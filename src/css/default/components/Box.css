@@ -1,0 +1,38 @@
+/*
+Box
+  Box-header   # optional
+  Box-body
+*/
+
+.Box {
+  background: var(--Box-background);
+  color: var(--Box-color);
+  border: var(--Box-border);
+  border-radius: var(--global-borderRadius);
+}
+
+/* TODO: move .BoxBody to .Box .Box-body */
+.BoxBody {
+  background: var(--Box-background);
+  color: var(--Box-color);
+  border: var(--Box-border);
+  border-radius: var(--global-borderRadius);
+  padding: var(--global-space-default);
+  word-break: break-word;
+  word-wrap: break-word;
+}
+
+.Box-header {
+  background: var(--Box-header-background);
+  color: var(--Box-header-color);
+  border-bottom: var(--Box-border);
+  border-top-left-radius: var(--global-borderRadius);
+  border-top-right-radius: var(--global-borderRadius);
+  padding: 5px 10px;
+}
+
+.Box-body {
+  padding: var(--global-space-default);
+  word-break: break-word;
+  word-wrap: break-word;
+}

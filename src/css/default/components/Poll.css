@@ -1,0 +1,61 @@
+/*
+# Vote
+Poll
+  Poll-question
+  <form>Poll-voteForm
+    <ul> Poll-answers 
+      Poll-answerItem Checkbox
+    Poll-voteFormSubmit 
+
+# Result
+Poll
+  Poll-question
+  <ul> Poll-answers
+    Poll-answerItem
+      Poll-answerText
+      <progress> Progress
+  Poll-count
+  Poll-admin
+*/
+
+.Poll {
+  display: flex;
+  flex-direction: column;
+  gap: var(--global-space-sm);
+}
+
+.Poll-question {
+  font-size: var(--global-fontSize-lg);
+  font-weight: bold;
+}
+
+.Poll-answers {
+  display: flex;
+  flex-direction: column;
+  gap: var(--global-space-sm);
+  margin: var(--global-space-default);
+  list-style-type: none !important; /* override PostBody */
+  padding: 0px !important; /* override PostBody */
+}
+
+.Poll-answerItem {
+  padding: 0px;
+}
+
+.Poll-answerText {
+  margin-bottom: var(--global-space-sm);
+}
+
+/* voteForm */
+.Poll-voteFormItem {
+  display: flex;
+}
+.Poll-voteForm .Checkbox-label {
+  width: 100%;
+}
+
+/* admin */
+.Poll-admin {
+  display: flex;
+  gap: var(--global-space-default);
+}

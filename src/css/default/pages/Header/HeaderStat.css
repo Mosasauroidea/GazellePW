@@ -1,0 +1,40 @@
+/*
+HeaderStat
+  HeaderStat-item
+    HeaderStat-link
+      HeaderStat-icon
+      HeaderStat-value
+*/
+
+.HeaderStat {
+  display: flex;
+  justify-content: center;
+  font-size: 0.95rem;
+  overflow: hidden;
+  gap: 22px;
+}
+
+.HeaderStat-item {
+  padding: 0; /* override global.css li */
+}
+
+.HeaderStat-link {
+  display: flex;
+  align-items: center;
+  gap: var(--global-space-sm);
+}
+
+.HeaderStat-link .icon {
+  width: 18px;
+  height: 18px;
+}
+@media (max-width: 768px) {
+  .HeaderStat-link .icon {
+    width: 14px;
+    height: 14px;
+  }
+}
+
+.HeaderStat-value {
+  font-size: 13px;
+}

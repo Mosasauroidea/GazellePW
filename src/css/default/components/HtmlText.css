@@ -1,0 +1,20 @@
+/* also see PageWiki.css */
+
+.HtmlText :is(ol, ul) {
+  padding-left: 20px;
+}
+.HtmlText ul {
+  list-style-type: disc;
+}
+
+.HtmlText li {
+  padding: 0;
+}
+
+/* fix rule_summary */
+.HtmlText.rule_summary > ul {
+  padding-left: 0px;
+}
+.HtmlText.rule_summary li {
+  padding: var(--global-space-sm) 0;
+}

@@ -1,0 +1,19 @@
+<svg class="russian icon" width="20" height="16" viewBox="0 0 20 16" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+	<defs>
+		<path d="M0 0h20v15H0z" id="russian_icon%s__a" />
+		<path d="M0 0h20v15H0z" id="russian_icon%s__c" />
+	</defs>
+	<g fill="none" fill-rule="evenodd" transform="translate(0 .5)">
+		<mask fill="#fff" id="russian_icon%s__b">
+			<use xlink:href="#russian_icon%s__a" />
+		</mask>
+		<g mask="url(#russian_icon%s__b)">
+			<mask fill="#fff" id="russian_icon%s__d">
+				<use xlink:href="#russian_icon%s__c" />
+			</mask>
+			<path d="M0 5h20v5H0z" fill="#3D58DB" mask="url(#russian_icon%s__d)" />
+			<path d="M0 0h20v5H0z" fill="#F7FCFF" mask="url(#russian_icon%s__d)" />
+			<path d="M0 10h20v5H0z" fill="#C51918" mask="url(#russian_icon%s__d)" />
+		</g>
+	</g>
+</svg>

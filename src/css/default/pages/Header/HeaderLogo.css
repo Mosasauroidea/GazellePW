@@ -1,0 +1,38 @@
+/*
+HeaderLogo
+  HeaderLogo-link
+*/
+
+.HeaderLogo {
+  grid-row: 2 / span 1;
+  order: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-left: var(--global-space-default);
+  min-height: 50px;
+}
+@media (max-width: 768px) {
+  .HeaderLogo {
+    padding-left: 0;
+    height: 50px;
+  }
+}
+
+.Header.is-hasAlerts .HeaderLogo {
+  grid-row: 2 / span 2;
+}
+
+.HeaderLogo-link {
+  display: block;
+  width: 100%;
+  background: url(../../assets/loginlogo.png) center / contain no-repeat;
+  height: 100%;
+  filter: var(--HeaderLogo-filter);
+}
+@media (max-width: 768px) {
+  .HeaderLogo-link {
+    margin-left: auto;
+    margin-right: auto;
+  }
+}

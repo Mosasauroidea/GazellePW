@@ -1,0 +1,7 @@
+{% block subject %}
+A request you created has been unfilled
+{% endblock %}
+{% block body %}
+The request "[url=requests.php?action=view&amp;id=$RequestID]{{ FullName }}[/url]" was unfilled by [url=user.php?id={{ LoggedUserID }}]{{ LoggedUserUsername}}[/url] for the reason:
+[quote]{{ Reason }}[/quote]
+{% endblock %}

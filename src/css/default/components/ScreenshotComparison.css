@@ -1,0 +1,92 @@
+/*
+ScreenshotComparison.jsx
+Torrent - Compare Screenshot
+
+ScreenshotComparison
+  header
+    title
+    threshold
+      thresholdInput
+  rows
+    row
+      imageContainer
+        image
+      overlayContainer
+        overlay
+  help
+*/
+
+.ScreenshotComparison {
+  --ScreenshotComparison-background: black;
+  --ScreenshotComparison-title-color: #aaa;
+  --ScreenshotComparison-title-fontSize: 2rem;
+  --ScreenshotComparison-title-fontWeight: bold;
+  --ScreenshotComparison-title-textShadow: 0px 0px 4px #000, 0px 0px 4px #000,
+    0px 0px 4px #000;
+  --ScreenshotComparison-image-border: 10px solid #363636;
+  --ScreenshotComparison-help-margin: 40px;
+  --ScreenshotComparison-help-textAlign: center;
+}
+
+.ScreenshotComparison {
+  position: fixed;
+  inset: 0;
+  overflow: auto;
+  z-index: var(--global-zIndex-screenshotComparison);
+  background: var(--ScreenshotComparison-background);
+}
+
+.ScreenshotComparison-header {
+  position: fixed;
+  left: 0;
+  right: 0;
+  z-index: calc(var(--global-zIndex-screenshotComparison) + 1);
+  padding: var(--global-space-default);
+}
+
+.ScreenshotComparison-title {
+  color: var(--ScreenshotComparison-title-color);
+  font-size: var(--ScreenshotComparison-title-fontSize);
+  font-weight: var(--ScreenshotComparison-title-fontWeight);
+  text-shadow: var(--ScreenshotComparison-title-textShadow);
+  text-align: center;
+}
+
+.ScreenshotComparison-threshold {
+  text-align: center;
+}
+
+.ScreenshotComparison-thresholdInput {
+  width: 50%;
+}
+
+.ScreenshotComparison-row {
+  position: relative;
+  text-align: center;
+}
+
+.ScreenshotComparison-imageContainer {
+  position: absolute;
+  left: 0;
+  top: 0;
+  display: inline-block;
+  width: 100%;
+}
+
+.ScreenshotComparison-image {
+  border: var(--ScreenshotComparison-image-border);
+}
+
+.ScreenshotComparison-help {
+  margin: var(--ScreenshotComparison-help-margin);
+  text-align: var(--ScreenshotComparison-help-textAlign);
+}
+
+.ScreenshotComparison-overlayLoading {
+  font-size: 3rem;
+  color: rgba(255, 255, 255, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}

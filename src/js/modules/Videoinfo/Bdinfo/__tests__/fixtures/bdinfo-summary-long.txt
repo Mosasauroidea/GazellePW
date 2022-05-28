@@ -1,0 +1,141 @@
+Disc Title:     LIANG BO
+Disc Size:      14,315,681,792 bytes
+Protection:     AACS(v70)
+BDInfo:         0.7.5.9 (compatible layout created by DVDFab 12.0.0.0)
+Notes:          
+BDINFO HOME:
+  Cinema Squid (old)
+    http://www.cinemasquid.com/blu-ray/tools/bdinfo
+  UniqProject GitHub (new)
+    https://github.com/UniqProject/BDInfo
+  DVDFab
+    http://www.dvdfab.cn/bdinfo.htm?client_m=YTQtMDItYjktNDAtOTEtZGQ6ZWMtOGUtYjUtNGUtY2MtZjg=&client_e=ZHZkZmFicGxheWVyX3VsdHJhX3dpbkBkdmRmYWIuY24=
+INCLUDES FORUMS REPORT FOR:
+  AVS Forum Blu-ray Audio and Video Specifications Thread
+    http://www.avsforum.com/avs-vb/showthread.php?t=1155731
+WARNING: Report is incomplete because: Scan has not been run.
+
+********************
+PLAYLIST: 00001.MPLS  
+********************
+
+<--- BEGIN FORUMS PASTE --->
+[code]
+                                                                                                                  Total   Video                                             
+Title                                                           Codec   Length   Movie Size      Disc Size       Bitrate Bitrate Main Audio Track                          Secondary Audio Track
+-----                                                           ------  -------  --------------  --------------  ------- ------- ------------------                        ---------------------
+00001.MPLS                                                      AVC     0:45:20  14,135,519,232  14,315,681,792  41.56   0.00    LPCM 2.0                                  
+[/code]
+[code]
+DISC INFO:
+Disc Title:     LIANG BO
+Disc Size:      14,315,681,792 bytes
+Protection:     AACS(v70)
+BDInfo:         0.7.5.9 (compatible layout created by DVDFab 12.0.0.0)
+
+PLAYLIST REPORT:
+
+Name:                   00001.MPLS  
+Length:                 0:45:20.718 (h:m:s.ms)
+Size:                   14,135,519,232 bytes
+Total Bitrate:          41.56 Mbps
+
+(*) Indicates included stream hidden by this playlist.
+
+VIDEO:
+Codec                   Bitrate             Description     
+-----                   -------             -----------     
+MPEG-4 AVC Video        0 kbps              1080p / 23.976 fps / 16:9 / High Profile 4.1
+* MPEG-H HEVC Video     0 kbps              1080p / 23.976 fps / 16:9 / Main 10 @ Level 5.1 @ High / 10 bits / Dolby Vision / BT.2020
+
+AUDIO:
+Codec                           Language        Bitrate         Description     
+-----                           --------        -------         -----------     
+LPCM Audio                      Chinese         1536 kbps       2.0 / 48 kHz / 1536 kbps / 16-bit
+FILES:
+Name            Time In         Length          Size            Total Bitrate   
+----            -------         ------          ----            -------------   
+00002.M2TS      0:00:00.000     0:45:20.718     14,135,519,232  41,564 kbps     
+CHAPTERS:
+Number          Time In         Length          Avg Video Rate  Max 1-Sec Rate  Max 1-Sec Time  Max 5-Sec Rate  Max 5-Sec Time  Max 10Sec Rate  Max 10Sec Time  Avg Frame Size  Max Frame Size  Max Frame Time  
+------          -------         ------          --------------  --------------  --------------  --------------  --------------  --------------  --------------  --------------  --------------  --------------  
+1               0:00:00.000     0:45:20.718     0 kbps          0 kbps          00:00:00.000    0 kbps          00:00:00.000    0 kbps          00:00:00.000    0 bytes         0 bytes         00:00:00.000    
+STREAM DIAGNOSTICS:
+File            PID             Type            Codec           Language                Seconds                 Bitrate                 Bytes           Packets         
+----            ---             ----            -----           --------                --------------          --------------          -------------   -----           
+00002.M2TS      4113 (0x1011)   0x1B            AVC                                     0.00                    0                       0               0               
+00002.M2TS      4352 (0x1100)   0x80            LPCM            zho (Chinese)           0.00                    0                       0               0               
+[/code]
+<---- END FORUMS PASTE ---->
+QUICK SUMMARY:
+Disc Title: LIANG BO
+Disc Size: 14,315,681,792 bytes
+Protection: AACS(v70)
+Playlist: 00001.MPLS  
+Size: 14,135,519,232 bytes
+Length: 0:45:20.718
+Total Bitrate: 41.56 Mbps
+Video: MPEG-4 AVC Video / 0 kbps / 1080p / 23.976 fps / 16:9 / High Profile 4.1
+* Video: MPEG-H HEVC Video / 0 kbps / 1080p / 23.976 fps / 16:9 / Main 10 @ Level 5.1 @ High / 10 bits / Dolby Vision / BT.2020
+Audio: Chinese / LPCM Audio / 2.0 / 48 kHz / 1536 kbps / 16-bit
+Subtitle: Chinese / 23.429 kbps
+Subtitle: Chinese / 24.159 kbps
+Subtitle: English / 32.438 kbps
+
+
+********************
+PLAYLIST: 00000.MPLS  
+********************
+<--- BEGIN FORUMS PASTE --->
+[code]
+                                                                                                                  Total   Video                                             
+Title                                                           Codec   Length   Movie Size      Disc Size       Bitrate Bitrate Main Audio Track                          Secondary Audio Track
+-----                                                           ------  -------  --------------  --------------  ------- ------- ------------------                        ---------------------
+00000.MPLS                                                      AVC     0:00:36  170,434,560     14,315,681,792  37.84   0.00    LPCM 2.0                                  
+[/code]
+[code]
+DISC INFO:
+Disc Title:     LIANG BO
+Disc Size:      14,315,681,792 bytes
+Protection:     AACS(v70)
+BDInfo:         0.7.5.9 (compatible layout created by DVDFab 12.0.0.0)
+PLAYLIST REPORT:
+Name:                   00000.MPLS  
+Length:                 0:00:36.036 (h:m:s.ms)
+Size:                   170,434,560 bytes
+Total Bitrate:          37.84 Mbps
+VIDEO:
+Codec                   Bitrate             Description     
+-----                   -------             -----------     
+MPEG-4 AVC Video        0 kbps              1080p / 23.976 fps / 16:9 / High Profile 4.1
+AUDIO:
+Codec                           Language        Bitrate         Description     
+-----                           --------        -------         -----------     
+LPCM Audio                      Chinese         1536 kbps       2.0 / 48 kHz / 1536 kbps / 16-bit
+FILES:
+Name            Time In         Length          Size            Total Bitrate   
+----            -------         ------          ----            -------------   
+00000.M2TS      0:00:00.000     0:00:10.010     45,588,480      36,434 kbps     
+00001.M2TS      0:00:10.010     0:00:26.026     124,846,080     38,375 kbps     
+CHAPTERS:
+Number          Time In         Length          Avg Video Rate  Max 1-Sec Rate  Max 1-Sec Time  Max 5-Sec Rate  Max 5-Sec Time  Max 10Sec Rate  Max 10Sec Time  Avg Frame Size  Max Frame Size  Max Frame Time  
+------          -------         ------          --------------  --------------  --------------  --------------  --------------  --------------  --------------  --------------  --------------  --------------  
+1               0:00:00.000     0:00:36.036     0 kbps          0 kbps          00:00:00.000    0 kbps          00:00:00.000    0 kbps          00:00:00.000    0 bytes         0 bytes         00:00:00.000    
+STREAM DIAGNOSTICS:
+File            PID             Type            Codec           Language                Seconds                 Bitrate                 Bytes           Packets         
+----            ---             ----            -----           --------                --------------          --------------          -------------   -----           
+00000.M2TS      4113 (0x1011)   0x1B            AVC                                     0.00                    0                       0               0               
+00001.M2TS      4113 (0x1011)   0x1B            AVC                                     0.00                    0                       0               0               
+00001.M2TS      4352 (0x1100)   0x80            LPCM            zho (Chinese)           0.00                    0                       0               0               
+[/code]
+<---- END FORUMS PASTE ---->
+QUICK SUMMARY:
+Disc Title: LIANG BO
+Disc Size: 14,315,681,792 bytes
+Protection: AACS(v70)
+Playlist: 00000.MPLS  
+Size: 170,434,560 bytes
+Length: 0:00:36.036
+Total Bitrate: 37.84 Mbps
+Video: MPEG-4 AVC Video / 0 kbps / 1080p / 23.976 fps / 16:9 / High Profile 4.1
+Audio: Chinese / LPCM Audio / 2.0 / 48 kHz / 1536 kbps / 16-bit

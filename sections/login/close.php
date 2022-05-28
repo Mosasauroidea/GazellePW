@@ -1,0 +1,2 @@
+<?
+$CloseLogin = 0;

@@ -1,0 +1,107 @@
+/*
+Where
+  torrent list - search        # A table without any style
+  torrent show - peer list     # torrents/peerlist.php
+  torrent show - download list # torrents/downloadlist.php
+  torrent show - snatch list   # torrents/snatchlist.php
+  torrent show - giver list
+  torrent show - file list     # torrents/filelist.php
+  top10 - users    # top10/users.php
+  top10 - tags     # top10/tags.php
+  top10 - donors   # top10/donors.php
+  Rules            # rules/jump.php
+  Rules - Ratio    # rules/ratio.php
+  Rules - clients  # rules/clients.php
+  Wiki - history   # wiki/revisions.php
+  Staff            # staff/index.php
+  Search - log     # log/index.php
+  Search - user     # user/advancedsearch.php
+  Upload           # upload/upload.php
+  Bonus Store      # bonus/store.php
+  Bonus - rates    # bonus/bprates.php
+  Bonus - purchase history  # bonus/history.php
+  Invite               # user/invite.php   
+  User - Inbox         # inbox/inbox.php, user/user.php, staffpm/staff_inbox.php,user_inbox.php
+  User - frends        # friends/friends.php
+  User - session       # user/sessions.php
+  User - token history # user/token_history.php
+  User - email view    # userhistory/email_history.php, email_history2.php
+  User - IP view       # userhistory/ip_history.php
+  User - Tracker IP view # userhistory/ip_tracker_history.php
+  User - Passkey view    # userhistory/passkey_history.php
+  User - password view   # userhistory/password_history.php
+  Application            # managers/apply_list.php
+  
+TableContainer
+  Table is-noRowBorder
+    Table-rowHeader
+      Table-cell Table-cellCenter Table-cellRight
+        icon
+    Table-row
+      Table-cell
+*/
+
+.TableContainer {
+  overflow: auto;
+}
+
+.Table {
+  display: table;
+  border-collapse: separate;
+  border-spacing: 0;
+  background: var(--Box-background);
+  border: var(--Box-border);
+  border-radius: var(--global-borderRadius);
+  width: 100%;
+}
+
+/* cell */
+.Table .Table-cell {
+  padding: var(--global-space-sm);
+}
+
+.Table:not(.is-noRowBorder)
+  :is(.Table-rowHeader, .Table-row:not(:last-child))
+  .Table-cell {
+  border-bottom: var(--Box-border);
+}
+
+.Table[last-tr-hidden] .Table-row:nth-last-child(2) .Table-cell {
+  border-bottom: none;
+  /* 电影详情最后一个tr是hidden  */
+}
+
+.Table .Table-cellCenter {
+  text-align: center;
+}
+
+.Table .Table-cellRight {
+  text-align: right;
+}
+
+.Table .Table-cellLeft {
+  text-align: left;
+}
+
+.Table .Table-cellTop {
+  vertical-align: top;
+}
+
+/* cellHeader */
+.Table .Table-rowHeader .Table-cell {
+  background: var(--Box-header-background);
+}
+
+.Table .Table-rowHeader .Table-cell:first-child {
+  border-top-left-radius: var(--global-borderRadius);
+}
+
+.Table .Table-rowHeader .Table-cell:last-child {
+  border-top-right-radius: var(--global-borderRadius);
+}
+
+.Table .Table-rowHeader .icon {
+  width: 16px;
+  height: 16px;
+  color: var(--Box-color);
+}

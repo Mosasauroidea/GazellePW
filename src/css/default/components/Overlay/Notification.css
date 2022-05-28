@@ -1,0 +1,35 @@
+/*
+noty_bar
+	noty_message
+	noty_buttons
+*/
+
+.noty_bar {
+  border-radius: var(--global-borderRadius);
+  overflow: hidden;
+  background: var(--Notification-background);
+  color: var(--Notification-color);
+  border: var(--Notification-border);
+  box-shadow: var(--Notification-boxShadow);
+}
+
+.noty_bar .noty_message {
+  padding: var(--global-space-default);
+  border-top-left-radius: var(--global-borderRadius);
+  border-top-right-radius: var(--global-borderRadius);
+  font-size: var(--global-fontSize-lg);
+  background: var(--Notification-message-background);
+  color: var(--Notification-message-color);
+  border-bottom: var(--Notification-message-borderBottom);
+}
+
+.noty_bar .noty_buttons {
+  border-top: none !important;
+  background-color: inherit !important;
+}
+
+ul#noty_bottomRight_layout_container > li {
+  background: none !important;
+  border: none !important;
+  box-shadow: none !important;
+}

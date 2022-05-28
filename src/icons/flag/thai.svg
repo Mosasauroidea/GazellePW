@@ -1,0 +1,14 @@
+<svg class="thai icon" width="20" height="16" viewBox="0 0 20 16" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+	<defs>
+		<path d="M0 0h20v15H0z" id="thai_icon%s__a" />
+	</defs>
+	<g fill="none" fill-rule="evenodd" transform="translate(0 .5)">
+		<mask fill="#fff" id="thai_icon%s__b">
+			<use xlink:href="#thai_icon%s__a" />
+		</mask>
+		<g mask="url(#thai_icon%s__b)">
+			<path d="M0 10h20v5H0zM0 0h20v3.75H0z" fill="#F50101" />
+			<path d="M20.938 4.063v6.875H-.938V4.061h21.875z" fill="#3D58DB" stroke="#FFF" stroke-width="1.875" />
+		</g>
+	</g>
+</svg>

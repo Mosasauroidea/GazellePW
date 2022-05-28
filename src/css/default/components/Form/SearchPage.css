@@ -1,0 +1,40 @@
+/*
+<form class="Form SearchPage Search<Name>">
+	SearchPageHeader        # optional
+		SearchPageHeader-title
+		SearchPageHeader-actions
+	SearchPageBody      # optinal
+    <table class="Form-rowList">
+  SearchPageFooter
+    SearchPageFooter-resultCount
+    SearchPageFooter-actions
+ */
+.SearchPage {
+  padding: var(--global-space-default);
+  display: flex;
+  flex-direction: column;
+  gap: var(--global-space-default);
+}
+
+/* SearchPageHeader */
+.SearchPageHeader {
+  display: flex;
+  font-size: var(--global-fontSize-lg);
+}
+.SearchPageHeader-actions {
+  margin-left: auto;
+}
+
+/* SearchPageFooter */
+.SearchPageFooter {
+  display: flex;
+}
+.SearchPageFooter-actions {
+  margin-left: auto;
+  display: inline-flex;
+  gap: var(--global-space-sm);
+}
+
+.SearchPage .is-tagFilter .Form-inputs > Input {
+  width: 70%;
+}

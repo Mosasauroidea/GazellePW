@@ -1,0 +1,51 @@
+/*
+u-vstack u-vstack-large     # vertical
+u-hstack u-hstack-large     # horizontal
+
+u-center          # center
+
+u-flex | u-center | ..
+  u-marginLeftAuto
+
+u-heightFull      # height full
+*/
+
+/* u-vstack */
+.u-vstack {
+  display: flex;
+  flex-direction: column;
+  gap: var(--global-space-default);
+}
+.u-vstack-large {
+  display: flex;
+  flex-direction: column;
+  gap: var(--global-space-lg);
+}
+
+/* u-hstack */
+.u-hstack {
+  display: flex;
+  gap: var(--global-space-default);
+}
+.u-hstack-large {
+  display: flex;
+  gap: var(--global-space-lg);
+}
+
+.u-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.u-heightFull {
+  height: 100%;
+}
+
+.u-flex {
+  display: flex;
+}
+
+u-marginLeftAuto {
+  margin-left: auto;
+}

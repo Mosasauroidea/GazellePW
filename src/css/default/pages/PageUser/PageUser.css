@@ -1,0 +1,55 @@
+#user #thumb .icon {
+  color: #da7171;
+}
+
+.donor_icon {
+  width: 15px;
+  height: 15px;
+}
+
+.warned-flag .icon,
+.disabled_flag .icon {
+  color: #c83f3f;
+  width: 12px;
+  height: 12px;
+}
+.half-warned-flag .icon {
+  color: #ffbf00;
+  width: 12px;
+  height: 12px;
+}
+table .warned-flag,
+table .half-warned-flag,
+table .disabled_flag {
+  transform: scale(0.8, 0.8);
+  bottom: 0;
+}
+
+/* User Settings */
+.StyleGallery {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--global-space-default);
+}
+.StyleGallery-imageLink {
+  display: block;
+}
+.StyleGallery-image {
+  height: 100px;
+  min-height: 100px;
+  width: 200px;
+  min-width: 200px;
+  object-fit: cover;
+  object-position: top;
+}
+
+/* 个人页捐赠框 */
+#staff_notes_box,
+.TableDonateBox,
+.TableDonorPoints {
+  margin-bottom: var(--global-space-lg);
+}
+
+#user .SidebarList-item {
+  display: block;
+}

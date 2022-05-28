@@ -1,0 +1,25 @@
+.Username {
+  display: inline-flex;
+  gap: var(--global-space-sm);
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.Username-customTitle {
+  display: inline-flex;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.Username-customTitle > * {
+  display: flex;
+  align-items: center;
+}
+.Username-customTitle img {
+  height: 16px;
+  margin: 0 5px;
+}
+
+.Username-classes {
+  display: inline-flex;
+  gap: var(--global-space-sm);
+}

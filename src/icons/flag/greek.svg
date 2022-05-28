@@ -1,0 +1,16 @@
+<svg class="greek icon" width="20" height="16" viewBox="0 0 20 16" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+	<defs>
+		<path d="M0 0h20v15H0z" id="greek_icon%s__a" />
+	</defs>
+	<g fill="none" fill-rule="evenodd" transform="translate(0 .5)">
+		<mask fill="#fff" id="greek_icon%s__b">
+			<use xlink:href="#greek_icon%s__a" />
+		</mask>
+		<g mask="url(#greek_icon%s__b)">
+			<path d="M0 0h20v15H0z" fill="#F7FCFF" />
+			<path d="M.017 3.438h20v1.875h-20zM0 0h20v1.875H0zM-.037 6.875h20V8.75h-20zM.07 10.25h20v1.875h-20zM.063 13.438h20v1.875h-20z" fill="#4564F9" />
+			<path d="M0 0h10v8.75H0z" fill="#4564F9" />
+			<path d="M4.044 0h1.978v3.438H10v2.366H6.022v3.571H4.044V5.804H0V3.437h4.044z" fill="#F7FCFF" />
+		</g>
+	</g>
+</svg>

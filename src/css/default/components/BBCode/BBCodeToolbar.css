@@ -1,0 +1,65 @@
+/*
+Upload - Mediainfo
+BBCodeToolbar
+  BBCodeToolbar-button
+    BBCodeToolbar-icon
+  preivew-button
+*/
+
+.BBCodeToolbar {
+  display: flex;
+  /* 双击不会全选textarea */
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.BBCodeToolbar-alignRight {
+  margin-left: auto;
+}
+
+.BBCodeToolbar-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--global-borderRadius);
+  border: none;
+  background: none;
+  cursor: pointer;
+  padding: 3px;
+}
+.BBCodeToolbar-button:disabled {
+  cursor: default;
+}
+
+.BBCodeToolbar-button:hover:not(:disabled) {
+  background: var(--BBCodeToolbar-button-onHover-background);
+  box-shadow: var(--BBCodeToolbar-button-onHover-boxShadow);
+}
+
+/* click effect */
+.BBCodeToolbar-button:active:not(:disabled) {
+  border: var(--BBCodeToolbar-button-onActive-border);
+  box-shadow: var(--BBCodeToolbar-button-onActive-boxShadow);
+}
+
+.BBCodeToolbar-icon {
+  height: 20px;
+  width: 20px;
+  fill: var(--global-color);
+}
+
+.BBCodeToolbar-icon.is-loading {
+  width: 30px;
+  height: 30px;
+}
+
+.u-bbcodeEditor {
+  border: var(--Box-border);
+  border-radius: var(--global-borderRadius);
+  margin-bottom: var(--global-space-sm);
+}

@@ -1,0 +1,61 @@
+/*
+HeaderDonate
+	HeaderDonate-content
+		HeaderDonate-link
+			HeaderDonate-progressBarBorder
+				HeaderDonate-progressBar
+			HeaderDonate-percent
+*/
+
+.HeaderDonate {
+  height: 100%;
+}
+@media (max-width: 768px) {
+  .HeaderDonate {
+    display: flex;
+    justify-content: center;
+  }
+}
+
+.HeaderDonate-content {
+  height: 100%;
+}
+
+.HeaderDonate-link {
+  display: flex;
+  align-items: center;
+  width: 125px;
+  height: 100%;
+}
+.HeaderDonate-percent {
+  line-height: 1;
+  color: var(--HeaderDonate-percent-color);
+  font-weight: bold;
+}
+
+.HeaderDonate-link:hover .HeaderDonate-percent {
+  color: var(--Header-link-onHover-color);
+}
+
+.HeaderDonate-progressBarBorder {
+  border: var(--HeaderDonate-progressBarBorder-border);
+  border-radius: var(--global-borderRadius);
+  padding: 2px;
+  height: 16px;
+  width: 80px;
+  margin-left: var(--global-space-default);
+  margin-right: var(--global-space-sm);
+}
+
+.HeaderDonate-link:hover .HeaderDonate-progressBarBorder {
+  border: var(--HeaderDonate-progressBarBorder-onHover-border);
+}
+
+.HeaderDonate-progressBar {
+  background: var(--HeaderDonate-progressBar-background);
+  height: 100%;
+}
+
+.HeaderDonate-link:hover .HeaderDonate-progressBar {
+  background: var(--HeaderDonate-progressBar-onHover-background);
+}

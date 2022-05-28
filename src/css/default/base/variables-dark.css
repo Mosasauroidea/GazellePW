@@ -1,0 +1,157 @@
+@media (prefers-color-scheme: dark) {
+  :root {
+    /* Colors */
+    --global-background: #111;
+    --global-background2: url(../assets/bg.png) repeat #111;
+    --global-color: #aaa;
+    --global-onHover-color: #64b5f6;
+    --global-color-primary: rgba(255, 255, 255, 0.1);
+    --global-color-onPrimary: #aaa;
+    --global-onHover-color-primary: #555;
+    --global-onHover-color-onPrimary: white;
+    --global-color-link: #3d81b1;
+    --global-onHover-color-link: #42aacd;
+    --global-color-rewardButton: #da7171;
+    --global-color-success: #28a745;
+    --global-color-warning: #ff4373;
+    --global-color-circle: #f4d90d;
+    --global-color-ratio1: #cc364e;
+    --global-color-ratio2: #ff2600;
+    --global-color-ratio3: #ff5e00;
+    --global-color-ratio4: #ff7100;
+    --global-color-ratio5: #ff9700;
+    --global-color-ratio6: #fa0;
+    --global-color-ratio7: #74c42e;
+    --global-color-ratio8: #7dae32;
+    --global-color-postH3: #03dddd;
+    --global-color-postH4: #00afdb;
+    --global-color-postH5: #638ef3;
+    --global-color-ruleStrong: #a5bed0;
+
+    /* Selection */
+    --global-background-selection: #3d81b1;
+    --global-color-selection: #fff;
+
+    /* Scrollbar */
+    --global-background-scrollbarThumb: #363636;
+    --global-boxShadow-scrollbarThumb: inset 0 0 3px rgba(0, 0, 0, 0.2);
+    --global-background-scrollbarTrack: #000;
+    --global-boxShadow-scrollbarTrack: inset 0 0 5px rgba(255, 255, 255, 0.1);
+
+    /* Box */
+    --global-color-box: #242525;
+    --global-colorTransparent-box: rgba(221, 221, 221, 0.075);
+    --global-colorTransparentSecondary-box: rgba(221, 221, 221, 0.075);
+    --global-color-onBox: #aaa;
+    --global-border-box: 1px solid #363636;
+    --global-boxShadow-box: none;
+    --global-color-boxHeader: #111;
+    --global-color-onBoxHeader: #aaa;
+
+    /* BoxWithoutBorder */
+    --global-background-boxWithoutBorder: transparent;
+    --global-padding-boxWithoutBorder: 0;
+    --global-border-boxWithoutBorder: 1px solid #363636;
+    --global-boxShadow-boxWithoutBorder: rgba(221, 221, 221, 0.075);
+
+    /* Input */
+    --global-color-input: #292929;
+    --global-onHover-color-input: #333;
+    --global-onDisabled-color-input: #808080;
+    --global-color-onInput: #aaa;
+    --global-border-input: 1px solid #464646;
+    /* InputInvert: on dark background */
+    --global-color-inputInvert: rgba(221, 221, 221, 0.075);
+    --global-color-onInputInvert: #aaa;
+    --global-border-inputInvert: 1px solid #464646;
+
+    /* Button */
+    --Button-solid-border: 1px solid #464646;
+    --Button-solid-boxShadow: 0 0 5px 2px rgba(37, 37, 37, 0.07);
+
+    /* transluent */
+    --Button-translucent-background: var(--Button-solid-background);
+    --Button-translucent-onHover-background: var(
+      --Button-solid-onHover-background
+    );
+
+    /* Header */
+    --Header-background: transparent;
+    --Header-color: #aaa;
+    --Header-boxShadow: none;
+    --Header-border: 1px solid #464646;
+    --Header-top-background: rgba(221, 221, 221, 0.075);
+    --Header-bottom-background: rgba(221, 221, 221, 0.075);
+    --Header-icon-onHover-background: rgba(255, 255, 255, 0.1);
+    --Header-link-color: #aaa;
+    --Header-link-onHover-color: #fff;
+    --Header-dropdown-background: #111;
+    --Header-dropdown-border: 1px solid #464646;
+    --HeaderAnnounceItem-link-background: #ccbc33;
+    --HeaderAnnounceItem-link-color: black;
+    --HeaderAnnounceItem-link-opacity: 0.8;
+    --HeaderAnnounceItem-link-onHover-color: var(
+      --HeaderAnnounceItem-link-color
+    );
+    --HeaderAnnounceItem-link-onHover-opacity: 1;
+    --HeaderDonate-percent-color: #aaa;
+    --HeaderDonate-progressBar-background: #aaa;
+    --HeaderDonate-progressBar-onHover-background: #fff;
+    --HeaderDonate-progressBarBorder-border: 2px solid #aaa;
+    --HeaderDonate-progressBarBorder-borderRadius: 3px;
+    --HeaderDonate-progressBarBorder-onHover-border: 2px solid #fff;
+
+    /* Footer */
+    --Footer-background: transparent;
+
+    /* Body */
+    --Body-background: inherit;
+    --Body-border: none;
+    --Body-boxShadow: none;
+    --Body-padding: 20px;
+    --Body-borderRadius: 0;
+
+    /* Tooltipster */
+    --global-background-tooltipster: #1f1f1f;
+    --global-color-tooltipster: #b6b6b6;
+    --global-borderColor-tooltipster: #393939;
+
+    /* MovieInfo */
+    --global-background-movieInfoButton: #1a1a1a;
+    --global-onHover-background-movieInfoButton: #1a1a1a;
+    --global-color-movieInfoyear: #777;
+    --artist-photo-opacity: 1;
+    /* Table */
+    --TableMediaInfo-border: 1px solid #404040;
+
+    /* TorrentTable */
+    --TableTorrent-movieInfo-background: inherit;
+    --TableTorrent-category-background: rgba(0, 0, 0, 0.1);
+    --TableTorrent-title-background: rgba(0, 0, 0, 0.2);
+    --TableTorrent-movieInfoTitle-color: #b0b0b0;
+    --TableTorrent-movieInfoTitle-onHover-color: #ccc;
+    --TableTorrent-movieInfoYear-color: #777;
+    --slotButton-opacity: 0.4;
+    --slotButton-onHover-opacity: 0.8;
+    --slotButton-onActive-opacity: 1;
+    --slotQuality-color: #afd2ff;
+    --slotClear-color: #ff4373;
+    --slotCnQuality-color: #ffcd8c;
+    --slotEnQuality-color: #ff99e0;
+    --slotRetenion-color: #86db79;
+    --slotFeature-color: #86db79;
+    --slotRemux-color: #91daee;
+    --slotUntouched-color: #91daee;
+    --slotDiy-color: #91daee;
+    --slotEmpty-color: #777;
+    --slotHighlightName-color: #ddd;
+
+    /* BBCodeToolbar */
+    --BBCodeToolbar-button-onActive-border: 1px solid #999;
+    --BBCodeToolbar-button-onActive-boxShadow: inset 0 0 4px rgb(0 0 0 / 50%);
+
+    /* Progress */
+    --Progress-bar-background: #111;
+    --Progress-value-background: #323232;
+  }
+}

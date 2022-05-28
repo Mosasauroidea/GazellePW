@@ -1,0 +1,184 @@
+/*
+Form Form<Name> is-longLabel    # optional
+Form SearchPage         # has border
+
+Form-rowList              # optional
+  Form-row is-<name>
+    Form-label
+    Form-items            # vertical
+      Form-inputs
+    Form-inputs           # horizontal
+    <td> Form-submit           # forum thread search
+
+Form-rowList variant="header" 
+  Form-rowHeader 
+    Form-title
+
+Form-rowList variant="alignLeft"   # sitehistory.php
+  Form-row
+    <input>
+
+FormOneLine Search<Name>
+  <input>
+
+*/
+
+/* variant header */
+.Form-rowList[variant='header'] {
+  display: block;
+  /* override table */
+  background: var(--Box-background);
+  border: var(--Box-border);
+  border-radius: var(--global-borderRadius);
+  width: 100%;
+  margin-bottom: var(--global-space-lg);
+}
+
+.Form-rowHeader {
+  display: flex;
+  /* override tr */
+  border-top-right-radius: var(--global-borderRadius);
+  border-top-left-radius: var(--global-borderRadius);
+  background: var(--Box-header-background);
+  font-size: var(--global-fontSize-lg);
+  white-space: nowrap;
+  padding: 5px 8px;
+}
+
+.Form-actions {
+  margin-left: auto;
+}
+
+.Form-title {
+  padding: 0; /* override td */
+}
+
+/* rowList */
+.Form-rowList {
+  width: 100%;
+  display: block; /* fix table */
+}
+.SearchPage:not(.is-fullWidth) .Form-rowList {
+  margin: 0 auto;
+}
+.Form-rowList > tbody {
+  display: block;
+}
+
+/* row */
+.Form-row {
+  display: block;
+  padding: 5px 5px;
+}
+.Form-rowList[variant='alignLeft'] .Form-row {
+  justify-content: start;
+}
+.Form-row[variant='alignLeft'] {
+  justify-content: flex-start;
+}
+.Form-rowList[variant='header'] .Form-row:nth-child(2) {
+  margin-top: var(--global-space-default);
+}
+.Form-rowList[variant='header'] .Form-row:last-child {
+  margin-bottom: var(--global-space-default);
+}
+@media (min-width: 768px) {
+  .Form-row {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: var(--global-space-default);
+  }
+}
+@media (max-width: 767px) {
+  .SearchUserAdvanced .Form-row {
+    flex-wrap: wrap;
+  }
+  .Form.is-longLabel .Form-row {
+    flex-direction: column;
+  }
+}
+
+/* label */
+.Form-label {
+  /* user advanced search on mobile */
+  text-align: right;
+  vertical-align: middle;
+}
+@media (min-width: 768px) {
+  .Form-label {
+    width: 10%;
+  }
+  .SearchPage .Form-label {
+    width: 20%;
+  }
+  .LayoutMainSidebar-main .Form-label {
+    width: 18%;
+  }
+  .SearchUserAdvanced .Form-label {
+    width: 8%;
+  }
+}
+@media (max-width: 767px) {
+  .Form.is-longLabel .Form-label {
+    width: 100%;
+    text-align: left;
+  }
+}
+
+/* items */
+.Form-items {
+  display: flex;
+  flex-direction: column;
+  gap: var(--global-space-sm);
+  word-break: break-word;
+}
+@media (min-width: 768px) {
+  .Form-items {
+    width: 60%;
+  }
+  .LayoutMainSidebar-main .Form-items {
+    width: 78%;
+  }
+}
+
+/* inputs */
+.Form-inputs {
+  display: flex;
+  gap: var(--global-space-default);
+  align-items: center;
+  flex-wrap: wrap;
+}
+@media (min-width: 768px) {
+  .Form-inputs {
+    width: 60%;
+  }
+  .Form-items .Form-inputs {
+    width: 100%;
+  }
+  :is(.LayoutMainSidebar-main, .TorrentNotifyForm) .Form-inputs {
+    width: 78%;
+  }
+  .SearchUserAdvanced .Form-inputs {
+    width: 24%;
+    align-items: start;
+  }
+}
+
+/* input */
+.Form-inputs.is-splitEven .Input {
+  flex: 1;
+  width: 100%;
+}
+
+.FormOneLine {
+  display: flex;
+  gap: var(--global-space-default);
+  align-items: center;
+}
+
+.Form-vstack {
+  display: flex;
+  flex-direction: column;
+  gap: var(--global-space-sm);
+}

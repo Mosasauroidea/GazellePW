@@ -1,0 +1,29 @@
+/* 
+HeaderAnnounce
+  HeaderAnnounceItem
+    HeaderAnnounceItem-link
+*/
+
+.HeaderAnnounce {
+  order: 2;
+  display: flex;
+  flex-direction: column;
+  gap: var(--global-space-sm);
+  text-align: center;
+  justify-content: center;
+}
+
+.HeaderAnnounceItem-link {
+  background: var(--HeaderAnnounceItem-link-background);
+  color: var(--HeaderAnnounceItem-link-color);
+  opacity: var(--HeaderAnnounceItem-link-opacity);
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: var(--global-borderRadius);
+  transition: all 0.3s ease;
+  text-decoration: none;
+}
+.HeaderAnnounceItem-link:hover {
+  opacity: var(--HeaderAnnounceItem-link-onHover-opacity);
+  color: var(--HeaderAnnounceItem-link-onHover-color);
+}

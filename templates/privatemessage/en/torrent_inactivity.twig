@@ -1,0 +1,9 @@
+{% block subject %}
+{{ Count }} of your torrents {{ HAS_HAVE }} been trumpable for inactivity
+{% endblock %}
+{% block body %}
+{{ Count }} of your uploads {% if Singular %}has{% else %}have{%endif%} been trumpable for being unseeded. Since {% if Singular %} it {% else %} they {%endif%} didn't break any rules (we hope), please feel free to re-seed {% if Singular %} it {% else %} they {%endif%}.
+
+The following torrent {% if Singular %}was{% else %}were{%endif%} trumpable:
+{{ MessageInfo}}
+{% endblock %}

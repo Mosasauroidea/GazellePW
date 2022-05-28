@@ -1,0 +1,129 @@
+General
+Unique ID          : 70224953110897017935994172891880854274 (0x34D4D581485B71136445D23B89BD9302)
+COMPLETE NAME:The.Handmaiden : .2016.Hybrid.1080p.BluRay.DDP.5.1.x264.D-Z0N3.mkv
+Format : Matroska
+Format version : Version 4
+File size : 18.9 GiB
+Duration : 2 h 24 min
+Overall bit rate : 18.7 Mb/s
+Encoded date : UTC 2020-09-05 21:11:41
+Writing application : mkvmerge v49.0.0 ('Sick Of Losing Soulmates') 64-bit
+Writing library : libebml v1.4.0 + libmatroska v1.6.2
+
+     
+
+Video
+ID : 1
+Format : AVC
+Format/Info : Advanced Video Codec
+Format profile : High@L4.1
+Format settings : CABAC / 5 Ref Frames
+Format settings, CABAC : Yes
+Format settings, Reference frames : 5 frames
+Codec ID : V_MPEG4/ISO/AVC
+Duration : 2 h 24 min
+Bit rate : 17.5 Mb/s
+Width : 1 920 pixels
+Height : 804 pixels
+Display aspect ratio : 2.40:1
+Frame rate mode : Constant
+Frame rate : 24.000 FPS
+Color space : YUV
+Chroma subsampling : 4:2:0
+Bit depth : 8 bits
+Scan type : Progressive
+Bits/(Pixel*Frame) : 0.473
+Stream size : 17.7 GiB (94%)
+Writing library : x264 core 160 r0+3062 5be29bc t_mod_New [(8 & 10)-bit@all X86_64]
+Encoding settings : cabac=1 / ref=5 / deblock=1:-3:-2 / analyse=0x3:0x133 / me=umh / subme=11 / psy=1 / fade_compensate=0.00 / psy_rd=1.02:0.00 / mixed_ref=1 / me_range=32 / chroma_me=1 / trellis=2 / 8x8dct=1 / cqm=0 / deadzone=21,11 / fast_pskip=0 / chroma_qp_offset=-2 / threads=24 / lookahead_threads=6 / sliced_threads=0 / nr=0 / decimate=0 / interlaced=0 / bluray_compat=0 / constrained_intra=0 / fgo=0 / bframes=16 / b_pyramid=2 / b_adapt=2 / b_bias=0 / direct=3 / weightb=1 / open_gop=0 / weightp=2 / keyint=250 / keyint_min=24 / scenecut=40 / intra_refresh=0 / rc_lookahead=60 / rc=crf / mbtree=0 / crf=16.6000 / qcomp=0.68 / qpmin=0:0:0 / qpmax=69:69:69 / qpstep=4 / vbv_maxrate=62500 / vbv_bufsize=78125 / crf_max=0.0 / nal_hrd=none / filler=0 / ip_ratio=1.30 / pb_ratio=1.20 / aq=3:0.75 / aq-sensitivity=10.00 / aq-factor=1.00:1.00:1.00 / aq2=0 / aq3=0 / zones=0,480,b=1.3/481,1009,b=1.2/26756,26819,b=1.3/27245,27279,b=1.3/41638,41736,b=1.3/57548,57580,b=1.3/73487,73696,b=1.3/76103,76254,b=1.3/81772,81794,b=1.3/82287,82309,b=1.3/82514,82641,b=1.3/91754,93189,b=1.3/93375,93649,b=1.3/93740,94038,b=1.3/124203,124258,b=1.3/127260,127402,b=1.3/128417,128626,b=1.3/128780,129300,b=1.3/132066,132379,b=1.3/139227,139342,b=1.3/169522,169740,b=1.3/183211,183586,b=1.3/195056,195069,b=1.3/195117,195130,b=1.3/195156,195177,b=1.3/195240,195259,b=1.3/195285,195307,b=1.3/195663,195949,b=1.3/196144,196238,b=1.3/76960,77619,b=1.1/85069,85089,b=1.1/168538,168547,b=1.1/195531,195662,b=1.1/195950,196143,b=1.1
+Default : Yes
+Forced : No
+
+Audio #1
+ID : 2
+Format : E-AC-3
+Format/Info : Enhanced AC-3
+Commercial name : Dolby Digital Plus
+Codec ID : A_EAC3
+Duration : 2 h 24 min
+Bit rate mode : Constant
+Bit rate : 1 023 kb/s
+Channel(s) : 6 channels
+Channel layout : L R C LFE Ls Rs
+Sampling rate : 48.0 kHz
+Frame rate : 93.750 FPS (512 SPF)
+Compression mode : Lossy
+Stream size : 1.03 GiB (5%)
+Language : Multiple languages
+Service kind : Complete Main
+Default : Yes
+Forced : No
+
+Audio #2
+ID : 3
+Format : Opus
+Codec ID : A_OPUS
+Duration : 2 h 24 min
+Bit rate : 88.6 kb/s
+Channel(s) : 2 channels
+Channel layout : L R
+Sampling rate : 48.0 kHz
+Frame rate : 50.000 FPS (960 SPF)
+Compression mode : Lossy
+Stream size : 91.7 MiB (0%)
+Title : Commentary by Director Park Chan-wook and Film Critic Kim Hye-ri
+Writing library : Lavf58.45.100
+Language : Korean
+Default : No
+Forced : No
+ENCODER_OPTIONS : --bitrate 96
+
+Text #1
+ID : 4
+Format : ASS
+Codec ID : S_TEXT/ASS
+Codec ID/Info : Advanced Sub Station Alpha
+Duration : 2 h 20 min
+Bit rate : 148 b/s
+Count of elements : 1851
+Compression mode : Lossless
+Stream size : 153 KiB (0%)
+Language : English
+Default : Yes
+Forced : No
+
+Text #2
+ID : 5
+Format : PGS
+Muxing mode : zlib
+Codec ID : S_HDMV/PGS
+Codec ID/Info : Picture based subtitle format used on BDs/HD-DVDs
+Duration : 2 h 20 min
+Bit rate : 20.0 kb/s
+Count of elements : 2701
+Stream size : 20.1 MiB (0%)
+Language : Korean
+Default : No
+Forced : No
+
+Menu
+00:00:00.000 : en:Chapter 1
+00:06:55.791 : en:Chapter 2
+00:13:56.917 : en:Chapter 3
+00:21:13.666 : en:Chapter 4
+00:28:45.000 : en:Chapter 5
+00:36:19.208 : en:Chapter 6
+00:42:14.875 : en:Chapter 7
+00:51:10.249 : en:Chapter 8
+00:57:22.249 : en:Chapter 9
+01:02:45.249 : en:Chapter 10
+01:11:49.666 : en:Chapter 11
+01:19:17.333 : en:Chapter 12
+01:26:03.666 : en:Chapter 13
+01:33:53.833 : en:Chapter 14
+01:39:27.291 : en:Chapter 15
+01:46:15.708 : en:Chapter 16
+01:53:53.917 : en:Chapter 17
+02:02:50.166 : en:Chapter 18
+02:10:40.082 : en:Chapter 19
+02:18:43.249 : en:Chapter 20

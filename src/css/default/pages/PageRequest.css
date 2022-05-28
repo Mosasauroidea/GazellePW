@@ -1,0 +1,3 @@
+.FormRequestNew .Input[type='text']:not(.is-small) {
+  width: 313px;
+}

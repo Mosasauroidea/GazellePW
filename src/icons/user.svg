@@ -1,0 +1,6 @@
+<svg class="user icon" width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+	<g fill="none" fill-rule="evenodd" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" transform="translate(4 3)">
+		<path d="M16 18v-2a4 4 0 0 0-4-4H4a4 4 0 1 0-4 4v2" />
+		<circle cx="8" cy="4" r="4" />
+	</g>
+</svg>

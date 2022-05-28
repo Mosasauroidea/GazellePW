@@ -1,0 +1,33 @@
+DISC INFO:
+
+Disc Label: Ginga Kikoutai Majestic Prince Movie Kakusei no Idenshi 2016 1080p Blu-ray AVC DTS-HD MA5.1-Nyaa
+Disc Size: 26,406,150,752 bytes
+Protection: AACS
+BDInfo: 0.7.5.5
+
+PLAYLIST REPORT:
+
+Name: 00004.MPLS
+Length: 1:19:35.771 (h:m:s.ms)
+Size: 18,926,622,720 bytes
+Total Bitrate: 31.70 Mbps
+
+VIDEO:
+
+Codec Bitrate Description
+----- ------- -----------
+MPEG-4 AVC Video 21847 kbps 1080p / 23.976 fps / 16:9 / High Profile 4.1
+
+AUDIO:
+
+Codec Language Bitrate Description
+----- -------- ------- -----------
+DTS-HD Master Audio English 3924 kbps 5.1 / 48 kHz / 3924 kbps / 24-bit (DTS Core: 5.1 / 48 kHz / 1509 kbps / 24-bit)
+DTS-HD Master Audio Japanese 4015 kbps 5.1 / 48 kHz / 4015 kbps / 24-bit (DTS Core: 5.1 / 48 kHz / 1509 kbps / 24-bit)
+
+SUBTITLES:
+
+Codec Language Bitrate Description
+----- -------- ------- -----------
+Presentation Graphics English 9.931 kbps
+Presentation Graphics English 64.304 kbps

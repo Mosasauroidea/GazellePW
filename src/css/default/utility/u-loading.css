@@ -1,0 +1,16 @@
+/*
+u-loading u-loading-isLoading
+  u-loading-a
+  u-loading-b
+*/
+
+.u-loading-b {
+  display: none;
+}
+
+.u-loading-isLoading .u-loading-a {
+  display: none;
+}
+.u-loading-isLoading .u-loading-b {
+  display: block;
+}

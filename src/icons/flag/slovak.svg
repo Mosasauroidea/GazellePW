@@ -1,0 +1,30 @@
+<svg class="slovak icon" width="20" height="16" viewBox="0 0 20 16" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+	<defs>
+		<path d="M0 0h20v15H0z" id="slovak_icon%s__a" />
+		<path d="M0 0h20v15H0z" id="slovak_icon%s__c" />
+		<path d="M6.17 4.4c.113-.81.057-2.27-.168-4.381H.216C.063 2.283.03 3.743.118 4.4c.131.986.727 3.151 2.993 4.13 2.164-.967 2.891-2.915 3.06-4.13z" id="slovak_icon%s__e" />
+	</defs>
+	<g fill="none" fill-rule="evenodd" transform="translate(0 .5)">
+		<mask fill="#fff" id="slovak_icon%s__b">
+			<use xlink:href="#slovak_icon%s__a" />
+		</mask>
+		<g mask="url(#slovak_icon%s__b)">
+			<mask fill="#fff" id="slovak_icon%s__d">
+				<use xlink:href="#slovak_icon%s__c" />
+			</mask>
+			<use fill="#3D58DB" xlink:href="#slovak_icon%s__c" />
+			<path d="M0 0h20v5H0z" fill="#F7FCFF" mask="url(#slovak_icon%s__d)" />
+			<path d="M0 10h20v5H0z" fill="#E31D1C" mask="url(#slovak_icon%s__d)" />
+			<g mask="url(#slovak_icon%s__d)">
+				<g transform="translate(3.75 3.75)">
+					<mask fill="#fff" id="slovak_icon%s__f">
+						<use xlink:href="#slovak_icon%s__e" />
+					</mask>
+					<path d="M6.283-.294c.254 2.3.317 3.878.197 4.737-.178 1.287-.95 3.348-3.241 4.372C.585 7.78-.053 5.488-.192 4.442c-.092-.695-.056-2.273.116-4.736z" stroke="#FFF" stroke-width=".625" />
+					<path d="M2.66.369c.087.13.149.296.188.497.038.2.06.476.067.827l-1.224-.15v.928l1.252-.16-.02.882c-.25.026-.478.026-.682 0a7.487 7.487 0 0 1-.912-.202v1.063a6.61 6.61 0 0 1 .912-.242c.198-.03.425-.03.681 0v1.305h.508V3.812c.37-.032.666-.03.887.004.221.035.436.114.646.238V2.991a1.965 1.965 0 0 1-.619.198c-.2.027-.505.028-.914.004l.02-.881c.278-.03.494-.033.65-.012.155.021.33.078.525.171v-.928c-.19.103-.36.164-.508.183-.15.018-.38.008-.694-.033.006-.362.025-.631.057-.808a1.73 1.73 0 0 1 .184-.516H2.661z" fill="#F7FCFF" mask="url(#slovak_icon%s__f)" />
+					<path d="M.56 6.403c.184-.393.425-.627.722-.701.298-.075.604.042.916.35.19-.623.519-.935.984-.935.465 0 .779.312.942.935a.918.918 0 0 1 .726-.35c.285 0 .56.234.824.701-.852 1.548-1.704 2.321-2.556 2.321-.853 0-1.705-.773-2.557-2.32z" fill="#2E42A5" mask="url(#slovak_icon%s__f)" />
+				</g>
+			</g>
+		</g>
+	</g>
+</svg>

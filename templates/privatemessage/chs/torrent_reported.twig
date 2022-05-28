@@ -1,0 +1,12 @@
+{% block subject %}
+种子被报告
+{% endblock %}
+{% block body %}
+你发布的种子 [url={{ SiteURL }}/torrents.php?torrentid={{ TorrentID }}]{{ RawName }}[/url] 被某位用户以「[url={{ SiteURL }}/wiki.php?action=article&id=54]{{ ToReportTitle }}[/url]」为由报告，具体报告内容请进入种子详情页面点击「查看报告信息」按钮查看。
+
+[important]注意：[/important]
+[#]报告是全体用户的权利，此报告并非一定由管理组成员提交，也并非说明种子一定存在报告中所述问题。管理员处理此报告时，若发现报告存在错误、滥用、语言攻击等问题，会视情况提醒或警告报告人。
+[#]禁止使用报告功能去解释或反驳该报告，更不要在站内论坛、聊天群等地抱怨和发泄不满，那可能导致你被警告，我们允许你理性探讨。
+[#][b]只有管理员对种子处理时发送的 PM 才算作管理组裁定[/b]，此时若你对处理有异议，可以 PM 处理人或在 [url={{ SiteURL }}/forums.php?action=viewforum&forumid=11]申诉[/url] 板块发帖。
+[#]对于此报告，如果想做说明或解释，可使用报告详情右侧的回复功能，但注意只能回复一次，此回复用于帮助管理更好地处理该报告。另外若此报告无误，自行修正即可，无需进行回复。
+{% endblock %}

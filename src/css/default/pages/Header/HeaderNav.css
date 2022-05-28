@@ -1,0 +1,65 @@
+/*
+HeaderNav
+  HeaderNavList
+    HeaderNavList-item
+      HeaderNav-link
+*/
+
+.HeaderNav {
+  order: 4;
+  grid-column: 1 / -1;
+  z-index: 3;
+  padding: 9px 0;
+  justify-items: center;
+  border-top: var(--Header-border);
+  border-bottom: var(--Header-border);
+  background: var(--Header-bottom-background);
+  box-shadow: var(--Header-boxShadow);
+}
+
+.HeaderNavList {
+  display: flex;
+  justify-content: center;
+}
+@media (max-width: 768px) {
+  .HeaderNavList {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, 90px);
+  }
+}
+
+.HeaderNavList-item {
+  width: 90px;
+  box-sizing: border-box;
+  transition: all 0.25s ease;
+  position: relative;
+  text-align: center;
+  padding: var(--global-space-sm);
+  display: block;
+  font-size: var(--global-fontSize-lg);
+}
+@media (max-width: 768px) {
+  .HeaderNavList-item {
+    text-align: left;
+  }
+}
+
+.HeaderNavList-item.active {
+  font-weight: bold;
+}
+@media (min-width: 768px) {
+  .HeaderNavList-item#nav_torrents ~ li {
+    border-left: var(--Box-border);
+  }
+}
+
+/* link */
+.HeaderNav-link {
+  padding: 0px 5px;
+}
+.HeaderNav-link:hover:after {
+  left: 3px;
+  right: unset;
+  width: 78px;
+  z-index: 3;
+}

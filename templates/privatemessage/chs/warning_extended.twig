@@ -1,0 +1,7 @@
+{% block subject %}
+警告期延长
+{% endblock %}
+{% block body %}
+你的警告期被延长了 {{ ExtendWarning }} 周，处理人是 [user]{{ UserName }}[/user]。理由如下：
+[quote]{{ WarnReason }}[/quote]
+{% endblock %}

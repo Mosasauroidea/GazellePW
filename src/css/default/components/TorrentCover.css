@@ -1,0 +1,41 @@
+/*
+Where
+  user - recent uploads
+  collage - show
+  artist - show
+  bookmarks - show
+
+TorrentCover
+  TorrentCover-item
+    TorrentCover-imageContainer
+        TorrentCover-image
+*/
+
+.TorrentCover {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, 150px);
+  justify-content: center;
+  column-gap: var(--global-space-lg);
+  row-gap: var(--global-space-default);
+}
+@media (max-width: 768px) {
+  .PageUserShow .TorrentCover {
+    display: flex;
+    justify-content: flex-start;
+    overflow: auto;
+  }
+}
+
+.TorrentCover-item {
+  text-align: center;
+}
+
+.TorrentCover-imageContainer {
+  width: 150px;
+  height: 222px;
+}
+
+.TorrentCover-image {
+  height: 100%;
+  border-radius: var(--global-borderRadius);
+}

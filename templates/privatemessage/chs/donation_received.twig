@@ -1,0 +1,14 @@
+{% block subject %}
+感谢！我们已收到并登记了你的捐助
+{% endblock %}
+{% block body %}
+感谢你的慷慨解囊，你的支持是我们前进的动力。下面是关于本次捐助的摘要：
+[*][b]捐助额：{{ DonationAmount }}[/b]
+[*][b]捐助点数： +{{ ReceivedRank }}[/b]
+[*][b]你的捐助等级： {{ CurrentRank }}[/b]
+最后，再次感谢你对于站点一直以来的支持。
+
+{{ SiteName }} 管理组
+
+[align=center][如果你还有任何疑惑或关心的问题，欢迎发送 [url={{ SiteURL }}/staffpm.php]管理组私信[/url]][/align]
+{% endblock %}

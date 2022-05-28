@@ -1,0 +1,32 @@
+/*
+HeaderProfile
+	HeaderProfile-avatar
+	HeaderProfile-nameLink
+	HeaderProfile-menuExtendIcon
+*/
+
+.HeaderProfile {
+  width: auto;
+  gap: var(--global-space-default);
+  padding: 0 10px;
+  display: flex;
+  align-items: center;
+  height: 100%;
+}
+
+.HeaderProfile-avatar {
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+}
+
+@media (max-width: 768px) {
+  .HeaderProfile-nameLink {
+    display: none;
+  }
+}
+
+.HeaderProfile-menuExtendIcon {
+  width: 16px;
+  height: 16px;
+}

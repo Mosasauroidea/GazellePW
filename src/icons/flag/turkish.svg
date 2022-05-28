@@ -1,0 +1,18 @@
+<svg class="turkish icon" width="20" height="16" viewBox="0 0 20 16" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+	<defs>
+		<path d="M0 0h20v15H0z" id="turkish_icon%s__a" />
+		<path d="M0 0h20v15H0z" id="turkish_icon%s__c" />
+	</defs>
+	<g fill="none" fill-rule="evenodd" transform="translate(0 .5)">
+		<mask fill="#fff" id="turkish_icon%s__b">
+			<use xlink:href="#turkish_icon%s__a" />
+		</mask>
+		<g mask="url(#turkish_icon%s__b)">
+			<mask fill="#fff" id="turkish_icon%s__d">
+				<use xlink:href="#turkish_icon%s__c" />
+			</mask>
+			<use fill="#E31D1C" xlink:href="#turkish_icon%s__c" />
+			<path d="M9.92 2.541c1.158.018 2.559.717 2.949 1.684l-.029-.016c-.196-.11-1.382-.725-2.73-.427-1.478.326-2.43 1.609-2.469 3.145-.04 1.642.988 2.78 2.32 3.133 1.043.277 2.142-.128 2.57-.317l.117-.054.07-.035c-.181.506-1.032 1.689-2.781 1.661C7.755 11.281 5.3 9.659 5.37 6.888c.067-2.673 2.395-4.381 4.55-4.347zm3.127 2.55.972 1.12 1.395-.443-.872 1.175 1.278 1.138-1.636-.147-1.012 1.172.054-1.585-1.495-.557 1.341-.467-.025-1.405z" fill="#F7FCFF" mask="url(#turkish_icon%s__d)" transform="rotate(-1 10.594 6.928)" />
+		</g>
+	</g>
+</svg>

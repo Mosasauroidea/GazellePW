@@ -1,0 +1,15 @@
+<svg class="latvian icon" width="20" height="16" viewBox="0 0 20 16" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+	<defs>
+		<path d="M0 0h20v15H0z" id="latvian_icon%s__a" />
+	</defs>
+	<g fill="none" fill-rule="evenodd" transform="translate(0 .5)">
+		<mask fill="#fff" id="latvian_icon%s__b">
+			<use xlink:href="#latvian_icon%s__a" />
+		</mask>
+		<g mask="url(#latvian_icon%s__b)">
+			<path d="M0 9h20v6H0z" fill="#C51918" />
+			<path d="M0 5h20v3.75H0z" fill="#F7FCFF" />
+			<path d="M0 0h20v6H0z" fill="#C51918" />
+		</g>
+	</g>
+</svg>

@@ -1,0 +1,18 @@
+<svg class="polish icon" width="20" height="16" viewBox="0 0 20 16" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+	<defs>
+		<path d="M0 0h20v15H0z" id="polish_icon%s__a" />
+		<path d="M0 0h20v15H0z" id="polish_icon%s__c" />
+	</defs>
+	<g fill="none" fill-rule="evenodd" transform="translate(0 .5)">
+		<mask fill="#fff" id="polish_icon%s__b">
+			<use xlink:href="#polish_icon%s__a" />
+		</mask>
+		<g mask="url(#polish_icon%s__b)">
+			<mask fill="#fff" id="polish_icon%s__d">
+				<use xlink:href="#polish_icon%s__c" />
+			</mask>
+			<use fill="#F7FCFF" xlink:href="#polish_icon%s__c" />
+			<path d="M0 7.5h20V15H0z" fill="#C51918" mask="url(#polish_icon%s__d)" />
+		</g>
+	</g>
+</svg>

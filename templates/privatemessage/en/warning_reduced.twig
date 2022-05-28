@@ -1,0 +1,7 @@
+{% block subject %}
+Your warning has been reduced
+{% endblock %}
+{% block body %}
+Your warning has been reduced by {{ ReduceWarning }} Week{% if ReduceWarning > 1 %}s{% endif %} by [user]{{ UserName }}[/user]. The reason given was:
+[quote]{{ WarnReason }}[/quote]
+{% endblock %}

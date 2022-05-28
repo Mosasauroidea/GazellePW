@@ -1,0 +1,15 @@
+<svg class="romanian icon" width="20" height="16" viewBox="0 0 20 16" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+	<defs>
+		<path d="M0 0h20v15H0z" id="romanian_icon%s__a" />
+	</defs>
+	<g fill="none" fill-rule="evenodd" transform="translate(0 .5)">
+		<mask fill="#fff" id="romanian_icon%s__b">
+			<use xlink:href="#romanian_icon%s__a" />
+		</mask>
+		<g mask="url(#romanian_icon%s__b)">
+			<path d="M6.25 0h7.5v15h-7.5z" fill="#FBCD17" />
+			<path d="M13.75 0H20v15h-6.25z" fill="#E11C1B" />
+			<path d="M0 0h6.25v15H0z" fill="#2E42A5" />
+		</g>
+	</g>
+</svg>

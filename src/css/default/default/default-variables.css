@@ -1,0 +1,233 @@
+/*
+--global[-on<State>]-<cssProperty>-<name>
+--Component-descentName-[on<State>]-<cssProperty>
+*/
+
+:root {
+  --global-fontFamily: ui-sans-serif, system-ui, sans-serif;
+  --global-fontSize-desktop: 16px;
+  --global-fontSize-mobile: 14px;
+  --global-fontSize-sm: 0.875rem;
+  --global-fontSize-lg: 1.125rem;
+  --global-lineHeight: 1.5;
+  --global-borderRadius: 5px;
+  --global-space-default: 10px;
+  --global-space-sm: 5px;
+  --global-space-lg: 20px;
+
+  /* Colors */
+  --global-color-placeholder: grey;
+  --global-backgroundColor: white;
+  --global-color: #404040;
+  --global-color-primary: rgba(0, 0, 0, 0.1);
+  --global-color-onPrimary: #000;
+  --global-onHover-color: #202020;
+  --global-onHover-color-primary: rgba(0, 0, 0, 0.3);
+  --global-onHover-color-onPrimary: #000;
+  --global-color-border: #ccc;
+  --global-color-link: #004070;
+  --global-onHover-color-link: #1958bd;
+  --global-color-rewardButton: #da7171;
+  --global-color-success: #28a745;
+  --global-color-warning: #d8210d;
+  --global-color-circle: #f4d90d;
+  --global-color-ratio1: #cc364e;
+  --global-color-ratio2: #ff2600;
+  --global-color-ratio3: #ff5e00;
+  --global-color-ratio4: #ff7100;
+  --global-color-ratio5: #ff9700;
+  --global-color-ratio6: #fa0;
+  --global-color-ratio7: #74c42e;
+  --global-color-ratio8: #7dae32;
+  --global-color-postH3: #149999;
+  --global-color-postH4: #4b87a7;
+  --global-color-postH5: #4768b3;
+  --global-color-ruleStrong: #004f9d;
+
+  /* Box */
+  --global-color-box: white;
+  --global-colorTransparent-box: white;
+  --global-colorTransparentSecondary-box: rgba(0, 0, 0, 0.08);
+  --global-color-onBox: #404040;
+  --global-border-box: 1px solid #ccc;
+  --global-boxShadow-box: none;
+  --global-color-boxHeader: rgba(0, 0, 0, 0.05);
+  --global-color-onBoxHeader: #404040;
+  --Box-background: var(--global-colorTransparent-box);
+  --Box-color: var(--global-color-onBox);
+  --Box-border: var(--global-border-box);
+  --Box-header-background: var(--global-color-boxHeader);
+  --Box-header-color: var(--global-color-onBoxHeader);
+  /* BoxWithoutBorder */
+  --global-background-boxWithoutBorder: transparent;
+  --global-padding-boxWithoutBorder: 0;
+  --global-border-boxWithoutBorder: 1px solid #ccc;
+  --global-boxShadow-boxWithoutBorder: rgba(0, 0, 0, 0.05);
+
+  /* Overlay */
+  --Overlay-backgroundColor: #eee;
+  --Overlay-background: var(--Overlay-backgroundColor);
+  --Overlay-color: var(--global-color);
+  --Overlay-borderColor: var(--global-color-border);
+  --Overlay-border: 1px solid var(--Overlay-borderColor);
+  --Overlay-boxShadow: rgba(140, 149, 159, 0.2) 0px 8px 24px 0px;
+  /* DropdownMenu */
+  --DropdownMenu-item-color: inherit;
+  --DropdownMenu-item-onHover-background: rgba(0, 0, 0, 0.1);
+  --DropdownMenu-item-onHover-color: var(--DropdownMenu-item-color);
+  --DropdownMenu-link-color: var(--Header-link-text);
+  --DropdownMenu-link-onHover-color: var(--Header-link-onHover-text);
+  --DropdownMenu-item-onHover-textDecoration: none;
+
+  /* Header */
+  --Header-background: rgba(122, 188, 255, 0.3);
+  --Header-color: #404040;
+  --Header-border: 1px solid #ccc;
+  --Header-boxShadow: none;
+  --Header-top-background: #fff;
+  --Header-bottom-background: #fff;
+  --Header-link-color: #004070;
+  --Header-link-textDecoration: var(--Link-textDecoration);
+  --Header-link-onHover-color: #1958bd;
+  --Header-link-onHover-textDecoration: var(--Link-onHover-textDecoration);
+  --Header-input-background: rgba(255, 255, 255, 0.3);
+  --Header-input-color: var(--Input-color);
+  --Header-input-border: 1px solid rgba(0, 0, 0, 0.1);
+  --Header-input-onPlaceholder-color: var(--Header-input-color);
+  --Header-input-onHover-background: var(--Input-onHover-background);
+  --Header-button-background: rgba(255, 255, 255, 0.3);
+  --Header-button-color: var(--Button-default-color);
+  --Header-button-border: var(--Button-default-border);
+  --Header-button-boxShadow: var(--Button-default-boxShadow);
+  --Header-button-onHover-background: rgba(0, 0, 0, 0.1);
+  --Header-button-onHover-color: var(--Button-default-onHover-color);
+  --Header-button-onHover-border: var(--Button-default-onHover-border);
+  --Header-button-onHover-boxShadow: var(--Button-default-onHover-boxShadow);
+  --HeaderAnnounceItem-link-background: #f0df49;
+  --HeaderAnnounceItem-link-color: black;
+  --HeaderAnnounceItem-link-opacity: 0.8;
+  --HeaderAnnounceItem-link-onHover-color: var(--HeaderAnnounceItem-link-color);
+  --HeaderAnnounceItem-link-onHover-opacity: 1;
+  --HeaderDonate-percent-color: #004070;
+  --HeaderDonate-progressBar-background: #004070;
+  --HeaderDonate-progressBar-onHover-background: #1958bd;
+  --HeaderDonate-progressBarBorder-border: 2px solid #004070;
+  --HeaderDonate-progressBarBorder-onHover-border: 2px solid #1958bd;
+  --HeaderLogo-filter: drop-shadow(0px 0px 1px #999);
+
+  /* Sidebar */
+  --SidebarItem-background: var(--global-colorTransparent-box);
+  --SidebarItem-color: var(--global-color-onBox);
+  --SidebarItem-border: var(--global-border-box);
+  --SidebarItem-boxShadow: var(--global-boxShadow-box);
+  --SidebarItem-header-background: var(--global-color-boxHeader);
+  --SidebarItem-header-color: var(--global-color-onBoxHeader);
+  --SidebarItem-header-borderBottom: var(--global-border-box);
+
+  /* Input */
+  --global-color-input: #eee;
+  --global-onHover-color-input: #ddd;
+  --global-onDisabled-color-input: #808080;
+  --global-color-onInput: black;
+  --global-border-input: 1px solid transparent;
+  --Input-background: var(--global-color-input);
+  --Input-color: var(--global-color-onInput);
+  --Input-border: var(--global-border-input);
+  --Input-boxShadow: none;
+  --Input-onHover-background: var(--global-onHover-color-input);
+  --Input-onFocus-border: var(--Input-border);
+  --Input-onFocus-boxShadow: var(--Input-boxShadow);
+
+  /* Link */
+  --Link-color: var(--global-color-link);
+  --Link-textDecoration: none;
+  --Link-onHover-color: var(--global-onHover-color-link);
+  --Link-onHover-textDecoration: var(--Link-textDecoration);
+
+  /* Button */
+  --Button-default-background: var(--global-color-primary);
+  --Button-default-color: var(--global-color-onPrimary);
+  --Button-default-border: none;
+  --Button-default-boxShadow: none;
+  --Button-default-onHover-background: var(--global-onHover-color-primary);
+  --Button-default-onHover-color: var(--global-onHover-color-onPrimary);
+  --Button-default-onHover-boxShadow: var(--Button-default-boxShadow);
+  --Button-default-onHover-border: var(--Button-default-border);
+  --Button-primary-background: var(--Button-default-background);
+  --Button-primary-color: var(--Button-default-color);
+  --Button-primary-border: var(--Button-default-border);
+  --Button-primary-boxShadow: var(--Button-default-boxShadow);
+  --Button-primary-onHover-background: var(--Button-default-onHover-background);
+  --Button-primary-onHover-color: var(--Button-default-onHover-color);
+  --Button-primary-onHover-border: var(--Button-default-onHover-border);
+  --Button-primary-onHover-boxShadow: var(--Button-default-onHover-boxShadow);
+
+  /* MovieInfo */
+  --global-background-movieInfoButton: rgba(0, 0, 0, 0.08);
+  --global-onHover-background-movieInfoButton: rgba(0, 0, 0, 0.15);
+  --global-color-movieInfoyear: #777;
+  --MovieInfo-border: var(--global-border-box);
+  --MovieInfo-boxShadow: var(--global-boxShadow-box);
+  --MovieInfo-background: rgba(0, 0, 0, 0.08);
+  --MovieInfo-button-background: var(--global-background-movieInfoButton);
+  --MovieInfo-button-onHover-background: var(
+    --global-onHover-background-movieInfoButton
+  );
+  --Movieinfo-button-color: var(--global-color);
+  --Movieinfo-button-onHover-color: var(--global-onHover-color);
+  --MovieInfo-button-border: var(--global-border-box);
+  --MovieInfo-year-color: var(--global-color-movieInfoyear);
+  --artist-photo-opacity: 0.2;
+
+  /* Table */
+  --TableMediaInfo-border: 1px solid #404040;
+
+  /* TorrentTable */
+  --TableTorrent-movieInfo-background: rgba(0, 0, 0, 0.15);
+  --TableTorrent-category-background: rgba(0, 0, 0, 0.1);
+  --TableTorrent-title-background: rgba(0, 0, 0, 0.05);
+  --TableTorrent-movieInfoTitle-color: black;
+  --TableTorrent-movieInfoTitle-onHover-color: #323232;
+  --TableTorrent-movieInfoYear-color: #777;
+  --slotButton-opacity: 0.4;
+  --slotButton-onHover-opacity: 0.8;
+  --slotButton-onActive-opacity: 1;
+  --slotQuality-color: #006df9;
+  --slotClear-color: #fb0040;
+  --slotCnQuality-color: #f88c00;
+  --slotEnQuality-color: #f900ad;
+  --slotRetenion-color: #1cd700;
+  --slotFeature-color: #86db79;
+  --slotRemux-color: #02bbed;
+  --slotUntouched-color: #00b9ec;
+  --slotDiy-color: #00b8ea;
+  --slotEmpty-color: #a7a7a7;
+  --slotHighlightName-color: #ddd;
+
+  /* Form */
+  --Form-errorMessage-color: var(--global-color-warning);
+
+  /* BBCodeToolbar */
+  --BBCodeToolbar-button-onHover-background: var(--global-onHover-color-input);
+  --BBCodeToolbar-button-onHover-boxShadow: none;
+  --BBCodeToolbar-button-onActive-border: 1px solid white;
+  --BBCodeToolbar-button-onActive-boxShadow: inset 0 0 4px rgb(0 0 0 / 50%);
+
+  /* Notification */
+  --Notification-background: var(--global-color-box);
+  --Notification-color: var(--global-color-onBox);
+  --Notification-border: var(--global-border-box);
+  --Notification-box-shadow: var(--HeadBody-boxShadow);
+  --Notification-message-background: var(--global-color-boxHeader);
+  --Notification-message-color: var(--global-color-onBoxHeader);
+  --Notification-message-borderBottom: var(--global-border-box);
+
+  /* Progress */
+  --Progress-bar-background: rgba(0, 0, 0, 0.05);
+  --Progress-value-background: rgba(122, 188, 255, 0.3);
+
+  /* End */
+  --global-zIndex-screenshotComparison: 10;
+  --global-zIndex-dialog: 20;
+  --global-zIndex-snackbar: 30;
+}

@@ -1,0 +1,14 @@
+#SearchCollage {
+  display: grid;
+  grid-template-columns: 1fr auto;
+}
+
+#AddCollage > #select_collage {
+  width: 100%;
+}
+
+#AddCollage > #selected_collage_category,
+#AddCollage > #selected_collage_author,
+#AddCollage > #selected_collage_description {
+  padding: 0 7px;
+}

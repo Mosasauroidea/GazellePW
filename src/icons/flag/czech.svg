@@ -1,0 +1,20 @@
+<svg class="czech icon" width="20" height="16" viewBox="0 0 20 16" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+	<defs>
+		<path d="M0 0h20v15H0z" id="czech_icon%s__a" />
+		<path d="M0 0h20v15H0z" id="czech_icon%s__c" />
+		<path d="M0 0v15l11.25-7.5z" id="czech_icon%s__e" />
+	</defs>
+	<g fill="none" fill-rule="evenodd" transform="translate(0 .5)">
+		<mask fill="#fff" id="czech_icon%s__b">
+			<use xlink:href="#czech_icon%s__a" />
+		</mask>
+		<g mask="url(#czech_icon%s__b)">
+			<mask fill="#fff" id="czech_icon%s__d">
+				<use xlink:href="#czech_icon%s__c" />
+			</mask>
+			<use fill="#E31D1C" xlink:href="#czech_icon%s__c" />
+			<path d="M0-1.25h20V7.5H0z" fill="#F7FCFF" mask="url(#czech_icon%s__d)" />
+			<use fill="#3D58DB" xlink:href="#czech_icon%s__e" />
+		</g>
+	</g>
+</svg>

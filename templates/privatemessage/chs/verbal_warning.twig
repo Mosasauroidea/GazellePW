@@ -1,0 +1,8 @@
+{% block subject %}
+你被{% if Length %}{% else %}口头{% endif %}警告了
+{% endblock %}
+{% block body %}
+你因为 [url={{ URL }}]这条评论[/url] 得到了{% if Length > 1 %} {{ Length }}周 {% else %}口头{% endif %}警告。
+
+[quote]{{ PrivateMessage }}[/quote]
+{% endblock %}

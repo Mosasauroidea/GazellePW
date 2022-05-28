@@ -1,0 +1,7 @@
+{% block subject %}
+Your warning has been extended
+{% endblock %}
+{% block body %}
+Your warning has been extended by {{ ExtendWarning }} Week{% if ExtendWarning > 1 %}s{% endif %} by [user]{{ UserName }}[/user]. The reason given was:
+[quote]{{ WarnReason }}[/quote]
+{% endblock %}

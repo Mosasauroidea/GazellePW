@@ -1,0 +1,14 @@
+/*
+Where
+  profile - missing                # torrents/missing.php
+*/
+
+.TableMissing-cellName {
+  width: 30%;
+  min-width: 300px;
+}
+
+.TableMissing .icon {
+  width: 15px;
+  height: 15px;
+}

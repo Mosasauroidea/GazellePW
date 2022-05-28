@@ -1,0 +1,19 @@
+<svg class="lithuanian icon" width="20" height="16" viewBox="0 0 20 16" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+	<defs>
+		<path d="M0 0h20v15H0z" id="lithuanian_icon%s__a" />
+		<path d="M0 0h20v15H0z" id="lithuanian_icon%s__c" />
+	</defs>
+	<g fill="none" fill-rule="evenodd" transform="translate(0 .5)">
+		<mask fill="#fff" id="lithuanian_icon%s__b">
+			<use xlink:href="#lithuanian_icon%s__a" />
+		</mask>
+		<g mask="url(#lithuanian_icon%s__b)">
+			<mask fill="#fff" id="lithuanian_icon%s__d">
+				<use xlink:href="#lithuanian_icon%s__c" />
+			</mask>
+			<use fill="#55BA07" xlink:href="#lithuanian_icon%s__c" />
+			<path d="M0 0h20v5H0z" fill="#FECA00" mask="url(#lithuanian_icon%s__d)" />
+			<path d="M0 10h20v5H0z" fill="#C51918" mask="url(#lithuanian_icon%s__d)" />
+		</g>
+	</g>
+</svg>

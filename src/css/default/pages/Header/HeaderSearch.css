@@ -1,0 +1,44 @@
+/*
+HeaderSearch
+  HeaderSearchList
+    HeaderSearchList-item
+      HeaderSearch-form
+*/
+
+.HeaderSearch {
+  order: 3;
+  grid-column: 2;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  text-align: center;
+}
+.Header.is-hasAlerts .HeaderSearch {
+  grid-row: span 1;
+}
+
+.HeaderSearchList {
+  display: grid;
+  margin: 0 auto;
+  max-width: 735px;
+  grid-template-columns: repeat(6, 1fr);
+  grid-template-rows: 26px;
+}
+@media (max-width: 768px) {
+  .HeaderSearchList {
+    grid-column: 1 / 4;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: 26px 26px;
+    row-gap: var(--global-space-default);
+    max-width: 370px;
+  }
+}
+
+.HeaderSearchList-item {
+  list-style: none;
+  padding: 2px 5px;
+}
+
+.HeaderSearch-form {
+  display: inline;
+}

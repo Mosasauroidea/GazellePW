@@ -1,0 +1,163 @@
+/*
+Where
+  torrents - show          # torrents/details.php
+  torrents - artist show   # artist/artist.php
+*/
+
+.MovieInfo {
+  
+  
+  
+  
+  margin-bottom: var(--global-space-lg);
+  display: grid;
+  grid-template-columns: 249px 1fr;
+  grid-template-rows: auto auto auto 1fr;
+  padding: var(--global-space-lg);
+  column-gap: var(--global-space-lg);
+  row-gap: 15px;
+  overflow: hidden;
+}
+@media (max-width: 768px) {
+  .MovieInfo {
+    display: block;
+  }
+}
+
+.MovieInfo-left {
+  grid-row: 1/5;
+}
+
+.MovieInfo-poster {
+  border-radius: var(--global-borderRadius);
+  width: 250px;
+  /* height: 100%;
+  min-height: 375px; */
+}
+
+.MovieInfo-title {
+  font-size: 30px;
+  line-height: 32px;
+  font-weight: 700;
+  position: relative;
+  bottom: 3px;
+}
+
+.MovieInfo-subTitle {
+  display: block;
+  font-size: 20px;
+  margin: 0 0 5px 0;
+  font-weight: 300;
+}
+
+.MovieInfo-facts {
+  border-radius: var(--global-borderRadius);
+  display: inline-flex;
+  background: var(--MovieInfo-button-background);
+  border: var(--MovieInfo-button-border);
+  width: fit-content;
+  margin-bottom: var(--global-space-sm);
+
+  flex-wrap: wrap;
+}
+
+.MovieInfo-fact {
+  display: flex;
+  height: 100%;
+  padding: 5px 10px;
+  color: var(--Movieinfo-button-color);
+  align-items: center;
+  gap: var(--global-space-sm);
+}
+.MovieInfo-fact:not(:last-child) {
+  border-right: var(--MovieInfo-button-border);
+}
+.MovieInfo-fact:hover {
+  color: var(--Movieinfo-button-onHover-color);
+  background: var(--MovieInfo-button-onHover-background);
+}
+
+.MovieInfo-fact .icon {
+  width: 16px;
+  height: 16px;
+}
+
+.MovieInfo-tags {
+  line-height: 1.5;
+  display: flex;
+  gap: var(--global-space-sm);
+}
+
+.MovieInfo-tag {
+  background: var(--MovieInfo-button-background);
+  border: var(--MovieInfo-button-border);
+  color: var(--Movieinfo-button-color);
+  border-radius: var(--global-borderRadius);
+  display: inline-block;
+  padding: 3px 5px;
+}
+.MovieInfo-tag:hover {
+  background: var(--MovieInfo-button-onHover-background);
+  color: var(--Movieinfo-button-onHover-color);
+}
+
+.MovieInfo-synopsis > p {
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  display: -webkit-box;
+  overflow: hidden;
+}
+.MovieInfo-synopsis.overflown > p {
+  cursor: pointer;
+}
+.MovieInfo-synopsis.expand > p {
+  -webkit-line-clamp: inherit;
+}
+
+.MovieInfo-artists {
+  display: grid;
+  grid-auto-flow: column;
+  grid-template-columns: repeat(6, 130px);
+  gap: var(--global-space-sm);
+  overflow-x: scroll;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.MovieInfo-artists::-webkit-scrollbar {
+  display: none;
+}
+
+.MovieInfo-artist {
+  width: 130px;
+  text-align: center;
+}
+
+.MovieInfo-artistPhoto {
+  width: 100px;
+  height: 150px;
+  object-fit: cover;
+  margin: 0 auto 5px;
+  border-radius: var(--global-borderRadius);
+}
+
+.MovieInfo-year {
+  font-size: 80%;
+  color: var(--MovieInfo-year-color);
+}
+
+.MovieInfo-poster.empty_photo {
+  content: url('https://ptpimg.me/72j48o.png');
+  opacity: var(--artist-photo-opacity);
+  display: block;
+  width: 100%;
+  pointer-events: none;
+}
+.MovieInfo-artistPhoto.default_photo {
+  opacity: var(--artist-photo-opacity);
+  content: url('https://ptpimg.me/72j48o.png');
+  pointer-events: none;
+}
+
+.MovieInfo .lack_of_info {
+  filter: grayscale(1);
+}

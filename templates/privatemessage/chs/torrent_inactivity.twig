@@ -1,0 +1,9 @@
+{% block subject %}
+你有 {{ Count }} 个种子因不活跃而进入可替代状态
+{% endblock %}
+{% block body %}
+你发布的 {{ Count }} 个种子因长期无人做种而进入可替代状态。由于{% if Singular %}它{% else %}他们{%endif%}大概率没有违反任何规则，所以你可以为{% if Singular %}它{% else %}他们{% endif %}续种。
+
+下列种子已被标为 “可替代”：
+{{ MessageInfo}}
+{% endblock %}

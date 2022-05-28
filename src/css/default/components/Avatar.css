@@ -1,0 +1,23 @@
+.Avatar {
+  position: relative;
+}
+
+.Avatar-item {
+  transition: opacity 500ms;
+}
+
+.Avatar-image {
+  border-radius: var(--global-borderRadius);
+min-width: 150px;}
+.Avatar-item:nth-child(2) {
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0;
+}
+.Avatar.is-canChange:hover .Avatar-item:nth-child(1) {
+  opacity: 0;
+}
+.Avatar.is-canChange:hover .Avatar-item:nth-child(2) {
+  opacity: 1;
+}

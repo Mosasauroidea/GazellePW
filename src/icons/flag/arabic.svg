@@ -1,0 +1,16 @@
+<svg class="arabic icon" width="20" height="16" viewBox="0 0 20 16" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+	<defs>
+		<path d="M0 0h20v15H0z" id="arabic_icon%s__a" />
+	</defs>
+	<g fill="none" fill-rule="evenodd" transform="translate(0 .5)">
+		<mask fill="#fff" id="arabic_icon%s__b">
+			<use xlink:href="#arabic_icon%s__a" />
+		</mask>
+		<g mask="url(#arabic_icon%s__b)">
+			<path d="M0 0h20v15H0z" fill="#F7FCFF" />
+			<path d="M0 0h20v5H0z" fill="#5EAA22" />
+			<path d="M0 10h20v5H0z" fill="#272727" />
+			<path d="M0 1.25 10 7.5 0 13.75z" fill="#E31D1C" />
+		</g>
+	</g>
+</svg>

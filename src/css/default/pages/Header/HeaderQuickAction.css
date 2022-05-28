@@ -1,0 +1,38 @@
+/*
+HeaderQuickAction
+  HeaderQuickAction-item
+    HeaderQuickAction-link
+*/
+.HeaderQuickAction {
+  display: flex;
+  justify-content: flex-end;
+  height: 100%;
+}
+@media (max-width: 768px) {
+  .HeaderQuickAction {
+    justify-content: center;
+    height: 40px;
+  }
+}
+
+.HeaderQuickAction-item {
+  /* override global.css li */
+  padding: 0;
+}
+@media (max-width: 768px) {
+  .HeaderQuickAction-item:first-child {
+    margin-right: auto;
+    width: 100px;
+  }
+  .HeaderQuickAction-item:last-child {
+    margin-left: auto;
+    width: 100px;
+    display: flex;
+    justify-content: flex-end;
+  }
+}
+
+/* HeaderQuickAction-iconLink */
+.HeaderQuickAction-iconLink {
+  width: 40px;
+}

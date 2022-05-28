@@ -1,0 +1,18 @@
+<svg class="japanese icon" width="20" height="16" viewBox="0 0 20 16" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+	<defs>
+		<path d="M0 0h20v15H0z" id="japanese_icon%s__a" />
+		<path d="M0 0h20v15H0z" id="japanese_icon%s__c" />
+	</defs>
+	<g fill="none" fill-rule="evenodd" transform="translate(0 .5)">
+		<mask fill="#fff" id="japanese_icon%s__b">
+			<use xlink:href="#japanese_icon%s__a" />
+		</mask>
+		<g mask="url(#japanese_icon%s__b)">
+			<mask fill="#fff" id="japanese_icon%s__d">
+				<use xlink:href="#japanese_icon%s__c" />
+			</mask>
+			<use fill="#F7FCFF" xlink:href="#japanese_icon%s__c" />
+			<circle cx="10" cy="7.5" fill="#E31D1C" mask="url(#japanese_icon%s__d)" r="4.688" />
+		</g>
+	</g>
+</svg>

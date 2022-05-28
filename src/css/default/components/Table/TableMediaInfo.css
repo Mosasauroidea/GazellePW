@@ -1,0 +1,41 @@
+/*
+TableMediaInfo varaint='mediainfo | bdinfo'
+*/
+.TableMediaInfo {
+  border: var(--TableMediaInfo-border);
+  border-collapse: collapse;
+  font-size: 10px;
+}
+
+.TableMediaInfo > tbody > tr > td {
+  border: var(--TableMediaInfo-border);
+  padding: var(--global-space-sm);
+  vertical-align: top;
+}
+
+.TableMediaInfo > tbody > tr > td:nth-child(1) {
+  min-width: 160px;
+}
+
+.TableMediaInfo > tbody > tr > td:nth-child(2) {
+  min-width: 260px;
+}
+
+.TableMediaInfo > tbody > tr > td > table > tbody > tr > td {
+  padding: 0 2px;
+}
+
+.TableMediaInfo caption {
+  font-weight: 700;
+  border-bottom: 1px solid #393939;
+}
+
+.TableMediaInfo .General .key {
+  min-width: 60px;
+}
+.TableMediaInfo .Video .key {
+  min-width: 70px;
+}
+.TableMediaInfo .Audio .key {
+  min-width: 15px;
+}

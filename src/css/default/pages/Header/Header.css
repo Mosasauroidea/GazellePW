@@ -1,0 +1,68 @@
+/*
+Where
+  Header     # privateheader.php
+
+Header is-hasAlerts
+  HeaderInfo
+    HeaderDonate
+    HeaderStat
+    HeaderQuickAction
+  HeaderLogo
+  HeaderAnnounce
+  HeaderSearch
+  HeaderNav
+  HeaderAdmin
+*/
+
+.Header {
+  display: grid;
+  width: 100%;
+  row-gap: var(--global-space-default);
+  grid-template-columns: 220px auto 220px;
+  background: var(--Header-background);
+  color: var(--Header-color);
+  box-shadow: var(--Header-boxShadow);
+}
+@media (max-width: 768px) {
+  .Header {
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+/* LinkHeader */
+.LinkHeader {
+  color: var(--Header-link-color);
+  text-decoration: var(--Header-link-textDecoration);
+}
+.LinkHeader:hover {
+  color: var(--Header-link-onHover-color);
+  text-decoration: var(--Header-link-onHover-textDecoration);
+}
+
+/* ButtonHeader */
+.ButtonHeader {
+  background: var(--Header-button-background);
+  color: var(--Header-button-color);
+  border: var(--Header-button-border);
+  box-shadow: var(--Header-button-boxShadow);
+}
+.ButtonHeader:hover {
+  background: var(--Header-button-onHover-background);
+  color: var(--Header-button-onHover-color);
+  border: var(--Header-button-onHover-border);
+  box-shadow: var(--Header-button-onHover-boxShadow);
+}
+
+/* InputHeader */
+.InputHeader[type='text'] {
+  background: var(--Header-input-background);
+  color: var(--Header-input-color);
+  border: var(--Header-input-border);
+}
+.InputHeader[type='text']::placeholder {
+  color: var(--Header-input-onPlaceholder-color);
+}
+.InputHeader[type='text']:hover {
+  background: var(--Header-input-onHover-background);
+}

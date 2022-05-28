@@ -1,0 +1,12 @@
+{% block subject %}
+Torrent reported
+{% endblock %}
+{% block body %}
+The torrent [url={{ SiteURL }}/torrents.php?torrentid={{ TorrentID }}]{{ RawName }}[/url] you uploaded was reported by someone with "[url={{ SiteURL }}/wiki.php?action=article&id=54]{{ ToReportTitle }}[/url]". Please view your torrent details page for more information about the report.
+
+[important]Warning: [/important]
+[#]All users can report, it may not submitted by a staff and may be incorrect. If staffs   found that the report was wrong / abused / had offensive language when handling reports, they would tell or warn the reporter depending on the situation.
+[#]Do not use report function to explain or argue with the report. We allow you discuss with other users rationally, but complaining or venting in the forums or chatting groups is strictly prohibited. It may let you warned.
+[#][b]Only PM sent by staff when handling reports was considered as official decision.[/b] At this time, you may PM the staff who handle the report or create a thread at [url={{ SiteURL }}/forums.php?action=viewforum&forumid=11]Appeal[/url] forum if you disagree with the result.
+[#]You may reply at the reports area if you want to explain to the report. Please attention, you can only reply once, and this explanation is used to help staffs to solve the reports better. Once you correct your torrent by following the report, there is no need to reply.
+{% endblock %}

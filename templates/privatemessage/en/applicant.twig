@@ -1,0 +1,11 @@
+{% block subject %}
+You have a reply to your {{ RoleTitle }} application
+{% endblock %}
+{% block body %}
+Hello {{ UserName }},
+
+{{ StaffUserName }} has replied to your application for the role of {{ RoleTitle }}.
+You can view the reply [url=apply.php?action=view&id={{ ThisID }}]here[/url].
+
+{{ SiteName }} Staff <3
+{% endblock %}

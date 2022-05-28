@@ -1,0 +1,15 @@
+
+{% block subject %}
+Here {% if Amount > 1 %}is{% else %}are{% endif %} {{ Amount }} freeleech token{% if Amount > 1 %}s{% endif %}!
+{% endblock %}
+{% block body %}
+Hello {{ To }},
+
+{{From}} has sent you {{ Amount }} freeleech token{% if Amount > 1 %}s{% endif %}for you to use! 
+
+You can use them to download torrents without getting charged any download. 
+
+More details about them can be found on [url=wiki.php?action=article&id=57]the wiki[/url].
+
+Enjoy!
+{% endblock %}

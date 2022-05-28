@@ -1,0 +1,45 @@
+/*
+Header - Profile
+
+Dropdown is-open
+	Dropdown-trigger
+	DropdownMenu Overlay
+		DropdownMenu-item
+*/
+
+.Dropdown {
+  position: relative;
+}
+
+.Dropdown-trigger {
+  cursor: pointer;
+}
+
+.DropdownMenu {
+  position: absolute;
+  top: 100%;
+  right: 10px;
+  z-index: 100;
+  list-style: none;
+  padding: 5px 0;
+}
+
+.Dropdown:not(.is-open) .DropdownMenu {
+  display: none;
+}
+
+.DropdownMenu-item {
+  color: var(--DropdownMenu-item-color);
+  display: block;
+  cursor: pointer;
+  overflow: hidden;
+  padding: var(--global-space-sm) var(--global-space-lg);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.DropdownMenu-item:hover {
+  background: var(--DropdownMenu-item-onHover-background);
+  color: var(--DropdownMenu-item-onHover-color);
+  text-decoration: var(--DropdownMenu-item-onHover-textDecoration);
+}

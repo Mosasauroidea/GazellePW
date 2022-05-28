@@ -1,0 +1,14 @@
+Disc Title: AVENGERS_ENDGAME
+Disc Size: 45,180,271,242 bytes
+Protection: AACS
+Playlist: 00800.MPLS
+Size: 43,469,426,688 bytes
+Length: 3:01:11.360
+Total Bitrate: 31.99 Mbps
+Video: MPEG-4 AVC Video / 23352 kbps / 1080p / 23.976 fps / 16:9 / High Profile 4.1
+Audio: English / DTS-HD Master Audio / 7.1 / 48 kHz / 5028 kbps / 24-bit (DTS Core: 5.1 / 48 kHz / 1509 kbps / 24-bit / DN -2dB)
+Audio: Portuguese / Dolby Digital Audio / 5.1 / 48 kHz / 640 kbps / DN -2dB
+Audio: English / Dolby Digital Audio / 2.0 / 48 kHz / 192 kbps / DN -4dB
+Subtitle: English / 28.869 kbps
+Subtitle: Portuguese / 28.151 kbps
+Subtitle: English / 0.130 kbps

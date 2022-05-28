@@ -1,0 +1,11 @@
+{% block subject %}
+关于你申请 {{ RoleTitle }} 职位的回复
+{% endblock %}
+{% block body %}
+你好 {{ UserName }}：
+
+{{ StaffUserName }} 已经回复了你对于 {{ RoleTitle }} 职位的申请。
+你可以点击 [url=apply.php?action=view&id={{ ThisID }}]这里[/url] 查看回复内容。
+
+{{ SiteName }} 管理组 ❤
+{% endblock %}

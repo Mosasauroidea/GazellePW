@@ -1,0 +1,9 @@
+{% block subject %}
+Torrent deleted: {{ Name }}
+{% endblock %}
+{% block body %}
+A torrent {% if Action == "Uploaded" %}you uploaded{% elseif Action == "Seeding" %}you are seeding{% elseif Action == "Snatched" %}you've snatched{% elseif Action == "Downloaded" %}you've downloaded{% endif %}{% if TrumpID %} has been trumped. You can find the new torrent [url={{ SiteURL }}/torrents.php?torrentid={{ TrumpID }}]here[/url].{% else %} has been deleted.{% endif %}
+
+
+[url={{ SiteURL }}/log.php?search=Torrent+{{ TorrentID}}]Log message[/url]: {{Log}}.
+{% endblock %}

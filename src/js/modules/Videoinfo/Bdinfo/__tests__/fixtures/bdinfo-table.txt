@@ -1,0 +1,54 @@
+Disc Title:     Avengers.Endgame.2019.1080p.Blu-ray.AVC.DTS-HD.MA.7.1-HDChina
+Disc Label:     AVENGER&#39;S ENDGAME_HDC
+Disc Size:      45,578,826,277 bytes
+Protection:     AACS
+Extras:         BD-Java
+BDInfo:         0.7.5.5
+
+PLAYLIST REPORT:
+
+Name:                   00800.MPLS
+Length:                 3:01:11.360 (h:m:s.ms)
+Size:                   43,883,360,256 bytes
+Total Bitrate:          32.29 Mbps
+
+VIDEO:
+
+Codec                   Bitrate             Description    
+-----                   -------             -----------    
+MPEG-4 AVC Video        23352 kbps          1080p / 23.976 fps / 16:9 / High Profile 4.1
+
+AUDIO:
+
+Codec                           Language        Bitrate         Description    
+-----                           --------        -------         -----------    
+DTS-HD Master Audio             English         5028 kbps       7.1 / 48 kHz /  5028 kbps / 24-bit (DTS Core: 5.1 / 48 kHz /  1509 kbps / 24-bit / DN -2dB)
+Dolby Digital Audio             English         320 kbps        2.0 / 48 kHz /   320 kbps / DN -29dB
+
+SUBTITLES:
+
+Codec                           Language        Bitrate         Description    
+-----                           --------        -------         -----------    
+Presentation Graphics           English         33.823 kbps                    
+Presentation Graphics           English         69.912 kbps                    
+
+FILES:
+
+Name            Time In         Length          Size            Total Bitrate   
+----            -------         ------          ----            -------------   
+00000.M2TS      0:00:00.000     0:00:10.010     45,588,480      36,434 kbps     
+00001.M2TS      0:00:10.010     0:00:26.026     124,846,080     38,375 kbps     
+
+CHAPTERS:
+
+Number          Time In         Length          Avg Video Rate  Max 1-Sec Rate  Max 1-Sec Time  Max 5-Sec Rate  Max 5-Sec Time  Max 10Sec Rate  Max 10Sec Time  Avg Frame Size  Max Frame Size  Max Frame Time  
+------          -------         ------          --------------  --------------  --------------  --------------  --------------  --------------  --------------  --------------  --------------  --------------  
+1               0:00:00.000     0:00:36.036     0 kbps          0 kbps          00:00:00.000    0 kbps          00:00:00.000    0 kbps          00:00:00.000    0 bytes         0 bytes         00:00:00.000    
+
+STREAM DIAGNOSTICS:
+
+File            PID             Type            Codec           Language                Seconds                 Bitrate                 Bytes           Packets         
+----            ---             ----            -----           --------                --------------          --------------          -------------   -----           
+00000.M2TS      4113 (0x1011)   0x1B            AVC                                     0.00                    0                       0               0               
+00001.M2TS      4113 (0x1011)   0x1B            AVC                                     0.00                    0                       0               0               
+00001.M2TS      4352 (0x1100)   0x80            LPCM            zho (Chinese)           0.00   

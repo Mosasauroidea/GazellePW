@@ -1,0 +1,10 @@
+{% block subject %}
+{{ Username }} 向你推荐了 {{ Article }} {{ Type }}
+{% endblock %}
+{% block body %}
+{{ Username }} 向你推荐了 {{ Type }} [url={ Link }}]{{ Name }}[/url]。
+{% if Note %}
+
+{{ Note }}
+{% endif %}
+{% endblock %}

@@ -1,0 +1,19 @@
+<svg class="hungarian icon" width="20" height="16" viewBox="0 0 20 16" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+	<defs>
+		<path d="M0 0h20v15H0z" id="hungarian_icon%s__a" />
+		<path d="M0 0h20v15H0z" id="hungarian_icon%s__c" />
+	</defs>
+	<g fill="none" fill-rule="evenodd" transform="translate(0 .5)">
+		<mask fill="#fff" id="hungarian_icon%s__b">
+			<use xlink:href="#hungarian_icon%s__a" />
+		</mask>
+		<g mask="url(#hungarian_icon%s__b)">
+			<mask fill="#fff" id="hungarian_icon%s__d">
+				<use xlink:href="#hungarian_icon%s__c" />
+			</mask>
+			<use fill="#F7FCFF" xlink:href="#hungarian_icon%s__c" />
+			<path d="M0 0h20v5H0z" fill="#F14423" mask="url(#hungarian_icon%s__d)" />
+			<path d="M0 10h20v5H0z" fill="#5EAA22" mask="url(#hungarian_icon%s__d)" />
+		</g>
+	</g>
+</svg>

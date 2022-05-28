@@ -1,0 +1,47 @@
+{
+  "name": "gpw/gazelle",
+  "description": "Web framework for private BitTorrent trackers using Ocelot",
+  "type": "project",
+  "license": "Unlicense",
+  "authors": [
+    {
+      "name": "What.CD"
+    },
+    {
+      "name": "Apollo"
+    },
+    {
+      "name": "Mosasauroidea"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "Gazelle\\": "app/"
+    }
+  },
+  "require": {
+    "php": ">=7",
+    "robmorgan/phinx": "^0.10.0",
+    "yupmin/php-chardet": "^1.0",
+    "whichbrowser/parser": "^2.0",
+    "orpheusnet/bencode-torrent": "*",
+    "irazasyed/telegram-bot-sdk": "^3.4",
+    "imdbphp/imdbphp": "^6.5",
+    "php-curl-class/php-curl-class": "^9.1",
+    "mailgun/mailgun-php": "~1.7.2",
+    "kriswallsmith/buzz": "^1.2",
+    "nyholm/psr7": "^1.4",
+    "aws/aws-sdk-php": "^3.185",
+    "twig/twig": "^2.0",
+    "d11wtq/boris": "^1.0"
+  },
+  "require-dev": {
+    "phpstan/phpstan": "^0.12.49",
+    "phpunit/phpunit": "^6|^7",
+    "squizlabs/php_codesniffer": "^3.5"
+  },
+  "scripts": {
+    "test": "phpunit",
+    "phpstan": "phpstan analyse"
+  }
+}

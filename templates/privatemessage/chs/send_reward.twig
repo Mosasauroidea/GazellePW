@@ -1,0 +1,11 @@
+{% block subject %}
+奖励通知
+{% endblock %}
+{% block body %}
+你获得了：
+{% if Invites > 0 %}{{ Invites }}枚邀请{% if InvitesTime > 0 %}（{{InvitesTime}}）{% endif %} {% endif %}
+{% if Tokens > 0 %}{{ Tokens }}枚令牌{% if TokensTime > 0 %}（{{TokensTime}}）{% endif %} {% endif %}
+{% if Bonus > 0 %} {{ Bonus }}积分 {% endif %}
+{% if BadgeName %} 印记： {{ BadgeName }}
+{% endif %}
+{% endblock %}

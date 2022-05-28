@@ -1,0 +1,15 @@
+<svg class="italian icon" width="20" height="16" viewBox="0 0 20 16" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+	<defs>
+		<path d="M0 0h20v15H0z" id="italian_icon%s__a" />
+	</defs>
+	<g fill="none" fill-rule="evenodd" transform="translate(0 .5)">
+		<mask fill="#fff" id="italian_icon%s__b">
+			<use xlink:href="#italian_icon%s__a" />
+		</mask>
+		<g mask="url(#italian_icon%s__b)">
+			<path d="M14 0h6v15h-6z" fill="#C51918" />
+			<path d="M0 0h6v15H0z" fill="#5EAA22" />
+			<path d="M6 0h8v15H6z" fill="#FFF" />
+		</g>
+	</g>
+</svg>

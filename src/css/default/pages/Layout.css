@@ -1,0 +1,65 @@
+/*
+LayoutPage Page<Name>        # gap
+  LayoutPage-header Header
+  LayoutPage-body Body
+  LayoutPage-footer Footer
+
+LayoutMainSidebar
+  LayoutMainSidebar-main      # gap
+  LayoutMainSidebar-sidebar
+
+LayoutBody                    # gap
+*/
+
+/* LayoutPage */
+.LayoutPage {
+  display: flex;
+  flex-direction: column;
+  gap: var(--global-space-lg);
+}
+.LayoutPage-body {
+  width: 100%;
+  align-self: center;
+  max-width: 1200px;
+}
+@media (max-width: 425px) {
+  .LayoutPage-body {
+    padding: 20px 0;
+  }
+}
+.LayoutPage-siteDebug {
+  width: 100%;
+  max-width: 1200px;
+  align-self: center;
+}
+
+/* LayoutBody */
+.LayoutBody {
+  display: flex;
+  flex-direction: column;
+  gap: var(--global-space-lg);
+}
+
+/* LayoutMainSidebar */
+.LayoutMainSidebar {
+  display: grid;
+  grid-template-columns: 1fr 270px;
+  grid-template-rows: auto;
+  width: auto;
+  gap: var(--global-space-lg);
+}
+@media (max-width: 768px) {
+  .LayoutMainSidebar {
+    display: flex;
+    flex-direction: column;
+  }
+}
+.LayoutMainSidebar-main {
+  order: 1;
+  display: flex;
+  flex-direction: column;
+  gap: var(--global-space-lg);
+}
+.LayoutMainSidebar-sidebar {
+  order: 2;
+}

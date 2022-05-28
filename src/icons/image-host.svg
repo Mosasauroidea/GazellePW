@@ -1,0 +1,7 @@
+<svg class="image-host icon" width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+	<g fill="none" fill-rule="evenodd" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" transform="translate(3 3)">
+		<rect width="18" height="18" rx="2" />
+		<circle cx="5.5" cy="5.5" r="1.5" />
+		<path d="m18 12-5-5L2 18" />
+	</g>
+</svg>

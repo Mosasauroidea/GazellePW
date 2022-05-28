@@ -1,0 +1,526 @@
+/* Torrent Table
+Where
+  torrents - list with group       # classes/torrenttable.class.php GroupTorrentTableView
+  torrents - list without group    # classes/torrenttable.class.php UngroupTorrentTableView variant="ungroup"
+  torrents - show                  # torrents/details.php TableTorrent
+  torrents - show - slots          # torrents/details.php TableTorrent variant="slot"
+  reports                          # reportsv2/report.php
+  (re-used)
+  torrents - artist
+  profile - bookmarks
+  profile - uploaded
+  top10                            # classes/torrenttable.class.php UngroupTorrentTableView variant="ungroup"
+
+TorrentTable variant="ungroup | slot" header-large last-tr-hidden
+  rowHeader         # 头部 colhead
+  rowMovieInfo      # 电影信息 group
+  rowCategory       # 标清, 高清, .. edition
+  rowTitle          # 种子标题 editon_1 torrent_row
+  rowDetail         # 种子详情 edition_1 torrentdetails hidden
+
+row
+  row: border-bottom
+  rowHeader
+cell
+  cell: border-bottom
+  cellHeader: backgroudd
+  cellHeaderSnatches
+  cellStat
+  cellStatTime
+ */
+
+.TableTorrent {
+  table-layout: fixed;
+  min-width: 760px;
+  font-size: var(--global-fontSize-sm);
+}
+
+.TableTorrent .Table-rowHeader {
+  font-size: var(--global-fontSize-lg);
+}
+
+/* row */
+.TableTorrent-rowMovieInfo {
+  background: var(--TableTorrent-movieInfo-background);
+}
+
+.TableTorrent-rowCategory {
+  background: var(--TableTorrent-category-background);
+}
+
+.TableTorrent-rowTitle,
+.TableTorrent-rowDetail {
+  background: var(--TableTorrent-title-background);
+}
+
+.PageTop10Home .TableTorrent-rowTitle,
+.PageTop10Home .TableTorrent-rowMovieInfo,
+.TableTorrent[variant='ungroup'] .TableTorrent-rowTitle,
+.TableTorrent[variant='ungroup'] .TableTorrent-rowMovieInfo {
+  background: var(--TableTorrent-category-background);
+}
+
+/* cell */
+.TableTorrent .Table-cell:first-child {
+  padding-left: var(--global-space-default);
+}
+.TableTorrent .Table-cell:last-child {
+  padding-right: var(--global-space-default);
+}
+
+.TableTorrent-cellName {
+  width: 80%;
+  min-width: 600px;
+}
+
+.TableTorrent[variant='slot'] .TableTorrent-cellName {
+  width: auto;
+  min-width: auto;
+}
+
+.TableTorrent-cellHeaderUncheckedStatistic {
+  display: flex;
+  justify-content: space-between;
+}
+
+.TableTorrent-cellMovieInfoCollapse {
+  width: 40px;
+}
+
+.TableTorrent-cellStat {
+  padding: 0 20px;
+  width: 60px;
+  text-align: right;
+  white-space: nowrap;
+}
+
+@media (max-width: 425px) {
+  .TableTorrent-cellStat {
+    padding: 0 2px;
+  }
+}
+
+.TableTorrent-cellStatTime {
+  width: 100px;
+}
+
+.TableTorrent-cellUploadTime {
+  width: 150px;
+}
+
+.TableTorrent-cellUserName {
+  width: 100px;
+  text-align: center;
+}
+
+.TableTorrent-cellSlotName {
+  width: 150px;
+}
+
+.TableTorrent-cellEmptySlotNote {
+  color: var(--slotEmpty-color);
+}
+
+.TableTorrent-rowTitle .TableTorrent-cellSlotName {
+  color: var(--slotHighlightName-color);
+}
+
+.TableTorrent[variant='slot'] .TableTorrent-cellSize {
+  width: 120px;
+}
+
+.TableTorrent-rowTitle .icon {
+  width: 13px;
+  height: 13px;
+}
+
+.TableTorrent-titleActions {
+  float: right;
+  padding-left: var(--global-space-lg);
+}
+
+/* Slot */
+.TableTorrent-slotFilters {
+  text-align: center;
+}
+
+.TableTorrent-slotFilterButton {
+  font-size: 14px;
+  opacity: var(--slotButton-opacity);
+  margin: 0 7px;
+}
+
+.TableTorrent-slotFilterButton:hover {
+  opacity: 0.8;
+  opacity: var(--slotButton-onHover-opacity);
+}
+
+.TableTorrent-slotFilterButton.is-active {
+  opacity: var(--slotButton-onActive-opacity);
+}
+
+.TableTorrent-slotFilterButton .icon {
+  width: 16px;
+  height: 16px;
+}
+
+.TableTorrent-slotFilterButton[data-slot='quality'] {
+  color: var(--slotQuality-color);
+}
+
+.TableTorrent-slotFilterButton[data-slot='clear'] {
+  color: var(--slotClear-color);
+}
+
+.TableTorrent-slotFilterButton[data-slot='cn_quality'] {
+  color: var(--slotCnQuality-color);
+}
+
+.TableTorrent-slotFilterButton[data-slot='en_quality'] {
+  color: var(--slotEnQuality-color);
+}
+
+.TableTorrent-slotFilterButton[data-slot='retention'] {
+  color: var(--slotRetenion-color);
+}
+
+.TableTorrent-slotFilterButton[data-slot='feature'] {
+  color: var(--slotFeature-color);
+}
+
+.TableTorrent-slotFilterButton[data-slot='remux'] {
+  color: var(--slotRemux-color);
+}
+
+.TableTorrent-slotFilterButton[data-slot='untouched'] {
+  color: var(--slotUntouched-color);
+}
+
+.TableTorrent-slotFilterButton[data-slot='diy'] {
+  color: var(--slotDiy-color);
+}
+
+.TableTorrent-rowTitle[data-slot='cn_quality'] .Table-cell:first-child {
+  border-left: 1px solid var(--slotCnQuality-color);
+}
+
+.TableTorrent-rowTitle[data-slot='en_quality'] .Table-cell:first-child {
+  border-left: 1px solid var(--slotEnQuality-color);
+}
+
+.TableTorrent-rowTitle[data-slot='quality'] .Table-cell:first-child {
+  border-left: 1px solid var(--slotEnQuality-color);
+}
+
+.TableTorrent-rowTitle:is([data-slot='retention'], [data-slot='feature'])
+  .Table-cell:first-child {
+  border-left: 1px solid var(--slotRetenion-color);
+}
+
+.TableTorrent-rowTitle:is([data-slot='diy'], [data-slot='remux'], [data-slot='untouched'])
+  .Table-cell:first-child {
+  border-left: 1px solid var(--slotDiy-color);
+}
+
+.TableTorrent-rowTitle[data-slot='empty'] .Table-cell:first-child {
+  border-left: 1px solid transparent;
+}
+
+/* Torrent Label */
+.TableTorrent-titleLabel.torrent_discount {
+  color: #fff;
+  padding: 0 3.5px;
+  border-radius: var(--global-borderRadius);
+  font-weight: 400 !important;
+  font-size: 13px;
+  display: inline-block;
+  transform: scale(0.85, 0.72) translateY(2px);
+}
+
+.TableTorrent-titleLabel.torrent_discount.free {
+  background-color: #0055ff;
+}
+
+.TableTorrent-titleLabel.torrent_discount.three_fourth_off {
+  background-color: #622ca8;
+}
+
+.TableTorrent-titleLabel.torrent_discount.two_fourth_off {
+  background-color: #8d4b44;
+}
+
+.TableTorrent-titleLabel.torrent_discount.one_fourth_off {
+  background-color: #3e6e7b;
+}
+
+.TableTorrent-titleLabel.torrent_discount.neutral {
+  background-color: #55666f;
+}
+
+.TableTorrent-titleLabel.tl_notice {
+  font-weight: bold;
+}
+
+.TableTorrent-titleLabel.tl_reported {
+  color: #d39911;
+}
+
+.TableTorrent-titleLabel.tl_trumpable {
+  color: #d46d3d;
+}
+
+.TableTorrent-titleLabel.tl_snatched {
+  color: #00bc8c;
+}
+
+.TableTorrent-titleLabel.tl_free {
+  font-weight: bold;
+}
+
+/* movieInfo
+TableTorrent-movieInfo
+  poster
+  content
+    title
+    subtitle
+    facts
+      factsItem
+    tags
+      tagsItem
+    action
+    createdAt
+*/
+.TableTorrent-cellMovieInfoPoster img {
+  transition: transform 0.2s ease;
+  transition-delay: 0.2s;
+  z-index: 3000;
+  cursor: pointer;
+  border-radius: var(--global-borderRadius);
+  position: relative;
+}
+
+.TableTorrent-cellMovieInfoPoster img:hover {
+  transform: scale(2);
+}
+
+.TableTorrent-movieInfoBody {
+  display: flex;
+  gap: var(--global-space-default);
+}
+
+.TableTorrent-movieInfoPoster {
+  width: 100px;
+}
+
+.TableTorrent-movieInfoContent {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  gap: var(--global-space-sm);
+  width: 100%;
+}
+
+.TableTorrent-movieInfoTitle a {
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--TableTorrent-movieInfoTitle-color);
+}
+
+.TableTorrent-movieInfoTitle a:hover {
+  color: var(--TableTorrent-movieInfoTitle-onHover-color) !important;
+}
+
+.TableTorrent-movieInfoYear {
+  color: var(--TableTorrent-movieInfoYear-color);
+  font-size: 80%;
+  font-style: italic;
+}
+
+.TableTorrent-movieInfoSubtitle {
+  font-size: 15px;
+}
+
+.TableTorrent-movieInfoFacts {
+  border-radius: var(--global-borderRadius);
+  display: inline-flex;
+  font-size: 12px;
+  background: var(--MovieInfo-button-background);
+  border: var(--MovieInfo-button-border);
+  width: fit-content;
+}
+
+.TableTorrent-movieInfoFactsItem {
+  display: flex;
+  padding: 2px 8px;
+  color: var(--Movieinfo-button-color);
+  align-items: center;
+  gap: var(--global-space-sm);
+}
+
+.TableTorrent-movieInfoFactsItem:not(:last-child) {
+  border-right: var(--MovieInfo-button-border);
+}
+
+.TableTorrent-movieInfoFactsItem:hover {
+  color: var(--Movieinfo-button-onhover-color);
+  background: var(--MovieInfo-button-onHover-background);
+}
+
+.TableTorrent-movieInfoFactsItem .icon {
+  width: 12px;
+  height: 12px;
+}
+
+.TableTorrent-movieInfoTags {
+  font-size: 12px;
+  line-height: normal;
+  visibility: hidden;
+}
+
+.TableTorrent-movieInfoTagsItem {
+  border-radius: var(--global-borderRadius);
+  display: inline-block;
+  visibility: visible;
+  background: var(--MovieInfo-button-background);
+  border: var(--MovieInfo-button-border);
+  color: var(--Movieinfo-button-color);
+  padding: 3px 5px;
+}
+
+.TableTorrent-movieInfoTagsItem:hover {
+  background: var(--MovieInfo-button-onHover-background);
+  color: var(--Movieinfo-button-onhover-color);
+}
+
+.TableTorrent-movieInfoAction {
+  position: absolute;
+  right: 0;
+}
+
+.TableTorrent-movieInfoCreatedAt {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+}
+
+.TableTorrent-movieInfoAction,
+:is(#torrents, #bookmarks, #top10, #artist)
+  :is(.remove_bookmark, .add_bookmark)
+  .icon {
+  color: #777;
+}
+
+.TableTorrent-movieInfoAction
+  :is(.add_bookmark .icon.remove-icon, .remove_bookmark .icon.add-icon),
+:is(#torrents, #bookmarks, #top10, #artist, #collage, #userhistory)
+  :is(.add_bookmark svg.remove-icon, .remove_bookmark svg.add-icon) {
+  display: none;
+}
+
+/* detail
+TOC
+  .subtitles-container
+    .subtitles-list
+      .subtitles-item
+      ...
+*/
+.TableTorrent-cellDetail .subtitles-container {
+  display: flex;
+  flex-direction: column;
+  gap: var(--global-space-default);
+}
+
+.TableTorrent-cellDetail .subtitles-list {
+  display: flex;
+  align-items: center;
+  gap: var(--global-space-sm);
+  flex-wrap: wrap;
+}
+
+.TableTorrent-cellDetail .subtitles-item .icon {
+  width: 20px;
+  height: 20px;
+}
+
+/* Toggle Group
+ToggleGroup is-toHide
+  ToggleGroup-button
+*/
+.ToggleGroup {
+  cursor: pointer;
+  display: block;
+  font-size: 0;
+  height: 27px;
+  outline: 0;
+  overflow: hidden;
+  position: relative;
+  text-indent: -9999px;
+  -webkit-transition: all 0.3s ease !important;
+  -o-transition: all 0.3s ease !important;
+  transition: all 0.3s ease !important;
+  width: 27px;
+}
+
+.ToggleGroup-button {
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  position: absolute;
+}
+
+.ToggleGroup-button:after,
+.ToggleGroup-button:before {
+  content: '';
+  display: block;
+  height: 2px;
+  left: 3px;
+  position: absolute;
+  top: 12px;
+  transition-delay: 0, 0.3s, 0s;
+  transition-duration: 0.15s, 0.3s, 0.3s;
+  width: 22px;
+  background-color: #aaa;
+}
+
+.ToggleGroup:focus {
+  outline: none;
+}
+
+.ToggleGroup-button:hover:after,
+.ToggleGroup-button:hover:before {
+  background-color: #777;
+}
+
+.ToggleGroup-button:before {
+  transform: rotate(90deg);
+  transition-property: background-color, top, transform;
+}
+
+.ToggleGroup-button:after {
+  transition-property: background-color, bottom, transform;
+}
+
+.ToggleGroup.is-toHide .ToggleGroup-button {
+  background: transparent;
+}
+
+.ToggleGroup.is-toHide .ToggleGroup-button:before {
+  top: 12px;
+  transform: rotate(0deg);
+}
+
+.ToggleGroup.is-toHide .ToggleGroup-button:after {
+  bottom: 0;
+  transform: rotate(180deg);
+}
+
+.snatched_group .ToggleGroup-button:after,
+.snatched_group .ToggleGroup-button:before {
+  background-color: #a2c3fa;
+}
+
+#subtitles_container {
+  width: 100%;
+}

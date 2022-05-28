@@ -1,0 +1,38 @@
+<svg class="brazilian_port icon" width="20" height="16" viewBox="0 0 20 16" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+	<defs>
+		<path d="M0 0h20v15H0z" id="brazilian_port_icon%s__a" />
+		<path d="M0 0h20v15H0z" id="brazilian_port_icon%s__c" />
+		<path d="M9.954 2.315 17.58 7.63l-7.73 4.977-7.47-5.08z" id="brazilian_port_icon%s__f" />
+		<linearGradient id="brazilian_port_icon%s__g" x1="50%" x2="50%" y1="100%" y2="0%">
+			<stop offset="0%" stop-color="#FFC600" />
+			<stop offset="100%" stop-color="#FFDE42" />
+		</linearGradient>
+		<filter width="76%" height="68.6%" filterUnits="objectBoundingBox" id="brazilian_port_icon%s__e" x="11.9%" y="15.4%">
+			<feOffset in="SourceAlpha" result="shadowOffsetOuter1" />
+			<feColorMatrix in="shadowOffsetOuter1" values="0 0 0 0 0.03137255 0 0 0 0 0.36862746 0 0 0 0 0 0 0 0 0.28 0" />
+		</filter>
+		<circle cx="10" cy="7.625" id="brazilian_port_icon%s__h" r="3.125" />
+	</defs>
+	<g fill="none" fill-rule="evenodd" transform="translate(0 .5)">
+		<mask fill="#fff" id="brazilian_port_icon%s__b">
+			<use xlink:href="#brazilian_port_icon%s__a" />
+		</mask>
+		<g mask="url(#brazilian_port_icon%s__b)">
+			<mask fill="#fff" id="brazilian_port_icon%s__d">
+				<use xlink:href="#brazilian_port_icon%s__c" />
+			</mask>
+			<use fill="#093" xlink:href="#brazilian_port_icon%s__c" />
+			<g mask="url(#brazilian_port_icon%s__d)">
+				<use fill="#000" filter="url(#brazilian_port_icon%s__e)" xlink:href="#brazilian_port_icon%s__f" />
+				<use fill="#FFD221" xlink:href="#brazilian_port_icon%s__f" />
+				<use fill="url(#brazilian_port_icon%s__g)" xlink:href="#brazilian_port_icon%s__f" />
+				<mask fill="#fff" id="brazilian_port_icon%s__i">
+					<use xlink:href="#brazilian_port_icon%s__h" />
+				</mask>
+				<use fill="#2E42A5" xlink:href="#brazilian_port_icon%s__h" />
+				<path d="m8.988 9.106-.14.074.027-.156-.113-.11.156-.023.07-.141.07.141.155.023-.113.11.027.156zM10.238 9.106l-.14.074.027-.156-.113-.11.156-.023.07-.141.07.141.155.023-.113.11.027.156zM10.238 9.856l-.14.074.027-.156-.113-.11.156-.023.07-.141.07.141.155.023-.113.11.027.156zM9.613 7.231l-.14.074.027-.156-.113-.11.156-.023.07-.141.07.141.155.023-.113.11.027.156zM9.613 8.481l-.14.074.027-.156-.113-.11.156-.023.07-.141.07.141.155.023-.113.11.027.156zM8.737 7.856l-.14.074.028-.156-.113-.11.156-.023.07-.141.07.141.155.023-.113.11.027.156zM7.862 8.356l-.14.074.028-.156-.113-.11.156-.023.07-.141.07.141.155.023-.113.11.027.156zM10.738 6.231l-.14.074.027-.156-.113-.11.156-.023.07-.141.07.141.155.023-.113.11.027.156z" fill="#F7FCFF" mask="url(#brazilian_port_icon%s__i)" />
+				<path d="m6.203 6.873.094-1.246c2.999.226 5.366 1.212 7.07 2.966l-.896.871c-1.477-1.52-3.557-2.386-6.268-2.59z" fill="#F7FCFF" fill-rule="nonzero" mask="url(#brazilian_port_icon%s__i)" />
+			</g>
+		</g>
+	</g>
+</svg>

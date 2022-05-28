@@ -1,0 +1,11 @@
+{% block subject %}
+Reward notification
+{% endblock %}
+{% block body %}
+You've got：
+{% if Invites > 0 %}{{ Invites }} invite{% if Invites > 1 %}s{% endif %}{% if InvitesTime > 0 %}（{{InvitesTime}}）{% endif %} {% endif %}
+{% if Tokens > 0 %}{{ Tokens }} token{% if Tokens > 1 %}s{% endif %}{% if TokensTime > 0 %}（{{TokensTime}}）{% endif %} {% endif %}
+{% if Bonus > 0 %} {{ Bonus }} bonus {% endif %}
+{% if BadgeName %} Badge: {{ BadgeName }}{% endif %}
+
+{% endblock %}

@@ -1,0 +1,8 @@
+{% block subject %}
+你收到了多个警告
+{% endblock %}
+{% block body %}
+在你最近收到警告（到期时间为 {{ TimePlusDurationDate }}）时，你已有一个未到期的旧警告（到期时间为 {{ OldDate }}）。
+
+由于警告的叠加性，你的总警告时长会延续到 {{ NewExpDate }}。
+{% endblock %}

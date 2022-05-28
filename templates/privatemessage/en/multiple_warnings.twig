@@ -1,0 +1,8 @@
+{% block subject %}
+You have received multiple warnings
+{% endblock %}
+{% block body %}
+When you received your latest warning (set to expire on {{ TimePlusDurationDate }}), you already had a different warning (set to expire on {{ OldDate }}.
+
+Due to this collision, your warning status will now expire at {{ NewExpDate }}.
+{% endblock %}

@@ -1,0 +1,14 @@
+{% block subject %}
+Your contribution has been received and credited. Thank you!
+{% endblock %}
+{% block body %}
+Thank you for your generosity and support. It's users like you who make all of this possible. What follows is a brief description of your transaction:
+[*][b]You contributed: {{ DonationAmount }}[/b]
+[*][b]You received: {{ ReceivedRank }} Donor point{% if ReceivedRank > 1%}s{% endif %}[/b]
+[*][b]Your donor rank: #{{ CurrentRank }}[/b]
+Once again, thank you for your continued support of the site.
+
+{{ SiteName }}  Staff
+
+[align=center][If you have any questions or concerns, please [url={{ SiteURL }}/staffpm.php]send a Staff PM[/url]][/align]
+{% endblock %}

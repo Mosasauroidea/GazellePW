@@ -1,0 +1,89 @@
+/*
+links
+Header - admin buttons
+Upload - submit loading button
+
+ButtonGroup
+
+<a class="Link">
+<button class="Button">
+<a class="Button">
+<input class="Button" type="submit | button">
+  variant="primary"
+
+Loading Button
+  <button class="Button"> 
+     <span>Next</span>
+     <span class="Button-loaderIcon"></span>
+  </button>
+*/
+
+.ButtonGroup {
+  display: inline-flex;
+  gap: var(--global-space-sm);
+}
+
+/* Link */
+:is(.Link, a) {
+  color: var(--Link-color);
+  text-decoration: var(--Link-textDecoration);
+  transition: all 0.3s ease;
+}
+:is(.Link, a):hover {
+  color: var(--Link-onHover-color);
+  text-decoration: var(--Link-onHover-textDecoration);
+}
+
+/* Button */
+.Button {
+  background: var(--Button-default-background);
+  color: var(--Button-default-color);
+  border: var(--Button-default-border);
+  box-shadow: var(--Button-default-boxShadow);
+  display: inline-flex;
+  text-align: center;
+  padding: 3px 6px;
+  transition: all 0.3s ease;
+  border-radius: var(--global-borderRadius);
+  cursor: pointer;
+  align-items: center;
+  text-decoration: none;
+}
+
+.Button:hover {
+  background: var(--Button-default-onHover-background);
+  color: var(--Button-default-onHover-color);
+  border: var(--Button-default-onHover-border);
+  box-shadow: var(--Button-default-onHover-boxShadow);
+  text-decoration: none;
+}
+
+.Button:disabled {
+  cursor: not-allowed;
+}
+
+.Button[variant='primary'] {
+  background: var(--Button-primary-background);
+  color: var(--Button-primary-color);
+  border: var(--Button-primary-border);
+  box-shadow: var(--Button-primary-boxShadow);
+}
+
+.Button[variant='primary']:hover {
+  background: var(--Button-primary-onHover-background);
+  color: var(--Button-primary-onHover-color);
+  border: var(--Button-primary-onHover-border);
+  box-shadow: var(--Button-primary-onHover-boxShadow);
+}
+
+.Button .Button-loaderIcon {
+  display: none;
+  background: url(../assets/loading.svg);
+  background-size: 100% 100%;
+  width: 26px;
+  height: 26px;
+}
+
+.Button.is-loading .Button-loaderIcon {
+  display: block;
+}

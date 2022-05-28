@@ -1,0 +1,11 @@
+QUICK SUMMARY:
+
+Disc Title: Lang Go
+Disc Size: 14,315,681,792 bytes
+Protection: AACS(v70)
+Playlist: 00000.MPLS  
+Size: 170,434,560 bytes
+Length: 0:00:36.036
+Total Bitrate: 37.84 Mbps
+Video: MPEG-4 AVC Video / 0 kbps / 1080p / 23.976 fps / 16:9 / High Profile 4.1
+Audio: Chinese / LPCM Audio / 2.0 / 48 kHz / 1536 kbps / 16-bit

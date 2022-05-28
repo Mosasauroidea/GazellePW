@@ -1,0 +1,8 @@
+{% block subject %}
+{{ Count }} of your torrents {% if Count > 1 %}have{% else %}has{% endif %} been deleted for inactivity
+{% endblock %}
+{% block body %}
+{% if Count > 1 %}Some{% else %}One{% endif %} of your uploads {% if Count > 1 %}have{% else %}has{% endif %} been deleted for being unseeded. Since {% if Count > 1 %}they{% else %}it{% endif %}  didn't break any rules (we hope), please feel free to re-upload {% if Count > 1 %}them{% else %}it{% endif %}. 
+The following torrent {% if Count > 1 %}were{% else %}was{% endif %} deleted:
+{{ MessageInfo }}
+{% endblock %}

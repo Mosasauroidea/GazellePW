@@ -1,0 +1,102 @@
+/*
+Dialog.jsx
+Compare Screenshot - press ? to open help documentation.
+
+Dialog
+	main
+		header
+			title
+			closeButton
+		body
+		footer
+*/
+
+.Dialog {
+  --Dialog-overlay-background: rgba(0, 0, 0, 0.5);
+  --Dialog-main-border: var(--global-border-box);
+  --Dialog-main-borderRadius: 5px;
+  --Dialog-main-boxShadow: 0 0 18px rgb(0 0 0 / 40%);
+  --Dialog-main-background: var(--global-color-box);
+  --Dialog-main-color: var(--global-color-onBox);
+  --Dialog-header-borderBottom: var(--global-border-box);
+  --Dialog-header-background: var(--global-color-boxHeader);
+  --Dialog-header-color: var(--global-color-onBoxHeader);
+  --Dialog-closeButton-color: var(--Link-color);
+}
+
+.Dialog {
+  position: fixed;
+  inset: 0;
+  overflow-y: auto;
+  z-index: var(--global-zIndex-dialog);
+}
+
+.Dialog-center {
+  text-align: center;
+  min-height: 100vh;
+}
+
+.Dialog-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.Dialog-center2 {
+  display: inline-block;
+  height: 100vh;
+  vertical-align: middle;
+}
+
+.Dialog-main {
+  vertical-align: middle;
+  text-align: left;
+  overflow: hidden;
+  max-width: 80%;
+  display: inline-block;
+  position: relative;
+  background: var(--Dialog-main-background);
+  color: var(--Dialog-main-color);
+  border: var(--Dialog-main-border);
+  border-radius: var(--Dialog-main-borderRadius);
+  box-shadow: var(--Dialog-main-boxShadow);
+}
+
+.Dialog-header {
+  height: 48px;
+  display: flex;
+  align-items: center;
+  background: var(--Dialog-header-background);
+  color: var(--Dialog-header-color);
+  border-bottom: var(--Dialog-header-borderBottom);
+}
+
+.Dialog-title {
+  font-size: var(--global-fontSize-lg);
+  font-weight: bold;
+  flex: 1;
+  padding-left: 16px;
+}
+
+.Dialog-closeButton {
+  width: 48px;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.Dialog-closeButton:hover {
+  color: var(--Dialog-closeButton-color);
+}
+
+.Dialog-closeButtonIcon {
+  width: 24px;
+  height: 24px;
+}
+
+.Dialog-body {
+  padding: 16px;
+  font-size: var(--global-fontSize-lg);
+}

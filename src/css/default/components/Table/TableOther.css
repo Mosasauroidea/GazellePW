@@ -1,0 +1,35 @@
+table {
+  border-collapse: separate;
+  border-spacing: 0;
+  width: 100%;
+}
+
+/* toolbox - multiple freeleech */
+table td,
+table th {
+  padding: 2px;
+}
+
+table.table_in_text {
+  border-collapse: collapse;
+}
+
+table td.center {
+  vertical-align: middle;
+  text-align: center;
+}
+
+table td.center[colspan='2'] {
+  display: table-cell;
+  text-align: center;
+}
+
+table td.center[colspan='2'] > span[style='float: right;'] {
+  float: none !important;
+  margin-left: var(--global-space-lg);
+}
+
+table .colhead td,
+table .colhead_dark td {
+  font-size: var(--global-fontSize-lg);
+}

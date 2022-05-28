@@ -1,0 +1,60 @@
+/*
+Select
+  <select class="Input" name>
+    <option class="Select-option" value selected>
+    <optgroup class="Select-group"><option>
+
+Multiple Select
+  Where: reports - search
+  <select class="Input" multiple>
+
+SelectInput
+  <div class="SelectInput">
+    <select>
+    <input>
+
+DatePicker
+  <input class="Input" type="date" name>
+*/
+
+/* select */
+:is(select.Input, .Input:is([type='date'], [type='datetime'], [type='datetime-local'])) {
+  background-color: var(--Input-background);
+  color: var(--Input-color);
+  border: var(--Input-border);
+  border-radius: var(--global-borderRadius);
+  cursor: pointer;
+  padding: 0 7px;
+  height: 26px;
+  transition: all 0.3s ease;
+  /* override */
+  margin: 0;
+  outline: none;
+  max-width: 100%;
+}
+
+:is(select.Input, .Input:is([type='date'], [type='datetime'], [type='datetime-local'])):hover {
+  background: var(--Input-onHover-background);
+}
+
+:is(select.Input, .Input:is([type='date'], [type='datetime'], [type='datetime-local'])):focus {
+  border: var(--Input-onFocus-border);
+  box-shadow: var(--Input-onFocus-boxShadow);
+}
+
+select.Input[multiple] {
+  height: 150px;
+}
+
+/* date */
+@media (prefers-color-scheme: dark) {
+  ::-webkit-calendar-picker-indicator {
+    filter: invert(80%);
+  }
+}
+
+/* Select Input */
+.SelectInput {
+  display: flex;
+  gap: var(--global-space-sm);
+}

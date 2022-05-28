@@ -1,0 +1,36 @@
+:root {
+  --global-fontFamily: -apple-system, BlinkMacSystemFont, Segoe UI, Helvetica,
+    Arial, sans-serif, Apple Color Emoji, Segoe UI Emoji;
+  --global-fontSize-desktop: 13px;
+  --global-fontSize-mobile: 13px;
+  --global-fontSize-sm: 1rem;
+  --global-fontSize-lg: 1.125rem;
+  --Body-background: #fff;
+  --Body-border: none;
+  --Body-boxShadow: 0 0 6px 0 rgba(0, 0, 0, 0.1);
+  --Body-padding: 20px;
+  --Body-borderRadius: 5px;
+  --global-backgroundColor: #eee;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --Body-background: inherit;
+    --Body-border: none;
+    --Body-boxShadow: none;
+    --Body-padding: 20px;
+    --Body-borderRadius: 0;
+  }
+}
+
+.Body {
+  background: var(--Body-background);
+  border: var(--Body-border);
+  box-shadow: var(--Body-boxShadow);
+  border-radius: var(--Body-borderRadius);
+  padding: var(--Body-padding);
+}
+
+.HeaderNavList-item {
+  font-size: 16px;
+}

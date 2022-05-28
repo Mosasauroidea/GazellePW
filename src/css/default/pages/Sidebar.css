@@ -1,0 +1,120 @@
+/*
+Sidebar
+  SidebarItem is-limitHeight
+    SidebarItem-header
+      SidebarItem-headerTitle
+      SidebarItem-headerActions
+    SidebarItem-body
+
+SidebarList
+*/
+
+.Sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: var(--global-space-lg);
+}
+
+@media (min-width: 425px) and (max-width: 768px) {
+  /* two columns */
+  .Sidebar {
+    display: grid;
+    grid-template-column: 1fr 1fr;
+  }
+}
+
+.SidebarItem-header {
+  display: flex;
+  gap: var(--global-space-sm);
+}
+
+.SidebarItem-headerTitle {
+}
+
+.SidebarItem-headerActions {
+  font-size: var(--global-fontSize-sm);
+  margin-left: auto;
+}
+
+.SidebarItem-body {
+  word-break: break-word;
+  word-wrap: break-word;
+  font-size: var(--global-fontSize-sm);
+}
+
+.SidebarItem-body:not(.SidebarList) {
+  padding: var(--global-space-default);
+}
+
+.SidebarItem.is-limitHeight .SidebarItem-body {
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+/* SidebarList
+SidebarList:not(.is-ordered)
+  SidebarList-item
+    SidebarList-actions
+      SidebarList-action
+        icon
+
+SidebarList.is-ordered
+  SidebarList-item
+*/
+.SidebarList.is-ordered {
+  list-style: decimal;
+  padding: 10px 0 10px 25px;
+}
+
+.SidebarList.is-ordered .SidebarList-item {
+  padding: 5px 0;
+  /* override li */
+}
+
+.SidebarList:not(.is-ordered) {
+  padding: var(--global-space-sm);
+}
+
+.SidebarList:not(.is-ordered) .SidebarList-item {
+  display: flex;
+  align-items: center;
+  padding: var(--global-space-sm);
+}
+
+.SidebarList-actions {
+  display: flex;
+  align-items: center;
+  margin-left: auto;
+}
+
+.SidebarList-action {
+  color: var(--global-color);
+}
+
+.SidebarList-action .icon {
+  width: 16px;
+  height: 16px;
+}
+
+/* SidebarItemTags */
+.SidebarItemTags-score {
+  display: inline-block;
+  width: 20px;
+  text-align: right;
+}
+
+/* SidebarItemSettings */
+.SidebarItemSettings .SidebarList-item {
+  font-weight: 400;
+  font-size: var(--global-fontSize-lg);
+}
+
+@media (max-width: 768px) {
+  .SidebarItemPoster .SidebarItem-body {
+    display: flex;
+    justify-content: center;
+  }
+  .SidebarItemPoster-image {
+    width: 150px;
+  }
+}

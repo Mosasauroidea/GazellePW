@@ -1,0 +1,144 @@
+#tools div#salary-table {
+  width: 100%;
+  border: var(--global-border-box);
+  box-shadow: var(--box-shadow);
+  border-radius: var(--global-borderRadius);
+  display: grid;
+  grid-template-columns: auto 1fr;
+}
+#tools div#salary-table > div#table-head-left > div,
+#tools div#salary-table > div#table-right-scroll > div#table-head-top > div,
+#tools div#salary-table > div#table-right-scroll > div#table-content > div {
+  padding: 7px 5px;
+  display: flex;
+  align-content: center;
+  justify-content: center;
+}
+#tools div#salary-table > div#table-head-left {
+  display: grid;
+  grid-template-columns: 50px 100px;
+  grid-template-rows: 86px;
+  border-bottom-left-radius: 4px;
+}
+#tools div#salary-table > div#table-head-left > div {
+  border-right: var(--global-border-box);
+}
+#tools div#salary-table > div#table-head-left > div.group-name {
+  background-color: var(--global-colorTransparent-box) !important;
+  align-items: center;
+  border-top: var(--global-border-box);
+}
+#tools div#salary-table > div#table-head-left > div.group-name:last-of-type {
+  border-bottom-left-radius: 4px;
+}
+#tools
+  div#salary-table
+  > div#table-head-left
+  > div.group-name:first-of-type
+  ~ div.group-name,
+#tools
+  div#salary-table
+  > #table-head-left
+  > div:nth-child(2)
+  ~ div.div-username {
+  border-top: var(--global-border-box);
+}
+#tools div#salary-table > div#table-head-left > div {
+  align-items: center;
+}
+#tools div#salary-table > div#table-head-left > div.row1 {
+  background-color: var(--global-colorTransparent-box);
+}
+#tools div#salary-table > div#table-head-left > div.th-span2 {
+  grid-column-start: span 2;
+  background-color: var(--global-colorTransparent-box);
+}
+#tools div#salary-table > div#table-head-left > div.row2 {
+  border-top: var(--global-border-box);
+  background-color: var(--global-colorTransparent-box);
+}
+#tools h2#award-title {
+  margin-bottom: 0;
+}
+#tools div#salary-table > div#table-right-scroll {
+  display: block;
+  overflow-x: auto;
+}
+#tools div#salary-table > div#table-right-scroll::-webkit-scrollbar {
+  display: none;
+}
+#tools div#salary-table > div#table-right-scroll > div#table-head-top {
+  display: grid;
+  grid-template-columns: repeat(9, 1fr);
+  grid-template-rows: auto 53px;
+  background-color: var(--global-colorTransparent-box);
+  min-width: 800px;
+}
+#tools div#salary-table > div#table-right-scroll > div#table-head-top.fixed {
+  position: fixed !important;
+  top: 0px;
+}
+#tools div#salary-table > div#table-right-scroll > div#table-head-top > div {
+  border-right: var(--global-border-box);
+  border-bottom: var(--global-border-box);
+  align-items: center;
+  text-align: center;
+}
+#tools
+  div#salary-table
+  > div#table-right-scroll
+  > div#table-head-top
+  > div.th-span2 {
+  grid-column-start: span 2;
+}
+#tools
+  div#salary-table
+  > div#table-right-scroll
+  > div#table-head-top
+  > div.th-span3 {
+  grid-column-start: span 3;
+}
+#tools
+  div#salary-table
+  > div#table-right-scroll
+  > div#table-head-top
+  > div.th-span4 {
+  grid-column-start: span 4;
+}
+#tools
+  div#salary-table
+  > div#table-right-scroll
+  > div#table-head-top
+  > div.col-tail {
+  border-right: none !important;
+}
+#tools div#salary-table > div#table-right-scroll > div#table-content {
+  display: grid;
+  min-width: 800px;
+  border-bottom-right-radius: 4px;
+}
+#tools div#salary-table > div#table-right-scroll > div#table-content > div {
+  border-right: var(--global-border-box);
+  border-top: var(--global-border-box);
+}
+#tools
+  div#salary-table
+  > div#table-right-scroll
+  > div#table-content
+  > div:last-child {
+  border-bottom-right-radius: 4px;
+}
+#tools
+  div#salary-table
+  > div#table-right-scroll
+  > div#table-content
+  > div.col-tail {
+  border-right: none;
+}
+#tools
+  div#salary-table
+  > div#table-right-scroll
+  > div#table-content
+  > div.row3 {
+  border-top: none;
+}

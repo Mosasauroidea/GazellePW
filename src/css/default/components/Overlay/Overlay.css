@@ -1,0 +1,11 @@
+/*
+Overlay
+*/
+
+.Overlay {
+  background: var(--Overlay-background);
+  color: var(--Overlay-color);
+  border: var(--Overlay-border);
+  box-shadow: var(--Overlay-boxShadow);
+  border-radius: var(--global-borderRadius);
+}

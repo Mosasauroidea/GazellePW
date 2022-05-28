@@ -1,0 +1,34 @@
+.SearchInbox-row {
+  display: flex;
+  gap: var(--global-space-default);
+}
+
+.SearchInbox-actions {
+  margin-left: auto;
+}
+
+#inbox .vertical_space,
+#staffpm .vertical_space {
+  margin-bottom: var(--global-space-lg);
+}
+
+#inbox div.box.vertical_space {
+  background: var(--Box-background);
+  color: var(--Box-color);
+  border: var(--Box-border);
+  border-radius: var(--global-borderRadius);
+  line-height: 1.5em;
+}
+#inbox div.box.vertical_space > .head {
+  background: var(--Box-header-background);
+  color: var(--Box-header-color);
+  border-bottom: var(--Box-border);
+  border-top-left-radius: var(--global-borderRadius);
+  border-top-right-radius: var(--global-borderRadius);
+  padding: 7px;
+}
+#inbox div.box.vertical_space > .body {
+  padding: var(--global-space-default);
+  word-break: break-word;
+  word-wrap: break-word;
+}

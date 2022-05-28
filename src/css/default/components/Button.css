@@ -1,0 +1,75 @@
+/*
+links
+Header - admin buttons
+Upload - submit loading button
+
+ButtonGroup
+
+<a class="Link">
+<button class="Button">
+<input class="Button" type="submit | button">
+
+Loading Button
+  <button class="Button" variant="solid">
+     <span>Next</span>
+     <span class="Button-loaderIcon"></span>
+  </button>
+*/
+
+.ButtonGroup {
+  display: inline-flex;
+  gap: 5px;
+}
+
+/* Link */
+.Link,
+a {
+  color: var(--Button-link-color);
+}
+
+.Link:hover,
+a:hover {
+  color: var(--Button-link-onHover-color);
+}
+
+/* Button */
+.Button,
+a {
+  text-decoration: none;
+}
+
+.Button:disabled {
+  cursor: not-allowed;
+}
+
+.Button:not([variant]) {
+  background: var(--Button-solid-background);
+  color: var(--Button-solid-color);
+  border: var(--Button-solid-border);
+  box-shadow: var(--Button-solid-boxShadow);
+  display: inline-flex;
+  text-align: center;
+  padding: 3px 6px;
+  transition: all 0.3s ease;
+  border-radius: 5px;
+  cursor: pointer;
+  align-items: center;
+}
+
+.Button:not([variant]):hover {
+  background: var(--Button-solid-onHover-background);
+  color: var(--Button-solid-onHover-color);
+  box-shadow: var(--Button-solid-onHover-boxShadow);
+}
+
+.Button .Button-loaderIcon {
+  display: none;
+  background: url(../assets/loading.svg);
+  background-size: 100% 100%;
+  width: 26px;
+  height: 26px;
+}
+
+.Button.is-loading .Button-loaderIcon {
+  display: block;
+}

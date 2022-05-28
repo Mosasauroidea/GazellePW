@@ -1,0 +1,76 @@
+/*
+Where
+  home   # private.php
+
+PostList PostList<Name>
+
+Post background-transparent
+  Post-header
+  Post-body
+
+Post-header
+  <span Post-headerTitle
+  Post-headerActions
+  -
+  Post-headerLeft
+    <span Post-headerTitle
+    <span Post-headerDate
+    <span Post-headerAuthor
+  Post-headerActions
+  
+Post-headerMultipleRows
+  Post-headerRow
+    Post-headerTitle
+    Post-headerActions
+  Post-headerRow Post-headerTags
+*/
+
+.PostList {
+  display: flex;
+  flex-direction: column;
+  gap: var(--global-space-lg);
+}
+
+.Post {
+  line-height: 1.5em;
+}
+
+.Post-header {
+  display: flex;
+  gap: var(--global-space-default);
+  flex-wrap: wrap;
+}
+
+.Post-headerTitle {
+  font-size: var(--global-fontSize-lg);
+  font-weight: bold;
+  display: inline;
+}
+
+.Post-headerActions {
+  margin-left: auto;
+  display: inline-flex;
+  gap: var(--global-space-sm);
+  font-size: var(--global-fontSize-sm);
+}
+
+.Post-headerRow {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.Post-bodyActions {
+  column-gap: var(--global-space-default);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 5px 5px;
+}
+
+.Post-bodyActions[variant='alignLeft'] {
+  justify-content: flex-start;
+}
+
+.preview_submit {
+  text-align: center;
+}

@@ -1,0 +1,14 @@
+QUICK SUMMARY:
+Disc Label: LIANG BO
+Disc Size: 14,315,681,792 bytes
+Protection: AACS(v70)
+Playlist: 00001.MPLS  
+Size: 14,135,519,232 bytes
+Length: 0:45:20.718
+Total Bitrate: 41.56 Mbps
+Video: MPEG-4 AVC Video / 0 kbps / 1080p / 23.976 fps / 16:9 / High Profile 4.1
+* Video: MPEG-H HEVC Video / 0 kbps / 1080p / 23.976 fps / 16:9 / Main 10 @ Level 5.1 @ High / 10 bits / Dolby Vision / BT.2020
+Audio: Chinese / LPCM Audio / 2.0 / 48 kHz / 1536 kbps / 16-bit
+Subtitle: Chinese / 23.429 kbps
+Subtitle: Chinese / 24.159 kbps
+Subtitle: English / 32.438 kbps

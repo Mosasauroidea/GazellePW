@@ -1,0 +1,8 @@
+{% block subject %}
+你有 {{ Count }} 个种子因不活跃而被删除
+{% endblock %}
+{% block body %}
+你发布的种子里有{% if Count > 1 %}一些{% else %}一个{% endif %}因未做种而被删除。由于{% if Count > 1 %}它们{% else %}它{% endif %}并未违反任何规则（但愿如此），你可以重新发布{% if Count > 1 %}它们{% else %}它{% endif %}。
+下面是删种名录：
+{{ MessageInfo }}
+{% endblock %}

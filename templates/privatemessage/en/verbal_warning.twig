@@ -1,0 +1,8 @@
+{% block subject %}
+You have received a {% if Length %}{% else %}verbal {% endif %}warning
+{% endblock %}
+{% block body %}
+You have received a {% if Length %} {{ Length }} week{% if Length > 1 %}s{% endif %}{% else %}verbal{% endif %} warning for [url={{ URL }}]this comment[/url].
+
+[quote]{{ PrivateMessage }}[/quote]
+{% endblock %}

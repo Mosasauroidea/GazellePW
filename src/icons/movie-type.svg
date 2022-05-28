@@ -1,0 +1,6 @@
+<svg class="movie-type icon" width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+	<g fill="none" fill-rule="evenodd" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+		<rect width="20" height="20" rx="2.18" x="2" y="2" />
+		<path d="M7 2v20M17 2v20M2 12h20M2 7h5M2 17h5M17 17h5M17 7h5" />
+	</g>
+</svg>

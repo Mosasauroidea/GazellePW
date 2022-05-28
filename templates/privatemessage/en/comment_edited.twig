@@ -1,0 +1,6 @@
+{% block subject %}
+Your comment #{{ PostID }} has been edited
+{% endblock %}
+{% block body %}
+One of your comments has been edited by [url=user.php?id={{ UserID }}]{{ UserName }}[/url]: [url]comments.php?action=jump&postid={{ PostID }}[/url].
+{% endblock %}

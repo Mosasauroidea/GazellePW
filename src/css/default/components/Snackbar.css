@@ -1,0 +1,37 @@
+/*
+Snackbar.jsx
+Snackbar.open({ message: 'hello' })
+Snackbar.close()
+
+
+Snackbar
+	body
+*/
+
+.Snackbar {
+  --Snackbar-body-background: rgba(0, 0, 0, 0.7);
+  --Snackbar-body-color: #fff;
+}
+
+.Snackbar {
+  position: fixed;
+  inset: 0;
+  overflow-y: auto;
+  z-index: var(--global-zIndex-snackbar);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.Snackbar-body {
+  max-width: 80%;
+  font-size: 2rem;
+  padding: 16px;
+  min-width: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 20px;
+  background: var(--Snackbar-body-background);
+  color: var(--Snackbar-body-color);
+}

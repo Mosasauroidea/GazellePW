@@ -1,0 +1,55 @@
+/*
+HeaderInfo
+  HeaderInfo-left
+  HeaderInfo-middle
+  HeaderInfo-right
+*/
+
+.HeaderInfo {
+  order: 0;
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: 300px auto 300px;
+  align-items: center;
+  height: 35px;
+  border-bottom: var(--Header-border);
+  background: var(--Header-top-background);
+  box-shadow: var(--Header-boxShadow);
+}
+@media (max-width: 1000px) {
+  .HeaderInfo {
+    grid-template-columns: 140px auto 300px;
+  }
+}
+@media (max-width: 768px) {
+  .HeaderInfo {
+    display: flex;
+    flex-direction: column;
+    height: auto;
+  align-items: inherit;}
+}
+
+.HeaderInfo-middle {
+  order: 1;
+}
+@media (max-width: 768px) {
+  .HeaderInfo-middle {
+    order: 2;
+  }
+}
+
+.HeaderInfo-right {
+  order: 2;
+}
+@media (max-width: 768px) {
+  .HeaderInfo-right {
+    order: 1;
+  }
+}
+
+.HeaderInfo-item {
+  margin: 0;
+  text-align: left;
+  list-style: none;
+  height: 100%;
+}

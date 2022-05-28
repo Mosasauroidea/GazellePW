@@ -1,0 +1,29 @@
+/*
+Where
+	Torrents - search
+
+<div class="RadioGroup">
+  <div class="Radio">
+    <input class="Input" type="radio" id name value>
+    <label class="Radio-label" for="id">
+*/
+
+.RadioGroup {
+  display: inline-flex;
+  gap: var(--global-space-default);
+}
+
+.Radio {
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--global-space-sm);
+}
+
+.Input[type='radio'] {
+  cursor: pointer;
+}
+
+.Radio-label {
+  cursor: pointer;
+}

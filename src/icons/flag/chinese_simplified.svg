@@ -1,0 +1,19 @@
+<svg class="chinese_simplified icon" width="20" height="16" viewBox="0 0 20 16" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+	<defs>
+		<path d="M0 0h20v15H0z" id="chinese_simplified_icon%s__a" />
+	</defs>
+	<g fill="none" fill-rule="evenodd" transform="translate(0 .5)">
+		<mask fill="#fff" id="chinese_simplified_icon%s__b">
+			<use xlink:href="#chinese_simplified_icon%s__a" />
+		</mask>
+		<g mask="url(#chinese_simplified_icon%s__b)">
+			<path d="M0 0h20v15H0z" fill="#E31D1C" />
+			<g fill="#FECA00">
+				<path d="M4.446 6.097 2.013 8.004l.929-2.884-1.623-1.5 2.198-.08.93-2.322.929 2.321h2.193L5.95 5.12l.738 2.884zM9.385 3.857l-1.02.617.232-1.203-.85-.9 1.151-.049.487-1.123.487 1.123h1.15l-.849.949.256 1.203z" />
+				<path d="m10.635 6.357-1.02.617.232-1.203-.85-.9 1.151-.049.487-1.123.487 1.123h1.15l-.849.949.256 1.203z" />
+				<path d="m9.385 8.857-1.02.617.232-1.203-.85-.9 1.151-.049.487-1.123.487 1.123h1.15l-.849.949.256 1.203z" />
+				<path d="m6.885 10.107-1.02.617.232-1.203-.85-.9 1.151-.049.487-1.123.487 1.123h1.15l-.849.949.256 1.203z" />
+			</g>
+		</g>
+	</g>
+</svg>

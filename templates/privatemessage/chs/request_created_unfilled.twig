@@ -1,0 +1,7 @@
+{% block subject %}
+你所创建的一个求种的应求被否决
+{% endblock %}
+{% block body %}
+求种 “[url={{ SITE_URL }}/requests.php?action=view&amp;id=$RequestID]{{ FullName }}[/url]” 的应求被 [url={{ SITE_URL }}/user.php?id={{ LoggedUserID }}]{{ LoggedUserUsername}}[/url] 否决，理由是：
+[quote]{{ Reason }}[/quote]
+{% endblock %}

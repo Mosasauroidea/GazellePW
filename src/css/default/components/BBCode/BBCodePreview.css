@@ -1,0 +1,11 @@
+.BBCodePreview-html,
+.BBCodePreview-text {
+  min-height: 200px;
+  border-top: var(--Box-border);
+  padding: 2px 5px;
+  text-align: left;
+}
+
+.u-bbcodeEditor .u-bbcodeTextarea {
+  border-radius: 0px 0px 5px 5px;
+}

@@ -1,0 +1,56 @@
+.u-hidden,
+.hidden {
+  display: none !important;
+}
+
+/* u-color */
+.u-colorSuccess {
+  color: var(--global-color-success);
+}
+.u-colorWarning {
+  color: var(--global-color-warning);
+}
+.u-colorCircle {
+  color: var(--global-color-circle);
+}
+.u-colorRatio00,
+.u-colorRatio01 {
+  color: var(--global-color-ratio1);
+}
+.u-colorRatio02 {
+  color: var(--global-color-ratio2);
+}
+.u-colorRatio03 {
+  color: var(--global-color-ratio3);
+}
+.u-colorRatio04 {
+  color: var(--global-color-ratio4);
+}
+.u-colorRatio05 {
+  color: var(--global-color-ratio5);
+}
+.u-colorRatio06 {
+  color: var(--global-color-ratio6);
+}
+.u-colorRatio07 {
+  color: var(--global-color-ratio7);
+}
+.u-colorRatio08,
+.u-colorRatio09,
+.u-colorRatio10,
+.u-colorRatio20,
+.u-colorRatio50,
+.u-colorRatio99 {
+  color: var(--global-color-ratio8);
+}
+
+/*
+u-hoverToShow-hover
+  u-hoverToShow-hide
+*/
+.u-hoverToShow-hover:hover .u-hoverToShow-hide {
+  visibility: visible;
+}
+.u-hoverToShow-hide {
+  visibility: hidden;
+}

@@ -1,0 +1,58 @@
+<?
+$TorrentID = isset($_GET['torrentid']) ? $_GET['torrentid'] : null;
+// TODO by qwerty 获取失败
+if (!$TorrentID) {
+    die();
+}
+$AllSubtitles = Subtitles::get($TorrentID);
+if (empty($AllSubtitles)) {
+    die();
+}
+
+?>
+<table class="TableSubtitle Table" id="subtitle_browse_table">
+    <tr class="Table-rowHeader">
+        <td class="Table-cellLeft TableSubtitle-cellLanguage Table-cell"><?= Lang::get('global', 'language') ?></td>
+        <td class="TableSubtitle-cellName Table-cell"><?= Lang::get('subtitles', 'subtitle_names') ?></td>
+        <td class="TableSubtitle-celllFormat Table-cell Table-cellRight"><?= Lang::get('global', 'format') ?></td>
+        <td class="TableSubtitle-cellSize Table-cell Table-cellRight"><?= Lang::get('global', 'size') ?></td>
+    </tr>
+    <?
+
+    $Labels = ['chinese_simplified', 'chinese_traditional', 'english', 'japanese', 'korean', 'no_subtitles', 'arabic', 'brazilian_port', 'bulgarian', 'croatian', 'czech', 'danish', 'dutch', 'estonian', 'finnish', 'french', 'german', 'greek', 'hebrew', 'hindi', 'hungarian', 'icelandic', 'indonesian', 'italian', 'latvian', 'lithuanian', 'norwegian', 'persian', 'polish', 'portuguese', 'romanian', 'russian', 'serbian', 'slovak', 'slovenian', 'spanish', 'swedish', 'thai', 'turkish', 'ukrainian', 'vietnamese'];
+    foreach ($AllSubtitles as $Subtitle) {
+        $LanguageArray = explode(',', $Subtitle['languages']);
+        $IsNew = time_ago($Subtitle['upload_time']) < 60;
+        $CanRM = check_perms('users_mod');
+        $UserInfo = Users::user_info($Subtitle['uploader']);
+        $UploaderName = $UserInfo['Username'];
+        if ($UploaderName == '') {
+            $UploaderName = "Unknown [" . $Subltitle['uploader'] . "]";
+        }
+    ?>
+        <tr class="TableSubtitle-row Table-row">
+            <td class="TableSubtitle-cellLanguage Table-cell">
+                <?
+                foreach ($LanguageArray as $Language) {
+                ?>
+                    <?= icon("flag/$Language") ?>
+                <?
+                }
+                ?>
+            </td>
+            <td class="TableSubtitle-cellName Table-cell" data-tooltip="<?= Lang::get('torrents', 'upload_by_before') . $UploaderName . Lang::get('torrents', 'upload_by_after') . time_diff($Subtitle['upload_time'], 2, false)  . ' | ' . Lang::get('subtitles', 'times_of_download') . $Subtitle['download_times'] ?>">
+                <span class="floatright">
+                    <span>[ </span>
+                    <a href="subtitles.php?action=download&id=<?= $Subtitle['id'] ?>" data-tooltip="<?= Lang::get('global', 'download') ?>">DL</a>
+                    <?= $CanRM ? '| <a href="subtitles.php?action=delete&id=' . $Subtitle['id'] . '"  data-tooltip="' . Lang::get('global', 'remove') . '">RM</a> ' : '' ?>]
+                </span>
+                <?= $Subtitle['name'] . ' ' ?>
+                <strong class="u-colorWarning"><?= ($IsNew ?  Lang::get('subtitles', 'new')  : '') ?></strong>
+            </td>
+            <td class="TableSubtitle-cellFormat Table-cell Table-cellRight"><?= $Subtitle['format'] ?></td>
+            <td class="TableSubtitle-cellSize Table-cell Table-cellRight"><?= Format::get_size($Subtitle['size']) ?></td>
+        </tr>
+    <?
+    }
+    ?>
+</table>

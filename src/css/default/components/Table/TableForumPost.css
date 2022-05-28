@@ -1,0 +1,74 @@
+/*
+Where
+	torrents - show - comment   # classes/commentsview.class.php 
+	forums - post               # forums/thread.php
+	forums - new post - preview # forums/newthread.php
+	user - view posts           # userhistory/post_history.php
+	user - subscriptions        # userhistory/subscriptions.php
+	user - subscriptions - quote notifications # userhistory/quote_notifications.php
+*/
+
+.TableForumPost {
+  word-break: normal;
+  word-wrap: break-word;
+  hyphens: auto;
+  table-layout: auto;
+}
+
+.TableForumPost-cellContent {
+  display: flex;
+}
+
+.TableForumPost-cellContent > .Table-cell {
+  padding: var(--global-space-default);
+}
+
+.TableForumPost-cellAvatar {
+  border-right: var(--Box-border);
+}
+@media (max-width: 768px) {
+  .TableForumPost-cellAvatar {
+    display: none;
+  }
+}
+
+/* header */
+.TableForumPostHeader {
+  display: flex;
+  flex-wrap: wrap;
+}
+.TableForumPostHeader-actions {
+  margin-left: auto;
+  display: flex;
+  gap: var(--global-space-sm);
+}
+.TableForumPostHeader-info {
+  display: flex;
+  gap: var(--global-space-sm);
+flex-wrap: wrap;}
+
+/* body */
+.TableForumPost-cellBody {
+  flex: 1;
+}
+.TableForumPostBody {
+  line-height: 1.75em;
+  min-height: 150px;
+  display: flex;
+  flex-direction: column;
+}
+.TableForumPostBody-actions {
+  margin-top: auto;
+  padding-top: 7px;
+}
+.TableForumPostBody-actionReward .Input[type='text'] {
+  width: 200px;
+}
+.TableForumPostBody-divider {
+  margin-top: 2rem;
+  margin-bottom: 3px;
+  width: 100%;
+  box-sizing: content-box;
+  overflow: visible;
+  border-top: var(--global-border-box);
+}

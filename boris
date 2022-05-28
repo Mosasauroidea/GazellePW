@@ -1,0 +1,79 @@
+#!/usr/bin/env php
+<?php
+
+/* Ensure that the following functions are removed from the `disable_functions`
+ * directive in cli/php.ini
+ *
+ *   pcntl_fork
+ *   pcntl_signal
+ *   pcntl_signal_dispatch
+ *   pcntl_waitpid
+ *
+ * boris won't function unless these functions are enabled in the PHP interpreter.
+ *
+ * The following variables are defined:
+ *
+ *   $db         - database connection
+ *   $cache      - memcache connection
+ *   $bonus      - \Gazelle\Bonus instance
+ *   $stylesheet - \Gazelle\Stylesheet instance
+ *
+ * More can be added when implemented.
+ */
+
+define('BORIS', 1);
+
+require_once(__DIR__ . '/classes/config.php');
+require_once(__DIR__ . '/classes/const.php');
+require_once(__DIR__ . '/vendor/autoload.php');
+require_once(__DIR__ . '/classes/paranoia.class.php');
+require_once(__DIR__ . '/classes/time.class.php');
+require_once(__DIR__ . '/classes/util.php');
+require_once(__DIR__ . '/vendor/d11wtq/boris/lib/autoload.php');
+
+$Cache = new CACHE($MemcachedServers);
+$DB = new DB_MYSQL;
+$Debug = new DEBUG;
+$Debug->handle_errors();
+
+G::$Cache = &$Cache;
+G::$DB = &$DB;
+G::$Debug = &$Debug;
+
+$b = new \Boris\Boris(SITE_NAME . '> ');
+$preload = [
+    'cache'       => $Cache,
+    'db'          => $DB,
+    'fileTorrent' => new \Gazelle\File\Torrent,
+    'stylesheet'  => new \Gazelle\Stylesheet,
+    'tagMan'      => new \Gazelle\Manager\Tag,
+    'twig'        => new Twig\Environment(
+        new Twig\Loader\FilesystemLoader('templates'),
+        ['debug' => true, 'cache' => __DIR__ . '/cache/twig']
+    ),
+];
+
+printf("** preloaded objects:\n** %s\n", implode(', ', array_keys($preload)));
+$b->setLocal($preload);
+$b->start();
+
+/*
+ * Sample usage:
+ *
+    vagrant@contrib-jessie:/var/www$ ./boris
+    [1] ops> $db->query('select count(*) from torrents');
+    // object(mysqli_result)(
+    //   'current_field' => NULL,
+    //   'field_count' => NULL,
+    //   'lengths' => NULL,
+    //   'num_rows' => NULL,
+    //   'type' => NULL
+    // )
+    [2] ops> $db->to_array();
+    // array(
+    //   0 => array(
+    //     0 => '14',
+    //     'count(*)' => '14'
+    //   )
+    // )
+*/

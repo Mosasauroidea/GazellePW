@@ -1,0 +1,6 @@
+{% block subject %}
+你所寻找的 {{ FullName }} 已经发布
+{% endblock %}
+{% block body %}
+有用户根据你的求种发布了 [url=requests.php?action=view&amp;id={{ RequestID }}]{{ FullName }}[/url]，你可以点此查看：[url]torrents.php?torrentid={{ TorrentID }}[/url]。
+{% endblock %}

@@ -1,0 +1,12 @@
+{% block subject %}
+Bounty was reduced on a request you filled
+{% endblock %}
+{% block body %}
+With regret, Staff informs you that a reduction of {{ Bounty }} bounty was applied to a request you filled on {{ FillDate }}.
+
+It has been determined that a person who had voted on this request was manipulating their ratio and as a consequence, their request votes have been rescinded. One of the requests affected was this one, and as a result, your upload stats have changed. It fills us with sadness to have to undertake such an action, however, the buffer they dumped on the request was never real in the first place.
+
+The request: {{ RequestURL }}
+
+Report handled by {{ StaffUserName }}.
+{% endblock %}

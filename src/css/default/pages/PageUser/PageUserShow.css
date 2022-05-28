@@ -1,0 +1,16 @@
+@media (max-width: 768px) {
+  .PageUserShow .LayoutMainSidebar-main {
+    order: 3;
+  }
+}
+
+.SidebarItemUserAvatar .SidebarItem-body {
+  display: flex;
+  justify-content: center;
+}
+
+@media (max-width: 768px) {
+  .SidebarItemUserAvatar .Avatar {
+    width: 150px;
+  }
+}

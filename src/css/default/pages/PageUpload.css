@@ -1,0 +1,34 @@
+.FormUpload:not(.u-formUploadAutoFilled, .u-formUploadNoImdbId)
+  .u-formUploadCollapse {
+  display: none;
+}
+
+@media (min-width: 768px) {
+  .FormUpload .Input[type='text']:not(.is-small) {
+    width: 360px;
+  }
+}
+
+.FormUpload-explain {
+  margin: 5px 0px;
+  padding: var(--global-space-default);
+  border: var(--global-border-box);
+  background-color: var(--global-colorTransparentSecondary-box);
+  border-radius: var(--global-borderRadius);
+}
+.FormUpload-explain .postlist {
+  padding-left: 40px;
+}
+.FormUpload-mediaInfoActions {
+  display: flex;
+  justify-content: flex-end;
+  gap: var(--global-space-sm);
+}
+.FormUpload-flags {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+}
+
+.FormSubmitCenter {
+  text-align: center;
+}

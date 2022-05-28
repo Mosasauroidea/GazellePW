@@ -1,0 +1,20 @@
+<svg class="danish icon" width="20" height="16" viewBox="0 0 20 16" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+	<defs>
+		<path d="M0 0h20v15H0z" id="danish_icon%s__a" />
+		<path d="M0 0h20v15H0z" id="danish_icon%s__c" />
+	</defs>
+	<g fill="none" fill-rule="evenodd" transform="translate(0 .5)">
+		<mask fill="#fff" id="danish_icon%s__b">
+			<use xlink:href="#danish_icon%s__a" />
+		</mask>
+		<g mask="url(#danish_icon%s__b)">
+			<mask fill="#fff" id="danish_icon%s__d">
+				<use xlink:href="#danish_icon%s__c" />
+			</mask>
+			<use fill="#C51918" xlink:href="#danish_icon%s__c" />
+			<g fill="#F7FCFF" mask="url(#danish_icon%s__d)">
+				<path d="M6 0h3v6h11v3H9v6H6V9H0V6h6z" />
+			</g>
+		</g>
+	</g>
+</svg>

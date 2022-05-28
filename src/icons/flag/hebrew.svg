@@ -1,0 +1,20 @@
+<svg class="hebrew icon" width="20" height="16" viewBox="0 0 20 16" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+	<defs>
+		<path d="M0 0h20v15H0z" id="hebrew_icon%s__a" />
+		<path d="M0 0h20v15H0z" id="hebrew_icon%s__c" />
+	</defs>
+	<g fill="none" fill-rule="evenodd" transform="translate(0 .5)">
+		<mask fill="#fff" id="hebrew_icon%s__b">
+			<use xlink:href="#hebrew_icon%s__a" />
+		</mask>
+		<g mask="url(#hebrew_icon%s__b)">
+			<mask fill="#fff" id="hebrew_icon%s__d">
+				<use xlink:href="#hebrew_icon%s__c" />
+			</mask>
+			<use fill="#F7FCFF" xlink:href="#hebrew_icon%s__c" />
+			<path d="M0 2.5h20v2.228H0zM0 10.218V12.5h20v-2.282z" fill="#3D58DB" mask="url(#hebrew_icon%s__d)" />
+			<path d="M8.317 8.65h3.465l-1.715-2.964-1.75 2.963zm4.657.687h-5.86l2.958-5.013 2.902 5.013z" fill="#3D58DB" fill-rule="nonzero" mask="url(#hebrew_icon%s__d)" />
+			<path d="M8.175 9.92h3.573l-1.694-2.998-1.88 2.997zm4.75.687H6.932l3.153-5.029 2.84 5.029z" fill="#3D58DB" fill-rule="nonzero" mask="url(#hebrew_icon%s__d)" transform="matrix(1 0 0 -1 0 16.185)" />
+		</g>
+	</g>
+</svg>

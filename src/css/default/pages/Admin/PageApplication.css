@@ -1,0 +1,16 @@
+#switcher {
+  list-style: none;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+#switcher li {
+  display: inline;
+  margin: 0 5px;
+}
+
+#apply .Post-header > div {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}

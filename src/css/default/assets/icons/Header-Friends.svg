@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+	<defs>
+		<style>.a{fill:none;stroke:#a9a9a9;stroke-linecap:round;stroke-linejoin:round}</style>
+	</defs>
+	<path class="a" d="M4.776 12.5h-1.31A2.965 2.965 0 0 0 .5 15.465V19.5h17v-4.035a2.965 2.965 0 0 0-2.965-2.965h-1.31" />
+	<path class="a" d="M4.776 12.5A4.458 4.458 0 0 1 4.5 11V7a4.5 4.5 0 0 1 9 0v4a4.49 4.49 0 0 1-8.724 1.5z" />
+	<circle class="a" cx="16.5" cy="3.5" r="2" />
+	<path class="a" d="M16.5 5.5v2" />
+</svg>

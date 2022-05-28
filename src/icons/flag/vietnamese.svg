@@ -1,0 +1,21 @@
+<svg class="vietnamese icon" width="20" height="16" viewBox="0 0 20 16" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+	<defs>
+		<path d="M0 0h20v15H0z" id="vietnamese_icon%s__a" />
+		<path d="M0 0h20v15H0z" id="vietnamese_icon%s__c" />
+	</defs>
+	<g fill="none" fill-rule="evenodd" transform="translate(0 .5)">
+		<mask fill="#fff" id="vietnamese_icon%s__b">
+			<use xlink:href="#vietnamese_icon%s__a" />
+		</mask>
+		<g mask="url(#vietnamese_icon%s__b)">
+			<path d="M0 0h20v15H0z" fill="#F7FCFF" />
+			<mask fill="#fff" id="vietnamese_icon%s__d">
+				<use xlink:href="#vietnamese_icon%s__c" />
+			</mask>
+			<use fill="#E31D1C" xlink:href="#vietnamese_icon%s__c" />
+			<g fill="#FFD221" mask="url(#vietnamese_icon%s__d)">
+				<path d="m10.039 9.987-3.22 2.047L7.9 8.451l-2.296-2.34 3.166-.07 1.4-3.537 1.277 3.584 3.158.055-2.373 2.384 1.108 3.409z" />
+			</g>
+		</g>
+	</g>
+</svg>

@@ -1,0 +1,15 @@
+/*
+Where
+	requests - list    # requests/requests.php
+	torrents - show    # torrent/details.php
+	user               # user/user.php
+	artists - show     # artist/artist.php
+*/
+.TableRequest-cellName {
+  width: 50%;
+  min-width: 400px;
+}
+
+.TableRequest-cellValue {
+  text-align: right;
+}

@@ -1,0 +1,12 @@
+.SidebarItemCollageTorrentAdd .add_torrent_container {
+  padding: var(--global-space-default);
+}
+.SidebarItemCollageTorrentAdd .field_div {
+  width: 80%;
+  display: flex;
+  align-items: center;
+}
+
+.SidebarItemCollageTorrentAdd .FormOneLine {
+  padding-bottom: var(--global-space-default);
+}

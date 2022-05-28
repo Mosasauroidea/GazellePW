@@ -1,0 +1,57 @@
+.Footer {
+  background: var(--Footer-background);
+  color: var(--Footer-color);
+  box-shadow: var(--Footer-boxShadow);
+  text-align: center;
+  padding: var(--global-space-default);
+  align-self: center;
+  max-width: 1200px;
+  border-top: var(--Box-border);
+  width: 100%;
+  margin-top: 50px;
+  padding-top: 50px;
+  font-size: var(--global-fontSize-sm);
+}
+
+.Footer p {
+  flex: 0 1 auto;
+  margin: 5px 0;
+}
+
+.Footer > div {
+  flex: 1 0 100%;
+  line-height: 1.75em;
+  margin-bottom: 25px;
+}
+
+.Footer > div a {
+  color: var(--Footer-color);
+  display: block;
+}
+
+.Footer > p > a {
+  color: var(--Footer-color);
+}
+
+.Footer > p > a:hover {
+  color: var(--Footer-link-onHover-color);
+}
+
+.Footer > div a:hover {
+  color: var(--Footer-link-onHover-color);
+}
+
+.Footer > div b {
+  font-weight: 400;
+}
+
+.Footer .Footer-stats {
+  flex-basis: 20%;
+  margin-top: -5px;
+  padding: 5px 15px;
+}
+
+.Footer-stats > div {
+  display: flex;
+  flex-wrap: wrap;
+}

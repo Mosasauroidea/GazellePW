@@ -1,0 +1,8 @@
+{% block subject %}
+你有一个应求被否决
+{% endblock %}
+{% block body %}
+求种 “[url={{ SITE_URL }}/requests.php?action=view&amp;id=$RequestID]{{ FullName }}[/url]” 的应求被 [url={{ SITE_URL }}/user.php?id={{ LoggedUserID }}]{{ LoggedUserUsername}}[/url] 否决，理由是：
+[quote]{{ Reason }}[/quote]
+如果你认为该否决不合理，请 [url={{ SITE_URL }}/reports.php?action=report&amp;type=request&amp;id={{ RequestID }}]报告求种[/url] 并解释它不该被否决的具体原因。
+{% endblock %}

@@ -1,0 +1,121 @@
+/*
+TorrentDetail
+  TorrentDetail-row is-<name> is-block
+*/
+
+.TorrentDetail {
+  display: flex;
+  flex-direction: column;
+  gap: var(--global-space-default);
+}
+
+/* row */
+.TorrentDetail-row:not(.is-description) {
+  display: flex;
+  flex-direction: column;
+  gap: var(--global-space-default);
+}
+
+.TorrentDetail-row.is-block {
+  background-color: var(--global-colorTransparentSecondary-box);
+  border: var(--global-border-box);
+  border-radius: var(--global-borderRadius);
+  padding: var(--global-space-default);
+  word-break: break-word;
+}
+
+/* uploader */
+.TorrentDetail-uploader {
+  display: flex;
+}
+
+.TorrentDetail-likeContainer {
+  margin-left: auto;
+}
+
+.TorrentDetail-rewardDisplay .icon {
+  width: 16px;
+  height: 16px;
+}
+
+.TorrentDetail-like .icon,
+.TorrentDetail-rewardButton .icon {
+  width: 16px;
+  height: 16px;
+  color: var(--global-color-rewardButton);
+}
+
+.TorrentDetail-rewardButton.is-toReward .icon {
+  color: inherit;
+}
+
+.TorrentDetail-like,
+.TorrentDetail-reward {
+  display: flex;
+  align-items: center;
+  gap: var(--global-space-sm);
+}
+
+.TorrentDetail-trumpableTitle {
+  font-weight: bold;
+}
+
+.TorrentDetail-rewardList {
+  display: flex;
+  justify-content: center;
+}
+
+.TorrentDetail-links {
+  display: flex;
+  justify-content: center;
+  gap: var(--global-space-default);
+}
+
+.MediaInfoText {
+  white-space: pre-wrap;
+  font-family: monospace;
+  word-wrap: break-word;
+  overflow: unset;
+  word-break: break-all;
+}
+
+.MediaInfoText > br {
+  line-height: 0;
+  display: none;
+}
+
+.FormTorrentAddArtist {
+  flex-direction: column;
+  gap: 6px;
+}
+
+.FormTorrentAddArtist #AddArtists {
+  display: flex;
+  width: 100%;
+  gap: var(--global-space-default);
+}
+
+.FormTorrentAddArtist .Button {
+  width: 100%;
+}
+
+.FormCollageRow {
+  justify-content: left;
+  padding: 5px 0px;
+}
+
+.FormCollageRow #select_collage {
+  width: 100%;
+}
+
+.grid_subtitles {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+}
+
+.TorrentDetailSubtitle-list {
+  display: flex;
+  align-items: center;
+  column-gap: var(--global-space-sm);
+  flex-wrap: wrap;
+}

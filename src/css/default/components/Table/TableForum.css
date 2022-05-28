@@ -1,0 +1,88 @@
+/*
+Where
+	forums - list        # forums/main.php
+	forums - show        # forums/forum.php
+	forums - search      # forums/search.php
+	user - forum threads # userhistory/topic_history.php
+*/
+
+@media (max-width: 768px) {
+  .TableForum {
+    word-break: break-all;
+  }
+}
+
+/* cell */
+@media (max-width: 768px) {
+  .Table-cell {
+    padding: 2.5px;
+  }
+}
+
+/* cellReadStatus */
+.TableForum-cellReadStatus {
+  text-align: center;
+}
+@media (min-width: 768px) {
+  .TableForum-cellReadStatus {
+    width: 30px;
+  }
+}
+
+.TableForum-cellReadStatus .icon {
+  width: 10px;
+  height: 10px;
+}
+@media (min-width: 768px) {
+  .TableForum-cellReadStatus .icon {
+    width: 20px;
+    height: 20px;
+  }
+}
+
+@media (min-width: 768px) {
+  .TableForum-cellForumName {
+    width: 20%;
+  }
+}
+
+/* cellValue */
+.TableForum-cellValue {
+  text-align: right;
+  display: none;
+  padding-right: 2.5px;
+}
+@media (min-width: 768px) {
+  .TableForum-cellValue {
+    display: table-cell;
+    width: 80px;
+    padding-right: 1rem;
+  }
+}
+
+@media (min-width: 768px) {
+  .TableForum-cellAuthor {
+    width: 160px;
+  }
+}
+
+@media (min-width: 768px) {
+  .TableForum-cellTime {
+    width: 200px;
+  }
+}
+
+/* cellPost */
+.TableForum-post {
+  display: flex;
+  align-items: center;
+  gap: var(--global-space-default);
+  flex-wrap: wrap;
+}
+.TableForum-lastPoster {
+  margin-left: auto;
+}
+.TableForum-cellPost .icon {
+  width: 14px;
+  height: 14px;
+}

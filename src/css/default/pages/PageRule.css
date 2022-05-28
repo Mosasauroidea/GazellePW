@@ -1,0 +1,88 @@
+#rules .RuleText {
+  padding: 15px 10px;
+}
+#rules #actual_rules .RuleText {
+  padding-top: 0;
+}
+
+#rules .before_rules {
+  margin-bottom: var(--global-space-lg);
+}
+#rules #actual_rules > h4 {
+  margin: 20px 0 10px;
+  text-align: center;
+}
+#rules #actual_rules .RuleText > h5 {
+  font-weight: normal;
+  color: var(--global-color);
+  padding: var(--global-space-sm);
+}
+
+#actual_rules > h4 {
+  font-size: 1.5rem !important;
+}
+#actual_rules > h5 {
+  font-size: 1.3rem !important;
+}
+#rules h4,
+#rules h5 {
+  font-family: apple-system, BlinkMacSystemFont, Segoe UI, Helvetica, Arial,
+    sans-serif;
+  font-weight: 400;
+  padding: 2px 5px 7px 4px;
+  vertical-align: middle;
+}
+
+#rules .rule_summary li > p,
+#rules .rule_summary:last-child {
+  margin-bottom: 0;
+}
+
+#rules #irc,
+#rules #forums {
+  font-size: 1.6rem;
+  font-weight: 300;
+  margin: 0 auto 0;
+  padding: 0 0 5px;
+}
+#rules .rule_summary ul > li {
+  list-style: none;
+}
+#rules .rule_summary {
+  padding: 1rem;
+  margin-bottom: var(--global-space-lg);
+}
+#rules h5 {
+  font-size: 13px;
+  font-weight: bold;
+  color: var(--global-color-ruleStrong);
+}
+#rules .rules li .rule_short,
+#rules div ul li > strong {
+  font-weight: normal;
+  color: var(--global-color-ruleStrong);
+}
+
+#rules .header + .RuleText > p:last-child,
+#rules .header > .general:last-child {
+  margin-bottom: 0;
+}
+#rules .header > #general + p {
+  padding-left: var(--global-space-default);
+}
+#rules .header + .RuleText > table > tbody > tr > td {
+  padding: 7px;
+  display: flex;
+  flex-flow: wrap;
+  align-items: center;
+  justify-content: flex-start;
+}
+#rules .header + .RuleText > table > tbody > tr {
+  width: 100%;
+  display: grid;
+  grid-template-columns: auto 150px;
+}
+
+#rules .Box-body {
+  overflow: hidden;
+}

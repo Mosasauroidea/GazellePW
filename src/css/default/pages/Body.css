@@ -1,0 +1,82 @@
+/*
+LayoutBody          # gap
+  BodyHeader
+    BodyHeader-nav  # <h3>
+    BodyNavLinks
+  BodyContent       # gap
+
+BodyNavLinks
+BodyNavLinksWithExpand
+  BodyNavLinks
+  BodyNavLinks-expand
+    BodyNavLinks-expandHeader
+Where
+  page: top links
+  artist: top and middle links
+  form thread: top links with expand
+*/
+
+@media (max-width: 768px) {
+  .Body {
+    padding: var(--global-space-default);
+  }
+}
+
+.LayoutMainSidebar-main .box {
+  min-width: 400px;
+  width: auto;
+  background: var(--global-boxShadow-boxWithoutBorder);
+  border: var(--global-border-boxWithoutBorder);
+  border-radius: var(--global-borderRadius);
+}
+
+.LayoutMainSidebar-main .box > .head {
+  padding: var(--global-space-sm);
+  background: var(--global-background-boxWithoutBorder);
+  border-top-left-radius: var(--global-borderRadius);
+  border-top-right-radius: var(--global-borderRadius);
+  border-bottom: var(--global-border-boxWithoutBorder);
+  font-size: var(--global-fontSize-lg);
+}
+
+.LayoutMainSidebar-main .box > .pad {
+  padding: 7px 10px;
+  min-width: 350px;
+  word-break: break-word;
+  word-wrap: break-word;
+}
+
+/* BodyHeader */
+.BodyHeader {
+  display: flex;
+  flex-direction: column;
+  gap: var(--global-space-default);
+}
+
+.BodyHeader-nav {
+  font-size: 1.6rem;
+  font-weight: bold;
+  /* override h3 */
+  margin: 0;
+}
+
+/* BodyNavLinks */
+.BodyNavLinks {
+  display: flex;
+  justify-content: center;
+  column-gap: var(--global-space-default);
+  row-gap: var(--global-space-default);
+  flex-wrap: wrap;
+}
+
+.BodyNavLinksWithExpand {
+  display: flex;
+  flex-direction: column;
+  row-gap: var(--global-space-default);
+}
+
+.BodyContent {
+  display: flex;
+  flex-direction: column;
+  gap: var(--global-space-default);
+}

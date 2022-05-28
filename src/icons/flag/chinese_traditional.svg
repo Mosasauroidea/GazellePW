@@ -1,0 +1,33 @@
+<svg class="chinese_traditional icon" width="20" height="16" viewBox="0 0 20 16" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+	<defs>
+		<path d="M0 0h20v15H0z" id="chinese_traditional_icon%s__a" />
+		<path d="M0 0h20v15H0z" id="chinese_traditional_icon%s__c" />
+		<path d="M12.929 12.315s-1.725-.723-1.53-2.531c.187-1.736.527-2.164.062-2.368l-.062-.024s4.645 1.39 1.53 4.923zm-2.751-3.839s.833 4.777-3.72 3.57c0 0-.123-1.866 1.58-2.5 1.705-.635 2.215-.485 2.14-1.07zm-2.83-2.525c.97 1.538.93 2.068 1.486 1.875 0 0-.037.015-.105.039l-.095.031c-.87.282-4.273 1.126-4.056-2.979 0 0 1.8-.504 2.77 1.034zm8.576.471s-1.05 1.548-2.783 1c-1.665-.526-2.017-.945-2.309-.53l-.034.054.006-.012c.153-.275 2.373-4.132 5.12-.512zm-5.306-4.295s1.256 1.385.314 2.94c-.903 1.491-1.393 1.736-1.062 2.117l.045.047-.01-.008c-.23-.214-3.454-3.282.713-5.096z" id="chinese_traditional_icon%s__f" />
+		<filter width="117.2%" height="109.6%" filterUnits="objectBoundingBox" id="chinese_traditional_icon%s__e" x="-6.2%" y="-6.8%">
+			<feMorphology in="SourceAlpha" operator="dilate" radius=".5" result="shadowSpreadOuter1" />
+			<feOffset in="shadowSpreadOuter1" result="shadowOffsetOuter1" />
+			<feGaussianBlur in="shadowOffsetOuter1" result="shadowBlurOuter1" stdDeviation=".5" />
+			<feColorMatrix in="shadowBlurOuter1" values="0 0 0 0 0.6 0 0 0 0 0 0 0 0 0 0 0 0 0 0.36 0" />
+		</filter>
+	</defs>
+	<g fill="none" fill-rule="evenodd" transform="translate(0 .5)">
+		<mask fill="#fff" id="chinese_traditional_icon%s__b">
+			<use xlink:href="#chinese_traditional_icon%s__a" />
+		</mask>
+		<g mask="url(#chinese_traditional_icon%s__b)">
+			<mask fill="#fff" id="chinese_traditional_icon%s__d">
+				<use xlink:href="#chinese_traditional_icon%s__c" />
+			</mask>
+			<use fill="#EA1A1A" xlink:href="#chinese_traditional_icon%s__c" />
+			<g mask="url(#chinese_traditional_icon%s__d)">
+				<use fill="#000" filter="url(#chinese_traditional_icon%s__e)" xlink:href="#chinese_traditional_icon%s__f" />
+				<use fill="#FFF" xlink:href="#chinese_traditional_icon%s__f" />
+			</g>
+			<path d="M6.35 6.38c.607.955 1.407 1.432 2.4 1.432" mask="url(#chinese_traditional_icon%s__d)" stroke="#EA1A1A" stroke-width=".625" />
+			<path d="M8.636 5.103c.63.952 1.443 1.429 2.437 1.429" mask="url(#chinese_traditional_icon%s__d)" stroke="#EA1A1A" stroke-width=".625" transform="rotate(62 9.854 5.817)" />
+			<path d="M11.092 5.705c.707 1.073 1.557 1.61 2.55 1.61" mask="url(#chinese_traditional_icon%s__d)" stroke="#EA1A1A" stroke-width=".625" transform="rotate(132 12.367 6.51)" />
+			<path d="M10.549 7.561c.707 1.074 1.557 1.61 2.55 1.61" mask="url(#chinese_traditional_icon%s__d)" stroke="#EA1A1A" stroke-width=".625" transform="rotate(-158 11.824 8.366)" />
+			<path d="M8.282 8.565c.707 1.073 1.557 1.61 2.55 1.61" mask="url(#chinese_traditional_icon%s__d)" stroke="#EA1A1A" stroke-width=".625" transform="rotate(-88 9.557 9.37)" />
+		</g>
+	</g>
+</svg>

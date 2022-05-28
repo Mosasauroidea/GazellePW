@@ -1,0 +1,6 @@
+{% block subject %}
+The request {{ FullName }} has been filled
+{% endblock %}
+{% block body %}
+One of your requests [url=requests.php?action=view&amp;id={{ RequestID }}]{{ FullName }}[/url] has been filled. You can view it here: [url]torrents.php?torrentid={{ TorrentID }}[/url].
+{% endblock %}

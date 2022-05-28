@@ -1,0 +1,66 @@
+/*
+<input
+  class="Input" is-small
+  type="text" email, password, number
+  name
+  value
+>
+
+<textarea class="Input" name>
+*/
+
+::placeholder {
+  color: var(--global-color-placeholder);
+}
+
+.Input:is([type='text'], [type='email'], [type='password'], [type='number']),
+textarea.Input {
+  background: var(--Input-background);
+  color: var(--Input-color);
+  border: var(--Input-border);
+  border-radius: var(--global-borderRadius);
+  box-shadow: var(--Input-boxShadow);
+  font-size: 1rem;
+  line-height: 17px;
+  width: 100%;
+  outline: none;
+  margin: 0;
+  padding: 4px 5px;
+  height: 27px;
+  transition: all 0.3s ease;
+  /* override */
+  max-width: 100%;
+}
+
+textarea.Input {
+  min-height: 200px;
+  resize: vertical;
+}
+
+.Input.is-small:is([type='text'], [type='email'], [type='password'], [type='number']),
+textarea.Input.is-small {
+  width: 160px;
+}
+
+.Input:is([type='text'], [type='email'], [type='password'], [type='number']):hover {
+  background: var(--Input-onHover-background);
+}
+
+.Input:is([type='text'], [type='email'], [type='password'], [type='number']):focus {
+  border: var(--Input-onFocus-border);
+  box-shadow: var(--Input-onFocus-boxShadow);
+}
+
+.Input:is([type='text'], [type='email'], [type='password'], [type='number']):disabled {
+  font-style: italic;
+  color: var(--global-onDisabled-color-input);
+  background: rgba(221, 221, 221, 0.15);
+  cursor: default;
+}
+
+.Input:is([type='text'], [type='email'], [type='password'], [type='number']):read-only {
+  font-style: italic;
+  color: var(--global-onDisabled-color-input);
+  background: rgba(221, 221, 221, 0.15);
+  cursor: default;
+}

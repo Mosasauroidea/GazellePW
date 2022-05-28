@@ -1,0 +1,7 @@
+{% block subject %}
+删种通知
+{% endblock %}
+{% block body %}
+一个{% if Action == "Uploaded" %}你发布的种子{% elseif Action == "Seeding" %}你正做种的种子{% elseif Action == "Snatched" %}你已完成的种子{% elseif Action == "Downloaded" %}你已下载种子{% endif %}{% if TrumpID %}已被替代。你可以点击 [url={{ SiteURL }}/torrents.php?torrentid={{ TrumpID }}]这里[/url] 查看新种子。{% else %}已被删除{% endif %}
+
+{% endblock %}

@@ -1,0 +1,192 @@
+<?
+$ConvID = $_GET['id'];
+if (!$ConvID || !is_number($ConvID)) {
+    error(404);
+}
+
+
+$UserID = $LoggedUser['ID'];
+$DB->query("
+	SELECT InInbox, InSentbox
+	FROM pm_conversations_users
+	WHERE UserID = '$UserID'
+		AND ConvID = '$ConvID'");
+if (!$DB->has_results()) {
+    error(403);
+}
+list($InInbox, $InSentbox) = $DB->next_record();
+
+
+
+if (!$InInbox && !$InSentbox) {
+
+    error(404);
+}
+
+// Get information on the conversation
+$DB->query("
+	SELECT
+		c.Subject,
+		cu.Sticky,
+		cu.UnRead,
+		cu.ForwardedTo
+	FROM pm_conversations AS c
+		JOIN pm_conversations_users AS cu ON c.ID = cu.ConvID
+	WHERE c.ID = '$ConvID'
+		AND UserID = '$UserID'");
+list($Subject, $Sticky, $UnRead, $ForwardedID) = $DB->next_record();
+
+
+$DB->query("
+	SELECT um.ID, Username
+	FROM pm_messages AS pm
+		JOIN users_main AS um ON um.ID = pm.SenderID
+	WHERE pm.ConvID = '$ConvID'");
+
+$ConverstionParticipants = $DB->to_array();
+
+foreach ($ConverstionParticipants as $Participant) {
+    $PMUserID = (int)$Participant['ID'];
+    $Users[$PMUserID]['UserStr'] = Users::format_username($PMUserID, true, true, true, true);
+    $Users[$PMUserID]['Username'] = $Participant['Username'];
+}
+
+$Users[0]['UserStr'] = 'System'; // in case it's a message from the system
+$Users[0]['Username'] = 'System';
+
+
+if ($UnRead == '1') {
+
+    $DB->query("
+		UPDATE pm_conversations_users
+		SET UnRead = '0'
+		WHERE ConvID = '$ConvID'
+			AND UserID = '$UserID'");
+    // Clear the caches of the inbox and sentbox
+    $Cache->decrement("inbox_new_$UserID");
+}
+
+View::show_header(Lang::get('inbox', 'view_conversation_space') . "$Subject", 'comments,inbox,bbcode,jquery.validate,form_validate', 'PageInboxConversation');
+
+// Get messages
+$DB->query("
+	SELECT SentDate, SenderID, Body, ID
+	FROM pm_messages
+	WHERE ConvID = '$ConvID'
+	ORDER BY ID");
+?>
+<div class="LayoutBody">
+    <h2><?= $Subject . ($ForwardedID > 0 ? " (Forwarded to $ForwardedName)" : '') ?></h2>
+    <div class="BodyNavLinks">
+        <a href="<?= Inbox::get_inbox_link(); ?>" class="brackets"><?= Lang::get('inbox', 'back_to_inbox') ?></a>
+    </div>
+    <?
+
+    while (list($SentDate, $SenderID, $Body, $MessageID) = $DB->next_record()) { ?>
+        <div class="Box">
+            <div class="Box-header" style="overflow: hidden;">
+                <div style="float: left;">
+                    <strong><?= $Users[(int)$SenderID]['UserStr'] ?></strong> <?= time_diff($SentDate) ?>
+                    <? if ($SenderID > 0) { ?>
+                        - <a href="#quickpost" onclick="Quote('<?= $MessageID ?>','<?= $Users[(int)$SenderID]['Username'] ?>');" class="brackets"><?= Lang::get('inbox', 'quote') ?></a>
+                    <?  } ?>
+                </div>
+                <div style="float: right;"><a href="#">&uarr;</a> <a href="#messageform">&darr;</a></div>
+            </div>
+            <div class="Box-body HtmlText PostArticle" id="message<?= $MessageID ?>">
+                <?= Text::full_format($Body) ?>
+            </div>
+        </div>
+    <?
+    }
+    $DB->query("
+	SELECT UserID
+	FROM pm_conversations_users
+	WHERE UserID != '$LoggedUser[ID]'
+		AND ConvID = '$ConvID'
+		AND (ForwardedTo = 0 OR ForwardedTo = UserID)");
+    $ReceiverIDs = $DB->collect('UserID');
+
+
+
+    if (!empty($ReceiverIDs) && (empty($LoggedUser['DisablePM']) || array_intersect($ReceiverIDs, array_keys($StaffIDs)))) {
+    ?>
+        <h3><?= Lang::get('inbox', 'reply') ?></h3>
+        <form class="Box send_form" name="reply" action="inbox.php" method="post" id="messageform">
+            <div class="Box-body">
+                <input type="hidden" name="action" value="takecompose" />
+                <input type="hidden" name="auth" value="<?= $LoggedUser['AuthKey'] ?>" />
+                <input type="hidden" name="toid" value="<?= implode(',', $ReceiverIDs) ?>" />
+                <input type="hidden" name="convid" value="<?= $ConvID ?>" />
+                <textarea class="Input" id="quickpost" class="required" name="body" cols="90" rows="10" onkeyup="resize('quickpost');"></textarea> <br />
+                <div id="preview" class="box vertical_space body hidden"></div>
+                <div id="buttons" class="center">
+                    <input class="Button" type="button" value="Preview" onclick="Quick_Preview();" />
+                    <input class="Button" type="submit" value="<?= Lang::get('inbox', 'send_message') ?>" />
+                </div>
+            </div>
+        </form>
+    <?
+    }
+    ?>
+    <div class="Form-row">
+        <form class="manage_form Form-row" name="messages" action="inbox.php" method="post">
+            <input type="hidden" name="action" value="takeedit" />
+            <input type="hidden" name="convid" value="<?= $ConvID ?>" />
+            <input type="hidden" name="auth" value="<?= $LoggedUser['AuthKey'] ?>" />
+
+            <div class="label">
+                <input type="checkbox" id="sticky" name="sticky" <? if ($Sticky) {
+                                                                        echo ' checked="checked"';
+                                                                    } ?> />
+                <label for="sticky"><?= Lang::get('inbox', 'sticky') ?></label>
+            </div>
+            <div class="label">
+                <input type="checkbox" id="mark_unread" name="mark_unread" />
+                <label for="mark_unread"><?= Lang::get('inbox', 'mark_as_unread') ?></label>
+            </div>
+            <div class="label">
+                <input type="checkbox" id="delete" name="delete" />
+                <label for="delete"><?= Lang::get('inbox', 'delete_conversation') ?></label>
+            </div>
+            <div class="center" colspan="6"><input class="Button" type="submit" value="Manage conversation" /></div>
+        </form>
+        <?
+        $DB->query("
+	SELECT SupportFor
+	FROM users_info
+	WHERE UserID = " . $LoggedUser['ID']);
+        list($FLS) = $DB->next_record();
+        if ((check_perms('users_mod') || $FLS != '') && (!$ForwardedID || $ForwardedID == $LoggedUser['ID'])) {
+        ?>
+            <form class="Box send_form Form-row" name="forward" action="inbox.php" method="post">
+                <div class="Box-body">
+                    <input type="hidden" name="action" value="forward" />
+                    <input type="hidden" name="convid" value="<?= $ConvID ?>" />
+                    <input type="hidden" name="auth" value="<?= $LoggedUser['AuthKey'] ?>" />
+                    <label for="receiverid"><?= Lang::get('inbox', 'forward_to') ?></label>
+                    <select class="Input" id="receiverid" name="receiverid">
+                        <?
+                        foreach ($StaffIDs as $StaffID => $StaffName) {
+                            if ($StaffID == $LoggedUser['ID'] || in_array($StaffID, $ReceiverIDs)) {
+                                continue;
+                            }
+                        ?>
+                            <option class="Select-option" value="<?= $StaffID ?>"><?= $StaffName ?></option>
+                        <?
+                        }
+                        ?>
+                    </select>
+                    <input class="Button" type="submit" value="Forward" />
+                </div>
+            </form>
+    </div>
+<?
+        }
+
+        //And we're done!
+?>
+</div>
+<?
+View::show_footer();
+?>

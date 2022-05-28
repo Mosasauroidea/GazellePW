@@ -1,0 +1,83 @@
+<?
+View::show_header(Lang::get('collages', 'new_create'), '', 'PageCollageNew');
+
+if (!check_perms('site_collages_renamepersonal')) {
+    $ChangeJS = " onchange=\"if ( this.options[this.selectedIndex].value == '0') { $('#namebox').ghide(); $('#personal').gshow(); } else { $('#namebox').gshow(); $('#personal').ghide(); }\"";
+}
+
+if (!check_perms('site_collages_renamepersonal') && $Category === '0') {
+    $NoName = true;
+}
+?>
+<div class="LayoutBody">
+    <div class="BodyHeader">
+        <h2 class="BodyHeader-nav"><?= Lang::get('collages', 'collage') ?> </h2>
+    </div>
+    <?
+    if (isset($Err)) { ?>
+        <div class="save_message u-colorWarning"><?= $Err ?></div>
+        <br />
+    <?
+    } ?>
+    <div class="Box">
+        <div class="Box-header"><?= Lang::get('collages', 'selected_collage_category') ?>
+        </div>
+        <div class="Box-body">
+            <?= Lang::get('collages', 'new_note') ?>
+            <ul>
+                <?= Lang::get('collages', 'new_category_note') ?>
+                <?
+                if (($CollageCount < $LoggedUser['Permissions']['MaxCollages']) && check_perms('site_collages_personal')) { ?>
+                    <?= Lang::get('collages', 'new_category_note2') ?>
+                <?  } ?>
+            </ul>
+        </div>
+
+    </div>
+    <form class="create_form" name="collage" action="collages.php" method="post">
+        <input type="hidden" name="action" value="new_handle" />
+        <input type="hidden" name="auth" value="<?= $LoggedUser['AuthKey'] ?>" />
+        <table class="Form-rowList layout" variant="header">
+            <tr class="Form-rowHeader">
+                <td><?= Lang::get('collages', 'create_collages') ?></td>
+            </tr>
+            <tr class="Form-row" id="collagename">
+                <td class="Form-label"><strong><?= Lang::get('collages', 'new_name') ?>:</strong></td>
+                <td class="Form-inputs">
+                    <input class="Input" type="text" <?= $NoName ? ' class="hidden"' : ''; ?> name="name" size="60" id="namebox" value="<?= display_str($Name) ?>" />
+                    <span id="personal" <?= $NoName ? '' : ' class="hidden"'; ?> style="font-style: oblique;"><strong><?= $LoggedUser['Username'] ?><?= Lang::get('collages', 'user_s_personal_collage') ?></strong></span>
+                </td>
+            </tr>
+            <tr class="Form-row">
+                <td class="Form-label"><strong><?= Lang::get('collages', 'new_category') ?>:</strong></td>
+                <td class="Form-inputs">
+                    <select class="Input" name="category" <?= $ChangeJS ?>>
+                        <?
+                        foreach ($CollageCats as $CatID) { ?>
+                            <option class="Select-option" value="<?= $CatID ?>" <?= (($CatID == $Category) ? ' selected="selected"' : '') ?>><?= Lang::get('collages', 'collagecats')[$CatID] ?></option>
+                        <?
+                        }
+                        ?>
+                    </select>
+
+                </td>
+            </tr>
+            <tr class="Form-row">
+                <td class="Form-label"><?= Lang::get('collages', 'new_description') ?>:</td>
+                <td class="Form-inputs">
+                    <textarea class="Input" name="description" id="description" cols="60" rows="10"><?= display_str($Description) ?></textarea>
+                </td>
+            </tr>
+            <tr class="Form-row">
+                <td class="Form-label"><strong><?= Lang::get('collages', 'tags') ?>:</strong></td>
+                <td class="Form-inputs">
+                    <input class="Input" type="text" id="tags" name="tags" size="60" value="<?= display_str($Tags) ?>" />
+                </td>
+            </tr>
+            <tr class="Form-row">
+                <td colspan="2" class="center"><input class="Button" type="submit" value="<?= Lang::get('collages', 'new_create') ?>" /></td>
+            </tr>
+        </table>
+    </form>
+</div>
+<? View::show_footer(); ?>
