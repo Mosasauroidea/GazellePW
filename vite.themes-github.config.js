@@ -11,7 +11,7 @@ export default defineConfig({
     emptyOutDir: false,
     assetsDir: 'app',
     rollupOptions: {
-      input: ['src/css/default/github/style.css'],
+      input: ['src/css/default/github/index.css'],
       output: {
         assetFileNames: 'app/themes/github/[name].[ext]',
       },
