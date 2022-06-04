@@ -38,4 +38,4 @@ Any contributions you make are greatly appreciated!
 - [OMDb API](https://www.omdbapi.com/)
 - [imdbphp](https://github.com/tboothman/imdbphp)
 - [WhatCD/Gazelle](https://github.com/WhatCD/Gazelle)
-- [OPSnet/Gazelle](https://github.com/WhatCD/Gazelle)
+- [OPSnet/Gazelle](https://github.com/OPSnet/Gazelle)
