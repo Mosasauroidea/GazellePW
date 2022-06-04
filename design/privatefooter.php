@@ -18,7 +18,7 @@
 
     $Load = sys_getloadavg();
     ?>
-    <p>Site and design &copy; <?= date('Y') ?> <?= SITE_NAME ?> </p>
+    <p>Site and design &copy; <?= date('Y') ?> <?= SITE_NAME ?> | Powered by <a target="blank" href="https://github.com/Mosasauroidea/GazellePW">GazellePW</a></p>
     <? if (!empty($LastActive)) { ?>
         <p>
             <a href="user.php?action=sessions">
