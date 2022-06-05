@@ -152,9 +152,9 @@ if (!empty($_REQUEST['confirm'])) {
 
             $DB->query("
 				INSERT INTO users_main
-					(Username, Email, PassHash, torrent_pass, IP, PermissionID, Enabled, Invites, Uploaded, ipcc, FLTokens)
+					(Username, Email, PassHash, torrent_pass, IP, PermissionID, Enabled, Invites, Uploaded, ipcc, FLTokens, LastLogin, LastAccess, Title)
 				VALUES
-					('" . db_string(trim($_POST['username'])) . "', '" . db_string($_POST['email']) . "', '" . db_string(Users::make_password_hash($_POST['password'])) . "', '" . db_string($torrent_pass) . "', '" . db_string($_SERVER['REMOTE_ADDR']) . "', '$Class', '$Enabled', '" . STARTING_INVITES . "', '" . STARTING_UPLOAD . "', '$IPcc', '0')");
+					('" . db_string(trim($_POST['username'])) . "', '" . db_string($_POST['email']) . "', '" . db_string(Users::make_password_hash($_POST['password'])) . "', '" . db_string($torrent_pass) . "', '" . db_string($_SERVER['REMOTE_ADDR']) . "', '$Class', '$Enabled', '" . STARTING_INVITES . "', '" . STARTING_UPLOAD . "', '$IPcc', '0', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '')");
 
             $UserID = $DB->inserted_id();
 
@@ -182,9 +182,9 @@ if (!empty($_REQUEST['confirm'])) {
             }
             $DB->query("
 				INSERT INTO users_info
-					(UserID, StyleID, AuthKey, Inviter, JoinDate, AdminComment)
+					(UserID, StyleID, AuthKey, Inviter, JoinDate, AdminComment, Info, Avatar, SiteOptions, Warned, SupportFor, TorrentGrouping, ResetKey, ResetExpires, RatioWatchEnds, BanDate, InfoTitle)
 				VALUES
-					('$UserID', '$StyleID', '" . db_string($AuthKey) . "', '$InviterID', '" . sqltime() . "', '$InviteReason')");
+					('$UserID', '$StyleID', '" . db_string($AuthKey) . "', '$InviterID', '" . sqltime() . "', '$InviteReason', '', '', '', '0000-00-00 00:00:00', '', '0', '', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '')");
 
             $DB->query("
 				INSERT INTO users_history_ips
@@ -226,9 +226,10 @@ if (!empty($_REQUEST['confirm'])) {
                 // Note: This should never happen unless you've transferred from another database, like What.CD did
                 if (!$DB->has_results()) {
                     $DB->query("
-						SELECT MAX(TreeID) + 1
+						SELECT MAX(TreeID)
 						FROM invite_tree");
                     list($TreeID) = $DB->next_record();
+                    $TreeID += 1;
 
                     $DB->query("
 						INSERT INTO invite_tree
