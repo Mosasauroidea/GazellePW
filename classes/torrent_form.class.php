@@ -599,10 +599,8 @@ class TORRENT_FORM {
                         <?
                         }
                         ?>
-                </td>
-            </tr>
-        </div>
-        </td>
+                </div>
+            </td>
         </tr>
         <tr class="Form-row is-section">
             <td class="Form-label"></td>
@@ -703,7 +701,8 @@ class TORRENT_FORM {
                         </select>
                         <input class="Input is-small hidden" type="text" name="codec_other" value="<?= !in_array($TorrentCodec, $this->Codecs) ? $TorrentCodec : '' ?>" />
                     </div>
-                    <span id="codex_warning" class="u-colorWarning"></span>
+                </div>
+                <span id="codex_warning" class="u-colorWarning"></span>
             </td>
         </tr>
         <tr class="Form-row is-specification">
@@ -985,6 +984,7 @@ class TORRENT_FORM {
         ?>
 
         </table>
+        </div>
 <?
                 //  For AJAX requests,
                 //  we don't need to include all scripts, but we do need to include the code
