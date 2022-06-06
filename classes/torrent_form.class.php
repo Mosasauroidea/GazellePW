@@ -960,7 +960,7 @@ class TORRENT_FORM {
                                                                                                                             } ?> />
                             <label class="Checkbox-label" for="self_purchase"><?= Lang::get('upload', 'self_purchase') ?></label>
                         </div>
-                        <div class="Checkbo">
+                        <div class="Checkbox">
                             <input class="Input" type="checkbox" onchange="AlterOriginal()" id="self_rip" name="diy" <? if ($Diy) {
                                                                                                                             echo 'checked="checked" ';
                                                                                                                         } ?> />
