@@ -11,7 +11,7 @@ export default defineConfig({
     emptyOutDir: false,
     assetsDir: 'app',
     rollupOptions: {
-      input: ['src/css/default/default/style.css'],
+      input: ['src/css/default/default/index.css'],
       output: {
         assetFileNames: 'app/themes/default/[name].[ext]',
       },

@@ -11,7 +11,7 @@ export default defineConfig({
     emptyOutDir: false,
     assetsDir: 'app',
     rollupOptions: {
-      input: ['src/css/publicstyle/index.css'],
+      input: ['src/css/publicstyle/style.css'],
       output: {
         assetFileNames: 'app/publicstyle/[name].[ext]',
       },
