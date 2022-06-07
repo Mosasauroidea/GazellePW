@@ -83,7 +83,7 @@ View::show_header(Lang::get('user', 'manage_notifications'), 'jquery.validate,fo
         'Label' => '',
         'Artists' => '',
         'ExcludeVA' => false,
-        'NewGroupsOnly' => true,
+        'NewGroupsOnly' => false,
         'Tags' => '',
         'NotTags' => '',
         'ReleaseTypes' => '',
@@ -393,13 +393,16 @@ View::show_header(Lang::get('user', 'manage_notifications'), 'jquery.validate,fo
                     </td>
                 </tr>
                 <tr class="Form-row">
-                    <td class="Form-label"><?= Lang::get('user', 'only_new_releases') ?>:</td>
+                    <? $NewGroupsOnlyChecked = $N['NewGroupsOnly'] == '1' ? 'checked="checked"' : ''  ?>
+                    <td class="Form-label">
+                        <?= Lang::get('user', 'only_new_releases') ?>:
+                    </td>
                     <td class="Form-inputs">
                         <div class="Checkbox">
-                            <input class="Input" type="checkbox" name="newgroupsonly<?= $i ?>" id="newgroupsonly_<?= $N['ID'] ?>" <? if ($N['NewGroupsOnly'] == '1') {
-                                                                                                                                        echo ' checked="checked"';
-                                                                                                                                    } ?> />
-                            <label class="Checkbox-label" for="newgroupsonly_<?= $N['ID'] ?>"><?= Lang::get('user', 'only_new_releases_label') ?></label>
+                            <input class="Input" type="checkbox" name="newgroupsonly<?= $i ?>" id="newgroupsonly_<?= $N['ID'] ?>" <?= $NewGroupsOnlyChecked  ?> />
+                            <label class="Checkbox-label" for="newgroupsonly_<?= $N['ID'] ?>">
+                                <?= Lang::get('user', 'only_new_releases_label') ?>
+                            </label>
                         </div>
                     </td>
                 </tr>

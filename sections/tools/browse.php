@@ -36,7 +36,7 @@ function create_row($Title, $URL, $HasPermission = false, $Tooltip = false) {
 
 View::show_header(Lang::get('tools', 'staff_tools'), '', 'PageToolHome');
 ?>
-<div class="permissions">
+<div class="Permissions">
     <div class="permission_container">
         <!-- begin left column -->
         <?

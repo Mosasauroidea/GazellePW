@@ -659,7 +659,7 @@ View::show_header($ThreadInfo['Title'] . ' &lt; ' . $Forums[$ForumID]['Name'] . 
                     <td class="TableForumPost-cellBody Table-cell" <? if (!Users::has_avatars_enabled()) {
                                                                         echo ' colspan="2"';
                                                                     } ?>>
-                        <div class="TableForumPostBody HtmlText" id="content<?= $PostID ?>">
+                        <div class="TableForumPostBody" id="content<?= $PostID ?>">
                             <div class="TableForumPostBody-text HtmlText PostArticle">
                                 <? if ($ThreadInfo['hiddenreplies'] == 1 && $Key != 0) { ?>
                                     <div class="TableForumPostBody-hiddenReply">(<?= Lang::get('forums', 'only_starter') ?>)</div>

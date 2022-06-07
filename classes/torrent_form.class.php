@@ -599,391 +599,391 @@ class TORRENT_FORM {
                         <?
                         }
                         ?>
-                </div>
-            </td>
-        </tr>
-        <tr class="Form-row is-section">
-            <td class="Form-label"></td>
-            <td class="Form-items">
-                <div>
-                    <strong class="how_to_toggle_container">[<a href="javascript:void(0);" onclick="$('#torrent_info_how_to_blockquote').new_toggle();"><strong class="how_to_toggle"><?= Lang::get('upload', 'torrent_info_how_to_toggle') ?></strong></a>]</strong>
-                </div>
-                <div class="FormUpload-explain" id="torrent_info_how_to_blockquote" style="display: none">
-                    <?= Lang::get('upload', 'torrent_info_how_to_blockquote') ?>
-                </div>
-            </td>
-        </tr>
-        <tr class="Form-row is-specification">
-            <td class="Form-label"><?= Lang::get('upload', 'movie_source') ?><span class="u-colorWarning">*</span>:</td>
-            <td class="Form-items Form-errorContainer">
-                <div class="Form-inputs">
-                    <div class="SelectInput">
-                        <select class="Input" id="source" name="source">
-                            <option class="Select-option" value=""><?= Lang::get('upload', 'auto_detect') ?></option>
-                            <?
-                            $SourceOther = null;
-                            if (!in_array($TorrentSource, $this->Sources)) {
-                                $SourceOther = $TorrentSource;
-                            }
-                            foreach (Misc::display_array($this->Sources) as $Source) {
-                                echo "\t\t\t\t\t\t<option value=\"$Source\"";
-                                if ($Source == $TorrentSource) {
-                                    echo ' selected="selected"';
-                                } else if ($Source == 'Other' && $SourceOther) {
-                                    echo ' selected="selected"';
-                                }
-                                echo ">$Source</option>\n";
-                                // <option class="Select-option" value="$Source" selected="selected">$Source</option>
-                            }
-                            ?>
-                        </select>
-                        <input class="Input is-small hidden" type="text" name="source_other" value="<?= !in_array($TorrentSource, $this->Sources) ? $TorrentSource : '' ?>" />
-                    </div>
-                </div>
-                <span id="source_warning" class="u-colorWarning"></span>
-            </td>
-        </tr>
-        <tr class="Form-row is-specification <?= $this->NewTorrent || in_array($TorrentSource, ['HDTV', 'WEB', "TV"]) ? 'hidden' : '' ?> " id="processing-container">
-            <td class="Form-label"><?= Lang::get('upload', 'movie_processing') ?><span class="u-colorWarning">*</span>:</td>
-            <td class="Form-items Form-errorContainer">
-                <div class="Form-inputs">
-                    <select class="Input" id="processing" name="processing">
-                        <?
-                        $SelectedProcessing = $TorrentProcessing;
-                        if ($TorrentProcessing && !in_array($TorrentProcessing, $this->Processings)) {
-                            $SelectedProcessing = 'Untouched';
-                        }
-
-                        foreach (Misc::display_array($this->Processings) as $Processing) {
-                            echo "\t\t\t\t\t\t<option value=\"$Processing\"";
-                            if ($Processing == $SelectedProcessing) {
-                                echo ' selected="selected"';
-                            }
-                            echo ">$Processing</option>\n";
-                        }
-                        ?>
-                    </select>
-                    <select class="Input <?= in_array($TorrentSource, ['Blu-ray', 'DVD']) && $SelectedProcessing == 'Untouched' ? '' : 'hidden' ?>" name="processing_other">
-                        <option class="Select-Option" value=''><?= Lang::get('upload', 'auto_detect') ?></option>
-                        <option class="Select-Option bd <?= $TorrentSource == 'Blu-ray' ? '' : 'hidden' ?>" value='BD25' <?= $TorrentProcessing == 'BD25' ? 'selected="selected"' : '' ?>>BD25</option>
-                        <option class="Select-Option bd <?= $TorrentSource == 'Blu-ray' ? '' : 'hidden' ?>" value='BD50' <?= $TorrentProcessing == 'BD50' ? 'selected="selected"' : '' ?>>BD50</option>
-                        <option class="Select-Option bd <?= $TorrentSource == 'Blu-ray' ? '' : 'hidden' ?>" value='BD66' <?= $TorrentProcessing == 'BD66' ? 'selected="selected"' : '' ?>>BD66</option>
-                        <option class="Select-Option bd <?= $TorrentSource == 'Blu-ray' ? '' : 'hidden' ?>" value='BD100' <?= $TorrentProcessing == 'BD100' ? 'selected="selected"' : '' ?>>BD100</option>
-                        <option class="Select-Option dvd <?= $TorrentSource == 'DVD' ? '' : 'hidden' ?>" value='DVD5' <?= $TorrentProcessing == 'DVD5' ? 'selected="selected"' : '' ?>>DVD5</option>
-                        <option class="Select-Option dvd <?= $TorrentSource == 'DVD' ? '' : 'hidden' ?>" value='DVD9' <?= $TorrentProcessing == 'DVD9' ? 'selected="selected"' : '' ?>>DVD9</option>
-                    </select>
-                </div>
-            </td>
-        </tr>
-
-        <tr class="Form-row is-specification">
-            <td class="Form-label"><?= Lang::get('upload', 'movie_codec') ?><span class="u-colorWarning">*</span>:</td>
-            <td class="Form-items Form-errorContainer">
-                <div class="Form-inputs">
-                    <div class="SelectInput">
-                        <select class="Input" id="codec" name="codec">
-                            <option value=''><?= Lang::get('upload', 'auto_detect') ?></option>
-                            <?
-                            $CodecOther = null;
-                            if (!in_array($TorrentCodec, $this->Codecs)) {
-                                $CodecOther = $TorrentCodec;
-                            }
-                            foreach (Misc::display_array($this->Codecs) as $Codec) {
-                                echo "\t\t\t\t\t\t<option value=\"$Codec\"";
-                                if ($Codec == $TorrentCodec) {
-                                    echo ' selected="selected"';
-                                } else if ($Codec == 'Other' && $CodecOther) {
-                                    echo ' selected="selected"';
-                                }
-                                echo ">$Codec</option>\n";
-                            }
-                            ?>
-                        </select>
-                        <input class="Input is-small hidden" type="text" name="codec_other" value="<?= !in_array($TorrentCodec, $this->Codecs) ? $TorrentCodec : '' ?>" />
-                    </div>
-                </div>
-                <span id="codex_warning" class="u-colorWarning"></span>
-            </td>
-        </tr>
-        <tr class="Form-row is-specification">
-            <td class="Form-label"><?= Lang::get('upload', 'movie_resolution') ?><span class="u-colorWarning">*</span>:</td>
-            <td class="Form-items Form-errorContainer">
-                <div class="Form-inputs">
-                    <div class="SelectInput">
-                        <select class="Input" id="resolution" name="resolution">
-                            <option class="Select-option" value=""><?= Lang::get('upload', 'auto_detect') ?></option>
-                            <?
-                            $resolution = $TorrentResolution;
-                            $resolution_width = '';
-                            $resolution_height = '';
-                            if ($resolution && !in_array($resolution, $this->Resolutions)) {
-                                $resolution = "Other";
-                                list($resolution_width, $resolution_height) = explode('&times;', $Torrent['Resolution']);
-                            }
-                            foreach (Misc::display_array($this->Resolutions) as $Resolution) {
-                                echo "\t\t\t\t\t\t<option value=\"$Resolution\"";
-                                if ($Resolution == $resolution) {
-                                    echo ' selected="selected"';
-                                }
-                                echo ">$Resolution</option>\n";
-                                // <option class="Select-option" value="$Resolution" selected="selected">$Resolution</option>
-                            }
-                            ?>
-                        </select>
-                        <span class="hidden">
-                            <input class="Input is-small" type="number" id="resolution_width" name="resolution_width" value="<?= $resolution_width ?>">
-                            <span>×</span>
-                            <input class="Input is-small" type="number" id="resolution_height" name="resolution_height" , value="<?= $resolution_height ?>">
-                        </span>
-                    </div>
-                </div>
-                <span id="resolution_warning" class="u-colorWarning"></span>
-            </td>
-        </tr>
-        <tr class="Form-row">
-            <td class="Form-label"><?= Lang::get('upload', 'movie_container') ?><span class="u-colorWarning">*</span>:</td>
-            <td class="Form-items Form-errorContainer">
-                <div class="Form-inputs">
-                    <div class="SelectInput">
-                        <select class="Input" id="container" name="container">
-                            <option class="Select-option" value=""><?= Lang::get('upload', 'auto_detect') ?></option>
-                            <?
-                            $ContainerOther = null;
-                            if (!in_array($TorrentContainer, $this->Containers)) {
-                                $ContainerOther = $TorrentContainer;
-                            }
-                            foreach (Misc::display_array($this->Containers) as $Container) {
-                                echo "\t\t\t\t\t\t<option value=\"$Container\"";
-                                if ($Container == $TorrentContainer) {
-                                    echo ' selected="selected"';
-                                } else if ($Container == 'Other' && $ContainerOther) {
-                                    echo ' selected="selected"';
-                                }
-                                echo ">$Container</option>\n";
-                                // <option class="Select-option" value="$Container" selected="selected">$Container</option>
-                            }
-                            ?>
-                        </select>
-                        <input class="Input hidden" type="text" name="container_other" value="<?= !in_array($TorrentContainer, $this->Containers) ? $TorrentContainer : '' ?>" />
-                    </div>
-                </div>
-                <span id="container_warning" class="u-colorWarning"></span>
-            </td>
-        </tr>
-        <?
-                if (check_perms("users_mod") && !$this->NewTorrent) {
-        ?>
-            <tr class="Form-row">
-                <td class="Form-label"><?= Lang::get('upload', 'staff_note') ?>:</td>
-                <td class="Form-items">
-                    <div class="Form-inputs">
-                        <textarea class="Input" name="staff_note" id="staff_note"><?= $Note ?></textarea>
                     </div>
                 </td>
             </tr>
-        <?  } ?>
-        <tr class="Form-row">
-            <td class="Form-label"></td>
-            <td class="Form-items">
-                <div class="FormUpload-mediaInfoActions">
-                    <a id="add-mediainfo" href="#" class="brackets">+</a>
-                    <a id="remove-mediainfo" href="#" class="brackets">&minus;</a>
-                </div>
-            </td>
-        </tr>
-        <tr class="Form-row is-mediainfo" id="mediainfo">
-            <td class="Form-label">MediaInfo/BDInfo<span class="u-colorWarning">*</span>:</td>
-            <td class="Form-items">
-                <? if ($this->NewTorrent) {
-                    $GroupClass = "group1";
-                } else {
-                    $GroupClass = "group0";
-                } ?>
-                <?
-                if ($MediaInfos) {
-                    foreach ($MediaInfos as $MediaInfo) {
-                ?>
+            <tr class="Form-row is-section">
+                <td class="Form-label"></td>
+                <td class="Form-items">
+                    <div>
+                        <strong class="how_to_toggle_container">[<a href="javascript:void(0);" onclick="$('#torrent_info_how_to_blockquote').new_toggle();"><strong class="how_to_toggle"><?= Lang::get('upload', 'torrent_info_how_to_toggle') ?></strong></a>]</strong>
+                    </div>
+                    <div class="FormUpload-explain" id="torrent_info_how_to_blockquote" style="display: none">
+                        <?= Lang::get('upload', 'torrent_info_how_to_blockquote') ?>
+                    </div>
+                </td>
+            </tr>
+            <tr class="Form-row is-specification">
+                <td class="Form-label"><?= Lang::get('upload', 'movie_source') ?><span class="u-colorWarning">*</span>:</td>
+                <td class="Form-items Form-errorContainer">
+                    <div class="Form-inputs">
+                        <div class="SelectInput">
+                            <select class="Input" id="source" name="source">
+                                <option class="Select-option" value=""><?= Lang::get('upload', 'auto_detect') ?></option>
+                                <?
+                                $SourceOther = null;
+                                if (!in_array($TorrentSource, $this->Sources)) {
+                                    $SourceOther = $TorrentSource;
+                                }
+                                foreach (Misc::display_array($this->Sources) as $Source) {
+                                    echo "\t\t\t\t\t\t<option value=\"$Source\"";
+                                    if ($Source == $TorrentSource) {
+                                        echo ' selected="selected"';
+                                    } else if ($Source == 'Other' && $SourceOther) {
+                                        echo ' selected="selected"';
+                                    }
+                                    echo ">$Source</option>\n";
+                                    // <option class="Select-option" value="$Source" selected="selected">$Source</option>
+                                }
+                                ?>
+                            </select>
+                            <input class="Input is-small hidden" type="text" name="source_other" value="<?= !in_array($TorrentSource, $this->Sources) ? $TorrentSource : '' ?>" />
+                        </div>
+                    </div>
+                    <span id="source_warning" class="u-colorWarning"></span>
+                </td>
+            </tr>
+            <tr class="Form-row is-specification <?= $this->NewTorrent || in_array($TorrentSource, ['HDTV', 'WEB', "TV"]) ? 'hidden' : '' ?> " id="processing-container">
+                <td class="Form-label"><?= Lang::get('upload', 'movie_processing') ?><span class="u-colorWarning">*</span>:</td>
+                <td class="Form-items Form-errorContainer">
+                    <div class="Form-inputs">
+                        <select class="Input" id="processing" name="processing">
+                            <?
+                            $SelectedProcessing = $TorrentProcessing;
+                            if ($TorrentProcessing && !in_array($TorrentProcessing, $this->Processings)) {
+                                $SelectedProcessing = 'Untouched';
+                            }
+
+                            foreach (Misc::display_array($this->Processings) as $Processing) {
+                                echo "\t\t\t\t\t\t<option value=\"$Processing\"";
+                                if ($Processing == $SelectedProcessing) {
+                                    echo ' selected="selected"';
+                                }
+                                echo ">$Processing</option>\n";
+                            }
+                            ?>
+                        </select>
+                        <select class="Input <?= in_array($TorrentSource, ['Blu-ray', 'DVD']) && $SelectedProcessing == 'Untouched' ? '' : 'hidden' ?>" name="processing_other">
+                            <option class="Select-Option" value=''><?= Lang::get('upload', 'auto_detect') ?></option>
+                            <option class="Select-Option bd <?= $TorrentSource == 'Blu-ray' ? '' : 'hidden' ?>" value='BD25' <?= $TorrentProcessing == 'BD25' ? 'selected="selected"' : '' ?>>BD25</option>
+                            <option class="Select-Option bd <?= $TorrentSource == 'Blu-ray' ? '' : 'hidden' ?>" value='BD50' <?= $TorrentProcessing == 'BD50' ? 'selected="selected"' : '' ?>>BD50</option>
+                            <option class="Select-Option bd <?= $TorrentSource == 'Blu-ray' ? '' : 'hidden' ?>" value='BD66' <?= $TorrentProcessing == 'BD66' ? 'selected="selected"' : '' ?>>BD66</option>
+                            <option class="Select-Option bd <?= $TorrentSource == 'Blu-ray' ? '' : 'hidden' ?>" value='BD100' <?= $TorrentProcessing == 'BD100' ? 'selected="selected"' : '' ?>>BD100</option>
+                            <option class="Select-Option dvd <?= $TorrentSource == 'DVD' ? '' : 'hidden' ?>" value='DVD5' <?= $TorrentProcessing == 'DVD5' ? 'selected="selected"' : '' ?>>DVD5</option>
+                            <option class="Select-Option dvd <?= $TorrentSource == 'DVD' ? '' : 'hidden' ?>" value='DVD9' <?= $TorrentProcessing == 'DVD9' ? 'selected="selected"' : '' ?>>DVD9</option>
+                        </select>
+                    </div>
+                </td>
+            </tr>
+
+            <tr class="Form-row is-specification">
+                <td class="Form-label"><?= Lang::get('upload', 'movie_codec') ?><span class="u-colorWarning">*</span>:</td>
+                <td class="Form-items Form-errorContainer">
+                    <div class="Form-inputs">
+                        <div class="SelectInput">
+                            <select class="Input" id="codec" name="codec">
+                                <option value=''><?= Lang::get('upload', 'auto_detect') ?></option>
+                                <?
+                                $CodecOther = null;
+                                if (!in_array($TorrentCodec, $this->Codecs)) {
+                                    $CodecOther = $TorrentCodec;
+                                }
+                                foreach (Misc::display_array($this->Codecs) as $Codec) {
+                                    echo "\t\t\t\t\t\t<option value=\"$Codec\"";
+                                    if ($Codec == $TorrentCodec) {
+                                        echo ' selected="selected"';
+                                    } else if ($Codec == 'Other' && $CodecOther) {
+                                        echo ' selected="selected"';
+                                    }
+                                    echo ">$Codec</option>\n";
+                                }
+                                ?>
+                            </select>
+                            <input class="Input is-small hidden" type="text" name="codec_other" value="<?= !in_array($TorrentCodec, $this->Codecs) ? $TorrentCodec : '' ?>" />
+                        </div>
+                    </div>
+                    <span id="codex_warning" class="u-colorWarning"></span>
+                </td>
+            </tr>
+            <tr class="Form-row is-specification">
+                <td class="Form-label"><?= Lang::get('upload', 'movie_resolution') ?><span class="u-colorWarning">*</span>:</td>
+                <td class="Form-items Form-errorContainer">
+                    <div class="Form-inputs">
+                        <div class="SelectInput">
+                            <select class="Input" id="resolution" name="resolution">
+                                <option class="Select-option" value=""><?= Lang::get('upload', 'auto_detect') ?></option>
+                                <?
+                                $resolution = $TorrentResolution;
+                                $resolution_width = '';
+                                $resolution_height = '';
+                                if ($resolution && !in_array($resolution, $this->Resolutions)) {
+                                    $resolution = "Other";
+                                    list($resolution_width, $resolution_height) = explode('&times;', $Torrent['Resolution']);
+                                }
+                                foreach (Misc::display_array($this->Resolutions) as $Resolution) {
+                                    echo "\t\t\t\t\t\t<option value=\"$Resolution\"";
+                                    if ($Resolution == $resolution) {
+                                        echo ' selected="selected"';
+                                    }
+                                    echo ">$Resolution</option>\n";
+                                    // <option class="Select-option" value="$Resolution" selected="selected">$Resolution</option>
+                                }
+                                ?>
+                            </select>
+                            <span class="hidden">
+                                <input class="Input is-small" type="number" id="resolution_width" name="resolution_width" value="<?= $resolution_width ?>">
+                                <span>×</span>
+                                <input class="Input is-small" type="number" id="resolution_height" name="resolution_height" , value="<?= $resolution_height ?>">
+                            </span>
+                        </div>
+                    </div>
+                    <span id="resolution_warning" class="u-colorWarning"></span>
+                </td>
+            </tr>
+            <tr class="Form-row">
+                <td class="Form-label"><?= Lang::get('upload', 'movie_container') ?><span class="u-colorWarning">*</span>:</td>
+                <td class="Form-items Form-errorContainer">
+                    <div class="Form-inputs">
+                        <div class="SelectInput">
+                            <select class="Input" id="container" name="container">
+                                <option class="Select-option" value=""><?= Lang::get('upload', 'auto_detect') ?></option>
+                                <?
+                                $ContainerOther = null;
+                                if (!in_array($TorrentContainer, $this->Containers)) {
+                                    $ContainerOther = $TorrentContainer;
+                                }
+                                foreach (Misc::display_array($this->Containers) as $Container) {
+                                    echo "\t\t\t\t\t\t<option value=\"$Container\"";
+                                    if ($Container == $TorrentContainer) {
+                                        echo ' selected="selected"';
+                                    } else if ($Container == 'Other' && $ContainerOther) {
+                                        echo ' selected="selected"';
+                                    }
+                                    echo ">$Container</option>\n";
+                                    // <option class="Select-option" value="$Container" selected="selected">$Container</option>
+                                }
+                                ?>
+                            </select>
+                            <input class="Input hidden" type="text" name="container_other" value="<?= !in_array($TorrentContainer, $this->Containers) ? $TorrentContainer : '' ?>" />
+                        </div>
+                    </div>
+                    <span id="container_warning" class="u-colorWarning"></span>
+                </td>
+            </tr>
+            <?
+                if (check_perms("users_mod") && !$this->NewTorrent) {
+            ?>
+                <tr class="Form-row">
+                    <td class="Form-label"><?= Lang::get('upload', 'staff_note') ?>:</td>
+                    <td class="Form-items">
+                        <div class="Form-inputs">
+                            <textarea class="Input" name="staff_note" id="staff_note"><?= $Note ?></textarea>
+                        </div>
+                    </td>
+                </tr>
+            <?  } ?>
+            <tr class="Form-row">
+                <td class="Form-label"></td>
+                <td class="Form-items">
+                    <div class="FormUpload-mediaInfoActions">
+                        <a id="add-mediainfo" href="#" class="brackets">+</a>
+                        <a id="remove-mediainfo" href="#" class="brackets">&minus;</a>
+                    </div>
+                </td>
+            </tr>
+            <tr class="Form-row is-mediainfo" id="mediainfo">
+                <td class="Form-label">MediaInfo/BDInfo<span class="u-colorWarning">*</span>:</td>
+                <td class="Form-items">
+                    <? if ($this->NewTorrent) {
+                        $GroupClass = "group1";
+                    } else {
+                        $GroupClass = "group0";
+                    } ?>
+                    <?
+                    if ($MediaInfos) {
+                        foreach ($MediaInfos as $MediaInfo) {
+                    ?>
+                            <div class="Form-errorContainer">
+                                <div class="hidden">
+                                    <div class="BBCodePreview-html <?= $GroupClass ?>"></div>
+                                </div>
+                                <div>
+                                    <textarea class="Input BBCodePreview-text <?= $GroupClass ?>" name="mediainfo[]" data-type="mediainfo" placeholder="<?= Lang::get('upload', 'mediainfo_bdinfo_placeholder') ?>"><?= $MediaInfo ?></textarea>
+                                </div>
+                            </div>
+                            <p class="upload_form_note"><?= Lang::get('upload', 'mediainfo_bdinfo_note') ?></p>
+                        <?
+                        }
+                    } else {
+                        ?>
                         <div class="Form-errorContainer">
                             <div class="hidden">
                                 <div class="BBCodePreview-html <?= $GroupClass ?>"></div>
                             </div>
                             <div>
-                                <textarea class="Input BBCodePreview-text <?= $GroupClass ?>" name="mediainfo[]" data-type="mediainfo" placeholder="<?= Lang::get('upload', 'mediainfo_bdinfo_placeholder') ?>"><?= $MediaInfo ?></textarea>
+                                <textarea class="Input BBCodePreview-text <?= $GroupClass ?>" name="mediainfo[]" data-type="mediainfo" placeholder="<?= Lang::get('upload', 'mediainfo_bdinfo_placeholder') ?>"></textarea>
                             </div>
                         </div>
-                        <p class="upload_form_note"><?= Lang::get('upload', 'mediainfo_bdinfo_note') ?></p>
                     <?
                     }
-                } else {
                     ?>
-                    <div class="Form-errorContainer">
-                        <div class="hidden">
-                            <div class="BBCodePreview-html <?= $GroupClass ?>"></div>
-                        </div>
-                        <div>
-                            <textarea class="Input BBCodePreview-text <?= $GroupClass ?>" name="mediainfo[]" data-type="mediainfo" placeholder="<?= Lang::get('upload', 'mediainfo_bdinfo_placeholder') ?>"></textarea>
-                        </div>
-                    </div>
-                <?
-                }
-                ?>
-            </td>
-        </tr>
+                </td>
+            </tr>
 
-        <tr class="Form-row is-description" id="description-container">
-            <td class="Form-label"><?= Lang::get('upload', 'movie_torrent_description') ?><span class="u-colorWarning">*</span>:</td>
-            <td class="Form-items">
-                <div class="Form-errorContainer Form-vstack">
-                    <?php new TEXTAREA_PREVIEW('release_desc', 'release_desc', display_str($TorrentDescription), 60, 8, true, true, false); ?>
-                </div>
-            </td>
-        </tr>
-        <tr class="Form-row is-text">
-            <td class="Form-label">
-                <?= Lang::get('upload', 'movie_subtitles') ?><span class="u-colorWarning">*</span>:
-            </td>
-            <td class="Form-items">
-                <div id="subtitles_container" class="Form-errorContainer">
-                    <div id="type_of_subtitles" class="RadioGroup">
-                        <div class="Radio">
-                            <input class="Input" type="radio" id="mixed_subtitles" name="subtitle_type" data-value="mixed-sub" value="1" <?= $SubtitleType == 1 ? 'checked' : '' ?>>
-                            <label class="Radio-label" for="mixed_subtitles"><?= Lang::get('upload', 'mixed_subtitles') ?></label>
-                        </div>
-                        <div class="Ratio">
-                            <input class="Input" type="radio" id="hardcoded_subtitles" name="subtitle_type" value="2" data-value="hardcoded-sub" <?= $SubtitleType == 2 ? 'checked' : '' ?>>
-                            <label class="Radio-label" for="hardcoded_subtitles"><?= Lang::get('upload', 'hardcode_sub') ?></label>
-                        </div>
-                        <div class="Radio">
-                            <input class="Input" type="radio" id="no_subtitles" name="subtitle_type" value="3" data-value="no-sub" <?= $SubtitleType == 3 ? 'checked' : '' ?>>
-                            <label class="Radio-label" for="no_subtitles"><?= Lang::get('upload', 'no_subtitles') ?></label>
-                        </div>
+            <tr class="Form-row is-description" id="description-container">
+                <td class="Form-label"><?= Lang::get('upload', 'movie_torrent_description') ?><span class="u-colorWarning">*</span>:</td>
+                <td class="Form-items">
+                    <div class="Form-errorContainer Form-vstack">
+                        <?php new TEXTAREA_PREVIEW('release_desc', 'release_desc', display_str($TorrentDescription), 60, 8, true, true, false); ?>
                     </div>
-                    <div id="other_subtitles" class="<?= in_array($SubtitleType, [1, 2]) ? '' : 'hidden' ?>">
-                        <div class="FormUpload-flags">
-                            <?
-                            function genSubcheckboxes($Labels, $Subtitles) {
-                                for ($i = 0; $i < count($Labels); $i++) {
-                                    echo '<div class="Checkbox">
+                </td>
+            </tr>
+            <tr class="Form-row is-text">
+                <td class="Form-label">
+                    <?= Lang::get('upload', 'movie_subtitles') ?><span class="u-colorWarning">*</span>:
+                </td>
+                <td class="Form-items">
+                    <div id="subtitles_container" class="Form-errorContainer">
+                        <div id="type_of_subtitles" class="RadioGroup">
+                            <div class="Radio">
+                                <input class="Input" type="radio" id="mixed_subtitles" name="subtitle_type" data-value="mixed-sub" value="1" <?= $SubtitleType == 1 ? 'checked' : '' ?>>
+                                <label class="Radio-label" for="mixed_subtitles"><?= Lang::get('upload', 'mixed_subtitles') ?></label>
+                            </div>
+                            <div class="Ratio">
+                                <input class="Input" type="radio" id="hardcoded_subtitles" name="subtitle_type" value="2" data-value="hardcoded-sub" <?= $SubtitleType == 2 ? 'checked' : '' ?>>
+                                <label class="Radio-label" for="hardcoded_subtitles"><?= Lang::get('upload', 'hardcode_sub') ?></label>
+                            </div>
+                            <div class="Radio">
+                                <input class="Input" type="radio" id="no_subtitles" name="subtitle_type" value="3" data-value="no-sub" <?= $SubtitleType == 3 ? 'checked' : '' ?>>
+                                <label class="Radio-label" for="no_subtitles"><?= Lang::get('upload', 'no_subtitles') ?></label>
+                            </div>
+                        </div>
+                        <div id="other_subtitles" class="<?= in_array($SubtitleType, [1, 2]) ? '' : 'hidden' ?>">
+                            <div class="FormUpload-flags">
+                                <?
+                                function genSubcheckboxes($Labels, $Subtitles) {
+                                    for ($i = 0; $i < count($Labels); $i++) {
+                                        echo '<div class="Checkbox">
                                         <input class="Input" type="checkbox" id="' . $Labels[$i] . '" name="subtitles[]" value="' . $Labels[$i] . '"' . (strpos($Subtitles, $Labels[$i]) === false ? "" : "checked=\"checked\"") . '>
                                         <label class="Checkbox-label" for="' . $Labels[$i] . '">' .
-                                        icon("flag/$Labels[$i]") .  Lang::get('upload', $Labels[$i]) . '
+                                            icon("flag/$Labels[$i]") .  Lang::get('upload', $Labels[$i]) . '
                                         </label>
                                     </div>';
+                                    }
                                 }
-                            }
-                            $Labels = ['chinese_simplified', 'chinese_traditional', 'english', 'japanese', 'korean'];
-                            genSubcheckboxes($Labels,  $Subtitles);
-                            ?>
+                                $Labels = ['chinese_simplified', 'chinese_traditional', 'english', 'japanese', 'korean'];
+                                genSubcheckboxes($Labels,  $Subtitles);
+                                ?>
 
-                            <?
-                            $Labels = ['arabic', 'brazilian_port', 'bulgarian', 'croatian', 'czech', 'danish', 'dutch', 'estonian', 'finnish', 'french', 'german', 'greek', 'hebrew', 'hindi', 'hungarian', 'icelandic', 'indonesian', 'italian', 'latvian', 'lithuanian', 'norwegian', 'persian', 'polish', 'portuguese', 'romanian', 'russian', 'serbian', 'slovak', 'slovenian', 'spanish', 'swedish', 'thai', 'turkish', 'ukrainian', 'vietnamese'];
-                            genSubcheckboxes($Labels,  $Subtitles);
-                            ?>
+                                <?
+                                $Labels = ['arabic', 'brazilian_port', 'bulgarian', 'croatian', 'czech', 'danish', 'dutch', 'estonian', 'finnish', 'french', 'german', 'greek', 'hebrew', 'hindi', 'hungarian', 'icelandic', 'indonesian', 'italian', 'latvian', 'lithuanian', 'norwegian', 'persian', 'polish', 'portuguese', 'romanian', 'russian', 'serbian', 'slovak', 'slovenian', 'spanish', 'swedish', 'thai', 'turkish', 'ukrainian', 'vietnamese'];
+                                genSubcheckboxes($Labels,  $Subtitles);
+                                ?>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <!-- <p class="upload_form_note"><?= Lang::get('upload', 'movie_subtitles_note') ?></p> -->
-            </td>
-        </tr>
-        <?
-                if (!$this->NewTorrent && check_perms('users_mod')) {
-        ?>
-            </td>
-            </tr>
-            <tr class="Form-row">
-                <td class="Form-label"><?= Lang::get('upload', 'custom_trumpable') ?>:</td>
-                <td class="Form-items">
-                    <div class="Form-inputs">
-                        <textarea class="Input" style="min-height: auto;" name="custom_trumpable" id="custom_trumpable" cols="60" rows="1"><?= $CustomTrumpable ?></textarea>
-                    </div>
+                    <!-- <p class="upload_form_note"><?= Lang::get('upload', 'movie_subtitles_note') ?></p> -->
                 </td>
             </tr>
-        <?
+            <?
+                if (!$this->NewTorrent && check_perms('users_mod')) {
+            ?>
+                </td>
+                </tr>
+                <tr class="Form-row">
+                    <td class="Form-label"><?= Lang::get('upload', 'custom_trumpable') ?>:</td>
+                    <td class="Form-items">
+                        <div class="Form-inputs">
+                            <textarea class="Input" style="min-height: auto;" name="custom_trumpable" id="custom_trumpable" cols="60" rows="1"><?= $CustomTrumpable ?></textarea>
+                        </div>
+                    </td>
+                </tr>
+            <?
                 }
                 if ($this->NewTorrent) {
-        ?>
-        <?      } /* if new torrent */ ?>
-        <tr class="Form-row is-text" id="movie_feature_tr">
-            <td class="Form-label"><?= Lang::get('upload', 'movie_feature') ?>:</td>
-            <td class="Form-items">
-                <div class="Form-inputs">
-                    <div class="Checkbox">
-                        <input class="Input" type="checkbox" id="chinese_dubbed" name="chinese_dubbed" <?= $ChineseDubbed ? "checked" : "" ?> />
-                        <label class="Checkbox-label" for="chinese_dubbed"><?= Lang::get('upload', 'chinese_dubbed_label') ?></label>
-                    </div>
-                    <div class="Checkbox">
-                        <input class="Input" type="checkbox" id="special_effects_subtitles" name="special_effects_subtitles" <?= $SpecialSub ? "checked" : "" ?> />
-                        <label class="Checkbox-label" for="special_effects_subtitles"><?= Lang::get('upload', 'special_effects_subtitles_label') ?></label>
-                    </div>
-                </div>
-            </td>
-        </tr>
-        <? if (check_perms("torrents_trumpable")) { ?>
-            <tr class="Form-row" id="trumpable_tr">
-                <td class="Form-label"><?= Lang::get('upload', 'movie_trumpable') ?>:</td>
+            ?>
+            <?      } /* if new torrent */ ?>
+            <tr class="Form-row is-text" id="movie_feature_tr">
+                <td class="Form-label"><?= Lang::get('upload', 'movie_feature') ?>:</td>
                 <td class="Form-items">
                     <div class="Form-inputs">
                         <div class="Checkbox">
-                            <input class="Input" type="checkbox" id="no_sub" name="no_sub" <?= $this->Disabled ?> <?= $NoSub ? "checked" : "" ?> />
-                            <label class="Checkbox-label" for="no_sub"><?= Lang::get('upload', 'no_sub') ?></label>
+                            <input class="Input" type="checkbox" id="chinese_dubbed" name="chinese_dubbed" <?= $ChineseDubbed ? "checked" : "" ?> />
+                            <label class="Checkbox-label" for="chinese_dubbed"><?= Lang::get('upload', 'chinese_dubbed_label') ?></label>
                         </div>
                         <div class="Checkbox">
-                            <input class="Input" type="checkbox" id="hardcode_sub" name="hardcode_sub" <?= $this->Disabled ?> <?= $HardSub ? "checked" : "" ?> />
-                            <label class="Checkbox-label" for="hardcode_sub"><?= Lang::get('upload', 'hardcode_sub') ?></label>
-                        </div>
-                        <div class="Checkbox">
-                            <input class="Input" type="checkbox" id="bad_folders" name="bad_folders" <?= $this->Disabled ?> <?= $BadFolders ? "checked" : "" ?> />
-                            <label class="Checkbox-label" for="bad_folders"><?= Lang::get('upload', 'bad_folders') ?></label>
+                            <input class="Input" type="checkbox" id="special_effects_subtitles" name="special_effects_subtitles" <?= $SpecialSub ? "checked" : "" ?> />
+                            <label class="Checkbox-label" for="special_effects_subtitles"><?= Lang::get('upload', 'special_effects_subtitles_label') ?></label>
                         </div>
                     </div>
                 </td>
             </tr>
-        <?
+            <? if (check_perms("torrents_trumpable")) { ?>
+                <tr class="Form-row" id="trumpable_tr">
+                    <td class="Form-label"><?= Lang::get('upload', 'movie_trumpable') ?>:</td>
+                    <td class="Form-items">
+                        <div class="Form-inputs">
+                            <div class="Checkbox">
+                                <input class="Input" type="checkbox" id="no_sub" name="no_sub" <?= $this->Disabled ?> <?= $NoSub ? "checked" : "" ?> />
+                                <label class="Checkbox-label" for="no_sub"><?= Lang::get('upload', 'no_sub') ?></label>
+                            </div>
+                            <div class="Checkbox">
+                                <input class="Input" type="checkbox" id="hardcode_sub" name="hardcode_sub" <?= $this->Disabled ?> <?= $HardSub ? "checked" : "" ?> />
+                                <label class="Checkbox-label" for="hardcode_sub"><?= Lang::get('upload', 'hardcode_sub') ?></label>
+                            </div>
+                            <div class="Checkbox">
+                                <input class="Input" type="checkbox" id="bad_folders" name="bad_folders" <?= $this->Disabled ?> <?= $BadFolders ? "checked" : "" ?> />
+                                <label class="Checkbox-label" for="bad_folders"><?= Lang::get('upload', 'bad_folders') ?></label>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            <?
                 }
                 if (check_perms('users_mod') || $this->NewTorrent) {
-        ?>
-            <tr class="Form-row">
-                <td class="Form-label"></td>
-                <td class="Form-items">
-                    <div>
-                        <strong class="how_to_toggle_container">[<a href="javascript:void(0);" onclick="$('#marks_how_to_blockquote').new_toggle();"><strong class="how_to_toggle"><?= Lang::get('upload', 'marks_how_to_toggle') ?></strong></a>]</strong>
-                    </div>
-                </td>
-            </tr>
-            <tr class="Form-row" id="marks_tr">
-                <td class="Form-label"><?= Lang::get('upload', 'marks') ?>:</td>
-                <td class="Form-items">
-                    <div class="Form-inputs">
-                        <div class="Checkbox">
-                            <input class="Input" type="checkbox" onchange="AlterOriginal()" id="self_purchase" name="buy" <? if ($Buy) {
+            ?>
+                <tr class="Form-row">
+                    <td class="Form-label"></td>
+                    <td class="Form-items">
+                        <div>
+                            <strong class="how_to_toggle_container">[<a href="javascript:void(0);" onclick="$('#marks_how_to_blockquote').new_toggle();"><strong class="how_to_toggle"><?= Lang::get('upload', 'marks_how_to_toggle') ?></strong></a>]</strong>
+                        </div>
+                    </td>
+                </tr>
+                <tr class="Form-row" id="marks_tr">
+                    <td class="Form-label"><?= Lang::get('upload', 'marks') ?>:</td>
+                    <td class="Form-items">
+                        <div class="Form-inputs">
+                            <div class="Checkbox">
+                                <input class="Input" type="checkbox" onchange="AlterOriginal()" id="self_purchase" name="buy" <? if ($Buy) {
+                                                                                                                                    echo 'checked="checked" ';
+                                                                                                                                } ?> />
+                                <label class="Checkbox-label" for="self_purchase"><?= Lang::get('upload', 'self_purchase') ?></label>
+                            </div>
+                            <div class="Checkbox">
+                                <input class="Input" type="checkbox" onchange="AlterOriginal()" id="self_rip" name="diy" <? if ($Diy) {
                                                                                                                                 echo 'checked="checked" ';
                                                                                                                             } ?> />
-                            <label class="Checkbox-label" for="self_purchase"><?= Lang::get('upload', 'self_purchase') ?></label>
+                                <label class="Checkbox-label" for="self_rip"><?= Lang::get('upload', 'self_rip') ?></label>
+                            </div>
+                            <div class="Checkbox">
+                                <input class="Input" type="checkbox" id="jinzhuan" name="jinzhuan" <? if ($Jinzhuan) {
+                                                                                                        echo 'checked="checked" ';
+                                                                                                    } ?><?= !$Buy && !$Diy && !check_perms("users_mod") ? "disabled" : "" ?> />
+                                <label class="Checkbox-label" for="jinzhuan"><?= Lang::get('upload', 'jinzhuan') ?></label>
+                            </div>
                         </div>
-                        <div class="Checkbox">
-                            <input class="Input" type="checkbox" onchange="AlterOriginal()" id="self_rip" name="diy" <? if ($Diy) {
-                                                                                                                            echo 'checked="checked" ';
-                                                                                                                        } ?> />
-                            <label class="Checkbox-label" for="self_rip"><?= Lang::get('upload', 'self_rip') ?></label>
+                        <div style="padding: 10px 0 0;"><?= Lang::get('upload', 'marks_warning') ?></div>
+                        <div class="FormUpload-explain" id="marks_how_to_blockquote" style="display: none;">
+                            <?= Lang::get('upload', 'marks_how_to_blockquote') ?>
                         </div>
-                        <div class="Checkbox">
-                            <input class="Input" type="checkbox" id="jinzhuan" name="jinzhuan" <? if ($Jinzhuan) {
-                                                                                                    echo 'checked="checked" ';
-                                                                                                } ?><?= !$Buy && !$Diy && !check_perms("users_mod") ? "disabled" : "" ?> />
-                            <label class="Checkbox-label" for="jinzhuan"><?= Lang::get('upload', 'jinzhuan') ?></label>
-                        </div>
-                    </div>
-                    <div style="padding: 10px 0 0;"><?= Lang::get('upload', 'marks_warning') ?></div>
-                    <div class="FormUpload-explain" id="marks_how_to_blockquote" style="display: none;">
-                        <?= Lang::get('upload', 'marks_how_to_blockquote') ?>
-                    </div>
-                </td>
-            </tr>
-        <?
+                    </td>
+                </tr>
+            <?
                 }
-        ?>
+            ?>
 
-        </table>
+            </table>
         </div>
 <?
                 //  For AJAX requests,

@@ -389,6 +389,13 @@ class TorrentSearch {
         if (
             isset($Terms['searchstr'])
             && $Terms['searchstr']
+        ) {
+            // Supports filename 
+            $Terms['searchstr'] = str_replace('.', ' ', $Terms['searchstr']);
+        }
+        if (
+            isset($Terms['searchstr'])
+            && $Terms['searchstr']
             && substr($Terms['searchstr'], 0, 1) != '*'
             && substr($Terms['searchstr'], strlen($Terms['searchstr']) - 1, 1) != '*'
             && strpos($Terms['searchstr'], ' ') === false

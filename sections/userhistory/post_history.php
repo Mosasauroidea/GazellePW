@@ -260,14 +260,14 @@ if ($ShowGrouped) {
                     <?
                     if (!$ShowGrouped) {
                     ?>
-                        <tr class="Table-row">
+                        <tr class="TableForumPost-cellContent Table-row">
                             <? if (Users::has_avatars_enabled()) { ?>
                                 <td class="TableForumPost-cellAvatar Table-cell">
                                     <?= Users::show_avatar($Avatar, $UserID, $Username, $HeavyInfo['DisableAvatars']) ?>
                                 </td>
                             <?  } ?>
                             <td class="TableForumPost-cellBody Table-cell">
-                                <div class="TableForumPostBody HtmlText" id="content<?= $PostID ?>">
+                                <div class="TableForumPostBody" id="content<?= $PostID ?>">
                                     <div class="TableForumPostBody-text HtmlText PostArticle">
                                         <?= Text::full_format($Body) ?>
                                     </div>

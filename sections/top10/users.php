@@ -19,7 +19,6 @@ View::show_header(Lang::get('top10', 'top_10_users'), '', 'PageTop10User');
 
     </div>
     <?
-
     // defaults to 10 (duh)
     $Limit = isset($_GET['limit']) ? intval($_GET['limit']) : 10;
     $Limit = in_array($Limit, array(10, 100, 250)) ? $Limit : 10;
@@ -42,52 +41,55 @@ View::show_header(Lang::get('top10', 'top_10_users'), '', 'PageTop10User');
 		or Downloaded>'" . 5 * 1024 * 1024 * 1024 . "')
 	GROUP BY u.ID";
 
-    if ($Details == 'all' || $Details == 'ul') {
-        if (!$TopUserUploads = $Cache->get_value('topuser_ul_' . $Limit)) {
-            $DB->query("$BaseQuery ORDER BY u.Uploaded DESC LIMIT $Limit;");
-            $TopUserUploads = $DB->to_array();
-            $Cache->cache_value('topuser_ul_' . $Limit, $TopUserUploads, 3600 * 12);
-        }
-        generate_user_table(Lang::get('top10', 'uploaders'), 'ul', $TopUserUploads, $Limit);
-    }
-
-    if ($Details == 'all' || $Details == 'dl') {
-        if (!$TopUserDownloads = $Cache->get_value('topuser_dl_' . $Limit)) {
-            $DB->query("$BaseQuery ORDER BY u.Downloaded DESC LIMIT $Limit;");
-            $TopUserDownloads = $DB->to_array();
-            $Cache->cache_value('topuser_dl_' . $Limit, $TopUserDownloads, 3600 * 12);
-        }
-        generate_user_table(Lang::get('top10', 'downloaders'), 'dl', $TopUserDownloads, $Limit);
-    }
-
+    /* upload count */
     if ($Details == 'all' || $Details == 'numul') {
-        if (!$TopUserNumUploads = $Cache->get_value('topuser_numul_' . $Limit)) {
+        if (!$TopUserNumUploads = $Cache->get_value('topuser_numul')) {
             $DB->query("$BaseQuery ORDER BY NumUploads DESC LIMIT $Limit;");
             $TopUserNumUploads = $DB->to_array();
-            $Cache->cache_value('topuser_numul_' . $Limit, $TopUserNumUploads, 3600 * 12);
+            $Cache->cache_value('topuser_numul' . $Limit, $TopUserNumUploads, 3600 * 12);
         }
         generate_user_table(Lang::get('top10', 'torrents_uploaded'), 'numul', $TopUserNumUploads, $Limit);
     }
 
+    /* upload size */
+    if ($Details == 'all' || $Details == 'ul') {
+        if (!$TopUserUploads = $Cache->get_value('topuser_ul')) {
+            $DB->query("$BaseQuery ORDER BY u.Uploaded DESC LIMIT 250;");
+            $TopUserUploads = $DB->to_array();
+            $Cache->cache_value('topuser_ul', $TopUserUploads, 3600 * 12);
+        }
+        generate_user_table(Lang::get('top10', 'uploaders'), 'ul', $TopUserUploads, $Limit);
+    }
+
+    /* download size */
+    if ($Details == 'all' || $Details == 'dl') {
+        if (!$TopUserDownloads = $Cache->get_value('topuser_dl')) {
+            $DB->query("$BaseQuery ORDER BY u.Downloaded DESC LIMIT $Limit;");
+            $TopUserDownloads = $DB->to_array();
+            $Cache->cache_value('topuser_dl', $TopUserDownloads, 3600 * 12);
+        }
+        generate_user_table(Lang::get('top10', 'downloaders'), 'dl', $TopUserDownloads, $Limit);
+    }
+
+    /* upload speed */
     if ($Details == 'all' || $Details == 'uls') {
-        if (!$TopUserUploadSpeed = $Cache->get_value('topuser_ulspeed_' . $Limit)) {
+        if (!$TopUserUploadSpeed = $Cache->get_value('topuser_ulspeed')) {
             $DB->query("$BaseQuery ORDER BY UpSpeed DESC LIMIT $Limit;");
             $TopUserUploadSpeed = $DB->to_array();
-            $Cache->cache_value('topuser_ulspeed_' . $Limit, $TopUserUploadSpeed, 3600 * 12);
+            $Cache->cache_value('topuser_ulspeed', $TopUserUploadSpeed, 3600 * 12);
         }
         generate_user_table(Lang::get('top10', 'fastest_uploaders'), 'uls', $TopUserUploadSpeed, $Limit);
     }
 
+    /* download speed */
     if ($Details == 'all' || $Details == 'dls') {
-        if (!$TopUserDownloadSpeed = $Cache->get_value('topuser_dlspeed_' . $Limit)) {
+        if (!$TopUserDownloadSpeed = $Cache->get_value('topuser_dlspeed')) {
             $DB->query("$BaseQuery ORDER BY DownSpeed DESC LIMIT $Limit;");
             $TopUserDownloadSpeed = $DB->to_array();
-            $Cache->cache_value('topuser_dlspeed_' . $Limit, $TopUserDownloadSpeed, 3600 * 12);
+            $Cache->cache_value('topuser_dlspeed', $TopUserDownloadSpeed, 3600 * 12);
         }
         generate_user_table(Lang::get('top10', 'fastest_downloaders'), 'dls', $TopUserDownloadSpeed, $Limit);
     }
-
-
 
     echo '</div>';
     View::show_footer();
@@ -95,9 +97,10 @@ View::show_header(Lang::get('top10', 'top_10_users'), '', 'PageTop10User');
 
     // generate a table based on data from most recent query to $DB
     function generate_user_table($Caption, $Tag, $Details, $Limit) {
-        global $Time;
+        $Details = array_slice($Details, 0, $Limit);
     ?>
-        <h3><?= Lang::get('top10', 'top') ?> <?= $Limit . ' ' . $Caption; ?>
+        <h3>
+            <?= Lang::get('top10', 'top') ?> <?= $Limit . ' ' . $Caption; ?>
             <small class="top10_quantity_links">
                 <?
                 switch ($Limit) {
@@ -115,7 +118,7 @@ View::show_header(Lang::get('top10', 'top_10_users'), '', 'PageTop10User');
                         - <span class="brackets"><?= Lang::get('top10', 'top') ?> 10</span>
                         - <a href="top10.php?type=users&amp;limit=100&amp;details=<?= $Tag ?>" class="brackets"><?= Lang::get('top10', 'top') ?> 100</a>
                         - <a href="top10.php?type=users&amp;limit=250&amp;details=<?= $Tag ?>" class="brackets"><?= Lang::get('top10', 'top') ?> 250</a>
-                <?  } ?>
+                <? } ?>
             </small>
         </h3>
         <div class="TableContainer">
@@ -144,7 +147,6 @@ View::show_header(Lang::get('top10', 'top_10_users'), '', 'PageTop10User');
                 $Rank = 0;
                 foreach ($Details as $Detail) {
                     $Rank++;
-                    $Highlight = ($Rank % 2 ? 'a' : 'b');
                     $IsAnonymous = preg_match("/&quot;(uploaded|downloaded|ratio|uploads\+)&quot;/", $Detail['Paranoia']);
                 ?>
                     <tr class="Table-row">
@@ -158,9 +160,7 @@ View::show_header(Lang::get('top10', 'top_10_users'), '', 'PageTop10User');
                         <td class="Table-cell Table-cellRight tooltip" data-tooltip="<?= Lang::get('top10', 'down_speed_is_base_2') ?>"><?= Format::get_size($Detail['DownSpeed']) . '/s' ?></td>
                         <td class="Table-cell Table-cellRight"><?= $IsAnonymous ? '--' : time_diff($Detail['JoinDate']) ?></td>
                     </tr>
-                <?  } ?>
+                <? } ?>
             </table>
         </div>
-    <?
-    }
-    ?>
+    <? } ?>

@@ -209,7 +209,7 @@ CREATE TABLE `artists_alias` (
   KEY `ArtistID` (`ArtistID`,`Name`) USING BTREE,
   KEY `Name` (`Name`),
   KEY `Redirect` (`Redirect`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
 
 
 --

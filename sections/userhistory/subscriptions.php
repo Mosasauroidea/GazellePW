@@ -222,14 +222,14 @@ $Requests = Requests::get_requests($Requests);
                         </td>
                     </tr>
                     <? if (!empty($Result['LastReadBody'])) { /* if a user is subscribed to a topic/comments but hasn't accessed the site ever, LastReadBody will be null - in this case we don't display a post. */ ?>
-                        <tr class="Table-row <?= $ShowCollapsed ? ' hidden' : '' ?>">
+                        <tr class="TableForumPost-cellContent Table-row <?= $ShowCollapsed ? ' hidden' : '' ?>">
                             <? if (Users::has_avatars_enabled()) { ?>
                                 <td class="TableForumPost-cellAvatar Table-cell">
                                     <?= Users::show_avatar($Result['LastReadAvatar'], $Result['LastReadUserID'], $Result['LastReadUsername'], $HeavyInfo['DisableAvatars']) ?>
                                 </td>
                             <?          } ?>
                             <td class="TableForumPost-cellBody Table-cell">
-                                <div class="TableForumPostBody HtmlText">
+                                <div class="TableForumPostBody">
                                     <div class="TableForumPostBody-text HtmlText PostArticle">
                                         <?= Text::full_format($Result['LastReadBody']) ?>
                                     </div>

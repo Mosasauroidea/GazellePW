@@ -2,6 +2,7 @@ import './i18n' /* set window.tranaction, before everything */
 import './bbcode'
 import './tooltipster'
 import './dropdownMenu'
+import './movieInfo'
 import Lightbox from './Lightbox'
 import filterSlot from './filterSlot'
 import toggleTab from './toggleTab'

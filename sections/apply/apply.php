@@ -44,27 +44,27 @@ View::show_header(Lang::get('apply', 'apply'), 'apply,bbcode', 'PageApplyApply')
         <div class="Box ">
             <div class="Box-header"><?= Lang::get('apply', 'open_roles') ?></div>
             <div class="Box-body HtmlText">
-                <ur>
+                <ul>
                     <li><?= Lang::get('apply', 'referral_note') ?></li>
-                    </ul>
-                    <div class="box" id="role_box">
-                        <div class="head"></div>
-                        <div class="pad TableContainer">
-                            <table id="current_applications_table">
-                                <? foreach ($Roles as $title => $info) { ?>
-                                    <tr>
-                                        <td>
-                                            <div class="role_container">
-                                                <h2 class="head"><?= $title ?></h2>
-                                                <div class="HtmlText PostArticle"><?= Text::full_format($info['description']) ?></div>
-                                            </div>
-                                            </br>
-                                        </td>
-                                    </tr>
-                                <?  } /* foreach */ ?>
-                            </table>
-                        </div>
+                </ul>
+                <div class="box" id="role_box">
+                    <div class="head"></div>
+                    <div class="pad TableContainer">
+                        <table id="current_applications_table">
+                            <? foreach ($Roles as $title => $info) { ?>
+                                <tr>
+                                    <td>
+                                        <div class="role_container">
+                                            <h2 class="head"><?= $title ?></h2>
+                                            <div class="HtmlText PostArticle"><?= Text::full_format($info['description']) ?></div>
+                                        </div>
+                                        </br>
+                                    </td>
+                                </tr>
+                            <?  } /* foreach */ ?>
+                        </table>
                     </div>
+                </div>
             </div>
         </div>
     <? } ?>

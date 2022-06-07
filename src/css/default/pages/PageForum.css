@@ -20,10 +20,10 @@
   display: flex;
 }
 .ForumPostReward-cell.is-giver {
-  width: 100px;
+  width: 110px;
 }
 .ForumPostReward-cell.is-bonus {
-  width: 50px;
+  width: 70px;
 }
 
 /* Cleanup */
@@ -121,8 +121,6 @@ form.edit_form      -> 编辑主题
 }
 
 #forums .TableForumPostHeader-like {
-  
-  
   color: var(--global-color-rewardButton);
 }
 

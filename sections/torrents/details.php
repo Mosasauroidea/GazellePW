@@ -1091,32 +1091,5 @@ View::show_header($Title, 'browse,comments,torrent,bbcode,recommend,cover_art,su
         </div>
     </div>
 </div>
-<script>
-    $(document).ready(() => {
-        function isOverflown(ele) {
-            return ele.scrollHeight > ele.clientHeight
-        }
-
-        var synopsisContent = $(".MovieInfo-synopsis").tooltipster('content');
-
-        function synopsisToggle() {
-            if (isOverflown($('.MovieInfo-synopsis > p')[0])) {
-                $('.MovieInfo-synopsis').addClass('overflown')
-                $(".MovieInfo-synopsis").tooltipster('content', synopsisContent);
-            } else {
-                $('.MovieInfo-synopsis').removeClass('overflown')
-                $(".MovieInfo-synopsis").tooltipster('content', null);
-            }
-        }
-
-        synopsisToggle()
-
-        $(window).resize(synopsisToggle)
-
-        $('.MovieInfo-synopsis').click(() => {
-            $('.MovieInfo-synopsis').toggleClass('expand')
-        })
-    });
-</script>
 <?
 View::show_footer();

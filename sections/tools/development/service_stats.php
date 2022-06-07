@@ -27,7 +27,7 @@ View::show_header(Lang::get('tools', 'service_stats'), '', 'PageToolSericeStat')
 <div class="BodyNavLinks">
     <a href="tools.php?action=database_specifics" class="brackets"><?= Lang::get('tools', 'database_specifics') ?></a>
 </div>
-<div class="permissions">
+<div class="Permissions">
     <div class="TableContainer">
         <table class="TablePermission Table">
             <tr class="Table-rowHeader">

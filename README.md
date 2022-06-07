@@ -10,6 +10,8 @@ GazellePW (GazellePosterWall) is a web framework geared towards private BitTorre
 
 ## Features
 
+> [Screenshot](https://raw.githubusercontent.com/Mosasauroidea/GazellePW/main/public/static/stylespreview/full_github.jpg)
+
 - Beautiful and modern UI: Responsive design, Mobile-friendly, BBCode toolbar, All icons in svg format etc
 - Theme: Auto dark/light theme, Create a new theme in one hour, Component-based style
 - Optimization for movie content: Upload auto-fill movie info, Screenshot comparison (supports PixelCompare and SolarCurve), MediaInfo parser, Movie poster wall, Multiple formats and editions, Torrent slot system, Movie search etc
@@ -39,3 +41,4 @@ Any contributions you make are greatly appreciated!
 - [imdbphp](https://github.com/tboothman/imdbphp)
 - [WhatCD/Gazelle](https://github.com/WhatCD/Gazelle)
 - [OPSnet/Gazelle](https://github.com/OPSnet/Gazelle)
+- [EasyCompare](https://github.com/N3xusHD/EasyCompare)

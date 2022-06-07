@@ -337,23 +337,17 @@ View::show_header(Lang::get('torrents', 'header'), 'browse', 'PageTorrentHome');
                         </select>
                     </td>
                 </tr>
-                <tr class="Form-row is-freeTorrent <?= $HideBasic ?>">
+                <tr class="Form-row">
                     <td class="Form-label">
-                        <label for="shows_free"><?= Lang::get('torrents', 'only_shows_free_torrents') ?>:</label>
                     </td>
                     <td class="Form-inputs">
-                        <div class="Checkbox">
+                        <div class="Checkbox is-freeTorrent <?= $HideBasic ?>">
                             <input class="Input" type="checkbox" value="1" name="freetorrent" <? $HideAdvanced ? Format::checked('freetorrent', '1') : '' ?> id="shows_free" />
+                            <label for="shows_free"><?= Lang::get('torrents', 'only_shows_free_torrents') ?></label>
                         </div>
-                    </td>
-                </tr>
-                <tr class="Form-row is-groupResults <?= $HideAdvanced ?>">
-                    <td class="Form-label">
-                        <label for="group_results"><?= Lang::get('torrents', 'group_results') ?>:</label>
-                    </td>
-                    <td class="Form-inputs">
-                        <div class="Checkbox">
+                        <div class="Checkbox is-groupResults">
                             <input class="Input" type="checkbox" value="1" name="group_results" id="group_results" <?= $GroupResults ? ' checked="checked"' : '' ?> />
+                            <label for="group_results"><?= Lang::get('torrents', 'group_results') ?></label>
                         </div>
                     </td>
                 </tr>

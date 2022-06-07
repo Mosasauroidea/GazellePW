@@ -17,7 +17,6 @@ export default function toggleSearchTorrentAdvanced(event, mode) {
       root.querySelector('.is-advancedText').classList.add('u-hidden')
       root.querySelector('.is-advancedLink').classList.remove('u-hidden')
       root.querySelector('.is-inputAction').value = 'basic'
-      root.querySelector('.is-groupResults').classList.add('u-hidden')
       root.querySelector('.is-freeTorrent').classList.remove('u-hidden')
 
       for (const v of root.querySelectorAll('.is-basic')) {
@@ -38,7 +37,6 @@ export default function toggleSearchTorrentAdvanced(event, mode) {
       root.querySelector('.is-basicLink').classList.remove('u-hidden')
       root.querySelector('.is-advancedText').classList.remove('u-hidden')
       root.querySelector('.is-advancedLink').classList.add('u-hidden')
-      root.querySelector('.is-groupResults').classList.remove('u-hidden')
       root.querySelector('.is-freeTorrent').classList.add('u-hidden')
       root.querySelector('.is-inputAction').value = 'advanced'
       for (const v of root.querySelectorAll('.is-basic')) {

@@ -291,16 +291,18 @@ TableTorrent-movieInfo
     createdAt
 */
 .TableTorrent-cellMovieInfoPoster img {
-  transition: transform 0.2s ease;
+  transition: all 0.2s ease;
   transition-delay: 0.2s;
-  z-index: 3000;
+  z-index: var(--global-zIndex-default);
   cursor: pointer;
   border-radius: var(--global-borderRadius);
   position: relative;
 }
 
 .TableTorrent-cellMovieInfoPoster img:hover {
+  z-index: calc(var(--global-zIndex-default) + 1);
   transform: scale(2);
+  transform-origin: 0 0;
 }
 
 .TableTorrent-movieInfoBody {

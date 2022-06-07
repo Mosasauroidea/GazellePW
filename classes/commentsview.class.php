@@ -61,14 +61,14 @@ class CommentsView {
                             </div>
                     </td>
                 </tr>
-                <tr class="Table-row TableForumPost-cellContent">
+                <tr class="TableForumPost-cellContent Table-row">
                     <? if (Users::has_avatars_enabled()) { ?>
                         <td class="TableForumPost-cellAvatar Table-cell">
                             <?= Users::show_avatar($UserInfo['Avatar'], $AuthorID, $UserInfo['Username'], G::$LoggedUser['DisableAvatars']) ?>
                         </td>
                     <?      } ?>
                     <td class="TableForumPost-cellBody Table-cell">
-                        <div class="TableForumPostBody HtmlText" id="content<?= $PostID ?>">
+                        <div class="TableForumPostBody" id="content<?= $PostID ?>">
                             <div class="TableForumPostBody-text HtmlText PostArticle">
                                 <?= Text::full_format($Body) ?>
                             </div>

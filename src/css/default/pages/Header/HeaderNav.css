@@ -8,7 +8,6 @@ HeaderNav
 .HeaderNav {
   order: 4;
   grid-column: 1 / -1;
-  z-index: 3;
   padding: 9px 0;
   justify-items: center;
   border-top: var(--Header-border);
@@ -61,5 +60,4 @@ HeaderNav
   left: 3px;
   right: unset;
   width: 78px;
-  z-index: 3;
 }

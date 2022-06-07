@@ -47,7 +47,7 @@ $Image = $Group['WikiImage'];
 $Body = $Group['WikiBody'];
 $DoubanID = $Group['DoubanID'];
 $Year = $Group['Year'];
-$ReleaseType = $Group['ReleaseYear'];
+$ReleaseType = $Group['ReleaseType'];
 $CategoryID = $Group['CategoryID'];
 
 
@@ -90,11 +90,14 @@ View::show_header(Lang::get('torrents', 'edit_torrent_group'), '', 'PageTorrentE
                 </tr>
                 <tr class="Form-row" variant="">
                     <td class="Form-items">
-                        <div><?= Lang::get('torrents', 'release_type') ?>:
+                        <div>
+                            <?= Lang::get('torrents', 'release_type') ?>:
                             <select class="Input" id="releasetype" name="releasetype">
                                 <? foreach ($ReleaseTypes as $Key) { ?>
-                                    <option class="Select-option" value="<?= $Key ?>" <?= ($Key == $ReleaseType ? ' selected="selected"' : '') ?>><?= Lang::get('torrents', 'release_types')[$Key] ?></option>
-                                <?      } ?>
+                                    <option class="Select-option" value="<?= $Key ?>" <?= ($Key == $ReleaseType ? ' selected="selected"' : '') ?>>
+                                        <?= Lang::get('torrents', 'release_types')[$Key] ?>
+                                    </option>
+                                <? } ?>
                             </select>
                         </div>
                     </td>

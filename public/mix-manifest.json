@@ -1,0 +1,14 @@
+{
+    "/js/global.js": "/js/global.js",
+    "/js/upload/index.js": "/js/upload/index.js",
+    "/js/torrents/index.js": "/js/torrents/index.js",
+    "/js/wiki/index.js": "/js/wiki/index.js",
+    "/js/sitehistory/index.js": "/js/sitehistory/index.js",
+    "/css/gpw_dark_mono/style.css": "/css/gpw_dark_mono/style.css",
+    "/css/global-bundle.css": "/css/global-bundle.css",
+    "/css/gpw_dark_mono/assets/bg.png": "/css/gpw_dark_mono/assets/bg.png",
+    "/css/gpw_dark_mono/assets/loading.svg": "/css/gpw_dark_mono/assets/loading.svg",
+    "/css/gpw_dark_mono/assets/loginlogo.png": "/css/gpw_dark_mono/assets/loginlogo.png",
+    "/js/tooltipster.bundle.min.js": "/js/tooltipster.bundle.min.js",
+    "/js/tooltipster-discovery.min.js": "/js/tooltipster-discovery.min.js"
+}

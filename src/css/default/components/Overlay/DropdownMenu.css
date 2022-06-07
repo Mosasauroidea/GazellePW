@@ -19,7 +19,7 @@ Dropdown is-open
   position: absolute;
   top: 100%;
   right: 10px;
-  z-index: 100;
+  z-index: var(--global-zIndex-default);
   list-style: none;
   padding: 5px 0;
 }

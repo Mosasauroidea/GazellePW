@@ -32,7 +32,7 @@ ScreenshotComparison
   position: fixed;
   inset: 0;
   overflow: auto;
-  z-index: var(--global-zIndex-screenshotComparison);
+  z-index: var(--global-zIndex-default);
   background: var(--ScreenshotComparison-background);
 }
 
@@ -40,7 +40,7 @@ ScreenshotComparison
   position: fixed;
   left: 0;
   right: 0;
-  z-index: calc(var(--global-zIndex-screenshotComparison) + 1);
+  z-index: calc(var(--global-zIndex-default) + 1);
   padding: var(--global-space-default);
 }
 
@@ -89,4 +89,8 @@ ScreenshotComparison
   align-items: center;
   justify-content: center;
   height: 100%;
+}
+
+.ScreenshotComparison img {
+  max-width: inherit; /* override 100% */
 }

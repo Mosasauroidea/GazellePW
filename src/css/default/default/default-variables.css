@@ -227,7 +227,7 @@
   --Progress-value-background: rgba(122, 188, 255, 0.3);
 
   /* End */
-  --global-zIndex-screenshotComparison: 10;
+  --global-zIndex-default: 10;
   --global-zIndex-dialog: 20;
   --global-zIndex-snackbar: 30;
 }

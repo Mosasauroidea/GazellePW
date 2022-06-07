@@ -132,7 +132,7 @@ $PermissionsArray = [
 
 function permissions_form() {
 ?>
-    <div class="permissions">
+    <div class="Permissions">
         <div class="TableContainer permission_container">
             <table class="Table">
                 <tr class="Table-rowHeader">

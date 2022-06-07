@@ -7,7 +7,6 @@ if (!empty($_GET['id']) && is_number($_GET['id'])) { //Visiting article via ID
 } elseif ($_GET['name'] != '') { //Retrieve article ID via alias.
     $ArticleID = Wiki::alias_to_id($_GET['name']);
 }
-
 if ($ArticleID) {
     $Article = Wiki::get_article($ArticleID, false);
 }

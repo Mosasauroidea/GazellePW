@@ -6,6 +6,8 @@
 
 ## 背景
 
+> [截图](https://raw.githubusercontent.com/Mosasauroidea/GazellePW/main/public/static/stylespreview/full_github.jpg)
+
 [WhatCD/Gazelle](https://github.com/WhatCD/Gazelle) 最初诞生于音乐站点，尽管后来 OPSnet 开发组在其基础上做了一些代码重构，也只是为其音乐内容锦上添花。而 Gazelle 的应用不止于此，我们基于 [OPSnet/Gazelle](https://github.com/OPSnet/Gazelle) 的某个版本，进行了大量的功能新增和逻辑优化，使 Gazelle 适用于电影站的建设，我们称其为 GazellePosterWall，而如果想要基于 GazellePW 搭建 TV 甚至是其他类别的站点，相较原版 Gazelle，也会更加容易。
 
 ## 特性
@@ -39,3 +41,4 @@
 - [imdbphp](https://github.com/tboothman/imdbphp)
 - [WhatCD/Gazelle](https://github.com/WhatCD/Gazelle)
 - [OPSnet/Gazelle](https://github.com/OPSnet/Gazelle)
+- [EasyCompare](https://github.com/N3xusHD/EasyCompare)

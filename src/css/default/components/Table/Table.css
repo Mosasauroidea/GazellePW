@@ -42,7 +42,7 @@ TableContainer
 */
 
 .TableContainer {
-  overflow: auto;
+  overflow-y: auto;
 }
 
 .Table {

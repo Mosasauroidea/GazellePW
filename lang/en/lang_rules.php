@@ -476,14 +476,15 @@ $lang_rules = array(
 
     'upload_h40k_note' => "<ul>
 <li id='r4.0.1'><a href='#h4.0'><strong></strong></a> <a href='#r4.0.1'>4.0.1.</a> <strong>Here is a diagram for our slots (special editions are not considered) below. A slot means an empty \"seat\" for a new upload, once was all occupied, the latest upload must trump older torrents or be removed.</strong> <i class=\"u-colorWarning\">Update! 2021-08-06</i>
+<div class='TableContainer'>
 <table class='Table TableRuleSlot'>
 <tr class='Table-rowHeader'>
-   <th class='Table-cell' style='width: 45px'>Content</th>
-   <th class='Table-cell' style='width: 85px'>Slot type</th>
-   <th class='Table-cell' style='width: 160px'>Subtitle requirement</th>
-   <th class='Table-cell'>Codec</th>
-   <th class='Table-cell' style='width: 180px'>Divide by resolution</th>
-   <th class='Table-cell'>Description</th>
+   <th class='Table-cell is-content'>Content</th>
+   <th class='Table-cell is-slot'>Slot type</th>
+   <th class='Table-cell is-subtitle'>Subtitle requirement</th>
+   <th class='Table-cell is-codec'>Codec</th>
+   <th class='Table-cell is-resolution'>Divide by resolution</th>
+   <th class='Table-cell is-description'>Description</th>
 </tr>
 
 <tr class='Table-row'>
@@ -564,6 +565,7 @@ $lang_rules = array(
    <td class='Table-cell'>2160p (1 slot)</td>
 </tr>
 </table>
+</div>
 <li id='r4.0.2'><a href='#h4.0'><strong></strong></a> <a href='#r4.0.2'>4.0.2.</a> <strong>Slot types</strong> are divided by processing, subtitles, and audio tracks. They tell us the type of resources (be convenient for calling and remembering).
     <ul>
         <li id='r4.0.2.1'><a href='#r4.0.2'><strong></strong></a> <a href='#r4.0.2.1'>4.0.2.1.</a> <strong>CN Quality Slot</strong> torrents <strong>MUST</strong>have softcoded Chinese subtitles (simplified and traditional are both allowed). Chinese, Chinese + English, Chinese + Original (original language subtitle, e.g. Japanese) subtitle combinations only enter CN Quality Slots. All other combinations enter EN Quality Slots.

@@ -1,40 +1,40 @@
-#tools .permissions {
+.Permissions {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   grid-template-rows: repeat(3, auto);
   column-gap: var(--global-space-lg);
 }
 @media (max-width: 1000px) {
-  #tools .permissions {
+  .Permissions {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     grid-template-rows: auto;
   }
 }
 @media (max-width: 768px) {
-  #tools .permissions {
+  .Permissions {
     display: block;
   }
 }
 
-#tools .permissions .permission_container {
+.Permissions .permission_container {
   display: flex;
   flex-direction: column;
   gap: var(--global-space-lg);
 }
 
-#tools .permissions .submit_container {
+.Permissions .submit_container {
   grid-column: 1 / 4;
   text-align: center;
 }
 @media (max-width: 1000px) {
-  #tools .permissions .submit_container {
+  .Permissions .submit_container {
     grid-column: 1 / 3;
     text-align: center;
   }
 }
 @media (max-width: 768px) {
-  #tools .permissions .submit_container {
+  .Permissions .submit_container {
     text-align: center;
   }
 }

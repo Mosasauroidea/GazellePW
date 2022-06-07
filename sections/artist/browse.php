@@ -383,7 +383,7 @@ View::show_header(($ChineseName ? '[' . $ChineseName . '] ' : '') . $Name, 'brow
                     <a target="_blank" href="<? echo "https://www.imdb.com/name/" . $IMDBID ?>"><? print_r($IMDBID) ?></a>
                 </span>
             </div>
-            <div class="MovieInfo-synopsis">
+            <div class="MovieInfo-synopsis" data-tooltip="<?= Lang::get('torrents', 'fold_tooltip') ?>">
                 <p><?= $Body ? Text::full_format($Body) : Lang::get('artist', 'empty_introduction_note') ?></p>
             </div>
         </div>

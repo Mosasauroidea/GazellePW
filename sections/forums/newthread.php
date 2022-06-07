@@ -63,7 +63,7 @@ View::show_header('Forums &gt; ' . $Forum['Name'] . ' &gt; New Topic', 'comments
                             </div>
                     </td>
                 </tr>
-                <tr class="Table-row">
+                <tr class="TableForumPost-cellContent Table-row">
                     <? if (Users::has_avatars_enabled()) { ?>
                         <td class="TableForumPost-cellAvatar Table-cell">
                             <?= Users::show_avatar($LoggedUser['Avatar'], $LoggedUser['ID'], $LoggedUser['Username'], $HeavyInfo['DisableAvatars']) ?>

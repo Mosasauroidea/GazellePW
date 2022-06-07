@@ -486,94 +486,96 @@ $lang_rules = array(
 
     'upload_h40k_note' => "<ul>
         <li id='r4.0.1'><a href='#h4.0'><strong></strong></a> <a href='#r4.0.1'>4.0.1.</a> <strong>下面是在无特殊版本的情况下，一部影视作品的完整槽位（种子发布到站点后能占据的空余坑位，一旦占满，后来者就必须针对现有种子发起替代）表：</strong><i class=\"u-colorWarning\">Update! 2021-08-06</i>
-        <table class='Table TableRuleSlot'>
-            <tr class='Table-rowHeader'>
-                <th class='Table-cell' style='width: 45px'>内容</th>
-                <th class='Table-cell' style='width: 85px'>槽位类型</th>
-                <th class='Table-cell' style='width: 160px'>字幕要求</th>
-                <th class='Table-cell'>编码</th>
-                <th class='Table-cell' style='width: 170px'>按清晰度划分</th>
-                <th class='Table-cell'>说明</th>
-            </tr>
+        <div class='TableContainer'>
+            <table class='Table TableRuleSlot'>
+                <tr class='Table-rowHeader'>
+                    <th class='Table-cell is-content'>内容</th>
+                    <th class='Table-cell is-slot'>槽位类型</th>
+                    <th class='Table-cell is-subtitle'>字幕要求</th>
+                    <th class='Table-cell is-codec'>编码</th>
+                    <th class='Table-cell is-resolution'>按清晰度划分</th>
+                    <th class='Table-cell is-description'>说明</th>
+                </tr>
 
-            <tr class='Table-row'>
-                <td class='Table-cell' rowspan='11'>影片主体</td>
-                <td class='Table-cell' rowspan='2'>Encode<br/>中字质量槽</td>
-                <td class='Table-cell' rowspan='2'>必须内封中字<br/>(硬字、外挂不算)</td>
-                <td class='Table-cell'>x264</td>
-                <td class='Table-cell'>SD / 720p / 1080p (3 槽)</td>
-                <td class='Table-cell' rowspan='4'>替代优先级：视频质量佳 > 体积小</td>
-            </tr>
-            <tr class='Table-row'>
-                <td class='Table-cell'>x265</td>
-                <td class='Table-cell'>HDR 1080p / 2160p (2 槽)</td>
-            </tr>
-            <tr class='Table-row'>
-                <td class='Table-cell' rowspan='2'>Encode<br/>英字质量槽</td>
-                <td class='Table-cell' rowspan='2'>必须带英字<br/>(可封可挂，硬字不算)</td>
-                <td class='Table-cell'>x264</td>
-                <td class='Table-cell'>SD / 720p / 1080p (3 槽)</td>
-            </tr>
-            <tr class='Table-row'>
-                <td class='Table-cell'>x265</td>
-                <td class='Table-cell'>HDR 1080p / 2160p (2 槽)</td>
-            </tr>
-            <tr class='Table-row'>
-                <td class='Table-cell' rowspan='2'>Encode<br/>存档槽</td>
-                <td class='Table-cell' rowspan='2'>无要求</td>
-                <td class='Table-cell'>x264</td>
-                <td class='Table-cell'>720p / 1080p (2 槽)</td>
-                <td class='Table-cell' rowspan='2'>替代优先级：同体积更高质量优先，同质量更小体积优先</td>
-            </tr>
-            <tr class='Table-row'>
-                <td class='Table-cell'>x265</td>
-                <td class='Table-cell'>2160p (1 槽)</td>
-            </tr>
-            <tr class='Table-row'>
-                <td class='Table-cell' rowspan='2'>Encode<br/>特色槽</td>
-                <td class='Table-cell' rowspan='2'>必须内封中字或带国配<br/>(硬字、外挂不算)</td>
-                <td class='Table-cell'>x264</td>
-                <td class='Table-cell'>720p / 1080p (2 槽)</td>
-                <td class='Table-cell' rowspan='2'>替代优先级：国配／特效字幕丰富 > 国配／特效字幕质量佳 > 视频质量优<br/>仅限外语片，单独包含特效或国配无法替代另一种</td>
-            </tr>
-            <tr class='Table-row'>
-                <td class='Table-cell'>x265</td>
-                <td class='Table-cell'>2160p (1 槽)</td>
-            </tr>
-            <tr class='Table-row'>
-                <td class='Table-cell'>Remux 槽</td>
-                <td class='Table-cell'>无要求</td>
-                <td class='Table-cell'>-</td>
-                <td class='Table-cell'>720p / 1080p / 2160p (3 槽)</td>
-                <td class='Table-cell'>替代优先级：原盘质量优 > 带内封中</td>
-            </tr>
-            <tr class='Table-row'>
-                <td class='Table-cell'>原盘槽</td>
-                <td class='Table-cell'>无要求</td>
-                <td class='Table-cell'>-</td>
-                <td class='Table-cell'>SD×2 / 720p / 1080p / 2160p (5 槽)</td>
-                <td class='Table-cell'>替代优先级：原盘质量优<br/>蓝光原盘可以 ISO 镜像或文件夹的形式发布</td>
-            </tr>
-            <tr class='Table-row'>
-                <td class='Table-cell'>DIY 原盘槽</td>
-                <td class='Table-cell'>无要求</td>
-                <td class='Table-cell'>-</td>
-                <td class='Table-cell'>1080p / 2160p (2 槽)</td>
-                <td class='Table-cell'>替代优先级：国配／特效字幕更丰富 > 国配／特效字幕质量更佳 > 视频质量更优<br/>仅限外语片，单独包含特效或国配无法替代另一种，可以 ISO 镜像和文件夹的形式发布</td>
-            </tr>
-            <tr class='Table-row'>
-                <td class='Table-cell' rowspan='2'>附加内容</td>
-                <td class='Table-cell' rowspan='2'>Encode<br/>质量槽</td>
-                <td class='Table-cell' rowspan='2'>无要求</td>
-                <td class='Table-cell'>x264</td>
-                <td class='Table-cell'>SD / 720p / 1080p (3 槽)</td>
-                <td class='Table-cell' rowspan='2'>替代优先级：视频质量佳 > 体积小</td>
-            </tr>
-            <tr class='Table-row'>
-                <td class='Table-cell'>x265</td>
-                <td class='Table-cell'>2160p (1 槽)</td>
-            </tr>
-        </table>
+                <tr class='Table-row'>
+                    <td class='Table-cell' rowspan='11'>影片主体</td>
+                    <td class='Table-cell' rowspan='2'>Encode<br/>中字质量槽</td>
+                    <td class='Table-cell' rowspan='2'>必须内封中字<br/>(硬字、外挂不算)</td>
+                    <td class='Table-cell'>x264</td>
+                    <td class='Table-cell'>SD / 720p / 1080p (3 槽)</td>
+                    <td class='Table-cell' rowspan='4'>替代优先级：视频质量佳 > 体积小</td>
+                </tr>
+                <tr class='Table-row'>
+                    <td class='Table-cell'>x265</td>
+                    <td class='Table-cell'>HDR 1080p / 2160p (2 槽)</td>
+                </tr>
+                <tr class='Table-row'>
+                    <td class='Table-cell' rowspan='2'>Encode<br/>英字质量槽</td>
+                    <td class='Table-cell' rowspan='2'>必须带英字<br/>(可封可挂，硬字不算)</td>
+                    <td class='Table-cell'>x264</td>
+                    <td class='Table-cell'>SD / 720p / 1080p (3 槽)</td>
+                </tr>
+                <tr class='Table-row'>
+                    <td class='Table-cell'>x265</td>
+                    <td class='Table-cell'>HDR 1080p / 2160p (2 槽)</td>
+                </tr>
+                <tr class='Table-row'>
+                    <td class='Table-cell' rowspan='2'>Encode<br/>存档槽</td>
+                    <td class='Table-cell' rowspan='2'>无要求</td>
+                    <td class='Table-cell'>x264</td>
+                    <td class='Table-cell'>720p / 1080p (2 槽)</td>
+                    <td class='Table-cell' rowspan='2'>替代优先级：同体积更高质量优先，同质量更小体积优先</td>
+                </tr>
+                <tr class='Table-row'>
+                    <td class='Table-cell'>x265</td>
+                    <td class='Table-cell'>2160p (1 槽)</td>
+                </tr>
+                <tr class='Table-row'>
+                    <td class='Table-cell' rowspan='2'>Encode<br/>特色槽</td>
+                    <td class='Table-cell' rowspan='2'>必须内封中字或带国配<br/>(硬字、外挂不算)</td>
+                    <td class='Table-cell'>x264</td>
+                    <td class='Table-cell'>720p / 1080p (2 槽)</td>
+                    <td class='Table-cell' rowspan='2'>替代优先级：国配／特效字幕丰富 > 国配／特效字幕质量佳 > 视频质量优<br/>仅限外语片，单独包含特效或国配无法替代另一种</td>
+                </tr>
+                <tr class='Table-row'>
+                    <td class='Table-cell'>x265</td>
+                    <td class='Table-cell'>2160p (1 槽)</td>
+                </tr>
+                <tr class='Table-row'>
+                    <td class='Table-cell'>Remux 槽</td>
+                    <td class='Table-cell'>无要求</td>
+                    <td class='Table-cell'>-</td>
+                    <td class='Table-cell'>720p / 1080p / 2160p (3 槽)</td>
+                    <td class='Table-cell'>替代优先级：原盘质量优 > 带内封中</td>
+                </tr>
+                <tr class='Table-row'>
+                    <td class='Table-cell'>原盘槽</td>
+                    <td class='Table-cell'>无要求</td>
+                    <td class='Table-cell'>-</td>
+                    <td class='Table-cell'>SD×2 / 720p / 1080p / 2160p (5 槽)</td>
+                    <td class='Table-cell'>替代优先级：原盘质量优<br/>蓝光原盘可以 ISO 镜像或文件夹的形式发布</td>
+                </tr>
+                <tr class='Table-row'>
+                    <td class='Table-cell'>DIY 原盘槽</td>
+                    <td class='Table-cell'>无要求</td>
+                    <td class='Table-cell'>-</td>
+                    <td class='Table-cell'>1080p / 2160p (2 槽)</td>
+                    <td class='Table-cell'>替代优先级：国配／特效字幕更丰富 > 国配／特效字幕质量更佳 > 视频质量更优<br/>仅限外语片，单独包含特效或国配无法替代另一种，可以 ISO 镜像和文件夹的形式发布</td>
+                </tr>
+                <tr class='Table-row'>
+                    <td class='Table-cell' rowspan='2'>附加内容</td>
+                    <td class='Table-cell' rowspan='2'>Encode<br/>质量槽</td>
+                    <td class='Table-cell' rowspan='2'>无要求</td>
+                    <td class='Table-cell'>x264</td>
+                    <td class='Table-cell'>SD / 720p / 1080p (3 槽)</td>
+                    <td class='Table-cell' rowspan='2'>替代优先级：视频质量佳 > 体积小</td>
+                </tr>
+                <tr class='Table-row'>
+                    <td class='Table-cell'>x265</td>
+                    <td class='Table-cell'>2160p (1 槽)</td>
+                </tr>
+            </table>
+        </div>
         <li id='r4.0.2'><a href='#h4.0'><strong></strong></a> <a href='#r4.0.2'>4.0.2.</a> <strong>槽位类型：</strong>指示了该槽位所容纳资源的类型并方便称呼和记忆，依据种子的处理、字幕、音轨情况划分。
             <ul>
                 <li id='r4.0.2.1'><a href='#r4.0.2'><strong></strong></a> <a href='#r4.0.2.1'>4.0.2.1.</a> 进入 <strong>“中字质量槽”</strong> 的种子<strong>必须</strong>内封中字（简繁不限）。可以进入中字槽的字幕组合有：中、中+英、中+原（指原始语言字幕，如日语字幕），这三大类字幕组合的种子只进入中字质量槽。其他所有字幕组合，均进入英字质量槽。

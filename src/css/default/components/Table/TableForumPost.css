@@ -1,4 +1,19 @@
 /*
+<table> TableForumPost
+  <tr>
+    <td>
+      <div> TableForumPostHeader
+        TableForumPostHeader-info
+        TableForumPostHeader-actions
+  <tr> TableForumPost-cellContent
+    <td> TableForumPost-cellAvatar
+    <td> TableForumPost-cellBody
+      <div> TableForumPostBody
+      
+
+
+
+
 Where
 	torrents - show - comment   # classes/commentsview.class.php 
 	forums - post               # forums/thread.php
@@ -45,7 +60,8 @@ Where
 .TableForumPostHeader-info {
   display: flex;
   gap: var(--global-space-sm);
-flex-wrap: wrap;}
+  flex-wrap: wrap;
+}
 
 /* body */
 .TableForumPost-cellBody {
