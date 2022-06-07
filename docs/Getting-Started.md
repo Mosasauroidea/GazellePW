@@ -30,7 +30,7 @@ docker buildx create --use
 docker buildx build --platform linux/amd64 --load -t gpw-web:latest .
 
 # Run Docker
-docker compose -p gazelle up
+docker-compose -p gazelle up
 ```
 
 Now you can access the website through http://localhost:9000
