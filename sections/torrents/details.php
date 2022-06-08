@@ -207,7 +207,7 @@ View::show_header($Title, 'browse,comments,torrent,bbcode,recommend,cover_art,su
         </div>
 
         <div class="MovieInfo-synopsis" data-tooltip="<?= Lang::get('torrents', 'fold_tooltip') ?>">
-            <p>
+            <p class="HtmlText">
                 <? print_r($WikiBody) ?>
             </p>
         </div>
@@ -453,7 +453,7 @@ View::show_header($Title, 'browse,comments,torrent,bbcode,recommend,cover_art,su
                     <div class="SidebarItemArtistAdd SidebarItem Box">
                         <div class="SidebarItem-header Box-header u-hoverToShow-hover">
                             <span><?= Lang::get('torrents', 'add_artist') ?></span>
-                            <a class="u-hoverToShow-hide" onclick="AddArtistField(); return false;" href="#">+</a>
+                            <a class="u-hoverToShow-hide" onclick="globalapp.browseAddArtistField(); return false;" href="#">+</a>
                         </div>
                         <div class="SidebarItem-body Box-body">
                             <form class="FormOneLine FormTorrentAddArtist" name="artists" action="torrents.php" method="post">
@@ -798,7 +798,7 @@ View::show_header($Title, 'browse,comments,torrent,bbcode,recommend,cover_art,su
                                         continue;
                                     }
                                     $SlotTooltip = TorrentSlot::empty_slot_tooltip($MissingSlot);
-                                    $MissSlotNames[] = "<span class='' title='$SlotTooltip'><i>" . Lang::get('torrents', TorrentSlot::slot_option_lang($MissingSlot)) . "</i></span>";
+                                    $MissSlotNames[] = "<span data-tooltip='$SlotTooltip'><i>" . Lang::get('torrents', TorrentSlot::slot_option_lang($MissingSlot)) . "</i></span>";
                                 }
                                 if (count($MissSlotNames) > 0) {
                                 ?>
@@ -943,7 +943,7 @@ View::show_header($Title, 'browse,comments,torrent,bbcode,recommend,cover_art,su
                                 <td class="TableRequest-cellVotes Table-cell TableRequest-cellValue">
                                     <span id="vote_count_<?= $Request['ID'] ?>"><?= count($RequestVotes['Voters']) ?></span>
                                     <? if (check_perms('site_vote')) { ?>
-                                        &nbsp;&nbsp; <a href="javascript:Vote(0, <?= $Request['ID'] ?>)" class="brackets">+</a>
+                                        &nbsp;&nbsp; <a href="javascript:globalapp.requestVote(0, <?= $Request['ID'] ?>)" class="brackets">+</a>
                                     <?          } ?>
                                 </td>
                                 <td class="TableRequest-cellBounty Table-cell TableRequest-cellValue">

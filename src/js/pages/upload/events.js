@@ -20,5 +20,5 @@ document.addEventListener('DOMContentLoaded', () => {
     .addEventListener('click', removeMediaInfoTextarea)
 
   /* Add Format Page: torrent - add format; request - upload request */
-  window.artistsShowMore({ hide: true })
+  globalapp.uploadArtistsShowMore({ hide: true })
 })

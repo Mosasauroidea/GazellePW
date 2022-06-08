@@ -632,7 +632,7 @@ View::show_header($ThreadInfo['Title'] . ' &lt; ' . $Forums[$ForumID]['Name'] . 
                                 ?>
                                 - <span class="TableForumPostHeader-like" id="thumb<?= $PostID ?>" <?= $ThumbCounts[$PostID]['on'] ? 'style="display: none;"' : '' ?>>
                                     <?=
-                                    $LoggedUser['ID'] == $AuthorID ? "<div title=\"" . Lang::get('forums', 'cant_like_yourself') . "\">" . icon("Common/like") . "</div>" : "<a href=\"javascript:void(0);\" onclick=\"thumb($PostID, $AuthorID, 'post')\">" . icon("Common/like") . "</a>"
+                                    $LoggedUser['ID'] == $AuthorID ? "<div data-tooltip=\"" . Lang::get('forums', 'cant_like_yourself') . "\">" . icon("Common/like") . "</div>" : "<a href=\"javascript:void(0);\" onclick=\"thumb($PostID, $AuthorID, 'post')\">" . icon("Common/like") . "</a>"
                                     ?>
                                 </span>
 
@@ -666,19 +666,23 @@ View::show_header($ThreadInfo['Title'] . ' &lt; ' . $Forums[$ForumID]['Name'] . 
                                 <? } ?>
                                 <?= Text::full_format($Body) ?>
                             </div>
-                            <?
-                            if (($ThreadInfo['hiddenreplies'] != 1 || check_perms('forums_see_hidden') || $ThreadInfo['OP'] == $LoggedUser['ID'] && $AuthorID != $LoggedUser['ID']) && $JF_log) {
-                            ?>
-                                <div class=" ForumPostReward">
+                            <? if (($ThreadInfo['hiddenreplies'] != 1 || check_perms('forums_see_hidden') || $ThreadInfo['OP'] == $LoggedUser['ID'] && $AuthorID != $LoggedUser['ID']) && $JF_log) { ?>
+                                <div class="ForumPostReward is-<?= $PostID ?>">
                                     <div class="ForumPostReward-header">
                                         <?= Lang::get('forums', 'bonus_giving') ?>
                                     </div>
-                                    <div class="ForumPostReward-body">
-                                        <div class="ForumPostReward-row is-header">
-                                            <div class="ForumPostReward-cell is-giver"><?= Lang::get('forums', 'bonus_giver') ?></div>
-                                            <div class="ForumPostReward-cell is-bonus"><?= Lang::get('forums', 'bonus') ?></div>
-                                            <div class="ForumPostReward-cell is-comment"><?= Lang::get('forums', 'comments') ?></div>
-                                        </div>
+                                    <table class="ForumPostReward-body">
+                                        <tr class="ForumPostReward-row is-header">
+                                            <td class="ForumPostReward-cell is-giver">
+                                                <?= Lang::get('forums', 'bonus_giver') ?>
+                                            </td>
+                                            <td class="ForumPostReward-cell is-bonus">
+                                                <?= Lang::get('forums', 'bonus') ?>
+                                            </td>
+                                            <td class="ForumPostReward-cell is-comment">
+                                                <?= Lang::get('forums', 'comments') ?>
+                                            </td>
+                                        </tr>
                                         <?
                                         foreach ($JF_log as $k => $val) {
                                             if (is_array($val)) {
@@ -693,34 +697,37 @@ View::show_header($ThreadInfo['Title'] . ' &lt; ' . $Forums[$ForumID]['Name'] . 
                                                         })
                                                     </script>
                                                 <? } ?>
-                                                <? $Class = $k > 2 ? "can_hide_$PostID" : '' ?>
-                                                <div class="ForumPostReward-row <?= $Class ?>">
-                                                    <div class="ForumPostReward-cell is-giver">
+                                                <? $Class = $k > 2 ? "u-hidden" : '' ?>
+                                                <tr class="ForumPostReward-row <?= $Class ?>">
+                                                    <td class="ForumPostReward-cell is-giver">
                                                         <?
                                                         if (check_perms('admin_send_bonus') && $val['Sys']) {
                                                             echo ("<a id=\"delete_link_" . $val['ID'] . "\" href=\"javascript:void(0)\">×</a> ");
                                                         }
-                                                        echo Users::format_username($val['Sentuid'], false, false, false, false, false, $IsDonorForum); ?>
-                                                    </div>
-                                                    <div class="ForumPostReward-cell is-bonus">
+                                                        echo Users::format_username($val['Sentuid'], false, false, false, false, false, $IsDonorForum);
+                                                        ?>
+                                                    </td>
+                                                    <td class="ForumPostReward-cell is-bonus">
                                                         <?= $val['Sentjf'] == 0 ? "" : $val['Sentjf'] ?>
-                                                    </div>
-                                                    <div class="ForumPostReward-cell is-comment" data-tooltip="<?= $val['Comment'] ?>">
+                                                    </td>
+                                                    <td class="ForumPostReward-cell is-comment" data-tooltip="<?= $val['Comment'] ?>">
                                                         <?= $val['Comment'] ?>
-                                                    </div>
-                                                </div>
+                                                    </td>
+                                                </tr>
                                             <? } ?>
                                         <? } ?>
                                         <? if (count($JF_log) > 3) { ?>
-                                            <div class="ForumPostReward-row">
-                                                <div class="ForumPostReward-cell">
-                                                    <a id="show_link_<?= $PostID ?>" href="javascript:$('.can_hide_<?= $PostID ?>').show();$('#show_link_<?= $PostID ?>').hide()">...</a>
-                                                </div>
-                                                <div class="ForumPostReward-cell"></div>
-                                                <div class="ForumPostReward-cell"></div>
-                                            </div>
+                                            <tr class="ForumPostReward-row">
+                                                <td class="ForumPostReward-cell">
+                                                    <a id="show_link_<?= $PostID ?>" href='#' onclick="globalapp.toggleAny(event, '.ForumPostReward.is-<?= $PostID ?> .ForumPostReward-row.u-hidden', { hideSelf: true })">...</a>
+                                                </td>
+                                                <td class="ForumPostReward-cell">
+                                                </td>
+                                                <td class="ForumPostReward-cell">
+                                                </td>
+                                            </tr>
                                         <? } ?>
-                                    </div>
+                                    </table>
                                 </div>
                             <? } ?>
                             <div class="TableForumPostBody-actions">
@@ -863,8 +870,12 @@ View::show_header($ThreadInfo['Title'] . ' &lt; ' . $Forums[$ForumID]['Name'] . 
                     foreach ($Notes as $Note) {
                     ?>
                         <div class="Post Box">
-                            <div class="Post-header Box-header"><?= Users::format_username($Note['AuthorID']) ?> (<?= time_diff($Note['AddedTime'], 2, true, true) ?>)</div>
-                            <div class="Post-body Box-body HtmlText"><?= Text::full_format($Note['Body']) ?></div>
+                            <div class="Post-header Box-header">
+                                <?= Users::format_username($Note['AuthorID']) ?> (<?= time_diff($Note['AddedTime'], 2, true, true) ?>)
+                            </div>
+                            <div class="Post-body Box-body HtmlText">
+                                <?= Text::full_format($Note['Body']) ?>
+                            </div>
                         </div>
                     <?
                     }

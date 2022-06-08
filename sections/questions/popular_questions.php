@@ -54,7 +54,7 @@ View::show_header('Popular Questions', 'questions,bbcode', 'PageQuestionPopular'
                     <?      } ?>
                 </span>
             </div>
-            <div class="pad">
+            <div class="pad HtmlText">
                 <?= Text::full_format($Question['Question']) ?>
             </div>
         </div>

@@ -103,5 +103,8 @@ TableContainer
 .Table .Table-rowHeader .icon {
   width: 16px;
   height: 16px;
-  color: var(--Box-color);
+}
+
+.TableUser {
+  min-width: 600px;
 }

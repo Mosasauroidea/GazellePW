@@ -5,7 +5,7 @@ $RequestTax = REQUEST_TAX;
 
 // Minimum and default amount of upload to remove from the user when they vote.
 // Also change in static/functions/requests.js
-$MinimumVote = 20 * 1024 * 1024;
+$MinimumVote = 100 * 1024 * 1024;
 
 if (!empty($LoggedUser['DisableRequests'])) {
     error('Your request privileges have been removed.');

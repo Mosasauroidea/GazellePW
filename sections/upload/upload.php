@@ -128,12 +128,18 @@ $HideDNU = check_perms('torrents_hide_dnu') && !$NewDNU;
                     ?>
                         <tr class="Table-row">
                             <td class="Table-cell">
-                                <?= Text::full_format($Name) . "\n" ?>
-                                <? if ($TimeDiff < strtotime($Updated)) { ?>
-                                    <strong class="u-colorWarning">(New!)</strong>
-                                <?      } ?>
+                                <div class="HtmlText">
+                                    <?= Text::full_format($Name) . "\n" ?>
+                                    <? if ($TimeDiff < strtotime($Updated)) { ?>
+                                        <strong class="u-colorWarning">(New!)</strong>
+                                    <? } ?>
+                                </div>
                             </td>
-                            <td class="Table-cell"><?= Text::full_format($Comment) ?></td>
+                            <td class="Table-cell">
+                                <div class="HtmlText">
+                                    <?= Text::full_format($Comment) ?>
+                                </div>
+                            </td>
                         </tr>
                     <? } ?>
                 </table>

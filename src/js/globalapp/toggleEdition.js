@@ -14,7 +14,7 @@ u-hidden
 const BUTTON_COLLAPSE = '−'
 const BUTTON_EXPAND = '+'
 
-export default function toggleEdition(event, groupId, editionId) {
+globalapp.toggleEdition = function toggleEdition(event, groupId, editionId) {
   event.preventDefault()
   const target = event.target
   const table = target.closest('.Table')

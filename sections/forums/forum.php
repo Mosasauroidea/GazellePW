@@ -267,7 +267,7 @@ View::show_header(Lang::get('forums', 'forums') . '&gt; ' . $Forums[$ForumID]['N
                                     $DisplayTitle = display_str($Title);
 
                                     ?>
-                                    <a href="forums.php?action=viewthread&amp;threadid=<?= $TopicID ?>" data-title-plain="<?= $DisplayTitle ?>" <?= (strlen($Title) > $TopicLength ? "title='" . $DisplayTitle . "'" : "") ?>><?= display_str(Format::cut_string($Title, $TopicLength, true)) ?></a>
+                                    <a href="forums.php?action=viewthread&amp;threadid=<?= $TopicID ?>" data-title-plain="<?= $DisplayTitle ?>" <?= (strlen($Title) > $TopicLength ? "data-tooltip='" . $DisplayTitle . "'" : "") ?>><?= display_str(Format::cut_string($Title, $TopicLength, true)) ?></a>
                                     <?= $PagesText ?>
                                     <? if (!empty($LastRead[$TopicID])) { ?>
                                         <a class="TableForum-jumpToLastRead " data-tooltip="<?= Lang::get('forums', 'jump_to_last_read') ?>" data-tooltip="<?= $TooltipTheme ?>" href="forums.php?action=viewthread&amp;threadid=<?= $TopicID ?>&amp;page=<?= $LastRead[$TopicID]['Page'] ?>#post<?= $LastRead[$TopicID]['PostID'] ?>">

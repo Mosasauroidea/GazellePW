@@ -173,11 +173,11 @@ if ($Sneaky) {
     <div class="BodyNavLinks">
         <? if ($FilterID) { ?>
             <a href="torrents.php?action=notify<?= ($Sneaky ? "&amp;userid=$UserID" : '') ?>" class="brackets"><?= Lang::get('torrents', 'view_all') ?></a>
-        <?  } elseif (!$Sneaky) { ?>
+        <? } elseif (!$Sneaky) { ?>
             <a href="torrents.php?action=notify_clear&amp;auth=<?= $LoggedUser['AuthKey'] ?>" class="brackets"><?= Lang::get('torrents', 'clear_all_old') ?></a>
-            <a href="#" onclick="clearSelected(); return false;" class="brackets"><?= Lang::get('torrents', 'clear_selected') ?></a>
+            <a class="brackets" href="#" onclick="globalapp.clearSelected(event)"><?= Lang::get('torrents', 'clear_selected') ?></a>
             <a href="torrents.php?action=notify_catchup&amp;auth=<?= $LoggedUser['AuthKey'] ?>" class="brackets"><?= Lang::get('torrents', 'catch_up') ?></a>
-        <?  } ?>
+        <? } ?>
         <a href="user.php?action=notify" class="brackets"><?= Lang::get('torrents', 'edit_filters') ?></a>
     </div>
     <? if ($TorrentCount > NOTIFICATIONS_PER_PAGE) { ?>
@@ -221,10 +221,10 @@ if ($Sneaky) {
             </div>
             <div class="BodyNavLinks notify_filter_links">
                 <? if (!$Sneaky) { ?>
-                    <a href="#" onclick="clearSelected(<?= $FilterID ?>); return false;" class="brackets"><?= Lang::get('torrents', 'clear_selected_in_filter') ?></a>
+                    <a class="brackets" href="#" onclick="globalapp.rssClearSelected(event, <?= $FilterID ?>)"><?= Lang::get('torrents', 'clear_selected_in_filter') ?></a>
                     <a href="torrents.php?action=notify_clear_filter&amp;filterid=<?= $FilterID ?>&amp;auth=<?= $LoggedUser['AuthKey'] ?>" class="brackets"><?= Lang::get('torrents', 'clear_all_old_in_filter') ?></a>
                     <a href="torrents.php?action=notify_catchup_filter&amp;filterid=<?= $FilterID ?>&amp;auth=<?= $LoggedUser['AuthKey'] ?>" class="brackets"><?= Lang::get('torrents', 'mark_all_in_filter_as_read') ?></a>
-                <?      } ?>
+                <? } ?>
             </div>
             <form class="torrent-table" name="torrents" id="notificationform_<?= $FilterID ?>" action="">
                 <?

@@ -612,9 +612,12 @@ class Users {
                     $IconImage = STATIC_SERVER . "common/symbols/donor_{$DonorHeart}.png";
                 }
             }
-            $Str .= "<a target=\"_blank\" href=\"$IconLink\"><img class=\"donor_icon tooltip\" src=\"$IconImage\" title=\"$IconText\" /></a>";
+            $Str .= "<a target=\"_blank\" href=\"$IconLink\"><img class=\"donor_icon\" src=\"$IconImage\" data-tooltip=\"$IconText\" /></a>";
         }
-        if ($IsWarned && $IsEnabled) {
+
+        if ($IsEnabled && $UserInfo['Enabled'] == 2) {
+            $Str .= '<a href="rules.php" data-tooltip="' . Lang::get('user', 'disabled') . '"><i class="disabled_flag" aria-hidden="true">' . icon("User/disabled") . '</i></a>';
+        } else if ($IsWarned && $IsEnabled) {
             if ($UserInfo['Warned'] != '0000-00-00 00:00:00') {
                 $Str .= '<a href="wiki.php?action=article&amp;id=114"'
                     . '><i class="warned-flag" aria-hidden="true" data-tooltip="Warned'
@@ -666,7 +669,6 @@ class Users {
                 }
             }
         }
-        $Str .= ($IsEnabled && $UserInfo['Enabled'] == 2) ? '<a href="rules.php"><i class="disabled_flag" aria-hidden="true">' . icon("User/disabled") . '</i></a>' : '';
 
         if ($Badges) {
             $ClassesDisplay = array();
@@ -689,125 +691,9 @@ class Users {
             $WearOrDisplay = Badges::get_wear_badges($UserID);
             foreach ($WearOrDisplay['Username'] as $BadgeID) {
                 $Badge = Badges::get_badges_by_id($BadgeID);
-                $Str .= "<span class=\"" . ($ProfileBadges ? "user_profile" : "post_username") . "_badges\" title=\"" . Badges::get_text($Badge['Label'], 'badge_name') . "\"><img src=\"" . $Badge['SmallImage'] . "\"></span>";
+                $Str .= "<span class=\"" . ($ProfileBadges ? "user_profile" : "post_username") . "_badges\" data-tooltip=\"" . Badges::get_text($Badge['Label'], 'badge_name') . "\"><img src=\"" . $Badge['SmallImage'] . "\"></span>";
             }
         }
-        if ($Title) {
-            // Image proxy CTs
-            if (check_perms('site_proxy_images') && !empty($UserInfo['Title'])) {
-                $UserInfo['Title'] = preg_replace_callback(
-                    '~src=("?)(http.+?)(["\s>])~',
-                    function ($Matches) {
-                        return 'src=' . $Matches[1] . ImageTools::process($Matches[2]) . $Matches[3];
-                    },
-                    $UserInfo['Title']
-                );
-            }
-
-            if ($UserInfo['Title']) {
-                $Str .= ' <span class="Username-customTitle">(' . $UserInfo['Title'] . ')</span>';
-            }
-        }
-        $Str .= '</span>';
-        return $Str;
-    }
-    public static function format_userinfo($UserID, $Badges = false, $IsWarned = true, $IsEnabled = true, $Class = false, $Title = false, $IsDonorForum = false) {
-        global $Classes;
-        $donation = new Donation();
-
-        // This array is a hack that should be made less retarded, but whatevs
-        //                        PermID => ShortForm
-        $SecondaryClasses = array(
-            '23' => 'FLS', // First Line Support
-            '30' => 'IN', // Interviewer
-            '31' => 'TC', // Torrent Celebrity
-            '32' => 'D', // Designer
-            '33' => 'ST', // Security Team
-            '37' => 'AR', // Archive Team
-            '36' => 'AT', // Alpha Team
-            '38' => 'CT', // Charlie Team
-            '39' => 'DT', // Delta Team
-            '56' => 'TI',
-        );
-
-        if ($UserID == 0) {
-            return 'System';
-        }
-
-        $UserInfo = self::user_info($UserID);
-
-        $Paranoia = $UserInfo['Paranoia'];
-
-        if ($UserInfo['Class'] < $Classes[MOD]['Level']) {
-            $OverrideParanoia = check_perms('users_override_paranoia', $UserInfo['Class']);
-        } else {
-            // Don't override paranoia for mods who don't want to show their donor heart
-            $OverrideParanoia = false;
-        }
-        $ShowDonorIcon = (!in_array('hide_donor_heart', $Paranoia) || $OverrideParanoia);
-
-        if ($IsDonorForum) {
-            list($Prefix, $Suffix, $HasComma) = $donation->titles($UserID);
-            $Username = "$Prefix " . ($HasComma ? ', ' : ' ') . "$Suffix ";
-        }
-        $Str = '<span class="Username">';
-        if ($Title) {
-            $Str .= "<strong><a href=\"user.php?id=$UserID\">$Username</a></strong>";
-        } else {
-            $Str .= "<a href=\"user.php?id=$UserID\">$Username</a>";
-        }
-        $FoundRank = null;
-        if ($Badges) {
-            if ($FoundRank == 0 && $UserInfo['Found'] == 1) {
-                $FoundRank = 1;
-            }
-            if ($ShowDonorIcon && $FoundRank > 0) {
-                $IconLink = '#';
-                $IconImage = 'donor.png';
-                $IconText = '创站元老';
-                $FoundHeart = $FoundRank;
-                $EnabledRewards = $donation->enabledRewards($UserID);
-                $DonorRewards = $donation->rewards($UserID);
-                $DonorHeart = $donation->rank($UserID);
-                if ($EnabledRewards['HasDonorIconMouseOverText'] && !empty($DonorRewards['IconMouseOverText'])) {
-                    $IconText = display_str($DonorRewards['IconMouseOverText']);
-                }
-                if ($EnabledRewards['HasDonorIconLink'] && !empty($DonorRewards['CustomIconLink'])) {
-                    $IconLink = display_str($DonorRewards['CustomIconLink']);
-                }
-                if ($EnabledRewards['HasCustomDonorIcon'] && !empty($DonorRewards['CustomIcon'])) {
-                    $IconImage = ImageTools::process($DonorRewards['CustomIcon'], false, 'donoricon', $UserID);
-                } else {
-                    if ($FoundHeart === 1) {
-                        $IconImage = STATIC_SERVER . 'common/symbols/Found.gif';
-                    } else {
-                        $IconImage = STATIC_SERVER . "common/symbols/donor_{$DonorHeart}.png";
-                    }
-                }
-                $Str .= "<a target=\"_blank\" href=\"$IconLink\"><img class=\"donor_icon tooltip\" src=\"$IconImage\" title=\"$IconText\" /></a>";
-            }
-        }
-
-        $Str .= ($IsEnabled && $UserInfo['Enabled'] == 2) ? '<a href="rules.php"><img src="' . STATIC_SERVER . 'common/symbols/disabled.png" alt="Banned" data-tooltip="Disabled"  /></a>' : '';
-
-        if ($Badges) {
-            $ClassesDisplay = array();
-            foreach (array_intersect_key($SecondaryClasses, $UserInfo['ExtraClasses']) as $PermID => $PermShort) {
-                $ClassesDisplay[] = '<span class="secondary_class" data-tooltip="' . $Classes[$PermID]['Name'] . '">' . $PermShort . '</span>';
-            }
-            if (!empty($ClassesDisplay)) {
-                $Str .= '&nbsp;' . implode('&nbsp;', $ClassesDisplay);
-            }
-        }
-
-        if ($Class) {
-            if ($Title) {
-                $Str .= ' <strong>(' . Users::make_class_string($UserInfo['PermissionID']) . ')</strong>';
-            } else {
-                $Str .= ' (' . Users::make_class_string($UserInfo['PermissionID']) . ')';
-            }
-        }
-
         if ($Title) {
             // Image proxy CTs
             if (check_perms('site_proxy_images') && !empty($UserInfo['Title'])) {

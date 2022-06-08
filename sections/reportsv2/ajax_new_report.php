@@ -235,9 +235,13 @@ $BBName = "[url=torrents.php?torrentid=$TorrentID#TorrentID] $RawName [/url]";
             } ?>
             <tr>
                 <td class="label">User comment:</td>
-                <td colspan="3"><?= Text::full_format($UserComment) ?></td>
+                <td colspan="3">
+                    <div class="HtmlText">
+                        <?= Text::full_format($UserComment) ?>
+                    </div>
+                </td>
             </tr>
-            <?                  /* END REPORTED STUFF :|: BEGIN MOD STUFF */ ?>
+            <? /* END REPORTED STUFF :|: BEGIN MOD STUFF */ ?>
             <tr>
                 <td class="label">Report comment:</td>
                 <td colspan="3">

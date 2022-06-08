@@ -107,7 +107,7 @@ $(function () {
     },
     noteToggle: function () {
       var span = $(
-        '<a href="#" class="brackets tooltip" title="Toggle note">Hide</a>'
+        '<a href="#" class="brackets" data-tooltip="Toggle note">Hide</a>'
       ).click(function (e) {
         e.preventDefault()
         $('#drag_drop_textnote > :first-child').toggle()

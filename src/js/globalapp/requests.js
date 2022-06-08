@@ -1,13 +1,16 @@
-function Vote(amount, requestid) {
+const minimumVote = 100 * 1024 * 1024
+
+globalapp.requestVote = function requestVote(amount, requestid) {
   if (typeof amount == 'undefined') {
     amount = parseInt($('#amount').raw().value)
   }
   if (amount == 0) {
-    amount = 20 * 1024 * 1024
+    amount = minimumVote
   }
 
-  var index
-  var votecount
+  let index
+  let votecount
+  let bounty
   if (!requestid) {
     requestid = $('#requestid').raw().value
     votecount = $('#votecount').raw()
@@ -18,10 +21,10 @@ function Vote(amount, requestid) {
     index = true
   }
 
-  if (amount > 20 * 1024 * 1024) {
-    upload = $('#current_uploaded').raw().value
-    download = $('#current_downloaded').raw().value
-    rr = $('#current_rr').raw().value
+  if (amount > minimumVote) {
+    const upload = $('#current_uploaded').raw().value
+    const download = $('#current_downloaded').raw().value
+    const rr = $('#current_rr').raw().value
     if (amount > 0.3 * (upload - rr * download)) {
       if (
         !confirm(
@@ -42,7 +45,7 @@ function Vote(amount, requestid) {
       amount,
     function (response) {
       if (response == 'bankrupt') {
-        error_message(
+        Snackbar.error(
           'You do not have sufficient upload credit to add ' +
             get_size(amount) +
             ' to this request'
@@ -55,13 +58,13 @@ function Vote(amount, requestid) {
       }
 
       if ($('#total_bounty').results() > 0) {
-        totalBounty = parseInt($('#total_bounty').raw().value)
+        let totalBounty = parseInt($('#total_bounty').raw().value)
         totalBounty += amount * (1 - $('#request_tax').raw().value)
-        var requestTax = $('#request_tax').raw().value
+        const requestTax = $('#request_tax').raw().value
         $('#total_bounty').raw().value = totalBounty
         $('#formatted_bounty').raw().innerHTML = get_size(totalBounty)
         if (requestTax > 0) {
-          save_message(
+          Snackbar.notify(
             'Your vote of ' +
               get_size(amount) +
               ', adding a ' +
@@ -69,22 +72,24 @@ function Vote(amount, requestid) {
               ' bounty, has been added'
           )
         } else {
-          save_message('Your vote of ' + get_size(amount) + ' has been added')
+          Snackbar.notify(
+            'Your vote of ' + get_size(amount) + ' has been added'
+          )
         }
         $('#button').raw().disabled = true
       } else {
-        save_message('Your vote of ' + get_size(amount) + ' has been added')
+        Snackbar.notify('Your vote of ' + get_size(amount) + ' has been added')
       }
     }
   )
 }
 
-function Calculate() {
-  var mul =
+globalapp.requestCalculate = function requestCalculate() {
+  const mul =
     $('#unit').raw().options[$('#unit').raw().selectedIndex].value == 'mb'
       ? 1024 * 1024
       : 1024 * 1024 * 1024
-  var amt = Math.floor($('#amount_box').raw().value * mul)
+  const amt = Math.floor($('#amount_box').raw().value * mul)
   if (amt > $('#current_uploaded').raw().value) {
     $('#new_uploaded').raw().innerHTML = "You can't afford that request!"
     $('#new_bounty').raw().innerHTML = '0.00 MB'
@@ -95,7 +100,7 @@ function Calculate() {
     (window.location.search.indexOf('action=new') != -1 &&
       $('#amount_box').raw().value * mul < 100 * 1024 * 1024) ||
     (window.location.search.indexOf('action=view') != -1 &&
-      $('#amount_box').raw().value * mul < 20 * 1024 * 1024)
+      $('#amount_box').raw().value * mul < minimumVote)
   ) {
     $('#new_uploaded').raw().innerHTML = get_size(
       $('#current_uploaded').raw().value
@@ -122,7 +127,9 @@ function Calculate() {
   }
 }
 
-function AddArtistField(movie = false) {
+globalapp.reqeustAddArtistField = function requestAddArtistField(
+  movie = false
+) {
   var ArtistIDField = document.createElement('input')
   ArtistIDField.type = 'hidden'
   ArtistIDField.id = 'artist_id_' + ArtistCount
@@ -177,7 +184,7 @@ function AddArtistField(movie = false) {
   ArtistCount++
 }
 
-function RemoveArtistField() {
+globalapp.requestRemoveArtistField = function requestRemoveArtistField() {
   if (ArtistCount === 1) {
     return
   }
@@ -185,7 +192,7 @@ function RemoveArtistField() {
   ArtistCount--
 }
 
-function Categories() {
+globalapp.requestCategories = function requestCategories() {
   var cat =
     $('#categories').raw().options[$('#categories').raw().selectedIndex].value
   if (cat == 'Movie') {
@@ -195,7 +202,7 @@ function Categories() {
   }
 }
 
-function add_tag() {
+globalapp.requestAddTag = function requestAddTag() {
   if ($('#tags').raw().value == '') {
     $('#tags').raw().value =
       $('#genre_tags').raw().options[$('#genre_tags').raw().selectedIndex].value
@@ -211,7 +218,7 @@ function add_tag() {
   }
 }
 
-function Toggle(id, disable) {
+globalapp.requestToggle = function reqeustToggle(id, disable) {
   var arr = document.getElementsByName(id + '[]')
   var master = $('#toggle_' + id).raw().checked
   for (var x in arr) {
@@ -222,7 +229,7 @@ function Toggle(id, disable) {
   }
 }
 
-function MovieAutofill() {
+globalapp.reqeustMovieAutofill = function requestMovieAutofill() {
   var imdb = $('#imdb').val().match(/tt\d+/)
   if (imdb) {
     imdb = imdb[0]
@@ -294,7 +301,7 @@ function MovieAutofill() {
           importanceid = '#importance_' + i
           artistimdbid = '#artist_id_' + i
           artist_cname = '#artist_chinese_' + i
-          AddArtistField(true)
+          globalapp.requestAddArtistField(true)
         } else {
           artistid = '#artist'
           importanceid = '#importance'

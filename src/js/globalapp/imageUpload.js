@@ -1,11 +1,14 @@
-export function imgUpload(file = false) {
+globalapp.imgUpload = function imgUpload(file = false) {
   UploadImage(file, (url) => {
     $('#image').val(url)
     $('#uploaded_img').attr('src', url)
   })
 }
 
-export function imgUploadFillBBCode(containerId, loadingTarget) {
+globalapp.imgUploadFillBBCode = function imgUploadFillBBCode(
+  containerId,
+  loadingTarget
+) {
   loadingTarget = document.querySelector(loadingTarget)
   UploadImage(
     false,
@@ -27,7 +30,7 @@ export function imgUploadFillBBCode(containerId, loadingTarget) {
   )
 }
 
-export function imgCopy() {
+globalapp.imgCopy = function imgCopy() {
   if ($('#image').val()) {
     $('#image').select()
     document.execCommand('Copy')
@@ -35,7 +38,7 @@ export function imgCopy() {
   }
 }
 
-async function upload(file, cb, { onBefore, onFinal } = {}) {
+globalapp.upload = async function upload(file, cb, { onBefore, onFinal } = {}) {
   try {
     const formData = new FormData()
     formData.append('file', file)
@@ -57,7 +60,7 @@ async function upload(file, cb, { onBefore, onFinal } = {}) {
   }
 }
 
-export function UploadImage(
+globalapp.UploadImage = function UploadImage(
   file,
   after = (url) => {},
   { onBefore, onFinal } = {}
@@ -85,11 +88,11 @@ export function UploadImage(
   }
 }
 
-export function imgAllowDrop(ev) {
+globalapp.imgAllowDrop = function imgAllowDrop(ev) {
   ev.preventDefault()
 }
 
-export function imgDrop(event) {
+globalapp.imgDrop = function imgDrop(event) {
   event.preventDefault()
   if (event.dataTransfer.files.length) {
     var file = event.dataTransfer.files[0]

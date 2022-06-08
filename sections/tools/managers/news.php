@@ -83,7 +83,9 @@ switch ($_GET['action']) {
                     - <a href="tools.php?action=editnews&amp;id=<?= $NewsID ?>" class="brackets">Edit</a>
                     <a href="tools.php?action=deletenews&amp;id=<?= $NewsID ?>&amp;auth=<?= $LoggedUser['AuthKey'] ?>" class="brackets">Delete</a>
                 </div>
-                <div class="pad"><?= Text::full_format($Body) ?></div>
+                <div class="pad HtmlText">
+                    <?= Text::full_format($Body) ?>
+                </div>
             </div>
         <?
             if (++$Count > ($NewsCount - 1)) {

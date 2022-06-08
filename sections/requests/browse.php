@@ -442,7 +442,7 @@ View::show_header($Title, '', 'PageRequestHome');
                     <tr class="Form-row is-release">
                         <td class="Form-label"><?= Lang::get('requests', 'release_list') ?></td>
                         <td class="Form-inputs">
-                            <input class="Input" type="checkbox" id="toggle_releases" onchange="Toggle('releases', 0);" <?= (!$Submitted || !empty($ReleaseArray) && count($ReleaseArray) === count($ReleaseTypes) ? ' checked="checked"' : '') ?> /> <label for="toggle_releases">All</label>
+                            <input class="Input" type="checkbox" id="toggle_releases" onchange="globalapp.requestToggle('releases', 0);" <?= (!$Submitted || !empty($ReleaseArray) && count($ReleaseArray) === count($ReleaseTypes) ? ' checked="checked"' : '') ?> /> <label for="toggle_releases">All</label>
                             <?
                             foreach ($ReleaseTypes as $Key) {
                             ?>
@@ -459,7 +459,7 @@ View::show_header($Title, '', 'PageRequestHome');
                         <td class="Form-label"><?= Lang::get('requests', 'source_list') ?>:</td>
                         <td class="Form-inputs">
                             <div class="Checkbox">
-                                <input class="Input" type="checkbox" id="toggle_source" onchange="Toggle('sources', 0);" <?= (!$Submitted || !empty($SourceArray) && count($SourceArray) === count($Sources) ? ' checked="checked"' : '') ?> />
+                                <input class="Input" type="checkbox" id="toggle_source" onchange="globalapp.requestToggle('sources', 0);" <?= (!$Submitted || !empty($SourceArray) && count($SourceArray) === count($Sources) ? ' checked="checked"' : '') ?> />
                                 <label class="Checkbox-label" for="toggle_source">All</label>
                             </div>
                             <div class="Checkbox">
@@ -480,7 +480,7 @@ View::show_header($Title, '', 'PageRequestHome');
                         <td class="Form-label"><?= Lang::get('requests', 'codec_list') ?>:</td>
                         <td class="Form-inputs">
                             <div class="Checkbox">
-                                <input class="Input" type="checkbox" id="toggle_codec" onchange="Toggle('codec', 0);" <?= (!$Submitted || !empty($CodecArray) && count($CodecArray) === count($Codecs) ? ' checked="checked"' : '') ?> />
+                                <input class="Input" type="checkbox" id="toggle_codec" onchange="globalapp.requestToggle('codec', 0);" <?= (!$Submitted || !empty($CodecArray) && count($CodecArray) === count($Codecs) ? ' checked="checked"' : '') ?> />
                                 <label class="Checkbox-label" for="toggle_codec">All</label>
                             </div>
                             <div class="Checkbox">
@@ -501,7 +501,7 @@ View::show_header($Title, '', 'PageRequestHome');
                         <td class="Form-label"><?= Lang::get('requests', 'container_list') ?>:</td>
                         <td class="Form-inputs">
                             <div class="Checkbox">
-                                <input class="Input" type="checkbox" id="toggle_container" onchange="Toggle('container', 0);" <?= (!$Submitted || !empty($ContainerArray) && count($ContainerArray) === count($Containers) ? ' checked="checked"' : '') ?> />
+                                <input class="Input" type="checkbox" id="toggle_container" onchange="globalapp.requestToggle('container', 0);" <?= (!$Submitted || !empty($ContainerArray) && count($ContainerArray) === count($Containers) ? ' checked="checked"' : '') ?> />
                                 <label class="Checkbox-label" for="toggle_container">All</label>
                             </div>
                             <div class="Checkbox">
@@ -524,7 +524,7 @@ View::show_header($Title, '', 'PageRequestHome');
                         <td class="Form-label"><?= Lang::get('requests', 'resolution_list') ?>:</td>
                         <td class="Form-inputs">
                             <div class="Checkbox">
-                                <input class="Input" type="checkbox" id="toggle_resolution" onchange="Toggle('resolution', 0);" <?= (!$Submitted || !empty($ResolutionArray) && count($ResolutionArray) === count($Resolutions) ? ' checked="checked"' : '') ?> />
+                                <input class="Input" type="checkbox" id="toggle_resolution" onchange="globalapp.requestToggle('resolution', 0);" <?= (!$Submitted || !empty($ResolutionArray) && count($ResolutionArray) === count($Resolutions) ? ' checked="checked"' : '') ?> />
                                 <label class="Checkbox-label" for="toggle_resolution">All</label>
                             </div>
                             <div class="Checkbox">
@@ -641,7 +641,7 @@ View::show_header($Title, '', 'PageRequestHome');
                             <td class="TableRequest-cellVotes Table-cell">
                                 <span id="vote_count_<?= $RequestID ?>"><?= number_format($VoteCount) ?></span>
                                 <? if (!$IsFilled && check_perms('site_vote')) { ?>
-                                    <a href="javascript:Vote(0, <?= $RequestID ?>)" class="brackets">+</a>
+                                    <a href="javascript:globalapp.requestVote(0, <?= $RequestID ?>)" class="brackets">+</a>
                                 <?      } ?>
                             </td>
                             <td class="TableRequest-cellSize Table-cell">

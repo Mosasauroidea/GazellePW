@@ -7,7 +7,8 @@ function clearItem(torrentId) {
   )
 }
 
-function clearSelected(filterId) {
+globalapp.rssClearSelected = function rssClearSelected(event, filterId) {
+  event.preventDefault()
   var checkBoxes,
     checkedBoxes = []
   if (filterId) {
@@ -28,7 +29,7 @@ function clearSelected(filterId) {
       authkey,
     function () {
       for (var i = checkedBoxes.length - 1; i >= 0; i--) {
-        $('#torrent' + checkedBoxes[i]).remove()
+        $(`.u-tableTorrent-rowTitle[torrent-id=${checkedBoxes[i]}]`).remove()
       }
     }
   )

@@ -12,11 +12,15 @@ function thumb(itemid, userid, type) {
       switch (type) {
         case 'post':
           $('#thumb' + itemid + ',#unthumb' + itemid).toggle()
-          $('#thumbcnt' + itemid).text(data.count == '0' ? '赞' : data.count)
+          $('#thumbcnt' + itemid).text(
+            data.count == '0' ? translation.get('like') : data.count
+          )
           break
         case 'torrent':
           $('#thumb' + itemid + ',#unthumb' + itemid).toggle()
-          $('#thumbcnt' + itemid).text(data.count == '0' ? '赞' : data.count)
+          $('#thumbcnt' + itemid).text(
+            data.count == '0' ? translation.get('like') : data.count
+          )
           break
       }
     },
@@ -37,11 +41,15 @@ function unthumb(itemid, userid, type) {
       switch (type) {
         case 'post':
           $('#thumb' + itemid + ',#unthumb' + itemid).toggle()
-          $('#thumbcnt' + itemid).text(data.count == '0' ? '赞' : data.count)
+          $('#thumbcnt' + itemid).text(
+            data.count == '0' ? translation.get('like') : data.count
+          )
           break
         case 'torrent':
           $('#thumb' + itemid + ',#unthumb' + itemid).toggle()
-          $('#thumbcnt' + itemid).text(data.count == '0' ? '赞' : data.count)
+          $('#thumbcnt' + itemid).text(
+            data.count == '0' ? translation.get('like') : data.count
+          )
           break
       }
     },

@@ -198,17 +198,21 @@ $DB->set_query_id($Reports);
                     </td>
                 </tr>
                 <tr>
-                    <td colspan="2"><?= Text::full_format($Reason) ?></td>
+                    <td colspan="2">
+                        <div class="HtmlText">
+                            <?= Text::full_format($Reason) ?>
+                        </div>
+                    </td>
                 </tr>
                 <tr>
                     <td colspan="2">
                         <? if ($ClaimerID == $LoggedUser['ID']) { ?>
                             <span id="claimed_<?= $ReportID ?>"><?= Lang::get('reports', 'claimed_by_before') ?><?= Users::format_username($ClaimerID, false, false, false, false) ?><?= Lang::get('reports', 'claimed_by_after') ?> <a href="#" onclick="unClaim(<?= $ReportID ?>); return false;" class="brackets"><?= Lang::get('reports', 'unclaim') ?></a></span>
-                        <?                  } elseif ($ClaimerID) { ?>
+                        <? } elseif ($ClaimerID) { ?>
                             <span id="claimed_<?= $ReportID ?>"><?= Lang::get('reports', 'claimed_by_before') ?><?= Users::format_username($ClaimerID, false, false, false, false) ?><?= Lang::get('reports', 'claimed_by_after') ?></span>
-                        <?                  } else { ?>
+                        <? } else { ?>
                             <a href="#" id="claim_<?= $ReportID ?>" onclick="claim(<?= $ReportID ?>); return false;" class="brackets"><?= Lang::get('reports', 'claim') ?></a>
-                        <?                  } ?>
+                        <? } ?>
                         &nbsp;&nbsp;
                         <a href="#" onclick="toggleNotes(<?= $ReportID ?>); return false;" class="brackets"><?= Lang::get('reports', 'toggle_notes') ?></a>
 

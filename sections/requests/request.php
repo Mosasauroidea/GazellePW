@@ -62,7 +62,7 @@ $CanEdit = ($UserCanEdit || $ProjectCanEdit || check_perms('site_moderate_reques
 // Comments (must be loaded before View::show_header so that subscriptions and quote notifications are handled properly)
 list($NumComments, $Page, $Thread, $LastRead) = Comments::load('requests', $RequestID);
 
-View::show_header(Lang::get('requests', 'view_request') . ": $FullName", 'comments,requests,bbcode,subscriptions', 'PageRequestShow');
+View::show_header(Lang::get('requests', 'view_request') . ": $FullName", 'comments,bbcode,subscriptions', 'PageRequestShow');
 
 ?>
 <div class="LayoutBody">
@@ -265,7 +265,7 @@ View::show_header(Lang::get('requests', 'view_request') . ": $FullName", 'commen
                             <div>
                                 <span id="votecount"><?= number_format($VoteCount) ?></span>
                                 <? if ($CanVote) { ?>
-                                    &nbsp;&nbsp;<a href="javascript:Vote(0)" class="brackets"><strong>+</strong></a>
+                                    &nbsp;&nbsp;<a href="javascript:globalapp.requestVote(0)" class="brackets"><strong>+</strong></a>
                                     <strong><?= Lang::get('requests', 'costs') ?> <?= Format::get_size($MinimumVote, 0) ?></strong>
                                 <?  } ?>
                             </div>
@@ -285,12 +285,12 @@ View::show_header(Lang::get('requests', 'view_request') . ": $FullName", 'commen
                                 <?= Lang::get('requests', 'custom_vote') ?></td>
                             <td class="Form-items">
                                 <div class="Form-inputs">
-                                    <input class="Input" type="text" id="amount_box" size="8" onchange="Calculate();" />
-                                    <select class="Input" id="unit" name="unit" onchange="Calculate();">
+                                    <input class="Input" type="text" id="amount_box" size="8" onchange="globalapp.Calculate();" />
+                                    <select class="Input" id="unit" name="unit" onchange="globalapp.Calculate();">
                                         <option class="Select-option" value="mb">MB</option>
                                         <option class="Select-option" value="gb">GB</option>
                                     </select>
-                                    <input class="Button" type="button" value="Preview" onclick="Calculate();" />
+                                    <input class="Button" type="button" value="Preview" onclick="globalapp.Calculate();" />
                                     <?= $RequestTax > 0 ? "<strong>{$RequestTaxPercent}% " . Lang::get('requests', 'system_taxed') : '' ?>
                                 </div>
                             </td>
@@ -310,7 +310,9 @@ View::show_header(Lang::get('requests', 'view_request') . ": $FullName", 'commen
                                     <input type="hidden" id="current_rr" value="<?= (float)$LoggedUser['RequiredRatio'] ?>" />
                                     <input id="total_bounty" type="hidden" value="<?= $RequestVotes['TotalBounty'] ?>" />
                                     <div>
-                                        <?= $RequestTax > 0 ? 'Bounty after tax: <strong><span id="bounty_after_tax">90.00 MB</span></strong><br />' : '' ?><?= Lang::get('requests', 'if_you_add_the_entered') ?>
+                                        <? $Class = $RequestTax > 0 ? '' : 'u-hidden' ?>
+                                        <div class="<?= $Class ?>">Bounty after tax: <strong><span id="bounty_after_tax">90.00 MB</span></strong></div>
+                                        <?= Lang::get('requests', 'if_you_add_the_entered') ?>
                                         <strong><span id="new_bounty">0.00 MB</span></strong>
                                         <?= Lang::get('requests', 'of_bounty_your_new_stats') ?>:
                                     </div>
@@ -319,7 +321,7 @@ View::show_header(Lang::get('requests', 'view_request') . ": $FullName", 'commen
                                     </div>
                                     <div>
                                         <?= Lang::get('requests', 'ratio') ?>: <span id="new_ratio"><?= Format::get_ratio_html($LoggedUser['BytesUploaded'], $LoggedUser['BytesDownloaded']) ?></span>
-                                        <input class="Button" type="button" id="button" value="确认!" disabled="disabled" onclick="Vote();" />
+                                        <input class="Button" type="button" id="button" value="确认!" disabled="disabled" onclick="globalapp.requestVote();" />
                                     </div>
                                 </form>
                             </td>

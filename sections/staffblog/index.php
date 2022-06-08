@@ -182,7 +182,6 @@
             <?  } ?>
         </div>
         </div>
-</div>
-<?
-View::show_footer();
-?>
+        <?
+        View::show_footer();
+        ?>

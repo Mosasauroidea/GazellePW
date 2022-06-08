@@ -60,6 +60,10 @@ cell
   background: var(--TableTorrent-category-background);
 }
 
+.TableTorrent .Table-rowHeader .icon {
+  color: var(--Box-color);
+}
+
 /* cell */
 .TableTorrent .Table-cell:first-child {
   padding-left: var(--global-space-default);

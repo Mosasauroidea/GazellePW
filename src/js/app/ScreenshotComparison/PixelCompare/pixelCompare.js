@@ -13,7 +13,7 @@ export async function active({ context }) {
   } = context
   // Not set loading if active is fast
   const timeout = setTimeout(() => {
-    Snackbar.open({ message: translation.get('screenshot_comparison.loading') })
+    Snackbar.open(translation.get('screenshot_comparison.loading'))
   }, 1e3)
   const img1 = imgRefs[currentRow][0].current
   const img2 = imgRefs[currentRow][currentColumn].current

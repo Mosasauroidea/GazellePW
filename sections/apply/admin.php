@@ -81,11 +81,12 @@ if (isset($_POST['auth'])) {
                                 </tr>
                                 <tr>
                                     <td>
-                                        <div class="HtmlText PostArticle"><?= Text::full_format($info['description']) ?></div>
-                                        </br>
+                                        <div class="HtmlText PostArticle">
+                                            <?= Text::full_format($info['description']) ?>
+                                        </div>
                                     </td>
                                 </tr>
-                            <?      } /* foreach */ ?>
+                            <? } /* foreach */ ?>
                         </table>
                     </div>
                 </div>

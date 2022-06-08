@@ -1,4 +1,4 @@
-public
+public/{app,js}
 vendor
 src/js/forked
 src/css/forked

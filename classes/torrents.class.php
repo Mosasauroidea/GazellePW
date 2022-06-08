@@ -1814,7 +1814,7 @@ WHERE ud.TorrentID=? AND ui.NotifyOnDeleteDownloaded='1' AND ud.UserID NOT IN ({
         if ($SubName) {
             $DisplayName .= " [<a href=\"torrents.php?searchstr=" . $SubName . "\">$SubName</a>] ";
         }
-        $DisplayName .= "<a href=\"torrents.php?id=$GroupID&amp;torrentid=$TorrentID#torrent$TorrentID\" class=\"tooltip\" title=\"" . Lang::get('global', 'view_torrent') . "\" dir=\"ltr\">$GroupName</a>";
+        $DisplayName .= "<a href=\"torrents.php?id=$GroupID&amp;torrentid=$TorrentID#torrent$TorrentID\" data-tooltip=\"" . Lang::get('global', 'view_torrent') . "\" dir=\"ltr\">$GroupName</a>";
         if ($GroupYear) {
             $DisplayName .= " ($GroupYear)";
         }

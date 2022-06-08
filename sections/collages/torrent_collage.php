@@ -154,8 +154,9 @@ View::show_header($Name, 'browse,collage,bbcode,voting,recommend', 'PageCollageT
                 <div class="SidebarItem-header Box-header">
                     <strong><?= Lang::get('collages', 'description') ?></strong>
                 </div>
-                <div class="SidebarItem-body Box-body">
-                    <?= Text::full_format($Description) ?></div>
+                <div class="SidebarItem-body Box-body HtmlText">
+                    <?= Text::full_format($Description) ?>
+                </div>
             </div>
             <div class="SidebarItemStats SidebarItem Box">
                 <div class="SidebarItem-header Box-header">

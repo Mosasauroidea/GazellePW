@@ -26,33 +26,49 @@ function createFunctionInit(attribute) {
   }
 }
 
-$('[data-tooltip]').tooltipster({
-  functionInit: createFunctionInit('data-tooltip'),
-})
+globalapp.tooltipInit = function tooltipInit(target) {
+  $(target)
+    .find('[data-tooltip]')
+    .tooltipster({
+      functionInit: createFunctionInit('data-tooltip'),
+    })
 
-$('[data-tooltip-theme="gold"]').tooltipster({
-  functionInit: createFunctionInit('data-tooltip'),
-  theme: '.tooltipster-default gold_theme',
-})
+  $(target)
+    .find('[data-tooltip-theme="gold"]')
+    .tooltipster({
+      functionInit: createFunctionInit('data-tooltip'),
+      theme: '.tooltipster-default gold_theme',
+    })
 
-$('[data-tooltip-image]').tooltipster({
-  functionInit: createFunctionInit('data-tooltip-image'),
-  fixedWidth: 252,
-})
+  $(target)
+    .find('[data-tooltip-image]')
+    .tooltipster({
+      functionInit: createFunctionInit('data-tooltip-image'),
+      fixedWidth: 252,
+    })
 
-$('[data-tooltip-interactive]').tooltipster({
-  functionInit: createFunctionInit('data-tooltip-interactive'),
-  interactive: true,
-  interactiveTolerance: 500,
-})
+  $(target)
+    .find('[data-tooltip-interactive]')
+    .tooltipster({
+      functionInit: createFunctionInit('data-tooltip-interactive'),
+      interactive: true,
+      interactiveTolerance: 500,
+    })
 
-$('[data-tooltip-html]').tooltipster({
-  functionInit(instance, helper) {
-    const content = helper.origin.querySelector('[data-tooltip-html-content]')
-    content.remove()
-    content.style.display = 'block'
-    instance.content(content)
-  },
-})
+  $(target)
+    .find('[data-tooltip-html]')
+    .tooltipster({
+      functionInit(instance, helper) {
+        const content = helper.origin.querySelector(
+          '[data-tooltip-html-content]'
+        )
+        content.remove()
+        content.style.display = 'block'
+        instance.content(content)
+      },
+    })
 
-$.tooltipster.group('grouped')
+  $.tooltipster.group('grouped')
+}
+
+globalapp.tooltipInit(document)

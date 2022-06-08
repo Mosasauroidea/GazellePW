@@ -136,13 +136,9 @@ View::show_header('Blog', 'bbcode', 'PageBlogHome');
                         <?= Text::full_format($Body) ?>
                     </div>
                 </div>
-            <?php
-            }
-            ?>
+            <? } ?>
         </div>
-    <?
-    }
-    ?>
+    <? } ?>
 </div>
 <?php
 View::show_footer();

@@ -33,7 +33,7 @@ View::show_header('Ask the Staff', 'bbcode', 'PageQuestionAnswer');
                     <?= Users::format_username($Question['UserID']) ?> - <?= time_diff($Question['Date']) ?>
                 </span>
             </div>
-            <div class="pad">
+            <div class="pad HtmlText">
                 <?= Text::full_format($Question['Question']) ?>
             </div>
         </div>

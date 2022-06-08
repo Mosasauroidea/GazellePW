@@ -108,7 +108,9 @@ if ($ConvID = (int)$_GET['id']) {
                             - <a href="#quickpost" onclick="Quote('<?= $MessageID ?>', '<?= $Username ?>');" class="brackets"><?= Lang::get('staffpm', 'quote') ?></a>
                         <?      } ?>
                     </div>
-                    <div class="body "><?= Text::full_format($Message) ?></div>
+                    <div class="body HtmlText">
+                        <?= Text::full_format($Message) ?>
+                    </div>
                 </div>
                 <div align="center" style="display: none;"></div>
             <?

@@ -130,7 +130,7 @@ class TORRENT_FORM {
                             <td class="Form-label"><?= Lang::get('upload', 'type') ?>:</td>
                             <td class="Form-items">
                                 <div class="Form-inputs">
-                                    <select class="Input" id="categories" name="type" onchange="Categories()" <?= $this->Disabled ?>>
+                                    <select class="Input" id="categories" name="type" onchange="globalapp.uploadCategories()" <?= $this->Disabled ?>>
                                         <?
                                         foreach (Misc::display_array($this->Categories) as $Index => $Cat) {
                                             if ($Cat == "Applications") {
@@ -302,9 +302,12 @@ class TORRENT_FORM {
                     <td class="Form-items Form-errorContainer">
                         <div class="Form-inputs">
                             <input class="Input" type="text" id="imdb" name="imdb" size="45" placeholder="IMDB" <?= $this->Disabled ?> value=<?= $IMDBID ?>>
-                            <button class='Button autofill loading' variant="primary" id="imdb_button" onclick="movieAutofill()" <?= $this->Disabled ? "disabled" : '' ?> type='button' /><span class="text"><?= Lang::get('upload', 'movie_fill') ?></span><span class="icon"></span></button>
+                            <button class='Button autofill' variant="primary" id="imdb_button" onclick="globalapp.uploadMovieAutofill()" <?= $this->Disabled ? "disabled" : '' ?> type='button' />
+                            <span class="text"><?= Lang::get('upload', 'movie_fill') ?></span>
+                            <span class="Button-loaderIcon"></span>
+                            </button>
                             <div class="Checkbox">
-                                <input class="Input" type="checkbox" name="no_imdb_link" id="no_imdb_link" onchange="noImdbId()" <?= $this->Disabled ? "disabled" : '' ?>>
+                                <input class="Input" type="checkbox" name="no_imdb_link" id="no_imdb_link" onchange="globalapp.uploadNoImdbId()" <?= $this->Disabled ? "disabled" : '' ?>>
                                 <label class="Checkbox-label" for="no_imdb_link">&nbsp;<?= Lang::get('upload', 'no_imdb_link') ?></label>
                             </div>
                         </div>
@@ -409,7 +412,7 @@ class TORRENT_FORM {
                                         if ($FirstArtist) {
                                             if (!$this->DisabledFlag) {
                                         ?>
-                                                <a href="javascript:AddArtistField(true)" class="brackets">+</a> <a href="javascript:RemoveArtistField()" class="brackets">&minus;</a>
+                                                <a href="javascript:globalapp.uploadAddArtistField(true)" class="brackets">+</a> <a href="javascript:globalapp.globalapp.uploadRemoveArtistField()" class="brackets">&minus;</a>
                                         <?
                                             }
                                             $FirstArtist = false;
@@ -435,12 +438,12 @@ class TORRENT_FORM {
                                     <option class="Select-option" value="5"><?= Lang::get('upload', 'cinematographer') ?></option>
                                     <option class="Select-option" value="6"><?= Lang::get('upload', 'actor') ?></option>
                                 </select>
-                                <a href="#" onclick="AddArtistField(true); return false;" class="brackets add-artist">+</a>
-                                <a href="#" onclick="RemoveArtistField(); return false;" class="brackets remove-artist">&minus;</a>
+                                <a href="#" onclick="globalapp.uploadAddArtistField(true); return false;" class="brackets add-artist">+</a>
+                                <a href="#" onclick="globalapp.uploadRemoveArtistField(); return false;" class="brackets remove-artist">&minus;</a>
                             </div>
                         <? } ?>
                         <div class="show-more" style="display: none;">
-                            <a href='#' onclick="artistsShowMore(); return false"><?= Lang::get('upload', 'show_more') ?></a>
+                            <a href='#' onclick="globalapp.uploadArtistsShowMore(); return false"><?= Lang::get('upload', 'show_more') ?></a>
                         </div>
                     </td>
                 </tr>
@@ -479,7 +482,7 @@ class TORRENT_FORM {
                         <td class="Form-items Form-errorContainer">
                             <div class="Form-inputs">
                                 <? if ($GenreTags) { ?>
-                                    <select class="Input" id="genre_tags" name="genre_tags" onchange="add_tag(); return false;" <?= $this->Disabled ?>>
+                                    <select class="Input" id="genre_tags" name="genre_tags" onchange="globalapp.uploadAddTag(); return false;" <?= $this->Disabled ?>>
                                         <? foreach (Misc::display_array($GenreTags) as $Genre) { ?>
                                             <option class="Select-option" value="<?= $Genre ?>"><?= $Genre ?></option>
                                         <?              } ?>
@@ -955,15 +958,15 @@ class TORRENT_FORM {
                     <td class="Form-items">
                         <div class="Form-inputs">
                             <div class="Checkbox">
-                                <input class="Input" type="checkbox" onchange="AlterOriginal()" id="self_purchase" name="buy" <? if ($Buy) {
-                                                                                                                                    echo 'checked="checked" ';
-                                                                                                                                } ?> />
+                                <input class="Input" type="checkbox" onchange="globalapp.uploadAlterOriginal()" id="self_purchase" name="buy" <? if ($Buy) {
+                                                                                                                                                    echo 'checked="checked" ';
+                                                                                                                                                } ?> />
                                 <label class="Checkbox-label" for="self_purchase"><?= Lang::get('upload', 'self_purchase') ?></label>
                             </div>
                             <div class="Checkbox">
-                                <input class="Input" type="checkbox" onchange="AlterOriginal()" id="self_rip" name="diy" <? if ($Diy) {
-                                                                                                                                echo 'checked="checked" ';
-                                                                                                                            } ?> />
+                                <input class="Input" type="checkbox" onchange="globalapp.uploadAlterOriginal()" id="self_rip" name="diy" <? if ($Diy) {
+                                                                                                                                                echo 'checked="checked" ';
+                                                                                                                                            } ?> />
                                 <label class="Checkbox-label" for="self_rip"><?= Lang::get('upload', 'self_rip') ?></label>
                             </div>
                             <div class="Checkbox">

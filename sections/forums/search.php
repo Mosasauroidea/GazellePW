@@ -380,12 +380,13 @@ View::show_header(Lang::get('forums', 'forums_greater_than_search'), 'bbcode,for
                 <? if ($Type == 'body') { ?>
                     <tr class="TableForum-row Table-row hidden" id="post_<?= $PostID ?>_text">
                         <td class="TableForum-cellPostBody Table-cell" colspan="4">
-                            <?= Text::full_format($Body) ?>
+                            <div class="HtmlText">
+                                <?= Text::full_format($Body) ?>
+                            </div>
                         </td>
                     </tr>
-            <?  }
-            }
-            ?>
+                <? } ?>
+            <? } ?>
         </table>
     </div>
 

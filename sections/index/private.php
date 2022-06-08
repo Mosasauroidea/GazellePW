@@ -301,7 +301,6 @@ View::show_header(Lang::get('index', 'index'), 'comments', 'PageHome');
         }
         ?>
 
-
         <div class="SidebarItemStats SidebarItem Box">
             <div class="SidebarItem-header Box-header">
                 <?= Lang::get('index', 'stats') ?>
@@ -470,8 +469,18 @@ View::show_header(Lang::get('index', 'index'), 'comments', 'PageHome');
             </ul>
         </div>
 
+        <div class="Social">
+            <a target="_blank" href="feeds.php?feed=feed_news&amp;user=<?= G::$LoggedUser['ID'] ?>&amp;auth=<?= G::$LoggedUser['RSS_Auth'] ?>&amp;passkey=<?= G::$LoggedUser['torrent_pass'] ?>&amp;authkey=<?= G::$LoggedUser['AuthKey'] ?>">
+                <?= icon('rss') ?>
+            </a>
+            <a target="_blank" href="https://t.me/+SARDb636Ku3lY1bi">
+                <?= icon('telegram') ?>
+            </a>
+            <a target="_blank" href="https://github.com/Mosasauroidea/GazellePW">
+                <?= icon('github') ?>
+            </a>
+        </div>
     </div>
-
 
     <div class="LayoutMainSidebar-main">
         <div class="PostList PostListNews">
@@ -486,7 +495,9 @@ View::show_header(Lang::get('index', 'index'), 'comments', 'PageHome');
                 <div id="news<?= $NewsID ?>" class="Post Box news_post">
                     <div class="Post-header Box-header">
                         <div class="Post-headerLeft">
-                            <span class="Post-headerTitle"><?= Text::full_format($Title) ?></span>
+                            <span class="Post-headerTitle HtmlText">
+                                <?= Text::full_format($Title) ?>
+                            </span>
                             <?= time_diff($NewsTime); ?>
                         </div>
                         <div class="Post-headerActions">
@@ -497,7 +508,9 @@ View::show_header(Lang::get('index', 'index'), 'comments', 'PageHome');
                             - <a class="Post-toggleButton <?= $IsSticky ? 'is-sticky' : '' ?>" href="#" onclick="$('#newsbody<?= $NewsID ?>').gtoggle(); this.innerHTML = (this.innerHTML == '<?= Lang::get('global', 'hide') ?>' ? '<?= Lang::get('global', 'show') ?>' : '<?= Lang::get('global', 'hide') ?>'); return false;" class="brackets"><?= $IsSticky ? Lang::get('index', 'show') : Lang::get('index', 'hide')  ?></a>
                         </div>
                     </div>
-                    <div id="newsbody<?= $NewsID ?>" class="HtmlText PostArticle Post-body Box-body <?= $IsSticky ? 'hidden' : '' ?>"><?= Text::full_format($Body) ?></div>
+                    <div id="newsbody<?= $NewsID ?>" class="HtmlText PostArticle Post-body Box-body <?= $IsSticky ? 'hidden' : '' ?>">
+                        <?= Text::full_format($Body) ?>
+                    </div>
                 </div>
             <?
                 if (++$Count > ($NewsCount - 1)) {
@@ -505,21 +518,17 @@ View::show_header(Lang::get('index', 'index'), 'comments', 'PageHome');
                 }
             }
             ?>
-            <div id="more_news">
-                <div>
-                    <em>
-                        <!--
+            <em id="more_news">
+                <!--
                         <span>
                             <a href="#" onclick="news_ajax(event, 3, <?= $NewsCount ?>, <?= check_perms('admin_manage_news') ? 1 : 0; ?>, false); return false;"><?= Lang::get('index', 'add_more') ?></a>
                             <?= Lang::get('index', 'period') ?>
                         </span>
                         -->
-                        <?= Lang::get('index', 'add_old') ?>
-                        <a href="forums.php?action=viewforum&amp;forumid=7"><?= Lang::get('index', 'click_here') ?></a>
-                        <?= Lang::get('index', 'period') ?>
-                    </em>
-                </div>
-            </div>
+                <a href="forums.php?action=viewforum&amp;forumid=7">
+                    <?= Lang::get('index', 'browse_old_news') ?>
+                </a>
+            </em>
         </div>
     </div>
 </div>

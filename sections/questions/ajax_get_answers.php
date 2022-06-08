@@ -20,16 +20,14 @@ G::$DB->query("
 $Answers = G::$DB->to_array(false, MYSQLI_ASSOC);
 foreach ($Answers as $Answer) {
 ?>
-    <div class="box box2">
-        <div class="head">
+    <div class="Box">
+        <div class="Box-header">
             <span>
                 Answer by <?= Users::format_username($Answer['UserID']) ?> - <?= time_diff($Answer['Date']) ?>
             </span>
         </div>
-        <div class="pad">
+        <div class="Box-body HtmlText">
             <?= Text::full_format($Answer['Answer']) ?>
         </div>
     </div>
-<?
-}
-?>
+<? } ?>

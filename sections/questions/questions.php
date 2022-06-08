@@ -80,7 +80,7 @@ if ($TotalQuestions > QUESTIONS_PER_PAGE) { ?>
                     <a href="#" id="<?= $Question['ID'] ?>" class="answer_link brackets">Answer</a>
                 </span>
             </div>
-            <div class="pad">
+            <div class="pad HtmlText">
                 <?= Text::full_format($Question['Question']) ?>
             </div>
         </div>

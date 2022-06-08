@@ -10,7 +10,7 @@ TorrentDetail
 }
 
 /* row */
-.TorrentDetail-row:not(.is-description) {
+.TorrentDetail-row:not(.is-description):not(.TorrentDetail-trumpable) {
   display: flex;
   flex-direction: column;
   gap: var(--global-space-default);
@@ -45,8 +45,8 @@ TorrentDetail
   color: var(--global-color-rewardButton);
 }
 
-.TorrentDetail-rewardButton.is-toReward .icon {
-  color: inherit;
+.TorrentDetail-rewardButton.is-active .icon {
+  color: var(--global-color-rewardButtonActive);
 }
 
 .TorrentDetail-like,

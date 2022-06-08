@@ -191,20 +191,6 @@ function ratio(dividend, divisor, color) {
   return rat
 }
 
-function save_message(message) {
-  var messageDiv = document.createElement('div')
-  messageDiv.className = 'save_message'
-  messageDiv.innerHTML = message
-  $('#content').raw().insertBefore(messageDiv, $('#content').raw().firstChild)
-}
-
-function error_message(message) {
-  var messageDiv = document.createElement('div')
-  messageDiv.className = 'error_message'
-  messageDiv.innerHTML = message
-  $('#content').raw().insertBefore(messageDiv, $('#content').raw().firstChild)
-}
-
 //returns key if true, and false if false. better than the PHP funciton
 function in_array(needle, haystack, strict) {
   if (strict === undefined) {

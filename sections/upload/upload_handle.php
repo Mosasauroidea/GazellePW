@@ -819,7 +819,9 @@ if ($Properties['Scene'] == '1') {
 
 $RemasterTitleRSS = explode(' / ', $Properties['RemasterTitle']);
 foreach ($RemasterTitleRSS as $RT) {
-    $Details .= " / " . EditionInfo::text(trim($RT));
+    if ($RT) {
+        $Details .= " / " . EditionInfo::text(trim($RT));
+    }
 }
 
 if ($T['FreeLeech'] == '1') {

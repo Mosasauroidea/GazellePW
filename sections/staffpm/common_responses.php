@@ -70,7 +70,7 @@ View::show_header('Staff PMs', 'staffpm', 'PageStaffPMResponse');
                         <input class="Input" type="text" name="name" id="response_name_<?= $ID ?>" size="87" value="<?= display_str($Name) ?>" />
                     </div>
                     <div class="pad">
-                        <div class="BoxBody hidden" style="text-align: left;" id="response_div_<?= $ID ?>">
+                        <div class="BoxBody HtmlText hidden" style="text-align: left;" id="response_div_<?= $ID ?>">
                             <?= Text::full_format($Message) ?>
                         </div>
                         <textarea class="Input" rows="10" cols="87" id="response_message_<?= $ID ?>" name="message"><?= display_str($Message) ?></textarea>

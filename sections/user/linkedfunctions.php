@@ -238,7 +238,9 @@ function user_dupes_table($UserID) {
                 </tr>
                 <tr>
                     <td colspan="5" align="left">
-                        <div id="dupecomments" class="<?= ($DupeCount ? '' : 'hidden') ?>"><?= Text::full_format($Comments); ?></div>
+                        <div id="dupecomments" class="HtmlText <?= ($DupeCount ? '' : 'hidden') ?>">
+                            <?= Text::full_format($Comments) ?>
+                        </div>
                         <div id="editdupecomments" class="<?= ($DupeCount ? 'hidden' : '') ?>">
                             <textarea class="Input" name="dupecomments" onkeyup="resize('dupecommentsbox');" id="dupecommentsbox" cols="65" rows="5"><?= display_str($Comments) ?></textarea>
                         </div>

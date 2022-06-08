@@ -11,7 +11,7 @@ table.filteredSlots = ['cn_quantity']
   .Table-row data-slot=<slotName>
 */
 
-export default function filterSlot(event, slotNames) {
+globalapp.filterSlot = function filterSlot(event, slotNames) {
   event.preventDefault()
   const target = event.target.closest('.TableTorrent-slotFilterButton')
   const table = target.closest('.TableTorrent')

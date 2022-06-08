@@ -1,0 +1,6 @@
+<svg class="icon rss" xmlns="http://www.w3.org/2000/svg" width="192" height="192" fill="currentColor" viewBox="0 0 256 256">
+  <rect width="256" height="256" fill="none"></rect>
+  <path d="M56,48A152.1,152.1,0,0,1,208,200" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="24"></path>
+  <path d="M56,120a80,80,0,0,1,80,80" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="24"></path>
+  <circle cx="56" cy="200" r="16"></circle>
+</svg>

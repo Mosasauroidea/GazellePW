@@ -2,7 +2,7 @@
 lightbox.css
 */
 
-export default class Lightbox {
+class Lightbox {
   init(image) {
     this.ShownImage = null
 
@@ -107,3 +107,5 @@ export default class Lightbox {
     return false
   }
 }
+
+window.lightbox = new Lightbox()

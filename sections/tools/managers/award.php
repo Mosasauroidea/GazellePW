@@ -98,7 +98,7 @@ $(document).ready(function() {
             if (!$first) {
                 $GroupNameMap = ['Moderator' => 'Mod', 'Torrent Moderator' => 'TM', 'Forum Moderator' => 'FM', 'Torrent Inspector' => 'TI', 'First Line Support' => 'FLS', 'Interviewer' => 'IN', 'Translators' => 'TL', 'Senior Moderator' => 'SM', 'Developer' => 'Dev', 'Administrator' => 'AD'];
                 if (isset($GroupNameMap[$data['GroupName']])) {
-                    echo "<div class=\"group-name\" style=\"grid-row-start: span $rowspan;\" title=\"" . $data['GroupName'] . "\">" . $GroupNameMap[$data['GroupName']] . "</div>";
+                    echo "<div class=\"group-name\" style=\"grid-row-start: span $rowspan;\" data-tooltip=\"" . $data['GroupName'] . "\">" . $GroupNameMap[$data['GroupName']] . "</div>";
                 } else {
                     echo "<div class=\"group-name\" style=\"grid-row-start: span $rowspan;\">" . $data['GroupName'] . "</div>";
                 }

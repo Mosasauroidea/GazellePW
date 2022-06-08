@@ -1,6 +1,8 @@
 /*
 Snackbar.jsx
-Snackbar.open({ message: 'hello' })
+Snackbar.open(message)
+Snackbar.notify(message)  // auto close after 2 seconds or click to close
+Snackbar.error(message)
 Snackbar.close()
 
 
@@ -11,6 +13,10 @@ Snackbar
 .Snackbar {
   --Snackbar-body-background: rgba(0, 0, 0, 0.7);
   --Snackbar-body-color: #fff;
+}
+
+.Snackbar.is-error {
+  --Snackbar-body-background: var(--global-color-warning);
 }
 
 .Snackbar {

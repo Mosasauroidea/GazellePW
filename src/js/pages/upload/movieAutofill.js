@@ -1,4 +1,4 @@
-function movieAutofill() {
+globalapp.uploadMovieAutofill = function uploadMovieAutofill() {
   function setLoading(loading) {
     if (loading) {
       $('.Button.autofill').addClass('is-loading').prop('disabled', true)
@@ -124,7 +124,7 @@ function movieAutofill() {
           importance.push(6)
         })
       }
-      removeAllArtistFields()
+      globalapp.uploadRemoveAllArtistFields()
       for (var i = 0; i < artists.length; i++) {
         var artistid, importanceid, artistimdbid, artist_cname
         if (i) {
@@ -132,7 +132,7 @@ function movieAutofill() {
           importanceid = '#importance_' + i
           artistimdbid = '#artist_id_' + i
           artist_cname = '#artist_chinese_' + i
-          AddArtistField(true)
+          globalapp.uploadAddArtistField(true)
         } else {
           artistid = '#artist'
           importanceid = '#importance'
@@ -152,11 +152,9 @@ function movieAutofill() {
         '.u-formUploadArtistList input:not([name="artists_chinese[]"]), .u-formUploadArtistList select'
       ).prop('disabled', true)
       if (artists.length >= 5) {
-        artistsShowMore({ hide: true })
+        globalapp.uploadArtistsShowMore({ hide: true })
       }
     },
     dataType: 'json',
   })
 }
-
-window.movieAutofill = movieAutofill

@@ -64,7 +64,7 @@ View::show_header(Lang::get('forums', 'forums'), '', 'PageForumHome');
             } else { ?>
             <td class="TableForum-cellPost Table-cell">
                 <div class="TableForum-post">
-                    <a href="forums.php?action=viewthread&amp;threadid=<?= $LastTopicID ?>" data-title-plain="<?= display_str($LastTopic) ?>" <?= ((strlen($LastTopic) > 50) ? "title='" . display_str($LastTopic) . "'" : "") ?>><?= display_str(Format::cut_string($LastTopic, 50, 1)) ?></a>
+                    <a href="forums.php?action=viewthread&amp;threadid=<?= $LastTopicID ?>" data-title-plain="<?= display_str($LastTopic) ?>" <?= ((strlen($LastTopic) > 50) ? "data-tooltip='" . display_str($LastTopic) . "'" : "") ?>><?= display_str(Format::cut_string($LastTopic, 50, 1)) ?></a>
                     <? if (!empty($LastRead[$LastTopicID])) { ?>
                         <a class="TableForum-jumpToLastRead" data-tooltip="<?= Lang::get('forums', 'jump_to_last_read') ?>" data-tooltip-theme="<?= $TooltipTheme ?>" href="forums.php?action=viewthread&amp;threadid=<?= $LastTopicID ?>&amp;page=<?= $LastRead[$LastTopicID]['Page'] ?>#post<?= $LastRead[$LastTopicID]['PostID'] ?>">
                             <?= icon('Forum/jump-to-last-read'); ?>

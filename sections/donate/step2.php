@@ -95,9 +95,12 @@ if (count($PrepaidCardDonations) > 0) {
 ?>
 <div class="Box donation_info">
     <div class="Box-header">
-        <strong class="donation_info_title"><?= Lang::get('donate', 'tutorials') ?></strong>
+        <strong class="donation_info_title">
+            <?= Lang::get('donate', 'tutorials') ?>
+        </strong>
     </div>
-    <div id="donate_guide" class="Box-body HtmlText PostArticle"><?= Text::full_format($Body) ?>
+    <div id="donate_guide" class="Box-body HtmlText PostArticle">
+        <?= Text::full_format($Body) ?>
     </div>
 </div>
 

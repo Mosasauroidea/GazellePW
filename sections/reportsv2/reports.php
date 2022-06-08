@@ -24,8 +24,10 @@ View::show_header(Lang::get('reportsv2', 'reports_v2'), 'reportsv2', 'PageReport
     | <span data-tooltip="<?= Lang::get('reportsv2', 'unclaim_all_btn_title') ?>">
         <input class="Button" type="button" onclick="GiveBack();" value="<?= Lang::get("reportsv2", 'unclaim_all') ?>" /></span>
 </div>
-<div id=" all_reports" style="margin-left: auto; margin-right: auto;">
+
+<div id="all_reports" style="margin-left: auto; margin-right: auto;">
 </div>
+
 <?
 View::show_footer();
 ?>

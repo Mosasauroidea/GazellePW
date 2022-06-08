@@ -305,7 +305,7 @@ $TorrentDisplayList = ob_get_clean();
 
 // Comments (must be loaded before View::show_header so that subscriptions and quote notifications are handled properly)
 list($NumComments, $Page, $Thread, $LastRead) = Comments::load('artist', $ArtistID);
-View::show_header(($ChineseName ? '[' . $ChineseName . '] ' : '') . $Name, 'browse,requests,bbcode,comments,voting,recommend,subscriptions', 'PageArtistHome');
+View::show_header(($ChineseName ? '[' . $ChineseName . '] ' : '') . $Name, 'browse,bbcode,comments,voting,recommend,subscriptions', 'PageArtistHome');
 ?>
 <div class="LayoutBody">
     <div class="BodyHeader">
@@ -384,7 +384,9 @@ View::show_header(($ChineseName ? '[' . $ChineseName . '] ' : '') . $Name, 'brow
                 </span>
             </div>
             <div class="MovieInfo-synopsis" data-tooltip="<?= Lang::get('torrents', 'fold_tooltip') ?>">
-                <p><?= $Body ? Text::full_format($Body) : Lang::get('artist', 'empty_introduction_note') ?></p>
+                <p class="HtmlText">
+                    <?= $Body ? Text::full_format($Body) : Lang::get('artist', 'empty_introduction_note') ?>
+                </p>
             </div>
         </div>
     </div>
@@ -615,8 +617,8 @@ View::show_header(($ChineseName ? '[' . $ChineseName . '] ' : '') . $Name, 'brow
                                 <span id="vote_count_<?= $RequestID ?>"><?= $Request['Votes'] ?></span>
                                 <? if (check_perms('site_vote')) { ?>
                                     <input type="hidden" id="auth" name="auth" value="<?= $LoggedUser['AuthKey'] ?>" />
-                                    &nbsp;&nbsp; <a href="javascript:Vote(0, <?= $RequestID ?>)" class="brackets">+</a>
-                                <?      } ?>
+                                    &nbsp;&nbsp; <a href="javascript:globalapp.requestVote(0, <?= $RequestID ?>)" class="brackets">+</a>
+                                <? } ?>
                             </td>
                             <td class="TableRequest-cellBounty Table-cell">
                                 <span id="bounty_<?= $RequestID ?>"><?= Format::get_size($Request['Bounty']) ?></span>

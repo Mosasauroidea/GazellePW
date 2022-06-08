@@ -1,4 +1,5 @@
 export default {
+  like: 'Like',
   copied: 'Copied',
   view: 'View',
   clear: 'Clear',

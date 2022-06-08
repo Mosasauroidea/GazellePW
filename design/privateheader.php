@@ -18,30 +18,28 @@ $donation = new Donation();
     <link rel="shortcut icon" href="favicon.ico" />
     <link rel="apple-touch-icon" href="favicon.ico" />
     <link rel="stylesheet" type="text/css" media="screen" href="/deps/tooltipster.bundle.min.css" />
-    <link rel="search" type="application/opensearchdescription+xml" data-tooltip="<?= SITE_NAME ?> Torrents" href="opensearch.php?type=torrents" />
-    <link rel="search" type="application/opensearchdescription+xml" data-tooltip="<?= SITE_NAME ?> Artists" href="opensearch.php?type=artists" />
-    <link rel="search" type="application/opensearchdescription+xml" data-tooltip="<?= SITE_NAME ?> Requests" href="opensearch.php?type=requests" />
-    <link rel="search" type="application/opensearchdescription+xml" data-tooltip="<?= SITE_NAME ?> Forums" href="opensearch.php?type=forums" />
-    <link rel="search" type="application/opensearchdescription+xml" data-tooltip="<?= SITE_NAME ?> Log" href="opensearch.php?type=log" />
-    <link rel="search" type="application/opensearchdescription+xml" data-tooltip="<?= SITE_NAME ?> Users" href="opensearch.php?type=users" />
-    <link rel="search" type="application/opensearchdescription+xml" data-tooltip="<?= SITE_NAME ?> Wiki" href="opensearch.php?type=wiki" />
-    <link rel="alternate" type="application/rss+xml" href="feeds.php?feed=feed_news&amp;user=<?= G::$LoggedUser['ID'] ?>&amp;auth=<?= G::$LoggedUser['RSS_Auth'] ?>&amp;passkey=<?= G::$LoggedUser['torrent_pass'] ?>&amp;authkey=<?= G::$LoggedUser['AuthKey'] ?>" data-tooltip="<?= SITE_NAME ?> - News" />
-    <link rel="alternate" type="application/rss+xml" href="feeds.php?feed=feed_blog&amp;user=<?= G::$LoggedUser['ID'] ?>&amp;auth=<?= G::$LoggedUser['RSS_Auth'] ?>&amp;passkey=<?= G::$LoggedUser['torrent_pass'] ?>&amp;authkey=<?= G::$LoggedUser['AuthKey'] ?>" data-tooltip="<?= SITE_NAME ?> - Blog" />
-    <link rel="alternate" type="application/rss+xml" href="feeds.php?feed=feed_changelog&amp;user=<?= G::$LoggedUser['ID'] ?>&amp;auth=<?= G::$LoggedUser['RSS_Auth'] ?>&amp;passkey=<?= G::$LoggedUser['torrent_pass'] ?>&amp;authkey=<?= G::$LoggedUser['AuthKey'] ?>" data-tooltip="<?= SITE_NAME ?> - Gazelle Change Log" />
-    <link rel="alternate" type="application/rss+xml" href="feeds.php?feed=torrents_notify_<?= G::$LoggedUser['torrent_pass'] ?>&amp;user=<?= G::$LoggedUser['ID'] ?>&amp;auth=<?= G::$LoggedUser['RSS_Auth'] ?>&amp;passkey=<?= G::$LoggedUser['torrent_pass'] ?>&amp;authkey=<?= G::$LoggedUser['AuthKey'] ?>" data-tooltip="<?= SITE_NAME ?> - P.T.N." />
+    <link rel="search" type="application/opensearchdescription+xml" title="<?= SITE_NAME ?> Torrents" href="opensearch.php?type=torrents" />
+    <link rel="search" type="application/opensearchdescription+xml" title="<?= SITE_NAME ?> Artists" href="opensearch.php?type=artists" />
+    <link rel="search" type="application/opensearchdescription+xml" title="<?= SITE_NAME ?> Requests" href="opensearch.php?type=requests" />
+    <link rel="search" type="application/opensearchdescription+xml" title="<?= SITE_NAME ?> Forums" href="opensearch.php?type=forums" />
+    <link rel="search" type="application/opensearchdescription+xml" title="<?= SITE_NAME ?> Log" href="opensearch.php?type=log" />
+    <link rel="search" type="application/opensearchdescription+xml" title="<?= SITE_NAME ?> Users" href="opensearch.php?type=users" />
+    <link rel="search" type="application/opensearchdescription+xml" title="<?= SITE_NAME ?> Wiki" href="opensearch.php?type=wiki" />
+    <link rel="alternate" type="application/rss+xml" title="<?= SITE_NAME ?> - News" href="feeds.php?feed=feed_news&amp;user=<?= G::$LoggedUser['ID'] ?>&amp;auth=<?= G::$LoggedUser['RSS_Auth'] ?>&amp;passkey=<?= G::$LoggedUser['torrent_pass'] ?>&amp;authkey=<?= G::$LoggedUser['AuthKey'] ?>" />
+    <link rel="alternate" type="application/rss+xml" title="<?= SITE_NAME ?> - Blog" href="feeds.php?feed=feed_blog&amp;user=<?= G::$LoggedUser['ID'] ?>&amp;auth=<?= G::$LoggedUser['RSS_Auth'] ?>&amp;passkey=<?= G::$LoggedUser['torrent_pass'] ?>&amp;authkey=<?= G::$LoggedUser['AuthKey'] ?>" />
+    <link rel="alternate" type="application/rss+xml" title="<?= SITE_NAME ?> - Changelog" href="feeds.php?feed=feed_changelog&amp;user=<?= G::$LoggedUser['ID'] ?>&amp;auth=<?= G::$LoggedUser['RSS_Auth'] ?>&amp;passkey=<?= G::$LoggedUser['torrent_pass'] ?>&amp;authkey=<?= G::$LoggedUser['AuthKey'] ?>" />
+    <link rel="alternate" type="application/rss+xml" title="<?= SITE_NAME ?> - P.T.N." href="feeds.php?feed=torrents_notify_<?= G::$LoggedUser['torrent_pass'] ?>&amp;user=<?= G::$LoggedUser['ID'] ?>&amp;auth=<?= G::$LoggedUser['RSS_Auth'] ?>&amp;passkey=<?= G::$LoggedUser['torrent_pass'] ?>&amp;authkey=<?= G::$LoggedUser['AuthKey'] ?>" />
 
     <?
     if (isset(G::$LoggedUser['Notify'])) {
         foreach (G::$LoggedUser['Notify'] as $Filter) {
             list($FilterID, $FilterName) = $Filter;
     ?>
-            <link rel="alternate" type="application/rss+xml" href="feeds.php?feed=torrents_notify_<?= $FilterID ?>_<?= G::$LoggedUser['torrent_pass'] ?>&amp;user=<?= G::$LoggedUser['ID'] ?>&amp;auth=<?= G::$LoggedUser['RSS_Auth'] ?>&amp;passkey=<?= G::$LoggedUser['torrent_pass'] ?>&amp;authkey=<?= G::$LoggedUser['AuthKey'] ?>&amp;name=<?= urlencode($FilterName) ?>" data-tooltip="<?= SITE_NAME ?> - <?= display_str($FilterName) ?>" />
-    <?
-        }
-    }
-    ?>
-    <link rel="alternate" type="application/rss+xml" href="feeds.php?feed=torrents_all&amp;user=<?= G::$LoggedUser['ID'] ?>&amp;auth=<?= G::$LoggedUser['RSS_Auth'] ?>&amp;passkey=<?= G::$LoggedUser['torrent_pass'] ?>&amp;authkey=<?= G::$LoggedUser['AuthKey'] ?>" data-tooltip="<?= SITE_NAME ?> - All Torrents" />
-    <link rel="alternate" type="application/rss+xml" href="feeds.php?feed=torrents_movie&amp;user=<?= G::$LoggedUser['ID'] ?>&amp;auth=<?= G::$LoggedUser['RSS_Auth'] ?>&amp;passkey=<?= G::$LoggedUser['torrent_pass'] ?>&amp;authkey=<?= G::$LoggedUser['AuthKey'] ?>" data-tooltip="<?= SITE_NAME ?> - Movie Torrents" />
+            <link rel="alternate" type="application/rss+xml" title="<?= SITE_NAME ?> - <?= display_str($FilterName) ?>" href="feeds.php?feed=torrents_notify_<?= $FilterID ?>_<?= G::$LoggedUser['torrent_pass'] ?>&amp;user=<?= G::$LoggedUser['ID'] ?>&amp;auth=<?= G::$LoggedUser['RSS_Auth'] ?>&amp;passkey=<?= G::$LoggedUser['torrent_pass'] ?>&amp;authkey=<?= G::$LoggedUser['AuthKey'] ?>&amp;name=<?= urlencode($FilterName) ?>" />
+        <? } ?>
+    <? } ?>
+    <link rel="alternate" type="application/rss+xml" title="<?= SITE_NAME ?> - All Torrents" href="feeds.php?feed=torrents_all&amp;user=<?= G::$LoggedUser['ID'] ?>&amp;auth=<?= G::$LoggedUser['RSS_Auth'] ?>&amp;passkey=<?= G::$LoggedUser['torrent_pass'] ?>&amp;authkey=<?= G::$LoggedUser['AuthKey'] ?>" />
+    <link rel="alternate" type="application/rss+xml" title="<?= SITE_NAME ?> - Movie Torrents" href="feeds.php?feed=torrents_movie&amp;user=<?= G::$LoggedUser['ID'] ?>&amp;auth=<?= G::$LoggedUser['RSS_Auth'] ?>&amp;passkey=<?= G::$LoggedUser['torrent_pass'] ?>&amp;authkey=<?= G::$LoggedUser['AuthKey'] ?>" />
     <meta name="viewport" content="width=device-width" />
     <?
     if (G::$LoggedUser['StyleURL']) {
@@ -57,7 +55,7 @@ $donation = new Donation();
             $StyleURL = G::$LoggedUser['StyleURL'];
         }
     ?>
-        <link rel="stylesheet" type="text/css" media="screen" href="<?= $StyleURL ?>" data-tooltip="External CSS" />
+        <link rel="stylesheet" type="text/css" title="External CSS" media="screen" href="<?= $StyleURL ?>" />
     <? } else { ?>
         <? if (IS_DEV) { ?>
             <link rel="stylesheet" type="text/css" media="screen" href="/src/css/default/<?= G::$LoggedUser['StyleName'] ?>/index.css" />
@@ -66,6 +64,7 @@ $donation = new Donation();
         <? } ?>
     <? } ?>
     <script type="text/javascript">
+        window.globalapp = {}
         //<![CDATA[
         var authkey = "<?= G::$LoggedUser['AuthKey'] ?>";
         var userid = <?= G::$LoggedUser['ID'] ?>;

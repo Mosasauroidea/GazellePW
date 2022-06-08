@@ -84,7 +84,7 @@ class UngroupTorrentSimpleListView extends UngroupTorrentTableView {
             $ColCount -= 1;
         }
     ?>
-        <tr class="TableTorrent-rowTitle Table-row  <?= $SnatchedGroupClass . (!empty($LoggedUser['TorrentGrouping']) && $LoggedUser['TorrentGrouping'] === 1 ? ' hidden' : '') ?>" group-id="<?= $GroupID ?>">
+        <tr class="TableTorrent-rowTitle Table-row u-tableTorrent-rowTitle <?= $SnatchedGroupClass . (!empty($LoggedUser['TorrentGrouping']) && $LoggedUser['TorrentGrouping'] === 1 ? ' hidden' : '') ?>" group-id="<?= $GroupID ?>" torrent-id="<?= $TorrentID ?>">
 
             <?
             if ($this->WithNumber) {
@@ -246,8 +246,8 @@ class TorrentTableView {
     }
     public function render_torrent_detail($Group, $Torrent) {
         $ReadOnly = $this->DetailOption->ReadOnly;
-        $ThumbCounts = $this->DetailOption->ThumbCounts;
-        $BonusSended = $this->DetailOption->BonusSended;
+        $ThumbCounts = $this->DetailOption->ThumbCounts[$Torrent['ID']];
+        $BonusSended = $this->DetailOption->BonusSended[$Torrent['ID']];
         $ShowReport = $this->DetailOption->WithReport;
         $GroupID = $Group['ID'];
         $GroupCategoryID = $Group['CategoryID'];
@@ -405,12 +405,14 @@ class TorrentTableView {
                                 } ?>
                     </div>
                     <? if (!$ReadOnly) { ?>
-                        <div class="TorrentDetail-likeContainer ButtonGroup">
+                        <div class="TorrentDetail-likeContainer ButtonGroup ButtonGroup--wide">
                             <div class="TorrentDetail-reward is-total">
                                 <span class="TorrentDetail-rewardButton" data-tooltip="<?= Lang::get('torrents', 'total_reward_bonus_points_pre_tax') ?>">
                                     <?= icon('bonus-active') ?>
                                 </span>
-                                <span data-tooltip="<?= Lang::get('torrents', 'total_reward_bonus_points_pre_tax') ?>" id="bonuscnt<?= $TorrentID ?>"><?= isset($BonusSended) && isset($BonusSended['Count']) && $BonusSended['Count'] > 0 ? $BonusSended['Count'] : '0' ?></span>
+                                <span data-tooltip="<?= Lang::get('torrents', 'total_reward_bonus_points_pre_tax') ?>" id="bonuscnt<?= $TorrentID ?>">
+                                    <?= isset($BonusSended) && isset($BonusSended['Count']) && $BonusSended['Count'] > 0 ? $BonusSended['Count'] : '0' ?>
+                                </span>
                             </div>
                             <div class="TorrentDetail-like">
                                 <span id="thumb<?= $TorrentID ?>" <?= isset($ThumbCounts) && isset($ThumbCounts['on']) && $ThumbCounts['on'] > 0 ? 'style="display: none;"' : '' ?>>
@@ -427,7 +429,7 @@ class TorrentTableView {
                                 </span>
                                 <span id="unthumb<?= $TorrentID ?>" <?= isset($ThumbCounts) && empty($ThumbCounts['on']) ? 'style="display: none;"' : '' ?>>
                                     <a href="javascript:void(0);" onclick="unthumb(<?= $TorrentID ?>, <?= $UserID ?>, 'torrent')">
-                                        <?= icon("Common/like") ?>
+                                        <?= icon("Common/like-solid") ?>
                                     </a>
                                 </span>
                                 <span id="thumbcnt<?= $TorrentID ?>">
@@ -449,8 +451,12 @@ class TorrentTableView {
             <?
             if ($TrumpableMsg) { ?>
                 <div class="TorrentDetail-trumpable TorrentDetail-row is-block">
-                    <span class="TorrentDetail-trumpableTitle"><?= Lang::get('torrents', 'trumpable_reason') ?>:</span>
-                    <span class="TorrentDetail-trumpableMessage"><?= $TrumpableMsg ?></span>
+                    <span class="TorrentDetail-trumpableTitle">
+                        <?= Lang::get('torrents', 'trumpable_reason') ?>:
+                    </span>
+                    <span class="TorrentDetail-trumpableMessage">
+                        <?= $TrumpableMsg ?>
+                    </span>
                 </div>
             <?
             } ?>
@@ -460,11 +466,9 @@ class TorrentTableView {
             ?>
                 <div class="TorrentDetail-row is-rewardContainer">
                     <div class="TorrentDetail-rewardList ButtonGroup" id="sendbonus_<?= $TorrentID ?>">
-                        <?
-                        $Sended = isset($BonusSended[$TorrentID]) ? explode(',', $BonusSended[$TorrentID]['Sended']) : [];
-                        ?>
+                        <? $Sended = isset($BonusSended) ? explode(',', $BonusSended['Sended']) : []; ?>
                         <div class="TorrentDetail-reward">
-                            <span class="TorrentDetail-rewardButton" data-tooltip="<?= G::$LoggedUser['ID'] == $UserID ? Lang::get('torrents', 'you_cant_reward_yourself') : Lang::get('torrents', 'you_have_rewarded') ?>" style="<?= in_array(5, $Sended) || G::$LoggedUser['ID'] == $UserID ? "" : "display: none;" ?>" id="bonus5<?= $TorrentID ?>">
+                            <span class="TorrentDetail-rewardButton is-active" data-tooltip="<?= G::$LoggedUser['ID'] == $UserID ? Lang::get('torrents', 'you_cant_reward_yourself') : Lang::get('torrents', 'you_have_rewarded') ?>" style="<?= in_array(5, $Sended) || G::$LoggedUser['ID'] == $UserID ? "" : "display: none;" ?>" id="bonus5<?= $TorrentID ?>">
                                 <?= icon('bonus-active') ?>
                             </span>
                             <a class="TorrentDetail-rewardButton is-toReward" data-tooltip="<?= Lang::get('torrents', 'reward_5_bonus_to_uploader') ?>" style="<?= in_array(5, $Sended) || G::$LoggedUser['ID'] == $UserID ? "display: none;" : "" ?>" id="abonus5<?= $TorrentID ?>" href="javascript:void(0);" onclick="sendbonus(<?= $TorrentID ?>, 5)">
@@ -473,7 +477,7 @@ class TorrentTableView {
                             <span>5</span>
                         </div>
                         <div class="TorrentDetail-reward">
-                            <span class="TorrentDetail-rewardButton" data-tooltip="<?= G::$LoggedUser['ID'] == $UserID ? Lang::get('torrents', 'you_cant_reward_yourself') : Lang::get('torrents', 'you_have_rewarded') ?>" style="<?= in_array(30, $Sended) || G::$LoggedUser['ID'] == $UserID ? "" : "display: none;" ?>" id="bonus30<?= $TorrentID ?>">
+                            <span class="TorrentDetail-rewardButton is-active" data-tooltip="<?= G::$LoggedUser['ID'] == $UserID ? Lang::get('torrents', 'you_cant_reward_yourself') : Lang::get('torrents', 'you_have_rewarded') ?>" style="<?= in_array(30, $Sended) || G::$LoggedUser['ID'] == $UserID ? "" : "display: none;" ?>" id="bonus30<?= $TorrentID ?>">
                                 <?= icon('bonus-active') ?>
                             </span>
                             <a class="TorrentDetail-rewardButton is-toReward" data-tooltip="<?= Lang::get('torrents', 'reward_30_bonus_to_uploader') ?>" style="<?= in_array(30, $Sended) || G::$LoggedUser['ID'] == $UserID ? "display: none;" : "" ?>" id="abonus30<?= $TorrentID ?>" href="javascript:void(0);" onclick="sendbonus(<?= $TorrentID ?>, 30)">
@@ -482,19 +486,19 @@ class TorrentTableView {
                             <span>30</span>
                         </div>
                         <div class="TorrentDetail-reward">
-                            <span class="TorrentDetail-rewardDisplay" data-tooltip="<?= G::$LoggedUser['ID'] == $UserID ? Lang::get('torrents', 'you_cant_reward_yourself') : Lang::get('torrents', 'you_have_rewarded') ?>" style="<?= in_array(100, $Sended) || G::$LoggedUser['ID'] == $UserID ? "" : "display: none;" ?>" id="bonus100<?= $TorrentID ?>">
+                            <span class="TorrentDetail-rewardButton is-active" data-tooltip="<?= G::$LoggedUser['ID'] == $UserID ? Lang::get('torrents', 'you_cant_reward_yourself') : Lang::get('torrents', 'you_have_rewarded') ?>" style="<?= in_array(100, $Sended) || G::$LoggedUser['ID'] == $UserID ? "" : "display: none;" ?>" id="bonus100<?= $TorrentID ?>">
                                 <?= icon('bonus-active') ?>
                             </span>
-                            <a class="TorrentDetail-rewardButton" data-tooltip="<?= Lang::get('torrents', 'reward_100_bonus_to_uploader') ?>" style="<?= in_array(100, $Sended) || G::$LoggedUser['ID'] == $UserID ? "display: none;" : "" ?>" id="abonus100<?= $TorrentID ?>" href="javascript:void(0);" onclick="sendbonus(<?= $TorrentID ?>, 100)">
+                            <a class="TorrentDetail-rewardButton is-toReward" data-tooltip="<?= Lang::get('torrents', 'reward_100_bonus_to_uploader') ?>" style="<?= in_array(100, $Sended) || G::$LoggedUser['ID'] == $UserID ? "display: none;" : "" ?>" id="abonus100<?= $TorrentID ?>" href="javascript:void(0);" onclick="sendbonus(<?= $TorrentID ?>, 100)">
                                 <?= icon('bonus-active') ?>
                             </a>
                             <span>100</span>
                         </div>
                         <div class="TorrentDetail-reward">
-                            <span class="TorrentDetail-rewardDisplay" data-tooltip="<?= G::$LoggedUser['ID'] == $UserID ? Lang::get('torrents', 'you_cant_reward_yourself') : Lang::get('torrents', 'you_have_rewarded') ?>" style="<?= in_array(300, $Sended) || G::$LoggedUser['ID'] == $UserID ? "" : "display: none;" ?>" id="bonus300<?= $TorrentID ?>">
+                            <span class="TorrentDetail-rewardButton is-active" data-tooltip="<?= G::$LoggedUser['ID'] == $UserID ? Lang::get('torrents', 'you_cant_reward_yourself') : Lang::get('torrents', 'you_have_rewarded') ?>" style="<?= in_array(300, $Sended) || G::$LoggedUser['ID'] == $UserID ? "" : "display: none;" ?>" id="bonus300<?= $TorrentID ?>">
                                 <?= icon('bonus-active') ?>
                             </span>
-                            <a class="TorrentDetail-rewardButton" data-tooltip="<?= Lang::get('torrents', 'reward_300_bonus_to_uploader') ?>" style="<?= in_array(300, $Sended) || G::$LoggedUser['ID'] == $UserID ? "display: none;" : "" ?>" id="abonus300<?= $TorrentID ?>" href="javascript:void(0);" onclick="sendbonus(<?= $TorrentID ?>, 300)">
+                            <a class="TorrentDetail-rewardButton is-toReward" data-tooltip="<?= Lang::get('torrents', 'reward_300_bonus_to_uploader') ?>" style="<?= in_array(300, $Sended) || G::$LoggedUser['ID'] == $UserID ? "display: none;" : "" ?>" id="abonus300<?= $TorrentID ?>" href="javascript:void(0);" onclick="sendbonus(<?= $TorrentID ?>, 300)">
                                 <?= icon('bonus-active') ?>
                             </a>
                             <span>300</span>
@@ -629,19 +633,12 @@ class TorrentTableView {
                         }
                         ?>
                     </div>
-                <?
-                }
-                if (!empty($Description)) {
-                ?>
+                <? } ?>
+                <? if (!empty($Description)) { ?>
                     <div class="TorrentDetail-row is-description is-block">
-                        <?
-                        echo Text::full_format($Description);
-                        ?>
+                        <?= Text::full_format($Description) ?>
                     </div>
-                <?
-                }
-                ?>
-
+                <? } ?>
         </div>
     <?
     }

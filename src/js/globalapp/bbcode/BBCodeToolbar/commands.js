@@ -403,7 +403,7 @@ export default commands
         ' data-code="' +
         code +
         '"' +
-        ' title="' +
+        ' data-tooltip="' +
         title +
         '"' +
         ' class="bbcode-toolbar__emoticon-popup-item js-bbcode-toolbar__emoticon-popup-item"' +

@@ -166,9 +166,17 @@ View::show_header(Lang::get('reports', 'report_a') . $Type['title'], 'bbcode,jqu
                         <td class="Table-cell"><?= Lang::get('reports', 'filled') ?>?</td>
                     </tr>
                     <tr class="Table-row">
-                        <td class="Table-cell"><?= display_str($Name) ?></td>
-                        <td class="Table-cell"><?= Text::full_format($Desc) ?></td>
-                        <td class="Table-cell"><strong><?= ($Filled == 0 ? Lang::get('reports', 'no') : Lang::get('reports', 'yes')) ?></strong></td>
+                        <td class="Table-cell">
+                            <?= display_str($Name) ?>
+                        </td>
+                        <td class="Table-cell">
+                            <div class="HtmlText">
+                                <?= Text::full_format($Desc) ?>
+                            </div>
+                        </td>
+                        <td class="Table-cell">
+                            <strong><?= ($Filled == 0 ? Lang::get('reports', 'no') : Lang::get('reports', 'yes')) ?></strong>
+                        </td>
                     </tr>
                 </table>
                 <br />

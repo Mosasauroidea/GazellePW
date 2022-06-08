@@ -58,7 +58,9 @@ if ($Depth != 0) {
     }
 }
 ?>
-<?= Text::full_format($Body) ?>
+<div class="HtmlText">
+    <?= Text::full_format($Body) ?>
+</div>
 <br />
 <br />
 <span class="last_edited">

@@ -56,7 +56,9 @@ View::show_header(Lang::get('apply', 'apply'), 'apply,bbcode', 'PageApplyApply')
                                     <td>
                                         <div class="role_container">
                                             <h2 class="head"><?= $title ?></h2>
-                                            <div class="HtmlText PostArticle"><?= Text::full_format($info['description']) ?></div>
+                                            <div class="HtmlText PostArticle">
+                                                <?= Text::full_format($info['description']) ?>
+                                            </div>
                                         </div>
                                         </br>
                                     </td>

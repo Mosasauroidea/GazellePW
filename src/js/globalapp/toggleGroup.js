@@ -7,7 +7,7 @@ Table
 	row: group-id=x edition-id=x
 hidden
 */
-export default function toggleGroup(groupid, link, event) {
+globalapp.toggleGroup = function toggleGroup(groupid, link, event) {
   var showRow = true
   var clickedRow = link
   while (clickedRow.nodeName != 'TR') {

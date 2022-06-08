@@ -7,21 +7,28 @@ import Snackbar from './Snackbar'
 
 const ID = 'snackbar'
 
-function open({ message }) {
-  closeElement(ID)
-  openElement(ID, <Snackbar message={message} />)
+Snackbar.open = function open(message, props = {}) {
+  Snackbar.close()
+  openElement(ID, <Snackbar {...props} message={message} />)
 }
 
-function close() {
+Snackbar.notify = function notify(message, args) {
+  Snackbar.open(message, { onClick: close, ...args })
+  setTimeout(() => {
+    Snackbar.close()
+  }, 2e3)
+}
+
+Snackbar.error = function error(message) {
+  Snackbar.notify(message, { type: 'error' })
+}
+
+Snackbar.close = function close() {
   closeElement(ID)
 }
 
-function isOpen() {
+Snackbar.isOpen = function isOpen() {
   return isElementOpen(ID)
 }
-
-Snackbar.open = open
-Snackbar.close = close
-Snackbar.isOpen = isOpen
 
 export default Snackbar

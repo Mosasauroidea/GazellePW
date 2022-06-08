@@ -9,21 +9,10 @@
 }
 .ForumPostReward-body {
   padding: var(--global-space-default);
-  display: flex;
-  flex-direction: column;
-  gap: var(--global-space-sm);
+  width: auto; /* override table */
 }
-.ForumPostReward-row.is-header {
-  font-weight: bold;
-}
-.ForumPostReward-row {
-  display: flex;
-}
-.ForumPostReward-cell.is-giver {
-  width: 110px;
-}
-.ForumPostReward-cell.is-bonus {
-  width: 70px;
+.ForumPostReward-cell {
+  padding: 2px var(--global-space-default);
 }
 
 /* Cleanup */

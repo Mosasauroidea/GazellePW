@@ -29,7 +29,7 @@ if (!check_perms('users_mod')) {
 function create_row($Title, $URL, $HasPermission = false, $Tooltip = false) {
     if ($HasPermission) {
         global $ToolsHTML;
-        $TooltipHTML = $Tooltip !== false ? " class=\"tooltip\" title=\"$Tooltip\"" : "";
+        $TooltipHTML = $Tooltip !== false ? " data-tooltip=\"$Tooltip\"" : "";
         $ToolsHTML .= "\t\t\t\t<tr class='Table-row'><td class='Table-cell'><a class='Link' href=\"$URL\"$TooltipHTML>$Title</a></td></tr>\n";
     }
 }

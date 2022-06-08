@@ -1,4 +1,5 @@
 export default {
+  like: '赞',
   copied: '已复制',
   view: '查看',
   clear: '清除',

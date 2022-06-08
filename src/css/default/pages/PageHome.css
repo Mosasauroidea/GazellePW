@@ -1,0 +1,28 @@
+.Social {
+  display: flex;
+  gap: var(--global-space-lg);
+  justify-content: center;
+}
+
+.Social .icon {
+  width: 24px;
+  height: 24px;
+}
+
+.Social .rss.icon {
+  color: #ffa500;
+}
+
+.Social .telegram.icon {
+  color: #26a5e4;
+}
+
+.Social .github.icon {
+  color: #181717;
+}
+
+@media (prefers-color-scheme: dark) {
+  .Social .github.icon {
+    color: #cdd9e5;
+  }
+}

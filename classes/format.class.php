@@ -149,7 +149,7 @@ class Format {
             $RatioColor = 'u-colorRatio99';
             $Class = $Tooltip ? 'tooltip' : '';
             $Title = $Tooltip ? 'Infinite' : '';
-            return "<span class='$Class u-colorRatio99' title='$Title'>∞</span>";
+            return "<span class='$Class u-colorRatio99' data-tooltip='$Title'>∞</span>";
         }
         if ($Color) {
             $Ratio = sprintf(

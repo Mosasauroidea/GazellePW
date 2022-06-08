@@ -239,7 +239,7 @@ function check_paranoia_here($Setting) {
     }
 }
 
-View::show_header($Username, "jquery.imagesloaded,jquery.wookmark,user,bbcode,requests,comments,info_paster,tiles", "PageUserShow");
+View::show_header($Username, "jquery.imagesloaded,jquery.wookmark,user,bbcode,comments,info_paster,tiles", "PageUserShow");
 
 if (check_paranoia_here('artistsadded')) {
     $DB->query("
@@ -856,7 +856,7 @@ WHERE xs.uid =" . $UserID . " and xs.tstamp >= unix_timestamp(date_format(now(),
                         <li class="SidebarList-item" <?
                                                         $DB->query("select count(*), EndTime from invites_typed where UserID=" . $UserID . " and Type='time' and Used=0 group by EndTime");
                                                         $TimeAndCnts = $DB->to_array(false, MYSQLI_NUM, false);
-                                                        if (count($TimeAndCnts) > 0) echo "title=\"";
+                                                        if (count($TimeAndCnts) > 0) echo "data-tooltip=\"";
                                                         $num = 0;
                                                         foreach ($TimeAndCnts as $TAC) {
                                                             if ($num != 0) echo "\n";
@@ -1381,8 +1381,8 @@ WHERE xs.uid =" . $UserID . " and xs.tstamp >= unix_timestamp(date_format(now(),
                                         <td class="TableRequest-cell">
                                             <span id="vote_count_<?= $RequestID ?>"><?= $VotesCount ?></span>
                                             <? if (check_perms('site_vote')) { ?>
-                                                <a href="javascript:Vote(0, <?= $RequestID ?>)">+</a>
-                                            <?          } ?>
+                                                <a href="javascript:globalapp.requestVote(0, <?= $RequestID ?>)">+</a>
+                                            <? } ?>
                                         </td>
                                         <td class="Table-cell">
                                             <span id="bounty_<?= $RequestID ?>"><?= Format::get_size($Bounty) ?></span>
@@ -1391,7 +1391,7 @@ WHERE xs.uid =" . $UserID . " and xs.tstamp >= unix_timestamp(date_format(now(),
                                             <?= time_diff($Request['TimeAdded']) ?>
                                         </td>
                                     </tr>
-                                <?      } ?>
+                                <? } ?>
                             </table>
                         </div>
                     </div>
@@ -1483,7 +1483,9 @@ WHERE xs.uid =" . $UserID . " and xs.tstamp >= unix_timestamp(date_format(now(),
                     <div class="Box">
                         <div class="Box-header"><?= Lang::get('user', 'forum_warnings') ?></div>
                         <div class="Box-body">
-                            <div id="forumwarningslinks" class="AdminComment" style="width: 98%;"><?= Text::full_format($ForumWarnings) ?></div>
+                            <div id="forumwarningslinks" class="HtmlText AdminComment" style="width: 98%;">
+                                <?= Text::full_format($ForumWarnings) ?>
+                            </div>
                         </div>
                     </div>
                 <?
@@ -1501,7 +1503,9 @@ WHERE xs.uid =" . $UserID . " and xs.tstamp >= unix_timestamp(date_format(now(),
                         </div>
                         <div id="staffnotes" class="Box-body">
                             <input type="hidden" name="comment_hash" value="<?= $CommentHash ?>" />
-                            <div id="admincommentlinks" class="AdminComment" style="width: 98%;"><?= Text::full_format($AdminComment) ?></div>
+                            <div id="admincommentlinks" class="HtmlText AdminComment" style="width: 98%;">
+                                <?= Text::full_format($AdminComment) ?>
+                            </div>
                         </div>
                     </div>
 
@@ -1714,13 +1718,12 @@ WHERE xs.uid =" . $UserID . " and xs.tstamp >= unix_timestamp(date_format(now(),
                                 <td class="Form-inputs">
                                     <? if ($FA_Key) { ?>
                                         <a href="user.php?action=2fa&page=user&do=disable&userid=<?= $UserID ?>"><?= Lang::get('user', 'close') ?></a>
-                                    <?      } else { ?>
+                                    <? } else { ?>
                                         <?= Lang::get('user', 'closed') ?>
-                                    <?      } ?>
+                                    <? } ?>
                                 </td>
                             </tr>
-
-                        <?  } ?>
+                        <? } ?>
                     </table>
 
                     <? if (check_perms('users_warn')) { ?>
@@ -1731,14 +1734,18 @@ WHERE xs.uid =" . $UserID . " and xs.tstamp >= unix_timestamp(date_format(now(),
                                 </td>
                             </tr>
                             <tr class="Form-row">
-                                <td class="Form-label"><?= Lang::get('user', 'warned') ?></td>
+                                <td class="Form-label">
+                                    <?= Lang::get('user', 'warned') ?>
+                                </td>
                                 <td class="Form-inputs">
                                     <input type="checkbox" name="Warned" <? if ($Warned != '0000-00-00 00:00:00') { ?> checked="checked" <? } ?> />
                                 </td>
                             </tr>
                             <? if ($Warned == '0000-00-00 00:00:00') { /* user is not warned */ ?>
                                 <tr class="Form-row">
-                                    <td class="Form-label"><?= Lang::get('user', 'warn_time') ?></td>
+                                    <td class="Form-label">
+                                        <?= Lang::get('user', 'warn_time') ?>
+                                    </td>
                                     <td class="Form-inputs">
                                         <select class="Input" name="WarnLength">
                                             <option class="Select-option" value="">---</option>
@@ -1749,9 +1756,11 @@ WHERE xs.uid =" . $UserID . " and xs.tstamp >= unix_timestamp(date_format(now(),
                                         </select>
                                     </td>
                                 </tr>
-                            <?      } else { /* user is warned */ ?>
+                            <? } else { /* user is warned */ ?>
                                 <tr class="Form-row">
-                                    <td class="Form-label"><?= Lang::get('user', 'warn_time') ?></td>
+                                    <td class="Form-label">
+                                        <?= Lang::get('user', 'warn_time') ?>
+                                    </td>
                                     <td class="Form-inputs">
                                         <select class="Input" name="ExtendWarning" onchange="ToggleWarningAdjust(this);">
                                             <option class="Select-option">---</option>
@@ -1762,21 +1771,25 @@ WHERE xs.uid =" . $UserID . " and xs.tstamp >= unix_timestamp(date_format(now(),
                                         </select>
                                     </td>
                                 </tr>
-                                <tr id="ReduceWarningTR">
-                                    <td class="Form-label"><?= Lang::get('user', 'free_time') ?></td>
+                                <tr class="Form-row" id="ReduceWarningTR">
+                                    <td class="Form-label">
+                                        <?= Lang::get('user', 'free_time') ?>
+                                    </td>
                                     <td class="Form-inputs">
-                                        name="ReduceWarning">
-                                        <option class="Select-option">---</option>
-                                        <option class="Select-option" value="1"><?= Lang::get('user', '1_week') ?></option>
-                                        <option class="Select-option" value="2"><?= Lang::get('user', '2_week') ?></option>
-                                        <option class="Select-option" value="4"><?= Lang::get('user', '4_week') ?></option>
-                                        <option class="Select-option" value="8"><?= Lang::get('user', '8_week') ?></option>
+                                        <select class="Input" name="ReduceWarning">
+                                            <option class="Select-option">---</option>
+                                            <option class="Select-option" value="1"><?= Lang::get('user', '1_week') ?></option>
+                                            <option class="Select-option" value="2"><?= Lang::get('user', '2_week') ?></option>
+                                            <option class="Select-option" value="4"><?= Lang::get('user', '4_week') ?></option>
+                                            <option class="Select-option" value="8"><?= Lang::get('user', '8_week') ?></option>
                                         </select>
                                     </td>
                                 </tr>
-                            <?      } ?>
+                            <? } ?>
                             <tr class="Form-row">
-                                <td class="Form-label" data-tooltip="<?= Lang::get('user', 'warn_reason_title') ?>"><?= Lang::get('user', 'warn_reason') ?></td>
+                                <td class="Form-label" data-tooltip="<?= Lang::get('user', 'warn_reason_title') ?>">
+                                    <?= Lang::get('user', 'warn_reason') ?>
+                                </td>
                                 <td class="Form-inputs">
                                     <input class="Input" type="text" name="WarnReason" />
                                 </td>

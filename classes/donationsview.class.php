@@ -32,7 +32,7 @@ class DonationsView {
 
         <table class="TableDonorPoints Table Form-rowList" id="donor_points_box">
             <tr class="Form-rowHeader">
-                <td colspan="3" title='<?= Lang::get('user', 'donor_system_modify_values_title') ?>'><?= Lang::get('user', 'donor_system_modify_values') ?></td>
+                <td colspan="3" data-tooltip='<?= Lang::get('user', 'donor_system_modify_values_title') ?>'><?= Lang::get('user', 'donor_system_modify_values') ?></td>
             </tr>
             <tr class="Form-row">
                 <td class="Form-label" data-tooltip="<?= Lang::get('user', 'active_points_title') ?>"><?= Lang::get('user', 'active_points') ?>:</td>
@@ -107,7 +107,7 @@ class DonationsView {
                         <span style="float: right;"><a href="#" onclick="$('#profilediv_<?= $i ?>').gtoggle(); this.innerHTML = (this.innerHTML == '<?= Lang::get('global', 'hide') ?>' ? '<?= Lang::get('global', 'show') ?>' : '<?= Lang::get('global', 'hide') ?>'); return false;" class="brackets"><?= Lang::get('global', 'hide') ?></a></span>
                     </div>
                     <div class="Box-body HtmlText PostArticle profileinfo" id="profilediv_<?= $i ?>">
-                        <? echo Text::full_format($ProfileRewards['ProfileInfo' . $i]); ?>
+                        <?= Text::full_format($ProfileRewards['ProfileInfo' . $i]) ?>
                     </div>
                 </div>
         <?

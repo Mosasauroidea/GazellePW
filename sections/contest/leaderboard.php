@@ -63,7 +63,7 @@ if ($Contest['Banner']) {
                 <div class="head">
                     <h3>A grand total of <?=
                                             G::$Cache->get_value("contest_leaderboard_total_{$Contest['ID']}")
-                                                ?: "<span title=\"We will recalculate the numbers soon\">many, many, many</span>"
+                                                ?: "<span data-tooltip=\"We will recalculate the numbers soon\">many, many, many</span>"
                                             ?> <?= $Contest['ContestType'] == 'request_fill' ? 'requests have been filled' : 'torrents have been uploaded' ?>.</h3>
                 </div>
                 <table class="layout">

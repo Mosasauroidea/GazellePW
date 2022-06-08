@@ -179,7 +179,7 @@ View::show_header(Lang::get('torrents', 'header'), 'browse', 'PageTorrentHome');
                 <a href="wiki.php?action=article&name=%E9%AB%98%E7%BA%A7%E6%90%9C%E7%B4%A2%E6%8C%87%E5%8D%97" target="_blank" data-tooltip="<?= Lang::get('torrents', 'guide_of_advanced_search') ?>">[?]</a>
             </div>
             <div class="SearchPageHeader-actions">
-                <a href="#" onclick="globalapp.toggleAny(event, '.SearchPageBody', { updateText: true });globalapp.toggleAny(event, '.SearchPageFooter', { updateText: true })" id="ft_toggle" class="brackets">
+                <a href="#" onclick="globalapp.toggleAny(event, '.SearchPageBody', { updateText: true }); globalapp.toggleAny(event, '.SearchPageFooter', { updateText: true })" id="ft_toggle" class="brackets">
                     <span class="u-toggleAny-show <?= $HideFilter ?: 'u-hidden' ?>"><?= Lang::get('global', 'show') ?></span>
                     <span class="u-toggleAny-hide <?= $HideFilter ? 'u-hidden' : '' ?>"><?= Lang::get('global', 'hide') ?></span>
                 </a>
@@ -369,7 +369,7 @@ View::show_header(Lang::get('torrents', 'header'), 'browse', 'PageTorrentHome');
                     $x = 0;
                     foreach ($GenreTags as $Tag) {
                     ?>
-                        <td width="12.5%"><a href="#" onclick="add_tag('<?= $Tag ?>'); return false;"><?= $Tag ?></a></td>
+                        <td width="12.5%"><a href="#" onclick="globalapp.browseAddTag('<?= $Tag ?>'); return false;"><?= $Tag ?></a></td>
                         <?
                         $x++;
                         if ($x % 7 == 0) {

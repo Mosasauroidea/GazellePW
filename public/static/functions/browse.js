@@ -174,7 +174,7 @@ function show_reported(TorrentID, View) {
   $('#' + View + '_giver_' + TorrentID).ghide()
 }
 
-function add_tag(tag) {
+globalapp.browseAddTag = function browseAddTag(tag) {
   if ($('#tags').raw().value == '') {
     $('#tags').raw().value = tag
   } else {
@@ -184,7 +184,7 @@ function add_tag(tag) {
 
 var ArtistFieldCount = 1
 
-function AddArtistField() {
+globalapp.browseAddArtistField = function browseAddArtistField() {
   var x = $('#AddArtists').raw()
   x.appendChild(document.createElement('br'))
   var ArtistField = document.createElement('input')

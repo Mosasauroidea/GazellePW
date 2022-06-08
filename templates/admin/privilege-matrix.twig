@@ -34,9 +34,9 @@
     </tr>
 {% for p in privilege %}
     <tr>
-        <td{{ p.orphan ? ' title="This is an orphaned privilege" style="color: orangered; font-weight: bold;"' : '' }} title="{{ p.description }}">{{ p.name }}</td>
+        <td{{ p.orphan ? ' data-tooltip="This is an orphaned privilege" style="color: orangered; font-weight: bold;"' : '' }} data-tooltip="{{ p.description }}">{{ p.name }}</td>
 {% for c in class_list %}
-        <td style="text-align: center;" title="{{ c.name }} {{ c.id in p.can ? 'can' : 'cannot' }} {{ p.description }}">
+        <td style="text-align: center;" data-tooltip="{{ c.name }} {{ c.id in p.can ? 'can' : 'cannot' }} {{ p.description }}">
             <a href="tools.php?action=permissions&amp;id={{ c.id }}">{{ c.id in p.can ? tick : '&middot;' }}</a></td>
 {% endfor %}
     </tr>

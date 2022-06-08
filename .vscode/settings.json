@@ -5,7 +5,7 @@
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "[xml]": {
-    "editor.defaultFormatter": "DotJoshJohnson.xml"
+    "editor.defaultFormatter": "redhat.vscode-xml"
   },
   "[php]": {
     "editor.defaultFormatter": "bmewburn.vscode-intelephense-client"

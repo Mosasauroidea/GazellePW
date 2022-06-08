@@ -20,7 +20,7 @@ if ($Contest !== false and strlen($Contest['Banner'])) {
             <p>There is no contest at the moment.</p>
         </div>
     <?  } else { ?>
-        <div class="Box-body">
+        <div class="Box-body HtmlText">
             <?= Text::full_format($Contest['WikiText']) ?>
         </div>
     <? } ?>

@@ -153,7 +153,7 @@ HTML;
                     case TorrentSlotGroupStatus::Empty:
                         // 空的class
                         $SlotStatusClass[$type] = '';
-                        $text[$type] = "<span class='u-colorSuccess' title='" . Lang::get('torrents', 'slot_status_empty') . "'>" . icon('check') . "</span>";
+                        $text[$type] = "<span class='u-colorSuccess' data-tooltip='" . Lang::get('torrents', 'slot_status_empty') . "'>" . icon('check') . "</span>";
                         break;
                     case TorrentSlotGroupStatus::Full:
                         // 满的class

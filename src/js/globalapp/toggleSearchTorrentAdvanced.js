@@ -6,7 +6,10 @@ is-inputAction
 u-hidden
 */
 
-export default function toggleSearchTorrentAdvanced(event, mode) {
+globalapp.toggleSearchTorrentAdvanced = function toggleSearchTorrentAdvanced(
+  event,
+  mode
+) {
   event.preventDefault()
   const target = event.target
   const root = target.closest('.SearchTorrent')

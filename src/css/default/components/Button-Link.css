@@ -12,7 +12,7 @@ ButtonGroup
   variant="primary"
 
 Loading Button
-  <button class="Button"> 
+  <button class="Button">  is-loading
      <span>Next</span>
      <span class="Button-loaderIcon"></span>
   </button>
@@ -20,7 +20,10 @@ Loading Button
 
 .ButtonGroup {
   display: inline-flex;
-  gap: var(--global-space-sm);
+  gap: var(--global-space-default);
+}
+.ButtonGroup--wide {
+  gap: var(--global-space-lg);
 }
 
 /* Link */
