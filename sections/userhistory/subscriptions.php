@@ -216,7 +216,6 @@ $Requests = Requests::get_requests($Requests);
                                             <a href="#" onclick="SubscribeComments('<?= $Result['Page'] ?>', <?= $Result['PageID'] ?>); return false;" id="subscribelink_<?= $Result['Page'] . $Result['PageID'] ?>" class="brackets"><?= Lang::get('global', 'unsubscribe') ?></a>
                                         </span>
                                     <? } ?>
-                                    <a href="#">&uarr;</a>
                                 </div>
                             </div>
                         </td>

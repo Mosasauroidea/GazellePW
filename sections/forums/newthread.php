@@ -59,7 +59,6 @@ View::show_header('Forums &gt; ' . $Forum['Name'] . ' &gt; New Topic', 'comments
                                 <a href="#newthreadpreview" class="brackets">
                                     <?= Lang::get('forums', 'report') ?>
                                 </a>
-                                <a href="#">&uarr;</a>
                             </div>
                     </td>
                 </tr>

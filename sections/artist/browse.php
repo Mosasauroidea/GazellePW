@@ -287,7 +287,7 @@ foreach ($Importances as $Group) {
 foreach ($TorrentGroups as $ReleaseType => $GroupInfo) {
     $DisplayName =  sectionTitle($ReleaseType);
 ?>
-    <h3 id="torrents_<?= $ReleaseType ?>"><a href="#">&uarr;</a>&nbsp;<strong><?= $DisplayName ?></strong>&nbsp;(<a href="#" onclick="$('.torrent_table_<?= $ReleaseType ?>').gtoggle(true); return false;"><?= Lang::get('artist', 'view') ?></a>)</h3>
+    <h3 id="torrents_<?= $ReleaseType ?>"><strong><?= $DisplayName ?></strong>&nbsp;(<a href="#" onclick="$('.torrent_table_<?= $ReleaseType ?>').gtoggle(true); return false;"><?= Lang::get('artist', 'view') ?></a>)</h3>
     <div class="Box">
         <div class="Box-body torrent_table_<?= $ReleaseType ?>" id="torrent_table_<?= $ID ?>">
             <?
@@ -536,7 +536,7 @@ View::show_header(($ChineseName ? '[' . $ChineseName . '] ' : '') . $Name, 'brow
         ?>
             <table class="TableCollage Table" id="collages">
                 <tr class="Table-rowHeader">
-                    <td class="Table-cell" width="85%"><a href="#">&uarr;</a>&nbsp;This artist is in <?= number_format(count($Collages)) ?> collage<?= ((count($Collages) > 1) ? 's' : '') ?><?= $SeeAll ?></td>
+                    <td class="Table-cell" width="85%">This artist is in <?= number_format(count($Collages)) ?> collage<?= ((count($Collages) > 1) ? 's' : '') ?><?= $SeeAll ?></td>
                     <td class="Table-cell"># artists</td>
                 </tr>
                 <?
@@ -569,7 +569,6 @@ View::show_header(($ChineseName ? '[' . $ChineseName . '] ' : '') . $Name, 'brow
                 <table class="TableRequest Table" cellpadding="6" cellspacing="1" border="0" width="100%" id="requests">
                     <tr class="Table-rowHeader">
                         <td class="Table-cell" style="width: 48%;">
-                            <a href="#">&uarr;</a>&nbsp;
                             <?= Lang::get('artist', 'request_name') ?>
                         </td>
                         <td class="Table-cell">
@@ -661,7 +660,6 @@ View::show_header(($ChineseName ? '[' . $ChineseName . '] ' : '') . $Name, 'brow
         ?>
             <div id="similar_artist_map" class="box">
                 <div id="flipper_head" class="head">
-                    <a href="#">&uarr;</a>&nbsp;
                     <strong id="flipper_title"><?= Lang::get('artist', 'similar_artist_map') ?></strong>
                     <a id="flip_to" class="brackets" href="#" onclick="flipView(); return false;"><?= Lang::get('artist', 'switch_to_cloud') ?></a>
                 </div>

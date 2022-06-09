@@ -252,7 +252,6 @@ if ($ShowGrouped) {
                                     <? if ($ViewingOwn && !in_array($TopicID, $UserSubscriptions)) { ?>
                                         <a href="#" onclick="Subscribe(<?= $TopicID ?>); $('.subscribelink<?= $TopicID ?>').remove(); return false;" class="brackets subscribelink<?= $TopicID ?>"><?= Lang::get('global', 'subscribe') ?></a>
                                     <? } ?>
-                                    <a href="#">&uarr;</a>
                                 </div>
                             </div>
                         </td>

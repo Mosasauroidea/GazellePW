@@ -91,7 +91,7 @@ $DB->query("
                         - <a href="#quickpost" onclick="Quote('<?= $MessageID ?>','<?= $Users[(int)$SenderID]['Username'] ?>');" class="brackets"><?= Lang::get('inbox', 'quote') ?></a>
                     <?  } ?>
                 </div>
-                <div style="float: right;"><a href="#">&uarr;</a> <a href="#messageform">&darr;</a></div>
+                <div style="float: right;"><a href="#messageform">&darr;</a></div>
             </div>
             <div class="Box-body HtmlText PostArticle" id="message<?= $MessageID ?>">
                 <?= Text::full_format($Body) ?>

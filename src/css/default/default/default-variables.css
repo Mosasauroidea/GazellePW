@@ -231,4 +231,5 @@
   --global-zIndex-default: 10;
   --global-zIndex-dialog: 20;
   --global-zIndex-snackbar: 30;
+  --global-zIndex-backToTop: 100;
 }

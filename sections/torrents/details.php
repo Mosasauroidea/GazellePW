@@ -982,7 +982,7 @@ View::show_header($Title, 'browse,comments,torrent,bbcode,recommend,cover_art,su
             ?>
                 <table class="Table TableCollage">
                     <tr class="Table-rowHeader">
-                        <td class="Table-cell" width="85%"><a href="#">&uarr;</a>&nbsp;<?= Lang::get('torrents', 'this_album_is_in_collages_1') ?>
+                        <td class="Table-cell" width="85%"><?= Lang::get('torrents', 'this_album_is_in_collages_1') ?>
                             <?= number_format(count($Collages)) ?>
                             <?= Lang::get('torrents', 'this_album_is_in_collages_2') ?><?= ((count($Collages) > 1) ? Lang::get('torrents', 'this_album_is_in_collages_3') : '') ?><?= $SeeAll ?>
                         </td>
@@ -1037,7 +1037,7 @@ View::show_header($Title, 'browse,comments,torrent,bbcode,recommend,cover_art,su
             ?>
                 <table class="TableCollage Table">
                     <tr class="Table-rowHeader">
-                        <td class="Table-cell" width="85%"><a href="#">&uarr;</a>&nbsp;<?= Lang::get('torrents', 'this_album_is_in_personal_collages_1') ?>
+                        <td class="Table-cell" width="85%"><?= Lang::get('torrents', 'this_album_is_in_personal_collages_1') ?>
                             <?= number_format(count($PersonalCollages)) ?>
                             <?= Lang::get('torrents', 'this_album_is_in_personal_collages_2') ?><?= ((count($PersonalCollages) > 1) ? Lang::get('torrents', 'this_album_is_in_personal_collages_3') : '') ?><?= $SeeAll ?>
                         </td>

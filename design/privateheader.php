@@ -365,6 +365,9 @@ if ($_REQUEST['action']) {
 ?>
 
 <body id="<?= $Document == 'collages' ? 'collage' : $Document ?>" class="<?= $BodyClass ?>">
+    <button class="BackToTop" onclick="globalapp.backToTop()">
+        <?= icon('back-to-top') ?>
+    </button>
     <input id="extracb1" class="hidden" type="checkbox">
     <input id="extracb2" class="hidden" type="checkbox">
     <input id="extracb3" class="hidden" type="checkbox">

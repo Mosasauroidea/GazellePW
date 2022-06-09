@@ -56,7 +56,6 @@ class CommentsView {
                                         </form>
                                         - <a href="#" onclick="$('#warn<?= $PostID ?>').raw().submit(); return false;" class="brackets"><?= Lang::get('forums', 'warn') ?></a>
                                     <? } ?>
-                                    <a href="#">&uarr;</a>
                                 <? } ?>
                             </div>
                     </td>

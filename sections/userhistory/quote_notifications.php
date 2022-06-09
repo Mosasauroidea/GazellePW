@@ -154,9 +154,6 @@ View::show_header(Lang::get('userhistory', 'header_quote_notifications'), '', 'P
                                     <?= icon('Forum/jump-to-last-read') ?>
                                 </a>
                             </div>
-                            <div class="TableForumPostHeader-actions">
-                                <a href="#">&uarr;</a>
-                            </div>
                         </div>
                     </td>
                 </tr>

@@ -240,7 +240,7 @@ function Save_Edit(postid) {
         $('#bar' + postid).raw().innerHTML =
           '<a href="reports.php?action=report&amp;type=post&amp;id=' +
           postid +
-          '" class="brackets">Report</a>&nbsp;<a href="#">&uarr;</a>'
+          '" class="brackets">Report</a>'
         $('#preview' + postid).raw().innerHTML = response
         $('#editbox' + postid).ghide()
         $('#pmbox' + postid).ghide()

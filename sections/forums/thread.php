@@ -638,7 +638,6 @@ View::show_header($ThreadInfo['Title'] . ' &lt; ' . $Forums[$ForumID]['Name'] . 
 
                                 <span class="TableForumPostHeader-like" id="unthumb<?= $PostID ?>" <?= !$ThumbCounts[$PostID]['on'] ? 'style="display: none;"' : '' ?>><a href="javascript:void(0);" onclick="unthumb(<?= $PostID ?>, <?= $AuthorID ?>, 'post')"><?= icon("Common/like") ?></a></span>
                                 <span id="thumbcnt<?= $PostID ?>"><?= $ThumbCounts[$PostID]['count'] ? $ThumbCounts[$PostID]['count'] : Lang::get('forums', 'like') ?></span>
-                                - <a href="#">&uarr;</a>
                             </div>
                     </td>
                 </tr>
