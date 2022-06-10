@@ -76,13 +76,13 @@ Where
 .TableForum-post {
   display: flex;
   align-items: center;
-  gap: var(--global-space-default);
+  gap: var(--global-space-sm);
   flex-wrap: wrap;
 }
 .TableForum-lastPoster {
   margin-left: auto;
 }
 .TableForum-cellPost .icon {
-  width: 14px;
-  height: 14px;
+  width: 1em;
+  height: 1em;
 }

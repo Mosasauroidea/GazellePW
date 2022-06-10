@@ -16,6 +16,7 @@
   --global-space-lg: 20px;
 
   /* Colors */
+  --global-color-inactive: grey;
   --global-color-placeholder: grey;
   --global-backgroundColor: white;
   --global-color: #404040;

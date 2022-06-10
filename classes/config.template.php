@@ -182,7 +182,7 @@ define('MINIO_BUCKET', "");
 
 // Banner info
 define('BANNER_URL', '/apply.php');
-define('BANNER_TEXT', 'Banner Text');
+define('BANNER_TEXT', 'Banner Notification');
 
 define('USER',      '2');
 define('MEMBER',    '3');
@@ -205,6 +205,6 @@ define('INTERVIEW', '30');
 define('INDEX_ARTICLE', 1);
 define('DONATE_ARTILCE_ID', 2);
 
-define('GLOBAL_FREELEECH', true);
+define('GLOBAL_FREELEECH', false);
 
 define('DONATE_MONTH_GOAL', 750);

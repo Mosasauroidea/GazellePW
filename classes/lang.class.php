@@ -80,7 +80,9 @@ class Lang {
             if (!$Lang) {
                 $Lang = self::DEFAULT_LANG;
             }
-            setcookie('lang', $Lang, time() + 60 * 60 * 24 * 365, '/');
+            if ($_COOKIE['lang'] != $Lang) {
+                setcookie('lang', $Lang, time() + 60 * 60 * 24 * 365, '/');
+            }
         }
         if (!in_array($Lang, array('chs', 'en'))) {
             $Lang = self::DEFAULT_LANG;

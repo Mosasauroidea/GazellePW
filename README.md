@@ -1,4 +1,4 @@
-[中文](./README-ZH.md) | English
+[中文](./README-ZH.md) | [Screenshot](https://raw.githubusercontent.com/Mosasauroidea/GazellePW/main/public/static/stylespreview/en-github-dark.png)
 
 # GazellePW
 
@@ -9,8 +9,6 @@ GazellePW (GazellePosterWall) is a web framework geared towards private BitTorre
 [WhatCD/Gazelle](https://github.com/WhatCD/Gazelle) is naturally focusing on music. OPSnet team also does some great things based on it, but Gazelle could be applied to more scenarios. We forked some versions of [OPSnet/Gazelle](https://github.com/OPSnet/Gazelle), added lots of features, and made cleanups. Now it works for movie sites. In addition, it also contributes to TV sites and even other sites.
 
 ## Features
-
-> [Screenshot](https://raw.githubusercontent.com/Mosasauroidea/GazellePW/main/public/static/stylespreview/full_github.jpg)
 
 - Beautiful and modern UI: Responsive design, Mobile-friendly, BBCode toolbar, All icons in svg format etc
 - Theme: Auto dark/light theme, Create a new theme in one hour, Component-based style

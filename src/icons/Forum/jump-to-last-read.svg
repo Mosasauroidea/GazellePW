@@ -1,3 +1,5 @@
-<svg class="icon" width="24px" height="24px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16">
-	<path d="M8 0a8 8 0 1 0 8 8 8 8 0 0 0-8-8zm4.612 8.769l-6.336 3.658a.888.888 0 0 1-1.332-.769V4.342a.888.888 0 0 1 1.332-.77l6.336 3.66a.888.888 0 0 1 0 1.537z" fill="#a9a9a9" />
+<svg class="icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 256 256">
+  <rect width="256" height="256" fill="none"></rect>
+  <polyline points="56 48 136 128 56 208" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="24"></polyline>
+  <polyline points="136 48 216 128 136 208" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="24"></polyline>
 </svg>

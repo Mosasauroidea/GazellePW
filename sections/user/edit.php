@@ -161,10 +161,11 @@ echo $Val->GenerateJS('userform');
                                 </a>
                             </div>
                             <div class="StyleGallery u-hidden">
+                                <? $LangForFile = $Lang === 'chs' ? 'zh' : $Lang ?>
                                 <? foreach ($Stylesheets as $Style) { ?>
                                     <div class="StyleGallery-item">
-                                        <a class="StyleGallery-imageLink" name="<?= ($Style['Name']) ?>" href="<?= STATIC_SERVER . 'stylespreview/full_' . $Style['Name'] . '.jpg' ?>" target="_blank">
-                                            <img class="StyleGallery-image" src="<?= STATIC_SERVER . 'stylespreview/thumb_' . $Style['Name'] . '.jpg' ?>" alt="<?= $Style['Name'] ?>" />
+                                        <a class="StyleGallery-imageLink" name="<?= ($Style['Name']) ?>" href="<?= STATIC_SERVER . 'stylespreview/' . $LangForFile . '-' . $Style['Name'] . '-dark.png' ?>" target="_blank">
+                                            <img class="StyleGallery-image" src="<?= STATIC_SERVER . 'stylespreview/thumb-' . $Style['Name'] . '.jpg' ?>" alt="<?= $Style['Name'] ?>" />
                                         </a>
                                         <div class="StyleGallery-name Radio">
                                             <input class="Input" type="radio" name="stylesheet_gallery" id="input-stylesheet-<?= $Style['ID'] ?>" value="<?= ($Style['ID']) ?>" />

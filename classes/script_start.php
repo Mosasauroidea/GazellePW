@@ -21,6 +21,7 @@ require(SERVER_ROOT . '/classes/classloader.php');
 use Gazelle\Util\Crypto;
 use Gazelle\Manager\Donation;
 
+$SSL = $_SERVER['SERVER_PORT'] === '443';
 
 //Deal with dumbasses
 if (isset($_REQUEST['info_hash']) && isset($_REQUEST['peer_id'])) {
