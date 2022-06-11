@@ -1,0 +1,38 @@
+/*
+backToTop.js
+*/
+
+.BackToTop {
+  --scrollOffset: 500;
+  --buttonOpacity: 0.5;
+  width: 50px;
+  height: 50px;
+  border-radius: 100%;
+  background: var(--Button-default-background);
+  color: var(--Button-default-color);
+  border: var(--Button-default-border);
+  box-shadow: var(--Button-default-boxShadow);
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  z-index: var(--global-zIndex-backToTop);
+  opacity: 0;
+  visibility: hidden;
+}
+.BackToTop:hover {
+  background: var(--Button-default-onHover-background);
+  color: var(--Button-default-onHover-color);
+  border: var(--Button-default-onHover-border);
+  box-shadow: var(--Button-default-onHover-boxShadow);
+  opacity: 1 !important; /* override js */
+  transition: all 0.5s !important;
+}
+@media (max-width: 760px) {
+  .BackToTop {
+    display: none;
+  }
+}

@@ -108,3 +108,8 @@ TableContainer
 .TableUser {
   min-width: 600px;
 }
+
+.TableTop10User {
+  min-width: 600px;
+  font-family: var(--global-fontFamilyMonospace);
+}

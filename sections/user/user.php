@@ -826,33 +826,12 @@ WHERE xs.uid =" . $UserID . " and xs.tstamp >= unix_timestamp(date_format(now(),
                     }
                     ?>
                     <li class="SidebarList-item"><?= Lang::get('user', 'p_paranoiaLevel') ?>: <span data-tooltip="<?= $ParanoiaLevel ?>"><?= $ParanoiaLevelText ?></span></li>
-                    <? if ((check_perms('users_view_email') && in_array("emailshowtotc", $Paranoia)) || check_perms("users_override_paranoia") || $OwnProfile) { ?>
-                        <li class="SidebarList-item"><?= Lang::get('user', 'p_email') ?>: <a href="mailto:<?= display_str($Email) ?>"><?= display_str($Email) ?></a>
-                            <? if (check_perms('users_view_email', $Class)) { ?>
-                                <a href="user.php?action=search&amp;email_history=on&amp;email=<?= display_str($Email) ?>" data-tooltip="Search">S</a>
-                            <? } ?>
-                        </li>
-                    <? } ?>
-                    <? if (check_perms('users_view_ips', $Class)) { ?>
-                        <li class="SidebarList-item"><?= Lang::get('user', 'p_ip') ?>: <?= Tools::display_ip($IP) ?></li>
-                        <li class="SidebarList-item"><?= Lang::get('user', 'p_host') ?>: <?= Tools::get_host_by_ajax($IP) ?></li>
-                    <? } ?>
-                    <? if (check_perms('users_view_keys', $Class) || $OwnProfile) { ?>
-                        <li class="SidebarList-item"><?= Lang::get('user', 'p_passkey') ?>: <a href="#" id="passkey" onclick="togglePassKey('<?= display_str($torrent_pass) ?>'); return false;"><?= Lang::get('user', 'view') ?></a></li>
-                    <? } ?>
-                    <?
-                    if (check_perms('users_view_invites') || $OwnProfile) {
-                        if (check_perms('users_view_invites')) {
-                            if (!$InviterID) {
-                                $Invited = '<span style="font-style: italic;">Nobody</span>';
-                            } else {
-                                $Invited = "<a href=\"user.php?id=$InviterID\">$InviterName</a>";
-                            } ?>
-                            <li class="SidebarList-item isInviter" id="inviter-value" data-value="<?= $InviterName ?>">
-                                <span><?= Lang::get('user', 'p_inviter') ?>: </span>
-                                <?= $Invited ?>
-                            </li>
-                        <?  } ?>
+                    <? if (check_perms('users_view_invites') || $OwnProfile) {
+                        if (!$InviterID) {
+                            $Invited = '<span>Nobody</span>';
+                        } else {
+                            $Invited = "<a href=\"user.php?id=$InviterID\">$InviterName</a>";
+                        } ?>
                         <li class="SidebarList-item" <?
                                                         $DB->query("select count(*), EndTime from invites_typed where UserID=" . $UserID . " and Type='time' and Used=0 group by EndTime");
                                                         $TimeAndCnts = $DB->to_array(false, MYSQLI_NUM, false);
@@ -880,6 +859,24 @@ WHERE xs.uid =" . $UserID . " and xs.tstamp >= unix_timestamp(date_format(now(),
                             echo " ($Pending)";
                             ?>
                         </li>
+                        <li class="SidebarList-item isInviter" id="inviter-value" data-value="<?= $InviterName ?>">
+                            <span><?= Lang::get('user', 'p_inviter') ?>: </span>
+                            <?= $Invited ?>
+                        </li>
+                    <? } ?>
+                    <? if ((check_perms('users_view_email') && in_array("emailshowtotc", $Paranoia)) || check_perms("users_override_paranoia") || $OwnProfile) { ?>
+                        <li class="SidebarList-item"><?= Lang::get('user', 'p_email') ?>: <a href="mailto:<?= display_str($Email) ?>"><?= display_str($Email) ?></a>
+                            <? if (check_perms('users_view_email', $Class)) { ?>
+                                <a href="user.php?action=search&amp;email_history=on&amp;email=<?= display_str($Email) ?>" data-tooltip="Search">S</a>
+                            <? } ?>
+                        </li>
+                    <? } ?>
+                    <? if (check_perms('users_view_ips', $Class)) { ?>
+                        <li class="SidebarList-item"><?= Lang::get('user', 'p_ip') ?>: <?= Tools::display_ip($IP) ?></li>
+                        <li class="SidebarList-item"><?= Lang::get('user', 'p_host') ?>: <?= Tools::get_host_by_ajax($IP) ?></li>
+                    <? } ?>
+                    <? if (check_perms('users_view_keys', $Class) || $OwnProfile) { ?>
+                        <li class="SidebarList-item"><?= Lang::get('user', 'p_passkey') ?>: <a href="#" id="passkey" onclick="togglePassKey('<?= display_str($torrent_pass) ?>'); return false;"><?= Lang::get('user', 'view') ?></a></li>
                     <? } ?>
                     <? if (Applicant::user_is_applicant($UserID) && (check_perms('admin_manage_applicants') || $OwnProfile)) { ?>
                         <li class="SidebarList-item"><?= Lang::get('user', 'p_inviter') ?>: <a href="/apply.php?action=view"><?= Lang::get('user', 'view') ?></a></li>
@@ -1168,6 +1165,7 @@ WHERE xs.uid =" . $UserID . " and xs.tstamp >= unix_timestamp(date_format(now(),
                 if ($RecentSnatches === false) {
                     $DB->query("
 			SELECT
+                t.ID AS TorrentID,
 				g.ID,
 				g.Name,
 				g.WikiImage,
@@ -1193,7 +1191,7 @@ WHERE xs.uid =" . $UserID . " and xs.tstamp >= unix_timestamp(date_format(now(),
                         <div class="Box-body">
                             <?
                             $tableRender = new TorrentGroupCoverTableView($RecentSnatches);
-                            $tableRender->render();
+                            $tableRender->render(['UseTorrentID' => true]);
                             ?>
                         </div>
                     </div>
@@ -1206,6 +1204,7 @@ WHERE xs.uid =" . $UserID . " and xs.tstamp >= unix_timestamp(date_format(now(),
                 if ($RecentUploads === false) {
                     $DB->query("
 			SELECT
+                t.ID AS TorrentID,
 				g.ID,
 				g.Name,
                 g.SubName,
@@ -1229,7 +1228,7 @@ WHERE xs.uid =" . $UserID . " and xs.tstamp >= unix_timestamp(date_format(now(),
                         <div class="Box-body">
                             <?
                             $tableRender = new TorrentGroupCoverTableView($RecentUploads);
-                            $tableRender->render();
+                            $tableRender->render(['UseTorrentID' => true]);
                             ?>
                         </div>
                     </div>

@@ -100,7 +100,18 @@ $Properties['Allow'] = isset($_POST['allow']) ? 1 : 0;
 $Properties['TagList'] = $_POST['tags'];
 $Properties['Image'] = $_POST['image'];
 $Properties['GroupDescription'] = trim($_POST['desc']);
+
 $Properties['RemasterTitle'] = trim($_POST['remaster_title']);
+if ($Properties['RemasterTitle']) {
+    $RemasterTitles = explode(' / ', $Properties['RemasterTitle']);
+    $AllTitles = EditionInfo::allEditionKey();
+    foreach ($RemasterTitles as $Title) {
+        if (!in_array($Title, $AllTitles)) {
+            die("invalid remaster_title");
+        }
+    }
+}
+
 $Properties['RemasterCustomTitle'] = html_entity_decode($_POST['remaster_custom_title'], ENT_QUOTES);
 
 $Properties['TorrentDescription'] = $_POST['release_desc'];

@@ -5,6 +5,7 @@
 
 :root {
   --global-fontFamily: ui-sans-serif, system-ui, sans-serif;
+  --global-fontFamilyMonospace: ui-monospace, monospace;
   --global-fontSize-desktop: 16px;
   --global-fontSize-mobile: 14px;
   --global-fontSize-sm: 0.875rem;

@@ -7,14 +7,16 @@ interface SortLink {
 }
 
 class TorrentGroupCoverTableView extends GroupTorrentTableView {
-    public function render() {
+    /* { UseTorrentID => false } */
+    public function render($options = []) {
 ?>
         <div class="TorrentCover">
             <?
             foreach ($this->Groups as $RS) {
                 $Name = Torrents::group_name($RS, false);
+                $QueryString = $options['UseTorrentID'] ? "torrentid=" . $RS['TorrentID'] : "id=" . $RS['ID'];
             ?>
-                <a class="TorrentCover-item" href="torrents.php?id=<?= $RS['ID'] ?>">
+                <a class="TorrentCover-item" href="torrents.php?<?= $QueryString ?>">
                     <div class="TorrentCover-imageContainer">
                         <img class="TorrentCover-image" src="<?= ImageTools::process($RS['WikiImage'], false) ?>" />
                     </div>

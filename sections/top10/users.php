@@ -1,7 +1,7 @@
 <?
 // error out on invalid requests (before caching)
 if (isset($_GET['details'])) {
-    if (in_array($_GET['details'], array('ul', 'dl', 'numul'))) {
+    if (in_array($_GET['details'], array('ul', 'dl', 'numul', 'bonus_points'))) {
         $Details = $_GET['details'];
     } else {
         error(404);
@@ -29,7 +29,8 @@ View::show_header(Lang::get('top10', 'top_10_users'), '', 'PageTop10User');
 		u.Uploaded,
 		u.Downloaded,
 		COUNT(t.ID) AS NumUploads,
-		u.Paranoia
+		u.Paranoia,
+        u.BonusPoints
 	FROM users_main AS u
 		JOIN users_info AS ui ON ui.UserID = u.ID
 		LEFT JOIN torrents AS t ON t.UserID=u.ID
@@ -48,6 +49,7 @@ View::show_header(Lang::get('top10', 'top_10_users'), '', 'PageTop10User');
         }
         generate_user_table(Lang::get('top10', 'torrents_uploaded'), 'numul', $TopUserNumUploads, $Limit);
     }
+
 
     /* upload size */
     if ($Details == 'all' || $Details == 'ul') {
@@ -69,13 +71,30 @@ View::show_header(Lang::get('top10', 'top_10_users'), '', 'PageTop10User');
         generate_user_table(Lang::get('top10', 'downloaders'), 'dl', $TopUserDownloads, $Limit);
     }
 
+    /* bonus points */
+    if ($Details == 'all' || $Details == 'bonus_points') {
+        if (!$TopUserBonusPoints = $Cache->get_value('topuser_bonus_points')) {
+            $DB->query("$BaseQuery ORDER BY BonusPoints DESC LIMIT $Limit;");
+            $TopUserBonusPoints = $DB->to_array();
+            $Cache->cache_value('topuser_bonus_points' . $Limit, $TopUserBonusPoints, 3600 * 12);
+        }
+        generate_user_table(Lang::get('user', 'bonus_points'), 'bonus_points', $TopUserBonusPoints, $Limit);
+    }
 
     echo '</div>';
     View::show_footer();
     exit;
 
+    function create_items($Items, $Item) {
+        $Result = array_diff($Items, [$Item]);
+        array_unshift($Result, $Item);
+        return $Result;
+    }
+
     // generate a table based on data from most recent query to $DB
     function generate_user_table($Caption, $Tag, $Details, $Limit) {
+        $DefaultItems = ['ul', 'dl', 'numul', 'bonus_points', 'ratio'];
+        $Items = create_items($DefaultItems, $Tag);
         $Details = array_slice($Details, 0, $Limit);
     ?>
         <h3>
@@ -101,14 +120,23 @@ View::show_header(Lang::get('top10', 'top_10_users'), '', 'PageTop10User');
             </small>
         </h3>
         <div class="TableContainer">
-            <table class="TableUser Table">
+            <table class="TableTop10User Table">
                 <tr class="Table-rowHeader">
                     <td class="Table-cell"><?= Lang::get('top10', 'rank') ?></td>
                     <td class="Table-cell"><?= Lang::get('top10', 'user') ?></td>
-                    <td class="Table-cell Table-cellRight"><?= Lang::get('top10', 'uploads') ?></td>
-                    <td class="Table-cell Table-cellRight"><?= Lang::get('top10', 'uploaded') ?></td>
-                    <td class="Table-cell Table-cellRight"><?= Lang::get('top10', 'downloaded') ?></td>
-                    <td class="Table-cell Table-cellRight"><?= Lang::get('top10', 'ratio') ?></td>
+                    <? foreach ($Items as $Item) { ?>
+                        <? if ($Item === 'numul') { ?>
+                            <td class="Table-cell Table-cellRight"><?= Lang::get('top10', 'uploads') ?></td>
+                        <? } else if ($Item === 'bonus_points') { ?>
+                            <td class="Table-cell Table-cellRight"><?= Lang::get('user', 'bonus_points') ?></td>
+                        <? } else if ($Item === 'ul') { ?>
+                            <td class="Table-cell Table-cellRight"><?= Lang::get('user', 'uploaded') ?></td>
+                        <? } else if ($Item === 'dl') { ?>
+                            <td class="Table-cell Table-cellRight"><?= Lang::get('user', 'downloaded') ?></td>
+                        <? } else if ($Item === 'ratio') { ?>
+                            <td class="Table-cell Table-cellRight"><?= Lang::get('user', 'ratio') ?></td>
+                        <? } ?>
+                    <? } ?>
                     <td class="Table-cell Table-cellRight"><?= Lang::get('top10', 'joined') ?></td>
                 </tr>
                 <?
@@ -124,15 +152,24 @@ View::show_header(Lang::get('top10', 'top_10_users'), '', 'PageTop10User');
                 $Rank = 0;
                 foreach ($Details as $Detail) {
                     $Rank++;
-                    $IsAnonymous = preg_match("/&quot;(uploaded|downloaded|ratio|uploads\+)&quot;/", $Detail['Paranoia']);
+                    $IsAnonymous = preg_match("/&quot;(uploaded|downloaded|ratio|uploads\+|bonuspoints)&quot;/", $Detail['Paranoia']);
                 ?>
                     <tr class="Table-row">
                         <td class="Table-cell"><?= $Rank ?></td>
                         <td class="Table-cell"><?= $IsAnonymous ?  Lang::get('user', 'anonymous') : Users::format_username($Detail['ID'], false, false, false) ?></td>
-                        <td class="Table-cell Table-cellRight"><?= number_format($Detail['NumUploads']) ?></td>
-                        <td class="Table-cell Table-cellRight"><?= Format::get_size($Detail['Uploaded']) ?></td>
-                        <td class="Table-cell Table-cellRight"><?= Format::get_size($Detail['Downloaded']) ?></td>
-                        <td class="Table-cell Table-cellRight"><?= Format::get_ratio_html($Detail['Uploaded'], $Detail['Downloaded']) ?></td>
+                        <? foreach ($Items as $Item) { ?>
+                            <? if ($Item === 'numul') { ?>
+                                <td class="Table-cell Table-cellRight"><?= number_format($Detail['NumUploads']) ?></td>
+                            <? } else if ($Item === 'bonus_points') { ?>
+                                <td class="Table-cell Table-cellRight"><?= number_format($Detail['BonusPoints']) ?></td>
+                            <? } else if ($Item === 'ul') { ?>
+                                <td class="Table-cell Table-cellRight"><?= Format::get_size($Detail['Uploaded']) ?></td>
+                            <? } else if ($Item === 'dl') { ?>
+                                <td class="Table-cell Table-cellRight"><?= Format::get_size($Detail['Downloaded']) ?></td>
+                            <? } else if ($Item === 'ratio') { ?>
+                                <td class="Table-cell Table-cellRight"><?= Format::get_ratio_html($Detail['Uploaded'], $Detail['Downloaded']) ?></td>
+                            <? } ?>
+                        <? } ?>
                         <td class="Table-cell Table-cellRight"><?= $IsAnonymous ? '--' : time_diff($Detail['JoinDate']) ?></td>
                     </tr>
                 <? } ?>

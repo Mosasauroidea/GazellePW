@@ -40,8 +40,7 @@ View::show_header(Lang::get('index', 'index'), 'comments', 'PageHome');
 ?>
 <div class="LayoutMainSidebar">
     <div class="Sidebar LayoutMainSidebar-sidebar">
-        <? include('month_movie.php'); ?>
-
+        <!-- Poll -->
         <?
         if (($TopicID = $Cache->get_value('polls_featured')) === false) {
             $DB->query("
@@ -67,13 +66,11 @@ View::show_header(Lang::get('index', 'index'), 'comments', 'PageHome');
 				AND Vote != '0'
 			GROUP BY Vote");
                 $VoteArray = $DB->to_array(false, MYSQLI_NUM);
-
                 $Votes = array();
                 foreach ($VoteArray as $VoteSet) {
                     list($Key, $Value) = $VoteSet;
                     $Votes[$Key] = $Value;
                 }
-
                 for ($i = 1, $il = count($Answers); $i <= $il; ++$i) {
                     if (!isset($Votes[$i])) {
                         $Votes[$i] = 0;
@@ -94,7 +91,6 @@ View::show_header(Lang::get('index', 'index'), 'comments', 'PageHome');
                     $MaxVotes = 0;
                     $PeopleCount = 0;
                 }
-
                 $DB->query("
 		SELECT Vote
 		FROM forums_polls_votes
@@ -176,6 +172,10 @@ View::show_header(Lang::get('index', 'index'), 'comments', 'PageHome');
             <? } ?>
         <?  } ?>
 
+        <!-- Featured Movie -->
+        <? include('month_movie.php'); ?>
+
+        <!-- Forum Latest Topic -->
         <?
         $LatestThread = Forums::latest_thread();
         if ($LatestThread) {
@@ -201,6 +201,7 @@ View::show_header(Lang::get('index', 'index'), 'comments', 'PageHome');
             </div>
         <?  } ?>
 
+        <!-- Staff Blog -->
         <? if (check_perms('users_mod')) { ?>
             <div class="SidebarItemStaffBlog SidebarItem Box">
                 <div class="SidebarItem-header Box-header">
@@ -294,6 +295,7 @@ View::show_header(Lang::get('index', 'index'), 'comments', 'PageHome');
             </ul>
         </div>
 
+        <!-- Site History -->
         <?
         include('contest_leaderboard.php');
         if (ENABLE_SITEHISTORY) {
@@ -301,6 +303,7 @@ View::show_header(Lang::get('index', 'index'), 'comments', 'PageHome');
         }
         ?>
 
+        <!-- Stats -->
         <div class="SidebarItemStats SidebarItem Box">
             <div class="SidebarItem-header Box-header">
                 <?= Lang::get('index', 'stats') ?>
@@ -310,7 +313,6 @@ View::show_header(Lang::get('index', 'index'), 'comments', 'PageHome');
                     <li><?= Lang::get('index', 'user_limit') ?>: <?= number_format(USER_LIMIT) ?></li>
                 <?
                 }
-
                 if (($UserCount = $Cache->get_value('stats_user_count')) === false) {
                     $DB->query("
 		SELECT COUNT(ID)
@@ -323,7 +325,6 @@ View::show_header(Lang::get('index', 'index'), 'comments', 'PageHome');
                 ?>
                 <li class="SidebarList-item"><?= Lang::get('index', 'enable_users') ?>: <?= number_format($UserCount) ?>&nbsp;<a href="stats.php?action=users" class="brackets"><?= Lang::get('index', 'details') ?></a></li>
                 <?
-
                 if (($UserStats = $Cache->get_value('stats_users')) === false) {
                     $DB->query("
 		SELECT COUNT(ID)
@@ -331,21 +332,18 @@ View::show_header(Lang::get('index', 'index'), 'comments', 'PageHome');
 		WHERE Enabled = '1'
 			AND LastAccess > '" . time_minus(3600 * 24) . "'");
                     list($UserStats['Day']) = $DB->next_record();
-
                     $DB->query("
 		SELECT COUNT(ID)
 		FROM users_main
 		WHERE Enabled = '1'
 			AND LastAccess > '" . time_minus(3600 * 24 * 7) . "'");
                     list($UserStats['Week']) = $DB->next_record();
-
                     $DB->query("
 		SELECT COUNT(ID)
 		FROM users_main
 		WHERE Enabled = '1'
 			AND LastAccess > '" . time_minus(3600 * 24 * 30) . "'");
                     list($UserStats['Month']) = $DB->next_record();
-
                     $Cache->cache_value('stats_users', $UserStats, 0);
                 }
                 ?>
@@ -353,7 +351,6 @@ View::show_header(Lang::get('index', 'index'), 'comments', 'PageHome');
                 <li class="SidebarList-item"><?= Lang::get('index', 'wek_visit') ?>: <?= number_format($UserStats['Week']) ?> (<?= number_format($UserStats['Week'] / $UserCount * 100, 2) ?>%)</li>
                 <li class="SidebarList-item"><?= Lang::get('index', 'mon_visit') ?>: <?= number_format($UserStats['Month']) ?> (<?= number_format($UserStats['Month'] / $UserCount * 100, 2) ?>%)</li>
                 <?
-
                 if (($TorrentCount = $Cache->get_value('stats_torrent_count')) === false) {
                     $DB->query("
 		SELECT COUNT(ID)
@@ -361,7 +358,6 @@ View::show_header(Lang::get('index', 'index'), 'comments', 'PageHome');
                     list($TorrentCount) = $DB->next_record();
                     $Cache->cache_value('stats_torrent_count', $TorrentCount, 604800); // staggered 1 week cache
                 }
-
                 if (($MoviesCount = $Cache->get_value('stats_album_count')) === false) {
                     $DB->query("
 		SELECT COUNT(ID)
@@ -370,7 +366,6 @@ View::show_header(Lang::get('index', 'index'), 'comments', 'PageHome');
                     list($MoviesCount) = $DB->next_record();
                     $Cache->cache_value('stats_album_count', $MoviesCount, 86400); // staggered 1 day cache
                 }
-
                 if (($DramaCount = $Cache->get_value('stats_drama_count')) === false) {
                     $DB->query("
 		SELECT COUNT(ID)
@@ -379,7 +374,6 @@ View::show_header(Lang::get('index', 'index'), 'comments', 'PageHome');
                     list($DramaCount) = $DB->next_record();
                     $Cache->cache_value('stats_drama_count', $DramaCount, 604830); // staggered 1 week cache
                 }
-
                 if (($ArtistCount = $Cache->get_value('stats_artist_count')) === false) {
                     $DB->query("
 		SELECT COUNT(ArtistID)
@@ -393,7 +387,6 @@ View::show_header(Lang::get('index', 'index'), 'comments', 'PageHome');
                 <li class="SidebarList-item"><?= Lang::get('global', 'artist') ?>: <?= number_format($ArtistCount) ?></li>
                 <?
                 //End Torrent Stats
-
                 if (($CollageCount = $Cache->get_value('stats_collages')) === false) {
                     $DB->query("
 		SELECT COUNT(ID)
@@ -406,7 +399,6 @@ View::show_header(Lang::get('index', 'index'), 'comments', 'PageHome');
                     <li class="SidebarList-item"><?= Lang::get('index', 'collage') ?>: <?= number_format($CollageCount) ?></li>
                 <?
                 }
-
                 if (($RequestStats = $Cache->get_value('stats_requests')) === false) {
                     $DB->query("
 		SELECT COUNT(ID)
@@ -425,13 +417,11 @@ View::show_header(Lang::get('index', 'index'), 'comments', 'PageHome');
                 ?>
                 <li class="SidebarList-item"><?= Lang::get('global', 'requests') ?>: <?= number_format($RequestCount) ?> (<?= number_format($RequestPercentage, 2) ?>% <?= Lang::get('index', 'filled') ?>)</li>
                 <?
-
                 if ($SnatchStats = $Cache->get_value('stats_snatches')) {
                 ?>
                     <li class="SidebarList-item"><?= Lang::get('index', 'snatches') ?>: <?= number_format($SnatchStats) ?></li>
                 <?
                 }
-
                 if (($PeerStats = $Cache->get_value('stats_peers')) === false) {
                     //Cache lock!
                     $PeerStatsLocked = $Cache->get_value('stats_peers_lock');
@@ -452,7 +442,6 @@ View::show_header(Lang::get('index', 'index'), 'comments', 'PageHome');
                     $PeerStatsLocked = false;
                     list($LeecherCount, $SeederCount) = $PeerStats;
                 }
-
                 if (!$PeerStatsLocked) {
                     $Ratio = Format::get_ratio_html($SeederCount, $LeecherCount);
                     $PeerCount = number_format($SeederCount + $LeecherCount);
@@ -469,6 +458,7 @@ View::show_header(Lang::get('index', 'index'), 'comments', 'PageHome');
             </ul>
         </div>
 
+        <!-- Social Links -->
         <div class="Social">
             <a target="_blank" href="feeds.php?feed=feed_news&amp;user=<?= G::$LoggedUser['ID'] ?>&amp;auth=<?= G::$LoggedUser['RSS_Auth'] ?>&amp;passkey=<?= G::$LoggedUser['torrent_pass'] ?>&amp;authkey=<?= G::$LoggedUser['AuthKey'] ?>">
                 <?= icon('rss') ?>

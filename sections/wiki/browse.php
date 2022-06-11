@@ -143,7 +143,7 @@ View::show_header($Title, 'wiki,bbcode', 'PageWikiHome');
                     <div class="SidebarItem-header Box-header"><?= Lang::get('wiki', 'add_alias') ?></div>
                     <div class="SidebarItem-body Box-body">
                         <form class="FormOneLine add_form" name="aliases" action="wiki.php" method="post">
-                            <input type="hidden" name="action" />
+                            <input type="hidden" name="action" value="add_alias" />
                             <input type="hidden" name="auth" value="<?= $LoggedUser['AuthKey'] ?>" />
                             <input type="hidden" name="article" value="<?= $ArticleID ?>" />
                             <input class="Input" type="text" onfocus="if (this.value == 'Add alias') this.value='';" onblur="if (this.value == '') this.value='Add alias';" name="alias" size="20" />
