@@ -459,16 +459,18 @@ View::show_header(Lang::get('index', 'index'), 'comments', 'PageHome');
         </div>
 
         <!-- Social Links -->
-        <div class="Social">
-            <a target="_blank" href="feeds.php?feed=feed_news&amp;user=<?= G::$LoggedUser['ID'] ?>&amp;auth=<?= G::$LoggedUser['RSS_Auth'] ?>&amp;passkey=<?= G::$LoggedUser['torrent_pass'] ?>&amp;authkey=<?= G::$LoggedUser['AuthKey'] ?>">
-                <?= icon('rss') ?>
-            </a>
-            <a target="_blank" href="https://t.me/+SARDb636Ku3lY1bi">
-                <?= icon('telegram') ?>
-            </a>
-            <a target="_blank" href="https://github.com/Mosasauroidea/GazellePW">
-                <?= icon('github') ?>
-            </a>
+        <div class="Box">
+            <div class="Social Box-body">
+                <a target="_blank" href="feeds.php?feed=feed_news&amp;user=<?= G::$LoggedUser['ID'] ?>&amp;auth=<?= G::$LoggedUser['RSS_Auth'] ?>&amp;passkey=<?= G::$LoggedUser['torrent_pass'] ?>&amp;authkey=<?= G::$LoggedUser['AuthKey'] ?>">
+                    <?= icon('rss') ?>
+                </a>
+                <a target="_blank" href="https://t.me/+SARDb636Ku3lY1bi">
+                    <?= icon('telegram') ?>
+                </a>
+                <a target="_blank" href="https://github.com/Mosasauroidea/GazellePW">
+                    <?= icon('github') ?>
+                </a>
+            </div>
         </div>
     </div>
 
