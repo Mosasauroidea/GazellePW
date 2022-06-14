@@ -11,8 +11,8 @@
   padding: inherit;
 }
 :root {
-  --global-fontFamily: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica,
-    Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji';
+  /* --global-fontFamily: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica,
+    Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji'; */
   --global-fontFamilyMonospace: ui-monospace, SFMono-Regular, SF Mono, Menlo,
     Consolas, Liberation Mono, monospace;
   --global-fontSize-desktop: 16px;
@@ -26,87 +26,141 @@
   --global-space-lg: 20px;
 
   /* Colors */
-  --global-color-placeholder: var(--color-fg-subtle);
-  --global-backgroundColor: var(--color-canvas-inset);
-  --global-color: var(--color-fg-default);
+  --global-color-placeholder:
+  var(--color-fg-subtle);
+  --global-backgroundColor:
+  var(--color-canvas-inset);
+  --global-color:
+  var(--color-fg-default);
 
   /* Box */
-  --Box-background: var(--color-canvas-default);
-  --Box-color: var(--color-fg-default);
-  --Box-border: 1px solid var(--color-border-default);
-  --Box-header-background: var(--color-canvas-subtle);
-  --Box-header-color: var(--color-fg-default);
+  --Box-background:
+  var(--color-canvas-default);
+  --Box-color:
+  var(--color-fg-default);
+  --Box-border: 1px solid
+  var(--color-border-default);
+  --Box-header-background:
+  var(--color-canvas-subtle);
+  --Box-header-color:
+  var(--color-fg-default);
 
   /* Link */
-  --Link-color: var(--color-accent-fg);
+  --Link-color:
+  var(--color-accent-fg);
   --Link-textDecoration: none;
-  --Link-onHover-color: var(--Link-color);
+  --Link-onHover-color:
+  var(--Link-color);
   --Link-onHover-textDecoration: underline;
 
   /* Button */
-  --Button-default-background: var(--color-btn-bg);
-  --Button-default-color: var(--color-btn-text);
-  --Button-default-border: 1px solid var(--color-btn-border);
-  --Button-default-boxShadow: var(--color-btn-shadow),
+  --Button-default-background:
+  var(--color-btn-bg);
+  --Button-default-color:
+  var(--color-btn-text);
+  --Button-default-border: 1px solid
+  var(--color-btn-border);
+  --Button-default-boxShadow:
+  var(--color-btn-shadow),
     var(--color-btn-inset-shadow);
-  --Button-default-onHover-background: var(--color-btn-hover-bg);
-  --Button-default-onHover-color: var(--Button-default-color);
-  --Button-default-onHover-boxShadow: var(--Button-default-boxShadow);
-  --Button-default-onHover-border: 1px solid var(--color-btn-hover-border);
-  --Button-primary-background: var(--color-btn-primary-bg);
-  --Button-primary-color: var(--color-btn-primary-text);
-  --Button-primary-border: var(--color-btn-primary-border);
-  --Button-primary-boxShadow: var(--color-btn-primary-shadow),
+  --Button-default-onHover-background:
+  var(--color-btn-hover-bg);
+  --Button-default-onHover-color:
+  var(--Button-default-color);
+  --Button-default-onHover-boxShadow:
+  var(--Button-default-boxShadow);
+  --Button-default-onHover-border: 1px solid
+  var(--color-btn-hover-border);
+  --Button-primary-background:
+  var(--color-btn-primary-bg);
+  --Button-primary-color:
+  var(--color-btn-primary-text);
+  --Button-primary-border:
+  var(--color-btn-primary-border);
+  --Button-primary-boxShadow:
+  var(--color-btn-primary-shadow),
     var(--color-btn-primary-inset-shadow);
-  --Button-primary-onHover-background: var(--color-btn-primary-hover-bg);
-  --Button-primary-onHover-color: var(--Button-primary-color);
-  --Button-primary-onHover-border: var(--color-btn-primary-hover-border);
-  --Button-primary-onHover-boxShadow: var(--Button-primary-boxShadow);
+  --Button-primary-onHover-background:
+  var(--color-btn-primary-hover-bg);
+  --Button-primary-onHover-color:
+  var(--Button-primary-color);
+  --Button-primary-onHover-border:
+  var(--color-btn-primary-hover-border);
+  --Button-primary-onHover-boxShadow:
+  var(--Button-primary-boxShadow);
 
   /* Input */
-  --Input-background: var(--color-canvas-inset);
-  --Input-color: var(--color-fg-default);
-  --Input-border: 1px solid var(--color-border-default);
-  --Input-boxShadow: var(--color-primer-shadow-inset);
-  --Input-onHover-background: var(--Input-background);
-  --Input-onFocus-border: 1px solid var(--color-accent-fg);
+  --Input-background:
+  var(--color-canvas-inset);
+  --Input-color:
+  var(--color-fg-default);
+  --Input-border: 1px solid
+  var(--color-border-default);
+  --Input-boxShadow:
+  var(--color-primer-shadow-inset);
+  --Input-onHover-background:
+  var(--Input-background);
+  --Input-onFocus-border: 1px solid
+  var(--color-accent-fg);
   --Input-onFocus-boxShadow: inset 0 0 0 1px transparent;
 
   /* Overlay */
-  --Overlay-backgroundColor: var(--color-canvas-overlay);
-  --Overlay-background: var(--Overlay-backgroundColor);
-  --Overlay-color: var(--color-fg-default);
-  --Overlay-borderColor: var(--color-border-default);
-  --Overlay-border: 1px solid var(--Overlay-borderColor);
-  --Overlay-boxShadow: var(--color-shadow-large);
+  --Overlay-backgroundColor:
+  var(--color-canvas-overlay);
+  --Overlay-background:
+  var(--Overlay-backgroundColor);
+  --Overlay-color:
+  var(--color-fg-default);
+  --Overlay-borderColor:
+  var(--color-border-default);
+  --Overlay-border: 1px solid
+  var(--Overlay-borderColor);
+  --Overlay-boxShadow:
+  var(--color-shadow-large);
   /* DropdownMenu */
-  --DropdownMenu-item-color: var(--color-fg-default);
-  --DropdownMenu-item-onHover-background: var(--color-accent-emphasis);
-  --DropdownMenu-item-onHover-color: var(--color-fg-on-emphasis);
+  --DropdownMenu-item-color:
+  var(--color-fg-default);
+  --DropdownMenu-item-onHover-background:
+  var(--color-accent-emphasis);
+  --DropdownMenu-item-onHover-color:
+  var(--color-fg-on-emphasis);
   --DropdownMenu-item-onHover-textDecoration: none;
 
   /* Header */
-  --Header-background: var(--color-header-bg);
-  --Header-color: var(--color-header-text);
+  --Header-background:
+  var(--color-header-bg);
+  --Header-color:
+  var(--color-header-text);
   --Header-border: none;
   --Header-boxShadow: none;
-  --Header-link-color: var(--color-header-text);
+  --Header-link-color:
+  var(--color-header-text);
   --Header-link-textDecoration: none;
-  --Header-link-onHover-color: var(--color-header-logo);
-  --Header-link-onHover-textDecoration: var(--Header-link-textDecoration);
-  --Header-input-background: var(--color-header-search-bg);
-  --Header-input-color: var(--color-scale-white);
-  --Header-input-border: 1px solid var(--color-header-search-border);
-  --Header-input-onPlaceholder-color: rgba(255, 255, 255, 0.75);
-  --Header-input-onHover-background: var(--Header-input-background);
+  --Header-link-onHover-color:
+  var(--color-header-logo);
+  --Header-link-onHover-textDecoration:
+  var(--Header-link-textDecoration);
+  --Header-input-background:
+  var(--color-header-search-bg);
+  --Header-input-color:
+  var(--color-scale-white);
+  --Header-input-border: 1px solid
+  var(--color-header-search-border);
+  --Header-input-onPlaceholder-color:
+  rgba(255, 255, 255, 0.75);
+  --Header-input-onHover-background:
+  var(--Header-input-background);
   --Header-button-background: #373e47;
   --Header-button-color: #adbac7;
-  --Header-button-border: 1px solid rgba(205, 217, 229, 0.1);
+  --Header-button-border: 1px solid
+  rgba(205, 217, 229, 0.1);
   --Header-button-boxShadow: 0 0 transparent, 0 0 transparent;
   --Header-button-onHover-background: #444c56;
-  --Header-button-onHover-color: var(--Header-button-color);
+  --Header-button-onHover-color:
+  var(--Header-button-color);
   --Header-button-onHover-border: 1px solid #768390;
-  --Header-button-onHover-boxShadow: var(--Header-button-boxShadow);
+  --Header-button-onHover-boxShadow:
+  var(--Header-button-boxShadow);
   --HeaderDonate-percent-color: #aaa;
   --HeaderDonate-progressBar-background: #aaa;
   --HeaderDonate-progressBar-onHover-background: #fff;
@@ -114,8 +168,10 @@
   --HeaderDonate-progressBarBorder-onHover-border: 2px solid #fff;
 
   /* Table */
-  --TableTorrent-category-background: var(--color-canvas-inset);
-  --TableTorrent-movieInfo-background: var(--color-canvas-subtle);
+  --TableTorrent-category-background:
+  var(--color-canvas-inset);
+  --TableTorrent-movieInfo-background:
+  var(--color-canvas-subtle);
 }
 
 :root {
