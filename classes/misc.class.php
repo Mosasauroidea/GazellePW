@@ -50,6 +50,7 @@ class Misc {
                 } catch (Exception $e) {
                     echo 'Message could not be sent. Mailer Error: ', $mail->ErrorInfo;
                 }
+                break;			
             case 'mailgun':
                 $mg = new Mailgun(MAILGUN_API_KEY);
                 $info = [
