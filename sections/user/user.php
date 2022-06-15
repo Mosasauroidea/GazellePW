@@ -657,7 +657,7 @@ WHERE xs.uid =" . $UserID . " and xs.tstamp >= unix_timestamp(date_format(now(),
                         <li class="SidebarList-item is-uploadedRank <?= $OverrideClass ?>" id="uploaded-rank-value" data-value="<?= $UploadedRank ?>">
                             <span><?= Lang::get('user', 'u_uploaded') ?>: </span>
                             <span data-tooltip="<?= Format::get_size($Uploaded) ?>">
-                                <?= $UploadedRank === false ? 'Server busy' : number_format($UploadedRank) ?>
+                                <?= $UploadedRank === false ? 'Server busy' : number_format($UploadedRank) . '%' ?>
                             </span>
                         </li>
                     <?
@@ -666,7 +666,7 @@ WHERE xs.uid =" . $UserID . " and xs.tstamp >= unix_timestamp(date_format(now(),
                         <li class="SidebarList-item is-downloadedRank <?= $OverrideClass ?>" id="downloaded-rank-value" data-value="<?= $DownloadedRank ?>">
                             <span><?= Lang::get('user', 'u_downloaded') ?>: </span>
                             <span data-tooltip="<?= Format::get_size($Downloaded) ?>">
-                                <?= $DownloadedRank === false ? 'Server busy' : number_format($DownloadedRank) ?>
+                                <?= $DownloadedRank === false ? 'Server busy' : number_format($DownloadedRank) . '%' ?>
                             </span>
                         </li>
                     <?
@@ -675,7 +675,7 @@ WHERE xs.uid =" . $UserID . " and xs.tstamp >= unix_timestamp(date_format(now(),
                         <li class="SidebarList-item is-uploadsRank <?= $OverrideClass ?>" id="uploads-rank-value" data-value="<?= $UploadsRank ?>">
                             <span><?= Lang::get('user', 'u_uploads') ?>: </span>
                             <span data-tooltip="<?= number_format($Uploads) ?>">
-                                <?= $UploadsRank === false ? 'Server busy' : number_format($UploadsRank) ?>
+                                <?= $UploadsRank === false ? 'Server busy' : number_format($UploadsRank) . '%' ?>
                             </span>
                         </li>
                     <?
@@ -684,7 +684,7 @@ WHERE xs.uid =" . $UserID . " and xs.tstamp >= unix_timestamp(date_format(now(),
                         <li class="SidebarList-item is-requestsFilledRank <?= $OverrideClass ?>" id="requests-filled-rank-value" data-value="<?= $RequestRank ?>">
                             <span><?= Lang::get('user', 'u_filled') ?>: </span>
                             <span data-tooltip="<?= number_format($RequestsFilled) ?>">
-                                <?= $RequestRank === false ? 'Server busy' : number_format($RequestRank) ?>
+                                <?= $RequestRank === false ? 'Server busy' : number_format($RequestRank) . '%' ?>
                             </span>
                         </li>
                     <?
@@ -693,21 +693,21 @@ WHERE xs.uid =" . $UserID . " and xs.tstamp >= unix_timestamp(date_format(now(),
                         <li class="SidebarList-item is-bountySpentRank <?= $OverrideClass ?>" id="bounty-spent-rank-value" data-value="<?= $BountyRank ?>">
                             <span><?= Lang::get('user', 'u_bounty') ?>: </span>
                             <span data-tooltip="<?= Format::get_size($TotalSpent) ?>">
-                                <?= $BountyRank === false ? 'Server busy' : number_format($BountyRank) ?>
+                                <?= $BountyRank === false ? 'Server busy' : number_format($BountyRank) . '%' ?>
                             </span>
                         </li>
                     <?  } ?>
                     <li class="SidebarList-item is-postCreateRank" id="post-create-rank" data-value="<?= $PostRank ?>">
                         <span><?= Lang::get('user', 'u_post') ?>: </span>
                         <span data-tooltip="<?= number_format($ForumPosts) ?>">
-                            <?= $PostRank === false ? 'Server busy' : number_format($PostRank) ?>
+                            <?= $PostRank === false ? 'Server busy' : number_format($PostRank) . '%' ?>
                         </span>
                     </li>
                     <? if (($Override = check_paranoia_here('artistsadded'))) { ?>
                         <li class="SidebarList-item is-artistAddRank <?= $OverrideClass ?>" id="artist-add-rank-value" data-value="<?= $ArtistsRank ?>">
                             <span><?= Lang::get('user', 'u_artist') ?>: </span>
                             <span data-tooltip="<?= number_format($ArtistsAdded) ?>">
-                                <?= $ArtistsRank === false ? 'Server busy' : number_format($ArtistsRank) ?>
+                                <?= $ArtistsRank === false ? 'Server busy' : number_format($ArtistsRank) . '%' ?>
                             </span>
                         </li>
                     <?
@@ -715,7 +715,7 @@ WHERE xs.uid =" . $UserID . " and xs.tstamp >= unix_timestamp(date_format(now(),
                     if (check_paranoia_here(array('uploaded', 'downloaded', 'uploads+', 'requestsfilled_count', 'requestsvoted_bounty', 'artistsadded'))) { ?>
                         <li class="SidebarList-item is-overallRank" id="overall-rank-value" data-value="<?= $OverallRank ?>">
                             <span><?= Lang::get('user', 'u_total') ?>: </span>
-                            <span><?= $OverallRank === false ? 'Server busy' : number_format($OverallRank) ?></span>
+                            <span><?= $OverallRank === false ? 'Server busy' : number_format($OverallRank) . '%' ?></span>
                         </li>
                     <?  } ?>
                 </ul>
