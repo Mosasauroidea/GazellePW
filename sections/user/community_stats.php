@@ -212,9 +212,11 @@ $OverrideClass = $Override === 2 ? 'paranoia_override' : '';
             <li class="SidebarList-item isUploadCount <?= $OverrideClass ?>" id="upload-count-value" data-value="<?= $Uploads ?>">
                 <?= Lang::get('user', 'comm_upload') ?>:
                 <?= number_format($Uploads) ?>
-                <span data-tooltip="<?= Lang::get('user', 'total_uploads_title') ?>">
-                    (<?= $TotalUploads ?>)
-                </span>
+                <? if ($TotalUploads) { ?>
+                    <span data-tooltip="<?= Lang::get('user', 'total_uploads_title') ?>">
+                        (<?= $TotalUploads ?>)
+                    </span>
+                <? } ?>
                 <? if ($CanViewUploads || $Override = check_paranoia_here('uploads')) { ?>
                     <a class="brackets <?= $OverrideClass ?>" href="torrents.php?type=uploaded&amp;userid=<?= $UserID ?>">
                         <?= Lang::get('user', 'view') ?>
