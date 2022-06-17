@@ -17,10 +17,14 @@ if (!empty($_GET['order_by']) && in_array($_GET['order_by'], $OrderBys)) {
     $OrderBy = " order by " . $_GET['order_by'] . " $OrderWay ";
 }
 
-if (!empty($_GET['userid']) && check_perms('users_mod')) {
-    $UserID = intval($_GET['userid']);
-    $User = array_merge(Users::user_stats($_GET['userid']), Users::user_info($_GET['userid']), Users::user_heavy_info($_GET['userid']));
-    if (empty($User)) {
+if (!empty($_GET['userid'])) {
+    if (check_perms('users_mod')) {
+        $UserID = intval($_GET['userid']);
+        $User = array_merge(Users::user_stats($_GET['userid']), Users::user_info($_GET['userid']), Users::user_heavy_info($_GET['userid']));
+        if (empty($User)) {
+            error(404);
+        }
+    } else {
         error(404);
     }
 } else {

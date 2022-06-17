@@ -310,9 +310,7 @@ list($ThumbCount) = $DB->next_record();
         </h2>
     </div>
     <div class="BodyNavLinks">
-        <?
-        if (!$OwnProfile) {
-        ?>
+        <? if (!$OwnProfile) { ?>
             <a href="inbox.php?action=compose&amp;to=<?= $UserID ?>"><?= Lang::get('user', 'compose') ?></a>
             <?
             $DB->query("
@@ -325,57 +323,35 @@ list($ThumbCount) = $DB->next_record();
                 <a href="friends.php?action=add&amp;friendid=<?= $UserID ?>&amp;auth=<?= $LoggedUser['AuthKey'] ?>"><?= Lang::get('user', 'add_friend') ?></a>
             <?  } ?>
             <a href="reports.php?action=report&amp;type=user&amp;id=<?= $UserID ?>"><?= Lang::get('user', 'report') ?></a>
-        <?
-
-        }
-
-        if (check_perms('users_edit_profiles', $Class) || $LoggedUser['ID'] == $UserID) {
-        ?>
-            <a href="user.php?action=edit&amp;userid=<?= $UserID ?>"><?= Lang::get('user', 'setting') ?></a>
-        <?
-        }
-        ?>
-        <? if ($OwnProfile) { ?>
-            <a href="bonus.php?action=bprates" class="brackets"><?= Lang::get('bonus', 'bonus_point_rates') ?></a>
         <? } ?>
-        <?
-        if (check_perms('users_view_invites', $Class)) {
-        ?>
+        <? if (check_perms('users_edit_profiles', $Class) || $LoggedUser['ID'] == $UserID) { ?>
+            <a href="user.php?action=edit&amp;userid=<?= $UserID ?>"><?= Lang::get('user', 'setting') ?></a>
+        <? } ?>
+        <? if ($OwnProfile) { ?>
+            <a class="brackets" href="bonus.php?action=bprates"><?= Lang::get('bonus', 'bonus_point_rates') ?></a>
+        <? } ?>
+        <? if (check_perms('users_view_invites', $Class)) { ?>
             <a href="user.php?action=invite&amp;userid=<?= $UserID ?>"><?= Lang::get('user', 'invite') ?></a>
-        <?
-        }
-        if (check_perms('admin_manage_permissions', $Class)) {
-        ?>
+        <? }
+        if (check_perms('admin_manage_permissions', $Class)) { ?>
             <a href="user.php?action=permissions&amp;userid=<?= $UserID ?>"><?= Lang::get('user', 'permissions') ?></a>
-        <?
-        }
-        if (check_perms('users_view_ips', $Class)) {
-        ?>
+        <? } ?>
+        <? if (check_perms('users_view_ips', $Class)) { ?>
             <a href="user.php?action=sessions&amp;userid=<?= $UserID ?>"><?= Lang::get('user', 'sessions') ?></a>
             <a href="userhistory.php?action=copypaste&amp;userid=<?= $UserID ?>"><?= Lang::get('user', 'copypaste') ?></a>
-        <?
-        }
-        if (check_perms('admin_reports')) {
-        ?>
+        <? } ?>
+        <? if (check_perms('admin_reports')) { ?>
             <a href="reportsv2.php?view=reporter&amp;id=<?= $UserID ?>"><?= Lang::get('user', 'reporter') ?></a>
-        <?
-        }
-        if (check_perms('users_mod')) {
-        ?>
+        <? } ?>
+        <? if (check_perms('users_mod')) { ?>
             <a href="userhistory.php?action=token_history&amp;userid=<?= $UserID ?>"><?= Lang::get('user', 'token_history') ?></a>
-        <?
-        }
-        if (check_perms('admin_clear_cache') && check_perms('users_override_paranoia')) {
-        ?>
+        <? } ?>
+        <? if (check_perms('admin_clear_cache') && check_perms('users_override_paranoia')) { ?>
             <a href="user.php?action=clearcache&amp;id=<?= $UserID ?>"><?= Lang::get('user', 'clearcache') ?></a>
-        <?
-        }
-        if (check_perms('users_mod')) {
-        ?>
+        <? } ?>
+        <? if (check_perms('users_mod')) { ?>
             <a href="#staff_tools"><?= Lang::get('user', 'staff_tools') ?></a>
-        <?
-        }
-        ?>
+        <? } ?>
     </div>
     <div class="LayoutMainSidebar">
         <div class="Sidebar LayoutMainSidebar-sidebar">
@@ -527,9 +503,17 @@ list($ThumbCount) = $DB->next_record();
                             ?>
                         </li>
                         <li class="SidebarList-item is-bpRate <?= $OverrideClass ?>" id="bp-rate-value" data-value="<?= $BonusPointsPerHour ?>">
-                            <a href="bonus.php?action=bprates&userid=<?= $UserID ?>">
+                            <? if ($OwnProfile) { ?>
+                                <a href="bonus.php?action=bprates">
+                                    <?= Lang::get('user', 'bprates') ?>
+                                </a>
+                            <? } else if (check_perms('users_mod')) { ?>
+                                <a href="bonus.php?action=bprates&userid=<?= $UserID ?>">
+                                    <?= Lang::get('user', 'bprates') ?>
+                                </a>
+                            <? } else { ?>
                                 <?= Lang::get('user', 'bprates') ?>
-                            </a>
+                            <? } ?>
                             <span>: </span>
                             <?= number_format($BonusPointsPerHour) ?>
                         </li>
