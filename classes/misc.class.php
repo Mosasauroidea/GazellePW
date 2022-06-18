@@ -1,8 +1,10 @@
 <?
-require_once("PHPMailer/class.phpmailer.php");
-require_once("PHPMailer/class.smtp.php");
 
 use Mailgun\Mailgun;
+
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\SMTP;
+use PHPMailer\PHPMailer\Exception;
 
 class Misc {
     /**
@@ -29,28 +31,32 @@ class Misc {
             return;
         }
         switch (EMAIL_DELIVERY_TYPE) {
+            case 'smtp':
             case 'local':
                 // remove the next line if you want to send HTML email from some places...
                 $mail = new PHPMailer(true);
                 try {
-                    $mail->SMTPDebug = 1;
+                    if (MAIL_SMTP_DEBUG) {
+                        $mail->SMTPDebug = SMTP::DEBUG_SERVER;
+                    }
                     $mail->isSMTP();
-                    $mail->Host = 'smtp.mailgun.org'; // Specify main and backup SMTP servers
+                    $mail->Host = MAIL_SMTP_HOST; // Specify main and backup SMTP servers
                     $mail->SMTPAuth = true;        // Enable SMTP authentication
-                    $mail->Username = 'noreply@' . MAIL_HOST;     // SMTP username
-                    $mail->Password = '2991d7f9dccca01e873ad8bcf6e894b4-602cc1bf-c550c1a6';       // SMTP password
-                    $mail->SMTPSecure = 'ssl';       // Enable TLS encryption, `ssl` also accepted
-                    $mail->Port = 465;         // TCP port to connect to
-                    $mail->setFrom('noreply@' . MAIL_HOST, SITE_NAME);
+                    $mail->Username = MAIL_SMTP_USERNAME;     // SMTP username
+                    $mail->Password = MAIL_SMTP_PASSWORD;       // SMTP password
+                    $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;       // Enable TLS encryption, `ssl` also accepted
+                    $mail->Port = MAIL_SMTP_PORT;         // TCP port to connect to
+
+                    $mail->setFrom($From . '@' . MAIL_HOST, SITE_NAME);
                     $mail->ContentType = $ContentType;
                     $mail->addAddress($To);
                     $mail->Subject = $Subject;
                     $mail->Body = $Body;
                     $mail->send();
                 } catch (Exception $e) {
-                    echo 'Message could not be sent. Mailer Error: ', $mail->ErrorInfo;
+                    die('Message could not be sent. Mailer Error: ' . $mail->ErrorInfo);
                 }
-                break;			
+                break;
             case 'mailgun':
                 $mg = new Mailgun(MAILGUN_API_KEY);
                 $info = [

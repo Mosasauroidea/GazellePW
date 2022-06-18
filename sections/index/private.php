@@ -460,11 +460,12 @@ View::show_header(Lang::get('index', 'index'), 'comments', 'PageHome');
 
         <!-- Social Links -->
         <div class="Box">
+            <div class="Social Box-header"><?= Lang::get('index', 'links') ?></div>
             <div class="Social Box-body">
                 <a target="_blank" href="feeds.php?feed=feed_news&amp;user=<?= G::$LoggedUser['ID'] ?>&amp;auth=<?= G::$LoggedUser['RSS_Auth'] ?>&amp;passkey=<?= G::$LoggedUser['torrent_pass'] ?>&amp;authkey=<?= G::$LoggedUser['AuthKey'] ?>">
                     <?= icon('rss') ?>
                 </a>
-                <a target="_blank" href="https://t.me/+SARDb636Ku3lY1bi">
+                <a target="_blank" href="<?= TG_GROUP ?>">
                     <?= icon('telegram') ?>
                 </a>
                 <a target="_blank" href="https://github.com/Mosasauroidea/GazellePW">

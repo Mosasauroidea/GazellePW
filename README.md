@@ -14,7 +14,8 @@ GazellePW (GazellePosterWall) is a web framework geared towards private BitTorre
 - Theme: Auto dark/light theme, Create a new theme in one hour, Component-based style
 - Optimization for movie content: Upload auto-fill movie info, Screenshot comparison (supports PixelCompare and SolarCurve), MediaInfo parser, Movie poster wall, Multiple formats and editions, Torrent slot system, Movie search etc
 - Localization: Simplified Chinese and English languages
-- Image hosting service: Local or [Minio](https://github.com/minio/minio)
+- Image host: Local or [Minio](https://github.com/minio/minio)
+- Mail delivery type: SMTP or [Mailgun](https://www.mailgun.com/)
 - Additional torrents off: 25%, 50%, 75%
 - Modern development: Docker, Vite, React
 - ...

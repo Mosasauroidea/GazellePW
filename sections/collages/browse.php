@@ -179,6 +179,71 @@ View::show_header(Lang::get('collages', 'browse_collages'), '', 'PageCollageHome
         <?  } else { ?>
             <div class="BodyHeader-nav"><?= Lang::get('collages', 'browse_collages') ?><?= (!empty($UserLink) ? (isset($CollageIDs) ? " with contributions by $UserLink" : " started by $UserLink") : '') ?></div>
         <?  } ?>
+        <?
+        if (!$BookmarkView) {
+        ?>
+            <div class="BodyNavLinks">
+                <?
+                if (check_perms('site_collages_create')) {
+                ?>
+                    <a href="collages.php?action=new" class="brackets"><?= Lang::get('collages', 'create_collages') ?></a>
+                    <?
+                }
+                if (check_perms('site_collages_personal')) {
+
+                    $DB->query("
+				SELECT ID
+				FROM collages
+				WHERE UserID = '$LoggedUser[ID]'
+					AND CategoryID = '0'
+					AND Deleted = '0'");
+                    $CollageCount = $DB->record_count();
+
+                    if ($CollageCount === 1) {
+                        list($CollageID) = $DB->next_record();
+                    ?>
+                        <a href="collages.php?id=<?= $CollageID ?>" class="brackets"><?= Lang::get('collages', 'personal_collage') ?></a>
+                    <?          } elseif ($CollageCount > 1) { ?>
+                        <a href="collages.php?action=mine" class="brackets"><?= Lang::get('collages', 'personal_collages') ?></a>
+                    <?
+                    }
+                }
+                if (check_perms('site_collages_subscribe')) {
+                    ?>
+                    <a href="userhistory.php?action=subscribed_collages" class="brackets"><?= Lang::get('collages', 'subscribed_collages') ?></a>
+                <?      } ?>
+                <a href="bookmarks.php?type=collages" class="brackets"><?= Lang::get('collages', 'bookmarks_collages') ?></a>
+                <? if (check_perms('site_collages_recover')) { ?>
+                    <a href="collages.php?action=recover" class="brackets"><?= Lang::get('collages', 'recover_collages') ?></a>
+                <?
+                }
+                if (check_perms('site_collages_create') || check_perms('site_collages_personal') || check_perms('site_collages_recover')) {
+                ?>
+            </div>
+            <div class="BodyNavLinks">
+            <?
+                }
+            ?>
+            <a href="collages.php?userid=<?= $LoggedUser['ID'] ?>" class="brackets"><?= Lang::get('collages', 'start_collages') ?></a>
+            <a href="collages.php?userid=<?= $LoggedUser['ID'] ?>&amp;contrib=1" class="brackets"><?= Lang::get('collages', 'contributed_collages') ?></a>
+            <a href="random.php?action=collage" class="brackets"><?= Lang::get('collages', 'random_collages') ?></a>
+            </div>
+        <?
+        } else {
+        ?>
+
+            <div>
+                <div class="BodyNavLinks">
+                    <a href="bookmarks.php?type=torrents" class="brackets"><?= Lang::get('global', 'torrents') ?></a>
+                    <a href="bookmarks.php?type=artists" class="brackets"><?= Lang::get('global', 'artists') ?></a>
+                    <a href="bookmarks.php?type=collages" class="brackets"><?= Lang::get('collages', 'collage') ?></a>
+                    <a href="bookmarks.php?type=requests" class="brackets"><?= Lang::get('global', 'requests') ?></a>
+                </div>
+            </div>
+        <?
+        }
+        ?>
+
         <? if (!$BookmarkView) { ?>
             <div>
                 <form class="Form SearchPage Box SearchCollage" name="collages" action="" method="get">
@@ -280,79 +345,21 @@ View::show_header(Lang::get('collages', 'browse_collages'), '', 'PageCollageHome
             </div>
         <?
         }
-        ?>
-        <?
-        if (!$BookmarkView) {
-        ?>
-            <div class="BodyNavLinks">
-                <?
-                if (check_perms('site_collages_create')) {
-                ?>
-                    <a href="collages.php?action=new" class="brackets"><?= Lang::get('collages', 'create_collages') ?></a>
-                    <?
-                }
-                if (check_perms('site_collages_personal')) {
 
-                    $DB->query("
-				SELECT ID
-				FROM collages
-				WHERE UserID = '$LoggedUser[ID]'
-					AND CategoryID = '0'
-					AND Deleted = '0'");
-                    $CollageCount = $DB->record_count();
-
-                    if ($CollageCount === 1) {
-                        list($CollageID) = $DB->next_record();
-                    ?>
-                        <a href="collages.php?id=<?= $CollageID ?>" class="brackets"><?= Lang::get('collages', 'personal_collage') ?></a>
-                    <?          } elseif ($CollageCount > 1) { ?>
-                        <a href="collages.php?action=mine" class="brackets"><?= Lang::get('collages', 'personal_collages') ?></a>
-                    <?
-                    }
-                }
-                if (check_perms('site_collages_subscribe')) {
-                    ?>
-                    <a href="userhistory.php?action=subscribed_collages" class="brackets"><?= Lang::get('collages', 'subscribed_collages') ?></a>
-                <?      } ?>
-                <a href="bookmarks.php?type=collages" class="brackets"><?= Lang::get('collages', 'bookmarks_collages') ?></a>
-                <? if (check_perms('site_collages_recover')) { ?>
-                    <a href="collages.php?action=recover" class="brackets"><?= Lang::get('collages', 'recover_collages') ?></a>
-                <?
-                }
-                if (check_perms('site_collages_create') || check_perms('site_collages_personal') || check_perms('site_collages_recover')) {
-                ?>
-            </div>
-            <div class="BodyNavLinks">
+        ?>
+    </div>
+    <?
+    $Pages = Format::get_pages($Page, $NumResults, COLLAGES_PER_PAGE, 9);
+    if ($Pages) {
+    ?>
+        <div class="BodyNavLinks">
             <?
-                }
+            echo $Pages;
             ?>
-            <a href="collages.php?userid=<?= $LoggedUser['ID'] ?>" class="brackets"><?= Lang::get('collages', 'start_collages') ?></a>
-            <a href="collages.php?userid=<?= $LoggedUser['ID'] ?>&amp;contrib=1" class="brackets"><?= Lang::get('collages', 'contributed_collages') ?></a>
-            <a href="random.php?action=collage" class="brackets"><?= Lang::get('collages', 'random_collages') ?></a>
-            </div>
-        <?
-        } else {
-        ?>
-
-            <div>
-                <div class="BodyNavLinks">
-                    <a href="bookmarks.php?type=torrents" class="brackets"><?= Lang::get('global', 'torrents') ?></a>
-                    <a href="bookmarks.php?type=artists" class="brackets"><?= Lang::get('global', 'artists') ?></a>
-                    <a href="bookmarks.php?type=collages" class="brackets"><?= Lang::get('collages', 'collage') ?></a>
-                    <a href="bookmarks.php?type=requests" class="brackets"><?= Lang::get('global', 'requests') ?></a>
-                </div>
-            </div>
-        <?
-        }
-        ?>
-    </div>
-    <div class="BodyNavLinks">
-        <?
-        $Pages = Format::get_pages($Page, $NumResults, COLLAGES_PER_PAGE, 9);
-        echo $Pages;
-        ?>
-    </div>
-    <? if (count($Collages) === 0) { ?>
+        </div>
+    <?
+    }
+    if (count($Collages) === 0) { ?>
         <div class="Box">
             <div class="Box-body" align="center">
                 <? if ($BookmarkView) { ?>

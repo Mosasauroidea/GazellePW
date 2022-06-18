@@ -1,4 +1,12 @@
 /*
+TableContainer
+  Table is-noRowBorder
+    Table-rowHeader
+      Table-cell Table-cellCenter Table-cellRight
+        icon
+    Table-row
+      Table-cell
+
 Where
   torrent list - search        # A table without any style
   torrent show - peer list     # torrents/peerlist.php
@@ -32,13 +40,6 @@ Where
   User - password view   # userhistory/password_history.php
   Application            # managers/apply_list.php
   
-TableContainer
-  Table is-noRowBorder
-    Table-rowHeader
-      Table-cell Table-cellCenter Table-cellRight
-        icon
-    Table-row
-      Table-cell
 */
 
 .TableContainer {

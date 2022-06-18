@@ -1075,7 +1075,7 @@ class Text {
                         ) {
                             $TableStyle = ' style="width: ' . intval($Block['Attr']) . '%;"';
                         }
-                        $Str .= "<table class=\"table_in_text\"$TableStyle>";
+                        $Str .= "<div class=\"TalbeContainer\"><table class=\"Table\"$TableStyle>";
                         foreach ($Block['Val'] as $tr) {
                             if (is_string($tr)) {
                                 $tr = trim($tr);
@@ -1090,14 +1090,14 @@ class Text {
                                     if ($Tr == '') {
                                         continue;
                                     }
-                                    $Str .= '<tr>';
+                                    $Str .= '<tr class="Table-row">';
                                     $Tds = explode('|', $Tr);
                                     foreach ($Tds as $Td) {
                                         $Td = trim($Td);
                                         if ($Td == '') {
                                             continue;
                                         }
-                                        $Str .= "<td>$Td</td>";
+                                        $Str .= "<td class=\"Table-cell\">$Td</td>";
                                     }
                                     $Str .= '</tr>';
                                 }
@@ -1105,7 +1105,7 @@ class Text {
                                 $Str .= self::to_html([$tr]);
                             }
                         }
-                        $Str .= '</table>';
+                        $Str .= '</table></div>';
                         break;
                     case 'tr':
                         $TrStyle = '';
@@ -1113,7 +1113,7 @@ class Text {
                         if (isset($Block['Attr']) && (in_array($Block['Attr'], $ValidAttribs) || preg_match('/^#[0-9a-f]{6}$/', $Block['Attr']))) {
                             $TrStyle = ' style="background-color: ' . $Block['Attr'] . ';"';
                         }
-                        $Str .= "<tr$TrStyle>" . self::to_html($Block['Val']) . '</tr>';
+                        $Str .= "<tr class=\"Table-row\" $TrStyle>" . self::to_html($Block['Val']) . '</tr>';
                         break;
                     case 'td':
                         $TdStyle = '';
@@ -1133,7 +1133,7 @@ class Text {
                                 }
                             }
                         }
-                        $Str .= "<td$TdStyle>" . self::to_html($Block['Val']) . "</td>";
+                        $Str .= "<td class=\"Table-cell\" $TdStyle>" . self::to_html($Block['Val']) . "</td>";
                         break;
                     case 'lang':
                         if (isset($Block['Attr'])) {

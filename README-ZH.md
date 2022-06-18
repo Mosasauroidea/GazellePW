@@ -1,4 +1,5 @@
 [English](./README.md) | [截图](https://raw.githubusercontent.com/Mosasauroidea/GazellePW/main/public/static/stylespreview/zh-github-dark.png)
+
 # GazellePW
 
 全称 GazellePosterWall，一个 PT（Private Tracker）Web 框架，Gazelle 的 **影视版本**。
@@ -9,11 +10,12 @@
 
 ## 特性
 
-- 精美的界面：响应式布局，手机端界面适配，BBCode 工具栏，所有图标都是 SVG 格式等
-- 主题: 自动明/暗色主题切换，一小时创建出一个新主题，基于组件的样式
+- 精美的界面：响应式布局，手机端界面适配，BBCode 工具栏，SVG 格式图标等
+- 主题： 基于组件的样式，自动明/暗色主题切换，快速创建新主题（一小时）
 - 影视优化：发布时自动获取影片信息，截图对比图(支持像素对比和曲线滤镜)，MediaInfo，海报墙，多版本槽位分类、搜索，种子槽位系统等
 - 多语言支持：中英双语
-- 图床：本地或者[Minio](https://github.com/minio/minio)
+- 图床：本地或者 [Minio](https://github.com/minio/minio)
+- 邮件发送：SMTP 或者 [Mailgun](https://www.mailgun.com/)
 - 在免费和中性基础上，额外增加 25%，50%，75% 种子免费
 - 现代化开发：Docker, Vite, React
 - ...

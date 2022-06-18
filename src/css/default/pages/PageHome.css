@@ -1,7 +1,6 @@
 .Social {
   display: flex;
   gap: var(--global-space-lg);
-  justify-content: center;
 }
 
 .Social .icon {

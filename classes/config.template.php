@@ -111,11 +111,17 @@ define('ENABLE_HNR', false); // Set to enable H&R
 define('ENABLE_SITEHISTORY', false); // Set to enable site history
 
 // Email delivery method and information
-define('EMAIL_DELIVERY_TYPE', 'local'); // should be either 'mailgun' to use mailgun services or 'local' to use a local SMTP server
-define('MAIL_HOST', 'mail.' . SITE_HOST); // The host to use for mail delivery (e.g. gpw.con)
+define('EMAIL_DELIVERY_TYPE', 'smtp'); // should be either 'mailgun' to use mailgun services or 'smtp' to use a SMTP server
+define('MAIL_HOST', 'mail.' . SITE_HOST); // The host to use for mail delivery (e.g. gpw.com)
 // Mailgun config
 define('MAILGUN_API_KEY', '');
 define('MAILGUN_API_URL', '');
+// SMTP config
+define('MAIL_SMTP_HOST', '');
+define('MAIL_SMTP_DEBUG', true);
+define('MAIL_SMTP_USERNAME', '');
+define('MAIL_SMTP_PASSWORD', '');
+define('MAIL_SMTP_PORT', 465);
 
 // Pagination
 define('TORRENT_COMMENTS_PER_PAGE', 10);

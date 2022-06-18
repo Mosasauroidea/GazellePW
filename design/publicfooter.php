@@ -7,4 +7,3 @@
 		</body>
 
 		</html>
-		<script src="<?= STATIC_SERVER ?>functions/ban.js?v=<?= filemtime(SERVER_ROOT . '/public/static/functions/ban.js') ?>" type="text/javascript"></script>

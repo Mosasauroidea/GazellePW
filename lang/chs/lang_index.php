@@ -36,4 +36,5 @@ $lang_index = array(
   'mystery' => 'It\'s a mystery!',
   'product_note' => 'You may want to put an image here.',
   'latest_thread' => '最新回帖',
+  'links' => '相关链接',
 );
