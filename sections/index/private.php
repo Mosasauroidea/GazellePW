@@ -494,11 +494,13 @@ View::show_header(Lang::get('index', 'index'), 'comments', 'PageHome');
                             <?= time_diff($NewsTime); ?>
                         </div>
                         <div class="Post-headerActions">
-                            <a href="forums.php?action=viewthread&amp;threadid=<?= $NewsID ?>" class="brackets"><?= Lang::get('index', 'discuss') ?></a>
-                            <? if (check_perms('admin_manage_news')) { ?>
-                                - <a href="forums.php?action=viewthread&amp;threadid=<?= $NewsID ?>" class="brackets"><?= Lang::get('global', 'edit') ?></a>
-                            <?  } ?>
-                            - <a class="Post-toggleButton <?= $IsSticky ? 'is-sticky' : '' ?>" href="#" onclick="$('#newsbody<?= $NewsID ?>').gtoggle(); this.innerHTML = (this.innerHTML == '<?= Lang::get('global', 'hide') ?>' ? '<?= Lang::get('global', 'show') ?>' : '<?= Lang::get('global', 'hide') ?>'); return false;" class="brackets"><?= $IsSticky ? Lang::get('index', 'show') : Lang::get('index', 'hide')  ?></a>
+                            <a href="forums.php?action=viewthread&amp;threadid=<?= $NewsID ?>" class="brackets">
+                                <?= Lang::get('index', 'discuss') ?>
+                            </a>
+                            -
+                            <a class="Post-toggleButton <?= $IsSticky ? 'is-sticky' : '' ?>" href="#" onclick="$('#newsbody<?= $NewsID ?>').gtoggle(); this.innerHTML = (this.innerHTML == '<?= Lang::get('global', 'hide') ?>' ? '<?= Lang::get('global', 'show') ?>' : '<?= Lang::get('global', 'hide') ?>'); return false;" class="brackets">
+                                <?= $IsSticky ? Lang::get('index', 'show') : Lang::get('index', 'hide')  ?>
+                            </a>
                         </div>
                     </div>
                     <div id="newsbody<?= $NewsID ?>" class="HtmlText PostArticle Post-body Box-body <?= $IsSticky ? 'hidden' : '' ?>">
