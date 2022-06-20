@@ -637,36 +637,30 @@ View::show_header($Title, 'browse,comments,torrent,bbcode,recommend,cover_art,su
                         $CanUseToken = Torrents::can_use_token($Torrent);
                         $CanDelete = check_perms('torrents_delete') || $UserID == $LoggedUser['ID'];
                         ?>
-
                         <tr class="TableTorrent-rowTitle Table-row releases_<?= $ReleaseType ?>  <?= $SnatchedGroupClass . $SnatchedTorrentClass ?>" id="torrent<?= $TorrentID ?>" group-id="<?= $GroupID ?>" edition-id="<?= $EditionID ?>" data-slot="<?= TorrentSlot::slot_name($Slot) ?>" data-source="<?= $Source ?>" data-codec="<?= $Codec ?>" data-container="<?= $Container ?>" data-resolution="<?= $Resolution ?>" data-processing="<?= $Processing ?>">
                             <td class="Table-cell">
-                                <span class="TableTorrent-titleActions">[
+                                <span class="TableTorrent-titleActions">
+                                    [
                                     <a href="torrents.php?action=download&amp;id=<?= $TorrentID ?>&amp;authkey=<?= $LoggedUser['AuthKey'] ?>&amp;torrent_pass=<?= $LoggedUser['torrent_pass'] ?>" data-tooltip="<?= Lang::get('global', 'download') ?>"><?= ($HasFile ? 'DL' : 'Missing') ?></a>
-                                    <?
-                                    if ($CanUseToken) {
-                                    ?>
-                                        | <a href="torrents.php?action=download&amp;id=<?= $TorrentID ?>&amp;authkey=<?= $LoggedUser['AuthKey'] ?>&amp;torrent_pass=<?= $LoggedUser['torrent_pass'] ?>&amp;usetoken=1" data-tooltip="<?= Lang::get('global', 'use_fl_tokens') ?>" onclick="return confirm('<?= FL_confirmation_msg($Seeders, $Size) ?>');">FL</a>
-                                    <?
-                                    }
-                                    ?>
-                                    | <a href="reportsv2.php?action=report&amp;id=<?= $TorrentID ?>" data-tooltip="<?= Lang::get('torrents', 'report') ?>">RP</a>
-                                    <?
-                                    if ($CanEdit) {
-                                    ?>
-                                        | <a href="torrents.php?action=edit&amp;id=<?= $TorrentID ?>" data-tooltip="<?= Lang::get('global', 'edit') ?>">ED</a>
-                                    <?
-                                    }
-                                    if ($CanDelete) {
-                                    ?>
-                                        | <a href="torrents.php?action=delete&amp;torrentid=<?= $TorrentID ?>" data-tooltip="<?= Lang::get('torrents', 'remove') ?>">RM</a>
-                                    <?
-                                    }
-                                    ?>
-                                    | <a href="torrents.php?torrentid=<?= $TorrentID ?>" data-tooltip="<?= Lang::get('torrents', 'permalink') ?>">PL</a>
-
-                                    ]</span>
+                                    <? if ($CanUseToken) { ?>
+                                        |
+                                        <a href="torrents.php?action=download&amp;id=<?= $TorrentID ?>&amp;authkey=<?= $LoggedUser['AuthKey'] ?>&amp;torrent_pass=<?= $LoggedUser['torrent_pass'] ?>&amp;usetoken=1" data-tooltip="<?= Lang::get('global', 'use_fl_tokens') ?>" onclick="return confirm('<?= FL_confirmation_msg($Seeders, $Size) ?>');">FL</a>
+                                    <? } ?>
+                                    |
+                                    <a href="reportsv2.php?action=report&amp;id=<?= $TorrentID ?>" data-tooltip="<?= Lang::get('torrents', 'report') ?>">RP</a>
+                                    <? if ($CanEdit) { ?>
+                                        |
+                                        <a href="torrents.php?action=edit&amp;id=<?= $TorrentID ?>" data-tooltip="<?= Lang::get('global', 'edit') ?>">ED</a>
+                                    <? }
+                                    if ($CanDelete) { ?>
+                                        |
+                                        <a href="torrents.php?action=delete&amp;torrentid=<?= $TorrentID ?>" data-tooltip="<?= Lang::get('torrents', 'remove') ?>">RM</a>
+                                    <? } ?>
+                                    |
+                                    <a href="torrents.php?torrentid=<?= $TorrentID ?>" data-tooltip="<?= Lang::get('torrents', 'permalink') ?>">PL</a>
+                                    ]
+                                </span>
                                 <?
-
                                 if ($CheckAllTorrents || ($CheckSelfTorrents && $UserID == $LoggedUser['ID'])) {
                                     if (!$CheckAllTorrents) {
                                         $TorrentCheckedBy = "someone";

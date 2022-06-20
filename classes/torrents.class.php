@@ -1102,7 +1102,7 @@ WHERE ud.TorrentID=? AND ui.NotifyOnDeleteDownloaded='1' AND ud.UserID NOT IN ({
         if ($Link) {
             $TorrentInfo = "<a class='$Class' href='torrents.php?id=$GroupID&amp;torrentid=$TorrentID#torrent$TorrentID'>" . $TorrentInfo . "</a>";
         }
-        return Torrents::group_name($Group, $Link) . "&nbsp;&nbsp;&raquo;&nbsp;" . $TorrentInfo;
+        return Torrents::group_name($Group, $Link) . "&nbsp;&raquo;&nbsp;" . $TorrentInfo;
     }
 
     /**

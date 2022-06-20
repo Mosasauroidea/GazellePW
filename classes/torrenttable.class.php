@@ -42,10 +42,8 @@ class UngroupTorrentSimpleListView extends UngroupTorrentTableView {
 
     public function render() {
     ?>
-        <div class="TableContainer">
-            <?
-            if (!empty($this->Torrents)) {
-            ?>
+        <div class="TableContainer UngroupTorrentSimpleListView">
+            <? if (!empty($this->Torrents)) { ?>
                 <table class="TableTorrent Table" variant="ungroup" id="torrent_table">
                     <tr class="Table-rowHeader">
                         <?
@@ -56,9 +54,7 @@ class UngroupTorrentSimpleListView extends UngroupTorrentTableView {
                         ?>
                     </tr>
                 </table>
-            <?
-            } else {
-            ?>
+            <? } else { ?>
                 <table>
                     <tr class="rowb">
                         <td colspan="7" class="center">
@@ -66,9 +62,7 @@ class UngroupTorrentSimpleListView extends UngroupTorrentTableView {
                         </td>
                     </tr>
                 </table>
-            <?
-            }
-            ?>
+            <? } ?>
         </div>
     <?
     }
@@ -86,58 +80,53 @@ class UngroupTorrentSimpleListView extends UngroupTorrentTableView {
             $ColCount -= 1;
         }
     ?>
+        <? /* UngroupTorrentSimpleListView */ ?>
         <tr class="TableTorrent-rowTitle Table-row u-tableTorrent-rowTitle <?= $SnatchedGroupClass . (!empty($LoggedUser['TorrentGrouping']) && $LoggedUser['TorrentGrouping'] === 1 ? ' hidden' : '') ?>" group-id="<?= $GroupID ?>" torrent-id="<?= $TorrentID ?>">
-
-            <?
-            if ($this->WithNumber) {
-            ?>
+            <? if ($this->WithNumber) { ?>
                 <td class="TableTorrent-cellMovieInfo Table-cell TableTorrent-cellMovieInfoNo" style="padding: 8px; text-align: center;" class="td_rank m_td_left"><strong><?= $Idx + 1 ?></strong></td>
-            <?
-            }
-            if (!empty($this->FilterID)) {
-            ?>
+            <? }
+            if (!empty($this->FilterID)) { ?>
                 <td class="TableTorrent-cellMovieInfo Table-cell TableTorrent-cellMovieInfoCheckbox" style="text-align: center;">
                     <input type="checkbox" class="notify_box notify_box_<?= $this->FilterID ?>" value="<?= $TorrentID ?>" id="clear_<?= $TorrentID ?>" tabindex="1" />
                 </td>
-            <?
-            }
-            ?>
+            <? } ?>
             <td class="Table-cell">
-                <span class="TableTorrent-titleActions">[ <a href="torrents.php?action=download&amp;id=<?= $TorrentID ?>&amp;authkey=<?= $LoggedUser['AuthKey'] ?>&amp;torrent_pass=<?= $LoggedUser['torrent_pass'] ?>" data-tooltip="Download">DL</a>
+                <span class="TableTorrent-titleActions">
+                    [
+                    <a href="torrents.php?action=download&amp;id=<?= $TorrentID ?>&amp;authkey=<?= $LoggedUser['AuthKey'] ?>&amp;torrent_pass=<?= $LoggedUser['torrent_pass'] ?>" data-tooltip="Download">DL</a>
                     <? if (Torrents::can_use_token($Torrent)) { ?>
                         |
                         <a href="torrents.php?action=download&amp;id=<?= $TorrentID ?>&amp;authkey=<?= $LoggedUser['AuthKey'] ?>&amp;torrent_pass=<?= $LoggedUser['torrent_pass'] ?>&amp;usetoken=1" data-tooltip="Use a FL Token" onclick="return confirm('<?= FL_confirmation_msg($Torrent['Seeders'], $Torrent['Size']) ?>');">FL</a>
                     <? } ?>
-                    | <a href="torrents.php?torrentid=<?= $TorrentID ?>" data-tooltip="<?= Lang::get('torrents', 'permalink') ?>">PL</a>
+                    |
+                    <a href="torrents.php?torrentid=<?= $TorrentID ?>" data-tooltip="<?= Lang::get('torrents', 'permalink') ?>">PL</a>
                     ]
                 </span>
-                <?
-
-                if (isset($this->DetailView)) {
-                ?>
+                <? if (isset($this->DetailView)) { ?>
                     <a clas="<?= $SnatchedTorrentClass ?>" href="#" onclick="globalapp.toggleTorrentDetail(event, '#torrent_<?= $this->DetailView ?>_<?= $TorrentID ?>')">
                         <?= Torrents::torrent_simple_view($Group, $Torrent, false, ['Self' => $this->WithSelf]) ?>
                     </a>
-                <?
-                } else {
-                ?>
+                <? } else { ?>
                     <?= Torrents::torrent_simple_view($Group, $Torrent,  true, ['Class' => $SnatchedTorrentClass]) ?>
-                <?
-                }
-                ?>
+                <? } ?>
             </td>
-            <?
-            if ($this->WithTime) {
-            ?>
-                <td class="Table-cell TableTorrent-cellStat TableTorrent-cellStatTime"><?= time_diff($Torrent['Time'], 1) ?></td>
-            <?
-            }
-            ?>
-            <td class="Table-cell TableTorrent-cellStat TableTorrent-cellStatSize"><?= Format::get_size($Torrent['Size']) ?></td>
-            <td class="Table-cell TableTorrent-cellStat TableTorrent-cellStatSnatches"><?= number_format($Torrent['Snatched']) ?></td>
+            <? if ($this->WithTime) { ?>
+                <td class="Table-cell TableTorrent-cellStat TableTorrent-cellStatTime">
+                    <?= time_diff($Torrent['Time'], 1) ?>
+                </td>
+            <? } ?>
+            <td class="Table-cell TableTorrent-cellStat TableTorrent-cellStatSize">
+                <?= Format::get_size($Torrent['Size']) ?>
+            </td>
+            <td class="Table-cell TableTorrent-cellStat TableTorrent-cellStatSnatches">
+                <?= number_format($Torrent['Snatched']) ?>
+            </td>
             <td class="Table-cell TableTorrent-cellStat TableTorrent-cellStatSeeders <?= (($Torrent['Seeders'] == 0) ? ' u-colorRatio00' : '') ?>">
-                <?= number_format($Torrent['Seeders']) ?></td>
-            <td class="Table-cell TableTorrent-cellStat TableTorrent-cellStatLeechers"><?= number_format($Torrent['Leechers']) ?></td>
+                <?= number_format($Torrent['Seeders']) ?>
+            </td>
+            <td class="Table-cell TableTorrent-cellStat TableTorrent-cellStatLeechers">
+                <?= number_format($Torrent['Leechers']) ?>
+            </td>
         </tr>
         <?
         if (isset($this->DetailView)) {
@@ -145,9 +134,7 @@ class UngroupTorrentSimpleListView extends UngroupTorrentTableView {
         ?>
             <tr class="TableTorrent-rowDetail u-toggleEdition-alwaysHidden Table-row releases_<?= $Group['ReleaseType'] ?>  <? if (!$Expand) { ?>u-hidden<? } ?>" id="torrent_<?= $this->DetailView ?>_<?= $TorrentID; ?>" group-id="<?= $GroupID ?>">
                 <td class="TableTorrent-cellDetail Table-cell" colspan="<?= $ColCount ?>">
-                    <?
-                    $this->render_torrent_detail($Torrent['Group'], $Torrent, null, null, false);
-                    ?>
+                    <? $this->render_torrent_detail($Torrent['Group'], $Torrent, null, null, false); ?>
                 </td>
             </tr>
         <? } ?>
@@ -179,7 +166,7 @@ class TorrentTableView {
     protected $CheckSelfTorrents;
     protected $AllUncheckedCnt = 0;
     protected $PageUncheckedCnt = 0;
-    /** 
+    /**
      * @var DetailOption $DetailOption
      */
     protected $DetailOption;
@@ -314,9 +301,9 @@ class TorrentTableView {
             $Reported = true;
             include(Lang::getLangfilePath("report_types"));
             $ReportInfo = '
-            <div class="TableContainer">
-                <table class="TableReportInfo Table">
-                    <tr class="Table-rowHeader">
+        <div class="TableContainer">
+            <table class="TableReportInfo Table">
+                <tr class="Table-rowHeader">
                     <td class="Table-cell">' . Lang::get('torrents', 'this_torrent_has_active_reports_1') . $NumReports . Lang::get('torrents', 'this_torrent_has_active_reports_2') . ($NumReports === 1 ? Lang::get('torrents', 'this_torrent_has_active_reports_3') : Lang::get('torrents', 'this_torrent_has_active_reports_4')) . ":</td>
                 </tr>";
             foreach ($Reports as $Report) {
@@ -344,7 +331,9 @@ class TorrentTableView {
                 $ReportInfo .= "
                 <tr class='Table-row'>
                     <td class='Table-cell'>$ReportLinks" . Lang::get('torrents', 'at') . " " . time_diff($Report['ReportedTime'], 2, true, true) . Lang::get('torrents', 'for_the_reason') . $ReportType['title'] . '":' . ($CanReply ? ('<a class="floatright report_reply_btn" onclick="$(\'.can_reply_' . $ReportID . '\').toggle()" href="javascript:void(0)">' . Lang::get('torrents', 'reply') . '</a>') : "") . '
-                        <blockquote>' . Text::full_format($Report['UserComment']) . ($Report['UploaderReply'] ? ('<hr class="report_inside_line">' . $UploaderLinks . ' ' . time_diff($Report['ReplyTime'], 2, true, true) . ':<br>' . Text::full_format($Report['UploaderReply'])) : '') . '</blockquote>
+                        <blockquote>' . Text::full_format($Report['UserComment']) . ($Report['UploaderReply'] ? ('
+                            <hr class="report_inside_line">' . $UploaderLinks . ' ' . time_diff($Report['ReplyTime'], 2, true, true) . ':<br>' . Text::full_format($Report['UploaderReply'])) : '') . '
+                        </blockquote>
                     </td>
                 </tr>';
                 $area = new TEXTAREA_PREVIEW('uploader_reply', '', '', 50, 10, true, true, true, array(
@@ -357,14 +346,16 @@ class TorrentTableView {
                             <input type="hidden" name="reportid" value="' . $ReportID . '">
                             <input type="hidden" name="torrentid" value="' . $TorrentID . '">
                             ' . $area->getBuffer() . '
-                        <div class="submit_div preview_submit">
+                            <div class="submit_div preview_submit">
                                 <input class="Button" type="submit">
                             </div>
                         </form>
                     </td>
                 </tr>' : "";
             }
-            $ReportInfo .= "\n\t\t</table></div>";
+            $ReportInfo .= "\n\t\t
+            </table>
+        </div>";
         }
     ?>
 
@@ -1004,9 +995,12 @@ class GroupTorrentTableView extends TorrentTableView {
             $Cols += 1;
         }
         ?>
+        <? /* GroupTorrentTableView */ ?>
         <tr class="TableTorrent-rowTitle Table-row <?= $this->WithCheck && $TorrentChecked ? "torrent_checked " : "torrent_unchecked" ?> <?= $SnatchedGroupClass . (!empty($LoggedUser['TorrentGrouping']) && $LoggedUser['TorrentGrouping'] == 1 ? ' hidden' : '') ?>" group-id="<?= $GroupID ?>" edition-id="<?= $EditionID ?>">
             <td class="Table-cell is-name" colspan="<?= $Cols ?>">
-                <span class="TableTorrent-titleActions">[ <a href="torrents.php?action=download&amp;id=<?= $TorrentID ?>&amp;authkey=<?= $LoggedUser['AuthKey'] ?>&amp;torrent_pass=<?= $LoggedUser['torrent_pass'] ?>" data-tooltip="Download">DL</a>
+                <span class="TableTorrent-titleActions">
+                    [
+                    <a href="torrents.php?action=download&amp;id=<?= $TorrentID ?>&amp;authkey=<?= $LoggedUser['AuthKey'] ?>&amp;torrent_pass=<?= $LoggedUser['torrent_pass'] ?>" data-tooltip="Download">DL</a>
                     <? if (Torrents::can_use_token($Torrent)) { ?>
                         |
                         <a href="torrents.php?action=download&amp;id=<?= $TorrentID ?>&amp;authkey=<?= $LoggedUser['AuthKey'] ?>&amp;torrent_pass=<?= $LoggedUser['torrent_pass'] ?>&amp;usetoken=1" data-tooltip="Use a FL Token" onclick="return confirm('<?= FL_confirmation_msg($Torrent['Seeders'], $Torrent['Size']) ?>');">FL</a>
@@ -1024,29 +1018,32 @@ class GroupTorrentTableView extends TorrentTableView {
                 ?>
                         <i id="torrent<?= $TorrentID ?>_check1" style="display:<?= $TorrentChecked ? "inline-block" : "none" ?>;color:#649464;" data-tooltip="<?= Lang::get('torrents', 'checked_by_before') ?><?= $TorrentChecked ? $TorrentCheckedBy : $LoggedUser['Username'] ?><?= Lang::get('torrents', 'checked_by_after') ?>"><?= icon("Table/checked") ?></i>
                         <i id="torrent<?= $TorrentID ?>_check0" style="display:<?= $TorrentChecked ? "none" : "inline-block" ?>;color:#CF3434;" data-tooltip="<?= Lang::get('torrents', 'has_not_been_checked') ?><?= Lang::get('torrents', 'checked_explanation') ?>"><?= icon("Table/unchecked") ?></i>
-
                     <? } else { ?>
                         <i style="color: <?= $TorrentChecked ? "#74B274" : "#A6A6A6" ?>;" data-tooltip="<?= $TorrentChecked ? Lang::get('torrents', 'has_been_checked') : Lang::get('torrents', 'has_not_been_checked') ?><?= Lang::get('torrents', 'checked_explanation') ?>"><?= icon("Table/" . ($TorrentChecked ? "checked" : "unchecked")) ?> </i>
-                <?
-                    }
-                }
-                ?>
-                &raquo; <a class="<?= $SnatchedTorrentClass ?>" data-tooltip="<?= $FileName ?>" href="torrents.php?id=<?= $GroupID ?>&amp;torrentid=<?= $TorrentID ?>#torrent<?= $TorrentID ?>"><?= Torrents::torrent_info($Torrent, true) ?></a>
+                    <? } ?>
+                <? } ?>
+                &nbsp;
+                <a class="<?= $SnatchedTorrentClass ?>" data-tooltip="<?= $FileName ?>" href="torrents.php?id=<?= $GroupID ?>&amp;torrentid=<?= $TorrentID ?>#torrent<?= $TorrentID ?>">
+                    <?= Torrents::torrent_info($Torrent, true) ?>
+                </a>
             </td>
-            <?
-            if ($this->WithTime) {
-            ?>
+            <? if ($this->WithTime) { ?>
                 <td class="Table-cell TableTorrent-cellStat TableTorrent-cellStatTime">
                     <?= time_diff($Torrent['Time'], 1) ?>
                 </td>
-            <?
-            }
-            ?>
-            <td class="Table-cell TableTorrent-cellStat TableTorrent-cellStatSize"><?= Format::get_size($Torrent['Size']) ?></td>
-            <td class="Table-cell TableTorrent-cellStat TableTorrent-cellStatSnatches"><?= number_format($Torrent['Snatched']) ?></td>
+            <? } ?>
+            <td class="Table-cell TableTorrent-cellStat TableTorrent-cellStatSize">
+                <?= Format::get_size($Torrent['Size']) ?>
+            </td>
+            <td class="Table-cell TableTorrent-cellStat TableTorrent-cellStatSnatches">
+                <?= number_format($Torrent['Snatched']) ?>
+            </td>
             <td class="Table-cell TableTorrent-cellStat TableTorrent-cellStatSeeders <?= (($Torrent['Seeders'] == 0) ? ' u-colorRatio00' : '') ?>">
-                <?= number_format($Torrent['Seeders']) ?></td>
-            <td class="Table-cell TableTorrent-cellStat TableTorrent-cellStatLeechers"><?= number_format($Torrent['Leechers']) ?></td>
+                <?= number_format($Torrent['Seeders']) ?>
+            </td>
+            <td class="Table-cell TableTorrent-cellStat TableTorrent-cellStatLeechers">
+                <?= number_format($Torrent['Leechers']) ?>
+            </td>
         </tr>
     <?
     }
@@ -1061,9 +1058,7 @@ class UngroupTorrentTableView  extends TorrentTableView {
     public function render() {
     ?>
         <div class="TableContainer">
-            <?
-            if (!empty($this->Torrents)) {
-            ?>
+            <? if (!empty($this->Torrents)) { ?>
                 <table class="TableTorrent Table" variant="ungroup" id="torrent_table">
                     <tr class="Table-rowHeader">
                         <?
@@ -1074,9 +1069,7 @@ class UngroupTorrentTableView  extends TorrentTableView {
                         ?>
                     </tr>
                 </table>
-            <?
-            } else {
-            ?>
+            <? } else { ?>
                 <table>
                     <tr class="rowb">
                         <td colspan="7" class="center">
@@ -1084,9 +1077,7 @@ class UngroupTorrentTableView  extends TorrentTableView {
                         </td>
                     </tr>
                 </table>
-            <?
-            }
-            ?>
+            <? } ?>
         </div>
     <?
     }
@@ -1102,33 +1093,41 @@ class UngroupTorrentTableView  extends TorrentTableView {
         $FileName = Torrents::parse_file_name($Torrent);
         global $LoggedUser;
     ?>
+        <? /* UngroupTorrentTableView */ ?>
         <tr class="TableTorrent-rowTitle Table-row  <?= $SnatchedGroupClass . (!empty($LoggedUser['TorrentGrouping']) && $LoggedUser['TorrentGrouping'] === 1 ? ' hidden' : '') ?>" group-id="<?= $GroupID ?>">
             <td class="Table-cell">
-                <span class="TableTorrent-titleActions">[ <a href="torrents.php?action=download&amp;id=<?= $TorrentID ?>&amp;authkey=<?= $LoggedUser['AuthKey'] ?>&amp;torrent_pass=<?= $LoggedUser['torrent_pass'] ?>" data-tooltip="Download">DL</a>
+                <span class="TableTorrent-titleActions">
+                    [
+                    <a href="torrents.php?action=download&amp;id=<?= $TorrentID ?>&amp;authkey=<?= $LoggedUser['AuthKey'] ?>&amp;torrent_pass=<?= $LoggedUser['torrent_pass'] ?>" data-tooltip="Download">DL</a>
                     <? if (Torrents::can_use_token($Torrent)) { ?>
                         |
                         <a href="torrents.php?action=download&amp;id=<?= $TorrentID ?>&amp;authkey=<?= $LoggedUser['AuthKey'] ?>&amp;torrent_pass=<?= $LoggedUser['torrent_pass'] ?>&amp;usetoken=1" data-tooltip="Use a FL Token" onclick="return confirm('<?= FL_confirmation_msg($Torrent['Seeders'], $Torrent['Size']) ?>');">FL</a>
                     <? } ?>
                     ]
                 </span>
-                &raquo; <a class="<?= $SnatchedTorrentClass ?>" data-tooltip="<?= $FileName ?>" href="torrents.php?id=<?= $GroupID ?>&amp;torrentid=<?= $TorrentID ?>#torrent<?= $TorrentID ?>"><?= Torrents::torrent_info($Torrent, true) ?></a>
+                <a class="<?= $SnatchedTorrentClass ?>" data-tooltip="<?= $FileName ?>" href="torrents.php?id=<?= $GroupID ?>&amp;torrentid=<?= $TorrentID ?>#torrent<?= $TorrentID ?>">
+                    <?= Torrents::torrent_info($Torrent, true) ?>
+                </a>
             </td>
-            <?
-            if ($this->WithTime) {
-            ?>
-                <td class="Table-cell TableTorrent-cellStat TableTorrent-cellStatTime"><?= time_diff($Torrent['Time'], 1) ?></td>
-            <?
-            }
-            ?>
-            <td class="Table-cell TableTorrent-cellStat TableTorrent-cellStatSize"><?= Format::get_size($Torrent['Size']) ?></td>
-            <td class="Table-cell TableTorrent-cellStat TableTorrent-cellStatSnatches"><?= number_format($Torrent['Snatched']) ?></td>
+            <? if ($this->WithTime) { ?>
+                <td class="Table-cell TableTorrent-cellStat TableTorrent-cellStatTime">
+                    <?= time_diff($Torrent['Time'], 1) ?>
+                </td>
+            <? } ?>
+            <td class="Table-cell TableTorrent-cellStat TableTorrent-cellStatSize">
+                <?= Format::get_size($Torrent['Size']) ?>
+            </td>
+            <td class="Table-cell TableTorrent-cellStat TableTorrent-cellStatSnatches">
+                <?= number_format($Torrent['Snatched']) ?>
+            </td>
             <td class="Table-cell TableTorrent-cellStat TableTorrent-cellStatSeeders <?= (($Torrent['Seeders'] == 0) ? ' u-colorRatio00' : '') ?>">
                 <?= number_format($Torrent['Seeders']) ?></td>
-            <td class="Table-cell TableTorrent-cellStat TableTorrent-cellStatLeechers"><?= number_format($Torrent['Leechers']) ?></td>
+            <td class="Table-cell TableTorrent-cellStat TableTorrent-cellStatLeechers">
+                <?= number_format($Torrent['Leechers']) ?>
+            </td>
         </tr>
     <?
     }
-
 
     private function render_group_info($Idx) {
         $Torrent = $this->Torrents[$Idx];
@@ -1145,36 +1144,29 @@ class UngroupTorrentTableView  extends TorrentTableView {
         $SnatchedGroupClass = Torrents::parse_group_snatched($GroupInfo) ? ' snatched_group' : '';
     ?>
         <tr class="TableTorrent-rowMovieInfo Table-row <?= $SnatchedTorrentClass . $SnatchedGroupClass ?>" group-id="<?= $GroupInfo['ID'] ?>">
-            <?
-            if ($this->WithNumber) {
-            ?>
+            <? if ($this->WithNumber) { ?>
                 <td class="TableTorrent-cellMovieInfo Table-cell TableTorrent-cellMovieInfoNo" rowspan="2" style="padding: 8px; text-align: center;" class="td_rank m_td_left"><strong><?= $Idx + 1 ?></strong></td>
-            <?
-            }
-            if (!empty($this->FilterID)) {
-            ?>
+            <? } ?>
+            <? if (!empty($this->FilterID)) { ?>
                 <td class="TableTorrent-cellMovieInfo Table-cell TableTorrent-cellMovieInfoCheckbox" rowspan="2" style="text-align: center;">
                     <input type="checkbox" class="notify_box notify_box_<?= $this->FilterID ?>" value="<?= $TorrentID ?>" id="clear_<?= $TorrentID ?>" tabindex="1" />
                 </td>
-            <?
-            }
-            ?>
+            <? } ?>
             <? if ($this->WithCover) { ?>
                 <td class="TableTorrent-cellMovieInfo Table-cell TableTorrent-cellMovieInfoPoster" rowspan="2">
                     <?= ImageTools::cover_thumb($GroupInfo['WikiImage'], $CategoryID) ?>
                 </td>
-            <?      } ?>
-
-
+            <? } ?>
             <td class="TableTorrent-cellMovieInfo Table-cell TableTorrent-cellMovieInfoBody" colspan="<?= $Cols ?>">
                 <div class="TableTorrent-movieInfoBody">
                     <div class="TableTorrent-movieInfoContent">
                         <?= $this->render_group_name($GroupInfo, true); ?>
                         <?= $this->render_movie_info($GroupInfo) ?>
-                        <div class="TableTorrent-movieInfoTags"><?= $TorrentTags->format("torrents.php?action=basic&amp;taglist=", '', 'TableTorrent-movieInfoTagsItem') ?></div>
+                        <div class="TableTorrent-movieInfoTags">
+                            <?= $TorrentTags->format("torrents.php?action=basic&amp;taglist=", '', 'TableTorrent-movieInfoTagsItem') ?>
+                        </div>
                     </div>
                 </div>
-            </td>
             </td>
         </tr>
 <?
