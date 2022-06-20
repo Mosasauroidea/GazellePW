@@ -139,7 +139,7 @@ class DEBUG {
         $Return = array();
         foreach ($Array as $Key => $Val) {
             $Return[$Key] = '';
-            if (!is_int($Key) || $Key != $LastKey + 1) {
+            if (!is_int($Key) || $Key != intval($LastKey) + 1) {
                 $Return[$Key] .= "'$Key' => ";
             }
             if ($Val === true) {
