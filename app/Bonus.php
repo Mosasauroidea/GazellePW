@@ -232,11 +232,13 @@ class Bonus {
             $this->db->rollback();
             return false;
         }
+	$this->db->commit();
         $new_stats = \Users::user_stats($user_id, true);
         if (!($new_stats['BonusPoints'] >= 0 && $new_stats['BonusPoints'] < $stats['BonusPoints'])) {
             $this->db->rollback();
             return false;
         }
+	$this->db->begin_transaction();
         $this->addPurchaseHistory($item['ID'], $user_id, $price);
         $this->db->commit();
         $this->cache->delete_value('user_info_heavy_' . $user_id);
