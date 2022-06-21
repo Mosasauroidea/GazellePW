@@ -333,38 +333,38 @@ $Pages = Format::get_pages($Page, $TorrentCount, TORRENTS_PER_PAGE);
                     <tr class="Form-row">
                         <td class="Form-label"><strong><?= Lang::get('torrents', 'ft_ripspecifics') ?>:</strong></td>
                         <td class="Form-inputs" colspan="3">
-                            <select class="Select" id="source" name="source" class="ft_source fti_advanced">
+                            <select class="Input" id="source" name="source" class="ft_source fti_advanced">
                                 <option class="Select-option" value=""><?= Lang::get('torrents', 'source') ?></option>
                                 <? foreach ($Sources as $SourceName) { ?>
                                     <option class="Select-option" value="<?= display_str($SourceName); ?>" <? Format::selected('source', $SourceName) ?>><?= display_str($SourceName); ?></option>
                                 <?  } ?>
                             </select>
 
-                            <select class="Select" name="codec" class="ft_codec fti_advanced">
+                            <select class="Input" name="codec" class="ft_codec fti_advanced">
                                 <option class="Select-option" value=""><?= Lang::get('torrents', 'codec') ?></option>
                                 <? foreach ($Codecs as $CodecName) { ?>
                                     <option class="Select-option" value="<?= display_str($CodecName); ?>" <? Format::selected('codec', $CodecName) ?>><?= display_str($CodecName); ?></option>
                                 <?  } ?>
                             </select>
-                            <select class="Select" name="container" class="ft_container fti_advanced">
+                            <select class="Input" name="container" class="ft_container fti_advanced">
                                 <option class="Select-option" value=""><?= Lang::get('torrents', 'container') ?></option>
                                 <? foreach ($Containers as $ContainerName) { ?>
                                     <option class="Select-option" value="<?= display_str($ContainerName); ?>" <? Format::selected('container', $ContainerName) ?>><?= display_str($ContainerName); ?></option>
                                 <?  } ?>
                             </select>
-                            <select class="Select" name="resolution" class="ft_resolution fti_advanced">
+                            <select class="Input" name="resolution" class="ft_resolution fti_advanced">
                                 <option class="Select-option" value=""><?= Lang::get('torrents', 'resolution') ?></option>
                                 <? foreach ($Resolutions as $ResolutionName) { ?>
                                     <option class="Select-option" value="<?= display_str($ResolutionName); ?>" <? Format::selected('resolution', $ResolutionName) ?>><?= display_str($ResolutionName); ?></option>
                                 <?  } ?>
                             </select>
-                            <select class="Select" name="processing" class="ft_container fti_advanced">
+                            <select class="Input" name="processing" class="ft_container fti_advanced">
                                 <option class="Select-option" value=""><?= Lang::get('torrents', 'processing') ?></option>
                                 <? foreach ($Processings as $ProcessingName) { ?>
                                     <option class="Select-option" value="<?= display_str($ProcessingName); ?>" <? Format::selected('processing', $ProcessingName) ?>><?= display_str($ProcessingName); ?></option>
                                 <?  } ?>
                             </select>
-                            <select class="Select" name="releasetype" class="ft_releasetype fti_advanced">
+                            <select class="Input" name="releasetype" class="ft_releasetype fti_advanced">
                                 <option class="Select-option" value=""><?= Lang::get('torrents', 'ft_releasetype') ?></option>
                                 <? foreach ($ReleaseTypes as $ID) { ?>
                                     <option class="Select-option" value="<?= display_str($ID); ?>" <? Format::selected('releasetype', $ID) ?>><?= display_str(Lang::get('torrents', 'release_types')[$ID]); ?></option>
@@ -379,7 +379,7 @@ $Pages = Format::get_pages($Page, $TorrentCount, TORRENTS_PER_PAGE);
                                 <input class="Input" type="checkbox" name="view" <?= $View == 1 ? "checked" : "" ?> id="only_hnr" value="1">
                                 <label class="Checkbox-label"><?= Lang::get('torrents', 'only_hnr') ?></label>
                             </div>
-                            <select class="Select" name="scene" class="ft_scene">
+                            <select class="Input" name="scene" class="ft_scene">
                                 <option class="Select-option" value=""><?= Lang::get('torrents', 'scene') ?></option>
                                 <option class="Select-option" value="1" <? Format::selected('scene', 1) ?>><?= Lang::get('torrents', 'yes') ?></option>
                                 <option class="Select-option" value="0" <? Format::selected('scene', 0) ?>><?= Lang::get('torrents', 'no') ?></option>
@@ -404,12 +404,12 @@ $Pages = Format::get_pages($Page, $TorrentCount, TORRENTS_PER_PAGE);
                     <tr class="Form-row">
                         <td class="Form-label"><strong><?= Lang::get('torrents', 'ft_order') ?>:</strong></td>
                         <td class="Form-inputs">
-                            <select class="Select" name="order" class="ft_order_by">
+                            <select class="Input" name="order" class="ft_order_by">
                                 <? foreach ($Orders as $OrderKey => $OrderText) { ?>
                                     <option class="Select-option" value="<?= $OrderKey ?>" <? Format::selected('order', $OrderKey) ?>><?= $OrderText ?></option>
                                 <?    } ?>
                             </select>
-                            <select class="Select" name="way" class="ft_order_way">
+                            <select class="Input" name="way" class="ft_order_way">
                                 <? foreach ($Ways as $WayKey => $WayText) { ?>
                                     <option class="Select-option" value="<?= $WayKey ?>" <? Format::selected('way', $WayKey) ?>><?= $WayText ?></option>
                                 <?    } ?>

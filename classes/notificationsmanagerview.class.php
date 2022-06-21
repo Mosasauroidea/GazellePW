@@ -28,7 +28,7 @@ class NotificationsManagerView {
         <tr class="Form-row">
             <td class="Form-label"><strong><?= Lang::get('user', 'push_notifications') ?></strong></td>
             <td class="Form-inputs">
-                <select class="Select" name="pushservice" id="pushservice">
+                <select class="Input" name="pushservice" id="pushservice">
                     <option class="Select-option" value="0" <? if (empty($PushService)) { ?> selected="selected" <? } ?>><?= Lang::get('user', 'disable_push_notifications') ?></option>
                     <option class="Select-option" value="1" <? if ($PushService == 1) { ?> selected="selected" <? } ?>><?= Lang::get('user', 'notify_my_android') ?></option>
                     <option class="Select-option" value="2" <? if ($PushService == 2) { ?> selected="selected" <? } ?>><?= Lang::get('user', 'prowl') ?></option>
@@ -41,7 +41,7 @@ class NotificationsManagerView {
                     <label id="pushservice_title" for="pushkey"><?= Lang::get('user', 'api_key') ?></label>
                     <input class="Input" type="text" size="50" name="pushkey" id="pushkey" value="<?= display_str($PushOptions['PushKey']) ?>" />
                     <label class="pushdeviceid" id="pushservice_device" for="pushdevice"><?= Lang::get('user', 'device_id') ?></label>
-                    <select class="Select" class="pushdeviceid" name="pushdevice" id="pushdevice">
+                    <select class="Input" class="pushdeviceid" name="pushdevice" id="pushdevice">
                         <option class="Select-option" value="<?= display_str($PushOptions['PushDevice']) ?>" selected="selected"><?= display_str($PushOptions['PushDevice']) ?></option>
                     </select>
                     <br />
