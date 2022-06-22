@@ -11,6 +11,7 @@ $Redirects = [
 
 $PathInfo = pathinfo($_SERVER['SCRIPT_NAME']);
 $Document = $PathInfo['filename'];
+$SSL = $_SERVER['SERVER_PORT'] === '443';
 if ($PathInfo['dirname'] !== '/') {
     header("Location: /index.php");
 } elseif (isset($Redirects[$Document])) {

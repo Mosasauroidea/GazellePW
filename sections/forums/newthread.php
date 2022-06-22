@@ -148,10 +148,11 @@ View::show_header('Forums &gt; ' . $Forum['Name'] . ' &gt; New Topic', 'comments
                             <input class="Input required is-small" type="number" name="maxcount" min="1" max="25" value="1" />
                         </div>
                     </div>
-                    <div id="buttons" class="center">
-                        <input class="Button" type="submit" id="submit_button" value="<?= Lang::get('global', 'submit') ?>" />
-                    </div>
+
                 <? } ?>
+                <div id="buttons" class="center">
+                    <input class="Button" type="submit" id="submit_button" value="<?= Lang::get('global', 'submit') ?>" />
+                </div>
             </div>
 
         </form>

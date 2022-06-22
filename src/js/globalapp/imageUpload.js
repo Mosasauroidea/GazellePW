@@ -1,14 +1,12 @@
-globalapp.imgUpload = function imgUpload(file = false) {
+function imgUpload(file = false) {
   UploadImage(file, (url) => {
     $('#image').val(url)
     $('#uploaded_img').attr('src', url)
   })
 }
+globalapp.imgUpload = imgUpload
 
-globalapp.imgUploadFillBBCode = function imgUploadFillBBCode(
-  containerId,
-  loadingTarget
-) {
+function imgUploadFillBBCode(containerId, loadingTarget) {
   loadingTarget = document.querySelector(loadingTarget)
   UploadImage(
     false,
@@ -29,16 +27,18 @@ globalapp.imgUploadFillBBCode = function imgUploadFillBBCode(
     }
   )
 }
+globalapp.imgUploadFillBBCode = imgUploadFillBBCode
 
-globalapp.imgCopy = function imgCopy() {
+function imgCopy() {
   if ($('#image').val()) {
     $('#image').select()
     document.execCommand('Copy')
     alert(translation.get('copied'))
   }
 }
+globalapp.imgCopy = imgCopy
 
-globalapp.upload = async function upload(file, cb, { onBefore, onFinal } = {}) {
+async function upload(file, cb, { onBefore, onFinal } = {}) {
   try {
     const formData = new FormData()
     formData.append('file', file)
@@ -59,12 +59,9 @@ globalapp.upload = async function upload(file, cb, { onBefore, onFinal } = {}) {
     onFinal && onFinal()
   }
 }
+globalapp.upload = upload
 
-globalapp.UploadImage = function UploadImage(
-  file,
-  after = (url) => {},
-  { onBefore, onFinal } = {}
-) {
+function UploadImage(file, after = (url) => {}, { onBefore, onFinal } = {}) {
   var input = document.createElement('input')
   input.type = 'file'
   input.accept = 'image/gif,image/jpeg,image/jpg,image/png,image/svg'
@@ -87,17 +84,20 @@ globalapp.UploadImage = function UploadImage(
     input.click()
   }
 }
+globalapp.UploadImage = UploadImage
 
-globalapp.imgAllowDrop = function imgAllowDrop(ev) {
+function imgAllowDrop(ev) {
   ev.preventDefault()
 }
+globalapp.imgAllowDrop = imgAllowDrop
 
-globalapp.imgDrop = function imgDrop(event) {
+function imgDrop(event) {
   event.preventDefault()
   if (event.dataTransfer.files.length) {
     var file = event.dataTransfer.files[0]
     if (/image\/\w+/.test(file.type)) {
-      UploadImage(file)
+      imgUpload(file)
     }
   }
 }
+globalapp.imgDrop = imgDrop

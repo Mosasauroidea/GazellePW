@@ -450,13 +450,6 @@ class TORRENT_FORM {
 
                 <tr class="Form-row">
                     <td class="Form-label"><?= Lang::get('upload', 'movie_cover') ?><span class="u-colorWarning">*</span>:</td>
-                    <script>
-                        function imgUpload(file = false) {
-                            UploadImage(file, url => {
-                                $('#image').val(url)
-                            })
-                        }
-                    </script>
                     <td class="Form-items Form-errorContainer">
                         <div class="Form-inputs">
                             <input class="Input" type="text" ondrop="globalapp.imgDrop(event)" ondragover="globalapp.imgAllowDrop(event)" id="image" name="image" size="60" value="<?= display_str($Torrent['Image']) ?>" <?= $this->Disabled ?> />
@@ -485,9 +478,9 @@ class TORRENT_FORM {
                                     <select class="Input" id="genre_tags" name="genre_tags" onchange="globalapp.uploadAddTag(); return false;" <?= $this->Disabled ?>>
                                         <? foreach (Misc::display_array($GenreTags) as $Genre) { ?>
                                             <option class="Select-option" value="<?= $Genre ?>"><?= $Genre ?></option>
-                                        <?              } ?>
+                                        <? } ?>
                                     </select>
-                                <?          } ?>
+                                <? } ?>
                                 <input class="Input" type="text" id="tags" name="tags" size="40" value="<?= display_str($Torrent['TagList']) ?>" <?
                                                                                                                                                     Users::has_autocomplete_enabled('other'); ?><?= $this->Disabled ?> />
                             </div>
@@ -500,20 +493,19 @@ class TORRENT_FORM {
                             <h7><?= Lang::get('upload', 'chinese_movie_synopsis_note') ?></h7>
                         </td>
                     </tr>
-                <?
-                    }
-                }
-                if (!$this->NewTorrent) {
-                ?>
+                <? } ?>
+            <? } ?>
+            <? if (!$this->NewTorrent) { ?>
                 <tr class="Form-rowHeader" id="edit_torrent">
-                    <td class="Form-title"><?= Lang::get('torrents', 'browser_edit_torrent') ?></td>
+                    <td class="Form-title">
+                        <?= Lang::get('torrents', 'browser_edit_torrent') ?>
+                    </td>
                 </tr>
-            <?
-                }
-
-            ?>
+            <? } ?>
             <tr class="Form-row is-section is-text">
-                <td class="Form-label"><?= Lang::get('upload', 'movie_scene') ?>:</td>
+                <td class="Form-label">
+                    <?= Lang::get('upload', 'movie_scene') ?>:
+                </td>
                 <td class="Form-items">
                     <div class="Form-inputs">
                         <div class="Checkbox">
@@ -521,11 +513,15 @@ class TORRENT_FORM {
                             <label class="Checkbox-label" for="scene"><?= Lang::get('upload', 'movie_scene_label') ?></label>
                         </div>
                     </div>
-                    <p class="upload_form_note"><?= Lang::get('upload', 'movie_scene_note') ?></p>
+                    <p class="upload_form_note">
+                        <?= Lang::get('upload', 'movie_scene_note') ?>
+                    </p>
                 </td>
             </tr>
             <tr class="Form-row is-text">
-                <td class="Form-label"><?= Lang::get('upload', 'not_main_movie') ?>:</td>
+                <td class="Form-label">
+                    <?= Lang::get('upload', 'not_main_movie') ?>:
+                </td>
                 <td class="Form-items">
                     <div class="Form-inputs">
                         <div class="Checkbox">
@@ -533,12 +529,15 @@ class TORRENT_FORM {
                             <label class="Checkbox-label" for="not_main_movie"><?= Lang::get('upload', 'not_main_movie_label') ?></label>
                         </div>
                     </div>
-                    <p class="upload_form_note"><?= Lang::get('upload', 'not_main_movie_note') ?></p>
+                    <p class="upload_form_note">
+                        <?= Lang::get('upload', 'not_main_movie_note') ?>
+                    </p>
                 </td>
             </tr>
-
             <tr class="Form-row is-text" id="movie_edition_information_tr">
-                <td class="Form-label"><?= Lang::get('upload', 'movie_edition_information') ?>:</td>
+                <td class="Form-label">
+                    <?= Lang::get('upload', 'movie_edition_information') ?>:
+                </td>
                 <td class="Form-items Form-errorContainer">
                     <div class="Form-inputs">
                         <div class="Checkbox">
@@ -550,58 +549,51 @@ class TORRENT_FORM {
                         <?= Lang::get('upload', 'movie_edition_information_examples') ?>
                         <input type="hidden" id="remaster_title_hide" name="remaster_title" value="<?= display_str($RemasterTitle) ?>" />
                         <div id="movie_edition_information_container" style="display: none">
-                            <div><?= Lang::get('upload', 'movie_information') ?>: <input class="Input" type="text" name="remaster_title_show" readonly id="remaster_title_show" size="80" value="<?= $RemasterTitle ? display_str(Torrents::display_edition_info($RemasterTitle)) : '' ?>" />
+                            <div>
+                                <?= Lang::get('upload', 'movie_information') ?>: <input class="Input" type="text" name="remaster_title_show" readonly id="remaster_title_show" size="80" value="<?= $RemasterTitle ? display_str(Torrents::display_edition_info($RemasterTitle)) : '' ?>" />
                             </div>
                             <div id="movie_remaster_tags">
-                                <div><?= Lang::get('editioninfo', 'collections') ?>:
-                                    <?
-
-                                    $this->genRemasterTags(EditionInfo::allEditionKey(EditionType::Collection), $RemasterTitle);
-                                    ?>
+                                <div>
+                                    <?= Lang::get('editioninfo', 'collections') ?>:
+                                    <? $this->genRemasterTags(EditionInfo::allEditionKey(EditionType::Collection), $RemasterTitle); ?>
                                 </div>
-                                <div><?= Lang::get('editioninfo', 'editions') ?>:
-                                    <?
-                                    $this->genRemasterTags(EditionInfo::allEditionKey(EditionType::Edition), $RemasterTitle);
-                                    ?>
+                                <div>
+                                    <?= Lang::get('editioninfo', 'editions') ?>:
+                                    <? $this->genRemasterTags(EditionInfo::allEditionKey(EditionType::Edition), $RemasterTitle); ?>
                                 </div>
-                                <div><?= Lang::get('editioninfo', 'features') ?>:
-                                    <?
-                                    $this->genRemasterTags(EditionInfo::allEditionKey(EditionType::Feature), $RemasterTitle);
-                                    ?>
+                                <div>
+                                    <?= Lang::get('editioninfo', 'features') ?>:
+                                    <? $this->genRemasterTags(EditionInfo::allEditionKey(EditionType::Feature), $RemasterTitle); ?>
                                 </div>
                             </div>
                             <div class="items">
                                 <div class="item">
-                                    <input id="other-button" onclick="$('#other-input').new_toggle()" type="button" value="<?= Lang::get('upload', 'other') ?>">
-                                    <input id="year-button" onclick="$('#year-input').new_toggle()" type="button" value="<?= Lang::get('upload', 'year') ?>">
+                                    <input class="Button" id="other-button" onclick="$('#other-input').new_toggle()" type="button" value="<?= Lang::get('upload', 'other') ?>">
+                                    <input class="Button" id="year-button" onclick="$('#year-input').new_toggle()" type="button" value="<?= Lang::get('upload', 'year') ?>">
                                 </div>
-                                <div class="item" id="other-input" style="display: none;"><?= Lang::get('upload', 'other') ?>: <input class="Input" type="text" value="<?= $RemasterCustomTitle ?>" name="remaster_custom_title"> </div>
-                                <div class="item" id="year-input" style="display: none;"><?= Lang::get('upload', 'year') ?>: <input class="Input" type="number" value="<?= $RemasterYear ?>" name="remaster_year"></div>
+                                <div class="item" id="other-input" style="display: none;">
+                                    <?= Lang::get('upload', 'other') ?>: <input class="Input" type="text" value="<?= $RemasterCustomTitle ?>" name="remaster_custom_title">
+                                </div>
+                                <div class="item" id="year-input" style="display: none;">
+                                    <?= Lang::get('upload', 'year') ?>: <input class="Input" type="number" value="<?= $RemasterYear ?>" name="remaster_year">
+                                </div>
                             </div>
                         </div>
-                        <?
-                        if ($RemasterTitle || $RemasterCustomTitle || $RemasterYear) {
-                        ?>
+                        <? if ($RemasterTitle || $RemasterCustomTitle || $RemasterYear) { ?>
                             <script>
                                 $('#movie_edition_information_container').new_toggle();
                             </script>
-                        <?
-                        }
-                        if ($RemasterCustomTitle) {
-                        ?>
+                        <? } ?>
+                        <? if ($RemasterCustomTitle) { ?>
                             <script>
                                 $('#other-input').new_toggle();
                             </script>
-                        <?
-                        }
-                        if ($RemasterYear) {
-                        ?>
+                        <? } ?>
+                        <? if ($RemasterYear) { ?>
                             <script>
                                 $('#year-input').new_toggle();
                             </script>
-                        <?
-                        }
-                        ?>
+                        <? } ?>
                     </div>
                 </td>
             </tr>

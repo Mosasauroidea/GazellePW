@@ -120,6 +120,7 @@ if (!empty($_REQUEST['confirm'])) {
                     list($InviterID, $InviteEmail, $InviteReason, $InviteID) = $DB->next_record(MYSQLI_NUM, false);
                 }
                 if ($_REQUEST['email'] != $InviteEmail) {
+                    error_log("Mismatch invite email, request email: " . $_REQUEST['email'] . " invite email: " . $InviteEmail);
                     $Err = Lang::get('register', 'invite_email_mismatch');
                 }
             } else {
