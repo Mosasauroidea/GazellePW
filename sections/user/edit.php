@@ -179,19 +179,23 @@ echo $Val->GenerateJS('userform');
                     <tr class="Form-row">
                         <td class="Form-label"><strong><?= Lang::get('user', 'theme') ?></strong></td>
                         <td class="Form-inputs">
-                            <div class="RadioGroup">
-                                <div class="Radio">
-                                    <input class="Input" type="radio" name="style_theme" value="auto" id="theme-auto" <?= $StyleTheme == 'auto' ? 'checked' : '' ?> />
-                                    <label class="Radio-label" for="theme-auto"><?= Lang::get('user', 'theme_auto') ?></label>
-                                </div>
-                                <div class="Radio">
-                                    <input class="Input" type="radio" name="style_theme" value="light" id="theme-light" <?= $StyleTheme == 'light' ? 'checked' : '' ?> />
-                                    <label class="Radio-label" for="theme-light"><?= Lang::get('user', 'theme_light') ?></label>
-                                </div>
-                                <div class="Input">
-                                    <input class="Input" type="radio" name="style_theme" value="dark" id="theme-dark" <?= $StyleTheme == 'dark' ? 'checked' : '' ?> />
-                                    <label class="Radio-label" for="theme-dark"><?= Lang::get('user', 'theme_dark') ?></label>
-                                </div>
+                            <div class="Radio">
+                                <input class="Input" type="radio" name="style_theme" value="auto" id="theme-auto" <?= $StyleTheme == 'auto' ? 'checked' : '' ?> />
+                                <label class="Radio-label" for="theme-auto">
+                                    <?= Lang::get('user', 'theme_auto') ?>
+                                </label>
+                            </div>
+                            <div class="Radio">
+                                <input class="Input" type="radio" name="style_theme" value="light" id="theme-light" <?= $StyleTheme == 'light' ? 'checked' : '' ?> />
+                                <label class="Radio-label" for="theme-light">
+                                    <?= Lang::get('user', 'theme_light') ?>
+                                </label>
+                            </div>
+                            <div class="Input">
+                                <input class="Input" type="radio" name="style_theme" value="dark" id="theme-dark" <?= $StyleTheme == 'dark' ? 'checked' : '' ?> />
+                                <label class="Radio-label" for="theme-dark">
+                                    <?= Lang::get('user', 'theme_dark') ?>
+                                </label>
                             </div>
                         </td>
                     </tr>
@@ -252,16 +256,18 @@ echo $Val->GenerateJS('userform');
                         <tr class="Form-row" id="tor_searchtype_tr">
                             <td class="Form-label" data-tooltip="<?= Lang::get('user', 'default_search_title') ?>"><strong><?= Lang::get('user', 'default_search') ?></strong></td>
                             <td class="Form-inputs">
-                                <ul class="options_list nobullet">
-                                    <li>
-                                        <input type="radio" name="searchtype" id="search_type_simple" value="0" <?= $SiteOptions['SearchType'] == 0 ? ' checked="checked"' : '' ?> />
-                                        <label for="search_type_simple"><?= Lang::get('user', 'base') ?></label>
-                                    </li>
-                                    <li>
-                                        <input type="radio" name="searchtype" id="search_type_advanced" value="1" <?= $SiteOptions['SearchType'] == 1 ? ' checked="checked"' : '' ?> />
-                                        <label for="search_type_advanced"><?= Lang::get('user', 'advanced') ?></label>
-                                    </li>
-                                </ul>
+                                <div class="Radio">
+                                    <input class="Input" type="radio" name="searchtype" id="search_type_simple" value="0" <?= $SiteOptions['SearchType'] == 0 ? ' checked="checked"' : '' ?> />
+                                    <label class="Radio-label" for="search_type_simple">
+                                        <?= Lang::get('user', 'base') ?>
+                                    </label>
+                                </div>
+                                <div class="Radio">
+                                    <input class="Input" type="radio" name="searchtype" id="search_type_advanced" value="1" <?= $SiteOptions['SearchType'] == 1 ? ' checked="checked"' : '' ?> />
+                                    <label class="Radio-label" for="search_type_advanced">
+                                        <?= Lang::get('user', 'advanced') ?>
+                                    </label>
+                                </div>
                             </td>
                         </tr>
                     <?  } ?>
@@ -279,33 +285,35 @@ echo $Val->GenerateJS('userform');
                     <tr class="Form-row" id="tor_gdisp_search_tr">
                         <td class="Form-label" data-tooltip="<?= Lang::get('user', 'torrents_group_display_title') ?>"><strong><?= Lang::get('user', 'torrents_group_display') ?></strong></td>
                         <td class="Form-inputs">
-                            <div class="option_group">
-                                <ul class="options_list nobullet">
-                                    <li>
-                                        <input type="radio" name="torrentgrouping" id="torrent_grouping_open" value="0" <?= $SiteOptions['TorrentGrouping'] == 0 ? ' checked="checked"' : '' ?> />
-                                        <label for="torrent_grouping_open"><?= Lang::get('user', 'enabled') ?></label>
-                                    </li>
-                                    <li>
-                                        <input type="radio" name="torrentgrouping" id="torrent_grouping_closed" value="1" <?= $SiteOptions['TorrentGrouping'] == 1 ? ' checked="checked"' : '' ?> />
-                                        <label for="torrent_grouping_closed"><?= Lang::get('user', 'disabled') ?></label>
-                                    </li>
-                                </ul>
+                            <div class="Radio">
+                                <input class="Input" type="radio" name="torrentgrouping" id="torrent_grouping_open" value="0" <?= $SiteOptions['TorrentGrouping'] == 0 ? ' checked="checked"' : '' ?> />
+                                <label class="Radio-label" for="torrent_grouping_open">
+                                    <?= Lang::get('user', 'enabled') ?>
+                                </label>
+                            </div>
+                            <div class="Radio">
+                                <input class="Input" type="radio" name="torrentgrouping" id="torrent_grouping_closed" value="1" <?= $SiteOptions['TorrentGrouping'] == 1 ? ' checked="checked"' : '' ?> />
+                                <label class="Radio-label" for="torrent_grouping_closed">
+                                    <?= Lang::get('user', 'disabled') ?>
+                                </label>
                             </div>
                         </td>
                     </tr>
                     <tr class="Form-row" id="tor_gdisp_artist_tr">
                         <td class="Form-label" data-tooltip="<?= Lang::get('user', 'torrents_artists_display_title') ?>"><strong><?= Lang::get('user', 'torrents_artists_display') ?></strong></td>
                         <td class="Form-inputs">
-                            <ul class="options_list nobullet">
-                                <li>
-                                    <input type="radio" name="discogview" id="discog_view_open" value="0" <?= $SiteOptions['DiscogView'] == 0 ? ' checked="checked"' : '' ?> />
-                                    <label for="discog_view_open"><?= Lang::get('user', 'enabled') ?></label>
-                                </li>
-                                <li>
-                                    <input type="radio" name="discogview" id="discog_view_closed" value="1" <?= $SiteOptions['DiscogView'] == 1 ? ' checked="checked"' : '' ?> />
-                                    <label for="discog_view_closed"><?= Lang::get('user', 'disabled') ?></label>
-                                </li>
-                            </ul>
+                            <div class="Radio">
+                                <input class="Input" type="radio" name="discogview" id="discog_view_open" value="0" <?= $SiteOptions['DiscogView'] == 0 ? ' checked="checked"' : '' ?> />
+                                <label class="Radio-label" for="discog_view_open">
+                                    <?= Lang::get('user', 'enabled') ?>
+                                </label>
+                            </div>
+                            <div class="Radio">
+                                <input class="Input" type="radio" name="discogview" id="discog_view_closed" value="1" <?= $SiteOptions['DiscogView'] == 1 ? ' checked="checked"' : '' ?> />
+                                <label class="Radio-label" for="discog_view_closed">
+                                    <?= Lang::get('user', 'disabled') ?>
+                                </label>
+                            </div>
                         </td>
                     </tr>
                     <tr class="Form-row" id="tor_reltype_tr">
@@ -350,15 +358,11 @@ echo $Val->GenerateJS('userform');
                     <tr class="Form-row" id="tor_cover_tor_tr">
                         <td class="Form-label" data-tooltip="<?= Lang::get('user', 'torrents_cover_title') ?>"><strong><?= Lang::get('user', 'torrents_cover') ?></strong></td>
                         <td class="Form-inputs">
-                            <ul class="options_list nobullet">
-                                <li>
-                                    <input type="hidden" name="coverart" value="" />
-                                    <div class="Checkbox">
-                                        <input class="Input" type="checkbox" name="coverart" id="coverart" <?= $SiteOptions['CoverArt'] ? ' checked="checked"' : '' ?> />
-                                        <label class="Checkbox-label" for="coverart"><?= Lang::get('user', 'enabled') ?></label>
-                                    </div>
-                                </li>
-                            </ul>
+                            <input type="hidden" name="coverart" value="" />
+                            <div class="Checkbox">
+                                <input class="Input" type="checkbox" name="coverart" id="coverart" <?= $SiteOptions['CoverArt'] ? ' checked="checked"' : '' ?> />
+                                <label class="Checkbox-label" for="coverart"><?= Lang::get('user', 'enabled') ?></label>
+                            </div>
                         </td>
                     </tr>
 
@@ -379,20 +383,14 @@ echo $Val->GenerateJS('userform');
                     <tr class="Form-row" id="tor_showfilt_tr">
                         <td class="Form-label" data-tooltip="<?= Lang::get('user', 'filt_tr_title') ?>"><strong><?= Lang::get('user', 'filt_tr') ?></strong></td>
                         <td class="Form-inputs">
-                            <ul class="options_list nobullet">
-                                <li>
-                                    <div class="Checkbox">
-                                        <input class="Input" type="checkbox" name="showtfilter" id="showtfilter" <?= (!isset($SiteOptions['ShowTorFilter']) || $SiteOptions['ShowTorFilter'] ? ' checked="checked"' : '') ?> />
-                                        <label class="Checkbox-label" for="showtfilter"><?= Lang::get('user', 'filt_tr_show') ?></label>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="Checkbox">
-                                        <input class="Input" type="checkbox" name="showtags" id="showtags" <? Format::selected('ShowTags', 1, 'checked', $SiteOptions); ?> />
-                                        <label class="Checkbox-label" for="showtags"><?= Lang::get('user', 'filt_tr_show_tags') ?></label>
-                                    </div>
-                                </li>
-                            </ul>
+                            <div class="Checkbox">
+                                <input class="Input" type="checkbox" name="showtfilter" id="showtfilter" <?= (!isset($SiteOptions['ShowTorFilter']) || $SiteOptions['ShowTorFilter'] ? ' checked="checked"' : '') ?> />
+                                <label class="Checkbox-label" for="showtfilter"><?= Lang::get('user', 'filt_tr_show') ?></label>
+                            </div>
+                            <div class="Checkbox">
+                                <input class="Input" type="checkbox" name="showtags" id="showtags" <? Format::selected('ShowTags', 1, 'checked', $SiteOptions); ?> />
+                                <label class="Checkbox-label" for="showtags"><?= Lang::get('user', 'filt_tr_show_tags') ?></label>
+                            </div>
                         </td>
                     </tr>
                     <tr class="Form-row" id="tor_autocomp_tr">

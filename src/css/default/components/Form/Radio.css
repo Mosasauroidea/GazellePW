@@ -2,7 +2,7 @@
 Where
 	Torrents - search
 
-<div class="RadioGroup">
+<div class="RadioGroup">    # optional
   <div class="Radio">
     <input class="Input" type="radio" id name value>
     <label class="Radio-label" for="id">
