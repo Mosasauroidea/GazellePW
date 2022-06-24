@@ -51,7 +51,9 @@ if (!empty($_GET['e']) && in_array($_GET['e'], $Errors)) {
 ?>
         <div class="LayoutBody">
             <div class="BodyHeader">
-                <h2 class="BodyHeader-nav"><?= $Title ?></h2>
+                <h2 class="BodyHeader-nav">
+                    <?= $Title ?>
+                </h2>
             </div>
             <div class="Box">
                 <div class="Box-body">

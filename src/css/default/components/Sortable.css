@@ -1,0 +1,15 @@
+/* Sortable.js
+
+<div class="u-sortable">
+  <div class="u-sortable-item">
+*/
+
+.u-sortable-item {
+  cursor: move;
+}
+.u-sortable-item--isStart {
+  opacity: 0.4;
+}
+.u-sortable-item--isOver {
+  text-decoration: underline;
+}

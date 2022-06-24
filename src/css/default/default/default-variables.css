@@ -186,6 +186,7 @@
   --TableMediaInfo-border: 1px solid #404040;
 
   /* TorrentTable */
+  --TableTorrent-fontSize: var(--global-fontSize-sm);
   --TableTorrent-movieInfo-background: rgba(0, 0, 0, 0.15);
   --TableTorrent-category-background: rgba(0, 0, 0, 0.1);
   --TableTorrent-title-background: rgba(0, 0, 0, 0.05);

@@ -612,7 +612,9 @@ View::show_header($Title, 'browse,comments,torrent,bbcode,recommend,cover_art,su
                         $Processing = $Torrent['Processing'];
                         $UserID = $Torrent['UserID'];
                         $HasFile = $Torrent['HasFile'];
-                        $ExtraInfo = Torrents::torrent_info($Torrent, true);
+                        $ExtraInfo = Torrents::torrent_info($Torrent, true, [
+                            'CustomTorrentTitle' => G::$LoggedUser['CustomTorrentTitle']
+                        ]);
                         $NewEdition = Torrents::get_new_edition_title($LastTorrent, $Torrent);
                         if ($NewEdition) {
                             $EditionID++;
@@ -769,7 +771,9 @@ View::show_header($Title, 'browse,comments,torrent,bbcode,recommend,cover_art,su
                                 $TorrentID = $Torrent['ID'];
                                 $Size = $Torrent['Size'];
                                 $IsExtraSlot = $Torrent['IsExtraSlot'];
-                                $TorrentInfo = Torrents::torrent_info($Torrent, true);
+                                $TorrentInfo = Torrents::torrent_info($Torrent, true, [
+                                    'CustomTorrentTitle' => G::$LoggedUser['CustomTorrentTitle']
+                                ]);
                             }
                             $Slot = $Torrent['Slot'];
                             $NewEdition = Torrents::get_new_edition_title($LastTorrent, $Torrent);

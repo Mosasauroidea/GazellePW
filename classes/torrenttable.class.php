@@ -104,10 +104,21 @@ class UngroupTorrentSimpleListView extends UngroupTorrentTableView {
                 </span>
                 <? if (isset($this->DetailView)) { ?>
                     <a clas="<?= $SnatchedTorrentClass ?>" href="#" onclick="globalapp.toggleTorrentDetail(event, '#torrent_<?= $this->DetailView ?>_<?= $TorrentID ?>')">
-                        <?= Torrents::torrent_simple_view($Group, $Torrent, false, ['Self' => $this->WithSelf]) ?>
+                        <?= Torrents::torrent_simple_view($Group, $Torrent, false, [
+                            'Self' => $this->WithSelf,
+                            'CustomTorrentTitle' => G::$LoggedUser['CustomTorrentTitle'],
+                        ]) ?>
                     </a>
                 <? } else { ?>
-                    <?= Torrents::torrent_simple_view($Group, $Torrent,  true, ['Class' => $SnatchedTorrentClass]) ?>
+                    <?= Torrents::torrent_simple_view(
+                        $Group,
+                        $Torrent,
+                        true,
+                        [
+                            'Class' => $SnatchedTorrentClass,
+                            'CustomTorrentTitle' => G::$LoggedUser['CustomTorrentTitle'],
+                        ]
+                    ) ?>
                 <? } ?>
             </td>
             <? if ($this->WithTime) { ?>
@@ -1024,7 +1035,9 @@ class GroupTorrentTableView extends TorrentTableView {
                 <? } ?>
                 &nbsp;
                 <a class="<?= $SnatchedTorrentClass ?>" data-tooltip="<?= $FileName ?>" href="torrents.php?id=<?= $GroupID ?>&amp;torrentid=<?= $TorrentID ?>#torrent<?= $TorrentID ?>">
-                    <?= Torrents::torrent_info($Torrent, true) ?>
+                    <?= Torrents::torrent_info($Torrent, true, [
+                        'CustomTorrentTitle' => G::$LoggedUser['CustomTorrentTitle']
+                    ]) ?>
                 </a>
             </td>
             <? if ($this->WithTime) { ?>
@@ -1106,7 +1119,9 @@ class UngroupTorrentTableView  extends TorrentTableView {
                     ]
                 </span>
                 <a class="<?= $SnatchedTorrentClass ?>" data-tooltip="<?= $FileName ?>" href="torrents.php?id=<?= $GroupID ?>&amp;torrentid=<?= $TorrentID ?>#torrent<?= $TorrentID ?>">
-                    <?= Torrents::torrent_info($Torrent, true) ?>
+                    <?= Torrents::torrent_info($Torrent, true, [
+                        'CustomTorrentTitle' => G::$LoggedUser['CustomTorrentTitle']
+                    ]) ?>
                 </a>
             </td>
             <? if ($this->WithTime) { ?>

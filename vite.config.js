@@ -36,6 +36,7 @@ export default defineConfig({
         'src/js/pages/sitehistory/index.js',
         'src/js/pages/upload/index.js',
         'src/js/pages/home.js',
+        'src/js/pages/userEdit.js',
       ],
     },
   },

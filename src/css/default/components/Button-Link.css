@@ -6,10 +6,12 @@ Upload - submit loading button
 ButtonGroup
 
 <a class="Link">
+
 <button class="Button">
 <a class="Button">
 <input class="Button" type="submit | button">
   variant="primary"
+  size="tiny"
 
 Loading Button
   <button class="Button">  is-loading
@@ -52,7 +54,6 @@ Loading Button
   align-items: center;
   text-decoration: none;
 }
-
 .Button:hover {
   background: var(--Button-default-onHover-background);
   color: var(--Button-default-onHover-color);
@@ -60,11 +61,17 @@ Loading Button
   box-shadow: var(--Button-default-onHover-boxShadow);
   text-decoration: none;
 }
-
 .Button:disabled {
   cursor: not-allowed;
 }
 
+/* Tiny */
+.Button[size='tiny'] {
+  font-size: 10px;
+  padding: 0 3px;
+}
+
+/* Primary */
 .Button[variant='primary'] {
   background: var(--Button-primary-background);
   color: var(--Button-primary-color);

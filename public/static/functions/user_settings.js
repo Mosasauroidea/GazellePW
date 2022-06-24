@@ -19,20 +19,7 @@ $(document).ready(function () {
     }
   })
 
-  $('#settings_sections li').each(function (index) {
-    $(this).click(function (e) {
-      var id = $(this).data('gazelle-section-id')
-      if (id) {
-        e.preventDefault()
-        if (id == 'all_settings' || id == 'live_search') {
-          $('#userform table').show()
-        } else {
-          $('#userform table').hide()
-          $('#' + id).show()
-        }
-      }
-    })
-  })
+  $('#settings_sections li').each(function (index) {})
 
   $('#settings_search').on('keyup', function () {
     var search = $(this).val().toLowerCase()

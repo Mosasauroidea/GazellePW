@@ -162,7 +162,9 @@ if (!isset($dt_until)) {
                         }
                         if ($r['GroupID']) {
                             $Torrent = Torrents::get_torrent($r['TorrentID']);
-                            $name = Torrents::torrent_simple_view($Torrent['Group'], $Torrent);
+                            $name = Torrents::torrent_simple_view($Torrent['Group'], $Torrent, [
+                                'CustomTorrentTitle' => G::$LoggedUser['CustomTorrentTitle'],
+                            ]);
                         } else {
                             $name = $r['Name'];
                         }

@@ -7,6 +7,7 @@ class Torrents {
     const FILELIST_DELIM = 0xF7; // Hex for &divide; Must be the same as phrase_boundary in sphinx.conf!
     const SNATCHED_UPDATE_INTERVAL = 3600; // How often we want to update users' snatch lists
     const SNATCHED_UPDATE_AFTERDL = 300; // How long after a torrent download we want to update a user's snatch lists
+
     public static function get_thumb_counts($GroupID) {
         G::$DB->query("
         select tt.id, 
@@ -1054,47 +1055,51 @@ WHERE ud.TorrentID=? AND ui.NotifyOnDeleteDownloaded='1' AND ud.UserID NOT IN ({
         return false;
     }
 
-    private static function torrent_media_info($Data, $Style = false) {
+    private static function torrent_media_info($Data, $Style = false, $Option = []) {
+        $CustomTorrentTitle = $Option['CustomTorrentTitle'] ?: self::CustomTorrentTitleDefault;
         $Info = array();
-        if (!empty($Data['Codec'])) {
-            if ($Style) {
-                $Info[] = "<span class='codec'>" .  $Data['Codec'] . "</span>";
-            } else {
-                $Info[] = $Data['Codec'];
+        foreach ($CustomTorrentTitle['Items'] as $Item) {
+            if ($Item == 'Codec' && !empty($Data['Codec'])) {
+                if ($Style) {
+                    $Info[] = "<span class='TorrentTitle-item codec'>" .  $Data['Codec'] . "</span>";
+                } else {
+                    $Info[] = $Data['Codec'];
+                }
             }
-        }
-        if (!empty($Data['Source'])) {
-            if ($Style) {
-                $Info[] = "<span class='source'>" .  $Data['Source'] . "</span>";
-            } else {
-                $Info[] = $Data['Source'];
+            if ($Item == 'Source' && !empty($Data['Source'])) {
+                if ($Style) {
+                    $Info[] = "<span class='TorrentTitle-item source'>" .  $Data['Source'] . "</span>";
+                } else {
+                    $Info[] = $Data['Source'];
+                }
             }
-        }
-        if (!empty($Data['Resolution'])) {
-            if ($Style) {
-                $Info[] = "<span class='resolution'>" .  $Data['Resolution'] . "</span>";
-            } else {
-                $Info[] = $Data['Resolution'];
+            if ($Item == 'Resolution' && !empty($Data['Resolution'])) {
+                if ($Style) {
+                    $Info[] = "<span class='TorrentTitle-item resolution'>" .  $Data['Resolution'] . "</span>";
+                } else {
+                    $Info[] = $Data['Resolution'];
+                }
             }
-        }
-        if (!empty($Data['Container'])) {
-            if ($Style) {
-                $Info[] = "<span class='container'>" .  $Data['Container'] . "</span>";
-            } else {
-                $Info[] = $Data['Container'];
+            if ($Item == 'Container' && !empty($Data['Container'])) {
+                if ($Style) {
+                    $Info[] = "<span class='TorrentTitle-item container'>" .  $Data['Container'] . "</span>";
+                } else {
+                    $Info[] = $Data['Container'];
+                }
             }
-        }
-        if (!empty($Data['Processing']) && $Data['Processing'] != 'Encode' && $Data['Processing'] != '---') {
-            if ($Style) {
-                $Info[] = "<span class='processing'>" .  $Data['Processing'] . "</span>";
-            } else {
-                $Info[] = $Data['Processing'];
+            if ($Item == 'Processing' && !empty($Data['Processing']) && $Data['Processing'] != 'Encode' && $Data['Processing'] != '---') {
+                if ($Style) {
+                    $Info[] = "<span class='TorrentTitle-item processing'>" .  $Data['Processing'] . "</span>";
+                } else {
+                    $Info[] = $Data['Processing'];
+                }
             }
         }
         return $Info;
     }
 
-    public static function torrent_simple_view($Group, $Torrent, $Link = true, $Option = ['Self' => true, 'Class' => '']) {
+    public static function torrent_simple_view($Group, $Torrent, $Link = true, $Option = []) {
+        $Option = array_merge(['Self' => true, 'Class' => ''], $Option);
         $GroupID = $Group['ID'];
         $TorrentID = $Torrent['ID'];
         $TorrentInfo = Torrents::torrent_info($Torrent, true, $Option);
@@ -1113,10 +1118,11 @@ WHERE ud.TorrentID=? AND ui.NotifyOnDeleteDownloaded='1' AND ud.UserID NOT IN ({
      * @param boolean $ShowMedia if false, Media key will be omitted
      * @return string
      */
-    public static function torrent_info($Data, $ShowMedia = true, $Option = ['Self' => true]) {
+    public static function torrent_info($Data, $ShowMedia = true, $Option = []) {
+        $Option = array_merge(['Self' => true, 'Class' => ''], $Option);
         $Info = array();
         if ($ShowMedia) {
-            $Info = self::torrent_media_info($Data, true);
+            $Info = self::torrent_media_info($Data, true, $Option);
         }
         $RemasterYearInfo = '';
         if (!empty($Data['RemasterYear'])) {
@@ -1140,7 +1146,7 @@ WHERE ud.TorrentID=? AND ui.NotifyOnDeleteDownloaded='1' AND ud.UserID NOT IN ({
                     if (in_array($label, $t)) {
                         $title = $title . $RemasterYearInfo;
                     }
-                    return "<span class='remaster_$label'>" . $title . "</span>";
+                    return "<span class='TorrentTitle-item remaster_$label'>" . $title . "</span>";
                 },
                 array_intersect($EditionInfo, $EditionInfo)
             );
@@ -1150,7 +1156,7 @@ WHERE ud.TorrentID=? AND ui.NotifyOnDeleteDownloaded='1' AND ud.UserID NOT IN ({
         }
 
         if (!empty($Data['RemasterCustomTitle'])) {
-            $CustomTitle = "<span class='remaster_custom_title'>" . $Data['RemasterCustomTitle'] . "</span>";
+            $CustomTitle = "<span class='TorrentTitle-item remaster_custom_title'>" . $Data['RemasterCustomTitle'] . "</span>";
             if (!count($t)) {
                 $CustomTitle .= $RemasterYearInfo;
             }
@@ -1158,7 +1164,7 @@ WHERE ud.TorrentID=? AND ui.NotifyOnDeleteDownloaded='1' AND ud.UserID NOT IN ({
         }
 
         if (!empty($Data['Scene'])) {
-            $Info[] = 'Scene';
+            $Info[] = "<span class='TorrentTitle-item scene'>Scene</span>";
         }
         if (!empty($Data['Subtitles'])) {
             $Subtitles = explode(',', $Data['Subtitles']);
@@ -1197,9 +1203,6 @@ WHERE ud.TorrentID=? AND ui.NotifyOnDeleteDownloaded='1' AND ud.UserID NOT IN ({
             $Info[] = Format::torrent_label(Lang::get('torrents', 'trump'), 'tl_trumpable');
         }
 
-
-
-
         if (self::global_freeleech()) {
             $Info[] = Format::torrent_label(Lang::get('torrents', 'fld'), 'tl_free torrent_discount free');
         } else if (isset($Data['FreeTorrent'])) {
@@ -1226,9 +1229,26 @@ WHERE ud.TorrentID=? AND ui.NotifyOnDeleteDownloaded='1' AND ud.UserID NOT IN ({
                 $Info[] = Format::torrent_label(Lang::get('torrents', 'snatched'));
             }
         }
-        return implode(' / ', $Info);
+        $Class = $Option['Class'];
+        return "<span class='TorrentTitle $Class'>" . implode(' / ', $Info) . '</span>';
     }
 
+    const CustomTorrentTitleDefault = [
+        'Items' => ['Codec', 'Source', 'Resolution', 'Container', 'Processing']
+    ];
+
+    public static function customTorrentTitle($CustomTorrentTitle, $Options = []) {
+        $Options = array_merge(['Class' => ''], $Options);
+        $Class = $Options['Class'];
+        $CustomTorrentTitle = $CustomTorrentTitle ?: self::CustomTorrentTitleDefault;
+        $Items = $CustomTorrentTitle['Items'];
+        $Result = "<span class='TorrentTitle $Class u-sortable'>";
+        $ResultInner = [];
+        foreach ($Items as $Item) {
+            $ResultInner[] = "<span class='TorrentTitle-item u-sortable-item'>$Item</span>";
+        }
+        return $Result . implode(' / ', $ResultInner) . '</span>';
+    }
 
     /**
      * Will freeleech / neutral leech / normalise a set of torrents

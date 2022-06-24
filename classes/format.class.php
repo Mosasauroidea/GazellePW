@@ -647,14 +647,14 @@ class Format {
         }
         if (!empty($Title)) {
             return $Icon . sprintf(
-                '<span class="TableTorrent-titleLabel %1$s" data-tooltip="%2$s" style="white-space: nowrap;">%3$s</span>',
+                '<span class="TorrentTitle-item %1$s" data-tooltip="%2$s">%3$s</span>',
                 display_str($Class),
                 display_str($title),
                 display_str($Text)
             );
         } else {
             return $Icon . sprintf(
-                '<span class="TableTorrent-titleLabel %1$s" style="white-space: nowrap;">%2$s</span>',
+                '<span class="TorrentTitle-item %1$s">%2$s</span>',
                 display_str($Class),
                 display_str($Text)
             );

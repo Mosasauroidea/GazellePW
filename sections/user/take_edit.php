@@ -310,7 +310,8 @@ $Cache->update_row(false, array(
     'StyleID' => $_POST['stylesheet'],
     'StyleURL' => display_str($_POST['styleurl']),
     'StyleTheme' => $_POST['style_theme'],
-    'DownloadAlt' => $DownloadAlt
+    'DownloadAlt' => $DownloadAlt,
+    'CustomTorrentTitle' => $_POST['CustomTorrentTitle'] ? json_decode($_POST['CustomTorrentTitle'], true) : null,
 ));
 $Cache->update_row(false, $Options);
 $Cache->commit_transaction(0);
@@ -335,6 +336,7 @@ $SQL = "
 		i.NotifyOnDeleteSnatched = '$NotifyOnDeleteSnatched',
 		i.NotifyOnDeleteDownloaded = '$NotifyOnDeleteDownloaded',
 		i.Lang = '" . db_string($_POST['language']) . "',
+        i.CustomTorrentTitle = '" . db_string($_POST['CustomTorrentTitle']) . "',
 		m.Email = '" . db_string($_POST['email']) . "',
 		m.IRCKey = '" . db_string($_POST['irckey']) . "',
 		m.Paranoia = '" . db_string(serialize($Paranoia)) . "'";

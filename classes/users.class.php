@@ -248,11 +248,12 @@ class Users {
 					i.RequestsAlerts,
 					i.TGID,
 					m.FLTokens,
-					m.PermissionID
+					m.PermissionID,
+                    i.CustomTorrentTitle
 				FROM users_main AS m
 					INNER JOIN users_info AS i ON i.UserID = m.ID
 				WHERE m.ID = '$UserID'");
-            $HeavyInfo = G::$DB->next_record(MYSQLI_ASSOC, array('CustomPermissions', 'SiteOptions'));
+            $HeavyInfo = G::$DB->next_record(MYSQLI_ASSOC, array('CustomPermissions', 'SiteOptions', 'CustomTorrentTitle'));
 
             G::$DB->query("select count(ID) from tokens_typed where UserID=$UserID and Type='time'");
             list($TimedTokens) = G::$DB->next_record();
@@ -313,6 +314,8 @@ class Users {
             $HeavyInfo = array_merge($HeavyInfo, $HeavyInfo['SiteOptions']);
 
             unset($HeavyInfo['SiteOptions']);
+
+            $HeavyInfo['CustomTorrentTitle'] = $HeavyInfo['CustomTorrentTitle'] ? json_decode($HeavyInfo['CustomTorrentTitle'], true) : null;
 
             G::$DB->set_query_id($QueryID);
 

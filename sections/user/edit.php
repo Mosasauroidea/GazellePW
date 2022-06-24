@@ -31,12 +31,15 @@ $DB->query("
 		i.NotifyOnDeleteDownloaded,
 		i.Lang,
 		i.TGID,
-		right(m.torrent_pass,8)
+		right(m.torrent_pass,8),
+        i.CustomTorrentTitle
 	FROM users_main AS m
 		JOIN users_info AS i ON i.UserID = m.ID
 		LEFT JOIN permissions AS p ON p.ID = m.PermissionID
 	WHERE m.ID = '" . db_string($UserID) . "'");
-list($Username, $Email, $IRCKey, $Paranoia, $TwoFAKey, $Info, $Avatar, $StyleID, $StyleURL, $StyleTheme, $SiteOptions, $UnseededAlerts, $ReportedAlerts, $RequestsAlerts, $DownloadAlt, $Class, $InfoTitle, $NotifyOnDeleteSeeding, $NotifyOnDeleteSnatched, $NotifyOnDeleteDownloaded, $Lang, $TGID, $Right8Passkey) = $DB->next_record(MYSQLI_NUM, array(3, 9, 10));
+list($Username, $Email, $IRCKey, $Paranoia, $TwoFAKey, $Info, $Avatar, $StyleID, $StyleURL, $StyleTheme, $SiteOptions, $UnseededAlerts, $ReportedAlerts, $RequestsAlerts, $DownloadAlt, $Class, $InfoTitle, $NotifyOnDeleteSeeding, $NotifyOnDeleteSnatched, $NotifyOnDeleteDownloaded, $Lang, $TGID, $Right8Passkey, $CustomTorrentTitleRaw) = $DB->next_record(MYSQLI_NUM, array(3, 9, 10, 23));
+$CustomTorrentTitle = $CustomTorrentTitleRaw ? json_decode($CustomTorrentTitleRaw, true) : null;
+
 
 if ($UserID != $LoggedUser['ID'] && !check_perms('users_edit_profiles', $Class)) {
     error(403);
@@ -96,35 +99,48 @@ echo $Val->GenerateJS('userform');
                         <strong><?= Lang::get('user', 'menu') ?></strong>
                     </div>
                     <ul class="SidebarList SidebarItem-body Box-body">
-                        <li class="SidebarList-item" data-gazelle-section-id="all_settings">
-                            <a class="Link" href="#" data-tooltip="<?= Lang::get('user', 'st_all_title') ?>"><?= Lang::get('user', 'st_all') ?></a>
+                        <li class="SidebarList-item">
+                            <a class="Link" href="#site_appearance_settings" data-tooltip="<?= Lang::get('user', 'st_style_title') ?>">
+                                <?= Lang::get('user', 'st_style') ?>
+                            </a>
                         </li>
-                        <li class="SidebarList-item" data-gazelle-section-id="site_appearance_settings">
-                            <a class="Link" href="#" data-tooltip="<?= Lang::get('user', 'st_style_title') ?>"><?= Lang::get('user', 'st_style') ?></a>
+                        <li class="SidebarList-item">
+                            <a class="Link" href="#site_language_settings" data-tooltip="<?= Lang::get('user', 'st_language_title') ?>">
+                                <?= Lang::get('user', 'st_language') ?>
+                            </a>
                         </li>
-                        <li class="SidebarList-item" data-gazelle-section-id="site_language_settings">
-                            <a class="Link" href="#" data-tooltip="<?= Lang::get('user', 'st_language_title') ?>"><?= Lang::get('user', 'st_language') ?></a>
+                        <li class="SidebarList-item">
+                            <a class="Link" href="#torrent_settings" data-tooltip="<?= Lang::get('user', 'st_torrents_title') ?>">
+                                <?= Lang::get('user', 'st_torrents') ?>
+                            </a>
                         </li>
-                        <li class="SidebarList-item" data-gazelle-section-id="torrent_settings">
-                            <a class="Link" href="#" data-tooltip="<?= Lang::get('user', 'st_torrents_title') ?>"><?= Lang::get('user', 'st_torrents') ?></a>
+                        <li class="SidebarList-item">
+                            <a class="Link" href="#community_settings" data-tooltip="<?= Lang::get('user', 'st_community_title') ?>">
+                                <?= Lang::get('user', 'st_community') ?>
+                            </a>
                         </li>
-                        <li class="SidebarList-item" data-gazelle-section-id="community_settings">
-                            <a class="Link" href="#" data-tooltip="<?= Lang::get('user', 'st_community_title') ?>"><?= Lang::get('user', 'st_community') ?></a>
+                        <li class="SidebarList-item">
+                            <a class="Link" href="#notification_settings" data-tooltip="<?= Lang::get('user', 'st_notification_title') ?>">
+                                <?= Lang::get('user', 'st_notification') ?>
+                            </a>
                         </li>
-                        <li class="SidebarList-item" data-gazelle-section-id="notification_settings">
-                            <a class="Link" href="#" data-tooltip="<?= Lang::get('user', 'st_notification_title') ?>"><?= Lang::get('user', 'st_notification') ?></a>
+                        <li class="SidebarList-item">
+                            <a class="Link" href="#personal_settings" data-tooltip="<?= Lang::get('user', 'st_personal_title') ?>">
+                                <?= Lang::get('user', 'st_personal') ?>
+                            </a>
                         </li>
-                        <li class="SidebarList-item" data-gazelle-section-id="personal_settings">
-                            <a class="Link" href="#" data-tooltip="<?= Lang::get('user', 'st_personal_title') ?>"><?= Lang::get('user', 'st_personal') ?></a>
+                        <li class="SidebarList-item">
+                            <a class="Link" href="#paranoia_settings" data-tooltip="<?= Lang::get('user', 'st_paranoia_title') ?>">
+                                <?= Lang::get('user', 'st_paranoia') ?>
+                            </a>
                         </li>
-                        <li class="SidebarList-item" data-gazelle-section-id="paranoia_settings">
-                            <a class="Link" href="#" data-tooltip="<?= Lang::get('user', 'st_paranoia_title') ?>"><?= Lang::get('user', 'st_paranoia') ?></a>
+                        <li class="SidebarList-item">
+                            <a class="Link" href="#access_settings" data-tooltip="<?= Lang::get('user', 'st_access_title') ?>">
+                                <?= Lang::get('user', 'st_access') ?>
+                            </a>
                         </li>
-                        <li class="SidebarList-item" data-gazelle-section-id="access_settings">
-                            <a class="Link" href="#" data-tooltip="<?= Lang::get('user', 'st_access_title') ?>"><?= Lang::get('user', 'st_access') ?></a>
-                        </li>
-                        <li class="SidebarList-item" data-gazelle-section-id="live_search">
-                            <input class="Input" type="text" id="settings_search" placeholder="<?= Lang::get('user', 'st_search') ?>" />
+                        <li class="SidebarList-item">
+                            <input class="Input" type="text" id="settings_search" onclick="location.href='#'" placeholder="<?= Lang::get('user', 'st_search') ?>" />
                         </li>
                         <li class="SidebarList-item">
                             <input class="Button" type="submit" id="submit" value="<?= Lang::get('user', 'st_save') ?>" />
@@ -251,8 +267,54 @@ echo $Val->GenerateJS('userform');
                             <?= Lang::get('user', 'st_torrents') ?>
                         </td>
                     </tr>
-                    <? if (check_perms('site_advanced_search')) {
-                    ?>
+                    <? if (IS_DEV) { ?>
+                        <tr class="Form-row is-torrentTitle" id="custom_torrent_title">
+                            <td class="Form-label" data-tooltip="<?= Lang::get('user', 'setting_custom_torrent_title_tooltip') ?>">
+                                <strong>
+                                    <?= Lang::get('user', 'setting_custom_torrent_title') ?>
+                                </strong>
+                            </td>
+                            <td class="Form-items">
+                                <div>
+                                    <input id="CustomTorrentTitleInput" type="hidden" name="CustomTorrentTitle" value='<?= $CustomTorrentTitleRaw  ?>' />
+                                    <?= Torrents::customTorrentTitle(
+                                        $CustomTorrentTitle,
+                                        [
+                                            'Class' => 'TorrentTitle--standalone is-edit'
+                                        ]
+                                    ) ?>
+                                    <button class="Button" size="tiny" onclick="globalapp.userEditCustomTorrentTitleReset()" type="submit">
+                                        <?= Lang::get('user', 'reset') ?>
+                                    </button>
+                                </div>
+                                <div class="TorrentTitle-previews">
+                                    <?
+                                    $Previews = [
+                                        ['Codec' => 'x265', 'Source' => 'WEB', 'Resolution' => '720p', 'Container' => 'MKV', 'Processing' => 'Encode'],
+                                        ['Codec' => 'x265', 'Source' => 'Blu-ray', 'Resolution' => '720p', 'Container' => 'MKV', 'Processing' => 'Remux'],
+                                        ['Codec' => 'x265', 'Source' => 'Blu-ray', 'Resolution' => '720p', 'Container' => 'm2ts', 'Processing' => 'BD50'],
+                                        ['Codec' => 'x265', 'Source' => 'WEB', 'Resolution' => '2160p', 'Container' => 'MKV', 'Processing' => 'Encode'],
+                                        ['Codec' => 'x265', 'Source' => 'Blu-ray', 'Resolution' => '2160p', 'Container' => 'MKV', 'Processing' => 'Remux'],
+                                        ['Codec' => 'x265', 'Source' => 'Blu-ray', 'Resolution' => '2160p', 'Container' => 'm2ts', 'Processing' => 'BD50'],
+                                    ];
+                                    ?>
+                                    <? foreach ($Previews as $Preview) { ?>
+                                        <div>
+                                            <?= Torrents::torrent_info(
+                                                $Preview,
+                                                true,
+                                                [
+                                                    'Class' => 'TorrentTitle--standalone is-preview',
+                                                    'CustomTorrentTitle' => $CustomTorrentTitle,
+                                                ]
+                                            ) ?>
+                                        </div>
+                                    <? } ?>
+                                </div>
+                            </td>
+                        </tr>
+                    <? } ?>
+                    <? if (check_perms('site_advanced_search')) { ?>
                         <tr class="Form-row" id="tor_searchtype_tr">
                             <td class="Form-label" data-tooltip="<?= Lang::get('user', 'default_search_title') ?>"><strong><?= Lang::get('user', 'default_search') ?></strong></td>
                             <td class="Form-inputs">
@@ -270,7 +332,7 @@ echo $Val->GenerateJS('userform');
                                 </div>
                             </td>
                         </tr>
-                    <?  } ?>
+                    <? } ?>
                     <tr class="Form-row" id="tor_group_tr">
                         <td class="Form-label" data-tooltip="<?= Lang::get('user', 'torrents_group_title') ?>"><strong><?= Lang::get('user', 'torrents_group') ?></strong></td>
                         <td class="Form-inputs">
@@ -1083,4 +1145,4 @@ echo $Val->GenerateJS('userform');
         </div>
     </form>
 </div>
-<? View::show_footer(); ?>
+<? View::show_footer([], 'userEdit.js'); ?>

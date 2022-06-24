@@ -24,7 +24,9 @@ if ($TorrentID) {
     }
     if ($TorrentID) {
         $TorrentDetail = Torrents::get_torrent($TorrentID);
-        $Title = Torrents::torrent_simple_view($TorrentDetail['Group'], $TorrentDetail);
+        $Title = Torrents::torrent_simple_view($TorrentDetail['Group'], $TorrentDetail, [
+            'CustomTorrentTitle' => G::$LoggedUser['CustomTorrentTitle'],
+        ]);
     ?>
 
         <div id="subtitle_upload_form_container" class="TableContainer">

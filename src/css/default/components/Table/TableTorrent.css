@@ -32,7 +32,7 @@ cell
 .TableTorrent {
   table-layout: fixed;
   min-width: 760px;
-  font-size: var(--global-fontSize-sm);
+  font-size: var(--TableTorrent-fontSize);
 }
 
 .TableTorrent .Table-rowHeader {
@@ -228,57 +228,6 @@ cell
 
 .TableTorrent-rowTitle[data-slot='empty'] .Table-cell:first-child {
   border-left: 1px solid transparent;
-}
-
-/* Torrent Label */
-.TableTorrent-titleLabel.torrent_discount {
-  color: #fff;
-  padding: 0 3.5px;
-  border-radius: var(--global-borderRadius);
-  font-weight: 400 !important;
-  font-size: 13px;
-  display: inline-block;
-  transform: scale(0.85, 0.72) translateY(2px);
-}
-
-.TableTorrent-titleLabel.torrent_discount.free {
-  background-color: #0055ff;
-}
-
-.TableTorrent-titleLabel.torrent_discount.three_fourth_off {
-  background-color: #622ca8;
-}
-
-.TableTorrent-titleLabel.torrent_discount.two_fourth_off {
-  background-color: #8d4b44;
-}
-
-.TableTorrent-titleLabel.torrent_discount.one_fourth_off {
-  background-color: #3e6e7b;
-}
-
-.TableTorrent-titleLabel.torrent_discount.neutral {
-  background-color: #55666f;
-}
-
-.TableTorrent-titleLabel.tl_notice {
-  font-weight: bold;
-}
-
-.TableTorrent-titleLabel.tl_reported {
-  color: #d39911;
-}
-
-.TableTorrent-titleLabel.tl_trumpable {
-  color: #d46d3d;
-}
-
-.TableTorrent-titleLabel.tl_snatched {
-  color: #00bc8c;
-}
-
-.TableTorrent-titleLabel.tl_free {
-  font-weight: bold;
 }
 
 /* movieInfo
