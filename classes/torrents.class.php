@@ -433,16 +433,16 @@ class Torrents {
             }
             $CM = ltrim(substr($CM, $slash), '\\');
             $CM = ltrim($CM, '/');
-            return $CM;
+            return trim($CM);
         }
 
         $CM = self::getval($MediaInfo, 'Disc Title');
         if ($CM) {
-            return $CM;
+            return trim($CM);
         }
         $CM = self::getval($MediaInfo, "Disc Label");
         if ($CM) {
-            return $CM;
+            return trim($CM);
         }
 
         return "";
@@ -1056,9 +1056,9 @@ WHERE ud.TorrentID=? AND ui.NotifyOnDeleteDownloaded='1' AND ud.UserID NOT IN ({
     }
 
     private static function torrent_media_info($Data, $Style = false, $Option = []) {
-        $CustomTorrentTitle = $Option['CustomTorrentTitle'] ?: self::CustomTorrentTitleDefault;
+        $Items = $Option['SettingTorrentTitle']['Items'] ?: self::SettingTorrentTitleItemsDefault;
         $Info = array();
-        foreach ($CustomTorrentTitle['Items'] as $Item) {
+        foreach ($Items as $Item) {
             if ($Item == 'Codec' && !empty($Data['Codec'])) {
                 if ($Style) {
                     $Info[] = "<span class='TorrentTitle-item codec'>" .  $Data['Codec'] . "</span>";
@@ -1229,25 +1229,34 @@ WHERE ud.TorrentID=? AND ui.NotifyOnDeleteDownloaded='1' AND ud.UserID NOT IN ({
                 $Info[] = Format::torrent_label(Lang::get('torrents', 'snatched'));
             }
         }
+        if ($Option['SettingTorrentTitle']['ReleaseGroup']) {
+            $ReleaseGroup = $Data['ReleaseGroup'] ?: self::release_group($Data);
+            if ($ReleaseGroup) {
+                $Info[] = "<span class='TorrenTitle-item is-releaseGroup'>$ReleaseGroup</span>";
+            }
+        }
         $Class = $Option['Class'];
         return "<span class='TorrentTitle $Class'>" . implode(' / ', $Info) . '</span>';
     }
 
-    const CustomTorrentTitleDefault = [
-        'Items' => ['Codec', 'Source', 'Resolution', 'Container', 'Processing']
-    ];
+    const SettingTorrentTitleItemsDefault = ['Codec', 'Source', 'Resolution', 'Container', 'Processing'];
 
-    public static function customTorrentTitle($CustomTorrentTitle, $Options = []) {
+    public static function settingTorrentTitle($SettingTorrentTitle, $Options = []) {
         $Options = array_merge(['Class' => ''], $Options);
         $Class = $Options['Class'];
-        $CustomTorrentTitle = $CustomTorrentTitle ?: self::CustomTorrentTitleDefault;
-        $Items = $CustomTorrentTitle['Items'];
+        $Items = $SettingTorrentTitle['Items'] ?: self::SettingTorrentTitleItemsDefault;
         $Result = "<span class='TorrentTitle $Class u-sortable'>";
         $ResultInner = [];
         foreach ($Items as $Item) {
             $ResultInner[] = "<span class='TorrentTitle-item u-sortable-item'>$Item</span>";
         }
         return $Result . implode(' / ', $ResultInner) . '</span>';
+    }
+
+    public static function release_group($Torrent) {
+        $FileName = Torrents::parse_file_name($Torrent);
+        preg_match("/-(\w+)(\.\w+)?$/i", $FileName, $Matches);
+        return $Matches[1];
     }
 
     /**

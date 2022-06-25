@@ -106,7 +106,7 @@ class UngroupTorrentSimpleListView extends UngroupTorrentTableView {
                     <a clas="<?= $SnatchedTorrentClass ?>" href="#" onclick="globalapp.toggleTorrentDetail(event, '#torrent_<?= $this->DetailView ?>_<?= $TorrentID ?>')">
                         <?= Torrents::torrent_simple_view($Group, $Torrent, false, [
                             'Self' => $this->WithSelf,
-                            'CustomTorrentTitle' => G::$LoggedUser['CustomTorrentTitle'],
+                            'SettingTorrentTitle' => G::$LoggedUser['SettingTorrentTitle'],
                         ]) ?>
                     </a>
                 <? } else { ?>
@@ -116,7 +116,7 @@ class UngroupTorrentSimpleListView extends UngroupTorrentTableView {
                         true,
                         [
                             'Class' => $SnatchedTorrentClass,
-                            'CustomTorrentTitle' => G::$LoggedUser['CustomTorrentTitle'],
+                            'SettingTorrentTitle' => G::$LoggedUser['SettingTorrentTitle'],
                         ]
                     ) ?>
                 <? } ?>
@@ -1036,7 +1036,7 @@ class GroupTorrentTableView extends TorrentTableView {
                 &nbsp;
                 <a class="<?= $SnatchedTorrentClass ?>" data-tooltip="<?= $FileName ?>" href="torrents.php?id=<?= $GroupID ?>&amp;torrentid=<?= $TorrentID ?>#torrent<?= $TorrentID ?>">
                     <?= Torrents::torrent_info($Torrent, true, [
-                        'CustomTorrentTitle' => G::$LoggedUser['CustomTorrentTitle']
+                        'SettingTorrentTitle' => G::$LoggedUser['SettingTorrentTitle']
                     ]) ?>
                 </a>
             </td>
@@ -1120,7 +1120,7 @@ class UngroupTorrentTableView  extends TorrentTableView {
                 </span>
                 <a class="<?= $SnatchedTorrentClass ?>" data-tooltip="<?= $FileName ?>" href="torrents.php?id=<?= $GroupID ?>&amp;torrentid=<?= $TorrentID ?>#torrent<?= $TorrentID ?>">
                     <?= Torrents::torrent_info($Torrent, true, [
-                        'CustomTorrentTitle' => G::$LoggedUser['CustomTorrentTitle']
+                        'SettingTorrentTitle' => G::$LoggedUser['SettingTorrentTitle']
                     ]) ?>
                 </a>
             </td>

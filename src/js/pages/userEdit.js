@@ -8,16 +8,14 @@ import sortable from '#/modules/Sortable'
 
 sortable({
   onDragEnd: () => {
-    const texts = Array.from(document.querySelectorAll('.u-sortable-item')).map(
+    const items = Array.from(document.querySelectorAll('.u-sortable-item')).map(
       (element) => element.textContent.trim()
     )
-    const CustomTorrentTitle = { Items: texts }
-    document.querySelector('#CustomTorrentTitleInput').value =
-      JSON.stringify(CustomTorrentTitle)
+    document.querySelector('#SettingTorrentTitleInput').value = items.join(',')
   },
 })
 
-globalapp.userEditCustomTorrentTitleReset =
-  function userEditCustomTorrentTitleReset() {
-    document.querySelector('#CustomTorrentTitleInput').value = ''
+globalapp.userEditSettingTorrentTitleReset =
+  function userEditSettingTorrentTitleReset() {
+    document.querySelector('#SettingTorrentTitleInput').value = ''
   }

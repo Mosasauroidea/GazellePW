@@ -32,13 +32,13 @@ $DB->query("
 		i.Lang,
 		i.TGID,
 		right(m.torrent_pass,8),
-        i.CustomTorrentTitle
+        i.SettingTorrentTitle
 	FROM users_main AS m
 		JOIN users_info AS i ON i.UserID = m.ID
 		LEFT JOIN permissions AS p ON p.ID = m.PermissionID
 	WHERE m.ID = '" . db_string($UserID) . "'");
-list($Username, $Email, $IRCKey, $Paranoia, $TwoFAKey, $Info, $Avatar, $StyleID, $StyleURL, $StyleTheme, $SiteOptions, $UnseededAlerts, $ReportedAlerts, $RequestsAlerts, $DownloadAlt, $Class, $InfoTitle, $NotifyOnDeleteSeeding, $NotifyOnDeleteSnatched, $NotifyOnDeleteDownloaded, $Lang, $TGID, $Right8Passkey, $CustomTorrentTitleRaw) = $DB->next_record(MYSQLI_NUM, array(3, 9, 10, 23));
-$CustomTorrentTitle = $CustomTorrentTitleRaw ? json_decode($CustomTorrentTitleRaw, true) : null;
+list($Username, $Email, $IRCKey, $Paranoia, $TwoFAKey, $Info, $Avatar, $StyleID, $StyleURL, $StyleTheme, $SiteOptions, $UnseededAlerts, $ReportedAlerts, $RequestsAlerts, $DownloadAlt, $Class, $InfoTitle, $NotifyOnDeleteSeeding, $NotifyOnDeleteSnatched, $NotifyOnDeleteDownloaded, $Lang, $TGID, $Right8Passkey, $SettingTorrentTitle) = $DB->next_record(MYSQLI_NUM, array(3, 9, 10, 23));
+$SettingTorrentTitle = $SettingTorrentTitle ? json_decode($SettingTorrentTitle, true) : [];
 
 
 if ($UserID != $LoggedUser['ID'] && !check_perms('users_edit_profiles', $Class)) {
@@ -267,53 +267,60 @@ echo $Val->GenerateJS('userform');
                             <?= Lang::get('user', 'st_torrents') ?>
                         </td>
                     </tr>
-                    <? if (IS_DEV) { ?>
-                        <tr class="Form-row is-torrentTitle" id="custom_torrent_title">
-                            <td class="Form-label" data-tooltip="<?= Lang::get('user', 'setting_custom_torrent_title_tooltip') ?>">
-                                <strong>
-                                    <?= Lang::get('user', 'setting_custom_torrent_title') ?>
-                                </strong>
-                            </td>
-                            <td class="Form-items">
+                    <tr class="Form-row is-torrentTitle" id="custom_torrent_title">
+                        <td class="Form-label" data-tooltip="<?= Lang::get('user', 'SettingCustomTorrentTitleTooltip') ?>">
+                            <strong>
+                                <?= Lang::get('user', 'SettingCustomTorrentTitle') ?>
+                            </strong>
+                        </td>
+                        <td class="Form-items">
+                            <div>
+                                <div class="Checkbox">
+                                    <? $Checked = $SettingTorrentTitle['ReleaseGroup'] ? 'checked' : '' ?>
+                                    <input class="Input" type="checkbox" name="settingTorrentTitleReleaseGroup" id="release_group" <?= $Checked ?> />
+                                    <label class="Checkbox-label" for="release_group"><?= Lang::get('user', 'setting_release_group') ?></label>
+                                </div>
+                            </div>
+                            <? if (IS_DEV) { ?>
                                 <div>
-                                    <input id="CustomTorrentTitleInput" type="hidden" name="CustomTorrentTitle" value='<?= $CustomTorrentTitleRaw  ?>' />
-                                    <?= Torrents::customTorrentTitle(
-                                        $CustomTorrentTitle,
+                                    <input id="SettingTorrentTitleInput" type="hidden" name="settingTorrentTitleItems" value='<?= implode(',', $SettingTorrentTitle['Items'])  ?>' />
+                                    <?= Torrents::settingTorrentTitle(
+                                        $SettingTorrentTitle,
                                         [
                                             'Class' => 'TorrentTitle--standalone is-edit'
                                         ]
                                     ) ?>
-                                    <button class="Button" size="tiny" onclick="globalapp.userEditCustomTorrentTitleReset()" type="submit">
+                                    <button class="Button" size="tiny" onclick="globalapp.userEditSettingTorrentTitleReset()" type="submit">
                                         <?= Lang::get('user', 'reset') ?>
                                     </button>
                                 </div>
-                                <div class="TorrentTitle-previews">
-                                    <?
-                                    $Previews = [
-                                        ['Codec' => 'x265', 'Source' => 'WEB', 'Resolution' => '720p', 'Container' => 'MKV', 'Processing' => 'Encode'],
-                                        ['Codec' => 'x265', 'Source' => 'Blu-ray', 'Resolution' => '720p', 'Container' => 'MKV', 'Processing' => 'Remux'],
-                                        ['Codec' => 'x265', 'Source' => 'Blu-ray', 'Resolution' => '720p', 'Container' => 'm2ts', 'Processing' => 'BD50'],
-                                        ['Codec' => 'x265', 'Source' => 'WEB', 'Resolution' => '2160p', 'Container' => 'MKV', 'Processing' => 'Encode'],
-                                        ['Codec' => 'x265', 'Source' => 'Blu-ray', 'Resolution' => '2160p', 'Container' => 'MKV', 'Processing' => 'Remux'],
-                                        ['Codec' => 'x265', 'Source' => 'Blu-ray', 'Resolution' => '2160p', 'Container' => 'm2ts', 'Processing' => 'BD50'],
-                                    ];
-                                    ?>
-                                    <? foreach ($Previews as $Preview) { ?>
-                                        <div>
-                                            <?= Torrents::torrent_info(
-                                                $Preview,
-                                                true,
-                                                [
-                                                    'Class' => 'TorrentTitle--standalone is-preview',
-                                                    'CustomTorrentTitle' => $CustomTorrentTitle,
-                                                ]
-                                            ) ?>
-                                        </div>
-                                    <? } ?>
-                                </div>
-                            </td>
-                        </tr>
-                    <? } ?>
+                            <? } ?>
+                            <div class="TorrentTitle-previews">
+                                <?
+                                $Previews = [
+                                    ['Codec' => 'x265', 'Source' => 'WEB', 'Resolution' => '720p', 'Container' => 'MKV', 'Processing' => 'Encode', 'ReleaseGroup' => 'HANDJOB'],
+                                    ['Codec' => 'x265', 'Source' => 'Blu-ray', 'Resolution' => '720p', 'Container' => 'MKV', 'Processing' => 'Remux',  'ReleaseGroup' => 'MZABI'],
+                                    ['Codec' => 'x265', 'Source' => 'Blu-ray', 'Resolution' => '720p', 'Container' => 'm2ts', 'Processing' => 'BD50', 'ReleaseGroup' => 'Geek'],
+                                    ['Codec' => 'x265', 'Source' => 'WEB', 'Resolution' => '2160p', 'Container' => 'MKV', 'Processing' => 'Encode'],
+                                    ['Codec' => 'x265', 'Source' => 'Blu-ray', 'Resolution' => '2160p', 'Container' => 'MKV', 'Processing' => 'Remux'],
+                                    ['Codec' => 'x265', 'Source' => 'Blu-ray', 'Resolution' => '2160p', 'Container' => 'm2ts', 'Processing' => 'BD50'],
+                                ];
+                                ?>
+                                <? foreach ($Previews as $Preview) { ?>
+                                    <div>
+                                        <?= Torrents::torrent_info(
+                                            $Preview,
+                                            true,
+                                            [
+                                                'Class' => 'TorrentTitle--standalone is-preview',
+                                                'SettingTorrentTitle' => $SettingTorrentTitle,
+                                            ]
+                                        ) ?>
+                                    </div>
+                                <? } ?>
+                            </div>
+                        </td>
+                    </tr>
                     <? if (check_perms('site_advanced_search')) { ?>
                         <tr class="Form-row" id="tor_searchtype_tr">
                             <td class="Form-label" data-tooltip="<?= Lang::get('user', 'default_search_title') ?>"><strong><?= Lang::get('user', 'default_search') ?></strong></td>

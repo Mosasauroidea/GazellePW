@@ -54,6 +54,11 @@ if ($Err) {
     die();
 }
 
+// SettingTorrentTitle
+$SettingTorrentTitle = [];
+$SettingTorrentTitle['ReleaseGroup'] = (bool) $_POST['settingTorrentTitleReleaseGroup'];
+$SettingTorrentTitle['Items'] = $_POST['settingTorrentTitleItems'] ? explode(',', $_POST['settingTorrentTitleItems']) : null;
+
 // Begin building $Paranoia
 // Reduce the user's input paranoia until it becomes consistent
 if (isset($_POST['p_uniquegroups_l'])) {
@@ -311,7 +316,7 @@ $Cache->update_row(false, array(
     'StyleURL' => display_str($_POST['styleurl']),
     'StyleTheme' => $_POST['style_theme'],
     'DownloadAlt' => $DownloadAlt,
-    'CustomTorrentTitle' => $_POST['CustomTorrentTitle'] ? json_decode($_POST['CustomTorrentTitle'], true) : null,
+    'SettingTorrentTitle' => $SettingTorrentTitle,
 ));
 $Cache->update_row(false, $Options);
 $Cache->commit_transaction(0);
@@ -336,7 +341,7 @@ $SQL = "
 		i.NotifyOnDeleteSnatched = '$NotifyOnDeleteSnatched',
 		i.NotifyOnDeleteDownloaded = '$NotifyOnDeleteDownloaded',
 		i.Lang = '" . db_string($_POST['language']) . "',
-        i.CustomTorrentTitle = '" . db_string($_POST['CustomTorrentTitle']) . "',
+        i.SettingTorrentTitle = '" . db_string(json_encode($SettingTorrentTitle)) . "',
 		m.Email = '" . db_string($_POST['email']) . "',
 		m.IRCKey = '" . db_string($_POST['irckey']) . "',
 		m.Paranoia = '" . db_string(serialize($Paranoia)) . "'";
@@ -378,7 +383,6 @@ $SQL .= "WHERE m.ID = '" . db_string($UserID) . "'";
 $DB->query($SQL);
 
 if ($ResetPassword) {
-
     logout_all_sessions();
 }
 

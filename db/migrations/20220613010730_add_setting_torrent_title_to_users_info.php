@@ -2,7 +2,7 @@
 
 use Phinx\Migration\AbstractMigration;
 
-class AddCustomTorrentTitleToUsersInfo extends AbstractMigration {
+class AddSettingTorrentTitleToUsersInfo extends AbstractMigration {
     /**
      * Change Method.
      *
@@ -31,7 +31,7 @@ class AddCustomTorrentTitleToUsersInfo extends AbstractMigration {
     public function change() {
         $this
             ->table('users_info')
-            ->addColumn('CustomTorrentTitle', 'string')
+            ->addColumn('SettingTorrentTitle', 'text')
             ->save();
     }
 }
