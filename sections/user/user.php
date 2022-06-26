@@ -1883,30 +1883,32 @@ WHERE xs.uid =" . $UserID . " and xs.tstamp >= unix_timestamp(date_format(now(),
                                             </div>
                                     </td>
                                 </tr>
-                                <tr class="Form-row">
-                                    <td class="Form-label"><?= Lang::get('user', 'hacked') ?></td>
-                                    <td class="Form-inputs">
-                                        <div class="Checkbox">
-                                            <input class="Input" type="checkbox" name="SendHackedMail" id="SendHackedMail" />
-                                            <label class="Checkbox-label" for="SendHackedMail"><?= Lang::get('user', 'send_hacked_account_email_to') ?></label>
-                                        </div>
-                                        <select class="Input" name="HackedEmail">
-                                            <?
-                                            foreach ($Emails as $Email) {
-                                                list($Address, $IP) = $Email;
-                                            ?>
-                                                <option class="Select-option" value="<?= display_str($Address) ?>"><?= display_str($Address) ?> - <?= display_str($IP) ?></option>
-                                            <?          } ?>
-                                        </select>
-                                    </td>
-                                </tr>
-
-                            <?
-                                        }
-                                    }
-
-                                    if (check_perms('users_disable_any')) {
-                            ?>
+                                <? if ($Emails) { ?>
+                                    <tr class="Form-row">
+                                        <td class="Form-label"><?= Lang::get('user', 'hacked') ?></td>
+                                        <td class="Form-inputs">
+                                            <div class="Checkbox">
+                                                <input class="Input" type="checkbox" name="SendHackedMail" id="SendHackedMail" />
+                                                <label class="Checkbox-label" for="SendHackedMail">
+                                                    <?= Lang::get('user', 'send_hacked_account_email_to') ?>
+                                                </label>
+                                            </div>
+                                            <select class="Input" name="HackedEmail">
+                                                <?
+                                                foreach ($Emails as $Email) {
+                                                    list($Address, $IP) = $Email;
+                                                ?>
+                                                    <option class="Select-option" value="<?= display_str($Address) ?>">
+                                                        <?= display_str($Address) ?> - <?= display_str($IP) ?>
+                                                    </option>
+                                                <? } ?>
+                                            </select>
+                                        </td>
+                                    </tr>
+                                <? } ?>
+                            <? } ?>
+                        <? } ?>
+                        <? if (check_perms('users_disable_any')) { ?>
                             <tr class="Form-row">
                                 <td class="Form-label"><?= Lang::get('user', 'account') ?></td>
                                 <td class="Form-inputs">

@@ -386,23 +386,8 @@ class TorrentSearch {
      * @param array $Terms Array with search terms from query()
      */
     private function process_search_terms($Terms) {
-        if (
-            isset($Terms['searchstr'])
-            && $Terms['searchstr']
-        ) {
-            // Supports filename 
-            $Terms['searchstr'] = str_replace('.', ' ', $Terms['searchstr']);
-        }
-        if (
-            isset($Terms['searchstr'])
-            && $Terms['searchstr']
-            && substr($Terms['searchstr'], 0, 1) != '*'
-            && substr($Terms['searchstr'], strlen($Terms['searchstr']) - 1, 1) != '*'
-            && strpos($Terms['searchstr'], ' ') === false
-        ) {
-            $Terms['searchstr'] = '*' . $Terms['searchstr'] . '*';
-        }
         foreach ($Terms as $Key => $Term) {
+            $Term = strtolower(trim($Term));
             if (isset(self::$Fields[$Key])) {
                 $this->process_field($Key, $Term);
             } elseif (isset(self::$Attributes[$Key])) {
@@ -512,7 +497,6 @@ class TorrentSearch {
      * @param string $Term Search expression for the field
      */
     private function process_field($Field, $Term) {
-        $Term = trim($Term);
         if ($Term === '') {
             return;
         }
@@ -569,7 +553,6 @@ class TorrentSearch {
         $SearchContainers = array_map('strtolower', $Containers);
         $SearchResolutions = array_map('strtolower', $Resolutions);
         $SearchProcessings = array_map('strtolower', $Processings);
-
         foreach (explode(' ', $Term) as $Word) {
             if (in_array($Word, $SearchSources)) {
                 $this->add_word('source', $Word);
@@ -582,6 +565,10 @@ class TorrentSearch {
             } elseif (in_array($Word, $SearchProcessings)) {
                 $this->add_word('processing', $Word);
             } else {
+                // Supports Hello.World 
+                $Word = str_replace('.', ' ', $Word);
+                // Supports *he*
+                $Word = "*$Word*";
                 $this->add_word('searchstr', $Word);
             }
         }
