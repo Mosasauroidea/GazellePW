@@ -252,10 +252,12 @@ TableTorrent-movieInfo
   position: relative;
 }
 
-.TableTorrent-cellMovieInfoPoster img:hover {
-  z-index: calc(var(--global-zIndex-default) + 1);
-  transform: scale(2);
-  transform-origin: 0 0;
+@media (min-width: 768px) {
+  .TableTorrent-cellMovieInfoPoster img:hover {
+    z-index: calc(var(--global-zIndex-default) + 1);
+    transform: scale(2);
+    transform-origin: 0 0;
+  }
 }
 
 .TableTorrent-movieInfoBody {
