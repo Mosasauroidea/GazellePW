@@ -147,7 +147,7 @@ View::show_header(Lang::get('forums', 'forums_greater_than_search'), 'bbcode,for
                 <tr class="Form-row" variant="alighLeft">
                     <td class="Form-label"><?= Lang::get('forums', 'search_forums') ?>:</td>
                     <td class="Form-inputs">
-                        <table id="forum_search_cat_list" class="cat_list layout">
+                        <table class="SearchForum-forumList" id="forum_search_cat_list">
                             <?
                             // List of forums
                             $Open = false;

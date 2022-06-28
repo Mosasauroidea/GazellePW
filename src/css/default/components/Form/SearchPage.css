@@ -38,3 +38,13 @@
 .SearchPage .is-tagFilter .Form-inputs > Input {
   width: 70%;
 }
+
+/* SearchForum */
+.SearchForum-forumList .Form-row {
+  flex-wrap: wrap;
+}
+@media (max-width: 768px) {
+  .SearchForum-forumList .Form-row {
+    display: flex;
+  }
+}
