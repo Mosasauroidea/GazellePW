@@ -44,7 +44,7 @@ class UngroupTorrentSimpleListView extends UngroupTorrentTableView {
     ?>
         <div class="TableContainer UngroupTorrentSimpleListView">
             <? if (!empty($this->Torrents)) { ?>
-                <table class="TableTorrent Table" variant="ungroup" id="torrent_table">
+                <table class="TableTorrent Table <?= $this->TableTorrentClass ?>" variant="ungroup" id="torrent_table">
                     <tr class="Table-rowHeader">
                         <?
                         $this->render_header();
@@ -190,6 +190,7 @@ class TorrentTableView {
         } else {
             $this->WithCover = false;
         }
+        $this->TableTorrentClass = G::$LoggedUser['SettingTorrentTitle']['SameWidth'] ? 'is-sameWidth' : '';
     }
     public function with_detail($View = '', DetailOption $DetailOption = null): ?TorrentTableView {
         $this->DetailView = $View;
@@ -867,7 +868,7 @@ class GroupTorrentTableView extends TorrentTableView {
         }
         ?>
         <div class="TableContainer">
-            <table class="TableTorrent Table" id="torrent_table">
+            <table class="TableTorrent Table <?= $this->TableTorrentClass ?>" id="torrent_table">
                 <tr class="Table-rowHeader">
                     <?
                     $this->render_header();
@@ -1072,7 +1073,7 @@ class UngroupTorrentTableView  extends TorrentTableView {
     ?>
         <div class="TableContainer">
             <? if (!empty($this->Torrents)) { ?>
-                <table class="TableTorrent Table" variant="ungroup" id="torrent_table">
+                <table class="TableTorrent Table <?= $this->TableTorrentClass ?> " variant="ungroup" id="torrent_table">
                     <tr class="Table-rowHeader">
                         <?
                         $this->render_header();

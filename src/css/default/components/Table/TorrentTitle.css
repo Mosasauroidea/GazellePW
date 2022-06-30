@@ -3,9 +3,17 @@ TorrentTitle TorrentTitle--standalone   # settings - torrent title
   TorrentTitle-item
 */
 
+.TableTorrent.is-sameWidth .TorrentTitle {
+  font-family: var(--global-fontFamilyMonospace);
+}
+
 /* item */
 .TorrentTitle-item {
   white-space: nowrap;
+}
+.TableTorrent.is-sameWidth .TorrentTitle-item {
+  white-space: pre-wrap;
+  padding: 0 2px;
 }
 .TorrentTitle-item.torrent_discount {
   color: #fff;

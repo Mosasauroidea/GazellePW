@@ -29,10 +29,13 @@ cell
   cellStatTime
  */
 
-.TableTorrent {
+.TableTorrent:not(.TableTorrent--preview) {
   table-layout: fixed;
   min-width: 760px;
   font-size: var(--TableTorrent-fontSize);
+}
+.TableTorrent.is-sameWidth {
+  font-size: 12px;
 }
 
 .TableTorrent .Table-rowHeader {

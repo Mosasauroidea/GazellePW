@@ -102,7 +102,10 @@ View::show_header(Lang::get('top10', 'top_10_torrents_history'), '', 'PageTop10H
         <br />
         <div class="pad box">
             <h3><?= Lang::get('top10', 'top_10_for_before') ?><?= ($Type == 'day' ? $Date : Lang::get('top10', 'the_first_week_after_before') . "$Date" . Lang::get('top10', 'the_first_week_after_after')) ?><?= Lang::get('top10', 'top_10_for_after') ?></h3>
-            <table class="TableTorrent Table">
+            <?
+            $TableTorrentClass = G::$LoggedUser['SettingTorrentTitle']['SameWidth'] ? 'is-sameWidth' : '';
+            ?>
+            <table class="TableTorrent Table $TableTorrentClass">
                 <tr class="Table-rowHeader">
                     <td class="Table-cell" style="width: 15px;"></td>
                     <td class="Table-cell"></td>

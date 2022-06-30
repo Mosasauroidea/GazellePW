@@ -54,7 +54,6 @@ if (count($UserIDs) > 0) {
         <tr class="Table-rowHeader">
             <td class="Table-cell"><?= Lang::get('torrents', 'user') ?></td>
             <td class="Table-cell"><?= Lang::get('torrents', 'time') ?></td>
-
             <td class="Table-cell"><?= Lang::get('torrents', 'user') ?></td>
             <td class="Table-cell"><?= Lang::get('torrents', 'time') ?></td>
         </tr>

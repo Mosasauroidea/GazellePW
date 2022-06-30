@@ -268,17 +268,26 @@ echo $Val->GenerateJS('userform');
                         </td>
                     </tr>
                     <tr class="Form-row is-torrentTitle" id="custom_torrent_title">
-                        <td class="Form-label" data-tooltip="<?= Lang::get('user', 'SettingCustomTorrentTitleTooltip') ?>">
+                        <td class="Form-label" data-tooltip="<?= Lang::get('user', 'SettingTorrentTitleTooltip') ?>">
                             <strong>
-                                <?= Lang::get('user', 'SettingCustomTorrentTitle') ?>
+                                <?= Lang::get('user', 'SettingTorrentTitle') ?>
                             </strong>
                         </td>
                         <td class="Form-items">
                             <div>
                                 <div class="Checkbox">
+                                    <? $Checked = $SettingTorrentTitle['SameWidth'] ? 'checked' : '' ?>
+                                    <input class="Input" type="checkbox" name="settingTorrentTitleSameWidth" id="same_width" <?= $Checked ?> />
+                                    <label class="Checkbox-label" for="same_width">
+                                        <?= Lang::get('user', 'SettingSameWidth') ?>
+                                    </label>
+                                </div>
+                                <div class="Checkbox">
                                     <? $Checked = $SettingTorrentTitle['ReleaseGroup'] ? 'checked' : '' ?>
                                     <input class="Input" type="checkbox" name="settingTorrentTitleReleaseGroup" id="release_group" <?= $Checked ?> />
-                                    <label class="Checkbox-label" for="release_group"><?= Lang::get('user', 'setting_release_group') ?></label>
+                                    <label class="Checkbox-label" for="release_group">
+                                        <?= Lang::get('user', 'SettingReleaseGroup') ?>
+                                    </label>
                                 </div>
                             </div>
                             <? if (IS_DEV) { ?>
@@ -295,7 +304,10 @@ echo $Val->GenerateJS('userform');
                                     </button>
                                 </div>
                             <? } ?>
-                            <div class="TorrentTitle-previews">
+                            <?
+                            $TableTorrentClass = $SettingTorrentTitle['SameWidth'] ? 'is-sameWidth' : '';
+                            ?>
+                            <div class="TorrentTitle-previews TableTorrent TableTorrent--preview <?= $TableTorrentClass ?>">
                                 <?
                                 $Previews = [
                                     ['Codec' => 'x265', 'Source' => 'WEB', 'Resolution' => '720p', 'Container' => 'MKV', 'Processing' => 'Encode', 'ReleaseGroup' => 'HANDJOB'],

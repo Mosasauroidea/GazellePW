@@ -535,7 +535,10 @@ View::show_header($Title, 'browse,comments,torrent,bbcode,recommend,cover_art,su
         <? } ?>
         <div class="LayoutMainSidebar-main u-tab">
             <div class="TableContainer u-tabItem u-tabItemTorrent" style="<?= $View == 'slot' ? "display:none" : "" ?>">
-                <table class="TableTorrent Table has-slots" header-large last-tr-hidden id="torrent_details">
+                <?
+                $TableTorrentClass = G::$LoggedUser['SettingTorrentTitle']['SameWidth'] ? 'is-sameWidth' : '';
+                ?>
+                <table class="TableTorrent Table has-slots <?= $TableTorrentClass ?>" header-large last-tr-hidden id="torrent_details">
                     <tr class="Table-rowHeader">
                         <td class="TableTorrent-cellName Table-cell" colspan="1">
                             <span>
@@ -734,7 +737,7 @@ View::show_header($Title, 'browse,comments,torrent,bbcode,recommend,cover_art,su
                 <input type="hidden" name="auth" value="<?= $LoggedUser['AuthKey'] ?>" />
                 <input type="hidden" name="groupid" value="<?= $GroupID ?>" />
                 <div class="TableContainer">
-                    <table class="TableTorrent Table" variant="slot" header-large>
+                    <table class="TableTorrent Table <?= $TableTorrentClass ?>" variant="slot" header-large>
                         <tr class="Table-rowHeader">
                             <td class="TableTorrent-cellName Table-cell" colspan="1">
                                 <span>
@@ -906,12 +909,11 @@ View::show_header($Title, 'browse,comments,torrent,bbcode,recommend,cover_art,su
                 </div>
             </form>
             <?
-
             if ($HasRequest) {
                 $i = 0;
             ?>
                 <div class="TableContainer">
-                    <table class="TableTorrent TableRequest Table u-tabItem u-tabItemRequest" style="<?= $View == 'request' ? "" : "display:none" ?>" id="torrent_details">
+                    <table class="TableTorrent TableRequest Table u-tabItem u-tabItemRequest <?= $TableTorrentClass ?>" style="<?= $View == 'request' ? "" : "display:none" ?>" id="torrent_details">
                         <tr class="Table-rowHeader">
                             <td class="TableRequest-cellName Table-cell" colspan="1">
                                 <span>
