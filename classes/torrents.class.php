@@ -1133,7 +1133,7 @@ WHERE ud.TorrentID=? AND ui.NotifyOnDeleteDownloaded='1' AND ud.UserID NOT IN ({
     public static function torrent_info($Data, $ShowMedia = true, $Option = []) {
         $Option = array_merge(['Self' => true, 'Class' => ''], $Option);
         $Info = array();
-        $Separator = $Option['SettingTorrentTitle']['SameWidth'] ? '/' : ' / ';
+        $Separator = '/';
         if ($ShowMedia) {
             $Info = self::torrent_media_info($Data, true, $Option);
         }
@@ -1155,7 +1155,7 @@ WHERE ud.TorrentID=? AND ui.NotifyOnDeleteDownloaded='1' AND ud.UserID NOT IN ({
 
             $EditionInfo = array_map(
                 function ($label) use ($t, $RemasterYearInfo) {
-                    $title = EditionInfo::text($label);
+                    $title = EditionInfo::icon($label);
                     if (in_array($label, $t)) {
                         $title = $title . $RemasterYearInfo;
                     }
@@ -1263,7 +1263,7 @@ WHERE ud.TorrentID=? AND ui.NotifyOnDeleteDownloaded='1' AND ud.UserID NOT IN ({
         foreach ($Items as $Item) {
             $ResultInner[] = "<span class='TorrentTitle-item u-sortable-item'>$Item</span>";
         }
-        return $Result . implode(' / ', $ResultInner) . '</span>';
+        return $Result . implode('/', $ResultInner) . '</span>';
     }
 
     public static function release_group($Torrent) {

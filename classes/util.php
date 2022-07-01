@@ -298,7 +298,8 @@ function open_registration($Email = null) {
     return false;
 }
 
-function icon($name, $class = '') {
+function icon($name, $class = '', $Option = []) {
+    $Option = array_merge(['ReturnEmptyString' => false], $Option);
     $icon = file_get_contents(SERVER_ROOT . "/src/icons/$name.svg");
     if ($icon) {
         // random id for flag icon
@@ -308,7 +309,7 @@ function icon($name, $class = '') {
         $icon = str_replace('class="', "class=\"$class ", $icon);
         return $icon;
     } else {
-        return $name;
+        return $Option['ReturnEmptyString'] ? '' : $name;
     }
 }
 

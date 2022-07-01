@@ -136,14 +136,19 @@ cell
   width: 120px;
 }
 
-.TableTorrent-rowTitle .icon {
+/* Title */
+.TableTorrent-title {
+  display: flex;
+  gap: var(--global-space-sm);
+  align-items: center;
+}
+.TableTorrent-titleCheck .icon {
   width: 13px;
   height: 13px;
 }
-
 .TableTorrent-titleActions {
-  float: right;
-  padding-left: var(--global-space-lg);
+  margin-left: auto;
+  white-space: nowrap;
 }
 
 /* Slot */

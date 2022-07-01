@@ -91,35 +91,37 @@ class UngroupTorrentSimpleListView extends UngroupTorrentTableView {
                 </td>
             <? } ?>
             <td class="Table-cell">
-                <span class="TableTorrent-titleActions">
-                    [
-                    <a href="torrents.php?action=download&amp;id=<?= $TorrentID ?>&amp;authkey=<?= $LoggedUser['AuthKey'] ?>&amp;torrent_pass=<?= $LoggedUser['torrent_pass'] ?>" data-tooltip="Download">DL</a>
-                    <? if (Torrents::can_use_token($Torrent)) { ?>
-                        |
-                        <a href="torrents.php?action=download&amp;id=<?= $TorrentID ?>&amp;authkey=<?= $LoggedUser['AuthKey'] ?>&amp;torrent_pass=<?= $LoggedUser['torrent_pass'] ?>&amp;usetoken=1" data-tooltip="Use a FL Token" onclick="return confirm('<?= FL_confirmation_msg($Torrent['Seeders'], $Torrent['Size']) ?>');">FL</a>
+                <div class="TableTorrent-title">
+                    <? if (isset($this->DetailView)) { ?>
+                        <a clas="<?= $SnatchedTorrentClass ?>" href="#" onclick="globalapp.toggleTorrentDetail(event, '#torrent_<?= $this->DetailView ?>_<?= $TorrentID ?>')">
+                            <?= Torrents::torrent_simple_view($Group, $Torrent, false, [
+                                'Self' => $this->WithSelf,
+                                'SettingTorrentTitle' => G::$LoggedUser['SettingTorrentTitle'],
+                            ]) ?>
+                        </a>
+                    <? } else { ?>
+                        <?= Torrents::torrent_simple_view(
+                            $Group,
+                            $Torrent,
+                            true,
+                            [
+                                'Class' => $SnatchedTorrentClass,
+                                'SettingTorrentTitle' => G::$LoggedUser['SettingTorrentTitle'],
+                            ]
+                        ) ?>
                     <? } ?>
-                    |
-                    <a href="torrents.php?torrentid=<?= $TorrentID ?>" data-tooltip="<?= Lang::get('torrents', 'permalink') ?>">PL</a>
-                    ]
-                </span>
-                <? if (isset($this->DetailView)) { ?>
-                    <a clas="<?= $SnatchedTorrentClass ?>" href="#" onclick="globalapp.toggleTorrentDetail(event, '#torrent_<?= $this->DetailView ?>_<?= $TorrentID ?>')">
-                        <?= Torrents::torrent_simple_view($Group, $Torrent, false, [
-                            'Self' => $this->WithSelf,
-                            'SettingTorrentTitle' => G::$LoggedUser['SettingTorrentTitle'],
-                        ]) ?>
-                    </a>
-                <? } else { ?>
-                    <?= Torrents::torrent_simple_view(
-                        $Group,
-                        $Torrent,
-                        true,
+                    <span class="TableTorrent-titleActions">
                         [
-                            'Class' => $SnatchedTorrentClass,
-                            'SettingTorrentTitle' => G::$LoggedUser['SettingTorrentTitle'],
+                        <a href="torrents.php?action=download&amp;id=<?= $TorrentID ?>&amp;authkey=<?= $LoggedUser['AuthKey'] ?>&amp;torrent_pass=<?= $LoggedUser['torrent_pass'] ?>" data-tooltip="Download">DL</a>
+                        <? if (Torrents::can_use_token($Torrent)) { ?>
+                            |
+                            <a href="torrents.php?action=download&amp;id=<?= $TorrentID ?>&amp;authkey=<?= $LoggedUser['AuthKey'] ?>&amp;torrent_pass=<?= $LoggedUser['torrent_pass'] ?>&amp;usetoken=1" data-tooltip="Use a FL Token" onclick="return confirm('<?= FL_confirmation_msg($Torrent['Seeders'], $Torrent['Size']) ?>');">FL</a>
+                        <? } ?>
+                        |
+                        <a href="torrents.php?torrentid=<?= $TorrentID ?>" data-tooltip="<?= Lang::get('torrents', 'permalink') ?>">PL</a>
                         ]
-                    ) ?>
-                <? } ?>
+                    </span>
+                </div>
             </td>
             <? if ($this->WithTime) { ?>
                 <td class="Table-cell TableTorrent-cellStat TableTorrent-cellStatTime">
@@ -1010,36 +1012,38 @@ class GroupTorrentTableView extends TorrentTableView {
         <? /* GroupTorrentTableView */ ?>
         <tr class="TableTorrent-rowTitle Table-row <?= $this->WithCheck && $TorrentChecked ? "torrent_checked " : "torrent_unchecked" ?> <?= $SnatchedGroupClass . (!empty($LoggedUser['TorrentGrouping']) && $LoggedUser['TorrentGrouping'] == 1 ? ' hidden' : '') ?>" group-id="<?= $GroupID ?>" edition-id="<?= $EditionID ?>">
             <td class="Table-cell is-name" colspan="<?= $Cols ?>">
-                <span class="TableTorrent-titleActions">
-                    [
-                    <a href="torrents.php?action=download&amp;id=<?= $TorrentID ?>&amp;authkey=<?= $LoggedUser['AuthKey'] ?>&amp;torrent_pass=<?= $LoggedUser['torrent_pass'] ?>" data-tooltip="Download">DL</a>
-                    <? if (Torrents::can_use_token($Torrent)) { ?>
-                        |
-                        <a href="torrents.php?action=download&amp;id=<?= $TorrentID ?>&amp;authkey=<?= $LoggedUser['AuthKey'] ?>&amp;torrent_pass=<?= $LoggedUser['torrent_pass'] ?>&amp;usetoken=1" data-tooltip="Use a FL Token" onclick="return confirm('<?= FL_confirmation_msg($Torrent['Seeders'], $Torrent['Size']) ?>');">FL</a>
+                <div class="TableTorrent-title">
+                    <?
+                    if ($this->WithCheck) {
+                        $TorrentChecked = $Torrent['Checked'];
+                        $TorrentCheckedBy = 'unknown';
+                        if ($TorrentChecked) {
+                            $TorrentCheckedBy = Users::user_info($TorrentChecked)['Username'];
+                        }
+                    ?>
+                        <div class="TableTorrent-titleCheck">
+                            <? if ($this->CheckAllTorrents || ($this->CheckSelfTorrents && $LoggedUser['id'] == $Torrent['UserID'])) { ?>
+                                <i class="TableTorrent-check" id="torrent<?= $TorrentID ?>_check1" style="display:<?= $TorrentChecked ? "inline-block" : "none" ?>;color:#649464;" data-tooltip="<?= Lang::get('torrents', 'checked_by_before') ?><?= $TorrentChecked ? $TorrentCheckedBy : $LoggedUser['Username'] ?><?= Lang::get('torrents', 'checked_by_after') ?>"><?= icon("Table/checked") ?></i>
+                                <i class="TableTorrent-check" id="torrent<?= $TorrentID ?>_check0" style="display:<?= $TorrentChecked ? "none" : "inline-block" ?>;color:#CF3434;" data-tooltip="<?= Lang::get('torrents', 'has_not_been_checked') ?><?= Lang::get('torrents', 'checked_explanation') ?>"><?= icon("Table/unchecked") ?></i>
+                            <? } else { ?>
+                                <i class="TableTorrent-check" style="color: <?= $TorrentChecked ? "#74B274" : "#A6A6A6" ?>;" data-tooltip="<?= $TorrentChecked ? Lang::get('torrents', 'has_been_checked') : Lang::get('torrents', 'has_not_been_checked') ?><?= Lang::get('torrents', 'checked_explanation') ?>"><?= icon("Table/" . ($TorrentChecked ? "checked" : "unchecked")) ?> </i>
+                            <? } ?>
+                        </div>
                     <? } ?>
-                    ]
-                </span>
-                <?
-                if ($this->WithCheck) {
-                    $TorrentChecked = $Torrent['Checked'];
-                    $TorrentCheckedBy = 'unknown';
-                    if ($TorrentChecked) {
-                        $TorrentCheckedBy = Users::user_info($TorrentChecked)['Username'];
-                    }
-                    if ($this->CheckAllTorrents || ($this->CheckSelfTorrents && $LoggedUser['id'] == $Torrent['UserID'])) {
-                ?>
-                        <i id="torrent<?= $TorrentID ?>_check1" style="display:<?= $TorrentChecked ? "inline-block" : "none" ?>;color:#649464;" data-tooltip="<?= Lang::get('torrents', 'checked_by_before') ?><?= $TorrentChecked ? $TorrentCheckedBy : $LoggedUser['Username'] ?><?= Lang::get('torrents', 'checked_by_after') ?>"><?= icon("Table/checked") ?></i>
-                        <i id="torrent<?= $TorrentID ?>_check0" style="display:<?= $TorrentChecked ? "none" : "inline-block" ?>;color:#CF3434;" data-tooltip="<?= Lang::get('torrents', 'has_not_been_checked') ?><?= Lang::get('torrents', 'checked_explanation') ?>"><?= icon("Table/unchecked") ?></i>
-                    <? } else { ?>
-                        <i style="color: <?= $TorrentChecked ? "#74B274" : "#A6A6A6" ?>;" data-tooltip="<?= $TorrentChecked ? Lang::get('torrents', 'has_been_checked') : Lang::get('torrents', 'has_not_been_checked') ?><?= Lang::get('torrents', 'checked_explanation') ?>"><?= icon("Table/" . ($TorrentChecked ? "checked" : "unchecked")) ?> </i>
-                    <? } ?>
-                <? } ?>
-                &nbsp;
-                <a class="<?= $SnatchedTorrentClass ?>" data-tooltip="<?= $FileName ?>" href="torrents.php?id=<?= $GroupID ?>&amp;torrentid=<?= $TorrentID ?>#torrent<?= $TorrentID ?>">
-                    <?= Torrents::torrent_info($Torrent, true, [
-                        'SettingTorrentTitle' => G::$LoggedUser['SettingTorrentTitle']
-                    ]) ?>
-                </a>
+                    <a class="<?= $SnatchedTorrentClass ?>" data-tooltip="<?= $FileName ?>" href="torrents.php?id=<?= $GroupID ?>&amp;torrentid=<?= $TorrentID ?>#torrent<?= $TorrentID ?>">
+                        <?= Torrents::torrent_info($Torrent, true, [
+                            'SettingTorrentTitle' => G::$LoggedUser['SettingTorrentTitle']
+                        ]) ?>
+                    </a>
+                    <span class="TableTorrent-titleActions">
+                        [
+                        <a href="torrents.php?action=download&amp;id=<?= $TorrentID ?>&amp;authkey=<?= $LoggedUser['AuthKey'] ?>&amp;torrent_pass=<?= $LoggedUser['torrent_pass'] ?>" data-tooltip="Download">DL</a>
+                        <? if (Torrents::can_use_token($Torrent)) { ?>
+                            |
+                            <a href="torrents.php?action=download&amp;id=<?= $TorrentID ?>&amp;authkey=<?= $LoggedUser['AuthKey'] ?>&amp;torrent_pass=<?= $LoggedUser['torrent_pass'] ?>&amp;usetoken=1" data-tooltip="Use a FL Token" onclick="return confirm('<?= FL_confirmation_msg($Torrent['Seeders'], $Torrent['Size']) ?>');">FL</a>
+                        <? } ?>
+                        ]
+                    </span>
             </td>
             <? if ($this->WithTime) { ?>
                 <td class="Table-cell TableTorrent-cellStat TableTorrent-cellStatTime">
@@ -1110,20 +1114,22 @@ class UngroupTorrentTableView  extends TorrentTableView {
         <? /* UngroupTorrentTableView */ ?>
         <tr class="TableTorrent-rowTitle Table-row  <?= $SnatchedGroupClass . (!empty($LoggedUser['TorrentGrouping']) && $LoggedUser['TorrentGrouping'] === 1 ? ' hidden' : '') ?>" group-id="<?= $GroupID ?>">
             <td class="Table-cell">
-                <span class="TableTorrent-titleActions">
-                    [
-                    <a href="torrents.php?action=download&amp;id=<?= $TorrentID ?>&amp;authkey=<?= $LoggedUser['AuthKey'] ?>&amp;torrent_pass=<?= $LoggedUser['torrent_pass'] ?>" data-tooltip="Download">DL</a>
-                    <? if (Torrents::can_use_token($Torrent)) { ?>
-                        |
-                        <a href="torrents.php?action=download&amp;id=<?= $TorrentID ?>&amp;authkey=<?= $LoggedUser['AuthKey'] ?>&amp;torrent_pass=<?= $LoggedUser['torrent_pass'] ?>&amp;usetoken=1" data-tooltip="Use a FL Token" onclick="return confirm('<?= FL_confirmation_msg($Torrent['Seeders'], $Torrent['Size']) ?>');">FL</a>
-                    <? } ?>
-                    ]
-                </span>
-                <a class="<?= $SnatchedTorrentClass ?>" data-tooltip="<?= $FileName ?>" href="torrents.php?id=<?= $GroupID ?>&amp;torrentid=<?= $TorrentID ?>#torrent<?= $TorrentID ?>">
-                    <?= Torrents::torrent_info($Torrent, true, [
-                        'SettingTorrentTitle' => G::$LoggedUser['SettingTorrentTitle']
-                    ]) ?>
-                </a>
+                <div class="TableTorrent-title">
+                    <a class="<?= $SnatchedTorrentClass ?>" data-tooltip="<?= $FileName ?>" href="torrents.php?id=<?= $GroupID ?>&amp;torrentid=<?= $TorrentID ?>#torrent<?= $TorrentID ?>">
+                        <?= Torrents::torrent_info($Torrent, true, [
+                            'SettingTorrentTitle' => G::$LoggedUser['SettingTorrentTitle']
+                        ]) ?>
+                    </a>
+                    <span class="TableTorrent-titleActions">
+                        [
+                        <a href="torrents.php?action=download&amp;id=<?= $TorrentID ?>&amp;authkey=<?= $LoggedUser['AuthKey'] ?>&amp;torrent_pass=<?= $LoggedUser['torrent_pass'] ?>" data-tooltip="Download">DL</a>
+                        <? if (Torrents::can_use_token($Torrent)) { ?>
+                            |
+                            <a href="torrents.php?action=download&amp;id=<?= $TorrentID ?>&amp;authkey=<?= $LoggedUser['AuthKey'] ?>&amp;torrent_pass=<?= $LoggedUser['torrent_pass'] ?>&amp;usetoken=1" data-tooltip="Use a FL Token" onclick="return confirm('<?= FL_confirmation_msg($Torrent['Seeders'], $Torrent['Size']) ?>');">FL</a>
+                        <? } ?>
+                        ]
+                    </span>
+                </div>
             </td>
             <? if ($this->WithTime) { ?>
                 <td class="Table-cell TableTorrent-cellStat TableTorrent-cellStatTime">

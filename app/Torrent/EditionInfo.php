@@ -39,6 +39,10 @@ class EditionInfo {
         return Lang::get('editioninfo', $key);
     }
 
+    public static function icon(string $key): ?string {
+        return icon("Torrent/$key", "", ['ReturnEmptyString' => true]) ?: self::text($key);
+    }
+
     public static function key(string $text): ?string {
         // TODO by qwerty 硬编码中英双语
         $L = ['en', 'chs'];

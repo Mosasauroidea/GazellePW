@@ -3,18 +3,19 @@ TorrentTitle TorrentTitle--standalone   # settings - torrent title
   TorrentTitle-item
 */
 
+.TorrentTitle {
+  display: inline-flex;
+  align-items: center;
+  flex-wrap: wrap;
+  white-space: pre-wrap;
+  column-gap: 5px;
+  line-height: 1.2;
+}
 .TableTorrent.is-sameWidth .TorrentTitle {
   font-family: var(--global-fontFamilyMonospace);
 }
 
 /* item */
-.TorrentTitle-item {
-  white-space: nowrap;
-}
-.TableTorrent.is-sameWidth .TorrentTitle-item {
-  white-space: pre-wrap;
-  padding: 0 2px;
-}
 .TorrentTitle-item.torrent_discount {
   color: #fff;
   padding: 0 3.5px;
