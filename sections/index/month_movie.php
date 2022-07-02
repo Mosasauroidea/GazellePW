@@ -26,7 +26,7 @@ if (is_number($FeaturedMovie['GroupID'])) {
                 <?= Lang::get('index', 'featured_item') ?>
             </span>
             <div class="SidebarItem-headerActions">
-                <a href="forums.php?action=viewthread&amp;threadid=<?= $FeaturedMovie['ThreadID'] ?>">[<?= Lang::get('index', 'discuss') ?>]</a>
+                <a href="forums.php?action=viewthread&amp;threadid=<?= $FeaturedMovie['ThreadID'] ?>"><?= Lang::get('index', 'discuss') ?></a>
             </div>
         </div>
         <div class="SidebarItem-body Box-body">
@@ -35,6 +35,4 @@ if (is_number($FeaturedMovie['GroupID'])) {
             </a>
         </div>
     </div>
-<?
-}
-?>
+<? } ?>
