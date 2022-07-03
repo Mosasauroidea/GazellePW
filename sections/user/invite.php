@@ -31,7 +31,7 @@ $DB->query("
 	ORDER BY Expires");
 $Pending =  $DB->to_array();
 
-$OrderWays = array('username', 'email', 'joined', 'lastseen', 'uploaded', 'downloaded', 'ratio');
+$OrderWays = array('username', 'email', 'joined', 'lastseen', 'uploads', 'uploaded', 'downloaded', 'ratio');
 
 if (empty($_GET['order'])) {
     $CurrentOrder = 'id';
@@ -64,6 +64,9 @@ switch ($CurrentOrder) {
     case 'lastseen':
         $OrderBy = "um.LastAccess";
         break;
+    case 'uploads':
+        $OrderBy = "Uploads";
+        break;
     case 'uploaded':
         $OrderBy = "um.Uploaded";
         break;
@@ -82,14 +85,16 @@ $CurrentURL = Format::get_url(array('action', 'order', 'sort'));
 
 $DB->query("
 	SELECT
-		ID,
-		Email,
-		Uploaded,
-		Downloaded,
-		JoinDate,
-		LastAccess
+		um.ID,
+		um.Email,
+		um.Uploaded,
+		um.Downloaded,
+		ui.JoinDate,
+		um.LastAccess,
+        COUNT(t.ID) AS Uploads
 	FROM users_main AS um
 		LEFT JOIN users_info AS ui ON ui.UserID = um.ID
+        LEFT JOIN torrents AS t ON t.UserID = um.ID
 	WHERE ui.Inviter = '$UserID'
 	ORDER BY $OrderBy $CurrentSort");
 
@@ -173,22 +178,16 @@ View::show_header(Lang::get('user', 'invites'), '', 'PageUserInvite');
                 <?  } ?>
             </form>
         </div>
-
-    <?
-    } elseif (!empty($LoggedUser['DisableInvites'])) { ?>
+    <? } elseif (!empty($LoggedUser['DisableInvites'])) { ?>
         <div class="BoxBody" style="text-align: center;">
             <strong class="u-colorWarning"><?= Lang::get('user', 'your_invites_have_been_disabled') ?></strong>
         </div>
-    <?
-    } elseif ($LoggedUser['RatioWatch'] || !$CanLeech) { ?>
+    <? } elseif ($LoggedUser['RatioWatch'] || !$CanLeech) { ?>
         <div class="BoxBody" style="text-align: center;">
             <strong class="u-colorWarning"><?= Lang::get('user', 'you_may_not_send_invites_while_on_ratio_watch_or') ?></strong>
         </div>
-    <?
-    }
-
-    if (!empty($Pending)) {
-    ?>
+    <? } ?>
+    <? if (!empty($Pending)) { ?>
         <h3 id="pending_invites_header"><?= Lang::get('user', 'pending_invites') ?></h3>
         <div class="BoxBody" id="pending_invites_container">
             <table class="TableInvite Table">
@@ -208,13 +207,10 @@ View::show_header(Lang::get('user', 'invites'), '', 'PageUserInvite');
                         <td class="Table-cell"><a href="register.php?invite=<?= $InviteKey ?>"><?= Lang::get('user', 'invite_link') ?></a></td>
                         <td class="Table-cell"><a href="user.php?action=delete_invite&amp;invite=<?= $InviteKey ?>&amp;auth=<?= $LoggedUser['AuthKey'] ?>" onclick="return confirm('<?= Lang::get('user', 'are_you_sure_you_want_to_delete_this_invite') ?>');"><?= Lang::get('user', 'delete_invite') ?></a></td>
                     </tr>
-                <?  } ?>
+                <? } ?>
             </table>
         </div>
-    <?
-    }
-
-    ?>
+    <? } ?>
     <h3 id="invite_table_header"><?= Lang::get('user', 'invitee_list') ?></h3>
     <div class="TableContainer" id="invite_table_container">
         <table class="Table TableInvite">
@@ -223,19 +219,21 @@ View::show_header(Lang::get('user', 'invites'), '', 'PageUserInvite');
                 <td class="Table-cell"><a href="user.php?action=invite&amp;order=email&amp;sort=<?= (($CurrentOrder == 'email') ? $NewSort : 'desc') ?>&amp;<?= $CurrentURL ?>"><?= Lang::get('user', 'email') ?></a></td>
                 <td class="Table-cell"><a href="user.php?action=invite&amp;order=joined&amp;sort=<?= (($CurrentOrder == 'joined') ? $NewSort : 'desc') ?>&amp;<?= $CurrentURL ?>"><?= Lang::get('user', 'joined') ?></a></td>
                 <td class="Table-cell"><a href="user.php?action=invite&amp;order=lastseen&amp;sort=<?= (($CurrentOrder == 'lastseen') ? $NewSort : 'desc') ?>&amp;<?= $CurrentURL ?>"><?= Lang::get('user', 'last_seen') ?></a></td>
+                <td class="Table-cell Table-cellRight"><a href="user.php?action=invite&amp;order=uploads&amp;sort=<?= (($CurrentOrder == 'uploads') ? $NewSort : 'desc') ?>&amp;<?= $CurrentURL ?>"><?= Lang::get('user', 'uploads') ?></a></td>
                 <td class="Table-cell Table-cellRight"><a href="user.php?action=invite&amp;order=uploaded&amp;sort=<?= (($CurrentOrder == 'uploaded') ? $NewSort : 'desc') ?>&amp;<?= $CurrentURL ?>"><?= Lang::get('user', 'upload') ?></a></td>
                 <td class="Table-cell Table-cellRight"><a href="user.php?action=invite&amp;order=downloaded&amp;sort=<?= (($CurrentOrder == 'downloaded') ? $NewSort : 'desc') ?>&amp;<?= $CurrentURL ?>"><?= Lang::get('global', 'download') ?></a></td>
                 <td class="Table-cell Table-cellRight"><a href="user.php?action=invite&amp;order=ratio&amp;sort=<?= (($CurrentOrder == 'ratio') ? $NewSort : 'desc') ?>&amp;<?= $CurrentURL ?>"><?= Lang::get('user', 'ratio') ?></a></td>
             </tr>
             <?
             foreach ($Invited as $User) {
-                list($ID, $Email, $Uploaded, $Downloaded, $JoinDate, $LastAccess) = $User;
+                list($ID, $Email, $Uploaded, $Downloaded, $JoinDate, $LastAccess, $Uploads) = $User;
             ?>
                 <tr class="Table-row">
                     <td class="Table-cell"><?= Users::format_username($ID, true, true, true, true) ?></td>
                     <td class="Table-cell"><?= display_str($Email) ?></td>
                     <td class="Table-cell"><?= time_diff($JoinDate, 1) ?></td>
                     <td class="Table-cell"><?= time_diff($LastAccess, 1); ?></td>
+                    <td class="Table-cell Table-cellRight"><?= number_format($Uploads) ?></td>
                     <td class="Table-cell Table-cellRight"><?= Format::get_size($Uploaded) ?></td>
                     <td class="Table-cell Table-cellRight"><?= Format::get_size($Downloaded) ?></td>
                     <td class="Table-cell Table-cellRight"><?= Format::get_ratio_html($Uploaded, $Downloaded) ?></td>

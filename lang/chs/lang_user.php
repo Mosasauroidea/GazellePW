@@ -547,6 +547,7 @@ $lang_user = array(
     'joined' => '加入时间',
     'last_seen' => '最近登录',
     'upload' => '上传',
+    'uploads' => '上传数',
     'username_invites_tree' => ' > 邀请 > 邀请树',
     'tree' => '邀请树',
     'this_tree_has_n_entries_n_branches_and_a_depth_of_n_1' => '该邀请树共有 ',

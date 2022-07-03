@@ -546,6 +546,7 @@ $lang_user = array(
   'joined' => 'Joined',
   'last_seen' => 'Last Seen',
   'upload' => 'Uploaded',
+  'uploads' => 'Uploads',
   'username_invites_tree' => ' > Invites > Tree',
   'tree' => 'Tree',
   'this_tree_has_n_entries_n_branches_and_a_depth_of_n_1' => 'This tree has ',
