@@ -1,5 +1,8 @@
 <?php
 $lang_upload = array(
+  'drop_area' => '拖动图片到这里',
+  'select_file' => '选择图片',
+  'copy' => '复制',
   'upload' => '发布',
   'upload_img' => '上传',
   'torrent_diff' => '本站禁止发布列表',
@@ -28,7 +31,6 @@ $lang_upload = array(
   'jinzhuan' => '禁转',
   'marks_warning' => '<strong class=\'u-colorWarning\'>转载资源不得使用「自购」和「自制」标记，否则将导致你被警告。</strong>',
   'image_host' => '图床',
-  'image_placeholder' => '支持粘贴图片地址、本地图片拖至此处或点击右侧上传按钮',
   'copied' => '已复制',
   'image_note' => '<h7>请遵守 <a href=\'wiki.php?action=article&id=27\' target=\'_blank\'>封面说明</a>，推荐使用右侧的上传按钮上传到官方图床。<span><strong class=\'u-colorWarning\'>注：</strong>请尽量完善封面，若因偷懒大量发布缺少封面的种子，将会导致你受处罚。</span></h7>',
   'freeleech' => '免费下载',

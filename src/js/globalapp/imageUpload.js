@@ -29,10 +29,10 @@ function imgUploadFillBBCode(containerId, loadingTarget) {
 }
 globalapp.imgUploadFillBBCode = imgUploadFillBBCode
 
-function imgCopy() {
-  if ($('#image').val()) {
-    $('#image').select()
-    document.execCommand('Copy')
+async function imgCopy() {
+  const value = $('#image').val()
+  if (value) {
+    await navigator.clipboard.writeText(value)
     alert(translation.get('copied'))
   }
 }

@@ -1,0 +1,29 @@
+.ImageHost {
+  display: flex;
+  flex-direcion: column;
+  align-items: center;
+  gap: var(--global-space-default);
+}
+
+.ImageHost-dropArea {
+  width: 500px;
+  height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: var(--Box-border);
+  border-style: dashed;
+  border-width: 5px;
+  borderradiuis: var(--global-borderRadius);
+}
+
+.ImageHost-Result {
+  display: flex;
+  gap: var(--global-space-default);
+}
+
+.ImageHost-Result .icon {
+  cursor: pointer;
+  width: 24px;
+  height: 24px;
+}

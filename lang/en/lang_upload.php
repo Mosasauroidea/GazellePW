@@ -1,5 +1,8 @@
 <?php
 $lang_upload = array(
+  'drop_area' => 'Drop an Image here',
+  'select_file' => 'Select an Image',
+  'copy' => 'Copy',
   'upload' => 'Upload',
   'upload_img' => 'Upload',
   'torrent_diff' => 'Do Not Upload List',
@@ -28,7 +31,6 @@ $lang_upload = array(
   'jinzhuan' => 'Exclusive',
   'marks_warning' => '<strong class=\'u-colorWarning\'>Selecting "Self-purchase" or "Self-rip" mark for a re-posted torrent may cause you get warned.</strong>',
   'image_host' => 'Image Host',
-  'image_placeholder' => 'Paste url, drag image file or click upload button',
   'copied' => 'Copied',
   'image_note' => '<h7>Please follow <a href=\'wiki.php?action=article&id=27\' target=\'_blank\'>The Cover Instructions</a>, we recommend you to use our <a href=\'http://www.dicimg.club\' target=\'_blank\'>official image host</a>. <span><strong class=\'u-colorWarning\'>Note:</strong> Please try your best to upload the cover. You will be punished if you upload too many torrents without covers.</span></h7>',
   'freeleech' => 'Freeleech',
