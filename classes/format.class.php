@@ -368,7 +368,9 @@ class Format {
      * @param int $Number
      * @return string formatted number.
      */
-    public static function human_format($Number) {
+    public static function human_format($Number, $Options = []) {
+        $Options = array_merge(['Precision' => 2], $Options);
+        $Percision = $Options['Percision'];
         $Steps = 0;
         while ($Number >= 1000) {
             $Steps++;
@@ -379,22 +381,22 @@ class Format {
                 return round($Number);
                 break;
             case 1:
-                return round($Number, 2) . 'k';
+                return round($Number, $Percision) . 'k';
                 break;
             case 2:
-                return round($Number, 2) . 'M';
+                return round($Number, $Percision) . 'M';
                 break;
             case 3:
-                return round($Number, 2) . 'G';
+                return round($Number, $Percision) . 'G';
                 break;
             case 4:
-                return round($Number, 2) . 'T';
+                return round($Number, $Percision) . 'T';
                 break;
             case 5:
-                return round($Number, 2) . 'P';
+                return round($Number, $Percision) . 'P';
                 break;
             default:
-                return round($Number, 2) . 'E + ' . $Steps * 3;
+                return round($Number, $Percision) . 'E + ' . $Steps * 3;
         }
     }
 

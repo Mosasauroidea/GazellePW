@@ -4,6 +4,9 @@
   align-items: center;
   flex-wrap: wrap;
 }
+.TableTop10User .Username {
+  flex-wrap: nowrap;
+}
 
 .Username-customTitle {
   display: inline-flex;

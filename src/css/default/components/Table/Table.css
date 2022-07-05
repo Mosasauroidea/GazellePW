@@ -110,7 +110,9 @@ Where
   min-width: 600px;
 }
 
+/* Top10 */
 .TableTop10User {
   min-width: 600px;
   font-family: var(--global-fontFamilyMonospace);
+  white-space: nowrap;
 }

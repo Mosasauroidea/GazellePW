@@ -161,16 +161,16 @@ View::show_header(Lang::get('top10', 'top_10_users'), '', 'PageTop10User');
                             <? if ($Item === 'numul') { ?>
                                 <td class="Table-cell Table-cellRight"><?= number_format($Detail['NumUploads']) ?></td>
                             <? } else if ($Item === 'bonus_points') { ?>
-                                <td class="Table-cell Table-cellRight"><?= number_format($Detail['BonusPoints']) ?></td>
+                                <td class="Table-cell Table-cellRight"><?= Format::human_format($Detail['BonusPoints'], ['Percision' => 0]) ?></td>
                             <? } else if ($Item === 'ul') { ?>
-                                <td class="Table-cell Table-cellRight"><?= Format::get_size($Detail['Uploaded']) ?></td>
+                                <td class="Table-cell Table-cellRight"><?= Format::get_size($Detail['Uploaded'], 0) ?></td>
                             <? } else if ($Item === 'dl') { ?>
-                                <td class="Table-cell Table-cellRight"><?= Format::get_size($Detail['Downloaded']) ?></td>
+                                <td class="Table-cell Table-cellRight"><?= Format::get_size($Detail['Downloaded'], 0) ?></td>
                             <? } else if ($Item === 'ratio') { ?>
                                 <td class="Table-cell Table-cellRight"><?= Format::get_ratio_html($Detail['Uploaded'], $Detail['Downloaded']) ?></td>
                             <? } ?>
                         <? } ?>
-                        <td class="Table-cell Table-cellRight"><?= $IsAnonymous ? '--' : time_diff($Detail['JoinDate']) ?></td>
+                        <td class="Table-cell Table-cellRight"><?= $IsAnonymous ? '--' : (new DateTime($Detail['JoinDate']))->format('Y'); ?></td>
                     </tr>
                 <? } ?>
             </table>
