@@ -94,16 +94,18 @@ $DB->set_query_id($Reports);
         $Reference = "reports.php?id=$ReportID#report$ReportID";
     ?>
         <div class="TableContainer pending_report_v1" id="report_<?= $ReportID ?>" style="margin-bottom: 1em;">
-            <table cellpadding="5" id="report_<?= $ReportID ?>">
-                <tr>
-                    <td><strong><a href="<?= $Reference ?>"><?= Lang::get('reports', 'report') ?> #<?= $ReportID ?></a></strong></td>
-                    <td>
+            <table class="Table" cellpadding="5" id="report_<?= $ReportID ?>">
+                <tr class="Table-rowHeader">
+                    <td class="Table-cell">
+                        <strong><a href="<?= $Reference ?>"><?= Lang::get('reports', 'report') ?> #<?= $ReportID ?></a></strong>
+                    </td>
+                    <td class="Table-cell">
                         <strong><?= $Type['title'] ?></strong><?= Lang::get('reports', 'sth_was_reported_by_user_sometime_before') ?><a href="user.php?id=<?= $SnitchID ?>"><?= $SnitchName ?></a><?= Lang::get('reports', 'sth_was_reported_by_user_sometime_after') ?><?= time_diff($ReportedTime) ?>
                         <a href="reports.php?action=compose&amp;to=<?= $SnitchID ?>&amp;reportid=<?= $ReportID ?>&amp;type=<?= $Short ?>&amp;thingid=<?= $ThingID ?>" class="brackets"><?= Lang::get('reports', 'contact') ?></a>
                     </td>
                 </tr>
-                <tr>
-                    <td class="center" colspan="2">
+                <tr class="Table-row">
+                    <td class="Table-cell center" colspan="2">
                         <strong>
                             <? switch ($Short) {
                                 case 'user':
@@ -197,15 +199,15 @@ $DB->set_query_id($Reports);
                         </strong>
                     </td>
                 </tr>
-                <tr>
-                    <td colspan="2">
+                <tr class="Table-row">
+                    <td class="Table-cell" colspan="2">
                         <div class="HtmlText">
                             <?= Text::full_format($Reason) ?>
                         </div>
                     </td>
                 </tr>
-                <tr>
-                    <td colspan="2">
+                <tr class="Table-row">
+                    <td class="Table-cell" colspan="2">
                         <? if ($ClaimerID == $LoggedUser['ID']) { ?>
                             <span id="claimed_<?= $ReportID ?>"><?= Lang::get('reports', 'claimed_by_before') ?><?= Users::format_username($ClaimerID, false, false, false, false) ?><?= Lang::get('reports', 'claimed_by_after') ?> <a href="#" onclick="unClaim(<?= $ReportID ?>); return false;" class="brackets"><?= Lang::get('reports', 'unclaim') ?></a></span>
                         <? } elseif ($ClaimerID) { ?>
@@ -224,8 +226,8 @@ $DB->set_query_id($Reports);
                     </td>
                 </tr>
                 <? if ($Status != 'Resolved') { ?>
-                    <tr>
-                        <td class="center" colspan="2">
+                    <tr class="Table-row">
+                        <td class="Table-cell center" colspan="2">
                             <form id="report_form_<?= $ReportID ?>" action="">
                                 <input type="hidden" name="reportid" value="<?= $ReportID ?>" />
                                 <input type="hidden" name="auth" value="<?= $LoggedUser['AuthKey'] ?>" />
@@ -233,28 +235,21 @@ $DB->set_query_id($Reports);
                             </form>
                         </td>
                     </tr>
-                <?
-                } else {
-                    $ResolverInfo = Users::user_info($ResolverID);
-                ?>
-                    <tr>
-                        <td colspan="2">
+                <?  } else { ?>
+                    <? $ResolverInfo = Users::user_info($ResolverID); ?>
+                    <tr class="Table-row">
+                        <td class="Table-cell" colspan="2">
                             <?= Lang::get('reports', 'resolved_by_before') ?><a href="users.php?id=<?= $ResolverID ?>"><?= $ResolverInfo['Username'] ?></a><?= Lang::get('reports', 'resolved_by_after') ?>
                         </td>
                     </tr>
-                <?          } ?>
+                <? } ?>
             </table>
         </div>
-    <?
-        $DB->set_query_id($Reports);
-    }
-    ?>
+        <? $DB->set_query_id($Reports); ?>
+    <? } ?>
     <div class="BodyNavLinks">
-        <?
-        echo $Pages;
-        ?>
+        <?= $Pages; ?>
     </div>
 </div>
 <?
 View::show_footer();
-?>
