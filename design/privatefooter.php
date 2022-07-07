@@ -69,6 +69,10 @@ if (!empty($NotificationSpans)) {
 <div id="extra5"><span></span></div>
 <div id="extra6"><span></span></div>
 
+<script>
+    window.DATA = <?= json_encode($GLOBALS['WINDOW_DATA']) ?>;
+</script>
+
 <script src="/deps/tooltipster.bundle.min.js"></script>
 <script src="/deps/tooltipster-discovery.min.js"></script>
 

@@ -323,7 +323,10 @@ View::show_header(Lang::get('index', 'index'), 'comments', 'PageHome');
                 }
                 $UserCount = (int)$UserCount;
                 ?>
-                <li class="SidebarList-item"><?= Lang::get('index', 'enable_users') ?>: <?= number_format($UserCount) ?>&nbsp;<a href="stats.php?action=users" class="brackets"><?= Lang::get('index', 'details') ?></a></li>
+                <li class="SidebarList-item">
+                    <?= Lang::get('index', 'enable_users') ?>:
+                    <?= number_format($UserCount) ?>
+                </li>
                 <?
                 if (($UserStats = $Cache->get_value('stats_users')) === false) {
                     $DB->query("
@@ -494,40 +497,36 @@ View::show_header(Lang::get('index', 'index'), 'comments', 'PageHome');
                             <?= time_diff($NewsTime); ?>
                         </div>
                         <div class="Post-headerActions">
-                            <a href="forums.php?action=viewthread&amp;threadid=<?= $NewsID ?>" class="brackets">
+                            <a class="brackets" href="forums.php?action=viewthread&amp;threadid=<?= $NewsID ?>">
                                 <?= Lang::get('index', 'discuss') ?>
                             </a>
                             -
-                            <a class="Post-toggleButton <?= $IsSticky ? 'is-sticky' : '' ?>" href="#" onclick="$('#newsbody<?= $NewsID ?>').gtoggle(); this.innerHTML = (this.innerHTML == '<?= Lang::get('global', 'hide') ?>' ? '<?= Lang::get('global', 'show') ?>' : '<?= Lang::get('global', 'hide') ?>'); return false;" class="brackets">
-                                <?= $IsSticky ? Lang::get('index', 'show') : Lang::get('index', 'hide')  ?>
+                            <a class="Post-toggleButton brackets <?= $IsSticky ? 'is-sticky' : '' ?>" href="#" onclick="$('#newsbody<?= $NewsID ?>').gtoggle(); this.innerHTML = (this.innerHTML == '<?= Lang::get('global', 'hide') ?>' ? '<?= Lang::get('global', 'show') ?>' : '<?= Lang::get('global', 'hide') ?>'); return false;">
+                                <?= Lang::get('index', 'show') ?>
                             </a>
                         </div>
                     </div>
-                    <div id="newsbody<?= $NewsID ?>" class="HtmlText PostArticle Post-body Box-body <?= $IsSticky ? 'hidden' : '' ?>">
+                    <div id="newsbody<?= $NewsID ?>" class="HtmlText PostArticle Post-body Box-body hidden">
                         <?= Text::full_format($Body) ?>
                     </div>
                 </div>
-            <?
+                <?
                 if (++$Count > ($NewsCount - 1)) {
                     break;
                 }
-            }
-            ?>
+                ?>
+            <? } ?>
             <em id="more_news">
-                <!--
-                        <span>
-                            <a href="#" onclick="news_ajax(event, 3, <?= $NewsCount ?>, <?= check_perms('admin_manage_news') ? 1 : 0; ?>, false); return false;"><?= Lang::get('index', 'add_more') ?></a>
-                            <?= Lang::get('index', 'period') ?>
-                        </span>
-                        -->
                 <a href="forums.php?action=viewforum&amp;forumid=7">
                     <?= Lang::get('index', 'browse_old_news') ?>
                 </a>
             </em>
         </div>
+        <div class="Home-stats BoxBody" id="root-stats"></div>
     </div>
 </div>
 <?
+Stats::torrentByDay();
 View::show_footer(array('disclaimer' => true), 'home.js');
 
 function contest() {

@@ -135,4 +135,9 @@ export default {
     response_deleted: 'Response successfully deleted.',
     assign_assigned: 'Conversation successfully assigned.',
   },
+
+  stats: {
+    torrentByDay: 'Torrent Daily Uploads',
+    torrentByMonth: 'Torrent Monthly Uploads',
+  },
 }

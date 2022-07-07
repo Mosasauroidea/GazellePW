@@ -1,5 +1,6 @@
 <?php
 $lang_stats = array(
+  'stats' => 'Stats',
   'detailed_user_statistics' => 'Detailed User Statistics',
   'torrent_stats' => 'Torrent Stats',
   'user_flow' => 'User Flow',

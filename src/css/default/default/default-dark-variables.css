@@ -130,6 +130,11 @@
     /* Progress */
     --Progress-bar-background: #111;
     --Progress-value-background: #323232;
+
+    /* Chart */
+    --Chart-gridLine: #434c56;
+    --Chart-axisText: #768390;
+    --Chart-axisLine: #434c56;
   }
 }
 

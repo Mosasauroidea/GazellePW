@@ -230,6 +230,19 @@
   --Progress-bar-background: rgba(0, 0, 0, 0.05);
   --Progress-value-background: rgba(122, 188, 255, 0.3);
 
+  /* Chart */
+  --Chart-color0: rgb(232, 193, 160);
+  --Chart-color1: rgb(244, 117, 96);
+  --Chart-color2: rgb(241, 225, 91);
+  --Chart-color3: rgb(232, 168, 56);
+  --Chart-color4: rgb(97, 205, 187);
+  --Chart-color5: rgb(151, 227, 213);
+  --Chart-background: none;
+  --Chart-text: currentColor;
+  --Chart-gridLine: #d0d7de;
+  --Chart-axisText: #57606a;
+  --Chart-axisLine: #d0d7de;
+
   /* End */
   --global-zIndex-default: 10;
   --global-zIndex-dialog: 20;

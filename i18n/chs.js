@@ -125,4 +125,9 @@ export default {
     response_deleted: '成功删除回复',
     assign_assigned: '成功指定对话',
   },
+
+  stats: {
+    torrentByDay: '每日发种数',
+    torrentByMonth: '每月发种数',
+  },
 }

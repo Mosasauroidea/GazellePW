@@ -1,5 +1,6 @@
 <?php
 $lang_stats = array(
+  'stats' => '统计',
   'detailed_user_statistics' => '用户统计详情',
   'torrent_stats' => '种子统计',
   'user_flow' => '用户流动',

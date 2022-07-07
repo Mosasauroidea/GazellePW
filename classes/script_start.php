@@ -12,6 +12,8 @@
 
 /********************************************************/
 
+$WINDOW_DATA = [];
+
 require 'config.php'; //The config contains all site wide configuration information
 require 'const.php';
 

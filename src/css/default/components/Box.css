@@ -1,17 +1,10 @@
 /*
-Box
-  Box-header   # optional
+BoxBody          // box without header
+Box              // box with header
+  Box-header 
   Box-body
 */
 
-.Box {
-  background: var(--Box-background);
-  color: var(--Box-color);
-  border: var(--Box-border);
-  border-radius: var(--global-borderRadius);
-}
-
-/* TODO: move .BoxBody to .Box .Box-body */
 .BoxBody {
   background: var(--Box-background);
   color: var(--Box-color);
@@ -20,6 +13,13 @@ Box
   padding: var(--global-space-default);
   word-break: break-word;
   word-wrap: break-word;
+}
+
+.Box {
+  background: var(--Box-background);
+  color: var(--Box-color);
+  border: var(--Box-border);
+  border-radius: var(--global-borderRadius);
 }
 
 .Box-header {

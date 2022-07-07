@@ -1,0 +1,70 @@
+@import '../../forked/highcharts.css';
+
+.ChartStat {
+  height: 300px;
+}
+
+/* global */
+.highcharts-root text {
+  stroke: none;
+  fill: var(--Chart-text);
+}
+.highcharts-background {
+  fill: var(--Chart-background);
+}
+
+/* colors */
+.highcharts-color-0 {
+  fill: var(--Chart-color0);
+  stroke: var(--Chart-color0);
+}
+.highcharts-color-1 {
+  fill: var(--Chart-color1);
+  stroke: var(--Chart-color1);
+}
+.highcharts-color-2 {
+  fill: var(--Chart-color2);
+  stroke: var(--Chart-color2);
+}
+.highcharts-color-3 {
+  fill: var(--Chart-color3);
+  stroke: var(--Chart-color3);
+}
+.highcharts-color-4 {
+  fill: var(--Chart-color4);
+  stroke: var(--Chart-color4);
+}
+.highcharts-color-5 {
+  fill: var(--Chart-color5);
+  stroke: var(--Chart-color5);
+}
+
+/* title */
+.highcharts-title {
+  font-size: 1.5em;
+}
+.highcharts-subtitle {
+  opacity: 0.8;
+}
+
+/* axis */
+.highcharts-axis-line {
+  stroke: var(--Chart-axisLine);
+}
+.highcharts-tick {
+  stroke: var(--Chart-axisLine);
+}
+.highcharts-axis-labels text {
+  fill: var(--Chart-axisText);
+}
+
+/* grid */
+.highcharts-grid-line {
+  stroke: var(--Chart-gridLine);
+}
+
+/* tooltip */
+.highcharts-tooltip-box {
+  stroke: var(--Overlay-borderColor);
+  fill: var(--Overlay-backgroundColor);
+}
