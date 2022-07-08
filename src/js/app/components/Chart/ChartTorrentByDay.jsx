@@ -10,6 +10,7 @@ export const ChartTorrentByDay = () => {
     series: [
       {
         data: window.DATA['statsTorrentByDay'].map((v) => ({
+          date: v.date,
           x: new Date(v.date).getTime(),
           y: v.uploads,
         })),

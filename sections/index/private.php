@@ -522,7 +522,14 @@ View::show_header(Lang::get('index', 'index'), 'comments', 'PageHome');
                 </a>
             </em>
         </div>
-        <div class="Home-stats BoxBody" id="root-stats"></div>
+        <div class="Home-stats Box">
+            <div class="Box-header">
+                <!-- <a href="/stats.php"> -->
+                <?= Lang::get('index', 'stats') ?>
+                <!-- </a> -->
+            </div>
+            <div class="Box-body" id="root-stats"></div>
+        </div>
     </div>
 </div>
 <?

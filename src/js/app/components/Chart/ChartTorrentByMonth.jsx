@@ -9,17 +9,26 @@ export const ChartTorrentByMonth = () => {
     },
     series: [
       {
-        name: '1',
-        data: window.DATA['ChartTorrentByMonth'].map((v, i) => ({
-          x: i,
-          y: v.in,
+        data: window.DATA['statsTorrentByMonth'].map((v, i) => ({
+          date: v.date,
+          x: new Date(v.date).getTime(),
+          y: v.uploads,
         })),
+        dataLabels: { enabled: true },
       },
     ],
+    xAxis: {
+      type: 'datetime',
+      dateTimeLabelFormats: {
+        month: '%Y-%m',
+      },
+      tickInterval: 30 * 24 * 3600 * 1000,
+    },
   })
   return (
-    <div style={{ height: 300 }}>
-      <Chart options={options} />
-    </div>
+    <Chart
+      options={options}
+      containerProps={{ className: 'ChartStat ChartTorrentByMonth' }}
+    />
   )
 }
