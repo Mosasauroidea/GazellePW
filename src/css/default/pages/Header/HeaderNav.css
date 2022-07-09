@@ -38,7 +38,7 @@ HeaderNav
   font-size: var(--global-fontSize-lg);
 }
 @media (max-width: 768px) {
-  .HeaderNavList-item {
+  [data-lang='en'] .HeaderNavList-item {
     text-align: left;
   }
 }
