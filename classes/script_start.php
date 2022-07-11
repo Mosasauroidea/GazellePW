@@ -71,6 +71,7 @@ require(SERVER_ROOT . '/classes/paranoia.class.php'); //Require the paranoia che
 require(SERVER_ROOT . '/classes/regex.php');
 require(SERVER_ROOT . '/classes/util.php');
 require(SERVER_ROOT . '/classes/vite.php');
+require(SERVER_ROOT . '/app/Torrent/TorrentSlot.php');
 
 $Debug = new DEBUG;
 $Debug->handle_errors();

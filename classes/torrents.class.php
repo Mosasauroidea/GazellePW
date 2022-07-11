@@ -2,6 +2,7 @@
 
 use Gazelle\Torrent\EditionType;
 use Gazelle\Torrent\EditionInfo;
+use Gazelle\Torrent\TorrentSlot;
 
 class Torrents {
     const FILELIST_DELIM = 0xF7; // Hex for &divide; Must be the same as phrase_boundary in sphinx.conf!
@@ -1063,10 +1064,13 @@ WHERE ud.TorrentID=? AND ui.NotifyOnDeleteDownloaded='1' AND ud.UserID NOT IN ({
         $Resolution = $Data['Resolution'];
         $Container = $Data['Container'];
         $Processing = in_array($Data['Processing'], ['---', 'Encode']) ? '' : $Data['Processing'];
-        if ($Option['SettingTorrentTitle']['SameWidth']) {
+        if ($Option['SettingTorrentTitle']['Alternative']) {
             $Codec = str_pad($Data['Codec'], 5, ' ', STR_PAD_RIGHT);
             $Source = str_pad($Data['Source'], 7, ' ', STR_PAD_RIGHT);
-            $Resolution = str_pad($Data['Resolution'], 5, ' ', STR_PAD_RIGHT);
+            $Edition = self::get_edition($Resolution, $Data['RemasterTitle'], $Data['RemasterCustomTitle'], $Data['NotMainMovie']);
+            if (!in_array($Edition, ['extra_definition', '3d'])) {
+                $Resolution = '';
+            }
             $Container = str_pad($Data['Container'], 4, ' ', STR_PAD_RIGHT);
             $Processing = str_pad($Processing ?: 'Encode', 6, ' ', STR_PAD_RIGHT);
         }
@@ -1101,6 +1105,10 @@ WHERE ud.TorrentID=? AND ui.NotifyOnDeleteDownloaded='1' AND ud.UserID NOT IN ({
             }
             if ($Item == 'Processing' && !empty($Processing)) {
                 if ($Style) {
+                    if ($Option['SettingTorrentTitle']['Alternative']) {
+                        $Slot = TorrentSlot::slot_name($Data['Slot']);
+                        $Processing = icon("Torrent/slot_${Slot}");
+                    }
                     $Info[] = "<span class='TorrentTitle-item processing'>" . $Processing . "</span>";
                 } else {
                     $Info[] = $Processing;
@@ -1791,7 +1799,7 @@ WHERE ud.TorrentID=? AND ui.NotifyOnDeleteDownloaded='1' AND ud.UserID NOT IN ({
         $lastEdition = self::get_edition($LastResolution, $LastRemasterTitle, $LastRemasterCustomTitle, $LastNotMain);
         $nextEdition = self::get_edition($Resolution, $RemasterTitle, $RemasterCustomTitle, $NotMain);
         if ($lastEdition != $nextEdition) {
-            return Lang::get('torrents', $nextEdition);
+            return Lang::get('torrents', $nextEdition, false, ['DefaultValue' => $nextEdition]);
         }
         return false;
     }
@@ -1817,12 +1825,16 @@ WHERE ud.TorrentID=? AND ui.NotifyOnDeleteDownloaded='1' AND ud.UserID NOT IN ({
     }
 
     public static function get_edition($Resolution, $RemasterTitle, $RemasterCustomTitle, $NotMain) {
-        global $HighDefinition, $StandardDefinition, $UltraDefinition;
+        global $HighDefinition, $StandardDefinition, $UltraDefinition, $LoggedUser;
+        $SettingTorrentTitle = $LoggedUser['SettingTorrentTitle'];
         if ($NotMain) {
             return "extra_definition";
         }
         if (self::is_3d($RemasterTitle)) {
             return "3d";
+        }
+        if ($SettingTorrentTitle['Alternative']) {
+            return $Resolution;
         }
         if (in_array($Resolution, $StandardDefinition)) {
             return "group_standard_resolution";

@@ -1,6 +1,7 @@
 <?
 
 use Gazelle\Manager\Donation;
+use Gazelle\Torrent\TorrentSlotType;
 
 $UserID = $_REQUEST['userid'];
 if (!is_number($UserID)) {
@@ -249,10 +250,10 @@ echo $Val->GenerateJS('userform');
                         <td class="Form-items">
                             <div>
                                 <div class="Checkbox">
-                                    <? $Checked = $SettingTorrentTitle['SameWidth'] ? 'checked' : '' ?>
-                                    <input class="Input" type="checkbox" name="settingTorrentTitleSameWidth" id="same_width" <?= $Checked ?> />
+                                    <? $Checked = $SettingTorrentTitle['Alternative'] ? 'checked' : '' ?>
+                                    <input class="Input" type="checkbox" name="settingTorrentTitleAlternative" id="same_width" <?= $Checked ?> />
                                     <label class="Checkbox-label" for="same_width">
-                                        <?= Lang::get('user', 'SettingSameWidth') ?>
+                                        <?= Lang::get('user', 'SettingAlternative') ?>
                                     </label>
                                 </div>
                                 <div class="Checkbox">
@@ -278,17 +279,20 @@ echo $Val->GenerateJS('userform');
                                 </div>
                             <? } ?>
                             <?
-                            $TableTorrentClass = $SettingTorrentTitle['SameWidth'] ? 'is-sameWidth' : '';
+                            $TableTorrentClass = $SettingTorrentTitle['Alternative'] ? 'is-alternative' : '';
                             ?>
                             <div class="TorrentTitle-previews TableTorrent TableTorrent--preview <?= $TableTorrentClass ?>">
                                 <?
                                 $Previews = [
-                                    ['Codec' => 'x265', 'Source' => 'WEB', 'Resolution' => '720p', 'Container' => 'MKV', 'Processing' => 'Encode', 'ReleaseGroup' => 'HANDJOB'],
-                                    ['Codec' => 'x265', 'Source' => 'Blu-ray', 'Resolution' => '720p', 'Container' => 'MKV', 'Processing' => 'Remux',  'ReleaseGroup' => 'MZABI'],
-                                    ['Codec' => 'x265', 'Source' => 'Blu-ray', 'Resolution' => '720p', 'Container' => 'm2ts', 'Processing' => 'BD50', 'ReleaseGroup' => 'Geek'],
-                                    ['Codec' => 'x265', 'Source' => 'WEB', 'Resolution' => '2160p', 'Container' => 'MKV', 'Processing' => 'Encode'],
-                                    ['Codec' => 'x265', 'Source' => 'Blu-ray', 'Resolution' => '2160p', 'Container' => 'MKV', 'Processing' => 'Remux'],
-                                    ['Codec' => 'x265', 'Source' => 'Blu-ray', 'Resolution' => '2160p', 'Container' => 'm2ts', 'Processing' => 'BD50'],
+                                    ['Codec' => 'x265', 'Source' => 'WEB', 'Resolution' => '720p', 'Container' => 'MKV', 'Processing' => 'Encode', 'Slot' => TorrentSlotType::EnglishQuality, 'RemasterTitle' => 'dolby_vision / dolby_atmos / masters_of_cinema', 'ReleaseGroup' => 'HANDJOB'],
+                                    ['Codec' => 'x265', 'Source' => 'WEB', 'Resolution' => '720p', 'Container' => 'MKV', 'Processing' => 'Encode', 'Slot' => TorrentSlotType::ChineseQuality, 'RemasterTitle' => 'the_criterion_collection', 'ReleaseGroup' => 'HANDJOB'],
+                                    ['Codec' => 'x265', 'Source' => 'WEB', 'Resolution' => '720p', 'Container' => 'MKV', 'Processing' => 'Encode', 'Slot' => TorrentSlotType::Feature, 'RemasterTitle' => 'warner_archive_collection', 'ReleaseGroup' => 'HANDJOB'],
+                                    ['Codec' => 'x265', 'Source' => 'Blu-ray', 'Resolution' => '720p', 'Container' => 'MKV', 'Processing' => 'Remux', 'Slot' => TorrentSlotType::Remux, 'ReleaseGroup' => 'MZABI'],
+                                    ['Codec' => 'x265', 'Source' => 'Blu-ray', 'Resolution' => '720p', 'Container' => 'm2ts', 'Processing' => 'BD50', 'Slot' => TorrentSlotType::DIY,  'ReleaseGroup' => 'Geek'],
+                                    ['Codec' => 'x265', 'Source' => 'Blu-ray', 'Resolution' => '720p', 'Container' => 'm2ts', 'Processing' => 'BD50', 'Slot' => TorrentSlotType::Untouched, 'ReleaseGroup' => 'Geek'],
+                                    ['Codec' => 'x265', 'Source' => 'WEB', 'Resolution' => '2160p', 'Container' => 'MKV', 'Processing' => 'Encode', 'Slot' => TorrentSlotType::ChineseQuality],
+                                    ['Codec' => 'x265', 'Source' => 'Blu-ray', 'Resolution' => '2160p', 'Container' => 'MKV', 'Processing' => 'Remux', 'Slot' => TorrentSlotType::Remux],
+                                    ['Codec' => 'x265', 'Source' => 'Blu-ray', 'Resolution' => '2160p', 'Container' => 'm2ts', 'Processing' => 'BD50', 'Slot' => TorrentSlotType::Untouched],
                                 ];
                                 ?>
                                 <? foreach ($Previews as $Preview) { ?>

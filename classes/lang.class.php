@@ -5,7 +5,8 @@ class Lang {
     const EN = 'en';
     const CHS = 'chs';
     const LANGS = [self::EN, self::CHS];
-    public static function get($Page, $Label = false, $Lang = false, ...$Interpolations) {
+    public static function get($Page, $Label = false, $Lang = false, $Option = [], ...$Interpolations) {
+        $Option = array_merge(['DefaultValue' => null], $Option);
         if (!isset(self::$Lang[$Lang . $Page])) {
             include(self::getLangfilePath($Page, $Lang));
             $LangArray = "lang_$Page";
@@ -15,7 +16,7 @@ class Lang {
             return self::$Lang[$Lang . $Page];
         }
         if (!isset(self::$Lang[$Lang . $Page][$Label])) {
-            return '$lang_' . $Page . "['$Label']";
+            return $Option['DefaultValue'] ?: '$lang_' . $Page . "['$Label']";
         }
         if (!empty($Interpolations)) {
             $Tmp = sprintf(self::$Lang[$Lang . $Page][$Label], ...$Interpolations);

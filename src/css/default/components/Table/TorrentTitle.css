@@ -11,7 +11,7 @@ TorrentTitle TorrentTitle--standalone   # settings - torrent title
   column-gap: 5px;
   line-height: 1.2;
 }
-.TableTorrent.is-sameWidth .TorrentTitle {
+.TableTorrent.is-alternative .TorrentTitle {
   font-family: var(--global-fontFamilyMonospace);
 }
 

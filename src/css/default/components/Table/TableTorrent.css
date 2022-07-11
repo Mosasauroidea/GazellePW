@@ -34,7 +34,7 @@ cell
   min-width: 760px;
   font-size: var(--TableTorrent-fontSize);
 }
-.TableTorrent.is-sameWidth {
+.TableTorrent.is-alternative {
   font-size: 12px;
 }
 

@@ -192,7 +192,7 @@ class TorrentTableView {
         } else {
             $this->WithCover = false;
         }
-        $this->TableTorrentClass = G::$LoggedUser['SettingTorrentTitle']['SameWidth'] ? 'is-sameWidth' : '';
+        $this->TableTorrentClass = G::$LoggedUser['SettingTorrentTitle']['Alternative'] ? 'is-alternative' : '';
     }
     public function with_detail($View = '', DetailOption $DetailOption = null): ?TorrentTableView {
         $this->DetailView = $View;

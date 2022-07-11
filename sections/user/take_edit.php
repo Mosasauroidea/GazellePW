@@ -57,7 +57,7 @@ if ($Err) {
 // SettingTorrentTitle
 $SettingTorrentTitle = [];
 $SettingTorrentTitle['ReleaseGroup'] = (bool) $_POST['settingTorrentTitleReleaseGroup'];
-$SettingTorrentTitle['SameWidth'] = (bool) $_POST['settingTorrentTitleSameWidth'];
+$SettingTorrentTitle['Alternative'] = (bool) $_POST['settingTorrentTitleAlternative'];
 $SettingTorrentTitle['Items'] = $_POST['settingTorrentTitleItems'] ? explode(',', $_POST['settingTorrentTitleItems']) : null;
 
 // Begin building $Paranoia

@@ -536,7 +536,7 @@ View::show_header($Title, 'browse,comments,torrent,bbcode,recommend,cover_art,su
         <div class="LayoutMainSidebar-main u-tab">
             <div class="TableContainer u-tabItem u-tabItemTorrent" style="<?= $View == 'slot' ? "display:none" : "" ?>">
                 <?
-                $TableTorrentClass = G::$LoggedUser['SettingTorrentTitle']['SameWidth'] ? 'is-sameWidth' : '';
+                $TableTorrentClass = G::$LoggedUser['SettingTorrentTitle']['Alternative'] ? 'is-alternative' : '';
                 ?>
                 <table class="TableTorrent Table has-slots <?= $TableTorrentClass ?>" header-large last-tr-hidden id="torrent_details">
                     <tr class="Table-rowHeader">
@@ -576,15 +576,16 @@ View::show_header($Title, 'browse,comments,torrent,bbcode,recommend,cover_art,su
                     <tr class="TableTorrent-rowSlotFilter Table-row id=" slot_filter_container">
                         <td class="TableTorrent-cellSlotFilter Table-cell" colspan="5">
                             <div class="TableTorrent-slotFilters" id="slot_filter">
-                                <a href="#" class="TableTorrent-slotFilterButton" data-slot="quality" onclick='globalapp.filterSlot(event, ["quality", "en_quality", "cn_quality", "feature"])' data-tooltip="<?= Lang::get('torrents', 'all_quality_slot') ?>"><?= icon('Table/quality') ?></a>
-                                <a href="#" class="TableTorrent-slotFilterButton" data-slot="cn_quality" onclick='globalapp.filterSlot(event, ["cn_quality"])' data-tooltip="<?= Lang::get('torrents', 'cn_quality_slot') ?>"><?= icon('Table/cn-quality') ?></a>
-                                <a href="#" class="TableTorrent-slotFilterButton" data-slot="en_quality" onclick='globalapp.filterSlot(event, ["en_quality"])' data-tooltip="<?= Lang::get('torrents', 'en_quality_slot') ?>"><?= icon('Table/en-quality') ?></a>
-                                <a href="#" class="TableTorrent-slotFilterButton" data-slot="retention" onclick='globalapp.filterSlot(event, ["retention"])' data-tooltip="<?= Lang::get('torrents', 'retention_slot') ?>"><?= icon('Table/retention') ?></a>
-                                <a href="#" class="TableTorrent-slotFilterButton" data-slot="feature" onclick='globalapp.filterSlot(event, ["feature"])' data-tooltip="<?= Lang::get('torrents', 'feature_slot') ?>"><?= icon('Table/feature') ?></a>
-                                <a href="#" class="TableTorrent-slotFilterButton" data-slot="remux" onclick='globalapp.filterSlot(event, ["remux"])' data-tooltip="<?= Lang::get('torrents', 'remux_slot') ?>"><?= icon('Table/remux') ?></a>
-                                <a href="#" class="TableTorrent-slotFilterButton" data-slot="untouched" onclick='globalapp.filterSlot(event, ["untouched"])' data-tooltip="<?= Lang::get('torrents', 'untouched_slot') ?>"><?= icon('Table/untouched') ?></a>
-                                <a href="#" class="TableTorrent-slotFilterButton" data-slot="diy" onclick='globalapp.filterSlot(event, ["diy"])' data-tooltip="<?= Lang::get('torrents', 'diy_slot') ?>"><?= icon('Table/diy') ?></a>
-                                <a href="#" class="TableTorrent-slotFilterButton" data-slot="clear" onclick='globalapp.filterSlot(event, [])' style="visibility: hidden;" data-tooltip="<?= Lang::get('torrents', 'clear_slot') ?>"><?= icon('Table/clear') ?></a>
+                                <!-- same line to prevent space -->
+                                <a href="#" class="TableTorrent-slotFilterButton" data-slot="quality" onclick='globalapp.filterSlot(event, ["quality", "en_quality", "cn_quality", "feature"])' data-tooltip="<?= Lang::get('torrents', 'all_quality_slot') ?>"><?= icon('Torrent/slot_quality') ?></a>
+                                <a href="#" class="TableTorrent-slotFilterButton" data-slot="cn_quality" onclick='globalapp.filterSlot(event, ["cn_quality"])' data-tooltip="<?= Lang::get('torrents', 'cn_quality_slot') ?>"><?= icon('Torrent/slot_cn_quality') ?></a>
+                                <a href="#" class="TableTorrent-slotFilterButton" data-slot="en_quality" onclick='globalapp.filterSlot(event, ["en_quality"])' data-tooltip="<?= Lang::get('torrents', 'en_quality_slot') ?>"><?= icon('Torrent/slot_en_quality') ?></a>
+                                <a href="#" class="TableTorrent-slotFilterButton" data-slot="retention" onclick='globalapp.filterSlot(event, ["retention"])' data-tooltip="<?= Lang::get('torrents', 'retention_slot') ?>"><?= icon('Torrent/slot_retention') ?></a>
+                                <a href="#" class="TableTorrent-slotFilterButton" data-slot="feature" onclick='globalapp.filterSlot(event, ["feature"])' data-tooltip="<?= Lang::get('torrents', 'feature_slot') ?>"><?= icon('Torrent/slot_feature') ?></a>
+                                <a href="#" class="TableTorrent-slotFilterButton" data-slot="remux" onclick='globalapp.filterSlot(event, ["remux"])' data-tooltip="<?= Lang::get('torrents', 'remux_slot') ?>"><?= icon('Torrent/slot_remux') ?></a>
+                                <a href="#" class="TableTorrent-slotFilterButton" data-slot="untouched" onclick='globalapp.filterSlot(event, ["untouched"])' data-tooltip="<?= Lang::get('torrents', 'untouched_slot') ?>"><?= icon('Torrent/slot_untouched') ?></a>
+                                <a href="#" class="TableTorrent-slotFilterButton" data-slot="diy" onclick='globalapp.filterSlot(event, ["diy"])' data-tooltip="<?= Lang::get('torrents', 'diy_slot') ?>"><?= icon('Torrent/slot_diy') ?></a>
+                                <a href="#" class="TableTorrent-slotFilterButton" data-slot="clear" onclick='globalapp.filterSlot(event, [])' style="visibility: hidden;" data-tooltip="<?= Lang::get('torrents', 'clear_slot') ?>"><?= icon('Torrent/slot_clear') ?></a>
                             </div>
                         </td>
                     </tr>

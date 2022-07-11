@@ -345,7 +345,6 @@ $lang_torrents = array(
     'group_ultra_high_resolution' => "Ultra High Definition",
     '3d' => "3D",
     'extra_definition' => "Other",
-
     'movie_votes' => 'votes',
     'missing' => 'Missing',
     'request_number' => 'Request number',
