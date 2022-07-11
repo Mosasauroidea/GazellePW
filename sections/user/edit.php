@@ -105,11 +105,6 @@ echo $Val->GenerateJS('userform');
                             </a>
                         </li>
                         <li class="SidebarList-item">
-                            <a class="Link" href="#site_language_settings" data-tooltip="<?= Lang::get('user', 'st_language_title') ?>">
-                                <?= Lang::get('user', 'st_language') ?>
-                            </a>
-                        </li>
-                        <li class="SidebarList-item">
                             <a class="Link" href="#torrent_settings" data-tooltip="<?= Lang::get('user', 'st_torrents_title') ?>">
                                 <?= Lang::get('user', 'st_torrents') ?>
                             </a>
@@ -238,28 +233,6 @@ echo $Val->GenerateJS('userform');
                             </td>
                         </tr>
                     <?  } ?>
-                </table>
-                <table class="Form-rowList" variant="header" id="site_language_settings">
-                    <tr class="Form-rowHeader">
-                        <td class="Form-title" colspan="2">
-                            <?= Lang::get('user', 'st_language') ?>
-                        </td>
-                    </tr>
-                    <tr class="Form-row" id="site_lang_tr">
-                        <td class="Form-label" data-tooltip=""><strong><?= Lang::get('user', 'st_language_head') ?></strong></td>
-                        <td class="Form-inputs">
-                            <select class="Input" name="language" id="language">
-                                <option class="Select-option" value="chs" <?= $Lang == 'chs' ? ' selected="selected"' : '' ?>><?= Lang::get('user', 'st_chinese') ?></option>
-                                <?
-                                if (true) {
-                                ?>
-                                    <option class="Select-option" value="en" <?= $Lang == 'en' ? ' selected="selected"' : '' ?>><?= Lang::get('user', 'st_english') ?></option>
-                                <?
-                                }
-                                ?>
-                            </select>
-                        </td>
-                    </tr>
                 </table>
                 <table class="Form-rowList" variant="header" id="torrent_settings">
                     <tr class="Form-rowHeader">

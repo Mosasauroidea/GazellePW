@@ -31,6 +31,10 @@ HeaderQuickAction
     justify-content: flex-end;
   }
 }
+.HeaderQuickAction-item .icon {
+  width: 24px;
+  height: 24px;
+}
 
 /* HeaderQuickAction-iconLink */
 .HeaderQuickAction-iconLink {

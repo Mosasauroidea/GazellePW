@@ -4,6 +4,7 @@ class Lang {
     const DEFAULT_LANG = 'chs';
     const EN = 'en';
     const CHS = 'chs';
+    const LANGS = [self::EN, self::CHS];
     public static function get($Page, $Label = false, $Lang = false, ...$Interpolations) {
         if (!isset(self::$Lang[$Lang . $Page])) {
             include(self::getLangfilePath($Page, $Lang));

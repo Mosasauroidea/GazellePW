@@ -4,7 +4,7 @@ Header - Profile
 Dropdown is-open
 	Dropdown-trigger
 	DropdownMenu Overlay
-		DropdownMenu-item
+		<a|button|input[type="submit"] class="DropdownMenu-item">
 */
 
 .Dropdown {
@@ -36,6 +36,12 @@ Dropdown is-open
   padding: var(--global-space-sm) var(--global-space-lg);
   text-overflow: ellipsis;
   white-space: nowrap;
+  /* override button */
+  border: none;
+  background: none;
+  /* override input[type="submit"] */
+  width: 100%;
+  text-align: left;
 }
 
 .DropdownMenu-item:hover {

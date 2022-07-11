@@ -4,11 +4,13 @@ use Gazelle\Manager\Donation;
 
 define('FOOTER_FILE', SERVER_ROOT . '/design/privatefooter.php');
 
+global $LoggedUser;
 $donation = new Donation();
+$CurrentLang = Lang::getUserLang($LoggedUser['ID']);
 
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html data-theme="<?= G::$LoggedUser['StyleTheme'] ?>" data-lang="<?= Lang::getUserLang(G::$LoggedUser['ID']) ?>" xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<html data-theme="<?= G::$LoggedUser['StyleTheme'] ?>" data-lang="<?= $CurrentLang  ?>" xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 
 <head>
     <title><?= display_str($PageTitle) ?></title>
@@ -481,6 +483,22 @@ if ($_REQUEST['action']) {
                             <?= icon('image-host') ?>
                         </a>
                     </li>
+                    <? if (IS_DEV) { ?>
+                        <li class="HeaderQuickAction-item is-language brackets Dropdown Dropdown-trigger" data-tooltip="<?= Lang::get('common', 'language') ?>">
+                            <a class="HeaderQuickAction-iconLink LinkHeader Link u-center u-heightFull">
+                                <?= icon('Common/language') ?>
+                            </a>
+                            <form action="/" method="post">
+                                <input type="hidden" name="action" value="change_language" />
+                                <input type="hidden" name="auth" value="<?= $LoggedUser['AuthKey'] ?>" />
+                                <div class="DropdownMenu Overlay">
+                                    <? foreach (Lang::LANGS as $Lang) { ?>
+                                        <input class="DropdownMenu-item is-lang<?= $Lang ?>" type="submit" name="language" value="<?= Lang::get('common', "lang_$Lang") ?>" />
+                                    <? } ?>
+                                </div>
+                            </form>
+                        </li>
+                    <? } ?>
                     <li class="HeaderQuickAction-item is-profile brackets Dropdown">
                         <div class="HeaderProfile">
                             <a class="HeaderProfile-nameLink LinkHeader Link u-center u-heightFull" id="header-username-value" data-value="<?= G::$LoggedUser['Username'] ?>" href="user.php?id=<?= G::$LoggedUser['ID'] ?>">
@@ -492,35 +510,34 @@ if ($_REQUEST['action']) {
                             </span>
                         </div>
                         <div class="DropdownMenu Overlay">
-                            <a class="DropdownMenu-item Link is-profile" href="user.php?id=<?= G::$LoggedUser['ID'] ?>"><?= Lang::get('global', 'profile') ?></a>
-                            <a class="DropdownMenu-item Link is-settings" href="user.php?action=edit&amp;userid=<?= G::$LoggedUser['ID'] ?>"><?= Lang::get('global', 'setting') ?></a>
-                            <a class="DropdownMenu-item Link is-inbox" href="<?= Inbox::get_inbox_link(); ?>"> <?= Lang::get('global', 'inbox') ?></a>
-                            <a class="DropdownMenu-item Link is-staffpm" href="staffpm.php"> <?= Lang::get('global', 'staffpm') ?></a>
+                            <a class="DropdownMenu-item is-profile" href="user.php?id=<?= G::$LoggedUser['ID'] ?>"><?= Lang::get('global', 'profile') ?></a>
+                            <a class="DropdownMenu-item is-settings" href="user.php?action=edit&amp;userid=<?= G::$LoggedUser['ID'] ?>"><?= Lang::get('global', 'setting') ?></a>
+                            <a class="DropdownMenu-item is-inbox" href="<?= Inbox::get_inbox_link(); ?>"> <?= Lang::get('global', 'inbox') ?></a>
+                            <a class="DropdownMenu-item is-staffpm" href="staffpm.php"> <?= Lang::get('global', 'staffpm') ?></a>
                             <?
                             if (ENABLE_BADGE) {
                             ?>
-                                <a class="DropdownMenu-item Link is-badges" href="badges.php"> <?= Lang::get('global', 'my_badges') ?></a>
+                                <a class="DropdownMenu-item is-badges" href="badges.php"> <?= Lang::get('global', 'my_badges') ?></a>
                             <?
                             }
                             ?>
-                            <a class="DropdownMenu-item Link is-uploaded" href="torrents.php?type=uploaded&amp;userid=<?= G::$LoggedUser['ID'] ?>"> <?= Lang::get('global', 'my_uploaded') ?></a>
-                            <a class="DropdownMenu-item Link is-bookmarks" href="bookmarks.php?type=torrents"> <?= Lang::get('global', 'my_bookmarks') ?></a>
-                            <? if (check_perms('site_torrents_notify')) { ?> <a class="DropdownMenu-item Link is-notify" href="user.php?action=notify"> <?= Lang::get('global', 'my_notify') ?></a> <?    } ?>
+                            <a class="DropdownMenu-item is-uploaded" href="torrents.php?type=uploaded&amp;userid=<?= G::$LoggedUser['ID'] ?>"> <?= Lang::get('global', 'my_uploaded') ?></a>
+                            <a class="DropdownMenu-item is-bookmarks" href="bookmarks.php?type=torrents"> <?= Lang::get('global', 'my_bookmarks') ?></a>
+                            <? if (check_perms('site_torrents_notify')) { ?> <a class="DropdownMenu-item is-notify" href="user.php?action=notify"> <?= Lang::get('global', 'my_notify') ?></a> <?    } ?>
                             <?
                             $ClassNames = $NewSubscriptions ? 'new-subscriptions' : '';
                             $ClassNames = trim($ClassNames . Format::add_class($PageID, array('userhistory', 'subscriptions'), 'active', false));
                             ?>
-                            <a class="DropdownMenu-item Link is-subscriptions <?= $ClassNames ?>" href="userhistory.php?action=subscriptions"> <?= Lang::get('global', 'my_subscriptions') ?></a>
-                            <a class="DropdownMenu-item Link is-comments" href="comments.php"> <?= Lang::get('global', 'my_comments') ?></a>
-                            <a class="DropdownMenu-item Link is-friends" href="friends.php"> <?= Lang::get('global', 'my_friends') ?></a>
-                            <a class="DropdownMenu-item Link is-missing" href="torrents.php?type=missing"> <?= Lang::get('global', 'missing') ?></a>
-                            <? if (isset(G::$LoggedUser['SSPAccess'])) { ?> <a class="DropdownMenu-item Link is-ssp" href="ssp.php"> <?= Lang::get('global', 'ssp') ?></a> <?  } ?>
-                            <a class="DropdownMenu-item Link is-logout" href="logout.php?auth=<?= G::$LoggedUser['AuthKey'] ?>"> <?= Lang::get('global', 'logout') ?></a>
+                            <a class="DropdownMenu-item is-subscriptions <?= $ClassNames ?>" href="userhistory.php?action=subscriptions"> <?= Lang::get('global', 'my_subscriptions') ?></a>
+                            <a class="DropdownMenu-item is-comments" href="comments.php"> <?= Lang::get('global', 'my_comments') ?></a>
+                            <a class="DropdownMenu-item is-friends" href="friends.php"> <?= Lang::get('global', 'my_friends') ?></a>
+                            <a class="DropdownMenu-item is-missing" href="torrents.php?type=missing"> <?= Lang::get('global', 'missing') ?></a>
+                            <? if (isset(G::$LoggedUser['SSPAccess'])) { ?> <a class="DropdownMenu-item is-ssp" href="ssp.php"> <?= Lang::get('global', 'ssp') ?></a> <?  } ?>
+                            <a class="DropdownMenu-item is-logout" href="logout.php?auth=<?= G::$LoggedUser['AuthKey'] ?>"> <?= Lang::get('global', 'logout') ?></a>
                         </div>
                     </li>
                 </ul>
             </div>
-
 
             <div class="HeaderLogo">
                 <a class="HeaderLogo-link" href="index.php"></a>

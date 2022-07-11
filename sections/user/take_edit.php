@@ -309,7 +309,6 @@ $Cache->update_row(false, array(
     'Paranoia' => $Paranoia
 ));
 $Cache->commit_transaction(0);
-$Cache->cache_value("lang_$UserID", $_POST['language']);
 
 $Cache->begin_transaction("user_info_heavy_$UserID");
 $Cache->update_row(false, array(
@@ -341,7 +340,6 @@ $SQL = "
 		i.NotifyOnDeleteSeeding = '$NotifyOnDeleteSeeding',
 		i.NotifyOnDeleteSnatched = '$NotifyOnDeleteSnatched',
 		i.NotifyOnDeleteDownloaded = '$NotifyOnDeleteDownloaded',
-		i.Lang = '" . db_string($_POST['language']) . "',
         i.SettingTorrentTitle = '" . db_string(json_encode($SettingTorrentTitle)) . "',
 		m.Email = '" . db_string($_POST['email']) . "',
 		m.IRCKey = '" . db_string($_POST['irckey']) . "',
@@ -361,7 +359,6 @@ if ($ResetPassword) {
 }
 
 if (isset($_POST['resetpasskey'])) {
-
     $UserInfo = Users::user_heavy_info($UserID);
     $OldPassKey = db_string($UserInfo['torrent_pass']);
     $NewPassKey = db_string(Users::make_secret());

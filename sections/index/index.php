@@ -4,6 +4,8 @@ if (isset($LoggedUser['ID'])) {
         include('private.php');
     } else {
         switch ($_REQUEST['action']) {
+            case 'change_language':
+                include('change_language.php');
             case 'poll':
                 include(SERVER_ROOT . '/sections/forums/poll_vote.php');
                 break;
