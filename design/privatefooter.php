@@ -37,6 +37,7 @@
 <? if (DEBUG_MODE || check_perms('site_debug')) { ?>
     <div class="LayoutPage-siteDebug">
         <?
+        $Debug->phpinfo_table();
         $Debug->perf_table();
         $Debug->flag_table();
         $Debug->error_table();

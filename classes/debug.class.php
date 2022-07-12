@@ -675,6 +675,13 @@ class DEBUG {
                 </tr>
             <?      } ?>
         </table>
+    <?
+    }
+
+
+    public function phpinfo_table() {
+    ?>
+        <div>PHP Version: <?= phpversion() ?></div>
 <?
     }
 }
