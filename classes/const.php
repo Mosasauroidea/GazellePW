@@ -199,3 +199,5 @@ define('HNR_INTERVAL', 14 * 24 * 3600);
 define('MAX_RANK', 6);
 define('MAX_SPECIAL_RANK', 5);
 define('DONOR_FORUM_RANK', 6);
+
+define('VERSION', @file_get_contents(SERVER_ROOT . '/VERSION'));
