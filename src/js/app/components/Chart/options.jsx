@@ -1,7 +1,4 @@
-export const optionsLineSingle = {
-  chart: {
-    type: 'spline',
-  },
+export const optionsSingle = {
   yAxis: {
     title: {
       text: null,

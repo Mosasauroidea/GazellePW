@@ -139,5 +139,6 @@ export default {
   stats: {
     torrentByDay: 'Torrent Daily Uploads',
     torrentByMonth: 'Torrent Monthly Uploads',
+    torrentByYear: 'Torrent Yearly Uploads',
   },
 }

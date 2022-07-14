@@ -31,7 +31,6 @@ echo $Val->GenerateJS('registerform');
                     <td class="table-left"><?= Lang::get('register', 'email') ?></td>
                     <td class="table-right">
                         <input class="Input" type="email" name="email" id="email" placeholder="Email" value="<?= (!empty($_REQUEST['email']) ? display_str($_REQUEST['email']) : (!empty($InviteEmail) ? display_str($InviteEmail) : '')) ?>" />
-                        <p class="note"><?= Lang::get('register', 'email_note') ?></p>
                     </td>
                 </tr>
                 <tr>

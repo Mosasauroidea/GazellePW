@@ -129,5 +129,6 @@ export default {
   stats: {
     torrentByDay: '每日发种数',
     torrentByMonth: '每月发种数',
+    torrentByYear: '每年发种数',
   },
 }

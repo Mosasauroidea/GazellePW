@@ -1,6 +1,11 @@
 import { render } from 'react-dom'
-import { ChartTorrentByMonth } from '#/app/components'
+import { ChartTorrentByMonth, ChartTorrentByYear } from '#/app/components'
 
-const StatsHome = () => <ChartTorrentByMonth />
+const StatsHome = () => (
+  <>
+    <ChartTorrentByMonth />
+    <ChartTorrentByYear />
+  </>
+)
 
 render(<StatsHome />, document.querySelector('#root'))

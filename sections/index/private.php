@@ -524,9 +524,13 @@ View::show_header(Lang::get('index', 'index'), 'comments', 'PageHome');
         </div>
         <div class="Home-stats Box">
             <div class="Box-header">
-                <!-- <a href="/stats.php"> -->
-                <?= Lang::get('index', 'stats') ?>
-                <!-- </a> -->
+                <? if (IS_DEV) { ?>
+                    <a href="/stats.php">
+                        <?= Lang::get('index', 'stats') ?>
+                    </a>
+                <? } else { ?>
+                    <?= Lang::get('index', 'stats') ?>
+                <? } ?>
             </div>
             <div class="Box-body" id="root-stats"></div>
         </div>

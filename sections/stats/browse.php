@@ -53,4 +53,7 @@ if (!$Data) {
 
 <?
 Stats::torrentByMonth();
+if (IS_DEV) {
+  Stats::torrentByYear();
+}
 View::show_footer([], 'stats/index');

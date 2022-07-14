@@ -1,9 +1,12 @@
 import { merge } from 'lodash'
 import { Chart } from '#/app/components'
-import { optionsLineSingle } from './optionsLineSingle'
+import { optionsSingle } from './options'
 
 export const ChartTorrentByMonth = () => {
-  const options = merge({}, optionsLineSingle, {
+  const options = merge({}, optionsSingle, {
+    chart: {
+      type: 'spline',
+    },
     title: {
       text: translation.get('stats.torrentByMonth'),
     },

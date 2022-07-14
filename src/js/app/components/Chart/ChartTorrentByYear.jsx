@@ -2,17 +2,21 @@ import { merge } from 'lodash'
 import { Chart } from '#/app/components'
 import { optionsSingle } from './options'
 
-export const ChartTorrentByDay = () => {
+export const ChartTorrentByYear = () => {
+  const data = window.DATA['statsTorrentByYear']
+  if (!data) {
+    return null
+  }
   const options = merge({}, optionsSingle, {
     chart: {
-      type: 'spline',
+      type: 'column',
     },
     title: {
-      text: translation.get('stats.torrentByDay'),
+      text: translation.get('stats.torrentByYear'),
     },
     series: [
       {
-        data: window.DATA['statsTorrentByDay'].map((v) => ({
+        data: data.map((v, i) => ({
           date: v.date,
           x: new Date(v.date).getTime(),
           y: v.uploads,
@@ -22,16 +26,12 @@ export const ChartTorrentByDay = () => {
     ],
     xAxis: {
       type: 'datetime',
-      dateTimeLabelFormats: {
-        day: '%m-%d',
-      },
-      tickInterval: 24 * 3600 * 1000,
     },
   })
   return (
     <Chart
       options={options}
-      containerProps={{ className: 'ChartStat ChartTorrentByDay' }}
+      containerProps={{ className: 'ChartStat ChartTorrentByYear' }}
     />
   )
 }
