@@ -52,7 +52,7 @@ if (!$Data) {
 <div id="root"></div>
 
 <?
-Stats::torrentByMonth();
+// Stats::torrentByMonth();
 if (IS_DEV) {
   Stats::torrentByYear();
 }

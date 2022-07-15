@@ -465,13 +465,13 @@ View::show_header(Lang::get('index', 'index'), 'comments', 'PageHome');
         <div class="Box">
             <div class="Social Box-header"><?= Lang::get('index', 'links') ?></div>
             <div class="Social Box-body">
-                <a target="_blank" href="feeds.php?feed=feed_news&amp;user=<?= G::$LoggedUser['ID'] ?>&amp;auth=<?= G::$LoggedUser['RSS_Auth'] ?>&amp;passkey=<?= G::$LoggedUser['torrent_pass'] ?>&amp;authkey=<?= G::$LoggedUser['AuthKey'] ?>">
+                <a target="_blank" href="feeds.php?feed=feed_news&amp;user=<?= G::$LoggedUser['ID'] ?>&amp;auth=<?= G::$LoggedUser['RSS_Auth'] ?>&amp;passkey=<?= G::$LoggedUser['torrent_pass'] ?>&amp;authkey=<?= G::$LoggedUser['AuthKey'] ?>" data-tooltip="<?= Lang::get('common', 'rss') ?>">
                     <?= icon('rss') ?>
                 </a>
-                <a target="_blank" href="<?= TG_GROUP ?>">
+                <a target="_blank" href="<?= TG_GROUP ?>" data-tooltip="<?= Lang::get('common', 'telegram') ?>">
                     <?= icon('telegram') ?>
                 </a>
-                <a target="_blank" href="https://github.com/Mosasauroidea/GazellePW">
+                <a target="_blank" href="https://github.com/Mosasauroidea/GazellePW" data-tooltip="<?= Lang::get('common', 'github') ?>">
                     <?= icon('github') ?>
                 </a>
             </div>
@@ -537,7 +537,7 @@ View::show_header(Lang::get('index', 'index'), 'comments', 'PageHome');
     </div>
 </div>
 <?
-Stats::torrentByDay();
+// Stats::torrentByDay();
 View::show_footer(array('disclaimer' => true), 'home.js');
 
 function contest() {

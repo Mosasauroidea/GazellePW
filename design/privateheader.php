@@ -483,22 +483,20 @@ if ($_REQUEST['action']) {
                             <?= icon('image-host') ?>
                         </a>
                     </li>
-                    <? if (IS_DEV) { ?>
-                        <li class="HeaderQuickAction-item is-language brackets Dropdown Dropdown-trigger" data-tooltip="<?= Lang::get('common', 'language') ?>">
-                            <a class="HeaderQuickAction-iconLink LinkHeader Link u-center u-heightFull">
-                                <?= icon('Common/language') ?>
-                            </a>
-                            <form action="/" method="post">
-                                <input type="hidden" name="action" value="change_language" />
-                                <input type="hidden" name="auth" value="<?= $LoggedUser['AuthKey'] ?>" />
-                                <div class="DropdownMenu Overlay">
-                                    <? foreach (Lang::LANGS as $Lang) { ?>
-                                        <input class="DropdownMenu-item is-lang<?= $Lang ?>" type="submit" name="language" value="<?= Lang::get('common', "lang_$Lang") ?>" />
-                                    <? } ?>
-                                </div>
-                            </form>
-                        </li>
-                    <? } ?>
+                    <li class="HeaderQuickAction-item is-language brackets Dropdown Dropdown-trigger" data-tooltip="<?= Lang::get('common', 'language') ?>">
+                        <a class="HeaderQuickAction-iconLink LinkHeader Link u-center u-heightFull">
+                            <?= icon('Common/language') ?>
+                        </a>
+                        <form action="/" method="post">
+                            <input type="hidden" name="action" value="change_language" />
+                            <input type="hidden" name="auth" value="<?= $LoggedUser['AuthKey'] ?>" />
+                            <div class="DropdownMenu Overlay">
+                                <? foreach (Lang::LANGS as $Lang) { ?>
+                                    <input class="DropdownMenu-item is-lang<?= $Lang ?>" type="submit" name="language" value="<?= Lang::get('common', "lang_$Lang") ?>" />
+                                <? } ?>
+                            </div>
+                        </form>
+                    </li>
                     <li class="HeaderQuickAction-item is-profile brackets Dropdown">
                         <div class="HeaderProfile">
                             <a class="HeaderProfile-nameLink LinkHeader Link u-center u-heightFull" id="header-username-value" data-value="<?= G::$LoggedUser['Username'] ?>" href="user.php?id=<?= G::$LoggedUser['ID'] ?>">
