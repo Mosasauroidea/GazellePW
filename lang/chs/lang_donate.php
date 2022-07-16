@@ -41,7 +41,7 @@ $lang_donate = array(
 </ul>',
 	'view_donor_system_faq' => '查看捐助系统常见问题解答',
 	'view_donor_perks_img' => '查看捐助等级福利图解',
-	'donation_info_11' => '详情请见：<a href="wiki.php?action=article&id=52">Wiki</a>',
+	'donation_info_11' => '详情请见：<a href="wiki.php?action=article&id=89">Wiki</a>',
 	'what_wont_receive' => '捐助之后你不能获得',
 	'donation_info_12' => '<ul><li>无视站点规则的特权</li><li>额外的上传量</li></ul>',
 	'rank_1_header' => '1 活跃点数',

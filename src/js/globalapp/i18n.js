@@ -1,11 +1,17 @@
-import translations from '../../../i18n'
 import { get } from 'lodash-es'
+import en from '../../../locales/en.yaml'
+import zh_CN from '../../../locales/zh_CN.yaml'
+
+const DEFULAT_LANG = 'en'
+
+const translations = { en, zh_CN }
 
 window.translation = {
   lang() {
     let lang = cookie.get('lang')
+    lang = lang === 'chs' ? 'zh_CN' : lang
     if (!(lang in translations)) {
-      lang = 'chs'
+      lang = DEFAULT_LANG
     }
     return lang
   },

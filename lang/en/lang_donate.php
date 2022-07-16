@@ -40,7 +40,7 @@ $lang_donate = array(
 </ul>',
 	'view_donor_system_faq' => 'View Donor Rank System FAQ Document',
 	'view_donor_perks_img' => 'View Donor Rank Perks Infographic',
-	'donation_info_11' => 'Detail: <a href="wiki.php?action=article&id=52">Wiki</a>',
+	'donation_info_11' => 'Detail: <a href="wiki.php?action=article&id=89">Wiki</a>',
 	'what_wont_receive' => 'What you won\'t receive for donating',
 	'donation_info_12' => '<ul><li>Immunity from the rules</li><li>Additional upload credit</li></ul>',
 	'rank_1_header' => '$7.5',

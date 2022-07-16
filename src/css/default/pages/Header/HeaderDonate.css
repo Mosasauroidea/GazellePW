@@ -24,12 +24,11 @@ HeaderDonate
 .HeaderDonate-link {
   display: flex;
   align-items: center;
-  width: 125px;
   height: 100%;
 }
 .HeaderDonate-percent {
   line-height: 1;
-  color: var(--HeaderDonate-percent-color);
+  color: var(--global-color-warning);
   font-weight: bold;
 }
 

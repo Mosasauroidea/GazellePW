@@ -537,7 +537,10 @@ View::show_header(Lang::get('index', 'index'), 'comments', 'PageHome');
     </div>
 </div>
 <?
-// Stats::torrentByDay();
+if (IS_DEV) {
+    Stats::torrentByDay();
+}
+
 View::show_footer(array('disclaimer' => true), 'home.js');
 
 function contest() {

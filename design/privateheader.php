@@ -383,11 +383,11 @@ if ($_REQUEST['action']) {
             <div class="HeaderInfo">
                 <ul class="HeaderDonate HeaderInfo-left">
                     <li class="HeaderDonate-content HeaderInfo-item brackets <?= Format::add_class($PageID, array('donate'), 'active', false) ?>">
-                        <a class="HeaderDonate-link LinkHeader Link" href="donate.php" data-tooltip="<?= Lang::get('donate', 'progress', false, $donation->getYearProgress()) ?>">
+                        <a class="HeaderDonate-link LinkHeader Link" href="donate.php" data-tooltip="<?= Lang::get('donate', 'progress', false, [], $donation->getYearProgress()) ?>">
                             <div class="HeaderDonate-progressBarBorder">
                                 <div class="HeaderDonate-progressBar" style="width: <?= $donation->getYearProgress() . '%' ?>"></div>
                             </div>
-                            <div class="HeaderDonate-percent"><?= $donation->getYearProgress() . '%' ?></div>
+                            <div class="HeaderDonate-percent u-colorWarning"><?= Lang::get('donate', 'donate') ?></div>
                         </a>
                     </li>
                 </ul>

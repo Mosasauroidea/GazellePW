@@ -7,7 +7,7 @@ $lang_staff = array(
 			<p>If you\'d like to join our staff, please feel free to <strong><a href=\'apply.php\'>apply</a></strong>!</p>',
   'community_help' => 'Community Help',
   'role_applications_note' => '<p>We\'d like you to join us. Please try to <a href=\'apply.php\'>apply</a> if you are interested in our jobs!</p>',
-  'fl_support_note' => '<p><strong>These users may not be official staff members.</strong> They are users who have volunteered their time to help people in need. Please treat them with respect, and read <a href=\'wiki.php?action=article&amp;id=52\'>this</a> before contacting them.</p>',
+  'fl_support_note' => '<p><strong>These users may not be official staff members.</strong> They are users who have volunteered their time to help people in need. Please treat them with respect, and read <a href=\'wiki.php?action=article&amp;id=95\'>this</a> before contacting them.</p>',
   'username' => 'Username',
   'lastseen' => 'Last seen',
   'support' => 'Support for',

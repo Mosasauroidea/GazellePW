@@ -71,3 +71,15 @@ Split the UI from the logical, so that refactor the UI (change the class) won't 
 
 <?= icon('flag/hello') ?>
 ```
+
+### Localization
+
+locales/{en,zh_CN}.json
+
+```json
+{
+  "namespace": {
+    "helloWorld": "text"
+  }
+}
+```

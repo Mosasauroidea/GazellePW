@@ -2,9 +2,10 @@ import { defineConfig } from 'vite'
 import preact from '@preact/preset-vite'
 import mdx from '@mdx-js/rollup'
 import hq from 'alias-hq'
+import yaml from '@rollup/plugin-yaml'
 
 export default defineConfig({
-  plugins: [preact(), mdx()],
+  plugins: [preact(), mdx(), yaml()],
 
   clearScreen: false,
 
