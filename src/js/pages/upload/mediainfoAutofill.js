@@ -1,5 +1,5 @@
 import { isArray, isString, isBoolean } from 'lodash-es'
-import Videoinfo from '#/modules/Videoinfo'
+import Videoinfo from '#/js/modules/Videoinfo'
 
 const SHOW = Symbol('show-action')
 

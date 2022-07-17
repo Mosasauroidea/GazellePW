@@ -33,7 +33,7 @@ async function imgCopy() {
   const value = $('#image').val()
   if (value) {
     await navigator.clipboard.writeText(value)
-    alert(translation.get('copied'))
+    alert(lang.get('common.copied'))
   }
 }
 globalapp.imgCopy = imgCopy

@@ -1,10 +1,10 @@
-import { useKeyPrevent } from '#/app/hooks'
+import { useKeyPrevent } from '#/js/app/hooks'
 import {
   openElement,
   closeElement,
   isElementOpen,
-} from '#/app/utils/openElement'
-import { Dialog } from '#/app/components'
+} from '#/js/app/utils/openElement'
+import { Dialog } from '#/js/app/components'
 import en from './en.mdx'
 import chs from './chs.mdx'
 
@@ -22,7 +22,7 @@ export default function useHelp() {
       ID,
       <Dialog close={close}>
         <Dialog.Title close={close}>
-          {translation.get('screenshot_comparison.help_title')}
+          {lang.get('screenshot_comparison.help_title')}
         </Dialog.Title>
         <Dialog.Body>{select({ en, chs })}</Dialog.Body>
       </Dialog>
@@ -31,6 +31,6 @@ export default function useHelp() {
 }
 
 function select(Comps) {
-  const Comp = Comps[translation.lang()]
+  const Comp = Comps[lang.lang()]
   return <Comp />
 }

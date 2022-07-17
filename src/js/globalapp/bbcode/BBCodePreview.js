@@ -6,9 +6,9 @@
 .u-bbcodePreview-button data-id=<id>
 */
 
-const EDIT = translation.get('bbcode.edit')
-const PREVIEW = translation.get('bbcode.preview')
-const LOADING = translation.get('bbcode.loading')
+const EDIT = lang.get('bbcode.edit')
+const PREVIEW = lang.get('bbcode.preview')
+const LOADING = lang.get('bbcode.loading')
 
 export default class BBCodePreview {
   static register() {

@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 import { render } from 'react-dom'
-import { ChartTorrentByDay } from '#/app/components'
+import { ChartTorrentByDay } from '#/js/app/components'
 
 const StatsHome = () => <ChartTorrentByDay />
 

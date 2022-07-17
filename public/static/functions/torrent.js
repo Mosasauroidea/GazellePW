@@ -121,27 +121,27 @@ function ArtistManager() {
     elImportance.id = 'artists_importance'
     var elOpt = document.createElement('option')
     elOpt.value = 1
-    elOpt.innerHTML = translation.get('director')
+    elOpt.innerHTML = lang.get('common.director')
     elImportance.appendChild(elOpt)
     elOpt = document.createElement('option')
     elOpt.value = 2
-    elOpt.innerHTML = translation.get('writter')
+    elOpt.innerHTML = lang.get('writter')
     elImportance.appendChild(elOpt)
     elOpt = document.createElement('option')
     elOpt.value = 3
-    elOpt.innerHTML = translation.get('producer')
+    elOpt.innerHTML = lang.get('common.producer')
     elImportance.appendChild(elOpt)
     elOpt = document.createElement('option')
     elOpt.value = 4
-    elOpt.innerHTML = translation.get('composer')
+    elOpt.innerHTML = lang.get('common.composer')
     elImportance.appendChild(elOpt)
     elOpt = document.createElement('option')
     elOpt.value = 5
-    elOpt.innerHTML = translation.get('cinematographer')
+    elOpt.innerHTML = lang.get('common.cinematographer')
     elImportance.appendChild(elOpt)
     elOpt = document.createElement('option')
     elOpt.value = 6
-    elOpt.innerHTML = translation.get('actor')
+    elOpt.innerHTML = lang.get('common.actor')
     elImportance.appendChild(elOpt)
     elSubmitDiv.appendChild(elImportance)
     elSubmitDiv.appendChild(document.createTextNode(' '))

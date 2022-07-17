@@ -28,7 +28,7 @@ function ConfirmPurchase(event, item, next, element) {
     event.preventDefault()
     return false
   }
-  check = confirm(translation.format(translation.get('confirm_purchase'), item))
+  check = confirm(lang.format(lang.get('common.confirm_purchase'), item))
   if (!check) {
     event.preventDefault()
     return false
@@ -39,7 +39,7 @@ function ConfirmPurchase(event, item, next, element) {
  * @return {boolean}
  */
 function ConfirmOther(event, element) {
-  var name = prompt(translation.get('confirm_username'))
+  var name = prompt(lang.get('common.confirm_username'))
   if (!name || name === '') {
     return false
   }

@@ -1,4 +1,4 @@
-import { Snackbar } from '#/app/components'
+import { Snackbar } from '#/js/app/components'
 import { fetchImageData, imageDataToDataUrl } from '../utils/canvas'
 
 export async function active({ context }) {
@@ -6,7 +6,7 @@ export async function active({ context }) {
     context
   // Not set loading if active is fast
   const timeout = setTimeout(() => {
-    Snackbar.open(translation.get('screenshot_comparison.loading'))
+    Snackbar.open(lang.get('screenshot_comparison.loading'))
   }, 1e3)
   const img = imgRefs[currentRow][currentColumn].current
   const width = img.width
@@ -21,7 +21,7 @@ export async function active({ context }) {
     curve: solarCurve,
   })
   const imageUrl = imageDataToDataUrl(outputImageData)
-  const title = `${translation.get('screenshot_comparison.solar_curve')}: ${
+  const title = `${lang.get('screenshot_comparison.solar_curve')}: ${
     columnNames[currentColumn]
   }`
   clearTimeout(timeout)

@@ -1,15 +1,14 @@
 import { get } from 'lodash-es'
-import en from '../../../locales/en.yaml'
-import zh_CN from '../../../locales/zh_CN.yaml'
+import en from '#/locales/en/client.yaml'
+import zhCN from '#/locales/zh-CN/client.yaml'
 
 const DEFULAT_LANG = 'en'
 
-const translations = { en, zh_CN }
+const translations = { en, chs: zhCN }
 
-window.translation = {
+window.lang = {
   lang() {
     let lang = cookie.get('lang')
-    lang = lang === 'chs' ? 'zh_CN' : lang
     if (!(lang in translations)) {
       lang = DEFAULT_LANG
     }

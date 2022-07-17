@@ -1,5 +1,5 @@
 import { render } from 'react-dom'
-import { ChartTorrentByMonth, ChartTorrentByYear } from '#/app/components'
+import { ChartTorrentByMonth, ChartTorrentByYear } from '#/js/app/components'
 
 const StatsHome = () => (
   <>

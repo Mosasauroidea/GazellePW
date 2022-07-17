@@ -1228,15 +1228,15 @@ WHERE ud.TorrentID=? AND ui.NotifyOnDeleteDownloaded='1' AND ud.UserID NOT IN ({
             $Info[] = Format::torrent_label(Lang::get('torrents', 'fld'), 'tl_free torrent_discount free');
         } else if (isset($Data['FreeTorrent'])) {
             if ($Data['FreeTorrent'] == '1') {
-                $Info[] = Format::torrent_label(Lang::get('torrents', 'fld'), 'tl_free torrent_discount free', ($Data['FreeEndTime'] ? Lang::get('torrents', 'free_left', false, time_diff($Data['FreeEndTime'], 2, false)) : ""));
+                $Info[] = Format::torrent_label(Lang::get('torrents', 'fld'), 'tl_free torrent_discount free', ($Data['FreeEndTime'] ? Lang::get('torrents', 'free_left', false, [], time_diff($Data['FreeEndTime'], 2, false)) : ""));
             } else if ($Data['FreeTorrent'] == '2') {
                 $Info[] = Format::torrent_label('Neutral Leech!', 'torrent_discount neutral');
             } else if ($Data['FreeTorrent'] == '11') {
-                $Info[] = Format::torrent_label('-25%', 'torrent_discount one_fourth_off', ($Data['FreeEndTime'] ? Lang::get('torrents', 'free_left', false, time_diff($Data['FreeEndTime'], 2, false)) : ""));
+                $Info[] = Format::torrent_label('-25%', 'torrent_discount one_fourth_off', ($Data['FreeEndTime'] ? Lang::get('torrents', 'free_left', false, [], time_diff($Data['FreeEndTime'], 2, false)) : ""));
             } else if ($Data['FreeTorrent'] == '12') {
-                $Info[] = Format::torrent_label('-50%', 'torrent_discount two_fourth_off', ($Data['FreeEndTime'] ? Lang::get('torrents', 'free_left', false, time_diff($Data['FreeEndTime'], 2, false)) : ""));
+                $Info[] = Format::torrent_label('-50%', 'torrent_discount two_fourth_off', ($Data['FreeEndTime'] ? Lang::get('torrents', 'free_left', false, [], time_diff($Data['FreeEndTime'], 2, false)) : ""));
             } else if ($Data['FreeTorrent'] == '13') {
-                $Info[] = Format::torrent_label('-75%', 'torrent_discount three_fourth_off', ($Data['FreeEndTime'] ? Lang::get('torrents', 'free_left', false, time_diff($Data['FreeEndTime'], 2, false)) : ""));
+                $Info[] = Format::torrent_label('-75%', 'torrent_discount three_fourth_off', ($Data['FreeEndTime'] ? Lang::get('torrents', 'free_left', false, [], time_diff($Data['FreeEndTime'], 2, false)) : ""));
             }
         }
         if ($Option['Self']) {

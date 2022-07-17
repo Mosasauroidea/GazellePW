@@ -40,13 +40,13 @@ globalapp.toggleGroup = function toggleGroup(groupid, link, event) {
       if (row.has_class('TableTorrent-rowMovieInfo')) {
         var section
         if (location.pathname.search('/artist.php$') !== -1) {
-          section = translation.get('in_this_release_type')
+          section = lang.get('common.in_this_release_type')
         } else {
-          section = translation.get('on_this_page')
+          section = lang.get('common.on_this_page')
         }
         var tooltip = showing
-          ? translation.format(translation.get('collapse_this_group'), section)
-          : translation.format(translation.get('expand_this_group'), section)
+          ? lang.format(lang.get('common.collapse_this_group'), section)
+          : lang.format(lang.get('common.expand_this_group'), section)
         $('.ToggleGroup-button', row).updateTooltip(tooltip)
         const parentClassList = $('.ToggleGroup-button', row).raw().parentNode
           .classList

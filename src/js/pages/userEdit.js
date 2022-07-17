@@ -4,7 +4,7 @@
   dnd.js
 */
 
-import sortable from '#/modules/Sortable'
+import sortable from '#/js/modules/Sortable'
 
 sortable({
   onDragEnd: () => {

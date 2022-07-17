@@ -1,4 +1,4 @@
-import '#/forked/mousetrap.min'
+import '#/js/forked/mousetrap.min'
 import commands from './commands'
 
 /*

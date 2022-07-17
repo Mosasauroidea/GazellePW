@@ -1,50 +1,37 @@
 ---
-a_main_artist_is_required: A "Main" artist is required
-actor: Actor
-add_torrent_description: Add Torrent Description
-are_you_sure_cannot_undone: Are you sure you wish to do this? This cannot be undone!
-are_you_sure_you_want_to_cancel: Are you sure you want to cancel?
-are_you_sure_you_wish_to_delete_this_post: Are you sure you wish to delete this post?
 bbcode:
   edit: Edit
   loading: Loading...
   preview: Preview
-check_all: Check all
-cinematographer: Cinematographer
-clear: Clear
-collapse_this_group: Collapse this group. Hold [Command] <em>(Mac)</em> or [Ctrl] <em>(PC)</em> while clicking to collapse all groups {0}
-composer: Composer
-confirm_purchase: Are you sure you want to purchase {0}?
-confirm_username: 'Enter username to give tokens to:'
-copied: Copied
-director: Director
-expand_this_group: Expand this group. Hold [Command] <em>(Mac)</em> or [Ctrl] <em>(PC)</em> while clicking to expand all groups {0}
-hide: Hide
-imdb_unknown_error: Unknown error, please contact staff.
-in_this_release_type: in this release type.
-invalid_imdb_link_note: Please enter a valid IMDb link like "tt1234567" or "https://www.imdb.com/title/tt1234567".
-like: Like
-main: Main
-on_this_page: on this page.
-please_enter_a_valid_credit_card_number: Please enter a valid credit card number.
-please_enter_a_valid_date: Please enter a valid date.
-please_enter_a_valid_date_iso: Please enter a valid date (ISO).
-please_enter_a_valid_date_number: Please enter a valid number.
-please_enter_a_valid_email_address: Please enter a valid email address.
-please_enter_a_valid_url: Please enter a valid URL.
-please_enter_a_value_between_x_and_y: Please enter a value between {0} and {1}.
-please_enter_a_value_between_x_and_y_characters_long: Please enter a value between {0} and {1} characters long.
-please_enter_a_value_greater_than_or_equal_to_n: Please enter a value greater than or equal to {0}.
-please_enter_a_value_less_than_or_equal_to_n: Please enter a value less than or equal to {0}.
-please_enter_at_least_n_characters: Please enter at least {0} characters.
-please_enter_no_more_than_n_characters: Please enter no more than {0} characters.
-please_enter_only_digits: Please enter only digits.
-please_enter_the_same_value_again: Please enter the same value again.
-please_fix_this_field: Please fix this field.
-pm_user_on_edit: <span id="pmbox{0}"><label>PM user on edit? <input type="checkbox" name="pm" value="1" /></label></span>
-producer: Producer
-request_has_been_unresolved: The request has been un-resolved. Please refresh your browser to see it.
-request_torrent_group_exists_note: The movie already <a href='/torrents.php?id={0}'>exists</a> on the site. Please make sure the format you request does not exist and use the [Request format] link to request your expect format for the movie.
+common:
+  actor: Actor
+  are_you_sure_cannot_undone: Are you sure you wish to do this? This cannot be undone!
+  are_you_sure_you_want_to_cancel: Are you sure you want to cancel?
+  are_you_sure_you_wish_to_delete_this_post: Are you sure you wish to delete this post?
+  check_all: Check all
+  cinematographer: Cinematographer
+  collapse_this_group: Collapse this group. Hold [Command] <em>(Mac)</em> or [Ctrl] <em>(PC)</em> while clicking to collapse all groups {0}
+  composer: Composer
+  confirm_purchase: Are you sure you want to purchase {0}?
+  confirm_username: 'Enter username to give tokens to:'
+  copied: Copied
+  director: Director
+  expand_this_group: Expand this group. Hold [Command] <em>(Mac)</em> or [Ctrl] <em>(PC)</em> while clicking to expand all groups {0}
+  hide: Hide
+  in_this_release_type: in this release type.
+  like: Like
+  on_this_page: on this page.
+  pm_user_on_edit: <span id="pmbox{0}"><label>PM user on edit? <input type="checkbox" name="pm" value="1" /></label></span>
+  producer: Producer
+  request_has_been_unresolved: The request has been un-resolved. Please refresh your browser to see it.
+  uncheck_all: Uncheck all
+  view: View
+  writer: Writer
+error:
+  imdb_unknown_error: Unknown error, please contact staff.
+  invalid_imdb_link_note: Please enter a valid IMDb link like "tt1234567" or "https://www.imdb.com/title/tt1234567".
+  request_torrent_group_exists_note: The movie already <a href='/torrents.php?id={0}'>exists</a> on the site. Please make sure the format you request does not exist and use the [Request format] link to request your expect format for the movie.
+  torrent_group_exists_note: The movie already <a href='/torrents.php?id={0}'>exists</a> on the site. Please make sure that you're not uploading a duplicate and use the [Add format] link to upload a new format for the movie.
 screenshot_comparison:
   gpw_helper_not_installed: Please install <a href="https://greasyfork.org/scripts/445653-gpw-helper/code/GPW-Helper.user.js" target="_blank">GPW Helper</a> and reload the page
   help: Press ? to read help
@@ -60,7 +47,6 @@ screenshot_comparison:
   loading: Loading...
   pixel_compare: Pixel Compare
   solar_curve: Solar Curve
-show: Show
 staffpm:
   assign_assigned: Conversation successfully assigned.
   error: Something went wrong.
@@ -71,12 +57,9 @@ stats:
   torrentByDay: Torrent Daily Uploads
   torrentByMonth: Torrent Monthly Uploads
   torrentByYear: Torrent Yearly Uploads
-this_field_is_required: This field is required.
-torrent_group_exists_note: The movie already <a href='/torrents.php?id={0}'>exists</a> on the site. Please make sure that you're not uploading a duplicate and use the [Add format] link to upload a new format for the movie.
 torrent_table:
   collapse_edition: Collapse this resolution group. Hold [Command] <em>(Mac)</em> or [Ctrl] <em>(PC)</em> while clicking to collapse all resolutions in this torrent group.
   expand_edition: Expand this resolution group. Hold [Command] <em>(Mac)</em> or [Ctrl] <em>(PC)</em> while clicking to expand all resolutions in this torrent group.
-uncheck_all: Uncheck all
 upload:
   codec_required: Please select a codec.
   container_required: Please select a container.
@@ -100,8 +83,20 @@ upload:
   tag_required: Please specify at least one genre!
   torrent_file_required: Please select a torrent file!
   year_required: Please specify the year of the original release!
-view: View
-warning_subtitle_file: Please select subtitle file!
-warning_subtitle_format: Please select subtitle format!
-warning_subtitle_language: Please select subtitle langauge!
-writer: Writer
+validation:
+  please_enter_a_valid_credit_card_number: Please enter a valid credit card number.
+  please_enter_a_valid_date: Please enter a valid date.
+  please_enter_a_valid_date_iso: Please enter a valid date (ISO).
+  please_enter_a_valid_date_number: Please enter a valid number.
+  please_enter_a_valid_email_address: Please enter a valid email address.
+  please_enter_a_valid_url: Please enter a valid URL.
+  please_enter_a_value_between_x_and_y: Please enter a value between {0} and {1}.
+  please_enter_a_value_between_x_and_y_characters_long: Please enter a value between {0} and {1} characters long.
+  please_enter_a_value_greater_than_or_equal_to_n: Please enter a value greater than or equal to {0}.
+  please_enter_a_value_less_than_or_equal_to_n: Please enter a value less than or equal to {0}.
+  please_enter_at_least_n_characters: Please enter at least {0} characters.
+  please_enter_no_more_than_n_characters: Please enter no more than {0} characters.
+  please_enter_only_digits: Please enter only digits.
+  please_enter_the_same_value_again: Please enter the same value again.
+  please_fix_this_field: Please fix this field.
+  this_field_is_required: This field is required.

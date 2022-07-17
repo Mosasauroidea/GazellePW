@@ -7,9 +7,9 @@ globalapp.uploadMovieAutofill = function uploadMovieAutofill() {
     }
   }
   function setError(key, values = []) {
-    let message = translation.get(key)
+    let message = lang.get(key)
     if (values.length > 0) {
-      message = translation.format(message, ...values)
+      message = lang.format(message, ...values)
     }
     $('.imdb.Form-errorMessage').html(key ? message : '')
   }
@@ -31,7 +31,7 @@ globalapp.uploadMovieAutofill = function uploadMovieAutofill() {
     type: 'GET',
     error: (err) => {
       setLoading(false)
-      setError('imdb_unknown_error')
+      setError('common.imdb_unknown_error')
     },
     success: (data) => {
       setLoading(false)
@@ -39,10 +39,10 @@ globalapp.uploadMovieAutofill = function uploadMovieAutofill() {
       if (data.code) {
         setError(
           data.code === 1
-            ? 'invalid_imdb_link_note'
+            ? 'error.invalid_imdb_link_note'
             : data.code === 2
-            ? 'torrent_group_exists_note'
-            : 'imdb_unknown_error',
+            ? 'error.torrent_group_exists_note'
+            : 'error.imdb_unknown_error',
           data.code === 2 ? [data.error.GroupID] : []
         )
         return

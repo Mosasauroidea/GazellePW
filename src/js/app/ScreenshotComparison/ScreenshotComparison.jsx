@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types'
-import { Dialog } from '#/app/components'
+import { Dialog } from '#/js/app/components'
 import useScreenshotComparison from './useScreenshotComparison'
 import { PixelCompareThreshold } from './PixelCompare'
 
@@ -88,7 +88,7 @@ const ScreenshotComparison = ({ close, columnNames, images, options }) => {
         ))}
       </div>
       <div className="ScreenshotComparison-help">
-        {translation.get('screenshot_comparison.help')}
+        {lang.get('screenshot_comparison.help')}
       </div>
     </div>
   )

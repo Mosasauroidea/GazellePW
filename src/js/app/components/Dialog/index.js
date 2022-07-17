@@ -1,4 +1,4 @@
-import renderElement from '#/app/utils/renderElement'
+import renderElement from '#/js/app/utils/renderElement'
 import Dialog from './Dialog'
 import useScrollLock from './useScrollLock'
 

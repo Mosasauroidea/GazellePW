@@ -79,12 +79,12 @@ function createNoty(type, id, message, url, importance) {
     buttons: [
       {
         addClass: 'brackets noty_button_view' + (hideButtons ? ' hidden' : ''),
-        text: translation.get('view'),
+        text: lang.get('common.view'),
         href: url,
       },
       {
         addClass: 'brackets noty_button_clear',
-        text: translation.get('clear'),
+        text: lang.get('common.clear'),
         onClick: function ($noty) {
           $noty.close()
           clear(type, id)
@@ -92,7 +92,7 @@ function createNoty(type, id, message, url, importance) {
       },
       {
         addClass: 'brackets noty_button_close ',
-        text: translation.get('hide'),
+        text: lang.get('common.hide'),
         onClick: function ($noty) {
           $noty.close()
         },

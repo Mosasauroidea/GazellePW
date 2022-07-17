@@ -60,15 +60,15 @@ globalapp.uploadAddArtistField = function AddArtistField(movie = false) {
   ImportanceField.id = 'importance_' + ArtistCount
   ImportanceField.name = 'importance[]'
 
-  ImportanceField.options[0] = new Option(translation.get('director'), '1')
-  ImportanceField.options[1] = new Option(translation.get('writer'), '2')
-  ImportanceField.options[2] = new Option(translation.get('producer'), '3')
-  ImportanceField.options[3] = new Option(translation.get('composer'), '4')
+  ImportanceField.options[0] = new Option(lang.get('common.director'), '1')
+  ImportanceField.options[1] = new Option(lang.get('common.writer'), '2')
+  ImportanceField.options[2] = new Option(lang.get('common.producer'), '3')
+  ImportanceField.options[3] = new Option(lang.get('common.composer'), '4')
   ImportanceField.options[4] = new Option(
-    translation.get('cinematographer'),
+    lang.get('common.cinematographer'),
     '5'
   )
-  ImportanceField.options[5] = new Option(translation.get('actor'), '6')
+  ImportanceField.options[5] = new Option(lang.get('common.actor'), '6')
 
   var x = $('#artistfields').raw()
   const div = document.createElement('div')

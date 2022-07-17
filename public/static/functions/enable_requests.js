@@ -31,7 +31,7 @@
     $('input[id^=outcome]').click(function () {
       if (
         $(this).val() != 'Discard' &&
-        !confirm(translation.get('are_you_sure_cannot_undone'))
+        !confirm(lang.get('common.are_you_sure_cannot_undone'))
       ) {
         return false
       }
@@ -79,7 +79,7 @@
         }).done(function (response) {
           if (response['status'] == 'success') {
             $('#row_' + id).remove()
-            alert(translation.get('request_has_been_unresolved'))
+            alert(lang.get('common.request_has_been_unresolved'))
           } else {
             alert(response['status'])
           }

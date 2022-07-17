@@ -58,14 +58,10 @@ globalapp.toggleEdition = function toggleEdition(event, groupId, editionId) {
   for (const toggleButton of toggleButtons) {
     if (isHidden) {
       toggleButton.innerHTML = BUTTON_COLLAPSE
-      $(toggleButton).updateTooltip(
-        translation.get('torrent_table.collapse_edition')
-      )
+      $(toggleButton).updateTooltip(lang.get('torrent_table.collapse_edition'))
     } else {
       toggleButton.innerHTML = BUTTON_EXPAND
-      $(toggleButton).updateTooltip(
-        translation.get('torrent_table.expand_edition')
-      )
+      $(toggleButton).updateTooltip(lang.get('torrent_table.expand_edition'))
     }
   }
 }

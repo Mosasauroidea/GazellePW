@@ -1,5 +1,5 @@
-import Pristine from '#/forked/pristine'
-import Videoinfo from '#/modules/Videoinfo'
+import Pristine from '#/js/forked/pristine'
+import Videoinfo from '#/js/modules/Videoinfo'
 
 const SOURCE_HAS_NO_PROCESSING = ['', 'TV', 'HDTV', 'WEB']
 const DVD = ['DVD']
@@ -319,14 +319,14 @@ function createValidator({ validator }) {
   return {
     addValidator({ selector, validate, messageKey }) {
       const inputs = Array.from(form.querySelectorAll(selector))
-      const message = translation.get(messageKey)
+      const message = lang.get(messageKey)
       for (const input of inputs) {
         validator.addValidator(input, validate, message)
       }
     },
 
     addValidatorSelectInput({ selector, validate, messageKey }) {
-      const message = translation.get(messageKey)
+      const message = lang.get(messageKey)
       const select = form.querySelector(selector)
       if (!select) {
         return

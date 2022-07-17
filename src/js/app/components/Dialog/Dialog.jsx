@@ -1,5 +1,5 @@
 import { useRef } from 'react'
-import { useKeyPrevent, useEvent } from '#/app/hooks'
+import { useKeyPrevent, useEvent } from '#/js/app/hooks'
 import useScrollLock from './useScrollLock'
 
 /* Dialog.css */

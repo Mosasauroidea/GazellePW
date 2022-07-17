@@ -1,7 +1,7 @@
 import { useState, useRef } from 'react'
-import { useKeyPrevent } from '#/app/hooks'
-import { isGpwHelperInjected } from '#/app/utils'
-import { Dialog, Snackbar } from '#/app/components'
+import { useKeyPrevent } from '#/js/app/hooks'
+import { isGpwHelperInjected } from '#/js/app/utils'
+import { Dialog, Snackbar } from '#/js/app/components'
 
 export default function useToggle({
   key,
@@ -20,7 +20,7 @@ export default function useToggle({
           <Dialog.Body>
             <div
               dangerouslySetInnerHTML={{
-                __html: translation.get(
+                __html: lang.get(
                   'screenshot_comparison.gpw_helper_not_installed'
                 ),
               }}

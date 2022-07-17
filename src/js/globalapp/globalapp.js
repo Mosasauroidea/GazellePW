@@ -1,4 +1,4 @@
-import './i18n' /* set window.tranaction, before everything */
+import './lang'
 import './bbcode'
 import './tooltipster'
 import './dropdownMenu'

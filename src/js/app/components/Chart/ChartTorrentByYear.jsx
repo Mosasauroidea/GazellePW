@@ -1,5 +1,5 @@
 import { merge } from 'lodash'
-import { Chart } from '#/app/components'
+import { Chart } from '#/js/app/components'
 import { optionsSingle } from './options'
 
 export const ChartTorrentByYear = () => {
@@ -12,7 +12,7 @@ export const ChartTorrentByYear = () => {
       type: 'column',
     },
     title: {
-      text: translation.get('stats.torrentByYear'),
+      text: lang.get('stats.torrentByYear'),
     },
     series: [
       {

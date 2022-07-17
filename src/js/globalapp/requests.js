@@ -151,15 +151,15 @@ globalapp.reqeustAddArtistField = function requestAddArtistField(
   var ImportanceField = document.createElement('select')
   ImportanceField.id = 'importance_' + ArtistCount
   ImportanceField.name = 'importance[]'
-  ImportanceField.options[0] = new Option(translation.get('director'), '1')
-  ImportanceField.options[1] = new Option(translation.get('writer'), '2')
-  ImportanceField.options[2] = new Option(translation.get('producer'), '3')
-  ImportanceField.options[3] = new Option(translation.get('composer'), '4')
+  ImportanceField.options[0] = new Option(lang.get('common.director'), '1')
+  ImportanceField.options[1] = new Option(lang.get('common.writer'), '2')
+  ImportanceField.options[2] = new Option(lang.get('common.producer'), '3')
+  ImportanceField.options[3] = new Option(lang.get('common.composer'), '4')
   ImportanceField.options[4] = new Option(
-    translation.get('cinematographer'),
+    lang.get('common.cinematographer'),
     '5'
   )
-  ImportanceField.options[5] = new Option(translation.get('actor'), '6')
+  ImportanceField.options[5] = new Option(lang.get('common.actor'), '6')
 
   var x = $('#artistfields').raw()
   const div = document.createElement('div')
@@ -237,9 +237,9 @@ globalapp.reqeustMovieAutofill = function requestMovieAutofill() {
     return
   }
   function setError(key, values = []) {
-    let message = translation.get(key)
+    let message = lang.get(key)
     if (values.length > 0) {
-      message = translation.format(message, ...values)
+      message = lang.format(message, ...values)
     }
     $('.imdb.Form-errorMessage').html(key ? message : '')
   }
@@ -256,10 +256,10 @@ globalapp.reqeustMovieAutofill = function requestMovieAutofill() {
       if (data.code) {
         setError(
           data.code === 1
-            ? 'invalid_imdb_link_note'
+            ? 'error.invalid_imdb_link_note'
             : data.code === 2
-            ? 'request_torrent_group_exists_note'
-            : 'imdb_unknown_error',
+            ? 'error.request_torrent_group_exists_note'
+            : 'error.imdb_unknown_error',
           data.code === 2 ? [data.error.GroupID] : []
         )
         return

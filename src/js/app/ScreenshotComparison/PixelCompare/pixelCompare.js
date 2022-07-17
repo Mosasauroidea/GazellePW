@@ -1,5 +1,5 @@
 import pixelmatch from 'pixelmatch'
-import { Snackbar } from '#/app/components'
+import { Snackbar } from '#/js/app/components'
 import { imageDataToDataUrl, fetchImageData } from '../utils/canvas'
 
 export async function active({ context }) {
@@ -13,7 +13,7 @@ export async function active({ context }) {
   } = context
   // Not set loading if active is fast
   const timeout = setTimeout(() => {
-    Snackbar.open(translation.get('screenshot_comparison.loading'))
+    Snackbar.open(lang.get('screenshot_comparison.loading'))
   }, 1e3)
   const img1 = imgRefs[currentRow][0].current
   const img2 = imgRefs[currentRow][currentColumn].current
@@ -33,7 +33,7 @@ export async function active({ context }) {
     }
   )
   const imageUrl = imageDataToDataUrl(outputImageData)
-  const title = `${translation.get('screenshot_comparison.pixel_compare')}: ${
+  const title = `${lang.get('screenshot_comparison.pixel_compare')}: ${
     columnNames[0]
   } -> ${columnNames[currentColumn]}`
   clearTimeout(timeout)

@@ -2,7 +2,7 @@ import {
   openElement,
   closeElement,
   isElementOpen,
-} from '#/app/utils/openElement'
+} from '#/js/app/utils/openElement'
 import Snackbar from './Snackbar'
 
 const ID = 'snackbar'

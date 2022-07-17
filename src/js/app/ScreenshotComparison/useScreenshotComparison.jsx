@@ -1,7 +1,7 @@
 import { useState, useRef, createRef } from 'react'
 import { chunk } from 'lodash-es'
-import { useKeyPrevent } from '#/app/hooks'
-import { Dialog } from '#/app/components'
+import { useKeyPrevent } from '#/js/app/hooks'
+import { Dialog } from '#/js/app/components'
 import {
   usePixelCompare,
   pixelCompareHandleCompareChange,

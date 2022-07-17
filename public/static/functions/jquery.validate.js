@@ -308,33 +308,37 @@
     },
 
     messages: {
-      required: translation.get('this_field_is_required'),
-      remote: translation.get('please_fix_this_field'),
-      email: translation.get('please_enter_a_valid_email_address'),
-      url: translation.get('please_enter_a_valid_url'),
-      date: translation.get('please_enter_a_valid_date'),
-      dateISO: translation.get('please_enter_a_valid_date_iso'),
-      number: translation.get('please_enter_a_valid_date_number'),
-      digits: translation.get('please_enter_only_digits'),
-      creditcard: translation.get('please_enter_a_valid_credit_card_number'),
-      equalTo: translation.get('please_enter_the_same_value_again'),
+      required: lang.get('validation.this_field_is_required'),
+      remote: lang.get('validation.please_fix_this_field'),
+      email: lang.get('validation.please_enter_a_valid_email_address'),
+      url: lang.get('validation.please_enter_a_valid_url'),
+      date: lang.get('validation.please_enter_a_valid_date'),
+      dateISO: lang.get('validation.please_enter_a_valid_date_iso'),
+      number: lang.get('validation.please_enter_a_valid_date_number'),
+      digits: lang.get('validation.please_enter_only_digits'),
+      creditcard: lang.get(
+        'validation.please_enter_a_valid_credit_card_number'
+      ),
+      equalTo: lang.get('validation.please_enter_the_same_value_again'),
       maxlength: $.validator.format(
-        translation.get('please_enter_no_more_than_n_characters')
+        lang.get('validation.please_enter_no_more_than_n_characters')
       ),
       minlength: $.validator.format(
-        translation.get('please_enter_at_least_n_characters')
+        lang.get('validataion.please_enter_at_least_n_characters')
       ),
       rangelength: $.validator.format(
-        translation.get('please_enter_a_value_between_x_and_y_characters_long')
+        lang.get(
+          'validataion.please_enter_a_value_between_x_and_y_characters_long'
+        )
       ),
       range: $.validator.format(
-        translation.get('please_enter_a_value_between_x_and_y')
+        lang.get('validataion.please_enter_a_value_between_x_and_y')
       ),
       max: $.validator.format(
-        translation.get('please_enter_a_value_less_than_or_equal_to_n')
+        lang.get('validataion.please_enter_a_value_less_than_or_equal_to_n')
       ),
       min: $.validator.format(
-        translation.get('please_enter_a_value_greater_than_or_equal_to_n')
+        lang.get('validataion.please_enter_a_value_greater_than_or_equal_to_n')
       ),
     },
 
