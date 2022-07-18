@@ -13,15 +13,10 @@ class Badges {
     );
     static $Lang = false;
     public static function get_text($Label, $Type) {
-        if (!self::$Lang) {
-            include(Lang::getLangfilePath('badges'));
-            self::$Lang = $lang_badges;
-        }
-        if (isset(self::$Lang["{$Label}_$Type"])) {
-            return self::$Lang["{$Label}_$Type"];
-        } else {
-            return "{$Label}_$Type";
-        }
+        return Lang::get('badges', "{$Label}_$Type", false, [
+            'DefaultValue' =>
+            "{$Label}_$Type"
+        ]);
     }
     public static function get_badge_labels() {
         if (($Badges = G::$Cache->get_value("badge_labels")) === false) {

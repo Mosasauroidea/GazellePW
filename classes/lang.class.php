@@ -1,50 +1,48 @@
 <?
+
+global $Locales;
+$Files = glob(SERVER_ROOT . '/src/locales/*/server.yaml');
+$Locales = [];
+foreach ($Files as $File) {
+    $Locale = yaml_parse_file($File);
+    $Lang = basename(dirname($File));
+    $Lang = $Lang == 'zh-CN' ? 'chs' : $Lang;
+    $Locales[$Lang] = $Locale;
+}
+
 class Lang {
     static $Lang = [];
     const DEFAULT_LANG = 'chs';
     const EN = 'en';
     const CHS = 'chs';
     const LANGS = [self::EN, self::CHS];
+
     public static function get($Page, $Label = false, $Lang = false, $Option = [], ...$Interpolations) {
         $Option = array_merge(['DefaultValue' => null], $Option);
-        if (!isset(self::$Lang[$Lang . $Page])) {
-            include(self::getLangfilePath($Page, $Lang));
-            $LangArray = "lang_$Page";
-            self::$Lang[$Lang . $Page] = $$LangArray;
+        global $Locales;
+        $Lang = self::getLang($Lang);
+        $Locale = $Locales[$Lang][$Page];
+        if (!$Label) {
+            return $Locale;
         }
-        if ($Label === false) {
-            return self::$Lang[$Lang . $Page];
-        }
-        if (!isset(self::$Lang[$Lang . $Page][$Label])) {
-            return $Option['DefaultValue'] ?: '$lang_' . $Page . "['$Label']";
+        $Value = $Locale[$Label];
+        if ($Value) {
+            $Value = str_replace(['${SITE_NAME}', '${TG_GROUP}', '${TG_DISBALE_CHANNEL}', '${MAIL_HOST}'], [SITE_NAME, TG_GROUP, TG_DISBALE_CHANNEL, MAIL_HOST], $Value);
+        } else {
+            $Value = $Option['DefaultValue'] ?: "$Page.$Label";
         }
         if (!empty($Interpolations)) {
-            $Tmp = sprintf(self::$Lang[$Lang . $Page][$Label], ...$Interpolations);
-            if ($Tmp === false) {
-                return '$lang_' . $Page . "['$Label'] is bad!";
+            $Value = sprintf($Value, ...$Interpolations);
+            if ($Value === false) {
+                $Value = "$Page.$Label is bad";
             }
-            return $Tmp;
         }
-        return self::$Lang[$Lang . $Page][$Label];
+        return $Value;
     }
 
-    public static function get_key($Page, $Label = false, $Lang = false, ...$Interpolations) {
-        if (!isset(self::$Lang[$Lang . $Page])) {
-            include(self::getLangfilePath($Page, $Lang));
-            $LangArray = "lang_$Page";
-            self::$Lang[$Lang . $Page] = $$LangArray;
-        }
-        if ($Label === false) {
-            return self::$Lang[$Lang . $Page];
-        }
-        if (!empty($Interpolations)) {
-            $Tmp = sprintf(self::$Lang[$Lang . $Page][$Label], ...$Interpolations);
-            if ($Tmp === false) {
-                return '$lang_' . $Page . "['$Label'] is bad!";
-            }
-            return $Tmp;
-        }
-        return array_search($Label, self::$Lang[$Lang . $Page]);
+    public static function get_key($Page, $Label = false, $Lang = false) {
+        $Locale = self::get($Page, false, $Lang);
+        return array_search($Label, $Locale);
     }
 
     public static function getUserLang($UserID) {
@@ -65,7 +63,13 @@ class Lang {
         }
         return $Lang;
     }
+
     public static function getLangfilePath($Page, $Lang = false) {
+        $Lang = self::getLang($Lang);
+        return SERVER_ROOT . "/lang/$Lang/lang_$Page.php";
+    }
+
+    public static function getLang($Lang = false) {
         if (!$Lang) {
             if (class_exists('G')) {
                 $UserID = false;
@@ -89,6 +93,6 @@ class Lang {
         if (!in_array($Lang, array('chs', 'en'))) {
             $Lang = self::DEFAULT_LANG;
         }
-        return SERVER_ROOT . "/lang/$Lang/lang_$Page.php";
+        return $Lang;
     }
 }
