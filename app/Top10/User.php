@@ -69,7 +69,7 @@ class User extends \Gazelle\Base {
                 LIMIT ?",
                     $orderBy
                 ),
-                STARTING_UPLOAD,
+                CONFIG['STARTING_UPLOAD'],
                 5 * 1024 * 1024 * 1024,
                 5 * 1024 * 1024 * 1024,
                 $limit

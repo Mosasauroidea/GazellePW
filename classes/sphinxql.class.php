@@ -99,7 +99,7 @@ class Sphinxql extends mysqli {
         global $Debug;
         $ErrorMsg = 'SphinxQL (' . $this->Ident . '): ' . strval($Msg);
         $Debug->analysis('SphinxQL Error', $ErrorMsg, 3600 * 24);
-        if ($Halt === true && (DEBUG_MODE || check_perms('site_debug'))) {
+        if ($Halt === true && (CONFIG['DEBUG_MODE'] || check_perms('site_debug'))) {
             echo '<pre>' . display_str($ErrorMsg) . '</pre>';
             die();
         } elseif ($Halt === true) {

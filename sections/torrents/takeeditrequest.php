@@ -6,12 +6,12 @@ if (empty($_POST['groupid']) || !is_numeric($_POST['groupid'])) {
     error(403);
 }
 
-$EditForumID = EDITING_FORUM_ID;
-$BotID = SYSTEM_USER_ID;
+$EditForumID = CONFIG['EDITING_FORUM_ID'];
+$BotID = CONFIG['SYSTEM_USER_ID'];
 
 $GroupID = intval($_POST['groupid']);
 
-include(SERVER_ROOT . '/sections/torrents/functions.php');
+include(CONFIG['SERVER_ROOT'] . '/sections/torrents/functions.php');
 $TorrentCache = Torrents::get_group($GroupID, true, $RevisionID);
 
 $TorrentDetails = $TorrentCache;
@@ -71,13 +71,13 @@ if ($Forum = $Cache->get_value("forums_{$EditForumID}")) {
     list($Forum,,, $Stickies) = $Forum;
 
     // Remove the last thread from the index
-    if (count($Forum) == TOPICS_PER_PAGE && $Stickies < TOPICS_PER_PAGE) {
+    if (count($Forum) == CONFIG['TOPICS_PER_PAGE'] && $Stickies < CONFIG['TOPICS_PER_PAGE']) {
         array_pop($Forum);
     }
 
     if ($Stickies > 0) {
         $Part1 = array_slice($Forum, 0, $Stickies, true); // Stickies
-        $Part3 = array_slice($Forum, $Stickies, TOPICS_PER_PAGE - $Stickies - 1, true); // Rest of page
+        $Part3 = array_slice($Forum, $Stickies, CONFIG['TOPICS_PER_PAGE'] - $Stickies - 1, true); // Rest of page
     } else {
         $Part1 = array();
         $Part3 = $Forum;

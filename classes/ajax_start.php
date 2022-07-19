@@ -4,8 +4,8 @@ use Gazelle\Util\Crypto;
 
 require 'config.php'; //The config contains all site wide configuration information as well as memcached rules
 require 'const.php';
-require(SERVER_ROOT . '/classes/debug.class.php');
-require(SERVER_ROOT . '/classes/cache.class.php'); //Require the caching class
+require(CONFIG['SERVER_ROOT'] . '/classes/debug.class.php');
+require(CONFIG['SERVER_ROOT'] . '/classes/cache.class.php'); //Require the caching class
 
 $Debug = new DEBUG;
 $Cache = new CACHE($MemcachedServers); //Load the caching class
@@ -13,17 +13,17 @@ $Cache = new CACHE($MemcachedServers); //Load the caching class
 $SSL = $_SERVER['SERVER_PORT'] === '443';
 
 if (isset($_COOKIE['session'])) {
-    $LoginCookie = Crypto::decrypt($_COOKIE['session'], ENCKEY);
+    $LoginCookie = Crypto::decrypt($_COOKIE['session'], CONFIG['ENCKEY']);
 }
 if (isset($LoginCookie)) {
-    list($SessionID, $UserID) = explode("|~|", Crypto::decrypt($LoginCookie, ENCKEY));
+    list($SessionID, $UserID) = explode("|~|", Crypto::decrypt($LoginCookie, CONFIG['ENCKEY']));
 
     if (!$UserID || !$SessionID) {
         die('Not logged in!');
     }
 
     if (!$Enabled = $Cache->get_value("enabled_$UserID")) {
-        require(SERVER_ROOT . '/classes/mysql.class.php'); //Require the database wrapper
+        require(CONFIG['SERVER_ROOT'] . '/classes/mysql.class.php'); //Require the database wrapper
         $DB = new DB_MYSQL; //Load the database wrapper
         $DB->query("
 			SELECT Enabled
@@ -119,12 +119,12 @@ function make_secret($Length = 32) {
     return substr($Secret, 0, $Length);
 }
 
-// Send a message to an IRC bot listening on SOCKET_LISTEN_PORT
+// Send a message to an IRC bot listening on CONFIG['SOCKET_LISTEN_PORT']
 function send_irc($Raw) {
-    if (defined('DISABLE_IRC') && DISABLE_IRC === true) {
+    if (CONFIG['DISABLE_IRC'] === true) {
         return;
     }
-    $IRCSocket = fsockopen(SOCKET_LISTEN_ADDRESS, SOCKET_LISTEN_PORT);
+    $IRCSocket = fsockopen(CONFIG['SOCKET_LISTEN_ADDRESS'], CONFIG['SOCKET_LISTEN_PORT']);
     $Raw = str_replace(array("\n", "\r"), '', $Raw);
     fwrite($IRCSocket, $Raw);
     fclose($IRCSocket);

@@ -1,7 +1,7 @@
 <?
 
 sleep(5);
-if (ENABLE_BADGE) {
+if (CONFIG['ENABLE_BADGE']) {
     $BadgeLabels = Badges::get_badge_labels();
     foreach ($BadgeLabels as $BadgeLabel) {
         if (Badges::checkBadgeFunc($BadgeLabel['Label']) && $BadgeLabel['Auto']) {

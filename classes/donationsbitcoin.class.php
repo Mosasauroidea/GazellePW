@@ -131,7 +131,7 @@ class DonationsBitcoin {
         if ($NewAmount < $OldAmount) {
             // This shouldn't happen. Perhaps bitcoind was restarted recently
             // or the block index was removed. Either way, try again later
-            send_irc('PRIVMSG ' . LAB_CHAN . " :Bad bitcoin donation data (is $NewAmount, was $OldAmount). If this persists, something is probably wrong");
+            send_irc('PRIVMSG ' . CONFIG['LAB_CHAN'] . " :Bad bitcoin donation data (is $NewAmount, was $OldAmount). If this persists, something is probably wrong");
             return false;
         }
         if ($NewAmount > $OldAmount) {

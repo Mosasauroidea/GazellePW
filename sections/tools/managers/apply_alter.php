@@ -15,20 +15,20 @@ if ($_POST['submit'] == 'Agree') {
         $DB->query("UPDATE `register_apply` SET `apply_status` = '1', `note` = '" . base64_encode($P['note']) . "',  `ts` = `ts`,  `ts_mod` = now(), `id_mod` = '" . $LoggedUser['ID'] . "' WHERE `ID` = '" . $P['id'] . "';");
 
         $InviteKey = db_string(Users::make_secret());
-        $SiteName = SITE_NAME;
+        $SiteName = CONFIG['SITE_NAME'];
         $SiteURL = site_url();
         $InviteExpires = time_plus(60 * 60 * 24 * 3); // 3 days
         $InviteReason = '';
         $Email = $P['email'];
         $DB->query("INSERT INTO invites (InviterID, InviteKey, Email, Expires, Reason) 
 	VALUES ('412', '$InviteKey', '$Email', '$InviteExpires', '$InviteReason')");
-        require(SERVER_ROOT . '/classes/templates.class.php');
+        require(CONFIG['SERVER_ROOT'] . '/classes/templates.class.php');
         $Tpl = new \TEMPLATE;
-        $Tpl->open(SERVER_ROOT . '/templates/apply_approved.tpl');
-        $Tpl->set('SiteName', SITE_NAME);
-        $Tpl->set('SiteURL', SITE_URL);
+        $Tpl->open(CONFIG['SERVER_ROOT'] . '/templates/apply_approved.tpl');
+        $Tpl->set('SiteName', CONFIG['SITE_NAME']);
+        $Tpl->set('SiteURL', CONFIG['SITE_URL']);
         $Tpl->set('InviteKey', $InviteKey);
-        Misc::send_email($Email, '你有一封来自 ' . SITE_NAME . ' 的邀请函 | You have been invited to ' . SITE_NAME, $Tpl->get(), 'noreply');
+        Misc::send_email($Email, '你有一封来自 ' . CONFIG['SITE_NAME'] . ' 的邀请函 | You have been invited to ' . CONFIG['SITE_NAME'], $Tpl->get(), 'noreply');
     }
 } elseif ($_POST['submit'] == 'Refuse') {
     $DB->query("SELECT `apply_status` FROM `register_apply` WHERE `ID` = '" . $P['id'] . "'");

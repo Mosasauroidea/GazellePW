@@ -33,7 +33,7 @@
 						WHERE ID = '" . db_string($_POST['blogid']) . "'");
                         $Cache->delete_value('staff_blog');
                         $Cache->delete_value('staff_feed_blog');
-                        Misc::create_thread(ANNOUNCEMENT_FORUM_ID, G::$LoggedUser['ID'], $_POST['title'], $_POST['body']);
+                        Misc::create_thread(CONFIG['ANNOUNCEMENT_FORUM_ID'], G::$LoggedUser['ID'], $_POST['title'], $_POST['body']);
                     }
                     header('Location: staffblog.php');
                     break;
@@ -75,9 +75,9 @@
                     $Cache->delete_value('staff_blog');
                     $Cache->delete_value('staff_blog_latest_time');
 
-                    send_irc("PRIVMSG " . ADMIN_CHAN . " :!mod New staff blog: " . $_POST['title'] . " - " . site_url() . "/staffblog.php#blog" . $DB->inserted_id());
+                    send_irc("PRIVMSG " . CONFIG['ADMIN_CHAN'] . " :!mod New staff blog: " . $_POST['title'] . " - " . site_url() . "/staffblog.php#blog" . $DB->inserted_id());
 
-                    Misc::create_thread(ANNOUNCEMENT_FORUM_ID, G::$LoggedUser['ID'], $_POST['title'], $_POST['body']);
+                    Misc::create_thread(CONFIG['ANNOUNCEMENT_FORUM_ID'], G::$LoggedUser['ID'], $_POST['title'], $_POST['body']);
 
                     header('Location: staffblog.php');
                     break;

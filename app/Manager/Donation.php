@@ -192,7 +192,7 @@ class Donation extends \Gazelle\Base {
         if (empty($YearSum)) {
             return 0;
         }
-        return number_format(($YearSum * 50 / (DONATE_MONTH_GOAL * 12) * 100));
+        return number_format(($YearSum * 50 / (CONFIG['DONATE_MONTH_GOAL'] * 12) * 100));
     }
 
     public function rejectPrepaidCard($PrepaidCardID) {
@@ -208,7 +208,7 @@ class Donation extends \Gazelle\Base {
             PrepaidCardStatus::Reject,
             $PrepaidCardID
         );
-        Misc::send_pm_with_tpl($UserID, 'reject_prepaid_card', ['SiteURL' => SITE_URL]);
+        Misc::send_pm_with_tpl($UserID, 'reject_prepaid_card', ['SiteURL' => CONFIG['SITE_URL']]);
         $this->cache->delete_value("user_donations_prepaid_card_$UserID");
         $this->cache->delete_value("donations_pending_count");
         return "";
@@ -313,8 +313,8 @@ class Donation extends \Gazelle\Base {
                     'DonationAmount' => $Amount . ' ' . $Currency,
                     'ReceivedRank' => $IncreaseRank,
                     'CurrentRank' => $this->rankLabel($Rank, $SpecialRank),
-                    'SiteName' => SITE_NAME,
-                    'SiteURL' => SITE_URL,
+                    'SiteName' => CONFIG['SITE_NAME'],
+                    'SiteURL' => CONFIG['SITE_URL'],
                 ]
             );
         }
@@ -468,7 +468,7 @@ class Donation extends \Gazelle\Base {
     }
 
     public function hasForumAccess($UserID) {
-        return $this->rank($UserID) >= DONOR_FORUM_RANK || $this->specialRank($UserID) >= MAX_SPECIAL_RANK;
+        return $this->rank($UserID) >= CONFIG['DONOR_FORUM_RANK'] || $this->specialRank($UserID) >= MAX_SPECIAL_RANK;
     }
 
     /**

@@ -40,7 +40,7 @@ if (!isset($_GET['threadid']) || !is_number($_GET['threadid'])) {
 if (isset($LoggedUser['PostsPerPage'])) {
     $PerPage = $LoggedUser['PostsPerPage'];
 } else {
-    $PerPage = POSTS_PER_PAGE;
+    $PerPage = CONFIG['POSTS_PER_PAGE'];
 }
 
 //---------- Get some data to start processing
@@ -52,7 +52,7 @@ if ($ThreadInfo === null) {
 }
 $ForumID = $ThreadInfo['ForumID'];
 
-$IsDonorForum = $ForumID == DONOR_FORUM ? true : false;
+$IsDonorForum = $ForumID == CONFIG['DONOR_FORUM'] ? true : false;
 
 // Make sure they're allowed to look at the page
 if (!Forums::check_forumperm($ForumID)) {
@@ -87,7 +87,7 @@ list($Page, $Limit) = Format::page_limit($PerPage, min($ThreadInfo['Posts'], $Po
 if (($Page - 1) * $PerPage > $ThreadInfo['Posts']) {
     $Page = ceil($ThreadInfo['Posts'] / $PerPage);
 }
-list($CatalogueID, $CatalogueLimit) = Format::catalogue_limit($Page, $PerPage, THREAD_CATALOGUE);
+list($CatalogueID, $CatalogueLimit) = Format::catalogue_limit($Page, $PerPage, CONFIG['THREAD_CATALOGUE']);
 
 // Cache catalogue from which the page is selected, allows block caches and future ability to specify posts per page
 if (!$Catalogue = $Cache->get_value("thread_{$ThreadID}_catalogue_$CatalogueID")) {
@@ -110,7 +110,7 @@ if (!$Catalogue = $Cache->get_value("thread_{$ThreadID}_catalogue_$CatalogueID")
         $Cache->cache_value("thread_{$ThreadID}_catalogue_$CatalogueID", $Catalogue, 0);
     }
 }
-$Thread = Format::catalogue_select($Catalogue, $Page, $PerPage, THREAD_CATALOGUE);
+$Thread = Format::catalogue_select($Catalogue, $Page, $PerPage, CONFIG['THREAD_CATALOGUE']);
 $LastPost = end($Thread);
 $LastPost = $LastPost['ID'];
 $FirstPost = reset($Thread);
@@ -332,7 +332,7 @@ View::show_header($ThreadInfo['Title'] . ' &lt; ' . $Forums[$ForumID]['Name'] . 
                 <?
                         } else {
                             //Staff forum, output voters, not percentages
-                            include(SERVER_ROOT . '/sections/staff/functions.php');
+                            include(CONFIG['SERVER_ROOT'] . '/sections/staff/functions.php');
                             $Staff = get_staff();
 
                             $StaffNames = array();

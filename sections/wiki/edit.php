@@ -46,7 +46,7 @@ View::show_header('Edit ' . $Title, '', 'PageWikiEdit');
                             <option class="Select-option" value="chs" <?= $Lang == "chs" ? " selected" : "" ?>><?= Lang::get('wiki', 'chinese') ?></option>
                             <option class="Select-option" value="en" <?= $Lang == "en" ? " selected" : "" ?>><?= Lang::get('wiki', 'english') ?></option>
                         </select>
-                        <input placeholder="<?= Lang::get('wiki', 'article_chinese') ?>" class="Input" type="text" size="92" name="fatherLink" id="fatherLink" <?= $FatherID ? "value=\"" . SITE_URL . "/wiki.php?action=article&id=$FatherID\"" : "" ?>>
+                        <input placeholder="<?= Lang::get('wiki', 'article_chinese') ?>" class="Input" type="text" size="92" name="fatherLink" id="fatherLink" <?= $FatherID ? "value=\"" . CONFIG['SITE_URL'] . "/wiki.php?action=article&id=$FatherID\"" : "" ?>>
                     </div>
                 </div>
                 <div class="Post-bodyActions">

@@ -3,7 +3,7 @@ View::show_header('两步验证', '', 'PageUser2FAPasswordConfirm');
 ?>
 
 <div class="BoxBody">
-    <p>请注意，如果你丢失了你的两步验证密钥以及所有的备用密钥，即使是 <?= SITE_NAME ?> 的工作人员也救不回你的账号。请确保你将备用密钥安置在妥当之处。</p>
+    <p>请注意，如果你丢失了你的两步验证密钥以及所有的备用密钥，即使是 <?= CONFIG['SITE_NAME'] ?> 的工作人员也救不回你的账号。请确保你将备用密钥安置在妥当之处。</p>
 </div>
 
 <form method="post">

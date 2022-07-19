@@ -5,7 +5,7 @@ if (!defined('LOG_ENTRIES_PER_PAGE')) {
 }
 View::show_header(Lang::get('log', 'site_log'), '', 'PageLogHome');
 
-include(SERVER_ROOT . '/sections/log/sphinx.php');
+include(CONFIG['SERVER_ROOT'] . '/sections/log/sphinx.php');
 ?>
 <div class="LayoutBody">
     <div class="BodyHeader">
@@ -28,10 +28,10 @@ include(SERVER_ROOT . '/sections/log/sphinx.php');
         </table>
     </form>
 
-    <? if ($TotalMatches > LOG_ENTRIES_PER_PAGE) { ?>
+    <? if ($TotalMatches > CONFIG['LOG_ENTRIES_PER_PAGE']) { ?>
         <div class="BodyNavLinks">
             <?
-            $Pages = Format::get_pages($Page, $TotalMatches, LOG_ENTRIES_PER_PAGE, 9);
+            $Pages = Format::get_pages($Page, $TotalMatches, CONFIG['LOG_ENTRIES_PER_PAGE'], 9);
             echo $Pages; ?>
         </div>
     <?  } ?>
@@ -218,7 +218,7 @@ include(SERVER_ROOT . '/sections/log/sphinx.php');
             ?>
         </table>
     </div>
-    <? if ($TotalMatches > LOG_ENTRIES_PER_PAGE) { ?>
+    <? if ($TotalMatches > CONFIG['LOG_ENTRIES_PER_PAGE']) { ?>
         <div class="BodyNavLinks">
             <?= $Pages; ?>
         </div>

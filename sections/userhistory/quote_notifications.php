@@ -18,7 +18,7 @@ if (isset($_GET['catchup']) && $_GET['catchup']) {
 if (isset($LoggedUser['PostsPerPage'])) {
     $PerPage = $LoggedUser['PostsPerPage'];
 } else {
-    $PerPage = POSTS_PER_PAGE;
+    $PerPage = CONFIG['POSTS_PER_PAGE'];
 }
 list($Page, $Limit) = Format::page_limit($PerPage);
 
@@ -86,7 +86,7 @@ View::show_header(Lang::get('userhistory', 'header_quote_notifications'), '', 'P
             <a href="userhistory.php?action=quote_notifications&amp;catchup=1" class="brackets"><?= Lang::get('userhistory', 'catch_up') ?></a>
             <!-- <br /><br /> -->
             <?
-            $Pages = Format::get_pages($Page, $NumResults, TOPICS_PER_PAGE, 9);
+            $Pages = Format::get_pages($Page, $NumResults, CONFIG['TOPICS_PER_PAGE'], 9);
             echo $Pages;
             ?>
         </div>

@@ -1,7 +1,7 @@
 <?php
 authorize();
 
-include(SERVER_ROOT . '/classes/validate.class.php');
+include(CONFIG['SERVER_ROOT'] . '/classes/validate.class.php');
 $Val = new VALIDATE;
 
 $P = array();
@@ -71,7 +71,7 @@ if ($Err) {
     $Category = $_POST['category'];
     $Tags = $_POST['tags'];
     $Description = $_POST['description'];
-    include(SERVER_ROOT . '/sections/collages/new.php');
+    include(CONFIG['SERVER_ROOT'] . '/sections/collages/new.php');
     die();
 }
 

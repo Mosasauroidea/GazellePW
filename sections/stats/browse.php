@@ -52,8 +52,8 @@ if (!$Data) {
 <div id="root"></div>
 
 <?
-// Stats::torrentByMonth();
-if (IS_DEV) {
+if (CONFIG['IS_DEV']) {
+  Stats::torrentByMonth();
   Stats::torrentByYear();
 }
 View::show_footer([], 'stats/index');

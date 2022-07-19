@@ -1,5 +1,5 @@
 <?
-include(SERVER_ROOT . '/classes/feed.class.php'); // RSS feeds
+include(CONFIG['SERVER_ROOT'] . '/classes/feed.class.php'); // RSS feeds
 
 authorize();
 

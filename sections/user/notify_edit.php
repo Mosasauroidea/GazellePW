@@ -170,7 +170,7 @@ View::show_header(Lang::get('user', 'manage_notifications'), 'jquery.validate,fo
                 <a href="#" onclick="$('#filter_form_<?= $N['ID'] ?>').gtoggle(); return false;" class="brackets"><?= Lang::get('global', 'show') ?></a>
                 <a href="user.php?action=notify_delete&amp;id=<?= $N['ID'] ?>&amp;auth=<?= $LoggedUser['AuthKey'] ?>" onclick="return confirm('<?= Lang::get('user', 'are_you_sure_delete_notification_filter') ?>')" class="brackets"><?= Lang::get('global', 'delete') ?></a>
                 <a <a class="brackets" href="feeds.php?feed=torrents_notify_<?= $N['ID'] ?>_<?= $LoggedUser['torrent_pass'] ?>&amp;user=<?= $LoggedUser['ID'] ?>&amp;auth=<?= $LoggedUser['RSS_Auth'] ?>&amp;passkey=<?= $LoggedUser['torrent_pass'] ?>&amp;authkey=<?= $LoggedUser['AuthKey'] ?>&amp;name=<?= urlencode($N['Label']) ?>"><?= Lang::get('user', 'rss_address') ?></a>
-                <a href="feeds.php?feed=torrents_notify_<?= $N['ID'] ?>_<?= $LoggedUser['torrent_pass'] ?>&amp;user=<?= $LoggedUser['ID'] ?>&amp;auth=<?= $LoggedUser['RSS_Auth'] ?>&amp;passkey=<?= $LoggedUser['torrent_pass'] ?>&amp;authkey=<?= $LoggedUser['AuthKey'] ?>&amp;name=<?= urlencode($N['Label']) ?>"><img src="<?= STATIC_SERVER ?>/common/symbols/rss.png" alt="RSS feed" /></a>
+                <a href="feeds.php?feed=torrents_notify_<?= $N['ID'] ?>_<?= $LoggedUser['torrent_pass'] ?>&amp;user=<?= $LoggedUser['ID'] ?>&amp;auth=<?= $LoggedUser['RSS_Auth'] ?>&amp;passkey=<?= $LoggedUser['torrent_pass'] ?>&amp;authkey=<?= $LoggedUser['AuthKey'] ?>&amp;name=<?= urlencode($N['Label']) ?>"><img src="<?= CONFIG['STATIC_SERVER'] ?>/common/symbols/rss.png" alt="RSS feed" /></a>
 
             </b>
         <?

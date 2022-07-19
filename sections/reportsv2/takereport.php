@@ -109,7 +109,7 @@ list($GroupID) = $DB->next_record();
 
 if (!empty($Err)) {
     error($Err);
-    include(SERVER_ROOT . '/sections/reportsv2/report.php');
+    include(CONFIG['SERVER_ROOT'] . '/sections/reportsv2/report.php');
     die();
 }
 
@@ -170,7 +170,7 @@ if ($Type != "rescore" && $Type != "lossyapproval" && $Type != "upload_contest" 
         } elseif (array_key_exists($_POST['type'], $Types['master'])) {
             $ToReportTitle = $Types['master'][$Type]['title'];
         }
-        Misc::send_pm_with_tpl($UserID, 'torrent_reported', ['SiteURL' => SITE_URL, 'TorrentID' => $TorrentID, 'RawName' => $RawName, 'ToReportTitle' => $ToReportTitle]);
+        Misc::send_pm_with_tpl($UserID, 'torrent_reported', ['SiteURL' => CONFIG['SITE_URL'], 'TorrentID' => $TorrentID, 'RawName' => $RawName, 'ToReportTitle' => $ToReportTitle]);
     }
 }
 $Cache->delete_value("reports_torrent_$TorrentID");

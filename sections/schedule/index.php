@@ -43,7 +43,7 @@ $RunTasks = null;
  */
 function run_tasks($Dir) {
     global $RunTasks, $LineEnd;
-    $Tasks = array_diff(scandir(SERVER_ROOT . '/sections/schedule/' . $Dir, 1), array('.', '..'));
+    $Tasks = array_diff(scandir(CONFIG['SERVER_ROOT'] . '/sections/schedule/' . $Dir, 1), array('.', '..'));
     sort($Tasks);
     extract($GLOBALS);
     foreach ($Tasks as $Task) {
@@ -54,7 +54,7 @@ function run_tasks($Dir) {
         }
         print("Running {$Task}...");
         /** @noinspection PhpIncludeInspection */
-        require_once SERVER_ROOT . "/sections/schedule/{$Dir}/{$Task}.php";
+        require_once CONFIG['SERVER_ROOT'] . "/sections/schedule/{$Dir}/{$Task}.php";
         print("DONE! (" . number_format(microtime(true) - $TimeStart, 3) . ")" . $LineEnd);
     }
 }
@@ -64,14 +64,14 @@ function run_task($Dir, $Task) {
     extract($GLOBALS);
     print("Running {$Task}...");
     /** @noinspection PhpIncludeInspection */
-    require_once SERVER_ROOT . "/sections/schedule/{$Dir}/{$Task}.php";
+    require_once CONFIG['SERVER_ROOT'] . "/sections/schedule/{$Dir}/{$Task}.php";
     print("DONE! (" . number_format(microtime(true) - $TimeStart, 3) . ")" . $LineEnd);
 }
 
 $RunOnce = '';
 
 if (PHP_SAPI === 'cli') {
-    if (!isset($argv[1]) || $argv[1] != SCHEDULE_KEY) {
+    if (!isset($argv[1]) || $argv[1] != CONFIG['SCHEDULE_KEY']) {
         error(403);
     }
     if (isset($argv[2])) {

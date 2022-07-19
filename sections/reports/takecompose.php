@@ -50,7 +50,7 @@ if (!empty($Err)) {
     //header('Location: inbox.php?action=compose&to='.$_POST['toid']);
     $ToID = $_POST['toid'];
     $Return = true;
-    include(SERVER_ROOT . '/sections/inbox/compose.php');
+    include(CONFIG['SERVER_ROOT'] . '/sections/inbox/compose.php');
     die();
 }
 

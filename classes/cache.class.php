@@ -72,7 +72,7 @@ class CACHE extends Memcached {
      * @param $Servers
      * @param string $PersistantID
      */
-    function __construct($Servers, $PersistantID = SITE_NAME) {
+    function __construct($Servers, $PersistantID = CONFIG['SITE_NAME']) {
         parent::__construct($PersistantID);
         $this->Servers = $Servers;
         $ServerList = array();

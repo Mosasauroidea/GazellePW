@@ -1,6 +1,6 @@
 <?php
-define("PUSH_SOCKET_LISTEN_ADDRESS", "127.0.0.1");
-define("PUSH_SOCKET_LISTEN_PORT", 6789);
+define("PUSH_CONFIG['SOCKET_LISTEN_ADDRESS']", "127.0.0.1");
+define("PUSH_CONFIG['SOCKET_LISTEN_PORT']", 6789);
 
 require 'NMA_API.php';
 require 'config.php';
@@ -20,7 +20,7 @@ class PushServer {
     private function init() {
         $this->ListenSocket = socket_create(AF_INET, SOCK_STREAM, SOL_TCP);
         socket_set_option($this->ListenSocket, SOL_SOCKET, SO_REUSEADDR, 1);
-        socket_bind($this->ListenSocket, PUSH_SOCKET_LISTEN_ADDRESS, PUSH_SOCKET_LISTEN_PORT);
+        socket_bind($this->ListenSocket, PUSH_CONFIG['SOCKET_LISTEN_ADDRESS'], PUSH_CONFIG['SOCKET_LISTEN_PORT']);
         socket_listen($this->ListenSocket);
         socket_set_nonblock($this->ListenSocket);
         echo "\nInitialized\n";
@@ -70,7 +70,7 @@ class PushServer {
         $API = "https://api.prowlapp.com/publicapi/add";
         $Fields = array(
             'apikey' => urlencode($Key),
-            'application' => urlencode(SITE_NAME),
+            'application' => urlencode(CONFIG['SITE_NAME']),
             'event' => urlencode($Title),
             'description' => urlencode($Message)
         );
@@ -100,7 +100,7 @@ class PushServer {
         $Fields = array(
             'title' => urlencode($Title),
             'text' => urlencode($Message),
-            'sender' => urlencode(SITE_NAME)
+            'sender' => urlencode(CONFIG['SITE_NAME'])
         );
         $FieldsString = "";
         foreach ($Fields as $key => $value) {
@@ -122,7 +122,7 @@ class PushServer {
             'apikey' => $Key
         ));
         if ($NMA->verify()) {
-            if ($NMA->notify(SITE_NAME, $Title, $Message, $URL)) {
+            if ($NMA->notify(CONFIG['SITE_NAME'], $Title, $Message, $URL)) {
                 echo "Push sent to NMA";
             }
         }

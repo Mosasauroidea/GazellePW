@@ -1,5 +1,5 @@
 <?
-$RequestTax = REQUEST_TAX;
+$RequestTax = CONFIG['REQUEST_TAX'];
 
 // Minimum and default amount of upload to remove from the user when they vote.
 // Also change in static/functions/requests.js
@@ -113,5 +113,5 @@ ajax_json_success(array(
     'tags' => $JsonTags,
     'comments' => $JsonRequestComments,
     'commentPage' => (int)$Page,
-    'commentPages' => (int)ceil($NumComments / TORRENT_COMMENTS_PER_PAGE),
+    'commentPages' => (int)ceil($NumComments / CONFIG['TORRENT_COMMENTS_PER_PAGE']),
 ));

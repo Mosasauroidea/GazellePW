@@ -99,7 +99,7 @@ class DEBUG {
             $Time
         );
         $RequestURI = !empty($_SERVER['REQUEST_URI']) ? substr($_SERVER['REQUEST_URI'], 1) : '';
-        // send_irc('PRIVMSG ' . LAB_CHAN . " :{$Message} $Document " . site_url() . "tools.php?action=analysis&case=$Identifier " . site_url() . $RequestURI);
+        // send_irc('PRIVMSG ' . CONFIG['LAB_CHAN'] . " :{$Message} $Document " . site_url() . "tools.php?action=analysis&case=$Identifier " . site_url() . $RequestURI);
     }
 
     public function get_cpu_time() {
@@ -118,7 +118,7 @@ class DEBUG {
         if (!$VarName) {
             $VarName = $ID;
         }
-        $File = array('path' => substr($BackTrace[0]['file'], strlen(SERVER_ROOT)), 'line' => $BackTrace[0]['line']);
+        $File = array('path' => substr($BackTrace[0]['file'], strlen(CONFIG['SERVER_ROOT'])), 'line' => $BackTrace[0]['line']);
         $this->LoggedVars[$ID] = array($VarName => array('bt' => $File, 'data' => $Var));
     }
 
@@ -210,10 +210,10 @@ class DEBUG {
         }
 
         //Shorten the path & we're done
-        $File = str_replace(SERVER_ROOT, '', $File);
-        $Error = str_replace(SERVER_ROOT, '', $Error);
+        $File = str_replace(CONFIG['SERVER_ROOT'], '', $File);
+        $Error = str_replace(CONFIG['SERVER_ROOT'], '', $Error);
 
-        if (DEBUG_WARNINGS) {
+        if (CONFIG['DEBUG_WARNINGS']) {
             $this->Errors[] = array($Error, $File . ':' . $Line, $Call, $Args);
         }
         return true;

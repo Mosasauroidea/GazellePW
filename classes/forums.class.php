@@ -86,7 +86,7 @@ class Forums {
             return true;
         }
         $donation = new Donation();
-        if ($ForumID == DONOR_FORUM && $donation->hasForumAccess(G::$LoggedUser['ID'])) {
+        if ($ForumID == CONFIG['DONOR_FORUM'] && $donation->hasForumAccess(G::$LoggedUser['ID'])) {
             return true;
         }
         $UserInfo = G::$Cache->get_value("user_info_" . G::$LoggedUser['ID']);
@@ -143,7 +143,7 @@ class Forums {
     // 最近5天最新回帖
     public static function latest_thread() {
         list($Classes,) = Users::get_classes();
-        $Class = $Classes[USER]['Level'];
+        $Class = $Classes[CONFIG['USER_CLASS']['USER']]['Level'];
         $Threads = G::$Cache->get_value("LatestThread");
         if (!$Threads) {
             G::$DB->query("SELECT
@@ -265,7 +265,7 @@ class Forums {
         if (isset(G::$LoggedUser['PostsPerPage'])) {
             $PerPage = G::$LoggedUser['PostsPerPage'];
         } else {
-            $PerPage = POSTS_PER_PAGE;
+            $PerPage = CONFIG['POSTS_PER_PAGE'];
         }
         $TopicIDs = array();
         foreach ($Forums as $Forum) {
@@ -344,8 +344,8 @@ class Forums {
         $RestrictedForums = self::get_restricted_forums();
         $PermittedForums = self::get_permitted_forums();
         $donation = new Donation();
-        if ($donation->hasForumAccess(G::$LoggedUser['ID']) && !in_array(DONOR_FORUM, $PermittedForums)) {
-            $PermittedForums[] = DONOR_FORUM;
+        if ($donation->hasForumAccess(G::$LoggedUser['ID']) && !in_array(CONFIG['DONOR_FORUM'], $PermittedForums)) {
+            $PermittedForums[] = CONFIG['DONOR_FORUM'];
         }
         $SQL = "((f.MinClassRead <= '" . G::$LoggedUser['Class'] . "'";
         if (count($RestrictedForums)) {

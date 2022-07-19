@@ -500,7 +500,7 @@ class Users {
 
     /**
      * Create salted crypt hash for a given string with
-     * settings specified in CRYPT_HASH_PREFIX
+     * settings specified in CONFIG['CRYPT_HASH_PREFIX']
      *
      * @param string  $Str string to hash
      * @return string hashed password
@@ -525,8 +525,8 @@ class Users {
         global $Classes;
         $donation = new Donation();
         $Badges = $Badges;
-        $ProfileBadges = $ProfileBadges && ENABLE_BADGE;
-        $UsernameBadges = $UsernameBadges && ENABLE_BADGE;
+        $ProfileBadges = $ProfileBadges && CONFIG['ENABLE_BADGE'];
+        $UsernameBadges = $UsernameBadges && CONFIG['ENABLE_BADGE'];
 
         // This array is a hack that should be made less retarded, but whatevs
         //                        PermID => ShortForm
@@ -557,7 +557,7 @@ class Users {
         $Username = $UserInfo['Username'];
         $Paranoia = $UserInfo['Paranoia'];
 
-        if ($UserInfo['Class'] < $Classes[MOD]['Level']) {
+        if ($UserInfo['Class'] < $Classes[CONFIG['USER_CLASS']['MOD']]['Level']) {
             $OverrideParanoia = check_perms('users_override_paranoia', $UserInfo['Class']);
         } else {
             // Don't override paranoia for mods who don't want to show their donor heart
@@ -610,9 +610,9 @@ class Users {
                     $DonorHeart = 5;
                 }
                 if ($DonorHeart === 1) {
-                    $IconImage = STATIC_SERVER . 'common/symbols/donor.png';
+                    $IconImage = CONFIG['STATIC_SERVER'] . 'common/symbols/donor.png';
                 } else {
-                    $IconImage = STATIC_SERVER . "common/symbols/donor_{$DonorHeart}.png";
+                    $IconImage = CONFIG['STATIC_SERVER'] . "common/symbols/donor_{$DonorHeart}.png";
                 }
             }
             $Str .= "<a target=\"_blank\" href=\"$IconLink\"><img class=\"donor_icon\" src=\"$IconImage\" data-tooltip=\"$IconText\" /></a>";
@@ -798,7 +798,7 @@ class Users {
                 if (!empty($Avatar)) {
                     $FirstAvatar = $Avatar;
                 } else {
-                    $FirstAvatar = STATIC_SERVER . 'common/avatars/default.png';
+                    $FirstAvatar = CONFIG['STATIC_SERVER'] . 'common/avatars/default.png';
                 }
                 break;
             case 2:
@@ -845,7 +845,7 @@ class Users {
                 }
                 break;
             default:
-                $FirstAvatar = STATIC_SERVER . 'common/avatars/default.png';
+                $FirstAvatar = CONFIG['STATIC_SERVER'] . 'common/avatars/default.png';
         }
         // in this case, $Attrs is actually just a URL
         if (!$ReturnHTML) {
@@ -917,17 +917,17 @@ class Users {
 				ResetExpires = '" . time_plus(60 * 60) . "'
 			WHERE UserID = '$UserID'");
 
-        require(SERVER_ROOT . '/classes/templates.class.php');
+        require(CONFIG['SERVER_ROOT'] . '/classes/templates.class.php');
         $TPL = new TEMPLATE;
-        $TPL->open(SERVER_ROOT . '/templates/password_reset.tpl'); // Password reset template
+        $TPL->open(CONFIG['SERVER_ROOT'] . '/templates/password_reset.tpl'); // Password reset template
 
         $TPL->set('Username', $Username);
         $TPL->set('ResetKey', $ResetKey);
         $TPL->set('IP', $_SERVER['REMOTE_ADDR']);
-        $TPL->set('SITE_NAME', SITE_NAME);
+        $TPL->set('SITE_NAME', CONFIG['SITE_NAME']);
         $TPL->set('SITE_URL', site_url(false));
 
-        Misc::send_email($Email, '重置你 ' . SITE_NAME . ' 账号的密码 | Password reset information for ' . SITE_NAME,  $TPL->get(), 'noreply', 'text/html');
+        Misc::send_email($Email, '重置你 ' . CONFIG['SITE_NAME'] . ' 账号的密码 | Password reset information for ' . CONFIG['SITE_NAME'],  $TPL->get(), 'noreply', 'text/html');
     }
 
     /**

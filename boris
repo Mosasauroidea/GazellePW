@@ -40,7 +40,7 @@ G::$Cache = &$Cache;
 G::$DB = &$DB;
 G::$Debug = &$Debug;
 
-$b = new \Boris\Boris(SITE_NAME . '> ');
+$b = new \Boris\Boris(CONFIG['SITE_NAME'] . '> ');
 $preload = [
     'cache'       => $Cache,
     'db'          => $DB,

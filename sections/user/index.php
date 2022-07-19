@@ -6,7 +6,7 @@ Should the advanced search really only show if they match 3 perms?
 Make sure all constants are defined in config.php and not in random files
  *****************************************************************/
 enforce_login();
-include(SERVER_ROOT . "/classes/validate.class.php");
+include(CONFIG['SERVER_ROOT'] . "/classes/validate.class.php");
 $Val = new VALIDATE;
 
 if (empty($_REQUEST['action'])) {
@@ -58,8 +58,8 @@ switch ($_REQUEST['action']) {
         }
         break;
     case '2fa':
-        include(SERVER_ROOT . '/classes/google_authenticator.class.php');
-        include(SERVER_ROOT . '/classes/qr.class.php');
+        include(CONFIG['SERVER_ROOT'] . '/classes/google_authenticator.class.php');
+        include(CONFIG['SERVER_ROOT'] . '/classes/qr.class.php');
 
         if (session_status() === PHP_SESSION_NONE) {
             session_start();
@@ -176,7 +176,7 @@ switch ($_REQUEST['action']) {
         include('take_edit.php');
         break;
     case 'invitetree':
-        include(SERVER_ROOT . '/sections/user/invitetree.php');
+        include(CONFIG['SERVER_ROOT'] . '/sections/user/invitetree.php');
         break;
     case 'invite':
         include('invite.php');
@@ -215,7 +215,7 @@ switch ($_REQUEST['action']) {
         $Cache->delete_value('inbox_new_' . $UserID);
         $Cache->delete_value('notifications_new_' . $UserID);
         $Cache->delete_value('collage_subs_user_new_' . $UserID);
-        include(SERVER_ROOT . '/sections/user/user.php');
+        include(CONFIG['SERVER_ROOT'] . '/sections/user/user.php');
         break;
 
         // Provide public methods for Last.fm data gets.
@@ -225,7 +225,7 @@ switch ($_REQUEST['action']) {
         break;
     default:
         if (isset($_REQUEST['id'])) {
-            include(SERVER_ROOT . '/sections/user/user.php');
+            include(CONFIG['SERVER_ROOT'] . '/sections/user/user.php');
         } else {
             header("Location: user.php?id={$LoggedUser['ID']}");
         }

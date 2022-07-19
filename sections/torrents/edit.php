@@ -7,7 +7,7 @@
 // At the bottom, there are grouping functions which are off limits to  //
 // most members.                                                        //
 //**********************************************************************//
-require(SERVER_ROOT . '/classes/torrent_form.class.php');
+require(CONFIG['SERVER_ROOT'] . '/classes/torrent_form.class.php');
 if (!is_number($_GET['id']) || !$_GET['id']) {
     error(0);
 }

@@ -42,7 +42,7 @@ if ($TorrentID) {
                     </tr>
                     <tr class="Form-row">
                         <td class="Form-label"><?= Lang::get('subtitles', 'torrent_pl') ?>:</td>
-                        <td class="Form-inputs"><input class="Input" type="text" readonly value="<?= site_url() . '/torrents.php?torrentid=' . $TorrentID ?>" name="torrent_pl_link" id="subtitle_torrent_pl" placeholder="<?= SITE_URL ?>/torrents.php?torrentid=12345"></td>
+                        <td class="Form-inputs"><input class="Input" type="text" readonly value="<?= site_url() . '/torrents.php?torrentid=' . $TorrentID ?>" name="torrent_pl_link" id="subtitle_torrent_pl" placeholder="<?= CONFIG['SITE_URL'] ?>/torrents.php?torrentid=12345"></td>
                     </tr>
                     <tr class="Form-row">
                         <td class="Form-label"><?= Lang::get('global', 'language') ?>:</td>

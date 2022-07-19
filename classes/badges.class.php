@@ -1,15 +1,15 @@
 <?
-include(SERVER_ROOT . '/sections/badges/functions.php');
+include(CONFIG['SERVER_ROOT'] . '/sections/badges/functions.php');
 class Badges {
     static $Limit = array(
-        USER => 0,
-        MEMBER => 0,
-        POWER => 1,
-        ELITE => 2,
-        TORRENT_MASTER => 3,
-        POWER_TM => 4,
-        ELITE_TM => 5,
-        GURU => 5,
+        CONFIG['USER_CLASS']['USER'] => 0,
+        CONFIG['USER_CLASS']['MEMBER'] => 0,
+        CONFIG['USER_CLASS']['POWER'] => 1,
+        CONFIG['USER_CLASS']['ELITE'] => 2,
+        CONFIG['USER_CLASS']['TORRENT_MASTER'] => 3,
+        CONFIG['USER_CLASS']['POWER_TM'] => 4,
+        CONFIG['USER_CLASS']['ELITE_TM'] => 5,
+        CONFIG['USER_CLASS']['GURU'] => 5,
     );
     static $Lang = false;
     public static function get_text($Label, $Type) {

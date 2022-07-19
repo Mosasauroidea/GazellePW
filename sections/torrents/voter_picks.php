@@ -1,6 +1,6 @@
 <?
 //global $Cache, $DB;
-include(SERVER_ROOT . '/sections/torrents/ranking_funcs.php');
+include(CONFIG['SERVER_ROOT'] . '/sections/torrents/ranking_funcs.php');
 
 $Top10 = $Cache->get_value('similar_albums_' . $GroupID);
 if ($Top10 === false || isset($Top10[$GroupID])) {

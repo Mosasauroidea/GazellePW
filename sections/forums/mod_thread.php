@@ -52,7 +52,7 @@ $ForumID = (int)$_POST['forumid'];
 $Page = (int)$_POST['page'];
 $Action = '';
 
-$TrashForumID = ($ForumID === EDITING_FORUM_ID) ? EDITING_TRASH_FORUM_ID : TRASH_FORUM_ID;
+$TrashForumID = ($ForumID === CONFIG['EDITING_FORUM_ID']) ? CONFIG['EDITING_TRASH_FORUM_ID'] : CONFIG['TRASH_FORUM_ID'];
 
 if ($Locked == 1) {
     $DB->query("
@@ -354,7 +354,7 @@ if (isset($_POST['delete'])) {
         }
     }
     if ($Locked) {
-        $CatalogueID = floor($NumPosts / THREAD_CATALOGUE);
+        $CatalogueID = floor($NumPosts / CONFIG['THREAD_CATALOGUE']);
         for ($i = 0; $i <= $CatalogueID; $i++) {
             $Cache->expire_value("thread_{$TopicID}_catalogue_$i", 3600 * 24 * 7); // 7 days
         }

@@ -4,7 +4,7 @@
 Forums search result page
 */
 
-list($Page, $Limit) = Format::page_limit(POSTS_PER_PAGE);
+list($Page, $Limit) = Format::page_limit(CONFIG['POSTS_PER_PAGE']);
 
 if (isset($_GET['type']) && $_GET['type'] === 'body') {
     $Type = 'body';
@@ -313,7 +313,7 @@ View::show_header(Lang::get('forums', 'forums_greater_than_search'), 'bbcode,for
         list($Results) = $DB->next_record();
         $DB->set_query_id($Records);
 
-        $Pages = Format::get_pages($Page, $Results, POSTS_PER_PAGE, 9);
+        $Pages = Format::get_pages($Page, $Results, CONFIG['POSTS_PER_PAGE'], 9);
         echo $Pages;
         ?>
     </div>

@@ -14,7 +14,7 @@ View::show_header('Periodic Task Statistics', '', 'PageToolPeriodicStat');
 <div class="BodyHeader">
     <h2 class="BodyHeader-nav">Periodic Task Statistics</h2>
 </div>
-<?php include(SERVER_ROOT . '/sections/tools/development/periodic_links.php'); ?>
+<?php include(CONFIG['SERVER_ROOT'] . '/sections/tools/development/periodic_links.php'); ?>
 
 <div class="BoxBody">
     <table class="Table">
@@ -42,8 +42,8 @@ View::show_header('Periodic Task Statistics', '', 'PageToolPeriodicStat');
     </div>
 </div>
 
-<script src="<?= STATIC_SERVER ?>/functions/highcharts.js"></script>
-<script src="<?= STATIC_SERVER ?>/functions/highcharts_custom.js"></script>
+<script src="<?= CONFIG['STATIC_SERVER'] ?>/functions/highcharts.js"></script>
+<script src="<?= CONFIG['STATIC_SERVER'] ?>/functions/highcharts_custom.js"></script>
 
 <script>
     document.addEventListener('DOMContentLoaded', function() {

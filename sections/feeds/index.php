@@ -23,7 +23,7 @@ if (
 $User = (int)$_GET['user'];
 
 if (!$Enabled = $Cache->get_value("enabled_$User")) {
-    require(SERVER_ROOT . '/classes/mysql.class.php');
+    require(CONFIG['SERVER_ROOT'] . '/classes/mysql.class.php');
     $DB = new DB_MYSQL; //Load the database wrapper
     $DB->query("
 		SELECT Enabled
@@ -33,19 +33,19 @@ if (!$Enabled = $Cache->get_value("enabled_$User")) {
     $Cache->cache_value("enabled_$User", $Enabled, 0);
 }
 
-if (md5($User . RSS_HASH . $_GET['passkey']) !== $_GET['auth'] || $Enabled != 1) {
+if (md5($User . CONFIG['RSS_HASH'] . $_GET['passkey']) !== $_GET['auth'] || $Enabled != 1) {
     $Feed->open_feed();
     $Feed->channel('Blocked', 'RSS feed.');
     $Feed->close_feed();
     die();
 }
-require(SERVER_ROOT . '/classes/text.class.php');
+require(CONFIG['SERVER_ROOT'] . '/classes/text.class.php');
 $Feed->open_feed();
 switch ($_GET['feed']) {
     case 'feed_news':
         $Feed->channel('News', 'RSS feed for site news.');
         if (!$News = $Cache->get_value('news')) {
-            require(SERVER_ROOT . '/classes/mysql.class.php'); //Require the database wrapper
+            require(CONFIG['SERVER_ROOT'] . '/classes/mysql.class.php'); //Require the database wrapper
             $DB = new DB_MYSQL; //Load the database wrapper
             $DB->query("
 				SELECT
@@ -65,7 +65,7 @@ switch ($_GET['feed']) {
             if (strtotime($NewsTime) >= time()) {
                 continue;
             }
-            echo $Feed->item($Title, Text::strip_bbcode($Body), "index.php#news$NewsID", SITE_NAME . ' Staff', '', '', $NewsTime);
+            echo $Feed->item($Title, Text::strip_bbcode($Body), "index.php#news$NewsID", CONFIG['SITE_NAME'] . ' Staff', '', '', $NewsTime);
             if (++$Count > 4) {
                 break;
             }
@@ -74,7 +74,7 @@ switch ($_GET['feed']) {
     case 'feed_blog':
         $Feed->channel('Blog', 'RSS feed for site blog.');
         if (!$Blog = $Cache->get_value('blog')) {
-            require(SERVER_ROOT . '/classes/mysql.class.php'); //Require the database wrapper
+            require(CONFIG['SERVER_ROOT'] . '/classes/mysql.class.php'); //Require the database wrapper
             $DB = new DB_MYSQL; //Load the database wrapper
             $DB->query("
 				SELECT
@@ -95,17 +95,17 @@ switch ($_GET['feed']) {
         foreach ($Blog as $BlogItem) {
             list($BlogID, $Author, $AuthorID, $Title, $Body, $BlogTime, $ThreadID) = $BlogItem;
             if ($ThreadID) {
-                echo $Feed->item($Title, Text::strip_bbcode($Body), "forums.php?action=viewthread&amp;threadid=$ThreadID", SITE_NAME . ' Staff', '', '', $BlogTime);
+                echo $Feed->item($Title, Text::strip_bbcode($Body), "forums.php?action=viewthread&amp;threadid=$ThreadID", CONFIG['SITE_NAME'] . ' Staff', '', '', $BlogTime);
             } else {
-                echo $Feed->item($Title, Text::strip_bbcode($Body), "blog.php#blog$BlogID", SITE_NAME . ' Staff', '', '', $BlogTime);
+                echo $Feed->item($Title, Text::strip_bbcode($Body), "blog.php#blog$BlogID", CONFIG['SITE_NAME'] . ' Staff', '', '', $BlogTime);
             }
         }
         break;
     case 'feed_changelog':
         $Feed->channel('Gazelle Change Log', 'RSS feed for Gazelle\'s changelog.');
         if (!$Changelog = $Cache->get_value('changelog')) {
-            require(SERVER_ROOT . '/classes/mysql.class.php');
-            require(SERVER_ROOT . '/classes/misc.class.php');
+            require(CONFIG['SERVER_ROOT'] . '/classes/mysql.class.php');
+            require(CONFIG['SERVER_ROOT'] . '/classes/misc.class.php');
 
             $DB = new DB_MYSQL;
             $DB->query("
@@ -118,7 +118,7 @@ switch ($_GET['feed']) {
         }
         foreach ($Changelog as $Change) {
             list($Message, $Author, $Date) = $Change;
-            echo $Feed->item("$Date by $Author", $Message, 'tools.php?action=change_log', SITE_NAME . ' Staff', '', '', $Date);
+            echo $Feed->item("$Date by $Author", $Message, 'tools.php?action=change_log', CONFIG['SITE_NAME'] . ' Staff', '', '', $Date);
         }
         break;
     case 'torrents_all':

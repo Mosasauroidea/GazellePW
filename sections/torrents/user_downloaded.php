@@ -1,7 +1,7 @@
 <?php
 
 // todo by qwerty temp code
-if (!ENABLE_HNR) {
+if (!CONFIG['ENABLE_HNR']) {
     die();
 }
 
@@ -39,10 +39,10 @@ if (!is_number($UserID)) {
 
 if (!empty($_GET['page']) && is_number($_GET['page']) && $_GET['page'] > 0) {
     $Page = $_GET['page'];
-    $Limit = ($Page - 1) * TORRENTS_PER_PAGE . ', ' . TORRENTS_PER_PAGE;
+    $Limit = ($Page - 1) * CONFIG['TORRENTS_PER_PAGE'] . ', ' . CONFIG['TORRENTS_PER_PAGE'];
 } else {
     $Page = 1;
-    $Limit = TORRENTS_PER_PAGE;
+    $Limit = CONFIG['TORRENTS_PER_PAGE'];
 }
 
 if (!empty($_GET['order']) && array_key_exists($_GET['order'], $Orders)) {
@@ -310,7 +310,7 @@ $User = Users::user_info($UserID);
 
 View::show_header($User['Username'] . Lang::get('torrents', 'user_s') . Lang::get('torrents', 'action_' . $Action) . Lang::get('torrents', 'action_torrents'), 'voting', 'PageTorrentuserDownloaded');
 
-$Pages = Format::get_pages($Page, $TorrentCount, TORRENTS_PER_PAGE);
+$Pages = Format::get_pages($Page, $TorrentCount, CONFIG['TORRENTS_PER_PAGE']);
 
 
 ?>
@@ -503,7 +503,7 @@ $Pages = Format::get_pages($Page, $TorrentCount, TORRENTS_PER_PAGE);
                         <?= icon("torrent-time") ?>
                     </i>
                 </td>
-                <? if (ENABLE_HNR) { ?>
+                <? if (CONFIG['ENABLE_HNR']) { ?>
                     <td class="center">
                         <i data-tooltip="<?= Lang::get('torrents', 'hit_and_run') ?>">
                             <?= icon("User/hnr") ?>
@@ -559,7 +559,7 @@ $Pages = Format::get_pages($Page, $TorrentCount, TORRENTS_PER_PAGE);
                     <td class="Table-cell Table-cellCenter">
                         <?= Time::convertMinutes($SeedTime / 60) ?>
                     </td>
-                    <? if (ENABLE_HNR) { ?>
+                    <? if (CONFIG['ENABLE_HNR']) { ?>
                         <td class="Table-cell Table-cellCenter">
                             <span class="u-colorWarning"><?= $HNR ? Lang::get('torrents', 'yes') : Lang::get('torrents', 'no') ?></span>
                         </td>

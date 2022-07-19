@@ -21,7 +21,7 @@ class SphinxqlQuery {
      * @param int $Port listening port
      * @param string $Socket Unix socket address, overrides $Server:$Port
      */
-    public function __construct($Server = SPHINXQL_HOST, $Port = SPHINXQL_PORT, $Socket = SPHINXQL_SOCK) {
+    public function __construct($Server = CONFIG['SPHINXQL_HOST'], $Port = CONFIG['SPHINXQL_PORT'], $Socket = CONFIG['SPHINXQL_SOCK']) {
         $this->Sphinxql = Sphinxql::init_connection($Server, $Port, $Socket);
         $this->reset();
     }
@@ -220,7 +220,7 @@ class SphinxqlQuery {
      * @param int $MaxMatches number of results to store in the Sphinx server's memory. Must be >= ($Offset+$Limit)
      * @return current SphinxqlQuery object
      */
-    public function limit($Offset, $Limit, $MaxMatches = SPHINX_MAX_MATCHES) {
+    public function limit($Offset, $Limit, $MaxMatches = CONFIG['SPHINX_MAX_MATCHES']) {
         $this->Limits = "$Offset, $Limit";
         $this->set('max_matches', $MaxMatches);
         return $this;

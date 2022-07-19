@@ -16,10 +16,10 @@ View::show_header(Lang::get('forums', 'forums'), '', 'PageForumHome');
             if (!Forums::check_forumperm($ForumID)) {
                 continue;
             }
-            if ($ForumID == DONOR_FORUM) {
+            if ($ForumID == CONFIG['DONOR_FORUM']) {
                 $ForumDescription = Donations::get_forum_description();
             }
-            $TooltipTheme = $ForumID == DONOR_FORUM ? 'gold' : '';
+            $TooltipTheme = $ForumID == CONFIG['DONOR_FORUM'] ? 'gold' : '';
             $Row = $Row === 'a' ? 'b' : 'a';
             $ForumDescription = display_str($ForumDescription);
 

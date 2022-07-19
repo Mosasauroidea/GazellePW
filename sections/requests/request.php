@@ -115,7 +115,7 @@ View::show_header(Lang::get('requests', 'view_request') . ": $FullName", 'commen
                         ?>
                             <img style="width: 100%;" src="<?= ImageTools::process($Request['Image'], true) ?>" alt="<?= $FullName ?>" onclick="lightbox.init(this, 220);" />
                         <?      } else { ?>
-                            <img style="width: 100%;" src="<?= STATIC_SERVER ?>common/noartwork/<?= $CategoryIcons[$Request['CategoryID'] - 1] ?>" alt="<?= $CategoryName ?>" data-tooltip="<?= $CategoryName ?>" height="220" border="0" />
+                            <img style="width: 100%;" src="<?= CONFIG['STATIC_SERVER'] ?>common/noartwork/<?= $CategoryIcons[$Request['CategoryID'] - 1] ?>" alt="<?= $CategoryName ?>" data-tooltip="<?= $CategoryName ?>" height="220" border="0" />
                         <?      } ?>
                     </div>
                 </div>
@@ -395,7 +395,7 @@ View::show_header(Lang::get('requests', 'view_request') . ": $FullName", 'commen
                 <div class="BodyNavLinks">
                     <a name="comments"></a>
                     <?
-                    $Pages = Format::get_pages($Page, $NumComments, TORRENT_COMMENTS_PER_PAGE, 9, '#comments');
+                    $Pages = Format::get_pages($Page, $NumComments, CONFIG['TORRENT_COMMENTS_PER_PAGE'], 9, '#comments');
                     echo $Pages;
                     ?>
                 </div>

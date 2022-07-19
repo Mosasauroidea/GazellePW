@@ -16,7 +16,7 @@ if (!extension_loaded('gd')) {
 
 function img_error($Type) {
     header('Content-type: image/gif');
-    die(file_get_contents(SERVER_ROOT . '/sections/image/' . $Type . '.gif'));
+    die(file_get_contents(CONFIG['SERVER_ROOT'] . '/sections/image/' . $Type . '.gif'));
 }
 
 function invisible($Image) {

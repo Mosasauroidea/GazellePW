@@ -18,7 +18,7 @@ if ($CloseLogin) {
 ?>
 <? View::show_header(Lang::get('login', 'login'), '', 'PageLoginHome'); ?>
 <span id="no-cookies" class="hidden warning">你似乎禁用了 Cookies。</span>
-<noscript><span class="u-colorWarning"><?= SITE_NAME ?>本页面需要启用 JavaScript 才能正常工作，请为你的浏览器启用 JavaScript。</span><br /></noscript>
+<noscript><span class="u-colorWarning"><?= CONFIG['SITE_NAME'] ?>本页面需要启用 JavaScript 才能正常工作，请为你的浏览器启用 JavaScript。</span><br /></noscript>
 <?
 
 

@@ -17,7 +17,7 @@ class Tracker {
      */
     public static function update_tracker($Action, $Updates, $ToIRC = false) {
         // Build request
-        $Get = TRACKER_SECRET . "/update?action=$Action";
+        $Get = CONFIG['TRACKER_SECRET'] . "/update?action=$Action";
         foreach ($Updates as $Key => $Value) {
             $Get .= "&$Key=$Value";
         }
@@ -27,7 +27,7 @@ class Tracker {
         if (self::send_request($Get, $MaxAttempts, $Err) === false) {
             send_irc("PRIVMSG #tracker :$MaxAttempts $Err $Get");
             if (G::$Cache->get_value('ocelot_error_reported') === false) {
-                send_irc('PRIVMSG ' . ADMIN_CHAN . " :Failed to update ocelot: $Err : $Get");
+                send_irc('PRIVMSG ' . CONFIG['ADMIN_CHAN'] . " :Failed to update ocelot: $Err : $Get");
                 G::$Cache->cache_value('ocelot_error_reported', true, 3600);
             }
             return false;
@@ -92,7 +92,7 @@ class Tracker {
         if (!defined('TRACKER_REPORTKEY')) {
             return false;
         }
-        $Get = TRACKER_REPORTKEY . '/report?';
+        $Get = CONFIG['TRACKER_REPORTKEY'] . '/report?';
         if ($Type === self::STATS_MAIN) {
             $Get .= 'get=stats';
         } elseif ($Type === self::STATS_USER && !empty($Params['key'])) {
@@ -121,7 +121,7 @@ class Tracker {
      * @return string tracker response message or false if the request failed
      */
     private static function send_request($Get, $MaxAttempts = 1, &$Err = false) {
-        if (defined('DISABLE_TRACKER') && DISABLE_TRACKER === true) {
+        if (CONFIG['DISABLE_TRACKER'] === true) {
             return false;
         }
         $Header = "GET /$Get HTTP/1.1\r\nHost: localhost\r\nConnection: Close\r\n\r\n";
@@ -136,7 +136,7 @@ class Tracker {
             $Sleep = 6;
 
             // Send request
-            $File = fsockopen(TRACKER_HOST, TRACKER_PORT, $ErrorNum, $ErrorString);
+            $File = fsockopen(CONFIG['TRACKER_HOST'], CONFIG['TRACKER_PORT'], $ErrorNum, $ErrorString);
             if ($File) {
                 if (fwrite($File, $Header) === false) {
                     $Err = "Failed to fwrite()";

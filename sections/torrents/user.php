@@ -1,5 +1,5 @@
 <?php
-include(SERVER_ROOT . '/classes/torrenttable.class.php');
+include(CONFIG['SERVER_ROOT'] . '/classes/torrenttable.class.php');
 $Orders = array('Time' => Lang::get('torrents', 'add_time'), 'Name' => Lang::get('torrents', 'name'), 'Seeders' => Lang::get('torrents', 'seeders'), 'Leechers' => Lang::get('torrents', 'leechers'), 'Snatched' => Lang::get('torrents', 'snatched'), 'Size' => Lang::get('torrents', 'size'));
 $Ways = array('ASC' => Lang::get('torrents', 'asc'), 'DESC' => Lang::get('torrents', 'desc'));
 $UserVotes = Votes::get_user_votes($LoggedUser['ID']);
@@ -31,10 +31,10 @@ if (!is_number($UserID)) {
 
 if (!empty($_GET['page']) && is_number($_GET['page']) && $_GET['page'] > 0) {
     $Page = $_GET['page'];
-    $Limit = ($Page - 1) * TORRENTS_PER_PAGE . ', ' . TORRENTS_PER_PAGE;
+    $Limit = ($Page - 1) * CONFIG['TORRENTS_PER_PAGE'] . ', ' . CONFIG['TORRENTS_PER_PAGE'];
 } else {
     $Page = 1;
-    $Limit = TORRENTS_PER_PAGE;
+    $Limit = CONFIG['TORRENTS_PER_PAGE'];
 }
 
 if (!empty($_GET['order']) && array_key_exists($_GET['order'], $Orders)) {
@@ -304,7 +304,7 @@ $User = Users::user_info($UserID);
 
 View::show_header($User['Username'] . Lang::get('torrents', 'user_s') . Lang::get('torrents', 'action_' . $Action) . Lang::get('torrents', 'action_torrents'), 'voting', 'PageTorrentUser');
 
-$Pages = Format::get_pages($Page, $TorrentCount, TORRENTS_PER_PAGE);
+$Pages = Format::get_pages($Page, $TorrentCount, CONFIG['TORRENTS_PER_PAGE']);
 
 
 ?>

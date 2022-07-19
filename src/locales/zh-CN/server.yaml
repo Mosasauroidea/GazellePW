@@ -469,14 +469,14 @@ donate:
   donate: 捐助
   donate_error: 系统错误
   donation_info_1: |
-    感谢你来到捐助页面，你的支持将使 ${SITE_NAME} 得以更稳定地运行。如果你有足够的经济条件，请考虑捐助。在捐助前，你需要知晓并确认以下几点：
+    感谢你来到捐助页面，你的支持将使 ${CONFIG['SITE_NAME']} 得以更稳定地运行。如果你有足够的经济条件，请考虑捐助。在捐助前，你需要知晓并确认以下几点：
     <ol id="about_donation">
-    <li>${SITE_NAME} 是一个非营利性组织，无任何赞助，我们完全免费为用户提供服务。支持 ${SITE_NAME} 永远仅出于你的个人意愿。</li>
-    <li>${SITE_NAME} 仅会将捐助所得用于支付服务器运营开销。它们包括服务器的维护、升级，以及主机、带宽、电源等运营费用。</li>
-    <li>捐助不是向 ${SITE_NAME} 的工作人员付款，任何负责网站运营的工作人员或其他个人都不会从用户的捐助中获取经济利益。</li>
-    <li>捐助行为不是在 “购买” 捐助者的等级、邀请或任何 ${SITE_NAME} 的特殊权益（如上传量或者下载权限等），用户也无法通过捐助恢复任何已经被限制的账号或权益（如账号锁定、下载权限禁用等）。捐助仅是单纯地帮助 ${SITE_NAME} 支付账单。</li>
-    <li>${SITE_NAME} 永远禁止通过捐助（或代捐）的方式获取账号，任何通过交易的入站邀请都是个人行为，且通过该方式获取的账号买卖双方都将被永封且不予解封。</li>
-    <li>${SITE_NAME} 的捐助等级系统向所有可敬的捐助者开放。该系统会为捐助者提供一些使用站点时非必要的个性化福利。例如一些是装饰性的（如 ID 后面的捐助标志），一次性的（如额外的邀请），或者一些额外的个性化选项（如额外的个人介绍槽位，或是私人合集槽位）。</li>
+    <li>${CONFIG['SITE_NAME']} 是一个非营利性组织，无任何赞助，我们完全免费为用户提供服务。支持 ${CONFIG['SITE_NAME']} 永远仅出于你的个人意愿。</li>
+    <li>${CONFIG['SITE_NAME']} 仅会将捐助所得用于支付服务器运营开销。它们包括服务器的维护、升级，以及主机、带宽、电源等运营费用。</li>
+    <li>捐助不是向 ${CONFIG['SITE_NAME']} 的工作人员付款，任何负责网站运营的工作人员或其他个人都不会从用户的捐助中获取经济利益。</li>
+    <li>捐助行为不是在 “购买” 捐助者的等级、邀请或任何 ${CONFIG['SITE_NAME']} 的特殊权益（如上传量或者下载权限等），用户也无法通过捐助恢复任何已经被限制的账号或权益（如账号锁定、下载权限禁用等）。捐助仅是单纯地帮助 ${CONFIG['SITE_NAME']} 支付账单。</li>
+    <li>${CONFIG['SITE_NAME']} 永远禁止通过捐助（或代捐）的方式获取账号，任何通过交易的入站邀请都是个人行为，且通过该方式获取的账号买卖双方都将被永封且不予解封。</li>
+    <li>${CONFIG['SITE_NAME']} 的捐助等级系统向所有可敬的捐助者开放。该系统会为捐助者提供一些使用站点时非必要的个性化福利。例如一些是装饰性的（如 ID 后面的捐助标志），一次性的（如额外的邀请），或者一些额外的个性化选项（如额外的个人介绍槽位，或是私人合集槽位）。</li>
     </ol>
   donation_info_10: |
     <strong class="u-colorWarning">重要说明：</strong>
@@ -487,13 +487,13 @@ donate:
     <li>捐助等级的上限为 5，每月 -1。但累计点数（1 点 = ¥50）只加不减，累计点数达到 10，奖励用户一次指定月度推荐电影的机会；累计点数达到 20，可开启第二头像；累计点数达到 50，活跃点数和捐助等级将不再下降。</li>
     <li>捐助等级下降会导致未使用的额外合集额度被收回，但已奖励的邀请名额不会被收回。</li>
     <li>在捐助前如有任何疑问，请阅读 <a href="/wiki.php?action=article&id=277">Wiki</a>，仍有不解，请<strong>务必</strong>发送 Staff PM 与管理组确认。</li>
-    <li>${SITE_NAME} 管理组会尽最大努力以公平、有趣的方式表彰 ${SITE_NAME} 的捐助者，但所有捐助福利随时可能更改或取消，恕不另行通知。</li>
+    <li>${CONFIG['SITE_NAME']} 管理组会尽最大努力以公平、有趣的方式表彰 ${CONFIG['SITE_NAME']} 的捐助者，但所有捐助福利随时可能更改或取消，恕不另行通知。</li>
     </ul>
   donation_info_11: 详情请见：<a href="wiki.php?action=article&id=89">Wiki</a>
   donation_info_12: <ul><li>无视站点规则的特权</li><li>额外的上传量</li></ul>
-  donation_info_2: ${SITE_NAME} 仅会将捐助所得用于支付维持站点运行、tracker 服务器、IRC 服务器所需的费用上。它们包括站点运行所需的硬件费用（如服务器、升级、修复等），以及持续性的运营费用（如主机、带宽、电源等)。
-  donation_info_3: 请注意，${SITE_NAME} 是一个非营利性组织。任何负责网站运营的工作人员或其他个人都不会从用户的捐助中获取经济利益。来自捐助者的支持只用于运营成本。捐助不是向 ${SITE_NAME} 的工作人员付款，也不是购买上传量，更不是购买下载权限。你只是单纯地帮助 ${SITE_NAME} 买单。
-  donation_info_4: ${SITE_NAME} 的捐助等级系统向所有可敬的捐助者开放。该系统会为捐助者提供福利。一些是装饰性的（例如在用户名后边跟一个捐助标志），一些是一次性的（例如额外的邀请），还有一些能够变更站点选项（例如额外的个人介绍槽位，或是私人合集槽位）。
+  donation_info_2: ${CONFIG['SITE_NAME']} 仅会将捐助所得用于支付维持站点运行、tracker 服务器、IRC 服务器所需的费用上。它们包括站点运行所需的硬件费用（如服务器、升级、修复等），以及持续性的运营费用（如主机、带宽、电源等)。
+  donation_info_3: 请注意，${CONFIG['SITE_NAME']} 是一个非营利性组织。任何负责网站运营的工作人员或其他个人都不会从用户的捐助中获取经济利益。来自捐助者的支持只用于运营成本。捐助不是向 ${CONFIG['SITE_NAME']} 的工作人员付款，也不是购买上传量，更不是购买下载权限。你只是单纯地帮助 ${CONFIG['SITE_NAME']} 买单。
+  donation_info_4: ${CONFIG['SITE_NAME']} 的捐助等级系统向所有可敬的捐助者开放。该系统会为捐助者提供福利。一些是装饰性的（例如在用户名后边跟一个捐助标志），一些是一次性的（例如额外的邀请），还有一些能够变更站点选项（例如额外的个人介绍槽位，或是私人合集槽位）。
   donation_info_5: 如果你已阅读并理解上述说明且愿意捐助，请点击下方按钮捐助。
   donation_info_8: |
     任何符合最低要求的捐助都会使你获得捐助点数。在首次获取捐助点数后，你的捐助等级会达到 1 级，该等级是永久的。通过解锁该等级，你能获得以下福利：
@@ -899,23 +899,23 @@ inbox:
   forwarded_to: 转发
   get_special_rank_five_pm: |-
     恭喜你达到 [url=wiki.php?action=article&id=277]特殊等级 5[/url]！你现在是[b]钻石捐助者[/b]了！你已永久激活所有捐助等级所涉及的所有奖励，海豚感谢你的奉献！
-    ${SITE_NAME} Staff
+    ${CONFIG['SITE_NAME']} Staff
   get_special_rank_five_sbj: 你已达到特殊等级 5！你获得了：钻石捐助等级。详情请见正文。
   get_special_rank_four_pm: |-
     恭喜你达到 [url=wiki.php?action=article&id=277]特殊等级 4[/url]！你获得了[b]第二头像[/b]！你可前往设置页面的个人设置部分设定你的第二头像，在鼠标移动到你的头像上时，它就能自动切换显示第二头像。
-    ${SITE_NAME} Staff
+    ${CONFIG['SITE_NAME']} Staff
   get_special_rank_four_sbj: 你已达到特殊等级 4！你获得了：第二头像。详情请见正文。
   get_special_rank_one_pm: |-
     恭喜你达到 [url=wiki.php?action=article&id=277]特殊等级 1[/url]！你现在已经能够免疫 [url=wiki.php?action=article&id=73]账号不活跃[/url] 了。祝你玩得开心！
-    ${SITE_NAME} Staff
+    ${CONFIG['SITE_NAME']} Staff
   get_special_rank_one_sbj: 你已达到特殊等级 1！你获得了：免疫不活跃。详情请见正文。
   get_special_rank_three_pm: |-
-    恭喜你达到 [url=wiki.php?action=article&id=277]特殊等级 3[/url]！你赢得了[b]一次用户指定[/b]！你指定的电影会在 ${SITE_NAME} 首页亮相。在你提交选择后，我们无法保证你选择的电影的具体上线时间。用户指定电影将按照先到先得的顺序排列。指定时请遵循以下准则： [*]请指定尚未当选过推荐电影的电影。你可以在论坛里找到过往的推荐电影。 [*]仔细完整地填写所附表格。 [*]关于你所指定电影的具体安排、上线时间，请发送 [url=staffpm.php]Staff PM[/url] 询问。
-    ${SITE_NAME} Staff
+    恭喜你达到 [url=wiki.php?action=article&id=277]特殊等级 3[/url]！你赢得了[b]一次用户指定[/b]！你指定的电影会在 ${CONFIG['SITE_NAME']} 首页亮相。在你提交选择后，我们无法保证你选择的电影的具体上线时间。用户指定电影将按照先到先得的顺序排列。指定时请遵循以下准则： [*]请指定尚未当选过推荐电影的电影。你可以在论坛里找到过往的推荐电影。 [*]仔细完整地填写所附表格。 [*]关于你所指定电影的具体安排、上线时间，请发送 [url=staffpm.php]Staff PM[/url] 询问。
+    ${CONFIG['SITE_NAME']} Staff
   get_special_rank_three_sbj: 你已达到特殊等级 3！你获得了：一次用户指定。详情请见正文。
   get_special_rank_two_pm: |-
     恭喜你达到 [url=wiki.php?action=article&id=277]特殊等级 2[/url]！你获得了一枚 [url=badge.php]捐助纪念印记[/url]。祝你玩得开心！
-    ${SITE_NAME} Staff
+    ${CONFIG['SITE_NAME']} Staff
   get_special_rank_two_sbj: 你已达到特殊等级 2！你获得了：一枚捐助印记。详情请见正文。
   inbox: 收件箱
   is_empty: 是空的。
@@ -1013,9 +1013,9 @@ login:
   denied: 拒绝
   disabled: 已被禁用
   disabled_note1: 你的账号已被禁用。<br />这可能是由于不活跃或违规造成的。<br /><br /></p>
-  disabled_note2: 如果你确信自己的账号信誉良好且是由于不活跃而被禁用的，你可以在下面方框内通过邮件恢复它。<br />请注意，你需要使用与 ${SITE_NAME} 账号相关联的电子邮件来进行此操作；<br />如果你不确定原因，请查看输入框下面的说明。<br /><br />
+  disabled_note2: 如果你确信自己的账号信誉良好且是由于不活跃而被禁用的，你可以在下面方框内通过邮件恢复它。<br />请注意，你需要使用与 ${CONFIG['SITE_NAME']} 账号相关联的电子邮件来进行此操作；<br />如果你不确定原因，请查看输入框下面的说明。<br /><br />
   disabled_note3: |
-    如果你不确定何原因导致账号被禁用，或者你希望找管理组询问情况，可以进入我们的 <a href='${TG_DISBALE_CHANNEL}'>Telegram 申诉频道</a>。<br /><br /><strong>在进入 IRC 或 Telegram 频道之前，请再次阅读 <a style='color: #ffbb33;' href='#' onclick="toggle_visibility('golden_rules')">黄金规则</a>。</strong><br /><br />进入频道后，请阅读公告。<br /><br />请注意，<strong>不诚实</strong>会导致你永远无缘 ${SITE_NAME}。<br />
+    如果你不确定何原因导致账号被禁用，或者你希望找管理组询问情况，可以进入我们的 <a href='${CONFIG['TG_DISBALE_CHANNEL']}'>Telegram 申诉频道</a>。<br /><br /><strong>在进入 IRC 或 Telegram 频道之前，请再次阅读 <a style='color: #ffbb33;' href='#' onclick="toggle_visibility('golden_rules')">黄金规则</a>。</strong><br /><br />进入频道后，请阅读公告。<br /><br />请注意，<strong>不诚实</strong>会导致你永远无缘 ${CONFIG['SITE_NAME']}。<br />
   email: 电子邮箱
   email_address_placeholder: 邮箱地址
   email_send: 邮件已发送，请根据其中的提示重设你的密码。
@@ -1037,9 +1037,9 @@ login:
   outcome_discarded: 忽略
   outcome_rejected: 拒绝
   password: 密　码
-  password_send: 你的密码已成功重置。<br /> 请<a href='login.php'>点此</a>登录 ${SITE_NAME}。
-  re_enable_request_received: 你的账号恢复申请已被送达。你会在 72 小时内收到一封回信。<br />如果你在 72 小时后仍未收到邮件，请通过 IRC 或 <a href='${TG_DISBALE_CHANNEL} '>Telegram</a> 同管理员取得联系。
-  re_enable_request_rejected: 你的账号恢复申请已被拒收。<br />这可能是因为之前已经提交的申请尚未被处理，或最近的申请确实已被拒绝。<br /><br />请通过 IRC 或 <a href='${TG_DISBALE_CHANNEL}'>Telegram</a> 同管理员取得联系。
+  password_send: 你的密码已成功重置。<br /> 请<a href='login.php'>点此</a>登录 ${CONFIG['SITE_NAME']}。
+  re_enable_request_received: 你的账号恢复申请已被送达。你会在 72 小时内收到一封回信。<br />如果你在 72 小时后仍未收到邮件，请通过 IRC 或 <a href='${CONFIG['TG_DISBALE_CHANNEL']} '>Telegram</a> 同管理员取得联系。
+  re_enable_request_rejected: 你的账号恢复申请已被拒收。<br />这可能是因为之前已经提交的申请尚未被处理，或最近的申请确实已被拒绝。<br /><br />请通过 IRC 或 <a href='${CONFIG['TG_DISBALE_CHANNEL']}'>Telegram</a> 同管理员取得联系。
   re_new_password: 确认新密码
   reason: 原因
   recovery: 重设密码
@@ -1693,40 +1693,41 @@ rules:
   end: 分享率规则"
   golden_rules: 黄金规则
   golden_rules_de: 该部分规则至关重要，违反它们会导致极为严重的后果。
-  golden_rules_used: 黄金规则适用于 ${SITE_NAME} 和我们的社交网络。这是最高级的规则，如不遵守，你的账号将会遭受最严厉的惩罚。
+  golden_rules_used: 黄金规则适用于 ${CONFIG['SITE_NAME']} 和我们的社交网络。这是最高级的规则，如不遵守，你的账号将会遭受最严厉的惩罚。
   hnr: H&R
   hnr_rules_body: >-
     <strong>什么是 H&R：</strong><br/> <ul> <li>H&R，全称 Hit and Run，中文译作 “下完就跑”，指的是下载完成种子后在规定时间内单种分享率不达标或做种时长不达标的行为。一个种子不达标一次，即计为一个 H&R。</li> <li>在下载一个种子总大小 20% 的数据量后，你就需要满足做种要求，以免积累 H&R。要求的具体内容是，在两周内累计做种达到 48 小时；或是单种分享率达到 1。</li> <li>一旦你积累的 H&R 总数达到 10 个，你的下载权限就会被暂时封禁。你可以通过辅种或 “<a href='bonus.php'>破财消灾</a>” 的方式消除你的 H&R 数量。</li> <li>由于 H&R 的统计由站点 Tracker 所收到的数据决定，因此，只关注你的客户端数据是不够的，为确保安全，我们建议你在 <a href='torrents.php?type=downloaded'>记录页面</a> 确认已达到做种要求后再撤种。</li> <li>进一步解释请见 <a
     href='wiki.php?action=article&id=68'>H&R 常见问题解答</a>。</li> </ul>
   info: 注释
-  long_11: 每位用户终生仅允许拥有一个账号，如果你的账号被禁，你可以通过 <a href="${TG_DISBALE_CHANNEL}" target='_blank'>Telegram 官方群</a>或 <a href="staffpm.php">Staff PM</a> 联系管理员。不要创建多个账号（即俗称的 “马甲”）。一经查实所有关联账号都将被封禁。
+  long_11: 每位用户终生仅允许拥有一个账号，如果你的账号被禁，你可以通过 <a href="${CONFIG['TG_DISBALE_CHANNEL']}" target='_blank'>Telegram 官方群</a>或 <a href="staffpm.php">Staff PM</a> 联系管理员。不要创建多个账号（即俗称的 “马甲”）。一经查实所有关联账号都将被封禁。
   long_12: 如果你想要封存账号，可以通过 <a href="staffpm.php">Staff PM</a> 联系管理员来停用你的账号。
-  long_13: 账号仅供私人使用。禁止以任何方式（例如共享登录信息、外部程序等）将你的账号访问权限授予他人。如果你的亲朋好友想要使用本站，请 <a href="wiki.php?action=article&name=invite">邀请</a> 或引导他们加入我们的 <a href="${TG_GROUP}" target='_blank'>Telegram 官方群</a>。
-  long_14: 为保证账号处于良好状况，你应定期登录 ${SITE_NAME}。如果做不到，你的账号会被禁用，详情请查看 <a href="wiki.php?action=article&id=11">不活跃账号</a> 一文。
+  long_13: 账号仅供私人使用。禁止以任何方式（例如共享登录信息、外部程序等）将你的账号访问权限授予他人。如果你的亲朋好友想要使用本站，请 <a href="wiki.php?action=article&name=invite">邀请</a> 或引导他们加入我们的 <a href="${CONFIG['TG_GROUP']}" target='_blank'>Telegram 官方群</a>。
+  long_14: 为保证账号处于良好状况，你应定期登录 ${CONFIG['SITE_NAME']}。如果做不到，你的账号会被禁用，详情请查看 <a href="wiki.php?action=article&id=11">不活跃账号</a> 一文。
   long_21: 你需要对你邀请的用户负责。你邀请的用户达不到合格分享率，不会导致你受罚。但若你邀请的用户违反了黄金规则，你的账号或相关权限可能会被禁用。
   long_22: 只邀请你认识和信任的人，若非如此，请不要邀请他们。请尽可能邀请你现实中认识的朋友，若要邀请网友，你应该确定认识并相信他们。不要在未设置浏览限制的 PT 站内论坛板块、贴吧、论坛、聊天软件群（QQ、TG、微信等，私聊除外）、社交媒体或任何公共场所提供和回应求邀请求。例外情况：管理组指定的专员可以在被批准的场所提供邀请。注意不要让发邀帖被搜索引擎抓到。
-  long_23: 在升级到 Power User 后可访问 ${SITE_NAME} 的邀请相关板块。在求邀前必须先行阅读 <a href="forums.php?action=viewthread&threadid=15">求邀区版规</a> 和 <a href="forums.php?action=viewthread&threadid=100">禁止求邀列表</a>。如果其他用户不曾表示可以提供邀请，则你不能以任何方式向其求邀，包括私信。
+  long_23: 在升级到 Power User 后可访问 ${CONFIG['SITE_NAME']} 的邀请相关板块。在求邀前必须先行阅读 <a href="forums.php?action=viewthread&threadid=15">求邀区版规</a> 和 <a href="forums.php?action=viewthread&threadid=100">禁止求邀列表</a>。如果其他用户不曾表示可以提供邀请，则你不能以任何方式向其求邀，包括私信。
   long_24: 不要在任何公共区域泄露站点真实名称和简称、服务器地址以及 Tracker 地址，截图时请遮蔽站点 Logo。
   long_31: 通过使用 BitTorrent 协议或站点功能的漏洞（例如滥用 <a href="rules.php?p=requests">求种</a>）来伪造发布／下载量或修改分享率数据是被绝对禁止的。如有疑问，请 <a href="staffpm.php">Staff PM</a> 以了解详情。
   long_32: 禁止向 Tracker 报告错误数据，无论你使用的是否是 “能作弊的客户端” ，或者白名单内的客户端。
   long_33: 本站 Tracker 采用 <a href="rules.php?p=clients">白名单</a> 模式，仅允许使用白名单内的客户端，魔改版是不被允许的，测试版或 CVS 版请私信管理员。
-  long_34: 将非 ${SITE_NAME} 的 Tracker URL 加入到 ${SITE_NAME} 种子的行为是被禁止的。这样做会产生错误数据并被视作作弊。无论种子是否正在客户端内做种都适用此规则。
-  long_35: 每个 ${SITE_NAME} 的种子文件中都嵌入了包含你个人密钥的 URL，密钥使用户能够向 Tracker 报告数据，密钥泄露将有可能使他人有机会窃取你的分享率。
+  long_34: 将非 ${CONFIG['SITE_NAME']} 的 Tracker URL 加入到 ${CONFIG['SITE_NAME']} 种子的行为是被禁止的。这样做会产生错误数据并被视作作弊。无论种子是否正在客户端内做种都适用此规则。
+  long_35: 每个 ${CONFIG['SITE_NAME']} 的种子文件中都嵌入了包含你个人密钥的 URL，密钥使用户能够向 Tracker 报告数据，密钥泄露将有可能使他人有机会窃取你的分享率。
   long_41: 禁止以任何理由公开曝光用户及管理员的隐私信息，或以此类行为相要挟。隐私信息包括但不限于个人识别信息（例如姓名、记录、活动日志细节、照片）。未经许可，不得讨论或共享未经用户自愿公开提供的信息。包括通过搜集已公开信息（如谷歌搜索结果）来获取私人信息。
   long_42: 禁止任何形式的诈骗（如网络钓鱼）。
-  long_43: 只允许与 Moderator 私下讨论分歧。如果 Moderator 已退休或联系不上，你可以 <a href="staffpm.php">Staff PM</a>。不允许因个人理由联系多位 Moderator；但是，如果你需要第三方意见，可以联系 Administrator。联系管理员的方式包括私信、<a href="staffpm.php">Staff PM</a> 和<a href="${TG_GROUP}" target='_blank'>Telegram 官方群</a>。
+  long_43: 只允许与 Moderator 私下讨论分歧。如果 Moderator 已退休或联系不上，你可以 <a href="staffpm.php">Staff PM</a>。不允许因个人理由联系多位 Moderator；但是，如果你需要第三方意见，可以联系 Administrator。联系管理员的方式包括私信、<a href="staffpm.php">Staff PM</a> 和<a href="${CONFIG['TG_GROUP']}" target='_blank'>Telegram 官方群</a>。
   long_44: 禁止在站内、站外或交流群冒充管理员或官方服务账号。也禁止歪曲管理员的决定。
   long_45: '&nbsp;“网络霸凌” 是指对其他用户的指手画脚的行为。禁止对立、挑衅或攻击涉嫌违反规则的用户及被举报的用户。如果你发现违规行为，举报就够了。'
   long_46: 优惠活动（如种子免费、候选通过等）由管理员自行决定。它们不遵循固定的安排，用户不得提出类似要求。
-  long_47: 禁止使用 ${SITE_NAME} 的服务并通过脚本、漏洞或其他技术来获取任何类型的用户识别信息（如 IP 地址、个人链接等）。
-  long_48: 禁止将 ${SITE_NAME} 提供的服务（例如 Gazelle、Ocelot）及维护的代码商业化。禁止通过利用上述服务（如用户种子数据等）商业化 ${SITE_NAME} 用户提供的资源。其他推广、募捐及交易行为也被禁止。
+  long_47: 禁止使用 ${CONFIG['SITE_NAME']} 的服务并通过脚本、漏洞或其他技术来获取任何类型的用户识别信息（如 IP 地址、个人链接等）。
+  long_48: 禁止将 ${CONFIG['SITE_NAME']} 提供的服务（例如 Gazelle、Ocelot）及维护的代码商业化。禁止通过利用上述服务（如用户种子数据等）商业化 ${CONFIG['SITE_NAME']} 用户提供的资源。其他推广、募捐及交易行为也被禁止。
   long_51: 禁止通过公用或免费的代理、VPN、Tor 浏览网站，你可以通过付费 VPN、私有服务器（盒子）和代理来浏览网站。不允许通过 Tor 网络访问站点或连接 Tracker 服务器。最多允许 3 个 IP 同时做种。如有疑问请发送 <a href="staffpm.php">Staff PM</a>。<i class="u-colorWarning">Update! 2021-06-23</i>
   long_52: 所有自动化站点访问都必须通过指定的 <a href="https://github.com/WhatCD/Gazelle/wiki/JSON-API-Documentation">API</a> 完成。API 在 10 秒内只会回应 5 个请求。 脚本和其他自动化流程不得收集网站的 HTML 页面。如有疑问，请咨询管理员。
-  long_53: 禁止使用自动化的方式（例如，基于 API 的脚本、日志或站点抓取等）自动抓取免费种子。详情请参阅 ${SITE_NAME} 的 <a href="wiki.php?action=article&id=63">免费种子自动收集政策</a> 一文。
-  long_61: 禁止在站点中实时寻找或利用 BUG（你可以在本地开发环境试验）。如果你发现了严重错误或安全漏洞，请立即按照 ${SITE_NAME} 的 <a href="wiki.php?action=article&id=64">漏洞报告政策</a> 进行报告。也可以在 <a href="forums.php?action=viewforum&forumid=16">论坛的反馈版块</a> 报告不太严重的 BUG。
+  long_53: 禁止使用自动化的方式（例如，基于 API 的脚本、日志或站点抓取等）自动抓取免费种子。详情请参阅 ${CONFIG['SITE_NAME']} 的 <a href="wiki.php?action=article&id=63">免费种子自动收集政策</a> 一文。
+  long_61: 禁止在站点中实时寻找或利用 BUG（你可以在本地开发环境试验）。如果你发现了严重错误或安全漏洞，请立即按照 ${CONFIG['SITE_NAME']} 的 <a href="wiki.php?action=article&id=64">漏洞报告政策</a> 进行报告。也可以在 <a href="forums.php?action=viewforum&forumid=16">论坛的反馈版块</a> 报告不太严重的 BUG。
   long_62: 有关漏洞的公布、组织、传播、分享、技术讨论或技术促进等事宜皆由管理组决定。漏洞被定义为对内部、外部、非营利或营利性服务的意料之外或未被许可的利用。漏洞的类型可能随时被重新划分。
-  long_70: ${SITE_NAME} 的工作人员是志愿者，他们将私人时间用于维护网站运行，而这是没有任何补偿的。不尊重他们可能会导致被警告甚至更严重的后果。
-  long_71: '&nbsp;${SITE_NAME} 的所有规则可能会有不同的解释。鉴于管理组编写了这些规则，他们拥有最终解释权。如果你对本文感到疑惑或不解，或者你认为应该重新制定规则，请发送 <a href="staffpm.php">Staff PM</a>。'
+  long_70: ${CONFIG['SITE_NAME']} 的工作人员是志愿者，他们将私人时间用于维护网站运行，而这是没有任何补偿的。不尊重他们可能会导致被警告甚至更严重的后果。
+  long_71: |
+    &nbsp;${CONFIG['SITE_NAME']} 的所有规则可能会有不同的解释。鉴于管理组编写了这些规则，他们拥有最终解释权。如果你对本文感到疑惑或不解，或者你认为应该重新制定规则，请发送 <a href="staffpm.php">Staff PM</a>。
   ratio: 分享率
   ratio_1: <strong>1. 计算合格分享率可能的最大值和最小值</strong>。使用上述表格，在第一列中查看你账号下载量所在的范围。接下来，查看相邻一列的数值。第二列给出了每个下载量对应的最大合格分享率，此时对应 0% 做种率的情形。第三列给出了每个下载资源量对应的最小合格分享率，对应 100% 做种率的情形。
   ratio_2: <strong>2. 计算实际的合格分享率</strong>。你的实际合格分享率数值将处于最大值和最小值之间。为了计算你的实际合格分享率，系统会首先将最大合格分享率与数值 [1-(做种数/完成数)] 相乘。更直观的表达式如下所示：
@@ -1782,7 +1783,7 @@ rules:
   short_31: 禁止参与分享率作弊。
   short_32: 禁止向 Tracker 上报非正常统计数据（即禁止作弊）。
   short_33: 禁止使用未允许的客户端。
-  short_34: 禁止修改 ${SITE_NAME} 的种子文件。
+  short_34: 禁止修改 ${CONFIG['SITE_NAME']} 的种子文件。
   short_35: 禁止将种子文件或密钥分享给他人。
   short_41: 禁止威胁、社工、敲诈用户及管理员。
   short_42: 禁止欺诈。
@@ -1791,8 +1792,8 @@ rules:
   short_45: 禁止网络霸凌。
   short_46: 不要要求优惠活动。
   short_47: 禁止收集用户识别信息。
-  short_48: 禁止利用 ${SITE_NAME} 的服务（包括 Tracker、网站和交流群）来牟取商业利益。
-  short_51: 禁止使用免费的代理或 VPN 浏览 ${SITE_NAME}。
+  short_48: 禁止利用 ${CONFIG['SITE_NAME']} 的服务（包括 Tracker、网站和交流群）来牟取商业利益。
+  short_51: 禁止使用免费的代理或 VPN 浏览 ${CONFIG['SITE_NAME']}。
   short_52: 禁止滥用自动访问网站。
   short_53: 禁止自动抓取免费种子。
   short_61: 禁止寻找或利用现有的 BUG。
@@ -1987,7 +1988,7 @@ rules:
   upload_introk: 介绍
   upload_introk_note: |
     <p>为保证资源质量，下面的发布规则繁多且详细。为清楚和彻底地解释规则，我们认为这个长度是必要的。每条规则的摘要在其详细说明之前以<span style='font-weight: bold;'>粗体</span>显示，以便于阅读。你还可以在索引中找到相应的规则部分。序号前的 “↑” （返回至 <a href='#Index'>目录</a>）和 <a href='#Index'>规则链接</a>（跳转至详细说明）可助你快速导航。</p>
-    <p>在发布任何内容之前，如果你仍然不确定规则的含义，请在站内寻求支持：<a href='staff.php'>一线支持</a>、<a href='forums.php?action=viewforum&amp;forumid=16'>论坛咨询</a> 或在 <a href='wiki.php?action=article&amp;name=IRC'><?= BOT_HELP_CHAN ?>IRC（建设中）</a> 上提问。如果以上未能为你提供足够的帮助，请 <a href='staffpm.php'>私信管理</a>。如果你在发布规则中发现任何失效的链接，请 <a href='staffpm.php'>私信管理</a>，并在你的信息中包含发布规则编号（例如 <a href='#r2.4.3'>2.4.3</a>）。</p>
+    <p>在发布任何内容之前，如果你仍然不确定规则的含义，请在站内寻求支持：<a href='staff.php'>一线支持</a>、<a href='forums.php?action=viewforum&amp;forumid=16'>论坛咨询</a> 或在 <a href='wiki.php?action=article&amp;name=IRC'><?= CONFIG['BOT_HELP_CHAN'] ?>IRC（建设中）</a> 上提问。如果以上未能为你提供足够的帮助，请 <a href='staffpm.php'>私信管理</a>。如果你在发布规则中发现任何失效的链接，请 <a href='staffpm.php'>私信管理</a>，并在你的信息中包含发布规则编号（例如 <a href='#r2.4.3'>2.4.3</a>）。</p>
   upload_r220: 总览
   upload_r220_note: 这张图表是重复和替代规则的总览。
   upload_rules: 发布规则
@@ -3642,13 +3643,13 @@ user:
   invite: 邀请
   invite_link: 邀请链接
   invite_note: 备注
-  invite_rules_1: <a href="/rules.php#gr1.1">一人一号</a>。创建多个账号（即俗称的 “马甲”），一经查实即封禁所有相关账号。不要向任何曾经拥有过 ${SITE_NAME} 账号的人发送邀请，即使是你的熟人也不可以。如果你邀请了曾被禁用的用户，你将可能被永久禁止。如果他们希望重启账号，请指引他通过账号找回功能、QQ 群、TG 群，或请朋友在申诉板块寻求帮助或发送 <a href="/staffpm.php">Staff PM</a> 联系管理人员。
+  invite_rules_1: <a href="/rules.php#gr1.1">一人一号</a>。创建多个账号（即俗称的 “马甲”），一经查实即封禁所有相关账号。不要向任何曾经拥有过 ${CONFIG['SITE_NAME']} 账号的人发送邀请，即使是你的熟人也不可以。如果你邀请了曾被禁用的用户，你将可能被永久禁止。如果他们希望重启账号，请指引他通过账号找回功能、QQ 群、TG 群，或请朋友在申诉板块寻求帮助或发送 <a href="/staffpm.php">Staff PM</a> 联系管理人员。
   invite_rules_2: <a href="/rules.php#gr2.1">不要邀请劣质用户</a>。你需要对你邀请的用户负责。你邀请的用户达不到合格分享率，不会导致你受罚。但若你邀请的用户操作违反了<a href="/rules.php">黄金规则</a>，你的账号和／或权限可能会被禁用。
   invite_rules_3: <a href="/rules.php#gr2.2">禁止交易、出售、公开赠送或公开提供邀请</a>。只邀请你认识和信任的人，若非如此，请不要邀请他们。邀请主要是指你现实中认识的朋友，若邀请网友，你应该认识并相信他们。不要在未设置等级限制的 PT 论坛版块、贴吧、论坛、聊天软件群（QQ、TG、微信等，私聊除外）、社交媒体或其他任何公共场所提供或回应求邀。例外情况：管理团队指定的专员可以在被批准的场所提供邀请。注意发邀帖不要被搜索引擎抓到。
   invite_rules_4: 请远离邀请交易论坛。如果你邀请任何来自交易论坛的人，你可能会被永久封号，同时牵连到你的邀请树。
   invite_rules_5: 在发放邀请时，请尊重发放邀请处的规则。
   invite_rules_6: 如果你尚未阅读或不理解上述信息，请勿发送邀请。
-  invite_rules_7: 请在发送邀请邮件前告知受邀人将 noreply@${MAIL_HOST} 添加到邮件白名单。
+  invite_rules_7: 请在发送邀请邮件前告知受邀人将 noreply@${CONFIG['MAIL_HOST']} 添加到邮件白名单。
   invite_tree: 邀请树
   invitee_list: 邀请列表
   invitees: 后宫数
@@ -3696,7 +3697,7 @@ user:
   manage_notifications: 管理推送
   mature: 成人内容 (论坛, 评论, 简介)
   mature_show: 显示成人内容
-  mature_title: ${SITE_NAME} 对于社交领域的成人内容政策较为灵活。勾选 “显示成人内容” 会允许你点击访问 <code>[mature]</code> 标签下的任何内容。如果你不勾选 “显示成人内容”，就不会看到任何用 <code>[mature]</code> 包裹起来的内容。
+  mature_title: ${CONFIG['SITE_NAME']} 对于社交领域的成人内容政策较为灵活。勾选 “显示成人内容” 会允许你点击访问 <code>[mature]</code> 标签下的任何内容。如果你不勾选 “显示成人内容”，就不会看到任何用 <code>[mature]</code> 包裹起来的内容。
   menu: 目录
   merge_from: 合并到此
   merge_from_title: 输入一个用户名，将其数据合并给该用户。
@@ -3905,7 +3906,7 @@ user:
   st_2fa_note3: 点击此处
   st_2fa_period: 两步验证。
   st_access: 访问设置
-  st_access_title: 这些设置控制着你登录和访问 ${SITE_NAME} 时的具体细节，包括 IRC 以及 tracker。
+  st_access_title: 这些设置控制着你登录和访问 ${CONFIG['SITE_NAME']} 时的具体细节，包括 IRC 以及 tracker。
   st_all: 所有设置
   st_all_title: 查看所有用户设置。
   st_avatar: 头像链接
@@ -3989,7 +3990,7 @@ user:
   style_tool: 风格工具提示
   style_tool_title: 当悬停带有额外信息的元素 (例如这个元素) 时，使用样式化的工具提示而不是浏览器的默认值
   stylesheet: 层叠样式表
-  stylesheet_title: 选择一个样式会变更 ${SITE_NAME} 的视觉外观。
+  stylesheet_title: 选择一个样式会变更 ${CONFIG['SITE_NAME']} 的视觉外观。
   subject: 主题
   submit: 提交
   super_toasty: Super Toasty (APP)
@@ -4001,7 +4002,7 @@ user:
   tg_binding_binded: 已绑定
   tg_binding_key: 绑定密钥:&nbsp;
   tg_binding_right8: （Passkey 末八位）
-  tg_binding_span: 请至 <a target="_blank" href="${TG_GROUP}">官方 TG 群</a>，输入 <code>/gohome</code>，并根据提示进行绑定操作。
+  tg_binding_span: 请至 <a target="_blank" href="${CONFIG['TG_GROUP']}">官方 TG 群</a>，输入 <code>/gohome</code>，并根据提示进行绑定操作。
   tg_binding_status: 绑定状态:&nbsp;
   tg_binding_unbind: 未绑定
   the_total_amount_downloaded_was: ；下载总量为&nbsp;

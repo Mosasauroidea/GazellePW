@@ -4,8 +4,8 @@ if (!check_perms('admin_donor_log')) {
     error(403);
 }
 
-include(SERVER_ROOT . '/sections/donate/config.php');
-include(SERVER_ROOT . '/sections/donate/const.php');
+include(CONFIG['SERVER_ROOT'] . '/sections/donate/config.php');
+include(CONFIG['SERVER_ROOT'] . '/sections/donate/const.php');
 
 define('DONATIONS_PER_PAGE', 50);
 list($Page, $Limit) = Format::page_limit(DONATIONS_PER_PAGE);
@@ -70,7 +70,7 @@ $DB->query("SELECT SUM(Amount) FROM donations");
 list($Total) = $DB->next_record();
 
 if (empty($_GET['email']) && empty($_GET['username']) && empty($_GET['source']) && !isset($_GET['page']) && !$DonationTimeline = $Cache->get_value('donation_timeline')) {
-    include(SERVER_ROOT . '/classes/charts.class.php');
+    include(CONFIG['SERVER_ROOT'] . '/classes/charts.class.php');
     $DB->query("
 		SELECT DATE_FORMAT(Time,'%b \'%y') AS Month, SUM(Amount)
 		FROM donations

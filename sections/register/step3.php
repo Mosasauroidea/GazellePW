@@ -1,5 +1,5 @@
 <?
-include(SERVER_ROOT . "/sections/login/close.php");
+include(CONFIG['SERVER_ROOT'] . "/sections/login/close.php");
 if ($CloseLogin) {
     $DB->query("select loginkey from login_link where userid=$UserID");
     list($LoginKey) = $DB->next_record();

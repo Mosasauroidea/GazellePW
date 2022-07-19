@@ -207,7 +207,7 @@ class ImageTools {
             }
         }
 
-        return SITE_URL . "/image.php?c=1&amp;i=" . urlencode($Url);
+        return CONFIG['SITE_URL'] . "/image.php?c=1&amp;i=" . urlencode($Url);
     }
 
     /**
@@ -263,7 +263,7 @@ class ImageTools {
         if ($Url) {
             $Src = self::process($Url, true);
         } else {
-            $Src = STATIC_SERVER . 'common/noartwork/' . $CategoryIcons[$CategoryID - 1];
+            $Src = CONFIG['STATIC_SERVER'] . 'common/noartwork/' . $CategoryIcons[$CategoryID - 1];
         }
 ?>
         <img src="<?= $Src ?>" width="94" height="137" alt="Cover" onclick="lightbox.init(this, 100)" />

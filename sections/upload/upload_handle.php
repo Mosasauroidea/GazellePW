@@ -17,10 +17,10 @@ define('MAX_FILENAME_LENGTH', 255);
 use Gazelle\Torrent\EditionInfo;
 use Gazelle\Torrent\TorrentSlot;
 
-include(SERVER_ROOT . '/classes/validate.class.php');
-include(SERVER_ROOT . '/classes/feed.class.php');
-include(SERVER_ROOT . '/sections/torrents/functions.php');
-include(SERVER_ROOT . '/classes/file_checker.class.php');
+include(CONFIG['SERVER_ROOT'] . '/classes/validate.class.php');
+include(CONFIG['SERVER_ROOT'] . '/classes/feed.class.php');
+include(CONFIG['SERVER_ROOT'] . '/sections/torrents/functions.php');
+include(CONFIG['SERVER_ROOT'] . '/classes/file_checker.class.php');
 
 enforce_login();
 authorize();
@@ -235,7 +235,7 @@ if (empty($Properties['GroupID'])) {
 
 if ($Err) { // Show the upload form, with the data the user entered
     $UploadForm = $Type;
-    include(SERVER_ROOT . '/sections/upload/upload.php');
+    include(CONFIG['SERVER_ROOT'] . '/sections/upload/upload.php');
     die();
 }
 
@@ -260,7 +260,7 @@ foreach ($Properties as $Key => $Value) {
 
 $Tor = new BencodeTorrent($TorrentName, true);
 $PublicTorrent = $Tor->make_private(); // The torrent is now private.
-$UnsourcedTorrent = $Tor->set_source(); // The source is now TORRENT_SOURCE
+$UnsourcedTorrent = $Tor->set_source(); // The source is now CONFIG['TORRENT_SOURCE']
 $TorEnc = db_string($Tor->encode());
 $InfoHash = pack('H*', $Tor->info_hash());
 
@@ -320,7 +320,7 @@ $Debug->set_flag('upload: torrent decoded');
 
 if (!empty($Err)) { // Show the upload form, with the data the user entered
     $UploadForm = $Type;
-    include(SERVER_ROOT . '/sections/upload/upload.php');
+    include(CONFIG['SERVER_ROOT'] . '/sections/upload/upload.php');
     die();
 }
 
@@ -728,7 +728,7 @@ $Properties['ID'] = $TorrentID;
 $Properties['FreeTorrent'] = $T['FreeLeech'];
 $IRCMessage = Torrents::build_irc_msg($LoggedUser['Username'], $Properties);
 // ENT_QUOTES is needed to decode single quotes/apostrophes
-send_irc('PRIVMSG ' . BOT_ANNOUNCE_CHAN . ' :' . html_entity_decode($IRCMessage, ENT_QUOTES));
+send_irc('PRIVMSG ' . CONFIG['BOT_ANNOUNCE_CHAN'] . ' :' . html_entity_decode($IRCMessage, ENT_QUOTES));
 $Debug->set_flag('upload: announced on irc');
 
 

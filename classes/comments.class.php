@@ -23,7 +23,7 @@ class Comments {
 						FROM comments
 						WHERE Page = '$Page'
 							AND PageID = $PageID
-					) / " . TORRENT_COMMENTS_PER_PAGE . "
+					) / " . CONFIG['TORRENT_COMMENTS_PER_PAGE'] . "
 				) AS Pages");
         list($Pages) = G::$DB->next_record();
 
@@ -32,7 +32,7 @@ class Comments {
 			VALUES ('$Page', $PageID, " . G::$LoggedUser['ID'] . ", '" . sqltime() . "', '" . db_string($Body) . "')");
         $PostID = G::$DB->inserted_id();
 
-        $CatalogueID = floor((TORRENT_COMMENTS_PER_PAGE * $Pages - TORRENT_COMMENTS_PER_PAGE) / THREAD_CATALOGUE);
+        $CatalogueID = floor((CONFIG['TORRENT_COMMENTS_PER_PAGE'] * $Pages - CONFIG['TORRENT_COMMENTS_PER_PAGE']) / CONFIG['THREAD_CATALOGUE']);
         G::$Cache->delete_value($Page . '_comments_' . $PageID . '_catalogue_' . $CatalogueID);
         G::$Cache->delete_value($Page . '_comments_' . $PageID);
 
@@ -73,7 +73,7 @@ class Comments {
         }
 
         G::$DB->query("
-			SELECT CEIL(COUNT(ID) / " . TORRENT_COMMENTS_PER_PAGE . ") AS Page
+			SELECT CEIL(COUNT(ID) / " . CONFIG['TORRENT_COMMENTS_PER_PAGE'] . ") AS Page
 			FROM comments
 			WHERE Page = '$Page'
 				AND PageID = $PageID
@@ -90,7 +90,7 @@ class Comments {
 			WHERE ID = $PostID");
 
         // Update the cache
-        $CatalogueID = floor((TORRENT_COMMENTS_PER_PAGE * $CommPage - TORRENT_COMMENTS_PER_PAGE) / THREAD_CATALOGUE);
+        $CatalogueID = floor((CONFIG['TORRENT_COMMENTS_PER_PAGE'] * $CommPage - CONFIG['TORRENT_COMMENTS_PER_PAGE']) / CONFIG['THREAD_CATALOGUE']);
         G::$Cache->delete_value($Page . '_comments_' . $PageID . '_catalogue_' . $CatalogueID);
 
         if ($Page == 'collages') {
@@ -129,8 +129,8 @@ class Comments {
         // get number of pages
         G::$DB->query("
 			SELECT
-				CEIL(COUNT(ID) / " . TORRENT_COMMENTS_PER_PAGE . ") AS Pages,
-				CEIL(SUM(IF(ID <= $PostID, 1, 0)) / " . TORRENT_COMMENTS_PER_PAGE . ") AS Page
+				CEIL(COUNT(ID) / " . CONFIG['TORRENT_COMMENTS_PER_PAGE'] . ") AS Pages,
+				CEIL(SUM(IF(ID <= $PostID, 1, 0)) / " . CONFIG['TORRENT_COMMENTS_PER_PAGE'] . ") AS Page
 			FROM comments
 			WHERE Page = '$Page'
 				AND PageID = $PageID
@@ -163,8 +163,8 @@ class Comments {
         Subscriptions::flush_quote_notifications($Page, $PageID);
 
         //We need to clear all subsequential catalogues as they've all been bumped with the absence of this post
-        $ThisCatalogue = floor((TORRENT_COMMENTS_PER_PAGE * $CommPage - TORRENT_COMMENTS_PER_PAGE) / THREAD_CATALOGUE);
-        $LastCatalogue = floor((TORRENT_COMMENTS_PER_PAGE * $CommPages - TORRENT_COMMENTS_PER_PAGE) / THREAD_CATALOGUE);
+        $ThisCatalogue = floor((CONFIG['TORRENT_COMMENTS_PER_PAGE'] * $CommPage - CONFIG['TORRENT_COMMENTS_PER_PAGE']) / CONFIG['THREAD_CATALOGUE']);
+        $LastCatalogue = floor((CONFIG['TORRENT_COMMENTS_PER_PAGE'] * $CommPages - CONFIG['TORRENT_COMMENTS_PER_PAGE']) / CONFIG['THREAD_CATALOGUE']);
         for ($i = $ThisCatalogue; $i <= $LastCatalogue; ++$i) {
             G::$Cache->delete_value($Page . '_comments_' . $PageID . '_catalogue_' . $i);
         }
@@ -256,7 +256,7 @@ class Comments {
 
         // If a postid was passed, we need to determine which page that comment is on.
         // Format::page_limit handles a potential $_GET['page']
-        if (isset($_GET['postid']) && is_number($_GET['postid']) && $NumComments > TORRENT_COMMENTS_PER_PAGE) {
+        if (isset($_GET['postid']) && is_number($_GET['postid']) && $NumComments > CONFIG['TORRENT_COMMENTS_PER_PAGE']) {
             G::$DB->query("
 				SELECT COUNT(ID)
 				FROM comments
@@ -264,18 +264,18 @@ class Comments {
 					AND PageID = $PageID
 					AND ID <= $_GET[postid]");
             list($PostNum) = G::$DB->next_record();
-            list($CommPage, $Limit) = Format::page_limit(TORRENT_COMMENTS_PER_PAGE, $PostNum);
+            list($CommPage, $Limit) = Format::page_limit(CONFIG['TORRENT_COMMENTS_PER_PAGE'], $PostNum);
         } else {
-            list($CommPage, $Limit) = Format::page_limit(TORRENT_COMMENTS_PER_PAGE, $NumComments);
+            list($CommPage, $Limit) = Format::page_limit(CONFIG['TORRENT_COMMENTS_PER_PAGE'], $NumComments);
         }
 
         // Get the cache catalogue
-        $CatalogueID = floor((TORRENT_COMMENTS_PER_PAGE * $CommPage - TORRENT_COMMENTS_PER_PAGE) / THREAD_CATALOGUE);
+        $CatalogueID = floor((CONFIG['TORRENT_COMMENTS_PER_PAGE'] * $CommPage - CONFIG['TORRENT_COMMENTS_PER_PAGE']) / CONFIG['THREAD_CATALOGUE']);
 
         // Cache catalogue from which the page is selected, allows block caches and future ability to specify posts per page
         $Catalogue = G::$Cache->get_value($Page . '_comments_' . $PageID . '_catalogue_' . $CatalogueID);
         if ($Catalogue === false) {
-            $CatalogueLimit = $CatalogueID * THREAD_CATALOGUE . ', ' . THREAD_CATALOGUE;
+            $CatalogueLimit = $CatalogueID * CONFIG['THREAD_CATALOGUE'] . ', ' . CONFIG['THREAD_CATALOGUE'];
             G::$DB->query("
 				SELECT
 					c.ID,
@@ -296,7 +296,7 @@ class Comments {
         }
 
         //This is a hybrid to reduce the catalogue down to the page elements: We use the page limit % catalogue
-        $Thread = array_slice($Catalogue, ((TORRENT_COMMENTS_PER_PAGE * $CommPage - TORRENT_COMMENTS_PER_PAGE) % THREAD_CATALOGUE), TORRENT_COMMENTS_PER_PAGE, true);
+        $Thread = array_slice($Catalogue, ((CONFIG['TORRENT_COMMENTS_PER_PAGE'] * $CommPage - CONFIG['TORRENT_COMMENTS_PER_PAGE']) % CONFIG['THREAD_CATALOGUE']), CONFIG['TORRENT_COMMENTS_PER_PAGE'], true);
 
         if ($HandleSubscriptions && count($Thread) > 0) {
             // quote notifications
@@ -371,13 +371,13 @@ class Comments {
         // cache (we need to clear all comment catalogues)
         G::$DB->query("
 			SELECT
-				CEIL(COUNT(ID) / " . TORRENT_COMMENTS_PER_PAGE . ") AS Pages
+				CEIL(COUNT(ID) / " . CONFIG['TORRENT_COMMENTS_PER_PAGE'] . ") AS Pages
 			FROM comments
 			WHERE Page = '$Page'
 				AND PageID = $TargetPageID
 			GROUP BY PageID");
         list($CommPages) = G::$DB->next_record();
-        $LastCatalogue = floor((TORRENT_COMMENTS_PER_PAGE * $CommPages - TORRENT_COMMENTS_PER_PAGE) / THREAD_CATALOGUE);
+        $LastCatalogue = floor((CONFIG['TORRENT_COMMENTS_PER_PAGE'] * $CommPages - CONFIG['TORRENT_COMMENTS_PER_PAGE']) / CONFIG['THREAD_CATALOGUE']);
         for ($i = 0; $i <= $LastCatalogue; ++$i) {
             G::$Cache->delete_value($Page . "_comments_$TargetPageID" . "_catalogue_$i");
         }
@@ -397,7 +397,7 @@ class Comments {
         // get number of pages
         G::$DB->query("
 			SELECT
-				CEIL(COUNT(ID) / " . TORRENT_COMMENTS_PER_PAGE . ") AS Pages
+				CEIL(COUNT(ID) / " . CONFIG['TORRENT_COMMENTS_PER_PAGE'] . ") AS Pages
 			FROM comments
 			WHERE Page = '$Page'
 				AND PageID = $PageID
@@ -424,7 +424,7 @@ class Comments {
         Subscriptions::move_subscriptions($Page, $PageID, null);
 
         // Clear cache
-        $LastCatalogue = floor((TORRENT_COMMENTS_PER_PAGE * $CommPages - TORRENT_COMMENTS_PER_PAGE) / THREAD_CATALOGUE);
+        $LastCatalogue = floor((CONFIG['TORRENT_COMMENTS_PER_PAGE'] * $CommPages - CONFIG['TORRENT_COMMENTS_PER_PAGE']) / CONFIG['THREAD_CATALOGUE']);
         for ($i = 0; $i <= $LastCatalogue; ++$i) {
             G::$Cache->delete_value($Page . '_comments_' . $PageID . '_catalogue_' . $i);
         }

@@ -68,7 +68,7 @@ class Session extends Base {
     }
 
     public function cookie(string $sessionId): string {
-        return Crypto::encrypt(Crypto::encrypt($sessionId . '|~|' . $this->id, ENCKEY), ENCKEY);
+        return Crypto::encrypt(Crypto::encrypt($sessionId . '|~|' . $this->id, CONFIG['ENCKEY']), CONFIG['ENCKEY']);
     }
 
     public function update(array $info): array {

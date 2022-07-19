@@ -14,8 +14,8 @@ class FEED {
     }
 
     function channel($Title, $Description, $Section = '') {
-        $Site = SITE_URL;
-        echo "\t\t<title>$Title :: " . SITE_NAME . "</title>\n";
+        $Site = CONFIG['SITE_URL'];
+        echo "\t\t<title>$Title :: " . CONFIG['SITE_NAME'] . "</title>\n";
         echo "\t\t<link>$Site/$Section</link>\n";
         echo "\t\t<description>$Description</description>\n";
         echo "\t\t<language>en-us</language>\n";
@@ -30,7 +30,7 @@ class FEED {
         } else {
             $Date = date('r', strtotime($Date));
         }
-        $Site = SITE_URL;
+        $Site = CONFIG['SITE_URL'];
         $Item = "\t\t<item>\n";
         $Item .= "\t\t\t<title><![CDATA[$Title]]></title>\n";
         $Item .= "\t\t\t<description><![CDATA[$Description]]></description>\n";

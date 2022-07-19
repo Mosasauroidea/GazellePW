@@ -114,7 +114,7 @@ View::show_header(Lang::get('user', 'invites'), '', 'PageUserInvite');
             </a>
         </div>
     </div>
-    <? if ($UserCount >= USER_LIMIT && !check_perms('site_can_invite_always')) { ?>
+    <? if ($UserCount >= CONFIG['USER_LIMIT'] && !check_perms('site_can_invite_always')) { ?>
         <div class="BoxBody notice">
             <p><?= Lang::get('user', 'because_the_user_limit_has_been_reached_you_are_unable_to_send_invites_at_this_time') ?></p>
         </div>
@@ -143,7 +143,7 @@ View::show_header(Lang::get('user', 'invites'), '', 'PageUserInvite');
         && empty($LoggedUser['DisableInvites'])
         && check_perms('site_can_invite')
         && ($LoggedUser['Invites'] > 0 || check_perms('site_send_unlimited_invites'))
-        && ($UserCount <= USER_LIMIT || USER_LIMIT == 0 || check_perms('site_can_invite_always'))
+        && ($UserCount <= CONFIG['USER_LIMIT'] || CONFIG['USER_LIMIT'] == 0 || check_perms('site_can_invite_always'))
     ) { ?>
         <div class="BoxBody HtmlText" id="invite_rules_container">
             <ul>

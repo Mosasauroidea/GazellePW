@@ -16,7 +16,7 @@ if ($ThreadID > 0) {
         error('No such thread exists!');
     }
 } elseif ($ThreadID === '') {
-    $ThreadID = Misc::create_thread(ANNOUNCEMENT_FORUM_ID, G::$LoggedUser['ID'], $_POST['title'], $_POST['body']);
+    $ThreadID = Misc::create_thread(CONFIG['ANNOUNCEMENT_FORUM_ID'], G::$LoggedUser['ID'], $_POST['title'], $_POST['body']);
     if ($ThreadID < 1) {
         error(0);
     }

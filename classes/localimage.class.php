@@ -1,7 +1,7 @@
 <?
 
 class LocalImage implements ImageStorage {
-    private $Dir = SERVER_ROOT . '/public/image';
+    private $Dir = CONFIG['SERVER_ROOT'] . '/public/image';
     public function __construct() {
         if (!is_dir($this->Dir)) {
             mkdir($this->Dir, 0755, true);
@@ -15,6 +15,6 @@ class LocalImage implements ImageStorage {
         $file = fopen($this->Dir . '/' . $Name, 'w');
         fwrite($file, $Content);
         fclose($file);
-        return IMAGE_URL . '/image/' . $Name;
+        return CONFIG['IMAGE_URL'] . '/image/' . $Name;
     }
 }

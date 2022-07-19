@@ -1,7 +1,7 @@
 <?
 /*
  * This page creates previews of all supported stylesheets
- * SERVER_ROOT . '/' . STATIC_SERVER . 'stylespreview' must exist and be writable
+ * CONFIG['SERVER_ROOT'] . '/' . CONFIG['STATIC_SERVER'] . 'stylespreview' must exist and be writable
  * Dependencies are PhantomJS (http://phantomjs.org/) and
  * ImageMagick (http://www.imagemagick.org/script/index.php)
  */
@@ -13,7 +13,7 @@ $DB->query('
 		Name AS ProperName
 	FROM stylesheets');
 $Styles = $DB->to_array('ID', MYSQLI_BOTH);
-$ImagePath = SERVER_ROOT . '/' . STATIC_SERVER . 'stylespreview';
+$ImagePath = CONFIG['SERVER_ROOT'] . '/' . CONFIG['STATIC_SERVER'] . 'stylespreview';
 ?>
 <div class="LayoutBody">
     <h2><?= Lang::get('tools', 'rerender_stylesheet_gallery_images') ?></h2>
@@ -23,8 +23,8 @@ $ImagePath = SERVER_ROOT . '/' . STATIC_SERVER . 'stylespreview';
                 <div class="SidebarItem-header Box-header">
                     <?= Lang::get('tools', 'rendering_parameters') ?></div>
                 <ul class="SidebarList SidebarItem-body Box-body">
-                    <li class="SidebarList-item"><?= Lang::get('tools', 'server_root') ?>: <?= var_dump(SERVER_ROOT); ?></li>
-                    <li class="SidebarList-item"><?= Lang::get('tools', 'static_server') ?>: <?= var_dump(STATIC_SERVER); ?></li>
+                    <li class="SidebarList-item"><?= Lang::get('tools', 'server_root') ?>: <?= var_dump(CONFIG['SERVER_ROOT']); ?></li>
+                    <li class="SidebarList-item"><?= Lang::get('tools', 'static_server') ?>: <?= var_dump(CONFIG['STATIC_SERVER']); ?></li>
                     <li class="SidebarList-item"><?= Lang::get('tools', 'whoami') ?>: <? echo (shell_exec('whoami')); ?></li>
                     <li class="SidebarList-item"><?= Lang::get('tools', 'path') ?>: <? echo dirname(__FILE__); ?></li>
                     <li class="SidebarList-item"><?= Lang::get('tools', 'nodejs') ?>: <? echo (shell_exec('node -v;')); ?></li>
@@ -51,7 +51,7 @@ $ImagePath = SERVER_ROOT . '/' . STATIC_SERVER . 'stylespreview';
                             <h6><?= $Style['Name'] ?></h6>
                             <p><?= Lang::get('tools', 'build_preview') ?>:<br />
                                 <?
-                                $CmdLine = '/usr/bin/node "' . dirname(__FILE__) . '/render_build_preview.js" "' . SERVER_ROOT . '" "' . STATIC_SERVER . '" "' . $Style['Name'] . '" "' . dirname(__FILE__) . '" &';
+                                $CmdLine = '/usr/bin/node "' . dirname(__FILE__) . '/render_build_preview.js" "' . CONFIG['SERVER_ROOT'] . '" "' . CONFIG['STATIC_SERVER'] . '" "' . $Style['Name'] . '" "' . dirname(__FILE__) . '" &';
                                 echo $CmdLine . "<br />";
                                 echo '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';
                                 $BuildResult = trim(shell_exec(escapeshellcmd($CmdLine)));

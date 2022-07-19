@@ -5,7 +5,7 @@ if (empty($_POST['id']) || !is_number($_POST['id']) || empty($_POST['type']) || 
     error(404);
 }
 
-include(SERVER_ROOT . '/sections/reports/array.php');
+include(CONFIG['SERVER_ROOT'] . '/sections/reports/array.php');
 
 if (!array_key_exists($_POST['type'], $Types)) {
     error(403);

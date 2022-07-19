@@ -33,6 +33,6 @@ foreach ($Thread as $Key => $Post) {
 
 ajax_json_success(array(
     'page' => (int)$Page,
-    'pages' => ceil($NumComments / TORRENT_COMMENTS_PER_PAGE),
+    'pages' => ceil($NumComments / CONFIG['TORRENT_COMMENTS_PER_PAGE']),
     'comments' => $JsonComments
 ));

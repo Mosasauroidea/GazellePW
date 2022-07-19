@@ -17,37 +17,37 @@ class Misc {
      * @param string $ContentType text/plain or text/html
      */
     public static function send_email($To, $Subject, $Body, $From, $ContentType = '') {
-        if (DEBUG_EMAIL) {
-            if (!is_dir(TMPDIR . '/emails')) {
-                mkdir(TMPDIR . '/emails', 0755, true);
+        if (CONFIG['DEBUG_EMAIL']) {
+            if (!is_dir(CONFIG['TMPDIR'] . '/emails')) {
+                mkdir(CONFIG['TMPDIR'] . '/emails', 0755, true);
             }
             $ext = 'txt';
             if ($ContentType == 'text/html') {
                 $ext = 'html';
             }
-            $out = fopen(TMPDIR . "/emails/$To." . date('Ymd.H.i.s') . ".$ext", "w");
+            $out = fopen(CONFIG['TMPDIR'] . "/emails/$To." . date('Ymd.H.i.s') . ".$ext", "w");
             fwrite($out, $Subject . "\n" . $Body . "\n");
             fclose($out);
             return;
         }
-        switch (EMAIL_DELIVERY_TYPE) {
+        switch (CONFIG['EMAIL_DELIVERY_TYPE']) {
             case 'smtp':
             case 'local':
                 // remove the next line if you want to send HTML email from some places...
                 $mail = new PHPMailer(true);
                 try {
-                    if (MAIL_SMTP_DEBUG) {
+                    if (CONFIG['MAIL_SMTP_DEBUG']) {
                         $mail->SMTPDebug = SMTP::DEBUG_SERVER;
                     }
                     $mail->isSMTP();
-                    $mail->Host = MAIL_SMTP_HOST; // Specify main and backup SMTP servers
+                    $mail->Host = CONFIG['MAIL_SMTP_HOST']; // Specify main and backup SMTP servers
                     $mail->SMTPAuth = true;        // Enable SMTP authentication
-                    $mail->Username = MAIL_SMTP_USERNAME;     // SMTP username
-                    $mail->Password = MAIL_SMTP_PASSWORD;       // SMTP password
+                    $mail->Username = CONFIG['MAIL_SMTP_USERNAME'];     // SMTP username
+                    $mail->Password = CONFIG['MAIL_SMTP_PASSWORD'];       // SMTP password
                     $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;       // Enable TLS encryption, `ssl` also accepted
-                    $mail->Port = MAIL_SMTP_PORT;         // TCP port to connect to
+                    $mail->Port = CONFIG['MAIL_SMTP_PORT'];         // TCP port to connect to
 
-                    $mail->setFrom($From . '@' . MAIL_HOST, SITE_NAME);
+                    $mail->setFrom($From . '@' . CONFIG['MAIL_HOST'], CONFIG['SITE_NAME']);
                     $mail->ContentType = $ContentType;
                     $mail->addAddress($To);
                     $mail->Subject = $Subject;
@@ -58,9 +58,9 @@ class Misc {
                 }
                 break;
             case 'mailgun':
-                $mg = new Mailgun(MAILGUN_API_KEY);
+                $mg = new Mailgun(CONFIG['MAILGUN_API_KEY']);
                 $info = [
-                    'from'    => SITE_NAME . ' ' . $From . '@' . MAIL_HOST,
+                    'from'    => CONFIG['SITE_NAME'] . ' ' . $From . '@' . CONFIG['MAIL_HOST'],
                     'to'      =>  $To,
                     'subject' =>  $Subject,
                 ];
@@ -69,10 +69,10 @@ class Misc {
                 } else {
                     $info['text'] = $Body;
                 }
-                $result = $mg->sendMessage(MAIL_HOST, $info);
+                $result = $mg->sendMessage(CONFIG['MAIL_HOST'], $info);
 
                 if ($result->http_response_code != 200) {
-                    send_irc('PRIVMSG ' . STATUS_CHAN . " !dev email failed to $To with status" . $result->http_response_code . " error message " . print_r($$result->http_response_body));
+                    send_irc('PRIVMSG ' . CONFIG['STATUS_CHAN'] . " !dev email failed to $To with status" . $result->http_response_code . " error message " . print_r($$result->http_response_body));
                 }
                 break;
             default:
@@ -288,7 +288,7 @@ class Misc {
         // Bump this topic to head of the cache
         list($Forum,,, $Stickies) = G::$Cache->get_value("forums_$ForumID");
         if (!empty($Forum)) {
-            if (count($Forum) == TOPICS_PER_PAGE && $Stickies < TOPICS_PER_PAGE) {
+            if (count($Forum) == CONFIG['TOPICS_PER_PAGE'] && $Stickies < CONFIG['TOPICS_PER_PAGE']) {
                 array_pop($Forum);
             }
             G::$DB->prepared_query('
@@ -310,10 +310,10 @@ class Misc {
                     'LastPostAuthorID' => $AuthorID,
                 )
             ); //Bumped thread
-            $Part3 = array_slice($Forum, $Stickies, TOPICS_PER_PAGE, true); //Rest of page
+            $Part3 = array_slice($Forum, $Stickies, CONFIG['TOPICS_PER_PAGE'], true); //Rest of page
             if ($Stickies > 0) {
                 $Part1 = array_slice($Forum, 0, $Stickies, true); //Stickies
-                $Part3 = array_slice($Forum, $Stickies, TOPICS_PER_PAGE - $Stickies - 1, true); //Rest of page
+                $Part3 = array_slice($Forum, $Stickies, CONFIG['TOPICS_PER_PAGE'] - $Stickies - 1, true); //Rest of page
             } else {
                 $Part1 = array();
                 $Part3 = $Forum;
@@ -347,7 +347,7 @@ class Misc {
         G::$Cache->update_row($ForumID, $UpdateArray);
         G::$Cache->commit_transaction(0);
 
-        $CatalogueID = floor((POSTS_PER_PAGE * ceil($Posts / POSTS_PER_PAGE) - POSTS_PER_PAGE) / THREAD_CATALOGUE);
+        $CatalogueID = floor((CONFIG['POSTS_PER_PAGE'] * ceil($Posts / CONFIG['POSTS_PER_PAGE']) - CONFIG['POSTS_PER_PAGE']) / CONFIG['THREAD_CATALOGUE']);
         G::$Cache->begin_transaction('thread_' . $TopicID . '_catalogue_' . $CatalogueID);
         $Post = array(
             'ID' => $PostID,

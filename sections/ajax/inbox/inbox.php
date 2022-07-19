@@ -18,7 +18,7 @@ if (!in_array($Section, array('inbox', 'sentbox'))) {
     die();
 }
 
-list($Page, $Limit) = Format::page_limit(MESSAGES_PER_PAGE);
+list($Page, $Limit) = Format::page_limit(CONFIG['MESSAGES_PER_PAGE']);
 
 $Sort = empty($_GET['sort']) || $_GET['sort'] != "unread" ? "Date DESC" : "cu.Unread = '1' DESC, DATE DESC";
 
@@ -81,7 +81,7 @@ if (empty($CurURL)) {
     $CurURL = "inbox.php?" . $CurURL . "&";
 }
 
-$Pages = Format::get_pages($Page, $NumResults, MESSAGES_PER_PAGE, 9);
+$Pages = Format::get_pages($Page, $NumResults, CONFIG['MESSAGES_PER_PAGE'], 9);
 
 $JsonMessages = array();
 while (list($ConvID, $Subject, $Unread, $Sticky, $ForwardedID, $ForwardedName, $SenderID, $Username, $Donor, $Warned, $Enabled, $Avatar, $Date) = $DB->next_record()) {
@@ -109,7 +109,7 @@ print
             'status' => 'success',
             'response' => array(
                 'currentPage' => (int)$Page,
-                'pages' => ceil($NumResults / MESSAGES_PER_PAGE),
+                'pages' => ceil($NumResults / CONFIG['MESSAGES_PER_PAGE']),
                 'messages' => $JsonMessages
             )
         )

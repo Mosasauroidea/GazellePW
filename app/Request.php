@@ -82,7 +82,7 @@ class Request extends Base {
                 sqltime(),
                 \Format::get_size($bounty),
                 $bounty,
-                SITE_URL . '/requests.php?action=view&id=' . $this->id,
+                CONFIG['SITE_URL'] . '/requests.php?action=view&id=' . $this->id,
                 $staffName
             );
             $this->db->prepared_query(
@@ -123,7 +123,7 @@ class Request extends Base {
                 sqltime(),
                 \Format::get_size($bounty),
                 $bounty,
-                SITE_URL . '/requests.php?action=view&id=' . $this->id,
+                CONFIG['SITE_URL'] . '/requests.php?action=view&id=' . $this->id,
                 $staffName
             );
             $this->db->prepared_query(
@@ -156,7 +156,7 @@ class Request extends Base {
         if (!$fillerId) {
             return;
         }
-        $requestUrl = SITE_URL . '/requests.php?action=view&id=' . $this->id;
+        $requestUrl = CONFIG['SITE_URL'] . '/requests.php?action=view&id=' . $this->id;
         $message = sprintf(
             "%s Reduction of %s bounty (%s b) on filled request %s by %s\n\n",
             sqltime(),

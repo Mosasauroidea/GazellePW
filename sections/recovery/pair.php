@@ -76,7 +76,7 @@ View::show_header('Recovery pair users', '', 'PageRecoveryPair');
                     <tr>
                         <th></th>
                         <th>Previous</th>
-                        <th><?= SITE_NAME ?></th>
+                        <th><?= CONFIG['SITE_NAME'] ?></th>
 
                     <tr>
                         <th>ID</th>
@@ -129,17 +129,17 @@ View::show_header('Recovery pair users', '', 'PageRecoveryPair');
     } /* $Confirm */ ?>
 
     <div class="box">
-        <div class="head">Pair <?= SITE_NAME ?> user</div>
+        <div class="head">Pair <?= CONFIG['SITE_NAME'] ?> user</div>
 
-        <p>In the following section you will be asked to pair a user on <?= SITE_NAME ?> with their original account on the previous site.
+        <p>In the following section you will be asked to pair a user on <?= CONFIG['SITE_NAME'] ?> with their original account on the previous site.
             Once this assocation has been recorded, torrents, buffer, bookmarks etc, from the previous account will be assigned to
-            the <?= SITE_NAME ?> account.</p>
+            the <?= CONFIG['SITE_NAME'] ?> account.</p>
 
         <div class="pad">
             <form method="post" action="/recovery.php?action=pair">
                 <table>
                     <tr>
-                        <th><?= SITE_NAME ?> ID</th>
+                        <th><?= CONFIG['SITE_NAME'] ?> ID</th>
                         <td><input class="Input" type="text" name="curr" width="10" value="<?= isset($curr_id) ? $curr_id : '' ?>" /></td>
                     </tr>
                     <tr>

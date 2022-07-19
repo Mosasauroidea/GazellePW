@@ -339,7 +339,7 @@ class Donations {
     }
 
     public static function has_donor_forum($UserID) {
-        return self::get_rank($UserID) >= DONOR_FORUM_RANK || self::get_special_rank($UserID) >= MAX_SPECIAL_RANK;
+        return self::get_rank($UserID) >= CONFIG['DONOR_FORUM_RANK'] || self::get_special_rank($UserID) >= MAX_SPECIAL_RANK;
     }
 
     /**

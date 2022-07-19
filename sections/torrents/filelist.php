@@ -1,5 +1,5 @@
 <?
-include(SERVER_ROOT . '/sections/torrents/functions.php');
+include(CONFIG['SERVER_ROOT'] . '/sections/torrents/functions.php');
 if (!isset($_GET['torrentid']) || !is_number($_GET['torrentid'])) {
 	error(404);
 }

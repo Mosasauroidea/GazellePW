@@ -90,7 +90,7 @@ $OverrideClass = $Override === 2 ? 'paranoia_override' : '';
                     </a>
                 <? } ?>
             </li>
-            <? if (ENABLE_COLLAGES) { ?>
+            <? if (CONFIG['ENABLE_COLLAGES']) { ?>
                 <li class="SidebarList-item isCollageCommentCount <?= $OverrideClass ?>" id="collage-comment-count-value" data-value="<?= $NumCollageComments ?>">
                     <span><?= Lang::get('user', 'community_colls') ?>: </span>
                     <?= number_format($NumCollageComments) ?>
@@ -112,7 +112,7 @@ $OverrideClass = $Override === 2 ? 'paranoia_override' : '';
             </li>
         <? } ?>
         <?
-        if (($Override = check_paranoia_here('collages+')) && ENABLE_COLLAGES) { ?>
+        if (($Override = check_paranoia_here('collages+')) && CONFIG['ENABLE_COLLAGES']) { ?>
             <li class="SidebarList-item isCollageCreateCount <?= $OverrideClass ?>" id="collage-create-count-value" data-value="<?= $NumCollages ?>">
                 <span><?= Lang::get('user', 'community_collstart') ?>: </span>
                 <?= number_format($NumCollages) ?>
@@ -124,7 +124,7 @@ $OverrideClass = $Override === 2 ? 'paranoia_override' : '';
             </li>
         <?
         }
-        if (($Override = check_paranoia_here('collagecontribs+')) && ENABLE_COLLAGES) { ?>
+        if (($Override = check_paranoia_here('collagecontribs+')) && CONFIG['ENABLE_COLLAGES']) { ?>
             <li class="SidebarList-item isCollageContributeCount <?= $OverrideClass ?>" id="collage-countribute-count-value" data-value="<?= $NumCollageContribs ?>">
                 <span><?= Lang::get('user', 'community_collcontrib') ?>: </span>
                 <?= number_format($NumCollageContribs) ?>

@@ -26,7 +26,7 @@ $Debug = new DEBUG;
 $Twig = new Twig\Environment(
     new \Twig\Loader\FilesystemLoader(__DIR__ . '/../templates'),
     [
-        'debug' => DEBUG_MODE,
+        'debug' => CONFIG['DEBUG_MODE'],
         'cache' => __DIR__ . '/../cache/twig'
     ]
 );

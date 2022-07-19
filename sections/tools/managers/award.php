@@ -1,5 +1,5 @@
 <?
-include(SERVER_ROOT . '/sections/tools/managers/award_functions.php');
+include(CONFIG['SERVER_ROOT'] . '/sections/tools/managers/award_functions.php');
 View::show_header(Lang::get('tools', 'work_statistical_graph'), '', 'PageToolAward');
 $Year = isset($_GET['year']) ? intval($_GET['year']) : 0;
 $Quarter = isset($_GET['quarter']) ? intval($_GET['quarter']) : 0;

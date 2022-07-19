@@ -35,7 +35,7 @@ View::show_header(Lang::get('top10', 'top_10_users'), '', 'PageTop10User');
 		JOIN users_info AS ui ON ui.UserID = u.ID
 		LEFT JOIN torrents AS t ON t.UserID=u.ID
 	WHERE u.Enabled='1'
-		And Uploaded>" . STARTING_UPLOAD . "
+		And Uploaded>" . CONFIG['STARTING_UPLOAD'] . "
 		AND (Uploaded>'" . 10 * 1024 * 1024 * 1024 . "'
 		or Downloaded>'" . 5 * 1024 * 1024 * 1024 . "')
 	GROUP BY u.ID";

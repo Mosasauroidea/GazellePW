@@ -16,31 +16,31 @@ if (!empty($_REQUEST['action'])) {
 
 switch ($Action) {
     case 'take_post':
-        require SERVER_ROOT . '/sections/comments/take_post.php';
+        require CONFIG['SERVER_ROOT'] . '/sections/comments/take_post.php';
         break;
     case 'take_edit':
-        require SERVER_ROOT . '/sections/comments/take_edit.php';
+        require CONFIG['SERVER_ROOT'] . '/sections/comments/take_edit.php';
         break;
     case 'take_delete':
-        require SERVER_ROOT . '/sections/comments/take_delete.php';
+        require CONFIG['SERVER_ROOT'] . '/sections/comments/take_delete.php';
         break;
     case 'warn':
-        require SERVER_ROOT . '/sections/comments/warn.php';
+        require CONFIG['SERVER_ROOT'] . '/sections/comments/warn.php';
         break;
     case 'take_warn':
-        require SERVER_ROOT . '/sections/comments/take_warn.php';
+        require CONFIG['SERVER_ROOT'] . '/sections/comments/take_warn.php';
         break;
     case 'get':
-        require SERVER_ROOT . '/sections/comments/get.php';
+        require CONFIG['SERVER_ROOT'] . '/sections/comments/get.php';
         break;
     case 'jump':
-        require SERVER_ROOT . '/sections/comments/jump.php';
+        require CONFIG['SERVER_ROOT'] . '/sections/comments/jump.php';
         break;
     case 'artist':
     case 'collages':
     case 'requests':
     case 'torrents':
     default:
-        require SERVER_ROOT . '/sections/comments/comments.php';
+        require CONFIG['SERVER_ROOT'] . '/sections/comments/comments.php';
         break;
 }

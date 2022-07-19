@@ -274,17 +274,17 @@ if ($_POST['ResetEmailHistory'] && check_perms('users_edit_reset_keys')) {
 			INSERT INTO users_history_emails
 				(UserID, Email, Time, IP)
 			VALUES
-				('$UserID', '$Username@" . SITE_HOST . "', '0000-00-00 00:00:00', '127.0.0.1')");
+				('$UserID', '$Username@" . CONFIG['SITE_HOST'] . "', '0000-00-00 00:00:00', '127.0.0.1')");
     } else {
         $DB->query("
 			INSERT INTO users_history_emails
 				(UserID, Email, Time, IP)
 			VALUES
-				('$UserID', '$Username@" . SITE_HOST . "', '0000-00-00 00:00:00', '" . $Cur['IP'] . "')");
+				('$UserID', '$Username@" . CONFIG['SITE_HOST'] . "', '0000-00-00 00:00:00', '" . $Cur['IP'] . "')");
     }
     $DB->query("
 		UPDATE users_main
-		SET Email = '$Username@" . SITE_HOST . "'
+		SET Email = '$Username@" . CONFIG['SITE_HOST'] . "'
 		WHERE ID = '$UserID'");
     $DB->query("
 		UPDATE users_history_invites AS uhi
@@ -293,7 +293,7 @@ if ($_POST['ResetEmailHistory'] && check_perms('users_edit_reset_keys')) {
 		    um.IP IN ('127.0.0.1', '0.0.0.0')
 		    OR um.Visible = '0'
 		  )
-		SET uhi.Email = '$Username@" . SITE_HOST . "'
+		SET uhi.Email = '$Username@" . CONFIG['SITE_HOST'] . "'
 		WHERE uhi.Email != um.Email
 			AND uhi.InvitedID = '$UserID'");
 
@@ -442,7 +442,7 @@ if (check_perms('users_promote_below') || check_perms('users_promote_to')) {
             $Values[] = $PermID;
         }
         if (in_array('31', $AddedClasses)) {
-            Misc::send_pm_with_tpl($UserID, 'official_recruiter', ['SiteName' => SITE_NAME]);
+            Misc::send_pm_with_tpl($UserID, 'official_recruiter', ['SiteName' => CONFIG['SITE_NAME']]);
         }
         $DB->prepared_query(
             "

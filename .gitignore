@@ -8,8 +8,7 @@ phpMyAdmin/
 vendor/
 static/similar/
 mix-manifest.json
-classes/config.php
-classes/config.env.php
+config.local.php
 archive.tgz
 .metals/
 adminer.php

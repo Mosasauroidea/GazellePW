@@ -2,7 +2,7 @@
 
 //------------- Delete dead torrents ------------------------------------//
 //sleep(10);
-include(SERVER_ROOT . '/sections/tools/managers/award_functions.php');
+include(CONFIG['SERVER_ROOT'] . '/sections/tools/managers/award_functions.php');
 $Year = date('Y');
 $Month = date('n') - 1;
 $Quarter = 0;

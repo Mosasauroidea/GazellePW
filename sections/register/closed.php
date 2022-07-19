@@ -4,7 +4,7 @@ View::show_header(Lang::get('register', 'register_closed'), 'PageRegisterClosed'
 <div style="margin-top: 2.5rem;">
     <!-- <strong>Sorry, the site is currently invite only.</strong>
     <br> -->
-    <? if (empty(OPEN_REGISTRATION_EMAIL)) {
+    <? if (empty(CONFIG['OPEN_REGISTRATION_EMAIL'])) {
     ?>
         <strong><?= Lang::get('register', 'register_closed_note') ?></strong>
     <?
@@ -13,7 +13,7 @@ View::show_header(Lang::get('register', 'register_closed'), 'PageRegisterClosed'
         <strong><?= Lang::get('register', 'register_closed_note2') ?></strong>
         <ul style="width:80px; text-align:left">
             <?
-            foreach (OPEN_REGISTRATION_EMAIL as $Email) {
+            foreach (CONFIG['OPEN_REGISTRATION_EMAIL'] as $Email) {
             ?>
                 <li>
                     <?= $Email ?>

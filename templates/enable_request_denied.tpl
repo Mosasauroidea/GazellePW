@@ -7,4 +7,4 @@ Your request to re-enable your account was not accepted, for one or more of the 
 If you have any questions about this result, please visit us on Telegram ({{TG_DISABLE_CHANNEL}}) for assistance.
 
 Thank you,
-{{SITE_NAME}} Staff
+{{CONFIG['SITE_NAME']}} Staff

@@ -30,7 +30,7 @@ foreach ($UserDemoteCriteria as $L) {
 		WHERE UserID = $UserID");
 		$Cache->delete_value("user_info_$UserID");
 		$Cache->delete_value("user_info_heavy_$UserID");
-		Misc::send_pm_with_tpl($UserID, 'demote_users', ['UserClass' => Users::make_class_string($NewClass),  'SiteName' => SITE_NAME]);
+		Misc::send_pm_with_tpl($UserID, 'demote_users', ['UserClass' => Users::make_class_string($NewClass),  'SiteName' => CONFIG['SITE_NAME']]);
 		sleep(1);
 	}
 }

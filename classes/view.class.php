@@ -18,17 +18,17 @@ class View {
         if ($PageTitle != '') {
             $PageTitle .= ' :: ';
         }
-        $PageTitle .= SITE_NAME;
+        $PageTitle .= CONFIG['SITE_NAME'];
         $PageID = array(
             $Document, // Document
             empty($_REQUEST['action']) ? false : $_REQUEST['action'], // Action
             empty($_REQUEST['type']) ? false : $_REQUEST['type'] // Type
         );
 
-        if (!is_array(G::$LoggedUser) || empty(G::$LoggedUser['ID']) || $PageTitle == 'Recover Password :: ' . SITE_NAME) {
-            require(SERVER_ROOT . '/design/publicheader.php');
+        if (!is_array(G::$LoggedUser) || empty(G::$LoggedUser['ID']) || $PageTitle == 'Recover Password :: ' . CONFIG['SITE_NAME']) {
+            require(CONFIG['SERVER_ROOT'] . '/design/publicheader.php');
         } else {
-            require(SERVER_ROOT . '/design/privateheader.php');
+            require(CONFIG['SERVER_ROOT'] . '/design/privateheader.php');
         }
     }
 
@@ -43,9 +43,9 @@ class View {
     public static function show_footer($Options = array(), $PageJS = '') {
         global $ScriptStartTime, $SessionID, $UserSessions, $Debug, $Time;
         if (!is_array(G::$LoggedUser) || (isset($Options['recover']) && $Options['recover'] === true)) {
-            require(SERVER_ROOT . '/design/publicfooter.php');
+            require(CONFIG['SERVER_ROOT'] . '/design/publicfooter.php');
         } else {
-            require(SERVER_ROOT . '/design/privatefooter.php');
+            require(CONFIG['SERVER_ROOT'] . '/design/privatefooter.php');
         }
     }
 
@@ -70,7 +70,7 @@ class View {
         if (isset($LoadedTemplates[$TemplateName])) {
             $ClassName = $LoadedTemplates[$TemplateName];
         } else {
-            include(SERVER_ROOT . '/design/' . $TemplateName . '.php');
+            include(CONFIG['SERVER_ROOT'] . '/design/' . $TemplateName . '.php');
 
             // Turn template_name into TemplateName
             $ClassNameParts = explode('_', $TemplateName);

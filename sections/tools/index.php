@@ -19,7 +19,7 @@ if (isset($argv[1])) {
 }
 
 if (!isset($_REQUEST['action'])) {
-    include(SERVER_ROOT . '/sections/tools/browse.php');
+    include(CONFIG['SERVER_ROOT'] . '/sections/tools/browse.php');
     die();
 }
 
@@ -41,10 +41,10 @@ if (substr($_REQUEST['action'], 0, 16) == 'rerender_gallery' && !isset($argv[1])
     }
 }
 
-include(SERVER_ROOT . '/classes/validate.class.php');
+include(CONFIG['SERVER_ROOT'] . '/classes/validate.class.php');
 $Val = new VALIDATE;
 
-include(SERVER_ROOT . '/classes/feed.class.php');
+include(CONFIG['SERVER_ROOT'] . '/classes/feed.class.php');
 $Feed = new FEED;
 
 switch ($_REQUEST['action']) {
@@ -56,58 +56,58 @@ switch ($_REQUEST['action']) {
         break;
         //Services
     case 'get_host':
-        include(SERVER_ROOT . '/sections/tools/services/get_host.php');
+        include(CONFIG['SERVER_ROOT'] . '/sections/tools/services/get_host.php');
         break;
     case 'get_cc':
-        include(SERVER_ROOT . '/sections/tools/services/get_cc.php');
+        include(CONFIG['SERVER_ROOT'] . '/sections/tools/services/get_cc.php');
         break;
         //Managers
     case 'categories':
-        include(SERVER_ROOT . '/sections/tools/managers/categories_list.php');
+        include(CONFIG['SERVER_ROOT'] . '/sections/tools/managers/categories_list.php');
         break;
 
     case 'categories_alter':
-        include(SERVER_ROOT . '/sections/tools/managers/categories_alter.php');
+        include(CONFIG['SERVER_ROOT'] . '/sections/tools/managers/categories_alter.php');
         break;
 
     case 'forum':
-        include(SERVER_ROOT . '/sections/tools/managers/forum_list.php');
+        include(CONFIG['SERVER_ROOT'] . '/sections/tools/managers/forum_list.php');
         break;
 
     case 'forum_alter':
-        include(SERVER_ROOT . '/sections/tools/managers/forum_alter.php');
+        include(CONFIG['SERVER_ROOT'] . '/sections/tools/managers/forum_alter.php');
         break;
 
     case 'apply_list':
-        include(SERVER_ROOT . '/sections/tools/managers/apply_list.php');
+        include(CONFIG['SERVER_ROOT'] . '/sections/tools/managers/apply_list.php');
         break;
 
     case 'apply_alter':
-        include(SERVER_ROOT . '/sections/tools/managers/apply_alter.php');
+        include(CONFIG['SERVER_ROOT'] . '/sections/tools/managers/apply_alter.php');
         break;
 
     case 'award':
         if (check_perms('staff_award')) {
-            include(SERVER_ROOT . '/sections/tools/managers/award.php');
+            include(CONFIG['SERVER_ROOT'] . '/sections/tools/managers/award.php');
         } else {
             error(403);
         }
         break;
 
     case 'whitelist':
-        include(SERVER_ROOT . '/sections/tools/managers/whitelist_list.php');
+        include(CONFIG['SERVER_ROOT'] . '/sections/tools/managers/whitelist_list.php');
         break;
 
     case 'whitelist_alter':
-        include(SERVER_ROOT . '/sections/tools/managers/whitelist_alter.php');
+        include(CONFIG['SERVER_ROOT'] . '/sections/tools/managers/whitelist_alter.php');
         break;
 
     case 'enable_requests':
-        include(SERVER_ROOT . '/sections/tools/managers/enable_requests.php');
+        include(CONFIG['SERVER_ROOT'] . '/sections/tools/managers/enable_requests.php');
         break;
     case 'ajax_take_enable_request':
         if (FEATURE_EMAIL_REENABLE) {
-            include(SERVER_ROOT . '/sections/tools/managers/ajax_take_enable_request.php');
+            include(CONFIG['SERVER_ROOT'] . '/sections/tools/managers/ajax_take_enable_request.php');
         } else {
             // Prevent post requests to the ajax page
             header("Location: browse.php");
@@ -116,48 +116,48 @@ switch ($_REQUEST['action']) {
         break;
 
     case 'login_watch':
-        include(SERVER_ROOT . '/sections/tools/managers/login_watch.php');
+        include(CONFIG['SERVER_ROOT'] . '/sections/tools/managers/login_watch.php');
         break;
 
     case 'recommend':
-        include(SERVER_ROOT . '/sections/tools/managers/recommend_list.php');
+        include(CONFIG['SERVER_ROOT'] . '/sections/tools/managers/recommend_list.php');
         break;
 
     case 'recommend_add':
-        include(SERVER_ROOT . '/sections/tools/managers/recommend_add.php');
+        include(CONFIG['SERVER_ROOT'] . '/sections/tools/managers/recommend_add.php');
         break;
 
     case 'recommend_alter':
-        include(SERVER_ROOT . '/sections/tools/managers/recommend_alter.php');
+        include(CONFIG['SERVER_ROOT'] . '/sections/tools/managers/recommend_alter.php');
         break;
 
     case 'recommend_restore':
-        include(SERVER_ROOT . '/sections/tools/managers/recommend_restore.php');
+        include(CONFIG['SERVER_ROOT'] . '/sections/tools/managers/recommend_restore.php');
         break;
 
     case 'email_blacklist':
-        include(SERVER_ROOT . '/sections/tools/managers/email_blacklist.php');
+        include(CONFIG['SERVER_ROOT'] . '/sections/tools/managers/email_blacklist.php');
         break;
 
     case 'email_blacklist_alter':
-        include(SERVER_ROOT . '/sections/tools/managers/email_blacklist_alter.php');
+        include(CONFIG['SERVER_ROOT'] . '/sections/tools/managers/email_blacklist_alter.php');
         break;
 
     case 'email_blacklist_search':
-        include(SERVER_ROOT . '/sections/tools/managers/email_blacklist_search.php');
+        include(CONFIG['SERVER_ROOT'] . '/sections/tools/managers/email_blacklist_search.php');
         break;
 
     case 'dnu':
-        include(SERVER_ROOT . '/sections/tools/managers/dnu_list.php');
+        include(CONFIG['SERVER_ROOT'] . '/sections/tools/managers/dnu_list.php');
         break;
 
     case 'dnu_alter':
-        include(SERVER_ROOT . '/sections/tools/managers/dnu_alter.php');
+        include(CONFIG['SERVER_ROOT'] . '/sections/tools/managers/dnu_alter.php');
         break;
 
     case 'editnews':
     case 'news':
-        include(SERVER_ROOT . '/sections/tools/managers/news.php');
+        include(CONFIG['SERVER_ROOT'] . '/sections/tools/managers/news.php');
         break;
 
     case 'takeeditnews':
@@ -218,40 +218,40 @@ switch ($_REQUEST['action']) {
         break;
 
     case 'bonus_points':
-        include(SERVER_ROOT . '/sections/tools/managers/bonus_points.php');
+        include(CONFIG['SERVER_ROOT'] . '/sections/tools/managers/bonus_points.php');
         break;
     case 'tokens':
-        include(SERVER_ROOT . '/sections/tools/managers/tokens.php');
+        include(CONFIG['SERVER_ROOT'] . '/sections/tools/managers/tokens.php');
         break;
     case 'invite':
-        include(SERVER_ROOT . '/sections/tools/managers/invite.php');
+        include(CONFIG['SERVER_ROOT'] . '/sections/tools/managers/invite.php');
         break;
     case 'multiple_freeleech':
-        include(SERVER_ROOT . '/sections/tools/managers/multiple_freeleech.php');
+        include(CONFIG['SERVER_ROOT'] . '/sections/tools/managers/multiple_freeleech.php');
         break;
     case 'ocelot':
-        include(SERVER_ROOT . '/sections/tools/managers/ocelot.php');
+        include(CONFIG['SERVER_ROOT'] . '/sections/tools/managers/ocelot.php');
         break;
     case 'ocelot_info':
-        include(SERVER_ROOT . '/sections/tools/data/ocelot_info.php');
+        include(CONFIG['SERVER_ROOT'] . '/sections/tools/data/ocelot_info.php');
         break;
     case 'official_tags':
-        include(SERVER_ROOT . '/sections/tools/managers/official_tags.php');
+        include(CONFIG['SERVER_ROOT'] . '/sections/tools/managers/official_tags.php');
         break;
     case 'edit_tags':
-        include(SERVER_ROOT . '/sections/tools/misc/tags.php');
+        include(CONFIG['SERVER_ROOT'] . '/sections/tools/misc/tags.php');
         break;
     case 'tag_aliases':
-        include(SERVER_ROOT . '/sections/tools/managers/tag_aliases.php');
+        include(CONFIG['SERVER_ROOT'] . '/sections/tools/managers/tag_aliases.php');
         break;
     case 'change_log':
-        include(SERVER_ROOT . '/sections/tools/managers/change_log.php');
+        include(CONFIG['SERVER_ROOT'] . '/sections/tools/managers/change_log.php');
         break;
     case 'global_notification':
-        include(SERVER_ROOT . '/sections/tools/managers/global_notification.php');
+        include(CONFIG['SERVER_ROOT'] . '/sections/tools/managers/global_notification.php');
         break;
     case 'take_global_notification':
-        include(SERVER_ROOT . '/sections/tools/managers/take_global_notification.php');
+        include(CONFIG['SERVER_ROOT'] . '/sections/tools/managers/take_global_notification.php');
         break;
     case 'permissions':
         if (!check_perms('admin_manage_permissions')) {
@@ -365,7 +365,7 @@ switch ($_REQUEST['action']) {
                 }
             }
 
-            include(SERVER_ROOT . '/sections/tools/managers/permissions_alter.php');
+            include(CONFIG['SERVER_ROOT'] . '/sections/tools/managers/permissions_alter.php');
         } else {
             if (!empty($_REQUEST['removeid'])) {
                 $DB->prepared_query("
@@ -398,181 +398,181 @@ switch ($_REQUEST['action']) {
                 $Cache->delete_value('classes');
             }
 
-            include(SERVER_ROOT . '/sections/tools/managers/permissions_list.php');
+            include(CONFIG['SERVER_ROOT'] . '/sections/tools/managers/permissions_list.php');
         }
         break;
     case 'staff_groups_alter':
-        include(SERVER_ROOT . '/sections/tools/managers/staff_groups_alter.php');
+        include(CONFIG['SERVER_ROOT'] . '/sections/tools/managers/staff_groups_alter.php');
         break;
     case 'staff_groups':
-        include(SERVER_ROOT . '/sections/tools/managers/staff_groups_list.php');
+        include(CONFIG['SERVER_ROOT'] . '/sections/tools/managers/staff_groups_list.php');
         break;
     case 'ip_ban':
         //TODO: Clean up DB table ip_bans.
-        include(SERVER_ROOT . '/sections/tools/managers/bans.php');
+        include(CONFIG['SERVER_ROOT'] . '/sections/tools/managers/bans.php');
         break;
     case 'quick_ban':
-        include(SERVER_ROOT . '/sections/tools/misc/quick_ban.php');
+        include(CONFIG['SERVER_ROOT'] . '/sections/tools/misc/quick_ban.php');
         break;
         //Data
     case 'registration_log':
-        include(SERVER_ROOT . '/sections/tools/data/registration_log.php');
+        include(CONFIG['SERVER_ROOT'] . '/sections/tools/data/registration_log.php');
         break;
 
     case 'prvlog':
-        include(SERVER_ROOT . '/sections/tools/finances/btc_log.php');
+        include(CONFIG['SERVER_ROOT'] . '/sections/tools/finances/btc_log.php');
         break;
 
     case 'bitcoin_unproc':
-        include(SERVER_ROOT . '/sections/tools/finances/bitcoin_unproc.php');
+        include(CONFIG['SERVER_ROOT'] . '/sections/tools/finances/bitcoin_unproc.php');
         break;
 
     case 'prepaid_card':
-        include(SERVER_ROOT . '/sections/tools/finances/prepaid_card.php');
+        include(CONFIG['SERVER_ROOT'] . '/sections/tools/finances/prepaid_card.php');
         break;
 
     case 'take_prepaid_card':
-        include(SERVER_ROOT . '/sections/tools/finances/take_prepaid_card.php');
+        include(CONFIG['SERVER_ROOT'] . '/sections/tools/finances/take_prepaid_card.php');
         break;
 
     case 'bitcoin_balance':
-        include(SERVER_ROOT . '/sections/tools/finances/bitcoin_balance.php');
+        include(CONFIG['SERVER_ROOT'] . '/sections/tools/finances/bitcoin_balance.php');
         break;
 
     case 'donor_rewards':
-        include(SERVER_ROOT . '/sections/tools/finances/donor_rewards.php');
+        include(CONFIG['SERVER_ROOT'] . '/sections/tools/finances/donor_rewards.php');
         break;
     case 'upscale_pool':
-        include(SERVER_ROOT . '/sections/tools/data/upscale_pool.php');
+        include(CONFIG['SERVER_ROOT'] . '/sections/tools/data/upscale_pool.php');
         break;
 
     case 'invite_pool':
-        include(SERVER_ROOT . '/sections/tools/data/invite_pool.php');
+        include(CONFIG['SERVER_ROOT'] . '/sections/tools/data/invite_pool.php');
         break;
 
     case 'torrent_stats':
-        include(SERVER_ROOT . '/sections/tools/data/torrent_stats.php');
+        include(CONFIG['SERVER_ROOT'] . '/sections/tools/data/torrent_stats.php');
         break;
 
     case 'user_flow':
-        include(SERVER_ROOT . '/sections/tools/data/user_flow.php');
+        include(CONFIG['SERVER_ROOT'] . '/sections/tools/data/user_flow.php');
         break;
 
     case 'economic_stats':
-        include(SERVER_ROOT . '/sections/tools/data/economic_stats.php');
+        include(CONFIG['SERVER_ROOT'] . '/sections/tools/data/economic_stats.php');
         break;
 
     case 'service_stats':
-        include(SERVER_ROOT . '/sections/tools/development/service_stats.php');
+        include(CONFIG['SERVER_ROOT'] . '/sections/tools/development/service_stats.php');
         break;
 
     case 'database_specifics':
-        include(SERVER_ROOT . '/sections/tools/data/database_specifics.php');
+        include(CONFIG['SERVER_ROOT'] . '/sections/tools/data/database_specifics.php');
         break;
 
     case 'special_users':
-        include(SERVER_ROOT . '/sections/tools/data/special_users.php');
+        include(CONFIG['SERVER_ROOT'] . '/sections/tools/data/special_users.php');
         break;
 
     case 'platform_usage':
-        include(SERVER_ROOT . '/sections/tools/data/platform_usage.php');
+        include(CONFIG['SERVER_ROOT'] . '/sections/tools/data/platform_usage.php');
         break;
         //END Data
 
         //Misc
     case 'update_geoip':
-        include(SERVER_ROOT . '/sections/tools/development/update_geoip.php');
+        include(CONFIG['SERVER_ROOT'] . '/sections/tools/development/update_geoip.php');
         break;
 
     case 'update_offsets':
-        include(SERVER_ROOT . '/sections/tools/development/update_offsets.php');
+        include(CONFIG['SERVER_ROOT'] . '/sections/tools/development/update_offsets.php');
         break;
 
     case 'dupe_ips':
-        include(SERVER_ROOT . '/sections/tools/misc/dupe_ip.php');
+        include(CONFIG['SERVER_ROOT'] . '/sections/tools/misc/dupe_ip.php');
         break;
 
     case 'clear_cache':
-        include(SERVER_ROOT . '/sections/tools/development/clear_cache.php');
+        include(CONFIG['SERVER_ROOT'] . '/sections/tools/development/clear_cache.php');
         break;
 
     case 'create_user':
-        include(SERVER_ROOT . '/sections/tools/misc/create_user.php');
+        include(CONFIG['SERVER_ROOT'] . '/sections/tools/misc/create_user.php');
         break;
 
     case 'manipulate_tree':
-        include(SERVER_ROOT . '/sections/tools/misc/manipulate_tree.php');
+        include(CONFIG['SERVER_ROOT'] . '/sections/tools/misc/manipulate_tree.php');
         break;
 
     case 'site_info':
-        include(SERVER_ROOT . '/sections/tools/development/site_info.php');
+        include(CONFIG['SERVER_ROOT'] . '/sections/tools/development/site_info.php');
         break;
 
     case 'site_options':
-        include(SERVER_ROOT . '/sections/tools/development/site_options.php');
+        include(CONFIG['SERVER_ROOT'] . '/sections/tools/development/site_options.php');
         break;
 
     case 'recommendations':
-        include(SERVER_ROOT . '/sections/tools/misc/recommendations.php');
+        include(CONFIG['SERVER_ROOT'] . '/sections/tools/misc/recommendations.php');
         break;
 
     case 'analysis':
-        include(SERVER_ROOT . '/sections/tools/misc/analysis.php');
+        include(CONFIG['SERVER_ROOT'] . '/sections/tools/misc/analysis.php');
         break;
 
     case 'process_info':
-        include(SERVER_ROOT . '/sections/tools/development/process_info.php');
+        include(CONFIG['SERVER_ROOT'] . '/sections/tools/development/process_info.php');
         break;
 
     case 'rerender_gallery':
-        include(SERVER_ROOT . '/sections/tools/development/rerender_gallery.php');
+        include(CONFIG['SERVER_ROOT'] . '/sections/tools/development/rerender_gallery.php');
         break;
 
     case 'public_sandbox':
-        include(SERVER_ROOT . '/sections/tools/sandboxes/public_sandbox.php');
+        include(CONFIG['SERVER_ROOT'] . '/sections/tools/sandboxes/public_sandbox.php');
         break;
 
     case 'mod_sandbox':
         if (check_perms('users_mod')) {
-            include(SERVER_ROOT . '/sections/tools/sandboxes/mod_sandbox.php');
+            include(CONFIG['SERVER_ROOT'] . '/sections/tools/sandboxes/mod_sandbox.php');
         } else {
             error(403);
         }
         break;
     case 'bbcode_sandbox':
-        include(SERVER_ROOT . '/sections/tools/sandboxes/bbcode_sandbox.php');
+        include(CONFIG['SERVER_ROOT'] . '/sections/tools/sandboxes/bbcode_sandbox.php');
         break;
     case 'calendar':
-        include(SERVER_ROOT . '/sections/tools/managers/calendar.php');
+        include(CONFIG['SERVER_ROOT'] . '/sections/tools/managers/calendar.php');
         break;
     case 'get_calendar_event':
-        include(SERVER_ROOT . '/sections/tools/managers/ajax_get_calendar_event.php');
+        include(CONFIG['SERVER_ROOT'] . '/sections/tools/managers/ajax_get_calendar_event.php');
         break;
     case 'take_calendar_event':
-        include(SERVER_ROOT . '/sections/tools/managers/ajax_take_calendar_event.php');
+        include(CONFIG['SERVER_ROOT'] . '/sections/tools/managers/ajax_take_calendar_event.php');
         break;
     case 'stylesheets':
-        include(SERVER_ROOT . '/sections/tools/managers/stylesheets_list.php');
+        include(CONFIG['SERVER_ROOT'] . '/sections/tools/managers/stylesheets_list.php');
         break;
     case 'mass_pm':
-        include(SERVER_ROOT . '/sections/tools/managers/mass_pm.php');
+        include(CONFIG['SERVER_ROOT'] . '/sections/tools/managers/mass_pm.php');
         break;
     case 'take_mass_pm':
-        include(SERVER_ROOT . '/sections/tools/managers/take_mass_pm.php');
+        include(CONFIG['SERVER_ROOT'] . '/sections/tools/managers/take_mass_pm.php');
         break;
     case 'monthalbum':
-        include(SERVER_ROOT . '/sections/tools/misc/album_of_month.php');
+        include(CONFIG['SERVER_ROOT'] . '/sections/tools/misc/album_of_month.php');
         break;
     case 'badges':
-        if (!check_perms('admin_manage_badges') || !ENABLE_BADGE) error(403);
-        else include(SERVER_ROOT . '/sections/tools/managers/badges.php');
+        if (!check_perms('admin_manage_badges') || !CONFIG['ENABLE_BADGE']) error(403);
+        else include(CONFIG['SERVER_ROOT'] . '/sections/tools/managers/badges.php');
         break;
     case 'badges_gave':
-        if (!check_perms('admin_manage_badges') || !ENABLE_BADGE) error(403);
-        else include(SERVER_ROOT . '/sections/tools/managers/badges_gave.php');
+        if (!check_perms('admin_manage_badges') || !CONFIG['ENABLE_BADGE']) error(403);
+        else include(CONFIG['SERVER_ROOT'] . '/sections/tools/managers/badges_gave.php');
         break;
     case 'iplock':
-        include(SERVER_ROOT . '/sections/tools/managers/iplock.php');
+        include(CONFIG['SERVER_ROOT'] . '/sections/tools/managers/iplock.php');
         break;
     case 'events_reward':
         if (
@@ -581,15 +581,15 @@ switch ($_REQUEST['action']) {
             || check_perms('events_reward_bonus')
             || check_perms('events_reward_badges')
         ) {
-            include(SERVER_ROOT . '/sections/tools/managers/events_reward.php');
+            include(CONFIG['SERVER_ROOT'] . '/sections/tools/managers/events_reward.php');
         } else {
             error(403);
         }
         break;
     case 'events_reward_history':
         if (!check_perms('events_reward_history')) error(403);
-        include(SERVER_ROOT . '/sections/tools/managers/events_reward_history.php');
+        include(CONFIG['SERVER_ROOT'] . '/sections/tools/managers/events_reward_history.php');
         break;
     default:
-        include(SERVER_ROOT . '/sections/tools/browse.php');
+        include(CONFIG['SERVER_ROOT'] . '/sections/tools/browse.php');
 }

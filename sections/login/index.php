@@ -24,7 +24,7 @@ if (!empty($LoggedUser['ID']) && $_REQUEST['act'] != 'recover') {
     die();
 }
 
-if (BLOCK_OPERA_MINI && isset($_SERVER['HTTP_X_OPERAMINI_PHONE'])) {
+if (CONFIG['BLOCK_OPERA_MINI'] && isset($_SERVER['HTTP_X_OPERAMINI_PHONE'])) {
     error('Opera Mini is banned. Please use another browser.');
 }
 
@@ -33,7 +33,7 @@ if (Tools::site_ban_ip($_SERVER['REMOTE_ADDR'])) {
     error('Your IP address has been banned.');
 }
 
-require(SERVER_ROOT . '/classes/validate.class.php');
+require(CONFIG['SERVER_ROOT'] . '/classes/validate.class.php');
 $Validate = new VALIDATE;
 
 if (array_key_exists('action', $_GET) && $_GET['action'] == 'disabled') {
@@ -183,7 +183,7 @@ elseif (isset($_REQUEST['act']) && $_REQUEST['act'] === '2fa_recovery') {
         $Recovery = (!empty($Recovery)) ? unserialize($Recovery) : array();
         if (($Key = array_search($_POST['2fa_recovery_key'], $Recovery)) !== false) {
             $SessionID = Users::make_secret();
-            $Cookie = Crypto::encrypt(Crypto::encrypt($SessionID . '|~|' . $UserID, ENCKEY), ENCKEY);
+            $Cookie = Crypto::encrypt(Crypto::encrypt($SessionID . '|~|' . $UserID, CONFIG['ENCKEY']), CONFIG['ENCKEY']);
             if ($_SESSION['temp_stay_logged']) {
                 $KeepLogged = 1;
                 setcookie('session', $Cookie, time() + 60 * 60 * 24 * 365, '/', '', $SSL, true);
@@ -326,7 +326,7 @@ elseif (isset($_REQUEST['act']) && $_REQUEST['act'] === '2fa_recovery') {
     if (empty($_POST['2fa'])) {
         require('2fa.php');
     } else {
-        include(SERVER_ROOT . '/classes/google_authenticator.class.php');
+        include(CONFIG['SERVER_ROOT'] . '/classes/google_authenticator.class.php');
 
         list($UserID, $PermissionID, $CustomPermissions, $PassHash, $Secret, $Enabled, $TFAKey, $Recovery) = $_SESSION['temp_user_data'];
 
@@ -336,7 +336,7 @@ elseif (isset($_REQUEST['act']) && $_REQUEST['act'] === '2fa_recovery') {
             header('Location: login.php?invalid2fa');
         } else {
             $SessionID = Users::make_secret();
-            $Cookie = Crypto::encrypt(Crypto::encrypt($SessionID . '|~|' . $UserID, ENCKEY), ENCKEY);
+            $Cookie = Crypto::encrypt(Crypto::encrypt($SessionID . '|~|' . $UserID, CONFIG['ENCKEY']), CONFIG['ENCKEY']);
 
             if ($_SESSION['temp_stay_logged']) {
                 $KeepLogged = 1;
@@ -529,7 +529,7 @@ else {
                     }
                     if ($Enabled == 1) {
                         $SessionID = Users::make_secret();
-                        $Cookie = Crypto::encrypt(Crypto::encrypt($SessionID . '|~|' . $UserID, ENCKEY), ENCKEY);
+                        $Cookie = Crypto::encrypt(Crypto::encrypt($SessionID . '|~|' . $UserID, CONFIG['ENCKEY']), CONFIG['ENCKEY']);
 
                         if ($TFAKey) {
                             // user has TFA enabled! :)

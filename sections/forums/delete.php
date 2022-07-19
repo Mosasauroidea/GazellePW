@@ -16,8 +16,8 @@ $DB->query("
 	SELECT
 		TopicID,
 		ForumID,
-		CEIL(COUNT(p.ID) / " . POSTS_PER_PAGE . ") AS Pages,
-		CEIL(SUM(IF(p.ID <= '$PostID', 1, 0)) / " . POSTS_PER_PAGE . ") AS Page,
+		CEIL(COUNT(p.ID) / " . CONFIG['POSTS_PER_PAGE'] . ") AS Pages,
+		CEIL(SUM(IF(p.ID <= '$PostID', 1, 0)) / " . CONFIG['POSTS_PER_PAGE'] . ") AS Page,
 		StickyPostID
 	FROM forums_posts AS p
 		JOIN forums_topics AS t ON t.ID = p.TopicID
@@ -131,8 +131,8 @@ if ($StickyPostID == $PostID) {
 }
 
 //We need to clear all subsequential catalogues as they've all been bumped with the absence of this post
-$ThisCatalogue = floor((POSTS_PER_PAGE * $Page - POSTS_PER_PAGE) / THREAD_CATALOGUE);
-$LastCatalogue = floor((POSTS_PER_PAGE * $Pages - POSTS_PER_PAGE) / THREAD_CATALOGUE);
+$ThisCatalogue = floor((CONFIG['POSTS_PER_PAGE'] * $Page - CONFIG['POSTS_PER_PAGE']) / CONFIG['THREAD_CATALOGUE']);
+$LastCatalogue = floor((CONFIG['POSTS_PER_PAGE'] * $Pages - CONFIG['POSTS_PER_PAGE']) / CONFIG['THREAD_CATALOGUE']);
 for ($i = $ThisCatalogue; $i <= $LastCatalogue; $i++) {
 	$Cache->delete_value("thread_$TopicID" . "_catalogue_$i");
 }

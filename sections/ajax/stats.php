@@ -99,7 +99,7 @@ if (($PeerStats = $Cache->get_value('stats_peers')) === false) {
 }
 
 ajax_json_success(array(
-  'maxUsers' => USER_LIMIT,
+  'maxUsers' => CONFIG['USER_LIMIT'],
   'enabledUsers' => (int) $UserCount,
   'usersActiveThisDay' => (int) $UserStats['Day'],
   'usersActiveThisWeek' => (int) $UserStats['Week'],

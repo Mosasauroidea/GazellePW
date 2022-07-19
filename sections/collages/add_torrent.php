@@ -2,7 +2,7 @@
 
 authorize();
 
-include(SERVER_ROOT . '/classes/validate.class.php');
+include(CONFIG['SERVER_ROOT'] . '/classes/validate.class.php');
 $Val = new VALIDATE;
 $FromAjax = isset($_POST['groupid']);
 function add_torrent($CollageID, $GroupID) {

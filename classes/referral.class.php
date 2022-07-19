@@ -75,7 +75,7 @@ class Referral {
      */
     public function generate_token() {
 
-        $_SESSION['referral_token'] = SITE_NAME . ':' . Users::make_secret(64) . ':' . SITE_NAME;
+        $_SESSION['referral_token'] = CONFIG['SITE_NAME'] . ':' . Users::make_secret(64) . ':' . CONFIG['SITE_NAME'];
         return $_SESSION['referral_token'];
     }
 
@@ -350,15 +350,15 @@ class Referral {
         $InviteReason = 'This user was referred to membership by their account at ' . $service . '. They verified their account on ' . date('Y-m-d H:i:s');
         $InviteKey = db_string(Users::make_secret());
         $InviterId = $this->ExternalServices[$service]['inviter_id'];
-        require(SERVER_ROOT . '/classes/templates.class.php');
+        require(CONFIG['SERVER_ROOT'] . '/classes/templates.class.php');
         $Tpl = new TEMPLATE;
-        $Tpl->open(SERVER_ROOT . '/templates/referral.tpl'); // Password reset template
+        $Tpl->open(CONFIG['SERVER_ROOT'] . '/templates/referral.tpl'); // Password reset template
         $Tpl->set('Email', $email);
         $Tpl->set('InviteKey', $InviteKey);
-        $Tpl->set('DISABLED_CHAN', BOT_DISABLED_CHAN);
-        $Tpl->set('IRC_SERVER', BOT_SERVER);
-        $Tpl->set('SITE_NAME', SITE_NAME);
-        $Tpl->set('SITE_URL', SITE_URL);
+        $Tpl->set('DISABLED_CHAN', CONFIG['BOT_DISABLED_CHAN']);
+        $Tpl->set('IRC_SERVER', CONFIG['BOT_SERVER']);
+        $Tpl->set('SITE_NAME', CONFIG['SITE_NAME']);
+        $Tpl->set('SITE_URL', CONFIG['SITE_URL']);
 
         // save invite to DB
         G::$DB->query("
@@ -368,7 +368,7 @@ class Referral {
 			('$InviterId', '$InviteKey', '" . db_string($email) . "', '$InviteExpires', '$InviteReason')");
 
         // send email
-        Misc::send_email($email, 'You have been invited to ' . SITE_NAME, $Tpl->get(), 'noreply', 'text/plain');
+        Misc::send_email($email, 'You have been invited to ' . CONFIG['SITE_NAME'], $Tpl->get(), 'noreply', 'text/plain');
     }
 
     /**

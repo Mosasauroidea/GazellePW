@@ -128,7 +128,7 @@ class Applicant {
         G::$Cache->delete_value(sprintf(self::CACHE_KEY, $this->id));
         G::$Cache->delete_value(self::CACHE_KEY_NEW_REPLY);
         G::$Cache->delete_value(self::CACHE_KEY_NEW_COUNT);
-        $SiteName = SITE_NAME;
+        $SiteName = CONFIG['SITE_NAME'];
         if ($visibility == 'public' && Permissions::has_permission($poster_id, 'admin_manage_applicants')) {
             $staff = Users::user_info($poster_id);
             $user  = Users::user_info($this->user_id());

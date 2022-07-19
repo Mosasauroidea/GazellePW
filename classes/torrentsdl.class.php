@@ -31,7 +31,7 @@ class TorrentsDL {
         $this->QueryResult = $QueryResult;
         $this->Title = $Title;
         $this->User = G::$LoggedUser;
-        $AnnounceURL = ANNOUNCE_URL;
+        $AnnounceURL = CONFIG['ANNOUNCE_URL'];
         $this->AnnounceURL = $AnnounceURL . '/' . G::$LoggedUser['torrent_pass'] . '/announce';
         $this->Zip = new Zip(Misc::file_string($Title));
     }
@@ -133,7 +133,7 @@ class TorrentsDL {
         $Used = Format::get_size(memory_get_usage(true));
         $Date = date("M d Y, H:i");
         $NumSkipped = count($this->SkippedFiles);
-        return "Collector Download Summary for $this->Title - " . SITE_NAME . "\r\n"
+        return "Collector Download Summary for $this->Title - " . CONFIG['SITE_NAME'] . "\r\n"
             . "\r\n"
             . "User:		{$this->User[Username]}\r\n"
             . "Passkey:	{$this->User[torrent_pass]}\r\n"

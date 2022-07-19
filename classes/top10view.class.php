@@ -11,7 +11,7 @@ class Top10View {
             <a href="top10.php?type=users" class="brackets"><?= self::get_selected_link(Lang::get('top10', 'users'), $Selected == "users") ?></a>
             <a href="top10.php?type=tags" class="brackets"><?= self::get_selected_link(Lang::get('top10', 'tags'), $Selected == "tags") ?></a>
             <?
-            if (ENABLE_VOTES) {
+            if (CONFIG['ENABLE_VOTES']) {
             ?>
                 <a href="top10.php?type=votes" class="brackets"><?= self::get_selected_link(Lang::get('top10', 'favorites'), $Selected == "votes") ?></a>
             <? } ?>

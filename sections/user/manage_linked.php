@@ -1,6 +1,6 @@
 <?
 authorize();
-include(SERVER_ROOT . '/sections/user/linkedfunctions.php');
+include(CONFIG['SERVER_ROOT'] . '/sections/user/linkedfunctions.php');
 
 if (!check_perms('users_mod')) {
     error(403);

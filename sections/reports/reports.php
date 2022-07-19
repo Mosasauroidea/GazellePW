@@ -11,7 +11,7 @@ define('REPORTS_PER_PAGE', '10');
 
 list($Page, $Limit) = Format::page_limit(REPORTS_PER_PAGE);
 
-include(SERVER_ROOT . '/sections/reports/array.php');
+include(CONFIG['SERVER_ROOT'] . '/sections/reports/array.php');
 
 // Header
 View::show_header(Lang::get('reports', 'reports'), 'bbcode,reports', 'PageReportHome');
@@ -161,7 +161,7 @@ $DB->set_query_id($Reports);
                                     if (isset($LoggedUser['PostsPerPage'])) {
                                         $PerPage = $LoggedUser['PostsPerPage'];
                                     } else {
-                                        $PerPage = POSTS_PER_PAGE;
+                                        $PerPage = CONFIG['POSTS_PER_PAGE'];
                                     }
                                     $DB->query("
 										SELECT

@@ -71,7 +71,7 @@ function get_fls() {
 				JOIN permissions AS p ON p.ID = m.PermissionID
 				JOIN users_levels AS l ON l.UserID = i.UserID
 			WHERE l.PermissionID = ?
-			ORDER BY m.Username', FLS_TEAM);
+			ORDER BY m.Username', CONFIG['USER_CLASS']['FLS_TEAM']);
         $FLS = $DB->to_array(false, MYSQLI_BOTH, array(3, 'Paranoia'));
         $Cache->cache_value('fls', $FLS, 180);
     }

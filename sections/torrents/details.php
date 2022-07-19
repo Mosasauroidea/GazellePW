@@ -3,7 +3,7 @@
 use Gazelle\Torrent\TorrentSlot;
 use Gazelle\Torrent\TorrentSlotType;
 
-include(SERVER_ROOT . '/classes/torrenttable.class.php');
+include(CONFIG['SERVER_ROOT'] . '/classes/torrenttable.class.php');
 function compare($X, $Y) {
     return ($Y['score'] - $X['score']);
 }
@@ -19,7 +19,7 @@ if (!empty($_GET['revisionid']) && is_number($_GET['revisionid'])) {
     $RevisionID = 0;
 }
 
-include(SERVER_ROOT . '/sections/torrents/functions.php');
+include(CONFIG['SERVER_ROOT'] . '/sections/torrents/functions.php');
 $TorrentCache = Torrents::get_group($GroupID, true, $RevisionID);
 $TorrentDetails = $TorrentCache;
 $TorrentList = $TorrentCache['Torrents'];
@@ -481,11 +481,11 @@ View::show_header($Title, 'browse,comments,torrent,bbcode,recommend,cover_art,su
             <?
                 }
             }
-            if (ENABLE_COLLAGES) {
-                include(SERVER_ROOT . '/sections/torrents/collage.php');
+            if (CONFIG['ENABLE_COLLAGES']) {
+                include(CONFIG['SERVER_ROOT'] . '/sections/torrents/collage.php');
             }
-            include(SERVER_ROOT . '/sections/torrents/vote_ranks.php');
-            include(SERVER_ROOT . '/sections/torrents/vote.php');
+            include(CONFIG['SERVER_ROOT'] . '/sections/torrents/vote_ranks.php');
+            include(CONFIG['SERVER_ROOT'] . '/sections/torrents/vote.php');
             ?>
         </div>
         <?
@@ -1066,8 +1066,8 @@ View::show_header($Title, 'browse,comments,torrent,bbcode,recommend,cover_art,su
             <?
             }
             // Matched Votes
-            include(SERVER_ROOT . '/sections/torrents/voter_picks.php');
-            $Pages = Format::get_pages($Page, $NumComments, TORRENT_COMMENTS_PER_PAGE, 9, '#comments');
+            include(CONFIG['SERVER_ROOT'] . '/sections/torrents/voter_picks.php');
+            $Pages = Format::get_pages($Page, $NumComments, CONFIG['TORRENT_COMMENTS_PER_PAGE'], 9, '#comments');
             ?>
             <div class="u-vstack" id="torrent_comments">
                 <div class="BodyNavLinks"><a name="comments"></a>

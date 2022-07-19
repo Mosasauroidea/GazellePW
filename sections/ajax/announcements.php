@@ -1,6 +1,6 @@
 <?
 if (!$News = $Cache->get_value('news')) {
-    $ForumID = NEWS_FORUM_ID;
+    $ForumID = CONFIG['NEWS_FORUM_ID'];
     $DB->query("SELECT `ID`, `Title`, `CreatedTime` FROM `forums_topics` WHERE `ForumID` = '$ForumID' AND  `IsNotice` = '1'  ORDER BY `IsSticky` DESC, `CreatedTime` DESC LIMIT $NewsCount");
     $topics = $DB->to_array(false, MYSQLI_NUM, false);
     $News = array();

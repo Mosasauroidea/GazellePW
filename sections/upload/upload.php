@@ -9,7 +9,7 @@
 // called again.                                                        //
 //**********************************************************************//
 
-require(SERVER_ROOT . '/classes/torrent_form.class.php');
+require(CONFIG['SERVER_ROOT'] . '/classes/torrent_form.class.php');
 
 ini_set('max_file_uploads', '100');
 

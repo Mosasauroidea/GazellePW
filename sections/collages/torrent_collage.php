@@ -1,6 +1,6 @@
 <?php
 
-include(SERVER_ROOT . '/classes/torrenttable.class.php');
+include(CONFIG['SERVER_ROOT'] . '/classes/torrenttable.class.php');
 function compare($X, $Y) {
     return ($Y['count'] - $X['count']);
 }
@@ -287,7 +287,7 @@ View::show_header($Name, 'browse,collage,bbcode,voting,recommend', 'PageCollageT
                     }
                     $tableRender = new TorrentGroupCoverTableView($Groups);
                     $tableRender->render();
-                    $Pages = Format::get_pages($Page, $NumComments, TORRENT_COMMENTS_PER_PAGE, 9, '#comments');
+                    $Pages = Format::get_pages($Page, $NumComments, CONFIG['TORRENT_COMMENTS_PER_PAGE'], 9, '#comments');
                     ?>
                 </div>
             </div>

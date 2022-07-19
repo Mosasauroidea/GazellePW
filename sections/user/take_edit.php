@@ -24,7 +24,7 @@ if (!$U) {
 
 $Permissions = Permissions::get_permissions($U['PermissionID']);
 if ($UserID != $LoggedUser['ID'] && !check_perms('users_edit_profiles', $Permissions['Class'])) {
-    send_irc('PRIVMSG ' . ADMIN_CHAN . ' :User ' . $LoggedUser['Username'] . ' (' . site_url() . 'user.php?id=' . $LoggedUser['ID'] . ') just tried to edit the profile of ' . site_url() . 'user.php?id=' . $_REQUEST['userid']);
+    send_irc('PRIVMSG ' . CONFIG['ADMIN_CHAN'] . ' :User ' . $LoggedUser['Username'] . ' (' . site_url() . 'user.php?id=' . $LoggedUser['ID'] . ') just tried to edit the profile of ' . site_url() . 'user.php?id=' . $_REQUEST['userid']);
     error(403);
 }
 
@@ -257,7 +257,8 @@ $Options['Sub']            = (int)!empty($_POST['sub']);
 $Options['Makers']            = (int)!empty($_POST['makers']);
 $Options['ShowExtraCovers']     = (int)!empty($_POST['show_extra_covers']);
 $Options['AutoComplete']        = (int)$_POST['autocomplete'];
-if ($LoggedUser['PermissionID'] == SYSOP || $LoggedUser['PermissionID'] == 24) {
+// TODO: who is 24?
+if ($LoggedUser['PermissionID'] == CONFIG['USER_CLASS']['SYSOP'] || $LoggedUser['PermissionID'] == 24) {
     $Options['SSPAccess']         = (!empty($_POST['ssp_access']) ? 1 : 0);
 } else if ($UH['SSPAccess']) {
     $Options['SSPAccess'] = 1;

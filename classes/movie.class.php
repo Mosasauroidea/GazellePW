@@ -11,7 +11,7 @@ class MOVIE {
         if (G::$DB->has_results()) {
             list($OMDBData) = G::$DB->next_record(MYSQLI_NUM, false);
         }
-        $omdb_key = OMDB_API_KEY;
+        $omdb_key = CONFIG['OMDB_API_KEY'];
         if (!empty($omdb_key) && (empty($OMDBData) || $Refresh)) {
             $curl = new Curl();
             $curl->get('http://www.omdbapi.com', ['apikey' => $omdb_key, 'i' => $IMDBID]);
@@ -35,10 +35,10 @@ class MOVIE {
         if (G::$DB->has_results()) {
             list($DoubanData) = G::$DB->next_record(MYSQLI_NUM, false);
         }
-        $douban_api_url = DOUBAN_API_URL;
+        $douban_api_url = CONFIG['DOUBAN_API_URL'];
         if (!empty($douban_api_url) && (empty($DoubanData) || $Refresh)) {
             $curl = new Curl();
-            $curl->get(DOUBAN_API_URL . 'search?douban-id=' . $DoubanID);
+            $curl->get(CONFIG['DOUBAN_API_URL'] . 'search?douban-id=' . $DoubanID);
             if ($curl->error) {
             } else {
                 $DoubanData = json_encode($curl->response, JSON_UNESCAPED_UNICODE);
@@ -72,10 +72,10 @@ class MOVIE {
             list($DoubanData) = G::$DB->next_record(MYSQLI_NUM, false);
         }
 
-        $douban_api_url = DOUBAN_API_URL;
+        $douban_api_url = CONFIG['DOUBAN_API_URL'];
         if (!empty($douban_api_url) && (empty($DoubanData) || $Refresh)) {
             $curl = new Curl();
-            $curl->get(DOUBAN_API_URL . 'search?imdb-id=' . $IMDBID);
+            $curl->get(CONFIG['DOUBAN_API_URL'] . 'search?imdb-id=' . $IMDBID);
             if ($curl->error) {
             } else {
                 $DoubanData = json_encode($curl->response, JSON_UNESCAPED_UNICODE);
@@ -163,7 +163,7 @@ class MOVIE {
                 }
             }
         }
-        $key = TMDB_API_KEY;
+        $key = CONFIG['TMDB_API_KEY'];
         if (!empty($key)) {
             $multi_curl = new MultiCurl();
             $multi_curl->setConnectTimeout(10);
@@ -311,9 +311,9 @@ class MOVIE {
             G::$DB->query("INSERT INTO movie_info_cache (IMDBID, IMDBActorData, IMDBActorTime) VALUES('$IMDBID', '" . db_string($IMDBActorData) . "', '" . sqlTime() . "')  ON DUPLICATE KEY UPDATE IMDBActorData=VALUES(IMDBActorData), IMDBActorTime=VALUES(IMDBActorTime)");
         }
 
-        $omdb_key = OMDB_API_KEY;
-        $key = TMDB_API_KEY;
-        $douban_api_url = DOUBAN_API_URL;
+        $omdb_key = CONFIG['OMDB_API_KEY'];
+        $key = CONFIG['TMDB_API_KEY'];
+        $douban_api_url = CONFIG['DOUBAN_API_URL'];
         $Info = array();
         $multi_curl = new MultiCurl();
         $multi_curl->setConnectTimeout(10);
@@ -326,11 +326,11 @@ class MOVIE {
             $tmdb->myTag = 'tmdb';
         }
         if (!empty($douban_api_url) && (empty($DoubanActorData) || $Refresh)) {
-            $douban = $multi_curl->addGet(DOUBAN_API_URL . 'actors?imdb-id=' . $IMDBID);
+            $douban = $multi_curl->addGet(CONFIG['DOUBAN_API_URL'] . 'actors?imdb-id=' . $IMDBID);
             $douban->myTag = 'douban-actor';
         }
         if (!empty($douban_api_url) && (empty($DoubanData) || $Refresh)) {
-            $douban = $multi_curl->addGet(DOUBAN_API_URL . 'search?imdb-id=' . $IMDBID);
+            $douban = $multi_curl->addGet(CONFIG['DOUBAN_API_URL'] . 'search?imdb-id=' . $IMDBID);
             $douban->myTag = 'douban';
         }
 

@@ -6,7 +6,7 @@ if (!check_perms('site_debug')) {
 //View schemas
 if (!empty($_GET['table'])) {
     $DB->query('SHOW TABLES');
-    $Tables = $DB->collect('Tables_in_' . SQLDB);
+    $Tables = $DB->collect('Tables_in_' . CONFIG['SQLDB']);
     if (!in_array($_GET['table'], $Tables)) {
         error(0);
     }
@@ -23,7 +23,7 @@ if (!$Tables = $Cache->get_value('database_table_stats')) {
     $Cache->cache_value('database_table_stats', $Tables, 3600 * 4);
 }
 
-require(SERVER_ROOT . '/classes/charts.class.php');
+require(CONFIG['SERVER_ROOT'] . '/classes/charts.class.php');
 $Pie = new PIE_CHART(750, 400, array('Other' => 1, 'Percentage' => 1, 'Sort' => 1));
 
 //Begin sorting

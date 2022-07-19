@@ -122,7 +122,7 @@ class Image {
         self::render($text);
         $data = ob_get_contents();
         ob_end_clean();
-        $out = fopen(TMPDIR . "/$text.png", 'wb');
+        $out = fopen(CONFIG['TMPDIR'] . "/$text.png", 'wb');
         fputs($out, $data);
         fclose($out);
     }

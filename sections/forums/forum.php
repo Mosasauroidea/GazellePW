@@ -17,16 +17,16 @@ if (!is_number($ForumID)) {
     error(0);
 }
 
-$IsDonorForum = $ForumID == DONOR_FORUM ? true : false;
-$TooltipTheme = $ForumID == DONOR_FORUM ? "gold" : "";
+$IsDonorForum = $ForumID == CONFIG['DONOR_FORUM'] ? true : false;
+$TooltipTheme = $ForumID == CONFIG['DONOR_FORUM'] ? "gold" : "";
 
 if (isset($LoggedUser['PostsPerPage'])) {
     $PerPage = $LoggedUser['PostsPerPage'];
 } else {
-    $PerPage = POSTS_PER_PAGE;
+    $PerPage = CONFIG['POSTS_PER_PAGE'];
 }
 
-list($Page, $Limit) = Format::page_limit(TOPICS_PER_PAGE);
+list($Page, $Limit) = Format::page_limit(CONFIG['TOPICS_PER_PAGE']);
 
 //---------- Get some data to start processing
 
@@ -162,7 +162,7 @@ View::show_header(Lang::get('forums', 'forums') . '&gt; ' . $Forums[$ForumID]['N
     <div class="BodyContent">
         <div class="BodyNavLinks pager">
             <?
-            $Pages = Format::get_pages($Page, $Forums[$ForumID]['NumTopics'], TOPICS_PER_PAGE, 9);
+            $Pages = Format::get_pages($Page, $Forums[$ForumID]['NumTopics'], CONFIG['TOPICS_PER_PAGE'], 9);
             echo $Pages;
             ?>
         </div>

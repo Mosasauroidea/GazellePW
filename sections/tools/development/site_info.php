@@ -4,15 +4,15 @@
 
 function composer_exec($CMD) {
     // Composer won't work well through shell_exec if xdebug is enabled
-    // which we might expect if DEBUG_MODE is enabled (as neither
-    // xdebug or DEBUG_MODE should happen on production)
-    if (defined('DEBUG_MODE') && DEBUG_MODE === true) {
+    // which we might expect if CONFIG['DEBUG_MODE'] is enabled (as neither
+    // xdebug or CONFIG['DEBUG_MODE'] should happen on production)
+    if (isset(CONFIG['DEBUG_MODE']) && CONFIG['DEBUG_MODE'] === true) {
         $CMD = 'COMPOSER_ALLOW_XDEBUG=1 ' . $CMD;
     }
     return shell_exec($CMD);
 }
 
-if (!defined('DEBUG_MODE') || DEBUG_MODE !== true) {
+if (!isset(CONFIG['DEBUG_MODE']) || CONFIG['DEBUG_MODE'] !== true) {
     if (!check_perms('site_debug')) {
         error(403);
     }
@@ -31,11 +31,11 @@ $ComposerVersion = substr(composer_exec('composer --version'), 16);
 
 $Packages = [];
 
-$Composer = json_decode(file_get_contents(SERVER_ROOT . '/composer.json'), true);
+$Composer = json_decode(file_get_contents(CONFIG['SERVER_ROOT'] . '/composer.json'), true);
 foreach ($Composer['require'] as $Package => $Version) {
     $Packages[$Package] = ['Name' => $Package, 'Version' => $Version];
 }
-$ComposerLock = json_decode(file_get_contents(SERVER_ROOT . '/composer.lock'), true);
+$ComposerLock = json_decode(file_get_contents(CONFIG['SERVER_ROOT'] . '/composer.lock'), true);
 foreach ($ComposerLock['packages'] as $Package) {
     if (isset($Packages[$Package['name']])) {
         $Packages[$Package['name']]['Locked'] = $Package['version'];
@@ -50,8 +50,8 @@ foreach ($ComposerPackages['installed'] as $Package) {
 }
 
 $Debug->set_flag('Start Phinx');
-$PhinxVersion = shell_exec(SERVER_ROOT . '/vendor/bin/phinx --version');
-$PhinxMigrations = array_filter(json_decode(shell_exec(SERVER_ROOT . '/vendor/bin/phinx status -c ' . SERVER_ROOT . '/phinx.php --format=json | tail -n 1'), true)['migrations'], function ($value) {
+$PhinxVersion = shell_exec(CONFIG['SERVER_ROOT'] . '/vendor/bin/phinx --version');
+$PhinxMigrations = array_filter(json_decode(shell_exec(CONFIG['SERVER_ROOT'] . '/vendor/bin/phinx status -c ' . CONFIG['SERVER_ROOT'] . '/phinx.php --format=json | tail -n 1'), true)['migrations'], function ($value) {
     return count($value) > 0;
 });
 $PHPTimeStamp = date('Y-m-d H:i:s');

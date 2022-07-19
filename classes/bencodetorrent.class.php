@@ -110,18 +110,18 @@ class BencodeTorrent extends BencodeDecode {
     /**
      * Adds thet "source" flag to the torrent to allow for easier cross-seeding
      *
-     * @return bool false if the source flag was already set to TORRENT_SOURCE, else true
+     * @return bool false if the source flag was already set to CONFIG['TORRENT_SOURCE'], else true
      */
     function set_source() {
         if (empty($this->Dec)) {
             return false;
         }
 
-        if (isset($this->Dec['info']['source']) && $this->Dec['info']['source'] === TORRENT_SOURCE) {
+        if (isset($this->Dec['info']['source']) && $this->Dec['info']['source'] === CONFIG['TORRENT_SOURCE']) {
             return false;
         }
 
-        $this->Dec['info']['source'] = TORRENT_SOURCE;
+        $this->Dec['info']['source'] = CONFIG['TORRENT_SOURCE'];
         ksort($this->Dec['info']);
         return true;
     }

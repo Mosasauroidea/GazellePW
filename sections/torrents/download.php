@@ -90,7 +90,7 @@ if (!is_array($Info) || !array_key_exists('PlainArtists', $Info) || empty($Info[
     $Artists = Artists::get_artist($Info[0][4]);
     $Info['Artists'] = Artists::display_artists($Artists, false, true);
     $Info['PlainArtists'] = Artists::display_artists($Artists, false, true, false);
-    $Info['Sitename'] = '[' . SITE_NAME . ']  ';
+    $Info['Sitename'] = '[' . CONFIG['SITE_NAME'] . ']  ';
     $Cache->cache_value("torrent_download_$TorrentID", $Info, 0);
 }
 if (!is_array($Info[0])) {
@@ -210,13 +210,13 @@ Torrents::set_snatch_update_time($UserID, Torrents::SNATCHED_UPDATE_AFTERDL);
 list($Contents) = $DB->next_record(MYSQLI_NUM, false);
 
 $FileName = TorrentsDL::construct_file_name($Name, $SubName, $Source, $Codec, $Container, $Resolution, $Processing, $Year, $TorrentID);
-$AnnounceURL = ANNOUNCE_URL;
+$AnnounceURL = CONFIG['ANNOUNCE_URL'];
 if ($DownloadAlt) {
     header('Content-Type: text/plain; charset=utf-8');
 } elseif (!$DownloadAlt || $Failed) {
     header('Content-Type: application/x-bittorrent; charset=utf-8');
 }
-header('Content-disposition: attachment; filename="[' . SITE_NAME . ']' . $FileName . '"');
+header('Content-disposition: attachment; filename="[' . CONFIG['SITE_NAME'] . ']' . $FileName . '"');
 
 echo TorrentsDL::get_file($Contents, $AnnounceURL . "/$TorrentPass/announce", $TorrentID);
 

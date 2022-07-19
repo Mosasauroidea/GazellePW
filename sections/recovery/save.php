@@ -2,12 +2,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 
 <head>
-    <title><?= SITE_NAME ?> :: Membership recovery</title>
+    <title><?= CONFIG['SITE_NAME'] ?> :: Membership recovery</title>
     <meta http-equiv="X-UA-Compatible" content="chrome=1; IE=edge" />
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <link rel="shortcut icon" href="/favicon.ico" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-    <link rel="stylesheet" href="<?= STATIC_SERVER ?>/styles/apollostage/style.css" />
+    <link rel="stylesheet" href="<?= CONFIG['STATIC_SERVER'] ?>/styles/apollostage/style.css" />
 
     <style type="text/css" media="screen">
         body {

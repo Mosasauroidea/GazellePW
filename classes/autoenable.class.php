@@ -57,7 +57,7 @@ class AutoEnable {
 
         if (G::$DB->has_results() || !isset($UserID)) {
             // User already has/had a pending activation request or username is invalid
-            $Output = sprintf(Lang::get('login', 're_enable_request_rejected'), BOT_DISABLED_CHAN, BOT_SERVER);
+            $Output = sprintf(Lang::get('login', 're_enable_request_rejected'), CONFIG['BOT_DISABLED_CHAN'], CONFIG['BOT_SERVER']);
             if (isset($UserID)) {
                 Tools::update_user_notes($UserID, sqltime() . Lang::get('login', 'enable_request_rejected_from_ip') . "$IP\n\n");
             }
@@ -113,17 +113,17 @@ class AutoEnable {
 
         if ($Status != self::DISCARDED) {
             // Prepare email
-            require(SERVER_ROOT . '/classes/templates.class.php');
+            require(CONFIG['SERVER_ROOT'] . '/classes/templates.class.php');
             $TPL = new TEMPLATE;
             if ($Status == self::APPROVED) {
-                $TPL->open(SERVER_ROOT . '/templates/enable_request_accepted.tpl');
+                $TPL->open(CONFIG['SERVER_ROOT'] . '/templates/enable_request_accepted.tpl');
                 $TPL->set('SITE_URL', site_url(false));
             } else {
-                $TPL->open(SERVER_ROOT . '/templates/enable_request_denied.tpl');
-                $TPL->set('TG_DISABLE_CHANNEL', TG_DISBALE_CHANNEL);
+                $TPL->open(CONFIG['SERVER_ROOT'] . '/templates/enable_request_denied.tpl');
+                $TPL->set('TG_DISABLE_CHANNEL', CONFIG['TG_DISBALE_CHANNEL']);
             }
 
-            $TPL->set('SITE_NAME', SITE_NAME);
+            $TPL->set('SITE_NAME', CONFIG['SITE_NAME']);
 
             foreach ($Results as $Result) {
                 list($Email, $ID, $UserID) = $Result;
@@ -140,7 +140,7 @@ class AutoEnable {
                 }
 
                 // Send email
-                $Subject = Lang::get('login', 'your_enable_request_for_before') . SITE_NAME . Lang::get('login', 'your_enable_request_for_after');
+                $Subject = Lang::get('login', 'your_enable_request_for_before') . CONFIG['SITE_NAME'] . Lang::get('login', 'your_enable_request_for_after');
                 $Subject .= ($Status == self::APPROVED) ? Lang::get('login', 'approved') : Lang::get('login', 'denied');
 
                 Misc::send_email($Email, $Subject, $TPL->get(), 'noreply');
@@ -253,7 +253,7 @@ class AutoEnable {
             if ($Timestamp < time_minus(3600 * 72)) {
                 // Old request
                 Tools::update_user_notes($UserID, sqltime() . Lang::get('login', 'tried_to_use_an_expired_token_before') . $_SERVER['REMOTE_ADDR'] . Lang::get('login', 'tried_to_use_an_expired_token_after') . "\n\n");
-                $Err = Lang::get('login', 'token_has_expired_please_visit_1') . BOT_DISABLED_CHAN . Lang::get('login', 'token_has_expired_please_visit_2') . BOT_SERVER . Lang::get('login', 'token_has_expired_please_visit_3');
+                $Err = Lang::get('login', 'token_has_expired_please_visit_1') . CONFIG['BOT_DISABLED_CHAN'] . Lang::get('login', 'token_has_expired_please_visit_2') . CONFIG['BOT_SERVER'] . Lang::get('login', 'token_has_expired_please_visit_3');
             } else {
                 // Good request, decrement cache value and enable account
                 G::$Cache->decrement_value(AutoEnable::CACHE_KEY_NAME);

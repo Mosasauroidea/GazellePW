@@ -8,14 +8,14 @@
  * Any changes made to this page within the foreach loop should probably be
  * replicated on the auto page (reports.php).
  */
-include(SERVER_ROOT . '/sections/torrents/functions.php');
-include(SERVER_ROOT . '/classes/torrenttable.class.php');
+include(CONFIG['SERVER_ROOT'] . '/sections/torrents/functions.php');
+include(CONFIG['SERVER_ROOT'] . '/classes/torrenttable.class.php');
 
 if (!check_perms('admin_reports')) {
     error(403);
 }
 
-include(SERVER_ROOT . '/classes/reports.class.php');
+include(CONFIG['SERVER_ROOT'] . '/classes/reports.class.php');
 
 define('REPORTS_PER_PAGE', '10');
 list($Page, $Limit) = Format::page_limit(REPORTS_PER_PAGE);

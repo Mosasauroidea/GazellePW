@@ -1,6 +1,6 @@
 <?php
 
-require(SERVER_ROOT . '/sections/torrents/functions.php');
+require(CONFIG['SERVER_ROOT'] . '/sections/torrents/functions.php');
 
 $GroupAllowed = array('WikiBody', 'WikiImage', 'ID', 'Name', 'Year',  'ReleaseType', 'CategoryID', 'Time');
 $TorrentAllowed = array('ID', 'RemasterYear', 'RemasterTitle',  'Scene', 'FileCount', 'Size', 'Seeders', 'Leechers', 'Snatched', 'FreeTorrent', 'Time', 'Description', 'FileList', 'FilePath', 'UserID', 'Username');

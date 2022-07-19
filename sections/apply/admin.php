@@ -42,7 +42,7 @@ if (isset($_POST['auth'])) {
 
 <div class="LayoutBody">
     <div class="BodyHeader">
-        <h2 class="BodyHeader-nav"><?= Lang::get('apply', 'manage_roles_at_before') ?><?= SITE_NAME ?><?= Lang::get('apply', 'manage_roles_at_after') ?></h2>
+        <h2 class="BodyHeader-nav"><?= Lang::get('apply', 'manage_roles_at_before') ?><?= CONFIG['SITE_NAME'] ?><?= Lang::get('apply', 'manage_roles_at_after') ?></h2>
         <div class="BodyNavLinks">
             <a href="/apply.php" class="brackets"><?= Lang::get('apply', 'apply') ?></a>
             <a href="/apply.php?action=view" class="brackets"><?= Lang::get('apply', 'current_applications') ?></a>

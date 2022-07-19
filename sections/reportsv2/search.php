@@ -126,7 +126,7 @@ if (!isset($dt_until)) {
     <?
     if (isset($Results)) {
         $Page  = max(1, isset($_GET['page']) ? intval($_GET['page']) : 1);
-        $Pages = Format::get_pages($Page, $Total, TORRENTS_PER_PAGE);
+        $Pages = Format::get_pages($Page, $Total, CONFIG['TORRENTS_PER_PAGE']);
     ?>
         <div class="BodyNavLinks">
             <?= $Pages ?>

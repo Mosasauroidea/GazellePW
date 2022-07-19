@@ -3,9 +3,9 @@
 //------------- Delete dead torrents ------------------------------------//
 sleep(10);
 $Criteria = array();
-$Criteria[] = array('Class' => TORRENT_MASTER, 'Limit' => 1);
-$Criteria[] = array('Class' => POWER_TM, 'Limit' => 2);
-$Criteria[] = array('Class' => ELITE_TM, 'Limit' => 3);
+$Criteria[] = array('Class' => CONFIG['USER_CLASS']['TORRENT_MASTER'], 'Limit' => 1);
+$Criteria[] = array('Class' => CONFIG['USER_CLASS']['POWER_TM'], 'Limit' => 2);
+$Criteria[] = array('Class' => CONFIG['USER_CLASS']['ELITE_TM'], 'Limit' => 3);
 foreach ($Criteria as $L) {
     $SQL = "select ID from users_main where PermissionID=" . $L['Class'];
     $DB->query($SQL);

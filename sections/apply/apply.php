@@ -24,7 +24,7 @@ View::show_header(Lang::get('apply', 'apply'), 'apply,bbcode', 'PageApplyApply')
 
 <div class="LayoutBody">
     <div class="BodyHeader">
-        <h2 class="BodyHeader-nav"><?= Lang::get('apply', 'apply_for_a_role_at_before') ?><?= SITE_NAME ?><?= Lang::get('apply', 'apply_for_a_role_at_after') ?></h2>
+        <h2 class="BodyHeader-nav"><?= Lang::get('apply', 'apply_for_a_role_at_before') ?><?= CONFIG['SITE_NAME'] ?><?= Lang::get('apply', 'apply_for_a_role_at_after') ?></h2>
         <? if (check_perms('admin_manage_applicants') || Applicant::user_is_applicant($LoggedUser['ID'])) { ?>
             <div class="BodyNavLinks">
                 <? if (check_perms('admin_manage_applicants')) { ?>

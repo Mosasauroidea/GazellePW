@@ -242,7 +242,7 @@ class NotificationsManager {
         $Title = G::$Cache->get_value('news_latest_title');
         if ($CurrentNews === false || $Title === false) {
             $QueryID = G::$DB->get_query_id();
-            $ForumID = NEWS_FORUM_ID;
+            $ForumID = CONFIG['NEWS_FORUM_ID'];
             G::$DB->query("SELECT `ID`, `Title` FROM `forums_topics` WHERE `ForumID` = '$ForumID' AND  `IsNotice` = '1'  ORDER BY `IsSticky` DESC, `CreatedTime` DESC LIMIT 1");
             if (G::$DB->has_results()) {
                 list($CurrentNews, $Title) = G::$DB->next_record();
@@ -429,7 +429,7 @@ class NotificationsManager {
         if (!$News) {
             if (!$News = G::$Cache->get_value('news')) {
 
-                $ForumID = NEWS_FORUM_ID;
+                $ForumID = CONFIG['NEWS_FORUM_ID'];
                 G::$DB->query(
                     "SELECT `ID`, `Title`, 'NULL', `CreatedTime` FROM `forums_topics` WHERE `ForumID` = '$ForumID' AND  `IsNotice` = '1'  ORDER BY `IsSticky` DESC, `CreatedTime` DESC LIMIT 1"
                 );

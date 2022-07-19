@@ -3,7 +3,7 @@
 ini_set('max_file_uploads', 1);
 define('MAX_FILENAME_LENGTH', 255);
 
-include(SERVER_ROOT . '/classes/file_checker.class.php');
+include(CONFIG['SERVER_ROOT'] . '/classes/file_checker.class.php');
 
 enforce_login();
 
@@ -32,7 +32,7 @@ if (empty($SubtitleName) || !is_uploaded_file($SubtitleName) || !filesize($Subti
     $Err = Lang::get('subtitles', 'please_upload_supported_subtitle_formats');
 }
 if ($Err) {
-    include(SERVER_ROOT . '/sections/subtitles/upload.php');
+    include(CONFIG['SERVER_ROOT'] . '/sections/subtitles/upload.php');
     die($Err);
 }
 $file_data = file_get_contents($SubtitleName);

@@ -24,10 +24,10 @@ if (isset($_GET['pp'])) {
 } elseif (isset($LoggedUser['PostsPerPage'])) {
     $PerPage = $LoggedUser['PostsPerPage'];
 } else {
-    $PerPage = POSTS_PER_PAGE;
+    $PerPage = CONFIG['POSTS_PER_PAGE'];
 }
 
-list($Page, $Limit) = Format::page_limit(TOPICS_PER_PAGE);
+list($Page, $Limit) = Format::page_limit(CONFIG['TOPICS_PER_PAGE']);
 
 //---------- Get some data to start processing
 
@@ -88,7 +88,7 @@ foreach ($Forums[$ForumID]['SpecificRules'] as $ThreadIDs) {
     );
 }
 
-$Pages = Format::get_pages($Page, $Forums[$ForumID]['NumTopics'], TOPICS_PER_PAGE, 9);
+$Pages = Format::get_pages($Page, $Forums[$ForumID]['NumTopics'], CONFIG['TOPICS_PER_PAGE'], 9);
 
 if (count($Forum) === 0) {
     print
@@ -172,7 +172,7 @@ if (count($Forum) === 0) {
                     'forumName' => $ForumName,
                     'specificRules' => $JsonSpecificRules,
                     'currentPage' => (int)$Page,
-                    'pages' => ceil($Forums[$ForumID]['NumTopics'] / TOPICS_PER_PAGE),
+                    'pages' => ceil($Forums[$ForumID]['NumTopics'] / CONFIG['TOPICS_PER_PAGE']),
                     'threads' => $JsonTopics
                 )
             )

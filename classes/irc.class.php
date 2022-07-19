@@ -45,10 +45,10 @@ abstract class IRC_BOT {
     private function connect_irc($Reconnect = false) {
         $this->Connecting = true;
         //Open a socket to the IRC server
-        if (defined('BOT_PORT_SSL')) {
-            $IrcAddress = 'tls://' . BOT_SERVER . ':' . BOT_PORT_SSL;
+        if (CONFIG['BOT_PORT_SSL']) {
+            $IrcAddress = 'tls://' . CONFIG['BOT_SERVER'] . ':' . CONFIG['BOT_PORT']_SSL;
         } else {
-            $IrcAddress = 'tcp://' . BOT_SERVER . ':' . BOT_PORT;
+            $IrcAddress = 'tcp://' . CONFIG['BOT_SERVER'] . ':' . CONFIG['BOT_PORT'];
         }
         while (!$this->Socket = stream_socket_client($IrcAddress, $ErrNr, $ErrStr)) {
             sleep(15);
@@ -62,7 +62,7 @@ abstract class IRC_BOT {
 
     private function connect_listener() {
         //create a socket to listen on
-        $ListenAddress = 'tcp://' . SOCKET_LISTEN_ADDRESS . ':' . SOCKET_LISTEN_PORT;
+        $ListenAddress = 'tcp://' . CONFIG['SOCKET_LISTEN_ADDRESS'] . ':' . CONFIG['SOCKET_LISTEN_PORT'];
         if (!$this->ListenSocket = stream_socket_server($ListenAddress, $ErrNr, $ErrStr)) {
             die("Cannot create listen socket: $ErrStr");
         }
@@ -70,8 +70,8 @@ abstract class IRC_BOT {
     }
 
     private function post_connect() {
-        fwrite($this->Socket, "NICK " . BOT_NICK . "Init\n");
-        fwrite($this->Socket, "USER " . BOT_NICK . " * * :IRC Bot\n");
+        fwrite($this->Socket, "NICK " . CONFIG['BOT_NICK'] . "Init\n");
+        fwrite($this->Socket, "USER " . CONFIG['BOT_NICK'] . " * * :IRC Bot\n");
         $this->listen();
     }
 
@@ -143,7 +143,7 @@ abstract class IRC_BOT {
     /*
     This function uses blacklisted_ip, which is no longer in RC2.
     You can probably find it in old RC1 code kicking aronud if you need it.
-    protected function ip_check($IP, $Gline = false, $Channel = BOT_REPORT_CHAN) {
+    protected function ip_check($IP, $Gline = false, $Channel = CONFIG['BOT_REPORT_CHAN']) {
         if (blacklisted_ip($IP)) {
             $this->send_to($Channel, 'TOR IP Detected: '.$IP);
             if ($Gline) {

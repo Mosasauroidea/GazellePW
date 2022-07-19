@@ -24,7 +24,7 @@ $_POST['action'] is what the user is trying to do. It can be:
 if (isset($LoggedUser['PostsPerPage'])) {
     $PerPage = $LoggedUser['PostsPerPage'];
 } else {
-    $PerPage = POSTS_PER_PAGE;
+    $PerPage = CONFIG['POSTS_PER_PAGE'];
 }
 
 if (isset($_POST['thread']) && !is_number($_POST['thread'])) {
@@ -96,13 +96,13 @@ if ($ThreadInfo['LastPostAuthorID'] == $LoggedUser['ID'] && isset($_POST['merge'
     $Cache->delete_value("forums_edits_$PostID");
 
     //Get the catalogue it is in
-    $CatalogueID = floor((POSTS_PER_PAGE * ceil($ThreadInfo['Posts'] / POSTS_PER_PAGE) - POSTS_PER_PAGE) / THREAD_CATALOGUE);
+    $CatalogueID = floor((CONFIG['POSTS_PER_PAGE'] * ceil($ThreadInfo['Posts'] / CONFIG['POSTS_PER_PAGE']) - CONFIG['POSTS_PER_PAGE']) / CONFIG['THREAD_CATALOGUE']);
 
     //Get the catalogue value for the post we're appending to
-    if ($ThreadInfo['Posts'] % THREAD_CATALOGUE == 0) {
-        $Key = THREAD_CATALOGUE - 1;
+    if ($ThreadInfo['Posts'] % CONFIG['THREAD_CATALOGUE'] == 0) {
+        $Key = CONFIG['THREAD_CATALOGUE'] - 1;
     } else {
-        $Key = ($ThreadInfo['Posts'] % THREAD_CATALOGUE) - 1;
+        $Key = ($ThreadInfo['Posts'] % CONFIG['THREAD_CATALOGUE']) - 1;
     }
     if ($ThreadInfo['StickyPostID'] == $PostID) {
         $ThreadInfo['StickyPost']['Body'] .= "\n\n$Body";
@@ -170,11 +170,11 @@ if ($ThreadInfo['LastPostAuthorID'] == $LoggedUser['ID'] && isset($_POST['merge'
         // if we're bumping from an older page
         } else {
             // Remove the last thread from the index
-            if (count($Forum) == TOPICS_PER_PAGE && $Stickies < TOPICS_PER_PAGE) {
+            if (count($Forum) == CONFIG['TOPICS_PER_PAGE'] && $Stickies < CONFIG['TOPICS_PER_PAGE']) {
                 array_pop($Forum);
             }
             // Never know if we get a page full of stickies...
-            if ($Stickies < TOPICS_PER_PAGE || $ThreadInfo['IsSticky'] == 1) {
+            if ($Stickies < CONFIG['TOPICS_PER_PAGE'] || $ThreadInfo['IsSticky'] == 1) {
                 //Pull the data for the thread we're bumping
                 $DB->query("
                     SELECT
@@ -207,7 +207,7 @@ if ($ThreadInfo['LastPostAuthorID'] == $LoggedUser['ID'] && isset($_POST['merge'
         }
         if ($Stickies > 0) {
             $Part1 = array_slice($Forum, 0, $Stickies, true); //Stickies
-            $Part3 = array_slice($Forum, $Stickies, TOPICS_PER_PAGE - $Stickies - 1, true); //Rest of page
+            $Part3 = array_slice($Forum, $Stickies, CONFIG['TOPICS_PER_PAGE'] - $Stickies - 1, true); //Rest of page
         } else {
             $Part1 = array();
             $Part3 = $Forum;
@@ -246,7 +246,7 @@ if ($ThreadInfo['LastPostAuthorID'] == $LoggedUser['ID'] && isset($_POST['merge'
 
 
     //This calculates the block of 500 posts that this one will fall under
-    $CatalogueID = floor((POSTS_PER_PAGE * ceil($ThreadInfo['Posts'] / POSTS_PER_PAGE) - POSTS_PER_PAGE) / THREAD_CATALOGUE);
+    $CatalogueID = floor((CONFIG['POSTS_PER_PAGE'] * ceil($ThreadInfo['Posts'] / CONFIG['POSTS_PER_PAGE']) - CONFIG['POSTS_PER_PAGE']) / CONFIG['THREAD_CATALOGUE']);
 
     //Insert the post into the thread catalogue (block of 500 posts)
     $Cache->begin_transaction("thread_$TopicID" . "_catalogue_$CatalogueID");

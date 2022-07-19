@@ -682,7 +682,7 @@ class TorrentTableView {
                 </a>
             </span>
         <?  }
-        if ($this->WithVote && ENABLE_VOTES) {
+        if ($this->WithVote && CONFIG['ENABLE_VOTES']) {
             $VoteType = isset($UserVotes[$GroupID]['Type']) ? $UserVotes[$GroupID]['Type'] : '';
             Votes::vote_link($GroupID, $VoteType);
         }

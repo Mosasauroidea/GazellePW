@@ -28,7 +28,7 @@ if ($GroupCategoryID == 1) {
     if ($LIs != '') {
 ?>
         <div class="box" id="votes_ranks">
-            <div class="head"><strong><?= SITE_NAME ?> Favorites</strong></div>
+            <div class="head"><strong><?= CONFIG['SITE_NAME'] ?> Favorites</strong></div>
             <div class="vote_charts body">
                 <ul class="stats nobullet" id="vote_rankings">
                     <?= $LIs ?>

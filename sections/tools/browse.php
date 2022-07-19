@@ -152,7 +152,7 @@ View::show_header(Lang::get('tools', 'staff_tools'), '', 'PageToolHome');
         create_row(Lang::get('tools', 'ip_address_bans'), "tools.php?action=ip_ban", check_perms("admin_manage_ipbans"));
         create_row(Lang::get('tools', 'duplicate_ip_addresses'), "tools.php?action=dupe_ips", check_perms("users_view_ips"));
         create_row(Lang::get('tools', 'manipulate_invite_tree'), "tools.php?action=manipulate_tree", check_perms("users_mod"));
-        if (ENABLE_BADGE) {
+        if (CONFIG['ENABLE_BADGE']) {
             create_row(Lang::get('tools', 'manage_badges'), "tools.php?action=badges", check_perms("admin_manage_badges"));
         }
         if ($ToolsHTML) {
@@ -172,7 +172,7 @@ View::show_header(Lang::get('tools', 'staff_tools'), '', 'PageToolHome');
         create_row(Lang::get('tools', 'bonus_points_giving'), "tools.php?action=bonus_points", check_perms("users_mod"));
         create_row(Lang::get('tools', 'fl_tokens_giving'), "tools.php?action=tokens", check_perms("users_mod"));
         create_row(Lang::get('tools', 'invites_giving'), "tools.php?action=invite", check_perms("users_edit_invites"));
-        if (ENABLE_BADGE) {
+        if (CONFIG['ENABLE_BADGE']) {
             create_row(Lang::get('tools', 'badges_giving'), "tools.php?action=badges_gave", check_perms("admin_manage_badges"));
         }
         create_row(Lang::get('tools', 'events_reward'), "tools.php?action=events_reward", check_perms("events_reward_tokens") || check_perms("events_reward_bonus") || check_perms("events_reward_invites") || check_perms("events_reward_badges"));
@@ -235,7 +235,7 @@ View::show_header(Lang::get('tools', 'staff_tools'), '', 'PageToolHome');
 
         // begin Torrents category
         $ToolsHTML = "";
-        if (ENABLE_COLLAGES) {
+        if (CONFIG['ENABLE_COLLAGES']) {
             create_row(Lang::get('tools', 'collage_recovery'), "collages.php?action=recover", check_perms("site_collages_recover"));
         }
         create_row(Lang::get('tools', 'dnu_list'), "tools.php?action=dnu", check_perms("admin_dnu"));

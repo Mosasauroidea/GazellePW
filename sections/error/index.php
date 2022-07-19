@@ -17,7 +17,7 @@ if (!empty($_GET['e']) && in_array($_GET['e'], $Errors)) {
         case '403':
             $Title = Lang::get('global', 'error_403_title');
             $Description = Lang::get('global', 'error_403_description');
-            notify(STATUS_CHAN, '403');
+            notify(CONFIG['STATUS_CHAN'], '403');
             break;
         case '404':
             $Title = Lang::get('global', 'error_404_title');
@@ -26,7 +26,7 @@ if (!empty($_GET['e']) && in_array($_GET['e'], $Errors)) {
         case '0':
             $Title = Lang::get('global', 'invalid_input_title');
             $Description = Lang::get('global', 'invalid_input_description');
-            notify(STATUS_CHAN, 'PHP-0');
+            notify(CONFIG['STATUS_CHAN'], 'PHP-0');
             break;
         case '-1':
             $Title = Lang::get('global', 'invalid_request_title');

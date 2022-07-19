@@ -45,20 +45,20 @@ class GenerateInvite extends AbstractAPI {
             "Passed Interview"
         );
 
-        $site_url = SITE_URL . "/register.php?invite={$key}";
+        $site_url = CONFIG['SITE_URL'] . "/register.php?invite={$key}";
 
         if (!empty($_GET['email'])) {
             $body = $this->twig->render('emails/invite.twig', [
                 'InviterName' => $interviewer_name,
                 'InviteKey' => $key,
                 'Email' => $_GET['email'],
-                'SITE_NAME' => SITE_NAME,
-                'SITE_URL' => SITE_URL,
-                'IRC_SERVER' => BOT_SERVER,
-                'DISABLED_CHAN' => BOT_DISABLED_CHAN
+                'SITE_NAME' => CONFIG['SITE_NAME'],
+                'SITE_URL' => CONFIG['SITE_URL'],
+                'IRC_SERVER' => CONFIG['BOT_SERVER'],
+                'DISABLED_CHAN' => CONFIG['BOT_DISABLED_CHAN']
             ]);
 
-            \Misc::send_email($_GET['email'], 'New account confirmation at ' . SITE_NAME, $body, 'noreply');
+            \Misc::send_email($_GET['email'], 'New account confirmation at ' . CONFIG['SITE_NAME'], $body, 'noreply');
         }
 
         return ["key" => $key, "invite_url" => $site_url];

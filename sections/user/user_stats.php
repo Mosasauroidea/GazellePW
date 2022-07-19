@@ -49,8 +49,8 @@ if ($Charts == false) {
 View::show_header('User Stats', '', 'PageUserStat');
 ?>
 
-<script src="<?= STATIC_SERVER ?>/functions/highcharts.js"></script>
-<script src="<?= STATIC_SERVER ?>/functions/highcharts_custom.js"></script>
+<script src="<?= CONFIG['STATIC_SERVER'] ?>/functions/highcharts.js"></script>
+<script src="<?= CONFIG['STATIC_SERVER'] ?>/functions/highcharts_custom.js"></script>
 
 <script>
     document.addEventListener('DOMContentLoaded', function() {

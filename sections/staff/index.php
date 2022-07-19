@@ -2,7 +2,7 @@
 enforce_login();
 View::show_header(Lang::get('staff', 'index'), '', 'PageStaffHome');
 
-include(SERVER_ROOT . '/sections/staff/functions.php');
+include(CONFIG['SERVER_ROOT'] . '/sections/staff/functions.php');
 
 $SupportStaff = get_support();
 
@@ -15,7 +15,7 @@ list($FrontLineSupport, $Staff) = $SupportStaff;
 
 <div class="LayoutBody">
     <div class="BodyHeader">
-        <h2 class="BodyHeader-nav"><?= SITE_NAME ?> <?= Lang::get('staff', 'index') ?></h2>
+        <h2 class="BodyHeader-nav"><?= CONFIG['SITE_NAME'] ?> <?= Lang::get('staff', 'index') ?></h2>
     </div>
     <? if (check_perms('admin_manage_applicants')) { ?>
         <!-- <div class="BodyNavLinks">

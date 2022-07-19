@@ -68,7 +68,7 @@ class TORRENT_FORM {
     }
 
     function head() {
-        $AnnounceURL =  ANNOUNCE_URL;
+        $AnnounceURL =  CONFIG['ANNOUNCE_URL'];
 ?>
 
         <div class="Form">

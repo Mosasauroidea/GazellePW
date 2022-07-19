@@ -176,8 +176,8 @@ echo $Val->GenerateJS('userform');
                                 <? $LangForFile = $Lang === 'chs' ? 'zh' : $Lang ?>
                                 <? foreach ($Stylesheets as $Style) { ?>
                                     <div class="StyleGallery-item">
-                                        <a class="StyleGallery-imageLink" name="<?= ($Style['Name']) ?>" href="<?= STATIC_SERVER . 'stylespreview/' . $LangForFile . '-' . $Style['Name'] . '-dark.png' ?>" target="_blank">
-                                            <img class="StyleGallery-image" src="<?= STATIC_SERVER . 'stylespreview/thumb-' . $Style['Name'] . '.jpg' ?>" alt="<?= $Style['Name'] ?>" />
+                                        <a class="StyleGallery-imageLink" name="<?= ($Style['Name']) ?>" href="<?= CONFIG['STATIC_SERVER'] . 'stylespreview/' . $LangForFile . '-' . $Style['Name'] . '-dark.png' ?>" target="_blank">
+                                            <img class="StyleGallery-image" src="<?= CONFIG['STATIC_SERVER'] . 'stylespreview/thumb-' . $Style['Name'] . '.jpg' ?>" alt="<?= $Style['Name'] ?>" />
                                         </a>
                                         <div class="StyleGallery-name Radio">
                                             <input class="Input" type="radio" name="stylesheet_gallery" id="input-stylesheet-<?= $Style['ID'] ?>" value="<?= ($Style['ID']) ?>" />
@@ -264,7 +264,7 @@ echo $Val->GenerateJS('userform');
                                     </label>
                                 </div>
                             </div>
-                            <? if (IS_DEV) { ?>
+                            <? if (CONFIG['IS_DEV']) { ?>
                                 <div>
                                     <input id="SettingTorrentTitleInput" type="hidden" name="settingTorrentTitleItems" value='<?= implode(',', $SettingTorrentTitle['Items'])  ?>' />
                                     <?= Torrents::settingTorrentTitle(
@@ -1002,7 +1002,7 @@ echo $Val->GenerateJS('userform');
                     list($Invited) = $DB->next_record();
                     ?>
                     <tr class="Form-row" id="para_invited_tr">
-                        <td class="Form-label" data-tooltip="This option controls the display of your <?= SITE_NAME ?> invitees."><strong><?= Lang::get('user', 'para_invited') ?></strong></td>
+                        <td class="Form-label" data-tooltip="This option controls the display of your <?= CONFIG['SITE_NAME'] ?> invitees."><strong><?= Lang::get('user', 'para_invited') ?></strong></td>
                         <td class="Form-inputs">
                             <input id="input-p_invitedcount" type="checkbox" name="p_invitedcount" <?= checked(!in_array('invitedcount', $Paranoia)) ?> />
                             <label for="input-p_invitedcount"> <?= Lang::get('user', 'show_count') ?></label>
@@ -1023,7 +1023,7 @@ echo $Val->GenerateJS('userform');
                         </td>
                     </tr>
                     <?
-                    if (ENABLE_BADGE) {
+                    if (CONFIG['ENABLE_BADGE']) {
                     ?>
                         <tr class="Form-row" id="para_badgedisplay_tr">
                             <td class="Form-label" data-tooltip="para_badgedisplay_title"><strong><?= Lang::get('user', 'para_badgedisplay') ?></strong></td>
@@ -1064,7 +1064,7 @@ echo $Val->GenerateJS('userform');
                                 <input class="Button" type="button" onclick="RandomIRCKey();" value="<?= Lang::get('user', 'irckey_title') ?>" />
                             </div>
                             <div>
-                                <?= Lang::get('user', 'irckey_note_1') ?> <?= BOT_NICK ?> <?= Lang::get('user', 'irckey_note_2') ?>
+                                <?= Lang::get('user', 'irckey_note_1') ?> <?= CONFIG['BOT_NICK'] ?> <?= Lang::get('user', 'irckey_note_2') ?>
                             </div>
                         </td>
                     </tr>

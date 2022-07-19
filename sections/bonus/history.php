@@ -15,10 +15,10 @@ if (check_perms('admin_bp_history') && isset($_GET['id']) && is_number($_GET['id
 $Summary = $Bonus->getUserSummary($ID);
 
 $Page  = max(1, isset($_GET['page']) ? intval($_GET['page']) : 1);
-$Pages = Format::get_pages($Page, $Summary['nr'], TORRENTS_PER_PAGE);
+$Pages = Format::get_pages($Page, $Summary['nr'], CONFIG['TORRENTS_PER_PAGE']);
 
 if ($Summary['nr'] > 0) {
-    $History = $Bonus->getUserHistory($ID, $Page, TORRENTS_PER_PAGE);
+    $History = $Bonus->getUserHistory($ID, $Page, CONFIG['TORRENTS_PER_PAGE']);
 }
 
 ?>

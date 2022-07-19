@@ -4,8 +4,8 @@
  * they visit reportsv2.php?id=xxx
  */
 
-include(SERVER_ROOT . '/sections/torrents/functions.php');
-include(SERVER_ROOT . '/classes/torrenttable.class.php');
+include(CONFIG['SERVER_ROOT'] . '/sections/torrents/functions.php');
+include(CONFIG['SERVER_ROOT'] . '/classes/torrenttable.class.php');
 
 //If we're not coming from torrents.php, check we're being returned because of an error.
 if (!isset($_GET['id']) || !is_number($_GET['id'])) {

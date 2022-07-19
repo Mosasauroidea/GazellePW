@@ -1,6 +1,6 @@
 <? View::show_header(Lang::get('login', 'two_factor_authentication'), '', 'PageLogin2FA'); ?>
 <span id="no-cookies" class="hidden u-colorWarning"><?= Lang::get('login', 'cookies_disabled') ?><br /><br /></span>
-<noscript><span class="u-colorWarning"><?= SITE_NAME ?><?= Lang::get('login', 'requires_js') ?></span><br /><br />
+<noscript><span class="u-colorWarning"><?= CONFIG['SITE_NAME'] ?><?= Lang::get('login', 'requires_js') ?></span><br /><br />
 </noscript>
 <?
 if (strtotime($BannedUntil) < time()) {

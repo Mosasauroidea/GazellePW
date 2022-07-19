@@ -3,7 +3,7 @@ View::show_header(Lang::get('user', 'two_factor_authentication'), '', 'PageUser2
 ?>
 
 <div class="BoxBody">
-    <p><?= Lang::get('user', 'two_factor_authentication_note_1') ?> <?= SITE_NAME ?> <?= Lang::get('user', 'two_factor_authentication_note_2') ?></p>
+    <p><?= Lang::get('user', 'two_factor_authentication_note_1') ?> <?= CONFIG['SITE_NAME'] ?> <?= Lang::get('user', 'two_factor_authentication_note_2') ?></p>
 
     <p><?= Lang::get('user', 'two_factor_authentication_note_3') ?></p>
 </div>
@@ -13,7 +13,7 @@ View::show_header(Lang::get('user', 'two_factor_authentication'), '', 'PageUser2
         <div>
             <img src="data:image/png;base64,<?
                                             echo base64_encode(
-                                                (new QrCode())->setText('otpauth://totp/' . SITE_NAME . '?secret=' . $_SESSION['private_key'])
+                                                (new QrCode())->setText('otpauth://totp/' . CONFIG['SITE_NAME'] . '?secret=' . $_SESSION['private_key'])
                                                     ->setSize(300)
                                                     ->setPadding(10)
                                                     ->setLabel($_SESSION['private_key'])

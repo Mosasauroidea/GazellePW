@@ -68,7 +68,7 @@ class UserRank extends Base {
         $this->config = $config;
         $definition = $this->config->definition();
 
-        $dimension['uploaded'] -= STARTING_UPLOAD;
+        $dimension['uploaded'] -= CONFIG['STARTING_UPLOAD'];
         $this->rank = [];
         $ok = true;
         foreach ($definition as $d) {

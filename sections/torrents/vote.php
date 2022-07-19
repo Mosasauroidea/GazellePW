@@ -9,7 +9,7 @@ $DownVotes  = $TotalVotes - $UpVotes;
 $Voted = isset($UserVotes[$GroupID]) ? $UserVotes[$GroupID]['Type'] : false;
 $Score = Votes::binomial_score($UpVotes, $TotalVotes);
 $Percentage = $TotalVotes > 0 ? number_format($UpVotes / $TotalVotes * 100, 1) : '--';
-if (ENABLE_VOTES) {
+if (CONFIG['ENABLE_VOTES']) {
 ?>
     <div class="caidan artbox">
         <div class="sec-title"><span><?= Lang::get('torrents', 'album_votes') ?></span></div>

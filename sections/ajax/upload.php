@@ -3,7 +3,7 @@
 
 
 // Include the necessary form class
-include(SERVER_ROOT . '/classes/torrent_form.class.php');
+include(CONFIG['SERVER_ROOT'] . '/classes/torrent_form.class.php');
 $TorrentForm = new TORRENT_FORM();
 
 $GenreTags = $Cache->get_value('genre_tags');

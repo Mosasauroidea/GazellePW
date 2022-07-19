@@ -1,5 +1,5 @@
 <?
-include(SERVER_ROOT . '/sections/reports/array.php');
+include(CONFIG['SERVER_ROOT'] . '/sections/reports/array.php');
 
 if (empty($_GET['type']) || empty($_GET['id']) || !is_number($_GET['id'])) {
     error(404);

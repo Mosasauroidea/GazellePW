@@ -1,5 +1,5 @@
 <?
-include(SERVER_ROOT . '/classes/torrenttable.class.php');
+include(CONFIG['SERVER_ROOT'] . '/classes/torrenttable.class.php');
 
 $TorrentID = $_GET['torrentid'];
 if (!$TorrentID || !is_number($TorrentID)) {
@@ -88,9 +88,9 @@ if (check_perms('admin_reports')) {
 ?>
     <div id="all_reports" style="margin-left: auto; margin-right: auto;">
         <?
-        include(SERVER_ROOT . '/classes/reports.class.php');
+        include(CONFIG['SERVER_ROOT'] . '/classes/reports.class.php');
 
-        //require(SERVER_ROOT.'/sections/reportsv2/array.php');
+        //require(CONFIG['SERVER_ROOT'].'/sections/reportsv2/array.php');
         include(Lang::getLangfilePath("report_types"));
         // TODO fix data
         $ReportID = 0;

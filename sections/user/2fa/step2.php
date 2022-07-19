@@ -3,7 +3,7 @@ View::show_header(Lang::get('user', 'two_factor_authentication'), '', 'Pageuser2
 ?>
 
 <div class="BoxBody">
-    <p><?= Lang::get('user', 'two_factor_authentication_note_1') ?> <?= SITE_NAME ?> <?= Lang::get('user', 'two_factor_authentication_note_2') ?></p>
+    <p><?= Lang::get('user', 'two_factor_authentication_note_1') ?> <?= CONFIG['SITE_NAME'] ?> <?= Lang::get('user', 'two_factor_authentication_note_2') ?></p>
 </div>
 
 <form method="post">

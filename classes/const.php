@@ -71,41 +71,41 @@ $SpecialChars = array(
 
 $UserDemoteCriteria = [
 	[
-		'From' => GURU,
-		'To' => ELITE_TM,
+		'From' => CONFIG['USER_CLASS']['GURU'],
+		'To' => CONFIG['USER_CLASS']['ELITE_TM'],
 		'MinUploads' => 1000,
 	],
 	[
-		'From' => ELITE_TM,
-		'To' => POWER_TM,
+		'From' => CONFIG['USER_CLASS']['ELITE_TM'],
+		'To' => CONFIG['USER_CLASS']['POWER_TM'],
 		'MinUploads' => 500,
 	],
 
 	[
-		'From' => POWER_TM,
-		'To' => TORRENT_MASTER,
+		'From' => CONFIG['USER_CLASS']['POWER_TM'],
+		'To' => CONFIG['USER_CLASS']['TORRENT_MASTER'],
 		'MinUploads' => 250,
 	],
 
 	[
-		'From' => TORRENT_MASTER,
-		'To' => ELITE,
+		'From' => CONFIG['USER_CLASS']['TORRENT_MASTER'],
+		'To' => CONFIG['USER_CLASS']['ELITE'],
 		'MinUploads' => 100,
 	],
 	[
-		'From' => ELITE,
-		'To' => POWER,
+		'From' => CONFIG['USER_CLASS']['ELITE'],
+		'To' => CONFIG['USER_CLASS']['POWER'],
 		'MinUploads' => 25,
 	],
 	[
-		'From' => POWER,
-		'To' => MEMBER,
+		'From' => CONFIG['USER_CLASS']['POWER'],
+		'To' => CONFIG['USER_CLASS']['MEMBER'],
 		'MinRatio' => 0.95,
 		'MinUploads' => 1,
 	],
 	[
-		'From' => MEMBER,
-		'To' => USER,
+		'From' => CONFIG['USER_CLASS']['MEMBER'],
+		'To' => CONFIG['USER_CLASS']['USER'],
 		'MinRatio' => 0.65,
 	],
 
@@ -113,8 +113,8 @@ $UserDemoteCriteria = [
 
 $UserPromoteCriteria = [
 	[
-		'From' => USER,
-		'To' => MEMBER,
+		'From' => CONFIG['USER_CLASS']['USER'],
+		'To' => CONFIG['USER_CLASS']['MEMBER'],
 		'MinUpload' => 0,
 		'MinDownload' => 80 * 1024 * 1024 * 1024,
 		'MinRatio' => 0.8,
@@ -123,8 +123,8 @@ $UserPromoteCriteria = [
 		'AwardLevel' => 1,
 	],
 	[
-		'From' => MEMBER,
-		'To' => POWER,
+		'From' => CONFIG['USER_CLASS']['MEMBER'],
+		'To' => CONFIG['USER_CLASS']['POWER'],
 		'MinUpload' => 0,
 		'MinDownload' => 200 * 1024 * 1024 * 1024,
 		'MinRatio' => 1.2,
@@ -134,8 +134,8 @@ $UserPromoteCriteria = [
 		'Invite' => 1,
 	],
 	[
-		'From' => POWER,
-		'To' => ELITE,
+		'From' => CONFIG['USER_CLASS']['POWER'],
+		'To' => CONFIG['USER_CLASS']['ELITE'],
 		'MinUpload' => 0,
 		'MinDownload' => 500 * 1024 * 1024 * 1024,
 		'MinRatio' => 1.2,
@@ -145,8 +145,8 @@ $UserPromoteCriteria = [
 		'Invite' => 1,
 	],
 	[
-		'From' => ELITE,
-		'To' => TORRENT_MASTER,
+		'From' => CONFIG['USER_CLASS']['ELITE'],
+		'To' => CONFIG['USER_CLASS']['TORRENT_MASTER'],
 		'MinUpload' => 0,
 		'MinDownload' => 1 * 1024 * 1024 * 1024 * 1024,
 		'MinRatio' => 1.2,
@@ -157,8 +157,8 @@ $UserPromoteCriteria = [
 
 	],
 	[
-		'From' => TORRENT_MASTER,
-		'To' => POWER_TM,
+		'From' => CONFIG['USER_CLASS']['TORRENT_MASTER'],
+		'To' => CONFIG['USER_CLASS']['POWER_TM'],
 		'MinUpload' => 0,
 		'MinDownload' => 2 * 1024 * 1024 * 1024 * 1024,
 		'MinRatio' => 1.2,
@@ -169,8 +169,8 @@ $UserPromoteCriteria = [
 
 	],
 	[
-		'From' => POWER_TM,
-		'To' => ELITE_TM,
+		'From' => CONFIG['USER_CLASS']['POWER_TM'],
+		'To' => CONFIG['USER_CLASS']['ELITE_TM'],
 		'MinUpload' => 0,
 		'MinDownload' => 5 * 1024 * 1024 * 1024 * 1024,
 		'MinRatio' => 1.2,
@@ -180,8 +180,8 @@ $UserPromoteCriteria = [
 		'Invite' => 3,
 	],
 	[
-		'From' => ELITE_TM,
-		'To' => GURU,
+		'From' => CONFIG['USER_CLASS']['ELITE_TM'],
+		'To' => CONFIG['USER_CLASS']['GURU'],
 		'MinUpload' => 0,
 		'MinDownload' => 10 * 1024 * 1024 * 1024 * 1024,
 		'MinRatio' => 1.2,
@@ -200,4 +200,4 @@ define('MAX_RANK', 6);
 define('MAX_SPECIAL_RANK', 5);
 define('DONOR_FORUM_RANK', 6);
 
-define('VERSION', @file_get_contents(SERVER_ROOT . '/VERSION'));
+define('VERSION', @file_get_contents(CONFIG['SERVER_ROOT'] . '/VERSION'));

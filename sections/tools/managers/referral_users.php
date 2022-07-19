@@ -141,7 +141,7 @@ if ($ReferredUsers["Results"] > 0) { ?>
                     <?php if (check_perms('users_view_invites')) { ?>
                         <td class="Table-cell">
                             <?php if (!$Active) { ?>
-                                <a href="<?= SITE_URL ?>/register.php?invite=<?= $Invite ?>"><?= $Invite ?></a>
+                                <a href="<?= CONFIG['SITE_URL'] ?>/register.php?invite=<?= $Invite ?>"><?= $Invite ?></a>
                             <?php       } ?>
                         </td>
                     <?php   }

@@ -233,7 +233,7 @@ class Inbox extends Base {
             " . self::SECTIONS[$this->section]['dateField'];
         $search .= 'GROUP BY c.ID';
         // TODO: the function below has a fragile dep on $_GET
-        $limit = "LIMIT " . \Format::page_limit(MESSAGES_PER_PAGE)[1];
+        $limit = "LIMIT " . \Format::page_limit(CONFIG['MESSAGES_PER_PAGE'])[1];
 
         $this->db->prepared_query(
             sprintf(

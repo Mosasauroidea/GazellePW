@@ -20,172 +20,172 @@ if (!empty($_REQUEST['action'])) {
     switch ($_REQUEST['action']) {
         case "takeeditslot":
             enforce_login();
-            include(SERVER_ROOT . '/sections/torrents/takeeditslot.php');
+            include(CONFIG['SERVER_ROOT'] . '/sections/torrents/takeeditslot.php');
             break;
         case 'sendbonus':
             enforce_login();
-            include(SERVER_ROOT . '/sections/torrents/sendbonus.php');
+            include(CONFIG['SERVER_ROOT'] . '/sections/torrents/sendbonus.php');
             break;
         case 'sendbonuslist':
             enforce_login();
-            include(SERVER_ROOT . '/sections/torrents/sendbonuslist.php');
+            include(CONFIG['SERVER_ROOT'] . '/sections/torrents/sendbonuslist.php');
             break;
         case 'edit':
             enforce_login();
-            include(SERVER_ROOT . '/sections/torrents/edit.php');
+            include(CONFIG['SERVER_ROOT'] . '/sections/torrents/edit.php');
             break;
 
         case 'editgroup':
             enforce_login();
-            include(SERVER_ROOT . '/sections/torrents/editgroup.php');
+            include(CONFIG['SERVER_ROOT'] . '/sections/torrents/editgroup.php');
             break;
 
         case 'editgroupid':
             enforce_login();
-            include(SERVER_ROOT . '/sections/torrents/editgroupid.php');
+            include(CONFIG['SERVER_ROOT'] . '/sections/torrents/editgroupid.php');
             break;
 
         case 'changecategory':
             enforce_login();
-            include(SERVER_ROOT . '/sections/torrents/takechangecategory.php');
+            include(CONFIG['SERVER_ROOT'] . '/sections/torrents/takechangecategory.php');
             break;
         case 'grouplog':
             enforce_login();
-            include(SERVER_ROOT . '/sections/torrents/grouplog.php');
+            include(CONFIG['SERVER_ROOT'] . '/sections/torrents/grouplog.php');
             break;
         case 'takeedit':
             enforce_login();
-            include(SERVER_ROOT . '/sections/torrents/takeedit.php');
+            include(CONFIG['SERVER_ROOT'] . '/sections/torrents/takeedit.php');
             break;
 
         case 'newgroup':
             enforce_login();
-            include(SERVER_ROOT . '/sections/torrents/takenewgroup.php');
+            include(CONFIG['SERVER_ROOT'] . '/sections/torrents/takenewgroup.php');
             break;
 
         case 'peerlist':
             enforce_login();
-            include(SERVER_ROOT . '/sections/torrents/peerlist.php');
+            include(CONFIG['SERVER_ROOT'] . '/sections/torrents/peerlist.php');
             break;
 
         case 'snatchlist':
             enforce_login();
-            include(SERVER_ROOT . '/sections/torrents/snatchlist.php');
+            include(CONFIG['SERVER_ROOT'] . '/sections/torrents/snatchlist.php');
             break;
 
         case 'downloadlist':
             enforce_login();
-            include(SERVER_ROOT . '/sections/torrents/downloadlist.php');
+            include(CONFIG['SERVER_ROOT'] . '/sections/torrents/downloadlist.php');
             break;
 
         case 'filelist':
             enforce_login();
-            include(SERVER_ROOT . '/sections/torrents/filelist.php');
+            include(CONFIG['SERVER_ROOT'] . '/sections/torrents/filelist.php');
             break;
 
 
         case 'redownload':
             enforce_login();
-            include(SERVER_ROOT . '/sections/torrents/redownload.php');
+            include(CONFIG['SERVER_ROOT'] . '/sections/torrents/redownload.php');
             break;
 
         case 'revert':
         case 'takegroupedit':
             enforce_login();
-            include(SERVER_ROOT . '/sections/torrents/takegroupedit.php');
+            include(CONFIG['SERVER_ROOT'] . '/sections/torrents/takegroupedit.php');
             break;
 
         case 'nonwikiedit':
             enforce_login();
-            include(SERVER_ROOT . '/sections/torrents/nonwikiedit.php');
+            include(CONFIG['SERVER_ROOT'] . '/sections/torrents/nonwikiedit.php');
             break;
 
         case 'rename':
             enforce_login();
-            include(SERVER_ROOT . '/sections/torrents/rename.php');
+            include(CONFIG['SERVER_ROOT'] . '/sections/torrents/rename.php');
             break;
 
         case 'merge':
             enforce_login();
-            include(SERVER_ROOT . '/sections/torrents/merge.php');
+            include(CONFIG['SERVER_ROOT'] . '/sections/torrents/merge.php');
             break;
 
         case 'add_alias':
             enforce_login();
-            include(SERVER_ROOT . '/sections/torrents/add_alias.php');
+            include(CONFIG['SERVER_ROOT'] . '/sections/torrents/add_alias.php');
             break;
 
         case 'delete_alias':
             enforce_login();
             authorize();
-            include(SERVER_ROOT . '/sections/torrents/delete_alias.php');
+            include(CONFIG['SERVER_ROOT'] . '/sections/torrents/delete_alias.php');
             break;
 
         case 'history':
             enforce_login();
-            include(SERVER_ROOT . '/sections/torrents/history.php');
+            include(CONFIG['SERVER_ROOT'] . '/sections/torrents/history.php');
             break;
 
         case 'delete':
             enforce_login();
-            include(SERVER_ROOT . '/sections/torrents/delete.php');
+            include(CONFIG['SERVER_ROOT'] . '/sections/torrents/delete.php');
             break;
 
         case 'takedelete':
             enforce_login();
-            include(SERVER_ROOT . '/sections/torrents/takedelete.php');
+            include(CONFIG['SERVER_ROOT'] . '/sections/torrents/takedelete.php');
             break;
 
         case 'masspm':
             enforce_login();
-            include(SERVER_ROOT . '/sections/torrents/masspm.php');
+            include(CONFIG['SERVER_ROOT'] . '/sections/torrents/masspm.php');
             break;
 
         case 'reseed':
             enforce_login();
-            include(SERVER_ROOT . '/sections/torrents/reseed.php');
+            include(CONFIG['SERVER_ROOT'] . '/sections/torrents/reseed.php');
             break;
 
         case 'takemasspm':
             enforce_login();
-            include(SERVER_ROOT . '/sections/torrents/takemasspm.php');
+            include(CONFIG['SERVER_ROOT'] . '/sections/torrents/takemasspm.php');
             break;
 
         case 'vote_tag':
             enforce_login();
             authorize();
-            include(SERVER_ROOT . '/sections/torrents/vote_tag.php');
+            include(CONFIG['SERVER_ROOT'] . '/sections/torrents/vote_tag.php');
             break;
 
         case 'add_tag':
             enforce_login();
-            include(SERVER_ROOT . '/sections/torrents/add_tag.php');
+            include(CONFIG['SERVER_ROOT'] . '/sections/torrents/add_tag.php');
             break;
 
         case 'delete_tag':
             enforce_login();
             authorize();
-            include(SERVER_ROOT . '/sections/torrents/delete_tag.php');
+            include(CONFIG['SERVER_ROOT'] . '/sections/torrents/delete_tag.php');
             break;
 
         case 'notify':
             enforce_login();
-            include(SERVER_ROOT . '/sections/torrents/notify.php');
+            include(CONFIG['SERVER_ROOT'] . '/sections/torrents/notify.php');
             break;
 
         case 'manage_artists':
             enforce_login();
-            require(SERVER_ROOT . '/sections/torrents/manage_artists.php');
+            require(CONFIG['SERVER_ROOT'] . '/sections/torrents/manage_artists.php');
             break;
 
         case 'editrequest':
             enforce_login();
-            require(SERVER_ROOT . '/sections/torrents/editrequest.php');
+            require(CONFIG['SERVER_ROOT'] . '/sections/torrents/editrequest.php');
             break;
 
         case 'takeeditrequest':
             enforce_login();
-            require(SERVER_ROOT . '/sections/torrents/takeeditrequest.php');
+            require(CONFIG['SERVER_ROOT'] . '/sections/torrents/takeeditrequest.php');
             break;
 
         case 'notify_clear':
@@ -198,11 +198,11 @@ if (!empty($_REQUEST['action'])) {
         case 'notify_catchup_filter':
             authorize();
             enforce_login();
-            require(SERVER_ROOT . '/sections/torrents/notify_actions.php');
+            require(CONFIG['SERVER_ROOT'] . '/sections/torrents/notify_actions.php');
             break;
 
         case 'download':
-            require(SERVER_ROOT . '/sections/torrents/download.php');
+            require(CONFIG['SERVER_ROOT'] . '/sections/torrents/download.php');
             break;
 
         case 'regen_filelist':
@@ -235,16 +235,16 @@ if (!empty($_REQUEST['action'])) {
             }
             break;
         case 'add_cover_art':
-            include(SERVER_ROOT . '/sections/torrents/add_cover_art.php');
+            include(CONFIG['SERVER_ROOT'] . '/sections/torrents/add_cover_art.php');
             break;
         case 'remove_cover_art':
-            include(SERVER_ROOT . '/sections/torrents/remove_cover_art.php');
+            include(CONFIG['SERVER_ROOT'] . '/sections/torrents/remove_cover_art.php');
             break;
         case 'autocomplete_tags':
-            include(SERVER_ROOT . '/sections/torrents/autocomplete_tags.php');
+            include(CONFIG['SERVER_ROOT'] . '/sections/torrents/autocomplete_tags.php');
             break;
         case 'torrent_check':
-            include(SERVER_ROOT . '/sections/torrents/torrent_check.php');
+            include(CONFIG['SERVER_ROOT'] . '/sections/torrents/torrent_check.php');
             break;
         default:
             $Hit = false;
@@ -256,17 +256,17 @@ if (!empty($_REQUEST['action'])) {
 
 if (!empty($_GET['type'])) {
     if ($_GET['type'] == 'missing') {
-        include(SERVER_ROOT . '/sections/torrents/missing.php');
-    } else if ($_GET['type'] == 'downloaded' && ENABLE_HNR) {
-        include(SERVER_ROOT . '/sections/torrents/user_downloaded.php');
+        include(CONFIG['SERVER_ROOT'] . '/sections/torrents/missing.php');
+    } else if ($_GET['type'] == 'downloaded' && CONFIG['ENABLE_HNR']) {
+        include(CONFIG['SERVER_ROOT'] . '/sections/torrents/user_downloaded.php');
     } else {
-        include(SERVER_ROOT . '/sections/torrents/user.php');
+        include(CONFIG['SERVER_ROOT'] . '/sections/torrents/user.php');
     }
 } else {
     enforce_login();
 
     if (!empty($_GET['id'])) {
-        include(SERVER_ROOT . '/sections/torrents/details.php');
+        include(CONFIG['SERVER_ROOT'] . '/sections/torrents/details.php');
     } elseif (isset($_GET['torrentid']) && is_number($_GET['torrentid'])) {
         $DB->query("
 			SELECT GroupID
@@ -287,9 +287,9 @@ if (!empty($_GET['type'])) {
         if ($GroupID) {
             header("Location: torrents.php?id=$GroupID");
         } else {
-            include(SERVER_ROOT . '/sections/torrents/browse.php');
+            include(CONFIG['SERVER_ROOT'] . '/sections/torrents/browse.php');
         }
     } else {
-        include(SERVER_ROOT . '/sections/torrents/browse.php');
+        include(CONFIG['SERVER_ROOT'] . '/sections/torrents/browse.php');
     }
 }

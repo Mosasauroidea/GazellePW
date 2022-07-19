@@ -1,5 +1,5 @@
 <?
-include(SERVER_ROOT . '/classes/torrenttable.class.php');
+include(CONFIG['SERVER_ROOT'] . '/classes/torrenttable.class.php');
 $Where = array();
 if (!empty($_GET['advanced']) && check_perms('site_advanced_top10')) {
     $Details = 'all';

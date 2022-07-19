@@ -325,11 +325,11 @@ if (isset($_GET['year'])) {
 
 if (!empty($_GET['page']) && is_number($_GET['page']) && $_GET['page'] > 0) {
     $Page = $_GET['page'];
-    $Offset = ($Page - 1) * REQUESTS_PER_PAGE;
-    $SphQL->limit($Offset, REQUESTS_PER_PAGE, $Offset + REQUESTS_PER_PAGE);
+    $Offset = ($Page - 1) * CONFIG['REQUESTS_PER_PAGE'];
+    $SphQL->limit($Offset, CONFIG['REQUESTS_PER_PAGE'], $Offset + CONFIG['REQUESTS_PER_PAGE']);
 } else {
     $Page = 1;
-    $SphQL->limit(0, REQUESTS_PER_PAGE, REQUESTS_PER_PAGE);
+    $SphQL->limit(0, CONFIG['REQUESTS_PER_PAGE'], CONFIG['REQUESTS_PER_PAGE']);
 }
 
 $SphQLResult = $SphQL->query();
@@ -339,11 +339,11 @@ if ($NumResults > 0) {
     if ($OrderBy === 'random') {
         $NumResults = count($SphRequests);
     }
-    if ($NumResults > REQUESTS_PER_PAGE) {
-        if (($Page - 1) * REQUESTS_PER_PAGE > $NumResults) {
+    if ($NumResults > CONFIG['REQUESTS_PER_PAGE']) {
+        if (($Page - 1) * CONFIG['REQUESTS_PER_PAGE'] > $NumResults) {
             $Page = 0;
         }
-        $PageLinks = Format::get_pages($Page, $NumResults, REQUESTS_PER_PAGE);
+        $PageLinks = Format::get_pages($Page, $NumResults, CONFIG['REQUESTS_PER_PAGE']);
     }
 }
 
@@ -369,7 +369,7 @@ View::show_header($Title, '', 'PageRequestHome');
             <?  } else { ?>
                 <a class="Link" href="bookmarks.php?type=torrents"><?= Lang::get('global', 'torrents') ?></a>
                 <a class="Link" href="bookmarks.php?type=artists"><?= Lang::get('global', 'artists') ?></a>
-                <? if (ENABLE_COLLAGES) { ?>
+                <? if (CONFIG['ENABLE_COLLAGES']) { ?>
                     <a class="Link" href="bookmarks.php?type=collages"><?= Lang::get('requests', 'collages') ?></a>
                 <? } ?>
                 <a class="Link" href="bookmarks.php?type=requests"><?= Lang::get('global', 'requests') ?></a>

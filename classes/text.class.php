@@ -10,7 +10,7 @@ class Text {
     );
 
     /**
-     * Array of smilies; code => image file in STATIC_SERVER/common/smileys
+     * Array of smilies; code => image file in CONFIG['STATIC_SERVER']/common/smileys
      * @var array $Smileys
      */
     private static $Smileys = array(
@@ -224,8 +224,8 @@ class Text {
             return false;
         }
         $Host = $URLInfo['host'];
-        // If for some reason your site does not require subdomains or contains a directory in the SITE_URL, revert to the line below.
-        if (empty($URLInfo['port']) && $Host === SITE_HOST) {
+        // If for some reason your site does not require subdomains or contains a directory in the CONFIG['SITE_URL'], revert to the line below.
+        if (empty($URLInfo['port']) && $Host === CONFIG['SITE_HOST']) {
             $URL = '';
             if (!empty($URLInfo['path'])) {
                 $URL .= ltrim($URLInfo['path'], '/'); // Things break if the path starts with '//'
@@ -894,7 +894,7 @@ class Text {
                         $Str .= '<a href="wiki.php?action=article&amp;name=' . urlencode($Block['Val']) . '">' . $Block['Val'] . '</a>';
                         break;
                     case 'tex':
-                        $Str .= '<img style="vertical-align: middle;" src="' . STATIC_SERVER . 'blank.gif" onload="if (this.src.substr(this.src.length - 9, this.src.length) == \'blank.gif\') { this.src = \'https://chart.googleapis.com/chart?cht=tx&amp;chf=bg,s,FFFFFF00&amp;chl=' . urlencode(mb_convert_encoding($Block['Val'], 'UTF-8', 'HTML-ENTITIES')) . '&amp;chco=\' + hexify(getComputedStyle(this.parentNode, null).color); }" alt="' . $Block['Val'] . '" />';
+                        $Str .= '<img style="vertical-align: middle;" src="' . CONFIG['STATIC_SERVER'] . 'blank.gif" onload="if (this.src.substr(this.src.length - 9, this.src.length) == \'blank.gif\') { this.src = \'https://chart.googleapis.com/chart?cht=tx&amp;chf=bg,s,FFFFFF00&amp;chl=' . urlencode(mb_convert_encoding($Block['Val'], 'UTF-8', 'HTML-ENTITIES')) . '&amp;chco=\' + hexify(getComputedStyle(this.parentNode, null).color); }" alt="' . $Block['Val'] . '" />';
                         break;
                     case 'plain':
                         $Str .= $Block['Val'];
@@ -1513,7 +1513,7 @@ class Text {
         if (count(self::$ProcessedSmileys) == 0 && count(self::$Smileys) > 0) {
             foreach (self::$Smileys as $Key => $Val) {
                 if (str_ends_with($Val, '.gif')) {
-                    self::$ProcessedSmileys[$Key] = '<img border="0" src="' . STATIC_SERVER . 'common/smileys/' . $Val . '" alt="" />';
+                    self::$ProcessedSmileys[$Key] = '<img border="0" src="' . CONFIG['STATIC_SERVER'] . 'common/smileys/' . $Val . '" alt="" />';
                 } else {
                     self::$ProcessedSmileys[$Key] = $Val;
                 }
@@ -1673,7 +1673,7 @@ class Text {
         $Str = str_replace("</size>", "[/size]", $Str);
         //$Str = preg_replace("/\<a href=\"rules.php\?(.*)#(.*)\"\>(.*)\<\/a\>/", "[rule]\\3[/rule]", $Str);
         //$Str = preg_replace("/\<a href=\"wiki.php\?action=article&name=(.*)\"\>(.*)\<\/a>/", "[[\\1]]", $Str);
-        $Str = preg_replace('#/torrents.php\?taglist="?(?:[^"]*)#', SITE_URL . '\\0', $Str);
+        $Str = preg_replace('#/torrents.php\?taglist="?(?:[^"]*)#', CONFIG['SITE_URL'] . '\\0', $Str);
         $Str = preg_replace("/\<(\/*)artist\>/", "[\\1artist]", $Str);
         $Str = preg_replace("/\((\/*)user\>/", "[\\1user]", $Str);
         $Str = preg_replace("/\<a href=\"([^\"]*)\">/", "[url=\\1]", $Str);

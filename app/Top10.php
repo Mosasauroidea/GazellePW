@@ -10,7 +10,7 @@ class Top10 {
             <a href="top10.php?type=users" class="brackets"><?= self::selectedLink("Users", $selected == "users") ?></a>
             <a href="top10.php?type=tags" class="brackets"><?= self::selectedLink("Tags", $selected == "tags") ?></a>
             <?
-            if (ENABLE_VOTES) {
+            if (CONFIG['ENABLE_VOTES']) {
             ?>
                 <a href="top10.php?type=votes" class="brackets"><?= self::selectedLink("Favorites", $selected == "votes") ?></a>
             <? } ?>

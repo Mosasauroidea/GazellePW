@@ -12,7 +12,7 @@ if (!is_number($UserID)) {
     error(0);
 }
 
-$PerPage = TOPICS_PER_PAGE;
+$PerPage = CONFIG['TOPICS_PER_PAGE'];
 
 list($Page, $Limit) = Format::page_limit($PerPage);
 

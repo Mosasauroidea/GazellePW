@@ -103,15 +103,15 @@ function display_str($Str) {
 
 
 /**
- * Send a message to an IRC bot listening on SOCKET_LISTEN_PORT
+ * Send a message to an IRC bot listening on CONFIG['SOCKET_LISTEN_PORT']
  *
  * @param string $Raw An IRC protocol snippet to send.
  */
 function send_irc($Raw) {
-    if (defined('DISABLE_IRC') && DISABLE_IRC === true) {
+    if (CONFIG['DISABLE_IRC'] === true) {
         return;
     }
-    $IRCSocket = fsockopen(SOCKET_LISTEN_ADDRESS, SOCKET_LISTEN_PORT);
+    $IRCSocket = fsockopen(CONFIG['SOCKET_LISTEN_ADDRESS'], CONFIG['SOCKET_LISTEN_PORT']);
     $Raw = str_replace(array("\n", "\r"), '', $Raw);
     fwrite($IRCSocket, $Raw);
     fclose($IRCSocket);
@@ -128,7 +128,7 @@ function send_irc($Raw) {
  * @param string $Log If true, the user is given a link to search $Log in the site log.
  */
 function error($Error, $NoHTML = false, $Log = false, $Title = false) {
-    require(SERVER_ROOT . '/sections/error/index.php');
+    require(CONFIG['SERVER_ROOT'] . '/sections/error/index.php');
     G::$Debug->profile();
     die();
 }
@@ -149,7 +149,7 @@ function check_perms($PermissionName, $MinClass = 0) {
 
 
 function static_prefix() {
-    if (IS_DEV) {
+    if (CONFIG['IS_DEV']) {
         return "/src";
     }
     return "/public";
@@ -179,7 +179,7 @@ function add_json_info($Json) {
     if (!isset($Json['info'])) {
         $Json = array_merge($Json, [
             'info' => [
-                'source' => SITE_NAME,
+                'source' => CONFIG['SITE_NAME'],
                 'version' => 1,
             ],
         ]);
@@ -205,9 +205,9 @@ function add_json_info($Json) {
  */
 function site_url($Slash = true) {
     if ($Slash) {
-        return SITE_URL . '/';
+        return CONFIG['SITE_URL'] . '/';
     }
-    return SITE_URL;
+    return CONFIG['SITE_URL'];
 }
 
 /**
@@ -275,24 +275,24 @@ function plural(int $n) {
 }
 
 function open_registration($Email = null) {
-    if (defined('OPEN_REGISTRATION') && OPEN_REGISTRATION) {
+    if (CONFIG['OPEN_REGISTRATION']) {
         return true;
     }
-    if (!empty(OPEN_REGISTRATION_EMAIL)) {
+    if (!empty(CONFIG['OPEN_REGISTRATION_EMAIL'])) {
         if (!empty($Email)) {
             $EmailBox = explode('@', $Email);
-            if (in_array($EmailBox[1], OPEN_REGISTRATION_EMAIL)) {
+            if (in_array($EmailBox[1], CONFIG['OPEN_REGISTRATION_EMAIL'])) {
                 return true;
             }
         } else {
             return true;
         }
     }
-    if (!defined('OPEN_REGISTRATION_TO') || !defined('OPEN_REGISTRATION_FROM')) {
+    if (!isset(CONFIG['OPEN_REGISTRATION_TO']) || !isset(CONFIG['OPEN_REGISTRATION_FROM'])) {
         return false;
     }
     $t = time();
-    if ($t >= strtotime(OPEN_REGISTRATION_FROM) && $t < strtotime(OPEN_REGISTRATION_TO)) {
+    if ($t >= strtotime(CONFIG['OPEN_REGISTRATION_FROM']) && $t < strtotime(CONFIG['OPEN_REGISTRATION_TO'])) {
         return true;
     }
     return false;
@@ -300,7 +300,7 @@ function open_registration($Email = null) {
 
 function icon($name, $class = '', $Option = []) {
     $Option = array_merge(['ReturnEmptyString' => false], $Option);
-    $icon = file_get_contents(SERVER_ROOT . "/src/icons/$name.svg");
+    $icon = file_get_contents(CONFIG['SERVER_ROOT'] . "/src/icons/$name.svg");
     if ($icon) {
         // random id for flag icon
         if (str_starts_with($name, "flag/")) {

@@ -2,8 +2,8 @@
 
 $Page = !empty($_GET['page']) ? intval($_GET['page']) : 1;
 $Page = max(1, $Page);
-$Limit = TORRENTS_PER_PAGE;
-$Offset = TORRENTS_PER_PAGE * ($Page - 1);
+$Limit = CONFIG['TORRENTS_PER_PAGE'];
+$Offset = CONFIG['TORRENTS_PER_PAGE'] * ($Page - 1);
 
 if (!empty($_GET['order_way']) && $_GET['order_way'] == 'desc') {
     $OrderWay = 'desc';
@@ -63,7 +63,7 @@ $TotalWeeklyPoints = $TotalDailyPoints * 7;
 $TotalMonthlyPoints = $TotalDailyPoints * 30.436875;
 $TotalYearlyPoints = $TotalDailyPoints * 365.2425;
 
-$Pages = Format::get_pages($Page, $TotalTorrents, TORRENTS_PER_PAGE);
+$Pages = Format::get_pages($Page, $TotalTorrents, CONFIG['TORRENTS_PER_PAGE']);
 
 ?>
 <div class=LayoutBody>

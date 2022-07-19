@@ -2,7 +2,7 @@
 
 use Gazelle\Manager\Donation;
 
-define('FOOTER_FILE', SERVER_ROOT . '/design/privatefooter.php');
+define('FOOTER_FILE', CONFIG['SERVER_ROOT'] . '/design/privatefooter.php');
 
 global $LoggedUser;
 $donation = new Donation();
@@ -20,28 +20,28 @@ $CurrentLang = Lang::getUserLang($LoggedUser['ID']);
     <link rel="shortcut icon" href="favicon.ico" />
     <link rel="apple-touch-icon" href="favicon.ico" />
     <link rel="stylesheet" type="text/css" media="screen" href="/deps/tooltipster.bundle.min.css" />
-    <link rel="search" type="application/opensearchdescription+xml" title="<?= SITE_NAME ?> Torrents" href="opensearch.php?type=torrents" />
-    <link rel="search" type="application/opensearchdescription+xml" title="<?= SITE_NAME ?> Artists" href="opensearch.php?type=artists" />
-    <link rel="search" type="application/opensearchdescription+xml" title="<?= SITE_NAME ?> Requests" href="opensearch.php?type=requests" />
-    <link rel="search" type="application/opensearchdescription+xml" title="<?= SITE_NAME ?> Forums" href="opensearch.php?type=forums" />
-    <link rel="search" type="application/opensearchdescription+xml" title="<?= SITE_NAME ?> Log" href="opensearch.php?type=log" />
-    <link rel="search" type="application/opensearchdescription+xml" title="<?= SITE_NAME ?> Users" href="opensearch.php?type=users" />
-    <link rel="search" type="application/opensearchdescription+xml" title="<?= SITE_NAME ?> Wiki" href="opensearch.php?type=wiki" />
-    <link rel="alternate" type="application/rss+xml" title="<?= SITE_NAME ?> - News" href="feeds.php?feed=feed_news&amp;user=<?= G::$LoggedUser['ID'] ?>&amp;auth=<?= G::$LoggedUser['RSS_Auth'] ?>&amp;passkey=<?= G::$LoggedUser['torrent_pass'] ?>&amp;authkey=<?= G::$LoggedUser['AuthKey'] ?>" />
-    <link rel="alternate" type="application/rss+xml" title="<?= SITE_NAME ?> - Blog" href="feeds.php?feed=feed_blog&amp;user=<?= G::$LoggedUser['ID'] ?>&amp;auth=<?= G::$LoggedUser['RSS_Auth'] ?>&amp;passkey=<?= G::$LoggedUser['torrent_pass'] ?>&amp;authkey=<?= G::$LoggedUser['AuthKey'] ?>" />
-    <link rel="alternate" type="application/rss+xml" title="<?= SITE_NAME ?> - Changelog" href="feeds.php?feed=feed_changelog&amp;user=<?= G::$LoggedUser['ID'] ?>&amp;auth=<?= G::$LoggedUser['RSS_Auth'] ?>&amp;passkey=<?= G::$LoggedUser['torrent_pass'] ?>&amp;authkey=<?= G::$LoggedUser['AuthKey'] ?>" />
-    <link rel="alternate" type="application/rss+xml" title="<?= SITE_NAME ?> - P.T.N." href="feeds.php?feed=torrents_notify_<?= G::$LoggedUser['torrent_pass'] ?>&amp;user=<?= G::$LoggedUser['ID'] ?>&amp;auth=<?= G::$LoggedUser['RSS_Auth'] ?>&amp;passkey=<?= G::$LoggedUser['torrent_pass'] ?>&amp;authkey=<?= G::$LoggedUser['AuthKey'] ?>" />
+    <link rel="search" type="application/opensearchdescription+xml" title="<?= CONFIG['SITE_NAME'] ?> Torrents" href="opensearch.php?type=torrents" />
+    <link rel="search" type="application/opensearchdescription+xml" title="<?= CONFIG['SITE_NAME'] ?> Artists" href="opensearch.php?type=artists" />
+    <link rel="search" type="application/opensearchdescription+xml" title="<?= CONFIG['SITE_NAME'] ?> Requests" href="opensearch.php?type=requests" />
+    <link rel="search" type="application/opensearchdescription+xml" title="<?= CONFIG['SITE_NAME'] ?> Forums" href="opensearch.php?type=forums" />
+    <link rel="search" type="application/opensearchdescription+xml" title="<?= CONFIG['SITE_NAME'] ?> Log" href="opensearch.php?type=log" />
+    <link rel="search" type="application/opensearchdescription+xml" title="<?= CONFIG['SITE_NAME'] ?> Users" href="opensearch.php?type=users" />
+    <link rel="search" type="application/opensearchdescription+xml" title="<?= CONFIG['SITE_NAME'] ?> Wiki" href="opensearch.php?type=wiki" />
+    <link rel="alternate" type="application/rss+xml" title="<?= CONFIG['SITE_NAME'] ?> - News" href="feeds.php?feed=feed_news&amp;user=<?= G::$LoggedUser['ID'] ?>&amp;auth=<?= G::$LoggedUser['RSS_Auth'] ?>&amp;passkey=<?= G::$LoggedUser['torrent_pass'] ?>&amp;authkey=<?= G::$LoggedUser['AuthKey'] ?>" />
+    <link rel="alternate" type="application/rss+xml" title="<?= CONFIG['SITE_NAME'] ?> - Blog" href="feeds.php?feed=feed_blog&amp;user=<?= G::$LoggedUser['ID'] ?>&amp;auth=<?= G::$LoggedUser['RSS_Auth'] ?>&amp;passkey=<?= G::$LoggedUser['torrent_pass'] ?>&amp;authkey=<?= G::$LoggedUser['AuthKey'] ?>" />
+    <link rel="alternate" type="application/rss+xml" title="<?= CONFIG['SITE_NAME'] ?> - Changelog" href="feeds.php?feed=feed_changelog&amp;user=<?= G::$LoggedUser['ID'] ?>&amp;auth=<?= G::$LoggedUser['RSS_Auth'] ?>&amp;passkey=<?= G::$LoggedUser['torrent_pass'] ?>&amp;authkey=<?= G::$LoggedUser['AuthKey'] ?>" />
+    <link rel="alternate" type="application/rss+xml" title="<?= CONFIG['SITE_NAME'] ?> - P.T.N." href="feeds.php?feed=torrents_notify_<?= G::$LoggedUser['torrent_pass'] ?>&amp;user=<?= G::$LoggedUser['ID'] ?>&amp;auth=<?= G::$LoggedUser['RSS_Auth'] ?>&amp;passkey=<?= G::$LoggedUser['torrent_pass'] ?>&amp;authkey=<?= G::$LoggedUser['AuthKey'] ?>" />
 
     <?
     if (isset(G::$LoggedUser['Notify'])) {
         foreach (G::$LoggedUser['Notify'] as $Filter) {
             list($FilterID, $FilterName) = $Filter;
     ?>
-            <link rel="alternate" type="application/rss+xml" title="<?= SITE_NAME ?> - <?= display_str($FilterName) ?>" href="feeds.php?feed=torrents_notify_<?= $FilterID ?>_<?= G::$LoggedUser['torrent_pass'] ?>&amp;user=<?= G::$LoggedUser['ID'] ?>&amp;auth=<?= G::$LoggedUser['RSS_Auth'] ?>&amp;passkey=<?= G::$LoggedUser['torrent_pass'] ?>&amp;authkey=<?= G::$LoggedUser['AuthKey'] ?>&amp;name=<?= urlencode($FilterName) ?>" />
+            <link rel="alternate" type="application/rss+xml" title="<?= CONFIG['SITE_NAME'] ?> - <?= display_str($FilterName) ?>" href="feeds.php?feed=torrents_notify_<?= $FilterID ?>_<?= G::$LoggedUser['torrent_pass'] ?>&amp;user=<?= G::$LoggedUser['ID'] ?>&amp;auth=<?= G::$LoggedUser['RSS_Auth'] ?>&amp;passkey=<?= G::$LoggedUser['torrent_pass'] ?>&amp;authkey=<?= G::$LoggedUser['AuthKey'] ?>&amp;name=<?= urlencode($FilterName) ?>" />
         <? } ?>
     <? } ?>
-    <link rel="alternate" type="application/rss+xml" title="<?= SITE_NAME ?> - All Torrents" href="feeds.php?feed=torrents_all&amp;user=<?= G::$LoggedUser['ID'] ?>&amp;auth=<?= G::$LoggedUser['RSS_Auth'] ?>&amp;passkey=<?= G::$LoggedUser['torrent_pass'] ?>&amp;authkey=<?= G::$LoggedUser['AuthKey'] ?>" />
-    <link rel="alternate" type="application/rss+xml" title="<?= SITE_NAME ?> - Movie Torrents" href="feeds.php?feed=torrents_movie&amp;user=<?= G::$LoggedUser['ID'] ?>&amp;auth=<?= G::$LoggedUser['RSS_Auth'] ?>&amp;passkey=<?= G::$LoggedUser['torrent_pass'] ?>&amp;authkey=<?= G::$LoggedUser['AuthKey'] ?>" />
+    <link rel="alternate" type="application/rss+xml" title="<?= CONFIG['SITE_NAME'] ?> - All Torrents" href="feeds.php?feed=torrents_all&amp;user=<?= G::$LoggedUser['ID'] ?>&amp;auth=<?= G::$LoggedUser['RSS_Auth'] ?>&amp;passkey=<?= G::$LoggedUser['torrent_pass'] ?>&amp;authkey=<?= G::$LoggedUser['AuthKey'] ?>" />
+    <link rel="alternate" type="application/rss+xml" title="<?= CONFIG['SITE_NAME'] ?> - Movie Torrents" href="feeds.php?feed=torrents_movie&amp;user=<?= G::$LoggedUser['ID'] ?>&amp;auth=<?= G::$LoggedUser['RSS_Auth'] ?>&amp;passkey=<?= G::$LoggedUser['torrent_pass'] ?>&amp;authkey=<?= G::$LoggedUser['AuthKey'] ?>" />
     <meta name="viewport" content="width=device-width" />
     <?
     if (G::$LoggedUser['StyleURL']) {
@@ -49,20 +49,20 @@ $CurrentLang = Lang::getUserLang($LoggedUser['ID']);
         if (
             substr(G::$LoggedUser['StyleURL'], -4) == '.css'
             && $StyleURLInfo['query'] . $StyleURLInfo['fragment'] == ''
-            && in_array($StyleURLInfo['host'], array(SITE_HOST))
-            && file_exists(SERVER_ROOT . $StyleURLInfo['path'])
+            && in_array($StyleURLInfo['host'], array(CONFIG['SITE_HOST']))
+            && file_exists(CONFIG['SERVER_ROOT'] . $StyleURLInfo['path'])
         ) {
-            $StyleURL = G::$LoggedUser['StyleURL'] . '?v=' . filemtime(SERVER_ROOT . '/public' . $StyleURLInfo['path']);
+            $StyleURL = G::$LoggedUser['StyleURL'] . '?v=' . filemtime(CONFIG['SERVER_ROOT'] . '/public' . $StyleURLInfo['path']);
         } else {
             $StyleURL = G::$LoggedUser['StyleURL'];
         }
     ?>
         <link rel="stylesheet" type="text/css" title="External CSS" media="screen" href="<?= $StyleURL ?>" />
     <? } else { ?>
-        <? if (IS_DEV) { ?>
+        <? if (CONFIG['IS_DEV']) { ?>
             <link rel="stylesheet" type="text/css" media="screen" href="/src/css/default/<?= G::$LoggedUser['StyleName'] ?>/index.css" />
         <? } else { ?>
-            <link rel="stylesheet" type="text/css" media="screen" href="/app/themes/<?= G::$LoggedUser['StyleName'] ?>/index.css?v=<?= filemtime(SERVER_ROOT . '/public/app/themes/' . G::$LoggedUser['StyleName'] . '/index.css') ?>" />
+            <link rel="stylesheet" type="text/css" media="screen" href="/app/themes/<?= G::$LoggedUser['StyleName'] ?>/index.css?v=<?= filemtime(CONFIG['SERVER_ROOT'] . '/public/app/themes/' . G::$LoggedUser['StyleName'] . '/index.css') ?>" />
         <? } ?>
     <? } ?>
     <script type="text/javascript">
@@ -79,7 +79,7 @@ $CurrentLang = Lang::getUserLang($LoggedUser['ID']);
             continue;
         }
     ?>
-        <script src="<?= STATIC_SERVER ?>functions/<?= $Script ?>.js?v=<?= filemtime(SERVER_ROOT . '/public/static/functions/' . $Script . '.js') ?>" type="text/javascript"></script>
+        <script src="<?= CONFIG['STATIC_SERVER'] ?>functions/<?= $Script ?>.js?v=<?= filemtime(CONFIG['SERVER_ROOT'] . '/public/static/functions/' . $Script . '.js') ?>" type="text/javascript"></script>
     <?
     }
 
@@ -114,8 +114,8 @@ $CurrentLang = Lang::getUserLang($LoggedUser['ID']);
 $Alerts = array();
 $ModBar = array();
 // Important banner
-if (defined('BANNER_URL') && defined('BANNER_TEXT') && !empty(BANNER_URL) && !empty(BANNER_TEXT)) {
-    $Alerts[] = "<a class='HeaderAnnounceItem-link' href='" . BANNER_URL . "'>" . BANNER_TEXT . "</a>";
+if (isset(CONFIG['BANNER_URL']) && isset(CONFIG['BANNER_TEXT']) && !empty(CONFIG['BANNER_URL']) && !empty(CONFIG['BANNER_TEXT'])) {
+    $Alerts[] = "<a class='HeaderAnnounceItem-link' href='" . CONFIG['BANNER_URL'] . "'>" . CONFIG['BANNER_TEXT'] . "</a>";
 }
 
 // Staff blog
@@ -196,9 +196,9 @@ if (check_perms('staff_award')) {
 }
 if (
     check_perms('users_mod')
-    || G::$LoggedUser['PermissionID'] == FORUM_MOD
-    || G::$LoggedUser['PermissionID'] == TORRENT_MOD
-    || isset(G::$LoggedUser['ExtraClasses'][FLS_TEAM])
+    || G::$LoggedUser['PermissionID'] == CONFIG['USER_CLASS']['FORUM_MOD']
+    || G::$LoggedUser['PermissionID'] == CONFIG['USER_CLASS']['TORRENT_MOD']
+    || isset(G::$LoggedUser['ExtraClasses'][CONFIG['USER_CLASS']['FLS_TEAM']])
 ) {
     $NumStaffPMsArray = G::$Cache->get_value('num_staff_pms_' . G::$LoggedUser['ID']);
     if ($NumStaffPMsArray === false) {
@@ -216,11 +216,11 @@ if (
                         FROM staff_pm_conversations
                         WHERE Status = 'Unanswered'
                         AND (AssignedToUser = " . G::$LoggedUser['ID'] . "
-                            OR (LEAST('$LevelCap', Level) <= '" . G::$LoggedUser['EffectiveClass'] . "' AND Level >= " . $Classes[MOD]['Level'] . "))");
+                            OR (LEAST('$LevelCap', Level) <= '" . G::$LoggedUser['EffectiveClass'] . "' AND Level >= " . $Classes[CONFIG['USER_CLASS']['FLS_TEAM']]['Level'] . "))");
             list($NumMyStaffPMs) = G::$DB->next_record();
             $NumStaffPMsArray = array($NumStaffPMs, $NumMyStaffPMs);
         }
-        if (isset(G::$LoggedUser['ExtraClasses'][FLS_TEAM])) {
+        if (isset(G::$LoggedUser['ExtraClasses'][CONFIG['USER_CLASS']['FLS_TEAM']])) {
             G::$DB->query("
                             SELECT COUNT(ID)
                             FROM staff_pm_conversations
@@ -231,7 +231,7 @@ if (
             list($NumStaffPMs) = G::$DB->next_record();
             $NumStaffPMsArray = array($NumStaffPMs);
         }
-        if (G::$LoggedUser['PermissionID'] == FORUM_MOD || G::$LoggedUser['PermissionID'] == TORRENT_MOD) {
+        if (G::$LoggedUser['PermissionID'] == CONFIG['USER_CLASS']['FORUM_MOD'] || G::$LoggedUser['PermissionID'] == CONFIG['USER_CLASS']['TORRENT_MOD']) {
             G::$DB->query("
                             SELECT COUNT(ID)
                             FROM staff_pm_conversations
@@ -245,7 +245,7 @@ if (
                         FROM staff_pm_conversations
                         WHERE Status='Unanswered'
                             AND (AssignedToUser = " . G::$LoggedUser['ID'] . "
-                                OR (Level <= '" . $Classes[G::$LoggedUser['PermissionID']]['Level'] . "' and level >= " . $Classes[FORUM_MOD]['Level'] . "))");
+                                OR (Level <= '" . $Classes[G::$LoggedUser['PermissionID']]['Level'] . "' and level >= " . $Classes[CONFIG['USER_CLASS']['FORUM_MOD']]['Level'] . "))");
 
             list($NumMyStaffPMs) = G::$DB->next_record();
             $NumStaffPMsArray = array($NumStaffPMs, $NumMyStaffPMs);
@@ -376,7 +376,7 @@ if ($_REQUEST['action']) {
     <input id="extracb4" class="hidden" type="checkbox">
     <input id="extracb5" class="hidden" type="checkbox">
     <?
-    $Avatar = G::$LoggedUser['Avatar'] ?: STATIC_SERVER . 'common/avatars/default.png';
+    $Avatar = G::$LoggedUser['Avatar'] ?: CONFIG['STATIC_SERVER'] . 'common/avatars/default.png';
     ?>
     <div class="LayoutPage <?= $PageClass ?>">
         <header class="LayoutPage-header Header <?= (!empty($Alerts) || !empty($ModBar)) ? 'is-hasAlerts' : '' ?>">
@@ -438,7 +438,7 @@ if ($_REQUEST['action']) {
                             </a>
                         </li>
                     <?    }
-                    if (ENABLE_HNR) { ?>
+                    if (CONFIG['ENABLE_HNR']) { ?>
                         <li class="HeaderStat-item isHnr">
                             <a class="HeaderStat-link LinkHeader Link" href="rules.php?p=ratio">
                                 <i data-tooltip="<?= Lang::get('torrents', 'hit_and_run') ?>">
@@ -513,7 +513,7 @@ if ($_REQUEST['action']) {
                             <a class="DropdownMenu-item is-inbox" href="<?= Inbox::get_inbox_link(); ?>"> <?= Lang::get('global', 'inbox') ?></a>
                             <a class="DropdownMenu-item is-staffpm" href="staffpm.php"> <?= Lang::get('global', 'staffpm') ?></a>
                             <?
-                            if (ENABLE_BADGE) {
+                            if (CONFIG['ENABLE_BADGE']) {
                             ?>
                                 <a class="DropdownMenu-item is-badges" href="badges.php"> <?= Lang::get('global', 'my_badges') ?></a>
                             <?
@@ -620,7 +620,7 @@ if ($_REQUEST['action']) {
                             <?= Lang::get('index', 'moviegroups') ?></a>
                     </li>
                     <?
-                    if (ENABLE_COLLAGES) {
+                    if (CONFIG['ENABLE_COLLAGES']) {
                     ?>
                         <li class="HeaderNavList-item" id="nav_collages" <?=
                                                                             Format::add_class($PageID, array('collages'), 'active', true) ?>>

@@ -15,7 +15,7 @@ if (!in_array($Section, array('inbox', 'sentbox'))) {
     error(404);
 }
 
-list($Page, $Limit) = Format::page_limit(MESSAGES_PER_PAGE);
+list($Page, $Limit) = Format::page_limit(CONFIG['MESSAGES_PER_PAGE']);
 
 View::show_header(Lang::get('inbox', 'inbox'), '', 'PageInboxHome');
 ?>
@@ -80,7 +80,7 @@ View::show_header(Lang::get('inbox', 'inbox'), '', 'PageInboxHome');
             $DB->set_query_id($Results);
             $Count = $DB->record_count();
 
-            $Pages = Format::get_pages($Page, $NumResults, MESSAGES_PER_PAGE, 9);
+            $Pages = Format::get_pages($Page, $NumResults, CONFIG['MESSAGES_PER_PAGE'], 9);
             echo "\t\t$Pages\n";
             ?>
         </div>

@@ -3,7 +3,7 @@ class Minio implements ImageStorage {
 	private $s3;
 	private $bucket;
 	private $image_url;
-	function __construct($Endpoint = MINIO_ENDPOINT, $Key = MINIO_KEY, $Secret = MINIO_SECRET, $Bucket = MINIO_BUCKET, $ImageUrl = IMAGE_URL) {
+	function __construct($Endpoint = CONFIG['MINIO_ENDPOINT'], $Key = CONFIG['MINIO_KEY'], $Secret = CONFIG['MINIO_SECRET'], $Bucket = CONFIG['MINIO_BUCKET'], $ImageUrl = CONFIG['IMAGE_URL']) {
 		$this->s3 = new Aws\S3\S3Client([
 			'version' => 'latest',
 			'endpoint' => $Endpoint,

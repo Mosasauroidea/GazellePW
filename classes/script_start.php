@@ -13,12 +13,11 @@
 /********************************************************/
 
 $WINDOW_DATA = [];
-
-require 'config.php'; //The config contains all site wide configuration information
-require 'const.php';
+require('config.php');
+require('const.php');
 
 // Autoload classes.
-require(SERVER_ROOT . '/classes/classloader.php');
+require(CONFIG['SERVER_ROOT'] . '/classes/classloader.php');
 
 use Gazelle\Util\Crypto;
 use Gazelle\Manager\Donation;
@@ -29,7 +28,7 @@ if (isset($_REQUEST['info_hash']) && isset($_REQUEST['peer_id'])) {
     die('d14:failure reason40:Invalid .torrent, try downloading again.e');
 }
 
-require(SERVER_ROOT . '/classes/proxies.class.php');
+require(CONFIG['SERVER_ROOT'] . '/classes/proxies.class.php');
 
 // Get the user's actual IP address if they're proxied.
 if (
@@ -61,17 +60,17 @@ if (!defined('PHP_WINDOWS_VERSION_MAJOR')) {
 
 ob_start(); //Start a buffer, mainly in case there is a mysql error
 
-set_include_path(SERVER_ROOT);
+set_include_path(CONFIG['SERVER_ROOT']);
 
-require(SERVER_ROOT . '/classes/debug.class.php'); //Require the debug class
-require(SERVER_ROOT . '/classes/mysql.class.php'); //Require the database wrapper
-require(SERVER_ROOT . '/classes/cache.class.php'); //Require the caching class
-require(SERVER_ROOT . '/classes/time.class.php'); //Require the time class
-require(SERVER_ROOT . '/classes/paranoia.class.php'); //Require the paranoia check_paranoia function
-require(SERVER_ROOT . '/classes/regex.php');
-require(SERVER_ROOT . '/classes/util.php');
-require(SERVER_ROOT . '/classes/vite.php');
-require(SERVER_ROOT . '/app/Torrent/TorrentSlot.php');
+require(CONFIG['SERVER_ROOT'] . '/classes/debug.class.php'); //Require the debug class
+require(CONFIG['SERVER_ROOT'] . '/classes/mysql.class.php'); //Require the database wrapper
+require(CONFIG['SERVER_ROOT'] . '/classes/cache.class.php'); //Require the caching class
+require(CONFIG['SERVER_ROOT'] . '/classes/time.class.php'); //Require the time class
+require(CONFIG['SERVER_ROOT'] . '/classes/paranoia.class.php'); //Require the paranoia check_paranoia function
+require(CONFIG['SERVER_ROOT'] . '/classes/regex.php');
+require(CONFIG['SERVER_ROOT'] . '/classes/util.php');
+require(CONFIG['SERVER_ROOT'] . '/classes/vite.php');
+require(CONFIG['SERVER_ROOT'] . '/app/Torrent/TorrentSlot.php');
 
 $Debug = new DEBUG;
 $Debug->handle_errors();
@@ -82,11 +81,11 @@ $DB = new DB_MYSQL;
 $Cache = new CACHE($MemcachedServers);
 
 $Twig = new Twig\Environment(
-    new Twig\Loader\FilesystemLoader(SERVER_ROOT . '/templates'),
-    ['debug' => DEBUG_MODE, 'cache' => SERVER_ROOT . '/.cache/twig']
+    new Twig\Loader\FilesystemLoader(CONFIG['SERVER_ROOT'] . '/templates'),
+    ['debug' => CONFIG['DEBUG_MODE'], 'cache' => CONFIG['SERVER_ROOT'] . '/.cache/twig']
 );
 
-ImageTools::init(IMAGE_PROVIDER);
+ImageTools::init(CONFIG['IMAGE_PROVIDER']);
 
 G::$Cache = &$Cache;
 G::$DB = &$DB;
@@ -131,10 +130,10 @@ list($Classes, $ClassLevels) = Users::get_classes();
 // Permissions
 
 if (isset($_COOKIE['session'])) {
-    $LoginCookie = Crypto::decrypt($_COOKIE['session'], ENCKEY);
+    $LoginCookie = Crypto::decrypt($_COOKIE['session'], CONFIG['ENCKEY']);
 }
 if (isset($LoginCookie)) {
-    list($SessionID, $LoggedUser['ID']) = explode('|~|', Crypto::decrypt($LoginCookie, ENCKEY));
+    list($SessionID, $LoggedUser['ID']) = explode('|~|', Crypto::decrypt($LoginCookie, CONFIG['ENCKEY']));
     $LoggedUser['ID'] = (int)$LoggedUser['ID'];
 
     if (!IPLock::canLogin($LoggedUser['ID'], $_SERVER['REMOTE_ADDR'])) {
@@ -194,7 +193,7 @@ if (isset($LoginCookie)) {
     $LoggedUser = array_merge($HeavyInfo, $LightInfo, $UserStats);
     G::$LoggedUser = &$LoggedUser;
 
-    $LoggedUser['RSS_Auth'] = md5($LoggedUser['ID'] . RSS_HASH . $LoggedUser['torrent_pass']);
+    $LoggedUser['RSS_Auth'] = md5($LoggedUser['ID'] . CONFIG['RSS_HASH'] . $LoggedUser['torrent_pass']);
 
     // $LoggedUser['RatioWatch'] as a bool to disable things for users on Ratio Watch
     $LoggedUser['RatioWatch'] = ($LoggedUser['RatioWatchEnds'] != '0000-00-00 00:00:00'
@@ -203,7 +202,7 @@ if (isset($LoginCookie)) {
 
     // Load in the permissions
     $LoggedUser['Permissions'] = Permissions::get_permissions_for_user($LoggedUser['ID'], $LoggedUser['CustomPermissions']);
-    if (ENABLE_COLLAGES) {
+    if (CONFIG['ENABLE_COLLAGES']) {
         $donation = new Donation;
         if (empty($LoggedUser['Permissions']['MaxCollages'])) {
             $LoggedUser['Permissions']['MaxCollages'] = 0;
@@ -386,11 +385,11 @@ function enforce_login() {
  * Should be used for any user action that relies solely on GET.
  *
  * @param bool Are we using ajax?
- * @return bool authorisation status. Prints an error message to LAB_CHAN on IRC on failure.
+ * @return bool authorisation status. Prints an error message to CONFIG['LAB_CHAN'] on IRC on failure.
  */
 function authorize($Ajax = false) {
     if (empty($_REQUEST['auth']) || $_REQUEST['auth'] != G::$LoggedUser['AuthKey']) {
-        send_irc("PRIVMSG " . LAB_CHAN . " :" . G::$LoggedUser['Username'] . " just failed authorize on " . $_SERVER['REQUEST_URI'] . (!empty($_SERVER['HTTP_REFERER']) ? " coming from " . $_SERVER['HTTP_REFERER'] : ""));
+        send_irc("PRIVMSG " . CONFIG['LAB_CHAN'] . " :" . G::$LoggedUser['Username'] . " just failed authorize on " . $_SERVER['REQUEST_URI'] . (!empty($_SERVER['HTTP_REFERER']) ? " coming from " . $_SERVER['HTTP_REFERER'] : ""));
         error('Invalid authorization key. Go back, refresh, and try again.', $Ajax);
         return false;
     }
@@ -400,7 +399,7 @@ function authorize($Ajax = false) {
 function authorizeIfPost($Ajax = false) {
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if (empty($_POST['auth']) || $_POST['auth'] != G::$LoggedUser['AuthKey']) {
-            send_irc("PRIVMSG " . LAB_CHAN . " :" . G::$LoggedUser['Username'] . " just failed authorize on " . $_SERVER['REQUEST_URI'] . (!empty($_SERVER['HTTP_REFERER']) ? " coming from " . $_SERVER['HTTP_REFERER'] : ""));
+            send_irc("PRIVMSG " . CONFIG['LAB_CHAN'] . " :" . G::$LoggedUser['Username'] . " just failed authorize on " . $_SERVER['REQUEST_URI'] . (!empty($_SERVER['HTTP_REFERER']) ? " coming from " . $_SERVER['HTTP_REFERER'] : ""));
             error('Invalid authorization key. Go back, refresh, and try again.', $Ajax);
             return false;
         }
@@ -436,12 +435,12 @@ $AllowedPages = ['staffpm', 'ajax', 'locked', 'logout', 'login'];
 
 G::$Router = new \Gazelle\Router(G::$LoggedUser['AuthKey']);
 if (isset(G::$LoggedUser['LockedAccount']) && !in_array($Document, $AllowedPages)) {
-    require(SERVER_ROOT . '/sections/locked/index.php');
+    require(CONFIG['SERVER_ROOT'] . '/sections/locked/index.php');
 } else {
-    if (!file_exists(SERVER_ROOT . '/sections/' . $Document . '/index.php')) {
+    if (!file_exists(CONFIG['SERVER_ROOT'] . '/sections/' . $Document . '/index.php')) {
         error(404);
     } else {
-        require(SERVER_ROOT . '/sections/' . $Document . '/index.php');
+        require(CONFIG['SERVER_ROOT'] . '/sections/' . $Document . '/index.php');
     }
 }
 

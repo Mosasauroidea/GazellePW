@@ -21,14 +21,14 @@ $BaseQuery = "
 		ui.JoinDate,
 		u.Uploaded,
 		u.Downloaded,
-		ABS(u.Uploaded-" . STARTING_UPLOAD . ") / (" . time() . " - UNIX_TIMESTAMP(ui.JoinDate)) AS UpSpeed,
+		ABS(u.Uploaded-" . CONFIG['STARTING_UPLOAD'] . ") / (" . time() . " - UNIX_TIMESTAMP(ui.JoinDate)) AS UpSpeed,
 		u.Downloaded / (" . time() . " - UNIX_TIMESTAMP(ui.JoinDate)) AS DownSpeed,
 		COUNT(t.ID) AS NumUploads
 	FROM users_main AS u
 		JOIN users_info AS ui ON ui.UserID = u.ID
 		LEFT JOIN torrents AS t ON t.UserID = u.ID
 	WHERE u.Enabled = '1'
-		And Uploaded>" . STARTING_UPLOAD . "
+		And Uploaded>" . CONFIG['STARTING_UPLOAD'] . "
 		AND Uploaded > '" . 5 * 1024 * 1024 * 1024 . "'
 		AND Downloaded > '" . 5 * 1024 * 1024 * 1024 . "'
 		AND (Paranoia IS NULL OR (Paranoia NOT LIKE '%\"uploaded\"%' AND Paranoia NOT LIKE '%\"downloaded\"%'))

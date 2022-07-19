@@ -11,9 +11,9 @@ class NotificationsManagerView {
             'user_notifications.js'
         );
         foreach ($JSIncludes as $JSInclude) {
-            $Path = STATIC_SERVER . "functions/$JSInclude";
+            $Path = CONFIG['STATIC_SERVER'] . "functions/$JSInclude";
 ?>
-            <script src="<?= $Path ?>?v=<?= filemtime(SERVER_ROOT . "/public/$Path") ?>" type="text/javascript"></script>
+            <script src="<?= $Path ?>?v=<?= filemtime(CONFIG['SERVER_ROOT'] . "/public/$Path") ?>" type="text/javascript"></script>
         <?
         }
     }

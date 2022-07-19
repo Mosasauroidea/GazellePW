@@ -2,7 +2,7 @@
 
 use Gazelle\Manager\Donation;
 
-include(SERVER_ROOT . '/classes/torrenttable.class.php');
+include(CONFIG['SERVER_ROOT'] . '/classes/torrenttable.class.php');
 
 if (empty($_GET['id']) || !is_number($_GET['id']) || (!empty($_GET['preview']) && !is_number($_GET['preview']))) {
     error(404);
@@ -907,48 +907,48 @@ WHERE xs.uid =" . $UserID . " and xs.tstamp >= unix_timestamp(date_format(now(),
             <?
             // TODO 丧心病狂，这里又定义一遍，展示在个人页上
             $NextLevel = array();
-            $NextLevel[$Classes[USER]['Level']] = array(
-                'To' => $Classes[MEMBER]['Name'],
+            $NextLevel[$Classes[CONFIG['USER_CLASS']['USER']]['Level']] = array(
+                'To' => $Classes[CONFIG['USER_CLASS']['MEMBER']]['Name'],
                 'MinUpload' => 0,
                 'MinDownload' => 80 * 1024 * 1024 * 1024,
                 'MinRatio' => 0.8,
                 'MinUploads' => 0,
                 'MaxTime' => time_minus(3600 * 24 * 7)
             );
-            $NextLevel[$Classes[MEMBER]['Level']] = array(
-                'To' => $Classes[POWER]['Name'],
+            $NextLevel[$Classes[CONFIG['USER_CLASS']['MEMBER']]['Level']] = array(
+                'To' => $Classes[CONFIG['USER_CLASS']['POWER']]['Name'],
                 'MinUpload' => 0,
                 'MinDownload' => 200 * 1024 * 1024 * 1024,
                 'MinRatio' => 1.2,
                 'MinUploads' => 1,
                 'MaxTime' => time_minus(3600 * 24 * 7 * 2)
             );
-            $NextLevel[$Classes[POWER]['Level']] = array(
-                'To' => $Classes[ELITE]['Name'],
+            $NextLevel[$Classes[CONFIG['USER_CLASS']['POWER']]['Level']] = array(
+                'To' => $Classes[CONFIG['USER_CLASS']['ELITE']]['Name'],
                 'MinUpload' => 0,
                 'MinDownload' => 500 * 1024 * 1024 * 1024,
                 'MinRatio' => 1.2,
                 'MinUploads' => 25,
                 'MaxTime' => time_minus(3600 * 24 * 7 * 4)
             );
-            $NextLevel[$Classes[ELITE]['Level']] = array(
-                'To' => $Classes[TORRENT_MASTER]['Name'],
+            $NextLevel[$Classes[CONFIG['USER_CLASS']['ELITE']]['Level']] = array(
+                'To' => $Classes[CONFIG['USER_CLASS']['TORRENT_MASTER']]['Name'],
                 'MinUpload' => 0,
                 'MinDownload' => 1 * 1024 * 1024 * 1024 * 1024,
                 'MinRatio' => 1.2,
                 'MinUploads' => 100,
                 'MaxTime' => time_minus(3600 * 24 * 7 * 8)
             );
-            $NextLevel[$Classes[TORRENT_MASTER]['Level']] = array(
-                'To' => $Classes[POWER_TM]['Name'],
+            $NextLevel[$Classes[CONFIG['USER_CLASS']['TORRENT_MASTER']]['Level']] = array(
+                'To' => $Classes[CONFIG['USER_CLASS']['POWER_TM']]['Name'],
                 'MinUpload' => 0,
                 'MinDownload' => 2 * 1024 * 1024 * 1024 * 1024,
                 'MinRatio' => 1.2,
                 'MinUploads' => 250,
                 'MaxTime' => time_minus(3600 * 24 * 7 * 12)
             );
-            $NextLevel[$Classes[POWER_TM]['Level']] = array(
-                'To' => $Classes[ELITE_TM]['Name'],
+            $NextLevel[$Classes[CONFIG['USER_CLASS']['POWER_TM']]['Level']] = array(
+                'To' => $Classes[CONFIG['USER_CLASS']['ELITE_TM']]['Name'],
                 'MinUpload' => 0,
                 'MinDownload' => 5 * 1024 * 1024 * 1024 * 1024,
                 'MinRatio' => 1.2,
@@ -956,8 +956,8 @@ WHERE xs.uid =" . $UserID . " and xs.tstamp >= unix_timestamp(date_format(now(),
                 'MaxTime' => time_minus(3600 * 24 * 7 * 16),
             );
 
-            $NextLevel[$Classes[ELITE_TM]['Level']] = array(
-                'To' => $Classes[GURU]['Name'],
+            $NextLevel[$Classes[CONFIG['USER_CLASS']['ELITE_TM']]['Level']] = array(
+                'To' => $Classes[CONFIG['USER_CLASS']['GURU']]['Name'],
                 'MinUpload' => 0,
                 'MinDownload' => 10 * 1024 * 1024 * 1024 * 1024,
                 'MinRatio' => 1.2,
@@ -1019,7 +1019,7 @@ WHERE xs.uid =" . $UserID . " and xs.tstamp >= unix_timestamp(date_format(now(),
             ?>
 
             <?
-            include(SERVER_ROOT . '/sections/user/community_stats.php');
+            include(CONFIG['SERVER_ROOT'] . '/sections/user/community_stats.php');
 
             DonationsView::render_donor_stats($OwnProfile, $donationInfo, $leaderBoardRank, $donorVisible, $isDonor);
             ?>
@@ -1053,7 +1053,7 @@ WHERE xs.uid =" . $UserID . " and xs.tstamp >= unix_timestamp(date_format(now(),
                     $MaxBadges[$Badge['Label']] = array('ID' => $BadgeID, 'Level' => $Badge['Level']);
                 }
             }
-            if (ENABLE_BADGE) {
+            if (CONFIG['ENABLE_BADGE']) {
             ?>
                 <div class="Box">
                     <script>
@@ -1279,12 +1279,12 @@ WHERE xs.uid =" . $UserID . " and xs.tstamp >= unix_timestamp(date_format(now(),
 
             // Linked accounts
             if (check_perms('users_mod')) {
-                include(SERVER_ROOT . '/sections/user/linkedfunctions.php');
+                include(CONFIG['SERVER_ROOT'] . '/sections/user/linkedfunctions.php');
                 user_dupes_table($UserID);
             }
 
             if ((check_perms('users_view_invites')) && $Invited > 0) {
-                include(SERVER_ROOT . '/classes/invite_tree.class.php');
+                include(CONFIG['SERVER_ROOT'] . '/classes/invite_tree.class.php');
                 $Tree = new INVITE_TREE($UserID, array('visible' => false));
             ?>
                 <div class="Box" id="invitetree_box">
@@ -1382,7 +1382,7 @@ WHERE xs.uid =" . $UserID . " and xs.tstamp >= unix_timestamp(date_format(now(),
                 }
             }
 
-            $IsFLS = isset($LoggedUser['ExtraClasses'][FLS_TEAM]);
+            $IsFLS = isset($LoggedUser['ExtraClasses'][CONFIG['USER_CLASS']['FLS_TEAM']]);
             if (check_perms('users_mod', $Class) || $IsFLS) {
                 $UserLevel = $LoggedUser['EffectiveClass'];
                 $DB->query("

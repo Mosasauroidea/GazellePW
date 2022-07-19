@@ -13,7 +13,7 @@ View::show_header('Periodic Task Manager', '', 'PageToolPeriodicEdit');
     <h2 class="BodyHeader-nav">Periodic Task Manager</h2>
 </div>
 <?php
-include(SERVER_ROOT . '/sections/tools/development/periodic_links.php');
+include(CONFIG['SERVER_ROOT'] . '/sections/tools/development/periodic_links.php');
 
 if (isset($err)) { ?>
     <strong class="u-colorWarning"><?= $err ?></strong>

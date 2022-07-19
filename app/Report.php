@@ -80,8 +80,8 @@ class Report {
             $args,
             $args,
             [
-                TORRENTS_PER_PAGE, // LIMIT
-                TORRENTS_PER_PAGE * (max($filter['page'], 1) - 1), // OFFSET
+                CONFIG['TORRENTS_PER_PAGE'], // LIMIT
+                CONFIG['TORRENTS_PER_PAGE'] * (max($filter['page'], 1) - 1), // OFFSET
             ]
         );
         $db->prepared_query_array($sql, $args);

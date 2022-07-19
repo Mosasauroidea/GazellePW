@@ -49,7 +49,7 @@ View::show_header($Title, 'wiki,bbcode', 'PageWikiHome');
             <? if ($Edit <= $LoggedUser['EffectiveClass']) { ?>
                 <a class="Link" href="wiki.php?action=edit&amp;id=<?= $ArticleID ?>"><?= Lang::get('wiki', 'article_edit') ?></a>
                 <a class="Link" href="wiki.php?action=revisions&amp;id=<?= $ArticleID ?>"><?= Lang::get('wiki', 'article_history') ?></a>
-                <? if (check_perms('admin_manage_wiki') && $_GET['id'] != INDEX_ARTICLE) { ?>
+                <? if (check_perms('admin_manage_wiki') && $_GET['id'] != CONFIG['INDEX_ARTICLE']) { ?>
                     <a class="Link" href="wiki.php?action=delete&amp;id=<?= $ArticleID ?>&amp;auth=<?= $LoggedUser['AuthKey'] ?>" onclick="return confirm('<?= Lang::get('wiki', 'article_delete_confirm1') ?>\n<?= Lang::get('wiki', 'article_delete_confirm2') ?>\n<?= Lang::get('wiki', 'article_delete_confirm3') ?>')"><?= Lang::get('wiki', 'article_delete') ?></a>
                 <? } ?>
             <? } ?>

@@ -5,7 +5,7 @@ if (empty($_GET['groupid']) || !is_numeric($_GET['groupid'])) {
 }
 $GroupID = intval($_GET['groupid']);
 
-include(SERVER_ROOT . '/sections/torrents/functions.php');
+include(CONFIG['SERVER_ROOT'] . '/sections/torrents/functions.php');
 $TorrentCache = Torrents::get_group($GroupID, true);
 
 $TorrentDetails = $TorrentCache;

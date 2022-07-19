@@ -43,7 +43,7 @@ View::show_header($Title, 'browse', 'PageBookmarkArtists');
             <a href="bookmarks.php?type=torrents" class="brackets"><?= Lang::get('global', 'torrents') ?></a>
             <a href="bookmarks.php?type=artists" class="brackets"><?= Lang::get('global', 'artists') ?></a>
             <?
-            if (ENABLE_COLLAGES) {
+            if (CONFIG['ENABLE_COLLAGES']) {
             ?>
                 <a href="bookmarks.php?type=collages" class="brackets"><?= Lang::get('bookmarks', 'collages') ?></a>
             <?

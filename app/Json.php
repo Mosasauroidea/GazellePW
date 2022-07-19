@@ -9,7 +9,7 @@ abstract class Json extends Base {
 
     public function __construct() {
         parent::__construct();
-        $this->source = SITE_NAME;
+        $this->source = CONFIG['SITE_NAME'];
         $this->mode = 0;
         $this->version = 1;
     }

@@ -340,7 +340,7 @@ $BadgeLabels = Badges::get_badge_labels();
                 </div>
             </div>
         <? }
-        if (check_perms('events_reward_badges') && ENABLE_BADGE) { ?>
+        if (check_perms('events_reward_badges') && CONFIG['ENABLE_BADGE']) { ?>
             <div class="Box events_reward_container">
                 <div class="Box-header">
                     <input type="checkbox" id="someone_badges_input" name="badges" onclick="$('#someone_badges').toggle()"><label for="someone_badges_input"><?= Lang::get('tools', 'badge_send') ?></label>

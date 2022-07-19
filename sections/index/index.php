@@ -7,7 +7,7 @@ if (isset($LoggedUser['ID'])) {
             case 'change_language':
                 include('change_language.php');
             case 'poll':
-                include(SERVER_ROOT . '/sections/forums/poll_vote.php');
+                include(CONFIG['SERVER_ROOT'] . '/sections/forums/poll_vote.php');
                 break;
             default:
                 error(0);

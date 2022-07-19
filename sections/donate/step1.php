@@ -1,7 +1,7 @@
 <?
 View::show_header(Lang::get('donate', 'donate'), '', 'PageDonateStep1');
 
-$SiteName = SITE_NAME;
+$SiteName = CONFIG['SITE_NAME'];
 ?>
 <div class="LayoutBody" id="donate_information">
     <div class="BodyHeader">

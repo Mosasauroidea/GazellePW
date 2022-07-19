@@ -15,8 +15,8 @@ if (!$ThreadID || !$PostID || !is_number($ThreadID) || !is_number($PostID)) {
 
 $DB->query("
 	SELECT
-		CEIL(COUNT(ID)/" . POSTS_PER_PAGE . ") AS Pages,
-		CEIL(SUM(IF(ID<=$PostID,1,0))/" . POSTS_PER_PAGE . ") AS Page
+		CEIL(COUNT(ID)/" . CONFIG['POSTS_PER_PAGE'] . ") AS Pages,
+		CEIL(SUM(IF(ID<=$PostID,1,0))/" . CONFIG['POSTS_PER_PAGE'] . ") AS Page
 	FROM forums_posts
 	WHERE TopicID=$ThreadID
 	GROUP BY TopicID");
@@ -37,8 +37,8 @@ if ($DB->has_results()) {
         Forums::add_topic_note($ThreadID, "Post $PostID stickied");
     }
     $Cache->delete_value('thread_' . $ThreadID . '_info');
-    $ThisCatalogue = floor((POSTS_PER_PAGE * $Page - POSTS_PER_PAGE) / THREAD_CATALOGUE);
-    $LastCatalogue = floor((POSTS_PER_PAGE * $Pages - POSTS_PER_PAGE) / THREAD_CATALOGUE);
+    $ThisCatalogue = floor((CONFIG['POSTS_PER_PAGE'] * $Page - CONFIG['POSTS_PER_PAGE']) / CONFIG['THREAD_CATALOGUE']);
+    $LastCatalogue = floor((CONFIG['POSTS_PER_PAGE'] * $Pages - CONFIG['POSTS_PER_PAGE']) / CONFIG['THREAD_CATALOGUE']);
     for ($i = $ThisCatalogue; $i <= $LastCatalogue; $i++) {
         $Cache->delete_value('thread_' . $ThreadID . '_catalogue_' . $i);
     }

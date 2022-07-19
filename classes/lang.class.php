@@ -1,7 +1,7 @@
 <?
 
 global $Locales;
-$Files = glob(SERVER_ROOT . '/src/locales/*/server.yaml');
+$Files = glob(CONFIG['SERVER_ROOT'] . '/src/locales/*/server.yaml');
 $Locales = [];
 foreach ($Files as $File) {
     $Locale = yaml_parse_file($File);
@@ -25,11 +25,12 @@ class Lang {
         if (!$Label) {
             return $Locale;
         }
+        if (!isset($Locale[$Label])) {
+            return $Option['DefaultValue'] ?: "$Page.$Label";
+        }
         $Value = $Locale[$Label];
-        if ($Value) {
-            $Value = str_replace(['${SITE_NAME}', '${TG_GROUP}', '${TG_DISBALE_CHANNEL}', '${MAIL_HOST}'], [SITE_NAME, TG_GROUP, TG_DISBALE_CHANNEL, MAIL_HOST], $Value);
-        } else {
-            $Value = $Option['DefaultValue'] ?: "$Page.$Label";
+        if (is_string($Value)) {
+            $Value = str_replace(["${CONFIG['SITE_NAME']}", "${CONFIG['TG_GROUP']}", "${CONFIG['TG_DISBALE_CHANNEL']}", "${CONFIG['MAIL_HOST']}"], [CONFIG['SITE_NAME'], CONFIG['TG_GROUP'], CONFIG['TG_DISBALE_CHANNEL'], CONFIG['MAIL_HOST']], $Value);
         }
         if (!empty($Interpolations)) {
             $Value = sprintf($Value, ...$Interpolations);
@@ -66,7 +67,7 @@ class Lang {
 
     public static function getLangfilePath($Page, $Lang = false) {
         $Lang = self::getLang($Lang);
-        return SERVER_ROOT . "/lang/$Lang/lang_$Page.php";
+        return CONFIG['SERVER_ROOT'] . "/lang/$Lang/lang_$Page.php";
     }
 
     public static function getLang($Lang = false) {

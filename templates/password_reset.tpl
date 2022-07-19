@@ -67,12 +67,12 @@ li.important{
 	text-align: center;
 	padding: 20px 0;
 	background-color: #1e2538;">
-<img src="{{SITE_URL}}/static/styles/public/images/loginlogo.png" style="width: 50%;">
+<img src="{{CONFIG['SITE_URL']}}/static/styles/public/images/loginlogo.png" style="width: 50%;">
 </div>
 <div id="invite_mail_body" style="padding: 15px;">此邮件用于确认对该用户发起的密码重置请求：{{Username}} <br/><br/>
 请在 1 小时内点击下方按钮完成密码重置：<br/>
 <p class="button_container" style="text-align: center;
-	margin: 10px 0;"><a class="button" target="_blank" href='{{SITE_URL}}/login.php?act=recover&key={{ResetKey}}' style="cursor: pointer;
+	margin: 10px 0;"><a class="button" target="_blank" href='{{CONFIG['SITE_URL']}}/login.php?act=recover&key={{ResetKey}}' style="cursor: pointer;
     outline: 0;
     transition: all .1s linear;
     background: #4285f4;
@@ -93,7 +93,7 @@ li.important{
 A password reset process has been started for the username: {{Username}}<br/><br/>
 To finish this process please click the link below (you have 1 hour):<br/>
 <p class="button_container" style="text-align: center;
-	margin: 10px 0;"><a class="button" target="_blank" href='{{SITE_URL}}/login.php?act=recover&key={{ResetKey}}' style="cursor: pointer;
+	margin: 10px 0;"><a class="button" target="_blank" href='{{CONFIG['SITE_URL']}}/login.php?act=recover&key={{ResetKey}}' style="cursor: pointer;
     outline: 0;
     transition: all .1s linear;
     background: #4285f4;
@@ -108,5 +108,5 @@ To finish this process please click the link below (you have 1 hour):<br/>
 The user who requested the password reset had the IP address {{IP}}.<br/><br/>
 If you did not initiate this password reset then please disregard this email.<br/><br/><br/>
 Thank you,<br/>
-{{SITE_NAME}} Staff</div>
+{{CONFIG['SITE_NAME']}} Staff</div>
 </div></div>

@@ -242,7 +242,7 @@ class TorrentSearch {
         if (check_perms('site_search_many')) {
             $this->Page = $Page;
         } else {
-            $this->Page = min($Page, SPHINX_MAX_MATCHES / $PageSize);
+            $this->Page = min($Page, CONFIG['SPHINX_MAX_MATCHES'] / $PageSize);
         }
         $ResultLimit = $PageSize;
         $this->PageSize = $PageSize;

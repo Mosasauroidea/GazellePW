@@ -59,7 +59,7 @@ if (!empty($CollageSubscriptions) && in_array($CollageID, $CollageSubscriptions)
     $Cache->delete_value('collage_subs_user_new_' . $LoggedUser['ID']);
 }
 
-include(SERVER_ROOT . '/sections/collages/torrent_collage.php');
+include(CONFIG['SERVER_ROOT'] . '/sections/collages/torrent_collage.php');
 
 if (isset($SetCache)) {
     $CollageData = array(

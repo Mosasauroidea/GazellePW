@@ -3,7 +3,7 @@
 User collage subscription page
 */
 
-include(SERVER_ROOT . '/classes/torrenttable.class.php');
+include(CONFIG['SERVER_ROOT'] . '/classes/torrenttable.class.php');
 if (!check_perms('site_collages_subscribe')) {
     error(403);
 }

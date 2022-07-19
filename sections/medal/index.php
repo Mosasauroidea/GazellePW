@@ -28,39 +28,39 @@ if (isset($_GET['action'])) {
                         case 'other-1':
                         case 'other-2':
                         case 'other-3':
-                            require_once(SERVER_ROOT . '/sections/bonus/tokens.php');
+                            require_once(CONFIG['SERVER_ROOT'] . '/sections/bonus/tokens.php');
                             break;
                         case 'invite':
-                            require_once(SERVER_ROOT . '/sections/bonus/invite.php');
+                            require_once(CONFIG['SERVER_ROOT'] . '/sections/bonus/invite.php');
                             break;
                         case 'title-bb-y':
                         case 'title-bb-n':
                         case 'title-off':
-                            require_once(SERVER_ROOT . '/sections/bonus/title.php');
+                            require_once(CONFIG['SERVER_ROOT'] . '/sections/bonus/title.php');
                             break;
                         default:
-                            require_once(SERVER_ROOT . DEFAULT_PAGE);
+                            require_once(CONFIG['SERVER_ROOT'] . DEFAULT_PAGE);
                             break;
                     }
                 } else {
-                    require_once(SERVER_ROOT . DEFAULT_PAGE);
+                    require_once(CONFIG['SERVER_ROOT'] . DEFAULT_PAGE);
                     break;
                 }
             }
             break;
         case 'bprates':
-            require_once(SERVER_ROOT . '/sections/bonus/bprates.php');
+            require_once(CONFIG['SERVER_ROOT'] . '/sections/bonus/bprates.php');
             break;
         case 'title':
-            require_once(SERVER_ROOT . '/sections/bonus/title.php');
+            require_once(CONFIG['SERVER_ROOT'] . '/sections/bonus/title.php');
             break;
         case 'history':
-            require_once(SERVER_ROOT . '/sections/bonus/history.php');
+            require_once(CONFIG['SERVER_ROOT'] . '/sections/bonus/history.php');
             break;
         default:
-            require_once(SERVER_ROOT . DEFAULT_PAGE);
+            require_once(CONFIG['SERVER_ROOT'] . DEFAULT_PAGE);
             break;
     }
 } else {
-    require_once(SERVER_ROOT . DEFAULT_PAGE);
+    require_once(CONFIG['SERVER_ROOT'] . DEFAULT_PAGE);
 }

@@ -26,7 +26,7 @@ if ($p['submit'] == 'Delete') {
     }
 
     if ($err !== null) {
-        include(SERVER_ROOT . '/sections/tools/development/periodic_edit.php');
+        include(CONFIG['SERVER_ROOT'] . '/sections/tools/development/periodic_edit.php');
         die();
     }
 

@@ -18,7 +18,7 @@
 
     $Load = sys_getloadavg();
     ?>
-    <p>Site and design &copy; <?= date('Y') ?> <?= SITE_NAME ?> | Powered by <a target="blank" href="https://github.com/Mosasauroidea/GazellePW">GazellePW</a></p>
+    <p>Site and design &copy; <?= date('Y') ?> <?= CONFIG['SITE_NAME'] ?> | Powered by <a target="blank" href="https://github.com/Mosasauroidea/GazellePW">GazellePW</a></p>
     <? if (!empty($LastActive)) { ?>
         <p>
             <a href="user.php?action=sessions">
@@ -36,7 +36,7 @@
         <? } ?>
     </p>
 </footer>
-<? if (DEBUG_MODE || check_perms('site_debug')) { ?>
+<? if (CONFIG['DEBUG_MODE'] || check_perms('site_debug')) { ?>
     <div class="LayoutPage-siteDebug">
         <?
         $Debug->phpinfo_table();
@@ -85,7 +85,7 @@ if (!empty($NotificationSpans)) {
     <script type="module" src="<?= vite("src/js/pages/$PageJS") ?>"></script>
 <? endif; ?>
 
-<? if (IS_DEV) : ?>
+<? if (CONFIG['IS_DEV']) : ?>
     <script type="module" src="<?= vite("@vite/client") ?>"></script>
 <? endif; ?>
 <script type="module" src="<?= vite("src/js/app/app.jsx") ?>"></script>

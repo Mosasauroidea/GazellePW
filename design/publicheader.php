@@ -1,6 +1,6 @@
 <?
 global $LoggedUser, $SSL, $LoginKey;
-define('FOOTER_FILE', SERVER_ROOT . '/design/publicfooter.php');
+define('FOOTER_FILE', CONFIG['SERVER_ROOT'] . '/design/publicfooter.php');
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
@@ -13,17 +13,17 @@ define('FOOTER_FILE', SERVER_ROOT . '/design/publicfooter.php');
     <link rel="shortcut icon" href="favicon.ico" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <meta name="viewport" content="width=device-width; initial-scale=1.0;" />
-    <? if (IS_DEV) { ?>
+    <? if (CONFIG['IS_DEV']) { ?>
         <link rel="stylesheet" type="text/css" media="screen" href="/src/css/publicstyle/style.css" />
     <? } else { ?>
-        <link rel="stylesheet" type="text/css" media="screen" href="/app/publicstyle/style.css?v=<?= filemtime(SERVER_ROOT . '/public/app/publicstyle/style.css') ?>" />
+        <link rel="stylesheet" type="text/css" media="screen" href="/app/publicstyle/style.css?v=<?= filemtime(CONFIG['SERVER_ROOT'] . '/public/app/publicstyle/style.css') ?>" />
     <? } ?>
-    <script src="<?= STATIC_SERVER ?>functions/jquery.js" type="text/javascript"></script>
-    <script src="<?= STATIC_SERVER ?>functions/script_start.js?v=<?= filemtime(SERVER_ROOT . '/public/static/functions/script_start.js') ?>" type="text/javascript"></script>
-    <script src="<?= STATIC_SERVER ?>functions/ajax.class.js?v=<?= filemtime(SERVER_ROOT . '/public/static/functions/ajax.class.js') ?>" type="text/javascript"></script>
-    <script src="<?= STATIC_SERVER ?>functions/cookie.class.js?v=<?= filemtime(SERVER_ROOT . '/public/static/functions/cookie.class.js') ?>" type="text/javascript"></script>
-    <script src="<?= STATIC_SERVER ?>functions/storage.class.js?v=<?= filemtime(SERVER_ROOT . '/public/static/functions/storage.class.js') ?>" type="text/javascript"></script>
-    <script src="<?= STATIC_SERVER ?>functions/global.js?v=<?= filemtime(SERVER_ROOT . '/public/static/functions/global.js') ?>" type="text/javascript"></script>
+    <script src="<?= CONFIG['STATIC_SERVER'] ?>functions/jquery.js" type="text/javascript"></script>
+    <script src="<?= CONFIG['STATIC_SERVER'] ?>functions/script_start.js?v=<?= filemtime(CONFIG['SERVER_ROOT'] . '/public/static/functions/script_start.js') ?>" type="text/javascript"></script>
+    <script src="<?= CONFIG['STATIC_SERVER'] ?>functions/ajax.class.js?v=<?= filemtime(CONFIG['SERVER_ROOT'] . '/public/static/functions/ajax.class.js') ?>" type="text/javascript"></script>
+    <script src="<?= CONFIG['STATIC_SERVER'] ?>functions/cookie.class.js?v=<?= filemtime(CONFIG['SERVER_ROOT'] . '/public/static/functions/cookie.class.js') ?>" type="text/javascript"></script>
+    <script src="<?= CONFIG['STATIC_SERVER'] ?>functions/storage.class.js?v=<?= filemtime(CONFIG['SERVER_ROOT'] . '/public/static/functions/storage.class.js') ?>" type="text/javascript"></script>
+    <script src="<?= CONFIG['STATIC_SERVER'] ?>functions/global.js?v=<?= filemtime(CONFIG['SERVER_ROOT'] . '/public/static/functions/global.js') ?>" type="text/javascript"></script>
 </head>
 
 <body>
@@ -49,14 +49,14 @@ define('FOOTER_FILE', SERVER_ROOT . '/design/publicfooter.php');
             <td id="main-td" align="center" valign="middle">
                 <div id="logo">
                     <ul id="index-login">
-                        <?php if (SHOW_PUBLIC_INDEX) { ?>
+                        <?php if (CONFIG['SHOW_PUBLIC_INDEX']) { ?>
                             <li><a href="index.php"><?= Lang::get('pub', 'public_index') ?></a></li>
                         <?php } ?>
                         <li><a id="login-a" href="login.php<?= (isset($LoginKey) && $LoginKey) ? "?loginkey=$LoginKey" : "" ?>"><?= Lang::get('pub', 'login') ?></a></li>
                         <?php if (open_registration()) { ?>
                             <li><a href="register.php"><?= Lang::get('pub', 'register') ?></a></li>
                         <?php } ?>
-                        <?php if (OPEN_EXTERNAL_REFERRALS) { ?>
+                        <?php if (CONFIG['OPEN_EXTERNAL_REFERRALS']) { ?>
                             <li><a href="referral.php"><?= Lang::get('pub', 'referral') ?></a></li>
                         <?php } ?>
 

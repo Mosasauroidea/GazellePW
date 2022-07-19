@@ -17,7 +17,7 @@ authorize();
 if (isset($LoggedUser['PostsPerPage'])) {
     $PerPage = $LoggedUser['PostsPerPage'];
 } else {
-    $PerPage = POSTS_PER_PAGE;
+    $PerPage = CONFIG['POSTS_PER_PAGE'];
 }
 
 
@@ -129,7 +129,7 @@ if (!$NoPoll) { // god, I hate double negatives...
     $Cache->cache_value("polls_$TopicID", array($Question, $Answers, $Votes, '0000-00-00 00:00:00', '0', $MaxCount), 0);
 
     if ($ForumID == STAFF_FORUM) {
-        send_irc('PRIVMSG ' . ADMIN_CHAN . ' :!mod Poll created by ' . $LoggedUser['Username'] . ": \"$Question\" " . site_url() . "forums.php?action=viewthread&threadid=$TopicID");
+        send_irc('PRIVMSG ' . CONFIG['ADMIN_CHAN'] . ' :!mod Poll created by ' . $LoggedUser['Username'] . ": \"$Question\" " . site_url() . "forums.php?action=viewthread&threadid=$TopicID");
     }
 }
 
@@ -140,13 +140,13 @@ if ($Forum = $Cache->get_value("forums_$ForumID")) {
     list($Forum,,,$Stickies) = $Forum;
 
     // Remove the last thread from the index
-    if (count($Forum) == TOPICS_PER_PAGE && $Stickies < TOPICS_PER_PAGE) {
+    if (count($Forum) == CONFIG['TOPICS_PER_PAGE'] && $Stickies < CONFIG['TOPICS_PER_PAGE']) {
         array_pop($Forum);
     }
 
     if ($Stickies > 0) {
         $Part1 = array_slice($Forum, 0, $Stickies, true); // Stickies
-        $Part3 = array_slice($Forum, $Stickies, TOPICS_PER_PAGE - $Stickies - 1, true); // Rest of page
+        $Part3 = array_slice($Forum, $Stickies, CONFIG['TOPICS_PER_PAGE'] - $Stickies - 1, true); // Rest of page
     } else {
         $Part1 = array();
         $Part3 = $Forum;

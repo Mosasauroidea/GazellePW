@@ -88,12 +88,12 @@ class Permissions {
 
         // This is legacy donor cruft
         if ($UserInfo['Donor']) {
-            $DonorPerms = self::get_permissions(DONOR);
+            $DonorPerms = self::get_permissions(CONFIG['USER_CLASS']['DONOR']);
             unset($DonorPerms['Permissions']['MaxCollages']);
         } else {
             $DonorPerms = array('Permissions' => array());
         }
-        if (ENABLE_COLLAGES) {
+        if (CONFIG['ENABLE_COLLAGES']) {
             $MaxCollages = $BonusCollages;
             if (!empty($Permissions['Permissions']['MaxCollages'])) {
                 $MaxCollages += $Permissions['Permissions']['MaxCollages'];

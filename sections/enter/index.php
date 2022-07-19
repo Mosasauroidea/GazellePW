@@ -9,7 +9,7 @@ if (isset($LoggedUser)) {
 }
 */
 
-include(SERVER_ROOT . '/classes/validate.class.php');
+include(CONFIG['SERVER_ROOT'] . '/classes/validate.class.php');
 
 $Val = new VALIDATE;
 
@@ -94,11 +94,11 @@ if (!empty($_REQUEST['confirm'])) {
             $UserCount = $DB->record_count();
             if ($UserCount == 0) {
                 $NewInstall = true;
-                $Class = SYSOP;
+                $Class = CONFIG['USER_CLASS']['SYSOP'];
                 $Enabled = '1';
             } else {
                 $NewInstall = false;
-                $Class = USER;
+                $Class = CONFIG['USER_CLASS']['USER'];
                 $Enabled = '0';
             }
 
@@ -108,7 +108,7 @@ if (!empty($_REQUEST['confirm'])) {
 				INSERT INTO users_main
 					(Username, Email, PassHash, torrent_pass, IP, PermissionID, Enabled, Invites, Uploaded, ipcc)
 				VALUES
-					('" . db_string(trim($_POST['username'])) . "', '" . db_string($_POST['email']) . "', '" . db_string(Users::make_password_hash($_POST['password'])) . "', '" . db_string($torrent_pass) . "', '" . db_string($_SERVER['REMOTE_ADDR']) . "', '$Class', '$Enabled', '" . STARTING_INVITES . "', '" . STARTING_UPLOAD . "', '$IPcc')");
+					('" . db_string(trim($_POST['username'])) . "', '" . db_string($_POST['email']) . "', '" . db_string(Users::make_password_hash($_POST['password'])) . "', '" . db_string($torrent_pass) . "', '" . db_string($_SERVER['REMOTE_ADDR']) . "', '$Class', '$Enabled', '" . CONFIG['STARTING_INVITES'] . "', '" . CONFIG['STARTING_UPLOAD'] . "', '$IPcc')");
 
             $UserID = $DB->inserted_id();
 
@@ -232,16 +232,16 @@ if (!empty($_REQUEST['confirm'])) {
                 $TreeLevel = 1;
             }
 
-            include(SERVER_ROOT . '/classes/templates.class.php');
+            include(CONFIG['SERVER_ROOT'] . '/classes/templates.class.php');
             $TPL = new TEMPLATE;
-            $TPL->open(SERVER_ROOT . '/templates/new_registration.tpl');
+            $TPL->open(CONFIG['SERVER_ROOT'] . '/templates/new_registration.tpl');
 
             $TPL->set('Username', $_REQUEST['username']);
             $TPL->set('TorrentKey', $torrent_pass);
-            $TPL->set('SITE_NAME', SITE_NAME);
-            $TPL->set('SITE_URL', SITE_URL);
+            $TPL->set('SITE_NAME', CONFIG['SITE_NAME']);
+            $TPL->set('SITE_URL', CONFIG['SITE_URL']);
 
-            Misc::send_email($_REQUEST['email'], '激活你的 ' . SITE_NAME . ' 账号 | New account confirmation at ' . SITE_NAME, $TPL->get(), 'noreply');
+            Misc::send_email($_REQUEST['email'], '激活你的 ' . CONFIG['SITE_NAME'] . ' 账号 | New account confirmation at ' . CONFIG['SITE_NAME'], $TPL->get(), 'noreply');
             Tracker::update_tracker('add_user', array('id' => $UserID, 'passkey' => $torrent_pass));
             $Sent = 1;
         }

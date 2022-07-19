@@ -14,11 +14,11 @@ return
             'default_database' => 'gazelle',
             'gazelle' => [
                 'adapter' => 'mysql',
-                'host' => SQLHOST,
-                'name' => SQLDB,
-                'user' => SQLLOGIN,
-                'pass' => SQLPASS,
-                'port' => SQLPORT,
+                'host' => CONFIG['SQLHOST'],
+                'name' => CONFIG['SQLDB'],
+                'user' => CONFIG['SQLLOGIN'],
+                'pass' => CONFIG['SQLPASS'],
+                'port' => CONFIG['SQLPORT'],
                 'charset' => 'utf8'
             ],
         ],

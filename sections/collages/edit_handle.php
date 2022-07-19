@@ -30,7 +30,7 @@ if (isset($_POST['name'])) {
             $Err = Lang::get('collages', 'a_collage_with_that_name_already_exists_2');
         }
         $ErrNoEscape = true;
-        include(SERVER_ROOT . '/sections/collages/edit.php');
+        include(CONFIG['SERVER_ROOT'] . '/sections/collages/edit.php');
         die();
     }
 }

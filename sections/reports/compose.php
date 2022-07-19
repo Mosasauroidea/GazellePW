@@ -96,7 +96,7 @@ switch ($Type) {
         if (isset($LoggedUser['PostsPerPage'])) {
             $PerPage = $LoggedUser['PostsPerPage'];
         } else {
-            $PerPage = POSTS_PER_PAGE;
+            $PerPage = CONFIG['POSTS_PER_PAGE'];
         }
         $DB->query("
 			SELECT

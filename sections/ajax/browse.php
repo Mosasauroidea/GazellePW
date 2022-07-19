@@ -1,5 +1,5 @@
 <?
-include(SERVER_ROOT . '/sections/torrents/functions.php');
+include(CONFIG['SERVER_ROOT'] . '/sections/torrents/functions.php');
 
 if (!empty($_GET['order_way']) && $_GET['order_way'] == 'asc') {
     $OrderWay = 'asc';
@@ -15,7 +15,7 @@ if (empty($_GET['order_by']) || !isset(TorrentSearch::$SortOrders[$_GET['order_b
 
 $GroupResults = !isset($_GET['group_results']) || $_GET['group_results'] != '0';
 $Page = !empty($_GET['page']) ? (int)$_GET['page'] : 1;
-$Search = new TorrentSearch($GroupResults, $OrderBy, $OrderWay, $Page, TORRENTS_PER_PAGE);
+$Search = new TorrentSearch($GroupResults, $OrderBy, $OrderWay, $Page, CONFIG['TORRENTS_PER_PAGE']);
 $Results = $Search->query($_GET);
 $Groups = $Search->get_groups();
 
@@ -171,6 +171,6 @@ foreach ($Results as $Key => $GroupID) {
 }
 ajax_json_success(array(
     'currentPage' => intval($Page),
-    'pages' => ceil($NumResults / TORRENTS_PER_PAGE),
+    'pages' => ceil($NumResults / CONFIG['TORRENTS_PER_PAGE']),
     'results' => $JsonGroups
 ));

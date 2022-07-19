@@ -32,7 +32,7 @@ switch ($View) {
         break;
     default:
         $Status = "Unanswered";
-        if ($UserLevel >= $Classes[FORUM_MOD]['Level']) {
+        if ($UserLevel >= $Classes[CONFIG['USER_CLASS']['FORUM_MOD']]['Level']) {
             $ViewString = Lang::get('staffpm', 'your_unanswered');
         } else {
             // FLS
@@ -46,14 +46,14 @@ $WhereCondition = "
 	  AND spc.Status IN ('$Status')";
 
 if ($ViewString == 'Your Unanswered') {
-    if ($UserLevel >= $Classes[MOD]['Level']) {
-        $WhereCondition .= " AND spc.Level >= " . $Classes[MOD]['Level'];
-    } else if ($UserLevel >= $Classes[FORUM_MOD]['Level']) {
-        $WhereCondition .= " AND spc.Level >= " . $Classes[FORUM_MOD]['Level'];
+    if ($UserLevel >= $Classes[CONFIG['USER_CLASS']['MOD']]['Level']) {
+        $WhereCondition .= " AND spc.Level >= " . $Classes[CONFIG['USER_CLASS']['MOD']]['Level'];
+    } else if ($UserLevel >= $Classes[CONFIG['USER_CLASS']['FORUM_MOD']]['Level']) {
+        $WhereCondition .= " AND spc.Level >= " . $Classes[CONFIG['USER_CLASS']['FORUM_MOD']]['Level'];
     }
 }
 
-list($Page, $Limit) = Format::page_limit(MESSAGES_PER_PAGE);
+list($Page, $Limit) = Format::page_limit(CONFIG['MESSAGES_PER_PAGE']);
 // Get messages
 $StaffPMs = $DB->query("
 	SELECT
@@ -86,7 +86,7 @@ if (empty($CurURL)) {
 } else {
     $CurURL = "staffpm.php?$CurURL&";
 }
-$Pages = Format::get_pages($Page, $NumResults, MESSAGES_PER_PAGE, 9);
+$Pages = Format::get_pages($Page, $NumResults, CONFIG['MESSAGES_PER_PAGE'], 9);
 
 $Row = 'a';
 

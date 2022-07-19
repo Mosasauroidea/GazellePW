@@ -10,7 +10,7 @@ if (!isset($_GET['id']) || !is_number($_GET['id'])) {
 }
 $ID = (int)$_GET['id'];
 
-if ($ID == INDEX_ARTICLE) {
+if ($ID == CONFIG['INDEX_ARTICLE']) {
     error('You cannot delete the main wiki article.');
 }
 

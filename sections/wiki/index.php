@@ -63,7 +63,7 @@ if (!empty($_REQUEST['action'])) {
             break;
     }
 } else {
-    $_GET['id'] = INDEX_ARTICLE;
+    $_GET['id'] = CONFIG['INDEX_ARTICLE'];
     include('browse.php');
     //include('splash.php');
 }

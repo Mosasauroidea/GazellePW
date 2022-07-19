@@ -1,6 +1,6 @@
 <?
 //~~~~~~~~~~~ Main artist page ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
-include(SERVER_ROOT . '/classes/torrenttable.class.php');
+include(CONFIG['SERVER_ROOT'] . '/classes/torrenttable.class.php');
 
 //For sorting tags
 function compare($X, $Y) {
@@ -14,7 +14,7 @@ function sectionTitle($id) {
 }
 
 // Similar Artist Map
-include(SERVER_ROOT . '/classes/artists_similar.class.php');
+include(CONFIG['SERVER_ROOT'] . '/classes/artists_similar.class.php');
 
 $UserVotes = Votes::get_user_votes($LoggedUser['ID']);
 
@@ -643,7 +643,7 @@ View::show_header(($ChineseName ? '[' . $ChineseName . '] ' : '') . $Name, 'brow
                 }
             }
             if (empty($Similar) || empty($Similar->Artists)) {
-                include(SERVER_ROOT . '/classes/image.class.php');
+                include(CONFIG['SERVER_ROOT'] . '/classes/image.class.php');
                 $Img = new IMAGE;
                 $Img->create(WIDTH, HEIGHT);
                 $Img->color(255, 255, 255, 127);
@@ -732,7 +732,7 @@ View::show_header(($ChineseName ? '[' . $ChineseName . '] ' : '') . $Name, 'brow
         <? } /* if $NumSimilar > 0 */ ?>
         <?
         // --- Comments ---
-        $Pages = Format::get_pages($Page, $NumComments, TORRENT_COMMENTS_PER_PAGE, 9, '#comments');
+        $Pages = Format::get_pages($Page, $NumComments, CONFIG['TORRENT_COMMENTS_PER_PAGE'], 9, '#comments');
 
         ?>
         <div id="artistcomments">

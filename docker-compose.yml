@@ -16,7 +16,6 @@ services:
       - node-modules:/var/www/node_modules
       - .docker/web/nginx.conf:/etc/nginx/sites-available/gazelle.conf
       - .docker/web/www.conf:/etc/php/7.3/fpm/pool.d/www.conf
-    env_file: .env
     environment:
       # These should match what you set for your mysql container below
       - MYSQL_USER=gazelle

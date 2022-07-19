@@ -45,7 +45,7 @@ View::show_header('', '', 'PageRecoveryRecovery');
 </style>
 
 <div id="logo">
-    <a href="/" style="margin-left: 0;"><img src="<?= STATIC_SERVER ?>/styles/public/images/loginlogo.png" alt="Orpheus Network" data-tooltip="Orpheus Network" /></a>
+    <a href="/" style="margin-left: 0;"><img src="<?= CONFIG['STATIC_SERVER'] ?>/styles/public/images/loginlogo.png" alt="Orpheus Network" data-tooltip="Orpheus Network" /></a>
 </div>
 
 <div class="container">

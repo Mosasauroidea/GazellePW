@@ -1,6 +1,6 @@
 <? View::show_header('Two-factor Authentication', '', 'PageLogin2FARecovery'); ?>
 <span id="no-cookies" class="hidden u-colorWarning">You appear to have cookies disabled.<br /><br /></span>
-<noscript><span class="u-colorWarning"><?= SITE_NAME ?> requires JavaScript to function properly. Please enable JavaScript in your browser.</span><br /><br />
+<noscript><span class="u-colorWarning"><?= CONFIG['SITE_NAME'] ?> requires JavaScript to function properly. Please enable JavaScript in your browser.</span><br /><br />
 </noscript>
 <?
 if (strtotime($BannedUntil) < time()) {

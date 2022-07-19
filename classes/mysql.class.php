@@ -14,7 +14,7 @@ turned off by setting $Escape to false in next_record or to_array.
 
 * Creating the object.
 
-require(SERVER_ROOT.'/classes/mysql.class.php');
+require(CONFIG['SERVER_ROOT'].'/classes/mysql.class.php');
 $DB = new DB_MYSQL;
 -----
 
@@ -177,7 +177,7 @@ class DB_MYSQL {
     protected $Port = 0;
     protected $Socket = '';
 
-    public function __construct($Database = SQLDB, $User = SQLLOGIN, $Pass = SQLPASS, $Server = SQLHOST, $Port = SQLPORT, $Socket = SQLSOCK) {
+    public function __construct($Database = CONFIG['SQLDB'], $User = CONFIG['SQLLOGIN'], $Pass = CONFIG['SQLPASS'], $Server = CONFIG['SQLHOST'], $Port = CONFIG['SQLPORT'], $Socket = CONFIG['SQLSOCK']) {
         $this->Database = $Database;
         $this->Server = $Server;
         $this->User = $User;
@@ -193,7 +193,7 @@ class DB_MYSQL {
         global $Debug, $argv;
         $DBError = 'MySQL: ' . strval($Msg) . ' SQL error: ' . strval($this->Errno) . ' (' . strval($this->Error) . ')';
         if ($this->Errno == 1194) {
-            send_irc('PRIVMSG ' . ADMIN_CHAN . ' :' . $DBError);
+            send_irc('PRIVMSG ' . CONFIG['ADMIN_CHAN'] . ' :' . $DBError);
         }
         $Debug->analysis('!dev DB Error', $DBError, 3600 * 24);
         throw new DB_MYSQL_Exception($DBError);

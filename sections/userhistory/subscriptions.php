@@ -6,7 +6,7 @@ User subscription page
 if (isset($LoggedUser['PostsPerPage'])) {
     $PerPage = $LoggedUser['PostsPerPage'];
 } else {
-    $PerPage = POSTS_PER_PAGE;
+    $PerPage = CONFIG['POSTS_PER_PAGE'];
 }
 list($Page, $Limit) = Format::page_limit($PerPage);
 

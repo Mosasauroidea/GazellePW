@@ -50,7 +50,7 @@ class Referral extends \Gazelle\Base {
 
         $status = $this->cache->get_value(self::CACHE_BOUNCER);
         if ($status === false) {
-            $req = $this->proxy->fetch(SITE_URL, [], [], false);
+            $req = $this->proxy->fetch(CONFIG['SITE_URL'], [], [], false);
             $status = $req == null ? 'dead' : 'alive';
             $this->cache->cache_value(self::CACHE_BOUNCER, $status, 60 * 15);
         }
@@ -548,7 +548,7 @@ class Referral extends \Gazelle\Base {
         );
 
         if ($existing) {
-            return [false, "Account already used for referral, join " . BOT_DISABLED_CHAN . " on " . BOT_SERVER . " for help."];
+            return [false, "Account already used for referral, join " . CONFIG['BOT_DISABLED_CHAN'] . " on " . CONFIG['BOT_SERVER'] . " for help."];
         }
 
         $inviteKey = randomString();
@@ -580,13 +580,13 @@ class Referral extends \Gazelle\Base {
             $message = $twig->render('emails/referral.twig', [
                 'Email' => $email,
                 'InviteKey' => $inviteKey,
-                'DISABLED_CHAN' => BOT_DISABLED_CHAN,
-                'IRC_SERVER' => BOT_SERVER,
-                'SITE_NAME' => SITE_NAME,
-                'SITE_URL' => SITE_URL
+                'DISABLED_CHAN' => CONFIG['BOT_DISABLED_CHAN'],
+                'IRC_SERVER' => CONFIG['BOT_SERVER'],
+                'SITE_NAME' => CONFIG['SITE_NAME'],
+                'SITE_URL' => CONFIG['SITE_URL']
             ]);
 
-            \Misc::send_email($email, 'You have been invited to ' . SITE_NAME, $message, 'noreply', 'text/plain');
+            \Misc::send_email($email, 'You have been invited to ' . CONFIG['SITE_NAME'], $message, 'noreply', 'text/plain');
         }
 
         return [true, $inviteKey];

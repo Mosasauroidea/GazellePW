@@ -40,7 +40,7 @@ class BindCommand extends Command {
     /**
      * @var string Command Description
      */
-    protected $description = "通过你的 " . SITE_NAME . " 用户名和种子密钥末 8 位与 TG 账号绑定 | Bind your account with your USERNAME & TORRENT PASSKEY (last 8 characters)";
+    protected $description = "通过你的 " . CONFIG['SITE_NAME'] . " 用户名和种子密钥末 8 位与 TG 账号绑定 | Bind your account with your USERNAME & TORRENT PASSKEY (last 8 characters)";
 
     /**
      * @inheritdoc
@@ -103,7 +103,7 @@ class LoginCommand extends Command {
         G::$DB->query("select count(1), Username, ID from users_info i left join users_main m on m.id=i.userid where TGID='$UserTGID'");
         list($HasUser, $Username, $UserID) = G::$DB->next_record();
         if ($HasUser) {
-            include(SERVER_ROOT . "/sections/login/close.php");
+            include(CONFIG['SERVER_ROOT'] . "/sections/login/close.php");
             if ($CloseLogin) {
                 G::$DB->query("select count(1), LoginKey from login_link where UserID='$UserID' and used='0'");
                 list($HasKey, $Key) = G::$DB->next_record();
@@ -111,7 +111,7 @@ class LoginCommand extends Command {
                     $Key = Users::make_secret();
                     G::$DB->query("insert into login_link (LoginKey, UserID, Username) values ('" . db_string($Key) . "', '$UserID', '$Username')");
                 }
-                $this->replyWithMessage(['text' => SITE_URL . "/login.php?loginkey=$Key"]);
+                $this->replyWithMessage(['text' => CONFIG['SITE_URL'] . "/login.php?loginkey=$Key"]);
             } else {
                 $this->replyWithMessage(['text' => "现在可正常访问登录页面 | You can access to the login page directly"]);
             }

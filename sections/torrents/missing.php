@@ -5,7 +5,7 @@ use Gazelle\Torrent\TorrentSlotGroup;
 use Gazelle\Torrent\TorrentSlotGroupStatus;
 use Gazelle\Torrent\TorrentSlot;
 
-include(SERVER_ROOT . '/sections/torrents/functions.php');
+include(CONFIG['SERVER_ROOT'] . '/sections/torrents/functions.php');
 
 if (empty($_SERVER['QUERY_STRING']) || (count($_GET) === 1 && isset($_GET['page']))) {
     if (!empty($LoggedUser['DefaultSearch'])) {
@@ -22,18 +22,18 @@ $OrderBy = 'time';
 $GroupResults = true;
 $OrderWay = 'desc';
 $Page = !empty($_GET['page']) ? (int) $_GET['page'] : 1;
-$Search = new TorrentSearch($GroupResults, $OrderBy, $OrderWay, $Page, TORRENTS_PER_PAGE);
+$Search = new TorrentSearch($GroupResults, $OrderBy, $OrderWay, $Page, CONFIG['TORRENTS_PER_PAGE']);
 $Results = $Search->query($_GET);
 $Groups = $Search->get_groups();
 $RealNumResults = $NumResults = $Search->record_count();
 
 if (check_perms('site_search_many')) {
-    $LastPage = ceil($NumResults / TORRENTS_PER_PAGE);
-    $FixSearch = new TorrentSearch($GroupResults, $OrderBy, $OrderWay, $LastPage, TORRENTS_PER_PAGE);
+    $LastPage = ceil($NumResults / CONFIG['TORRENTS_PER_PAGE']);
+    $FixSearch = new TorrentSearch($GroupResults, $OrderBy, $OrderWay, $LastPage, CONFIG['TORRENTS_PER_PAGE']);
     $FixSearch->query($_GET);
     $RealNumResults = $NumResults = $FixSearch->record_count();
 } else {
-    $NumResults = min($NumResults, SPHINX_MAX_MATCHES);
+    $NumResults = min($NumResults, CONFIG['SPHINX_MAX_MATCHES']);
 }
 
 View::show_header(Lang::get('torrents', 'missing'), 'missing', 'PageTorrentMissing');
@@ -82,9 +82,9 @@ HTML;
         die();
     }
 
-    if ($NumResults < ($Page - 1) * TORRENTS_PER_PAGE + 1) {
-        $LastPage = ceil($NumResults / TORRENTS_PER_PAGE);
-        $Pages = Format::get_pages(0, $NumResults, TORRENTS_PER_PAGE);
+    if ($NumResults < ($Page - 1) * CONFIG['TORRENTS_PER_PAGE'] + 1) {
+        $LastPage = ceil($NumResults / CONFIG['TORRENTS_PER_PAGE']);
+        $Pages = Format::get_pages(0, $NumResults, CONFIG['TORRENTS_PER_PAGE']);
     ?>
         <div class="BoxBody" align="center">
             <h2>The requested page contains no matches.</h2>
@@ -98,7 +98,7 @@ HTML;
     }
 
     // List of pages
-    $Pages = Format::get_pages($Page, $NumResults, TORRENTS_PER_PAGE);
+    $Pages = Format::get_pages($Page, $NumResults, CONFIG['TORRENTS_PER_PAGE']);
 ?>
 <div class="BodyNavLinks"><?= $Pages ?></div>
 <div class="TableContainer">

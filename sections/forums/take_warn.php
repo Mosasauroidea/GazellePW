@@ -51,7 +51,7 @@ $DB->query("
 				FROM forums_posts AS p2
 				WHERE p2.TopicID = p.TopicID
 					AND p2.ID <= '$PostID'
-			) / " . POSTS_PER_PAGE . "
+			) / " . CONFIG['POSTS_PER_PAGE'] . "
 		) AS Page
 	FROM forums_posts AS p
 		JOIN forums_topics AS t ON p.TopicID = t.ID
@@ -67,7 +67,7 @@ $DB->query("
 		EditedTime = '$SQLTime'
 	WHERE ID = '$PostID'");
 
-$CatalogueID = floor((POSTS_PER_PAGE * $Page - POSTS_PER_PAGE) / THREAD_CATALOGUE);
+$CatalogueID = floor((CONFIG['POSTS_PER_PAGE'] * $Page - CONFIG['POSTS_PER_PAGE']) / CONFIG['THREAD_CATALOGUE']);
 $Cache->begin_transaction("thread_$TopicID" . "_catalogue_$CatalogueID");
 if ($Cache->MemcacheDBArray[$Key]['ID'] != $PostID) {
 	$Cache->cancel_transaction();

@@ -2,7 +2,7 @@
 $Key = $_REQUEST['key'];
 $Type = $_REQUEST['type'];
 
-if (($Key != TRACKER_SECRET) || $_SERVER['REMOTE_ADDR'] != TRACKER_HOST) {
+if (($Key != CONFIG['TRACKER_SECRET']) || $_SERVER['REMOTE_ADDR'] != CONFIG['TRACKER_HOST']) {
     error(403);
 }
 

@@ -50,7 +50,7 @@ if ((empty($_POST['submit']) || empty($_POST['username'])) && !isset($Output)) {
     $Nick = $_POST['username'];
     $Nick = preg_replace('/[^a-zA-Z0-9\[\]\\`\^\{\}\|_]/', '', $Nick);
     if (strlen($Nick) == 0) {
-        $Nick = SITE_NAME . 'Guest????';
+        $Nick = CONFIG['SITE_NAME'] . 'Guest????';
     } else {
         if (is_numeric(substr($Nick, 0, 1))) {
             $Nick = '_' . $Nick;
@@ -68,12 +68,12 @@ if ((empty($_POST['submit']) || empty($_POST['username'])) && !isset($Output)) {
                 </div>
                 <applet codebase="static/irc/" code="IRCApplet.class" archive="irc.jar,sbox.jar" width="800" height="600" align="center">
                     <param name="nick" value="<?= ($Nick) ?>" />
-                    <param name="alternatenick" value="<?= SITE_NAME ?>Guest????" />
+                    <param name="alternatenick" value="<?= CONFIG['SITE_NAME'] ?>Guest????" />
                     <param name="name" value="Java IRC User" />
-                    <param name="host" value="<?= (BOT_SERVER) ?>" />
+                    <param name="host" value="<?= (CONFIG['BOT_SERVER']) ?>" />
                     <param name="multiserver" value="false" />
                     <param name="autorejoin" value="false" />
-                    <param name="command1" value="JOIN <?= BOT_DISABLED_CHAN ?>" />
+                    <param name="command1" value="JOIN <?= CONFIG['BOT_DISABLED_CHAN'] ?>" />
                     <param name="gui" value="sbox" />
                     <param name="pixx:highlight" value="true" />
                     <param name="pixx:highlightnick" value="true" />

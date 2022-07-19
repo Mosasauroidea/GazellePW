@@ -13,7 +13,7 @@ if ($LoggedUser['BytesUploaded'] == 0 && $LoggedUser['BytesDownloaded'] == 0) {
 $MyNews = $LoggedUser['LastReadNews'];
 $CurrentNews = $Cache->get_value('news_latest_id');
 if ($CurrentNews === false) {
-    $FormID = NEWS_FORUM_ID;
+    $FormID = CONFIG['NEWS_FORUM_ID'];
     $DB->query("SELECT COUNT(*) FROM `forums_topics` WHERE `ForumID` = '$FormID'");
     $sort4 = $DB->to_array(false, MYSQLI_NUM, false);
     if ($DB->record_count() === 1) {

@@ -45,26 +45,26 @@ class SiteLog extends \Gazelle\Base {
                 LIMIT ?, ?
                 ",
                 $offset,
-                LOG_ENTRIES_PER_PAGE
+                CONFIG['LOG_ENTRIES_PER_PAGE']
             );
             $this->totalMatches = $this->db->record_count();
-            if ($this->totalMatches == LOG_ENTRIES_PER_PAGE) {
+            if ($this->totalMatches == CONFIG['LOG_ENTRIES_PER_PAGE']) {
                 // This is a lot faster than SQL_CALC_FOUND_ROWS
                 $sq = new \SphinxqlQuery();
                 $result = $sq->select('id')->from('log, log_delta')->limit(0, 1, 1)->query();
                 $this->debug->log_var($result, '$result');
-                $this->totalMatches = min(SPHINX_MAX_MATCHES, $result->get_meta('total_found'));
+                $this->totalMatches = min(CONFIG['SPHINX_MAX_MATCHES'], $result->get_meta('total_found'));
             } else {
                 $this->totalMatches += $offset;
             }
             $this->queryStatus = 0;
         } else {
-            $page = min(SPHINX_MAX_MATCHES / TORRENTS_PER_PAGE, $page);
+            $page = min(CONFIG['SPHINX_MAX_MATCHES'] / CONFIG['TORRENTS_PER_PAGE'], $page);
             $sq = new \SphinxqlQuery();
             $sq->select('id')
                 ->from('log, log_delta')
                 ->order_by('id', 'DESC')
-                ->limit($offset, LOG_ENTRIES_PER_PAGE, $offset + LOG_ENTRIES_PER_PAGE);
+                ->limit($offset, CONFIG['LOG_ENTRIES_PER_PAGE'], $offset + CONFIG['LOG_ENTRIES_PER_PAGE']);
             foreach (explode(' ', $searchTerm) as $s) {
                 $sq->where_match($s, 'message');
             }
@@ -75,7 +75,7 @@ class SiteLog extends \Gazelle\Base {
                 $this->queryError = $result->Error;
                 $this->logQuery = $this->db->prepared_query('SET @nothing = 0');
             } else {
-                $this->totalMatches = min(SPHINX_MAX_MATCHES, $result->get_meta('total_found'));
+                $this->totalMatches = min(CONFIG['SPHINX_MAX_MATCHES'], $result->get_meta('total_found'));
                 $logIds = $result->collect('id') ?: [0];
                 $this->logQuery = $this->db->prepared_query(
                     "
@@ -96,8 +96,8 @@ class SiteLog extends \Gazelle\Base {
         $message = '';
         $color = $colon = false;
         for ($i = 0, $n = count($messageParts); $i < $n; $i++) {
-            if (strpos($messageParts[$i], SITE_URL) === 0) {
-                $offset = strlen(SITE_URL) + 1; // trailing slash
+            if (strpos($messageParts[$i], CONFIG['SITE_URL']) === 0) {
+                $offset = strlen(CONFIG['SITE_URL']) + 1; // trailing slash
                 $messageParts[$i] = '<a href="' . substr($messageParts[$i], $offset) . '">' . substr($messageParts[$i], $offset) . '</a>';
             }
             switch ($messageParts[$i]) {

@@ -70,7 +70,7 @@ echo $Val->GenerateJS('permissionsform');
         <? } ?>
     </table>
     <?
-    include(SERVER_ROOT . "/classes/permissions_form.php");
+    include(CONFIG['SERVER_ROOT'] . "/classes/permissions_form.php");
     permissions_form();
     ?>
 </form>

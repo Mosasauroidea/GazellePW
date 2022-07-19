@@ -45,7 +45,7 @@ if (empty($IRCKey)) {
         $nick = $LoggedUser['Username'];
         $nick = preg_replace('/[^a-zA-Z0-9\[\]\\`\^\{\}\|_]/', '', $nick);
         if (strlen($nick) == 0) {
-            $nick = SITE_NAME . 'Guest????';
+            $nick = CONFIG['SITE_NAME'] . 'Guest????';
         } else {
             if (is_numeric(substr($nick, 0, 1))) {
                 $nick = '_' . $nick;
@@ -65,7 +65,7 @@ if (empty($IRCKey)) {
                         <param name="nick" value="<?= $nick ?>" />
                         <param name="alternatenick" value="WhatGuest????" />
                         <param name="name" value="Java IRC User" />
-                        <param name="host" value="<?= BOT_SERVER ?>" />
+                        <param name="host" value="<?= CONFIG['BOT_SERVER'] ?>" />
                         <param name="multiserver" value="true" />
                         <param name="autorejoin" value="false" />
 

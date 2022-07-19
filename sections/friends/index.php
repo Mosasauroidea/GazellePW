@@ -8,15 +8,15 @@ if (!empty($_REQUEST['friendid']) && !is_number($_REQUEST['friendid'])) {
 if (!empty($_REQUEST['action'])) {
     switch ($_REQUEST['action']) {
         case 'add':
-            include(SERVER_ROOT . '/sections/friends/add.php');
+            include(CONFIG['SERVER_ROOT'] . '/sections/friends/add.php');
             break;
         case 'Remove friend':
             authorize();
-            include(SERVER_ROOT . '/sections/friends/remove.php');
+            include(CONFIG['SERVER_ROOT'] . '/sections/friends/remove.php');
             break;
         case 'Update':
             authorize();
-            include(SERVER_ROOT . '/sections/friends/comment.php');
+            include(CONFIG['SERVER_ROOT'] . '/sections/friends/comment.php');
             break;
 
         case 'Contact':
@@ -26,5 +26,5 @@ if (!empty($_REQUEST['action'])) {
             error(404);
     }
 } else {
-    include(SERVER_ROOT . '/sections/friends/friends.php');
+    include(CONFIG['SERVER_ROOT'] . '/sections/friends/friends.php');
 }

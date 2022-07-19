@@ -5,12 +5,12 @@ use Gazelle\Manager\PrepaidCardStatus;
 
 View::show_header(Lang::get('donate', 'donate'), '', 'PageDonateStep2');
 
-$SiteName = SITE_NAME;
+$SiteName = CONFIG['SITE_NAME'];
 $UserID = $LoggedUser['ID'];
 
 $donation = new Donation();
 $PrepaidCardDonations = $donation->getPrepaidCardDonations($UserID);
-$Article = Wiki::get_article(DONATE_ARTILCE_ID, false);
+$Article = Wiki::get_article(CONFIG['DONATE_ARTILCE_ID'], false);
 $Body = $Article['Body'];
 list($Revision, $Title, $Body, $Read, $Edit, $Date, $AuthorID, $AuthorName, $Aliases, $UserIDs,, $FatherID) = array_shift($Article);
 ?>

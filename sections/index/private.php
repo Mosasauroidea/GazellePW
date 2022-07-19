@@ -3,7 +3,7 @@ Text::$TOC = true;
 
 $NewsCount = 5;
 if (!$News = $Cache->get_value('news')) {
-    $ForumID = NEWS_FORUM_ID;
+    $ForumID = CONFIG['NEWS_FORUM_ID'];
     $DB->query("SELECT `ID`, `Title`, `CreatedTime` , `IsSticky` FROM `forums_topics` WHERE `ForumID` = '$ForumID' AND  `IsNotice` = '1'  ORDER BY `IsSticky` DESC, `CreatedTime` DESC LIMIT $NewsCount");
     $topics = $DB->to_array(false, MYSQLI_NUM, false);
     $News = array();
@@ -298,7 +298,7 @@ View::show_header(Lang::get('index', 'index'), 'comments', 'PageHome');
         <!-- Site History -->
         <?
         include('contest_leaderboard.php');
-        if (ENABLE_SITEHISTORY) {
+        if (CONFIG['ENABLE_SITEHISTORY']) {
             SiteHistoryView::render_recent_sidebar(SiteHistory::get_events(null, null, null, null, null, null, 5));
         }
         ?>
@@ -309,8 +309,8 @@ View::show_header(Lang::get('index', 'index'), 'comments', 'PageHome');
                 <?= Lang::get('index', 'stats') ?>
             </div>
             <ul class="SidebarItem-body Box-body SidebarList">
-                <? if (USER_LIMIT > 0) { ?>
-                    <li><?= Lang::get('index', 'user_limit') ?>: <?= number_format(USER_LIMIT) ?></li>
+                <? if (CONFIG['USER_LIMIT'] > 0) { ?>
+                    <li><?= Lang::get('index', 'user_limit') ?>: <?= number_format(CONFIG['USER_LIMIT']) ?></li>
                 <?
                 }
                 if (($UserCount = $Cache->get_value('stats_user_count')) === false) {
@@ -397,7 +397,7 @@ View::show_header(Lang::get('index', 'index'), 'comments', 'PageHome');
                     list($CollageCount) = $DB->next_record();
                     $Cache->cache_value('stats_collages', $CollageCount, 11280); //staggered 1 week cache
                 }
-                if (ENABLE_COLLAGES) {
+                if (CONFIG['ENABLE_COLLAGES']) {
                 ?>
                     <li class="SidebarList-item"><?= Lang::get('index', 'collage') ?>: <?= number_format($CollageCount) ?></li>
                 <?
@@ -468,7 +468,7 @@ View::show_header(Lang::get('index', 'index'), 'comments', 'PageHome');
                 <a target="_blank" href="feeds.php?feed=feed_news&amp;user=<?= G::$LoggedUser['ID'] ?>&amp;auth=<?= G::$LoggedUser['RSS_Auth'] ?>&amp;passkey=<?= G::$LoggedUser['torrent_pass'] ?>&amp;authkey=<?= G::$LoggedUser['AuthKey'] ?>" data-tooltip="<?= Lang::get('common', 'rss') ?>">
                     <?= icon('rss') ?>
                 </a>
-                <a target="_blank" href="<?= TG_GROUP ?>" data-tooltip="<?= Lang::get('common', 'telegram') ?>">
+                <a target="_blank" href="<?= CONFIG['TG_GROUP'] ?>" data-tooltip="<?= Lang::get('common', 'telegram') ?>">
                     <?= icon('telegram') ?>
                 </a>
                 <a target="_blank" href="https://github.com/Mosasauroidea/GazellePW" data-tooltip="<?= Lang::get('common', 'github') ?>">
@@ -524,7 +524,7 @@ View::show_header(Lang::get('index', 'index'), 'comments', 'PageHome');
         </div>
         <div class="Home-stats Box">
             <div class="Box-header">
-                <? if (IS_DEV) { ?>
+                <? if (CONFIG['IS_DEV']) { ?>
                     <a href="/stats.php">
                         <?= Lang::get('index', 'stats') ?>
                     </a>

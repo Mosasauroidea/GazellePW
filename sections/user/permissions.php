@@ -15,7 +15,7 @@ if (!check_perms('admin_manage_permissions', $UserClass)) {
     error(403);
 }
 
-include(SERVER_ROOT . "/classes/permissions_form.php");
+include(CONFIG['SERVER_ROOT'] . "/classes/permissions_form.php");
 
 list($UserID, $Username, $PermissionID) = array_values(Users::user_info($_REQUEST['userid']));
 

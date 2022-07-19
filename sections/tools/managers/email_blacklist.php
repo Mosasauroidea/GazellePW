@@ -49,7 +49,7 @@ list($NumResults) = $DB->next_record();
     <div class="BodyNavLinks pager">
         <!-- <br /> -->
         <?
-        $Pages = Format::get_pages($Page, $NumResults, TOPICS_PER_PAGE, 9);
+        $Pages = Format::get_pages($Page, $NumResults, CONFIG['TOPICS_PER_PAGE'], 9);
         echo $Pages;
         ?>
     </div>
