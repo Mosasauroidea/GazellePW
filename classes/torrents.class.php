@@ -1389,7 +1389,7 @@ WHERE ud.TorrentID=? AND ui.NotifyOnDeleteDownloaded='1' AND ud.UserID NOT IN ({
             return false;
         }
 
-        return (G::$LoggedUser['FLTokens'] >= 0
+        return (G::$LoggedUser['FLTokens'] >= 1
             && !$Torrent['PersonalFL']
             && (in_array($Torrent['FreeTorrent'], ['11', '12', '13']) || empty($Torrent['FreeTorrent']))
             && G::$LoggedUser['CanLeech'] == '1');
