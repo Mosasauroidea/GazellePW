@@ -34,7 +34,7 @@ apply:
   public: public
   published: published
   referral_note: |
-    <b>Referral note: You are encouraged to refer your friends to apply for our jobs (even they are not ${CONFIG['SITE_NAME']} users yet, except applying for TI). If succeeded, you will get <span class='u-colorWarning'>3 invites</span> and <span class='u-colorWarning'>250000 BP</span> as rewards! Please use Staff PM and send a referral letter to "Staff". You need to provide basic information and contact ways in the letter.</b>
+    <b>Referral note: You are encouraged to refer your friends to apply for our jobs (even they are not {{CONFIG['SITE_NAME']}} users yet, except applying for TI). If succeeded, you will get <span class='u-colorWarning'>3 invites</span> and <span class='u-colorWarning'>250000 BP</span> as rewards! Please use Staff PM and send a referral letter to "Staff". You need to provide basic information and contact ways in the letter.</b>
   reply: Reply
   resolved: Resolved
   resolved_applications: Resolved applications
@@ -48,7 +48,7 @@ apply:
   saved: saved
   space_role: '&nbsp;Role'
   staff: staff
-  thanks_for_your_interest_in_helping: Thanks for your interest in helping ${CONFIG['SITE_NAME']}! There are no openings at the moment. Keep an eye on the front page or the ${CONFIG['SITE_NAME']} forum for announcements in the future.
+  thanks_for_your_interest_in_helping: Thanks for your interest in helping {{CONFIG['SITE_NAME']}}! There are no openings at the moment. Keep an eye on the front page or the {{CONFIG['SITE_NAME']}} forum for announcements in the future.
   the_cupboard_is_empty: The cupboard is empty. There are no applications to show.
   the_role_was_1: The role&nbsp;
   the_role_was_2: '&nbsp;was&nbsp;'
@@ -516,14 +516,14 @@ donate:
   donate: Donate
   donate_error: System error
   donation_info_1: |
-    Thank you for coming to donation page, your support will help ${CONFIG['SITE_NAME']}'s survival. If you are financially able, help pay ${CONFIG['SITE_NAME']}'s bills by donating. Before you donate, you need to know and confirm these things:
+    Thank you for coming to donation page, your support will help {{CONFIG['SITE_NAME']}}'s survival. If you are financially able, help pay {{CONFIG['SITE_NAME']}}'s bills by donating. Before you donate, you need to know and confirm these things:
       <ol id="about_donation">
-      <li>${CONFIG['SITE_NAME']} is a nonprofit organization and not sponsored, and provides its services free of charge. Supporting ${CONFIG['SITE_NAME']} is and will always remain voluntary.</li>
-      <li>${CONFIG['SITE_NAME']} uses all voluntary donations to cover the costs of running the site, tracker, and IRC network. These costs represent the hardware the site runs on (e.g. servers, upgrades, fixes, etc.), and recurring operating expenses (e.g. hosting, bandwidth, power, etc.).</li>
-      <li>When you donate you aren't paying the ${CONFIG['SITE_NAME']} Staff, purchasing upload credit, or buying the ability to download. No staff member or other individual responsible for the site's operation personally profits from user donations.</li>
-      <li>Be reminded that when you make a donation, you aren't "purchasing" Donor Ranks, invites, or any ${CONFIG['SITE_NAME']}-specific benefit. And users cannot fetch their lost privileges (e.g. account locked, download privilege banned etc.) or accounts by donating. When donating, you are helping ${CONFIG['SITE_NAME']} pay its bills, and your donation should be made in this spirit.</li>
-      <li>${CONFIG['SITE_NAME']} forbid people to gain accounts by donation permanently. Any invite by trading is individual behavior. Any account comes from trading will cause buyer and seller's accounts banned and will not be recovered forever.</li>
-      <li>${CONFIG['SITE_NAME']}'s Donor Rank system is currently available to all credited donors. This system provides donors with perks. Some of these perks are cosmetic (e.g. a donor icon added to your account), some are one-time benefits (e.g. additional invites), and others modify specific site options (e.g. additional profile information boxes, or personal collages).</li>
+      <li>{{CONFIG['SITE_NAME']}} is a nonprofit organization and not sponsored, and provides its services free of charge. Supporting {{CONFIG['SITE_NAME']}} is and will always remain voluntary.</li>
+      <li>{{CONFIG['SITE_NAME']}} uses all voluntary donations to cover the costs of running the site, tracker, and IRC network. These costs represent the hardware the site runs on (e.g. servers, upgrades, fixes, etc.), and recurring operating expenses (e.g. hosting, bandwidth, power, etc.).</li>
+      <li>When you donate you aren't paying the {{CONFIG['SITE_NAME']}} Staff, purchasing upload credit, or buying the ability to download. No staff member or other individual responsible for the site's operation personally profits from user donations.</li>
+      <li>Be reminded that when you make a donation, you aren't "purchasing" Donor Ranks, invites, or any {{CONFIG['SITE_NAME']}}-specific benefit. And users cannot fetch their lost privileges (e.g. account locked, download privilege banned etc.) or accounts by donating. When donating, you are helping {{CONFIG['SITE_NAME']}} pay its bills, and your donation should be made in this spirit.</li>
+      <li>{{CONFIG['SITE_NAME']}} forbid people to gain accounts by donation permanently. Any invite by trading is individual behavior. Any account comes from trading will cause buyer and seller's accounts banned and will not be recovered forever.</li>
+      <li>{{CONFIG['SITE_NAME']}}'s Donor Rank system is currently available to all credited donors. This system provides donors with perks. Some of these perks are cosmetic (e.g. a donor icon added to your account), some are one-time benefits (e.g. additional invites), and others modify specific site options (e.g. additional profile information boxes, or personal collages).</li>
     </ol>
   donation_info_10: |
     <strong class="u-colorWarning">Important explanation:</strong>
@@ -534,14 +534,14 @@ donate:
       <li>the upper limit of Donation Rank is 5 and will -1 per month. However the Total Donor Points (1 point = $7.5) will only increase. When Total Donor Points reach 50, your rank will not reduce any more.</li>
       <li>The reduction of Donation Rank will cause the unused additional personal collage drawback, but your invites will still be there.</li>
       <li>If you have any question, <strong>please</strong> send us a Staff PM to confirm before you donate.</li>
-      <li>The ${CONFIG['SITE_NAME']} Staff does its best to recognize ${CONFIG['SITE_NAME']}'s financial supporters in a fair and fun way, but all Donor Perks are subject to change or cancellation at any time, without notice.</li>
+      <li>The {{CONFIG['SITE_NAME']}} Staff does its best to recognize {{CONFIG['SITE_NAME']}}'s financial supporters in a fair and fun way, but all Donor Perks are subject to change or cancellation at any time, without notice.</li>
     </ul>
   donation_info_11: |
     Detail: <a href="wiki.php?action=article&id=89">Wiki</a>
   donation_info_12: |
     <ul><li>Immunity from the rules</li><li>Additional upload credit</li></ul>
   donation_info_2: ''
-  donation_info_3: Please note that  As a donor, your financial support is exclusively applied to operating costs.  When you donate you are paying ${CONFIG['SITE_NAME']}'s bills.
+  donation_info_3: Please note that  As a donor, your financial support is exclusively applied to operating costs.  When you donate you are paying {{CONFIG['SITE_NAME']}}'s bills.
   donation_info_4: ''
   donation_info_5: If you have read the instructions above and are interested in donating, you may click the button below to donate.
   donation_info_8: |
@@ -944,29 +944,29 @@ inbox:
   get_special_rank_five_pm: |
     Congratulations on reaching [url=wiki.php?action=article&id=277]Special Rank #5[/url]! You are diamond donor now. You have activated all donating awards permanently. Thank you for your kindness!
 
-    ${CONFIG['SITE_NAME']} Staff
+    {{CONFIG['SITE_NAME']}} Staff
   get_special_rank_five_sbj: You've Reached Special Donor Rank
   get_special_rank_four_pm: |
     Congratulations on reaching [url=wiki.php?action=article&id=277]Special Rank #4[/url]! You've been awarded [b]second avatar[/b]!  Your normal avatar will "flip" to this one when someone runs their mouse over the image.
 
-    ${CONFIG['SITE_NAME']} Staff
+    {{CONFIG['SITE_NAME']}} Staff
   get_special_rank_four_sbj: You've Reached Special Donor Rank
   get_special_rank_one_pm: |
     Congratulations on reaching [url=wiki.php?action=article&id=277]Special Rank #1[/url]! You can You've been awarded [url=wiki.php?action=article&id=91]Inactivity[/url] Immunity! Have fun!
-    ${CONFIG['SITE_NAME']} Staff
+    {{CONFIG['SITE_NAME']}} Staff
   get_special_rank_one_sbj: You've Reached Special Donor Rank
   get_special_rank_three_pm: |
-    Congratulations on reaching [url=wiki.php?action=article&id=277]Special Rank #3[/url]! You've been awarded [b]one user pick[/b]! This user pick will be featured on the ${CONFIG['SITE_NAME']} front page during an upcoming event. After you submit your pick, there is no guarantee as to how long it will take before your pick is featured. Picks will be featured on a first-submitted, first-served basis. Please abide by the following guidelines when making your selection:
+    Congratulations on reaching [url=wiki.php?action=article&id=277]Special Rank #3[/url]! You've been awarded [b]one user pick[/b]! This user pick will be featured on the {{CONFIG['SITE_NAME']}} front page during an upcoming event. After you submit your pick, there is no guarantee as to how long it will take before your pick is featured. Picks will be featured on a first-submitted, first-served basis. Please abide by the following guidelines when making your selection:
 
     [*]Pick something that hasn't been chosen. You can tell if a pick has been used previously by looking at the collages it's in.
     [*]Complete the enclosed form carefully and completely.
     [*]Send a [url=staffpm.php]Staff PM[/url] to request further information about the formatting of your pick, and the time at which it will be posted.
         
-    ${CONFIG['SITE_NAME']} Staff
+    {{CONFIG['SITE_NAME']}} Staff
   get_special_rank_three_sbj: You've Reached Special Donor Rank
   get_special_rank_two_pm: |
     Congratulations on reaching [url=wiki.php?action=article&id=277]Special Rank #2[/url]! You can You've been awarded a [url=badge.php]Donor Badge[/url] Immunity! Have fun!
-    ${CONFIG['SITE_NAME']} Staff
+    {{CONFIG['SITE_NAME']}} Staff
   get_special_rank_two_sbj: You've Reached Special Donor Rank
   inbox: Inbox
   is_empty: '&nbsp;is empty.'
@@ -1009,10 +1009,11 @@ inbox:
   you_cannot_start_a_conversation_with_yourself: You cannot start a conversation with yourself!
   your: Your&nbsp;
 index:
+  popular_movies: Popular Movies
   add_more: Click to load more news
   blank: Blank&#8202;&mdash;&#8202;Show the results!
   blog_note: Blog
-  browse_old_news: Browse old news
+  announcements: Announcements
   cleader: Contest Leaderboard
   click_here: click here
   collage: Collages
@@ -1694,7 +1695,7 @@ rules:
   chat_forum: Anything not allowed on the forums is also not allowed on IRC and vice versa. They are separated for convenience only.
   chat_forums: Forums Rules
   chat_forums_irc: |
-    <li>Do not belittle or slander any other tracker on any occasion under the jurisdiction of ${CONFIG['SITE_NAME']}.</li>
+    <li>Do not belittle or slander any other tracker on any occasion under the jurisdiction of {{CONFIG['SITE_NAME']}}.</li>
     <li>Everyone began from a greenhand. Please help new users patiently if possible.</li>
   chat_forums_rules: |
     <li>Read the rule of the forum before posting.</li>
@@ -1737,7 +1738,7 @@ rules:
   end: 分享率规则"
   golden_rules: Golden Rules
   golden_rules_de: These are the most important rules. Breaking these rules will result in the most serious consequences.
-  golden_rules_used: The Golden Rules encompass all of ${CONFIG['SITE_NAME']} and the ${CONFIG['SITE_NAME']} IRC network. These rules are paramount; non-compliance will jeopardize your account.
+  golden_rules_used: The Golden Rules encompass all of {{CONFIG['SITE_NAME']}} and the {{CONFIG['SITE_NAME']}} IRC network. These rules are paramount; non-compliance will jeopardize your account.
   hnr: Hit and Run
   hnr_rules_body: >-
     <strong>What is Hit and Run (H&R):</strong><br/><ul> <li>H&R means after snatched a torrent, the downloader doesn't seed or the seeding time doesn't meet the requirement. A torrent doesn't meet the requirement will make your H&R +1.</li> <li>After downloading 20% data of a torrent, you need to seed until meet the requirement. The requirement is totally seed for 48 hours in 2 weeks or at least one full copy.</li> <li>Once your H&Rs reach 10, your downloading priviledge will be temporarily
@@ -1751,14 +1752,14 @@ rules:
   long_22: |
     Only invite people you know and trust. Do not offer invites via other trackers, forums, social media, or other public locations. Responding to public invite requests is prohibited. Exception: Staff-designated recruiters may offer invites in approved locations.
   long_23: >-
-    You may visit invite forum of ${CONFIG['SITE_NAME']} when you reach Power User and above. Some trackers only allow offical recruitment, their invites may not be offered or requested on the forums in other trackers. You need to read <a href="forums.php?action=viewthread&threadid=15">Rules on Section of Requesting Invites</a> and <a href="forums.php?action=viewthread&threadid=100">Do Not Request Invites List</a> before you request an invite. You may request invites by messaging users only when they have
+    You may visit invite forum of {{CONFIG['SITE_NAME']}} when you reach Power User and above. Some trackers only allow offical recruitment, their invites may not be offered or requested on the forums in other trackers. You need to read <a href="forums.php?action=viewthread&threadid=15">Rules on Section of Requesting Invites</a> and <a href="forums.php?action=viewthread&threadid=100">Do Not Request Invites List</a> before you request an invite. You may request invites by messaging users only when they have
     offered them in the Invites Forum. Unsolicited invite requests, even by private message, are prohibited.
-  long_24: Do not mention "${CONFIG['SITE_NAME']}" in any public area. And do not reveal our site url or tracker url. Please hide our Logo when you capturing a screenshot.
+  long_24: Do not mention "{{CONFIG['SITE_NAME']}}" in any public area. And do not reveal our site url or tracker url. Please hide our Logo when you capturing a screenshot.
   long_31: Transferring buffer&mdash;or increasing your buffer&mdash;through unintended uses of the BitTorrent protocol or site features (e.g., <a href="rules.php?p=requests">request abuse</a>) constitutes ratio manipulation. When in doubt, send a <a href='staffpm.php'>Staff PM</a> asking for more information.
   long_32: Reporting incorrect data to the tracker constitutes cheating, whether it is accomplished through the use of a modified "cheat client" or through manipulation of an approved client.
   long_33: Your client must be listed on the <a href="rules.php?p=clients">Client Whitelist</a>. You must not use clients that have been modified in any way. Developers interested in testing unstable clients must receive staff approval prior to testing.
-  long_34: Embedding non-${CONFIG['SITE_NAME']} announce URLs in ${CONFIG['SITE_NAME']} .torrents is prohibited. Doing so causes false data to be reported and will be interpreted as cheating. This applies to standalone .torrent files and .torrent files that have been loaded into a client.
-  long_35: Embedded in each ${CONFIG['SITE_NAME']} .torrent file is an announce URL containing your personal passkey. Passkeys enable users to report stats to the tracker.
+  long_34: Embedding non-{{CONFIG['SITE_NAME']}} announce URLs in {{CONFIG['SITE_NAME']}} .torrents is prohibited. Doing so causes false data to be reported and will be interpreted as cheating. This applies to standalone .torrent files and .torrent files that have been loaded into a client.
+  long_35: Embedded in each {{CONFIG['SITE_NAME']}} .torrent file is an announce URL containing your personal passkey. Passkeys enable users to report stats to the tracker.
   long_41: Exposing or threatening to expose private information about users for any reason is prohibited. Private information includes, but is not limited to, personally identifying information (e.g., names, records, biographical details, photos). Information that has not been openly volunteered by a user should not be discussed or shared without permission. This includes private information collected via investigations into openly volunteered information (e.g., Google search results).
   long_42: Scams (e.g., phishing) of any kind are prohibited.
   long_43: Disagreements must be discussed privately with the deciding moderator. If the moderator has retired or is unavailable, you may send a <a href='staffpm.php'>Staff PM</a>. Do not contact multiple moderators hoping to find one amenable to your cause; however, you may contact a site administrator if you require a second opinion. Options for contacting staff include private message, Staff PM, and
@@ -1766,15 +1767,15 @@ rules:
   long_45: |
     "Backseat moderation" occurs when users police other users. Confronting, provoking, or chastising users suspected of violating rules&mdash;or users suspected of submitting reports&mdash;is prohibited. Submit a report if you see a rule violation.
   long_46: Special events (e.g., freeleech, neutral leech, picks) are launched at the discretion of the staff. They do not adhere to a fixed schedule, and may not be requested by users.
-  long_47: It is prohibited to use ${CONFIG['SITE_NAME']}'s services to harvest user-identifying information of any kind (e.g., IP addresses, personal links) through the use of scripts, exploits, or other techniques.
-  long_48: Commercializing services provided by or code maintained by ${CONFIG['SITE_NAME']} (e.g., Gazelle, Ocelot) is prohibited. Commercializing content provided by ${CONFIG['SITE_NAME']} users via the aforementioned services (e.g., user torrent data) is prohibited. Referral schemes, financial solicitations, and money offers are also prohibited.
+  long_47: It is prohibited to use {{CONFIG['SITE_NAME']}}'s services to harvest user-identifying information of any kind (e.g., IP addresses, personal links) through the use of scripts, exploits, or other techniques.
+  long_48: Commercializing services provided by or code maintained by {{CONFIG['SITE_NAME']}} (e.g., Gazelle, Ocelot) is prohibited. Commercializing content provided by {{CONFIG['SITE_NAME']}} users via the aforementioned services (e.g., user torrent data) is prohibited. Referral schemes, financial solicitations, and money offers are also prohibited.
   long_51: You may browse the site through a VPN/proxy only if you have paid for this service. This includes (for example) self-hosted VPNs or proxies, services like NordVPN and VPNs or proxies that come with a seedbox. The use of Tor for browsing the site or seeding is not allowed. You may seed from up to 3 IPs at the same time. When in doubt, please send a <a href='staffpm.php'>Staff PM</a>. <i class="u-colorWarning">Update! 2021-06-23</i>
   long_52: All automated site access must be done through the <a href="https://github.com/WhatCD/Gazelle/wiki/JSON-API-Documentation">API</a>. API use is limited to 5 requests within any 10-second window. Scripts and other automated processes must not scrape the site's HTML pages. When in doubt, seek advice from staff.
-  long_53: The automatic snatching of freeleech torrents using any method involving little or no user-input (e.g., API-based scripts, log or site scraping, etc.) is prohibited. See ${CONFIG['SITE_NAME']}'s <a href="wiki.php?action=article&id=63">Freeleech Autosnatching Policy</a> article for more information.
-  long_61: Seeking or exploiting bugs in the live site (as opposed to a local development environment) is prohibited. If you discover a critical bug or security vulnerability, immediately report it in accordance with ${CONFIG['SITE_NAME']}'s <a href="wiki.php?action=article&id=64">Responsible Disclosure Policy</a>. Non-critical bugs can be reported in the <a href="forums.php?action=viewforum&forumid=16">Bugs Forum</a>.
+  long_53: The automatic snatching of freeleech torrents using any method involving little or no user-input (e.g., API-based scripts, log or site scraping, etc.) is prohibited. See {{CONFIG['SITE_NAME']}}'s <a href="wiki.php?action=article&id=63">Freeleech Autosnatching Policy</a> article for more information.
+  long_61: Seeking or exploiting bugs in the live site (as opposed to a local development environment) is prohibited. If you discover a critical bug or security vulnerability, immediately report it in accordance with {{CONFIG['SITE_NAME']}}'s <a href="wiki.php?action=article&id=64">Responsible Disclosure Policy</a>. Non-critical bugs can be reported in the <a href="forums.php?action=viewforum&forumid=16">Bugs Forum</a>.
   long_62: The publication, organization, dissemination, sharing, technical discussion, or technical facilitation of exploits is prohibited at staff discretion. Exploits are defined as unanticipated or unaccepted uses of internal, external, non-profit, or for-profit services. Exploits are subject to reclassification at any time.
-  long_70: Staff on ${CONFIG['SITE_NAME']} are volunteers who dedicate their time in order to keep the site running, without receiving any compensation. Being disrespectful to them is prohibited, and might result in a warning or worse.
-  long_71: All rules on ${CONFIG['SITE_NAME']} may be subject to different interpretations. Since the staff wrote these rules, their interpretation is final. If you need clarification on a rule, or if you think a rule should be restated, please send a <a href='staffpm.php'>Staff PM</a>.
+  long_70: Staff on {{CONFIG['SITE_NAME']}} are volunteers who dedicate their time in order to keep the site running, without receiving any compensation. Being disrespectful to them is prohibited, and might result in a warning or worse.
+  long_71: All rules on {{CONFIG['SITE_NAME']}} may be subject to different interpretations. Since the staff wrote these rules, their interpretation is final. If you need clarification on a rule, or if you think a rule should be restated, please send a <a href='staffpm.php'>Staff PM</a>.
   ratio: Ratio
   ratio_1: |
     <strong>1: Determine the maximum and minimum possible values of your required ratio.</strong> Using the table above, determine your amount downloaded bracket from the first column.
@@ -1866,7 +1867,7 @@ rules:
   short_31: Do not engage in ratio manipulation.
   short_32: Do not report incorrect data to the tracker (i.e., cheating).
   short_33: Do not use unapproved clients.
-  short_34: Do not modify ${CONFIG['SITE_NAME']} .torrent files.
+  short_34: Do not modify {{CONFIG['SITE_NAME']}} .torrent files.
   short_35: Do not share .torrent files or your passkey.
   short_41: Do not blackmail, threaten, or expose fellow users or staff.
   short_42: Do not scam or defraud.
@@ -1875,8 +1876,8 @@ rules:
   short_45: Do not backseat moderate.
   short_46: Do not request special events.
   short_47: Do not harvest user-identifying information.
-  short_48: Do not use ${CONFIG['SITE_NAME']}'s services (including the tracker, website, and IRC network) for commercial gain.
-  short_51: Do not browse ${CONFIG['SITE_NAME']} using any free proxy or VPN service.
+  short_48: Do not use {{CONFIG['SITE_NAME']}}'s services (including the tracker, website, and IRC network) for commercial gain.
+  short_51: Do not browse {{CONFIG['SITE_NAME']}} using any free proxy or VPN service.
   short_52: Do not abuse automated site access.
   short_53: Do not autosnatch freeleech torrents.
   short_61: Do not seek or exploit live bugs for any reason.
@@ -1957,7 +1958,7 @@ rules:
     </li>
 
     <li id='r1.1.6'><a href='#h1.1'><strong></strong></a> <a href='#r1.1.6'>1.1.6.</a>
-        <strong>Documentary series: </strong>A documentary likes <a href='#r1.1.4'>1.1.4</a>, each season has a theme (e.g. BBC's Blue Planet 1 & 2); or likes <a href='#r1.1.5'>1.1.5</a>, each episode is self-referential (e.g. ESPN 30 for 30) is allowed on ${CONFIG['SITE_NAME']}. Please <a href='forums.php?action=viewthread&threadid=21'>ask for staff approval</a> if you are not sure.
+        <strong>Documentary series: </strong>A documentary likes <a href='#r1.1.4'>1.1.4</a>, each season has a theme (e.g. BBC's Blue Planet 1 & 2); or likes <a href='#r1.1.5'>1.1.5</a>, each episode is self-referential (e.g. ESPN 30 for 30) is allowed on {{CONFIG['SITE_NAME']}}. Please <a href='forums.php?action=viewthread&threadid=21'>ask for staff approval</a> if you are not sure.
     </li>
 
     <li id='r1.1.7'><a href='#h1.1'><strong></strong></a> <a href='#r1.1.7'>1.1.7.</a>
@@ -2234,7 +2235,7 @@ rules:
 
     </li>
 
-    <li id='r3.6.2'><a href='#h3.6'><strong></strong></a> <a href='#r3.6.2'>3.6.2.</a> <strong>Subtitle formats allowed by ${CONFIG['SITE_NAME']} are .sub, .idx, .sup, .srt, .vtt, .ass, .smi, and .ssa. </strong>They can also be compressed to .rar, .zip, .7z, .tar, .tgz, or .tar.gz.
+    <li id='r3.6.2'><a href='#h3.6'><strong></strong></a> <a href='#r3.6.2'>3.6.2.</a> <strong>Subtitle formats allowed by {{CONFIG['SITE_NAME']}} are .sub, .idx, .sup, .srt, .vtt, .ass, .smi, and .ssa. </strong>They can also be compressed to .rar, .zip, .7z, .tar, .tgz, or .tar.gz.
 
     </li>
 
@@ -2783,7 +2784,7 @@ rules:
   upload_h5k: Trumping
   upload_h61k: Don't upload things that you don't have full access to. You have to make sure that you can do anything to the torrents or content before you upload them no matter where they are (locally or on the seedbox).
   upload_h62k: Don't upload torrents that you don't plan to seed. We ask you to seed at least 48 hours in 2 weeks or until the ratio reach 1. This rule is also for uploaders, please read <a href='rules.php?p=ratio'>H&R Rules</a> for more information.
-  upload_h63k: Seeding as long as you can. ${CONFIG['SITE_NAME']} plan to be a library for all movies and all formats permanently. Longer seeding, better tracker. As a member of ${CONFIG['SITE_NAME']}, you need to be strict with yourself.
+  upload_h63k: Seeding as long as you can. {{CONFIG['SITE_NAME']}} plan to be a library for all movies and all formats permanently. Longer seeding, better tracker. As a member of {{CONFIG['SITE_NAME']}}, you need to be strict with yourself.
   upload_h64k: Consider your situation when uploading torrents. You may reduce your upload frequency if your net speed is slow. DO NOT limit your bandwidth deliberately.
   upload_h6k: Others
   upload_introk: Introduction
@@ -2898,7 +2899,7 @@ subtitles:
     <ul>
       <li id='r3.6.1'><a href='rules.php?p=upload#r3.6.1'>1.</a> <strong>The subtitle uploaded by a user must be synchronized with the specific video file, otherwise it will be deleted directly.</strong>
       </li>
-      <li id='r3.6.2'><a href='rules.php?p=upload#r3.6.2'>2.</a> <strong>Subtitle formats allowed by ${CONFIG['SITE_NAME']} are .sub, .idx, .sup, .srt, .vtt, .ass, .smi, and .ssa. </strong>They can also be compressed to .rar, .zip, .7z, .tar, .tgz, or .tar.gz.
+      <li id='r3.6.2'><a href='rules.php?p=upload#r3.6.2'>2.</a> <strong>Subtitle formats allowed by {{CONFIG['SITE_NAME']}} are .sub, .idx, .sup, .srt, .vtt, .ass, .smi, and .ssa. </strong>They can also be compressed to .rar, .zip, .7z, .tar, .tgz, or .tar.gz.
       </li>
       <li id='r3.6.3'><a href='rules.php?p=upload#r3.6.3'>3.</a> <strong>It's recommend for a subtitle to use the consistent file name to the video file.</strong>Adding a language tag on the tail is allowed, e.g. "Monsters.Inc.2001.1080p.BluRay.DTS.x264.D-Z0N3.chs.srt".
       </li>
@@ -3069,7 +3070,7 @@ tools:
   cashe_storage_title: Evictions begin when storage exceeds 85%
   cashe_total_index: Cache Total Index
   category: Category
-  category_manager: Category manager
+  category_manager: Forum Category manager
   certain_size_torrents: Certain size torrents
   certain_torrent_groups: Certain torrent groups
   certain_torrents: Certain torrents
@@ -3142,7 +3143,7 @@ tools:
   drag_and_drop_table_rows_to_reorder: Drag and drop table rows to reorder.
   drive: Drive
   drive_offsets: Drive Offsets
-  drive_offsets_notice: This page lists all of the stored Drive Offsets on ${CONFIG['SITE_NAME']}. We use these offsets to check the offset listed in a rip log file. This information comes from <a href="http://www.accuraterip.com/driveoffsets.htm" target="_blank" rel="noreferrer nofollow">Accuraterip</a>.
+  drive_offsets_notice: This page lists all of the stored Drive Offsets on {{CONFIG['SITE_NAME']}}. We use these offsets to check the offset listed in a rip log file. This information comes from <a href="http://www.accuraterip.com/driveoffsets.htm" target="_blank" rel="noreferrer nofollow">Accuraterip</a>.
   dupe_ips: Dupe IPs
   dupes: Dupes
   duplicate_ip_addresses: Duplicate IP addresses
@@ -3605,17 +3606,17 @@ top10:
   free: freeleech
   ft_torrents: Filter torrents
   hide: Hide
-  in_the_past_day: Most Active Torrents Uploaded in the Past Day
-  in_the_past_month: Most Active Torrents Uploaded in the Past Month
-  in_the_past_week: Most Active Torrents Uploaded in the Past Week
-  in_the_past_year: Most Active Torrents Uploaded in the Past Year
+  in_the_past_day: Most Active %s Uploaded in the Past Day
+  in_the_past_month: Most Active %s Uploaded in the Past Month
+  in_the_past_week: Most Active %s Uploaded in the Past Week
+  in_the_past_year: Most Active %s Uploaded in the Past Year
   joined: Joined
   last_donated: Last Donated
-  most_data: Most Data Transferred Torrents
+  most_data: Most Data Transferred %s
   most_highly_voted_tags: Most Highly Voted Tags
-  most_seed: Best Seeded Torrents
-  most_snatched: Most Snatched Torrents
-  most_torrents: Most Active Torrents of All Time
+  most_seed: Best Seeded %s
+  most_snatched: Most Snatched %s
+  most_torrents: Most Active %s of All Time
   most_used_request_tags: Most Used Request Tags
   most_used_torrent_tags: Most Used Torrent Tags
   name: Name
@@ -3651,7 +3652,9 @@ top10:
   top_donors: Top Donors
   top_n_donors: Top Donors
   top_torrents: Torrents
+  top_movies: Movies
   torrents: Torrents
+  movies: Movies
   torrents_uploaded: Torrents Uploaded
   total_donor_points: Total Donor Points
   type: Type
@@ -4488,15 +4491,15 @@ user:
   invite_note: Invite note
   invite_rules_1: |
     <a href="/rules.php#gr1.1">One account per person</a>. Have more than one account will cause all relative accounts disabled.
-    Do not invite people who used to have a ${CONFIG['SITE_NAME']} account, even though the person is your acquaintance. If you invite someone used to be disabled, you may be banned forever. If they want to enable their accounts again, lead them to Auto-Enable feature, QQ Group, TG Group or ask friends to send a <a href="/staffpm.php">Staff PM</a>.
+    Do not invite people who used to have a {{CONFIG['SITE_NAME']}} account, even though the person is your acquaintance. If you invite someone used to be disabled, you may be banned forever. If they want to enable their accounts again, lead them to Auto-Enable feature, QQ Group, TG Group or ask friends to send a <a href="/staffpm.php">Staff PM</a>.
   invite_rules_2: |
     <a href="/rules.php#gr2.1">Do not invite bad users</a>. Do not invite bad users.  You are responsible for your invitees. You will not be punished if your invitees fail to maintain required share ratios, but invitees who break <a href="/rules.php">golden rules</a> will place your invite privileges and account at risk.
   invite_rules_3: |
     <a href="/rules.php#gr2.2">Do not trade, sell, publicly give away, or publicly offer invites</a>. Only invite people you know and trust. Do not offer invites via other trackers, forums, social media, or other public locations. Responding to public invite requests is prohibited. Exception: Staff-designated recruiters may offer invites in approved locations.
-  invite_rules_4: Do not use illicit invite forums. Note that "friends" from illicit invite forums will never be considered friends by ${CONFIG['SITE_NAME']} and you and your tree will be permanently banned if you invite someone from any illicit invite forum.
+  invite_rules_4: Do not use illicit invite forums. Note that "friends" from illicit invite forums will never be considered friends by {{CONFIG['SITE_NAME']}} and you and your tree will be permanently banned if you invite someone from any illicit invite forum.
   invite_rules_5: Obey the rules of the place where you are offering invites at.
   invite_rules_6: Do not send an invite if you have not read or do not understand the information above.
-  invite_rules_7: Tell your invitee to add noreply@${CONFIG['MAIL_HOST']} to email whitelist before you send invite.
+  invite_rules_7: Tell your invitee to add noreply@{{CONFIG['MAIL_HOST']}} to email whitelist before you send invite.
   invite_tree: Invite tree
   invitee_list: Invitee list
   invitees: Invitees
@@ -4546,7 +4549,7 @@ user:
   mature: Mature content (forums, comments, profiles)
   mature_show: Display mature content
   mature_title: >-
-    ${CONFIG['SITE_NAME']} has very flexible &lt;a href=&quot;wiki.php?action=article&amp;amp;id=1063&quot;&gt;mature content policies&lt;/a&gt; for all community areas. Choosing to display mature content will allow you to click-through to view any content posted beneath &lt;code&gt;[mature]&lt;/code&gt; tags. If you choose not to display mature content, all content tagged with &lt;code&gt;[mature]&lt;/code&gt; tags will be hidden from you.' data-title-plain='${CONFIG['SITE_NAME']} has very flexible mature content
+    {{CONFIG['SITE_NAME']}} has very flexible &lt;a href=&quot;wiki.php?action=article&amp;amp;id=1063&quot;&gt;mature content policies&lt;/a&gt; for all community areas. Choosing to display mature content will allow you to click-through to view any content posted beneath &lt;code&gt;[mature]&lt;/code&gt; tags. If you choose not to display mature content, all content tagged with &lt;code&gt;[mature]&lt;/code&gt; tags will be hidden from you.' data-title-plain='{{CONFIG['SITE_NAME']}} has very flexible mature content
     policies for all community areas. Choosing to display mature content will allow you to click-through to view any content posted beneath [mature] tags. If you choose not to display mature content, all content tagged with [mature] tags will be hidden from you.
   menu: Sections
   merge_from: Merge from
@@ -4757,7 +4760,7 @@ user:
   st_2fa_note3: Click here to&nbsp;
   st_2fa_period: Two-factor Authentication.&nbsp;
   st_access: Access Settings
-  st_access_title: These settings control your login and access details for <?=${CONFIG['SITE_NAME']}?>, the site's IRC network, and the tracker.
+  st_access_title: These settings control your login and access details for <?={{CONFIG['SITE_NAME']}}?>, the site's IRC network, and the tracker.
   st_all: All Settings
   st_all_title: View the full list of user settings.
   st_avatar: Avatar URL
@@ -4781,7 +4784,7 @@ user:
   st_donorlink_title: Congratulations! You've unlocked this option by reaching Donor Rank
   st_email: Email address
   st_email_note: When changing your email address, you must enter your current password in the &quot;Current password&quot; field before saving your changes.
-  st_email_title: This is the email address you want associated with your <?=${CONFIG['SITE_NAME']}?> account. It will be used if you forget your password or if an alert needs to be sent to you.
+  st_email_title: This is the email address you want associated with your <?={{CONFIG['SITE_NAME']}}?> account. It will be used if you forget your password or if an alert needs to be sent to you.
   st_lastactivity: Recent activity
   st_lastseen: Last seen
   st_lastseen_title: Enable this to allow others to see when your most recent site activity occurred.
@@ -4849,7 +4852,7 @@ user:
   style_tool: Styled tooltips
   style_tool_title: Use styled tooltips instead of the browser's default when hovering elements with extra information (such as this one).
   stylesheet: Stylesheet
-  stylesheet_title: Selecting a stylesheet will change ${CONFIG['SITE_NAME']}'s visual appearance.
+  stylesheet_title: Selecting a stylesheet will change {{CONFIG['SITE_NAME']}}'s visual appearance.
   subject: Subject
   submit: Submit
   super_toasty: Super Toasty
@@ -4861,7 +4864,7 @@ user:
   tg_binding_binded: Binded
   tg_binding_key: Binding key
   tg_binding_right8: '&nbsp;(last 8 digits of your Passkey)'
-  tg_binding_span: Please join <a target="_blank" href="${CONFIG['TG_GROUP']}">Official Telegram group</a>，type <code>/gohome</code>，bind your Telegram to your account follow the prompts.
+  tg_binding_span: Please join <a target="_blank" href="{{CONFIG['TG_GROUP']}}">Official Telegram group</a>，type <code>/gohome</code>，bind your Telegram to your account follow the prompts.
   tg_binding_status: Binding status
   tg_binding_unbind: Unbind
   the_total_amount_downloaded_was: ; the total amount downloaded was&nbsp;

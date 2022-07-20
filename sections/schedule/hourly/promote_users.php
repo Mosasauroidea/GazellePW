@@ -66,7 +66,7 @@ foreach ($UserPromoteCriteria as $L) { // $L = Level
 					SET AdminComment = CONCAT('" . sqltime() . " - Class changed to " . Users::make_class_string($L['To']) . " by System\n\n', AdminComment)
 					WHERE UserID = $UserID");
 
-            Misc::send_pm_with_tpl($UserID, 'promote_users', ['UserClass' => Users::make_class_string($L['To']), 'SITE_NAME' => CONFIG['SITE_NAME']]);
+            Misc::send_pm_with_tpl($UserID, 'promote_users', ['UserClass' => Users::make_class_string($L['To']), 'CONFIG' => CONFIG]);
             if ($L['Invite']) {
                 $DB->query("select AwardLevel from users_main where ID=$UserID and AwardLevel < " . $L['AwardLevel']);
                 $AwardLevel = $DB->collect('AwardLevel');

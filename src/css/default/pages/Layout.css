@@ -59,6 +59,7 @@ LayoutBody                    # gap
   display: flex;
   flex-direction: column;
   gap: var(--global-space-lg);
+  overflow: hidden;
 }
 .LayoutMainSidebar-sidebar {
   order: 2;

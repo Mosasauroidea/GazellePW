@@ -1,0 +1,12 @@
+.TableForumControlPanel {
+  white-space: nowrap;
+}
+.TableForumControlPanel .Table-cell.is-name {
+  min-width: 200px;
+}
+.TableForumControlPanel .Table-cell.is-description {
+  min-width: 300px;
+}
+.TableForumControlPanel .Table-cell.is-sort {
+  min-width: 50px;
+}

@@ -10,18 +10,18 @@ common:
   are_you_sure_you_wish_to_delete_this_post: Are you sure you wish to delete this post?
   check_all: Check all
   cinematographer: Cinematographer
-  collapse_this_group: Collapse this group. Hold [Command] <em>(Mac)</em> or [Ctrl] <em>(PC)</em> while clicking to collapse all groups {0}
+  collapse_this_group: Collapse this group. Hold [Command] <em>(Mac)</em> or [Ctrl] <em>(PC)</em> while clicking to collapse all groups {{section}}
   composer: Composer
-  confirm_purchase: Are you sure you want to purchase {0}?
+  confirm_purchase: Are you sure you want to purchase {{item}}?
   confirm_username: 'Enter username to give tokens to:'
   copied: Copied
   director: Director
-  expand_this_group: Expand this group. Hold [Command] <em>(Mac)</em> or [Ctrl] <em>(PC)</em> while clicking to expand all groups {0}
+  expand_this_group: Expand this group. Hold [Command] <em>(Mac)</em> or [Ctrl] <em>(PC)</em> while clicking to expand all groups {{section}}
   hide: Hide
   in_this_release_type: in this release type.
   like: Like
   on_this_page: on this page.
-  pm_user_on_edit: <span id="pmbox{0}"><label>PM user on edit? <input type="checkbox" name="pm" value="1" /></label></span>
+  pm_user_on_edit: <span id="pmbox{{postId}}"><label>PM user on edit? <input type="checkbox" name="pm" value="1" /></label></span>
   producer: Producer
   request_has_been_unresolved: The request has been un-resolved. Please refresh your browser to see it.
   uncheck_all: Uncheck all
@@ -30,8 +30,8 @@ common:
 error:
   imdb_unknown_error: Unknown error, please contact staff.
   invalid_imdb_link_note: Please enter a valid IMDb link like "tt1234567" or "https://www.imdb.com/title/tt1234567".
-  request_torrent_group_exists_note: The movie already <a href='/torrents.php?id={0}'>exists</a> on the site. Please make sure the format you request does not exist and use the [Request format] link to request your expect format for the movie.
-  torrent_group_exists_note: The movie already <a href='/torrents.php?id={0}'>exists</a> on the site. Please make sure that you're not uploading a duplicate and use the [Add format] link to upload a new format for the movie.
+  request_torrent_group_exists_note: The movie already <a href='/torrents.php?id={{groupId}}'>exists</a> on the site. Please make sure the format you request does not exist and use the [Request format] link to request your expect format for the movie.
+  torrent_group_exists_note: The movie already <a href='/torrents.php?id={{groupId}}'>exists</a> on the site. Please make sure that you're not uploading a duplicate and use the [Add format] link to upload a new format for the movie.
 screenshot_comparison:
   gpw_helper_not_installed: Please install <a href="https://greasyfork.org/scripts/445653-gpw-helper/code/GPW-Helper.user.js" target="_blank">GPW Helper</a> and reload the page
   help: Press ? to read help

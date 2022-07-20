@@ -29,6 +29,7 @@ GazellePW (GazellePosterWall) is a web framework geared towards private BitTorre
 
 Any contributions you make are greatly appreciated!
 
+- Translate the documentation and site into your language.
 - Please report bugs by submitting a [Issues](https://github.com/Mosasauroidea/GazellePW/issues/new/choose).
 - Please submit contributions using [Pull requests](https://github.com/Mosasauroidea/GazellePW/pulls).
 

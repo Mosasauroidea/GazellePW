@@ -1,4 +1,6 @@
 <?php
+include(CONFIG['SERVER_ROOT'] . '/classes/torrenttable.class.php');
+require(CONFIG['SERVER_ROOT'] . '/classes/top10_movies.class.php');
 Text::$TOC = true;
 
 $NewsCount = 5;
@@ -479,48 +481,71 @@ View::show_header(Lang::get('index', 'index'), 'comments', 'PageHome');
     </div>
 
     <div class="LayoutMainSidebar-main">
-        <div class="PostList PostListNews">
-            <?
-            $Count = 0;
-            foreach ($News as $NewsItem) {
-                list($NewsID, $Title, $Body, $NewsTime, $IsSticky) = $NewsItem;
-                if (strtotime($NewsTime) > time()) {
-                    continue;
-                }
-            ?>
-                <div id="news<?= $NewsID ?>" class="Post Box news_post">
-                    <div class="Post-header Box-header">
-                        <div class="Post-headerLeft">
-                            <span class="Post-headerTitle HtmlText">
-                                <?= Text::full_format($Title) ?>
-                            </span>
-                            <?= time_diff($NewsTime); ?>
-                        </div>
-                        <div class="Post-headerActions">
-                            <a class="brackets" href="forums.php?action=viewthread&amp;threadid=<?= $NewsID ?>">
-                                <?= Lang::get('index', 'discuss') ?>
-                            </a>
-                            -
-                            <a class="Post-toggleButton brackets <?= $IsSticky ? 'is-sticky' : '' ?>" href="#" onclick="$('#newsbody<?= $NewsID ?>').gtoggle(); this.innerHTML = (this.innerHTML == '<?= Lang::get('global', 'hide') ?>' ? '<?= Lang::get('global', 'show') ?>' : '<?= Lang::get('global', 'hide') ?>'); return false;">
-                                <?= Lang::get('index', 'show') ?>
-                            </a>
-                        </div>
-                    </div>
-                    <div id="newsbody<?= $NewsID ?>" class="HtmlText PostArticle Post-body Box-body hidden">
-                        <?= Text::full_format($Body) ?>
-                    </div>
-                </div>
+        <!-- Active Movies -->
+        <div class="IndexTop10Movie Box">
+            <div class="Box-header">
+                <?= Lang::get('index', 'popular_movies') ?>
+            </div>
+            <div class="Box-body">
                 <?
-                if (++$Count > ($NewsCount - 1)) {
-                    break;
-                }
+                $Top10Movies = new Top10Movies();
+                $Data = $Top10Movies->getData(
+                    'active_week',
+                    [
+                        'Limit' => 10,
+                    ]
+                );
+                $tableRender = new TorrentGroupCoverTableView($Data);
+                $tableRender->render([
+                    'Variant' => 'OneLine'
+                ]);
                 ?>
-            <? } ?>
-            <em id="more_news">
-                <a href="forums.php?action=viewforum&amp;forumid=7">
-                    <?= Lang::get('index', 'browse_old_news') ?>
+            </div>
+        </div>
+
+        <!-- Anouncements -->
+        <div class="PostBox Box">
+            <div class="Box-header">
+                <a href="forums.php?action=viewforum&amp;forumid=<?= CONFIG['ANNOUNCEMENT_FORUM_ID'] ?>">
+                    <?= Lang::get('index', 'announcements') ?>
                 </a>
-            </em>
+            </div>
+            <div class="Box-body PostList PostListNews">
+                <?
+                $Count = 0;
+                foreach ($News as $NewsItem) {
+                    list($NewsID, $Title, $Body, $NewsTime, $IsSticky) = $NewsItem;
+                    if (strtotime($NewsTime) > time()) {
+                        continue;
+                    }
+                ?>
+                    <div id="news<?= $NewsID ?>" class="Post news_post">
+                        <div class="Post-header">
+                            <div class="Post-headerLeft">
+                                <a class="Post-headerTitle HtmlText  <?= $IsSticky ? 'is-sticky' : '' ?>" href="#" onclick="$('#newsbody<?= $NewsID ?>').gtoggle(); return false;">
+                                    <?= Text::full_format($Title) ?>
+                                </a>
+                            </div>
+                            <div class="Post-headerActions">
+                                <?= time_diff($NewsTime); ?>
+                            </div>
+                        </div>
+                        <div id="newsbody<?= $NewsID ?>" class="HtmlText PostArticle Post-body hidden">
+                            <?= Text::full_format($Body) ?>
+                            <div>
+                                <a class="brackets" href="forums.php?action=viewthread&amp;threadid=<?= $NewsID ?>">
+                                    <?= Lang::get('index', 'discuss') ?>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <?
+                    if (++$Count > ($NewsCount - 1)) {
+                        break;
+                    }
+                    ?>
+                <? } ?>
+            </div>
         </div>
         <div class="Home-stats Box">
             <div class="Box-header">

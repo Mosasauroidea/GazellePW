@@ -134,7 +134,7 @@ function Edit_Form(post, key) {
       .attr('href')
       .split('=')[1]
     if (postuserid != userid) {
-      pmbox = lang.format(lang.get('common.pm_user_on_edit'), postid)
+      pmbox = lang.get('common.pm_user_on_edit', { postId: postid })
     } else {
       pmbox = ''
     }

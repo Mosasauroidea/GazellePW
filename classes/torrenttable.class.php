@@ -9,8 +9,10 @@ interface SortLink {
 class TorrentGroupCoverTableView extends GroupTorrentTableView {
     /* { UseTorrentID => false } */
     public function render($options = []) {
+        $Class = $options['class'];
+        $Variant = $options['Variant'];
 ?>
-        <div class="TorrentCover">
+        <div class="TorrentCover <?= $Class ?>" variant="<?= $Variant ?>">
             <?
             foreach ($this->Groups as $RS) {
                 $Name = Torrents::group_name($RS, false);
@@ -40,7 +42,10 @@ class UngroupTorrentSimpleListView extends UngroupTorrentTableView {
         return $this;
     }
 
-    public function render() {
+    public function render($Options = []) {
+        $Options = array_merge([
+            'NoActions' => false,
+        ], $Options)
     ?>
         <div class="TableContainer UngroupTorrentSimpleListView">
             <? if (!empty($this->Torrents)) { ?>
@@ -49,7 +54,7 @@ class UngroupTorrentSimpleListView extends UngroupTorrentTableView {
                         <?
                         $this->render_header();
                         foreach ($this->Torrents as $Idx => $Torrent) {
-                            $this->render_torrent_info($Idx);
+                            $this->render_torrent_info($Idx, $Options);
                         }
                         ?>
                     </tr>
@@ -66,7 +71,7 @@ class UngroupTorrentSimpleListView extends UngroupTorrentTableView {
         </div>
     <?
     }
-    protected function render_torrent_info($Idx) {
+    protected function render_torrent_info($Idx, $Options = []) {
         $Torrent = $this->Torrents[$Idx];
         $TorrentID = $Torrent['ID'];
         $Group = $Torrent['Group'];
@@ -110,17 +115,19 @@ class UngroupTorrentSimpleListView extends UngroupTorrentTableView {
                             ]
                         ) ?>
                     <? } ?>
-                    <span class="TableTorrent-titleActions">
-                        [
-                        <a href="torrents.php?action=download&amp;id=<?= $TorrentID ?>&amp;authkey=<?= $LoggedUser['AuthKey'] ?>&amp;torrent_pass=<?= $LoggedUser['torrent_pass'] ?>" data-tooltip="Download">DL</a>
-                        <? if (Torrents::can_use_token($Torrent)) { ?>
+                    <? if (!$Options['NoActions']) { ?>
+                        <span class="TableTorrent-titleActions">
+                            [
+                            <a href="torrents.php?action=download&amp;id=<?= $TorrentID ?>&amp;authkey=<?= $LoggedUser['AuthKey'] ?>&amp;torrent_pass=<?= $LoggedUser['torrent_pass'] ?>" data-tooltip="Download">DL</a>
+                            <? if (Torrents::can_use_token($Torrent)) { ?>
+                                |
+                                <a href="torrents.php?action=download&amp;id=<?= $TorrentID ?>&amp;authkey=<?= $LoggedUser['AuthKey'] ?>&amp;torrent_pass=<?= $LoggedUser['torrent_pass'] ?>&amp;usetoken=1" data-tooltip="Use a FL Token" onclick="return confirm('<?= FL_confirmation_msg($Torrent['Seeders'], $Torrent['Size']) ?>');">FL</a>
+                            <? } ?>
                             |
-                            <a href="torrents.php?action=download&amp;id=<?= $TorrentID ?>&amp;authkey=<?= $LoggedUser['AuthKey'] ?>&amp;torrent_pass=<?= $LoggedUser['torrent_pass'] ?>&amp;usetoken=1" data-tooltip="Use a FL Token" onclick="return confirm('<?= FL_confirmation_msg($Torrent['Seeders'], $Torrent['Size']) ?>');">FL</a>
-                        <? } ?>
-                        |
-                        <a href="torrents.php?torrentid=<?= $TorrentID ?>" data-tooltip="<?= Lang::get('torrents', 'permalink') ?>">PL</a>
-                        ]
-                    </span>
+                            <a href="torrents.php?torrentid=<?= $TorrentID ?>" data-tooltip="<?= Lang::get('torrents', 'permalink') ?>">PL</a>
+                            ]
+                        </span>
+                    <? } ?>
                 </div>
             </td>
             <? if ($this->WithTime) { ?>

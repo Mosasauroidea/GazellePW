@@ -1,30 +1,29 @@
-import { get } from 'lodash-es'
+import { isString, get, template, templateSettings } from 'lodash-es'
 import en from '#/locales/en/client.yaml'
 import zhCN from '#/locales/zh-CN/client.yaml'
 
+const LOCALES = { en, chs: zhCN }
+
 const DEFULAT_LANG = 'en'
 
-const translations = { en, chs: zhCN }
+templateSettings.interpolate = /\{\{([^\\}]*(?:\\.[^\\}]*)*)\}\}/g
 
 window.lang = {
   lang() {
     let lang = cookie.get('lang')
-    if (!(lang in translations)) {
+    if (!(lang in LOCALES)) {
       lang = DEFAULT_LANG
     }
     return lang
   },
 
-  get(str) {
-    return get(translations[this.lang()], str, str)
-  },
-
-  format() {
-    var s = arguments[0]
-    for (var i = 0; i < arguments.length - 1; i++) {
-      var reg = new RegExp('\\{' + i + '\\}', 'gm')
-      s = s.replace(reg, arguments[i + 1])
+  get(key, { defaultValue, ...rest } = {}) {
+    const locale = LOCALES[this.lang()]
+    defaultValue = defaultValue !== undefined ? defaultValue : key
+    let value = get(locale, key, defaultValue)
+    if (isString(value)) {
+      value = template(value)({ CONFIG: window.DATA.CONFIG, ...rest })
     }
-    return s
+    return value
   },
 }

@@ -1026,7 +1026,14 @@ WHERE ud.TorrentID=? AND ui.NotifyOnDeleteDownloaded='1' AND ud.UserID NOT IN ({
     public static function group_name($Group, $Link = true) {
         global $LoggedUser;
         $lang = Lang::getUserLang($LoggedUser['ID']);
-        $GroupName = !empty($Group['SubName']) && $lang == Lang::CHS ? $Group['SubName'] : $Group['Name'];
+        $GroupName = $Group['Name'];
+        if (!empty($Group['SubName'])) {
+            if ($lang === Lang::CHS) {
+                $GroupName = $Group['SubName'];
+            } else {
+                $GroupName =  $Group['Name'] . ' | ' . $Group['SubName'];
+            }
+        }
         $Year = $Group['Year'];
         $Ret = $GroupName . ' (' . $Year . ')';
         if ($Link) {

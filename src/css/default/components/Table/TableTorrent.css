@@ -37,6 +37,9 @@ cell
 .TableTorrent.is-alternative {
   font-size: 12px;
 }
+.TableTorrent.is-alternative .TableTorrent-rowDetail {
+  font-size: 1rem;
+}
 
 .TableTorrent .Table-rowHeader {
   font-size: var(--global-fontSize-lg);

@@ -44,9 +44,10 @@ globalapp.toggleGroup = function toggleGroup(groupid, link, event) {
         } else {
           section = lang.get('common.on_this_page')
         }
-        var tooltip = showing
-          ? lang.format(lang.get('common.collapse_this_group'), section)
-          : lang.format(lang.get('common.expand_this_group'), section)
+        var tooltip = lang.get(
+          `common.${showing ? 'collapse_this_group' : 'expand_this_group'}`,
+          { section }
+        )
         $('.ToggleGroup-button', row).updateTooltip(tooltip)
         const parentClassList = $('.ToggleGroup-button', row).raw().parentNode
           .classList

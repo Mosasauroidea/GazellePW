@@ -10,18 +10,18 @@ common:
   are_you_sure_you_wish_to_delete_this_post: 你确定要删除这条回帖吗？
   check_all: 全选
   cinematographer: 摄影
-  collapse_this_group: 折叠本影片。在左键单击的同时按住 [Command] <em>(Mac)</em> 或 [Ctrl] <em>(PC)</em> 键以折叠{0}所有的影片。
+  collapse_this_group: 折叠本影片。在左键单击的同时按住 [Command] <em>(Mac)</em> 或 [Ctrl] <em>(PC)</em> 键以折叠{{section}}所有的影片。
   composer: 作曲
-  confirm_purchase: 你确定要购买 {0}吗？
+  confirm_purchase: 你确定要购买 {{item}}吗？
   confirm_username: '请输入受赠者的用户名:'
   copied: 已复制
   director: 导演
-  expand_this_group: 展开本影片。在左键单击的同时按住 [Command] <em>(Mac)</em> 或 [Ctrl] <em>(PC)</em> 键以展开{0}所有的影片。
+  expand_this_group: 展开本影片。在左键单击的同时按住 [Command] <em>(Mac)</em> 或 [Ctrl] <em>(PC)</em> 键以展开{{section}}所有的影片。
   hide: 隐藏
   in_this_release_type: 本发布类型
   like: 赞
   on_this_page: 本页面
-  pm_user_on_edit: <span id="pmbox{0}"><label>编辑后私信通知发帖人？<input type="checkbox" name="pm" value="1" /></label></span>
+  pm_user_on_edit: <span id="pmbox{{postId}}"><label>编辑后私信通知发帖人？<input type="checkbox" name="pm" value="1" /></label></span>
   producer: 制片
   request_has_been_unresolved: 请求已被归入未处理类别。请刷新浏览器查看。
   uncheck_all: 取消全选
@@ -30,8 +30,8 @@ common:
 error:
   imdb_unknown_error: 请检查 IMDb ID 是否填写有误，如果无误，请重试，重试无效，请联系管理员。
   invalid_imdb_link_note: 请填入格式合规的 IMDb 链接，形如 “tt1234567” 或 “https://www.imdb.com/title/tt1234567”。
-  request_torrent_group_exists_note: 站点已有此电影，<a href='/torrents.php?id={0}'>点此</a> 查看并确保你想要的格式不存在，通过页面上方的 “请求格式” 发布求种。
-  torrent_group_exists_note: 站点已有此电影，<a href='/torrents.php?id={0}'>点此</a> 查看并确保你想要发布的种子不与既有种子重复后，通过页面上方的 “添加格式” 发布。
+  request_torrent_group_exists_note: 站点已有此电影，<a href='/torrents.php?id={{groupId}}'>点此</a> 查看并确保你想要的格式不存在，通过页面上方的 “请求格式” 发布求种。
+  torrent_group_exists_note: 站点已有此电影，<a href='/torrents.php?id={{groupId}}'>点此</a> 查看并确保你想要发布的种子不与既有种子重复后，通过页面上方的 “添加格式” 发布。
 screenshot_comparison:
   gpw_helper_not_installed: 请先安装 <a href="https://greasyfork.org/scripts/445653-gpw-helper/code/GPW-Helper.user.js" target="_blank">GPW 助手</a>, 然后重新加载此页面
   help: 按 ? 键查看帮助文档

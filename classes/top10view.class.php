@@ -5,21 +5,18 @@ class Top10View {
     public static function render_linkbox($Selected, $Class) {
 ?>
         <div class="<?= $Class ?>">
-
-            <a href="top10.php?type=torrents" class="brackets"><?= self::get_selected_link(Lang::get('top10', 'torrents'), $Selected == "torrents") ?></a>
-            <a href="top10.php?type=original" class="brackets"><?= self::get_selected_link(Lang::get('top10', 'original'), $Selected == "original") ?></a>
-            <a href="top10.php?type=users" class="brackets"><?= self::get_selected_link(Lang::get('top10', 'users'), $Selected == "users") ?></a>
-            <a href="top10.php?type=tags" class="brackets"><?= self::get_selected_link(Lang::get('top10', 'tags'), $Selected == "tags") ?></a>
-            <?
-            if (CONFIG['ENABLE_VOTES']) {
-            ?>
-                <a href="top10.php?type=votes" class="brackets"><?= self::get_selected_link(Lang::get('top10', 'favorites'), $Selected == "votes") ?></a>
+            <a class="brackets" href="top10.php?type=movies"><?= self::get_selected_link(Lang::get('top10', 'movies'), $Selected == "movies") ?></a>
+            <a class="brackets" href="top10.php?type=torrents"><?= self::get_selected_link(Lang::get('top10', 'torrents'), $Selected == "torrents") ?></a>
+            <a class="brackets" href="top10.php?type=original"><?= self::get_selected_link(Lang::get('top10', 'original'), $Selected == "original") ?></a>
+            <a class="brackets" href="top10.php?type=users"><?= self::get_selected_link(Lang::get('top10', 'users'), $Selected == "users") ?></a>
+            <a class="brackets" href="top10.php?type=tags"><?= self::get_selected_link(Lang::get('top10', 'tags'), $Selected == "tags") ?></a>
+            <? if (CONFIG['ENABLE_VOTES']) { ?>
+                <a class="brackets" href="top10.php?type=votes"><?= self::get_selected_link(Lang::get('top10', 'favorites'), $Selected == "votes") ?></a>
             <? } ?>
-            <a href="top10.php?type=donors" class="brackets"><?= self::get_selected_link(Lang::get('top10', 'donors'), $Selected == "donors") ?></a>
+            <a class="brackets" href="top10.php?type=donors"><?= self::get_selected_link(Lang::get('top10', 'donors'), $Selected == "donors") ?></a>
         </div>
         <?
     }
-
     private static function get_selected_link($String, $Selected) {
         if ($Selected) {
             return "<strong>$String</strong>";

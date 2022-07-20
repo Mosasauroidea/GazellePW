@@ -28,17 +28,26 @@ Post-headerMultipleRows
 .PostList {
   display: flex;
   flex-direction: column;
-  gap: var(--global-space-lg);
+  padding: 0;
 }
 
 .Post {
   line-height: 1.5em;
 }
+.Post:not(:last-child) {
+  border-bottom: var(--Box-border);
+}
 
 .Post-header {
   display: flex;
   gap: var(--global-space-default);
+  padding: var(--global-space-default);
   flex-wrap: wrap;
+}
+@media (min-width: 768px) {
+  .Post-header {
+    flex-wrap: nowrap;
+  }
 }
 
 .Post-headerTitle {
@@ -52,11 +61,17 @@ Post-headerMultipleRows
   display: inline-flex;
   gap: var(--global-space-sm);
   font-size: var(--global-fontSize-sm);
+  white-space: nowrap;
 }
 
 .Post-headerRow {
   display: flex;
   flex-wrap: wrap;
+}
+
+.Post-body {
+  border-top: var(--Box-border);
+  padding: var(--global-space-lg);
 }
 
 .Post-bodyActions {

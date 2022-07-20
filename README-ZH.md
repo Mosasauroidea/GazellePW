@@ -29,6 +29,7 @@
 
 我们非常欢迎来自社区的各种贡献！
 
+- 翻译文档和网站
 - 通过 [Issues](https://github.com/Mosasauroidea/GazellePW/issues/new/choose) 报告 bug 或者提出功能需求
 - 通过 [Pull requests](https://github.com/Mosasauroidea/GazellePW/pulls) 提交代码修改
 

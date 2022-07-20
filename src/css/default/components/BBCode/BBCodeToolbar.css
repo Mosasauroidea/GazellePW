@@ -26,11 +26,10 @@ BBCodeToolbar
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: var(--global-borderRadius);
   border: none;
   background: none;
   cursor: pointer;
-  padding: 3px;
+  padding: var(--global-space-default);
 }
 .BBCodeToolbar-button:disabled {
   cursor: default;

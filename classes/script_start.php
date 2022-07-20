@@ -12,7 +12,6 @@
 
 /********************************************************/
 
-$WINDOW_DATA = [];
 require('config.php');
 require('const.php');
 
@@ -81,7 +80,10 @@ $DB = new DB_MYSQL;
 $Cache = new CACHE($MemcachedServers);
 
 $Twig = new Twig\Environment(
-    new Twig\Loader\FilesystemLoader(CONFIG['SERVER_ROOT'] . '/templates'),
+    new Twig\Loader\FilesystemLoader([
+        CONFIG['SERVER_ROOT'] . '/templates',
+        CONFIG['SERVER_ROOT'] . '/src/locales',
+    ]),
     ['debug' => CONFIG['DEBUG_MODE'], 'cache' => CONFIG['SERVER_ROOT'] . '/.cache/twig']
 );
 

@@ -20,16 +20,18 @@ function class_list($Selected = 0) {
 }
 function ed_class_list($Second) {
     global $Classes;
-    $Return = '';
+    $Return = "<div class='u-hstack'>";
     $SecondArray = unserialize(base64_decode($Second));
     foreach ($Classes as $Class) {
         if ($Class['Secondary']) {
             $Name = $Class['Name'];
             $ID = $Class['ID'];
-            $Return .= "<input type=\"checkbox\" id=\"ed_$ID\" name=\"second[]\" value=\"$ID\" " .
-                (in_array($ID, $SecondArray) ? "checked=\"checked\"" : "") . "/><label for=\"ed_$ID\">$Name</label>";
+            $Return .= "<label class='Checkbox'><input class='Input' type='checkbox' name='second[]' value='$ID' " .
+                (in_array($ID, $SecondArray) ? "checked='checked'" : "") .
+                "/>$Name</label>";
         }
     }
+    $Return .= "</div>";
     reset($Classes);
     return $Return;
 }
@@ -83,32 +85,26 @@ $DB->query('
 <div class="TableContainer">
     <table class="TableForumControlPanel Table">
         <tr class="Table-rowHeader">
-            <td class="Table-cell"><?= Lang::get('tools', 'category') ?></td>
-            <td class="Table-cell"><?= Lang::get('tools', 'sort') ?></td>
-            <td class="Table-cell"><?= Lang::get('tools', 'name') ?></td>
-            <td class="Table-cell"><?= Lang::get('tools', 'description') ?></td>
-            <td class="Table-cell"><?= Lang::get('tools', 'min_class_read') ?></td>
-            <td class="Table-cell"><?= Lang::get('tools', 'min_class_write') ?></td>
-            <td class="Table-cell"><?= Lang::get('tools', 'min_class_create') ?></td>
-            <td class="Table-cell"><?= Lang::get('tools', 'auto_lock') ?></td>
-            <td class="Table-cell"><?= Lang::get('tools', 'auto_lock_weeks') ?></td>
-            <td class="Table-cell"><?= Lang::get('tools', 'operation') ?></td>
+            <td class="Table-cell is-category"><?= Lang::get('tools', 'category') ?></td>
+            <td class="Table-cell is-sort"><?= Lang::get('tools', 'sort') ?></td>
+            <td class="Table-cell is-name"><?= Lang::get('tools', 'name') ?></td>
+            <td class="Table-cell is-description"><?= Lang::get('tools', 'description') ?></td>
+            <td class="Table-cell is-minClassRead"><?= Lang::get('tools', 'min_class_read') ?></td>
+            <td class="Table-cell is-minClassWrite"><?= Lang::get('tools', 'min_class_write') ?></td>
+            <td class="Table-cell is-minClassCrate"><?= Lang::get('tools', 'min_class_create') ?></td>
+            <td class="Table-cell is-autoLock"><?= Lang::get('tools', 'auto_lock') ?></td>
+            <td class="Table-cell is-autoLockWeeks"><?= Lang::get('tools', 'auto_lock_weeks') ?></td>
+            <td class="Table-cell is-operation"><?= Lang::get('tools', 'operation') ?></td>
         </tr>
         <?
-        $Row = 'b';
         while (list($ID, $CategoryID, $Sort, $Name, $Description, $MinClassRead, $MinClassWrite, $MinClassCreate, $AutoLock, $AutoLockWeeks, $Second) = $DB->next_record()) {
-            $Row = $Row === 'a' ? 'b' : 'a';
         ?>
-
-
             <form class="manage_form" name="forums" action="" method="post">
-
                 <tr class="Table-row">
                     <input type="hidden" name="id" value="<?= $ID ?>" />
                     <input type="hidden" name="action" value="forum_alter" />
                     <input type="hidden" name="auth" value="<?= $LoggedUser['AuthKey'] ?>" />
-                    <td class="Table-cell">
-
+                    <td class="Table-cell is-category">
                         <a href="javascript:$('#forum_' + <?= $ID ?>).toggle();">+</a><select class="Input" name="categoryid">
                             <? reset($ForumCats);
                             foreach ($ForumCats as $CurCat => $CatName) {
@@ -116,57 +112,53 @@ $DB->query('
                                 <option class="Select-option" value="<?= $CurCat ?>" <? if ($CurCat == $CategoryID) {
                                                                                             echo ' selected="selected"';
                                                                                         } ?>><?= $CatName ?></option>
-                            <?  } ?>
+                            <? } ?>
                         </select>
                     </td>
-                    <td class="Table-cell">
+                    <td class="Table-cell is-sort">
                         <input class="Input" type="text" size="3" name="sort" value="<?= $Sort ?>" />
                     </td>
-                    <td class="Table-cell">
+                    <td class="Table-cell is-name">
                         <input class="Input" type="text" size="10" name="name" value="<?= $Name ?>" />
                     </td>
-                    <td class="Table-cell">
+                    <td class="Table-cell is-description">
                         <input class="Input" type="text" size="20" name="description" value="<?= $Description ?>" />
                     </td>
-                    <td class="Table-cell">
+                    <td class="Table-cell is-minClassRead">
                         <select class="Input" name="minclassread">
                             <?= class_list($MinClassRead) ?>
                         </select>
                     </td>
-                    <td class="Table-cell">
+                    <td class="Table-cell is-minClassWrite">
                         <select class="Input" name="minclasswrite">
                             <?= class_list($MinClassWrite) ?>
                         </select>
                     </td>
-                    <td class="Table-cell">
+                    <td class="Table-cell is-minClassCreate">
                         <select class="Input" name="minclasscreate">
                             <?= class_list($MinClassCreate) ?>
                         </select>
                     </td>
-                    <td class="Table-cell">
+                    <td class="Table-cell is-autoLock">
                         <input type="checkbox" name="autolock" <?= ($AutoLock == '1') ? ' checked="checked"' : '' ?> />
                     </td>
-                    <td class="Table-cell">
+                    <td class="Table-cell is-autoLockWeeks">
                         <input class="Input" type="text" name="autolockweeks" value="<?= $AutoLockWeeks ?>" />
                     </td>
-                    <td class="Table-cell">
+                    <td class="Table-cell is-operatioin">
                         <input class="Button" type="submit" name="submit" value="Edit" />
                         <input class="Button" type="submit" name="submit" value="Delete" onclick="return confirm('Are you sure you want to delete this forum? This is an irreversible action!')" />
                     </td>
-
-
                 </tr>
-                <tr class="Table-row" id="forum_<?= $ID ?>" style="display:none;">
-                    <td class="Table-cell" colspan="10">
+                <tr class="Table-row is-classList" id="forum_<?= $ID ?>" style="display:none;">
+                    <td class="Table-cell is-classList" colspan="10">
                         <?= ed_class_list($Second) ?>
                     </td>
                 </tr>
             </form>
-        <?
-        }
-        ?>
+        <? } ?>
         <tr class="Table-rowHeader">
-            <td class="Table-cell" colspan="8"><?= Lang::get('tools', 'create_forum') ?></td>
+            <td class="Table-cell" colspan="10"><?= Lang::get('tools', 'create_forum') ?></td>
         </tr>
         <tr class="Table-row">
             <form class="create_form" name="forum" action="" method="post">

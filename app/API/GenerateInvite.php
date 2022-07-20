@@ -52,10 +52,7 @@ class GenerateInvite extends AbstractAPI {
                 'InviterName' => $interviewer_name,
                 'InviteKey' => $key,
                 'Email' => $_GET['email'],
-                'SITE_NAME' => CONFIG['SITE_NAME'],
-                'SITE_URL' => CONFIG['SITE_URL'],
-                'IRC_SERVER' => CONFIG['BOT_SERVER'],
-                'DISABLED_CHAN' => CONFIG['BOT_DISABLED_CHAN']
+                CONFIG => CONFIG,
             ]);
 
             \Misc::send_email($_GET['email'], 'New account confirmation at ' . CONFIG['SITE_NAME'], $body, 'noreply');

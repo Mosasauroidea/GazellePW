@@ -1,11 +1,12 @@
 <?
 
-global $Locales;
+global $Locales, $Twig, $WINDOW_DATA;
 $Files = glob(CONFIG['SERVER_ROOT'] . '/src/locales/*/server.yaml');
 $Locales = [];
 foreach ($Files as $File) {
-    $Locale = yaml_parse_file($File);
     $Lang = basename(dirname($File));
+    $YamlText = $Twig->render("$Lang/server.yaml", ['CONFIG' => $WINDOW_DATA['CONFIG']]);
+    $Locale = yaml_parse($YamlText);
     $Lang = $Lang == 'zh-CN' ? 'chs' : $Lang;
     $Locales[$Lang] = $Locale;
 }
@@ -29,9 +30,6 @@ class Lang {
             return $Option['DefaultValue'] ?: "$Page.$Label";
         }
         $Value = $Locale[$Label];
-        if (is_string($Value)) {
-            $Value = str_replace(["${CONFIG['SITE_NAME']}", "${CONFIG['TG_GROUP']}", "${CONFIG['TG_DISBALE_CHANNEL']}", "${CONFIG['MAIL_HOST']}"], [CONFIG['SITE_NAME'], CONFIG['TG_GROUP'], CONFIG['TG_DISBALE_CHANNEL'], CONFIG['MAIL_HOST']], $Value);
-        }
         if (!empty($Interpolations)) {
             $Value = sprintf($Value, ...$Interpolations);
             if ($Value === false) {

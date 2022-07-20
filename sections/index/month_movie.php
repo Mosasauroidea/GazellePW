@@ -22,12 +22,9 @@ if (is_number($FeaturedMovie['GroupID'])) {
 ?>
     <div class="SidebarItemPoster SidebarItem Box">
         <div class="SidebarItem-header Box-header">
-            <span class="SidebarItem-headerTitle">
+            <a class="SidebarItem-headerTitle" href="forums.php?action=viewthread&amp;threadid=<?= $FeaturedMovie['ThreadID'] ?>">
                 <?= Lang::get('index', 'featured_item') ?>
-            </span>
-            <div class="SidebarItem-headerActions">
-                <a href="forums.php?action=viewthread&amp;threadid=<?= $FeaturedMovie['ThreadID'] ?>"><?= Lang::get('index', 'discuss') ?></a>
-            </div>
+            </a>
         </div>
         <div class="SidebarItem-body Box-body">
             <a href="torrents.php?id=<?= $FeaturedMovie['GroupID'] ?>" data-tooltip="<?= Torrents::group_name($FeaturedMovie, false) ?>">

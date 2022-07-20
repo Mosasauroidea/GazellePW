@@ -71,6 +71,7 @@ if ($UserID !== $LoggedUser['ID']) {
 		'FullName' => $FullName,
 		'LoggedUserID' => $LoggedUser['ID'],
 		'LoggedUserUsername' => $LoggedUser['Username'],
+		'CONFIG' => CONFIG,
 	]);
 }
 

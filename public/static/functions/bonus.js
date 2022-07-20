@@ -28,7 +28,7 @@ function ConfirmPurchase(event, item, next, element) {
     event.preventDefault()
     return false
   }
-  check = confirm(lang.format(lang.get('common.confirm_purchase'), item))
+  check = confirm(lang.get('common.confirm_purchase', { item }))
   if (!check) {
     event.preventDefault()
     return false

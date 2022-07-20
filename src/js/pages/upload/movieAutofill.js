@@ -6,13 +6,6 @@ globalapp.uploadMovieAutofill = function uploadMovieAutofill() {
       $('.Button.autofill').removeClass('is-loading').prop('disabled', false)
     }
   }
-  function setError(key, values = []) {
-    let message = lang.get(key)
-    if (values.length > 0) {
-      message = lang.format(message, ...values)
-    }
-    $('.imdb.Form-errorMessage').html(key ? message : '')
-  }
 
   var imdb = $('#imdb').val().match(/tt\d+/)
   if (imdb) {
@@ -31,19 +24,19 @@ globalapp.uploadMovieAutofill = function uploadMovieAutofill() {
     type: 'GET',
     error: (err) => {
       setLoading(false)
-      setError('common.imdb_unknown_error')
+      globalapp.setFormError('common.imdb_unknown_error')
     },
     success: (data) => {
       setLoading(false)
-      setError(null)
+      globalapp.setFormError(null)
       if (data.code) {
-        setError(
+        globalapp.setFormError(
           data.code === 1
             ? 'error.invalid_imdb_link_note'
             : data.code === 2
             ? 'error.torrent_group_exists_note'
             : 'error.imdb_unknown_error',
-          data.code === 2 ? [data.error.GroupID] : []
+          data.code === 2 && { groupID: data.error.GroupID }
         )
         return
       }
@@ -157,4 +150,13 @@ globalapp.uploadMovieAutofill = function uploadMovieAutofill() {
     },
     dataType: 'json',
   })
+}
+
+global.setFormError = function setFormError(key, options = {}) {
+  if (key) {
+    const message = lang.get(key, options)
+    $('.imdb.Form-errorMessage').html(message)
+  } else {
+    $('.imdb.Form-errorMessage').html('')
+  }
 }

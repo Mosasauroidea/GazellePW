@@ -5,7 +5,7 @@ Where
   artist - show
   bookmarks - show
 
-TorrentCover
+TorrentCover variant="OneLine"
   TorrentCover-item
     TorrentCover-imageContainer
         TorrentCover-image
@@ -13,10 +13,20 @@ TorrentCover
 
 .TorrentCover {
   display: grid;
-  grid-template-columns: repeat(auto-fill, 150px);
-  justify-content: center;
+  grid-template-columns: repeat(auto-fill, 200px);
+  justify-content: start;
   column-gap: var(--global-space-lg);
   row-gap: var(--global-space-default);
+}
+@media (max-width: 768px) {
+  .TorrentCover[variant='OneLine'] {
+    column-gap: var(--global-space-default);
+    font-size: var(--global-fontSize-sm);
+  }
+}
+.TorrentCover[variant='OneLine'] {
+  display: flex;
+  overflow: auto;
 }
 @media (max-width: 768px) {
   .PageUserShow .TorrentCover {
@@ -27,12 +37,21 @@ TorrentCover
 }
 
 .TorrentCover-item {
-  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  word-break: break-all;
 }
 
 .TorrentCover-imageContainer {
-  width: 150px;
-  height: 222px;
+  width: 200px;
+  height: 300px;
+}
+@media (max-width: 768px) {
+  .TorrentCover[variant='OneLine'] .TorrentCover-imageContainer {
+    width: 75px;
+    height: 111px;
+  }
 }
 
 .TorrentCover-image {

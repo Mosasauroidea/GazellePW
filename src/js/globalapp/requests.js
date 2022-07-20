@@ -229,19 +229,12 @@ globalapp.requestToggle = function reqeustToggle(id, disable) {
   }
 }
 
-globalapp.reqeustMovieAutofill = function requestMovieAutofill() {
+globalapp.requestMovieAutofill = function requestMovieAutofill() {
   var imdb = $('#imdb').val().match(/tt\d+/)
   if (imdb) {
     imdb = imdb[0]
   } else {
     return
-  }
-  function setError(key, values = []) {
-    let message = lang.get(key)
-    if (values.length > 0) {
-      message = lang.format(message, ...values)
-    }
-    $('.imdb.Form-errorMessage').html(key ? message : '')
   }
 
   $.ajax({
@@ -254,13 +247,13 @@ globalapp.reqeustMovieAutofill = function requestMovieAutofill() {
     success: (data) => {
       const errorMessage = $('.imdb.Form-errorMessage')
       if (data.code) {
-        setError(
+        globalapp.setFormError(
           data.code === 1
             ? 'error.invalid_imdb_link_note'
             : data.code === 2
             ? 'error.request_torrent_group_exists_note'
             : 'error.imdb_unknown_error',
-          data.code === 2 ? [data.error.GroupID] : []
+          data.code === 2 && { groupId }
         )
         return
       }
