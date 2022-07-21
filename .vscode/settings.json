@@ -10,13 +10,14 @@
   "[php]": {
     "editor.defaultFormatter": "bmewburn.vscode-intelephense-client"
   },
+  "[markdown]": {
+    "editor.wordWrap": "bounded",
+    "editor.wordWrapColumn": 120
+  },
+  "[mdx]": {
+    "editor.wordWrap": "off",
+    "editor.wordWrapColumn": 120
+  },
   "intelephense.format.braces": "k&r",
-  "formatFiles.excludedFolders": [
-    "node_modules",
-    ".vscode",
-    ".git",
-    "dist",
-    ".chrome",
-    "vendor"
-  ]
+  "formatFiles.excludedFolders": ["node_modules", ".vscode", ".git", "dist", ".chrome", "vendor"]
 }

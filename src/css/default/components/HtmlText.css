@@ -1,5 +1,40 @@
 /* also see PageWiki.css */
 
+/*
+HtmlText mdx
+  HtmlText-anchor
+*/
+
+.HtmlText[mdx] {
+  padding: 16px 32px;
+}
+
+/* Check Upload Rules page */
+.HtmlText :is(h1, h2, h3, h4, h5, h6) {
+  font-size: 1em;
+  font-weight: normal;
+  margin-top: 24px;
+  margin-bottom: 16px;
+  line-height: 1.25;
+}
+.HtmlText h1 {
+  font-size: 2em;
+  font-weight: bold;
+  border-bottom: var(--Box-border);
+  padding-bottom: 0.3em;
+}
+.HtmlText h2 {
+  font-size: 1.6em;
+  font-weight: bold;
+  border-bottom: var(--Box-border);
+  padding-bottom: 0.3em;
+}
+.HtmlText h3 {
+  font-size: 1.25em;
+  font-size: var(--global-fontSize-lg);
+  font-weight: bold;
+}
+
 .HtmlText :is(ol, ul) {
   padding-left: 20px;
 }
@@ -17,4 +52,21 @@
 }
 .HtmlText.rule_summary li {
   padding: var(--global-space-sm) 0;
+}
+
+.HtmlText-anchor {
+  padding-right: 4px;
+  margin-left: -20px;
+  color: inherit;
+}
+.HtmlText-anchor:hover {
+  color: inherit;
+}
+.HtmlText-anchorIcon {
+  width: 16px;
+  height: 16px;
+  visibility: hidden;
+}
+.HtmlText :is(h1, h2, h3, h4, h5, h6):hover .HtmlText-anchorIcon {
+  visibility: visible;
 }

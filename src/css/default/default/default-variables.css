@@ -46,6 +46,7 @@
   --global-color-postH4: #4b87a7;
   --global-color-postH5: #4768b3;
   --global-color-ruleStrong: #004f9d;
+  --global-color-code: rgba(175, 184, 193, 0.2);
 
   /* Box */
   --global-color-box: white;
@@ -173,9 +174,7 @@
   --MovieInfo-boxShadow: var(--global-boxShadow-box);
   --MovieInfo-background: rgba(0, 0, 0, 0.08);
   --MovieInfo-button-background: var(--global-background-movieInfoButton);
-  --MovieInfo-button-onHover-background: var(
-    --global-onHover-background-movieInfoButton
-  );
+  --MovieInfo-button-onHover-background: var(--global-onHover-background-movieInfoButton);
   --Movieinfo-button-color: var(--global-color);
   --Movieinfo-button-onHover-color: var(--global-onHover-color);
   --MovieInfo-button-border: var(--global-border-box);

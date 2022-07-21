@@ -1,25 +1,29 @@
+.TableRuleSlot table {
+  table-layout: fixed;
+}
+
 @media (max-width: 768px) {
   .TableRuleSlot {
     width: 1100px;
   }
 }
 
-.TableRuleSlot .Table-cell.is-content {
+.TableRuleSlot .Table-cellHeader:nth-child(1) {
   width: 80px;
 }
 
-.TableRuleSlot .Table-cell.is-slot {
+.TableRuleSlot .Table-cellHeader:nth-child(2) {
   width: 130px;
 }
 
-.TableRuleSlot .Table-cell.is-subtitle {
+.TableRuleSlot .Table-cellHeader:nth-child(3) {
   width: 250px;
 }
 
-.TableRuleSlot .Table-cell.is-codec {
+.TableRuleSlot .Table-cellHeader:nth-child(4) {
   width: 60px;
 }
 
-.TableRuleSlot .Table-cell.is-resolution {
+.TableRuleSlot .Table-cellHeader:nth-child(5) {
   width: 230px;
 }

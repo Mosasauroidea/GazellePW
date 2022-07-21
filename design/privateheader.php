@@ -107,6 +107,10 @@ $CurrentLang = Lang::getUserLang($LoggedUser['ID']);
     }
     $Scripts = array_merge(['jquery', 'script_start', 'ajax.class', 'cookie.class', 'global', 'jquery.autocomplete', 'autocomplete', 'jquery.countdown.min', 'bbcode'], explode(',', $JSIncludes));
     ?>
+
+    <script>
+        window.DATA = <?= json_encode($GLOBALS['WINDOW_DATA']) ?>;
+    </script>
 </head>
 
 <?

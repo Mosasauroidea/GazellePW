@@ -868,9 +868,6 @@ class Text {
                         break;
                     case 'rule':
                         $Rule = trim(strtolower($Block['Val']));
-                        if ($Rule[0] != 'r' && $Rule[0] != 'h') {
-                            $Rule = 'r' . $Rule;
-                        }
                         $Str .= '<a href="rules.php?p=upload#' . urlencode(Format::undisplay_str($Rule)) . '">' . preg_replace('/[aA-zZ]/', '', $Block['Val']) . '</a>';
                         break;
                     case 'torrent':

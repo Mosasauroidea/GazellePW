@@ -1,0 +1,7 @@
+<H1 id="content">Clients Rules</H1>
+
+Client rules are how we maintain the integrity of our swarms. This allows us to filter out disruptive and dishonest clients that may hurt the performance of either the tracker or individual peers.
+
+**Modified clients**(e.g. [qBittorrent-Enhanced-Editon](https://github.com/c0re100/qBittorrent-Enhanced-Edition)) may lead to data statistics errors. Using them will cause you to be warned or even disabled. Please use official clients with three digit version number.
+
+<TableData columns={[{ header: 'Client Whitelist', accessor: 'ClientName' }]} data={window.DATA.clients} />

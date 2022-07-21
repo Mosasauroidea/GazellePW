@@ -28,6 +28,7 @@
     --global-color-postH4: #00afdb;
     --global-color-postH5: #638ef3;
     --global-color-ruleStrong: #a5bed0;
+    --global-color-code: rgba(99, 110, 123, 0.4);
 
     /* Box */
     --global-color-box: #242525;
@@ -74,15 +75,11 @@
     --Header-input-color: #aaa;
     --Header-input-border: 1px solid #464646;
     --Header-button-background: var(--Button-default-background);
-    --Header-button-onHover-background: var(
-      --Button-default-onHover-background
-    );
+    --Header-button-onHover-background: var(--Button-default-onHover-background);
     --HeaderAnnounceItem-link-background: #ccbc33;
     --HeaderAnnounceItem-link-color: black;
     --HeaderAnnounceItem-link-opacity: 0.8;
-    --HeaderAnnounceItem-link-onHover-color: var(
-      --HeaderAnnounceItem-link-color
-    );
+    --HeaderAnnounceItem-link-onHover-color: var(--HeaderAnnounceItem-link-color);
     --HeaderAnnounceItem-link-onHover-opacity: 1;
     --HeaderDonate-percent-color: #aaa;
     --HeaderDonate-progressBar-background: #aaa;

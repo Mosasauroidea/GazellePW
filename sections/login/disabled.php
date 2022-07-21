@@ -40,10 +40,13 @@ if ((empty($_POST['submit']) || empty($_POST['username'])) && !isset($Output)) {
     }
 </script>
 
-<div id="golden_rules" class="HtmlText rule_summary" style="width: 35%; font-weight: bold; display: none; text-align: left;">
-    <? Rules::display_golden_rules(); ?>
-    <br /><br />
-</div>
+<div class="HtmlText" id="Rules-GoldenRules-mdx" mdx style="width: 35%; font-weight: bold; display: none; text-align: left;"></div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        lang.render('Rules/GoldenRules.mdx')
+    })
+</script>
 
 <?
 } else if (!isset($Output)) {

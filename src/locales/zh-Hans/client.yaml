@@ -64,7 +64,7 @@ upload:
   codec_required: 请选择一个编码。
   container_required: 请选择一个容器。
   desc_img_3_png: 请添加至少三张 PNG 格式的电影原始分辨率（非播放分辨率）截图，操作方法请见 <a href='wiki.php?action=article&id=51' target='_blank'>本文</a>。
-  desc_img_hosts: 请使用发布规则 <a href='rules.php?p=upload#r2.2.1' target='_blank'>2.2.1</a> 所推荐的图床以保证截图的访问速度和有效时长。
+  desc_img_hosts: 请使用发布规则 <a href='rules.php?p=upload#2.2.1' target='_blank'>2.2.1</a> 所推荐的图床以保证截图的访问速度和有效时长。
   imdb_link_required: 请填写格式正确的 IMDb 链接或 ID！
   mediainfo_complete_name_required: 必须要包含 Complete name 或 Disc Title 或 Disc Label。
   mediainfo_invalid_chars: 你填入的 MediaInfo/BDInfo 存在错误，请自用 MdiaInfo 工具扫描获取，不要从他站直接粘贴。如果仍然失败，请在论坛反馈。

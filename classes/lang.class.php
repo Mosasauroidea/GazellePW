@@ -7,7 +7,7 @@ foreach ($Files as $File) {
     $Lang = basename(dirname($File));
     $YamlText = $Twig->render("$Lang/server.yaml", ['CONFIG' => $WINDOW_DATA['CONFIG']]);
     $Locale = yaml_parse($YamlText);
-    $Lang = $Lang == 'zh-CN' ? 'chs' : $Lang;
+    $Lang = $Lang == 'zh-Hans' ? 'chs' : $Lang;
     $Locales[$Lang] = $Locale;
 }
 

@@ -64,7 +64,7 @@ upload:
   codec_required: Please select a codec.
   container_required: Please select a container.
   desc_img_3_png: At least three PNG screenshots are required, see <a href="wiki.php?action=article&id=51" target="_blank">help</a>.
-  desc_img_hosts: Please use image hosts that are recommended by Upload Rule <a href="rules.php?p=upload#r2.2.1" target="_blank">2.2.1</a>.
+  desc_img_hosts: Please use image hosts that are recommended by Upload Rule <a href="rules.php?p=upload#2.2.1" target="_blank">2.2.1</a>.
   imdb_link_required: IMDb link or ID with a correct format is required!
   mediainfo_complete_name_required: Must contains Complete name (or Disc Title/Label).
   mediainfo_invalid_chars: There are some mistakes in the MediaInfo/BDInfo you submitted, please scan by yourself with mediainfo app, do not paste from other places. Feel free to feedback if it doesn't work.

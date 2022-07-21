@@ -32,6 +32,7 @@
   var(--color-canvas-inset);
   --global-color:
   var(--color-fg-default);
+  --global-color-code: var(--color-accent-muted)
 
   /* Box */
   --Box-background:

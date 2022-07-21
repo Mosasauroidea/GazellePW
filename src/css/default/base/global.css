@@ -30,29 +30,6 @@ ul {
   list-style-type: none;
 }
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  margin-top: 7px;
-  margin-bottom: 7px;
-  font-weight: normal;
-}
-
-h1 {
-  font-size: 2rem;
-}
-
-h2 {
-  font-size: 1.6rem;
-}
-
-h3 {
-  font-size: var(--global-fontSize-lg);
-}
-
 li {
   padding: var(--global-space-sm);
 }
@@ -76,15 +53,15 @@ pre {
 }
 
 pre {
-  font-family: monospace;
+  font-family: var(--global-fontFamilyMonospace);
 }
 
 code {
-  font-family: Consolas, Monospace;
-  line-height: 18px;
-  max-width: 100% !important;
-  padding: 1px 4px;
-  background: rgba(255, 255, 255, 0.1);
+  font-family: var(--global-fontFamilyMonospace);
+  padding: 0.2em 0.4em;
+  font-size: 85%;
+  background-color: var(--color-neutral-muted);
+  border-radius: var(--global-borderRadius);
 }
 
 /* Form */

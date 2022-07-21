@@ -3,10 +3,19 @@ import preact from '@preact/preset-vite'
 import mdx from '@mdx-js/rollup'
 import hq from 'alias-hq'
 import yaml from '@rollup/plugin-yaml'
+import remarkGfm from 'remark-gfm'
+import { remarkExtendedTable, extendedTableHandlers } from 'remark-extended-table'
+import remarkRehype from 'remark-rehype'
 
 export default defineConfig({
-  plugins: [preact(), mdx(), yaml()],
-
+  plugins: [
+    preact(),
+    mdx({
+      providerImportSource: '@mdx-js/react',
+      remarkPlugins: [remarkGfm, remarkExtendedTable, [remarkRehype, { handlers: { ...extendedTableHandlers } }]],
+    }),
+    yaml(),
+  ],
   clearScreen: false,
 
   resolve: {

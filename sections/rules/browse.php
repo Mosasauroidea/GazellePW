@@ -1,20 +1,18 @@
 <?
-//Include the header
 View::show_header(Lang::get('rules', 'rules'), '', 'PageRuleHome');
 ?>
-<!-- General Rules -->
-<div class="PageBody">
-    <? include('jump.php'); ?>
-    <div class="header">
-        <h2 id="general"><?= Lang::get('rules', 'golden_rules') ?></h2>
-        <p><?= Lang::get('rules', 'golden_rules_used') ?></p>
-    </div>
-    <div class="BoxBody HtmlText rule_summary">
-        <? Rules::display_golden_rules(); ?>
-    </div>
-    <!-- END General Rules -->
 
+<div class="LayoutBody">
+    <? include('jump.php'); ?>
+    <div class="HtmlText BoxBody" id="Rules-GoldenRules-mdx" mdx></div>
 </div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        lang.render('Rules/GoldenRules.mdx')
+    })
+</script>
+
 <?
 View::show_footer();
 ?>

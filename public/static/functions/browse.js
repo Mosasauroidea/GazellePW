@@ -1,26 +1,20 @@
 function show_peers(TorrentID, Page, View) {
   if (Page > 0) {
-    ajax.get(
-      'torrents.php?action=peerlist&page=' + Page + '&torrentid=' + TorrentID,
-      function (response) {
-        $('#' + View + '_peers_' + TorrentID)
-          .gshow()
-          .raw().innerHTML = response
-      }
-    )
+    ajax.get('torrents.php?action=peerlist&page=' + Page + '&torrentid=' + TorrentID, function (response) {
+      $('#' + View + '_peers_' + TorrentID)
+        .gshow()
+        .raw().innerHTML = response
+    })
   } else {
     if ($('#' + View + '_peers_' + TorrentID).raw().innerHTML === '') {
       $('#' + View + '_peers_' + TorrentID)
         .gshow()
         .raw().innerHTML = '<h4>Loading...</h4>'
-      ajax.get(
-        'torrents.php?action=peerlist&torrentid=' + TorrentID,
-        function (response) {
-          $('#' + View + '_peers_' + TorrentID)
-            .gshow()
-            .raw().innerHTML = response
-        }
-      )
+      ajax.get('torrents.php?action=peerlist&torrentid=' + TorrentID, function (response) {
+        $('#' + View + '_peers_' + TorrentID)
+          .gshow()
+          .raw().innerHTML = response
+      })
     } else {
       $('#' + View + '_peers_' + TorrentID).gtoggle()
     }
@@ -35,30 +29,21 @@ function show_peers(TorrentID, Page, View) {
 
 function show_giver(TorrentID, Page, View) {
   if (Page > 0) {
-    ajax.get(
-      'torrents.php?action=sendbonuslist&page=' +
-        Page +
-        '&torrentid=' +
-        TorrentID,
-      function (response) {
-        $('#' + View + '_giver_' + TorrentID)
-          .gshow()
-          .raw().innerHTML = response
-      }
-    )
+    ajax.get('torrents.php?action=sendbonuslist&page=' + Page + '&torrentid=' + TorrentID, function (response) {
+      $('#' + View + '_giver_' + TorrentID)
+        .gshow()
+        .raw().innerHTML = response
+    })
   } else {
     if ($('#' + View + '_giver_' + TorrentID).raw().innerHTML === '') {
       $('#' + View + '_giver_' + TorrentID)
         .gshow()
         .raw().innerHTML = '<h4>Loading...</h4>'
-      ajax.get(
-        'torrents.php?action=sendbonuslist&torrentid=' + TorrentID,
-        function (response) {
-          $('#' + View + '_giver_' + TorrentID)
-            .gshow()
-            .raw().innerHTML = response
-        }
-      )
+      ajax.get('torrents.php?action=sendbonuslist&torrentid=' + TorrentID, function (response) {
+        $('#' + View + '_giver_' + TorrentID)
+          .gshow()
+          .raw().innerHTML = response
+      })
     } else {
       $('#' + View + '_giver_' + TorrentID).gtoggle()
     }
@@ -73,27 +58,21 @@ function show_giver(TorrentID, Page, View) {
 
 function show_snatches(TorrentID, Page, View) {
   if (Page > 0) {
-    ajax.get(
-      'torrents.php?action=snatchlist&page=' + Page + '&torrentid=' + TorrentID,
-      function (response) {
-        $('#' + View + '_snatches_' + TorrentID)
-          .gshow()
-          .raw().innerHTML = response
-      }
-    )
+    ajax.get('torrents.php?action=snatchlist&page=' + Page + '&torrentid=' + TorrentID, function (response) {
+      $('#' + View + '_snatches_' + TorrentID)
+        .gshow()
+        .raw().innerHTML = response
+    })
   } else {
     if ($('#' + View + '_snatches_' + TorrentID).raw().innerHTML === '') {
       $('#' + View + '_snatches_' + TorrentID)
         .gshow()
         .raw().innerHTML = '<h4>Loading...</h4>'
-      ajax.get(
-        'torrents.php?action=snatchlist&torrentid=' + TorrentID,
-        function (response) {
-          $('#' + View + '_snatches_' + TorrentID)
-            .gshow()
-            .raw().innerHTML = response
-        }
-      )
+      ajax.get('torrents.php?action=snatchlist&torrentid=' + TorrentID, function (response) {
+        $('#' + View + '_snatches_' + TorrentID)
+          .gshow()
+          .raw().innerHTML = response
+      })
     } else {
       $('#' + View + '_snatches_' + TorrentID).gtoggle()
     }
@@ -108,28 +87,19 @@ function show_snatches(TorrentID, Page, View) {
 
 function show_downloads(TorrentID, Page, View) {
   if (Page > 0) {
-    ajax.get(
-      'torrents.php?action=downloadlist&page=' +
-        Page +
-        '&torrentid=' +
-        TorrentID,
-      function (response) {
-        $('#' + View + '_downloads_' + TorrentID)
-          .gshow()
-          .raw().innerHTML = response
-      }
-    )
+    ajax.get('torrents.php?action=downloadlist&page=' + Page + '&torrentid=' + TorrentID, function (response) {
+      $('#' + View + '_downloads_' + TorrentID)
+        .gshow()
+        .raw().innerHTML = response
+    })
   } else {
     if ($('#' + View + '_downloads_' + TorrentID).raw().innerHTML === '') {
       $('#' + View + '_downloads_' + TorrentID)
         .gshow()
         .raw().innerHTML = '<h4>Loading...</h4>'
-      ajax.get(
-        'torrents.php?action=downloadlist&torrentid=' + TorrentID,
-        function (response) {
-          $('#' + View + '_downloads_' + TorrentID).raw().innerHTML = response
-        }
-      )
+      ajax.get('torrents.php?action=downloadlist&torrentid=' + TorrentID, function (response) {
+        $('#' + View + '_downloads_' + TorrentID).raw().innerHTML = response
+      })
     } else {
       $('#' + View + '_downloads_' + TorrentID).gtoggle()
     }
@@ -147,12 +117,9 @@ function show_files(TorrentID, View) {
     $('#' + View + '_files_' + TorrentID)
       .gshow()
       .raw().innerHTML = '<h4>Loading...</h4>'
-    ajax.get(
-      'torrents.php?action=filelist&torrentid=' + TorrentID,
-      function (response) {
-        $('#' + View + '_files_' + TorrentID).raw().innerHTML = response
-      }
-    )
+    ajax.get('torrents.php?action=filelist&torrentid=' + TorrentID, function (response) {
+      $('#' + View + '_files_' + TorrentID).raw().innerHTML = response
+    })
   } else {
     $('#' + View + '_files_' + TorrentID).gtoggle()
   }

@@ -52,7 +52,7 @@ $Types = array(
                 'upload' => '0',
                 'warn' => '4',
                 'delete' => '1',
-                'pm' => '[rule]h1.2[/rule]. You have uploaded material that is currently forbidden. Items on the Do Not Upload (DNU) list (at the top of the [url=upload.php]upload page[/url]) and in the [url=rules.php?p=upload#h1.2]Specifically Banned[/url] portion of the uploading rules cannot be uploaded to the site. Do not upload them unless your torrent meets a condition specified in the comments of the DNU list.
+                'pm' => '[rule]h1.2[/rule]. You have uploaded material that is currently forbidden. Items on the Do Not Upload (DNU) list (at the top of the [url=upload.php]upload page[/url]) and in the [url=rules.php?p=upload#1.2]Specifically Banned[/url] portion of the uploading rules cannot be uploaded to the site. Do not upload them unless your torrent meets a condition specified in the comments of the DNU list.
                 Your torrent was reported because it contained material from the DNU list or from the Specifically Banned section of the rules.'
             )
         ),

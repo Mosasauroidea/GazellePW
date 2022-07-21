@@ -1,7 +1,19 @@
 <?
-//Include the header
-View::show_header(Lang::get('rules', 'upload_rules'), 'rules', 'PageRules is-upload');
+View::show_header(Lang::get('rules', 'upload_rules'), '', 'PageRules is-upload');
 ?>
+
+<div class="LayoutBody">
+    <? include('jump.php'); ?>
+    <div class="HtmlText BoxBody" id="Rules-Upload-mdx" mdx></div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        lang.render('Rules/Upload.mdx')
+    })
+</script>
+
+<? /*
 <!-- Uploading Rules -->
 <div class="LayoutBody">
     <? include('jump.php'); ?>
@@ -207,6 +219,8 @@ View::show_header(Lang::get('rules', 'upload_rules'), 'rules', 'PageRules is-upl
     </div>
 
 </div>
+*/ ?>
+
 <?
 View::show_footer();
 ?>
