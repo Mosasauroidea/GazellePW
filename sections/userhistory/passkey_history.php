@@ -29,7 +29,7 @@ if (!check_perms('users_view_keys', $Class)) {
     error(403);
 }
 
-View::show_header(Lang::get('userhistory', 'passkey_history_for_before') . "$Username" . Lang::get('userhistory', 'passkey_history_for_after'), '', 'PageUserHistoryPasskey');
+View::show_header(Lang::get('userhistory.passkey_history_for_before') . "$Username" . Lang::get('userhistory.passkey_history_for_after'), '', 'PageUserHistoryPasskey');
 
 $DB->query("
 	SELECT
@@ -43,14 +43,14 @@ $DB->query("
 
 ?>
 <div class="BodyHeader">
-    <h2 class="BodyHeader-nav"><?= Lang::get('userhistory', 'passkey_history_for_before') ?><a href="/user.php?id=<?= $UserID ?>"><?= $Username ?></a><?= Lang::get('userhistory', 'passkey_history_for_after') ?></h2>
+    <h2 class="BodyHeader-nav"><?= Lang::get('userhistory.passkey_history_for_before') ?><a href="/user.php?id=<?= $UserID ?>"><?= $Username ?></a><?= Lang::get('userhistory.passkey_history_for_after') ?></h2>
 </div>
 <div class="TableContainer">
     <table class="TableUserPasskeyHihstory Table">
         <tr class="Table-rowHeader">
-            <td class="Table-cell"><?= Lang::get('userhistory', 'old') ?></td>
-            <td class="Table-cell"><?= Lang::get('userhistory', 'new') ?></td>
-            <td class="Table-cell"><?= Lang::get('userhistory', 'changed') ?></td>
+            <td class="Table-cell"><?= Lang::get('userhistory.old') ?></td>
+            <td class="Table-cell"><?= Lang::get('userhistory.new') ?></td>
+            <td class="Table-cell"><?= Lang::get('userhistory.changed') ?></td>
             <td class="Table-cell">IP <a href="/userhistory.php?action=ips&amp;userid=<?= $UserID ?>" class="brackets">H</a></td>
         </tr>
         <? while (list($OldPassKey, $NewPassKey, $ChangeTime, $ChangerIP) = $DB->next_record()) { ?>

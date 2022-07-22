@@ -122,31 +122,31 @@ View::show_header($Title, 'browse,comments,torrent,bbcode,recommend,cover_art,su
     <div class="BodyHeader">
         <div class="BodyNavLinks">
             <? if (check_perms('site_edit_wiki')) { ?>
-                <a href="torrents.php?action=editgroup&amp;groupid=<?= $GroupID ?>" class="brackets"><?= Lang::get('torrents', 'editgroup') ?></a>
+                <a href="torrents.php?action=editgroup&amp;groupid=<?= $GroupID ?>" class="brackets"><?= Lang::get('torrents.editgroup') ?></a>
             <?  } ?>
-            <a href="torrents.php?action=editrequest&amp;groupid=<?= $GroupID ?>" class="brackets"><?= Lang::get('torrents', 'editrequest') ?></a>
-            <a href="torrents.php?action=history&amp;groupid=<?= $GroupID ?>" class="brackets"><?= Lang::get('torrents', 'viewhistory') ?></a>
+            <a href="torrents.php?action=editrequest&amp;groupid=<?= $GroupID ?>" class="brackets"><?= Lang::get('torrents.editrequest') ?></a>
+            <a href="torrents.php?action=history&amp;groupid=<?= $GroupID ?>" class="brackets"><?= Lang::get('torrents.viewhistory') ?></a>
             <? if ($RevisionID && check_perms('site_edit_wiki')) { ?>
-                <a href="torrents.php?action=revert&amp;groupid=<?= $GroupID ?>&amp;revisionid=<?= $RevisionID ?>&amp;auth=<?= $LoggedUser['AuthKey'] ?>" class="brackets"><?= Lang::get('torrents', 'revert') ?></a>
+                <a href="torrents.php?action=revert&amp;groupid=<?= $GroupID ?>&amp;revisionid=<?= $RevisionID ?>&amp;auth=<?= $LoggedUser['AuthKey'] ?>" class="brackets"><?= Lang::get('torrents.revert') ?></a>
             <?
             }
             if (Bookmarks::has_bookmarked('torrent', $GroupID)) {
             ?>
-                <a href="#" id="bookmarklink_torrent_<?= $GroupID ?>" class="remove_bookmark brackets" onclick="Unbookmark('torrent', <?= $GroupID ?>, '<?= Lang::get('global', 'add_bookmark') ?>'); return false;"><?= Lang::get('global', 'remove_bookmark') ?></a>
+                <a href="#" id="bookmarklink_torrent_<?= $GroupID ?>" class="remove_bookmark brackets" onclick="Unbookmark('torrent', <?= $GroupID ?>, '<?= Lang::get('global.add_bookmark') ?>'); return false;"><?= Lang::get('global.remove_bookmark') ?></a>
             <?  } else { ?>
-                <a href="#" id="bookmarklink_torrent_<?= $GroupID ?>" class="add_bookmark brackets" onclick="Bookmark('torrent', <?= $GroupID ?>, '<?= Lang::get('global', 'remove_bookmark') ?>'); return false;"><?= Lang::get('global', 'add_bookmark') ?></a>
+                <a href="#" id="bookmarklink_torrent_<?= $GroupID ?>" class="add_bookmark brackets" onclick="Bookmark('torrent', <?= $GroupID ?>, '<?= Lang::get('global.remove_bookmark') ?>'); return false;"><?= Lang::get('global.add_bookmark') ?></a>
             <?  } ?>
-            <a href="#" id="subscribelink_torrents<?= $GroupID ?>" class="brackets" onclick="SubscribeComments('torrents', <?= $GroupID ?>); return false;"><?= Subscriptions::has_subscribed_comments('torrents', $GroupID) !== false ? Lang::get('torrents', 'unsubscribe') : Lang::get('torrents', 'subscribe') ?></a>
+            <a href="#" id="subscribelink_torrents<?= $GroupID ?>" class="brackets" onclick="SubscribeComments('torrents', <?= $GroupID ?>); return false;"><?= Subscriptions::has_subscribed_comments('torrents', $GroupID) !== false ? Lang::get('torrents.unsubscribe') : Lang::get('torrents.subscribe') ?></a>
             <!-- <a href="#" id="recommend" class="brackets">Recommend</a> -->
             <?
             if ($Categories[$GroupCategoryID - 1] == 'Movies') { ?>
-                <a href="upload.php?groupid=<?= $GroupID ?>" class="brackets"><?= Lang::get('torrents', 'add_format') ?></a>
+                <a href="upload.php?groupid=<?= $GroupID ?>" class="brackets"><?= Lang::get('torrents.add_format') ?></a>
             <?
             }
             if (check_perms('site_submit_requests')) { ?>
-                <a href="requests.php?action=new&amp;groupid=<?= $GroupID ?>" class="brackets"><?= Lang::get('torrents', 'req_format') ?></a>
+                <a href="requests.php?action=new&amp;groupid=<?= $GroupID ?>" class="brackets"><?= Lang::get('torrents.req_format') ?></a>
             <?  } ?>
-            <a href="torrents.php?action=grouplog&amp;groupid=<?= $GroupID ?>" class="brackets"><?= Lang::get('torrents', 'viewlog') ?></a>
+            <a href="torrents.php?action=grouplog&amp;groupid=<?= $GroupID ?>" class="brackets"><?= Lang::get('torrents.viewlog') ?></a>
         </div>
     </div>
     <!-- IMDB -->
@@ -165,36 +165,36 @@ View::show_header($Title, 'browse,comments,torrent,bbcode,recommend,cover_art,su
         </div>
         <div class="MovieInfo-tagContainer">
             <div class="MovieInfo-facts">
-                <a class="MovieInfo-fact" data-tooltip="<?= Lang::get('global', 'imdb_rating') ?>, <?= $IMDBVote . ' ' . Lang::get('torrents', 'movie_votes') ?>" target="_blank" href="https://www.imdb.com/title/<? print_r($IMDBID) ?>">
+                <a class="MovieInfo-fact" data-tooltip="<?= Lang::get('global.imdb_rating') ?>, <?= $IMDBVote . ' ' . Lang::get('torrents.movie_votes') ?>" target="_blank" href="https://www.imdb.com/title/<? print_r($IMDBID) ?>">
                     <?= icon('imdb') ?>
                     <span><?= !empty($IMDBRating) ? sprintf("%.1f", $IMDBRating) : '--' ?></span>
                 </a>
-                <a class="MovieInfo-fact" data-tooltip="<?= Lang::get('global', 'douban_rating') ?>, <?= ($DoubanVote ? $DoubanVote : '?') . ' ' . Lang::get('torrents', 'movie_votes') ?>" target="_blank" href="https://movie.douban.com/subject/<?= $DoubanID ?>/">
+                <a class="MovieInfo-fact" data-tooltip="<?= Lang::get('global.douban_rating') ?>, <?= ($DoubanVote ? $DoubanVote : '?') . ' ' . Lang::get('torrents.movie_votes') ?>" target="_blank" href="https://movie.douban.com/subject/<?= $DoubanID ?>/">
                     <?= icon('douban') ?>
                     <span><?= !empty($DoubanRating) ? sprintf("%.1f", $DoubanRating) : '--' ?></span>
                 </a>
-                <a class="MovieInfo-fact <?= empty($RTRating) ? 'lack_of_info' : '' ?>" data-tooltip="<?= Lang::get('global', 'rt_rating') ?>" target="_blank" href="https://www.rottentomatoes.com/m/<?= $RTTitle ?>">
+                <a class="MovieInfo-fact <?= empty($RTRating) ? 'lack_of_info' : '' ?>" data-tooltip="<?= Lang::get('global.rt_rating') ?>" target="_blank" href="https://www.rottentomatoes.com/m/<?= $RTTitle ?>">
                     <?= icon('rotten-tomatoes') ?>
                     <span><?= !empty($RTRating) ? $RTRating : '--' ?></span>
                 </a>
-                <a class="MovieInfo-fact" data-tooltip="<?= Lang::get('upload', 'director') ?>" href="/artist.php?id=<?= $Director['id'] ?>" dir="ltr">
+                <a class="MovieInfo-fact" data-tooltip="<?= Lang::get('upload.director') ?>" href="/artist.php?id=<?= $Director['id'] ?>" dir="ltr">
                     <?= icon('movie-director') ?>
                     <span><?= Artists::display_artist($Director, false) ?></span>
                 </a>
                 <? if (!empty($Duration)) { ?>
-                    <span class="MovieInfo-fact" data-tooltip="<?= Lang::get('torrents', 'imdb_runtime') ?>">
+                    <span class="MovieInfo-fact" data-tooltip="<?= Lang::get('torrents.imdb_runtime') ?>">
                         <?= icon('movie-runtime') ?>
                         <span><?= $Duration . " min" ?></span>
                     </span>
                 <?  } ?>
                 <? if (!empty($Region)) { ?>
-                    <span class="MovieInfo-fact" data-tooltip="<?= Lang::get('torrents', 'imdb_region') ?>">
+                    <span class="MovieInfo-fact" data-tooltip="<?= Lang::get('torrents.imdb_region') ?>">
                         <?= icon('movie-country') ?>
                         <span><? print_r(implode(', ', array_slice(explode(',', $Region), 0, 2))) ?></span>
                     </span>
                 <?  } ?>
                 <? if (!empty($Language)) { ?>
-                    <span class="MovieInfo-fact" data-tooltip="<?= Lang::get('torrents', 'imdb_language') ?>">
+                    <span class="MovieInfo-fact" data-tooltip="<?= Lang::get('torrents.imdb_language') ?>">
                         <?= icon('movie-language') ?>
                         <span><? print_r(implode(', ', array_slice(explode(',', $Language), 0, 2))) ?></span>
                     </span>
@@ -202,14 +202,14 @@ View::show_header($Title, 'browse,comments,torrent,bbcode,recommend,cover_art,su
             </div>
             <div class="MovieInfo-tags">
                 <? foreach ($TagNames as $TagName) { ?>
-                    <span class="MovieInfo-tag" data-tooltip="<?= Lang::get('torrents', 'tag') ?>">
+                    <span class="MovieInfo-tag" data-tooltip="<?= Lang::get('torrents.tag') ?>">
                         <?= $TagName ?>
                     </span>
                 <? } ?>
             </div>
         </div>
 
-        <div class="MovieInfo-synopsis" data-tooltip="<?= Lang::get('torrents', 'fold_tooltip') ?>">
+        <div class="MovieInfo-synopsis" data-tooltip="<?= Lang::get('torrents.fold_tooltip') ?>">
             <p class="HtmlText">
                 <? print_r($WikiBody) ?>
             </p>
@@ -232,7 +232,7 @@ View::show_header($Title, 'browse,comments,torrent,bbcode,recommend,cover_art,su
         <div class="Sidebar LayoutMainSidebar-sidebar">
             <div class="SidebarTags SidebarItem Box">
                 <div class="SidebarItem-header Box-header">
-                    <span><?= Lang::get('torrents', 'tag') ?></span>
+                    <span><?= Lang::get('torrents.tag') ?></span>
                     <?
                     $DeletedTag = $Cache->get_value("deleted_tags_$GroupID" . '_' . $LoggedUser['ID']);
                     if (!empty($DeletedTag)) { ?>
@@ -243,7 +243,7 @@ View::show_header($Title, 'browse,comments,torrent,bbcode,recommend,cover_art,su
                             <input type="hidden" name="tagname" value="<?= $DeletedTag ?>" />
                             <input type="hidden" name="undo" value="true" />
                         </form>
-                        <a class="brackets" href="#" onclick="$('#undo_tag_delete_form').raw().submit(); return false;"><?= Lang::get('torrents', 'undo_delete') ?></a>
+                        <a class="brackets" href="#" onclick="$('#undo_tag_delete_form').raw().submit(); return false;"><?= Lang::get('torrents.undo_delete') ?></a>
 
                     <?              } ?>
                 </div>
@@ -257,20 +257,20 @@ View::show_header($Title, 'browse,comments,torrent,bbcode,recommend,cover_art,su
                                 <a href="torrents.php?taglist=<?= $Tag['name'] ?>"><?= display_str($Tag['name']) ?></a>
                                 <div class="SidebarList-actions">
                                     <? if (check_perms('users_warn')) { ?>
-                                        <a class="SidebarList-action u-hoverToShow-hide" href="user.php?id=<?= $Tag['userid'] ?>" data-tooltip="<?= Lang::get('torrents', 'view_the_profile_of_the_user_that_added_this_tag') ?>">
+                                        <a class="SidebarList-action u-hoverToShow-hide" href="user.php?id=<?= $Tag['userid'] ?>" data-tooltip="<?= Lang::get('torrents.view_the_profile_of_the_user_that_added_this_tag') ?>">
                                             <?= icon('user') ?>
                                         </a>
                                     <? } ?>
                                     <? if (empty($LoggedUser['DisableTagging']) && check_perms('site_delete_tag')) { ?>
-                                        <a class="SidebarList-action  u-hoverToShow-hide" href="torrents.php?action=delete_tag&amp;groupid=<?= $GroupID ?>&amp;tagid=<?= $Tag['id'] ?>&amp;auth=<?= $LoggedUser['AuthKey'] ?>" data-tooltip="<?= Lang::get('torrents', 'remove_tag') ?>">
+                                        <a class="SidebarList-action  u-hoverToShow-hide" href="torrents.php?action=delete_tag&amp;groupid=<?= $GroupID ?>&amp;tagid=<?= $Tag['id'] ?>&amp;auth=<?= $LoggedUser['AuthKey'] ?>" data-tooltip="<?= Lang::get('torrents.remove_tag') ?>">
                                             <?= icon('remove') ?>
                                         </a>
                                     <? } ?>
-                                    <a class="SidebarList-action" href="torrents.php?action=vote_tag&amp;way=up&amp;groupid=<?= $GroupID ?>&amp;tagid=<?= $Tag['id'] ?>&amp;auth=<?= $LoggedUser['AuthKey'] ?>" data-tooltip="<?= Lang::get('torrents', 'vote_this_tag_up') ?>">
+                                    <a class="SidebarList-action" href="torrents.php?action=vote_tag&amp;way=up&amp;groupid=<?= $GroupID ?>&amp;tagid=<?= $Tag['id'] ?>&amp;auth=<?= $LoggedUser['AuthKey'] ?>" data-tooltip="<?= Lang::get('torrents.vote_this_tag_up') ?>">
                                         <?= icon('vote-up') ?>
                                     </a>
                                     <span class="SidebarTags-score"><?= $Tag['score'] ?></span>
-                                    <a class="SidebarList-action" href="torrents.php?action=vote_tag&amp;way=down&amp;groupid=<?= $GroupID ?>&amp;tagid=<?= $Tag['id'] ?>&amp;auth=<?= $LoggedUser['AuthKey'] ?>" data-tooltip="<?= Lang::get('torrents', 'vote_this_tag_down') ?>">
+                                    <a class="SidebarList-action" href="torrents.php?action=vote_tag&amp;way=down&amp;groupid=<?= $GroupID ?>&amp;tagid=<?= $Tag['id'] ?>&amp;auth=<?= $LoggedUser['AuthKey'] ?>" data-tooltip="<?= Lang::get('torrents.vote_this_tag_down') ?>">
                                         <?= icon('vote-down') ?>
                                     </a>
                                 </div>
@@ -283,7 +283,7 @@ View::show_header($Title, 'browse,comments,torrent,bbcode,recommend,cover_art,su
                 } else { // The "no tags to display" message was wrapped in <ul> tags to pad the text.
                 ?>
                     <ul>
-                        <li><?= Lang::get('torrents', 'there_are_no_tags_to_display') ?></li>
+                        <li><?= Lang::get('torrents.there_are_no_tags_to_display') ?></li>
                     </ul>
                 <?
                 }
@@ -293,7 +293,7 @@ View::show_header($Title, 'browse,comments,torrent,bbcode,recommend,cover_art,su
             if (empty($LoggedUser['DisableTagging'])) {
             ?>
                 <div class="SidebarItemTagAdd SidebarItem Box">
-                    <div class="SidebarItem-header Box-header"><span><?= Lang::get('torrents', 'add_tag') ?></span></div>
+                    <div class="SidebarItem-header Box-header"><span><?= Lang::get('torrents.add_tag') ?></span></div>
                     <div class="SidebarItem-body Box-body">
                         <form class="FormOneLine FormTorrentAddTag" name="tags" action="torrents.php" method="post">
                             <input type="hidden" name="action" value="add_tag" />
@@ -302,7 +302,7 @@ View::show_header($Title, 'browse,comments,torrent,bbcode,recommend,cover_art,su
                             <input class="Input" type="text" name="tagname" id="tagname" size="20" <? Users::has_autocomplete_enabled('other'); ?> />
                             <input class="Button" type="submit" value="+" />
                         </form>
-                        <span><a href="rules.php?p=tag" class="brackets"><?= Lang::get('torrents', 'tag_rules') ?></a></span>
+                        <span><a href="rules.php?p=tag" class="brackets"><?= Lang::get('torrents.tag_rules') ?></a></span>
                     </div>
                 </div>
             <?
@@ -315,13 +315,13 @@ View::show_header($Title, 'browse,comments,torrent,bbcode,recommend,cover_art,su
             ?>
                 <div class="SidebarItemArtists SidebarItem Box is-limitHeight">
                     <div class="SidebarItem-header Box-header u-hoverToShow-hover">
-                        <span><?= Lang::get('global', 'artist') ?></span>
-                        <?= check_perms('torrents_edit') ? '<a class="u-hoverToShow-hide" onclick="ArtistManager(); return false;" href="#">' . Lang::get('global', 'edit') . '</a>' : '' ?>
+                        <span><?= Lang::get('global.artist') ?></span>
+                        <?= check_perms('torrents_edit') ? '<a class="u-hoverToShow-hide" onclick="ArtistManager(); return false;" href="#">' . Lang::get('global.edit') . '</a>' : '' ?>
                     </div>
                     <ul class="SidebarItem-body Box-body SidebarList" id="artist_list">
                         <?
                         if (!empty($Artists[1])) {
-                            print '<li class="SidebarList-item"><strong class="artists_label">' . Lang::get('torrents', 'director') . ':</strong></li>';
+                            print '<li class="SidebarList-item"><strong class="artists_label">' . Lang::get('torrents.director') . ':</strong></li>';
                         }
                         foreach ($Artists[1] as $Artist) {
                         ?>
@@ -332,7 +332,7 @@ View::show_header($Title, 'browse,comments,torrent,bbcode,recommend,cover_art,su
                                     $AliasID = $Artist['id'];
                                 ?>
                                     <div class="SidebarList-actions">
-                                        <a class="SidebarList-action u-hoverToShow-hide" href="javascript:void(0);" onclick="ajax.get('torrents.php?action=delete_alias&amp;auth=' + authkey + '&amp;groupid=<?= $GroupID ?>&amp;artistid=<?= $Artist['id'] ?>&amp;importance=1'); this.parentNode.parentNode.style.display = 'none';" data-tooltip="<?= Lang::get('torrents', 'remove_artist') ?>">
+                                        <a class="SidebarList-action u-hoverToShow-hide" href="javascript:void(0);" onclick="ajax.get('torrents.php?action=delete_alias&amp;auth=' + authkey + '&amp;groupid=<?= $GroupID ?>&amp;artistid=<?= $Artist['id'] ?>&amp;importance=1'); this.parentNode.parentNode.style.display = 'none';" data-tooltip="<?= Lang::get('torrents.remove_artist') ?>">
                                             <?= icon('remove') ?>
                                         </a>
                                     </div>
@@ -343,7 +343,7 @@ View::show_header($Title, 'browse,comments,torrent,bbcode,recommend,cover_art,su
 
 
                         if (!empty($Artists[2]) && count($Artists[2]) > 0) {
-                            print '				<li class="SidebarList-item"><strong class="artists_label">' .  Lang::get('torrents', 'writer') . ':</strong></li>';
+                            print '				<li class="SidebarList-item"><strong class="artists_label">' .  Lang::get('torrents.writer') . ':</strong></li>';
                             foreach ($Artists[2] as $Artist) {
                             ?>
                                 <li class="SidebarAritsts-item">
@@ -352,7 +352,7 @@ View::show_header($Title, 'browse,comments,torrent,bbcode,recommend,cover_art,su
                                         $AliasID = $Artist['id'];
                                     ?>
                                         <div class="SidebarList-actions">
-                                            <a class="SidebarList-action u-hoverToShow-hide" href="javascript:void(0);" onclick="ajax.get('torrents.php?action=delete_alias&amp;auth=' + authkey + '&amp;groupid=<?= $GroupID ?>&amp;artistid=<?= $Artist['id'] ?>&amp;importance=2'); this.parentNode.parentNode.style.display = 'none';" data-tooltip="<?= Lang::get('torrents', 'remove_artist') ?>">
+                                            <a class="SidebarList-action u-hoverToShow-hide" href="javascript:void(0);" onclick="ajax.get('torrents.php?action=delete_alias&amp;auth=' + authkey + '&amp;groupid=<?= $GroupID ?>&amp;artistid=<?= $Artist['id'] ?>&amp;importance=2'); this.parentNode.parentNode.style.display = 'none';" data-tooltip="<?= Lang::get('torrents.remove_artist') ?>">
                                                 <?= icon('remove') ?>
                                             </a>
                                         </div>
@@ -364,7 +364,7 @@ View::show_header($Title, 'browse,comments,torrent,bbcode,recommend,cover_art,su
 
 
                         if (!empty($Artists[3]) && count($Artists[3]) > 0) {
-                            print '				<li class="SidebarList-item"><strong class="artists_label">' . Lang::get('torrents', 'movie_producer') . ':</strong></li>';
+                            print '				<li class="SidebarList-item"><strong class="artists_label">' . Lang::get('torrents.movie_producer') . ':</strong></li>';
                             foreach ($Artists[3] as $Artist) {
                             ?>
                                 <li class="SidebarList-item u-hoverToShow-hover">
@@ -373,7 +373,7 @@ View::show_header($Title, 'browse,comments,torrent,bbcode,recommend,cover_art,su
                                         $AliasID = $Artist['id'];
                                     ?>
                                         <span class="SidebarList-actions">
-                                            <a class="SidebarList-action  u-hoverToShow-hide" href="javascript:void(0);" onclick="ajax.get('torrents.php?action=delete_alias&amp;auth=' + authkey + '&amp;groupid=<?= $GroupID ?>&amp;artistid=<?= $Artist['id'] ?>&amp;importance=3'); this.parentNode.parentNode.style.display = 'none';" data-tooltip="<?= Lang::get('torrents', 'remove_artist') ?>">
+                                            <a class="SidebarList-action  u-hoverToShow-hide" href="javascript:void(0);" onclick="ajax.get('torrents.php?action=delete_alias&amp;auth=' + authkey + '&amp;groupid=<?= $GroupID ?>&amp;artistid=<?= $Artist['id'] ?>&amp;importance=3'); this.parentNode.parentNode.style.display = 'none';" data-tooltip="<?= Lang::get('torrents.remove_artist') ?>">
                                                 <?= icon('remove') ?>
                                             </a>
                                         </span>
@@ -383,7 +383,7 @@ View::show_header($Title, 'browse,comments,torrent,bbcode,recommend,cover_art,su
                             }
                         }
                         if (!empty($Artists[4]) && count($Artists[4]) > 0) {
-                            print '<li class="SidebarList-item "><strong class="artists_label">' . Lang::get('torrents', 'composer') . ':</strong></li>';
+                            print '<li class="SidebarList-item "><strong class="artists_label">' . Lang::get('torrents.composer') . ':</strong></li>';
                             foreach ($Artists[4] as $Artist) {
                             ?>
                                 <li class="SidebarList-item u-hoverToShow-hover">
@@ -402,7 +402,7 @@ View::show_header($Title, 'browse,comments,torrent,bbcode,recommend,cover_art,su
                                         }
                                     ?>
                                         <span class="SidebarList-actions">
-                                            <a class="SidebarList-action u-hoverToShow-hide" href="javascript:void(0);" onclick="ajax.get('torrents.php?action=delete_alias&amp;auth=' + authkey + '&amp;groupid=<?= $GroupID ?>&amp;artistid=<?= $Artist['id'] ?>&amp;importance=4'); this.parentNode.parentNode.style.display = 'none';" data-tooltip="<?= Lang::get('torrents', 'remove_artist') ?>">
+                                            <a class="SidebarList-action u-hoverToShow-hide" href="javascript:void(0);" onclick="ajax.get('torrents.php?action=delete_alias&amp;auth=' + authkey + '&amp;groupid=<?= $GroupID ?>&amp;artistid=<?= $Artist['id'] ?>&amp;importance=4'); this.parentNode.parentNode.style.display = 'none';" data-tooltip="<?= Lang::get('torrents.remove_artist') ?>">
                                                 <?= icon('remove') ?>
                                             </a>
                                         </span>
@@ -412,7 +412,7 @@ View::show_header($Title, 'browse,comments,torrent,bbcode,recommend,cover_art,su
                             }
                         }
                         if (!empty($Artists[5]) && count($Artists[5]) > 0) {
-                            print '<li class="SidebarList-item"><strong class="artists_label">' . Lang::get('torrents', 'cinematographer') . ':</strong></li>';
+                            print '<li class="SidebarList-item"><strong class="artists_label">' . Lang::get('torrents.cinematographer') . ':</strong></li>';
                             foreach ($Artists[5] as $Artist) {
                             ?>
                                 <li class="SidebarList-item u-hoverToShow-hover">
@@ -421,7 +421,7 @@ View::show_header($Title, 'browse,comments,torrent,bbcode,recommend,cover_art,su
                                         $AliasID = $Artist['id'];
                                     ?>
                                         <span class="SidebarList-actions">
-                                            <a class="SidebarList-action u-hoverToShow-hide" href="javascript:void(0);" onclick="ajax.get('torrents.php?action=delete_alias&amp;auth=' + authkey + '&amp;groupid=<?= $GroupID ?>&amp;artistid=<?= $Artist['id'] ?>&amp;importance=5'); this.parentNode.parentNode.style.display = 'none';" data-tooltip="<?= Lang::get('torrents', 'remove_conductor') ?>">
+                                            <a class="SidebarList-action u-hoverToShow-hide" href="javascript:void(0);" onclick="ajax.get('torrents.php?action=delete_alias&amp;auth=' + authkey + '&amp;groupid=<?= $GroupID ?>&amp;artistid=<?= $Artist['id'] ?>&amp;importance=5'); this.parentNode.parentNode.style.display = 'none';" data-tooltip="<?= Lang::get('torrents.remove_conductor') ?>">
                                                 <?= icon('remove') ?>
                                             </a>
                                         </span>
@@ -431,7 +431,7 @@ View::show_header($Title, 'browse,comments,torrent,bbcode,recommend,cover_art,su
                             }
                         }
                         if (!empty($Artists[6]) && count($Artists[6]) > 0) {
-                            print '<li class="SidebarList-item"><strong class="artists_label">' . Lang::get('torrents', 'actor') . ':</strong></li>';
+                            print '<li class="SidebarList-item"><strong class="artists_label">' . Lang::get('torrents.actor') . ':</strong></li>';
                             foreach ($Artists[6] as $Artist) {
                             ?>
                                 <li class="SidebarList-item u-hoverToShow-hover">
@@ -440,7 +440,7 @@ View::show_header($Title, 'browse,comments,torrent,bbcode,recommend,cover_art,su
                                         $AliasID = $Artist['id'];
                                     ?>
                                         <span class="SidebarList-actions">
-                                            <a class="SidebarList-action u-hoverToShow-hide" href="javascript:void(0);" onclick="ajax.get('torrents.php?action=delete_alias&amp;auth=' + authkey + '&amp;groupid=<?= $GroupID ?>&amp;artistid=<?= $Artist['id'] ?>&amp;importance=6'); this.parentNode.parentNode.style.display = 'none';" data-tooltip="<?= Lang::get('torrents', 'remove_artist') ?>">
+                                            <a class="SidebarList-action u-hoverToShow-hide" href="javascript:void(0);" onclick="ajax.get('torrents.php?action=delete_alias&amp;auth=' + authkey + '&amp;groupid=<?= $GroupID ?>&amp;artistid=<?= $Artist['id'] ?>&amp;importance=6'); this.parentNode.parentNode.style.display = 'none';" data-tooltip="<?= Lang::get('torrents.remove_artist') ?>">
                                                 <?= icon('remove') ?>
                                             </a>
                                         </span>
@@ -455,7 +455,7 @@ View::show_header($Title, 'browse,comments,torrent,bbcode,recommend,cover_art,su
                 <? if (check_perms('torrents_add_artist')) { ?>
                     <div class="SidebarItemArtistAdd SidebarItem Box">
                         <div class="SidebarItem-header Box-header u-hoverToShow-hover">
-                            <span><?= Lang::get('torrents', 'add_artist') ?></span>
+                            <span><?= Lang::get('torrents.add_artist') ?></span>
                             <a class="u-hoverToShow-hide" onclick="globalapp.browseAddArtistField(); return false;" href="#">+</a>
                         </div>
                         <div class="SidebarItem-body Box-body">
@@ -466,15 +466,15 @@ View::show_header($Title, 'browse,comments,torrent,bbcode,recommend,cover_art,su
                                     <input type="hidden" name="groupid" value="<?= $GroupID ?>" />
                                     <input class="Input" type="text" id="artist" name="aliasname[]" size="17" <? Users::has_autocomplete_enabled('other'); ?> />
                                     <select class="Input" name="importance[]">
-                                        <option class="Select-option" value="1"><?= Lang::get('torrents', 'director') ?></option>
-                                        <option class="Select-option" value="2"><?= Lang::get('torrents', 'writer') ?></option>
-                                        <option class="Select-option" value="3"><?= Lang::get('torrents', 'movie_producer') ?></option>
-                                        <option class="Select-option" value="4"><?= Lang::get('torrents', 'composer') ?></option>
-                                        <option class="Select-option" value="5"><?= Lang::get('torrents', 'cinematographer') ?></option>
-                                        <option class="Select-option" value="6"><?= Lang::get('torrents', 'actor') ?></option>
+                                        <option class="Select-option" value="1"><?= Lang::get('torrents.director') ?></option>
+                                        <option class="Select-option" value="2"><?= Lang::get('torrents.writer') ?></option>
+                                        <option class="Select-option" value="3"><?= Lang::get('torrents.movie_producer') ?></option>
+                                        <option class="Select-option" value="4"><?= Lang::get('torrents.composer') ?></option>
+                                        <option class="Select-option" value="5"><?= Lang::get('torrents.cinematographer') ?></option>
+                                        <option class="Select-option" value="6"><?= Lang::get('torrents.actor') ?></option>
                                     </select>
                                 </div>
-                                <input class="Button" type="submit" value="<?= Lang::get('global', 'add') ?>" />
+                                <input class="Button" type="submit" value="<?= Lang::get('global.add') ?>" />
                             </form>
                         </div>
                     </div>
@@ -542,33 +542,33 @@ View::show_header($Title, 'browse,comments,torrent,bbcode,recommend,cover_art,su
                     <tr class="Table-rowHeader">
                         <td class="TableTorrent-cellName Table-cell" colspan="1">
                             <span>
-                                <?= Lang::get('global', 'torrents') ?>
+                                <?= Lang::get('global.torrents') ?>
                                 <span> | <span>
-                                        <a href='#' onclick='globalapp.toggleTab(event, ".u-tabItemSlot")'><?= Lang::get('torrents', 'slot_table') ?></a>
+                                        <a href='#' onclick='globalapp.toggleTab(event, ".u-tabItemSlot")'><?= Lang::get('torrents.slot_table') ?></a>
                                     </span>
                                     <? if ($HasRequest) { ?>
                                         | <span>
-                                            <a href='#' onclick='globalapp.toggleTab(event, ".u-tabItemRequest")'><?= Lang::get('global', 'requests') ?></a>
+                                            <a href='#' onclick='globalapp.toggleTab(event, ".u-tabItemRequest")'><?= Lang::get('global.requests') ?></a>
                                         </span>
                                     <? } ?>
                         </td>
                         <td class="TableTorrent-cellSize Table-cell TableTorrent-cellStat">
-                            <span aria-hidden="true" data-tooltip="<?= Lang::get('global', 'size') ?>">
+                            <span aria-hidden="true" data-tooltip="<?= Lang::get('global.size') ?>">
                                 <?= icon('torrent-size') ?>
                             </span>
                         </td>
                         <td class="TableTorrent-cellSnatches Table-cell TableTorrent-cellStat">
-                            <span aria-hidden="true" data-tooltip="<?= Lang::get('global', 'snatched') ?>">
+                            <span aria-hidden="true" data-tooltip="<?= Lang::get('global.snatched') ?>">
                                 <?= icon('torrent-snatches') ?>
                             </span>
                         </td>
                         <td class="TableTorrent-cellSeeders Table-cell TableTorrent-cellStat">
-                            <i aria-hidden="true" data-tooltip="<?= Lang::get('global', 'seeders') ?>">
+                            <i aria-hidden="true" data-tooltip="<?= Lang::get('global.seeders') ?>">
                                 <?= icon('torrent-seeders') ?>
                             </i>
                         </td>
                         <td class="TableTorrent-cellLeechers Table-cell TableTorrent-cellStat">
-                            <i aria-hidden="true" data-tooltip="<?= Lang::get('global', 'leechers') ?>">
+                            <i aria-hidden="true" data-tooltip="<?= Lang::get('global.leechers') ?>">
                                 <?= icon('torrent-leechers') ?>
                             </i>
                         </td>
@@ -577,15 +577,15 @@ View::show_header($Title, 'browse,comments,torrent,bbcode,recommend,cover_art,su
                         <td class="TableTorrent-cellSlotFilter Table-cell" colspan="5">
                             <div class="TableTorrent-slotFilters" id="slot_filter">
                                 <!-- same line to prevent space -->
-                                <a href="#" class="TableTorrent-slotFilterButton" data-slot="quality" onclick='globalapp.filterSlot(event, ["quality", "en_quality", "cn_quality", "feature"])' data-tooltip="<?= Lang::get('torrents', 'all_quality_slot') ?>"><?= icon('Torrent/slot_quality') ?></a>
-                                <a href="#" class="TableTorrent-slotFilterButton" data-slot="cn_quality" onclick='globalapp.filterSlot(event, ["cn_quality"])' data-tooltip="<?= Lang::get('torrents', 'cn_quality_slot') ?>"><?= icon('Torrent/slot_cn_quality') ?></a>
-                                <a href="#" class="TableTorrent-slotFilterButton" data-slot="en_quality" onclick='globalapp.filterSlot(event, ["en_quality"])' data-tooltip="<?= Lang::get('torrents', 'en_quality_slot') ?>"><?= icon('Torrent/slot_en_quality') ?></a>
-                                <a href="#" class="TableTorrent-slotFilterButton" data-slot="retention" onclick='globalapp.filterSlot(event, ["retention"])' data-tooltip="<?= Lang::get('torrents', 'retention_slot') ?>"><?= icon('Torrent/slot_retention') ?></a>
-                                <a href="#" class="TableTorrent-slotFilterButton" data-slot="feature" onclick='globalapp.filterSlot(event, ["feature"])' data-tooltip="<?= Lang::get('torrents', 'feature_slot') ?>"><?= icon('Torrent/slot_feature') ?></a>
-                                <a href="#" class="TableTorrent-slotFilterButton" data-slot="remux" onclick='globalapp.filterSlot(event, ["remux"])' data-tooltip="<?= Lang::get('torrents', 'remux_slot') ?>"><?= icon('Torrent/slot_remux') ?></a>
-                                <a href="#" class="TableTorrent-slotFilterButton" data-slot="untouched" onclick='globalapp.filterSlot(event, ["untouched"])' data-tooltip="<?= Lang::get('torrents', 'untouched_slot') ?>"><?= icon('Torrent/slot_untouched') ?></a>
-                                <a href="#" class="TableTorrent-slotFilterButton" data-slot="diy" onclick='globalapp.filterSlot(event, ["diy"])' data-tooltip="<?= Lang::get('torrents', 'diy_slot') ?>"><?= icon('Torrent/slot_diy') ?></a>
-                                <a href="#" class="TableTorrent-slotFilterButton" data-slot="clear" onclick='globalapp.filterSlot(event, [])' style="visibility: hidden;" data-tooltip="<?= Lang::get('torrents', 'clear_slot') ?>"><?= icon('Torrent/slot_clear') ?></a>
+                                <a href="#" class="TableTorrent-slotFilterButton" data-slot="quality" onclick='globalapp.filterSlot(event, ["quality", "en_quality", "cn_quality", "feature"])' data-tooltip="<?= Lang::get('torrents.all_quality_slot') ?>"><?= icon('Torrent/slot_quality') ?></a>
+                                <a href="#" class="TableTorrent-slotFilterButton" data-slot="cn_quality" onclick='globalapp.filterSlot(event, ["cn_quality"])' data-tooltip="<?= Lang::get('torrents.cn_quality_slot') ?>"><?= icon('Torrent/slot_cn_quality') ?></a>
+                                <a href="#" class="TableTorrent-slotFilterButton" data-slot="en_quality" onclick='globalapp.filterSlot(event, ["en_quality"])' data-tooltip="<?= Lang::get('torrents.en_quality_slot') ?>"><?= icon('Torrent/slot_en_quality') ?></a>
+                                <a href="#" class="TableTorrent-slotFilterButton" data-slot="retention" onclick='globalapp.filterSlot(event, ["retention"])' data-tooltip="<?= Lang::get('torrents.retention_slot') ?>"><?= icon('Torrent/slot_retention') ?></a>
+                                <a href="#" class="TableTorrent-slotFilterButton" data-slot="feature" onclick='globalapp.filterSlot(event, ["feature"])' data-tooltip="<?= Lang::get('torrents.feature_slot') ?>"><?= icon('Torrent/slot_feature') ?></a>
+                                <a href="#" class="TableTorrent-slotFilterButton" data-slot="remux" onclick='globalapp.filterSlot(event, ["remux"])' data-tooltip="<?= Lang::get('torrents.remux_slot') ?>"><?= icon('Torrent/slot_remux') ?></a>
+                                <a href="#" class="TableTorrent-slotFilterButton" data-slot="untouched" onclick='globalapp.filterSlot(event, ["untouched"])' data-tooltip="<?= Lang::get('torrents.untouched_slot') ?>"><?= icon('Torrent/slot_untouched') ?></a>
+                                <a href="#" class="TableTorrent-slotFilterButton" data-slot="diy" onclick='globalapp.filterSlot(event, ["diy"])' data-tooltip="<?= Lang::get('torrents.diy_slot') ?>"><?= icon('Torrent/slot_diy') ?></a>
+                                <a href="#" class="TableTorrent-slotFilterButton" data-slot="clear" onclick='globalapp.filterSlot(event, [])' style="visibility: hidden;" data-tooltip="<?= Lang::get('torrents.clear_slot') ?>"><?= icon('Torrent/slot_clear') ?></a>
                             </div>
                         </td>
                     </tr>
@@ -628,7 +628,7 @@ View::show_header($Title, 'browse,comments,torrent,bbcode,recommend,cover_art,su
                     ?>
                             <tr class="TableTorrent-rowCategory Table-row" group-id="<?= $GroupID ?>">
                                 <td class="TableTorrent-cellCategory Table-cell" colspan="5">
-                                    <a class="u-toggleEdition-button" href="#" onclick="globalapp.toggleEdition(event, <?= $GroupID ?>, <?= $EditionID ?>)" data-tooltip="<?= Lang::get('global', 'collapse_this_edition_title') ?>">&minus;</a>
+                                    <a class="u-toggleEdition-button" href="#" onclick="globalapp.toggleEdition(event, <?= $GroupID ?>, <?= $EditionID ?>)" data-tooltip="<?= Lang::get('global.collapse_this_edition_title') ?>">&minus;</a>
                                     <?= $NewEdition ?>
                                 </td>
                             </tr>
@@ -668,14 +668,14 @@ View::show_header($Title, 'browse,comments,torrent,bbcode,recommend,cover_art,su
                                                     }, torrent_check)
                                                 })
                                             </script>
-                                            <a class="TableTorrent-check" href="javascript:void(0)" id="torrent<?= $TorrentID ?>_check1" style="display:<?= $TorrentChecked ? "inline-block" : "none" ?>;color:#649464;" data-tooltip="<?= Lang::get('torrents', 'checked_by_before') ?><?= $TorrentChecked ? $TorrentCheckedBy : $LoggedUser['Username'] ?><?= Lang::get('torrents', 'checked_by_after') ?>">
+                                            <a class="TableTorrent-check" href="javascript:void(0)" id="torrent<?= $TorrentID ?>_check1" style="display:<?= $TorrentChecked ? "inline-block" : "none" ?>;color:#649464;" data-tooltip="<?= Lang::get('torrents.checked_by_before') ?><?= $TorrentChecked ? $TorrentCheckedBy : $LoggedUser['Username'] ?><?= Lang::get('torrents.checked_by_after') ?>">
                                                 <?= icon("Table/checked") ?>
                                             </a>
-                                            <a class="TableTorrent-check" href="javascript:void(0)" id="torrent<?= $TorrentID ?>_check0" style="display:<?= $TorrentChecked ? "none" : "inline-block" ?>;color:#CF3434;" data-tooltip="<?= Lang::get('torrents', 'turn_me_green') ?>">
+                                            <a class="TableTorrent-check" href="javascript:void(0)" id="torrent<?= $TorrentID ?>_check0" style="display:<?= $TorrentChecked ? "none" : "inline-block" ?>;color:#CF3434;" data-tooltip="<?= Lang::get('torrents.turn_me_green') ?>">
                                                 <?= icon("Table/unchecked") ?>
                                             </a>
                                         <? } else { ?>
-                                            <i class="TableTorrent-check" style="color: <?= $TorrentChecked ? "#74B274" : "#A6A6A6" ?>;" data-tooltip="<?= $TorrentChecked ? Lang::get('torrents', 'has_been_checked') : Lang::get('torrents', 'has_not_been_checked') ?><?= Lang::get('torrents', 'checked_explanation') ?>">
+                                            <i class="TableTorrent-check" style="color: <?= $TorrentChecked ? "#74B274" : "#A6A6A6" ?>;" data-tooltip="<?= $TorrentChecked ? Lang::get('torrents.has_been_checked') : Lang::get('torrents.has_not_been_checked') ?><?= Lang::get('torrents.checked_explanation') ?>">
                                                 <?= icon("Table/" . ($TorrentChecked ? "checked" : "unchecked")) ?>
                                             </i>
                                         <? } ?>
@@ -683,28 +683,28 @@ View::show_header($Title, 'browse,comments,torrent,bbcode,recommend,cover_art,su
                                     <a class="TableTorrent-titleTitle" data-tooltip-html href="#" onclick="globalapp.toggleTorrentDetail(event, '#torrent_detail_<?= $TorrentID ?>')">
                                         <?= $ExtraInfo; ?>
                                         <div data-tooltip-html-content>
-                                            <div><?= Lang::get('torrents', TorrentSlot::slot_name($Slot) . '_slot') ?></div>
+                                            <div><?= Lang::get('torrents.' . TorrentSlot::slot_name($Slot) . '_slot') ?></div>
                                         </div>
                                     </a>
                                     <span class="TableTorrent-titleActions">
                                         [
-                                        <a href="torrents.php?action=download&amp;id=<?= $TorrentID ?>&amp;authkey=<?= $LoggedUser['AuthKey'] ?>&amp;torrent_pass=<?= $LoggedUser['torrent_pass'] ?>" data-tooltip="<?= Lang::get('global', 'download') ?>"><?= ($HasFile ? 'DL' : 'Missing') ?></a>
+                                        <a href="torrents.php?action=download&amp;id=<?= $TorrentID ?>&amp;authkey=<?= $LoggedUser['AuthKey'] ?>&amp;torrent_pass=<?= $LoggedUser['torrent_pass'] ?>" data-tooltip="<?= Lang::get('global.download') ?>"><?= ($HasFile ? 'DL' : 'Missing') ?></a>
                                         <? if ($CanUseToken) { ?>
                                             |
-                                            <a href="torrents.php?action=download&amp;id=<?= $TorrentID ?>&amp;authkey=<?= $LoggedUser['AuthKey'] ?>&amp;torrent_pass=<?= $LoggedUser['torrent_pass'] ?>&amp;usetoken=1" data-tooltip="<?= Lang::get('global', 'use_fl_tokens') ?>" onclick="return confirm('<?= FL_confirmation_msg($Seeders, $Size) ?>');">FL</a>
+                                            <a href="torrents.php?action=download&amp;id=<?= $TorrentID ?>&amp;authkey=<?= $LoggedUser['AuthKey'] ?>&amp;torrent_pass=<?= $LoggedUser['torrent_pass'] ?>&amp;usetoken=1" data-tooltip="<?= Lang::get('global.use_fl_tokens') ?>" onclick="return confirm('<?= FL_confirmation_msg($Seeders, $Size) ?>');">FL</a>
                                         <? } ?>
                                         |
-                                        <a href="reportsv2.php?action=report&amp;id=<?= $TorrentID ?>" data-tooltip="<?= Lang::get('torrents', 'report') ?>">RP</a>
+                                        <a href="reportsv2.php?action=report&amp;id=<?= $TorrentID ?>" data-tooltip="<?= Lang::get('torrents.report') ?>">RP</a>
                                         <? if ($CanEdit) { ?>
                                             |
-                                            <a href="torrents.php?action=edit&amp;id=<?= $TorrentID ?>" data-tooltip="<?= Lang::get('global', 'edit') ?>">ED</a>
+                                            <a href="torrents.php?action=edit&amp;id=<?= $TorrentID ?>" data-tooltip="<?= Lang::get('global.edit') ?>">ED</a>
                                         <? }
                                         if ($CanDelete) { ?>
                                             |
-                                            <a href="torrents.php?action=delete&amp;torrentid=<?= $TorrentID ?>" data-tooltip="<?= Lang::get('torrents', 'remove') ?>">RM</a>
+                                            <a href="torrents.php?action=delete&amp;torrentid=<?= $TorrentID ?>" data-tooltip="<?= Lang::get('torrents.remove') ?>">RM</a>
                                         <? } ?>
                                         |
-                                        <a href="torrents.php?torrentid=<?= $TorrentID ?>" data-tooltip="<?= Lang::get('torrents', 'permalink') ?>">PL</a>
+                                        <a href="torrents.php?torrentid=<?= $TorrentID ?>" data-tooltip="<?= Lang::get('torrents.permalink') ?>">PL</a>
                                         ]
                                     </span>
                             </td>
@@ -740,24 +740,24 @@ View::show_header($Title, 'browse,comments,torrent,bbcode,recommend,cover_art,su
                         <tr class="Table-rowHeader">
                             <td class="TableTorrent-cellName Table-cell" colspan="1">
                                 <span>
-                                    <a href="#" onclick="globalapp.toggleTab(event, '.u-tabItemTorrent')"><?= Lang::get('global', 'torrents') ?></a>
+                                    <a href="#" onclick="globalapp.toggleTab(event, '.u-tabItemTorrent')"><?= Lang::get('global.torrents') ?></a>
                                     <span> | </span>
-                                    <?= Lang::get('torrents', 'slot_table') ?>
+                                    <?= Lang::get('torrents.slot_table') ?>
                                 </span>
-                                <a href="wiki.php?action=article&id=66" data-tooltip="<?= Lang::get('torrents', 'slot_wiki') ?>">[?]</a>
+                                <a href="wiki.php?action=article&id=66" data-tooltip="<?= Lang::get('torrents.slot_wiki') ?>">[?]</a>
                                 <? if ($HasRequest) { ?>
                                     | <span>
-                                        <a href='#' onclick='globalapp.toggleTab(event, ".u-tabItemRequest")'><?= Lang::get('global', 'requests') ?></a>
+                                        <a href='#' onclick='globalapp.toggleTab(event, ".u-tabItemRequest")'><?= Lang::get('global.requests') ?></a>
                                     </span>
                                 <? } ?>
                             </td>
                             <td class="TableTorrent-cellSize Table-cell TableTorrent-cellStat">
-                                <span aria-hidden="true" data-tooltip="<?= Lang::get('global', 'size') ?>">
+                                <span aria-hidden="true" data-tooltip="<?= Lang::get('global.size') ?>">
                                     <?= icon('torrent-size') ?>
                                 </span>
                             </td>
                             <td class="TableTorrent-cellSlotName Table-cell">
-                                <span><?= Lang::get('torrents', 'slot_action') ?></span>
+                                <span><?= Lang::get('torrents.slot_action') ?></span>
                             </td>
                         </tr>
 
@@ -787,7 +787,7 @@ View::show_header($Title, 'browse,comments,torrent,bbcode,recommend,cover_art,su
                         ?>
                                 <tr class="TableTorrent-rowCategory Table-row" group-id="<?= $GroupID ?>">
                                     <td class="TableTorrent-cellCategory Table-cell" colspan="3">
-                                        <a class="u-toggleEdition-button" href="#" onclick="globalapp.toggleEdition(event, <?= $GroupID ?>, <?= $EditionID ?>)" data-tooltip="<?= Lang::get('global', 'collapse_this_edition_title') ?>">&minus;</a>
+                                        <a class="u-toggleEdition-button" href="#" onclick="globalapp.toggleEdition(event, <?= $GroupID ?>, <?= $EditionID ?>)" data-tooltip="<?= Lang::get('global.collapse_this_edition_title') ?>">&minus;</a>
                                         <?= $NewEdition ?>
                                     </td>
                                 </tr>
@@ -801,12 +801,12 @@ View::show_header($Title, 'browse,comments,torrent,bbcode,recommend,cover_art,su
                                         continue;
                                     }
                                     $SlotTooltip = TorrentSlot::empty_slot_tooltip($MissingSlot);
-                                    $MissSlotNames[] = "<span data-tooltip='$SlotTooltip'><i>" . Lang::get('torrents', TorrentSlot::slot_option_lang($MissingSlot)) . "</i></span>";
+                                    $MissSlotNames[] = "<span data-tooltip='$SlotTooltip'><i>" . Lang::get('torrents.' . TorrentSlot::slot_option_lang($MissingSlot)) . "</i></span>";
                                 }
                                 if (count($MissSlotNames) > 0) {
                                 ?>
                                     <tr class="TableTorrent-rowEmptySlotNote Table-row releases_<?= $ReleaseType ?>" group-id="<?= $GroupID ?>" edition-id="<?= $EditionID ?>">
-                                        <td class="TableTorrent-cellEmptySlotNote" colspan="3"><i><?= Lang::get('torrents', TorrentSlot::empty_slot_title(TorrentSlot::get_slot_resolution($Resolution))) ?></i><?= implode(' / ', $MissSlotNames) ?></td>
+                                        <td class="TableTorrent-cellEmptySlotNote" colspan="3"><i><?= Lang::get('torrents.' . TorrentSlot::empty_slot_title(TorrentSlot::get_slot_resolution($Resolution))) ?></i><?= implode(' / ', $MissSlotNames) ?></td>
                                     </tr>
                                 <?
                                 }
@@ -822,7 +822,7 @@ View::show_header($Title, 'browse,comments,torrent,bbcode,recommend,cover_art,su
                                             $TorrentInfo = "<strong style='display:inline' class='u-colorWarning'>$TorrentInfo</strong>";
                                         }
                                         ?>
-                                        <a data-tooltip="<?= Lang::get('torrents', TorrentSlot::slot_name($Slot) . '_slot') ?>" href="#" onclick="globalapp.toggleTorrentDetail(event, '#torrent_slot_<?= $TorrentID ?>'); return false;"><?= $TorrentInfo ?></a>
+                                        <a data-tooltip="<?= Lang::get('torrents.' . TorrentSlot::slot_name($Slot) . '_slot') ?>" href="#" onclick="globalapp.toggleTorrentDetail(event, '#torrent_slot_<?= $TorrentID ?>'); return false;"><?= $TorrentInfo ?></a>
 
                                     </td>
                                     <td class="TableTorrent-cellSize Table-cell TableTorrent-cellStat">
@@ -840,7 +840,7 @@ View::show_header($Title, 'browse,comments,torrent,bbcode,recommend,cover_art,su
                                                     <?= TorrentSlot::slot_option($RSlot, false, $Slot, $IsExtraSlot) ?>
                                                 <?
                                                 }
-                                                $extraName = Lang::get('torrents', 'additional_slots');
+                                                $extraName = Lang::get('torrents.additional_slots');
                                                 ?>
                                                 <optgroup class="Select-group" label="<?= $extraName ?>">
                                                     <?
@@ -862,7 +862,7 @@ View::show_header($Title, 'browse,comments,torrent,bbcode,recommend,cover_art,su
                                         if (empty($SlotName)) {
                                             $SlotName = '---';
                                         } else {
-                                            $SlotName = Lang::get('torrents', $SlotName);
+                                            $SlotName = Lang::get("torrents.$SlotName");
                                         }
                                         if ($IsExtraSlot) {
                                             $SlotName .= '*';
@@ -916,17 +916,17 @@ View::show_header($Title, 'browse,comments,torrent,bbcode,recommend,cover_art,su
                         <tr class="Table-rowHeader">
                             <td class="TableRequest-cellName Table-cell" colspan="1">
                                 <span>
-                                    <a href="#" onclick="globalapp.toggleTab(event, '.u-tabItemTorrent')"><?= Lang::get('global', 'torrents') ?></a>
+                                    <a href="#" onclick="globalapp.toggleTab(event, '.u-tabItemTorrent')"><?= Lang::get('global.torrents') ?></a>
                                 </span>
                                 <span> | </span>
                                 <span>
-                                    <a href='#' onclick='globalapp.toggleTab(event, ".u-tabItemSlot")'><?= Lang::get('torrents', 'slot_table') ?></a>
+                                    <a href='#' onclick='globalapp.toggleTab(event, ".u-tabItemSlot")'><?= Lang::get('torrents.slot_table') ?></a>
                                 </span>
                                 <span> | </span>
-                                <?= Lang::get('global', 'requests') ?>
+                                <?= Lang::get('global.requests') ?>
                             </td>
-                            <td class="TableRequest-cellVotes Table-cell TableRequest-cellValue"><?= Lang::get('torrents', 'votes') ?></td>
-                            <td class="TableRequest-cellBounty Table-cell TableRequest-cellValue"><?= Lang::get('torrents', 'bounty') ?></td>
+                            <td class="TableRequest-cellVotes Table-cell TableRequest-cellValue"><?= Lang::get('torrents.votes') ?></td>
+                            <td class="TableRequest-cellBounty Table-cell TableRequest-cellValue"><?= Lang::get('torrents.bounty') ?></td>
                         </tr>
                         <? foreach ($Requests as $Request) {
                             $RequestVotes = Requests::get_votes_array($Request['ID']);
@@ -984,11 +984,11 @@ View::show_header($Title, 'browse,comments,torrent,bbcode,recommend,cover_art,su
             ?>
                 <table class="Table TableCollage">
                     <tr class="Table-rowHeader">
-                        <td class="Table-cell" width="85%"><?= Lang::get('torrents', 'this_album_is_in_collages_1') ?>
+                        <td class="Table-cell" width="85%"><?= Lang::get('torrents.this_album_is_in_collages_1') ?>
                             <?= number_format(count($Collages)) ?>
-                            <?= Lang::get('torrents', 'this_album_is_in_collages_2') ?><?= ((count($Collages) > 1) ? Lang::get('torrents', 'this_album_is_in_collages_3') : '') ?><?= $SeeAll ?>
+                            <?= Lang::get('torrents.this_album_is_in_collages_2') ?><?= ((count($Collages) > 1) ? Lang::get('torrents.this_album_is_in_collages_3') : '') ?><?= $SeeAll ?>
                         </td>
-                        <td class="Table-cell"><?= Lang::get('torrents', 'torrents_count') ?></td>
+                        <td class="Table-cell"><?= Lang::get('torrents.torrents_count') ?></td>
                     </tr>
                     <? foreach ($Indices as $i) {
                         list($CollageName, $CollageTorrents, $CollageID) = $Collages[$i];
@@ -1039,11 +1039,11 @@ View::show_header($Title, 'browse,comments,torrent,bbcode,recommend,cover_art,su
             ?>
                 <table class="TableCollage Table">
                     <tr class="Table-rowHeader">
-                        <td class="Table-cell" width="85%"><?= Lang::get('torrents', 'this_album_is_in_personal_collages_1') ?>
+                        <td class="Table-cell" width="85%"><?= Lang::get('torrents.this_album_is_in_personal_collages_1') ?>
                             <?= number_format(count($PersonalCollages)) ?>
-                            <?= Lang::get('torrents', 'this_album_is_in_personal_collages_2') ?><?= ((count($PersonalCollages) > 1) ? Lang::get('torrents', 'this_album_is_in_personal_collages_3') : '') ?><?= $SeeAll ?>
+                            <?= Lang::get('torrents.this_album_is_in_personal_collages_2') ?><?= ((count($PersonalCollages) > 1) ? Lang::get('torrents.this_album_is_in_personal_collages_3') : '') ?><?= $SeeAll ?>
                         </td>
-                        <td class="Table-cell"><?= Lang::get('torrents', 'torrents_count') ?></td>
+                        <td class="Table-cell"><?= Lang::get('torrents.torrents_count') ?></td>
                     </tr>
                     <? foreach ($Indices as $i) {
                         list($CollageName, $CollageTorrents, $CollageID) = $PersonalCollages[$i];

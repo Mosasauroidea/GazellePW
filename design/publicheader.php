@@ -50,14 +50,14 @@ define('FOOTER_FILE', CONFIG['SERVER_ROOT'] . '/design/publicfooter.php');
                 <div id="logo">
                     <ul id="index-login">
                         <?php if (CONFIG['SHOW_PUBLIC_INDEX']) { ?>
-                            <li><a href="index.php"><?= Lang::get('pub', 'public_index') ?></a></li>
+                            <li><a href="index.php"><?= Lang::get('pub.public_index') ?></a></li>
                         <?php } ?>
-                        <li><a id="login-a" href="login.php<?= (isset($LoginKey) && $LoginKey) ? "?loginkey=$LoginKey" : "" ?>"><?= Lang::get('pub', 'login') ?></a></li>
+                        <li><a id="login-a" href="login.php<?= (isset($LoginKey) && $LoginKey) ? "?loginkey=$LoginKey" : "" ?>"><?= Lang::get('pub.login') ?></a></li>
                         <?php if (open_registration()) { ?>
-                            <li><a href="register.php"><?= Lang::get('pub', 'register') ?></a></li>
+                            <li><a href="register.php"><?= Lang::get('pub.register') ?></a></li>
                         <?php } ?>
                         <?php if (CONFIG['OPEN_EXTERNAL_REFERRALS']) { ?>
-                            <li><a href="referral.php"><?= Lang::get('pub', 'referral') ?></a></li>
+                            <li><a href="referral.php"><?= Lang::get('pub.referral') ?></a></li>
                         <?php } ?>
 
                     </ul>

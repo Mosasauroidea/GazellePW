@@ -976,7 +976,7 @@ class Text {
                         self::$InQuotes--;
                         break;
                     case 'hide':
-                        $Str .= '<strong>' . (($Block['Attr']) ? $Block['Attr'] : Lang::get('user', 'hidden_text')) . '</strong>: <a href="javascript:void(0);" onclick="BBCode.spoiler(this);">Show</a>';
+                        $Str .= '<strong>' . (($Block['Attr']) ? $Block['Attr'] : Lang::get('user.hidden_text')) . '</strong>: <a href="javascript:void(0);" onclick="BBCode.spoiler(this);">Show</a>';
                         $Str .= '<blockquote class="hidden spoiler">' . self::to_html($Block['Val']) . '</blockquote>';
                         break;
                     case 'mature':
@@ -1165,7 +1165,7 @@ class Text {
                         ];
                         $Str .= "<div>";
                         $Str .= "<a data-action='toggle-mediainfo' href='#'>";
-                        $Str .= Lang::get('index', 'details');
+                        $Str .= Lang::get('index.details');
                         $Str .= "</a> | " . $Title . "</div><div class='hidden'><pre class='MediaInfoText' variant='bdinfo'>" . $Block['Val'] . "</pre></div>";
                         $VideoAudioSubTitle = stristr($Block['Val'], "VIDEO:");
                         $VideoText = rtrim(substr($VideoAudioSubTitle, 0, stripos($VideoAudioSubTitle, "AUDIO:")));
@@ -1382,7 +1382,7 @@ class Text {
                             }
                         }
                         $Str .= "<div><a data-action='toggle-mediainfo' href='#'>";
-                        $Str .= Lang::get('index', 'details') . "</a> | ";
+                        $Str .= Lang::get('index.details') . "</a> | ";
                         if (isset($MediaInfo['General'][0]) && $MediaInfo['General'][0]['Complete name']) {
                             $slash = strrpos($MediaInfo['General'][0]['Complete name'], '\\');
                             if (!$slash) {

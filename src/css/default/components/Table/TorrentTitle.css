@@ -16,29 +16,16 @@ TorrentTitle TorrentTitle--standalone   # settings - torrent title
 }
 
 /* item */
-.TorrentTitle-item.torrent_discount {
-  color: #fff;
-  padding: 0 3.5px;
-  border-radius: var(--global-borderRadius);
-  font-weight: 400 !important;
-  font-size: 13px;
-  display: inline-block;
-  transform: scale(0.85, 0.72) translateY(2px);
-}
-.TorrentTitle-item.torrent_discount.free {
+.TorrentTitle-item.bg {
   background-color: #0055ff;
+  color: #fff;
+  padding: 1px 3.5px;
+  display: inline-block;
+  font-size: 0.8em;
+  border-radius: 3px;
 }
-.TorrentTitle-item.torrent_discount.three_fourth_off {
-  background-color: #622ca8;
-}
-.TorrentTitle-item.torrent_discount.two_fourth_off {
-  background-color: #8d4b44;
-}
-.TorrentTitle-item.torrent_discount.one_fourth_off {
-  background-color: #3e6e7b;
-}
-.TorrentTitle-item.torrent_discount.neutral {
-  background-color: #55666f;
+.TorrentTitle-item.bg:is(.tl_buy, .tl_diy) {
+  background-color: #d46d3d;
 }
 .TorrentTitle-item.tl_notice {
   font-weight: bold;
@@ -51,9 +38,6 @@ TorrentTitle TorrentTitle--standalone   # settings - torrent title
 }
 .TorrentTitle-item.tl_snatched {
   color: #00bc8c;
-}
-.TorrentTitle-item.tl_free {
-  font-weight: bold;
 }
 
 /* standalone */

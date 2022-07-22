@@ -65,14 +65,14 @@ $DB->query("
 	SELECT FOUND_ROWS()");
 list($NumResults) = $DB->next_record();
 
-View::show_header(Lang::get('wiki', 'search_articles'), '', 'PageWikiSearch');
+View::show_header(Lang::get('wiki.search_articles'), '', 'PageWikiSearch');
 $DB->set_query_id($RS);
 ?>
 <div class="LayoutBody">
     <div class="BodyHeader">
-        <h2 class="BodyHeader-nav"><?= Lang::get('wiki', 'search_articles') ?></h2>
+        <h2 class="BodyHeader-nav"><?= Lang::get('wiki.search_articles') ?></h2>
         <div class="BodyNavLinks">
-            <a href="wiki.php?action=create&amp;alias=<?= display_str(Wiki::normalize_alias($_GET['search'])) ?>" class="brackets"><?= Lang::get('wiki', 'create_an_article') ?></a>
+            <a href="wiki.php?action=create&amp;alias=<?= display_str(Wiki::normalize_alias($_GET['search'])) ?>" class="brackets"><?= Lang::get('wiki.create_an_article') ?></a>
         </div>
     </div>
     <div id="wiki_search_box">
@@ -83,22 +83,22 @@ $DB->set_query_id($RS);
             </div>
             <table cellpadding="6" cellspacing="1" border="0" class="layout border" width="100%">
                 <tr>
-                    <td class="label"><label for="search"><strong><?= Lang::get('wiki', 'search_for') ?>:</strong></label></td>
+                    <td class="label"><label for="search"><strong><?= Lang::get('wiki.search_for') ?>:</strong></label></td>
                     <td colspan="3">
                         <input class="Input" type="text" name="search" id="search" size="70" value="<?= display_str($_GET['search']) ?>" />
                     </td>
                 </tr>
                 <tr>
-                    <td class="label"><strong><?= Lang::get('wiki', 'search_in') ?>:</strong></td>
+                    <td class="label"><strong><?= Lang::get('wiki.search_in') ?>:</strong></td>
                     <td>
                         <label><input type="radio" name="type" value="Title" <? if ($Type == 'Title') {
                                                                                     echo 'checked="checked" ';
-                                                                                } ?> /> <?= Lang::get('wiki', 'title') ?></label>
+                                                                                } ?> /> <?= Lang::get('wiki.title') ?></label>
                         <label><input type="radio" name="type" value="Body" <? if ($Type == 'Body') {
                                                                                 echo 'checked="checked" ';
-                                                                            } ?> /> <?= Lang::get('wiki', 'body') ?></label>
+                                                                            } ?> /> <?= Lang::get('wiki.body') ?></label>
                     </td>
-                    <td class="label"><strong><?= Lang::get('wiki', 'order_by') ?>:</strong></td>
+                    <td class="label"><strong><?= Lang::get('wiki.order_by') ?>:</strong></td>
                     <td>
                         <select class="Input" name="order">
                             <? foreach ($OrderVals as $Cur) { ?>
@@ -133,9 +133,9 @@ $DB->set_query_id($RS);
     <div class="TableContainer">
         <table class="TableWikiArticle Table">
             <tr class="Table-rowHeader">
-                <td class="Table-cell"><?= Lang::get('wiki', 'article') ?></td>
-                <td class="Table-cell" class="Table-cell"><?= Lang::get('wiki', 'last_updated_on') ?></td>
-                <td><?= Lang::get('wiki', 'last_edited_by') ?></td>
+                <td class="Table-cell"><?= Lang::get('wiki.article') ?></td>
+                <td class="Table-cell" class="Table-cell"><?= Lang::get('wiki.last_updated_on') ?></td>
+                <td><?= Lang::get('wiki.last_edited_by') ?></td>
             </tr>
             <? while (list($ID, $Title, $Date, $UserID) = $DB->next_record()) { ?>
                 <tr class="Table-row">

@@ -93,7 +93,7 @@ View::show_header('User Stats', '', 'PageUserStat');
         <?php
         if (!$OwnProfile) {
         ?>
-            <a href="inbox.php?action=compose&amp;toid=<?= $UserID ?>" class="brackets"><?= Lang::get('inbox', 'send_message') ?></a>
+            <a href="inbox.php?action=compose&amp;toid=<?= $UserID ?>" class="brackets"><?= Lang::get('inbox.send_message') ?></a>
             <a href="reports.php?action=report&amp;type=user&amp;id=<?= $UserID ?>" class="brackets">Report user</a>
         <?php
         }

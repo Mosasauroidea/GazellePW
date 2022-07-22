@@ -1,6 +1,6 @@
 <?
 include(CONFIG['SERVER_ROOT'] . '/sections/tools/managers/award_functions.php');
-View::show_header(Lang::get('tools', 'work_statistical_graph'), '', 'PageToolAward');
+View::show_header(Lang::get('tools.work_statistical_graph'), '', 'PageToolAward');
 $Year = isset($_GET['year']) ? intval($_GET['year']) : 0;
 $Quarter = isset($_GET['quarter']) ? intval($_GET['quarter']) : 0;
 $Month = isset($_GET['month']) ? intval($_GET['month']) : 0;
@@ -14,9 +14,9 @@ if (!$Year) {
 if ($Quarter && $Month) {
     $Month = 0;
 }
-$QUARTER = array("", Lang::get('tools', 'quarter_1'), Lang::get('tools', 'quarter_2'), Lang::get('tools', 'quarter_3'), Lang::get('tools', 'quarter_4'));
+$QUARTER = array("", Lang::get('tools.quarter_1'), Lang::get('tools.quarter_2'), Lang::get('tools.quarter_3'), Lang::get('tools.quarter_4'));
 ?>
-<h2><?= Lang::get('tools', 'statistical_settlement_time_dividing_query_panel') ?></h2>
+<h2><?= Lang::get('tools.statistical_settlement_time_dividing_query_panel') ?></h2>
 <table style="width: auto;" id="table-select">
     <?
     printYearTR(2019, ($Month || $Quarter) ? 0 : $Year);
@@ -70,12 +70,12 @@ $(document).ready(function() {
 })
 </script>
 -->
-<h2 id="award-title" style="text-align: center;"><?= Lang::get('tools', 'year_before') . "$Year" . Lang::get('tools', 'year_after') . ($Month ? Lang::get('tools', 'month_before') . "$Month" . Lang::get('tools', 'month_after') : "") . ($Quarter ? "$QUARTER[$Quarter]" : "") ?></h2>
-<p style="font-size: 14px;text-align: right;"><?= Lang::get('tools', 'explanation_thread') ?></p>
+<h2 id="award-title" style="text-align: center;"><?= Lang::get('tools.year_before') . "$Year" . Lang::get('tools.year_after') . ($Month ? Lang::get('tools.month_before') . "$Month" . Lang::get('tools.month_after') : "") . ($Quarter ? "$QUARTER[$Quarter]" : "") ?></h2>
+<p style="font-size: 14px;text-align: right;"><?= Lang::get('tools.explanation_thread') ?></p>
 <div id="salary-table">
     <div id="table-head-left">
-        <div class="row1 th-span1 row-span-2"><?= Lang::get('tools', 'group') ?></div>
-        <div class="row1 th-span1 row-span-2"><?= Lang::get('tools', 'id') ?></div>
+        <div class="row1 th-span1 row-span-2"><?= Lang::get('tools.group') ?></div>
+        <div class="row1 th-span1 row-span-2"><?= Lang::get('tools.id') ?></div>
         <?
         $row = 2;
         $PutoutUsersIDs = [];
@@ -109,33 +109,33 @@ $(document).ready(function() {
     </div>
     <div id="table-right-scroll">
         <div id="table-head-top" style="grid-template-columns: repeat(15, 1fr);">
-            <div class="row1 th-span2"><?= Lang::get('tools', 'data') ?></div>
-            <div class="row1 th-span4"><?= Lang::get('tools', 'torrent_management') ?></div>
-            <div class="row1 th-span4"><?= Lang::get('tools', 'site_activities') ?></div>
-            <div class="row1 th-span1"><?= Lang::get('tools', 'others') ?></div>
-            <div class="row1 col-tail th-span4"><?= Lang::get('tools', 'wage_statistics') ?></div>
-            <div class="row2 th-span1"><?= Lang::get('tools', 'snatches') ?></div>
-            <div class="row2 th-span1"><?= Lang::get('tools', 'uploads') ?></div>
-            <div class="row2 th-span1"><?= Lang::get('tools', 'checks') ?></div>
-            <div class="row2 th-span1"><?= Lang::get('tools', 'reports_submitted') ?></div>
-            <div class="row2 th-span1"><?= Lang::get('tools', 'reports_handled') ?></div>
-            <div class="row2 th-span1"><?= Lang::get('tools', 'edit_requests_handled') ?></div>
-            <div class="row2 th-span1"><?= Lang::get('tools', 'posts') ?></div>
-            <div class="row2 th-span1"><?= Lang::get('tools', 'rewarded_times') ?></div>
-            <div class="row2 th-span1"><?= Lang::get('tools', 'qq_group') ?></div>
-            <div class="row2 th-span1"><?= Lang::get('tools', 'tg_group') ?></div>
-            <div class="row2 th-span1"><?= Lang::get('tools', 'examined') ?></div>
-            <div class="row2 th-span1"><?= Lang::get('tools', 'total_points') ?></div>
-            <div class="row2 th-span1"><?= Lang::get('tools', 'floating_wage') ?></div>
-            <div class="row2 th-span1"><?= Lang::get('tools', 'base_salary') ?></div>
-            <div class="row2 th-span1 col-tail"><?= Lang::get('tools', 'total_wages') ?></div>
+            <div class="row1 th-span2"><?= Lang::get('tools.data') ?></div>
+            <div class="row1 th-span4"><?= Lang::get('tools.torrent_management') ?></div>
+            <div class="row1 th-span4"><?= Lang::get('tools.site_activities') ?></div>
+            <div class="row1 th-span1"><?= Lang::get('tools.others') ?></div>
+            <div class="row1 col-tail th-span4"><?= Lang::get('tools.wage_statistics') ?></div>
+            <div class="row2 th-span1"><?= Lang::get('tools.snatches') ?></div>
+            <div class="row2 th-span1"><?= Lang::get('tools.uploads') ?></div>
+            <div class="row2 th-span1"><?= Lang::get('tools.checks') ?></div>
+            <div class="row2 th-span1"><?= Lang::get('tools.reports_submitted') ?></div>
+            <div class="row2 th-span1"><?= Lang::get('tools.reports_handled') ?></div>
+            <div class="row2 th-span1"><?= Lang::get('tools.edit_requests_handled') ?></div>
+            <div class="row2 th-span1"><?= Lang::get('tools.posts') ?></div>
+            <div class="row2 th-span1"><?= Lang::get('tools.rewarded_times') ?></div>
+            <div class="row2 th-span1"><?= Lang::get('tools.qq_group') ?></div>
+            <div class="row2 th-span1"><?= Lang::get('tools.tg_group') ?></div>
+            <div class="row2 th-span1"><?= Lang::get('tools.examined') ?></div>
+            <div class="row2 th-span1"><?= Lang::get('tools.total_points') ?></div>
+            <div class="row2 th-span1"><?= Lang::get('tools.floating_wage') ?></div>
+            <div class="row2 th-span1"><?= Lang::get('tools.base_salary') ?></div>
+            <div class="row2 th-span1 col-tail"><?= Lang::get('tools.total_wages') ?></div>
 
         </div>
         <div id="table-content" style="grid-template-columns: repeat(15, 1fr);">
             <?
             $row = 2;
             $PutoutUsersIDs = [];
-            $Gear = ["", Lang::get('tools', 'grade_1'), Lang::get('tools', 'grade_2'), Lang::get('tools', 'grade_3'), Lang::get('tools', 'grade_4'), Lang::get('tools', 'grade_5')];
+            $Gear = ["", Lang::get('tools.grade_1'), Lang::get('tools.grade_2'), Lang::get('tools.grade_3'), Lang::get('tools.grade_4'), Lang::get('tools.grade_5')];
             foreach ($AwardDatas as $data) {
                 foreach ($data['Users'] as $User) {
                     if (!in_array($User['UserID'], $PutoutUsersIDs)) {

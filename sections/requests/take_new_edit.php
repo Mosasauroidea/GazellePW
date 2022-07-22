@@ -54,7 +54,7 @@ if (empty($CategoryID)) {
 }
 
 if (empty($_POST['title'])) {
-    $Err = Lang::get('requests', 'forgot_enter_title');
+    $Err = Lang::get('requests.forgot_enter_title');
 } else {
     $Title = trim($_POST['title']);
 }
@@ -81,20 +81,20 @@ if (!empty($_POST['imdb'])) {
 }
 
 if (empty($_POST['tags'])) {
-    $Err = Lang::get('requests', 'forgot_enter_tags');
+    $Err = Lang::get('requests.forgot_enter_tags');
 } else {
     $Tags = trim($_POST['tags']);
 }
 
 if ($NewRequest) {
     if (empty($_POST['amount'])) {
-        $Err = Lang::get('requests', 'forgot_enter_bounty');
+        $Err = Lang::get('requests.forgot_enter_bounty');
     } else {
         $Bounty = trim($_POST['amount']);
         if (!is_number($Bounty)) {
-            $Err = Lang::get('requests', 'entered_bounty_not_number');
+            $Err = Lang::get('requests.entered_bounty_not_number');
         } elseif ($Bounty < 100 * 1024 * 1024) {
-            $Err = Lang::get('requests', 'min_bounty_100_mb');
+            $Err = Lang::get('requests.min_bounty_100_mb');
         }
         $Bytes = $Bounty; //From MB to B
     }
@@ -107,19 +107,19 @@ if (empty($_POST['image'])) {
     if (preg_match('/' . IMAGE_REGEX . '/', trim($_POST['image'])) > 0) {
         $Image = trim($_POST['image']);
     } else {
-        $Err = display_str($_POST['image']) . Lang::get('requests', 'image_link_invalid');
+        $Err = display_str($_POST['image']) . Lang::get('requests.image_link_invalid');
     }
 }
 
 if (empty($_POST['description'])) {
-    $Err = Lang::get('requests', 'forgot_enter_description');
+    $Err = Lang::get('requests.forgot_enter_description');
 } else {
     $Description = trim($_POST['description']);
 }
 
 if ($CategoryName === 'Movies') {
     if (empty($_POST['artists'])) {
-        $Err = Lang::get('requests', 'forgot_enter_artists');
+        $Err = Lang::get('requests.forgot_enter_artists');
     } else {
         $Artists = $_POST['artists'];
         $ArtistIDs = $_POST['artist_ids'];
@@ -128,7 +128,7 @@ if ($CategoryName === 'Movies') {
     }
 
     if (!is_number($_POST['releasetype']) || !in_array($_POST['releasetype'], $ReleaseTypes)) {
-        $Err = Lang::get('requests', 'forgot_pick_release_type');
+        $Err = Lang::get('requests.forgot_pick_release_type');
     }
 
     $ReleaseType = $_POST['releasetype'];
@@ -136,7 +136,7 @@ if ($CategoryName === 'Movies') {
     if (empty($_POST['all_codecs']) && count($_POST['codecs']) !== count($Codecs)) {
         $CodecArray = $_POST['codecs'];
         if (count($CodecArray) < 1) {
-            $Err = Lang::get('requests', 'require_one_codec');
+            $Err = Lang::get('requests.require_one_codec');
         }
     } else {
         $AllCodec = true;
@@ -145,7 +145,7 @@ if ($CategoryName === 'Movies') {
     if (empty($_POST['all_sources']) && count($_POST['sources']) !== count($Sources)) {
         $SourceArray = $_POST['sources'];
         if (count($SourceArray) < 1) {
-            $Err = Lang::get('requests', 'require_one_source');
+            $Err = Lang::get('requests.require_one_source');
         }
     } else {
         $AllSources = true;
@@ -154,7 +154,7 @@ if ($CategoryName === 'Movies') {
     if (empty($_POST['all_containers']) && count($_POST['containers']) !== count($Containers)) {
         $ContainerArray = $_POST['containers'];
         if (count($ContainerArray) < 1) {
-            $Err = Lang::get('requests', 'require_one_container');
+            $Err = Lang::get('requests.require_one_container');
         }
     } else {
         $AllContainer = true;
@@ -162,7 +162,7 @@ if ($CategoryName === 'Movies') {
     if (empty($_POST['all_resolutions']) && count($_POST['resolutions']) !== count($Resolutions)) {
         $ResolutionArray = $_POST['resolutions'];
         if (count($ResolutionArray) < 1) {
-            $Err = Lang::get('requests', 'require_one_resolution');
+            $Err = Lang::get('requests.require_one_resolution');
         }
     } else {
         $AllResolution = true;
@@ -181,10 +181,10 @@ if ($CategoryName === 'Movies') {
 				WHERE ID = '$GroupID'
 					AND CategoryID = 1");
             if (!$DB->has_results()) {
-                $Err = Lang::get('requests', 'torrent_group_must_correspond_site');
+                $Err = Lang::get('requests.torrent_group_must_correspond_site');
             }
         } else {
-            $Err = Lang::get('requests', 'torrent_group_must_correspond_site');
+            $Err = Lang::get('requests.torrent_group_must_correspond_site');
         }
     } else {
         $GroupID = 0;
@@ -192,11 +192,11 @@ if ($CategoryName === 'Movies') {
 }
 
 if (empty($_POST['year'])) {
-    $Err = Lang::get('requests', 'forgot_enter_year');
+    $Err = Lang::get('requests.forgot_enter_year');
 } else {
     $Year = trim($_POST['year']);
     if (!is_number($Year)) {
-        $Err = Lang::get('requests', 'entered_year_not_number');
+        $Err = Lang::get('requests.entered_year_not_number');
     }
 }
 
@@ -219,7 +219,7 @@ if ($CategoryName === 'Movies') {
         }
     }
     if ($MainArtistCount < 1) {
-        $Err = Lang::get('requests', 'at_least_one_director');
+        $Err = Lang::get('requests.at_least_one_director');
     }
     if (!isset($ArtistNames[0])) {
         unset($ArtistForm);

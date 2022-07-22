@@ -599,14 +599,14 @@ else {
                             setcookie('username', db_string($_POST['username']), time() + 60 * 60, '/', '', false);
                             header('Location: login.php?action=disabled');
                         } elseif ($Enabled == 0) {
-                            $Err = Lang::get('login', 'err_1');
+                            $Err = Lang::get('login.err_1');
                         }
                         setcookie('keeplogged', '', time() + 60 * 60 * 24 * 365, '/', '', false);
                     }
                 } else {
                     log_attempt($UserID);
 
-                    $Err = Lang::get('login', 'err_2');
+                    $Err = Lang::get('login.err_2');
                     setcookie('keeplogged', '', time() + 60 * 60 * 24 * 365, '/', '', false);
                 }
             } else {

@@ -650,7 +650,7 @@ forums:
   forum_specific_rules: 版规
   forums: 论坛
   forums_greater_than_search: 论坛 &gt; 搜索
-  index_refresh: 首页显示（需刷新缓存）
+  index_refresh: 首页显示
   jump_to_last_read: 跳转到最近的已读帖子
   last_edit_by_after: '&nbsp;编辑于'
   last_edit_by_before: 最近由&nbsp;
@@ -660,8 +660,7 @@ forums:
   last_post_time: 最近回帖时间
   latest: 最新主题
   like: 赞
-  limited1: 限投
-  limited2: 项
+  limited: 限投%s项
   locked: 锁定
   missing_votes: 弃权票
   move_thread: 移动主题到
@@ -917,11 +916,10 @@ inbox:
   you_cannot_start_a_conversation_with_yourself: 你不能向自己发起对话！
   your: 你的
 index:
-  popular_movies: 热门电影
   add_more: 加载更多
+  announcements: 公告
   blank: 弃权 - 显示结果
   blog_note: 博客
-  announcements: 公告
   cleader: Contest Leaderboard
   click_here: 请点此
   collage: 合集
@@ -943,6 +941,7 @@ index:
   peers: 同伴数
   period: 。
   poll: 投票
+  popular_movies: 热门电影
   product_note: You may want to put an image here.
   product_page: Product Page
   s_l_ratio: 做种/下载比
@@ -1646,7 +1645,7 @@ rules:
   ratio: 分享率
   ratio_dl_title: 这些单位是二进制而非十进制的，举个例子，1 GB 中有 1024 MB。
   ratio_summary_e_e: 随着你做种比率的增加，系统会将合格分享率降低。你的做种率越高，你需要达到的合格分享率就越低，进而你就不容易被列入分享率监控名单。
-  ratio_title: 分享率与 H&R
+  ratio_title: 分享率
   ratio_title_de: 该部分规则决定用户在本站做种／下载活动应如何进行。
   requests_title: 求种
   requests_title_de: 该部分规则决定求种的组织和管理形式。
@@ -2498,6 +2497,7 @@ top10:
   most_torrents: 上传最活跃的资源
   most_used_request_tags: 高使用率求种标签
   most_used_torrent_tags: 高使用率种子标签
+  movies: 电影
   name: 种子名称
   neg_votes: 反对
   original: 原创
@@ -2529,11 +2529,10 @@ top10:
   top_10_torrents_history: 前 10 种子历史记录
   top_10_users: 前 10 用户
   top_donors: 捐助者排行
+  top_movies: 电影
   top_n_donors: 捐助者
   top_torrents: 种子
-  top_movies: 电影
   torrents: 种子
-  movies: 电影
   torrents_uploaded: 发布者
   total_donor_points: 总捐助点数
   type: 类型

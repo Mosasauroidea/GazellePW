@@ -51,11 +51,11 @@ if (isset($_REQUEST['addinvite'])) {
         $message = '<strong>用户不存在</strong><br /><br />';
     }
 }
-View::show_header(Lang::get('tools', 'add_invites'));
+View::show_header(Lang::get('tools.add_invites'));
 
 ?>
 <div class="BodyHeader">
-    <h2 class="BodyHeader-nav"><?= Lang::get('tools', 'add_invites_to_users') ?></h2>
+    <h2 class="BodyHeader-nav"><?= Lang::get('tools.add_invites_to_users') ?></h2>
 </div>
 <script>
     function timed() {
@@ -71,20 +71,20 @@ View::show_header(Lang::get('tools', 'add_invites'));
     <form class="add_form" name="invites" method="post">
         <input type="hidden" name="action" value="invite" />
         <input type="hidden" name="auth" value="<?= $LoggedUser['AuthKey'] ?>" />
-        <input id="all" type="radio" name="all" value="all" onclick="user()" checked><label for="all"><?= Lang::get('tools', 'all_enabled_users') ?></label>
-        <input id="one" type="radio" name="all" value="one" onclick="user()"><label for="one"><?= Lang::get('tools', 'userid') ?></label>
+        <input id="all" type="radio" name="all" value="all" onclick="user()" checked><label for="all"><?= Lang::get('tools.all_enabled_users') ?></label>
+        <input id="one" type="radio" name="all" value="one" onclick="user()"><label for="one"><?= Lang::get('tools.userid') ?></label>
         <br>
         <input class="Input" type="number" id="userid" name="userid" size="5" style="text-align: right;" value="0" min="0" disabled />
         <br><br>
-        <label for="numinvite"><?= Lang::get('tools', 'invites') ?>: </label><br>
+        <label for="numinvite"><?= Lang::get('tools.invites') ?>: </label><br>
         <input class="Input" type="number" id="numinvite" name="numinvite" size="5" style="text-align: right;" value="0" min="0" />
         <br><br>
         <div class="Checkbox">
             <input class="Input" type="checkbox" id="time" onclick="timed()" />
-            <label class="Checkbox-label" for="time"><?= Lang::get('tools', 'period_of_validity') ?></label>
+            <label class="Checkbox-label" for="time"><?= Lang::get('tools.period_of_validity') ?></label>
         </div>
         <br>
-        <input class="Input" type="number" name="datetime" id="datetime" disabled><br><?= Lang::get('tools', 'hours') ?>
+        <input class="Input" type="number" name="datetime" id="datetime" disabled><br><?= Lang::get('tools.hours') ?>
 
         <br><br>
         <input class="Button" type="submit" name="addinvite" value="Add invites" />

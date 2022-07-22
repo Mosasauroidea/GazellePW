@@ -44,16 +44,16 @@ View::show_header('Edit Forum Rule', '', 'PageForumEditRule');
     <div class="Box-body thin">
         <div class="BodyHeader">
             <h2 class="BodyHeader-nav">
-                <a href="forums.php"><?= Lang::get('forums', 'forums') ?></a>
+                <a href="forums.php"><?= Lang::get('forums.forums') ?></a>
                 &gt;
                 <a href="forums.php?action=viewforum&amp;forumid=<?= $ForumID ?>"><?= $Forums[$ForumID]['Name'] ?></a>
                 &gt;
-                <?= Lang::get('forums', 'edit_forum_specific_rules') ?>
+                <?= Lang::get('forums.edit_forum_specific_rules') ?>
             </h2>
         </div>
         <table class="TableEditRule">
             <tr class="Table-rowHeader">
-                <td class="Table-cell"><?= Lang::get('forums', 'thread_id') ?></td>
+                <td class="Table-cell"><?= Lang::get('forums.thread_id') ?></td>
                 <td class="Table-cell"></td>
             </tr>
             <tr>

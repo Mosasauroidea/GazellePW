@@ -25,21 +25,21 @@ if (!Forums::check_forumperm($ForumID, 'Write') || !Forums::check_forumperm($For
 View::show_header('Forums &gt; ' . $Forum['Name'] . ' &gt; New Topic', 'comments,bbcode,jquery.validate,form_validate', 'PageForumNewThread');
 ?>
 <div class="LayoutBody">
-    <h2><a href="forums.php"><?= Lang::get('forums', 'forums') ?></a> &gt; <a href="forums.php?action=viewforum&amp;forumid=<?= $ForumID ?>"><?= $Forum['Name'] ?></a> &gt; <span id="newthreadtitle"><?= Lang::get('forums', 'new_topic') ?></span></h2>
+    <h2><a href="forums.php"><?= Lang::get('forums.forums') ?></a> &gt; <a href="forums.php?action=viewforum&amp;forumid=<?= $ForumID ?>"><?= $Forum['Name'] ?></a> &gt; <span id="newthreadtitle"><?= Lang::get('forums.new_topic') ?></span></h2>
     <div class="hidden" id="newthreadpreview">
         <div class="BodyNavLinks">
             <div class="center">
-                <a href="#" onclick="return false;" class="brackets"><?= Lang::get('forums', 'report') ?></a>
+                <a href="#" onclick="return false;" class="brackets"><?= Lang::get('forums.report') ?></a>
                 <a href="#" onclick="return false;" class="brackets"><?= !empty($HeavyInfo['AutoSubscribe']) ? 'Unsubscribe' : 'Subscribe' ?></a>
             </div>
         </div>
         <? if (check_perms('forums_polls_create')) { ?>
             <div class="box thin clear hidden" id="pollpreview">
-                <div class="head colhead_dark"><strong><?= Lang::get('forums', 'poll') ?></strong> <a href="#" onclick="$('#threadpoll').gtoggle(); return false;" class="brackets"><?= Lang::get('forums', 'view') ?></a></div>
+                <div class="head colhead_dark"><strong><?= Lang::get('forums.poll') ?></strong> <a href="#" onclick="$('#threadpoll').gtoggle(); return false;" class="brackets"><?= Lang::get('forums.view') ?></a></div>
                 <div class="pad" id="threadpoll">
                     <p><strong id="pollquestion"></strong></p>
                     <div id="pollanswers"></div>
-                    <br /><input type="radio" name="vote" id="answer_0" value="0" /> <label for="answer_0"><?= Lang::get('forums', 'blank_show_results') ?></label><br /><br />
+                    <br /><input type="radio" name="vote" id="answer_0" value="0" /> <label for="answer_0"><?= Lang::get('forums.blank_show_results') ?></label><br /><br />
                     <input class="Button" type="button" style="float: left;" value="Vote" />
                 </div>
             </div>
@@ -57,7 +57,7 @@ View::show_header('Forums &gt; ' . $Forum['Name'] . ' &gt; New Topic', 'comments
                             </div>
                             <div class="TableForumPostHeader-actions" id="barpreview">
                                 <a href="#newthreadpreview" class="brackets">
-                                    <?= Lang::get('forums', 'report') ?>
+                                    <?= Lang::get('forums.report') ?>
                                 </a>
                             </div>
                     </td>
@@ -81,13 +81,13 @@ View::show_header('Forums &gt; ' . $Forum['Name'] . ' &gt; New Topic', 'comments
             <input type="hidden" name="auth" value="<?= $LoggedUser['AuthKey'] ?>" />
             <input type="hidden" name="forum" value="<?= $ForumID ?>" />
             <div class="Post Post-body Box-body HtmlText" id="newthreadtext">
-                <h3><?= Lang::get('forums', 'title') ?></h3>
+                <h3><?= Lang::get('forums.title') ?></h3>
                 <input class="Input required" type="text" id="title" name="title" />
-                <h3><?= Lang::get('forums', 'body') ?></h3>
+                <h3><?= Lang::get('forums.body') ?></h3>
                 <? new TEXTAREA_PREVIEW('body', 'posttext') ?>
                 <div>
                     <input id="subscribebox" type="checkbox" name="subscribe" <?= !empty($HeavyInfo['AutoSubscribe']) ? ' checked="checked"' : '' ?> onchange="$('#subscribeboxpreview').raw().checked=this.checked;" />
-                    <label for="subscribebox"><?= Lang::get('forums', 'subscribe_to_topic') ?></label>
+                    <label for="subscribebox"><?= Lang::get('forums.subscribe_to_topic') ?></label>
                 </div>
                 </tr>
                 <?
@@ -127,15 +127,15 @@ View::show_header('Forums &gt; ' . $Forum['Name'] . ' &gt; New Topic', 'comments
                         //]]>
                     </script>
                     <div>
-                        <strong><?= Lang::get('forums', 'poll_settings') ?></strong>
-                        <a href="#" onclick="$('#poll_question, #poll_answers').gtoggle(); return false;" class="brackets"><?= Lang::get('forums', 'view') ?></a>
+                        <strong><?= Lang::get('forums.poll_settings') ?></strong>
+                        <a href="#" onclick="$('#poll_question, #poll_answers').gtoggle(); return false;" class="brackets"><?= Lang::get('forums.view') ?></a>
                     </div>
                     <div id="poll_question" class="hidden">
-                        <?= Lang::get('forums', 'question') ?>:
+                        <?= Lang::get('forums.question') ?>:
                         <input class="Input required" type="text" name="question" id="pollquestionfield" />
                     </div>
                     <div id="poll_answers" class="hidden">
-                        <?= Lang::get('forums', 'answers') ?>:
+                        <?= Lang::get('forums.answers') ?>:
                         <div id="answer_block">
                             <input class="Input required" type="text" name="answers[]" />
                             <a href="#" onclick="AddAnswerField();return false;" class="brackets">+</a>
@@ -151,7 +151,7 @@ View::show_header('Forums &gt; ' . $Forum['Name'] . ' &gt; New Topic', 'comments
 
                 <? } ?>
                 <div id="buttons" class="center">
-                    <input class="Button" type="submit" id="submit_button" value="<?= Lang::get('global', 'submit') ?>" />
+                    <input class="Button" type="submit" id="submit_button" value="<?= Lang::get('global.submit') ?>" />
                 </div>
             </div>
 

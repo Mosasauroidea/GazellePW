@@ -221,10 +221,10 @@ function FL_confirmation_msg($seeders, $Size) {
      * Any apostrophes should be avoided or escaped appropriately (with \\').
      */
     $TokenUses = ceil($Size / (5 * 1024 * 1024 * 1024));
-    $FTStr = "$TokenUses" . Lang::get('global', 'n_fl_token') . ($TokenUses > 1 ? Lang::get('global', 's') : "");
+    $FTStr = "$TokenUses" . Lang::get('global.n_fl_token') . ($TokenUses > 1 ? Lang::get('global.s') : "");
     return ($seeders == 0)
-        ? Lang::get('global', 'not_seeded_sure_use_fl_before') . "$FTStr" . Lang::get('global', 'not_seeded_sure_use_fl_after')
-        : Lang::get('global', 'sure_use_fl_before') . "$FTStr" . Lang::get('global', 'sure_use_fl_after');
+        ? Lang::get('global.not_seeded_sure_use_fl_before') . "$FTStr" . Lang::get('global.not_seeded_sure_use_fl_after')
+        : Lang::get('global.sure_use_fl_before') . "$FTStr" . Lang::get('global.sure_use_fl_after');
 }
 
 /**
@@ -365,4 +365,16 @@ function display_array($Array, $Escape = array()) {
 
 function page_title_conn($Titles) {
     return implode(" > ", $Titles);
+}
+
+function get_by_path($Object, $Path, $DefaultValue = null) {
+    $Keys = explode('.', $Path);
+    $Value = $Object;
+    foreach ($Keys as $Key) {
+        if (!isset($Value[$Key])) {
+            return $DefaultValue;
+        }
+        $Value = $Value[$Key];
+    }
+    return $Value;
 }

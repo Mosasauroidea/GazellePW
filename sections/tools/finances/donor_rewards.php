@@ -12,7 +12,7 @@ if ($_GET['username']) {
     $SearchQuery = " WHERE Username LIKE '%$SearchString%' ";
 }
 
-$Title = Lang::get('tools', 'donor_rewards');
+$Title = Lang::get('tools.donor_rewards');
 
 $DB->query("
 	SELECT
@@ -50,20 +50,20 @@ View::show_header($Title, '', 'PageToolDonorReward');
 
 <form action="" method="get">
     <input type="hidden" name="action" value="donor_rewards" />
-    <strong><?= Lang::get('tools', 'username_search') ?>: </strong>
+    <strong><?= Lang::get('tools.username_search') ?>: </strong>
     <input class="Input" type="text" name="username" />
 </form>
 <table class="Table">
     <tr class="Table-rowHeader">
-        <td class="Table-cell"><?= Lang::get('tools', 'username') ?></td>
-        <td class="Table-cell"><?= Lang::get('tools', 'rank') ?></td>
-        <td class="Table-cell"><?= Lang::get('tools', 'hidden') ?></td>
-        <td class="Table-cell"><?= Lang::get('tools', 'last_donated') ?></td>
-        <td class="Table-cell"><?= Lang::get('tools', 'icon_text') ?></td>
-        <td class="Table-cell"><?= Lang::get('tools', 'icon') ?></td>
-        <td class="Table-cell"><?= Lang::get('tools', 'icon_link') ?></td>
-        <td class="Table-cell"><?= Lang::get('tools', 'avatar_text') ?></td>
-        <td class="Table-cell"><?= Lang::get('tools', 'second_avatar') ?></td>
+        <td class="Table-cell"><?= Lang::get('tools.username') ?></td>
+        <td class="Table-cell"><?= Lang::get('tools.rank') ?></td>
+        <td class="Table-cell"><?= Lang::get('tools.hidden') ?></td>
+        <td class="Table-cell"><?= Lang::get('tools.last_donated') ?></td>
+        <td class="Table-cell"><?= Lang::get('tools.icon_text') ?></td>
+        <td class="Table-cell"><?= Lang::get('tools.icon') ?></td>
+        <td class="Table-cell"><?= Lang::get('tools.icon_link') ?></td>
+        <td class="Table-cell"><?= Lang::get('tools.avatar_text') ?></td>
+        <td class="Table-cell"><?= Lang::get('tools.second_avatar') ?></td>
     </tr>
     <?
     foreach ($Users as $User) {
@@ -73,7 +73,7 @@ View::show_header($Title, '', 'PageToolDonorReward');
         <tr class="Table-row">
             <td class="Table-cell"><?= Users::format_username($User['UserID'], false, true, true, false, false, true) ?></td>
             <td class="Table-cell"><?= $User['Rank'] ?></td>
-            <td class="Table-cell"><?= $User['Hidden'] ? Lang::get('tools', 'yes') : Lang::get('tools', 'no') ?></td>
+            <td class="Table-cell"><?= $User['Hidden'] ? Lang::get('tools.yes') : Lang::get('tools.no') ?></td>
             <td class="Table-cell"><?= time_diff($User['DonationTime']) ?></td>
             <td class="Table-cell" style="word-wrap: break-word;">
                 <?= $User['IconMouseOverText'] ?>

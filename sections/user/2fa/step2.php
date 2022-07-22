@@ -1,9 +1,9 @@
 <?
-View::show_header(Lang::get('user', 'two_factor_authentication'), '', 'Pageuser2FAStep2');
+View::show_header(Lang::get('user.two_factor_authentication'), '', 'Pageuser2FAStep2');
 ?>
 
 <div class="BoxBody">
-    <p><?= Lang::get('user', 'two_factor_authentication_note_1') ?> <?= CONFIG['SITE_NAME'] ?> <?= Lang::get('user', 'two_factor_authentication_note_2') ?></p>
+    <p><?= Lang::get('user.two_factor_authentication_note_1') ?> <?= CONFIG['SITE_NAME'] ?> <?= Lang::get('user.two_factor_authentication_note_2') ?></p>
 </div>
 
 <form method="post">
@@ -11,15 +11,15 @@ View::show_header(Lang::get('user', 'two_factor_authentication'), '', 'Pageuser2
         <thead>
             <tr class="colhead_dark">
                 <td colspan="2">
-                    <strong><?= Lang::get('user', 'please_enter_2fa_key') ?></strong>
+                    <strong><?= Lang::get('user.please_enter_2fa_key') ?></strong>
                 </td>
             </tr>
         </thead>
 
         <tbody>
             <tr>
-                <td class="label" data-tooltip-interactive="<?= Lang::get('user', 'authentication_key_title') ?>" data-title-plain="If all went to plan last step, your authentication app should've given you a code. Please enter that here.">
-                    <label for="2fa"><strong><?= Lang::get('user', 'authentication_key') ?>:</strong></label>
+                <td class="label" data-tooltip-interactive="<?= Lang::get('user.authentication_key_title') ?>" data-title-plain="If all went to plan last step, your authentication app should've given you a code. Please enter that here.">
+                    <label for="2fa"><strong><?= Lang::get('user.authentication_key') ?>:</strong></label>
                 </td>
 
                 <td>

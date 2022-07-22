@@ -41,20 +41,20 @@ class CommentsView {
                             </div>
                             <div class="TableForumPostHeader-actions" id="bar<?= $PostID ?>">
                                 <? if ($Tools) { ?>
-                                    <a href="#quickpost" onclick="Quote('<?= $PostID ?>','<?= $UserInfo['Username'] ?>', true);" class="brackets"><?= Lang::get('forums', 'quote') ?></a>
+                                    <a href="#quickpost" onclick="Quote('<?= $PostID ?>','<?= $UserInfo['Username'] ?>', true);" class="brackets"><?= Lang::get('forums.quote') ?></a>
                                     <? if ($AuthorID == G::$LoggedUser['ID'] || check_perms('site_moderate_forums')) { ?>
-                                        - <a href="#post<?= $PostID ?>" onclick="Edit_Form('<?= $PostID ?>','<?= $Key ?>');" class="brackets"><?= Lang::get('global', 'edit') ?></a>
+                                        - <a href="#post<?= $PostID ?>" onclick="Edit_Form('<?= $PostID ?>','<?= $Key ?>');" class="brackets"><?= Lang::get('global.edit') ?></a>
                                     <? } ?>
                                     <? if (check_perms('site_moderate_forums')) { ?>
-                                        - <a href="#post<?= $PostID ?>" onclick="Delete('<?= $PostID ?>');" class="brackets"><?= Lang::get('global', 'delete') ?></a>
+                                        - <a href="#post<?= $PostID ?>" onclick="Delete('<?= $PostID ?>');" class="brackets"><?= Lang::get('global.delete') ?></a>
                                     <? } ?>
-                                    - <a href="reports.php?action=report&amp;type=comment&amp;id=<?= $PostID ?>" class="brackets"><?= Lang::get('forums', 'report') ?></a>
+                                    - <a href="reports.php?action=report&amp;type=comment&amp;id=<?= $PostID ?>" class="brackets"><?= Lang::get('forums.report') ?></a>
                                     <? if (check_perms('users_warn') && $AuthorID != G::$LoggedUser['ID'] && G::$LoggedUser['Class'] >= $UserInfo['Class']) { ?>
                                         <form class="manage_form hidden" name="user" id="warn<?= $PostID ?>" action="comments.php" method="post">
                                             <input type="hidden" name="action" value="warn" />
                                             <input type="hidden" name="postid" value="<?= $PostID ?>" />
                                         </form>
-                                        - <a href="#" onclick="$('#warn<?= $PostID ?>').raw().submit(); return false;" class="brackets"><?= Lang::get('forums', 'warn') ?></a>
+                                        - <a href="#" onclick="$('#warn<?= $PostID ?>').raw().submit(); return false;" class="brackets"><?= Lang::get('forums.warn') ?></a>
                                     <? } ?>
                                 <? } ?>
                             </div>
@@ -78,7 +78,7 @@ class CommentsView {
                                         <? if (check_perms('site_admin_forums')) { ?>
                                             <a href="#content<?= $PostID ?>" onclick="LoadEdit('<?= substr($Link, 0, strcspn($Link, '.')) ?>', <?= $PostID ?>, 1); return false;">&laquo;</a>
                                         <?          } ?>
-                                        <?= Lang::get('forums', 'last_edited_by_before') ?><?= Users::format_username($EditedUserID, false, false, false) ?><?= Lang::get('forums', 'last_edited_by_after') ?> <?= time_diff($EditedTime, 2, true, true) ?>
+                                        <?= Lang::get('forums.last_edited_by_before') ?><?= Users::format_username($EditedUserID, false, false, false) ?><?= Lang::get('forums.last_edited_by_after') ?> <?= time_diff($EditedTime, 2, true, true) ?>
                                     </span>
                                 <?      } ?>
                             </div>

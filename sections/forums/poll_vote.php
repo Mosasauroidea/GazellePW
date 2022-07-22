@@ -88,7 +88,7 @@ if (!empty($Votes)) {
 
 if (!isset($_POST['vote']) || !count($_POST['vote'])) {
 ?>
-    <span class="u-colorWarning"><?= Lang::get('forums', 'please_select_an_option') ?></span><br />
+    <span class="u-colorWarning"><?= Lang::get('forums.please_select_an_option') ?></span><br />
     <form class="vote_form" name="poll" id="poll" action="">
         <input type="hidden" name="action" value="poll" />
         <input type="hidden" name="auth" value="<?= $LoggedUser['AuthKey'] ?>" />
@@ -98,7 +98,7 @@ if (!isset($_POST['vote']) || !count($_POST['vote'])) {
             <input class="poll_answer" type="checkbox" name="vote" id="answer_<?= $i ?>" value="<?= $i ?>" onclick="PollCount(<?= $MaxCount ?>)" />
             <label for="answer_<?= $i ?>"><?= display_str($Answers[$i]) ?></label><br />
         <?  } ?>
-        <br /><input type="checkbox" name="vote" id="answer_0" value="0" onclick="PollCount(0)" /> <label for="answer_0"><?= Lang::get('forums', 'blank_show_results') ?></label><br /><br />
+        <br /><input type="checkbox" name="vote" id="answer_0" value="0" onclick="PollCount(0)" /> <label for="answer_0"><?= Lang::get('forums.blank_show_results') ?></label><br /><br />
         <input class="Button" type="button" onclick="ajax.post('index.php', 'poll', function(response) { $('#poll_container').raw().innerHTML = response });" value="Vote" />
     </form>
 <?
@@ -177,8 +177,8 @@ if (!isset($_POST['vote']) || !count($_POST['vote'])) {
         ?>
     </ul>
     <div class="Poll-count">
-        <?= Lang::get('forums', 'votes') ?>: <?= number_format($TotalVotes) ?>,
-        <?= Lang::get('forums', 'voters') ?>: <?= $PeopleCount ?>
+        <?= Lang::get('forums.votes') ?>: <?= number_format($TotalVotes) ?>,
+        <?= Lang::get('forums.voters') ?>: <?= $PeopleCount ?>
     </div>
 <?
 }

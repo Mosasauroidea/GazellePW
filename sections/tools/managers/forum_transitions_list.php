@@ -72,7 +72,7 @@ View::show_header('Forum Transitions');
             <tr>
                 <td class="label"><label for="userid">User ID</label></td>
                 <td><input class="Input" type="text" name="userid" value="<?= $user ?>" /></td>
-                <td><input class="Button" type="submit" name="submit" value="<?= Lang::get('global', 'submit') ?>" /></td>
+                <td><input class="Button" type="submit" name="submit" value="<?= Lang::get('global.submit') ?>" /></td>
             <tr>
         </table>
     </form>

@@ -4,7 +4,7 @@ if (!is_number($GroupID)) {
     error(404);
 }
 
-View::show_header(Lang::get('torrents', 'history_for_group_after'), '', 'PageTorrentGroupLog');
+View::show_header(Lang::get('torrents.history_for_group_after'), '', 'PageTorrentGroupLog');
 
 $Group = Torrents::get_group($GroupID);
 $Title = Torrents::group_name($Group);
@@ -12,15 +12,15 @@ $Title = Torrents::group_name($Group);
 
 <div class="LayoutBody">
     <div class="BodyHeader">
-        <h2 class="BodyHeader-nav"><?= page_title_conn([Lang::get('torrents', 'history_for_after'), $Title]) ?></h2>
+        <h2 class="BodyHeader-nav"><?= page_title_conn([Lang::get('torrents.history_for_after'), $Title]) ?></h2>
     </div>
     <div class="TableContainer">
         <table class="TableGroupHistory Table">
             <tr class="Table-rowHeader">
-                <td class="Table-cell TableTorrent-cellUploadTime"><?= Lang::get('torrents', 'date') ?></td>
-                <td class="Table-cell"><?= Lang::get('global', 'torrent') ?></td>
-                <td class="Table-cell TableTorrent-cellUserName"><?= Lang::get('torrents', 'user') ?></td>
-                <td class="Table-cell"><?= Lang::get('torrents', 'info') ?></td>
+                <td class="Table-cell TableTorrent-cellUploadTime"><?= Lang::get('torrents.date') ?></td>
+                <td class="Table-cell"><?= Lang::get('global.torrent') ?></td>
+                <td class="Table-cell TableTorrent-cellUserName"><?= Lang::get('torrents.user') ?></td>
+                <td class="Table-cell"><?= Lang::get('torrents.info') ?></td>
             </tr>
             <?
             $Log = $DB->query("

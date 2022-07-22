@@ -96,7 +96,7 @@ $Diff1 = get_body($ArticleID, $_GET['old']);
 ?>
 <div class="LayoutBody">
     <div class="BodyHeader">
-        <h2 class="BodyHeader-nav"><?= Lang::get('wiki', 'compare') ?> <a href="wiki.php?action=article&amp;id=<?= $ArticleID ?>"><?= $Title ?></a> <?= Lang::get('wiki', 'revisions') ?></h2>
+        <h2 class="BodyHeader-nav"><?= Lang::get('wiki.compare') ?> <a href="wiki.php?action=article&amp;id=<?= $ArticleID ?>"><?= $Title ?></a> <?= Lang::get('wiki.revisions') ?></h2>
     </div>
     <div class="box center_revision" id="center">
         <div class="body"><? foreach (diff($Diff1, $Diff2) as $Line) {

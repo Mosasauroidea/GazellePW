@@ -3,7 +3,7 @@
 <footer class="LayoutPage-footer Footer">
     <? if (!empty($Options['disclaimer'])) { ?>
         <div id="disclaimer_container" class="thin" style="text-align: center; margin-bottom: 20px;">
-            <?= Lang::get('pub', 'note') ?>
+            <?= Lang::get('pub.note') ?>
         </div>
     <?
     }
@@ -72,6 +72,10 @@ if (!empty($NotificationSpans)) {
 <div id="extra5"><span></span></div>
 <div id="extra6"><span></span></div>
 
+<script>
+    Object.assign(window.DATA, <?= json_encode($GLOBALS['WINDOW_DATA']) ?>)
+</script>
+
 <script src="/deps/tooltipster.bundle.min.js"></script>
 <script src="/deps/tooltipster-discovery.min.js"></script>
 
@@ -85,6 +89,7 @@ if (!empty($NotificationSpans)) {
     <script type="module" src="<?= vite("@vite/client") ?>"></script>
 <? endif; ?>
 <script type="module" src="<?= vite("src/js/app/app.jsx") ?>"></script>
+
 
 </body>
 

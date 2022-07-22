@@ -55,7 +55,7 @@ if (Misc::in_array_partial($_SERVER['HTTP_USER_AGENT'], $ScriptUAs)) {
 			AND TorrentID = $TorrentID
 		LIMIT 4");
     if ($DB->record_count() === 4) {
-        error(Lang::get('torrents', 'error_downloaded_to_many_times'), true);
+        error(Lang::get('torrents.error_downloaded_to_many_times'), true);
         die();
     }
 }
@@ -105,12 +105,12 @@ if ($_REQUEST['usetoken'] && in_array($FreeTorrent, ['0', '11', '12', '13']) && 
     if (isset($LoggedUser)) {
         $FLTokens = $LoggedUser['FLTokens'];
         if ($LoggedUser['CanLeech'] != '1') {
-            error(Lang::get('torrents', 'error_leech_disabled'));
+            error(Lang::get('torrents.error_leech_disabled'));
         }
     } else {
         $UInfo = Users::user_heavy_info($UserID);
         if ($UInfo['CanLeech'] != '1') {
-            error(Lang::get('torrents', 'error_leech_disabled_may'));
+            error(Lang::get('torrents.error_leech_disabled_may'));
         }
         $FLTokens = $UInfo['FLTokens'];
     }
@@ -120,7 +120,7 @@ if ($_REQUEST['usetoken'] && in_array($FreeTorrent, ['0', '11', '12', '13']) && 
     if (!Torrents::has_token($TorrentID)) {
         $TokenUses = ceil($Size / (5 * 1024 * 1024 * 1024));
         if ($FLTokens < $TokenUses) {
-            error(Lang::get('torrents', 'error_tokens_not_enough'));
+            error(Lang::get('torrents.error_tokens_not_enough'));
         }
         /*
         if ($Size >= 2147483648) {
@@ -129,7 +129,7 @@ if ($_REQUEST['usetoken'] && in_array($FreeTorrent, ['0', '11', '12', '13']) && 
         */
         // Let the tracker know about this
         if (!Tracker::update_tracker('add_token', array('info_hash' => rawurlencode($InfoHash), 'userid' => $UserID))) {
-            error(Lang::get('torrents', 'error_occurred_to_token'));
+            error(Lang::get('torrents.error_occurred_to_token'));
         }
 
         if (!Torrents::has_token($TorrentID)) {

@@ -12,13 +12,13 @@ $Groups = $DB->to_array(false, MYSQLI_ASSOC);
 View::show_header('Staff Group Management');
 ?>
 <div class="BodyHeader">
-    <h2 class="BodyHeader-nav"><?= Lang::get('tools', 'staff_group_management') ?></h2>
+    <h2 class="BodyHeader-nav"><?= Lang::get('tools.staff_group_management') ?></h2>
 </div>
 <table class="Table">
     <tr class="Table-rowHeader">
-        <td class="Table-cell"><?= Lang::get('tools', 'sort') ?></td>
-        <td class="Table-cell"><?= Lang::get('tools', 'name') ?></td>
-        <td class="Table-cell"><?= Lang::get('tools', 'submit') ?></td>
+        <td class="Table-cell"><?= Lang::get('tools.sort') ?></td>
+        <td class="Table-cell"><?= Lang::get('tools.name') ?></td>
+        <td class="Table-cell"><?= Lang::get('tools.submit') ?></td>
     </tr>
     <?php
     $Row = 'b';
@@ -38,7 +38,7 @@ View::show_header('Staff Group Management');
                 </td>
                 <td class="Table-cell">
                     <input class="Button" type="submit" name="submit" value="Edit" />
-                    <input class="Button" type="submit" name="submit" value="Delete" onclick="return confirm('<?= Lang::get('tools', 'sure_delete_staff_group_title') ?>')" />
+                    <input class="Button" type="submit" name="submit" value="Delete" onclick="return confirm('<?= Lang::get('tools.sure_delete_staff_group_title') ?>')" />
                 </td>
             </form>
         </tr>
@@ -46,7 +46,7 @@ View::show_header('Staff Group Management');
     }
     ?>
     <tr class="Table-rowHeader">
-        <td class="Table-cell" colspan="3"><?= Lang::get('tools', 'create_group') ?></td>
+        <td class="Table-cell" colspan="3"><?= Lang::get('tools.create_group') ?></td>
     </tr>
     <tr class="Table-row">
         <form class="create_form" name="groups" action="" method="post">

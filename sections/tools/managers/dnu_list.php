@@ -2,7 +2,7 @@
 if (!check_perms('admin_dnu')) {
     error(403);
 }
-$Title = Lang::get('tools', 'manage_the_dnu_list');
+$Title = Lang::get('tools.manage_the_dnu_list');
 
 View::show_header($Title, 'jquery-ui,dnu_list');
 $DB->query("
@@ -19,13 +19,13 @@ $DB->query("
 <div class="BodyHeader">
     <h2 class="BodyHeader-nav"><?= ($Title) ?></h2>
     <div class="BodyNavLinks">
-        <p><?= Lang::get('tools', 'drag_and_drop_table_rows_to_reorder') ?></p>
+        <p><?= Lang::get('tools.drag_and_drop_table_rows_to_reorder') ?></p>
     </div>
 </div>
 <div class="TableContainer">
     <table class="TableDnu Table">
         <tr class="Table-rowHeader">
-            <td class="Table-cell" colspan="4"><?= Lang::get('tools', 'add_an_entry_to_the_dnu_list') ?></td>
+            <td class="Table-cell" colspan="4"><?= Lang::get('tools.add_an_entry_to_the_dnu_list') ?></td>
         </tr>
         <tr class="Table-row">
             <form class="add_form" name="dnu" action="tools.php" method="post">
@@ -43,10 +43,10 @@ $DB->query("
             </form>
         </tr>
         <tr class="Table-rowHeader">
-            <td class="Table-cell"><?= Lang::get('tools', 'name') ?></td>
-            <td class="Table-cell"><?= Lang::get('tools', 'dnu_comment') ?></td>
-            <td class="Table-cell"><?= Lang::get('tools', 'dnu_added') ?></td>
-            <td class="Table-cell"><?= Lang::get('tools', 'operations') ?></td>
+            <td class="Table-cell"><?= Lang::get('tools.name') ?></td>
+            <td class="Table-cell"><?= Lang::get('tools.dnu_comment') ?></td>
+            <td class="Table-cell"><?= Lang::get('tools.dnu_added') ?></td>
+            <td class="Table-cell"><?= Lang::get('tools.operations') ?></td>
         </tr>
         <tbody>
             <? while (list($ID, $Name, $Comment, $UserID, $DNUTime) = $DB->next_record()) { ?>

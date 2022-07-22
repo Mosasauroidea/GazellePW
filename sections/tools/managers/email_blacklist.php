@@ -5,7 +5,7 @@ if (!check_perms('users_view_email')) {
 }
 list($Page, $Limit) = Format::page_limit(EMAILS_PER_PAGE);
 
-View::show_header(Lang::get('tools', 'manage_email_blacklist'));
+View::show_header(Lang::get('tools.manage_email_blacklist'));
 $Where = "";
 if (!empty($_POST['email'])) {
     $Email = db_string($_POST['email']);
@@ -37,13 +37,13 @@ $DB->query('SELECT FOUND_ROWS()');
 list($NumResults) = $DB->next_record();
 ?>
 <div class="BodyHeader">
-    <h2 class="BodyHeader-nav"><?= Lang::get('tools', 'email_blacklist') ?></h2>
+    <h2 class="BodyHeader-nav"><?= Lang::get('tools.email_blacklist') ?></h2>
 </div>
 <div id="email_blacklist_manager">
     <form action="tools.php" method="post">
         <input type="hidden" name="action" value="email_blacklist" />
-        <input class="Input" type="email" name="email" size="30" placeholder="<?= Lang::get('tools', 'email') ?>" />
-        <input class="Input" type="text" name="comment" size="60" placeholder="<?= Lang::get('tools', 'email_blacklist_comment') ?>" />
+        <input class="Input" type="email" name="email" size="30" placeholder="<?= Lang::get('tools.email') ?>" />
+        <input class="Input" type="text" name="comment" size="60" placeholder="<?= Lang::get('tools.email_blacklist_comment') ?>" />
         <input class="Button" type="submit" value="Search" />
     </form>
     <div class="BodyNavLinks pager">
@@ -55,13 +55,13 @@ list($NumResults) = $DB->next_record();
     </div>
     <table class="Table">
         <tr class="Table-rowHeader">
-            <td class="Table-cell"><?= Lang::get('tools', 'email_address') ?></td>
-            <td class="Table-cell"><?= Lang::get('tools', 'email_blacklist_comment') ?></td>
-            <td class="Table-cell"><?= Lang::get('tools', 'date_added') ?></td>
-            <td class="Table-cell"><?= Lang::get('tools', 'operations') ?></td>
+            <td class="Table-cell"><?= Lang::get('tools.email_address') ?></td>
+            <td class="Table-cell"><?= Lang::get('tools.email_blacklist_comment') ?></td>
+            <td class="Table-cell"><?= Lang::get('tools.date_added') ?></td>
+            <td class="Table-cell"><?= Lang::get('tools.operations') ?></td>
         </tr>
         <tr class="Table-rowHeader">
-            <td class="Table-cell" colspan="4"><?= Lang::get('tools', 'add_to_blacklist') ?></td>
+            <td class="Table-cell" colspan="4"><?= Lang::get('tools.add_to_blacklist') ?></td>
         </tr>
         <tr class="Table-row">
             <form class="add_form" name="email_blacklist" action="tools.php" method="post">

@@ -8,7 +8,7 @@ if (!check_perms('site_collages_subscribe')) {
     error(403);
 }
 
-View::show_header(Lang::get('userhistory', 'subscribed_collages'), 'browse', 'PageUserHistorySubscribedCollage');
+View::show_header(Lang::get('userhistory.subscribed_collages'), 'browse', 'PageUserHistorySubscribedCollage');
 
 $ShowAll = !empty($_GET['showall']);
 
@@ -45,30 +45,30 @@ $CollageSubs = $DB->to_array();
 ?>
 <div class="LayoutBody">
     <div class="BodyHeader">
-        <h2 class="BodyHeader-nav"><?= Lang::get('userhistory', 'subscribed_collages') ?><?= ($ShowAll ? '' : Lang::get('userhistory', 'with_new_additions')) ?></h2>
+        <h2 class="BodyHeader-nav"><?= Lang::get('userhistory.subscribed_collages') ?><?= ($ShowAll ? '' : Lang::get('userhistory.with_new_additions')) ?></h2>
 
         <div class="BodyNavLinks">
             <?
             if ($ShowAll) {
             ?>
                 <br /><br />
-                <a href="userhistory.php?action=subscribed_collages&amp;showall=0" class="brackets"><?= Lang::get('userhistory', 'only_display_collages_with_new_additions') ?></a>
+                <a href="userhistory.php?action=subscribed_collages&amp;showall=0" class="brackets"><?= Lang::get('userhistory.only_display_collages_with_new_additions') ?></a>
             <?
             } else {
             ?>
                 <br /><br />
-                <a href="userhistory.php?action=subscribed_collages&amp;showall=1" class="brackets"><?= Lang::get('userhistory', 'show_all_subscribed_collages') ?></a>
+                <a href="userhistory.php?action=subscribed_collages&amp;showall=1" class="brackets"><?= Lang::get('userhistory.show_all_subscribed_collages') ?></a>
             <?
             }
             ?>
-            <a href="userhistory.php?action=catchup_collages&amp;auth=<?= $LoggedUser['AuthKey'] ?>" class="brackets"><?= Lang::get('userhistory', 'catch_up') ?></a>
+            <a href="userhistory.php?action=catchup_collages&amp;auth=<?= $LoggedUser['AuthKey'] ?>" class="brackets"><?= Lang::get('userhistory.catch_up') ?></a>
         </div>
     </div>
     <?
     if (!$NumResults) {
     ?>
         <div class="center">
-            <?= Lang::get('userhistory', 'no_subscribed_collages') ?><?= ($ShowAll ? '' : Lang::get('userhistory', 'with_new_additions')) ?>
+            <?= Lang::get('userhistory.no_subscribed_collages') ?><?= ($ShowAll ? '' : Lang::get('userhistory.with_new_additions')) ?>
         </div>
         <?
     } else {
@@ -100,10 +100,10 @@ $CollageSubs = $DB->to_array();
                 <tr class="colhead_dark">
                     <td>
                         <span style="float: left;">
-                            <strong><a href="collage.php?id=<?= $CollageID ?>"><?= $CollageName ?></a></strong> (<?= $NewTorrentCount ?> <?= Lang::get('userhistory', 'new_torrent') ?><?= ($NewTorrentCount == 1 ? '' : Lang::get('userhistory', 's')) ?>)
+                            <strong><a href="collage.php?id=<?= $CollageID ?>"><?= $CollageName ?></a></strong> (<?= $NewTorrentCount ?> <?= Lang::get('userhistory.new_torrent') ?><?= ($NewTorrentCount == 1 ? '' : Lang::get('userhistory.s')) ?>)
                         </span>&nbsp;
                         <span style="float: right;">
-                            <a href="#" onclick="$('#collage_table_<?= $CollageID ?>').gtoggle(); this.innerHTML = (this.innerHTML == '<?= Lang::get('global', 'hide') ?>' ? '<?= Lang::get('global', 'show') ?>' : '<?= Lang::get('global', 'hide') ?>'); return false;" class="brackets"><?= ($ShowAll ? Lang::get('userhistory', 'show') : Lang::get('userhistory', 'hide')) ?></a>&nbsp;&nbsp;&nbsp;<a href="userhistory.php?action=catchup_collages&amp;auth=<?= $LoggedUser['AuthKey'] ?>&amp;collageid=<?= $CollageID ?>" class="brackets"><?= Lang::get('userhistory', 'catch_up') ?></a>&nbsp;&nbsp;&nbsp;<a href="#" onclick="CollageSubscribe(<?= $CollageID ?>); return false;" id="subscribelink<?= $CollageID ?>" class="brackets"><?= Lang::get('global', 'unsubscribe') ?></a>
+                            <a href="#" onclick="$('#collage_table_<?= $CollageID ?>').gtoggle(); this.innerHTML = (this.innerHTML == '<?= Lang::get('global.hide') ?>' ? '<?= Lang::get('global.show') ?>' : '<?= Lang::get('global.hide') ?>'); return false;" class="brackets"><?= ($ShowAll ? Lang::get('userhistory.show') : Lang::get('userhistory.hide')) ?></a>&nbsp;&nbsp;&nbsp;<a href="userhistory.php?action=catchup_collages&amp;auth=<?= $LoggedUser['AuthKey'] ?>&amp;collageid=<?= $CollageID ?>" class="brackets"><?= Lang::get('userhistory.catch_up') ?></a>&nbsp;&nbsp;&nbsp;<a href="#" onclick="CollageSubscribe(<?= $CollageID ?>); return false;" id="subscribelink<?= $CollageID ?>" class="brackets"><?= Lang::get('global.unsubscribe') ?></a>
                         </span>
                     </td>
                 </tr>

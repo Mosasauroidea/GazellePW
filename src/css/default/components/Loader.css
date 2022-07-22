@@ -1,0 +1,22 @@
+.Loader {
+  width: 1em;
+  aspect-ratio: 1;
+  display: grid;
+  mask: conic-gradient(from 22deg, #0003, #000);
+  -webkit-mask: conic-gradient(from 22deg, #0003, #000);
+  animation: loader 1s steps(8) infinite;
+}
+.Loader,
+.Loader:before {
+  background: linear-gradient(currentColor 0 0) 50%/34% 8% space no-repeat,
+    linear-gradient(currentColor 0 0) 50%/8% 34% no-repeat space;
+}
+.Loader:before {
+  content: '';
+  transform: rotate(45deg);
+}
+@keyframes loader {
+  to {
+    transform: rotate(1turn);
+  }
+}

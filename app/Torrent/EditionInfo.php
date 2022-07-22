@@ -36,7 +36,7 @@ class EditionInfo {
     }
 
     public static function text(string $key): ?string {
-        return Lang::get('editioninfo', $key);
+        return Lang::get("editioninfo.$key");
     }
 
     public static function icon(string $key): ?string {
@@ -54,5 +54,20 @@ class EditionInfo {
         }
         // TODO by qwerty fix
         return "invalid text";
+    }
+
+    public static function validate($Value) {
+        if (!$Value) {
+            return true;
+        }
+        $RemasterTitles = explode(' / ', $Value);
+        $AllTitles = EditionInfo::allEditionKey();
+        var_dump($RemasterTitles, $AllTitles);
+        foreach ($RemasterTitles as $Title) {
+            if (!in_array($Title, $AllTitles)) {
+                return false;
+            }
+        }
+        return true;
     }
 }

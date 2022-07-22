@@ -27,7 +27,7 @@ $DB->query('SELECT FOUND_ROWS()');
 list($NumResults) = $DB->next_record();
 
 ?>
-<h4 data-tooltip="<?= Lang::get('torrents', 'list_of_giver_title') ?>"><?= Lang::get('torrents', 'list_of_giver') ?></h4>
+<h4 data-tooltip="<?= Lang::get('torrents.list_of_giver_title') ?>"><?= Lang::get('torrents.list_of_giver') ?></h4>
 
 <? if ($NumResults > 100) { ?>
     <div class="BodyNavLinks"><?= js_pages('show_snatches', $_GET['torrentid'], $NumResults, $Page) ?></div>
@@ -35,11 +35,11 @@ list($NumResults) = $DB->next_record();
 <div class="TableContainer">
     <table class="TableTorrentSeedBonus Table">
         <tr class="Table-rowHeader">
-            <td class="Table-cell"><?= Lang::get('torrents', 'user') ?></td>
-            <td class="Table-cell"><?= Lang::get('torrents', 'gift_points_pre_tax') ?></td>
+            <td class="Table-cell"><?= Lang::get('torrents.user') ?></td>
+            <td class="Table-cell"><?= Lang::get('torrents.gift_points_pre_tax') ?></td>
 
-            <td class="Table-cell"><?= Lang::get('torrents', 'user') ?></td>
-            <td class="Table-cell"><?= Lang::get('torrents', 'gift_points_pre_tax') ?></td>
+            <td class="Table-cell"><?= Lang::get('torrents.user') ?></td>
+            <td class="Table-cell"><?= Lang::get('torrents.gift_points_pre_tax') ?></td>
         </tr>
         <tr>
             <?

@@ -161,24 +161,24 @@ if (!empty($GroupIDs)) {
 }
 if ($Sneaky) {
     $UserInfo = Users::user_info($UserID);
-    View::show_header($UserInfo['Username'] . Lang::get('torrents', 's_notifications'), 'notifications', 'PageTorrentNotify');
+    View::show_header($UserInfo['Username'] . Lang::get('torrents.s_notifications'), 'notifications', 'PageTorrentNotify');
 } else {
-    View::show_header(Lang::get('torrents', 'my_notifications'), 'notifications', 'PageTorrentNotify');
+    View::show_header(Lang::get('torrents.my_notifications'), 'notifications', 'PageTorrentNotify');
 }
 ?>
 <div class=LayoutBody>
     <div class="BodyHeader">
-        <h2 class="BodyHeader-nav"><?= Lang::get('torrents', 'latest_notifications') ?></h2>
+        <h2 class="BodyHeader-nav"><?= Lang::get('torrents.latest_notifications') ?></h2>
     </div>
     <div class="BodyNavLinks">
         <? if ($FilterID) { ?>
-            <a href="torrents.php?action=notify<?= ($Sneaky ? "&amp;userid=$UserID" : '') ?>" class="brackets"><?= Lang::get('torrents', 'view_all') ?></a>
+            <a href="torrents.php?action=notify<?= ($Sneaky ? "&amp;userid=$UserID" : '') ?>" class="brackets"><?= Lang::get('torrents.view_all') ?></a>
         <? } elseif (!$Sneaky) { ?>
-            <a href="torrents.php?action=notify_clear&amp;auth=<?= $LoggedUser['AuthKey'] ?>" class="brackets"><?= Lang::get('torrents', 'clear_all_old') ?></a>
-            <a class="brackets" href="#" onclick="globalapp.clearSelected(event)"><?= Lang::get('torrents', 'clear_selected') ?></a>
-            <a href="torrents.php?action=notify_catchup&amp;auth=<?= $LoggedUser['AuthKey'] ?>" class="brackets"><?= Lang::get('torrents', 'catch_up') ?></a>
+            <a href="torrents.php?action=notify_clear&amp;auth=<?= $LoggedUser['AuthKey'] ?>" class="brackets"><?= Lang::get('torrents.clear_all_old') ?></a>
+            <a class="brackets" href="#" onclick="globalapp.clearSelected(event)"><?= Lang::get('torrents.clear_selected') ?></a>
+            <a href="torrents.php?action=notify_catchup&amp;auth=<?= $LoggedUser['AuthKey'] ?>" class="brackets"><?= Lang::get('torrents.catch_up') ?></a>
         <? } ?>
-        <a href="user.php?action=notify" class="brackets"><?= Lang::get('torrents', 'edit_filters') ?></a>
+        <a href="user.php?action=notify" class="brackets"><?= Lang::get('torrents.edit_filters') ?></a>
     </div>
     <? if ($TorrentCount > NOTIFICATIONS_PER_PAGE) { ?>
         <div class="BodyNavLinks">
@@ -191,7 +191,7 @@ if ($Sneaky) {
         <table class="layout border">
             <tr class="rowb">
                 <td colspan="8" class="center">
-                    <?= Lang::get('torrents', 'no_new_notifications_found') ?><a href="user.php?action=notify" class="brackets"><?= Lang::get('torrents', 'edit_notification_filters') ?></a>
+                    <?= Lang::get('torrents.no_new_notifications_found') ?><a href="user.php?action=notify" class="brackets"><?= Lang::get('torrents.edit_notification_filters') ?></a>
                 </td>
             </tr>
         </table>
@@ -213,17 +213,17 @@ if ($Sneaky) {
             <div class="header">
                 <h3>
                     <? if ($FilterResults['FilterLabel'] !== false) { ?>
-                        <?= Lang::get('torrents', 'matches_for_before') ?><a href="torrents.php?action=notify&amp;filterid=<?= $FilterID . ($Sneaky ? "&amp;userid=$UserID" : '') ?>"><?= $FilterResults['FilterLabel'] ?></a><?= Lang::get('torrents', 'matches_for_after') ?>
+                        <?= Lang::get('torrents.matches_for_before') ?><a href="torrents.php?action=notify&amp;filterid=<?= $FilterID . ($Sneaky ? "&amp;userid=$UserID" : '') ?>"><?= $FilterResults['FilterLabel'] ?></a><?= Lang::get('torrents.matches_for_after') ?>
                     <?      } else { ?>
-                        <?= Lang::get('torrents', 'matches_for_unknown_filter_before') ?>[<?= $FilterID ?>]<?= Lang::get('torrents', 'matches_for_unknown_filter_after') ?>
+                        <?= Lang::get('torrents.matches_for_unknown_filter_before') ?>[<?= $FilterID ?>]<?= Lang::get('torrents.matches_for_unknown_filter_after') ?>
                     <?      } ?>
                 </h3>
             </div>
             <div class="BodyNavLinks notify_filter_links">
                 <? if (!$Sneaky) { ?>
-                    <a class="brackets" href="#" onclick="globalapp.rssClearSelected(event, <?= $FilterID ?>)"><?= Lang::get('torrents', 'clear_selected_in_filter') ?></a>
-                    <a href="torrents.php?action=notify_clear_filter&amp;filterid=<?= $FilterID ?>&amp;auth=<?= $LoggedUser['AuthKey'] ?>" class="brackets"><?= Lang::get('torrents', 'clear_all_old_in_filter') ?></a>
-                    <a href="torrents.php?action=notify_catchup_filter&amp;filterid=<?= $FilterID ?>&amp;auth=<?= $LoggedUser['AuthKey'] ?>" class="brackets"><?= Lang::get('torrents', 'mark_all_in_filter_as_read') ?></a>
+                    <a class="brackets" href="#" onclick="globalapp.rssClearSelected(event, <?= $FilterID ?>)"><?= Lang::get('torrents.clear_selected_in_filter') ?></a>
+                    <a href="torrents.php?action=notify_clear_filter&amp;filterid=<?= $FilterID ?>&amp;auth=<?= $LoggedUser['AuthKey'] ?>" class="brackets"><?= Lang::get('torrents.clear_all_old_in_filter') ?></a>
+                    <a href="torrents.php?action=notify_catchup_filter&amp;filterid=<?= $FilterID ?>&amp;auth=<?= $LoggedUser['AuthKey'] ?>" class="brackets"><?= Lang::get('torrents.mark_all_in_filter_as_read') ?></a>
                 <? } ?>
             </div>
             <form class="torrent-table" name="torrents" id="notificationform_<?= $FilterID ?>" action="">

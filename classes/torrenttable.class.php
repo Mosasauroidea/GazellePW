@@ -63,7 +63,7 @@ class UngroupTorrentSimpleListView extends UngroupTorrentTableView {
                 <table>
                     <tr class="rowb">
                         <td colspan="7" class="center">
-                            <?= Lang::get('top10', 'found_no_torrents_matching_the_criteria') ?>
+                            <?= Lang::get('top10.found_no_torrents_matching_the_criteria') ?>
                         </td>
                     </tr>
                 </table>
@@ -124,7 +124,7 @@ class UngroupTorrentSimpleListView extends UngroupTorrentTableView {
                                 <a href="torrents.php?action=download&amp;id=<?= $TorrentID ?>&amp;authkey=<?= $LoggedUser['AuthKey'] ?>&amp;torrent_pass=<?= $LoggedUser['torrent_pass'] ?>&amp;usetoken=1" data-tooltip="Use a FL Token" onclick="return confirm('<?= FL_confirmation_msg($Torrent['Seeders'], $Torrent['Size']) ?>');">FL</a>
                             <? } ?>
                             |
-                            <a href="torrents.php?torrentid=<?= $TorrentID ?>" data-tooltip="<?= Lang::get('torrents', 'permalink') ?>">PL</a>
+                            <a href="torrents.php?torrentid=<?= $TorrentID ?>" data-tooltip="<?= Lang::get('torrents.permalink') ?>">PL</a>
                             ]
                         </span>
                     <? } ?>
@@ -286,20 +286,20 @@ class TorrentTableView {
 
 
         if (!empty($BadFolders)) {
-            $TrumpableMsg .= $TrumpableAddExtra . Lang::get('torrents', 'bad_filename');
+            $TrumpableMsg .= $TrumpableAddExtra . Lang::get('torrents.bad_filename');
             $TrumpableAddExtra = ' / ';
         }
 
         if (!empty($BadFiles)) {
-            $TrumpableMsg .= $TrumpableAddExtra . Lang::get('torrents', 'bad_files');
+            $TrumpableMsg .= $TrumpableAddExtra . Lang::get('torrents.bad_files');
             $TrumpableAddExtra = ' / ';
         }
         if (!empty($NoSub)) {
-            $TrumpableMsg .= $TrumpableAddExtra . Lang::get('upload', 'no_sub');
+            $TrumpableMsg .= $TrumpableAddExtra . Lang::get('upload.no_sub');
             $TrumpableAddExtra = ' / ';
         }
         if (!empty($HardSub)) {
-            $TrumpableMsg .= $TrumpableAddExtra . Lang::get('upload', 'hardcode_sub');
+            $TrumpableMsg .= $TrumpableAddExtra . Lang::get('upload.hardcode_sub');
             $TrumpableAddExtra = ' / ';
         }
         if (!empty($CustomTrumpable)) {
@@ -307,7 +307,7 @@ class TorrentTableView {
             $TrumpableAddExtra = ' / ';
         }
         if ($Dead) {
-            $TrumpableMsg .= $TrumpableAddExtra . Lang::get('upload', 'dead_torrent');
+            $TrumpableMsg .= $TrumpableAddExtra . Lang::get('upload.dead_torrent');
             $TrumpableAddExtra = ' / ';
         }
         $Reported = false;
@@ -325,7 +325,7 @@ class TorrentTableView {
         <div class="TableContainer">
             <table class="TableReportInfo Table">
                 <tr class="Table-rowHeader">
-                    <td class="Table-cell">' . Lang::get('torrents', 'this_torrent_has_active_reports_1') . $NumReports . Lang::get('torrents', 'this_torrent_has_active_reports_2') . ($NumReports === 1 ? Lang::get('torrents', 'this_torrent_has_active_reports_3') : Lang::get('torrents', 'this_torrent_has_active_reports_4')) . ":</td>
+                    <td class="Table-cell">' . Lang::get('torrents.this_torrent_has_active_reports_1') . $NumReports . Lang::get('torrents.this_torrent_has_active_reports_2') . ($NumReports === 1 ? Lang::get('torrents.this_torrent_has_active_reports_3') : Lang::get('torrents.this_torrent_has_active_reports_4')) . ":</td>
                 </tr>";
             foreach ($Reports as $Report) {
                 $ReportID = $Report['ID'];
@@ -333,11 +333,11 @@ class TorrentTableView {
                     $ReporterID = $Report['ReporterID'];
                     $Reporter = Users::user_info($ReporterID);
                     $ReporterName = $Reporter['Username'];
-                    $ReportLinks = "<a href=\"user.php?id=$ReporterID\">$ReporterName</a> <a href=\"reportsv2.php?view=report&amp;id=$Report[ID]\">" . Lang::get('torrents', 'reported_it') . "</a>";
-                    $UploaderLinks = Users::format_username($UserID, false, false, false) . " " . Lang::get('torrents', 'reply_at');
+                    $ReportLinks = "<a href=\"user.php?id=$ReporterID\">$ReporterName</a> <a href=\"reportsv2.php?view=report&amp;id=$Report[ID]\">" . Lang::get('torrents.reported_it') . "</a>";
+                    $UploaderLinks = Users::format_username($UserID, false, false, false) . " " . Lang::get('torrents.reply_at');
                 } else {
-                    $ReportLinks = Lang::get('torrents', 'someone_reported_it');
-                    $UploaderLinks = Lang::get('torrents', 'uploader_replied_it');
+                    $ReportLinks = Lang::get('torrents.someone_reported_it');
+                    $UploaderLinks = Lang::get('torrents.uploader_replied_it');
                 }
 
                 if (isset($Types[$GroupCategoryID][$Report['Type']])) {
@@ -351,14 +351,14 @@ class TorrentTableView {
                 $CanReply = $UserID == G::$LoggedUser['ID'] && !$Report['UploaderReply'] && !$ReadOnly;
                 $ReportInfo .= "
                 <tr class='Table-row'>
-                    <td class='Table-cell'>$ReportLinks" . Lang::get('torrents', 'at') . " " . time_diff($Report['ReportedTime'], 2, true, true) . Lang::get('torrents', 'for_the_reason') . $ReportType['title'] . '":' . ($CanReply ? ('<a class="floatright report_reply_btn" onclick="$(\'.can_reply_' . $ReportID . '\').toggle()" href="javascript:void(0)">' . Lang::get('torrents', 'reply') . '</a>') : "") . '
+                    <td class='Table-cell'>$ReportLinks" . Lang::get('torrents.at') . " " . time_diff($Report['ReportedTime'], 2, true, true) . Lang::get('torrents.for_the_reason') . $ReportType['title'] . '":' . ($CanReply ? ('<a class="floatright report_reply_btn" onclick="$(\'.can_reply_' . $ReportID . '\').toggle()" href="javascript:void(0)">' . Lang::get('torrents.reply') . '</a>') : "") . '
                         <blockquote>' . Text::full_format($Report['UserComment']) . ($Report['UploaderReply'] ? ('
                             <hr class="report_inside_line">' . $UploaderLinks . ' ' . time_diff($Report['ReplyTime'], 2, true, true) . ':<br>' . Text::full_format($Report['UploaderReply'])) : '') . '
                         </blockquote>
                     </td>
                 </tr>';
                 $area = new TEXTAREA_PREVIEW('uploader_reply', '', '', 50, 10, true, true, true, array(
-                    'placeholder="' . Lang::get('torrents', 'reply_it_patiently') . '"'
+                    'placeholder="' . Lang::get('torrents.reply_it_patiently') . '"'
                 ), false);
                 $ReportInfo .= $CanReply ? '
                 <tr class="Table-row report_reply_tr can_reply_' . $ReportID . '" style="display: none;">
@@ -384,9 +384,9 @@ class TorrentTableView {
             <div class="TorrentDetail-row is-uploadContainer is-block" id="release_<?= $TorrentID ?>">
                 <div class="TorrentDetail-uploader">
                     <div class="TorrentDetail-uploaderInfo">
-                        <span><?= Lang::get('torrents', 'upload_by_before') ?><span>
+                        <span><?= Lang::get('torrents.upload_by_before') ?><span>
                                 <?= Users::format_username($UserID, false, false, false) ?>
-                                <?= Lang::get('torrents', 'upload_by_after') ?>
+                                <?= Lang::get('torrents.upload_by_after') ?>
                                 <?= time_diff($TorrentTime); ?>
                                 <?
                                 if ($Seeders == 0) {
@@ -395,14 +395,14 @@ class TorrentTableView {
                                     if (time() - strtotime($LastActive) > 1576800000) {
                                 ?>
                                         <span>|</span>
-                                        <?= Lang::get('torrents', 'last_active') ?>:<?= Lang::get('torrents', 'never') ?>
+                                        <?= Lang::get('torrents.last_active') ?>:<?= Lang::get('torrents.never') ?>
                                     <?
                                     } elseif ($LastActive != '0000-00-00 00:00:00' && time() - strtotime($LastActive) >= 1209600) {
                                     ?>
-                                        <span>|</span><strong><?= Lang::get('torrents', 'last_active') ?> <?= time_diff($LastActive); ?></strong>
+                                        <span>|</span><strong><?= Lang::get('torrents.last_active') ?> <?= time_diff($LastActive); ?></strong>
                                     <?
                                     } else {
-                                    ?><span>|</span> <?= Lang::get('torrents', 'last_active') ?> <?= time_diff($LastActive); ?>
+                                    ?><span>|</span> <?= Lang::get('torrents.last_active') ?> <?= time_diff($LastActive); ?>
                                     <?
                                     }
                                 }
@@ -414,24 +414,24 @@ class TorrentTableView {
                                         time() - strtotime($LastReseedRequest) >= 864000) ||
                                         check_perms('users_mod'))
                                 ) {
-                                    ?><span>|</span> <a href="torrents.php?action=reseed&amp;torrentid=<?= $TorrentID ?>&amp;groupid=<?= $GroupID ?>" class="brackets" onclick="return confirm('<?= Lang::get('torrents', 'request_re_seed_confirm') ?>');"><?= Lang::get('torrents', 'request_re_seed') ?></a>
+                                    ?><span>|</span> <a href="torrents.php?action=reseed&amp;torrentid=<?= $TorrentID ?>&amp;groupid=<?= $GroupID ?>" class="brackets" onclick="return confirm('<?= Lang::get('torrents.request_re_seed_confirm') ?>');"><?= Lang::get('torrents.request_re_seed') ?></a>
                                 <?
                                 } ?>
                     </div>
                     <? if (!$ReadOnly) { ?>
                         <div class="TorrentDetail-likeContainer ButtonGroup ButtonGroup--wide">
                             <div class="TorrentDetail-reward is-total">
-                                <span class="TorrentDetail-rewardButton" data-tooltip="<?= Lang::get('torrents', 'total_reward_bonus_points_pre_tax') ?>">
+                                <span class="TorrentDetail-rewardButton" data-tooltip="<?= Lang::get('torrents.total_reward_bonus_points_pre_tax') ?>">
                                     <?= icon('bonus-active') ?>
                                 </span>
-                                <span data-tooltip="<?= Lang::get('torrents', 'total_reward_bonus_points_pre_tax') ?>" id="bonuscnt<?= $TorrentID ?>">
+                                <span data-tooltip="<?= Lang::get('torrents.total_reward_bonus_points_pre_tax') ?>" id="bonuscnt<?= $TorrentID ?>">
                                     <?= isset($BonusSended) && isset($BonusSended['Count']) && $BonusSended['Count'] > 0 ? $BonusSended['Count'] : '0' ?>
                                 </span>
                             </div>
                             <div class="TorrentDetail-like">
                                 <span id="thumb<?= $TorrentID ?>" <?= isset($ThumbCounts) && isset($ThumbCounts['on']) && $ThumbCounts['on'] > 0 ? 'style="display: none;"' : '' ?>>
                                     <? if (G::$LoggedUser['ID'] == $UserID) { ?>
-                                        <i data-tooltip="<?= Lang::get('torrents', 'you_cant_like_yourself') ?>">
+                                        <i data-tooltip="<?= Lang::get('torrents.you_cant_like_yourself') ?>">
                                             <?= icon("Common/like") ?>
                                         </i>
                                     <?
@@ -447,7 +447,7 @@ class TorrentTableView {
                                     </a>
                                 </span>
                                 <span id="thumbcnt<?= $TorrentID ?>">
-                                    <?= isset($ThumbCounts) && isset($ThumbCounts['count']) ? $ThumbCounts['count'] : Lang::get('torrents', 'like') ?>
+                                    <?= isset($ThumbCounts) && isset($ThumbCounts['count']) ? $ThumbCounts['count'] : Lang::get('torrents.like') ?>
                                 </span>
                             </div>
                         </div>
@@ -458,7 +458,7 @@ class TorrentTableView {
                         <?
                         $NewRatio = Format::get_ratio_html(G::$LoggedUser['BytesUploaded'], G::$LoggedUser['BytesDownloaded'] + $Size);
                         ?>
-                        <?= Lang::get('torrents', 'if_you_download_this_before') ?> <?= $NewRatio ?><?= Lang::get('torrents', 'if_you_download_this_after') ?>
+                        <?= Lang::get('torrents.if_you_download_this_before') ?> <?= $NewRatio ?><?= Lang::get('torrents.if_you_download_this_after') ?>
                     </div>
                 <? } ?>
             </div>
@@ -466,7 +466,7 @@ class TorrentTableView {
             if ($TrumpableMsg) { ?>
                 <div class="TorrentDetail-trumpable TorrentDetail-row is-block">
                     <span class="TorrentDetail-trumpableTitle">
-                        <?= Lang::get('torrents', 'trumpable_reason') ?>:
+                        <?= Lang::get('torrents.trumpable_reason') ?>:
                     </span>
                     <span class="TorrentDetail-trumpableMessage">
                         <?= $TrumpableMsg ?>
@@ -482,37 +482,37 @@ class TorrentTableView {
                     <div class="TorrentDetail-rewardList ButtonGroup" id="sendbonus_<?= $TorrentID ?>">
                         <? $Sended = isset($BonusSended) ? explode(',', $BonusSended['Sended']) : []; ?>
                         <div class="TorrentDetail-reward">
-                            <span class="TorrentDetail-rewardButton is-active" data-tooltip="<?= G::$LoggedUser['ID'] == $UserID ? Lang::get('torrents', 'you_cant_reward_yourself') : Lang::get('torrents', 'you_have_rewarded') ?>" style="<?= in_array(5, $Sended) || G::$LoggedUser['ID'] == $UserID ? "" : "display: none;" ?>" id="bonus5<?= $TorrentID ?>">
+                            <span class="TorrentDetail-rewardButton is-active" data-tooltip="<?= G::$LoggedUser['ID'] == $UserID ? Lang::get('torrents.you_cant_reward_yourself') : Lang::get('torrents.you_have_rewarded') ?>" style="<?= in_array(5, $Sended) || G::$LoggedUser['ID'] == $UserID ? "" : "display: none;" ?>" id="bonus5<?= $TorrentID ?>">
                                 <?= icon('bonus-active') ?>
                             </span>
-                            <a class="TorrentDetail-rewardButton is-toReward" data-tooltip="<?= Lang::get('torrents', 'reward_5_bonus_to_uploader') ?>" style="<?= in_array(5, $Sended) || G::$LoggedUser['ID'] == $UserID ? "display: none;" : "" ?>" id="abonus5<?= $TorrentID ?>" href="javascript:void(0);" onclick="sendbonus(<?= $TorrentID ?>, 5)">
+                            <a class="TorrentDetail-rewardButton is-toReward" data-tooltip="<?= Lang::get('torrents.reward_5_bonus_to_uploader') ?>" style="<?= in_array(5, $Sended) || G::$LoggedUser['ID'] == $UserID ? "display: none;" : "" ?>" id="abonus5<?= $TorrentID ?>" href="javascript:void(0);" onclick="sendbonus(<?= $TorrentID ?>, 5)">
                                 <?= icon('bonus-active') ?>
                             </a>
                             <span>5</span>
                         </div>
                         <div class="TorrentDetail-reward">
-                            <span class="TorrentDetail-rewardButton is-active" data-tooltip="<?= G::$LoggedUser['ID'] == $UserID ? Lang::get('torrents', 'you_cant_reward_yourself') : Lang::get('torrents', 'you_have_rewarded') ?>" style="<?= in_array(30, $Sended) || G::$LoggedUser['ID'] == $UserID ? "" : "display: none;" ?>" id="bonus30<?= $TorrentID ?>">
+                            <span class="TorrentDetail-rewardButton is-active" data-tooltip="<?= G::$LoggedUser['ID'] == $UserID ? Lang::get('torrents.you_cant_reward_yourself') : Lang::get('torrents.you_have_rewarded') ?>" style="<?= in_array(30, $Sended) || G::$LoggedUser['ID'] == $UserID ? "" : "display: none;" ?>" id="bonus30<?= $TorrentID ?>">
                                 <?= icon('bonus-active') ?>
                             </span>
-                            <a class="TorrentDetail-rewardButton is-toReward" data-tooltip="<?= Lang::get('torrents', 'reward_30_bonus_to_uploader') ?>" style="<?= in_array(30, $Sended) || G::$LoggedUser['ID'] == $UserID ? "display: none;" : "" ?>" id="abonus30<?= $TorrentID ?>" href="javascript:void(0);" onclick="sendbonus(<?= $TorrentID ?>, 30)">
+                            <a class="TorrentDetail-rewardButton is-toReward" data-tooltip="<?= Lang::get('torrents.reward_30_bonus_to_uploader') ?>" style="<?= in_array(30, $Sended) || G::$LoggedUser['ID'] == $UserID ? "display: none;" : "" ?>" id="abonus30<?= $TorrentID ?>" href="javascript:void(0);" onclick="sendbonus(<?= $TorrentID ?>, 30)">
                                 <?= icon('bonus-active') ?>
                             </a>
                             <span>30</span>
                         </div>
                         <div class="TorrentDetail-reward">
-                            <span class="TorrentDetail-rewardButton is-active" data-tooltip="<?= G::$LoggedUser['ID'] == $UserID ? Lang::get('torrents', 'you_cant_reward_yourself') : Lang::get('torrents', 'you_have_rewarded') ?>" style="<?= in_array(100, $Sended) || G::$LoggedUser['ID'] == $UserID ? "" : "display: none;" ?>" id="bonus100<?= $TorrentID ?>">
+                            <span class="TorrentDetail-rewardButton is-active" data-tooltip="<?= G::$LoggedUser['ID'] == $UserID ? Lang::get('torrents.you_cant_reward_yourself') : Lang::get('torrents.you_have_rewarded') ?>" style="<?= in_array(100, $Sended) || G::$LoggedUser['ID'] == $UserID ? "" : "display: none;" ?>" id="bonus100<?= $TorrentID ?>">
                                 <?= icon('bonus-active') ?>
                             </span>
-                            <a class="TorrentDetail-rewardButton is-toReward" data-tooltip="<?= Lang::get('torrents', 'reward_100_bonus_to_uploader') ?>" style="<?= in_array(100, $Sended) || G::$LoggedUser['ID'] == $UserID ? "display: none;" : "" ?>" id="abonus100<?= $TorrentID ?>" href="javascript:void(0);" onclick="sendbonus(<?= $TorrentID ?>, 100)">
+                            <a class="TorrentDetail-rewardButton is-toReward" data-tooltip="<?= Lang::get('torrents.reward_100_bonus_to_uploader') ?>" style="<?= in_array(100, $Sended) || G::$LoggedUser['ID'] == $UserID ? "display: none;" : "" ?>" id="abonus100<?= $TorrentID ?>" href="javascript:void(0);" onclick="sendbonus(<?= $TorrentID ?>, 100)">
                                 <?= icon('bonus-active') ?>
                             </a>
                             <span>100</span>
                         </div>
                         <div class="TorrentDetail-reward">
-                            <span class="TorrentDetail-rewardButton is-active" data-tooltip="<?= G::$LoggedUser['ID'] == $UserID ? Lang::get('torrents', 'you_cant_reward_yourself') : Lang::get('torrents', 'you_have_rewarded') ?>" style="<?= in_array(300, $Sended) || G::$LoggedUser['ID'] == $UserID ? "" : "display: none;" ?>" id="bonus300<?= $TorrentID ?>">
+                            <span class="TorrentDetail-rewardButton is-active" data-tooltip="<?= G::$LoggedUser['ID'] == $UserID ? Lang::get('torrents.you_cant_reward_yourself') : Lang::get('torrents.you_have_rewarded') ?>" style="<?= in_array(300, $Sended) || G::$LoggedUser['ID'] == $UserID ? "" : "display: none;" ?>" id="bonus300<?= $TorrentID ?>">
                                 <?= icon('bonus-active') ?>
                             </span>
-                            <a class="TorrentDetail-rewardButton is-toReward" data-tooltip="<?= Lang::get('torrents', 'reward_300_bonus_to_uploader') ?>" style="<?= in_array(300, $Sended) || G::$LoggedUser['ID'] == $UserID ? "display: none;" : "" ?>" id="abonus300<?= $TorrentID ?>" href="javascript:void(0);" onclick="sendbonus(<?= $TorrentID ?>, 300)">
+                            <a class="TorrentDetail-rewardButton is-toReward" data-tooltip="<?= Lang::get('torrents.reward_300_bonus_to_uploader') ?>" style="<?= in_array(300, $Sended) || G::$LoggedUser['ID'] == $UserID ? "display: none;" : "" ?>" id="abonus300<?= $TorrentID ?>" href="javascript:void(0);" onclick="sendbonus(<?= $TorrentID ?>, 300)">
                                 <?= icon('bonus-active') ?>
                             </a>
                             <span>300</span>
@@ -524,7 +524,7 @@ class TorrentTableView {
                     <div class="TorrentDetail-row is-pmContainer">
                         <div class="TorrentDetail-links is-massPM">
                             <a class="Link" href="torrents.php?action=masspm&amp;id=<?= $GroupID ?>&amp;torrentid=<?= $TorrentID ?>">
-                                <?= Lang::get('torrents', 'masspm') ?>
+                                <?= Lang::get('torrents.masspm') ?>
                             </a>
                         </div>
                     <?
@@ -534,16 +534,16 @@ class TorrentTableView {
                 <div class="TorrentDetail-row is-viewActionsContainer">
                     <div class="TorrentDetail-links is-viewActions">
                         <? if (!$ReadOnly) { ?>
-                            <a class="Link" href="#" onclick="show_peers('<?= $TorrentID ?>', 0, '<?= $this->DetailView ?>'); return false;"><?= Lang::get('torrents', 'view_peer_list') ?></a>
+                            <a class="Link" href="#" onclick="show_peers('<?= $TorrentID ?>', 0, '<?= $this->DetailView ?>'); return false;"><?= Lang::get('torrents.view_peer_list') ?></a>
                             <? if (check_perms('site_view_torrent_snatchlist')) { ?>
-                                <a class="Link" href="#" onclick="show_downloads('<?= $TorrentID ?>', 0, '<?= $this->DetailView ?>'); return false;" data-tooltip="<?= Lang::get('torrents', 'show_downloads_title') ?>"><?= Lang::get('torrents', 'view_download_list') ?></a>
-                                <a class="Link" href="#" onclick="show_snatches('<?= $TorrentID ?>', 0, '<?= $this->DetailView ?>'); return false;" data-tooltip="<?= Lang::get('torrents', 'show_snatches_title') ?>"><?= Lang::get('torrents', 'view_snatch_list') ?></a>
+                                <a class="Link" href="#" onclick="show_downloads('<?= $TorrentID ?>', 0, '<?= $this->DetailView ?>'); return false;" data-tooltip="<?= Lang::get('torrents.show_downloads_title') ?>"><?= Lang::get('torrents.view_download_list') ?></a>
+                                <a class="Link" href="#" onclick="show_snatches('<?= $TorrentID ?>', 0, '<?= $this->DetailView ?>'); return false;" data-tooltip="<?= Lang::get('torrents.show_snatches_title') ?>"><?= Lang::get('torrents.view_snatch_list') ?></a>
                             <?  } ?>
-                            <a class="Link" href="#" onclick="show_giver('<?= $TorrentID ?>', 0, '<?= $this->DetailView ?>'); return false;"><?= Lang::get('torrents', 'giver_list') ?></a>
+                            <a class="Link" href="#" onclick="show_giver('<?= $TorrentID ?>', 0, '<?= $this->DetailView ?>'); return false;"><?= Lang::get('torrents.giver_list') ?></a>
                         <?  } ?>
-                        <a class="Link" href="#" onclick="show_files('<?= $TorrentID ?>', '<?= $this->DetailView ?>'); return false;"><?= Lang::get('torrents', 'view_file_list') ?></a>
+                        <a class="Link" href="#" onclick="show_files('<?= $TorrentID ?>', '<?= $this->DetailView ?>'); return false;"><?= Lang::get('torrents.view_file_list') ?></a>
                         <? if ($Reported) { ?>
-                            <a class="Link" href="#" onclick="show_reported('<?= $TorrentID ?>','<?= $this->DetailView ?>'); return false;"><?= Lang::get('torrents', 'view_report_information') ?></a>
+                            <a class="Link" href="#" onclick="show_reported('<?= $TorrentID ?>','<?= $this->DetailView ?>'); return false;"><?= Lang::get('torrents.view_report_information') ?></a>
                         <?  } ?>
                     </div>
                     <div class="TorrentDetail-giverList hidden" id="<?= $this->DetailView ?>_giver_<?= $TorrentID ?>"></div>
@@ -558,19 +558,19 @@ class TorrentTableView {
 
                 <? if ($Note) { ?>
                     <div class="TorrentDetail-row is-staffNote is-block">
-                        <span class='u-colorWarning'><strong><?= Lang::get('upload', 'staff_note') ?>:</strong></span>
+                        <span class='u-colorWarning'><strong><?= Lang::get('upload.staff_note') ?>:</strong></span>
                         <?= Text::full_format($Note) ?>
                     </div>
                 <? } ?>
 
                 <div class="TorrentDetail-row is-subtitle is-block TorrentDetailSubtitle" id="subtitles_box">
                     <div class="TorrentDetailSubtitle-header" id="subtitles_box_header">
-                        <strong class="TorrentDetailSubtitle-title" id="subtitles_box_title"><?= Lang::get('global', 'subtitles') ?>:</strong>
+                        <strong class="TorrentDetailSubtitle-title" id="subtitles_box_title"><?= Lang::get('global.subtitles') ?>:</strong>
                         <? if (!$ReadOnly) { ?>
-                            <span class="floatright"><a href="subtitles.php?action=upload&torrent_id=<?= $TorrentID ?>"><?= Lang::get('torrents', 'add_subtitles') ?></a></span>
+                            <span class="floatright"><a href="subtitles.php?action=upload&torrent_id=<?= $TorrentID ?>"><?= Lang::get('torrents.add_subtitles') ?></a></span>
                         <?  } ?>
                         <? if (!$Subtitles && !$ExternalSubtitleIDs) { ?>
-                            <span class="TorrentDetailSubtitle-noSubtitle" data-tooltip="<?= Lang::get('upload', "no_subtitles") ?>">
+                            <span class="TorrentDetailSubtitle-noSubtitle" data-tooltip="<?= Lang::get('upload.no_subtitles') ?>">
                                 <?= icon('flag/no_subtitles') ?>
                             </span>
                         <? } ?>
@@ -581,9 +581,9 @@ class TorrentTableView {
                         $SubtitleArray = explode(',', $Subtitles);
                     ?>
                         <div class="TorrentDetailSubtitle-list is-internal" id="subtitles_box_in_torrent">
-                            <span class="TorrentDetailSubtitle-listTitle"><?= $SubtitleType == 1 ? Lang::get('global', 'in_torrent_subtitles') : Lang::get('global', 'in_torrent_hard_subtitles'); ?>:</span>
+                            <span class="TorrentDetailSubtitle-listTitle"><?= $SubtitleType == 1 ? Lang::get('global.in_torrent_subtitles') : Lang::get('global.in_torrent_hard_subtitles'); ?>:</span>
                             <? foreach ($SubtitleArray as $Subtitle) { ?>
-                                <span class="TorrentDetailSubtitle-listItem" data-tooltip="<?= Lang::get('upload', $Subtitle) ?>">
+                                <span class="TorrentDetailSubtitle-listItem" data-tooltip="<?= Lang::get("upload.$Subtitle") ?>">
                                     <?= icon("flag/$Subtitle") ?>
                                 </span>
                             <? } ?>
@@ -596,7 +596,7 @@ class TorrentTableView {
                     ?>
                         <div class="TorrentDetailSubtitle-list is-external" id="subtitles_box_external">
                             <span class="TorrentDetailSubtitle-listTitle">
-                                <?= Lang::get('global', 'external_subtitles') ?>:
+                                <?= Lang::get('global.external_subtitles') ?>:
                             </span>
                             <?
                             foreach ($ExternalSubtitleIDArray as $index => $ExternalSubtitleID) {
@@ -604,24 +604,24 @@ class TorrentTableView {
                                 $SubtitleLanguagesArray = explode(',', $SubtitleLanguages);
                                 if (in_array('chinese_simplified', $SubtitleLanguagesArray)) {
                             ?>
-                                    <a class="TorrentDetailSubtitle-listItem" href="subtitles.php?action=download&id= <?= $ExternalSubtitleID ?>" data-tooltip="<?= Lang::get('upload', 'chinese_simplified') ?>">
+                                    <a class="TorrentDetailSubtitle-listItem" href="subtitles.php?action=download&id= <?= $ExternalSubtitleID ?>" data-tooltip="<?= Lang::get('upload.chinese_simplified') ?>">
                                         <?= icon('flag/chinese_simplified') ?>
                                     </a>
                                 <?
                                 } else if (in_array('chinese_traditional', $SubtitleLanguagesArray)) { ?>
-                                    <a class=" TorrentDetailSubtitle-listItem" href="subtitles.php?action=download&id=<?= $ExternalSubtitleID ?>" data-tooltip="<?= Lang::get('upload', 'chinese_traditional') ?>">
+                                    <a class=" TorrentDetailSubtitle-listItem" href="subtitles.php?action=download&id=<?= $ExternalSubtitleID ?>" data-tooltip="<?= Lang::get('upload.chinese_traditional') ?>">
                                         <?= icon('flag/chinese_traditional') ?>
                                     </a>
                                 <?
                                 } else if ($SubtitleLanguagesArray[0]) { ?>
-                                    <a class=" TorrentDetailSubtitle-listItem" href="subtitles.php?action=download&id=<?= $ExternalSubtitleID ?>" data-tooltip="<?= Lang::get('upload', $SubtitleLanguagesArray[0]) ?>">
+                                    <a class=" TorrentDetailSubtitle-listItem" href="subtitles.php?action=download&id=<?= $ExternalSubtitleID ?>" data-tooltip="<?= Lang::get("upload.${SubtitleLanguagesArray[0]}") ?>">
                                         <?= icon("flag/$SubtitleLanguagesArray[0]") ?>
                                     </a>
                             <?
                                 }
                             }
                             ?>
-                            | <a class="Link" href="#" onclick="BrowseExternalSub(<?= $TorrentID ?>); return false;"><?= Lang::get('index', 'details') ?></a>
+                            | <a class="Link" href="#" onclick="BrowseExternalSub(<?= $TorrentID ?>); return false;"><?= Lang::get('index.details') ?></a>
                         </div>
                         <div id="external_subtitle_container_<?= $TorrentID ?>" class="hidden"></div>
                     <?  } ?>
@@ -631,7 +631,7 @@ class TorrentTableView {
 
                 <? if (!empty($MediaInfos)) { ?>
                     <div class=" TorrentDetail-row is-mediainfo is-block">
-                        <strong class="TorrentDetailSubtitle-title" id="subtitles_box_title"><?= Lang::get('torrents', 'media_info') ?>:</strong>
+                        <strong class="TorrentDetailSubtitle-title" id="subtitles_box_title"><?= Lang::get('torrents.media_info') ?>:</strong>
                         <?
                         $Index = 0;
                         $MediaInfoObj = json_decode($MediaInfos);
@@ -708,29 +708,29 @@ class TorrentTableView {
 
     ?>
         <div class="TableTorrent-movieInfoFacts ">
-            <a class="TableTorrent-movieInfoFactsItem" data-tooltip="<?= Lang::get('global', 'imdb_rating') ?>, <?= $Group['IMDBVote'] . ' ' . Lang::get('torrents', 'movie_votes') ?>" target="_blank" href="https://www.imdb.com/title/<?= $Group['IMDBID'] ?>">
+            <a class="TableTorrent-movieInfoFactsItem" data-tooltip="<?= Lang::get('global.imdb_rating') ?>, <?= $Group['IMDBVote'] . ' ' . Lang::get('torrents.movie_votes') ?>" target="_blank" href="https://www.imdb.com/title/<?= $Group['IMDBID'] ?>">
                 <?= icon('imdb-gray') ?>
                 <span><?= !empty($Group['IMDBRating']) ? sprintf("%.1f", $Group['IMDBRating']) : '--' ?></span>
             </a>
-            <a class="TableTorrent-movieInfoFactsItem" data-tooltip="<?= Lang::get('global', 'douban_rating') ?>, <?= ($Group['DoubanVote'] ? $Group['DoubanVote'] : '?') . ' ' . Lang::get('torrents', 'movie_votes') ?>" target="_blank" href="https://movie.douban.com/subject/<?= $Group['DoubanID'] ?>/">
+            <a class="TableTorrent-movieInfoFactsItem" data-tooltip="<?= Lang::get('global.douban_rating') ?>, <?= ($Group['DoubanVote'] ? $Group['DoubanVote'] : '?') . ' ' . Lang::get('torrents.movie_votes') ?>" target="_blank" href="https://movie.douban.com/subject/<?= $Group['DoubanID'] ?>/">
                 <?= icon('douban-gray') ?>
                 <span><?= !empty($Group['DoubanRating']) ? sprintf("%.1f", $Group['DoubanRating']) : '--' ?></span>
             </a>
-            <a class="TableTorrent-movieInfoFactsItem" data-tooltip="<?= Lang::get('global', 'rt_rating') ?>" target="_blank" href="https://www.rottentomatoes.com/m/<?= $Group['RTTitle'] ?>">
+            <a class="TableTorrent-movieInfoFactsItem" data-tooltip="<?= Lang::get('global.rt_rating') ?>" target="_blank" href="https://www.rottentomatoes.com/m/<?= $Group['RTTitle'] ?>">
                 <?= icon('rotten-tomatoes-gray') ?>
                 <span><?= !empty($Group['RTRating']) ? $Group['RTRating'] : '--' ?></span>
             </a>
-            <a class="TableTorrent-movieInfoFactsItem" data-tooltip="<?= Lang::get('upload', 'director') ?>" href="/artist.php?id=<?= $Director['id'] ?>" dir="ltr">
+            <a class="TableTorrent-movieInfoFactsItem" data-tooltip="<?= Lang::get('upload.director') ?>" href="/artist.php?id=<?= $Director['id'] ?>" dir="ltr">
                 <?= icon('movie-director') ?>
                 <span><?= Artists::display_artist($Director, false) ?></span>
             </a>
-            <span class="TableTorrent-movieInfoFactsItem" data-tooltip="<?= Lang::get('torrents', 'imdb_region') ?>">
+            <span class="TableTorrent-movieInfoFactsItem" data-tooltip="<?= Lang::get('torrents.imdb_region') ?>">
                 <?= icon('movie-country') ?>
                 <span><? print_r(implode(', ', array_slice(explode(',', $Group['Region']), 0, 2))) ?></span>
             </span>
-            <span class="TableTorrent-movieInfoFactsItem" data-tooltip="<?= Lang::get('upload', 'movie_type') ?>">
+            <span class="TableTorrent-movieInfoFactsItem" data-tooltip="<?= Lang::get('upload.movie_type') ?>">
                 <?= icon('movie-type') ?>
-                <span><?= Lang::get('torrents', 'release_types')[$Group['ReleaseType']] ?></span>
+                <span><?= Lang::get('torrents.release_types')[$Group['ReleaseType']] ?></span>
             </span>
         </div>
     <?
@@ -757,7 +757,7 @@ class TorrentTableView {
         }
         ?>
         <td class="Table-cell TableTorrent-cellHeaderUncheckedStatistic">
-            <span><?= Lang::get('torrents', 'name') ?><?= ($this->WithYear ? '/' . $this->header_elem(Lang::get('torrents', 'year'), true, 'year') : '') ?></span>
+            <span><?= Lang::get('torrents.name') ?><?= ($this->WithYear ? '/' . $this->header_elem(Lang::get('torrents.year'), true, 'year') : '') ?></span>
             <? if ($this->WithCheck) {
                 if ($this->CheckAllTorrents) {
                     if ($this->AllUncheckedCnt < 50) {
@@ -770,7 +770,7 @@ class TorrentTableView {
                         $CntColor = "#CF3434";
                     }
             ?>
-                    <span><?= Lang::get('torrents', 'unchecked_torrents') ?>:<?= $this->PageUncheckedCnt ?>/<span style="color: <?= $CntColor ?>;font-weight: bold;"><?= $this->AllUncheckedCnt ?></span></span>
+                    <span><?= Lang::get('torrents.unchecked_torrents') ?>:<?= $this->PageUncheckedCnt ?>/<span style="color: <?= $CntColor ?>;font-weight: bold;"><?= $this->AllUncheckedCnt ?></span></span>
             <? }
             } ?>
         </td>
@@ -778,22 +778,22 @@ class TorrentTableView {
         if ($this->WithTime) {
         ?>
             <td class="Table-cell TableTorrent-cellStat TableTorrent-cellStatTime">
-                <?= $this->header_elem('<span  aria-hidden="true" data-tooltip="' . Lang::get('torrents', 'time') . '">' . icon('torrent-time') . '</span>', $this->WithSort, 'time') ?>
+                <?= $this->header_elem('<span  aria-hidden="true" data-tooltip="' . Lang::get('torrents.time') . '">' . icon('torrent-time') . '</span>', $this->WithSort, 'time') ?>
             </td>
         <?
         }
         ?>
         <td class="Table-cell TableTorrent-cellStat TableTorrent-cellStatSize  ">
-            <?= $this->header_elem('<span  aria-hidden="true" data-tooltip="' . Lang::get('global', 'size') . '">' . icon('torrent-size') . '</i>', $this->WithSort, 'size') ?>
+            <?= $this->header_elem('<span  aria-hidden="true" data-tooltip="' . Lang::get('global.size') . '">' . icon('torrent-size') . '</i>', $this->WithSort, 'size') ?>
         </td>
         <td class="Table-cell TableTorrent-cellStat TableTorrent-cellStatSnatches">
-            <?= $this->header_elem('<i  aria-hidden="true" data-tooltip="' . Lang::get('global', 'snatched') . '">' . icon('torrent-snatches') . '</i>', $this->WithSort, 'snatched') ?>
+            <?= $this->header_elem('<i  aria-hidden="true" data-tooltip="' . Lang::get('global.snatched') . '">' . icon('torrent-snatches') . '</i>', $this->WithSort, 'snatched') ?>
         </td>
         <td class="Table-cell TableTorrent-cellStat TableTorrent-cellStatSeeders">
-            <?= $this->header_elem('<i  aria-hidden="true" data-tooltip="' . Lang::get('global', 'seeders') . '">' . icon('torrent-seeders') . '</i>', $this->WithSort, 'seeders') ?>
+            <?= $this->header_elem('<i  aria-hidden="true" data-tooltip="' . Lang::get('global.seeders') . '">' . icon('torrent-seeders') . '</i>', $this->WithSort, 'seeders') ?>
         </td>
         <td class="Table-cell TableTorrent-cellStat TableTorrent-cellStatLeechers">
-            <?= $this->header_elem('<i  aria-hidden="true" data-tooltip="' . Lang::get('global', 'leechers') . '">' . icon('torrent-leechers') . '</i>', $this->WithSort, 'leechers') ?>
+            <?= $this->header_elem('<i  aria-hidden="true" data-tooltip="' . Lang::get('global.leechers') . '">' . icon('torrent-leechers') . '</i>', $this->WithSort, 'leechers') ?>
         </td>
         <?
     }
@@ -936,7 +936,7 @@ class GroupTorrentTableView extends TorrentTableView {
             ?>
             <td class="TableTorrent-cellMovieInfo Table-cell TableTorrent-cellMovieInfoCollapse">
                 <div id="showimg_<?= $GroupID ?>" class="ToggleGroup <?= ($ShowGroups ? 'is-toHide' : '') ?>">
-                    <a href="#" class="ToggleGroup-button" onclick="globalapp.toggleGroup(<?= $GroupID ?>, this, event)" data-tooltip="<?= Lang::get('global', 'collapse_this_group_title') ?>"></a>
+                    <a href="#" class="ToggleGroup-button" onclick="globalapp.toggleGroup(<?= $GroupID ?>, this, event)" data-tooltip="<?= Lang::get('global.collapse_this_group_title') ?>"></a>
                 </div>
             </td>
             <? if ($this->WithCover) { ?>
@@ -988,7 +988,7 @@ class GroupTorrentTableView extends TorrentTableView {
         ?>
                 <tr class="TableTorrent-rowCategory Table-row <?= $this->WithCheck && $GroupChecked ? "torrent_all_checked " : "torrent_all_unchecked" ?> <?= (!empty($LoggedUser['TorrentGrouping']) && $LoggedUser['TorrentGrouping'] === 1 ? ' hidden' : '') ?>" group-id="<?= $GroupID ?>">
                     <td class="TableTorrent-cellCategory Table-cell" colspan="<?= $Cols ?>">
-                        <a class="u-toggleEdition-button" href="#" onclick="globalapp.toggleEdition(event, <?= $GroupID ?>, <?= $EditionID ?>)" data-tooltip="<?= Lang::get('global', 'collapse_this_edition_title') ?>">&minus;</a>
+                        <a class="u-toggleEdition-button" href="#" onclick="globalapp.toggleEdition(event, <?= $GroupID ?>, <?= $EditionID ?>)" data-tooltip="<?= Lang::get('global.collapse_this_edition_title') ?>">&minus;</a>
                         <?= $NewEdition ?>
                     </td>
                 </tr>
@@ -1008,7 +1008,7 @@ class GroupTorrentTableView extends TorrentTableView {
 
         global $LoggedUser;
         $TorrentChecked = $Torrent['Checked'];
-        $FileName = Torrents::parse_file_name($Torrent);
+        $FileName = Torrents::filename($Torrent);
         $SnatchedTorrentClass = $Torrent['IsSnatched'] ? ' snatched_torrent' : '';
         $SnatchedGroupClass = Torrents::parse_group_snatched($Group) ? ' snatched_group' : '';
         $Cols = 2;
@@ -1030,10 +1030,10 @@ class GroupTorrentTableView extends TorrentTableView {
                     ?>
                         <div class="TableTorrent-titleCheck">
                             <? if ($this->CheckAllTorrents || ($this->CheckSelfTorrents && $LoggedUser['id'] == $Torrent['UserID'])) { ?>
-                                <i class="TableTorrent-check" id="torrent<?= $TorrentID ?>_check1" style="display:<?= $TorrentChecked ? "inline-block" : "none" ?>;color:#649464;" data-tooltip="<?= Lang::get('torrents', 'checked_by_before') ?><?= $TorrentChecked ? $TorrentCheckedBy : $LoggedUser['Username'] ?><?= Lang::get('torrents', 'checked_by_after') ?>"><?= icon("Table/checked") ?></i>
-                                <i class="TableTorrent-check" id="torrent<?= $TorrentID ?>_check0" style="display:<?= $TorrentChecked ? "none" : "inline-block" ?>;color:#CF3434;" data-tooltip="<?= Lang::get('torrents', 'has_not_been_checked') ?><?= Lang::get('torrents', 'checked_explanation') ?>"><?= icon("Table/unchecked") ?></i>
+                                <i class="TableTorrent-check" id="torrent<?= $TorrentID ?>_check1" style="display:<?= $TorrentChecked ? "inline-block" : "none" ?>;color:#649464;" data-tooltip="<?= Lang::get('torrents.checked_by_before') ?><?= $TorrentChecked ? $TorrentCheckedBy : $LoggedUser['Username'] ?><?= Lang::get('torrents.checked_by_after') ?>"><?= icon("Table/checked") ?></i>
+                                <i class="TableTorrent-check" id="torrent<?= $TorrentID ?>_check0" style="display:<?= $TorrentChecked ? "none" : "inline-block" ?>;color:#CF3434;" data-tooltip="<?= Lang::get('torrents.has_not_been_checked') ?><?= Lang::get('torrents.checked_explanation') ?>"><?= icon("Table/unchecked") ?></i>
                             <? } else { ?>
-                                <i class="TableTorrent-check" style="color: <?= $TorrentChecked ? "#74B274" : "#A6A6A6" ?>;" data-tooltip="<?= $TorrentChecked ? Lang::get('torrents', 'has_been_checked') : Lang::get('torrents', 'has_not_been_checked') ?><?= Lang::get('torrents', 'checked_explanation') ?>"><?= icon("Table/" . ($TorrentChecked ? "checked" : "unchecked")) ?> </i>
+                                <i class="TableTorrent-check" style="color: <?= $TorrentChecked ? "#74B274" : "#A6A6A6" ?>;" data-tooltip="<?= $TorrentChecked ? Lang::get('torrents.has_been_checked') : Lang::get('torrents.has_not_been_checked') ?><?= Lang::get('torrents.checked_explanation') ?>"><?= icon("Table/" . ($TorrentChecked ? "checked" : "unchecked")) ?> </i>
                             <? } ?>
                         </div>
                     <? } ?>
@@ -1098,7 +1098,7 @@ class UngroupTorrentTableView  extends TorrentTableView {
                 <table>
                     <tr class="rowb">
                         <td colspan="7" class="center">
-                            <?= Lang::get('top10', 'found_no_torrents_matching_the_criteria') ?>
+                            <?= Lang::get('top10.found_no_torrents_matching_the_criteria') ?>
                         </td>
                     </tr>
                 </table>
@@ -1115,7 +1115,7 @@ class UngroupTorrentTableView  extends TorrentTableView {
         $SnatchedGroupClass = Torrents::parse_group_snatched($Group) ? ' snatched_group' : '';
         $TorrentID = $Torrent['ID'];
         $SnatchedTorrentClass = $Torrent['IsSnatched'] ? ' snatched_torrent' : '';
-        $FileName = Torrents::parse_file_name($Torrent);
+        $FileName = Torrents::filename($Torrent);
         global $LoggedUser;
     ?>
         <? /* UngroupTorrentTableView */ ?>

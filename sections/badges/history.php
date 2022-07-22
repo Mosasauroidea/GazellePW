@@ -1,26 +1,26 @@
 <?
-View::show_header(Lang::get('badges', 'badges_center'), '', 'PageBadgeHisotry');
+View::show_header(Lang::get('badges.badges_center'), '', 'PageBadgeHisotry');
 $BadgesByUserID = Badges::get_badges_by_userid($LoggedUser['ID']);
 $Page  = max(1, isset($_GET['page']) ? intval($_GET['page']) : 1);
 $Pages = Format::get_pages($Page, count($BadgesByUserID), 20);
 ?>
 <div class="LayoutBody">
     <div class="BodyHeader">
-        <h2 class="BodyHeader-nav"><?= Users::format_username($UserID, false, false, false) ?> &gt; <?= Lang::get('badges', 'index_badge') ?> &gt; <?= Lang::get('badges', 'badge_log') ?></h2>
+        <h2 class="BodyHeader-nav"><?= Users::format_username($UserID, false, false, false) ?> &gt; <?= Lang::get('badges.index_badge') ?> &gt; <?= Lang::get('badges.badge_log') ?></h2>
     </div>
     <div class="BodyNavLinks">
-        <a href="/badges.php?action=display" class="brackets"><?= Lang::get('badges', 'badge_display') ?></a>
-        <a href="/badges.php" class="brackets"><?= Lang::get('badges', 'badge_achievement_progress') ?></a>
-        <a href="/badges.php?action=history" class="brackets"><?= Lang::get('badges', 'badge_log') ?></a>
-        <a href="/badges.php?action=store" class="brackets"><?= Lang::get('badges', 'badge_store') ?></a>
+        <a href="/badges.php?action=display" class="brackets"><?= Lang::get('badges.badge_display') ?></a>
+        <a href="/badges.php" class="brackets"><?= Lang::get('badges.badge_achievement_progress') ?></a>
+        <a href="/badges.php?action=history" class="brackets"><?= Lang::get('badges.badge_log') ?></a>
+        <a href="/badges.php?action=store" class="brackets"><?= Lang::get('badges.badge_store') ?></a>
         <!-- <a href="" class="brackets">游九中心</a> -->
     </div>
     <div class="linkbox" class="page_turn"><?= $Pages ?></div>
     <div class="TableContainer badge_log_container">
         <table class="TableBadgeLog Table" id="badge_log_table">
             <tr class="Table-rowHeader">
-                <td class="Table-cell"><?= Lang::get('badges', 'badge_obtained_time') ?></td>
-                <td class="Table-cell"><?= Lang::get('badges', 'badge_log_detail') ?></td>
+                <td class="Table-cell"><?= Lang::get('badges.badge_obtained_time') ?></td>
+                <td class="Table-cell"><?= Lang::get('badges.badge_log_detail') ?></td>
             </tr>
 
             <?

@@ -13,7 +13,7 @@ require(CONFIG['SERVER_ROOT'] . '/classes/torrent_form.class.php');
 
 ini_set('max_file_uploads', '100');
 
-View::show_header(Lang::get('upload', 'upload'), '', 'PageUploadHome');
+View::show_header(Lang::get('upload.upload'), '', 'PageUploadHome');
 
 if (empty($Properties) && !empty($_GET['groupid']) && is_number($_GET['groupid'])) {
     $DB->query('
@@ -106,21 +106,21 @@ $HideDNU = check_perms('torrents_hide_dnu') && !$NewDNU;
 <div class="LayoutBody">
     <div class="BodyHeader">
         <div class="BodyHeader-nav">
-            <?= Lang::get('upload', 'upload') ?>
+            <?= Lang::get('upload.upload') ?>
         </div>
         <div id="dnu_container" class="<?= (check_perms('torrents_hide_dnu') ? 'BoxBody' : '') ?>">
-            <h3 id="dnu_header"><?= Lang::get('upload', 'torrent_diff') ?></h3>
-            <p><?= $NewDNU ? '<strong class="u-colorWarning">' : '' ?><?= Lang::get('upload', 'last_update') ?>: <?= time_diff($Updated) ?><?= $NewDNU ? '</strong>' : '' ?></p>
-            <p><?= Lang::get('upload', 'upload_note') ?>
+            <h3 id="dnu_header"><?= Lang::get('upload.torrent_diff') ?></h3>
+            <p><?= $NewDNU ? '<strong class="u-colorWarning">' : '' ?><?= Lang::get('upload.last_update') ?>: <?= time_diff($Updated) ?><?= $NewDNU ? '</strong>' : '' ?></p>
+            <p><?= Lang::get('upload.upload_note') ?>
                 <? if ($HideDNU) { ?>
-                    <span id="showdnu"><a href="#" onclick="$('#dnulist').gtoggle(); this.innerHTML = (this.innerHTML == 'Hide' ? 'Show' : 'Hide'); return false;" class="brackets"><?= Lang::get('global', 'show') ?></a></span>
+                    <span id="showdnu"><a href="#" onclick="$('#dnulist').gtoggle(); this.innerHTML = (this.innerHTML == 'Hide' ? 'Show' : 'Hide'); return false;" class="brackets"><?= Lang::get('global.show') ?></a></span>
                 <?  } ?>
             </p>
             <div id="dnulist" class="TableContainer" class="<?= ($HideDNU ? 'hidden' : '') ?>">
                 <table class="TableUploadRule Table">
                     <tr class="Table-rowHeader">
-                        <td class="Table-cell" width="50%"><strong><?= Lang::get('upload', 'name') ?></strong></td>
-                        <td class="Table-cell"><strong><?= Lang::get('upload', 'explain') ?></strong></td>
+                        <td class="Table-cell" width="50%"><strong><?= Lang::get('upload.name') ?></strong></td>
+                        <td class="Table-cell"><strong><?= Lang::get('upload.explain') ?></strong></td>
                     </tr>
                     <? $TimeDiff = strtotime('-1 month', strtotime('now'));
                     foreach ($DNU as $BadUpload) {

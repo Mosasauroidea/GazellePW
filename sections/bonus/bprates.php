@@ -32,7 +32,7 @@ if (!empty($_GET['userid'])) {
     $User = $LoggedUser;
 }
 
-$Title = ($UserID === $LoggedUser['ID']) ? Lang::get('bonus', 'your_bonus_point_rate') : "{$User['Username']}" . Lang::get('bonus', 's_bonus_point_rate');
+$Title = ($UserID === $LoggedUser['ID']) ? Lang::get('bonus.your_bonus_point_rate') : "{$User['Username']}" . Lang::get('bonus.s_bonus_point_rate');
 View::show_header($Title, '', 'PageBonusBPRates');
 
 $DB->prepared_query("
@@ -70,16 +70,17 @@ $Pages = Format::get_pages($Page, $TotalTorrents, CONFIG['TORRENTS_PER_PAGE']);
     <div class="BodyHeader">
         <h2 class="BodyHeader-nav"><?= $Title ?></h2>
         <h3>
-            <span><?= Lang::get('bonus', 'total_points') ?>: </span>
+            <span><?= Lang::get('bonus.total_points') ?>: </span>
             <span class="is-bp" id="bp-value" data-value="<?= $User['BonusPoints'] ?>">
                 <?= number_format($User['BonusPoints']) ?>
             </span>
         </h3>
     </div>
     <div class="BodyNavLinks">
-        <a href="wiki.php?action=article&id=47" class="brackets"><?= Lang::get('bonus', 'about_bonus_points') ?></a>
-        <a href="bonus.php" class="brackets"><?= Lang::get('bonus', 'bonus_points_shop') ?></a>
-        <a href="bonus.php?action=history" class="brackets"><?= Lang::get('bonus', 'history') ?></a>
+        <a class="brackets" href="/wiki.php?action=article&id=47"><?= Lang::get('bonus.about_bonus_points') ?></a>
+        <a class="brackets" href="/bonus.php"><?= Lang::get('bonus.bonus_points_shop') ?></a>
+        <a class="brackets" href="/bonus.php?action=history"><?= Lang::get('bonus.history') ?></a>
+        <a class="brackets" href="/top10.php?type=users&limit=10&details=bonus_points"><?= Lang::get('top10.top') . ' 10 ' . Lang::get('user.bonus_points') ?></a>
     </div>
     <?
     if (!empty($Pages)) {
@@ -94,13 +95,13 @@ $Pages = Format::get_pages($Page, $TotalTorrents, CONFIG['TORRENTS_PER_PAGE']);
         <table class="TableBonusRate Table">
             <thead>
                 <tr class="Table-rowHeader">
-                    <td class="Table-cell"><?= Lang::get('bonus', 'total_torrents') ?></td>
-                    <td class="Table-cell"><?= Lang::get('global', 'size') ?></td>
-                    <td class="Table-cell"><?= Lang::get('bonus', 'bp_hour') ?></td>
-                    <td class="Table-cell"><?= Lang::get('bonus', 'bp_day') ?></td>
-                    <td class="Table-cell"><?= Lang::get('bonus', 'bp_week') ?></td>
-                    <td class="Table-cell"><?= Lang::get('bonus', 'bp_month') ?></td>
-                    <td class="Table-cell"><?= Lang::get('bonus', 'bp_year') ?></td>
+                    <td class="Table-cell"><?= Lang::get('bonus.total_torrents') ?></td>
+                    <td class="Table-cell"><?= Lang::get('global.size') ?></td>
+                    <td class="Table-cell"><?= Lang::get('bonus.bp_hour') ?></td>
+                    <td class="Table-cell"><?= Lang::get('bonus.bp_day') ?></td>
+                    <td class="Table-cell"><?= Lang::get('bonus.bp_week') ?></td>
+                    <td class="Table-cell"><?= Lang::get('bonus.bp_month') ?></td>
+                    <td class="Table-cell"><?= Lang::get('bonus.bp_year') ?></td>
                 </tr>
             </thead>
             <tbody>
@@ -138,15 +139,15 @@ $Pages = Format::get_pages($Page, $TotalTorrents, CONFIG['TORRENTS_PER_PAGE']);
         <table class="TableBonusRateDetail Table">
             <thead>
                 <tr class="Table-rowHeader">
-                    <td class="Table-cell"><?= Lang::get('global', 'torrent') ?></td>
-                    <td class="Table-cell"><a href="bonus.php?action=bprates&order_by=size<?= $LinkTail ?><?= $UserID == $LoggedUser['ID'] ? "" : "&userid=$UserID" ?>"><?= Lang::get('global', 'size') ?></a></td>
-                    <td class="Table-cell"><a href="bonus.php?action=bprates&order_by=seeders<?= $LinkTail ?><?= $UserID == $LoggedUser['ID'] ? "" : "&userid=$UserID" ?>"><?= Lang::get('global', 'seeders') ?></a></td>
-                    <td class="Table-cell"><a href="bonus.php?action=bprates&order_by=seedtime<?= $LinkTail ?><?= $UserID == $LoggedUser['ID'] ? "" : "&userid=$UserID" ?>"><?= Lang::get('bonus', 'seedtime') ?></a></td>
-                    <td class="Table-cell"><a href="bonus.php?action=bprates&order_by=hourlypoints<?= $LinkTail ?><?= $UserID == $LoggedUser['ID'] ? "" : "&userid=$UserID" ?>"><?= Lang::get('bonus', 'bp_hour') ?></a></td>
-                    <td class="Table-cell"><?= Lang::get('bonus', 'bp_day') ?></td>
-                    <td class="Table-cell"><?= Lang::get('bonus', 'bp_week') ?></td>
-                    <td class="Table-cell"><?= Lang::get('bonus', 'bp_month') ?></td>
-                    <td class="Table-cell"><?= Lang::get('bonus', 'bp_year') ?></td>
+                    <td class="Table-cell"><?= Lang::get('global.torrent') ?></td>
+                    <td class="Table-cell"><a href="bonus.php?action=bprates&order_by=size<?= $LinkTail ?><?= $UserID == $LoggedUser['ID'] ? "" : "&userid=$UserID" ?>"><?= Lang::get('global.size') ?></a></td>
+                    <td class="Table-cell"><a href="bonus.php?action=bprates&order_by=seeders<?= $LinkTail ?><?= $UserID == $LoggedUser['ID'] ? "" : "&userid=$UserID" ?>"><?= Lang::get('global.seeders') ?></a></td>
+                    <td class="Table-cell"><a href="bonus.php?action=bprates&order_by=seedtime<?= $LinkTail ?><?= $UserID == $LoggedUser['ID'] ? "" : "&userid=$UserID" ?>"><?= Lang::get('bonus.seedtime') ?></a></td>
+                    <td class="Table-cell"><a href="bonus.php?action=bprates&order_by=hourlypoints<?= $LinkTail ?><?= $UserID == $LoggedUser['ID'] ? "" : "&userid=$UserID" ?>"><?= Lang::get('bonus.bp_hour') ?></a></td>
+                    <td class="Table-cell"><?= Lang::get('bonus.bp_day') ?></td>
+                    <td class="Table-cell"><?= Lang::get('bonus.bp_week') ?></td>
+                    <td class="Table-cell"><?= Lang::get('bonus.bp_month') ?></td>
+                    <td class="Table-cell"><?= Lang::get('bonus.bp_year') ?></td>
                 </tr>
             </thead>
             <tbody>
@@ -199,7 +200,7 @@ $Pages = Format::get_pages($Page, $TotalTorrents, CONFIG['TORRENTS_PER_PAGE']);
                         $Name = Torrents::torrent_simple_view($Torrent['Group'], $Torrent, [
                             'SettingTorrentTitle' => G::$LoggedUser['SettingTorrentTitle'],
                         ]);
-                        $DisplayName = '<a href="torrents.php?id=' . $GroupID . '&amp;torrentid=' . $Torrent['ID'] . '"  data-tooltip="' . Lang::get('global', 'view_torrent') . '" dir="ltr">' . $Name . '</a>';
+                        $DisplayName = '<a href="torrents.php?id=' . $GroupID . '&amp;torrentid=' . $Torrent['ID'] . '"  data-tooltip="' . Lang::get('global.view_torrent') . '" dir="ltr">' . $Name . '</a>';
                 ?>
                         <tr class="Table-row">
                             <td class="Table-cell"><?= $DisplayName ?></td>
@@ -217,7 +218,7 @@ $Pages = Format::get_pages($Page, $TotalTorrents, CONFIG['TORRENTS_PER_PAGE']);
                 } else {
                     ?>
                     <tr class="Table-row">
-                        <td colspan="10" style="text-align:center;"><?= Lang::get('bonus', 'no_torrent_seeded_currently') ?></td>
+                        <td colspan="10" style="text-align:center;"><?= Lang::get('bonus.no_torrent_seeded_currently') ?></td>
                     </tr>
                 <?php
                 }

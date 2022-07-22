@@ -12,10 +12,10 @@ if (empty($AllSubtitles)) {
 ?>
 <table class="TableSubtitle Table" id="subtitle_browse_table">
     <tr class="Table-rowHeader">
-        <td class="Table-cellLeft TableSubtitle-cellLanguage Table-cell"><?= Lang::get('global', 'language') ?></td>
-        <td class="TableSubtitle-cellName Table-cell"><?= Lang::get('subtitles', 'subtitle_names') ?></td>
-        <td class="TableSubtitle-celllFormat Table-cell Table-cellRight"><?= Lang::get('global', 'format') ?></td>
-        <td class="TableSubtitle-cellSize Table-cell Table-cellRight"><?= Lang::get('global', 'size') ?></td>
+        <td class="Table-cellLeft TableSubtitle-cellLanguage Table-cell"><?= Lang::get('global.language') ?></td>
+        <td class="TableSubtitle-cellName Table-cell"><?= Lang::get('subtitles.subtitle_names') ?></td>
+        <td class="TableSubtitle-celllFormat Table-cell Table-cellRight"><?= Lang::get('global.format') ?></td>
+        <td class="TableSubtitle-cellSize Table-cell Table-cellRight"><?= Lang::get('global.size') ?></td>
     </tr>
     <?
 
@@ -40,14 +40,14 @@ if (empty($AllSubtitles)) {
                 }
                 ?>
             </td>
-            <td class="TableSubtitle-cellName Table-cell" data-tooltip="<?= Lang::get('torrents', 'upload_by_before') . $UploaderName . Lang::get('torrents', 'upload_by_after') . time_diff($Subtitle['upload_time'], 2, false)  . ' | ' . Lang::get('subtitles', 'times_of_download') . $Subtitle['download_times'] ?>">
+            <td class="TableSubtitle-cellName Table-cell" data-tooltip="<?= Lang::get('torrents.upload_by_before') . $UploaderName . Lang::get('torrents.upload_by_after') . time_diff($Subtitle['upload_time'], 2, false)  . ' | ' . Lang::get('subtitles.times_of_download') . $Subtitle['download_times'] ?>">
                 <span class="floatright">
                     <span>[ </span>
-                    <a href="subtitles.php?action=download&id=<?= $Subtitle['id'] ?>" data-tooltip="<?= Lang::get('global', 'download') ?>">DL</a>
-                    <?= $CanRM ? '| <a href="subtitles.php?action=delete&id=' . $Subtitle['id'] . '"  data-tooltip="' . Lang::get('global', 'remove') . '">RM</a> ' : '' ?>]
+                    <a href="subtitles.php?action=download&id=<?= $Subtitle['id'] ?>" data-tooltip="<?= Lang::get('global.download') ?>">DL</a>
+                    <?= $CanRM ? '| <a href="subtitles.php?action=delete&id=' . $Subtitle['id'] . '"  data-tooltip="' . Lang::get('global.remove') . '">RM</a> ' : '' ?>]
                 </span>
                 <?= $Subtitle['name'] . ' ' ?>
-                <strong class="u-colorWarning"><?= ($IsNew ?  Lang::get('subtitles', 'new')  : '') ?></strong>
+                <strong class="u-colorWarning"><?= ($IsNew ?  Lang::get('subtitles.new')  : '') ?></strong>
             </td>
             <td class="TableSubtitle-cellFormat Table-cell Table-cellRight"><?= $Subtitle['format'] ?></td>
             <td class="TableSubtitle-cellSize Table-cell Table-cellRight"><?= Format::get_size($Subtitle['size']) ?></td>

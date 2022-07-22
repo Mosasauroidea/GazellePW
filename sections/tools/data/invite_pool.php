@@ -2,7 +2,7 @@
 if (!check_perms('users_view_invites')) {
     error(403);
 }
-$Title = Lang::get('tools', 'invite_pool');
+$Title = Lang::get('tools.invite_pool');
 View::show_header($Title, '', 'PageToolInvitePool');
 define('INVITES_PER_PAGE', 50);
 list($Page, $Limit) = Format::page_limit(INVITES_PER_PAGE);
@@ -49,13 +49,13 @@ $DB->set_query_id($RS);
     <h2 class="BodyHeader-nav"><?= $Title ?></h2>
 </div>
 <div class="BoxBody" id="unused_invites">
-    <p><?= number_format($Results) ?> <?= Lang::get('tools', 'unused_invites_have_been_sent') ?></p>
+    <p><?= number_format($Results) ?> <?= Lang::get('tools.unused_invites_have_been_sent') ?></p>
 </div>
 <div class="BodyContent">
     <form class="Form SearchPage Box SearchInvite" name="invites" action="" method="get">
         <table class="Form-rowList">
             <tr class="Form-row">
-                <td class="Form-label"><?= Lang::get('tools', 'email_address') ?>:</td>
+                <td class="Form-label"><?= Lang::get('tools.email_address') ?>:</td>
                 <td class="Form-inputs">
                     <input type="hidden" name="action" value="invite_pool" />
                     <input class="Input" type="email" name="search" size="60" value="<?= display_str($Search) ?>" />
@@ -78,13 +78,13 @@ $DB->set_query_id($RS);
 </div>
 <table class="Table">
     <tr class="Table-rowHeader">
-        <td class="Table-cell"><?= Lang::get('tools', 'inviter') ?></td>
-        <td class="Table-cell"><?= Lang::get('tools', 'email_address') ?></td>
-        <td class="Table-cell"><?= Lang::get('tools', 'ip_address') ?></td>
-        <td class="Table-cell"><?= Lang::get('tools', 'invite_code') ?></td>
-        <td class="Table-cell"><?= Lang::get('tools', 'expires') ?></td>
+        <td class="Table-cell"><?= Lang::get('tools.inviter') ?></td>
+        <td class="Table-cell"><?= Lang::get('tools.email_address') ?></td>
+        <td class="Table-cell"><?= Lang::get('tools.ip_address') ?></td>
+        <td class="Table-cell"><?= Lang::get('tools.invite_code') ?></td>
+        <td class="Table-cell"><?= Lang::get('tools.expires') ?></td>
         <? if (check_perms('users_edit_invites')) { ?>
-            <td class="Table-cell"><?= Lang::get('tools', 'controls') ?></td>
+            <td class="Table-cell"><?= Lang::get('tools.controls') ?></td>
         <? } ?>
     </tr>
     <?

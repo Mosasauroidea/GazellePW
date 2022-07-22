@@ -6,7 +6,7 @@ if (!check_perms('site_moderate_forums')) {
 if (empty($Return)) {
     $ToID = $_GET['to'];
     if ($ToID == $LoggedUser['ID']) {
-        error(Lang::get('reports', 'you_cannot_start_a_conversation_with_yourself'));
+        error(Lang::get('reports.you_cannot_start_a_conversation_with_yourself'));
         header('Location: inbox.php');
     }
 }
@@ -35,7 +35,7 @@ list($ComposeToUsername) = $DB->next_record();
 if (!$ComposeToUsername) {
     error(404);
 }
-View::show_header(Lang::get('reports', 'compose'), 'inbox,bbcode', 'PageReportCompose');
+View::show_header(Lang::get('reports.compose'), 'inbox,bbcode', 'PageReportCompose');
 
 // $TypeLink is placed directly in the <textarea> when composing a PM
 switch ($Type) {
@@ -45,7 +45,7 @@ switch ($Type) {
 			FROM users_main
 			WHERE ID = $ThingID");
         if (!$DB->has_results()) {
-            $Error = Lang::get('reports', 'no_user_with_the_reported_id_found');
+            $Error = Lang::get('reports.no_user_with_the_reported_id_found');
         } else {
             list($Username) = $DB->next_record();
             $TypeLink = "the user [user]{$Username}[/user]";
@@ -59,7 +59,7 @@ switch ($Type) {
 			FROM requests
 			WHERE ID = $ThingID");
         if (!$DB->has_results()) {
-            $Error = Lang::get('reports', 'no_request_with_the_reported_id_found');
+            $Error = Lang::get('reports.no_request_with_the_reported_id_found');
         } else {
             list($Name) = $DB->next_record();
             $TypeLink = 'the request [url=' . site_url() . "requests.php?action=view&amp;id=$ThingID]" . display_str($Name) . '[/url]';
@@ -72,7 +72,7 @@ switch ($Type) {
 			FROM collages
 			WHERE ID = $ThingID");
         if (!$DB->has_results()) {
-            $Error = Lang::get('reports', 'no_collage_with_the_reported_id_found');
+            $Error = Lang::get('reports.no_collage_with_the_reported_id_found');
         } else {
             list($Name) = $DB->next_record();
             $TypeLink = 'the collage [url=' . site_url() . "collage.php?id=$ThingID]" . display_str($Name) . '[/url]';
@@ -85,7 +85,7 @@ switch ($Type) {
 			FROM forums_topics
 			WHERE ID = $ThingID");
         if (!$DB->has_results()) {
-            $Error = Lang::get('reports', 'no_forum_thread_with_the_reported_id_found');
+            $Error = Lang::get('reports.no_forum_thread_with_the_reported_id_found');
         } else {
             list($Title) = $DB->next_record();
             $TypeLink = 'the forum thread [url=' . site_url() . "forums.php?action=viewthread&amp;threadid=$ThingID]" . display_str($Title) . '[/url]';
@@ -112,7 +112,7 @@ switch ($Type) {
 			FROM forums_posts AS p
 			WHERE p.ID = $ThingID");
         if (!$DB->has_results()) {
-            $Error = Lang::get('reports', 'no_forum_post_with_the_reported_id_found');
+            $Error = Lang::get('reports.no_forum_post_with_the_reported_id_found');
         } else {
             list($PostID, $Body, $TopicID, $PostNum) = $DB->next_record();
             $TypeLink = 'this [url=' . site_url() . "forums.php?action=viewthread&amp;threadid=$TopicID&amp;post=$PostNum#post$PostID]forum post[/url]";
@@ -125,14 +125,14 @@ switch ($Type) {
 			FROM comments
 			WHERE ID = $ThingID");
         if (!$DB->has_results()) {
-            $Error = Lang::get('reports', 'no_comment_with_the_reported_id_found');
+            $Error = Lang::get('reports.no_comment_with_the_reported_id_found');
         } else {
             $TypeLink = '[url=' . site_url() . "comments.php?action=jump&amp;postid=$ThingID]this comment[/url]";
             $Subject = 'Comment Report: ID #' . display_str($ThingID);
         }
         break;
     default:
-        error(Lang::get('reports', 'incorrect_type'));
+        error(Lang::get('reports.incorrect_type'));
         break;
 }
 if (isset($Error)) {
@@ -145,13 +145,13 @@ $DB->query("
 	WHERE ID = $ReportID");
 list($Reason) = $DB->next_record();
 
-$Body = Lang::get('reports', 'you_reported_sth_for_the_reason_before') . "$TypeLink" . Lang::get('reports', 'you_reported_sth_for_the_reason_after') . ":\n[quote]{$Reason}[/quote]";
+$Body = Lang::get('reports.you_reported_sth_for_the_reason_before') . "$TypeLink" . Lang::get('reports.you_reported_sth_for_the_reason_after') . ":\n[quote]{$Reason}[/quote]";
 
 ?>
 <div class="LayoutBody">
     <div class="BodyHeader">
         <h2 class="BodyHeader-nav">
-            <?= Lang::get('reports', 'send_a_message_to_before') ?><a href="user.php?id=<?= $ToID ?>"><?= $ComposeToUsername ?></a><?= Lang::get('reports', 'send_a_message_to_after') ?>
+            <?= Lang::get('reports.send_a_message_to_before') ?><a href="user.php?id=<?= $ToID ?>"><?= $ComposeToUsername ?></a><?= Lang::get('reports.send_a_message_to_after') ?>
         </h2>
     </div>
     <form class="send_form" name="message" action="reports.php" method="post" id="messageform">
@@ -160,16 +160,16 @@ $Body = Lang::get('reports', 'you_reported_sth_for_the_reason_before') . "$TypeL
             <input type="hidden" name="toid" value="<?= $ToID ?>" />
             <input type="hidden" name="auth" value="<?= $LoggedUser['AuthKey'] ?>" />
             <div id="quickpost">
-                <h3><?= Lang::get('reports', 'subject') ?></h3>
+                <h3><?= Lang::get('reports.subject') ?></h3>
                 <input class="Input" type="text" name="subject" size="95" value="<?= (!empty($Subject) ? $Subject : '') ?>" />
                 <br />
-                <h3><?= Lang::get('reports', 'body') ?></h3>
+                <h3><?= Lang::get('reports.body') ?></h3>
                 <textarea class="Input" id="body" name="body" cols="95" rows="10"><?= (!empty($Body) ? $Body : '') ?></textarea>
             </div>
             <div id="preview" class="hidden"></div>
             <div id="buttons" class="center">
                 <input class="Button" type="button" value="Preview" onclick="Quick_Preview();" />
-                <input class="Button" type="submit" value="<?= Lang::get('inbox', 'send_message') ?>" />
+                <input class="Button" type="submit" value="<?= Lang::get('inbox.send_message') ?>" />
             </div>
         </div>
     </form>

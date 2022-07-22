@@ -67,23 +67,23 @@ $TorrentGroups = Torrents::get_groups($TorrentGroups, true, true, false);
 $Requests = Requests::get_requests($Requests);
 
 //Start printing page
-View::show_header(Lang::get('userhistory', 'header_quote_notifications'), '', 'PageUserHistoryQuoteNotification');
+View::show_header(Lang::get('userhistory.header_quote_notifications'), '', 'PageUserHistoryQuoteNotification');
 ?>
 <div class="LayoutBody">
     <div class="BodyHeader">
         <h2 class="BodyHeader-nav">
-            <?= Lang::get('userhistory', 'quote_notifications') ?>
-            <?= $NumResults && !empty($UnreadSQL) ? " ($NumResults" . Lang::get('userhistory', 'new_right_bracket') : '' ?>
+            <?= Lang::get('userhistory.quote_notifications') ?>
+            <?= $NumResults && !empty($UnreadSQL) ? " ($NumResults" . Lang::get('userhistory.new_right_bracket') : '' ?>
         </h2>
         <div class="BodyNavLinks">
             <br />
             <? if ($UnreadSQL) { ?>
-                <a href="userhistory.php?action=quote_notifications&amp;showall=1" class="brackets"><?= Lang::get('userhistory', 'show_all_quotes') ?></a>
+                <a href="userhistory.php?action=quote_notifications&amp;showall=1" class="brackets"><?= Lang::get('userhistory.show_all_quotes') ?></a>
             <? } else { ?>
-                <a href="userhistory.php?action=quote_notifications" class="brackets"><?= Lang::get('userhistory', 'show_unread_quotes') ?></a>
+                <a href="userhistory.php?action=quote_notifications" class="brackets"><?= Lang::get('userhistory.show_unread_quotes') ?></a>
             <? } ?>
-            <a href="userhistory.php?action=subscriptions" class="brackets"><?= Lang::get('userhistory', 'show_subscriptions') ?></a>
-            <a href="userhistory.php?action=quote_notifications&amp;catchup=1" class="brackets"><?= Lang::get('userhistory', 'catch_up') ?></a>
+            <a href="userhistory.php?action=subscriptions" class="brackets"><?= Lang::get('userhistory.show_subscriptions') ?></a>
+            <a href="userhistory.php?action=quote_notifications&amp;catchup=1" class="brackets"><?= Lang::get('userhistory.catch_up') ?></a>
             <!-- <br /><br /> -->
             <?
             $Pages = Format::get_pages($Page, $NumResults, CONFIG['TOPICS_PER_PAGE'], 9);
@@ -92,23 +92,23 @@ View::show_header(Lang::get('userhistory', 'header_quote_notifications'), '', 'P
         </div>
     </div>
     <? if (!$NumResults) { ?>
-        <div class="center"><?= Lang::get('userhistory', 'no_quotes_before') ?><?= ($UnreadSQL ? Lang::get('userhistory', 'space_new') : '') ?><?= Lang::get('userhistory', 'no_quotes_after') ?></div>
+        <div class="center"><?= Lang::get('userhistory.no_quotes_before') ?><?= ($UnreadSQL ? Lang::get('userhistory.space_new') : '') ?><?= Lang::get('userhistory.no_quotes_after') ?></div>
     <? } ?>
     <br />
     <?
     foreach ($Results as $Result) {
         switch ($Result['Page']) {
             case 'forums':
-                $Links = Lang::get('userhistory', 'forums') . ': <a href="forums.php?action=viewforum&amp;forumid=' . $Result['ForumID'] . '">' . display_str($Result['ForumName']) . '</a> &gt; ' .
+                $Links = Lang::get('userhistory.forums') . ': <a href="forums.php?action=viewforum&amp;forumid=' . $Result['ForumID'] . '">' . display_str($Result['ForumName']) . '</a> &gt; ' .
                     '<a href="forums.php?action=viewthread&amp;threadid=' . $Result['PageID'] . '"  data-tooltip="' . display_str($Result['ForumTitle']) . '">' . Format::cut_string($Result['ForumTitle'], 75) . '</a>';
                 $JumpLink = 'forums.php?action=viewthread&amp;threadid=' . $Result['PageID'] . '&amp;postid=' . $Result['PostID'] . '#post' . $Result['PostID'];
                 break;
             case 'artist':
-                $Links = Lang::get('userhistory', 'artist') . ': <a href="artist.php?id=' . $Result['PageID'] . '">' . display_str($Result['ArtistName']) . '</a>';
+                $Links = Lang::get('userhistory.artist') . ': <a href="artist.php?id=' . $Result['PageID'] . '">' . display_str($Result['ArtistName']) . '</a>';
                 $JumpLink = 'artist.php?id=' . $Result['PageID'] . '&amp;postid=' . $Result['PostID'] . '#post' . $Result['PostID'];
                 break;
             case 'collages':
-                $Links = Lang::get('userhistory', 'collage') . ': <a href="collages.php?id=' . $Result['PageID'] . '">' . display_str($Result['CollageName']) . '</a>';
+                $Links = Lang::get('userhistory.collage') . ': <a href="collages.php?id=' . $Result['PageID'] . '">' . display_str($Result['CollageName']) . '</a>';
                 $JumpLink = 'collages.php?action=comments&amp;collageid=' . $Result['PageID'] . '&amp;postid=' . $Result['PostID'] . '#post' . $Result['PostID'];
                 break;
             case 'requests':
@@ -118,7 +118,7 @@ View::show_header(Lang::get('userhistory', 'header_quote_notifications'), '', 'P
                 }
                 $Request = $Requests[$Result['PageID']];
                 $CategoryName = $Categories[$Request['CategoryID'] - 1];
-                $Links = Lang::get('userhistory', 'request') . ': ';
+                $Links = Lang::get('userhistory.request') . ': ';
                 $Links .= '<a href="requests.php?action=view&amp;id=' . $Result['PageID'] . '">' . $Request['Title'] . "</a>";
                 $JumpLink = 'requests.php?action=view&amp;id=' . $Result['PageID'] . '&amp;postid=' . $Result['PostID'] . '#post' . $Result['PostID'];
                 break;
@@ -128,12 +128,12 @@ View::show_header(Lang::get('userhistory', 'header_quote_notifications'), '', 'P
                     continue 2;
                 }
                 $GroupInfo = $TorrentGroups[$Result['PageID']];
-                $Links = Lang::get('userhistory', 'torrent') . ': ' . Artists::display_artists($GroupInfo['Artists']) . '<a href="torrents.php?id=' . $GroupInfo['ID'] . '" dir="ltr">' . $GroupInfo['Name'] . '</a>';
+                $Links = Lang::get('userhistory.torrent') . ': ' . Artists::display_artists($GroupInfo['Artists']) . '<a href="torrents.php?id=' . $GroupInfo['ID'] . '" dir="ltr">' . $GroupInfo['Name'] . '</a>';
                 if ($GroupInfo['Year'] > 0) {
                     $Links .= " [" . $GroupInfo['Year'] . "]";
                 }
                 if ($GroupInfo['ReleaseType'] > 0) {
-                    $Links .= " [" . Lang::get('torrents', 'release_types')[$GroupInfo['ReleaseType']] . "]";
+                    $Links .= " [" . Lang::get('torrents.release_types')[$GroupInfo['ReleaseType']] . "]";
                 }
                 $JumpLink = 'torrents.php?id=' . $GroupInfo['ID'] . '&postid=' . $Result['PostID'] . '#post' . $Result['PostID'];
                 break;
@@ -148,8 +148,8 @@ View::show_header(Lang::get('userhistory', 'header_quote_notifications'), '', 'P
                         <div class="TableForumPostHeader">
                             <div class="TableForumPostHeader-info">
                                 <?= $Links ?>
-                                &gt; <?= Lang::get('userhistory', 'quoted_by') ?> <?= Users::format_username($Result['QuoterID'], false, false, false, false) . ' ' . time_diff($Result['Date']) ?>
-                                <?= ($Result['UnRead'] ? Lang::get('userhistory', 'span_new') : '') ?>
+                                &gt; <?= Lang::get('userhistory.quoted_by') ?> <?= Users::format_username($Result['QuoterID'], false, false, false, false) . ' ' . time_diff($Result['Date']) ?>
+                                <?= ($Result['UnRead'] ? Lang::get('userhistory.span_new') : '') ?>
                                 <a data-tooltip="Jump to quote" href="<?= $JumpLink ?>">
                                     <?= icon('Forum/jump-to-last-read') ?>
                                 </a>

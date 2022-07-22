@@ -22,7 +22,7 @@ if (!$_POST['post'] || !is_number($_POST['post']) || !is_number($_POST['key'])) 
 // End injection check
 
 if ($LoggedUser['DisablePosting']) {
-    error(Lang::get('forums', 'your_posting_privileges_removed'));
+    error(Lang::get('forums.your_posting_privileges_removed'));
 }
 
 // Variables for database input
@@ -59,13 +59,13 @@ list($OldBody, $AuthorID, $TopicID, $IsLocked, $ForumID, $MinClassWrite, $Page) 
 // Make sure they aren't trying to edit posts they shouldn't
 // We use die() here instead of error() because whatever we spit out is displayed to the user in the box where his forum post is
 if (!Forums::check_forumperm($ForumID, 'Write') || ($IsLocked && !check_perms('site_moderate_forums') && !($AuthorID == $LoggedUser['ID'] && isset($LoggedUser['ExtraClasses']['31'])))) {
-    error(Lang::get('forums', 'either_the_thread_is_locked_or'), true);
+    error(Lang::get('forums.either_the_thread_is_locked_or'), true);
 }
 if ($UserID != $AuthorID && !check_perms('site_moderate_forums')) {
     error(403, true);
 }
 if ($LoggedUser['DisablePosting']) {
-    error(Lang::get('forums', 'your_posting_privileges_removed'), true);
+    error(Lang::get('forums.your_posting_privileges_removed'), true);
 }
 if (!$DB->has_results()) {
     error(404, true);
@@ -124,4 +124,4 @@ $Cache->delete_value("forums_edits_$PostID");
 // This gets sent to the browser, which echoes it in place of the old body
 echo Text::full_format($Body);
 ?>
-<br /><br /><span class="last_edited"><?= Lang::get('forums', 'last_edit_by_before') ?><a href="user.php?id=<?= $LoggedUser['ID'] ?>"><?= $LoggedUser['Username'] ?></a><?= Lang::get('forums', 'by_user_just_now_after') ?></span>
+<br /><br /><span class="last_edited"><?= Lang::get('forums.last_edit_by_before') ?><a href="user.php?id=<?= $LoggedUser['ID'] ?>"><?= $LoggedUser['Username'] ?></a><?= Lang::get('forums.by_user_just_now_after') ?></span>

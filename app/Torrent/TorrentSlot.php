@@ -524,7 +524,7 @@ class TorrentSlot {
 			default:
 				return '';
 		}
-		return Lang::get('torrents', $str);
+		return Lang::get("torrents.$str");
 	}
 
 	public static function slot_option_lang($Slot) {
@@ -565,7 +565,7 @@ class TorrentSlot {
 		if (empty($Slot)) {
 			$text = '---';
 		} else {
-			$text = Lang::get('torrents', self::slot_option_lang($Slot));
+			$text = Lang::get('torrents.' . self::slot_option_lang($Slot));
 			if ($IsExtra) {
 				$text .= '*';
 				$Slot .= '*';

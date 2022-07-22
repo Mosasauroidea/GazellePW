@@ -1,5 +1,5 @@
 <?
-View::show_header(Lang::get('rules', 'chat_title'), '', 'PageRuleChat');
+View::show_header(Lang::get('rules.chat_title'), '', 'PageRuleChat');
 ?>
 
 <div class="LayoutBody">

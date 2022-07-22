@@ -1,5 +1,5 @@
 <?
-View::show_header(Lang::get('rules', 'clients_title'), '', 'PageRuleClient');
+View::show_header(Lang::get('rules.clients_title'), '', 'PageRuleClient');
 
 if (!$WhitelistedClients = $Cache->get_value('whitelisted_clients')) {
     $DB->query('

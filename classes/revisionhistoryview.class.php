@@ -10,10 +10,10 @@ class RevisionHistoryView {
         <div class="TableContainer">
             <table class="TableRevision Table" id="revision_table">
                 <tr class="Table-rowHeader">
-                    <td class="Table-cell"><?= Lang::get('global', 'revision') ?></td>
-                    <td class="Table-cell"><?= Lang::get('global', 'date') ?></td>
-                    <td class="Table-cell"><?= Lang::get('global', 'user') ?></td>
-                    <td class="Table-cell"><?= Lang::get('global', 'summary') ?></td>
+                    <td class="Table-cell"><?= Lang::get('global.revision') ?></td>
+                    <td class="Table-cell"><?= Lang::get('global.date') ?></td>
+                    <td class="Table-cell"><?= Lang::get('global.user') ?></td>
+                    <td class="Table-cell"><?= Lang::get('global.summary') ?></td>
                 </tr>
                 <?
                 $Row = 'a';

@@ -8,7 +8,7 @@ $P = array();
 $P = db_array($_POST);
 
 if ($P['category'] != $PersonalCollageCategoryCat || check_perms('site_collages_renamepersonal')) {
-    $Val->SetFields('name', '1', 'string', Lang::get('collages', 'the_name_must_between'), array('maxlength' => 100, 'minlength' => 3));
+    $Val->SetFields('name', '1', 'string', Lang::get('collages.the_name_must_between'), array('maxlength' => 100, 'minlength' => 3));
 } else {
     // Get a collage name and make sure it's unique
     $name = $LoggedUser['Username'] . "'s personal collage";
@@ -27,7 +27,7 @@ if ($P['category'] != $PersonalCollageCategoryCat || check_perms('site_collages_
         $i++;
     }
 }
-$Val->SetFields('description', '1', 'string', Lang::get('collages', 'the_description_must_between'), array('maxlength' => 65535, 'minlength' => 10));
+$Val->SetFields('description', '1', 'string', Lang::get('collages.the_description_must_between'), array('maxlength' => 65535, 'minlength' => 10));
 
 $Err = $Val->ValidateForm($_POST);
 if (!$Err && $P['category'] == $PersonalCollageCategoryCat) {
@@ -39,9 +39,9 @@ if (!$Err && $P['category'] == $PersonalCollageCategoryCat) {
 			AND Deleted = '0'");
     list($CollageCount) = $DB->next_record();
     if (($CollageCount >= $LoggedUser['Permissions']['MaxCollages']) || !check_perms('site_collages_personal')) {
-        $Err = Lang::get('collages', 'you_may_not_create_a_personal_collage');
+        $Err = Lang::get('collages.you_may_not_create_a_personal_collage');
     } elseif (check_perms('site_collages_renamepersonal') && !stristr($P['name'], $LoggedUser['Username'])) {
-        $Err = Lang::get('collages', 'your_personal_collage_must');
+        $Err = Lang::get('collages.your_personal_collage_must');
     }
 }
 
@@ -53,16 +53,16 @@ if (!$Err) {
     if ($DB->has_results()) {
         list($ID, $Deleted) = $DB->next_record();
         if ($Deleted) {
-            $Err = Lang::get('collages', 'that_collage_already_exists_1');
+            $Err = Lang::get('collages.that_collage_already_exists_1');
         } else {
-            $Err = Lang::get('collages', 'that_collage_already_exists_2');
+            $Err = Lang::get('collages.that_collage_already_exists_2');
         }
     }
 }
 
 if (!$Err) {
     if (!in_array($P['category'], $CollageCats)) {
-        $Err = Lang::get('collages', 'please_select_a_category');
+        $Err = Lang::get('collages.please_select_a_category');
     }
 }
 

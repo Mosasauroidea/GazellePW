@@ -20,12 +20,12 @@ $Group = $Torrent['Group'];
 $CategoryID = $Group['CategoryID'];
 $GroupSnatched = Torrents::parse_group_snatched($Group);
 
-View::show_header(Lang::get('reportsv2', 'report'), 'reportsv2,browse,torrent,bbcode,recommend', 'PageReportV2Show');
+View::show_header(Lang::get('reportsv2.report'), 'reportsv2,browse,torrent,bbcode,recommend', 'PageReportV2Show');
 ?>
 
 <div class="LayoutBody">
     <div class="BodyHeader">
-        <h2 class="BodyHeader-nav"><?= Lang::get('reportsv2', 'report') ?></h2>
+        <h2 class="BodyHeader-nav"><?= Lang::get('reportsv2.report') ?></h2>
     </div>
     <?
     $DetailOption = new DetailOption;
@@ -45,11 +45,11 @@ View::show_header(Lang::get('reportsv2', 'report'), 'reportsv2,browse,torrent,bb
         </div>
         <table class="Form-rowList" variant="header">
             <tr class="Form-rowHeader">
-                <td class="Form-title"><?= Lang::get('reportsv2', 'report_a_torrent') ?></td>
+                <td class="Form-title"><?= Lang::get('reportsv2.report_a_torrent') ?></td>
             </tr>
             <tr class="Form-row">
                 <td colspan="2">
-                    <div><?= Lang::get('reportsv2', 'reason') ?>:
+                    <div><?= Lang::get('reportsv2.reason') ?>:
                         <select class=" Input" id="type" name="type" onchange="ChangeReportType();">
                             <?
                             if (!empty($Types[$CategoryID])) {
@@ -95,7 +95,7 @@ View::show_header(Lang::get('reportsv2', 'report'), 'reportsv2,browse,torrent,bb
             <tr class="Form-row">
                 <td colspan="2">
                     <div align="center" id="submit-report">
-                        <input class="Button" type="submit" value="<?= Lang::get('global', 'submit') ?>" />
+                        <input class="Button" type="submit" value="<?= Lang::get('global.submit') ?>" />
                     </div>
                 </td>
             </tr>

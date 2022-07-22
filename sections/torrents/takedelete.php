@@ -60,11 +60,11 @@ Torrents::send_pm($TorrentID, $UserID, $RawName, $Log, 0, G::$LoggedUser['ID'] !
 Misc::write_log($Log);
 Torrents::write_group_log($GroupID, $TorrentID, $LoggedUser['ID'], 'deleted torrent (' . number_format($Size / (1024 * 1024), 2) . ' MB, ' . strtoupper($InfoHash[1]) . ') for reason: ' . $_POST['reason'] . ' ' . $_POST['extra'], 0);
 
-View::show_header(Lang::get('torrents', 'torrent_deleted'), '', 'PageTorrentTakeDelete');
+View::show_header(Lang::get('torrents.torrent_deleted'), '', 'PageTorrentTakeDelete');
 ?>
 <div class="LayoutBody">
-	<h1><?= Lang::get('torrents', 'torrent_deleted_notice') ?></h1>
-	<p><?= Lang::get('torrents', 'torrent_deleted_successfully') ?></p>
+	<h1><?= Lang::get('torrents.torrent_deleted_notice') ?></h1>
+	<p><?= Lang::get('torrents.torrent_deleted_successfully') ?></p>
 </div>
 <?
 View::show_footer();

@@ -16,7 +16,7 @@ if (!check_perms('site_moderate_requests')) {
 <div class="LayoutBody">
     <div class="header">
         <h3><?= $Title ?></h3>
-        <h3><?= Lang::get('torrents', 'mass_pm') ?></h3>
+        <h3><?= Lang::get('torrents.mass_pm') ?></h3>
     </div>
     <form class="send_form" name="mass_message" action="torrents.php" method="post">
         <input type="hidden" name="action" value="takemasspm" />

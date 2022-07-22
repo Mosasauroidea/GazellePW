@@ -74,11 +74,11 @@ class MASS_USER_TORRENTS_TABLE_VIEW {
 ?>
         <div class="LayoutBody">
             <div class="BodyHeader">
-                <h2 class="BodyHeader-nav"><?= Lang::get('bookmarks', 'no_torrents_found') ?></h2>
+                <h2 class="BodyHeader-nav"><?= Lang::get('bookmarks.no_torrents_found') ?></h2>
             </div>
             <div class="Box">
                 <div class="Box-body" align="center">
-                    <p><?= Lang::get('bookmarks', 'add_some_torrents_and_come_back_later') ?></p>
+                    <p><?= Lang::get('bookmarks.add_some_torrents_and_come_back_later') ?></p>
                 </div>
             </div>
         </div>
@@ -109,10 +109,10 @@ class MASS_USER_TORRENTS_TABLE_VIEW {
 
                 <table class="Table">
                     <tr class="Table-rowHeader">
-                        <td class="Table-cell" id="sorting_head"><?= Lang::get('bookmarks', 'sorting') ?></td>
+                        <td class="Table-cell" id="sorting_head"><?= Lang::get('bookmarks.sorting') ?></td>
                     </tr>
                     <tr>
-                        <td id="drag_drop_textnote"><?= Lang::get('bookmarks', 'drag_drop_textnote_torrents') ?></td>
+                        <td id="drag_drop_textnote"><?= Lang::get('bookmarks.drag_drop_textnote_torrents') ?></td>
                     </tr>
                 </table>
 
@@ -123,13 +123,13 @@ class MASS_USER_TORRENTS_TABLE_VIEW {
                     <table class="TableManageCollage Table" id="manage_collage_table">
                         <thead>
                             <tr class="Table-rowHeader">
-                                <th class="Table-cell" style="width: 7%;" data-sorter="false"><?= Lang::get('bookmarks', 'order') ?></th>
-                                <th class="Table-cell" style="width: 1%;"><span><abbr data-tooltip="<?= Lang::get('bookmarks', 'current_order') ?>">#</abbr></span></th>
-                                <th class="Table-cell" style="width: 1%;"><span><?= Lang::get('bookmarks', 'year') ?></span></th>
-                                <th class="Table-cell" style="width: 15%;" data-sorter="ignoreArticles"><span><?= Lang::get('global', 'artist') ?></span></th>
-                                <th class="Table-cell" data-sorter="ignoreArticles"><span><?= Lang::get('global', 'torrent') ?></span></th>
-                                <th class="Table-cell" style="width: 5%;" data-sorter="relativeTime"><span><?= Lang::get('bookmarks', 'bookmarked') ?></span></th>
-                                <th class="Table-cell" style="width: 1%;" id="check_all" data-sorter="false"><span><?= Lang::get('bookmarks', 'remove') ?></span></th>
+                                <th class="Table-cell" style="width: 7%;" data-sorter="false"><?= Lang::get('bookmarks.order') ?></th>
+                                <th class="Table-cell" style="width: 1%;"><span><abbr data-tooltip="<?= Lang::get('bookmarks.current_order') ?>">#</abbr></span></th>
+                                <th class="Table-cell" style="width: 1%;"><span><?= Lang::get('bookmarks.year') ?></span></th>
+                                <th class="Table-cell" style="width: 15%;" data-sorter="ignoreArticles"><span><?= Lang::get('global.artist') ?></span></th>
+                                <th class="Table-cell" data-sorter="ignoreArticles"><span><?= Lang::get('global.torrent') ?></span></th>
+                                <th class="Table-cell" style="width: 5%;" data-sorter="relativeTime"><span><?= Lang::get('bookmarks.bookmarked') ?></span></th>
+                                <th class="Table-cell" style="width: 1%;" id="check_all" data-sorter="false"><span><?= Lang::get('bookmarks.remove') ?></span></th>
                             </tr>
                         </thead>
                         <tbody>

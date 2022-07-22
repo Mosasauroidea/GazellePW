@@ -3,7 +3,7 @@
 if (!check_perms('users_view_invites') && !check_perms('users_disable_users') && !check_perms('users_edit_invites') && !check_perms('users_disable_any')) {
     error(404);
 }
-View::show_header(Lang::get('tools', 'h2_manipulate_invite_tree'));
+View::show_header(Lang::get('tools.h2_manipulate_invite_tree'));
 
 if ($_POST['id']) {
     authorize();
@@ -12,7 +12,7 @@ if ($_POST['id']) {
         error(403);
     }
     if (!$_POST['comment']) {
-        error(Lang::get('tools', 'please_enter_a_comment_to_add_to_the_users_affected'));
+        error(Lang::get('tools.please_enter_a_comment_to_add_to_the_users_affected'));
     } else {
         $Comment = date('Y-m-d H:i:s') . " - ";
         $Comment .= db_string($_POST['comment']);
@@ -81,7 +81,7 @@ if ($_POST['id']) {
 
 <div class="LayoutBody">
     <div class="BodyHeader">
-        <h2 class="BodyHeader-nav"><?= Lang::get('tools', 'h2_manipulate_invite_tree') ?></h2>
+        <h2 class="BodyHeader-nav"><?= Lang::get('tools.h2_manipulate_invite_tree') ?></h2>
     </div>
     <? if ($Msg) { ?>
         <div class="center">
@@ -93,27 +93,27 @@ if ($_POST['id']) {
         <input type="hidden" name="auth" value="<?= $LoggedUser['AuthKey'] ?>" />
         <table class="layout">
             <tr>
-                <td class="label"><strong><?= Lang::get('tools', 'userid') ?>:</strong></td>
+                <td class="label"><strong><?= Lang::get('tools.userid') ?>:</strong></td>
                 <td><input class="Input" type="text" size="10" name="id" id="id" /></td>
-                <td class="label"><strong><?= Lang::get('tools', 'mandatory_comment') ?>:</strong></td>
+                <td class="label"><strong><?= Lang::get('tools.mandatory_comment') ?>:</strong></td>
                 <td><input class="Input" type="text" size="40" name="comment" id="comment" /></td>
             </tr>
             <tr>
-                <td class="label"><strong><?= Lang::get('tools', 'action') ?>:</strong></td>
+                <td class="label"><strong><?= Lang::get('tools.action') ?>:</strong></td>
                 <td colspan="2">
                     <select class="Input" name="perform">
                         <option class="Select-option" value="nothing" <?
                                                                         if ($_POST['perform'] === 'nothing') {
                                                                             echo ' selected="selected"';
-                                                                        } ?>><?= Lang::get('tools', 'do_nothing') ?></option>
+                                                                        } ?>><?= Lang::get('tools.do_nothing') ?></option>
                         <option class="Select-option" value="disable" <?
                                                                         if ($_POST['perform'] === 'disable') {
                                                                             echo ' selected="selected"';
-                                                                        } ?>><?= Lang::get('tools', 'disable_entire_tree') ?></option>
+                                                                        } ?>><?= Lang::get('tools.disable_entire_tree') ?></option>
                         <option class="Select-option" value="inviteprivs" <?
                                                                             if ($_POST['perform'] === 'inviteprivs') {
                                                                                 echo ' selected="selected"';
-                                                                            } ?>><?= Lang::get('tools', 'disable_invites_privileges') ?></option>
+                                                                            } ?>><?= Lang::get('tools.disable_invites_privileges') ?></option>
                     </select>
                 </td>
                 <td align="left"><input class="Button" type="submit" value="Go" /></td>

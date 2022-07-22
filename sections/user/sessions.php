@@ -47,20 +47,20 @@ if (!is_array($UserSessions)) {
 }
 
 list($UserID, $Username) = array_values(Users::user_info($UserID));
-View::show_header($Username . Lang::get('user', 'space_bigger_than_sessions'), '', 'PageUserSession');
+View::show_header($Username . Lang::get('user.space_bigger_than_sessions'), '', 'PageUserSession');
 ?>
 <div class="LayoutBody">
-    <h2><?= Users::format_username($UserID, $Username) ?><?= Lang::get('user', 'space_bigger_than_sessions') ?></h2>
+    <h2><?= Users::format_username($UserID, $Username) ?><?= Lang::get('user.space_bigger_than_sessions') ?></h2>
     <div class="BoxBody">
-        <p><?= Lang::get('user', 'clearing_cookies_can_result_in_ghost_sessions') ?></p>
+        <p><?= Lang::get('user.clearing_cookies_can_result_in_ghost_sessions') ?></p>
     </div>
     <div class="BoxBody">
         <table class="TableUserSession Table">
             <tr class="Table-rowHeader">
-                <td class="Table-cell"><?= Lang::get('user', 'ip_address') ?></td>
-                <td class="Table-cell"><?= Lang::get('user', 'browser') ?></td>
-                <td class="Table-cell"><?= Lang::get('user', 'platform') ?></td>
-                <td class="Table-cell"><?= Lang::get('user', 'last_activity') ?></td>
+                <td class="Table-cell"><?= Lang::get('user.ip_address') ?></td>
+                <td class="Table-cell"><?= Lang::get('user.browser') ?></td>
+                <td class="Table-cell"><?= Lang::get('user.platform') ?></td>
+                <td class="Table-cell"><?= Lang::get('user.last_activity') ?></td>
                 <td class="Table-cell">
                     <form class="manage_form" name="sessions" action="" method="post">
                         <input type="hidden" name="action" value="sessions" />

@@ -1,6 +1,6 @@
 <?
 //ini_set('max_file_uploads', 1);
-View::show_header(Lang::get('subtitles', 'h2_subtitles'), 'validate_subtitles', 'PageBookmarkSubtitle');
+View::show_header(Lang::get('subtitles.h2_subtitles'), 'validate_subtitles', 'PageBookmarkSubtitle');
 ?>
 
 
@@ -8,16 +8,16 @@ View::show_header(Lang::get('subtitles', 'h2_subtitles'), 'validate_subtitles', 
 
 <div class="LayoutBody">
     <div class="BodyHeader">
-        <h2 class="BodyHeader-nav"><?= Lang::get('subtitles', 'h2_subtitles') ?></h2>
+        <h2 class="BodyHeader-nav"><?= Lang::get('subtitles.h2_subtitles') ?></h2>
     </div>
     <div class="BodyNavLinks">
-        <a href="subtitles.php?action=new" class="brackets"><?= Lang::get('subtitles', 'new_subtitle') ?></a>
-        <a href="subtitles.php?action=new" class="brackets"><?= Lang::get('subtitles', 'my_subtitles') ?></a>
-        <a href="subtitles.php?action=new" class="brackets"><?= Lang::get('subtitles', 'bookmarked_subtitles') ?></a>
+        <a href="subtitles.php?action=new" class="brackets"><?= Lang::get('subtitles.new_subtitle') ?></a>
+        <a href="subtitles.php?action=new" class="brackets"><?= Lang::get('subtitles.my_subtitles') ?></a>
+        <a href="subtitles.php?action=new" class="brackets"><?= Lang::get('subtitles.bookmarked_subtitles') ?></a>
     </div>
     <div id="subtitle_search_box">
-        <input class="Input" type="text" id="subtitle_search_title" placeholder="<?= Lang::get('subtitles', 'title_or_imdb_link') ?>">
-        <input class="Input" type="text" id="subtitle_search_year" placeholder="<?= Lang::get('subtitles', 'year_optional') ?>">
+        <input class="Input" type="text" id="subtitle_search_title" placeholder="<?= Lang::get('subtitles.title_or_imdb_link') ?>">
+        <input class="Input" type="text" id="subtitle_search_year" placeholder="<?= Lang::get('subtitles.year_optional') ?>">
         <select class="Input" id="subtitle_search_language" name="TargetLanguageId" class="form__input">
             <option class="Select-option" value="14">简中</option>
             <option class="Select-option" value="14">繁中</option>
@@ -61,13 +61,13 @@ View::show_header(Lang::get('subtitles', 'h2_subtitles'), 'validate_subtitles', 
             <option class="Select-option" value="34">Ukrainian</option>
             <option class="Select-option" value="25">Vietnamese</option>
         </select>
-        <button class="Button"><?= Lang::get('subtitles', 'search') ?></button>
+        <button class="Button"><?= Lang::get('subtitles.search') ?></button>
     </div>
     <div id="subtitle_browser">
-        <div class="thead subtitle_language"><?= Lang::get('global', 'language') ?></div>
-        <div class="thead movie_title"><?= Lang::get('subtitles', 'movie_title') ?></div>
-        <div class="thead subtitle_language"><?= Lang::get('global', 'language') ?></div>
-        <div class="thead movie_title"><?= Lang::get('subtitles', 'movie_title') ?></div>
+        <div class="thead subtitle_language"><?= Lang::get('global.language') ?></div>
+        <div class="thead movie_title"><?= Lang::get('subtitles.movie_title') ?></div>
+        <div class="thead subtitle_language"><?= Lang::get('global.language') ?></div>
+        <div class="thead movie_title"><?= Lang::get('subtitles.movie_title') ?></div>
         <!-- 如果是多语字幕，下边就亮联合国旗 -->
         <div class="tbody subtitle_language">国旗</div>
         <div class="tbody movie_title"><a href="subtitles.php?action=detail">[电影中文名] 电影英文名 (年) by 导演名</a><span class="floatright">[ <a>DL</a> ]</span></div>

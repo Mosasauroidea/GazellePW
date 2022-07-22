@@ -5,7 +5,7 @@ function display_perm($Key) {
     if (!empty($Values[$Key])) {
         $Perm .= ' checked="checked"';
     }
-    $Perm .= " /> <label for=\"$Key\">" . Lang::get('permissions', $Key) . "</label><br />";
+    $Perm .= " /> <label for=\"$Key\">" . Lang::get("permissions.$Key") . "</label><br />";
     echo "$Perm\n";
 }
 
@@ -15,7 +15,7 @@ $DB->prepared_query("
 	ORDER BY Sort");
 $Groups = $DB->to_array(false, MYSQLI_ASSOC);
 
-View::show_header(Lang::get('tools', 'manage_permissions'), 'validate');
+View::show_header(Lang::get('tools.manage_permissions'), 'validate');
 
 echo $Val->GenerateJS('permissionsform');
 ?>
@@ -24,28 +24,28 @@ echo $Val->GenerateJS('permissionsform');
     <input type="hidden" name="auth" value="<?= $LoggedUser['AuthKey'] ?>" />
     <input type="hidden" name="id" value="<?= display_str($_REQUEST['id']); ?>" />
     <div class="BodyNavLinks">
-        <a href="tools.php?action=permissions" class="brackets"><?= Lang::get('tools', 'back_to_permission_list') ?></a>
-        <a href="tools.php" class="brackets"><?= Lang::get('tools', 'back_to_tools') ?></a>
+        <a href="tools.php?action=permissions" class="brackets"><?= Lang::get('tools.back_to_permission_list') ?></a>
+        <a href="tools.php" class="brackets"><?= Lang::get('tools.back_to_tools') ?></a>
     </div>
     <table class="permission_head layout">
         <tr>
-            <td class="label"><?= Lang::get('tools', 'permission_name') ?></td>
+            <td class="label"><?= Lang::get('tools.permission_name') ?></td>
             <td><input class="Input" type="text" name="name" id="name" value="<?= !empty($Name) ? display_str($Name) : '' ?>" /></td>
         </tr>
         <tr>
-            <td class="label"><?= Lang::get('tools', 'class_level') ?></td>
+            <td class="label"><?= Lang::get('tools.class_level') ?></td>
             <td><input class="Input" type="text" name="level" id="level" value="<?= !empty($Level) ? display_str($Level) : '' ?>" /></td>
         </tr>
         <tr>
-            <td class="label"><?= Lang::get('tools', 'secondary_class') ?></td>
+            <td class="label"><?= Lang::get('tools.secondary_class') ?></td>
             <td><input type="checkbox" name="secondary" value="1" <?= !empty($Secondary) ? ' checked="checked"' : '' ?> /></td>
         </tr>
         <tr>
-            <td class="label"><?= Lang::get('tools', 'show_on_staff_page') ?></td>
+            <td class="label"><?= Lang::get('tools.show_on_staff_page') ?></td>
             <td><input type="checkbox" name="displaystaff" value="1" <?= !empty($DisplayStaff) ? ' checked="checked"' : '' ?> /></td>
         </tr>
         <tr>
-            <td class="label"><?= Lang::get('tools', 'staff_page_group') ?></td>
+            <td class="label"><?= Lang::get('tools.staff_page_group') ?></td>
             <td>
                 <select class="Input" name="staffgroup" id="staffgroup">
                     <?php foreach ($Groups as $Group) { ?>
@@ -55,16 +55,16 @@ echo $Val->GenerateJS('permissionsform');
             </td>
         </tr>
         <tr>
-            <td class="label"><?= Lang::get('tools', 'max_collages') ?></td>
+            <td class="label"><?= Lang::get('tools.max_collages') ?></td>
             <td><input class="Input" type="text" name="maxcollages" size="5" value="<?= $Values['MaxCollages'] ?>" /></td>
         </tr>
         <tr>
-            <td class="label"><?= Lang::get('tools', 'additional_forums') ?></td>
+            <td class="label"><?= Lang::get('tools.additional_forums') ?></td>
             <td><input class="Input" type="text" size="30" name="forums" value="<?= display_str($Forums) ?>" /></td>
         </tr>
         <? if (is_numeric($_REQUEST['id'])) { ?>
             <tr>
-                <td class="label"><?= Lang::get('tools', 'current_users_in_this_class') ?></td>
+                <td class="label"><?= Lang::get('tools.current_users_in_this_class') ?></td>
                 <td><?= number_format($UserCount) ?></td>
             </tr>
         <? } ?>

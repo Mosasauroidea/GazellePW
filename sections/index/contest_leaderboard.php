@@ -10,7 +10,7 @@ if (empty($Leaderboard)) {
 ?>
 
 <div class="box">
-    <div class="head colhead_dark"><strong><?= Lang::get('index', 'cleader') ?></strong></div>
+    <div class="head colhead_dark"><strong><?= Lang::get('index.cleader') ?></strong></div>
     <div class="TableContainer">
         <table>
             <?php
@@ -28,6 +28,6 @@ if (empty($Leaderboard)) {
         </table>
     </div>
     <div class="center pad">
-        <a href="contest.php?action=leaderboard"><em><?= Lang::get('index', 'add_more') ?></em></a>
+        <a href="contest.php?action=leaderboard"><em><?= Lang::get('index.add_more') ?></em></a>
     </div>
 </div>

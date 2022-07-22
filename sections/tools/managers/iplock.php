@@ -4,7 +4,7 @@ if (isset($_POST['do'])) {
         case 'add':
             $r = IPLock::add($_POST['userid'], $_POST['ips']);
             if (!$r) {
-                error(Lang::get('tools', 'should_edit'));
+                error(Lang::get('tools.should_edit'));
             }
             break;
         case 'edit':
@@ -17,8 +17,8 @@ if (isset($_POST['do'])) {
     header("Location: /tools.php?action=iplock");
     exit();
 }
-View::show_header(Lang::get('tools', 'ip_lock_management')); ?>
-<h2><?= Lang::get('tools', 'ip_lock_management') ?></h2>
+View::show_header(Lang::get('tools.ip_lock_management')); ?>
+<h2><?= Lang::get('tools.ip_lock_management') ?></h2>
 <?
 $IPLockList = IPLock::getIPLock();
 ?>

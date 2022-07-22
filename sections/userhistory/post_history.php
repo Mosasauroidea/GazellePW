@@ -23,7 +23,7 @@ list($Page, $Limit) = Format::page_limit($PerPage);
 $UserInfo = Users::user_info($UserID);
 extract(array_intersect_key($UserInfo, array_flip(array('Username', 'Enabled', 'Title', 'Avatar', 'Donor', 'Warned'))));
 
-View::show_header(Lang::get('userhistory', 'post_history_for_before') . "$Username" . Lang::get('userhistory', 'post_history_for_after'), 'subscriptions,comments,bbcode', 'PageUserHistoryPost');
+View::show_header(Lang::get('userhistory.post_history_for_before') . "$Username" . Lang::get('userhistory.post_history_for_after'), 'subscriptions,comments,bbcode', 'PageUserHistoryPost');
 
 $ViewingOwn = ($UserID == $LoggedUser['ID']);
 $ShowUnread = ($ViewingOwn && (!isset($_GET['showunread']) || !!$_GET['showunread']));
@@ -160,11 +160,11 @@ if ($ShowGrouped) {
         <h2 class="BodyHeader-nav">
             <?
             if ($ShowGrouped) {
-                echo Lang::get('userhistory', 'grouped') . ($ShowUnread ? Lang::get('userhistory', 'unread') : '') . Lang::get('userhistory', 'post_history_for_before') . "<a href=\"user.php?id=$UserID\">$Username</a>" . Lang::get('userhistory', 'post_history_for_after');
+                echo Lang::get('userhistory.grouped') . ($ShowUnread ? Lang::get('userhistory.unread') : '') . Lang::get('userhistory.post_history_for_before') . "<a href=\"user.php?id=$UserID\">$Username</a>" . Lang::get('userhistory.post_history_for_after');
             } elseif ($ShowUnread) {
-                echo Lang::get('userhistory', 'unread_post_history_for_before') . "<a href=\"user.php?id=$UserID\">$Username</a>" . Lang::get('userhistory', 'unread_post_history_for_after');
+                echo Lang::get('userhistory.unread_post_history_for_before') . "<a href=\"user.php?id=$UserID\">$Username</a>" . Lang::get('userhistory.unread_post_history_for_after');
             } else {
-                echo Lang::get('userhistory', 'post_history_for_before') . "<a href=\"user.php?id=$UserID\">$Username</a>" . Lang::get('userhistory', 'post_history_for_after');
+                echo Lang::get('userhistory.post_history_for_before') . "<a href=\"user.php?id=$UserID\">$Username</a>" . Lang::get('userhistory.post_history_for_after');
             }
             ?>
         </h2>
@@ -176,25 +176,25 @@ if ($ShowGrouped) {
 
                 if (!$ShowUnread) {
                     if ($ShowGrouped) { ?>
-                        <a href="userhistory.php?action=posts&amp;userid=<?= $UserID ?>&amp;showunread=0&amp;group=0" class="brackets"><?= Lang::get('userhistory', 'show_all_posts') ?></a>
+                        <a href="userhistory.php?action=posts&amp;userid=<?= $UserID ?>&amp;showunread=0&amp;group=0" class="brackets"><?= Lang::get('userhistory.show_all_posts') ?></a>
                     <?      } else { ?>
-                        <a href="userhistory.php?action=posts&amp;userid=<?= $UserID ?>&amp;showunread=0&amp;group=1" class="brackets"><?= Lang::get('userhistory', 'show_all_posts_grouped') ?></a>
+                        <a href="userhistory.php?action=posts&amp;userid=<?= $UserID ?>&amp;showunread=0&amp;group=1" class="brackets"><?= Lang::get('userhistory.show_all_posts_grouped') ?></a>
                     <?      } ?>
-                    <a href="userhistory.php?action=posts&amp;userid=<?= $UserID ?>&amp;showunread=1&amp;group=1" class="brackets"><?= Lang::get('userhistory', 'only_display_posts_with_unread_replies_grouped') ?></a>
+                    <a href="userhistory.php?action=posts&amp;userid=<?= $UserID ?>&amp;showunread=1&amp;group=1" class="brackets"><?= Lang::get('userhistory.only_display_posts_with_unread_replies_grouped') ?></a>
                 <?  } else { ?>
-                    <a href="userhistory.php?action=posts&amp;userid=<?= $UserID ?>&amp;showunread=0&amp;group=0" class="brackets"><?= Lang::get('userhistory', 'show_all_posts') ?></a>
+                    <a href="userhistory.php?action=posts&amp;userid=<?= $UserID ?>&amp;showunread=0&amp;group=0" class="brackets"><?= Lang::get('userhistory.show_all_posts') ?></a>
                     <? if (!$ShowGrouped) { ?>
-                        <a href="userhistory.php?action=posts&amp;userid=<?= $UserID ?>&amp;showunread=1&amp;group=1" class="brackets"><?= Lang::get('userhistory', 'only_display_posts_with_unread_replies_grouped') ?></a>
+                        <a href="userhistory.php?action=posts&amp;userid=<?= $UserID ?>&amp;showunread=1&amp;group=1" class="brackets"><?= Lang::get('userhistory.only_display_posts_with_unread_replies_grouped') ?></a>
                     <?      } else { ?>
-                        <a href="userhistory.php?action=posts&amp;userid=<?= $UserID ?>&amp;showunread=1&amp;group=0" class="brackets"><?= Lang::get('userhistory', 'only_display_posts_with_unread_replies') ?></a>
+                        <a href="userhistory.php?action=posts&amp;userid=<?= $UserID ?>&amp;showunread=1&amp;group=0" class="brackets"><?= Lang::get('userhistory.only_display_posts_with_unread_replies') ?></a>
                 <?      }
                 }
                 ?>
-                <a href="userhistory.php?action=subscriptions" class="brackets"><?= Lang::get('userhistory', 'go_to_subscriptions') ?></a>
+                <a href="userhistory.php?action=subscriptions" class="brackets"><?= Lang::get('userhistory.go_to_subscriptions') ?></a>
             <?
             } else {
             ?>
-                <a href="forums.php?action=search&amp;type=body&amp;user=<?= $Username ?>" class="brackets"><?= Lang::get('userhistory', 'search') ?></a>
+                <a href="forums.php?action=search&amp;type=body&amp;user=<?= $Username ?>" class="brackets"><?= Lang::get('userhistory.search') ?></a>
             <?
             }
             ?>
@@ -204,7 +204,7 @@ if ($ShowGrouped) {
     if (empty($Results)) {
     ?>
         <div class="center">
-            <?= Lang::get('userhistory', 'no_topics') ?><?= $ShowUnread ? Lang::get('userhistory', 'with_unread_posts') : '' ?>
+            <?= Lang::get('userhistory.no_topics') ?><?= $ShowUnread ? Lang::get('userhistory.with_unread_posts') : '' ?>
         </div>
     <?
     } else {
@@ -226,19 +226,19 @@ if ($ShowGrouped) {
                             <div class="TableForumPostHeader">
                                 <div class="TableForumPostHeader-info">
                                     <?= time_diff($AddedTime) ?>
-                                    <?= Lang::get('userhistory', 'in') ?>
+                                    <?= Lang::get('userhistory.in') ?>
                                     <a href="forums.php?action=viewthread&amp;threadid=<?= $TopicID ?>&amp;postid=<?= $PostID ?>#post<?= $PostID ?>" data-tooltip="<?= display_str($ThreadTitle) ?>">
                                         <?= Format::cut_string($ThreadTitle, 200) ?>
                                     </a>
                                     <?
                                     if ($ViewingOwn) {
                                         if ((!$Locked || $Sticky) && (!$LastRead || $LastRead < $LastPostID)) { ?>
-                                            <span class="u-colorWarning">(<?= Lang::get('userhistory', 'new') ?>!)</span>
+                                            <span class="u-colorWarning">(<?= Lang::get('userhistory.new') ?>!)</span>
                                         <?
                                         }
                                         ?>
                                         <? if (!empty($LastRead)) { ?>
-                                            <a class="TableForum-jumpToLastRead" data-tooltip="<?= Lang::get('global', 'jump_to_last_read') ?>" href="forums.php?action=viewthread&amp;threadid=<?= $TopicID ?>&amp;postid=<?= $LastRead ?>#post<?= $LastRead ?>">
+                                            <a class="TableForum-jumpToLastRead" data-tooltip="<?= Lang::get('global.jump_to_last_read') ?>" href="forums.php?action=viewthread&amp;threadid=<?= $TopicID ?>&amp;postid=<?= $LastRead ?>#post<?= $LastRead ?>">
                                                 <?= icon("Forum/jump-to-last-read") ?>
                                             </a>
                                         <? }
@@ -250,7 +250,7 @@ if ($ShowGrouped) {
                                 </div>
                                 <div class="TableForumPostHeader-actions" id="bar<?= $PostID ?>">
                                     <? if ($ViewingOwn && !in_array($TopicID, $UserSubscriptions)) { ?>
-                                        <a href="#" onclick="Subscribe(<?= $TopicID ?>); $('.subscribelink<?= $TopicID ?>').remove(); return false;" class="brackets subscribelink<?= $TopicID ?>"><?= Lang::get('global', 'subscribe') ?></a>
+                                        <a href="#" onclick="Subscribe(<?= $TopicID ?>); $('.subscribelink<?= $TopicID ?>').remove(); return false;" class="brackets subscribelink<?= $TopicID ?>"><?= Lang::get('global.subscribe') ?></a>
                                     <? } ?>
                                 </div>
                             </div>
@@ -278,7 +278,7 @@ if ($ShowGrouped) {
                                                 <? if (check_perms('site_moderate_forums')) { ?>
                                                     <a href="#content<?= $PostID ?>" onclick="LoadEdit(<?= $PostID ?>, 1);">&laquo;</a>
                                                 <?              } ?>
-                                                <?= Lang::get('userhistory', 'last_edited_by') ?>
+                                                <?= Lang::get('userhistory.last_edited_by') ?>
                                                 <?= Users::format_username($EditedUserID, false, false, false) ?> <?= time_diff($EditedTime, 2, true, true) ?>
                                             </span>
                                         <?          } ?>

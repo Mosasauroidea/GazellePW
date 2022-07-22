@@ -123,18 +123,18 @@ if (isset($_POST['GroupID'])) {
             //What to do if we don't have a GroupID
         } else {
             //Uh oh, something went wrong
-            error(Lang::get('tools', 'plz_supply_a_valid_album_id'));
+            error(Lang::get('tools.plz_supply_a_valid_album_id'));
         }
     }
     //Form wasn't sent -- Show form
 } else {
 
     //Show our beautiful header
-    View::show_header(Lang::get('tools', 'album_of_the_month'));
+    View::show_header(Lang::get('tools.album_of_the_month'));
 
 ?>
     <div class="BodyHeader">
-        <h2 class="BodyHeader-nav"><?= Lang::get('tools', 'album_of_the_month') ?></h2>
+        <h2 class="BodyHeader-nav"><?= Lang::get('tools.album_of_the_month') ?></h2>
     </div>
 
     <div class="thin BoxBody">
@@ -142,16 +142,16 @@ if (isset($_POST['GroupID'])) {
             <div class="pad">
                 <input type="hidden" name="action" value="monthalbum" />
                 <input type="hidden" name="auth" value="<?= $LoggedUser['AuthKey'] ?>" />
-                <h3><?= Lang::get('tools', 'album_id') ?></h3>
+                <h3><?= Lang::get('tools.album_id') ?></h3>
                 <input class="Input" type="text" name="GroupID" id="groupid" /> <br />
-                <h3><?= Lang::get('tools', 'body') ?></h3>
-                <div>(<?= Lang::get('tools', 'leave_blank_to_auto_generate') ?>)</div>
+                <h3><?= Lang::get('tools.body') ?></h3>
+                <div>(<?= Lang::get('tools.leave_blank_to_auto_generate') ?>)</div>
                 <textarea class="Input" name="Body" cols="95" rows="15"></textarea><br /><br />
-                <input type="checkbox" name="FLTorrents" checked />&nbsp;<?= Lang::get('tools', 'mark_torrents_as') ?>&nbsp;
+                <input type="checkbox" name="FLTorrents" checked />&nbsp;<?= Lang::get('tools.mark_torrents_as') ?>&nbsp;
                 <select class="Input" name="freeleechtype">
-                    <option class="Select-option" value="1" selected><?= Lang::get('tools', 'fl') ?></option>
-                    <option class="Select-option" value="2"><?= Lang::get('tools', 'nl') ?></option>
-                    <option class="Select-option" value="0"><?= Lang::get('tools', 'normal') ?></option>
+                    <option class="Select-option" value="1" selected><?= Lang::get('tools.fl') ?></option>
+                    <option class="Select-option" value="2"><?= Lang::get('tools.nl') ?></option>
+                    <option class="Select-option" value="0"><?= Lang::get('tools.normal') ?></option>
                 </select>
                 <script>
                     $(document).ready(() => {
@@ -167,24 +167,24 @@ if (isset($_POST['GroupID'])) {
                         })
                     })
                 </script>
-                <input type="checkbox" id="limit-time" name="limit-time" <?= $Torrent['FreeEndTime'] ? " checked=\"checked\"" : "" ?> />&nbsp;<label for="limit-time" style="display: inline;"><?= Lang::get('tools', 'timer') ?></label>&nbsp;
+                <input type="checkbox" id="limit-time" name="limit-time" <?= $Torrent['FreeEndTime'] ? " checked=\"checked\"" : "" ?> />&nbsp;<label for="limit-time" style="display: inline;"><?= Lang::get('tools.timer') ?></label>&nbsp;
                 <input id="input-free-date" name="free-date" type="date" style="display:none;" /><input id="input-free-time" name="free-time" type="time" style="display:none;" />
-                &nbsp;<?= Lang::get('tools', 'for_reason') ?>&nbsp;<select class="Input" name="freeleechreason">
+                &nbsp;<?= Lang::get('tools.for_reason') ?>&nbsp;<select class="Input" name="freeleechreason">
                     <? $FL = array('N/A', 'Staff Pick', 'Perma-FL');
                     foreach ($FL as $Key => $FLType) { ?>
                         <option class="Select-option" value="<?= $Key ?>" <?= $FLType == 'Staff Pick' ? 'selected' : '' ?>><?= $FLType ?></option>
                     <?      } ?>
                 </select><br /><br />
-                <input type="checkbox" name="NLOver" checked />&nbsp;<?= Lang::get('tools', 'nl_torrents_over') ?>
+                <input type="checkbox" name="NLOver" checked />&nbsp;<?= Lang::get('tools.nl_torrents_over') ?>
                 <input class="Input" type="text" name="size" value="<?= isset($_POST['size']) ? $_POST['size'] : '1' ?>" size=1 />
                 <select class="Input" name="scale">
                     <option class="Select-option" value="k">KB</option>
                     <option class="Select-option" value="m">MB</option>
                     <option class="Select-option" value="g" selected>GB</option>
-                </select><?= Lang::get('tools', 'nl_torrents_over_after') ?><br /><br />
+                </select><?= Lang::get('tools.nl_torrents_over_after') ?><br /><br />
 
                 <div class="center">
-                    <input class="Button" type="submit" name="submit" value="<?= Lang::get('global', 'submit') ?>" />
+                    <input class="Button" type="submit" name="submit" value="<?= Lang::get('global.submit') ?>" />
                 </div>
             </div>
         </form>

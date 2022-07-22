@@ -81,53 +81,53 @@ if (!Forums::check_forumperm($ForumID)) {
 }
 
 // Start printing
-View::show_header(Lang::get('forums', 'forums') . '&gt; ' . $Forums[$ForumID]['Name'], '', $IsDonorForum ? 'donor' : '', 'PageForumShow');
+View::show_header(Lang::get('forums.forums') . '&gt; ' . $Forums[$ForumID]['Name'], '', $IsDonorForum ? 'donor' : '', 'PageForumShow');
 ?>
 <div class="LayoutBody">
     <div class="BodyHeader">
         <h2 class="BodyHeader-nav">
-            <a href="forums.php"><?= Lang::get('forums', 'forums') ?></a> &gt; <?= $ForumName ?>
+            <a href="forums.php"><?= Lang::get('forums.forums') ?></a> &gt; <?= $ForumName ?>
         </h2>
         <div class="BodyNavLinksWithExpand">
             <div class="BodyNavLinks">
                 <? if (Forums::check_forumperm($ForumID, 'Write') && Forums::check_forumperm($ForumID, 'Create')) { ?>
-                    <a href="forums.php?action=new&amp;forumid=<?= $ForumID ?>" class="brackets"><?= Lang::get('forums', 'new_thread') ?></a>
+                    <a href="forums.php?action=new&amp;forumid=<?= $ForumID ?>" class="brackets"><?= Lang::get('forums.new_thread') ?></a>
                 <? } ?>
                 <a href="#" onclick="$('#searchforum').gtoggle(); return false;" class="brackets">
-                    <?= Lang::get('forums', 'search_this_forum') ?>
+                    <?= Lang::get('forums.search_this_forum') ?>
                 </a>
             </div>
             <div class="BodyNavLinks-expand hidden" id="searchforum">
-                <h3 class="BodyNavLinks-expandHeader"><?= Lang::get('forums', 'search_this_forum') ?>:</h3>
+                <h3 class="BodyNavLinks-expandHeader"><?= Lang::get('forums.search_this_forum') ?>:</h3>
                 <form class="Form FormForumSearch" name="forum" action="forums.php" method="get">
                     <table class="Form-rowList">
                         <tr class="Form-row">
                             <td class="Form-label">
                                 <input type="hidden" name="action" value="search" />
                                 <input type="hidden" name="forums[]" value="<?= $ForumID ?>" />
-                                <strong><?= Lang::get('forums', 'search_for') ?>:</strong>
+                                <strong><?= Lang::get('forums.search_for') ?>:</strong>
                             </td>
                             <td class="Form-inputs">
                                 <input class="Input" type="text" id="searchbox" name="search" size="70" />
                             </td>
                         </tr>
                         <tr class="Form-row">
-                            <td class="Form-label"><?= Lang::get('forums', 'search_in') ?>:</td>
+                            <td class="Form-label"><?= Lang::get('forums.search_in') ?>:</td>
                             <td class="Form-inputs">
                                 <div class="Radio">
                                     <input class="Input" type="radio" name="type" id="type_title" value="title" checked="checked" />
-                                    <label class="Radio-label" for="type_title"><?= Lang::get('forums', 'titles') ?></label>
+                                    <label class="Radio-label" for="type_title"><?= Lang::get('forums.titles') ?></label>
                                 </div>
                                 <div class="Radio">
                                     <input class="Input" type="radio" name="type" id="type_body" value="body" />
-                                    <label class="Radio-label" for="type_body"><?= Lang::get('forums', 'post_bodies') ?></label>
+                                    <label class="Radio-label" for="type_body"><?= Lang::get('forums.post_bodies') ?></label>
                                 </div>
                             </td>
                         </tr>
                         <tr class="Form-row">
-                            <td class="Form-label"><?= Lang::get('forums', 'post_by') ?>:</td>
+                            <td class="Form-label"><?= Lang::get('forums.post_by') ?>:</td>
                             <td class="Form-inputs">
-                                <input class="Input" type="text" id="username" name="user" placeholder="<?= Lang::get('forums', 'username') ?>" size="70" />
+                                <input class="Input" type="text" id="username" name="user" placeholder="<?= Lang::get('forums.username') ?>" size="70" />
                             </td>
                         </tr>
                         <tr class="Form-row">
@@ -141,12 +141,12 @@ View::show_header(Lang::get('forums', 'forums') . '&gt; ' . $Forums[$ForumID]['N
         </div>
         <? if (check_perms('site_moderate_forums')) { ?>
             <div class="BodyNavLinks">
-                <a href="forums.php?action=edit_rules&amp;forumid=<?= $ForumID ?>" class="brackets"><?= Lang::get('forums', 'change_specific_rules') ?></a>
+                <a href="forums.php?action=edit_rules&amp;forumid=<?= $ForumID ?>" class="brackets"><?= Lang::get('forums.change_specific_rules') ?></a>
             </div>
         <?  } ?>
         <? if (!empty($Forums[$ForumID]['SpecificRules'])) { ?>
             <div class="BodyNavLinks">
-                <strong><?= Lang::get('forums', 'forum_specific_rules') ?></strong>
+                <strong><?= Lang::get('forums.forum_specific_rules') ?></strong>
                 <? foreach ($Forums[$ForumID]['SpecificRules'] as $ThreadIDs) {
                     $Thread = Forums::get_thread_info($ThreadIDs);
                     if ($Thread === null) {
@@ -171,13 +171,13 @@ View::show_header(Lang::get('forums', 'forums') . '&gt; ' . $Forums[$ForumID]['N
                 <tr class="Table-rowHeader">
                     <td class="TableForum-cellReadStatus Table-cell"></td>
                     <td class="TableForum-cellPost Table-cell">
-                        <?= Lang::get('forums', 'latest') ?>
+                        <?= Lang::get('forums.latest') ?>
                     </td>
                     <td class="TableForum-cellReplies TableForum-cellValue Table-cell">
-                        <?= Lang::get('forums', 'replies') ?>
+                        <?= Lang::get('forums.replies') ?>
                     </td>
                     <td class="TableForum-cellAuthor TableForum-cellValue Table-cell">
-                        <?= Lang::get('forums', 'author') ?>
+                        <?= Lang::get('forums.author') ?>
                     </td>
                 </tr>
                 <?
@@ -186,7 +186,7 @@ View::show_header(Lang::get('forums', 'forums') . '&gt; ' . $Forums[$ForumID]['N
                 ?>
                     <tr class="TableForum-row Table-row">
                         <td class="TableForum-cellEmptyState Table-cell" colspan="4">
-                            <?= Lang::get('forums', 'no_threads_in_forum') ?>
+                            <?= Lang::get('forums.no_threads_in_forum') ?>
                         </td>
                     </tr>
                     <?
@@ -270,13 +270,13 @@ View::show_header(Lang::get('forums', 'forums') . '&gt; ' . $Forums[$ForumID]['N
                                     <a href="forums.php?action=viewthread&amp;threadid=<?= $TopicID ?>" data-title-plain="<?= $DisplayTitle ?>" <?= (strlen($Title) > $TopicLength ? "data-tooltip='" . $DisplayTitle . "'" : "") ?>><?= display_str(Format::cut_string($Title, $TopicLength, true)) ?></a>
                                     <?= $PagesText ?>
                                     <? if (!empty($LastRead[$TopicID])) { ?>
-                                        <a class="TableForum-jumpToLastRead " data-tooltip="<?= Lang::get('forums', 'jump_to_last_read') ?>" data-tooltip="<?= $TooltipTheme ?>" href="forums.php?action=viewthread&amp;threadid=<?= $TopicID ?>&amp;page=<?= $LastRead[$TopicID]['Page'] ?>#post<?= $LastRead[$TopicID]['PostID'] ?>">
+                                        <a class="TableForum-jumpToLastRead " data-tooltip="<?= Lang::get('forums.jump_to_last_read') ?>" data-tooltip="<?= $TooltipTheme ?>" href="forums.php?action=viewthread&amp;threadid=<?= $TopicID ?>&amp;page=<?= $LastRead[$TopicID]['Page'] ?>#post<?= $LastRead[$TopicID]['PostID'] ?>">
                                             <?= icon('Forum/jump-to-last-read'); ?>
 
                                         </a>
                                     <?      } ?>
                                     <span class="TableForum-lastPoster">
-                                        <?= Lang::get('forums', 'by') ?>
+                                        <?= Lang::get('forums.by') ?>
                                         <span> </span>
                                         <?= Users::format_username($LastAuthorID, false, false, false, false, false, $IsDonorForum) ?>
                                         <span> </span>
@@ -301,7 +301,7 @@ View::show_header(Lang::get('forums', 'forums') . '&gt; ' . $Forums[$ForumID]['N
         <div class="BodyNavLinks pager">
             <?= $Pages ?>
         </div>
-        <div class="BodyNavLinks"><a href="forums.php?action=catchup&amp;forumid=<?= $ForumID ?>&amp;auth=<?= $LoggedUser['AuthKey'] ?>" class="brackets"><?= Lang::get('forums', 'catch_up') ?></a></div>
+        <div class="BodyNavLinks"><a href="forums.php?action=catchup&amp;forumid=<?= $ForumID ?>&amp;auth=<?= $LoggedUser['AuthKey'] ?>" class="brackets"><?= Lang::get('forums.catch_up') ?></a></div>
     </div>
 </div>
 <? View::show_footer(); ?>

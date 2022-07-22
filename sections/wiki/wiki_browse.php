@@ -1,5 +1,5 @@
 <?
-$Title = Lang::get('wiki', 'browse_wiki_articles');
+$Title = Lang::get('wiki.browse_wiki_articles');
 if (!empty($_GET['letter'])) {
     $Letter = strtoupper(substr($_GET['letter'], 0, 1));
     if ($Letter !== '1') {
@@ -34,7 +34,7 @@ $DB->query($sql);
             <h2 class="BodyHeader-nav"><?= $Title ?></h2>
         </div>
         <div class="BoxBody center" id="alpha_beta_switcher">
-            <p><?= Lang::get('wiki', 'article_note1') ?></p>
+            <p><?= Lang::get('wiki.article_note1') ?></p>
             <form class="FormOneLine SearchWiki" name="wiki" action="wiki.php" method="get">
                 <input type="hidden" name="action" value="search" />
                 <input type="hidden" name="nojump" value="1" />
@@ -42,7 +42,7 @@ $DB->query($sql);
                 <input value="Search" type="submit" class="hidden" />
             </form>
             <!-- <br /> -->
-            <p><?= Lang::get('wiki', 'article_note2') ?></p>
+            <p><?= Lang::get('wiki.article_note2') ?></p>
             <span>
                 <a href="wiki.php?action=browse&amp;letter=a">A</a>&nbsp;&nbsp;
                 <a href="wiki.php?action=browse&amp;letter=b">B</a>&nbsp;&nbsp;
@@ -76,9 +76,9 @@ $DB->query($sql);
         <div class="TableContainer">
             <table class="TableWikiArticle">
                 <tr class="Table-rowHeader">
-                    <td class="Table-cell"><?= Lang::get('wiki', 'article') ?></td>
-                    <td class="Table-cell"><?= Lang::get('wiki', 'last_upload') ?></td>
-                    <td class="Table-cell"><?= Lang::get('wiki', 'last_edited') ?></td>
+                    <td class="Table-cell"><?= Lang::get('wiki.article') ?></td>
+                    <td class="Table-cell"><?= Lang::get('wiki.last_upload') ?></td>
+                    <td class="Table-cell"><?= Lang::get('wiki.last_edited') ?></td>
                 </tr>
                 <? while (list($ID, $Title, $Date, $UserID) = $DB->next_record()) { ?>
                     <tr>

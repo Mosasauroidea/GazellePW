@@ -94,6 +94,8 @@ foreach ($Results as $Key => $GroupID) {
                 'chineseDubbed' => $Data['ChineseDubbed'],
                 'specialSub' => $Data['SpecialSub'],
                 'subtitles' => $Data['Subtitles'],
+                'fileName' => Torrents::filename($Data),
+                'releaseGroup' => Torrents::release_group($Data),
             );
         }
 
@@ -105,7 +107,7 @@ foreach ($Results as $Key => $GroupID) {
             'tags' => $TagList,
             'bookmarked' => in_array($GroupID, $Bookmarks),
             'groupYear' => (int)$GroupYear,
-            'releaseType' => Lang::get('torrents', 'release_types')[$ReleaseType],
+            'releaseType' => Lang::get('torrents.release_types')[$ReleaseType],
             'groupTime' => (string)$GroupTime,
             'maxSize' => (int)$MaxSize,
             'totalSnatched' => (int)$TotalSnatched,

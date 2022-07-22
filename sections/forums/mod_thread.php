@@ -384,6 +384,7 @@ if (isset($_POST['delete'])) {
                 }
             }
             if ($OldNotice != $Notice) {
+                $Cache->delete_value('news');
                 if (!$OldNotice) {
                     $TopicNotes[] = 'Notice';
                 } else {

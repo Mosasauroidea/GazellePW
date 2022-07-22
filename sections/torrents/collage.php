@@ -38,9 +38,9 @@
 				type: "POST",
 				success: data => {
 					if (data.state) {
-						alert("<?= Lang::get('collages', 'collage_add_success') ?>")
+						alert("<?= Lang::get('collages.collage_add_success') ?>")
 					} else {
-						alert("<?= Lang::get('collages', 'collage_add_error') ?>")
+						alert("<?= Lang::get('collages.collage_add_error') ?>")
 					}
 				},
 				dataType: "json",
@@ -73,32 +73,32 @@
 </script>
 <div class="SidebarItemAddCollage SidebarItem Box">
 	<div class="SidebarItem-header Box-header">
-		<span><?= Lang::get('collages', 'add_to_collage') ?></span>
+		<span><?= Lang::get('collages.add_to_collage') ?></span>
 	</div>
 	<div class="SidebarItem-body Box-body">
 		<div class="FormOneLine FormCollageSearch">
-			<input class="Input" type="text" id="collage_title" name="title" placeholder="<?= Lang::get('collages', 'collage_search') ?>" />
-			<input class="Button" type="button" value="<?= Lang::get('collages', 'search') ?>" onclick="search(false)" />
+			<input class="Input" type="text" id="collage_title" name="title" placeholder="<?= Lang::get('collages.collage_search') ?>" />
+			<input class="Button" type="button" value="<?= Lang::get('collages.search') ?>" onclick="search(false)" />
 		</div>
 		<div class="FormCollageAdd">
 			<div class="Form-row FormCollageRow">
 				<select class="Input" id="select_collage" onchange="selectCollage()"></select>
 			</div>
 			<div class="Form-row FormCollageRow" id="selected_collage_category">
-				<span><?= Lang::get('collages', 'selected_collage_category') ?>: </span>
+				<span><?= Lang::get('collages.selected_collage_category') ?>: </span>
 				<span id="s_c_span_category"></span>
 			</div>
 			<div class="Form-row FormCollageRow" id="selected_collage_author">
-				<span><?= Lang::get('collages', 'selected_collage_author') ?>: </span>
+				<span><?= Lang::get('collages.selected_collage_author') ?>: </span>
 				<span id="s_c_span_author"></span>
 			</div>
 			<div class="Form-row FormCollageRow" id="selected_collage_description">
-				<span><?= Lang::get('collages', 'selected_collage_description') ?>: </span>
+				<span><?= Lang::get('collages.selected_collage_description') ?>: </span>
 				<span id="s_c_span_description"></span>
 			</div>
 			<div class="Form-row ButtonGroup center">
-				<input class="Button" type="button" value="<?= Lang::get('collages', 'open_collage') ?>" onclick="openCollage()" />
-				<input class="Button" type="button" value="<?= Lang::get('collages', 'add_to_collage') ?>" onclick="addCollage(<?= $GroupID ?>)" />
+				<input class="Button" type="button" value="<?= Lang::get('collages.open_collage') ?>" onclick="openCollage()" />
+				<input class="Button" type="button" value="<?= Lang::get('collages.add_to_collage') ?>" onclick="addCollage(<?= $GroupID ?>)" />
 			</div>
 		</div>
 	</div>

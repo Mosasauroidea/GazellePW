@@ -10,11 +10,11 @@ if (isset($_GET['details'])) {
     $Details = 'all';
 }
 
-View::show_header(Lang::get('top10', 'top_10_users'), '', 'PageTop10User');
+View::show_header(Lang::get('top10.top_10_users'), '', 'PageTop10User');
 ?>
 <div class="LayoutBody">
     <div class="BodyHeader">
-        <h2 class="BodyHeader-nav"><?= Lang::get('top10', 'top_10_users') ?></h2>
+        <h2 class="BodyHeader-nav"><?= Lang::get('top10.top_10_users') ?></h2>
         <? Top10View::render_linkbox("users", 'BodyNavLinks'); ?>
 
     </div>
@@ -47,7 +47,7 @@ View::show_header(Lang::get('top10', 'top_10_users'), '', 'PageTop10User');
             $TopUserNumUploads = $DB->to_array();
             $Cache->cache_value('topuser_numul' . $Limit, $TopUserNumUploads, 3600 * 12);
         }
-        generate_user_table(Lang::get('top10', 'torrents_uploaded'), 'numul', $TopUserNumUploads, $Limit);
+        generate_user_table(Lang::get('top10.torrents_uploaded'), 'numul', $TopUserNumUploads, $Limit);
     }
 
 
@@ -58,7 +58,7 @@ View::show_header(Lang::get('top10', 'top_10_users'), '', 'PageTop10User');
             $TopUserUploads = $DB->to_array();
             $Cache->cache_value('topuser_ul', $TopUserUploads, 3600 * 12);
         }
-        generate_user_table(Lang::get('top10', 'uploaders'), 'ul', $TopUserUploads, $Limit);
+        generate_user_table(Lang::get('top10.uploaders'), 'ul', $TopUserUploads, $Limit);
     }
 
     /* download size */
@@ -68,7 +68,7 @@ View::show_header(Lang::get('top10', 'top_10_users'), '', 'PageTop10User');
             $TopUserDownloads = $DB->to_array();
             $Cache->cache_value('topuser_dl', $TopUserDownloads, 3600 * 12);
         }
-        generate_user_table(Lang::get('top10', 'downloaders'), 'dl', $TopUserDownloads, $Limit);
+        generate_user_table(Lang::get('top10.downloaders'), 'dl', $TopUserDownloads, $Limit);
     }
 
     /* bonus points */
@@ -78,7 +78,7 @@ View::show_header(Lang::get('top10', 'top_10_users'), '', 'PageTop10User');
             $TopUserBonusPoints = $DB->to_array();
             $Cache->cache_value('topuser_bonus_points' . $Limit, $TopUserBonusPoints, 3600 * 12);
         }
-        generate_user_table(Lang::get('user', 'bonus_points'), 'bonus_points', $TopUserBonusPoints, $Limit);
+        generate_user_table(Lang::get('user.bonus_points'), 'bonus_points', $TopUserBonusPoints, $Limit);
     }
 
     echo '</div>';
@@ -98,53 +98,53 @@ View::show_header(Lang::get('top10', 'top_10_users'), '', 'PageTop10User');
         $Details = array_slice($Details, 0, $Limit);
     ?>
         <h3>
-            <?= Lang::get('top10', 'top') ?> <?= $Limit . ' ' . $Caption; ?>
+            <?= Lang::get('top10.top') ?> <?= $Limit . ' ' . $Caption; ?>
             <small class="top10_quantity_links">
                 <?
                 switch ($Limit) {
                     case 100: ?>
-                        - <a href="top10.php?type=users&amp;details=<?= $Tag ?>" class="brackets"><?= Lang::get('top10', 'top') ?> 10</a>
-                        - <span class="brackets"><?= Lang::get('top10', 'top') ?> 100</span>
-                        - <a href="top10.php?type=users&amp;limit=250&amp;details=<?= $Tag ?>" class="brackets"><?= Lang::get('top10', 'top') ?> 250</a>
+                        - <a href="top10.php?type=users&amp;details=<?= $Tag ?>" class="brackets"><?= Lang::get('top10.top') ?> 10</a>
+                        - <span class="brackets"><?= Lang::get('top10.top') ?> 100</span>
+                        - <a href="top10.php?type=users&amp;limit=250&amp;details=<?= $Tag ?>" class="brackets"><?= Lang::get('top10.top') ?> 250</a>
                     <? break;
                     case 250: ?>
-                        - <a href="top10.php?type=users&amp;details=<?= $Tag ?>" class="brackets"><?= Lang::get('top10', 'top') ?> 10</a>
-                        - <a href="top10.php?type=users&amp;limit=100&amp;details=<?= $Tag ?>" class="brackets"><?= Lang::get('top10', 'top') ?> 100</a>
-                        - <span class="brackets"><?= Lang::get('top10', 'top') ?> 250</span>
+                        - <a href="top10.php?type=users&amp;details=<?= $Tag ?>" class="brackets"><?= Lang::get('top10.top') ?> 10</a>
+                        - <a href="top10.php?type=users&amp;limit=100&amp;details=<?= $Tag ?>" class="brackets"><?= Lang::get('top10.top') ?> 100</a>
+                        - <span class="brackets"><?= Lang::get('top10.top') ?> 250</span>
                     <? break;
                     default: ?>
-                        - <span class="brackets"><?= Lang::get('top10', 'top') ?> 10</span>
-                        - <a href="top10.php?type=users&amp;limit=100&amp;details=<?= $Tag ?>" class="brackets"><?= Lang::get('top10', 'top') ?> 100</a>
-                        - <a href="top10.php?type=users&amp;limit=250&amp;details=<?= $Tag ?>" class="brackets"><?= Lang::get('top10', 'top') ?> 250</a>
+                        - <span class="brackets"><?= Lang::get('top10.top') ?> 10</span>
+                        - <a href="top10.php?type=users&amp;limit=100&amp;details=<?= $Tag ?>" class="brackets"><?= Lang::get('top10.top') ?> 100</a>
+                        - <a href="top10.php?type=users&amp;limit=250&amp;details=<?= $Tag ?>" class="brackets"><?= Lang::get('top10.top') ?> 250</a>
                 <? } ?>
             </small>
         </h3>
         <div class="TableContainer">
             <table class="TableTop10User Table">
                 <tr class="Table-rowHeader">
-                    <td class="Table-cell"><?= Lang::get('top10', 'rank') ?></td>
-                    <td class="Table-cell"><?= Lang::get('top10', 'user') ?></td>
+                    <td class="Table-cell"><?= Lang::get('top10.rank') ?></td>
+                    <td class="Table-cell"><?= Lang::get('top10.user') ?></td>
                     <? foreach ($Items as $Item) { ?>
                         <? if ($Item === 'numul') { ?>
-                            <td class="Table-cell Table-cellRight"><?= Lang::get('top10', 'uploads') ?></td>
+                            <td class="Table-cell Table-cellRight"><?= Lang::get('top10.uploads') ?></td>
                         <? } else if ($Item === 'bonus_points') { ?>
-                            <td class="Table-cell Table-cellRight"><?= Lang::get('user', 'bonus_points') ?></td>
+                            <td class="Table-cell Table-cellRight"><?= Lang::get('user.bonus_points') ?></td>
                         <? } else if ($Item === 'ul') { ?>
-                            <td class="Table-cell Table-cellRight"><?= Lang::get('user', 'uploaded') ?></td>
+                            <td class="Table-cell Table-cellRight"><?= Lang::get('user.uploaded') ?></td>
                         <? } else if ($Item === 'dl') { ?>
-                            <td class="Table-cell Table-cellRight"><?= Lang::get('user', 'downloaded') ?></td>
+                            <td class="Table-cell Table-cellRight"><?= Lang::get('user.downloaded') ?></td>
                         <? } else if ($Item === 'ratio') { ?>
-                            <td class="Table-cell Table-cellRight"><?= Lang::get('user', 'ratio') ?></td>
+                            <td class="Table-cell Table-cellRight"><?= Lang::get('user.ratio') ?></td>
                         <? } ?>
                     <? } ?>
-                    <td class="Table-cell Table-cellRight"><?= Lang::get('top10', 'joined') ?></td>
+                    <td class="Table-cell Table-cellRight"><?= Lang::get('top10.joined') ?></td>
                 </tr>
                 <?
                 // in the unlikely event that query finds 0 rows...
                 if (empty($Details)) {
                     echo '
 		<tr class="Table-row">
-			<td class="Table-cell Table-cellCenter" colspan="9">' . Lang::get('top10', 'found_no_users_matching_the_criteria') . '</td>
+			<td class="Table-cell Table-cellCenter" colspan="9">' . Lang::get('top10.found_no_users_matching_the_criteria') . '</td>
 		</tr>
 		</table><br />';
                     return;
@@ -156,7 +156,7 @@ View::show_header(Lang::get('top10', 'top_10_users'), '', 'PageTop10User');
                 ?>
                     <tr class="Table-row">
                         <td class="Table-cell"><?= $Rank ?></td>
-                        <td class="Table-cell"><?= $IsAnonymous ?  Lang::get('user', 'anonymous') : Users::format_username($Detail['ID'], false, false, false) ?></td>
+                        <td class="Table-cell"><?= $IsAnonymous ?  Lang::get('user.anonymous') : Users::format_username($Detail['ID'], false, false, false) ?></td>
                         <? foreach ($Items as $Item) { ?>
                             <? if ($Item === 'numul') { ?>
                                 <td class="Table-cell Table-cellRight"><?= number_format($Detail['NumUploads']) ?></td>

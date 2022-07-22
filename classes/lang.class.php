@@ -1,11 +1,11 @@
 <?
 
-global $Locales, $Twig, $WINDOW_DATA;
+global $Locales, $Twig, $WINDOW_CONFIG;
 $Files = glob(CONFIG['SERVER_ROOT'] . '/src/locales/*/server.yaml');
 $Locales = [];
 foreach ($Files as $File) {
     $Lang = basename(dirname($File));
-    $YamlText = $Twig->render("$Lang/server.yaml", ['CONFIG' => $WINDOW_DATA['CONFIG']]);
+    $YamlText = $Twig->render("$Lang/server.yaml", ['CONFIG' => $WINDOW_CONFIG]);
     $Locale = yaml_parse($YamlText);
     $Lang = $Lang == 'zh-Hans' ? 'chs' : $Lang;
     $Locales[$Lang] = $Locale;
@@ -18,23 +18,21 @@ class Lang {
     const CHS = 'chs';
     const LANGS = [self::EN, self::CHS];
 
-    public static function get($Page, $Label = false, $Lang = false, $Option = [], ...$Interpolations) {
-        $Option = array_merge(['DefaultValue' => null], $Option);
+    public static function get($Key, $Options = []) {
         global $Locales;
-        $Lang = self::getLang($Lang);
-        $Locale = $Locales[$Lang][$Page];
-        if (!$Label) {
-            return $Locale;
-        }
-        if (!isset($Locale[$Label])) {
-            return $Option['DefaultValue'] ?: "$Page.$Label";
-        }
-        $Value = $Locale[$Label];
-        if (!empty($Interpolations)) {
-            $Value = sprintf($Value, ...$Interpolations);
-            if ($Value === false) {
-                $Value = "$Page.$Label is bad";
-            }
+        $Options = array_merge([
+            'DefaultValue' => null,
+            'Lang' => null,
+            'Values' => [],
+        ], $Options);
+        $DefaultValue = $Options['DefaultValue'] ?: $Key;
+        $Lang = self::getLang($Options['Lang']);
+        $Values = $Options['Values'];
+        $Locale = $Locales[$Lang];
+        $Value = get_by_path($Locale, $Key, $DefaultValue);
+        $Value = sprintf($Value, ...$Values);
+        if ($Value === false) {
+            $Value = $Key;
         }
         return $Value;
     }

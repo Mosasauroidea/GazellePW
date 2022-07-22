@@ -11,7 +11,7 @@ $donation = new Donation();
 list($Page, $Limit) = Format::page_limit($CountPerPage);
 list($All, $Result) = $donation->getAllPrepaidCardDonations($Limit);
 $PageView = Format::get_pages($Page, $All, $CountPerPage);
-$Title = Lang::get('tools', 'prepaid_card_donor');
+$Title = Lang::get('tools.prepaid_card_donor');
 View::show_header($Title, 'PageToolPrepaidCard');
 ?>
 <div class="BodyHeader">
@@ -25,11 +25,11 @@ View::show_header($Title, 'PageToolPrepaidCard');
         <table class="TableDonateManager Table">
             <tr class="Table-rowHeader">
                 <td class="Table-cell">用户</td>
-                <td class="Table-cell"><?= Lang::get('donate', 'added_time') ?></td>
-                <td class="Table-cell"><?= Lang::get('donate', 'card_num') ?></td>
-                <td class="Table-cell"><?= Lang::get('donate', 'card_secret') ?></td>
-                <td class="Table-cell"><?= Lang::get('donate', 'face_value') ?></td>
-                <td class="Table-cell"><?= Lang::get('tools', 'action') ?></td>
+                <td class="Table-cell"><?= Lang::get('donate.added_time') ?></td>
+                <td class="Table-cell"><?= Lang::get('donate.card_num') ?></td>
+                <td class="Table-cell"><?= Lang::get('donate.card_secret') ?></td>
+                <td class="Table-cell"><?= Lang::get('donate.face_value') ?></td>
+                <td class="Table-cell"><?= Lang::get('tools.action') ?></td>
             </tr>
             <?
             $Row = 'a';
@@ -50,16 +50,16 @@ View::show_header($Title, 'PageToolPrepaidCard');
                             <?
                             if ($Status == PrepaidCardStatus::Reject) {
                             ?>
-                                <span class="u-colorWarning"><?= Lang::get('tools', 'rejected') ?></span>
+                                <span class="u-colorWarning"><?= Lang::get('tools.rejected') ?></span>
                             <?
                             } else if ($Status == PrepaidCardStatus::Passed) {
                             ?>
-                                <span class="u-colorSuccess"><?= Lang::get('tools', "passed") ?></span>
+                                <span class="u-colorSuccess"><?= Lang::get('tools.passed') ?></span>
                             <?
                             } else {
                             ?>
-                                <button class="Button" type="submit" name="result" value="2" onclick="return confirm('<?= Lang::get('tools', 'sure_delete_staff_group_title') ?>')"><?= Lang::get('tools', 'pass') ?></button>
-                                <button class="Button" type="submit" name="result" value="3" onclick="return confirm('<?= Lang::get('tools', 'sure_delete_staff_group_title') ?>')"><?= Lang::get('tools', 'reject') ?></button>
+                                <button class="Button" type="submit" name="result" value="2" onclick="return confirm('<?= Lang::get('tools.sure_delete_staff_group_title') ?>')"><?= Lang::get('tools.pass') ?></button>
+                                <button class="Button" type="submit" name="result" value="3" onclick="return confirm('<?= Lang::get('tools.sure_delete_staff_group_title') ?>')"><?= Lang::get('tools.reject') ?></button>
                             <?
                             }
                             ?>

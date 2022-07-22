@@ -5,13 +5,13 @@ list($Page, $Limit) = Format::page_limit(COLLAGES_PER_PAGE);
 
 
 $OrderVals = array(
-    'Time' => Lang::get('collages', 'search_time'),
-    'Name' => Lang::get('collages', 'search_name'),
-    'Subscribers' => Lang::get('collages', 'search_subscribers'),
-    'Torrents' => Lang::get('collages', 'search_torrents'),
-    'Updated' => Lang::get('collages', 'search_updated')
+    'Time' => Lang::get('collages.search_time'),
+    'Name' => Lang::get('collages.search_name'),
+    'Subscribers' => Lang::get('collages.search_subscribers'),
+    'Torrents' => Lang::get('collages.search_torrents'),
+    'Updated' => Lang::get('collages.search_updated')
 );
-$WayVals = array('Ascending' => Lang::get('collages', 'search_ascending'), 'Descending' => Lang::get('collages', 'search_descending'));
+$WayVals = array('Ascending' => Lang::get('collages.search_ascending'), 'Descending' => Lang::get('collages.search_descending'));
 $OrderTable = array('Time' => 'ID', 'Name' => 'c.Name', 'Subscribers' => 'c.Subscribers', 'Torrents' => 'NumTorrents', 'Updated' => 'c.Updated');
 $WayTable = array('Ascending' => 'ASC', 'Descending' => 'DESC');
 
@@ -170,14 +170,14 @@ $Collages = $DB->to_array();
 $DB->query('SELECT FOUND_ROWS()');
 list($NumResults) = $DB->next_record();
 
-View::show_header(Lang::get('collages', 'browse_collages'), '', 'PageCollageHome');
+View::show_header(Lang::get('collages.browse_collages'), '', 'PageCollageHome');
 ?>
 <div class="LayoutBody">
     <div class="BodyHeader">
         <? if ($BookmarkView) { ?>
-            <div class="BodyHeader-nav"><?= Lang::get('collages', 'your_bookmarked_collages') ?></div>
+            <div class="BodyHeader-nav"><?= Lang::get('collages.your_bookmarked_collages') ?></div>
         <?  } else { ?>
-            <div class="BodyHeader-nav"><?= Lang::get('collages', 'browse_collages') ?><?= (!empty($UserLink) ? (isset($CollageIDs) ? " with contributions by $UserLink" : " started by $UserLink") : '') ?></div>
+            <div class="BodyHeader-nav"><?= Lang::get('collages.browse_collages') ?><?= (!empty($UserLink) ? (isset($CollageIDs) ? " with contributions by $UserLink" : " started by $UserLink") : '') ?></div>
         <?  } ?>
         <?
         if (!$BookmarkView) {
@@ -186,7 +186,7 @@ View::show_header(Lang::get('collages', 'browse_collages'), '', 'PageCollageHome
                 <?
                 if (check_perms('site_collages_create')) {
                 ?>
-                    <a href="collages.php?action=new" class="brackets"><?= Lang::get('collages', 'create_collages') ?></a>
+                    <a href="collages.php?action=new" class="brackets"><?= Lang::get('collages.create_collages') ?></a>
                     <?
                 }
                 if (check_perms('site_collages_personal')) {
@@ -202,19 +202,19 @@ View::show_header(Lang::get('collages', 'browse_collages'), '', 'PageCollageHome
                     if ($CollageCount === 1) {
                         list($CollageID) = $DB->next_record();
                     ?>
-                        <a href="collages.php?id=<?= $CollageID ?>" class="brackets"><?= Lang::get('collages', 'personal_collage') ?></a>
+                        <a href="collages.php?id=<?= $CollageID ?>" class="brackets"><?= Lang::get('collages.personal_collage') ?></a>
                     <?          } elseif ($CollageCount > 1) { ?>
-                        <a href="collages.php?action=mine" class="brackets"><?= Lang::get('collages', 'personal_collages') ?></a>
+                        <a href="collages.php?action=mine" class="brackets"><?= Lang::get('collages.personal_collages') ?></a>
                     <?
                     }
                 }
                 if (check_perms('site_collages_subscribe')) {
                     ?>
-                    <a href="userhistory.php?action=subscribed_collages" class="brackets"><?= Lang::get('collages', 'subscribed_collages') ?></a>
+                    <a href="userhistory.php?action=subscribed_collages" class="brackets"><?= Lang::get('collages.subscribed_collages') ?></a>
                 <?      } ?>
-                <a href="bookmarks.php?type=collages" class="brackets"><?= Lang::get('collages', 'bookmarks_collages') ?></a>
+                <a href="bookmarks.php?type=collages" class="brackets"><?= Lang::get('collages.bookmarks_collages') ?></a>
                 <? if (check_perms('site_collages_recover')) { ?>
-                    <a href="collages.php?action=recover" class="brackets"><?= Lang::get('collages', 'recover_collages') ?></a>
+                    <a href="collages.php?action=recover" class="brackets"><?= Lang::get('collages.recover_collages') ?></a>
                 <?
                 }
                 if (check_perms('site_collages_create') || check_perms('site_collages_personal') || check_perms('site_collages_recover')) {
@@ -224,9 +224,9 @@ View::show_header(Lang::get('collages', 'browse_collages'), '', 'PageCollageHome
             <?
                 }
             ?>
-            <a href="collages.php?userid=<?= $LoggedUser['ID'] ?>" class="brackets"><?= Lang::get('collages', 'start_collages') ?></a>
-            <a href="collages.php?userid=<?= $LoggedUser['ID'] ?>&amp;contrib=1" class="brackets"><?= Lang::get('collages', 'contributed_collages') ?></a>
-            <a href="random.php?action=collage" class="brackets"><?= Lang::get('collages', 'random_collages') ?></a>
+            <a href="collages.php?userid=<?= $LoggedUser['ID'] ?>" class="brackets"><?= Lang::get('collages.start_collages') ?></a>
+            <a href="collages.php?userid=<?= $LoggedUser['ID'] ?>&amp;contrib=1" class="brackets"><?= Lang::get('collages.contributed_collages') ?></a>
+            <a href="random.php?action=collage" class="brackets"><?= Lang::get('collages.random_collages') ?></a>
             </div>
         <?
         } else {
@@ -234,10 +234,10 @@ View::show_header(Lang::get('collages', 'browse_collages'), '', 'PageCollageHome
 
             <div>
                 <div class="BodyNavLinks">
-                    <a href="bookmarks.php?type=torrents" class="brackets"><?= Lang::get('global', 'torrents') ?></a>
-                    <a href="bookmarks.php?type=artists" class="brackets"><?= Lang::get('global', 'artists') ?></a>
-                    <a href="bookmarks.php?type=collages" class="brackets"><?= Lang::get('collages', 'collage') ?></a>
-                    <a href="bookmarks.php?type=requests" class="brackets"><?= Lang::get('global', 'requests') ?></a>
+                    <a href="bookmarks.php?type=torrents" class="brackets"><?= Lang::get('global.torrents') ?></a>
+                    <a href="bookmarks.php?type=artists" class="brackets"><?= Lang::get('global.artists') ?></a>
+                    <a href="bookmarks.php?type=collages" class="brackets"><?= Lang::get('collages.collage') ?></a>
+                    <a href="bookmarks.php?type=requests" class="brackets"><?= Lang::get('global.requests') ?></a>
                 </div>
             </div>
         <?
@@ -251,29 +251,29 @@ View::show_header(Lang::get('collages', 'browse_collages'), '', 'PageCollageHome
                     <div class="TableContainer">
                         <table class="Form-rowList">
                             <tr class="Form-row is-searchStr">
-                                <td class="Form-label"><?= Lang::get('collages', 'ftb_searchstr') ?>:</td>
+                                <td class="Form-label"><?= Lang::get('collages.ftb_searchstr') ?>:</td>
                                 <td class="Form-inputs">
                                     <input class="Input" type="text" name="search" size="70" value="<?= (!empty($_GET['search']) ? display_str($_GET['search']) : '') ?>" />
                                 </td>
                             </tr>
                             <tr class="Form-row is-tags">
-                                <td class="Form-label"><?= Lang::get('collages', 'tags') ?>:</td>
+                                <td class="Form-label"><?= Lang::get('collages.tags') ?>:</td>
                                 <td class="Form-inputs">
                                     <input class="Input" type="text" id="tags" name="tags" size="70" value="<?= (!empty($_GET['tags']) ? display_str($_GET['tags']) : '') ?>" <? Users::has_autocomplete_enabled('other'); ?> />
                                     <div class="RadioGroup">
                                         <div class="Radio">
                                             <input class="Input" type="radio" name="tags_type" id="tags_type0" value="0" <? Format::selected('tags_type', 0, 'checked') ?> />
-                                            <label class="Radio-label" for="tags_type0"> <?= Lang::get('collages', 'any') ?></label>
+                                            <label class="Radio-label" for="tags_type0"> <?= Lang::get('collages.any') ?></label>
                                         </div>
                                         <div class="Radio">
                                             <input class="Input" type="radio" name="tags_type" id="tags_type1" value="1" <? Format::selected('tags_type', 1, 'checked') ?> />
-                                            <label class="Radio-input" for="tags_type1"> <?= Lang::get('collages', 'all') ?></label>
+                                            <label class="Radio-input" for="tags_type1"> <?= Lang::get('collages.all') ?></label>
                                         </div>
                                     </div>
                                 </td>
                             </tr>
                             <tr class="Form-row is-type">
-                                <td class="Form-label"><?= Lang::get('collages', 'type') ?>:</td>
+                                <td class="Form-label"><?= Lang::get('collages.type') ?>:</td>
                                 <td class="Form-inputs">
                                     <? foreach ($CollageCats as $ID) {
                                         if ($ID == $PersonalCollageCategoryCat) {
@@ -283,13 +283,13 @@ View::show_header(Lang::get('collages', 'browse_collages'), '', 'PageCollageHome
                                             <input class="Input" type="checkbox" value="1" name="cats[<?= $ID ?>]" id="cats_<?= $ID ?>" <? if (in_array($ID, $Categories)) {
                                                                                                                                             echo ' checked="checked"';
                                                                                                                                         } ?> />
-                                            <label class="Checkbox-label" for="cats_<?= $ID ?>"><?= Lang::get('collages', 'collagecats')[$ID] ?></label>
+                                            <label class="Checkbox-label" for="cats_<?= $ID ?>"><?= Lang::get('collages.collagecats')[$ID] ?></label>
                                         </div>
                                     <?      } ?>
                                 </td>
                             </tr>
                             <tr class="Form-row is-searchIn">
-                                <td class="Form-label"><?= Lang::get('collages', 'search_for') ?>:</td>
+                                <td class="Form-label"><?= Lang::get('collages.search_for') ?>:</td>
                                 <td class="Form-inputs">
                                     <div class="RadioGroup">
                                         <div class="Radio">
@@ -297,7 +297,7 @@ View::show_header(Lang::get('collages', 'browse_collages'), '', 'PageCollageHome
                                                                                                                         echo 'checked="checked" ';
                                                                                                                     } ?> />
                                             <label class="Radio-label" for="type1">
-                                                <?= Lang::get('collages', 'search_name') ?>
+                                                <?= Lang::get('collages.search_name') ?>
                                             </label>
                                         </div>
                                         <div class="Radio">
@@ -305,14 +305,14 @@ View::show_header(Lang::get('collages', 'browse_collages'), '', 'PageCollageHome
                                                                                                                                 echo 'checked="checked" ';
                                                                                                                             } ?> />
                                             <label class="Radio-label" for="type2">
-                                                <?= Lang::get('collages', 'search_descriptions') ?>
+                                                <?= Lang::get('collages.search_descriptions') ?>
                                             </label>
                                         </div>
                                     </div>
                                 </td>
                             </tr>
                             <tr class="Form-row is-order">
-                                <td class="Form-label"><?= Lang::get('collages', 'ft_order') ?>:</td>
+                                <td class="Form-label"><?= Lang::get('collages.ft_order') ?>:</td>
                                 <td class="Form-inputs">
                                     <select class="Input" name="order_by">
                                         <? foreach ($OrderVals as $Key => $Cur) { ?>
@@ -338,7 +338,7 @@ View::show_header(Lang::get('collages', 'browse_collages'), '', 'PageCollageHome
                     </div>
                     <div class="SearchPageFooter">
                         <div class="SearchPageFooter-actions">
-                            <input class="Button" type="submit" value="<?= Lang::get('collages', 'search') ?>" />
+                            <input class="Button" type="submit" value="<?= Lang::get('collages.search') ?>" />
                         </div>
                     </div>
                 </form>
@@ -363,10 +363,10 @@ View::show_header(Lang::get('collages', 'browse_collages'), '', 'PageCollageHome
         <div class="Box">
             <div class="Box-body" align="center">
                 <? if ($BookmarkView) { ?>
-                    <h2><?= Lang::get('collages', 'result_1') ?></h2>
+                    <h2><?= Lang::get('collages.result_1') ?></h2>
                 <?      } else { ?>
-                    <h2><?= Lang::get('collages', 'result_2') ?></h2>
-                    <p><?= Lang::get('collages', 'result_3') ?></p>
+                    <h2><?= Lang::get('collages.result_2') ?></h2>
+                    <p><?= Lang::get('collages.result_3') ?></p>
                 <?      } ?>
             </div>
         </div>
@@ -380,12 +380,12 @@ View::show_header(Lang::get('collages', 'browse_collages'), '', 'PageCollageHome
 <div class="TableContainer">
     <table class="TableCollage Table">
         <tr class="Table-rowHeader">
-            <td class="Table-cell"><?= Lang::get('collages', 'category') ?></td>
-            <td class="Table-cell"><?= Lang::get('collages', 'collage') ?></td>
-            <td class="Table-cell Table-cellRight"><?= Lang::get('global', 'torrents') ?></td>
-            <td class="Table-cell Table-cellRight"><?= Lang::get('collages', 'subscribers') ?></td>
-            <td class="Table-cell Table-cellRight"><?= Lang::get('collages', 'updated') ?></td>
-            <td class="Table-cell Table-cellRight"><?= Lang::get('collages', 'author') ?></td>
+            <td class="Table-cell"><?= Lang::get('collages.category') ?></td>
+            <td class="Table-cell"><?= Lang::get('collages.collage') ?></td>
+            <td class="Table-cell Table-cellRight"><?= Lang::get('global.torrents') ?></td>
+            <td class="Table-cell Table-cellRight"><?= Lang::get('collages.subscribers') ?></td>
+            <td class="Table-cell Table-cellRight"><?= Lang::get('collages.updated') ?></td>
+            <td class="Table-cell Table-cellRight"><?= Lang::get('collages.author') ?></td>
         </tr>
         <?
         $Row = 'a'; // For the pretty colours
@@ -398,13 +398,13 @@ View::show_header(Lang::get('collages', 'browse_collages'), '', 'PageCollageHome
         ?>
             <tr class="Table-row <?= ($BookmarkView) ? " bookmark_$ID" : ''; ?>">
                 <td class="Table-cell td_collage_category">
-                    <a href="collages.php?action=search&amp;cats[<?= (int)$CategoryID ?>]=1"><?= Lang::get('collages', 'collagecats')[(int)$CategoryID] ?></a>
+                    <a href="collages.php?action=search&amp;cats[<?= (int)$CategoryID ?>]=1"><?= Lang::get('collages.collagecats')[(int)$CategoryID] ?></a>
                 </td>
                 <td class="Table-cell">
                     <a href="collages.php?id=<?= $ID ?>"><?= $Name ?></a>
                     <? if ($BookmarkView) { ?>
                         <span class="floatright">
-                            <a href="#" onclick="Unbookmark('collage', <?= $ID ?>, ''); return false;" class="brackets"><?= Lang::get('global', 'remove_bookmark') ?></a>
+                            <a href="#" onclick="Unbookmark('collage', <?= $ID ?>, ''); return false;" class="brackets"><?= Lang::get('global.remove_bookmark') ?></a>
                         </span>
                     <?  } ?>
                     <div class="tags"><?= $TorrentTags->format('collages.php?action=search&amp;tags=') ?></div>

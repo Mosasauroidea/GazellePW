@@ -14,11 +14,11 @@ if (!empty($_GET['torrentid']) && is_number($_GET['torrentid'])) {
     $TorrentID = $_GET['torrentid'];
 } else {
     if (empty($_POST['link'])) {
-        error(Lang::get('requests', 'forgot_link_fill_torrent'));
+        error(Lang::get('requests.forgot_link_fill_torrent'));
     } else {
         $Link = $_POST['link'];
         if (!preg_match('/' . TORRENT_REGEX . '/i', $Link, $Matches)) {
-            error(Lang::get('requests', 'link_not_valid'));
+            error(Lang::get('requests.link_not_valid'));
         } else {
             $TorrentID = $Matches[2];
         }
@@ -56,14 +56,14 @@ if (!empty($_POST['user']) && check_perms('site_moderate_requests')) {
 		FROM users_main
 		WHERE Username LIKE '" . db_string($FillerUsername) . "'");
     if (!$DB->has_results()) {
-        $Err = Lang::get('requests', 'no_such_user_to_fill');
+        $Err = Lang::get('requests.no_such_user_to_fill');
     } else {
         list($FillerID) = $DB->next_record();
     }
 }
 
 if (time_ago($UploadTime) < 3600 && $UploaderID !== $FillerID && !check_perms('site_moderate_requests')) {
-    $Err = Lang::get('requests', 'one_hour_grace_period');
+    $Err = Lang::get('requests.one_hour_grace_period');
 }
 
 
@@ -85,10 +85,10 @@ $RequestGroupName = Torrents::group_name($Data, false);
 
 
 if (!empty($OldTorrentID)) {
-    $Err = Lang::get('requests', 'already_filled');
+    $Err = Lang::get('requests.already_filled');
 }
 if ($RequestCategoryID !== '0' && $TorrentCategoryID !== $RequestCategoryID) {
-    $Err = Lang::get('requests', 'torrent_category_different_from_torrent');
+    $Err = Lang::get('requests.torrent_category_different_from_torrent');
 }
 
 $CategoryName = $Categories[$RequestCategoryID - 1];

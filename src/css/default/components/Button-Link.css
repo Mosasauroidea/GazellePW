@@ -16,7 +16,7 @@ ButtonGroup
 Loading Button
   <button class="Button">  is-loading
      <span>Next</span>
-     <span class="Button-loaderIcon"></span>
+     <span class="Loader"></span>
   </button>
 */
 
@@ -46,6 +46,7 @@ Loading Button
   border: var(--Button-default-border);
   box-shadow: var(--Button-default-boxShadow);
   display: inline-flex;
+  gap: var(--global-space-sm);
   text-align: center;
   padding: 3px 6px;
   transition: all 0.3s ease;
@@ -87,14 +88,9 @@ Loading Button
   box-shadow: var(--Button-primary-onHover-boxShadow);
 }
 
-.Button .Button-loaderIcon {
+.Button .Loader {
   display: none;
-  background: url(../assets/loading.svg);
-  background-size: 100% 100%;
-  width: 26px;
-  height: 26px;
 }
-
-.Button.is-loading .Button-loaderIcon {
-  display: block;
+.Button.is-loading .Loader {
+  display: grid;
 }

@@ -66,7 +66,7 @@ if ($UnRead == '1') {
     $Cache->decrement("inbox_new_$UserID");
 }
 
-View::show_header(Lang::get('inbox', 'view_conversation_space') . "$Subject", 'comments,inbox,bbcode,jquery.validate,form_validate', 'PageInboxConversation');
+View::show_header(Lang::get('inbox.view_conversation_space') . "$Subject", 'comments,inbox,bbcode,jquery.validate,form_validate', 'PageInboxConversation');
 
 // Get messages
 $DB->query("
@@ -78,7 +78,7 @@ $DB->query("
 <div class="LayoutBody">
     <h2><?= $Subject . ($ForwardedID > 0 ? " (Forwarded to $ForwardedName)" : '') ?></h2>
     <div class="BodyNavLinks">
-        <a href="<?= Inbox::get_inbox_link(); ?>" class="brackets"><?= Lang::get('inbox', 'back_to_inbox') ?></a>
+        <a href="<?= Inbox::get_inbox_link(); ?>" class="brackets"><?= Lang::get('inbox.back_to_inbox') ?></a>
     </div>
     <?
 
@@ -88,10 +88,9 @@ $DB->query("
                 <div style="float: left;">
                     <strong><?= $Users[(int)$SenderID]['UserStr'] ?></strong> <?= time_diff($SentDate) ?>
                     <? if ($SenderID > 0) { ?>
-                        - <a href="#quickpost" onclick="Quote('<?= $MessageID ?>','<?= $Users[(int)$SenderID]['Username'] ?>');" class="brackets"><?= Lang::get('inbox', 'quote') ?></a>
+                        - <a href="#quickpost" onclick="Quote('<?= $MessageID ?>','<?= $Users[(int)$SenderID]['Username'] ?>');" class="brackets"><?= Lang::get('inbox.quote') ?></a>
                     <?  } ?>
                 </div>
-                <div style="float: right;"><a href="#messageform">&darr;</a></div>
             </div>
             <div class="Box-body HtmlText PostArticle" id="message<?= $MessageID ?>">
                 <?= Text::full_format($Body) ?>
@@ -111,7 +110,7 @@ $DB->query("
 
     if (!empty($ReceiverIDs) && (empty($LoggedUser['DisablePM']) || array_intersect($ReceiverIDs, array_keys($StaffIDs)))) {
     ?>
-        <h3><?= Lang::get('inbox', 'reply') ?></h3>
+        <h3><?= Lang::get('inbox.reply') ?></h3>
         <form class="Box send_form" name="reply" action="inbox.php" method="post" id="messageform">
             <div class="Box-body">
                 <input type="hidden" name="action" value="takecompose" />
@@ -122,7 +121,7 @@ $DB->query("
                 <div id="preview" class="box vertical_space body hidden"></div>
                 <div id="buttons" class="center">
                     <input class="Button" type="button" value="Preview" onclick="Quick_Preview();" />
-                    <input class="Button" type="submit" value="<?= Lang::get('inbox', 'send_message') ?>" />
+                    <input class="Button" type="submit" value="<?= Lang::get('inbox.send_message') ?>" />
                 </div>
             </div>
         </form>
@@ -139,15 +138,15 @@ $DB->query("
                 <input type="checkbox" id="sticky" name="sticky" <? if ($Sticky) {
                                                                         echo ' checked="checked"';
                                                                     } ?> />
-                <label for="sticky"><?= Lang::get('inbox', 'sticky') ?></label>
+                <label for="sticky"><?= Lang::get('inbox.sticky') ?></label>
             </div>
             <div class="label">
                 <input type="checkbox" id="mark_unread" name="mark_unread" />
-                <label for="mark_unread"><?= Lang::get('inbox', 'mark_as_unread') ?></label>
+                <label for="mark_unread"><?= Lang::get('inbox.mark_as_unread') ?></label>
             </div>
             <div class="label">
                 <input type="checkbox" id="delete" name="delete" />
-                <label for="delete"><?= Lang::get('inbox', 'delete_conversation') ?></label>
+                <label for="delete"><?= Lang::get('inbox.delete_conversation') ?></label>
             </div>
             <div class="center" colspan="6"><input class="Button" type="submit" value="Manage conversation" /></div>
         </form>
@@ -164,7 +163,7 @@ $DB->query("
                     <input type="hidden" name="action" value="forward" />
                     <input type="hidden" name="convid" value="<?= $ConvID ?>" />
                     <input type="hidden" name="auth" value="<?= $LoggedUser['AuthKey'] ?>" />
-                    <label for="receiverid"><?= Lang::get('inbox', 'forward_to') ?></label>
+                    <label for="receiverid"><?= Lang::get('inbox.forward_to') ?></label>
                     <select class="Input" id="receiverid" name="receiverid">
                         <?
                         foreach ($StaffIDs as $StaffID => $StaffName) {

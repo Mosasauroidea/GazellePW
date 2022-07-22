@@ -10,11 +10,11 @@ if (isset($_GET['details'])) {
     $Details = 'all';
 }
 $OverrideParanoia = isset($_GET['override']) && check_perms('users_override_paranoia');
-View::show_header(Lang::get('top10', 'top_10_original_uploaders'));
+View::show_header(Lang::get('top10.top_10_original_uploaders'));
 ?>
 <div class="LayoutBody">
     <div class="BodyHeader">
-        <h2 class="BodyHeader-nav"><?= Lang::get('top10', 'top_10_original_uploaders') ?></h2>
+        <h2 class="BodyHeader-nav"><?= Lang::get('top10.top_10_original_uploaders') ?></h2>
         <? Top10View::render_linkbox("original", "BodyNavLinks"); ?>
     </div>
     <?
@@ -47,7 +47,7 @@ View::show_header(Lang::get('top10', 'top_10_original_uploaders'));
 				$Cache->cache_value('topuser_original_'.$Limit,$TopUserNumUploads, 3600 * 12);
 			}
 		}
-		generate_user_table(Lang::get('top10', 'original_uploaders'), Lang::get('top10', 'original_uploads'), 'original', $TopUserNumUploads, $Limit);
+		generate_user_table(Lang::get('top10.original_uploaders'), Lang::get('top10.original_uploads'), 'original', $TopUserNumUploads, $Limit);
 	}
 */
     if ($Details == 'all' || $Details == 'diy') {
@@ -58,7 +58,7 @@ View::show_header(Lang::get('top10', 'top_10_original_uploaders'));
                 $Cache->cache_value('topuser_diy_' . $Limit, $TopUserNumUploads, 3600 * 12);
             }
         }
-        generate_user_table(Lang::get('top10', 'self_rip_uploaders'), Lang::get('top10', 'self_rip_uploads'), 'diy', $TopUserNumUploads, $Limit);
+        generate_user_table(Lang::get('top10.self_rip_uploaders'), Lang::get('top10.self_rip_uploads'), 'diy', $TopUserNumUploads, $Limit);
     }
     if ($Details == 'all' || $Details == 'buy') {
         if ($OverrideParanoia || !$TopUserNumUploads = $Cache->get_value('topuser_buy_' . $Limit)) {
@@ -68,7 +68,7 @@ View::show_header(Lang::get('top10', 'top_10_original_uploaders'));
                 $Cache->cache_value('topuser_buy_' . $Limit, $TopUserNumUploads, 3600 * 12);
             }
         }
-        generate_user_table(Lang::get('top10', 'self_purchased_uploaders'), Lang::get('top10', 'self_purchased_uploads'), 'buy', $TopUserNumUploads, $Limit);
+        generate_user_table(Lang::get('top10.self_purchased_uploaders'), Lang::get('top10.self_purchased_uploads'), 'buy', $TopUserNumUploads, $Limit);
     }
 
     echo '</div>';
@@ -79,41 +79,41 @@ View::show_header(Lang::get('top10', 'top_10_original_uploaders'));
     function generate_user_table($Caption, $TH, $Tag, $Details, $Limit) {
         global $Time, $OverrideParanoia;
     ?>
-        <h3><?= Lang::get('top10', 'top') ?> <?= $Limit . ' ' . $Caption; ?>
+        <h3><?= Lang::get('top10.top') ?> <?= $Limit . ' ' . $Caption; ?>
             <small class="top10_quantity_links">
                 <?
                 switch ($Limit) {
                     case 100: ?>
-                        - <a href="top10.php?type=original&amp;details=<?= $Tag ?><?= $OverrideParanoia ? "&override=1" : "" ?>" class="brackets"><?= Lang::get('top10', 'top') ?> 10</a>
-                        - <span class="brackets"><?= Lang::get('top10', 'top') ?> 100</span>
-                        - <a href="top10.php?type=original&amp;limit=250&amp;details=<?= $Tag ?><?= $OverrideParanoia ? "&override=1" : "" ?>" class="brackets"><?= Lang::get('top10', 'top') ?> 250</a>
+                        - <a href="top10.php?type=original&amp;details=<?= $Tag ?><?= $OverrideParanoia ? "&override=1" : "" ?>" class="brackets"><?= Lang::get('top10.top') ?> 10</a>
+                        - <span class="brackets"><?= Lang::get('top10.top') ?> 100</span>
+                        - <a href="top10.php?type=original&amp;limit=250&amp;details=<?= $Tag ?><?= $OverrideParanoia ? "&override=1" : "" ?>" class="brackets"><?= Lang::get('top10.top') ?> 250</a>
                     <? break;
                     case 250: ?>
-                        - <a href="top10.php?type=original&amp;details=<?= $Tag ?><?= $OverrideParanoia ? "&override=1" : "" ?>" class="brackets"><?= Lang::get('top10', 'top') ?> 10</a>
-                        - <a href="top10.php?type=original&amp;limit=100&amp;details=<?= $Tag ?><?= $OverrideParanoia ? "&override=1" : "" ?>" class="brackets"><?= Lang::get('top10', 'top') ?> 100</a>
-                        - <span class="brackets"><?= Lang::get('top10', 'top') ?> 250</span>
+                        - <a href="top10.php?type=original&amp;details=<?= $Tag ?><?= $OverrideParanoia ? "&override=1" : "" ?>" class="brackets"><?= Lang::get('top10.top') ?> 10</a>
+                        - <a href="top10.php?type=original&amp;limit=100&amp;details=<?= $Tag ?><?= $OverrideParanoia ? "&override=1" : "" ?>" class="brackets"><?= Lang::get('top10.top') ?> 100</a>
+                        - <span class="brackets"><?= Lang::get('top10.top') ?> 250</span>
                     <? break;
                     default: ?>
-                        - <span class="brackets"><?= Lang::get('top10', 'top') ?> 10</span>
-                        - <a href="top10.php?type=original&amp;limit=100&amp;details=<?= $Tag ?><?= $OverrideParanoia ? "&override=1" : "" ?>" class="brackets"><?= Lang::get('top10', 'top') ?> 100</a>
-                        - <a href="top10.php?type=original&amp;limit=250&amp;details=<?= $Tag ?><?= $OverrideParanoia ? "&override=1" : "" ?>" class="brackets"><?= Lang::get('top10', 'top') ?> 250</a>
+                        - <span class="brackets"><?= Lang::get('top10.top') ?> 10</span>
+                        - <a href="top10.php?type=original&amp;limit=100&amp;details=<?= $Tag ?><?= $OverrideParanoia ? "&override=1" : "" ?>" class="brackets"><?= Lang::get('top10.top') ?> 100</a>
+                        - <a href="top10.php?type=original&amp;limit=250&amp;details=<?= $Tag ?><?= $OverrideParanoia ? "&override=1" : "" ?>" class="brackets"><?= Lang::get('top10.top') ?> 250</a>
                 <?    } ?>
             </small>
         </h3>
         <div class="TableContainer">
             <table class="TableUser Table">
                 <tr class="Table-rowHeader">
-                    <td class="Table-cell" width="10%"><?= Lang::get('top10', 'rank') ?></td>
-                    <td class="Table-cell"><?= Lang::get('top10', 'user') ?></td>
+                    <td class="Table-cell" width="10%"><?= Lang::get('top10.rank') ?></td>
+                    <td class="Table-cell"><?= Lang::get('top10.user') ?></td>
                     <td class="Table-cell Table-cellRight"><?= $TH ?></td>
-                    <td class="Table-cell Table-cellRight"><?= Lang::get('top10', 'uploads') ?></td>
+                    <td class="Table-cell Table-cellRight"><?= Lang::get('top10.uploads') ?></td>
                 </tr>
                 <?
                 // in the unlikely event that query finds 0 rows...
                 if (empty($Details)) {
                     echo '
 		<tr class="rowb">
-			<td colspan="9" class="Table-cell Table-cellCenter">' . Lang::get('top10', 'found_no_users_matching_the_criteria') . '</td>
+			<td colspan="9" class="Table-cell Table-cellCenter">' . Lang::get('top10.found_no_users_matching_the_criteria') . '</td>
 		</tr>
 		</table><br />';
                     return;

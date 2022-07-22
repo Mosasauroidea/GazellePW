@@ -97,45 +97,45 @@ View::show_header($Name, 'browse,collage,bbcode,voting,recommend', 'PageCollageT
         <h2 class="BodyHeader-nav"><?= $Name ?></h2>
         <div class="BodyNavLinks">
             <a href="collages.php" class="brackets">
-                <?= Lang::get('collages', 'collages_list') ?></a>
+                <?= Lang::get('collages.collages_list') ?></a>
             <? if (check_perms('site_collages_create')) { ?>
                 <a href="collages.php?action=new" class="brackets">
-                    <?= Lang::get('collages', 'create_collages') ?></a>
+                    <?= Lang::get('collages.create_collages') ?></a>
             <?  } ?>
         </div>
         <div class="BodyNavLinks">
             <? if (check_perms('site_collages_subscribe')) { ?>
-                <a href="#" id="subscribelink<?= $CollageID ?>" class="brackets" onclick="CollageSubscribe(<?= $CollageID ?>); return false;"><?= (in_array($CollageID, $CollageSubscriptions) ? Lang::get('collages', 'unsubscribe') : Lang::get('collages', 'subscribe')) ?></a>
+                <a href="#" id="subscribelink<?= $CollageID ?>" class="brackets" onclick="CollageSubscribe(<?= $CollageID ?>); return false;"><?= (in_array($CollageID, $CollageSubscriptions) ? Lang::get('collages.unsubscribe') : Lang::get('collages.subscribe')) ?></a>
             <?
             }
             if (check_perms('site_collages_delete') || (check_perms('site_edit_wiki') && !$Locked)) {
             ?>
                 <a href="collages.php?action=edit&amp;collageid=<?= $CollageID ?>" class="brackets">
-                    <?= Lang::get('collages', 'edit_collage') ?></a>
+                    <?= Lang::get('collages.edit_collage') ?></a>
             <?  } else { ?>
-                <span class="brackets"><?= Lang::get('collages', 'locked') ?></span>
+                <span class="brackets"><?= Lang::get('collages.locked') ?></span>
             <?
             }
             if (Bookmarks::has_bookmarked('collage', $CollageID)) {
             ?>
-                <a href="#" id="bookmarklink_collage_<?= $CollageID ?>" class="brackets" onclick="Unbookmark('collage', <?= $CollageID ?>, '<?= Lang::get('global', 'add_bookmark') ?>'); return false;">
-                    <?= Lang::get('global', 'remove_bookmark') ?></a>
+                <a href="#" id="bookmarklink_collage_<?= $CollageID ?>" class="brackets" onclick="Unbookmark('collage', <?= $CollageID ?>, '<?= Lang::get('global.add_bookmark') ?>'); return false;">
+                    <?= Lang::get('global.remove_bookmark') ?></a>
             <?  } else { ?>
-                <a href="#" id="bookmarklink_collage_<?= $CollageID ?>" class="brackets" onclick="Bookmark('collage', <?= $CollageID ?>, '<?= Lang::get('global', 'remove_bookmark') ?>'); return false;">
-                    <?= Lang::get('global', 'add_bookmark') ?></a>
+                <a href="#" id="bookmarklink_collage_<?= $CollageID ?>" class="brackets" onclick="Bookmark('collage', <?= $CollageID ?>, '<?= Lang::get('global.remove_bookmark') ?>'); return false;">
+                    <?= Lang::get('global.add_bookmark') ?></a>
             <?  } ?>
             <!-- <a href="#" id="recommend" class="brackets">Recommend</a> -->
             <?
             if (check_perms('site_collages_manage') && !$Locked) {
             ?>
                 <a href="collages.php?action=manage&amp;collageid=<?= $CollageID ?>" class="brackets">
-                    <?= Lang::get('collages', 'manage_torrents') ?></a>
+                    <?= Lang::get('collages.manage_torrents') ?></a>
             <?  } ?>
             <a href="reports.php?action=report&amp;type=collage&amp;id=<?= $CollageID ?>" class="brackets">
-                <?= Lang::get('collages', 'report_collage') ?></a>
+                <?= Lang::get('collages.report_collage') ?></a>
             <? if (check_perms('site_collages_delete') || $CreatorID == $LoggedUser['ID']) { ?>
-                <a href="collages.php?action=delete&amp;collageid=<?= $CollageID ?>&amp;auth=<?= $LoggedUser['AuthKey'] ?>" class="brackets" onclick="return confirm('<?= Lang::get('collages', 'delete_confirm') ?>');">
-                    <?= Lang::get('global', 'delete') ?></a>
+                <a href="collages.php?action=delete&amp;collageid=<?= $CollageID ?>&amp;auth=<?= $LoggedUser['AuthKey'] ?>" class="brackets" onclick="return confirm('<?= Lang::get('collages.delete_confirm') ?>');">
+                    <?= Lang::get('global.delete') ?></a>
             <?  } ?>
         </div>
     </div>
@@ -144,15 +144,15 @@ View::show_header($Name, 'browse,collage,bbcode,voting,recommend', 'PageCollageT
         <div class="Sidebar LayoutMainSidebar-sidebar">
             <div class="SidebarItemCollageCategory SidebarItem Box">
                 <div class="SidebarItem-header Box-header">
-                    <strong><?= Lang::get('collages', 'category') ?></strong>
+                    <strong><?= Lang::get('collages.category') ?></strong>
                 </div>
                 <div class="SidebarItem-body Box-body">
-                    <a href="collages.php?action=search&amp;cats[<?= (int)$CollageCategoryID ?>]=1"><?= Lang::get('collages', 'collagecats')[(int)$CollageCategoryID] ?></a>
+                    <a href="collages.php?action=search&amp;cats[<?= (int)$CollageCategoryID ?>]=1"><?= Lang::get('collages.collagecats')[(int)$CollageCategoryID] ?></a>
                 </div>
             </div>
             <div class="SidebarItemCollageDescription SidebarItem Box">
                 <div class="SidebarItem-header Box-header">
-                    <strong><?= Lang::get('collages', 'description') ?></strong>
+                    <strong><?= Lang::get('collages.description') ?></strong>
                 </div>
                 <div class="SidebarItem-body Box-body HtmlText">
                     <?= Text::full_format($Description) ?>
@@ -160,27 +160,27 @@ View::show_header($Name, 'browse,collage,bbcode,voting,recommend', 'PageCollageT
             </div>
             <div class="SidebarItemStats SidebarItem Box">
                 <div class="SidebarItem-header Box-header">
-                    <strong><?= Lang::get('collages', 'statistics') ?></strong>
+                    <strong><?= Lang::get('collages.statistics') ?></strong>
                 </div>
                 <ul class="SidebarList SidebarItem-body Box-body">
                     <li class="SidebarList-item">
-                        <?= Lang::get('global', 'torrents') ?>: <?= number_format($NumGroups) ?></li>
+                        <?= Lang::get('global.torrents') ?>: <?= number_format($NumGroups) ?></li>
                     <? if (!empty($TopArtists)) { ?>
                         <li class="SidebarList-item">
-                            <?= Lang::get('global', 'artists') ?>: <?= number_format(count($TopArtists)) ?></li>
+                            <?= Lang::get('global.artists') ?>: <?= number_format(count($TopArtists)) ?></li>
                     <? } ?>
                     <li class="SidebarList-item">
-                        <?= Lang::get('collages', 'subscribers') ?>: <?= number_format((int)$Subscribers) ?></li>
+                        <?= Lang::get('collages.subscribers') ?>: <?= number_format((int)$Subscribers) ?></li>
                     <li class="SidebarList-item">
-                        <?= Lang::get('collages', 'built_by') ?> <?= number_format(count($UserAdditions)) ?>
-                        <?= Lang::get('collages', 'user') ?><?= (count($UserAdditions) > 1 ? Lang::get('collages', 'users') : '') ?></li>
+                        <?= Lang::get('collages.built_by') ?> <?= number_format(count($UserAdditions)) ?>
+                        <?= Lang::get('collages.user') ?><?= (count($UserAdditions) > 1 ? Lang::get('collages.users') : '') ?></li>
                     <li class="SidebarList-item">
-                        <?= Lang::get('collages', 'last_updated') ?>: <?= time_diff($Updated) ?></li>
+                        <?= Lang::get('collages.last_updated') ?>: <?= time_diff($Updated) ?></li>
                 </ul>
             </div>
             <div class="SidebarItemTags SidebarItem Box">
                 <div class="SidebarItem-header Box-header">
-                    <strong><?= Lang::get('collages', 'top_tags') ?></strong>
+                    <strong><?= Lang::get('collages.top_tags') ?></strong>
                 </div>
                 <ul class="SidebarItem-body Box-body SidebarList">
                     <?
@@ -191,7 +191,7 @@ View::show_header($Name, 'browse,collage,bbcode,voting,recommend', 'PageCollageT
             <? if (!empty($TopArtists)) { ?>
                 <div class="SidebarItemArtists SidebarItem Box">
                     <div class="SidebarItem-header Box-header">
-                        <strong><?= Lang::get('collages', 'top_artists') ?></strong>
+                        <strong><?= Lang::get('collages.top_artists') ?></strong>
                     </div>
                     <ul class="SidebarList SidebarItem-body Box-body">
                         <?
@@ -214,7 +214,7 @@ View::show_header($Name, 'browse,collage,bbcode,voting,recommend', 'PageCollageT
             <?  } ?>
             <div class="SidebarItemCollageContributors SidebarItem Box">
                 <div class="SidebarItem-header Box-header">
-                    <strong><?= Lang::get('collages', 'top_contributors') ?></strong>
+                    <strong><?= Lang::get('collages.top_contributors') ?></strong>
                 </div>
                 <ul class="SidebarList SidebarItem-body Box-body">
                     <?
@@ -233,14 +233,14 @@ View::show_header($Name, 'browse,collage,bbcode,voting,recommend', 'PageCollageT
                 </ul>
             </div>
             <? if (check_perms('site_collages_manage') && !isset($PreventAdditions)) {
-                $BatchAdd = Lang::get('collages', 'batch_add');
-                $IndividualAdd = Lang::get('collages', 'individual_add');
+                $BatchAdd = Lang::get('collages.batch_add');
+                $IndividualAdd = Lang::get('collages.individual_add');
             ?>
                 <div class="SidebarItemCollageTorrentAdd SidebarItem Box">
                     <div class="SidebarItem-header Box-header">
-                        <strong><?= Lang::get('collages', 'add_torrent_group') ?></strong>
+                        <strong><?= Lang::get('collages.add_torrent_group') ?></strong>
                         <span class="floatright">
-                            <a href="#" onclick="$('.add_torrent_container').toggle_class('hidden'); this.innerHTML = (this.innerHTML == '<?= $BatchAdd ?>' ? '<?= $IndividualAdd ?>' : '<?= $BatchAdd ?>'); return false;" class="brackets"><?= Lang::get('collages', 'batch_add') ?></a></span>
+                            <a href="#" onclick="$('.add_torrent_container').toggle_class('hidden'); this.innerHTML = (this.innerHTML == '<?= $BatchAdd ?>' ? '<?= $IndividualAdd ?>' : '<?= $BatchAdd ?>'); return false;" class="brackets"><?= Lang::get('collages.batch_add') ?></a></span>
                     </div>
                     <div class="pad add_torrent_container">
                         <form class="FormOneLine FormCollageAddTorrentGroup" name="torrent" action="collages.php" method="post">
@@ -251,11 +251,11 @@ View::show_header($Name, 'browse,collage,bbcode,voting,recommend', 'PageCollageT
                                 <input class="Input" type="text" size="20" name="url" />
                             </div>
                             <div class="submit_div">
-                                <input class="Button" type="submit" value="<?= Lang::get('global', 'add') ?>" />
+                                <input class="Button" type="submit" value="<?= Lang::get('global.add') ?>" />
                             </div>
                         </form>
                         <span style="font-style: italic;">
-                            <?= Lang::get('collages', 'add_torrent_group_note1') ?></span>
+                            <?= Lang::get('collages.add_torrent_group_note1') ?></span>
 
                     </div>
                     <div class="pad hidden add_torrent_container">
@@ -267,11 +267,11 @@ View::show_header($Name, 'browse,collage,bbcode,voting,recommend', 'PageCollageT
                                 <textarea class="Input" name="urls" rows="5" cols="25" style="white-space: pre; word-wrap: normal; overflow: auto;"></textarea>
                             </div>
                             <div class="submit_div">
-                                <input class="Button" type="submit" value="<?= Lang::get('global', 'add') ?>" />
+                                <input class="Button" type="submit" value="<?= Lang::get('global.add') ?>" />
                             </div>
                         </form>
                         <span style="font-style: italic;">
-                            <?= Lang::get('collages', 'add_torrent_group_note2') ?></span>
+                            <?= Lang::get('collages.add_torrent_group_note2') ?></span>
 
                     </div>
                 </div>

@@ -13,7 +13,7 @@ $ID = $_POST['id'];
 $donation = new Donation();
 
 if (!in_array($Result, [PrepaidCardStatus::Passed, PrepaidCardStatus::Reject]) || empty($ID)) {
-    error(Lang::get('tools', 'error'));
+    error(Lang::get('tools.error'));
 }
 
 if ($Result == PrepaidCardStatus::Passed) {

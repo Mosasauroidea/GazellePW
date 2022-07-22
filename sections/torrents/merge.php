@@ -39,7 +39,7 @@ if (empty($_POST['confirm'])) {
 ?>
   <div class="center thin">
     <div class="BodyHeader">
-      <h2 class="BodyHeader-nav"><?= Lang::get('torrents', 'merge_confirm') ?></h2>
+      <h2 class="BodyHeader-nav"><?= Lang::get('torrents.merge_confirm') ?></h2>
     </div>
     <div class="BoxBody">
       <form class="confirm_form" name="torrent_group" action="torrents.php" method="post">
@@ -48,11 +48,11 @@ if (empty($_POST['confirm'])) {
         <input type="hidden" name="confirm" value="true" />
         <input type="hidden" name="groupid" value="<?= $GroupID ?>" />
         <input type="hidden" name="targetgroupid" value="<?= $NewGroupID ?>" />
-        <h3><?= Lang::get('torrents', 'you_are_attempting_to_merge') ?>:</h3>
+        <h3><?= Lang::get('torrents.you_are_attempting_to_merge') ?>:</h3>
         <ul>
           <li><?= Artists::display_artists($Artists[$GroupID], true, false) ?> - <a href="torrents.php?id=<?= $GroupID ?>"><?= $Name ?></a></li>
         </ul>
-        <h3><?= Lang::get('torrents', 'into_the_group') ?>:</h3>
+        <h3><?= Lang::get('torrents.into_the_group') ?>:</h3>
         <ul>
           <li><?= Artists::display_artists($Artists[$NewGroupID], true, false) ?> - <a href="torrents.php?id=<?= $NewGroupID ?>"><?= $NewName ?></a></li>
         </ul>

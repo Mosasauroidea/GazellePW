@@ -34,19 +34,19 @@ list($NumResults) = $DB->next_record();
 $DB->set_query_id($Result);
 
 ?>
-<h4><?= Lang::get('torrents', 'peer_list') ?></h4>
+<h4><?= Lang::get('torrents.peer_list') ?></h4>
 <? if ($NumResults > 100) { ?>
     <div class="BodyNavLinks"><?= js_pages('show_peers', $_GET['torrentid'], $NumResults, $Page) ?></div>
 <? } ?>
 <div class="TableContainer">
     <table class="TableTorrentPeerList Table">
         <tr class="Table-rowHeader">
-            <td class="Table-cell"><?= Lang::get('torrents', 'user') ?></td>
-            <td class="Table-cell"><?= Lang::get('torrents', 'active') ?></td>
-            <td class="Table-cell"><?= Lang::get('torrents', 'connectable') ?></td>
-            <td class="Table-cell Table-cellRight"><?= Lang::get('torrents', 'up_this_session') ?></td>
+            <td class="Table-cell"><?= Lang::get('torrents.user') ?></td>
+            <td class="Table-cell"><?= Lang::get('torrents.active') ?></td>
+            <td class="Table-cell"><?= Lang::get('torrents.connectable') ?></td>
+            <td class="Table-cell Table-cellRight"><?= Lang::get('torrents.up_this_session') ?></td>
             <td class="Table-cell Table-cellRight">%</td>
-            <td class="Table-cell"><?= Lang::get('torrents', 'client') ?></td>
+            <td class="Table-cell"><?= Lang::get('torrents.client') ?></td>
         </tr>
         <?
         while (list($PeerUserID, $Size, $Active, $Connectable, $Uploaded, $Remaining, $UserAgent) = $DB->next_record()) {
@@ -58,7 +58,7 @@ $DB->set_query_id($Result);
                     <td class="Table-cell"><?= Users::format_username($PeerUserID, false, false, false) ?></td>
                 <?  } else {
                 ?>
-                    <td class="Table-cell"><?= Lang::get('torrents', 'peer') ?></td>
+                    <td class="Table-cell"><?= Lang::get('torrents.peer') ?></td>
                 <?  }
                 ?>
                 <td class="Table-cell"><?= ($Active) ? '<span class="u-colorSuccess">Yes</span>' : '<span class="u-colorWarning">No</span>' ?></td>

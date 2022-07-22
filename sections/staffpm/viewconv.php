@@ -30,7 +30,7 @@ if ($ConvID = (int)$_GET['id']) {
         $Cache->delete_value("staff_pm_new_$LoggedUser[ID]");
     }
 
-    View::show_header(Lang::get('staffpm', 'staff_pm'), 'staffpm,bbcode', 'PageStaffPMViewConv');
+    View::show_header(Lang::get('staffpm.staff_pm'), 'staffpm,bbcode', 'PageStaffPMViewConv');
 
     $UserInfo = Users::user_info($UserID);
     $UserStr = Users::format_username($UserID, true, true, true, true);
@@ -41,29 +41,29 @@ if ($ConvID = (int)$_GET['id']) {
 ?>
     <div class="LayoutBody">
         <div class="BodyHeader">
-            <h2 class="BodyHeader-nav"><?= Lang::get('staffpm', 'staff_pm') ?> - <?= display_str($Subject) ?></h2>
+            <h2 class="BodyHeader-nav"><?= Lang::get('staffpm.staff_pm') ?> - <?= display_str($Subject) ?></h2>
             <div class="BodyNavLinks">
 
                 <?
                 if ($IsStaff) {
                 ?>
-                    <a href="staffpm.php" class="brackets"><?= Lang::get('staffpm', 'view_your_unanswered') ?></a>
+                    <a href="staffpm.php" class="brackets"><?= Lang::get('staffpm.view_your_unanswered') ?></a>
                 <?
                 }
                 if ($IsFLS) {
                 ?>
-                    <a href="staffpm.php?view=unanswered" class="brackets"><?= Lang::get('staffpm', 'view_all_unanswered') ?></a>
-                    <a href="staffpm.php?view=open" class="brackets"><?= Lang::get('staffpm', 'view_unresolved') ?></a>
-                    <a href="staffpm.php?view=resolved" class="brackets"><?= Lang::get('staffpm', 'view_resolved') ?></a>
+                    <a href="staffpm.php?view=unanswered" class="brackets"><?= Lang::get('staffpm.view_all_unanswered') ?></a>
+                    <a href="staffpm.php?view=open" class="brackets"><?= Lang::get('staffpm.view_unresolved') ?></a>
+                    <a href="staffpm.php?view=resolved" class="brackets"><?= Lang::get('staffpm.view_resolved') ?></a>
                 <?
                 }
                 if ($IsStaff) { ?>
-                    <a href="staffpm.php?action=scoreboard" class="brackets"><?= Lang::get('staffpm', 'view_scoreboard') ?></a>
+                    <a href="staffpm.php?action=scoreboard" class="brackets"><?= Lang::get('staffpm.view_scoreboard') ?></a>
                 <?
                 }
                 if (!$IsStaff && !$IsFLS) {
                 ?>
-                    <a href="staffpm.php" class="brackets"><?= Lang::get('staffpm', 'view_scoreboard') ?></a>
+                    <a href="staffpm.php" class="brackets"><?= Lang::get('staffpm.view_scoreboard') ?></a>
                 <?
                 }
                 ?>
@@ -105,7 +105,7 @@ if ($ConvID = (int)$_GET['id']) {
                         </strong>
                         <?= time_diff($SentDate, 2, true) ?>
                         <? if ($Status != 'Resolved') { ?>
-                            - <a href="#quickpost" onclick="Quote('<?= $MessageID ?>', '<?= $Username ?>');" class="brackets"><?= Lang::get('staffpm', 'quote') ?></a>
+                            - <a href="#quickpost" onclick="Quote('<?= $MessageID ?>', '<?= $Username ?>');" class="brackets"><?= Lang::get('staffpm.quote') ?></a>
                         <?      } ?>
                     </div>
                     <div class="body HtmlText">
@@ -123,14 +123,14 @@ if ($ConvID = (int)$_GET['id']) {
                 <div id="common_answers" class="hidden">
                     <div class="box vertical_space">
                         <div class="head">
-                            <strong><?= Lang::get('staffpm', 'preview') ?></strong>
+                            <strong><?= Lang::get('staffpm.preview') ?></strong>
                         </div>
-                        <div id="common_answers_body" class="body"><?= Lang::get('staffpm', 'select_an_answer_from_the_drop_down_to_view_it') ?></div>
+                        <div id="common_answers_body" class="body"><?= Lang::get('staffpm.select_an_answer_from_the_drop_down_to_view_it') ?></div>
                     </div>
                     <br />
                     <div class="center">
                         <select class="Input" id="common_answers_select" onchange="UpdateMessage();">
-                            <option id="first_common_response"><?= Lang::get('staffpm', 'select_a_message') ?></option>
+                            <option id="first_common_response"><?= Lang::get('staffpm.select_a_message') ?></option>
                             <?
                             // List common responses
                             $DB->query("
@@ -159,7 +159,7 @@ if ($ConvID = (int)$_GET['id']) {
             // Reply box and buttons
             ?>
             <div class="Form-rowList" variant="header">
-                <div class="Form-rowHeader"><?= Lang::get('staffpm', 'reply') ?></div>
+                <div class="Form-rowHeader"><?= Lang::get('staffpm.reply') ?></div>
                 <div id="reply_box">
                     <div id="buttons" class="center">
                         <form class="manage_form" name="staff_messages" action="staffpm.php" method="post" id="messageform">
@@ -181,7 +181,7 @@ if ($ConvID = (int)$_GET['id']) {
                                             <?      // FLS "class"
                                             $Selected = ((!$AssignedToUser && $PMLevel == 0) ? ' selected="selected"' : '');
                                             ?>
-                                            <option class="Select-option" value="class_0" <?= $Selected ?>><?= Lang::get('staffpm', 'first_line_support') ?></option>
+                                            <option class="Select-option" value="class_0" <?= $Selected ?>><?= Lang::get('staffpm.first_line_support') ?></option>
                                             <?      // Staff classes
                                             foreach ($ClassLevels as $Class) {
                                                 // Create one <option class="Select-option"> for each staff user class
@@ -248,7 +248,7 @@ if ($ConvID = (int)$_GET['id']) {
                                         <input class="Button" type="button" value="Common answers" onclick="$('#common_answers').gtoggle();" />
                                     <?      } ?>
                                     <input class="Button hidden button_preview_<?= $TextPrev->getID() ?>" type="button" id="previewbtn" value="Preview" />
-                                    <input class="Button" type="submit" value="<?= Lang::get('inbox', 'send_message') ?>" />
+                                    <input class="Button" type="submit" value="<?= Lang::get('inbox.send_message') ?>" />
                                 <?  } else { ?>
                                     <input class="Button" type="button" value="Unresolve" onclick="location.href='staffpm.php?action=unresolve&amp;id=<?= $ConvID ?>';" />
                                 <?
@@ -265,21 +265,21 @@ if ($ConvID = (int)$_GET['id']) {
                                     <input type="hidden" name="auth" value="<?= $LoggedUser['AuthKey'] ?>" />
                                     <input type="hidden" name="id" value="<?= $ConvID ?>" />
                                     <div class="Form-row">
-                                        <div class="Form-label"><?= Lang::get('staffpm', 'amount') ?>: </div>
+                                        <div class="Form-label"><?= Lang::get('staffpm.amount') ?>: </div>
                                         <div class="Form-inputs"><input class="Input" type="text" name="donation_amount" onkeypress="return isNumberKey(event);" /></div>
                                     </div>
                                     <div class="Form-row">
-                                        <div class="Form-label"><?= Lang::get('staffpm', 'reason') ?>: </div>
+                                        <div class="Form-label"><?= Lang::get('staffpm.reason') ?>: </div>
                                         <div class="Form-inputs"><input class="Input" type="text" name="donation_reason" /></div>
                                     </div>
                                     <div class="Form-row">
                                         <select class="Input" name="donation_source">
-                                            <option class="Select-option" value="Flattr"><?= Lang::get('staffpm', 'flattr') ?></option>
+                                            <option class="Select-option" value="Flattr"><?= Lang::get('staffpm.flattr') ?></option>
                                         </select>
                                         <select class="Input" name="donation_currency">
-                                            <option class="Select-option" value="EUR"><?= Lang::get('staffpm', 'eur') ?></option>
+                                            <option class="Select-option" value="EUR"><?= Lang::get('staffpm.eur') ?></option>
                                         </select>
-                                        <input class="Button" type="submit" value="<?= Lang::get('global', 'submit') ?>" />
+                                        <input class="Button" type="submit" value="<?= Lang::get('global.submit') ?>" />
                                     </div>
                                 </form>
                             </div>

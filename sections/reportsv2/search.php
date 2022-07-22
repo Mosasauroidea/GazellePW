@@ -3,7 +3,7 @@ if (!check_perms('admin_reports')) {
     error(403);
 }
 
-View::show_header(Lang::get('reportsv2', 'reports_v2'), 'reportsv2', 'PageReportV2Search');
+View::show_header(Lang::get('reportsv2.reports_v2'), 'reportsv2', 'PageReportV2Search');
 
 $report_name_cache = [];
 foreach ($ReportCategories as $label => $key) {
@@ -65,37 +65,37 @@ if (!isset($dt_until)) {
 
 <div class="LayoutBody">
     <div class="BodyHeader">
-        <h2 class="BodyHeader-nav"><?= Lang::get('reportsv2', 'search_reports') ?></h2>
+        <h2 class="BodyHeader-nav"><?= Lang::get('reportsv2.search_reports') ?></h2>
         <? include('header.php'); ?>
     </div>
     <div>
         <form class="Form SearchPage" method="get" action="/reportsv2.php">
             <table>
                 <tr class="Form-row">
-                    <td class="Form-label" width="150px"><?= Lang::get('reportsv2', 'reported_by') ?></td>
+                    <td class="Form-label" width="150px"><?= Lang::get('reportsv2.reported_by') ?></td>
                     <td class="Form-inputs"><input class="Input is-small" type="text" name="reporter" size="20" value="<?= $_GET['reporter'] ?: '' ?>" /></td>
                 </tr>
                 <tr class="Form-row">
-                    <td class="Form-label" width="150px"><?= Lang::get('reportsv2', 'handled_by') ?></td>
+                    <td class="Form-label" width="150px"><?= Lang::get('reportsv2.handled_by') ?></td>
                     <td class="Form-inputs"><input class="Input is-small" type="text" name="handler" size="20" value="<?= $_GET['handler'] ?: '' ?>" /></td>
                 </tr>
                 <tr class="Form-row">
-                    <td class="Form-label" width="150px"><?= Lang::get('reportsv2', 'uploaded_by') ?></td>
+                    <td class="Form-label" width="150px"><?= Lang::get('reportsv2.uploaded_by') ?></td>
                     <td class="Form-inputs"><input class="Input is-small" type="text" name="uploader" size="20" value="<?= $_GET['uploader'] ?: '' ?>" /></td>
                 </tr>
                 <tr class="Form-row">
-                    <td class="Form-label" width="150px"><?= Lang::get('reportsv2', 'single_torrent') ?></td>
+                    <td class="Form-label" width="150px"><?= Lang::get('reportsv2.single_torrent') ?></td>
                     <td class="Form-inputs"><input class="Input" type="text" name="torrent" size="80" value="<?= $_GET['torrent'] ?: '' ?>" /></td>
                 </tr>
                 <tr class="Form-row">
-                    <td class="Form-label" width="150px"><?= Lang::get('reportsv2', 'torrent_group') ?></td>
+                    <td class="Form-label" width="150px"><?= Lang::get('reportsv2.torrent_group') ?></td>
                     <td class="Form-inputs"><input class="Input" type="text" name="group" size="80" value="<?= $_GET['group'] ?: '' ?>" /></td>
                 </tr>
                 <tr class="Form-row">
-                    <td class="Form-label" width="150px"><?= Lang::get('reportsv2', 'report_type') ?></td>
+                    <td class="Form-label" width="150px"><?= Lang::get('reportsv2.report_type') ?></td>
                     <td class="Form-inputs">
                         <select class="Input" multiple="multiple" size="8" name="report-type[]">
-                            <option class="Select-option" value="0"><?= Lang::get('reportsv2', 'don_t_care') ?></option>
+                            <option class="Select-option" value="0"><?= Lang::get('reportsv2.don_t_care') ?></option>
                             <?
                             foreach ($report_name_cache as $key => $label) {
                                 $selected = in_array($key, $ReportType) ? ' selected="selected"' : '';
@@ -106,16 +106,16 @@ if (!isset($dt_until)) {
                     </td>
                 </tr>
                 <tr class="Form-row">
-                    <td class="Form-label" width="150px"><?= Lang::get('reportsv2', 'report_created') ?></td>
+                    <td class="Form-label" width="150px"><?= Lang::get('reportsv2.report_created') ?></td>
                     <td class="Form-inputs">
-                        <?= Lang::get('reportsv2', 'from') ?> <input class="Input is-small" type="text" name="dt-from" size="10" value="<?= $dt_from ?>" /> <?= Lang::get('reportsv2', 'and_until') ?>
+                        <?= Lang::get('reportsv2.from') ?> <input class="Input is-small" type="text" name="dt-from" size="10" value="<?= $dt_from ?>" /> <?= Lang::get('reportsv2.and_until') ?>
                         <input class="Input is-small" type="text" name="dt-until" size="10" value="<?= $dt_until ?>" />
                     </td>
                 </tr>
                 <tr class="Form-row">
                     <td colspan="2">
                         <input type="hidden" name="action" value="search" />
-                        <input class="Button" type="submit" value="<?= Lang::get('reportsv2', 'search_reports') ?>" />
+                        <input class="Button" type="submit" value="<?= Lang::get('reportsv2.search_reports') ?>" />
                     </td>
                 </tr>
             </table>
@@ -135,13 +135,13 @@ if (!isset($dt_until)) {
             <table class="Table">
                 <thead>
                     <tr class="Table-rowHeader">
-                        <td class="Table-cell"><?= Lang::get('reportsv2', 'report') ?></td>
-                        <td class="Table-cell"><?= Lang::get('reportsv2', 'uploaded_by') ?></td>
-                        <td class="Table-cell"><?= Lang::get('reportsv2', 'reported_by') ?></td>
-                        <td class="Table-cell"><?= Lang::get('reportsv2', 'handled_by') ?></td>
-                        <td class="Table-cell"><?= Lang::get('global', 'torrent') ?></td>
-                        <td class="Table-cell"><?= Lang::get('reportsv2', 'report_type') ?></td>
-                        <td class="Table-cell" width="120px"><?= Lang::get('reportsv2', 'date_reported') ?></td>
+                        <td class="Table-cell"><?= Lang::get('reportsv2.report') ?></td>
+                        <td class="Table-cell"><?= Lang::get('reportsv2.uploaded_by') ?></td>
+                        <td class="Table-cell"><?= Lang::get('reportsv2.reported_by') ?></td>
+                        <td class="Table-cell"><?= Lang::get('reportsv2.handled_by') ?></td>
+                        <td class="Table-cell"><?= Lang::get('global.torrent') ?></td>
+                        <td class="Table-cell"><?= Lang::get('reportsv2.report_type') ?></td>
+                        <td class="Table-cell" width="120px"><?= Lang::get('reportsv2.date_reported') ?></td>
                     </tr>
                 </thead>
                 <tbody>

@@ -3,14 +3,14 @@ if (!check_perms('admin_whitelist')) {
     error(403);
 }
 
-View::show_header(Lang::get('tools', 'client_whitelist_manager'));
+View::show_header(Lang::get('tools.client_whitelist_manager'));
 $DB->query('
 	SELECT id, vstring, peer_id
 	FROM xbt_client_whitelist
 	ORDER BY peer_id ASC');
 ?>
 <div class="BodyHeader">
-    <h2 class="BodyHeader-nav"><?= Lang::get('tools', 'client_whitelist') ?></h2>
+    <h2 class="BodyHeader-nav"><?= Lang::get('tools.client_whitelist') ?></h2>
 </div>
 <div class="box2 pad thin">
     <form class="add_form" name="clients" action="" method="post">
@@ -18,7 +18,7 @@ $DB->query('
         <input type="hidden" name="auth" value="<?= $LoggedUser['AuthKey'] ?>" />
         <table class="Table">
             <tr class="Table-rowHeader">
-                <td class="Table-cell" colspan="4"><?= Lang::get('tools', 'add_client') ?></td>
+                <td class="Table-cell" colspan="4"><?= Lang::get('tools.add_client') ?></td>
             </tr>
             <tr class="Table-row">
                 <td class="Table-cell">
@@ -35,9 +35,9 @@ $DB->query('
     </form>
     <table class="Table">
         <tr class="Table-rowHeader">
-            <td class="Table-cell"><?= Lang::get('tools', 'client') ?></td>
-            <td class="Table-cell"><?= Lang::get('tools', 'peer_id') ?></td>
-            <td class="Table-cell"><?= Lang::get('tools', 'submit') ?></td>
+            <td class="Table-cell"><?= Lang::get('tools.client') ?></td>
+            <td class="Table-cell"><?= Lang::get('tools.peer_id') ?></td>
+            <td class="Table-cell"><?= Lang::get('tools.submit') ?></td>
         </tr>
         <?
         $Row = 'b';

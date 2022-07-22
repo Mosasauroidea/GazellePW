@@ -81,11 +81,7 @@ function Quote(post, user, link) {
   // if any text inside of a forum post body is selected, use that instead of Ajax result.
   // unfortunately, this will not preserve bbcode in the quote. This is an unfortunate necessity, as
   // doing some sort of weird grepping through the Ajax bbcode for the selected text is overkill.
-  if (
-    getSelection().toString() &&
-    inPost(getSelection().anchorNode) &&
-    inPost(getSelection().focusNode)
-  ) {
+  if (getSelection().toString() && inPost(getSelection().anchorNode) && inPost(getSelection().focusNode)) {
     insertQuote(getSelection().toString())
   } else {
     ajax.get(requrl, insertQuote)
@@ -117,15 +113,9 @@ function Edit_Form(post, key) {
   postid = post
   var boxWidth, postuserid, pmbox, inputname
   //If no edit is already going underway or a previous edit was finished, make the necessary dom changes.
-  if (
-    !$('#editbox' + postid).results() ||
-    $('#editbox' + postid + '.hidden').results()
-  ) {
+  if (!$('#editbox' + postid).results() || $('#editbox' + postid + '.hidden').results()) {
     $('#reply_box').ghide()
-    if (
-      location.href.match(/torrents\.php/) ||
-      location.href.match(/artist\.php/)
-    ) {
+    if (location.href.match(/torrents\.php/) || location.href.match(/artist\.php/)) {
       boxWidth = '50'
     } else {
       boxWidth = '80'
@@ -233,54 +223,34 @@ function Cancel_Preview(postid) {
 function Save_Edit(postid) {
   $('#reply_box').gshow()
   if (location.href.match(/forums\.php/)) {
-    ajax.post(
-      'forums.php?action=takeedit',
-      'form' + postid,
-      function (response) {
-        $('#bar' + postid).raw().innerHTML =
-          '<a href="reports.php?action=report&amp;type=post&amp;id=' +
-          postid +
-          '" class="brackets">Report</a>'
-        $('#preview' + postid).raw().innerHTML = response
-        $('#editbox' + postid).ghide()
-        $('#pmbox' + postid).ghide()
-      }
-    )
+    ajax.post('forums.php?action=takeedit', 'form' + postid, function (response) {
+      $('#bar' + postid).raw().innerHTML =
+        '<a href="reports.php?action=report&amp;type=post&amp;id=' + postid + '" class="brackets">Report</a>'
+      $('#preview' + postid).raw().innerHTML = response
+      $('#editbox' + postid).ghide()
+      $('#pmbox' + postid).ghide()
+    })
   } else {
-    ajax.post(
-      'comments.php?action=take_edit',
-      'form' + postid,
-      function (response) {
-        $('#bar' + postid).raw().innerHTML = ''
-        $('#preview' + postid).raw().innerHTML = response
-        $('#editbox' + postid).ghide()
-        $('#pmbox' + postid).ghide()
-      }
-    )
+    ajax.post('comments.php?action=take_edit', 'form' + postid, function (response) {
+      $('#bar' + postid).raw().innerHTML = ''
+      $('#preview' + postid).raw().innerHTML = response
+      $('#editbox' + postid).ghide()
+      $('#pmbox' + postid).ghide()
+    })
   }
 }
 
 function Delete(post) {
   postid = post
-  if (
-    confirm(
-      lang.get('common.common.are_you_sure_you_wish_to_delete_this_post')
-    ) == true
-  ) {
+  if (confirm(lang.get('common.common.are_you_sure_you_wish_to_delete_this_post')) == true) {
     if (location.href.match(/forums\.php/)) {
-      ajax.get(
-        'forums.php?action=delete&auth=' + authkey + '&postid=' + postid,
-        function () {
-          $('#post' + postid).ghide()
-        }
-      )
+      ajax.get('forums.php?action=delete&auth=' + authkey + '&postid=' + postid, function () {
+        $('#post' + postid).ghide()
+      })
     } else {
-      ajax.get(
-        'comments.php?action=take_delete&auth=' + authkey + '&postid=' + postid,
-        function () {
-          $('#post' + postid).ghide()
-        }
-      )
+      ajax.get('comments.php?action=take_delete&auth=' + authkey + '&postid=' + postid, function () {
+        $('#post' + postid).ghide()
+      })
     }
   }
 }
@@ -354,17 +324,9 @@ function Newthread_Preview(mode) {
 }
 
 function LoadEdit(type, post, depth) {
-  ajax.get(
-    'forums.php?action=ajax_get_edit&postid=' +
-      post +
-      '&depth=' +
-      depth +
-      '&type=' +
-      type,
-    function (response) {
-      $('#content' + post).raw().innerHTML = response
-    }
-  )
+  ajax.get('forums.php?action=ajax_get_edit&postid=' + post + '&depth=' + depth + '&type=' + type, function (response) {
+    $('#content' + post).raw().innerHTML = response
+  })
 }
 
 function AddPollOption(id) {
@@ -405,7 +367,7 @@ function AddPollOption(id) {
   list.appendChild(item)
 }
 function PollCount(count) {
-  var anss = $('.poll_answer')
+  var anss = $('.js-Poll-answerInput')
   if (count) {
     var selectCount = 0
     for (var i = 0; i < anss.length; i++) {

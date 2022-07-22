@@ -13,9 +13,9 @@ if (isset($_POST['do'])) {
     }
     header("Location: /tools.php?action=badges_gave&userid=" . $_POST['userid']);
 }
-View::show_header(Lang::get('tools', 'badge_management'), '', 'PageToolBadgeGave'); ?>
+View::show_header(Lang::get('tools.badge_management'), '', 'PageToolBadgeGave'); ?>
 
-<h2><?= Lang::get('tools', 'badge_management') ?></h2>
+<h2><?= Lang::get('tools.badge_management') ?></h2>
 <?
 //$Badges = Badges::get_badges_by_label();
 //$Labels = array_keys($Badges);
@@ -23,7 +23,7 @@ View::show_header(Lang::get('tools', 'badge_management'), '', 'PageToolBadgeGave
 $Badges = Badges::get_badges_by_id();
 $BadgeLabels = Badges::get_badge_labels();
 ?>
-<h3><?= Lang::get('tools', 'badge_send') ?></h3>
+<h3><?= Lang::get('tools.badge_send') ?></h3>
 <form action="tools.php?action=badges_gave" method="POST">
     <select class="Input" name='badgeid'>
         <?
@@ -32,16 +32,16 @@ $BadgeLabels = Badges::get_badge_labels();
         }
         ?>
     </select>
-    <span><?= Lang::get('tools', 'badge_to') ?></span>
+    <span><?= Lang::get('tools.badge_to') ?></span>
     <input class="Input" type="number" name="userid" placeholder="UserID">
     <input name="do" type="submit" value="gave">
 </form>
-<h3><?= Lang::get('tools', 'badge_query') ?></h3>
+<h3><?= Lang::get('tools.badge_query') ?></h3>
 <form action="tools.php?action=badges_gave" method="POST">
     <input class="Input" type="number" name="userid" placeholder="UserID">
     <input name="do" type="submit" value="query">
 </form>
-<h3><?= Lang::get('tools', 'badge_withdraw') ?></h3>
+<h3><?= Lang::get('tools.badge_withdraw') ?></h3>
 <form action="tools.php?action=badges_gave" method="POST">
     <input class="Input" type="number" name="userid" placeholder="UserID" value="<?= $_GET['userid'] ?>" readonly>
     <select class="Input" name='badgeid'>

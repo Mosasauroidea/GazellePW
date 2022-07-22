@@ -114,13 +114,13 @@ $RS = $DB->query("
 $DB->query('SELECT FOUND_ROWS()');
 list($Results) = $DB->next_record();
 
-View::show_header(Lang::get('tools', 'h2_user_flow'), '', 'PageToolUserFlow');
+View::show_header(Lang::get('tools.h2_user_flow'), '', 'PageToolUserFlow');
 $DB->set_query_id($RS);
 ?>
 <div class="LayoutBody">
 	<? if (!isset($_GET['page'])) { ?>
 		<div class="BoxBody">
-			<img src="https://chart.googleapis.com/chart?cht=lc&amp;chs=820x160&amp;chco=000D99,99000D&amp;chg=0,-1,1,1&amp;chxt=y,x&amp;chxs=0,h&amp;chxl=1:|<?= implode('|', $Labels) ?>&amp;chxr=0,0,<?= $Max ?>&amp;chd=t:<?= implode(',', $InFlow) ?>|<?= implode(',', $OutFlow) ?>&amp;chls=2,4,0&amp;chdl=New+Registrations|Disabled+Users&amp;chf=bg,s,FFFFFF00" alt="<?= Lang::get('tools', 'user_flow_vs_time') ?>" />
+			<img src="https://chart.googleapis.com/chart?cht=lc&amp;chs=820x160&amp;chco=000D99,99000D&amp;chg=0,-1,1,1&amp;chxt=y,x&amp;chxs=0,h&amp;chxl=1:|<?= implode('|', $Labels) ?>&amp;chxr=0,0,<?= $Max ?>&amp;chd=t:<?= implode(',', $InFlow) ?>|<?= implode(',', $OutFlow) ?>&amp;chls=2,4,0&amp;chdl=New+Registrations|Disabled+Users&amp;chf=bg,s,FFFFFF00" alt="<?= Lang::get('tools.user_flow_vs_time') ?>" />
 		</div>
 	<?  } ?>
 	<div class="BodyNavLinks">
@@ -131,13 +131,13 @@ $DB->set_query_id($RS);
 	</div>
 	<table class="TableUserFlow Table">
 		<tr class="Table-rowHeader">
-			<td class="Table-cell"><?= Lang::get('tools', 'date') ?></td>
-			<td class="Table-cell">(+) <?= Lang::get('tools', 'joined') ?></td>
-			<td class="Table-cell">(-) <?= Lang::get('tools', 'manual') ?></td>
-			<td class="Table-cell">(-) <?= Lang::get('tools', 'ratio') ?></td>
-			<td class="Table-cell">(-) <?= Lang::get('tools', 'inactivity') ?></td>
-			<td class="Table-cell">(-) <?= Lang::get('tools', 'total') ?></td>
-			<td class="Table-cell"><?= Lang::get('tools', 'net_growth') ?></td>
+			<td class="Table-cell"><?= Lang::get('tools.date') ?></td>
+			<td class="Table-cell">(+) <?= Lang::get('tools.joined') ?></td>
+			<td class="Table-cell">(-) <?= Lang::get('tools.manual') ?></td>
+			<td class="Table-cell">(-) <?= Lang::get('tools.ratio') ?></td>
+			<td class="Table-cell">(-) <?= Lang::get('tools.inactivity') ?></td>
+			<td class="Table-cell">(-) <?= Lang::get('tools.total') ?></td>
+			<td class="Table-cell"><?= Lang::get('tools.net_growth') ?></td>
 		</tr>
 		<?
 		while (list($Date, $Month, $Joined, $Manual, $Ratio, $Inactivity) = $DB->next_record()) {

@@ -1,5 +1,6 @@
 ---
 apply:
+  a: a %s %s %s
   applicant: Applicant
   applicant_administration: Applicant administration
   application_received_from_1: Application received from&nbsp;
@@ -693,7 +694,7 @@ forums:
   forum_specific_rules: Forum specific rules
   forums: Forums
   forums_greater_than_search: Forums &gt; Search
-  index_refresh: Index refresh
+  index_refresh: Show on home page
   jump_to_last_read: Jump to last read
   last_edit_by_after: ''
   last_edit_by_before: Last edited by&nbsp;
@@ -703,8 +704,7 @@ forums:
   last_post_time: Last post time
   latest: Latest
   like: Like
-  limited1: Limited to
-  limited2: options
+  limited: Limited to %s options
   locked: Locked
   missing_votes: Missing votes
   move_thread: Move thread
@@ -968,11 +968,10 @@ inbox:
   you_cannot_start_a_conversation_with_yourself: You cannot start a conversation with yourself!
   your: Your&nbsp;
 index:
-  popular_movies: Popular Movies
   add_more: Click to load more news
+  announcements: Announcements
   blank: Blank&#8202;&mdash;&#8202;Show the results!
   blog_note: Blog
-  announcements: Announcements
   cleader: Contest Leaderboard
   click_here: click here
   collage: Collages
@@ -994,6 +993,7 @@ index:
   peers: Peers
   period: .
   poll: Poll
+  popular_movies: Popular Movies
   product_note: You may want to put an image here.
   product_page: Product Page
   s_l_ratio: Seeder/leecher ratio
@@ -1006,6 +1006,92 @@ index:
   visit: Visit
   vote: Vote
   wek_visit: Users active this week
+log:
+  message: Message
+  nothing_found: Nothing found!
+  period: .
+  search_for: Search for
+  search_request_failed: Search request failed
+  site_log: Site Log
+  time: Time
+login:
+  2fa_key: 2FA Key
+  approved: approved
+  attempts_1: You have&nbsp;
+  attempts_2: '&nbsp;attempts remaining.<br /><br /><strong>WARNING:</strong> You will be banned for 6 hours after your login attempts run out!<br />'
+  back: Back
+  cookies_disabled: You appear to have cookies disabled.
+  denied: denied
+  disabled: Disabled
+  disabled_note1: |
+    Your account has been disabled.<br />
+    This is either due to inactivity or rule violation(s).<br /><br /></p>
+  disabled_note2: |
+    If you believe your account was in good standing and was disabled for inactivity, you may request it be re-enabled via email using the form below.<br />
+    Please note that you will need access to the email account associated with your account at {{CONFIG['SITE_NAME']}} for this to work;<br />
+    if you do not, please see the section after this form.<br /><br />
+  disabled_note3: |
+    If you are unsure why your account is disabled, or you wish to discuss this with staff, join: <a href="{{CONFIG['TG_DISBALE_CHANNEL']}}">Telegram Disable Channel</a>.<br />
+    <br />
+    <strong>Before joining the disabled channel, please read our <br /> <span style="color: gold;">Golden Rules</span> which can be found <a href="#" onclick="toggle_visibility('golden_rules')">here</a>.</strong> <br /><br />
+    After you joined the channel, read the announcement first.<br />
+    <br />
+    <strong>Be honest.</strong> At this point, lying will get you nowhere.
+  email: Email address
+  email_address_placeholder: Email Address
+  email_send: An email has been sent to you; please follow the directions in that email to reset your password.
+  enable_request_id_by_user_after: '&nbsp;by&nbsp;'
+  enable_request_id_by_user_before: '&nbsp;- Enable request&nbsp;'
+  enable_request_id_unresolved_by_after: '&nbsp;unresolved by&nbsp;'
+  enable_request_id_unresolved_by_before: '&nbsp;- Enable request&nbsp;'
+  enable_request_received_from_ip_after: '&nbsp;received from&nbsp;'
+  enable_request_received_from_ip_before: '&nbsp;- Enable request&nbsp;'
+  enable_request_rejected_from_ip: '&nbsp;- Enable request rejected from&nbsp;'
+  enter_valid_email: Please enter a valid email address.
+  err_1: Your account has not been confirmed.<br />Please check your email.
+  err_2: Your username or password was incorrect.
+  find_pw: Recover it here!
+  forget_pw: Lost your password?
+  invalid_token: Invalid token.
+  login: Login
+  new_password: New Password&nbsp;
+  outcome_approved: Approved
+  outcome_discarded: Discarded
+  outcome_rejected: Rejected
+  password: Password
+  password_send: |
+    Your password has been successfully reset.<br />
+    Please <a href='login.php'>click here</a> to log in using your new password.
+  re_enable_request_received: Your request to re-enable your account has been received. You can expect a reply message in your email within 72 hours.<br />If you do not receive an email after 72 hours have passed, please visit us on IRC or <a href='https://t.me/joinchat/KNqyAh4_iO9jY2U1'>Telegram</a> for assistance.
+  re_enable_request_rejected: Your request to re-enable your account has been rejected.<br />This may be because a request is already pending for your username, or because a recent request was denied.<br /><br />You are encouraged to discuss this with staff by visiting %s on %s
+  re_new_password: Confirm Password&nbsp;
+  reason: Reason
+  recovery: Recover Password
+  recovery_1: Reset your password - Step 1
+  recovery_2: Reset your password - Final Step
+  recovery_2_note: A strong password is 8 characters or longer, contains at least 1 lowercase and uppercase letter, and contains at least a number or symbol, or is 20 characters or longer.<br /><br />
+  recovery_note: An email will be sent to your email address with information <br/> on how to reset your password.<br /><br />
+  remember_me: remember me
+  requires_js: '&nbsp;requires JavaScript to function properly. Please enable JavaScript in your browser.'
+  token_has_expired_please_visit_1: Token has expired. Please visit&nbsp;
+  token_has_expired_please_visit_2: '&nbsp;on&nbsp;'
+  token_has_expired_please_visit_3: '&nbsp;to discuss this with staff.'
+  tried_to_use_an_expired_token_before: |
+    &nbsp;- Tried to use an expired enable token from&nbsp;
+    tried_to_use_an_expired_token_after:&nbsp;
+  two_factor_auth_key: Two-factor Auth Key
+  two_factor_authentication: Two-factor Authentication
+  use_2fa_recovery_code: Use 2FA Recovery Code
+  use_recovery_key: Use a recovery key?
+  username: Username
+  warning: You have entered an invalid two-factor authentication key. Please login again.
+  warning_disable_after: .
+  warning_disable_before: You will be banned for&nbsp;
+  you_are_banned_from_logging_1: You are banned from logging in for another&nbsp;
+  you_are_banned_from_logging_2: .
+  your_account_has_been_enabled: Your account has been enabled. You may now log in.<br>Please be sure to log in before 24:00 today or your account will be disabled again.
+  your_enable_request_for_after: '&nbsp;has been&nbsp;'
+  your_enable_request_for_before: Your enable request for&nbsp;
 permissions:
   admin_advanced_user_search: Can access advanced user search
   admin_bp_history: Can view bonus points spent by other users
@@ -1179,7 +1265,7 @@ referral:
   enter_username_at_2: '&nbsp;exactly as it appears on the site. This is critical in verifying your account.'
   enter_your_username_1: Enter your username and&nbsp;
   enter_your_username_2: '&nbsp;will verify your membership and issue an invite code to you.'
-  exclamation_mark: null
+  exclamation_mark: '!'
   external_tracker_referrals: External Tracker Referrals
   join: Join
   paste_string: Paste the character string anywhere in the body of your profile and save it.
@@ -1664,7 +1750,7 @@ rules:
   info: Additional Information
   ratio: Ratio
   ratio_dl_title: These units are actually in base 2, not base 10. For example, there are 1,024 MB in 1 GB.
-  ratio_title: Ratio & H&R
+  ratio_title: Ratio
   ratio_title_de: These are the rules for seeding/leeching activity on this site.
   requests_title: Requests
   requests_title_de: These are the rules that govern requests.
@@ -2500,6 +2586,7 @@ top10:
   most_torrents: Most Active %s of All Time
   most_used_request_tags: Most Used Request Tags
   most_used_torrent_tags: Most Used Torrent Tags
+  movies: Movies
   name: Name
   neg_votes: Neg. votes
   original: Original
@@ -2531,11 +2618,10 @@ top10:
   top_10_torrents_history: Top 10 Torrents history!
   top_10_users: Top 10 Users
   top_donors: Top Donors
+  top_movies: Movies
   top_n_donors: Top Donors
   top_torrents: Torrents
-  top_movies: Movies
   torrents: Torrents
-  movies: Movies
   torrents_uploaded: Torrents Uploaded
   total_donor_points: Total Donor Points
   type: Type
@@ -2655,13 +2741,13 @@ torrents:
   file_names: File Names
   first_torrent: First torrent
   first_torrent_title: This is the first torrent that the user uploaded
-  fld: Freeleech!
+  fld: FREE
   fold_tooltip: Click to fold and unfold overview
   for_the_reason: |
     &nbsp;for the reason "
   free_left: |
     %s left
-  freeleech: Freeleech
+  freeleech: FREE
   ft_filelist: File list
   ft_order: Order by
   ft_releasetype: Release type
@@ -2892,7 +2978,7 @@ torrents:
   torrent_group_id_change_confirmation: Torrent Group ID Change Confirmation
   torrent_group_leech_status: Torrent <strong>group</strong> leech status
   torrent_group_meta_editing: Movie info editing
-  torrents_count: null
+  torrents_count: '# torrents'
   total_reward_bonus_points_pre_tax: Total reward bonus points (pre-tax)
   trump: Trumpable
   trumpable_reason: Trumpable reason
@@ -3430,8 +3516,8 @@ user:
   mature: Mature content (forums, comments, profiles)
   mature_show: Display mature content
   mature_title: >-
-    {{CONFIG['SITE_NAME']}} has very flexible &lt;a href=&quot;wiki.php?action=article&amp;amp;id=1063&quot;&gt;mature content policies&lt;/a&gt; for all community areas. Choosing to display mature content will allow you to click-through to view any content posted beneath &lt;code&gt;[mature]&lt;/code&gt; tags. If you choose not to display mature content, all content tagged with &lt;code&gt;[mature]&lt;/code&gt; tags will be hidden from you.' data-title-plain='{{CONFIG['SITE_NAME']}} has very flexible mature content
-    policies for all community areas. Choosing to display mature content will allow you to click-through to view any content posted beneath [mature] tags. If you choose not to display mature content, all content tagged with [mature] tags will be hidden from you.
+    {{CONFIG['SITE_NAME']}} has very flexible &lt;a href=&quot;wiki.php?action=article&amp;amp;id=1063&quot;&gt;mature content policies&lt;/a&gt; for all community areas. Choosing to display mature content will allow you to click-through to view any content posted beneath &lt;code&gt;[mature]&lt;/code&gt; tags. If you choose not to display mature content, all content tagged with &lt;code&gt;[mature]&lt;/code&gt; tags will be hidden from you.' data-title-plain='{{CONFIG['SITE_NAME']}} has very
+    flexible mature content policies for all community areas. Choosing to display mature content will allow you to click-through to view any content posted beneath [mature] tags. If you choose not to display mature content, all content tagged with [mature] tags will be hidden from you.
   menu: Sections
   merge_from: Merge from
   merge_from_title: Enter a username.
@@ -3473,9 +3559,9 @@ user:
   notifyondeletesnatched: Deleted snatched torrent alerts
   notifyondeletesnatched_checked: Enable PM notification for deleted snatched torrents
   notifyondeletesnatched_title: Enabling this will send you a PM alert whenever a torrent you've snatched is deleted.
-  number_of_emails: null
-  number_of_invitees: null
-  number_of_invites: null
+  number_of_emails: '# Emails'
+  number_of_invitees: '# Invitees'
+  number_of_invites: '# Invites'
   'off': 'Off'
   'on': 'On'
   one_of_these_artists: One of these artists

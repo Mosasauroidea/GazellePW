@@ -11,6 +11,8 @@ authorize();
 
 require(CONFIG['SERVER_ROOT'] . '/classes/validate.class.php');
 
+use Gazelle\Torrent\EditionInfo;
+
 $Validate = new VALIDATE;
 
 //******************************************************************************//
@@ -66,7 +68,12 @@ $Properties['Processing'] = $_POST['processing'];
 if ($_POST['processing_other']) {
     $Properties['Processing'] = $_POST['processing_other'];
 }
+
 $Properties['RemasterTitle'] = $_POST['remaster_title'];
+if (!EditionInfo::validate($Properties['RemasterTitle'])) {
+    die("invalid remaster_title");
+}
+
 $Properties['RemasterCustomTitle'] = $_POST['remaster_custom_title'];
 $Properties['TorrentDescription'] = $_POST['release_desc'];
 $Properties['Name'] = $_POST['title'];

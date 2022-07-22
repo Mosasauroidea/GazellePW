@@ -27,7 +27,7 @@ if (!empty($_GET['userid'])) {
 }
 
 $Sneaky = $UserID !== $LoggedUser['ID'];
-$Title = $Sneaky ? "$Username" . Lang::get('bookmarks', 's_bookmarked_torrent_groups') : Lang::get('bookmarks', 'your_bookmarked_torrent_groups');
+$Title = $Sneaky ? "$Username" . Lang::get('bookmarks.s_bookmarked_torrent_groups') : Lang::get('bookmarks.your_bookmarked_torrent_groups');
 
 $NumGroups = 0;
 $ArtistCount = array();
@@ -65,28 +65,28 @@ View::show_header($Title, 'browse,collage', 'PageBookmarkTorrent');
             <? if (!$Sneaky) { ?><a href="feeds.php?feed=torrents_bookmarks_t_<?= $LoggedUser['torrent_pass'] ?>&amp;user=<?= $LoggedUser['ID'] ?>&amp;auth=<?= $LoggedUser['RSS_Auth'] ?>&amp;passkey=<?= $LoggedUser['torrent_pass'] ?>&amp;authkey=<?= $LoggedUser['AuthKey'] ?>&amp;name=<?= urlencode(CONFIG['SITE_NAME'] . ': Bookmarked Torrents') ?>"><img src="<?= CONFIG['STATIC_SERVER'] ?>/common/symbols/rss.png" alt="RSS feed" /></a>&nbsp;
                 <? } ?><?= $Title ?></h2>
         <div class="BodyNavLinks">
-            <a href="bookmarks.php?type=torrents" class="brackets"><?= Lang::get('global', 'torrents') ?></a>
-            <a href="bookmarks.php?type=artists" class="brackets"><?= Lang::get('global', 'artists') ?></a>
+            <a href="bookmarks.php?type=torrents" class="brackets"><?= Lang::get('global.torrents') ?></a>
+            <a href="bookmarks.php?type=artists" class="brackets"><?= Lang::get('global.artists') ?></a>
             <?
             if (CONFIG['ENABLE_COLLAGES']) {
             ?>
-                <a href="bookmarks.php?type=collages" class="brackets"><?= Lang::get('bookmarks', 'collages') ?></a>
+                <a href="bookmarks.php?type=collages" class="brackets"><?= Lang::get('bookmarks.collages') ?></a>
             <?
             }
             ?>
-            <a href="bookmarks.php?type=requests" class="brackets"><?= Lang::get('global', 'requests') ?></a>
+            <a href="bookmarks.php?type=requests" class="brackets"><?= Lang::get('global.requests') ?></a>
             <? if (count($TorrentList) > 0) { ?>
         </div>
         <div class="BodyNavLinks">
-            <a href="bookmarks.php?action=remove_snatched&amp;auth=<?= $LoggedUser['AuthKey'] ?>" class="brackets" onclick="return confirm('<?= Lang::get('bookmarks', 'remove_snatched_confirm') ?>');"><?= Lang::get('bookmarks', 'remove_snatched') ?></a>
-            <a href="bookmarks.php?action=edit&amp;type=torrents" class="brackets"><?= Lang::get('bookmarks', 'manage_torrents') ?></a>
+            <a href="bookmarks.php?action=remove_snatched&amp;auth=<?= $LoggedUser['AuthKey'] ?>" class="brackets" onclick="return confirm('<?= Lang::get('bookmarks.remove_snatched_confirm') ?>');"><?= Lang::get('bookmarks.remove_snatched') ?></a>
+            <a href="bookmarks.php?action=edit&amp;type=torrents" class="brackets"><?= Lang::get('bookmarks.manage_torrents') ?></a>
         <? } ?>
         </div>
     </div>
     <? if (count($TorrentList) === 0) { ?>
         <div class="Box">
             <div class="Box-body" align="center">
-                <h2><?= Lang::get('bookmarks', 'no_bookmarked_torrents') ?></h2>
+                <h2><?= Lang::get('bookmarks.no_bookmarked_torrents') ?></h2>
             </div>
         </div>
 </div>
@@ -99,15 +99,15 @@ View::show_header($Title, 'browse,collage', 'PageBookmarkTorrent');
     <div class="Sidebar LayoutMainSidebar-sidebar">
         <div class="SidebarItemStats SidebarItem Box">
             <div class="SidebarItem-header Box-header">
-                <strong><?= Lang::get('bookmarks', 'stats') ?></strong>
+                <strong><?= Lang::get('bookmarks.stats') ?></strong>
             </div>
             <ul class="SidebarList SidebarItem-body Box-body">
-                <li class="SidebarList-item"><?= Lang::get('bookmarks', 'torrent_groups') ?>: <?= $NumGroups ?></li>
-                <li class="SidebarList-item"><?= Lang::get('global', 'artists') ?>: <?= count($ArtistCount) ?></li>
+                <li class="SidebarList-item"><?= Lang::get('bookmarks.torrent_groups') ?>: <?= $NumGroups ?></li>
+                <li class="SidebarList-item"><?= Lang::get('global.artists') ?>: <?= count($ArtistCount) ?></li>
             </ul>
         </div>
         <div class="SidebarItemTags SidebarItem Box">
-            <div class="SidebarItem-header Box-header"><strong><?= Lang::get('bookmarks', 'top_tags') ?></strong></div>
+            <div class="SidebarItem-header Box-header"><strong><?= Lang::get('bookmarks.top_tags') ?></strong></div>
             <div class="SidebarItem-body Box-body">
                 <ul class="SidebarList">
                     <? Tags::format_top(5, 'torrents.php?taglist=', '', 'SidebarList-item') ?>
@@ -116,7 +116,7 @@ View::show_header($Title, 'browse,collage', 'PageBookmarkTorrent');
         </div>
         <div class="SidebarItemArtists SidebarItem Box">
             <div class="SidebarItem-header Box-header">
-                <strong><?= Lang::get('bookmarks', 'top_artists') ?></strong>
+                <strong><?= Lang::get('bookmarks.top_artists') ?></strong>
             </div>
             <div class="SidebarList SidebarItem-body Box-body">
                 <?

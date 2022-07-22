@@ -10,7 +10,7 @@ if (isset($_POST['do'])) {
         case 'deleteItem':
             if (!Badges::deleteItem($_POST['id'])) {
                 // error("删除失败");
-                error(Lang::get('tools', 'delete_failed'));
+                error(Lang::get('tools.delete_failed'));
             }
             break;
         case 'addLabel':
@@ -22,29 +22,29 @@ if (isset($_POST['do'])) {
         case 'deleteLabel':
             if (!Badges::deleteLabel($_POST['label'])) {
                 // error("删除失败");
-                error(Lang::get('tools', 'delete_failed'));
+                error(Lang::get('tools.delete_failed'));
             }
             break;
     }
     header("Location: /tools.php?action=badges&label=" . $_POST['label']);
 }
-View::show_header(Lang::get('tools', 'badge_management'), '', 'PageToolBadge'); ?>
-<h2><?= Lang::get('tools', 'badge_management') ?></h2>
+View::show_header(Lang::get('tools.badge_management'), '', 'PageToolBadge'); ?>
+<h2><?= Lang::get('tools.badge_management') ?></h2>
 <?
 $BadgeLabels = Badges::get_badge_labels();
 ?>
 <table id="badge_management_table">
     <tr>
         <th></th>
-        <th><?= Lang::get('tools', 'badge_tag') ?></th>
-        <th><?= Lang::get('tools', 'badge_image') ?></th>
-        <th><?= Lang::get('tools', 'badge_type') ?></th>
-        <th><?= Lang::get('tools', 'badge_auto') ?></th>
-        <th><?= Lang::get('tools', 'badge_class') ?></th>
-        <th><?= Lang::get('tools', 'badge_progress') ?></th>
-        <th><?= Lang::get('tools', 'badge_sort') ?></th>
-        <th><?= Lang::get('tools', 'badge_note') ?></th>
-        <th><?= Lang::get('tools', 'badge_operations') ?></th>
+        <th><?= Lang::get('tools.badge_tag') ?></th>
+        <th><?= Lang::get('tools.badge_image') ?></th>
+        <th><?= Lang::get('tools.badge_type') ?></th>
+        <th><?= Lang::get('tools.badge_auto') ?></th>
+        <th><?= Lang::get('tools.badge_class') ?></th>
+        <th><?= Lang::get('tools.badge_progress') ?></th>
+        <th><?= Lang::get('tools.badge_sort') ?></th>
+        <th><?= Lang::get('tools.badge_note') ?></th>
+        <th><?= Lang::get('tools.badge_operations') ?></th>
     </tr>
     <tr>
         <form action="tools.php?action=badges" method="POST">
@@ -62,11 +62,11 @@ $BadgeLabels = Badges::get_badge_labels();
     </tr>
     <tr>
         <th></th>
-        <th><?= Lang::get('tools', 'badge_tag') ?></th>
-        <th><?= Lang::get('tools', 'badge_image') ?></th>
-        <th><?= Lang::get('tools', 'badge_icon') ?></th>
-        <th><?= Lang::get('tools', 'badge_level') ?></th>
-        <th><?= Lang::get('tools', 'badge_level_number') ?></th>
+        <th><?= Lang::get('tools.badge_tag') ?></th>
+        <th><?= Lang::get('tools.badge_image') ?></th>
+        <th><?= Lang::get('tools.badge_icon') ?></th>
+        <th><?= Lang::get('tools.badge_level') ?></th>
+        <th><?= Lang::get('tools.badge_level_number') ?></th>
     </tr>
     <tr>
         <form action="tools.php?action=badges" method="POST">
@@ -84,15 +84,15 @@ $BadgeLabels = Badges::get_badge_labels();
     ?>
         <tr>
             <th></th>
-            <th><?= Lang::get('tools', 'badge_tag') ?></th>
-            <th><?= Lang::get('tools', 'badge_image') ?></th>
-            <th><?= Lang::get('tools', 'badge_type') ?></th>
-            <th><?= Lang::get('tools', 'badge_auto') ?></th>
-            <th><?= Lang::get('tools', 'badge_class') ?></th>
-            <th><?= Lang::get('tools', 'badge_progress') ?></th>
-            <th><?= Lang::get('tools', 'badge_sort') ?></th>
-            <th><?= Lang::get('tools', 'badge_note') ?></th>
-            <th><?= Lang::get('tools', 'badge_operations') ?></th>
+            <th><?= Lang::get('tools.badge_tag') ?></th>
+            <th><?= Lang::get('tools.badge_image') ?></th>
+            <th><?= Lang::get('tools.badge_type') ?></th>
+            <th><?= Lang::get('tools.badge_auto') ?></th>
+            <th><?= Lang::get('tools.badge_class') ?></th>
+            <th><?= Lang::get('tools.badge_progress') ?></th>
+            <th><?= Lang::get('tools.badge_sort') ?></th>
+            <th><?= Lang::get('tools.badge_note') ?></th>
+            <th><?= Lang::get('tools.badge_operations') ?></th>
         </tr>
         <tr>
             <form action="tools.php?action=badges" method="POST">
@@ -111,11 +111,11 @@ $BadgeLabels = Badges::get_badge_labels();
         </tr>
         <tr class="badge_<?= $BadgeLabel['Label'] ?>" <?= $_GET['label'] == $BadgeLabel['Label'] ? "" : "style=\"display: none;\"" ?>>
             <th></th>
-            <th><?= Lang::get('tools', 'badge_tag') ?></th>
-            <th><?= Lang::get('tools', 'badge_image') ?></th>
-            <th><?= Lang::get('tools', 'badge_icon') ?></th>
-            <th><?= Lang::get('tools', 'badge_level') ?></th>
-            <th><?= Lang::get('tools', 'badge_level_number') ?></th>
+            <th><?= Lang::get('tools.badge_tag') ?></th>
+            <th><?= Lang::get('tools.badge_image') ?></th>
+            <th><?= Lang::get('tools.badge_icon') ?></th>
+            <th><?= Lang::get('tools.badge_level') ?></th>
+            <th><?= Lang::get('tools.badge_level_number') ?></th>
         </tr>
         <?
         $Badges = Badges::get_badges_by_label($BadgeLabel['Label']);

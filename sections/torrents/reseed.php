@@ -9,7 +9,7 @@ list($LastActive, $LastReseedRequest, $UploaderID, $UploadedTime, $GroupID) = $D
 
 if (!check_perms('users_mod')) {
     if (time() - strtotime($LastReseedRequest) < 864000) {
-        error(Lang::get('torrents', 'already_a_re_seed_request'));
+        error(Lang::get('torrents.already_a_re_seed_request'));
     }
     if ($LastActive == '0000-00-00 00:00:00' || time() - strtotime($LastActive) < 345678) {
         error(403);
@@ -76,10 +76,10 @@ View::show_header('', '', 'PageTorrentReseed');
 ?>
 <div class="LayoutBody">
     <div class="BodyHeader">
-        <h2 class="BodyHeader-nav"><?= Lang::get('torrents', 'successfully_sent_re_seed_request') ?></h2>
+        <h2 class="BodyHeader-nav"><?= Lang::get('torrents.successfully_sent_re_seed_request') ?></h2>
     </div>
     <div class="BoxBody thin">
-        <p><?= Lang::get('torrents', 'successfully_sent_re_seed_request_for_torrent') ?><a href="torrents.php?id=<?= $GroupID ?>&torrentid=<?= $TorrentID ?>"><?= display_str($Name) ?></a><?= Lang::get('torrents', 'space_to_space') ?><?= $NumUsers ?><?= Lang::get('torrents', 'n_user') ?><?= $NumUsers === 1 ? '' : Lang::get('torrents', 's'); ?><?= Lang::get('torrents', 'period') ?></p>
+        <p><?= Lang::get('torrents.successfully_sent_re_seed_request_for_torrent') ?><a href="torrents.php?id=<?= $GroupID ?>&torrentid=<?= $TorrentID ?>"><?= display_str($Name) ?></a><?= Lang::get('torrents.space_to_space') ?><?= $NumUsers ?><?= Lang::get('torrents.n_user') ?><?= $NumUsers === 1 ? '' : Lang::get('torrents.s'); ?><?= Lang::get('torrents.period') ?></p>
     </div>
 </div>
 <?

@@ -19,7 +19,7 @@ if (!check_perms('site_delete_artist') || !check_perms('torrents_delete')) {
     error(403);
 }
 
-View::show_header(Lang::get('artist', 'artist_deleted'), '', 'PageArtistDelete');
+View::show_header(Lang::get('artist.artist_deleted'), '', 'PageArtistDelete');
 
 $DB->query("
 	SELECT Name
@@ -37,8 +37,8 @@ if ($DB->has_results()) {
 ?>
     <div class="LayoutBody">
         <div class="remove-artist-failed">
-            <?= Lang::get('artist', 'there_are_still_torrents_that_have') ?><a href="artist.php?id=<?= $ArtistID ?>" data-tooltip="<?= Lang::get('artist', 'view_artist') ?>" dir="ltr"><?= $Name ?></a><?= Lang::get('artist', 'as_an_artist') ?><br />
-            <?= Lang::get('artist', 'please_remove_the_artist_from_these_torrents') ?><br />
+            <?= Lang::get('artist.there_are_still_torrents_that_have') ?><a href="artist.php?id=<?= $ArtistID ?>" data-tooltip="<?= Lang::get('artist.view_artist') ?>" dir="ltr"><?= $Name ?></a><?= Lang::get('artist.as_an_artist') ?><br />
+            <?= Lang::get('artist.please_remove_the_artist_from_these_torrents') ?><br />
             <div class="Box">
                 <div class="Box-body">
                     <ul>
@@ -46,7 +46,7 @@ if ($DB->has_results()) {
                         while (list($GroupName, $GroupID) = $DB->next_record(MYSQLI_NUM, true)) {
                         ?>
                             <li>
-                                <a href="torrents.php?id=<?= $GroupID ?>" data-tooltip="<?= Lang::get('artist', 'view_torrent_group') ?>" dir="ltr"><?= $GroupName ?></a>
+                                <a href="torrents.php?id=<?= $GroupID ?>" data-tooltip="<?= Lang::get('artist.view_torrent_group') ?>" dir="ltr"><?= $GroupName ?></a>
                             </li>
                         <?
                         }
@@ -69,8 +69,8 @@ if ($DB->has_results()) {
 ?>
     <div class="LayoutBody">
         <div class="remove-artist-failed">
-            <?= Lang::get('artist', 'there_are_still_requests_that_have') ?><a href="artist.php?id=<?= $ArtistID ?>" data-tooltip="<?= Lang::get('artist', 'view_artist') ?>" dir="ltr"><?= $Name ?></a><?= Lang::get('artist', 'as_an_artist') ?><br />
-            <?= Lang::get('artist', 'please_remove_the_artist_from_these_requests') ?><br />
+            <?= Lang::get('artist.there_are_still_requests_that_have') ?><a href="artist.php?id=<?= $ArtistID ?>" data-tooltip="<?= Lang::get('artist.view_artist') ?>" dir="ltr"><?= $Name ?></a><?= Lang::get('artist.as_an_artist') ?><br />
+            <?= Lang::get('artist.please_remove_the_artist_from_these_requests') ?><br />
             <div class="Box">
                 <div class="Box-body">
                     <ul>
@@ -78,7 +78,7 @@ if ($DB->has_results()) {
                         while (list($RequestName, $RequestID) = $DB->next_record(MYSQLI_NUM, true)) {
                         ?>
                             <li>
-                                <a href="requests.php?action=view&amp;id=<?= $RequestID ?>" data-tooltip="<?= Lang::get('artist', 'view_request') ?>" dir="ltr"><?= $RequestName ?></a>
+                                <a href="requests.php?action=view&amp;id=<?= $RequestID ?>" data-tooltip="<?= Lang::get('artist.view_request') ?>" dir="ltr"><?= $RequestName ?></a>
                             </li>
                         <?
                         }
@@ -96,7 +96,7 @@ if ($Count == 0) {
 ?>
     <div class="Box">
         <div class="thin Box-body">
-            <?= Lang::get('artist', 'artist_deleted_before') ?><?= $Name ?><?= Lang::get('artist', 'artist_deleted_after') ?>
+            <?= Lang::get('artist.artist_deleted_before') ?><?= $Name ?><?= Lang::get('artist.artist_deleted_after') ?>
         </div>
     </div>
 <?

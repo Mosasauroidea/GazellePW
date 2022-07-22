@@ -40,7 +40,7 @@ function wrap($String, $ForceMatch = '', $IPSearch = false) {
     }
     if ($Match == ' REGEXP ') {
         if (strpos($String, '\'') !== false || preg_match('/^.*\\\\$/i', $String)) {
-            error(Lang::get('user', 'regex_contains_illegal_characters'));
+            error(Lang::get('user.regex_contains_illegal_characters'));
         }
     } else {
         $String = db_string($String);
@@ -514,7 +514,7 @@ if (count($_GET)) {
         error($Err);
     }
 }
-View::show_header(Lang::get('user', 'user_search'), '', 'PageUserAdvancedSearch');
+View::show_header(Lang::get('user.user_search'), '', 'PageUserAdvancedSearch');
 ?>
 
 <div class="LayoutBody">
@@ -522,78 +522,78 @@ View::show_header(Lang::get('user', 'user_search'), '', 'PageUserAdvancedSearch'
         <input type="hidden" name="action" value="search" />
         <table class="Form-rowList">
             <tr class="Form-row">
-                <td class="Form-label"><?= Lang::get('user', 'username') ?>:</td>
+                <td class="Form-label"><?= Lang::get('user.username') ?>:</td>
                 <td class="Form-inputs">
                     <input class="Input" type="text" name="username" size="20" value="<?= display_str($_GET['username']) ?>" />
                 </td>
-                <td class="Form-label"><?= Lang::get('user', 'joined') ?>:</td>
+                <td class="Form-label"><?= Lang::get('user.joined') ?>:</td>
                 <td class="Form-inputs">
                     <select class="Input" name="joined">
                         <option class="Select-option" value="on" <? if ($_GET['joined'] === 'on') {
                                                                         echo ' selected="selected"';
-                                                                    } ?>><?= Lang::get('user', 'on') ?></option>
+                                                                    } ?>><?= Lang::get('user.on') ?></option>
                         <option class="Select-option" value="before" <? if ($_GET['joined'] === 'before') {
                                                                             echo ' selected="selected"';
-                                                                        } ?>><?= Lang::get('user', 'before') ?></option>
+                                                                        } ?>><?= Lang::get('user.before') ?></option>
                         <option class="Select-option" value="after" <? if ($_GET['joined'] === 'after') {
                                                                         echo ' selected="selected"';
-                                                                    } ?>><?= Lang::get('user', 'after') ?></option>
+                                                                    } ?>><?= Lang::get('user.after') ?></option>
                         <option class="Select-option" value="between" <? if ($_GET['joined'] === 'between') {
                                                                             echo ' selected="selected"';
-                                                                        } ?>><?= Lang::get('user', 'between') ?></option>
+                                                                        } ?>><?= Lang::get('user.between') ?></option>
                     </select>
                     <input class="Input" type="text" name="join1" size="10" value="<?= display_str($_GET['join1']) ?>" placeholder="YYYY-MM-DD" />
                     <input class="Input" type="text" name="join2" size="10" value="<?= display_str($_GET['join2']) ?>" placeholder="YYYY-MM-DD" />
                 </td>
-                <td class="Form-label"><?= Lang::get('user', 'enabled') ?>:</td>
+                <td class="Form-label"><?= Lang::get('user.enabled') ?>:</td>
                 <td class="Form-inputs">
                     <select class="Input" name="enabled">
                         <option class="Select-option" value="" <? if ($_GET['enabled'] === '') {
                                                                     echo ' selected="selected"';
-                                                                } ?>><?= Lang::get('user', 'do_not_care') ?></option>
+                                                                } ?>><?= Lang::get('user.do_not_care') ?></option>
                         <option class="Select-option" value="0" <? if ($_GET['enabled'] === '0') {
                                                                     echo ' selected="selected"';
-                                                                } ?>><?= Lang::get('user', 'unconfirmed') ?></option>
+                                                                } ?>><?= Lang::get('user.unconfirmed') ?></option>
                         <option class="Select-option" value="1" <? if ($_GET['enabled'] === '1') {
                                                                     echo ' selected="selected"';
-                                                                } ?>><?= Lang::get('user', 'enabled') ?></option>
+                                                                } ?>><?= Lang::get('user.enabled') ?></option>
                         <option class="Select-option" value="2" <? if ($_GET['enabled'] === '2') {
                                                                     echo ' selected="selected"';
-                                                                } ?>><?= Lang::get('user', 'disabled') ?></option>
+                                                                } ?>><?= Lang::get('user.disabled') ?></option>
                     </select>
                 </td>
             </tr>
 
             <tr class="Form-row">
-                <td class="Form-label"><?= Lang::get('user', 'email_address') ?>:</td>
+                <td class="Form-label"><?= Lang::get('user.email_address') ?>:</td>
                 <td class="Form-inputs">
                     <input class="Input" type="text" name="email" size="20" value="<?= display_str($_GET['email']) ?>" />
                 </td>
-                <td class="Form-label"><?= Lang::get('user', 'last_active') ?>:</td>
+                <td class="Form-label"><?= Lang::get('user.last_active') ?>:</td>
                 <td class="Form-inputs">
                     <select class="Input" name="lastactive">
                         <option class="Select-option" value="on" <? if ($_GET['lastactive'] === 'on') {
                                                                         echo ' selected="selected"';
-                                                                    } ?>><?= Lang::get('user', 'on') ?></option>
+                                                                    } ?>><?= Lang::get('user.on') ?></option>
                         <option class="Select-option" value="before" <? if ($_GET['lastactive'] === 'before') {
                                                                             echo ' selected="selected"';
-                                                                        } ?>><?= Lang::get('user', 'before') ?></option>
+                                                                        } ?>><?= Lang::get('user.before') ?></option>
                         <option class="Select-option" value="after" <? if ($_GET['lastactive'] === 'after') {
                                                                         echo ' selected="selected"';
-                                                                    } ?>><?= Lang::get('user', 'after') ?></option>
+                                                                    } ?>><?= Lang::get('user.after') ?></option>
                         <option class="Select-option" value="between" <? if ($_GET['lastactive'] === 'between') {
                                                                             echo ' selected="selected"';
-                                                                        } ?>><?= Lang::get('user', 'between') ?></option>
+                                                                        } ?>><?= Lang::get('user.between') ?></option>
                     </select>
                     <input class="Input" type="text" name="lastactive1" size="10" value="<?= display_str($_GET['lastactive1']) ?>" placeholder="YYYY-MM-DD" />
                     <input class="Input" type="text" name="lastactive2" size="10" value="<?= display_str($_GET['lastactive2']) ?>" placeholder="YYYY-MM-DD" />
                 </td>
-                <td class="Form-label"><?= Lang::get('user', 'primary_class') ?>:</td>
+                <td class="Form-label"><?= Lang::get('user.primary_class') ?>:</td>
                 <td class="Form-inputs">
                     <select class="Input" name="class">
                         <option class="Select-option" value="" <? if ($_GET['class'] === '') {
                                                                     echo ' selected="selected"';
-                                                                } ?>><?= Lang::get('user', 'do_not_care') ?></option>
+                                                                } ?>><?= Lang::get('user.do_not_care') ?></option>
                         <? foreach ($ClassLevels as $Class) {
                             if ($Class['Secondary']) {
                                 continue;
@@ -608,30 +608,30 @@ View::show_header(Lang::get('user', 'user_search'), '', 'PageUserAdvancedSearch'
             </tr>
 
             <tr class="Form-row">
-                <td class="Form-label" data-tooltip="<?= Lang::get('user', 'to_fuzzy_search_for_a_block_of_addresses_title') ?>"><?= Lang::get('user', 'ip_address') ?>:</td>
+                <td class="Form-label" data-tooltip="<?= Lang::get('user.to_fuzzy_search_for_a_block_of_addresses_title') ?>"><?= Lang::get('user.ip_address') ?>:</td>
                 <td class="Form-inputs">
                     <input class="Input" type="text" name="ip" size="20" value="<?= display_str($_GET['ip']) ?>" />
                 </td>
-                <td class="Form-label"><?= Lang::get('user', 'locked_account') ?>:</td>
+                <td class="Form-label"><?= Lang::get('user.locked_account') ?>:</td>
                 <td class="Form-inputs">
                     <select class="Input" name="lockedaccount">
                         <option class="Select-option" value="any" <? if ($_GET['lockedaccount'] == 'any') {
                                                                         echo ' selected="selected"';
-                                                                    } ?>><?= Lang::get('user', 'do_not_care') ?></option>
+                                                                    } ?>><?= Lang::get('user.do_not_care') ?></option>
                         <option class="Select-option" value="locked" <? if ($_GET['lockedaccount'] == 'locked') {
                                                                             echo ' selected="selected"';
-                                                                        } ?>><?= Lang::get('user', 'locked') ?></option>
+                                                                        } ?>><?= Lang::get('user.locked') ?></option>
                         <option class="Select-option" value="unlocked" <? if ($_GET['lockedaccount'] == 'unlocked') {
                                                                             echo ' selected="selected"';
-                                                                        } ?>><?= Lang::get('user', 'ulocked') ?></option>
+                                                                        } ?>><?= Lang::get('user.ulocked') ?></option>
                     </select>
                 </td>
-                <td class="Form-label"><?= Lang::get('user', 'secondary_class') ?>:</td>
+                <td class="Form-label"><?= Lang::get('user.secondary_class') ?>:</td>
                 <td class="Form-inputs">
                     <select class="Input" name="secclass">
                         <option class="Select-option" value="" <? if ($_GET['secclass'] === '') {
                                                                     echo ' selected="selected"';
-                                                                } ?>><?= Lang::get('user', 'do_not_care') ?></option>
+                                                                } ?>><?= Lang::get('user.do_not_care') ?></option>
                         <? $Secondaries = array();
                         // Neither level nor ID is particularly useful when searching secondary classes, so let's do some
                         // kung-fu to sort them alphabetically.
@@ -659,10 +659,10 @@ View::show_header(Lang::get('user', 'user_search'), '', 'PageUserAdvancedSearch'
                 <td class="Form-label">Extra:</td>
                 <td class="Form-inputs">
                     <ul class="options_list nobullet">
-                        <li data-tooltip="<?= Lang::get('user', 'disabled_accounts_linked_by_ip_title') ?>">
+                        <li data-tooltip="<?= Lang::get('user.disabled_accounts_linked_by_ip_title') ?>">
                             <div class="Checkbox">
                                 <input class="Input" type="checkbox" name="disabled_ip" id="disabled_ip" />
-                                <label class="Checkbox-label" for="disabled_ip"><?= Lang::get('user', 'disabled_accounts_linked_by_ip') ?></label>
+                                <label class="Checkbox-label" for="disabled_ip"><?= Lang::get('user.disabled_accounts_linked_by_ip') ?></label>
                             </div>
                         </li>
                         <li>
@@ -670,7 +670,7 @@ View::show_header(Lang::get('user', 'user_search'), '', 'PageUserAdvancedSearch'
                                 <input class="Input" type="checkbox" name="ip_history" id="ip_history" <? if ($ip_history_checked) {
                                                                                                             echo ' checked="checked"';
                                                                                                         } ?> />
-                                <label class="Checkbox-label" data-tooltip="<?= Lang::get('user', 'disabled_accounts_linked_by_ip_must_also_be_checked') ?>" for="ip_history"> <?= Lang::get('user', 'ip_history') ?></label>
+                                <label class="Checkbox-label" data-tooltip="<?= Lang::get('user.disabled_accounts_linked_by_ip_must_also_be_checked') ?>" for="ip_history"> <?= Lang::get('user.ip_history') ?></label>
                             </div>
                         </li>
                         <li>
@@ -678,230 +678,230 @@ View::show_header(Lang::get('user', 'user_search'), '', 'PageUserAdvancedSearch'
                                 <input class="Input" type="checkbox" name="email_history" id="email_history" <? if ($email_history_checked) {
                                                                                                                     echo ' checked="checked"';
                                                                                                                 } ?> />
-                                <label class="Checkbox-label" data-tooltip="<?= Lang::get('user', 'also_search_the_email_addresses_the_member_used_in_the_past') ?>" for="email_history"><?= Lang::get('user', 'email_history') ?></label>
+                                <label class="Checkbox-label" data-tooltip="<?= Lang::get('user.also_search_the_email_addresses_the_member_used_in_the_past') ?>" for="email_history"><?= Lang::get('user.email_history') ?></label>
                             </div>
                         </li>
                     </ul>
                 </td>
-                <td class="Form-label"><?= Lang::get('user', 'ratio') ?>:</td>
+                <td class="Form-label"><?= Lang::get('user.ratio') ?>:</td>
                 <td class="Form-inputs">
                     <select class="Input" name="ratio">
                         <option class="Select-option" value="equal" <? if ($_GET['ratio'] === 'equal') {
                                                                         echo ' selected="selected"';
-                                                                    } ?>><?= Lang::get('user', 'equal') ?></option>
+                                                                    } ?>><?= Lang::get('user.equal') ?></option>
                         <option class="Select-option" value="above" <? if ($_GET['ratio'] === 'above') {
                                                                         echo ' selected="selected"';
-                                                                    } ?>><?= Lang::get('user', 'above') ?></option>
+                                                                    } ?>><?= Lang::get('user.above') ?></option>
                         <option class="Select-option" value="below" <? if ($_GET['ratio'] === 'below') {
                                                                         echo ' selected="selected"';
-                                                                    } ?>><?= Lang::get('user', 'below') ?></option>
+                                                                    } ?>><?= Lang::get('user.below') ?></option>
                         <option class="Select-option" value="between" <? if ($_GET['ratio'] === 'between') {
                                                                             echo ' selected="selected"';
-                                                                        } ?>><?= Lang::get('user', 'between') ?></option>
+                                                                        } ?>><?= Lang::get('user.between') ?></option>
                     </select>
                     <input class="Input" type="text" name="ratio1" size="6" value="<?= display_str($_GET['ratio1']) ?>" />
                     <input class="Input" type="text" name="ratio2" size="6" value="<?= display_str($_GET['ratio2']) ?>" />
                 </td>
-                <td class="Form-label"><?= Lang::get('user', 'donor') ?>:</td>
+                <td class="Form-label"><?= Lang::get('user.donor') ?>:</td>
                 <td class="Form-inputs">
                     <select class="Input" name="donor">
                         <option class="Select-option" value="" <? if ($_GET['donor'] === '') {
                                                                     echo ' selected="selected"';
-                                                                } ?>><?= Lang::get('user', 'do_not_care') ?></option>
+                                                                } ?>><?= Lang::get('user.do_not_care') ?></option>
                         <option class="Select-option" value="yes" <? if ($_GET['donor'] === 'yes') {
                                                                         echo ' selected="selected"';
-                                                                    } ?>><?= Lang::get('user', 'yes') ?></option>
+                                                                    } ?>><?= Lang::get('user.yes') ?></option>
                         <option class="Select-option" value="no" <? if ($_GET['donor'] === 'no') {
                                                                         echo ' selected="selected"';
-                                                                    } ?>><?= Lang::get('user', 'no') ?></option>
+                                                                    } ?>><?= Lang::get('user.no') ?></option>
                     </select>
                 </td>
             </tr>
 
             <tr class="Form-row">
-                <td class="Form-label"><?= Lang::get('user', 'disabled_invites') ?>:</td>
+                <td class="Form-label"><?= Lang::get('user.disabled_invites') ?>:</td>
                 <td class="Form-inputs">
                     <select class="Input" name="disabled_invites">
                         <option class="Select-option" value="" <? if ($_GET['disabled_invites'] === '') {
                                                                     echo ' selected="selected"';
-                                                                } ?>><?= Lang::get('user', 'do_not_care') ?></option>
+                                                                } ?>><?= Lang::get('user.do_not_care') ?></option>
                         <option class="Select-option" value="yes" <? if ($_GET['disabled_invites'] === 'yes') {
                                                                         echo ' selected="selected"';
-                                                                    } ?>><?= Lang::get('user', 'yes') ?></option>
+                                                                    } ?>><?= Lang::get('user.yes') ?></option>
                         <option class="Select-option" value="no" <? if ($_GET['disabled_invites'] === 'no') {
                                                                         echo ' selected="selected"';
-                                                                    } ?>><?= Lang::get('user', 'no') ?></option>
+                                                                    } ?>><?= Lang::get('user.no') ?></option>
                     </select>
                 </td>
-                <td class="Form-label" data-tooltip="<?= Lang::get('user', 'units_are_in_gibibytes') ?>"><?= Lang::get('user', 'uploaded') ?>:</td>
+                <td class="Form-label" data-tooltip="<?= Lang::get('user.units_are_in_gibibytes') ?>"><?= Lang::get('user.uploaded') ?>:</td>
                 <td class="Form-inputs">
                     <select class="Input" name="uploaded">
                         <option class="Select-option" value="equal" <? if ($_GET['uploaded'] === 'equal') {
                                                                         echo ' selected="selected"';
-                                                                    } ?>><?= Lang::get('user', 'equal') ?></option>
+                                                                    } ?>><?= Lang::get('user.equal') ?></option>
                         <option class="Select-option" value="above" <? if ($_GET['uploaded'] === 'above') {
                                                                         echo ' selected="selected"';
-                                                                    } ?>><?= Lang::get('user', 'above') ?></option>
+                                                                    } ?>><?= Lang::get('user.above') ?></option>
                         <option class="Select-option" value="below" <? if ($_GET['uploaded'] === 'below') {
                                                                         echo ' selected="selected"';
-                                                                    } ?>><?= Lang::get('user', 'below') ?></option>
+                                                                    } ?>><?= Lang::get('user.below') ?></option>
                         <option class="Select-option" value="between" <? if ($_GET['uploaded'] === 'between') {
                                                                             echo ' selected="selected"';
-                                                                        } ?>><?= Lang::get('user', 'between') ?></option>
+                                                                        } ?>><?= Lang::get('user.between') ?></option>
                         <option class="Select-option" value="buffer" <? if ($_GET['uploaded'] === 'buffer') {
                                                                             echo ' selected="selected"';
-                                                                        } ?>><?= Lang::get('user', 'buffer') ?></option>
+                                                                        } ?>><?= Lang::get('user.buffer') ?></option>
                     </select>
                     <input class="Input" type="text" name="uploaded1" size="6" value="<?= display_str($_GET['uploaded1']) ?>" />
                     <input class="Input" type="text" name="uploaded2" size="6" value="<?= display_str($_GET['uploaded2']) ?>" />
                 </td>
-                <td class="Form-label"><?= Lang::get('user', 'disabled_privilege') ?>:</td>
+                <td class="Form-label"><?= Lang::get('user.disabled_privilege') ?>:</td>
                 <td class="Form-inputs">
                     <select class="Input" name="disabled">
                         <option class="Select-option" value="" <? if ($_GET['disabled'] === '') {
                                                                     echo ' selected="selected"';
-                                                                } ?>><?= Lang::get('user', 'do_not_care') ?></option>
+                                                                } ?>><?= Lang::get('user.do_not_care') ?></option>
                         <option class="Select-option" value="DisableAnyone" <? if ($_GET['disabled'] === 'DisableAnyone') {
                                                                                 echo ' selected="selected"';
-                                                                            } ?>><?= Lang::get('user', 'anyone') ?></option>
+                                                                            } ?>><?= Lang::get('user.anyone') ?></option>
                         <option class="Select-option" value="DisablePosting" <? if ($_GET['disabled'] === 'DisablePosting') {
                                                                                     echo ' selected="selected"';
-                                                                                } ?>><?= Lang::get('user', 'posting') ?></option>
+                                                                                } ?>><?= Lang::get('user.posting') ?></option>
                         <option class="Select-option" value="DisableAvatar" <? if ($_GET['disabled'] === 'DisableAvatar') {
                                                                                 echo ' selected="selected"';
-                                                                            } ?>><?= Lang::get('user', 'avatar') ?></option>
+                                                                            } ?>><?= Lang::get('user.avatar') ?></option>
                         <option class="Select-option" value="DisableForums" <? if ($_GET['disabled'] === 'DisableForums') {
                                                                                 echo ' selected="selected"';
-                                                                            } ?>><?= Lang::get('user', 'forums') ?></option>
+                                                                            } ?>><?= Lang::get('user.forums') ?></option>
                         <option class="Select-option" value="DisableIRC" <? if ($_GET['disabled'] === 'DisableIRC') {
                                                                                 echo ' selected="selected"';
-                                                                            } ?>><?= Lang::get('user', 'irc') ?></option>
+                                                                            } ?>><?= Lang::get('user.irc') ?></option>
                         <option class="Select-option" value="DisablePM" <? if ($_GET['disabled'] === 'DisablePM') {
                                                                             echo ' selected="selected"';
-                                                                        } ?>><?= Lang::get('user', 'pm') ?></option>
+                                                                        } ?>><?= Lang::get('user.pm') ?></option>
                         <option class="Select-option" value="DisableLeech" <? if ($_GET['disabled'] === 'DisableLeech') {
                                                                                 echo ' selected="selected"';
-                                                                            } ?>><?= Lang::get('user', 'leech') ?></option>
+                                                                            } ?>><?= Lang::get('user.leech') ?></option>
                         <option class="Select-option" value="DisableRequests" <? if ($_GET['disabled'] === 'DisableRequests') {
                                                                                     echo ' selected="selected"';
-                                                                                } ?>><?= Lang::get('global', 'requests') ?></option>
+                                                                                } ?>><?= Lang::get('global.requests') ?></option>
                         <option class="Select-option" value="DisableUpload" <? if ($_GET['disabled'] === 'DisableUpload') {
                                                                                 echo ' selected="selected"';
-                                                                            } ?>><?= Lang::get('user', 'torrent_upload') ?></option>
+                                                                            } ?>><?= Lang::get('user.torrent_upload') ?></option>
                         <option class="Select-option" value="DisablePoints" <? if ($_GET['disabled'] === 'DisablePoints') {
                                                                                 echo ' selected="selected"';
-                                                                            } ?>><?= Lang::get('user', 'bonus_points') ?></option>
+                                                                            } ?>><?= Lang::get('user.bonus_points') ?></option>
                         <option class="Select-option" value="DisableTagging" <? if ($_GET['disabled'] === 'DisableTagging') {
                                                                                     echo ' selected="selected"';
-                                                                                } ?>><?= Lang::get('user', 'tagging') ?></option>
+                                                                                } ?>><?= Lang::get('user.tagging') ?></option>
                         <option class="Select-option" value="DisableWiki" <? if ($_GET['disabled'] === 'DisableWiki') {
                                                                                 echo ' selected="selected"';
-                                                                            } ?>><?= Lang::get('user', 'wiki') ?></option>
+                                                                            } ?>><?= Lang::get('user.wiki') ?></option>
                         <option class="Select-option" value="DisableInvites" <? if ($_GET['disabled'] === 'DisableInvites') {
                                                                                     echo ' selected="selected"';
-                                                                                } ?>><?= Lang::get('user', 'invites') ?></option>
+                                                                                } ?>><?= Lang::get('user.invites') ?></option>
                         <option class="Select-option" value="DisableCheckAll" <? if ($_GET['disabled'] === 'DisableCheckAll') {
                                                                                     echo ' selected="selected"';
-                                                                                } ?>><?= Lang::get('user', 'check_all_torrents') ?></option>
+                                                                                } ?>><?= Lang::get('user.check_all_torrents') ?></option>
                         <option class="Select-option" value="DisableCheckSelf" <? if ($_GET['disabled'] === 'DisableCheckSelf') {
                                                                                     echo ' selected="selected"';
-                                                                                } ?>><?= Lang::get('user', 'check_self_torrents') ?></option>
+                                                                                } ?>><?= Lang::get('user.check_self_torrents') ?></option>
                     </select>
                 </td>
             </tr>
 
             <tr class="Form-row">
-                <td class="Form-label"><?= Lang::get('user', 'number_of_invites') ?>:</td>
+                <td class="Form-label"><?= Lang::get('user.number_of_invites') ?>:</td>
                 <td class="Form-inputs">
                     <select class="Input" name="invites">
                         <option class="Select-option" value="equal" <? if ($_GET['invites'] === 'equal') {
                                                                         echo ' selected="selected"';
-                                                                    } ?>><?= Lang::get('user', 'equal') ?></option>
+                                                                    } ?>><?= Lang::get('user.equal') ?></option>
                         <option class="Select-option" value="above" <? if ($_GET['invites'] === 'above') {
                                                                         echo ' selected="selected"';
-                                                                    } ?>><?= Lang::get('user', 'above') ?></option>
+                                                                    } ?>><?= Lang::get('user.above') ?></option>
                         <option class="Select-option" value="below" <? if ($_GET['invites'] === 'below') {
                                                                         echo ' selected="selected"';
-                                                                    } ?>><?= Lang::get('user', 'below') ?></option>
+                                                                    } ?>><?= Lang::get('user.below') ?></option>
                         <option class="Select-option" value="between" <? if ($_GET['invites'] === 'between') {
                                                                             echo ' selected="selected"';
-                                                                        } ?>><?= Lang::get('user', 'between') ?></option>
+                                                                        } ?>><?= Lang::get('user.between') ?></option>
                     </select>
                     <input class="Input" type="text" name="invites1" size="6" value="<?= display_str($_GET['invites1']) ?>" />
                     <input class="Input" type="text" name="invites2" size="6" value="<?= display_str($_GET['invites2']) ?>" />
                 </td>
-                <td class="Form-label" data-tooltip="<?= Lang::get('user', 'units_are_in_gibibytes') ?>"><?= Lang::get('user', 'downloaded') ?>:</td>
+                <td class="Form-label" data-tooltip="<?= Lang::get('user.units_are_in_gibibytes') ?>"><?= Lang::get('user.downloaded') ?>:</td>
                 <td class="Form-inputs">
                     <select class="Input" name="downloaded">
                         <option class="Select-option" value="equal" <? if ($_GET['downloaded'] === 'equal') {
                                                                         echo ' selected="selected"';
-                                                                    } ?>><?= Lang::get('user', 'equal') ?></option>
+                                                                    } ?>><?= Lang::get('user.equal') ?></option>
                         <option class="Select-option" value="above" <? if ($_GET['downloaded'] === 'above') {
                                                                         echo ' selected="selected"';
-                                                                    } ?>><?= Lang::get('user', 'above') ?></option>
+                                                                    } ?>><?= Lang::get('user.above') ?></option>
                         <option class="Select-option" value="below" <? if ($_GET['downloaded'] === 'below') {
                                                                         echo ' selected="selected"';
-                                                                    } ?>><?= Lang::get('user', 'below') ?></option>
+                                                                    } ?>><?= Lang::get('user.below') ?></option>
                         <option class="Select-option" value="between" <? if ($_GET['downloaded'] === 'between') {
                                                                             echo ' selected="selected"';
-                                                                        } ?>><?= Lang::get('user', 'between') ?></option>
+                                                                        } ?>><?= Lang::get('user.between') ?></option>
                     </select>
                     <input class="Input" type="text" name="downloaded1" size="6" value="<?= display_str($_GET['downloaded1']) ?>" />
                     <input class="Input" type="text" name="downloaded2" size="6" value="<?= display_str($_GET['downloaded2']) ?>" />
                 </td>
-                <td class="Form-label"><?= Lang::get('user', 'warned') ?>:</td>
+                <td class="Form-label"><?= Lang::get('user.warned') ?>:</td>
                 <td class="Form-inputs">
                     <select class="Input" name="warned">
                         <option class="Select-option" value="" <? if ($_GET['warned'] === '') {
                                                                     echo ' selected="selected"';
-                                                                } ?>><?= Lang::get('user', 'do_not_care') ?></option>
+                                                                } ?>><?= Lang::get('user.do_not_care') ?></option>
                         <option class="Select-option" value="yes" <? if ($_GET['warned'] === 'yes') {
                                                                         echo ' selected="selected"';
-                                                                    } ?>><?= Lang::get('user', 'yes') ?></option>
+                                                                    } ?>><?= Lang::get('user.yes') ?></option>
                         <option class="Select-option" value="no" <? if ($_GET['warned'] === 'no') {
                                                                         echo ' selected="selected"';
-                                                                    } ?>><?= Lang::get('user', 'no') ?></option>
+                                                                    } ?>><?= Lang::get('user.no') ?></option>
                     </select>
                 </td>
             </tr>
 
             <tr class="Form-row">
-                <td class="Form-label"><?= Lang::get('user', 'number_of_invitees') ?>:</td>
+                <td class="Form-label"><?= Lang::get('user.number_of_invitees') ?>:</td>
                 <td class="Form-inputs">
                     <select class="Input" name="invitees">
-                        <option class="Select-option" value="equal" <?= isset($_GET['invitees']) && $_GET['invitees'] == 'equal' ? 'selected' : '' ?>><?= Lang::get('user', 'equal') ?></option>
-                        <option class="Select-option" value="above" <?= isset($_GET['invitees']) && $_GET['invitees'] == 'above' ? 'selected' : '' ?>><?= Lang::get('user', 'above') ?></option>
-                        <option class="Select-option" value="below" <?= isset($_GET['invitees']) && $_GET['invitees'] == 'below' ? 'selected' : '' ?>><?= Lang::get('user', 'below') ?></option>
-                        <option class="Select-option" value="between" <?= isset($_GET['invitees']) && $_GET['invitees'] == 'between' ? 'selected' : '' ?>><?= Lang::get('user', 'between') ?></option>
-                        <option class="Select-option" value="off" <?= !isset($_GET['invitees']) || $_GET['invitees'] == 'off' ? 'selected' : '' ?>><?= Lang::get('user', 'off') ?></option>
+                        <option class="Select-option" value="equal" <?= isset($_GET['invitees']) && $_GET['invitees'] == 'equal' ? 'selected' : '' ?>><?= Lang::get('user.equal') ?></option>
+                        <option class="Select-option" value="above" <?= isset($_GET['invitees']) && $_GET['invitees'] == 'above' ? 'selected' : '' ?>><?= Lang::get('user.above') ?></option>
+                        <option class="Select-option" value="below" <?= isset($_GET['invitees']) && $_GET['invitees'] == 'below' ? 'selected' : '' ?>><?= Lang::get('user.below') ?></option>
+                        <option class="Select-option" value="between" <?= isset($_GET['invitees']) && $_GET['invitees'] == 'between' ? 'selected' : '' ?>><?= Lang::get('user.between') ?></option>
+                        <option class="Select-option" value="off" <?= !isset($_GET['invitees']) || $_GET['invitees'] == 'off' ? 'selected' : '' ?>><?= Lang::get('user.off') ?></option>
                     </select>
                     <input class="Input" type="text" name="invitees1" size="6" value="<?= display_str($_GET['invitees1']) ?>" />
                     <input class="Input" type="text" name="invitees2" size="6" value="<?= display_str($_GET['invitees2']) ?>" />
                 </td>
-                <td class="Form-label"><?= Lang::get('global', 'snatched') ?>:</td>
+                <td class="Form-label"><?= Lang::get('global.snatched') ?>:</td>
                 <td class="Form-inputs">
                     <select class="Input" name="snatched">
                         <option class="Select-option" value="equal" <? if (isset($_GET['snatched']) && $_GET['snatched'] === 'equal') {
                                                                         echo ' selected="selected"';
-                                                                    } ?>><?= Lang::get('user', 'equal') ?></option>
+                                                                    } ?>><?= Lang::get('user.equal') ?></option>
                         <option class="Select-option" value="above" <? if (isset($_GET['snatched']) && $_GET['snatched'] === 'above') {
                                                                         echo ' selected="selected"';
-                                                                    } ?>><?= Lang::get('user', 'above') ?></option>
+                                                                    } ?>><?= Lang::get('user.above') ?></option>
                         <option class="Select-option" value="below" <? if (isset($_GET['snatched']) && $_GET['snatched'] === 'below') {
                                                                         echo ' selected="selected"';
-                                                                    } ?>><?= Lang::get('user', 'below') ?></option>
+                                                                    } ?>><?= Lang::get('user.below') ?></option>
                         <option class="Select-option" value="between" <? if (isset($_GET['snatched']) && $_GET['snatched'] === 'between') {
                                                                             echo ' selected="selected"';
-                                                                        } ?>><?= Lang::get('user', 'between') ?></option>
+                                                                        } ?>><?= Lang::get('user.between') ?></option>
                         <option class="Select-option" value="off" <? if (!isset($_GET['snatched']) || $_GET['snatched'] === 'off') {
                                                                         echo ' selected="selected"';
-                                                                    } ?>><?= Lang::get('user', 'off') ?></option>
+                                                                    } ?>><?= Lang::get('user.off') ?></option>
                     </select>
                     <input class="Input" type="text" name="snatched1" size="6" value="<?= display_str($_GET['snatched1']) ?>" />
                     <input class="Input" type="text" name="snatched2" size="6" value="<?= display_str($_GET['snatched2']) ?>" />
                 </td>
                 <? if (check_perms('users_mod')) { ?>
-                    <td class="Form-label"><?= Lang::get('user', 'staff_notes') ?>:</td>
+                    <td class="Form-label"><?= Lang::get('user.staff_notes') ?>:</td>
                     <td class="Form-inputs">
                         <input class="Input" type="text" name="comment" size="20" value="<?= display_str($_GET['comment']) ?>" />
                     </td>
@@ -913,11 +913,11 @@ View::show_header(Lang::get('user', 'user_search'), '', 'PageUserAdvancedSearch'
             </tr>
 
             <tr class="Form-row">
-                <td class="Form-label"><?= Lang::get('user', 'passkey') ?>:</td>
+                <td class="Form-label"><?= Lang::get('user.passkey') ?>:</td>
                 <td class="Form-inputs">
                     <input class="Input" type="text" name="passkey" size="20" value="<?= display_str($_GET['passkey']) ?>" />
                 </td>
-                <td class="Form-label" data-tooltip="<?= Lang::get('user', 'supports_partial_url_matching') ?>"><?= Lang::get('user', 'avatar_url') ?>:</td>
+                <td class="Form-label" data-tooltip="<?= Lang::get('user.supports_partial_url_matching') ?>"><?= Lang::get('user.avatar_url') ?>:</td>
                 <td class="Form-inputs">
                     <input class="Input" type="text" name="avatar" size="20" value="<?= display_str($_GET['avatar']) ?>" />
                 </td>
@@ -926,35 +926,35 @@ View::show_header(Lang::get('user', 'user_search'), '', 'PageUserAdvancedSearch'
             </tr>
 
             <tr class="Form-row">
-                <td class="Form-label"><?= Lang::get('user', 'tracker_ip') ?>:</td>
+                <td class="Form-label"><?= Lang::get('user.tracker_ip') ?>:</td>
                 <td class="Form-inputs">
                     <input class="Input" type="text" name="tracker_ip" size="20" value="<?= display_str($_GET['tracker_ip']) ?>" />
                 </td>
-                <td class="Form-label"><?= Lang::get('user', 'stylesheet') ?>:</td>
+                <td class="Form-label"><?= Lang::get('user.stylesheet') ?>:</td>
                 <td class="Form-inputs">
                     <select class="Input" name="stylesheet" id="stylesheet">
-                        <option class="Select-option" value=""><?= Lang::get('user', 'do_not_care') ?></option>
+                        <option class="Select-option" value=""><?= Lang::get('user.do_not_care') ?></option>
                         <? foreach ($Stylesheets as $Style) { ?>
                             <option class="Select-option" value="<?= $Style['ID'] ?>" <? Format::selected('stylesheet', $Style['ID']) ?>><?= $Style['ProperName'] ?></option>
                         <?                  } ?>
                     </select>
                 </td>
-                <td class="Form-label" data-tooltip="<?= Lang::get('user', 'country_code_title') ?>"><?= Lang::get('user', 'country_code') ?>:</td>
+                <td class="Form-label" data-tooltip="<?= Lang::get('user.country_code_title') ?>"><?= Lang::get('user.country_code') ?>:</td>
                 <td class="Form-inputs">
                     <select class="Input" name="cc_op">
                         <option class="Select-option" value="equal" <? if ($_GET['cc_op'] === 'equal') {
                                                                         echo ' selected="selected"';
-                                                                    } ?>><?= Lang::get('user', 'equals') ?></option>
+                                                                    } ?>><?= Lang::get('user.equals') ?></option>
                         <option class="Select-option" value="not_equal" <? if ($_GET['cc_op'] === 'not_equal') {
                                                                             echo ' selected="selected"';
-                                                                        } ?>><?= Lang::get('user', 'not_equal') ?></option>
+                                                                        } ?>><?= Lang::get('user.not_equal') ?></option>
                     </select>
                     <input class="Input" type="text" name="cc" size="2" value="<?= display_str($_GET['cc']) ?>" />
                 </td>
             </tr>
 
             <tr class="Form-row">
-                <td class="Form-label"><?= Lang::get('user', 'search_type') ?>:</td>
+                <td class="Form-label"><?= Lang::get('user.search_type') ?>:</td>
                 <td class="Form-inputs">
                     <ul class="options_list nobullet">
                         <li>
@@ -962,7 +962,7 @@ View::show_header(Lang::get('user', 'user_search'), '', 'PageUserAdvancedSearch'
                                 <input class="Input" type="radio" name="matchtype" id="strict_match_type" value="strict" <? if ($_GET['matchtype'] == 'strict' || !$_GET['matchtype']) {
                                                                                                                                 echo ' checked="checked"';
                                                                                                                             } ?> />
-                                <label class="Radio-label" data-tooltip="<?= Lang::get('user', 'search_type_strict_title') ?>" for="strict_match_type"><?= Lang::get('user', 'search_type_strict') ?></label>
+                                <label class="Radio-label" data-tooltip="<?= Lang::get('user.search_type_strict_title') ?>" for="strict_match_type"><?= Lang::get('user.search_type_strict') ?></label>
                             </div>
                         </li>
                         <li>
@@ -970,7 +970,7 @@ View::show_header(Lang::get('user', 'user_search'), '', 'PageUserAdvancedSearch'
                                 <input class="Input" type="radio" name="matchtype" id="fuzzy_match_type" value="fuzzy" <? if ($_GET['matchtype'] == 'fuzzy' || !$_GET['matchtype']) {
                                                                                                                             echo ' checked="checked"';
                                                                                                                         } ?> />
-                                <label class="Radio-label" data-tooltip="<?= Lang::get('user', 'search_type_fuzzy_title') ?>" for="fuzzy_match_type"><?= Lang::get('user', 'search_type_fuzzy') ?></label>
+                                <label class="Radio-label" data-tooltip="<?= Lang::get('user.search_type_fuzzy_title') ?>" for="fuzzy_match_type"><?= Lang::get('user.search_type_fuzzy') ?></label>
                             </div>
                         </li>
                         <li>
@@ -978,12 +978,12 @@ View::show_header(Lang::get('user', 'user_search'), '', 'PageUserAdvancedSearch'
                                 <input class="Input" type="radio" name="matchtype" id="regex_match_type" value="regex" <? if ($_GET['matchtype'] == 'regex') {
                                                                                                                             echo ' checked="checked"';
                                                                                                                         } ?> />
-                                <label class="Radio-label" data-tooltip="<?= Lang::get('user', 'search_type_regex_title') ?>" for="regex_match_type"><?= Lang::get('user', 'search_type_regex') ?></label>
+                                <label class="Radio-label" data-tooltip="<?= Lang::get('user.search_type_regex_title') ?>" for="regex_match_type"><?= Lang::get('user.search_type_regex') ?></label>
                             </div>
                         </li>
                     </ul>
                 </td>
-                <td class="Form-label"><?= Lang::get('user', 'order') ?>:</td>
+                <td class="Form-label"><?= Lang::get('user.order') ?>:</td>
                 <td class="Form-inputs">
                     <select class="Input" name="order">
                         <?
@@ -1001,18 +1001,18 @@ View::show_header(Lang::get('user', 'user_search'), '', 'PageUserAdvancedSearch'
                         <?                      } ?>
                     </select>
                 </td>
-                <td class="Form-label"><?= Lang::get('user', 'number_of_emails') ?>:</td>
+                <td class="Form-label"><?= Lang::get('user.number_of_emails') ?>:</td>
                 <td class="Form-inputs">
                     <select class="Input" name="emails_opt">
                         <option class="Select-option" value="equal" <? if ($_GET['emails_opt'] === 'equal') {
                                                                         echo ' selected="selected"';
-                                                                    } ?>><?= Lang::get('user', 'equal') ?></option>
+                                                                    } ?>><?= Lang::get('user.equal') ?></option>
                         <option class="Select-option" value="above" <? if ($_GET['emails_opt'] === 'above') {
                                                                         echo ' selected="selected"';
-                                                                    } ?>><?= Lang::get('user', 'above') ?></option>
+                                                                    } ?>><?= Lang::get('user.above') ?></option>
                         <option class="Select-option" value="below" <? if ($_GET['emails_opt'] === 'below') {
                                                                         echo ' selected="selected"';
-                                                                    } ?>><?= Lang::get('user', 'below') ?></option>
+                                                                    } ?>><?= Lang::get('user.below') ?></option>
                     </select>
                     <input class="Input" type="text" name="email_cnt" size="6" value="<?= display_str($_GET['email_cnt']) ?>" />
                 </td>
@@ -1043,23 +1043,23 @@ if ($RunQuery) {
     ?>
 </div>
 <div class="BoxBody center" id="user_search_results_box">
-    <h2><?= number_format($NumResults) ?><?= Lang::get('user', 'space_results') ?></h2>
+    <h2><?= number_format($NumResults) ?><?= Lang::get('user.space_results') ?></h2>
     <div class="TableContainer">
         <table class="TableUserSearch Table">
             <tr class="Table-rowHeader">
-                <td class="Table-cell"><?= Lang::get('user', 'username') ?></td>
-                <td class="Table-cell"><?= Lang::get('user', 'ratio') ?></td>
-                <td class="Table-cell"><?= Lang::get('user', 'ip_address') ?></td>
-                <td class="Table-cell"><?= Lang::get('user', 'email') ?></td>
-                <td class="Table-cell"><?= Lang::get('user', 'joined') ?></td>
-                <td class="Table-cell"><?= Lang::get('user', 'last_seen') ?></td>
-                <td class="Table-cell"><?= Lang::get('user', 'uploaded') ?></td>
-                <td class="Table-cell"><?= Lang::get('user', 'downloaded') ?></td>
-                <td class="Table-cell"><?= Lang::get('user', 'downloads') ?></td>
-                <td class="Table-cell"><?= Lang::get('global', 'snatched') ?></td>
-                <td class="Table-cell"><?= Lang::get('user', 'invites') ?></td>
+                <td class="Table-cell"><?= Lang::get('user.username') ?></td>
+                <td class="Table-cell"><?= Lang::get('user.ratio') ?></td>
+                <td class="Table-cell"><?= Lang::get('user.ip_address') ?></td>
+                <td class="Table-cell"><?= Lang::get('user.email') ?></td>
+                <td class="Table-cell"><?= Lang::get('user.joined') ?></td>
+                <td class="Table-cell"><?= Lang::get('user.last_seen') ?></td>
+                <td class="Table-cell"><?= Lang::get('user.uploaded') ?></td>
+                <td class="Table-cell"><?= Lang::get('user.downloaded') ?></td>
+                <td class="Table-cell"><?= Lang::get('user.downloads') ?></td>
+                <td class="Table-cell"><?= Lang::get('global.snatched') ?></td>
+                <td class="Table-cell"><?= Lang::get('user.invites') ?></td>
                 <? if (isset($_GET['invitees']) && $_GET['invitees'] != 'off') { ?>
-                    <td class="Table-cell"><?= Lang::get('user', 'invitees') ?></td>
+                    <td class="Table-cell"><?= Lang::get('user.invitees') ?></td>
                 <?      } ?>
             </tr>
             <?

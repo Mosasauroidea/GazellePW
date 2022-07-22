@@ -1,5 +1,5 @@
 <?
-View::show_header(Lang::get('rules', 'tags_title'), '', 'PageRuleTag');
+View::show_header(Lang::get('rules.tags_title'), '', 'PageRuleTag');
 ?>
 
 <div class="LayoutBody">

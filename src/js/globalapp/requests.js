@@ -37,19 +37,10 @@ globalapp.requestVote = function requestVote(amount, requestid) {
   }
 
   ajax.get(
-    'requests.php?action=takevote&id=' +
-      requestid +
-      '&auth=' +
-      authkey +
-      '&amount=' +
-      amount,
+    'requests.php?action=takevote&id=' + requestid + '&auth=' + authkey + '&amount=' + amount,
     function (response) {
       if (response == 'bankrupt') {
-        Snackbar.error(
-          'You do not have sufficient upload credit to add ' +
-            get_size(amount) +
-            ' to this request'
-        )
+        Snackbar.error('You do not have sufficient upload credit to add ' + get_size(amount) + ' to this request')
         return
       } else if (response == 'dupesuccess') {
         //No increment
@@ -72,9 +63,7 @@ globalapp.requestVote = function requestVote(amount, requestid) {
               ' bounty, has been added'
           )
         } else {
-          Snackbar.notify(
-            'Your vote of ' + get_size(amount) + ' has been added'
-          )
+          Snackbar.notify('Your vote of ' + get_size(amount) + ' has been added')
         }
         $('#button').raw().disabled = true
       } else {
@@ -85,51 +74,42 @@ globalapp.requestVote = function requestVote(amount, requestid) {
 }
 
 globalapp.requestCalculate = function requestCalculate() {
-  const mul =
-    $('#unit').raw().options[$('#unit').raw().selectedIndex].value == 'mb'
-      ? 1024 * 1024
-      : 1024 * 1024 * 1024
+  const mul = $('#unit').raw().options[$('#unit').raw().selectedIndex].value == 'mb' ? 1024 * 1024 : 1024 * 1024 * 1024
   const amt = Math.floor($('#amount_box').raw().value * mul)
   if (amt > $('#current_uploaded').raw().value) {
     $('#new_uploaded').raw().innerHTML = "You can't afford that request!"
     $('#new_bounty').raw().innerHTML = '0.00 MB'
-    $('#bounty_after_tax').raw().innerHTML = '0.00 MB'
+    if ($('#bounty_after_tax').raw()) {
+      $('#bounty_after_tax').raw().innerHTML = '0.00 MB'
+    }
     $('#button').raw().disabled = true
   } else if (
     isNaN($('#amount_box').raw().value) ||
-    (window.location.search.indexOf('action=new') != -1 &&
-      $('#amount_box').raw().value * mul < 100 * 1024 * 1024) ||
-    (window.location.search.indexOf('action=view') != -1 &&
-      $('#amount_box').raw().value * mul < minimumVote)
+    (window.location.search.indexOf('action=new') != -1 && $('#amount_box').raw().value * mul < 100 * 1024 * 1024) ||
+    (window.location.search.indexOf('action=view') != -1 && $('#amount_box').raw().value * mul < minimumVote)
   ) {
-    $('#new_uploaded').raw().innerHTML = get_size(
-      $('#current_uploaded').raw().value
-    )
+    $('#new_uploaded').raw().innerHTML = get_size($('#current_uploaded').raw().value)
     $('#new_bounty').raw().innerHTML = '0.00 MB'
-    $('#bounty_after_tax').raw().innerHTML = '0.00 MB'
+    if ($('#bounty_after_tax').raw()) {
+      $('#bounty_after_tax').raw().innerHTML = '0.00 MB'
+    }
     $('#button').raw().disabled = true
   } else {
     $('#button').raw().disabled = false
     $('#amount').raw().value = amt
-    $('#new_uploaded').raw().innerHTML = get_size(
-      $('#current_uploaded').raw().value - amt
-    )
+    $('#new_uploaded').raw().innerHTML = get_size($('#current_uploaded').raw().value - amt)
     $('#new_ratio').raw().innerHTML = ratio(
       $('#current_uploaded').raw().value - amt,
       $('#current_downloaded').raw().value
     )
-    $('#new_bounty').raw().innerHTML = get_size(
-      mul * $('#amount_box').raw().value
-    )
-    $('#bounty_after_tax').raw().innerHTML = get_size(
-      mul * 0.9 * $('#amount_box').raw().value
-    )
+    $('#new_bounty').raw().innerHTML = get_size(mul * $('#amount_box').raw().value)
+    if ($('#bounty_after_tax').raw()) {
+      $('#bounty_after_tax').raw().innerHTML = get_size(mul * 0.9 * $('#amount_box').raw().value)
+    }
   }
 }
 
-globalapp.reqeustAddArtistField = function requestAddArtistField(
-  movie = false
-) {
+globalapp.requestAddArtistField = function requestAddArtistField(movie = false) {
   var ArtistIDField = document.createElement('input')
   ArtistIDField.type = 'hidden'
   ArtistIDField.id = 'artist_id_' + ArtistCount
@@ -155,10 +135,7 @@ globalapp.reqeustAddArtistField = function requestAddArtistField(
   ImportanceField.options[1] = new Option(lang.get('common.writer'), '2')
   ImportanceField.options[2] = new Option(lang.get('common.producer'), '3')
   ImportanceField.options[3] = new Option(lang.get('common.composer'), '4')
-  ImportanceField.options[4] = new Option(
-    lang.get('common.cinematographer'),
-    '5'
-  )
+  ImportanceField.options[4] = new Option(lang.get('common.cinematographer'), '5')
   ImportanceField.options[5] = new Option(lang.get('common.actor'), '6')
 
   var x = $('#artistfields').raw()
@@ -170,10 +147,7 @@ globalapp.reqeustAddArtistField = function requestAddArtistField(
   div.appendChild(ImportanceField)
   $('#artistfields .show-more').before(div)
 
-  if (
-    $('#artist_0').data('gazelle-autocomplete') ||
-    $('#artist').data('gazelle-autocomplete')
-  ) {
+  if ($('#artist_0').data('gazelle-autocomplete') || $('#artist').data('gazelle-autocomplete')) {
     $(ArtistField).live('focus', function () {
       $(ArtistField).autocomplete({
         serviceUrl: 'artist.php?action=autocomplete',
@@ -193,8 +167,7 @@ globalapp.requestRemoveArtistField = function requestRemoveArtistField() {
 }
 
 globalapp.requestCategories = function requestCategories() {
-  var cat =
-    $('#categories').raw().options[$('#categories').raw().selectedIndex].value
+  var cat = $('#categories').raw().options[$('#categories').raw().selectedIndex].value
   if (cat == 'Movie') {
     $('#artist_tr').gshow()
     $('#releasetypes_tr').gshow()
@@ -204,32 +177,27 @@ globalapp.requestCategories = function requestCategories() {
 
 globalapp.requestAddTag = function requestAddTag() {
   if ($('#tags').raw().value == '') {
-    $('#tags').raw().value =
-      $('#genre_tags').raw().options[$('#genre_tags').raw().selectedIndex].value
-  } else if (
-    $('#genre_tags').raw().options[$('#genre_tags').raw().selectedIndex]
-      .value == '---'
-  ) {
+    $('#tags').raw().value = $('#genre_tags').raw().options[$('#genre_tags').raw().selectedIndex].value
+  } else if ($('#genre_tags').raw().options[$('#genre_tags').raw().selectedIndex].value == '---') {
   } else {
     $('#tags').raw().value =
-      $('#tags').raw().value +
-      ', ' +
-      $('#genre_tags').raw().options[$('#genre_tags').raw().selectedIndex].value
+      $('#tags').raw().value + ', ' + $('#genre_tags').raw().options[$('#genre_tags').raw().selectedIndex].value
   }
 }
 
 globalapp.requestToggle = function reqeustToggle(id, disable) {
   var arr = document.getElementsByName(id + '[]')
   var master = $('#toggle_' + id).raw().checked
-  for (var x in arr) {
-    arr[x].checked = master
+  for (const element of arr) {
+    element.checked = master
     if (disable == 1) {
-      arr[x].disabled = master
+      element.disabled = master
     }
   }
 }
 
-globalapp.requestMovieAutofill = function requestMovieAutofill() {
+globalapp.requestMovieAutofill = function requestMovieAutofill(event) {
+  const target = event.currentTarget
   var imdb = $('#imdb').val().match(/tt\d+/)
   if (imdb) {
     imdb = imdb[0]
@@ -237,6 +205,7 @@ globalapp.requestMovieAutofill = function requestMovieAutofill() {
     return
   }
 
+  globalapp.buttonSetLoading(target, true)
   $.ajax({
     url: 'upload.php',
     data: {
@@ -244,7 +213,12 @@ globalapp.requestMovieAutofill = function requestMovieAutofill() {
       imdbid: imdb,
     },
     type: 'GET',
+    error: (error) => {
+      globalapp.buttonSetLoading(target, false)
+      console.error(error)
+    },
     success: (data) => {
+      globalapp.buttonSetLoading(target, false)
       const errorMessage = $('.imdb.Form-errorMessage')
       if (data.code) {
         globalapp.setFormError(
@@ -288,7 +262,7 @@ globalapp.requestMovieAutofill = function requestMovieAutofill() {
         })
       }
       for (var i = 0; i < artists.length; i++) {
-        var artistid, importanceid, artistimdbid
+        var artistid, importanceid, artistimdbid, artist_cname
         if (i) {
           artistid = '#artist_' + i
           importanceid = '#importance_' + i

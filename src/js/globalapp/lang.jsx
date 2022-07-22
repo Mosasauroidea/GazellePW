@@ -27,7 +27,7 @@ import * as components from '#/js/app/components'
 
 const LOCALES = { en, chs: zhHans }
 
-const DEFULAT_LANG = 'en'
+const DEFAULT_LANG = 'en'
 
 const COMPONENTS = {
   en: {

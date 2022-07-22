@@ -30,18 +30,18 @@ if (isset($_POST['confirm'])) {
     if ($Bonus->purchaseTitle($ID, $Label, $_POST['title'], G::$LoggedUser['EffectiveClass'])) {
         header('Location: bonus.php?complete=' . urlencode($Label));
     } else {
-        error(Lang::get('bonus', 'you_cannot_afford_this_item'));
+        error(Lang::get('bonus.you_cannot_afford_this_item'));
     }
 }
 
-View::show_header(Lang::get('bonus', 'bonus_points_title'), 'bonus', 'PageBonusTitle');
+View::show_header(Lang::get('bonus.bonus_points_title'), 'bonus', 'PageBonusTitle');
 ?>
 <div class="LayoutBody">
     <div class="TableContainer">
         <table id="custom-title-setting">
             <thead>
                 <tr>
-                    <td><?= Lang::get('bonus', 'custom_title') ?>, <?= ($BBCode === 'true') ? Lang::get('bonus', 'custom_title') : Lang::get('bonus', 'no_bbcode_allowed') ?> - <?= number_format($Price) ?> <?= Lang::get('bonus', 'custom_title') ?></td>
+                    <td><?= Lang::get('bonus.custom_title') ?>, <?= ($BBCode === 'true') ? Lang::get('bonus.custom_title') : Lang::get('bonus.no_bbcode_allowed') ?> - <?= number_format($Price) ?> <?= Lang::get('bonus.custom_title') ?></td>
                 </tr>
             </thead>
             <tbody>
@@ -50,8 +50,8 @@ View::show_header(Lang::get('bonus', 'bonus_points_title'), 'bonus', 'PageBonusT
                         <form action="bonus.php?action=purchase&label=<?= $Label ?>" method="post">
                             <input type="hidden" name="auth" value="<?= G::$LoggedUser['AuthKey'] ?>" />
                             <input type="hidden" name="confirm" value="true" />
-                            <input class="Input" type="text" id="title" name="title" placeholder="<?= Lang::get('bonus', 'custom_title') ?>" /> <br />
-                            <input class="Button" type="submit" onclick="ConfirmPurchase(event, '<?= $Item['Title'] ?>')" value="<?= Lang::get('global', 'submit') ?>" />&nbsp;
+                            <input class="Input" type="text" id="title" name="title" placeholder="<?= Lang::get('bonus.custom_title') ?>" /> <br />
+                            <input class="Button" type="submit" onclick="ConfirmPurchase(event, '<?= $Item['Title'] ?>')" value="<?= Lang::get('global.submit') ?>" />&nbsp;
                             <input class="Button" type="button" onclick="PreviewTitle(<?= $BBCode ?>);" value="Preview" />
                             <div id="preview" class="Username-customTitle"></div>
                         </form>

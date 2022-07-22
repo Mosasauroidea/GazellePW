@@ -1,5 +1,5 @@
 <?
-View::show_header(Lang::get('rules', 'ratio_title'), '', 'PageRuleRatio');
+View::show_header(Lang::get('rules.ratio_title'), '', 'PageRuleRatio');
 ?>
 
 <div class="LayoutBody">

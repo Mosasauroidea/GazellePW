@@ -19,7 +19,7 @@ list($Page, $Limit) = Format::page_limit($PerPage);
 $UserInfo = Users::user_info($UserID);
 $Username = $UserInfo['Username'];
 
-View::show_header(Lang::get('userhistory', 'threads_started_by_before') . "$Username" . Lang::get('userhistory', 'threads_started_by_after'), 'subscriptions,comments,bbcode', 'PageUserHistoryTopic');
+View::show_header(Lang::get('userhistory.threads_started_by_before') . "$Username" . Lang::get('userhistory.threads_started_by_after'), 'subscriptions,comments,bbcode', 'PageUserHistoryTopic');
 
 $QueryID = $DB->prepared_query("
 SELECT SQL_CALC_FOUND_ROWS
@@ -43,13 +43,13 @@ $DB->set_query_id($QueryID);
 ?>
 <div class="LayoutBody">
     <div class="BodyHeader">
-        <h2 class="BodyHeader-nav"><?= Lang::get('userhistory', 'threads_started_by_before') ?><a href="user.php?id=<?= $UserID ?>"><?= $Username ?></a><?= Lang::get('userhistory', 'threads_started_by_after') ?></h2>
+        <h2 class="BodyHeader-nav"><?= Lang::get('userhistory.threads_started_by_before') ?><a href="user.php?id=<?= $UserID ?>"><?= $Username ?></a><?= Lang::get('userhistory.threads_started_by_after') ?></h2>
     </div>
     <?
     if (empty($Results)) {
     ?>
         <div class="center">
-            <?= Lang::get('userhistory', 'no_topics') ?>
+            <?= Lang::get('userhistory.no_topics') ?>
         </div>
     <?
     } else {
@@ -64,16 +64,16 @@ $DB->set_query_id($QueryID);
             <table class="TableForum Table">
                 <tr class="TableForum-row Table-rowHeader">
                     <td class="TableForum-cellForumName Table-cell">
-                        <?= Lang::get('userhistory', 'forum') ?>
+                        <?= Lang::get('userhistory.forum') ?>
                     </td>
                     <td class="TableForum-cellPost Table-cell">
-                        <?= Lang::get('userhistory', 'topic') ?>
+                        <?= Lang::get('userhistory.topic') ?>
                     </td>
                     <td class="TableForum-cellCreatedAt TableForum-cellTime Table-cell">
-                        <?= Lang::get('userhistory', 'topic_creation_time') ?>
+                        <?= Lang::get('userhistory.topic_creation_time') ?>
                     </td>
                     <td class="TableForum-cellModifiedAt TableForum-cellTime Table-cell">
-                        <?= Lang::get('userhistory', 'last_post_time') ?>
+                        <?= Lang::get('userhistory.last_post_time') ?>
                     </td>
                 </tr>
                 <?

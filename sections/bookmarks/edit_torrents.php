@@ -22,13 +22,13 @@ if (!empty($_GET['userid'])) {
 // Require the table class
 // require_once CONFIG['SERVER_ROOT'] . '/classes/mass_user_torrents_table_view.class.php';
 
-View::show_header(Lang::get('bookmarks', 'organize_bookmarks'), 'browse,jquery-ui,jquery.tablesorter,sort', 'PageBookmarkEditTorrents');
+View::show_header(Lang::get('bookmarks.organize_bookmarks'), 'browse,jquery-ui,jquery.tablesorter,sort', 'PageBookmarkEditTorrents');
 
 $EditType = isset($_GET['type']) ? $_GET['type'] : 'torrents';
 
 list(, $CollageDataList, $TorrentList) = Users::get_bookmarks($UserID); // TODO: $TorrentList might not have the correct order, use the $GroupIDs instead
 
-$TT = new MASS_USER_TORRENTS_TABLE_VIEW($TorrentList, $CollageDataList, $EditType, Lang::get('bookmarks', 'organize_torrent_bookmarks'));
+$TT = new MASS_USER_TORRENTS_TABLE_VIEW($TorrentList, $CollageDataList, $EditType, Lang::get('bookmarks.organize_torrent_bookmarks'));
 $TT->render_all();
 
 View::show_footer();

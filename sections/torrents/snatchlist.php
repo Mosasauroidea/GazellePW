@@ -27,7 +27,7 @@ $DB->query('SELECT FOUND_ROWS()');
 list($NumResults) = $DB->next_record();
 
 ?>
-<h4 data-tooltip="<?= Lang::get('torrents', 'show_snatches_title') ?>"><?= Lang::get('torrents', 'list_of_snatchers') ?></h4>
+<h4 data-tooltip="<?= Lang::get('torrents.show_snatches_title') ?>"><?= Lang::get('torrents.list_of_snatchers') ?></h4>
 
 <? if ($NumResults > 100) { ?>
     <div class="BodyNavLinks"><?= js_pages('show_snatches', $_GET['torrentid'], $NumResults, $Page) ?></div>
@@ -35,11 +35,11 @@ list($NumResults) = $DB->next_record();
 <div class="TableContainer">
     <table class="TableTorrentSnatchList Table">
         <tr class="Table-rowHeader">
-            <td class="Table-cell"><?= Lang::get('torrents', 'user') ?></td>
-            <td class="Table-cell"><?= Lang::get('torrents', 'time') ?></td>
+            <td class="Table-cell"><?= Lang::get('torrents.user') ?></td>
+            <td class="Table-cell"><?= Lang::get('torrents.time') ?></td>
 
-            <td class="Table-cell"><?= Lang::get('torrents', 'user') ?></td>
-            <td class="Table-cell"><?= Lang::get('torrents', 'time') ?></td>
+            <td class="Table-cell"><?= Lang::get('torrents.user') ?></td>
+            <td class="Table-cell"><?= Lang::get('torrents.time') ?></td>
         </tr>
         <tr>
             <?

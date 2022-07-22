@@ -9,7 +9,7 @@ if (!check_perms('admin_reports')) {
     error(403);
 }
 
-View::show_header(Lang::get('reportsv2', 'reports_v2'), 'reportsv2', 'PageReportV2Views');
+View::show_header(Lang::get('reportsv2.reports_v2'), 'reportsv2', 'PageReportV2Views');
 
 
 //Grab owner's ID, just for examples
@@ -24,7 +24,7 @@ $Owner = display_str($Owner);
 ?>
 <div class="LayoutBody">
     <div class="BodyHeader">
-        <h2 class="BodyHeader-nav"><?= Lang::get('reportsv2', 'reports_v2_information') ?></h2>
+        <h2 class="BodyHeader-nav"><?= Lang::get('reportsv2.reports_v2_information') ?></h2>
         <? include('header.php'); ?>
     </div>
     <div class="thin float_clear">
@@ -42,12 +42,12 @@ $Owner = display_str($Owner);
 	ORDER BY Reports DESC");
             $Results = $DB->to_array();
             ?>
-            <h3><?= Lang::get('reportsv2', 'time_d') ?></h3>
+            <h3><?= Lang::get('reportsv2.time_d') ?></h3>
             <div>
                 <table class="Table">
                     <tr class="Table-rowHeader">
-                        <td class="Table-cell"><?= Lang::get('reportsv2', 'username') ?></td>
-                        <td class="Table-cell Table-cellRight"><?= Lang::get('reportsv2', 'reports') ?></td>
+                        <td class="Table-cell"><?= Lang::get('reportsv2.username') ?></td>
+                        <td class="Table-cell Table-cellRight"><?= Lang::get('reportsv2.reports') ?></td>
                     </tr>
                     <?
                     foreach ($Results as $Result) {
@@ -80,12 +80,12 @@ $Owner = display_str($Owner);
 	ORDER BY Reports DESC");
             $Results = $DB->to_array();
             ?>
-            <h3><?= Lang::get('reportsv2', 'time_w') ?></h3>
+            <h3><?= Lang::get('reportsv2.time_w') ?></h3>
             <div>
                 <table class="Table">
                     <tr class="Table-rowHeader">
-                        <td class="Table-cell"><?= Lang::get('reportsv2', 'username') ?></td>
-                        <td class="Table-cell Table-cellRight"><?= Lang::get('reportsv2', 'reports') ?></td>
+                        <td class="Table-cell"><?= Lang::get('reportsv2.username') ?></td>
+                        <td class="Table-cell Table-cellRight"><?= Lang::get('reportsv2.reports') ?></td>
                     </tr>
                     <?
                     foreach ($Results as $Result) {
@@ -118,12 +118,12 @@ $Owner = display_str($Owner);
 	ORDER BY Reports DESC");
             $Results = $DB->to_array();
             ?>
-            <h3><?= Lang::get('reportsv2', 'time_m') ?></h3>
+            <h3><?= Lang::get('reportsv2.time_m') ?></h3>
             <div>
                 <table class="Table">
                     <tr class="Table-rowHeader">
-                        <td class="Table-cell"><?= Lang::get('reportsv2', 'username') ?></td>
-                        <td class="Table-cell Table-cellRight"><?= Lang::get('reportsv2', 'reports') ?></td>
+                        <td class="Table-cell"><?= Lang::get('reportsv2.username') ?></td>
+                        <td class="Table-cell Table-cellRight"><?= Lang::get('reportsv2.reports') ?></td>
                     </tr>
                     <?
                     foreach ($Results as $Result) {
@@ -155,12 +155,12 @@ $Owner = display_str($Owner);
 	ORDER BY Reports DESC");
             $Results = $DB->to_array();
             ?>
-            <h3><?= Lang::get('reportsv2', 'time_a') ?></h3>
+            <h3><?= Lang::get('reportsv2.time_a') ?></h3>
             <div>
                 <table class="Table">
                     <tr class="Table-rowHeader">
-                        <td class="Table-cell"><?= Lang::get('reportsv2', 'username') ?></td>
-                        <td class="Table-cell Table-cellRight"><?= Lang::get('reportsv2', 'reports') ?></td>
+                        <td class="Table-cell"><?= Lang::get('reportsv2.username') ?></td>
+                        <td class="Table-cell Table-cellRight"><?= Lang::get('reportsv2.reports') ?></td>
                     </tr>
                     <?
                     foreach ($Results as $Result) {
@@ -195,12 +195,12 @@ $Owner = display_str($Owner);
 
             $Staff = $DB->to_array();
             ?>
-            <h3><?= Lang::get('reportsv2', 'currently_assigned_reports_by_staff_member') ?></h3>
+            <h3><?= Lang::get('reportsv2.currently_assigned_reports_by_staff_member') ?></h3>
             <div>
                 <table class="Table">
                     <tr class="Table-rowHeader">
-                        <td class="Table-cell"><?= Lang::get('reportsv2', 'staff_member') ?></td>
-                        <td class="Table-cell Table-cellRight"><?= Lang::get('reportsv2', 'current_count') ?></td>
+                        <td class="Table-cell"><?= Lang::get('reportsv2.staff_member') ?></td>
+                        <td class="Table-cell Table-cellRight"><?= Lang::get('reportsv2.current_count') ?></td>
                     </tr>
                     <?
                     foreach ($Staff as $Array) {
@@ -212,14 +212,14 @@ $Owner = display_str($Owner);
                     ?>
                         <tr class="Table-row">
                             <td class="Table-cell">
-                                <a href="reportsv2.php?view=staff&amp;id=<?= $Array['ResolverID'] ?>"><?= display_str($Array['Username']) ?><?= Lang::get('reportsv2', 's_reports') ?></a>
+                                <a href="reportsv2.php?view=staff&amp;id=<?= $Array['ResolverID'] ?>"><?= display_str($Array['Username']) ?><?= Lang::get('reportsv2.s_reports') ?></a>
                             </td>
                             <td class="Table-cell Table-cellRight"><?= number_format($Array['Count']) ?></td>
                         </tr>
                     <?  } ?>
                 </table>
             </div>
-            <h3><?= Lang::get('reportsv2', 'different_view_modes_by_report_type') ?></h3>
+            <h3><?= Lang::get('reportsv2.different_view_modes_by_report_type') ?></h3>
             <?
             $DB->query("
 		SELECT
@@ -234,8 +234,8 @@ $Owner = display_str($Owner);
                 <div>
                     <table class="Table">
                         <tr class="Table-rowHeader">
-                            <td class="Table-cell"><?= Lang::get('reportsv2', 'type') ?></td>
-                            <td class="Table-cell Table-cellRight"><?= Lang::get('reportsv2', 'current_count') ?></td>
+                            <td class="Table-cell"><?= Lang::get('reportsv2.type') ?></td>
+                            <td class="Table-cell Table-cellRight"><?= Lang::get('reportsv2.current_count') ?></td>
                         </tr>
                         <?
                         foreach ($Current as $Array) {

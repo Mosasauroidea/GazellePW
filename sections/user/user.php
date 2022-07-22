@@ -311,7 +311,7 @@ list($ThumbCount) = $DB->next_record();
     </div>
     <div class="BodyNavLinks">
         <? if (!$OwnProfile) { ?>
-            <a href="inbox.php?action=compose&amp;to=<?= $UserID ?>"><?= Lang::get('user', 'compose') ?></a>
+            <a href="inbox.php?action=compose&amp;to=<?= $UserID ?>"><?= Lang::get('user.compose') ?></a>
             <?
             $DB->query("
 		SELECT FriendID
@@ -320,37 +320,37 @@ list($ThumbCount) = $DB->next_record();
 			AND FriendID = '$UserID'");
             if (!$DB->has_results()) {
             ?>
-                <a href="friends.php?action=add&amp;friendid=<?= $UserID ?>&amp;auth=<?= $LoggedUser['AuthKey'] ?>"><?= Lang::get('user', 'add_friend') ?></a>
+                <a href="friends.php?action=add&amp;friendid=<?= $UserID ?>&amp;auth=<?= $LoggedUser['AuthKey'] ?>"><?= Lang::get('user.add_friend') ?></a>
             <?  } ?>
-            <a href="reports.php?action=report&amp;type=user&amp;id=<?= $UserID ?>"><?= Lang::get('user', 'report') ?></a>
+            <a href="reports.php?action=report&amp;type=user&amp;id=<?= $UserID ?>"><?= Lang::get('user.report') ?></a>
         <? } ?>
         <? if (check_perms('users_edit_profiles', $Class) || $LoggedUser['ID'] == $UserID) { ?>
-            <a href="user.php?action=edit&amp;userid=<?= $UserID ?>"><?= Lang::get('user', 'setting') ?></a>
+            <a href="user.php?action=edit&amp;userid=<?= $UserID ?>"><?= Lang::get('user.setting') ?></a>
         <? } ?>
         <? if ($OwnProfile) { ?>
-            <a class="brackets" href="bonus.php?action=bprates"><?= Lang::get('bonus', 'bonus_point_rates') ?></a>
+            <a class="brackets" href="bonus.php?action=bprates"><?= Lang::get('bonus.bonus_point_rates') ?></a>
         <? } ?>
         <? if (check_perms('users_view_invites', $Class)) { ?>
-            <a href="user.php?action=invite&amp;userid=<?= $UserID ?>"><?= Lang::get('user', 'invite') ?></a>
+            <a href="user.php?action=invite&amp;userid=<?= $UserID ?>"><?= Lang::get('user.invite') ?></a>
         <? }
         if (check_perms('admin_manage_permissions', $Class)) { ?>
-            <a href="user.php?action=permissions&amp;userid=<?= $UserID ?>"><?= Lang::get('user', 'permissions') ?></a>
+            <a href="user.php?action=permissions&amp;userid=<?= $UserID ?>"><?= Lang::get('user.permissions') ?></a>
         <? } ?>
         <? if (check_perms('users_view_ips', $Class)) { ?>
-            <a href="user.php?action=sessions&amp;userid=<?= $UserID ?>"><?= Lang::get('user', 'sessions') ?></a>
-            <a href="userhistory.php?action=copypaste&amp;userid=<?= $UserID ?>"><?= Lang::get('user', 'copypaste') ?></a>
+            <a href="user.php?action=sessions&amp;userid=<?= $UserID ?>"><?= Lang::get('user.sessions') ?></a>
+            <a href="userhistory.php?action=copypaste&amp;userid=<?= $UserID ?>"><?= Lang::get('user.copypaste') ?></a>
         <? } ?>
         <? if (check_perms('admin_reports')) { ?>
-            <a href="reportsv2.php?view=reporter&amp;id=<?= $UserID ?>"><?= Lang::get('user', 'reporter') ?></a>
+            <a href="reportsv2.php?view=reporter&amp;id=<?= $UserID ?>"><?= Lang::get('user.reporter') ?></a>
         <? } ?>
         <? if (check_perms('users_mod')) { ?>
-            <a href="userhistory.php?action=token_history&amp;userid=<?= $UserID ?>"><?= Lang::get('user', 'token_history') ?></a>
+            <a href="userhistory.php?action=token_history&amp;userid=<?= $UserID ?>"><?= Lang::get('user.token_history') ?></a>
         <? } ?>
         <? if (check_perms('admin_clear_cache') && check_perms('users_override_paranoia')) { ?>
-            <a href="user.php?action=clearcache&amp;id=<?= $UserID ?>"><?= Lang::get('user', 'clearcache') ?></a>
+            <a href="user.php?action=clearcache&amp;id=<?= $UserID ?>"><?= Lang::get('user.clearcache') ?></a>
         <? } ?>
         <? if (check_perms('users_mod')) { ?>
-            <a href="#staff_tools"><?= Lang::get('user', 'staff_tools') ?></a>
+            <a href="#staff_tools"><?= Lang::get('user.staff_tools') ?></a>
         <? } ?>
     </div>
     <div class="LayoutMainSidebar">
@@ -360,7 +360,7 @@ list($ThumbCount) = $DB->next_record();
             ?>
                 <div class="SidebarItemUserAvatar SidebarItem Box">
                     <div class="SidebarItem-header Box-header">
-                        <?= Lang::get('user', 'avatar') ?>
+                        <?= Lang::get('user.avatar') ?>
                     </div>
                     <div class="SidebarItem-body Box-body">
                         <?= Users::show_avatar($Avatar, $UserID, $Username, $HeavyInfo['DisableAvatars'], 240) ?>
@@ -394,12 +394,12 @@ list($ThumbCount) = $DB->next_record();
                     } else {
                     ?>
                         <div class="SidebarItem-header Box-header">
-                            <?= Lang::get('user', 'send_fltoken') ?></div>
+                            <?= Lang::get('user.send_fltoken') ?></div>
                         <form class="SidebarItem-body Box-body fl_form" name="user" id="fl_form" action="user.php?id=<?= $UserID ?>" method="post">
                             <ul class="SidebarList SidebarItem-body Box-body">
                                 <?
                                 foreach ($FL_Items as $data) {
-                                    $label_title = Lang::get('user', 'this_costs', false, $data['Price'], $data['After']);
+                                    $label_title = Lang::get('user.this_costs', ['Values' => [$data['Price'], $data['After']]]);
                                 ?>
                                     <li class="SidebarList-item">
                                         <input type="radio" name="fltype" id="fl-<?= $data['Label'] ?>" value="fl-<?= $data['Label'] ?>" />
@@ -423,25 +423,25 @@ list($ThumbCount) = $DB->next_record();
             $OverrideClass = $Override === 2 ? 'paranoia_override' : '';
             ?>
             <div class="SidebarItemStats SidebarItem Box">
-                <div class="SidebarItem-header Box-header"><?= Lang::get('user', 'statistics') ?></div>
+                <div class="SidebarItem-header Box-header"><?= Lang::get('user.statistics') ?></div>
                 <ul class="SidebarList SidebarItem-body Box-body">
                     <li class="SidebarList-item is-joinDate" id="join-date-value" data-value="<?= (new DateTime($JoinDate))->format(DateTime::ATOM) ?>">
-                        <span><?= Lang::get('user', 'joineddate') ?>: </span>
+                        <span><?= Lang::get('user.joineddate') ?>: </span>
                         <?= $JoinDateHtml ?>
                     </li>
                     <? if (($Override = check_paranoia_here('lastseen'))) { ?>
                         <li class="SidebarList-item is-lastAccessDate <?= $OverrideClass ?>" id="last-access-date-value" data-value="<?= (new DateTime($LastAccess))->format(DateTime::ATOM)  ?>">
-                            <span><?= Lang::get('user', 'lastaccess') ?>: </span>
+                            <span><?= Lang::get('user.lastaccess') ?>: </span>
                             <?= $LastAccessHtml ?>
                         </li>
                     <? } ?>
                     <? if (($Override = check_paranoia_here('uploaded'))) { ?>
                         <li class="SidebarList-item is-uploaded <?= $OverrideClass ?>" id="uploaded-value" data-value="<?= $Uploaded ?>">
-                            <span><?= Lang::get('user', 'uploaded') ?>: </span>
+                            <span><?= Lang::get('user.uploaded') ?>: </span>
                             <span data-tooltip="<?= Format::get_size($Uploaded, 5) ?>">
                                 <?= Format::get_size($Uploaded) ?>
                             </span>
-                            <span data-tooltip="<?= Lang::get('user', 'true_uploaded_title') ?>">
+                            <span data-tooltip="<?= Lang::get('user.true_uploaded_title') ?>">
                                 (<?= Format::get_size($Uploaded - $BonusUploaded) ?>)
                             </span>
                         </li>
@@ -453,11 +453,11 @@ list($ThumbCount) = $DB->next_record();
                         $AllDownloaded += $Downloaded;
                     ?>
                         <li class="SidebarList-item is-downloaded <?= $OverrideClass ?>" id="downloaded-value" data-value="<?= $Downloaded ?>">
-                            <span><?= Lang::get('user', 'downloaded') ?>: </span>
+                            <span><?= Lang::get('user.downloaded') ?>: </span>
                             <span data-tooltip="<?= Format::get_size($Downloaded, 5) ?>">
                                 <?= Format::get_size($Downloaded) ?>
                             </span>
-                            <span data-tooltip="<?= Lang::get('user', 'true_downloaded_title') ?>">
+                            <span data-tooltip="<?= Lang::get('user.true_downloaded_title') ?>">
                                 (<?= Format::get_size($AllDownloaded) ?>)
                             </span>
                         </li>
@@ -467,7 +467,7 @@ list($ThumbCount) = $DB->next_record();
                     ?>
                         <? $Buffer = $Uploaded / 0.65 - $Downloaded ?>
                         <li class="SidebarList-item is-buffer <?= $OverrideClass ?>" id="buffer-value" data-value="<?= $Buffer ?>" data-tooltip="<?= Format::get_size($Buffer) ?>">
-                            <span><?= Lang::get('user', 'buffer') ?>: </span>
+                            <span><?= Lang::get('user.buffer') ?>: </span>
                             <?= Format::get_size($Buffer) ?>
                         </li>
                     <?
@@ -475,7 +475,7 @@ list($ThumbCount) = $DB->next_record();
                     if (($Override = check_paranoia_here('ratio'))) {
                     ?>
                         <li class="SidebarList-item is-ratio <?= $OverrideClass ?>" id="ratio-value" data-value="<?= Format::get_ratio($Uploaded, $Downloaded) ?>">
-                            <span><?= Lang::get('user', 'ratio') ?>: </span>
+                            <span><?= Lang::get('user.ratio') ?>: </span>
                             <?= Format::get_ratio_html($Uploaded, $Downloaded) ?>
                         </li>
                     <?
@@ -484,7 +484,7 @@ list($ThumbCount) = $DB->next_record();
                     ?>
                         <? $RequiredRatioDisplay = number_format((float)$RequiredRatio, 2) ?>
                         <li class="SidebarList-item is-requiredRatio <?= $OverrideClass ?>" id="required-ratio-value" data-value="<?= $RequiredRatio ?>">
-                            <span><?= Lang::get('user', 'required_ratio') ?>: </span>
+                            <span><?= Lang::get('user.required_ratio') ?>: </span>
                             <span data-tooltip="<?= $RequiredRatioDisplay ?>">
                                 <?= $RequiredRatioDisplay ?>
                             </span>
@@ -494,7 +494,7 @@ list($ThumbCount) = $DB->next_record();
                     if (($Override = check_paranoia_here('bonuspoints')) && isset($BonusPoints)) {
                     ?>
                         <li class="SidebarList-item is-bp <?= $OverrideClass ?>" id="bp-value" data-value="<?= $BonusPoints ?>">
-                            <span><?= Lang::get('user', 'bonus_points') ?>: </span>
+                            <span><?= Lang::get('user.bonus_points') ?>: </span>
                             <?= number_format($BonusPoints) ?>
                             <?
                             if (check_perms('admin_bp_history')) {
@@ -505,14 +505,14 @@ list($ThumbCount) = $DB->next_record();
                         <li class="SidebarList-item is-bpRate <?= $OverrideClass ?>" id="bp-rate-value" data-value="<?= $BonusPointsPerHour ?>">
                             <? if ($OwnProfile) { ?>
                                 <a href="bonus.php?action=bprates">
-                                    <?= Lang::get('user', 'bprates') ?>
+                                    <?= Lang::get('user.bprates') ?>
                                 </a>
                             <? } else if (check_perms('users_mod')) { ?>
                                 <a href="bonus.php?action=bprates&userid=<?= $UserID ?>">
-                                    <?= Lang::get('user', 'bprates') ?>
+                                    <?= Lang::get('user.bprates') ?>
                                 </a>
                             <? } else { ?>
-                                <?= Lang::get('user', 'bprates') ?>
+                                <?= Lang::get('user.bprates') ?>
                             <? } ?>
                             <span>: </span>
                             <?= number_format($BonusPointsPerHour) ?>
@@ -529,20 +529,20 @@ list($ThumbCount) = $DB->next_record();
                         foreach ($TimeAndCnts as $TAC) {
                             if ($num != 0) $Title = "$Title\n";
                             $num += $TAC[0];
-                            $Title = $Title . $TAC[0] . " (" . $TAC[1] . Lang::get('user', 'space_expired');
+                            $Title = $Title . $TAC[0] . " (" . $TAC[1] . Lang::get('user.space_expired');
                         }
                         $TokensDisplay = $num == 0 ? number_format($FLTokens) : number_format($FLTokens - $num) . '+' . number_format($num);
                         ?>
                         <li class="SidebarList-item is-flTokenCount <?= $OverrideClass ?>" id="fl-token-count-value" data-value="<?= $FLTokens ?>" data-tooltip="<?= $Title ?>">
                             <a href="userhistory.php?action=token_history&amp;userid=<?= $UserID ?>">
-                                <?= Lang::get('user', 'token_number') ?></a>
+                                <?= Lang::get('user.token_number') ?></a>
                             <span>: </span>
                             <?= $TokensDisplay ?>
                         </li>
                     <? } ?>
                     <? if (($OwnProfile || check_perms('users_mod')) && $Warned != '0000-00-00 00:00:00') { ?>
                         <li class="SidebarList-item is-warnedExpireDate <?= $OverrideClass ?>" id="warned-expire-date-value" data-value="<?= (new DateTime($Warned))->format(DateTime::ATOM) ?>">
-                            <span><?= Lang::get('user', 'warning_expires_in') ?>: </span>
+                            <span><?= Lang::get('user.warning_expires_in') ?>: </span>
                             <?= time_diff((date('Y-m-d H:i', strtotime($Warned)))) ?>
                         </li>
                     <?  } ?>
@@ -635,11 +635,11 @@ WHERE xs.uid =" . $UserID . " and xs.tstamp >= unix_timestamp(date_format(now(),
             <? } ?>
             <div class="SidebarItemUserRank SidebarItem Box">
                 <div class="SidebarItem-header Box-header">
-                    <?= Lang::get('user', 'u_percentile') ?></div>
+                    <?= Lang::get('user.u_percentile') ?></div>
                 <ul class="SidebarList SidebarItem-body Box-body">
                     <? if (($Override = check_paranoia_here('uploaded'))) { ?>
                         <li class="SidebarList-item is-uploadedRank <?= $OverrideClass ?>" id="uploaded-rank-value" data-value="<?= $UploadedRank ?>">
-                            <span><?= Lang::get('user', 'u_uploaded') ?>: </span>
+                            <span><?= Lang::get('user.u_uploaded') ?>: </span>
                             <span data-tooltip="<?= Format::get_size($Uploaded) ?>">
                                 <?= $UploadedRank === false ? 'Server busy' : number_format($UploadedRank) . '%' ?>
                             </span>
@@ -648,7 +648,7 @@ WHERE xs.uid =" . $UserID . " and xs.tstamp >= unix_timestamp(date_format(now(),
                     }
                     if (($Override = check_paranoia_here('downloaded'))) { ?>
                         <li class="SidebarList-item is-downloadedRank <?= $OverrideClass ?>" id="downloaded-rank-value" data-value="<?= $DownloadedRank ?>">
-                            <span><?= Lang::get('user', 'u_downloaded') ?>: </span>
+                            <span><?= Lang::get('user.u_downloaded') ?>: </span>
                             <span data-tooltip="<?= Format::get_size($Downloaded) ?>">
                                 <?= $DownloadedRank === false ? 'Server busy' : number_format($DownloadedRank) . '%' ?>
                             </span>
@@ -657,7 +657,7 @@ WHERE xs.uid =" . $UserID . " and xs.tstamp >= unix_timestamp(date_format(now(),
                     }
                     if (($Override = check_paranoia_here('uploads+'))) { ?>
                         <li class="SidebarList-item is-uploadsRank <?= $OverrideClass ?>" id="uploads-rank-value" data-value="<?= $UploadsRank ?>">
-                            <span><?= Lang::get('user', 'u_uploads') ?>: </span>
+                            <span><?= Lang::get('user.u_uploads') ?>: </span>
                             <span data-tooltip="<?= number_format($Uploads) ?>">
                                 <?= $UploadsRank === false ? 'Server busy' : number_format($UploadsRank) . '%' ?>
                             </span>
@@ -666,7 +666,7 @@ WHERE xs.uid =" . $UserID . " and xs.tstamp >= unix_timestamp(date_format(now(),
                     }
                     if (($Override = check_paranoia_here('requestsfilled_count'))) { ?>
                         <li class="SidebarList-item is-requestsFilledRank <?= $OverrideClass ?>" id="requests-filled-rank-value" data-value="<?= $RequestRank ?>">
-                            <span><?= Lang::get('user', 'u_filled') ?>: </span>
+                            <span><?= Lang::get('user.u_filled') ?>: </span>
                             <span data-tooltip="<?= number_format($RequestsFilled) ?>">
                                 <?= $RequestRank === false ? 'Server busy' : number_format($RequestRank) . '%' ?>
                             </span>
@@ -675,21 +675,21 @@ WHERE xs.uid =" . $UserID . " and xs.tstamp >= unix_timestamp(date_format(now(),
                     }
                     if (($Override = check_paranoia_here('requestsvoted_bounty'))) { ?>
                         <li class="SidebarList-item is-bountySpentRank <?= $OverrideClass ?>" id="bounty-spent-rank-value" data-value="<?= $BountyRank ?>">
-                            <span><?= Lang::get('user', 'u_bounty') ?>: </span>
+                            <span><?= Lang::get('user.u_bounty') ?>: </span>
                             <span data-tooltip="<?= Format::get_size($TotalSpent) ?>">
                                 <?= $BountyRank === false ? 'Server busy' : number_format($BountyRank) . '%' ?>
                             </span>
                         </li>
                     <?  } ?>
                     <li class="SidebarList-item is-postCreateRank" id="post-create-rank" data-value="<?= $PostRank ?>">
-                        <span><?= Lang::get('user', 'u_post') ?>: </span>
+                        <span><?= Lang::get('user.u_post') ?>: </span>
                         <span data-tooltip="<?= number_format($ForumPosts) ?>">
                             <?= $PostRank === false ? 'Server busy' : number_format($PostRank) . '%' ?>
                         </span>
                     </li>
                     <? if (($Override = check_paranoia_here('artistsadded'))) { ?>
                         <li class="SidebarList-item is-artistAddRank <?= $OverrideClass ?>" id="artist-add-rank-value" data-value="<?= $ArtistsRank ?>">
-                            <span><?= Lang::get('user', 'u_artist') ?>: </span>
+                            <span><?= Lang::get('user.u_artist') ?>: </span>
                             <span data-tooltip="<?= number_format($ArtistsAdded) ?>">
                                 <?= $ArtistsRank === false ? 'Server busy' : number_format($ArtistsRank) . '%' ?>
                             </span>
@@ -698,7 +698,7 @@ WHERE xs.uid =" . $UserID . " and xs.tstamp >= unix_timestamp(date_format(now(),
                     }
                     if (check_paranoia_here(array('uploaded', 'downloaded', 'uploads+', 'requestsfilled_count', 'requestsvoted_bounty', 'artistsadded'))) { ?>
                         <li class="SidebarList-item is-overallRank" id="overall-rank-value" data-value="<?= $OverallRank ?>">
-                            <span><?= Lang::get('user', 'u_total') ?>: </span>
+                            <span><?= Lang::get('user.u_total') ?>: </span>
                             <span><?= $OverallRank === false ? 'Server busy' : number_format($OverallRank) . '%' ?></span>
                         </li>
                     <?  } ?>
@@ -748,39 +748,39 @@ WHERE xs.uid =" . $UserID . " and xs.tstamp >= unix_timestamp(date_format(now(),
             ?>
                 <div class="SidebarItemUserHistory SidebarItem Box">
                     <div class="SidebarItem-header Box-header">
-                        <?= Lang::get('user', 'history') ?></div>
+                        <?= Lang::get('user.history') ?></div>
                     <ul class="SidebarList SidebarItem-body Box-body">
                         <? if (check_perms('users_view_email', $Class)) { ?>
-                            <li class="SidebarList-item"><?= Lang::get('user', 'emails') ?>: <?= number_format($EmailChanges) ?> <a href="userhistory.php?action=email2&amp;userid=<?= $UserID ?>"><?= Lang::get('user', 'view') ?></a><a href="userhistory.php?action=email&amp;userid=<?= $UserID ?>"> <?= Lang::get('user', 'legacy_view') ?></a></li>
+                            <li class="SidebarList-item"><?= Lang::get('user.emails') ?>: <?= number_format($EmailChanges) ?> <a href="userhistory.php?action=email2&amp;userid=<?= $UserID ?>"><?= Lang::get('user.view') ?></a><a href="userhistory.php?action=email&amp;userid=<?= $UserID ?>"> <?= Lang::get('user.legacy_view') ?></a></li>
                         <?
                         }
                         if (check_perms('users_view_ips', $Class)) {
                         ?>
-                            <li class="SidebarList-item">IPs: <?= number_format($IPChanges) ?> <a href="userhistory.php?action=ips&amp;userid=<?= $UserID ?>"><?= Lang::get('user', 'view') ?></a><a href="userhistory.php?action=ips&amp;userid=<?= $UserID ?>&amp;usersonly=1"> <?= Lang::get('user', 'view_users') ?></a></li>
+                            <li class="SidebarList-item">IPs: <?= number_format($IPChanges) ?> <a href="userhistory.php?action=ips&amp;userid=<?= $UserID ?>"><?= Lang::get('user.view') ?></a><a href="userhistory.php?action=ips&amp;userid=<?= $UserID ?>&amp;usersonly=1"> <?= Lang::get('user.view_users') ?></a></li>
                             <? if (check_perms('users_view_ips', $Class) && check_perms('users_mod', $Class)) { ?>
-                                <li class="SidebarList-item">Tracker IPs: <?= number_format($TrackerIPs) ?> <a href="userhistory.php?action=tracker_ips&amp;userid=<?= $UserID ?>"><?= Lang::get('user', 'view') ?></a></li>
+                                <li class="SidebarList-item">Tracker IPs: <?= number_format($TrackerIPs) ?> <a href="userhistory.php?action=tracker_ips&amp;userid=<?= $UserID ?>"><?= Lang::get('user.view') ?></a></li>
                             <?
                             }
                         }
                         if (check_perms('users_view_keys', $Class)) {
                             ?>
-                            <li class="SidebarList-item"><?= Lang::get('user', 'passkeys') ?>: <?= number_format($PasskeyChanges) ?> <a href="userhistory.php?action=passkeys&amp;userid=<?= $UserID ?>"><?= Lang::get('user', 'view') ?></a></li>
+                            <li class="SidebarList-item"><?= Lang::get('user.passkeys') ?>: <?= number_format($PasskeyChanges) ?> <a href="userhistory.php?action=passkeys&amp;userid=<?= $UserID ?>"><?= Lang::get('user.view') ?></a></li>
                         <?
                         }
                         if (check_perms('users_mod', $Class)) {
                         ?>
-                            <li class="SidebarList-item"><?= Lang::get('user', 'passwords') ?>: <?= number_format($PasswordChanges) ?> <a href="userhistory.php?action=passwords&amp;userid=<?= $UserID ?>"><?= Lang::get('user', 'view') ?></a></li>
-                            <li class="SidebarList-item"><?= Lang::get('user', 'stats') ?>: N/A <a href="userhistory.php?action=stats&amp;userid=<?= $UserID ?>"><?= Lang::get('user', 'view') ?></a></li>
+                            <li class="SidebarList-item"><?= Lang::get('user.passwords') ?>: <?= number_format($PasswordChanges) ?> <a href="userhistory.php?action=passwords&amp;userid=<?= $UserID ?>"><?= Lang::get('user.view') ?></a></li>
+                            <li class="SidebarList-item"><?= Lang::get('user.stats') ?>: N/A <a href="userhistory.php?action=stats&amp;userid=<?= $UserID ?>"><?= Lang::get('user.view') ?></a></li>
                         <?      } ?>
                     </ul>
                 </div>
             <?  } ?>
             <div class="SidebarItemUserPersonal SidebarItem Box">
                 <div class="SidebarItem-header Box-header">
-                    <?= Lang::get('user', 'p_personal') ?></div>
+                    <?= Lang::get('user.p_personal') ?></div>
                 <ul class="SidebarList SidebarItem-body Box-body">
                     <li class="SidebarList-item isClass" id="class-value" data-value="<?= $ClassLevels[$Class]['Name'] ?>">
-                        <?= Lang::get('user', 'p_class') ?>: <?= $ClassLevels[$Class]['Name'] ?></li>
+                        <?= Lang::get('user.p_class') ?>: <?= $ClassLevels[$Class]['Name'] ?></li>
                     <?
                     $UserInfo = Users::user_info($UserID);
                     if (!empty($UserInfo['ExtraClasses'])) {
@@ -809,7 +809,7 @@ WHERE xs.uid =" . $UserID . " and xs.tstamp >= unix_timestamp(date_format(now(),
                         $ParanoiaLevelText = 'Very high';
                     }
                     ?>
-                    <li class="SidebarList-item"><?= Lang::get('user', 'p_paranoiaLevel') ?>: <span data-tooltip="<?= $ParanoiaLevel ?>"><?= $ParanoiaLevelText ?></span></li>
+                    <li class="SidebarList-item"><?= Lang::get('user.p_paranoiaLevel') ?>: <span data-tooltip="<?= $ParanoiaLevel ?>"><?= $ParanoiaLevelText ?></span></li>
                     <? if (check_perms('users_view_invites') || $OwnProfile) {
                         if (!$InviterID) {
                             $Invited = '<span>Nobody</span>';
@@ -824,11 +824,11 @@ WHERE xs.uid =" . $UserID . " and xs.tstamp >= unix_timestamp(date_format(now(),
                                                         foreach ($TimeAndCnts as $TAC) {
                                                             if ($num != 0) echo "\n";
                                                             $num += $TAC[0];
-                                                            echo $TAC[0] . " (" . $TAC[1] . Lang::get('user', 'space_expired');
+                                                            echo $TAC[0] . " (" . $TAC[1] . Lang::get('user.space_expired');
                                                         }
                                                         if ($num != 0) echo "\"";
                                                         ?>>
-                            <span><?= Lang::get('user', 'p_invites') ?>: </span>
+                            <span><?= Lang::get('user.p_invites') ?>: </span>
                             <?
                             $DB->query("
 					SELECT COUNT(InviterID)
@@ -844,26 +844,26 @@ WHERE xs.uid =" . $UserID . " and xs.tstamp >= unix_timestamp(date_format(now(),
                             ?>
                         </li>
                         <li class="SidebarList-item isInviter" id="inviter-value" data-value="<?= $InviterName ?>">
-                            <span><?= Lang::get('user', 'p_inviter') ?>: </span>
+                            <span><?= Lang::get('user.p_inviter') ?>: </span>
                             <?= $Invited ?>
                         </li>
                     <? } ?>
                     <? if ((check_perms('users_view_email') && in_array("emailshowtotc", $Paranoia)) || check_perms("users_override_paranoia") || $OwnProfile) { ?>
-                        <li class="SidebarList-item"><?= Lang::get('user', 'p_email') ?>: <a href="mailto:<?= display_str($Email) ?>"><?= display_str($Email) ?></a>
+                        <li class="SidebarList-item"><?= Lang::get('user.p_email') ?>: <a href="mailto:<?= display_str($Email) ?>"><?= display_str($Email) ?></a>
                             <? if (check_perms('users_view_email', $Class)) { ?>
                                 <a href="user.php?action=search&amp;email_history=on&amp;email=<?= display_str($Email) ?>" data-tooltip="Search">S</a>
                             <? } ?>
                         </li>
                     <? } ?>
                     <? if (check_perms('users_view_ips', $Class)) { ?>
-                        <li class="SidebarList-item"><?= Lang::get('user', 'p_ip') ?>: <?= Tools::display_ip($IP) ?></li>
-                        <li class="SidebarList-item"><?= Lang::get('user', 'p_host') ?>: <?= Tools::get_host_by_ajax($IP) ?></li>
+                        <li class="SidebarList-item"><?= Lang::get('user.p_ip') ?>: <?= Tools::display_ip($IP) ?></li>
+                        <li class="SidebarList-item"><?= Lang::get('user.p_host') ?>: <?= Tools::get_host_by_ajax($IP) ?></li>
                     <? } ?>
                     <? if (check_perms('users_view_keys', $Class) || $OwnProfile) { ?>
-                        <li class="SidebarList-item"><?= Lang::get('user', 'p_passkey') ?>: <a href="#" id="passkey" onclick="togglePassKey('<?= display_str($torrent_pass) ?>'); return false;"><?= Lang::get('user', 'view') ?></a></li>
+                        <li class="SidebarList-item"><?= Lang::get('user.p_passkey') ?>: <a href="#" id="passkey" onclick="togglePassKey('<?= display_str($torrent_pass) ?>'); return false;"><?= Lang::get('user.view') ?></a></li>
                     <? } ?>
                     <? if (Applicant::user_is_applicant($UserID) && (check_perms('admin_manage_applicants') || $OwnProfile)) { ?>
-                        <li class="SidebarList-item"><?= Lang::get('user', 'p_inviter') ?>: <a href="/apply.php?action=view"><?= Lang::get('user', 'view') ?></a></li>
+                        <li class="SidebarList-item"><?= Lang::get('user.p_inviter') ?>: <a href="/apply.php?action=view"><?= Lang::get('user.view') ?></a></li>
                     <? } ?>
                     <?
                     if (!isset($SupportFor)) {
@@ -876,14 +876,14 @@ WHERE xs.uid =" . $UserID . " and xs.tstamp >= unix_timestamp(date_format(now(),
                     if ($Override = check_perms('users_mod') || $OwnProfile || !empty($SupportFor)) {
                     ?>
                         <li class="SidebarList-item <?= (($Override === 2 || $SupportFor) ? 'paranoia_override' : '') ?>">
-                            <?= Lang::get('user', 'p_clients') ?>: <?
-                                                                    $DB->query("
+                            <?= Lang::get('user.p_clients') ?>: <?
+                                                                $DB->query("
 			SELECT DISTINCT useragent
 			FROM xbt_files_users
 			WHERE uid = $UserID");
-                                                                    $Clients = $DB->collect(0);
-                                                                    echo implode('; ', $Clients);
-                                                                    ?></li>
+                                                                $Clients = $DB->collect(0);
+                                                                echo implode('; ', $Clients);
+                                                                ?></li>
                     <?
                     }
 
@@ -896,10 +896,10 @@ WHERE xs.uid =" . $UserID . " and xs.tstamp >= unix_timestamp(date_format(now(),
                         $Age = (empty($PasswordHistory)) ? time_diff($JoinDate) : time_diff($PasswordHistory);
                         $PasswordAge = substr($Age, 0, strpos($Age, " ago"));
                     ?>
-                        <li class="SidebarList-item"><?= Lang::get('user', 'p_passwordage') ?>: <?= $PasswordAge ?></li>
+                        <li class="SidebarList-item"><?= Lang::get('user.p_passwordage') ?>: <?= $PasswordAge ?></li>
                     <? }
                     if ($OwnProfile || check_perms('users_override_paranoia', $Class)) { ?>
-                        <li class="SidebarList-item"><?= Lang::get('user', 'p_irc') ?>: <?= empty($IRCKey) ? Lang::get('user', 'irc_no') : Lang::get('user', 'irc_yes') ?></li>
+                        <li class="SidebarList-item"><?= Lang::get('user.p_irc') ?>: <?= empty($IRCKey) ? Lang::get('user.irc_no') : Lang::get('user.irc_yes') ?></li>
                     <? } ?>
                 </ul>
             </div>
@@ -969,18 +969,18 @@ WHERE xs.uid =" . $UserID . " and xs.tstamp >= unix_timestamp(date_format(now(),
             ?>
                 <div class="SidebarItemUserNextClass SidebarItem Box">
                     <div class="SidebarItem-header Box-header">
-                        <?= Lang::get('user', 'next_userclass') ?></div>
+                        <?= Lang::get('user.next_userclass') ?></div>
                     <ul class="SidebarList SidebarItem-body Box-body">
-                        <li class="SidebarList-item"><?= Lang::get('user', 'next_userclass_title1') ?>: <?= $NextLevel[$Class]['To'] ?></li>
-                        <li class="SidebarList-item"><?= Lang::get('user', 'next_userclass_title6') ?>: <?
+                        <li class="SidebarList-item"><?= Lang::get('user.next_userclass_title1') ?>: <?= $NextLevel[$Class]['To'] ?></li>
+                        <li class="SidebarList-item"><?= Lang::get('user.next_userclass_title6') ?>: <?
                                                                                                         $p = $AllDownloaded / $NextLevel[$Class]['MinDownload'] * 100;
                                                                                                         echo Format::get_size($AllDownloaded) . ' / ' . Format::get_size($NextLevel[$Class]['MinDownload']) . " (<span class=\"" . ($p >= 100 ? "u-colorSuccess\">" : "u-colorWarning\">") . number_format($p) . "%</span>)"
                                                                                                         ?></li>
-                        <li class="SidebarList-item"><?= Lang::get('user', 'next_userclass_title3') ?>: <?
+                        <li class="SidebarList-item"><?= Lang::get('user.next_userclass_title3') ?>: <?
                                                                                                         $p = $Uploaded / $Downloaded / $NextLevel[$Class]['MinRatio'] * 100;
                                                                                                         echo number_format($Uploaded / $Downloaded, 2) . ' / ' . $NextLevel[$Class]['MinRatio'] . " (<span class=\"" . ($p >= 100 ? "u-colorSuccess\">" : "u-colorWarning\">") . number_format($p) . "%</span>)"
                                                                                                         ?></li>
-                        <li class="SidebarList-item"><?= Lang::get('user', 'next_userclass_title4') ?>: <?
+                        <li class="SidebarList-item"><?= Lang::get('user.next_userclass_title4') ?>: <?
                                                                                                         //$p = $JoinDate / $NextLevel[$Class]['MaxTime'] * 100;
                                                                                                         echo time_diff($JoinDate, $Levels = 2, $Span = true, $Lowercase = false, $StartTime = false, $HideAgo = true) . ' / ' . time_diff($NextLevel[$Class]['MaxTime'], $Levels = 2, $Span = true, $Lowercase = false, $StartTime = false, $HideAgo = true)
                                                                                                         ?></li>
@@ -991,7 +991,7 @@ WHERE xs.uid =" . $UserID . " and xs.tstamp >= unix_timestamp(date_format(now(),
                         list($MinUploads) = $DB->next_record();
                         // test
                         $p = $MinUploads / $NextLevel[$Class]['MinUploads'] * 100;
-                        echo "<li>" . Lang::get('user', 'next_userclass_title5') . ": $MinUploads / " . $NextLevel[$Class]['MinUploads'];
+                        echo "<li>" . Lang::get('user.next_userclass_title5') . ": $MinUploads / " . $NextLevel[$Class]['MinUploads'];
                         echo ($NextLevel[$Class]['MinUploads'] ? (" (<span class=\"" . ($p >= 100 ? "u-colorSuccess\">" : "u-colorWarning\">") . number_format($p) . "%</span>)") : "") . "</li>";
                         ?>
                     </ul>
@@ -1031,10 +1031,10 @@ WHERE xs.uid =" . $UserID . " and xs.tstamp >= unix_timestamp(date_format(now(),
                 && (time() < strtotime($RatioWatchEnds))
                 && ($Downloaded * $RequiredRatio) > $Uploaded
             ) {
-                $RatioWatchText = sprintf(Lang::get('user', 'ratio_watch_text'), Format::get_size(($Downloaded * $RequiredRatio) - $Uploaded), time_diff($RatioWatchEnds), Format::get_size($Downloaded - $RatioWatchDownload))
+                $RatioWatchText = sprintf(Lang::get('user.ratio_watch_text'), Format::get_size(($Downloaded * $RequiredRatio) - $Uploaded), time_diff($RatioWatchEnds), Format::get_size($Downloaded - $RatioWatchDownload))
             ?>
                 <div class="Box">
-                    <div class="Box-header"><?= Lang::get('user', 'ratio_watch') ?></div>
+                    <div class="Box-header"><?= Lang::get('user.ratio_watch') ?></div>
                     <div class="Box-body"><?= $RatioWatchText ?></div>
                 </div>
             <?
@@ -1077,8 +1077,8 @@ WHERE xs.uid =" . $UserID . " and xs.tstamp >= unix_timestamp(date_format(now(),
                         }
                     </script>
 
-                    <div class="Box-header"><a href="/badges.php"><?= Lang::get('user', 'badge_center') ?></a>
-                        <span style="float: right;"><a href="#" onclick="badgesDisplay()"><?= Lang::get('global', 'hide') ?></a></span>
+                    <div class="Box-header"><a href="/badges.php"><?= Lang::get('user.badge_center') ?></a>
+                        <span style="float: right;"><a href="#" onclick="badgesDisplay()"><?= Lang::get('global.hide') ?></a></span>
                     </div>
 
                     <div id="badge_display_head" class="Box-body badge_display">
@@ -1095,9 +1095,9 @@ WHERE xs.uid =" . $UserID . " and xs.tstamp >= unix_timestamp(date_format(now(),
                         }
                         if ($OwnProfile && count($WearOrDisplay['Profile']) == 0) {
                             if (count($BadgesByUserID) == 0) {
-                                echo '<span>' . Lang::get('badges', 'you_do_not_have_any_badge') . '</span>';
+                                echo '<span>' . Lang::get('badges.you_do_not_have_any_badge') . '</span>';
                             } else {
-                                echo '<span>' . Lang::get('badges', 'you_do_not_display_any_badge') . '</span>';
+                                echo '<span>' . Lang::get('badges.you_do_not_display_any_badge') . '</span>';
                             }
                         }
                         ?>
@@ -1125,15 +1125,15 @@ WHERE xs.uid =" . $UserID . " and xs.tstamp >= unix_timestamp(date_format(now(),
 
             <div class="Box">
                 <div class="Box-header">
-                    <div><?= !empty($InfoTitle) ? $InfoTitle : Lang::get('user', 'infotitle'); ?>
-                        <a class="floatright" href="#" onclick="$('#profilediv').gtoggle(); this.innerHTML = (this.innerHTML == '<?= Lang::get('global', 'hide') ?>' ? '<?= Lang::get('global', 'show') ?>' : '<?= Lang::get('global', 'hide') ?>'); return false;"><?= Lang::get('global', 'hide') ?></a>
+                    <div><?= !empty($InfoTitle) ? $InfoTitle : Lang::get('user.infotitle'); ?>
+                        <a class="floatright" href="#" onclick="$('#profilediv').gtoggle(); this.innerHTML = (this.innerHTML == '<?= Lang::get('global.hide') ?>' ? '<?= Lang::get('global.show') ?>' : '<?= Lang::get('global.hide') ?>'); return false;"><?= Lang::get('global.hide') ?></a>
                     </div>
                 </div>
                 <div class="Box-body HtmlText PostArticle profileinfo" id="profilediv">
                     <?
                     if (!$Info) {
                     ?>
-                        <?= Lang::get('user', 'no_infotitle') ?>
+                        <?= Lang::get('user.no_infotitle') ?>
                     <?
                     } else {
                         echo Text::full_format($Info);
@@ -1171,7 +1171,7 @@ WHERE xs.uid =" . $UserID . " and xs.tstamp >= unix_timestamp(date_format(now(),
                 if (!empty($RecentSnatches)) {
             ?>
                     <div class="Box" id="recent_snatches">
-                        <div class="Box-header"> <?= Lang::get('user', 'last_torrents') ?></div>
+                        <div class="Box-header"> <?= Lang::get('user.last_torrents') ?></div>
                         <div class="Box-body">
                             <?
                             $tableRender = new TorrentGroupCoverTableView($RecentSnatches);
@@ -1208,7 +1208,7 @@ WHERE xs.uid =" . $UserID . " and xs.tstamp >= unix_timestamp(date_format(now(),
                 if (!empty($RecentUploads)) {
                 ?>
                     <div class="Box" id="recent_uploads">
-                        <div class="Box-header"> <?= Lang::get('user', 'last_uploads') ?></div>
+                        <div class="Box-header"> <?= Lang::get('user.last_uploads') ?></div>
                         <div class="Box-body">
                             <?
                             $tableRender = new TorrentGroupCoverTableView($RecentUploads);
@@ -1289,7 +1289,7 @@ WHERE xs.uid =" . $UserID . " and xs.tstamp >= unix_timestamp(date_format(now(),
             ?>
                 <div class="Box" id="invitetree_box">
                     <div class="Box-header">
-                        <?= Lang::get('user', 'invite_tree') ?> <a href="#" onclick="$('#invitetree').gtoggle(); return false;"><?= Lang::get('user', 'view') ?></a>
+                        <?= Lang::get('user.invite_tree') ?> <a href="#" onclick="$('#invitetree').gtoggle(); return false;"><?= Lang::get('user.view') ?></a>
                     </div>
                     <div id="invitetree" class="hidden Box-body">
                         <? $Tree->make_tree(); ?>
@@ -1318,22 +1318,22 @@ WHERE xs.uid =" . $UserID . " and xs.tstamp >= unix_timestamp(date_format(now(),
                 ?>
                     <div class="Box" id="requests_box">
                         <div class="Box-header">
-                            <?= Lang::get('global', 'requests') ?> <a href="#" onclick="$('#requests').gtoggle(); return false;"><?= Lang::get('user', 'view') ?></a>
+                            <?= Lang::get('global.requests') ?> <a href="#" onclick="$('#requests').gtoggle(); return false;"><?= Lang::get('user.view') ?></a>
                         </div>
                         <div class="Box-body TableCotainer hidden" id="requests">
                             <table class="Table TableRequest" cellpadding="6" cellspacing="1" border="0" width="100%">
                                 <tr class="Table-rowHeader">
                                     <td class="Table-cell">
-                                        <?= Lang::get('user', 'name') ?>
+                                        <?= Lang::get('user.name') ?>
                                     </td>
                                     <td class="Table-cell">
-                                        <?= Lang::get('user', 'vote') ?>
+                                        <?= Lang::get('user.vote') ?>
                                     </td>
                                     <td class="Table-cell">
-                                        <?= Lang::get('user', 'bounty') ?>
+                                        <?= Lang::get('user.bounty') ?>
                                     </td>
                                     <td class="Table-cell">
-                                        <?= Lang::get('user', 'add_time') ?>
+                                        <?= Lang::get('user.add_time') ?>
                                     </td>
                                 </tr>
                                 <?
@@ -1407,15 +1407,15 @@ WHERE xs.uid =" . $UserID . " and xs.tstamp >= unix_timestamp(date_format(now(),
                 ?>
                     <div class="Box" id="staffpms_box">
                         <div class="Box-header">
-                            <?= Lang::get('user', 'staff_pm') ?> <a href="#" onclick="$('#staffpms').gtoggle(); return false;"><?= Lang::get('user', 'view') ?></a>
+                            <?= Lang::get('user.staff_pm') ?> <a href="#" onclick="$('#staffpms').gtoggle(); return false;"><?= Lang::get('user.view') ?></a>
                         </div>
                         <table class="Box-body Table TableUserInbox hidden" id="staffpms">
                             <tr class="Form-rowHeader">
-                                <td class="Table-cell"><?= Lang::get('user', 'subject') ?></td>
-                                <td class="Table-cell"><?= Lang::get('user', 'date') ?></td>
-                                <td class="Table-cell"><?= Lang::get('user', 'assigned_to') ?></td>
-                                <td class="Table-cell"><?= Lang::get('user', 'replies') ?></td>
-                                <td class="Table-cell"><?= Lang::get('user', 'resolved_by') ?></td>
+                                <td class="Table-cell"><?= Lang::get('user.subject') ?></td>
+                                <td class="Table-cell"><?= Lang::get('user.date') ?></td>
+                                <td class="Table-cell"><?= Lang::get('user.assigned_to') ?></td>
+                                <td class="Table-cell"><?= Lang::get('user.replies') ?></td>
+                                <td class="Table-cell"><?= Lang::get('user.resolved_by') ?></td>
                             </tr>
                             <?
                             foreach ($StaffPMs as $StaffPM) {
@@ -1464,7 +1464,7 @@ WHERE xs.uid =" . $UserID . " and xs.tstamp >= unix_timestamp(date_format(now(),
                 if ($DB->has_results()) {
                 ?>
                     <div class="Box">
-                        <div class="Box-header"><?= Lang::get('user', 'forum_warnings') ?></div>
+                        <div class="Box-header"><?= Lang::get('user.forum_warnings') ?></div>
                         <div class="Box-body">
                             <div id="forumwarningslinks" class="HtmlText AdminComment" style="width: 98%;">
                                 <?= Text::full_format($ForumWarnings) ?>
@@ -1482,7 +1482,7 @@ WHERE xs.uid =" . $UserID . " and xs.tstamp >= unix_timestamp(date_format(now(),
 
                     <div class="Box" id="staff_notes_box">
                         <div class="Box-header">
-                            <?= Lang::get('user', 'staff_note') ?>
+                            <?= Lang::get('user.staff_note') ?>
                         </div>
                         <div id="staffnotes" class="Box-body">
                             <input type="hidden" name="comment_hash" value="<?= $CommentHash ?>" />
@@ -1495,12 +1495,12 @@ WHERE xs.uid =" . $UserID . " and xs.tstamp >= unix_timestamp(date_format(now(),
                     <table class="Form-rowList" variant="header" id="user_info_box">
                         <tr class="Form-rowHeader">
                             <td class="Form-title" colspan="2">
-                                <?= Lang::get('user', 'info') ?>
+                                <?= Lang::get('user.info') ?>
                             </td>
                         </tr>
                         <? if (check_perms('users_edit_usernames', $Class)) { ?>
                             <tr class="Form-row">
-                                <td class="Form-label"><?= Lang::get('user', 'account') ?></td>
+                                <td class="Form-label"><?= Lang::get('user.account') ?></td>
                                 <td class="Form-inputs"><input class="Input" type="text" size="20" name="Username" value="<?= display_str($Username) ?>" /></td>
                             </tr>
                         <?
@@ -1508,7 +1508,7 @@ WHERE xs.uid =" . $UserID . " and xs.tstamp >= unix_timestamp(date_format(now(),
                         if (check_perms('users_edit_titles')) {
                         ?>
                             <tr class="Form-row">
-                                <td class="Form-label"><?= Lang::get('user', 'customtitle') ?></td>
+                                <td class="Form-label"><?= Lang::get('user.customtitle') ?></td>
                                 <td class="Form-inputs"><input class="Input" type="text" name="Title" value="<?= display_str($CustomTitle) ?>" /></td>
                             </tr>
                         <?
@@ -1517,7 +1517,7 @@ WHERE xs.uid =" . $UserID . " and xs.tstamp >= unix_timestamp(date_format(now(),
                         if (check_perms('users_promote_below', $Class) || check_perms('users_promote_to', $Class - 1)) {
                         ?>
                             <tr class="Form-row">
-                                <td class="Form-label"><?= Lang::get('user', 'promote_class') ?></td>
+                                <td class="Form-label"><?= Lang::get('user.promote_class') ?></td>
                                 <td class="Form-inputs">
                                     <select class="Input" name="Class">
                                         <?
@@ -1546,14 +1546,14 @@ WHERE xs.uid =" . $UserID . " and xs.tstamp >= unix_timestamp(date_format(now(),
                         if (check_perms('users_give_donor')) {
                         ?>
                             <tr class="Form-row">
-                                <td class="Form-label"><?= Lang::get('user', 'donor') ?></td>
+                                <td class="Form-label"><?= Lang::get('user.donor') ?></td>
                                 <td class="Form-inputs"><input class="Input" type="checkbox" name="Donor" <? if ($Donor == 1) { ?> checked="checked" <? } ?> /></td>
                             </tr>
                         <?
                         }
                         if (check_perms('users_promote_below') || check_perms('users_promote_to')) { ?>
                             <tr class="Form-row">
-                                <td class="Form-label"><?= Lang::get('user', 'se_class') ?></td>
+                                <td class="Form-label"><?= Lang::get('user.se_class') ?></td>
                                 <td class="Form-inputs">
                                     <?
                                     $DB->query("
@@ -1580,7 +1580,7 @@ WHERE xs.uid =" . $UserID . " and xs.tstamp >= unix_timestamp(date_format(now(),
                         if (check_perms('users_make_invisible')) {
                         ?>
                             <tr class="Form-row">
-                                <td class="Form-label"><?= Lang::get('user', 'view_list') ?></td>
+                                <td class="Form-label"><?= Lang::get('user.view_list') ?></td>
                                 <td class="Form-inputs">
                                     <input class="Input" type="checkbox" name="Visible" <? if ($Visible == 1) { ?> checked="checked" <? } ?> />
                                 </td>
@@ -1591,28 +1591,28 @@ WHERE xs.uid =" . $UserID . " and xs.tstamp >= unix_timestamp(date_format(now(),
                         if (check_perms('users_edit_ratio', $Class) || (check_perms('users_edit_own_ratio') && $UserID == $LoggedUser['ID'])) {
                         ?>
                             <tr class="Form-row">
-                                <td class="Form-label" data-tooltip="<?= Lang::get('user', 'uploaded_title') ?>"><?= Lang::get('user', 'uploaded') ?></td>
+                                <td class="Form-label" data-tooltip="<?= Lang::get('user.uploaded_title') ?>"><?= Lang::get('user.uploaded') ?></td>
                                 <td class="Form-inputs">
                                     <input type="hidden" name="OldUploaded" value="<?= $Uploaded ?>" />
                                     <input class="Input" type="text" size="20" name="Uploaded" value="<?= $Uploaded ?>" />
                                 </td>
                             </tr>
                             <tr class="Form-row">
-                                <td class="Form-label" data-tooltip="<?= Lang::get('user', 'downloaded_title') ?>"><?= Lang::get('user', 'downloaded') ?></td>
+                                <td class="Form-label" data-tooltip="<?= Lang::get('user.downloaded_title') ?>"><?= Lang::get('user.downloaded') ?></td>
                                 <td class="Form-inputs">
                                     <input type="hidden" name="OldDownloaded" value="<?= $Downloaded ?>" />
                                     <input class="Input" type="text" size="20" name="Downloaded" value="<?= $Downloaded ?>" />
                                 </td>
                             </tr>
                             <tr class="Form-row">
-                                <td class="Form-label" data-tooltip="<?= Lang::get('user', 'bonus_points_title') ?>"><?= Lang::get('user', 'bonus_points') ?></td>
+                                <td class="Form-label" data-tooltip="<?= Lang::get('user.bonus_points_title') ?>"><?= Lang::get('user.bonus_points') ?></td>
                                 <td class="Form-inputs">
                                     <input type="hidden" name="OldBonusPoints" value="<?= $BonusPoints ?>" />
                                     <input class="Input" type="text" size="20" name="BonusPoints" value="<?= $BonusPoints ?>" />
                                 </td>
                             </tr>
                             <tr class="Form-row">
-                                <td class="Form-label" data-tooltip="<?= Lang::get('user', 'merge_from_title') ?>"><?= Lang::get('user', 'merge_from') ?></td>
+                                <td class="Form-label" data-tooltip="<?= Lang::get('user.merge_from_title') ?>"><?= Lang::get('user.merge_from') ?></td>
                                 <td class="Form-inputs">
                                     <input class="Input" type="text" size="40" name="MergeStatsFrom" />
                                 </td>
@@ -1623,7 +1623,7 @@ WHERE xs.uid =" . $UserID . " and xs.tstamp >= unix_timestamp(date_format(now(),
                         if (check_perms('users_edit_invites')) {
                         ?>
                             <tr class="Form-row">
-                                <td class="Form-label" data-tooltip="Number of invites"><?= Lang::get('user', 'invite') ?></td>
+                                <td class="Form-label" data-tooltip="Number of invites"><?= Lang::get('user.invite') ?></td>
                                 <td class="Form-inputs"><input class="Input" type="text" size="5" name="Invites" value="<?= $Invites ?>" /></td>
                             </tr>
                         <?
@@ -1632,7 +1632,7 @@ WHERE xs.uid =" . $UserID . " and xs.tstamp >= unix_timestamp(date_format(now(),
                         if (check_perms('admin_manage_user_fls')) {
                         ?>
                             <tr class="Form-row">
-                                <td class="Form-label" data-tooltip="Number of FL tokens"><?= Lang::get('user', 'token') ?></td>
+                                <td class="Form-label" data-tooltip="Number of FL tokens"><?= Lang::get('user.token') ?></td>
                                 <td class="Form-inputs"><input class="Input" type="text" size="5" name="FLTokens" value="<?= $FLTokens ?>" /></td>
                             </tr>
                         <?
@@ -1641,7 +1641,7 @@ WHERE xs.uid =" . $UserID . " and xs.tstamp >= unix_timestamp(date_format(now(),
                         if (check_perms('admin_manage_fls') || (check_perms('users_mod') && $OwnProfile)) {
                         ?>
                             <tr class="Form-row">
-                                <td class="Form-label" data-tooltip="<?= Lang::get('user', 'staff_mark_title') ?>"><?= Lang::get('user', 'staff_mark') ?></td>
+                                <td class="Form-label" data-tooltip="<?= Lang::get('user.staff_mark_title') ?>"><?= Lang::get('user.staff_mark') ?></td>
                                 <td class="Form-inputs"><input class="Input" type="text" name="SupportFor" value="<?= display_str($SupportFor) ?>" /></td>
                             </tr>
                         <?
@@ -1650,36 +1650,36 @@ WHERE xs.uid =" . $UserID . " and xs.tstamp >= unix_timestamp(date_format(now(),
                         if (check_perms('users_edit_reset_keys')) {
                         ?>
                             <tr class="Form-row">
-                                <td class="Form-label"><?= Lang::get('user', 'reset') ?></td>
+                                <td class="Form-label"><?= Lang::get('user.reset') ?></td>
                                 <td class="Form-inputs" id="reset_td">
                                     <div class="Checkbox">
                                         <input class="Input" type="checkbox" name="ResetRatioWatch" id="ResetRatioWatch" />
-                                        <label class="Checkbox-label" for="ResetRatioWatch"><?= Lang::get('user', 'ratio_watch') ?></label>
+                                        <label class="Checkbox-label" for="ResetRatioWatch"><?= Lang::get('user.ratio_watch') ?></label>
                                     </div>
                                     <div class="Checkbox">
                                         <input class="Input" type="checkbox" name="ResetPasskey" id="ResetPasskey" />
-                                        <label class="Checkbox-label" for="ResetPasskey"><?= Lang::get('user', 'passkey') ?></label>
+                                        <label class="Checkbox-label" for="ResetPasskey"><?= Lang::get('user.passkey') ?></label>
                                     </div>
                                     <div class="Checkbox">
                                         <input class="Input" type="checkbox" name="ResetAuthkey" id="ResetAuthkey" />
-                                        <label class="Checkbox-label" for="ResetAuthkey"><?= Lang::get('user', 'authkey') ?></label>
+                                        <label class="Checkbox-label" for="ResetAuthkey"><?= Lang::get('user.authkey') ?></label>
                                     </div>
                                     <div class="Checkbox">
                                         <input class="Input" type="checkbox" name="ResetIPHistory" id="ResetIPHistory" />
-                                        <label class="Checkbox-label" for="ResetIPHistory"><?= Lang::get('user', 'ip_history') ?></label>
+                                        <label class="Checkbox-label" for="ResetIPHistory"><?= Lang::get('user.ip_history') ?></label>
                                     </div>
                                     <div class="Checkbox">
                                         <input class="Input" type="checkbox" name="ResetEmailHistory" id="ResetEmailHistory" />
-                                        <label class="Checkbox-label" for="ResetEmailHistory"><?= Lang::get('user', 'email_history') ?></label>
+                                        <label class="Checkbox-label" for="ResetEmailHistory"><?= Lang::get('user.email_history') ?></label>
                                     </div>
                                     <br />
                                     <div class="Checkbox">
                                         <input class="Input" type="checkbox" name="ResetSnatchList" id="ResetSnatchList" />
-                                        <label class="Checkbox-label" for="ResetSnatchList"><?= Lang::get('user', 'snatch_list') ?></label>
+                                        <label class="Checkbox-label" for="ResetSnatchList"><?= Lang::get('user.snatch_list') ?></label>
                                     </div>
                                     <div class="Checkbox">
                                         <input class="Input" type="checkbox" name="ResetDownloadList" id="ResetDownloadList" />
-                                        <label class="Checkbox-label" for="ResetDownloadList"><?= Lang::get('user', 'download_list') ?></label>
+                                        <label class="Checkbox-label" for="ResetDownloadList"><?= Lang::get('user.download_list') ?></label>
                                     </div>
                                 </td>
                             </tr>
@@ -1689,20 +1689,20 @@ WHERE xs.uid =" . $UserID . " and xs.tstamp >= unix_timestamp(date_format(now(),
                         if (check_perms('users_edit_password')) {
                         ?>
                             <tr class="Form-row">
-                                <td class="Form-label"><?= Lang::get('user', 'new_password') ?></td>
+                                <td class="Form-label"><?= Lang::get('user.new_password') ?></td>
                                 <td class="Form-inputs">
                                     <input class="Input" type="text" size="30" id="change_password" name="ChangePassword" />
-                                    <button class="Button" type="button" id="random_password"><?= Lang::get('user', 'generate') ?></button>
+                                    <button class="Button" type="button" id="random_password"><?= Lang::get('user.generate') ?></button>
                                 </td>
                             </tr>
 
                             <tr class="Form-row">
-                                <td class="Form-label"><?= Lang::get('user', '2fa') ?></td>
+                                <td class="Form-label"><?= Lang::get('user.2fa') ?></td>
                                 <td class="Form-inputs">
                                     <? if ($FA_Key) { ?>
-                                        <a href="user.php?action=2fa&page=user&do=disable&userid=<?= $UserID ?>"><?= Lang::get('user', 'close') ?></a>
+                                        <a href="user.php?action=2fa&page=user&do=disable&userid=<?= $UserID ?>"><?= Lang::get('user.close') ?></a>
                                     <? } else { ?>
-                                        <?= Lang::get('user', 'closed') ?>
+                                        <?= Lang::get('user.closed') ?>
                                     <? } ?>
                                 </td>
                             </tr>
@@ -1713,12 +1713,12 @@ WHERE xs.uid =" . $UserID . " and xs.tstamp >= unix_timestamp(date_format(now(),
                         <table class="Form-rowList" variant="header" id="warn_user_box">
                             <tr class="Form-rowHeader">
                                 <td class="Form-title" colspan="2">
-                                    <?= Lang::get('user', 'warn') ?>
+                                    <?= Lang::get('user.warn') ?>
                                 </td>
                             </tr>
                             <tr class="Form-row">
                                 <td class="Form-label">
-                                    <?= Lang::get('user', 'warned') ?>
+                                    <?= Lang::get('user.warned') ?>
                                 </td>
                                 <td class="Form-inputs">
                                     <input type="checkbox" name="Warned" <? if ($Warned != '0000-00-00 00:00:00') { ?> checked="checked" <? } ?> />
@@ -1727,51 +1727,51 @@ WHERE xs.uid =" . $UserID . " and xs.tstamp >= unix_timestamp(date_format(now(),
                             <? if ($Warned == '0000-00-00 00:00:00') { /* user is not warned */ ?>
                                 <tr class="Form-row">
                                     <td class="Form-label">
-                                        <?= Lang::get('user', 'warn_time') ?>
+                                        <?= Lang::get('user.warn_time') ?>
                                     </td>
                                     <td class="Form-inputs">
                                         <select class="Input" name="WarnLength">
                                             <option class="Select-option" value="">---</option>
-                                            <option class="Select-option" value="1"><?= Lang::get('user', '1_week') ?></option>
-                                            <option class="Select-option" value="2"><?= Lang::get('user', '2_week') ?></option>
-                                            <option class="Select-option" value="4"><?= Lang::get('user', '4_week') ?></option>
-                                            <option class="Select-option" value="8"><?= Lang::get('user', '8_week') ?></option>
+                                            <option class="Select-option" value="1"><?= Lang::get('user.1_week') ?></option>
+                                            <option class="Select-option" value="2"><?= Lang::get('user.2_week') ?></option>
+                                            <option class="Select-option" value="4"><?= Lang::get('user.4_week') ?></option>
+                                            <option class="Select-option" value="8"><?= Lang::get('user.8_week') ?></option>
                                         </select>
                                     </td>
                                 </tr>
                             <? } else { /* user is warned */ ?>
                                 <tr class="Form-row">
                                     <td class="Form-label">
-                                        <?= Lang::get('user', 'warn_time') ?>
+                                        <?= Lang::get('user.warn_time') ?>
                                     </td>
                                     <td class="Form-inputs">
                                         <select class="Input" name="ExtendWarning" onchange="ToggleWarningAdjust(this);">
                                             <option class="Select-option">---</option>
-                                            <option class="Select-option" value="1"><?= Lang::get('user', '1_week') ?></option>
-                                            <option class="Select-option" value="2"><?= Lang::get('user', '2_week') ?></option>
-                                            <option class="Select-option" value="4"><?= Lang::get('user', '4_week') ?></option>
-                                            <option class="Select-option" value="8"><?= Lang::get('user', '8_week') ?></option>
+                                            <option class="Select-option" value="1"><?= Lang::get('user.1_week') ?></option>
+                                            <option class="Select-option" value="2"><?= Lang::get('user.2_week') ?></option>
+                                            <option class="Select-option" value="4"><?= Lang::get('user.4_week') ?></option>
+                                            <option class="Select-option" value="8"><?= Lang::get('user.8_week') ?></option>
                                         </select>
                                     </td>
                                 </tr>
                                 <tr class="Form-row" id="ReduceWarningTR">
                                     <td class="Form-label">
-                                        <?= Lang::get('user', 'free_time') ?>
+                                        <?= Lang::get('user.free_time') ?>
                                     </td>
                                     <td class="Form-inputs">
                                         <select class="Input" name="ReduceWarning">
                                             <option class="Select-option">---</option>
-                                            <option class="Select-option" value="1"><?= Lang::get('user', '1_week') ?></option>
-                                            <option class="Select-option" value="2"><?= Lang::get('user', '2_week') ?></option>
-                                            <option class="Select-option" value="4"><?= Lang::get('user', '4_week') ?></option>
-                                            <option class="Select-option" value="8"><?= Lang::get('user', '8_week') ?></option>
+                                            <option class="Select-option" value="1"><?= Lang::get('user.1_week') ?></option>
+                                            <option class="Select-option" value="2"><?= Lang::get('user.2_week') ?></option>
+                                            <option class="Select-option" value="4"><?= Lang::get('user.4_week') ?></option>
+                                            <option class="Select-option" value="8"><?= Lang::get('user.8_week') ?></option>
                                         </select>
                                     </td>
                                 </tr>
                             <? } ?>
                             <tr class="Form-row">
-                                <td class="Form-label" data-tooltip="<?= Lang::get('user', 'warn_reason_title') ?>">
-                                    <?= Lang::get('user', 'warn_reason') ?>
+                                <td class="Form-label" data-tooltip="<?= Lang::get('user.warn_reason_title') ?>">
+                                    <?= Lang::get('user.warn_reason') ?>
                                 </td>
                                 <td class="Form-inputs">
                                     <input class="Input" type="text" name="WarnReason" />
@@ -1783,21 +1783,21 @@ WHERE xs.uid =" . $UserID . " and xs.tstamp >= unix_timestamp(date_format(now(),
                             <table class="Form-rowList" variant="header">
                                 <tr class="Form-rowHeader">
                                     <td class="Form-title" colspan="2">
-                                        <?= Lang::get('user', 'disable_account') ?>
+                                        <?= Lang::get('user.disable_account') ?>
                                     </td>
                                 </tr>
                                 <tr class="Form-row">
-                                    <td class="Form-label"><?= Lang::get('user', 'account_disable') ?></td>
+                                    <td class="Form-label"><?= Lang::get('user.account_disable') ?></td>
                                     <td class="Form-inputs">
                                         <input type="checkbox" name="LockAccount" id="LockAccount" <? if ($LockedAccount) { ?> checked="checked" <? } ?> />
                                     </td>
                                 </tr>
                                 <tr class="Form-row">
-                                    <td class="Form-label"><?= Lang::get('user', 'reason') ?></td>
+                                    <td class="Form-label"><?= Lang::get('user.reason') ?></td>
                                     <td class="Form-inputs">
                                         <select class="Input" name="LockReason">
                                             <option class="Select-option" value="---">---</option>
-                                            <option class="Select-option" value="<?= STAFF_LOCKED ?>" <? if ($LockedAccount == STAFF_LOCKED) { ?> selected <? } ?>><?= Lang::get('user', 'admin_account') ?></option>
+                                            <option class="Select-option" value="<?= STAFF_LOCKED ?>" <? if ($LockedAccount == STAFF_LOCKED) { ?> selected <? } ?>><?= Lang::get('user.admin_account') ?></option>
                                         </select>
                                     </td>
                                 </tr>
@@ -1806,7 +1806,7 @@ WHERE xs.uid =" . $UserID . " and xs.tstamp >= unix_timestamp(date_format(now(),
                         <table class="Form-rowList" variant="header" id="user_privs_box">
                             <tr class="Form-rowHeader">
                                 <td class="Form-title" colspan="2">
-                                    <?= Lang::get('user', 'user_po') ?>
+                                    <?= Lang::get('user.user_po') ?>
                                 </td>
                             </tr>
                             <? if (check_perms('users_disable_posts') || check_perms('users_disable_any')) {
@@ -1818,79 +1818,79 @@ WHERE xs.uid =" . $UserID . " and xs.tstamp >= unix_timestamp(date_format(now(),
                                 $Emails = $DB->to_array();
                             ?>
                                 <tr class="Form-row">
-                                    <td class="Form-label"><?= Lang::get('user', 'user_disable') ?></td>
+                                    <td class="Form-label"><?= Lang::get('user.user_disable') ?></td>
                                     <td class="Form-inputs">
                                         <div class="Checkbox">
                                             <input class="Input" type="checkbox" name="DisablePosting" id="DisablePosting" <? if ($DisablePosting == 1) { ?> checked="checked" <? } ?> />
-                                            <label class="Checkbox-label" for="DisablePosting"><?= Lang::get('user', 'posting') ?></label>
+                                            <label class="Checkbox-label" for="DisablePosting"><?= Lang::get('user.posting') ?></label>
                                         </div>
                                         <? if (check_perms('users_disable_any')) { ?>
                                             <div class="Checkbox">
                                                 <input class="Input" type="checkbox" name="DisableAvatar" id="DisableAvatar" <? if ($DisableAvatar == 1) { ?> checked="checked" <? } ?> />
-                                                <label class="Checkbox-label" for="DisableAvatar"><?= Lang::get('user', 'avatar') ?></label>
+                                                <label class="Checkbox-label" for="DisableAvatar"><?= Lang::get('user.avatar') ?></label>
                                             </div>
                                             <div class="Checkbox">
                                                 <input class="Input" type="checkbox" name="DisableForums" id="DisableForums" <? if ($DisableForums == 1) { ?> checked="checked" <? } ?> />
-                                                <label class="Checkbox-label" for="DisableForums"><?= Lang::get('user', 'forums') ?></label>
+                                                <label class="Checkbox-label" for="DisableForums"><?= Lang::get('user.forums') ?></label>
                                             </div>
                                             <div class="Checkbox">
                                                 <input class="Input" type="checkbox" name="DisableIRC" id="DisableIRC" <? if ($DisableIRC == 1) { ?> checked="checked" <? } ?> />
-                                                <label class="Checkbox-label" for="DisableIRC"><?= Lang::get('user', 'irc') ?></label>
+                                                <label class="Checkbox-label" for="DisableIRC"><?= Lang::get('user.irc') ?></label>
                                             </div>
                                             <div class="Checkbox">
                                                 <input class="Input" type="checkbox" name="DisablePM" id="DisablePM" <? if ($DisablePM == 1) { ?> checked="checked" <? } ?> />
-                                                <label class="Checkbox-label" for="DisablePM"><?= Lang::get('user', 'pm') ?></label>
+                                                <label class="Checkbox-label" for="DisablePM"><?= Lang::get('user.pm') ?></label>
                                             </div>
                                             <br />
                                             <div class="Checkbox">
                                                 <input class="Input" type="checkbox" name="DisableLeech" id="DisableLeech" <? if ($DisableLeech == 0) { ?> checked="checked" <? } ?> />
-                                                <label class="Checkbox-label" for="DisableLeech"><?= Lang::get('user', 'leech') ?></label>
+                                                <label class="Checkbox-label" for="DisableLeech"><?= Lang::get('user.leech') ?></label>
                                             </div>
                                             <div class="Checkbox">
                                                 <input class="Input" type="checkbox" name="DisableRequests" id="DisableRequests" <? if ($DisableRequests == 1) { ?> checked="checked" <? } ?> />
-                                                <label class="Checkbox-label" for="DisableRequests"><?= Lang::get('global', 'requests') ?></label>
+                                                <label class="Checkbox-label" for="DisableRequests"><?= Lang::get('global.requests') ?></label>
                                             </div>
                                             <div class="Checkbox">
                                                 <input class="Input" type="checkbox" name="DisableUpload" id="DisableUpload" <? if ($DisableUpload == 1) { ?> checked="checked" <? } ?> />
-                                                <label class="Checkbox-label" for="DisableUpload"><?= Lang::get('user', 'torrent_upload') ?></label>
+                                                <label class="Checkbox-label" for="DisableUpload"><?= Lang::get('user.torrent_upload') ?></label>
                                             </div>
                                             <div class="Checkbox">
                                                 <input class="Input" type="checkbox" name="DisablePoints" id="DisablePoints" <? if ($DisablePoints == 1) { ?> checked="checked" <? } ?> />
-                                                <label class="Checkbox-label" for="DisablePoints"><?= Lang::get('user', 'bonus_points') ?></label>
+                                                <label class="Checkbox-label" for="DisablePoints"><?= Lang::get('user.bonus_points') ?></label>
                                             </div>
                                             <br />
                                             <div class="Checkbox">
                                                 <input class="Input" type="checkbox" name="DisableTagging" id="DisableTagging" <? if ($DisableTagging == 1) { ?> checked="checked" <? } ?> />
-                                                <label class="Checkbox-label" for="DisableTagging" data-tooltip="<?= Lang::get('user', 'tagging_title') ?>"><?= Lang::get('user', 'tagging') ?></label>
+                                                <label class="Checkbox-label" for="DisableTagging" data-tooltip="<?= Lang::get('user.tagging_title') ?>"><?= Lang::get('user.tagging') ?></label>
                                             </div>
                                             <div class="Checkbox">
                                                 <input class="Input" type="checkbox" name="DisableWiki" id="DisableWiki" <? if ($DisableWiki == 1) { ?> checked="checked" <? } ?> />
-                                                <label class="Checkbox-label" for="DisableWiki"><?= Lang::get('user', 'wiki') ?></label>
+                                                <label class="Checkbox-label" for="DisableWiki"><?= Lang::get('user.wiki') ?></label>
                                             </div>
                                             <br />
                                             <div class="Checkbox">
                                                 <input class="Input" type="checkbox" name="DisableInvites" id="DisableInvites" <? if ($DisableInvites == 1) { ?> checked="checked" <? } ?> />
-                                                <label class="Checkbox-label" for="DisableInvites"><?= Lang::get('user', 'invites') ?></label>
+                                                <label class="Checkbox-label" for="DisableInvites"><?= Lang::get('user.invites') ?></label>
                                             </div>
                                             <br />
                                             <div class="Checkbox">
                                                 <input class="Input" type="checkbox" name="DisableCheckAll" id="DisableCheckAll" <? if ($DisableCheckAll == 1) { ?> checked="checked" <? } ?> />
-                                                <label class="Checkbox-label" for="DisableCheckAll"><?= Lang::get('user', 'check_all_torrents') ?></label>
+                                                <label class="Checkbox-label" for="DisableCheckAll"><?= Lang::get('user.check_all_torrents') ?></label>
                                             </div>
                                             <div class="Checkbox">
                                                 <input class="Input" type="checkbox" name="DisableCheckSelf" id="DisableCheckSelf" <? if ($DisableCheckSelf == 1) { ?> checked="checked" <? } ?> />
-                                                <label class="Checkbox-label" for="DisableCheckSelf"><?= Lang::get('user', 'check_his_her_torrents') ?></label>
+                                                <label class="Checkbox-label" for="DisableCheckSelf"><?= Lang::get('user.check_his_her_torrents') ?></label>
                                             </div>
                                     </td>
                                 </tr>
                                 <? if ($Emails) { ?>
                                     <tr class="Form-row">
-                                        <td class="Form-label"><?= Lang::get('user', 'hacked') ?></td>
+                                        <td class="Form-label"><?= Lang::get('user.hacked') ?></td>
                                         <td class="Form-inputs">
                                             <div class="Checkbox">
                                                 <input class="Input" type="checkbox" name="SendHackedMail" id="SendHackedMail" />
                                                 <label class="Checkbox-label" for="SendHackedMail">
-                                                    <?= Lang::get('user', 'send_hacked_account_email_to') ?>
+                                                    <?= Lang::get('user.send_hacked_account_email_to') ?>
                                                 </label>
                                             </div>
                                             <select class="Input" name="HackedEmail">
@@ -1910,34 +1910,34 @@ WHERE xs.uid =" . $UserID . " and xs.tstamp >= unix_timestamp(date_format(now(),
                         <? } ?>
                         <? if (check_perms('users_disable_any')) { ?>
                             <tr class="Form-row">
-                                <td class="Form-label"><?= Lang::get('user', 'account') ?></td>
+                                <td class="Form-label"><?= Lang::get('user.account') ?></td>
                                 <td class="Form-inputs">
                                     <select class="Input" name="UserStatus">
-                                        <option class="Select-option" value="0" <? if ($Enabled == '0') { ?> selected="selected" <? } ?>><?= Lang::get('user', 'unconfirmed') ?></option>
-                                        <option class="Select-option" value="1" <? if ($Enabled == '1') { ?> selected="selected" <? } ?>><?= Lang::get('user', 'enabled') ?></option>
-                                        <option class="Select-option" value="2" <? if ($Enabled == '2') { ?> selected="selected" <? } ?>><?= Lang::get('user', 'disabled') ?></option>
+                                        <option class="Select-option" value="0" <? if ($Enabled == '0') { ?> selected="selected" <? } ?>><?= Lang::get('user.unconfirmed') ?></option>
+                                        <option class="Select-option" value="1" <? if ($Enabled == '1') { ?> selected="selected" <? } ?>><?= Lang::get('user.enabled') ?></option>
+                                        <option class="Select-option" value="2" <? if ($Enabled == '2') { ?> selected="selected" <? } ?>><?= Lang::get('user.disabled') ?></option>
                                         <? if (check_perms('users_delete_users')) { ?>
                                             <optgroup class="Select-group" label="-- WARNING --">
-                                                <option class="Select-option" value="delete"><?= Lang::get('user', 'delete_account') ?></option>
+                                                <option class="Select-option" value="delete"><?= Lang::get('user.delete_account') ?></option>
                                             </optgroup>
                                         <?      } ?>
                                     </select>
                                 </td>
                             </tr>
                             <tr class="Form-row">
-                                <td class="Form-label"><?= Lang::get('user', 'user_reason') ?></td>
+                                <td class="Form-label"><?= Lang::get('user.user_reason') ?></td>
                                 <td class="Form-inputs">
                                     <input class="Input" type="text" name="UserReason" />
                                 </td>
                             </tr>
                             <tr class="Form-row">
-                                <td class="Form-label" data-tooltip="<?= Lang::get('user', 'restricted_forums_title') ?>"><?= Lang::get('user', 'restricted_forums') ?></td>
+                                <td class="Form-label" data-tooltip="<?= Lang::get('user.restricted_forums_title') ?>"><?= Lang::get('user.restricted_forums') ?></td>
                                 <td class="Form-inputs">
                                     <input class="Input" type="text" name="RestrictedForums" value="<?= display_str($RestrictedForums) ?>" />
                                 </td>
                             </tr>
                             <tr class="Form-row">
-                                <td class="Form-label" data-tooltip="<?= Lang::get('user', 'permitted_forums_title') ?>"><?= Lang::get('user', 'permitted_forums') ?></td>
+                                <td class="Form-label" data-tooltip="<?= Lang::get('user.permitted_forums_title') ?>"><?= Lang::get('user.permitted_forums') ?></td>
                                 <td class="Form-inputs">
                                     <input class="Input" type="text" name="PermittedForums" value="<?= display_str($PermittedForums) ?>" />
                                 </td>
@@ -1949,15 +1949,15 @@ WHERE xs.uid =" . $UserID . " and xs.tstamp >= unix_timestamp(date_format(now(),
                             <table class="Form-rowList" variant="header" id="session_box">
                                 <tr class="Form-rowHeader">
                                     <td class="Form-title" colspan="2">
-                                        <?= Lang::get('user', 'session') ?>
+                                        <?= Lang::get('user.session') ?>
                                     </td>
                                 </tr>
                                 <tr class="Form-row">
-                                    <td class="Form-label"><?= Lang::get('user', 'reset_session') ?></td>
+                                    <td class="Form-label"><?= Lang::get('user.reset_session') ?></td>
                                     <td class="Form-inputs"><input type="checkbox" name="ResetSession" id="ResetSession" /></td>
                                 </tr>
                                 <tr class="Form-row">
-                                    <td class="Form-label"><?= Lang::get('user', 'logout') ?></td>
+                                    <td class="Form-label"><?= Lang::get('user.logout') ?></td>
                                     <td class="Form-inputs"><input type="checkbox" name="LogOut" id="LogOut" /></td>
                                 </tr>
                             </table>
@@ -1969,18 +1969,18 @@ WHERE xs.uid =" . $UserID . " and xs.tstamp >= unix_timestamp(date_format(now(),
                         ?>
                         <table class="Form-rowList" variant="header" id="submit_box">
                             <tr class="Form-rowHeader">
-                                <td class="Form-title" colspan="2"><?= Lang::get('user', 'submit') ?></td>
+                                <td class="Form-title" colspan="2"><?= Lang::get('user.submit') ?></td>
                             </tr>
                             <tr class="Form-row">
-                                <td class="Form-label" data-tooltip="<?= Lang::get('user', 'reason_title') ?>"><?= Lang::get('user', 'reason') ?>:</td>
+                                <td class="Form-label" data-tooltip="<?= Lang::get('user.reason_title') ?>"><?= Lang::get('user.reason') ?>:</td>
                                 <td class="Form-inputs">
                                     <textarea class="Input wide_input_text" rows="1" cols="35" name="Reason" id="Reason" onkeyup="resize('Reason');"></textarea>
                                 </td>
                             </tr>
                             <tr class="Form-row">
-                                <td class="Form-label"><?= Lang::get('user', 'paste_user_stats') ?>:</td>
+                                <td class="Form-label"><?= Lang::get('user.paste_user_stats') ?>:</td>
                                 <td class="Form-inputs">
-                                    <button class="Button" type="button" id="paster"><?= Lang::get('user', 'paste') ?></button>
+                                    <button class="Button" type="button" id="paster"><?= Lang::get('user.paste') ?></button>
                                 </td>
                             </tr>
 

@@ -2,7 +2,7 @@
 if (!check_perms('site_view_flow')) {
     error(403);
 }
-View::show_header(Lang::get('tools', 'h2_upscale_pool'), '', 'PageToolUpscalePool');
+View::show_header(Lang::get('tools.h2_upscale_pool'), '', 'PageToolUpscalePool');
 define('USERS_PER_PAGE', 50);
 list($Page, $Limit) = Format::page_limit(USERS_PER_PAGE);
 
@@ -38,13 +38,13 @@ list($TotalDisabled) = $DB->next_record();
 $DB->set_query_id($RS);
 ?>
 <div class="BodyHeader">
-    <h2 class="BodyHeader-nav"><?= Lang::get('tools', 'h2_upscale_pool') ?></h2>
+    <h2 class="BodyHeader-nav"><?= Lang::get('tools.h2_upscale_pool') ?></h2>
 </div>
 <?
 if ($DB->has_results()) {
 ?>
     <div class="BoxBody thin" id="users_on_ratio_watch_number">
-        <p><?= Lang::get('tools', 'there_are_currently_enabled_users_on_ratio_watch_1') ?> <?= number_format($Results) ?> <?= Lang::get('tools', 'there_are_currently_enabled_users_on_ratio_watch_2') ?> <?= number_format($TotalDisabled) ?> <?= Lang::get('tools', 'there_are_currently_enabled_users_on_ratio_watch_3') ?></p>
+        <p><?= Lang::get('tools.there_are_currently_enabled_users_on_ratio_watch_1') ?> <?= number_format($Results) ?> <?= Lang::get('tools.there_are_currently_enabled_users_on_ratio_watch_2') ?> <?= number_format($TotalDisabled) ?> <?= Lang::get('tools.there_are_currently_enabled_users_on_ratio_watch_3') ?></p>
     </div>
     <div class="BodyNavLinks">
         <?
@@ -54,16 +54,16 @@ if ($DB->has_results()) {
     </div>
     <table class="Table">
         <tr class="Table-rowHeader">
-            <td class="Table-cell"><?= Lang::get('tools', 'user') ?></td>
-            <td class="Table-cell Table-cellRight"><?= Lang::get('tools', 'uploaded') ?></td>
-            <td class="Table-cell Table-cellRight"><?= Lang::get('tools', 'downloaded') ?></td>
-            <td class="Table-cell Table-cellRight"><?= Lang::get('tools', 'ratio') ?></td>
-            <td class="Table-cell Table-cellRight"><?= Lang::get('tools', 'required_ratio') ?></td>
-            <td class="Table-cell Table-cellRight" data-tooltip="<?= Lang::get('tools', 'deficit_title') ?>"><?= Lang::get('tools', 'deficit') ?></td>
-            <td class="Table-cell Table-cellRight" data-tooltip="<?= Lang::get('tools', 'gamble_title') ?>"><?= Lang::get('tools', 'gamble') ?></td>
-            <td class="Table-cell Table-cellRight"><?= Lang::get('tools', 'registration_date') ?></td>
-            <td class="Table-cell Table-cellRight" data-tooltip="<?= Lang::get('tools', 'ratio_watch_ended_ends_title') ?>"><?= Lang::get('tools', 'ratio_watch_ended_ends') ?></td>
-            <td class="Table-cell Table-cellRight"><?= Lang::get('tools', 'life_span') ?></td>
+            <td class="Table-cell"><?= Lang::get('tools.user') ?></td>
+            <td class="Table-cell Table-cellRight"><?= Lang::get('tools.uploaded') ?></td>
+            <td class="Table-cell Table-cellRight"><?= Lang::get('tools.downloaded') ?></td>
+            <td class="Table-cell Table-cellRight"><?= Lang::get('tools.ratio') ?></td>
+            <td class="Table-cell Table-cellRight"><?= Lang::get('tools.required_ratio') ?></td>
+            <td class="Table-cell Table-cellRight" data-tooltip="<?= Lang::get('tools.deficit_title') ?>"><?= Lang::get('tools.deficit') ?></td>
+            <td class="Table-cell Table-cellRight" data-tooltip="<?= Lang::get('tools.gamble_title') ?>"><?= Lang::get('tools.gamble') ?></td>
+            <td class="Table-cell Table-cellRight"><?= Lang::get('tools.registration_date') ?></td>
+            <td class="Table-cell Table-cellRight" data-tooltip="<?= Lang::get('tools.ratio_watch_ended_ends_title') ?>"><?= Lang::get('tools.ratio_watch_ended_ends') ?></td>
+            <td class="Table-cell Table-cellRight"><?= Lang::get('tools.life_span') ?></td>
         </tr>
         <?
         while (list($UserID, $Username, $Uploaded, $Downloaded, $PermissionID, $Enabled, $Donor, $Warned, $Joined, $RatioWatchEnds, $RatioWatchDownload, $RequiredRatio) = $DB->next_record()) {
@@ -89,7 +89,7 @@ if ($DB->has_results()) {
     </div>
 <?
 } else { ?>
-    <h2 align="center"><?= Lang::get('tools', 'there_are_currently_no_users_on_ratio_watch') ?></h2>
+    <h2 align="center"><?= Lang::get('tools.there_are_currently_no_users_on_ratio_watch') ?></h2>
 <?
 }
 

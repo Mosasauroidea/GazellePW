@@ -156,7 +156,7 @@ class Donations {
             // Send them a thank you PM
             if ($SendPM) {
                 $UserLang = Lang::getUserLang($UserID);
-                $Subject = Lang::get('inbox', 'contribution_has_been_received', $UserLang);
+                $Subject = Lang::get('inbox.contribution_has_been_received', ['Values' => [$UserLang]]);
                 $Body = self::get_pm_body($Source, $Currency, $Price, $IncreaseRank, $Rank, $UserLang);
                 Misc::send_pm($UserID, 0, $Subject, $Body);
             }
@@ -194,25 +194,25 @@ class Donations {
                 $SpecialRank = 0;
             }
             if ($SpecialRank < 1 && $TotalRank >= 2) {
-                Misc::send_pm($UserID, 0, Lang::get('inbox', 'get_special_rank_one_sbj', $UserLang), Lang::get('inbox', 'get_special_rank_one_pm', $UserLang));
+                Misc::send_pm($UserID, 0, Lang::get('inbox.get_special_rank_one_sbj', ['Values' => $UserLang]), Lang::get('inbox.get_special_rank_one_pm', ['Values' => $UserLang]));
                 $SpecialRank = 1;
             }
             if ($SpecialRank < 2 && $TotalRank >= 6) {
-                Misc::send_pm($UserID, 0, Lang::get('inbox', 'get_special_rank_two_sbj', $UserLang), Lang::get('inbox', 'get_special_rank_two_pm', $UserLang));
+                Misc::send_pm($UserID, 0, Lang::get('inbox.get_special_rank_two_sbj', ['Values' => $UserLang]), Lang::get('inbox.get_special_rank_two_pm', ['Values' => $UserLang]));
                 $SpecialRank = 2;
             }
             if ($SpecialRank < 3 && $TotalRank >= 12) {
-                Misc::send_pm($UserID, 0, Lang::get('inbox', 'get_special_rank_three_sbj', $UserLang), Lang::get('inbox', 'get_special_rank_three_pm', $UserLang));
+                Misc::send_pm($UserID, 0, Lang::get('inbox.get_special_rank_three_sbj', ['Values' => $UserLang]), Lang::get('inbox.get_special_rank_three_pm', ['Values' => $UserLang]));
                 $SpecialRank = 3;
                 $SpecialInvites += 2;
             }
             if ($SpecialRank < 4 && $TotalRank >= 24) {
-                Misc::send_pm($UserID, 0, Lang::get('inbox', 'get_special_rank_four_sbj', $UserLang), Lang::get('inbox', 'get_special_rank_four_pm', $UserLang));
+                Misc::send_pm($UserID, 0, Lang::get('inbox.get_special_rank_four_sbj', ['Values' => $UserLang]), Lang::get('inbox.get_special_rank_four_pm', ['Values' => $UserLang]));
                 $SpecialRank = 4;
                 $SpecialInvites += 4;
             }
             if ($SpecialRank < 5 && $TotalRank >= 50) {
-                Misc::send_pm($UserID, 0, Lang::get('inbox', 'get_special_rank_five_sbj', $UserLang), Lang::get('inbox', 'get_special_rank_five_pm', $UserLang));
+                Misc::send_pm($UserID, 0, Lang::get('inbox.get_special_rank_five_sbj', ['Values' => $UserLang]), Lang::get('inbox.get_special_rank_five_pm', ['Values' => $UserLang]));
                 $SpecialRank = 5;
                 $SpecialInvites += 6;
             }
@@ -255,7 +255,7 @@ class Donations {
         if (G::$DB->record_count() > 0) {
             while (list($UserID) = G::$DB->next_record()) {
                 $UserLang = Lang::getUserLang($UserID);
-                Misc::send_pm($UserID, 0,  Lang::get('inbox', 'expire_rank_sbj', $UserLang), Lang::get('inbox', 'expire_rank_pm', $UserLang));
+                Misc::send_pm($UserID, 0,  Lang::get('inbox.expire_rank_sbj', ['Values' => $UserLang]), Lang::get('inbox.expire_rank_pm', ['Values' => $UserLang]));
             }
         }
 
@@ -837,6 +837,6 @@ class Donations {
         } elseif ($CurrentRank == 5) {
             $CurrentRank = 4;
         }
-        return Lang::get('inbox', 'get_pm_body_1', $Lang) . " $DonationAmount $Currency\n" . Lang::get('inbox', 'get_pm_body_2', $Lang) . " $ReceivedRank " . Lang::get('inbox', 'get_pm_body_3', $Lang) . ($ReceivedRank == 1 ? '' : Lang::get('inbox', 's', $Lang)) . "\n" . Lang::get('inbox', 'get_pm_body_4', $Lang) . " $CurrentRank\n" . Lang::get('inbox', 'get_pm_body_5', $Lang);
+        return Lang::get('inbox.get_pm_body_1', ['Values' => $Lang]) . " $DonationAmount $Currency\n" . Lang::get('inbox.get_pm_body_2', ['Values' => $Lang]) . " $ReceivedRank " . Lang::get('inbox.get_pm_body_3', ['Values' => $Lang]) . ($ReceivedRank == 1 ? '' : Lang::get('inbox.s', ['Values' => $Lang])) . "\n" . Lang::get('inbox.get_pm_body_4', ['Values' => $Lang]) . " $CurrentRank\n" . Lang::get('inbox.get_pm_body_5', ['Values' => $Lang]);
     }
 }

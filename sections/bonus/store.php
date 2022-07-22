@@ -7,7 +7,7 @@ if (isset($_GET['complete'])) {
     $item = $Bonus->getItem($label);
 ?>
     <div class="alertbar blend">
-        &quot;<?= Lang::get('bonus', $item['Label']) ?>&quot;&nbsp;<?= Lang::get('bonus', 'purchased') ?>
+        &quot;<?= Lang::get("bonus.${item['Label']}") ?>&quot;&nbsp;<?= Lang::get('bonus.purchased') ?>
     </div>
 <?
 }
@@ -15,12 +15,12 @@ if (isset($_GET['complete'])) {
 ?>
 <div class=LayoutBody>
     <div class="BodyHeader">
-        <h2 class="BodyHeader-nav"><?= Lang::get('bonus', 'bonus_points_shop') ?></h2>
+        <h2 class="BodyHeader-nav"><?= Lang::get('bonus.bonus_points_shop') ?></h2>
     </div>
     <div class="BodyNavLinks">
-        <a href="wiki.php?action=article&id=47" class="brackets"><?= Lang::get('bonus', 'about_bonus_points') ?></a>
-        <a href="bonus.php?action=bprates" class="brackets"><?= Lang::get('bonus', 'bonus_point_rates') ?></a>
-        <a href="bonus.php?action=history" class="brackets"><?= Lang::get('bonus', 'history') ?></a>
+        <a href="wiki.php?action=article&id=47" class="brackets"><?= Lang::get('bonus.about_bonus_points') ?></a>
+        <a href="bonus.php?action=bprates" class="brackets"><?= Lang::get('bonus.bonus_point_rates') ?></a>
+        <a href="bonus.php?action=history" class="brackets"><?= Lang::get('bonus.history') ?></a>
     </div>
 
     <div class="LayoutBody">
@@ -29,9 +29,9 @@ if (isset($_GET['complete'])) {
                 <thead>
                     <tr class="Table-rowHeader">
                         <td class="Table-cell" width="30px">#</td>
-                        <td class="Table-cell"><?= Lang::get('bonus', 'description') ?></td>
-                        <td class="Table-cell" width="45px"><?= Lang::get('bonus', 'points_price') ?></td>
-                        <td class="Table-cell" width="70px"><?= Lang::get('bonus', 'checkout') ?></td>
+                        <td class="Table-cell"><?= Lang::get('bonus.description') ?></td>
+                        <td class="Table-cell" width="45px"><?= Lang::get('bonus.points_price') ?></td>
+                        <td class="Table-cell" width="70px"><?= Lang::get('bonus.checkout') ?></td>
                     </tr>
                 </thead>
                 <tbody>
@@ -52,24 +52,24 @@ if (isset($_GET['complete'])) {
                     ?>
                         <tr class="Table-row">
                             <td class="Table-cell"><?= $Cnt ?></td>
-                            <td class="Table-cell"><?= Lang::get('bonus', $Item['Label']) ?></td>
+                            <td class="Table-cell"><?= Lang::get("bonus.${Item['Label']}") ?></td>
                             <td class="Table-cell"><?= $FormattedPrice ?></td>
                             <td class="Table-cell">
                                 <?
                                 if ($Item['MinClass'] >  $LoggedUser['EffectiveClass']) {
                                 ?>
-                                    <span style="font-style: italic"><?= Lang::get('bonus', 'need_higher_user_class') ?></span>
+                                    <span style="font-style: italic"><?= Lang::get('bonus.need_higher_user_class') ?></span>
                                     <?
                                 } else {
                                     if (G::$LoggedUser['BonusPoints'] >= $Price) {
                                         $NextFunction = preg_match('/^other-\d$/',          $Label) ? 'ConfirmOther' : 'null';
                                         $OnClick      = preg_match('/^title-bbcode-[yn]$/', $Label) ? "NoOp" : "ConfirmPurchase";
                                     ?>
-                                        <a id="bonusconfirm" href="bonus.php?action=purchase&label=<?= $Label ?>&auth=<?= $LoggedUser['AuthKey'] ?>" onclick="<?= $OnClick ?>(event, '<?= Lang::get('bonus', $Item['Label']) ?>', <?= $NextFunction ?>, this);"><?= Lang::get('bonus', 'purchase') ?></a>
+                                        <a id="bonusconfirm" href="bonus.php?action=purchase&label=<?= $Label ?>&auth=<?= $LoggedUser['AuthKey'] ?>" onclick="<?= $OnClick ?>(event, '<?= Lang::get('bonus.' . $Item['Label']) ?>', <?= $NextFunction ?>, this);"><?= Lang::get('bonus.purchase') ?></a>
                                     <?
                                     } else {
                                     ?>
-                                        <span style="font-style: italic"><?= Lang::get('bonus', 'too_expensive') ?></span>
+                                        <span style="font-style: italic"><?= Lang::get('bonus.too_expensive') ?></span>
                             <?
                                     }
                                 }

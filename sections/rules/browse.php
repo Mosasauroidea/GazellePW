@@ -1,5 +1,5 @@
 <?
-View::show_header(Lang::get('rules', 'rules'), '', 'PageRuleHome');
+View::show_header(Lang::get('rules.rules'), '', 'PageRuleHome');
 ?>
 
 <div class="LayoutBody">

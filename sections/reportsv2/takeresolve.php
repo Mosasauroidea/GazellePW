@@ -281,34 +281,34 @@ if ($DB->affected_rows() > 0 || !$Report) {
     //PM
     if ($Escaped['uploader_pm'] || $Warning > 0 || isset($Escaped['delete']) || $SendPM || $_POST['custom_trumpable']) {
         if (isset($Escaped['delete'])) {
-            $PM = Lang::get('reportsv2', 'your_above_torrent_was_reported_and_has_been_deleted_before') . site_url() . "torrents.php?torrentid=$TorrentID" . Lang::get('reportsv2', 'your_above_torrent_was_reported_and_has_been_deleted_after') . "\n\n";
+            $PM = Lang::get('reportsv2.your_above_torrent_was_reported_and_has_been_deleted_before') . site_url() . "torrents.php?torrentid=$TorrentID" . Lang::get('reportsv2.your_above_torrent_was_reported_and_has_been_deleted_after') . "\n\n";
         } else {
-            $PM = Lang::get('reportsv2', 'your_above_torrent_was_reported_but_not_been_deleted_before') . site_url() . "torrents.php?torrentid=$TorrentID" . Lang::get('reportsv2', 'your_above_torrent_was_reported_but_not_been_deleted_after') . "\n\n";
+            $PM = Lang::get('reportsv2.your_above_torrent_was_reported_but_not_been_deleted_before') . site_url() . "torrents.php?torrentid=$TorrentID" . Lang::get('reportsv2.your_above_torrent_was_reported_but_not_been_deleted_after') . "\n\n";
         }
 
-        $Preset = $_POST['custom_trumpable'] ? $_POST['custom_trumpable'] . "\n\n" . Lang::get('reportsv2', 'your_torrent_is_now_displayed_on_better_php_and_trumpable_before') . site_url() . Lang::get('reportsv2', 'your_torrent_is_now_displayed_on_better_php_and_trumpable_after') : $ResolveType['resolve_options']['pm'];
+        $Preset = $_POST['custom_trumpable'] ? $_POST['custom_trumpable'] . "\n\n" . Lang::get('reportsv2.your_torrent_is_now_displayed_on_better_php_and_trumpable_before') . site_url() . Lang::get('reportsv2.your_torrent_is_now_displayed_on_better_php_and_trumpable_after') : $ResolveType['resolve_options']['pm'];
 
         if ($Preset != '') {
-            $PM .= Lang::get('reportsv2', 'pm_reason') . ": $Preset\n\n";
+            $PM .= Lang::get('reportsv2.pm_reason') . ": $Preset\n\n";
         }
 
         if ($Warning > 0) {
-            $PM .= Lang::get('reportsv2', 'this_has_resulted_in_an_n_week_warning_before') . site_url() . "wiki.php?action=article&amp;id=114]$Warning" . Lang::get('reportsv2', 'this_has_resulted_in_an_n_week_warning_after') . "\n\n";
+            $PM .= Lang::get('reportsv2.this_has_resulted_in_an_n_week_warning_before') . site_url() . "wiki.php?action=article&amp;id=114]$Warning" . Lang::get('reportsv2.this_has_resulted_in_an_n_week_warning_after') . "\n\n";
         }
 
         if ($Upload) {
-            $PM .= Lang::get('reportsv2', 'this_has_resulted_in_the_loss_of_your_upload_privilege_before') . ($Warning > 0 ? Lang::get('reportsv2', 'also_space') : '') . Lang::get('reportsv2', 'this_has_resulted_in_the_loss_of_your_upload_privilege_after') . "\n\n";
+            $PM .= Lang::get('reportsv2.this_has_resulted_in_the_loss_of_your_upload_privilege_before') . ($Warning > 0 ? Lang::get('reportsv2.also_space') : '') . Lang::get('reportsv2.this_has_resulted_in_the_loss_of_your_upload_privilege_after') . "\n\n";
         }
 
         if ($Log) {
-            $PM .= Lang::get('reportsv2', 'log_message') . ": $Log\n\n";
+            $PM .= Lang::get('reportsv2.log_message') . ": $Log\n\n";
         }
 
         if ($Escaped['uploader_pm']) {
-            $PM .= Lang::get('inbox', 'message_from_before') . $LoggedUser['Username'] . Lang::get('inbox', 'message_from_after') . ": $PMMessage\n\n";
+            $PM .= Lang::get('inbox.message_from_before') . $LoggedUser['Username'] . Lang::get('inbox.message_from_after') . ": $PMMessage\n\n";
         }
 
-        $PM .= Lang::get('reportsv2', 'report_was_handled_by_user_before') . $LoggedUser['Username'] . Lang::get('reportsv2', 'report_was_handled_by_user_after');
+        $PM .= Lang::get('reportsv2.report_was_handled_by_user_before') . $LoggedUser['Username'] . Lang::get('reportsv2.report_was_handled_by_user_after');
 
         Misc::send_pm($UploaderID, 0, "种子处理提示: " . $Escaped['raw_name'], $PM);
     }

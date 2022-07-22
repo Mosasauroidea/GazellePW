@@ -33,29 +33,29 @@ if (!empty($_POST)) {
     echo json_encode(array("code" => $r));
     return;
 }
-View::show_header(Lang::get('badges', 'badges_center'), '', 'PageBadgeStore');
+View::show_header(Lang::get('badges.badges_center'), '', 'PageBadgeStore');
 ?>
 <div class="LayoutBody">
     <div class="BodyHeader">
-        <h2 class="BodyHeader-nav"><?= Users::format_username($UserID, false, false, false) ?> &gt; <?= Lang::get('badges', 'index_badge') ?> &gt; <?= Lang::get('badges', 'badge_store') ?></h2>
+        <h2 class="BodyHeader-nav"><?= Users::format_username($UserID, false, false, false) ?> &gt; <?= Lang::get('badges.index_badge') ?> &gt; <?= Lang::get('badges.badge_store') ?></h2>
     </div>
     <div class="BodyNavLinks">
-        <a href="/badges.php?action=display" class="brackets"><?= Lang::get('badges', 'badge_display') ?></a>
-        <a href="/badges.php" class="brackets"><?= Lang::get('badges', 'badge_achievement_progress') ?></a>
-        <a href="/badges.php?action=history" class="brackets"><?= Lang::get('badges', 'badge_log') ?></a>
-        <a href="/badges.php?action=store" class="brackets"><?= Lang::get('badges', 'badge_store') ?></a>
+        <a href="/badges.php?action=display" class="brackets"><?= Lang::get('badges.badge_display') ?></a>
+        <a href="/badges.php" class="brackets"><?= Lang::get('badges.badge_achievement_progress') ?></a>
+        <a href="/badges.php?action=history" class="brackets"><?= Lang::get('badges.badge_log') ?></a>
+        <a href="/badges.php?action=store" class="brackets"><?= Lang::get('badges.badge_store') ?></a>
         <!-- <a href="" class="brackets">游乐中心</a> -->
     </div>
     <div class="TableContainer badge_store_container">
         <table class="TableBadgeStore Table">
             <tr class="Table-rowHeader">
                 <td class="Table-cell badge_number">#</td>
-                <td class="Table-cell badge_preview"><?= Lang::get('badges', 'badge_preview') ?></td>
-                <td class="Table-cell badge_name"><?= Lang::get('badges', 'badge_name') ?></td>
-                <td class="Table-cell badge_introduction"><?= Lang::get('badges', 'badge_introduction') ?></td>
-                <td class="Table-cell badge_unshelve"><?= Lang::get('badges', 'badge_unshelve') ?></td>
-                <td class="Table-cell badge_price"><?= Lang::get('badges', 'badge_price') ?></td>
-                <td class="Table-cell badge_exchange"><?= Lang::get('badges', 'badge_exchange') ?></td>
+                <td class="Table-cell badge_preview"><?= Lang::get('badges.badge_preview') ?></td>
+                <td class="Table-cell badge_name"><?= Lang::get('badges.badge_name') ?></td>
+                <td class="Table-cell badge_introduction"><?= Lang::get('badges.badge_introduction') ?></td>
+                <td class="Table-cell badge_unshelve"><?= Lang::get('badges.badge_unshelve') ?></td>
+                <td class="Table-cell badge_price"><?= Lang::get('badges.badge_price') ?></td>
+                <td class="Table-cell badge_exchange"><?= Lang::get('badges.badge_exchange') ?></td>
                 <!-- 每一列都要加这些 class -->
             </tr>
             <?
@@ -84,7 +84,7 @@ View::show_header(Lang::get('badges', 'badges_center'), '', 'PageBadgeStore');
                             <?=
                             $Exchanged ?
                                 "Exchanged" : ($Unshelved ?
-                                    Lang::get('badges', 'sold_out') : ($CanExchange ?
+                                    Lang::get('badges.sold_out') : ($CanExchange ?
                                         "<a href=\"javascript:buy(" . $Badge['ID'] . ")\">Exchange</a>" :
                                         "Too Expensive"))
                             ?></td>

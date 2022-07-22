@@ -5,7 +5,7 @@ if (!check_perms('site_top10')) {
     View::show_header('', '', 'PageTop10Index');
 ?>
     <div class="content_basiccontainer">
-        <?= Lang::get('top10', 'you_do_not_have_access_to_view_this_feature') ?>
+        <?= Lang::get('top10.you_do_not_have_access_to_view_this_feature') ?>
     </div>
 <?
     View::show_footer();
@@ -13,12 +13,12 @@ if (!check_perms('site_top10')) {
 }
 
 include(CONFIG['SERVER_ROOT'] . '/sections/torrents/functions.php'); //Has get_reports($TorrentID);
-if (empty($_GET['type']) || $_GET['type'] == 'movies') {
-    include(CONFIG['SERVER_ROOT'] . '/sections/top10/browse.php');
+if (empty($_GET['type']) || $_GET['type'] == 'torrents') {
+    include(CONFIG['SERVER_ROOT'] . '/sections/top10/torrents.php');
 } else {
     switch ($_GET['type']) {
-        case 'torrents':
-            include(CONFIG['SERVER_ROOT'] . '/sections/top10/torrents.php');
+        case 'movies':
+            include(CONFIG['SERVER_ROOT'] . '/sections/top10/browse.php');
             break;
         case 'users':
             include(CONFIG['SERVER_ROOT'] . '/sections/top10/users.php');

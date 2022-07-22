@@ -1,5 +1,5 @@
 <?
-View::show_header(Lang::get('register', 'register'), '', 'PageResigerCode');
+View::show_header(Lang::get('register.register'), '', 'PageResigerCode');
 ?>
 <div style="width: 500px;">
     <form class="auth_form" name="invite" method="get" action="register.php">

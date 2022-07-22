@@ -23,7 +23,7 @@ if (is_number($FeaturedMovie['GroupID'])) {
     <div class="SidebarItemPoster SidebarItem Box">
         <div class="SidebarItem-header Box-header">
             <a class="SidebarItem-headerTitle" href="forums.php?action=viewthread&amp;threadid=<?= $FeaturedMovie['ThreadID'] ?>">
-                <?= Lang::get('index', 'featured_item') ?>
+                <?= Lang::get('index.featured_item') ?>
             </a>
         </div>
         <div class="SidebarItem-body Box-body">

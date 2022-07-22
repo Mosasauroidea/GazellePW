@@ -20,11 +20,11 @@ View::show_header('Blog', 'bbcode', 'PageBlogHome');
     ?>
         <div class="Form-rowList" variant="header" id="blog_create_edit_box">
             <div class="Form-rowHeader">
-                <div style="width:100%" class="Form-title"><?= empty($_GET['action']) ? Lang::get('blog', 'create_a_blog_post') : Lang::get('blog', 'edit_blog_post') ?>
+                <div style="width:100%" class="Form-title"><?= empty($_GET['action']) ? Lang::get('blog.create_a_blog_post') : Lang::get('blog.edit_blog_post') ?>
                     <span class="floatright">
                         <a class="Link" href="#" onclick="globalapp.toggleAny(event, '.BlogCreate', { updateText: true })">
-                            <span class="u-toggleAny-show u-hidden"><?= Lang::get('global', 'show') ?></span>
-                            <span class="u-toggleAny-hide"><?= Lang::get('global', 'hide') ?></span>
+                            <span class="u-toggleAny-show u-hidden"><?= Lang::get('global.show') ?></span>
+                            <span class="u-toggleAny-hide"><?= Lang::get('global.hide') ?></span>
                         </a>
                     </span>
                 </div>
@@ -37,33 +37,33 @@ View::show_header('Blog', 'bbcode', 'PageBlogHome');
                         <input type="hidden" name="blogid" value="<?= $BlogID; ?>" />
                     <?php } ?>
                     <div>
-                        <h3><?= Lang::get('blog', 'title') ?></h3>
+                        <h3><?= Lang::get('blog.title') ?></h3>
                         <input class="Input" type="text" name="title" size="95" <?= !empty($Title) ? ' value="' . display_str($Title) . '"' : ''; ?> /><br />
                     </div>
                     <div>
-                        <h3><?= Lang::get('blog', 'body') ?></h3>
+                        <h3><?= Lang::get('blog.body') ?></h3>
                         <div>
                             <?php new TEXTAREA_PREVIEW('body', 'blog_content', display_str($Body), 60, 8, true, true, false); ?>
                         </div>
                     </div>
                     <div class="Post-bodyActions" variant="alignLeft">
                         <div>
-                            <input type="checkbox" value="1" name="important" id="important" checked="checked" /><label for="important"><?= Lang::get('blog', 'important') ?></label>
+                            <input type="checkbox" value="1" name="important" id="important" checked="checked" /><label for="important"><?= Lang::get('blog.important') ?></label>
                         </div>
 
                         <div>
                             <input id="subscribebox" type="checkbox" name="subscribe" <?= !empty($HeavyInfo['AutoSubscribe']) ? ' checked="checked"' : ''; ?> tabindex="2" />
 
-                            <label for="subscribebox"><?= Lang::get('global', 'subscribe') ?></label>
+                            <label for="subscribebox"><?= Lang::get('global.subscribe') ?></label>
                         </div>
                         <div>
-                            <span><?= Lang::get('blog', 'thread_id') ?></span>
-                            <input class="Input is-small" type="text" name="thread" size="8" <?= $ThreadID !== null ? ' value="' . display_str($ThreadID) . '"' : ''; ?> /><?= Lang::get('blog', 'thread_id_note') ?>
+                            <span><?= Lang::get('blog.thread_id') ?></span>
+                            <input class="Input is-small" type="text" name="thread" size="8" <?= $ThreadID !== null ? ' value="' . display_str($ThreadID) . '"' : ''; ?> /><?= Lang::get('blog.thread_id_note') ?>
                         </div>
                     </div>
 
                     <div class="Post-bodyActions">
-                        <input class="Button" type="submit" value="<?= !isset($_GET['action']) ? Lang::get('blog', 'create_a_blog_post') : Lang::get('blog', 'edit_blog_post'); ?>" />
+                        <input class="Button" type="submit" value="<?= !isset($_GET['action']) ? Lang::get('blog.create_a_blog_post') : Lang::get('blog.edit_blog_post'); ?>" />
                     </div>
                 </div>
             </form>
@@ -112,20 +112,20 @@ View::show_header('Blog', 'bbcode', 'PageBlogHome');
                 <div class="Post Box" id="blog<?= $BlogID ?>">
                     <div class="Post-header Box-header">
                         <div class="Post-headerLeft">
-                            <span class="Post-headerTitle"><?= $Title ?></span> - <?= Lang::get('blog', 'posted') ?>
-                            <?= time_diff($BlogTime); ?> <?= Lang::get('blog', 'by') ?>
+                            <span class="Post-headerTitle"><?= $Title ?></span> - <?= Lang::get('blog.posted') ?>
+                            <?= time_diff($BlogTime); ?> <?= Lang::get('blog.by') ?>
                             <a href="user.php?id=<?= $AuthorID ?>"><?= $Author ?></a>
                         </div>
                         <div class="Post-headerActions">
                             <?php if (check_perms('admin_manage_blog')) { ?>
-                                <a href=" blog.php?action=editblog&amp;id=<?= $BlogID ?>" class="brackets"><?= Lang::get('global', 'edit') ?></a>
-                                <a href="blog.php?action=deleteblog&amp;id=<?= $BlogID ?>&amp;auth=<?= G::$LoggedUser['AuthKey'] ?>" class="brackets"><?= Lang::get('global', 'delete') ?></a>
+                                <a href=" blog.php?action=editblog&amp;id=<?= $BlogID ?>" class="brackets"><?= Lang::get('global.edit') ?></a>
+                                <a href="blog.php?action=deleteblog&amp;id=<?= $BlogID ?>&amp;auth=<?= G::$LoggedUser['AuthKey'] ?>" class="brackets"><?= Lang::get('global.delete') ?></a>
                             <?php    } ?>
                             <?php if ($ThreadID) { ?>
-                                <a href="forums.php?action=viewthread&amp;threadid=<?= $ThreadID ?>"><?= Lang::get('index', 'discuss') ?></a>
+                                <a href="forums.php?action=viewthread&amp;threadid=<?= $ThreadID ?>"><?= Lang::get('index.discuss') ?></a>
                                 <?php
                                 if (check_perms('admin_manage_blog')) { ?>
-                                    <a href="blog.php?action=deadthread&amp;id=<?= $BlogID ?>&amp;auth=<?= G::$LoggedUser['AuthKey'] ?>" class="brackets"><?= Lang::get('blog', 'remove_link') ?></a>
+                                    <a href="blog.php?action=deadthread&amp;id=<?= $BlogID ?>&amp;auth=<?= G::$LoggedUser['AuthKey'] ?>" class="brackets"><?= Lang::get('blog.remove_link') ?></a>
                             <?php
                                 }
                             }

@@ -1,11 +1,11 @@
 <?
-View::show_header(Lang::get('user', 'two_factor_authentication'), '', 'PageUser2FAStep1');
+View::show_header(Lang::get('user.two_factor_authentication'), '', 'PageUser2FAStep1');
 ?>
 
 <div class="BoxBody">
-    <p><?= Lang::get('user', 'two_factor_authentication_note_1') ?> <?= CONFIG['SITE_NAME'] ?> <?= Lang::get('user', 'two_factor_authentication_note_2') ?></p>
+    <p><?= Lang::get('user.two_factor_authentication_note_1') ?> <?= CONFIG['SITE_NAME'] ?> <?= Lang::get('user.two_factor_authentication_note_2') ?></p>
 
-    <p><?= Lang::get('user', 'two_factor_authentication_note_3') ?></p>
+    <p><?= Lang::get('user.two_factor_authentication_note_3') ?></p>
 </div>
 
 <div class="box box2">
@@ -23,14 +23,14 @@ View::show_header(Lang::get('user', 'two_factor_authentication'), '', 'PageUser2
                                                     ->get('png')
                                             );
                                             ?>">
-            <div class="twofa_text"><?= Lang::get('user', 'secret_text') ?>: <span><?= $_SESSION['private_key'] ?></span></div>
+            <div class="twofa_text"><?= Lang::get('user.secret_text') ?>: <span><?= $_SESSION['private_key'] ?></span></div>
 
             <? if (isset($_GET['invalid'])) : ?>
-                <p class="u-colorWarning"><?= Lang::get('user', 'secret_text_invalid') ?></p>
+                <p class="u-colorWarning"><?= Lang::get('user.secret_text_invalid') ?></p>
             <? endif; ?>
         </div>
 
-        <a href="user.php?action=2fa&do=enable2&userid=<?= G::$LoggedUser['ID'] ?>" id="pad_next"><?= Lang::get('user', 'next') ?> &raquo;</a>
+        <a href="user.php?action=2fa&do=enable2&userid=<?= G::$LoggedUser['ID'] ?>" id="pad_next"><?= Lang::get('user.next') ?> &raquo;</a>
     </div>
 </div>
 

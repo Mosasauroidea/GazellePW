@@ -16,13 +16,13 @@
 ?>
 <div id="merchbox" class="box">
     <div class="head colhead_dark">
-        <strong><?=Lang::get('index', 'fproduct')?></strong>
+        <strong><?=Lang::get('index.fproduct')?></strong>
     </div>
     <div class="center pad">
-        <a href="http://anonym.to/?<?=$FeaturedMerchURL . $FeaturedMerch['ProductID']?>"><img src="<?=ImageTools::process($FeaturedMerch['Image'])?>" width="100%" alt="<?=Lang::get('index', 'fproduct_title')?>" /></a>
+        <a href="http://anonym.to/?<?=$FeaturedMerchURL . $FeaturedMerch['ProductID']?>"><img src="<?=ImageTools::process($FeaturedMerch['Image'])?>" width="100%" alt="<?=Lang::get('index.fproduct_title')?>" /></a>
     </div>
     <div class="center pad">
-        <a href="http://anonym.to/?<?=$FeaturedMerchURL . $FeaturedMerch['ProductID']?>"><em><?=Lang::get('index', 'product_page')?></em></a>
+        <a href="http://anonym.to/?<?=$FeaturedMerchURL . $FeaturedMerch['ProductID']?>"><em><?=Lang::get('index.product_page')?></em></a>
 <?      if ($FeaturedMerch['ArtistID'] > 0) {
             $UserInfo = Users::user_info($FeaturedMerch['ArtistID']);
 ?>      - Artist: <a href="user.php?id=<?=$FeaturedMerch['ArtistID']?>"><?=$UserInfo['Username']?></a>
@@ -32,10 +32,10 @@
 <?  } else { ?>
 <div class="box">
     <div class="head colhead_dark">
-        <strong><?=Lang::get('index', 'mystery')?></strong>
+        <strong><?=Lang::get('index.mystery')?></strong>
     </div>
     <div class="center pad">
-        <?=Lang::get('index', 'product_note')?>
+        <?=Lang::get('index.product_note')?>
     </div>
 </div>
 <?

@@ -5,37 +5,37 @@ if (!check_perms('users_mod')) {
 // if (!check_perms('site_top10_history')) {
 //  error(403);
 // }
-View::show_header(Lang::get('top10', 'top_10_torrents_history'), '', 'PageTop10History');
+View::show_header(Lang::get('top10.top_10_torrents_history'), '', 'PageTop10History');
 ?>
 <div class="LayoutBody">
     <div class="BodyHeader">
-        <h2 class="BodyHeader-nav"><?= Lang::get('top10', 'top_10_torrents') ?></h2>
+        <h2 class="BodyHeader-nav"><?= Lang::get('top10.top_10_torrents') ?></h2>
         <? Top10View::render_linkbox('', 'BodyNavLinks'); ?>
     </div>
     <form class="Form SearchPage Box SearchTop10History" name="top10" method="get" action="">
         <input type="hidden" name="type" value="history" />
-        <h3><?= Lang::get('top10', 'search_for_a_date_after') ?></h3>
+        <h3><?= Lang::get('top10.search_for_a_date_after') ?></h3>
         <table class="Form-rowList">
             <tr class="Form-row">
-                <td class="Form-label"><?= Lang::get('top10', 'date') ?>:</td>
+                <td class="Form-label"><?= Lang::get('top10.date') ?>:</td>
                 <td class="Form-inputs"><input class="Input" type="text" id="date" name="date" value="<?= !empty($_GET['date']) ? display_str($_GET['date']) : 'YYYY-MM-DD' ?>" onfocus="if ($('#date').raw().value == 'YYYY-MM-DD') { $('#date').raw().value = ''; }" /></td>
             </tr>
             <tr class="Form-row">
-                <td class="Form-label"><?= Lang::get('top10', 'type') ?>:</td>
+                <td class="Form-label"><?= Lang::get('top10.type') ?>:</td>
                 <td class="Form-inputs">
                     <div class="Radio">
                         <input class="Input" type="radio" name="datetype" value="day" checked="checked">
-                        <label class="Radio-label"><?= Lang::get('top10', 'day') ?></label>
+                        <label class="Radio-label"><?= Lang::get('top10.day') ?></label>
                     </div>
                     <div class="Radio">
                         <input class="Input" type="radio" name="datetype" value="week">
-                        <label class="Radio-label"><?= Lang::get('top10', 'week') ?></label>
+                        <label class="Radio-label"><?= Lang::get('top10.week') ?></label>
                     </div>
                 </td>
             </tr>
             <tr class="Form-row">
                 <td class="Form-submit" colspan="2">
-                    <input class="Button" type="submit" value="<?= Lang::get('global', 'submit') ?>" />
+                    <input class="Button" type="submit" value="<?= Lang::get('global.submit') ?>" />
                 </td>
             </tr>
         </table>
@@ -45,7 +45,7 @@ View::show_header(Lang::get('top10', 'top_10_torrents_history'), '', 'PageTop10H
         $Date = $_GET['date'];
         $SQLTime = $Date . ' 00:00:00';
         if (!validDate($SQLTime)) {
-            error(Lang::get('top10', 'sth_is_wrong_with_the_date_you_provided'));
+            error(Lang::get('top10.sth_is_wrong_with_the_date_you_provided'));
         }
 
         if (empty($_GET['datetype']) || $_GET['datetype'] == 'day') {
@@ -101,7 +101,7 @@ View::show_header(Lang::get('top10', 'top_10_torrents_history'), '', 'PageTop10H
 
         <br />
         <div class="pad box">
-            <h3><?= Lang::get('top10', 'top_10_for_before') ?><?= ($Type == 'day' ? $Date : Lang::get('top10', 'the_first_week_after_before') . "$Date" . Lang::get('top10', 'the_first_week_after_after')) ?><?= Lang::get('top10', 'top_10_for_after') ?></h3>
+            <h3><?= Lang::get('top10.top_10_for_before') ?><?= ($Type == 'day' ? $Date : Lang::get('top10.the_first_week_after_before') . "$Date" . Lang::get('top10.the_first_week_after_after')) ?><?= Lang::get('top10.top_10_for_after') ?></h3>
             <?
             $TableTorrentClass = G::$LoggedUser['SettingTorrentTitle']['Alternative'] ? 'is-alternative' : '';
             ?>
@@ -109,7 +109,7 @@ View::show_header(Lang::get('top10', 'top_10_torrents_history'), '', 'PageTop10H
                 <tr class="Table-rowHeader">
                     <td class="Table-cell" style="width: 15px;"></td>
                     <td class="Table-cell"></td>
-                    <td class="Table-cell"><?= Lang::get('top10', 'name') ?></td>
+                    <td class="Table-cell"><?= Lang::get('top10.name') ?></td>
                 </tr>
                 <?
                 foreach ($Details as $Torrent) {

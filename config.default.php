@@ -74,7 +74,7 @@ $CONFIG['DEBUG_WARNINGS'] = true; //Set to true if you want to see PHP warnings 
 
 $CONFIG['SHOW_PUBLIC_INDEX'] = true; // Show the public index.php landing page
 
-$CONFIG['OPEN_EXTERNAL_REFERRALS'] = true; //Set to false to disable external tracker referrals, true to allow them
+$CONFIG['OPEN_EXTERNAL_REFERRALS'] = false; //Set to false to disable external tracker referrals, true to allow them
 
 // Open registration details
 $CONFIG['OPEN_REGISTRATION'] = false;
@@ -216,12 +216,12 @@ $CONFIG['DONATE_MONTH_GOAL'] = 750;
 
 $CONFIG['GLOBAL_FREELEECH'] = false;
 
-$WINDOW_DATA = [
-    'CONFIG' => [
-        'SITE_NAME' => $CONFIG['SITE_NAME'],
-        'TG_GROUP' => $CONFIG['TG_GROUP'],
-        'TG_DISBALE_CHANNEL' => $CONFIG['TG_DISBALE_CHANNEL'],
-        'BOT_HELP_CHAN' => $CONFIG['BOT_HELP_CHAN'],
-        'MAIL_HOST' => $CONFIG['MAIL_HOST'],
-    ]
+$WINDOW_CONFIG = [
+    'SITE_NAME' => $CONFIG['SITE_NAME'],
+    'TG_GROUP' => $CONFIG['TG_GROUP'],
+    'TG_DISBALE_CHANNEL' => $CONFIG['TG_DISBALE_CHANNEL'],
+    'BOT_HELP_CHAN' => $CONFIG['BOT_HELP_CHAN'],
+    'MAIL_HOST' => $CONFIG['MAIL_HOST'],
 ];
+
+$WINDOW_DATA = [];

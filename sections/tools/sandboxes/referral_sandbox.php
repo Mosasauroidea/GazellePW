@@ -127,7 +127,7 @@ View::show_header("Referral Sandbox");
                 </tr>
             </tbody>
         </table>
-        <input class="Button" type="submit" value="<?= Lang::get('global', 'submit') ?>" />
+        <input class="Button" type="submit" value="<?= Lang::get('global.submit') ?>" />
     </form>
 </div>
 <div class="thin BoxBody">
@@ -185,7 +185,7 @@ View::show_header("Referral Sandbox");
                     </tr>
                 </tbody>
             </table>
-            <input class="Button" type="submit" value="<?= Lang::get('global', 'submit') ?>" />
+            <input class="Button" type="submit" value="<?= Lang::get('global.submit') ?>" />
         </form>
     <?php } ?>
 </div>

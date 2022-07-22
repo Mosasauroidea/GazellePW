@@ -1,12 +1,5 @@
 globalapp.uploadMovieAutofill = function uploadMovieAutofill() {
-  function setLoading(loading) {
-    if (loading) {
-      $('.Button.autofill').addClass('is-loading').prop('disabled', true)
-    } else {
-      $('.Button.autofill').removeClass('is-loading').prop('disabled', false)
-    }
-  }
-
+  const target = document.querySelector('.Button.autofill')
   var imdb = $('#imdb').val().match(/tt\d+/)
   if (imdb) {
     imdb = imdb[0]
@@ -14,7 +7,7 @@ globalapp.uploadMovieAutofill = function uploadMovieAutofill() {
     return
   }
 
-  setLoading(true)
+  globalapp.buttonSetLoading(target, true)
   $.ajax({
     url: 'upload.php',
     data: {
@@ -23,11 +16,11 @@ globalapp.uploadMovieAutofill = function uploadMovieAutofill() {
     },
     type: 'GET',
     error: (err) => {
-      setLoading(false)
+      globalapp.buttonSetLoading(target, false)
       globalapp.setFormError('common.imdb_unknown_error')
     },
     success: (data) => {
-      setLoading(false)
+      globalapp.buttonSetLoading(target, false)
       globalapp.setFormError(null)
       if (data.code) {
         globalapp.setFormError(
@@ -141,9 +134,10 @@ globalapp.uploadMovieAutofill = function uploadMovieAutofill() {
       }
       $('.FormValidation')[0].validator.validate()
       $('.FormUpload').addClass('u-formUploadAutoFilled')
-      $(
-        '.u-formUploadArtistList input:not([name="artists_chinese[]"]), .u-formUploadArtistList select'
-      ).prop('disabled', true)
+      $('.u-formUploadArtistList input:not([name="artists_chinese[]"]), .u-formUploadArtistList select').prop(
+        'disabled',
+        true
+      )
       if (artists.length >= 5) {
         globalapp.uploadArtistsShowMore({ hide: true })
       }
@@ -152,7 +146,7 @@ globalapp.uploadMovieAutofill = function uploadMovieAutofill() {
   })
 }
 
-global.setFormError = function setFormError(key, options = {}) {
+globalapp.setFormError = function setFormError(key, options = {}) {
   if (key) {
     const message = lang.get(key, options)
     $('.imdb.Form-errorMessage').html(message)
