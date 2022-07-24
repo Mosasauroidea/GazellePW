@@ -74,6 +74,18 @@ if ($CurrentBlog === false) {
 // Subscriptions
 $NewSubscriptions = Subscriptions::has_new_subscriptions();
 
+$Data = $Cache->get_value('ajax_info_data');
+if (!$Data) {
+    $User = new Users($LoggedUser['ID']);
+    $Data = array_merge(
+        [],
+        $User->seedingHeavy(),
+        $User->leeching(),
+        $User->snatched(),
+    );
+    $Cache->cache_value('ajax_info_data', $Data, DURATION['12h']);
+}
+
 ajax_json_success(array(
     'username' => $LoggedUser['Username'],
     'id' => (int)$LoggedUser['ID'],
@@ -87,10 +99,18 @@ ajax_json_success(array(
         'newSubscriptions' => $NewSubscriptions == 1
     ),
     'userstats' => array(
-        'uploaded' => (int)$LoggedUser['BytesUploaded'],
-        'downloaded' => (int)$LoggedUser['BytesDownloaded'],
+        'uploaded' => $LoggedUser['BytesUploaded'],
+        'downloaded' => $LoggedUser['BytesDownloaded'],
         'ratio' => (float)$Ratio,
-        'requiredratio' => (float)$LoggedUser['RequiredRatio'],
-        'class' => $ClassLevels[$LoggedUser['Class']]['Name']
-    )
+        'requiredratio' => $LoggedUser['RequiredRatio'],
+        'class' => $ClassLevels[$LoggedUser['Class']]['Name'],
+        'joinedDate' => $LoggedUser['JoinDate'],
+        'lastAccess' => $LoggedUser['LastAccess'],
+        'bonusPoints' => $LoggedUser['BonusPoints'],
+        'seedingCount' => $Data['seedingCount'],
+        'seedingSize' => $Data['seedingSize'],
+        'seedingBonusPointsPerHour' => $Data['seedingBonusPointsPerHour'],
+        'leechingCount' => $Data['leechingCount'],
+        'snatchedCount' => $Data['snatchedCount'],
+    ),
 ));

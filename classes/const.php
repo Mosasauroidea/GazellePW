@@ -201,3 +201,8 @@ define('MAX_SPECIAL_RANK', 5);
 define('DONOR_FORUM_RANK', 6);
 
 define('VERSION', @file_get_contents(CONFIG['SERVER_ROOT'] . '/VERSION'));
+
+define('DURATION', [
+	'12h' => 12 * 3600 * 1000,
+	'24h' => 24 * 3600 * 1000,
+]);

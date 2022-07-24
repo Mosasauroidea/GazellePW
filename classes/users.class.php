@@ -80,10 +80,17 @@ class Users {
         $UserStats = $Cache->get_value('user_stats_' . $UserID);
         if (!is_array($UserStats)) {
             $DB->query("
-			SELECT Uploaded AS BytesUploaded, Downloaded AS BytesDownloaded, BonusPoints, RequiredRatio
-			FROM users_main
-			WHERE ID = '$UserID'");
+                SELECT Uploaded AS BytesUploaded, Downloaded AS BytesDownloaded, BonusPoints, RequiredRatio
+                FROM users_main
+                WHERE ID = '$UserID'
+            ");
             $UserStats = $DB->next_record(MYSQLI_ASSOC);
+            $UserStats = array_merge($UserStats, [
+                'BytesUploaded' => (int) $UserStats['BytesUploaded'],
+                'BytesDownloaded' => (int) $UserStats['BytesDownloaded'],
+                'BonusPoints' => (float) $UserStats['BonusPoints'],
+                'RequiredRatio' => (float) $UserStats['RequiredRatio'],
+            ]);
             $Cache->cache_value('user_stats_' . $UserID, $UserStats, 3600);
         }
         return $UserStats;
@@ -249,7 +256,9 @@ class Users {
 					i.TGID,
 					m.FLTokens,
 					m.PermissionID,
-                    i.SettingTorrentTitle
+                    i.SettingTorrentTitle,
+                    i.JoinDate,
+                    m.LastAccess
 				FROM users_main AS m
 					INNER JOIN users_info AS i ON i.UserID = m.ID
 				WHERE m.ID = '$UserID'");
@@ -977,5 +986,86 @@ class Users {
         }
         $info = self::user_info($ID);
         return $info['EffectiveClass'] >= $MinClass;
+    }
+
+    public $UserID;
+
+    function __construct($UserID) {
+        $this->UserID = $UserID;
+    }
+
+    public function seedingLight() {
+        global $DB;
+        $UserID = $this->UserID;
+        $DB->query("
+            SELECT COUNT(x.uid) AS seedingCount
+            FROM xbt_files_users AS x
+                INNER JOIN torrents AS t ON t.ID = x.fid
+            WHERE x.uid = '$UserID'
+                AND x.remaining = 0
+        ");
+        $result = $DB->next_record(MYSQLI_ASSOC);
+        return [
+            'seedingCount' => (int) $result['seedingCount']
+        ];
+    }
+
+    public function seedingHeavy() {
+        global $DB;
+        $UserID = $this->UserID;
+        $DB->prepared_query("
+            SELECT
+                COUNT(xfu.uid) as seedingCount,
+                SUM(t.Size) as seedingSize,
+                SUM(IFNULL(t.Size / (1024 * 1024 * 1024) * 1 * (
+                    0.025 + (
+                        (0.06 * LN(1 + (xfh.seedtime / (24)))) / (POW(GREATEST(t.Seeders, 1), 0.6))
+                    )
+                ), 0)) AS seedingBonusPointsPerHour
+            FROM
+                (SELECT DISTINCT uid,fid FROM xbt_files_users WHERE active=1 AND remaining=0 AND mtime > unix_timestamp(NOW() - INTERVAL 1 HOUR) AND uid = ?) AS xfu
+                JOIN xbt_files_history AS xfh ON xfh.uid = xfu.uid AND xfh.fid = xfu.fid
+                JOIN torrents AS t ON t.ID = xfu.fid
+            WHERE
+                xfu.uid = ?
+        ", $UserID, $UserID);
+        $result = $DB->next_record(MYSQLI_ASSOC);
+        return [
+            'seedingCount' => (int) $result['seedingCount'],
+            'seedingSize' => (float) $result['seedingSize'],
+            'seedingBonusPointsPerHour' => (float) $result['seedingBonusPointsPerHour']
+        ];
+    }
+
+    public function leeching() {
+        global $DB;
+        $UserID = $this->UserID;
+        $DB->query("
+            SELECT COUNT(x.uid) AS leechingCount
+            FROM xbt_files_users AS x
+                INNER JOIN torrents AS t ON t.ID = x.fid
+            WHERE x.uid = '$UserID'
+                AND x.remaining > 0
+        ");
+        $result = $DB->next_record(MYSQLI_ASSOC);
+        return [
+            'leechingCount' => (int) $result['leechingCount']
+        ];
+    }
+
+    public function snatched() {
+        global $DB;
+        $UserID = $this->UserID;
+        $DB->query("
+            SELECT COUNT(x.uid) AS snatchedCount, COUNT(DISTINCT x.fid) as uniqueSnatchedCount
+            FROM xbt_snatched AS x
+                INNER JOIN torrents AS t ON t.ID = x.fid
+            WHERE x.uid = '$UserID'
+        ");
+        $result = $DB->next_record(MYSQLI_ASSOC);
+        return [
+            'snatchedCount' => (int) $result['snatchedCount'],
+            'uniqueSnatchedCount' => (int) $result['uniqueSnatchedCount']
+        ];
     }
 }
