@@ -204,7 +204,7 @@ function user_dupes_table($UserID) {
         <input type="hidden" id="form_comment_hash" name="form_comment_hash" value="<?= $CommentHash ?>" />
         <div class="Box" id="l_a_box">
             <div class="Box-header">
-                <?= Lang::get('user.linked_account') ?> (<?= max($DupeCount - 1, 0) ?>) <a href="#" onclick="$('.linkedaccounts').gtoggle(); return false;" class="brackets"><?= Lang::get('user.view') ?></a>
+                <?= t('server.user.linked_account') ?> (<?= max($DupeCount - 1, 0) ?>) <a href="#" onclick="$('.linkedaccounts').gtoggle(); return false;" class="brackets"><?= t('server.user.view') ?></a>
             </div>
             <table width="100%" class="Box-body layout hidden linkedaccounts">
                 <?= ($DupeCount ? "<tr>\n" : '') ?>

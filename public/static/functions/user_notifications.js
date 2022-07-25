@@ -18,10 +18,7 @@ function getSkippedPage() {
     url = new gazURL()
   switch (url.path) {
     case 'inbox':
-      if (
-        url.query.length == 0 ||
-        (url.query.length == 1 && url.query.hasOwnProperty('sort'))
-      ) {
+      if (url.query.length == 0 || (url.query.length == 1 && url.query.hasOwnProperty('sort'))) {
         skip = 'Inbox'
       }
       break
@@ -79,12 +76,12 @@ function createNoty(type, id, message, url, importance) {
     buttons: [
       {
         addClass: 'brackets noty_button_view' + (hideButtons ? ' hidden' : ''),
-        text: lang.get('common.view'),
+        text: t('client.common.view'),
         href: url,
       },
       {
         addClass: 'brackets noty_button_clear',
-        text: lang.get('common.clear'),
+        text: t('client.common.clear'),
         onClick: function ($noty) {
           $noty.close()
           clear(type, id)
@@ -92,7 +89,7 @@ function createNoty(type, id, message, url, importance) {
       },
       {
         addClass: 'brackets noty_button_close ',
-        text: lang.get('common.hide'),
+        text: t('client.common.hide'),
         onClick: function ($noty) {
           $noty.close()
         },

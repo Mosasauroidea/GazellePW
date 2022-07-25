@@ -1,7 +1,7 @@
 <?php
 include(CONFIG['SERVER_ROOT'] . '/classes/torrenttable.class.php');
-$Orders = array('Time' => Lang::get('torrents.add_time'), 'Name' => Lang::get('torrents.name'), 'Seeders' => Lang::get('torrents.seeders'), 'Leechers' => Lang::get('torrents.leechers'), 'Snatched' => Lang::get('torrents.snatched'), 'Size' => Lang::get('torrents.size'));
-$Ways = array('ASC' => Lang::get('torrents.asc'), 'DESC' => Lang::get('torrents.desc'));
+$Orders = array('Time' => t('server.torrents.add_time'), 'Name' => t('server.torrents.name'), 'Seeders' => t('server.torrents.seeders'), 'Leechers' => t('server.torrents.leechers'), 'Snatched' => t('server.torrents.snatched'), 'Size' => t('server.torrents.size'));
+$Ways = array('ASC' => t('server.torrents.asc'), 'DESC' => t('server.torrents.desc'));
 $UserVotes = Votes::get_user_votes($LoggedUser['ID']);
 
 // The "order by x" links on columns headers
@@ -302,7 +302,7 @@ $Results = Torrents::get_groups($GroupIDs);
 $Action = display_str($_GET['type']);
 $User = Users::user_info($UserID);
 
-View::show_header($User['Username'] . Lang::get('torrents.user_s') . Lang::get('torrents.action_' . $Action) . Lang::get('torrents.action_torrents'), 'voting', 'PageTorrentUser');
+View::show_header($User['Username'] . t('server.torrents.user_s') . t('server.torrents.action_' . $Action) . t('server.torrents.action_torrents'), 'voting', 'PageTorrentUser');
 
 $Pages = Format::get_pages($Page, $TorrentCount, CONFIG['TORRENTS_PER_PAGE']);
 
@@ -310,14 +310,14 @@ $Pages = Format::get_pages($Page, $TorrentCount, CONFIG['TORRENTS_PER_PAGE']);
 ?>
 <div class="LayoutBody">
     <div class="BodyHeader">
-        <h2 class="BodyHeader-nav"><a href="user.php?id=<?= $UserID ?>"><?= $User['Username'] ?></a><?= Lang::get('torrents.user_s') . Lang::get('torrents.action_' . $Action) . Lang::get('torrents.action_torrents') ?></h2>
+        <h2 class="BodyHeader-nav"><a href="user.php?id=<?= $UserID ?>"><?= $User['Username'] ?></a><?= t('server.torrents.user_s') . t('server.torrents.action_' . $Action) . t('server.torrents.action_torrents') ?></h2>
     </div>
     <div class="BodyContent">
         <form class="Form SearchPage Box SearchUserTorrent" name="torrents" action="" method="get">
             <div class="SearchPageBody">
                 <table class="Form-rowList">
                     <tr class="Form-row">
-                        <td class="Form-label"><strong><?= Lang::get('torrents.search_for') ?>:</strong></td>
+                        <td class="Form-label"><strong><?= t('server.torrents.search_for') ?>:</strong></td>
                         <td class="Form-inputs">
                             <input type="hidden" name="type" value="<?= $_GET['type'] ?>" />
                             <input type="hidden" name="userid" value="<?= $UserID ?>" />
@@ -325,74 +325,74 @@ $Pages = Format::get_pages($Page, $TorrentCount, CONFIG['TORRENTS_PER_PAGE']);
                         </td>
                     </tr>
                     <tr class="Form-row">
-                        <td class="Form-label"><strong><?= Lang::get('torrents.ft_ripspecifics') ?>:</strong></td>
+                        <td class="Form-label"><strong><?= t('server.torrents.ft_ripspecifics') ?>:</strong></td>
                         <td class="Form-inputs" colspan="3">
                             <select class="Input" id="source" name="source" class="ft_source fti_advanced">
-                                <option class="Select-option" value=""><?= Lang::get('torrents.source') ?></option>
+                                <option class="Select-option" value=""><?= t('server.torrents.source') ?></option>
                                 <? foreach ($Sources as $SourceName) { ?>
                                     <option class="Select-option" value="<?= display_str($SourceName); ?>" <? Format::selected('source', $SourceName) ?>><?= display_str($SourceName); ?></option>
                                 <?  } ?>
                             </select>
 
                             <select class="Input" name="codec" class="ft_codec fti_advanced">
-                                <option class="Select-option" value=""><?= Lang::get('torrents.codec') ?></option>
+                                <option class="Select-option" value=""><?= t('server.torrents.codec') ?></option>
                                 <? foreach ($Codecs as $CodecName) { ?>
                                     <option class="Select-option" value="<?= display_str($CodecName); ?>" <? Format::selected('codec', $CodecName) ?>><?= display_str($CodecName); ?></option>
                                 <?  } ?>
                             </select>
                             <select class="Input" name="container" class="ft_container fti_advanced">
-                                <option class="Select-option" value=""><?= Lang::get('torrents.container') ?></option>
+                                <option class="Select-option" value=""><?= t('server.torrents.container') ?></option>
                                 <? foreach ($Containers as $ContainerName) { ?>
                                     <option class="Select-option" value="<?= display_str($ContainerName); ?>" <? Format::selected('container', $ContainerName) ?>><?= display_str($ContainerName); ?></option>
                                 <?  } ?>
                             </select>
                             <select class="Input" name="resolution" class="ft_resolution fti_advanced">
-                                <option class="Select-option" value=""><?= Lang::get('torrents.resolution') ?></option>
+                                <option class="Select-option" value=""><?= t('server.torrents.resolution') ?></option>
                                 <? foreach ($Resolutions as $ResolutionName) { ?>
                                     <option class="Select-option" value="<?= display_str($ResolutionName); ?>" <? Format::selected('resolution', $ResolutionName) ?>><?= display_str($ResolutionName); ?></option>
                                 <?  } ?>
                             </select>
                             <select class="Input" name="processing" class="ft_container fti_advanced">
-                                <option class="Select-option" value=""><?= Lang::get('torrents.processing') ?></option>
+                                <option class="Select-option" value=""><?= t('server.torrents.processing') ?></option>
                                 <? foreach ($Processings as $ProcessingName) { ?>
                                     <option class="Select-option" value="<?= display_str($ProcessingName); ?>" <? Format::selected('processing', $ProcessingName) ?>><?= display_str($ProcessingName); ?></option>
                                 <?  } ?>
                             </select>
                             <select class="Input" name="releasetype" class="ft_releasetype fti_advanced">
-                                <option class="Select-option" value=""><?= Lang::get('torrents.ft_releasetype') ?></option>
+                                <option class="Select-option" value=""><?= t('server.torrents.ft_releasetype') ?></option>
                                 <? foreach ($ReleaseTypes as $ID) { ?>
-                                    <option class="Select-option" value="<?= display_str($ID); ?>" <? Format::selected('releasetype', $ID) ?>><?= display_str(Lang::get('torrents.release_types')[$ID]); ?></option>
+                                    <option class="Select-option" value="<?= display_str($ID); ?>" <? Format::selected('releasetype', $ID) ?>><?= display_str(t('server.torrents.release_types')[$ID]); ?></option>
                                 <?  } ?>
                             </select>
                         </td>
                     </tr>
                     <tr class="Form-row">
-                        <td class="Form-label"><strong><?= Lang::get('torrents.misc') ?>:</strong></td>
+                        <td class="Form-label"><strong><?= t('server.torrents.misc') ?>:</strong></td>
                         <td class="Form-inputs" colspan="3">
                             <select class="Input" name="scene" class="ft_scene">
-                                <option class="Select-option" value=""><?= Lang::get('torrents.scene') ?></option>
-                                <option class="Select-option" value="1" <? Format::selected('scene', 1) ?>><?= Lang::get('torrents.yes') ?></option>
-                                <option class="Select-option" value="0" <? Format::selected('scene', 0) ?>><?= Lang::get('torrents.no') ?></option>
+                                <option class="Select-option" value=""><?= t('server.torrents.scene') ?></option>
+                                <option class="Select-option" value="1" <? Format::selected('scene', 1) ?>><?= t('server.torrents.yes') ?></option>
+                                <option class="Select-option" value="0" <? Format::selected('scene', 0) ?>><?= t('server.torrents.no') ?></option>
                             </select>
                         </td>
                     </tr>
                     <tr class="Form-row">
-                        <td class="Form-label"><strong><?= Lang::get('torrents.tags') ?>:</strong></td>
+                        <td class="Form-label"><strong><?= t('server.torrents.tags') ?>:</strong></td>
                         <td class="Form-inputs">
                             <input class="Input" type="text" name="tags" size="60" data-tooltip="Use !tag to exclude tag" value="<? Format::form('tags') ?>" />
                             <div class="Radio">
                                 <input class="Input" type="radio" name="tags_type" id="tags_type0" value="0" <? Format::selected('tags_type', 0, 'checked') ?> />
-                                <label class="Radio-label" for="tags_type0"> <?= Lang::get('torrents.any') ?></label>
+                                <label class="Radio-label" for="tags_type0"> <?= t('server.torrents.any') ?></label>
                             </div>
                             <div class="Radio">
                                 <input class="Input" type="radio" name="tags_type" id="tags_type1" value="1" <? Format::selected('tags_type', 1, 'checked') ?> />
-                                <label class="Radio-label" for="tags_type1"> <?= Lang::get('torrents.all') ?></label>
+                                <label class="Radio-label" for="tags_type1"> <?= t('server.torrents.all') ?></label>
                             </div>
                         </td>
                     </tr>
 
                     <tr class="Form-row">
-                        <td class="Form-label"><strong><?= Lang::get('torrents.ft_order') ?>:</strong></td>
+                        <td class="Form-label"><strong><?= t('server.torrents.ft_order') ?>:</strong></td>
                         <td class="Form-inputs">
                             <select class="Input" name="order" class="ft_order_by">
                                 <? foreach ($Orders as $OrderKey => $OrderText) { ?>
@@ -443,7 +443,7 @@ $Pages = Format::get_pages($Page, $TorrentCount, CONFIG['TORRENTS_PER_PAGE']);
         </form>
     </div>
     <? if (count($GroupIDs) === 0) { ?>
-        <div class="center"><?= Lang::get('torrents.nothing_found') ?></div>
+        <div class="center"><?= t('server.torrents.nothing_found') ?></div>
     <?    } else { ?>
         <div class="BodyNavLinks"><?= $Pages ?></div>
     <?

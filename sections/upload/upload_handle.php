@@ -128,38 +128,38 @@ $Properties['Note'] = isset($POST['staff_note']) ? trim($_POST['staff_note']) : 
 //******************************************************************************//
 //--------------- Validate data in upload form ---------------------------------//
 
-// $Validate->SetFields('type', '1', 'inarray', Lang::get('upload.select_a_type'), array('inarray' => array_keys($Categories)));
+// $Validate->SetFields('type', '1', 'inarray', t('server.upload.select_a_type'), array('inarray' => array_keys($Categories)));
 
 $Validate->SetFields(
     'codec',
     '1',
     'string',
-    Lang::get('upload.select_valid_format')
+    t('server.upload.select_valid_format')
 );
 $Validate->SetFields(
     'resolution',
     '1',
     'string',
-    Lang::get('upload.select_valid_format')
+    t('server.upload.select_valid_format')
 );
 $Validate->SetFields(
     'container',
     '1',
     'string',
-    Lang::get('upload.select_valid_format')
+    t('server.upload.select_valid_format')
 );
 $Validate->SetFields(
     'source',
     '1',
     'string',
-    Lang::get('upload.select_valid_format')
+    t('server.upload.select_valid_format')
 );
 
 $Validate->SetFields(
     'name',
     '1',
     'string',
-    Lang::get('upload.title_length_limit')
+    t('server.upload.title_length_limit')
 );
 
 $Err = $Validate->ValidateForm($_POST); // Validate the form
@@ -168,9 +168,9 @@ $File = $_FILES['file_input']; // This is our torrent file
 $TorrentName = $File['tmp_name'];
 
 if (!is_uploaded_file($TorrentName) || !filesize($TorrentName)) {
-    $Err = Lang::get('upload.no_torrent_uploaded');
+    $Err = t('server.upload.no_torrent_uploaded');
 } elseif (substr(strtolower($File['name']), strlen($File['name']) - strlen('.torrent')) !== '.torrent') {
-    $Err = Lang::get('upload.not_torrent_file') . "(" . $File['name'] . ")" . Lang::get('upload.period');
+    $Err = t('server.upload.not_torrent_file') . "(" . $File['name'] . ")" . t('server.upload.period');
 }
 
 if ($Type == 'Movies') {
@@ -211,7 +211,7 @@ if (empty($Properties['GroupID'])) {
         }
     }
     if ($MainArtistCount < 1) {
-        $Err = Lang::get('upload.enter_at_least_one_artist');
+        $Err = t('server.upload.enter_at_least_one_artist');
         $ArtistForm = array();
     }
 } else {
@@ -269,18 +269,18 @@ if ($DB->has_results()) {
 		FROM torrents_files
 		WHERE TorrentID = $ID");
     if ($DB->has_results()) {
-        $Err = '<a class="u-colorWarning" href="torrents.php?torrentid=' . $ID . '">' . Lang::get('upload.same_torrent_exists') . '</a>';
+        $Err = '<a class="u-colorWarning" href="torrents.php?torrentid=' . $ID . '">' . t('server.upload.same_torrent_exists') . '</a>';
     } else {
         // A lost torrent
         $DB->query("
 			INSERT INTO torrents_files (TorrentID, File)
 			VALUES ($ID, '$TorEnc')");
-        $Err = '<a href="torrents.php?torrentid=' . $ID . '">' . Lang::get('upload.thank_you_fix_torrent') . '</a>';
+        $Err = '<a href="torrents.php?torrentid=' . $ID . '">' . t('server.upload.thank_you_fix_torrent') . '</a>';
     }
 }
 
 if (isset($Tor->Dec['encrypted_files'])) {
-    $Err = Lang::get('upload.not_supported_encrypted_file_list');
+    $Err = t('server.upload.not_supported_encrypted_file_list');
 }
 
 // File list and size
@@ -305,7 +305,7 @@ foreach ($FileList as $File) {
 }
 if (count($TooLongPaths) > 0) {
     $Names = implode(' <br />', $TooLongPaths);
-    $Err = Lang::get('upload.name_too_long') . "$Names";
+    $Err = t('server.upload.name_too_long') . "$Names";
 }
 $FilePath = db_string($DirName);
 $FileString = db_string(implode("\n", $TmpFileList));
@@ -790,10 +790,10 @@ if (isset($Properties['BadFolders'])) {
  */
 
 if ($PublicTorrent || $UnsourcedTorrent) {
-    View::show_header(Lang::get('upload.header_warning'), '', 'PageUploadHandle');
+    View::show_header(t('server.upload.header_warning'), '', 'PageUploadHandle');
 ?>
-    <h1><?= Lang::get('upload.upload_handle_warning') ?></h1>
-    <p><?= Lang::get('upload.need_download_new_torrent1') ?><a href="torrents.php?id=<?= $GroupID ?>&torrentid=<?= $TorrentID ?>"><?= Lang::get('upload.here') ?></a><?= Lang::get('upload.need_download_new_torrent2') ?></p>
+    <h1><?= t('server.upload.upload_handle_warning') ?></h1>
+    <p><?= t('server.upload.need_download_new_torrent1') ?><a href="torrents.php?id=<?= $GroupID ?>&torrentid=<?= $TorrentID ?>"><?= t('server.upload.here') ?></a><?= t('server.upload.need_download_new_torrent2') ?></p>
 <? View::show_footer();
 } elseif ($RequestID) {
     header("Location: requests.php?action=takefill&requestid=$RequestID&torrentid=$TorrentID&auth=" . $LoggedUser['AuthKey']);
@@ -814,7 +814,7 @@ if (function_exists('fastcgi_finish_request')) {
 // Manage notifications
 $Title = Torrents::display_simple_group_name($Properties, null, false);
 if ($Properties['ReleaseType'] > 0) {
-    $Title .= ' [' . Lang::get('torrents.release_types')[$Properties['ReleaseType']] . ']';
+    $Title .= ' [' . t('server.torrents.release_types')[$Properties['ReleaseType']] . ']';
 }
 $Details = '';
 $Details .= trim($Properties['Codec']) . ' / ' . trim($Properties['Source']) . ' / ' . trim($Properties['Resolution']) . ' / ' . trim($Properties['Container']) . ' / ' . trim($Properties['Processing']);

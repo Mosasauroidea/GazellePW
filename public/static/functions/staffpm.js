@@ -26,16 +26,11 @@ function SaveMessage(id) {
 
   ajax.post('?action=edit_response', ToPost, function (data) {
     if (data == '1') {
-      document.getElementById(ajax_message).textContent = lang.get(
-        'staffpm.response_created'
-      )
+      document.getElementById(ajax_message).textContent = t('client.staffpm.response_created')
     } else if (data == '2') {
-      document.getElementById(ajax_message).textContent = lang.get(
-        'staffpm.response_edited'
-      )
+      document.getElementById(ajax_message).textContent = t('client.staffpm.response_edited')
     } else {
-      document.getElementById(ajax_message).textContent =
-        lang.get('staffpm.error')
+      document.getElementById(ajax_message).textContent = t('client.staffpm.error')
     }
     $('#' + ajax_message).gshow()
     var t = setTimeout("$('#" + ajax_message + "').ghide()", 2000)
@@ -52,12 +47,9 @@ function DeleteMessage(id) {
   ajax.post('?action=delete_response', ToPost, function (data) {
     $(div).ghide()
     if (data == '1') {
-      document.getElementById(ajax_message).textContent = lang.get(
-        'staffpm.response_deleted'
-      )
+      document.getElementById(ajax_message).textContent = t('client.staffpm.response_deleted')
     } else {
-      document.getElementById(ajax_message).textContent =
-        lang.get('staffpm.error')
+      document.getElementById(ajax_message).textContent = t('client.staffpm.error')
     }
     $('#' + ajax_message).gshow()
     var t = setTimeout("$('#" + ajax_message + "').ghide()", 2000)
@@ -71,12 +63,9 @@ function Assign() {
 
   ajax.post('?action=assign', ToPost, function (data) {
     if (data == '1') {
-      document.getElementById('ajax_message').textContent = lang.get(
-        'staffpm.assign_assigned'
-      )
+      document.getElementById('ajax_message').textContent = t('client.staffpm.assign_assigned')
     } else {
-      document.getElementById('ajax_message').textContent =
-        lang.get('staffpm.error')
+      document.getElementById('ajax_message').textContent = t('client.staffpm.error')
     }
     $('#ajax_message').gshow()
     var t = setTimeout("$('#ajax_message').ghide()", 2000)

@@ -66,13 +66,13 @@ if (isset($_REQUEST['addtokens'])) {
 }
 
 
-View::show_header(Lang::get('tools.add_tokens_sitewide'));
+View::show_header(t('server.tools.add_tokens_sitewide'));
 
 ?>
 <div class="BodyHeader">
-    <h2 class="BodyHeader-nav"><?= Lang::get('tools.add_fl_tokens_to_all_enabled_users') ?></h2>
+    <h2 class="BodyHeader-nav"><?= t('server.tools.add_fl_tokens_to_all_enabled_users') ?></h2>
     <div class="BodyNavLinks">
-        <a href="tools.php?action=tokens&amp;showabusers=1" class="brackets"><?= Lang::get('tools.show_abusers') ?></a>
+        <a href="tools.php?action=tokens&amp;showabusers=1" class="brackets"><?= t('server.tools.show_abusers') ?></a>
     </div>
 </div>
 <div class="BoxBody" style="margin-left: auto; margin-right: auto; text-align: center; max-width: 40%;">
@@ -80,8 +80,8 @@ View::show_header(Lang::get('tools.add_tokens_sitewide'));
     <form class="add_form" name="fltokens" action="" method="post">
         <input type="hidden" name="action" value="tokens" />
         <input type="hidden" name="auth" value="<?= $LoggedUser['AuthKey'] ?>" />
-        <?= Lang::get('tools.tokens_to_add') ?>: <input class="Input" type="text" name="numtokens" size="5" style="text-align: right;" value="0" /><br /><br />
-        <label for="leechdisabled"><?= Lang::get('tools.grant_tokens_to_leech_disabled_users') ?>: </label><input type="checkbox" id="leechdisabled" name="leechdisabled" value="1" /><br /><br />
+        <?= t('server.tools.tokens_to_add') ?>: <input class="Input" type="text" name="numtokens" size="5" style="text-align: right;" value="0" /><br /><br />
+        <label for="leechdisabled"><?= t('server.tools.grant_tokens_to_leech_disabled_users') ?>: </label><input type="checkbox" id="leechdisabled" name="leechdisabled" value="1" /><br /><br />
         <input class="Button" type="submit" name="addtokens" value="Add tokens" />
     </form>
 </div>
@@ -91,9 +91,9 @@ View::show_header(Lang::get('tools.add_tokens_sitewide'));
     <form class="manage_form" name="fltokens" action="" method="post">
         <input type="hidden" name="action" value="tokens" />
         <input type="hidden" name="auth" value="<?= $LoggedUser['AuthKey'] ?>" />
-        <?= Lang::get('tools.tokens_to_set') ?>: <input class="Input" type="text" name="numtokens" size="5" style="text-align: right;" value="0" /><br /><br />
-        <span id="droptokens"><label for="onlydrop"><?= Lang::get('tools.only_affect_users_with_at_least_this_many_tokens') ?>: </label><input type="checkbox" id="onlydrop" name="onlydrop" value="1" onchange="$('#disabled').gtoggle(); return true;" /></span><br />
-        <span id="disabled"><label for="leechdisabled"><?= Lang::get('tools.also_add_tokens_to_leech_disabled_users') ?>: </label><input type="checkbox" id="leechdisabled" name="leechdisabled" value="1" onchange="$('#droptokens').gtoggle(); return true;" /></span><br /><br />
+        <?= t('server.tools.tokens_to_set') ?>: <input class="Input" type="text" name="numtokens" size="5" style="text-align: right;" value="0" /><br /><br />
+        <span id="droptokens"><label for="onlydrop"><?= t('server.tools.only_affect_users_with_at_least_this_many_tokens') ?>: </label><input type="checkbox" id="onlydrop" name="onlydrop" value="1" onchange="$('#disabled').gtoggle(); return true;" /></span><br />
+        <span id="disabled"><label for="leechdisabled"><?= t('server.tools.also_add_tokens_to_leech_disabled_users') ?>: </label><input type="checkbox" id="leechdisabled" name="leechdisabled" value="1" onchange="$('#droptokens').gtoggle(); return true;" /></span><br /><br />
         <input class="Button" type="submit" name="cleartokens" value="Set token total" />
     </form>
 </div>

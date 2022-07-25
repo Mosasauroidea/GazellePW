@@ -4,18 +4,18 @@ if (!check_perms('admin_manage_permissions') && !check_perms('users_mod')) {
 }
 
 if (!check_perms('admin_manage_permissions')) {
-    View::show_header(Lang::get('tools.h2_site_options'), '', 'PageToolSiteOption');
+    View::show_header(t('server.tools.h2_site_options'), '', 'PageToolSiteOption');
     $DB->query("SELECT Name, Value, Comment FROM site_options");
 ?>
     <div class="BodyHeader">
-        <h2 class="BodyHeader-nav"><?= Lang::get('tools.h2_site_options') ?></h2>
+        <h2 class="BodyHeader-nav"><?= t('server.tools.h2_site_options') ?></h2>
     </div>
     <div class="TableContainer">
         <table class="Table">
             <tr class="Table-rowHeader">
-                <td class="Table-cell"><?= Lang::get('tools.name') ?></td>
-                <td class="Table-cell"><?= Lang::get('tools.value') ?></td>
-                <td class="Table-cell"><?= Lang::get('tools.comment') ?></td>
+                <td class="Table-cell"><?= t('server.tools.name') ?></td>
+                <td class="Table-cell"><?= t('server.tools.value') ?></td>
+                <td class="Table-cell"><?= t('server.tools.comment') ?></td>
             </tr>
             <?
             $Row = 'a';
@@ -91,21 +91,21 @@ $DB->query("
     ORDER BY LOWER(Name) DESC
 ");
 
-View::show_header(Lang::get('tools.h2_site_options'), '', 'PageToolSiteOption');
+View::show_header(t('server.tools.h2_site_options'), '', 'PageToolSiteOption');
 ?>
 
 <div class="BodyHeader">
-    <h2 class="BodyHeader-nav"><?= Lang::get('tools.h2_site_options') ?></h2>
+    <h2 class="BodyHeader-nav"><?= t('server.tools.h2_site_options') ?></h2>
 </div>
 <div class="TableContainer">
     <table class="Table">
         <tr class="Table-rowHeader">
             <td class="Table-cell">
-                <span data-tooltip="<?= Lang::get('tools.words_must_be_separated_by_underscores') ?>"><?= Lang::get('tools.name') ?></span>
+                <span data-tooltip="<?= t('server.tools.words_must_be_separated_by_underscores') ?>"><?= t('server.tools.name') ?></span>
             </td>
-            <td class="Table-cell"><?= Lang::get('tools.value') ?></td>
-            <td class="Table-cell"><?= Lang::get('tools.comment') ?></td>
-            <td class="Table-cell"><?= Lang::get('tools.submit') ?></td>
+            <td class="Table-cell"><?= t('server.tools.value') ?></td>
+            <td class="Table-cell"><?= t('server.tools.comment') ?></td>
+            <td class="Table-cell"><?= t('server.tools.submit') ?></td>
         </tr>
         <tr class="Table-row">
             <form class="create_form" name="site_option" action="" method="post">

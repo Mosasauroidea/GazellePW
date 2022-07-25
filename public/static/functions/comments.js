@@ -124,7 +124,7 @@ function Edit_Form(post, key) {
       .attr('href')
       .split('=')[1]
     if (postuserid != userid) {
-      pmbox = lang.get('common.pm_user_on_edit', { postId: postid })
+      pmbox = t('client.common.pm_user_on_edit', { postId: postid })
     } else {
       pmbox = ''
     }
@@ -184,7 +184,7 @@ function Edit_Form(post, key) {
 }
 
 function Cancel_Edit(postid) {
-  var answer = confirm(lang.get('common.are_you_sure_you_want_to_cancel'))
+  var answer = confirm(t('client.common.are_you_sure_you_want_to_cancel'))
   if (answer) {
     $('#reply_box').gshow()
     $('#bar' + postid).raw().innerHTML = $('#bar' + postid).raw().oldbar
@@ -242,7 +242,7 @@ function Save_Edit(postid) {
 
 function Delete(post) {
   postid = post
-  if (confirm(lang.get('common.common.are_you_sure_you_wish_to_delete_this_post')) == true) {
+  if (confirm(t('client.common.common.are_you_sure_you_wish_to_delete_this_post')) == true) {
     if (location.href.match(/forums\.php/)) {
       ajax.get('forums.php?action=delete&auth=' + authkey + '&postid=' + postid, function () {
         $('#post' + postid).ghide()

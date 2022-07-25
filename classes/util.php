@@ -221,10 +221,10 @@ function FL_confirmation_msg($seeders, $Size) {
      * Any apostrophes should be avoided or escaped appropriately (with \\').
      */
     $TokenUses = ceil($Size / (5 * 1024 * 1024 * 1024));
-    $FTStr = "$TokenUses" . Lang::get('global.n_fl_token') . ($TokenUses > 1 ? Lang::get('global.s') : "");
+    $FTStr = "$TokenUses" . t('server.global.n_fl_token') . ($TokenUses > 1 ? t('server.global.s') : "");
     return ($seeders == 0)
-        ? Lang::get('global.not_seeded_sure_use_fl_before') . "$FTStr" . Lang::get('global.not_seeded_sure_use_fl_after')
-        : Lang::get('global.sure_use_fl_before') . "$FTStr" . Lang::get('global.sure_use_fl_after');
+        ? t('server.global.not_seeded_sure_use_fl_before') . "$FTStr" . t('server.global.not_seeded_sure_use_fl_after')
+        : t('server.global.sure_use_fl_before') . "$FTStr" . t('server.global.sure_use_fl_after');
 }
 
 /**

@@ -164,17 +164,17 @@ globalapp.browseAddArtistField = function browseAddArtistField() {
   Importance.name = 'importance[]'
   Importance.innerHTML =
     '<option class="Select-option" value="1">' +
-    lang.get('common.director') +
+    t('client.common.director') +
     '</option><option class="Select-option" value="2">' +
-    lang.get('common.writer') +
+    t('client.common.writer') +
     '</option><option class="Select-option" value="3">' +
-    lang.get('common.producer') +
+    t('client.common.producer') +
     '</option><option class="Select-option" value="4">' +
-    lang.get('common.composer') +
+    t('client.common.composer') +
     '</option><option class="Select-option" value="5">' +
-    lang.get('common.cinematographer') +
+    t('client.common.cinematographer') +
     '</option><option class="Select-option" value="6">' +
-    lang.get('common.actor') +
+    t('client.common.actor') +
     '</option>'
   x.appendChild(Importance)
   if ($('#artist').data('gazelle-autocomplete')) {

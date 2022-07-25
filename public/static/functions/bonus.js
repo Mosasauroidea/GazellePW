@@ -28,7 +28,7 @@ function ConfirmPurchase(event, item, next, element) {
     event.preventDefault()
     return false
   }
-  check = confirm(lang.get('common.confirm_purchase', { item }))
+  check = confirm(t('client.common.confirm_purchase', { item }))
   if (!check) {
     event.preventDefault()
     return false
@@ -39,13 +39,10 @@ function ConfirmPurchase(event, item, next, element) {
  * @return {boolean}
  */
 function ConfirmOther(event, element) {
-  var name = prompt(lang.get('common.confirm_username'))
+  var name = prompt(t('client.common.confirm_username'))
   if (!name || name === '') {
     return false
   }
-  $(element).attr(
-    'href',
-    $(element).attr('href') + '&user=' + encodeURIComponent(name)
-  )
+  $(element).attr('href', $(element).attr('href') + '&user=' + encodeURIComponent(name))
   return true
 }

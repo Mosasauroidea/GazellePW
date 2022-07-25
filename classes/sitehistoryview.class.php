@@ -6,7 +6,7 @@ class SiteHistoryView {
         if (check_perms('users_mod')) {
 ?>
             <div class="BodyNavLinks">
-                <a href="sitehistory.php?action=edit" class="brackets"><?= Lang::get('sitehistory.create_new_event') ?></a>
+                <a href="sitehistory.php?action=edit" class="brackets"><?= t('server.sitehistory.create_new_event') ?></a>
             </div>
         <?
         }
@@ -36,7 +36,7 @@ class SiteHistoryView {
                                 <a href="sitehistory.php?action=search&amp;category=<?= $Event['Category'] ?>" class="brackets"><?= $Categories[$Event['Category']] ?></a>
                                 <a href="sitehistory.php?action=search&amp;subcategory=<?= $Event['SubCategory'] ?>" class="brackets"><?= $SubCategories[$Event['SubCategory']] ?></a>
                                 <? if ($CanEdit) { ?>
-                                    <a class="brackets" href="sitehistory.php?action=edit&amp;id=<?= $Event['ID'] ?>"><?= Lang::get('global.edit') ?></a>
+                                    <a class="brackets" href="sitehistory.php?action=edit&amp;id=<?= $Event['ID'] ?>"><?= t('server.global.edit') ?></a>
                                 <? } ?>
                             </div>
                         </div>
@@ -67,7 +67,7 @@ class SiteHistoryView {
 
     public static function render_months($Months) { ?>
         <div class="SidebarItem Box">
-            <div class="SidebarItem-header Box-header"><?= Lang::get('sitehistory.calendar') ?></div>
+            <div class="SidebarItem-header Box-header"><?= t('server.sitehistory.calendar') ?></div>
             <div class="SidebarItem-body Box-body">
                 <?
                 $Year = "";
@@ -86,20 +86,20 @@ class SiteHistoryView {
 
     public static function render_search() { ?>
         <div class="SidebarItem Box">
-            <div class="SidebarItem-header Box-header"><?= Lang::get('sitehistory.search') ?></div>
+            <div class="SidebarItem-header Box-header"><?= t('server.sitehistory.search') ?></div>
             <div class="SidebarItem-body Box-body">
                 <form class="Form FormSiteHistorySearch" action="sitehistory.php" method="get">
                     <div class="Form-rowList" variant="alignLeft">
                         <input type="hidden" name="action" value="search" />
                         <div class="Form-row">
-                            <input class="Input" type="text" id="title" name="title" size="20" placeholder="<?= Lang::get('sitehistory.title') ?>" />
+                            <input class="Input" type="text" id="title" name="title" size="20" placeholder="<?= t('server.sitehistory.title') ?>" />
                         </div>
                         <div class="Form-row">
-                            <input class="Input" type="text" id="tags" name="tags" size="20" placeholder="<?= Lang::get('sitehistory.comma_separated_tags') ?>" />
+                            <input class="Input" type="text" id="tags" name="tags" size="20" placeholder="<?= t('server.sitehistory.comma_separated_tags') ?>" />
                         </div>
                         <div class="Form-row">
                             <select class="Input" name="category" id="category">
-                                <option class="Select-option" value="0"><?= Lang::get('sitehistory.choose_a_category') ?></option>
+                                <option class="Select-option" value="0"><?= t('server.sitehistory.choose_a_category') ?></option>
                                 <?
                                 $Categories = SiteHistory::get_categories();
                                 foreach ($Categories as $Key => $Value) {
@@ -110,7 +110,7 @@ class SiteHistoryView {
                         </div>
                         <div class="Form-row">
                             <select class="Input" name="subcategory">
-                                <option class="Select-option" value="0"><?= Lang::get('sitehistory.choose_a_subcategory') ?></option>
+                                <option class="Select-option" value="0"><?= t('server.sitehistory.choose_a_subcategory') ?></option>
                                 <?
                                 $SubCategories = SiteHistory::get_sub_categories();
                                 foreach ($SubCategories as $Key => $Value) {
@@ -139,28 +139,28 @@ class SiteHistoryView {
             <input type="hidden" name="auth" value="<?= G::$LoggedUser['AuthKey'] ?>" />
             <table class="Form-rowList" variant="header">
                 <tr class="Form-row">
-                    <td class="Form-label"><?= Lang::get('sitehistory.title') ?>:</td>
+                    <td class="Form-label"><?= t('server.sitehistory.title') ?>:</td>
                     <td class="Form-inputs">
                         <input class="Input required" type="text" id="title" name="title" size="50" value="<?= $Event['Title'] ?>" />
                     </td>
                 </tr>
                 <tr class="Form-row">
-                    <td class="Form-label"><?= Lang::get('sitehistory.link') ?>:</td>
+                    <td class="Form-label"><?= t('server.sitehistory.link') ?>:</td>
                     <td class="Form-inputs">
                         <input class="Input" type="text" id="url" name="url" size="50" value="<?= $Event['Url'] ?>" />
                     </td>
                 </tr>
                 <tr class="Form-row">
-                    <td class="Form-label"><?= Lang::get('sitehistory.date') ?>:</td>
+                    <td class="Form-label"><?= t('server.sitehistory.date') ?>:</td>
                     <td class="Form-inputs">
                         <input class="Input required" type="date" id="date" name="date" <?= $Event ? ' value="' . date('Y-m-d', strtotime($Event['Date'])) . '"' : '' ?> />
                     </td>
                 </tr>
                 <tr class="Form-row">
-                    <td class="Form-label"><?= Lang::get('sitehistory.category') ?>:</td>
+                    <td class="Form-label"><?= t('server.sitehistory.category') ?>:</td>
                     <td class="Form-inputs">
                         <select class="Input" id="category" name="category" class="required">
-                            <option class="Select-option" value="0"><?= Lang::get('sitehistory.choose_a_category') ?></option>
+                            <option class="Select-option" value="0"><?= t('server.sitehistory.choose_a_category') ?></option>
                             <?
                             $Categories = SiteHistory::get_categories();
                             foreach ($Categories as $Key => $Value) {
@@ -171,10 +171,10 @@ class SiteHistoryView {
                     </td>
                 </tr>
                 <tr class="Form-row">
-                    <td class="Form-label"><?= Lang::get('sitehistory.subcategory') ?>:</td>
+                    <td class="Form-label"><?= t('server.sitehistory.subcategory') ?>:</td>
                     <td class="Form-inputs">
                         <select class="Input" id="category" name="sub_category" class="required">
-                            <option class="Select-option" value="0"><?= Lang::get('sitehistory.choose_a_subcategory') ?></option>
+                            <option class="Select-option" value="0"><?= t('server.sitehistory.choose_a_subcategory') ?></option>
                             <? $SubCategories = SiteHistory::get_sub_categories();
                             foreach ($SubCategories as $Key => $Value) { ?>
                                 <option<?= $Key == $Event['SubCategory'] ? ' selected="selected"' : '' ?> value="<?= $Key ?>"><?= $Value ?></option>
@@ -183,11 +183,11 @@ class SiteHistoryView {
                     </td>
                 </tr>
                 <tr class="Form-row">
-                    <td class="Form-label"><?= Lang::get('sitehistory.tags') ?>:</td>
+                    <td class="Form-label"><?= t('server.sitehistory.tags') ?>:</td>
                     <td class="Form-inputs">
-                        <input class="Input" type="text" id="tags" name="tags" placeholder="<?= Lang::get('sitehistory.tags_placeholder') ?>" size="50" value="<?= $Event['Tags'] ?>" />
+                        <input class="Input" type="text" id="tags" name="tags" placeholder="<?= t('server.sitehistory.tags_placeholder') ?>" size="50" value="<?= $Event['Tags'] ?>" />
                         <select class="Input" id="tag_list">
-                            <option class="Select-option"><?= Lang::get('sitehistory.choose_tags') ?></option>
+                            <option class="Select-option"><?= t('server.sitehistory.choose_tags') ?></option>
                             <?
                             $Tags = SiteHistory::get_tags();
                             foreach ($Tags as $Tag) {
@@ -198,14 +198,14 @@ class SiteHistoryView {
                     </td>
                 </tr>
                 <tr class="Form-row">
-                    <td class="Form-label"><?= Lang::get('sitehistory.body') ?>:</td>
+                    <td class="Form-label"><?= t('server.sitehistory.body') ?>:</td>
                     <td class="Form-items">
                         <? new TEXTAREA_PREVIEW('body', 'site_history', $Event['Body'], 60, 8, true, true, false); ?>
                     </td>
                 </tr>
             </table>
             <div style="text-align: center;">
-                <input class="Button" type="submit" name="submit" value="<?= Lang::get('global.submit') ?>" />
+                <input class="Button" type="submit" name="submit" value="<?= t('server.global.submit') ?>" />
                 <? if ($Event) { ?>
                     <input class="Button" type="submit" name="delete" value="Delete" />
                 <?      } ?>
@@ -217,7 +217,7 @@ class SiteHistoryView {
     public static function render_recent_sidebar($Events) { ?>
         <div class="SidebarItemSiteHistory SidebarItem Box">
             <div class="SidebarItem-header Box-header">
-                <span><a href="sitehistory.php"><?= Lang::get('sitehistory.latest_site_history') ?></a></span>
+                <span><a href="sitehistory.php"><?= t('server.sitehistory.latest_site_history') ?></a></span>
             </div>
             <ul class="SidebarItem-body Box-body SidebarList is-ordered">
                 <?

@@ -16,7 +16,7 @@ if ($CloseLogin) {
 }
 
 ?>
-<? View::show_header(Lang::get('login.login'), '', 'PageLoginHome'); ?>
+<? View::show_header(t('server.login.login'), '', 'PageLoginHome'); ?>
 <span id="no-cookies" class="hidden warning">你似乎禁用了 Cookies。</span>
 <noscript><span class="u-colorWarning"><?= CONFIG['SITE_NAME'] ?>本页面需要启用 JavaScript 才能正常工作，请为你的浏览器启用 JavaScript。</span><br /></noscript>
 <?
@@ -42,10 +42,10 @@ if (strtotime($BannedUntil) < time()) {
             }
             ?>
             <? if ($Attempts > 0) { ?>
-                <br /><span><?= Lang::get('login.attempts_1') ?><span class="info"><?= (6 - $Attempts) ?></span><?= Lang::get('login.attempts_2') ?></span><br />
+                <br /><span><?= t('server.login.attempts_1') ?><span class="info"><?= (6 - $Attempts) ?></span><?= t('server.login.attempts_2') ?></span><br />
             <?    } ?>
             <? if (isset($_GET['invalid2fa'])) { ?>
-                <span class="u-colorWarning"><?= Lang::get('login.warning') ?> </span><br />
+                <span class="u-colorWarning"><?= t('server.login.warning') ?> </span><br />
             <?    } ?>
 
             <div id="login-table">
@@ -54,13 +54,13 @@ if (strtotime($BannedUntil) < time()) {
                     echo '<input type="hidden" name="loginkey" value="' . $_GET['loginkey'] . '"/>';
                 }
                 ?>
-                <div class="username-title"><?= Lang::get('login.username') ?>:</div>
+                <div class="username-title"><?= t('server.login.username') ?>:</div>
                 <div class="username-input">
                     <input class="Input" type="text" name="username" id="username" required="required" maxlength="20" autofocus="autofocus" placeholder="Username" />
                 </div>
                 <div class="space"></div>
 
-                <div class="password-title"><?= Lang::get('login.password') ?>:</div>
+                <div class="password-title"><?= t('server.login.password') ?>:</div>
                 <div class="password-input">
                     <input class="Input" type="password" name="password" id="password" required="required" maxlength="100" pattern=".{6,100}" placeholder="Password" />
                 </div>
@@ -70,9 +70,9 @@ if (strtotime($BannedUntil) < time()) {
                 <div id="remember-login">
                     <div class="Checkbox">
                         <input class="Input" type="checkbox" id="keeplogged" name="keeplogged" value="1" <?= (isset($_REQUEST['keeplogged']) && $_REQUEST['keeplogged']) ? ' checked="checked"' : '' ?> />
-                        <label class="Checkbox-label" for="keeplogged" id="keeplogged-label"><?= Lang::get('login.remember_me') ?></label>
+                        <label class="Checkbox-label" for="keeplogged" id="keeplogged-label"><?= t('server.login.remember_me') ?></label>
                     </div>
-                    <input class="Button" type="submit" name="login" value="<?= Lang::get('login.login') ?>" class="submit" id="login-btn" />
+                    <input class="Button" type="submit" name="login" value="<?= t('server.login.login') ?>" class="submit" id="login-btn" />
                 </div>
                 <div class="space"></div>
 
@@ -81,13 +81,13 @@ if (strtotime($BannedUntil) < time()) {
 <?
 } else {
 ?>
-    <span class="u-colorWarning"><?= Lang::get('login.warning_disable_before') ?><?= time_diff($BannedUntil) ?><?= Lang::get('login.warning_disable_after') ?></span><br />
+    <span class="u-colorWarning"><?= t('server.login.warning_disable_before') ?><?= time_diff($BannedUntil) ?><?= t('server.login.warning_disable_after') ?></span><br />
 <?
 }
 
 if ($Attempts > 0) {
 ?>
-    <span id="find-pw"><?= Lang::get('login.forget_pw') ?> <a href="login.php?act=recover" data-tooltip="Recover your password"><?= Lang::get('login.find_pw') ?></a></span>
+    <span id="find-pw"><?= t('server.login.forget_pw') ?> <a href="login.php?act=recover" data-tooltip="Recover your password"><?= t('server.login.find_pw') ?></a></span>
 <?
 }
 ?>

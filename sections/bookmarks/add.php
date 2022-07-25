@@ -61,7 +61,7 @@ if (!$DB->has_results()) {
 
             $Title = Torrents::display_simple_group_name($Group, null, false);
             if ($Group['ReleaseType'] > 0) {
-                $Title .= ' [' . Lang::get('torrents.release_types')[$Group['ReleaseType']] . ']';
+                $Title .= ' [' . t('server.torrents.release_types')[$Group['ReleaseType']] . ']';
             }
             $Details = '';
             $Details .= trim($Torrent['Codec']) . ' / ' . trim($Torrent['Source']) . ' / ' . trim($Torrent['Resolution']) . ' / ' . trim($Torrent['Container']) . ' / ' . trim($Torrent['Processing']);

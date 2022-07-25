@@ -1,12 +1,12 @@
 <?
-View::show_header(Lang::get('tools.batch_tag_editor'), 'validate');
+View::show_header(t('server.tools.batch_tag_editor'), 'validate');
 if (!check_perms('users_mod')) {
     error(403);
 }
 
 // validation functions
-$Val->SetFields('tag', true, 'string', Lang::get('tools.enter_a_single_tag_to_search_for'), array('maxlength' => '200', 'minlength' => '2'));
-$Val->SetFields('replace', true, 'string', Lang::get('tools.enter_a_single_replacement_tag'), array('maxlength' => '200', 'minlength' => '2'));
+$Val->SetFields('tag', true, 'string', t('server.tools.enter_a_single_tag_to_search_for'), array('maxlength' => '200', 'minlength' => '2'));
+$Val->SetFields('replace', true, 'string', t('server.tools.enter_a_single_replacement_tag'), array('maxlength' => '200', 'minlength' => '2'));
 
 echo $Val->GenerateJS('tagform');
 
@@ -16,25 +16,25 @@ define('MODE_MERGE', 1);
 
 ?>
 <div class="LayoutBody">
-    <h3><?= Lang::get('tools.merge_rename_tags') ?></h3>
+    <h3><?= t('server.tools.merge_rename_tags') ?></h3>
     <form action="tools.php" method="get" name="tagform" id="tagform" onsubmit="return formVal();">
         <input type="hidden" name="action" value="edit_tags" />
         <table>
             <tr>
                 <td class="label">
-                    <?= Lang::get('tools.tag') ?>:
+                    <?= t('server.tools.tag') ?>:
                 </td>
                 <td>
                     <input class="Input" type="text" name="tag" id="tag" />
                 </td>
                 <td class="label">
-                    <?= Lang::get('tools.rename_to_merge_with_tag') ?>:
+                    <?= t('server.tools.rename_to_merge_with_tag') ?>:
                 </td>
                 <td>
                     <input class="Input" type="text" name="replace" id="replace" />
                 </td>
                 <td class="label">
-                    <input type="checkbox" name="list" id="list" checked="checked" /> <label for="list"><?= Lang::get('tools.list_affected_rows') ?></label>
+                    <input type="checkbox" name="list" id="list" checked="checked" /> <label for="list"><?= t('server.tools.list_affected_rows') ?></label>
                 </td>
             </tr>
             <tr>
@@ -53,7 +53,7 @@ define('MODE_MERGE', 1);
         if ($Err) {
             echo '
 			<div class="BoxBody center">
-				<strong>' . Lang::get('tools.error') . ':</strong> ' . $Err . '
+				<strong>' . t('server.tools.error') . ':</strong> ' . $Err . '
 			</div>';
         } else {
             $Tag = Misc::sanitize_tag($_GET['tag']);
@@ -63,7 +63,7 @@ define('MODE_MERGE', 1);
             if ($Tag == $Replacement) {
                 echo "
 				<div class=\"BoxBody center\">
-					<strong>" . Lang::get('tools.error') . ": </strong>" . Lang::get('tools.cannot_merge_tag_with_itself_before') . "$Tag" . Lang::get('tools.cannot_merge_tag_with_itself_after') . "
+					<strong>" . t('server.tools.error') . ": </strong>" . t('server.tools.cannot_merge_tag_with_itself_before') . "$Tag" . t('server.tools.cannot_merge_tag_with_itself_after') . "
 				</div>
 			</div>";
                 View::show_footer();
@@ -79,7 +79,7 @@ define('MODE_MERGE', 1);
             if (!$DB->has_results()) {
                 echo "
 				<div class=\"BoxBody center\">
-					<strong>" . Lang::get('tools.error') . ": </strong>" . Lang::get('tools.no_such_tag_found') . ": $Tag
+					<strong>" . t('server.tools.error') . ": </strong>" . t('server.tools.no_such_tag_found') . ": $Tag
 				</div>
 			</div>";
                 View::show_footer();
@@ -241,14 +241,14 @@ define('MODE_MERGE', 1);
 				LIMIT 1");
             } // if ($Mode == MODE_MERGE)
 
-            echo "\n" . '<div class="BoxBody center"><strong>' . Lang::get('tools.success_exclamation_mark') . '</strong>' . Lang::get('tools.affected_entries') . ': ' . number_format($TotalAffected) . '</div>';
+            echo "\n" . '<div class="BoxBody center"><strong>' . t('server.tools.success_exclamation_mark') . '</strong>' . t('server.tools.affected_entries') . ': ' . number_format($TotalAffected) . '</div>';
 
             if ($_GET['list']) {
     ?>
                 <br>
                 <table class="Table">
                     <tr class="Table-rowHeader">
-                        <td class="Table-cell"><?= Lang::get('tools.affected_torrent_groups') ?></td>
+                        <td class="Table-cell"><?= t('server.tools.affected_torrent_groups') ?></td>
                     </tr>
                     <?
                     if (count($AffectedTorrents)) {
@@ -258,7 +258,7 @@ define('MODE_MERGE', 1);
                     }
                     ?>
                     <tr class="Table-rowHeader">
-                        <td class="Table-cell"><?= Lang::get('tools.affected_requests') ?></td>
+                        <td class="Table-cell"><?= t('server.tools.affected_requests') ?></td>
                     </tr>
                     <?
                     if (count($AffectedRequests)) {

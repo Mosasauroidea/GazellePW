@@ -3,7 +3,7 @@
 <footer class="LayoutPage-footer Footer">
     <? if (!empty($Options['disclaimer'])) { ?>
         <div id="disclaimer_container" class="thin" style="text-align: center; margin-bottom: 20px;">
-            <?= Lang::get('pub.note') ?>
+            <?= t('server.pub.note') ?>
         </div>
     <?
     }

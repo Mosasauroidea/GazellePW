@@ -46,7 +46,7 @@ View::show_header('Gazelle Change Log', 'datetime_picker', 'datetime_picker');
 ?>
 <div class="LayoutBody">
     <div class="BodyHeader">
-        <h2 class="BodyHeader-nav"><?= Lang::get('tools.gz_change_log') ?></h2>
+        <h2 class="BodyHeader-nav"><?= t('server.tools.gz_change_log') ?></h2>
         <div class="BodyNavLinks">
             <?
             $Pages = Format::get_pages($Page, $NumResults, $PerPage, 11);
@@ -57,29 +57,29 @@ View::show_header('Gazelle Change Log', 'datetime_picker', 'datetime_picker');
     <? if ($CanEdit) { ?>
         <div class="box box2 edit_changelog">
             <div class="head">
-                <strong><?= Lang::get('tools.manually_submit_a_log') ?></strong>
+                <strong><?= t('server.tools.manually_submit_a_log') ?></strong>
             </div>
             <div class="pad">
                 <form method="post" action="">
                     <input type="hidden" name="perform" value="add" />
                     <input type="hidden" name="auth" value="<?= $LoggedUser['AuthKey'] ?>" />
                     <div class="field_div" id="cl_message">
-                        <span class="label"><?= Lang::get('tools.commit_message') ?>:</span>
+                        <span class="label"><?= t('server.tools.commit_message') ?>:</span>
                         <!-- <br /> -->
                         <textarea class="Input" name="message" rows="2"></textarea>
                     </div>
                     <div class="field_div" id="cl_date">
-                        <span class="label"><?= Lang::get('tools.date') ?>:</span>
+                        <span class="label"><?= t('server.tools.date') ?>:</span>
                         <!-- <br /> -->
                         <input class="Input" type="text" name="date" />
                     </div>
                     <div class="field_div" id="cl_author">
-                        <span class="label"><?= Lang::get('tools.author') ?>:</span>
+                        <span class="label"><?= t('server.tools.author') ?>:</span>
                         <!-- <br /> -->
                         <input class="Input" type="text" name="author" value="<?= $LoggedUser['Username'] ?>" />
                     </div>
                     <div class="submit_div" id="cl_submit">
-                        <input class="Button" type="submit" value="<?= Lang::get('global.submit') ?>" />
+                        <input class="Button" type="submit" value="<?= t('server.global.submit') ?>" />
                     </div>
                 </form>
             </div>
@@ -99,7 +99,7 @@ View::show_header('Gazelle Change Log', 'datetime_picker', 'datetime_picker');
                             <input type="hidden" name="auth" value="<?= $LoggedUser['AuthKey'] ?>" />
                             <input type="hidden" name="change_id" value="<?= $Change['ID'] ?>" />
                         </form>
-                        <a href="#" onclick="$('#delete_<?= $Change['ID'] ?>').raw().submit(); return false;" class="brackets"><?= Lang::get('global.delete') ?></a>
+                        <a href="#" onclick="$('#delete_<?= $Change['ID'] ?>').raw().submit(); return false;" class="brackets"><?= t('server.global.delete') ?></a>
                     </span>
                 <?      } ?>
             </div>

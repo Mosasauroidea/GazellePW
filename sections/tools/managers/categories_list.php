@@ -4,7 +4,7 @@ if (!check_perms('admin_manage_forums')) {
     error(403);
 }
 
-View::show_header(Lang::get('tools.forum_category_management'));
+View::show_header(t('server.tools.forum_category_management'));
 $DB->prepared_query('
 	SELECT ID, Name, Sort, IFNULL(f.Count, 0) as Count
 	FROM forums_categories as fc
@@ -14,14 +14,14 @@ $DB->prepared_query('
 ?>
 <div class="header">
     <script type="text/javacript">document.getElementByID('content').style.overflow = 'visible';</script>
-    <h2><?= Lang::get('tools.forum_category_control_panel') ?></h2>
+    <h2><?= t('server.tools.forum_category_control_panel') ?></h2>
 </div>
 <table class="Table">
     <tr class="Table-rowHeader">
-        <td class="Table-cell"><?= Lang::get('tools.sort') ?></td>
-        <td class="Table-cell"><?= Lang::get('tools.name') ?></td>
-        <td class="Table-cell"><?= Lang::get('tools.forum_category_control_panel_forums') ?></td>
-        <td class="Table-cell"><?= Lang::get('tools.operation') ?></td>
+        <td class="Table-cell"><?= t('server.tools.sort') ?></td>
+        <td class="Table-cell"><?= t('server.tools.name') ?></td>
+        <td class="Table-cell"><?= t('server.tools.forum_category_control_panel_forums') ?></td>
+        <td class="Table-cell"><?= t('server.tools.operation') ?></td>
     </tr>
     <?
     $Row = 'b';
@@ -54,7 +54,7 @@ $DB->prepared_query('
     }
     ?>
     <tr class="Table-rowHeader">
-        <td class="Table-cell" colspan="8"><?= Lang::get('tools.create_category') ?></td>
+        <td class="Table-cell" colspan="8"><?= t('server.tools.create_category') ?></td>
     </tr>
     <tr class="Table-row">
         <form class="create_form" name="forum" action="" method="post">

@@ -1,16 +1,16 @@
 import { render } from 'react-dom'
 import { MDXProvider } from '@mdx-js/react'
 import { isString, get, template, templateSettings } from 'lodash-es'
-import en from '#/locales/en/client.yaml'
-import zhHans from '#/locales/zh-Hans/client.yaml'
+import en from '#/locales/en/en.yaml'
+import zhHans from '#/locales/zh-Hans/zh-Hans.yaml'
 import ScreenshotComparisionHelpEn from '#/locales/en/ScreenshotComparisonHelp.mdx'
 import ScreenshotComparisionHelpZhHans from '#/locales/zh-Hans/ScreenshotComparisonHelp.mdx'
 import DonateOverviewEn from '#/locales/en/Donate/Overview.mdx'
 import DonateOverviewZhHans from '#/locales/zh-Hans/Donate/Overview.mdx'
 import RulesGoldenRulesEn from '#/locales/en/Rules/GoldenRules.mdx'
 import RulesGoldenRulesZhHans from '#/locales/zh-Hans/Rules/GoldenRules.mdx'
-import RulesChartEn from '#/locales/en/Rules/Chart.mdx'
-import RulesChartZhHans from '#/locales/zh-Hans/Rules/Chart.mdx'
+import RulesChatEn from '#/locales/en/Rules/Chat.mdx'
+import RulesChatZhHans from '#/locales/zh-Hans/Rules/Chat.mdx'
 import RulesCollagesEn from '#/locales/en/Rules/Collages.mdx'
 import RulesCollagesZhHans from '#/locales/zh-Hans/Rules/Collages.mdx'
 import RulesRequestsEn from '#/locales/en/Rules/Requests.mdx'
@@ -34,7 +34,7 @@ const COMPONENTS = {
     'ScreenshotComparisonHelp.mdx': ScreenshotComparisionHelpEn,
     'Donate/Overview.mdx': DonateOverviewEn,
     'Rules/GoldenRules.mdx': RulesGoldenRulesEn,
-    'Rules/Chat.mdx': RulesChartEn,
+    'Rules/Chat.mdx': RulesChatEn,
     'Rules/Collages.mdx': RulesCollagesEn,
     'Rules/Requests.mdx': RulesRequestsEn,
     'Rules/Tags.mdx': RulesTagsEn,
@@ -46,7 +46,7 @@ const COMPONENTS = {
     'ScreenshotComparisonHelp.mdx': ScreenshotComparisionHelpZhHans,
     'Donate/Overview.mdx': DonateOverviewZhHans,
     'Rules/GoldenRules.mdx': RulesGoldenRulesZhHans,
-    'Rules/Chat.mdx': RulesChartZhHans,
+    'Rules/Chat.mdx': RulesChatZhHans,
     'Rules/Collages.mdx': RulesCollagesZhHans,
     'Rules/Requests.mdx': RulesRequestsZhHans,
     'Rules/Tags.mdx': RulesTagsZhHans,
@@ -93,3 +93,5 @@ window.lang = {
     render(<MDXProvider components={components}>{this.element(name)}</MDXProvider>, document.getElementById(selector))
   },
 }
+
+window.t = window.lang.get.bind(window.lang)

@@ -1,6 +1,6 @@
 <?php
 
-View::show_header(Lang::get('staffpm.staff_inbox'), '', 'PageStaffPMInbox');
+View::show_header(t('server.staffpm.staff_inbox'), '', 'PageStaffPMInbox');
 
 $View = display_str($_GET['view']);
 $UserLevel = $LoggedUser['EffectiveClass'];
@@ -13,30 +13,30 @@ $LevelCap = 1000;
 $SortStr = 'IF(AssignedToUser = ' . $LoggedUser['ID'] . ', 0, 1) ASC, ';
 switch ($View) {
     case 'unanswered':
-        $ViewString = Lang::get('staffpm.unanswered');
+        $ViewString = t('server.staffpm.unanswered');
         $Status = "Unanswered";
         break;
     case 'open':
-        $ViewString = Lang::get('staffpm.unresolved');
+        $ViewString = t('server.staffpm.unresolved');
         $Status = "Open', 'Unanswered";
         $SortStr = '';
         break;
     case 'resolved':
-        $ViewString = Lang::get('staffpm.resolved');
+        $ViewString = t('server.staffpm.resolved');
         $Status = "Resolved";
         $SortStr = '';
         break;
     case 'my':
-        $ViewString = Lang::get('staffpm.your_unanswered');
+        $ViewString = t('server.staffpm.your_unanswered');
         $Status = "Unanswered";
         break;
     default:
         $Status = "Unanswered";
         if ($UserLevel >= $Classes[CONFIG['USER_CLASS']['FORUM_MOD']]['Level']) {
-            $ViewString = Lang::get('staffpm.your_unanswered');
+            $ViewString = t('server.staffpm.your_unanswered');
         } else {
             // FLS
-            $ViewString = Lang::get('staffpm.unanswered');
+            $ViewString = t('server.staffpm.unanswered');
         }
         break;
 }
@@ -94,20 +94,20 @@ $Row = 'a';
 ?>
 <div class="LayoutBody">
     <div class="BodyHeader">
-        <h2 class="BodyHeader-nav"><?= $ViewString ?><?= Lang::get('staffpm.space_staff_pms') ?></h2>
+        <h2 class="BodyHeader-nav"><?= $ViewString ?><?= t('server.staffpm.space_staff_pms') ?></h2>
         <div class="BodyNavLinks">
             <? if ($IsStaff) { ?>
-                <a href="staffpm.php" class="brackets"><?= Lang::get('staffpm.view_your_unanswered') ?></a>
+                <a href="staffpm.php" class="brackets"><?= t('server.staffpm.view_your_unanswered') ?></a>
             <?  } ?>
-            <a href="staffpm.php?view=unanswered" class="brackets"><?= Lang::get('staffpm.view_all_unanswered') ?></a>
-            <a href="staffpm.php?view=open" class="brackets"><?= Lang::get('staffpm.view_unresolved') ?></a>
-            <a href="staffpm.php?view=resolved" class="brackets"><?= Lang::get('staffpm.view_resolved') ?></a>
+            <a href="staffpm.php?view=unanswered" class="brackets"><?= t('server.staffpm.view_all_unanswered') ?></a>
+            <a href="staffpm.php?view=open" class="brackets"><?= t('server.staffpm.view_unresolved') ?></a>
+            <a href="staffpm.php?view=resolved" class="brackets"><?= t('server.staffpm.view_resolved') ?></a>
             <? if ($IsStaff) { ?>
-                <a href="staffpm.php?action=scoreboard" class="brackets"><?= Lang::get('staffpm.view_scoreboard') ?></a>
+                <a href="staffpm.php?action=scoreboard" class="brackets"><?= t('server.staffpm.view_scoreboard') ?></a>
             <?  }
 
             if ($IsFLS && !$IsStaff) { ?>
-                <span data-tooltip="This is the inbox where replies to Staff PMs you have sent are."><a href="staffpm.php?action=userinbox" class="brackets"><?= Lang::get('staffpm.personal_staff_inbox') ?></a></span>
+                <span data-tooltip="This is the inbox where replies to Staff PMs you have sent are."><a href="staffpm.php?action=userinbox" class="brackets"><?= t('server.staffpm.personal_staff_inbox') ?></a></span>
             <?  } ?>
         </div>
     </div>
@@ -122,7 +122,7 @@ $Row = 'a';
         if (!$DB->has_results()) {
             // No messages
         ?>
-            <h2><?= Lang::get('staffpm.no_messages') ?></h2>
+            <h2><?= t('server.staffpm.no_messages') ?></h2>
             <?
 
         } else {
@@ -144,13 +144,13 @@ $Row = 'a';
                             <? if ($ViewString != 'Resolved' && $IsStaff) { ?>
                                 <td class="Table-cell" width="10"><input type="checkbox" onclick="toggleChecks('messageform', this);" /></td>
                             <?  } ?>
-                            <td class="Table-cell" width="50%"><?= Lang::get('staffpm.subject') ?></td>
-                            <td class="Table-cell"><?= Lang::get('staffpm.sender') ?></td>
-                            <td class="Table-cell"><?= Lang::get('staffpm.date') ?></td>
-                            <td class="Table-cell"><?= Lang::get('staffpm.assigned_to') ?></td>
-                            <td class="Table-cell"><?= Lang::get('staffpm.replies') ?></td>
+                            <td class="Table-cell" width="50%"><?= t('server.staffpm.subject') ?></td>
+                            <td class="Table-cell"><?= t('server.staffpm.sender') ?></td>
+                            <td class="Table-cell"><?= t('server.staffpm.date') ?></td>
+                            <td class="Table-cell"><?= t('server.staffpm.assigned_to') ?></td>
+                            <td class="Table-cell"><?= t('server.staffpm.replies') ?></td>
                             <? if ($ViewString == 'Resolved') { ?>
-                                <td class="Table-cell"><?= Lang::get('staffpm.resolved_by') ?></td>
+                                <td class="Table-cell"><?= t('server.staffpm.resolved_by') ?></td>
                             <?  } ?>
                         </tr>
                         <?

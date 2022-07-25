@@ -2,35 +2,26 @@ var ArtistCount = 1
 
 globalapp.uploadCategories = function uploadCategories() {
   var dynamic_form = $('#dynamic_form')
-  ajax.get(
-    'ajax.php?action=upload_section&categoryid=' + $('#categories').raw().value,
-    function (response) {
-      dynamic_form.raw().innerHTML = response
-      initMultiButtons()
-      // Evaluate the code that generates previews.
-      eval($('#dynamic_form script.preview_code').html())
-      setTimeout(function () {
-        dynamic_form.data('loaded', true)
-      }, 500)
+  ajax.get('ajax.php?action=upload_section&categoryid=' + $('#categories').raw().value, function (response) {
+    dynamic_form.raw().innerHTML = response
+    initMultiButtons()
+    // Evaluate the code that generates previews.
+    eval($('#dynamic_form script.preview_code').html())
+    setTimeout(function () {
+      dynamic_form.data('loaded', true)
+    }, 500)
 
-      ArtistCount = 1
-    }
-  )
+    ArtistCount = 1
+  })
 }
 
 globalapp.uploadAddTag = function uploadAddTag() {
   if ($('#tags').raw().value == '') {
-    $('#tags').raw().value =
-      $('#genre_tags').raw().options[$('#genre_tags').raw().selectedIndex].value
-  } else if (
-    $('#genre_tags').raw().options[$('#genre_tags').raw().selectedIndex]
-      .value === ''
-  ) {
+    $('#tags').raw().value = $('#genre_tags').raw().options[$('#genre_tags').raw().selectedIndex].value
+  } else if ($('#genre_tags').raw().options[$('#genre_tags').raw().selectedIndex].value === '') {
   } else {
     $('#tags').raw().value =
-      $('#tags').raw().value +
-      ', ' +
-      $('#genre_tags').raw().options[$('#genre_tags').raw().selectedIndex].value
+      $('#tags').raw().value + ', ' + $('#genre_tags').raw().options[$('#genre_tags').raw().selectedIndex].value
   }
 }
 
@@ -60,15 +51,12 @@ globalapp.uploadAddArtistField = function AddArtistField(movie = false) {
   ImportanceField.id = 'importance_' + ArtistCount
   ImportanceField.name = 'importance[]'
 
-  ImportanceField.options[0] = new Option(lang.get('common.director'), '1')
-  ImportanceField.options[1] = new Option(lang.get('common.writer'), '2')
-  ImportanceField.options[2] = new Option(lang.get('common.producer'), '3')
-  ImportanceField.options[3] = new Option(lang.get('common.composer'), '4')
-  ImportanceField.options[4] = new Option(
-    lang.get('common.cinematographer'),
-    '5'
-  )
-  ImportanceField.options[5] = new Option(lang.get('common.actor'), '6')
+  ImportanceField.options[0] = new Option(t('client.common.director'), '1')
+  ImportanceField.options[1] = new Option(t('client.common.writer'), '2')
+  ImportanceField.options[2] = new Option(t('client.common.producer'), '3')
+  ImportanceField.options[3] = new Option(t('client.common.composer'), '4')
+  ImportanceField.options[4] = new Option(t('client.common.cinematographer'), '5')
+  ImportanceField.options[5] = new Option(t('client.common.actor'), '6')
 
   var x = $('#artistfields').raw()
   const div = document.createElement('div')
@@ -79,10 +67,7 @@ globalapp.uploadAddArtistField = function AddArtistField(movie = false) {
   div.appendChild(ImportanceField)
   $('#artistfields .show-more').before(div)
 
-  if (
-    $('#artist_0').data('gazelle-autocomplete') ||
-    $('#artist').data('gazelle-autocomplete')
-  ) {
+  if ($('#artist_0').data('gazelle-autocomplete') || $('#artist').data('gazelle-autocomplete')) {
     $(ArtistField).live('focus', function () {
       $(ArtistField).autocomplete({
         serviceUrl: 'artist.php?action=autocomplete',
@@ -107,10 +92,7 @@ globalapp.uploadRemoveAllArtistFields = function removeAllArtistFields() {
 }
 
 globalapp.uploadAlterOriginal = function AlterOriginal() {
-  if (
-    !$('input[name=buy]').raw().checked &&
-    !$('input[name=diy]').raw().checked
-  ) {
+  if (!$('input[name=buy]').raw().checked && !$('input[name=diy]').raw().checked) {
     //$('input[name=allow]').raw().disabled = true
     $('input[name=jinzhuan]').raw().disabled = true
     //$('input[name=allow]').raw().checked = false

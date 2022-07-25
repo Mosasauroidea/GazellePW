@@ -61,7 +61,7 @@ View::show_header();
             </tr>
             <tr>
                 <td colspan="2" class="center">
-                    <input class="Button" type="submit" value="<?= Lang::get('global.submit') ?>" />
+                    <input class="Button" type="submit" value="<?= t('server.global.submit') ?>" />
                 </td>
             </tr>
             <tr>

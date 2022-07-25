@@ -2,13 +2,13 @@
 if (!check_perms('admin_manage_stylesheets')) {
     error(403);
 }
-View::show_header(Lang::get('tools.manage_stylesheets'));
+View::show_header(t('server.tools.manage_stylesheets'));
 ?>
 <div class="LayoutBody">
     <div class="BodyHeader">
-        <h2 class="BodyHeader-nav"><?= Lang::get('tools.manage_stylesheets') ?></h2>
+        <h2 class="BodyHeader-nav"><?= t('server.tools.manage_stylesheets') ?></h2>
         <div class="BodyNavLinks">
-            <a href="tools.php" class="brackets"><?= Lang::get('tools.back_to_tools') ?></a>
+            <a href="tools.php" class="brackets"><?= t('server.tools.back_to_tools') ?></a>
         </div>
     </div>
     <?php
@@ -32,24 +32,24 @@ View::show_header(Lang::get('tools.manage_stylesheets'));
     ?>
         <table class="Table">
             <tr class="Table-rowHeader">
-                <td class="Table-cell"><?= Lang::get('tools.name') ?></td>
-                <td class="Table-cell"><?= Lang::get('tools.description') ?></td>
-                <td class="Table-cell"><?= Lang::get('tools.default') ?></td>
-                <td class="Table-cell"><?= Lang::get('tools.count') ?></td>
+                <td class="Table-cell"><?= t('server.tools.name') ?></td>
+                <td class="Table-cell"><?= t('server.tools.description') ?></td>
+                <td class="Table-cell"><?= t('server.tools.default') ?></td>
+                <td class="Table-cell"><?= t('server.tools.count') ?></td>
             </tr>
             <?php
             while (list($ID, $Name, $Description, $Default, $EnabledCount, $TotalCount) = $DB->next_record(MYSQLI_NUM, array(1, 2))) { ?>
                 <tr class="Table-row">
                     <td class="Table-cell"><?= $Name ?></td>
                     <td class="Table-cell"><?= $Description ?></td>
-                    <td class="Table-cell"><?= ($Default == '1') ? Lang::get('tools.default') : '' ?></td>
+                    <td class="Table-cell"><?= ($Default == '1') ? t('server.tools.default') : '' ?></td>
                     <td class="Table-cell"><?= number_format($EnabledCount) ?> (<?= number_format($TotalCount) ?>)</td>
                 </tr>
             <?php    } ?>
         </table>
     <?php
     } else { ?>
-        <h2 align="center"><?= Lang::get('tools.there_are_no_stylesheets') ?></h2>
+        <h2 align="center"><?= t('server.tools.there_are_no_stylesheets') ?></h2>
     <?php
     } ?>
 </div>

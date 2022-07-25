@@ -1,14 +1,14 @@
 <?
 
 global $Locales, $Twig, $WINDOW_CONFIG;
-$Files = glob(CONFIG['SERVER_ROOT'] . '/src/locales/*/server.yaml');
+$Files = glob(CONFIG['SERVER_ROOT'] . '/src/locales/*/*.yaml');
 $Locales = [];
 foreach ($Files as $File) {
     $Lang = basename(dirname($File));
-    $YamlText = $Twig->render("$Lang/server.yaml", ['CONFIG' => $WINDOW_CONFIG]);
+    $YamlText = $Twig->render("$Lang/$Lang.yaml", ['CONFIG' => $WINDOW_CONFIG]);
     $Locale = yaml_parse($YamlText);
-    $Lang = $Lang == 'zh-Hans' ? 'chs' : $Lang;
-    $Locales[$Lang] = $Locale;
+    $NewLang = $Lang == 'zh-Hans' ? 'chs' : $Lang;
+    $Locales[$NewLang] = $Locale;
 }
 
 class Lang {
@@ -29,7 +29,10 @@ class Lang {
         $Lang = self::getLang($Options['Lang']);
         $Values = $Options['Values'];
         $Locale = $Locales[$Lang];
-        $Value = get_by_path($Locale, $Key, $DefaultValue);
+        $Value = $Locale[$Key];
+        if (!isset($Locale[$Key])) {
+            $Value = $DefaultValue;
+        }
         $Value = sprintf($Value, ...$Values);
         if ($Value === false) {
             $Value = $Key;
@@ -92,4 +95,8 @@ class Lang {
         }
         return $Lang;
     }
+}
+
+function t(...$args) {
+    return Lang::get(...$args);
 }

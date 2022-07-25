@@ -43,14 +43,14 @@ if (!empty($_REQUEST['confirm'])) {
         $Cache->delete_value("user_info_$UserID");
     }
 } elseif (open_registration($_REQUEST['email']) || !empty($_REQUEST['invite'])) {
-    $Val->SetFields('username', true, 'regex', Lang::get('register.you_did_not_enter_a_valid_username'), array('regex' => USERNAME_REGEX));
-    $Val->SetFields('email', true, 'email', Lang::get('register.you_did_not_enter_a_valid_email_address'));
-    $Val->SetFields('password', true, 'regex', Lang::get('register.a_strong_password_is_8_characters_or_longer'), array('regex' => '/(?=^.{8,}$)(?=.*[^a-zA-Z])(?=.*[A-Z])(?=.*[a-z]).*$|.{20,}/'));
-    $Val->SetFields('confirm_password', true, 'compare', Lang::get('register.your_passwords_do_not_match'), array('comparefield' => 'password'));
-    $Val->SetFields('readrules', true, 'checkbox', Lang::get('register.you_did_not_select_rules'));
-    $Val->SetFields('readwiki', true, 'checkbox', Lang::get('register.you_did_not_select_wiki'));
-    $Val->SetFields('agereq', true, 'checkbox', Lang::get('register.you_did_not_select_age'));
-    //$Val->SetFields('captcha', true, 'string', Lang::get('register.you_did_not_enter_a_captcha_code'), array('minlength' => 6, 'maxlength' => 6));
+    $Val->SetFields('username', true, 'regex', t('server.register.you_did_not_enter_a_valid_username'), array('regex' => USERNAME_REGEX));
+    $Val->SetFields('email', true, 'email', t('server.register.you_did_not_enter_a_valid_email_address'));
+    $Val->SetFields('password', true, 'regex', t('server.register.a_strong_password_is_8_characters_or_longer'), array('regex' => '/(?=^.{8,}$)(?=.*[^a-zA-Z])(?=.*[A-Z])(?=.*[a-z]).*$|.{20,}/'));
+    $Val->SetFields('confirm_password', true, 'compare', t('server.register.your_passwords_do_not_match'), array('comparefield' => 'password'));
+    $Val->SetFields('readrules', true, 'checkbox', t('server.register.you_did_not_select_rules'));
+    $Val->SetFields('readwiki', true, 'checkbox', t('server.register.you_did_not_select_wiki'));
+    $Val->SetFields('agereq', true, 'checkbox', t('server.register.you_did_not_select_age'));
+    //$Val->SetFields('captcha', true, 'string', t('server.register.you_did_not_enter_a_captcha_code'), array('minlength' => 6, 'maxlength' => 6));
 
     if (!empty($_POST['submit'])) {
         // User has submitted registration form
@@ -66,12 +66,12 @@ if (!empty($_REQUEST['confirm'])) {
             if (open_registration()) {
                 $NewValue = $Cache->increment(LIMIT_REGISTER_VERSION);
                 if (LIMIT_REGISTER_COUNT < $NewValue) {
-                    $Err = Lang::get('register.register_closed');
+                    $Err = t('server.register.register_closed');
                 }
             } else if (!empty($_REQUEST['invite'])) {
                 $NewValue = $Cache->increment(LIMIT_REGISTER_VERSION);
                 if (LIMIT_REGISTER_COUNT < $NewValue) {
-                    $Err = Lang::get('register.register_closed');
+                    $Err = t('server.register.register_closed');
                 }
             }
         }
@@ -79,11 +79,11 @@ if (!empty($_REQUEST['confirm'])) {
             $NotAllowedEmails = CONFIG['NOT_ALLOWED_REGISTRATION_EMAIL'];
             $EmailBox = explode('@', $_REQUEST['email']);
             if (in_array($EmailBox[1], $NotAllowedEmails)) {
-                $Err = Lang::get('pub.not_allowed_email');
+                $Err = t('server.pub.not_allowed_email');
             }
             // Don't allow a username of "0" or "1" due to PHP's type juggling
             if (trim($_POST['username']) == '0' || trim($_POST['username']) == '1') {
-                $Err = Lang::get('register.you_cannot_have_a_username_of_0_or_1');
+                $Err = t('server.register.you_cannot_have_a_username_of_0_or_1');
             }
 
 
@@ -95,7 +95,7 @@ if (!empty($_REQUEST['confirm'])) {
             list($UserCount) = $DB->next_record();
 
             if ($UserCount) {
-                $Err = Lang::get('register.someone_registered_with_that_username');
+                $Err = t('server.register.someone_registered_with_that_username');
                 $_REQUEST['username'] = '';
             }
             $DB->query("
@@ -104,7 +104,7 @@ if (!empty($_REQUEST['confirm'])) {
                 WHERE Email = '" . db_string(trim($_POST['email'])) . "'");
             list($UserCount) = $DB->next_record();
             if ($UserCount) {
-                $Err = Lang::get('register.someone_registered_with_that_email');
+                $Err = t('server.register.someone_registered_with_that_email');
                 $_REQUEST['email'] = '';
             }
 
@@ -114,14 +114,14 @@ if (!empty($_REQUEST['confirm'])) {
 					FROM invites
 					WHERE InviteKey = '" . db_string($_REQUEST['invite']) . "'");
                 if (!$DB->has_results()) {
-                    $Err = Lang::get('register.invite_does_not_exist');
+                    $Err = t('server.register.invite_does_not_exist');
                     $InviterID = 0;
                 } else {
                     list($InviterID, $InviteEmail, $InviteReason, $InviteID) = $DB->next_record(MYSQLI_NUM, false);
                 }
                 if ($_REQUEST['email'] != $InviteEmail) {
                     error_log("Mismatch invite email, request email: " . $_REQUEST['email'] . " invite email: " . $InviteEmail);
-                    $Err = Lang::get('register.invite_email_mismatch');
+                    $Err = t('server.register.invite_email_mismatch');
                 }
             } else {
                 $InviterID = 0;

@@ -12,15 +12,11 @@ function thumb(itemid, userid, type) {
       switch (type) {
         case 'post':
           $('#thumb' + itemid + ',#unthumb' + itemid).toggle()
-          $('#thumbcnt' + itemid).text(
-            data.count == '0' ? lang.get('common.like') : data.count
-          )
+          $('#thumbcnt' + itemid).text(data.count == '0' ? t('client.common.like') : data.count)
           break
         case 'torrent':
           $('#thumb' + itemid + ',#unthumb' + itemid).toggle()
-          $('#thumbcnt' + itemid).text(
-            data.count == '0' ? lang.get('common.like') : data.count
-          )
+          $('#thumbcnt' + itemid).text(data.count == '0' ? t('client.common.like') : data.count)
           break
       }
     },
@@ -41,15 +37,11 @@ function unthumb(itemid, userid, type) {
       switch (type) {
         case 'post':
           $('#thumb' + itemid + ',#unthumb' + itemid).toggle()
-          $('#thumbcnt' + itemid).text(
-            data.count == '0' ? lang.get('common.like') : data.count
-          )
+          $('#thumbcnt' + itemid).text(data.count == '0' ? t('client.common.like') : data.count)
           break
         case 'torrent':
           $('#thumb' + itemid + ',#unthumb' + itemid).toggle()
-          $('#thumbcnt' + itemid).text(
-            data.count == '0' ? lang.get('common.like') : data.count
-          )
+          $('#thumbcnt' + itemid).text(data.count == '0' ? t('client.common.like') : data.count)
           break
       }
     },

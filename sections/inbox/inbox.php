@@ -17,17 +17,17 @@ if (!in_array($Section, array('inbox', 'sentbox'))) {
 
 list($Page, $Limit) = Format::page_limit(CONFIG['MESSAGES_PER_PAGE']);
 
-View::show_header(Lang::get('inbox.inbox'), '', 'PageInboxHome');
+View::show_header(t('server.inbox.inbox'), '', 'PageInboxHome');
 ?>
 <div class="LayoutBody">
     <div class="BodyHeader">
-        <h2 class="BodyHeader-title"><?= ($Section === 'sentbox' ? Lang::get('inbox.sentbox') : Lang::get('inbox.inbox')) ?></h2>
+        <h2 class="BodyHeader-title"><?= ($Section === 'sentbox' ? t('server.inbox.sentbox') : t('server.inbox.inbox')) ?></h2>
         <div class="BodyNavLinks">
             <?
             if ($Section === 'inbox') { ?>
-                <a href="<?= Inbox::get_inbox_link('sentbox'); ?>" class="brackets"><?= Lang::get('inbox.sentbox') ?></a>
+                <a href="<?= Inbox::get_inbox_link('sentbox'); ?>" class="brackets"><?= t('server.inbox.sentbox') ?></a>
             <? } elseif ($Section === 'sentbox') { ?>
-                <a href="<?= Inbox::get_inbox_link(); ?>" class="brackets"><?= Lang::get('inbox.inbox') ?></a>
+                <a href="<?= Inbox::get_inbox_link(); ?>" class="brackets"><?= t('server.inbox.inbox') ?></a>
             <? }
 
             ?>
@@ -88,22 +88,22 @@ View::show_header(Lang::get('inbox.inbox'), '', 'PageInboxHome');
 
     <div class="BodyContent">
         <? if ($Count == 0 && empty($_GET['search'])) { ?>
-            <h2><?= Lang::get('inbox.your') ?><?= ($Section === 'sentbox' ? Lang::get('inbox.sentbox') : Lang::get('inbox.inbox')) ?><?= Lang::get('inbox.is_empty') ?></h2>
+            <h2><?= t('server.inbox.your') ?><?= ($Section === 'sentbox' ? t('server.inbox.sentbox') : t('server.inbox.inbox')) ?><?= t('server.inbox.is_empty') ?></h2>
         <? } else { ?>
             <form class="Form SearchInbox u-vstack" name="<?= ($Section === 'sentbox' ? 'sentbox' : 'inbox') ?>" action="inbox.php" method="get" id="searchbox">
                 <div class="SearchInbox-row">
                     <input type="hidden" name="action" value="<?= $Section ?>" />
                     <div class="Radio">
                         <input class="Input" type="radio" name="searchtype" value="user" id="radio-user" <?= (empty($_GET['searchtype']) || $_GET['searchtype'] === 'user' ? ' checked="checked"' : '') ?> />
-                        <label class="Radio-label" for="radio-user"><?= Lang::get('inbox.user') ?></label>
+                        <label class="Radio-label" for="radio-user"><?= t('server.inbox.user') ?></label>
                     </div>
                     <div class="Radio">
                         <input class="Input" type="radio" name="searchtype" value="subject" id="radio-subject" <?= (!empty($_GET['searchtype']) && $_GET['searchtype'] === 'subject' ? ' checked="checked"' : '') ?> />
-                        <label class="Radio-label" for="radio-subject"><?= Lang::get('inbox.subject') ?></label>
+                        <label class="Radio-label" for="radio-subject"><?= t('server.inbox.subject') ?></label>
                     </div>
                     <div class="Radio">
                         <input class="Input" type="radio" name="searchtype" value="message" id="radio-message" <?= (!empty($_GET['searchtype']) && $_GET['searchtype'] === 'message' ? ' checked="checked"' : '') ?> />
-                        <label class="Radio-label" for="radio-message"><?= Lang::get('inbox.message') ?></label>
+                        <label class="Radio-label" for="radio-message"><?= t('server.inbox.message') ?></label>
                     </div>
                     <span class="SearchInbox-actions">
                         <?          // provide a temporary toggle for sorting PMs
@@ -111,40 +111,40 @@ View::show_header(Lang::get('inbox.inbox'), '', 'PageInboxHome');
                         $BaseURL = "inbox.php?action={$_GET['action']}";
 
                         if ($_GET['sort'] === 'unread') { ?>
-                            <a href="<?= $BaseURL ?>" class="brackets" data-tooltip="<?= $ToggleTitle ?>"><?= Lang::get('inbox.list_latest_first') ?></a>
+                            <a href="<?= $BaseURL ?>" class="brackets" data-tooltip="<?= $ToggleTitle ?>"><?= t('server.inbox.list_latest_first') ?></a>
                         <?      } else { ?>
-                            <a href="<?= $BaseURL ?>&sort=unread" class="brackets" data-tooltip="<?= $ToggleTitle ?>"><?= Lang::get('inbox.list_unread_first') ?></a>
+                            <a href="<?= $BaseURL ?>&sort=unread" class="brackets" data-tooltip="<?= $ToggleTitle ?>"><?= t('server.inbox.list_unread_first') ?></a>
                         <?      } ?>
                     </span>
                 </div>
                 <div class="SearchInbox-row">
-                    <input class="Input" type="text" name="text" placeholder="<?= (!empty($_GET['search']) ? display_str($_GET['search']) : Lang::get('inbox.placeholder_search') . ($Section === 'sentbox' ? Lang::get('inbox.sentbox') : Lang::get('inbox.inbox'))) ?>" />
+                    <input class="Input" type="text" name="text" placeholder="<?= (!empty($_GET['search']) ? display_str($_GET['search']) : t('server.inbox.placeholder_search') . ($Section === 'sentbox' ? t('server.inbox.sentbox') : t('server.inbox.inbox'))) ?>" />
                 </div>
             </form>
             <form class="u-vstack manage_form" name="messages" action="inbox.php" method="post" id="messageform">
                 <input type="hidden" name="action" value="masschange" />
                 <input type="hidden" name="auth" value="<?= $LoggedUser['AuthKey'] ?>" />
                 <div>
-                    <input class="Button" type="submit" name="read" value="<?= Lang::get('inbox.mark_as_read') ?>" />&nbsp;
-                    <input class="Button" type="submit" name="unread" value="<?= Lang::get('inbox.mark_as_unread') ?>" />&nbsp;
-                    <input class="Button" type="submit" name="delete" value="<?= Lang::get('inbox.delete_messages') ?>" />
+                    <input class="Button" type="submit" name="read" value="<?= t('server.inbox.mark_as_read') ?>" />&nbsp;
+                    <input class="Button" type="submit" name="unread" value="<?= t('server.inbox.mark_as_unread') ?>" />&nbsp;
+                    <input class="Button" type="submit" name="delete" value="<?= t('server.inbox.delete_messages') ?>" />
                 </div>
 
                 <div class="TableContainer">
                     <table class="TableUserInbox Table">
                         <tr class="Table-rowHeader">
                             <td class="Table-cell" width="10px"><input type="checkbox" onclick="toggleChecks('messageform', this);" /></td>
-                            <td class="Table-cell" width="50%"><?= Lang::get('inbox.subject') ?></td>
-                            <td class="Table-cell"><?= ($Section === 'sentbox' ? Lang::get('inbox.receiver') : Lang::get('inbox.sender')) ?></td>
-                            <td class="Table-cell"><?= Lang::get('inbox.date') ?></td>
+                            <td class="Table-cell" width="50%"><?= t('server.inbox.subject') ?></td>
+                            <td class="Table-cell"><?= ($Section === 'sentbox' ? t('server.inbox.receiver') : t('server.inbox.sender')) ?></td>
+                            <td class="Table-cell"><?= t('server.inbox.date') ?></td>
                             <? if (check_perms('users_mod')) { ?>
-                                <td class="Table-cell"><?= Lang::get('inbox.forwarded_to') ?></td>
+                                <td class="Table-cell"><?= t('server.inbox.forwarded_to') ?></td>
                             <?      } ?>
                         </tr>
                         <?
                         if ($Count == 0) { ?>
                             <tr class="Table-row">
-                                <td class="Table-cell" colspan="5"><?= Lang::get('inbox.no_results') ?></td>
+                                <td class="Table-cell" colspan="5"><?= t('server.inbox.no_results') ?></td>
                             </tr>
                             <?  } else {
                             while (list($ConvID, $Subject, $Unread, $Sticky, $ForwardedID, $SenderID, $Date) = $DB->next_record()) {
@@ -188,9 +188,9 @@ View::show_header(Lang::get('inbox.inbox'), '', 'PageInboxHome');
                     </table>
                 </div>
                 <div>
-                    <input class="Button" type="submit" name="read" value="<?= Lang::get('inbox.mark_as_read') ?>" />&nbsp;
-                    <input class="Button" type="submit" name="unread" value="<?= Lang::get('inbox.mark_as_unread') ?>" />&nbsp;
-                    <input class="Button" type="submit" name="delete" value="<?= Lang::get('inbox.delete_messages') ?>" />
+                    <input class="Button" type="submit" name="read" value="<?= t('server.inbox.mark_as_read') ?>" />&nbsp;
+                    <input class="Button" type="submit" name="unread" value="<?= t('server.inbox.mark_as_unread') ?>" />&nbsp;
+                    <input class="Button" type="submit" name="delete" value="<?= t('server.inbox.delete_messages') ?>" />
                 </div>
             </form>
         <? } ?>

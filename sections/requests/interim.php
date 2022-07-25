@@ -37,9 +37,9 @@ View::show_header(ucwords($Action) . ' Request', '', 'PageRequestInterim');
             <input type="hidden" name="auth" value="<?= $LoggedUser['AuthKey'] ?>" />
             <input type="hidden" name="id" value="<?= $_GET['id'] ?>" />
             <? if ($Action === 'delete') { ?>
-                <div class="u-colorWarning"><?= Lang::get('requests.delete_request_warning') ?></div>
+                <div class="u-colorWarning"><?= t('server.requests.delete_request_warning') ?></div>
             <?  } ?>
-            <strong><?= Lang::get('requests.reason') ?>:</strong>
+            <strong><?= t('server.requests.reason') ?>:</strong>
             <input class="Input" type="text" name="reason" size="30" />
             <div>
                 <input class="Button" type="submit" value="<?= ucwords($Action) ?>" />

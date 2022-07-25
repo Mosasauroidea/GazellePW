@@ -9,9 +9,9 @@ if (is_number($_GET['id'])) {
 }
 
 if ($ID) {
-    $Title = Lang::get('sitehistory.edit');
+    $Title = t('server.sitehistory.edit');
 } else {
-    $Title = Lang::get('sitehistory.create');
+    $Title = t('server.sitehistory.create');
 }
 View::show_header($Title, '', 'PageSiteHistoryEdit');
 
@@ -19,9 +19,9 @@ View::show_header($Title, '', 'PageSiteHistoryEdit');
 
 <div class="header">
     <? if ($ID) { ?>
-        <h2><?= Lang::get('sitehistory.edit_event') ?></h2>
+        <h2><?= t('server.sitehistory.edit_event') ?></h2>
     <?  } else { ?>
-        <h2><?= Lang::get('sitehistory.create_new_event') ?></h2>
+        <h2><?= t('server.sitehistory.create_new_event') ?></h2>
     <?  } ?>
 </div>
 

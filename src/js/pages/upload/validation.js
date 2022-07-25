@@ -7,14 +7,7 @@ const BD = ['Blu-ray']
 const SELECT_HAS_OTHER_INPUT = ['Other']
 const SELECT_REQUIRED = ['', '---']
 const IMDB_ID_PATTERN = /tt\d+/
-const IMAGE_HOSTS = [
-  'kshare.club',
-  'pixhost.to',
-  'ptpimg.me',
-  'img.pterclub.com',
-  'yes.ilikeshots.club',
-  'imgbox.com',
-]
+const IMAGE_HOSTS = ['kshare.club', 'pixhost.to', 'ptpimg.me', 'img.pterclub.com', 'yes.ilikeshots.club', 'imgbox.com']
 
 document.addEventListener('DOMContentLoaded', () => {
   registerValidation()
@@ -36,9 +29,7 @@ export function registerValidation() {
 
   form.onsubmit = function (e) {
     const valid = validator.validate()
-    document
-      .querySelector('.form-invalid .Form-errorMessage')
-      ?.classList.remove('animate__animated', 'animate__flash')
+    document.querySelector('.form-invalid .Form-errorMessage')?.classList.remove('animate__animated', 'animate__flash')
     if (valid) {
       $('input:disabled, select:disabled').prop('disabled', false)
       $('#post').addClass('is-loading').prop('disabled', true)
@@ -46,11 +37,7 @@ export function registerValidation() {
       document.querySelector('.form-invalid').scrollIntoView()
       document
         .querySelector('.form-invalid .Form-errorMessage')
-        .classList.add(
-          'animate__animated',
-          'animate__flash',
-          'animate__repeat-3'
-        )
+        .classList.add('animate__animated', 'animate__flash', 'animate__repeat-3')
     }
     return valid
   }
@@ -172,8 +159,7 @@ export function registerValidation() {
     messageKey: 'upload.resolution_required',
   })
   addValidator({
-    selector:
-      '[name=movie_edition_information], [name=remaster_title_show], [name=remaster_custom_title]',
+    selector: '[name=movie_edition_information], [name=remaster_title_show], [name=remaster_custom_title]',
     validate: validateRemaster,
     messageKey: 'upload.remaster_required',
   })
@@ -181,9 +167,7 @@ export function registerValidation() {
 
 function validateRequired(value) {
   if (this.type === 'radio' || this.type === 'checkbox') {
-    return this.pristine.self.form.querySelectorAll(
-      'input[name="' + this.getAttribute('name') + '"]:checked'
-    ).length
+    return this.pristine.self.form.querySelectorAll('input[name="' + this.getAttribute('name') + '"]:checked').length
   } else {
     return Boolean(value)
   }
@@ -269,9 +253,7 @@ export function validateDescComparison(value) {
   if (!value) {
     return true
   }
-  const matches = [
-    ...value.matchAll(/\[comparison.*?\]([\s\S]*?)\[\/comparison\]/gi),
-  ]
+  const matches = [...value.matchAll(/\[comparison.*?\]([\s\S]*?)\[\/comparison\]/gi)]
   const pattern = `(${IMAGE_HOSTS.join('|')}).*?png`
   if (matches) {
     for (const match of matches) {
@@ -291,10 +273,7 @@ export function validateDescComparison(value) {
 }
 
 function validateImdb(value) {
-  if (
-    (value && value.match(IMDB_ID_PATTERN)) ||
-    $('[name=no_imdb_link]').prop('checked')
-  ) {
+  if ((value && value.match(IMDB_ID_PATTERN)) || $('[name=no_imdb_link]').prop('checked')) {
     return true
   } else {
     return false
@@ -305,10 +284,7 @@ function validateRemaster() {
   const notMainMovie = $('[name=not_main_movie]').prop('checked')
   const remasterTitleShow = $('[name=remaster_title_show]').val()
   const remasterCustomTitle = $('[name=remaster_custom_title]').val()
-  if (
-    notMainMovie &&
-    !(remasterTitleShow.match(/额外内容/) || remasterCustomTitle)
-  ) {
+  if (notMainMovie && !(remasterTitleShow.match(/额外内容/) || remasterCustomTitle)) {
     return false
   }
   return true
@@ -319,14 +295,14 @@ function createValidator({ validator }) {
   return {
     addValidator({ selector, validate, messageKey }) {
       const inputs = Array.from(form.querySelectorAll(selector))
-      const message = lang.get(messageKey)
+      const message = t(messageKey)
       for (const input of inputs) {
         validator.addValidator(input, validate, message)
       }
     },
 
     addValidatorSelectInput({ selector, validate, messageKey }) {
-      const message = lang.get(messageKey)
+      const message = t(messageKey)
       const select = form.querySelector(selector)
       if (!select) {
         return
@@ -334,16 +310,10 @@ function createValidator({ validator }) {
       let inputs = []
       const nextEl = select.nextElementSibling
       if (nextEl) {
-        inputs = ['INPUT', 'SELECT'].includes(nextEl.tagName)
-          ? [nextEl]
-          : Array.from(nextEl.querySelectorAll('input'))
+        inputs = ['INPUT', 'SELECT'].includes(nextEl.tagName) ? [nextEl] : Array.from(nextEl.querySelectorAll('input'))
       }
       for (const elem of [select, ...inputs]) {
-        validator.addValidator(
-          elem,
-          () => validate({ select, inputs }),
-          message
-        )
+        validator.addValidator(elem, () => validate({ select, inputs }), message)
       }
     },
   }
@@ -365,10 +335,7 @@ export function handleSourceAndProcessing() {
     }
 
     // processing other
-    if (
-      processing.value === 'Untouched' &&
-      [...DVD, ...BD].includes(source.value)
-    ) {
+    if (processing.value === 'Untouched' && [...DVD, ...BD].includes(source.value)) {
       processingOther.disabled = false
       processingOther.classList.remove('hidden')
       const showSelector = BD.includes(source.value) ? '.bd' : '.dvd'
@@ -428,18 +395,13 @@ function handleSubtitle() {
 }
 function validateSubtitle() {
   const form = this.pristine.self.form
-  const subtitleType = Array.from(
-    form.querySelectorAll(`[name="subtitle_type"]:checked`)
-  )[0]
+  const subtitleType = Array.from(form.querySelectorAll(`[name="subtitle_type"]:checked`))[0]
   if (!subtitleType) {
     return false
   }
   const type = subtitleType.getAttribute('data-value')
   if (type !== 'no-sub') {
-    if (
-      Array.from(form.querySelectorAll(`[name="subtitles[]"]:checked`))
-        .length === 0
-    ) {
+    if (Array.from(form.querySelectorAll(`[name="subtitles[]"]:checked`)).length === 0) {
       return false
     }
   }
@@ -447,9 +409,7 @@ function validateSubtitle() {
 }
 
 function validateSubtitleWithMediainfo() {
-  const checkedSubtitles = Array.from(
-    document.querySelectorAll(`[name="subtitles[]"]:checked`)
-  )
+  const checkedSubtitles = Array.from(document.querySelectorAll(`[name="subtitles[]"]:checked`))
   if (checkedSubtitles.length > 0) {
     return true
   }
@@ -488,9 +448,7 @@ export function handleSelectInput({ watch, apply }) {
     }
   }
 
-  for (const selectInput of Array.from(
-    document.querySelectorAll('.SelectInput')
-  )) {
+  for (const selectInput of Array.from(document.querySelectorAll('.SelectInput'))) {
     const select = selectInput.querySelector('select')
     const input = select.nextElementSibling
     if (watch) {

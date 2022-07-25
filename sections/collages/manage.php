@@ -35,19 +35,19 @@ if (count($GroupIDs) > 0) {
     $TorrentList = array();
 }
 
-View::show_header(Lang::get('collages.manage_collage') . ": $Name", 'jquery-ui,jquery.tablesorter,sort', 'PageCollageManage');
+View::show_header(t('server.collages.manage_collage') . ": $Name", 'jquery-ui,jquery.tablesorter,sort', 'PageCollageManage');
 
 ?>
 <div class="LayoutBody">
     <div class="BodyHeader">
-        <h2 class="BodyHeader-nav"><?= Lang::get('collages.manage_collage') ?> > <a href="collages.php?id=<?= $CollageID ?>"><?= $Name ?></a></h2>
+        <h2 class="BodyHeader-nav"><?= t('server.collages.manage_collage') ?> > <a href="collages.php?id=<?= $CollageID ?>"><?= $Name ?></a></h2>
     </div>
     <div class="Box">
         <div class="Box-header">
-            <?= Lang::get('collages.sorting') ?>
+            <?= t('server.collages.sorting') ?>
         </div>
         <div class="Box-body">
-            <?= Lang::get('collages.drag_drop_textnote') ?>
+            <?= t('server.collages.drag_drop_textnote') ?>
         </div>
     </div>
 
@@ -57,11 +57,11 @@ View::show_header(Lang::get('collages.manage_collage') . ": $Name", 'jquery-ui,j
     <table class="TableManageCollage Table" id="manage_collage_table">
         <thead>
             <tr class="Table-rowHeader">
-                <th class="Table-cell" style="width: 50px" data-sorter="false"><?= Lang::get('collages.order') ?></th>
+                <th class="Table-cell" style="width: 50px" data-sorter="false"><?= t('server.collages.order') ?></th>
                 <th class="Table-cell Table-cellLeft" style="width: 50px"><span><abbr data-tooltip="Current rank">#</abbr></span></th>
-                <th class="Table-cell Table-cellLeft" data-sorter="ignoreArticles"><span><?= Lang::get('global.torrent') ?></span></th>
-                <th class="Table-cell Table-cellRight"><span><?= Lang::get('collages.adder') ?></span></th>
-                <th class="Table-cell Table-cellRight nobr" style="width:150px" data-sorter="false"><span><abbr data-tooltip="<?= Lang::get('collages.tweak_title') ?>"><?= Lang::get('collages.tweak') ?></abbr></span></th>
+                <th class="Table-cell Table-cellLeft" data-sorter="ignoreArticles"><span><?= t('server.global.torrent') ?></span></th>
+                <th class="Table-cell Table-cellRight"><span><?= t('server.collages.adder') ?></span></th>
+                <th class="Table-cell Table-cellRight nobr" style="width:150px" data-sorter="false"><span><abbr data-tooltip="<?= t('server.collages.tweak_title') ?>"><?= t('server.collages.tweak') ?></abbr></span></th>
             </tr>
         </thead>
         <tbody>

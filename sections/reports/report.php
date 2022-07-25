@@ -128,23 +128,23 @@ switch ($Short) {
         break;
 }
 
-View::show_header(Lang::get('reports.report_a') . $Type['title'], 'bbcode,jquery.validate,form_validate', 'PageReportShow');
+View::show_header(t('server.reports.report_a') . $Type['title'], 'bbcode,jquery.validate,form_validate', 'PageReportShow');
 ?>
 <div class="LayoutBody">
     <div class="BodyHeader">
-        <h2 class="BodyHeader-nav"><?= Lang::get('reports.h2_report') ?><?= $Type['title'] ?></h2>
+        <h2 class="BodyHeader-nav"><?= t('server.reports.h2_report') ?><?= $Type['title'] ?></h2>
     </div>
     <div class="Box">
-        <div class="Box-header"><?= Lang::get('reports.reporting_guidelines') ?></div>
+        <div class="Box-header"><?= t('server.reports.reporting_guidelines') ?></div>
         <div class="Box-body">
-            <p><?= Lang::get('reports.reporting_guidelines_intro') ?></p>
+            <p><?= t('server.reports.reporting_guidelines_intro') ?></p>
             <ul class="Postlist">
                 <?
                 foreach ($Type['guidelines'] as $Guideline) { ?>
                     <li><?= $Guideline ?></li>
                 <?  } ?>
             </ul>
-            <p><?= Lang::get('reports.reporting_guidelines_summary') ?></p>
+            <p><?= t('server.reports.reporting_guidelines_summary') ?></p>
         </div>
     </div>
     <div class="Form-rowList" variant="header">
@@ -153,17 +153,17 @@ View::show_header(Lang::get('reports.report_a') . $Type['title'], 'bbcode,jquery
         switch ($Short) {
             case 'user':
         ?>
-                <div class="Form-rowHeader"><?= Lang::get('reports.reporting_the_user') ?> > <?= display_str($Username) ?></div>
+                <div class="Form-rowHeader"><?= t('server.reports.reporting_the_user') ?> > <?= display_str($Username) ?></div>
             <?
                 break;
             case 'request_update':
             ?>
-                <p><?= Lang::get('reports.reporting_the_request') ?>:</p>
+                <p><?= t('server.reports.reporting_the_request') ?>:</p>
                 <table class=" TableReportDetail">
                     <tr class="Table-rowHeader">
-                        <td class="Table-cell"><?= Lang::get('reports.title') ?></td>
-                        <td class="Table-cell"><?= Lang::get('reports.description') ?></td>
-                        <td class="Table-cell"><?= Lang::get('reports.filled') ?>?</td>
+                        <td class="Table-cell"><?= t('server.reports.title') ?></td>
+                        <td class="Table-cell"><?= t('server.reports.description') ?></td>
+                        <td class="Table-cell"><?= t('server.reports.filled') ?>?</td>
                     </tr>
                     <tr class="Table-row">
                         <td class="Table-cell">
@@ -175,14 +175,14 @@ View::show_header(Lang::get('reports.report_a') . $Type['title'], 'bbcode,jquery
                             </div>
                         </td>
                         <td class="Table-cell">
-                            <strong><?= ($Filled == 0 ? Lang::get('reports.no') : Lang::get('reports.yes')) ?></strong>
+                            <strong><?= ($Filled == 0 ? t('server.reports.no') : t('server.reports.yes')) ?></strong>
                         </td>
                     </tr>
                 </table>
                 <br />
 
                 <div class="BoxBody center">
-                    <p><strong><?= Lang::get('reports.way_to_increase_turnover_rate') ?></strong></p>
+                    <p><strong><?= t('server.reports.way_to_increase_turnover_rate') ?></strong></p>
                     <form class="create_form" id="report_form" name="report" action="" method="post">
                         <input type="hidden" name="action" value="takereport" />
                         <input type="hidden" name="auth" value="<?= $LoggedUser['AuthKey'] ?>" />
@@ -190,13 +190,13 @@ View::show_header(Lang::get('reports.report_a') . $Type['title'], 'bbcode,jquery
                         <input type="hidden" name="type" value="<?= $Short ?>" />
                         <table class="layout">
                             <tr>
-                                <td class="label"><?= Lang::get('reports.year_required') ?></td>
+                                <td class="label"><?= t('server.reports.year_required') ?></td>
                                 <td>
                                     <input class="Input required" type="text" size="4" name="year" />
                                 </td>
                             </tr>
                             <tr>
-                                <td class="label"><?= Lang::get('reports.release_type') ?></td>
+                                <td class="label"><?= t('server.reports.release_type') ?></td>
                                 <td>
                                     <select class="Input" id="releasetype" name="releasetype">
                                         <option class="Select-option" value="0">---</option>
@@ -207,7 +207,7 @@ View::show_header(Lang::get('reports.report_a') . $Type['title'], 'bbcode,jquery
                                 </td>
                             </tr>
                             <tr>
-                                <td class="label"><?= Lang::get('reports.comment') ?></td>
+                                <td class="label"><?= t('server.reports.comment') ?></td>
                                 <td>
                                     <textarea class="Input" rows="8" cols="80" name="comment" class="required"></textarea>
                                 </td>
@@ -222,36 +222,36 @@ View::show_header(Lang::get('reports.report_a') . $Type['title'], 'bbcode,jquery
                 break;
             case 'request':
             ?>
-                <div class="Form-rowHeader"><?= Lang::get('reports.h2_report') ?><?= $Type['title'] ?> </div>
+                <div class="Form-rowHeader"><?= t('server.reports.h2_report') ?><?= $Type['title'] ?> </div>
                 <div class="Form-row">
-                    <div class="Form-label"><?= Lang::get('reports.title') ?>:</div>
+                    <div class="Form-label"><?= t('server.reports.title') ?>:</div>
                     <div class="Form-inputs"><?= display_str($Name) ?></div>
                 </div>
                 <div class="Form-row">
-                    <div class="Form-label"><?= Lang::get('reports.description') ?>:</div>
+                    <div class="Form-label"><?= t('server.reports.description') ?>:</div>
                     <div class="Form-inputs HtmlText PostArticle"><?= Text::full_format($Desc) ?></div>
                 </div>
                 <div class="Form-row">
-                    <div class="Form-label"><?= Lang::get('reports.filled') ?>:</div>
-                    <div class="Form-inputs HtmlText PostArticle"><strong><?= ($Filled == 0 ? Lang::get('reports.no') : Lang::get('reports.yes')) ?></strong></div>
+                    <div class="Form-label"><?= t('server.reports.filled') ?>:</div>
+                    <div class="Form-inputs HtmlText PostArticle"><strong><?= ($Filled == 0 ? t('server.reports.no') : t('server.reports.yes')) ?></strong></div>
                 </div>
 
             <?
                 break;
             case 'collage':
             ?>
-                <div class="Form-rowHeader"><?= Lang::get('reports.h2_report') ?><?= $Type['title'] ?> ><?= display_str($Name) ?></div>
+                <div class="Form-rowHeader"><?= t('server.reports.h2_report') ?><?= $Type['title'] ?> ><?= display_str($Name) ?></div>
             <?
                 break;
             case 'thread':
             ?>
-                <div class="Form-rowHeader"><?= Lang::get('reports.h2_report') ?><?= $Type['title'] ?> </div>
+                <div class="Form-rowHeader"><?= t('server.reports.h2_report') ?><?= $Type['title'] ?> </div>
                 <div class="Form-row">
-                    <div class="Form-label"><?= Lang::get('reports.username') ?>:</div>
+                    <div class="Form-label"><?= t('server.reports.username') ?>:</div>
                     <div class="Form-inputs"><?= display_str($Username) ?></div>
                 </div>
                 <div class="Form-row">
-                    <div class="Form-label"><?= Lang::get('reports.title') ?>:</div>
+                    <div class="Form-label"><?= t('server.reports.title') ?>:</div>
                     <div class="Form-inputs HtmlText PostArticle"><?= Text::full_format($Title) ?></div>
                 </div>
 
@@ -259,26 +259,26 @@ View::show_header(Lang::get('reports.report_a') . $Type['title'], 'bbcode,jquery
                 break;
             case 'post':
             ?>
-                <div class="Form-rowHeader"><?= Lang::get('reports.h2_report') ?><?= $Type['title'] ?> </div>
+                <div class="Form-rowHeader"><?= t('server.reports.h2_report') ?><?= $Type['title'] ?> </div>
                 <div class="Form-row">
-                    <div class="Form-label"><?= Lang::get('reports.username') ?>:</div>
+                    <div class="Form-label"><?= t('server.reports.username') ?>:</div>
                     <div class="Form-inputs"><?= display_str($Username) ?></div>
                 </div>
                 <div class="Form-row">
-                    <div class="Form-label"><?= Lang::get('reports.body') ?>:</div>
+                    <div class="Form-label"><?= t('server.reports.body') ?>:</div>
                     <div class="Form-inputs HtmlText PostArticle"><?= Text::full_format($Body) ?></div>
                 </div>
             <?
                 break;
             case 'comment':
             ?>
-                <div class="Form-rowHeader"><?= Lang::get('reports.h2_report') ?><?= $Type['title'] ?> </div>
+                <div class="Form-rowHeader"><?= t('server.reports.h2_report') ?><?= $Type['title'] ?> </div>
                 <div class="Form-row">
-                    <div class="Form-label"><?= Lang::get('reports.username') ?>:</div>
+                    <div class="Form-label"><?= t('server.reports.username') ?>:</div>
                     <div class="Form-inputs"><?= display_str($Username) ?></div>
                 </div>
                 <div class="Form-row">
-                    <div class="Form-label"><?= Lang::get('reports.body') ?>:</div>
+                    <div class="Form-label"><?= t('server.reports.body') ?>:</div>
                     <div class="Form-inputs HtmlText PostArticle"><?= Text::full_format($Body) ?></div>
                 </div>
 
@@ -294,7 +294,7 @@ View::show_header(Lang::get('reports.report_a') . $Type['title'], 'bbcode,jquery
                 <input type="hidden" name="type" value="<?= $Short ?>" />
                 <div class="Form-row">
                     <div class="Form-items">
-                        <? new TEXTAREA_PREVIEW('reason', 'reason', '', 60, 8, true, true, false, ['placeholder:"' . Lang::get('reports.reason') . '"']); ?>
+                        <? new TEXTAREA_PREVIEW('reason', 'reason', '', 60, 8, true, true, false, ['placeholder:"' . t('server.reports.reason') . '"']); ?>
                     </div>
                 </div>
                 <div class="Form-row">

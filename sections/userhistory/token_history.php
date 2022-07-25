@@ -54,7 +54,7 @@ if (isset($_GET['expire'])) {
     header("Location: userhistory.php?action=token_history&userid=$UserID");
 }
 
-View::show_header(Lang::get('userhistory.fl_token_history'), '', 'PageUserHistoryToken');
+View::show_header(t('server.userhistory.fl_token_history'), '', 'PageUserHistoryToken');
 
 list($Page, $Limit) = Format::page_limit(25);
 
@@ -83,18 +83,18 @@ $Pages = Format::get_pages($Page, $NumResults, 25);
 ?>
 <div class="LayoutBody">
     <div class="BodyHeader">
-        <h2 class="BodyHeader-nav"><?= Lang::get('userhistory.fl_token_history_for_before') ?><?= Users::format_username($UserID, false, false, false) ?><?= Lang::get('userhistory.fl_token_history_for_after') ?></h2>
+        <h2 class="BodyHeader-nav"><?= t('server.userhistory.fl_token_history_for_before') ?><?= Users::format_username($UserID, false, false, false) ?><?= t('server.userhistory.fl_token_history_for_after') ?></h2>
     </div>
     <div class="BodyNavLinks"><?= $Pages ?></div>
     <div class="TableContainer">
         <table class="TableUserTokenHistory Table">
             <tr class="Table-rowHeader">
-                <td class="Table-cell"><?= Lang::get('global.torrent') ?></td>
-                <td class="Table-cell"><?= Lang::get('userhistory.time') ?></td>
-                <td class="Table-cell"><?= Lang::get('userhistory.expired') ?></td>
+                <td class="Table-cell"><?= t('server.global.torrent') ?></td>
+                <td class="Table-cell"><?= t('server.userhistory.time') ?></td>
+                <td class="Table-cell"><?= t('server.userhistory.expired') ?></td>
                 <? if (check_perms('users_mod')) { ?>
-                    <td class="Table-cell"><?= Lang::get('userhistory.downloaded') ?></td>
-                    <td class="Table-cell"><?= Lang::get('userhistory.tokens_used') ?></td>
+                    <td class="Table-cell"><?= t('server.userhistory.downloaded') ?></td>
+                    <td class="Table-cell"><?= t('server.userhistory.tokens_used') ?></td>
                 <? } ?>
             </tr>
             <?
@@ -121,7 +121,7 @@ $Pages = Format::get_pages($Page, $NumResults, 25);
                 <tr class="Table-row">
                     <td class="Table-cell"><?= $Name ?></td>
                     <td class="Table-cell"><?= time_diff($Time) ?></td>
-                    <td class="Table-cell"><?= ($Expired ? Lang::get('userhistory.yes') : Lang::get('userhistory.no')) ?><?= (check_perms('users_mod') && !$Expired) ? " <a href=\"userhistory.php?action=token_history&amp;expire=1&amp;userid=$UserID&amp;torrentid=$TorrentID\">" . Lang::get('userhistory.expire_button') . "</a>" : ''; ?></td>
+                    <td class="Table-cell"><?= ($Expired ? t('server.userhistory.yes') : t('server.userhistory.no')) ?><?= (check_perms('users_mod') && !$Expired) ? " <a href=\"userhistory.php?action=token_history&amp;expire=1&amp;userid=$UserID&amp;torrentid=$TorrentID\">" . t('server.userhistory.expire_button') . "</a>" : ''; ?></td>
                     <? if (check_perms('users_mod')) { ?>
                         <td class="Table-cell"><?= Format::get_size($Downloaded) ?></td>
                         <td class="Table-cell"><?= $Uses ?></td>

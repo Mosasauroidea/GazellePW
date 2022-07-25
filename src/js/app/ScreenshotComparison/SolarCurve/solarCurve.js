@@ -2,11 +2,10 @@ import { Snackbar } from '#/js/app/components'
 import { fetchImageData, imageDataToDataUrl } from '../utils/canvas'
 
 export async function active({ context }) {
-  const { imgRefs, currentRow, currentColumn, setOverlay, columnNames } =
-    context
+  const { imgRefs, currentRow, currentColumn, setOverlay, columnNames } = context
   // Not set loading if active is fast
   const timeout = setTimeout(() => {
-    Snackbar.open(lang.get('screenshot_comparison.loading'))
+    Snackbar.open(t('client.screenshot_comparison.loading'))
   }, 1e3)
   const img = imgRefs[currentRow][currentColumn].current
   const width = img.width
@@ -21,9 +20,7 @@ export async function active({ context }) {
     curve: solarCurve,
   })
   const imageUrl = imageDataToDataUrl(outputImageData)
-  const title = `${lang.get('screenshot_comparison.solar_curve')}: ${
-    columnNames[currentColumn]
-  }`
+  const title = `${t('client.screenshot_comparison.solar_curve')}: ${columnNames[currentColumn]}`
   clearTimeout(timeout)
   setOverlay((state) => ({ ...state, imageUrl, title }))
   Snackbar.close()
@@ -63,7 +60,5 @@ function solarCurve(x, t = 5, k = 5.5) {
   const A = (-1 / 4194304) * m
   const B = (3 / 32768) * m
   const C = 1 / t
-  return Math.round(
-    127.9999 * Math.sin(A * x ** 3 + B * x ** 2 + C * x - Math.PI / 2) + 127.5
-  )
+  return Math.round(127.9999 * Math.sin(A * x ** 3 + B * x ** 2 + C * x - Math.PI / 2) + 127.5)
 }

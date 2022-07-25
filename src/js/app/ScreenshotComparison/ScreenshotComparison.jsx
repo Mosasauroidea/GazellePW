@@ -8,18 +8,8 @@ ScreenshotComparison.css
 
 open(['Source', 'Encode'], imgUrls, { debug: true })
 */
-export default function openScreenshotComparison(
-  columnNames,
-  images,
-  options = {}
-) {
-  Dialog.open(
-    <ScreenshotComparison
-      columnNames={columnNames}
-      images={images}
-      options={options}
-    />
-  )
+export default function openScreenshotComparison(columnNames, images, options = {}) {
+  Dialog.open(<ScreenshotComparison columnNames={columnNames} images={images} options={options} />)
 }
 
 const ScreenshotComparison = ({ close, columnNames, images, options }) => {
@@ -29,23 +19,12 @@ const ScreenshotComparison = ({ close, columnNames, images, options }) => {
     images,
     options,
   })
-  const {
-    rootRef,
-    handleMouseMove,
-    currentColumn,
-    currentRow,
-    rows,
-    rowRefs,
-    imgRefs,
-    overlay,
-  } = context
+  const { rootRef, handleMouseMove, currentColumn, currentRow, rows, rowRefs, imgRefs, overlay } = context
 
   return (
     <div ref={rootRef} className="ScreenshotComparison">
       <div className="ScreenshotComparison-header">
-        <div className="ScreenshotComparison-title">
-          {overlay.title || columnNames[currentColumn].trim()}
-        </div>
+        <div className="ScreenshotComparison-title">{overlay.title || columnNames[currentColumn].trim()}</div>
         <PixelCompareThreshold context={context} />
       </div>
       <div className="ScreenshotComparison-rows">
@@ -60,36 +39,27 @@ const ScreenshotComparison = ({ close, columnNames, images, options }) => {
               <img src={columns[0]} style={{ visibility: 'hidden' }} />
             </div>
             {columns.map((image, columnIndex) => (
-              <div
-                key={columnIndex}
-                className="ScreenshotComparison-imageContainer"
-              >
+              <div key={columnIndex} className="ScreenshotComparison-imageContainer">
                 <img
                   ref={imgRefs[rowIndex][columnIndex]}
                   key={columnIndex}
                   className="ScreenshotComparison-image"
                   src={image}
                   style={{
-                    visibility:
-                      currentColumn === columnIndex ? 'visible' : 'hidden',
+                    visibility: currentColumn === columnIndex ? 'visible' : 'hidden',
                   }}
                 />
               </div>
             ))}
             {overlay.imageUrl && rowIndex === currentRow && (
               <div className="ScreenshotComparison-imageContainer ScreenshotComparison-overlayContainer">
-                <img
-                  className="ScreenshotComparison-image ScreenshotComparison-overlay"
-                  src={overlay.imageUrl}
-                />
+                <img className="ScreenshotComparison-image ScreenshotComparison-overlay" src={overlay.imageUrl} />
               </div>
             )}
           </div>
         ))}
       </div>
-      <div className="ScreenshotComparison-help">
-        {lang.get('screenshot_comparison.help')}
-      </div>
+      <div className="ScreenshotComparison-help">{t('client.screenshot_comparison.help')}</div>
     </div>
   )
 }

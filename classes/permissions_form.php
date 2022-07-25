@@ -136,7 +136,7 @@ function permissions_form() {
         <div class="TableContainer permission_container">
             <table class="Table">
                 <tr class="Table-rowHeader">
-                    <td class="Table-cell"><?= Lang::get('permissions.site') ?></td>
+                    <td class="Table-cell"><?= t('server.permissions.site') ?></td>
                 </tr>
                 <tr>
                     <td>
@@ -192,7 +192,7 @@ function permissions_form() {
         <div class="TableContainer permission_container">
             <table class="Table">
                 <tr class="Table-rowHeader">
-                    <td class="Table-cell"><?= Lang::get('permissions.users') ?></td>
+                    <td class="Table-cell"><?= t('server.permissions.users') ?></td>
                 </tr>
                 <tr>
                     <td>
@@ -231,7 +231,7 @@ function permissions_form() {
                         display_perm('staff_award');
                         display_perm('users_view_disabled');
                         ?>
-                        <?= Lang::get('permissions.only_applicable_to_lower_class') ?>
+                        <?= t('server.permissions.only_applicable_to_lower_class') ?>
                     </td>
                 </tr>
             </table>
@@ -239,7 +239,7 @@ function permissions_form() {
         <div class="TableContainer permission_container">
             <table class="Table">
                 <tr class="Table-rowHeader">
-                    <td class="Table-cell"><?= Lang::get('permissions.torrents') ?></td>
+                    <td class="Table-cell"><?= t('server.permissions.torrents') ?></td>
                 </tr>
                 <tr>
                     <td>
@@ -266,7 +266,7 @@ function permissions_form() {
         <div class="TableContainer permission_container">
             <table class="Table">
                 <tr class="Table-rowHeader">
-                    <td class="Table-cell"><?= Lang::get('permissions.administrative') ?></td>
+                    <td class="Table-cell"><?= t('server.permissions.administrative') ?></td>
                 </tr>
                 <tr>
                     <td>

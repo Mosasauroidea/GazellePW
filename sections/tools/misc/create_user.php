@@ -89,7 +89,7 @@ if (isset($_POST['Username'])) {
 
 ?>
     <div class="BodyHeader">
-        <h2 class="BodyHeader-nav"><?= Lang::get('tools.create_a_user') ?></h2>
+        <h2 class="BodyHeader-nav"><?= t('server.tools.create_a_user') ?></h2>
     </div>
 
     <div class="thin BoxBody">
@@ -98,15 +98,15 @@ if (isset($_POST['Username'])) {
             <input type="hidden" name="auth" value="<?= $LoggedUser['AuthKey'] ?>" />
             <table class="layout" cellpadding="2" cellspacing="1" border="0" align="center">
                 <tr valign="top">
-                    <td align="right" class="label"><?= Lang::get('tools.username') ?>:</td>
+                    <td align="right" class="label"><?= t('server.tools.username') ?>:</td>
                     <td align="left"><input class="Input" type="text" name="Username" id="username" /></td>
                 </tr>
                 <tr valign="top">
-                    <td align="right" class="label"><?= Lang::get('tools.email_address') ?>:</td>
+                    <td align="right" class="label"><?= t('server.tools.email_address') ?>:</td>
                     <td align="left"><input class="Input" type="email" name="Email" id="email" /></td>
                 </tr>
                 <tr valign="top">
-                    <td align="right" class="label"><?= Lang::get('tools.password') ?>:</td>
+                    <td align="right" class="label"><?= t('server.tools.password') ?>:</td>
                     <td align="left"><input class="Input" type="password" name="Password" id="password" /></td>
                 </tr>
                 <tr>

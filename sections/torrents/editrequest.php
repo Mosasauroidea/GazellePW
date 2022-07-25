@@ -13,9 +13,9 @@ $TorrentList = $TorrentCache['Torrents'];
 
 $Name = Torrents::group_name($TorrentDetails);
 
-$Title = page_title_conn([Lang::get('torrents.request_an_edit'), $Name]);
+$Title = page_title_conn([t('server.torrents.request_an_edit'), $Name]);
 
-View::show_header(Lang::get('torrents.request_an_edit'), '', '', 'PageTorrentEditRequest');
+View::show_header(t('server.torrents.request_an_edit'), '', '', 'PageTorrentEditRequest');
 
 ?>
 <div class="LayoutBody">
@@ -24,11 +24,11 @@ View::show_header(Lang::get('torrents.request_an_edit'), '', '', 'PageTorrentEdi
     </div>
     <div class="Box">
         <div class="Box-body">
-            <?= Lang::get('torrents.you_are_req_note') ?>
+            <?= t('server.torrents.you_are_req_note') ?>
         </div>
     </div>
     <div class="Form-rowList" variant="header">
-        <div class="Form-rowHeader"><strong class="u-colorWarning"><?= Lang::get('torrents.edit_details') ?></strong></div>
+        <div class="Form-rowHeader"><strong class="u-colorWarning"><?= t('server.torrents.edit_details') ?></strong></div>
         <form action="torrents.php" method="POST">
             <input type="hidden" name="action" value="takeeditrequest" />
             <input type="hidden" name="groupid" value="<?= $GroupID ?>" />
@@ -37,7 +37,7 @@ View::show_header(Lang::get('torrents.request_an_edit'), '', '', 'PageTorrentEdi
                 <? new TEXTAREA_PREVIEW('edit_details', 'edit_details'); ?>
             </div>
             <div class="Form-row">
-                <input class="Button" type="submit" value="<?= Lang::get('global.submit') ?>" />
+                <input class="Button" type="submit" value="<?= t('server.global.submit') ?>" />
             </div>
         </form>
     </div>

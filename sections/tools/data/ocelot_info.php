@@ -23,26 +23,26 @@ if (isset($_GET['userid']) && is_number($_GET['userid'])) {
     $MainStats = Tracker::info();
 }
 
-View::show_header(Lang::get('tools.tracker_info'), '', 'PageToolOcelotInfo');
+View::show_header(t('server.tools.tracker_info'), '', 'PageToolOcelotInfo');
 ?>
 <div class="LayoutBody">
     <div class="BodyHeader">
-        <h2 class="BodyHeader-nav"><?= Lang::get('tools.tracker_info') ?></h2>
+        <h2 class="BodyHeader-nav"><?= t('server.tools.tracker_info') ?></h2>
     </div>
     <div class="BodyNavLinks">
-        <a href="?action=<?= $_REQUEST['action'] ?>" class="brackets"><?= Lang::get('tools.main_stats') ?></a>
+        <a href="?action=<?= $_REQUEST['action'] ?>" class="brackets"><?= t('server.tools.main_stats') ?></a>
     </div>
     <div class="LayoutMainSidebar">
         <div class="Sidebar LayoutMainSidebar-sidebar">
             <div class="SidebarItem Box">
                 <div class="SidebarItem-header Box-header">
-                    <strong><?= Lang::get('tools.user_stats') ?></strong>
+                    <strong><?= t('server.tools.user_stats') ?></strong>
                 </div>
                 <div class="SidebarItem-body Box-body">
                     <form class="FormOneLine FormToolUserStat" method="get" action="">
                         <input type="hidden" name="action" value="ocelot_info" />
-                        <span class="label"><?= Lang::get('tools.get_stats_for_user') ?></span><br />
-                        <input class="Input" type="text" name="userid" placeholder="<?= Lang::get('tools.user_id') ?>" value="<? Format::form('userid') ?>" />
+                        <span class="label"><?= t('server.tools.get_stats_for_user') ?></span><br />
+                        <input class="Input" type="text" name="userid" placeholder="<?= t('server.tools.user_id') ?>" value="<? Format::form('userid') ?>" />
                         <input class="Button" type="submit" value="Go" />
                     </form>
                 </div>
@@ -50,14 +50,14 @@ View::show_header(Lang::get('tools.tracker_info'), '', 'PageToolOcelotInfo');
         </div>
         <div class="LayoutMainSidebar-main">
             <div class="box box2">
-                <div class="head"><strong><?= Lang::get('tools.numbers_and_such') ?></strong></div>
+                <div class="head"><strong><?= t('server.tools.numbers_and_such') ?></strong></div>
                 <div class="pad">
                     <?
                     if (!empty($UserPeerStats)) {
                     ?>
-                        <?= Lang::get('tools.user_id') ?>: <?= $_GET['userid'] ?><br />
-                        <?= Lang::get('tools.leeching') ?>: <?= $UserPeerStats[0] === false ? "hidden" : number_format($UserPeerStats[0]) ?><br />
-                        <?= Lang::get('tools.seeding') ?>: <?= $UserPeerStats[1] === false ? "hidden" : number_format($UserPeerStats[1]) ?><br />
+                        <?= t('server.tools.user_id') ?>: <?= $_GET['userid'] ?><br />
+                        <?= t('server.tools.leeching') ?>: <?= $UserPeerStats[0] === false ? "hidden" : number_format($UserPeerStats[0]) ?><br />
+                        <?= t('server.tools.seeding') ?>: <?= $UserPeerStats[1] === false ? "hidden" : number_format($UserPeerStats[1]) ?><br />
                         <?
                     } elseif (!empty($MainStats)) {
                         foreach ($MainStats as $Key => $Value) {
@@ -75,15 +75,15 @@ View::show_header(Lang::get('tools.tracker_info'), '', 'PageToolOcelotInfo');
                         }
                     } elseif (isset($TorrentPass)) {
                         ?>
-                        <?= Lang::get('tools.failed_to_get_stats_for_user_before') ?><?= $_GET['userid'] ?><?= Lang::get('tools.failed_to_get_stats_for_user_after') ?>
+                        <?= t('server.tools.failed_to_get_stats_for_user_before') ?><?= $_GET['userid'] ?><?= t('server.tools.failed_to_get_stats_for_user_after') ?>
                     <?
                     } elseif (isset($_GET['userid'])) {
                     ?>
-                        <?= Lang::get('tools.user_does_not_exist_before') ?><?= display_str($_GET['userid']) ?><?= Lang::get('tools.user_does_not_exist_after') ?>
+                        <?= t('server.tools.user_does_not_exist_before') ?><?= display_str($_GET['userid']) ?><?= t('server.tools.user_does_not_exist_after') ?>
                     <?
                     } else {
                     ?>
-                        <?= Lang::get('tools.failed_to_get_tracker_info') ?>
+                        <?= t('server.tools.failed_to_get_tracker_info') ?>
                     <?
                     }
                     ?>

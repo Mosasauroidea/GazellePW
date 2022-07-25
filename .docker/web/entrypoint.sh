@@ -41,8 +41,8 @@ fi
 
 echo "Start services..."
 
-touch /var/log/fpm-php.www.log
-chmod 777 /var/log/fpm-php.www.log
+mkdir -p /var/www/logs
+truncate -s0  /var/www/logs/*.log
 
 run_service cron
 run_service nginx
@@ -50,4 +50,4 @@ run_service php7.3-fpm
 
 crontab /var/www/.docker/web/crontab
 
-tail -f /var/log/nginx/access.log
+tail -f /var/www/logs/*.log

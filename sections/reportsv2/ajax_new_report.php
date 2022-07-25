@@ -327,12 +327,12 @@ $BBName = "[url=torrents.php?torrentid=$TorrentID#TorrentID] $RawName [/url]";
             </tr>
             <tr>
                 <td colspan="4" style="text-align: center;">
-                    <input class="Button" type="button" value="<?= Lang::get('reportsv2.invalidate_report') ?>" onclick="Dismiss(<?= $ReportID ?>);" />
-                    <input class="Button" type="button" value="<?= Lang::get('reportsv2.resolve_report') ?>" onclick="ManualResolve(<?= $ReportID ?>);" />
-                    | <input class="Button" type="button" value="<?= Lang::get('reportsv2.unclaim') ?>" onclick="GiveBack(<?= $ReportID ?>);" />
-                    | <input id="grab<?= $ReportID ?>" type="button" value="<?= Lang::get('reportsv2.claim') ?>" onclick="Grab(<?= $ReportID ?>);" />
-                    | <?= Lang::get('reportsv2.multi_resolve') ?> <input type="checkbox" name="multi" id="multi<?= $ReportID ?>" checked="checked" />
-                    | <input class="Button" type="button" value="<?= Lang::get('global.submit') ?>" onclick="TakeResolve(<?= $ReportID ?>);" />
+                    <input class="Button" type="button" value="<?= t('server.reportsv2.invalidate_report') ?>" onclick="Dismiss(<?= $ReportID ?>);" />
+                    <input class="Button" type="button" value="<?= t('server.reportsv2.resolve_report') ?>" onclick="ManualResolve(<?= $ReportID ?>);" />
+                    | <input class="Button" type="button" value="<?= t('server.reportsv2.unclaim') ?>" onclick="GiveBack(<?= $ReportID ?>);" />
+                    | <input id="grab<?= $ReportID ?>" type="button" value="<?= t('server.reportsv2.claim') ?>" onclick="Grab(<?= $ReportID ?>);" />
+                    | <?= t('server.reportsv2.multi_resolve') ?> <input type="checkbox" name="multi" id="multi<?= $ReportID ?>" checked="checked" />
+                    | <input class="Button" type="button" value="<?= t('server.global.submit') ?>" onclick="TakeResolve(<?= $ReportID ?>);" />
                 </td>
             </tr>
         </table>

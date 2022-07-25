@@ -51,11 +51,11 @@ if (isset($_GET['username'])) {
     }
 }
 
-View::show_header(Lang::get('user.user_search'), '', 'PageUserSearch');
+View::show_header(t('server.user.user_search'), '', 'PageUserSearch');
 ?>
 <div class="LayoutBody">
     <div class="BodyHeader">
-        <h3 class="BodyHeader-nav"><?= Lang::get('user.search_results') ?></h3>
+        <h3 class="BodyHeader-nav"><?= t('server.user.search_results') ?></h3>
     </div>
     <? $Pages = Format::get_pages($Page, $NumResults, USERS_PER_PAGE, 9);
     if ($Pages) { ?>
@@ -65,7 +65,7 @@ View::show_header(Lang::get('user.user_search'), '', 'PageUserSearch');
         <input type="hidden" name="action" value="search" />
         <table class="Form-rowList">
             <tr class="Form-row">
-                <td class="Form-label"><?= Lang::get('user.username') ?>:</td>
+                <td class="Form-label"><?= t('server.user.username') ?>:</td>
                 <td class="Form-inputs">
                     <input class="Input" type="text" name="username" size="60" value="<?= display_str($_GET['username']) ?>" />
                 </td>
@@ -80,8 +80,8 @@ View::show_header(Lang::get('user.user_search'), '', 'PageUserSearch');
     <div class="TableContainer">
         <table class="Table" style="width: 400px; margin: 0px auto;">
             <tr class="Table-rowHeader">
-                <td class="Table-cell" width="50%"><?= Lang::get('user.username') ?></td>
-                <td class="Table-cell"><?= Lang::get('user.primary_class') ?></td>
+                <td class="Table-cell" width="50%"><?= t('server.user.username') ?></td>
+                <td class="Table-cell"><?= t('server.user.primary_class') ?></td>
             </tr>
             <?
             foreach ($Results as $Result) {

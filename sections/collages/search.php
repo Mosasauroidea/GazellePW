@@ -21,7 +21,7 @@ group by ID";
 $DB->query($SQL);
 $Collages = $DB->to_array(false, MYSQLI_ASSOC);
 $r = [];
-$CollageCats = Lang::get('collages.collagecats');
+$CollageCats = t('server.collages.collagecats');
 foreach ($Collages as $Collage) {
     if ($Collage['CategoryID'] === '0' && !check_perms('site_collages_delete')) {
         if (!check_perms('site_collages_personal') || $Collage['UserID'] !== $LoggedUser['ID']) {

@@ -3,18 +3,18 @@ enforce_login();
 if (!defined('LOG_ENTRIES_PER_PAGE')) {
     define('LOG_ENTRIES_PER_PAGE', 100);
 }
-View::show_header(Lang::get('log.site_log'), '', 'PageLogHome');
+View::show_header(t('server.log.site_log'), '', 'PageLogHome');
 
 include(CONFIG['SERVER_ROOT'] . '/sections/log/sphinx.php');
 ?>
 <div class="LayoutBody">
     <div class="BodyHeader">
-        <h2 class="BodyHeader-nav"><?= Lang::get('log.site_log') ?></h2>
+        <h2 class="BodyHeader-nav"><?= t('server.log.site_log') ?></h2>
     </div>
     <form class="Form SearchPage Box SearchLog" name="log" action="" method="get">
         <table class="Form-rowList">
             <tr class="Form-row">
-                <td class="Form-label"><?= Lang::get('log.search_for') ?>:</td>
+                <td class="Form-label"><?= t('server.log.search_for') ?>:</td>
                 <td class="Form-inputs">
                     <input class="Input" type="text" name="search" size="60" <?= (!empty($_GET['search']) ? ' value="' . display_str($_GET['search']) . '"' : '') ?> />
                 </td>
@@ -38,16 +38,16 @@ include(CONFIG['SERVER_ROOT'] . '/sections/log/sphinx.php');
     <div class="TableContainer">
         <table class="TableLogSearch Table">
             <tr class="Table-rowHeader">
-                <td class="Table-cell" style="width: 200px;"><strong><?= Lang::get('log.time') ?></strong></td>
-                <td class="Table-cell"><strong><?= Lang::get('log.message') ?></strong></td>
+                <td class="Table-cell" style="width: 200px;"><strong><?= t('server.log.time') ?></strong></td>
+                <td class="Table-cell"><strong><?= t('server.log.message') ?></strong></td>
             </tr>
             <? if ($QueryStatus) { ?>
                 <tr class="Table-row">
-                    <td class="Table-cell" colspan="2"><?= Lang::get('log.search_request_failed') ?> (<?= $QueryError ?>)<?= Lang::get('log.period') ?></td>
+                    <td class="Table-cell" colspan="2"><?= t('server.log.search_request_failed') ?> (<?= $QueryError ?>)<?= t('server.log.period') ?></td>
                 </tr>
             <?  } elseif (!$DB->has_results()) { ?>
                 <tr class="Table-row">
-                    <td class="Table-cell" colspan="2"><?= Lang::get('log.nothing_found') ?></td>
+                    <td class="Table-cell" colspan="2"><?= t('server.log.nothing_found') ?></td>
                 </tr>
                 <?
             }

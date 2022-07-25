@@ -48,10 +48,10 @@ if (isset($_POST['doit'])) {
     $Cache->delete_value('genre_tags');
 }
 
-View::show_header(Lang::get('tools.h2_official_tags_manager'));
+View::show_header(t('server.tools.h2_official_tags_manager'));
 ?>
 <div class="BodyHeader">
-    <h2 class="BodyHeader-nav"><?= Lang::get('tools.h2_official_tags_manager') ?></h2>
+    <h2 class="BodyHeader-nav"><?= t('server.tools.h2_official_tags_manager') ?></h2>
 </div>
 <div style="text-align: center;">
     <div style="display: inline-block;">
@@ -61,17 +61,17 @@ View::show_header(Lang::get('tools.h2_official_tags_manager'));
             <input type="hidden" name="doit" value="1" />
             <table class="TableTags">
                 <tr class="Table-rowHeader">
-                    <td class="Table-cell Tabel-cellCenter"><?= Lang::get('tools.remove') ?></td>
-                    <td class="Table-cell"><?= Lang::get('tools.tag') ?></td>
-                    <td class="Table-cell"><?= Lang::get('tools.uses') ?></td>
+                    <td class="Table-cell Tabel-cellCenter"><?= t('server.tools.remove') ?></td>
+                    <td class="Table-cell"><?= t('server.tools.tag') ?></td>
+                    <td class="Table-cell"><?= t('server.tools.uses') ?></td>
                     <td class="Table-cell">&nbsp;&nbsp;&nbsp;</td>
-                    <td class="Table-cell Table-cellCenter"><?= Lang::get('tools.remove') ?></td>
-                    <td class="Table-cell"><?= Lang::get('tools.tag') ?></td>
-                    <td class="Table-cell"><?= Lang::get('tools.uses') ?></td>
+                    <td class="Table-cell Table-cellCenter"><?= t('server.tools.remove') ?></td>
+                    <td class="Table-cell"><?= t('server.tools.tag') ?></td>
+                    <td class="Table-cell"><?= t('server.tools.uses') ?></td>
                     <td class="Table-cell">&nbsp;&nbsp;&nbsp;</td>
-                    <td class="Table-cell Table-cellCenter"><?= Lang::get('tools.remove') ?></td>
-                    <td class="Table-cell"><?= Lang::get('tools.tag') ?></td>
-                    <td class="Table-cell"><?= Lang::get('tools.uses') ?></td>
+                    <td class="Table-cell Table-cellCenter"><?= t('server.tools.remove') ?></td>
+                    <td class="Table-cell"><?= t('server.tools.tag') ?></td>
+                    <td class="Table-cell"><?= t('server.tools.uses') ?></td>
                 </tr>
                 <?
                 $i = 0;
@@ -113,7 +113,7 @@ View::show_header(Lang::get('tools.h2_official_tags_manager'));
                 ?>
                 <tr class="Table-row">
                     <td class="Table-cell" colspan="11">
-                        <label for="newtag"><?= Lang::get('tools.new_official_tag') ?>: </label><input class="Input" type="text" name="newtag" />
+                        <label for="newtag"><?= t('server.tools.new_official_tag') ?>: </label><input class="Input" type="text" name="newtag" />
                     </td>
                 </tr>
                 <tr class="Table-row">

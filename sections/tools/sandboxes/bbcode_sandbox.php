@@ -2,7 +2,7 @@
 if (!check_perms('users_mod')) {
     error(403);
 }
-$Title = Lang::get('tools.bbcode_sandbox');
+$Title = t('server.tools.bbcode_sandbox');
 View::show_header($Title, 'bbcode_sandbox');
 ?>
 <div class="BodyHeader">

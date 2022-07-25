@@ -1201,28 +1201,28 @@ WHERE ud.TorrentID=? AND ui.NotifyOnDeleteDownloaded='1' AND ud.UserID NOT IN ({
         if (!empty($Data['Subtitles'])) {
             $Subtitles = explode(',', $Data['Subtitles']);
             if (in_array('chinese_simplified', $Subtitles)) {
-                $Info[] = Format::torrent_label(Lang::get('torrents.chi'), 'tl_chi');
+                $Info[] = Format::torrent_label(t('server.torrents.chi'), 'tl_chi');
             } else if (in_array('chinese_traditional', $Subtitles)) {
-                $Info[] = Format::torrent_label(Lang::get('torrents.chi'), 'tl_chi');
+                $Info[] = Format::torrent_label(t('server.torrents.chi'), 'tl_chi');
             }
         }
         if ($Data['ChineseDubbed']) {
-            $Info[] = Format::torrent_label(Lang::get('torrents.cn_dub'), 'tl_cn_dub');
+            $Info[] = Format::torrent_label(t('server.torrents.cn_dub'), 'tl_cn_dub');
         }
         if ($Data['SpecialSub']) {
-            $Info[] = Format::torrent_label(Lang::get('torrents.se_sub'), 'tl_se_sub');
+            $Info[] = Format::torrent_label(t('server.torrents.se_sub'), 'tl_se_sub');
         }
         if ($Data['Buy'] == '1' &&  $Data['Diy'] == '0') {
-            $Info[] = Format::torrent_label(Lang::get('torrents.buy'), 'bg tl_buy');
+            $Info[] = Format::torrent_label(t('server.torrents.buy'), 'bg tl_buy');
         }
         if ($Data['Diy'] == '1') {
-            $Info[] = Format::torrent_label(Lang::get('torrents.diy'), 'bg tl_diy');
+            $Info[] = Format::torrent_label(t('server.torrents.diy'), 'bg tl_diy');
         }
         if ($Data['Jinzhuan'] == '1' && $Data['Allow'] == '0') {
-            $Info[] = Format::torrent_label(Lang::get('torrents.jinzhuan'), 'tl_exclusive');
+            $Info[] = Format::torrent_label(t('server.torrents.jinzhuan'), 'tl_exclusive');
         }
         if ($Data['Allow'] == '1') {
-            $Info[] = Format::torrent_label(Lang::get('torrents.allow'), 'tl_allow');
+            $Info[] = Format::torrent_label(t('server.torrents.allow'), 'tl_allow');
         }
         if (
             (!empty($Data['BadFiles'])) ||
@@ -1232,33 +1232,33 @@ WHERE ud.TorrentID=? AND ui.NotifyOnDeleteDownloaded='1' AND ud.UserID NOT IN ({
             (!empty($Data['CustomTrumpable'])) ||
             self::is_torrent_dead($Data)
         ) {
-            $Info[] = Format::torrent_label(Lang::get('torrents.trump'), 'tl_trumpable');
+            $Info[] = Format::torrent_label(t('server.torrents.trump'), 'tl_trumpable');
         }
 
         if (self::global_freeleech()) {
-            $Info[] = Format::torrent_label(Lang::get('torrents.fld'), 'tl_free bg torrent_discount free');
+            $Info[] = Format::torrent_label(t('server.torrents.fld'), 'tl_free bg torrent_discount free');
         } else if (isset($Data['FreeTorrent'])) {
             if ($Data['FreeTorrent'] == '1') {
-                $Info[] = Format::torrent_label(Lang::get('torrents.fld'), 'tl_free bg torrent_discount free', ($Data['FreeEndTime'] ? Lang::get('torrents.free_left', ['Values' => [time_diff($Data['FreeEndTime'], 2, false)]]) : ""));
+                $Info[] = Format::torrent_label(t('server.torrents.fld'), 'tl_free bg torrent_discount free', ($Data['FreeEndTime'] ? t('server.torrents.free_left', ['Values' => [time_diff($Data['FreeEndTime'], 2, false)]]) : ""));
             } else if ($Data['FreeTorrent'] == '2') {
                 $Info[] = Format::torrent_label('Neutral Leech!', 'bg torrent_discount neutral');
             } else if ($Data['FreeTorrent'] == '11') {
-                $Info[] = Format::torrent_label('-25%', 'bg torrent_discount one_fourth_off', ($Data['FreeEndTime'] ? Lang::get('torrents.free_left', ['Values' => [time_diff($Data['FreeEndTime'], 2, false)]]) : ""));
+                $Info[] = Format::torrent_label('-25%', 'bg torrent_discount one_fourth_off', ($Data['FreeEndTime'] ? t('server.torrents.free_left', ['Values' => [time_diff($Data['FreeEndTime'], 2, false)]]) : ""));
             } else if ($Data['FreeTorrent'] == '12') {
-                $Info[] = Format::torrent_label('-50%', 'bg torrent_discount two_fourth_off', ($Data['FreeEndTime'] ? Lang::get('torrents.free_left', ['Values' => [time_diff($Data['FreeEndTime'], 2, false)]]) : ""));
+                $Info[] = Format::torrent_label('-50%', 'bg torrent_discount two_fourth_off', ($Data['FreeEndTime'] ? t('server.torrents.free_left', ['Values' => [time_diff($Data['FreeEndTime'], 2, false)]]) : ""));
             } else if ($Data['FreeTorrent'] == '13') {
-                $Info[] = Format::torrent_label('-75%', 'bg torrent_discount three_fourth_off', ($Data['FreeEndTime'] ? Lang::get('torrents.free_left', ['Values' => [time_diff($Data['FreeEndTime'], 2, false)]]) : ""));
+                $Info[] = Format::torrent_label('-75%', 'bg torrent_discount three_fourth_off', ($Data['FreeEndTime'] ? t('server.torrents.free_left', ['Values' => [time_diff($Data['FreeEndTime'], 2, false)]]) : ""));
             }
         }
         if ($Option['Self']) {
             if (!empty($Data['ReportID']) > 0) {
-                $Info[] = Format::torrent_label(Lang::get('torrents.reported'), 'tl_reported tips-reported');
+                $Info[] = Format::torrent_label(t('server.torrents.reported'), 'tl_reported tips-reported');
             }
             if (!empty($Data['PersonalFL'])) {
-                $Info[] = Format::torrent_label(Lang::get('torrents.pfl'), 'tl_free');
+                $Info[] = Format::torrent_label(t('server.torrents.pfl'), 'tl_free');
             }
             if (!empty($Data['IsSnatched'])) {
-                $Info[] = Format::torrent_label(Lang::get('torrents.snatched'));
+                $Info[] = Format::torrent_label(t('server.torrents.snatched'));
             }
         }
         if ($Option['SettingTorrentTitle']['ReleaseGroup']) {
@@ -1819,7 +1819,7 @@ WHERE ud.TorrentID=? AND ui.NotifyOnDeleteDownloaded='1' AND ud.UserID NOT IN ({
         $lastEdition = self::get_edition($LastResolution, $LastRemasterTitle, $LastRemasterCustomTitle, $LastNotMain);
         $nextEdition = self::get_edition($Resolution, $RemasterTitle, $RemasterCustomTitle, $NotMain);
         if ($lastEdition != $nextEdition) {
-            return Lang::get("torrents.$nextEdition", ['DefaultValue' => $nextEdition]);
+            return t("server.torrents.$nextEdition", ['DefaultValue' => $nextEdition]);
         }
         return false;
     }
@@ -1888,7 +1888,7 @@ WHERE ud.TorrentID=? AND ui.NotifyOnDeleteDownloaded='1' AND ud.UserID NOT IN ({
         if ($SubName) {
             $DisplayName .= " [<a href=\"torrents.php?searchstr=" . $SubName . "\">$SubName</a>] ";
         }
-        $DisplayName .= "<a href=\"torrents.php?id=$GroupID&amp;torrentid=$TorrentID#torrent$TorrentID\" data-tooltip=\"" . Lang::get('global.view_torrent') . "\" dir=\"ltr\">$GroupName</a>";
+        $DisplayName .= "<a href=\"torrents.php?id=$GroupID&amp;torrentid=$TorrentID#torrent$TorrentID\" data-tooltip=\"" . t('server.global.view_torrent') . "\" dir=\"ltr\">$GroupName</a>";
         if ($GroupYear) {
             $DisplayName .= " ($GroupYear)";
         }

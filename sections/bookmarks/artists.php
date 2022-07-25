@@ -31,7 +31,7 @@ $DB->query("
 
 $ArtistList = $DB->to_array();
 
-$Title = $Sneaky ? "$Username" . Lang::get('bookmarks.s_bookmarked_artists') : Lang::get('bookmarks.your_bookmarked_artists');
+$Title = $Sneaky ? "$Username" . t('server.bookmarks.s_bookmarked_artists') : t('server.bookmarks.your_bookmarked_artists');
 
 View::show_header($Title, 'browse', 'PageBookmarkArtists');
 
@@ -40,22 +40,22 @@ View::show_header($Title, 'browse', 'PageBookmarkArtists');
     <div class="BodyHeader">
         <h2 class="BodyHeader-nav"><?= $Title ?></h2>
         <div class="BodyNavLinks">
-            <a href="bookmarks.php?type=torrents" class="brackets"><?= Lang::get('global.torrents') ?></a>
-            <a href="bookmarks.php?type=artists" class="brackets"><?= Lang::get('global.artists') ?></a>
+            <a href="bookmarks.php?type=torrents" class="brackets"><?= t('server.global.torrents') ?></a>
+            <a href="bookmarks.php?type=artists" class="brackets"><?= t('server.global.artists') ?></a>
             <?
             if (CONFIG['ENABLE_COLLAGES']) {
             ?>
-                <a href="bookmarks.php?type=collages" class="brackets"><?= Lang::get('bookmarks.collages') ?></a>
+                <a href="bookmarks.php?type=collages" class="brackets"><?= t('server.bookmarks.collages') ?></a>
             <?
             }
             ?>
-            <a href="bookmarks.php?type=requests" class="brackets"><?= Lang::get('global.requests') ?></a>
+            <a href="bookmarks.php?type=requests" class="brackets"><?= t('server.global.requests') ?></a>
         </div>
     </div>
     <div class="Box">
         <div class="Box-body" align="center">
             <? if (count($ArtistList) === 0) { ?>
-                <h2><?= Lang::get('bookmarks.no_bookmarked_artists') ?></h2>
+                <h2><?= t('server.bookmarks.no_bookmarked_artists') ?></h2>
         </div>
     </div>
 </div>
@@ -67,7 +67,7 @@ View::show_header($Title, 'browse', 'PageBookmarkArtists');
 <div class="TableContainer">
     <table class="TableArtist Table">
         <tr class="Table-rowHeader">
-            <td class="Table-cell"><?= Lang::get('global.artist') ?></td>
+            <td class="Table-cell"><?= t('server.global.artist') ?></td>
         </tr>
         <?
         $Row = 'a';
@@ -93,16 +93,16 @@ View::show_header($Title, 'browse', 'PageBookmarkArtists');
                             }
                             if (stripos($Notify['Artists'], "|$Name|") === false) {
                         ?>
-                                <a href="artist.php?action=notify&amp;artistid=<?= $ArtistID ?>&amp;auth=<?= $LoggedUser['AuthKey'] ?>" class="brackets"><?= Lang::get('bookmarks.notify_new') ?></a>
+                                <a href="artist.php?action=notify&amp;artistid=<?= $ArtistID ?>&amp;auth=<?= $LoggedUser['AuthKey'] ?>" class="brackets"><?= t('server.bookmarks.notify_new') ?></a>
                             <?
                             } else {
                             ?>
-                                <a href="artist.php?action=notifyremove&amp;artistid=<?= $ArtistID ?>&amp;auth=<?= $LoggedUser['AuthKey'] ?>" class="brackets"><?= Lang::get('bookmarks.dont_notify_new') ?></a>
+                                <a href="artist.php?action=notifyremove&amp;artistid=<?= $ArtistID ?>&amp;auth=<?= $LoggedUser['AuthKey'] ?>" class="brackets"><?= t('server.bookmarks.dont_notify_new') ?></a>
                         <?
                             }
                         }
                         ?>
-                        &nbsp;&nbsp;&nbsp;<a href="#" id="bookmarklink_artist_<?= $ArtistID ?>" onclick="Unbookmark('artist', <?= $ArtistID ?>, '<?= Lang::get('bookmarks.bookmark') ?>'); return false;" class="brackets"><?= Lang::get('global.remove_bookmark') ?></a>
+                        &nbsp;&nbsp;&nbsp;<a href="#" id="bookmarklink_artist_<?= $ArtistID ?>" onclick="Unbookmark('artist', <?= $ArtistID ?>, '<?= t('server.bookmarks.bookmark') ?>'); return false;" class="brackets"><?= t('server.global.remove_bookmark') ?></a>
                     </span>
                 </td>
             </tr>

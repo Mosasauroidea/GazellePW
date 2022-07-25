@@ -1,5 +1,5 @@
 <?
-View::show_header(Lang::get('rules.collages_title'), '', 'PageRuleCollage');
+View::show_header(t('server.rules.collages_title'), '', 'PageRuleCollage');
 ?>
 
 <div class="LayoutBody">

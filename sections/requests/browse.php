@@ -49,7 +49,7 @@ if (!empty($_GET['userid'])) {
 $BookmarkView = false;
 
 if (empty($_GET['type'])) {
-    $Title = Lang::get('requests.requests');
+    $Title = t('server.requests.requests');
     if (empty($_GET['showall'])) {
         $SphQL->where('visible', 1);
     }
@@ -60,10 +60,10 @@ if (empty($_GET['type'])) {
                 if (!check_paranoia('requestsvoted_list', $UserInfo['Paranoia'], $Perms['Class'], $UserInfo['ID'])) {
                     error(403);
                 }
-                $Title = Lang::get('requests.requests_created_by_before') . $UserInfo['Username'] . Lang::get('requests.requests_created_by_after');
+                $Title = t('server.requests.requests_created_by_before') . $UserInfo['Username'] . t('server.requests.requests_created_by_after');
                 $SphQL->where('userid', $UserInfo['ID']);
             } else {
-                $Title = Lang::get('requests.my_requests');
+                $Title = t('server.requests.my_requests');
                 $SphQL->where('userid', $LoggedUser['ID']);
             }
             break;
@@ -72,10 +72,10 @@ if (empty($_GET['type'])) {
                 if (!check_paranoia('requestsvoted_list', $UserInfo['Paranoia'], $Perms['Class'], $UserInfo['ID'])) {
                     error(403);
                 }
-                $Title = Lang::get('requests.requests_voted_for_by_before') . $UserInfo['Username'] . Lang::get('requests.requests_voted_for_by_after');
+                $Title = t('server.requests.requests_voted_for_by_before') . $UserInfo['Username'] . t('server.requests.requests_voted_for_by_after');
                 $SphQL->where('voter', $UserInfo['ID']);
             } else {
-                $Title = Lang::get('requests.requests_i_have_voted_on');
+                $Title = t('server.requests.requests_i_have_voted_on');
                 $SphQL->where('voter', $LoggedUser['ID']);
             }
             break;
@@ -84,15 +84,15 @@ if (empty($_GET['type'])) {
                 if (!check_paranoia('requestsfilled_list', $UserInfo['Paranoia'], $Perms['Class'], $UserInfo['ID'])) {
                     error(403);
                 }
-                $Title = Lang::get('requests.requests_filled_by_before') . $UserInfo['Username'] . Lang::get('requests.requests_filled_by_after');
+                $Title = t('server.requests.requests_filled_by_before') . $UserInfo['Username'] . t('server.requests.requests_filled_by_after');
                 $SphQL->where('fillerid', $UserInfo['ID']);
             } else {
-                $Title = Lang::get('requests.requests_i_have_filled');
+                $Title = t('server.requests.requests_i_have_filled');
                 $SphQL->where('fillerid', $LoggedUser['ID']);
             }
             break;
         case 'bookmarks':
-            $Title = Lang::get('requests.bookmarks');
+            $Title = t('server.requests.bookmarks');
             $BookmarkView = true;
             $SphQL->where('bookmarker', $LoggedUser['ID']);
             break;
@@ -359,20 +359,20 @@ View::show_header($Title, '', 'PageRequestHome');
         <div class="BodyNavLinks">
             <? if (!$BookmarkView) {
                 if (check_perms('site_submit_requests')) { ?>
-                    <a class="Link" href="requests.php?action=new"><?= Lang::get('requests.new_request') ?></a>
-                    <a class="Link" href="requests.php?type=created&show_filled=on"><?= Lang::get('requests.my_requests') ?></a>
+                    <a class="Link" href="requests.php?action=new"><?= t('server.requests.new_request') ?></a>
+                    <a class="Link" href="requests.php?type=created&show_filled=on"><?= t('server.requests.my_requests') ?></a>
                 <? } ?>
                 <? if (check_perms('site_vote')) { ?>
-                    <a class="Link" href="requests.php?type=voted"><?= Lang::get('requests.vote_requests') ?></a>
+                    <a class="Link" href="requests.php?type=voted"><?= t('server.requests.vote_requests') ?></a>
                 <? } ?>
-                <a class="Link" href="bookmarks.php?type=requests"><?= Lang::get('requests.bookmarked_requests') ?></a>
+                <a class="Link" href="bookmarks.php?type=requests"><?= t('server.requests.bookmarked_requests') ?></a>
             <?  } else { ?>
-                <a class="Link" href="bookmarks.php?type=torrents"><?= Lang::get('global.torrents') ?></a>
-                <a class="Link" href="bookmarks.php?type=artists"><?= Lang::get('global.artists') ?></a>
+                <a class="Link" href="bookmarks.php?type=torrents"><?= t('server.global.torrents') ?></a>
+                <a class="Link" href="bookmarks.php?type=artists"><?= t('server.global.artists') ?></a>
                 <? if (CONFIG['ENABLE_COLLAGES']) { ?>
-                    <a class="Link" href="bookmarks.php?type=collages"><?= Lang::get('requests.collages') ?></a>
+                    <a class="Link" href="bookmarks.php?type=collages"><?= t('server.requests.collages') ?></a>
                 <? } ?>
-                <a class="Link" href="bookmarks.php?type=requests"><?= Lang::get('global.requests') ?></a>
+                <a class="Link" href="bookmarks.php?type=requests"><?= t('server.global.requests') ?></a>
             <?  } ?>
         </div>
     </div>
@@ -380,7 +380,7 @@ View::show_header($Title, '', 'PageRequestHome');
     if ($BookmarkView && $NumResults === 0) {
     ?>
         <div class="BoxBody" align="center">
-            <h2><?= Lang::get('requests.you_have_not_bookmarked_any_request') ?></h2>
+            <h2><?= t('server.requests.you_have_not_bookmarked_any_request') ?></h2>
         </div>
     <?
     } else { ?>
@@ -398,7 +398,7 @@ View::show_header($Title, '', 'PageRequestHome');
                 <?      } ?>
                 <table class="Form-rowList">
                     <tr class="Form-row is-searchStr">
-                        <td class="Form-label"><?= Lang::get('requests.search_terms') ?>:</td>
+                        <td class="Form-label"><?= t('server.requests.search_terms') ?>:</td>
                         <td class="Form-inputs">
                             <input class="Input" type="text" name="search" size="75" value="<? if (isset($_GET['search'])) {
                                                                                                 echo display_str($_GET['search']);
@@ -406,24 +406,24 @@ View::show_header($Title, '', 'PageRequestHome');
                         </td>
                     </tr>
                     <tr class="Form-row is-tagFilter">
-                        <td class="Form-label"><?= Lang::get('requests.tags_comma') ?>:</td>
+                        <td class="Form-label"><?= t('server.requests.tags_comma') ?>:</td>
                         <td class="Form-inputs">
                             <input class="Input" type="text" name="tags" id="tags" size="60" value="<?= !empty($TagNames) ? display_str($TagNames) : '' ?>" <? Users::has_autocomplete_enabled('other'); ?> />
                             <div class="RadioGroup">
                                 <div class="Radio">
                                     <input class="Input" type="radio" name="tags_type" id="tags_type0" value="0" <? Format::selected('tags_type', 0, 'checked') ?> />
-                                    <label class="Radio-label" for="tags_type0"><?= Lang::get('requests.any') ?> </label>
+                                    <label class="Radio-label" for="tags_type0"><?= t('server.requests.any') ?> </label>
                                 </div>
                                 <div class="Radio">
                                     <input class="Input" type="radio" name="tags_type" id="tags_type1" value="1" <? Format::selected('tags_type', 1, 'checked') ?> />
-                                    <label class="Radio-label" for="tags_type1"><?= Lang::get('requests.all') ?></label>
+                                    <label class="Radio-label" for="tags_type1"><?= t('server.requests.all') ?></label>
                                 </div>
                             </div>
                         </td>
                     </tr>
                     <tr class="Form-row is-includeFilled">
                         <td class="Form-label">
-                            <label for="include_filled_box"><?= Lang::get('requests.include_filled') ?>:</label>
+                            <label for="include_filled_box"><?= t('server.requests.include_filled') ?>:</label>
                         </td>
                         <td class="Form-inputs">
                             <input class="Input" type="checkbox" id="include_filled_box" name="show_filled" <? if (!empty($_GET['show_filled']) || (!empty($_GET['type']) && $_GET['type'] === 'filled')) { ?> checked="checked" <? } ?> />
@@ -431,7 +431,7 @@ View::show_header($Title, '', 'PageRequestHome');
                     </tr>
                     <tr class="Form-row is-includeOld">
                         <td class="Form-label">
-                            <label for="include_old_box"><?= Lang::get('requests.include_old') ?>:</label>
+                            <label for="include_old_box"><?= t('server.requests.include_old') ?>:</label>
                         </td>
                         <td class="Form-inputs">
                             <input class="Input" type="checkbox" id="include_old_box" name="showall" <? if (!empty($_GET['showall'])) { ?> checked="checked" <? } ?> />
@@ -440,7 +440,7 @@ View::show_header($Title, '', 'PageRequestHome');
                 </table>
                 <table class="Form-rowList">
                     <tr class="Form-row is-release">
-                        <td class="Form-label"><?= Lang::get('requests.release_list') ?></td>
+                        <td class="Form-label"><?= t('server.requests.release_list') ?></td>
                         <td class="Form-inputs">
                             <input class="Input" type="checkbox" id="toggle_releases" onchange="globalapp.requestToggle('releases', 0);" <?= (!$Submitted || !empty($ReleaseArray) && count($ReleaseArray) === count($ReleaseTypes) ? ' checked="checked"' : '') ?> /> <label for="toggle_releases">All</label>
                             <?
@@ -448,7 +448,7 @@ View::show_header($Title, '', 'PageRequestHome');
                             ?>
                                 <div class="Checkbox">
                                     <input class="Input" type="checkbox" name="releases[]" value="<?= $Key ?>" id="release_<?= $Key ?>" <?= (!$Submitted || (!empty($ReleaseArray) && in_array($Key, $ReleaseArray)) ? ' checked="checked" ' : '') ?> />
-                                    <label class="Checkbox-label" for="release_<?= $Key ?>"><?= Lang::get('torrents.release_types')[$Key] ?></label>
+                                    <label class="Checkbox-label" for="release_<?= $Key ?>"><?= t('server.torrents.release_types')[$Key] ?></label>
                                 </div>
                             <?
                             }
@@ -456,7 +456,7 @@ View::show_header($Title, '', 'PageRequestHome');
                         </td>
                     </tr>
                     <tr class="Form-row is-source">
-                        <td class="Form-label"><?= Lang::get('requests.source_list') ?>:</td>
+                        <td class="Form-label"><?= t('server.requests.source_list') ?>:</td>
                         <td class="Form-inputs">
                             <div class="Checkbox">
                                 <input class="Input" type="checkbox" id="toggle_source" onchange="globalapp.requestToggle('sources', 0);" <?= (!$Submitted || !empty($SourceArray) && count($SourceArray) === count($Sources) ? ' checked="checked"' : '') ?> />
@@ -477,7 +477,7 @@ View::show_header($Title, '', 'PageRequestHome');
                         </td>
                     </tr>
                     <tr class="Form-row is-codec">
-                        <td class="Form-label"><?= Lang::get('requests.codec_list') ?>:</td>
+                        <td class="Form-label"><?= t('server.requests.codec_list') ?>:</td>
                         <td class="Form-inputs">
                             <div class="Checkbox">
                                 <input class="Input" type="checkbox" id="toggle_codec" onchange="globalapp.requestToggle('codec', 0);" <?= (!$Submitted || !empty($CodecArray) && count($CodecArray) === count($Codecs) ? ' checked="checked"' : '') ?> />
@@ -498,7 +498,7 @@ View::show_header($Title, '', 'PageRequestHome');
                         </td>
                     </tr>
                     <tr class="Form-row is-container">
-                        <td class="Form-label"><?= Lang::get('requests.container_list') ?>:</td>
+                        <td class="Form-label"><?= t('server.requests.container_list') ?>:</td>
                         <td class="Form-inputs">
                             <div class="Checkbox">
                                 <input class="Input" type="checkbox" id="toggle_container" onchange="globalapp.requestToggle('container', 0);" <?= (!$Submitted || !empty($ContainerArray) && count($ContainerArray) === count($Containers) ? ' checked="checked"' : '') ?> />
@@ -521,7 +521,7 @@ View::show_header($Title, '', 'PageRequestHome');
                         </td>
                     </tr>
                     <tr class="Form-row is-resolution">
-                        <td class="Form-label"><?= Lang::get('requests.resolution_list') ?>:</td>
+                        <td class="Form-label"><?= t('server.requests.resolution_list') ?>:</td>
                         <td class="Form-inputs">
                             <div class="Checkbox">
                                 <input class="Input" type="checkbox" id="toggle_resolution" onchange="globalapp.requestToggle('resolution', 0);" <?= (!$Submitted || !empty($ResolutionArray) && count($ResolutionArray) === count($Resolutions) ? ' checked="checked"' : '') ?> />
@@ -547,7 +547,7 @@ View::show_header($Title, '', 'PageRequestHome');
             </div>
             <div class="SearchPageFooter">
                 <div class="SearchPageFooter-actions">
-                    <input class="Button" type="submit" value="<?= Lang::get('torrents.search_requests') ?>" />
+                    <input class="Button" type="submit" value="<?= t('server.torrents.search_requests') ?>" />
                 </div>
             </div>
         </form>
@@ -563,28 +563,28 @@ View::show_header($Title, '', 'PageRequestHome');
             <table class="TableRequest Table" id="request_table" cellpadding="6" cellspacing="1" border="0" width="100%">
                 <tr class="Table-rowHeader">
                     <td class="Table-cell" style="width: 38%;">
-                        <?= Lang::get('requests.name') ?> / <a href="?order=year&amp;sort=<?= ($OrderBy === 'year' ? $NewSort : 'desc') ?>&amp;<?= $CurrentURL ?>"><?= Lang::get('requests.year') ?></a>
+                        <?= t('server.requests.name') ?> / <a href="?order=year&amp;sort=<?= ($OrderBy === 'year' ? $NewSort : 'desc') ?>&amp;<?= $CurrentURL ?>"><?= t('server.requests.year') ?></a>
                     </td>
                     <td class="Table-cell">
-                        <a href="?order=votes&amp;sort=<?= ($OrderBy === 'votes' ? $NewSort : 'desc') ?>&amp;<?= $CurrentURL ?>"><?= Lang::get('requests.votes') ?></a>
+                        <a href="?order=votes&amp;sort=<?= ($OrderBy === 'votes' ? $NewSort : 'desc') ?>&amp;<?= $CurrentURL ?>"><?= t('server.requests.votes') ?></a>
                     </td>
                     <td class="Table-cell">
-                        <a href="?order=bounty&amp;sort=<?= ($OrderBy === 'bounty' ? $NewSort : 'desc') ?>&amp;<?= $CurrentURL ?>"><?= Lang::get('requests.bounty') ?></a>
+                        <a href="?order=bounty&amp;sort=<?= ($OrderBy === 'bounty' ? $NewSort : 'desc') ?>&amp;<?= $CurrentURL ?>"><?= t('server.requests.bounty') ?></a>
                     </td>
                     <td class="Table-cell">
-                        <a href="?order=filled&amp;sort=<?= ($OrderBy === 'filled' ? $NewSort : 'desc') ?>&amp;<?= $CurrentURL ?>"><?= Lang::get('requests.filled') ?></a>
+                        <a href="?order=filled&amp;sort=<?= ($OrderBy === 'filled' ? $NewSort : 'desc') ?>&amp;<?= $CurrentURL ?>"><?= t('server.requests.filled') ?></a>
                     </td>
                     <td class="Table-cell">
-                        <?= Lang::get('requests.filled_by') ?>
+                        <?= t('server.requests.filled_by') ?>
                     </td>
                     <td class="Table-cell">
-                        <?= Lang::get('requests.add_by') ?>
+                        <?= t('server.requests.add_by') ?>
                     </td>
                     <td class="Table-cell">
-                        <a href="?order=created&amp;sort=<?= ($OrderBy === 'created' ? $NewSort : 'desc') ?>&amp;<?= $CurrentURL ?>"><?= Lang::get('requests.created') ?></a>
+                        <a href="?order=created&amp;sort=<?= ($OrderBy === 'created' ? $NewSort : 'desc') ?>&amp;<?= $CurrentURL ?>"><?= t('server.requests.created') ?></a>
                     </td>
                     <td class="Table-cell">
-                        <a href="?order=lastvote&amp;sort=<?= ($OrderBy === 'lastvote' ? $NewSort : 'desc') ?>&amp;<?= $CurrentURL ?>"><?= Lang::get('requests.lastvote') ?></a>
+                        <a href="?order=lastvote&amp;sort=<?= ($OrderBy === 'lastvote' ? $NewSort : 'desc') ?>&amp;<?= $CurrentURL ?>"><?= t('server.requests.lastvote') ?></a>
                     </td>
                 </tr>
                 <?

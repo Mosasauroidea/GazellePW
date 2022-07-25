@@ -24,7 +24,7 @@ $sqltime = sqltime();
 $UserLink = site_url() . 'user.php?id=' . G::$LoggedUser['ID'];
 $Username = G::$LoggedUser['Username'];
 $TorrentLink = site_url() . 'torrents.php?id=' . $GroupID;
-$Title = Lang::get('torrents.torrent_group') . Torrents::group_name($TorrentDetails, false);
+$Title = t('server.torrents.torrent_group') . Torrents::group_name($TorrentDetails, false);
 $Body = <<<POST
 [url={$UserLink}]{$Username}[/url] has submitted an editing request for: [url={$TorrentLink}]{$Title}[/url]
 

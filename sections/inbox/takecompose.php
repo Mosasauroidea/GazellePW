@@ -15,7 +15,7 @@ if (isset($_POST['convid']) && is_number($_POST['convid'])) {
     $ToID = explode(',', $_POST['toid']);
     foreach ($ToID as $TID) {
         if (!is_number($TID)) {
-            $Err = Lang::get('inbox.a_recipient_does_not_exist');
+            $Err = t('server.inbox.a_recipient_does_not_exist');
         }
     }
     $DB->query("
@@ -29,18 +29,18 @@ if (isset($_POST['convid']) && is_number($_POST['convid'])) {
 } else {
     $ConvID = '';
     if (!is_number($_POST['toid'])) {
-        $Err = Lang::get('inbox.this_recipient_does_not_exist');
+        $Err = t('server.inbox.this_recipient_does_not_exist');
     } else {
         $ToID = $_POST['toid'];
     }
     $Subject = trim($_POST['subject']);
     if (empty($Subject)) {
-        $Err = Lang::get('inbox.cannot_send_msg_without_subject');
+        $Err = t('server.inbox.cannot_send_msg_without_subject');
     }
 }
 $Body = trim($_POST['body']);
 if ($Body === '' || $Body === false) {
-    $Err = Lang::get('inbox.cannot_send_msg_without_body');
+    $Err = t('server.inbox.cannot_send_msg_without_body');
 }
 
 if (!empty($Err)) {

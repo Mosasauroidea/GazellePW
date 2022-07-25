@@ -2,7 +2,7 @@
 if (!check_perms('admin_donor_log')) {
     error(403);
 }
-$Title = Lang::get('tools.bitcoin_donation_balance');
+$Title = t('server.tools.bitcoin_donation_balance');
 View::show_header($Title, '', 'PageToolBitcoinBalance');
 
 $Balance = DonationsBitcoin::get_balance() . ' BTC';
@@ -17,7 +17,7 @@ $Balance = DonationsBitcoin::get_balance() . ' BTC';
     <?
     if (empty($_GET['list'])) {
     ?>
-        <a href="?action=<?= $_REQUEST['action'] ?>&amp;list=1" class="brackets"><?= Lang::get('tools.show_donor_list') ?></a>
+        <a href="?action=<?= $_REQUEST['action'] ?>&amp;list=1" class="brackets"><?= t('server.tools.show_donor_list') ?></a>
     <?
     } else {
         $BitcoinAddresses = DonationsBitcoin::get_received();
@@ -30,9 +30,9 @@ $Balance = DonationsBitcoin::get_balance() . ' BTC';
     ?>
         <table class="Table">
             <tr class="Table-rowHeader">
-                <th class="Table-cell"><?= Lang::get('tools.username') ?></th>
-                <th class="Table-cell"><?= Lang::get('tools.receiving_bitcoin_address') ?></th>
-                <th class="Table-cell"><?= Lang::get('tools.amount') ?></th>
+                <th class="Table-cell"><?= t('server.tools.username') ?></th>
+                <th class="Table-cell"><?= t('server.tools.receiving_bitcoin_address') ?></th>
+                <th class="Table-cell"><?= t('server.tools.amount') ?></th>
             </tr>
             <?
             while (list($UserID, $BitcoinAddress) = $DB->next_record(MYSQLI_NUM, false)) {

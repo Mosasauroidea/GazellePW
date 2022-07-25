@@ -1,0 +1,7 @@
+files:
+  - source: /src/locales/en/**/*.yaml
+    translation: /src/locales/%osx_locale%/**/%original_file_name%
+    skip_untranslated_strings: false
+preserve_hierarchy: true
+project_id: '528530'
+api_token_env: CROWDIN_PERSONAL_TOKEN

@@ -27,7 +27,7 @@ if (!empty($_GET['action']) && $_GET['action'] == 'revert') { // if we're revert
 ?>
         <div class="center thin">
             <div class="BodyHeader">
-                <h2 class="BodyHeader-nav"><?= Lang::get('torrents.revert_confirm') ?></h2>
+                <h2 class="BodyHeader-nav"><?= t('server.torrents.revert_confirm') ?></h2>
             </div>
             <div class="BoxBody">
                 <form class="confirm_form" name="torrent_group" action="torrents.php" method="get">
@@ -36,7 +36,7 @@ if (!empty($_GET['action']) && $_GET['action'] == 'revert') { // if we're revert
                     <input type="hidden" name="confirm" value="true" />
                     <input type="hidden" name="groupid" value="<?= $GroupID ?>" />
                     <input type="hidden" name="revisionid" value="<?= $RevisionID ?>" />
-                    <h3><?= Lang::get('torrents.revert_confirm_body_1') ?> <a href="torrents.php?id=<?= $GroupID ?>&amp;revisionid=<?= $RevisionID ?>"><?= $RevisionID ?></a><?= Lang::get('torrents.revert_confirm_body_2') ?></h3>
+                    <h3><?= t('server.torrents.revert_confirm_body_1') ?> <a href="torrents.php?id=<?= $GroupID ?>&amp;revisionid=<?= $RevisionID ?>"><?= $RevisionID ?></a><?= t('server.torrents.revert_confirm_body_2') ?></h3>
                     <input class="Button" type="submit" value="Confirm" />
                 </form>
             </div>

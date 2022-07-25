@@ -172,10 +172,10 @@ if (isset($_POST['confirm'])) {
 
   header("Location: artist.php?action=edit&artistid=$NewArtistID");
 } else {
-  View::show_header(Lang::get('artist.merging_artists'), 'PageChangeArtistId');
+  View::show_header(t('server.artist.merging_artists'), 'PageChangeArtistId');
 ?>
   <div class="BodyHeader">
-    <h2 class="BodyHeader-nav"><?= Lang::get('artist.confirm_merge') ?></h2>
+    <h2 class="BodyHeader-nav"><?= t('server.artist.confirm_merge') ?></h2>
   </div>
   <form class="merge_form" name="artist" action="artist.php" method="post">
     <input type="hidden" name="action" value="change_artistid" />
@@ -184,7 +184,7 @@ if (isset($_POST['confirm'])) {
     <input type="hidden" name="newartistid" value="<?= $NewArtistID ?>" />
     <input type="hidden" name="confirm" value="1" />
     <div style="text-align: center;">
-      <p id="confirm_merge_note"><?= Lang::get('artist.confirm_merge_1') ?><a href="artist.php?id=<?= $ArtistID ?>"><?= display_str($ArtistName) ?> (<?= $ArtistID ?>)</a><?= Lang::get('artist.confirm_merge_2') ?><a href="artist.php?id=<?= $NewArtistID ?>"><?= display_str($NewArtistName) ?> (<?= $NewArtistID ?>)</a><?= Lang::get('artist.confirm_merge_3') ?></p>
+      <p id="confirm_merge_note"><?= t('server.artist.confirm_merge_1') ?><a href="artist.php?id=<?= $ArtistID ?>"><?= display_str($ArtistName) ?> (<?= $ArtistID ?>)</a><?= t('server.artist.confirm_merge_2') ?><a href="artist.php?id=<?= $NewArtistID ?>"><?= display_str($NewArtistName) ?> (<?= $NewArtistID ?>)</a><?= t('server.artist.confirm_merge_3') ?></p>
       <input class="Button" type="submit" value="Confirm" />
     </div>
   </form>

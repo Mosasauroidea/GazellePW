@@ -6,10 +6,10 @@ authorize();
 $UserID = $LoggedUser['ID'];
 $Language = '';
 switch (trim($_POST['language'])) {
-  case Lang::get('common.lang_en'):
+  case t('server.common.lang_en'):
     $Language = Lang::EN;
     break;
-  case Lang::get('common.lang_chs'):
+  case t('server.common.lang_chs'):
     $Language = Lang::CHS;
     break;
   default:

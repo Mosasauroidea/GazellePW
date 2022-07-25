@@ -45,17 +45,17 @@ if (count($UserIDs) > 0) {
     $Seeding = $DB->to_array('uid');
 }
 ?>
-<h4 data-tooltip="<?= Lang::get('torrents.show_downloads_title') ?>"><?= Lang::get('torrents.list_of_downloaders') ?></h4>
+<h4 data-tooltip="<?= t('server.torrents.show_downloads_title') ?>"><?= t('server.torrents.list_of_downloaders') ?></h4>
 <? if ($NumResults > 100) { ?>
     <div class="BodyNavLinks"><?= js_pages('show_downloads', $_GET['torrentid'], $NumResults, $Page) ?></div>
 <? } ?>
 <div class="TableContainer">
     <table class="TableTorrent Table">
         <tr class="Table-rowHeader">
-            <td class="Table-cell"><?= Lang::get('torrents.user') ?></td>
-            <td class="Table-cell"><?= Lang::get('torrents.time') ?></td>
-            <td class="Table-cell"><?= Lang::get('torrents.user') ?></td>
-            <td class="Table-cell"><?= Lang::get('torrents.time') ?></td>
+            <td class="Table-cell"><?= t('server.torrents.user') ?></td>
+            <td class="Table-cell"><?= t('server.torrents.time') ?></td>
+            <td class="Table-cell"><?= t('server.torrents.user') ?></td>
+            <td class="Table-cell"><?= t('server.torrents.time') ?></td>
         </tr>
         <tr>
             <?

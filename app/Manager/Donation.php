@@ -76,7 +76,7 @@ class Donation extends \Gazelle\Base {
     public function prepaidCardDonate(int $PrepaidCardID, $Who) {
         $prepaidCardInfo = $this->prepaidCard($PrepaidCardID);
         if (empty($prepaidCardInfo)) {
-            return Lang::get('donate.donate_error');
+            return t('server.donate.donate_error');
         }
         $UserID = $prepaidCardInfo['user_id'];
         $this->db->prepared_query(
@@ -161,7 +161,7 @@ class Donation extends \Gazelle\Base {
             $this->db->prepared_query('INSERT INTO donations_prepaid_card (user_id, create_time, card_num, card_secret, face_value)
                 VALUES (?, ?, ?, ?, ?)', $UserID, $Date, $CardNum, $CardSecret, $FaceValue);
         } catch (DB_MYSQL_DuplicateKeyException $e) {
-            return Lang::get('donate.duplicated_card');
+            return t('server.donate.duplicated_card');
         }
 
         $this->cache->delete_value("user_donations_prepaid_card_$UserID");
@@ -198,7 +198,7 @@ class Donation extends \Gazelle\Base {
     public function rejectPrepaidCard($PrepaidCardID) {
         $prepaidCardInfo = $this->prepaidCard($PrepaidCardID);
         if (empty($prepaidCardInfo)) {
-            return Lang::get('donate.donate_error');
+            return t('server.donate.donate_error');
         }
         $UserID = $prepaidCardInfo['user_id'];
 
@@ -224,7 +224,7 @@ class Donation extends \Gazelle\Base {
 			WHERE ID = '$UserID'
 			LIMIT 1");
         if (!$this->db->has_results()) {
-            return Lang::get('donate.donate_error');
+            return t('server.donate.donate_error');
         }
 
         $this->cache->InternalCache = false;
@@ -331,7 +331,7 @@ class Donation extends \Gazelle\Base {
 
     public static function rankLabel($rank, $specialRank, $ShowOverflow = true) {
         if ($specialRank == MAX_SPECIAL_RANK) {
-            return '∞ [' . Lang::get('donate.diamond_rank') . ']';
+            return '∞ [' . t('server.donate.diamond_rank') . ']';
         }
         $label = $rank >= MAX_RANK ? MAX_RANK : $rank;
         $overflow = $rank - $label;
@@ -339,15 +339,15 @@ class Donation extends \Gazelle\Base {
             $label .= " (+$overflow)";
         }
         if ($rank >= 6) {
-            $label .= ' [' . Lang::get('donate.gold_rank') . ']';
+            $label .= ' [' . t('server.donate.gold_rank') . ']';
         } elseif ($rank >= 4) {
-            $label .= ' [' . Lang::get('donate.silver_rank') . ']';
+            $label .= ' [' . t('server.donate.silver_rank') . ']';
         } elseif ($rank >= 3) {
-            $label .= ' [' . Lang::get('donate.bronze_rank') . ']';
+            $label .= ' [' . t('server.donate.bronze_rank') . ']';
         } elseif ($rank >= 2) {
-            $label .= ' [' . Lang::get('donate.copper_rank') . ']';
+            $label .= ' [' . t('server.donate.copper_rank') . ']';
         } elseif ($rank >= 1) {
-            $label .= ' [' . Lang::get('donate.red_rank') . ']';
+            $label .= ' [' . t('server.donate.red_rank') . ']';
         }
         return $label;
     }

@@ -52,7 +52,7 @@ if (isset($auth_code_arr[4])) {
     Misc::send_pm_with_tpl($JF_AuthorID, 'award_withdrawal', ['JF_TopicID' => $JF_TopicID, 'JF_PostID' => $JF_PostID]);
 } else {
     if ($JF_AuthorID == $JF_uid && !$JF_sys) {
-        echo json_encode(array('ret' => 0, 'msg' => Lang::get('forums.you_can_t_award_yourself')));
+        echo json_encode(array('ret' => 0, 'msg' => t('server.forums.you_can_t_award_yourself')));
         die();
     }
     if ($JF == 0 && $comment == "") {

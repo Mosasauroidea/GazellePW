@@ -6,15 +6,13 @@
 .u-bbcodePreview-button data-id=<id>
 */
 
-const EDIT = lang.get('bbcode.edit')
-const PREVIEW = lang.get('bbcode.preview')
-const LOADING = lang.get('bbcode.loading')
+const EDIT = t('client.bbcode.edit')
+const PREVIEW = t('client.bbcode.preview')
+const LOADING = t('client.bbcode.loading')
 
 export default class BBCodePreview {
   static register() {
-    for (const buttonEl of document.querySelectorAll(
-      '.u-bbcodePreview-button'
-    )) {
+    for (const buttonEl of document.querySelectorAll('.u-bbcodePreview-button')) {
       new BBCodePreview({ buttonEl }).register()
     }
   }
@@ -51,12 +49,8 @@ export default class BBCodePreview {
   }
 
   getPairs() {
-    const textEls = [
-      ...document.querySelectorAll(`.BBCodePreview-text.group${this.id}`),
-    ]
-    const htmlEls = [
-      ...document.querySelectorAll(`.BBCodePreview-html.group${this.id}`),
-    ]
+    const textEls = [...document.querySelectorAll(`.BBCodePreview-text.group${this.id}`)]
+    const htmlEls = [...document.querySelectorAll(`.BBCodePreview-html.group${this.id}`)]
     const pairs = textEls.map((textEl, i) => ({
       textEl,
       htmlEl: htmlEls[i],

@@ -4,16 +4,16 @@ if (!check_perms('site_view_flow')) {
     error(403);
 }
 
-View::show_header(Lang::get('tools.h2_os_and_browser_usage'), '', 'PageToolPlatformUsage');
+View::show_header(t('server.tools.h2_os_and_browser_usage'), '', 'PageToolPlatformUsage');
 
 ?>
 <div class="BodyHeader">
-    <h2 class="BodyHeader-nav"><?= Lang::get('tools.os_usage') ?></h2>
+    <h2 class="BodyHeader-nav"><?= t('server.tools.os_usage') ?></h2>
 </div>
 <table class="Table">
     <tr class="Table-rowHeader">
-        <td class="Table-cell"><?= Lang::get('tools.os') ?></td>
-        <td class="Table-cell"><?= Lang::get('tools.count') ?></td>
+        <td class="Table-cell"><?= t('server.tools.os') ?></td>
+        <td class="Table-cell"><?= t('server.tools.count') ?></td>
     </tr>
 
     <?php
@@ -29,12 +29,12 @@ View::show_header(Lang::get('tools.h2_os_and_browser_usage'), '', 'PageToolPlatf
     ?>
 </table>
 <div class="BodyHeader">
-    <h2 class="BodyHeader-nav"><?= Lang::get('tools.browser_usage') ?></h2>
+    <h2 class="BodyHeader-nav"><?= t('server.tools.browser_usage') ?></h2>
 </div>
 <table class="Table">
     <tr class="Table-rowHeader">
-        <td class="Table-cell"><?= Lang::get('tools.browser') ?></td>
-        <td class="Table-cell"><?= Lang::get('tools.count') ?></td>
+        <td class="Table-cell"><?= t('server.tools.browser') ?></td>
+        <td class="Table-cell"><?= t('server.tools.count') ?></td>
     </tr>
 
     <?php

@@ -85,33 +85,33 @@ if (!empty($_GET['threadid']) && is_number($_GET['threadid'])) {
 }
 
 // Let's hope we got some results - start printing out the content.
-View::show_header(Lang::get('forums.forums_greater_than_search'), 'bbcode,forum_search,datetime_picker', 'PageFormSearch');
+View::show_header(t('server.forums.forums_greater_than_search'), 'bbcode,forum_search,datetime_picker', 'PageFormSearch');
 ?>
 <div class="LayoutBody">
     <div class="BodyHeader">
-        <h2 class="BodyHeader-nav"><a href="forums.php"><?= Lang::get('forums.forums') ?></a> &gt; <?= Lang::get('forums.search') ?><?= $Title ?></h2>
+        <h2 class="BodyHeader-nav"><a href="forums.php"><?= t('server.forums.forums') ?></a> &gt; <?= t('server.forums.search') ?><?= $Title ?></h2>
     </div>
     <form class="Form SearchPage Box SearchForum" name="forums" action="" method="get">
         <input type="hidden" name="action" value="search" />
         <table class="Form-rowList">
             <tr class="Form-row">
-                <td class="Form-label"><?= Lang::get('forums.search_for') ?>:</td>
+                <td class="Form-label"><?= t('server.forums.search_for') ?>:</td>
                 <td class="Form-inputs">
                     <input class="Input" type="text" name="search" size="70" value="<?= display_str($Search) ?>" />
                 </td>
             </tr>
             <tr class="Form-row">
-                <td class="Form-label"><?= Lang::get('forums.posted_by') ?>:</td>
+                <td class="Form-label"><?= t('server.forums.posted_by') ?>:</td>
                 <td class="Form-inputs">
                     <input class="Input" type="text" name="user" placeholder="Username" size="70" value="<?= display_str($User) ?>" />
                 </td>
             </tr>
             <tr class="Form-row">
-                <td class="Form-label"><?= Lang::get('forums.topic_created') ?>:</td>
+                <td class="Form-label"><?= t('server.forums.topic_created') ?>:</td>
                 <td class="Form-inputs">
-                    <?= Lang::get('forums.after') ?>:
+                    <?= t('server.forums.after') ?>:
                     <input class="Input is-small" type="text" name="thread_created_after" id="thread_created_after" value="<?= $ThreadAfterDate ?>" />
-                    <?= Lang::get('forums.before') ?>:
+                    <?= t('server.forums.before') ?>:
                     <input class="Input is-small" type="text" name="thread_created_before" id="thread_created_before" value="<?= $ThreadBeforeDate ?>" />
                 </td>
             </tr>
@@ -119,33 +119,33 @@ View::show_header(Lang::get('forums.forums_greater_than_search'), 'bbcode,forum_
             if (empty($ThreadID)) {
             ?>
                 <tr class="Form-row">
-                    <td class="Form-label"><?= Lang::get('forums.search_in') ?>:</td>
+                    <td class="Form-label"><?= t('server.forums.search_in') ?>:</td>
                     <td class="Form-inputs">
                         <div class="Radio">
                             <input class="Input" type="radio" name="type" id="type_title" value="title" <? if ($Type == 'title') {
                                                                                                             echo ' checked="checked"';
                                                                                                         } ?> />
-                            <label class="Radio-label" for="type_title"><?= Lang::get('forums.titles') ?></label>
+                            <label class="Radio-label" for="type_title"><?= t('server.forums.titles') ?></label>
                         </div>
                         <div class="Radio">
                             <input class="Input" type="radio" name="type" id="type_body" value="body" <? if ($Type == 'body') {
                                                                                                             echo ' checked="checked"';
                                                                                                         } ?> />
-                            <label class="Radio-label" for="type_body"><?= Lang::get('forums.post_bodies') ?></label>
+                            <label class="Radio-label" for="type_body"><?= t('server.forums.post_bodies') ?></label>
                         </div>
                     </td>
                 </tr>
                 <tr class="Form-row <?= $Type == 'title' ? 'hidden' : '' ?>" id="post_created_row">
-                    <td class="Form-label"><?= Lang::get('forums.post_created') ?>:</td>
+                    <td class="Form-label"><?= t('server.forums.post_created') ?>:</td>
                     <td class="Form-inputs">
-                        <?= Lang::get('forums.after') ?>:
+                        <?= t('server.forums.after') ?>:
                         <input class="Input" type="text" name="post_created_after" id="post_created_after" value="<?= $PostAfterDate ?>" />
-                        <?= Lang::get('forums.before') ?>:
+                        <?= t('server.forums.before') ?>:
                         <input class="Input" type="text" name="post_created_before" id="post_created_before" value="<?= $PostBeforeDate ?>" />
                     </td>
                 </tr>
                 <tr class="Form-row" variant="alighLeft">
-                    <td class="Form-label"><?= Lang::get('forums.search_forums') ?>:</td>
+                    <td class="Form-label"><?= t('server.forums.search_forums') ?>:</td>
                     <td class="Form-inputs">
                         <table class="SearchForum-forumList" id="forum_search_cat_list">
                             <?
@@ -180,7 +180,7 @@ View::show_header(Lang::get('forums.forums_greater_than_search'), 'bbcode,forum_
             <tr class="Form-row" variant="alignLeft">
                 <td colspan="5" class="forum_cat">
                     <strong><?= $ForumCats[$Forum['CategoryID']] ?></strong>
-                    <a href="#" class="brackets forum_category" id="forum_category_<?= $i ?>"><?= Lang::get('forums.check_all') ?></a>
+                    <a href="#" class="brackets forum_category" id="forum_category_<?= $i ?>"><?= t('server.forums.check_all') ?></a>
                 </td>
             </tr>
             <tr class="Form-row" variant="alignLeft">
@@ -321,21 +321,21 @@ View::show_header(Lang::get('forums.forums_greater_than_search'), 'bbcode,forum_
         <table class="TableForum Table">
             <tr class="Table-rowHeader">
                 <td class="TableForum-cellForumName Table-cell">
-                    <?= Lang::get('forums.forum') ?>
+                    <?= t('server.forums.forum') ?>
                 </td>
                 <td class="TableForum-cellPost Table-cell">
-                    <?= ((!empty($ThreadID)) ? 'Post begins' : Lang::get('forums.topic')) ?>
+                    <?= ((!empty($ThreadID)) ? 'Post begins' : t('server.forums.topic')) ?>
                 </td>
                 <td class="TableForum-cellCreatedAt TableForum-cellTime Table-cell">
-                    <?= Lang::get('forums.topic_creation_time') ?>
+                    <?= t('server.forums.topic_creation_time') ?>
                 </td>
                 <td class="TableForum-cellModifiedAt TableForum-cellTime Table-cell">
-                    <?= Lang::get('forums.last_post_time') ?>
+                    <?= t('server.forums.last_post_time') ?>
                 </td>
             </tr>
             <? if (!$DB->has_results()) { ?>
                 <tr class="TableForum-row Table-row">
-                    <td class="TableForum-cellEmptyState Table-cell" colspan="4">Nothing found<?= ((isset($AuthorID) && $AuthorID == 0) ? Lang::get('forums.unknown_username') : '') ?>!</td>
+                    <td class="TableForum-cellEmptyState Table-cell" colspan="4">Nothing found<?= ((isset($AuthorID) && $AuthorID == 0) ? t('server.forums.unknown_username') : '') ?>!</td>
                 </tr>
             <? }
 

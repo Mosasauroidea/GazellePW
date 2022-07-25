@@ -10,7 +10,7 @@ if (isset($_POST['submit']) && isset($_POST['id']) && $_POST['submit'] == 'Unban
 		WHERE ID = ' . $_POST['id']);
 }
 
-View::show_header(Lang::get('tools.login_watch'));
+View::show_header(t('server.tools.login_watch'));
 
 $DB->query('
 	SELECT
@@ -27,17 +27,17 @@ $DB->query('
 ?>
 <div class="LayoutBody">
     <div class="BodyHeader">
-        <h2 class="BodyHeader-nav"><?= Lang::get('tools.login_watch') ?></h2>
+        <h2 class="BodyHeader-nav"><?= t('server.tools.login_watch') ?></h2>
     </div>
     <table class="Table">
         <tr class="Table-rowHeader">
             <td class="Table-cell">IP</td>
-            <td class="Table-cell"><?= Lang::get('tools.user') ?></td>
-            <td class="Table-cell"><?= Lang::get('tools.bans') ?></td>
-            <td class="Table-cell"><?= Lang::get('tools.remaining') ?></td>
-            <td class="Table-cell"><?= Lang::get('tools.submit') ?></td>
+            <td class="Table-cell"><?= t('server.tools.user') ?></td>
+            <td class="Table-cell"><?= t('server.tools.bans') ?></td>
+            <td class="Table-cell"><?= t('server.tools.remaining') ?></td>
+            <td class="Table-cell"><?= t('server.tools.submit') ?></td>
             <? if (check_perms('admin_manage_ipbans')) { ?>
-                <td class="Table-cell"><?= Lang::get('tools.submit') ?></td>
+                <td class="Table-cell"><?= t('server.tools.submit') ?></td>
             <?  } ?>
         </tr>
         <?

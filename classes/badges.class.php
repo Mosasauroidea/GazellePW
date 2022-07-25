@@ -13,7 +13,7 @@ class Badges {
     );
     static $Lang = false;
     public static function get_text($Label, $Type) {
-        return Lang::get("badges.{$Label}_$Type", [
+        return t("server.badges.{$Label}_$Type", [
             'DefaultValue' =>
             "{$Label}_$Type"
         ]);

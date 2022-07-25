@@ -29,7 +29,7 @@ Tools necessary for economic management
 if (!check_perms('site_view_flow')) {
     error(403);
 }
-View::show_header(Lang::get('tools.economy'), '', 'PageToolEconomicStat');
+View::show_header(t('server.tools.economy'), '', 'PageToolEconomicStat');
 
 if (!$EconomicStats = $Cache->get_value('new_economic_stats')) {
     $DB->query("
@@ -104,47 +104,47 @@ $TotalLeechers = $TotalPeers - $TotalSeeders;
 ?>
 <div class="LayoutBody">
     <div class="box">
-        <div class="head"><?= Lang::get('tools.overall_stats') ?></div>
+        <div class="head"><?= t('server.tools.overall_stats') ?></div>
         <div class="pad">
             <ul class="stats nobullet">
-                <li><strong><?= Lang::get('tools.total_upload') ?>: </strong><?= Format::get_size($TotalUpload) ?></li>
-                <li><strong><?= Lang::get('tools.total_download') ?>: </strong><?= Format::get_size($TotalDownload) ?></li>
-                <li><strong><?= Lang::get('tools.total_buffer') ?>: </strong><?= Format::get_size($TotalUpload / 1.05 - $TotalDownload) ?></li>
+                <li><strong><?= t('server.tools.total_upload') ?>: </strong><?= Format::get_size($TotalUpload) ?></li>
+                <li><strong><?= t('server.tools.total_download') ?>: </strong><?= Format::get_size($TotalDownload) ?></li>
+                <li><strong><?= t('server.tools.total_buffer') ?>: </strong><?= Format::get_size($TotalUpload / 1.05 - $TotalDownload) ?></li>
                 <br />
-                <li><strong><?= Lang::get('tools.mean_ratio') ?>: </strong><?= Format::get_ratio_html($TotalUpload, $TotalDownload) ?></li>
-                <li><strong><?= Lang::get('tools.mean_upload') ?>: </strong><?= Format::get_size($TotalUpload / $NumUsers) ?></li>
-                <li><strong><?= Lang::get('tools.mean_download') ?>: </strong><?= Format::get_size($TotalDownload / $NumUsers) ?></li>
-                <li><strong><?= Lang::get('tools.mean_buffer') ?>: </strong><?= Format::get_size(($TotalUpload - $TotalDownload) / $NumUsers) ?></li>
+                <li><strong><?= t('server.tools.mean_ratio') ?>: </strong><?= Format::get_ratio_html($TotalUpload, $TotalDownload) ?></li>
+                <li><strong><?= t('server.tools.mean_upload') ?>: </strong><?= Format::get_size($TotalUpload / $NumUsers) ?></li>
+                <li><strong><?= t('server.tools.mean_download') ?>: </strong><?= Format::get_size($TotalDownload / $NumUsers) ?></li>
+                <li><strong><?= t('server.tools.mean_buffer') ?>: </strong><?= Format::get_size(($TotalUpload - $TotalDownload) / $NumUsers) ?></li>
                 <br />
-                <li><strong><?= Lang::get('tools.total_request_bounty') ?>: </strong><?= Format::get_size($TotalBounty) ?></li>
-                <li><strong><?= Lang::get('tools.available_request_bounty') ?>: </strong><?= Format::get_size($AvailableBounty) ?></li>
+                <li><strong><?= t('server.tools.total_request_bounty') ?>: </strong><?= Format::get_size($TotalBounty) ?></li>
+                <li><strong><?= t('server.tools.available_request_bounty') ?>: </strong><?= Format::get_size($AvailableBounty) ?></li>
             </ul>
         </div>
     </div>
     <br />
     <div class="box">
-        <div class="head"><?= Lang::get('tools.swarms_and_snatches') ?></div>
+        <div class="head"><?= t('server.tools.swarms_and_snatches') ?></div>
         <div class="pad">
             <ul class="stats nobullet">
-                <li><strong><?= Lang::get('tools.total_seeders') ?>: </strong><?= number_format($TotalSeeders) ?></li>
-                <li><strong><?= Lang::get('tools.total_leechers') ?>: </strong><?= number_format($TotalLeechers) ?></li>
-                <li><strong><?= Lang::get('tools.total_leechers') ?>: </strong><?= number_format($TotalSeeders + $TotalLeechers) ?></li>
-                <li><strong><?= Lang::get('tools.total_snatches') ?>: </strong><?= number_format($TotalOverallSnatches) ?></li>
-                <li><strong><?= Lang::get('tools.seeder_leecher_ratio') ?>: </strong><?= Format::get_ratio_html($TotalSeeders, $TotalLeechers) ?></li>
-                <li><strong><?= Lang::get('tools.seeder_snatch_ratio') ?>: </strong><?= Format::get_ratio_html($TotalSeeders, $TotalOverallSnatches) ?></li>
+                <li><strong><?= t('server.tools.total_seeders') ?>: </strong><?= number_format($TotalSeeders) ?></li>
+                <li><strong><?= t('server.tools.total_leechers') ?>: </strong><?= number_format($TotalLeechers) ?></li>
+                <li><strong><?= t('server.tools.total_leechers') ?>: </strong><?= number_format($TotalSeeders + $TotalLeechers) ?></li>
+                <li><strong><?= t('server.tools.total_snatches') ?>: </strong><?= number_format($TotalOverallSnatches) ?></li>
+                <li><strong><?= t('server.tools.seeder_leecher_ratio') ?>: </strong><?= Format::get_ratio_html($TotalSeeders, $TotalLeechers) ?></li>
+                <li><strong><?= t('server.tools.seeder_snatch_ratio') ?>: </strong><?= Format::get_ratio_html($TotalSeeders, $TotalOverallSnatches) ?></li>
                 <br />
-                <li><strong><?= Lang::get('tools.mean_seeders_per_torrent') ?>: </strong><?= number_format($TotalSeeders / $TotalTorrents, 2) ?></li>
-                <li><strong><?= Lang::get('tools.mean_leechers_per_torrent') ?>: </strong><?= number_format($TotalLeechers / $TotalTorrents, 2) ?></li>
-                <li><strong><?= Lang::get('tools.mean_snatches_per_torrent') ?>: </strong><?= number_format($TotalSnatches / $TotalTorrents, 2) ?></li>
+                <li><strong><?= t('server.tools.mean_seeders_per_torrent') ?>: </strong><?= number_format($TotalSeeders / $TotalTorrents, 2) ?></li>
+                <li><strong><?= t('server.tools.mean_leechers_per_torrent') ?>: </strong><?= number_format($TotalLeechers / $TotalTorrents, 2) ?></li>
+                <li><strong><?= t('server.tools.mean_snatches_per_torrent') ?>: </strong><?= number_format($TotalSnatches / $TotalTorrents, 2) ?></li>
                 <br />
-                <li><strong><?= Lang::get('tools.mean_seeding_per_user') ?>: </strong><?= number_format($TotalSeeders / $NumUsers, 2) ?></li>
-                <li><strong><?= Lang::get('tools.mean_leeching_per_user') ?>: </strong><?= number_format($TotalLeechers / $NumUsers, 2) ?></li>
-                <li><strong><?= Lang::get('tools.mean_snatches_per_user') ?>: </strong><?= number_format($TotalOverallSnatches / $NumUsers, 2) ?></li>
+                <li><strong><?= t('server.tools.mean_seeding_per_user') ?>: </strong><?= number_format($TotalSeeders / $NumUsers, 2) ?></li>
+                <li><strong><?= t('server.tools.mean_leeching_per_user') ?>: </strong><?= number_format($TotalLeechers / $NumUsers, 2) ?></li>
+                <li><strong><?= t('server.tools.mean_snatches_per_user') ?>: </strong><?= number_format($TotalOverallSnatches / $NumUsers, 2) ?></li>
                 <br />
-                <li><strong><?= Lang::get('tools.total_users_in_at_least_1_swarm') ?>: </strong><?= number_format($TotalPeerUsers) ?></li>
-                <li><strong><?= Lang::get('tools.mean_seeding_per_user_in_at_least_1_swarm') ?>: </strong><?= number_format($TotalSeeders / $TotalPeerUsers, 2) ?></li>
-                <li><strong><?= Lang::get('tools.mean_leeching_per_user_in_at_least_1_swarm') ?>: </strong><?= number_format($TotalLeechers / $TotalPeerUsers, 2) ?></li>
-                <li><strong><?= Lang::get('tools.mean_snatches_per_user_in_at_least_1_swarm') ?>: </strong><?= number_format($TotalSnatches / $TotalPeerUsers, 2) ?></li>
+                <li><strong><?= t('server.tools.total_users_in_at_least_1_swarm') ?>: </strong><?= number_format($TotalPeerUsers) ?></li>
+                <li><strong><?= t('server.tools.mean_seeding_per_user_in_at_least_1_swarm') ?>: </strong><?= number_format($TotalSeeders / $TotalPeerUsers, 2) ?></li>
+                <li><strong><?= t('server.tools.mean_leeching_per_user_in_at_least_1_swarm') ?>: </strong><?= number_format($TotalLeechers / $TotalPeerUsers, 2) ?></li>
+                <li><strong><?= t('server.tools.mean_snatches_per_user_in_at_least_1_swarm') ?>: </strong><?= number_format($TotalSnatches / $TotalPeerUsers, 2) ?></li>
             </ul>
         </div>
     </div>

@@ -119,9 +119,6 @@ RUN useradd -ms /bin/bash gazelle \
     && cp /var/www/.docker/web/php.ini /etc/php/7.3/cli/php.ini \
     && cp /var/www/.docker/web/php.ini /etc/php/7.3/fpm/php.ini \
     && cp /var/www/.docker/web/xdebug.ini /etc/php/7.3/mods-available/xdebug.ini \
-    && cp /var/www/.docker/web/www.conf /etc/php/7.3/fpm/pool.d/www.conf \
-    && cp /var/www/.docker/web/nginx.conf /etc/nginx/sites-available/gazelle.conf \
-    && ln -s /etc/nginx/sites-available/gazelle.conf /etc/nginx/sites-enabled/gazelle.conf \
     && rm -f /etc/nginx/sites-enabled/default
 
 EXPOSE 80/tcp

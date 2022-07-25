@@ -31,7 +31,7 @@ if (!empty($_GET['ip']) && trim($_GET['ip']) != '') {
     $SearchIPQuery = "";
 }
 
-View::show_header(Lang::get('userhistory.ip_address_history_for_before') . "$UserInfo[Username]" . Lang::get('userhistory.ip_address_history_for_after'), '', 'PageUserHistoryIP');
+View::show_header(t('server.userhistory.ip_address_history_for_before') . "$UserInfo[Username]" . t('server.userhistory.ip_address_history_for_after'), '', 'PageUserHistoryIP');
 ?>
 <script type="text/javascript">
     //<![CDATA[
@@ -173,13 +173,13 @@ $Pages = Format::get_pages($Page, $NumResults, IPS_PER_PAGE, 9);
 ?>
 <div class="LayoutBody">
     <div class="BodyHeader">
-        <h2 class="BodyHeader-nav"><?= Lang::get('userhistory.ip_address_history_for_before') ?><a href="user.php?id=<?= $UserID ?>"><?= $UserInfo['Username'] ?></a><?= Lang::get('userhistory.ip_address_history_for_after') ?></h2>
+        <h2 class="BodyHeader-nav"><?= t('server.userhistory.ip_address_history_for_before') ?><a href="user.php?id=<?= $UserID ?>"><?= $UserInfo['Username'] ?></a><?= t('server.userhistory.ip_address_history_for_after') ?></h2>
         <div class="BodyNavLinks">
             <?
             if ($UsersOnly) { ?>
-                <a href="userhistory.php?<?= Format::get_url(array('usersonly')) ?>" class="brackets"><?= Lang::get('userhistory.view_all_ip_address') ?></a>
+                <a href="userhistory.php?<?= Format::get_url(array('usersonly')) ?>" class="brackets"><?= t('server.userhistory.view_all_ip_address') ?></a>
             <?  } else { ?>
-                <a href="userhistory.php?<?= Format::get_url() ?>&amp;usersonly=1" class="brackets"><?= Lang::get('userhistory.view_ip_addresses_with_users') ?></a>
+                <a href="userhistory.php?<?= Format::get_url() ?>&amp;usersonly=1" class="brackets"><?= t('server.userhistory.view_ip_addresses_with_users') ?></a>
             <?  } ?>
         </div>
         <?
@@ -189,7 +189,7 @@ $Pages = Format::get_pages($Page, $NumResults, IPS_PER_PAGE, 9);
     </div>
     <table class="Table">
         <tr class="Table-rowHeader">
-            <td class="Table-cell"><?= Lang::get('userhistory.ip_address_search') ?></td>
+            <td class="Table-cell"><?= t('server.userhistory.ip_address_search') ?></td>
         </tr>
         <tr class="Table-row">
             <td class="Table-cell">
@@ -201,7 +201,7 @@ $Pages = Format::get_pages($Page, $NumResults, IPS_PER_PAGE, 9);
                     <?  } ?>
                     <input class="Input" type="text" name="ip" value="<?= Format::form('ip') ?>" />
                     <input class="Button" type="submit" value="Search" />
-                    <?= Lang::get('userhistory.wildcard_search_examples') ?>
+                    <?= t('server.userhistory.wildcard_search_examples') ?>
                 </form>
             </td>
         </tr>
@@ -210,11 +210,11 @@ $Pages = Format::get_pages($Page, $NumResults, IPS_PER_PAGE, 9);
     <div class="TableContainer">
         <table class="TableUserIPHistory Table">
             <tr class="Table-rowHeader">
-                <td class="Table-cell"><?= Lang::get('userhistory.ip_address') ?></td>
-                <td class="Table-cell"><?= Lang::get('userhistory.started') ?> <a href="#" onclick="$('#iphistory .reltime').gtoggle(); $('#iphistory .abstime').gtoggle(); return false;" class="brackets"><?= Lang::get('global.toggle') ?></a></td>
-                <td class="Table-cell"><?= Lang::get('userhistory.ended') ?></td>
-                <td class="Table-cell hidden"><?= Lang::get('userhistory.ended') ?></td>
-                <td class="Table-cell"><?= Lang::get('userhistory.elapsed') ?></td>
+                <td class="Table-cell"><?= t('server.userhistory.ip_address') ?></td>
+                <td class="Table-cell"><?= t('server.userhistory.started') ?> <a href="#" onclick="$('#iphistory .reltime').gtoggle(); $('#iphistory .abstime').gtoggle(); return false;" class="brackets"><?= t('server.global.toggle') ?></a></td>
+                <td class="Table-cell"><?= t('server.userhistory.ended') ?></td>
+                <td class="Table-cell hidden"><?= t('server.userhistory.ended') ?></td>
+                <td class="Table-cell"><?= t('server.userhistory.elapsed') ?></td>
             </tr>
             <?
             $Counter = 0;

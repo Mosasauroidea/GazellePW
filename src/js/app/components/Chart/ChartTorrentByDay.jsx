@@ -8,7 +8,7 @@ export const ChartTorrentByDay = () => {
       type: 'spline',
     },
     title: {
-      text: lang.get('stats.torrentByDay'),
+      text: t('client.stats.torrentByDay'),
     },
     series: [
       {
@@ -28,10 +28,5 @@ export const ChartTorrentByDay = () => {
       tickInterval: 24 * 3600 * 1000,
     },
   })
-  return (
-    <Chart
-      options={options}
-      containerProps={{ className: 'ChartStat ChartTorrentByDay' }}
-    />
-  )
+  return <Chart options={options} containerProps={{ className: 'ChartStat ChartTorrentByDay' }} />
 }

@@ -25,9 +25,9 @@ if (isset($_POST['name'])) {
     if ($DB->has_results()) {
         list($ID, $Deleted) = $DB->next_record();
         if ($Deleted) {
-            $Err = Lang::get('collages.a_collage_with_that_name_already_exists_1');
+            $Err = t('server.collages.a_collage_with_that_name_already_exists_1');
         } else {
-            $Err = Lang::get('collages.a_collage_with_that_name_already_exists_2');
+            $Err = t('server.collages.a_collage_with_that_name_already_exists_2');
         }
         $ErrNoEscape = true;
         include(CONFIG['SERVER_ROOT'] . '/sections/collages/edit.php');
@@ -45,7 +45,7 @@ $Updates = array("Description='" . db_string($_POST['description']) . "', TagLis
 
 if (!check_perms('site_collages_delete') && ($CategoryID == $PersonalCollageCategoryCat && $UserID == $LoggedUser['ID'] && check_perms('site_collages_renamepersonal'))) {
     if (!stristr($_POST['name'], $LoggedUser['Username'])) {
-        error(Lang::get('collages.your_personal_collage_must'));
+        error(t('server.collages.your_personal_collage_must'));
     }
 }
 

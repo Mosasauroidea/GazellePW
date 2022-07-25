@@ -131,12 +131,12 @@ globalapp.requestAddArtistField = function requestAddArtistField(movie = false) 
   var ImportanceField = document.createElement('select')
   ImportanceField.id = 'importance_' + ArtistCount
   ImportanceField.name = 'importance[]'
-  ImportanceField.options[0] = new Option(lang.get('common.director'), '1')
-  ImportanceField.options[1] = new Option(lang.get('common.writer'), '2')
-  ImportanceField.options[2] = new Option(lang.get('common.producer'), '3')
-  ImportanceField.options[3] = new Option(lang.get('common.composer'), '4')
-  ImportanceField.options[4] = new Option(lang.get('common.cinematographer'), '5')
-  ImportanceField.options[5] = new Option(lang.get('common.actor'), '6')
+  ImportanceField.options[0] = new Option(t('client.common.director'), '1')
+  ImportanceField.options[1] = new Option(t('client.common.writer'), '2')
+  ImportanceField.options[2] = new Option(t('client.common.producer'), '3')
+  ImportanceField.options[3] = new Option(t('client.common.composer'), '4')
+  ImportanceField.options[4] = new Option(t('client.common.cinematographer'), '5')
+  ImportanceField.options[5] = new Option(t('client.common.actor'), '6')
 
   var x = $('#artistfields').raw()
   const div = document.createElement('div')

@@ -1,5 +1,5 @@
 <?
-View::show_header(Lang::get('register.register'), '', 'PageEnterStep1');
+View::show_header(t('server.register.register'), '', 'PageEnterStep1');
 echo $Val->GenerateJS('registerform');
 ?>
 <script src="<?= CONFIG['STATIC_SERVER'] ?>functions/validate.js" type="text/javascript"></script>
@@ -19,29 +19,29 @@ echo $Val->GenerateJS('registerform');
             <?  } ?>
             <table class="layout" cellpadding="2" cellspacing="1" border="0" align="center">
                 <tr valign="top">
-                    <td align="right" style="width: 100px;"><?= Lang::get('register.username') ?></td>
+                    <td align="right" style="width: 100px;"><?= t('server.register.username') ?></td>
                     <td align="left">
                         <input class="Input" type="text" name="username" id="username" placeholder="Username" value="<?= (!empty($_REQUEST['username']) ? display_str($_REQUEST['username']) : '') ?>" />
-                        <p class="note"><?= Lang::get('register.username_note') ?></p>
+                        <p class="note"><?= t('server.register.username_note') ?></p>
                     </td>
                 </tr>
                 <tr valign="top">
-                    <td align="right"><?= Lang::get('register.email') ?></td>
+                    <td align="right"><?= t('server.register.email') ?></td>
                     <td align="left">
                         <input class="Input" type="email" name="email" id="email" placeholder="Email" value="<?= (!empty($_REQUEST['email']) ? display_str($_REQUEST['email']) : (!empty($InviteEmail) ? display_str($InviteEmail) : '')) ?>" />
                     </td>
                 </tr>
                 <tr valign="top">
-                    <td align="right"><?= Lang::get('register.password') ?></td>
+                    <td align="right"><?= t('server.register.password') ?></td>
                     <td align="left">
                         <input class="Input" type="password" name="password" id="new_pass_1" placeholder="Password" /> <strong id="pass_strength"></strong>
                     </td>
                 </tr>
                 <tr valign="top">
-                    <td align="right"><?= Lang::get('register.re_password') ?></td>
+                    <td align="right"><?= t('server.register.re_password') ?></td>
                     <td align="left">
                         <input class="Input" type="password" name="confirm_password" id="new_pass_2" placeholder="Verify password" /> <strong id="pass_match"></strong>
-                        <p class="note"><?= Lang::get('register.password_note') ?></p>
+                        <p class="note"><?= t('server.register.password_note') ?></p>
                     </td>
                 </tr>
                 <tr valign="top">
@@ -49,7 +49,7 @@ echo $Val->GenerateJS('registerform');
                     <td align="left">
                         <div class="Checkbox">
                             <input class="Input" type="checkbox" name="readrules" id="readrules" value="1" <? if (!empty($_REQUEST['readrules'])) { ?> checked="checked" <? } ?> />
-                            <label class="Checkbox-label" for="readrules"><?= Lang::get('register.readrules') ?></label>
+                            <label class="Checkbox-label" for="readrules"><?= t('server.register.readrules') ?></label>
                         </div>
                     </td>
                 </tr>
@@ -58,7 +58,7 @@ echo $Val->GenerateJS('registerform');
                     <td align="left">
                         <div class="Checkbox">
                             <input class="Input" type="checkbox" name="readwiki" id="readwiki" value="1" <? if (!empty($_REQUEST['readwiki'])) { ?> checked="checked" <? } ?> />
-                            <label class="Checkbox-label" for="readwiki"><?= Lang::get('register.readwiki') ?></label>
+                            <label class="Checkbox-label" for="readwiki"><?= t('server.register.readwiki') ?></label>
                         </div>
                     </td>
                 </tr>
@@ -67,7 +67,7 @@ echo $Val->GenerateJS('registerform');
                     <td align="left">
                         <div class="Checkbox">
                             <input class="Input" type="checkbox" name="agereq" id="agereq" value="1" <? if (!empty($_REQUEST['agereq'])) { ?> checked="checked" <? } ?> />
-                            <label class="Checkbox-label" for="agereq"><?= Lang::get('register.agereq') ?></label>
+                            <label class="Checkbox-label" for="agereq"><?= t('server.register.agereq') ?></label>
                         </div>
                     </td>
                 </tr>
@@ -75,14 +75,14 @@ echo $Val->GenerateJS('registerform');
                     <td colspan="2" height="10"></td>
                 </tr>
                 <tr>
-                    <td colspan="2" align="right"><input class="Button" type="submit" name="submit" value="<?= Lang::get('register.register') ?>" class="submit" /></td>
+                    <td colspan="2" align="right"><input class="Button" type="submit" name="submit" value="<?= t('server.register.register') ?>" class="submit" /></td>
                 </tr>
             </table>
         <? } else { ?>
-            <p sytle="margin-top: 2.5rem;"><?= Lang::get('register.send_note') ?></p>
+            <p sytle="margin-top: 2.5rem;"><?= t('server.register.send_note') ?></p>
 
         <? if ($NewInstall) {
-                echo Lang::get('register.send_note');
+                echo t('server.register.send_note');
             }
         } ?>
     </div>

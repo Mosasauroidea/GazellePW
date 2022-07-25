@@ -94,6 +94,8 @@ G::$DB = &$DB;
 G::$Debug = &$Debug;
 G::$Twig = &$Twig;
 
+require_once(CONFIG['SERVER_ROOT'] . '/classes/lang.class.php');
+
 //Begin browser identification
 if (session_status() === PHP_SESSION_NONE) {
     session_start();

@@ -31,7 +31,7 @@ if ($Verify === TRUE) {
     $error = $_SESSION['verify_error'];
 }
 
-View::show_header(Lang::get('referral.external_tracker_referrals'), '', 'PageReferralStep2');
+View::show_header(t('server.referral.external_tracker_referrals'), '', 'PageReferralStep2');
 ?>
 <style>
     * {
@@ -57,28 +57,28 @@ View::show_header(Lang::get('referral.external_tracker_referrals'), '', 'PageRef
     }
 </style>
 <div style="width: 500px; text-align: left">
-    <h1><?= Lang::get('referral.external_tracker_referrals') ?></h1>
+    <h1><?= t('server.referral.external_tracker_referrals') ?></h1>
     <br />
-    <p><?= Lang::get('referral.another_tracker_we_trust_1') ?><?php echo CONFIG['SITE_NAME']; ?><?= Lang::get('referral.another_tracker_we_trust_2') ?></p>
+    <p><?= t('server.referral.another_tracker_we_trust_1') ?><?php echo CONFIG['SITE_NAME']; ?><?= t('server.referral.another_tracker_we_trust_2') ?></p>
     <br />
-    <h4><?= Lang::get('referral.process_follows') ?></h4>
+    <h4><?= t('server.referral.process_follows') ?></h4>
     <br />
     <ol>
-        <li><?= Lang::get('referral.choose_a_tracker_you_are_member') ?></li>
-        <li><?php echo CONFIG['SITE_NAME']; ?><?= Lang::get('referral.will_generate_string') ?></li>
-        <li><?= Lang::get('referral.paste_string') ?></li>
-        <li><?= Lang::get('referral.enter_your_username_1') ?><?php echo CONFIG['SITE_NAME']; ?> <?php echo CONFIG['SITE_NAME']; ?><?= Lang::get('referral.enter_your_username_2') ?></li>
-        <li><?= Lang::get('referral.join') ?> <?php echo CONFIG['SITE_NAME']; ?><?= Lang::get('referral.exclamation_mark') ?></li>
+        <li><?= t('server.referral.choose_a_tracker_you_are_member') ?></li>
+        <li><?php echo CONFIG['SITE_NAME']; ?><?= t('server.referral.will_generate_string') ?></li>
+        <li><?= t('server.referral.paste_string') ?></li>
+        <li><?= t('server.referral.enter_your_username_1') ?><?php echo CONFIG['SITE_NAME']; ?> <?php echo CONFIG['SITE_NAME']; ?><?= t('server.referral.enter_your_username_2') ?></li>
+        <li><?= t('server.referral.join') ?> <?php echo CONFIG['SITE_NAME']; ?><?= t('server.referral.exclamation_mark') ?></li>
     </ol>
     <br />
-    <h2><?= Lang::get('referral.step_2') ?><?php echo CONFIG['SITE_NAME']; ?></h2>
+    <h2><?= t('server.referral.step_2') ?><?php echo CONFIG['SITE_NAME']; ?></h2>
     <br />
     <?php if (!$Verify || $error) : ?>
-        <h3><?= Lang::get('referral.an_error_1') ?><?php echo $Service; ?><?= Lang::get('referral.an_error_2') ?></h3>
+        <h3><?= t('server.referral.an_error_1') ?><?php echo $Service; ?><?= t('server.referral.an_error_2') ?></h3>
         <br />
         <p><?php echo $error; ?></p>
     <?php else : ?>
-        <h3><?= Lang::get('referral.congratulations_1') ?><?php echo $Service; ?><?= Lang::get('referral.congratulations_2') ?><?php echo CONFIG['SITE_NAME']; ?><?= Lang::get('referral.exclamation_mark') ?></h3 <?php endif; ?>>
+        <h3><?= t('server.referral.congratulations_1') ?><?php echo $Service; ?><?= t('server.referral.congratulations_2') ?><?php echo CONFIG['SITE_NAME']; ?><?= t('server.referral.exclamation_mark') ?></h3 <?php endif; ?>>
         <br />
 </div>
 <?php View::show_footer(); ?>

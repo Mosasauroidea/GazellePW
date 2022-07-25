@@ -1,4 +1,4 @@
-<? View::show_header(Lang::get('stats.stats'), '', 'PageStatsHome'); ?>
+<? View::show_header(t('server.stats.stats'), '', 'PageStatsHome'); ?>
 
 <?
 $Cache->delete_value('stats_torrent_by_month');

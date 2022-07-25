@@ -27,25 +27,16 @@ globalapp.toggleEdition = function toggleEdition(event, groupId, editionId) {
     rows = [...table.querySelectorAll(`[group-id="${groupId}"][edition-id]`)]
     toggleButtons = [...table.querySelectorAll(`.u-toggleEdition-button`)]
   } else {
-    rows = [
-      ...table.querySelectorAll(
-        `[group-id="${groupId}"][edition-id="${editionId}"]`
-      ),
-    ]
+    rows = [...table.querySelectorAll(`[group-id="${groupId}"][edition-id="${editionId}"]`)]
     toggleButtons = [target]
   }
 
   for (const row of rows) {
     if (isHidden) {
-      if (
-        filteredSlots.length === 0 ||
-        filteredSlots.includes(row.getAttribute('data-slot'))
-      ) {
+      if (filteredSlots.length === 0 || filteredSlots.includes(row.getAttribute('data-slot'))) {
         row.classList.remove('u-hidden')
       }
-      row.classList.remove(
-        'u-toggleEdition-hiddenByToggleEdition'
-      ) /* for filterSlot */
+      row.classList.remove('u-toggleEdition-hiddenByToggleEdition') /* for filterSlot */
     } else {
       row.classList.add('u-hidden', 'u-toggleEdition-hiddenByToggleEdition')
     }
@@ -58,10 +49,10 @@ globalapp.toggleEdition = function toggleEdition(event, groupId, editionId) {
   for (const toggleButton of toggleButtons) {
     if (isHidden) {
       toggleButton.innerHTML = BUTTON_COLLAPSE
-      $(toggleButton).updateTooltip(lang.get('torrent_table.collapse_edition'))
+      $(toggleButton).updateTooltip(t('client.torrent_table.collapse_edition'))
     } else {
       toggleButton.innerHTML = BUTTON_EXPAND
-      $(toggleButton).updateTooltip(lang.get('torrent_table.expand_edition'))
+      $(toggleButton).updateTooltip(t('client.torrent_table.expand_edition'))
     }
   }
 }

@@ -17,7 +17,7 @@ if (!is_number($ArtistID) || !($Redirect === 0 || is_number($Redirect)) || !$Art
 }
 
 if ($AliasName == '') {
-    error(Lang::get('artist.blank_artist_name'));
+    error(t('server.artist.blank_artist_name'));
 }
 
 /*
@@ -47,10 +47,10 @@ if ($DB->has_results()) {
 					WHERE AliasID = '$CloneAliasID'");
                 Misc::write_log("Redirection for the alias $CloneAliasID ($DBAliasName) for the artist $ArtistID was removed by user $LoggedUser[ID] ($LoggedUser[Username])");
             } else {
-                error(Lang::get('artist.no_changes_were_made'));
+                error(t('server.artist.no_changes_were_made'));
             }
         } else {
-            error(Lang::get('artist.an_alias_already_exists_before') . $CloneArtistID . Lang::get('artist.an_alias_already_exists_after'));
+            error(t('server.artist.an_alias_already_exists_before') . $CloneArtistID . t('server.artist.an_alias_already_exists_after'));
         }
     }
 }
@@ -61,11 +61,11 @@ if (!$CloneAliasID) {
 			FROM artists_alias
 			WHERE AliasID = $Redirect");
         if (!$DB->has_results()) {
-            error(Lang::get('artist.cannot_redirect'));
+            error(t('server.artist.cannot_redirect'));
         }
         list($FoundArtistID, $FoundRedirect) = $DB->next_record();
         if ($ArtistID != $FoundArtistID) {
-            error(Lang::get('artist.redirection_must_target'));
+            error(t('server.artist.redirection_must_target'));
         }
         if ($FoundRedirect != 0) {
             $Redirect = $FoundRedirect;

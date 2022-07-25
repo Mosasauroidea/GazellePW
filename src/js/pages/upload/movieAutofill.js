@@ -148,7 +148,7 @@ globalapp.uploadMovieAutofill = function uploadMovieAutofill() {
 
 globalapp.setFormError = function setFormError(key, options = {}) {
   if (key) {
-    const message = lang.get(key, options)
+    const message = t(key, options)
     $('.imdb.Form-errorMessage').html(message)
   } else {
     $('.imdb.Form-errorMessage').html('')

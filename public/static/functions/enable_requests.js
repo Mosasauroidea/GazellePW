@@ -29,10 +29,7 @@
       }
     })
     $('input[id^=outcome]').click(function () {
-      if (
-        $(this).val() != 'Discard' &&
-        !confirm(lang.get('common.are_you_sure_cannot_undone'))
-      ) {
+      if ($(this).val() != 'Discard' && !confirm(t('client.common.are_you_sure_cannot_undone'))) {
         return false
       }
       var id = $(this).data('id')
@@ -79,7 +76,7 @@
         }).done(function (response) {
           if (response['status'] == 'success') {
             $('#row_' + id).remove()
-            alert(lang.get('common.request_has_been_unresolved'))
+            alert(t('client.common.request_has_been_unresolved'))
           } else {
             alert(response['status'])
           }

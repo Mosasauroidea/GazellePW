@@ -162,7 +162,7 @@ class INVITE_TREE {
 
             ?>
                 <p style="font-weight: bold;">
-                    <?= Lang::get('user.this_tree_has_n_entries_n_branches_and_a_depth_of_n_1') ?><?= number_format($Count) ?><?= Lang::get('user.this_tree_has_n_entries_n_branches_and_a_depth_of_n_2') ?><?= number_format($Branches) ?><?= Lang::get('user.this_tree_has_n_entries_n_branches_and_a_depth_of_n_3') ?><?= number_format($MaxTreeLevel - $OriginalTreeLevel) ?><?= Lang::get('user.this_tree_has_n_entries_n_branches_and_a_depth_of_n_4') ?>
+                    <?= t('server.user.this_tree_has_n_entries_n_branches_and_a_depth_of_n_1') ?><?= number_format($Count) ?><?= t('server.user.this_tree_has_n_entries_n_branches_and_a_depth_of_n_2') ?><?= number_format($Branches) ?><?= t('server.user.this_tree_has_n_entries_n_branches_and_a_depth_of_n_3') ?><?= number_format($MaxTreeLevel - $OriginalTreeLevel) ?><?= t('server.user.this_tree_has_n_entries_n_branches_and_a_depth_of_n_4') ?>
                 <?
                 $ClassStrings = array();
                 foreach ($ClassSummary as $ClassID => $ClassCount) {
@@ -184,53 +184,53 @@ class INVITE_TREE {
                 if (count($ClassStrings) > 1) {
                     array_pop($ClassStrings);
                     echo implode(', ', $ClassStrings);
-                    echo Lang::get('user.space_and_space') . $LastClass;
+                    echo t('server.user.space_and_space') . $LastClass;
                 } else {
                     echo $LastClass;
                 }
                 echo '. ';
                 echo $DisabledCount;
-                echo ($DisabledCount == 1) ? Lang::get('user.n_users_are_disabled_1') : Lang::get('user.n_users_are_disabled_2');
-                echo Lang::get('user.n_users_are_disabled_3');
+                echo ($DisabledCount == 1) ? t('server.user.n_users_are_disabled_1') : t('server.user.n_users_are_disabled_2');
+                echo t('server.user.n_users_are_disabled_3');
                 if ($DisabledCount == 0) {
                     echo '0%)';
                 } else {
                     echo number_format(($DisabledCount / $Count) * 100) . '%)';
                 }
-                echo Lang::get('user.comma_space_and_space');
+                echo t('server.user.comma_space_and_space');
                 echo $DonorCount;
-                echo ($DonorCount == 1) ? Lang::get('user.n_users_have_donated_1') : Lang::get('user.n_users_have_donated_2');
-                echo Lang::get('user.n_users_have_donated_3');
+                echo ($DonorCount == 1) ? t('server.user.n_users_have_donated_1') : t('server.user.n_users_have_donated_2');
+                echo t('server.user.n_users_have_donated_3');
                 if ($DonorCount == 0) {
                     echo '0%)';
                 } else {
                     echo number_format(($DonorCount / $Count) * 100) . '%)';
                 }
-                echo Lang::get('user.period_space_p');
+                echo t('server.user.period_space_p');
 
                 echo '<p style="font-weight: bold;">';
-                echo Lang::get('user.the_total_amount_uploaded_by_the_entire_tree_was') . Format::get_size($TotalUpload);
-                echo Lang::get('user.the_total_amount_downloaded_was') . Format::get_size($TotalDownload);
-                echo Lang::get('user.and_the_total_ratio_is') . Format::get_ratio_html($TotalUpload, $TotalDownload) . Lang::get('user.period_space');
+                echo t('server.user.the_total_amount_uploaded_by_the_entire_tree_was') . Format::get_size($TotalUpload);
+                echo t('server.user.the_total_amount_downloaded_was') . Format::get_size($TotalDownload);
+                echo t('server.user.and_the_total_ratio_is') . Format::get_ratio_html($TotalUpload, $TotalDownload) . t('server.user.period_space');
                 echo '</p>';
 
                 echo '<p style="font-weight: bold;">';
-                echo Lang::get('user.the_total_amount_uplaoded_by_direct_invitees_was_') . Format::get_size($TopLevelUpload);
-                echo Lang::get('user.the_total_amount_downloaded_was') . Format::get_size($TopLevelDownload);
-                echo Lang::get('user.and_the_total_ratio_is') . Format::get_ratio_html($TopLevelUpload, $TopLevelDownload) . Lang::get('user.period_space');
+                echo t('server.user.the_total_amount_uplaoded_by_direct_invitees_was_') . Format::get_size($TopLevelUpload);
+                echo t('server.user.the_total_amount_downloaded_was') . Format::get_size($TopLevelDownload);
+                echo t('server.user.and_the_total_ratio_is') . Format::get_ratio_html($TopLevelUpload, $TopLevelDownload) . t('server.user.period_space');
 
-                echo Lang::get('user.these_numbers_include_the_stats_of_paranoid_users_and') . "\n\t\t</p>\n";
+                echo t('server.user.these_numbers_include_the_stats_of_paranoid_users_and') . "\n\t\t</p>\n";
 
                 if ($ParanoidCount) {
                     echo '<p style="font-weight: bold;">';
                     echo $ParanoidCount;
-                    echo ($ParanoidCount == 1) ? Lang::get('user.space_user_space_bracket') : Lang::get('user.space_users_space_bracket');
+                    echo ($ParanoidCount == 1) ? t('server.user.space_user_space_bracket') : t('server.user.space_users_space_bracket');
                     echo number_format(($ParanoidCount / $Count) * 100);
                     echo '%) ';
-                    echo ($ParanoidCount == 1) ? Lang::get('user.space_is') : Lang::get('user.space_are');
-                    echo Lang::get('user.too_paranoid_to_have_their_stats_shown_here_and');
-                    echo ($ParanoidCount == 1) ? Lang::get('user.space_was') : Lang::get('user.space_were');
-                    echo Lang::get('user.not_factored_into_the_stats_for_the_total_tree');
+                    echo ($ParanoidCount == 1) ? t('server.user.space_is') : t('server.user.space_are');
+                    echo t('server.user.too_paranoid_to_have_their_stats_shown_here_and');
+                    echo ($ParanoidCount == 1) ? t('server.user.space_was') : t('server.user.space_were');
+                    echo t('server.user.not_factored_into_the_stats_for_the_total_tree');
                     echo '</p>';
                 }
             }

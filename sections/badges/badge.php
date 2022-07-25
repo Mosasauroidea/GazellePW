@@ -1,19 +1,19 @@
 <?
 
-View::show_header(Lang::get('badges.badges_center'), '', 'PageBadgeShow');
+View::show_header(t('server.badges.badges_center'), '', 'PageBadgeShow');
 $BadgeLabelsByType = Badges::get_badge_labels_by_type();
 $BadgesByUserID = Badges::get_badges_by_userid($LoggedUser['ID']);
 $BadgesCount = Badges::get_badges_count($LoggedUser['ID']);
 ?>
 <div class="LayoutBody">
     <div class="BodyHeader">
-        <h2 class="BodyHeader-nav"><?= Users::format_username($UserID, false, false, false) ?> &gt; <?= Lang::get('badges.index_badge') ?> &gt; <?= Lang::get('badges.badge_achievement_progress') ?></h2>
+        <h2 class="BodyHeader-nav"><?= Users::format_username($UserID, false, false, false) ?> &gt; <?= t('server.badges.index_badge') ?> &gt; <?= t('server.badges.badge_achievement_progress') ?></h2>
     </div>
     <div class="BodyNavLinks">
-        <a href="/badges.php?action=display" class="brackets"><?= Lang::get('badges.badge_display') ?></a>
-        <a href="/badges.php" class="brackets"><?= Lang::get('badges.badge_achievement_progress') ?></a>
-        <a href="/badges.php?action=history" class="brackets"><?= Lang::get('badges.badge_log') ?></a>
-        <a href="/badges.php?action=store" class="brackets"><?= Lang::get('badges.badge_store') ?></a>
+        <a href="/badges.php?action=display" class="brackets"><?= t('server.badges.badge_display') ?></a>
+        <a href="/badges.php" class="brackets"><?= t('server.badges.badge_achievement_progress') ?></a>
+        <a href="/badges.php?action=history" class="brackets"><?= t('server.badges.badge_log') ?></a>
+        <a href="/badges.php?action=store" class="brackets"><?= t('server.badges.badge_store') ?></a>
         <!-- <a href="" class="brackets">游乐中心</a> -->
     </div>
     <?

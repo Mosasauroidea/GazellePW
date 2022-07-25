@@ -5,7 +5,7 @@ if (!check_perms('site_top10')) {
     View::show_header('', '', 'PageTop10Index');
 ?>
     <div class="content_basiccontainer">
-        <?= Lang::get('top10.you_do_not_have_access_to_view_this_feature') ?>
+        <?= t('server.top10.you_do_not_have_access_to_view_this_feature') ?>
     </div>
 <?
     View::show_footer();

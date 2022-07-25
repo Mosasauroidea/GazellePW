@@ -37,11 +37,11 @@ if (substr($FileList, -3) == '}}}') { // Old style
 	<table class="TableTorrentFileList Table">
 		<tr class="Table-rowHeader">
 			<td class="Table-cell">
-				<div class="filelist_title" style="float: left;"> <?= Lang::get('torrents.file_names') ?>
+				<div class="filelist_title" style="float: left;"> <?= t('server.torrents.file_names') ?>
 					<?
 					if (check_perms('users_mod')) {
 					?>
-						<a href="torrents.php?action=regen_filelist?torrentid=<?= $TorrentID ?>" class="brackets"><?= Lang::get('torrents.regenerate') ?></a>
+						<a href="torrents.php?action=regen_filelist?torrentid=<?= $TorrentID ?>" class="brackets"><?= t('server.torrents.regenerate') ?></a>
 					<?
 					}
 					?>
@@ -49,7 +49,7 @@ if (substr($FileList, -3) == '}}}') { // Old style
 				<div class="filelist_path" style="float: right;"><?= $FilePath ? "/$FilePath/" : '/' ?></div>
 			</td>
 			<td class="Table-cell">
-				<strong><?= Lang::get('torrents.size') ?></strong>
+				<strong><?= t('server.torrents.size') ?></strong>
 			</td>
 		</tr>
 		<?

@@ -83,9 +83,9 @@ if (!empty($_GET['order_way']) && $_GET['order_way'] == 'asc') {
 array_multisort($Sort, $SortWay, $Tables);
 //End sorting
 
-View::show_header(Lang::get('tools.database_specifics'), '', 'PageToolDatabase');
+View::show_header(t('server.tools.database_specifics'), '', 'PageToolDatabase');
 ?>
-<h3><?= Lang::get('tools.breakdown') ?></h3>
+<h3><?= t('server.tools.breakdown') ?></h3>
 <div class="BoxBody center">
     <img src="<?= $Pie->url() ?>" />
 </div>
@@ -93,14 +93,14 @@ View::show_header(Lang::get('tools.database_specifics'), '', 'PageToolDatabase')
 <div class="TableContainer">
     <table class="Table">
         <tr class="Table-rowHeader">
-            <td class="Table-cell"><a href="tools.php?action=database_specifics&amp;order_by=name&amp;order_way=<?= (!empty($_GET['order_by']) && $_GET['order_by'] == 'name' && !empty($_GET['order_way']) && $_GET['order_way'] == 'desc') ? 'asc' : 'desc' ?>"><?= Lang::get('tools.name') ?></a></td>
-            <td class="Table-cell"><a href="tools.php?action=database_specifics&amp;order_by=engine&amp;order_way=<?= (!empty($_GET['order_by']) && $_GET['order_by'] == 'engine' && !empty($_GET['order_way']) && $_GET['order_way'] == 'desc') ? 'asc' : 'desc' ?>"><?= Lang::get('tools.engine') ?></a></td>
-            <td class="Table-cell"><a href="tools.php?action=database_specifics&amp;order_by=rows&amp;order_way=<?= (!empty($_GET['order_by']) && $_GET['order_by'] == 'rows' && !empty($_GET['order_way']) && $_GET['order_way'] == 'desc') ? 'asc' : 'desc' ?>"><?= Lang::get('tools.rows') ?></td>
-            <td class="Table-cell"><a href="tools.php?action=database_specifics&amp;order_by=rowsize&amp;order_way=<?= (!empty($_GET['order_by']) && $_GET['order_by'] == 'rowsize' && !empty($_GET['order_way']) && $_GET['order_way'] == 'desc') ? 'asc' : 'desc' ?>"><?= Lang::get('tools.row_size') ?></a></td>
-            <td class="Table-cell"><a href="tools.php?action=database_specifics&amp;order_by=datasize&amp;order_way=<?= (!empty($_GET['order_by']) && $_GET['order_by'] == 'datasize' && !empty($_GET['order_way']) && $_GET['order_way'] == 'desc') ? 'asc' : 'desc' ?>"><?= Lang::get('tools.data_size') ?></a></td>
-            <td class="Table-cell"><a href="tools.php?action=database_specifics&amp;order_by=indexsize&amp;order_way=<?= (!empty($_GET['order_by']) && $_GET['order_by'] == 'indexsize' && !empty($_GET['order_way']) && $_GET['order_way'] == 'desc') ? 'asc' : 'desc' ?>"><?= Lang::get('tools.index_size') ?></a></td>
-            <td class="Table-cell"><a href="tools.php?action=database_specifics&amp;order_by=totalsize&amp;order_way=<?= (!empty($_GET['order_by']) && $_GET['order_by'] == 'totalsize' && !empty($_GET['order_way']) && $_GET['order_way'] == 'desc') ? 'asc' : 'desc' ?>"><?= Lang::get('tools.index_size') ?></td>
-            <td class="Table-cell"><?= Lang::get('tools.tools') ?></td>
+            <td class="Table-cell"><a href="tools.php?action=database_specifics&amp;order_by=name&amp;order_way=<?= (!empty($_GET['order_by']) && $_GET['order_by'] == 'name' && !empty($_GET['order_way']) && $_GET['order_way'] == 'desc') ? 'asc' : 'desc' ?>"><?= t('server.tools.name') ?></a></td>
+            <td class="Table-cell"><a href="tools.php?action=database_specifics&amp;order_by=engine&amp;order_way=<?= (!empty($_GET['order_by']) && $_GET['order_by'] == 'engine' && !empty($_GET['order_way']) && $_GET['order_way'] == 'desc') ? 'asc' : 'desc' ?>"><?= t('server.tools.engine') ?></a></td>
+            <td class="Table-cell"><a href="tools.php?action=database_specifics&amp;order_by=rows&amp;order_way=<?= (!empty($_GET['order_by']) && $_GET['order_by'] == 'rows' && !empty($_GET['order_way']) && $_GET['order_way'] == 'desc') ? 'asc' : 'desc' ?>"><?= t('server.tools.rows') ?></td>
+            <td class="Table-cell"><a href="tools.php?action=database_specifics&amp;order_by=rowsize&amp;order_way=<?= (!empty($_GET['order_by']) && $_GET['order_by'] == 'rowsize' && !empty($_GET['order_way']) && $_GET['order_way'] == 'desc') ? 'asc' : 'desc' ?>"><?= t('server.tools.row_size') ?></a></td>
+            <td class="Table-cell"><a href="tools.php?action=database_specifics&amp;order_by=datasize&amp;order_way=<?= (!empty($_GET['order_by']) && $_GET['order_by'] == 'datasize' && !empty($_GET['order_way']) && $_GET['order_way'] == 'desc') ? 'asc' : 'desc' ?>"><?= t('server.tools.data_size') ?></a></td>
+            <td class="Table-cell"><a href="tools.php?action=database_specifics&amp;order_by=indexsize&amp;order_way=<?= (!empty($_GET['order_by']) && $_GET['order_by'] == 'indexsize' && !empty($_GET['order_way']) && $_GET['order_way'] == 'desc') ? 'asc' : 'desc' ?>"><?= t('server.tools.index_size') ?></a></td>
+            <td class="Table-cell"><a href="tools.php?action=database_specifics&amp;order_by=totalsize&amp;order_way=<?= (!empty($_GET['order_by']) && $_GET['order_by'] == 'totalsize' && !empty($_GET['order_way']) && $_GET['order_way'] == 'desc') ? 'asc' : 'desc' ?>"><?= t('server.tools.index_size') ?></td>
+            <td class="Table-cell"><?= t('server.tools.tools') ?></td>
         </tr>
         <?
         $TotalRows = 0;
@@ -123,7 +123,7 @@ View::show_header(Lang::get('tools.database_specifics'), '', 'PageToolDatabase')
                 <td class="Table-cell"><?= Format::get_size($DataSize) ?></td>
                 <td class="Table-cell"><?= Format::get_size($IndexSize) ?></td>
                 <td class="Table-cell"><?= Format::get_size($DataSize + $IndexSize) ?></td>
-                <td class="Table-cell"><a href="tools.php?action=database_specifics&amp;table=<?= display_str($Name) ?>" class="brackets"><?= Lang::get('tools.schema') ?></a></td>
+                <td class="Table-cell"><a href="tools.php?action=database_specifics&amp;table=<?= display_str($Name) ?>" class="brackets"><?= t('server.tools.schema') ?></a></td>
             </tr>
         <?
         }

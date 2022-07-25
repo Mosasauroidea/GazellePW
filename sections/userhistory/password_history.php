@@ -29,7 +29,7 @@ if (!check_perms('users_view_keys', $Class)) {
 	error(403);
 }
 
-View::show_header(Lang::get('userhistory.password_reset_history_for_before') . "$Username" . Lang::get('userhistory.password_reset_history_for_after'), '', 'PageUserHistoryPassword');
+View::show_header(t('server.userhistory.password_reset_history_for_before') . "$Username" . t('server.userhistory.password_reset_history_for_after'), '', 'PageUserHistoryPassword');
 
 $DB->query("
 	SELECT
@@ -41,12 +41,12 @@ $DB->query("
 
 ?>
 <div class="BodyHeader">
-	<h2 class="BodyHeader-nav"><?= Lang::get('userhistory.password_reset_history_for_before') ?><a href="/user.php?id=<?= $UserID ?>"><?= $Username ?></a><?= Lang::get('userhistory.password_reset_history_for_after') ?></h2>
+	<h2 class="BodyHeader-nav"><?= t('server.userhistory.password_reset_history_for_before') ?><a href="/user.php?id=<?= $UserID ?>"><?= $Username ?></a><?= t('server.userhistory.password_reset_history_for_after') ?></h2>
 </div>
 <div class="TableContainer">
 	<table class="TableUserPasswordHistory Table">
 		<tr class="Table-rowHeader">
-			<td class="Table-cell"><?= Lang::get('userhistory.changed') ?></td>
+			<td class="Table-cell"><?= t('server.userhistory.changed') ?></td>
 			<td class="Table-cell">IP <a href="/userhistory.php?action=ips&amp;userid=<?= $UserID ?>" class="brackets">H</a></td>
 		</tr>
 		<? while (list($ChangeTime, $ChangerIP) = $DB->next_record()) { ?>

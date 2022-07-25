@@ -94,7 +94,7 @@ function sendRewardPM($UserIDs, $Invites, $InvitesTime, $Tokens, $TokensTime, $B
     $BadgeName = "";
     if ($BadgeID) {
         $Badge = Badges::get_badges_by_id($BadgeID);
-        $BadgeName = Lang::get("badges.${Badge['Label']}_badge_name");
+        $BadgeName = t("server.badges.${Badge['Label']}_badge_name");
     }
     foreach ($UserIDs as $UserID) {
         Misc::send_pm_with_tpl(
@@ -212,7 +212,7 @@ if (isset($_POST['action'])) {
     header("Location: tools.php?action=events_reward");
     exit();
 }
-View::show_header(Lang::get('tools.events_reward'));
+View::show_header(t('server.tools.events_reward'));
 
 $Badges = Badges::get_badges_by_id();
 $BadgeLabels = Badges::get_badge_labels();
@@ -278,34 +278,34 @@ $BadgeLabels = Badges::get_badge_labels();
     <form class="LayoutBody" method="post" onsubmit="return check()">
         <input type="hidden" name="action" value="events_reward" />
         <div class="BodyHeader">
-            <h2 class="BodyHeader-nav"><?= Lang::get('tools.events_reward') ?></h2>
+            <h2 class="BodyHeader-nav"><?= t('server.tools.events_reward') ?></h2>
         </div>
         <div class="BodyNavLinks">
-            <div class="center"><a href="tools.php?action=events_reward_history" class="brackets"><?= Lang::get('tools.events_reward_history') ?></a></div>
+            <div class="center"><a href="tools.php?action=events_reward_history" class="brackets"><?= t('server.tools.events_reward_history') ?></a></div>
         </div>
         <div id="add_to">
-            <span><?= Lang::get('tools.add_to') ?>:</span>
-            <label><input id="add_all_1" type="radio" name="add_all" value="1" onclick="$('.add_disabled').show();$('#usernames').hide()"><?= Lang::get('tools.add_all') ?></label>
-            <label><input id="add_all_0" type="radio" name="add_all" value="0" onclick="$('.add_disabled').hide();$('#usernames').show()"><?= Lang::get('tools.add_part') ?></label>
-            <input class="add_disabled" id="add_disabled" name="add_disabled" style="display: none;" type="checkbox"><label style="display: none;" class="add_disabled" for="add_disabled"><?= Lang::get('tools.add_to_disabled_users') ?></label>
-            <textarea class="Input" id="usernames" name="usernames" style="display: none;" placeholder="<?= Lang::get('tools.add_to_placeholder') ?>"></textarea>
+            <span><?= t('server.tools.add_to') ?>:</span>
+            <label><input id="add_all_1" type="radio" name="add_all" value="1" onclick="$('.add_disabled').show();$('#usernames').hide()"><?= t('server.tools.add_all') ?></label>
+            <label><input id="add_all_0" type="radio" name="add_all" value="0" onclick="$('.add_disabled').hide();$('#usernames').show()"><?= t('server.tools.add_part') ?></label>
+            <input class="add_disabled" id="add_disabled" name="add_disabled" style="display: none;" type="checkbox"><label style="display: none;" class="add_disabled" for="add_disabled"><?= t('server.tools.add_to_disabled_users') ?></label>
+            <textarea class="Input" id="usernames" name="usernames" style="display: none;" placeholder="<?= t('server.tools.add_to_placeholder') ?>"></textarea>
         </div>
         <? if (check_perms('events_reward_tokens')) { ?>
             <div class="Box events_reward_container">
                 <div class="Box-header">
-                    </label><input type="checkbox" id="someone_tokens_input" name="tokens" onclick="$('#someone_tokens').toggle()"><label for="someone_tokens_input"><?= Lang::get('tools.someone_tokens') ?>
+                    </label><input type="checkbox" id="someone_tokens_input" name="tokens" onclick="$('#someone_tokens').toggle()"><label for="someone_tokens_input"><?= t('server.tools.someone_tokens') ?>
                 </div>
                 <div class="Box-body" id="someone_tokens" style="display: none;">
                     <div>
-                        <span><?= Lang::get('tools.token_type') ?>:</span>
-                        <label><input id="tokens_permanent_1" type="radio" name="tokens_permanent" value="1" onclick="$('#tokens_time').hide()"><?= Lang::get('tools.permanent') ?></label>
-                        <label><input id="tokens_permanent_0" type="radio" name="tokens_permanent" value="0" onclick="$('#tokens_time').show()"><?= Lang::get('tools.temporary') ?></label>
+                        <span><?= t('server.tools.token_type') ?>:</span>
+                        <label><input id="tokens_permanent_1" type="radio" name="tokens_permanent" value="1" onclick="$('#tokens_time').hide()"><?= t('server.tools.permanent') ?></label>
+                        <label><input id="tokens_permanent_0" type="radio" name="tokens_permanent" value="0" onclick="$('#tokens_time').show()"><?= t('server.tools.temporary') ?></label>
                         <input id="tokens_time" type="date" name="tokens_time" style="display: none;" />
                     </div>
-                    <div><span><?= Lang::get('tools.token_number') ?>:</span>
+                    <div><span><?= t('server.tools.token_number') ?>:</span>
                         <input class="Input is-small" type="number" id="tokens_numbers" name="tokens_numbers">
                     </div>
-                    <div><input id="leechdisabled" name="leechdisabled" type="checkbox"><label for="leechdisabled"><?= Lang::get('tools.leechdisabled') ?></label< /div>
+                    <div><input id="leechdisabled" name="leechdisabled" type="checkbox"><label for="leechdisabled"><?= t('server.tools.leechdisabled') ?></label< /div>
                     </div>
                 </div>
             </div>
@@ -313,16 +313,16 @@ $BadgeLabels = Badges::get_badge_labels();
         if (check_perms('events_reward_invites')) { ?>
             <div class="Box events_reward_container">
                 <div class="Box-header">
-                    <input type="checkbox" id="someone_invites_input" name="invites" onclick="$('#someone_invites').toggle()"><label for="someone_invites_input"><?= Lang::get('tools.someone_invites') ?></label>
+                    <input type="checkbox" id="someone_invites_input" name="invites" onclick="$('#someone_invites').toggle()"><label for="someone_invites_input"><?= t('server.tools.someone_invites') ?></label>
                 </div>
                 <div class="Box-body" id="someone_invites" style="display: none;">
                     <div>
-                        <span><?= Lang::get('tools.invites_type') ?>:</span>
-                        <label><input id="invites_permanent_1" type="radio" name="invites_permanent" value="1" onclick="$('#invites_time').hide()"><?= Lang::get('tools.permanent') ?></label>
-                        <label><input id="invites_permanent_0" type="radio" name="invites_permanent" value="0" onclick="$('#invites_time').show()"><?= Lang::get('tools.temporary') ?></label>
+                        <span><?= t('server.tools.invites_type') ?>:</span>
+                        <label><input id="invites_permanent_1" type="radio" name="invites_permanent" value="1" onclick="$('#invites_time').hide()"><?= t('server.tools.permanent') ?></label>
+                        <label><input id="invites_permanent_0" type="radio" name="invites_permanent" value="0" onclick="$('#invites_time').show()"><?= t('server.tools.temporary') ?></label>
                         <input id="invites_time" type="date" name="invites_time" style="display: none;" />
                     </div>
-                    <div><span><?= Lang::get('tools.invites_number') ?>:</span>
+                    <div><span><?= t('server.tools.invites_number') ?>:</span>
                         <input class="Input is-small" type="number" id="invites_numbers" name="invites_numbers">
                     </div>
                 </div>
@@ -331,10 +331,10 @@ $BadgeLabels = Badges::get_badge_labels();
         if (check_perms('events_reward_bonus')) { ?>
             <div class="Box events_reward_container">
                 <div class="Box-header">
-                    <input type="checkbox" id="someone_bonus_input" name="bonus" onclick="$('#someone_bonus').toggle()"><label for="someone_bonus_input"><?= Lang::get('tools.someone_bonus') ?></label>
+                    <input type="checkbox" id="someone_bonus_input" name="bonus" onclick="$('#someone_bonus').toggle()"><label for="someone_bonus_input"><?= t('server.tools.someone_bonus') ?></label>
                 </div>
                 <div class="Box-body" id="someone_bonus" style="display: none;">
-                    <div><span><?= Lang::get('tools.bonus_number') ?>:</span>
+                    <div><span><?= t('server.tools.bonus_number') ?>:</span>
                         <input class="Input is-small" type="number" id="bonus_numbers" name="bonus_numbers">
                     </div>
                 </div>
@@ -343,10 +343,10 @@ $BadgeLabels = Badges::get_badge_labels();
         if (check_perms('events_reward_badges') && CONFIG['ENABLE_BADGE']) { ?>
             <div class="Box events_reward_container">
                 <div class="Box-header">
-                    <input type="checkbox" id="someone_badges_input" name="badges" onclick="$('#someone_badges').toggle()"><label for="someone_badges_input"><?= Lang::get('tools.badge_send') ?></label>
+                    <input type="checkbox" id="someone_badges_input" name="badges" onclick="$('#someone_badges').toggle()"><label for="someone_badges_input"><?= t('server.tools.badge_send') ?></label>
                 </div>
                 <div class="Box-body" id="someone_badges" style="display: none;">
-                    <div><span><?= Lang::get('tools.badge_send') ?>:</span>
+                    <div><span><?= t('server.tools.badge_send') ?>:</span>
                         <select class="Input" id="badgeid" name='badgeid'>
                             <?
                             foreach ($Badges as $Badge) {
@@ -360,14 +360,14 @@ $BadgeLabels = Badges::get_badge_labels();
         <? } ?>
         <div class="Box events_reward_container">
             <div class="Box-header">
-                <?= Lang::get('tools.events_reward_pm') ?>
+                <?= t('server.tools.events_reward_pm') ?>
             </div>
             <div class="Box-body">
-                <span><?= Lang::get('tools.reason') ?>:</span>
-                <input class="Input" type="text" id="pm" name="pm" placeholder="<?= Lang::get('tools.reason_placeholder') ?>" size="80" />
+                <span><?= t('server.tools.reason') ?>:</span>
+                <input class="Input" type="text" id="pm" name="pm" placeholder="<?= t('server.tools.reason_placeholder') ?>" size="80" />
             </div>
         </div>
-        <div class="center"><input class="Button" type="submit" value="<?= Lang::get('tools.send_rewards') ?>"></div>
+        <div class="center"><input class="Button" type="submit" value="<?= t('server.tools.send_rewards') ?>"></div>
     </form>
 </div>
 <?

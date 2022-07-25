@@ -1,4 +1,5 @@
 import { defineConfig } from 'vite'
+import { pickBy } from 'lodash-es'
 import preact from '@preact/preset-vite'
 import mdx from '@mdx-js/rollup'
 import hq from 'alias-hq'
@@ -14,7 +15,11 @@ export default defineConfig({
       providerImportSource: '@mdx-js/react',
       remarkPlugins: [remarkGfm, remarkExtendedTable, [remarkRehype, { handlers: { ...extendedTableHandlers } }]],
     }),
-    yaml(),
+    yaml({
+      transform(data) {
+        return pickBy(data, (v, k) => k.startsWith('client.'))
+      },
+    }),
   ],
   clearScreen: false,
 

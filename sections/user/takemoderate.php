@@ -164,7 +164,7 @@ if (!$DB->has_results()) { // If user doesn't exist
 
 $Cur = $DB->next_record(MYSQLI_ASSOC, false);
 if ($_POST['comment_hash'] != $Cur['CommentHash']) {
-    error(Lang::get('user.somebody_else_has_moderated'));
+    error(t('server.user.somebody_else_has_moderated'));
 }
 
 //NOW that we know the class of the current user, we can see if one staff member is trying to hax0r us.
@@ -503,7 +503,7 @@ if ($Invites != $Cur['Invites'] && check_perms('users_edit_invites')) {
 }
 
 if ($Warned == 1 && $Cur['Warned'] == '0000-00-00 00:00:00' && check_perms('users_warn')) {
-    $Weeks = Lang::get('user.week') . ($WarnLength === 1 ? '' : Lang::get('user.s'));
+    $Weeks = t('server.user.week') . ($WarnLength === 1 ? '' : t('server.user.s'));
     Misc::send_pm_with_tpl(
         $UserID,
         'comment_warning',

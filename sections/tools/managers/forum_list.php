@@ -39,7 +39,7 @@ if (!check_perms('admin_manage_forums')) {
     error(403);
 }
 
-View::show_header(Lang::get('tools.forum_management'));
+View::show_header(t('server.tools.forum_management'));
 $DB->query('
 	SELECT ID, Name
 	FROM forums
@@ -80,21 +80,21 @@ $DB->query('
 ?>
 <div class="header">
     <script type="text/javacript">document.getElementByID('content').style.overflow = 'visible';</script>
-    <h2><?= Lang::get('tools.forum_control_panel') ?></h2>
+    <h2><?= t('server.tools.forum_control_panel') ?></h2>
 </div>
 <div class="TableContainer">
     <table class="TableForumControlPanel Table">
         <tr class="Table-rowHeader">
-            <td class="Table-cell is-category"><?= Lang::get('tools.category') ?></td>
-            <td class="Table-cell is-sort"><?= Lang::get('tools.sort') ?></td>
-            <td class="Table-cell is-name"><?= Lang::get('tools.name') ?></td>
-            <td class="Table-cell is-description"><?= Lang::get('tools.description') ?></td>
-            <td class="Table-cell is-minClassRead"><?= Lang::get('tools.min_class_read') ?></td>
-            <td class="Table-cell is-minClassWrite"><?= Lang::get('tools.min_class_write') ?></td>
-            <td class="Table-cell is-minClassCrate"><?= Lang::get('tools.min_class_create') ?></td>
-            <td class="Table-cell is-autoLock"><?= Lang::get('tools.auto_lock') ?></td>
-            <td class="Table-cell is-autoLockWeeks"><?= Lang::get('tools.auto_lock_weeks') ?></td>
-            <td class="Table-cell is-operation"><?= Lang::get('tools.operation') ?></td>
+            <td class="Table-cell is-category"><?= t('server.tools.category') ?></td>
+            <td class="Table-cell is-sort"><?= t('server.tools.sort') ?></td>
+            <td class="Table-cell is-name"><?= t('server.tools.name') ?></td>
+            <td class="Table-cell is-description"><?= t('server.tools.description') ?></td>
+            <td class="Table-cell is-minClassRead"><?= t('server.tools.min_class_read') ?></td>
+            <td class="Table-cell is-minClassWrite"><?= t('server.tools.min_class_write') ?></td>
+            <td class="Table-cell is-minClassCrate"><?= t('server.tools.min_class_create') ?></td>
+            <td class="Table-cell is-autoLock"><?= t('server.tools.auto_lock') ?></td>
+            <td class="Table-cell is-autoLockWeeks"><?= t('server.tools.auto_lock_weeks') ?></td>
+            <td class="Table-cell is-operation"><?= t('server.tools.operation') ?></td>
         </tr>
         <?
         while (list($ID, $CategoryID, $Sort, $Name, $Description, $MinClassRead, $MinClassWrite, $MinClassCreate, $AutoLock, $AutoLockWeeks, $Second) = $DB->next_record()) {
@@ -158,7 +158,7 @@ $DB->query('
             </form>
         <? } ?>
         <tr class="Table-rowHeader">
-            <td class="Table-cell" colspan="10"><?= Lang::get('tools.create_forum') ?></td>
+            <td class="Table-cell" colspan="10"><?= t('server.tools.create_forum') ?></td>
         </tr>
         <tr class="Table-row">
             <form class="create_form" name="forum" action="" method="post">

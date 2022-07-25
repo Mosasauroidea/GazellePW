@@ -20,7 +20,7 @@ if (!$NewRequest) {
 
 
 if ($NewRequest && ($LoggedUser['BytesUploaded'] < 250 * 1024 * 1024 || !check_perms('site_submit_requests'))) {
-    error(Lang::get('requests.you_do_not_have_enough_uploaded'));
+    error(t('server.requests.you_do_not_have_enough_uploaded'));
 }
 
 if (!$NewRequest) {
@@ -151,12 +151,12 @@ if ($NewRequest && !empty($_GET['artistid']) && is_number($_GET['artistid'])) {
     }
 }
 
-View::show_header(($NewRequest ? Lang::get('requests.new_create') : Lang::get('requests.new_edit')), 'form_validate', 'PageRequestNewEdit
+View::show_header(($NewRequest ? t('server.requests.new_create') : t('server.requests.new_edit')), 'form_validate', 'PageRequestNewEdit
 ');
 ?>
 <div class="LayoutBody">
     <div class="BodyHeader">
-        <h2 class="BodyHeader-nav"><?= Lang::get('requests.requests')  ?></h2>
+        <h2 class="BodyHeader-nav"><?= t('server.requests.requests')  ?></h2>
     </div>
     <div class="BodyContent">
         <form class="Form FormRequestNew" action="" method="post" id="request_form" onsubmit="globalapp.requestCalculate();">
@@ -170,15 +170,15 @@ View::show_header(($NewRequest ? Lang::get('requests.new_create') : Lang::get('r
 
             <table class="Form-rowList" variant="header">
                 <tr class="Form-rowHeader">
-                    <td class="Form-title"><?= $NewRequest ? Lang::get('requests.new_create') . (isset($GroupID) ? ' > ' . Torrents::group_name($RequestInfo) : '') : Lang::get('requests.new_edit')  ?></td>
+                    <td class="Form-title"><?= $NewRequest ? t('server.requests.new_create') . (isset($GroupID) ? ' > ' . Torrents::group_name($RequestInfo) : '') : t('server.requests.new_edit')  ?></td>
                 </tr>
                 <tr class="Form-row">
-                    <td colspan="2" class="center"><?= Lang::get('requests.new_rules') ?></td>
+                    <td colspan="2" class="center"><?= t('server.requests.new_rules') ?></td>
                 </tr>
                 <? if ($NewRequest || $CanEdit) { ?>
                     <tr class="Form-row">
                         <td class="Form-label">
-                            <?= Lang::get('upload.type') ?>:
+                            <?= t('server.upload.type') ?>:
                         </td>
                         <td class="Form-items">
                             <div class="Form-inputs">
@@ -196,16 +196,16 @@ View::show_header(($NewRequest ? Lang::get('requests.new_create') : Lang::get('r
                             <div class="Form-inputs">
                                 <input class="Input" type="text" id="imdb" name="imdb" size="45" placeholder="IMDB" value="<?= $IMDBID ?>" <?= $Disabled ?>>
                                 <button class="Button" variant="primary" type="button" <?= $DisabledFlag ? 'disabled' : '' ?> onclick="globalapp.requestMovieAutofill(event)" id="imdb_button">
-                                    <span><?= Lang::get('upload.movie_fill') ?></span>
+                                    <span><?= t('server.upload.movie_fill') ?></span>
                                     <span class="Loader"></span>
                                 </button>
-                                <input type="checkbox" name="no_imdb_link" id="no_imdb_link"><label for="no_imdb_link"><?= Lang::get('upload.no_imdb_link') ?></label>
+                                <input type="checkbox" name="no_imdb_link" id="no_imdb_link"><label for="no_imdb_link"><?= t('server.upload.no_imdb_link') ?></label>
                             </div>
-                            <div class="imdb Form-errorMessage"><?= Lang::get('upload.imdb_empty_warning') ?></div>
+                            <div class="imdb Form-errorMessage"><?= t('server.upload.imdb_empty_warning') ?></div>
                         </td>
                     </tr>
                     <tr class="Form-row" id="artist_tr">
-                        <td class="Form-label"><?= Lang::get('global.artist') ?>:</td>
+                        <td class="Form-label"><?= t('server.global.artist') ?>:</td>
                         <td class="Form-items" id="artistfields">
                             <?
                             if (!empty($ArtistForm)) {
@@ -216,10 +216,10 @@ View::show_header(($NewRequest ? Lang::get('requests.new_create') : Lang::get('r
                                     <div class="Form-inputs">
                                         <input type="hidden" id="artist_id" name="artist_ids[]" value="<?= display_str($Artist['imdbid']) ?>" size="45" />
                                         <input class="Input" type="text" id="artist_<?= $cnt ?>" <?= $Disabled ?> name="artists[]" <? Users::has_autocomplete_enabled('other'); ?> size="45" value="<?= display_str($Artist['name']) ?>" />
-                                        <input class="Input" type="text" id="artist_chinese" name="artists_chinese[]" size="25" value="<?= display_str($Artist['cname']) ?>" placeholder="<?= Lang::get('upload.chinese_name') ?>" <?
+                                        <input class="Input" type="text" id="artist_chinese" name="artists_chinese[]" size="25" value="<?= display_str($Artist['cname']) ?>" placeholder="<?= t('server.upload.chinese_name') ?>" <?
                                                                                                                                                                                                                                     Users::has_autocomplete_enabled('other'); ?> />
                                         <select class="Input" id="importance" name="importance[]">
-                                            <option class="Select-option" value="1" <?= ($Importance == '1' ? ' selected="selected"' : '') ?>><?= Lang::get('upload.director') ?></option>
+                                            <option class="Select-option" value="1" <?= ($Importance == '1' ? ' selected="selected"' : '') ?>><?= t('server.upload.director') ?></option>
                                         </select>
                                         <? if ($First) { ?>
                                             <div>
@@ -237,10 +237,10 @@ View::show_header(($NewRequest ? Lang::get('requests.new_create') : Lang::get('r
                                 <div class="Form-inputs">
                                     <input type="hidden" id="artist_id" name="artist_ids[]" size="45" />
                                     <input class="Input" type="text" id="artist" name="artists[]" <? Users::has_autocomplete_enabled('other'); ?> size="45" />
-                                    <input class="Input" type="text" id="artist_chinese" name="artists_chinese[]" size="25" placeholder="<?= Lang::get('upload.chinese_name') ?>" <?
+                                    <input class="Input" type="text" id="artist_chinese" name="artists_chinese[]" size="25" placeholder="<?= t('server.upload.chinese_name') ?>" <?
                                                                                                                                                                                     Users::has_autocomplete_enabled('other'); ?> />
                                     <select class="Input" id="importance" name="importance[]">
-                                        <option class="Select-option" value="1"><?= Lang::get('upload.director') ?></option>
+                                        <option class="Select-option" value="1"><?= t('server.upload.director') ?></option>
                                     </select>
                                     <div>
                                         <a href="#" onclick="globalapp.requestAddArtistField(); return false;" class="brackets">+</a>
@@ -254,7 +254,7 @@ View::show_header(($NewRequest ? Lang::get('requests.new_create') : Lang::get('r
     </td>
     </tr>
     <tr class="Form-row">
-        <td class="Form-label"><?= Lang::get('upload.movie_title') ?>:</td>
+        <td class="Form-label"><?= t('server.upload.movie_title') ?>:</td>
         <td class="Form-items">
             <div class="Form-inputs">
                 <input class="Input" type="text" id="title" name="title" <?= $Disabled ?> size="45" value="<?= (!empty($Title) ? $Title : '') ?>" />
@@ -262,7 +262,7 @@ View::show_header(($NewRequest ? Lang::get('requests.new_create') : Lang::get('r
         </td>
     </tr>
     <tr class="Form-row">
-        <td class="Form-label"><?= Lang::get('upload.chinese_title') ?>:</td>
+        <td class="Form-label"><?= t('server.upload.chinese_title') ?>:</td>
         <td class="Form-items">
             <div class="Form-inputs">
                 <input class="Input" type="text" id="subtitle" name="subtitle" <?= $Disabled ?> size="45" value="<?= (!empty($Subtitle) ? $Subtitle : '') ?>" />
@@ -271,7 +271,7 @@ View::show_header(($NewRequest ? Lang::get('requests.new_create') : Lang::get('r
     </tr>
 <?  } ?>
 <tr class="Form-row" id="year_tr">
-    <td class="Form-label"><?= Lang::get('requests.year') ?>:</td>
+    <td class="Form-label"><?= t('server.requests.year') ?>:</td>
     <td class="Form-items">
         <div class="Form-inputs">
             <input class="Input" type="text" id="year" name="year" <?= $Disabled ?> size="5" value="<?= (!empty($Year) ? $Year : '') ?>" />
@@ -280,7 +280,7 @@ View::show_header(($NewRequest ? Lang::get('requests.new_create') : Lang::get('r
 </tr>
 <? if ($NewRequest || $CanEdit) { ?>
     <tr class="Form-row" id="image_tr">
-        <td class="Form-label"><?= Lang::get('requests.image') ?>:</td>
+        <td class="Form-label"><?= t('server.requests.image') ?>:</td>
         <td class="Form-items">
             <div class="Form-inputs">
                 <input class="Input" type="text" id="image" name="image" <?= $Disabled ?> size="45" value="<?= (!empty($Image) ? $Image : '') ?>" />
@@ -289,7 +289,7 @@ View::show_header(($NewRequest ? Lang::get('requests.new_create') : Lang::get('r
     </tr>
 <?  } ?>
 <tr class="Form-row">
-    <td class="Form-label"><?= Lang::get('requests.tags') ?>:</td>
+    <td class="Form-label"><?= t('server.requests.tags') ?>:</td>
     <td class="Form-items">
         <div class="Form-inputs">
             <?
@@ -313,20 +313,20 @@ View::show_header(($NewRequest ? Lang::get('requests.new_create') : Lang::get('r
             <input class="Input" type="text" <?= $Disabled ?> id="tags" name="tags" size="45" value="<?= (!empty($Tags) ? display_str($Tags) : '') ?>" <? Users::has_autocomplete_enabled('other'); ?> />
         </div>
         <div>
-            <?= Lang::get('requests.tags_note') ?>
+            <?= t('server.requests.tags_note') ?>
         </div>
     </td>
 </tr>
 <? if ($NewRequest || $CanEdit) { ?>
     <tr class="Form-row" id="releasetypes_tr">
-        <td class="Form-label"><?= Lang::get('requests.release_list') ?>:</td>
+        <td class="Form-label"><?= t('server.requests.release_list') ?>:</td>
         <td class="Form-items">
             <div class="Form-inputs">
                 <select class="Input" id="releasetype" name="releasetype">
                     <?
                     foreach ($ReleaseTypes as $Key) {
                         //echo '<h1>'.$ReleaseType.'</h1>'; die();
-                    ?> <option class="Select-option" value="<?= $Key ?>" <?= !empty($ReleaseType) ? ($Key == $ReleaseType ? ' selected="selected"' : ($DisabledFlag ? 'disabled' : '')) : '' ?>><?= Lang::get('torrents.release_types')[$Key] ?></option>
+                    ?> <option class="Select-option" value="<?= $Key ?>" <?= !empty($ReleaseType) ? ($Key == $ReleaseType ? ' selected="selected"' : ($DisabledFlag ? 'disabled' : '')) : '' ?>><?= t('server.torrents.release_types')[$Key] ?></option>
                     <?
                     }
                     ?>
@@ -335,10 +335,10 @@ View::show_header(($NewRequest ? Lang::get('requests.new_create') : Lang::get('r
         </td>
     </tr>
     <tr class="Form-row" id="sources_tr">
-        <td class="Form-label"><?= Lang::get('requests.acceptable_sources') ?>:</td>
+        <td class="Form-label"><?= t('server.requests.acceptable_sources') ?>:</td>
         <td class="Form-items">
             <div class="Form-inputs">
-                <input type="checkbox" name="all_sources" id="toggle_sources" onchange="globalapp.requestToggle('sources', <?= ($NewRequest ? 1 : 0) ?>);" <?= !empty($SourceArray) && (count($SourceArray) === count($Sources)) ? ' checked="checked"' : ''; ?> /><label for="toggle_sources"> <?= Lang::get('requests.all') ?></label>
+                <input type="checkbox" name="all_sources" id="toggle_sources" onchange="globalapp.requestToggle('sources', <?= ($NewRequest ? 1 : 0) ?>);" <?= !empty($SourceArray) && (count($SourceArray) === count($Sources)) ? ' checked="checked"' : ''; ?> /><label for="toggle_sources"> <?= t('server.requests.all') ?></label>
                 <? foreach ($Sources as $Key => $Val) { ?>
                     <input type="checkbox" name="sources[]" value="<?= $Key ?>" onchange="if (!this.checked) { $('#toggle_sources').raw().checked = false; }" id="source_<?= $Key ?>" <?= (!empty($SourceArray) && in_array($Key, $SourceArray) ? ' checked="checked"' : '') ?> /><label for="source_<?= $Key ?>"> <?= $Val ?></label>
                 <?      } ?>
@@ -346,10 +346,10 @@ View::show_header(($NewRequest ? Lang::get('requests.new_create') : Lang::get('r
         </td>
     </tr>
     <tr class="Form-row" id="codecs_tr">
-        <td class="Form-label"><?= Lang::get('requests.acceptable_codecs') ?>:</td>
+        <td class="Form-label"><?= t('server.requests.acceptable_codecs') ?>:</td>
         <td class="Form-items">
             <div class="Form-inputs">
-                <input type="checkbox" name="all_codecs" id="toggle_codecs" onchange="globalapp.requestToggle('codecs', <?= ($NewRequest ? 1 : 0) ?>);" <?= (!empty($CodecArray) && (count($CodecArray) === count($Codecs)) ? ' checked="checked"' : '') ?> /><label for="toggle_codecs"> <?= Lang::get('requests.all') ?></label>
+                <input type="checkbox" name="all_codecs" id="toggle_codecs" onchange="globalapp.requestToggle('codecs', <?= ($NewRequest ? 1 : 0) ?>);" <?= (!empty($CodecArray) && (count($CodecArray) === count($Codecs)) ? ' checked="checked"' : '') ?> /><label for="toggle_codecs"> <?= t('server.requests.all') ?></label>
                 <? foreach ($Codecs as $Key => $Val) { ?>
                     <input type="checkbox" name="codecs[]" value="<?= $Key ?>" id="codec_<?= $Key ?>" <?= (!empty($CodecArray) && in_array($Key, $COdecArray) ? ' checked="checked" ' : '') ?> onchange="if (!this.checked) { $('#toggle_codecs').raw().checked = false; }" /><label for="codec_<?= $Key ?>"> <?= $Val ?></label>
                 <?      } ?>
@@ -357,10 +357,10 @@ View::show_header(($NewRequest ? Lang::get('requests.new_create') : Lang::get('r
         </td>
     </tr>
     <tr class="Form-row" id="containers_tr">
-        <td class="Form-label"><?= Lang::get('requests.acceptable_containers') ?>:</td>
+        <td class="Form-label"><?= t('server.requests.acceptable_containers') ?>:</td>
         <td class="Form-items">
             <div class="Form-inputs">
-                <input type="checkbox" name="all_containers" id="toggle_containers" onchange="globalapp.requestToggle('containers', <?= ($NewRequest ? 1 : 0) ?>);" <?= (!empty($ContainerArray) && (count($ContainerArray) === count($Containers)) ? ' checked="checked"' : '') ?> /><label for="toggle_containers"> <?= Lang::get('requests.all') ?></label>
+                <input type="checkbox" name="all_containers" id="toggle_containers" onchange="globalapp.requestToggle('containers', <?= ($NewRequest ? 1 : 0) ?>);" <?= (!empty($ContainerArray) && (count($ContainerArray) === count($Containers)) ? ' checked="checked"' : '') ?> /><label for="toggle_containers"> <?= t('server.requests.all') ?></label>
                 <? foreach ($Containers as $Key => $Val) { ?>
                     <input type="checkbox" name="containers[]" value="<?= $Key ?>" id="container_<?= $Key ?>" <?= (!empty($ContainerArray) && in_array($Key, $ContainerArray) ? ' checked="checked" ' : '') ?> onchange="if (!this.checked) { $('#toggle_containers').raw().checked = false; }" /><label for="container_<?= $Key ?>"> <?= $Val ?></label>
                 <?      } ?>
@@ -368,10 +368,10 @@ View::show_header(($NewRequest ? Lang::get('requests.new_create') : Lang::get('r
         </td>
     </tr>
     <tr class="Form-row" id="resolutions_tr">
-        <td class="Form-label"><?= Lang::get('requests.acceptable_resolutions') ?>:</td>
+        <td class="Form-label"><?= t('server.requests.acceptable_resolutions') ?>:</td>
         <td class="Form-items">
             <div class="Form-inputs">
-                <input type="checkbox" name="all_resolutions" id="toggle_resolutions" onchange="globalapp.requestToggle('resolutions', <?= ($NewRequest ? 1 : 0) ?>);" <?= (!empty($ResolutionArray) && (count($ResolutionArray) === count($Resolutions)) ? ' checked="checked"' : '') ?> /><label for="toggle_resolutions"> <?= Lang::get('requests.all') ?></label>
+                <input type="checkbox" name="all_resolutions" id="toggle_resolutions" onchange="globalapp.requestToggle('resolutions', <?= ($NewRequest ? 1 : 0) ?>);" <?= (!empty($ResolutionArray) && (count($ResolutionArray) === count($Resolutions)) ? ' checked="checked"' : '') ?> /><label for="toggle_resolutions"> <?= t('server.requests.all') ?></label>
                 <? foreach ($Resolutions as $Key => $Val) { ?>
                     <input type="checkbox" name="resolutions[]" value="<?= $Key ?>" id="resolution_<?= $Key ?>" <?= (!empty($ResolutionArray) && in_array($Key, $ResolutionArray) ? ' checked="checked" ' : '') ?> onchange="if (!this.checked) { $('#toggle_resolutions').raw().checked = false; }" /><label for="resolution_<?= $Key ?>"> <?= $Val ?></label>
                 <? } ?>
@@ -380,55 +380,55 @@ View::show_header(($NewRequest ? Lang::get('requests.new_create') : Lang::get('r
     </tr>
 <?  } ?>
 <tr class="Form-row">
-    <td class="Form-label"><?= Lang::get('requests.source_torrent') ?>:</td>
+    <td class="Form-label"><?= t('server.requests.source_torrent') ?>:</td>
     <td class="Form-items">
         <div class="Form-inputs">
-            <input class="Input" type="text" name="source_torrent" value="<?= $SourceTorrent ?>" placeholder="<?= Lang::get('requests.source_torrent_placeholder') ?>">
+            <input class="Input" type="text" name="source_torrent" value="<?= $SourceTorrent ?>" placeholder="<?= t('server.requests.source_torrent_placeholder') ?>">
         </div>
     </td>
 </tr>
 <tr class="Form-row">
-    <td class="Form-label"><?= Lang::get('requests.purchasable_at') ?>:</td>
+    <td class="Form-label"><?= t('server.requests.purchasable_at') ?>:</td>
     <td class="Form-items">
         <div class="Form-inputs">
-            <input class="Input" type="text" name="purchasable_at" value="<?= $PurchasableAt ?>" placeholder="<?= Lang::get('requests.purchasable_at_placeholder') ?>">
+            <input class="Input" type="text" name="purchasable_at" value="<?= $PurchasableAt ?>" placeholder="<?= t('server.requests.purchasable_at_placeholder') ?>">
         </div>
     </td>
 </tr>
 <tr class="Form-row">
-    <td class="Form-label"><?= Lang::get('requests.description') ?>:</td>
+    <td class="Form-label"><?= t('server.requests.description') ?>:</td>
     <td class="Form-items">
         <div class="Form-inputs">
             <textarea class="Input" name="description" cols="70" rows="7"><?= (!empty($Request['Description']) ? $Request['Description'] : '') ?></textarea>
         </div>
         <div>
-            <?= Lang::get('requests.description_note') ?>
+            <?= t('server.requests.description_note') ?>
         </div>
     </td>
 </tr>
 <? if (check_perms('site_moderate_requests')) { ?>
     <tr class="Form-row">
-        <td class="Form-label"><?= Lang::get('requests.t_group') ?>:</td>
+        <td class="Form-label"><?= t('server.requests.t_group') ?>:</td>
         <td class="Form-items">
             <div>
                 <?= site_url() ?>torrents.php?id=<input class="Input" type="text" name="groupid" value="<?= $GroupID ?>" size="15" />
             </div>
             <div>
-                <?= Lang::get('requests.t_group_note') ?>
+                <?= t('server.requests.t_group_note') ?>
             </div>
         </td>
     </tr>
 <?  } elseif ($GroupID && ($CategoryID == 1)) { ?>
     <tr class="Form-row">
-        <td class="Form-label"><?= Lang::get('requests.t_group') ?></td>
+        <td class="Form-label"><?= t('server.requests.t_group') ?></td>
         <td class="Form-items">
             <div>
                 <a href="torrents.php?id=<?= $GroupID ?>"><?= site_url() ?>torrents.php?id=<?= $GroupID ?></a>
             </div>
             <div>
-                <?= Lang::get('requests.this_request') ?><?= ($NewRequest ? Lang::get('requests.will_be') : Lang::get('requests.is')) ?><?= Lang::get('requests.associated_with_the_above_torrent_group') ?>
+                <?= t('server.requests.this_request') ?><?= ($NewRequest ? t('server.requests.will_be') : t('server.requests.is')) ?><?= t('server.requests.associated_with_the_above_torrent_group') ?>
                 <? if (!$NewRequest) { ?>
-                    <?= Lang::get('requests.if_this_is_incorrect_please') ?><a href="reports.php?action=report&amp;type=request&amp;id=<?= $RequestID ?>"><?= Lang::get('requests.report_this_request') ?></a><?= Lang::get('requests.so_that_staff_can_fix_it') ?>
+                    <?= t('server.requests.if_this_is_incorrect_please') ?><a href="reports.php?action=report&amp;type=request&amp;id=<?= $RequestID ?>"><?= t('server.requests.report_this_request') ?></a><?= t('server.requests.so_that_staff_can_fix_it') ?>
                 <?      }   ?>
                 <input type="hidden" name="groupid" value="<?= $GroupID ?>" />
             </div>
@@ -437,7 +437,7 @@ View::show_header(($NewRequest ? Lang::get('requests.new_create') : Lang::get('r
 <?  }
 if ($NewRequest) { ?>
     <tr class="Form-row" id="voting">
-        <td class="Form-label"><?= Lang::get('requests.bounty') ?>:</td>
+        <td class="Form-label"><?= t('server.requests.bounty') ?>:</td>
         <td class="Form-items">
             <div class="Form-inputs">
                 <input class="Input" type="text" id="amount_box" size="8" value="<?= (!empty($Bounty) ? $Bounty : '100') ?>" onchange="globalapp.requestCalculate();" />
@@ -451,21 +451,21 @@ if ($NewRequest) { ?>
         </td>
     </tr>
     <tr class="Form-row">
-        <td class="Form-label"><?= Lang::get('requests.pst') ?>:</td>
+        <td class="Form-label"><?= t('server.requests.pst') ?>:</td>
         <td class="Form-items">
             <input type="hidden" id="amount" name="amount" value="<?= (!empty($Bounty) ? $Bounty : '100') ?>" />
             <input type="hidden" id="current_uploaded" value="<?= $LoggedUser['BytesUploaded'] ?>" />
             <input type="hidden" id="current_downloaded" value="<?= $LoggedUser['BytesDownloaded'] ?>" />
             <?= $RequestTax > 0 ? '<div>Bounty after tax: <strong><span id="bounty_after_tax">90.00 MB</span></strong></div>' : '' ?>
             <div>
-                <?= Lang::get('requests.pst_1') ?><strong> <span id="new_bounty">100.00 MB</span></strong> <?= Lang::get('requests.pst_2') ?>
+                <?= t('server.requests.pst_1') ?><strong> <span id="new_bounty">100.00 MB</span></strong> <?= t('server.requests.pst_2') ?>
             </div>
 
             <div>
-                <?= Lang::get('requests.uploaded') ?>: <span id="new_uploaded"><?= Format::get_size($LoggedUser['BytesUploaded']) ?></span>
+                <?= t('server.requests.uploaded') ?>: <span id="new_uploaded"><?= Format::get_size($LoggedUser['BytesUploaded']) ?></span>
             </div>
             <div>
-                <?= Lang::get('requests.ratio') ?>: <span id="new_ratio"><?= Format::get_ratio_html($LoggedUser['BytesUploaded'], $LoggedUser['BytesDownloaded']) ?></span>
+                <?= t('server.requests.ratio') ?>: <span id="new_ratio"><?= Format::get_ratio_html($LoggedUser['BytesUploaded'], $LoggedUser['BytesDownloaded']) ?></span>
             </div>
         </td>
     </tr>

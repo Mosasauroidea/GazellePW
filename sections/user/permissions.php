@@ -69,7 +69,7 @@ function display_perm($Key) {
     if (isset($Permissions[$Key]) && $Permissions[$Key]) {
         $Perm .= ' checked="checked"';
     }
-    $Perm .= " /> <label for=\"$Key\">" . Lang::get("permissions.$Key")  . "</label><br />";
+    $Perm .= " /> <label for=\"$Key\">" . t("server.permissions.$Key")  . "</label><br />";
     echo "$Perm\n";
 }
 

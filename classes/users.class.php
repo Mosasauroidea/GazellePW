@@ -425,11 +425,11 @@ class Users {
      * @param boolean $Default Returns the default list if true
      */
     public static function release_order(&$SiteOptions, $Default = false) {
-        $RT = Lang::get('torrents.release_types') + array(
-            1024 => Lang::get('artist.1024'),
-            1023 => Lang::get('artist.1023'),
-            1022 => Lang::get('artist.1022'),
-            1021 => Lang::get('artist.1021')
+        $RT = t('server.torrents.release_types') + array(
+            1024 => t('server.artist.1024'),
+            1023 => t('server.artist.1023'),
+            1022 => t('server.artist.1022'),
+            1021 => t('server.artist.1021')
         );
 
         if ($Default || empty($SiteOptions['SortHide'])) {
@@ -628,7 +628,7 @@ class Users {
         }
 
         if ($IsEnabled && $UserInfo['Enabled'] == 2) {
-            $Str .= '<a href="rules.php" data-tooltip="' . Lang::get('user.disabled') . '"><i class="disabled_flag" aria-hidden="true">' . icon("User/disabled") . '</i></a>';
+            $Str .= '<a href="rules.php" data-tooltip="' . t('server.user.disabled') . '"><i class="disabled_flag" aria-hidden="true">' . icon("User/disabled") . '</i></a>';
         } else if ($IsWarned && $IsEnabled) {
             if ($UserInfo['Warned'] != '0000-00-00 00:00:00') {
                 $Str .= '<a href="wiki.php?action=article&amp;id=114"'

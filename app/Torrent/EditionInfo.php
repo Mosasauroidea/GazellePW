@@ -36,7 +36,7 @@ class EditionInfo {
     }
 
     public static function text(string $key): ?string {
-        return Lang::get("editioninfo.$key");
+        return t("server.editioninfo.$key");
     }
 
     public static function icon(string $key): ?string {

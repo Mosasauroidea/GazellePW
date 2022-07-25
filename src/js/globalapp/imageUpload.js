@@ -11,9 +11,7 @@ function imgUploadFillBBCode(containerId, loadingTarget) {
   UploadImage(
     false,
     (url) => {
-      $('#' + containerId).val(
-        $('#' + containerId).val() + '[img]' + url + '[/img]'
-      )
+      $('#' + containerId).val($('#' + containerId).val() + '[img]' + url + '[/img]')
     },
     {
       onBefore() {
@@ -33,7 +31,7 @@ async function imgCopy() {
   const value = $('#image').val()
   if (value) {
     await navigator.clipboard.writeText(value)
-    alert(lang.get('common.copied'))
+    alert(t('client.common.copied'))
   }
 }
 globalapp.imgCopy = imgCopy

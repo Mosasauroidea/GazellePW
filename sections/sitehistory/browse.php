@@ -28,11 +28,11 @@ if (!empty($_GET['tags'])) {
 }
 $Events = SiteHistory::get_events($Month, $Year, $Title, $Category, $SubCategory, $Tags, $Limit);
 $Months = SiteHistory::get_months();
-View::show_header(Lang::get('sitehistory.site_history'), '', 'PageSiteHistoryHome');
+View::show_header(t('server.sitehistory.site_history'), '', 'PageSiteHistoryHome');
 ?>
 <div class="LayoutBody">
     <div class="BodyHeader">
-        <h2 class="BodyHeader-nav"><a href="sitehistory.php"><?= Lang::get('sitehistory.site_history') ?></a> <?= $Month && $Year ? date("- F, Y", mktime(0, 0, 0, $Month, 1, $Year)) : '' ?></h2>
+        <h2 class="BodyHeader-nav"><a href="sitehistory.php"><?= t('server.sitehistory.site_history') ?></a> <?= $Month && $Year ? date("- F, Y", mktime(0, 0, 0, $Month, 1, $Year)) : '' ?></h2>
         <?
         SiteHistoryView::render_linkbox();
         ?>

@@ -147,43 +147,43 @@ if (!list($Labels, $InFlow, $OutFlow, $Max) = $Cache->get_value('users_timeline'
 }
 //End timeline generation
 
-View::show_header(Lang::get('stats.detailed_user_statistics'), '', 'PageStatUser');
+View::show_header(t('server.stats.detailed_user_statistics'), '', 'PageStatUser');
 ?>
 <div class="BodyNavLinks">
-    <a href="stats.php?action=torrents" class="brackets"><?= Lang::get('stats.torrent_stats') ?></a>
+    <a href="stats.php?action=torrents" class="brackets"><?= t('server.stats.torrent_stats') ?></a>
 </div>
-<h1 id="User_Flow"><a href="#User_Flow"><?= Lang::get('stats.user_flow') ?></a></h1>
+<h1 id="User_Flow"><a href="#User_Flow"><?= t('server.stats.user_flow') ?></a></h1>
 <div class="BoxBody center">
     <img src="https://chart.googleapis.com/chart?cht=lc&amp;chs=880x160&amp;chco=000D99,99000D&amp;chg=0,-1,1,1&amp;chxt=y,x&amp;chxs=0,h&amp;chxl=1:|<?= implode('|', $Labels) ?>&amp;chxr=0,0,<?= $Max ?>&amp;chd=t:<?= implode(',', $InFlow) ?>|<?= implode(',', $OutFlow) ?>&amp;chls=2,4,0&amp;chdl=New+Registrations|Disabled+Users&amp;chf=bg,s,FFFFFF00" alt="User Flow Chart" />
 </div>
 <br />
-<h1 id="User_Classes"><a href="#User_Classes"><?= Lang::get('stats.user_classes') ?></a></h1>
+<h1 id="User_Classes"><a href="#User_Classes"><?= t('server.stats.user_classes') ?></a></h1>
 <div class="BoxBody center">
-    <img src="<?= $ClassDistribution ?>" alt="<?= Lang::get('stats.user_class_distribution') ?>" />
+    <img src="<?= $ClassDistribution ?>" alt="<?= t('server.stats.user_class_distribution') ?>" />
 </div>
 <br />
-<h1 id="User_Platforms"><a href="#User_Platforms"><?= Lang::get('stats.user_platforms') ?></a></h1>
+<h1 id="User_Platforms"><a href="#User_Platforms"><?= t('server.stats.user_platforms') ?></a></h1>
 <div class="BoxBody center">
-    <img src="<?= $PlatformDistribution ?>" alt="<?= Lang::get('stats.user_platform_distribution') ?>" />
+    <img src="<?= $PlatformDistribution ?>" alt="<?= t('server.stats.user_platform_distribution') ?>" />
 </div>
 <br />
-<h1 id="User_Browsers"><a href="#User_Browsers"><?= Lang::get('stats.user_browsers') ?></a></h1>
+<h1 id="User_Browsers"><a href="#User_Browsers"><?= t('server.stats.user_browsers') ?></a></h1>
 <div class="BoxBody center">
-    <img src="<?= $BrowserDistribution ?>" alt="<?= Lang::get('stats.user_browsers_market_share') ?>" />
+    <img src="<?= $BrowserDistribution ?>" alt="<?= t('server.stats.user_browsers_market_share') ?>" />
 </div>
 <!-- <br />根本不能确实显示，而且也涉及到用户隐私，所以注释掉。
-<h1 id="Geo_Dist_Map"><a href="#Geo_Dist_Map"><?= Lang::get('stats.geographical_distribution_map') ?></a></h1>
+<h1 id="Geo_Dist_Map"><a href="#Geo_Dist_Map"><?= t('server.stats.geographical_distribution_map') ?></a></h1>
 <div class="box center">
-    <img src="https://chart.googleapis.com/chart?cht=map:fixed=-55,-180,73,180&amp;chs=440x220&amp;chd=t:<?= implode(',', $Rank) ?>&amp;chco=FFFFFF,EDEDED,1F0066&amp;chld=<?= implode('|', $Countries) ?>&amp;chf=bg,s,CCD6FF" alt="<?= Lang::get('stats.geographical_distribution_map') ?>" />
-    <img src="https://chart.googleapis.com/chart?cht=map:fixed=37,-26,65,67&amp;chs=440x220&amp;chs=440x220&amp;chd=t:<?= implode(',', $Rank) ?>&amp;chco=FFFFFF,EDEDED,1F0066&amp;chld=<?= implode('|', $Countries) ?>&amp;chf=bg,s,CCD6FF" alt="<?= Lang::get('stats.geographical_distribution_map_europe') ?>" />
+    <img src="https://chart.googleapis.com/chart?cht=map:fixed=-55,-180,73,180&amp;chs=440x220&amp;chd=t:<?= implode(',', $Rank) ?>&amp;chco=FFFFFF,EDEDED,1F0066&amp;chld=<?= implode('|', $Countries) ?>&amp;chf=bg,s,CCD6FF" alt="<?= t('server.stats.geographical_distribution_map') ?>" />
+    <img src="https://chart.googleapis.com/chart?cht=map:fixed=37,-26,65,67&amp;chs=440x220&amp;chs=440x220&amp;chd=t:<?= implode(',', $Rank) ?>&amp;chco=FFFFFF,EDEDED,1F0066&amp;chld=<?= implode('|', $Countries) ?>&amp;chf=bg,s,CCD6FF" alt="<?= t('server.stats.geographical_distribution_map_europe') ?>" />
     <br />
-    <img src="https://chart.googleapis.com/chart?cht=map:fixed=-46,-132,24,21.5&amp;chs=440x220&amp;chd=t:<?= implode(',', $Rank) ?>&amp;chco=FFFFFF,EDEDED,1F0066&amp;chld=<?= implode('|', $Countries) ?>&amp;chf=bg,s,CCD6FF" alt="<?= Lang::get('stats.geographical_distribution_map_south_america') ?>" />
-    <img src="https://chart.googleapis.com/chart?cht=map:fixed=-11,22,50,160&amp;chs=440x220&amp;chd=t:<?= implode(',', $Rank) ?>&amp;chco=FFFFFF,EDEDED,1F0066&amp;chld=<?= implode('|', $Countries) ?>&amp;chf=bg,s,CCD6FF" alt="<?= Lang::get('stats.geographical_distribution_map_asia') ?>" />
+    <img src="https://chart.googleapis.com/chart?cht=map:fixed=-46,-132,24,21.5&amp;chs=440x220&amp;chd=t:<?= implode(',', $Rank) ?>&amp;chco=FFFFFF,EDEDED,1F0066&amp;chld=<?= implode('|', $Countries) ?>&amp;chf=bg,s,CCD6FF" alt="<?= t('server.stats.geographical_distribution_map_south_america') ?>" />
+    <img src="https://chart.googleapis.com/chart?cht=map:fixed=-11,22,50,160&amp;chs=440x220&amp;chd=t:<?= implode(',', $Rank) ?>&amp;chco=FFFFFF,EDEDED,1F0066&amp;chld=<?= implode('|', $Countries) ?>&amp;chf=bg,s,CCD6FF" alt="<?= t('server.stats.geographical_distribution_map_asia') ?>" />
     <br />
-    <img src="https://chart.googleapis.com/chart?cht=map:fixed=-36,-57,37,100&amp;chs=440x220&amp;chd=t:<?= implode(',', $Rank) ?>&amp;chco=FFFFFF,EDEDED,1F0066&amp;chld=<?= implode('|', $Countries) ?>&amp;chf=bg,s,CCD6FF" alt="<?= Lang::get('stats.geographical_distribution_map_africa') ?>" />
-    <img src="https://chart.googleapis.com/chart?cht=map:fixed=14.8,15,45,86&amp;chs=440x220&amp;chd=t:<?= implode(',', $Rank) ?>&amp;chco=FFFFFF,EDEDED,1F0066&amp;chld=<?= implode('|', $Countries) ?>&amp;chf=bg,s,CCD6FF" alt="<?= Lang::get('stats.geographical_distribution_map_middle_east') ?>" />
+    <img src="https://chart.googleapis.com/chart?cht=map:fixed=-36,-57,37,100&amp;chs=440x220&amp;chd=t:<?= implode(',', $Rank) ?>&amp;chco=FFFFFF,EDEDED,1F0066&amp;chld=<?= implode('|', $Countries) ?>&amp;chf=bg,s,CCD6FF" alt="<?= t('server.stats.geographical_distribution_map_africa') ?>" />
+    <img src="https://chart.googleapis.com/chart?cht=map:fixed=14.8,15,45,86&amp;chs=440x220&amp;chd=t:<?= implode(',', $Rank) ?>&amp;chco=FFFFFF,EDEDED,1F0066&amp;chld=<?= implode('|', $Countries) ?>&amp;chf=bg,s,CCD6FF" alt="<?= t('server.stats.geographical_distribution_map_middle_east') ?>" />
     <br />
-    <img src="https://chart.googleapis.com/chart?chxt=y,x&amp;chg=0,-1,1,1&amp;chxs=0,h&amp;cht=bvs&amp;chco=76A4FB&amp;chs=880x300&amp;chd=t:<?= implode(',', array_slice($CountryUsers, 0, 31)) ?>&amp;chxl=1:|<?= implode('|', array_slice($Countries, 0, 31)) ?>|0:|<?= implode('|', $LogIncrements) ?>&amp;chf=bg,s,FFFFFF00" alt="<?= Lang::get('stats.number_of_users_by_country') ?>" />
+    <img src="https://chart.googleapis.com/chart?chxt=y,x&amp;chg=0,-1,1,1&amp;chxs=0,h&amp;cht=bvs&amp;chco=76A4FB&amp;chs=880x300&amp;chd=t:<?= implode(',', array_slice($CountryUsers, 0, 31)) ?>&amp;chxl=1:|<?= implode('|', array_slice($Countries, 0, 31)) ?>|0:|<?= implode('|', $LogIncrements) ?>&amp;chf=bg,s,FFFFFF00" alt="<?= t('server.stats.number_of_users_by_country') ?>" />
 </div> -->
 <?
 View::show_footer();

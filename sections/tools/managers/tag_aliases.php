@@ -3,7 +3,7 @@ if (!(check_perms('users_mod') || check_perms('site_tag_aliases_read'))) {
     error(403);
 }
 
-View::show_header(Lang::get('tools.tag_aliases'));
+View::show_header(t('server.tools.tag_aliases'));
 
 $orderby = ($_GET['order'] === 'badtags' ? 'BadTag' : 'AliasTag');
 
@@ -37,18 +37,18 @@ if (check_perms('users_mod')) {
 }
 ?>
 <div class="BodyHeader">
-    <h2 class="BodyHeader-nav"><?= Lang::get('tools.tag_aliases') ?></h2>
+    <h2 class="BodyHeader-nav"><?= t('server.tools.tag_aliases') ?></h2>
     <div class="BodyNavLinks">
-        <a href="tools.php?action=tag_aliases&amp;order=goodtags" class="brackets"><?= Lang::get('tools.sort_by_good_tags') ?></a>
-        <a href="tools.php?action=tag_aliases&amp;order=badtags" class="brackets"><?= Lang::get('tools.sort_by_bad_tags') ?></a>
+        <a href="tools.php?action=tag_aliases&amp;order=goodtags" class="brackets"><?= t('server.tools.sort_by_good_tags') ?></a>
+        <a href="tools.php?action=tag_aliases&amp;order=badtags" class="brackets"><?= t('server.tools.sort_by_bad_tags') ?></a>
     </div>
 </div>
 <table class="TableTagAlias Table">
     <tr class="Table-rowHeader">
-        <td class="Table-cell"><?= Lang::get('tools.proper_tag') ?></td>
-        <td class="Table-cell"><?= Lang::get('tools.renamed_from') ?></td>
+        <td class="Table-cell"><?= t('server.tools.proper_tag') ?></td>
+        <td class="Table-cell"><?= t('server.tools.renamed_from') ?></td>
         <? if (check_perms('users_mod')) { ?>
-            <td class="Table-cell"><?= Lang::get('tools.operations') ?></td>
+            <td class="Table-cell"><?= t('server.tools.operations') ?></td>
         <?  } ?>
     </tr>
     <!-- <tr /> -->

@@ -1,4 +1,8 @@
-[中文](./README-ZH.md) | [Screenshot](https://raw.githubusercontent.com/Mosasauroidea/GazellePW/main/public/static/stylespreview/en-github-dark.png)
+[中文](./docs/zh-Hans/README.md) | [Screenshot](https://raw.githubusercontent.com/Mosasauroidea/GazellePW/main/public/static/stylespreview/en-github-dark.png)
+
+<!--
+<a href="./docs/en/i18n.md"><span style="color: #d8210d; font-size: 1.5rem; text-decoration: underline;">Help us translate this project into your language!</span></a>
+-->
 
 # GazellePW
 
@@ -39,9 +43,9 @@ GazellePW (GazellePosterWall) is a web framework geared towards private BitTorre
 
 ## Documentation
 
-- [Getting Started](docs/Getting-Started.md)
-- [Frontend Development Guide](docs/Frontend-Development-Guide.md)
-- [Writting Markdown/MDX](docs/Writing-Markdown-Mdx.md)
+- [Getting Started](./docs/en/Getting-Started.md)
+- [Frontend Development Guide](./docs/en/Frontend-Development-Guide.md)
+- [Writting Markdown/MDX](./docs/en/Writing-Markdown-Mdx.md)
 
 ## Contributing
 

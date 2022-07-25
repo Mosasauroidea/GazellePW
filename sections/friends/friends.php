@@ -14,7 +14,7 @@ include_once(CONFIG['SERVER_ROOT'] . '/classes/paranoia.class.php');
 
 
 
-View::show_header(Lang::get('friends.friends'), 'comments', 'PageFriendHome');
+View::show_header(t('server.friends.friends'), 'comments', 'PageFriendHome');
 
 
 $UserID = $LoggedUser['ID'];
@@ -58,7 +58,7 @@ list($Results) = $DB->next_record();
 ?>
 <div class="LayoutBody">
     <div class="BodyHeader">
-        <h2 class="BodyHeader-nav"><?= Lang::get('friends.friends_list') ?></h2>
+        <h2 class="BodyHeader-nav"><?= t('server.friends.friends_list') ?></h2>
     </div>
     <div class="BodyNavLinks">
         <?
@@ -71,7 +71,7 @@ list($Results) = $DB->next_record();
         <div class="Box-body">
             <?
             if ($Results == 0) {
-                echo '<p>' . Lang::get('friends.you_have_no_friends') . '</p>';
+                echo '<p>' . t('server.friends.you_have_no_friends') . '</p>';
             }
             // Start printing out friends
             foreach ($Friends as $Friend) {
@@ -85,17 +85,17 @@ list($Results) = $DB->next_record();
                                 <td class="Table-cell" colspan="<?= (Users::has_avatars_enabled() ? 3 : 2) ?>">
                                     <span style="float: left;"><?= Users::format_username($FriendID, true, true, true, true) ?>
                                         <? if (check_paranoia('ratio', $Paranoia, $Class, $FriendID)) { ?>
-                                            &nbsp;<?= Lang::get('friends.ratio') ?>: <strong><?= Format::get_ratio_html($Uploaded, $Downloaded) ?></strong>
+                                            &nbsp;<?= t('server.friends.ratio') ?>: <strong><?= Format::get_ratio_html($Uploaded, $Downloaded) ?></strong>
                                         <?
                                         }
                                         if (check_paranoia('uploaded', $Paranoia, $Class, $FriendID)) {
                                         ?>
-                                            &nbsp;<?= Lang::get('friends.up') ?>: <strong><?= Format::get_size($Uploaded) ?></strong>
+                                            &nbsp;<?= t('server.friends.up') ?>: <strong><?= Format::get_size($Uploaded) ?></strong>
                                         <?
                                         }
                                         if (check_paranoia('downloaded', $Paranoia, $Class, $FriendID)) {
                                         ?>
-                                            &nbsp;<?= Lang::get('friends.down') ?>: <strong><?= Format::get_size($Downloaded) ?></strong>
+                                            &nbsp;<?= t('server.friends.down') ?>: <strong><?= Format::get_size($Downloaded) ?></strong>
                                         <?  } ?>
                                     </span>
                                     <? if (check_paranoia('lastseen', $Paranoia, $Class, $FriendID)) { ?>

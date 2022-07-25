@@ -81,25 +81,25 @@ list($Results) = $DB->next_record();
 
 $PageLinks = Format::get_pages($Page, $Results, BANS_PER_PAGE, 11);
 
-View::show_header(Lang::get('tools.h2_ip_address_bans'), '', 'PageToolBan');
+View::show_header(t('server.tools.h2_ip_address_bans'), '', 'PageToolBan');
 $DB->set_query_id($Bans);
 ?>
 
 <div class="BodyHeader">
-    <h2 class="BodyHeader-nav"><?= Lang::get('tools.h2_ip_address_bans') ?></h2>
+    <h2 class="BodyHeader-nav"><?= t('server.tools.h2_ip_address_bans') ?></h2>
 </div>
 <div class="BodyContent">
     <form class="Form SearchPage Box SearchBan" name="bans" action="" method="get">
         <table class="Form-rowList">
             <tr class="Form-row">
-                <td class="Form-label"><label for="ip"><?= Lang::get('tools.td_ip_address') ?>:</label></td>
+                <td class="Form-label"><label for="ip"><?= t('server.tools.td_ip_address') ?>:</label></td>
                 <td class="Form-inputs">
                     <input type="hidden" name="action" value="ip_ban" />
                     <input class="Input" type="text" id="ip" name="ip" size="20" value="<?= (!empty($_GET['ip']) ? display_str($_GET['ip']) : '') ?>" />
                 </td>
             </tr>
             <tr class="Form-row">
-                <td class="Form-label"><label for="notes"><?= Lang::get('tools.notes') ?>:</label></td>
+                <td class="Form-label"><label for="notes"><?= t('server.tools.notes') ?>:</label></td>
                 <td class="Form-inputs">
                     <input type="hidden" name="action" value="ip_ban" />
                     <input class="Input" type="text" id="notes" name="notes" size="60" value="<?= (!empty($_GET['notes']) ? display_str($_GET['notes']) : '') ?>" />
@@ -115,17 +115,17 @@ $DB->set_query_id($Bans);
 </div>
 <br />
 
-<h3><?= Lang::get('tools.manage') ?></h3>
+<h3><?= t('server.tools.manage') ?></h3>
 <div class="BodyNavLinks">
     <?= $PageLinks ?>
 </div>
 <table class="Table">
     <tr class="Table-rowHeader">
         <td class="Table-cell" colspan="2">
-            <span data-tooltip=""><?= Lang::get('tools.range') ?></span>
+            <span data-tooltip=""><?= t('server.tools.range') ?></span>
         </td>
-        <td class="Table-cell"><?= Lang::get('tools.notes') ?></td>
-        <td class="Table-cell"><?= Lang::get('tools.operations') ?></td>
+        <td class="Table-cell"><?= t('server.tools.notes') ?></td>
+        <td class="Table-cell"><?= t('server.tools.operations') ?></td>
     </tr>
     <tr class="Table-row">
         <form class="create_form" name="ban" action="" method="post">

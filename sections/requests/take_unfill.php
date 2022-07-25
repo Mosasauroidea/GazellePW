@@ -59,7 +59,7 @@ if ($RequestVotes['TotalBounty'] > $Uploaded) {
 		WHERE ID = $FillerID");
 }
 $FillerLang = Lang::getUserLang($FillerID);
-Misc::send_pm($FillerID, 0, Lang::get('inbox.request_filled_unfilled', ['Values' => $FillerLang]), Lang::get('inbox.the_request_url', ['Values' => $FillerLang]) . site_url() . "requests.php?action=view&amp;id=$RequestID]$FullName" . Lang::get('inbox.url_was_unfilled_by_url', ['Values' => $FillerLang]) . site_url() . 'user.php?id=' . $LoggedUser['ID'] . ']' . $LoggedUser['Username'] . Lang::get('inbox.url_for_the_reason_quote', ['Values' => $FillerLang]) . $_POST['reason'] . Lang::get('inbox.quote_if_disagree_unfill_please_url', ['Values' => $FillerLang]) . site_url() . "reports.php?action=report&amp;type=request&amp;id=" . $RequestID . Lang::get('inbox.report_request_and_explain', ['Values' => $FillerLang]));
+Misc::send_pm($FillerID, 0, t('server.inbox.request_filled_unfilled', ['Values' => $FillerLang]), t('server.inbox.the_request_url', ['Values' => $FillerLang]) . site_url() . "requests.php?action=view&amp;id=$RequestID]$FullName" . t('server.inbox.url_was_unfilled_by_url', ['Values' => $FillerLang]) . site_url() . 'user.php?id=' . $LoggedUser['ID'] . ']' . $LoggedUser['Username'] . t('server.inbox.url_for_the_reason_quote', ['Values' => $FillerLang]) . $_POST['reason'] . t('server.inbox.quote_if_disagree_unfill_please_url', ['Values' => $FillerLang]) . site_url() . "reports.php?action=report&amp;type=request&amp;id=" . $RequestID . t('server.inbox.report_request_and_explain', ['Values' => $FillerLang]));
 
 $Cache->delete_value("user_stats_$FillerID");
 

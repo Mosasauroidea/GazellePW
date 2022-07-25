@@ -12,7 +12,7 @@ export const ChartTorrentByYear = () => {
       type: 'column',
     },
     title: {
-      text: lang.get('stats.torrentByYear'),
+      text: t('client.stats.torrentByYear'),
     },
     series: [
       {
@@ -28,10 +28,5 @@ export const ChartTorrentByYear = () => {
       type: 'datetime',
     },
   })
-  return (
-    <Chart
-      options={options}
-      containerProps={{ className: 'ChartStat ChartTorrentByYear' }}
-    />
-  )
+  return <Chart options={options} containerProps={{ className: 'ChartStat ChartTorrentByYear' }} />
 }

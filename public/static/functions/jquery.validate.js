@@ -65,11 +65,7 @@
                   .val($(validator.submitButton).val())
                   .appendTo(validator.currentForm)
               }
-              validator.settings.submitHandler.call(
-                validator,
-                validator.currentForm,
-                event
-              )
+              validator.settings.submitHandler.call(validator, validator.currentForm, event)
               if (validator.submitButton) {
                 // and clean up afterwards; thanks to no-block-scope, hidden can be referenced
                 hidden.remove()
@@ -137,10 +133,7 @@
             delete existingRules.messages
             staticRules[element.name] = existingRules
             if (argument.messages) {
-              settings.messages[element.name] = $.extend(
-                settings.messages[element.name],
-                argument.messages
-              )
+              settings.messages[element.name] = $.extend(settings.messages[element.name], argument.messages)
             }
             break
           case 'remove':
@@ -244,31 +237,20 @@
         // hide error label and remove error class on focus if enabled
         if (this.settings.focusCleanup && !this.blockFocusCleanup) {
           if (this.settings.unhighlight) {
-            this.settings.unhighlight.call(
-              this,
-              element,
-              this.settings.errorClass,
-              this.settings.validClass
-            )
+            this.settings.unhighlight.call(this, element, this.settings.errorClass, this.settings.validClass)
           }
           this.addWrapper(this.errorsFor(element)).hide()
         }
       },
       onfocusout: function (element, event) {
-        if (
-          !this.checkable(element) &&
-          (element.name in this.submitted || !this.optional(element))
-        ) {
+        if (!this.checkable(element) && (element.name in this.submitted || !this.optional(element))) {
           this.element(element)
         }
       },
       onkeyup: function (element, event) {
         if (event.which === 9 && this.elementValue(element) === '') {
           return
-        } else if (
-          element.name in this.submitted ||
-          element === this.lastElement
-        ) {
+        } else if (element.name in this.submitted || element === this.lastElement) {
           this.element(element)
         }
       },
@@ -284,18 +266,14 @@
       },
       highlight: function (element, errorClass, validClass) {
         if (element.type === 'radio') {
-          this.findByName(element.name)
-            .addClass(errorClass)
-            .removeClass(validClass)
+          this.findByName(element.name).addClass(errorClass).removeClass(validClass)
         } else {
           $(element).addClass(errorClass).removeClass(validClass)
         }
       },
       unhighlight: function (element, errorClass, validClass) {
         if (element.type === 'radio') {
-          this.findByName(element.name)
-            .removeClass(errorClass)
-            .addClass(validClass)
+          this.findByName(element.name).removeClass(errorClass).addClass(validClass)
         } else {
           $(element).removeClass(errorClass).addClass(validClass)
         }
@@ -308,38 +286,22 @@
     },
 
     messages: {
-      required: lang.get('validation.this_field_is_required'),
-      remote: lang.get('validation.please_fix_this_field'),
-      email: lang.get('validation.please_enter_a_valid_email_address'),
-      url: lang.get('validation.please_enter_a_valid_url'),
-      date: lang.get('validation.please_enter_a_valid_date'),
-      dateISO: lang.get('validation.please_enter_a_valid_date_iso'),
-      number: lang.get('validation.please_enter_a_valid_date_number'),
-      digits: lang.get('validation.please_enter_only_digits'),
-      creditcard: lang.get(
-        'validation.please_enter_a_valid_credit_card_number'
-      ),
-      equalTo: lang.get('validation.please_enter_the_same_value_again'),
-      maxlength: $.validator.format(
-        lang.get('validation.please_enter_no_more_than_n_characters')
-      ),
-      minlength: $.validator.format(
-        lang.get('validataion.please_enter_at_least_n_characters')
-      ),
-      rangelength: $.validator.format(
-        lang.get(
-          'validataion.please_enter_a_value_between_x_and_y_characters_long'
-        )
-      ),
-      range: $.validator.format(
-        lang.get('validataion.please_enter_a_value_between_x_and_y')
-      ),
-      max: $.validator.format(
-        lang.get('validataion.please_enter_a_value_less_than_or_equal_to_n')
-      ),
-      min: $.validator.format(
-        lang.get('validataion.please_enter_a_value_greater_than_or_equal_to_n')
-      ),
+      required: t('client.validation.this_field_is_required'),
+      remote: t('client.validation.please_fix_this_field'),
+      email: t('client.validation.please_enter_a_valid_email_address'),
+      url: t('client.validation.please_enter_a_valid_url'),
+      date: t('client.validation.please_enter_a_valid_date'),
+      dateISO: t('client.validation.please_enter_a_valid_date_iso'),
+      number: t('client.validation.please_enter_a_valid_date_number'),
+      digits: t('client.validation.please_enter_only_digits'),
+      creditcard: t('client.validation.please_enter_a_valid_credit_card_number'),
+      equalTo: t('client.validation.please_enter_the_same_value_again'),
+      maxlength: $.validator.format(t('client.validation.please_enter_no_more_than_n_characters')),
+      minlength: $.validator.format(t('client.validation.please_enter_at_least_n_characters')),
+      rangelength: $.validator.format(t('client.validation.please_enter_a_value_between_x_and_y_characters_long')),
+      range: $.validator.format(t('client.validation.please_enter_a_value_between_x_and_y')),
+      max: $.validator.format(t('client.validation.please_enter_a_value_less_than_or_equal_to_n')),
+      min: $.validator.format(t('client.validation.please_enter_a_value_greater_than_or_equal_to_n')),
     },
 
     autoCreateRanges: false,
@@ -347,12 +309,8 @@
     prototype: {
       init: function () {
         this.labelContainer = $(this.settings.errorLabelContainer)
-        this.errorContext =
-          (this.labelContainer.length && this.labelContainer) ||
-          $(this.currentForm)
-        this.containers = $(this.settings.errorContainer).add(
-          this.settings.errorLabelContainer
-        )
+        this.errorContext = (this.labelContainer.length && this.labelContainer) || $(this.currentForm)
+        this.containers = $(this.settings.errorContainer).add(this.settings.errorLabelContainer)
         this.submitted = {}
         this.valueCache = {}
         this.pendingRequest = 0
@@ -391,17 +349,10 @@
             'focusin focusout keyup',
             delegate
           )
-          .validateDelegate(
-            "[type='radio'], [type='checkbox'], select, option",
-            'click',
-            delegate
-          )
+          .validateDelegate("[type='radio'], [type='checkbox'], select, option", 'click', delegate)
 
         if (this.settings.invalidHandler) {
-          $(this.currentForm).bind(
-            'invalid-form.validate',
-            this.settings.invalidHandler
-          )
+          $(this.currentForm).bind('invalid-form.validate', this.settings.invalidHandler)
         }
       },
 
@@ -419,11 +370,7 @@
 
       checkForm: function () {
         this.prepareForm()
-        for (
-          var i = 0, elements = (this.currentElements = this.elements());
-          elements[i];
-          i++
-        ) {
+        for (var i = 0, elements = (this.currentElements = this.elements()); elements[i]; i++) {
           this.check(elements[i])
         }
         return this.valid()
@@ -482,9 +429,7 @@
         this.lastElement = null
         this.prepareForm()
         this.hideErrors()
-        this.elements()
-          .removeClass(this.settings.errorClass)
-          .removeData('previousValue')
+        this.elements().removeClass(this.settings.errorClass).removeData('previousValue')
       },
 
       numberOfInvalids: function () {
@@ -514,11 +459,7 @@
       focusInvalid: function () {
         if (this.settings.focusInvalid) {
           try {
-            $(
-              this.findLastActive() ||
-                (this.errorList.length && this.errorList[0].element) ||
-                []
-            )
+            $(this.findLastActive() || (this.errorList.length && this.errorList[0].element) || [])
               .filter(':visible')
               .focus()
               // manually trigger focusin event; without it, focusin handler isn't called, findLastActive won't have anything to find
@@ -555,10 +496,7 @@
             }
 
             // select only the first element for each name, and only those with rules specified
-            if (
-              this.name in rulesCache ||
-              !validator.objectLength($(this).rules())
-            ) {
+            if (this.name in rulesCache || !validator.objectLength($(this).rules())) {
               return false
             }
 
@@ -573,10 +511,7 @@
 
       errors: function () {
         var errorClass = this.settings.errorClass.replace(' ', '.')
-        return $(
-          this.settings.errorElement + '.' + errorClass,
-          this.errorContext
-        )
+        return $(this.settings.errorElement + '.' + errorClass, this.errorContext)
       },
 
       reset: function () {
@@ -603,9 +538,7 @@
           val = $(element).val()
 
         if (type === 'radio' || type === 'checkbox') {
-          return $(
-            "input[name='" + $(element).attr('name') + "']:checked"
-          ).val()
+          return $("input[name='" + $(element).attr('name') + "']:checked").val()
         }
 
         if (typeof val === 'string') {
@@ -625,12 +558,7 @@
         for (var method in rules) {
           var rule = { method: method, parameters: rules[method] }
           try {
-            result = $.validator.methods[method].call(
-              this,
-              val,
-              element,
-              rule.parameters
-            )
+            result = $.validator.methods[method].call(this, val, element, rule.parameters)
 
             // if a method indicates that the field is optional and therefore valid,
             // don't mark it as valid when there are no other rules
@@ -652,11 +580,7 @@
           } catch (e) {
             if (this.settings.debug && window.console) {
               console.log(
-                'Exception occurred when checking element ' +
-                  element.id +
-                  ", check the '" +
-                  rule.method +
-                  "' method.",
+                'Exception occurred when checking element ' + element.id + ", check the '" + rule.method + "' method.",
                 e
               )
             }
@@ -677,8 +601,7 @@
       customDataMessage: function (element, method) {
         return (
           $(element).data('msg-' + method.toLowerCase()) ||
-          (element.attributes &&
-            $(element).attr('data-msg-' + method.toLowerCase()))
+          (element.attributes && $(element).attr('data-msg-' + method.toLowerCase()))
         )
       },
 
@@ -705,9 +628,7 @@
           // title is never undefined, so handle empty string as undefined
           (!this.settings.ignoreTitle && element.title) || undefined,
           $.validator.messages[method],
-          '<strong>Warning: No message defined for ' +
-            element.name +
-            '</strong>'
+          '<strong>Warning: No message defined for ' + element.name + '</strong>'
         )
       },
 
@@ -717,10 +638,7 @@
         if (typeof message === 'function') {
           message = message.call(this, rule.parameters, element)
         } else if (theregex.test(message)) {
-          message = $.validator.format(
-            message.replace(theregex, '{$1}'),
-            rule.parameters
-          )
+          message = $.validator.format(message.replace(theregex, '{$1}'), rule.parameters)
         }
         this.errorList.push({
           message: message,
@@ -743,12 +661,7 @@
         for (i = 0; this.errorList[i]; i++) {
           var error = this.errorList[i]
           if (this.settings.highlight) {
-            this.settings.highlight.call(
-              this,
-              error.element,
-              this.settings.errorClass,
-              this.settings.validClass
-            )
+            this.settings.highlight.call(this, error.element, this.settings.errorClass, this.settings.validClass)
           }
           this.showLabel(error.element, error.message)
         }
@@ -762,12 +675,7 @@
         }
         if (this.settings.unhighlight) {
           for (i = 0, elements = this.validElements(); elements[i]; i++) {
-            this.settings.unhighlight.call(
-              this,
-              elements[i],
-              this.settings.errorClass,
-              this.settings.validClass
-            )
+            this.settings.unhighlight.call(this, elements[i], this.settings.errorClass, this.settings.validClass)
           }
         }
         this.toHide = this.toHide.not(this.toShow)
@@ -789,9 +697,7 @@
         var label = this.errorsFor(element)
         if (label.length) {
           // refresh error/success class
-          label
-            .removeClass(this.settings.validClass)
-            .addClass(this.settings.errorClass)
+          label.removeClass(this.settings.validClass).addClass(this.settings.errorClass)
           // replace message on existing label
           label.html(message)
         } else {
@@ -836,10 +742,7 @@
       },
 
       idOrName: function (element) {
-        return (
-          this.groups[element.name] ||
-          (this.checkable(element) ? element.name : element.id || element.name)
-        )
+        return this.groups[element.name] || (this.checkable(element) ? element.name : element.id || element.name)
       },
 
       validationTargetFor: function (element) {
@@ -871,9 +774,7 @@
       },
 
       depend: function (param, element) {
-        return this.dependTypes[typeof param]
-          ? this.dependTypes[typeof param](param, element)
-          : true
+        return this.dependTypes[typeof param] ? this.dependTypes[typeof param](param, element) : true
       },
 
       dependTypes: {
@@ -890,10 +791,7 @@
 
       optional: function (element) {
         var val = this.elementValue(element)
-        return (
-          !$.validator.methods.required.call(this, val, element) &&
-          'dependency-mismatch'
-        )
+        return !$.validator.methods.required.call(this, val, element) && 'dependency-mismatch'
       },
 
       startRequest: function (element) {
@@ -910,12 +808,7 @@
           this.pendingRequest = 0
         }
         delete this.pending[element.name]
-        if (
-          valid &&
-          this.pendingRequest === 0 &&
-          this.formSubmitted &&
-          this.form()
-        ) {
+        if (valid && this.pendingRequest === 0 && this.formSubmitted && this.form()) {
           $(this.currentForm).submit()
           this.formSubmitted = false
         } else if (!valid && this.pendingRequest === 0 && this.formSubmitted) {
@@ -992,10 +885,7 @@
 
         // convert the value to a number for number inputs, and for text for backwards compability
         // allows type="date" and others to be compared as strings
-        if (
-          /min|max/.test(method) &&
-          (type === null || /number|range|text/.test(type))
-        ) {
+        if (/min|max/.test(method) && (type === null || /number|range|text/.test(type))) {
           value = Number(value)
         }
 
@@ -1034,9 +924,7 @@
       var rules = {}
       var validator = $.data(element.form, 'validator')
       if (validator.settings.rules) {
-        rules =
-          $.validator.normalizeRule(validator.settings.rules[element.name]) ||
-          {}
+        rules = $.validator.normalizeRule(validator.settings.rules[element.name]) || {}
       }
       return rules
     },
@@ -1122,8 +1010,7 @@
     // http://jqueryvalidation.org/jQuery.validator.addMethod/
     addMethod: function (name, method, message) {
       $.validator.methods[name] = method
-      $.validator.messages[name] =
-        message !== undefined ? message : $.validator.messages[name]
+      $.validator.messages[name] = message !== undefined ? message : $.validator.messages[name]
       if (method.length < 3) {
         $.validator.addClassRules(name, $.validator.normalizeRule(name))
       }
@@ -1171,26 +1058,17 @@
 
       // http://jqueryvalidation.org/date-method/
       date: function (value, element) {
-        return (
-          this.optional(element) ||
-          !/Invalid|NaN/.test(new Date(value).toString())
-        )
+        return this.optional(element) || !/Invalid|NaN/.test(new Date(value).toString())
       },
 
       // http://jqueryvalidation.org/dateISO-method/
       dateISO: function (value, element) {
-        return (
-          this.optional(element) ||
-          /^\d{4}[\/\-]\d{1,2}[\/\-]\d{1,2}$/.test(value)
-        )
+        return this.optional(element) || /^\d{4}[\/\-]\d{1,2}[\/\-]\d{1,2}$/.test(value)
       },
 
       // http://jqueryvalidation.org/number-method/
       number: function (value, element) {
-        return (
-          this.optional(element) ||
-          /^-?(?:\d+|\d{1,3}(?:,\d{3})+)?(?:\.\d+)?$/.test(value)
-        )
+        return this.optional(element) || /^-?(?:\d+|\d{1,3}(?:,\d{3})+)?(?:\.\d+)?$/.test(value)
       },
 
       // http://jqueryvalidation.org/digits-method/
@@ -1231,28 +1109,20 @@
 
       // http://jqueryvalidation.org/minlength-method/
       minlength: function (value, element, param) {
-        var length = $.isArray(value)
-          ? value.length
-          : this.getLength($.trim(value), element)
+        var length = $.isArray(value) ? value.length : this.getLength($.trim(value), element)
         return this.optional(element) || length >= param
       },
 
       // http://jqueryvalidation.org/maxlength-method/
       maxlength: function (value, element, param) {
-        var length = $.isArray(value)
-          ? value.length
-          : this.getLength($.trim(value), element)
+        var length = $.isArray(value) ? value.length : this.getLength($.trim(value), element)
         return this.optional(element) || length <= param
       },
 
       // http://jqueryvalidation.org/rangelength-method/
       rangelength: function (value, element, param) {
-        var length = $.isArray(value)
-          ? value.length
-          : this.getLength($.trim(value), element)
-        return (
-          this.optional(element) || (length >= param[0] && length <= param[1])
-        )
+        var length = $.isArray(value) ? value.length : this.getLength($.trim(value), element)
+        return this.optional(element) || (length >= param[0] && length <= param[1])
       },
 
       // http://jqueryvalidation.org/min-method/
@@ -1267,9 +1137,7 @@
 
       // http://jqueryvalidation.org/range-method/
       range: function (value, element, param) {
-        return (
-          this.optional(element) || (value >= param[0] && value <= param[1])
-        )
+        return this.optional(element) || (value >= param[0] && value <= param[1])
       },
 
       // http://jqueryvalidation.org/equalTo-method/
@@ -1278,11 +1146,9 @@
         // TODO find a way to bind the event just once, avoiding the unbind-rebind overhead
         var target = $(param)
         if (this.settings.onfocusout) {
-          target
-            .unbind('.validate-equalTo')
-            .bind('blur.validate-equalTo', function () {
-              $(element).valid()
-            })
+          target.unbind('.validate-equalTo').bind('blur.validate-equalTo', function () {
+            $(element).valid()
+          })
         }
         return value === target.val()
       },
@@ -1321,8 +1187,7 @@
               dataType: 'json',
               data: data,
               success: function (response) {
-                validator.settings.messages[element.name].remote =
-                  previous.originalMessage
+                validator.settings.messages[element.name].remote = previous.originalMessage
                 var valid = response === true || response === 'true'
                 if (valid) {
                   var submitted = validator.formSubmitted
@@ -1333,13 +1198,8 @@
                   validator.showErrors()
                 } else {
                   var errors = {}
-                  var message =
-                    response || validator.defaultMessage(element, 'remote')
-                  errors[element.name] = previous.message = $.isFunction(
-                    message
-                  )
-                    ? message(value)
-                    : message
+                  var message = response || validator.defaultMessage(element, 'remote')
+                  errors[element.name] = previous.message = $.isFunction(message) ? message(value) : message
                   validator.invalid[element.name] = true
                   validator.showErrors(errors)
                 }

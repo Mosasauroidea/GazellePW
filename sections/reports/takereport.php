@@ -22,7 +22,7 @@ if ($Short === 'request_update') {
     }
     $Reason = '[b]Year[/b]: ' . $Year . ".\n\n";
     // If the release type is somehow invalid, return "Not given"; otherwise, return the release type.
-    $Reason .= '[b]Release type[/b]: ' . ((empty($_POST['releasetype']) || !is_number($_POST['releasetype']) || $_POST['releasetype'] === '0') ? 'Not given' : Lang::get('torrents.release_types')[$_POST['releasetype']]) . ". \n\n";
+    $Reason .= '[b]Release type[/b]: ' . ((empty($_POST['releasetype']) || !is_number($_POST['releasetype']) || $_POST['releasetype'] === '0') ? 'Not given' : t('server.torrents.release_types')[$_POST['releasetype']]) . ". \n\n";
     $Reason .= '[b]Additional comments[/b]: ' . $_POST['comment'];
 } else {
     $Reason = $_POST['reason'];

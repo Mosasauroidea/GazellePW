@@ -77,9 +77,9 @@ class Time {
 
         if ($years > 0 && $levels > 0) {
             if ($years > 1) {
-                $return .= "$years " . Lang::get('time.ys');
+                $return .= "$years " . t('server.time.ys');
             } else {
-                $return .= "$years " . Lang::get('time.y');
+                $return .= "$years " . t('server.time.y');
             }
             $levels--;
         }
@@ -89,9 +89,9 @@ class Time {
                 $return .= ', ';
             }
             if ($months > 1) {
-                $return .= "$months " . Lang::get('time.ms');
+                $return .= "$months " . t('server.time.ms');
             } else {
-                $return .= "$months " . Lang::get('time.m');
+                $return .= "$months " . t('server.time.m');
             }
             $levels--;
         }
@@ -101,9 +101,9 @@ class Time {
                 $return .= ', ';
             }
             if ($weeks > 1) {
-                $return .= "$weeks " . Lang::get('time.ws');
+                $return .= "$weeks " . t('server.time.ws');
             } else {
-                $return .= "$weeks " . Lang::get('time.w');
+                $return .= "$weeks " . t('server.time.w');
             }
             $levels--;
         }
@@ -113,9 +113,9 @@ class Time {
                 $return .= ', ';
             }
             if ($days > 1) {
-                $return .= "$days " . Lang::get('time.ds');
+                $return .= "$days " . t('server.time.ds');
             } else {
-                $return .= "$days " . Lang::get('time.d');
+                $return .= "$days " . t('server.time.d');
             }
             $levels--;
         }
@@ -125,32 +125,32 @@ class Time {
                 $return .= ', ';
             }
             if ($hours > 1) {
-                $return .= "$hours " . Lang::get('time.hs');
+                $return .= "$hours " . t('server.time.hs');
             } else {
-                $return .= "$hours " . Lang::get('time.h');
+                $return .= "$hours " . t('server.time.h');
             }
             $levels--;
         }
 
         if ($minutes > 0 && $levels > 0) {
             if ($return != '') {
-                if (Lang::get('time.y') == 'year') {
-                    $return .= Lang::get('time.space_and_space');
+                if (t('server.time.y') == 'year') {
+                    $return .= t('server.time.space_and_space');
                 } else {
                     $return .= ' ';
                 }
             }
             if ($minutes > 1) {
-                $return .= "$minutes " . Lang::get('time.mns');
+                $return .= "$minutes " . t('server.time.mns');
             } else {
-                $return .= "$minutes " . Lang::get('time.mn');
+                $return .= "$minutes " . t('server.time.mn');
             }
         }
 
         if ($return == '') {
-            $return = Lang::get('time.just_now');
+            $return = t('server.time.just_now');
         } elseif (!$HideAgo) {
-            $return .= Lang::get('time.ago');
+            $return .= t('server.time.ago');
         }
 
         if ($lowercase) {

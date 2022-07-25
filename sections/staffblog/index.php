@@ -1,4 +1,4 @@
-<? View::show_header(Lang::get('blog.staff_blog'), 'bbcode', 'PageStaffBlogHome'); ?>
+<? View::show_header(t('server.blog.staff_blog'), 'bbcode', 'PageStaffBlogHome'); ?>
 <div class="LayoutBody">
     <?
     enforce_login();
@@ -24,7 +24,7 @@
                 case 'takeeditblog':
                     authorize();
                     if (empty($_POST['title'])) {
-                        error(Lang::get('blog.please_enter_a_title'));
+                        error(t('server.blog.please_enter_a_title'));
                     }
                     if (is_number($_POST['blogid'])) {
                         $DB->query("
@@ -62,7 +62,7 @@
                 case 'takenewblog':
                     authorize();
                     if (empty($_POST['title'])) {
-                        error(Lang::get('blog.please_enter_a_title'));
+                        error(t('server.blog.please_enter_a_title'));
                     }
                     $Title = db_string($_POST['title']);
                     $Body = db_string($_POST['body']);
@@ -103,9 +103,9 @@
         <div class="LayoutBody">
             <div class="BodyHeader">
                 <div class="head">
-                    <?= ((empty($_GET['action'])) ? Lang::get('blog.create_staff_blog_post') : Lang::get('blog.edit_staff_blog_post')) ?>
+                    <?= ((empty($_GET['action'])) ? t('server.blog.create_staff_blog_post') : t('server.blog.edit_staff_blog_post')) ?>
                     <span style="float: right;">
-                        <a href="#" onclick="$('#postform').gtoggle(); this.innerHTML = (this.innerHTML == '<?= Lang::get('global.hide') ?>' ? '<?= Lang::get('global.show') ?>' : '<?= Lang::get('global.hide') ?>'); return false;" class="brackets"><?= ((!isset($_REQUEST['action']) || $_REQUEST['action'] != 'editblog') ? Lang::get('global.show') : Lang::get('global.hide')) ?></a>
+                        <a href="#" onclick="$('#postform').gtoggle(); this.innerHTML = (this.innerHTML == '<?= t('server.global.hide') ?>' ? '<?= t('server.global.show') ?>' : '<?= t('server.global.hide') ?>'); return false;" class="brackets"><?= ((!isset($_REQUEST['action']) || $_REQUEST['action'] != 'editblog') ? t('server.global.show') : t('server.global.hide')) ?></a>
                     </span>
                 </div>
                 <form class="<?= ((empty($_GET['action'])) ? 'create_form' : 'edit_form') ?>" id="blog_post" name="blog_post" action="staffblog.php" method="post">
@@ -116,13 +116,13 @@
                             <input type="hidden" name="blogid" value="<?= $BlogID; ?>" />
                         <?      } ?>
                         <div class="field_div">
-                            <h3><?= Lang::get('blog.title') ?></h3>
+                            <h3><?= t('server.blog.title') ?></h3>
                             <input class="Input" type="text" name="title" size="95" <? if (!empty($Title)) {
                                                                                         echo ' value="' . display_str($Title) . '"';
                                                                                     } ?> />
                         </div>
                         <div class="field_div">
-                            <h3><?= Lang::get('blog.body') ?></h3>
+                            <h3><?= t('server.blog.body') ?></h3>
 
                             <textarea class="Input" id="quickpost" name="body" cols="95" rows="15"><? if (!empty($Body)) {
                                                                                                         echo display_str($Body);
@@ -131,7 +131,7 @@
                         </div>
                         <div class="submit_div center">
                             <input id="preview_button" type="button" value="Preview" onclick="Quick_Preview();">
-                            <input class="Button" type="submit" value="<?= ((!isset($_GET['action'])) ? Lang::get('blog.create_a_blog_post') : Lang::get('blog.edit_blog_post')) ?>" />
+                            <input class="Button" type="submit" value="<?= ((!isset($_GET['action'])) ? t('server.blog.create_a_blog_post') : t('server.blog.edit_blog_post')) ?>" />
                         </div>
                     </div>
                 </form>
@@ -164,14 +164,14 @@
                     <div class="Post-header Box-header">
                         <div class="Post-headerLeft">
                             <span class="Post-headerTitle"><?= $Title ?></span> -
-                            <span><?= Lang::get('blog.posted') ?></span>
+                            <span><?= t('server.blog.posted') ?></span>
                             <?= time_diff($BlogTime); ?>
-                            <?= Lang::get('blog.by') ?> <a href="user.php?name=<?= $Author ?>"><?= $Author ?></a>
+                            <?= t('server.blog.by') ?> <a href="user.php?name=<?= $Author ?>"><?= $Author ?></a>
                         </div>
                         <div class="Post-headerActions">
                             <? if (check_perms('admin_manage_blog')) { ?>
-                                - <a href="staffblog.php?action=editblog&amp;id=<?= $BlogID ?>" class="brackets"><?= Lang::get('global.edit') ?></a>
-                                <a href="staffblog.php?action=deleteblog&amp;id=<?= $BlogID ?>&amp;auth=<?= $LoggedUser['AuthKey'] ?>" onclick="return confirm('<?= Lang::get('blog.do_you_want_to_delete_this') ?>');" class="brackets"><?= Lang::get('global.delete') ?></a>
+                                - <a href="staffblog.php?action=editblog&amp;id=<?= $BlogID ?>" class="brackets"><?= t('server.global.edit') ?></a>
+                                <a href="staffblog.php?action=deleteblog&amp;id=<?= $BlogID ?>&amp;auth=<?= $LoggedUser['AuthKey'] ?>" onclick="return confirm('<?= t('server.blog.do_you_want_to_delete_this') ?>');" class="brackets"><?= t('server.global.delete') ?></a>
                             <? } ?>
                         </div>
                     </div>

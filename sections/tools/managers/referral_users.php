@@ -81,7 +81,7 @@ View::show_header('Referred Users');
                 </tr>
             </table>
             <div class="center">
-                <input class="Button" type="submit" name="submit" value="<?= Lang::get('global.submit') ?>" />
+                <input class="Button" type="submit" name="submit" value="<?= t('server.global.submit') ?>" />
             </div>
         </div>
     </form>

@@ -21,7 +21,7 @@ if (!is_number($OldGroupID) || !is_number($GroupID) || !is_number($TorrentID) ||
 
 if ($OldGroupID == $GroupID) {
     $Location = (empty($_SERVER['HTTP_REFERER'])) ? "torrents.php?action=edit&id={$GroupID}" : $_SERVER['HTTP_REFERER'];
-    header(Lang::get('torrents.location') . ": {$Location}");
+    header(t('server.torrents.location') . ": {$Location}");
     die();
 }
 
@@ -33,7 +33,7 @@ if (empty($_POST['confirm'])) {
 		WHERE ID = $OldGroupID");
     if (!$DB->has_results()) {
         //Trying to move to an empty group? I think not!
-        // set_message(Lang::get('torrents.the_destination_torrent_group_does_not_exist'));
+        // set_message(t('server.torrents.the_destination_torrent_group_does_not_exist'));
         $Location = (empty($_SERVER['HTTP_REFERER'])) ? "torrents.php?action=edit&id={$OldGroupID}" : $_SERVER['HTTP_REFERER'];
         header("Location: {$Location}");
         die();
@@ -45,10 +45,10 @@ if (empty($_POST['confirm'])) {
 		WHERE ID = $GroupID");
     if (!$DB->has_results()) {
         //Trying to move to an empty group? I think not!
-        // set_message(Lang::get('torrents.the_destination_torrent_group_does_not_exist'));
+        // set_message(t('server.torrents.the_destination_torrent_group_does_not_exist'));
         $Location = (empty($_SERVER['HTTP_REFERER'])) ? "torrents.php?action=edit&id={$OldGroupID}" : $_SERVER['HTTP_REFERER'];
         header("Location: {$Location}");
-        error(Lang::get('torrents.the_destination_torrent_group_does_not_exist'));
+        error(t('server.torrents.the_destination_torrent_group_does_not_exist'));
     }
     $NewGroup = $DB->next_record(MYSQLI_ASSOC);
 
@@ -56,7 +56,7 @@ if (empty($_POST['confirm'])) {
 ?>
     <div class="LayoutBody">
         <div class="BodyHeader">
-            <h2 class="BodyHeader-nav"><?= Lang::get('torrents.torrent_group_id_change_confirmation') ?></h2>
+            <h2 class="BodyHeader-nav"><?= t('server.torrents.torrent_group_id_change_confirmation') ?></h2>
         </div>
         <div class="BoxBody">
             <form class="confirm_form" name="torrent_group" action="torrents.php" method="post">
@@ -66,11 +66,11 @@ if (empty($_POST['confirm'])) {
                 <input type="hidden" name="torrentid" value="<?= $TorrentID ?>" />
                 <input type="hidden" name="oldgroupid" value="<?= $OldGroupID ?>" />
                 <input type="hidden" name="groupid" value="<?= $GroupID ?>" />
-                <h3><?= Lang::get('torrents.you_are_attempt_to_move_from_before') ?><?= $TorrentID ?><?= Lang::get('torrents.you_are_attempt_to_move_from_after') ?>:</h3>
+                <h3><?= t('server.torrents.you_are_attempt_to_move_from_before') ?><?= $TorrentID ?><?= t('server.torrents.you_are_attempt_to_move_from_after') ?>:</h3>
                 <ul>
                     <li><a href="torrents.php?id=<?= $OldGroupID ?>"><?= Torrents::group_name($OldGroup, false) ?></a></li>
                 </ul>
-                <h3><?= Lang::get('torrents.into_the_group') ?>:</h3>
+                <h3><?= t('server.torrents.into_the_group') ?>:</h3>
                 <ul>
                     <li><a href="torrents.php?id=<?= $GroupID ?>"><?= Torrents::group_name($NewGroup, false) ?></a></li>
                 </ul>

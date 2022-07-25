@@ -10,11 +10,11 @@ if (isset($_GET['details'])) {
     $Details = 'all';
 }
 
-View::show_header(Lang::get('top10.top_10_tags'), '', 'PageTop10Tag');
+View::show_header(t('server.top10.top_10_tags'), '', 'PageTop10Tag');
 ?>
 <div class="LayoutBody">
     <div class="BodyHeader">
-        <h2 class="BodyHeader-nav"><?= Lang::get('top10.top_10_tags') ?></h2>
+        <h2 class="BodyHeader-nav"><?= t('server.top10.top_10_tags') ?></h2>
         <? Top10View::render_linkbox("tags", 'BodyNavLinks'); ?>
     </div>
 
@@ -42,7 +42,7 @@ View::show_header(Lang::get('top10.top_10_tags'), '', 'PageTop10Tag');
             $Cache->cache_value('topusedtag_' . $Limit, $TopUsedTags, 3600 * 12);
         }
 
-        generate_tag_table(Lang::get('top10.most_used_torrent_tags'), 'ut', $TopUsedTags, $Limit);
+        generate_tag_table(t('server.top10.most_used_torrent_tags'), 'ut', $TopUsedTags, $Limit);
     }
 
     if ($Details == 'all' || $Details == 'ur') {
@@ -62,7 +62,7 @@ View::show_header(Lang::get('top10.top_10_tags'), '', 'PageTop10Tag');
             $Cache->cache_value('toprequesttag_' . $Limit, $TopRequestTags, 3600 * 12);
         }
 
-        generate_tag_table(Lang::get('top10.most_used_request_tags'), 'ur', $TopRequestTags, $Limit, false, true);
+        generate_tag_table(t('server.top10.most_used_request_tags'), 'ur', $TopRequestTags, $Limit, false, true);
     }
 
     if ($Details == 'all' || $Details == 'v') {
@@ -83,7 +83,7 @@ View::show_header(Lang::get('top10.top_10_tags'), '', 'PageTop10Tag');
             $Cache->cache_value('topvotedtag_' . $Limit, $TopVotedTags, 3600 * 12);
         }
 
-        generate_tag_table(Lang::get('top10.most_highly_voted_tags'), 'v', $TopVotedTags, $Limit);
+        generate_tag_table(t('server.top10.most_highly_voted_tags'), 'v', $TopVotedTags, $Limit);
     }
 
     echo '</div>';
@@ -98,36 +98,36 @@ View::show_header(Lang::get('top10.top_10_tags'), '', 'PageTop10Tag');
             $URLString = 'torrents.php?taglist=';
         }
     ?>
-        <h3><?= Lang::get('top10.top') ?> <?= $Limit . ' ' . $Caption ?>
+        <h3><?= t('server.top10.top') ?> <?= $Limit . ' ' . $Caption ?>
             <small class="top10_quantity_links">
                 <?
                 switch ($Limit) {
                     case 100: ?>
-                        - <a href="top10.php?type=tags&amp;details=<?= $Tag ?>" class="brackets"><?= Lang::get('top10.top') ?> 10</a>
-                        - <span class="brackets"><?= Lang::get('top10.top') ?> 100</span>
-                        - <a href="top10.php?type=tags&amp;limit=250&amp;details=<?= $Tag ?>" class="brackets"><?= Lang::get('top10.top') ?> 250</a>
+                        - <a href="top10.php?type=tags&amp;details=<?= $Tag ?>" class="brackets"><?= t('server.top10.top') ?> 10</a>
+                        - <span class="brackets"><?= t('server.top10.top') ?> 100</span>
+                        - <a href="top10.php?type=tags&amp;limit=250&amp;details=<?= $Tag ?>" class="brackets"><?= t('server.top10.top') ?> 250</a>
                     <? break;
                     case 250: ?>
-                        - <a href="top10.php?type=tags&amp;details=<?= $Tag ?>" class="brackets"><?= Lang::get('top10.top') ?> 10</a>
-                        - <a href="top10.php?type=tags&amp;limit=100&amp;details=<?= $Tag ?>" class="brackets"><?= Lang::get('top10.top') ?> 100</a>
-                        - <span class="brackets"><?= Lang::get('top10.top') ?> 250</span>
+                        - <a href="top10.php?type=tags&amp;details=<?= $Tag ?>" class="brackets"><?= t('server.top10.top') ?> 10</a>
+                        - <a href="top10.php?type=tags&amp;limit=100&amp;details=<?= $Tag ?>" class="brackets"><?= t('server.top10.top') ?> 100</a>
+                        - <span class="brackets"><?= t('server.top10.top') ?> 250</span>
                     <? break;
                     default: ?>
-                        - <span class="brackets"><?= Lang::get('top10.top') ?> 10</span>
-                        - <a href="top10.php?type=tags&amp;limit=100&amp;details=<?= $Tag ?>" class="brackets"><?= Lang::get('top10.top') ?> 100</a>
-                        - <a href="top10.php?type=tags&amp;limit=250&amp;details=<?= $Tag ?>" class="brackets"><?= Lang::get('top10.top') ?> 250</a>
+                        - <span class="brackets"><?= t('server.top10.top') ?> 10</span>
+                        - <a href="top10.php?type=tags&amp;limit=100&amp;details=<?= $Tag ?>" class="brackets"><?= t('server.top10.top') ?> 100</a>
+                        - <a href="top10.php?type=tags&amp;limit=250&amp;details=<?= $Tag ?>" class="brackets"><?= t('server.top10.top') ?> 250</a>
                 <?  } ?>
             </small>
         </h3>
         <div class="TableContainer">
             <table class="TableTag Table">
                 <tr class="Table-rowHeader">
-                    <td class="Table-cell"><?= Lang::get('top10.rank') ?></td>
-                    <td class="Table-cell"><?= Lang::get('top10.tag') ?></td>
-                    <td class="Table-cell Table-cellRight"><?= Lang::get('top10.uses') ?></td>
+                    <td class="Table-cell"><?= t('server.top10.rank') ?></td>
+                    <td class="Table-cell"><?= t('server.top10.tag') ?></td>
+                    <td class="Table-cell Table-cellRight"><?= t('server.top10.uses') ?></td>
                     <? if ($ShowVotes) {   ?>
-                        <td class="Table-cell Table-cellRight"><?= Lang::get('top10.pos_votes') ?></td>
-                        <td class="Table-cell Table-cellRight"><?= Lang::get('top10.neg_votes') ?></td>
+                        <td class="Table-cell Table-cellRight"><?= t('server.top10.pos_votes') ?></td>
+                        <td class="Table-cell Table-cellRight"><?= t('server.top10.neg_votes') ?></td>
                     <?  }   ?>
                 </tr>
                 <?
@@ -135,7 +135,7 @@ View::show_header(Lang::get('top10.top_10_tags'), '', 'PageTop10Tag');
                 if (empty($Details)) {
                     echo '
 		<tr class="Table-row">
-			<td class="Table-cell Table-cellCenter" colspan="9">' . Lang::get('top10.found_no_tags_matching_the_criteria') . '</td>
+			<td class="Table-cell Table-cellCenter" colspan="9">' . t('server.top10.found_no_tags_matching_the_criteria') . '</td>
 		</tr>
 		</table></div>';
                     return;

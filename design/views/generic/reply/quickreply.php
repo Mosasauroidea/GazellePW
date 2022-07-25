@@ -51,7 +51,7 @@ if (!isset($InputAction)) {
     $InputAction = 'reply';
 }
 if (!isset($InputTitle)) {
-    $InputTitle = Lang::get('forums.post_comment');
+    $InputTitle = t('server.forums.post_comment');
 }
 if (!isset($Action)) {
     $Action = '';
@@ -96,7 +96,7 @@ $ReplyText = new TEXTAREA_PREVIEW(
                 if (isset($SubscribeBox) && !isset($ForumID) && Subscriptions::has_subscribed_comments($Document, $InputID) === false) {
                 ?>
                     <input id="subscribebox" type="checkbox" name="subscribe" <?= !empty($HeavyInfo['AutoSubscribe']) ? ' checked="checked"' : '' ?> tabindex="2" />
-                    <label for="subscribebox"><?= Lang::get('forums.checkbox_subscribe') ?></label>
+                    <label for="subscribebox"><?= t('server.forums.checkbox_subscribe') ?></label>
                     <?
                 }
                 // Forum thread logic
@@ -105,7 +105,7 @@ $ReplyText = new TEXTAREA_PREVIEW(
                     if (!Subscriptions::has_subscribed($InputID)) {
                     ?>
                         <input id="subscribebox" type="checkbox" name="subscribe" <?= !empty($HeavyInfo['AutoSubscribe']) ? ' checked="checked"' : '' ?> tabindex="2" />
-                        <label for="subscribebox"><?= Lang::get('forums.checkbox_subscribe') ?></label>
+                        <label for="subscribebox"><?= t('server.forums.checkbox_subscribe') ?></label>
                     <?
                     }
 
@@ -117,7 +117,7 @@ $ReplyText = new TEXTAREA_PREVIEW(
                         $Checked = ($PostDate >= $TestDate) ? "checked" : "";
                     ?>
                         <input id="mergebox" type="checkbox" name="merge" tabindex="2">
-                        <label for="mergebox"><?= Lang::get('forums.checkbox_merge') ?></label>
+                        <label for="mergebox"><?= t('server.forums.checkbox_merge') ?></label>
                     <?
                     }
                     if (!G::$LoggedUser['DisableAutoSave']) {
@@ -129,7 +129,7 @@ $ReplyText = new TEXTAREA_PREVIEW(
                     }
                 }
                 ?>
-                <input class="Button" variant="primary" type="submit" value="<?= Lang::get('forums.post_reply') ?>" id="submit_button" tabindex="1" />
+                <input class="Button" variant="primary" type="submit" value="<?= t('server.forums.post_reply') ?>" id="submit_button" tabindex="1" />
             </div>
         </form>
     </div>

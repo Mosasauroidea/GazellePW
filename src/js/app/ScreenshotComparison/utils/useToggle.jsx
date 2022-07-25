@@ -3,13 +3,7 @@ import { useKeyPrevent } from '#/js/app/hooks'
 import { isGpwHelperInjected } from '#/js/app/utils'
 import { Dialog, Snackbar } from '#/js/app/components'
 
-export default function useToggle({
-  key,
-  context,
-  active,
-  deactive,
-  checkGpwHelper,
-}) {
+export default function useToggle({ key, context, active, deactive, checkGpwHelper }) {
   const [isActived, setIsActived] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
   useKeyPrevent(key, async () => {
@@ -20,9 +14,7 @@ export default function useToggle({
           <Dialog.Body>
             <div
               dangerouslySetInnerHTML={{
-                __html: lang.get(
-                  'screenshot_comparison.gpw_helper_not_installed'
-                ),
+                __html: t('client.screenshot_comparison.gpw_helper_not_installed'),
               }}
             />
           </Dialog.Body>

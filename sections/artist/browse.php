@@ -9,7 +9,7 @@ function compare($X, $Y) {
 
 function sectionTitle($id) {
     global $ReleaseTypes;
-    $text = isset(Lang::get('torrents.release_types')[$id]) ? Lang::get('torrents.release_types')[$id] : $ReleaseTypes[$id];
+    $text = isset(t('server.torrents.release_types')[$id]) ? t('server.torrents.release_types')[$id] : $ReleaseTypes[$id];
     return $text;
 }
 
@@ -198,22 +198,22 @@ foreach ($Importances as $ID => $Group) {
 }
 
 if (!empty($DirectorAlbums)) {
-    $ReleaseTypes[1021] = Lang::get('artist.1021');
+    $ReleaseTypes[1021] = t('server.artist.1021');
 }
 if (!empty($WritterAlbums)) {
-    $ReleaseTypes[1022] = Lang::get('artist.1022');
+    $ReleaseTypes[1022] = t('server.artist.1022');
 }
 if (!empty($ProducerAlbums)) {
-    $ReleaseTypes[1023] = Lang::get('artist.1023');
+    $ReleaseTypes[1023] = t('server.artist.1023');
 }
 if (!empty($ComposerAlbums)) {
-    $ReleaseTypes[1024] = Lang::get('artist.1024');
+    $ReleaseTypes[1024] = t('server.artist.1024');
 }
 if (!empty($CameraAlbums)) {
-    $ReleaseTypes[1025] = Lang::get('artist.1025');
+    $ReleaseTypes[1025] = t('server.artist.1025');
 }
 if (!empty($ActorAlbums)) {
-    $ReleaseTypes[1026] = Lang::get('artist.1026');
+    $ReleaseTypes[1026] = t('server.artist.1026');
 }
 //Custom sorting for releases
 if (!empty($LoggedUser['SortHide'])) {
@@ -250,7 +250,7 @@ if (!empty($UsedReleases)) { ?>
         }
         if ($NumRequests > 0) {
         ?>
-            <a href="#requests" class="brackets"><?= Lang::get('global.requests') ?></a>
+            <a href="#requests" class="brackets"><?= t('server.global.requests') ?></a>
         <? } ?>
     </div>
 <? }
@@ -287,7 +287,7 @@ foreach ($Importances as $Group) {
 foreach ($TorrentGroups as $ReleaseType => $GroupInfo) {
     $DisplayName =  sectionTitle($ReleaseType);
 ?>
-    <h3 id="torrents_<?= $ReleaseType ?>"><strong><?= $DisplayName ?></strong>&nbsp;(<a href="#" onclick="$('.torrent_table_<?= $ReleaseType ?>').gtoggle(true); return false;"><?= Lang::get('artist.view') ?></a>)</h3>
+    <h3 id="torrents_<?= $ReleaseType ?>"><strong><?= $DisplayName ?></strong>&nbsp;(<a href="#" onclick="$('.torrent_table_<?= $ReleaseType ?>').gtoggle(true); return false;"><?= t('server.artist.view') ?></a>)</h3>
     <div class="Box">
         <div class="Box-body torrent_table_<?= $ReleaseType ?>" id="torrent_table_<?= $ID ?>">
             <?
@@ -310,9 +310,9 @@ View::show_header(($ChineseName ? '[' . $ChineseName . '] ' : '') . $Name, 'brow
 <div class="LayoutBody">
     <div class="BodyHeader">
         <div class="BodyNavLinks">
-            <a href="artist.php?action=editrequest&amp;artistid=<?= $ArtistID ?>" class="brackets"><?= Lang::get('artist.editrequest') ?></a>
+            <a href="artist.php?action=editrequest&amp;artistid=<?= $ArtistID ?>" class="brackets"><?= t('server.artist.editrequest') ?></a>
             <? if (check_perms('site_submit_requests')) { ?>
-                <a href="requests.php?action=new&amp;artistid=<?= $ArtistID ?>" class="brackets"><?= Lang::get('artist.re_torrents') ?></a>
+                <a href="requests.php?action=new&amp;artistid=<?= $ArtistID ?>" class="brackets"><?= t('server.artist.re_torrents') ?></a>
                 <?
             }
             if (check_perms('site_torrents_notify')) {
@@ -328,32 +328,32 @@ View::show_header(($ChineseName ? '[' . $ChineseName . '] ' : '') . $Name, 'brow
                 }
                 if (stripos($Notify['Artists'], "|$Name|") === false) {
                 ?>
-                    <a href="artist.php?action=notify&amp;artistid=<?= $ArtistID ?>&amp;auth=<?= $LoggedUser['AuthKey'] ?>" class="brackets"><?= Lang::get('artist.torrents_notify') ?></a>
+                    <a href="artist.php?action=notify&amp;artistid=<?= $ArtistID ?>&amp;auth=<?= $LoggedUser['AuthKey'] ?>" class="brackets"><?= t('server.artist.torrents_notify') ?></a>
                 <?  } else { ?>
-                    <a href="artist.php?action=notifyremove&amp;artistid=<?= $ArtistID ?>&amp;auth=<?= $LoggedUser['AuthKey'] ?>" class="brackets"><?= Lang::get('artist.torrents_unnotify') ?></a>
+                    <a href="artist.php?action=notifyremove&amp;artistid=<?= $ArtistID ?>&amp;auth=<?= $LoggedUser['AuthKey'] ?>" class="brackets"><?= t('server.artist.torrents_unnotify') ?></a>
                 <?
                 }
             }
             if (Bookmarks::has_bookmarked('artist', $ArtistID)) {
                 ?>
-                <a href="#" id="bookmarklink_artist_<?= $ArtistID ?>" onclick="Unbookmark('artist', <?= $ArtistID ?>, '<?= Lang::get('global.add_bookmark') ?>'); return false;" class="brackets"><?= Lang::get('global.remove_bookmark') ?></a>
+                <a href="#" id="bookmarklink_artist_<?= $ArtistID ?>" onclick="Unbookmark('artist', <?= $ArtistID ?>, '<?= t('server.global.add_bookmark') ?>'); return false;" class="brackets"><?= t('server.global.remove_bookmark') ?></a>
             <?  } else { ?>
-                <a href="#" id="bookmarklink_artist_<?= $ArtistID ?>" onclick="Bookmark('artist', <?= $ArtistID ?>, '<?= Lang::get('global.remove_bookmark') ?>'); return false;" class="brackets"><?= Lang::get('global.add_bookmark') ?></a>
+                <a href="#" id="bookmarklink_artist_<?= $ArtistID ?>" onclick="Bookmark('artist', <?= $ArtistID ?>, '<?= t('server.global.remove_bookmark') ?>'); return false;" class="brackets"><?= t('server.global.add_bookmark') ?></a>
             <?  } ?>
-            <a href="#" id="subscribelink_artist<?= $ArtistID ?>" class="brackets" onclick="SubscribeComments('artist', <?= $ArtistID ?>);return false;"><?= Subscriptions::has_subscribed_comments('artist', $ArtistID) !== false ? Lang::get('torrents.unsubscribe') : Lang::get('torrents.subscribe') ?></a>
+            <a href="#" id="subscribelink_artist<?= $ArtistID ?>" class="brackets" onclick="SubscribeComments('artist', <?= $ArtistID ?>);return false;"><?= Subscriptions::has_subscribed_comments('artist', $ArtistID) !== false ? t('server.torrents.unsubscribe') : t('server.torrents.subscribe') ?></a>
             <!--    <a href="#" id="recommend" class="brackets">Recommend</a> -->
             <?
             if (check_perms('site_edit_wiki')) {
             ?>
-                <a href="artist.php?action=edit&amp;artistid=<?= $ArtistID ?>" class="brackets"><?= Lang::get('global.edit') ?></a>
+                <a href="artist.php?action=edit&amp;artistid=<?= $ArtistID ?>" class="brackets"><?= t('server.global.edit') ?></a>
             <?  } ?>
-            <a href="artist.php?action=history&amp;artistid=<?= $ArtistID ?>" class="brackets"><?= Lang::get('artist.viewhistory') ?></a>
+            <a href="artist.php?action=history&amp;artistid=<?= $ArtistID ?>" class="brackets"><?= t('server.artist.viewhistory') ?></a>
             <? if ($RevisionID && check_perms('site_edit_wiki')) { ?>
-                <a href="artist.php?action=revert&amp;artistid=<?= $ArtistID ?>&amp;revisionid=<?= $RevisionID ?>&amp;auth=<?= $LoggedUser['AuthKey'] ?>" class="brackets"><?= Lang::get('artist.revert') ?></a>
+                <a href="artist.php?action=revert&amp;artistid=<?= $ArtistID ?>&amp;revisionid=<?= $RevisionID ?>&amp;auth=<?= $LoggedUser['AuthKey'] ?>" class="brackets"><?= t('server.artist.revert') ?></a>
             <?  } ?>
-            <a href="artist.php?id=<?= $ArtistID ?>#artistcomments" class="brackets"><?= Lang::get('artist.artistcomments') ?></a>
+            <a href="artist.php?id=<?= $ArtistID ?>#artistcomments" class="brackets"><?= t('server.artist.artistcomments') ?></a>
             <? if (check_perms('site_delete_artist') && check_perms('torrents_delete')) { ?>
-                <a href="artist.php?action=delete&amp;artistid=<?= $ArtistID ?>&amp;auth=<?= $LoggedUser['AuthKey'] ?>" class="brackets"><?= Lang::get('global.delete') ?></a>
+                <a href="artist.php?action=delete&amp;artistid=<?= $ArtistID ?>&amp;auth=<?= $LoggedUser['AuthKey'] ?>" class="brackets"><?= t('server.global.delete') ?></a>
             <?  } ?>
         </div>
     </div>
@@ -370,22 +370,22 @@ View::show_header(($ChineseName ? '[' . $ChineseName . '] ' : '') . $Name, 'brow
         </div>
         <div class="MovieInfo-tagContainer">
             <div class="MovieInfo-facts">
-                <span class="MovieInfo-fact" data-tooltip="<?= Lang::get('artist.imdb_born_date') ?>">
+                <span class="MovieInfo-fact" data-tooltip="<?= t('server.artist.imdb_born_date') ?>">
                     <?= icon("MovieInfo/birthday") ?>
                     <span><?= $Birthday ?></span>
                 </span>
-                <span class="MovieInfo-fact" data-tooltip="<?= Lang::get('artist.imdb_born_area') ?>">
+                <span class="MovieInfo-fact" data-tooltip="<?= t('server.artist.imdb_born_area') ?>">
                     <?= icon("MovieInfo/place-of-birth") ?>
                     <span><?= $PlaceOfBirth ?></span>
                 </span>
-                <span class="MovieInfo-fact" data-tooltip="<?= Lang::get('artist.imdb_link') ?>">
+                <span class="MovieInfo-fact" data-tooltip="<?= t('server.artist.imdb_link') ?>">
                     <?= icon("imdb-gray") ?>
                     <a target="_blank" href="<? echo "https://www.imdb.com/name/" . $IMDBID ?>"><? print_r($IMDBID) ?></a>
                 </span>
             </div>
-            <div class="MovieInfo-synopsis" data-tooltip="<?= Lang::get('torrents.fold_tooltip') ?>">
+            <div class="MovieInfo-synopsis" data-tooltip="<?= t('server.torrents.fold_tooltip') ?>">
                 <p class="HtmlText">
-                    <?= $Body ? Text::full_format($Body) : Lang::get('artist.empty_introduction_note') ?>
+                    <?= $Body ? Text::full_format($Body) : t('server.artist.empty_introduction_note') ?>
                 </p>
             </div>
         </div>
@@ -395,7 +395,7 @@ View::show_header(($ChineseName ? '[' . $ChineseName . '] ' : '') . $Name, 'brow
     <div class="Sidebar LayoutMainSidebar-sidebar">
         <div class="SidebarItemSearch SidebarItem Box">
             <div class="SidebarItem-header Box-header">
-                <strong><?= Lang::get('artist.box_search') ?></strong>
+                <strong><?= t('server.artist.box_search') ?></strong>
             </div>
             <div class="SidebarItem-body Box-body">
                 <form class="FormOneLine FormSearchFileLists" name="filelists" action="torrents.php">
@@ -408,7 +408,7 @@ View::show_header(($ChineseName ? '[' . $ChineseName . '] ' : '') . $Name, 'brow
         </div>
         <div class="SidebarItemTags SidebarItem Box">
             <div class="SidebarItem-header Box-header">
-                <strong><?= Lang::get('artist.tag') ?></strong>
+                <strong><?= t('server.artist.tag') ?></strong>
             </div>
             <ul class="Sidebar-list SidebarItem-body Box-body">
                 <? Tags::format_top(50, 'torrents.php?taglist=', $Name, "Sidebar-item"); ?>
@@ -419,14 +419,14 @@ View::show_header(($ChineseName ? '[' . $ChineseName . '] ' : '') . $Name, 'brow
         ?>
         <div class="SidebarItemStats SidebarItem Box">
             <div class="SidebarItem-header Box-header">
-                <strong><?= Lang::get('artist.statistics') ?></strong>
+                <strong><?= t('server.artist.statistics') ?></strong>
             </div>
             <ul class="Sidebar-list SidebarItem-body Box-body">
-                <li class="Sidebar-item"><?= Lang::get('artist.number_of_groups') ?>: <?= number_format($NumGroups) ?></li>
-                <li class="Sidebar-item"><?= Lang::get('artist.number_of_torrents') ?>: <?= number_format($NumTorrents) ?></li>
-                <li class="Sidebar-item"><?= Lang::get('artist.number_of_seeders') ?>: <?= number_format($NumSeeders) ?></li>
-                <li class="Sidebar-item"><?= Lang::get('artist.number_of_leechers') ?>: <?= number_format($NumLeechers) ?></li>
-                <li class="Sidebar-item"><?= Lang::get('artist.number_of_snatches') ?>: <?= number_format($NumSnatches) ?></li>
+                <li class="Sidebar-item"><?= t('server.artist.number_of_groups') ?>: <?= number_format($NumGroups) ?></li>
+                <li class="Sidebar-item"><?= t('server.artist.number_of_torrents') ?>: <?= number_format($NumTorrents) ?></li>
+                <li class="Sidebar-item"><?= t('server.artist.number_of_seeders') ?>: <?= number_format($NumSeeders) ?></li>
+                <li class="Sidebar-item"><?= t('server.artist.number_of_leechers') ?>: <?= number_format($NumLeechers) ?></li>
+                <li class="Sidebar-item"><?= t('server.artist.number_of_snatches') ?>: <?= number_format($NumSnatches) ?></li>
             </ul>
         </div>
         <?
@@ -453,11 +453,11 @@ View::show_header(($ChineseName ? '[' . $ChineseName . '] ' : '') . $Name, 'brow
         ?>
         <div class="SidbarItemArtists SidebarItem Box">
             <div class="SidebarItem-header Box-header">
-                <strong><?= Lang::get('artist.similarartist') ?></strong>
+                <strong><?= t('server.artist.similarartist') ?></strong>
             </div>
             <ul class="SidebarList SidebarItem-body Box-body">
                 <? if ($NumSimilar == 0) { ?>
-                    <li class="SidebarList-item"><span style="font-style: italic;"><?= Lang::get('artist.similarartist_note') ?></span></li>
+                    <li class="SidebarList-item"><span style="font-style: italic;"><?= t('server.artist.similarartist_note') ?></span></li>
                 <?
                 }
                 $First = true;
@@ -475,14 +475,14 @@ View::show_header(($ChineseName ? '[' . $ChineseName . '] ' : '') . $Name, 'brow
                     <li class="SidebarList-item">
                         <span data-tooltip="<?= $Score ?>"><a href="artist.php?id=<?= $Artist2ID ?>" style="float: left; display: block;"><?= $Artist2Name ?></a></span>
                         <div style="float: right; display: block; letter-spacing: -1px;">
-                            <a href="artist.php?action=vote_similar&amp;artistid=<?= $ArtistID ?>&amp;similarid=<?= $SimilarID ?>&amp;way=up" class="brackets vote_artist_up" data-tooltip="<?= Lang::get('artist.vote_up_similar_artist_title') ?>">
+                            <a href="artist.php?action=vote_similar&amp;artistid=<?= $ArtistID ?>&amp;similarid=<?= $SimilarID ?>&amp;way=up" class="brackets vote_artist_up" data-tooltip="<?= t('server.artist.vote_up_similar_artist_title') ?>">
                                 <?= icon('vote-up') ?>
                             </a>
-                            <a href="artist.php?action=vote_similar&amp;artistid=<?= $ArtistID ?>&amp;similarid=<?= $SimilarID ?>&amp;way=down" class="brackets vote_artist_down" data-tooltip="<?= Lang::get('artist.vote_down_similar_artist_title') ?>">
+                            <a href="artist.php?action=vote_similar&amp;artistid=<?= $ArtistID ?>&amp;similarid=<?= $SimilarID ?>&amp;way=down" class="brackets vote_artist_down" data-tooltip="<?= t('server.artist.vote_down_similar_artist_title') ?>">
                                 <?= icon('vote-down') ?>
                             </a>
                             <? if (check_perms('site_delete_tag')) { ?>
-                                <span class="remove remove_artist"><a href="artist.php?action=delete_similar&amp;artistid=<?= $ArtistID ?>&amp;similarid=<?= $SimilarID ?>&amp;auth=<?= $LoggedUser['AuthKey'] ?>" class="brackets" data-tooltip="<?= Lang::get('artist.remove_similar_artist_title') ?>">X</a></span>
+                                <span class="remove remove_artist"><a href="artist.php?action=delete_similar&amp;artistid=<?= $ArtistID ?>&amp;similarid=<?= $SimilarID ?>&amp;auth=<?= $LoggedUser['AuthKey'] ?>" class="brackets" data-tooltip="<?= t('server.artist.remove_similar_artist_title') ?>">X</a></span>
                             <?      } ?>
                         </div>
                         <br style="clear: both;" />
@@ -492,7 +492,7 @@ View::show_header(($ChineseName ? '[' . $ChineseName . '] ' : '') . $Name, 'brow
         </div>
         <div class="SidebarItemArtistAdd SidebarItem Box">
             <div class="SidebarItem-header Box-header">
-                <strong><?= Lang::get('artist.add_similarartist') ?></strong>
+                <strong><?= t('server.artist.add_similarartist') ?></strong>
             </div>
             <div class="SidebarItem-body Box-body">
                 <form class="FormOneLine FormAddSimilarArtist" name="similar_artists" action="artist.php" method="post">
@@ -569,16 +569,16 @@ View::show_header(($ChineseName ? '[' . $ChineseName . '] ' : '') . $Name, 'brow
                 <table class="TableRequest Table" cellpadding="6" cellspacing="1" border="0" width="100%" id="requests">
                     <tr class="Table-rowHeader">
                         <td class="Table-cell" style="width: 48%;">
-                            <?= Lang::get('artist.request_name') ?>
+                            <?= t('server.artist.request_name') ?>
                         </td>
                         <td class="Table-cell">
-                            <?= Lang::get('artist.vote') ?>
+                            <?= t('server.artist.vote') ?>
                         </td>
                         <td class="Table-cell">
-                            <?= Lang::get('artist.bounty') ?>
+                            <?= t('server.artist.bounty') ?>
                         </td>
                         <td class="Table-cell">
-                            <?= Lang::get('artist.added') ?>
+                            <?= t('server.artist.added') ?>
                         </td>
                     </tr>
                     <?
@@ -660,8 +660,8 @@ View::show_header(($ChineseName ? '[' . $ChineseName . '] ' : '') . $Name, 'brow
         ?>
             <div id="similar_artist_map" class="box">
                 <div id="flipper_head" class="head">
-                    <strong id="flipper_title"><?= Lang::get('artist.similar_artist_map') ?></strong>
-                    <a id="flip_to" class="brackets" href="#" onclick="flipView(); return false;"><?= Lang::get('artist.switch_to_cloud') ?></a>
+                    <strong id="flipper_title"><?= t('server.artist.similar_artist_map') ?></strong>
+                    <a id="flip_to" class="brackets" href="#" onclick="flipView(); return false;"><?= t('server.artist.switch_to_cloud') ?></a>
                 </div>
                 <div id="flip_view_1" style="display: block; width: 100%; height: <?= (HEIGHT) ?>px; position: relative; background-image: url(static/similar/<?= ($ArtistID) ?>.png?t=<?= (time()) ?>);">
                     <?
@@ -675,7 +675,7 @@ View::show_header(($ChineseName ? '[' . $ChineseName . '] ' : '') . $Name, 'brow
                             <li></li>
                         </ul>
                     </div>
-                    <strong style="margin-left: 10px;"><a id="currentArtist" href="#null"><?= Lang::get('artist.loading') ?></a></strong>
+                    <strong style="margin-left: 10px;"><a id="currentArtist" href="#null"><?= t('server.artist.loading') ?></a></strong>
                 </div>
             </div>
 
@@ -689,8 +689,8 @@ View::show_header(($ChineseName ? '[' . $ChineseName . '] ' : '') . $Name, 'brow
                     if (state) {
                         document.getElementById('flip_view_1').style.display = 'none';
                         document.getElementById('flip_view_2').style.display = 'block';
-                        document.getElementById('flipper_title').innerHTML = '<?= Lang::get('artist.similar_artist_cloud') ?>';
-                        document.getElementById('flip_to').innerHTML = '<?= Lang::get('artist.switch_to_map') ?>';
+                        document.getElementById('flipper_title').innerHTML = '<?= t('server.artist.similar_artist_cloud') ?>';
+                        document.getElementById('flip_to').innerHTML = '<?= t('server.artist.switch_to_map') ?>';
 
                         if (!cloudLoaded) {
                             require("static/functions/tagcanvas.js", function() {
@@ -701,8 +701,8 @@ View::show_header(($ChineseName ? '[' . $ChineseName . '] ' : '') . $Name, 'brow
                     } else {
                         document.getElementById('flip_view_1').style.display = 'block';
                         document.getElementById('flip_view_2').style.display = 'none';
-                        document.getElementById('flipper_title').innerHTML = '<?= Lang::get('artist.similar_artist_map') ?>';
-                        document.getElementById('flip_to').innerHTML = '<?= Lang::get('artist.switch_to_cloud') ?>';
+                        document.getElementById('flipper_title').innerHTML = '<?= t('server.artist.similar_artist_map') ?>';
+                        document.getElementById('flip_to').innerHTML = '<?= t('server.artist.switch_to_cloud') ?>';
                     }
                 }
 

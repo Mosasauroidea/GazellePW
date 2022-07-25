@@ -1,0 +1,20 @@
+name: I18n
+
+on: 
+  workflow_dispatch:
+
+jobs:
+  i18n:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: crowdin/github-action@1.4.9
+        with:
+          upload_translations: true
+          download_translations: true
+          pull_request_title: 'i18n: Crowdin translations'
+          pull_request_labels: 'i18n'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          CROWDIN_PROJECT_ID: ${{ secrets.CROWDIN_PROJECT_ID }}
+          CROWDIN_PERSONAL_TOKEN: ${{ secrets.CROWDIN_PERSONAL_TOKEN }}

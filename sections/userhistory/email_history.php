@@ -36,7 +36,7 @@ $DB->query("
 	FROM users_main
 	WHERE ID = $UserID");
 list($Username) = $DB->next_record();
-View::show_header(Lang::get('userhistory.email_history_for_before') . "$Username" . Lang::get('userhistory.email_history_for_after'), '', 'PageUserHistoryEmail');
+View::show_header(t('server.userhistory.email_history_for_before') . "$Username" . t('server.userhistory.email_history_for_after'), '', 'PageUserHistoryEmail');
 
 if ($UsersOnly == 1) {
 	$DB->query("
@@ -88,17 +88,17 @@ if ($UsersOnly == 1) {
 $History = $DB->to_array();
 ?>
 <div class="BodyHeader">
-	<h2 class="BodyHeader-nav"><?= Lang::get('userhistory.email_history_for_before') ?><a href="user.php?id=<?= $UserID ?>"><?= $Username ?></a><?= Lang::get('userhistory.email_history_for_after') ?></h2>
+	<h2 class="BodyHeader-nav"><?= t('server.userhistory.email_history_for_before') ?><a href="user.php?id=<?= $UserID ?>"><?= $Username ?></a><?= t('server.userhistory.email_history_for_after') ?></h2>
 </div>
 <div class="TableContainer">
 	<table class="TableUserEmailHistory Table">
 		<tr class="Table-rowHeader">
-			<td class="Table-cell"><?= Lang::get('userhistory.email') ?></td>
-			<td class="Table-cell"><?= Lang::get('userhistory.set') ?></td>
+			<td class="Table-cell"><?= t('server.userhistory.email') ?></td>
+			<td class="Table-cell"><?= t('server.userhistory.set') ?></td>
 			<td class="Table-cell">IP <a href="userhistory.php?action=ips&amp;userid=<?= $UserID ?>" class="brackets">H</a></td>
 			<? if ($UsersOnly == 1) {
 			?>
-				<td class="Table-cell"><?= Lang::get('userhistory.user') ?></td>
+				<td class="Table-cell"><?= t('server.userhistory.user') ?></td>
 			<?
 			}
 			?>
@@ -114,7 +114,7 @@ $History = $DB->to_array();
 			<tr class="Table-row">
 				<td class="Table-cell"><?= display_str($Values['Email']) ?></td>
 				<td class="Table-cell"><?= time_diff($Values['Time']) ?></td>
-				<td class="Table-cell"><?= display_str($Values['IP']) ?> (<?= display_str($Values['Code']) ?>) <a href="user.php?action=search&amp;ip_history=on&amp;ip=<?= display_str($Values['IP']) ?>" class="brackets" data-tooltip="<?= Lang::get('userhistory.search') ?>">S</a></td>
+				<td class="Table-cell"><?= display_str($Values['IP']) ?> (<?= display_str($Values['Code']) ?>) <a href="user.php?action=search&amp;ip_history=on&amp;ip=<?= display_str($Values['IP']) ?>" class="brackets" data-tooltip="<?= t('server.userhistory.search') ?>">S</a></td>
 				<?
 				if ($UsersOnly == 1) {
 					$ueQuery = $DB->query("

@@ -57,9 +57,9 @@ class AutoEnable {
 
         if (G::$DB->has_results() || !isset($UserID)) {
             // User already has/had a pending activation request or username is invalid
-            $Output = sprintf(Lang::get('login.re_enable_request_rejected'), CONFIG['BOT_DISABLED_CHAN'], CONFIG['BOT_SERVER']);
+            $Output = sprintf(t('server.login.re_enable_request_rejected'), CONFIG['BOT_DISABLED_CHAN'], CONFIG['BOT_SERVER']);
             if (isset($UserID)) {
-                Tools::update_user_notes($UserID, sqltime() . Lang::get('login.enable_request_rejected_from_ip') . "$IP\n\n");
+                Tools::update_user_notes($UserID, sqltime() . t('server.login.enable_request_rejected_from_ip') . "$IP\n\n");
             }
         } else {
             // New disable activation request
@@ -73,8 +73,8 @@ class AutoEnable {
             // Cache the number of requests for the modbar
             G::$Cache->increment_value(self::CACHE_KEY_NAME);
             setcookie('username', '', time() - 60 * 60, '/', '', false);
-            $Output = Lang::get('login.re_enable_request_received');
-            Tools::update_user_notes($UserID, sqltime() . Lang::get('login.enable_request_received_from_ip_before') . G::$DB->inserted_id() . Lang::get('login.enable_request_received_from_ip_after') . "$IP\n\n");
+            $Output = t('server.login.re_enable_request_received');
+            Tools::update_user_notes($UserID, sqltime() . t('server.login.enable_request_received_from_ip_before') . G::$DB->inserted_id() . t('server.login.enable_request_received_from_ip_after') . "$IP\n\n");
         }
 
         return $Output;
@@ -140,8 +140,8 @@ class AutoEnable {
                 }
 
                 // Send email
-                $Subject = Lang::get('login.your_enable_request_for_before') . CONFIG['SITE_NAME'] . Lang::get('login.your_enable_request_for_after');
-                $Subject .= ($Status == self::APPROVED) ? Lang::get('login.approved') : Lang::get('login.denied');
+                $Subject = t('server.login.your_enable_request_for_before') . CONFIG['SITE_NAME'] . t('server.login.your_enable_request_for_after');
+                $Subject .= ($Status == self::APPROVED) ? t('server.login.approved') : t('server.login.denied');
 
                 Misc::send_email($Email, $Subject, $TPL->get(), 'noreply');
             }
@@ -161,8 +161,8 @@ class AutoEnable {
 
         foreach ($UserInfo as $User) {
             list($ID, $UserID) = $User;
-            $BaseComment = sqltime() . Lang::get('login.enable_request_received_from_ip_before') . "$ID " . strtolower(self::get_outcome_string($Status)) . Lang::get('login.enable_request_id_by_user_after') . '[user]' . $StaffUser . '[/user]';
-            $BaseComment .= (!empty($Comment)) ? "\n" . Lang::get('login.reason') . ": $Comment\n\n" : "\n\n";
+            $BaseComment = sqltime() . t('server.login.enable_request_received_from_ip_before') . "$ID " . strtolower(self::get_outcome_string($Status)) . t('server.login.enable_request_id_by_user_after') . '[user]' . $StaffUser . '[/user]';
+            $BaseComment .= (!empty($Comment)) ? "\n" . t('server.login.reason') . ": $Comment\n\n" : "\n\n";
             Tools::update_user_notes($UserID, $BaseComment);
         }
 
@@ -206,7 +206,7 @@ class AutoEnable {
 			WHERE ID = '" . G::$LoggedUser['ID'] . "'");
         list($StaffUser) = G::$DB->next_record();
 
-        Tools::update_user_notes($UserID, sqltime() . Lang::get('login.enable_request_id_unresolved_by_before') . "$ID" . Lang::get('login.enable_request_id_unresolved_by_after') . "[user]" . $StaffUser . '[/user]' . "\n\n");
+        Tools::update_user_notes($UserID, sqltime() . t('server.login.enable_request_id_unresolved_by_before') . "$ID" . t('server.login.enable_request_id_unresolved_by_after') . "[user]" . $StaffUser . '[/user]' . "\n\n");
         G::$DB->query("
 			UPDATE users_enable_requests
 			SET Outcome = NULL, HandledTimestamp = NULL, CheckedBy = NULL
@@ -222,11 +222,11 @@ class AutoEnable {
      */
     public static function get_outcome_string($Outcome) {
         if ($Outcome == self::APPROVED) {
-            $String = Lang::get('login.outcome_approved');
+            $String = t('server.login.outcome_approved');
         } else if ($Outcome == self::DENIED) {
-            $String = Lang::get('login.outcome_rejected');
+            $String = t('server.login.outcome_rejected');
         } else if ($Outcome == self::DISCARDED) {
-            $String = Lang::get('login.outcome_discarded');
+            $String = t('server.login.outcome_discarded');
         } else {
             $String = "---";
         }
@@ -252,8 +252,8 @@ class AutoEnable {
             G::$DB->query("UPDATE users_enable_requests SET Token = NULL WHERE Token = '$Token'");
             if ($Timestamp < time_minus(3600 * 72)) {
                 // Old request
-                Tools::update_user_notes($UserID, sqltime() . Lang::get('login.tried_to_use_an_expired_token_before') . $_SERVER['REMOTE_ADDR'] . Lang::get('login.tried_to_use_an_expired_token_after') . "\n\n");
-                $Err = Lang::get('login.token_has_expired_please_visit_1') . CONFIG['BOT_DISABLED_CHAN'] . Lang::get('login.token_has_expired_please_visit_2') . CONFIG['BOT_SERVER'] . Lang::get('login.token_has_expired_please_visit_3');
+                Tools::update_user_notes($UserID, sqltime() . t('server.login.tried_to_use_an_expired_token_before') . $_SERVER['REMOTE_ADDR'] . t('server.login.tried_to_use_an_expired_token_after') . "\n\n");
+                $Err = t('server.login.token_has_expired_please_visit_1') . CONFIG['BOT_DISABLED_CHAN'] . t('server.login.token_has_expired_please_visit_2') . CONFIG['BOT_SERVER'] . t('server.login.token_has_expired_please_visit_3');
             } else {
                 // Good request, decrement cache value and enable account
                 G::$Cache->decrement_value(AutoEnable::CACHE_KEY_NAME);
@@ -263,10 +263,10 @@ class AutoEnable {
                 G::$DB->query("SELECT torrent_pass FROM users_main WHERE ID='{$UserID}'");
                 list($TorrentPass) = G::$DB->next_record();
                 Tracker::update_tracker('add_user', array('id' => $UserID, 'passkey' => $TorrentPass));
-                $Err = Lang::get('login.your_account_has_been_enabled');
+                $Err = t('server.login.your_account_has_been_enabled');
             }
         } else {
-            $Err = Lang::get('login.invalid_token');
+            $Err = t('server.login.invalid_token');
         }
 
         return $Err;

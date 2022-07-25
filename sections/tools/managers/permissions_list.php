@@ -1,10 +1,10 @@
 <?
-View::show_header(Lang::get('tools.manage_permissions'));
+View::show_header(t('server.tools.manage_permissions'));
 ?>
 <script type="text/javascript">
     //<![CDATA[
     function confirmDelete(id) {
-        if (confirm("<?= Lang::get('tools.are_you_sure_remove_class') ?>")) {
+        if (confirm("<?= t('server.tools.are_you_sure_remove_class') ?>")) {
             location.href = "tools.php?action=permissions&removeid=" + id;
         }
         return false;
@@ -14,8 +14,8 @@ View::show_header(Lang::get('tools.manage_permissions'));
 <div class="LayoutBody">
     <div class="header">
         <div class="BodyNavLinks">
-            <a href="tools.php?action=permissions&amp;id=new" class="brackets"><?= Lang::get('tools.create_a_new_permission_set') ?></a>
-            <a href="tools.php" class="brackets"><?= Lang::get('tools.back_to_tools') ?></a>
+            <a href="tools.php?action=permissions&amp;id=new" class="brackets"><?= t('server.tools.create_a_new_permission_set') ?></a>
+            <a href="tools.php" class="brackets"><?= t('server.tools.back_to_tools') ?></a>
         </div>
     </div>
     <?
@@ -36,10 +36,10 @@ View::show_header(Lang::get('tools.manage_permissions'));
         <div class="TableContainer">
             <table class="TableUserPermission Table">
                 <tr class="Table-row">
-                    <td class="Table-cell"><?= Lang::get('tools.name') ?></td>
-                    <td class="Table-cell"><?= Lang::get('tools.level') ?></td>
-                    <td class="Table-cell"><?= Lang::get('tools.user_count') ?></td>
-                    <td class="Table-cell Table-cellCenter"><?= Lang::get('tools.actions') ?></td>
+                    <td class="Table-cell"><?= t('server.tools.name') ?></td>
+                    <td class="Table-cell"><?= t('server.tools.level') ?></td>
+                    <td class="Table-cell"><?= t('server.tools.user_count') ?></td>
+                    <td class="Table-cell Table-cellCenter"><?= t('server.tools.actions') ?></td>
                 </tr>
                 <? while (list($ID, $Name, $Level, $Secondary, $UserCount) = $DB->next_record()) {
                     $part = $Secondary ? 'secclass' : 'class';
@@ -50,9 +50,9 @@ View::show_header(Lang::get('tools.manage_permissions'));
                         <td class="Table-cell"><?= ($Secondary ? 'Secondary' : $Level) ?></td>
                         <td class="Table-cell"><a href="<?= $link; ?>"><?= number_format($UserCount); ?></a></td>
                         <td class="Table-cell Table-cellCenter">
-                            <a href="tools.php?action=permissions&amp;id=<?= $ID ?>" class="brackets"><?= Lang::get('global.edit') ?></a>
+                            <a href="tools.php?action=permissions&amp;id=<?= $ID ?>" class="brackets"><?= t('server.global.edit') ?></a>
                             &nbsp;
-                            <a href="#" onclick="return confirmDelete(<?= $ID ?>);" class="brackets floatright"><?= Lang::get('tools.remove') ?></a>
+                            <a href="#" onclick="return confirmDelete(<?= $ID ?>);" class="brackets floatright"><?= t('server.tools.remove') ?></a>
                         </td>
                     </tr>
                 <?  } ?>
@@ -60,7 +60,7 @@ View::show_header(Lang::get('tools.manage_permissions'));
         </div>
     <?
     } else { ?>
-        <h2 align="center"><?= Lang::get('tools.there_are_no_permission_classes') ?></h2>
+        <h2 align="center"><?= t('server.tools.there_are_no_permission_classes') ?></h2>
     <?
     } ?>
 </div>

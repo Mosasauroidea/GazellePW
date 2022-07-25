@@ -20,7 +20,7 @@ View::show_header('Delete collage', '', 'PageCollageDelete');
 <div class="thin center">
     <div class="box" id="collage_delete_box">
         <div class="head colhead">
-            <?= Lang::get('collages.delete_collage') ?>
+            <?= t('server.collages.delete_collage') ?>
         </div>
         <div class="pad">
             <form class="delete_form" name="collage" action="collages.php" method="post">
@@ -31,13 +31,13 @@ View::show_header('Delete collage', '', 'PageCollageDelete');
                 if ($CategoryID == $PersonalCollageCategoryCat) {
                 ?>
                     <div class="alertbar" style="margin-bottom: 1em;">
-                        <strong><?= Lang::get('collages.delete_warning') ?></strong>
+                        <strong><?= t('server.collages.delete_warning') ?></strong>
                     </div>
                 <?
                 }
                 ?>
                 <div class="field_div">
-                    <strong><?= Lang::get('collages.reason') ?>: </strong>
+                    <strong><?= t('server.collages.reason') ?>: </strong>
                     <input class="Input" type="text" name="reason" size="40" />
                 </div>
                 <div class="submit_div">

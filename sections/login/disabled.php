@@ -1,28 +1,28 @@
 <?
-View::show_header(Lang::get('login.disabled'), '', 'PageLoginDisabled');
+View::show_header(t('server.login.disabled'), '', 'PageLoginDisabled');
 if (isset($_POST['email']) && FEATURE_EMAIL_REENABLE) {
     // Handle auto-enable request
     if ($_POST['email'] != '') {
         $Output = AutoEnable::new_request(db_string($_POST['username']), db_string($_POST['email']));
     } else {
-        $Output = Lang::get('login.enter_valid_email');
+        $Output = t('server.login.enter_valid_email');
     }
 
-    $Output .= "<br /><br /><a href='login.php?action=disabled'>" . Lang::get('login.back') . "</a>";
+    $Output .= "<br /><br /><a href='login.php?action=disabled'>" . t('server.login.back') . "</a>";
 }
 if ((empty($_POST['submit']) || empty($_POST['username'])) && !isset($Output)) {
 ?>
     <p class="u-colorWarning">
-        <?= Lang::get('login.disabled_note1') ?>
+        <?= t('server.login.disabled_note1') ?>
         <? if (FEATURE_EMAIL_REENABLE) { ?>
-            <?= Lang::get('login.disabled_note2') ?>
+            <?= t('server.login.disabled_note2') ?>
     <form action="" method="POST">
-        <input class="Input" type="email" placeholder="<?= Lang::get('login.email_address_placeholder') ?>" name="email" required />
-        <input class="Button" type="submit" value="<?= Lang::get('global.submit') ?>" />
+        <input class="Input" type="email" placeholder="<?= t('server.login.email_address_placeholder') ?>" name="email" required />
+        <input class="Button" type="submit" value="<?= t('server.global.submit') ?>" />
         <input type="hidden" name="username" value="<?= $_COOKIE['username'] ?>" />
     </form><br />
 <? } ?>
-<?= Lang::get('login.disabled_note3') ?>
+<?= t('server.login.disabled_note3') ?>
 <br />
 <br />
 </p>

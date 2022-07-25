@@ -15,30 +15,30 @@ if (!empty($_GET['e']) && in_array($_GET['e'], $Errors)) {
     switch ($Error) {
 
         case '403':
-            $Title = Lang::get('global.error_403_title');
-            $Description = Lang::get('global.error_403_description');
+            $Title = t('server.global.error_403_title');
+            $Description = t('server.global.error_403_description');
             notify(CONFIG['STATUS_CHAN'], '403');
             break;
         case '404':
-            $Title = Lang::get('global.error_404_title');
-            $Description = Lang::get('global.error_404_description');
+            $Title = t('server.global.error_404_title');
+            $Description = t('server.global.error_404_description');
             break;
         case '0':
-            $Title = Lang::get('global.invalid_input_title');
-            $Description = Lang::get('global.invalid_input_description');
+            $Title = t('server.global.invalid_input_title');
+            $Description = t('server.global.invalid_input_description');
             notify(CONFIG['STATUS_CHAN'], 'PHP-0');
             break;
         case '-1':
-            $Title = Lang::get('global.invalid_request_title');
-            $Description = Lang::get('global.invalid_request_description');
+            $Title = t('server.global.invalid_request_title');
+            $Description = t('server.global.invalid_request_description');
             break;
         default:
             if (!empty($Error)) {
-                if (!$Title) $Title = Lang::get('global.error');
+                if (!$Title) $Title = t('server.global.error');
                 $Description = $Error;
             } else {
-                $Title = Lang::get('global.unexpected_error_title');
-                $Description = Lang::get('global.unexpected_error_description');
+                $Title = t('server.global.unexpected_error_title');
+                $Description = t('server.global.unexpected_error_description');
             }
     }
 
