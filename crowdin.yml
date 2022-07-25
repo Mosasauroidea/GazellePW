@@ -1,6 +1,6 @@
 files:
-  - source: /src/locales/en/**/*.yaml
-    translation: /src/locales/%osx_locale%/**/%original_file_name%
+  - source: /src/locales/en/en.yaml
+    translation: /src/locales/%osx_locale%/%osx_locale%.yaml
     skip_untranslated_strings: false
 preserve_hierarchy: true
 project_id: '528530'
