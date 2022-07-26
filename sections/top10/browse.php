@@ -38,7 +38,7 @@ View::show_header(t('server.top10.top') . " $Limit " . t('server.top10.top_movie
     }
     if ($Details == 'all' || $Details == 'week') {
         $Data = $Top10Movies->getData("active_week", ['Limit' => $Limit]);
-        generate_torrent_table(t('server.top10.in_the_past_week', ['Values' =>  [t('server.top10.movies')]]), 'week', $Data, $Limit);
+        generate_torrent_table(t('server.top10.in_the_past_week', ['Values' => [t('server.top10.movies')]]), 'week', $Data, $Limit);
     }
     if ($Details == 'all' || $Details == 'month') {
         $Data = $Top10Movies->getData("active_month", ['Limit' => $Limit]);
@@ -46,7 +46,7 @@ View::show_header(t('server.top10.top') . " $Limit " . t('server.top10.top_movie
     }
     if ($Details == 'all' || $Details == 'year') {
         $Data = $Top10Movies->getData("active_year", ['Limit' => $Limit]);
-        generate_torrent_table(t('server.top10.in_the_past_year', ['Values' =>  [t('server.top10.movies')]]), 'year', $Data, $Limit);
+        generate_torrent_table(t('server.top10.in_the_past_year', ['Values' => [t('server.top10.movies')]]), 'year', $Data, $Limit);
     }
     if ($Details == 'all' || $Details == 'overall') {
         $Data = $Top10Movies->getData("active_all", ['Limit' => $Limit]);

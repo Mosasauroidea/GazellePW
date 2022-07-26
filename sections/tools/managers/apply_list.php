@@ -206,7 +206,7 @@ if ($NumResults > ($Page - 1) * 50 + 1) {
                     <button class="pending" aria-hidden="true" type="submit" name="submit" value="Pending" data-tooltip="<?= t('server.tools.pend') ?>" onclick="click_sure('待定')">
                         <?= icon("Admin/pend") ?>
                     </button>
-                    <button class="add" aria-hidden="true" type="submit" name="submit" value="<?= t('server.global.add') ?>" data-tooltip="<?= t('server.tools.add') ?>" onclick="click_sure('补充')">
+                    <button class="add" aria-hidden="true" type="submit" name="submit" value="<?= t('server.common.add') ?>" data-tooltip="<?= t('server.tools.add') ?>" onclick="click_sure('补充')">
                         <?= icon("Admin/add") ?>
                     </button>
                 </td>

@@ -40,7 +40,7 @@ if (count($Top10) > 0) {
     <div class="TableContainer">
         <table class="TableVoteMatche Table">
             <tr class="Table-rowHeader">
-                <td class="Table-cell"><?= t('server.torrents.people_who_like_this_album_also_liked') ?> (<a href="#" onclick="$('.votes_rows').gtoggle(); return false;"><?= t('server.global.show') ?></a>)</td>
+                <td class="Table-cell"><?= t('server.torrents.people_who_like_this_album_also_liked') ?> (<a href="#" onclick="$('.votes_rows').gtoggle(); return false;"><?= t('server.common.show') ?></a>)</td>
             </tr>
             <?
             $Top10Groups = array_keys($Top10);

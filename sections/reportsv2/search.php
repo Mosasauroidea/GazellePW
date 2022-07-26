@@ -139,7 +139,7 @@ if (!isset($dt_until)) {
                         <td class="Table-cell"><?= t('server.reportsv2.uploaded_by') ?></td>
                         <td class="Table-cell"><?= t('server.reportsv2.reported_by') ?></td>
                         <td class="Table-cell"><?= t('server.reportsv2.handled_by') ?></td>
-                        <td class="Table-cell"><?= t('server.global.torrent') ?></td>
+                        <td class="Table-cell"><?= t('server.common.torrent') ?></td>
                         <td class="Table-cell"><?= t('server.reportsv2.report_type') ?></td>
                         <td class="Table-cell" width="120px"><?= t('server.reportsv2.date_reported') ?></td>
                     </tr>

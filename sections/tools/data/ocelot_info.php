@@ -75,11 +75,13 @@ View::show_header(t('server.tools.tracker_info'), '', 'PageToolOcelotInfo');
                         }
                     } elseif (isset($TorrentPass)) {
                         ?>
-                        <?= t('server.tools.failed_to_get_stats_for_user_before') ?><?= $_GET['userid'] ?><?= t('server.tools.failed_to_get_stats_for_user_after') ?>
+                        <?= t('server.tools.failed_to_get_stats_for_user', ['Values' => [
+                            $_GET['userid']
+                        ]]) ?>
                     <?
                     } elseif (isset($_GET['userid'])) {
                     ?>
-                        <?= t('server.tools.user_does_not_exist_before') ?><?= display_str($_GET['userid']) ?><?= t('server.tools.user_does_not_exist_after') ?>
+                        <?= t('server.tools.user_does_not_exist', ['Values' => [display_str($_GET['userid'])]]) ?>
                     <?
                     } else {
                     ?>

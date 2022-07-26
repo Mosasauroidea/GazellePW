@@ -194,25 +194,25 @@ class Donations {
                 $SpecialRank = 0;
             }
             if ($SpecialRank < 1 && $TotalRank >= 2) {
-                Misc::send_pm($UserID, 0, t('server.inbox.get_special_rank_one_sbj', ['Values' => $UserLang]), t('server.inbox.get_special_rank_one_pm', ['Values' => $UserLang]));
+                Misc::send_pm($UserID, 0, t('server.inbox.get_special_rank_one_sbj', ['Values' => [$UserLang]]), t('server.inbox.get_special_rank_one_pm', ['Values' => [$UserLang]]));
                 $SpecialRank = 1;
             }
             if ($SpecialRank < 2 && $TotalRank >= 6) {
-                Misc::send_pm($UserID, 0, t('server.inbox.get_special_rank_two_sbj', ['Values' => $UserLang]), t('server.inbox.get_special_rank_two_pm', ['Values' => $UserLang]));
+                Misc::send_pm($UserID, 0, t('server.inbox.get_special_rank_two_sbj', ['Values' => [$UserLang]]), t('server.inbox.get_special_rank_two_pm', ['Values' => [$UserLang]]));
                 $SpecialRank = 2;
             }
             if ($SpecialRank < 3 && $TotalRank >= 12) {
-                Misc::send_pm($UserID, 0, t('server.inbox.get_special_rank_three_sbj', ['Values' => $UserLang]), t('server.inbox.get_special_rank_three_pm', ['Values' => $UserLang]));
+                Misc::send_pm($UserID, 0, t('server.inbox.get_special_rank_three_sbj', ['Values' => [$UserLang]]), t('server.inbox.get_special_rank_three_pm', ['Values' => [$UserLang]]));
                 $SpecialRank = 3;
                 $SpecialInvites += 2;
             }
             if ($SpecialRank < 4 && $TotalRank >= 24) {
-                Misc::send_pm($UserID, 0, t('server.inbox.get_special_rank_four_sbj', ['Values' => $UserLang]), t('server.inbox.get_special_rank_four_pm', ['Values' => $UserLang]));
+                Misc::send_pm($UserID, 0, t('server.inbox.get_special_rank_four_sbj', ['Values' => [$UserLang]]), t('server.inbox.get_special_rank_four_pm', ['Values' => [$UserLang]]));
                 $SpecialRank = 4;
                 $SpecialInvites += 4;
             }
             if ($SpecialRank < 5 && $TotalRank >= 50) {
-                Misc::send_pm($UserID, 0, t('server.inbox.get_special_rank_five_sbj', ['Values' => $UserLang]), t('server.inbox.get_special_rank_five_pm', ['Values' => $UserLang]));
+                Misc::send_pm($UserID, 0, t('server.inbox.get_special_rank_five_sbj', ['Values' => [$UserLang]]), t('server.inbox.get_special_rank_five_pm', ['Values' => [$UserLang]]));
                 $SpecialRank = 5;
                 $SpecialInvites += 6;
             }
@@ -255,7 +255,7 @@ class Donations {
         if (G::$DB->record_count() > 0) {
             while (list($UserID) = G::$DB->next_record()) {
                 $UserLang = Lang::getUserLang($UserID);
-                Misc::send_pm($UserID, 0,  t('server.inbox.expire_rank_sbj', ['Values' => $UserLang]), t('server.inbox.expire_rank_pm', ['Values' => $UserLang]));
+                Misc::send_pm($UserID, 0,  t('server.inbox.expire_rank_sbj', ['Values' => [$UserLang]]), t('server.inbox.expire_rank_pm', ['Values' => [$UserLang]]));
             }
         }
 
@@ -837,6 +837,6 @@ class Donations {
         } elseif ($CurrentRank == 5) {
             $CurrentRank = 4;
         }
-        return t('server.inbox.get_pm_body_1', ['Values' => $Lang]) . " $DonationAmount $Currency\n" . t('server.inbox.get_pm_body_2', ['Values' => $Lang]) . " $ReceivedRank " . t('server.inbox.get_pm_body_3', ['Values' => $Lang]) . ($ReceivedRank == 1 ? '' : t('server.inbox.s', ['Values' => $Lang])) . "\n" . t('server.inbox.get_pm_body_4', ['Values' => $Lang]) . " $CurrentRank\n" . t('server.inbox.get_pm_body_5', ['Values' => $Lang]);
+        return t('server.inbox.get_pm_body_1', ['Values' => [$Lang]]) . " $DonationAmount $Currency\n" . t('server.inbox.get_pm_body_2', ['Values' => [$Lang]]) . " $ReceivedRank " . t('server.inbox.get_pm_body_3', ['Values' => [$Lang]]) . ($ReceivedRank == 1 ? '' : t('server.inbox.s', ['Values' => [$Lang]])) . "\n" . t('server.inbox.get_pm_body_4', ['Values' => [$Lang]]) . " $CurrentRank\n" . t('server.inbox.get_pm_body_5', ['Values' => [$Lang]]);
     }
 }

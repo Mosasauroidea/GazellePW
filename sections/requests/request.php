@@ -67,20 +67,20 @@ View::show_header(t('server.requests.view_request') . ": $FullName", 'comments,b
 ?>
 <div class="LayoutBody">
     <div class="BodyHeader">
-        <h2 class="BodyHeader-nav"><a href="requests.php"><?= t('server.global.requests') ?></a> &gt; <?= $DisplayLink ?></h2>
+        <h2 class="BodyHeader-nav"><a href="requests.php"><?= t('server.common.requests') ?></a> &gt; <?= $DisplayLink ?></h2>
         <div class="BodyNavLinks">
             <? if ($CanEdit) { ?>
-                <a href="requests.php?action=edit&amp;id=<?= $RequestID ?>" class="brackets"><?= t('server.global.edit') ?></a>
+                <a href="requests.php?action=edit&amp;id=<?= $RequestID ?>" class="brackets"><?= t('server.common.edit') ?></a>
             <?  }
             if ($UserCanEdit || check_perms('users_mod')) { ?>
-                <a href="requests.php?action=delete&amp;id=<?= $RequestID ?>" class="brackets"><?= t('server.global.delete') ?></a>
+                <a href="requests.php?action=delete&amp;id=<?= $RequestID ?>" class="brackets"><?= t('server.common.delete') ?></a>
             <?  }
             if (Bookmarks::has_bookmarked('request', $RequestID)) { ?>
-                <a href="#" id="bookmarklink_request_<?= $RequestID ?>" onclick="Unbookmark('request', <?= $RequestID ?>, '<?= t('server.global.add_bookmark') ?>'); return false;" class="brackets"><?= t('server.global.remove_bookmark') ?></a>
+                <a href="#" id="bookmarklink_request_<?= $RequestID ?>" onclick="Unbookmark('request', <?= $RequestID ?>, '<?= t('server.common.add_bookmark') ?>'); return false;" class="brackets"><?= t('server.common.remove_bookmark') ?></a>
             <?  } else { ?>
-                <a href="#" id="bookmarklink_request_<?= $RequestID ?>" onclick="Bookmark('request', <?= $RequestID ?>, '<?= t('server.global.remove_bookmark') ?>'); return false;" class="brackets"><?= t('server.global.add_bookmark') ?></a>
+                <a href="#" id="bookmarklink_request_<?= $RequestID ?>" onclick="Bookmark('request', <?= $RequestID ?>, '<?= t('server.common.remove_bookmark') ?>'); return false;" class="brackets"><?= t('server.common.add_bookmark') ?></a>
             <?  } ?>
-            <a href="#" id="subscribelink_requests<?= $RequestID ?>" class="brackets" onclick="SubscribeComments('requests',<?= $RequestID ?>);return false;"><?= Subscriptions::has_subscribed_comments('requests', $RequestID) !== false ? t('server.global.unsubscribe') : t('server.global.subscribe') ?></a>
+            <a href="#" id="subscribelink_requests<?= $RequestID ?>" class="brackets" onclick="SubscribeComments('requests',<?= $RequestID ?>);return false;"><?= Subscriptions::has_subscribed_comments('requests', $RequestID) !== false ? t('server.common.unsubscribe') : t('server.common.subscribe') ?></a>
             <a href="reports.php?action=report&amp;type=request&amp;id=<?= $RequestID ?>" class="brackets"><?= t('server.requests.report_request') ?></a>
             <? if (!$IsFilled) { ?>
                 <a href="upload.php?requestid=<?= $RequestID ?><?= ($Request['GroupID'] ? "&amp;groupid=$Request[GroupID]" : '') ?>" class="brackets"><?= t('server.requests.upload_request') ?></a>
@@ -124,7 +124,7 @@ View::show_header(t('server.requests.view_request') . ": $FullName", 'comments,b
             if ($CategoryName === 'Movies') { ?>
                 <div class="SidebarItemArtists SidebarItem Box">
                     <div class="SidebarItem-header Box-header">
-                        <strong><?= t('server.global.director') ?></strong>
+                        <strong><?= t('server.common.director') ?></strong>
                     </div>
                     <ul class="SidebarList SidebarItem-body Box-body">
                         <?

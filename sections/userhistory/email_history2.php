@@ -37,7 +37,7 @@ $DB->query("
 	FROM users_main
 	WHERE ID = $UserID");
 list($Username) = $DB->next_record();
-View::show_header(t('server.userhistory.email_history_for_before') . "$Username" . t('server.userhistory.email_history_for_after'), '', 'PageUserEmail2');
+View::show_header(t('server.userhistory.email_history_for', ['Values' => [$Username]]), '', 'PageUserEmail2');
 
 // Get current email (and matches)
 $DB->query(
@@ -174,10 +174,11 @@ if ($Old) {
 ?>
 <div class="LayoutBody">
     <div class="BodyHeader">
-        <h2 class="BodyHeader-nav"><?= t('server.userhistory.email_history_for_before') ?><a href="user.php?id=<?= $UserID ?>"><?= $Username ?></a><?= t('server.userhistory.email_history_for_after') ?></h2>
-        <div class="BodyNavLinks center">
-            <a href="userhistory.php?action=email&amp;userid=<?= $UserID ?>" class="brackets"><?= t('server.userhistory.email_history_for_before') ?></a>
-        </div>
+        <h2 class="BodyHeader-nav">
+            <?= t('server.userhistory.email_history_for', ['Values' => [
+                "<a href='user.php?id=${UserID}'>${Username}</a>"
+            ]]) ?>
+        </h2>
     </div>
     <div class="TableContainer">
         <table class="TableUserEmailHistory Table">

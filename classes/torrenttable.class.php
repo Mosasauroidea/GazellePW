@@ -325,7 +325,12 @@ class TorrentTableView {
         <div class="TableContainer">
             <table class="TableReportInfo Table">
                 <tr class="Table-rowHeader">
-                    <td class="Table-cell">' . t('server.torrents.this_torrent_has_active_reports_1') . $NumReports . t('server.torrents.this_torrent_has_active_reports_2') . ($NumReports === 1 ? t('server.torrents.this_torrent_has_active_reports_3') : t('server.torrents.this_torrent_has_active_reports_4')) . ":</td>
+                    <td class="Table-cell">'
+                . t('server.torrents.this_torrent_has_active_reports', ['Values' => [
+                    $NumReports,
+                    t('server.torrents.this_torrent_has_active_reports_count', ['Count' => $NumReports, 'Values' => [$NumReports]])
+                ]])
+                . ":</td>
                 </tr>";
             foreach ($Reports as $Report) {
                 $ReportID = $Report['ID'];
@@ -351,8 +356,16 @@ class TorrentTableView {
                 $CanReply = $UserID == G::$LoggedUser['ID'] && !$Report['UploaderReply'] && !$ReadOnly;
                 $ReportInfo .= "
                 <tr class='Table-row'>
-                    <td class='Table-cell'>$ReportLinks" . t('server.torrents.at') . " " . time_diff($Report['ReportedTime'], 2, true, true) . t('server.torrents.for_the_reason') . $ReportType['title'] . '":' . ($CanReply ? ('<a class="floatright report_reply_btn" onclick="$(\'.can_reply_' . $ReportID . '\').toggle()" href="javascript:void(0)">' . t('server.torrents.reply') . '</a>') : "") . '
-                        <blockquote>' . Text::full_format($Report['UserComment']) . ($Report['UploaderReply'] ? ('
+                    <td class='Table-cell'>"
+                    . "$ReportLinks"
+                    . t('server.torrents.at', ['Values' => [
+                        time_diff($Report['ReportedTime'], 2, true, true)
+                    ]])
+                    . t('server.torrents.for_the_reason')
+                    . $ReportType['title']
+                    . '":'
+                    . ($CanReply ? ('<a class="floatright report_reply_btn" onclick="$(\'.can_reply_' . $ReportID . '\').toggle()" href="javascript:void(0)">' . t('server.torrents.reply') . '</a>') : "")
+                    . '<blockquote>' . Text::full_format($Report['UserComment']) . ($Report['UploaderReply'] ? ('
                             <hr class="report_inside_line">' . $UploaderLinks . ' ' . time_diff($Report['ReplyTime'], 2, true, true) . ':<br>' . Text::full_format($Report['UploaderReply'])) : '') . '
                         </blockquote>
                     </td>
@@ -384,39 +397,41 @@ class TorrentTableView {
             <div class="TorrentDetail-row is-uploadContainer is-block" id="release_<?= $TorrentID ?>">
                 <div class="TorrentDetail-uploader">
                     <div class="TorrentDetail-uploaderInfo">
-                        <span><?= t('server.torrents.upload_by_before') ?><span>
-                                <?= Users::format_username($UserID, false, false, false) ?>
-                                <?= t('server.torrents.upload_by_after') ?>
-                                <?= time_diff($TorrentTime); ?>
-                                <?
-                                if ($Seeders == 0) {
-                                    // If the last time this was seeded was 50 years ago, most likely it has never been seeded, so don't bother
-                                    // displaying "Last active: 2000+ years" as that's dumb
-                                    if (time() - strtotime($LastActive) > 1576800000) {
-                                ?>
-                                        <span>|</span>
-                                        <?= t('server.torrents.last_active') ?>:<?= t('server.torrents.never') ?>
-                                    <?
-                                    } elseif ($LastActive != '0000-00-00 00:00:00' && time() - strtotime($LastActive) >= 1209600) {
-                                    ?>
-                                        <span>|</span><strong><?= t('server.torrents.last_active') ?> <?= time_diff($LastActive); ?></strong>
-                                    <?
-                                    } else {
-                                    ?><span>|</span> <?= t('server.torrents.last_active') ?> <?= time_diff($LastActive); ?>
-                                    <?
-                                    }
-                                }
-                                if (
-                                    !$ReadOnly &&
-                                    (($Seeders == 0  &&
-                                        $LastActive != '0000-00-00 00:00:00' &&
-                                        time() - strtotime($LastActive) >= 345678 &&
-                                        time() - strtotime($LastReseedRequest) >= 864000) ||
-                                        check_perms('users_mod'))
-                                ) {
-                                    ?><span>|</span> <a href="torrents.php?action=reseed&amp;torrentid=<?= $TorrentID ?>&amp;groupid=<?= $GroupID ?>" class="brackets" onclick="return confirm('<?= t('server.torrents.request_re_seed_confirm') ?>');"><?= t('server.torrents.request_re_seed') ?></a>
-                                <?
-                                } ?>
+                        <span>
+                            <?= t('server.torrents.upload_by', ['Values' => [
+                                Users::format_username($UserID, false, false, false)
+                            ]]) ?>
+                        </span>
+                        <?= time_diff($TorrentTime); ?>
+                        <?
+                        if ($Seeders == 0) {
+                            // If the last time this was seeded was 50 years ago, most likely it has never been seeded, so don't bother
+                            // displaying "Last active: 2000+ years" as that's dumb
+                            if (time() - strtotime($LastActive) > 1576800000) {
+                        ?>
+                                <span>|</span>
+                                <?= t('server.torrents.last_active') ?>:<?= t('server.torrents.never') ?>
+                            <?
+                            } elseif ($LastActive != '0000-00-00 00:00:00' && time() - strtotime($LastActive) >= 1209600) {
+                            ?>
+                                <span>|</span><strong><?= t('server.torrents.last_active') ?> <?= time_diff($LastActive); ?></strong>
+                            <?
+                            } else {
+                            ?><span>|</span> <?= t('server.torrents.last_active') ?> <?= time_diff($LastActive); ?>
+                            <?
+                            }
+                        }
+                        if (
+                            !$ReadOnly &&
+                            (($Seeders == 0  &&
+                                $LastActive != '0000-00-00 00:00:00' &&
+                                time() - strtotime($LastActive) >= 345678 &&
+                                time() - strtotime($LastReseedRequest) >= 864000) ||
+                                check_perms('users_mod'))
+                        ) {
+                            ?><span>|</span> <a href="torrents.php?action=reseed&amp;torrentid=<?= $TorrentID ?>&amp;groupid=<?= $GroupID ?>" class="brackets" onclick="return confirm('<?= t('server.torrents.request_re_seed_confirm') ?>');"><?= t('server.torrents.request_re_seed') ?></a>
+                        <?
+                        } ?>
                     </div>
                     <? if (!$ReadOnly) { ?>
                         <div class="TorrentDetail-likeContainer ButtonGroup ButtonGroup--wide">
@@ -458,7 +473,7 @@ class TorrentTableView {
                         <?
                         $NewRatio = Format::get_ratio_html(G::$LoggedUser['BytesUploaded'], G::$LoggedUser['BytesDownloaded'] + $Size);
                         ?>
-                        <?= t('server.torrents.if_you_download_this_before') ?> <?= $NewRatio ?><?= t('server.torrents.if_you_download_this_after') ?>
+                        <?= t('server.torrents.if_you_download_this', ['Values' => [$NewRatio]]) ?>
                     </div>
                 <? } ?>
             </div>
@@ -565,7 +580,7 @@ class TorrentTableView {
 
                 <div class="TorrentDetail-row is-subtitle is-block TorrentDetailSubtitle" id="subtitles_box">
                     <div class="TorrentDetailSubtitle-header" id="subtitles_box_header">
-                        <strong class="TorrentDetailSubtitle-title" id="subtitles_box_title"><?= t('server.global.subtitles') ?>:</strong>
+                        <strong class="TorrentDetailSubtitle-title" id="subtitles_box_title"><?= t('server.common.subtitles') ?>:</strong>
                         <? if (!$ReadOnly) { ?>
                             <span class="floatright"><a href="subtitles.php?action=upload&torrent_id=<?= $TorrentID ?>"><?= t('server.torrents.add_subtitles') ?></a></span>
                         <?  } ?>
@@ -581,7 +596,7 @@ class TorrentTableView {
                         $SubtitleArray = explode(',', $Subtitles);
                     ?>
                         <div class="TorrentDetailSubtitle-list is-internal" id="subtitles_box_in_torrent">
-                            <span class="TorrentDetailSubtitle-listTitle"><?= $SubtitleType == 1 ? t('server.global.in_torrent_subtitles') : t('server.global.in_torrent_hard_subtitles'); ?>:</span>
+                            <span class="TorrentDetailSubtitle-listTitle"><?= $SubtitleType == 1 ? t('server.common.in_torrent_subtitles') : t('server.common.in_torrent_hard_subtitles'); ?>:</span>
                             <? foreach ($SubtitleArray as $Subtitle) { ?>
                                 <span class="TorrentDetailSubtitle-listItem" data-tooltip="<?= t("server.upload.$Subtitle") ?>">
                                     <?= icon("flag/$Subtitle") ?>
@@ -596,7 +611,7 @@ class TorrentTableView {
                     ?>
                         <div class="TorrentDetailSubtitle-list is-external" id="subtitles_box_external">
                             <span class="TorrentDetailSubtitle-listTitle">
-                                <?= t('server.global.external_subtitles') ?>:
+                                <?= t('server.common.external_subtitles') ?>:
                             </span>
                             <?
                             foreach ($ExternalSubtitleIDArray as $index => $ExternalSubtitleID) {
@@ -708,15 +723,15 @@ class TorrentTableView {
 
     ?>
         <div class="TableTorrent-movieInfoFacts ">
-            <a class="TableTorrent-movieInfoFactsItem" data-tooltip="<?= t('server.global.imdb_rating') ?>, <?= $Group['IMDBVote'] . ' ' . t('server.torrents.movie_votes') ?>" target="_blank" href="https://www.imdb.com/title/<?= $Group['IMDBID'] ?>">
+            <a class="TableTorrent-movieInfoFactsItem" data-tooltip="<?= t('server.common.imdb_rating') ?>, <?= $Group['IMDBVote'] . ' ' . t('server.torrents.movie_votes') ?>" target="_blank" href="https://www.imdb.com/title/<?= $Group['IMDBID'] ?>">
                 <?= icon('imdb-gray') ?>
                 <span><?= !empty($Group['IMDBRating']) ? sprintf("%.1f", $Group['IMDBRating']) : '--' ?></span>
             </a>
-            <a class="TableTorrent-movieInfoFactsItem" data-tooltip="<?= t('server.global.douban_rating') ?>, <?= ($Group['DoubanVote'] ? $Group['DoubanVote'] : '?') . ' ' . t('server.torrents.movie_votes') ?>" target="_blank" href="https://movie.douban.com/subject/<?= $Group['DoubanID'] ?>/">
+            <a class="TableTorrent-movieInfoFactsItem" data-tooltip="<?= t('server.common.douban_rating') ?>, <?= ($Group['DoubanVote'] ? $Group['DoubanVote'] : '?') . ' ' . t('server.torrents.movie_votes') ?>" target="_blank" href="https://movie.douban.com/subject/<?= $Group['DoubanID'] ?>/">
                 <?= icon('douban-gray') ?>
                 <span><?= !empty($Group['DoubanRating']) ? sprintf("%.1f", $Group['DoubanRating']) : '--' ?></span>
             </a>
-            <a class="TableTorrent-movieInfoFactsItem" data-tooltip="<?= t('server.global.rt_rating') ?>" target="_blank" href="https://www.rottentomatoes.com/m/<?= $Group['RTTitle'] ?>">
+            <a class="TableTorrent-movieInfoFactsItem" data-tooltip="<?= t('server.common.rt_rating') ?>" target="_blank" href="https://www.rottentomatoes.com/m/<?= $Group['RTTitle'] ?>">
                 <?= icon('rotten-tomatoes-gray') ?>
                 <span><?= !empty($Group['RTRating']) ? $Group['RTRating'] : '--' ?></span>
             </a>
@@ -784,16 +799,16 @@ class TorrentTableView {
         }
         ?>
         <td class="Table-cell TableTorrent-cellStat TableTorrent-cellStatSize  ">
-            <?= $this->header_elem('<span  aria-hidden="true" data-tooltip="' . t('server.global.size') . '">' . icon('torrent-size') . '</i>', $this->WithSort, 'size') ?>
+            <?= $this->header_elem('<span  aria-hidden="true" data-tooltip="' . t('server.common.size') . '">' . icon('torrent-size') . '</i>', $this->WithSort, 'size') ?>
         </td>
         <td class="Table-cell TableTorrent-cellStat TableTorrent-cellStatSnatches">
-            <?= $this->header_elem('<i  aria-hidden="true" data-tooltip="' . t('server.global.snatched') . '">' . icon('torrent-snatches') . '</i>', $this->WithSort, 'snatched') ?>
+            <?= $this->header_elem('<i  aria-hidden="true" data-tooltip="' . t('server.common.snatched') . '">' . icon('torrent-snatches') . '</i>', $this->WithSort, 'snatched') ?>
         </td>
         <td class="Table-cell TableTorrent-cellStat TableTorrent-cellStatSeeders">
-            <?= $this->header_elem('<i  aria-hidden="true" data-tooltip="' . t('server.global.seeders') . '">' . icon('torrent-seeders') . '</i>', $this->WithSort, 'seeders') ?>
+            <?= $this->header_elem('<i  aria-hidden="true" data-tooltip="' . t('server.common.seeders') . '">' . icon('torrent-seeders') . '</i>', $this->WithSort, 'seeders') ?>
         </td>
         <td class="Table-cell TableTorrent-cellStat TableTorrent-cellStatLeechers">
-            <?= $this->header_elem('<i  aria-hidden="true" data-tooltip="' . t('server.global.leechers') . '">' . icon('torrent-leechers') . '</i>', $this->WithSort, 'leechers') ?>
+            <?= $this->header_elem('<i  aria-hidden="true" data-tooltip="' . t('server.common.leechers') . '">' . icon('torrent-leechers') . '</i>', $this->WithSort, 'leechers') ?>
         </td>
         <?
     }
@@ -936,7 +951,7 @@ class GroupTorrentTableView extends TorrentTableView {
             ?>
             <td class="TableTorrent-cellMovieInfo Table-cell TableTorrent-cellMovieInfoCollapse">
                 <div id="showimg_<?= $GroupID ?>" class="ToggleGroup <?= ($ShowGroups ? 'is-toHide' : '') ?>">
-                    <a href="#" class="ToggleGroup-button" onclick="globalapp.toggleGroup(<?= $GroupID ?>, this, event)" data-tooltip="<?= t('server.global.collapse_this_group_title') ?>"></a>
+                    <a href="#" class="ToggleGroup-button" onclick="globalapp.toggleGroup(<?= $GroupID ?>, this, event)" data-tooltip="<?= t('server.common.collapse_this_group_title') ?>"></a>
                 </div>
             </td>
             <? if ($this->WithCover) { ?>
@@ -988,7 +1003,7 @@ class GroupTorrentTableView extends TorrentTableView {
         ?>
                 <tr class="TableTorrent-rowCategory Table-row <?= $this->WithCheck && $GroupChecked ? "torrent_all_checked " : "torrent_all_unchecked" ?> <?= (!empty($LoggedUser['TorrentGrouping']) && $LoggedUser['TorrentGrouping'] === 1 ? ' hidden' : '') ?>" group-id="<?= $GroupID ?>">
                     <td class="TableTorrent-cellCategory Table-cell" colspan="<?= $Cols ?>">
-                        <a class="u-toggleEdition-button" href="#" onclick="globalapp.toggleEdition(event, <?= $GroupID ?>, <?= $EditionID ?>)" data-tooltip="<?= t('server.global.collapse_this_edition_title') ?>">&minus;</a>
+                        <a class="u-toggleEdition-button" href="#" onclick="globalapp.toggleEdition(event, <?= $GroupID ?>, <?= $EditionID ?>)" data-tooltip="<?= t('server.common.collapse_this_edition_title') ?>">&minus;</a>
                         <?= $NewEdition ?>
                     </td>
                 </tr>
@@ -1030,7 +1045,7 @@ class GroupTorrentTableView extends TorrentTableView {
                     ?>
                         <div class="TableTorrent-titleCheck">
                             <? if ($this->CheckAllTorrents || ($this->CheckSelfTorrents && $LoggedUser['id'] == $Torrent['UserID'])) { ?>
-                                <i class="TableTorrent-check" id="torrent<?= $TorrentID ?>_check1" style="display:<?= $TorrentChecked ? "inline-block" : "none" ?>;color:#649464;" data-tooltip="<?= t('server.torrents.checked_by_before') ?><?= $TorrentChecked ? $TorrentCheckedBy : $LoggedUser['Username'] ?><?= t('server.torrents.checked_by_after') ?>"><?= icon("Table/checked") ?></i>
+                                <i class="TableTorrent-check" id="torrent<?= $TorrentID ?>_check1" style="display:<?= $TorrentChecked ? "inline-block" : "none" ?>;color:#649464;" data-tooltip="<?= t('server.torrents.checked_by', ['Values' => [$TorrentChecked ? $TorrentCheckedBy : $LoggedUser['Username']]]) ?>"><?= icon("Table/checked") ?></i>
                                 <i class="TableTorrent-check" id="torrent<?= $TorrentID ?>_check0" style="display:<?= $TorrentChecked ? "none" : "inline-block" ?>;color:#CF3434;" data-tooltip="<?= t('server.torrents.has_not_been_checked') ?><?= t('server.torrents.checked_explanation') ?>"><?= icon("Table/unchecked") ?></i>
                             <? } else { ?>
                                 <i class="TableTorrent-check" style="color: <?= $TorrentChecked ? "#74B274" : "#A6A6A6" ?>;" data-tooltip="<?= $TorrentChecked ? t('server.torrents.has_been_checked') : t('server.torrents.has_not_been_checked') ?><?= t('server.torrents.checked_explanation') ?>"><?= icon("Table/" . ($TorrentChecked ? "checked" : "unchecked")) ?> </i>

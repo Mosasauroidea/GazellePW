@@ -14,7 +14,7 @@ if ($TorrentID) {
 
     <div class="BodyContent">
         <div class="Box">
-            <div class="Box-header"> <?= t('server.global.rules') ?> </div>
+            <div class="Box-header"> <?= t('server.common.rules') ?> </div>
             <div class="Box-body"> <?= t('server.subtitles.subtitle_rules') ?> </div>
         </div>
     </div>
@@ -45,7 +45,7 @@ if ($TorrentID) {
                         <td class="Form-inputs"><input class="Input" type="text" readonly value="<?= site_url() . '/torrents.php?torrentid=' . $TorrentID ?>" name="torrent_pl_link" id="subtitle_torrent_pl" placeholder="<?= CONFIG['SITE_URL'] ?>/torrents.php?torrentid=12345"></td>
                     </tr>
                     <tr class="Form-row">
-                        <td class="Form-label"><?= t('server.global.language') ?>:</td>
+                        <td class="Form-label"><?= t('server.common.language') ?>:</td>
                         <td class="Form-inputs">
                             <div id="subtitles_container" class="Form-errorContainer">
                                 <div id="common_subtitles" class="grid_subtitles">

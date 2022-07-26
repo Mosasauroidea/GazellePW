@@ -96,7 +96,7 @@ if (check_perms('torrents_edit') && (check_perms('users_mod') || $Properties['Ca
         <div class=LayoutBody>
             <div class="BodyHeader">
                 <div class="BodyHeader-nav">
-                    <?= t('server.global.edit') ?>
+                    <?= t('server.common.edit') ?>
                 </div>
             </div>
 
@@ -145,7 +145,7 @@ if (check_perms('torrents_edit') && (check_perms('users_mod') || $Properties['Ca
                         </tr>
                         <tr class="Form-row">
                             <td colspan="2" class="center">
-                                <input class="Button" type="submit" value="<?= t('server.global.submit') ?>" />
+                                <input class="Button" type="submit" value="<?= t('server.common.submit') ?>" />
                             </td>
                         </tr>
                     </table>
@@ -182,7 +182,7 @@ if (check_perms('torrents_edit') && (check_perms('users_mod') || $Properties['Ca
                             </tr>
                             <tr class="Form-row>
                             <td colspan=" 2" class="center">
-                                <input class="Button" type="submit" value="<?= t('server.global.sumbit') ?>" />
+                                <input class="Button" type="submit" value="<?= t('server.common.sumbit') ?>" />
                                 </td>
                             </tr>
                         </table>

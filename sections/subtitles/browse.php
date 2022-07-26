@@ -48,7 +48,7 @@ if ($TorrentID) {
         }
         ?>
         <div class="Box">
-            <div class="Box-header"> <?= t('server.global.rules') ?> </div>
+            <div class="Box-header"> <?= t('server.common.rules') ?> </div>
             <div class="Box-body"> <?= t('server.subtitles.subtitle_rules') ?> </div>
         </div>
     </div>
@@ -60,12 +60,12 @@ if ($TorrentID) {
             <option class="Select-option" value="14">简中</option><option class="Select-option" value="14">繁中</option><option class="Select-option" value="3">English</option><option class="Select-option" value="14">日语 japanese</option><option class="Select-option" value="19">韩语 korean</option><option class="Select-option" value="" selected="selected">---</option><option class="Select-option" value="22">Arabic</option><option class="Select-option" value="49">Brazilian Portuguese</option><option class="Select-option" value="29">Bulgarian</option><option class="Select-option" value="14">Chinese</option><option class="Select-option" value="23">Croatian</option><option class="Select-option" value="30">Czech</option><option class="Select-option" value="10">Danish</option><option class="Select-option" value="9">Dutch</option><option class="Select-option" value="38">Estonian</option><option class="Select-option" value="15">Finnish</option><option class="Select-option" value="6">German</option><option class="Select-option" value="26">Greek</option><option class="Select-option" value="40">Hebrew</option><option class="Select-option" value="41">Hindi</option><option class="Select-option" value="24">Hungarian</option><option class="Select-option" value="28">Icelandic</option><option class="Select-option" value="47">Indonesian</option><option class="Select-option" value="16">Italian</option></option><option class="Select-option" value="37">Latvian</option><option class="Select-option" value="39">Lithuanian</option><option class="Select-option" value="12">Norwegian</option><option class="Select-option" value="52">Persian</option><option class="Select-option" value="17">Polish</option><option class="Select-option" value="21">Portuguese</option><option class="Select-option" value="13">Romanian</option><option class="Select-option" value="7">Russian</option><option class="Select-option" value="31">Serbian</option><option class="Select-option" value="42">Slovak</option><option class="Select-option" value="43">Slovenian</option><option class="Select-option" value="11">Swedish</option><option class="Select-option" value="20">Thai</option><option class="Select-option" value="18">Turkish</option><option class="Select-option" value="34">Ukrainian</option><option class="Select-option" value="25">Vietnamese</option>
         </select>
         <select class="Input" id="subtitle_search_format" name="" class="form__input">
-            <option class="Select-option"><?= t('server.global.format') ?></option>
+            <option class="Select-option"><?= t('server.common.format') ?></option>
             <option class="Select-option">SRT</option>
             <option class="Select-option">ASS</option>
             <option class="Select-option">SUP</option>
             <option class="Select-option">VTT</option>
-            <option class="Select-option"><?= t('server.global.others') ?></option>
+            <option class="Select-option"><?= t('server.common.others') ?></option>
         </select>
         <button class="Button"><?= t('server.subtitles.search') ?></button>
     </div> -->
@@ -74,12 +74,12 @@ if ($TorrentID) {
     <!-- <table id="subtitle_browse_table">
         <tr class="colhead">
             <td>这一列是伸缩展开按钮的位置</td>
-            <td style="70px"><?= t('server.global.language') ?></td>
+            <td style="70px"><?= t('server.common.language') ?></td>
             <td><?= t('server.subtitles.movie_title') ?></td>
-            <td><?= t('server.global.format') ?></td>
-            <td><?= t('server.global.size') ?></td>
+            <td><?= t('server.common.format') ?></td>
+            <td><?= t('server.common.size') ?></td>
             <td><?= t('server.subtitles.times_of_download') ?></td>
-            <td><?= t('server.global.time') ?></td>
+            <td><?= t('server.common.time') ?></td>
         </tr>
         <tr class="group">
             <td>这一列是伸缩展开按钮的位置</td>
@@ -127,7 +127,7 @@ if ($TorrentID) {
                         <td class="Form-inputs"><input class="Input" type="text" readonly value="<?= site_url() . '/torrents.php?torrentid=' . $TorrentID ?>" name="torrent_pl_link" id="subtitle_torrent_pl" placeholder="<?= CONFIG['SITE_URL'] ?>/torrents.php?torrentid=12345"></td>
                     </tr>
                     <tr class="Form-row">
-                        <td class="Form-label"><?= t('server.global.language') ?>:</td>
+                        <td class="Form-label"><?= t('server.common.language') ?>:</td>
                         <td class="Form-inputs">
                             <div id="subtitles_container" class="Form-errorContainer">
                                 <div id="common_subtitles" class="grid_subtitles">
@@ -181,13 +181,13 @@ if ($TorrentID) {
         ?>
             <table class="TableSubtitle Table" id="subtitle_browse_table">
                 <tr class="Table-rowHeader">
-                    <td class="TableSubtitle-cellLanguage Table-cell"><?= t('server.global.language') ?></td>
+                    <td class="TableSubtitle-cellLanguage Table-cell"><?= t('server.common.language') ?></td>
                     <td class="TableSubtitle-cellName Table-cell"><?= t('server.subtitles.subtitle_names') ?></td>
-                    <td class="TableSubtitle-celllFormat Table-cell"><?= t('server.global.format') ?></td>
-                    <td class="TableSubtitle-cellSize Table-cell"><?= t('server.global.size') ?></td>
+                    <td class="TableSubtitle-celllFormat Table-cell"><?= t('server.common.format') ?></td>
+                    <td class="TableSubtitle-cellSize Table-cell"><?= t('server.common.size') ?></td>
                     <td class="TableSubtitle-cellDownloads Table-cell"><?= t('server.subtitles.times_of_download') ?></td>
                     <td class="TableSubtitle-cellUploader Table-cell"><?= t('server.subtitles.subtitle_uploader') ?></td>
-                    <td class="TableSubtitle-cellCreatedAt TableSubtitle-cellTime Table-cell"><?= t('server.global.time') ?></td>
+                    <td class="TableSubtitle-cellCreatedAt TableSubtitle-cellTime Table-cell"><?= t('server.common.time') ?></td>
                 </tr>
                 <?
 
@@ -211,10 +211,10 @@ if ($TorrentID) {
                             <td class="TableSubtitle-cellName Table-cell">
                                 <span class="floatright">
                                     <span>[ </span>
-                                    <a href="subtitles.php?action=download&id=<?= $Subtitle['id'] ?>" data-tooltip="<?= t('server.global.download') ?>">DL</a>
+                                    <a href="subtitles.php?action=download&id=<?= $Subtitle['id'] ?>" data-tooltip="<?= t('server.common.download') ?>">DL</a>
                                     <span> | </span>
-                                    <a href="reportsv2.php?action=report&type=subtitle_track_bad&id=<?= $TorrentID ?>" data-tooltip="<?= t('server.global.report') ?>">RP</a>
-                                    <?= $CanRM ? '| <a href="subtitles.php?action=delete&id=' . $Subtitle['id'] . '"  data-tooltip="' . t('server.global.remove') . '">RM</a> ' : '' ?>]
+                                    <a href="reportsv2.php?action=report&type=subtitle_track_bad&id=<?= $TorrentID ?>" data-tooltip="<?= t('server.common.report') ?>">RP</a>
+                                    <?= $CanRM ? '| <a href="subtitles.php?action=delete&id=' . $Subtitle['id'] . '"  data-tooltip="' . t('server.common.remove') . '">RM</a> ' : '' ?>]
                                 </span>
                                 <?= $Subtitle['name'] . ' ' ?>
                                 <span class="u-colorWarning"><?= ($IsNew ? '(' . t('server.subtitles.new') . '!)' : '') ?></span>

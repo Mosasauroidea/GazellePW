@@ -250,7 +250,7 @@ if (!empty($UsedReleases)) { ?>
         }
         if ($NumRequests > 0) {
         ?>
-            <a href="#requests" class="brackets"><?= t('server.global.requests') ?></a>
+            <a href="#requests" class="brackets"><?= t('server.common.requests') ?></a>
         <? } ?>
     </div>
 <? }
@@ -336,16 +336,16 @@ View::show_header(($ChineseName ? '[' . $ChineseName . '] ' : '') . $Name, 'brow
             }
             if (Bookmarks::has_bookmarked('artist', $ArtistID)) {
                 ?>
-                <a href="#" id="bookmarklink_artist_<?= $ArtistID ?>" onclick="Unbookmark('artist', <?= $ArtistID ?>, '<?= t('server.global.add_bookmark') ?>'); return false;" class="brackets"><?= t('server.global.remove_bookmark') ?></a>
+                <a href="#" id="bookmarklink_artist_<?= $ArtistID ?>" onclick="Unbookmark('artist', <?= $ArtistID ?>, '<?= t('server.common.add_bookmark') ?>'); return false;" class="brackets"><?= t('server.common.remove_bookmark') ?></a>
             <?  } else { ?>
-                <a href="#" id="bookmarklink_artist_<?= $ArtistID ?>" onclick="Bookmark('artist', <?= $ArtistID ?>, '<?= t('server.global.remove_bookmark') ?>'); return false;" class="brackets"><?= t('server.global.add_bookmark') ?></a>
+                <a href="#" id="bookmarklink_artist_<?= $ArtistID ?>" onclick="Bookmark('artist', <?= $ArtistID ?>, '<?= t('server.common.remove_bookmark') ?>'); return false;" class="brackets"><?= t('server.common.add_bookmark') ?></a>
             <?  } ?>
             <a href="#" id="subscribelink_artist<?= $ArtistID ?>" class="brackets" onclick="SubscribeComments('artist', <?= $ArtistID ?>);return false;"><?= Subscriptions::has_subscribed_comments('artist', $ArtistID) !== false ? t('server.torrents.unsubscribe') : t('server.torrents.subscribe') ?></a>
             <!--    <a href="#" id="recommend" class="brackets">Recommend</a> -->
             <?
             if (check_perms('site_edit_wiki')) {
             ?>
-                <a href="artist.php?action=edit&amp;artistid=<?= $ArtistID ?>" class="brackets"><?= t('server.global.edit') ?></a>
+                <a href="artist.php?action=edit&amp;artistid=<?= $ArtistID ?>" class="brackets"><?= t('server.common.edit') ?></a>
             <?  } ?>
             <a href="artist.php?action=history&amp;artistid=<?= $ArtistID ?>" class="brackets"><?= t('server.artist.viewhistory') ?></a>
             <? if ($RevisionID && check_perms('site_edit_wiki')) { ?>
@@ -353,7 +353,7 @@ View::show_header(($ChineseName ? '[' . $ChineseName . '] ' : '') . $Name, 'brow
             <?  } ?>
             <a href="artist.php?id=<?= $ArtistID ?>#artistcomments" class="brackets"><?= t('server.artist.artistcomments') ?></a>
             <? if (check_perms('site_delete_artist') && check_perms('torrents_delete')) { ?>
-                <a href="artist.php?action=delete&amp;artistid=<?= $ArtistID ?>&amp;auth=<?= $LoggedUser['AuthKey'] ?>" class="brackets"><?= t('server.global.delete') ?></a>
+                <a href="artist.php?action=delete&amp;artistid=<?= $ArtistID ?>&amp;auth=<?= $LoggedUser['AuthKey'] ?>" class="brackets"><?= t('server.common.delete') ?></a>
             <?  } ?>
         </div>
     </div>

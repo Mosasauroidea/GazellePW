@@ -62,8 +62,12 @@ switch ($Action) {
         $Field1 = 'artists_group.ArtistID';
         $Field2 = 'artists_group.Name';
         $Table = 'artists_group';
-        $Title = t('server.comments.artist_comments_left_by_user_before') . ($Self ? t('server.comments.you') : t('server.comments.space_username') . $Username . t('server.comments.username_space')) . t('server.comments.artist_comments_left_by_user_after');
-        $Header = t('server.comments.artist_comments_left_by_user_before') . ($Self ? t('server.comments.you') : t('server.comments.space_username') . Users::format_username($UserID, false, false, false) . t('server.comments.username_space')) . t('server.comments.artist_comments_left_by_user_after');
+        $Title = t('server.comments.artist_comments_left_by_user', ['Values' => [
+            ($Self ? t('server.comments.you') : t('server.comments.username_space', ['Values' => [$Username]]))
+        ]]);
+        $Header = t('server.comments.artist_comments_left_by_user', ['Values' => [
+            ($Self ? t('server.comments.you') : t('server.comments.username_space', ['Values' => [Users::format_username($UserID, false, false, false)]]))
+        ]]);
         $Conditions[] = "comments.AuthorID = $UserID";
         break;
     case 'collages':
@@ -74,19 +78,31 @@ switch ($Action) {
         if ($Type == 'created') {
             $Conditions[] = "collages.UserID = $UserID";
             $Conditions[] = "comments.AuthorID != $UserID";
-            $Title = t('server.comments.comments_left_on_collages_user_created_before') . ($Self ? t('server.comments.you') : t('server.comments.space_username') . $Username . t('server.comments.username_space')) . t('server.comments.comments_left_on_collages_user_created_after');
-            $Header = t('server.comments.comments_left_on_collages_user_created_before') . ($Self ? t('server.comments.you') : t('server.comments.space_username') . Users::format_username($UserID, false, false, false) . t('server.comments.username_space')) . t('server.comments.comments_left_on_collages_user_created_after');
+            $Title = t('server.comments.comments_left_on_collages_user_created', ['Values' => [
+                ($Self ? t('server.comments.you') : t('server.comments.username_space', ['Values' => [$Username]]))
+            ]]);
+            $Header = t('server.comments.comments_left_on_collages_user_created', ['Values' => [
+                ($Self ? t('server.comments.you') : t('server.comments.uername_space', ['Values' => [Users::format_username($UserID, false, false, false)]]))
+            ]]);
         } elseif ($Type == 'contributed') {
             $Conditions[] = "comments.AuthorID != $UserID";
             $Join[] = "LEFT JOIN collages_torrents ON collages_torrents.CollageID = collages.ID AND collages_torrents.UserID = $UserID";
             $Join[] = "LEFT JOIN collages_artists ON collages_artists.CollageID = collages.ID AND collages_artists.UserID = $UserID";
-            $Title = t('server.comments.comments_left_on_collages_user_has_contributed_to_before') . ($Self ? t('server.comments.you_ve') : t('server.comments.has_before') . $Username . t('server.comments.has_after')) . t('server.comments.comments_left_on_collages_user_has_contributed_to_after');
-            $Header = t('server.comments.comments_left_on_collages_user_has_contributed_to_before') . ($Self ? t('server.comments.you_ve') : t('server.comments.has_before') . Users::format_username($UserID, false, false, false) . t('server.comments.has_after')) . t('server.comments.comments_left_on_collages_user_has_contributed_to_after');
+            $Title = t('server.comments.comments_left_on_collages_user_has_contributed_to', ['Values' => [
+                ($Self ? t('server.comments.you_ve') : t('server.comments.user_has', ['Values' => [$Username]]))
+            ]]);
+            $Header = t('server.comments.comments_left_on_collages_user_has_contributed_to', ['Values' => [
+                ($Self ? t('server.comments.you_ve') : t('server.comments.user_has', ['Values' => [Users::format_username($UserID, false, false, false)]]))
+            ]]);
         } else {
             $Type = 'default';
             $Conditions[] = "comments.AuthorID = $UserID";
-            $Title = t('server.comments.collage_comments_left_by_user_before') . ($Self ? t('server.comments.you') : t('server.comments.space_username') . $Username . t('server.comments.username_space')) . t('server.comments.collage_comments_left_by_user_after');
-            $Header = t('server.comments.collage_comments_left_by_user_before') . ($Self ? t('server.comments.you') : t('server.comments.space_username') . Users::format_username($UserID, false, false, false) . t('server.comments.username_space')) . t('server.comments.collage_comments_left_by_user_after');
+            $Title = t('server.comments.collage_comments_left_by_user', ['Values' => [
+                ($Self ? t('server.comments.you') : t('server.comments.username_space', ['Values' => [$Username]]))
+            ]]);
+            $Header = t('server.comments.collage_comments_left_by_user', ['Values' => [
+                ($Self ? t('server.comments.you') : t('server.comments.username_space', ['Values' => [Users::format_username($UserID, false, false, false)]]))
+            ]]);
         }
         break;
     case 'requests':
@@ -96,19 +112,31 @@ switch ($Action) {
         if ($Type == 'created') {
             $Conditions[] = "requests.UserID = $UserID";
             $Conditions[] = "comments.AuthorID != $UserID";
-            $Title = t('server.comments.collage_comments_left_by_user_before') . ($Self ? t('server.comments.you') : t('server.comments.space_username') . $Username . t('server.comments.username_space')) . t('server.comments.comments_left_on_requests_user_created_after');
-            $Header = t('server.comments.collage_comments_left_by_user_before') . ($Self ? t('server.comments.you') : t('server.comments.space_username') . Users::format_username($UserID, false, false, false) . t('server.comments.username_space')) . t('server.comments.comments_left_on_requests_user_created_after');
+            $Title = t('server.comments.comments_left_on_requests_user_created', ['Values' => [
+                ($Self ? t('server.comments.you') : t('server.comments.username_space', ['Values' => [$Username]]))
+            ]]);
+            $Header = t('server.comments.comments_left_on_requests_user_created', ['Values' => [
+                ($Self ? t('server.comments.you') : t('server.comments.username_space', ['Values' => [Users::format_username($UserID, false, false, false)]]))
+            ]]);
         } elseif ($Type == 'voted') {
             $Conditions[] = "requests_votes.UserID = $UserID";
             $Conditions[] = "comments.AuthorID != $UserID";
             $Join[] = 'JOIN requests_votes ON requests_votes.RequestID = requests.ID';
-            $Title = t('server.comments.comments_left_on_requests_user_has_voted_on_before') . ($Self ? t('server.comments.you_ve') : t('server.comments.has_before') . $Username . t('server.comments.has_after')) . t('server.comments.comments_left_on_requests_user_has_voted_on_after');
-            $Header = t('server.comments.comments_left_on_requests_user_has_voted_on_before') . ($Self ? t('server.comments.you_ve') : t('server.comments.has_before') . Users::format_username($UserID, false, false, false) . t('server.comments.has_after')) . t('server.comments.comments_left_on_requests_user_has_voted_on_after');
+            $Title = t('server.comments.comments_left_on_requests_user_has_voted_on', ['Values' => [
+                ($Self ? t('server.comments.you_ve') : t('server.comments.user_has', ['Values' => [$Username]]))
+            ]]);
+            $Header = t('server.comments.comments_left_on_requests_user_has_voted_on', ['Values' => [
+                ($Self ? t('server.comments.you_ve') : t('server.comments.user_has', ['Values' => [Users::format_username($UserID, false, false, false)]]))
+            ]]);
         } else {
             $Type = 'default';
             $Conditions[] = "comments.AuthorID = $UserID";
-            $Title = t('server.comments.request_comments_left_by_user_before') . ($Self ? t('server.comments.you') : t('server.comments.space_username') . $Username . t('server.comments.username_space')) . t('server.comments.request_comments_left_by_user_after');
-            $Header = t('server.comments.request_comments_left_by_user_before') . ($Self ? t('server.comments.you') : t('server.comments.space_username') . Users::format_username($UserID, false, false, false) . t('server.comments.username_space')) . t('server.comments.request_comments_left_by_user_after');
+            $Title = t('server.comments.request_comments_left_by_user', ['Values' => [
+                ($Self ? t('server.comments.you') : t('server.comments.username_space', ['Values' => [$Username]]))
+            ]]);
+            $Header = t('server.comments.request_comments_left_by_user', ['Values' => [
+                ($Self ? t('server.comments.you') : t('server.comments.username_space', ['Values' => [Users::format_username($UserID, false, false, false)]]))
+            ]]);
         }
         break;
     case 'torrents':
@@ -122,13 +150,21 @@ switch ($Action) {
             $Conditions[] = "torrents.UserID = $UserID";
             $Conditions[] = 'comments.AddedTime > torrents.Time';
             $Conditions[] = "comments.AuthorID != $UserID";
-            $Title = t('server.comments.comments_left_on_torrents_user_has_uploaded_before') . ($Self ? t('server.comments.you_ve') : t('server.comments.has_before') . $Username . t('server.comments.has_after')) . t('server.comments.comments_left_on_torrents_user_has_uploaded_after');
-            $Header = t('server.comments.comments_left_on_torrents_user_has_uploaded_before') . ($Self ? t('server.comments.you_ve') : t('server.comments.has_before') . Users::format_username($UserID, false, false, false) . t('server.comments.has_after')) . t('server.comments.comments_left_on_torrents_user_has_uploaded_after');
+            $Title = t('server.comments.comments_left_on_torrents_user_has_uploaded', ['Values' => [
+                ($Self ? t('server.comments.you_ve') : t('server.comments.user_has', ['Values' => [$Username]]))
+            ]]);
+            $Header = t('server.comments.comments_left_on_torrents_user_has_uploaded', ['Values' => [
+                ($Self ? t('server.comments.you_ve') : t('server.comments.user_has', ['Values' => [Users::format_username($UserID, false, false, false)]]))
+            ]]);
         } else {
             $Type = 'default';
             $Conditions[] = "comments.AuthorID = $UserID";
-            $Title = t('server.comments.torrent_comments_left_by_before') . ($Self ? t('server.comments.you') : t('server.comments.space_username') . $Username . t('server.comments.username_space')) . t('server.comments.torrent_comments_left_by_after');
-            $Header = t('server.comments.torrent_comments_left_by_before') . ($Self ? t('server.comments.you') : t('server.comments.space_username') . Users::format_username($UserID, false, false, false) . t('server.comments.username_space')) . t('server.comments.torrent_comments_left_by_after');
+            $Title = t('server.comments.torrent_comments_left_by', ['Values' => [
+                ($Self ? t('server.comments.you') : t('server.comments.username_space', ['Values' => [$Username]]))
+            ]]);
+            $Header = t('server.comments.torrent_comments_left_by', ['Values' => [
+                ($Self ? t('server.comments.you') : t('server.comments.username_space', ['Values' => [Users::format_username($UserID, false, false, false)]]))
+            ]]);
         }
         break;
 }
@@ -195,35 +231,67 @@ switch ($Action) {
     case 'collages':
         $BaseLink = 'comments.php?action=collages' . $LinkID;
         if ($Type != 'default') {
-            $TypeLinks[] = '<a href="' . $BaseLink . '" class="brackets">' . t('server.comments.display_comments_left_on_collages_user_has_made_before') . ($Self ? t('server.comments.you_ve') : t('server.comments.has_before') . $Username . t('server.comments.has_after')) . t('server.comments.display_comments_left_on_collages_user_has_made_after') . '</a>';
+            $TypeLinks[] = '<a href="' . $BaseLink . '" class="brackets">'
+                . t('server.comments.display_comments_left_on_collages_user_has_made', ['Values' => [
+                    ($Self ? t('server.comments.you_ve') : t('server.comments.user_has', ['Values' => [$Username]]))
+                ]])
+                . '</a>';
         }
         if ($Type != 'created') {
-            $TypeLinks[] = '<a href="' . $BaseLink . '&amp;type=created" class="brackets">' . t('server.comments.display_comments_left_on_users_collages_before') . ($Self ? t('server.comments.your_collages') : t('server.comments.collages_created_by_before') . $Username . t('server.comments.collages_created_by_after')) . t('server.comments.display_comments_left_on_users_collages_after') . '</a>';
+            $TypeLinks[] = '<a href="' . $BaseLink . '&amp;type=created" class="brackets">'
+                . t('server.comments.display_comments_left_on_users_collages', ['Values' => [
+                    ($Self ? t('server.comments.your_collages') : t('server.comments.collages_created_by', ['Values' => [$Username]]))
+                ]])
+                . '</a>';
         }
         if ($Type != 'contributed') {
-            $TypeLinks[] = '<a href="' . $BaseLink . '&amp;type=contributed" class="brackets">' . t('server.comments.display_comments_left_on_collages_user_has_contributed_to_before') . ($Self ? t('server.comments.you_ve') : t('server.comments.has_before') . $Username . t('server.comments.has_after')) . t('server.comments.display_comments_left_on_collages_user_has_contributed_to_after') . '</a>';
+            $TypeLinks[] = '<a href="' . $BaseLink . '&amp;type=contributed" class="brackets">'
+                . t('server.comments.display_comments_left_on_collages_user_has_contributed_to', ['Values' => [
+                    ($Self ? t('server.comments.you_ve') : t('server.comments.user_has', ['Values' => [$Username]]))
+                ]])
+                . '</a>';
         }
         break;
     case 'requests':
         $BaseLink = 'comments.php?action=requests' . $LinkID;
         if ($Type != 'default') {
-            $TypeLinks[] = '<a href="' . $BaseLink . '" class="brackets">' . t('server.comments.display_comments_left_on_requests_user_has_made_before') . ($Self ? t('server.comments.you_ve') : t('server.comments.has_before') . $Username . t('server.comments.has_after')) . t('server.comments.display_comments_left_on_requests_user_has_made_after') . '</a>';
+            $TypeLinks[] = '<a href="' . $BaseLink . '" class="brackets">'
+                . t('server.comments.display_comments_left_on_requests_user_has_made', ['Values' => [
+                    ($Self ? t('server.comments.you_ve') : t('server.comments.user_has', ['Values' => [$Username]]))
+                ]])
+                . '</a>';
         }
         if ($Type != 'created') {
             //
             //your requests
-            $TypeLinks[] = '<a href="' . $BaseLink . '&amp;type=created" class="brackets">' . t('server.comments.display_comments_left_on_requests_user_created_before') . ($Self ? t('server.comments.you') :  t('server.comments.space_username') . $Username . t('server.comments.username_space')) . t('server.comments.display_comments_left_on_requests_user_created_after') . '</a>';
+            $TypeLinks[] = '<a href="' . $BaseLink . '&amp;type=created" class="brackets">'
+                . t('server.comments.display_comments_left_on_requests_user_created', ['Values' => [
+                    ($Self ? t('server.comments.you') :  t('server.comments.username_space', ['Values' => [$Username]]))
+                ]])
+                . '</a>';
         }
         if ($Type != 'voted') {
-            $TypeLinks[] = '<a href="' . $BaseLink . '&amp;type=voted" class="brackets">' . t('server.comments.display_comments_left_on_requests_user_has_voted_on_before') . ($Self ? t('server.comments.you_ve') : t('server.comments.has_before') . $Username . t('server.comments.has_after')) . t('server.comments.display_comments_left_on_requests_user_has_voted_on_after') . '</a>';
+            $TypeLinks[] = '<a href="' . $BaseLink . '&amp;type=voted" class="brackets">'
+                . t('server.comments.display_comments_left_on_requests_user_has_voted_on', ['Values' => [
+                    ($Self ? t('server.comments.you_ve') : t('server.comments.user_has', ['Values' => [$Username]]))
+                ]])
+                . '</a>';
         }
         break;
     case 'torrents':
         if ($Type != 'default') {
-            $TypeLinks[] = '<a href="comments.php?action=torrents' . $LinkID . '" class="brackets">' . t('server.comments.display_comments_left_on_torrents_user_has_made_before') . ($Self ? t('server.comments.you_ve') : t('server.comments.has_before') . $Username . t('server.comments.has_after')) . t('server.comments.display_comments_left_on_torrents_user_has_made_after') . '</a>';
+            $TypeLinks[] = '<a href="comments.php?action=torrents' . $LinkID . '" class="brackets">'
+                . t('server.comments.display_comments_left_on_torrents_user_has_made', ['Values' => [
+                    ($Self ? t('server.comments.you_ve') : t('server.comments.user_has', ['Values' => [$Username]]))
+                ]])
+                . '</a>';
         }
         if ($Type != 'uploaded') {
-            $TypeLinks[] = '<a href="comments.php?action=torrents' . $LinkID . '&amp;type=uploaded" class="brackets">' . t('server.comments.display_comments_left_on_torrents_user_has_uploaded_before') . ($Self ? t('server.comments.you_ve') : t('server.comments.has_before') . $Username . t('server.comments.has_after')) . t('server.comments.display_comments_left_on_torrents_user_has_uploaded_after') . '</a>';
+            $TypeLinks[] = '<a href="comments.php?action=torrents' . $LinkID . '&amp;type=uploaded" class="brackets">'
+                . t('server.comments.display_comments_left_on_torrents_user_has_uploaded', ['Values' => [
+                    ($Self ? t('server.comments.you_ve') : t('server.comments.user_has', ['Values' => [$Username]]))
+                ]])
+                . '</a>';
         }
         break;
 }

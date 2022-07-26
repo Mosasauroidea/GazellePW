@@ -75,7 +75,7 @@ if ($DB->has_results()) {
         <? echo $Pages; ?>
     </div>
 <?  } else { ?>
-    <h2 align="center"><?= t('server.tools.there_are_no_users_with_more_than_n_ip_overlaps_before') ?> <?= IP_OVERLAPS ?> <?= t('server.tools.there_are_no_users_with_more_than_n_ip_overlaps_after') ?></h2>
+    <h2 align="center"><?= t('server.tools.there_are_no_users_with_more_than_n_ip_overlaps', ['Values' => [IP_OVERLAPS]]) ?></h2>
 <?
 }
 View::show_footer();

@@ -281,23 +281,33 @@ if ($DB->affected_rows() > 0 || !$Report) {
     //PM
     if ($Escaped['uploader_pm'] || $Warning > 0 || isset($Escaped['delete']) || $SendPM || $_POST['custom_trumpable']) {
         if (isset($Escaped['delete'])) {
-            $PM = t('server.reportsv2.your_above_torrent_was_reported_and_has_been_deleted_before') . site_url() . "torrents.php?torrentid=$TorrentID" . t('server.reportsv2.your_above_torrent_was_reported_and_has_been_deleted_after') . "\n\n";
+            $PM = t('server.reportsv2.your_above_torrent_was_reported_and_has_been_deleted', ['Values' => [
+                site_url() . "torrents.php?torrentid=$TorrentID"
+            ]])  . "\n\n";
         } else {
-            $PM = t('server.reportsv2.your_above_torrent_was_reported_but_not_been_deleted_before') . site_url() . "torrents.php?torrentid=$TorrentID" . t('server.reportsv2.your_above_torrent_was_reported_but_not_been_deleted_after') . "\n\n";
+            $PM = t('server.reportsv2.your_above_torrent_was_reported_but_not_been_deleted', ['Values' => [
+                site_url() . "torrents.php?torrentid=$TorrentID"
+            ]]) . "\n\n";
         }
 
-        $Preset = $_POST['custom_trumpable'] ? $_POST['custom_trumpable'] . "\n\n" . t('server.reportsv2.your_torrent_is_now_displayed_on_better_php_and_trumpable_before') . site_url() . t('server.reportsv2.your_torrent_is_now_displayed_on_better_php_and_trumpable_after') : $ResolveType['resolve_options']['pm'];
+        $Preset = $_POST['custom_trumpable'] ? $_POST['custom_trumpable'] . "\n\n" . t('server.reportsv2.your_torrent_is_now_displayed_on_better_php_and_trumpable', ['Values' => [
+            site_url()
+        ]]) : $ResolveType['resolve_options']['pm'];
 
         if ($Preset != '') {
             $PM .= t('server.reportsv2.pm_reason') . ": $Preset\n\n";
         }
 
         if ($Warning > 0) {
-            $PM .= t('server.reportsv2.this_has_resulted_in_an_n_week_warning_before') . site_url() . "wiki.php?action=article&amp;id=114]$Warning" . t('server.reportsv2.this_has_resulted_in_an_n_week_warning_after') . "\n\n";
+            $PM .= t('server.reportsv2.this_has_resulted_in_an_n_week_warning', ['Values' => [
+                site_url() . "wiki.php?action=article&amp;id=114]$Warning"
+            ]]) .  "\n\n";
         }
 
         if ($Upload) {
-            $PM .= t('server.reportsv2.this_has_resulted_in_the_loss_of_your_upload_privilege_before') . ($Warning > 0 ? t('server.reportsv2.also_space') : '') . t('server.reportsv2.this_has_resulted_in_the_loss_of_your_upload_privilege_after') . "\n\n";
+            $PM .= t('server.reportsv2.this_has_resulted_in_the_loss_of_your_upload_privilege', ['Values' => [
+                ($Warning > 0 ? t('server.reportsv2.also_space') : '')
+            ]]) . "\n\n";
         }
 
         if ($Log) {
@@ -305,10 +315,10 @@ if ($DB->affected_rows() > 0 || !$Report) {
         }
 
         if ($Escaped['uploader_pm']) {
-            $PM .= t('server.inbox.message_from_before') . $LoggedUser['Username'] . t('server.inbox.message_from_after') . ": $PMMessage\n\n";
+            $PM .= t('server.inbox.message_from', ['Values' => [$LoggedUser['Username']]]) .  ": $PMMessage\n\n";
         }
 
-        $PM .= t('server.reportsv2.report_was_handled_by_user_before') . $LoggedUser['Username'] . t('server.reportsv2.report_was_handled_by_user_after');
+        $PM .= t('server.reportsv2.report_was_handled_by_user', ['Values' => [$LoggedUser['Username']]]);
 
         Misc::send_pm($UploaderID, 0, "种子处理提示: " . $Escaped['raw_name'], $PM);
     }

@@ -12,10 +12,10 @@ if (empty($AllSubtitles)) {
 ?>
 <table class="TableSubtitle Table" id="subtitle_browse_table">
     <tr class="Table-rowHeader">
-        <td class="Table-cellLeft TableSubtitle-cellLanguage Table-cell"><?= t('server.global.language') ?></td>
+        <td class="Table-cellLeft TableSubtitle-cellLanguage Table-cell"><?= t('server.common.language') ?></td>
         <td class="TableSubtitle-cellName Table-cell"><?= t('server.subtitles.subtitle_names') ?></td>
-        <td class="TableSubtitle-celllFormat Table-cell Table-cellRight"><?= t('server.global.format') ?></td>
-        <td class="TableSubtitle-cellSize Table-cell Table-cellRight"><?= t('server.global.size') ?></td>
+        <td class="TableSubtitle-celllFormat Table-cell Table-cellRight"><?= t('server.common.format') ?></td>
+        <td class="TableSubtitle-cellSize Table-cell Table-cellRight"><?= t('server.common.size') ?></td>
     </tr>
     <?
 
@@ -40,11 +40,11 @@ if (empty($AllSubtitles)) {
                 }
                 ?>
             </td>
-            <td class="TableSubtitle-cellName Table-cell" data-tooltip="<?= t('server.torrents.upload_by_before') . $UploaderName . t('server.torrents.upload_by_after') . time_diff($Subtitle['upload_time'], 2, false)  . ' | ' . t('server.subtitles.times_of_download') . $Subtitle['download_times'] ?>">
+            <td class="TableSubtitle-cellName Table-cell" data-tooltip="<?= t('server.torrents.upload_by', ['Values' => [$UploaderName]])  . time_diff($Subtitle['upload_time'], 2, false)  . ' | ' . t('server.subtitles.times_of_download') . $Subtitle['download_times'] ?>">
                 <span class="floatright">
                     <span>[ </span>
-                    <a href="subtitles.php?action=download&id=<?= $Subtitle['id'] ?>" data-tooltip="<?= t('server.global.download') ?>">DL</a>
-                    <?= $CanRM ? '| <a href="subtitles.php?action=delete&id=' . $Subtitle['id'] . '"  data-tooltip="' . t('server.global.remove') . '">RM</a> ' : '' ?>]
+                    <a href="subtitles.php?action=download&id=<?= $Subtitle['id'] ?>" data-tooltip="<?= t('server.common.download') ?>">DL</a>
+                    <?= $CanRM ? '| <a href="subtitles.php?action=delete&id=' . $Subtitle['id'] . '"  data-tooltip="' . t('server.common.remove') . '">RM</a> ' : '' ?>]
                 </span>
                 <?= $Subtitle['name'] . ' ' ?>
                 <strong class="u-colorWarning"><?= ($IsNew ?  t('server.subtitles.new')  : '') ?></strong>

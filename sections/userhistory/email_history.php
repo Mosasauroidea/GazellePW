@@ -36,7 +36,7 @@ $DB->query("
 	FROM users_main
 	WHERE ID = $UserID");
 list($Username) = $DB->next_record();
-View::show_header(t('server.userhistory.email_history_for_before') . "$Username" . t('server.userhistory.email_history_for_after'), '', 'PageUserHistoryEmail');
+View::show_header(t('server.userhistory.email_history_for', ['Values' => [$Username]]), '', 'PageUserHistoryEmail');
 
 if ($UsersOnly == 1) {
 	$DB->query("
@@ -88,7 +88,11 @@ if ($UsersOnly == 1) {
 $History = $DB->to_array();
 ?>
 <div class="BodyHeader">
-	<h2 class="BodyHeader-nav"><?= t('server.userhistory.email_history_for_before') ?><a href="user.php?id=<?= $UserID ?>"><?= $Username ?></a><?= t('server.userhistory.email_history_for_after') ?></h2>
+	<h2 class="BodyHeader-nav">
+		<?= t('server.userhistory.email_history_for', ['Values' => [
+			"<a href='user.php?id=${UserID}'>${Username}</a>"
+		]]) ?>
+	</h2>
 </div>
 <div class="TableContainer">
 	<table class="TableUserEmailHistory Table">

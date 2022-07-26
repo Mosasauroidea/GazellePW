@@ -108,7 +108,7 @@ View::show_header($Title, 'wiki,bbcode', 'PageWikiHome');
                         <strong><?= t('server.wiki.permissions') ?></strong>
                         <ul>
                             <li><?= t('server.wiki.read') ?>: <?= $ClassLevels[$Read]['Name'] ?></li>
-                            <li><?= t('server.global.edit') ?>: <?= $ClassLevels[$Edit]['Name'] ?></li>
+                            <li><?= t('server.common.edit') ?>: <?= $ClassLevels[$Edit]['Name'] ?></li>
                         </ul>
                     </li>
                     <li>

@@ -18,7 +18,7 @@ $Title = Torrents::group_name($Group);
         <table class="TableGroupHistory Table">
             <tr class="Table-rowHeader">
                 <td class="Table-cell TableTorrent-cellUploadTime"><?= t('server.torrents.date') ?></td>
-                <td class="Table-cell"><?= t('server.global.torrent') ?></td>
+                <td class="Table-cell"><?= t('server.common.torrent') ?></td>
                 <td class="Table-cell TableTorrent-cellUserName"><?= t('server.torrents.user') ?></td>
                 <td class="Table-cell"><?= t('server.torrents.info') ?></td>
             </tr>

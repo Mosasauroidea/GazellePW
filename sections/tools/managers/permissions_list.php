@@ -50,7 +50,7 @@ View::show_header(t('server.tools.manage_permissions'));
                         <td class="Table-cell"><?= ($Secondary ? 'Secondary' : $Level) ?></td>
                         <td class="Table-cell"><a href="<?= $link; ?>"><?= number_format($UserCount); ?></a></td>
                         <td class="Table-cell Table-cellCenter">
-                            <a href="tools.php?action=permissions&amp;id=<?= $ID ?>" class="brackets"><?= t('server.global.edit') ?></a>
+                            <a href="tools.php?action=permissions&amp;id=<?= $ID ?>" class="brackets"><?= t('server.common.edit') ?></a>
                             &nbsp;
                             <a href="#" onclick="return confirmDelete(<?= $ID ?>);" class="brackets floatright"><?= t('server.tools.remove') ?></a>
                         </td>

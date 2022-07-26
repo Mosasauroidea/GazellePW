@@ -100,7 +100,11 @@ $DB->set_query_id($Reports);
                         <strong><a href="<?= $Reference ?>"><?= t('server.reports.report') ?> #<?= $ReportID ?></a></strong>
                     </td>
                     <td class="Table-cell">
-                        <strong><?= $Type['title'] ?></strong><?= t('server.reports.sth_was_reported_by_user_sometime_before') ?><a href="user.php?id=<?= $SnitchID ?>"><?= $SnitchName ?></a><?= t('server.reports.sth_was_reported_by_user_sometime_after') ?><?= time_diff($ReportedTime) ?>
+                        <strong><?= $Type['title'] ?></strong>
+                        <?= t('server.reports.sth_was_reported_by_user_sometime', ['Values' => [
+                            "<a href='user.php?id=${SnitchID}'>${SnitchName}</a>"
+                        ]]) ?>
+                        <?= time_diff($ReportedTime) ?>
                         <a href="reports.php?action=compose&amp;to=<?= $SnitchID ?>&amp;reportid=<?= $ReportID ?>&amp;type=<?= $Short ?>&amp;thingid=<?= $ThingID ?>" class="brackets"><?= t('server.reports.contact') ?></a>
                     </td>
                 </tr>
@@ -209,9 +213,16 @@ $DB->set_query_id($Reports);
                 <tr class="Table-row">
                     <td class="Table-cell" colspan="2">
                         <? if ($ClaimerID == $LoggedUser['ID']) { ?>
-                            <span id="claimed_<?= $ReportID ?>"><?= t('server.reports.claimed_by_before') ?><?= Users::format_username($ClaimerID, false, false, false, false) ?><?= t('server.reports.claimed_by_after') ?> <a href="#" onclick="unClaim(<?= $ReportID ?>); return false;" class="brackets"><?= t('server.reports.unclaim') ?></a></span>
+                            <span id="claimed_<?= $ReportID ?>">
+                                <?= t('server.reports.claimed_by', ['Values' => [
+                                    Users::format_username($ClaimerID, false, false, false, false)
+                                ]]) ?>
+                                <a href="#" onclick="unClaim(<?= $ReportID ?>); return false;" class="brackets"><?= t('server.reports.unclaim') ?></a></span>
                         <? } elseif ($ClaimerID) { ?>
-                            <span id="claimed_<?= $ReportID ?>"><?= t('server.reports.claimed_by_before') ?><?= Users::format_username($ClaimerID, false, false, false, false) ?><?= t('server.reports.claimed_by_after') ?></span>
+                            <span id="claimed_<?= $ReportID ?>">
+                                <?= t('server.reports.claimed_by', ['Values' => [
+                                    Users::format_username($ClaimerID, false, false, false, false)
+                                ]]) ?></span>
                         <? } else { ?>
                             <a href="#" id="claim_<?= $ReportID ?>" onclick="claim(<?= $ReportID ?>); return false;" class="brackets"><?= t('server.reports.claim') ?></a>
                         <? } ?>
@@ -239,7 +250,9 @@ $DB->set_query_id($Reports);
                     <? $ResolverInfo = Users::user_info($ResolverID); ?>
                     <tr class="Table-row">
                         <td class="Table-cell" colspan="2">
-                            <?= t('server.reports.resolved_by_before') ?><a href="users.php?id=<?= $ResolverID ?>"><?= $ResolverInfo['Username'] ?></a><?= t('server.reports.resolved_by_after') ?>
+                            <?= t('server.reports.resolved_by', ['Values' => [
+                                "<a href='users.php?id=$ResolverID'>${ResolverInfo['Username']}</a>"
+                            ]]) ?>
                         </td>
                     </tr>
                 <? } ?>

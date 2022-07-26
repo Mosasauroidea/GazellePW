@@ -29,7 +29,7 @@ $OldDonations = G::$DB->to_pair(0, 1, false);
             if ($Amount == $OldDonations[$Address]) { // Direct comparison should be fine as everything comes from bitcoind
                 continue;
             }
-            $Debug->log_var(array('old' => $OldDonations[$Address], 'new' => $Amount), t('server.tools.new_donations_from_before') . "$Address" . t('server.tools.new_donations_from_after'));
+            $Debug->log_var(array('old' => $OldDonations[$Address], 'new' => $Amount), t('server.tools.new_donations_from', ['Values' => [$Address]]));
             // PHP doesn't do fixed-point math, and json_decode has already botched the precision
             // so let's just round this off to satoshis and pray that we're on a 64 bit system
             $Amount = round($Amount - $OldDonations[$Address], 8);

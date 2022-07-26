@@ -56,7 +56,7 @@ View::show_header(t('server.torrents.missing'), 'missing', 'PageTorrentMissing')
         <div class="SearchPageFooter">
             <div class="SearchPageFooter-resultCount">
                 <?= number_format($RealNumResults) ?> <?= t('server.torrents.space_results') ?>
-                <?= !check_perms('site_search_many') ? "(" . t('server.torrents.showing_first_n_matches_before') . $NumResults . t('server.torrents.showing_first_n_matches_after') . ")" : "" ?>
+                <?= !check_perms('site_search_many') ? "(" . t('server.torrents.showing_first_n_matches', ['Values' => [$NumResults]])  . ")" : "" ?>
             </div>
             <div class="SearchPageFooter-actions">
                 <input class="Button" type="submit" value="<?= t('server.torrents.search_torrents') ?>" />
@@ -106,7 +106,7 @@ HTML;
         <tr class="Table-rowHeader">
             <td class="TableMissing-cellName Table-cell"><?= t('server.torrents.name') ?></td>
             <td class="TableMissing-cellSnatches Table-cell">
-                <i aria-hidden="true" alt="Snatches" data-tooltip="<?= t('server.global.snatched') ?>">
+                <i aria-hidden="true" alt="Snatches" data-tooltip="<?= t('server.common.snatched') ?>">
                     <?= icon("torrent-snatches") ?>
                 </i>
             </td>

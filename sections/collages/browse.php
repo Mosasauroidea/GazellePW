@@ -234,10 +234,10 @@ View::show_header(t('server.collages.browse_collages'), '', 'PageCollageHome');
 
             <div>
                 <div class="BodyNavLinks">
-                    <a href="bookmarks.php?type=torrents" class="brackets"><?= t('server.global.torrents') ?></a>
-                    <a href="bookmarks.php?type=artists" class="brackets"><?= t('server.global.artists') ?></a>
+                    <a href="bookmarks.php?type=torrents" class="brackets"><?= t('server.common.torrents') ?></a>
+                    <a href="bookmarks.php?type=artists" class="brackets"><?= t('server.common.artists') ?></a>
                     <a href="bookmarks.php?type=collages" class="brackets"><?= t('server.collages.collage') ?></a>
-                    <a href="bookmarks.php?type=requests" class="brackets"><?= t('server.global.requests') ?></a>
+                    <a href="bookmarks.php?type=requests" class="brackets"><?= t('server.common.requests') ?></a>
                 </div>
             </div>
         <?
@@ -382,7 +382,7 @@ View::show_header(t('server.collages.browse_collages'), '', 'PageCollageHome');
         <tr class="Table-rowHeader">
             <td class="Table-cell"><?= t('server.collages.category') ?></td>
             <td class="Table-cell"><?= t('server.collages.collage') ?></td>
-            <td class="Table-cell Table-cellRight"><?= t('server.global.torrents') ?></td>
+            <td class="Table-cell Table-cellRight"><?= t('server.common.torrents') ?></td>
             <td class="Table-cell Table-cellRight"><?= t('server.collages.subscribers') ?></td>
             <td class="Table-cell Table-cellRight"><?= t('server.collages.updated') ?></td>
             <td class="Table-cell Table-cellRight"><?= t('server.collages.author') ?></td>
@@ -404,7 +404,7 @@ View::show_header(t('server.collages.browse_collages'), '', 'PageCollageHome');
                     <a href="collages.php?id=<?= $ID ?>"><?= $Name ?></a>
                     <? if ($BookmarkView) { ?>
                         <span class="floatright">
-                            <a href="#" onclick="Unbookmark('collage', <?= $ID ?>, ''); return false;" class="brackets"><?= t('server.global.remove_bookmark') ?></a>
+                            <a href="#" onclick="Unbookmark('collage', <?= $ID ?>, ''); return false;" class="brackets"><?= t('server.common.remove_bookmark') ?></a>
                         </span>
                     <?  } ?>
                     <div class="tags"><?= $TorrentTags->format('collages.php?action=search&amp;tags=') ?></div>

@@ -64,9 +64,9 @@ View::show_header(t('server.subtitles.h2_subtitles'), 'validate_subtitles', 'Pag
         <button class="Button"><?= t('server.subtitles.search') ?></button>
     </div>
     <div id="subtitle_browser">
-        <div class="thead subtitle_language"><?= t('server.global.language') ?></div>
+        <div class="thead subtitle_language"><?= t('server.common.language') ?></div>
         <div class="thead movie_title"><?= t('server.subtitles.movie_title') ?></div>
-        <div class="thead subtitle_language"><?= t('server.global.language') ?></div>
+        <div class="thead subtitle_language"><?= t('server.common.language') ?></div>
         <div class="thead movie_title"><?= t('server.subtitles.movie_title') ?></div>
         <!-- 如果是多语字幕，下边就亮联合国旗 -->
         <div class="tbody subtitle_language">国旗</div>

@@ -43,10 +43,10 @@ class CommentsView {
                                 <? if ($Tools) { ?>
                                     <a href="#quickpost" onclick="Quote('<?= $PostID ?>','<?= $UserInfo['Username'] ?>', true);" class="brackets"><?= t('server.forums.quote') ?></a>
                                     <? if ($AuthorID == G::$LoggedUser['ID'] || check_perms('site_moderate_forums')) { ?>
-                                        - <a href="#post<?= $PostID ?>" onclick="Edit_Form('<?= $PostID ?>','<?= $Key ?>');" class="brackets"><?= t('server.global.edit') ?></a>
+                                        - <a href="#post<?= $PostID ?>" onclick="Edit_Form('<?= $PostID ?>','<?= $Key ?>');" class="brackets"><?= t('server.common.edit') ?></a>
                                     <? } ?>
                                     <? if (check_perms('site_moderate_forums')) { ?>
-                                        - <a href="#post<?= $PostID ?>" onclick="Delete('<?= $PostID ?>');" class="brackets"><?= t('server.global.delete') ?></a>
+                                        - <a href="#post<?= $PostID ?>" onclick="Delete('<?= $PostID ?>');" class="brackets"><?= t('server.common.delete') ?></a>
                                     <? } ?>
                                     - <a href="reports.php?action=report&amp;type=comment&amp;id=<?= $PostID ?>" class="brackets"><?= t('server.forums.report') ?></a>
                                     <? if (check_perms('users_warn') && $AuthorID != G::$LoggedUser['ID'] && G::$LoggedUser['Class'] >= $UserInfo['Class']) { ?>
@@ -78,7 +78,10 @@ class CommentsView {
                                         <? if (check_perms('site_admin_forums')) { ?>
                                             <a href="#content<?= $PostID ?>" onclick="LoadEdit('<?= substr($Link, 0, strcspn($Link, '.')) ?>', <?= $PostID ?>, 1); return false;">&laquo;</a>
                                         <? } ?>
-                                        <?= t('server.forums.last_edited_by_before') ?><?= Users::format_username($EditedUserID, false, false, false) ?><?= t('server.forums.last_edited_by_after') ?> <?= time_diff($EditedTime, 2, true, true) ?>
+                                        <?= t('server.forums.last_edited_by', ['Values' => [
+                                            Users::format_username($EditedUserID, false, false, false)
+                                        ]]) ?>
+                                        <?= time_diff($EditedTime, 2, true, true) ?>
                                     </span>
                                 <? } ?>
                             </div>

@@ -387,9 +387,9 @@ View::show_header(t('server.index.index'), 'comments', 'PageHome');
                     $Cache->cache_value('stats_artist_count', $ArtistCount, 604860); // staggered 1 week cache
                 }
                 ?>
-                <li class="SidebarList-item"><?= t('server.global.torrents') ?>: <?= number_format($TorrentCount) ?></li>
+                <li class="SidebarList-item"><?= t('server.common.torrents') ?>: <?= number_format($TorrentCount) ?></li>
                 <li class="SidebarList-item"><?= t('server.index.moviegroups') ?>: <?= number_format($MoviesCount) ?></li>
-                <li class="SidebarList-item"><?= t('server.global.artist') ?>: <?= number_format($ArtistCount) ?></li>
+                <li class="SidebarList-item"><?= t('server.common.artist') ?>: <?= number_format($ArtistCount) ?></li>
                 <?
                 //End Torrent Stats
                 if (($CollageCount = $Cache->get_value('stats_collages')) === false) {
@@ -420,7 +420,7 @@ View::show_header(t('server.index.index'), 'comments', 'PageHome');
                 }
                 $RequestPercentage = $RequestCount > 0 ? $FilledCount / $RequestCount * 100 : 0;
                 ?>
-                <li class="SidebarList-item"><?= t('server.global.requests') ?>: <?= number_format($RequestCount) ?> (<?= number_format($RequestPercentage, 2) ?>% <?= t('server.index.filled') ?>)</li>
+                <li class="SidebarList-item"><?= t('server.common.requests') ?>: <?= number_format($RequestCount) ?> (<?= number_format($RequestPercentage, 2) ?>% <?= t('server.index.filled') ?>)</li>
                 <?
                 if ($SnatchStats = $Cache->get_value('stats_snatches')) {
                 ?>
@@ -457,8 +457,8 @@ View::show_header(t('server.index.index'), 'comments', 'PageHome');
                 }
                 ?>
                 <li class="SidebarList-item"><?= t('server.index.peers') ?>: <?= $PeerCount ?></li>
-                <li class="SidebarList-item"><?= t('server.global.seeders') ?>: <?= $SeederCount ?></li>
-                <li class="SidebarList-item"><?= t('server.global.leechers') ?>: <?= $LeecherCount ?></li>
+                <li class="SidebarList-item"><?= t('server.common.seeders') ?>: <?= $SeederCount ?></li>
+                <li class="SidebarList-item"><?= t('server.common.leechers') ?>: <?= $LeecherCount ?></li>
                 <li><?= t('server.index.s_l_ratio') ?>: <?= $Ratio ?></li>
             </ul>
         </div>

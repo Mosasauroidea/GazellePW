@@ -40,8 +40,8 @@ View::show_header($Title, 'browse', 'PageBookmarkArtists');
     <div class="BodyHeader">
         <h2 class="BodyHeader-nav"><?= $Title ?></h2>
         <div class="BodyNavLinks">
-            <a href="bookmarks.php?type=torrents" class="brackets"><?= t('server.global.torrents') ?></a>
-            <a href="bookmarks.php?type=artists" class="brackets"><?= t('server.global.artists') ?></a>
+            <a href="bookmarks.php?type=torrents" class="brackets"><?= t('server.common.torrents') ?></a>
+            <a href="bookmarks.php?type=artists" class="brackets"><?= t('server.common.artists') ?></a>
             <?
             if (CONFIG['ENABLE_COLLAGES']) {
             ?>
@@ -49,7 +49,7 @@ View::show_header($Title, 'browse', 'PageBookmarkArtists');
             <?
             }
             ?>
-            <a href="bookmarks.php?type=requests" class="brackets"><?= t('server.global.requests') ?></a>
+            <a href="bookmarks.php?type=requests" class="brackets"><?= t('server.common.requests') ?></a>
         </div>
     </div>
     <div class="Box">
@@ -67,7 +67,7 @@ View::show_header($Title, 'browse', 'PageBookmarkArtists');
 <div class="TableContainer">
     <table class="TableArtist Table">
         <tr class="Table-rowHeader">
-            <td class="Table-cell"><?= t('server.global.artist') ?></td>
+            <td class="Table-cell"><?= t('server.common.artist') ?></td>
         </tr>
         <?
         $Row = 'a';
@@ -102,7 +102,7 @@ View::show_header($Title, 'browse', 'PageBookmarkArtists');
                             }
                         }
                         ?>
-                        &nbsp;&nbsp;&nbsp;<a href="#" id="bookmarklink_artist_<?= $ArtistID ?>" onclick="Unbookmark('artist', <?= $ArtistID ?>, '<?= t('server.bookmarks.bookmark') ?>'); return false;" class="brackets"><?= t('server.global.remove_bookmark') ?></a>
+                        &nbsp;&nbsp;&nbsp;<a href="#" id="bookmarklink_artist_<?= $ArtistID ?>" onclick="Unbookmark('artist', <?= $ArtistID ?>, '<?= t('server.bookmarks.bookmark') ?>'); return false;" class="brackets"><?= t('server.common.remove_bookmark') ?></a>
                     </span>
                 </td>
             </tr>

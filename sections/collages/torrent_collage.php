@@ -118,11 +118,11 @@ View::show_header($Name, 'browse,collage,bbcode,voting,recommend', 'PageCollageT
             }
             if (Bookmarks::has_bookmarked('collage', $CollageID)) {
             ?>
-                <a href="#" id="bookmarklink_collage_<?= $CollageID ?>" class="brackets" onclick="Unbookmark('collage', <?= $CollageID ?>, '<?= t('server.global.add_bookmark') ?>'); return false;">
-                    <?= t('server.global.remove_bookmark') ?></a>
+                <a href="#" id="bookmarklink_collage_<?= $CollageID ?>" class="brackets" onclick="Unbookmark('collage', <?= $CollageID ?>, '<?= t('server.common.add_bookmark') ?>'); return false;">
+                    <?= t('server.common.remove_bookmark') ?></a>
             <?  } else { ?>
-                <a href="#" id="bookmarklink_collage_<?= $CollageID ?>" class="brackets" onclick="Bookmark('collage', <?= $CollageID ?>, '<?= t('server.global.remove_bookmark') ?>'); return false;">
-                    <?= t('server.global.add_bookmark') ?></a>
+                <a href="#" id="bookmarklink_collage_<?= $CollageID ?>" class="brackets" onclick="Bookmark('collage', <?= $CollageID ?>, '<?= t('server.common.remove_bookmark') ?>'); return false;">
+                    <?= t('server.common.add_bookmark') ?></a>
             <?  } ?>
             <!-- <a href="#" id="recommend" class="brackets">Recommend</a> -->
             <?
@@ -135,7 +135,7 @@ View::show_header($Name, 'browse,collage,bbcode,voting,recommend', 'PageCollageT
                 <?= t('server.collages.report_collage') ?></a>
             <? if (check_perms('site_collages_delete') || $CreatorID == $LoggedUser['ID']) { ?>
                 <a href="collages.php?action=delete&amp;collageid=<?= $CollageID ?>&amp;auth=<?= $LoggedUser['AuthKey'] ?>" class="brackets" onclick="return confirm('<?= t('server.collages.delete_confirm') ?>');">
-                    <?= t('server.global.delete') ?></a>
+                    <?= t('server.common.delete') ?></a>
             <?  } ?>
         </div>
     </div>
@@ -164,16 +164,19 @@ View::show_header($Name, 'browse,collage,bbcode,voting,recommend', 'PageCollageT
                 </div>
                 <ul class="SidebarList SidebarItem-body Box-body">
                     <li class="SidebarList-item">
-                        <?= t('server.global.torrents') ?>: <?= number_format($NumGroups) ?></li>
+                        <?= t('server.common.torrents') ?>: <?= number_format($NumGroups) ?></li>
                     <? if (!empty($TopArtists)) { ?>
                         <li class="SidebarList-item">
-                            <?= t('server.global.artists') ?>: <?= number_format(count($TopArtists)) ?></li>
+                            <?= t('server.common.artists') ?>: <?= number_format(count($TopArtists)) ?></li>
                     <? } ?>
                     <li class="SidebarList-item">
                         <?= t('server.collages.subscribers') ?>: <?= number_format((int)$Subscribers) ?></li>
                     <li class="SidebarList-item">
-                        <?= t('server.collages.built_by') ?> <?= number_format(count($UserAdditions)) ?>
-                        <?= t('server.collages.user') ?><?= (count($UserAdditions) > 1 ? t('server.collages.users') : '') ?></li>
+                        <?= t('server.collages.built_by_n_users', ['Values' => [
+                            number_format(count($UserAdditions)),
+                            t('server.collages.user', ['Count' => count($UserAdditions)])
+                        ]]) ?>
+                    </li>
                     <li class="SidebarList-item">
                         <?= t('server.collages.last_updated') ?>: <?= time_diff($Updated) ?></li>
                 </ul>
@@ -251,7 +254,7 @@ View::show_header($Name, 'browse,collage,bbcode,voting,recommend', 'PageCollageT
                                 <input class="Input" type="text" size="20" name="url" />
                             </div>
                             <div class="submit_div">
-                                <input class="Button" type="submit" value="<?= t('server.global.add') ?>" />
+                                <input class="Button" type="submit" value="<?= t('server.common.add') ?>" />
                             </div>
                         </form>
                         <span style="font-style: italic;">
@@ -267,7 +270,7 @@ View::show_header($Name, 'browse,collage,bbcode,voting,recommend', 'PageCollageT
                                 <textarea class="Input" name="urls" rows="5" cols="25" style="white-space: pre; word-wrap: normal; overflow: auto;"></textarea>
                             </div>
                             <div class="submit_div">
-                                <input class="Button" type="submit" value="<?= t('server.global.add') ?>" />
+                                <input class="Button" type="submit" value="<?= t('server.common.add') ?>" />
                             </div>
                         </form>
                         <span style="font-style: italic;">

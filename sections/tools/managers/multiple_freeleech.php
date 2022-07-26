@@ -119,13 +119,13 @@ if (isset($_POST['torrents'])) {
                 <td class="label"><?= t('server.tools.specifications') ?>:</td>
                 <td>
                     <select class="Input">
-                        <option class="Select-option"><?= t('server.global.type') ?></option>
-                        <option class="Select-option"><?= t('server.global.feature_film') ?></option>
-                        <option class="Select-option"><?= t('server.global.short_film') ?></option>
-                        <option class="Select-option"><?= t('server.global.miniseries') ?></option>
-                        <option class="Select-option"><?= t('server.global.stand_up_comedy') ?></option>
-                        <option class="Select-option"><?= t('server.global.live_performance') ?></option>
-                        <option class="Select-option"><?= t('server.global.movie_collection') ?></option>
+                        <option class="Select-option"><?= t('server.common.type') ?></option>
+                        <option class="Select-option"><?= t('server.common.feature_film') ?></option>
+                        <option class="Select-option"><?= t('server.common.short_film') ?></option>
+                        <option class="Select-option"><?= t('server.common.miniseries') ?></option>
+                        <option class="Select-option"><?= t('server.common.stand_up_comedy') ?></option>
+                        <option class="Select-option"><?= t('server.common.live_performance') ?></option>
+                        <option class="Select-option"><?= t('server.common.movie_collection') ?></option>
                     </select>
                     <select class="Input">
                         <option class="Select-option"><?= t('server.tools.resolution') ?></option>
@@ -233,7 +233,7 @@ if (isset($_POST['torrents'])) {
                 <td class="Table-cell">2021-05-13</td>
                 <td class="Table-cell">Username</td>
                 <td class="Table-cell">
-                    <a><?= t('server.global.delete') ?></a><!-- 如果要调整促销规则，删掉旧的新增就可以 -->
+                    <a><?= t('server.common.delete') ?></a><!-- 如果要调整促销规则，删掉旧的新增就可以 -->
                 </td>
             </tr>
             <tr class="Table-row">
@@ -243,7 +243,7 @@ if (isset($_POST['torrents'])) {
                 <td class="Table-cell">2021-05-14</td>
                 <td class="Table-cell">Username</td>
                 <td class="Table-cell">
-                    <a><?= t('server.global.delete') ?></a>
+                    <a><?= t('server.common.delete') ?></a>
                 </td>
             </tr>
         </table>
@@ -305,7 +305,7 @@ if (isset($_POST['torrents'])) {
                 <option class="Select-option" value="m" <?= $_POST['scale'] == 'm' ? 'selected' : '' ?>>MB</option>
                 <option class="Select-option" value="g" <?= !isset($_POST['scale']) || $_POST['scale'] == 'g' ? 'selected' : '' ?>>GB</option>
             </select><?= t('server.tools.nl_torrents_over_after') ?><br /><br />
-            <input class="Button" type="submit" value="<?= t('server.global.submit') ?>" />
+            <input class="Button" type="submit" value="<?= t('server.common.submit') ?>" />
         </form>
     </div>
 </div>

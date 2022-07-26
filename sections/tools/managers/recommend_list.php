@@ -50,7 +50,7 @@ $DB->query("
                     <?      } ?>
                     - <a href="torrents.php?id=<?= $GroupID ?>"><?= $GroupName ?></a>
                     <? if (check_perms('site_manage_recommendations') || $UserID == $LoggedUser['ID']) { ?>
-                        <a href="tools.php?action=recommend_alter&amp;groupid=<?= $GroupID ?>" class="brackets"><?= t('server.global.delete') ?></a>
+                        <a href="tools.php?action=recommend_alter&amp;groupid=<?= $GroupID ?>" class="brackets"><?= t('server.common.delete') ?></a>
                     <?      } ?>
                 </li>
             <?  } ?>

@@ -105,7 +105,7 @@
                 <div class="head">
                     <?= ((empty($_GET['action'])) ? t('server.blog.create_staff_blog_post') : t('server.blog.edit_staff_blog_post')) ?>
                     <span style="float: right;">
-                        <a href="#" onclick="$('#postform').gtoggle(); this.innerHTML = (this.innerHTML == '<?= t('server.global.hide') ?>' ? '<?= t('server.global.show') ?>' : '<?= t('server.global.hide') ?>'); return false;" class="brackets"><?= ((!isset($_REQUEST['action']) || $_REQUEST['action'] != 'editblog') ? t('server.global.show') : t('server.global.hide')) ?></a>
+                        <a href="#" onclick="$('#postform').gtoggle(); this.innerHTML = (this.innerHTML == '<?= t('server.common.hide') ?>' ? '<?= t('server.common.show') ?>' : '<?= t('server.common.hide') ?>'); return false;" class="brackets"><?= ((!isset($_REQUEST['action']) || $_REQUEST['action'] != 'editblog') ? t('server.common.show') : t('server.common.hide')) ?></a>
                     </span>
                 </div>
                 <form class="<?= ((empty($_GET['action'])) ? 'create_form' : 'edit_form') ?>" id="blog_post" name="blog_post" action="staffblog.php" method="post">
@@ -170,8 +170,8 @@
                         </div>
                         <div class="Post-headerActions">
                             <? if (check_perms('admin_manage_blog')) { ?>
-                                - <a href="staffblog.php?action=editblog&amp;id=<?= $BlogID ?>" class="brackets"><?= t('server.global.edit') ?></a>
-                                <a href="staffblog.php?action=deleteblog&amp;id=<?= $BlogID ?>&amp;auth=<?= $LoggedUser['AuthKey'] ?>" onclick="return confirm('<?= t('server.blog.do_you_want_to_delete_this') ?>');" class="brackets"><?= t('server.global.delete') ?></a>
+                                - <a href="staffblog.php?action=editblog&amp;id=<?= $BlogID ?>" class="brackets"><?= t('server.common.edit') ?></a>
+                                <a href="staffblog.php?action=deleteblog&amp;id=<?= $BlogID ?>&amp;auth=<?= $LoggedUser['AuthKey'] ?>" onclick="return confirm('<?= t('server.blog.do_you_want_to_delete_this') ?>');" class="brackets"><?= t('server.common.delete') ?></a>
                             <? } ?>
                         </div>
                     </div>

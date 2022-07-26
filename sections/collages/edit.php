@@ -104,7 +104,7 @@ if (!empty($Err)) {
 
             <? } ?>
             <tr class="Form-row">
-                <td colspan="2" class="center"><input class="Button" type="submit" value="<?= t('server.global.edit') ?>" /></td>
+                <td colspan="2" class="center"><input class="Button" type="submit" value="<?= t('server.common.edit') ?>" /></td>
             </tr>
         </table>
     </form>

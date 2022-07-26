@@ -178,7 +178,7 @@ View::show_header($ThreadInfo['Title'] . ' &lt; ' . $Forums[$ForumID]['Name'] . 
         <div class="BodyNavLinksWithExpand">
             <div class="BodyNavLinks">
                 <a href="reports.php?action=report&amp;type=thread&amp;id=<?= $ThreadID ?>" class="brackets"><?= t('server.forums.report') ?></a>
-                <a href="#" onclick="Subscribe(<?= $ThreadID ?>);return false;" id="subscribelink<?= $ThreadID ?>" class="brackets"><?= (in_array($ThreadID, $UserSubscriptions) ? t('server.global.unsubscribe') :  t('server.global.subscribe')) ?></a>
+                <a href="#" onclick="Subscribe(<?= $ThreadID ?>);return false;" id="subscribelink<?= $ThreadID ?>" class="brackets"><?= (in_array($ThreadID, $UserSubscriptions) ? t('server.common.unsubscribe') :  t('server.common.subscribe')) ?></a>
                 <a href="#" onclick="$('#searchthread').gtoggle(); return false;" class="brackets"><?= t('server.forums.search') ?></a>
                 <? if (check_perms('site_debug')) { ?> <a href="tools.php?action=service_stats" class="brackets"><?= t('server.forums.service_stats') ?></a> <? } ?>
             </div>
@@ -587,12 +587,12 @@ View::show_header($ThreadInfo['Title'] . ' &lt; ' . $Forums[$ForumID]['Name'] . 
                                 <a href="#quickpost" id="quote_<?= $PostID ?>" onclick="Quote('<?= $PostID ?>', '<?= $Username ?>', true);" class="brackets"><?= t('server.forums.quote') ?></a>
 
                                 <? if ((!$ThreadInfo['IsLocked'] && Forums::check_forumperm($ForumID, 'Write') && $AuthorID == $LoggedUser['ID']) || check_perms('site_moderate_forums') || ($AuthorID == $LoggedUser['ID'] && isset($LoggedUser['ExtraClasses']['31']))) { ?>
-                                    - <a href="#post<?= $PostID ?>" onclick="Edit_Form('<?= $PostID ?>', '<?= $Key ?>');" class="brackets"><?= t('server.global.edit') ?></a>
+                                    - <a href="#post<?= $PostID ?>" onclick="Edit_Form('<?= $PostID ?>', '<?= $Key ?>');" class="brackets"><?= t('server.common.edit') ?></a>
                                 <?
 
                                 }
                                 if (check_perms('site_admin_forums') && $ThreadInfo['Posts'] > 1) { ?>
-                                    - <a href="#post<?= $PostID ?>" onclick="Delete('<?= $PostID ?>');" class="brackets"><?= t('server.global.delete') ?></a>
+                                    - <a href="#post<?= $PostID ?>" onclick="Delete('<?= $PostID ?>');" class="brackets"><?= t('server.common.delete') ?></a>
                                 <?
                                 }
 
@@ -739,8 +739,11 @@ View::show_header($ThreadInfo['Title'] . ' &lt; ' . $Forums[$ForumID]['Name'] . 
                                     <div class="last_edited">
                                         <? if (check_perms('site_admin_forums')) { ?>
                                             <a href="#content<?= $PostID ?>" onclick="LoadEdit('forums', <?= $PostID ?>, 1); return false;">&laquo;</a>
-                                        <?        } ?>
-                                        <?= t('server.forums.last_edit_by_before') ?><?= Users::format_username($EditedUserID, false, false, false, false, false, $IsDonorForum) ?><?= t('server.forums.last_edit_by_after') ?> <?= time_diff($EditedTime, 2, true, true) ?>
+                                        <? } ?>
+                                        <?= t('server.forums.last_edit_by', ['Values' => [
+                                            Users::format_username($EditedUserID, false, false, false, false, false, $IsDonorForum)
+                                        ]]) ?>
+                                        <?= time_diff($EditedTime, 2, true, true) ?>
                                     </div>
                                 <?    }
                                 if ($ThreadInfo['hiddenreplies'] != 1 || check_perms('forums_see_hidden') || $ThreadInfo['OP'] == $LoggedUser['ID']) {
@@ -859,7 +862,7 @@ View::show_header($ThreadInfo['Title'] . ' &lt; ' . $Forums[$ForumID]['Name'] . 
         $Notes = G::$DB->to_array();
     ?>
         <div class="Form-rowList" variant="header">
-            <div class="Form-rowHeader"><?= t('server.forums.thread_notes') ?><a href="#" onclick="$('#thread_notes_table').gtoggle(); return false;" class="Form-actions"><?= t('server.global.toggle') ?></a></div>
+            <div class="Form-rowHeader"><?= t('server.forums.thread_notes') ?><a href="#" onclick="$('#thread_notes_table').gtoggle(); return false;" class="Form-actions"><?= t('server.common.toggle') ?></a></div>
             <form action="forums.php" method="post">
                 <input type="hidden" name="action" value="take_topic_notes" />
                 <input type="hidden" name="auth" value="<?= $LoggedUser['AuthKey'] ?>" />

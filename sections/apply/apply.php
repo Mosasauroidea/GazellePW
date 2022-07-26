@@ -102,7 +102,7 @@ View::show_header(t('server.apply.apply'), 'apply,bbcode', 'PageApplyApply');
                         </div>
                         <div id="buttons" class="center">
                             <input type="hidden" name="auth" value="<?= $LoggedUser['AuthKey'] ?>" />
-                            <input class="Button" type="submit" value="<?= t('server.global.submit') ?>" />
+                            <input class="Button" type="submit" value="<?= t('server.common.submit') ?>" />
                         </div>
                     </div>
                 </div>

@@ -113,7 +113,7 @@ $HideDNU = check_perms('torrents_hide_dnu') && !$NewDNU;
             <p><?= $NewDNU ? '<strong class="u-colorWarning">' : '' ?><?= t('server.upload.last_update') ?>: <?= time_diff($Updated) ?><?= $NewDNU ? '</strong>' : '' ?></p>
             <p><?= t('server.upload.upload_note') ?>
                 <? if ($HideDNU) { ?>
-                    <span id="showdnu"><a href="#" onclick="$('#dnulist').gtoggle(); this.innerHTML = (this.innerHTML == 'Hide' ? 'Show' : 'Hide'); return false;" class="brackets"><?= t('server.global.show') ?></a></span>
+                    <span id="showdnu"><a href="#" onclick="$('#dnulist').gtoggle(); this.innerHTML = (this.innerHTML == 'Hide' ? 'Show' : 'Hide'); return false;" class="brackets"><?= t('server.common.show') ?></a></span>
                 <?  } ?>
             </p>
             <div id="dnulist" class="TableContainer" class="<?= ($HideDNU ? 'hidden' : '') ?>">

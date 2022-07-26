@@ -162,7 +162,7 @@ if ($NotificationsManager->is_traditional(NotificationsManager::INBOX)) {
 }
 
 if (G::$LoggedUser['RatioWatch']) {
-    $Alerts[] = t('server.pub.ratio_watch_you_have_before') . time_diff(G::$LoggedUser['RatioWatchEnds'], 3) . t('server.pub.ratio_watch_you_have_after');
+    $Alerts[] = t('server.pub.ratio_watch_you_have', ['Values' => [time_diff(G::$LoggedUser['RatioWatchEnds'], 3)]]);
 } elseif (G::$LoggedUser['CanLeech'] != 1) {
     $Alerts[] = t('server.pub.ratio_watch_your_dl_privileges');
 }
@@ -351,7 +351,7 @@ if (check_perms('users_mod') && FEATURE_EMAIL_REENABLE) {
     }
 
     if ($NumEnableRequests > 0) {
-        $ModBar[] = '<a class="Button ButtonHeader"  href="tools.php?action=enable_requests">' . $NumEnableRequests . t('server.global.enable_requests') . "</a>";
+        $ModBar[] = '<a class="Button ButtonHeader"  href="tools.php?action=enable_requests">' . $NumEnableRequests . t('server.common.enable_requests') . "</a>";
     }
 }
 ?>
@@ -393,7 +393,7 @@ if ($_REQUEST['action']) {
                     </li>
                 </ul>
                 <ul class="HeaderStat HeaderInfo-middle">
-                    <li class="HeaderStat-item is-seeding" data-tooltip="<?= t('server.global.uploaded') ?>">
+                    <li class="HeaderStat-item is-seeding" data-tooltip="<?= t('server.common.uploaded') ?>">
                         <a class="HeaderStat-link LinkHeader Link" href="torrents.php?type=seeding&amp;userid=<?= G::$LoggedUser['ID'] ?>">
                             <?= icon('uploaded') ?>
                             <span class="HeaderStat-value is-uploaded" id="header-uploaded-value" data-value="<?= G::$LoggedUser['BytesUploaded'] ?>">
@@ -401,7 +401,7 @@ if ($_REQUEST['action']) {
                             </span>
                         </a>
                     </li>
-                    <li class="HeaderStat-item is-leeching" data-tooltip="<?= t('server.global.downloaded') ?>">
+                    <li class="HeaderStat-item is-leeching" data-tooltip="<?= t('server.common.downloaded') ?>">
                         <a class="HeaderStat-link LinkHeader Link" href="torrents.php?type=leeching&amp;userid=<?= G::$LoggedUser['ID'] ?>">
                             <?= icon('downloaded') ?>
                             <span class="HeaderStat-value is-downloaded" id="header-downloaded-value" data-value="<?= G::$LoggedUser['BytesDownloaded'] ?>">
@@ -410,7 +410,7 @@ if ($_REQUEST['action']) {
                         </a>
                     </li>
 
-                    <li class="HeaderStat-item is-ratio" data-tooltip="<?= t('server.global.ratio') ?>">
+                    <li class="HeaderStat-item is-ratio" data-tooltip="<?= t('server.common.ratio') ?>">
                         <a class="HeaderStat-link LinkHeader Link">
                             <?= icon('ratio') ?>
                             <span class="HeaderStat-value is-ratio" id="header-ratio-value" data-value="<?= Format::get_ratio(G::$LoggedUser['BytesUploaded'], G::$LoggedUser['BytesDownloaded']) ?>">
@@ -419,7 +419,7 @@ if ($_REQUEST['action']) {
                         </a>
                     </li>
                     <? if (((int) G::$LoggedUser['RequiredRatio']) !== 0) { ?>
-                        <li class="HeaderStat-item is-requiredRatio" data-tooltip="<?= t('server.global.required_ratio') ?>">
+                        <li class="HeaderStat-item is-requiredRatio" data-tooltip="<?= t('server.common.required_ratio') ?>">
                             <a class="HeaderStat-link LinkHeader Link" href="rules.php?p=ratio">
                                 <?= icon('required-ratio') ?>
                                 <span class="HeaderStat-value is-required-ratio" id="header-required-ratio-value" data-value="<?= G::$LoggedUser['RequiredRatio'] ?>">
@@ -428,7 +428,7 @@ if ($_REQUEST['action']) {
                             </a>
                         </li>
                     <? } ?>
-                    <li class="HeaderStat-item is-bp" data-tooltip="<?= t('server.global.bonus') ?>">
+                    <li class="HeaderStat-item is-bp" data-tooltip="<?= t('server.common.bonus') ?>">
                         <a class="HeaderStat-link LinkHeader Link" href="/bonus.php?action=bprates">
                             <?= icon('bonus-active') ?>
                             <span class="HeaderStat-value is-bp" id="header-bp-value" data-value="<?= G::$LoggedUser['BonusPoints'] ?>">
@@ -462,17 +462,17 @@ if ($_REQUEST['action']) {
                 ?>
                 <ul class="HeaderQuickAction HeaderInfo-right">
                     <li class="HeaderQuickAction-item is-upload brackets <?= Format::add_class($PageID, array('upload'), 'active', false) ?>">
-                        <a class="HeaderQuickAction-iconLink LinkHeader Link u-center u-heightFull" href="upload.php" data-tooltip="<?= t('server.global.menu_upload_title') ?>">
+                        <a class="HeaderQuickAction-iconLink LinkHeader Link u-center u-heightFull" href="upload.php" data-tooltip="<?= t('server.common.menu_upload_title') ?>">
                             <?= icon('upload') ?>
                         </a>
                     </li>
                     <li class="HeaderQuickAction-item is-invite brackets <?= Format::add_class($PageID, array('user', 'invite'), 'active', false) ?>">
-                        <a class='HeaderQuickAction-iconLink LinkHeader Link u-center u-heightFull' href="user.php?action=invite" data-tooltip="<?= t('server.global.invite') ?><?= $Invites ?>">
+                        <a class='HeaderQuickAction-iconLink LinkHeader Link u-center u-heightFull' href="user.php?action=invite" data-tooltip="<?= t('server.common.invite') ?><?= $Invites ?>">
                             <?= icon('invite') ?>
                         </a>
                     </li>
                     <li class="HeaderQuickAction-item is-imageHost brackets">
-                        <a class="HeaderQuickAction-iconLink LinkHeader Link u-center u-heightFull" href="upload.php?action=image" data-tooltip="<?= t('server.global.image_host') ?>">
+                        <a class="HeaderQuickAction-iconLink LinkHeader Link u-center u-heightFull" href="upload.php?action=image" data-tooltip="<?= t('server.common.image_host') ?>">
                             <?= icon('image-host') ?>
                         </a>
                     </li>
@@ -501,30 +501,30 @@ if ($_REQUEST['action']) {
                             </span>
                         </div>
                         <div class="DropdownMenu Overlay">
-                            <a class="DropdownMenu-item is-profile" href="user.php?id=<?= G::$LoggedUser['ID'] ?>"><?= t('server.global.profile') ?></a>
-                            <a class="DropdownMenu-item is-settings" href="user.php?action=edit&amp;userid=<?= G::$LoggedUser['ID'] ?>"><?= t('server.global.setting') ?></a>
-                            <a class="DropdownMenu-item is-inbox" href="<?= Inbox::get_inbox_link(); ?>"> <?= t('server.global.inbox') ?></a>
-                            <a class="DropdownMenu-item is-staffpm" href="staffpm.php"> <?= t('server.global.staffpm') ?></a>
+                            <a class="DropdownMenu-item is-profile" href="user.php?id=<?= G::$LoggedUser['ID'] ?>"><?= t('server.common.profile') ?></a>
+                            <a class="DropdownMenu-item is-settings" href="user.php?action=edit&amp;userid=<?= G::$LoggedUser['ID'] ?>"><?= t('server.common.setting') ?></a>
+                            <a class="DropdownMenu-item is-inbox" href="<?= Inbox::get_inbox_link(); ?>"> <?= t('server.common.inbox') ?></a>
+                            <a class="DropdownMenu-item is-staffpm" href="staffpm.php"> <?= t('server.common.staffpm') ?></a>
                             <?
                             if (CONFIG['ENABLE_BADGE']) {
                             ?>
-                                <a class="DropdownMenu-item is-badges" href="badges.php"> <?= t('server.global.my_badges') ?></a>
+                                <a class="DropdownMenu-item is-badges" href="badges.php"> <?= t('server.common.my_badges') ?></a>
                             <?
                             }
                             ?>
-                            <a class="DropdownMenu-item is-uploaded" href="torrents.php?type=uploaded&amp;userid=<?= G::$LoggedUser['ID'] ?>"> <?= t('server.global.my_uploaded') ?></a>
-                            <a class="DropdownMenu-item is-bookmarks" href="bookmarks.php?type=torrents"> <?= t('server.global.my_bookmarks') ?></a>
-                            <? if (check_perms('site_torrents_notify')) { ?> <a class="DropdownMenu-item is-notify" href="user.php?action=notify"> <?= t('server.global.my_notify') ?></a> <?    } ?>
+                            <a class="DropdownMenu-item is-uploaded" href="torrents.php?type=uploaded&amp;userid=<?= G::$LoggedUser['ID'] ?>"> <?= t('server.common.my_uploaded') ?></a>
+                            <a class="DropdownMenu-item is-bookmarks" href="bookmarks.php?type=torrents"> <?= t('server.common.my_bookmarks') ?></a>
+                            <? if (check_perms('site_torrents_notify')) { ?> <a class="DropdownMenu-item is-notify" href="user.php?action=notify"> <?= t('server.common.my_notify') ?></a> <?    } ?>
                             <?
                             $ClassNames = $NewSubscriptions ? 'new-subscriptions' : '';
                             $ClassNames = trim($ClassNames . Format::add_class($PageID, array('userhistory', 'subscriptions'), 'active', false));
                             ?>
-                            <a class="DropdownMenu-item is-subscriptions <?= $ClassNames ?>" href="userhistory.php?action=subscriptions"> <?= t('server.global.my_subscriptions') ?></a>
-                            <a class="DropdownMenu-item is-comments" href="comments.php"> <?= t('server.global.my_comments') ?></a>
-                            <a class="DropdownMenu-item is-friends" href="friends.php"> <?= t('server.global.my_friends') ?></a>
-                            <a class="DropdownMenu-item is-missing" href="torrents.php?type=missing"> <?= t('server.global.missing') ?></a>
-                            <? if (isset(G::$LoggedUser['SSPAccess'])) { ?> <a class="DropdownMenu-item is-ssp" href="ssp.php"> <?= t('server.global.ssp') ?></a> <?  } ?>
-                            <a class="DropdownMenu-item is-logout" href="logout.php?auth=<?= G::$LoggedUser['AuthKey'] ?>"> <?= t('server.global.logout') ?></a>
+                            <a class="DropdownMenu-item is-subscriptions <?= $ClassNames ?>" href="userhistory.php?action=subscriptions"> <?= t('server.common.my_subscriptions') ?></a>
+                            <a class="DropdownMenu-item is-comments" href="comments.php"> <?= t('server.common.my_comments') ?></a>
+                            <a class="DropdownMenu-item is-friends" href="friends.php"> <?= t('server.common.my_friends') ?></a>
+                            <a class="DropdownMenu-item is-missing" href="torrents.php?type=missing"> <?= t('server.common.missing') ?></a>
+                            <? if (isset(G::$LoggedUser['SSPAccess'])) { ?> <a class="DropdownMenu-item is-ssp" href="ssp.php"> <?= t('server.common.ssp') ?></a> <?  } ?>
+                            <a class="DropdownMenu-item is-logout" href="logout.php?auth=<?= G::$LoggedUser['AuthKey'] ?>"> <?= t('server.common.logout') ?></a>
                         </div>
                     </li>
                 </ul>
@@ -572,33 +572,33 @@ if ($_REQUEST['action']) {
                         <span class="hidden">Artist: </span>
                         <form class="HeaderSearch-form" name="artists" action="artist.php" method="get">
                             <input class="Input InputHeader" id="artistsearch" <?= Users::has_autocomplete_enabled('search');
-                                                                                ?> accesskey="a" spellcheck="false" autocomplete="off" placeholder="<?= t('server.global.artists') ?>" type="text" name="artistname" size="17" />
+                                                                                ?> accesskey="a" spellcheck="false" autocomplete="off" placeholder="<?= t('server.common.artists') ?>" type="text" name="artistname" size="17" />
                         </form>
                     </li>
                     <li class="HeaderSearchList-item" id="searchbar_requests">
                         <span class="hidden">Requests: </span>
                         <form class="HeaderSearch-form" name="requests" action="requests.php" method="get">
-                            <input class="Input InputHeader" type="text" id="requestssearch" spellcheck="false" accesskey="r" placeholder="<?= t('server.global.requests') ?>" name="search" size="17" />
+                            <input class="Input InputHeader" type="text" id="requestssearch" spellcheck="false" accesskey="r" placeholder="<?= t('server.common.requests') ?>" name="search" size="17" />
                         </form>
                     </li>
                     <li class="HeaderSearchList-item" id="searchbar_forums">
                         <span class="hidden">Forums: </span>
                         <form class="HeaderSearch-form" name="forums" action="forums.php" method="get">
                             <input value="search" type="hidden" name="action" />
-                            <input class="Input InputHeader" type="text" id="forumssearch" accesskey="f" placeholder="<?= t('server.global.forums') ?>" name="search" size="17" />
+                            <input class="Input InputHeader" type="text" id="forumssearch" accesskey="f" placeholder="<?= t('server.common.forums') ?>" name="search" size="17" />
                         </form>
                     </li>
                     <li class="HeaderSearchList-item" id="searchbar_log">
                         <span class="hidden">Log: </span>
                         <form class="HeaderSearch-form" name="log" action="log.php" method="get">
-                            <input class="Input InputHeader" type="text" id="logsearch" accesskey="l" placeholder="<?= t('server.global.log') ?>" name="search" size="17" />
+                            <input class="Input InputHeader" type="text" id="logsearch" accesskey="l" placeholder="<?= t('server.common.log') ?>" name="search" size="17" />
                         </form>
                     </li>
                     <li class="HeaderSearchList-item" id="searchbar_users">
                         <span class="hidden">Users: </span>
                         <form class="HeaderSearch-form" name="users" action="user.php" method="get">
                             <input type="hidden" name="action" value="search" />
-                            <input class="Input InputHeader" type="text" id="userssearch" accesskey="u" placeholder="<?= t('server.global.users') ?>" name="search" size="20" />
+                            <input class="Input InputHeader" type="text" id="userssearch" accesskey="u" placeholder="<?= t('server.common.users') ?>" name="search" size="20" />
                         </form>
                     </li>
                 </ul>
@@ -618,7 +618,7 @@ if ($_REQUEST['action']) {
                         <li class="HeaderNavList-item" id="nav_collages" <?=
                                                                             Format::add_class($PageID, array('collages'), 'active', true) ?>>
                             <a class="HeaderNav-link LinkHeader Link" href="collages.php">
-                                <?= t('server.global.collages') ?></a>
+                                <?= t('server.common.collages') ?></a>
                         </li>
                     <?
                     }
@@ -626,32 +626,32 @@ if ($_REQUEST['action']) {
                     <li class="HeaderNavList-item" id="nav_requests" <?=
                                                                         Format::add_class($PageID, array('requests'), 'active', true) ?>>
                         <a class="HeaderNav-link LinkHeader Link" href="requests.php">
-                            <?= t('server.global.requests') ?></a>
+                            <?= t('server.common.requests') ?></a>
                     </li>
                     <li class="HeaderNavList-item" id="nav_forums" <?=
                                                                     Format::add_class($PageID, array('forums'), 'active', true) ?>>
                         <a class="HeaderNav-link LinkHeader Link" href="forums.php">
-                            <?= t('server.global.forums') ?></a>
+                            <?= t('server.common.forums') ?></a>
                     </li>
                     <li class="HeaderNavList-item" id="nav_top10" <?=
                                                                     Format::add_class($PageID, array('top10'), 'active', true) ?>>
                         <a class="HeaderNav-link LinkHeader Link" href="top10.php">
-                            <?= t('server.global.top_10') ?></a>
+                            <?= t('server.common.top_10') ?></a>
                     </li>
                     <li class="HeaderNavList-item" id="nav_rules" <?=
                                                                     Format::add_class($PageID, array('rules'), 'active', true) ?>>
                         <a class="HeaderNav-link LinkHeader Link" href="rules.php">
-                            <?= t('server.global.rules') ?></a>
+                            <?= t('server.common.rules') ?></a>
                     </li>
                     <li class="HeaderNavList-item" id="nav_wiki" <?=
                                                                     Format::add_class($PageID, array('wiki'), 'active', true) ?>>
                         <a class="HeaderNav-link LinkHeader Link" href="wiki.php">
-                            <?= t('server.global.wiki') ?></a>
+                            <?= t('server.common.wiki') ?></a>
                     </li>
                     <li class="HeaderNavList-item" id="nav_staff" <?=
                                                                     Format::add_class($PageID, array('staff'), 'active', true) ?>>
                         <a class="HeaderNav-link LinkHeader Link" href="staff.php">
-                            <?= t('server.global.staff') ?></a>
+                            <?= t('server.common.staff') ?></a>
                     </li>
                 </ul>
             </div>

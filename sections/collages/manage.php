@@ -59,7 +59,7 @@ View::show_header(t('server.collages.manage_collage') . ": $Name", 'jquery-ui,jq
             <tr class="Table-rowHeader">
                 <th class="Table-cell" style="width: 50px" data-sorter="false"><?= t('server.collages.order') ?></th>
                 <th class="Table-cell Table-cellLeft" style="width: 50px"><span><abbr data-tooltip="Current rank">#</abbr></span></th>
-                <th class="Table-cell Table-cellLeft" data-sorter="ignoreArticles"><span><?= t('server.global.torrent') ?></span></th>
+                <th class="Table-cell Table-cellLeft" data-sorter="ignoreArticles"><span><?= t('server.common.torrent') ?></span></th>
                 <th class="Table-cell Table-cellRight"><span><?= t('server.collages.adder') ?></span></th>
                 <th class="Table-cell Table-cellRight nobr" style="width:150px" data-sorter="false"><span><abbr data-tooltip="<?= t('server.collages.tweak_title') ?>"><?= t('server.collages.tweak') ?></abbr></span></th>
             </tr>

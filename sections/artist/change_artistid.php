@@ -184,7 +184,16 @@ if (isset($_POST['confirm'])) {
     <input type="hidden" name="newartistid" value="<?= $NewArtistID ?>" />
     <input type="hidden" name="confirm" value="1" />
     <div style="text-align: center;">
-      <p id="confirm_merge_note"><?= t('server.artist.confirm_merge_1') ?><a href="artist.php?id=<?= $ArtistID ?>"><?= display_str($ArtistName) ?> (<?= $ArtistID ?>)</a><?= t('server.artist.confirm_merge_2') ?><a href="artist.php?id=<?= $NewArtistID ?>"><?= display_str($NewArtistName) ?> (<?= $NewArtistID ?>)</a><?= t('server.artist.confirm_merge_3') ?></p>
+      <p id="confirm_merge_note">
+        <?
+        $ArtistNameDisplay = display_str($ArtistName);
+        $NewArtistNameDisplay = display_str($NewArtistName);
+        ?>
+        <?= t('server.artist.confirm_merge_body', ['Values' => [
+          "<a href='artist.php?id=${ArtistID}'>${ArtistNameDisplay} (${ArtistID})</a>",
+          "<a href='artist.php?id=${NewArtistID}'>${NewArtistNameDisplay} (${NewArtistID})</a>",
+        ]]) ?>
+      </p>
       <input class="Button" type="submit" value="Confirm" />
     </div>
   </form>

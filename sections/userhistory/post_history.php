@@ -23,7 +23,7 @@ list($Page, $Limit) = Format::page_limit($PerPage);
 $UserInfo = Users::user_info($UserID);
 extract(array_intersect_key($UserInfo, array_flip(array('Username', 'Enabled', 'Title', 'Avatar', 'Donor', 'Warned'))));
 
-View::show_header(t('server.userhistory.post_history_for_before') . "$Username" . t('server.userhistory.post_history_for_after'), 'subscriptions,comments,bbcode', 'PageUserHistoryPost');
+View::show_header(t('server.userhistory.post_history_for', ['Values' => [$Username]]), 'subscriptions,comments,bbcode', 'PageUserHistoryPost');
 
 $ViewingOwn = ($UserID == $LoggedUser['ID']);
 $ShowUnread = ($ViewingOwn && (!isset($_GET['showunread']) || !!$_GET['showunread']));
@@ -160,11 +160,19 @@ if ($ShowGrouped) {
         <h2 class="BodyHeader-nav">
             <?
             if ($ShowGrouped) {
-                echo t('server.userhistory.grouped') . ($ShowUnread ? t('server.userhistory.unread') : '') . t('server.userhistory.post_history_for_before') . "<a href=\"user.php?id=$UserID\">$Username</a>" . t('server.userhistory.post_history_for_after');
+                echo t('server.userhistory.grouped')
+                    . ($ShowUnread ? t('server.userhistory.unread') : '')
+                    . t('server.userhistory.post_history_for', ['Values' => [
+                        "<a href='user.php?id=${UserID}'>${Username}</a>"
+                    ]]);
             } elseif ($ShowUnread) {
-                echo t('server.userhistory.unread_post_history_for_before') . "<a href=\"user.php?id=$UserID\">$Username</a>" . t('server.userhistory.unread_post_history_for_after');
+                echo t('server.userhistory.unread_post_history_for', ['Values' => [
+                    "<a href='user.php?id=${UserID}'>${Username}</a>"
+                ]]);
             } else {
-                echo t('server.userhistory.post_history_for_before') . "<a href=\"user.php?id=$UserID\">$Username</a>" . t('server.userhistory.post_history_for_after');
+                echo t('server.userhistory.post_history_for', ['Values' => [
+                    "<a href='user.php?id=${UserID}'>${Username}</a>"
+                ]]);
             }
             ?>
         </h2>
@@ -238,7 +246,7 @@ if ($ShowGrouped) {
                                         }
                                         ?>
                                         <? if (!empty($LastRead)) { ?>
-                                            <a class="TableForum-jumpToLastRead" data-tooltip="<?= t('server.global.jump_to_last_read') ?>" href="forums.php?action=viewthread&amp;threadid=<?= $TopicID ?>&amp;postid=<?= $LastRead ?>#post<?= $LastRead ?>">
+                                            <a class="TableForum-jumpToLastRead" data-tooltip="<?= t('server.common.jump_to_last_read') ?>" href="forums.php?action=viewthread&amp;threadid=<?= $TopicID ?>&amp;postid=<?= $LastRead ?>#post<?= $LastRead ?>">
                                                 <?= icon("Forum/jump-to-last-read") ?>
                                             </a>
                                         <? }
@@ -250,7 +258,7 @@ if ($ShowGrouped) {
                                 </div>
                                 <div class="TableForumPostHeader-actions" id="bar<?= $PostID ?>">
                                     <? if ($ViewingOwn && !in_array($TopicID, $UserSubscriptions)) { ?>
-                                        <a href="#" onclick="Subscribe(<?= $TopicID ?>); $('.subscribelink<?= $TopicID ?>').remove(); return false;" class="brackets subscribelink<?= $TopicID ?>"><?= t('server.global.subscribe') ?></a>
+                                        <a href="#" onclick="Subscribe(<?= $TopicID ?>); $('.subscribelink<?= $TopicID ?>').remove(); return false;" class="brackets subscribelink<?= $TopicID ?>"><?= t('server.common.subscribe') ?></a>
                                     <? } ?>
                                 </div>
                             </div>

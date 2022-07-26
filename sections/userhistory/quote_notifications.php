@@ -92,7 +92,11 @@ View::show_header(t('server.userhistory.header_quote_notifications'), '', 'PageU
         </div>
     </div>
     <? if (!$NumResults) { ?>
-        <div class="center"><?= t('server.userhistory.no_quotes_before') ?><?= ($UnreadSQL ? t('server.userhistory.space_new') : '') ?><?= t('server.userhistory.no_quotes_after') ?></div>
+        <div class="center">
+            <?= t('server.userhistory.no_quotes', ['Values' => [
+                ($UnreadSQL ? t('server.userhistory.space_new') : '')
+            ]]) ?>
+        </div>
     <? } ?>
     <br />
     <?

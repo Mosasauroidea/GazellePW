@@ -24,11 +24,17 @@ class Lang {
             'DefaultValue' => null,
             'Lang' => null,
             'Values' => [],
+            'Count' => null,
         ], $Options);
         $DefaultValue = $Options['DefaultValue'] ?: $Key;
         $Lang = self::getLang($Options['Lang']);
         $Values = $Options['Values'];
+        $Count = $Options['Count'];
         $Locale = $Locales[$Lang];
+        if ($Count !== null) {
+            $Suffix = ($Count === 1) ? '_one' : '_other';
+            $Key = "${Key}${Suffix}";
+        }
         $Value = $Locale[$Key];
         if (!isset($Locale[$Key])) {
             $Value = $DefaultValue;

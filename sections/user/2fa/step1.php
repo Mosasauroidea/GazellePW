@@ -3,8 +3,7 @@ View::show_header(t('server.user.two_factor_authentication'), '', 'PageUser2FASt
 ?>
 
 <div class="BoxBody">
-    <p><?= t('server.user.two_factor_authentication_note_1') ?> <?= CONFIG['SITE_NAME'] ?> <?= t('server.user.two_factor_authentication_note_2') ?></p>
-
+    <p><?= t('server.user.two_factor_authentication_note') ?></p>
     <p><?= t('server.user.two_factor_authentication_note_3') ?></p>
 </div>
 

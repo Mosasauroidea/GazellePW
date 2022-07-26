@@ -83,13 +83,17 @@ $Pages = Format::get_pages($Page, $NumResults, 25);
 ?>
 <div class="LayoutBody">
     <div class="BodyHeader">
-        <h2 class="BodyHeader-nav"><?= t('server.userhistory.fl_token_history_for_before') ?><?= Users::format_username($UserID, false, false, false) ?><?= t('server.userhistory.fl_token_history_for_after') ?></h2>
+        <h2 class="BodyHeader-nav">
+            <?= t('server.userhistory.fl_token_history_for', ['Values' => [
+                Users::format_username($UserID, false, false, false)
+            ]]) ?>
+        </h2>
     </div>
     <div class="BodyNavLinks"><?= $Pages ?></div>
     <div class="TableContainer">
         <table class="TableUserTokenHistory Table">
             <tr class="Table-rowHeader">
-                <td class="Table-cell"><?= t('server.global.torrent') ?></td>
+                <td class="Table-cell"><?= t('server.common.torrent') ?></td>
                 <td class="Table-cell"><?= t('server.userhistory.time') ?></td>
                 <td class="Table-cell"><?= t('server.userhistory.expired') ?></td>
                 <? if (check_perms('users_mod')) { ?>

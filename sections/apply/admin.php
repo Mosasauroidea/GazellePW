@@ -59,7 +59,12 @@ if (isset($_POST['auth'])) {
                     <div class="Box-header"><?= t('server.apply.current_roles') ?></div>
                     <div class="Box-body">
                         <? if ($Saved) { ?>
-                            <p><?= t('server.apply.the_role_was_1') ?><?= $AppRole->title() ?><?= t('server.apply.the_role_was_2') ?><?= $Saved ?><?= t('server.apply.the_role_was_3') ?></p>
+                            <p>
+                                <?= t('server.apply.the_role_was', ['Values' => [
+                                    $AppRole->title(),
+                                    $Saved,
+                                ]]) ?>
+                            </p>
                         <? } ?>
 
 

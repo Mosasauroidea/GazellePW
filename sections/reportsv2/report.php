@@ -95,7 +95,7 @@ View::show_header(t('server.reportsv2.report'), 'reportsv2,browse,torrent,bbcode
             <tr class="Form-row">
                 <td colspan="2">
                     <div align="center" id="submit-report">
-                        <input class="Button" type="submit" value="<?= t('server.global.submit') ?>" />
+                        <input class="Button" type="submit" value="<?= t('server.common.submit') ?>" />
                     </div>
                 </td>
             </tr>

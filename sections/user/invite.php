@@ -225,7 +225,7 @@ View::show_header(t('server.user.invites'), '', 'PageUserInvite');
                 <td class="Table-cell"><a href="user.php?action=invite&amp;order=lastseen&amp;sort=<?= (($CurrentOrder == 'lastseen') ? $NewSort : 'desc') ?>&amp;<?= $CurrentURL ?>"><?= t('server.user.last_seen') ?></a></td>
                 <td class="Table-cell Table-cellRight"><a href="user.php?action=invite&amp;order=uploads&amp;sort=<?= (($CurrentOrder == 'uploads') ? $NewSort : 'desc') ?>&amp;<?= $CurrentURL ?>"><?= t('server.user.uploads') ?></a></td>
                 <td class="Table-cell Table-cellRight"><a href="user.php?action=invite&amp;order=uploaded&amp;sort=<?= (($CurrentOrder == 'uploaded') ? $NewSort : 'desc') ?>&amp;<?= $CurrentURL ?>"><?= t('server.user.upload') ?></a></td>
-                <td class="Table-cell Table-cellRight"><a href="user.php?action=invite&amp;order=downloaded&amp;sort=<?= (($CurrentOrder == 'downloaded') ? $NewSort : 'desc') ?>&amp;<?= $CurrentURL ?>"><?= t('server.global.download') ?></a></td>
+                <td class="Table-cell Table-cellRight"><a href="user.php?action=invite&amp;order=downloaded&amp;sort=<?= (($CurrentOrder == 'downloaded') ? $NewSort : 'desc') ?>&amp;<?= $CurrentURL ?>"><?= t('server.common.download') ?></a></td>
                 <td class="Table-cell Table-cellRight"><a href="user.php?action=invite&amp;order=ratio&amp;sort=<?= (($CurrentOrder == 'ratio') ? $NewSort : 'desc') ?>&amp;<?= $CurrentURL ?>"><?= t('server.user.ratio') ?></a></td>
             </tr>
             <?

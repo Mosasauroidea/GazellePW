@@ -42,7 +42,14 @@ if (strtotime($BannedUntil) < time()) {
             }
             ?>
             <? if ($Attempts > 0) { ?>
-                <br /><span><?= t('server.login.attempts_1') ?><span class="info"><?= (6 - $Attempts) ?></span><?= t('server.login.attempts_2') ?></span><br />
+                <br />
+                <span>
+                    <? $RemainingAttempts = 6 - $Attempts; ?>
+                    <?= t('server.login.attempts', ['Values' => [
+                        "<span class='info'>${RemainingAttempts}</span>"
+                    ]]) ?>
+                </span>
+                <br />
             <?    } ?>
             <? if (isset($_GET['invalid2fa'])) { ?>
                 <span class="u-colorWarning"><?= t('server.login.warning') ?> </span><br />
@@ -81,7 +88,9 @@ if (strtotime($BannedUntil) < time()) {
 <?
 } else {
 ?>
-    <span class="u-colorWarning"><?= t('server.login.warning_disable_before') ?><?= time_diff($BannedUntil) ?><?= t('server.login.warning_disable_after') ?></span><br />
+    <span class="u-colorWarning">
+        <?= t('server.login.warning_disable', ['Values' => [time_diff($BannedUntil)]]) ?>
+    </span><br />
 <?
 }
 

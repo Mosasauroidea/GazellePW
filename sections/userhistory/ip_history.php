@@ -31,7 +31,7 @@ if (!empty($_GET['ip']) && trim($_GET['ip']) != '') {
     $SearchIPQuery = "";
 }
 
-View::show_header(t('server.userhistory.ip_address_history_for_before') . "$UserInfo[Username]" . t('server.userhistory.ip_address_history_for_after'), '', 'PageUserHistoryIP');
+View::show_header(t('server.userhistory.ip_address_history_for', ['Values' => [$UserInfo['Username']]]), '', 'PageUserHistoryIP');
 ?>
 <script type="text/javascript">
     //<![CDATA[
@@ -173,7 +173,11 @@ $Pages = Format::get_pages($Page, $NumResults, IPS_PER_PAGE, 9);
 ?>
 <div class="LayoutBody">
     <div class="BodyHeader">
-        <h2 class="BodyHeader-nav"><?= t('server.userhistory.ip_address_history_for_before') ?><a href="user.php?id=<?= $UserID ?>"><?= $UserInfo['Username'] ?></a><?= t('server.userhistory.ip_address_history_for_after') ?></h2>
+        <h2 class="BodyHeader-nav">
+            <?= t('server.userhistory.ip_address_history_for', ['Values' => [
+                "<a href='user.php?id=${UserID}'>${UserInfo['Username']}</a>"
+            ]]) ?>
+        </h2>
         <div class="BodyNavLinks">
             <?
             if ($UsersOnly) { ?>
@@ -211,7 +215,7 @@ $Pages = Format::get_pages($Page, $NumResults, IPS_PER_PAGE, 9);
         <table class="TableUserIPHistory Table">
             <tr class="Table-rowHeader">
                 <td class="Table-cell"><?= t('server.userhistory.ip_address') ?></td>
-                <td class="Table-cell"><?= t('server.userhistory.started') ?> <a href="#" onclick="$('#iphistory .reltime').gtoggle(); $('#iphistory .abstime').gtoggle(); return false;" class="brackets"><?= t('server.global.toggle') ?></a></td>
+                <td class="Table-cell"><?= t('server.userhistory.started') ?> <a href="#" onclick="$('#iphistory .reltime').gtoggle(); $('#iphistory .abstime').gtoggle(); return false;" class="brackets"><?= t('server.common.toggle') ?></a></td>
                 <td class="Table-cell"><?= t('server.userhistory.ended') ?></td>
                 <td class="Table-cell hidden"><?= t('server.userhistory.ended') ?></td>
                 <td class="Table-cell"><?= t('server.userhistory.elapsed') ?></td>

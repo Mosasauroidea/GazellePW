@@ -36,7 +36,7 @@ class SiteHistoryView {
                                 <a href="sitehistory.php?action=search&amp;category=<?= $Event['Category'] ?>" class="brackets"><?= $Categories[$Event['Category']] ?></a>
                                 <a href="sitehistory.php?action=search&amp;subcategory=<?= $Event['SubCategory'] ?>" class="brackets"><?= $SubCategories[$Event['SubCategory']] ?></a>
                                 <? if ($CanEdit) { ?>
-                                    <a class="brackets" href="sitehistory.php?action=edit&amp;id=<?= $Event['ID'] ?>"><?= t('server.global.edit') ?></a>
+                                    <a class="brackets" href="sitehistory.php?action=edit&amp;id=<?= $Event['ID'] ?>"><?= t('server.common.edit') ?></a>
                                 <? } ?>
                             </div>
                         </div>
@@ -205,7 +205,7 @@ class SiteHistoryView {
                 </tr>
             </table>
             <div style="text-align: center;">
-                <input class="Button" type="submit" name="submit" value="<?= t('server.global.submit') ?>" />
+                <input class="Button" type="submit" name="submit" value="<?= t('server.common.submit') ?>" />
                 <? if ($Event) { ?>
                     <input class="Button" type="submit" name="delete" value="Delete" />
                 <?      } ?>

@@ -50,7 +50,7 @@ if ($DB->has_results()) {
                 error(t('server.artist.no_changes_were_made'));
             }
         } else {
-            error(t('server.artist.an_alias_already_exists_before') . $CloneArtistID . t('server.artist.an_alias_already_exists_after'));
+            error(t('server.artist.an_alias_already_exists', ['Values' => [$CloneArtistID]]));
         }
     }
 }

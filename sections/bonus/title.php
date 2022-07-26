@@ -51,7 +51,7 @@ View::show_header(t('server.bonus.bonus_points_title'), 'bonus', 'PageBonusTitle
                             <input type="hidden" name="auth" value="<?= G::$LoggedUser['AuthKey'] ?>" />
                             <input type="hidden" name="confirm" value="true" />
                             <input class="Input" type="text" id="title" name="title" placeholder="<?= t('server.bonus.custom_title') ?>" /> <br />
-                            <input class="Button" type="submit" onclick="ConfirmPurchase(event, '<?= $Item['Title'] ?>')" value="<?= t('server.global.submit') ?>" />&nbsp;
+                            <input class="Button" type="submit" onclick="ConfirmPurchase(event, '<?= $Item['Title'] ?>')" value="<?= t('server.common.submit') ?>" />&nbsp;
                             <input class="Button" type="button" onclick="PreviewTitle(<?= $BBCode ?>);" value="Preview" />
                             <div id="preview" class="Username-customTitle"></div>
                         </form>

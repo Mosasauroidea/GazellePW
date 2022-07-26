@@ -40,7 +40,7 @@ View::show_header(t('server.referral.external_tracker_referrals'), '', 'PageRefe
 <div style="width: 500px; text-align: left">
     <h1><?= t('server.referral.external_tracker_referrals') ?></h1>
     <br />
-    <p><?= t('server.referral.another_tracker_we_trust_1') ?> <?php echo CONFIG['SITE_NAME']; ?> <?= t('server.referral.another_tracker_we_trust_2') ?></p>
+    <p><?= t('server.referral.another_tracker_we_trust') ?></p>
     <br />
     <h4><?= t('server.referral.process_follows') ?></h4>
     <br />
@@ -48,7 +48,7 @@ View::show_header(t('server.referral.external_tracker_referrals'), '', 'PageRefe
         <li><?= t('server.referral.choose_a_tracker_you_are_member') ?></li>
         <li><?php echo CONFIG['SITE_NAME']; ?><?= t('server.referral.will_generate_string') ?></li>
         <li><?= t('server.referral.paste_string') ?></li>
-        <li><?= t('server.referral.enter_your_username_1') ?><?php echo CONFIG['SITE_NAME']; ?> <?php echo CONFIG['SITE_NAME']; ?><?= t('server.referral.enter_your_username_2') ?></li>
+        <li><?= t('server.referral.enter_your_username') ?></li>
         <li><?= t('server.referral.join') ?> <?php echo CONFIG['SITE_NAME']; ?><?= t('server.referral.exclamation_mark') ?></li>
     </ol>
 
@@ -62,7 +62,7 @@ View::show_header(t('server.referral.external_tracker_referrals'), '', 'PageRefe
                 echo '<input type="radio" name="service" value="' . $Service . '"/><label for="' . $Service . '">  ' . $Service . '</label><br/><br/>';
             } ?>
             <br />
-            <input class="Button" type="submit" name="submit" value="<?= t('server.global.submit') ?>" />
+            <input class="Button" type="submit" name="submit" value="<?= t('server.common.submit') ?>" />
         </form>
     <?php else : ?>
         <br />

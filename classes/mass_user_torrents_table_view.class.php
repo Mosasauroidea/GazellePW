@@ -126,8 +126,8 @@ class MASS_USER_TORRENTS_TABLE_VIEW {
                                 <th class="Table-cell" style="width: 7%;" data-sorter="false"><?= t('server.bookmarks.order') ?></th>
                                 <th class="Table-cell" style="width: 1%;"><span><abbr data-tooltip="<?= t('server.bookmarks.current_order') ?>">#</abbr></span></th>
                                 <th class="Table-cell" style="width: 1%;"><span><?= t('server.bookmarks.year') ?></span></th>
-                                <th class="Table-cell" style="width: 15%;" data-sorter="ignoreArticles"><span><?= t('server.global.artist') ?></span></th>
-                                <th class="Table-cell" data-sorter="ignoreArticles"><span><?= t('server.global.torrent') ?></span></th>
+                                <th class="Table-cell" style="width: 15%;" data-sorter="ignoreArticles"><span><?= t('server.common.artist') ?></span></th>
+                                <th class="Table-cell" data-sorter="ignoreArticles"><span><?= t('server.common.torrent') ?></span></th>
                                 <th class="Table-cell" style="width: 5%;" data-sorter="relativeTime"><span><?= t('server.bookmarks.bookmarked') ?></span></th>
                                 <th class="Table-cell" style="width: 1%;" id="check_all" data-sorter="false"><span><?= t('server.bookmarks.remove') ?></span></th>
                             </tr>

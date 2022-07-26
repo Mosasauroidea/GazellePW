@@ -17,7 +17,11 @@ View::show_header("Revisions of " . $Title, '', 'PageWikiRevision');
 ?>
 <div class="LayoutBody">
     <div class="BodyHeader">
-        <h2 class="BodyHeader-nav"><?= t('server.wiki.revision_history_before') ?><a href="wiki.php?action=article&amp;id=<?= $ArticleID ?>"><?= $Title ?></a><?= t('server.wiki.revision_history_after') ?></h2>
+        <h2 class="BodyHeader-nav">
+            <?= t('server.wiki.revision_history', ['Values' => [
+                "<a href='wiki.php?action=article&amp;id=${ArticleID}'>${Title}</a>"
+            ]]) ?>
+        </h2>
     </div>
     <form action="wiki.php" method="get">
         <input type="hidden" name="action" id="action" value="<? t('server.wiki.compare') ?>" />

@@ -30,7 +30,7 @@ View::show_header(t('server.artist.request_an_edit'), '', 'PageArtistEditReqeust
                 <textarea class="Input" name="edit_details" required="required"></textarea>
             </div>
             <div class="Form-row">
-                <input class="Button" type="submit" value="<?= t('server.global.submit') ?>" />
+                <input class="Button" type="submit" value="<?= t('server.common.submit') ?>" />
             </div>
         </form>
     </div>

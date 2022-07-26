@@ -65,8 +65,8 @@ View::show_header($Title, 'browse,collage', 'PageBookmarkTorrent');
             <? if (!$Sneaky) { ?><a href="feeds.php?feed=torrents_bookmarks_t_<?= $LoggedUser['torrent_pass'] ?>&amp;user=<?= $LoggedUser['ID'] ?>&amp;auth=<?= $LoggedUser['RSS_Auth'] ?>&amp;passkey=<?= $LoggedUser['torrent_pass'] ?>&amp;authkey=<?= $LoggedUser['AuthKey'] ?>&amp;name=<?= urlencode(CONFIG['SITE_NAME'] . ': Bookmarked Torrents') ?>"><img src="<?= CONFIG['STATIC_SERVER'] ?>/common/symbols/rss.png" alt="RSS feed" /></a>&nbsp;
                 <? } ?><?= $Title ?></h2>
         <div class="BodyNavLinks">
-            <a href="bookmarks.php?type=torrents" class="brackets"><?= t('server.global.torrents') ?></a>
-            <a href="bookmarks.php?type=artists" class="brackets"><?= t('server.global.artists') ?></a>
+            <a href="bookmarks.php?type=torrents" class="brackets"><?= t('server.common.torrents') ?></a>
+            <a href="bookmarks.php?type=artists" class="brackets"><?= t('server.common.artists') ?></a>
             <?
             if (CONFIG['ENABLE_COLLAGES']) {
             ?>
@@ -74,7 +74,7 @@ View::show_header($Title, 'browse,collage', 'PageBookmarkTorrent');
             <?
             }
             ?>
-            <a href="bookmarks.php?type=requests" class="brackets"><?= t('server.global.requests') ?></a>
+            <a href="bookmarks.php?type=requests" class="brackets"><?= t('server.common.requests') ?></a>
             <? if (count($TorrentList) > 0) { ?>
         </div>
         <div class="BodyNavLinks">
@@ -103,7 +103,7 @@ View::show_header($Title, 'browse,collage', 'PageBookmarkTorrent');
             </div>
             <ul class="SidebarList SidebarItem-body Box-body">
                 <li class="SidebarList-item"><?= t('server.bookmarks.torrent_groups') ?>: <?= $NumGroups ?></li>
-                <li class="SidebarList-item"><?= t('server.global.artists') ?>: <?= count($ArtistCount) ?></li>
+                <li class="SidebarList-item"><?= t('server.common.artists') ?>: <?= count($ArtistCount) ?></li>
             </ul>
         </div>
         <div class="SidebarItemTags SidebarItem Box">

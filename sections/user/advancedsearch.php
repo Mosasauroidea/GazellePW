@@ -784,7 +784,7 @@ View::show_header(t('server.user.user_search'), '', 'PageUserAdvancedSearch');
                                                                             } ?>><?= t('server.user.leech') ?></option>
                         <option class="Select-option" value="DisableRequests" <? if ($_GET['disabled'] === 'DisableRequests') {
                                                                                     echo ' selected="selected"';
-                                                                                } ?>><?= t('server.global.requests') ?></option>
+                                                                                } ?>><?= t('server.common.requests') ?></option>
                         <option class="Select-option" value="DisableUpload" <? if ($_GET['disabled'] === 'DisableUpload') {
                                                                                 echo ' selected="selected"';
                                                                             } ?>><?= t('server.user.torrent_upload') ?></option>
@@ -878,7 +878,7 @@ View::show_header(t('server.user.user_search'), '', 'PageUserAdvancedSearch');
                     <input class="Input" type="text" name="invitees1" size="6" value="<?= display_str($_GET['invitees1']) ?>" />
                     <input class="Input" type="text" name="invitees2" size="6" value="<?= display_str($_GET['invitees2']) ?>" />
                 </td>
-                <td class="Form-label"><?= t('server.global.snatched') ?>:</td>
+                <td class="Form-label"><?= t('server.common.snatched') ?>:</td>
                 <td class="Form-inputs">
                     <select class="Input" name="snatched">
                         <option class="Select-option" value="equal" <? if (isset($_GET['snatched']) && $_GET['snatched'] === 'equal') {
@@ -1056,7 +1056,7 @@ if ($RunQuery) {
                 <td class="Table-cell"><?= t('server.user.uploaded') ?></td>
                 <td class="Table-cell"><?= t('server.user.downloaded') ?></td>
                 <td class="Table-cell"><?= t('server.user.downloads') ?></td>
-                <td class="Table-cell"><?= t('server.global.snatched') ?></td>
+                <td class="Table-cell"><?= t('server.common.snatched') ?></td>
                 <td class="Table-cell"><?= t('server.user.invites') ?></td>
                 <? if (isset($_GET['invitees']) && $_GET['invitees'] != 'off') { ?>
                     <td class="Table-cell"><?= t('server.user.invitees') ?></td>

@@ -167,8 +167,8 @@ View::show_header(t('server.user.manage_notifications'), 'jquery.validate,form_v
             <b>
                 <label><?= $Idx + 1 ?>.</label>
                 <?= display_str($N['Label']) ?>
-                <a href="#" onclick="$('#filter_form_<?= $N['ID'] ?>').gtoggle(); return false;" class="brackets"><?= t('server.global.show') ?></a>
-                <a href="user.php?action=notify_delete&amp;id=<?= $N['ID'] ?>&amp;auth=<?= $LoggedUser['AuthKey'] ?>" onclick="return confirm('<?= t('server.user.are_you_sure_delete_notification_filter') ?>')" class="brackets"><?= t('server.global.delete') ?></a>
+                <a href="#" onclick="$('#filter_form_<?= $N['ID'] ?>').gtoggle(); return false;" class="brackets"><?= t('server.common.show') ?></a>
+                <a href="user.php?action=notify_delete&amp;id=<?= $N['ID'] ?>&amp;auth=<?= $LoggedUser['AuthKey'] ?>" onclick="return confirm('<?= t('server.user.are_you_sure_delete_notification_filter') ?>')" class="brackets"><?= t('server.common.delete') ?></a>
                 <a <a class="brackets" href="feeds.php?feed=torrents_notify_<?= $N['ID'] ?>_<?= $LoggedUser['torrent_pass'] ?>&amp;user=<?= $LoggedUser['ID'] ?>&amp;auth=<?= $LoggedUser['RSS_Auth'] ?>&amp;passkey=<?= $LoggedUser['torrent_pass'] ?>&amp;authkey=<?= $LoggedUser['AuthKey'] ?>&amp;name=<?= urlencode($N['Label']) ?>"><?= t('server.user.rss_address') ?></a>
                 <a href="feeds.php?feed=torrents_notify_<?= $N['ID'] ?>_<?= $LoggedUser['torrent_pass'] ?>&amp;user=<?= $LoggedUser['ID'] ?>&amp;auth=<?= $LoggedUser['RSS_Auth'] ?>&amp;passkey=<?= $LoggedUser['torrent_pass'] ?>&amp;authkey=<?= $LoggedUser['AuthKey'] ?>&amp;name=<?= urlencode($N['Label']) ?>"><img src="<?= CONFIG['STATIC_SERVER'] ?>/common/symbols/rss.png" alt="RSS feed" /></a>
 

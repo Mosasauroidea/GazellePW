@@ -180,8 +180,8 @@ View::show_header(t('server.torrents.header'), 'browse', 'PageTorrentHome');
             </div>
             <div class="SearchPageHeader-actions">
                 <a href="#" onclick="globalapp.toggleAny(event, '.SearchPageBody', { updateText: true }); globalapp.toggleAny(event, '.SearchPageFooter', { updateText: true })" id="ft_toggle" class="brackets">
-                    <span class="u-toggleAny-show <?= $HideFilter ?: 'u-hidden' ?>"><?= t('server.global.show') ?></span>
-                    <span class="u-toggleAny-hide <?= $HideFilter ? 'u-hidden' : '' ?>"><?= t('server.global.hide') ?></span>
+                    <span class="u-toggleAny-show <?= $HideFilter ?: 'u-hidden' ?>"><?= t('server.common.show') ?></span>
+                    <span class="u-toggleAny-hide <?= $HideFilter ? 'u-hidden' : '' ?>"><?= t('server.common.hide') ?></span>
                 </a>
             </div>
         </div>
@@ -190,31 +190,31 @@ View::show_header(t('server.torrents.header'), 'browse', 'PageTorrentHome');
                 <tr class="Form-row is-advanced <?= $HideAdvanced ?>">
                     <td class="Form-label"><?= t('server.torrents.basic') ?>:</td>
                     <td class="Form-inputs is-splitEven">
-                        <input class="is-movieName Input" type="text" spellcheck="false" size="40" name="groupname" placeholder="<?= t('server.global.movie_name_title') ?>" value="<? Format::form('groupname') ?>" />
-                        <input class="is-artist Input" type="text" spellcheck="false" size="40" name="artistname" placeholder="<?= t('server.global.artist') ?>" value="<? Format::form('artistname') ?>" />
-                        <input class="is-year Input" type="text" spellcheck="false" size="40" name="year" placeholder="<?= t('server.global.year') ?>" value="<? Format::form('year') ?>" />
+                        <input class="is-movieName Input" type="text" spellcheck="false" size="40" name="groupname" placeholder="<?= t('server.common.movie_name_title') ?>" value="<? Format::form('groupname') ?>" />
+                        <input class="is-artist Input" type="text" spellcheck="false" size="40" name="artistname" placeholder="<?= t('server.common.artist') ?>" value="<? Format::form('artistname') ?>" />
+                        <input class="is-year Input" type="text" spellcheck="false" size="40" name="year" placeholder="<?= t('server.common.year') ?>" value="<? Format::form('year') ?>" />
                     </td>
                 </tr>
                 <tr class="Form-row is-languageRegion is-advanced <?= $HideAdvanced ?>">
-                    <td class="Form-label"><?= t('server.global.language_region') ?>:</td>
+                    <td class="Form-label"><?= t('server.common.language_region') ?>:</td>
                     <td class="Form-inputs is-splitEven">
-                        <input class="Input" type="text" spellcheck="false" size="40" name="language" placeholder="<?= t('server.global.language') ?>" value="<? Format::form('language') ?>" />
-                        <input class="Input" type="text" spellcheck="false" size="40" name="region" placeholder="<?= t('server.global.countries_and_regions') ?>" value="<? Format::form('region') ?>" />
-                        <input class="Input" type="text" spellcheck="false" size="40" name="subtitles" placeholder="<?= t('server.global.subtitle') ?>" value="<? Format::form('subtitle') ?>" />
+                        <input class="Input" type="text" spellcheck="false" size="40" name="language" placeholder="<?= t('server.common.language') ?>" value="<? Format::form('language') ?>" />
+                        <input class="Input" type="text" spellcheck="false" size="40" name="region" placeholder="<?= t('server.common.countries_and_regions') ?>" value="<? Format::form('region') ?>" />
+                        <input class="Input" type="text" spellcheck="false" size="40" name="subtitles" placeholder="<?= t('server.common.subtitle') ?>" value="<? Format::form('subtitle') ?>" />
                     </td>
                 </tr>
                 <tr class="Form-row is-rating is-advanced <?= $HideAdvanced ?>">
-                    <td class="Form-label"><?= t('server.global.rating') ?>:</td>
+                    <td class="Form-label"><?= t('server.common.rating') ?>:</td>
                     <td class="Form-inputs is-splitEven" colspan="3">
-                        <input class="Input" type="text" spellcheck="false" size="40" name="imdbrating" placeholder="<?= t('server.global.imdb_rating') ?>" value="<? Format::form('imdbrating') ?>" />
-                        <input class="Input" type="text" spellcheck="false" size="40" name="doubanrating" placeholder="<?= t('server.global.douban_rating') ?>" value="<? Format::form('doubanrating') ?>" />
-                        <input class="Input" type="text" spellcheck="false" size="40" name="rtrating" placeholder="<?= t('server.global.rt_rating') ?>" value="<? Format::form('rtrating') ?>" />
+                        <input class="Input" type="text" spellcheck="false" size="40" name="imdbrating" placeholder="<?= t('server.common.imdb_rating') ?>" value="<? Format::form('imdbrating') ?>" />
+                        <input class="Input" type="text" spellcheck="false" size="40" name="doubanrating" placeholder="<?= t('server.common.douban_rating') ?>" value="<? Format::form('doubanrating') ?>" />
+                        <input class="Input" type="text" spellcheck="false" size="40" name="rtrating" placeholder="<?= t('server.common.rt_rating') ?>" value="<? Format::form('rtrating') ?>" />
                     </td>
                 </tr>
                 <tr class="Form-row is-editionInfo is-advanced <?= $HideAdvanced ?>">
-                    <td class="Form-label"><?= t('server.global.edition_info') ?>:</td>
+                    <td class="Form-label"><?= t('server.common.edition_info') ?>:</td>
                     <td class="Form-inputs" colspan="3">
-                        <input class="Input" type="text" spellcheck="false" size="40" name="remtitle" value="<? Format::form('remtitle') ?>" placeholder="<?= t('server.global.comma_separated_edition') ?>" />
+                        <input class="Input" type="text" spellcheck="false" size="40" name="remtitle" value="<? Format::form('remtitle') ?>" placeholder="<?= t('server.common.comma_separated_edition') ?>" />
                     </td>
                 </tr>
                 <tr class="Form-row is-fileList is-advanced <?= $HideAdvanced ?>">
@@ -304,9 +304,9 @@ View::show_header(t('server.torrents.header'), 'browse', 'PageTorrentHome');
                     </td>
                 </tr>
                 <tr class="Form-row is-tagFilter is-advanced <?= $HideAdvanced ?>">
-                    <td class="Form-label"><span data-tooltip="<?= t('server.global.tags') ?>"><?= t('server.global.tags') ?>:</span></td>
+                    <td class="Form-label"><span data-tooltip="<?= t('server.common.tags') ?>"><?= t('server.common.tags') ?>:</span></td>
                     <td class="Form-inputs">
-                        <input class="Input" type="text" placeholder="<?= t('server.global.comma_separated') ?>" size="40" id="tags" name="taglist" value="<?= display_str($Search->get_terms('taglist')) ?>" <? Users::has_autocomplete_enabled('other'); ?> />
+                        <input class="Input" type="text" placeholder="<?= t('server.common.comma_separated') ?>" size="40" id="tags" name="taglist" value="<?= display_str($Search->get_terms('taglist')) ?>" <? Users::has_autocomplete_enabled('other'); ?> />
                         <div class="RadioGroup">
                             <div class="Radio">
                                 <input class="Input" type="radio" name="tags_type" id="tags_type0" value="0" <? Format::selected('tags_type', 0, 'checked') ?> />
@@ -325,10 +325,10 @@ View::show_header(t('server.torrents.header'), 'browse', 'PageTorrentHome');
                         <select class="Input" name="order_by">
                             <option class="Select-option" value="time" <? Format::selected('order_by', 'time') ?>><?= t('server.torrents.add_time') ?></option>
                             <option class="Select-option" value="year" <? Format::selected('order_by', 'year') ?>><?= t('server.torrents.year') ?></option>
-                            <option class="Select-option" value="size" <? Format::selected('order_by', 'size') ?>><?= t('server.global.size') ?></option>
-                            <option class="Select-option" value="snatched" <? Format::selected('order_by', 'snatched') ?>><?= t('server.global.snatched') ?></option>
-                            <option class="Select-option" value="seeders" <? Format::selected('order_by', 'seeders') ?>><?= t('server.global.seeders') ?></option>
-                            <option class="Select-option" value="leechers" <? Format::selected('order_by', 'leechers') ?>><?= t('server.global.leechers') ?></option>
+                            <option class="Select-option" value="size" <? Format::selected('order_by', 'size') ?>><?= t('server.common.size') ?></option>
+                            <option class="Select-option" value="snatched" <? Format::selected('order_by', 'snatched') ?>><?= t('server.common.snatched') ?></option>
+                            <option class="Select-option" value="seeders" <? Format::selected('order_by', 'seeders') ?>><?= t('server.common.seeders') ?></option>
+                            <option class="Select-option" value="leechers" <? Format::selected('order_by', 'leechers') ?>><?= t('server.common.leechers') ?></option>
                             <option class="Select-option" value="random" <? Format::selected('order_by', 'random') ?>><?= t('server.torrents.random') ?></option>
                         </select>
                         <select class="Input" name="order_way">
@@ -389,7 +389,7 @@ View::show_header(t('server.torrents.header'), 'browse', 'PageTorrentHome');
         <div class="SearchPageFooter <?= $HideFilter ? ' u-hidden' : '' ?>">
             <div class="SearchPageFooter-resultCount">
                 <?= number_format($RealNumResults) ?> <?= t('server.torrents.space_results') ?>
-                <?= !check_perms('site_search_many') ? "(" . t('server.torrents.showing_first_n_matches_before') . $NumResults . t('server.torrents.showing_first_n_matches_after') . ")" : "" ?>
+                <?= !check_perms('site_search_many') ? "(" . t('server.torrents.showing_first_n_matches', ['Values' => [$NumResults]]) . ")" : "" ?>
             </div>
             <div class="SearchPageFooter-actions">
                 <input class="Button" type="submit" value="<?= t('server.torrents.search_torrents') ?>" />

@@ -44,7 +44,12 @@ $DB->set_query_id($RS);
 if ($DB->has_results()) {
 ?>
     <div class="BoxBody thin" id="users_on_ratio_watch_number">
-        <p><?= t('server.tools.there_are_currently_enabled_users_on_ratio_watch_1') ?> <?= number_format($Results) ?> <?= t('server.tools.there_are_currently_enabled_users_on_ratio_watch_2') ?> <?= number_format($TotalDisabled) ?> <?= t('server.tools.there_are_currently_enabled_users_on_ratio_watch_3') ?></p>
+        <p>
+            <?= t('server.tools.there_are_currently_enabled_users_on_ratio_watch', ['Values' => [
+                number_format($Results),
+                number_format($TotalDisabled)
+            ]]) ?>
+        </p>
     </div>
     <div class="BodyNavLinks">
         <?

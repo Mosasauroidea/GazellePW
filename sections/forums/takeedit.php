@@ -124,4 +124,11 @@ $Cache->delete_value("forums_edits_$PostID");
 // This gets sent to the browser, which echoes it in place of the old body
 echo Text::full_format($Body);
 ?>
-<br /><br /><span class="last_edited"><?= t('server.forums.last_edit_by_before') ?><a href="user.php?id=<?= $LoggedUser['ID'] ?>"><?= $LoggedUser['Username'] ?></a><?= t('server.forums.by_user_just_now_after') ?></span>
+<br />
+<br />
+<span class="last_edited">
+    <?= t('server.forums.last_edit_by', ['Values' => [
+        "<a href='user.php?id=${LoggedUser['ID']}'>${LoggedUser['Username']}</a>"
+    ]]) ?>
+    <?= t('server.forums.by_user_just_now') ?>
+</span>

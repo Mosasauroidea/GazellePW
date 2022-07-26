@@ -18,7 +18,7 @@ if ((empty($_POST['submit']) || empty($_POST['username'])) && !isset($Output)) {
             <?= t('server.login.disabled_note2') ?>
     <form action="" method="POST">
         <input class="Input" type="email" placeholder="<?= t('server.login.email_address_placeholder') ?>" name="email" required />
-        <input class="Button" type="submit" value="<?= t('server.global.submit') ?>" />
+        <input class="Button" type="submit" value="<?= t('server.common.submit') ?>" />
         <input type="hidden" name="username" value="<?= $_COOKIE['username'] ?>" />
     </form><br />
 <? } ?>

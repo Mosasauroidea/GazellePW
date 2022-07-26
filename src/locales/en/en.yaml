@@ -1,3 +1,11 @@
+client.a_one: item
+client.a_other: items
+client.bbcode.edit: |-
+  Edit
+client.bbcode.loading: |-
+  Loading...
+client.bbcode.preview: |-
+  Preview
 client.common.actor: |-
   Actor
 client.common.are_you_sure_cannot_undone: |-
@@ -44,12 +52,6 @@ client.common.view: |-
   View
 client.common.writer: |-
   Writer
-client.bbcode.edit: |-
-  Edit
-client.bbcode.loading: |-
-  Loading...
-client.bbcode.preview: |-
-  Preview
 client.error.imdb_unknown_error: |-
   Unknown error, please contact staff.
 client.error.invalid_imdb_link_note: |-
@@ -168,18 +170,6 @@ client.validation.please_fix_this_field: |-
   Please fix this field.
 client.validation.this_field_is_required: |-
   This field is required.
-server.common.github: |-
-  GitHub
-server.common.lang_chs: |-
-  简体中文
-server.common.lang_en: |-
-  English
-server.common.language: |-
-  Language
-server.common.rss: |-
-  RSS
-server.common.telegram: |-
-  Telegram
 server.apply.applicant: |-
   Applicant
 server.apply.applicant_administration: |-
@@ -264,12 +254,8 @@ server.apply.thanks_for_your_interest_in_helping: |-
   Thanks for your interest in helping {{CONFIG['SITE_NAME']}}! There are no openings at the moment. Keep an eye on the front page or the {{CONFIG['SITE_NAME']}} forum for announcements in the future.
 server.apply.the_cupboard_is_empty: |-
   The cupboard is empty. There are no applications to show.
-server.apply.the_role_was_1: |-
-  The role&nbsp;
-server.apply.the_role_was_2: |-
-  &nbsp;was&nbsp;
-server.apply.the_role_was_3: |-
-  .
+server.apply.the_role_was: |-
+  The role %s was %s.
 server.apply.updated: |-
   updated
 server.apply.view_applications: |-
@@ -284,9 +270,6 @@ server.apply.you_need_explain_more: |-
   You need to explain things a bit more.
 server.apply.your_cover_letter: |-
   Your cover letter
-server.apply.your_role_at_after: ''
-server.apply.your_role_at_before: |-
-  Your Role at&nbsp;
 server.artist.1021: |-
   Director
 server.artist.1022: |-
@@ -309,24 +292,20 @@ server.artist.added: |-
   Added
 server.artist.aliases_list: |-
   List of existing artist aliases
-server.artist.an_alias_already_exists_after: |-
-  i">于此</a>。你可以将之重命名到此。
-server.artist.an_alias_already_exists_before: |-
-  与此相同的别名已经存在 <a href="artist.php?id=
+server.artist.an_alias_already_exists: |-
+  与此相同的别名已经存在 <a href="artist.php?id=%s">于此</a>。你可以将之重命名到此。
 server.artist.artist_aliases: |-
   Artist aliases
 server.artist.artist_deleted: |-
   Artist deleted
-server.artist.artist_deleted_after: |-
-  " deleted!
-server.artist.artist_deleted_before: |-
-  Artist "
 server.artist.artist_id: |-
   Artist ID
 server.artist.artist_info: |-
   Artist information
 server.artist.artist_name: |-
   Artist name
+server.artist.artist_x_deleted: |-
+  Artist "%s" deleted!
 server.artist.artistcomments: |-
   Comments
 server.artist.as_an_artist: |-
@@ -345,12 +324,8 @@ server.artist.chinese_name: |-
   Chinese name
 server.artist.confirm_merge: |-
   Confirm Merge
-server.artist.confirm_merge_1: |-
-  Please confirm that you wish to make&nbsp;
-server.artist.confirm_merge_2: |-
-  &nbsp;into a non-redirecting alias of&nbsp;
-server.artist.confirm_merge_3: |-
-  .
+server.artist.confirm_merge_body: |-
+  Please confirm that you wish to make %s into a non-redirecting alias of %s.
 server.artist.delete_this_alias: |-
   Delete this alias
 server.artist.edit_artist: |-
@@ -758,8 +733,8 @@ server.collages.bookmarks_collages: |-
   Bookmarked collages
 server.collages.browse_collages: |-
   Browse collages
-server.collages.built_by: |-
-  Built by
+server.collages.built_by_n_users: |-
+  Built by %s %s
 server.collages.category: |-
   Category
 server.collages.collage: |-
@@ -799,9 +774,6 @@ server.collages.collages_list: |-
   Collages List
 server.collages.comments: |-
   Comments
-server.collages.comments_for_collage_after: ''
-server.collages.comments_for_collage_before: |-
-  Comments for collage&nbsp;
 server.collages.contributed_collages: |-
   Collages you contributed to
 server.collages.create_collages: |-
@@ -963,12 +935,12 @@ server.collages.unsubscribe: |-
   Unsubscribe
 server.collages.updated: |-
   Updated
-server.collages.user: |-
+server.collages.user_one: |-
   User
+server.collages.user_other: |-
+  Users
 server.collages.user_s_personal_collage: |-
   's personal collage
-server.collages.users: |-
-  s
 server.collages.you_may_not_create_a_personal_collage: |-
   You may not create a personal collage.
 server.collages.your_bookmarked_collages: |-
@@ -977,91 +949,302 @@ server.collages.your_personal_collage_must: |-
   Your personal collage's title must include your username.
 server.comments.artist_comments: |-
   Artist comments
-server.comments.artist_comments_left_by_user_after: ''
-server.comments.artist_comments_left_by_user_before: |-
-  Artist comments left by&nbsp;
+server.comments.artist_comments_left_by_user: |-
+  Artist comments left by %s
 server.comments.collage_comments: |-
   Collage comments
-server.comments.collage_comments_left_by_user_after: ''
-server.comments.collage_comments_left_by_user_before: |-
-  Collage comments left by&nbsp;
-server.comments.collages_created_by_after: ''
-server.comments.collages_created_by_before: |-
-  collages created by&nbsp;
-server.comments.comments_left_on_collages_user_created_after: |-
-  &nbsp;created
-server.comments.comments_left_on_collages_user_created_before: |-
-  Comments left on collages&nbsp;
-server.comments.comments_left_on_collages_user_has_contributed_to_after: |-
-  &nbsp;contributed to
-server.comments.comments_left_on_collages_user_has_contributed_to_before: |-
-  Comments left on collages&nbsp;
-server.comments.comments_left_on_requests_user_created_after: |-
-  &nbsp;created
-server.comments.comments_left_on_requests_user_has_voted_on_after: |-
-  &nbsp;voted on
-server.comments.comments_left_on_requests_user_has_voted_on_before: |-
-  Comments left on requests&nbsp;
-server.comments.comments_left_on_torrents_user_has_uploaded_after: |-
-  &nbsp;uploaded
-server.comments.comments_left_on_torrents_user_has_uploaded_before: |-
-  Comments left on torrents&nbsp;
-server.comments.display_comments_left_on_collages_user_has_contributed_to_after: |-
-  &nbsp;contributed to
-server.comments.display_comments_left_on_collages_user_has_contributed_to_before: |-
-  Display comments left on collages&nbsp;
-server.comments.display_comments_left_on_collages_user_has_made_after: |-
-  &nbsp;made
-server.comments.display_comments_left_on_collages_user_has_made_before: |-
-  Display comments left on collages&nbsp;
-server.comments.display_comments_left_on_requests_user_created_after: |-
-  &nbsp;created
-server.comments.display_comments_left_on_requests_user_created_before: |-
-  Display comments left on requests&nbsp;
-server.comments.display_comments_left_on_requests_user_has_made_after: |-
-  &nbsp;made
-server.comments.display_comments_left_on_requests_user_has_made_before: |-
-  Display comments left on requests&nbsp;
-server.comments.display_comments_left_on_requests_user_has_voted_on_after: |-
-  &nbsp;voted on
-server.comments.display_comments_left_on_requests_user_has_voted_on_before: |-
-  Display comments left on requests&nbsp;
-server.comments.display_comments_left_on_torrents_user_has_made_after: |-
-  &nbsp;made
-server.comments.display_comments_left_on_torrents_user_has_made_before: |-
-  Display comments left on torrents&nbsp;
-server.comments.display_comments_left_on_torrents_user_has_uploaded_after: |-
-  &nbsp;uploaded
-server.comments.display_comments_left_on_torrents_user_has_uploaded_before: |-
-  Display comments left on torrents&nbsp;
-server.comments.display_comments_left_on_users_collages_after: ''
-server.comments.display_comments_left_on_users_collages_before: |-
-  Display comments left on&nbsp;
-server.comments.has_after: |-
-  &nbsp;has
-server.comments.has_before: ''
+server.comments.collage_comments_left_by_user: |-
+  Collage comments left by %s
+server.comments.collages_created_by: |-
+  collages created by %s
+server.comments.comments_left_on_collages_user_created: |-
+  Comments left on collages %s created
+server.comments.comments_left_on_collages_user_has_contributed_to: |-
+  Comments left on collages %s contributed to
+server.comments.comments_left_on_requests_user_created: |-
+  %s&nbsp;created
+server.comments.comments_left_on_requests_user_has_voted_on: |-
+  Comments left on requests %s voted on
+server.comments.comments_left_on_torrents_user_has_uploaded: |-
+  Comments left on torrents %s uploaded
+server.comments.display_comments_left_on_collages_user_has_contributed_to: |-
+  Display comments left on collages %s contributed to
+server.comments.display_comments_left_on_collages_user_has_made: |-
+  Display comments left on collages %s made
+server.comments.display_comments_left_on_requests_user_created: |-
+  Display comments left on requests %s created
+server.comments.display_comments_left_on_requests_user_has_made: |-
+  Display comments left on requests %s made
+server.comments.display_comments_left_on_requests_user_has_voted_on: |-
+  Display comments left on requests %s voted on
+server.comments.display_comments_left_on_torrents_user_has_made: |-
+  Display comments left on torrents %s made
+server.comments.display_comments_left_on_torrents_user_has_uploaded: |-
+  Display comments left on torrents %s uploaded
+server.comments.display_comments_left_on_users_collages: |-
+  Display comments left on %s
 server.comments.no_results: |-
   No results.
 server.comments.request_comments: |-
   Request comments
-server.comments.request_comments_left_by_user_after: ''
-server.comments.request_comments_left_by_user_before: |-
-  Request comments left by&nbsp;
+server.comments.request_comments_left_by_user: |-
+  Request comments left by %s
 server.comments.space_on_space: |-
   &nbsp;on&nbsp;
-server.comments.space_username: ''
 server.comments.torrent_comments: |-
   Torrent comments
-server.comments.torrent_comments_left_by_after: ''
-server.comments.torrent_comments_left_by_before: |-
-  Torrent comments left by&nbsp;
-server.comments.username_space: ''
+server.comments.torrent_comments_left_by: |-
+  Torrent comments left by %s
+server.comments.user_has: |-
+  %s has
+server.comments.username_space: |-
+  %s
 server.comments.you: |-
   you
 server.comments.you_ve: |-
   you've
 server.comments.your_collages: |-
   your collages
+server.common.add: |-
+  Add
+server.common.add_bookmark: |-
+  Add bookmark
+server.common.artist: |-
+  Artist
+server.common.artists: |-
+  Artists
+server.common.bonus: |-
+  Bonus
+server.common.collages: |-
+  Collages
+server.common.collapse_this_edition_title: |-
+  Collapse this edition. Hold [Command] <em>(Mac)</em> or [Ctrl] <em>(PC)</em> while clicking to collapse all editions in this torrent group.
+server.common.collapse_this_group_title: |-
+  Collapse this group. Hold [Command] <em>(Mac)</em> or [Ctrl] <em>(PC)</em> while clicking to collapse all groups on this page.
+server.common.comma_separated: |-
+  Comma separated
+server.common.comma_separated_edition: |-
+  Comma separated
+server.common.countries_and_regions: |-
+  Countries and regions
+server.common.date: |-
+  Date
+server.common.delete: |-
+  Delete
+server.common.director: |-
+  Director
+server.common.douban_rating: |-
+  Douban rating
+server.common.download: |-
+  Download
+server.common.downloaded: |-
+  Downloaded
+server.common.edit: |-
+  Edit
+server.common.edition_info: |-
+  Edition info
+server.common.enable_requests: |-
+  &nbsp;Enable requests
+server.common.error: |-
+  Error
+server.common.error_403_description: |-
+  You just tried to go to a page that you don't have enough permission to view.
+server.common.error_403_title: |-
+  Error 403
+server.common.error_404_description: |-
+  You just tried to go to a page that doesn't exist.
+server.common.error_404_title: |-
+  Error 404
+server.common.external_subtitles: |-
+  External
+server.common.feature_film: |-
+  Feature Film
+server.common.fltoken: |-
+  FL token
+server.common.format: |-
+  Format
+server.common.forums: |-
+  Forums
+server.common.github: |-
+  GitHub
+server.common.gpw_rating: |-
+  GPW rating
+server.common.hide: |-
+  Hide
+server.common.image_host: |-
+  Image host
+server.common.imdb_rating: |-
+  IMDb rating
+server.common.in_torrent_hard_subtitles: |-
+  Hardcoded
+server.common.in_torrent_subtitles: |-
+  Softcoded
+server.common.inbox: |-
+  Inbox
+server.common.include_all_aliases: |-
+  Include all aliases
+server.common.index: |-
+  Index
+server.common.invalid_input_description: |-
+  Something was wrong with the input provided with your request, and the server is refusing to fulfill it.
+server.common.invalid_input_title: |-
+  Invalid Input
+server.common.invalid_request_description: |-
+  Something was wrong with your request, and the server is refusing to fulfill it.
+server.common.invalid_request_title: |-
+  Invalid request
+server.common.invite: |-
+  Invite
+server.common.jump_to_last_read: |-
+  Jump to last read
+server.common.lang_chs: |-
+  简体中文
+server.common.lang_en: |-
+  English
+server.common.language: |-
+  Language
+server.common.language_region: |-
+  Language and region
+server.common.leechers: |-
+  Leechers
+server.common.live_performance: |-
+  Live Performance
+server.common.log: |-
+  Log
+server.common.logout: |-
+  Logout
+server.common.menu_upload_title: |-
+  Upload
+server.common.miniseries: |-
+  Miniseries
+server.common.missing: |-
+  Missing
+server.common.movie_collection: |-
+  Movie Collection
+server.common.movie_name: |-
+  Movie title
+server.common.movie_name_title: |-
+  Movie title or IMDb ID
+server.common.my_badges: |-
+  Badges
+server.common.my_bookmarks: |-
+  Bookmarks
+server.common.my_comments: |-
+  Comments
+server.common.my_friends: |-
+  Friends
+server.common.my_notify: |-
+  RSS
+server.common.my_subscriptions: |-
+  Subscriptions
+server.common.my_uploaded: |-
+  Uploaded
+server.common.n_fl_token: |-
+  &nbsp;Freeleech token
+server.common.no_torrent_tags: |-
+  No torrent tags
+server.common.not_seeded_sure_use_fl: |-
+  Warning! This torrent is not seeded at the moment, are you sure you want to use %s here?
+server.common.others: |-
+  Others
+server.common.profile: |-
+  Profile
+server.common.rating: |-
+  Rating
+server.common.ratio: |-
+  Ratio
+server.common.remove: |-
+  Remove
+server.common.remove_bookmark: |-
+  Remove bookmark
+server.common.rename: |-
+  Rename
+server.common.report: |-
+  Report
+server.common.requests: |-
+  Requests
+server.common.required_ratio: |-
+  Required ratio
+server.common.revision: |-
+  Revision
+server.common.rss: |-
+  RSS
+server.common.rt_rating: |-
+  Rotten Tomatoes rating
+server.common.rules: |-
+  Rules
+server.common.s: |-
+  s
+server.common.search: |-
+  Search
+server.common.seeders: |-
+  Seeders
+server.common.setting: |-
+  Settings
+server.common.short_film: |-
+  Short Film
+server.common.show: |-
+  Show
+server.common.size: |-
+  Size
+server.common.snatched: |-
+  Snatched
+server.common.ssp: |-
+  Proxy
+server.common.staff: |-
+  Staff
+server.common.staffpm: |-
+  Staff PM
+server.common.stand_up_comedy: |-
+  Stand-up Comedy
+server.common.submit: |-
+  Submit
+server.common.subscribe: |-
+  Subscribe
+server.common.subtitle: |-
+  Subtitle
+server.common.subtitles: |-
+  Subtitles
+server.common.summary: |-
+  Summary
+server.common.sure_use_fl: |-
+  Are you sure you want to use %s here?
+server.common.tags: |-
+  Tags
+server.common.telegram: |-
+  Telegram
+server.common.time: |-
+  Time
+server.common.toggle: |-
+  Toggle
+server.common.top_10: |-
+  Top 10
+server.common.torrent: |-
+  Torrent
+server.common.torrents: |-
+  Torrents
+server.common.type: |-
+  Type
+server.common.unexpected_error_description: |-
+  You have encountered an unexpected error.
+server.common.unexpected_error_title: |-
+  Unexpected Error
+server.common.unsubscribe: |-
+  Unsubscribe
+server.common.uploaded: |-
+  Uploaded
+server.common.use_fl_tokens: |-
+  Use FL Token(s)
+server.common.user: |-
+  User
+server.common.users: |-
+  Users
+server.common.view_torrent: |-
+  View torrent
+server.common.wiki: |-
+  Wiki
+server.common.year: |-
+  Year
 server.donate.added_time: |-
   Time
 server.donate.bronze_rank: |-
@@ -1321,10 +1504,8 @@ server.forums.bonus_reward: |-
   Bonus reward
 server.forums.by: |-
   by
-server.forums.by_user_just_now_after: |-
+server.forums.by_user_just_now: |-
   &nbsp;Just now
-server.forums.by_user_just_now_before: |-
-  by&nbsp;
 server.forums.cant_like_yourself: |-
   You can't like your own post.
 server.forums.catch_up: |-
@@ -1377,12 +1558,10 @@ server.forums.index_refresh: |-
   Show on home page
 server.forums.jump_to_last_read: |-
   Jump to last read
-server.forums.last_edit_by_after: ''
-server.forums.last_edit_by_before: |-
-  Last edited by&nbsp;
-server.forums.last_edited_by_after: ''
-server.forums.last_edited_by_before: |-
-  Last edited by&nbsp;
+server.forums.last_edit_by: |-
+  Last edited by %s
+server.forums.last_edited_by: |-
+  Last edited by %s
 server.forums.last_post: |-
   Last post
 server.forums.last_post_time: |-
@@ -1514,240 +1693,6 @@ server.friends.up: |-
   Up
 server.friends.you_have_no_friends: |-
   You have no friends! :(
-server.global.add: |-
-  Add
-server.global.add_bookmark: |-
-  Add bookmark
-server.global.artist: |-
-  Artist
-server.global.artists: |-
-  Artists
-server.global.bonus: |-
-  Bonus
-server.global.collages: |-
-  Collages
-server.global.collapse_this_edition_title: |-
-  Collapse this edition. Hold [Command] <em>(Mac)</em> or [Ctrl] <em>(PC)</em> while clicking to collapse all editions in this torrent group.
-server.global.collapse_this_group_title: |-
-  Collapse this group. Hold [Command] <em>(Mac)</em> or [Ctrl] <em>(PC)</em> while clicking to collapse all groups on this page.
-server.global.comma_separated: |-
-  Comma separated
-server.global.comma_separated_edition: |-
-  Comma separated
-server.global.countries_and_regions: |-
-  Countries and regions
-server.global.date: |-
-  Date
-server.global.delete: |-
-  Delete
-server.global.director: |-
-  Director
-server.global.douban_rating: |-
-  Douban rating
-server.global.download: |-
-  Download
-server.global.downloaded: |-
-  Downloaded
-server.global.edit: |-
-  Edit
-server.global.edition_info: |-
-  Edition info
-server.global.enable_requests: |-
-  &nbsp;Enable requests
-server.global.error: |-
-  Error
-server.global.error_403_description: |-
-  You just tried to go to a page that you don't have enough permission to view.
-server.global.error_403_title: |-
-  Error 403
-server.global.error_404_description: |-
-  You just tried to go to a page that doesn't exist.
-server.global.error_404_title: |-
-  Error 404
-server.global.external_subtitles: |-
-  External
-server.global.feature_film: |-
-  Feature Film
-server.global.fltoken: |-
-  FL token
-server.global.format: |-
-  Format
-server.global.forums: |-
-  Forums
-server.global.gpw_rating: |-
-  GPW rating
-server.global.hide: |-
-  Hide
-server.global.image_host: |-
-  Image host
-server.global.imdb_rating: |-
-  IMDb rating
-server.global.in_torrent_hard_subtitles: |-
-  Hardcoded
-server.global.in_torrent_subtitles: |-
-  Softcoded
-server.global.inbox: |-
-  Inbox
-server.global.include_all_aliases: |-
-  Include all aliases
-server.global.index: |-
-  Index
-server.global.invalid_input_description: |-
-  Something was wrong with the input provided with your request, and the server is refusing to fulfill it.
-server.global.invalid_input_title: |-
-  Invalid Input
-server.global.invalid_request_description: |-
-  Something was wrong with your request, and the server is refusing to fulfill it.
-server.global.invalid_request_title: |-
-  Invalid request
-server.global.invite: |-
-  Invite
-server.global.jump_to_last_read: |-
-  Jump to last read
-server.global.language: |-
-  Language
-server.global.language_region: |-
-  Language and region
-server.global.leechers: |-
-  Leechers
-server.global.live_performance: |-
-  Live Performance
-server.global.log: |-
-  Log
-server.global.logout: |-
-  Logout
-server.global.menu_upload_title: |-
-  Upload
-server.global.miniseries: |-
-  Miniseries
-server.global.missing: |-
-  Missing
-server.global.movie_collection: |-
-  Movie Collection
-server.global.movie_name: |-
-  Movie title
-server.global.movie_name_title: |-
-  Movie title or IMDb ID
-server.global.my_badges: |-
-  Badges
-server.global.my_bookmarks: |-
-  Bookmarks
-server.global.my_comments: |-
-  Comments
-server.global.my_friends: |-
-  Friends
-server.global.my_notify: |-
-  RSS
-server.global.my_subscriptions: |-
-  Subscriptions
-server.global.my_uploaded: |-
-  Uploaded
-server.global.n_fl_token: |-
-  &nbsp;Freeleech token
-server.global.no_torrent_tags: |-
-  No torrent tags
-server.global.not_seeded_sure_use_fl_after: |-
-  &nbsp;here?
-server.global.not_seeded_sure_use_fl_before: |-
-  Warning! This torrent is not seeded at the moment, are you sure you want to use&nbsp;
-server.global.others: |-
-  Others
-server.global.profile: |-
-  Profile
-server.global.rating: |-
-  Rating
-server.global.ratio: |-
-  Ratio
-server.global.remove: |-
-  Remove
-server.global.remove_bookmark: |-
-  Remove bookmark
-server.global.rename: |-
-  Rename
-server.global.report: |-
-  Report
-server.global.requests: |-
-  Requests
-server.global.required_ratio: |-
-  Required ratio
-server.global.revision: |-
-  Revision
-server.global.rt_rating: |-
-  Rotten Tomatoes rating
-server.global.rules: |-
-  Rules
-server.global.s: |-
-  s
-server.global.search: |-
-  Search
-server.global.seeders: |-
-  Seeders
-server.global.setting: |-
-  Settings
-server.global.short_film: |-
-  Short Film
-server.global.show: |-
-  Show
-server.global.size: |-
-  Size
-server.global.snatched: |-
-  Snatched
-server.global.ssp: |-
-  Proxy
-server.global.staff: |-
-  Staff
-server.global.staffpm: |-
-  Staff PM
-server.global.stand_up_comedy: |-
-  Stand-up Comedy
-server.global.submit: |-
-  Submit
-server.global.subscribe: |-
-  Subscribe
-server.global.subtitle: |-
-  Subtitle
-server.global.subtitles: |-
-  Subtitles
-server.global.summary: |-
-  Summary
-server.global.sure_use_fl_after: |-
-  &nbsp;here?
-server.global.sure_use_fl_before: |-
-  Are you sure you want to use&nbsp;
-server.global.tags: |-
-  Tags
-server.global.time: |-
-  Time
-server.global.toggle: |-
-  Toggle
-server.global.top_10: |-
-  Top 10
-server.global.torrent: |-
-  Torrent
-server.global.torrents: |-
-  Torrents
-server.global.type: |-
-  Type
-server.global.unexpected_error_description: |-
-  You have encountered an unexpected error.
-server.global.unexpected_error_title: |-
-  Unexpected Error
-server.global.unsubscribe: |-
-  Unsubscribe
-server.global.uploaded: |-
-  Uploaded
-server.global.use_fl_tokens: |-
-  Use FL Token(s)
-server.global.user: |-
-  User
-server.global.users: |-
-  Users
-server.global.view_torrent: |-
-  View torrent
-server.global.wiki: |-
-  Wiki
-server.global.year: |-
-  Year
 server.inbox.a_recipient_does_not_exist: |-
   A recipient does not exist.
 server.inbox.back_to_inbox: |-
@@ -1824,9 +1769,8 @@ server.inbox.mark_as_unread: |-
   Mark as unread
 server.inbox.message: |-
   Message
-server.inbox.message_from_after: ''
-server.inbox.message_from_before: |-
-  Message from&nbsp;
+server.inbox.message_from: |-
+  Message from %s
 server.inbox.no_results: |-
   No results.
 server.inbox.placeholder_search: |-
@@ -1846,9 +1790,8 @@ server.inbox.request_filled_unfilled: |-
   A request you filled has been unfilled
 server.inbox.s: |-
   s
-server.inbox.send_a_message_to_user_after: ''
-server.inbox.send_a_message_to_user_before: |-
-  Send a message to&nbsp;
+server.inbox.send_a_message_to_user: |-
+  Send a message to %s
 server.inbox.send_message: |-
   Send message
 server.inbox.sender: |-
@@ -1969,10 +1912,9 @@ server.login.2fa_key: |-
   2FA Key
 server.login.approved: |-
   approved
-server.login.attempts_1: |-
-  You have&nbsp;
-server.login.attempts_2: |-
-  &nbsp;attempts remaining.<br /><br /><strong>WARNING:</strong> You will be banned for 6 hours after your login attempts run out!<br />
+server.login.attempts: |-
+  You have %s attempts remaining.<br />
+  <strong>WARNING:</strong> You will be banned for 6 hours after your login attempts run out!
 server.login.back: |-
   Back
 server.login.cookies_disabled: |-
@@ -2001,18 +1943,12 @@ server.login.email_address_placeholder: |-
   Email Address
 server.login.email_send: |-
   An email has been sent to you; please follow the directions in that email to reset your password.
-server.login.enable_request_id_by_user_after: |-
-  &nbsp;by&nbsp;
-server.login.enable_request_id_by_user_before: |-
-  &nbsp;- Enable request&nbsp;
-server.login.enable_request_id_unresolved_by_after: |-
-  &nbsp;unresolved by&nbsp;
-server.login.enable_request_id_unresolved_by_before: |-
-  &nbsp;- Enable request&nbsp;
-server.login.enable_request_received_from_ip_after: |-
-  &nbsp;received from&nbsp;
-server.login.enable_request_received_from_ip_before: |-
-  &nbsp;- Enable request&nbsp;
+server.login.enable_request_id_by_user: |-
+  &nbsp;- Enable request %s by&nbsp;
+server.login.enable_request_id_unresolved_by: |-
+  &nbsp;- Enable request %s unresolved by&nbsp;
+server.login.enable_request_received_from_ip: |-
+  &nbsp;- Enable request %s received from&nbsp;
 server.login.enable_request_rejected_from_ip: |-
   &nbsp;- Enable request rejected from&nbsp;
 server.login.enter_valid_email: |-
@@ -2064,15 +2000,10 @@ server.login.remember_me: |-
   remember me
 server.login.requires_js: |-
   &nbsp;requires JavaScript to function properly. Please enable JavaScript in your browser.
-server.login.token_has_expired_please_visit_1: |-
-  Token has expired. Please visit&nbsp;
-server.login.token_has_expired_please_visit_2: |-
-  &nbsp;on&nbsp;
-server.login.token_has_expired_please_visit_3: |-
-  &nbsp;to discuss this with staff.
-server.login.tried_to_use_an_expired_token_before: |-
-  &nbsp;- Tried to use an expired enable token from&nbsp;
-  tried_to_use_an_expired_token_after:&nbsp;
+server.login.token_has_expired_please_visit: |-
+  Token has expired. Please visit %s on %s to discuss this with staff.
+server.login.tried_to_use_an_expired_token: |-
+  &nbsp;- Tried to use an expired enable token from %s&nbsp;
 server.login.two_factor_auth_key: |-
   Two-factor Auth Key
 server.login.two_factor_authentication: |-
@@ -2085,20 +2016,14 @@ server.login.username: |-
   Username
 server.login.warning: |-
   You have entered an invalid two-factor authentication key. Please login again.
-server.login.warning_disable_after: |-
-  .
-server.login.warning_disable_before: |-
-  You will be banned for&nbsp;
-server.login.you_are_banned_from_logging_1: |-
-  You are banned from logging in for another&nbsp;
-server.login.you_are_banned_from_logging_2: |-
-  .
+server.login.warning_disable: |-
+  You will be banned for %s.
+server.login.you_are_banned_from_logging: |-
+  You are banned from logging in for another %s.
 server.login.your_account_has_been_enabled: |-
   Your account has been enabled. You may now log in.<br>Please be sure to log in before 24:00 today or your account will be disabled again.
-server.login.your_enable_request_for_after: |-
-  &nbsp;has been&nbsp;
-server.login.your_enable_request_for_before: |-
-  Your enable request for&nbsp;
+server.login.your_enable_request_for: |-
+  Your enable request for {{CONFIG['SITE_NAME']}} has been&nbsp;
 server.permissions.admin_advanced_user_search: |-
   Can access advanced user search
 server.permissions.admin_bp_history: |-
@@ -2367,10 +2292,8 @@ server.pub.other_reports: |-
   &nbsp;other reports
 server.pub.public_index: |-
   Home
-server.pub.ratio_watch_you_have_after: |-
-  &nbsp;to get your ratio over your required ratio or your leeching abilities will be disabled.">Ratio Watch</a>
-server.pub.ratio_watch_you_have_before: |-
-  <a href="rules.php?p=ratio" data-tooltip="You have
+server.pub.ratio_watch_you_have: |-
+  <a href="rules.php?p=ratio" data-tooltip="You have %s to get your ratio over your required ratio or your leeching abilities will be disabled.">Ratio Watch</a>
 server.pub.ratio_watch_your_dl_privileges: |-
   <a href="rules.php?p=ratio" data-tooltip="Your downloading privileges are disabled until you meet your required ratio">Ratio Watch</a>
 server.pub.referral: |-
@@ -2397,36 +2320,24 @@ server.pub.user_manage: |-
   Application
 server.pub.you_have_space: |-
   You have&nbsp;
-server.referral.an_error_1: |-
-  There was an error verifying your account at&nbsp;
-server.referral.an_error_2: |-
-  . Please refresh the page and try again.
-server.referral.another_tracker_we_trust_1: |-
-  Here you are able to gain access to&nbsp;
-server.referral.another_tracker_we_trust_2: |-
-  &nbsp;by verifying that you are a member of another private tracker that we trust.
+server.referral.an_error: |-
+  There was an error verifying your account at %s. Please refresh the page and try again.
+server.referral.another_tracker_we_trust: |-
+  Here you are able to gain access to {{CONFIG['SITE_NAME']}} by verifying that you are a member of another private tracker that we trust.
 server.referral.choose_a_tracker: |-
   Choose a Tracker:
 server.referral.choose_a_tracker_you_are_member: |-
   Choose a tracker from the list that you're a member of.
-server.referral.congratulations_1: |-
-  Congratulations, you have verified your account at&nbsp;
-server.referral.congratulations_2: |-
-  . We have sent you an email that has been sent to the address you specified. Make sure to check your spam folder! Welcome to&nbsp;
-server.referral.copy_and_paste_the_code_1: |-
-  Copy and paste the code below into the profile of your&nbsp;
-server.referral.copy_and_paste_the_code_2: |-
-  &nbsp;account. It can go anywhere in your profile body (commonly known as "Profile info 1") as long as it is in one piece.
+server.referral.congratulations: |-
+  Congratulations, you have verified your account at %s. We have sent you an email that has been sent to the address you specified. Make sure to check your spam folder! Welcome to {{CONFIG['SITE_NAME']}}!
+server.referral.copy_and_paste_the_code: |-
+  Copy and paste the code below into the profile of your %s account. It can go anywhere in your profile body (commonly known as "Profile info 1") as long as it is in one piece.
 server.referral.email_address: |-
   Email Address
-server.referral.enter_username_at_1: |-
-  Enter the username you use at&nbsp;
-server.referral.enter_username_at_2: |-
-  &nbsp;exactly as it appears on the site. This is critical in verifying your account.
-server.referral.enter_your_username_1: |-
-  Enter your username and&nbsp;
-server.referral.enter_your_username_2: |-
-  &nbsp;will verify your membership and issue an invite code to you.
+server.referral.enter_username_at: |-
+  Enter the username you use at %s exactly as it appears on the site. This is critical in verifying your account.
+server.referral.enter_your_username: |-
+  Enter your username and {{CONFIG['SITE_NAME']}} will verify your membership and issue an invite code to you.
 server.referral.exclamation_mark: |-
   !
 server.referral.external_tracker_referrals: |-
@@ -2519,9 +2430,8 @@ server.reports.body: |-
   Body
 server.reports.claim: |-
   Claim
-server.reports.claimed_by_after: ''
-server.reports.claimed_by_before: |-
-  Claimed by&nbsp;
+server.reports.claimed_by: |-
+  Claimed by %s
 server.reports.collage: |-
   Collage
 server.reports.comment: |-
@@ -2664,18 +2574,14 @@ server.reports.request: |-
   Request
 server.reports.request_update: |-
   Request (Update)
-server.reports.resolved_by_after: ''
-server.reports.resolved_by_before: |-
-  Resolved by&nbsp;
-server.reports.send_a_message_to_after: ''
-server.reports.send_a_message_to_before: |-
-  Send a message to&nbsp;
+server.reports.resolved_by: |-
+  Resolved by %s
+server.reports.send_a_message_to: |-
+  Send a message to %s
 server.reports.stats: |-
   Stats
-server.reports.sth_was_reported_by_user_sometime_after: |-
-  &nbsp;
-server.reports.sth_was_reported_by_user_sometime_before: |-
-  &nbsp;was reported by&nbsp;
+server.reports.sth_was_reported_by_user_sometime: |-
+  &nbsp;was reported by %s
 server.reports.subject: |-
   Subject
 server.reports.threads_trashed_since_the_beginning_of_time: |-
@@ -2700,31 +2606,24 @@ server.reports.yes: |-
   Yes
 server.reports.you_cannot_start_a_conversation_with_yourself: |-
   You cannot start a conversation with yourself!
-server.reports.you_reported_sth_for_the_reason_after: |-
-  &nbsp;for the reason
-server.reports.you_reported_sth_for_the_reason_before: |-
-  You reported&nbsp;
+server.reports.you_reported_sth_for_the_reason: |-
+  You reported %s for the reason
 server.reportsv2.a_torrent_with_that_id_does_not_exist: |-
   A torrent with that ID doesn't exist!
 server.reportsv2.all_new_reports_for_the_chosen_type: |-
   All new reports for the chosen type
-server.reportsv2.all_reports_for_the_torrent_after: ''
-server.reportsv2.all_reports_for_the_torrent_before: |-
-  All reports for the torrent&nbsp;
-server.reportsv2.all_reports_for_torrents_uploaded_by_after: ''
-server.reportsv2.all_reports_for_torrents_uploaded_by_before: |-
-  All reports for torrents uploaded by&nbsp;
-server.reportsv2.all_reports_for_torrents_uploaded_by_user_after: ''
-server.reportsv2.all_reports_for_torrents_uploaded_by_user_before: |-
-  All reports for torrents uploaded by user&nbsp;
+server.reportsv2.all_reports_for_the_torrent: |-
+  All reports for the torrent %s
+server.reportsv2.all_reports_for_torrents_uploaded_by: |-
+  All reports for torrents uploaded by %s
+server.reportsv2.all_reports_for_torrents_uploaded_by_user: |-
+  All reports for torrents uploaded by user %s;
 server.reportsv2.all_the_old_smelly_reports: |-
   All the old smelly reports
-server.reportsv2.all_torrents_reported_by_after: ''
-server.reportsv2.all_torrents_reported_by_before: |-
-  All torrents reported by&nbsp;
-server.reportsv2.all_torrents_reported_by_user_after: ''
-server.reportsv2.all_torrents_reported_by_user_before: |-
-  All torrents reported by user&nbsp;
+server.reportsv2.all_torrents_reported_by: |-
+  All torrents reported by %s
+server.reportsv2.all_torrents_reported_by_user: |-
+  All torrents reported by user %s
 server.reportsv2.also_space: |-
   also&nbsp;
 server.reportsv2.and_until: |-
@@ -2852,35 +2751,14 @@ server.reportsv2.report_introduction: |-
   <p><strong>Choosing the accurate type (<a href="wiki.php?action=article&name=种子报告系统指南">guide</a>) and following the notes below will help the moderators handle your report in a timely fashion.</strong></p>
 server.reportsv2.report_type: |-
   Report type
-server.reportsv2.report_was_handled_by_user_after: |-
-  [/user].
-server.reportsv2.report_was_handled_by_user_before: |-
-  Report was handled by [user]
+server.reportsv2.report_was_handled_by_user: |-
+  Report was handled by [user]%s[/user].
 server.reportsv2.reported_by: |-
   Reported by
-server.reportsv2.reported_torrent: |-
-  Torrent
-server.reportsv2.reported_torrent_1: |-
-  Reported
-server.reportsv2.reported_torrent_2: |-
-  torrent
 server.reportsv2.reporter: |-
   Reporter
 server.reportsv2.reports: |-
   Reports
-server.reportsv2.reports_created_by_after: ''
-server.reportsv2.reports_created_by_before: |-
-  Reports created by
-server.reportsv2.reports_for_torrents_resolved_by_after: ''
-server.reportsv2.reports_for_torrents_resolved_by_before: |-
-  Reports for torrents resolved by
-server.reportsv2.reports_for_torrents_uploaded_by_after: ''
-server.reportsv2.reports_for_torrents_uploaded_by_before: |-
-  Reports for torrents uploaded by
-server.reportsv2.reports_of_torrents_with_id_1: |-
-  Reports of torrents with ID = 1
-server.reportsv2.reports_of_torrents_within_the_group_with_id_1: |-
-  Reports of torrents within the group with ID = 1
 server.reportsv2.reports_v2: |-
   Reports V2!
 server.reportsv2.reports_v2_information: |-
@@ -2921,36 +2799,23 @@ server.reportsv2.the_extra_pl_you_gave_included_the_link_to_the_torrent_you_are_
   The extra permalinks you gave included the link to the torrent you're reporting!
 server.reportsv2.the_pl_was_incorrect_it_should_look_like_torrents_php_torrentid_12345: |-
   The permalink was incorrect. It should look like&nbsp;
-server.reportsv2.the_report_with_id_1: |-
-  The report with ID = 1
-server.reportsv2.there_are_n_other_reports_for_torrents_in_this_group_1: |-
-  There&nbsp;
-server.reportsv2.there_are_n_other_reports_for_torrents_in_this_group_2: |-
-  are
-server.reportsv2.there_are_n_other_reports_for_torrents_in_this_group_3: |-
-  other reports
-server.reportsv2.there_are_n_other_reports_for_torrents_in_this_group_4: |-
+server.reportsv2.there_are_n_other_reports_for_torrents_in_this_group: |-
+  There %s for torrent(s) in this group
+server.reportsv2.there_are_n_other_reports_for_torrents_in_this_group_report_one: |-
   is 1 other report
-server.reportsv2.there_are_n_other_reports_for_torrents_in_this_group_5: |-
-  &nbsp;for torrent(s) in this group
-server.reportsv2.there_are_n_other_reports_for_torrents_uploaded_by_this_user_1: |-
-  There&nbsp;
-server.reportsv2.there_are_n_other_reports_for_torrents_uploaded_by_this_user_2: |-
-  are
-server.reportsv2.there_are_n_other_reports_for_torrents_uploaded_by_this_user_3: |-
-  other reports
-server.reportsv2.there_are_n_other_reports_for_torrents_uploaded_by_this_user_4: |-
+server.reportsv2.there_are_n_other_reports_for_torrents_in_this_group_report_other: |-
+  are %s other_reports
+server.reportsv2.there_are_n_other_reports_for_torrents_uploaded_by_this_user: |-
+  There %s for torrent(s) uploaded by this user
+server.reportsv2.there_are_n_other_reports_for_torrents_uploaded_by_this_user_count_other: |-
+  are %s other reports
+server.reportsv2.there_are_n_other_reports_for_torrents_uploaded_by_this_user_count_one: |-
   is 1 other report
 server.reportsv2.there_are_n_other_reports_for_torrents_uploaded_by_this_user_5: |-
-  &nbsp;for torrent(s) uploaded by this user
-server.reportsv2.this_has_resulted_in_an_n_week_warning_after: |-
-  &nbsp;week warning.[/url]
-server.reportsv2.this_has_resulted_in_an_n_week_warning_before: |-
-  This has resulted in a [url=
-server.reportsv2.this_has_resulted_in_the_loss_of_your_upload_privilege_after: |-
-  resulted in the loss of your upload privileges.
-server.reportsv2.this_has_resulted_in_the_loss_of_your_upload_privilege_before: |-
-  This has&nbsp;
+server.reportsv2.this_has_resulted_in_an_n_week_warning: |-
+  This has resulted in a [url=%s&nbsp;week warning.[/url]
+server.reportsv2.this_has_resulted_in_the_loss_of_your_upload_privilege: |-
+  This has %sresulted in the loss of your upload privileges.
 server.reportsv2.this_request: |-
   this request
 server.reportsv2.time_a: |-
@@ -2975,19 +2840,14 @@ server.reportsv2.unclaim_all: |-
   Unclaim all
 server.reportsv2.unclaim_all_btn_title: |-
   Unclaim all of the reports currently displayed
-server.reportsv2.unresolved_reports_for_the_group_after: ''
-server.reportsv2.unresolved_reports_for_the_group_before: |-
-  Unresolved reports for the group&nbsp;
+server.reportsv2.unresolved_reports_for_the_group: |-
+  Unresolved reports for the group %s
 server.reportsv2.update_now_title: |-
   Update resolve type
 server.reportsv2.upload_time: |-
   Upload time
 server.reportsv2.uploaded_by: |-
   Uploaded by
-server.reportsv2.uploaded_by_sb_on_st_1: |-
-  uploaded by
-server.reportsv2.uploaded_by_sb_on_st_2: |-
-  on
 server.reportsv2.uploader: |-
   Uploader
 server.reportsv2.uploader_s_reply: |-
@@ -3002,38 +2862,22 @@ server.reportsv2.view_old_reports: |-
   View old reports
 server.reportsv2.view_your_claimed_reports: |-
   View your claimed reports
-server.reportsv2.viewing_resolution_of_report_after: ''
-server.reportsv2.viewing_resolution_of_report_before: |-
-  Viewing resolution of report&nbsp;
+server.reportsv2.viewing_resolution_of_report: |-
+  Viewing resolution of report %s
 server.reportsv2.views: |-
   Views
 server.reportsv2.warning: |-
   Warning
 server.reportsv2.warning_title: |-
   Warning length in weeks
-server.reportsv2.was_reported_by_sb_st_for_the_reason_1: |-
-  was reported by
-server.reportsv2.was_reported_by_sb_st_for_the_reason_2: ''
-server.reportsv2.was_reported_by_sb_st_for_the_reason_3: |-
-  for the reason
-server.reportsv2.you_are_missing_a_required_filed_for_a_report_1: |-
-  You are missing a required field (
-server.reportsv2.you_are_missing_a_required_filed_for_a_report_2: |-
-  ) for a&nbsp;
-server.reportsv2.you_are_missing_a_required_filed_for_a_report_3: |-
-  &nbsp;report.
-server.reportsv2.your_above_torrent_was_reported_and_has_been_deleted_after: |-
-  ]Your above torrent[/url] was reported and has been deleted.
-server.reportsv2.your_above_torrent_was_reported_and_has_been_deleted_before: |-
-  [url=
-server.reportsv2.your_above_torrent_was_reported_but_not_been_deleted_after: |-
-  ]Your above torrent[/url] was reported but not been deleted.
-server.reportsv2.your_above_torrent_was_reported_but_not_been_deleted_before: |-
-  [url=
-server.reportsv2.your_torrent_is_now_displayed_on_better_php_and_trumpable_after: |-
-  better.php]Better.php[/url] and trumpable. Of course you may fix the torrent yourself and reuploaded the fixed one. Then you need to report he old one, choose "Trump" as the reason, then describe the issue you fixed in detail, and make sure you provide the permalink of new torrent.
-server.reportsv2.your_torrent_is_now_displayed_on_better_php_and_trumpable_before: |-
-  Your torrent is now displayed on [url=
+server.reportsv2.you_are_missing_a_required_filed_for_a_report: |-
+  You are missing a required field (%s) for a %s report.
+server.reportsv2.your_above_torrent_was_reported_and_has_been_deleted: |-
+  [url=%s]Your above torrent[/url] was reported and has been deleted.
+server.reportsv2.your_above_torrent_was_reported_but_not_been_deleted: |-
+  [url=%s]Your above torrent[/url] was reported but not been deleted.
+server.reportsv2.your_torrent_is_now_displayed_on_better_php_and_trumpable: |-
+  Your torrent is now displayed on [url=%s/better.php]Better.php[/url] and trumpable. Of course you may fix the torrent yourself and reuploaded the fixed one. Then you need to report he old one, choose "Trump" as the reason, then describe the issue you fixed in detail, and make sure you provide the permalink of new torrent.
 server.requests.acceptable_codecs: |-
   Acceptable codecs
 server.requests.acceptable_containers: |-
@@ -3175,10 +3019,8 @@ server.requests.post_vote_information: |-
   Post vote information
 server.requests.pst: |-
   Post request information
-server.requests.pst_1: |-
-  If you add the entered
-server.requests.pst_2: |-
-  of bounty, your new stats will be:
+server.requests.pst_body: |-
+  If you add the entered %s of bounty, your new stats will be:
 server.requests.purchasable_at: |-
   Purchasable at
 server.requests.purchasable_at_placeholder: |-
@@ -3197,19 +3039,16 @@ server.requests.request_update: |-
   Request update
 server.requests.requests: |-
   Requests
-server.requests.requests_created_by_after: ''
-server.requests.requests_created_by_before: |-
-  Requests created by&nbsp;
-server.requests.requests_filled_by_after: ''
-server.requests.requests_filled_by_before: |-
-  Requests filled by&nbsp;
+server.requests.requests_created_by: |-
+  Requests created by %s
+server.requests.requests_filled_by: |-
+  Requests filled by %s
 server.requests.requests_i_have_filled: |-
   Requests I have filled
 server.requests.requests_i_have_voted_on: |-
   Requests I have voted on
-server.requests.requests_voted_for_by_after: ''
-server.requests.requests_voted_for_by_before: |-
-  Requests voted for by&nbsp;
+server.requests.requests_voted_for_by: |-
+  Requests voted for by %s
 server.requests.require_one_codec: |-
   You must require at least one codec.
 server.requests.require_one_container: |-
@@ -3890,10 +3729,8 @@ server.tools.cache_increment: |-
   Cache Increment
 server.tools.calendar: |-
   Calendar
-server.tools.cannot_merge_tag_with_itself_after: |-
-  &nbsp;with itself!
-server.tools.cannot_merge_tag_with_itself_before: |-
-  Cannot merge tag&nbsp;
+server.tools.cannot_merge_tag_with_itself: |-
+  Cannot merge tag %s with itself!
 server.tools.cas_update_success: |-
   CAS/Update (Success)
 server.tools.cas_update_success_title_1: |-
@@ -4106,9 +3943,8 @@ server.tools.expires: |-
   Expires
 server.tools.explanation_thread: |-
   Please read <a href="forums.php?action=viewthread&threadid=123">this thread</a> to know how your data and salary counted.
-server.tools.failed_to_get_stats_for_user_after: ''
-server.tools.failed_to_get_stats_for_user_before: |-
-  Failed to get stats for user&nbsp;
+server.tools.failed_to_get_stats_for_user: |-
+  Failed to get stats for user %s
 server.tools.failed_to_get_tracker_info: |-
   Failed to get tracker info
 server.tools.feature_torrent: |-
@@ -4387,9 +4223,8 @@ server.tools.min_class_write: |-
   Min class write
 server.tools.misc: |-
   Misc
-server.tools.month_after: ''
-server.tools.month_before: |-
-  &nbsp;-&nbsp;
+server.tools.month: |-
+  &nbsp;-&nbsp;%s
 server.tools.multi_key: |-
   Multi-key
 server.tools.multiple_freeleech: |-
@@ -4402,9 +4237,8 @@ server.tools.net_growth: |-
   Net Growth
 server.tools.neutral_leech: |-
   Neutral leech
-server.tools.new_donations_from_after: ''
-server.tools.new_donations_from_before: |-
-  New donations from&nbsp;
+server.tools.new_donations_from: |-
+  New donations from %s
 server.tools.new_official_tag: |-
   New official tag
 server.tools.news_post: |-
@@ -4765,22 +4599,16 @@ server.tools.temporary: |-
   Temporary
 server.tools.tg_group: |-
   TG group
-server.tools.there_are_currently_enabled_users_on_ratio_watch_1: |-
-  There are currently
-server.tools.there_are_currently_enabled_users_on_ratio_watch_2: |-
-  enabled users on Ratio Watch and
-server.tools.there_are_currently_enabled_users_on_ratio_watch_3: |-
-  already disabled.
+server.tools.there_are_currently_enabled_users_on_ratio_watch: |-
+  There are currently %s enabled users on Ratio Watch and %s already disabled.
 server.tools.there_are_currently_no_users_on_ratio_watch: |-
   There are currently no users on ratio watch.
 server.tools.there_are_no_permission_classes: |-
   There are no permission classes.
 server.tools.there_are_no_stylesheets: |-
   There are no stylesheets.
-server.tools.there_are_no_users_with_more_than_n_ip_overlaps_after: |-
-  IP overlaps.
-server.tools.there_are_no_users_with_more_than_n_ip_overlaps_before: |-
-  There are currently no users with more than
+server.tools.there_are_no_users_with_more_than_n_ip_overlaps: |-
+  There are currently no users with more than %s IP overlaps.
 server.tools.there_have_been_no_new_registrations_in_the_past_72_hours: |-
   There have been no new registrations in the past 72 hours.
 server.tools.threads_active: |-
@@ -4891,10 +4719,8 @@ server.tools.user_agent: |-
   User Agent
 server.tools.user_count: |-
   User count
-server.tools.user_does_not_exist_after: |-
-  &nbsp;doesn't exist
-server.tools.user_does_not_exist_before: |-
-  User&nbsp;
+server.tools.user_does_not_exist: |-
+  User %s doesn't exist
 server.tools.user_flow: |-
   User flow
 server.tools.user_flow_vs_time: |-
@@ -4933,8 +4759,8 @@ server.tools.words_must_be_separated_by_underscores: |-
   Words must be separated by underscores
 server.tools.work_statistical_graph: |-
   Work Statistical Graph
-server.tools.year_after: ''
-server.tools.year_before: ''
+server.tools.year: |-
+  %s
 server.tools.yes: |-
   Yes
 server.top10.all: |-
@@ -5041,16 +4867,14 @@ server.top10.tags: |-
   Tags
 server.top10.tags_comma: |-
   Tags (comma-separated)
-server.top10.the_first_week_after_after: ''
-server.top10.the_first_week_after_before: |-
-  the first week after&nbsp;
+server.top10.the_first_week_after: |-
+  the first week after %s
 server.top10.top: |-
   Top
 server.top10.top_10_donors: |-
   Top 10 Donors
-server.top10.top_10_for_after: ''
-server.top10.top_10_for_before: |-
-  Top 10 for&nbsp;
+server.top10.top_10_for: |-
+  Top 10 for %s
 server.top10.top_10_original_uploaders: |-
   Top 10 Original Uploaders
 server.top10.top_10_tags: |-
@@ -5153,7 +4977,9 @@ server.torrents.artist_alias_id: |-
   Artist ID
 server.torrents.asc: |-
   Ascending
-server.torrents.at: ''
+# at <time>
+server.torrents.at: |-
+  &nbsp;
 server.torrents.bad_filename: |-
   Bad Folders
 server.torrents.bad_files: |-
@@ -5176,9 +5002,8 @@ server.torrents.change_category: |-
   Change Category
 server.torrents.change_group: |-
   Change Group
-server.torrents.checked_by_after: ''
-server.torrents.checked_by_before: |-
-  Checked by&nbsp;
+server.torrents.checked_by: |-
+  Checked by %s
 server.torrents.checked_explanation: |-
   &nbsp;checked (this icon is only used to tell you if this torrent was checked, it's none of the business of the quality. Read wiki for more information)
 server.torrents.chi: |-
@@ -5367,8 +5192,6 @@ server.torrents.hide_tags: |-
   Hide Tags
 server.torrents.history_for_after: |-
   Edit History
-server.torrents.history_for_before: |-
-  History for&nbsp;
 server.torrents.history_for_group_after: |-
   Edit history
 server.torrents.hit_and_run: |-
@@ -5377,10 +5200,8 @@ server.torrents.hnr_is_not_opened_now: |-
   H&R is not opened now
 server.torrents.hnrs: |-
   H&Rs
-server.torrents.if_you_download_this_after: |-
-  .
-server.torrents.if_you_download_this_before: |-
-  If you download this, your ratio will become
+server.torrents.if_you_download_this: |-
+  If you download this, your ratio will become%s.
 server.torrents.image: |-
   Poster
 server.torrents.imdb_id: |-
@@ -5425,12 +5246,10 @@ server.torrents.mass_pm: |-
   Send PM To All Snatchers
 server.torrents.masspm: |-
   Mass PM snatchers
-server.torrents.matches_for_after: ''
-server.torrents.matches_for_before: |-
-  Matches for&nbsp;
-server.torrents.matches_for_unknown_filter_after: ''
-server.torrents.matches_for_unknown_filter_before: |-
-  Matches for unknown filter
+server.torrents.matches_for: |-
+  Matches for %s
+server.torrents.matches_for_unknown_filter: |-
+  Matches for unknown filter %s
 server.torrents.media_info: |-
   Media info
 server.torrents.merge_confirm: |-
@@ -5578,14 +5397,10 @@ server.torrents.revert: |-
   Revert to this revision
 server.torrents.revert_confirm: |-
   Revert Confirm!
-server.torrents.revert_confirm_body_1: |-
-  You are attempting to revert to the revision
-server.torrents.revert_confirm_body_2: |-
-  .
+server.torrents.revert_confirm_body: |-
+  You are attempting to revert to the revision %s.
 server.torrents.revision_history_after: |-
   Revision history
-server.torrents.revision_history_before: |-
-  Revision history for&nbsp;
 server.torrents.reward_100_bonus_to_uploader: |-
   Reward 100 bonus to uploader
 server.torrents.reward_300_bonus_to_uploader: |-
@@ -5642,10 +5457,8 @@ server.torrents.show_downloads_title: |-
   View the list of users that have clicked the "DL" button.
 server.torrents.show_snatches_title: |-
   View the list of users that have reported a snatch to the tracker.
-server.torrents.showing_first_n_matches_after: |-
-  &nbsp;matches
-server.torrents.showing_first_n_matches_before: |-
-  Showing first&nbsp;
+server.torrents.showing_first_n_matches: |-
+  Showing first %s matches
 server.torrents.size: |-
   Size
 server.torrents.slot_action: |-
@@ -5698,50 +5511,28 @@ server.torrents.tags: |-
   Tags (comma-separated)
 server.torrents.the_destination_torrent_group_does_not_exist: |-
   The destination torrent group does not exist!
-server.torrents.there_are_n_other_reports_for_torrents_in_this_group_1: |-
-  There&nbsp;
-server.torrents.there_are_n_other_reports_for_torrents_in_this_group_2: |-
-  are
-server.torrents.there_are_n_other_reports_for_torrents_in_this_group_3: |-
-  other reports
-server.torrents.there_are_n_other_reports_for_torrents_in_this_group_4: |-
-  is 1 other report
-server.torrents.there_are_n_other_reports_for_torrents_in_this_group_5: |-
-  &nbsp;for torrent(s) in this group
-server.torrents.there_are_n_other_reports_for_torrents_uploaded_by_this_user_1: |-
-  There&nbsp;
-server.torrents.there_are_n_other_reports_for_torrents_uploaded_by_this_user_2: |-
-  are
-server.torrents.there_are_n_other_reports_for_torrents_uploaded_by_this_user_3: |-
-  other reports
-server.torrents.there_are_n_other_reports_for_torrents_uploaded_by_this_user_4: |-
-  is 1 other report
-server.torrents.there_are_n_other_reports_for_torrents_uploaded_by_this_user_5: |-
-  &nbsp;for torrent(s) uploaded by this user
 server.torrents.there_are_no_tags_to_display: |-
   There are no tags to display.
-server.torrents.this_album_is_in_collages_1: |-
-  This movie is in
-server.torrents.this_album_is_in_collages_2: |-
-  collage
-server.torrents.this_album_is_in_collages_3: |-
-  s
-server.torrents.this_album_is_in_personal_collages_1: |-
-  This movie is in
-server.torrents.this_album_is_in_personal_collages_2: |-
-  personal collage
-server.torrents.this_album_is_in_personal_collages_3: |-
-  s
+server.torrents.this_album_is_in_collages: |-
+  This movie is in %s
+server.torrents.this_album_is_in_collages_count_one: |-
+  %s collage
+server.torrents.this_album_is_in_collages_count_other: |-
+  %s collages
+server.torrents.this_album_is_in_personal_collages: |-
+  This movie is in %s
+server.torrents.this_album_is_in_personal_collages_count_one: |-
+  %s personal collage
+server.torrents.this_album_is_in_personal_collages_count_other: |-
+  %s personal collages
 server.torrents.this_request: |-
   this request
-server.torrents.this_torrent_has_active_reports_1: |-
-  This torrent has&nbsp;
-server.torrents.this_torrent_has_active_reports_2: |-
-  &nbsp;active&nbsp;
-server.torrents.this_torrent_has_active_reports_3: |-
-  report
-server.torrents.this_torrent_has_active_reports_4: |-
-  reports
+server.torrents.this_torrent_has_active_reports: |-
+  This torrent has %s active %s
+server.torrents.this_torrent_has_active_reports_count_one: |-
+  %s report
+server.torrents.this_torrent_has_active_reports_count_other: |-
+  %s reports
 server.torrents.time: |-
   Time
 server.torrents.title: |-
@@ -5806,9 +5597,8 @@ server.torrents.untouched_type_slot: |-
   Untouched type slot (including Remux, Untouched & DIY)
 server.torrents.up_this_session: |-
   Up (this session)
-server.torrents.upload_by_after: ''
-server.torrents.upload_by_before: |-
-  Uploaded by&nbsp;
+server.torrents.upload_by: |-
+  Uploaded by %s
 server.torrents.upload_torrent: |-
   Upload torrent
 server.torrents.uploader_replied_it: |-
@@ -5879,10 +5669,8 @@ server.torrents.year: |-
   Year
 server.torrents.yes: |-
   Yes
-server.torrents.you_are_attempt_to_move_from_after: |-
-  &nbsp;from the group
-server.torrents.you_are_attempt_to_move_from_before: |-
-  You are attempting to move the torrent with ID&nbsp;
+server.torrents.you_are_attempt_to_move_from: |-
+  You are attempting to move the torrent with ID %s from the group
 server.torrents.you_are_attempting_to_merge: |-
   You are attempting to merge the group
 server.torrents.you_are_req: |-
@@ -6772,18 +6560,18 @@ server.user.min_1888: |-
   1888 min
 server.user.minimum_imdb_rating: |-
   Minimum IMDb rating
-server.user.n_users_are_disabled_1: |-
+server.user.n_users_are_disabled: |-
+  %s disabled (
+server.user.n_users_are_disabled_count_one: |-
   &nbsp;user is
-server.user.n_users_are_disabled_2: |-
+server.user.n_users_are_disabled_count_other: |-
   &nbsp;users are
-server.user.n_users_are_disabled_3: |-
-  &nbsp;disabled (
-server.user.n_users_have_donated_1: |-
+server.user.n_users_have_donated: |-
+  %s donated (
+server.user.n_users_have_donated_count_one: |-
   &nbsp;user has
-server.user.n_users_have_donated_2: |-
+server.user.n_users_have_donated_count_other: |-
   &nbsp;users have
-server.user.n_users_have_donated_3: |-
-  &nbsp;donated (
 server.user.name: |-
   Name
 server.user.new_password: |-
@@ -7398,14 +7186,8 @@ server.user.these_numbers_include_the_stats_of_paranoid_users_and: |-
   These numbers include the stats of paranoid users and will be factored into the invitation giving script.
 server.user.this_costs: |-
   This costs %d BP, which will leave you %d afterwards
-server.user.this_tree_has_n_entries_n_branches_and_a_depth_of_n_1: |-
-  This tree has&nbsp;
-server.user.this_tree_has_n_entries_n_branches_and_a_depth_of_n_2: |-
-  &nbsp;entries,&nbsp;
-server.user.this_tree_has_n_entries_n_branches_and_a_depth_of_n_3: |-
-  &nbsp;branches, and a depth of&nbsp;
-server.user.this_tree_has_n_entries_n_branches_and_a_depth_of_n_4: |-
-  . It has
+server.user.this_tree_has_n_entries_n_branches_and_a_depth_of_n: |-
+  This tree has %s entries, %s branches, and a depth of %s. It has
 server.user.thread_subscriptions: |-
   Thread subscriptions
 server.user.to_fuzzy_search_for_a_block_of_addresses_title: |-
@@ -7470,10 +7252,8 @@ server.user.true_uploaded_title: |-
   True Uploaded (Uploaded bought from Bonus Points Shop excluded)
 server.user.two_factor_authentication: |-
   Two-factor Authentication
-server.user.two_factor_authentication_note_1: |-
-  Please note that if you lose your 2FA key and all of your backup keys, the
-server.user.two_factor_authentication_note_2: |-
-  staff cannot help you retrieve your account. Ensure you keep your backup keys in a safe place.
+server.user.two_factor_authentication_note: |-
+  Please note that if you lose your 2FA key and all of your backup keys, the {{CONFIG['SITE_NAME']}} staff cannot help you retrieve your account. Ensure you keep your backup keys in a safe place.
 server.user.two_factor_authentication_note_3: |-
   We've generated a secure secret that only you and me should know. Please import it into your phone, either by
   scanning the QR key, or copying in the small text below that. We recommend using the Authy app which you can get
@@ -7604,9 +7384,8 @@ server.userhistory.elapsed: |-
   Elapsed
 server.userhistory.email: |-
   Email
-server.userhistory.email_history_for_after: ''
-server.userhistory.email_history_for_before: |-
-  Email history for&nbsp;
+server.userhistory.email_history_for: |-
+  Email history for %s
 server.userhistory.end: |-
   End
 server.userhistory.ended: |-
@@ -7617,9 +7396,8 @@ server.userhistory.expired: |-
   Expired
 server.userhistory.fl_token_history: |-
   Freeleech token history
-server.userhistory.fl_token_history_for_after: ''
-server.userhistory.fl_token_history_for_before: |-
-  Freeleech token history for&nbsp;
+server.userhistory.fl_token_history_for: |-
+  Freeleech token history for %s
 server.userhistory.forum: |-
   Forum
 server.userhistory.forums: |-
@@ -7640,9 +7418,8 @@ server.userhistory.invite_email: |-
   Invite email
 server.userhistory.ip_address: |-
   IP address
-server.userhistory.ip_address_history_for_after: ''
-server.userhistory.ip_address_history_for_before: |-
-  IP address history for&nbsp;
+server.userhistory.ip_address_history_for: |-
+  IP address history for %s
 server.userhistory.ip_address_search: |-
   IP address search
 server.userhistory.last_edited_by: |-
@@ -7661,10 +7438,8 @@ server.userhistory.new_torrent: |-
   new torrent
 server.userhistory.no: |-
   No
-server.userhistory.no_quotes_after: |-
-  &nbsp;quotes.
-server.userhistory.no_quotes_before: |-
-  No
+server.userhistory.no_quotes: |-
+  No %s quotes.
 server.userhistory.no_subscribed_collages: |-
   No subscribed collages
 server.userhistory.no_subscriptions: |-
@@ -7683,17 +7458,14 @@ server.userhistory.only_display_posts_with_unread_replies_grouped: |-
   Only display posts with unread replies (grouped)
 server.userhistory.only_display_subscriptions_with_unread_replies: |-
   Only display subscriptions with unread replies
-server.userhistory.passkey_history_for_after: ''
-server.userhistory.passkey_history_for_before: |-
-  PassKey history for&nbsp;
-server.userhistory.password_reset_history_for_after: ''
-server.userhistory.password_reset_history_for_before: |-
-  Password reset history for&nbsp;
+server.userhistory.passkey_history_for: |-
+  PassKey history for %s
+server.userhistory.password_reset_history_for: |-
+  Password reset history for %s
 server.userhistory.post_bodies: |-
   &nbsp;post bodies
-server.userhistory.post_history_for_after: ''
-server.userhistory.post_history_for_before: |-
-  Post history for&nbsp;
+server.userhistory.post_history_for: |-
+  Post history for %s
 server.userhistory.quote_notifications: |-
   Quote notifications
 server.userhistory.quoted_by: |-
@@ -7740,9 +7512,8 @@ server.userhistory.subscribed_collages: |-
   Subscribed collages
 server.userhistory.subscriptions: |-
   Subscriptions
-server.userhistory.threads_started_by_after: ''
-server.userhistory.threads_started_by_before: |-
-  Threads started by&nbsp;
+server.userhistory.threads_started_by: |-
+  Threads started by %s
 server.userhistory.time: |-
   Time
 server.userhistory.tokens_used: |-
@@ -7753,14 +7524,12 @@ server.userhistory.topic_creation_time: |-
   Topic Creation Time
 server.userhistory.torrent: |-
   Torrent
-server.userhistory.tracker_ip_address_history_for_after: ''
-server.userhistory.tracker_ip_address_history_for_before: |-
-  Tracker IP address history for&nbsp;
+server.userhistory.tracker_ip_address_history_for: |-
+  Tracker IP address history for %s
 server.userhistory.unread: |-
   unread&nbsp;
-server.userhistory.unread_post_history_for_after: ''
-server.userhistory.unread_post_history_for_before: |-
-  Unread post history for&nbsp;
+server.userhistory.unread_post_history_for: |-
+  Unread post history for %s
 server.userhistory.view_all_ip_address: |-
   View all IP addresses
 server.userhistory.view_ip_addresses_with_users: |-
@@ -7771,9 +7540,8 @@ server.userhistory.with_new_additions: |-
   &nbsp;with new additions
 server.userhistory.with_unread_posts: |-
   &nbsp;with unread posts
-server.userhistory.with_unread_posts_after: |-
-  &nbsp;with unread posts
-server.userhistory.with_unread_posts_before: ''
+server.userhistory.with_unread_posts_number: |-
+  with unread posts %s
 server.userhistory.yes: |-
   Yes
 server.wiki.add_alias: |-
@@ -7872,9 +7640,8 @@ server.wiki.read: |-
   Read
 server.wiki.replace_article: |-
   &nbsp;an article in its place.
-server.wiki.revision_history_after: ''
-server.wiki.revision_history_before: |-
-  Revision history for&nbsp;
+server.wiki.revision_history: |-
+  Revision history for %s
 server.wiki.revisions: |-
   Revisions
 server.wiki.search: |-

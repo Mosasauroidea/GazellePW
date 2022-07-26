@@ -88,17 +88,17 @@ if (!$ID) {
             $Order = 'ORDER BY r.LastChangeTime DESC';
             break;
         case 'group':
-            $Title = t('server.reportsv2.unresolved_reports_for_the_group_before') . "$ID" . t('server.reportsv2.unresolved_reports_for_the_group_after');
+            $Title = t('server.reportsv2.unresolved_reports_for_the_group', ['Values' => [$ID]]);
             $Where = "
 				WHERE r.Status != 'Resolved'
 					AND tg.ID = $ID";
             break;
         case 'torrent':
-            $Title = t('server.reportsv2.all_reports_for_the_torrent_before') . "$ID" . t('server.reportsv2.all_reports_for_the_torrent_after');
+            $Title = t('server.reportsv2.all_reports_for_the_torrent', ['Values' => [$ID]]);
             $Where = "WHERE r.TorrentID = $ID";
             break;
         case 'report':
-            $Title = t('server.reportsv2.viewing_resolution_of_report_before') . "$ID" . t('server.reportsv2.viewing_resolution_of_report_after');
+            $Title = t('server.reportsv2.viewing_resolution_of_report', ['Values' => [$ID]]);
             $Where = "WHERE r.ID = $ID";
             break;
         case 'reporter':
@@ -108,9 +108,9 @@ if (!$ID) {
 				WHERE ID = $ID");
             list($Username) = $DB->next_record();
             if ($Username) {
-                $Title = t('server.reportsv2.all_torrents_reported_by_before') . "$Username" . t('server.reportsv2.all_torrents_reported_by_after');
+                $Title = t('server.reportsv2.all_torrents_reported_by', ['Values' => [$Username]]);
             } else {
-                $Title = t('server.reportsv2.all_torrents_reported_by_user_before') . "$ID" . t('server.reportsv2.all_torrents_reported_by_user_after');
+                $Title = t('server.reportsv2.all_torrents_reported_by_user', ['Values' => [$ID]]);
             }
             $Where = "WHERE r.ReporterID = $ID";
             $Order = 'ORDER BY r.ReportedTime DESC';
@@ -122,9 +122,9 @@ if (!$ID) {
 				WHERE ID = $ID");
             list($Username) = $DB->next_record();
             if ($Username) {
-                $Title = t('server.reportsv2.all_reports_for_torrents_uploaded_by_before') . "$Username" . t('server.reportsv2.all_reports_for_torrents_uploaded_by_after');
+                $Title = t('server.reportsv2.all_reports_for_torrents_uploaded_by', ['Values' => [$Username]]);
             } else {
-                $Title = t('server.reportsv2.all_reports_for_torrents_uploaded_by_user_before') . "$ID" . t('server.reportsv2.all_reports_for_torrents_uploaded_by_user_after');
+                $Title = t('server.reportsv2.all_reports_for_torrents_uploaded_by_user', ['Values' => [$ID]]);
             }
             $Where = "
 				WHERE r.Status != 'Resolved'
@@ -330,13 +330,19 @@ View::show_header(t('server.reportsv2.reports_v2'), 'reportsv2,bbcode,browse', '
 						WHERE r.Status != 'Resolved'
 							AND t.GroupID = $GroupID");
                                             $GroupOthers = ($DB->record_count() - 1);
-
-                                            if ($GroupOthers > 0) { ?>
+                                        ?>
+                                            <? if ($GroupOthers > 0) { ?>
                                                 <div style="font-style: italic;">
-                                                    <a href="reportsv2.php?view=group&amp;id=<?= $GroupID ?>"><?= t('server.reportsv2.there_are_n_other_reports_for_torrents_in_this_group_1') ?><?= (($GroupOthers > 1) ? t('server.reportsv2.there_are_n_other_reports_for_torrents_in_this_group_2') . " $GroupOthers " . t('server.reportsv2.there_are_n_other_reports_for_torrents_in_this_group_3') : t('server.reportsv2.there_are_n_other_reports_for_torrents_in_this_group_4')) ?><?= t('server.reportsv2.there_are_n_other_reports_for_torrents_in_this_group_5') ?></a>
+                                                    <a href="reportsv2.php?view=group&amp;id=<?= $GroupID ?>">
+                                                        <?= t('server.reportsv2.there_are_n_other_reports_for_torrents_in_this_group', [
+                                                            'Values' => [
+                                                                t('server.reportsv2.there_are_n_other_reports_for_torrents_in_this_group_report', ['Count' => $GroupOthers, 'Values' => [$GroupOthers]]),
+                                                            ]
+                                                        ]) ?>
+                                                    </a>
                                                 </div>
-                                            <?                  }
-
+                                            <? } ?>
+                                            <?
                                             $DB->query("
 						SELECT t.UserID
 						FROM reportsv2 AS r
@@ -347,7 +353,11 @@ View::show_header(t('server.reportsv2.reports_v2'), 'reportsv2,bbcode,browse', '
 
                                             if ($UploaderOthers > 0) { ?>
                                                 <div style="font-style: italic;">
-                                                    <a href="reportsv2.php?view=uploader&amp;id=<?= $UploaderID ?>"><?= t('server.reportsv2.there_are_n_other_reports_for_torrents_uploaded_by_this_user_1') ?><?= (($UploaderOthers > 1) ? t('server.reportsv2.there_are_n_other_reports_for_torrents_uploaded_by_this_user_2') . " $UploaderOthers " . t('server.reportsv2.there_are_n_other_reports_for_torrents_uploaded_by_this_user_3') : t('server.reportsv2.there_are_n_other_reports_for_torrents_uploaded_by_this_user_4')) ?><?= t('server.reportsv2.there_are_n_other_reports_for_torrents_uploaded_by_this_user_5') ?></a>
+                                                    <a href="reportsv2.php?view=uploader&amp;id=<?= $UploaderID ?>">
+                                                        <?= t('server.reportsv2.there_are_n_other_reports_for_torrents_uploaded_by_this_user', ['Values' => [
+                                                            t('server.reportsv2.there_are_n_other_reports_for_torrents_uploaded_by_this_user_count', ['Count' => $UploaderOthers, 'Values' => [$UploaderOthers]])
+                                                        ]]) ?>
+                                                    </a>
                                                 </div>
                                                 <?                  }
 
@@ -543,7 +553,7 @@ View::show_header(t('server.reportsv2.reports_v2'), 'reportsv2,bbcode,browse', '
                                                 ?>
                                                 <? if (check_perms('users_mod')) { ?>
                                                     <span data-tooltip="<?= t('server.reportsv2.delete_title') ?>">
-                                                        <input type="checkbox" name="delete" id="delete<?= $ReportID ?>" />&nbsp;<label for="delete<?= $ReportID ?>"><strong><?= t('server.global.delete') ?></strong></label>
+                                                        <input type="checkbox" name="delete" id="delete<?= $ReportID ?>" />&nbsp;<label for="delete<?= $ReportID ?>"><strong><?= t('server.common.delete') ?></strong></label>
                                                     </span> |
                                                 <?              } ?>
                                                 <span data-tooltip="<?= t('server.reportsv2.remove_upload_privileges_title') ?>">
@@ -604,7 +614,7 @@ View::show_header(t('server.reportsv2.reports_v2'), 'reportsv2,bbcode,browse', '
                                             <?                  } else { ?>
                                                 <input class="Button" id="grab<?= $ReportID ?>" type="button" value="<?= t('server.reportsv2.claim') ?>" onclick="Grab(<?= $ReportID ?>);" />
                                             <?                  }   ?>
-                                            <input class="Button" type="button" id="submit_<?= $ReportID ?>" value="<?= t('server.global.submit') ?>" onclick="TakeResolve(<?= $ReportID ?>);" />
+                                            <input class="Button" type="button" id="submit_<?= $ReportID ?>" value="<?= t('server.common.submit') ?>" onclick="TakeResolve(<?= $ReportID ?>);" />
                                         </td>
                                     </tr>
                                 <? } else { ?>

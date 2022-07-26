@@ -1078,7 +1078,7 @@ WHERE xs.uid =" . $UserID . " and xs.tstamp >= unix_timestamp(date_format(now(),
                     </script>
 
                     <div class="Box-header"><a href="/badges.php"><?= t('server.user.badge_center') ?></a>
-                        <span style="float: right;"><a href="#" onclick="badgesDisplay()"><?= t('server.global.hide') ?></a></span>
+                        <span style="float: right;"><a href="#" onclick="badgesDisplay()"><?= t('server.common.hide') ?></a></span>
                     </div>
 
                     <div id="badge_display_head" class="Box-body badge_display">
@@ -1126,7 +1126,7 @@ WHERE xs.uid =" . $UserID . " and xs.tstamp >= unix_timestamp(date_format(now(),
             <div class="Box">
                 <div class="Box-header">
                     <div><?= !empty($InfoTitle) ? $InfoTitle : t('server.user.infotitle'); ?>
-                        <a class="floatright" href="#" onclick="$('#profilediv').gtoggle(); this.innerHTML = (this.innerHTML == '<?= t('server.global.hide') ?>' ? '<?= t('server.global.show') ?>' : '<?= t('server.global.hide') ?>'); return false;"><?= t('server.global.hide') ?></a>
+                        <a class="floatright" href="#" onclick="$('#profilediv').gtoggle(); this.innerHTML = (this.innerHTML == '<?= t('server.common.hide') ?>' ? '<?= t('server.common.show') ?>' : '<?= t('server.common.hide') ?>'); return false;"><?= t('server.common.hide') ?></a>
                     </div>
                 </div>
                 <div class="Box-body HtmlText PostArticle profileinfo" id="profilediv">
@@ -1318,7 +1318,7 @@ WHERE xs.uid =" . $UserID . " and xs.tstamp >= unix_timestamp(date_format(now(),
                 ?>
                     <div class="Box" id="requests_box">
                         <div class="Box-header">
-                            <?= t('server.global.requests') ?> <a href="#" onclick="$('#requests').gtoggle(); return false;"><?= t('server.user.view') ?></a>
+                            <?= t('server.common.requests') ?> <a href="#" onclick="$('#requests').gtoggle(); return false;"><?= t('server.user.view') ?></a>
                         </div>
                         <div class="Box-body TableCotainer hidden" id="requests">
                             <table class="Table TableRequest" cellpadding="6" cellspacing="1" border="0" width="100%">
@@ -1848,7 +1848,7 @@ WHERE xs.uid =" . $UserID . " and xs.tstamp >= unix_timestamp(date_format(now(),
                                             </div>
                                             <div class="Checkbox">
                                                 <input class="Input" type="checkbox" name="DisableRequests" id="DisableRequests" <? if ($DisableRequests == 1) { ?> checked="checked" <? } ?> />
-                                                <label class="Checkbox-label" for="DisableRequests"><?= t('server.global.requests') ?></label>
+                                                <label class="Checkbox-label" for="DisableRequests"><?= t('server.common.requests') ?></label>
                                             </div>
                                             <div class="Checkbox">
                                                 <input class="Input" type="checkbox" name="DisableUpload" id="DisableUpload" <? if ($DisableUpload == 1) { ?> checked="checked" <? } ?> />

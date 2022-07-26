@@ -67,9 +67,12 @@ window.lang = {
     return lang
   },
 
-  get(key, { defaultValue, ...rest } = {}) {
+  get(key, { defaultValue, count, ...rest } = {}) {
     const locale = LOCALES[this.lang()]
     defaultValue = defaultValue !== undefined ? defaultValue : key
+    if (typeof count === 'number') {
+      key = count === 1 ? `${key}_one` : `${key}_other`
+    }
     let value = get(locale, key, defaultValue)
     if (isString(value)) {
       value = template(value)({ CONFIG: window.DATA.CONFIG, ...rest })

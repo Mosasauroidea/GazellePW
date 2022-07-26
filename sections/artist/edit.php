@@ -30,7 +30,7 @@ View::show_header(t('server.artist.edit_artist'), 'PageArtistEdit');
 ?>
 <div class="LayoutBody">
     <div class="BodyHeader">
-        <h2 class="BodyHeader-nav"><?= t('server.global.edit') ?><?= $ArtistName ?></h2>
+        <h2 class="BodyHeader-nav"><?= t('server.common.edit') ?><?= $ArtistName ?></h2>
     </div>
     <form class="edit_form" name="artist" action="artist.php" method="post">
         <input type="hidden" name="action" value="edit" />
@@ -64,7 +64,7 @@ View::show_header(t('server.artist.edit_artist'), 'PageArtistEdit');
                 </div>
             </div>
             <div class="Form-row">
-                <input class="Button" type="submit" value="<?= t('server.global.submit') ?>" />
+                <input class="Button" type="submit" value="<?= t('server.common.submit') ?>" />
             </div>
         </div>
     </form>
@@ -77,7 +77,7 @@ View::show_header(t('server.artist.edit_artist'), 'PageArtistEdit');
 
                 <div class="Form-row FormOneLine">
                     <input class="Input is-small" type="text" name="name" size="92" value="<?= $Name ?>" />
-                    <input class="Button" type="submit" value="<?= t('server.global.rename') ?>" />
+                    <input class="Button" type="submit" value="<?= t('server.common.rename') ?>" />
                 </div>
             </div>
             <input type="hidden" name="action" value="rename" />
@@ -173,7 +173,7 @@ View::show_header(t('server.artist.edit_artist'), 'PageArtistEdit');
                         <?  } ?>
                     </select>
                 </div>
-                <input class="Button" type="submit" value="<?= t('server.global.add') ?>" />
+                <input class="Button" type="submit" value="<?= t('server.common.add') ?>" />
             </div>
         </div>
         <div class="Form-row">

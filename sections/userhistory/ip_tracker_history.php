@@ -36,7 +36,7 @@ if (!check_perms('users_view_ips', $Class)) {
 
 $UsersOnly = $_GET['usersonly'];
 
-View::show_header(t('server.userhistory.tracker_ip_address_history_for_before') . "$Username" . t('server.userhistory.tracker_ip_address_history_for_after'), '', 'PageUserHistoryIPTracker');
+View::show_header(t('server.userhistory.tracker_ip_address_history_for', ['Values' => [$Username]]), '', 'PageUserHistoryIPTracker');
 ?>
 <script type="text/javascript">
     function ShowIPs(rowname) {
@@ -63,14 +63,18 @@ $Pages = Format::get_pages($Page, $NumResults, IPS_PER_PAGE, 9);
 ?>
 <div class="LayoutBody">
     <div class="BodyHeader">
-        <h2 class="BodyHeader-nav"><?= t('server.userhistory.tracker_ip_address_history_for_before') ?><a href="user.php?id=<?= $UserID ?>"><?= $Username ?></a><?= t('server.userhistory.tracker_ip_address_history_for_after') ?></h2>
+        <h2 class="BodyHeader-nav">
+            <?= t('server.userhistory.tracker_ip_address_history_for', ['Values' => [
+                "<a href='user.php?id=${UserID}'>${Username}</a>"
+            ]]) ?>
+        </h2>
     </div>
     <div class="BodyNavLinks"><?= $Pages ?></div>
     <div class="TableContainer">
         <table class="TableUserTrakcerIPHistory Table">
             <tr class="Table-rowHeader">
                 <td class="Table-cell"><?= t('server.userhistory.ip_address') ?></td>
-                <td class="Table-cell"><?= t('server.global.torrent') ?></td>
+                <td class="Table-cell"><?= t('server.common.torrent') ?></td>
                 <td class="Table-cell"><?= t('server.userhistory.time') ?></td>
             </tr>
             <?

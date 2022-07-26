@@ -381,7 +381,7 @@ class TORRENT_FORM {
                     </td>
                 </tr>
                 <tr class="Form-row" id="artist_tr">
-                    <td class="Form-label"><?= t('server.global.artist') ?><span class="u-colorWarning">*</span>:</td>
+                    <td class="Form-label"><?= t('server.common.artist') ?><span class="u-colorWarning">*</span>:</td>
                     <td class="Form-items is-artist u-formUploadArtistList" id="artistfields">
                         <p id="vawarning" class="hidden"><?= t('server.upload.artist_note') ?></p>
                         <?

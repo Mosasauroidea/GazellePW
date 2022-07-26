@@ -46,7 +46,7 @@ list($Revision, $Title, $Body, $Read, $Edit, $Date, $AuthorID, $AuthorName, $Ali
                 </div>
             </div>
             <div class="Form-row Form-submit">
-                <input class="Button" type="submit" value="<?= t('server.global.submit') ?>" />
+                <input class="Button" type="submit" value="<?= t('server.common.submit') ?>" />
             </div>
         </div>
     </form>

@@ -104,7 +104,7 @@ class DonationsView {
                 <div class="Box">
                     <div class="Box-header">
                         <span><?= !empty($ProfileRewards['ProfileInfoTitle' . $i]) ? display_str($ProfileRewards['ProfileInfoTitle' . $i]) : "Extra Profile " . ($i + 1) ?></span>
-                        <span style="float: right;"><a href="#" onclick="$('#profilediv_<?= $i ?>').gtoggle(); this.innerHTML = (this.innerHTML == '<?= t('server.global.hide') ?>' ? '<?= t('server.global.show') ?>' : '<?= t('server.global.hide') ?>'); return false;" class="brackets"><?= t('server.global.hide') ?></a></span>
+                        <span style="float: right;"><a href="#" onclick="$('#profilediv_<?= $i ?>').gtoggle(); this.innerHTML = (this.innerHTML == '<?= t('server.common.hide') ?>' ? '<?= t('server.common.show') ?>' : '<?= t('server.common.hide') ?>'); return false;" class="brackets"><?= t('server.common.hide') ?></a></span>
                     </div>
                     <div class="Box-body HtmlText PostArticle profileinfo" id="profilediv_<?= $i ?>">
                         <?= Text::full_format($ProfileRewards['ProfileInfo' . $i]) ?>

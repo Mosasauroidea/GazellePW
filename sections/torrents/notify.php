@@ -213,10 +213,15 @@ if ($Sneaky) {
             <div class="header">
                 <h3>
                     <? if ($FilterResults['FilterLabel'] !== false) { ?>
-                        <?= t('server.torrents.matches_for_before') ?><a href="torrents.php?action=notify&amp;filterid=<?= $FilterID . ($Sneaky ? "&amp;userid=$UserID" : '') ?>"><?= $FilterResults['FilterLabel'] ?></a><?= t('server.torrents.matches_for_after') ?>
-                    <?      } else { ?>
-                        <?= t('server.torrents.matches_for_unknown_filter_before') ?>[<?= $FilterID ?>]<?= t('server.torrents.matches_for_unknown_filter_after') ?>
-                    <?      } ?>
+                        <? $NewFilterID = $FilterID . ($Sneaky ? "&amp;userid=$UserID" : '') ?>
+                        <?= t('server.torrents.matches_for', ['Values' => [
+                            "<a href='torrents.php?action=notify&amp;filterid=${NewFilterID}>${FilterResults['FilterLabel']}</a>"
+                        ]]) ?>
+                    <? } else { ?>
+                        <?= t('server.torrents.matches_for_unknown_filter', ['Values' => [
+                            "[${FilterID}]"
+                        ]]) ?>
+                    <? } ?>
                 </h3>
             </div>
             <div class="BodyNavLinks notify_filter_links">

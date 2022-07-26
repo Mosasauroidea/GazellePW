@@ -159,7 +159,7 @@ class Tags {
      */
     public static function format_top($Max = 5, $Link = 'torrents.php?taglist=', $ArtistName = '', $ItemClass = '') {
         if (empty(self::$All)) { ?>
-            <li class="$ItemClass"><?= t('server.global.no_torrent_tags') ?></li>
+            <li class="$ItemClass"><?= t('server.common.no_torrent_tags') ?></li>
         <?
             return;
         }

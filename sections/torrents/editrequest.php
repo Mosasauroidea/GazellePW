@@ -37,7 +37,7 @@ View::show_header(t('server.torrents.request_an_edit'), '', '', 'PageTorrentEdit
                 <? new TEXTAREA_PREVIEW('edit_details', 'edit_details'); ?>
             </div>
             <div class="Form-row">
-                <input class="Button" type="submit" value="<?= t('server.global.submit') ?>" />
+                <input class="Button" type="submit" value="<?= t('server.common.submit') ?>" />
             </div>
         </form>
     </div>

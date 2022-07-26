@@ -205,7 +205,7 @@ View::show_header(($NewRequest ? t('server.requests.new_create') : t('server.req
                         </td>
                     </tr>
                     <tr class="Form-row" id="artist_tr">
-                        <td class="Form-label"><?= t('server.global.artist') ?>:</td>
+                        <td class="Form-label"><?= t('server.common.artist') ?>:</td>
                         <td class="Form-items" id="artistfields">
                             <?
                             if (!empty($ArtistForm)) {
@@ -458,7 +458,9 @@ if ($NewRequest) { ?>
             <input type="hidden" id="current_downloaded" value="<?= $LoggedUser['BytesDownloaded'] ?>" />
             <?= $RequestTax > 0 ? '<div>Bounty after tax: <strong><span id="bounty_after_tax">90.00 MB</span></strong></div>' : '' ?>
             <div>
-                <?= t('server.requests.pst_1') ?><strong> <span id="new_bounty">100.00 MB</span></strong> <?= t('server.requests.pst_2') ?>
+                <?= t('server.requests.pst_body', ['Values' => [
+                    "<strong><span id='new_bounty'>100.00 MB</span></strong>"
+                ]]) ?>
             </div>
 
             <div>

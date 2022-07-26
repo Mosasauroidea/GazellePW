@@ -96,7 +96,7 @@ if ($Count == 0) {
 ?>
     <div class="Box">
         <div class="thin Box-body">
-            <?= t('server.artist.artist_deleted_before') ?><?= $Name ?><?= t('server.artist.artist_deleted_after') ?>
+            <?= t('server.artist.artist_x_deleted', ['Values' => [$Name]]) ?>
         </div>
     </div>
 <?

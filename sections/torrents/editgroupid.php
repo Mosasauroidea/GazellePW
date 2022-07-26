@@ -66,7 +66,7 @@ if (empty($_POST['confirm'])) {
                 <input type="hidden" name="torrentid" value="<?= $TorrentID ?>" />
                 <input type="hidden" name="oldgroupid" value="<?= $OldGroupID ?>" />
                 <input type="hidden" name="groupid" value="<?= $GroupID ?>" />
-                <h3><?= t('server.torrents.you_are_attempt_to_move_from_before') ?><?= $TorrentID ?><?= t('server.torrents.you_are_attempt_to_move_from_after') ?>:</h3>
+                <h3><?= t('server.torrents.you_are_attempt_to_move_from', ['Values' => [$TorrentID]]) ?>:</h3>
                 <ul>
                     <li><a href="torrents.php?id=<?= $OldGroupID ?>"><?= Torrents::group_name($OldGroup, false) ?></a></li>
                 </ul>

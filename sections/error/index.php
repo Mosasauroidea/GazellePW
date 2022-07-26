@@ -15,30 +15,30 @@ if (!empty($_GET['e']) && in_array($_GET['e'], $Errors)) {
     switch ($Error) {
 
         case '403':
-            $Title = t('server.global.error_403_title');
-            $Description = t('server.global.error_403_description');
+            $Title = t('server.common.error_403_title');
+            $Description = t('server.common.error_403_description');
             notify(CONFIG['STATUS_CHAN'], '403');
             break;
         case '404':
-            $Title = t('server.global.error_404_title');
-            $Description = t('server.global.error_404_description');
+            $Title = t('server.common.error_404_title');
+            $Description = t('server.common.error_404_description');
             break;
         case '0':
-            $Title = t('server.global.invalid_input_title');
-            $Description = t('server.global.invalid_input_description');
+            $Title = t('server.common.invalid_input_title');
+            $Description = t('server.common.invalid_input_description');
             notify(CONFIG['STATUS_CHAN'], 'PHP-0');
             break;
         case '-1':
-            $Title = t('server.global.invalid_request_title');
-            $Description = t('server.global.invalid_request_description');
+            $Title = t('server.common.invalid_request_title');
+            $Description = t('server.common.invalid_request_description');
             break;
         default:
             if (!empty($Error)) {
-                if (!$Title) $Title = t('server.global.error');
+                if (!$Title) $Title = t('server.common.error');
                 $Description = $Error;
             } else {
-                $Title = t('server.global.unexpected_error_title');
-                $Description = t('server.global.unexpected_error_description');
+                $Title = t('server.common.unexpected_error_title');
+                $Description = t('server.common.unexpected_error_description');
             }
     }
 

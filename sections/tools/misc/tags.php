@@ -63,7 +63,7 @@ define('MODE_MERGE', 1);
             if ($Tag == $Replacement) {
                 echo "
 				<div class=\"BoxBody center\">
-					<strong>" . t('server.tools.error') . ": </strong>" . t('server.tools.cannot_merge_tag_with_itself_before') . "$Tag" . t('server.tools.cannot_merge_tag_with_itself_after') . "
+					<strong>" . t('server.tools.error') . ": </strong>" . t('server.tools.cannot_merge_tag_with_itself', ['Values' => [$Tag]]) . "
 				</div>
 			</div>";
                 View::show_footer();

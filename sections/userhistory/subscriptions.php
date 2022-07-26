@@ -106,8 +106,12 @@ $Requests = Requests::get_requests($Requests);
 ?>
 <div class="LayoutBody">
     <div class="BodyHeader">
-        <h2 class="BodyHeader-nav"><?= t('server.userhistory.with_unread_posts_before') ?><?= t('server.userhistory.subscriptions') ?><?= $ShowUnread ? t('server.userhistory.with_unread_posts_after') . ($NumResults ? t('server.userhistory.left_bracket') . $NumResults . t('server.userhistory.new_right_bracket') : '') : '' ?></h2>
-
+        <h2 class="BodyHeader-nav">
+            <?= t('server.userhistory.subscriptions') ?>
+            <?= t('server.userhistory.with_unread_posts_number', ['Values' => [
+                $ShowUnread ? ($NumResults ? t('server.userhistory.left_bracket') . $NumResults . t('server.userhistory.new_right_bracket') : '') : ''
+            ]]) ?>
+        </h2>
         <div class="BodyNavLinks">
             <?
             if (!$ShowUnread) {
@@ -202,18 +206,18 @@ $Requests = Requests::get_requests($Requests);
                             <div class="TableForumPostHeader">
                                 <div class="TableForumPostHeader-info">
                                     <?= $Links . ($Result['PostID'] < $Result['LastPost'] ? t('server.userhistory.span_new') : '') ?>
-                                    <a class="last_read" data-tooltip="<?= t('server.global.jump_to_last_read') ?>" href="<?= $JumpLink ?>">
+                                    <a class="last_read" data-tooltip="<?= t('server.common.jump_to_last_read') ?>" href="<?= $JumpLink ?>">
                                         <?= icon('Forum/jump-to-last-read') ?>
                                     </a>
                                 </div>
                                 <div class="TableForumPostHeader-actions">
                                     <? if ($Result['Page'] == 'forums') { ?>
                                         <span id="bar<?= $Result['PostID'] ?>">
-                                            <a href="#" onclick="Subscribe(<?= $Result['PageID'] ?>); return false;" id="subscribelink<?= $Result['PageID'] ?>" class="brackets"><?= t('server.global.unsubscribe') ?></a>
+                                            <a href="#" onclick="Subscribe(<?= $Result['PageID'] ?>); return false;" id="subscribelink<?= $Result['PageID'] ?>" class="brackets"><?= t('server.common.unsubscribe') ?></a>
                                         </span>
                                     <? } else { ?>
                                         <span id="bar_<?= $Result['Page'] . $Result['PostID'] ?>">
-                                            <a href="#" onclick="SubscribeComments('<?= $Result['Page'] ?>', <?= $Result['PageID'] ?>); return false;" id="subscribelink_<?= $Result['Page'] . $Result['PageID'] ?>" class="brackets"><?= t('server.global.unsubscribe') ?></a>
+                                            <a href="#" onclick="SubscribeComments('<?= $Result['Page'] ?>', <?= $Result['PageID'] ?>); return false;" id="subscribelink_<?= $Result['Page'] . $Result['PageID'] ?>" class="brackets"><?= t('server.common.unsubscribe') ?></a>
                                         </span>
                                     <? } ?>
                                 </div>

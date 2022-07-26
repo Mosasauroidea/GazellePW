@@ -60,7 +60,7 @@ if (empty($_GET['type'])) {
                 if (!check_paranoia('requestsvoted_list', $UserInfo['Paranoia'], $Perms['Class'], $UserInfo['ID'])) {
                     error(403);
                 }
-                $Title = t('server.requests.requests_created_by_before') . $UserInfo['Username'] . t('server.requests.requests_created_by_after');
+                $Title = t('server.requests.requests_created_by', ['Values' => [$UserInfo['Username']]]);
                 $SphQL->where('userid', $UserInfo['ID']);
             } else {
                 $Title = t('server.requests.my_requests');
@@ -72,7 +72,7 @@ if (empty($_GET['type'])) {
                 if (!check_paranoia('requestsvoted_list', $UserInfo['Paranoia'], $Perms['Class'], $UserInfo['ID'])) {
                     error(403);
                 }
-                $Title = t('server.requests.requests_voted_for_by_before') . $UserInfo['Username'] . t('server.requests.requests_voted_for_by_after');
+                $Title = t('server.requests.requests_voted_for_by', ['Values' => [$UserInfo['Username']]]);
                 $SphQL->where('voter', $UserInfo['ID']);
             } else {
                 $Title = t('server.requests.requests_i_have_voted_on');
@@ -84,7 +84,7 @@ if (empty($_GET['type'])) {
                 if (!check_paranoia('requestsfilled_list', $UserInfo['Paranoia'], $Perms['Class'], $UserInfo['ID'])) {
                     error(403);
                 }
-                $Title = t('server.requests.requests_filled_by_before') . $UserInfo['Username'] . t('server.requests.requests_filled_by_after');
+                $Title = t('server.requests.requests_filled_by', ['Values' => [$UserInfo['Username']]]);
                 $SphQL->where('fillerid', $UserInfo['ID']);
             } else {
                 $Title = t('server.requests.requests_i_have_filled');
@@ -367,12 +367,12 @@ View::show_header($Title, '', 'PageRequestHome');
                 <? } ?>
                 <a class="Link" href="bookmarks.php?type=requests"><?= t('server.requests.bookmarked_requests') ?></a>
             <?  } else { ?>
-                <a class="Link" href="bookmarks.php?type=torrents"><?= t('server.global.torrents') ?></a>
-                <a class="Link" href="bookmarks.php?type=artists"><?= t('server.global.artists') ?></a>
+                <a class="Link" href="bookmarks.php?type=torrents"><?= t('server.common.torrents') ?></a>
+                <a class="Link" href="bookmarks.php?type=artists"><?= t('server.common.artists') ?></a>
                 <? if (CONFIG['ENABLE_COLLAGES']) { ?>
                     <a class="Link" href="bookmarks.php?type=collages"><?= t('server.requests.collages') ?></a>
                 <? } ?>
-                <a class="Link" href="bookmarks.php?type=requests"><?= t('server.global.requests') ?></a>
+                <a class="Link" href="bookmarks.php?type=requests"><?= t('server.common.requests') ?></a>
             <?  } ?>
         </div>
     </div>

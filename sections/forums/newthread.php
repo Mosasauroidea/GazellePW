@@ -151,7 +151,7 @@ View::show_header('Forums &gt; ' . $Forum['Name'] . ' &gt; New Topic', 'comments
 
                 <? } ?>
                 <div id="buttons" class="center">
-                    <input class="Button" type="submit" id="submit_button" value="<?= t('server.global.submit') ?>" />
+                    <input class="Button" type="submit" id="submit_button" value="<?= t('server.common.submit') ?>" />
                 </div>
             </div>
 

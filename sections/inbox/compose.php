@@ -28,7 +28,11 @@ View::show_header(t('server.inbox.compose'), 'inbox,bbcode,jquery.validate,form_
 ?>
 <div class="LayoutBody">
     <div class="BodyHeader">
-        <h2 class="BodyHeader-nav"><?= t('server.inbox.send_a_message_to_user_before') ?><a href="user.php?id=<?= $ToID ?>"><?= $Username ?></a><?= t('server.inbox.send_a_message_to_user_after') ?></h2>
+        <h2 class="BodyHeader-nav">
+            <?= t('server.inbox.send_a_message_to_user', ['Values' => [
+                "<a href='user.php?id=$ToID'>$Username</a>"
+            ]]) ?>
+        </h2>
     </div>
     <form class="Box send_form" name="message" action="inbox.php" method="post" id="messageform">
         <div class="Box-body">

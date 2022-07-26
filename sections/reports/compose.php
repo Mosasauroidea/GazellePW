@@ -145,13 +145,15 @@ $DB->query("
 	WHERE ID = $ReportID");
 list($Reason) = $DB->next_record();
 
-$Body = t('server.reports.you_reported_sth_for_the_reason_before') . "$TypeLink" . t('server.reports.you_reported_sth_for_the_reason_after') . ":\n[quote]{$Reason}[/quote]";
+$Body = t('server.reports.you_reported_sth_for_the_reason', ['Values' => [$TypeLink]]) . ":\n[quote]{$Reason}[/quote]";
 
 ?>
 <div class="LayoutBody">
     <div class="BodyHeader">
         <h2 class="BodyHeader-nav">
-            <?= t('server.reports.send_a_message_to_before') ?><a href="user.php?id=<?= $ToID ?>"><?= $ComposeToUsername ?></a><?= t('server.reports.send_a_message_to_after') ?>
+            <?= t('server.reports.send_a_message_to', ['Values' => [
+                "<a href='user.php?id=${ToID}'>${ComposeToUsername}</a>"
+            ]]) ?>
         </h2>
     </div>
     <form class="send_form" name="message" action="reports.php" method="post" id="messageform">

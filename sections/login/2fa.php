@@ -20,7 +20,11 @@ if (strtotime($BannedUntil) < time()) {
             <span class="u-colorWarning"><?= $Err ?><br /><br /></span>
         <? } ?>
         <? if ($Attempts > 0) { ?>
-            <?= t('server.login.attempts_1') ?><span class="info"><?= (6 - $Attempts) ?></span><?= t('server.login.attempts_2') ?><br />
+            <? $RemainingAttempts = 6 - $Attempts; ?>
+            <?= t('server.login.attempts', ['Values' => [
+                "<span class='info'>${RemainingAttempts}</span>"
+            ]]) ?>
+            <br />
         <? } ?>
         <table class="layout">
             <tr>
@@ -41,7 +45,11 @@ if (strtotime($BannedUntil) < time()) {
 <?
 } else {
 ?>
-    <span class="u-colorWarning"><?= t('server.login.you_are_banned_from_logging_1') ?><?= time_diff($BannedUntil) ?><?= t('server.login.you_are_banned_from_logging_2') ?></span>
+    <span class="u-colorWarning">
+        <?= t('server.login.you_are_banned_from_logging', ['Values' => [
+            time_diff($BannedUntil)
+        ]]) ?>
+    </span>
 <?
 }
 

@@ -96,7 +96,7 @@ $Pages = Format::get_pages($Page, $TotalTorrents, CONFIG['TORRENTS_PER_PAGE']);
             <thead>
                 <tr class="Table-rowHeader">
                     <td class="Table-cell"><?= t('server.bonus.total_torrents') ?></td>
-                    <td class="Table-cell"><?= t('server.global.size') ?></td>
+                    <td class="Table-cell"><?= t('server.common.size') ?></td>
                     <td class="Table-cell"><?= t('server.bonus.bp_hour') ?></td>
                     <td class="Table-cell"><?= t('server.bonus.bp_day') ?></td>
                     <td class="Table-cell"><?= t('server.bonus.bp_week') ?></td>
@@ -139,9 +139,9 @@ $Pages = Format::get_pages($Page, $TotalTorrents, CONFIG['TORRENTS_PER_PAGE']);
         <table class="TableBonusRateDetail Table">
             <thead>
                 <tr class="Table-rowHeader">
-                    <td class="Table-cell"><?= t('server.global.torrent') ?></td>
-                    <td class="Table-cell"><a href="bonus.php?action=bprates&order_by=size<?= $LinkTail ?><?= $UserID == $LoggedUser['ID'] ? "" : "&userid=$UserID" ?>"><?= t('server.global.size') ?></a></td>
-                    <td class="Table-cell"><a href="bonus.php?action=bprates&order_by=seeders<?= $LinkTail ?><?= $UserID == $LoggedUser['ID'] ? "" : "&userid=$UserID" ?>"><?= t('server.global.seeders') ?></a></td>
+                    <td class="Table-cell"><?= t('server.common.torrent') ?></td>
+                    <td class="Table-cell"><a href="bonus.php?action=bprates&order_by=size<?= $LinkTail ?><?= $UserID == $LoggedUser['ID'] ? "" : "&userid=$UserID" ?>"><?= t('server.common.size') ?></a></td>
+                    <td class="Table-cell"><a href="bonus.php?action=bprates&order_by=seeders<?= $LinkTail ?><?= $UserID == $LoggedUser['ID'] ? "" : "&userid=$UserID" ?>"><?= t('server.common.seeders') ?></a></td>
                     <td class="Table-cell"><a href="bonus.php?action=bprates&order_by=seedtime<?= $LinkTail ?><?= $UserID == $LoggedUser['ID'] ? "" : "&userid=$UserID" ?>"><?= t('server.bonus.seedtime') ?></a></td>
                     <td class="Table-cell"><a href="bonus.php?action=bprates&order_by=hourlypoints<?= $LinkTail ?><?= $UserID == $LoggedUser['ID'] ? "" : "&userid=$UserID" ?>"><?= t('server.bonus.bp_hour') ?></a></td>
                     <td class="Table-cell"><?= t('server.bonus.bp_day') ?></td>
@@ -200,7 +200,7 @@ $Pages = Format::get_pages($Page, $TotalTorrents, CONFIG['TORRENTS_PER_PAGE']);
                         $Name = Torrents::torrent_simple_view($Torrent['Group'], $Torrent, [
                             'SettingTorrentTitle' => G::$LoggedUser['SettingTorrentTitle'],
                         ]);
-                        $DisplayName = '<a href="torrents.php?id=' . $GroupID . '&amp;torrentid=' . $Torrent['ID'] . '"  data-tooltip="' . t('server.global.view_torrent') . '" dir="ltr">' . $Name . '</a>';
+                        $DisplayName = '<a href="torrents.php?id=' . $GroupID . '&amp;torrentid=' . $Torrent['ID'] . '"  data-tooltip="' . t('server.common.view_torrent') . '" dir="ltr">' . $Name . '</a>';
                 ?>
                         <tr class="Table-row">
                             <td class="Table-cell"><?= $DisplayName ?></td>

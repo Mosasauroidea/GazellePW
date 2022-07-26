@@ -132,9 +132,9 @@ View::show_header($Title, 'browse,comments,torrent,bbcode,recommend,cover_art,su
             }
             if (Bookmarks::has_bookmarked('torrent', $GroupID)) {
             ?>
-                <a href="#" id="bookmarklink_torrent_<?= $GroupID ?>" class="remove_bookmark brackets" onclick="Unbookmark('torrent', <?= $GroupID ?>, '<?= t('server.global.add_bookmark') ?>'); return false;"><?= t('server.global.remove_bookmark') ?></a>
+                <a href="#" id="bookmarklink_torrent_<?= $GroupID ?>" class="remove_bookmark brackets" onclick="Unbookmark('torrent', <?= $GroupID ?>, '<?= t('server.common.add_bookmark') ?>'); return false;"><?= t('server.common.remove_bookmark') ?></a>
             <?  } else { ?>
-                <a href="#" id="bookmarklink_torrent_<?= $GroupID ?>" class="add_bookmark brackets" onclick="Bookmark('torrent', <?= $GroupID ?>, '<?= t('server.global.remove_bookmark') ?>'); return false;"><?= t('server.global.add_bookmark') ?></a>
+                <a href="#" id="bookmarklink_torrent_<?= $GroupID ?>" class="add_bookmark brackets" onclick="Bookmark('torrent', <?= $GroupID ?>, '<?= t('server.common.remove_bookmark') ?>'); return false;"><?= t('server.common.add_bookmark') ?></a>
             <?  } ?>
             <a href="#" id="subscribelink_torrents<?= $GroupID ?>" class="brackets" onclick="SubscribeComments('torrents', <?= $GroupID ?>); return false;"><?= Subscriptions::has_subscribed_comments('torrents', $GroupID) !== false ? t('server.torrents.unsubscribe') : t('server.torrents.subscribe') ?></a>
             <!-- <a href="#" id="recommend" class="brackets">Recommend</a> -->
@@ -165,15 +165,15 @@ View::show_header($Title, 'browse,comments,torrent,bbcode,recommend,cover_art,su
         </div>
         <div class="MovieInfo-tagContainer">
             <div class="MovieInfo-facts">
-                <a class="MovieInfo-fact" data-tooltip="<?= t('server.global.imdb_rating') ?>, <?= $IMDBVote . ' ' . t('server.torrents.movie_votes') ?>" target="_blank" href="https://www.imdb.com/title/<? print_r($IMDBID) ?>">
+                <a class="MovieInfo-fact" data-tooltip="<?= t('server.common.imdb_rating') ?>, <?= $IMDBVote . ' ' . t('server.torrents.movie_votes') ?>" target="_blank" href="https://www.imdb.com/title/<? print_r($IMDBID) ?>">
                     <?= icon('imdb') ?>
                     <span><?= !empty($IMDBRating) ? sprintf("%.1f", $IMDBRating) : '--' ?></span>
                 </a>
-                <a class="MovieInfo-fact" data-tooltip="<?= t('server.global.douban_rating') ?>, <?= ($DoubanVote ? $DoubanVote : '?') . ' ' . t('server.torrents.movie_votes') ?>" target="_blank" href="https://movie.douban.com/subject/<?= $DoubanID ?>/">
+                <a class="MovieInfo-fact" data-tooltip="<?= t('server.common.douban_rating') ?>, <?= ($DoubanVote ? $DoubanVote : '?') . ' ' . t('server.torrents.movie_votes') ?>" target="_blank" href="https://movie.douban.com/subject/<?= $DoubanID ?>/">
                     <?= icon('douban') ?>
                     <span><?= !empty($DoubanRating) ? sprintf("%.1f", $DoubanRating) : '--' ?></span>
                 </a>
-                <a class="MovieInfo-fact <?= empty($RTRating) ? 'lack_of_info' : '' ?>" data-tooltip="<?= t('server.global.rt_rating') ?>" target="_blank" href="https://www.rottentomatoes.com/m/<?= $RTTitle ?>">
+                <a class="MovieInfo-fact <?= empty($RTRating) ? 'lack_of_info' : '' ?>" data-tooltip="<?= t('server.common.rt_rating') ?>" target="_blank" href="https://www.rottentomatoes.com/m/<?= $RTTitle ?>">
                     <?= icon('rotten-tomatoes') ?>
                     <span><?= !empty($RTRating) ? $RTRating : '--' ?></span>
                 </a>
@@ -315,8 +315,8 @@ View::show_header($Title, 'browse,comments,torrent,bbcode,recommend,cover_art,su
             ?>
                 <div class="SidebarItemArtists SidebarItem Box is-limitHeight">
                     <div class="SidebarItem-header Box-header u-hoverToShow-hover">
-                        <span><?= t('server.global.artist') ?></span>
-                        <?= check_perms('torrents_edit') ? '<a class="u-hoverToShow-hide" onclick="ArtistManager(); return false;" href="#">' . t('server.global.edit') . '</a>' : '' ?>
+                        <span><?= t('server.common.artist') ?></span>
+                        <?= check_perms('torrents_edit') ? '<a class="u-hoverToShow-hide" onclick="ArtistManager(); return false;" href="#">' . t('server.common.edit') . '</a>' : '' ?>
                     </div>
                     <ul class="SidebarItem-body Box-body SidebarList" id="artist_list">
                         <?
@@ -474,7 +474,7 @@ View::show_header($Title, 'browse,comments,torrent,bbcode,recommend,cover_art,su
                                         <option class="Select-option" value="6"><?= t('server.torrents.actor') ?></option>
                                     </select>
                                 </div>
-                                <input class="Button" type="submit" value="<?= t('server.global.add') ?>" />
+                                <input class="Button" type="submit" value="<?= t('server.common.add') ?>" />
                             </form>
                         </div>
                     </div>
@@ -542,33 +542,33 @@ View::show_header($Title, 'browse,comments,torrent,bbcode,recommend,cover_art,su
                     <tr class="Table-rowHeader">
                         <td class="TableTorrent-cellName Table-cell" colspan="1">
                             <span>
-                                <?= t('server.global.torrents') ?>
+                                <?= t('server.common.torrents') ?>
                                 <span> | <span>
                                         <a href='#' onclick='globalapp.toggleTab(event, ".u-tabItemSlot")'><?= t('server.torrents.slot_table') ?></a>
                                     </span>
                                     <? if ($HasRequest) { ?>
                                         | <span>
-                                            <a href='#' onclick='globalapp.toggleTab(event, ".u-tabItemRequest")'><?= t('server.global.requests') ?></a>
+                                            <a href='#' onclick='globalapp.toggleTab(event, ".u-tabItemRequest")'><?= t('server.common.requests') ?></a>
                                         </span>
                                     <? } ?>
                         </td>
                         <td class="TableTorrent-cellSize Table-cell TableTorrent-cellStat">
-                            <span aria-hidden="true" data-tooltip="<?= t('server.global.size') ?>">
+                            <span aria-hidden="true" data-tooltip="<?= t('server.common.size') ?>">
                                 <?= icon('torrent-size') ?>
                             </span>
                         </td>
                         <td class="TableTorrent-cellSnatches Table-cell TableTorrent-cellStat">
-                            <span aria-hidden="true" data-tooltip="<?= t('server.global.snatched') ?>">
+                            <span aria-hidden="true" data-tooltip="<?= t('server.common.snatched') ?>">
                                 <?= icon('torrent-snatches') ?>
                             </span>
                         </td>
                         <td class="TableTorrent-cellSeeders Table-cell TableTorrent-cellStat">
-                            <i aria-hidden="true" data-tooltip="<?= t('server.global.seeders') ?>">
+                            <i aria-hidden="true" data-tooltip="<?= t('server.common.seeders') ?>">
                                 <?= icon('torrent-seeders') ?>
                             </i>
                         </td>
                         <td class="TableTorrent-cellLeechers Table-cell TableTorrent-cellStat">
-                            <i aria-hidden="true" data-tooltip="<?= t('server.global.leechers') ?>">
+                            <i aria-hidden="true" data-tooltip="<?= t('server.common.leechers') ?>">
                                 <?= icon('torrent-leechers') ?>
                             </i>
                         </td>
@@ -628,7 +628,7 @@ View::show_header($Title, 'browse,comments,torrent,bbcode,recommend,cover_art,su
                     ?>
                             <tr class="TableTorrent-rowCategory Table-row" group-id="<?= $GroupID ?>">
                                 <td class="TableTorrent-cellCategory Table-cell" colspan="5">
-                                    <a class="u-toggleEdition-button" href="#" onclick="globalapp.toggleEdition(event, <?= $GroupID ?>, <?= $EditionID ?>)" data-tooltip="<?= t('server.global.collapse_this_edition_title') ?>">&minus;</a>
+                                    <a class="u-toggleEdition-button" href="#" onclick="globalapp.toggleEdition(event, <?= $GroupID ?>, <?= $EditionID ?>)" data-tooltip="<?= t('server.common.collapse_this_edition_title') ?>">&minus;</a>
                                     <?= $NewEdition ?>
                                 </td>
                             </tr>
@@ -668,7 +668,7 @@ View::show_header($Title, 'browse,comments,torrent,bbcode,recommend,cover_art,su
                                                     }, torrent_check)
                                                 })
                                             </script>
-                                            <a class="TableTorrent-check" href="javascript:void(0)" id="torrent<?= $TorrentID ?>_check1" style="display:<?= $TorrentChecked ? "inline-block" : "none" ?>;color:#649464;" data-tooltip="<?= t('server.torrents.checked_by_before') ?><?= $TorrentChecked ? $TorrentCheckedBy : $LoggedUser['Username'] ?><?= t('server.torrents.checked_by_after') ?>">
+                                            <a class="TableTorrent-check" href="javascript:void(0)" id="torrent<?= $TorrentID ?>_check1" style="display:<?= $TorrentChecked ? "inline-block" : "none" ?>;color:#649464;" data-tooltip="<?= t('server.torrents.checked_by', ['Values' => [$TorrentChecked ? $TorrentCheckedBy : $LoggedUser['Username']]]) ?>">
                                                 <?= icon("Table/checked") ?>
                                             </a>
                                             <a class="TableTorrent-check" href="javascript:void(0)" id="torrent<?= $TorrentID ?>_check0" style="display:<?= $TorrentChecked ? "none" : "inline-block" ?>;color:#CF3434;" data-tooltip="<?= t('server.torrents.turn_me_green') ?>">
@@ -688,16 +688,16 @@ View::show_header($Title, 'browse,comments,torrent,bbcode,recommend,cover_art,su
                                     </a>
                                     <span class="TableTorrent-titleActions">
                                         [
-                                        <a href="torrents.php?action=download&amp;id=<?= $TorrentID ?>&amp;authkey=<?= $LoggedUser['AuthKey'] ?>&amp;torrent_pass=<?= $LoggedUser['torrent_pass'] ?>" data-tooltip="<?= t('server.global.download') ?>"><?= ($HasFile ? 'DL' : 'Missing') ?></a>
+                                        <a href="torrents.php?action=download&amp;id=<?= $TorrentID ?>&amp;authkey=<?= $LoggedUser['AuthKey'] ?>&amp;torrent_pass=<?= $LoggedUser['torrent_pass'] ?>" data-tooltip="<?= t('server.common.download') ?>"><?= ($HasFile ? 'DL' : 'Missing') ?></a>
                                         <? if ($CanUseToken) { ?>
                                             |
-                                            <a href="torrents.php?action=download&amp;id=<?= $TorrentID ?>&amp;authkey=<?= $LoggedUser['AuthKey'] ?>&amp;torrent_pass=<?= $LoggedUser['torrent_pass'] ?>&amp;usetoken=1" data-tooltip="<?= t('server.global.use_fl_tokens') ?>" onclick="return confirm('<?= FL_confirmation_msg($Seeders, $Size) ?>');">FL</a>
+                                            <a href="torrents.php?action=download&amp;id=<?= $TorrentID ?>&amp;authkey=<?= $LoggedUser['AuthKey'] ?>&amp;torrent_pass=<?= $LoggedUser['torrent_pass'] ?>&amp;usetoken=1" data-tooltip="<?= t('server.common.use_fl_tokens') ?>" onclick="return confirm('<?= FL_confirmation_msg($Seeders, $Size) ?>');">FL</a>
                                         <? } ?>
                                         |
                                         <a href="reportsv2.php?action=report&amp;id=<?= $TorrentID ?>" data-tooltip="<?= t('server.torrents.report') ?>">RP</a>
                                         <? if ($CanEdit) { ?>
                                             |
-                                            <a href="torrents.php?action=edit&amp;id=<?= $TorrentID ?>" data-tooltip="<?= t('server.global.edit') ?>">ED</a>
+                                            <a href="torrents.php?action=edit&amp;id=<?= $TorrentID ?>" data-tooltip="<?= t('server.common.edit') ?>">ED</a>
                                         <? }
                                         if ($CanDelete) { ?>
                                             |
@@ -740,19 +740,19 @@ View::show_header($Title, 'browse,comments,torrent,bbcode,recommend,cover_art,su
                         <tr class="Table-rowHeader">
                             <td class="TableTorrent-cellName Table-cell" colspan="1">
                                 <span>
-                                    <a href="#" onclick="globalapp.toggleTab(event, '.u-tabItemTorrent')"><?= t('server.global.torrents') ?></a>
+                                    <a href="#" onclick="globalapp.toggleTab(event, '.u-tabItemTorrent')"><?= t('server.common.torrents') ?></a>
                                     <span> | </span>
                                     <?= t('server.torrents.slot_table') ?>
                                 </span>
                                 <a href="wiki.php?action=article&id=66" data-tooltip="<?= t('server.torrents.slot_wiki') ?>">[?]</a>
                                 <? if ($HasRequest) { ?>
                                     | <span>
-                                        <a href='#' onclick='globalapp.toggleTab(event, ".u-tabItemRequest")'><?= t('server.global.requests') ?></a>
+                                        <a href='#' onclick='globalapp.toggleTab(event, ".u-tabItemRequest")'><?= t('server.common.requests') ?></a>
                                     </span>
                                 <? } ?>
                             </td>
                             <td class="TableTorrent-cellSize Table-cell TableTorrent-cellStat">
-                                <span aria-hidden="true" data-tooltip="<?= t('server.global.size') ?>">
+                                <span aria-hidden="true" data-tooltip="<?= t('server.common.size') ?>">
                                     <?= icon('torrent-size') ?>
                                 </span>
                             </td>
@@ -787,7 +787,7 @@ View::show_header($Title, 'browse,comments,torrent,bbcode,recommend,cover_art,su
                         ?>
                                 <tr class="TableTorrent-rowCategory Table-row" group-id="<?= $GroupID ?>">
                                     <td class="TableTorrent-cellCategory Table-cell" colspan="3">
-                                        <a class="u-toggleEdition-button" href="#" onclick="globalapp.toggleEdition(event, <?= $GroupID ?>, <?= $EditionID ?>)" data-tooltip="<?= t('server.global.collapse_this_edition_title') ?>">&minus;</a>
+                                        <a class="u-toggleEdition-button" href="#" onclick="globalapp.toggleEdition(event, <?= $GroupID ?>, <?= $EditionID ?>)" data-tooltip="<?= t('server.common.collapse_this_edition_title') ?>">&minus;</a>
                                         <?= $NewEdition ?>
                                     </td>
                                 </tr>
@@ -916,14 +916,14 @@ View::show_header($Title, 'browse,comments,torrent,bbcode,recommend,cover_art,su
                         <tr class="Table-rowHeader">
                             <td class="TableRequest-cellName Table-cell" colspan="1">
                                 <span>
-                                    <a href="#" onclick="globalapp.toggleTab(event, '.u-tabItemTorrent')"><?= t('server.global.torrents') ?></a>
+                                    <a href="#" onclick="globalapp.toggleTab(event, '.u-tabItemTorrent')"><?= t('server.common.torrents') ?></a>
                                 </span>
                                 <span> | </span>
                                 <span>
                                     <a href='#' onclick='globalapp.toggleTab(event, ".u-tabItemSlot")'><?= t('server.torrents.slot_table') ?></a>
                                 </span>
                                 <span> | </span>
-                                <?= t('server.global.requests') ?>
+                                <?= t('server.common.requests') ?>
                             </td>
                             <td class="TableRequest-cellVotes Table-cell TableRequest-cellValue"><?= t('server.torrents.votes') ?></td>
                             <td class="TableRequest-cellBounty Table-cell TableRequest-cellValue"><?= t('server.torrents.bounty') ?></td>
@@ -984,9 +984,11 @@ View::show_header($Title, 'browse,comments,torrent,bbcode,recommend,cover_art,su
             ?>
                 <table class="Table TableCollage">
                     <tr class="Table-rowHeader">
-                        <td class="Table-cell" width="85%"><?= t('server.torrents.this_album_is_in_collages_1') ?>
-                            <?= number_format(count($Collages)) ?>
-                            <?= t('server.torrents.this_album_is_in_collages_2') ?><?= ((count($Collages) > 1) ? t('server.torrents.this_album_is_in_collages_3') : '') ?><?= $SeeAll ?>
+                        <td class="Table-cell" width="85%">
+                            <?= t('server.torrents.this_album_is_in_collages', ['Values' => [
+                                t('server.torrents.this_album_is_in_collages_count', ['Count' => $Collages, 'Values' => [number_format(count($Collages))]])
+                            ]]) ?>
+                            <?= $SeeAll ?>
                         </td>
                         <td class="Table-cell"><?= t('server.torrents.torrents_count') ?></td>
                     </tr>
@@ -1039,9 +1041,13 @@ View::show_header($Title, 'browse,comments,torrent,bbcode,recommend,cover_art,su
             ?>
                 <table class="TableCollage Table">
                     <tr class="Table-rowHeader">
-                        <td class="Table-cell" width="85%"><?= t('server.torrents.this_album_is_in_personal_collages_1') ?>
-                            <?= number_format(count($PersonalCollages)) ?>
-                            <?= t('server.torrents.this_album_is_in_personal_collages_2') ?><?= ((count($PersonalCollages) > 1) ? t('server.torrents.this_album_is_in_personal_collages_3') : '') ?><?= $SeeAll ?>
+                        <td class="Table-cell" width="85%">
+                            <?= t('server.torrents.this_album_is_in_personal_collages', ['Values' => [
+                                t('server.torrents.this_album_is_in_personal_collages_count', ['Count' => count($PersonalCollages), 'Values' => [
+                                    number_format(count($PersonalCollages))
+                                ]])
+                            ]]) ?>
+                            <?= $SeeAll ?>
                         </td>
                         <td class="Table-cell"><?= t('server.torrents.torrents_count') ?></td>
                     </tr>

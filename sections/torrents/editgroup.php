@@ -58,7 +58,7 @@ View::show_header(t('server.torrents.edit_torrent_group'), '', 'PageTorrentEditG
 <div class="LayoutBody">
 
     <div class="BodyHeader">
-        <h2 class="BodyHeader-nav"><?= page_title_conn([t('server.global.edit'), Torrents::group_name($Group)]) ?></h2>
+        <h2 class="BodyHeader-nav"><?= page_title_conn([t('server.common.edit'), Torrents::group_name($Group)]) ?></h2>
     </div>
     <div class="BodyNavLinks">
         <a class="brackets" href="#movie_info_edit"><?= t('server.torrents.torrent_group_meta_editing') ?></a>
@@ -136,7 +136,7 @@ View::show_header(t('server.torrents.edit_torrent_group'), '', 'PageTorrentEditG
                 <tr class="Form-row">
                     <td class="Form-items">
                         <div style="text-align: center;">
-                            <input class="Button" type="submit" value="<?= t('server.global.submit') ?>" />
+                            <input class="Button" type="submit" value="<?= t('server.common.submit') ?>" />
                         </div>
 
                     </td>
@@ -192,7 +192,7 @@ View::show_header(t('server.torrents.edit_torrent_group'), '', 'PageTorrentEditG
                     <tr class="Form-row">
                         <td rowspan="2">
                             <div style="text-align: center;">
-                                <input class="Button" type="submit" value="<?= t('server.global.submit') ?>" />
+                                <input class="Button" type="submit" value="<?= t('server.common.submit') ?>" />
                             </div>
                         </td>
                     </tr>
@@ -227,7 +227,7 @@ View::show_header(t('server.torrents.edit_torrent_group'), '', 'PageTorrentEditG
                     <tr class="Form-row">
                         <td rowspan="2">
                             <div style="text-align: center;">
-                                <input class="Button" type="submit" value="<?= t('server.global.submit') ?>" />
+                                <input class="Button" type="submit" value="<?= t('server.common.submit') ?>" />
                             </div>
                         </td>
                     </tr>
@@ -249,7 +249,7 @@ View::show_header(t('server.torrents.edit_torrent_group'), '', 'PageTorrentEditG
                             <td class="Form-label"><?= t('server.torrents.merge_target') ?></td>
                             <td class="Form-inputs FormOneLine">
                                 <input class="Input is-small" type="text" name="targetgroupid" size="10" />
-                                <input class="Button" type="submit" value="<?= t('server.global.submit') ?>" />
+                                <input class="Button" type="submit" value="<?= t('server.common.submit') ?>" />
                             </td>
                         </tr>
                         <tr class="Form-row">

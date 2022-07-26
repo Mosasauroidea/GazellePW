@@ -79,7 +79,7 @@ View::show_header('Gazelle Change Log', 'datetime_picker', 'datetime_picker');
                         <input class="Input" type="text" name="author" value="<?= $LoggedUser['Username'] ?>" />
                     </div>
                     <div class="submit_div" id="cl_submit">
-                        <input class="Button" type="submit" value="<?= t('server.global.submit') ?>" />
+                        <input class="Button" type="submit" value="<?= t('server.common.submit') ?>" />
                     </div>
                 </form>
             </div>
@@ -99,7 +99,7 @@ View::show_header('Gazelle Change Log', 'datetime_picker', 'datetime_picker');
                             <input type="hidden" name="auth" value="<?= $LoggedUser['AuthKey'] ?>" />
                             <input type="hidden" name="change_id" value="<?= $Change['ID'] ?>" />
                         </form>
-                        <a href="#" onclick="$('#delete_<?= $Change['ID'] ?>').raw().submit(); return false;" class="brackets"><?= t('server.global.delete') ?></a>
+                        <a href="#" onclick="$('#delete_<?= $Change['ID'] ?>').raw().submit(); return false;" class="brackets"><?= t('server.common.delete') ?></a>
                     </span>
                 <?      } ?>
             </div>

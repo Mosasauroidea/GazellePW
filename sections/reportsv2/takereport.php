@@ -42,7 +42,7 @@ if (!isset($_POST['type'])) {
 foreach ($ReportType['report_fields'] as $Field => $Value) {
     if ($Value == '1') {
         if (empty($_POST[$Field])) {
-            $Err = t('server.reportsv2.you_are_missing_a_required_filed_for_a_report_1') . "$Field" . t('server.reportsv2.you_are_missing_a_required_filed_for_a_report_2') . $ReportType['title'] . t('server.reportsv2.you_are_missing_a_required_filed_for_a_report_3');
+            $Err = t('server.reportsv2.you_are_missing_a_required_filed_for_a_report', ['Values' => [$Field, $ReportType['title']]]);
         }
     }
 }

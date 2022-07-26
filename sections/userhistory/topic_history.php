@@ -19,7 +19,7 @@ list($Page, $Limit) = Format::page_limit($PerPage);
 $UserInfo = Users::user_info($UserID);
 $Username = $UserInfo['Username'];
 
-View::show_header(t('server.userhistory.threads_started_by_before') . "$Username" . t('server.userhistory.threads_started_by_after'), 'subscriptions,comments,bbcode', 'PageUserHistoryTopic');
+View::show_header(t('server.userhistory.threads_started_by', ['Values' => [$Username]]), 'subscriptions,comments,bbcode', 'PageUserHistoryTopic');
 
 $QueryID = $DB->prepared_query("
 SELECT SQL_CALC_FOUND_ROWS
@@ -43,7 +43,11 @@ $DB->set_query_id($QueryID);
 ?>
 <div class="LayoutBody">
     <div class="BodyHeader">
-        <h2 class="BodyHeader-nav"><?= t('server.userhistory.threads_started_by_before') ?><a href="user.php?id=<?= $UserID ?>"><?= $Username ?></a><?= t('server.userhistory.threads_started_by_after') ?></h2>
+        <h2 class="BodyHeader-nav">
+            <?= t('server.userhistory.threads_started_by', ['Values' => [
+                "<a href='user.php?id=${UserID}'>${Username}</a>"
+            ]]) ?>
+        </h2>
     </div>
     <?
     if (empty($Results)) {

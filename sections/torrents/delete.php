@@ -78,7 +78,7 @@ View::show_header(t('server.torrents.delete_torrent'), 'reportsv2', 'PageTorrent
                 </div>
             </div>
             <div class="Form-row">
-                <input class="Button" value="<?= t('server.global.delete') ?>" type="submit" />
+                <input class="Button" value="<?= t('server.common.delete') ?>" type="submit" />
             </div>
         </form>
     </div>
@@ -196,7 +196,13 @@ if (check_perms('admin_reports')) {
 
                                     if ($GroupOthers > 0) { ?>
                                         <div style="text-align: right;">
-                                            <a href="reportsv2.php?view=group&amp;id=<?= $GroupID ?>"><?= t('server.torrents.there_are_n_other_reports_for_torrents_in_this_group_1') ?><?= (($GroupOthers > 1) ? t('server.torrents.there_are_n_other_reports_for_torrents_in_this_group_2') . " $GroupOthers " . t('server.torrents.there_are_n_other_reports_for_torrents_in_this_group_3') : t('server.torrents.there_are_n_other_reports_for_torrents_in_this_group_4')) ?><?= t('server.torrents.there_are_n_other_reports_for_torrents_in_this_group_5') ?></a>
+                                            <a href="reportsv2.php?view=group&amp;id=<?= $GroupID ?>">
+                                                <?= t('server.reportsv2.there_are_n_other_reports_for_torrents_in_this_group', [
+                                                    'Values' => [
+                                                        t('server.reportsv2.there_are_n_other_reports_for_torrents_in_this_group_report', ['Count' => $GroupOthers, 'Values' => [$GroupOthers]]),
+                                                    ]
+                                                ]) ?>
+                                            </a>
                                         </div>
                                     <?          }
 
@@ -210,7 +216,11 @@ if (check_perms('admin_reports')) {
 
                                     if ($UploaderOthers > 0) { ?>
                                         <div style="text-align: right;">
-                                            <a href="reportsv2.php?view=uploader&amp;id=<?= $UploaderID ?>"><?= t('server.torrents.there_are_n_other_reports_for_torrents_uploaded_by_this_user_1') ?><?= (($UploaderOthers > 1) ? t('server.torrents.there_are_n_other_reports_for_torrents_uploaded_by_this_user_2') . "are $UploaderOthers reports" . t('server.torrents.there_are_n_other_reports_for_torrents_uploaded_by_this_user_3') : t('server.torrents.there_are_n_other_reports_for_torrents_uploaded_by_this_user_4')) ?><?= t('server.torrents.there_are_n_other_reports_for_torrents_uploaded_by_this_user_5') ?></a>
+                                            <a href="reportsv2.php?view=uploader&amp;id=<?= $UploaderID ?>">
+                                                <?= t('server.reportsv2.there_are_n_other_reports_for_torrents_uploaded_by_this_user', ['Values' => [
+                                                    t('server.reportsv2.there_are_n_other_reports_for_torrents_uploaded_by_this_user_count', ['Count' => $UploaderOthers, 'Values' => [$UploaderOthers]])
+                                                ]]) ?>
+                                            </a>
                                         </div>
                                         <?          }
 
@@ -272,7 +282,7 @@ if (check_perms('admin_reports')) {
                                         |
                                         <span data-tooltip="<?= t('server.torrents.delete_title') ?>">
                                             <input type="checkbox" name="delete" id="delete<?= $ReportID ?>" <?= ($ReportType['resolve_options']['delete'] ? ' checked="checked"' : '') ?> />
-                                            <label for="delete<?= $ReportID ?>"><strong><?= t('server.global.delete') ?></strong></label>
+                                            <label for="delete<?= $ReportID ?>"><strong><?= t('server.common.delete') ?></strong></label>
                                         </span>
                                         <?
                                         $DB->query("select firsttorrent from users_main where id=$UploaderID and firsttorrent=$TorrentID");
@@ -313,7 +323,7 @@ if (check_perms('admin_reports')) {
                         </tr>
                         <tr class="Form-row">
                             <td colspan="4" style="text-align: center;">
-                                <input class="Button" type="button" value="<?= t('server.global.submit') ?>" onclick="TakeResolve(<?= $ReportID ?>);" />
+                                <input class="Button" type="button" value="<?= t('server.common.submit') ?>" onclick="TakeResolve(<?= $ReportID ?>);" />
                             </td>
                         </tr>
                     </table>

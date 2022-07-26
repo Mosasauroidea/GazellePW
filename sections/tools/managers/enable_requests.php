@@ -243,7 +243,7 @@ $DB->set_query_id($QueryID);
             </tr>
             <tr class="Form-row">
                 <td class="Form-submit" colspan=2>
-                    <input class="Button" type="submit" value="<?= t('server.global.search') ?>" />
+                    <input class="Button" type="submit" value="<?= t('server.common.search') ?>" />
                 </td>
             </tr>
         </table>

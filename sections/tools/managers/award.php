@@ -70,7 +70,7 @@ $(document).ready(function() {
 })
 </script>
 -->
-<h2 id="award-title" style="text-align: center;"><?= t('server.tools.year_before') . "$Year" . t('server.tools.year_after') . ($Month ? t('server.tools.month_before') . "$Month" . t('server.tools.month_after') : "") . ($Quarter ? "$QUARTER[$Quarter]" : "") ?></h2>
+<h2 id="award-title" style="text-align: center;"><?= t('server.tools.year', ['Values' => [$Year]]) . ($Month ? t('server.tools.month', ['Values' => [$Month]]) : "") . ($Quarter ? "$QUARTER[$Quarter]" : "") ?></h2>
 <p style="font-size: 14px;text-align: right;"><?= t('server.tools.explanation_thread') ?></p>
 <div id="salary-table">
     <div id="table-head-left">

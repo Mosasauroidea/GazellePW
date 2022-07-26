@@ -127,7 +127,7 @@ View::show_header("Referral Sandbox");
                 </tr>
             </tbody>
         </table>
-        <input class="Button" type="submit" value="<?= t('server.global.submit') ?>" />
+        <input class="Button" type="submit" value="<?= t('server.common.submit') ?>" />
     </form>
 </div>
 <div class="thin BoxBody">
@@ -185,7 +185,7 @@ View::show_header("Referral Sandbox");
                     </tr>
                 </tbody>
             </table>
-            <input class="Button" type="submit" value="<?= t('server.global.submit') ?>" />
+            <input class="Button" type="submit" value="<?= t('server.common.submit') ?>" />
         </form>
     <?php } ?>
 </div>

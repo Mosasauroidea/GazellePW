@@ -23,8 +23,8 @@ View::show_header('Blog', 'bbcode', 'PageBlogHome');
                 <div style="width:100%" class="Form-title"><?= empty($_GET['action']) ? t('server.blog.create_a_blog_post') : t('server.blog.edit_blog_post') ?>
                     <span class="floatright">
                         <a class="Link" href="#" onclick="globalapp.toggleAny(event, '.BlogCreate', { updateText: true })">
-                            <span class="u-toggleAny-show u-hidden"><?= t('server.global.show') ?></span>
-                            <span class="u-toggleAny-hide"><?= t('server.global.hide') ?></span>
+                            <span class="u-toggleAny-show u-hidden"><?= t('server.common.show') ?></span>
+                            <span class="u-toggleAny-hide"><?= t('server.common.hide') ?></span>
                         </a>
                     </span>
                 </div>
@@ -54,7 +54,7 @@ View::show_header('Blog', 'bbcode', 'PageBlogHome');
                         <div>
                             <input id="subscribebox" type="checkbox" name="subscribe" <?= !empty($HeavyInfo['AutoSubscribe']) ? ' checked="checked"' : ''; ?> tabindex="2" />
 
-                            <label for="subscribebox"><?= t('server.global.subscribe') ?></label>
+                            <label for="subscribebox"><?= t('server.common.subscribe') ?></label>
                         </div>
                         <div>
                             <span><?= t('server.blog.thread_id') ?></span>
@@ -118,8 +118,8 @@ View::show_header('Blog', 'bbcode', 'PageBlogHome');
                         </div>
                         <div class="Post-headerActions">
                             <?php if (check_perms('admin_manage_blog')) { ?>
-                                <a href=" blog.php?action=editblog&amp;id=<?= $BlogID ?>" class="brackets"><?= t('server.global.edit') ?></a>
-                                <a href="blog.php?action=deleteblog&amp;id=<?= $BlogID ?>&amp;auth=<?= G::$LoggedUser['AuthKey'] ?>" class="brackets"><?= t('server.global.delete') ?></a>
+                                <a href=" blog.php?action=editblog&amp;id=<?= $BlogID ?>" class="brackets"><?= t('server.common.edit') ?></a>
+                                <a href="blog.php?action=deleteblog&amp;id=<?= $BlogID ?>&amp;auth=<?= G::$LoggedUser['AuthKey'] ?>" class="brackets"><?= t('server.common.delete') ?></a>
                             <?php    } ?>
                             <?php if ($ThreadID) { ?>
                                 <a href="forums.php?action=viewthread&amp;threadid=<?= $ThreadID ?>"><?= t('server.index.discuss') ?></a>

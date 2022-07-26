@@ -465,17 +465,17 @@ $Pages = Format::get_pages($Page, $TorrentCount, CONFIG['TORRENTS_PER_PAGE']);
                     </i>
                 </td>
                 <td class="Table-cell TableTorrent-cellStat">
-                    <i data-tooltip="<?= t('server.global.uploaded') ?>">
+                    <i data-tooltip="<?= t('server.common.uploaded') ?>">
                         <?= icon("uploaded") ?>
                     </i>
                 </td>
                 <td class="Table-cell TableTorrent-cellStat">
-                    <i data-tooltip="<?= t('server.global.downloaded') ?>">
+                    <i data-tooltip="<?= t('server.common.downloaded') ?>">
                         <?= icon("downloaded") ?>
                     </i>
                 </td>
                 <td class="Table-cell TableTorrent-cellStat">
-                    <i data-tooltip="<?= t('server.global.ratio') ?>">
+                    <i data-tooltip="<?= t('server.common.ratio') ?>">
                         <?= icon("ratio") ?>
                     </i>
                 </td>

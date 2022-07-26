@@ -35,7 +35,7 @@ View::show_header(t('server.top10.top_10_torrents_history'), '', 'PageTop10Histo
             </tr>
             <tr class="Form-row">
                 <td class="Form-submit" colspan="2">
-                    <input class="Button" type="submit" value="<?= t('server.global.submit') ?>" />
+                    <input class="Button" type="submit" value="<?= t('server.common.submit') ?>" />
                 </td>
             </tr>
         </table>
@@ -101,7 +101,11 @@ View::show_header(t('server.top10.top_10_torrents_history'), '', 'PageTop10Histo
 
         <br />
         <div class="pad box">
-            <h3><?= t('server.top10.top_10_for_before') ?><?= ($Type == 'day' ? $Date : t('server.top10.the_first_week_after_before') . "$Date" . t('server.top10.the_first_week_after_after')) ?><?= t('server.top10.top_10_for_after') ?></h3>
+            <h3>
+                <?= t('server.top10.top_10_for', ['Values' => [
+                    ($Type == 'day' ? $Date : t('server.top10.the_first_week_after', ['Values' => [$Date]]))
+                ]]) ?>
+            </h3>
             <?
             $TableTorrentClass = G::$LoggedUser['SettingTorrentTitle']['Alternative'] ? 'is-alternative' : '';
             ?>

@@ -162,7 +162,11 @@ class INVITE_TREE {
 
             ?>
                 <p style="font-weight: bold;">
-                    <?= t('server.user.this_tree_has_n_entries_n_branches_and_a_depth_of_n_1') ?><?= number_format($Count) ?><?= t('server.user.this_tree_has_n_entries_n_branches_and_a_depth_of_n_2') ?><?= number_format($Branches) ?><?= t('server.user.this_tree_has_n_entries_n_branches_and_a_depth_of_n_3') ?><?= number_format($MaxTreeLevel - $OriginalTreeLevel) ?><?= t('server.user.this_tree_has_n_entries_n_branches_and_a_depth_of_n_4') ?>
+                    <?= t('server.user.this_tree_has_n_entries_n_branches_and_a_depth_of_n', ['Values' => [
+                        number_format($Count),
+                        number_format($Branches),
+                        number_format($MaxTreeLevel - $OriginalTreeLevel)
+                    ]]) ?>
                 <?
                 $ClassStrings = array();
                 foreach ($ClassSummary as $ClassID => $ClassCount) {
@@ -190,8 +194,9 @@ class INVITE_TREE {
                 }
                 echo '. ';
                 echo $DisabledCount;
-                echo ($DisabledCount == 1) ? t('server.user.n_users_are_disabled_1') : t('server.user.n_users_are_disabled_2');
-                echo t('server.user.n_users_are_disabled_3');
+                echo t('server.user.n_users_are_disabled', ['Values' => [
+                    t('server.user.n_users_are_disabled_count', ['Count' => $DisabledCount])
+                ]]);
                 if ($DisabledCount == 0) {
                     echo '0%)';
                 } else {
@@ -199,8 +204,9 @@ class INVITE_TREE {
                 }
                 echo t('server.user.comma_space_and_space');
                 echo $DonorCount;
-                echo ($DonorCount == 1) ? t('server.user.n_users_have_donated_1') : t('server.user.n_users_have_donated_2');
-                echo t('server.user.n_users_have_donated_3');
+                echo t('server.user.n_users_have_donated', ['Values' => [
+                    t('server.user.n_users_have_donated_count', ['Count' => $DonorCount])
+                ]]);
                 if ($DonorCount == 0) {
                     echo '0%)';
                 } else {

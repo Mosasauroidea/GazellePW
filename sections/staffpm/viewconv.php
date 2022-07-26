@@ -279,7 +279,7 @@ if ($ConvID = (int)$_GET['id']) {
                                         <select class="Input" name="donation_currency">
                                             <option class="Select-option" value="EUR"><?= t('server.staffpm.eur') ?></option>
                                         </select>
-                                        <input class="Button" type="submit" value="<?= t('server.global.submit') ?>" />
+                                        <input class="Button" type="submit" value="<?= t('server.common.submit') ?>" />
                                     </div>
                                 </form>
                             </div>
