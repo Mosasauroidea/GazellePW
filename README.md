@@ -1,4 +1,4 @@
-[中文](./README-zh.md) | [Screenshot](https://raw.githubusercontent.com/Mosasauroidea/GazellePW/main/public/static/stylespreview/en-github-dark.png)
+[中文](./README-zh.md) | [Português](./README-pt.md) | [Screenshot](https://raw.githubusercontent.com/Mosasauroidea/GazellePW/main/public/static/stylespreview/en-github-dark.png)
 
 <a href="./docs/en/i18n.md"><span style="color: #d8210d; font-size: 1.5rem; text-decoration: underline;">Help us translate this project into your language!</span></a>
 
