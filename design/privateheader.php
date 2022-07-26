@@ -6,7 +6,7 @@ define('FOOTER_FILE', CONFIG['SERVER_ROOT'] . '/design/privatefooter.php');
 
 global $LoggedUser;
 $donation = new Donation();
-$CurrentLang = Lang::getUserLang($LoggedUser['ID']);
+$CurrentLang = Lang::getCurrentLangStandard();
 
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -116,7 +116,7 @@ $Alerts = array();
 $ModBar = array();
 // Important banner
 if (isset(CONFIG['BANNER_URL']) && !empty(CONFIG['BANNER_URL'])) {
-    $Alerts[] = "<a class='HeaderAnnounceItem-link' href='" . CONFIG['BANNER_URL'] . "'>" . t('server.other.banner_text') . "</a>";
+    $Alerts[] = "<a class='HeaderAnnounceItem-link' href='" . CONFIG['BANNER_URL'] . "'>" . CONFIG['BANNER_TEXT'][$CurrentLang]  . "</a>";
 }
 
 // Staff blog

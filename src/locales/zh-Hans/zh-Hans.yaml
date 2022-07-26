@@ -7452,5 +7452,3 @@ server.wiki.view_user: |-
   查看用户
 server.wiki.you_must_be_a_higher_user_class_to_view: |-
   你的用户等级不足以阅读本文
-server.other.banner_text: |-
-  顶部通知

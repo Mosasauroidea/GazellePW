@@ -70,6 +70,12 @@ class Lang {
         return $Lang;
     }
 
+    public static function getCurrentLangStandard() {
+        global $LoggedUser;
+        $Lang = self::getUserLang($LoggedUser['ID']);
+        return $Lang == 'chs' ? 'zh-Hans' : $Lang;
+    }
+
     public static function getLangfilePath($Page, $Lang = false) {
         $Lang = self::getLang($Lang);
         return CONFIG['SERVER_ROOT'] . "/lang/$Lang/lang_$Page.php";

@@ -187,6 +187,10 @@ $CONFIG['MINIO_BUCKET'] = "";
 
 // Banner info
 $CONFIG['BANNER_URL'] = "/apply.php";
+$CONFIG['BANNER_TEXT'] = [
+    "en" => "Banner Notification",
+    "zh-Hans" => "顶部通知"
+];
 
 $CONFIG['USER_CLASS'] = [
     'USER' => "2",

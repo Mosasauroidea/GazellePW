@@ -7588,5 +7588,3 @@ server.wiki.view_user: |-
   View user
 server.wiki.you_must_be_a_higher_user_class_to_view: |-
   You must be a higher user class to view this wiki article
-server.other.banner_text: |-
-  Banner Notification

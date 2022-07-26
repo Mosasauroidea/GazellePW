@@ -1,6 +1,6 @@
 [English](./README.md) | [截图](https://raw.githubusercontent.com/Mosasauroidea/GazellePW/main/public/static/stylespreview/zh-github-dark.png)
 
-[<span style="color: #d8210d; font-size: 1.5rem; text-decoration: underline;">帮助我们翻译此项目！</span>](./docs/zh-Hans/i18n.md)
+<a href="./docs/zh-Hans/i18n.md"><span style="color: #d8210d; font-size: 1.5rem; text-decoration: underline;">帮助我们翻译此项目！</span></a>
 
 # GazellePW
 
