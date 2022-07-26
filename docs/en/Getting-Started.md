@@ -1,45 +1,28 @@
 # Getting Started
 
-## Runtime Dependencies
+## Setup Project
 
-- php7.2+
-- SphinxSearch
-- NodeJS
-- Ocelot
-- Nginx
-- Memcached
-- Mysql 5.7
-- Linux crontab
+1. Install [Docker](https://docs.docker.com/get-started/) and [Docker Compose](https://docs.docker.com/compose/install/)
 
-## Quick Start
-
-> Set up [Docker](https://docs.docker.com/get-started/) and [Docker Compose](https://docs.docker.com/compose/install/)
+2. Run it
 
 ```shell
-# Clone repository
-git clone xxx/GazellePW
-cd GazellePW
-
-# Copy and edit .env file
-cp .env.template .env
-
-# Bulild Docker
+# Build Docker image
+# For x86 CPU
 docker build -t gpw-web:latest .
-# For Macbook M1
+# For ARM CPU (Macbook M1)
 docker buildx create --use
 docker buildx build --platform linux/amd64 --load -t gpw-web:latest .
 
-# Run Docker
+# Start
 docker-compose -p gazelle up
 ```
 
-Now you can access the website through http://localhost:9000
+3. Now you can access the website through http://localhost:9000
 
-To register: without email service configed, you could check the email file under local environment located at `./cache/emails/`. Please click on the link in the email to activate your account.
+4. Register an account: check email in `./cache/emails/` to activate your account.
 
----
-
-For more config detail, you can go to [config.template.php](classes/config.template.php). If you need the tracker, please deploy the [Ocelot](https://github.com/Mosasauroidea/Ocelot).
+5. If you need the tracker, please deploy the [Ocelot](https://github.com/Mosasauroidea/Ocelot).
 
 ## Setup Editor
 
@@ -47,14 +30,10 @@ For more config detail, you can go to [config.template.php](classes/config.templ
 
 ## Going further
 
-Create a Mysql phinx migration:
-
 ```shell
- docker exec -it --user gazelle gpw-web  vendor/bin/phinx create MyNewMigration
-```
+# Create a database migration
+docker-compose exec -it --user gazelle web  vendor/bin/phinx create MyNewMigration
 
-Edit the resulting file and then apply it:
-
-```shell
-docker exec -it --user gazelle gpw-web vendor/bin/phinx migrate
+# Run database migration
+docker-compose exec -it --user gazelle web vendor/bin/phinx migrate
 ```

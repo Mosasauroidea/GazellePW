@@ -4420,7 +4420,7 @@ server.tools.site_options: |-
 server.tools.size_limitation: |-
   Size limitation
 server.tools.size_limitation_note: |-
-  “等于” 与 “大于” “小于” 互斥，如果同时都填写了，只有 “等于” 会生效。如果希望对所有大小的种子生效，三处留空即可。
+  "Equal to", "greater than" and "less than" are mutually exclusive. If both are filled in at the same time, only "equal to" will take effect. If you want to work for all sizes of seeds, leave them empty.
 server.tools.size_per_day_this_month: |-
   Size per day this month
 server.tools.size_per_day_this_week: |-
@@ -4873,8 +4873,6 @@ server.torrents.action_uploaded: |-
   uploaded
 server.torrents.active: |-
   Active
-server.torrents.actor: |-
-  Actor
 server.torrents.actual_hnrs: |-
   Actual H&Rs
 server.torrents.add_artist: |-
@@ -5319,8 +5317,6 @@ server.torrents.resolution: |-
   Resolution
 server.torrents.resolve: |-
   Resolve
-server.torrents.resolve_title: |-
-  Click here to reset the resolution options to their default values.
 server.torrents.retention_slot: |-
   Retention Slot
 server.torrents.retention_slot_requirements: |-
@@ -5635,8 +5631,6 @@ server.torrents.you_have_recently_deleted_3_torrents: |-
   You have recently deleted 3 torrents. Please contact a staff member if you need to delete more.
 server.torrents.you_have_rewarded: |-
   You have rewarded
-server.upload.actor: |-
-  Actor
 server.upload.album_note: |-
   <h7>Do not include the words remaster, re-issue, MFSL Gold, limited edition, bonus tracks, bonus disc or country-specific information in this field. That belongs in the release information fields below; see <a href='wiki.php?action=article&amp;id=6' target='_blank'>this</a> for further information. Also remember to use the correct capitalization for your upload. See the <a href='wiki.php?action=article&amp;id=68' target='_blank'>Capitalization Guidelines</a> for more information.</h7>
 server.upload.arabic: |-

@@ -1,6 +1,6 @@
-# Writing Markdown/MDX
+# 书写 Markdown/MDX
 
-## Text
+## 文字
 
 ```
 **bold**
@@ -11,7 +11,7 @@ _italic_
 <H1 id>Heading 1</H1>            // h1 with anchor
 ```
 
-## Common
+## 常用
 
 ```
 [Link](href)
@@ -20,7 +20,7 @@ https://autolink.com
 {props.SITE_NAME}          // variable
 ```
 
-## Table
+## 表格
 
 ```
 | Header1 | Header2 | Header3 |

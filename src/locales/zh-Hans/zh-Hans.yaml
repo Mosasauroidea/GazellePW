@@ -4792,8 +4792,6 @@ server.torrents.action_uploaded: |-
   已发布
 server.torrents.active: |-
   最新活动
-server.torrents.actor: |-
-  演员
 server.torrents.actual_hnrs: |-
   实际统计的 H&R
 server.torrents.add_artist: |-
@@ -5238,8 +5236,6 @@ server.torrents.resolution: |-
   分辨率
 server.torrents.resolve: |-
   处理
-server.torrents.resolve_title: |-
-  点此重设处理选项为默认值。
 server.torrents.retention_slot: |-
   存档槽
 server.torrents.retention_slot_requirements: |-
@@ -5540,8 +5536,6 @@ server.torrents.you_have_recently_deleted_3_torrents: |-
   最近你已删除了 3 个种子。如果你还想删除更多，请联系管理组。
 server.torrents.you_have_rewarded: |-
   已赠送
-server.upload.actor: |-
-  演员
 server.upload.album_note: |-
   <strong class='u-colorWarning'>注意：</strong>下面艺人和标题的命名，请仔细阅读规则 <a href='rules.php?p=upload#2.3' target='_blank'>2.3. 格式要求</a> 及 <a href='wiki.php?action=article&id=6' target='_blank'>发种命名规则</a>。
 server.upload.arabic: |-

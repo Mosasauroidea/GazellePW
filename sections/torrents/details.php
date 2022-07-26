@@ -431,7 +431,7 @@ View::show_header($Title, 'browse,comments,torrent,bbcode,recommend,cover_art,su
                             }
                         }
                         if (!empty($Artists[6]) && count($Artists[6]) > 0) {
-                            print '<li class="SidebarList-item"><strong class="artists_label">' . t('server.torrents.actor') . ':</strong></li>';
+                            print '<li class="SidebarList-item"><strong class="artists_label">' . t('client.common.actor') . ':</strong></li>';
                             foreach ($Artists[6] as $Artist) {
                             ?>
                                 <li class="SidebarList-item u-hoverToShow-hover">
@@ -471,7 +471,7 @@ View::show_header($Title, 'browse,comments,torrent,bbcode,recommend,cover_art,su
                                         <option class="Select-option" value="3"><?= t('server.torrents.movie_producer') ?></option>
                                         <option class="Select-option" value="4"><?= t('server.torrents.composer') ?></option>
                                         <option class="Select-option" value="5"><?= t('server.torrents.cinematographer') ?></option>
-                                        <option class="Select-option" value="6"><?= t('server.torrents.actor') ?></option>
+                                        <option class="Select-option" value="6"><?= t('client.common.actor') ?></option>
                                     </select>
                                 </div>
                                 <input class="Button" type="submit" value="<?= t('server.common.add') ?>" />

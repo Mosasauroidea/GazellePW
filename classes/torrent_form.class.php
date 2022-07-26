@@ -406,7 +406,7 @@ class TORRENT_FORM {
                                             <option class="Select-option" value="5" <?= ($Importance == '5' ? ' selected="selected"' : ($this->DisabledFlag ? 'disabled' : '')) ?>>
                                                 <?= t('server.upload.cinematographer') ?></option>
                                             <option class="Select-option" value="6" <?= ($Importance == '6' ? ' selected="selected"' : ($this->DisabledFlag ? 'disabled' : '')) ?>>
-                                                <?= t('server.upload.actor') ?></option>
+                                                <?= t('client.common.actor') ?></option>
                                         </select>
                                         <?
                                         if ($FirstArtist) {
@@ -436,7 +436,7 @@ class TORRENT_FORM {
                                     <option class="Select-option" value="3"><?= t('server.upload.movie_producer') ?></option>
                                     <option class="Select-option" value="4"><?= t('server.upload.composer') ?></option>
                                     <option class="Select-option" value="5"><?= t('server.upload.cinematographer') ?></option>
-                                    <option class="Select-option" value="6"><?= t('server.upload.actor') ?></option>
+                                    <option class="Select-option" value="6"><?= t('client.common.actor') ?></option>
                                 </select>
                                 <a href="#" onclick="globalapp.uploadAddArtistField(true); return false;" class="brackets add-artist">+</a>
                                 <a href="#" onclick="globalapp.uploadRemoveArtistField(); return false;" class="brackets remove-artist">&minus;</a>

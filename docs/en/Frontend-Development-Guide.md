@@ -35,24 +35,22 @@
 
 ## Javascript
 
-### Must not access DOM via class
+### Don't not access DOM via class
 
-Instead use id or attribute to access the DOM
+Instead use `id` or `js attribute` to access the DOM. So that refactor the UI won't break the Javascript features.
 
 ```jsx
-<div class="ButtonAdd" id="button-add" is-loader>
-document.querySelector('.ButtonAdd') // NO, don't do this
+<div class="ButtonAdd" id="button-add" js="ButtonAdd">
+document.querySelector('.ButtonAdd') // NO
 document.querySelector('#button-add') // YES
-document.querySelectorAll('[is-loader]') // YES
+document.querySelectorAll('js[ButtonAdd]') // YES
 ```
-
-Split the UI from the logical, so that refactor the UI (change the class) won't break the Javascript features.
 
 ## Icon
 
 - Must be in svg format.
-- Must have `class="icon" width=".." height=".." viewBox=".."`
-- Custom Color: `currentColor`
+- Must have `<svg class="icon" width=".." height=".." viewBox="..">`
+- Custom Color: `<path fill="currentColor">`
 
 ### Create icon
 

@@ -1,11 +1,10 @@
-[English](../../README.md) | [截图](https://raw.githubusercontent.com/Mosasauroidea/GazellePW/main/public/static/stylespreview/zh-github-dark.png)
+[English](./README.md) | [截图](https://raw.githubusercontent.com/Mosasauroidea/GazellePW/main/public/static/stylespreview/zh-github-dark.png)
 
-
-<!--
-<a href="./docs/en/i18n.md"><span style="color: #d8210d; font-size: 1.5rem; text-decoration: underline;">Help us translate this project into your language!</span></a>
--->
+[<span style="color: #d8210d; font-size: 1.5rem; text-decoration: underline;">帮助我们翻译此项目！</span>](./docs/zh-Hans/i18n.md)
 
 # GazellePW
+
+[![Crowdin](https://badges.crowdin.net/gazellepw/localized.svg)](https://crowdin.com/project/gazellepw)
 
 全称 GazellePosterWall，一个 PT（Private Tracker）Web 框架。 Gazelle 的 **影视版本**。
 
@@ -44,9 +43,9 @@
 
 ## 文档
 
-- [快速开始](./Getting-Started.md)
-- [前端开发指南](./Frontend-Development-Guide.md)
-- [书写 Markdown/MDX](./Writing-Markdown-Mdx.md)
+- [快速开始](./docs/zh-Hans/Getting-Started.md)
+- [前端开发指南](./docs/zh-Hans/Frontend-Development-Guide.md)
+- [书写 Markdown/MDX](./docs/zh-Hans/Writing-Markdown-Mdx.md)
 
 ## 参与贡献
 

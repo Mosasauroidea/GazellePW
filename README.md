@@ -1,10 +1,10 @@
-[中文](./docs/zh-Hans/README.md) | [Screenshot](https://raw.githubusercontent.com/Mosasauroidea/GazellePW/main/public/static/stylespreview/en-github-dark.png)
+[中文](./README-zh.md) | [Screenshot](https://raw.githubusercontent.com/Mosasauroidea/GazellePW/main/public/static/stylespreview/en-github-dark.png)
 
-<!--
-<a href="./docs/en/i18n.md"><span style="color: #d8210d; font-size: 1.5rem; text-decoration: underline;">Help us translate this project into your language!</span></a>
--->
+[<span style="color: #d8210d; font-size: 1.5rem; text-decoration: underline;">Help us translate this project into your language!</span>](./docs/en/i18n.md)
 
 # GazellePW
+
+[![Crowdin](https://badges.crowdin.net/gazellepw/localized.svg)](https://crowdin.com/project/gazellepw)
 
 GazellePW (GazellePosterWall) is a web framework geared towards private BitTorrent trackers. It's a **movie version** of Gazelle.
 
@@ -51,7 +51,6 @@ GazellePW (GazellePosterWall) is a web framework geared towards private BitTorre
 
 Any contributions you make are greatly appreciated!
 
-- Help wanted: move [i18n](./docs/en/i18n.md) to ICU message format, use [symfony/translation](https://github.com/symfony/translation) for PHP and [formatjs](https://github.com/formatjs/formatjs) for JavaScript.
 - Translate the documentation and site into your language.
 - Please report bugs by submitting a [Issues](https://github.com/Mosasauroidea/GazellePW/issues/new/choose).
 - Please submit contributions using [Pull requests](https://github.com/Mosasauroidea/GazellePW/pulls).

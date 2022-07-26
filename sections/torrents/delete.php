@@ -248,7 +248,7 @@ if (check_perms('admin_reports')) {
                         <?              /* END REPORTED STUFF :|: BEGIN MOD STUFF */ ?>
                         <tr class="Form-row">
                             <td class="Form-label">
-                                <a href="javascript:Load('<?= $ReportID ?>')" data-tooltip="<?= t('server.torrents.resolve_title') ?>"><?= t('server.torrents.resolve') ?>:</a>
+                                <a href="javascript:Load('<?= $ReportID ?>')" data-tooltip="<?= t('server.reportsv2.resolve_title') ?>"><?= t('server.torrents.resolve') ?>:</a>
                             </td>
                             <td class="Form-items" colspan="3">
                                 <div class="Form-inputs">

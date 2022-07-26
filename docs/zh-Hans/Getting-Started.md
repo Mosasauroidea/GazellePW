@@ -1,60 +1,39 @@
-# Getting Started
+# 快速开始
 
-## Runtime Dependencies
+## 配置项目
 
-- php7.2+
-- SphinxSearch
-- NodeJS
-- Ocelot
-- Nginx
-- Memcached
-- Mysql 5.7
-- Linux crontab
+1. 安装 [Docker](https://docs.docker.com/get-started/) 和 [Docker Compose](https://docs.docker.com/compose/install/)
 
-## Quick Start
-
-> Set up [Docker](https://docs.docker.com/get-started/) and [Docker Compose](https://docs.docker.com/compose/install/)
+2. 运行
 
 ```shell
-# Clone repository
-git clone xxx/GazellePW
-cd GazellePW
-
-# Copy and edit .env file
-cp .env.template .env
-
-# Bulild Docker
+# 创建Docker镜像
+# x86 处理器
 docker build -t gpw-web:latest .
-# For Macbook M1
+# ARM 处理器 (Macbook M1)
 docker buildx create --use
 docker buildx build --platform linux/amd64 --load -t gpw-web:latest .
 
-# Run Docker
+# 运行
 docker-compose -p gazelle up
 ```
 
-Now you can access the website through http://localhost:9000
+3. 现在你可以通过 http://localhost:9000 访问网站。
 
-To register: without email service configed, you could check the email file under local environment located at `./cache/emails/`. Please click on the link in the email to activate your account.
+4. 注册用户: 可以通过 `./cache/emails` 查找本地邮件来激活账号。
 
----
+5. 如果你需要 Tracker, 部署[Ocelot](https://github.com/Mosasauroidea/Ocelot)。
 
-For more config detail, you can go to [config.template.php](classes/config.template.php). If you need the tracker, please deploy the [Ocelot](https://github.com/Mosasauroidea/Ocelot).
+## 配置编辑器
 
-## Setup Editor
+- VSCode: 安装 [Prettier](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode), [XML](https://marketplace.visualstudio.com/items?itemName=redhat.vscode-xml), [PHP Intelephense](https://marketplace.visualstudio.com/items?itemName=bmewburn.vscode-intelephense-client), [Crowdin](https://marketplace.visualstudio.com/items?itemName=Crowdin.vscode-crowdin)
 
-- VSCode: Install [Prettier](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode), [XML](https://marketplace.visualstudio.com/items?itemName=redhat.vscode-xml), [PHP Intelephense](https://marketplace.visualstudio.com/items?itemName=bmewburn.vscode-intelephense-client), [Crowdin](https://marketplace.visualstudio.com/items?itemName=Crowdin.vscode-crowdin)
-
-## Going further
-
-Create a Mysql phinx migration:
+## 高级
 
 ```shell
- docker exec -it --user gazelle gpw-web  vendor/bin/phinx create MyNewMigration
-```
+# 创建数据库 migration
+docker-compose exec -it --user gazelle web  vendor/bin/phinx create MyNewMigration
 
-Edit the resulting file and then apply it:
-
-```shell
-docker exec -it --user gazelle gpw-web vendor/bin/phinx migrate
+# 运行数据库 migration
+docker-compose exec -it --user gazelle web vendor/bin/phinx migrate
 ```
