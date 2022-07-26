@@ -135,7 +135,7 @@ class Time {
         if ($minutes > 0 && $levels > 0) {
             if ($return != '') {
                 if (t('server.time.y') == 'year') {
-                    $return .= t('server.time.space_and_space');
+                    $return .= t('server.time.space_and_space', ['Values' => ['']]);
                 } else {
                     $return .= ' ';
                 }

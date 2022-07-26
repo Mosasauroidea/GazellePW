@@ -1,5 +1,3 @@
-client.a_one: item
-client.a_other: items
 client.bbcode.edit: |-
   Edit
 client.bbcode.loading: |-
@@ -212,10 +210,14 @@ server.apply.manage_roles_at: |-
   Manage roles at {{CONFIG['SITE_NAME']}}
 server.apply.member_will_see_this_reply: |-
   member will see this reply
-server.apply.new_applicant: |-
-  new Applicants
-server.apply.new_applicant_reply: |-
-  new Applicant replies
+server.apply.new_applicant_one: |-
+  1 new Applicant
+server.apply.new_applicant_other: |-
+  %s new Applicants
+server.apply.new_applicant_reply_one: |-
+  1 new Applicant reply
+server.apply.new_applicant_reply_other: |-
+  %s new Applicant replies
 server.apply.new_role: |-
   New
 server.apply.no_current_roles: |-
@@ -1139,8 +1141,10 @@ server.common.my_subscriptions: |-
   Subscriptions
 server.common.my_uploaded: |-
   Uploaded
-server.common.n_fl_token: |-
-  &nbsp;Freeleech token
+server.common.n_fl_token_one: |-
+  1 Freeleech token
+server.common.n_fl_token_other: |-
+  %s Freeleech tokens
 server.common.no_torrent_tags: |-
   No torrent tags
 server.common.not_seeded_sure_use_fl: |-
@@ -1173,8 +1177,6 @@ server.common.rt_rating: |-
   Rotten Tomatoes rating
 server.common.rules: |-
   Rules
-server.common.s: |-
-  s
 server.common.search: |-
   Search
 server.common.seeders: |-
@@ -1299,81 +1301,6 @@ server.donate.profile_info: |-
   Profile info(s)
 server.donate.progress: |-
   Donation (Annual goal: %d%% achieved)
-server.donate.rank_1_body: |-
-  <ul>
-    <li>Red Heart Donor</li>
-    <li><a href="/wiki.php?action=article&id=91">Inactivity</a> timer immunity</li>
-    <li><a href="/collages.php">Collage</a> creation privileges</li>
-    <li>1 additional personal collage</li>
-  </ul>
-server.donate.rank_1_header: |-
-  $7.5
-server.donate.rank_20_body: |-
-  <ul>
-    <li>Second avatar</li>
-  </ul>
-server.donate.rank_20_header: |-
-  $150
-server.donate.rank_2_body: |-
-  <ul>
-    <li>Copper Donor</li>
-    <li>2 additional personal collage</li>
-    <li>2 <a href="/user.php?action=invite">invites</a></li>
-    <li>Donor icon mouseover text</li>
-    <li>1 additional personal profile</li>
-  </ul>
-server.donate.rank_2_header: |-
-  $15
-server.donate.rank_3_body: |-
-  <ul>
-    <li>Bronze Donor</li>
-    <li>3 additional personal collage</li>
-    <li>3 invites</li>
-    <li>Avatar mouseover text</li>
-    <li>2 additional personal profiles</li>
-  </ul>
-server.donate.rank_3_header: |-
-  $22.5
-server.donate.rank_4_body: |-
-  <ul>
-    <li>Silver Donor</li>
-    <li>4 additional personal collage</li>
-    <li>4 invites</li>
-    <li>Donor icon link</li>
-    <li>3 additional personal profiles</li>
-  </ul>
-server.donate.rank_4_header: |-
-  $30
-server.donate.rank_50_body: |-
-  <ul>
-    <li>Diamond Donor</li>
-    <li>Immunity the reduction of Donate Rank</li>
-  </ul>
-server.donate.rank_50_header: |-
-  $375
-server.donate.rank_5_body: |-
-  <ul>
-    <li>5 additional personal collage</li>
-    <li>5 invites</li>
-  </ul>
-server.donate.rank_5_header: |-
-  $37.5
-server.donate.rank_6_body: |-
-  <ul>
-    <li>Gold Donor</li>
-    <li>6 invites</li>
-  </ul>
-server.donate.rank_6_header: |-
-  $45
-server.donate.rank_8_body: |-
-  <ul>
-    <li>Custom donor icon</li>
-    <li>Can view donor forum</li>
-    <li>Donor forum honorific</li>
-    <li>4 additional personal profiles</li>
-  </ul>
-server.donate.rank_8_header: |-
-  $60
 server.donate.red_rank: |-
   Red
 server.donate.silver_rank: |-
@@ -1788,8 +1715,6 @@ server.inbox.report_request_and_explain: |-
   ]report the request[/url] and explain why this request should not have been unfilled.
 server.inbox.request_filled_unfilled: |-
   A request you filled has been unfilled
-server.inbox.s: |-
-  s
 server.inbox.send_a_message_to_user: |-
   Send a message to %s
 server.inbox.send_message: |-
@@ -2278,10 +2203,14 @@ server.pub.a: |-
   a
 server.pub.login: |-
   Login
-server.pub.new_quote: |-
+server.pub.new_quote_one: |-
   New quote
-server.pub.new_subscription: |-
+server.pub.new_quote_other: |-
+  New quotes
+server.pub.new_subscription_one: |-
   New subscription
+server.pub.new_subscription_other: |-
+  New subscriptions
 server.pub.not_allowed_email: |-
   We prohibit ProtonMail!
 server.pub.note: |-
@@ -2302,16 +2231,22 @@ server.pub.register: |-
   Register
 server.pub.report: |-
   &nbsp;Reported
-server.pub.s: |-
-  s
-server.pub.space_new_collage_update: |-
+server.pub.space_new_collage_update_one: |-
   &nbsp;new collage update
-server.pub.space_new_message: |-
+server.pub.space_new_collage_update_other: |-
+  &nbsp;new collage updates
+server.pub.space_new_message_one: |-
   &nbsp;new message
-server.pub.space_new_staff_pm: |-
+server.pub.space_new_message_other: |-
+  &nbsp;new messages
+server.pub.space_new_staff_pm_one: |-
   &nbsp;new Staff PM
-server.pub.space_new_torrent_notification: |-
+server.pub.space_new_staff_pm_other: |-
+  &nbsp;new Staff PMs
+server.pub.space_new_torrent_notification_one: |-
   &nbsp;new torrent notification
+server.pub.space_new_torrent_notification_other: |-
+  &nbsp;new torrent notifications
 server.pub.statistics: |-
   Statistics
 server.pub.toolbox: |-
@@ -2524,8 +2459,6 @@ server.reports.report_request_update_guide_1: |-
   This option is for asking the moderators to update your request to the new system.
 server.reports.report_request_update_guide_2: |-
   If your request has no other votes, you can just edit it yourself!
-server.reports.report_request_update_guide_3: |-
-  If possible, please include a <a href="http://www.discogs.com">Discogs</a> or <a href="https://musicbrainz.org">MusicBrainz</a> link in the comments field.
 server.reports.report_user_guide_1: |-
   The Report User option is for reporting a user who has broken one of the golden rules outlined <a href="rules.php">here</a>, or if you need to alert staff to something specific about a user that cannot be reported elsewhere.
 server.reports.report_user_guide_2: |-
@@ -2807,11 +2740,10 @@ server.reportsv2.there_are_n_other_reports_for_torrents_in_this_group_report_oth
   are %s other_reports
 server.reportsv2.there_are_n_other_reports_for_torrents_uploaded_by_this_user: |-
   There %s for torrent(s) uploaded by this user
-server.reportsv2.there_are_n_other_reports_for_torrents_uploaded_by_this_user_count_other: |-
-  are %s other reports
 server.reportsv2.there_are_n_other_reports_for_torrents_uploaded_by_this_user_count_one: |-
   is 1 other report
-server.reportsv2.there_are_n_other_reports_for_torrents_uploaded_by_this_user_5: |-
+server.reportsv2.there_are_n_other_reports_for_torrents_uploaded_by_this_user_count_other: |-
+  are %s other reports
 server.reportsv2.this_has_resulted_in_an_n_week_warning: |-
   This has resulted in a [url=%s&nbsp;week warning.[/url]
 server.reportsv2.this_has_resulted_in_the_loss_of_your_upload_privilege: |-
@@ -3269,8 +3201,6 @@ server.staffpm.amount: |-
   Amount
 server.staffpm.assigned_to: |-
   Assigned to
-server.staffpm.back_to_inbox: |-
-  Back to inbox
 server.staffpm.compose_new: |-
   Compose new
 server.staffpm.date: |-
@@ -3473,7 +3403,7 @@ server.time.mns: |-
 server.time.ms: |-
   months
 server.time.space_and_space: |-
-  &nbsp;and&nbsp;
+  &nbsp;%sand&nbsp;
 server.time.w: |-
   week
 server.time.ws: |-
@@ -3875,6 +3805,10 @@ server.tools.disable_entire_tree: |-
   Disable entire tree
 server.tools.disable_invites_privileges: |-
   Disable invites privileges
+server.tools.dnu_added: |-
+  Add Details
+server.tools.dnu_comment: |-
+  Note
 server.tools.dnu_list: |-
   "Do Not Upload" list
 server.tools.do_not_process_these_donations_manually: |-
@@ -3891,10 +3825,6 @@ server.tools.drag_and_drop_table_rows_to_reorder: |-
   Drag and drop table rows to reorder.
 server.tools.drive: |-
   Drive
-server.tools.drive_offsets: |-
-  Drive Offsets
-server.tools.drive_offsets_notice: |-
-  This page lists all of the stored Drive Offsets on {{CONFIG['SITE_NAME']}}. We use these offsets to check the offset listed in a rip log file. This information comes from <a href="http://www.accuraterip.com/driveoffsets.htm" target="_blank" rel="noreferrer nofollow">Accuraterip</a>.
 server.tools.dupe_ips: |-
   Dupe IPs
 server.tools.dupes: |-
@@ -4427,8 +4357,6 @@ server.tools.row_size: |-
   Row Size
 server.tools.rows: |-
   Rows
-server.tools.s: |-
-  s
 server.tools.sales_promotion_period: |-
   Sales promotion period
 server.tools.sales_promotion_plan: |-
@@ -4527,10 +4455,14 @@ server.tools.space_bonus: |-
   &nbsp;bonus
 server.tools.space_in_this_view: |-
   &nbsp;in this view
-server.tools.space_invite: |-
-  &nbsp;invite
-server.tools.space_token: |-
-  &nbsp;token
+server.tools.space_invite_one: |-
+  1 invite
+server.tools.space_invite_other: |-
+  %s invites
+server.tools.space_token_one: |-
+  1 token
+server.tools.space_token_other: |-
+  %s tokens
 server.tools.special: |-
   Special
 server.tools.special_effects_subtitles: |-
@@ -5268,8 +5200,10 @@ server.torrents.movie_votes: |-
   votes
 server.torrents.my_notifications: |-
   My notifications
-server.torrents.n_user: |-
-  &nbsp;user
+server.torrents.n_user_one: |-
+  1 user.
+server.torrents.n_user_other: |-
+  %s users.
 server.torrents.name: |-
   Name
 server.torrents.neutral_leech: |-
@@ -5413,8 +5347,6 @@ server.torrents.rt_title: |-
   RottenTomatoes ID
 server.torrents.rules_broken: |-
   Rules broken
-server.torrents.s: |-
-  s
 server.torrents.s_notifications: |-
   's notifications
 server.torrents.scene: |-
@@ -6870,8 +6802,6 @@ server.user.restricted_forums_title: |-
   Enter a comma-delimited list of forum IDs.
 server.user.rss_address: |-
   Address
-server.user.s: |-
-  s
 server.user.se_class: |-
   Second class
 server.user.search_results: |-
@@ -7352,8 +7282,10 @@ server.user.warned: |-
   Warned
 server.user.warning_expires_in: |-
   Warning expires in
-server.user.week: |-
+server.user.week_one: |-
   week
+server.user.week_other: |-
+  weeks
 server.user.wiki: |-
   Wiki
 server.user.year: |-
@@ -7434,8 +7366,10 @@ server.userhistory.new: |-
   New
 server.userhistory.new_right_bracket: |-
   &nbsp;new)
-server.userhistory.new_torrent: |-
-  new torrent
+server.userhistory.new_torrent_one: |-
+  %s new torrent
+server.userhistory.new_torrent_other: |-
+  %s new torrents
 server.userhistory.no: |-
   No
 server.userhistory.no_quotes: |-
@@ -7474,8 +7408,6 @@ server.userhistory.registration_ip_address: |-
   Registration IP address
 server.userhistory.request: |-
   Request
-server.userhistory.s: |-
-  s
 server.userhistory.search: |-
   Search
 server.userhistory.search_wimia_com: |-
@@ -7662,3 +7594,5 @@ server.wiki.view_user: |-
   View user
 server.wiki.you_must_be_a_higher_user_class_to_view: |-
   You must be a higher user class to view this wiki article
+server.other.banner_text: |-
+  Banner Notification

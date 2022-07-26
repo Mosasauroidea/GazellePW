@@ -115,8 +115,8 @@ $CurrentLang = Lang::getUserLang($LoggedUser['ID']);
 $Alerts = array();
 $ModBar = array();
 // Important banner
-if (isset(CONFIG['BANNER_URL']) && isset(CONFIG['BANNER_TEXT']) && !empty(CONFIG['BANNER_URL']) && !empty(CONFIG['BANNER_TEXT'])) {
-    $Alerts[] = "<a class='HeaderAnnounceItem-link' href='" . CONFIG['BANNER_URL'] . "'>" . CONFIG['BANNER_TEXT'] . "</a>";
+if (isset(CONFIG['BANNER_URL']) && !empty(CONFIG['BANNER_URL'])) {
+    $Alerts[] = "<a class='HeaderAnnounceItem-link' href='" . CONFIG['BANNER_URL'] . "'>" . t('server.other.banner_text') . "</a>";
 }
 
 // Staff blog
@@ -325,20 +325,17 @@ if (check_perms('admin_reports')) {
 if (check_perms('admin_manage_applicants')) {
     $NumNewApplicants = Applicant::new_applicant_count();
     if ($NumNewApplicants > 0) {
-        $ModBar[] = sprintf(
-            '<a class="Button ButtonHeader"  href="apply.php?action=view">%d new Applicant%s</a>',
-            $NumNewApplicants,
-            t('server.apply.new_applicant')
-        );
+        $ModBar[] = '<a class="Button ButtonHeader" href="apply.php?action=view">'
+            . t('server.apply.new_applicant', ['Count' => $NumNewApplicants, 'Values' => [$NumNewApplicants]])
+            . '</a>';
     }
 
     $NumNewReplies = Applicant::new_reply_count();
     if ($NumNewReplies > 0) {
-        $ModBar[] = sprintf(
-            '<a class="Button ButtonHeader"  href="apply.php?action=view">%d %s</a>',
-            $NumNewReplies,
-            t('server.apply.new_applicant_reply')
-        );
+        $ModBar[] =
+            '<a class="Button ButtonHeader" href="apply.php?action=view">'
+            .  t('server.apply.new_applicant_reply', ['Count' => $NumNewReplies, 'Values' => [$NumNewReplies]])
+            . '</a>';
     }
 }
 

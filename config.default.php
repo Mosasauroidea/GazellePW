@@ -187,7 +187,6 @@ $CONFIG['MINIO_BUCKET'] = "";
 
 // Banner info
 $CONFIG['BANNER_URL'] = "/apply.php";
-$CONFIG['BANNER_TEXT'] = "Banner Notification";
 
 $CONFIG['USER_CLASS'] = [
     'USER' => "2",

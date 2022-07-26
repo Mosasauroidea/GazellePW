@@ -335,7 +335,7 @@ class NotificationsManager {
         }
 
         if ($NewStaffPMs > 0) {
-            $Title = t('server.pub.you_have_space') . ($NewStaffPMs == 1 ? t('server.pub.a') : $NewStaffPMs) . t('server.pub.space_new_staff_pm') . ($NewStaffPMs > 1 ? t('server.pub.s') : '');
+            $Title = t('server.pub.you_have_space') . ($NewStaffPMs == 1 ? t('server.pub.a') : $NewStaffPMs) . t('server.pub.space_new_staff_pm', ['Count' => $NewStaffPMs]);
             $this->create_notification(self::STAFFPM, 0, $Title, 'staffpm.php', self::INFO);
         }
     }
@@ -356,7 +356,7 @@ class NotificationsManager {
         }
 
         if ($NewMessages > 0) {
-            $Title = t('server.pub.you_have_space') . ($NewMessages == 1 ? t('server.pub.a') : $NewMessages) . t('server.pub.space_new_message') . ($NewMessages > 1 ? t('server.pub.s') : '');
+            $Title = t('server.pub.you_have_space') . ($NewMessages == 1 ? t('server.pub.a') : $NewMessages) . t('server.pub.space_new_message', ['Count' => $NewMessages]);
             $this->create_notification(self::INBOX, 0, $Title, Inbox::get_inbox_link(), self::INFO);
         }
     }
@@ -377,7 +377,7 @@ class NotificationsManager {
             }
         }
         if (!empty($NewNotifications)) {
-            $Title = t('server.pub.you_have_space') . ($NewNotifications == 1 ? t('server.pub.a') : $NewNotifications) . t('server.pub.space_new_torrent_notification') . ($NewNotifications > 1 ? t('server.pub.s') : '');
+            $Title = t('server.pub.you_have_space') . ($NewNotifications == 1 ? t('server.pub.a') : $NewNotifications) . t('server.pub.space_new_torrent_notification', ['Count' => $NewNotifications]);
             $this->create_notification(self::TORRENTS, 0, $Title, 'torrents.php?action=notify', self::INFO);
         }
     }
@@ -400,7 +400,7 @@ class NotificationsManager {
                 G::$Cache->cache_value('collage_subs_user_new_' . G::$LoggedUser['ID'], $NewCollages, 0);
             }
             if ($NewCollages > 0) {
-                $Title = t('server.pub.you_have_space') . ($NewCollages == 1 ? t('server.pub.a') : $NewCollages) . t('server.pub.space_new_collage_update') . ($NewCollages > 1 ? t('server.pub.s') : '');
+                $Title = t('server.pub.you_have_space') . ($NewCollages == 1 ? t('server.pub.a') : $NewCollages) . t('server.pub.space_new_collage_update', ['Count' => $NewCollages]);
                 $this->create_notification(self::COLLAGES, 0, $Title, 'userhistory.php?action=subscribed_collages', self::INFO);
             }
         }
@@ -410,7 +410,7 @@ class NotificationsManager {
         if (isset(G::$LoggedUser['NotifyOnQuote']) && G::$LoggedUser['NotifyOnQuote']) {
             $QuoteNotificationsCount = Subscriptions::has_new_quote_notifications();
             if ($QuoteNotificationsCount > 0) {
-                $Title = t('server.pub.new_quote') . ($QuoteNotificationsCount > 1 ? t('server.pub.s') : '');
+                $Title = t('server.pub.new_quote', ['Count' => $QuoteNotificationsCount]);
                 $this->create_notification(self::QUOTES, 0, $Title, 'userhistory.php?action=quote_notifications', self::INFO);
             }
         }
@@ -419,7 +419,7 @@ class NotificationsManager {
     public function load_subscriptions() {
         $SubscriptionsCount = Subscriptions::has_new_subscriptions();
         if ($SubscriptionsCount > 0) {
-            $Title = t('server.pub.new_subscription') . ($SubscriptionsCount > 1 ? t('server.pub.s') : '');
+            $Title = t('server.pub.new_subscription', ['Count' => $SubscriptionsCount]);
             $this->create_notification(self::SUBSCRIPTIONS, 0, $Title, 'userhistory.php?action=subscriptions', self::INFO);
         }
     }

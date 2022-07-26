@@ -100,7 +100,7 @@ $CollageSubs = $DB->to_array();
                 <tr class="colhead_dark">
                     <td>
                         <span style="float: left;">
-                            <strong><a href="collage.php?id=<?= $CollageID ?>"><?= $CollageName ?></a></strong> (<?= $NewTorrentCount ?> <?= t('server.userhistory.new_torrent') ?><?= ($NewTorrentCount == 1 ? '' : t('server.userhistory.s')) ?>)
+                            <strong><a href="collage.php?id=<?= $CollageID ?>"><?= $CollageName ?></a></strong> (<?= t('server.userhistory.new_torrent', ['Count' => $NewTorrentCount, 'Values' => [$NewTorrentCount]]) ?>)
                         </span>&nbsp;
                         <span style="float: right;">
                             <a href="#" onclick="$('#collage_table_<?= $CollageID ?>').gtoggle(); this.innerHTML = (this.innerHTML == '<?= t('server.common.hide') ?>' ? '<?= t('server.common.show') ?>' : '<?= t('server.common.hide') ?>'); return false;" class="brackets"><?= ($ShowAll ? t('server.userhistory.show') : t('server.userhistory.hide')) ?></a>&nbsp;&nbsp;&nbsp;<a href="userhistory.php?action=catchup_collages&amp;auth=<?= $LoggedUser['AuthKey'] ?>&amp;collageid=<?= $CollageID ?>" class="brackets"><?= t('server.userhistory.catch_up') ?></a>&nbsp;&nbsp;&nbsp;<a href="#" onclick="CollageSubscribe(<?= $CollageID ?>); return false;" id="subscribelink<?= $CollageID ?>" class="brackets"><?= t('server.common.unsubscribe') ?></a>

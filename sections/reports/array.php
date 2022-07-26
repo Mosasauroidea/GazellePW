@@ -19,7 +19,6 @@ $Types = array(
         "guidelines" => array(
             t('server.reports.report_request_update_guide_1'),
             t('server.reports.report_request_update_guide_2'),
-            t('server.reports.report_request_update_guide_3')
         )
     ),
     "request" => array(

@@ -79,7 +79,7 @@ View::show_header('', '', 'PageTorrentReseed');
         <h2 class="BodyHeader-nav"><?= t('server.torrents.successfully_sent_re_seed_request') ?></h2>
     </div>
     <div class="BoxBody thin">
-        <p><?= t('server.torrents.successfully_sent_re_seed_request_for_torrent') ?><a href="torrents.php?id=<?= $GroupID ?>&torrentid=<?= $TorrentID ?>"><?= display_str($Name) ?></a><?= t('server.torrents.space_to_space') ?><?= $NumUsers ?><?= t('server.torrents.n_user') ?><?= $NumUsers === 1 ? '' : t('server.torrents.s'); ?><?= t('server.torrents.period') ?></p>
+        <p><?= t('server.torrents.successfully_sent_re_seed_request_for_torrent') ?><a href="torrents.php?id=<?= $GroupID ?>&torrentid=<?= $TorrentID ?>"><?= display_str($Name) ?></a><?= t('server.torrents.space_to_space') ?><?= t('server.torrents.n_user', ['Count' => $NumUsers, 'Values' => [$NumUsers]]) ?></p>
     </div>
 </div>
 <?

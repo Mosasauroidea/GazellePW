@@ -210,10 +210,14 @@ server.apply.manage_roles_at: |-
   管理 {{CONFIG['SITE_NAME']}} 的职位申请
 server.apply.member_will_see_this_reply: |-
   回复用户可见
-server.apply.new_applicant: |-
-  新职位申请
-server.apply.new_applicant_reply: |-
-  新职位申请回复
+server.apply.new_applicant_one: |-
+  1 新职位申请
+server.apply.new_applicant_other: |-
+  %s 新职位申请
+server.apply.new_applicant_reply_one: |-
+  1 新职位申请回复
+server.apply.new_applicant_reply_other: |-
+  %s 新职位申请回复
 server.apply.new_role: |-
   新建
 server.apply.no_current_roles: |-
@@ -753,10 +757,6 @@ server.collages.collages_list: |-
   合集总览
 server.collages.comments: |-
   评论
-server.collages.comments_for_collage_after: |-
-  &nbsp;下的评论
-server.collages.comments_for_collage_before: |-
-  合集&nbsp;
 server.collages.contributed_collages: |-
   你参与的合集
 server.collages.create_collages: |-
@@ -927,7 +927,7 @@ server.comments.collage_comments_left_by_user: |-
   %s发布的合集评论
 server.comments.collages_created_by: |-
   &nbsp;%s&nbsp;所创建合集
-server.comments.comments_left_on_collages_user_created_after: |-
+server.comments.comments_left_on_collages_user_created: |-
   &nbsp;%s&nbsp;所创建合集中的评论
 server.comments.comments_left_on_collages_user_has_contributed_to: |-
   %s所参与合集中的评论
@@ -963,7 +963,7 @@ server.comments.space_on_space: |-
   &nbsp;于&nbsp;
 server.comments.torrent_comments: |-
   种子评论
-server.comments.torrent_comments_left_by_before: |-
+server.comments.torrent_comments_left_by: |-
   %s发布的种子评论
 server.comments.user_has: |-
   &nbsp;%s&nbsp;
@@ -1109,8 +1109,10 @@ server.common.my_subscriptions: |-
   订阅管理
 server.common.my_uploaded: |-
   我的发布
-server.common.n_fl_token: |-
-  &nbsp;枚免费令牌
+server.common.n_fl_token_one: |-
+  %s 枚免费令牌
+server.common.n_fl_token_other: |-
+  %s 枚免费令牌
 server.common.no_torrent_tags: |-
   无标签
 server.common.not_seeded_sure_use_fl: |-
@@ -1143,7 +1145,6 @@ server.common.rt_rating: |-
   烂番茄评分
 server.common.rules: |-
   规则
-server.common.s: ''
 server.common.search: |-
   搜索
 server.common.seeders: |-
@@ -1268,87 +1269,6 @@ server.donate.profile_info: |-
   个人介绍
 server.donate.progress: |-
   捐助（已达到年目标的 %d%%）
-server.donate.rank_1_body: |-
-  <ul>
-  <li>[捐助等级 1] 爱心捐助者</li>
-  <li>免疫 <a href="/wiki.php?action=article&id=73">账号不活跃</a></li>
-  <li><a href="/collages.php">合集</a> 创建权限</li>
-  <li>1 个额外的个人合集</li>
-  </ul>
-server.donate.rank_1_header: |-
-  1 活跃点数
-server.donate.rank_20_body: |-
-  <ul>
-  <li>第二头像</li>
-  </ul>
-server.donate.rank_20_header: |-
-  ¥1000
-server.donate.rank_2_body: |-
-  <ul>
-  <li>[捐助等级 2] 黄铜捐助者</li>
-  <li>2 个额外的个人合集</li>
-  <li>2 枚 <a href="/user.php?action=invite">邀请</a></li>
-  <li>捐助图标鼠标悬停文本</li>
-  <li>1 栏额外的个人介绍</li>
-  </ul>
-server.donate.rank_2_header: |-
-  2 活跃点数
-server.donate.rank_3_body: |-
-  <ul>
-  <li>[捐助等级 3] 青铜捐助者</li>
-  <li>3 个额外的个人合集</li>
-  <li>3 枚邀请</li>
-  <li>头像鼠标悬停文本</li>
-  <li>2 栏额外的个人介绍</li>
-  </ul>
-server.donate.rank_3_header: |-
-  3 活跃点数
-server.donate.rank_4_body: |-
-  <ul>
-  <li>[捐助等级 4] 白银捐助者</li>
-  <li>4 个额外的个人合集</li>
-  <li>4 枚邀请</li>
-  <li>捐助图标外部链接</li>
-  <li>3 栏额外的个人介绍</li>
-  </ul>
-server.donate.rank_4_header: |-
-  4 活跃点数
-server.donate.rank_50_body: |-
-  <ul>
-  <li>钻石捐助者</li>
-  <li>免疫捐助等级降级</li>
-  </ul>
-server.donate.rank_50_header: |-
-  ¥2500
-server.donate.rank_5_body: |-
-  <ul>
-  <li>5 个额外的个人合集</li>
-  <li>5 枚邀请</li>
-  </ul>
-server.donate.rank_5_header: |-
-  5 活跃点数
-server.donate.rank_6_body: |-
-  <ul>
-  <li>[捐助等级 5] 黄金捐助者</li>
-  <li>6 枚邀请</li>
-  </ul>
-server.donate.rank_6_header: |-
-  6 活跃点数
-server.donate.rank_7_body: |-
-  <ul>
-  <li></li>
-  </ul>
-server.donate.rank_7_header: |-
-  7 活跃点数
-server.donate.rank_8_body: |-
-  <ul>
-  <li>自定义捐助图标</li>
-  <li>论坛捐助者版块访问权限</li>
-  <li>捐助者版块自定义头衔</li>
-  <li>4 栏额外的个人介绍</li>
-  </ul>
-server.donate.rank_8_header: |-
-  8 活跃点数
 server.donate.red_rank: |-
   爱心
 server.donate.silver_rank: |-
@@ -1755,7 +1675,6 @@ server.inbox.report_request_and_explain: |-
   ]报告求种[/url] 并解释它不该被否决的具体原因。
 server.inbox.request_filled_unfilled: |-
   你有一个应求被否决
-server.inbox.s: ''
 server.inbox.send_a_message_to_user: |-
   向 %s 发送私信
 server.inbox.send_message: |-
@@ -2235,9 +2154,13 @@ server.pub.a: |-
   1
 server.pub.login: |-
   登&nbsp;&nbsp;录
-server.pub.new_quote: |-
+server.pub.new_quote_one: |-
   新回复
-server.pub.new_subscription: |-
+server.pub.new_quote_other: |-
+  新回复
+server.pub.new_subscription_one: |-
+  新订阅
+server.pub.new_subscription_other: |-
   新订阅
 server.pub.not_allowed_email: |-
   本站禁止 ProtonMail！
@@ -2259,14 +2182,21 @@ server.pub.register: |-
   注&nbsp;&nbsp;册
 server.pub.report: |-
   &nbsp;报告
-server.pub.s: ''
-server.pub.space_new_collage_update: |-
+server.pub.space_new_collage_update_one: |-
   &nbsp;条合集更新
-server.pub.space_new_message: |-
+server.pub.space_new_collage_update_other: |-
+  &nbsp;条合集更新
+server.pub.space_new_message_one: |-
   &nbsp;条新信息
-server.pub.space_new_staff_pm: |-
+server.pub.space_new_message_other: |-
+  &nbsp;条新信息
+server.pub.space_new_staff_pm_one: |-
   &nbsp;条新管理组私信
-server.pub.space_new_torrent_notification: |-
+server.pub.space_new_staff_pm_other: |-
+  &nbsp;条新管理组私信
+server.pub.space_new_torrent_notification_one: |-
+  &nbsp;条新种推送
+server.pub.space_new_torrent_notification_other: |-
   &nbsp;条新种推送
 server.pub.statistics: |-
   统计面板
@@ -2748,10 +2678,10 @@ server.reportsv2.there_are_n_other_reports_for_torrents_in_this_group_report_oth
   有其他 %s 个报告
 server.reportsv2.there_are_n_other_reports_for_torrents_uploaded_by_this_user: |-
   该用户上传的种子还%s
-server.reportsv2.there_are_n_other_reports_for_torrents_uploaded_by_this_user_count_other: |-
-  有其他 %s 个报告
 server.reportsv2.there_are_n_other_reports_for_torrents_uploaded_by_this_user_count_one: |-
   有其他 1 个报告
+server.reportsv2.there_are_n_other_reports_for_torrents_uploaded_by_this_user_count_other: |-
+  有其他 %s 个报告
 server.reportsv2.this_has_resulted_in_an_n_week_warning: |-
   这导致你被警告了 [url=%s&nbsp;周[/url] 作为惩罚。
 server.reportsv2.this_has_resulted_in_the_loss_of_your_upload_privilege: |-
@@ -2850,8 +2780,6 @@ server.requests.bounty_min_100_mb: |-
   酬金必须大于等于 100 MB。
 server.requests.by_user: |-
   ，发起人是
-server.requests.claim: |-
-  Claim
 server.requests.codec_list: |-
   编码
 server.requests.collages: |-
@@ -2978,13 +2906,13 @@ server.requests.requests: |-
   求种
 server.requests.requests_created_by: |-
   %s 发布的求种
-server.requests.requests_filled_by_after: |-
+server.requests.requests_filled_by: |-
   %s 完成的求种
 server.requests.requests_i_have_filled: |-
   我完成的求种
 server.requests.requests_i_have_voted_on: |-
   我参与的求种
-server.requests.requests_voted_for_by_after: |-
+server.requests.requests_voted_for_by: |-
   %s 参与的求种
 server.requests.require_one_codec: |-
   你至少要勾选一个编码。
@@ -3030,8 +2958,6 @@ server.requests.torrent_group: |-
   种子组
 server.requests.torrent_group_must_correspond_site: |-
   如果输入了种子组 ID，那它必须与站点现存的种子组相符。
-server.requests.unclaim: |-
-  Unclaim
 server.requests.unfill: |-
   否决
 server.requests.unfilling_a_request_without_reason: |-
@@ -3082,8 +3008,6 @@ server.rules.ratio: |-
   分享率
 server.rules.ratio_dl_title: |-
   这些单位是二进制而非十进制的，举个例子，1 GB 中有 1024 MB。
-server.rules.ratio_summary_e_e: |-
-  随着你做种比率的增加，系统会将合格分享率降低。你的做种率越高，你需要达到的合格分享率就越低，进而你就不容易被列入分享率监控名单。
 server.rules.ratio_title: |-
   分享率
 server.rules.ratio_title_de: |-
@@ -3398,7 +3322,8 @@ server.time.mns: |-
   分
 server.time.ms: |-
   月
-server.time.space_and_space: ''
+server.time.space_and_space: |-
+  %s
 server.time.w: |-
   周
 server.time.ws: |-
@@ -4351,7 +4276,6 @@ server.tools.row_size: |-
   行大小
 server.tools.rows: |-
   行数
-server.tools.s: ''
 server.tools.sales_promotion_period: |-
   促销期限
 server.tools.sales_promotion_plan: |-
@@ -4450,10 +4374,14 @@ server.tools.space_bonus: |-
   &nbsp;积分
 server.tools.space_in_this_view: |-
   出现在这里
-server.tools.space_invite: |-
-  &nbsp;枚邀请
-server.tools.space_token: |-
-  &nbsp;枚令牌
+server.tools.space_invite_one: |-
+  1 枚邀请
+server.tools.space_invite_other: |-
+  %s 枚邀请
+server.tools.space_token_one: |-
+  1 枚令牌
+server.tools.space_token_other: |-
+  %s 枚令牌
 server.tools.special: |-
   特殊
 server.tools.special_effects_subtitles: |-
@@ -4900,6 +4828,7 @@ server.torrents.artist_alias_id: |-
   艺人 ID
 server.torrents.asc: |-
   升序
+#at <time>
 server.torrents.at: |-
   于 %s
 server.torrents.bad_filename: |-
@@ -5190,8 +5119,10 @@ server.torrents.movie_votes: |-
   票
 server.torrents.my_notifications: |-
   我的新种推送
-server.torrents.n_user: |-
-  &nbsp;位用户
+server.torrents.n_user_one: |-
+  1 位用户。
+server.torrents.n_user_other: |-
+  %s 位用户。
 server.torrents.name: |-
   名称
 server.torrents.neutral_leech: |-
@@ -5248,7 +5179,7 @@ server.torrents.regenerate: |-
   重新生成
 server.torrents.release_type: |-
   发行类别
-server.torrents.release_types':
+server.torrents.release_types:
   '1': |-
     长片
   '2': |-
@@ -5335,7 +5266,6 @@ server.torrents.rt_title: |-
   烂番茄标题
 server.torrents.rules_broken: |-
   违规
-server.torrents.s: ''
 server.torrents.s_notifications: |-
   &nbsp;的新种推送
 server.torrents.scene: |-
@@ -5862,8 +5792,6 @@ server.upload.serbian: |-
   塞尔威亚语
 server.upload.show_more: |-
   显示更多
-server.upload.simplified_and_traditional: |-
-  简繁
 server.upload.slovak: |-
   斯洛伐克语
 server.upload.slovenian: |-
@@ -6363,8 +6291,8 @@ server.user.irckey_note_1: |-
 server.user.irckey_note_2: |-
   的认证时，将不使用站点密码，而是使用此 key。<span style='white-space: nowrap;'>请注意：</span></p>
   <ul>
-      <li>此 key 明文显示且应不同于你的站点密码。</li>
-      <li>IRC key 的长度必须在 6 到 32 字符之间。</li>
+  <li>此 key 明文显示且应不同于你的站点密码。</li>
+  <li>IRC key 的长度必须在 6 到 32 字符之间。</li>
   </ul>
 server.user.irckey_title: |-
   生成 IRC key
@@ -6750,7 +6678,6 @@ server.user.restricted_forums_title: |-
   输入以逗号分隔的版块 ID。
 server.user.rss_address: |-
   订阅地址
-server.user.s: ''
 server.user.se_class: |-
   兼职等级
 server.user.search_results: |-
@@ -7219,7 +7146,9 @@ server.user.warned: |-
   警告
 server.user.warning_expires_in: |-
   警告到期时间
-server.user.week: |-
+server.user.week_one: |-
+  周
+server.user.week_other: |-
   周
 server.user.wiki: |-
   Wiki
@@ -7301,8 +7230,10 @@ server.userhistory.new: |-
   新
 server.userhistory.new_right_bracket: |-
   &nbsp;新)
-server.userhistory.new_torrent: |-
-  新种子
+server.userhistory.new_torrent_one: |-
+  %s 新种子
+server.userhistory.new_torrent_other: |-
+  %s 新种子
 server.userhistory.no: |-
   否
 server.userhistory.no_quotes: |-
@@ -7341,7 +7272,6 @@ server.userhistory.registration_ip_address: |-
   注册时的 IP 地址
 server.userhistory.request: |-
   求种
-server.userhistory.s: ''
 server.userhistory.search: |-
   搜索
 server.userhistory.search_wimia_com: |-
@@ -7528,3 +7458,5 @@ server.wiki.view_user: |-
   查看用户
 server.wiki.you_must_be_a_higher_user_class_to_view: |-
   你的用户等级不足以阅读本文
+server.other.banner_text: |-
+  顶部通知

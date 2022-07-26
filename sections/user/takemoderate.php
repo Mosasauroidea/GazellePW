@@ -503,7 +503,7 @@ if ($Invites != $Cur['Invites'] && check_perms('users_edit_invites')) {
 }
 
 if ($Warned == 1 && $Cur['Warned'] == '0000-00-00 00:00:00' && check_perms('users_warn')) {
-    $Weeks = t('server.user.week') . ($WarnLength === 1 ? '' : t('server.user.s'));
+    $Weeks = t('server.user.week', ['Count' => $WarnLength]);
     Misc::send_pm_with_tpl(
         $UserID,
         'comment_warning',

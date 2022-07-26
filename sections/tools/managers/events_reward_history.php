@@ -68,14 +68,14 @@ $Histories = $DB->to_array(false, MYSQLI_ASSOC);
                 <td class="Table-cell"><?
                                         $Strs = [];
                                         if ($Recode['Invites']) {
-                                            $Str = $Recode['Invites'] . t('server.tools.space_invite') . ($Recode['Invites'] > 1 ? t('server.tools.s') : "");
+                                            $Str = t('server.tools.space_invite', ['Count' => $Recode['Invites'], 'Values' => [$Recode['Invites']]]);
                                             if ($Recode['InvitesTime']) {
                                                 $Str .= " (" . substr($Recode['InvitesTime'], 0, 10) . ")";
                                             }
                                             $Strs[] = $Str;
                                         }
                                         if ($Recode['Tokens']) {
-                                            $Str = $Recode['Tokens'] . t('server.tools.space_token') . ($Recode['Tokens'] > 1 ? t('server.tools.s') : "");
+                                            $Str = t('server.tools.space_token', ['Count' => $Recode['Tokens'], 'Values' => [$Recode['Tokens']]]);
                                             if ($Recode['TokensTime']) {
                                                 $Str .= " (" . substr($Recode['TokensTime'], 0, 10) . ")";
                                             }

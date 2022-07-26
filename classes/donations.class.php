@@ -837,6 +837,15 @@ class Donations {
         } elseif ($CurrentRank == 5) {
             $CurrentRank = 4;
         }
-        return t('server.inbox.get_pm_body_1', ['Values' => [$Lang]]) . " $DonationAmount $Currency\n" . t('server.inbox.get_pm_body_2', ['Values' => [$Lang]]) . " $ReceivedRank " . t('server.inbox.get_pm_body_3', ['Values' => [$Lang]]) . ($ReceivedRank == 1 ? '' : t('server.inbox.s', ['Values' => [$Lang]])) . "\n" . t('server.inbox.get_pm_body_4', ['Values' => [$Lang]]) . " $CurrentRank\n" . t('server.inbox.get_pm_body_5', ['Values' => [$Lang]]);
+        return t('server.inbox.get_pm_body_1', ['Values' => [$Lang]])
+            . " $DonationAmount $Currency\n"
+            . t('server.inbox.get_pm_body_2', ['Values' => [$Lang]])
+            . " $ReceivedRank "
+            . t('server.inbox.get_pm_body_3', ['Values' => [$Lang]])
+            . ($ReceivedRank == 1 ? '' : t('server.inbox.s', ['Values' => [$Lang]]))
+            . "\n"
+            . t('server.inbox.get_pm_body_4', ['Values' => [$Lang]])
+            . " $CurrentRank\n"
+            . t('server.inbox.get_pm_body_5', ['Values' => [$Lang]]);
     }
 }
