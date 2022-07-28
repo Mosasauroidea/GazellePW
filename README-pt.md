@@ -1,6 +1,6 @@
-[中文](./README-zh.md) | [Português](./README-pt.md) | [Screenshot](https://raw.githubusercontent.com/Mosasauroidea/GazellePW/main/public/static/stylespreview/en-github-dark.png)
+[Screenshot](https://raw.githubusercontent.com/Mosasauroidea/GazellePW/main/public/static/stylespreview/en-github-dark.png)
 
-<a href="./docs/pt-br/i18n.md"><span style="color: #d8210d; font-size: 1.5rem; text-decoration: underline;">Ajude-nos a traduzir este projeto para o seu idioma!</span></a>
+[Ajude-nos a traduzir este projeto para o seu idioma!](./docs/pt-br/i18n.md)
 
 # GazellePW
 

@@ -22,7 +22,9 @@ docker-compose -p gazelle up
 
 4. Register an account: check email in `./cache/emails/` to activate your account.
 
-5. If you need the tracker, please deploy the [Ocelot](https://github.com/Mosasauroidea/Ocelot).
+5. Configuration (optional): create `config.local.php`, override anything from `config.default.php`
+
+6. If you need the tracker, please deploy the [Ocelot](https://github.com/Mosasauroidea/Ocelot).
 
 ## Setup Editor
 

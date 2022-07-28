@@ -22,7 +22,9 @@ docker-compose -p gazelle up
 
 4. 注册用户: 可以通过 `./cache/emails` 查找本地邮件来激活账号。
 
-5. 如果你需要 Tracker, 部署[Ocelot](https://github.com/Mosasauroidea/Ocelot)。
+5. 配置（可选）：创建 `config.local.php` 文件, 你可以覆盖 `config.default.php` 里面的所有配置。
+
+6. 如果你需要 Tracker, 部署[Ocelot](https://github.com/Mosasauroidea/Ocelot)。
 
 ## 配置编辑器
 

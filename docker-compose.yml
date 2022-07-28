@@ -14,7 +14,7 @@ services:
     volumes:
       - .:/var/www:delegated
       - node-modules:/var/www/node_modules
-      - .docker/web/nginx.conf:/etc/nginx/sites-available/gazelle.conf
+      - .docker/web/nginx.conf:/etc/nginx/sites-enabled/gazelle.conf
       - .docker/web/www.conf:/etc/php/7.3/fpm/pool.d/www.conf
     environment:
       # These should match what you set for your mysql container below
