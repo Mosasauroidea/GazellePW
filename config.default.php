@@ -163,7 +163,7 @@ $CONFIG['STATUS_CHAN'] = "#";
 $ExternalServicesConfig = [
     "PassThePopcorn" => [
         'type' => 'gazelle',
-        'inviter_id' => 1,
+        'inviter_id' => 2,
         'base_url' => 'https://passthepopcorn.me/',
         'api_path' => 'ajax.php?action=',
         'login_path' => 'login.php',
@@ -215,7 +215,7 @@ $CONFIG['USER_CLASS'] = [
 $CONFIG['INDEX_ARTICLE'] = 1;
 
 $CONFIG['DONATE_ARTILCE_ID'] = 2;
-$CONFIG['DONATE_MONTH_GOAL'] = 750;
+$CONFIG['DONATE_MONTH_GOAL'] = 75;
 
 $CONFIG['GLOBAL_FREELEECH'] = false;
 

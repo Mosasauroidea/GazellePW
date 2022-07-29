@@ -480,28 +480,36 @@ View::show_header(t('server.index.index'), 'comments', 'PageHome');
         </div>
     </div>
 
+
     <div class="LayoutMainSidebar-main">
         <!-- Active Movies -->
-        <div class="IndexTop10Movie Box">
-            <div class="Box-header">
-                <?= t('server.index.popular_movies') ?>
+        <?
+        $Top10Movies = new Top10Movies();
+        $Data = $Top10Movies->getData(
+            'active_week',
+            [
+                'Limit' => 10,
+            ]
+        );
+        if (count($Data) > 0) {
+        ?>
+            <div class="IndexTop10Movie Box">
+                <div class="Box-header">
+                    <?= t('server.index.popular_movies') ?>
+                </div>
+                <div class="Box-body">
+                    <?
+
+                    $tableRender = new TorrentGroupCoverTableView($Data);
+                    $tableRender->render([
+                        'Variant' => 'OneLine'
+                    ]);
+                    ?>
+                </div>
             </div>
-            <div class="Box-body">
-                <?
-                $Top10Movies = new Top10Movies();
-                $Data = $Top10Movies->getData(
-                    'active_week',
-                    [
-                        'Limit' => 10,
-                    ]
-                );
-                $tableRender = new TorrentGroupCoverTableView($Data);
-                $tableRender->render([
-                    'Variant' => 'OneLine'
-                ]);
-                ?>
-            </div>
-        </div>
+        <?
+        }
+        ?>
 
         <!-- Anouncements -->
         <div class="PostBox Box">
@@ -529,13 +537,14 @@ View::show_header(t('server.index.index'), 'comments', 'PageHome');
                             <div class="Post-headerActions">
                                 <?= time_diff($NewsTime); ?>
                             </div>
+                            <a class=" brackets" href="forums.php?action=viewthread&amp;threadid=<?= $NewsID ?>">
+                                <?= t('server.index.discuss') ?>
+                            </a>
                         </div>
-                        <div id="newsbody<?= $NewsID ?>" class="HtmlText PostArticle Post-body hidden">
+                        <div id="newsbody<?= $NewsID ?>" class="HtmlText PostArticle Post-body <?= ($Count < 3 ?: "hidden") ?>">
                             <?= Text::full_format($Body) ?>
                             <div>
-                                <a class="brackets" href="forums.php?action=viewthread&amp;threadid=<?= $NewsID ?>">
-                                    <?= t('server.index.discuss') ?>
-                                </a>
+
                             </div>
                         </div>
                     </div>
@@ -547,18 +556,16 @@ View::show_header(t('server.index.index'), 'comments', 'PageHome');
                 <? } ?>
             </div>
         </div>
-        <div class="Home-stats Box">
-            <div class="Box-header">
-                <? if (CONFIG['IS_DEV']) { ?>
+        <? if (CONFIG['IS_DEV']) { ?>
+            <div class="Home-stats Box">
+                <div class="Box-header">
                     <a href="/stats.php">
                         <?= t('server.index.stats') ?>
                     </a>
-                <? } else { ?>
-                    <?= t('server.index.stats') ?>
-                <? } ?>
+                </div>
+                <div class="Box-body" id="root-stats"></div>
             </div>
-            <div class="Box-body" id="root-stats"></div>
-        </div>
+        <? } ?>
     </div>
 </div>
 <?

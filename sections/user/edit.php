@@ -248,7 +248,7 @@ echo $Val->GenerateJS('userform');
                             </strong>
                         </td>
                         <td class="Form-items">
-                            <div>
+                            <div class="Form-inputs">
                                 <div class="Checkbox">
                                     <? $Checked = $SettingTorrentTitle['Alternative'] ? 'checked' : '' ?>
                                     <input class="Input" type="checkbox" name="settingTorrentTitleAlternative" id="same_width" <?= $Checked ?> />
@@ -260,7 +260,7 @@ echo $Val->GenerateJS('userform');
                                     <? $Checked = $SettingTorrentTitle['ReleaseGroup'] ? 'checked' : '' ?>
                                     <input class="Input" type="checkbox" name="settingTorrentTitleReleaseGroup" id="release_group" <?= $Checked ?> />
                                     <label class="Checkbox-label" for="release_group">
-                                        <?= t('server.user.SettingReleaseGroup') ?>
+                                        <?= t('server.user.SettingShowReleaseGroup') ?>
                                     </label>
                                 </div>
                             </div>
@@ -284,15 +284,8 @@ echo $Val->GenerateJS('userform');
                             <div class="TorrentTitle-previews TableTorrent TableTorrent--preview <?= $TableTorrentClass ?>">
                                 <?
                                 $Previews = [
-                                    ['Codec' => 'x265', 'Source' => 'WEB', 'Resolution' => '720p', 'Container' => 'MKV', 'Processing' => 'Encode', 'Slot' => TorrentSlotType::EnglishQuality, 'RemasterTitle' => 'dolby_vision / dolby_atmos / masters_of_cinema', 'ReleaseGroup' => 'HANDJOB'],
-                                    ['Codec' => 'x265', 'Source' => 'WEB', 'Resolution' => '720p', 'Container' => 'MKV', 'Processing' => 'Encode', 'Slot' => TorrentSlotType::ChineseQuality, 'RemasterTitle' => 'the_criterion_collection', 'ReleaseGroup' => 'HANDJOB'],
-                                    ['Codec' => 'x265', 'Source' => 'WEB', 'Resolution' => '720p', 'Container' => 'MKV', 'Processing' => 'Encode', 'Slot' => TorrentSlotType::Feature, 'RemasterTitle' => 'warner_archive_collection', 'ReleaseGroup' => 'HANDJOB'],
-                                    ['Codec' => 'x265', 'Source' => 'Blu-ray', 'Resolution' => '720p', 'Container' => 'MKV', 'Processing' => 'Remux', 'Slot' => TorrentSlotType::Remux, 'ReleaseGroup' => 'MZABI'],
-                                    ['Codec' => 'x265', 'Source' => 'Blu-ray', 'Resolution' => '720p', 'Container' => 'm2ts', 'Processing' => 'BD50', 'Slot' => TorrentSlotType::DIY,  'ReleaseGroup' => 'Geek'],
-                                    ['Codec' => 'x265', 'Source' => 'Blu-ray', 'Resolution' => '720p', 'Container' => 'm2ts', 'Processing' => 'BD50', 'Slot' => TorrentSlotType::Untouched, 'ReleaseGroup' => 'Geek'],
-                                    ['Codec' => 'x265', 'Source' => 'WEB', 'Resolution' => '2160p', 'Container' => 'MKV', 'Processing' => 'Encode', 'Slot' => TorrentSlotType::ChineseQuality],
-                                    ['Codec' => 'x265', 'Source' => 'Blu-ray', 'Resolution' => '2160p', 'Container' => 'MKV', 'Processing' => 'Remux', 'Slot' => TorrentSlotType::Remux],
-                                    ['Codec' => 'x265', 'Source' => 'Blu-ray', 'Resolution' => '2160p', 'Container' => 'm2ts', 'Processing' => 'BD50', 'Slot' => TorrentSlotType::Untouched],
+                                    ['Codec' => 'x265', 'Source' => 'WEB', 'Resolution' => '720p', 'Container' => 'MKV', 'Processing' => 'Encode', 'Slot' => TorrentSlotType::EnglishQuality, 'RemasterTitle' => 'dolby_vision / dolby_atmos / masters_of_cinema', 'ReleaseGroup' => 'Release Group'],
+                                    ['Codec' => 'x265', 'Source' => 'WEB', 'Resolution' => '720p', 'Container' => 'MKV', 'Processing' => 'Encode', 'Slot' => TorrentSlotType::ChineseQuality, 'RemasterTitle' => 'the_criterion_collection', 'ReleaseGroup' => 'Release Group'],
                                 ];
                                 ?>
                                 <? foreach ($Previews as $Preview) { ?>

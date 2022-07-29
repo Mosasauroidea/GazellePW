@@ -28,7 +28,6 @@ HeaderDonate
 }
 .HeaderDonate-percent {
   line-height: 1;
-  color: var(--global-color-warning);
   font-weight: bold;
 }
 

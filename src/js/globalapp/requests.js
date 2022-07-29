@@ -1,4 +1,4 @@
-const minimumVote = 100 * 1024 * 1024
+const minimumVote = 1 * 1024 * 1024 * 1024
 
 globalapp.requestVote = function requestVote(amount, requestid) {
   if (typeof amount == 'undefined') {

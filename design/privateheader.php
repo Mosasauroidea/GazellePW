@@ -385,7 +385,7 @@ if ($_REQUEST['action']) {
                             <div class="HeaderDonate-progressBarBorder">
                                 <div class="HeaderDonate-progressBar" style="width: <?= $donation->getYearProgress() . '%' ?>"></div>
                             </div>
-                            <div class="HeaderDonate-percent u-colorWarning"><?= t('server.donate.donate') ?></div>
+                            <div class="HeaderDonate-percent"><?= t('server.donate.donate') ?></div>
                         </a>
                     </li>
                 </ul>

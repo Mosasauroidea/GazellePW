@@ -5977,8 +5977,8 @@ server.user.8_week: |-
   8 week
 server.user.SettingAlternative: |-
   Alternative Style
-server.user.SettingReleaseGroup: |-
-  Release Group
+server.user.SettingShowReleaseGroup: |-
+  Show Release Group
 server.user.SettingTorrentTitle: |-
   Torrent Title
 server.user.SettingTorrentTitleTooltip: |-

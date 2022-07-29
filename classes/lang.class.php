@@ -36,10 +36,13 @@ class Lang {
             $Key = "${Key}${Suffix}";
         }
         $Value = $Locale[$Key];
+
         if (!isset($Locale[$Key])) {
             $Value = $DefaultValue;
         }
-        $Value = sprintf($Value, ...$Values);
+        if (is_string($Value)) {
+            $Value = sprintf($Value, ...$Values);
+        }
         if ($Value === false) {
             $Value = $Key;
         }

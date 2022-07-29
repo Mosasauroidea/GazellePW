@@ -3,7 +3,7 @@ $RequestTax = CONFIG['REQUEST_TAX'];
 
 // Minimum and default amount of upload to remove from the user when they vote.
 // Also change in static/functions/requests.js
-$MinimumVote = 100 * 1024 * 1024;
+$MinimumVote = 1 * 1024 * 1024 * 1024;
 
 /*
  * This is the page that displays the request to the end user after being created.

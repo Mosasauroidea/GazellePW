@@ -1033,7 +1033,7 @@ WHERE ud.TorrentID=? AND ui.NotifyOnDeleteDownloaded='1' AND ud.UserID NOT IN ({
             if ($lang === Lang::CHS) {
                 $GroupName = $Group['SubName'];
             } else {
-                $GroupName =  $Group['Name'] . ' | ' . $Group['SubName'];
+                $GroupName =  $Group['Name'];
             }
         }
         $Year = $Group['Year'];
@@ -1224,6 +1224,12 @@ WHERE ud.TorrentID=? AND ui.NotifyOnDeleteDownloaded='1' AND ud.UserID NOT IN ({
         if ($Data['Allow'] == '1') {
             $Info[] = Format::torrent_label(t('server.torrents.allow'), 'tl_allow');
         }
+        if ($Option['SettingTorrentTitle']['ReleaseGroup']) {
+            $ReleaseGroup = $Data['ReleaseGroup'] ?: self::release_group($Data);
+            if ($ReleaseGroup) {
+                $Info[] = "<span class='TorrenTitle-item is-releaseGroup'>$ReleaseGroup</span>";
+            }
+        }
         if (
             (!empty($Data['BadFiles'])) ||
             (!empty($Data['BadFolders'])) ||
@@ -1261,12 +1267,7 @@ WHERE ud.TorrentID=? AND ui.NotifyOnDeleteDownloaded='1' AND ud.UserID NOT IN ({
                 $Info[] = Format::torrent_label(t('server.torrents.snatched'));
             }
         }
-        if ($Option['SettingTorrentTitle']['ReleaseGroup']) {
-            $ReleaseGroup = $Data['ReleaseGroup'] ?: self::release_group($Data);
-            if ($ReleaseGroup) {
-                $Info[] = "<span class='TorrenTitle-item is-releaseGroup'>$ReleaseGroup</span>";
-            }
-        }
+
         $Class = $Option['Class'];
         return "<span class='TorrentTitle $Class'>" . implode($Separator, $Info) . '</span>';
     }

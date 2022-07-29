@@ -5860,8 +5860,8 @@ server.user.8_week: |-
   8 周
 server.user.SettingAlternative: |-
   另一种样式
-server.user.SettingReleaseGroup: |-
-  压制组
+server.user.SettingShowReleaseGroup: |-
+  显示制作组
 server.user.SettingTorrentTitle: |-
   种子标题
 server.user.SettingTorrentTitleTooltip: |-

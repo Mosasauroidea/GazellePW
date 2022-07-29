@@ -16,7 +16,6 @@
 		Time = NOW()");
     $Cache->delete_value('staff_blog_read_' . $LoggedUser['ID']);
 
-    define('ANNOUNCEMENT_FORUM_ID', 50);
 
     if (check_perms('admin_manage_blog')) {
         if (!empty($_REQUEST['action'])) {

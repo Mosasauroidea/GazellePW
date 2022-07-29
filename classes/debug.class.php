@@ -227,6 +227,7 @@ class DEBUG {
             $PageTime = (microtime(true) - $ScriptStartTime);
             $CPUTime = $this->get_cpu_time();
             $Perf = array(
+                'PHP version' => phpversion(),
                 'Memory usage' => Format::get_size(memory_get_usage(true)),
                 'Page process time' => number_format($PageTime, 3) . ' s'
             );
@@ -675,13 +676,6 @@ class DEBUG {
                 </tr>
             <?      } ?>
         </table>
-    <?
-    }
-
-
-    public function phpinfo_table() {
-    ?>
-        <div>PHP Version: <?= phpversion() ?></div>
 <?
     }
 }

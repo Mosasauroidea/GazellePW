@@ -1,7 +1,6 @@
 <?
 enforce_login();
 
-define('ANNOUNCEMENT_FORUM_ID', 43);
 
 if (check_perms('admin_manage_blog')) {
     if (!empty($_REQUEST['action'])) {
