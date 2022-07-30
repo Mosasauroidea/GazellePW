@@ -57,3 +57,10 @@ HeaderDonate
 .HeaderDonate-link:hover .HeaderDonate-progressBar {
   background: var(--HeaderDonate-progressBar-onHover-background);
 }
+
+.DonationPage-progress {
+  text-align: center;
+  font-size: 2rem;
+  font-weight: bold;
+  color: var(--global-color-success);
+}

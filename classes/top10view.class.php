@@ -5,9 +5,7 @@ class Top10View {
     public static function render_linkbox($Selected, $Class) {
 ?>
         <div class="<?= $Class ?>">
-            <? if (IS_DEV) { ?>
-                <a class="brackets" href="top10.php?type=movies"><?= self::get_selected_link(t('server.top10.movies'), $Selected == "movies") ?></a>
-            <? } ?>
+            <a class="brackets" href="top10.php?type=movies"><?= self::get_selected_link(t('server.top10.movies'), $Selected == "movies") ?></a>
             <a class="brackets" href="top10.php?type=torrents"><?= self::get_selected_link(t('server.top10.torrents'), $Selected == "torrents") ?></a>
             <a class="brackets" href="top10.php?type=original"><?= self::get_selected_link(t('server.top10.original'), $Selected == "original") ?></a>
             <a class="brackets" href="top10.php?type=users"><?= self::get_selected_link(t('server.top10.users'), $Selected == "users") ?></a>

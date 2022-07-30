@@ -320,7 +320,8 @@ class TorrentTableView {
 
         if ($NumReports > 0) {
             $Reported = true;
-            include(Lang::getLangfilePath("report_types"));
+            include(CONFIG['SERVER_ROOT'] . '/classes/reportsv2_type.php');
+            $ResolveType['resolve_options']['pm'];
             $ReportInfo = '
         <div class="TableContainer">
             <table class="TableReportInfo Table">

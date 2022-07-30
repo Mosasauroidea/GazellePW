@@ -13,8 +13,8 @@ TorrentCover variant="OneLine"
 
 .TorrentCover {
   display: grid;
-  grid-template-columns: repeat(auto-fill, 200px);
-  justify-content: start;
+  grid-template-columns: repeat(auto-fill, 190px);
+  justify-content: center;
   column-gap: var(--global-space-lg);
   row-gap: var(--global-space-default);
 }
@@ -27,6 +27,7 @@ TorrentCover variant="OneLine"
 .TorrentCover[variant='OneLine'] {
   display: flex;
   overflow: auto;
+  justify-content: start;
 }
 @media (max-width: 768px) {
   .PageUserShow .TorrentCover {
@@ -44,8 +45,8 @@ TorrentCover variant="OneLine"
 }
 
 .TorrentCover-imageContainer {
-  width: 200px;
-  height: 300px;
+  width: 190px;
+  height: 285px;
 }
 @media (max-width: 768px) {
   .TorrentCover[variant='OneLine'] .TorrentCover-imageContainer {
@@ -57,4 +58,8 @@ TorrentCover variant="OneLine"
 .TorrentCover-image {
   height: 100%;
   border-radius: var(--global-borderRadius);
+}
+
+.TorrentCover-item b {
+  color: var(--TableTorrent-movieInfoTitle-color);
 }

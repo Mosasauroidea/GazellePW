@@ -566,7 +566,7 @@ View::show_header($Title, '', 'PageRequestHome');
                         <?= t('server.requests.name') ?> / <a href="?order=year&amp;sort=<?= ($OrderBy === 'year' ? $NewSort : 'desc') ?>&amp;<?= $CurrentURL ?>"><?= t('server.requests.year') ?></a>
                     </td>
                     <td class="Table-cell">
-                        <a href="?order=votes&amp;sort=<?= ($OrderBy === 'votes' ? $NewSort : 'desc') ?>&amp;<?= $CurrentURL ?>"><?= t('server.requests.votes') ?></a>
+                        <a href="?order=votes&amp;sort=<?= ($OrderBy === 'votes' ? $NewSort : 'desc') ?>&amp;<?= $CurrentURL ?>"><?= t('server.requests.quick_vote') ?></a>
                     </td>
                     <td class="Table-cell">
                         <a href="?order=bounty&amp;sort=<?= ($OrderBy === 'bounty' ? $NewSort : 'desc') ?>&amp;<?= $CurrentURL ?>"><?= t('server.requests.bounty') ?></a>

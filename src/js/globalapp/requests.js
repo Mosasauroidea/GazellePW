@@ -78,9 +78,9 @@ globalapp.requestCalculate = function requestCalculate() {
   const amt = Math.floor($('#amount_box').raw().value * mul)
   if (amt > $('#current_uploaded').raw().value) {
     $('#new_uploaded').raw().innerHTML = "You can't afford that request!"
-    $('#new_bounty').raw().innerHTML = '0.00 MB'
+    $('#new_bounty').raw().innerHTML = '0.00 GB'
     if ($('#bounty_after_tax').raw()) {
-      $('#bounty_after_tax').raw().innerHTML = '0.00 MB'
+      $('#bounty_after_tax').raw().innerHTML = '0.00 GB'
     }
     $('#button').raw().disabled = true
   } else if (
@@ -89,9 +89,9 @@ globalapp.requestCalculate = function requestCalculate() {
     (window.location.search.indexOf('action=view') != -1 && $('#amount_box').raw().value * mul < minimumVote)
   ) {
     $('#new_uploaded').raw().innerHTML = get_size($('#current_uploaded').raw().value)
-    $('#new_bounty').raw().innerHTML = '0.00 MB'
+    $('#new_bounty').raw().innerHTML = '0.00 GB'
     if ($('#bounty_after_tax').raw()) {
-      $('#bounty_after_tax').raw().innerHTML = '0.00 MB'
+      $('#bounty_after_tax').raw().innerHTML = '0.00 GB'
     }
     $('#button').raw().disabled = true
   } else {
@@ -223,11 +223,11 @@ globalapp.requestMovieAutofill = function requestMovieAutofill(event) {
       if (data.code) {
         globalapp.setFormError(
           data.code === 1
-            ? 'error.invalid_imdb_link_note'
+            ? 'client.error.invalid_imdb_link_note'
             : data.code === 2
-            ? 'error.request_torrent_group_exists_note'
-            : 'error.imdb_unknown_error',
-          data.code === 2 && { groupId }
+            ? 'client.error.request_torrent_group_exists_note'
+            : 'client.error.imdb_unknown_error',
+          data.code === 2 && { groupID: data.error.GroupID }
         )
         return
       }

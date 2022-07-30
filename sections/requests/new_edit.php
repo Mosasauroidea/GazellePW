@@ -459,7 +459,7 @@ if ($NewRequest) { ?>
             <?= $RequestTax > 0 ? '<div>Bounty after tax: <strong><span id="bounty_after_tax">90.00 MB</span></strong></div>' : '' ?>
             <div>
                 <?= t('server.requests.pst_body', ['Values' => [
-                    "<strong><span id='new_bounty'>100.00 MB</span></strong>"
+                    "<strong><span id='new_bounty'>1GB</span></strong>"
                 ]]) ?>
             </div>
 

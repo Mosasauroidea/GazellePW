@@ -87,6 +87,7 @@ window.lang = {
     }
     const props = {
       ...window.DATA.CONFIG,
+      data: window.DATA,
     }
     return <Component {...props} />
   },

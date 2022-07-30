@@ -13,12 +13,12 @@ if (!check_perms('site_top10')) {
 }
 
 include(CONFIG['SERVER_ROOT'] . '/sections/torrents/functions.php'); //Has get_reports($TorrentID);
-if (empty($_GET['type']) || $_GET['type'] == 'torrents') {
-    include(CONFIG['SERVER_ROOT'] . '/sections/top10/torrents.php');
+if (empty($_GET['type']) || $_GET['type'] == 'movies') {
+    include(CONFIG['SERVER_ROOT'] . '/sections/top10/browse.php');
 } else {
     switch ($_GET['type']) {
-        case 'movies':
-            include(CONFIG['SERVER_ROOT'] . '/sections/top10/browse.php');
+        case 'torrents':
+            include(CONFIG['SERVER_ROOT'] . '/sections/top10/torrents.php');
             break;
         case 'users':
             include(CONFIG['SERVER_ROOT'] . '/sections/top10/users.php');

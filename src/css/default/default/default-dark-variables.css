@@ -100,8 +100,8 @@
 
     /* TorrentTable */
     --TableTorrent-movieInfo-background: inherit;
-    --TableTorrent-category-background: rgba(0, 0, 0, 0.1);
-    --TableTorrent-title-background: rgba(0, 0, 0, 0.2);
+    --TableTorrent-category-background: rgba(0, 0, 0, 0.25);
+    --TableTorrent-title-background: rgba(0, 0, 0, 0.7);
     --TableTorrent-movieInfoTitle-color: #b0b0b0;
     --TableTorrent-movieInfoTitle-onHover-color: #ccc;
     --TableTorrent-movieInfoYear-color: #777;

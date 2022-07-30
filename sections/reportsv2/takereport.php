@@ -164,7 +164,7 @@ if ($Type != "rescore" && $Type != "lossyapproval" && $Type != "upload_contest" 
         $RawName = Torrents::torrent_name($Torrent, false);
 
         $ToUserLang = Lang::getUserLang($UserID);
-        include(Lang::getLangfilePath("report_types", $ToUserLang));
+        include(CONFIG['SERVER_ROOT'] . '/classes/reportsv2_type.php');
         if (array_key_exists($_POST['type'], $Types[$CategoryID])) {
             $ToReportTitle = $Types[$CategoryID][$Type]['title'];
         } elseif (array_key_exists($_POST['type'], $Types['master'])) {

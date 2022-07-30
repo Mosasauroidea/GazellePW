@@ -5,8 +5,7 @@
  */
 
 enforce_login();
-include(Lang::getLangfilePath("report_types"));
-//include(CONFIG['SERVER_ROOT'].'/sections/reportsv2/array.php');
+include(CONFIG['SERVER_ROOT'] . '/classes/reportsv2_type.php');
 
 if (isset($_REQUEST['action'])) {
     switch ($_REQUEST['action']) {

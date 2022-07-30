@@ -1,25 +1,26 @@
 <?
 
-global $Locales, $Twig, $WINDOW_CONFIG;
-$Files = glob(CONFIG['SERVER_ROOT'] . '/src/locales/*/*.yaml');
-$Locales = [];
-foreach ($Files as $File) {
-    $Lang = basename(dirname($File));
-    $YamlText = $Twig->render("$Lang/$Lang.yaml", ['CONFIG' => $WINDOW_CONFIG]);
-    $Locale = yaml_parse($YamlText);
-    $NewLang = $Lang == 'zh-Hans' ? 'chs' : $Lang;
-    $Locales[$NewLang] = $Locale;
-}
-
 class Lang {
     static $Lang = [];
     const DEFAULT_LANG = 'chs';
     const EN = 'en';
     const CHS = 'chs';
     const LANGS = [self::EN, self::CHS];
+    static $Locales = [];
+
+    public static function init() {
+        global $WINDOW_CONFIG;
+        $Files = glob(CONFIG['SERVER_ROOT'] . '/src/locales/*/*.yaml');
+        foreach ($Files as $File) {
+            $Lang = basename(dirname($File));
+            $YamlText = G::$Twig->render("$Lang/$Lang.yaml", ['CONFIG' => $WINDOW_CONFIG]);
+            $Locale = yaml_parse($YamlText);
+            $NewLang = $Lang == 'zh-Hans' ? 'chs' : $Lang;
+            self::$Locales[$NewLang] = $Locale;
+        }
+    }
 
     public static function get($Key, $Options = []) {
-        global $Locales;
         $Options = array_merge([
             'DefaultValue' => null,
             'Lang' => null,
@@ -30,7 +31,7 @@ class Lang {
         $Lang = self::getLang($Options['Lang']);
         $Values = $Options['Values'];
         $Count = $Options['Count'];
-        $Locale = $Locales[$Lang];
+        $Locale = self::$Locales[$Lang];
         if ($Count !== null) {
             $Suffix = ($Count === 1) ? '_one' : '_other';
             $Key = "${Key}${Suffix}";
@@ -79,12 +80,7 @@ class Lang {
         return $Lang == 'chs' ? 'zh-Hans' : $Lang;
     }
 
-    public static function getLangfilePath($Page, $Lang = false) {
-        $Lang = self::getLang($Lang);
-        return CONFIG['SERVER_ROOT'] . "/lang/$Lang/lang_$Page.php";
-    }
-
-    public static function getLang($Lang = false) {
+    private static function getLang($Lang = false) {
         if (!$Lang) {
             if (class_exists('G')) {
                 $UserID = false;

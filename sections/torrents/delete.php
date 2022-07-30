@@ -89,10 +89,7 @@ if (check_perms('admin_reports')) {
     <div id="all_reports" style="margin-left: auto; margin-right: auto;">
         <?
         include(CONFIG['SERVER_ROOT'] . '/classes/reports.class.php');
-
-        //require(CONFIG['SERVER_ROOT'].'/sections/reportsv2/array.php');
-        include(Lang::getLangfilePath("report_types"));
-        // TODO fix data
+        include(CONFIG['SERVER_ROOT'] . '/classes/reportsv2_type.php');
         $ReportID = 0;
         $ReporterID = 0;
         $DB->query("

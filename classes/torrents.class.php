@@ -1212,12 +1212,7 @@ WHERE ud.TorrentID=? AND ui.NotifyOnDeleteDownloaded='1' AND ud.UserID NOT IN ({
         if ($Data['SpecialSub']) {
             $Info[] = Format::torrent_label(t('server.torrents.se_sub'), 'tl_se_sub');
         }
-        if ($Data['Buy'] == '1' &&  $Data['Diy'] == '0') {
-            $Info[] = Format::torrent_label(t('server.torrents.buy'), 'bg tl_buy');
-        }
-        if ($Data['Diy'] == '1') {
-            $Info[] = Format::torrent_label(t('server.torrents.diy'), 'bg tl_diy');
-        }
+
         if ($Data['Jinzhuan'] == '1' && $Data['Allow'] == '0') {
             $Info[] = Format::torrent_label(t('server.torrents.jinzhuan'), 'tl_exclusive');
         }
@@ -1241,6 +1236,12 @@ WHERE ud.TorrentID=? AND ui.NotifyOnDeleteDownloaded='1' AND ud.UserID NOT IN ({
             $Info[] = Format::torrent_label(t('server.torrents.trump'), 'tl_trumpable');
         }
 
+        if ($Data['Buy'] == '1' &&  $Data['Diy'] == '0') {
+            $Info[] = Format::torrent_label(t('server.torrents.buy'), 'bg tl_buy');
+        }
+        if ($Data['Diy'] == '1') {
+            $Info[] = Format::torrent_label(t('server.torrents.diy'), 'bg tl_diy');
+        }
         if (self::global_freeleech()) {
             $Info[] = Format::torrent_label(t('server.torrents.fld'), 'tl_free bg torrent_discount free');
         } else if (isset($Data['FreeTorrent'])) {

@@ -84,8 +84,9 @@ $Twig = new Twig\Environment(
         CONFIG['SERVER_ROOT'] . '/templates',
         CONFIG['SERVER_ROOT'] . '/src/locales',
     ]),
-    ['debug' => CONFIG['DEBUG_MODE'], 'cache' => CONFIG['SERVER_ROOT'] . '/.cache/twig']
+    ['debug' => CONFIG['DEBUG_MODE']]
 );
+
 
 ImageTools::init(CONFIG['IMAGE_PROVIDER']);
 
@@ -94,7 +95,7 @@ G::$DB = &$DB;
 G::$Debug = &$Debug;
 G::$Twig = &$Twig;
 
-require_once(CONFIG['SERVER_ROOT'] . '/classes/lang.class.php');
+Lang::init();
 
 //Begin browser identification
 if (session_status() === PHP_SESSION_NONE) {

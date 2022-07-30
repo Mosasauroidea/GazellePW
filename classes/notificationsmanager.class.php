@@ -124,11 +124,11 @@ class NotificationsManager {
         );
     }
 
-    public static function notify_user($UserID, $Type, $Message, $URL, $Importance) {
+    public static function notify_user($UserID, $Type, $Message, $URL, $Importance = null) {
         self::notify_users(array($UserID), $Type, $Message, $URL, $Importance);
     }
 
-    public static function notify_users($UserIDs, $Type, $Message, $URL, $Importance) {
+    public static function notify_users($UserIDs, $Type, $Message, $URL, $Importance = null) {
         /**
         if (!isset($Importance)) {
             $Importance = self::INFO;

@@ -17,7 +17,7 @@ globalapp.uploadMovieAutofill = function uploadMovieAutofill() {
     type: 'GET',
     error: (err) => {
       globalapp.buttonSetLoading(target, false)
-      globalapp.setFormError('common.imdb_unknown_error')
+      globalapp.setFormError('client.common.imdb_unknown_error')
     },
     success: (data) => {
       globalapp.buttonSetLoading(target, false)
@@ -25,10 +25,10 @@ globalapp.uploadMovieAutofill = function uploadMovieAutofill() {
       if (data.code) {
         globalapp.setFormError(
           data.code === 1
-            ? 'error.invalid_imdb_link_note'
+            ? 'client.error.invalid_imdb_link_note'
             : data.code === 2
-            ? 'error.torrent_group_exists_note'
-            : 'error.imdb_unknown_error',
+            ? 'client.error.torrent_group_exists_note'
+            : 'client.error.imdb_unknown_error',
           data.code === 2 && { groupID: data.error.GroupID }
         )
         return

@@ -40,3 +40,5 @@ const Heading = ({ as: Tag, id, children, ...rest }) => {
   }
   return <Tag {...rest}>{children}</Tag>
 }
+
+export const DonationProgress = ({ children }) => <div className="DonationPage-progress">{children}</div>

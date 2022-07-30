@@ -259,8 +259,14 @@ View::show_header(t('server.requests.view_request') . ": $FullName", 'comments,b
                         <td class="Form-label"><?= t('server.requests.purchasable_at') ?>:</td>
                         <td class="Form-items"><?= $Request['PurchasableAt'] ?></td>
                     </tr>
+                    <? if ($Request['LastVote'] > $Request['TimeAdded']) { ?>
+                        <tr class="Form-row">
+                            <td class="Form-label"><?= t('server.requests.last_voted') ?></td>
+                            <td class="Form-items"><?= time_diff($Request['LastVote']) ?></td>
+                        </tr>
+                    <? } ?>
                     <tr class="Form-row">
-                        <td class="Form-label"><?= t('server.requests.votes') ?></td>
+                        <td class="Form-label"><?= t('server.requests.quick_vote') ?></td>
                         <td class="Form-items">
                             <div>
                                 <span id="votecount"><?= number_format($VoteCount) ?></span>
@@ -271,62 +277,49 @@ View::show_header(t('server.requests.view_request') . ": $FullName", 'comments,b
                             </div>
                         </td>
                     </tr>
-                    <? if ($Request['LastVote'] > $Request['TimeAdded']) { ?>
-                        <tr class="Form-row">
-                            <td class="Form-label"><?= t('server.requests.last_voted') ?></td>
-                            <td class="Form-items"><?= time_diff($Request['LastVote']) ?></td>
-                        </tr>
-                    <?
-                    }
-                    if ($CanVote) {
-                    ?>
+                    <? if ($CanVote) { ?>
                         <tr class="Form-row" id="voting">
                             <td class="Form-label" data-tooltip="<?= t('server.requests.custom_vote_title') ?>">
-                                <?= t('server.requests.custom_vote') ?></td>
+                                <?= t('server.requests.custom_vote') ?>
+                            </td>
                             <td class="Form-items">
                                 <div class="Form-inputs">
-                                    <input class="Input" type="text" id="amount_box" size="8" onchange="globalapp.requestCalculate();" />
-                                    <select class="Input" id="unit" name="unit" onchange="globalapp.requestCalculate();">
-                                        <option class="Select-option" value="mb">MB</option>
-                                        <option class="Select-option" value="gb">GB</option>
-                                    </select>
-                                    <input class="Button" type="button" value="Preview" onclick="globalapp.requestCalculate();" />
-                                    <?= $RequestTax > 0 ? "<strong>{$RequestTaxPercent}% " . t('server.requests.system_taxed') : '' ?>
+                                    <form class="u-vstack add_form" name="request" action="requests.php" method="get" id="request_form">
+                                        <input type="hidden" name="action" value="vote" />
+                                        <input type="hidden" name="auth" value="<?= $LoggedUser['AuthKey'] ?>" />
+                                        <input type="hidden" id="request_tax" value="<?= $RequestTax ?>" />
+                                        <input type="hidden" id="requestid" name="id" value="<?= $RequestID ?>" />
+                                        <input type="hidden" id="auth" name="auth" value="<?= $LoggedUser['AuthKey'] ?>" />
+                                        <input type="hidden" id="amount" name="amount" value="0" />
+                                        <input type="hidden" id="current_uploaded" value="<?= $LoggedUser['BytesUploaded'] ?>" />
+                                        <input type="hidden" id="current_downloaded" value="<?= $LoggedUser['BytesDownloaded'] ?>" />
+                                        <input type="hidden" id="current_rr" value="<?= (float)$LoggedUser['RequiredRatio'] ?>" />
+                                        <input id="total_bounty" type="hidden" value="<?= $RequestVotes['TotalBounty'] ?>" />
+                                        <div>
+                                            <input class="Input is-small" type="text" id="amount_box" size="8" oninput="globalapp.requestCalculate();" />
+                                            <select class="Input hidden" id="unit" name="unit" onchange="globalapp.requestCalculate();">
+                                                <option class="Select-option" value="gb">GB</option>
+                                            </select>
+                                            <input class="Button" type="button" id="button" value="<?= t('server.requests.custom_vote') ?>" disabled="disabled" onclick="globalapp.requestVote();" />
+                                        </div>
+                                        <div>
+                                            <?= $RequestTax > 0 ? "<strong>{$RequestTaxPercent}% " . t('server.requests.system_taxed') : '' ?>
+                                            <? $Class = $RequestTax > 0 ? '' : 'u-hidden' ?>
+                                            <div class="<?= $Class ?>">Bounty after tax: <strong><span id="bounty_after_tax">90.00 MB</span></strong></div>
+                                            <?= t('server.requests.if_you_add_the_entered') ?>
+                                            <strong><span id="new_bounty">0.00 GB</span></strong>
+                                            <?= t('server.requests.of_bounty_your_new_stats') ?>:
+                                        </div>
+                                        <div>
+                                            <?= t('server.requests.uploaded') ?>: <span id="new_uploaded"><?= Format::get_size($LoggedUser['BytesUploaded']) ?></span>
+                                            <span>,</span>
+                                            <?= t('server.requests.ratio') ?>: <span id="new_ratio"><?= Format::get_ratio_html($LoggedUser['BytesUploaded'], $LoggedUser['BytesDownloaded']) ?></span>
+                                        </div>
+                                    </form>
                                 </div>
                             </td>
                         </tr>
-                        <tr class="Form-row">
-                            <td class="Form-label"><?= t('server.requests.post_vote_information') ?></td>
-                            <td class="Form-items">
-                                <form class="u-vstack add_form" name="request" action="requests.php" method="get" id="request_form">
-                                    <input type="hidden" name="action" value="vote" />
-                                    <input type="hidden" name="auth" value="<?= $LoggedUser['AuthKey'] ?>" />
-                                    <input type="hidden" id="request_tax" value="<?= $RequestTax ?>" />
-                                    <input type="hidden" id="requestid" name="id" value="<?= $RequestID ?>" />
-                                    <input type="hidden" id="auth" name="auth" value="<?= $LoggedUser['AuthKey'] ?>" />
-                                    <input type="hidden" id="amount" name="amount" value="0" />
-                                    <input type="hidden" id="current_uploaded" value="<?= $LoggedUser['BytesUploaded'] ?>" />
-                                    <input type="hidden" id="current_downloaded" value="<?= $LoggedUser['BytesDownloaded'] ?>" />
-                                    <input type="hidden" id="current_rr" value="<?= (float)$LoggedUser['RequiredRatio'] ?>" />
-                                    <input id="total_bounty" type="hidden" value="<?= $RequestVotes['TotalBounty'] ?>" />
-                                    <div>
-                                        <? $Class = $RequestTax > 0 ? '' : 'u-hidden' ?>
-                                        <div class="<?= $Class ?>">Bounty after tax: <strong><span id="bounty_after_tax">90.00 MB</span></strong></div>
-                                        <?= t('server.requests.if_you_add_the_entered') ?>
-                                        <strong><span id="new_bounty">0.00 MB</span></strong>
-                                        <?= t('server.requests.of_bounty_your_new_stats') ?>:
-                                    </div>
-                                    <div>
-                                        <?= t('server.requests.uploaded') ?>: <span id="new_uploaded"><?= Format::get_size($LoggedUser['BytesUploaded']) ?></span>
-                                    </div>
-                                    <div>
-                                        <?= t('server.requests.ratio') ?>: <span id="new_ratio"><?= Format::get_ratio_html($LoggedUser['BytesUploaded'], $LoggedUser['BytesDownloaded']) ?></span>
-                                        <input class="Button" type="button" id="button" value="确认!" disabled="disabled" onclick="globalapp.requestVote();" />
-                                    </div>
-                                </form>
-                            </td>
-                        </tr>
-                    <?  } ?>
+                    <? } ?>
                     <tr class="Form-row" id="bounty">
                         <td class="Form-label"><?= t('server.requests.bounty') ?></td>
                         <td class="Form-items" id="formatted_bounty"><?= Format::get_size($RequestVotes['TotalBounty']) ?></td>

@@ -10,6 +10,13 @@ View::show_header(t('server.donate.donate'), '', 'PageDonateStep1');
 </div>
 
 <?
+
+use Gazelle\Manager\Donation;
+
+global $WINDOW_DATA;
+$donation = new Donation();
+$WINDOW_DATA['donationProgress'] = $donation->getYearProgress() . '%';
+
 View::show_footer();
 ?>
 

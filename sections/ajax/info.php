@@ -81,7 +81,7 @@ if (!$Data) {
         [],
         $User->seedingHeavy(),
         $User->leeching(),
-        $User->snatched(),
+        $User->snatched()
     );
     $Cache->cache_value('ajax_info_data', $Data, DURATION['12h']);
 }
