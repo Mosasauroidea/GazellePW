@@ -182,7 +182,7 @@ if ($ThreadInfo['NoPoll'] == 0) {
         $MaxVotes = 0;
     }
 
-    $RevealVoters = in_array($ForumID, $ForumsRevealVoters);
+    $RevealVoters = in_array($ForumID, $CONFIG['ForumsRevealVoters']);
     //Polls lose the you voted arrow thingy
     $DB->query("
 		SELECT Vote

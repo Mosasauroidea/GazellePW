@@ -9,7 +9,7 @@ $Debug = new DEBUG;
 $Debug->handle_errors();
 
 $DB = new DB_MYSQL;
-$Cache = new CACHE($MemcachedServers);
+$Cache = new CACHE($CONFIG['MemcachedServers']);
 
 G::$Cache = $Cache;
 G::$DB = $DB;

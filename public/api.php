@@ -20,7 +20,7 @@ require_once(__DIR__ . '/../classes/const.php');
 require_once(__DIR__ . '/../vendor/autoload.php');
 require_once(__DIR__ . '/../classes/util.php');
 
-$Cache = new CACHE($MemcachedServers);
+$Cache = new CACHE($CONFIG['MemcachedServers']);
 $DB = new DB_MYSQL;
 $Debug = new DEBUG;
 $Twig = new Twig\Environment(

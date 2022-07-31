@@ -77,7 +77,7 @@ $Debug->set_flag('Debug constructed');
 
 $DB = new DB_MYSQL;
 
-$Cache = new CACHE($MemcachedServers);
+$Cache = new CACHE($CONFIG['MemcachedServers']);
 
 $Twig = new Twig\Environment(
     new Twig\Loader\FilesystemLoader([

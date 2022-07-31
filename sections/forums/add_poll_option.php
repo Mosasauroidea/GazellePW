@@ -13,7 +13,7 @@ if (!check_perms('site_moderate_forums')) {
 		FROM forums_topics
 		WHERE ID = $ThreadID");
 	list($ForumID) = $DB->next_record();
-	if (!in_array($ForumID, $ForumsRevealVoters)) {
+	if (!in_array($ForumID, $CONFIG['ForumsRevealVoters'])) {
 		error(403);
 	}
 }

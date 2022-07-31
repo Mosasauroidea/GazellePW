@@ -8,7 +8,7 @@ require(CONFIG['SERVER_ROOT'] . '/classes/debug.class.php');
 require(CONFIG['SERVER_ROOT'] . '/classes/cache.class.php'); //Require the caching class
 
 $Debug = new DEBUG;
-$Cache = new CACHE($MemcachedServers); //Load the caching class
+$Cache = new CACHE($CONFIG['MemcachedServers']); //Load the caching class
 
 $SSL = $_SERVER['SERVER_PORT'] === '443';
 

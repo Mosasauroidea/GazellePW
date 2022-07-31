@@ -569,7 +569,7 @@ View::show_header(t('server.index.index'), 'comments', 'PageHome');
     </div>
 </div>
 <?
-if (IS_DEV) {
+if ($CONFIG['IS_DEV']) {
     Stats::torrentByDay();
 }
 

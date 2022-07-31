@@ -253,7 +253,7 @@ View::show_header($ThreadInfo['Title'] . ' &lt; ' . $Forums[$ForumID]['Name'] . 
             $PeopleCount = 0;
         }
 
-        $RevealVoters = in_array($ForumID, $ForumsRevealVoters);
+        $RevealVoters = in_array($ForumID, $CONFIG['ForumsRevealVoters']);
         //Polls lose the you voted arrow thingy
         $DB->query("
 		SELECT Vote

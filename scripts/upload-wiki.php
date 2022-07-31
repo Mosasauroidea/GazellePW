@@ -26,7 +26,7 @@ $Debug->handle_errors();
 $Debug->set_flag('Debug constructed');
 
 $DB = new DB_MYSQL;
-$Cache = new CACHE($MemcachedServers);
+$Cache = new CACHE($CONFIG['MemcachedServers']);
 
 $in = fopen($argv[1], 'r');
 

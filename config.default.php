@@ -38,7 +38,7 @@ $CONFIG['SQLPORT'] = 3306; //The MySQL port to connect on
 $CONFIG['SQLSOCK'] = "/var/run/mysqld/mysqld.sock";
 
 // Memcached details
-$MemcachedServers = [
+$CONFIG['MemcachedServers'] = [
     // unix sockets are fast, and other people can't telnet into them
     ['host' => 'memcached', 'port' => 11211, 'buckets' => 1],
 ];
@@ -101,8 +101,7 @@ $CONFIG['ANNOUNCEMENT_FORUM_ID'] = 0;
 $CONFIG['NEWS_FORUM_ID'] = 0;
 $CONFIG['DONOR_FORUM'] = 0;
 
-$ForumsRevealVoters = [];
-$ForumsDoublePost = [];
+$CONFIG['ForumsRevealVoters'] = [];
 
 // Site option
 $CONFIG['ENABLE_BADGE'] = false; // Set to enable badge system
@@ -160,7 +159,7 @@ $CONFIG['LAB_CHAN'] = "#";
 $CONFIG['STATUS_CHAN'] = "#";
 
 // array to store external site credentials and API URIs, stored in cache to keep user sessions alive
-$ExternalServicesConfig = [
+$CONFIG['ExternalServicesConfig'] = [
     "PassThePopcorn" => [
         'type' => 'gazelle',
         'inviter_id' => 2,
@@ -218,13 +217,3 @@ $CONFIG['DONATE_ARTILCE_ID'] = 2;
 $CONFIG['DONATE_MONTH_GOAL'] = 75;
 
 $CONFIG['GLOBAL_FREELEECH'] = false;
-
-$WINDOW_CONFIG = [
-    'SITE_NAME' => $CONFIG['SITE_NAME'],
-    'TG_GROUP' => $CONFIG['TG_GROUP'],
-    'TG_DISBALE_CHANNEL' => $CONFIG['TG_DISBALE_CHANNEL'],
-    'BOT_HELP_CHAN' => $CONFIG['BOT_HELP_CHAN'],
-    'MAIL_HOST' => $CONFIG['MAIL_HOST'],
-];
-
-$WINDOW_DATA = [];

@@ -21,7 +21,7 @@ require(CONFIG['SERVER_ROOT'] . '/classes/cache.class.php'); // Require the cach
 require(CONFIG['SERVER_ROOT'] . '/classes/feed.class.php'); // Require the feeds class
 require(CONFIG['SERVER_ROOT'] . '/classes/util.php'); // Require the feeds class
 
-$Cache = new CACHE($MemcachedServers); // Load the caching class
+$Cache = new CACHE($CONFIG['MemcachedServers']); // Load the caching class
 $Feed = new FEED; // Load the time class
 
 header('Cache-Control: no-cache, must-revalidate, post-check=0, pre-check=0');

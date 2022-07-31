@@ -31,7 +31,7 @@ require_once(__DIR__ . '/classes/time.class.php');
 require_once(__DIR__ . '/classes/util.php');
 require_once(__DIR__ . '/vendor/d11wtq/boris/lib/autoload.php');
 
-$Cache = new CACHE($MemcachedServers);
+$Cache = new CACHE($CONFIG['MemcachedServers']);
 $DB = new DB_MYSQL;
 $Debug = new DEBUG;
 $Debug->handle_errors();

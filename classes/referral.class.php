@@ -22,11 +22,12 @@ class Referral {
      */
     function __construct() {
         // populate services array from cache if it exists, if not then grab from template
-        $services_config = $GLOBALS['ExternalServicesConfig'];
+        global $CONFIG;
+        $services_config = $CONFIG['ExternalServicesConfig'];
         $this->ExternalServices = G::$Cache->get_value('referral_services');
         // grab from template if not in cache
         if (empty($this->ExternalServices)) {
-            $this->ExternalServices = $GLOBALS['ExternalServicesConfig'];
+            $this->ExternalServices = $CONFIG['ExternalServicesConfig'];
             $this->cache_services();
         } else {
             // make sure we get fresh credentials from config

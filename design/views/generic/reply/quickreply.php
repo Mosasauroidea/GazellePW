@@ -36,7 +36,7 @@
             'SubscribeBox' => true
         ));
  */
-global $HeavyInfo, $UserSubscriptions, $ThreadInfo, $ForumsDoublePost, $Document;
+global $HeavyInfo, $UserSubscriptions, $ThreadInfo, $Document;
 
 if (G::$LoggedUser['DisablePosting']) {
     return;
