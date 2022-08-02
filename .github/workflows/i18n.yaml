@@ -17,7 +17,8 @@ jobs:
         with:
           upload_translations: true
           download_translations: true
-          pull_request_title: 'i18n: Crowdin translations'
+          create_pull_request: true
+          # pull_request_title: 'i18n: Crowdin translations'
           # pull_request_labels: 'i18n'
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
