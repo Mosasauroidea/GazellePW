@@ -1,0 +1,1417 @@
+client.bbcode.edit: |-
+  Editar
+client.bbcode.loading: |-
+  Carregando...
+client.bbcode.preview: |-
+  Pré-visualizar
+client.common.actor: |-
+  Ator
+client.common.are_you_sure_cannot_undone: |-
+  Tem certeza de que deseja fazer isso? Isso não pode ser desfeito!
+client.common.are_you_sure_you_want_to_cancel: |-
+  Tem certeza que deseja cancelar?
+client.common.are_you_sure_you_wish_to_delete_this_post: |-
+  Tem certeza que deseja excluir esta publicação?
+client.common.check_all: |-
+  Selecionar todos
+client.common.cinematographer: |-
+  Cinematográfico
+client.common.collapse_this_group: |-
+  Recolher este grupo. Segure [Command] <em>(Mac)</em> ou [Ctrl] <em>(PC)</em> enquanto clica para recolher todos os grupos {{section}}
+client.common.composer: |-
+  Compositor
+client.common.confirm_purchase: |-
+  Tem certeza de que deseja comprar {{item}}?
+client.common.confirm_username: |-
+  Digite o nome de usuário para dar tokens para:
+client.common.copied: |-
+  Copiado
+client.common.director: |-
+  Diretor
+client.common.expand_this_group: |-
+  Expanda este grupo. Segure [Command] <em>(Mac)</em> ou [Ctrl] <em>(PC)</em> enquanto clica para expandir todos os grupos {{section}}
+client.common.hide: |-
+  Esconder
+client.common.in_this_release_type: |-
+  neste tipo de lançamento.
+client.common.like: |-
+  Curtir
+client.common.on_this_page: |-
+  nesta página.
+client.common.pm_user_on_edit: |-
+  <span id="pmbox{{postId}}"><label>Usuário PM em edição? <input type="checkbox" name="pm" value="1" /></label></span>
+client.common.producer: |-
+  Produtor
+client.common.request_has_been_unresolved: |-
+  A solicitação não foi resolvida. Por favor, atualize o seu navegador para visualizar.
+client.common.uncheck_all: |-
+  Desmarcar todos
+client.common.view: |-
+  Visualizar
+client.common.writer: |-
+  Escritor
+client.error.imdb_unknown_error: |-
+  Erro desconhecido, entre em contato com a staff.
+client.error.invalid_imdb_link_note: |-
+  Por favor, digite um link IMDb válido, como "tt1234567" ou "https://www.imdb.com/title/tt1234567".
+client.error.request_torrent_group_exists_note: |-
+  O filme já <a href='/torrents.php?id={{groupID}}'>existe</a> no site. Por favor, verifique se o formato que você solicitou não existe e use o link [Solicitar formato] para solicitar o formato desejado do filme.
+client.error.torrent_group_exists_note: |-
+  O filme já <a href='/torrents.php?id={{groupID}}'>existe</a> no site. Por favor, certifique-se de que você não está carregando um duplicado e use o link [Adicionar formato] para enviar um novo formato do filme.
+client.other.client_whitelist: |-
+  Whitelist do Cliente
+client.screenshot_comparison.gpw_helper_not_installed: |-
+  Por favor instale <a href="https://greasyfork.org/scripts/445653-gpw-helper/code/GPW-Helper.user.js" target="_blank">GPW Helper</a> e recarregue a página
+client.screenshot_comparison.help: |-
+  Pressione ? para ler a ajuda
+client.screenshot_comparison.help_title: |-
+  Ajuda de Comparação de Screenshot
+client.screenshot_comparison.loading: |-
+  Carregando...
+client.screenshot_comparison.pixel_compare: |-
+  Comparar Pixel
+client.screenshot_comparison.solar_curve: |-
+  Curva solar
+client.staffpm.assign_assigned: |-
+  Conversa atribuída com sucesso.
+client.staffpm.error: |-
+  Algo deu errado.
+client.staffpm.response_created: |-
+  Resposta criada com sucesso
+client.staffpm.response_deleted: |-
+  Resposta excluída com sucesso.
+client.staffpm.response_edited: |-
+  Resposta editada com sucesso.
+client.stats.torrentByDay: |-
+  Uploads Diários de Torrents
+client.stats.torrentByMonth: |-
+  Torrent Uploads Mensais
+client.stats.torrentByYear: |-
+  Torrent Uploads Anuais
+client.torrent_table.collapse_edition: |-
+  Recolher este grupo de resolução. Segure [Command] <em>(Mac)</em> ou [Ctrl] <em>(PC)</em> enquanto clica para recolher todas as resoluções nesse grupo torrent.
+client.torrent_table.expand_edition: |-
+  Expanda este grupo de resolução. Segure [Command] <em>(Mac)</em> ou [Ctrl] <em>(PC)</em> enquanto clica para expandir todas as resoluções nesse grupo de torrentes.
+client.upload.codec_required: |-
+  Por favor selecione um codec.
+client.upload.container_required: |-
+  Por favor, selecione um contêiner.
+client.upload.desc_img_3_png: |-
+  São necessárias pelo menos três capturas de tela PNG consulte <a href="wiki.php?action=article&id=51" target="_blank">ajuda</a>.
+client.upload.desc_img_hosts: |-
+  Por favor, use hosts de imagem que são recomendados pela Regra de Upload <a href="rules.php?p=upload#2.2.1" target="_blank">2.1</a>.
+client.upload.imdb_link_required: |-
+  Link IMDb ou ID com formato correto é obrigatório!
+client.upload.mediainfo_complete_name_required: |-
+  Deve conter o nome Completo (ou Título do Disco/Marcador).
+client.upload.mediainfo_invalid_chars: |-
+  Há alguns erros no MediaInfo/BDInfo que você enviou, por favor, escaneie manualmente com o aplicativo mediainfo, não cole de outros lugares. Sinta-se livre para comentar se não funcionar.
+client.upload.mediainfo_required: |-
+  É necessário registro de MediaInfo (ou BDInfo).<br/> Para imagens de DVD certifique-se de incluir o log MediaInfo do maior VOB e o IFO anterior que contém a duração total.
+client.upload.mediainfo_table_space: |-
+  O espaço na tabela BDInfo causa o problema, por favor use a tab (\t) em vez disso.
+client.upload.movie_desc_required: |-
+  Por favor, especifique a descrição do filme
+client.upload.movie_title_required: |-
+  Por favor, especifique o título!
+client.upload.poster_required: |-
+  Por favor, especifique o capa! Se você não consegue encontrar nenhum, tire uma foto do filme e escreva o título do filme nele.
+client.upload.processing_required: |-
+  Por favor, selecione um processamento.
+client.upload.releasetype_required: |-
+  Selecione o tipo de acordo com as definições nas <a href="/rules.php?p=upload">regras de upload</a>.
+client.upload.remaster_required: |-
+  Por favor, especifique melhor o conteúdo específico dos extras.
+client.upload.resolution_required: |-
+  Por favor, selecione uma resolução.
+client.upload.source_required: |-
+  Por favor, selecione a fonte. Se não tem certeza, selecione Outro e digite Desconhecido.
+client.upload.subtitles_required: |-
+  Por favor, especifique as legendas ou selecione "Sem legendas" se não houver nenhum!
+client.upload.subtitles_with_mediainfo: |-
+  MediaInfo fornece legendas, por favor especifique as legendas.
+client.upload.tag_required: |-
+  Por favor, especifique pelo menos um gênero!
+client.upload.torrent_file_required: |-
+  Por favor, selecione um arquivo torrent!
+client.upload.year_required: |-
+  Por favor, especifique o ano da versão original!
+client.validation.please_enter_a_valid_credit_card_number: |-
+  Por favor, insira um número de cartão de crédito válido.
+client.validation.please_enter_a_valid_date: |-
+  Por favor, insira uma data válida.
+client.validation.please_enter_a_valid_date_iso: |-
+  Por favor, insira uma data válida (ISO).
+client.validation.please_enter_a_valid_date_number: |-
+  Por favor, digite um número válido.
+client.validation.please_enter_a_valid_email_address: |-
+  Por favor, insira um endereço de email válido.
+client.validation.please_enter_a_valid_url: |-
+  Por favor, insira uma URL válida.
+client.validation.please_enter_a_value_between_x_and_y: |-
+  Por favor, insira um valor entre {0} e {1}.
+client.validation.please_enter_a_value_between_x_and_y_characters_long: |-
+  Por favor, insira um valor entre {0} e {1} caracteres.
+client.validation.please_enter_a_value_greater_than_or_equal_to_n: |-
+  Por favor, insira um valor maior ou igual a {0}.
+client.validation.please_enter_a_value_less_than_or_equal_to_n: |-
+  Por favor, insira um valor menor ou igual a {0}.
+client.validation.please_enter_at_least_n_characters: |-
+  Por favor, insira pelo menos {0} caracteres.
+client.validation.please_enter_no_more_than_n_characters: |-
+  Por favor, não insira mais do que {0} caracteres.
+client.validation.please_enter_only_digits: |-
+  Por favor, entre somente com dígitos.
+client.validation.please_enter_the_same_value_again: |-
+  Por favor, insira o mesmo valor novamente.
+client.validation.please_fix_this_field: |-
+  Por favor, corrija este campo.
+client.validation.this_field_is_required: |-
+  Este campo é obrigatório.
+server.apply.applicant: |-
+  Inscrito
+server.apply.applicant_administration: |-
+  Administração do Inscrito
+server.apply.application_received_from: |-
+  Pedido recebido de %s às %s.
+server.apply.apply: |-
+  Aplicar
+server.apply.apply_for_a_role_at: |-
+  Solicitar um cargo em {{CONFIG['SITE_NAME']}}
+server.apply.archived: |-
+  arquivado
+server.apply.at_least_80_characters: |-
+  Pelo menos 80 caracteres, agora nos convença!
+server.apply.blank_applications: |-
+  &nbsp;Aplicativos
+server.apply.choose_a_role_from_the_list: |-
+  Escolha uma função da lista a seguir
+server.apply.comments: |-
+  Comentários
+server.apply.current: |-
+  Atual
+server.apply.current_applications: |-
+  Aplicações atuais
+server.apply.current_roles: |-
+  Funções atuais
+server.apply.date_created: |-
+  Data de Criação
+server.apply.description: |-
+  Descrição
+server.apply.edit_role: |-
+  Editar
+server.apply.last_comment_added: |-
+  Último comentário adicionado
+server.apply.last_comment_from: |-
+  Último comentário de
+server.apply.manage_roles: |-
+  Gerenciar funções
+server.apply.manage_roles_at: |-
+  Gerenciar funções em {{CONFIG['SITE_NAME']}}
+server.apply.member_will_see_this_reply: |-
+  o membro verá esta resposta
+server.apply.new_applicant_one: |-
+  1 nova Inscrição
+server.apply.new_applicant_other: |-
+  %s novas inscrições
+server.apply.new_applicant_reply_one: |-
+  1 nova resposta ao inscrito
+server.apply.new_applicant_reply_other: |-
+  %s novas respostas para inscritos
+server.apply.new_role: |-
+  Novo
+server.apply.no_current_roles: |-
+  Não há funções atuais. Crie uma usando o formulário abaixo.
+server.apply.only_staff_will_see_this_reply: |-
+  somente a staff verá esta resposta
+server.apply.open_roles: |-
+  Abrir Cargos
+server.apply.public: |-
+  público
+server.apply.published: |-
+  publicado
+server.apply.referral_note: |-
+  <b>Nota de referência: Você é encorajado a indicar seus amigos para candidatarem-se aos nossos trabalhos (mesmo que não sejam {{CONFIG['SITE_NAME']}} usuários ainda, exceto aplicação de TI). Se for bem sucedido, você receberá <span class='u-colorWarning'>3 convites</span> e <span class='u-colorWarning'>250000 BP</span> como recompensa! Por favor, use PM e envie uma carta de indicação para "Staff". Você precisa fornecer informações básicas e formas de contato na menssagem.</b>
+server.apply.reply: |-
+  Responder
+server.apply.resolved: |-
+  Resolvido
+server.apply.resolved_applications: |-
+  Aplicações resolvidas
+server.apply.role: |-
+  Funções
+server.apply.role_created_by: |-
+  Função criada %s por %s %s.
+server.apply.role_created_by_4: |-
+  última modificação&nbsp;
+server.apply.role_title: |-
+  Título
+server.apply.saved: |-
+  salvo
+server.apply.space_role: |-
+  &nbsp;Função
+server.apply.staff: |-
+  staff
+server.apply.thanks_for_your_interest_in_helping: |-
+  Obrigado pelo seu interesse em ajudar {{CONFIG['SITE_NAME']}}! Não há nenhuma abertura no momento. Fique de olho na página inicial ou no fórum {{CONFIG['SITE_NAME']}} para anúncios no futuro.
+server.apply.the_cupboard_is_empty: |-
+  O armário está vazio. Não há aplicativos para mostrar.
+server.apply.the_role_was: |-
+  A função %s era %s.
+server.apply.updated: |-
+  atualizado
+server.apply.view_applications: |-
+  Visualizar Aplicativos
+server.apply.view_your_application: |-
+  Ver sua inscrição
+server.apply.visibility: |-
+  Visibilidade
+server.apply.you_need_choose_role: |-
+  Você precisa escolher qual a função que lhe interessa.
+server.apply.you_need_explain_more: |-
+  Você precisa explicar as coisas um pouco mais.
+server.apply.your_cover_letter: |-
+  Sua carta de apresentação
+server.artist.1021: |-
+  Diretor
+server.artist.1022: |-
+  Escritor
+server.artist.1023: |-
+  Produtor
+server.artist.1024: |-
+  Compositor
+server.artist.1025: |-
+  Cinematográfico
+server.artist.1026: |-
+  Ator
+server.artist.add_alias: |-
+  Adicionar um pseudônimo de novo artista
+server.artist.add_alias_note: |-
+  Isto redireciona os nomes dos artistas como estão escritos (por exemplo, quando novos torrents são carregados ou artistas adicionados). Todos os usos desse novo pseudônimo serão redirecionados para o ID de pseudônimo que você inserir aqui. Use para erros ortográficos comuns, inclusão de marcas diacríticas, etc.
+server.artist.add_similarartist: |-
+  Adicionar artista similar
+server.artist.added: |-
+  Adicionado
+server.artist.aliases_list: |-
+  Lista de pseudônimos de artista existentes
+server.artist.an_alias_already_exists: |-
+  O mesmo pseudônimo já existe <a href="artist.php?id=%s">aqui</a>. Você pode renomeá-lo aqui.
+server.artist.artist_aliases: |-
+  Apelidos dos artistas
+server.artist.artist_deleted: |-
+  Artista excluído
+server.artist.artist_id: |-
+  ID do Artista
+server.artist.artist_info: |-
+  Informação do artista
+server.artist.artist_name: |-
+  Nome do artista
+server.artist.artist_x_deleted: |-
+  Artista "%s" excluído!
+server.artist.artistcomments: |-
+  Comentários
+server.artist.as_an_artist: |-
+  &nbsp;como um artista.
+server.artist.blank_artist_name: |-
+  O nome do artista está vazio.
+server.artist.bounty: |-
+  Recompensa
+server.artist.box_search: |-
+  Listas de arquivos pesquisados
+server.artist.cannot_redirect: |-
+  Não foi possível redirecionar para um apelido de um artista inexistente.
+server.artist.change_artist_id: |-
+  Alterar ID do artista
+server.artist.chinese_name: |-
+  Nome chinês
+server.artist.confirm_merge: |-
+  Confirmar a mesclagem
+server.artist.confirm_merge_body: |-
+  Por favor, confirme que você deseja transformar %s em um apelido não-redirecionado para %s.
+server.artist.delete_this_alias: |-
+  Excluir este apelido
+server.artist.edit_artist: |-
+  Editar Artista
+server.artist.edit_details: |-
+  Editar detalhes
+server.artist.edit_summary: |-
+  Resumo da edição
+server.artist.editrequest: |-
+  Solicitar uma edição
+server.artist.empty_introduction_note: |-
+  (Não há nenhuma introdução para este artista, por favor, adicione uma na página de edição.)
+server.artist.image: |-
+  Imagem
+server.artist.imdb_artist_id: |-
+  ID do artista do IMDb
+server.artist.imdb_born_area: |-
+  Local de Nascimento
+server.artist.imdb_born_date: |-
+  Data de nascimento
+server.artist.imdb_link: |-
+  Link do IMDb
+server.artist.info: |-
+  Informações
+server.artist.loading: |-
+  Carregando...
+server.artist.make_into: |-
+  Transformar em apelido sem redirecionamento
+server.artist.make_into_note: |-
+  Mescla este artista (%s) no artista especificado abaixo (sem redirecionamento), para que (%s) e seus aliases apareçam como um alias não redirecionado do artista inserido na caixa de texto abaixo.
+server.artist.merging_artists: |-
+  Mesclando Artistas
+server.artist.name: |-
+  nome
+server.artist.no_changes_were_made: |-
+  Como o pseudônimo de destino não é redirecionado para outro lugar, nada mudou.
+server.artist.non_redirecting_alias: |-
+  Pseudônimo não redirecionado
+server.artist.number_of_groups: |-
+  Número de grupos
+server.artist.number_of_leechers: |-
+  Número de leechers
+server.artist.number_of_seeders: |-
+  Número de seeders
+server.artist.number_of_snatches: |-
+  Número de snatches
+server.artist.number_of_torrents: |-
+  Número de torrents
+server.artist.or: |-
+  OU
+server.artist.please_remove_the_artist_from_these_requests: |-
+  Por favor, remova o artista destas solicitações manualmente antes de tentar excluir.
+server.artist.please_remove_the_artist_from_these_torrents: |-
+  Por favor, remova o artista destes torrents manualmente antes de tentar apagar.
+server.artist.re_torrents: |-
+  Adicionar pedido
+server.artist.redirect_to: |-
+  Gravar redirecionar para
+server.artist.redirection_must_target: |-
+  O destino do redirecionamento deve ser um dos pseudônimos do artista atual.
+server.artist.remove_similar_artist_title: |-
+  Remover este artista similar
+server.artist.rename: |-
+  Renomeie este artista
+server.artist.request_an_edit: |-
+  Solicitar uma Edição
+server.artist.request_name: |-
+  Nome da solicitação
+server.artist.revert: |-
+  Reverter para esta revisão
+server.artist.revision_history: |-
+  Histórico de revisões para %s
+server.artist.similar_artist_cloud: |-
+  Nuvem de Artista Similar
+server.artist.similar_artist_map: |-
+  Mapa similar do artista
+server.artist.similarartist: |-
+  Artistas Similares
+server.artist.similarartist_note: |-
+  Nenhuma encontrada
+server.artist.statistics: |-
+  Estatísticas
+server.artist.switch_to_cloud: |-
+  Alternar para a nuvem
+server.artist.switch_to_map: |-
+  Mudar para mapa
+server.artist.tag: |-
+  Tags
+server.artist.there_are_still_requests_that_have: |-
+  Ainda há solicitações que têm&nbsp;
+server.artist.there_are_still_torrents_that_have: |-
+  Ainda há torrents que têm&nbsp;
+server.artist.torrents_notify: |-
+  Notificar sobre novos uploads
+server.artist.torrents_unnotify: |-
+  Não notificar sobre novos uploads
+server.artist.user: |-
+  Usuário
+server.artist.view: |-
+  Visualizar
+server.artist.view_artist: |-
+  Ver artista
+server.artist.view_torrent_group: |-
+  Ver grupo de torrent
+server.artist.viewhistory: |-
+  Ver histórico
+server.artist.vote: |-
+  Votar
+server.artist.vote_down_similar_artist_title: |-
+  Vote deslike este artista semelhante. Use isso quando sentir que os dois artistas não são tão parecidos.
+server.artist.vote_up_similar_artist_title: |-
+  Vote like neste artista semelhante. Use isso quando sentir que os dois artistas são bastante semelhantes.
+server.artist.writes_redirect_to: |-
+  escreve redirecionar para
+server.artist.you_are_req_for: |-
+  Você está solicitando uma edição para...
+server.artist.you_are_req_for_note: |-
+  <p>
+  Por favor, detalhe todas as informações que precisam ser editadas para o artista. Inclua todos os links relevantes (discogs, musicbrainz, etc.).<br /><br />
+  Isso não gerará um relatório, mas criará um tópico no fórum de edição.<br /><br />
+
+  Para que este formulário pode ser usado:
+  </p>
+  <ul>
+  <li>Renomeando o artista</li>
+  <li>Pseudônimos de não redirecionamento ou redirecionamento</li>
+  <li>Adicionar/excluir aliases</li>
+  <li>etc...</li>
+  </ul>
+  <p>NÃO use este formulário para torrents individuais ou grupos de torrents. Para torrents individuais, use o recurso de relatório de torrent. Para grupos de torrent, acesse seus respectivos
+  páginas e use o recurso de solicitação de edição.</p>
+server.badges.badge_achievement_progress: |-
+  Progresso da Conquista
+server.badges.badge_display: |-
+  Mostrar Medalhas
+server.badges.badge_exchange: |-
+  Trocar
+server.badges.badge_introduction: |-
+  Introdução
+server.badges.badge_log: |-
+  Log de Medalhas
+server.badges.badge_log_detail: |-
+  Log
+server.badges.badge_name: |-
+  Nome
+server.badges.badge_obtained_time: |-
+  Tempo
+server.badges.badge_preview: |-
+  Pré-visualizar
+server.badges.badge_price: |-
+  Preço
+server.badges.badge_store: |-
+  Loja de Medalhas
+server.badges.badge_unshelve: |-
+  Desarquitetar
+server.badges.badges_center: |-
+  Centro de Medalhas
+server.badges.index_badge: |-
+  Medalhas
+server.badges.sold_out: |-
+  Sem estoque
+server.badges.you_do_not_display_any_badge: |-
+  Você já possui algumas medalhas, mas você não configurou para exibi-los, então aqui está vazio.
+server.badges.you_do_not_have_any_badge: |-
+  Você não pode equipar a área de exibição do seu distintivo porque você não possui medalhas.
+server.blog.body: |-
+  Corpo
+server.blog.by: |-
+  por
+server.blog.create_a_blog_post: |-
+  Criar um post no blog
+server.blog.create_staff_blog_post: |-
+  Criar um post no blog da staff
+server.blog.discuss_this_post_here: |-
+  Discuta esta publicação aqui
+server.blog.do_you_want_to_delete_this: |-
+  Você quer apagar isto?
+server.blog.edit_blog_post: |-
+  Editar postagem no blog
+server.blog.edit_staff_blog_post: |-
+  Editar post do blog staff
+server.blog.important: |-
+  Importante
+server.blog.please_enter_a_title: |-
+  Por favor insira um título.
+server.blog.posted: |-
+  publicado
+server.blog.remove_link: |-
+  Remover link
+server.blog.staff_blog: |-
+  Blog da Staff
+server.blog.thread_id: |-
+  ID do tópico
+server.blog.thread_id_note: |-
+  (Deixe em branco para criar o tópico automaticamente, defina como 0 para não usar tópico)
+server.blog.title: |-
+  Título
+server.bonus.about_bonus_points: |-
+  Sobre os Pontos de Bônus
+server.bonus.bbcode_allowed: |-
+  BBCode é permitido
+server.bonus.bonus_point_rates: |-
+  Taxas de Pontos Bônus
+server.bonus.bonus_points_purchase_history: |-
+  Histórico de Compras de Pontos Bônus
+server.bonus.bonus_points_shop: |-
+  Loja de Pontos Bônus
+server.bonus.bonus_points_spending_history: |-
+  Histórico de gastos de pontos bônus
+server.bonus.bonus_points_spending_history_for: |-
+  Histórico de gastos de Pontos Bônus para %s
+server.bonus.bonus_points_title: |-
+  Pontos de Bônus - Título
+server.bonus.bonus_points_to_purchase: |-
+  pontos de bônus para comprar
+server.bonus.bp_day: |-
+  BP/dia
+server.bonus.bp_hour: |-
+  BP/hora
+server.bonus.bp_month: |-
+  BP/mês
+server.bonus.bp_week: |-
+  BP/semana
+server.bonus.bp_year: |-
+  BP/ano
+server.bonus.checkout: |-
+  Comprar
+server.bonus.custom_title: |-
+  Título Personalizado
+server.bonus.description: |-
+  Descrição
+server.bonus.eliminate_a_hnr: |-
+  Eliminar um H&R
+server.bonus.history: |-
+  Histórico
+server.bonus.invite: |-
+  1 Convite
+server.bonus.item: |-
+  ítem
+server.bonus.items: |-
+  ítems
+server.bonus.need_higher_user_class: |-
+  Classe mais alta de usuário é necessária
+server.bonus.no_bbcode_allowed: |-
+  BBCode não é permitido
+server.bonus.no_purchase_history: |-
+  Sem histórico de compras.
+server.bonus.no_torrent_seeded_currently: |-
+  Nenhum torrent sendo visto atualmente.
+server.bonus.other-1: |-
+  1 Freeleech Token para Outro
+server.bonus.other-2: |-
+  10 Freeleech Tokens para Outro
+server.bonus.other-3: |-
+  50 Freeleech Tokens para Outro
+server.bonus.period: |-
+  .
+server.bonus.points: |-
+  Pontos
+server.bonus.points_price: |-
+  Pontos
+server.bonus.purchase: |-
+  Comprar
+server.bonus.purchased: |-
+  comprado!
+server.bonus.s_bonus_point_rate: |-
+  Taxa Ponto Bônus
+server.bonus.seeders: |-
+  Seeders
+server.bonus.seedtime: |-
+  Tempo de Seed
+server.bonus.size: |-
+  Tamanho
+server.bonus.statistical_size: |-
+  Tamanho Estatístico
+server.bonus.th_for: |-
+  Para
+server.bonus.th_item: |-
+  Ítem
+server.bonus.th_price: |-
+  Preço
+server.bonus.th_purchase_date: |-
+  Data de Compra
+server.bonus.title-bb-n: |-
+  Título Personalizado (Sem BBCode)
+server.bonus.title-bb-y: |-
+  Título Personalizado (BBCode Permitido)
+server.bonus.title-off: |-
+  Remover Título Personalizado
+server.bonus.token-1: |-
+  1 Token Freeleech
+server.bonus.token-2: |-
+  10 Tokens Freeleech
+server.bonus.token-3: |-
+  50 Tokens Freeleech
+server.bonus.token-4: |-
+  100 Tokens Freeleech
+server.bonus.too_expensive: |-
+  Muito Caro
+server.bonus.torrent: |-
+  Torrent
+server.bonus.total_points: |-
+  Pontos
+server.bonus.total_torrents: |-
+  Total de Torrents
+server.bonus.upload-1: |-
+  Upload de 5GB
+server.bonus.upload-2: |-
+  Upload de 50GB
+server.bonus.upload-3: |-
+  Upload de 250GB
+server.bonus.upload-4: |-
+  Upload de 500GB
+server.bonus.you_cannot_afford_this_item: |-
+  Você não pode pagar por este item.
+server.bonus.you_have_spent: |-
+  Você gastou
+server.bonus.your_bonus_point_rate: |-
+  Sua Taxa de Ponto Bônus
+server.bookmarks.add_some_torrents_and_come_back_later: |-
+  Adicione alguns torrents e volte mais tarde.
+server.bookmarks.bookmark: |-
+  Favorito
+server.bookmarks.bookmarked: |-
+  Favoritos
+server.bookmarks.collages: |-
+  Playlists
+server.bookmarks.current_order: |-
+  Pedido atual
+server.bookmarks.dont_notify_new: |-
+  Não notificar sobre novos uploads
+server.bookmarks.drag_drop_textnote_torrents: |-
+  <ul>
+  <li>Clique nos cabeçalhos para organizar colunas automaticamente.</li>
+  <li>Ordenar várias colunas simultaneamente mantendo a tecla shift pressionada e clicando em outros cabeçalhos de coluna.</li>
+  <li>Clique e arraste qualquer linha para mudar sua ordem.</li>
+  <li>Clique duas vezes em uma linha para verificar.</li>
+  </ul>
+server.bookmarks.manage_torrents: |-
+  Gerenciar torrents
+server.bookmarks.no_bookmarked_artists: |-
+  Você ainda não marcou nenhum artista como favorito
+server.bookmarks.no_bookmarked_torrents: |-
+  Você ainda não marcou torrents como favoritos
+server.bookmarks.no_torrents_found: |-
+  Nenhum torrent encontrado.
+server.bookmarks.notify_new: |-
+  Notificar sobre novos uploads
+server.bookmarks.order: |-
+  Pedir
+server.bookmarks.organize_bookmarks: |-
+  Organizar Favoritos
+server.bookmarks.organize_torrent_bookmarks: |-
+  Organizar Torrents Favoritos
+server.bookmarks.remove: |-
+  Remover
+server.bookmarks.remove_snatched: |-
+  Remover encontrado
+server.bookmarks.remove_snatched_confirm: |-
+  Tem certeza de que deseja remover os favoritos de todos os itens que você retirou?
+server.bookmarks.s_bookmarked_artists: |-
+  artistas favoritos
+server.bookmarks.s_bookmarked_torrent_groups: |-
+  grupos de torrents favoritos
+server.bookmarks.sorting: |-
+  Classificação
+server.bookmarks.stats: |-
+  Estatísticas
+server.bookmarks.top_artists: |-
+  Artistas Populares
+server.bookmarks.top_tags: |-
+  Top Tags
+server.bookmarks.torrent_groups: |-
+  Grupos de torrent
+server.bookmarks.year: |-
+  Ano
+server.bookmarks.your_bookmarked_artists: |-
+  Seus artistas favoritos
+server.bookmarks.your_bookmarked_torrent_groups: |-
+  Seus grupos de torrents favoritos
+server.collages.a_collage_with_that_name_already_exists_1: |-
+  Já existe uma playlist com esse nome mas precisa ser recuperada, por favor <a href="staffpm.php">entre em contato</a> com a staff!
+server.collages.add_comment: |-
+  Adicionar Comentário
+server.collages.add_to_collage: |-
+  Adicionar à Playlist
+server.collages.add_torrent_group: |-
+  Adicionar Grupo de Torrent
+server.collages.add_torrent_group_note1: |-
+  Digite a URL de um grupo de torrent no site.
+server.collages.add_torrent_group_note2: |-
+  Digite as URLs de grupos de torrents no site, um por linha.
+server.collages.adder: |-
+  Usuário
+server.collages.all: |-
+  Todos
+server.collages.any: |-
+  Qualquer
+server.collages.author: |-
+  Autor
+server.collages.batch_add: |-
+  Adicionar lote
+server.collages.bookmarks_collages: |-
+  Lista de favoritos de playlists
+server.collages.browse_collages: |-
+  Procurar playlists
+server.collages.built_by_n_users: |-
+  Feito por %s %s
+server.collages.category: |-
+  Categoria
+server.collages.collage: |-
+  Playlist
+server.collages.collage_add_error: |-
+  Falha ao adicionar na playlist
+server.collages.collage_add_success: |-
+  Adicionado na playlist com sucesso
+server.collages.collage_id: |-
+  ID da playlist
+server.collages.collage_is_completely_deleted: |-
+  Coleção está completamente excluída
+server.collages.collage_recovery: |-
+  Recuperação de coleção!
+server.collages.collage_search: |-
+  Pesquisa de coleção
+server.collages.collagecats:
+  '1': |-
+    Pessoal
+  '2': |-
+    Tema
+  '3': |-
+    Introdução ao gênero
+  '4': |-
+    Séries
+  '5': |-
+    Companhia de Produção
+  '6': |-
+    Escolhas da staff
+  '7': |-
+    Compilação Crítica
+  '8': |-
+    Recompensas
+server.collages.collages: |-
+  Playlists
+server.collages.collages_list: |-
+  Lista de Coleções
+server.collages.comments: |-
+  Comentários
+server.collages.contributed_collages: |-
+  Coleções para as quais você contribuiu
+server.collages.create_collages: |-
+  Nova coleção
+server.collages.delete_collage: |-
+  Apagar coleção
+server.collages.delete_confirm: |-
+  Tem certeza de que deseja excluir esta coleção?
+server.collages.description: |-
+  Descrição
+server.collages.edit_collage: |-
+  Editar coleção
+server.collages.edit_description: |-
+  Editar descrição
+server.collages.edit_tags: |-
+  Tags
+server.collages.featured: |-
+  Destaques
+server.collages.featured_title: |-
+  Uma coleção &quot;em destaque&quot; pessoal será listado primeiro no seu perfil, juntamente com uma prévia dos torrents incluídos.
+server.collages.ft_order: |-
+  Ordenar por
+server.collages.manage_torrents: |-
+  Gerenciar torrents
+server.collages.name: |-
+  Nome
+server.collages.new_category: |-
+  Categoria
+server.collages.new_description: |-
+  Descrição
+server.collages.new_name: |-
+  Nome
+server.collages.order: |-
+  Pedir
+server.collages.search_name: |-
+  Nome
+server.collages.search_time: |-
+  Tempo
+server.collages.selected_collage_author: |-
+  Autor
+server.collages.selected_collage_category: |-
+  Categoria
+server.collages.selected_collage_description: |-
+  Descrição
+server.collages.sorting: |-
+  Classificação
+server.collages.statistics: |-
+  Estatísticas
+server.collages.tags: |-
+  Tags (separadas por vírgula)
+server.collages.top_artists: |-
+  Artistas Populares
+server.collages.top_tags: |-
+  Top Tags
+server.collages.user_one: |-
+  Usuário
+server.common.collages: |-
+  Playlists
+server.common.director: |-
+  Diretor
+server.common.edit: |-
+  Editar
+server.common.hide: |-
+  Esconder
+server.common.include_all_aliases: |-
+  Incluir todos os pseudônimos
+server.common.log: |-
+  Log
+server.common.my_badges: |-
+  Medalhas
+server.common.my_comments: |-
+  Comentários
+server.common.no_torrent_tags: |-
+  Sem tags de torrent
+server.common.remove: |-
+  Remover
+server.common.seeders: |-
+  Seeders
+server.common.size: |-
+  Tamanho
+server.common.tags: |-
+  Tags
+server.common.time: |-
+  Tempo
+server.common.torrent: |-
+  Torrent
+server.common.user: |-
+  Usuário
+server.common.year: |-
+  Ano
+server.donate.added_time: |-
+  Tempo
+server.donate.history: |-
+  Histórico
+server.forums.author: |-
+  Autor
+server.forums.body: |-
+  Corpo
+server.forums.by: |-
+  por
+server.forums.check_all: |-
+  Selecionar todos
+server.forums.comments: |-
+  Comentários
+server.forums.featured: |-
+  Destaques
+server.forums.like: |-
+  Curtir
+server.forums.thread_id: |-
+  ID do tópico
+server.forums.title: |-
+  Título
+server.forums.view: |-
+  Visualizar
+server.inbox.body: |-
+  Corpo
+server.inbox.get_special_rank_two_pm: |-
+  Parabéns por alcançar a [url=wiki.php?action=article&id=277]Classificação Especial nº 2[/url]! Você pode Você recebeu uma [url=badge.php]Distintivo de Doador[/url] Imunidade! Divirta-se!
+  {{CONFIG['SITE_NAME']}} Equipe
+server.inbox.reply: |-
+  Responder
+server.inbox.user: |-
+  Usuário
+server.index.collage: |-
+  Playlists
+server.index.hide: |-
+  Esconder
+server.index.period: |-
+  .
+server.index.staff_note: |-
+  Blog da Staff
+server.index.stats: |-
+  Estatísticas
+server.index.vote: |-
+  Votar
+server.log.period: |-
+  .
+server.log.time: |-
+  Tempo
+server.login.enter_valid_email: |-
+  Por favor, insira um endereço de email válido.
+server.permissions.admin_manage_badges: |-
+  Pode gerenciar medalhas
+server.permissions.events_reward_badges: |-
+  Medalhas de recompensa de eventos
+server.permissions.site_delete_tag: |-
+  Pode excluir tags
+server.permissions.site_tag_aliases_read: |-
+  Pode ver a lista de pseudônimos de tags
+server.pub.statistics: |-
+  Estatísticas
+server.reports.body: |-
+  Corpo
+server.reports.collage: |-
+  Playlist
+server.reports.description: |-
+  Descrição
+server.reports.new: |-
+  Novo
+server.reports.stats: |-
+  Estatísticas
+server.reports.title: |-
+  Título
+server.reports.user: |-
+  Usuário
+server.reportsv2.comments: |-
+  Comentários
+server.requests.all: |-
+  Todos
+server.requests.any: |-
+  Qualquer
+server.requests.bounty: |-
+  Recompensa
+server.requests.collages: |-
+  Playlists
+server.requests.description: |-
+  Descrição
+server.requests.forgot_enter_tags: |-
+  Você se esqueceu de digitar as tags!
+server.requests.image: |-
+  Imagem
+server.requests.name: |-
+  Nome da solicitação
+server.requests.tags: |-
+  Tags
+server.requests.tags_comma: |-
+  Tags (separadas por vírgula)
+server.requests.tags_note: |-
+  As tags devem ser separadas por vírgulas, e você deve usar um período ('.') para separar as palavras dentro de uma tag&#8202;&mdash;&#8202;ex. '<strong class='u-colorSuccess'>imdb.top.500</strong>'.
+  <br /><br />
+  Há uma lista de tags oficiais à esquerda da caixa de texto. Por favor, use estas tags em vez de marcadores 'não oficiais' (por exemplo, use o drama '<strong class='u-colorSuccess'>oficial</strong>' tag, em vez de uma tag '<strong class='u-colorWarning'>holy.crap</strong>' tag.).
+server.requests.year: |-
+  Ano
+server.rules.collages_title: |-
+  Playlists
+server.rules.tags_title: |-
+  Tagging(Marcação)
+server.rules.tags_title_de: |-
+  Essas regras regem quais tags podem e não podem ser adicionadas.
+server.rules.type: |-
+  Categoria
+server.sitehistory.body: |-
+  Corpo
+server.sitehistory.category: |-
+  Categoria
+server.sitehistory.choose_tags: |-
+  Selecionar tags
+server.sitehistory.comma_separated_tags: |-
+  Tags separadas por vírgulas
+server.sitehistory.edit: |-
+  Editar
+server.sitehistory.tags: |-
+  Tags
+server.sitehistory.tags_placeholder: |-
+  Tags separadas por vírgula; use pontos / pontos para espaços
+server.sitehistory.title: |-
+  Título
+server.staffpm.preview: |-
+  Pré-visualizar
+server.staffpm.reply: |-
+  Responder
+server.staffpm.resolved: |-
+  Resolvido
+server.stats.stats: |-
+  Estatísticas
+server.subtitles.new: |-
+  Novo
+server.subtitles.subtitle_rules: |-
+  <ul>
+  <li id='r3.6.1'></strong>1.</a> <strong>A legenda carregada por um usuário deve ser sincronizada com o arquivo de vídeo específico, caso contrário ela será apagada diretamente.</strong>
+  </li>
+  <li id='r3.6.2'><a href='rules.php?p=upload#3.6.2'>2.</a> <strong>formatos de legenda permitidos por {{CONFIG['SITE_NAME']}} são .sub, .idx, .sup, .srt, .vtt, .ass, .smi, and . sa. </strong>eles também podem ser compactados com .rar, .zip, .7z, .tar, . gz, ou .tar.gz.
+  </li>
+  <li id='r3.6.3'><a href='rules.php?p=upload#3.6.3'>3.</a> <strong>É recomendável que uma legenda use o nome consistente do arquivo de vídeo.</strong>Adicionar uma tag de idioma no final é permitido, por exemplo, "Monsters.Inc.2001.1080p.BluRay.DTS.x264.D-Z0N3.chs.srt".
+  </li>
+  <li id='r3.6.4'><a href='rules.php?p=upload#3.6.4'>4.</a> <strong>Legendas Unicode são recomentadas. </strong>
+  </li>
+  <li id='r3.6.5'><a href='rules.php?p=upload#3.6.5'>5.</a> <strong>Por favor carregue um único arquivo de legenda para um filme. NÃO compile arquivos de legendas de idiomas diferentes. </strong>Por exemplo, incluindo a SRT simplificada chinesa, a SRT tradicional chinesa e a chinesa e a inglesa SRT em um único arquivo não é permitido. Devem ser enviados separadamente. <strong>Para miniseries, é permitido comprimir legendas para episódios juntos. </strong>você tem que ter certeza de que os nomes dos arquivos da legenda e do vídeo são correspondentes.
+  </li>
+  </ul>
+server.tools.added: |-
+  Adicionado
+server.tools.all: |-
+  Todos
+server.tools.author: |-
+  Autor
+server.tools.badge: |-
+  Medalha(s)
+server.tools.badge_auto: |-
+  Auto
+server.tools.badge_class: |-
+  Classe
+server.tools.badge_icon: |-
+  Ícone
+server.tools.badge_image: |-
+  Imagem
+server.tools.badge_level: |-
+  Nível
+server.tools.badge_level_number: |-
+  Número
+server.tools.badge_management: |-
+  Gerenciamento de Medalhas
+server.tools.badge_note: |-
+  Observação
+server.tools.badge_operations: |-
+  Operações
+server.tools.badge_progress: |-
+  Progresso
+server.tools.badge_query: |-
+  Consulta
+server.tools.badge_send: |-
+  Enviar
+server.tools.badge_sort: |-
+  Ordenar
+server.tools.badge_tag: |-
+  Tag
+server.tools.badge_to: |-
+  para
+server.tools.badge_withdraw: |-
+  Retirar
+server.tools.badges_giving: |-
+  Medalhas dando
+server.tools.batch_tag_editor: |-
+  Editor de Tags em Lote
+server.tools.body: |-
+  Corpo
+server.tools.cannot_merge_tag_with_itself: |-
+  Não é possível mesclar a tag %s com ela mesmo!
+server.tools.category: |-
+  Categoria
+server.tools.chinese_dubbed: |-
+  Dublado em chinês
+server.tools.client_whitelist: |-
+  Whitelist do Cliente
+server.tools.description: |-
+  Descrição
+server.tools.dnu_comment: |-
+  Observação
+server.tools.enter_a_single_replacement_tag: |-
+  Insira uma única tag de substituição.
+server.tools.enter_a_single_tag_to_search_for: |-
+  Insira uma única tag para pesquisar.
+server.tools.h2_official_tags_manager: |-
+  Gerenciador Oficial de Tags
+server.tools.history: |-
+  Histórico
+server.tools.icon: |-
+  Ícone
+server.tools.introduction: |-
+  Introdução
+server.tools.level: |-
+  Nível
+server.tools.manage_badges: |-
+  Gerenciar medalhas
+server.tools.mass_pm_class: |-
+  Classe
+server.tools.merge_rename_tags: |-
+  Mesclar/Renomear Tags
+server.tools.name: |-
+  Nome
+server.tools.new_official_tag: |-
+  Nova tag oficial
+server.tools.no_such_tag_found: |-
+  Tag não encontrada
+server.tools.official_tags_manager: |-
+  Gerenciador de tags oficiais
+server.tools.operations: |-
+  Operações
+server.tools.proper_tag: |-
+  Tag adequada
+server.tools.remove: |-
+  Remover
+server.tools.rename_to_merge_with_tag: |-
+  Renomear para/mesclar com a tag
+server.tools.sort: |-
+  Ordenar
+server.tools.sort_by_bad_tags: |-
+  Ordenar por tags ruins
+server.tools.sort_by_good_tags: |-
+  Ordenar por tags boas
+server.tools.tag: |-
+  Tag
+server.tools.tag_aliases: |-
+  Pseudônimo de Tag
+server.tools.user: |-
+  Usuário
+server.tools.view: |-
+  Visualizar
+server.top10.all: |-
+  Todos
+server.top10.any: |-
+  Qualquer
+server.top10.found_no_tags_matching_the_criteria: |-
+  Não foram encontradas tags correspondentes ao critério
+server.top10.hide: |-
+  Esconder
+server.top10.most_highly_voted_tags: |-
+  Tags mais votadas
+server.top10.most_used_request_tags: |-
+  Tags de solicitação mais usadas
+server.top10.most_used_torrent_tags: |-
+  Tags Torrent mais usadas
+server.top10.name: |-
+  Nome
+server.top10.tag: |-
+  Tag
+server.top10.tags: |-
+  Tags
+server.top10.tags_comma: |-
+  Tags (separadas por vírgula)
+server.top10.top_10_tags: |-
+  As 10 Principais Tags
+server.top10.user: |-
+  Usuário
+server.torrents.add_tag: |-
+  Adicionar Tag
+server.torrents.all: |-
+  Todos
+server.torrents.any: |-
+  Qualquer
+server.torrents.artist_alias_id: |-
+  ID do Artista
+server.torrents.bounty: |-
+  Recompensa
+server.torrents.chinese_title: |-
+  Título Chinês
+server.torrents.cinematographer: |-
+  Cinematográfico
+server.torrents.cn_quality_slot_requirements: |-
+  Deve conter uma legenda chinesa codificada. Legendas não podem ser mais do que chinesa e inglês. A qualidade do vídeo deve ser a melhor possível.
+server.torrents.composer: |-
+  Compositor
+server.torrents.director: |-
+  Diretor
+server.torrents.diy_slot_requirements: |-
+  Apenas para filmes não chineses. Deve adicionar menos um dub chinês ou uma legenda de efeitos especiais chineses à cópia do disco.
+server.torrents.edit_details: |-
+  Editar detalhes
+server.torrents.edit_summary: |-
+  Resumo da edição
+server.torrents.editgroup: |-
+  Editar descrição
+server.torrents.editrequest: |-
+  Solicitar uma edição
+server.torrents.eliminate_a_hnr: |-
+  Eliminar um H&R
+server.torrents.feature_slot_requirements: |-
+  Apenas para filmes não chineses. Deve conter uma legenda chinesa codificada. Precisa adicionar pelo menos uma legenda chinesa ou uma legenda de efeitos especiais em chinês para o código.
+server.torrents.ft_order: |-
+  Ordenar por
+server.torrents.ft_year: |-
+  Ano
+server.torrents.hide: |-
+  Esconder
+server.torrents.hide_tags: |-
+  Esconder Tags
+server.torrents.like: |-
+  Curtir
+server.torrents.movie_producer: |-
+  Produtor
+server.torrents.name: |-
+  Nome
+server.torrents.period: |-
+  .
+server.torrents.quality_slot_requirements: |-
+  É melhor conter uma legenda chinesa codificada. Um torrent sem legendas chinesas e inglesas seria marcado como "Trumpable". A qualidade do vídeo deve ser o melhor possível.
+server.torrents.remove: |-
+  Remover
+server.torrents.remove_tag: |-
+  Remover tag
+server.torrents.remux_slot_requirements: |-
+  É melhor conter uma legenda chinesa codificada. Um torrent sem legendas chinesas e inglesas seria marcado como "Trumpable".&nbsp;
+server.torrents.reply: |-
+  Responder
+server.torrents.request_an_edit: |-
+  Solicitar uma Edição
+server.torrents.revert: |-
+  Reverter para esta revisão
+server.torrents.seeders: |-
+  Seeders
+server.torrents.size: |-
+  Tamanho
+server.torrents.tag: |-
+  Tags
+server.torrents.tag_rules: |-
+  Ver regras de tags
+server.torrents.tags: |-
+  Tags (separadas por vírgula)
+server.torrents.there_are_no_tags_to_display: |-
+  Não há tags para exibir.
+server.torrents.time: |-
+  Tempo
+server.torrents.title: |-
+  Título
+server.torrents.torrent: |-
+  Torrent
+server.torrents.user: |-
+  Usuário
+server.torrents.view_tags: |-
+  Vizualizar Tags
+server.torrents.view_the_profile_of_the_user_that_added_this_tag: |-
+  Ver o perfil do usuário que adicionou esta tag
+server.torrents.viewhistory: |-
+  Ver histórico
+server.torrents.vote_this_tag_down: |-
+  Vote deslike nesta tag
+server.torrents.vote_this_tag_up: |-
+  Vote like nesta tag
+server.torrents.writer: |-
+  Escritor
+server.torrents.year: |-
+  Ano
+server.torrents.you_are_req: |-
+  Você está solicitando uma edição para...
+server.upload.chinese_dubbed_label: |-
+  Dublado em chinês
+server.upload.chinese_movie_synopsis: |-
+  Sinopse Chinesa
+server.upload.chinese_movie_synopsis_note: |-
+  Por favor, adicione synopsis em inglês se você não encontrou uma chinês.
+server.upload.chinese_name: |-
+  Nome chinês
+server.upload.chinese_simplified: |-
+  Chinês (simplificado)
+server.upload.chinese_title: |-
+  Título Chinês
+server.upload.chinese_traditional: |-
+  Chinês (Tradicional)
+server.upload.cinematographer: |-
+  Cinematográfico
+server.upload.composer: |-
+  Compositor
+server.upload.copied: |-
+  Copiado
+server.upload.director: |-
+  Diretor
+server.upload.movie_aliases: |-
+  Título Chinês
+server.upload.movie_aliases_note: |-
+  Por favor, digite o título em chinês.
+server.upload.movie_feature_note: |-
+  <strong>Nota: </strong>somente filmes não chineses podem usar essas marcas.
+server.upload.movie_producer: |-
+  Produtor
+server.upload.name: |-
+  Nome
+server.upload.period: |-
+  .
+server.upload.preview: |-
+  Pré-visualizar
+server.upload.tags: |-
+  Tags
+server.upload.title_how_to_blockquote: |-
+  Por favor, leia a regra de envio <a href='rules.php?p=upload#2.1' target='_blank'>2.1</a> para nomes com título. Aqui estão algumas explicações extras.<br/><br/>
+  <strong>Título do filme</strong>: Título principal em inglês do filme. Por favor, note que o título que foi preenchido automaticamente pode não ser normal, o que é uma transliteração do título do idioma original. No momento, recomendamos fortemente que você use o título padrão de inglês, que pode ser encontrado em:
+  <ul>
+  <li>cartaz de filmes;</li>
+  <li>MDb "Também conhecido como Ilustração;</li>
+  <li>Se o torrent é um Encode, o nome do arquivo pode ser um título em inglês padrão.</li>
+  </ul>Quando você não consegue encontrar um título padrão em inglês pelas formas acima, então uma transliteração é aceitável. Por exemplo, o filme Chinês <i>The Wandering Earth</i> não deve ser nomeado como <i>Liu Lang Di Qiu</i>.
+  <br/><br/>
+  <strong>Chinês:</strong> Por favor, digite o título da China continental. Não são permitidos títulos utilizados em Hong Kong ou província de Taiwan.
+server.upload.torrent_info_how_to_blockquote: |-
+  <strong>MediaInfo e especificações:</strong> Depois de colar a MediaInfo (<a href="wiki.php?action=article&name=MediaInfo+使用指南" target="_blank">guide</a>) ou log do BDInfo (<a href="wiki.php?action=article&name=BDInfo+使用指南" target="_blank">guia</a>), você pode clicar fora da área de texto, então os quatro seletores com "Detectar automaticamente" serão escolhidos automaticamente.<br/>
+  <strong class="u-colorWarning">Por favor, verifique novamente depois de preencher automaticamente.</strong><br/><br/>
+  <strong>Descrição do Torrent:</strong> Precisamos de, pelo menos, três capturas de tela PNG (<a href="wiki.php?action=article&name=原始分辨率截图指南" target="_blank">guias</a>).<br/>
+  É recomendado explicar o texto antes das capturas de tela, por exemplo <a href="torrents.php?torrentid=1" target="_blank">este torrent</a>.<br/>
+  Por favor consulte nossas <a href="rules.php?p=upload" target="_blank">regras</a> para mais informações sobre informações obrigatórias.<br/><br/>
+  <strong>Legendas:</strong> Por favor observe as diferenças entre a legenda forçada e a legenda codificada, você pode ler <a href="wiki.php?action=article&id=44" target="_blank">esse artigo</a>.<br/><br/>
+  <strong>Feature torrent:</strong> Somente <strong class="u-colorWarning">filmes não-chineses</strong> podem usar estas marcas (dialectos como Cantonês são considerados chineses).
+server.upload.writer: |-
+  Escritor
+server.upload.year: |-
+  Ano
+server.user.anyone: |-
+  Qualquer
+server.user.at_least_one_of_these_tags: |-
+  Pelo menos uma dessas tags
+server.user.autocomp_title: |-
+  O preenchimento automático tentará prever a palavra ou frase que você está digitando. Selecionando &quot;Em todos os lugares&quot; ativará o preenchimento automático nos campos de artista e tag em todo o site. A seleção de &quot;Somente pesquisas&quot; ativará o preenchimento automático nas pesquisas.
+server.user.badge_center: |-
+  Centro de Medalha
+server.user.bounty: |-
+  Recompensa
+server.user.collage_covers_all: |-
+  Todos
+server.user.comma_seperated_languages_list: |-
+  Lista separada por vírgulas&#8202;&mdash;&#8202;por exemplo, Chinês, Japonês, Inglês
+server.user.comma_seperated_tags_list: |-
+  Lista separada por vírgulas&#8202;&mdash;&#8202;por exemplo ação, ficção científica, suspense
+server.user.customtitle: |-
+  Título Personalizado
+server.user.donorforum_4: |-
+  Pré-visualizar
+server.user.filt_tr_show_tags: |-
+  Exibir filtros de tags oficiais
+server.user.filt_tr_title: |-
+  A exibição de controles de filtro mostrará as opções de filtragem de torrent no menu de pesquisa de torrent por padrão. A exibição de filtros para tags oficiais listará filtros clicáveis para tags oficiais no menu de pesquisa de torrent por padrão.
+server.user.history: |-
+  Histórico
+server.user.mature_title: |-
+  >-
+  {{CONFIG['SITE_NAME']}} tem &lt;a href=&quot;wiki.php?action=article&amp;amp;id=1063&quot;&gt;políticas de conteúdo adulto&lt;/a&gt; para todas as áreas da comunidade. Escolher exibir conteúdo adulto permitirá que você clique para visualizar qualquer conteúdo postado abaixo de &lt;code&gt;[mature]&lt;/code&gt; Tag. Se você optar por não exibir conteúdo adulto, todo o conteúdo marcado com &lt;code&gt;[mature]&lt;/code&gt; tags serão ocultadas de você.' data-title-plain='{{CONFIG['SITE_NAME']}} tem muito
+  políticas flexíveis de conteúdo maduro para todas as áreas da comunidade. Escolher exibir conteúdo adulto permitirá que você clique para visualizar qualquer conteúdo postado sob as tags [mature]. Se você optar por não exibir conteúdo adulto, todo o conteúdo marcado com tags [mature] ficará oculto para você.
+server.user.name: |-
+  Nome
+server.user.next_userclass_title4: |-
+  Tempo
+server.user.none_of_these_tags: |-
+  Nenhuma destas tags
+server.user.order: |-
+  Pedir
+server.user.p_class: |-
+  Classe
+server.user.p_personal: |-
+  Pessoal
+server.user.para_badgedisplay: |-
+  Mostrar todas as medalhas
+server.user.para_badgedisplay_label: |-
+  Permitir que outras pessoas vejam todas as medalhas que você possui
+server.user.para_stats: |-
+  Estatísticas
+server.user.statistics: |-
+  Estatísticas
+server.user.stats: |-
+  Estatísticas
+server.user.tagging: |-
+  Tagging(Marcação)
+server.user.tagging_title: |-
+  Isso apenas desativa a capacidade do usuário de excluir tags.
+server.user.theme: |-
+  Tema
+server.user.theme_auto: |-
+  Auto
+server.user.view: |-
+  Visualizar
+server.user.vote: |-
+  Votar
+server.userhistory.collage: |-
+  Playlist
+server.userhistory.hide: |-
+  Esconder
+server.userhistory.new: |-
+  Novo
+server.userhistory.time: |-
+  Tempo
+server.userhistory.torrent: |-
+  Torrent
+server.wiki.add_alias: |-
+  Adicionar pseudônimo
+server.wiki.aliases: |-
+  Pseudônimos
+server.wiki.article_chinese: |-
+  Link do Wiki Chinês
+server.wiki.article_delete_confirm3: |-
+  Dadas estas novas informações, você ainda quer DELETAR esse artigo, todas as suas revisões e todos os seus pseudônimos e agir como nunca existiu?
+server.wiki.article_edit: |-
+  Editar
+server.wiki.article_history: |-
+  Histórico
+server.wiki.article_language_detail: |-
+  Por favor, selecione o idioma em que a sua página wiki foi escrita. Se o artigo estiver escrito em um idioma diferente do chinês, você precisa incluir o URL da Wiki para o artigo chinês. Se você não vê o idioma na lista, por favor envie uma mensagem privada com a ID/URL do Wiki após a criação.
+server.wiki.body: |-
+  Corpo
+server.wiki.chinese: |-
+  Chinês
+server.wiki.delete_aliases: |-
+  Apagar pseudônimos
+server.wiki.history_author: |-
+  Autor
+server.wiki.history_new: |-
+  Novo
+server.wiki.history_title: |-
+  Título
+server.wiki.order_by: |-
+  Ordenar por
+server.wiki.revision_history: |-
+  Histórico de revisões para %s
+server.wiki.title: |-
+  Título

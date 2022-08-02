@@ -1360,7 +1360,7 @@ server.editioninfo.remaster: |-
 server.editioninfo.remux: |-
   Remux
 server.editioninfo.rifftrax: |-
-  Rifftrax
+  RiffTrax
 server.editioninfo.the_criterion_collection: |-
   标准收藏
 server.editioninfo.theatrical_cut: |-
@@ -1714,7 +1714,7 @@ server.index.blank: |-
 server.index.blog_note: |-
   博客
 server.index.cleader: |-
-  Contest Leaderboard
+  竞赛排行榜
 server.index.click_here: |-
   请点此
 server.index.collage: |-
@@ -1732,9 +1732,9 @@ server.index.featured_item: |-
 server.index.filled: |-
   已应求
 server.index.fproduct: |-
-  Featured Product
+  推荐商品
 server.index.fproduct_title: |-
-  Featured Product Image
+  推荐商品图
 server.index.hide: |-
   隐藏
 server.index.index: |-
@@ -1748,7 +1748,7 @@ server.index.mon_visit: |-
 server.index.moviegroups: |-
   电影
 server.index.mystery: |-
-  It's a mystery!
+  天机不可泄露！
 server.index.peers: |-
   同伴数
 server.index.period: |-
@@ -1758,9 +1758,9 @@ server.index.poll: |-
 server.index.popular_movies: |-
   热门电影
 server.index.product_note: |-
-  You may want to put an image here.
+  你可能想在这里放一张图。
 server.index.product_page: |-
-  Product Page
+  商品页面
 server.index.s_l_ratio: |-
   做种/下载比
 server.index.show: |-
@@ -2327,7 +2327,7 @@ server.reports.comment: |-
 server.reports.compose: |-
   撰写私信
 server.reports.contact: |-
-  Contact
+  联系
 server.reports.description: |-
   描述
 server.reports.filled: |-
@@ -2538,11 +2538,11 @@ server.reportsv2.types.movie.names_bad.title: |-
   问题文件（夹）名
 server.reportsv2.types.movie.names_bad.resolve_options.pm: |-
   [rule]2.1.1[/rule]。文件（夹）名必须使用电影原始语种名称或官方英文名（推荐）。（如海报所示等的官方英文名，其优先级高于 IMDb。）
-                
+
   [rule]2.1.2[/rule]。压制组发行（来自 P2P 组或 Scene 组）不应重命名，除非它们不满足规则 [rule]2.1.1[/rule] 或我们的文件名要求。
 
   [rule]2.1.4[/rule]。DVD 和 BD 文件目录结构不允许改动，仅顶层文件夹允许重命名。
-                
+
   你的种子被标记为问题文件（夹）名且可被替代。当然你也可自行修复这个种子，补充或修正文件（夹）名然后重新发布种子。然后以 “替代” 为由报告（RP）旧种，在报告说明中指出你已修复的命名问题，同时请确保提供用以替代的新种永久链接（PL）。
 server.reportsv2.types.movie.video_track_bad.report_messages.1: |-
   请指出视频轨存在的具体问题，并向我们提供 PNG 格式的影片原始分辨率截图。
@@ -2550,13 +2550,13 @@ server.reportsv2.types.movie.video_track_bad.title: |-
   问题视频轨
 server.reportsv2.types.movie.video_track_bad.resolve_options.pm: |-
   [rule]5.4.1[/rule]、[rule]5.4.2[/rule]。种子的纵横比因编码错误等原因与原始的、影院上映的电影不同。
-                
+
   [rule]5.4.5[/rule]、[rule]5.4.6[/rule]。种子被错误地反交错，或以错误的帧率播放。
 
   [rule]5.4.18[/rule]。种子明显裁边过多或过少。
 
   [rule]5.4.22[/rule]。种子含有明显的水印。
-                
+
   你的种子被标记为 “问题视频轨” 且可被替代。
 server.reportsv2.types.movie.audio_track_bad.report_messages.1: |-
   请指出音频轨存在的具体问题。
@@ -2566,11 +2566,11 @@ server.reportsv2.types.movie.audio_track_bad.resolve_options.pm: |-
   [rule]5.4.3[/rule]。种子内含的音频轨相对其分辨率而言过于庞大。
 
   [rule]5.4.4[/rule]。种子含有冗余的音频轨。
-                
+
   [rule]5.4.16[/rule]。既没有原始语种音频也没有国语配音，只有非国语配音的种子会被标记为 “可替代”。
-                
+
   [rule]5.4.17[/rule]。种子中包含的音轨有效，但不同步。
-                
+
   你的种子被标记为 “问题音频轨” 且可被替代。
 server.reportsv2.types.movie.subtitle_track_bad.report_messages.1: |-
   请指出字幕轨存在的具体问题。
@@ -2578,7 +2578,7 @@ server.reportsv2.types.movie.subtitle_track_bad.title: |-
   问题字幕轨
 server.reportsv2.types.movie.subtitle_track_bad.resolve_options.pm: |-
   [rule]5.4.7[/rule]。种子中包含的字幕有效，但不同步。
-                
+
   [rule]5.4.14[/rule]。无中字槽位的种子如果是不包含英文字幕（通过字幕管理器内挂或外挂）的非英语电影，会被标为 “可替代”。
 
   [rule]5.4.15[/rule]。无中字槽位的种子，其重要非英语对白不包含单独的英文字幕。
@@ -2586,7 +2586,7 @@ server.reportsv2.types.movie.subtitle_track_bad.resolve_options.pm: |-
   [rule]5.4.19[/rule]。包含字幕质量很差，且不是电影准确翻译的种子会被标为 “可替代”。
 
   [rule]5.4.20[/rule]。字幕被硬编码在视频轨中的种子会被标为 “可替代”。
-                
+
   你的种子被标记为 “问题字幕轨” 且可被替代。
 server.reportsv2.types.movie.torrent_description_bad.report_messages.1: |-
   请指出种子描述存在的具体问题。
@@ -2602,9 +2602,9 @@ server.reportsv2.types.movie.format.title: |-
   规格不当
 server.reportsv2.types.movie.format.resolve_options.pm: |-
   [rule]5.4.8[/rule]。种子应符合我们 [rule]h3[/rule] 推荐格式的要求。
-                
+
   [rule]5.4.9[/rule]。种子应符合我们 [rule]h3[/rule] 推荐分辨率的要求。
-                
+
   你的种子已被报告，因为其格式或分辨率与规则不符。
 server.reportsv2.a_torrent_with_that_id_does_not_exist: |-
   不存在该 ID 的种子。
@@ -3247,7 +3247,7 @@ server.staff.subject: |-
 server.staff.support: |-
   支持项目
 server.staff.torrent_inspector: |-
-  Torrent Inspector (TI)
+  种子检查员 (TI)
 server.staff.username: |-
   用户名
 server.staffpm.amount: |-
@@ -3893,7 +3893,7 @@ server.tools.email_blacklist_comment: |-
 server.tools.enable_requests: |-
   账号启用申请
 server.tools.engine: |-
-  Engine
+  引擎
 server.tools.enter_a_single_replacement_tag: |-
   输入单个标签用于替换。
 server.tools.enter_a_single_tag_to_search_for: |-
@@ -5086,7 +5086,7 @@ server.torrents.error_tokens_not_enough: |-
 server.torrents.extra: |-
   追加
 server.torrents.extra_definition: |-
-  Other
+  其他
 server.torrents.extra_info: |-
   额外信息
 server.torrents.extra_info_placeholder: |-
@@ -5272,7 +5272,7 @@ server.torrents.only_shows_free_torrents: |-
 server.torrents.other: |-
   其他
 server.torrents.peer: |-
-  Peer
+  同伴
 server.torrents.peer_list: |-
   同伴列表
 server.torrents.people_who_like_this_album_also_liked: |-
@@ -6025,7 +6025,7 @@ server.user.anonymous: |-
 server.user.anyone: |-
   任意
 server.user.api_key: |-
-  API key
+  API 密钥
 server.user.are_you_sure_delete_notification_filter: |-
   你确定要删除这个推送过滤器吗？
 server.user.are_you_sure_you_want_to_delete_this_invite: |-
@@ -6403,7 +6403,7 @@ server.user.irc_no: |-
 server.user.irc_yes: |-
   有
 server.user.irckey: |-
-  IRC key
+  IRC 密钥
 server.user.irckey_note_1: |-
   <p class='min_padding'>完成设置后，你在 <a href='wiki.php?action=article&amp;id=248'>本站 IRC</a> 通过
 server.user.irckey_note_2: |-
@@ -6607,7 +6607,7 @@ server.user.p_clients: |-
 server.user.p_email: |-
   邮箱地址
 server.user.p_host: |-
-  Host
+  服务商
 server.user.p_inviter: |-
   邀请人
 server.user.p_invites: |-
