@@ -13,7 +13,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - uses: crowdin/github-action@1.4.9
+      - uses: crowdin/github-action@1.4.10
         with:
           upload_translations: true
           download_translations: true
