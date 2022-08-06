@@ -3049,8 +3049,8 @@ server.requests.lastvote: |-
   Last vote
 server.requests.link_not_valid: |-
   Your link didn't seem to be a valid torrent link.
-server.requests.min_bounty_100_mb: |-
-  Minimum bounty is 100 MiB.
+server.requests.min_bounty: |-
+  Minimum bounty is 1 GiB.
 server.requests.my_requests: |-
   My requests
 server.requests.name: |-

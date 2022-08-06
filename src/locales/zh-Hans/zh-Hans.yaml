@@ -2982,8 +2982,8 @@ server.requests.lastvote: |-
   最后投票
 server.requests.link_not_valid: |-
   你提供的种子链接无效。
-server.requests.min_bounty_100_mb: |-
-  报酬至少 100 MB。
+server.requests.min_bounty: |-
+  报酬至少 1 GiB。
 server.requests.my_requests: |-
   我的求种
 server.requests.name: |-

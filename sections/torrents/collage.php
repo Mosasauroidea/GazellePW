@@ -92,10 +92,6 @@
 				<span><?= t('server.collages.selected_collage_author') ?>: </span>
 				<span id="s_c_span_author"></span>
 			</div>
-			<div class="Form-row FormCollageRow" id="selected_collage_description">
-				<span><?= t('server.collages.selected_collage_description') ?>: </span>
-				<span id="s_c_span_description"></span>
-			</div>
 			<div class="Form-row ButtonGroup center">
 				<input class="Button" type="button" value="<?= t('server.collages.open_collage') ?>" onclick="openCollage()" />
 				<input class="Button" type="button" value="<?= t('server.collages.add_to_collage') ?>" onclick="addCollage(<?= $GroupID ?>)" />

@@ -21,6 +21,7 @@ if ($Request === false) {
 $IsFilled = !empty($Request['TorrentID']);
 $CanVote = !$IsFilled && check_perms('site_vote');
 
+
 if ($Request['CategoryID'] === '0') {
     $CategoryName = 'Unknown';
 } else {

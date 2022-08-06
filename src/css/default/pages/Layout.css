@@ -43,7 +43,7 @@ LayoutBody                    # gap
 /* LayoutMainSidebar */
 .LayoutMainSidebar {
   display: grid;
-  grid-template-columns: 1fr 270px;
+  grid-template-columns: 1fr 230px;
   grid-template-rows: auto;
   width: auto;
   gap: var(--global-space-lg);

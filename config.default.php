@@ -86,6 +86,7 @@ $CONFIG['NOT_ALLOWED_REGISTRATION_EMAIL'] = [];
 $CONFIG['USER_LIMIT'] = 5000; //The maximum number of users the site can have, 0 for no limit
 
 $CONFIG['REQUEST_TAX'] = 0.0; //Percentage Tax (0 - 1) to charge users on making requests
+$CONFIG['REQUEST_MIN_VOTE'] = 1 * 1024 * 1024 * 1024;
 
 $CONFIG['STARTING_UPLOAD'] = 3221225472; //Upload given to newly registered users, in bytes using IEC standard (1024 bytes per KiB)
 

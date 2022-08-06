@@ -94,7 +94,7 @@ if ($NewRequest) {
         if (!is_number($Bounty)) {
             $Err = t('server.requests.entered_bounty_not_number');
         } elseif ($Bounty < 100 * 1024 * 1024) {
-            $Err = t('server.requests.min_bounty_100_mb');
+            $Err = t('server.requests.min_bounty');
         }
         $Bytes = $Bounty; //From MB to B
     }

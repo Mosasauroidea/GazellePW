@@ -159,7 +159,7 @@ View::show_header(($NewRequest ? t('server.requests.new_create') : t('server.req
         <h2 class="BodyHeader-nav"><?= t('server.requests.requests')  ?></h2>
     </div>
     <div class="BodyContent">
-        <form class="Form FormRequestNew" action="" method="post" id="request_form" onsubmit="globalapp.requestCalculate();">
+        <form class="Form FormUpload FormRequestNew" action="" method="post" id="request_form" onsubmit="globalapp.requestCalculate();">
             <div>
                 <? if (!$NewRequest) { ?>
                     <input type="hidden" name="requestid" value="<?= $RequestID ?>" />
@@ -176,7 +176,7 @@ View::show_header(($NewRequest ? t('server.requests.new_create') : t('server.req
                     <td colspan="2" class="center"><?= t('server.requests.new_rules') ?></td>
                 </tr>
                 <? if ($NewRequest || $CanEdit) { ?>
-                    <tr class="Form-row">
+                    <tr class="Form-row hidden">
                         <td class="Form-label">
                             <?= t('server.upload.type') ?>:
                         </td>
@@ -216,8 +216,8 @@ View::show_header(($NewRequest ? t('server.requests.new_create') : t('server.req
                                     <div class="Form-inputs">
                                         <input type="hidden" id="artist_id" name="artist_ids[]" value="<?= display_str($Artist['imdbid']) ?>" size="45" />
                                         <input class="Input" type="text" id="artist_<?= $cnt ?>" <?= $Disabled ?> name="artists[]" <? Users::has_autocomplete_enabled('other'); ?> size="45" value="<?= display_str($Artist['name']) ?>" />
-                                        <input class="Input" type="text" id="artist_chinese" name="artists_chinese[]" size="25" value="<?= display_str($Artist['cname']) ?>" placeholder="<?= t('server.upload.chinese_name') ?>" <?
-                                                                                                                                                                                                                                    Users::has_autocomplete_enabled('other'); ?> />
+                                        <input class="Input is-small" type="text" id="artist_chinese" name="artists_chinese[]" size="25" value="<?= display_str($Artist['cname']) ?>" placeholder="<?= t('server.upload.chinese_name') ?>" <?
+                                                                                                                                                                                                                                            Users::has_autocomplete_enabled('other'); ?> />
                                         <select class="Input" id="importance" name="importance[]">
                                             <option class="Select-option" value="1" <?= ($Importance == '1' ? ' selected="selected"' : '') ?>><?= t('server.upload.director') ?></option>
                                         </select>
@@ -237,8 +237,8 @@ View::show_header(($NewRequest ? t('server.requests.new_create') : t('server.req
                                 <div class="Form-inputs">
                                     <input type="hidden" id="artist_id" name="artist_ids[]" size="45" />
                                     <input class="Input" type="text" id="artist" name="artists[]" <? Users::has_autocomplete_enabled('other'); ?> size="45" />
-                                    <input class="Input" type="text" id="artist_chinese" name="artists_chinese[]" size="25" placeholder="<?= t('server.upload.chinese_name') ?>" <?
-                                                                                                                                                                                    Users::has_autocomplete_enabled('other'); ?> />
+                                    <input class="Input is-small" type="text" id="artist_chinese" name="artists_chinese[]" size="25" placeholder="<?= t('server.upload.chinese_name') ?>" <?
+                                                                                                                                                                                            Users::has_autocomplete_enabled('other'); ?> />
                                     <select class="Input" id="importance" name="importance[]">
                                         <option class="Select-option" value="1"><?= t('server.upload.director') ?></option>
                                     </select>
@@ -338,9 +338,11 @@ View::show_header(($NewRequest ? t('server.requests.new_create') : t('server.req
         <td class="Form-label"><?= t('server.requests.acceptable_sources') ?>:</td>
         <td class="Form-items">
             <div class="Form-inputs">
-                <input type="checkbox" name="all_sources" id="toggle_sources" onchange="globalapp.requestToggle('sources', <?= ($NewRequest ? 1 : 0) ?>);" <?= !empty($SourceArray) && (count($SourceArray) === count($Sources)) ? ' checked="checked"' : ''; ?> /><label for="toggle_sources"> <?= t('server.requests.all') ?></label>
+                <div class="Checkbox">
+                    <input type="checkbox" name="all_sources" id="toggle_sources" onchange="globalapp.requestToggle('sources', <?= ($NewRequest ? 1 : 0) ?>);" <?= !empty($SourceArray) && (count($SourceArray) === count($Sources)) ? ' checked="checked"' : ''; ?> /><label for="toggle_sources"> <?= t('server.requests.all') ?></label>
+                </div>
                 <? foreach ($Sources as $Key => $Val) { ?>
-                    <input type="checkbox" name="sources[]" value="<?= $Key ?>" onchange="if (!this.checked) { $('#toggle_sources').raw().checked = false; }" id="source_<?= $Key ?>" <?= (!empty($SourceArray) && in_array($Key, $SourceArray) ? ' checked="checked"' : '') ?> /><label for="source_<?= $Key ?>"> <?= $Val ?></label>
+                    <div class="Checkbox"><input type="checkbox" name="sources[]" value="<?= $Key ?>" onchange="if (!this.checked) { $('#toggle_sources').raw().checked = false; }" id="source_<?= $Key ?>" <?= (!empty($SourceArray) && in_array($Key, $SourceArray) ? ' checked="checked"' : '') ?> /><label for="source_<?= $Key ?>"> <?= $Val ?></label></div>
                 <?      } ?>
             </div>
         </td>
@@ -349,9 +351,13 @@ View::show_header(($NewRequest ? t('server.requests.new_create') : t('server.req
         <td class="Form-label"><?= t('server.requests.acceptable_codecs') ?>:</td>
         <td class="Form-items">
             <div class="Form-inputs">
-                <input type="checkbox" name="all_codecs" id="toggle_codecs" onchange="globalapp.requestToggle('codecs', <?= ($NewRequest ? 1 : 0) ?>);" <?= (!empty($CodecArray) && (count($CodecArray) === count($Codecs)) ? ' checked="checked"' : '') ?> /><label for="toggle_codecs"> <?= t('server.requests.all') ?></label>
+                <div class="Checkbox">
+                    <input type="checkbox" name="all_codecs" id="toggle_codecs" onchange="globalapp.requestToggle('codecs', <?= ($NewRequest ? 1 : 0) ?>);" <?= (!empty($CodecArray) && (count($CodecArray) === count($Codecs)) ? ' checked="checked"' : '') ?> /><label for="toggle_codecs"> <?= t('server.requests.all') ?></label>
+                </div>
                 <? foreach ($Codecs as $Key => $Val) { ?>
-                    <input type="checkbox" name="codecs[]" value="<?= $Key ?>" id="codec_<?= $Key ?>" <?= (!empty($CodecArray) && in_array($Key, $COdecArray) ? ' checked="checked" ' : '') ?> onchange="if (!this.checked) { $('#toggle_codecs').raw().checked = false; }" /><label for="codec_<?= $Key ?>"> <?= $Val ?></label>
+                    <div class="Checkbox">
+                        <input type="checkbox" name="codecs[]" value="<?= $Key ?>" id="codec_<?= $Key ?>" <?= (!empty($CodecArray) && in_array($Key, $COdecArray) ? ' checked="checked" ' : '') ?> onchange="if (!this.checked) { $('#toggle_codecs').raw().checked = false; }" /><label for="codec_<?= $Key ?>"> <?= $Val ?></label>
+                    </div>
                 <?      } ?>
             </div>
         </td>
@@ -360,9 +366,13 @@ View::show_header(($NewRequest ? t('server.requests.new_create') : t('server.req
         <td class="Form-label"><?= t('server.requests.acceptable_containers') ?>:</td>
         <td class="Form-items">
             <div class="Form-inputs">
-                <input type="checkbox" name="all_containers" id="toggle_containers" onchange="globalapp.requestToggle('containers', <?= ($NewRequest ? 1 : 0) ?>);" <?= (!empty($ContainerArray) && (count($ContainerArray) === count($Containers)) ? ' checked="checked"' : '') ?> /><label for="toggle_containers"> <?= t('server.requests.all') ?></label>
+                <div class="Checkbox">
+                    <input type="checkbox" name="all_containers" id="toggle_containers" onchange="globalapp.requestToggle('containers', <?= ($NewRequest ? 1 : 0) ?>);" <?= (!empty($ContainerArray) && (count($ContainerArray) === count($Containers)) ? ' checked="checked"' : '') ?> /><label for="toggle_containers"> <?= t('server.requests.all') ?></label>
+                </div>
                 <? foreach ($Containers as $Key => $Val) { ?>
-                    <input type="checkbox" name="containers[]" value="<?= $Key ?>" id="container_<?= $Key ?>" <?= (!empty($ContainerArray) && in_array($Key, $ContainerArray) ? ' checked="checked" ' : '') ?> onchange="if (!this.checked) { $('#toggle_containers').raw().checked = false; }" /><label for="container_<?= $Key ?>"> <?= $Val ?></label>
+                    <div class="Checkbox">
+                        <input type="checkbox" name="containers[]" value="<?= $Key ?>" id="container_<?= $Key ?>" <?= (!empty($ContainerArray) && in_array($Key, $ContainerArray) ? ' checked="checked" ' : '') ?> onchange="if (!this.checked) { $('#toggle_containers').raw().checked = false; }" /><label for="container_<?= $Key ?>"> <?= $Val ?></label>
+                    </div>
                 <?      } ?>
             </div>
         </td>
@@ -371,9 +381,13 @@ View::show_header(($NewRequest ? t('server.requests.new_create') : t('server.req
         <td class="Form-label"><?= t('server.requests.acceptable_resolutions') ?>:</td>
         <td class="Form-items">
             <div class="Form-inputs">
-                <input type="checkbox" name="all_resolutions" id="toggle_resolutions" onchange="globalapp.requestToggle('resolutions', <?= ($NewRequest ? 1 : 0) ?>);" <?= (!empty($ResolutionArray) && (count($ResolutionArray) === count($Resolutions)) ? ' checked="checked"' : '') ?> /><label for="toggle_resolutions"> <?= t('server.requests.all') ?></label>
+                <div class="Checkbox">
+                    <input type="checkbox" name="all_resolutions" id="toggle_resolutions" onchange="globalapp.requestToggle('resolutions', <?= ($NewRequest ? 1 : 0) ?>);" <?= (!empty($ResolutionArray) && (count($ResolutionArray) === count($Resolutions)) ? ' checked="checked"' : '') ?> /><label for="toggle_resolutions"> <?= t('server.requests.all') ?></label>
+                </div>
                 <? foreach ($Resolutions as $Key => $Val) { ?>
-                    <input type="checkbox" name="resolutions[]" value="<?= $Key ?>" id="resolution_<?= $Key ?>" <?= (!empty($ResolutionArray) && in_array($Key, $ResolutionArray) ? ' checked="checked" ' : '') ?> onchange="if (!this.checked) { $('#toggle_resolutions').raw().checked = false; }" /><label for="resolution_<?= $Key ?>"> <?= $Val ?></label>
+                    <div class="Checkbox">
+                        <input type="checkbox" name="resolutions[]" value="<?= $Key ?>" id="resolution_<?= $Key ?>" <?= (!empty($ResolutionArray) && in_array($Key, $ResolutionArray) ? ' checked="checked" ' : '') ?> onchange="if (!this.checked) { $('#toggle_resolutions').raw().checked = false; }" /><label for="resolution_<?= $Key ?>"> <?= $Val ?></label>
+                    </div>
                 <? } ?>
             </div>
         </td>
@@ -411,7 +425,7 @@ View::show_header(($NewRequest ? t('server.requests.new_create') : t('server.req
         <td class="Form-label"><?= t('server.requests.t_group') ?>:</td>
         <td class="Form-items">
             <div>
-                <?= site_url() ?>torrents.php?id=<input class="Input" type="text" name="groupid" value="<?= $GroupID ?>" size="15" />
+                <?= site_url() ?>torrents.php?id=<input class="Input is-small" type="text" name="groupid" value="<?= $GroupID ?>" size="15" />
             </div>
             <div>
                 <?= t('server.requests.t_group_note') ?>

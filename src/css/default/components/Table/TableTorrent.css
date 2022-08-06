@@ -99,6 +99,13 @@ cell
 
 .TableTorrent-cellStat {
   padding: 0 20px;
+  width: 40px;
+  text-align: right;
+  white-space: nowrap;
+}
+
+.TableTorrent-cellStatSize {
+  padding: 0 20px;
   width: 60px;
   text-align: right;
   white-space: nowrap;
@@ -163,6 +170,7 @@ cell
   font-size: 14px;
   opacity: var(--slotButton-opacity);
   margin: 0 7px;
+  vertical-align: sub;
 }
 
 .TableTorrent-slotFilterButton:hover {
@@ -227,13 +235,11 @@ cell
   border-left: 1px solid var(--slotEnQuality-color);
 }
 
-.TableTorrent-rowTitle:is([data-slot='retention'], [data-slot='feature'])
-  .Table-cell:first-child {
+.TableTorrent-rowTitle:is([data-slot='retention'], [data-slot='feature']) .Table-cell:first-child {
   border-left: 1px solid var(--slotRetenion-color);
 }
 
-.TableTorrent-rowTitle:is([data-slot='diy'], [data-slot='remux'], [data-slot='untouched'])
-  .Table-cell:first-child {
+.TableTorrent-rowTitle:is([data-slot='diy'], [data-slot='remux'], [data-slot='untouched']) .Table-cell:first-child {
   border-left: 1px solid var(--slotDiy-color);
 }
 
@@ -372,14 +378,11 @@ TableTorrent-movieInfo
 }
 
 .TableTorrent-movieInfoAction,
-:is(#torrents, #bookmarks, #top10, #artist)
-  :is(.remove_bookmark, .add_bookmark)
-  .icon {
+:is(#torrents, #bookmarks, #top10, #artist) :is(.remove_bookmark, .add_bookmark) .icon {
   color: #777;
 }
 
-.TableTorrent-movieInfoAction
-  :is(.add_bookmark .icon.remove-icon, .remove_bookmark .icon.add-icon),
+.TableTorrent-movieInfoAction :is(.add_bookmark .icon.remove-icon, .remove_bookmark .icon.add-icon),
 :is(#torrents, #bookmarks, #top10, #artist, #collage, #userhistory)
   :is(.add_bookmark svg.remove-icon, .remove_bookmark svg.add-icon) {
   display: none;

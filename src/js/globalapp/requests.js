@@ -109,6 +109,7 @@ globalapp.requestCalculate = function requestCalculate() {
   }
 }
 
+var ArtistCount = 1
 globalapp.requestAddArtistField = function requestAddArtistField(movie = false) {
   var ArtistIDField = document.createElement('input')
   ArtistIDField.type = 'hidden'
@@ -117,18 +118,21 @@ globalapp.requestAddArtistField = function requestAddArtistField(movie = false) 
   ArtistIDField.size = 45
 
   var ArtistField = document.createElement('input')
+  ArtistField.classList.add('Input')
   ArtistField.type = 'text'
   ArtistField.id = 'artist_' + ArtistCount
   ArtistField.name = 'artists[]'
   ArtistField.size = 45
 
   var ArtistChineseField = document.createElement('input')
+  ArtistChineseField.classList.add('Input', 'is-small')
   ArtistChineseField.type = 'text'
   ArtistChineseField.id = 'artist_chinese_' + ArtistCount
   ArtistChineseField.name = 'artists_chinese[]'
   ArtistChineseField.size = 25
 
   var ImportanceField = document.createElement('select')
+  ImportanceField.classList.add('Input')
   ImportanceField.id = 'importance_' + ArtistCount
   ImportanceField.name = 'importance[]'
   ImportanceField.options[0] = new Option(t('client.common.director'), '1')
@@ -140,12 +144,12 @@ globalapp.requestAddArtistField = function requestAddArtistField(movie = false) 
 
   var x = $('#artistfields').raw()
   const div = document.createElement('div')
-  div.classList.add('artist')
+  div.classList.add('Form-inputs', 'is-artist')
   div.appendChild(ArtistIDField)
   div.appendChild(ArtistField)
   div.appendChild(ArtistChineseField)
   div.appendChild(ImportanceField)
-  $('#artistfields .show-more').before(div)
+  $('#artistfields .Form-inputs:last').before(div)
 
   if ($('#artist_0').data('gazelle-autocomplete') || $('#artist').data('gazelle-autocomplete')) {
     $(ArtistField).live('focus', function () {
@@ -162,7 +166,7 @@ globalapp.requestRemoveArtistField = function requestRemoveArtistField() {
   if (ArtistCount === 1) {
     return
   }
-  $('#artistfields .artist').last().remove()
+  $('#artistfields .Form-inputs.is-artist').last().remove()
   ArtistCount--
 }
 

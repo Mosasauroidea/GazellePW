@@ -114,6 +114,16 @@ list($NumComments, $Page, $Thread, $LastRead) = Comments::load('torrents', $Grou
 $ThumbCounts = Torrents::get_thumb_counts($GroupID);
 $BonusSended = Torrents::get_bonus_sended($GroupID);
 
+if (check_perms('torrents_check')) {
+    $CheckAllTorrents = !$LoggedUser['DisableCheckAll'];
+} else {
+    $CheckAllTorrents = false;
+}
+if (check_perms('self_torrents_check')) {
+    $CheckSelfTorrents = !$LoggedUser['DisableCheckSelf'];
+} else {
+    $CheckSelfTorrents = false;
+}
 
 // Start output
 View::show_header($Title, 'browse,comments,torrent,bbcode,recommend,cover_art,subscriptions,sendbonus,thumb', 'PageTorrentShow');
@@ -228,6 +238,7 @@ View::show_header($Title, 'browse,comments,torrent,bbcode,recommend,cover_art,su
             ?>
         </div>
     </div>
+
     <div class="LayoutMainSidebar">
         <div class="Sidebar LayoutMainSidebar-sidebar">
             <div class="SidebarTags SidebarItem Box">
@@ -478,61 +489,125 @@ View::show_header($Title, 'browse,comments,torrent,bbcode,recommend,cover_art,su
                             </form>
                         </div>
                     </div>
-            <?
+                <?
                 }
             }
             if (CONFIG['ENABLE_COLLAGES']) {
+                $Collages = $Cache->get_value("torrent_collages_$GroupID");
+                if (!is_array($Collages)) {
+                    $DB->query("
+		SELECT c.Name, c.NumTorrents, c.ID
+		FROM collages AS c
+			JOIN collages_torrents AS ct ON ct.CollageID = c.ID
+		WHERE ct.GroupID = '$GroupID'
+			AND Deleted = '0'
+			AND CategoryID != '0'");
+                    $Collages = $DB->to_array();
+                    $Cache->cache_value("torrent_collages_$GroupID", $Collages, 600 * 6);
+                }
+                if (count($Collages) > 0) {
+                    if (count($Collages) > MAX_COLLAGES) {
+                        // Pick some at random
+                        $Range = range(0, count($Collages) - 1);
+                        shuffle($Range);
+                        $Indices = array_slice($Range, 0, MAX_COLLAGES);
+                        $SeeAll = ' <a href="#" onclick="$(\'.collage_rows\').gtoggle(); return false;">(See all)</a>';
+                    } else {
+                        $Indices = range(0, count($Collages) - 1);
+                        $SeeAll = '';
+                    }
+                ?>
+                    <div class="SidebarItem Box">
+                        <div class="SidebarItem-header Box-header">
+                            <?= t('server.torrents.this_album_is_in_collages', ['Values' => [
+                                t('server.torrents.this_album_is_in_collages_count', ['Count' => $Collages, 'Values' => [number_format(count($Collages))]])
+                            ]]) ?>
+
+                            <?= $SeeAll ?>
+                        </div>
+                        <ul class="SidebarList SidebarItem-body Box-body">
+                            <? foreach ($Indices as $i) {
+                                list($CollageName, $CollageTorrents, $CollageID) = $Collages[$i];
+                                unset($Collages[$i]);
+                            ?>
+                                <li class="SidebarList-item">
+                                    <a href="collages.php?id=<?= $CollageID ?>"><?= $CollageName ?></a>
+                                </li>
+                            <?  }
+                            foreach ($Collages as $Collage) {
+                                list($CollageName, $CollageTorrents, $CollageID) = $Collage;
+                            ?>
+                                <li class="SidebarList-item">
+                                    <a href="collages.php?id=<?= $CollageID ?>"><?= $CollageName ?></a>
+                                </li>
+                            <?  } ?>
+                        </ul>
+                    </div>
+                <?
+                }
+
+                $PersonalCollages = $Cache->get_value("torrent_collages_personal_$GroupID");
+                if (!is_array($PersonalCollages)) {
+                    $DB->query("
+		SELECT c.Name, c.NumTorrents, c.ID
+		FROM collages AS c
+			JOIN collages_torrents AS ct ON ct.CollageID = c.ID
+		WHERE ct.GroupID = '$GroupID'
+			AND Deleted = '0'
+			AND CategoryID = '0'");
+                    $PersonalCollages = $DB->to_array(false, MYSQLI_NUM);
+                    $Cache->cache_value("torrent_collages_personal_$GroupID", $PersonalCollages, 600 * 6);
+                }
+
+
+                if (count($PersonalCollages) > 0) {
+                    if (count($PersonalCollages) > MAX_PERS_COLLAGES) {
+                        // Pick some at random
+                        $Range = range(0, count($PersonalCollages) - 1);
+                        shuffle($Range);
+                        $Indices = array_slice($Range, 0, MAX_PERS_COLLAGES);
+                        $SeeAll = ' <a href="#" onclick="$(\'.personal_rows\').gtoggle(); return false;">(See all)</a>';
+                    } else {
+                        $Indices = range(0, count($PersonalCollages) - 1);
+                        $SeeAll = '';
+                    }
+                ?>
+                    <div class="SidebarItem Box">
+                        <div class="SidebarItem-header Box-header">
+                            <?= t('server.torrents.this_album_is_in_personal_collages', ['Values' => [
+                                t('server.torrents.this_album_is_in_personal_collages_count', ['Count' => count($PersonalCollages), 'Values' => [
+                                    number_format(count($PersonalCollages))
+                                ]])
+                            ]]) ?>
+                            <?= $SeeAll ?>
+                        </div>
+
+                        <ul class="SidebarList SidebarItem-body Box-body">
+                            <? foreach ($Indices as $i) {
+                                list($CollageName, $CollageTorrents, $CollageID) = $PersonalCollages[$i];
+                                unset($PersonalCollages[$i]);
+                            ?>
+                                <li class="SidebarList-item">
+                                    <a href="collages.php?id=<?= $CollageID ?>"><?= $CollageName ?></a>
+                                </li>
+                            <?  }
+                            foreach ($PersonalCollages as $Collage) {
+                                list($CollageName, $CollageTorrents, $CollageID) = $Collage;
+                            ?>
+                                <li class="SidebarList-item">
+                                    <a href="collages.php?id=<?= $CollageID ?>"><?= $CollageName ?></a>
+                                </li>
+                            <?  } ?>
+                        </ul>
+                    </div>
+            <?
+                }
                 include(CONFIG['SERVER_ROOT'] . '/sections/torrents/collage.php');
             }
             include(CONFIG['SERVER_ROOT'] . '/sections/torrents/vote_ranks.php');
             include(CONFIG['SERVER_ROOT'] . '/sections/torrents/vote.php');
             ?>
         </div>
-        <?
-        if (check_perms('torrents_check')) {
-            $CheckAllTorrents = !$LoggedUser['DisableCheckAll'];
-        } else {
-            $CheckAllTorrents = false;
-        }
-        if (check_perms('self_torrents_check')) {
-            $CheckSelfTorrents = !$LoggedUser['DisableCheckSelf'];
-        } else {
-            $CheckSelfTorrents = false;
-        }
-
-
-        if ($CheckAllTorrents || $CheckSelfTorrents) {
-        ?>
-            <script>
-                function torrent_check(event) {
-                    var id = event.data.id,
-                        checked = event.data.checked
-                    $.get("torrents.php", {
-                            action: "torrent_check",
-                            torrentid: id,
-                            checked: checked
-                        },
-                        function(data) {
-                            var obj = eval("(" + data + ")");
-                            if (obj.ret == "success") {
-                                if (checked == 1) {
-                                    $('#torrent' + id + '_check1').show()
-                                    $('#slot-torrent' + id + '_check1').show()
-                                    $('#torrent' + id + '_check0').hide()
-                                    $('#slot-torrent' + id + '_check0').hide()
-                                } else {
-                                    $('#torrent' + id + '_check0').show()
-                                    $('#slot-torrent' + id + '_check0').show()
-                                    $('#torrent' + id + '_check1').hide()
-                                    $('#slot-torrent' + id + '_check1').hide()
-                                }
-                            } else {
-                                alert('失败');
-                            }
-                        });
-                }
-            </script>
-        <? } ?>
         <div class="LayoutMainSidebar-main u-tab">
             <div class="TableContainer u-tabItem u-tabItemTorrent" style="<?= $View == 'slot' ? "display:none" : "" ?>">
                 <?
@@ -552,7 +627,7 @@ View::show_header($Title, 'browse,comments,torrent,bbcode,recommend,cover_art,su
                                         </span>
                                     <? } ?>
                         </td>
-                        <td class="TableTorrent-cellSize Table-cell TableTorrent-cellStat">
+                        <td class="TableTorrent-cellSize Table-cell TableTorrent-cellStat TableTorrent-cellStatSize">
                             <span aria-hidden="true" data-tooltip="<?= t('server.common.size') ?>">
                                 <?= icon('torrent-size') ?>
                             </span>
@@ -590,17 +665,6 @@ View::show_header($Title, 'browse,comments,torrent,bbcode,recommend,cover_art,su
                         </td>
                     </tr>
                     <?
-
-
-                    $CheckAllTorrents = false;
-                    if (check_perms('torrents_check')) {
-                        $CheckAllTorrents = !$LoggedUser['DisableCheckAll'];
-                    }
-                    $CheckSelfTorrents = false;
-                    if (check_perms('self_torrents_check')) {
-                        $CheckSelfTorrents = !$LoggedUser['DisableCheckSelf'];
-                    }
-
                     $LastTorrent = [];
                     $EditionID = 0;
                     $SnatchedGroupClass = Torrents::parse_group_snatched($TorrentDetails) ? ' snatched_group' : '';
@@ -708,7 +772,7 @@ View::show_header($Title, 'browse,comments,torrent,bbcode,recommend,cover_art,su
                                         ]
                                     </span>
                             </td>
-                            <td class="TableTorrent-cellSize Table-cell TableTorrent-cellStat"><?= Format::get_size($Size) ?></td>
+                            <td class="TableTorrent-cellSize Table-cell TableTorrent-cellStat TableTorrent-cellStatSize"><?= Format::get_size($Size) ?></td>
                             <td class="TableTorrent-cellSnatches Table-cell TableTorrent-cellStat"><?= number_format($Snatched) ?></td>
                             <td class="TableTorrent-cellSeeders Table-cell TableTorrent-cellStat"><?= number_format($Seeders) ?></td>
                             <td class="TableTorrent-cellLeechers Table-cell TableTorrent-cellStat"><?= number_format($Leechers) ?></td>
@@ -956,119 +1020,6 @@ View::show_header($Title, 'browse,comments,torrent,bbcode,recommend,cover_art,su
 
                     </table>
                 </div>
-            <?
-            }
-            $Collages = $Cache->get_value("torrent_collages_$GroupID");
-            if (!is_array($Collages)) {
-                $DB->query("
-		SELECT c.Name, c.NumTorrents, c.ID
-		FROM collages AS c
-			JOIN collages_torrents AS ct ON ct.CollageID = c.ID
-		WHERE ct.GroupID = '$GroupID'
-			AND Deleted = '0'
-			AND CategoryID != '0'");
-                $Collages = $DB->to_array();
-                $Cache->cache_value("torrent_collages_$GroupID", $Collages, 600 * 6);
-            }
-            if (count($Collages) > 0) {
-                if (count($Collages) > MAX_COLLAGES) {
-                    // Pick some at random
-                    $Range = range(0, count($Collages) - 1);
-                    shuffle($Range);
-                    $Indices = array_slice($Range, 0, MAX_COLLAGES);
-                    $SeeAll = ' <a href="#" onclick="$(\'.collage_rows\').gtoggle(); return false;">(See all)</a>';
-                } else {
-                    $Indices = range(0, count($Collages) - 1);
-                    $SeeAll = '';
-                }
-            ?>
-                <table class="Table TableCollage">
-                    <tr class="Table-rowHeader">
-                        <td class="Table-cell" width="85%">
-                            <?= t('server.torrents.this_album_is_in_collages', ['Values' => [
-                                t('server.torrents.this_album_is_in_collages_count', ['Count' => $Collages, 'Values' => [number_format(count($Collages))]])
-                            ]]) ?>
-                            <?= $SeeAll ?>
-                        </td>
-                        <td class="Table-cell"><?= t('server.torrents.torrents_count') ?></td>
-                    </tr>
-                    <? foreach ($Indices as $i) {
-                        list($CollageName, $CollageTorrents, $CollageID) = $Collages[$i];
-                        unset($Collages[$i]);
-                    ?>
-                        <tr class="Table-row">
-                            <td class="Table-cell"><a href="collages.php?id=<?= $CollageID ?>"><?= $CollageName ?></a></td>
-                            <td class="Table-cell" class="number_column"><?= number_format($CollageTorrents) ?></td>
-                        </tr>
-                    <?  }
-                    foreach ($Collages as $Collage) {
-                        list($CollageName, $CollageTorrents, $CollageID) = $Collage;
-                    ?>
-                        <tr class="Table-row hidden">
-                            <td class="Table-cell"><a href="collages.php?id=<?= $CollageID ?>"><?= $CollageName ?></a></td>
-                            <td class="Table-cell Table-cellRight"><?= number_format($CollageTorrents) ?></td>
-                        </tr>
-                    <?  } ?>
-                </table>
-            <?
-            }
-
-            $PersonalCollages = $Cache->get_value("torrent_collages_personal_$GroupID");
-            if (!is_array($PersonalCollages)) {
-                $DB->query("
-		SELECT c.Name, c.NumTorrents, c.ID
-		FROM collages AS c
-			JOIN collages_torrents AS ct ON ct.CollageID = c.ID
-		WHERE ct.GroupID = '$GroupID'
-			AND Deleted = '0'
-			AND CategoryID = '0'");
-                $PersonalCollages = $DB->to_array(false, MYSQLI_NUM);
-                $Cache->cache_value("torrent_collages_personal_$GroupID", $PersonalCollages, 600 * 6);
-            }
-
-
-            if (count($PersonalCollages) > 0) {
-                if (count($PersonalCollages) > MAX_PERS_COLLAGES) {
-                    // Pick some at random
-                    $Range = range(0, count($PersonalCollages) - 1);
-                    shuffle($Range);
-                    $Indices = array_slice($Range, 0, MAX_PERS_COLLAGES);
-                    $SeeAll = ' <a href="#" onclick="$(\'.personal_rows\').gtoggle(); return false;">(See all)</a>';
-                } else {
-                    $Indices = range(0, count($PersonalCollages) - 1);
-                    $SeeAll = '';
-                }
-            ?>
-                <table class="TableCollage Table">
-                    <tr class="Table-rowHeader">
-                        <td class="Table-cell" width="85%">
-                            <?= t('server.torrents.this_album_is_in_personal_collages', ['Values' => [
-                                t('server.torrents.this_album_is_in_personal_collages_count', ['Count' => count($PersonalCollages), 'Values' => [
-                                    number_format(count($PersonalCollages))
-                                ]])
-                            ]]) ?>
-                            <?= $SeeAll ?>
-                        </td>
-                        <td class="Table-cell"><?= t('server.torrents.torrents_count') ?></td>
-                    </tr>
-                    <? foreach ($Indices as $i) {
-                        list($CollageName, $CollageTorrents, $CollageID) = $PersonalCollages[$i];
-                        unset($PersonalCollages[$i]);
-                    ?>
-                        <tr class="Table-row">
-                            <td class="Table-cell"><a href="collages.php?id=<?= $CollageID ?>"><?= $CollageName ?></a></td>
-                            <td class="Table-cell Table-cellRight"><?= number_format($CollageTorrents) ?></td>
-                        </tr>
-                    <?  }
-                    foreach ($PersonalCollages as $Collage) {
-                        list($CollageName, $CollageTorrents, $CollageID) = $Collage;
-                    ?>
-                        <tr class="Table-row hidden">
-                            <td><a href="collages.php?id=<?= $CollageID ?>"><?= $CollageName ?></a></td>
-                            <td class="Table-cell Table-cellRight"><?= number_format($CollageTorrents) ?></td>
-                        </tr>
-                    <?  } ?>
-                </table>
             <?
             }
             // Matched Votes

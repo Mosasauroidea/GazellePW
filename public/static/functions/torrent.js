@@ -307,3 +307,34 @@ function BrowseExternalSub(torrentid) {
     $('#external_subtitle_container_' + torrentid).gtoggle()
   }
 }
+
+function torrent_check(event) {
+  var id = event.data.id,
+    checked = event.data.checked
+  $.get(
+    'torrents.php',
+    {
+      action: 'torrent_check',
+      torrentid: id,
+      checked: checked,
+    },
+    function (data) {
+      var obj = eval('(' + data + ')')
+      if (obj.ret == 'success') {
+        if (checked == 1) {
+          $('#torrent' + id + '_check1').show()
+          $('#slot-torrent' + id + '_check1').show()
+          $('#torrent' + id + '_check0').hide()
+          $('#slot-torrent' + id + '_check0').hide()
+        } else {
+          $('#torrent' + id + '_check0').show()
+          $('#slot-torrent' + id + '_check0').show()
+          $('#torrent' + id + '_check1').hide()
+          $('#slot-torrent' + id + '_check1').hide()
+        }
+      } else {
+        alert('失败')
+      }
+    }
+  )
+}
