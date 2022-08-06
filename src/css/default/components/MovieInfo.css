@@ -119,12 +119,6 @@ Where
   grid-auto-flow: column;
   grid-template-columns: repeat(6, 130px);
   gap: var(--global-space-sm);
-  overflow-x: scroll;
-  scrollbar-width: none;
-  -ms-overflow-style: none;
-}
-.MovieInfo-artists::-webkit-scrollbar {
-  display: none;
 }
 
 .MovieInfo-artist {

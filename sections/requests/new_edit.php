@@ -439,20 +439,11 @@ if ($NewRequest) { ?>
     <tr class="Form-row" id="voting">
         <td class="Form-label"><?= t('server.requests.bounty') ?>:</td>
         <td class="Form-items">
-            <div class="Form-inputs">
-                <input class="Input" type="text" id="amount_box" size="8" value="<?= (!empty($Bounty) ? $Bounty : '100') ?>" onchange="globalapp.requestCalculate();" />
-                <select class="Input" id="unit" name="unit" onchange="globalapp.requestCalculate();">
-                    <option class="Select-option" value="mb" <?= (!empty($_POST['unit']) && $_POST['unit'] === 'mb' ? ' selected="selected"' : '') ?>>MB</option>
-                    <option class="Select-option" value="gb" <?= (!empty($_POST['unit']) && $_POST['unit'] === 'gb' ? ' selected="selected"' : '') ?>>GB</option>
-                </select>
-                <input class="Button" type="button" value="Preview" onclick="globalapp.requestCalculate();" />
-            </div>
+            <input class="Input is-small" type="number" pattern="[0-9]" min="1" id="amount_box" size="8" value="<?= (!empty($Bounty) ? $Bounty : '1') ?>" oninput="globalapp.requestCalculate();" />
+            <select class="Input u-hidden" id="unit" name="unit" onchange="globalapp.requestCalculate();">
+                <option class="Select-option" value="gb" <?= (!empty($_POST['unit']) && $_POST['unit'] === 'gb' ? ' selected="selected"' : '') ?>>GB</option>
+            </select>
             <?= $RequestTax > 0 ? "<strong>{$RequestTaxPercent}% of this is deducted as tax by the system.</strong>" : '' ?>
-        </td>
-    </tr>
-    <tr class="Form-row">
-        <td class="Form-label"><?= t('server.requests.pst') ?>:</td>
-        <td class="Form-items">
             <input type="hidden" id="amount" name="amount" value="<?= (!empty($Bounty) ? $Bounty : '100') ?>" />
             <input type="hidden" id="current_uploaded" value="<?= $LoggedUser['BytesUploaded'] ?>" />
             <input type="hidden" id="current_downloaded" value="<?= $LoggedUser['BytesDownloaded'] ?>" />
@@ -462,7 +453,6 @@ if ($NewRequest) { ?>
                     "<strong><span id='new_bounty'>1GB</span></strong>"
                 ]]) ?>
             </div>
-
             <div>
                 <?= t('server.requests.uploaded') ?>: <span id="new_uploaded"><?= Format::get_size($LoggedUser['BytesUploaded']) ?></span>
             </div>

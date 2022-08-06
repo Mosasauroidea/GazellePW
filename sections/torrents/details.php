@@ -214,7 +214,7 @@ View::show_header($Title, 'browse,comments,torrent,bbcode,recommend,cover_art,su
                 <? print_r($WikiBody) ?>
             </p>
         </div>
-        <div class="MovieInfo-artists">
+        <div class="MovieInfo-artists u-hideScrollbar">
             <?
             for ($i = 0; $i < 10 && $i < count($Artists[6]); $i++) {
             ?>

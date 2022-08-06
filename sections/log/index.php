@@ -1,8 +1,6 @@
 <?
 enforce_login();
-if (!defined('LOG_ENTRIES_PER_PAGE')) {
-    define('LOG_ENTRIES_PER_PAGE', 100);
-}
+
 View::show_header(t('server.log.site_log'), '', 'PageLogHome');
 
 include(CONFIG['SERVER_ROOT'] . '/sections/log/sphinx.php');

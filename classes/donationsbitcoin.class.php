@@ -6,7 +6,7 @@ class DonationsBitcoin {
      * @return array (BitcoinAddress => Amount, ...)
      */
     public static function get_received() {
-        if (defined('BITCOIN_RPC_URL')) {
+        if (CONFIG['BITCOIN_RPC_URL']) {
             $Donations = BitcoinRpc::listreceivedbyaddress();
         }
         if (empty($Donations)) {
@@ -25,7 +25,7 @@ class DonationsBitcoin {
      * @return float balance
      */
     public static function get_balance() {
-        if (defined('BITCOIN_RPC_URL')) {
+        if (CONFIG['BITCOIN_RPC_URL']) {
             return BitcoinRpc::getbalance();
         }
     }
@@ -51,7 +51,7 @@ class DonationsBitcoin {
         if (!empty($Addr)) {
             return $Addr;
         } elseif ($GenAddress) {
-            if (defined('BITCOIN_RPC_URL')) {
+            if (CONFIG['BITCOIN_RPC_URL']) {
                 $NewAddr = BitcoinRpc::getnewaddress();
             }
             if (empty($NewAddr)) {
@@ -76,7 +76,7 @@ class DonationsBitcoin {
      * @return float amount
      */
     public static function get_total_received() {
-        if (defined('BITCOIN_RPC_URL')) {
+        if (CONFIG['BITCOIN_RPC_URL']) {
             $Accounts = BitcoinRpc::listreceivedbyaccount();
         }
         if (empty($Accounts)) {

@@ -2,7 +2,7 @@
 class BitcoinRpc {
 
     public static function __callStatic($Method, $Args) {
-        if (!defined('BITCOIN_RPC_URL')) {
+        if (CONFIG['BITCOIN_RPC_URL'])) {
             return false;
         }
         $MessageID = mt_rand();
@@ -22,7 +22,7 @@ class BitcoinRpc {
             )
         );
 
-        if (!$Response = file_get_contents(BITCOIN_RPC_URL, false, stream_context_create($Request))) {
+        if (!$Response = file_get_contents(CONFIG['BITCOIN_RPC_URL'], false, stream_context_create($Request))) {
             return false;
         }
         $Response = json_decode($Response);

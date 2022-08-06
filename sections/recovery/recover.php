@@ -50,7 +50,7 @@ View::show_header('', '', 'PageRecoveryRecovery');
 
 <div class="container">
     <?php
-    if (defined('RECOVERY') && RECOVERY) {
+    if (CONFIG['RECOVERY']) {
         include('sections/recovery/form.php');
     } else {
         include('sections/recovery/closed.php');

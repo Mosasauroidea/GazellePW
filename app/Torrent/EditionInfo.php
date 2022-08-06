@@ -62,7 +62,6 @@ class EditionInfo {
         }
         $RemasterTitles = explode(' / ', $Value);
         $AllTitles = EditionInfo::allEditionKey();
-        var_dump($RemasterTitles, $AllTitles);
         foreach ($RemasterTitles as $Title) {
             if (!in_array($Title, $AllTitles)) {
                 return false;

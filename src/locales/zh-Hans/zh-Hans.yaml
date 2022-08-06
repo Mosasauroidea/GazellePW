@@ -2902,8 +2902,6 @@ server.requests.bookmarks: |-
   求种收藏
 server.requests.bounty: |-
   报酬
-server.requests.bounty_min_100_mb: |-
-  酬金必须大于等于 100 MB。
 server.requests.by_user: |-
   ，发起人是
 server.requests.codec_list: |-
@@ -2976,8 +2974,6 @@ server.requests.image_link_invalid: |-
   &nbsp;是无效图链。
 server.requests.include_filled: |-
   包含已应求
-server.requests.include_old: |-
-  包含旧求种
 server.requests.is: |-
   已
 server.requests.last_voted: |-

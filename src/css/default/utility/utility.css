@@ -54,3 +54,12 @@ u-hoverToShow-hover
 .u-hoverToShow-hide {
   visibility: hidden;
 }
+
+.u-hideScrollbar {
+  overflow-x: scroll;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.u-hideScrollbar::-webkit-scrollbar {
+  display: none;
+}

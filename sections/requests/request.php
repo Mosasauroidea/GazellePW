@@ -296,11 +296,11 @@ View::show_header(t('server.requests.view_request') . ": $FullName", 'comments,b
                                         <input type="hidden" id="current_rr" value="<?= (float)$LoggedUser['RequiredRatio'] ?>" />
                                         <input id="total_bounty" type="hidden" value="<?= $RequestVotes['TotalBounty'] ?>" />
                                         <div>
-                                            <input class="Input is-small" type="text" id="amount_box" size="8" oninput="globalapp.requestCalculate();" />
+                                            <input class="Input is-small" type="number" pattern="[0-9]" min="1" id="amount_box" size="8" oninput="globalapp.requestCalculate();" />
                                             <select class="Input hidden" id="unit" name="unit" onchange="globalapp.requestCalculate();">
                                                 <option class="Select-option" value="gb">GB</option>
                                             </select>
-                                            <input class="Button" type="button" id="button" value="<?= t('server.requests.custom_vote') ?>" disabled="disabled" onclick="globalapp.requestVote();" />
+                                            <input class="Button" type="button" id="button" value="<?= t('server.requests.custom_vote') ?>" disabled="disabled" onclick="document.querySelector('#amount_box').reportValidity() && globalapp.requestVote();" />
                                         </div>
                                         <div>
                                             <?= $RequestTax > 0 ? "<strong>{$RequestTaxPercent}% " . t('server.requests.system_taxed') : '' ?>

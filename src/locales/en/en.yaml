@@ -2964,8 +2964,6 @@ server.requests.bookmarks: |-
   Bookmarks
 server.requests.bounty: |-
   Bounty
-server.requests.bounty_min_100_mb: |-
-  Bounty must be greater than or equal to 100 MiB.
 server.requests.by_user: |-
   , by user
 server.requests.codec_list: |-
@@ -3043,8 +3041,6 @@ server.requests.image_link_invalid: |-
   &nbsp;does not appear to be a valid link to an image.
 server.requests.include_filled: |-
   Include filled
-server.requests.include_old: |-
-  Include old
 server.requests.is: |-
   is
 server.requests.last_voted: |-

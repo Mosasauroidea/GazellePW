@@ -50,9 +50,6 @@ $BookmarkView = false;
 
 if (empty($_GET['type'])) {
     $Title = t('server.requests.requests');
-    if (empty($_GET['showall'])) {
-        $SphQL->where('visible', 1);
-    }
 } else {
     switch ($_GET['type']) {
         case 'created':
@@ -427,14 +424,6 @@ View::show_header($Title, '', 'PageRequestHome');
                         </td>
                         <td class="Form-inputs">
                             <input class="Input" type="checkbox" id="include_filled_box" name="show_filled" <? if (!empty($_GET['show_filled']) || (!empty($_GET['type']) && $_GET['type'] === 'filled')) { ?> checked="checked" <? } ?> />
-                        </td>
-                    </tr>
-                    <tr class="Form-row is-includeOld">
-                        <td class="Form-label">
-                            <label for="include_old_box"><?= t('server.requests.include_old') ?>:</label>
-                        </td>
-                        <td class="Form-inputs">
-                            <input class="Input" type="checkbox" id="include_old_box" name="showall" <? if (!empty($_GET['showall'])) { ?> checked="checked" <? } ?> />
                         </td>
                     </tr>
                 </table>

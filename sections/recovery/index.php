@@ -3,7 +3,7 @@
 if (isset($_GET['action'])) {
     switch ($_GET['action']) {
         case 'save':
-            if (defined('RECOVERY') && RECOVERY) {
+            if (CONFIG['RECOVERY']) {
                 require_once(CONFIG['SERVER_ROOT'] . '/sections/recovery/save.php');
             } else {
                 require_once(CONFIG['SERVER_ROOT'] . '/sections/recovery/recover.php');

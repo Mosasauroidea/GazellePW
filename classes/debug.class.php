@@ -21,22 +21,22 @@ class DEBUG {
         }
 
         $Micro = (microtime(true) - $ScriptStartTime) * 1000;
-        if ($Micro > MAX_TIME && !defined('TIME_EXCEPTION')) {
+        if ($Micro > MAX_TIME && empty(CONFIG['TIME_EXCEPTION'])) {
             $Reason[] = number_format($Micro, 3) . ' ms';
         }
 
         $Errors = count($this->get_errors());
-        if ($Errors > MAX_ERRORS && !defined('ERROR_EXCEPTION')) {
+        if ($Errors > MAX_ERRORS && empty(CONFIG['ERROR_EXCEPTION'])) {
             $Reason[] = $Errors . ' PHP errors';
         }
         /*
         $Queries = count($this->get_queries());
-        if ($Queries > MAX_QUERIES && !defined('QUERY_EXCEPTION')) {
+        if ($Queries > MAX_QUERIES && empty(CONFIG['QUERY_EXCEPTION'])) {
             $Reason[] = $Queries.' Queries';
         }
         */
         $Ram = memory_get_usage(true);
-        if ($Ram > MAX_MEMORY && !defined('MEMORY_EXCEPTION')) {
+        if ($Ram > MAX_MEMORY && empty(CONFIG['MEMORY_EXCEPTION'])) {
             $Reason[] = Format::get_size($Ram) . ' RAM used';
         }
 

@@ -89,7 +89,7 @@ class Tracker {
      * @return array with stats in named keys or false if the request failed
      */
     private static function get_stats($Type, $Params = false) {
-        if (!defined('TRACKER_REPORTKEY')) {
+        if (empty(CONFIG['TRACKER_REPORTKEY'])) {
             return false;
         }
         $Get = CONFIG['TRACKER_REPORTKEY'] . '/report?';
