@@ -114,13 +114,15 @@ if (check_perms('users_mod')) { // Person viewing is a staff member
 			i.DisableCheckAll,
 			i.DisableCheckSelf,
 			m.TotalUploads,
-            m.BonusUploaded
+            m.BonusUploaded,
+            COUNT(DISTINCT t.ID) AS Uploads
 		FROM users_main AS m
 			JOIN users_info AS i ON i.UserID = m.ID
 			LEFT JOIN users_main AS inviter ON i.Inviter = inviter.ID
 			LEFT JOIN permissions AS p ON p.ID = m.PermissionID
 			LEFT JOIN forums_posts AS posts ON posts.AuthorID = m.ID
 			LEFT JOIN locked_accounts AS la ON la.UserID = m.ID
+            LEFT JOIN torrents AS t ON t.UserID = m.ID
 		WHERE m.ID = '$UserID'
 		GROUP BY AuthorID");
 
@@ -128,7 +130,7 @@ if (check_perms('users_mod')) { // Person viewing is a staff member
         header("Location: log.php?search=User+$UserID");
     }
 
-    list($Username, $Email, $LastAccess, $IP, $Class, $Uploaded, $Downloaded, $BonusPoints, $RequiredRatio, $CustomTitle, $torrent_pass, $Enabled, $Paranoia, $Invites, $DisableLeech, $Visible, $JoinDate, $Info, $Avatar, $AdminComment, $Donor, $Found, $Artist, $Warned, $SupportFor, $RestrictedForums, $PermittedForums, $InviterID, $InviterName, $ForumPosts, $RatioWatchEnds, $RatioWatchDownload, $DisableAvatar, $DisableInvites, $DisablePosting, $DisablePoints, $DisableForums, $DisableTagging, $DisableUpload, $DisableWiki, $DisablePM, $DisableIRC, $DisableRequests, $FLTokens, $FA_Key, $CommentHash, $InfoTitle, $LockedAccount, $DisableCheckAll, $DisableCheckSelf, $TotalUploads, $BonusUploaded) = $DB->next_record(MYSQLI_NUM, array(9, 12));
+    list($Username, $Email, $LastAccess, $IP, $Class, $Uploaded, $Downloaded, $BonusPoints, $RequiredRatio, $CustomTitle, $torrent_pass, $Enabled, $Paranoia, $Invites, $DisableLeech, $Visible, $JoinDate, $Info, $Avatar, $AdminComment, $Donor, $Found, $Artist, $Warned, $SupportFor, $RestrictedForums, $PermittedForums, $InviterID, $InviterName, $ForumPosts, $RatioWatchEnds, $RatioWatchDownload, $DisableAvatar, $DisableInvites, $DisablePosting, $DisablePoints, $DisableForums, $DisableTagging, $DisableUpload, $DisableWiki, $DisablePM, $DisableIRC, $DisableRequests, $FLTokens, $FA_Key, $CommentHash, $InfoTitle, $LockedAccount, $DisableCheckAll, $DisableCheckSelf, $TotalUploads, $BonusUploaded, $Uploads) = $DB->next_record(MYSQLI_NUM, array(9, 12));
 } else { // Person viewing is a normal user
     $DB->query("
 		SELECT
@@ -159,12 +161,15 @@ if (check_perms('users_mod')) { // Person viewing is a staff member
 			i.DisableInvites,
 			inviter.username,
 			i.InfoTitle,
-            m.BonusUploaded
+            m.BonusUploaded,
+            m.TotalUploads,
+            COUNT(DISTINCT t.ID) AS Uploads
 		FROM users_main AS m
 			JOIN users_info AS i ON i.UserID = m.ID
 			LEFT JOIN permissions AS p ON p.ID = m.PermissionID
 			LEFT JOIN users_main AS inviter ON i.Inviter = inviter.ID
 			LEFT JOIN forums_posts AS posts ON posts.AuthorID = m.ID
+            LEFT JOIN torrents AS t ON t.UserID = m.ID
 		WHERE m.ID = $UserID
 		GROUP BY AuthorID");
 
@@ -176,7 +181,7 @@ if (check_perms('users_mod')) { // Person viewing is a staff member
         $Username, $Email, $LastAccess, $IP, $Class, $Uploaded, $Downloaded, $BonusPoints,
         $RequiredRatio, $Enabled, $Paranoia, $Invites, $CustomTitle, $torrent_pass,
         $DisableLeech, $JoinDate, $Info, $Avatar, $FLTokens, $Donor, $Found, $Warned,
-        $ForumPosts, $InviterID, $DisableInvites, $InviterName, $InfoTitle, $BonusUploaded
+        $ForumPosts, $InviterID, $DisableInvites, $InviterName, $InfoTitle, $BonusUploaded, $TotalUploads, $Uploads
     ) = $DB->next_record(MYSQLI_NUM, array(10, 12));
 }
 
@@ -644,43 +649,39 @@ WHERE xs.uid =" . $UserID . " and xs.tstamp >= unix_timestamp(date_format(now(),
                                 <?= $UploadedRank === false ? 'Server busy' : number_format($UploadedRank) . '%' ?>
                             </span>
                         </li>
-                    <?
-                    }
-                    if (($Override = check_paranoia_here('downloaded'))) { ?>
+                    <? } ?>
+                    <? if (($Override = check_paranoia_here('downloaded'))) { ?>
                         <li class="SidebarList-item is-downloadedRank <?= $OverrideClass ?>" id="downloaded-rank-value" data-value="<?= $DownloadedRank ?>">
                             <span><?= t('server.user.u_downloaded') ?>: </span>
                             <span data-tooltip="<?= Format::get_size($Downloaded) ?>">
                                 <?= $DownloadedRank === false ? 'Server busy' : number_format($DownloadedRank) . '%' ?>
                             </span>
                         </li>
-                    <?
-                    }
-                    if (($Override = check_paranoia_here('uploads+'))) { ?>
+                    <? } ?>
+                    <? if (($Override = check_paranoia_here('uploads+'))) { ?>
                         <li class="SidebarList-item is-uploadsRank <?= $OverrideClass ?>" id="uploads-rank-value" data-value="<?= $UploadsRank ?>">
                             <span><?= t('server.user.u_uploads') ?>: </span>
                             <span data-tooltip="<?= number_format($Uploads) ?>">
                                 <?= $UploadsRank === false ? 'Server busy' : number_format($UploadsRank) . '%' ?>
                             </span>
                         </li>
-                    <?
-                    }
-                    if (($Override = check_paranoia_here('requestsfilled_count'))) { ?>
+                    <? } ?>
+                    <? if (($Override = check_paranoia_here('requestsfilled_count'))) { ?>
                         <li class="SidebarList-item is-requestsFilledRank <?= $OverrideClass ?>" id="requests-filled-rank-value" data-value="<?= $RequestRank ?>">
                             <span><?= t('server.user.u_filled') ?>: </span>
                             <span data-tooltip="<?= number_format($RequestsFilled) ?>">
                                 <?= $RequestRank === false ? 'Server busy' : number_format($RequestRank) . '%' ?>
                             </span>
                         </li>
-                    <?
-                    }
-                    if (($Override = check_paranoia_here('requestsvoted_bounty'))) { ?>
+                    <? } ?>
+                    <? if (($Override = check_paranoia_here('requestsvoted_bounty'))) { ?>
                         <li class="SidebarList-item is-bountySpentRank <?= $OverrideClass ?>" id="bounty-spent-rank-value" data-value="<?= $BountyRank ?>">
                             <span><?= t('server.user.u_bounty') ?>: </span>
                             <span data-tooltip="<?= Format::get_size($TotalSpent) ?>">
                                 <?= $BountyRank === false ? 'Server busy' : number_format($BountyRank) . '%' ?>
                             </span>
                         </li>
-                    <?  } ?>
+                    <? } ?>
                     <li class="SidebarList-item is-postCreateRank" id="post-create-rank" data-value="<?= $PostRank ?>">
                         <span><?= t('server.user.u_post') ?>: </span>
                         <span data-tooltip="<?= number_format($ForumPosts) ?>">

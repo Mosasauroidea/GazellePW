@@ -46,6 +46,6 @@ u-heightFull      # height full
   display: flex;
 }
 
-u-marginLeftAuto {
+.u-marginLeftAuto {
   margin-left: auto;
 }

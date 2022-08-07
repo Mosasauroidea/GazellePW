@@ -51,19 +51,19 @@ export function registerValidation() {
   addValidatorSelectInput({
     selector: `[name="releasetype"]`,
     validate: validateSelectInputRequired,
-    messageKey: 'upload.releasetype_required',
+    messageKey: 'client.upload.releasetype_required',
   })
 
   handleSourceAndProcessing()
   addValidatorSelectInput({
     selector: `[name="source"]`,
     validate: validateSelectInputRequired,
-    messageKey: 'upload.source_required',
+    messageKey: 'client.upload.source_required',
   })
   addValidatorSelectInput({
     selector: `[name="processing"]`,
     validate: validateProcessing,
-    messageKey: 'upload.processing_required',
+    messageKey: 'client.upload.processing_required',
   })
 
   handleResolution()
@@ -72,96 +72,96 @@ export function registerValidation() {
   addValidator({
     selector: `[name="subtitles[]"], [name=subtitle_type]`,
     validate: validateSubtitle,
-    messageKey: 'upload.subtitles_required',
+    messageKey: 'client.upload.subtitles_required',
   })
   addValidator({
     selector: `[name="subtitles[]"], [name=subtitle_type]`,
     validate: validateSubtitleWithMediainfo,
-    messageKey: 'upload.subtitles_with_mediainfo',
+    messageKey: 'client.upload.subtitles_with_mediainfo',
   })
 
   addValidator({
     selector: `[name="file_input"]`,
     validate: validateRequired,
-    messageKey: 'upload.torrent_file_required',
+    messageKey: 'client.upload.torrent_file_required',
   })
   addValidator({
     selector: `[name="tags"]`,
     validate: validateRequired,
-    messageKey: 'upload.tag_required',
+    messageKey: 'client.upload.tag_required',
   })
   addValidator({
     selector: `[name="imdb"]`,
     validate: validateImdb,
-    messageKey: 'upload.imdb_link_required',
+    messageKey: 'client.upload.imdb_link_required',
   })
   addValidator({
     selector: `[name="title"]`,
     validate: validateRequired,
-    messageKey: 'upload.movie_title_required',
+    messageKey: 'client.upload.movie_title_required',
   })
   addValidator({
     selector: `[name="year"]`,
     validate: validateRequired,
-    messageKey: 'upload.year_required',
+    messageKey: 'client.upload.year_required',
   })
   addValidator({
     selector: `[name="image"]`,
     validate: validateRequired,
-    messageKey: 'upload.poster_required',
+    messageKey: 'client.upload.poster_required',
   })
   addValidator({
     selector: `[name="desc"]`,
     validate: validateRequired,
-    messageKey: 'upload.movie_desc_required',
+    messageKey: 'client.upload.movie_desc_required',
   })
 
   addValidator({
     selector: `[name="mediainfo[]"]`,
     validate: validateMediainfoRequired,
-    messageKey: 'upload.mediainfo_required',
+    messageKey: 'client.upload.mediainfo_required',
   })
   addValidator({
     selector: `[name="mediainfo[]"]`,
     validate: wrap(Videoinfo.validateCompleteNameRequired),
-    messageKey: 'upload.mediainfo_complete_name_required',
+    messageKey: 'client.upload.mediainfo_complete_name_required',
   })
   addValidator({
     selector: `[name="mediainfo[]"]`,
     validate: wrap(Videoinfo.validateTableSpace),
-    messageKey: 'upload.mediainfo_table_space',
+    messageKey: 'client.upload.mediainfo_table_space',
   })
 
   addValidator({
     selector: `[name="release_desc"]`,
     validate: validateDescImg3Png,
-    messageKey: 'upload.desc_img_3_png',
+    messageKey: 'client.upload.desc_img_3_png',
   })
   addValidator({
     selector: `[name="release_desc"]`,
     validate: validateDescImgHosts,
-    messageKey: 'upload.desc_img_hosts',
+    messageKey: 'client.upload.desc_img_hosts',
   })
 
   addValidatorSelectInput({
     selector: `[name="codec"]`,
     validate: validateSelectInputRequired,
-    messageKey: 'upload.codec_required',
+    messageKey: 'client.upload.codec_required',
   })
   addValidatorSelectInput({
     selector: `[name="container"]`,
     validate: validateSelectInputRequired,
-    messageKey: 'upload.container_required',
+    messageKey: 'client.upload.container_required',
   })
   addValidatorSelectInput({
     selector: `[name="resolution"]`,
     validate: validateSelectInputRequired,
-    messageKey: 'upload.resolution_required',
+    messageKey: 'client.upload.resolution_required',
   })
   addValidator({
     selector: '[name=movie_edition_information], [name=remaster_title_show], [name=remaster_custom_title]',
     validate: validateRemaster,
-    messageKey: 'upload.remaster_required',
+    messageKey: 'client.upload.remaster_required',
   })
 }
 

@@ -8,13 +8,15 @@ class UserRank {
         $QueryID = G::$DB->get_query_id();
 
         G::$DB->query("
-			DROP TEMPORARY TABLE IF EXISTS temp_stats");
+			DROP TEMPORARY TABLE IF EXISTS temp_stats
+            ");
 
         G::$DB->query("
 			CREATE TEMPORARY TABLE temp_stats (
 				ID int(10) NOT NULL PRIMARY KEY AUTO_INCREMENT,
 				Val bigint(20) NOT NULL
-			);");
+			)
+            ");
 
         G::$DB->query("
 			INSERT INTO temp_stats (Val) " .
@@ -28,7 +30,8 @@ class UserRank {
         G::$DB->query("
 			SELECT MIN(Val)
 			FROM temp_stats
-			GROUP BY CEIL(ID / (" . (int)$UserCount . " / 100));");
+			GROUP BY CEIL(ID / (" . (int)$UserCount . " / 100));
+         ");
 
         $Table = G::$DB->to_array();
 

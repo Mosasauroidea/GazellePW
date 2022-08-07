@@ -28,6 +28,8 @@ if (isset($_POST['id']) && is_number($_POST['id'])) {
             $IS_STAFF && $_POST['visibility'] == 'staff' ? 'staff' : 'public'
         );
     }
+    $Location = (empty($_SERVER['HTTP_REFERER'])) ? "/index.php" : $_SERVER['HTTP_REFERER']; // redirect back 
+    header("Location: /apply.php?action=view&id=$ID");
 } elseif (isset($_GET['id']) && is_number($_GET['id'])) {
     $ID = intval($_GET['id']);
     $App = Applicant::factory($ID);
@@ -97,30 +99,28 @@ $Resolved = (isset($_GET['status']) && $_GET['status'] === 'resolved');
             $UserName = (!$IS_STAFF && $note['user_id'] != $LoggedUser['ID']) ? "Staff" : Users::format_username($note['user_id'], true, true, true, true, true, false)
         ?>
             <div class="Box" style="border-color: <?= $IS_STAFF ? ($note['visibility'] == 'staff' ? '#FF8017' : '#347235') : '#808080' ?>;">
-                <div class="Box-header">
+                <div class="Box-header u-flex">
                     <div>
-                        <div><?= $UserName ?>
-                            - <?= time_diff($note['created'], 2) ?>
-                        </div>
-                        <div>
-                            <input class="Button" type="submit" name="note-delete-<?= $note['id'] ?>" value="delete" />
-                        </div>
+                        <?= $UserName ?>
+                        -
+                        <?= time_diff($note['created'], 2) ?>
+                    </div>
+                    <div class="u-marginLeftAuto">
+                        <input class="Button" type="submit" name="note-delete-<?= $note['id'] ?>" value="delete" />
                     </div>
                 </div>
                 <div class="Box-body HtmlText PostArticle">
                     <?= Text::full_format($note['body']) ?>
                 </div>
             </div>
-            <?
-        } /* foreach */
-        if (!$App->is_resolved()) {
-            if ($IS_STAFF) {
-            ?>
-                <form id="thread_note_reply" name="thread_note_replay" method="POST" action="/apply.php?action=view&amp;id=<?= $ID ?>">
-                    <table class="Form-rowList" variant="header">
-                        <tr class="Form-rowHeader">
-                            <td><?= t('server.inbox.reply') ?></td>
-                        </tr>
+        <? } /* foreach */ ?>
+        <? if (!$App->is_resolved()) { ?>
+            <form id="thread_note_reply" name="thread_note_replay" method="POST" action="/apply.php?action=view&amp;id=<?= $ID ?>">
+                <table class="Form-rowList" variant="header">
+                    <tr class="Form-rowHeader">
+                        <td><?= t('server.inbox.reply') ?></td>
+                    </tr>
+                    <? if ($IS_STAFF) { ?>
                         <tr class="Form-row">
                             <td class="Form-label"><?= t('server.apply.visibility') ?>:</td>
                             <td class="Form-inputs">
@@ -132,13 +132,11 @@ $Resolved = (isset($_GET['status']) && $_GET['status'] === 'resolved');
                                 </div>
                             </td>
                         </tr>
-                    <?      } /* $IS_STAFF */ ?>
+                    <? } /* $IS_STAFF */ ?>
                     <tr class="Form-row">
                         <td class="Form-label"><?= t('server.apply.reply') ?></td>
                         <td class="Form-items">
-                            <?
-                            echo new TEXTAREA_PREVIEW('note_reply', 'note_reply', '', 60, 8, true, true);
-                            ?>
+                            <?= new TEXTAREA_PREVIEW('note_reply', 'note_reply', '', 60, 8, true, true) ?>
                         </td>
                     </tr>
                     <tr class="Form-row">
@@ -151,52 +149,52 @@ $Resolved = (isset($_GET['status']) && $_GET['status'] === 'resolved');
                         </td>
                     </tr>
                 <?  } /* !$App->is_resolved() */ ?>
-                    </table>
-                </form>
-            <?
-        } else { /* no id parameter given -- show list of applicant entries - all if staff, otherwise their own (if any) */
-            $Page            = isset($_GET['page']) && is_number($_GET['page']) ? intval($_GET['page']) : 1;
-            $UserID          = $IS_STAFF ? 0 : $LoggedUser['ID'];
-            $ApplicationList = Applicant::get_list($Page, $Resolved, $UserID);
-            ?>
-                <h2><?= $Resolved ? t('server.apply.resolved') : t('server.apply.current') ?><?= t('server.apply.blank_applications') ?></h2>
-                <? if (count($ApplicationList)) { ?>
-                    <div class="TableContainer border">
-                        <table class="TableResolvedApplication Table" id="resolved_application">
-                            <tr class="Table-rowHeader">
-                                <td class="Table-cell"><?= t('server.apply.role') ?></td>
+                </table>
+            </form>
+        <?
+    } else { /* no id parameter given -- show list of applicant entries - all if staff, otherwise their own (if any) */
+        $Page            = isset($_GET['page']) && is_number($_GET['page']) ? intval($_GET['page']) : 1;
+        $UserID          = $IS_STAFF ? 0 : $LoggedUser['ID'];
+        $ApplicationList = Applicant::get_list($Page, $Resolved, $UserID);
+        ?>
+            <h2><?= $Resolved ? t('server.apply.resolved') : t('server.apply.current') ?><?= t('server.apply.blank_applications') ?></h2>
+            <? if (count($ApplicationList)) { ?>
+                <div class="TableContainer border">
+                    <table class="TableResolvedApplication Table" id="resolved_application">
+                        <tr class="Table-rowHeader">
+                            <td class="Table-cell"><?= t('server.apply.role') ?></td>
+                            <? if ($IS_STAFF) { ?>
+                                <td class="Table-cell"><?= t('server.apply.applicant') ?></td>
+                            <?      } ?>
+                            <td class="Table-cell"><?= t('server.apply.date_created') ?></td>
+                            <td class="Table-cell"><?= t('server.apply.comments') ?></td>
+                            <td class="Table-cell"><?= t('server.apply.last_comment_from') ?></td>
+                            <td class="Table-cell"><?= t('server.apply.last_comment_added') ?></td>
+                        </tr>
+                        <? foreach ($ApplicationList as $appl) { ?>
+                            <tr class="Table-row">
+                                <td class="Table-cell"><a href="/apply.php?action=view&amp;id=<?= $appl['ID'] ?>"><?= $appl['Role'] ?></a></td>
                                 <? if ($IS_STAFF) { ?>
-                                    <td class="Table-cell"><?= t('server.apply.applicant') ?></td>
+                                    <td class="Table-cell"><a href="/user.php?id=<?= $appl['UserID'] ?>"><?= $appl['Username'] ?></a></td>
                                 <?      } ?>
-                                <td class="Table-cell"><?= t('server.apply.date_created') ?></td>
-                                <td class="Table-cell"><?= t('server.apply.comments') ?></td>
-                                <td class="Table-cell"><?= t('server.apply.last_comment_from') ?></td>
-                                <td class="Table-cell"><?= t('server.apply.last_comment_added') ?></td>
+                                <td class="Table-cell"><?= time_diff($appl['Created'], 2) ?></td>
+                                <td class="Table-cell"><?= $appl['nr_notes'] ?></td>
+                                <td class="Table-cell"><a href="/user.php?id=<?= $appl['last_UserID'] ?>"><?= $appl['last_Username'] ?></a></td>
+                                <td class="Table-cell"><?= strlen($appl['last_Created']) ? time_diff($appl['last_Created'], 2) : '' ?></td>
                             </tr>
-                            <? foreach ($ApplicationList as $appl) { ?>
-                                <tr class="Table-row">
-                                    <td class="Table-cell"><a href="/apply.php?action=view&amp;id=<?= $appl['ID'] ?>"><?= $appl['Role'] ?></a></td>
-                                    <? if ($IS_STAFF) { ?>
-                                        <td class="Table-cell"><a href="/user.php?id=<?= $appl['UserID'] ?>"><?= $appl['Username'] ?></a></td>
-                                    <?      } ?>
-                                    <td class="Table-cell"><?= time_diff($appl['Created'], 2) ?></td>
-                                    <td class="Table-cell"><?= $appl['nr_notes'] ?></td>
-                                    <td class="Table-cell"><a href="/user.php?id=<?= $appl['last_UserID'] ?>"><?= $appl['last_Username'] ?></a></td>
-                                    <td class="Table-cell"><?= strlen($appl['last_Created']) ? time_diff($appl['last_Created'], 2) : '' ?></td>
-                                </tr>
-                            <?  } /* foreach */ ?>
-                        </table>
-                    </div>
-                <?
-                } /* count($ApplicationList) > 0 */ else {
-                ?>
-                    <div class="Box">
-                        <div class="Box-body"><?= t('server.apply.the_cupboard_is_empty') ?></div>
-                    </div>
+                        <?  } /* foreach */ ?>
+                    </table>
+                </div>
             <?
-                } /* no applications */
-            } /* show list of applicant entries */
+            } /* count($ApplicationList) > 0 */ else {
             ?>
+                <div class="Box">
+                    <div class="Box-body"><?= t('server.apply.the_cupboard_is_empty') ?></div>
+                </div>
+        <?
+            } /* no applications */
+        } /* show list of applicant entries */
+        ?>
 </div>
 <?
 View::show_footer();

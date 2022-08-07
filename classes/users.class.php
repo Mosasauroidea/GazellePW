@@ -1068,4 +1068,19 @@ class Users {
             'uniqueSnatchedCount' => (int) $result['uniqueSnatchedCount']
         ];
     }
+
+    public function uploads() {
+        global $DB;
+        $UserID = $this->UserID;
+        $DB->query("
+            SELECT COUNT(t.ID) AS Uploads
+            FROM users_main AS u
+            LEFT JOIN torrents AS t ON t.UserID = u.ID
+            WHERE u.id = '$UserID'
+        ");
+        $result = $DB->next_record(MYSQLI_ASSOC);
+        return [
+            'uploadCount' => (int) $result['Uploads'],
+        ];
+    }
 }

@@ -5,7 +5,7 @@ Where
   artist - show
   bookmarks - show
 
-TorrentCover variant="OneLine"
+TorrentCover variant="OneLine | FiveGrid"
   TorrentCover-item
     TorrentCover-imageContainer
         TorrentCover-image
@@ -13,10 +13,14 @@ TorrentCover variant="OneLine"
 
 .TorrentCover {
   display: grid;
-  grid-template-columns: repeat(auto-fill, 190px);
+  grid-template-columns: repeat(auto-fill, 150px);
   justify-content: center;
   column-gap: var(--global-space-lg);
   row-gap: var(--global-space-default);
+}
+.TorrentCover[variant='FiveGrid'] {
+  width: 870px;
+  margin: 0 auto;
 }
 @media (max-width: 768px) {
   .TorrentCover[variant='OneLine'] {
@@ -45,8 +49,8 @@ TorrentCover variant="OneLine"
 }
 
 .TorrentCover-imageContainer {
-  width: 190px;
-  height: 285px;
+  width: 150px;
+  height: 222px;
 }
 @media (max-width: 768px) {
   .TorrentCover[variant='OneLine'] .TorrentCover-imageContainer {

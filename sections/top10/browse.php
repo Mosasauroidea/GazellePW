@@ -103,6 +103,6 @@ function generate_torrent_table($Caption, $Tag, $Groups, $Limit) {
     </h3>
     <?
     $tableRender = new TorrentGroupCoverTableView($Groups);
-    $tableRender->render();
+    $tableRender->render(['Variant' => 'FiveGrid']);
     ?>
 <? } ?>
