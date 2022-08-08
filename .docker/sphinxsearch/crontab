@@ -1,2 +1,2 @@
-*         *  *   *    *       /usr/bin/indexer -c /var/lib/sphinxsearch/conf/sphinx.conf --rotate delta
+*         *  *   *    *       /usr/bin/indexer -c /var/lib/sphinxsearch/conf/sphinx.conf --rotate requests_delta log_delta delta
 5         *  *   *    *       /usr/bin/indexer -c /var/lib/sphinxsearch/conf/sphinx.conf --rotate --all

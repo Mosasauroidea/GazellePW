@@ -339,7 +339,7 @@ if (check_perms('admin_manage_applicants')) {
     }
 }
 
-if (check_perms('users_mod') && FEATURE_EMAIL_REENABLE) {
+if (check_perms('users_mod') && CONFIG['FEATURE_EMAIL_REENABLE']) {
     $NumEnableRequests = G::$Cache->get_value(AutoEnable::CACHE_KEY_NAME);
     if ($NumEnableRequests === false) {
         G::$DB->query("SELECT COUNT(1) FROM users_enable_requests WHERE Outcome IS NULL");

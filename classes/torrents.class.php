@@ -871,7 +871,7 @@ WHERE ud.TorrentID=? AND ui.NotifyOnDeleteDownloaded='1' AND ud.UserID NOT IN ({
         $ArtistInfo = Artists::get_artist($GroupID);
         foreach ($ArtistInfo as $Importances => $Importance) {
             foreach ($Importance as $Artist) {
-                G::$Cache->delete_value('artist_groups_' . $Artist['id']); //Needed for at least freeleech change, if not others.
+                G::$Cache->delete_value('artist_groups_' . $Artist['ArtistID']); //Needed for at least freeleech change, if not others.
             }
         }
 
@@ -1542,20 +1542,16 @@ WHERE ud.TorrentID=? AND ui.NotifyOnDeleteDownloaded='1' AND ud.UserID NOT IN ({
                         ta.ArtistID,
                         wa.IMDBID,
                         ag.RevisionID as RevisionID,
-                        wa.Image as Image,
-                        wa.Birthday as Birthday,
-                        wa.PlaceOfBirth as PlaceOfBirth,
-                        wa.Body as Body
+                        ag.Image as Image,
+                        ag.Birthday as Birthday,
+                        ag.PlaceOfBirth as PlaceOfBirth,
+                        ag.Body as Body
                        FROM 
                         torrents_artists as ta
                        LEFT JOIN 
                         artists_group as ag
                        ON 
                         ag.ArtistID = ta.ArtistID
-                       LEFT JOIN
-                        wiki_artists as wa
-                       ON
-                        ag.RevisionID = wa.RevisionID
                        WHERE 
                         GroupID=$GroupID
                        AND

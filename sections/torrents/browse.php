@@ -264,11 +264,11 @@ View::show_header(t('server.torrents.header'), 'browse', 'PageTorrentHome');
                         </select>
                         <select class="Input" name="freetorrent">
                             <option class="Select-option" value=""><?= t('server.tools.sales_promotion_plan') ?></option>
-                            <option class="Select-option" value='1' <? $HideBasic ? Format::selected('freetorrent', '1') : '' ?>><?= t('server.tools.free_leech') ?></option>
-                            <option class="Select-option" value='11' <? Format::selected('freetorrent', '11') ?>><?= t('server.tools.25_percent_off') ?></option>
-                            <option class="Select-option" value='12' <? Format::selected('freetorrent', '12') ?>><?= t('server.tools.50_percent_off') ?></option>
-                            <option class="Select-option" value='13' <? Format::selected('freetorrent', '13') ?>><?= t('server.tools.75_percent_off') ?></option>
-                            <option class="Select-option" value='2' <? Format::selected('freetorrent', '2') ?>><?= t('server.tools.neutral_leech') ?></option>
+                            <option class="Select-option" value='1' <? $HideBasic ? Format::selected('freetorrent', '1') : '' ?>><?= t('server.torrents.freeleech') ?></option>
+                            <option class="Select-option" value='11' <? Format::selected('freetorrent', '11') ?>><?= t('server.torrents.off25') ?></option>
+                            <option class="Select-option" value='12' <? Format::selected('freetorrent', '12') ?>><?= t('server.torrents.off50') ?></option>
+                            <option class="Select-option" value='13' <? Format::selected('freetorrent', '13') ?>><?= t('server.torrents.off75') ?></option>
+                            <option class="Select-option" value='2' <? Format::selected('freetorrent', '2') ?>><?= t('server.torrents.neutral_leech') ?></option>
                         </select>
                     </td>
                 </tr>

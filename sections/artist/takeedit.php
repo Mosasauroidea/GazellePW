@@ -29,7 +29,7 @@ if ($_GET['action'] === 'revert') { // if we're reverting to a previous revision
     $Summary = db_string($_POST['summary']);
     $Image = db_string($_POST['image']);
     $IMDBID = db_string($_POST['imdb_id']);
-    $CName = db_string($_POST['cname']);
+    $SubName = db_string($_POST['sub_name']);
     ImageTools::blacklisted($Image);
     // Trickery
     if (!preg_match("/^" . IMAGE_REGEX . "$/i", $Image)) {
@@ -39,14 +39,16 @@ if ($_GET['action'] === 'revert') { // if we're reverting to a previous revision
 
 // Insert revision
 if (!$RevisionID) { // edit
-    $DB->query("
-		select Body, Image, IMDBID, ChineseName, w.Birthday, w.PlaceOfBirth from wiki_artists w left join artists_group a on a.RevisionID = w.RevisionID where a.ArtistID=$ArtistID");
-    list($OldBody, $OldyImage, $OldIMDBID, $OldChineseName, $Birthday, $PlaceOfBirth) = $DB->next_record(MYSQLI_BOTH, false);
+    $DB->query(
+        "SELECT w.Body, w.Image, w.IMDBID, w.SubName, w.Birthday, w.PlaceOfBirth, w.Name from wiki_artists w left join artists_group a on a.RevisionID = w.RevisionID where a.ArtistID=$ArtistID"
+    );
+    list($OldBody, $OldyImage, $OldIMDBID, $OldSubName, $Birthday, $PlaceOfBirth, $Name) = $DB->next_record(MYSQLI_NUM, false);
     $BodyChange = $Body != db_string($OldBody);
     $ImageChange = $Image != $OldyImage;
     $IMDBIDChange = $IMDBID != $OldIMDBID;
-    $CNameChange = $CName != $OldChineseName;
+    $SubNameChange = $SubName != $OldSubName;
     $TotalSummary = "";
+    // TODO by qwerty i18N
     if ($BodyChange) {
         $TotalSummary .= "修改艺人信息。";
     }
@@ -56,40 +58,55 @@ if (!$RevisionID) { // edit
     if ($IMDBIDChange) {
         $TotalSummary .= "修改IMDBID。";
     }
-    if ($CNameChange) {
-        $TotalSummary .= "修改中文名。";
+    if ($CubNameChange) {
+        $TotalSummary .= "修改子名称";
     }
     $TotalSummary .= $Summary ? " 原因：$Summary" : "";
     $DB->query("
 		INSERT INTO wiki_artists
-			(PageID, Body, Image, UserID, Summary, Time, IMDBID, ChineseName, Birthday, PlaceOfBirth)
+			(PageID, Body, Image, UserID, Summary, Time, IMDBID, SubName, Birthday, PlaceOfBirth, Name)
 		VALUES
-			('$ArtistID', '$Body', '$Image', '$UserID', '$TotalSummary', '" . sqltime() . "', '$IMDBID', '$CName', '$Birthday', '$PlaceOfBirth')");
+			('$ArtistID', '$Body', '$Image', '$UserID', '$TotalSummary', '" . sqltime() . "', '$IMDBID', '$SubName', '$Birthday', '$PlaceOfBirth', '$Name')");
 } else { // revert
-    $DB->query("
-		INSERT INTO wiki_artists (PageID, Body, Image, UserID, Summary, Time, IMDBID, ChineseName, Birthday, PlaceOfBirth)
-		SELECT '$ArtistID', Body, Image, '$UserID', 'Reverted to revision $RevisionID', '" . sqltime() . "', 'IMDBID' , 'ChineseName', 'Birthday, 'PlaceOfBirth'
+    G::$DB->query(
+        "SELECT 
+        w.Body, w.Image, w.IMDBID, w.SubName, w.Birthday, w.PlaceOfBirth, w.Name from wiki_artists where RevisionID = '$RevisionID'"
+    );
+    list($Body, $Image, $IMDBID, $SubName, $Birthday, $PlaceOfBirth, $Name) = $DB->next_record(MYSQLI_NUM, false);
+    $DB->query(
+        "INSERT INTO wiki_artists (PageID, Body, Image, UserID, Summary, Time, IMDBID, SubName, Birthday, PlaceOfBirth, Name)
+		SELECT '$ArtistID', Body, Image, '$UserID', 'Reverted to revision $RevisionID', '" . sqltime() . "', 'IMDBID' , 'SubName', 'Birthday, 'PlaceOfBirth', 'Name'
 		FROM wiki_artists
-		WHERE RevisionID = '$RevisionID'");
+		WHERE RevisionID = '$RevisionID'"
+    );
 }
 
 $RevisionID = $DB->inserted_id();
 
 // Update artists table (technically, we don't need the RevisionID column, but we can use it for a join which is nice and fast)
-$DB->query("
-	UPDATE artists_group
+$DB->query(
+    "UPDATE artists_group
 	SET
-		RevisionID = '$RevisionID'
-	WHERE ArtistID = '$ArtistID'");
+        Image = '$Image',
+        Body = '$Body',
+        IMDBID = '$IMDBID',
+        SubName = '$SubName',
+        Birthday = '$Birthday',
+        PlaceOfBirth = '$PlaceOfBirth',
+		RevisionID = '$RevisionID',
+        Name = '$Name'
+	WHERE ArtistID = '$ArtistID'"
+);
 
 // There we go, all done!
 $Cache->delete_value("artist_$ArtistID"); // Delete artist cache
 
-// delete gropu artist;
-$DB->query("
-		SELECT GroupID
+// delete group artist cache;
+$DB->query(
+    "SELECT GroupID
 		FROM torrents_artists
-		WHERE ArtistID = '$ArtistID'");
+		WHERE ArtistID = '$ArtistID'"
+);
 $Groups = $DB->collect('GroupID');
 if (!empty($Groups)) {
     foreach ($Groups as $GroupID) {

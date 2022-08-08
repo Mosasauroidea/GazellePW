@@ -43,6 +43,9 @@ if (!isset($_REQUEST['action'])) {
         case 'viewrequest':
             include(CONFIG['SERVER_ROOT'] . '/sections/requests/request.php');
             break;
+        case 'autofill':
+            include(CONFIG['SERVER_ROOT'] . '/sections/requests/auto_fill.php');
+            break;
         default:
             error(0);
     }

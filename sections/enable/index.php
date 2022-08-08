@@ -1,6 +1,6 @@
 <?
 
-if (isset($LoggedUser['ID']) || !isset($_GET['token']) || !FEATURE_EMAIL_REENABLE) {
+if (isset($LoggedUser['ID']) || !isset($_GET['token']) || !CONFIG['FEATURE_EMAIL_REENABLE']) {
     header("Location: index.php");
     die();
 }

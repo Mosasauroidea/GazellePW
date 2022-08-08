@@ -17,9 +17,6 @@ $TorrentCache = Torrents::get_group($GroupID, true, $RevisionID);
 $TorrentDetails = $TorrentCache;
 $TorrentList = $TorrentCache['Torrents'];
 
-$Artists = Artists::get_artist($GroupID);
-
-
 $sqltime = sqltime();
 $UserLink = site_url() . 'user.php?id=' . G::$LoggedUser['ID'];
 $Username = G::$LoggedUser['Username'];

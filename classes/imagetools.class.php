@@ -33,7 +33,11 @@ class ImageTools {
      * @var array $Blacklist Array of blacklisted hosts
      */
     private static $Blacklist = array(
-        'tinypic.com'
+        'tinypic.com',
+        'imgur.com',
+        'funkyimg.com',
+        'e-cdns-images.dzcdn.net',
+        'fastpic.ru',
     );
 
     /**

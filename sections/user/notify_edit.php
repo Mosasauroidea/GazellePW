@@ -353,31 +353,31 @@ View::show_header(t('server.user.manage_notifications'), 'jquery.validate,form_v
                             <input class="Input" name="frees<?= $i ?>[]" id="free_leech" type="checkbox" value="<?= 1 ?>" <? if (in_array(1, $N['FreeTorrents'])) {
                                                                                                                                 echo ' checked="checked"';
                                                                                                                             } ?>" />
-                            <label for="Checkbox-label free_leech"><?= t('server.tools.free_leech') ?></label>
+                            <label for="Checkbox-label free_leech"><?= t('server.torrents.freeleech') ?></label>
                         </div>
                         <div class="Checkbox">
                             <input class="Input" name="frees<?= $i ?>[]" id="75_percent_off" type="checkbox" value="<?= 13 ?>" <? if (in_array(13, $N['FreeTorrents'])) {
                                                                                                                                     echo ' checked="checked"';
                                                                                                                                 } ?> />
-                            <label class="Checkbox-label" for="75_percent_off"><?= t('server.tools.75_percent_off') ?></label>
+                            <label class="Checkbox-label" for="75_percent_off"><?= t('server.torrents.off75') ?></label>
                         </div>
                         <div class="Checkbox">
                             <input class="Input" name="frees<?= $i ?>[]" id="50_percent_off" type="checkbox" value="<?= 12 ?>" <? if (in_array(12, $N['FreeTorrents'])) {
                                                                                                                                     echo ' checked="checked"';
                                                                                                                                 } ?> />
-                            <label class="Checkbox-label" for="50_percent_off"><?= t('server.tools.50_percent_off') ?></label>
+                            <label class="Checkbox-label" for="50_percent_off"><?= t('server.torrents.off50') ?></label>
                         </div>
                         <div class="Checkbox">
                             <input class="Input" name="frees<?= $i ?>[]" id="25_percent_off" type="checkbox" value="<?= 11 ?>" <? if (in_array(11, $N['FreeTorrents'])) {
                                                                                                                                     echo ' checked="checked"';
                                                                                                                                 } ?> />
-                            <label class="Checkbox-label" for="25_percent_off"><?= t('server.tools.25_percent_off') ?></label>
+                            <label class="Checkbox-label" for="25_percent_off"><?= t('server.torrents.off25') ?></label>
                         </div>
                         <div class="Checkbox">
                             <input class="Input" name="frees<?= $i ?>[]" id="neutral_leech" type="checkbox" value="<?= 2 ?>" / <? if (in_array(2, $N['FreeTorrents'])) {
                                                                                                                                     echo ' checked="checked"';
                                                                                                                                 } ?>>
-                            <label class="Checkbox-label" for="neutral_leech"><?= t('server.tools.neutral_leech') ?></label>
+                            <label class="Checkbox-label" for="neutral_leech"><?= t('server.torrents.neutral_leech') ?></label>
                         </div>
                     </td>
                 </tr>

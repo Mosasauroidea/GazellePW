@@ -25,6 +25,7 @@ class TORRENT_FORM {
     var $TorrentID = false;
     var $Disabled = '';
     var $DisabledFlag = false;
+    var $AddFormat = false;
 
     const TORRENT_INPUT_ACCEPT = ['application/x-bittorrent', '.torrent'];
     const JSON_INPUT_ACCEPT = ['application/json', '.json'];
@@ -50,6 +51,7 @@ class TORRENT_FORM {
         if ($this->Torrent && isset($this->Torrent['GroupID'])) {
             $this->Disabled = ' readonly';
             $this->DisabledFlag = true;
+            $this->AddFormat = true;
         }
     }
     function genRemasterTags($RemasterTags, $SelectedTitle) {
@@ -68,17 +70,10 @@ class TORRENT_FORM {
     }
 
     function head() {
-        $AnnounceURL =  CONFIG['ANNOUNCE_URL'];
 ?>
 
         <div class="Form">
-            <? if ($this->NewTorrent) { ?>
-                <p style="text-align: center; margin-bottom: 1px !important;">
-                    <?= t('server.upload.personal_announce') ?>:
-                    <br />
-                    <a onclick="return false" href="<?= $AnnounceURL . '/' . G::$LoggedUser['torrent_pass'] . '/announce' ?>"><?= t('server.upload.personal_announce_note') ?></a>
-                </p>
-            <?      }
+            <?
             if ($this->Error) {
                 echo "\t" . '<p style="text-align: center;" class="u-colorWarning">' . $this->Error . "</p>\n";
             }
@@ -97,7 +92,6 @@ class TORRENT_FORM {
                         if ($this->Torrent && $this->Torrent['GroupID']) {
                         ?>
                             <input type="hidden" name="groupid" value="<?= display_str($this->Torrent['GroupID']) ?>" />
-                            <input type="hidden" name="type" value="<?= in_array($this->UploadForm, $this->Categories) ?>" />
                         <?
                         }
                         if ($this->Torrent && isset($this->Torrent['RequestID'])) {
@@ -296,7 +290,7 @@ class TORRENT_FORM {
         <table cellpadding="3" cellspacing="1" border="0" class="layout border<? if ($this->NewTorrent) {
                                                                                     echo ' slice';
                                                                                 } ?>" width="100%">
-            <? if ($this->NewTorrent) { ?>
+            <? if ($this->NewTorrent && !$this->AddFormat) { ?>
                 <tr class="Form-row">
                     <td class="Form-label"><?= t('server.upload.movie_imdb') ?><span class="u-colorWarning">*</span>:</td>
                     <td class="Form-items Form-errorContainer">
@@ -308,10 +302,9 @@ class TORRENT_FORM {
                             </button>
                             <div class="Checkbox">
                                 <input class="Input" type="checkbox" name="no_imdb_link" id="no_imdb_link" onchange="globalapp.uploadNoImdbId()" <?= $this->Disabled ? "disabled" : '' ?>>
-                                <label class="Checkbox-label" for="no_imdb_link">&nbsp;<?= t('server.upload.no_imdb_link') ?></label>
+                                <label class="Checkbox-label" data-tooltip="<?= t('server.upload.imdb_empty_warning') ?>" for="no_imdb_link">&nbsp;<?= t('server.upload.no_imdb_link') ?></label>
                             </div>
                         </div>
-                        <div class="u-formUploadNoImdbNote"><?= t('server.upload.imdb_empty_warning') ?></div>
                         <div class="u-formUploadNoImdbNote hidden u-colorWarning"><?= t('server.upload.no_imdb_note') ?></div>
                         <div class="imdb Form-errorMessage"></div>
                     </td>
@@ -373,6 +366,7 @@ class TORRENT_FORM {
                                                         ?>><?= t('server.upload.year_remaster') ?><span class="u-colorWarning">*</span>:</span>
                     </td>
 
+
                     <td class="Form-items Form-errorContainer">
                         <p id="yearwarning" class="hidden"><?= t('server.upload.year_remaster_title') ?></p>
                         <div class="Form-inputs">
@@ -380,8 +374,10 @@ class TORRENT_FORM {
                         </div>
                     </td>
                 </tr>
+                <?
+                ?>
                 <tr class="Form-row" id="artist_tr">
-                    <td class="Form-label"><?= t('server.common.artist') ?><span class="u-colorWarning">*</span>:</td>
+                    <td class="Form-label"><?= t('server.common.artist') ?><span class="u-colorWarning"></span>:</td>
                     <td class="Form-items is-artist u-formUploadArtistList" id="artistfields">
                         <p id="vawarning" class="hidden"><?= t('server.upload.artist_note') ?></p>
                         <?
@@ -391,9 +387,9 @@ class TORRENT_FORM {
                                 foreach ($Artists as $Artist) {
                         ?>
                                     <div class="Form-inputs">
-                                        <input type="hidden" id="artist_id" name="artist_ids[]" value="<?= display_str($Artist['imdbid']) ?>" size="45" />
-                                        <input class="Input" type="text" id="artist" name="artists[]" size="45" value="<?= display_str($Artist['name']) ?>" <? Users::has_autocomplete_enabled('other'); ?><?= $this->Disabled ?> />
-                                        <input class="Input is-small" type="text" id="artist_chinese" data-tooltip="<?= t('server.upload.chinese_name') ?>" name="artists_chinese[]" size="25" value="<?= display_str($Artist['name']) ?>" <? Users::has_autocomplete_enabled('other'); ?><?= $this->Disabled ?> />
+                                        <input class="Input is-small" type="text" id="artist_id" name="artist_ids[]" value="<?= display_str($Artist['IMDBID']) ?>" size="45" />
+                                        <input class="Input is-small" type="text" id="artist" name="artists[]" size="45" value="<?= display_str($Artist['Name']) ?>" <? Users::has_autocomplete_enabled('other'); ?><?= $this->Disabled ?> />
+                                        <input class="Input is-small" type="text" id="artist_sub" data-tooltip="<?= t('server.upload.sub_name') ?>" name="artists_sub[]" size="25" value="<?= display_str($Artist['SubName']) ?>" <? Users::has_autocomplete_enabled('other'); ?><?= $this->Disabled ?> />
                                         <select class="Input" id="importance" name="importance[]" <?= $this->Disabled ?>>
                                             <option class="Select-option" value="1" <?= ($Importance == '1' ? ' selected="selected"' : ($this->DisabledFlag ? 'disabled' : '')) ?>>
                                                 <?= t('server.upload.director') ?></option>
@@ -425,11 +421,11 @@ class TORRENT_FORM {
                         } else {
                             ?>
                             <div class="Form-inputs">
-                                <input type="hidden" id="artist_id" name="artist_ids[]" size="45" />
-                                <input class="Input" type="text" id="artist" name="artists[]" size="45" <?
-                                                                                                        Users::has_autocomplete_enabled('other'); ?><?= $this->Disabled ?> />
-                                <input class="Input is-small" type="text" id="artist_chinese" name="artists_chinese[]" size="25" placeholder="<?= t('server.upload.chinese_name') ?>" <?
-                                                                                                                                                                                        Users::has_autocomplete_enabled('other'); ?><?= $this->Disabled ?> />
+                                <input class="Input is-small" type="text" id="artist_id" name="artist_ids[]" size="45" placeholder="<?= t('server.upload.movie_imdb') ?>" />
+                                <input class="Input is-small" type="text" id="artist" name="artists[]" size="45" <?
+                                                                                                                    Users::has_autocomplete_enabled('other'); ?><?= $this->Disabled ?> placeholder="<?= t('server.upload.english_name') ?>" />
+                                <input class="Input is-small" type="text" id="artist_sub" name="artists_sub[]" size="25" placeholder="<?= t('server.upload.sub_name') ?>" <?
+                                                                                                                                                                            Users::has_autocomplete_enabled('other'); ?><?= $this->Disabled ?> />
                                 <select class="Input" id="importance" name="importance[]" <?= $this->Disabled ?>>
                                     <option class="Select-option" value="1"><?= t('server.upload.director') ?></option>
                                     <option class="Select-option" value="2"><?= t('server.upload.writer') ?></option>
@@ -442,7 +438,7 @@ class TORRENT_FORM {
                                 <a href="#" onclick="globalapp.uploadRemoveArtistField(); return false;" class="brackets remove-artist">&minus;</a>
                             </div>
                         <? } ?>
-                        <div class="show-more" style="display: none;">
+                        <div class="show-more hidden">
                             <a href='#' onclick="globalapp.uploadArtistsShowMore(); return false"><?= t('server.upload.show_more') ?></a>
                         </div>
                     </td>
@@ -458,6 +454,7 @@ class TORRENT_FORM {
                         </div>
                     </td>
                 </tr>
+
                 <tr class="Form-row">
                     <td class="Form-label"><?= t('server.upload.trailer_link') ?>:</td>
                     <td class="Form-items">
@@ -895,9 +892,8 @@ class TORRENT_FORM {
                 </tr>
             <?
                 }
-                if ($this->NewTorrent) {
+
             ?>
-            <?      } /* if new torrent */ ?>
             <tr class="Form-row is-text" id="movie_feature_tr">
                 <td class="Form-label"><?= t('server.upload.movie_feature') ?>:</td>
                 <td class="Form-items">

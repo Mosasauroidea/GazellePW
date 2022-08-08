@@ -112,29 +112,30 @@ globalapp.uploadMovieAutofill = function uploadMovieAutofill() {
       }
       globalapp.uploadRemoveAllArtistFields()
       for (var i = 0; i < artists.length; i++) {
-        var artistid, importanceid, artistimdbid, artist_cname
+        var artistid, importanceid, artistimdbid, artist_sub_name
         if (i) {
           artistid = '#artist_' + i
           importanceid = '#importance_' + i
           artistimdbid = '#artist_id_' + i
-          artist_cname = '#artist_chinese_' + i
+          artist_sub_name = '#artist_sub_' + i
           globalapp.uploadAddArtistField(true)
         } else {
           artistid = '#artist'
           importanceid = '#importance'
           artistimdbid = '#artist_id'
-          artist_cname = '#artist_chinese'
+          artist_sub_name = '#artist_sub'
         }
         $(artistid).val(artists[i])
         $(importanceid).val(importance[i])
         $(artistimdbid).val(artist_ids[i])
-        if (data.ChineseName) {
-          $(artist_cname).val(data.ChineseName[[artists[i]]])
+        if (data.SubName && data.SubName[[artists[i]]]) {
+          $(artist_sub_name).val(data.SubName[[artists[i]]])
+          $(artist_sub_name).prop('disabled', true)
         }
       }
       $('.FormValidation')[0].validator.validate()
       $('.FormUpload').addClass('u-formUploadAutoFilled')
-      $('.u-formUploadArtistList input:not([name="artists_chinese[]"]), .u-formUploadArtistList select').prop(
+      $('.u-formUploadArtistList input:not([name="artists_sub[]"]), .u-formUploadArtistList select').prop(
         'disabled',
         true
       )

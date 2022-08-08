@@ -7,8 +7,6 @@ include(CONFIG['SERVER_ROOT'] . '/classes/file_checker.class.php');
 
 enforce_login();
 
-define('QUERY_EXCEPTION', true); // Shut up debugging
-
 $File = $_FILES['file_input']; // This is our torrent file
 $SubtitleName = $File['tmp_name'];
 $Name = $File['name'];

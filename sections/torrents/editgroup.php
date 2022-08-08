@@ -219,7 +219,7 @@ View::show_header(t('server.torrents.edit_torrent_group'), '', 'PageTorrentEditG
                         </td>
                     </tr>
                     <tr class="Form-row">
-                        <td class="Form-label"><?= t('server.torrents.chinese_title') ?>:</td>
+                        <td class="Form-label"><?= t('server.torrents.sub_title') ?>:</td>
                         <td class="Form-inputs">
                             <input class="Input" type="text" name="subname" size="92" value="<?= $SubName ?>" />
                         </td>

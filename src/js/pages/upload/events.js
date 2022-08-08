@@ -18,7 +18,4 @@ document.addEventListener('DOMContentLoaded', () => {
   document
     .querySelector('#remove-mediainfo')
     .addEventListener('click', removeMediaInfoTextarea)
-
-  /* Add Format Page: torrent - add format; request - upload request */
-  globalapp.uploadArtistsShowMore({ hide: true })
 })

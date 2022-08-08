@@ -18,7 +18,6 @@ if ($FeaturedMovie === false) {
     $Cache->cache_value('album_of_the_month', $FeaturedMovie, 0);
 }
 if (is_number($FeaturedMovie['GroupID'])) {
-    $Artists = Artists::get_artist($FeaturedMovie['GroupID']);
 ?>
     <div class="SidebarItemPoster SidebarItem Box">
         <div class="SidebarItem-header Box-header">

@@ -53,14 +53,14 @@ if (empty($CategoryID)) {
     error(0);
 }
 
-if (empty($_POST['title'])) {
+if (empty($_POST['name'])) {
     $Err = t('server.requests.forgot_enter_title');
 } else {
-    $Title = trim($_POST['title']);
+    $Title = trim($_POST['name']);
 }
 
-if (!empty($_POST['subtitle'])) {
-    $Subtitle = trim($_POST['subtitle']);
+if (!empty($_POST['subname'])) {
+    $Subtitle = trim($_POST['subname']);
 }
 
 
@@ -79,7 +79,6 @@ if (!empty($_POST['imdb'])) {
         die("invalid imdb");
     }
 }
-
 if (empty($_POST['tags'])) {
     $Err = t('server.requests.forgot_enter_tags');
 } else {
@@ -117,78 +116,77 @@ if (empty($_POST['description'])) {
     $Description = trim($_POST['description']);
 }
 
-if ($CategoryName === 'Movies') {
-    if (empty($_POST['artists'])) {
-        $Err = t('server.requests.forgot_enter_artists');
-    } else {
-        $Artists = $_POST['artists'];
-        $ArtistIDs = $_POST['artist_ids'];
-        $ArtistsChineseName = $_POST['artists_chinese'];
-        $Importance = $_POST['importance'];
-    }
+if (empty($_POST['artist_ids'])) {
+    var_dump($_POST);
+    $Err = t('server.requests.forgot_enter_artists');
+} else {
+    $Artists = $_POST['artists'];
+    $ArtistIDs = $_POST['artist_ids'];
+    $ArtistsSubName = $_POST['artists_sub'];
+    $Importance = $_POST['importance'];
+}
 
-    if (!is_number($_POST['releasetype']) || !in_array($_POST['releasetype'], $ReleaseTypes)) {
-        $Err = t('server.requests.forgot_pick_release_type');
-    }
+if (!is_number($_POST['releasetype']) || !in_array($_POST['releasetype'], $ReleaseTypes)) {
+    $Err = t('server.requests.forgot_pick_release_type');
+}
 
-    $ReleaseType = $_POST['releasetype'];
+$ReleaseType = $_POST['releasetype'];
 
-    if (empty($_POST['all_codecs']) && count($_POST['codecs']) !== count($Codecs)) {
-        $CodecArray = $_POST['codecs'];
-        if (count($CodecArray) < 1) {
-            $Err = t('server.requests.require_one_codec');
-        }
-    } else {
-        $AllCodec = true;
+if (empty($_POST['all_codecs']) && count($_POST['codecs']) !== count($Codecs)) {
+    $CodecArray = $_POST['codecs'];
+    if (count($CodecArray) < 1) {
+        $Err = t('server.requests.require_one_codec');
     }
+} else {
+    $AllCodec = true;
+}
 
-    if (empty($_POST['all_sources']) && count($_POST['sources']) !== count($Sources)) {
-        $SourceArray = $_POST['sources'];
-        if (count($SourceArray) < 1) {
-            $Err = t('server.requests.require_one_source');
-        }
-    } else {
-        $AllSources = true;
+if (empty($_POST['all_sources']) && count($_POST['sources']) !== count($Sources)) {
+    $SourceArray = $_POST['sources'];
+    if (count($SourceArray) < 1) {
+        $Err = t('server.requests.require_one_source');
     }
+} else {
+    $AllSources = true;
+}
 
-    if (empty($_POST['all_containers']) && count($_POST['containers']) !== count($Containers)) {
-        $ContainerArray = $_POST['containers'];
-        if (count($ContainerArray) < 1) {
-            $Err = t('server.requests.require_one_container');
-        }
-    } else {
-        $AllContainer = true;
+if (empty($_POST['all_containers']) && count($_POST['containers']) !== count($Containers)) {
+    $ContainerArray = $_POST['containers'];
+    if (count($ContainerArray) < 1) {
+        $Err = t('server.requests.require_one_container');
     }
-    if (empty($_POST['all_resolutions']) && count($_POST['resolutions']) !== count($Resolutions)) {
-        $ResolutionArray = $_POST['resolutions'];
-        if (count($ResolutionArray) < 1) {
-            $Err = t('server.requests.require_one_resolution');
-        }
-    } else {
-        $AllResolution = true;
+} else {
+    $AllContainer = true;
+}
+if (empty($_POST['all_resolutions']) && count($_POST['resolutions']) !== count($Resolutions)) {
+    $ResolutionArray = $_POST['resolutions'];
+    if (count($ResolutionArray) < 1) {
+        $Err = t('server.requests.require_one_resolution');
     }
+} else {
+    $AllResolution = true;
+}
 
-    // GroupID
-    if (!empty($_POST['groupid'])) {
-        $GroupID = trim($_POST['groupid']);
-        if (preg_match('/^' . TORRENT_GROUP_REGEX . '/i', $GroupID, $Matches)) {
-            $GroupID = $Matches[2];
-        }
-        if (is_number($GroupID)) {
-            $DB->query("
+// GroupID
+if (!empty($_POST['group'])) {
+    $GroupID = trim($_POST['group']);
+    if (preg_match('/^' . TORRENT_GROUP_REGEX . '/i', $GroupID, $Matches)) {
+        $GroupID = $Matches[2];
+    }
+    if (is_number($GroupID)) {
+        $DB->query("
 				SELECT 1
 				FROM torrents_group
 				WHERE ID = '$GroupID'
 					AND CategoryID = 1");
-            if (!$DB->has_results()) {
-                $Err = t('server.requests.torrent_group_must_correspond_site');
-            }
-        } else {
+        if (!$DB->has_results()) {
             $Err = t('server.requests.torrent_group_must_correspond_site');
         }
     } else {
-        $GroupID = 0;
+        $Err = t('server.requests.torrent_group_must_correspond_site');
     }
+} else {
+    $GroupID = 0;
 }
 
 if (empty($_POST['year'])) {
@@ -200,30 +198,14 @@ if (empty($_POST['year'])) {
     }
 }
 
-//For refilling on error
-if ($CategoryName === 'Movies') {
-    $MainArtistCount = 0;
-    $ArtistNames = array();
-    $ArtistForm = array(
-        1 => array(),
-    );
-    for ($i = 0, $il = count($Artists); $i < $il; $i++) {
-        if (trim($Artists[$i]) !== '') {
-            if (!in_array($Artists[$i], $ArtistNames)) {
-                $ArtistForm[$Importance[$i]][] = array('imdbid' => trim($ArtistIDs[$i]), 'name' => trim($Artists[$i]), 'cname' => trim($ArtistsChineseName[$i]));
-                if (in_array($Importance[$i], array(1))) {
-                    $MainArtistCount++;
-                }
-                $ArtistNames[] = trim($Artists[$i]);
-            }
-        }
+$Director = [];
+for ($i = 0, $il = count($Artists); $i < $il; $i++) {
+    if (trim($ArtistIDs[$i]) !== '') {
+        $Director[] = array('IMDBID' => trim($ArtistIDs[$i]), 'Name' => trim($Artists[$i]), 'SubName' => trim($ArtistsSubName[$i]));
     }
-    if ($MainArtistCount < 1) {
-        $Err = t('server.requests.at_least_one_director');
-    }
-    if (!isset($ArtistNames[0])) {
-        unset($ArtistForm);
-    }
+}
+if (count($Director) < 1) {
+    $Err = t('server.requests.at_least_one_director');
 }
 
 if (!empty($Err)) {
@@ -235,78 +217,75 @@ if (!empty($Err)) {
 }
 
 //Databasify the input
-if ($CategoryName === 'Movies') {
-    if (empty($AllCodec)) {
-        foreach ($CodecArray as $Index => $MasterIndex) {
-            if (array_key_exists($Index, $Codecs)) {
-                $CodecArray[$Index] = $Codecs[$MasterIndex];
-            } else {
-                //Hax
-                error(0);
-            }
+if (empty($AllCodec)) {
+    foreach ($CodecArray as $Index => $MasterIndex) {
+        if (array_key_exists($Index, $Codecs)) {
+            $CodecArray[$Index] = $Codecs[$MasterIndex];
+        } else {
+            //Hax
+            error(0);
         }
-        $CodecList = implode('|', $CodecArray);
-    } else {
-        $CodecList = 'Any';
     }
+    $CodecList = implode('|', $CodecArray);
+} else {
+    $CodecList = 'Any';
+}
 
-    if (empty($AllSources)) {
-        foreach ($SourceArray as $Index => $MasterIndex) {
-            if (array_key_exists($Index, $Sources)) {
-                $SourceArray[$Index] = $Sources[$MasterIndex];
-            } else {
-                //Hax
-                error(0);
-            }
+if (empty($AllSources)) {
+    foreach ($SourceArray as $Index => $MasterIndex) {
+        if (array_key_exists($Index, $Sources)) {
+            $SourceArray[$Index] = $Sources[$MasterIndex];
+        } else {
+            //Hax
+            error(0);
         }
-        $SourceList = implode('|', $SourceArray);
-    } else {
-        $SourceList = 'Any';
     }
+    $SourceList = implode('|', $SourceArray);
+} else {
+    $SourceList = 'Any';
+}
 
-    if (empty($AllContainer)) {
-        foreach ($ContainerArray as $Index => $MasterIndex) {
-            if (array_key_exists($Index, $Containers)) {
-                $ContainerArray[$Index] = $Containers[$MasterIndex];
-            } else {
-                //Hax
-                error(0);
-            }
+if (empty($AllContainer)) {
+    foreach ($ContainerArray as $Index => $MasterIndex) {
+        if (array_key_exists($Index, $Containers)) {
+            $ContainerArray[$Index] = $Containers[$MasterIndex];
+        } else {
+            //Hax
+            error(0);
         }
-        $ContainerList = implode('|', $ContainerArray);
-    } else {
-        $ContainerList = 'Any';
     }
+    $ContainerList = implode('|', $ContainerArray);
+} else {
+    $ContainerList = 'Any';
+}
 
-    if (empty($AllResolution)) {
-        foreach ($ResolutionArray as $Index => $MasterIndex) {
-            if (array_key_exists($Index, $Resolutions)) {
-                $ResolutionArray[$Index] = $Resolutions[$MasterIndex];
-            } else {
-                //Hax
-                error(0);
-            }
+if (empty($AllResolution)) {
+    foreach ($ResolutionArray as $Index => $MasterIndex) {
+        if (array_key_exists($Index, $Resolutions)) {
+            $ResolutionArray[$Index] = $Resolutions[$MasterIndex];
+        } else {
+            //Hax
+            error(0);
         }
-        $ResolutionList = implode('|', $ResolutionArray);
-    } else {
-        $ResolutionList = 'Any';
     }
+    $ResolutionList = implode('|', $ResolutionArray);
+} else {
+    $ResolutionList = 'Any';
 }
 
 //Query time!
-if ($CategoryName === 'Movies') {
-    if ($NewRequest) {
-        $DB->query('
+if ($NewRequest) {
+    $DB->query('
 			INSERT INTO requests (
 				UserID, TimeAdded, LastVote, CategoryID, Title, Year, Image, Description, 
                 ReleaseType, CodecList, SourceList, ContainerList, ResolutionList, IMDBID, PurchasableAt, Subtitle, SourceTorrent, Visible, GroupID)
 			VALUES
 				(' . $LoggedUser['ID'] . ", '" . sqltime() . "', '" . sqltime() . "', $CategoryID, '" . db_string($Title) . "', $Year, '" . db_string($Image) . "', '" . db_string($Description) . "', " .
-            $ReleaseType . ", '$CodecList','$SourceList', '$ContainerList', '$ResolutionList', '$IMDBID', '" . db_string($PurchasableAt) . "', '" . db_string($Subtitle) . "', '" . db_string($SourceTorrent) . "', 1, " . $GroupID . ")");
+        $ReleaseType . ", '$CodecList','$SourceList', '$ContainerList', '$ResolutionList', '$IMDBID', '" . db_string($PurchasableAt) . "', '" . db_string($Subtitle) . "', '" . db_string($SourceTorrent) . "', 1, " . $GroupID . ")");
 
-        $RequestID = $DB->inserted_id();
-    } else {
-        $DB->query("
+    $RequestID = $DB->inserted_id();
+} else {
+    $DB->query("
 			UPDATE requests
 			SET CategoryID = $CategoryID,
 				Title = '" . db_string($Title) . "',
@@ -325,107 +304,64 @@ if ($CategoryName === 'Movies') {
 				GroupID = '$GroupID'
 			WHERE ID = $RequestID");
 
-        // We need to be able to delete artists / tags
-        $DB->query("
+    // We need to be able to delete artists / tags
+    $DB->query("
 			SELECT ArtistID
 			FROM requests_artists
 			WHERE RequestID = $RequestID");
-        $RequestArtists = $DB->to_array();
-        foreach ($RequestArtists as $RequestArtist) {
-            $Cache->delete_value("artists_requests_$RequestArtist");
-        }
-        $DB->query("
+    $RequestArtists = $DB->to_array();
+    foreach ($RequestArtists as $RequestArtist) {
+        $Cache->delete_value("artists_requests_$RequestArtist");
+    }
+    $DB->query("
 			DELETE FROM requests_artists
 			WHERE RequestID = $RequestID");
-        $Cache->delete_value("request_artists_$RequestID");
-    }
+    $Cache->delete_value("request_artists_$RequestID");
+}
 
-    if ($GroupID) {
-        $Cache->delete_value("requests_group_$GroupID");
-    }
+if ($GroupID) {
+    $Cache->delete_value("requests_group_$GroupID");
+}
 
-    /*
+/*
      * Multiple Artists!
      * For the multiple artists system, we have 3 steps:
      * 1. See if each artist given already exists and if it does, grab the ID.
      * 2. For each artist that didn't exist, create an artist.
      * 3. Create a row in the requests_artists table for each artist, based on the ID.
-     */
-
-
-    foreach ($ArtistForm as $Importance => $Artists) {
-        foreach ($Artists as $Num => $Artist) {
-            //1. See if each artist given already exists and if it does, grab the ID.
-            $DB->query("
-				SELECT
-					ArtistID,
-					AliasID,
-					Name,
-					Redirect
-				FROM artists_alias
-				WHERE Name = '" . db_string($Artist['name']) . "'");
-
-            while (list($ArtistID, $AliasID, $AliasName, $Redirect) = $DB->next_record(MYSQLI_NUM, false)) {
-                if (!strcasecmp($Artist['name'], $AliasName)) {
-                    if ($Redirect) {
-                        $AliasID = $Redirect;
-                    }
-                    $ArtistForm[$Importance][$Num] = array('id' => $ArtistID, 'aliasid' => $AliasID, 'name' => $AliasName);
-                    break;
-                }
-            }
-            if (!$ArtistID) {
-                //2. For each artist that didn't exist, create an artist.
-                $DB->query("
-					INSERT INTO artists_group (Name)
-					VALUES ('" . db_string($Artist['name']) . "')");
-                $ArtistID = $DB->inserted_id();
-
-                $ArtistID = $DB->inserted_id();
-
-                $ArtistDetail = $FullArtistDetails[$Artist['imdbid']];
-                if (empty($ArtistDetail)) {
-                    $ArtistDetail = MOVIE::get_default_artist($Artist['imdbid']);
-                }
-                $ArtistImage = $ArtistDetail['Image'];
-                $ArtistBody = $ArtistDetail['Description'];
-                $ArtistIMDBID = $Artist['imdbid'];
-                $ArtistCN = $Artist['cname'];
-                $DB->query("
-				    INSERT INTO wiki_artists
-				        (PageID, Body, Image, UserID, Summary, Time, IMDBID, ChineseName)
-					VALUES
-						('$ArtistID', '" . db_string($ArtistBody) . "', '$ArtistImage', '$UserID', 'Auto load from tmdb', '" . sqltime() . "', '$ArtistIMDBID', '$ArtistCN' )");
-                $RevisionID = $DB->inserted_id();
-                $DB->query("
-					UPDATE artists_group SET RevisionID = '$RevisionID' WHERE ArtistID = '$ArtistID'
-				");
-
-                $Cache->increment('stats_artist_count');
-
-                $DB->query("
-					INSERT INTO artists_alias (ArtistID, Name)
-					VALUES ($ArtistID, '" . db_string($Artist['name']) . "')");
-                $AliasID = $DB->inserted_id();
-
-                $ArtistForm[$Importance][$Num] = array('id' => $ArtistID, 'aliasid' => $AliasID, 'name' => $Artist['name']);
-            }
+*/
+$FullArtistDetails = MOVIE::get_artists($ArtistIDs, $IMDBID, 10);
+foreach ($Director as $Num => $Artist) {
+    //1. See if each artist given already exists and if it does, grab the ID.
+    $Artist['Name'] = html_entity_decode($Artist['Name'], ENT_QUOTES);
+    $Artist['SubName'] = html_entity_decode($Artist['SubName'], ENT_QUOTES);
+    $ArtistDetail = MOVIE::get_default_artist($Artist['IMDBID']);
+    if ($Artist['IMDBID']) {
+        $Detail = $FullArtistDetails[$Artist['IMDBID']];
+        if ($Detail) {
+            $ArtistDetail = $Detail;
         }
     }
 
+    $Artist['Image'] = $ArtistDetail['Image'];
+    $Artist['Description'] = $ArtistDetail['Description'];
+    $Artist['Birthday'] = $ArtistDetail['Birthday'];
+    $Artist['PlaceOfBirth'] = $ArtistDetail['PlaceOfBirth'];
+    $Artist = Artists::add_artist($Artist);
+    $Director[$Num] = $Artist;
+}
 
-    //3. Create a row in the requests_artists table for each artist, based on the ID.
-    foreach ($ArtistForm as $Importance => $Artists) {
-        foreach ($Artists as $Num => $Artist) {
-            $DB->query("
+
+//3. Create a row in the requests_artists table for each artist, based on the ID.
+foreach ($Director as $Num => $Artist) {
+    $Importance = Artists::Director;
+    $DB->query("
 				INSERT IGNORE INTO requests_artists
 					(RequestID, ArtistID, AliasID, Importance)
 				VALUES
-					($RequestID, " . $Artist['id'] . ', ' . $Artist['aliasid'] . ", '$Importance')");
-            // $Cache->increment('stats_album_count');
-            $Cache->delete_value('artists_requests_' . $Artist['id']);
-        }
-    }
+					($RequestID, " . $Artist['ArtistID'] . ', ' . $Artist['AliasID'] . ", '$Importance')");
+    // $Cache->increment('stats_album_count');
+    $Cache->delete_value('artists_requests_' . $Artist['id']);
 }
 $UserHeavyInfo = Users::user_heavy_info($LoggedUser['ID']);
 if ($UserHeavyInfo['RequestsAlerts']) {

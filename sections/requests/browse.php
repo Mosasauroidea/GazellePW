@@ -451,10 +451,6 @@ View::show_header($Title, '', 'PageRequestHome');
                                 <input class="Input" type="checkbox" id="toggle_source" onchange="globalapp.requestToggle('sources', 0);" <?= (!$Submitted || !empty($SourceArray) && count($SourceArray) === count($Sources) ? ' checked="checked"' : '') ?> />
                                 <label class="Checkbox-label" for="toggle_source">All</label>
                             </div>
-                            <div class="Checkbox">
-                                <input class="Input" type="checkbox" id="source_strict" name="source_strict" <?= (!empty($_GET['source_strict']) ? ' checked="checked"' : '') ?> />
-                                <label class="Checkbox-label" for="source_strict">Only specified</label>
-                            </div>
                             <?
                             foreach ($Sources as $Key => $Val) {
                             ?>
@@ -472,10 +468,6 @@ View::show_header($Title, '', 'PageRequestHome');
                                 <input class="Input" type="checkbox" id="toggle_codec" onchange="globalapp.requestToggle('codec', 0);" <?= (!$Submitted || !empty($CodecArray) && count($CodecArray) === count($Codecs) ? ' checked="checked"' : '') ?> />
                                 <label class="Checkbox-label" for="toggle_codec">All</label>
                             </div>
-                            <div class="Checkbox">
-                                <input class="Input" type="checkbox" id="codec_strict" name="codec_strict" <?= (!empty($_GET['codec_strict']) ? ' checked="checked"' : '') ?> />
-                                <label class="Checkbox-label" for="codec_strict">Only specified</label>
-                            </div>
                             <?
                             foreach ($Codecs as $Key => $Val) {
                             ?>
@@ -492,10 +484,6 @@ View::show_header($Title, '', 'PageRequestHome');
                             <div class="Checkbox">
                                 <input class="Input" type="checkbox" id="toggle_container" onchange="globalapp.requestToggle('container', 0);" <?= (!$Submitted || !empty($ContainerArray) && count($ContainerArray) === count($Containers) ? ' checked="checked"' : '') ?> />
                                 <label class="Checkbox-label" for="toggle_container">All</label>
-                            </div>
-                            <div class="Checkbox">
-                                <input class="Input" type="checkbox" id="container_strict" name="container_strict" <?= (!empty($_GET['container_strict']) ? ' checked="checked"' : '') ?> />
-                                <label class="Checkbox-label" for="container_strict">Only specified</label>
                             </div>
                             <?
                             foreach ($Containers as $Key => $Val) {
@@ -515,10 +503,6 @@ View::show_header($Title, '', 'PageRequestHome');
                             <div class="Checkbox">
                                 <input class="Input" type="checkbox" id="toggle_resolution" onchange="globalapp.requestToggle('resolution', 0);" <?= (!$Submitted || !empty($ResolutionArray) && count($ResolutionArray) === count($Resolutions) ? ' checked="checked"' : '') ?> />
                                 <label class="Checkbox-label" for="toggle_resolution">All</label>
-                            </div>
-                            <div class="Checkbox">
-                                <input class="Input" type="checkbox" id="resolution_strict" name="resolution_strict" <?= (!empty($_GET['resolution_strict']) ? ' checked="checked"' : '') ?> />
-                                <label class="Checkbox-label" for="resolution_strict">Only specified</label>
                             </div>
                             <?
                             foreach ($Resolutions as $Key => $Val) {

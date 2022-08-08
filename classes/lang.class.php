@@ -20,6 +20,10 @@ class Lang {
         }
     }
 
+    public static function is_default() {
+        return Lang::getUserLang(G::$LoggedUser['ID']) == self::DEFAULT_LANG;
+    }
+
     public static function get($Key, $Options = []) {
         $Options = array_merge([
             'DefaultValue' => null,
@@ -27,8 +31,19 @@ class Lang {
             'Values' => [],
             'Count' => null,
         ], $Options);
-        $DefaultValue = $Options['DefaultValue'] ?: $Key;
         $Lang = self::getLang($Options['Lang']);
+        $Value = self::_get($Key, $Lang, $Options);
+        if ($Value === false) {
+            $Value = self::_get($Key, self::DEFAULT_LANG, $Options);
+        }
+        if ($Value == false) {
+            $Value = $Key;
+        }
+        return $Value;
+    }
+
+    private static function _get($Key, $Lang, $Options = []) {
+        $DefaultValue = $Options['DefaultValue'] ?: $Key;
         $Values = $Options['Values'];
         $Count = $Options['Count'];
         $Locale = self::$Locales[$Lang];
@@ -44,9 +59,7 @@ class Lang {
         if (is_string($Value)) {
             $Value = sprintf($Value, ...$Values);
         }
-        if ($Value === false) {
-            $Value = $Key;
-        }
+
         return $Value;
     }
 

@@ -29,12 +29,10 @@ class DEBUG {
         if ($Errors > MAX_ERRORS && empty(CONFIG['ERROR_EXCEPTION'])) {
             $Reason[] = $Errors . ' PHP errors';
         }
-        /*
         $Queries = count($this->get_queries());
         if ($Queries > MAX_QUERIES && empty(CONFIG['QUERY_EXCEPTION'])) {
-            $Reason[] = $Queries.' Queries';
+            $Reason[] = $Queries . ' Queries';
         }
-        */
         $Ram = memory_get_usage(true);
         if ($Ram > MAX_MEMORY && empty(CONFIG['MEMORY_EXCEPTION'])) {
             $Reason[] = Format::get_size($Ram) . ' RAM used';

@@ -965,7 +965,7 @@ class GroupTorrentTableView extends TorrentTableView {
                     <div class="TableTorrent-movieInfoContent">
                         <?= $this->render_group_name($Group); ?>
                         <?= $this->render_movie_info($Group) ?>
-                        <div class="TableTorrent-movieInfoTags"><?= $TorrentTags->format('torrents.php?action=basic&amp;taglist=', '', 'TableTorrent-movieInfoTagsItem') ?></div>
+                        <div class="TableTorrent-movieInfoTags"><i><?= $TorrentTags->format('torrents.php?action=basic&amp;taglist=', '', 'TableTorrent-movieInfoTagsItem') ?></i></div>
                     </div>
                 </div>
             </td>
@@ -1208,7 +1208,7 @@ class UngroupTorrentTableView  extends TorrentTableView {
                         <?= $this->render_group_name($GroupInfo, true); ?>
                         <?= $this->render_movie_info($GroupInfo) ?>
                         <div class="TableTorrent-movieInfoTags">
-                            <?= $TorrentTags->format("torrents.php?action=basic&amp;taglist=", '', 'TableTorrent-movieInfoTagsItem') ?>
+                            <i><?= $TorrentTags->format("torrents.php?action=basic&amp;taglist=", '', 'TableTorrent-movieInfoTagsItem') ?></i>
                         </div>
                     </div>
                 </div>

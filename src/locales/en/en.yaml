@@ -16,6 +16,8 @@ client.common.check_all: |-
   Check all
 client.common.cinematographer: |-
   Cinematographer
+client.common.clear: |-
+  Clear
 client.common.collapse_this_group: |-
   Collapse this group. Hold [Command] <em>(Mac)</em> or [Ctrl] <em>(PC)</em> while clicking to collapse all groups {{section}}
 client.common.composer: |-
@@ -32,8 +34,6 @@ client.common.expand_this_group: |-
   Expand this group. Hold [Command] <em>(Mac)</em> or [Ctrl] <em>(PC)</em> while clicking to expand all groups {{section}}
 client.common.hide: |-
   Hide
-client.common.clear: |-
-  Clear
 client.common.in_this_release_type: |-
   in this release type.
 client.common.like: |-
@@ -102,6 +102,10 @@ client.upload.desc_img_3_png: |-
   At least three PNG screenshots are required, see <a href="wiki.php?action=article&id=51" target="_blank">help</a>.
 client.upload.desc_img_hosts: |-
   Please use image hosts that are recommended by Upload Rule <a href="rules.php?p=upload#2.2.1" target="_blank">2.2.1</a>.
+client.upload.englisht_name: |-
+  English name
+client.upload.imdb: |-
+  IMDb
 client.upload.imdb_link_required: |-
   IMDb link or ID with a correct format is required!
 client.upload.mediainfo_complete_name_required: |-
@@ -128,6 +132,8 @@ client.upload.resolution_required: |-
   Please select a resolution.
 client.upload.source_required: |-
   Please select the source. If you are unsure then select Other and enter Unknown.
+client.upload.sub_name: |-
+  Chinese name
 client.upload.subtitles_required: |-
   Please specify the subtitles or select "No Subtitles" if there are not any!
 client.upload.subtitles_with_mediainfo: |-
@@ -324,8 +330,6 @@ server.artist.cannot_redirect: |-
   无法重定向至一个不存在的艺术家别名。
 server.artist.change_artist_id: |-
   Change artist ID
-server.artist.chinese_name: |-
-  Chinese name
 server.artist.confirm_merge: |-
   Confirm Merge
 server.artist.confirm_merge_body: |-
@@ -412,6 +416,8 @@ server.artist.similarartist_note: |-
   None found
 server.artist.statistics: |-
   Statistics
+server.artist.sub_name: |-
+  Chinese name
 server.artist.switch_to_cloud: |-
   Switch to cloud
 server.artist.switch_to_map: |-
@@ -1009,6 +1015,8 @@ server.comments.you_ve: |-
   you've
 server.comments.your_collages: |-
   your collages
+server.common.actions: |-
+  Actions
 server.common.add: |-
   Add
 server.common.add_bookmark: |-
@@ -2543,130 +2551,6 @@ server.reports.you_cannot_start_a_conversation_with_yourself: |-
   You cannot start a conversation with yourself!
 server.reports.you_reported_sth_for_the_reason: |-
   You reported %s for the reason
-server.reportsv2.types.master.dupe.report_messages.1: |-
-  Please specify a link to the original torrent.
-server.reportsv2.types.master.dupe.title: |-
-  Dupe
-server.reportsv2.types.master.dupe.resolve_options.pm: |-
-  [rule]h2.2[/rule]. Your torrent was reported because it was a duplicate of another torrent.
-server.reportsv2.types.master.banned.report_messages.1: |-
-  Please specify exactly which entry on the Do Not Upload list this is violating.
-server.reportsv2.types.master.banned.title: |-
-  Specifically Banned
-server.reportsv2.types.master.banned.resolve_options.pm: |-
-  [rule]h1.2[/rule]. You have uploaded material that is currently forbidden. Items on the Do Not Upload (DNU) list (at the top of the [url=upload.php]upload page[/url]) and in the [url=rules.php?p=upload#1.2]Specifically Banned[/url] portion of the uploading rules cannot be uploaded to the site. Do not upload them unless your torrent meets a condition specified in the comments of the DNU list.
-  Your torrent was reported because it contained material from the DNU list or from the Specifically Banned section of the rules.
-server.reportsv2.types.master.urgent.report_messages.1: |-
-  This report type is only for very urgent reports, usually for personal information being found within a torrent.
-server.reportsv2.types.master.urgent.report_messages.2: |-
-  Abusing the "Urgent" report type could result in a warning or worse.
-server.reportsv2.types.master.urgent.report_messages.3: |-
-  As this report type gives the staff absolutely no information about the problem, please be as clear as possible in your comments about what the problem is.
-server.reportsv2.types.master.urgent.title: |-
-  Urgent
-server.reportsv2.types.master.other.report_messages.1: |-
-  Please include as much information as possible to verify the report.
-server.reportsv2.types.master.other.title: |-
-  Other
-server.reportsv2.types.master.trump.report_messages.1: |-
-  Please list the specific reason(s) the newer torrent trumps the older one.
-server.reportsv2.types.master.trump.report_messages.2: |-
-  Please make sure you are reporting the torrent <strong class="u-colorWarning">which has been trumped</strong> and should be deleted, not the torrent that you think should remain on site.
-server.reportsv2.types.master.trump.title: |-
-  Trump
-server.reportsv2.types.master.trump.resolve_options.pm: |-
-  [rule]h2.2[/rule]. Your torrent was reported because it was trumped by another torrent.
-server.reportsv2.types.movie.transcode.report_messages.1: |-
-  Please tell us how you checked the video and the audio tracks and confirm that they are transcodes.
-server.reportsv2.types.movie.transcode.report_messages.2: |-
-  Please provide at least 1 picture as evidence if possible.
-server.reportsv2.types.movie.transcode.title: |-
-  Transcode
-server.reportsv2.types.movie.transcode.resolve_options.pm: |-
-  [rule]5.4.21[/rule]. Your torrent was reported, because it contains a transcoded audio track.
-server.reportsv2.types.movie.low.report_messages.1: |-
-  Please provide us PNG original screenshots.
-server.reportsv2.types.movie.low.title: |-
-  Inferior Source
-server.reportsv2.types.movie.low.resolve_options.pm: |-
-  [rule]5.4.10[/rule]、[rule]5.4.11[/rule]、[rule]5.4.21[/rule]、[rule]5.4.24[/rule]。Encodes from inferior, mistaken, low definition sources are trumpable.
-server.reportsv2.types.movie.names_bad.report_messages.1: |-
-  Please list the file/folder name and what is wrong with it.
-server.reportsv2.types.movie.names_bad.report_messages.2: |-
-  Ideally you will replace this torrent with one with fixed file/folder names and report this with the reason "Bad File/Folder Name Trump".
-server.reportsv2.types.movie.names_bad.title: |-
-  Bad File/Folder Names
-server.reportsv2.types.movie.names_bad.resolve_options.pm: |-
-  [rule]2.1.1[/rule]. File/Folder name should use the original title or official English title of the movie. (e.g. the English title on the poster, which is prior to IMDb.)
-                
-  [rule]2.1.2[/rule]. Renaming group releases (by P2P groups or Scene) is not allowed unless they disagree with rule [rule]2.1.1[/rule] or our file/folder name requirements.
-
-  [rule]2.1.4[/rule]. DVD/BD structures should not be modified, only the top-level folder can be renamed.
-                
-  Your torrent has been marked as trumpable because of the bad file/folder name. You may fix this by yourself and re-upload a new torrent. Then, you need to report the old one by \"Trump\" with the permalink of new torrent.
-
-server.reportsv2.types.movie.video_track_bad.report_messages.1: |-
-  Please provide us PNG original screenshots and specify the problems of the video track.
-server.reportsv2.types.movie.video_track_bad.title: |-
-  Bad Video Track
-server.reportsv2.types.movie.video_track_bad.resolve_options.pm: |-
-  [rule]5.4.1[/rule], [rule]5.4.2[/rule]. This upload has an aspect ratio different than the original, theatrically presented movie. Once a release with proper aspect ratio is available, no non-OAR upload may coexist in the same resolution group.
-                
-  [rule]5.4.5[/rule], [rule]5.4.6[/rule]. This upload has been improperly deinterlaced or plays at a framerate different than the native, proper framerate.
-
-  [rule]5.4.18[/rule]. This upload was significantly overcropped or undercropped.
-
-  [rule]5.4.22[/rule]. This upload is watermarked in a significant way.
-                
-  Your torrent has been marked as "Bad Video Track" and trumpable.
-server.reportsv2.types.movie.audio_track_bad.report_messages.1: |-
-  Please specify the problems of the audio track.
-server.reportsv2.types.movie.audio_track_bad.title: |-
-  Bad Audio Track
-server.reportsv2.types.movie.audio_track_bad.resolve_options.pm: |-
-  [rule]5.4.3[/rule]. The video or audio bitrate of this upload is too high.
-
-  [rule]5.4.4[/rule]. This upload includes superfluous audio tracks such as non-English dubs, or redundant versions of the same track.
-                
-  [rule]5.4.16[/rule]. Non-Chinese Language Dub: only for CN Quality Slots. This upload includes neither the original audio nor an Chinese dub, only a non-Chinese dub. Non-English Language Dub: only for EN Quality Slots. This upload includes neither the original audio nor an English dub, only a non-English dub.
-                
-  [rule]5.4.17[/rule]. Audio contained with this upload is usable, but not properly synchronized.
-                
-  Your torrent has been marked as "Bad Audio Track" and trumpable.
-server.reportsv2.types.movie.subtitle_track_bad.report_messages.1: |-
-  Please specify the problems of the subtitle track.
-server.reportsv2.types.movie.subtitle_track_bad.title: |-
-  Bad Subtitle Track
-server.reportsv2.types.movie.subtitle_track_bad.resolve_options.pm: |-
-  [rule]5.4.7[/rule]. Subtitles contained with this upload are usable, but not properly synchronized.
-                
-  [rule]5.4.14[/rule]. Only for EN Quality Slots. This upload of a non-English movie does not contain English subtitles (internal or external).
-
-  [rule]5.4.15[/rule]. Only for EN Quality Slots. This upload does not include separate English subtitles for significant non-English dialogue.
-
-  [rule]5.4.19[/rule]. Subtitles included with this upload are poor quality and not an accurate translation of the movie.
-
-  [rule]5.4.20[/rule]. Subtitles have been hardcoded in the video track of this upload. Hardcoded forced subtitles are not targeted by this mark.
-                
-  Your torrent has been marked as "Bad Subtitle Track" and trumpable.
-server.reportsv2.types.movie.torrent_description_bad.report_messages.1: |-
-  Please specify the problems of the torrent description.
-server.reportsv2.types.movie.torrent_description_bad.title: |-
-  Bad Torrent Description
-server.reportsv2.types.movie.torrent_description_bad.resolve_options.pm: |-
-  [rule]2.2[/rule]. The torrent description doesn't meet the requirement of the rules. It may be the MediaInfo mistakes or wrong screenshots.
-server.reportsv2.types.movie.format.report_messages.1: |-
-  Any torrent out of allow specifications may use this type. e.g. SDR x265 1080p Encode、RMVB 720p Encode etc..
-server.reportsv2.types.movie.format.report_messages.2: |-
-  Please specify whether the container or the resolution is not right.
-server.reportsv2.types.movie.format.title: |-
-  Improper Specifications
-server.reportsv2.types.movie.format.resolve_options.pm: |-
-  [rule]5.4.8[/rule]. This upload does not conform to our preferred formats.
-                
-  [rule]5.4.9[/rule]. This upload does not conform to our preferred resolutions.
-                
-  Your torrent was reported, because it used the format or the resolution that we do not prefer.
 server.reportsv2.a_torrent_with_that_id_does_not_exist: |-
   A torrent with that ID doesn't exist!
 server.reportsv2.all_new_reports_for_the_chosen_type: |-
@@ -2892,6 +2776,88 @@ server.reportsv2.tracks_should_be_given_in_a_space_separated_list_of_numbers_wit
   Tracks should be given in a space-separated list of numbers with no other characters.
 server.reportsv2.type: |-
   Type
+server.reportsv2.types.master.banned.report_messages.1: |-
+  Please specify exactly which entry on the Do Not Upload list this is violating.
+server.reportsv2.types.master.banned.resolve_options.pm: |-
+  [rule]h1.2[/rule]. You have uploaded material that is currently forbidden. Items on the Do Not Upload (DNU) list (at the top of the [url=upload.php]upload page[/url]) and in the [url=rules.php?p=upload#1.2]Specifically Banned[/url] portion of the uploading rules cannot be uploaded to the site. Do not upload them unless your torrent meets a condition specified in the comments of the DNU list.
+  Your torrent was reported because it contained material from the DNU list or from the Specifically Banned section of the rules.
+server.reportsv2.types.master.banned.title: |-
+  Specifically Banned
+server.reportsv2.types.master.dupe.report_messages.1: |-
+  Please specify a link to the original torrent.
+server.reportsv2.types.master.dupe.resolve_options.pm: |-
+  [rule]h2.2[/rule]. Your torrent was reported because it was a duplicate of another torrent.
+server.reportsv2.types.master.dupe.title: |-
+  Dupe
+server.reportsv2.types.master.other.report_messages.1: |-
+  Please include as much information as possible to verify the report.
+server.reportsv2.types.master.other.title: |-
+  Other
+server.reportsv2.types.master.trump.report_messages.1: |-
+  Please list the specific reason(s) the newer torrent trumps the older one.
+server.reportsv2.types.master.trump.report_messages.2: |-
+  Please make sure you are reporting the torrent <strong class="u-colorWarning">which has been trumped</strong> and should be deleted, not the torrent that you think should remain on site.
+server.reportsv2.types.master.trump.resolve_options.pm: |-
+  [rule]h2.2[/rule]. Your torrent was reported because it was trumped by another torrent.
+server.reportsv2.types.master.trump.title: |-
+  Trump
+server.reportsv2.types.master.urgent.report_messages.1: |-
+  This report type is only for very urgent reports, usually for personal information being found within a torrent.
+server.reportsv2.types.master.urgent.report_messages.2: |-
+  Abusing the "Urgent" report type could result in a warning or worse.
+server.reportsv2.types.master.urgent.report_messages.3: |-
+  As this report type gives the staff absolutely no information about the problem, please be as clear as possible in your comments about what the problem is.
+server.reportsv2.types.master.urgent.title: |-
+  Urgent
+server.reportsv2.types.movie.audio_track_bad.report_messages.1: |-
+  Please specify the problems of the audio track.
+server.reportsv2.types.movie.audio_track_bad.resolve_options.pm: "[rule]5.4.3[/rule]. The video or audio bitrate of this upload is too high.\n\n[rule]5.4.4[/rule]. This upload includes superfluous audio tracks such as non-English dubs, or redundant versions of the same track.\n              \n[rule]5.4.16[/rule]. Non-Chinese Language Dub: only for CN Quality Slots. This upload includes neither the original audio nor an Chinese dub, only a non-Chinese dub. Non-English Language Dub: only for EN Quality Slots. This upload includes neither the original audio nor an English dub, only a non-English dub.\n              \n[rule]5.4.17[/rule]. Audio contained with this upload is usable, but not properly synchronized.\n              \nYour torrent has been marked as \"Bad Audio Track\" and trumpable."
+server.reportsv2.types.movie.audio_track_bad.title: |-
+  Bad Audio Track
+server.reportsv2.types.movie.format.report_messages.1: |-
+  Any torrent out of allow specifications may use this type. e.g. SDR x265 1080p Encode、RMVB 720p Encode etc..
+server.reportsv2.types.movie.format.report_messages.2: |-
+  Please specify whether the container or the resolution is not right.
+server.reportsv2.types.movie.format.resolve_options.pm: "[rule]5.4.8[/rule]. This upload does not conform to our preferred formats.\n              \n[rule]5.4.9[/rule]. This upload does not conform to our preferred resolutions.\n              \nYour torrent was reported, because it used the format or the resolution that we do not prefer."
+server.reportsv2.types.movie.format.title: |-
+  Improper Specifications
+server.reportsv2.types.movie.low.report_messages.1: |-
+  Please provide us PNG original screenshots.
+server.reportsv2.types.movie.low.resolve_options.pm: |-
+  [rule]5.4.10[/rule]、[rule]5.4.11[/rule]、[rule]5.4.21[/rule]、[rule]5.4.24[/rule]。Encodes from inferior, mistaken, low definition sources are trumpable.
+server.reportsv2.types.movie.low.title: |-
+  Inferior Source
+server.reportsv2.types.movie.names_bad.report_messages.1: |-
+  Please list the file/folder name and what is wrong with it.
+server.reportsv2.types.movie.names_bad.report_messages.2: |-
+  Ideally you will replace this torrent with one with fixed file/folder names and report this with the reason "Bad File/Folder Name Trump".
+server.reportsv2.types.movie.names_bad.resolve_options.pm: "[rule]2.1.1[/rule]. File/Folder name should use the original title or official English title of the movie. (e.g. the English title on the poster, which is prior to IMDb.)\n              \n[rule]2.1.2[/rule]. Renaming group releases (by P2P groups or Scene) is not allowed unless they disagree with rule [rule]2.1.1[/rule] or our file/folder name requirements.\n\n[rule]2.1.4[/rule]. DVD/BD structures should not be modified, only the top-level folder can be renamed.\n              \nYour torrent has been marked as trumpable because of the bad file/folder name. You may fix this by yourself and re-upload a new torrent. Then, you need to report the old one by \\\"Trump\\\" with the permalink of new torrent."
+server.reportsv2.types.movie.names_bad.title: |-
+  Bad File/Folder Names
+server.reportsv2.types.movie.subtitle_track_bad.report_messages.1: |-
+  Please specify the problems of the subtitle track.
+server.reportsv2.types.movie.subtitle_track_bad.resolve_options.pm: "[rule]5.4.7[/rule]. Subtitles contained with this upload are usable, but not properly synchronized.\n              \n[rule]5.4.14[/rule]. Only for EN Quality Slots. This upload of a non-English movie does not contain English subtitles (internal or external).\n\n[rule]5.4.15[/rule]. Only for EN Quality Slots. This upload does not include separate English subtitles for significant non-English dialogue.\n\n[rule]5.4.19[/rule]. Subtitles included with this upload are poor quality and not an accurate translation of the movie.\n\n[rule]5.4.20[/rule]. Subtitles have been hardcoded in the video track of this upload. Hardcoded forced subtitles are not targeted by this mark.\n              \nYour torrent has been marked as \"Bad Subtitle Track\" and trumpable."
+server.reportsv2.types.movie.subtitle_track_bad.title: |-
+  Bad Subtitle Track
+server.reportsv2.types.movie.torrent_description_bad.report_messages.1: |-
+  Please specify the problems of the torrent description.
+server.reportsv2.types.movie.torrent_description_bad.resolve_options.pm: |-
+  [rule]2.2[/rule]. The torrent description doesn't meet the requirement of the rules. It may be the MediaInfo mistakes or wrong screenshots.
+server.reportsv2.types.movie.torrent_description_bad.title: |-
+  Bad Torrent Description
+server.reportsv2.types.movie.transcode.report_messages.1: |-
+  Please tell us how you checked the video and the audio tracks and confirm that they are transcodes.
+server.reportsv2.types.movie.transcode.report_messages.2: |-
+  Please provide at least 1 picture as evidence if possible.
+server.reportsv2.types.movie.transcode.resolve_options.pm: |-
+  [rule]5.4.21[/rule]. Your torrent was reported, because it contains a transcoded audio track.
+server.reportsv2.types.movie.transcode.title: |-
+  Transcode
+server.reportsv2.types.movie.video_track_bad.report_messages.1: |-
+  Please provide us PNG original screenshots and specify the problems of the video track.
+server.reportsv2.types.movie.video_track_bad.resolve_options.pm: "[rule]5.4.1[/rule], [rule]5.4.2[/rule]. This upload has an aspect ratio different than the original, theatrically presented movie. Once a release with proper aspect ratio is available, no non-OAR upload may coexist in the same resolution group.\n              \n[rule]5.4.5[/rule], [rule]5.4.6[/rule]. This upload has been improperly deinterlaced or plays at a framerate different than the native, proper framerate.\n\n[rule]5.4.18[/rule]. This upload was significantly overcropped or undercropped.\n\n[rule]5.4.22[/rule]. This upload is watermarked in a significant way.\n              \nYour torrent has been marked as \"Bad Video Track\" and trumpable."
+server.reportsv2.types.movie.video_track_bad.title: |-
+  Bad Video Track
 server.reportsv2.unclaim: |-
   Unclaim
 server.reportsv2.unclaim_all: |-
@@ -2958,6 +2924,10 @@ server.requests.associated_with_the_above_torrent_group: |-
   &nbsp;associated with the above torrent group.
 server.requests.at_least_one_director: |-
   Please enter at least one director.
+server.requests.auto_fill_note: |-
+  Auto fill with IMDb or torrent group link.
+server.requests.basic_info: |-
+  Basic info
 server.requests.bookmarked_requests: |-
   Bookmarked requests
 server.requests.bookmarks: |-
@@ -2989,7 +2959,7 @@ server.requests.delete_request_warning: |-
 server.requests.description: |-
   Description
 server.requests.description_note: |-
-  <b>Please describe your request in detail.</b> Example 1: Priority CD 100% log > Web 16bit lossless> Web 24bit lossless; Example 2: Web release needs clear lineage information.
+  <b>Please describe your request in detail.</b> Example 1: Priority CD 100%% log > Web 16bit lossless> Web 24bit lossless; Example 2: Web release needs clear lineage information.
   <br>If you do not have any extra requirement, please type "No extra information".
 server.requests.entered_bounty_not_number: |-
   Your entered bounty is not a number.
@@ -3047,6 +3017,10 @@ server.requests.last_voted: |-
   Last voted
 server.requests.lastvote: |-
   Last vote
+server.requests.link: |-
+  Link
+server.requests.link_empty_warning: |-
+  If there are neither IMDb link nor torrent group link, please check the box.
 server.requests.link_not_valid: |-
   Your link didn't seem to be a valid torrent link.
 server.requests.min_bounty: |-
@@ -3063,6 +3037,8 @@ server.requests.new_request: |-
   New request
 server.requests.new_rules: |-
   Please make sure your request follows <a href='rules.php?p=requests'>the request rules</a>!
+server.requests.no_link: |-
+  No link
 server.requests.no_such_user_to_fill: |-
   No such user to fill for!
 server.requests.of_bounty_your_new_stats: |-
@@ -3077,6 +3053,8 @@ server.requests.purchasable_at: |-
   Purchasable at
 server.requests.purchasable_at_placeholder: |-
   Optional link to a site where the movie can be purchased right now (no pre-orders)
+server.requests.quick_vote: |-
+  Quick Vote
 server.requests.ratio: |-
   Radio
 server.requests.reason: |-
@@ -3159,8 +3137,6 @@ server.requests.view_request: |-
   View request
 server.requests.vote_requests: |-
   Requests I've voted on
-server.requests.quick_vote: |-
-  Quick Vote
 server.requests.will_be: |-
   will be
 server.requests.year: |-
@@ -3532,12 +3508,6 @@ server.time.y: |-
   year
 server.time.ys: |-
   years
-server.tools.25_percent_off: |-
-  -25%
-server.tools.50_percent_off: |-
-  -50%
-server.tools.75_percent_off: |-
-  -75%
 server.tools.Bonus: |-
   Bonus
 server.tools.about_rendering: |-
@@ -3549,10 +3519,6 @@ server.tools.above: |-
   Above
 server.tools.access: |-
   Access
-server.tools.action: |-
-  Action
-server.tools.actions: |-
-  Actions
 server.tools.activity: |-
   Activity
 server.tools.add: |-
@@ -3784,7 +3750,7 @@ server.tools.cannot_merge_tag_with_itself: |-
 server.tools.cas_update_success: |-
   CAS/Update (Success)
 server.tools.cas_update_success_title_1: |-
-  More than 30% of the issued CAS commands were unnecessarily wasting time and resources.
+  More than 30%% of the issued CAS commands were unnecessarily wasting time and resources.
 server.tools.cas_update_success_title_2: |-
   Disable CAS with the -C parameter and save resources since it is not used.
 server.tools.cas_updates: |-
@@ -3794,7 +3760,7 @@ server.tools.cashe_current_index: |-
 server.tools.cashe_storage: |-
   Cache Storage
 server.tools.cashe_storage_title: |-
-  Evictions begin when storage exceeds 85%
+  Evictions begin when storage exceeds 85%%
 server.tools.cashe_total_index: |-
   Cache Total Index
 server.tools.category: |-
@@ -3908,7 +3874,7 @@ server.tools.delete_failed: |-
 server.tools.delete_success: |-
   Deletes (Success)
 server.tools.delete_success_title: |-
-  More than 30% of the issued delete commands were unnecessary wasting time and resources.
+  More than 30%% of the issued delete commands were unnecessary wasting time and resources.
 server.tools.deleted_on: |-
   Deleted on
 server.tools.deletes: |-
@@ -4031,8 +3997,6 @@ server.tools.forum_management: |-
   Forum Management
 server.tools.forum_manager: |-
   Forum manager
-server.tools.free_leech: |-
-  Free leech
 server.tools.gamble: |-
   Gamble
 server.tools.gamble_title: |-
@@ -4285,8 +4249,6 @@ server.tools.navigation_manager: |-
   Navigation manager
 server.tools.net_growth: |-
   Net Growth
-server.tools.neutral_leech: |-
-  Neutral leech
 server.tools.new_donations_from: |-
   New donations from %s
 server.tools.new_official_tag: |-
@@ -5058,8 +5020,6 @@ server.torrents.checked_explanation: |-
   &nbsp;checked (this icon is only used to tell you if this torrent was checked, it's none of the business of the quality. Read wiki for more information)
 server.torrents.chi: |-
   chi
-server.torrents.chinese_title: |-
-  Chinese title
 server.torrents.cinematographer: |-
   Cinematographer
 server.torrents.clear_all_old: |-
@@ -5337,11 +5297,11 @@ server.torrents.non_wiki_torrent_group_editing: |-
 server.torrents.nothing_found: |-
   Nothing found!
 server.torrents.off25: |-
-  -25%
+  -25%%
 server.torrents.off50: |-
-  -50%
+  -50%%
 server.torrents.off75: |-
-  -75%
+  -75%%
 server.torrents.only_hnr: |-
   Only H&R
 server.torrents.only_shows_free_torrents: |-
@@ -5440,7 +5400,7 @@ server.torrents.resolve: |-
 server.torrents.retention_slot: |-
   Retention Slot
 server.torrents.retention_slot_requirements: |-
-  Should be smaller than 80% of the Quality Slot torrent. The video quality should be not bad.
+  Should be smaller than 80%% of the Quality Slot torrent. The video quality should be not bad.
 server.torrents.retention_type_slot: |-
   Retention type slot (including Retention & Feature)
 server.torrents.revert: |-
@@ -5545,6 +5505,8 @@ server.torrents.space_to_space: |-
   &nbsp;to&nbsp;
 server.torrents.split_off_into_new_group: |-
   Split Off into New Group
+server.torrents.sub_title: |-
+  Chinese title
 server.torrents.subscribe: |-
   Subscribe
 server.torrents.successfully_sent_re_seed_request: |-
@@ -5777,12 +5739,8 @@ server.upload.chinese_movie_synopsis: |-
   Chinese Synopsis
 server.upload.chinese_movie_synopsis_note: |-
   Please add English synopsis if you didn't find a Chinese one.
-server.upload.chinese_name: |-
-  Chinese name
 server.upload.chinese_simplified: |-
   Chinese (Simplified)
-server.upload.chinese_title: |-
-  Chinese title
 server.upload.chinese_traditional: |-
   Chinese (Traditional)
 server.upload.cinematographer: |-
@@ -5813,6 +5771,8 @@ server.upload.english: |-
   English
 server.upload.english_movie_synopsis: |-
   English Synopsis
+server.upload.english_name: |-
+  English name
 server.upload.enter_at_least_one_artist: |-
   Please enter at least one main artist
 server.upload.estonian: |-
@@ -6021,6 +5981,10 @@ server.upload.special_effects_subtitles_label: |-
   Special effects subtitles
 server.upload.staff_note: |-
   Staff note
+server.upload.sub_name: |-
+  Chinese name
+server.upload.sub_title: |-
+  Chinese title
 server.upload.swedish: |-
   Swedish
 server.upload.tags: |-

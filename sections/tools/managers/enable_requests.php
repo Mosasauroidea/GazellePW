@@ -4,7 +4,7 @@ if (!check_perms('users_mod')) {
     error(403);
 }
 
-if (!FEATURE_EMAIL_REENABLE) {
+if (!CONFIG['FEATURE_EMAIL_REENABLE']) {
     // This feature is disabled
     header("Location: tools.php");
     die();

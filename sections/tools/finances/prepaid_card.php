@@ -29,7 +29,7 @@ View::show_header($Title, 'PageToolPrepaidCard');
                 <td class="Table-cell"><?= t('server.donate.card_num') ?></td>
                 <td class="Table-cell"><?= t('server.donate.card_secret') ?></td>
                 <td class="Table-cell"><?= t('server.donate.face_value') ?></td>
-                <td class="Table-cell"><?= t('server.tools.action') ?></td>
+                <td class="Table-cell"><?= t('server.common.actions') ?></td>
             </tr>
             <?
             $Row = 'a';

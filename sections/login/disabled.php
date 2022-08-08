@@ -14,7 +14,7 @@ if ((empty($_POST['submit']) || empty($_POST['username'])) && !isset($Output)) {
 ?>
     <p class="u-colorWarning">
         <?= t('server.login.disabled_note1') ?>
-        <? if (FEATURE_EMAIL_REENABLE) { ?>
+        <? if (CONFIG['FEATURE_EMAIL_REENABLE']) { ?>
             <?= t('server.login.disabled_note2') ?>
     <form action="" method="POST">
         <input class="Input" type="email" placeholder="<?= t('server.login.email_address_placeholder') ?>" name="email" required />

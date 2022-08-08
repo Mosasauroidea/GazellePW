@@ -36,16 +36,16 @@ if (!empty($_GET['revisionid'])) { // if they're viewing an old revision
 }
 
 if ($Data) {
-    list($K, list($Name, $Image, $Body, $IMDBID, $ChineseName, $Birthday, $PlaceOfBirth, $NumSimilar, $SimilarArray,,,)) = each($Data);
+    list($K, list($Name, $Image, $Body, $IMDBID, $SubName, $Birthday, $PlaceOfBirth, $NumSimilar, $SimilarArray,,,)) = each($Data);
 } else {
     if ($RevisionID) {
         $sql = "
 			SELECT
-				a.Name,
+				wiki.Name,
 				wiki.Image,
 				wiki.body,
 				wiki.IMDBID,
-                wiki.ChineseName,
+                wiki.SubName,
                 wiki.Birthday,
                 wiki.PlaceOfBirth
 			FROM wiki_artists AS wiki
@@ -55,14 +55,13 @@ if ($Data) {
         $sql = "
 			SELECT
 				a.Name,
-				wiki.Image,
-				wiki.body,
-				wiki.IMDBID,
-                wiki.ChineseName,
-                wiki.Birthday,
-                wiki.PlaceOfBirth
+				a.Image,
+				a.Body,
+				a.IMDBID,
+                a.SubName,
+                a.Birthday,
+                a.PlaceOfBirth
 			FROM artists_group AS a
-				LEFT JOIN wiki_artists AS wiki ON wiki.RevisionID = a.RevisionID
 			WHERE a.ArtistID = '$ArtistID' ";
     }
     $sql .= "
@@ -73,9 +72,8 @@ if ($Data) {
         error(404);
     }
 
-    list($Name, $Image, $Body, $IMDBID, $ChineseName, $Birthday, $PlaceOfBirth) = $DB->next_record(MYSQLI_NUM, array(0));
+    list($Name, $Image, $Body, $IMDBID, $SubName, $Birthday, $PlaceOfBirth) = $DB->next_record(MYSQLI_NUM, array(0, 2, 4));
 }
-
 
 //----------------- Build list and get stats
 
@@ -305,7 +303,7 @@ $TorrentDisplayList = ob_get_clean();
 
 // Comments (must be loaded before View::show_header so that subscriptions and quote notifications are handled properly)
 list($NumComments, $Page, $Thread, $LastRead) = Comments::load('artist', $ArtistID);
-View::show_header(($ChineseName ? '[' . $ChineseName . '] ' : '') . $Name, 'browse,bbcode,comments,voting,recommend,subscriptions', 'PageArtistHome');
+View::show_header(($SubName ? '[' . $SubName . '] ' : '') . $Name, 'browse,bbcode,comments,voting,recommend,subscriptions', 'PageArtistHome');
 ?>
 <div class="LayoutBody">
     <div class="BodyHeader">
@@ -366,7 +364,7 @@ View::show_header(($ChineseName ? '[' . $ChineseName . '] ' : '') . $Name, 'brow
             <div class="MovieInfo-title">
                 <? echo $Name ?>
             </div>
-            <a class="MovieInfo-subTitle" href="torrents.php?searchstr=<?= $Name ?>"><?= $ChineseName ?></a>
+            <a class="MovieInfo-subTitle" href="torrents.php?searchstr=<?= $Name ?>"><?= $SubName ?></a>
         </div>
         <div class="MovieInfo-tagContainer">
             <div class="MovieInfo-facts">
@@ -771,6 +769,6 @@ if ($RevisionID) {
     $Key = "artist_$ArtistID";
 }
 
-$Data = array(array($Name, $Image, $Body, $IMDBID, $ChineseName, $Birthday, $PlaceOfBirth, $NumSimilar, $SimilarArray, array(), array()));
+$Data = array(array($Name, $Image, $Body, $IMDBID, $SubName, $Birthday, $PlaceOfBirth, $NumSimilar, $SimilarArray, array(), array()));
 
 $Cache->cache_value($Key, $Data, 3600);

@@ -21,12 +21,11 @@ if (!$AutoSuggest) {
 		SELECT
 			a.ArtistID,
 			a.Name,
-            wa.ChineseName
+            a.SubName
 		FROM artists_group AS a
 			INNER JOIN torrents_artists AS ta ON ta.ArtistID=a.ArtistID
 			INNER JOIN torrents AS t ON t.GroupID=ta.GroupID
-            LEFT JOIN wiki_artists as wa ON a.RevisionID = wa.RevisionID
-		WHERE a.Name LIKE '" . db_string(str_replace('\\', '\\\\', $Letters), true) . "%' OR wa.ChineseName LIKE '" . db_string(str_replace('\\', '\\\\', $Letters), true) . "%'
+		WHERE a.Name LIKE '" . db_string(str_replace('\\', '\\\\', $Letters), true) . "%' OR a.SubName LIKE '" . db_string(str_replace('\\', '\\\\', $Letters), true) . "%'
 		GROUP BY ta.ArtistID
 		ORDER BY t.Snatched DESC
 		LIMIT $Limit");
@@ -41,8 +40,8 @@ $Response = array(
     'suggestions' => array()
 );
 foreach ($AutoSuggest as $Suggestion) {
-    list($ID, $Name, $CName) = $Suggestion;
-    if (stripos($Name, $FullName) === 0 || stripos($CName, $FullName) === 0) {
+    list($ID, $Name, $SubName) = $Suggestion;
+    if (stripos($Name, $FullName) === 0 || stripos($SubName, $FullName) === 0) {
         $Response['suggestions'][] = array('value' => $Name, 'data' => $ID);
         if (++$Matched > 9) {
             break;

@@ -19,12 +19,12 @@ class Requests {
         G::$DB->query("
 			REPLACE INTO sphinx_requests_delta (
 				ID, UserID, TimeAdded, LastVote, CategoryID, Title, TagList,
-				Year, ReleaseType, FillerID, TorrentID,
+				Year, ReleaseType, CodecList, SourceList, ContainerList, ResolutionList, FillerID, TorrentID,
 				TimeFilled, Visible, Votes, Bounty)
 			SELECT
 				ID, r.UserID, UNIX_TIMESTAMP(TimeAdded) AS TimeAdded,
 				UNIX_TIMESTAMP(LastVote) AS LastVote, CategoryID, Title, '$TagList',
-				Year, ReleaseType, FillerID, TorrentID,
+				Year, ReleaseType, CodecList, SourceList, ContainerList, ResolutionList, FillerID, TorrentID,
 				UNIX_TIMESTAMP(TimeFilled) AS TimeFilled, Visible,
 				COUNT(rv.UserID) AS Votes, SUM(rv.Bounty) >> 10 AS Bounty
 			FROM requests AS r
@@ -164,19 +164,18 @@ class Requests {
 					ra.ArtistID,
 					aa.Name,
 					ra.Importance,
-                    wa.ChineseName,
-                    wa.IMDBID
+                    ag.SubName,
+                    ag.IMDBID
 				FROM requests_artists AS ra
 					JOIN artists_alias AS aa ON ra.AliasID = aa.AliasID
                     JOIN artists_group AS ag ON ag.ArtistID = ra.ArtistID
-                    JOIN wiki_artists AS wa ON wa.RevisionID = ag.RevisionID
 				WHERE ra.RequestID = $RequestID
 				ORDER BY ra.Importance ASC, aa.Name ASC;");
             $ArtistRaw = G::$DB->to_array();
             G::$DB->set_query_id($QueryID);
             foreach ($ArtistRaw as $ArtistRow) {
-                list($ArtistID, $ArtistName, $ArtistImportance, $ArtistChineseName, $ArtistIMDBID) = $ArtistRow;
-                $Results[$ArtistImportance][] = array('id' => $ArtistID, 'name' => $ArtistName, 'imdbid' => $ArtistIMDBID, 'cname' => $ArtistChineseName);
+                list($ArtistID, $ArtistName, $ArtistImportance, $ArtistSubName, $ArtistIMDBID) = $ArtistRow;
+                $Results[$ArtistImportance][] = array('ArtistID' => $ArtistID, 'Name' => $ArtistName, 'IMDBID' => $ArtistIMDBID, 'SubName' => $ArtistSubName);
             }
             G::$Cache->cache_value("request_artists_$RequestID", $Results);
         }

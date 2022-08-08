@@ -322,8 +322,6 @@ server.artist.cannot_redirect: |-
   Não foi possível redirecionar para um apelido de um artista inexistente.
 server.artist.change_artist_id: |-
   Alterar ID do artista
-server.artist.chinese_name: |-
-  Nome chinês
 server.artist.confirm_merge: |-
   Confirmar a mesclagem
 server.artist.confirm_merge_body: |-
@@ -410,6 +408,8 @@ server.artist.similarartist_note: |-
   Nenhuma encontrada
 server.artist.statistics: |-
   Estatísticas
+server.artist.sub_name: |-
+  Nome chinês
 server.artist.switch_to_cloud: |-
   Alternar para a nuvem
 server.artist.switch_to_map: |-
@@ -1159,8 +1159,6 @@ server.torrents.artist_alias_id: |-
   ID do Artista
 server.torrents.bounty: |-
   Recompensa
-server.torrents.chinese_title: |-
-  Título Chinês
 server.torrents.cinematographer: |-
   Cinematográfico
 server.torrents.cn_quality_slot_requirements: |-
@@ -1217,6 +1215,8 @@ server.torrents.seeders: |-
   Seeders
 server.torrents.size: |-
   Tamanho
+server.torrents.sub_title: |-
+  Título Chinês
 server.torrents.tag: |-
   Tags
 server.torrents.tag_rules: |-
@@ -1255,12 +1255,8 @@ server.upload.chinese_movie_synopsis: |-
   Sinopse Chinesa
 server.upload.chinese_movie_synopsis_note: |-
   Por favor, adicione synopsis em inglês se você não encontrou uma chinês.
-server.upload.chinese_name: |-
-  Nome chinês
 server.upload.chinese_simplified: |-
   Chinês (simplificado)
-server.upload.chinese_title: |-
-  Título Chinês
 server.upload.chinese_traditional: |-
   Chinês (Tradicional)
 server.upload.cinematographer: |-
@@ -1285,6 +1281,10 @@ server.upload.period: |-
   .
 server.upload.preview: |-
   Pré-visualizar
+server.upload.sub_name: |-
+  Nome chinês
+server.upload.sub_title: |-
+  Título Chinês
 server.upload.tags: |-
   Tags
 server.upload.title_how_to_blockquote: |-

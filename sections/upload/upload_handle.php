@@ -28,8 +28,6 @@ authorize();
 $Validate = new VALIDATE;
 $Feed = new FEED;
 
-define('QUERY_EXCEPTION', true); // Shut up debugging
-
 //******************************************************************************//
 //--------------- Set $Properties array ----------------------------------------//
 // This is used if the form doesn't validate, and when the time comes to enter  //
@@ -39,7 +37,7 @@ $Properties = array();
 $Type = $Categories[(int)$_POST['type']];
 $TypeID = $_POST['type'] + 1;
 if (!empty($_POST['imdb'])) {
-    preg_match('/(tt\\d+)/', $_POST['imdb'], $IMDBMatch);
+    preg_match('/' . IMDB_REGEX . '/', $_POST['imdb'], $IMDBMatch);
     if ($IMDBMatch[1]) {
         $Properties['IMDBID'] = $IMDBMatch[1];
     } else {
@@ -117,7 +115,7 @@ if (empty($_POST['artists'])) {
     $Artists = $_POST['artists'];
     $Importance = $_POST['importance'];
     $ArtistIMDBIDs = $_POST['artist_ids'];
-    $ArtistChineseName = $_POST['artists_chinese'];
+    $ArtistSubName = $_POST['artists_sub'];
 }
 if (!empty($_POST['requestid'])) {
     $RequestID = $_POST['requestid'];
@@ -172,58 +170,20 @@ if (!is_uploaded_file($TorrentName) || !filesize($TorrentName)) {
 } elseif (substr(strtolower($File['name']), strlen($File['name']) - strlen('.torrent')) !== '.torrent') {
     $Err = t('server.upload.not_torrent_file') . "(" . $File['name'] . ")" . t('server.upload.period');
 }
+$GroupID = $Properties['GroupID'];
+$IsNewGroup = empty($GroupID);
 
-if ($Type == 'Movies') {
-    //extra torrent files
-    $ExtraTorrents = array();
-    $DupeNames = array();
-    $DupeNames[] = $_FILES['file_input']['name'];
-}
-
-//Multiple artists!
-if (empty($Properties['GroupID'])) {
-    $MainArtistCount = 0;
-    $ArtistNames = array(
-        1 => array(),
-        2 => array(),
-        3 => array(),
-        4 => array(),
-        5 => array(),
-        6 => array(),
-    );
-    $ArtistForm = array(
-        1 => array(),
-        2 => array(),
-        3 => array(),
-        4 => array(),
-        5 => array(),
-        6 => array(),
-    );
+if ($IsNewGroup) {
     for ($i = 0, $il = count($Artists); $i < $il; $i++) {
         if (trim($Artists[$i]) != '') {
-            if ($Importance[$i] == 1) {
+            if ($Importance[$i] == Artists::Director) {
                 $MainArtistCount++;
             }
-            if (!in_array(trim($Artists[$i]), $ArtistNames[$Importance[$i]])) {
-                $ArtistForm[$Importance[$i]][] = array('name' => Artists::normalise_artist_name($Artists[$i]), 'imdbid' => isset($ArtistIMDBIDs[$i]) ? $ArtistIMDBIDs[$i] : null, 'chinese_name' => $ArtistChineseName[$i]);
-                $ArtistNames[$Importance[$i]][] = trim($Artists[$i]);
-            }
+            $ArtistForm[$Importance[$i]][] = array('Name' => Artists::normalise_artist_name($Artists[$i]), 'IMDBID' => isset($ArtistIMDBIDs[$i]) ? $ArtistIMDBIDs[$i] : null, 'SubName' => $ArtistSubName[$i]);
         }
     }
     if ($MainArtistCount < 1) {
         $Err = t('server.upload.enter_at_least_one_artist');
-        $ArtistForm = array();
-    }
-} else {
-    $DB->query("
-		SELECT ta.ArtistID, aa.Name, ta.Importance
-		FROM torrents_artists AS ta
-			JOIN artists_alias AS aa ON ta.AliasID = aa.AliasID
-		WHERE ta.GroupID = " . $Properties['GroupID'] . "
-		ORDER BY ta.Importance ASC, aa.Name ASC;");
-    while (list($ArtistID, $ArtistName, $ArtistImportance) = $DB->next_record(MYSQLI_BOTH, false)) {
-        $ArtistForm[$ArtistImportance][] = array('id' => $ArtistID, 'name' => display_str($ArtistName));
-        $ArtistsUnescaped[$ArtistImportance][] = array('name' => $ArtistName);
     }
 }
 
@@ -329,200 +289,13 @@ if (!preg_match('/^' . IMAGE_REGEX . '$/i', $Properties['Image'])) {
     $T['Image'] = "''";
 }
 
-// Does it belong in a group?
-if ($Properties['GroupID']) {
-    $DB->query("
-			SELECT
-				ID,
-				WikiImage,
-				WikiBody,
-				RevisionID,
-				Name,
-				Year,
-				ReleaseType,
-				TagList,
-				SubName
-			FROM torrents_group
-			WHERE id = " . $Properties['GroupID']);
-    if ($DB->has_results()) {
-        // Don't escape tg.Name. It's written directly to the log table
-        list($GroupID, $WikiImage, $WikiBody, $RevisionID, $Properties['Name'], $GroupYear, $Properties['ReleaseType'], $Properties['TagList'], $GroupSubName) = $DB->next_record(MYSQLI_NUM, array(4));
-        $Properties['TagList'] = str_replace(array(' ', '.', '_'), array(', ', '.', '.'), $Properties['TagList']);
-        if (!$Properties['Image'] && $WikiImage) {
-            $Properties['Image'] = $WikiImage;
-            $T['Image'] = "'" . db_string($WikiImage) . "'";
-        }
-        if (strlen($WikiBody) > strlen($Body)) {
-            $Body = $WikiBody;
-            if (!$Properties['Image'] || $Properties['Image'] == $WikiImage) {
-                $NoRevision = true;
-            }
-        }
-        $ArtistForm = Artists::get_artist($GroupID);
-    }
-} else {
-    foreach ($ArtistForm as $Importance => $Artists) {
-        foreach ($Artists as $Num => $Artist) {
-            $RedirectName = $Artist['name'];
-            $DB->query("
-				SELECT
-					aa2.Name
-				FROM artists_alias aa1 INNER JOIN artists_alias aa2 on aa1.Redirect=aa2.AliasID
-				WHERE
-					aa1.Name = lower('" . db_string($Artist['name']) . "')");
-            if ($DB->has_results()) {
-                list($RedirectName) = $DB->next_record(MYSQLI_NUM, false);
-            }
-            $DB->query("
-					SELECT
-						tg.id,
-						tg.WikiImage,
-						tg.WikiBody,
-						tg.RevisionID,
-						tg.Year,
-						SubName
-					FROM torrents_group AS tg
-						LEFT JOIN torrents_artists AS ta ON ta.GroupID = tg.ID
-						LEFT JOIN artists_group AS ag ON ta.ArtistID = ag.ArtistID
-					WHERE ag.Name = '" . db_string($RedirectName) . "'
-						AND lower(tg.Name) = lower(" . $T['Name'] . ")
-						AND tg.ReleaseType = " . $T['ReleaseType'] . "
-						AND tg.Year = " . $T['Year']);
-
-            if ($DB->has_results()) {
-                list($GroupID, $WikiImage, $WikiBody, $RevisionID, $GroupYear, $GroupSubName) = $DB->next_record();
-                if (!$Properties['Image'] && $WikiImage) {
-                    $Properties['Image'] = $WikiImage;
-                    $T['Image'] = "'" . db_string($WikiImage) . "'";
-                }
-                if (strlen($WikiBody) > strlen($Body)) {
-                    $Body = $WikiBody;
-                    if (!$Properties['Image'] || $Properties['Image'] == $WikiImage) {
-                        $NoRevision = true;
-                    }
-                }
-                $ArtistForm = Artists::get_artist($GroupID);
-                //This torrent belongs in a group
-                break;
-            } else {
-                // The album hasn't been uploaded. Try to get the artist IDs
-                $DB->query("
-						SELECT
-							ArtistID,
-							AliasID,
-							Name,
-							Redirect
-						FROM artists_alias
-						WHERE Name = '" . db_string($Artist['name']) . "'");
-                if ($DB->has_results()) {
-                    while (list($ArtistID, $AliasID, $AliasName, $Redirect) = $DB->next_record(MYSQLI_NUM, false)) {
-                        if (!strcasecmp($Artist['name'], $AliasName)) {
-                            if ($Redirect) {
-                                $AliasID = $Redirect;
-                            }
-                            $ArtistForm[$Importance][$Num] = array('id' => $ArtistID, 'aliasid' => $AliasID, 'name' => $AliasName);
-                            break;
-                        }
-                    }
-                }
-            }
-        }
-    }
-}
-
 //Needs to be here as it isn't set for add format until now
 $Properties['Size'] = $TotalSize;
 $Properties['Group'] = ['SubName' => $Properties['SubName'], 'Name' => $Properties['Name'], 'Year' => $Properties['Year']];
 $LogName = Torrents::torrent_name($Properties, false);
 //For notifications--take note now whether it's a new group
-$IsNewGroup = !$GroupID;
 
 //----- Start inserts
-if (!$GroupID) {
-    //array to store which artists we have added already, to prevent adding an artist twice
-    $ArtistsAdded = array();
-    $IMDBIDs = array();
-    if ($Properties['IMDBID']) {
-        // 优先处理演员
-        foreach ($ArtistForm[6] as $Num => $Artist) {
-            if (!$Artist['id'] && $Artist['imdbid']) {
-                $IMDBIDs[] = $Artist['imdbid'];
-            }
-        }
-        foreach ($ArtistForm as $key => $value) {
-            if ($key == 6) {
-                continue;
-            }
-            foreach ($value as $Num => $Artist) {
-                if (!$Artist['id'] && $Artist['imdbid']) {
-                    $IMDBIDs[] = $Artist['imdbid'];
-                }
-            }
-        }
-    }
-    $FullArtistDetails = MOVIE::get_artists($IMDBIDs, $Properties['IMDBID'], 10);
-    foreach ($ArtistForm as $Importance => $Artists) {
-        foreach ($Artists as $Num => $Artist) {
-            $Artist['name'] = html_entity_decode($Artist['name'], ENT_QUOTES);
-            if ($Artist['id']) {
-                continue;
-            }
-            if (isset($ArtistsAdded[strtolower($Artist['name'])])) {
-                $ArtistForm[$Importance][$Num] = $ArtistsAdded[strtolower($Artist['name'])];
-            } else {
-                // Create artist
-                $DB->query("
-						INSERT INTO artists_group (Name)
-						VALUES ('" . db_string($Artist['name']) . "')");
-                $ArtistID = $DB->inserted_id();
-
-                $ArtistDetail = MOVIE::get_default_artist($Artist['imdbid']);
-                if ($Artist['imdbid']) {
-                    $Detail = $FullArtistDetails[$Artist['imdbid']];
-                    if ($Detail) {
-                        $ArtistDetail = $Detail;
-                    }
-                }
-
-                $ArtistImage = $ArtistDetail['Image'];
-                $ArtistBody = $ArtistDetail['Description'];
-                $ArtistIMDBID = $Artist['imdbid'];
-                $ArtistCN = $Artist['chinese_name'];
-                $ArtistBirth = $ArtistDetail['Birthday'];
-                $ArtistPlace = $ArtistDetail['PlaceOfBirth'];
-                $DB->query("
-						INSERT INTO wiki_artists
-							(PageID, Body, Image, UserID, Summary, Time, IMDBID, ChineseName, Birthday, PlaceOfBirth)
-						VALUES
-							('$ArtistID', '" . db_string($ArtistBody) . "', '$ArtistImage', '$UserID', 'Auto load from tmdb', '" . sqltime() . "', '$ArtistIMDBID', '" . db_string($ArtistCN) . "', '$ArtistBirth', '" . db_string($ArtistPlace) . "')");
-                $RevisionID = $DB->inserted_id();
-                $DB->query("
-						UPDATE artists_group SET RevisionID = '$RevisionID' WHERE ArtistID = '$ArtistID'
-				");
-
-                $Cache->increment('stats_artist_count');
-                $DB->query("
-						INSERT INTO artists_alias (ArtistID, Name)
-						VALUES ($ArtistID, '" . db_string($Artist['name']) . "')");
-                $AliasID = $DB->inserted_id();
-                $ArtistAliasList = $ArtistDetail['Alias'];
-                foreach ($ArtistAliasList as $key => $value) {
-                    $DB->query("
-						INSERT INTO artists_alias (ArtistID, Name, Redirect)
-						VALUES ($ArtistID, '" . db_string($value) . "', '" . $AliasID . "')");
-                }
-                if ($ArtistCN) {
-                    $DB->query("
-						INSERT INTO artists_alias (ArtistID, Name, Redirect)
-						VALUES ($ArtistID, '" . db_string($ArtistCN) . "', '" . $AliasID . "')");
-                }
-                $ArtistForm[$Importance][$Num] = array('id' => $ArtistID, 'aliasid' => $AliasID, 'name' => $Artist['name']);
-                $ArtistsAdded[strtolower($Artist['name'])] = $ArtistForm[$Importance][$Num];
-            }
-        }
-    }
-    unset($ArtistsAdded);
-}
 $RTRating = null;
 $DoubanRating = 'null';
 $DoubanID = 'null';
@@ -555,62 +328,91 @@ if ($Properties['IMDBID']) {
     $IMDBVote = $OMDBData->imdbVotes && $OMDBData->imdbVotes != 'N/A' ? str_replace(',', '', $OMDBData->imdbVotes) : 'null';
     $RTRating = $RTRating ? $RTRating : '';
 }
-
-if (!$GroupID) {
-    // Create torrent group
-    $DB->query("
-		INSERT INTO torrents_group
-			(ArtistID, CategoryID, Name, SubName, Year,  Time, WikiBody, WikiImage, ReleaseType, IMDBID, TrailerLink, IMDBRating, Duration, ReleaseDate, Region, Language, RTRating, DoubanRating, DoubanID, DoubanVote, IMDBVote)
-		VALUES
-			(0, $TypeID, " . $T['Name'] . ", " . $T['SubName'] . ", $T[Year],'" . sqltime() . "', '" . db_string($Body) . "', $T[Image], $T[ReleaseType], '" . $IMDBID . "', $T[TrailerLink], '" . $IMDBRating . "', '" . $Runtime . "', '" . $Released . "', '" . $Country . "', '" . $OMDBData->Language . "', '" . $RTRating . "', " . $DoubanRating . ", " . $DoubanID . ", " . $DoubanVote . ", " . $IMDBVote . ")");
-
-    $GroupID = $DB->inserted_id();
-    if ($Type == 'Movies') {
-        foreach ($ArtistForm as $Importance => $Artists) {
-            foreach ($Artists as $Num => $Artist) {
-                $DB->query("
-					INSERT IGNORE INTO torrents_artists (GroupID, ArtistID, AliasID, UserID, Importance, Credit, `Order`)
-					VALUES ($GroupID, " . $Artist['id'] . ', ' . $Artist['aliasid'] . ', ' . $LoggedUser['ID'] . ", '$Importance', true, $Num)");
+if ($IsNewGroup) {
+    $IMDBIDs = array();
+    if ($Properties['IMDBID']) {
+        // handle Actor first
+        foreach ($ArtistForm[Artists::Actor] as $Num => $Artist) {
+            if ($Artist['IMDBID']) {
+                $IMDBIDs[] = $Artist['IMDBID'];
             }
         }
-        $Cache->increment('stats_album_count');
+        foreach ($ArtistForm as $key => $value) {
+            if ($key == Artists::Actor) {
+                continue;
+            }
+            foreach ($value as $Num => $Artist) {
+                if ($Artist['IMDBID']) {
+                    $IMDBIDs[] = $Artist['IMDBID'];
+                }
+            }
+        }
     }
-    $Cache->increment('stats_group_count');
-} else {
-    $UpdateTG = '';
-    if (!$GroupSubName && $Properties['SubName']) {
-        $UpdateTG = ", SubName = $T[SubName]";
-    }
-    $DB->query("
-		UPDATE torrents_group
-		SET Time = '" . sqltime() . "' $UpdateTG
-		WHERE ID = $GroupID");
-    $Cache->delete_value("torrent_group_$GroupID");
-    $Cache->delete_value("torrents_details_$GroupID");
-    $Cache->delete_value("detail_files_$GroupID");
-    if ($Type == 'Movies') {
-        $DB->query("
-			SELECT ReleaseType
-			FROM torrents_group
-			WHERE ID = '$GroupID'");
-        list($Properties['ReleaseType']) = $DB->next_record();
-    }
-}
+    $FullArtistDetails = MOVIE::get_artists($IMDBIDs, $Properties['IMDBID'], 10);
 
-// Description
-if (!$NoRevision) {
-    $DB->query("
-		INSERT INTO wiki_torrents
+    foreach ($ArtistForm as $Importance => $Artists) {
+        foreach ($Artists as $Num => $Artist) {
+            $Artist['Name'] = html_entity_decode($Artist['Name'], ENT_QUOTES);
+            $Artist['SubName'] = html_entity_decode($Artist['SubName'], ENT_QUOTES);
+            $ArtistDetail = MOVIE::get_default_artist($Artist['IMDBID']);
+            if ($Artist['IMDBID']) {
+                $Detail = $FullArtistDetails[$Artist['IMDBID']];
+                if ($Detail) {
+                    $ArtistDetail = $Detail;
+                }
+            }
+
+            $Artist['Image'] = $ArtistDetail['Image'];
+            $Artist['Description'] = $ArtistDetail['Description'];
+            $Artist['Birthday'] = $ArtistDetail['Birthday'];
+            $Artist['PlaceOfBirth'] = $ArtistDetail['PlaceOfBirth'];
+            $Artist = Artists::add_artist($Artist);
+            $ArtistForm[$Importance][$Num] = $Artist;
+        }
+    }
+    // Create torrent group
+    $DB->query(
+        "INSERT INTO torrents_group
+			(ArtistID, CategoryID, Name, SubName, Year,  Time, WikiBody, WikiImage, ReleaseType, IMDBID, TrailerLink, IMDBRating, Duration, ReleaseDate, Region, Language, RTRating, DoubanRating, DoubanID, DoubanVote, IMDBVote)
+		VALUES
+            (0, $TypeID, " . $T['Name'] . ", " . $T['SubName'] . ", $T[Year],'" . sqltime() . "', '" . db_string($Body) . "', $T[Image], $T[ReleaseType], '" . $IMDBID . "', $T[TrailerLink], '" . $IMDBRating . "', '" . $Runtime . "', '" . $Released . "', '" . $Country . "', '" . $OMDBData->Language . "', '" . $RTRating . "', " . $DoubanRating . ", " . $DoubanID . ", " . $DoubanVote . ", " . $IMDBVote . ")"
+    );
+
+    $GroupID = $DB->inserted_id();
+    foreach ($ArtistForm as $Importance => $Artists) {
+        foreach ($Artists as $Num => $Artist) {
+            $DB->query(
+                "INSERT IGNORE INTO torrents_artists (GroupID, ArtistID, AliasID, UserID, Importance, Credit, `Order`)
+					VALUES ($GroupID, " . $Artist['ArtistID'] . ', ' . $Artist['AliasID'] . ', ' . $LoggedUser['ID'] . ", '$Importance', true, $Num)"
+            );
+        }
+    }
+    $Cache->increment('stats_album_count');
+    $Cache->increment('stats_group_count');
+    $DB->query(
+        "INSERT INTO wiki_torrents
 			(PageID, Body, UserID, Summary, Time, Image, IMDBID, IMDBRating, Duration, ReleaseDate, Region, Language, RTRating, DoubanRating, DoubanID, DoubanVote, IMDBVote)
 		VALUES
-			($GroupID, $T[GroupDescription], $LoggedUser[ID], 'Uploaded new torrent', '" . sqltime() . "', $T[Image], '" . $IMDBID . "', " . $IMDBRating . ", '" . $Runtime . "', '" . $Released . "', '" . $Country . "', '" . $Language . "', '" . $RTRating . "', " . $DoubanRating . ", " . $DoubanID . ", " . $DoubanVote . ", " . $IMDBVote . ")");
+			($GroupID, $T[GroupDescription], $LoggedUser[ID], 'Uploaded new torrent', '" . sqltime() . "', $T[Image], '" . $IMDBID . "', " . $IMDBRating . ", '" . $Runtime . "', '" . $Released . "', '" . $Country . "', '" . $Language . "', '" . $RTRating . "', " . $DoubanRating . ", " . $DoubanID . ", " . $DoubanVote . ", " . $IMDBVote . ")"
+    );
     $RevisionID = $DB->inserted_id();
 
     // Revision ID
-    $DB->query("
-		UPDATE torrents_group
+    $DB->query(
+        "UPDATE torrents_group
 		SET RevisionID = '$RevisionID'
-		WHERE ID = $GroupID");
+		WHERE ID = $GroupID"
+    );
+} else {
+    $Cache->delete_value("torrent_group_$GroupID");
+    $Cache->delete_value("torrents_details_$GroupID");
+    $Cache->delete_value("detail_files_$GroupID");
+    $DB->query(
+        "SELECT ReleaseType
+		FROM torrents_group
+		WHERE ID = '$GroupID'"
+    );
+    list($Properties['ReleaseType']) = $DB->next_record();
 }
 
 // Tags
@@ -642,9 +444,6 @@ if (!$Properties['GroupID']) {
     }
 }
 
-//******************************************************************************//
-//--------------- Add the log scores to the DB ---------------------------------//
-
 // Use this section to control freeleeches
 $T['FreeLeech'] = 0;
 $T['FreeLeechType'] = 1;
@@ -665,15 +464,12 @@ if ($Properties['Diy'] || $Properties['Buy']) {
 // limit free
 $FreeEndTime = time_plus(3600 * 48);
 
-
-
 $Checked = 0;
 // Torrent
 
-if ($Type == 'Movies') {
-    $Slot = TorrentSlot::CalSlot($Properties);
-    $DB->query("
-	INSERT INTO torrents
+$Slot = TorrentSlot::CalSlot($Properties);
+$DB->query(
+    "INSERT INTO torrents
 		(GroupID, UserID,
 		RemasterYear, RemasterTitle,
 		Scene, Jinzhuan, Diy, Buy, Allow, info_hash, FileCount, FileList,
@@ -682,14 +478,16 @@ if ($Type == 'Movies') {
 		($GroupID, $LoggedUser[ID], 
 		$T[RemasterYear], $T[RemasterTitle],
 		$T[Scene], $T[Jinzhuan],  $T[Diy],  $T[Buy],  $T[Allow], '" . db_string($InfoHash) . "', $NumFiles, '$FileString',
-		'$FilePath', $TotalSize, '" . sqltime() . "', $T[TorrentDescription], '$T[FreeLeech]', '$T[FreeLeechType]', $Checked, $T[NotMainMovie], $T[Source], $T[Codec], $T[Container], $T[Resolution], $T[Subtitles], $T[Makers], $T[Processing], $T[RemasterCustomTitle], $T[ChineseDubbed], $T[SpecialSub], $T[MediaInfo], $T[Note], $T[SubtitleType], $Slot)");
-}
+		'$FilePath', $TotalSize, '" . sqltime() . "', $T[TorrentDescription], '$T[FreeLeech]', '$T[FreeLeechType]', $Checked, $T[NotMainMovie], $T[Source], $T[Codec], $T[Container], $T[Resolution], $T[Subtitles], $T[Makers], $T[Processing], $T[RemasterCustomTitle], $T[ChineseDubbed], $T[SpecialSub], $T[MediaInfo], $T[Note], $T[SubtitleType], $Slot)"
+);
 
 
 $Cache->increment('stats_torrent_count');
 $TorrentID = $DB->inserted_id();
 
-$DB->query("INSERT INTO `freetorrents_timed`(`TorrentID`, `EndTime`) VALUES ($TorrentID,'$FreeEndTime') ON DUPLICATE KEY UPDATE EndTime=VALUES(EndTime)");
+$DB->query(
+    "INSERT INTO `freetorrents_timed`(`TorrentID`, `EndTime`) VALUES ($TorrentID,'$FreeEndTime') ON DUPLICATE KEY UPDATE EndTime=VALUES(EndTime)"
+);
 
 
 Tracker::update_tracker('add_torrent', array('id' => $TorrentID, 'info_hash' => rawurlencode($InfoHash), 'freetorrent' => $T['FreeLeech']));
@@ -863,8 +661,8 @@ if (!empty($ArtistsUnescaped)) {
     $ArtistNameList = array();
     foreach ($ArtistsUnescaped as $Importance => $Artists) {
         foreach ($Artists as $Artist) {
-            $ArtistNameList[] = "Artists LIKE '%|" . db_string(str_replace('\\', '\\\\', $Artist['name']), true) . "|%'";
-            $ArtistNameList[] = "Artists LIKE '%|" . db_string(str_replace('\\', '\\\\', $Artist['cname']), true) . "|%'";
+            $ArtistNameList[] = "Artists LIKE '%|" . db_string(str_replace('\\', '\\\\', $Artist['Name']), true) . "|%'";
+            $ArtistNameList[] = "Artists LIKE '%|" . db_string(str_replace('\\', '\\\\', $Artist['SubName']), true) . "|%'";
         }
     }
     // Don't add notification if >2 main artists or if tracked artist isn't a main artist

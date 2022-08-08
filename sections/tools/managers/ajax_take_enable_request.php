@@ -3,7 +3,7 @@ if (!check_perms('users_mod')) {
     json_error(403);
 }
 
-if (!FEATURE_EMAIL_REENABLE) {
+if (!CONFIG['FEATURE_EMAIL_REENABLE']) {
     json_error("This feature is currently disabled.");
 }
 

@@ -64,10 +64,16 @@ $WikiBody = Text::full_format($WikiBody);
 
 $Artists = Artists::get_artist($GroupID);
 $Director = null;
-foreach ($Artists[1] as $ID => $Artist) {
+foreach ($Artists[Artists::Director] as $ID => $Artist) {
     $Director = $Artist;
     break;
 }
+$Actors = $Artists[Artists::Actor];
+$Directors = $Artists[Artists::Director];
+$Writters = $Artists[Artists::Writter];
+$Cameras = $Artists[Artists::Camera];
+$Composers = $Artists[Artists::Composer];
+$Producers = $Artists[Artists::Producer];
 
 $Title = $RawName;
 $AltName = $RawName;
@@ -187,7 +193,7 @@ View::show_header($Title, 'browse,comments,torrent,bbcode,recommend,cover_art,su
                     <?= icon('rotten-tomatoes') ?>
                     <span><?= !empty($RTRating) ? $RTRating : '--' ?></span>
                 </a>
-                <a class="MovieInfo-fact" data-tooltip="<?= t('server.upload.director') ?>" href="/artist.php?id=<?= $Director['id'] ?>" dir="ltr">
+                <a class="MovieInfo-fact" data-tooltip="<?= t('server.upload.director') ?>" href="/artist.php?id=<?= $Director['ArtistID'] ?>" dir="ltr">
                     <?= icon('movie-director') ?>
                     <span><?= Artists::display_artist($Director, false) ?></span>
                 </a>
@@ -213,7 +219,7 @@ View::show_header($Title, 'browse,comments,torrent,bbcode,recommend,cover_art,su
             <div class="MovieInfo-tags">
                 <? foreach ($TagNames as $TagName) { ?>
                     <span class="MovieInfo-tag" data-tooltip="<?= t('server.torrents.tag') ?>">
-                        <?= $TagName ?>
+                        <i><?= $TagName ?></i>
                     </span>
                 <? } ?>
             </div>
@@ -226,12 +232,11 @@ View::show_header($Title, 'browse,comments,torrent,bbcode,recommend,cover_art,su
         </div>
         <div class="MovieInfo-artists u-hideScrollbar">
             <?
-            for ($i = 0; $i < 10 && $i < count($Artists[6]); $i++) {
+            for ($i = 0; $i < 10 && $i < count($Actors); $i++) {
             ?>
-                <a class="MovieInfo-artist" href="<? echo " artist.php?id=" . $Artists[6][$i]['id'] ?>">
-                    <img class="MovieInfo-artistPhoto <?= $Artists[6][$i]['image'] ? '' : 'default_photo' ?>" src="<?= ImageTools::process($Artists[6][$i]['image']) ?>">
-                    <div class="MovieInfo-artistName" data-tooltip="<? echo $Artists[6][$i]['name'] ?>"><? echo $Artists[6][$i]['name'] ?></div>
-                    <div class="MovieInfo-artistSubName" data-tooltip="<? echo $Artists[6][$i]['cname'] ?>"><? echo $Artists[6][$i]['cname'] ?></div>
+                <a class="MovieInfo-artist" href="<? echo " artist.php?id=" . $Actors[$i]['ArtistID'] ?>">
+                    <img class="MovieInfo-artistPhoto <?= $Actors[$i]['Image'] ? '' : 'default_photo' ?>" src="<?= ImageTools::process($Actors[$i]['Image']) ?>">
+                    <div class="MovieInfo-artistName" data-tooltip="<? echo Artists::get_artist_name($Actors[$i]) ?>"><? echo Artists::get_artist_name($Actors[$i]) ?></div>
                 </a>
             <?
             }
@@ -331,19 +336,18 @@ View::show_header($Title, 'browse,comments,torrent,bbcode,recommend,cover_art,su
                     </div>
                     <ul class="SidebarItem-body Box-body SidebarList" id="artist_list">
                         <?
-                        if (!empty($Artists[1])) {
+                        if (!empty($Directors) && count($Directors) > 0) {
                             print '<li class="SidebarList-item"><strong class="artists_label">' . t('server.torrents.director') . ':</strong></li>';
                         }
-                        foreach ($Artists[1] as $Artist) {
+                        foreach ($Directors as $Artist) {
                         ?>
                             <li class="SidebarList-item u-hoverToShow-hover">
                                 <?= Artists::display_artist($Artist) ?>
                                 <?
                                 if (check_perms('torrents_edit')) {
-                                    $AliasID = $Artist['id'];
                                 ?>
                                     <div class="SidebarList-actions">
-                                        <a class="SidebarList-action u-hoverToShow-hide" href="javascript:void(0);" onclick="ajax.get('torrents.php?action=delete_alias&amp;auth=' + authkey + '&amp;groupid=<?= $GroupID ?>&amp;artistid=<?= $Artist['id'] ?>&amp;importance=1'); this.parentNode.parentNode.style.display = 'none';" data-tooltip="<?= t('server.torrents.remove_artist') ?>">
+                                        <a class="SidebarList-action u-hoverToShow-hide" href="javascript:void(0);" onclick="ajax.get('torrents.php?action=delete_alias&amp;auth=' + authkey + '&amp;groupid=<?= $GroupID ?>&amp;artistid=<?= $Artist['ArtistID'] ?>&amp;importance=1'); this.parentNode.parentNode.style.display = 'none';" data-tooltip="<?= t('server.torrents.remove_artist') ?>">
                                             <?= icon('remove') ?>
                                         </a>
                                     </div>
@@ -353,109 +357,104 @@ View::show_header($Title, 'browse,comments,torrent,bbcode,recommend,cover_art,su
                         }
 
 
-                        if (!empty($Artists[2]) && count($Artists[2]) > 0) {
-                            print '				<li class="SidebarList-item"><strong class="artists_label">' .  t('server.torrents.writer') . ':</strong></li>';
+                        if (!empty($Writters) && count($Writters) > 0) {
+                            print '<li class="SidebarList-item"><strong class="artists_label">' .  t('server.torrents.writer') . ':</strong></li>';
                             foreach ($Artists[2] as $Artist) {
                             ?>
                                 <li class="SidebarAritsts-item">
                                     <?= Artists::display_artist($Artist) ?>
-                                    <? if (check_perms('torrents_writter')) {
-                                        $AliasID = $Artist['id'];
+                                    <? if (check_perms('torrents_edit')) {
                                     ?>
                                         <div class="SidebarList-actions">
-                                            <a class="SidebarList-action u-hoverToShow-hide" href="javascript:void(0);" onclick="ajax.get('torrents.php?action=delete_alias&amp;auth=' + authkey + '&amp;groupid=<?= $GroupID ?>&amp;artistid=<?= $Artist['id'] ?>&amp;importance=2'); this.parentNode.parentNode.style.display = 'none';" data-tooltip="<?= t('server.torrents.remove_artist') ?>">
+                                            <a class="SidebarList-action u-hoverToShow-hide" href="javascript:void(0);" onclick="ajax.get('torrents.php?action=delete_alias&amp;auth=' + authkey + '&amp;groupid=<?= $GroupID ?>&amp;artistid=<?= $Artist['ArtistID'] ?>&amp;importance=2'); this.parentNode.parentNode.style.display = 'none';" data-tooltip="<?= t('server.torrents.remove_artist') ?>">
                                                 <?= icon('remove') ?>
                                             </a>
                                         </div>
-                                    <?          } ?>
+                                    <?
+                                    }
+                                    ?>
                                 </li>
                             <?
                             }
                         }
 
 
-                        if (!empty($Artists[3]) && count($Artists[3]) > 0) {
-                            print '				<li class="SidebarList-item"><strong class="artists_label">' . t('server.torrents.movie_producer') . ':</strong></li>';
-                            foreach ($Artists[3] as $Artist) {
+                        if (!empty($Producers) && count($Producers) > 0) {
+                            print '<li class="SidebarList-item"><strong class="artists_label">' . t('server.torrents.movie_producer') . ':</strong></li>';
+                            foreach ($Producers as $Artist) {
                             ?>
                                 <li class="SidebarList-item u-hoverToShow-hover">
                                     <?= Artists::display_artist($Artist) ?>
                                     <? if (check_perms('torrents_edit')) {
-                                        $AliasID = $Artist['id'];
                                     ?>
                                         <span class="SidebarList-actions">
-                                            <a class="SidebarList-action  u-hoverToShow-hide" href="javascript:void(0);" onclick="ajax.get('torrents.php?action=delete_alias&amp;auth=' + authkey + '&amp;groupid=<?= $GroupID ?>&amp;artistid=<?= $Artist['id'] ?>&amp;importance=3'); this.parentNode.parentNode.style.display = 'none';" data-tooltip="<?= t('server.torrents.remove_artist') ?>">
+                                            <a class="SidebarList-action  u-hoverToShow-hide" href="javascript:void(0);" onclick="ajax.get('torrents.php?action=delete_alias&amp;auth=' + authkey + '&amp;groupid=<?= $GroupID ?>&amp;artistid=<?= $Artist['ArtistID'] ?>&amp;importance=3'); this.parentNode.parentNode.style.display = 'none';" data-tooltip="<?= t('server.torrents.remove_artist') ?>">
                                                 <?= icon('remove') ?>
                                             </a>
                                         </span>
-                                    <?          } ?>
+                                    <?
+                                    }
+                                    ?>
                                 </li>
                             <?
                             }
                         }
-                        if (!empty($Artists[4]) && count($Artists[4]) > 0) {
+                        if (!empty($Composers) && count($Composers) > 0) {
                             print '<li class="SidebarList-item "><strong class="artists_label">' . t('server.torrents.composer') . ':</strong></li>';
-                            foreach ($Artists[4] as $Artist) {
+                            foreach ($Composers as $Artist) {
                             ?>
+
                                 <li class="SidebarList-item u-hoverToShow-hover">
                                     <?= Artists::display_artist($Artist) ?>
                                     <?
                                     if (check_perms('torrents_edit')) {
-                                        $DB->query("
-					SELECT AliasID
-					FROM artists_alias
-					WHERE ArtistID = " . $Artist['id'] . "
-						AND ArtistID != AliasID
-						AND Name = '" . db_string($Artist['name']) . "'");
-                                        list($AliasID) = $DB->next_record();
-                                        if (empty($AliasID)) {
-                                            $AliasID = $Artist['id'];
-                                        }
                                     ?>
                                         <span class="SidebarList-actions">
-                                            <a class="SidebarList-action u-hoverToShow-hide" href="javascript:void(0);" onclick="ajax.get('torrents.php?action=delete_alias&amp;auth=' + authkey + '&amp;groupid=<?= $GroupID ?>&amp;artistid=<?= $Artist['id'] ?>&amp;importance=4'); this.parentNode.parentNode.style.display = 'none';" data-tooltip="<?= t('server.torrents.remove_artist') ?>">
+                                            <a class="SidebarList-action u-hoverToShow-hide" href="javascript:void(0);" onclick="ajax.get('torrents.php?action=delete_alias&amp;auth=' + authkey + '&amp;groupid=<?= $GroupID ?>&amp;artistid=<?= $Artist['ArtistID'] ?>&amp;importance=4'); this.parentNode.parentNode.style.display = 'none';" data-tooltip="<?= t('server.torrents.remove_artist') ?>">
                                                 <?= icon('remove') ?>
                                             </a>
                                         </span>
-                                    <?          } ?>
+                                    <?
+                                    }
+                                    ?>
                                 </li>
                             <?
                             }
                         }
-                        if (!empty($Artists[5]) && count($Artists[5]) > 0) {
+                        if (!empty($Cameras) && count($Cameras) > 0) {
                             print '<li class="SidebarList-item"><strong class="artists_label">' . t('server.torrents.cinematographer') . ':</strong></li>';
-                            foreach ($Artists[5] as $Artist) {
+                            foreach ($Cameras as $Artist) {
                             ?>
                                 <li class="SidebarList-item u-hoverToShow-hover">
                                     <?= Artists::display_artist($Artist) ?>
                                     <? if (check_perms('torrents_edit')) {
-                                        $AliasID = $Artist['id'];
                                     ?>
                                         <span class="SidebarList-actions">
-                                            <a class="SidebarList-action u-hoverToShow-hide" href="javascript:void(0);" onclick="ajax.get('torrents.php?action=delete_alias&amp;auth=' + authkey + '&amp;groupid=<?= $GroupID ?>&amp;artistid=<?= $Artist['id'] ?>&amp;importance=5'); this.parentNode.parentNode.style.display = 'none';" data-tooltip="<?= t('server.torrents.remove_conductor') ?>">
+                                            <a class="SidebarList-action u-hoverToShow-hide" href="javascript:void(0);" onclick="ajax.get('torrents.php?action=delete_alias&amp;auth=' + authkey + '&amp;groupid=<?= $GroupID ?>&amp;artistid=<?= $Artist['ArtistID'] ?>&amp;importance=5'); this.parentNode.parentNode.style.display = 'none';" data-tooltip="<?= t('server.torrents.remove_conductor') ?>">
                                                 <?= icon('remove') ?>
                                             </a>
                                         </span>
-                                    <?          } ?>
+                                    <?
+                                    } ?>
                                 </li>
                             <?
                             }
                         }
-                        if (!empty($Artists[6]) && count($Artists[6]) > 0) {
+                        if (!empty($Actors) && count($Actors) > 0) {
                             print '<li class="SidebarList-item"><strong class="artists_label">' . t('client.common.actor') . ':</strong></li>';
-                            foreach ($Artists[6] as $Artist) {
+                            foreach ($Actors as $Artist) {
                             ?>
                                 <li class="SidebarList-item u-hoverToShow-hover">
                                     <?= Artists::display_artist($Artist) ?>
                                     <? if (check_perms('torrents_edit')) {
-                                        $AliasID = $Artist['id'];
                                     ?>
                                         <span class="SidebarList-actions">
-                                            <a class="SidebarList-action u-hoverToShow-hide" href="javascript:void(0);" onclick="ajax.get('torrents.php?action=delete_alias&amp;auth=' + authkey + '&amp;groupid=<?= $GroupID ?>&amp;artistid=<?= $Artist['id'] ?>&amp;importance=6'); this.parentNode.parentNode.style.display = 'none';" data-tooltip="<?= t('server.torrents.remove_artist') ?>">
+                                            <a class="SidebarList-action u-hoverToShow-hide" href="javascript:void(0);" onclick="ajax.get('torrents.php?action=delete_alias&amp;auth=' + authkey + '&amp;groupid=<?= $GroupID ?>&amp;artistid=<?= $Artist['ArtistID'] ?>&amp;importance=6'); this.parentNode.parentNode.style.display = 'none';" data-tooltip="<?= t('server.torrents.remove_artist') ?>">
                                                 <?= icon('remove') ?>
                                             </a>
                                         </span>
-                                    <?          } ?>
+                                    <?
+                                    } ?>
                                 </li>
                         <?
                             }

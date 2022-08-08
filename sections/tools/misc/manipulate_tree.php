@@ -99,7 +99,7 @@ if ($_POST['id']) {
                 <td><input class="Input" type="text" size="40" name="comment" id="comment" /></td>
             </tr>
             <tr>
-                <td class="label"><strong><?= t('server.tools.action') ?>:</strong></td>
+                <td class="label"><strong><?= t('server.common.actions') ?>:</strong></td>
                 <td colspan="2">
                     <select class="Input" name="perform">
                         <option class="Select-option" value="nothing" <?

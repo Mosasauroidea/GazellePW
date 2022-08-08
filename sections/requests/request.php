@@ -29,28 +29,26 @@ if ($Request['CategoryID'] === '0') {
 }
 
 //Do we need to get artists?
-if ($CategoryName === 'Movies') {
-    $ArtistForm = Requests::get_artists($RequestID);
-    $ArtistName = Artists::display_artists($ArtistForm, false, true);
-    $RequestGroupName = Torrents::group_name($Request, false);
+$ArtistForm = Requests::get_artists($RequestID);
+$ArtistName = Artists::display_artists($ArtistForm, false, true);
+$RequestGroupName = Torrents::group_name($Request, false);
 
-    if ($IsFilled) {
-        $DisplayLink = "<a href=\"torrents.php?torrentid=$Request[TorrentID]\" dir=\"ltr\">$RequestGroupName</a>";
-    } else {
-        $DisplayLink = '<span dir="ltr">' . $RequestGroupName . "</span>";
-    }
-    $FullName = $RequestGroupName;
+if ($IsFilled) {
+    $DisplayLink = "<a href=\"torrents.php?torrentid=$Request[TorrentID]\" dir=\"ltr\">$RequestGroupName</a>";
+} else {
+    $DisplayLink = '<span dir="ltr">' . $RequestGroupName . "</span>";
+}
+$FullName = $RequestGroupName;
 
-    $CodecString = implode(', ', explode('|', $Request['CodecList']));
-    $ResolutionString = implode(', ', explode('|', $Request['ResolutionList']));
-    $ContainerString = implode(', ', explode('|', $Request['ContainerList']));
-    $SourceString =  implode(', ', explode('|', $Request['SourceList']));
+$CodecString = implode(', ', explode('|', $Request['CodecList']));
+$ResolutionString = implode(', ', explode('|', $Request['ResolutionList']));
+$ContainerString = implode(', ', explode('|', $Request['ContainerList']));
+$SourceString =  implode(', ', explode('|', $Request['SourceList']));
 
-    if (empty($Request['ReleaseType'])) {
-        $ReleaseName = 'Unknown';
-    } else {
-        $ReleaseName = t('server.torrents.release_types')[$Request['ReleaseType']];
-    }
+if (empty($Request['ReleaseType'])) {
+    $ReleaseName = 'Unknown';
+} else {
+    $ReleaseName = t('server.torrents.release_types')[$Request['ReleaseType']];
 }
 
 //Votes time
@@ -122,24 +120,23 @@ View::show_header(t('server.requests.view_request') . ": $FullName", 'comments,b
                 </div>
             <?
             }
-            if ($CategoryName === 'Movies') { ?>
-                <div class="SidebarItemArtists SidebarItem Box">
-                    <div class="SidebarItem-header Box-header">
-                        <strong><?= t('server.common.director') ?></strong>
-                    </div>
-                    <ul class="SidebarList SidebarItem-body Box-body">
-                        <?
-                        foreach ($ArtistForm[1] as $Artist) {
-                        ?>
-                            <li class="SidebarList-item">
-                                <?= Artists::display_artist($Artist) ?>
-                            </li>
-                        <?
-                        }
-                        ?>
-                    </ul>
+            ?>
+            <div class="SidebarItemArtists SidebarItem Box">
+                <div class="SidebarItem-header Box-header">
+                    <strong><?= t('server.common.director') ?></strong>
                 </div>
-            <?  } ?>
+                <ul class="SidebarList SidebarItem-body Box-body">
+                    <?
+                    foreach ($ArtistForm[Artists::Director] as $Artist) {
+                    ?>
+                        <li class="SidebarList-item">
+                            <?= Artists::display_artist($Artist) ?>
+                        </li>
+                    <?
+                    }
+                    ?>
+                </ul>
+            </div>
             <div class="SidebarItemTags SidebarItem Box">
                 <div class="SidebarItem-header Box-header">
                     <strong><?= t('server.requests.tags') ?></strong>
@@ -198,8 +195,17 @@ View::show_header(t('server.requests.view_request') . ": $FullName", 'comments,b
             </div>
         </div>
         <div class="LayoutMainSidebar-main">
+            <div class="Box box_request_desc requests__description">
+                <div class="Box-header"><strong><?= t('server.requests.description') ?></strong></div>
+                <div class="Box-body HtmlText PostArticle">
+                    <?= Text::full_format($Request['Description']); ?>
+                </div>
+            </div>
             <div class="TableContainer">
                 <table class="Form-rowList FormRequestFill Table">
+                    <tr class="Form-rowHeader">
+                        <td class="Form-itle"><?= t('server.requests.basic_info') ?></td>
+                    </tr>
                     <tr class="Form-row">
                         <td class="Form-label"><?= t('server.requests.created') ?></td>
                         <td class="Form-items">
@@ -256,16 +262,29 @@ View::show_header(t('server.requests.view_request') . ": $FullName", 'comments,b
                         </tr>
 
                     <?  } ?>
-                    <tr class="Form-row">
-                        <td class="Form-label"><?= t('server.requests.purchasable_at') ?>:</td>
-                        <td class="Form-items"><?= $Request['PurchasableAt'] ?></td>
-                    </tr>
+                    <? if ($Request['PurchasableAt']) { ?>
+                        <tr class="Form-row">
+                            <td class="Form-label"><?= t('server.requests.purchasable_at') ?>:</td>
+                            <td class="Form-items"><?= $Request['PurchasableAt'] ?></td>
+                        </tr>
+                    <? } ?>
                     <? if ($Request['LastVote'] > $Request['TimeAdded']) { ?>
                         <tr class="Form-row">
                             <td class="Form-label"><?= t('server.requests.last_voted') ?></td>
                             <td class="Form-items"><?= time_diff($Request['LastVote']) ?></td>
                         </tr>
                     <? } ?>
+                    <tr class="Form-row" id="bounty">
+                        <td class="Form-label"><?= t('server.requests.bounty') ?></td>
+                        <td class="Form-items" id="formatted_bounty"><?= Format::get_size($RequestVotes['TotalBounty']) ?></td>
+                    </tr>
+                </table>
+            </div>
+            <div class="TableContainer">
+                <table class="Form-rowList FormRequestFill Table">
+                    <tr class="Form-rowHeader">
+                        <td class="Form-itle"><?= t('server.common.actions') ?></td>
+                    </tr>
                     <tr class="Form-row">
                         <td class="Form-label"><?= t('server.requests.quick_vote') ?></td>
                         <td class="Form-items">
@@ -321,10 +340,7 @@ View::show_header(t('server.requests.view_request') . ": $FullName", 'comments,b
                             </td>
                         </tr>
                     <? } ?>
-                    <tr class="Form-row" id="bounty">
-                        <td class="Form-label"><?= t('server.requests.bounty') ?></td>
-                        <td class="Form-items" id="formatted_bounty"><?= Format::get_size($RequestVotes['TotalBounty']) ?></td>
-                    </tr>
+
                     <?
                     if ($IsFilled) {
                         $TimeCompare = 1267643718; // Requests v2 was implemented 2010-03-03 20:15:18
@@ -367,7 +383,7 @@ View::show_header(t('server.requests.view_request') . ": $FullName", 'comments,b
                                     </div>
                                     <? if (check_perms('site_moderate_requests')) { ?>
                                         <div class="field_div">
-                                            <?= t('server.requests.for_user') ?>: <input class="Input" type="text" size="25" name="user" <?= (!empty($FillerUsername) ? " value=\"$FillerUsername\"" : '') ?> />
+                                            <?= t('server.requests.for_user') ?>: <input class="Input is-small" type="text" size="25" name="user" <?= (!empty($FillerUsername) ? " value=\"$FillerUsername\"" : '') ?> />
                                         </div>
                                     <?      } ?>
                                     <div class="submit_div">
@@ -376,14 +392,8 @@ View::show_header(t('server.requests.view_request') . ": $FullName", 'comments,b
                                 </form>
                             </td>
                         </tr>
-                    <?  } ?>
+                    <? } ?>
                 </table>
-            </div>
-            <div class="Box box_request_desc requests__description">
-                <div class="Box-header"><strong><?= t('server.requests.description') ?></strong></div>
-                <div class="Box-body HtmlText PostArticle">
-                    <?= Text::full_format($Request['Description']); ?>
-                </div>
             </div>
             <div id="request_comments">
                 <div class="BodyNavLinks">

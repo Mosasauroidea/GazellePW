@@ -36,7 +36,6 @@ $Torrent = $TorrentCache;
 $TorrentDetails = $TorrentCache['Group'];
 $GroupID = $TorrentDetails['ID'];
 
-$ArtistForm = Artists::get_artist($GroupID);
 if ($TorrentDetails['CategoryID'] == 0) {
     $CategoryName = "Unknown";
 } else {

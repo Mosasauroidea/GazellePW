@@ -39,7 +39,7 @@ View::show_header(t('server.tools.manage_permissions'));
                     <td class="Table-cell"><?= t('server.tools.name') ?></td>
                     <td class="Table-cell"><?= t('server.tools.level') ?></td>
                     <td class="Table-cell"><?= t('server.tools.user_count') ?></td>
-                    <td class="Table-cell Table-cellCenter"><?= t('server.tools.actions') ?></td>
+                    <td class="Table-cell Table-cellCenter"><?= t('server.common.actions') ?></td>
                 </tr>
                 <? while (list($ID, $Name, $Level, $Secondary, $UserCount) = $DB->next_record()) {
                     $part = $Secondary ? 'secclass' : 'class';

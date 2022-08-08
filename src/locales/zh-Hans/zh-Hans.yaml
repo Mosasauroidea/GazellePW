@@ -16,6 +16,8 @@ client.common.check_all: |-
   全选
 client.common.cinematographer: |-
   摄影
+client.common.clear: |-
+  清除
 client.common.collapse_this_group: |-
   折叠本影片。在左键单击的同时按住 [Command] <em>(Mac)</em> 或 [Ctrl] <em>(PC)</em> 键以折叠{{section}}所有的影片。
 client.common.composer: |-
@@ -32,8 +34,6 @@ client.common.expand_this_group: |-
   展开本影片。在左键单击的同时按住 [Command] <em>(Mac)</em> 或 [Ctrl] <em>(PC)</em> 键以展开{{section}}所有的影片。
 client.common.hide: |-
   隐藏
-client.common.clear: |-
-  清除
 client.common.in_this_release_type: |-
   本发布类型
 client.common.like: |-
@@ -94,14 +94,16 @@ client.torrent_table.collapse_edition: |-
   折叠本清晰度组。在左键单击的同时按住 [Command] <em>(Mac)</em> 或 [Ctrl] <em>(PC)</em> 键以折叠本影片中所有的清晰度组。
 client.torrent_table.expand_edition: |-
   展开本清晰度组。在左键单击的同时按住 [Command] <em>(Mac)</em> 或 [Ctrl] <em>(PC)</em> 键以展开本影片中所有的清晰度组。
-client.upload.codec_required: |-
-  请选择一个编码。
 client.upload.container_required: |-
   请选择一个容器。
 client.upload.desc_img_3_png: |-
   请添加至少三张 PNG 格式的电影原始分辨率（非播放分辨率）截图，操作方法请见 <a href="wiki.php?action=article&id=51" target="_blank">本文</a>。
 client.upload.desc_img_hosts: |-
   请使用发布规则 <a href="rules.php?p=upload#2.2.1" target="_blank">2.2.1</a> 所推荐的图床以保证截图的访问速度和有效时长。
+client.upload.english_name: |-
+  英文名
+client.upload.imdb: |-
+  IMDb
 client.upload.imdb_link_required: |-
   请填写格式正确的 IMDb 链接或 ID！
 client.upload.mediainfo_complete_name_required: |-
@@ -128,6 +130,8 @@ client.upload.resolution_required: |-
   请选择一个分辨率。
 client.upload.source_required: |-
   请选择片源。如果你不确定，请选 “Other”，然后输入 “Unknown”。
+client.upload.sub_name: |-
+  中文名
 client.upload.subtitles_required: |-
   请指明文件所包含的字幕，如果没有就勾选 “无字幕”。
 client.upload.subtitles_with_mediainfo: |-
@@ -170,6 +174,8 @@ client.validation.please_fix_this_field: |-
   请修正此栏。
 client.validation.this_field_is_required: |-
   此栏必填。
+englishupload.codec_required: |-
+  请选择一个编码。
 server.apply.applicant: |-
   申请人
 server.apply.applicant_administration: |-
@@ -324,8 +330,6 @@ server.artist.cannot_redirect: |-
   Cannot redirect to a nonexistent artist alias.
 server.artist.change_artist_id: |-
   修改艺人ID
-server.artist.chinese_name: |-
-  中文名
 server.artist.confirm_merge: |-
   合并确认
 server.artist.confirm_merge_body: |-
@@ -412,6 +416,8 @@ server.artist.similarartist_note: |-
   未发现
 server.artist.statistics: |-
   统计
+server.artist.sub_name: |-
+  中文名
 server.artist.switch_to_cloud: |-
   切换到浮云图
 server.artist.switch_to_map: |-
@@ -977,6 +983,8 @@ server.comments.you_ve: |-
   我
 server.comments.your_collages: |-
   我所创建合集
+server.common.actions: |-
+  操作
 server.common.add: |-
   添加
 server.common.add_bookmark: |-
@@ -2482,130 +2490,6 @@ server.reports.you_cannot_start_a_conversation_with_yourself: |-
   你不能向自己发起对话！
 server.reports.you_reported_sth_for_the_reason: |-
   你报告了 %s，理由是
-server.reportsv2.types.master.dupe.report_messages.1: |-
-  请附上既有种子的链接
-server.reportsv2.types.master.dupe.title: |-
-  重复
-server.reportsv2.types.master.dupe.resolve_options.pm: |-
-  [rule]h2.2[/rule]。你的种子已被报告，因为它与站点既有种子重复。
-server.reportsv2.types.master.banned.report_messages.1: |-
-  请明确指出其违反了 “禁止发布” 列表中的哪一项。
-server.reportsv2.types.master.banned.title: |-
-  特别禁止内容
-server.reportsv2.types.master.banned.resolve_options.pm: |-
-  [rule]h1.2[/rule]。你上传了本站目前禁止的资源。列于禁止发布列表（位于 [url=upload.php]发布页面[/url] 顶部）以及上传规则中 [url=rules.php?p=upload#1.2]特别禁止[/url] 部分的资源不能被上传到本站。除非你的种子符合禁止发布列表注释中指定的条件，否则请勿发布。
-  你的种子已被报告，因为它包含了来自禁止发布列表或上传规则中特别禁止部分的资源。
-server.reportsv2.types.master.urgent.report_messages.1: |-
-  该类目仅适用于紧急情况，一般是因为在种子中泄露了个人信息。
-server.reportsv2.types.master.urgent.report_messages.2: |-
-  滥用 “紧急” 类目会导致警告或更严重的惩罚。
-server.reportsv2.types.master.urgent.report_messages.3: |-
-  由于该类目不能方便地告知管理员问题所在，所以请在说明中详细描述种子的问题。
-server.reportsv2.types.master.urgent.title: |-
-  紧急
-server.reportsv2.types.master.other.report_messages.1: |-
-  请在说明中尽可能详细地描述问题。
-server.reportsv2.types.master.other.title: |-
-  其他
-server.reportsv2.types.master.trump.report_messages.1: |-
-  请列出新种子能够替代原有种子的具体原因。
-server.reportsv2.types.master.trump.report_messages.2: |-
-  请确保你正在报告的，是<strong class="u-colorWarning">将被替代</strong>且应被删除的种子，而不是你认为应保留的种子。
-server.reportsv2.types.master.trump.title: |-
-  替代
-server.reportsv2.types.master.trump.resolve_options.pm: |-
-  [rule]h2.2[/rule]。你的种子已被报告，因为它将被新的种子替代。
-server.reportsv2.types.movie.transcode.report_messages.1: |-
-  请写明你检查的音视频轨以及用以确认它为劣质转码的方法。
-server.reportsv2.types.movie.transcode.report_messages.2: |-
-  如有可能，请附上至少一张用以佐证的分析图，分析图多多益善。
-server.reportsv2.types.movie.transcode.title: |-
-  劣质转码
-server.reportsv2.types.movie.transcode.resolve_options.pm: |-
-  [rule]5.4.21[/rule]。我们不接受有损来源的转码或重编码。
-  你的种子已被报告，因为它包含了劣质转码的音轨。
-server.reportsv2.types.movie.low.report_messages.1: |-
-  请向我们提供 PNG 格式的影片原始分辨率截图。
-server.reportsv2.types.movie.low.title: |-
-  劣质源
-server.reportsv2.types.movie.low.resolve_options.pm: |-
-  [rule]5.4.10[/rule]、[rule]5.4.11[/rule]、[rule]5.4.21[/rule]、[rule]5.4.24[/rule]。编码自质量低下的、存在错误的、低清的源的作品会被标记为 “可替代”。
-server.reportsv2.types.movie.names_bad.report_messages.1: |-
-  请指出有问题的文件（夹）名。
-server.reportsv2.types.movie.names_bad.report_messages.2: |-
-  理想情况下，你可以发布修复了文件（夹）名问题之后的种子以替代该种子。
-server.reportsv2.types.movie.names_bad.title: |-
-  问题文件（夹）名
-server.reportsv2.types.movie.names_bad.resolve_options.pm: |-
-  [rule]2.1.1[/rule]。文件（夹）名必须使用电影原始语种名称或官方英文名（推荐）。（如海报所示等的官方英文名，其优先级高于 IMDb。）
-
-  [rule]2.1.2[/rule]。压制组发行（来自 P2P 组或 Scene 组）不应重命名，除非它们不满足规则 [rule]2.1.1[/rule] 或我们的文件名要求。
-
-  [rule]2.1.4[/rule]。DVD 和 BD 文件目录结构不允许改动，仅顶层文件夹允许重命名。
-
-  你的种子被标记为问题文件（夹）名且可被替代。当然你也可自行修复这个种子，补充或修正文件（夹）名然后重新发布种子。然后以 “替代” 为由报告（RP）旧种，在报告说明中指出你已修复的命名问题，同时请确保提供用以替代的新种永久链接（PL）。
-server.reportsv2.types.movie.video_track_bad.report_messages.1: |-
-  请指出视频轨存在的具体问题，并向我们提供 PNG 格式的影片原始分辨率截图。
-server.reportsv2.types.movie.video_track_bad.title: |-
-  问题视频轨
-server.reportsv2.types.movie.video_track_bad.resolve_options.pm: |-
-  [rule]5.4.1[/rule]、[rule]5.4.2[/rule]。种子的纵横比因编码错误等原因与原始的、影院上映的电影不同。
-
-  [rule]5.4.5[/rule]、[rule]5.4.6[/rule]。种子被错误地反交错，或以错误的帧率播放。
-
-  [rule]5.4.18[/rule]。种子明显裁边过多或过少。
-
-  [rule]5.4.22[/rule]。种子含有明显的水印。
-
-  你的种子被标记为 “问题视频轨” 且可被替代。
-server.reportsv2.types.movie.audio_track_bad.report_messages.1: |-
-  请指出音频轨存在的具体问题。
-server.reportsv2.types.movie.audio_track_bad.title: |-
-  问题音频轨
-server.reportsv2.types.movie.audio_track_bad.resolve_options.pm: |-
-  [rule]5.4.3[/rule]。种子内含的音频轨相对其分辨率而言过于庞大。
-
-  [rule]5.4.4[/rule]。种子含有冗余的音频轨。
-
-  [rule]5.4.16[/rule]。既没有原始语种音频也没有国语配音，只有非国语配音的种子会被标记为 “可替代”。
-
-  [rule]5.4.17[/rule]。种子中包含的音轨有效，但不同步。
-
-  你的种子被标记为 “问题音频轨” 且可被替代。
-server.reportsv2.types.movie.subtitle_track_bad.report_messages.1: |-
-  请指出字幕轨存在的具体问题。
-server.reportsv2.types.movie.subtitle_track_bad.title: |-
-  问题字幕轨
-server.reportsv2.types.movie.subtitle_track_bad.resolve_options.pm: |-
-  [rule]5.4.7[/rule]。种子中包含的字幕有效，但不同步。
-
-  [rule]5.4.14[/rule]。无中字槽位的种子如果是不包含英文字幕（通过字幕管理器内挂或外挂）的非英语电影，会被标为 “可替代”。
-
-  [rule]5.4.15[/rule]。无中字槽位的种子，其重要非英语对白不包含单独的英文字幕。
-
-  [rule]5.4.19[/rule]。包含字幕质量很差，且不是电影准确翻译的种子会被标为 “可替代”。
-
-  [rule]5.4.20[/rule]。字幕被硬编码在视频轨中的种子会被标为 “可替代”。
-
-  你的种子被标记为 “问题字幕轨” 且可被替代。
-server.reportsv2.types.movie.torrent_description_bad.report_messages.1: |-
-  请指出种子描述存在的具体问题。
-server.reportsv2.types.movie.torrent_description_bad.title: |-
-  问题种子描述
-server.reportsv2.types.movie.torrent_description_bad.resolve_options.pm: |-
-  [rule]2.2[/rule]。当前填写的种子描述未符合规则要求，可能是 MediaInfo 不完整、有错误；或截图不符合规则。
-server.reportsv2.types.movie.format.report_messages.1: |-
-  在规则容许规格范围外的种子都可以使用本项，如 SDR x265 1080p Encode、RMVB 720p Encode 等。
-server.reportsv2.types.movie.format.report_messages.2: |-
-  请指明是容器不被规则允许，还是分辨率存在问题。
-server.reportsv2.types.movie.format.title: |-
-  规格不当
-server.reportsv2.types.movie.format.resolve_options.pm: |-
-  [rule]5.4.8[/rule]。种子应符合我们 [rule]h3[/rule] 推荐格式的要求。
-
-  [rule]5.4.9[/rule]。种子应符合我们 [rule]h3[/rule] 推荐分辨率的要求。
-
-  你的种子已被报告，因为其格式或分辨率与规则不符。
 server.reportsv2.a_torrent_with_that_id_does_not_exist: |-
   不存在该 ID 的种子。
 server.reportsv2.all_new_reports_for_the_chosen_type: |-
@@ -2830,6 +2714,130 @@ server.reportsv2.tracks_should_be_given_in_a_space_separated_list_of_numbers_wit
   音轨序号之间用空格空开，且不应含有数字以外的字符。
 server.reportsv2.type: |-
   类目
+server.reportsv2.types.master.banned.report_messages.1: |-
+  请明确指出其违反了 “禁止发布” 列表中的哪一项。
+server.reportsv2.types.master.banned.resolve_options.pm: |-
+  [rule]h1.2[/rule]。你上传了本站目前禁止的资源。列于禁止发布列表（位于 [url=upload.php]发布页面[/url] 顶部）以及上传规则中 [url=rules.php?p=upload#1.2]特别禁止[/url] 部分的资源不能被上传到本站。除非你的种子符合禁止发布列表注释中指定的条件，否则请勿发布。
+  你的种子已被报告，因为它包含了来自禁止发布列表或上传规则中特别禁止部分的资源。
+server.reportsv2.types.master.banned.title: |-
+  特别禁止内容
+server.reportsv2.types.master.dupe.report_messages.1: |-
+  请附上既有种子的链接
+server.reportsv2.types.master.dupe.resolve_options.pm: |-
+  [rule]h2.2[/rule]。你的种子已被报告，因为它与站点既有种子重复。
+server.reportsv2.types.master.dupe.title: |-
+  重复
+server.reportsv2.types.master.other.report_messages.1: |-
+  请在说明中尽可能详细地描述问题。
+server.reportsv2.types.master.other.title: |-
+  其他
+server.reportsv2.types.master.trump.report_messages.1: |-
+  请列出新种子能够替代原有种子的具体原因。
+server.reportsv2.types.master.trump.report_messages.2: |-
+  请确保你正在报告的，是<strong class="u-colorWarning">将被替代</strong>且应被删除的种子，而不是你认为应保留的种子。
+server.reportsv2.types.master.trump.resolve_options.pm: |-
+  [rule]h2.2[/rule]。你的种子已被报告，因为它将被新的种子替代。
+server.reportsv2.types.master.trump.title: |-
+  替代
+server.reportsv2.types.master.urgent.report_messages.1: |-
+  该类目仅适用于紧急情况，一般是因为在种子中泄露了个人信息。
+server.reportsv2.types.master.urgent.report_messages.2: |-
+  滥用 “紧急” 类目会导致警告或更严重的惩罚。
+server.reportsv2.types.master.urgent.report_messages.3: |-
+  由于该类目不能方便地告知管理员问题所在，所以请在说明中详细描述种子的问题。
+server.reportsv2.types.master.urgent.title: |-
+  紧急
+server.reportsv2.types.movie.audio_track_bad.report_messages.1: |-
+  请指出音频轨存在的具体问题。
+server.reportsv2.types.movie.audio_track_bad.resolve_options.pm: |-
+  [rule]5.4.3[/rule]。种子内含的音频轨相对其分辨率而言过于庞大。
+
+  [rule]5.4.4[/rule]。种子含有冗余的音频轨。
+
+  [rule]5.4.16[/rule]。既没有原始语种音频也没有国语配音，只有非国语配音的种子会被标记为 “可替代”。
+
+  [rule]5.4.17[/rule]。种子中包含的音轨有效，但不同步。
+
+  你的种子被标记为 “问题音频轨” 且可被替代。
+server.reportsv2.types.movie.audio_track_bad.title: |-
+  问题音频轨
+server.reportsv2.types.movie.format.report_messages.1: |-
+  在规则容许规格范围外的种子都可以使用本项，如 SDR x265 1080p Encode、RMVB 720p Encode 等。
+server.reportsv2.types.movie.format.report_messages.2: |-
+  请指明是容器不被规则允许，还是分辨率存在问题。
+server.reportsv2.types.movie.format.resolve_options.pm: |-
+  [rule]5.4.8[/rule]。种子应符合我们 [rule]h3[/rule] 推荐格式的要求。
+
+  [rule]5.4.9[/rule]。种子应符合我们 [rule]h3[/rule] 推荐分辨率的要求。
+
+  你的种子已被报告，因为其格式或分辨率与规则不符。
+server.reportsv2.types.movie.format.title: |-
+  规格不当
+server.reportsv2.types.movie.low.report_messages.1: |-
+  请向我们提供 PNG 格式的影片原始分辨率截图。
+server.reportsv2.types.movie.low.resolve_options.pm: |-
+  [rule]5.4.10[/rule]、[rule]5.4.11[/rule]、[rule]5.4.21[/rule]、[rule]5.4.24[/rule]。编码自质量低下的、存在错误的、低清的源的作品会被标记为 “可替代”。
+server.reportsv2.types.movie.low.title: |-
+  劣质源
+server.reportsv2.types.movie.names_bad.report_messages.1: |-
+  请指出有问题的文件（夹）名。
+server.reportsv2.types.movie.names_bad.report_messages.2: |-
+  理想情况下，你可以发布修复了文件（夹）名问题之后的种子以替代该种子。
+server.reportsv2.types.movie.names_bad.resolve_options.pm: |-
+  [rule]2.1.1[/rule]。文件（夹）名必须使用电影原始语种名称或官方英文名（推荐）。（如海报所示等的官方英文名，其优先级高于 IMDb。）
+
+  [rule]2.1.2[/rule]。压制组发行（来自 P2P 组或 Scene 组）不应重命名，除非它们不满足规则 [rule]2.1.1[/rule] 或我们的文件名要求。
+
+  [rule]2.1.4[/rule]。DVD 和 BD 文件目录结构不允许改动，仅顶层文件夹允许重命名。
+
+  你的种子被标记为问题文件（夹）名且可被替代。当然你也可自行修复这个种子，补充或修正文件（夹）名然后重新发布种子。然后以 “替代” 为由报告（RP）旧种，在报告说明中指出你已修复的命名问题，同时请确保提供用以替代的新种永久链接（PL）。
+server.reportsv2.types.movie.names_bad.title: |-
+  问题文件（夹）名
+server.reportsv2.types.movie.subtitle_track_bad.report_messages.1: |-
+  请指出字幕轨存在的具体问题。
+server.reportsv2.types.movie.subtitle_track_bad.resolve_options.pm: |-
+  [rule]5.4.7[/rule]。种子中包含的字幕有效，但不同步。
+
+  [rule]5.4.14[/rule]。无中字槽位的种子如果是不包含英文字幕（通过字幕管理器内挂或外挂）的非英语电影，会被标为 “可替代”。
+
+  [rule]5.4.15[/rule]。无中字槽位的种子，其重要非英语对白不包含单独的英文字幕。
+
+  [rule]5.4.19[/rule]。包含字幕质量很差，且不是电影准确翻译的种子会被标为 “可替代”。
+
+  [rule]5.4.20[/rule]。字幕被硬编码在视频轨中的种子会被标为 “可替代”。
+
+  你的种子被标记为 “问题字幕轨” 且可被替代。
+server.reportsv2.types.movie.subtitle_track_bad.title: |-
+  问题字幕轨
+server.reportsv2.types.movie.torrent_description_bad.report_messages.1: |-
+  请指出种子描述存在的具体问题。
+server.reportsv2.types.movie.torrent_description_bad.resolve_options.pm: |-
+  [rule]2.2[/rule]。当前填写的种子描述未符合规则要求，可能是 MediaInfo 不完整、有错误；或截图不符合规则。
+server.reportsv2.types.movie.torrent_description_bad.title: |-
+  问题种子描述
+server.reportsv2.types.movie.transcode.report_messages.1: |-
+  请写明你检查的音视频轨以及用以确认它为劣质转码的方法。
+server.reportsv2.types.movie.transcode.report_messages.2: |-
+  如有可能，请附上至少一张用以佐证的分析图，分析图多多益善。
+server.reportsv2.types.movie.transcode.resolve_options.pm: |-
+  [rule]5.4.21[/rule]。我们不接受有损来源的转码或重编码。
+  你的种子已被报告，因为它包含了劣质转码的音轨。
+server.reportsv2.types.movie.transcode.title: |-
+  劣质转码
+server.reportsv2.types.movie.video_track_bad.report_messages.1: |-
+  请指出视频轨存在的具体问题，并向我们提供 PNG 格式的影片原始分辨率截图。
+server.reportsv2.types.movie.video_track_bad.resolve_options.pm: |-
+  [rule]5.4.1[/rule]、[rule]5.4.2[/rule]。种子的纵横比因编码错误等原因与原始的、影院上映的电影不同。
+
+  [rule]5.4.5[/rule]、[rule]5.4.6[/rule]。种子被错误地反交错，或以错误的帧率播放。
+
+  [rule]5.4.18[/rule]。种子明显裁边过多或过少。
+
+  [rule]5.4.22[/rule]。种子含有明显的水印。
+
+  你的种子被标记为 “问题视频轨” 且可被替代。
+server.reportsv2.types.movie.video_track_bad.title: |-
+  问题视频轨
 server.reportsv2.unclaim: |-
   取消认领
 server.reportsv2.unclaim_all: |-
@@ -2896,6 +2904,10 @@ server.requests.associated_with_the_above_torrent_group: |-
   和上方填写的种子组关联在一起。
 server.requests.at_least_one_director: |-
   请填写至少一位导演。
+server.requests.auto_fill_note: |-
+  使用 IMDb 或者种子组链接自动填充
+server.requests.basic_info: |-
+  基本信息
 server.requests.bookmarked_requests: |-
   求种收藏
 server.requests.bookmarks: |-
@@ -2980,6 +2992,10 @@ server.requests.last_voted: |-
   最近的赞助人
 server.requests.lastvote: |-
   最后投票
+server.requests.link: |-
+  链接
+server.requests.link_empty_warning: |-
+  如 IMDb 链接和种子组链接都不存在，请勾选选框。
 server.requests.link_not_valid: |-
   你提供的种子链接无效。
 server.requests.min_bounty: |-
@@ -2996,6 +3012,8 @@ server.requests.new_request: |-
   发布求种
 server.requests.new_rules: |-
   请确保你发布的求种符合 <a href='rules.php?p=requests'>求种规则</a>！
+server.requests.no_link: |-
+  无链接
 server.requests.no_such_user_to_fill: |-
   求种用户不存在！
 server.requests.of_bounty_your_new_stats: |-
@@ -3010,6 +3028,8 @@ server.requests.purchasable_at: |-
   可购买于
 server.requests.purchasable_at_placeholder: |-
   选填，用以指向当前可购买片源的网店链接（不允许填预售链接）
+server.requests.quick_vote: |-
+  快速投票
 server.requests.ratio: |-
   分享率
 server.requests.reason: |-
@@ -3090,8 +3110,6 @@ server.requests.view_request: |-
   查看求种
 server.requests.vote_requests: |-
   我参与的求种
-server.requests.quick_vote: |-
-  快速投票
 server.requests.will_be: |-
   将会
 server.requests.year: |-
@@ -3452,12 +3470,6 @@ server.time.y: |-
   年
 server.time.ys: |-
   年
-server.tools.25_percent_off: |-
-  -25%
-server.tools.50_percent_off: |-
-  -50%
-server.tools.75_percent_off: |-
-  -75%
 server.tools.Bonus: |-
   积分
 server.tools.about_rendering: |-
@@ -3467,10 +3479,6 @@ server.tools.about_rendering_note: |-
 server.tools.above: |-
   大于
 server.tools.access: |-
-  操作
-server.tools.action: |-
-  操作
-server.tools.actions: |-
   操作
 server.tools.activity: |-
   活动
@@ -3703,7 +3711,7 @@ server.tools.cannot_merge_tag_with_itself: |-
 server.tools.cas_update_success: |-
   自动控制/更新 (成功)
 server.tools.cas_update_success_title_1: |-
-  在已发布的自动控制指令中，有超过 30% 是不必要的时间和资源浪费。
+  在已发布的自动控制指令中，有超过 30%% 是不必要的时间和资源浪费。
 server.tools.cas_update_success_title_2: |-
   使用 -C 参数禁用自动控制，因为用不着，所以可以节省资源。
 server.tools.cas_updates: |-
@@ -3713,7 +3721,7 @@ server.tools.cashe_current_index: |-
 server.tools.cashe_storage: |-
   缓存空间占用
 server.tools.cashe_storage_title: |-
-  当空间占用超过 85% 时开始释放
+  当空间占用超过 85%% 时开始释放
 server.tools.cashe_total_index: |-
   缓存全部索引
 server.tools.category: |-
@@ -3827,7 +3835,7 @@ server.tools.delete_failed: |-
 server.tools.delete_success: |-
   删除 (成功)
 server.tools.delete_success_title: |-
-  在已发出的删除命令中，有 30% 以上是不必要的，浪费了时间和资源。
+  在已发出的删除命令中，有 30%% 以上是不必要的，浪费了时间和资源。
 server.tools.deleted_on: |-
   删除时间
 server.tools.deletes: |-
@@ -3950,8 +3958,6 @@ server.tools.forum_management: |-
   论坛管理
 server.tools.forum_manager: |-
   论坛版块管理
-server.tools.free_leech: |-
-  免费
 server.tools.gamble: |-
   赌博
 server.tools.gamble_title: |-
@@ -4204,8 +4210,6 @@ server.tools.navigation_manager: |-
   导航管理
 server.tools.net_growth: |-
   净增长
-server.tools.neutral_leech: |-
-  中性
 server.tools.new_donations_from: |-
   来自 %s 的新捐助
 server.tools.new_official_tag: |-
@@ -4977,8 +4981,6 @@ server.torrents.checked_explanation: |-
   检查（此图标仅指种子是否已被检查而非质量好坏，具体请查看 Wiki）
 server.torrents.chi: |-
   中字
-server.torrents.chinese_title: |-
-  中文标题
 server.torrents.cinematographer: |-
   摄影
 server.torrents.clear_all_old: |-
@@ -5256,11 +5258,11 @@ server.torrents.non_wiki_torrent_group_editing: |-
 server.torrents.nothing_found: |-
   无匹配结果！
 server.torrents.off25: |-
-  -25%
+  -25%%
 server.torrents.off50: |-
-  -50%
+  -50%%
 server.torrents.off75: |-
-  -75%
+  -75%%
 server.torrents.only_hnr: |-
   只显示H&R
 server.torrents.only_shows_free_torrents: |-
@@ -5359,7 +5361,7 @@ server.torrents.resolve: |-
 server.torrents.retention_slot: |-
   存档槽
 server.torrents.retention_slot_requirements: |-
-  应小于质量类槽位体积的 80%。压制质量达到一般要求即可。
+  应小于质量类槽位体积的 80%%。压制质量达到一般要求即可。
 server.torrents.retention_type_slot: |-
   存档槽类 (含存档和特色)
 server.torrents.revert: |-
@@ -5464,6 +5466,8 @@ server.torrents.space_to_space: |-
   &nbsp;将续种请求发送给了&nbsp;
 server.torrents.split_off_into_new_group: |-
   拆分到新的种子组
+server.torrents.sub_title: |-
+  中文标题
 server.torrents.subscribe: |-
   订阅评论
 server.torrents.successfully_sent_re_seed_request: |-
@@ -5682,12 +5686,8 @@ server.upload.chinese_movie_synopsis: |-
   中文影片简介
 server.upload.chinese_movie_synopsis_note: |-
   如果找不到中文简介，请填写 IMDb 的英文简介，不要重复已经有其他途径展示的信息（演员、语言等）。
-server.upload.chinese_name: |-
-  中文名
 server.upload.chinese_simplified: |-
   简体
-server.upload.chinese_title: |-
-  中文标题
 server.upload.chinese_traditional: |-
   繁体
 server.upload.cinematographer: |-
@@ -5718,6 +5718,8 @@ server.upload.english: |-
   英语
 server.upload.english_movie_synopsis: |-
   英文影片简介
+server.upload.english_name: |-
+  英文名
 server.upload.enter_at_least_one_artist: |-
   请填写至少一位导演。
 server.upload.estonian: |-
@@ -5916,6 +5918,10 @@ server.upload.special_effects_subtitles_label: |-
   特效字幕
 server.upload.staff_note: |-
   管理备注
+server.upload.sub_name: |-
+  中文名
+server.upload.sub_title: |-
+  中文标题
 server.upload.swedish: |-
   瑞典语
 server.upload.tags: |-

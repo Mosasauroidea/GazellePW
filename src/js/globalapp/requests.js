@@ -1,5 +1,14 @@
 const minimumVote = 1 * 1024 * 1024 * 1024
 
+document.addEventListener('DOMContentLoaded', () => {
+  const form = document.querySelector('.FormRequestNew')
+  form.onsubmit = function (e) {
+    $('input:disabled, select:disabled').prop('disabled', false)
+    $('#post').addClass('is-loading').prop('disabled', true)
+    return true
+  }
+})
+
 globalapp.requestVote = function requestVote(amount, requestid) {
   if (typeof amount == 'undefined') {
     amount = parseInt($('#amount').raw().value)
@@ -109,67 +118,6 @@ globalapp.requestCalculate = function requestCalculate() {
   }
 }
 
-var ArtistCount = 1
-globalapp.requestAddArtistField = function requestAddArtistField(movie = false) {
-  var ArtistIDField = document.createElement('input')
-  ArtistIDField.type = 'hidden'
-  ArtistIDField.id = 'artist_id_' + ArtistCount
-  ArtistIDField.name = 'artist_ids[]'
-  ArtistIDField.size = 45
-
-  var ArtistField = document.createElement('input')
-  ArtistField.classList.add('Input')
-  ArtistField.type = 'text'
-  ArtistField.id = 'artist_' + ArtistCount
-  ArtistField.name = 'artists[]'
-  ArtistField.size = 45
-
-  var ArtistChineseField = document.createElement('input')
-  ArtistChineseField.classList.add('Input', 'is-small')
-  ArtistChineseField.type = 'text'
-  ArtistChineseField.id = 'artist_chinese_' + ArtistCount
-  ArtistChineseField.name = 'artists_chinese[]'
-  ArtistChineseField.size = 25
-
-  var ImportanceField = document.createElement('select')
-  ImportanceField.classList.add('Input')
-  ImportanceField.id = 'importance_' + ArtistCount
-  ImportanceField.name = 'importance[]'
-  ImportanceField.options[0] = new Option(t('client.common.director'), '1')
-  ImportanceField.options[1] = new Option(t('client.common.writer'), '2')
-  ImportanceField.options[2] = new Option(t('client.common.producer'), '3')
-  ImportanceField.options[3] = new Option(t('client.common.composer'), '4')
-  ImportanceField.options[4] = new Option(t('client.common.cinematographer'), '5')
-  ImportanceField.options[5] = new Option(t('client.common.actor'), '6')
-
-  var x = $('#artistfields').raw()
-  const div = document.createElement('div')
-  div.classList.add('Form-inputs', 'is-artist')
-  div.appendChild(ArtistIDField)
-  div.appendChild(ArtistField)
-  div.appendChild(ArtistChineseField)
-  div.appendChild(ImportanceField)
-  $('#artistfields .Form-inputs:last').before(div)
-
-  if ($('#artist_0').data('gazelle-autocomplete') || $('#artist').data('gazelle-autocomplete')) {
-    $(ArtistField).live('focus', function () {
-      $(ArtistField).autocomplete({
-        serviceUrl: 'artist.php?action=autocomplete',
-      })
-    })
-  }
-
-  ArtistCount++
-}
-
-globalapp.requestRemoveArtistField = function requestRemoveArtistField() {
-  if (ArtistCount === 1) {
-    return
-  }
-  $('#artistfields .Form-inputs.is-artist').last().remove()
-  ArtistCount--
-}
-
 globalapp.requestCategories = function requestCategories() {
   var cat = $('#categories').raw().options[$('#categories').raw().selectedIndex].value
   if (cat == 'Movie') {
@@ -200,48 +148,49 @@ globalapp.requestToggle = function reqeustToggle(id, disable) {
   }
 }
 
-globalapp.requestMovieAutofill = function requestMovieAutofill(event) {
-  const target = event.currentTarget
+var ArtistCount = 1
+
+globalapp.requestMovieAutofill = function requestMovieAutofill() {
+  const target = document.querySelector('.Button.autofill')
   var imdb = $('#imdb').val().match(/tt\d+/)
   if (imdb) {
     imdb = imdb[0]
-  } else {
+  }
+  var group = $('#group')
+    .val()
+    .match(/id=\d+/)
+  if (group) {
+    group = $('#group').val()
+  }
+  if (!group && !imdb) {
     return
   }
-
   globalapp.buttonSetLoading(target, true)
   $.ajax({
-    url: 'upload.php',
+    url: 'requests.php',
     data: {
-      action: 'movie_info',
-      imdbid: imdb,
+      action: 'autofill',
+      imdb: imdb,
+      group: group,
     },
     type: 'GET',
-    error: (error) => {
+    error: (err) => {
       globalapp.buttonSetLoading(target, false)
-      console.error(error)
+      globalapp.setFormError('client.common.imdb_unknown_error')
     },
     success: (data) => {
       globalapp.buttonSetLoading(target, false)
-      const errorMessage = $('.imdb.Form-errorMessage')
+      globalapp.setFormError(null)
       if (data.code) {
-        globalapp.setFormError(
-          data.code === 1
-            ? 'client.error.invalid_imdb_link_note'
-            : data.code === 2
-            ? 'client.error.request_torrent_group_exists_note'
-            : 'client.error.imdb_unknown_error',
-          data.code === 2 && { groupID: data.error.GroupID }
-        )
+        globalapp.setFormError('client.error.imdb_unknown_error')
         return
       }
       data = data.response
-      errorMessage.text('')
       if (data.Title) {
-        $('#title').val(data.Title)
+        $('#name').val(data.Title)
       }
       if (data.SubTitle) {
-        $('#subtitle').val(data.SubTitle)
+        $('#subname').val(data.SubTitle)
       }
       if (data.Poster) {
         $('#image').val(data.Poster)
@@ -255,6 +204,14 @@ globalapp.requestMovieAutofill = function requestMovieAutofill(event) {
       if (data.Type == 'Movie') {
         $('#releasetype').val(1)
       }
+      if (data.IMDBID) {
+        $('#imdb').val(data.IMDBID)
+      }
+      if (data.GroupLink) {
+        $('#group').val(data.GroupLink)
+      } else {
+        $('#group').val('')
+      }
       var artists = [],
         importance = [],
         artist_ids = []
@@ -265,28 +222,125 @@ globalapp.requestMovieAutofill = function requestMovieAutofill(event) {
           importance.push(1)
         })
       }
+      globalapp.requestRemoveAllArtistFields()
       for (var i = 0; i < artists.length; i++) {
-        var artistid, importanceid, artistimdbid, artist_cname
+        var artistid, importanceid, artistimdbid, artist_sub_name
         if (i) {
           artistid = '#artist_' + i
           importanceid = '#importance_' + i
           artistimdbid = '#artist_id_' + i
-          artist_cname = '#artist_chinese_' + i
+          artist_sub_name = '#artist_sub_' + i
           globalapp.requestAddArtistField(true)
         } else {
           artistid = '#artist'
           importanceid = '#importance'
           artistimdbid = '#artist_id'
-          artist_cname = '#artist_chinese'
+          artist_sub_name = '#artist_sub'
         }
         $(artistid).val(artists[i])
         $(importanceid).val(importance[i])
         $(artistimdbid).val(artist_ids[i])
-        if (data.ChineseName) {
-          $(artist_cname).val(data.ChineseName[[artists[i]]])
+        if (data.SubName && data.SubName[[artists[i]]]) {
+          $(artist_sub_name).val(data.SubName[[artists[i]]])
         }
+      }
+      $('.FormUpload').addClass('u-formUploadAutoFilled')
+      $('.u-formUploadArtistList input, .u-formUploadArtistList select').prop('disabled', true)
+      if (artists.length >= 5) {
+        globalapp.requestArtistsShowMore({ hide: true })
+      }
+      if (data.FillSource == 'group') {
+        $('#imdb, #group, #image, #tags, #releasetype, #year, #name, #subname').prop('disabled', true)
       }
     },
     dataType: 'json',
   })
+}
+
+globalapp.setFormError = function setFormError(key, options = {}) {
+  if (key) {
+    const message = t(key, options)
+    $('.imdb.Form-errorMessage').html(message)
+  } else {
+    $('.imdb.Form-errorMessage').html('')
+  }
+}
+
+globalapp.requestAddArtistField = function AddArtistField() {
+  var ArtistIDField = document.createElement('input')
+  ArtistIDField.classList.add('Input', 'is-small')
+  ArtistIDField.type = 'text'
+  ArtistIDField.id = 'artist_id_' + ArtistCount
+  ArtistIDField.name = 'artist_ids[]'
+  ArtistIDField.size = 45
+  ArtistIDField.placeholder = t('client.upload.imdb')
+
+  var ArtistField = document.createElement('input')
+  ArtistField.classList.add('Input', 'is-small')
+  ArtistField.type = 'text'
+  ArtistField.id = 'artist_' + ArtistCount
+  ArtistField.name = 'artists[]'
+  ArtistField.size = 45
+  ArtistField.placeholder = t('client.upload.english_name')
+
+  var ArtistSubField = document.createElement('input')
+  ArtistSubField.classList.add('Input', 'is-small')
+  ArtistSubField.type = 'text'
+  ArtistSubField.id = 'artist_sub_' + ArtistCount
+  ArtistSubField.name = 'artists_sub[]'
+  ArtistSubField.size = 25
+  ArtistSubField.placeholder = t('client.upload.sub_name')
+
+  var ImportanceField = document.createElement('input')
+  ImportanceField.id = 'importance_' + ArtistCount
+  ImportanceField.name = 'importance[]'
+  ImportanceField.type = 'hidden'
+
+  const div = document.createElement('div')
+  div.classList.add('Form-inputs', 'is-artist')
+  div.appendChild(ArtistIDField)
+  div.appendChild(ArtistField)
+  div.appendChild(ArtistSubField)
+  div.appendChild(ImportanceField)
+  $('#artistfields .show-more').before(div)
+
+  if ($('#artist_0').data('gazelle-autocomplete') || $('#artist').data('gazelle-autocomplete')) {
+    $(ArtistField).live('focus', function () {
+      $(ArtistField).autocomplete({
+        serviceUrl: 'artist.php?action=autocomplete',
+      })
+    })
+  }
+
+  ArtistCount++
+}
+
+globalapp.requestRemoveArtistField = function RemoveArtistField() {
+  if (ArtistCount === 1) {
+    return
+  }
+  $('#artistfields .Form-inputs.is-artist').last().remove()
+  ArtistCount--
+}
+
+globalapp.requestRemoveAllArtistFields = function removeAllArtistFields() {
+  $('#artistfields .Form-inputs.is-artist').slice(1).remove()
+  ArtistCount = 1
+}
+
+globalapp.requestArtistsShowMore = function artistsShowMore({ hide } = {}) {
+  if (hide) {
+    $('.u-formUploadArtistList .Form-inputs').slice(5).hide()
+    $('.u-formUploadArtistList .show-more').gshow()
+  } else {
+    $('.u-formUploadArtistList .Form-inputs').slice(5).show()
+    $('.u-formUploadArtistList .show-more').ghide()
+  }
+}
+
+globalapp.requestNoImdbId = function noImdbId() {
+  const form = $('.FormUpload')
+  form.toggleClass('u-formUploadNoImdbId')
+  $('.u-formUploadNoImdbNote').toggleClass('hidden')
+  $('.u-formUploadArtistList .show-more').ghide()
 }

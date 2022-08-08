@@ -106,7 +106,7 @@ switch ($_REQUEST['action']) {
         include(CONFIG['SERVER_ROOT'] . '/sections/tools/managers/enable_requests.php');
         break;
     case 'ajax_take_enable_request':
-        if (FEATURE_EMAIL_REENABLE) {
+        if (CONFIG['FEATURE_EMAIL_REENABLE']) {
             include(CONFIG['SERVER_ROOT'] . '/sections/tools/managers/ajax_take_enable_request.php');
         } else {
             // Prevent post requests to the ajax page

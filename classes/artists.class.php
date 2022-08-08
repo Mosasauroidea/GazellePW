@@ -1,6 +1,22 @@
 <?
 class Artists {
 
+    const Director = 1;
+    const Writter = 2;
+    const Producer = 3;
+    const Composer = 4;
+    const Camera = 5;
+    const Actor = 6;
+    const Importances = [
+        self::Director, self::Writter, self::Producer, self::Composer, self::Camera, self::Actor
+    ];
+
+    public static function get_artist_name($Artist) {
+        if (Lang::is_default() && !empty($Artist['SubName'])) {
+            return $Artist['SubName'];
+        }
+        return $Artist['Name'];
+    }
     public static function get_first_directors($Artists) {
         if (empty($Artists[1])) {
             return null;
@@ -47,24 +63,23 @@ class Artists {
             G::$DB->query("
 				SELECT ta.GroupID,
 					ta.ArtistID,
-					aa.Name,
+					ag.Name,
 					ta.Importance,
 					ta.AliasID,
-					wa.Image,
-                    wa.ChineseName,
-                    wa.IMDBID
+					ag.Image,
+                    ag.SubName,
+                    ag.IMDBID
 				FROM torrents_artists AS ta
 					JOIN artists_alias AS aa ON ta.AliasID = aa.AliasID
 				LEFT JOIN artists_group as ag ON ag.ArtistID = ta.ArtistID
-				LEFT JOIN wiki_artists as wa ON ag.RevisionID = wa.RevisionID
 				WHERE ta.GroupID IN ($IDs)
 				ORDER BY ta.GroupID ASC,
 					ta.Importance ASC,
 					ta.Order ASC,
 					aa.Name ASC;");
-            while (list($GroupID, $ArtistID, $ArtistName, $ArtistImportance, $AliasID, $Image, $CName, $IMDBID) = G::$DB->next_record(MYSQLI_BOTH, false)) {
-                $Results[$GroupID][$ArtistImportance][] = array('id' => $ArtistID, 'name' => $ArtistName, 'aliasid' => $AliasID, 'image' => $Image, 'cname' => $CName, 'imdbid' => $IMDBID);
-                $New[$GroupID][$ArtistImportance][] = array('id' => $ArtistID, 'name' => $ArtistName, 'aliasid' => $AliasID, 'image' => $Image, 'cname' => $CName, 'imdbid' => $IMDBID);
+            while (list($GroupID, $ArtistID, $ArtistName, $ArtistImportance, $AliasID, $Image, $SubName, $IMDBID) = G::$DB->next_record(MYSQLI_BOTH, false)) {
+                $Results[$GroupID][$ArtistImportance][] = array('ArtistID' => $ArtistID, 'Name' => $ArtistName, 'AliasID' => $AliasID, 'Image' => $Image, 'SubName' => $SubName, 'IMDBID' => $IMDBID);
+                $New[$GroupID][$ArtistImportance][] = array('ArtistID' => $ArtistID, 'Name' => $ArtistName, 'AliasID' => $AliasID, 'Image' => $Image, 'SubName' => $SubName, 'IMDBID' => $IMDBID);
             }
             G::$DB->set_query_id($QueryID);
             foreach ($DBs as $GroupID) {
@@ -83,18 +98,15 @@ class Artists {
     }
 
     public static function get_artist_by_id($ArtistID) {
-        G::$DB->query("
-	SELECT
-        ArtistID as id,
-		Name as name,
-		Image,
-		Body,
-        ChineseName as cname,
-        IMDBID
-	FROM artists_group AS a
-		LEFT JOIN wiki_artists ON wiki_artists.RevisionID = a.RevisionID
-	WHERE a.ArtistID = '$ArtistID'");
-
+        G::$DB->query("SELECT
+            ArtistID,
+    		Name,
+    		Image,
+    		Body,
+            SubName,
+            IMDBID
+    	FROM artists_group AS a
+    	WHERE a.ArtistID = '$ArtistID'");
         if (!G::$DB->has_results()) {
             error(404);
         }
@@ -111,6 +123,99 @@ class Artists {
     public static function get_artist($GroupID) {
         $Results = Artists::get_artists(array($GroupID));
         return $Results[$GroupID];
+    }
+
+    public static function multi_find_artist(array $IMDBIDs) {
+        $IDs = implode(',', $IMDBIDs);
+        G::$DB->query(
+            "SELECT ag.Name,
+					ag.SubName,
+					ag.Image,
+                    ag.IMDBID,
+                    ag.PlaceOfBirth,
+                    ag.Birthday,
+                    ag.Body
+				FROM artists_group AS ag
+				WHERE IMDBID IN ($IDs)"
+        );
+        return G::$DB->to_array('IMDBID', MYSQLI_ASSOC);
+    }
+
+    public static function add_artist($Artist, $Summary = "Auto load") {
+        $UserID = G::$LoggedUser['ID'];
+        G::$DB->begin_transaction();
+        $IMDBID = $Artist['IMDBID'];
+        $Name = db_string($Artist['Name']);
+        $SubName = db_string($Artist['SubName']);
+        $Image = db_string($Artist['Image']);
+        $Body = db_string($Artist['Description']);
+        $Birth = db_string($Artist['Birthday']);
+        $Place = db_string($Artist['PlaceOfBirth']);
+        $ArtistAliasList = $Artist['Alias'];
+
+        $New = false;
+
+        if (!empty($IMDBID)) {
+            G::$DB->prepared_query("SELECT * FROM artists_group WHERE IMDBID = ? FOR UPDATE", $IMDBID);
+            $OldArtist = G::$DB->next_record(MYSQLI_ASSOC);
+            if ($OldArtist) {
+                $OldID = $OldArtist['ArtistID'];
+                // TODO by qwerty update artist info
+                $Artist['ArtistID'] = $OldID;
+                G::$DB->prepared_query("SELECT ArtistID, AliasID, Redirect FROM artists_alias WHERE ArtistID = ?", $OldID);
+                while (list($ArtistID, $AliasID, $Redirect) = G::$DB->next_record(MYSQLI_NUM, false)) {
+                    if ($Redirect) {
+                        $Artist['AliasID'] = $Redirect;
+                    } else {
+                        $Artist['AliasID'] = $AliasID;
+                    }
+                    break;
+                }
+            } else {
+                G::$DB->prepared_query(
+                    "INSERT INTO artists_group (Name, Body, Image, IMDBID, SubName, Birthday, PlaceOfBirth) 
+                VALUES (?, ?, ?, ?, ?, ?, ?)",
+                    $Name,
+                    $Body,
+                    $Image,
+                    $IMDBID,
+                    $SubName,
+                    $Birth,
+                    $Place
+                );
+                $Artist['ArtistID'] = G::$DB->inserted_id();
+                G::$Cache->increment('stats_artist_count');
+                $New = true;
+            }
+        } else {
+            G::$DB->prepared_query("INSERT INTO artists_group (Name, SubName) VALUES (?, ?)", $Name, $SubName);
+            G::$Cache->increment('stats_artist_count');
+            $Artist['ArtistID'] = G::$DB->inserted_id();
+            $New = true;
+        }
+        if ($New) {
+            $ArtistID = $Artist['ArtistID'];
+            G::$DB->prepared_query("INSERT INTO wiki_artists
+							(PageID, Body, Image, UserID, Summary, Time, Birthday, PlaceOfBirth, IMDBID, Name)
+						VALUES
+							(?,?,?,?,?,?,?,?,?,?)", $ArtistID, $Body, $Image, $UserID, $Summary, sqltime(), $Birth, $Place, $IMDBID, $Name);
+            $RevisionID = G::$DB->inserted_id();
+            G::$DB->prepared_query("UPDATE artists_group SET RevisionID = ? WHERE ArtistID = ?", $RevisionID, $ArtistID);
+            G::$DB->prepared_query("INSERT INTO artists_alias (ArtistID, Name)
+						VALUES (?, ?)", $ArtistID, $Name);
+            $AliasID = G::$DB->inserted_id();
+            $Artist['AliasID'] = $AliasID;
+            foreach ($ArtistAliasList as $key => $value) {
+                G::$DB->prepared_query("INSERT INTO artists_alias (ArtistID, Name, Redirect)
+						VALUES (?, ?, ?)", $ArtistID, $value, $AliasID);
+            }
+            if ($SubName) {
+                G::$DB->prepared_query("INSERT INTO artists_alias (ArtistID, Name, Redirect)
+						VALUES (?, ?, ?)", $ArtistID, $SubName, $AliasID);
+            }
+        }
+        G::$DB->commit();
+        return $Artist;
     }
 
     /**
@@ -166,15 +271,15 @@ class Artists {
             global $LoggedUser;
             $UserID = $LoggedUser['ID'];
         }
-        if (!empty($Artist['cname']) && Lang::getUserLang($UserID) == Lang::CHS) {
-            $name = $Artist['cname'];
+        if (!empty($Artist['SubName']) && Lang::getUserLang($UserID) == Lang::CHS) {
+            $name = $Artist['SubName'];
         } else {
-            $name = $Artist['name'];
+            $name = $Artist['Name'];
         }
         if ($MakeLink && !$Escape) {
             error('Invalid parameters to Artists::display_artist()');
         } elseif ($MakeLink) {
-            return '<a href="artist.php?id=' . $Artist['id'] . '" dir="ltr">' . display_str($name) . '</a>';
+            return '<a href="artist.php?id=' . $Artist['ArtistID'] . '" dir="ltr">' . display_str($name) . '</a>';
         } elseif ($Escape) {
             return display_str($name);
         } else {

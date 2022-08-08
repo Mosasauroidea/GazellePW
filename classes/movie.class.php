@@ -38,7 +38,7 @@ class MOVIE {
         $douban_api_url = CONFIG['DOUBAN_API_URL'];
         if (!empty($douban_api_url) && (empty($DoubanData) || $Refresh)) {
             $curl = new Curl();
-            $curl->get(CONFIG['DOUBAN_API_URL'] . 'search?douban-id=' . $DoubanID);
+            $curl->get(CONFIG['DOUBAN_API_URL'] . '/search?douban-id=' . $DoubanID);
             if ($curl->error) {
             } else {
                 $DoubanData = json_encode($curl->response, JSON_UNESCAPED_UNICODE);
@@ -75,7 +75,7 @@ class MOVIE {
         $douban_api_url = CONFIG['DOUBAN_API_URL'];
         if (!empty($douban_api_url) && (empty($DoubanData) || $Refresh)) {
             $curl = new Curl();
-            $curl->get(CONFIG['DOUBAN_API_URL'] . 'search?imdb-id=' . $IMDBID);
+            $curl->get(CONFIG['DOUBAN_API_URL'] . '/search?imdb-id=' . $IMDBID);
             if ($curl->error) {
             } else {
                 $DoubanData = json_encode($curl->response, JSON_UNESCAPED_UNICODE);
@@ -285,12 +285,31 @@ class MOVIE {
         return $IMDBResult;
     }
 
+    public static function get_movie_fill_info_by_group_id($GroupID) {
+        $Group = Torrents::get_group($GroupID);
+        $Artists = Artists::get_artist($GroupID);
+        $Info = [];
+        $Info['Title'] = $Group['Name'];
+        $Info['Year'] = $Group['Year'];
+        $Info['Poster'] = $Group['WikiImage'];
+        $Info['SubTitle'] = $Group['SubName'];
+        foreach ($Artists[Artists::Director] as $Artist) {
+            $Info['Directors'][$Artist['IMDBID']] = $Artist['Name'];
+            $Info['SubName'][$Artist['Name']] = $Artist['SubName'];
+        }
+        $Info['IMDBID'] = $Group['IMDBID'];
+        $Info['Type'] = 'Movie';
+        $Info['Genre'] = implode(',', explode('|', $Group['TorrentTags']));
+        return $Info;
+    }
+
     public static function get_movie_fill_info($IMDBID, $Refresh = false) {
         $OMDBData = null;
         $TMDBData = null;
         $DoubanActorData = null;
         $DoubanData = null;
         $IMDBActorData = null;
+        $InnerActorData = null;
         G::$DB->query("SELECT OMDBData, TMDBData, DoubanActorData, IMDBActorData, DoubanData
             FROM movie_info_cache
             WHERE IMDBID='$IMDBID'");
@@ -311,6 +330,7 @@ class MOVIE {
             G::$DB->query("INSERT INTO movie_info_cache (IMDBID, IMDBActorData, IMDBActorTime) VALUES('$IMDBID', '" . db_string($IMDBActorData) . "', '" . sqlTime() . "')  ON DUPLICATE KEY UPDATE IMDBActorData=VALUES(IMDBActorData), IMDBActorTime=VALUES(IMDBActorTime)");
         }
 
+
         $omdb_key = CONFIG['OMDB_API_KEY'];
         $key = CONFIG['TMDB_API_KEY'];
         $douban_api_url = CONFIG['DOUBAN_API_URL'];
@@ -326,11 +346,11 @@ class MOVIE {
             $tmdb->myTag = 'tmdb';
         }
         if (!empty($douban_api_url) && (empty($DoubanActorData) || $Refresh)) {
-            $douban = $multi_curl->addGet(CONFIG['DOUBAN_API_URL'] . 'actors?imdb-id=' . $IMDBID);
+            $douban = $multi_curl->addGet(CONFIG['DOUBAN_API_URL'] . '/actors?imdb-id=' . $IMDBID);
             $douban->myTag = 'douban-actor';
         }
         if (!empty($douban_api_url) && (empty($DoubanData) || $Refresh)) {
-            $douban = $multi_curl->addGet(CONFIG['DOUBAN_API_URL'] . 'search?imdb-id=' . $IMDBID);
+            $douban = $multi_curl->addGet(CONFIG['DOUBAN_API_URL'] . '/search?imdb-id=' . $IMDBID);
             $douban->myTag = 'douban';
         }
 
@@ -374,7 +394,6 @@ class MOVIE {
         $Info['Year'] = $IMDBResult->year();
         $Info['Genre'] = strtolower(implode(',', $IMDBResult->genres()));
         $Info['Type'] = $IMDBResult->movieType();
-        $Info['Trailer'] = $IMDBResult->trailers();
 
         if ($OMDBData) {
             $OMDBResult = json_decode($OMDBData);
@@ -420,6 +439,8 @@ class MOVIE {
         }
 
 
+
+        $ArtistIMDBIDs = [];
         if ($IMDBActorData) {
             $IMDBActor = json_decode($IMDBActorData);
             $Directors = $IMDBActor->Directors;
@@ -429,13 +450,41 @@ class MOVIE {
             $Composer = $IMDBActor->Composers;
             $Cinematographer = $IMDBActor->Cinematographers;
             foreach ($Directors as $key => $value) {
+                $ArtistIMDBIDs[] = $value->imdb;
+            }
+            foreach ($Writters as $key => $value) {
+                $ArtistIMDBIDs[] = $value->imdb;
+            }
+            foreach ($Casts as $key => $value) {
+                $ArtistIMDBIDs[] = $value->imdb;
+            }
+            foreach ($Producer as $key => $value) {
+                $ArtistIMDBIDs[] = $value->imdb;
+            }
+            foreach ($Composer as $key => $value) {
+                $ArtistIMDBIDs[] = $value->imdb;
+            }
+            foreach ($Cinematographer as $key => $value) {
+                $ArtistIMDBIDs[] = $value->imdb;
+            }
+        }
+        if (count($ArtistIMDBIDs) > 0) {
+            $InnerActorData = Artists::multi_find_artist($ArtistIMDBIDs);
+        }
+        if (isset($Directors)) {
+            foreach ($Directors as $key => $value) {
                 $Info['Directors']["nm" . $value->imdb] = $value->name;
             }
+        }
 
+        if (isset($Writters)) {
             $Info['Writters'] = array();
             foreach ($Writters as $key => $value) {
                 $Info['Writters']["nm" . $value->imdb] = $value->name;
             }
+        }
+
+        if (isset($Casts)) {
             $Info['Casts'] = array();
             $Info['RestCasts'] = array();
             foreach ($Casts as $key => $value) {
@@ -445,34 +494,47 @@ class MOVIE {
                     $Info['RestCasts']["nm" . $value->imdb] = $value->name;
                 }
             }
-
+        }
+        if (isset($Producer)) {
             $Info['Producers'] = array();
             foreach ($Producer as $key => $value) {
                 $Info['Producers']["nm" . $value->imdb] = $value->name;
             }
-
+        }
+        if (isset($Composer)) {
             $Info['Composers'] = array();
             foreach ($Composer as $key => $value) {
                 $Info['Composers']["nm" . $value->imdb] = $value->name;
             }
+        }
 
+        if (isset($Cinematographers)) {
             $Info['Cinematographers'] = array();
             foreach ($Cinematographer as $key => $value) {
                 $Info['Cinematographers']["nm" . $value->imdb] = $value->name;
             }
-            if ($DoubanActorData) {
-                $DoubanResult = json_decode($DoubanActorData);
-                if ($DoubanResult->data) {
-                    if ($DoubanResult->data->douban) {
-                        $Info['DoubanID'] = $DoubanResult->data->douban->id;
-                    }
-                    $Info['ChineseName'] = array();
-                    foreach ($DoubanResult->data->actors as $name) {
-                        $Info['ChineseName'][$name->nameEn] = $name->name;
+        }
+
+        $Info['SubName'] = array();
+        if (isset($InnerActorData)) {
+            foreach ($InnerActorData as $IMDBID => $Data) {
+                $Info['SubName'][$Data['Name']] = $Data['SubName'];
+            }
+        }
+        if ($DoubanActorData) {
+            $DoubanResult = json_decode($DoubanActorData);
+            if ($DoubanResult->data) {
+                if ($DoubanResult->data->douban) {
+                    $Info['DoubanID'] = $DoubanResult->data->douban->id;
+                }
+                foreach ($DoubanResult->data->actors as $name) {
+                    if (empty($Info['SubName'][$name->nameEn])) {
+                        $Info['SubName'][$name->nameEn] = $name->name;
                     }
                 }
             }
         }
+
         return $Info;
     }
     public static function upload_movie_poster($IMDBID, $url) {

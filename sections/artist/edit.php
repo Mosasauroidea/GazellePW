@@ -19,8 +19,8 @@ if (!is_number($ArtistID)) {
 // Get the artist name and the body of the last revision
 $Artist = Artists::get_artist_by_id($ArtistID);
 $ArtistName = Artists::display_artist($Artist);
-$ChineseName = $Artist['cname'];
-$Name = $Artist['name'];
+$SubName = $Artist['SubName'];
+$Name = $Artist['Name'];
 $Body = $Artist['Body'];
 $Image = $Artist['Image'];
 $IMDBID = $Artist['IMDBID'];
@@ -53,8 +53,8 @@ View::show_header(t('server.artist.edit_artist'), 'PageArtistEdit');
                         <?= t('server.artist.imdb_artist_id') ?>:
                         <input class="Input is-small" type="text" name="imdb_id" size="20" placeholder="nm1234567" value="<?= $IMDBID ?>" />
                     </div>
-                    <div><?= t('server.artist.chinese_name') ?>:
-                        <input class="Input is-small" type="text" name="cname" size="20" placeholder="" value="<?= $ChineseName ?>" />
+                    <div><?= t('server.artist.sub_name') ?>:
+                        <input class="Input is-small" type="text" name="sub_name" size="20" placeholder="" value="<?= $SubName ?>" />
                     </div>
                 </div>
             </div>

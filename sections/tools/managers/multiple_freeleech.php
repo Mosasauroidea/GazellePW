@@ -190,11 +190,11 @@ if (isset($_POST['torrents'])) {
                 <td class="label"><?= t('server.tools.sales_promotion_plan') ?>:</td>
                 <td>
                     <select class="Input">
-                        <option class="Select-option"><?= t('server.tools.free_leech') ?></option>
-                        <option class="Select-option"><?= t('server.tools.25_percent_off') ?></option>
-                        <option class="Select-option"><?= t('server.tools.50_percent_off') ?></option>
-                        <option class="Select-option"><?= t('server.tools.75_percent_off') ?></option>
-                        <option class="Select-option"><?= t('server.tools.neutral_leech') ?></option>
+                        <option class="Select-option"><?= t('server.torrents.freeleech') ?></option>
+                        <option class="Select-option"><?= t('server.torrents.off25') ?></option>
+                        <option class="Select-option"><?= t('server.torrents.off50') ?></option>
+                        <option class="Select-option"><?= t('server.torrents.off75') ?></option>
+                        <option class="Select-option"><?= t('server.torrents.neutral_leech') ?></option>
                     </select>
                 </td>
             </tr>
