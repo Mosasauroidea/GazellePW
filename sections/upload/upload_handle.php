@@ -25,7 +25,6 @@ include(CONFIG['SERVER_ROOT'] . '/classes/file_checker.class.php');
 enforce_login();
 authorize();
 
-$Validate = new VALIDATE;
 $Feed = new FEED;
 
 //******************************************************************************//
@@ -34,8 +33,8 @@ $Feed = new FEED;
 // it into the database.                                                        //
 
 $Properties = array();
-$Type = $Categories[(int)$_POST['type']];
-$TypeID = $_POST['type'] + 1;
+$Properties['GroupID'] = $_POST['groupid'];
+
 if (!empty($_POST['imdb'])) {
     preg_match('/' . IMDB_REGEX . '/', $_POST['imdb'], $IMDBMatch);
     if ($IMDBMatch[1]) {
@@ -86,7 +85,6 @@ if ($Properties['SubtitleType'] == 2) {
     $Properties['NoSub'] = 1;
 }
 $Properties['BadFoldes'] = (isset($_POST['bad_folders'])) ? 1 : 0;
-
 $Properties['RemasterYear'] = trim($_POST['remaster_year']);
 $Properties['Year'] = trim($_POST['year']);
 $Properties['ReleaseType'] = $_POST['releasetype'];
@@ -103,31 +101,29 @@ $Properties['RemasterTitle'] = trim($_POST['remaster_title']);
 if (!EditionInfo::validate($Properties['RemasterTitle'])) {
     die("invalid remaster_title");
 }
-
 $Properties['RemasterCustomTitle'] = html_entity_decode($_POST['remaster_custom_title'], ENT_QUOTES);
-
 $Properties['TorrentDescription'] = $_POST['release_desc'];
 
-$Properties['GroupID'] = $_POST['groupid'];
-if (empty($_POST['artists'])) {
-    $Err = "You didn't enter any artists";
-} else {
-    $Artists = $_POST['artists'];
-    $Importance = $_POST['importance'];
-    $ArtistIMDBIDs = $_POST['artist_ids'];
-    $ArtistSubName = $_POST['artists_sub'];
-}
 if (!empty($_POST['requestid'])) {
     $RequestID = $_POST['requestid'];
     $Properties['RequestID'] = $RequestID;
 }
 $Properties['MediaInfo']  = $_POST['mediainfo'] ? json_encode($_POST['mediainfo']) : null;
 $Properties['Note'] = isset($POST['staff_note']) ? trim($_POST['staff_note']) : "";
+
+$Type = $Categories[(int)$_POST['type']];
+$TypeID = $_POST['type'] + 1;
+$GroupID = $Properties['GroupID'];
+$Artists = $_POST['artists'];
+$Importance = $_POST['importance'];
+$ArtistIMDBIDs = $_POST['artist_ids'];
+$ArtistSubName = $_POST['artists_sub'];
+$IsNewGroup = empty($GroupID);
+
 //******************************************************************************//
 //--------------- Validate data in upload form ---------------------------------//
 
-// $Validate->SetFields('type', '1', 'inarray', t('server.upload.select_a_type'), array('inarray' => array_keys($Categories)));
-
+$Validate = new VALIDATE;
 $Validate->SetFields(
     'codec',
     '1',
@@ -152,13 +148,14 @@ $Validate->SetFields(
     'string',
     t('server.upload.select_valid_format')
 );
-
-$Validate->SetFields(
-    'name',
-    '1',
-    'string',
-    t('server.upload.title_length_limit')
-);
+if ($IsNewGroup) {
+    $Validate->SetFields(
+        'name',
+        '1',
+        'string',
+        t('server.upload.title_length_limit')
+    );
+}
 
 $Err = $Validate->ValidateForm($_POST); // Validate the form
 
@@ -170,8 +167,6 @@ if (!is_uploaded_file($TorrentName) || !filesize($TorrentName)) {
 } elseif (substr(strtolower($File['name']), strlen($File['name']) - strlen('.torrent')) !== '.torrent') {
     $Err = t('server.upload.not_torrent_file') . "(" . $File['name'] . ")" . t('server.upload.period');
 }
-$GroupID = $Properties['GroupID'];
-$IsNewGroup = empty($GroupID);
 
 if ($IsNewGroup) {
     for ($i = 0, $il = count($Artists); $i < $il; $i++) {
