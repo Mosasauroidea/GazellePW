@@ -408,8 +408,6 @@ server.artist.similarartist_note: |-
   Nenhuma encontrada
 server.artist.statistics: |-
   Estatísticas
-server.artist.sub_name: |-
-  Nome chinês
 server.artist.switch_to_cloud: |-
   Alternar para a nuvem
 server.artist.switch_to_map: |-
@@ -1281,8 +1279,6 @@ server.upload.period: |-
   .
 server.upload.preview: |-
   Pré-visualizar
-server.upload.sub_name: |-
-  Nome chinês
 server.upload.sub_title: |-
   Título Chinês
 server.upload.tags: |-
