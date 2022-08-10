@@ -100,6 +100,8 @@ client.upload.desc_img_3_png: |-
   São necessárias pelo menos três capturas de tela PNG consulte <a href="wiki.php?action=article&id=51" target="_blank">ajuda</a>.
 client.upload.desc_img_hosts: |-
   Por favor, use hosts de imagem que são recomendados pela Regra de Upload <a href="rules.php?p=upload#2.2.1" target="_blank">2.1</a>.
+client.upload.englisht_name: |-
+  Nome em inglês
 client.upload.imdb_link_required: |-
   Link IMDb ou ID com formato correto é obrigatório!
 client.upload.mediainfo_complete_name_required: |-
@@ -126,6 +128,8 @@ client.upload.resolution_required: |-
   Por favor, selecione uma resolução.
 client.upload.source_required: |-
   Por favor, selecione a fonte. Se não tem certeza, selecione Outro e digite Desconhecido.
+client.upload.sub_name: |-
+  Nome em chinês
 client.upload.subtitles_required: |-
   Por favor, especifique as legendas ou selecione "Sem legendas" se não houver nenhum!
 client.upload.subtitles_with_mediainfo: |-
@@ -408,6 +412,8 @@ server.artist.similarartist_note: |-
   Nenhuma encontrada
 server.artist.statistics: |-
   Estatísticas
+server.artist.sub_name: |-
+  Nome em chinês
 server.artist.switch_to_cloud: |-
   Alternar para a nuvem
 server.artist.switch_to_map: |-
@@ -781,8 +787,19 @@ server.collages.delete_collage: |-
   Apagar coleção
 server.collages.delete_confirm: |-
   Tem certeza de que deseja excluir esta coleção?
+server.collages.delete_warning: |-
+  Atenção:
+  Esta é uma cor pessoal. Se você excluir esta colagem, <em>não pode ser recuperado</em>!
 server.collages.description: |-
   Descrição
+server.collages.drag_drop_textnote: |-
+  <ul>
+  <li>Clique nos cabeçalhos para organizar colunas automaticamente.</li>
+  <li>Ordenar várias colunas simultaneamente mantendo a tecla shift pressionada e clicando em outros cabeçalhos de coluna.</li>
+  <li>Clique e arraste qualquer linha para mudar sua ordem.</li>
+  <li>Pressione "Salvar Todas Alterações" quando terminar de classificar.</li>
+  <li>Pressione "Editar" ou "Remover" para simplesmente modificar uma entrada.</li>
+  </ul>
 server.collages.edit_collage: |-
   Editar coleção
 server.collages.edit_description: |-
@@ -795,18 +812,50 @@ server.collages.featured_title: |-
   Uma coleção &quot;em destaque&quot; pessoal será listado primeiro no seu perfil, juntamente com uma prévia dos torrents incluídos.
 server.collages.ft_order: |-
   Ordenar por
+server.collages.ftb_searchstr: |-
+  Termos de pesquisa
+server.collages.individual_add: |-
+  Adicionar individualmente
+server.collages.last_updated: |-
+  Última atualização
+server.collages.locked: |-
+  Bloqueado
+server.collages.manage_collage: |-
+  Gerenciar coleção
 server.collages.manage_torrents: |-
   Gerenciar torrents
 server.collages.name: |-
   Nome
 server.collages.new_category: |-
   Categoria
+server.collages.new_category_note2: |-
+  <li><strong>Pessoal:</strong> Você pode colocar o que quiser aqui. Esta é a sua própria cor pessoal.</li>
+server.collages.new_create: |-
+  Criar coleção
 server.collages.new_description: |-
   Descrição
 server.collages.new_name: |-
   Nome
+server.collages.new_note: |-
+  <strong>Verifique se sua coleção será permitida de acordo com as <a href='rules.php?p=collages'>Regras de colagem</a>.</strong>
+server.collages.open_collage: |-
+  Abrir coleção
 server.collages.order: |-
   Pedir
+server.collages.personal_collage: |-
+  Coleção pessoal
+server.collages.personal_collages: |-
+  Coleções pessoais
+server.collages.random_collages: |-
+  Coleção aleatória
+server.collages.recover_collages: |-
+  Recuperar coleção
+server.collages.recover_deleted_collage: |-
+  Recuperar coleção excluída
+server.collages.report_collage: |-
+  Relatório de coleção
+server.collages.result_1: |-
+  Você não marcou nenhuma coleção como favorito.
 server.collages.search_name: |-
   Nome
 server.collages.search_time: |-
@@ -821,6 +870,8 @@ server.collages.sorting: |-
   Classificação
 server.collages.statistics: |-
   Estatísticas
+server.collages.subscribed_collages: |-
+  Coleções inscritas
 server.collages.tags: |-
   Tags (separadas por vírgula)
 server.collages.top_artists: |-
@@ -829,6 +880,26 @@ server.collages.top_tags: |-
   Top Tags
 server.collages.user_one: |-
   Usuário
+server.collages.user_s_personal_collage: |-
+  da coleção pessoal
+server.collages.you_may_not_create_a_personal_collage: |-
+  Você não pode criar uma coleção pessoal.
+server.collages.your_bookmarked_collages: |-
+  Suas coleções favoritas
+server.collages.your_personal_collage_must: |-
+  O título da coleção pessoal deve incluir seu nome de usuário.
+server.comments.collages_created_by: |-
+  coleções criadas por %s
+server.comments.comments_left_on_collages_user_created: |-
+  Comentários deixados em coleções %s criados
+server.comments.comments_left_on_collages_user_has_contributed_to: |-
+  Comentários restantes em coleções %s contribuíram para
+server.comments.display_comments_left_on_collages_user_has_contributed_to: |-
+  Exibir comentários deixados em coleções %s contribuído para
+server.comments.display_comments_left_on_collages_user_has_made: |-
+  Exibir comentários deixados em coleções %s feitos
+server.comments.your_collages: |-
+  suas coleções
 server.common.collages: |-
   Playlists
 server.common.director: |-
@@ -867,6 +938,8 @@ server.donate.added_time: |-
   Tempo
 server.donate.history: |-
   Histórico
+server.donate.personal_collages: |-
+  Coleção(ões) Pessoal
 server.forums.author: |-
   Autor
 server.forums.body: |-
@@ -881,6 +954,8 @@ server.forums.featured: |-
   Destaques
 server.forums.like: |-
   Curtir
+server.forums.locked: |-
+  Bloqueado
 server.forums.thread_id: |-
   ID do tópico
 server.forums.title: |-
@@ -918,10 +993,28 @@ server.permissions.admin_manage_badges: |-
   Pode gerenciar medalhas
 server.permissions.events_reward_badges: |-
   Medalhas de recompensa de eventos
+server.permissions.site_collages_create: |-
+  Pode criar coleções
+server.permissions.site_collages_delete: |-
+  Pode excluir coleções
+server.permissions.site_collages_manage: |-
+  Pode gerenciar coleções (adicionar torrents, classificar)
+server.permissions.site_collages_personal: |-
+  Pode ter uma coleção pessoal
+server.permissions.site_collages_recover: |-
+  Pode recuperar coleções 'apagadas'
+server.permissions.site_collages_renamepersonal: |-
+  Pode renomear as próprias coleções pessoais
+server.permissions.site_collages_subscribe: |-
+  Pode acessar as assinaturas de coleção
 server.permissions.site_delete_tag: |-
   Pode excluir tags
 server.permissions.site_tag_aliases_read: |-
   Pode ver a lista de pseudônimos de tags
+server.pub.space_new_collage_update_one: |-
+  &nbsp;nova atualização de coleção
+server.pub.space_new_collage_update_other: |-
+  &nbsp;novas atualizações de coleção
 server.pub.statistics: |-
   Estatísticas
 server.reports.body: |-
@@ -932,6 +1025,14 @@ server.reports.description: |-
   Descrição
 server.reports.new: |-
   Novo
+server.reports.no_collage_with_the_reported_id_found: |-
+  Nenhuma coleção com o ID reportado foi encontrada
+server.reports.report_collage_guide_1: |-
+  A opção de coleção do relatório é reportar uma coleção que quebra uma das diretrizes de colagem encontradas na <a href="rules.php?p=collages">página de regras de coleção</a>.
+server.reports.report_collage_guide_2: |-
+  As regras de coleção são um conceito interpretado, e cabe ao pessoal interpretar estas regras. Se você sente que esta coleção pode ser um caso de fronteira entre permitido e não permitido, Sinta-se livre para o relatar e vamos analisá-lo.
+server.reports.reporting_the_collage: |-
+  Você está relatando a coleção
 server.reports.stats: |-
   Estatísticas
 server.reports.title: |-
@@ -956,6 +1057,8 @@ server.requests.image: |-
   Imagem
 server.requests.name: |-
   Nome da solicitação
+server.requests.search_terms: |-
+  Termos de pesquisa
 server.requests.tags: |-
   Tags
 server.requests.tags_comma: |-
@@ -968,6 +1071,8 @@ server.requests.year: |-
   Ano
 server.rules.collages_title: |-
   Playlists
+server.rules.collages_title_de: |-
+  Estas são as regras que regem as coleções.
 server.rules.tags_title: |-
   Tagging(Marcação)
 server.rules.tags_title_de: |-
@@ -1089,6 +1194,8 @@ server.tools.manage_badges: |-
   Gerenciar medalhas
 server.tools.mass_pm_class: |-
   Classe
+server.tools.max_collages: |-
+  Número máximo de coleções pessoais
 server.tools.merge_rename_tags: |-
   Mesclar/Renomear Tags
 server.tools.name: |-
@@ -1101,6 +1208,8 @@ server.tools.official_tags_manager: |-
   Gerenciador de tags oficiais
 server.tools.operations: |-
   Operações
+server.tools.paste_a_list_of_collage_or_torrent_group_urls: |-
+  Colar uma lista de coleções de grupo ou de grupos de torrents
 server.tools.proper_tag: |-
   Tag adequada
 server.tools.remove: |-
@@ -1183,6 +1292,8 @@ server.torrents.ft_order: |-
   Ordenar por
 server.torrents.ft_year: |-
   Ano
+server.torrents.ftb_searchstr: |-
+  Termos de pesquisa
 server.torrents.hide: |-
   Esconder
 server.torrents.hide_tags: |-
@@ -1223,6 +1334,14 @@ server.torrents.tags: |-
   Tags (separadas por vírgula)
 server.torrents.there_are_no_tags_to_display: |-
   Não há tags para exibir.
+server.torrents.this_album_is_in_collages_count_one: |-
+  %s coleção
+server.torrents.this_album_is_in_collages_count_other: |-
+  %s coleções
+server.torrents.this_album_is_in_personal_collages_count_one: |-
+  %s coleção pessoal
+server.torrents.this_album_is_in_personal_collages_count_other: |-
+  %s coleções pessoais
 server.torrents.time: |-
   Tempo
 server.torrents.title: |-
@@ -1265,6 +1384,10 @@ server.upload.copied: |-
   Copiado
 server.upload.director: |-
   Diretor
+server.upload.english_name: |-
+  Nome em inglês
+server.upload.last_update: |-
+  Última atualização
 server.upload.movie_aliases: |-
   Título Chinês
 server.upload.movie_aliases_note: |-
@@ -1279,6 +1402,8 @@ server.upload.period: |-
   .
 server.upload.preview: |-
   Pré-visualizar
+server.upload.sub_name: |-
+  Nome em chinês
 server.upload.sub_title: |-
   Título Chinês
 server.upload.tags: |-
@@ -1317,6 +1442,8 @@ server.user.bounty: |-
   Recompensa
 server.user.collage_covers_all: |-
   Todos
+server.user.collage_subscriptions_title: |-
+  Habilitando isto lhe dará uma notificação quando um torrent for adicionado a uma coleção que você está inscrito.
 server.user.comma_seperated_languages_list: |-
   Lista separada por vírgulas&#8202;&mdash;&#8202;por exemplo, Chinês, Japonês, Inglês
 server.user.comma_seperated_tags_list: |-
@@ -1331,6 +1458,8 @@ server.user.filt_tr_title: |-
   A exibição de controles de filtro mostrará as opções de filtragem de torrent no menu de pesquisa de torrent por padrão. A exibição de filtros para tags oficiais listará filtros clicáveis para tags oficiais no menu de pesquisa de torrent por padrão.
 server.user.history: |-
   Histórico
+server.user.locked: |-
+  Bloqueado
 server.user.mature_title: |-
   >-
   {{CONFIG['SITE_NAME']}} tem &lt;a href=&quot;wiki.php?action=article&amp;amp;id=1063&quot;&gt;políticas de conteúdo adulto&lt;/a&gt; para todas as áreas da comunidade. Escolher exibir conteúdo adulto permitirá que você clique para visualizar qualquer conteúdo postado abaixo de &lt;code&gt;[mature]&lt;/code&gt; Tag. Se você optar por não exibir conteúdo adulto, todo o conteúdo marcado com &lt;code&gt;[mature]&lt;/code&gt; tags serão ocultadas de você.' data-title-plain='{{CONFIG['SITE_NAME']}} tem muito
@@ -1375,6 +1504,10 @@ server.userhistory.hide: |-
   Esconder
 server.userhistory.new: |-
   Novo
+server.userhistory.no_subscribed_collages: |-
+  Nenhuma coleção assinada
+server.userhistory.subscribed_collages: |-
+  Coleções inscritas
 server.userhistory.time: |-
   Tempo
 server.userhistory.torrent: |-
@@ -1405,6 +1538,8 @@ server.wiki.history_new: |-
   Novo
 server.wiki.history_title: |-
   Título
+server.wiki.last_upload: |-
+  Última atualização
 server.wiki.order_by: |-
   Ordenar por
 server.wiki.revision_history: |-
