@@ -7,6 +7,10 @@
 2. 运行
 
 ```shell
+# 克隆项目
+git clone https://github.com/Mosasauroidea/GazellePW.git
+cd GazellePW
+
 # 创建Docker镜像
 # x86 处理器
 docker build -t gpw-web:latest .

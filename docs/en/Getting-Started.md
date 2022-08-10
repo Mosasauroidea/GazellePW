@@ -7,6 +7,10 @@
 2. Run it
 
 ```shell
+# Clone
+git clone https://github.com/Mosasauroidea/GazellePW.git
+cd GazellePW
+
 # Build Docker image
 # For x86 CPU
 docker build -t gpw-web:latest .

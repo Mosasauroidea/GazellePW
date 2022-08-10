@@ -857,7 +857,7 @@ WHERE ud.TorrentID=? AND ui.NotifyOnDeleteDownloaded='1' AND ud.UserID NOT IN ({
 				Size, Snatched, Seeders,
 				Leechers, CAST(Scene AS CHAR), CAST(Jinzhuan AS CHAR), CAST(Allow AS CHAR), 
 				CAST(FreeTorrent AS CHAR),Description,
-				REPLACE(REPLACE(FileList, '_', ' '), '/', ' ') AS FileList, $VoteScore, '" . db_string($ArtistName) . "',
+				(case when (t.Container = 'm2ts') then REPLACE(REPLACE(t.FilePath, '_', ' '), '/', ' ') else REPLACE(REPLACE(FileList, '_', ' '), '/', ' ') end) AS FileList, $VoteScore, '" . db_string($ArtistName) . "',
 				IMDBRating, DoubanRating, Region, Language, IMDBID, Resolution, Container, Source, Codec, Subtitles, 
                 Diy, Buy, ChineseDubbed, SpecialSub
 			FROM torrents AS t

@@ -84,7 +84,7 @@ $Twig = new Twig\Environment(
         CONFIG['SERVER_ROOT'] . '/templates',
         CONFIG['SERVER_ROOT'] . '/src/locales',
     ]),
-    ['debug' => CONFIG['DEBUG_MODE']]
+    ['debug' => CONFIG['DEBUG_MODE'], 'cache' => CONFIG['SERVER_ROOT'] . '/.cache/twig']
 );
 
 

@@ -269,7 +269,7 @@ if ($DB->affected_rows() > 0 || !$Report) {
             $AdminComment .= ' (' . $Escaped['admin_message'] . ')';
         }
         if ($AdminComment) {
-            $AdminComment = date('Y-m-d H:i:s') . " - Comment: $AdminComment on torrent $TorrentID by " . $LoggedUser['Username'] . "\n\n";
+            $AdminComment = date('Y-m-d H:i:s') . " - Report Comment: $AdminComment on torrent $TorrentID by " . $LoggedUser['Username'] . "\n\n";
 
             $DB->query("
 				UPDATE users_info
