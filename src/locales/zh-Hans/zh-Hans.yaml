@@ -5669,6 +5669,8 @@ server.upload.english: |-
   英语
 server.upload.english_movie_synopsis: |-
   英文影片简介
+server.upload.english_name: |-
+  英文名
 server.upload.enter_at_least_one_artist: |-
   请填写至少一位导演。
 server.upload.estonian: |-
