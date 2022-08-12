@@ -5,10 +5,10 @@ class Artists {
     const Writter = 2;
     const Producer = 3;
     const Composer = 4;
-    const Camera = 5;
+    const Cinematographer = 5;
     const Actor = 6;
     const Importances = [
-        self::Director, self::Writter, self::Producer, self::Composer, self::Camera, self::Actor
+        self::Director, self::Writter, self::Producer, self::Composer, self::Cinematographer, self::Actor
     ];
 
     public static function get_artist_name($Artist) {

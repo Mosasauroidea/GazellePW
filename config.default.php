@@ -25,7 +25,7 @@ $CONFIG['DOUBAN_API_URL'] = "DOUBAN_API_URL";
 // Keys
 $CONFIG['ENCKEY'] = "OL9n0m2JxhBxYyMvXWJg"; //Random key. The key for encryption
 $CONFIG['SITE_SALT'] = ''; // TODO: not used. Random key. Default site wide salt for passwords, DO NOT LEAVE THIS BLANK/CHANGE AFTER LAUNCH!
-$CONFIG['SCHEDULE_KEY'] = ""; // Random key. This key must be the argument to schedule.php for the schedule to work.
+$CONFIG['SCHEDULE_KEY'] = "OL9n0m2JxhBxYyMvXWJg"; // Random key. This key must be the argument to schedule.php for the schedule to work.
 $CONFIG['RSS_HASH'] = ""; //Random key. Used for generating unique RSS auth key.
 $CONFIG['CRYPT_HASH_PREFIX'] = "$2y$07$"; // TODO: not used.
 

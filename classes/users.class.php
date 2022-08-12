@@ -159,7 +159,7 @@ class Users {
                     'Found' => false,
                     'Warned' => '0000-00-00 00:00:00',
                     'Avatar' => '',
-                    'Lang' => 'chs',
+                    'Lang' => Lang::DEFAULT_LANG,
                     'Enabled' => 0,
                     'Title' => '',
                     'CatchupTime' => 0,

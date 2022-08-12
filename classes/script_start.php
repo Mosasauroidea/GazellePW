@@ -65,6 +65,7 @@ require(CONFIG['SERVER_ROOT'] . '/classes/debug.class.php'); //Require the debug
 require(CONFIG['SERVER_ROOT'] . '/classes/mysql.class.php'); //Require the database wrapper
 require(CONFIG['SERVER_ROOT'] . '/classes/cache.class.php'); //Require the caching class
 require(CONFIG['SERVER_ROOT'] . '/classes/time.class.php'); //Require the time class
+require(CONFIG['SERVER_ROOT'] . '/classes/lang.class.php'); //Require the time class
 require(CONFIG['SERVER_ROOT'] . '/classes/paranoia.class.php'); //Require the paranoia check_paranoia function
 require(CONFIG['SERVER_ROOT'] . '/classes/regex.php');
 require(CONFIG['SERVER_ROOT'] . '/classes/util.php');
@@ -94,8 +95,6 @@ G::$Cache = &$Cache;
 G::$DB = &$DB;
 G::$Debug = &$Debug;
 G::$Twig = &$Twig;
-
-Lang::init();
 
 //Begin browser identification
 if (session_status() === PHP_SESSION_NONE) {

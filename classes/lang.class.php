@@ -1,24 +1,11 @@
 <?
 
 class Lang {
-    static $Lang = [];
     const DEFAULT_LANG = 'chs';
     const EN = 'en';
     const CHS = 'chs';
     const LANGS = [self::EN, self::CHS];
     static $Locales = [];
-
-    public static function init() {
-        global $WINDOW_CONFIG;
-        $Files = glob(CONFIG['SERVER_ROOT'] . '/src/locales/*/*.yaml');
-        foreach ($Files as $File) {
-            $Lang = basename(dirname($File));
-            $YamlText = G::$Twig->render("$Lang/$Lang.yaml", ['CONFIG' => $WINDOW_CONFIG]);
-            $Locale = yaml_parse($YamlText);
-            $NewLang = $Lang == 'zh-Hans' ? 'chs' : $Lang;
-            self::$Locales[$NewLang] = $Locale;
-        }
-    }
 
     public static function is_default() {
         return Lang::getUserLang(G::$LoggedUser['ID']) == self::DEFAULT_LANG;
@@ -34,7 +21,7 @@ class Lang {
         $Lang = self::getLang($Options['Lang']);
         $Value = self::_get($Key, $Lang, $Options);
         if ($Value === false) {
-            $Value = self::_get($Key, self::DEFAULT_LANG, $Options);
+            $Value = self::_get($Key, self::EN, $Options);
         }
         if ($Value == false) {
             $Value = $Key;
@@ -46,7 +33,7 @@ class Lang {
         $DefaultValue = $Options['DefaultValue'] ?: $Key;
         $Values = $Options['Values'];
         $Count = $Options['Count'];
-        $Locale = self::$Locales[$Lang];
+        $Locale = self::get_locale($Lang);
         if ($Count !== null) {
             $Suffix = ($Count === 1) ? '_one' : '_other';
             $Key = "${Key}${Suffix}";
@@ -61,6 +48,19 @@ class Lang {
         }
 
         return $Value;
+    }
+
+    private static function get_locale($Lang) {
+        $NewLang = $Lang == 'chs' ? 'zh-Hans' : $Lang;
+        $Data = self::$Locales[$Lang];
+        if (!empty($Data)) {
+            return $Data;
+        }
+        global $WINDOW_CONFIG;
+        $YamlText = G::$Twig->render("$NewLang/$NewLang.yaml", ['CONFIG' => $WINDOW_CONFIG]);
+        $Locale = yaml_parse($YamlText);
+        self::$Locales[$Lang] = $Locale;
+        return $Locale;
     }
 
     public static function get_key($Page, $Label = false, $Lang = false) {
@@ -114,7 +114,7 @@ class Lang {
                 setcookie('lang', $Lang, time() + 60 * 60 * 24 * 365, '/');
             }
         }
-        if (!in_array($Lang, array('chs', 'en'))) {
+        if (!in_array($Lang, self::LANGS)) {
             $Lang = self::DEFAULT_LANG;
         }
         return $Lang;

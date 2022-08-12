@@ -1540,7 +1540,7 @@ WHERE ud.TorrentID=? AND ui.NotifyOnDeleteDownloaded='1' AND ud.UserID NOT IN ({
     public static function update_movie_artist_info($GroupID, $IMDBID, $Refresh = false) {
         G::$DB->query("SELECT 
                         ta.ArtistID,
-                        wa.IMDBID,
+                        ag.IMDBID,
                         ag.RevisionID as RevisionID,
                         ag.Image as Image,
                         ag.Birthday as Birthday,
@@ -1555,7 +1555,7 @@ WHERE ud.TorrentID=? AND ui.NotifyOnDeleteDownloaded='1' AND ud.UserID NOT IN ({
                        WHERE 
                         GroupID=$GroupID
                        AND
-                        wa.IMDBID <> ''");
+                        ag.IMDBID <> ''");
         $Artists = G::$DB->to_array(false, MYSQLI_ASSOC, false);
         $IMDBIDs = [];
         foreach ($Artists as $Artist) {

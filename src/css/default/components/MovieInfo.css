@@ -134,6 +134,10 @@ Where
   border-radius: var(--global-borderRadius);
 }
 
+.MovieInfo-artistName {
+  color: var(--Movieinfo-button-color);
+}
+
 .MovieInfo-year {
   font-size: 80%;
   color: var(--MovieInfo-year-color);

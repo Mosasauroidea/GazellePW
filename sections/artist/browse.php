@@ -174,7 +174,7 @@ foreach ($Importances as $ID => $Group) {
             // 摄影
         case '5':
             $Importances[$ID]['ReleaseType'] = 1025;
-            $CameraAlbums = true;
+            $CinematographerAlbums = true;
             break;
         case '6':
             $Importances[$ID]['ReleaseType'] = 1026;
@@ -207,7 +207,7 @@ if (!empty($ProducerAlbums)) {
 if (!empty($ComposerAlbums)) {
     $ReleaseTypes[1024] = t('server.artist.1024');
 }
-if (!empty($CameraAlbums)) {
+if (!empty($CinematographerAlbums)) {
     $ReleaseTypes[1025] = t('server.artist.1025');
 }
 if (!empty($ActorAlbums)) {

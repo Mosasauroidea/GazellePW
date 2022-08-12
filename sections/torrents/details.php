@@ -41,7 +41,8 @@ $IMDBVote = $TorrentDetails['IMDBVote'];
 $DoubanVote = $TorrentDetails['DoubanVote'];
 $DoubanID  = $TorrentDetails['DoubanID'];
 $RTTitle = $TorrentDetails['RTTitle'];
-$GroupName = $TorrentDetails['Name'];
+$GroupName = Lang::is_default() && isset($TorrentDetails['SubName']) ? $TorrentDetails['SubName'] : $TorrentDetails['Name'];
+$SubName = Lang::is_default() ? $TorrentDetails['Name'] : $TorrentDetails['SubName'];
 $GroupYear = $TorrentDetails['Year'];
 $ReleaseType = $TorrentDetails['ReleaseType'];
 $GroupCategoryID = $TorrentDetails['CategoryID'];
@@ -51,7 +52,6 @@ $TorrentTagIDs = $TorrentDetails['TorrentTagIDs'];
 $TorrentTagUserIDs = $TorrentDetails['TorrentTagUserIDs'];
 $TagPositiveVotes = $TorrentDetails['TagPositiveVotes'];
 $TagNegativeVotes = $TorrentDetails['TagNegativeVotes'];
-$SubName = $TorrentDetails['SubName'];
 $RawName = Torrents::group_name($TorrentDetails, false);
 $DisplayName = "<span dir=\"ltr\">$RawName</span>";
 
@@ -71,7 +71,7 @@ foreach ($Artists[Artists::Director] as $ID => $Artist) {
 $Actors = $Artists[Artists::Actor];
 $Directors = $Artists[Artists::Director];
 $Writters = $Artists[Artists::Writter];
-$Cameras = $Artists[Artists::Camera];
+$Cinematographers = $Artists[Artists::Cinematographer];
 $Composers = $Artists[Artists::Composer];
 $Producers = $Artists[Artists::Producer];
 
@@ -176,7 +176,7 @@ View::show_header($Title, 'browse,comments,torrent,bbcode,recommend,cover_art,su
             </a>
             <i class="MovieInfo-year">(<? print_r($GroupYear) ?>)</i>
             <? if ($SubName) {
-                echo "<div class='MovieInfo-subTitle'><a href=\"torrents.php?searchstr=" . $SubName . "\">$SubName</a></div>";
+                echo "<div class='MovieInfo-subTitle'>$SubName</div>";
             } ?>
         </div>
         <div class="MovieInfo-tagContainer">
@@ -421,9 +421,9 @@ View::show_header($Title, 'browse,comments,torrent,bbcode,recommend,cover_art,su
                             <?
                             }
                         }
-                        if (!empty($Cameras) && count($Cameras) > 0) {
+                        if (!empty($Cinematographers) && count($Cinematographers) > 0) {
                             print '<li class="SidebarList-item"><strong class="artists_label">' . t('server.torrents.cinematographer') . ':</strong></li>';
-                            foreach ($Cameras as $Artist) {
+                            foreach ($Cinematographers as $Artist) {
                             ?>
                                 <li class="SidebarList-item u-hoverToShow-hover">
                                     <?= Artists::display_artist($Artist) ?>

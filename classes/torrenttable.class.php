@@ -674,8 +674,8 @@ class TorrentTableView {
     }
     protected function render_group_name($GroupInfo) {
         $GroupID = $GroupInfo['ID'];
-        $SubName = $GroupInfo['SubName'];
-        $GroupName = $GroupInfo['Name'];
+        $GroupName = Lang::is_default() && isset($GroupInfo['SubName']) ? $GroupInfo['SubName'] : $GroupInfo['Name'];
+        $SubName = Lang::is_default() ? $GroupInfo['Name'] : $GroupInfo['SubName'];
         $GroupYear = $GroupInfo['Year'];
     ?>
         <span class="TableTorrent-movieInfoTitle">
@@ -713,7 +713,7 @@ class TorrentTableView {
 
         <div class="TableTorrent-movieInfoSubtitle">
             <? if ($SubName) {
-                echo " <a href=\"torrents.php?searchstr=" . $SubName . "\">$SubName</a>";
+                echo "$SubName";
             } ?>
         </div>
     <?
