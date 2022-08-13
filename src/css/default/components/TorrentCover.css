@@ -13,7 +13,7 @@ TorrentCover variant="OneLine | FiveGrid"
 
 .TorrentCover {
   display: grid;
-  grid-template-columns: repeat(auto-fill, 150px);
+  grid-template-columns: repeat(auto-fill, 160px);
   justify-content: center;
   column-gap: var(--global-space-lg);
   row-gap: var(--global-space-default);
@@ -49,8 +49,8 @@ TorrentCover variant="OneLine | FiveGrid"
 }
 
 .TorrentCover-imageContainer {
-  width: 150px;
-  height: 222px;
+  width: 160px;
+  height: 240px;
 }
 @media (max-width: 768px) {
   .TorrentCover[variant='OneLine'] .TorrentCover-imageContainer {
@@ -66,4 +66,5 @@ TorrentCover variant="OneLine | FiveGrid"
 
 .TorrentCover-item b {
   color: var(--TableTorrent-movieInfoTitle-color);
+  padding-top: var(--global-space-sm);
 }

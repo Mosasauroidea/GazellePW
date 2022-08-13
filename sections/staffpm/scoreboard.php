@@ -1,9 +1,4 @@
 <?php
-
-if (!check_perms('admin_staffpm_stats')) {
-    error(403);
-}
-
 require(__DIR__ . '/../staff/functions.php');
 $View   = ($_REQUEST['view'] ?? 'staff');
 $Action = ($_REQUEST['action'] ?? 'stats');
@@ -11,20 +6,24 @@ $Action = ($_REQUEST['action'] ?? 'stats');
 View::show_header('Staff Inbox', 'PageStaffPMScoreboard');
 ?>
 <div class="LayoutBody">
-    <div class="BodyNavLinks">
-        <?php if ($IsStaff) { ?>
-            <a href="staffpm.php" class="brackets">View your unanswered</a>
-        <?php } ?>
-        <a href="staffpm.php?view=unanswered" class="brackets">View all unanswered</a>
-        <a href="staffpm.php?view=open" class="brackets">View unresolved</a>
-        <a href="staffpm.php?view=resolved" class="brackets">View resolved</a>
-        <a href="staffpm.php?action=scoreboard&amp;view=user" class="brackets">View user scoreboard</a>
-        <a href="staffpm.php?action=scoreboard&amp;view=staff" class="brackets">View staff scoreboard</a>
-        <?php if ($IsFLS && !$IsStaff) { ?>
-            <span data-tooltip="The Staff PMs that you created are here."><a href="staffpm.php?action=userinbox" class="brackets">Personal Staff Inbox</a></span>
-        <?php } ?>
+    <div class="BodyHeader">
+        <h2 class="BodyHeader-nav"><?= $ViewString ?><?= t('server.staffpm.scoreboard') ?></h2>
+        <div class="BodyNavLinks">
+            <? if ($IsStaff) { ?>
+                <a href="staffpm.php" class="brackets"><?= t('server.staffpm.view_your_unanswered') ?></a>
+            <?  } ?>
+            <a href="staffpm.php?view=unanswered" class="brackets"><?= t('server.staffpm.view_all_unanswered') ?></a>
+            <a href="staffpm.php?view=open" class="brackets"><?= t('server.staffpm.view_unresolved') ?></a>
+            <a href="staffpm.php?view=resolved" class="brackets"><?= t('server.staffpm.view_resolved') ?></a>
+            <? if ($IsStaff) { ?>
+                <a href="staffpm.php?action=scoreboard" class="brackets"><?= t('server.staffpm.view_scoreboard') ?></a>
+            <?  }
+
+            if ($IsFLS && !$IsStaff) { ?>
+                <span data-tooltip="This is the inbox where replies to Staff PMs you have sent are."><a href="staffpm.php?action=userinbox" class="brackets"><?= t('server.staffpm.personal_staff_inbox') ?></a></span>
+            <?  } ?>
+        </div>
     </div>
-    <div class="head">Statistics</div>
     <div class="BoxBody">
         <table>
             <tr>
@@ -100,7 +99,7 @@ View::show_header('Staff Inbox', 'PageStaffPMScoreboard');
                     ?>
                     <strong>Inbox actions in the last week</strong>
                     <table class="Table">
-                        <tr class="Table-row">
+                        <tr class="Table-rowHeader">
                             <td class="Table-cell">Username</td>
                             <td class="Table-cell">Replies</td>
                             <td class="Table-cell"><?= $COL ?></td>

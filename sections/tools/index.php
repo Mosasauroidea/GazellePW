@@ -9,7 +9,6 @@
     -Unify all the code standards and file names (tool_list.php,tool_add.php,tool_alter.php)
 
  *****************************************************************/
-
 if (isset($argv[1])) {
     $_REQUEST['action'] = $argv[1];
 } else {

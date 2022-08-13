@@ -43,10 +43,10 @@ foreach ($GroupIDs as $Idx => $GroupID) {
     extract(Torrents::array_group($TorrentList[$GroupID]));
     foreach ($Artists as $Importance => $ImportanceArtists) {
         foreach ($ImportanceArtists as $Artist) {
-            if (!isset($TopArtists[$Artist['id']])) {
-                $TopArtists[$Artist['id']] = array('data' => $Artist, 'count' => 1);
+            if (!isset($TopArtists[$Artist['ArtistID']])) {
+                $TopArtists[$Artist['ArtistID']] = array('data' => $Artist, 'count' => 1);
             } else {
-                $TopArtists[$Artist['id']]['count']++;
+                $TopArtists[$Artist['ArtistID']]['count']++;
             }
         }
     }
@@ -108,10 +108,8 @@ View::show_header($Title, 'browse,collage', 'PageBookmarkTorrent');
         </div>
         <div class="SidebarItemTags SidebarItem Box">
             <div class="SidebarItem-header Box-header"><strong><?= t('server.bookmarks.top_tags') ?></strong></div>
-            <div class="SidebarItem-body Box-body">
-                <ul class="SidebarList">
-                    <? Tags::format_top(5, 'torrents.php?taglist=', '', 'SidebarList-item') ?>
-                </ul>
+            <div class="SidebarList SidebarItem-body Box-body">
+                <? Tags::format_top(5, 'torrents.php?taglist=', '', 'SidebarList-item') ?>
             </div>
         </div>
         <div class="SidebarItemArtists SidebarItem Box">

@@ -237,7 +237,7 @@ server.apply.public: |-
 server.apply.published: |-
   开放
 server.apply.referral_note: |-
-  <b>内推制度：欢迎用户推荐自己的伙伴前来应聘（可推荐无号用户，应聘 TI 除外），内推成功可获得 <span class='u-colorWarning'>3 个邀请名额</span>和 <span class='u-colorWarning'>250000 积分</span>的奖励！请推荐者使用 Staff PM（对象为 “工作组”）提交推荐信，信中需包含被推荐者的基本信息及意向沟通方式。</b>
+  <b>内推制度：欢迎用户推荐自己的伙伴前来应聘（可推荐无号用户，应聘 TI 除外），内推成功可获得 <span class='u-colorWarning'>3 个邀请名额</span> 和 <span class='u-colorWarning'>250000 积分</span>的奖励！请推荐者使用 Staff PM（对象为 “工作组”）提交推荐信，信中需包含被推荐者的基本信息及意向沟通方式。</b>
 server.apply.reply: |-
   回复
 server.apply.resolved: |-
@@ -3283,6 +3283,8 @@ server.staffpm.view_resolved: |-
   查看已解决
 server.staffpm.view_scoreboard: |-
   查看计分板
+server.staffpm.scoreboard: |-
+  计分板
 server.staffpm.view_unresolved: |-
   查看未解决
 server.staffpm.view_your_unanswered: |-

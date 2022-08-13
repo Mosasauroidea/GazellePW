@@ -143,6 +143,9 @@ class Artists {
 
     public static function add_artist($Artist, $Summary = "Auto load") {
         $UserID = G::$LoggedUser['ID'];
+        if (empty($UserID)) {
+            $UserID = 0;
+        }
         G::$DB->begin_transaction();
         $IMDBID = $Artist['IMDBID'];
         $Name = db_string($Artist['Name']);
@@ -161,6 +164,26 @@ class Artists {
             if ($OldArtist) {
                 $OldID = $OldArtist['ArtistID'];
                 // TODO by qwerty update artist info
+                $Updates = [];
+                if (!empty($Name)) {
+                    $Updates[] = "Name = '$Name'";
+                }
+                if (!empty($SubName)) {
+                    $Updates[] = "SubName = '$SubName'";
+                }
+                if (empty($OldArtist['Image']) && !empty($Image)) {
+                    $Updates[] = "Image = '$Image'";
+                }
+                if (empty($OldArtist['Description']) && !empty($Body)) {
+                    $Updates[] = "Description = '$Body'";
+                }
+                if (empty($OldArtist['Birthday']) && !empty($Birth)) {
+                    $Updates[] = "Birthday = '$Birth'";
+                }
+                if (empty($OldArtist['PlaceOfBirth']) && !empty($Place)) {
+                    $Updates[] = "PlaceOfBirth = '$Place'";
+                }
+                G::$DB->query("UPDATE artists_group SET " . implode(' , ', $Updates) . " WHERE ArtistID = $OldID");
                 $Artist['ArtistID'] = $OldID;
                 G::$DB->prepared_query("SELECT ArtistID, AliasID, Redirect FROM artists_alias WHERE ArtistID = ?", $OldID);
                 while (list($ArtistID, $AliasID, $Redirect) = G::$DB->next_record(MYSQLI_NUM, false)) {

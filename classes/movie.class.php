@@ -206,7 +206,7 @@ class MOVIE {
                     $IMDBID = $key;
                     $TMDBID = $value['TMDBID'] ? $value['TMDBID'] : 'null';
                     $TMDBData = $value['TMDBData'] ? $value['TMDBData'] : '';
-                    $SQL[] = "('" . $key . "', " . $TMDBID . ", '" . db_string($TMDBData) . "', '" . sqlTime() . "')";
+                    $SQL[] = "('" . $key . "', " . $TMDBID . ", '" . db_string($TMDBData) . "', '" . sqltime() . "')";
                 }
                 $FinalSQL = implode(',', $SQL);
                 G::$DB->query("INSERT INTO artist_info_cache (IMDBID, TMDBID, TMDBData, TMDBTime) VALUES " . $FinalSQL . " ON DUPLICATE KEY UPDATE TMDBID=VALUES(TMDBID), TMDBData=VALUES(TMDBData), TMDBTime=VALUES(TMDBTime)");

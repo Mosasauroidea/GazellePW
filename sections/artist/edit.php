@@ -53,6 +53,13 @@ View::show_header(t('server.artist.edit_artist'), 'PageArtistEdit');
                         <?= t('server.artist.imdb_artist_id') ?>:
                         <input class="Input is-small" type="text" name="imdb_id" size="20" placeholder="nm1234567" value="<?= $IMDBID ?>" />
                     </div>
+                </div>
+            </div>
+            <div class="Form-row">
+                <div class="Form-inputs">
+                    <div><?= t('server.artist.artist_name') ?>:
+                        <input class="Input is-small" type="text" name="name" size="20" placeholder="" value="<?= $Name ?>" />
+                    </div>
                     <div><?= t('server.artist.sub_name') ?>:
                         <input class="Input is-small" type="text" name="sub_name" size="20" placeholder="" value="<?= $SubName ?>" />
                     </div>
@@ -68,22 +75,6 @@ View::show_header(t('server.artist.edit_artist'), 'PageArtistEdit');
             </div>
         </div>
     </form>
-    <? if (check_perms('torrents_edit')) { ?>
-        <form class="rename_form" name="artist" action="artist.php" method="post">
-            <div class="Form-rowList" variant="header">
-                <div class="Form-rowHeader">
-                    <div><?= t('server.artist.rename') ?></div>
-                </div>
-
-                <div class="Form-row FormOneLine">
-                    <input class="Input is-small" type="text" name="name" size="92" value="<?= $Name ?>" />
-                    <input class="Button" type="submit" value="<?= t('server.common.rename') ?>" />
-                </div>
-            </div>
-            <input type="hidden" name="action" value="rename" />
-            <input type="hidden" name="auth" value="<?= $LoggedUser['AuthKey'] ?>" />
-            <input type="hidden" name="artistid" value="<?= $ArtistID ?>" />
-        </form>
 </div>
 
 <form class="merge_form" name="artist" action="artist.php" method="post">
@@ -179,7 +170,5 @@ View::show_header(t('server.artist.edit_artist'), 'PageArtistEdit');
         <div class="Form-row">
         </div>
     </form>
-</div>
-<? } ?>
 </div>
 <? View::show_footer() ?>

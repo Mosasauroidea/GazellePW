@@ -514,7 +514,7 @@ View::show_header(t('server.index.index'), 'comments', 'PageHome');
         <!-- Anouncements -->
         <div class="PostBox Box">
             <div class="Box-header">
-                <a href="forums.php?action=viewforum&amp;forumid=<?= CONFIG['ANNOUNCEMENT_FORUM_ID'] ?>">
+                <a href="forums.php?action=viewforum&amp;forumid=<?= CONFIG['NEWS_FORUM_ID'] ?>">
                     <?= t('server.index.announcements') ?>
                 </a>
             </div>

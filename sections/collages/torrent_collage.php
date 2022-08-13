@@ -55,10 +55,10 @@ foreach ($GroupIDs as $Idx => $GroupID) {
 
     foreach ($Artists as $Importance => $ImportanceArtists) {
         foreach ($ImportanceArtists as $Artist) {
-            if (!isset($TopArtists[$Artist['id']])) {
-                $TopArtists[$Artist['id']] = array('data' => $Artist, 'count' => 1);
+            if (!isset($TopArtists[$Artist['ArtistID']])) {
+                $TopArtists[$Artist['ArtistID']] = array('data' => $Artist, 'count' => 1);
             } else {
-                $TopArtists[$Artist['id']]['count']++;
+                $TopArtists[$Artist['ArtistID']]['count']++;
             }
         }
     }
@@ -150,14 +150,7 @@ View::show_header($Name, 'browse,collage,bbcode,voting,recommend', 'PageCollageT
                     <a href="collages.php?action=search&amp;cats[<?= (int)$CollageCategoryID ?>]=1"><?= t('server.collages.collagecats')[(int)$CollageCategoryID] ?></a>
                 </div>
             </div>
-            <div class="SidebarItemCollageDescription SidebarItem Box">
-                <div class="SidebarItem-header Box-header">
-                    <strong><?= t('server.collages.description') ?></strong>
-                </div>
-                <div class="SidebarItem-body Box-body HtmlText">
-                    <?= Text::full_format($Description) ?>
-                </div>
-            </div>
+
             <div class="SidebarItemStats SidebarItem Box">
                 <div class="SidebarItem-header Box-header">
                     <strong><?= t('server.collages.statistics') ?></strong>
@@ -282,6 +275,17 @@ View::show_header($Name, 'browse,collage,bbcode,voting,recommend', 'PageCollageT
         </div>
         <div class="LayoutMainSidebar-main">
             <div class="Box">
+                <div class="Box-header">
+                    <strong><?= t('server.collages.description') ?></strong>
+                </div>
+                <div class="Box-body HtmlText">
+                    <?= Text::full_format($Description) ?>
+                </div>
+            </div>
+            <div class="Box">
+                <div class="Box-header">
+                    <strong><?= t('server.index.moviegroups') ?></strong>
+                </div>
                 <div class="Box-body">
                     <?
                     $Groups = [];

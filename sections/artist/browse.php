@@ -362,9 +362,9 @@ View::show_header(($SubName ? '[' . $SubName . '] ' : '') . $Name, 'browse,bbcod
         </div>
         <div class="MovieInfo-titleContainer">
             <div class="MovieInfo-title">
-                <? echo $Name ?>
+                <?= (Lang::is_default() && !empty($SubName)) ? $SubName : $Name ?>
             </div>
-            <a class="MovieInfo-subTitle" href="torrents.php?searchstr=<?= $Name ?>"><?= $SubName ?></a>
+            <div class="MovieInfo-subTitle"><?= (Lang::is_default() && !empty($Name)) ? $Name : $SubName ?></div>
         </div>
         <div class="MovieInfo-tagContainer">
             <div class="MovieInfo-facts">

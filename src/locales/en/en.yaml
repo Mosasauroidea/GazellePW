@@ -3355,6 +3355,8 @@ server.staffpm.view_resolved: |-
   View resolved
 server.staffpm.view_scoreboard: |-
   View scoreboard
+server.staffpm.scoreboard: |-
+  Scoreboard
 server.staffpm.view_unresolved: |-
   View unresolved
 server.staffpm.view_your_unanswered: |-

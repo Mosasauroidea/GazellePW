@@ -159,7 +159,7 @@ class Tags {
      */
     public static function format_top($Max = 5, $Link = 'torrents.php?taglist=', $ArtistName = '', $ItemClass = '') {
         if (empty(self::$All)) { ?>
-            <li class="$ItemClass"><?= t('server.common.no_torrent_tags') ?></li>
+            <li class="<?= $ItemClass ?>"><?= t('server.common.no_torrent_tags') ?></li>
         <?
             return;
         }
@@ -167,7 +167,7 @@ class Tags {
             $ArtistName = '&amp;artistname=' . urlencode($ArtistName) . '&amp;action=advanced&amp;searchsubmit=1';
         }
         foreach (array_slice(self::sorted(), 0, $Max) as $TagName => $Total) { ?>
-            <li class="$ItemClass"><a href="<?= $Link . display_str($TagName) . $ArtistName ?>"><?= display_str($TagName) ?></a> (<?= $Total ?>)</li>
+            <li class="<?= $ItemClass ?>"><a href="<?= $Link . display_str($TagName) . $ArtistName ?>"><?= display_str($TagName) ?></a> (<?= $Total ?>)</li>
 <?      }
     }
 

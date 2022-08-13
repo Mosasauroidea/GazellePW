@@ -68,14 +68,10 @@ function run_task($Dir, $Task) {
     print("DONE! (" . number_format(microtime(true) - $TimeStart, 3) . ")" . $LineEnd);
 }
 
-$RunOnce = '';
 
 if (PHP_SAPI === 'cli') {
     if (!isset($argv[1]) || $argv[1] != CONFIG['SCHEDULE_KEY']) {
         error(403);
-    }
-    if (isset($argv[2])) {
-        $RunOnce = $argv[2];
     }
     for ($i = 2; $i < count($argv); $i++) {
         if ($argv[$i] === 'run_tasks') {
@@ -110,14 +106,6 @@ if (check_perms('admin_schedule')) {
     View::show_header('', '', 'PageScheduleHome');
     echo '<pre>';
 }
-
-if ($RunOnce) {
-    echo "Running every run tasks...{$LineEnd}";
-    run_task('once', $RunOnce);
-    echo "{$LineEnd}";
-    exit(0);
-}
-
 
 $DB->query("
 	SELECT NextHour, NextDay, NextBiWeekly, NextMonth

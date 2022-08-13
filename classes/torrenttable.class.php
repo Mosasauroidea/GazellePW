@@ -674,7 +674,7 @@ class TorrentTableView {
     }
     protected function render_group_name($GroupInfo) {
         $GroupID = $GroupInfo['ID'];
-        $GroupName = Lang::is_default() && isset($GroupInfo['SubName']) ? $GroupInfo['SubName'] : $GroupInfo['Name'];
+        $GroupName = (Lang::is_default() && !empty($GroupInfo['SubName'])) ? $GroupInfo['SubName'] : $GroupInfo['Name'];
         $SubName = Lang::is_default() ? $GroupInfo['Name'] : $GroupInfo['SubName'];
         $GroupYear = $GroupInfo['Year'];
     ?>
@@ -736,7 +736,7 @@ class TorrentTableView {
                 <?= icon('rotten-tomatoes-gray') ?>
                 <span><?= !empty($Group['RTRating']) ? $Group['RTRating'] : '--' ?></span>
             </a>
-            <a class="TableTorrent-movieInfoFactsItem" data-tooltip="<?= t('server.upload.director') ?>" href="/artist.php?id=<?= $Director['id'] ?>" dir="ltr">
+            <a class="TableTorrent-movieInfoFactsItem" data-tooltip="<?= t('server.upload.director') ?>" href="/artist.php?id=<?= $Director['ArtistID'] ?>" dir="ltr">
                 <?= icon('movie-director') ?>
                 <span><?= Artists::display_artist($Director, false) ?></span>
             </a>

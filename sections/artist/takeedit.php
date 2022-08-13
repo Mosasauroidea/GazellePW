@@ -29,6 +29,7 @@ if ($_GET['action'] === 'revert') { // if we're reverting to a previous revision
     $Summary = db_string($_POST['summary']);
     $Image = db_string($_POST['image']);
     $IMDBID = db_string($_POST['imdb_id']);
+    $Name = db_string($_POST['name']);
     $SubName = db_string($_POST['sub_name']);
     ImageTools::blacklisted($Image);
     // Trickery
@@ -42,11 +43,12 @@ if (!$RevisionID) { // edit
     $DB->query(
         "SELECT w.Body, w.Image, w.IMDBID, w.SubName, w.Birthday, w.PlaceOfBirth, w.Name from wiki_artists w left join artists_group a on a.RevisionID = w.RevisionID where a.ArtistID=$ArtistID"
     );
-    list($OldBody, $OldyImage, $OldIMDBID, $OldSubName, $Birthday, $PlaceOfBirth, $Name) = $DB->next_record(MYSQLI_NUM, false);
+    list($OldBody, $OldyImage, $OldIMDBID, $OldSubName, $Birthday, $PlaceOfBirth, $OldName) = $DB->next_record(MYSQLI_NUM, false);
     $BodyChange = $Body != db_string($OldBody);
     $ImageChange = $Image != $OldyImage;
     $IMDBIDChange = $IMDBID != $OldIMDBID;
     $SubNameChange = $SubName != $OldSubName;
+    $NameChange = $Name != $OldName;
     $TotalSummary = "";
     // TODO by qwerty i18N
     if ($BodyChange) {
@@ -60,6 +62,9 @@ if (!$RevisionID) { // edit
     }
     if ($CubNameChange) {
         $TotalSummary .= "修改子名称";
+    }
+    if ($NameChange) {
+        $TotalSummary .= "修改名称";
     }
     $TotalSummary .= $Summary ? " 原因：$Summary" : "";
     $DB->query("

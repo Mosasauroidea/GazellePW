@@ -24,9 +24,6 @@ if (!empty($_POST['action'])) {
         case 'download':
             require(CONFIG['SERVER_ROOT'] . '/sections/artist/download.php');
             break;
-        case 'rename':
-            require(CONFIG['SERVER_ROOT'] . '/sections/artist/rename.php');
-            break;
         case 'add_similar':
             require(CONFIG['SERVER_ROOT'] . '/sections/artist/add_similar.php');
             break;
@@ -109,11 +106,7 @@ if (!empty($_POST['action'])) {
 			FROM artists_alias
 			WHERE Name LIKE '" . db_string($NameSearch) . "'");
         if (!$DB->has_results()) {
-            if (isset($LoggedUser['SearchType']) && $LoggedUser['SearchType']) {
-                header('Location: torrents.php?action=advanced&artistname=' . urlencode($_GET['artistname']));
-            } else {
-                header('Location: torrents.php?searchstr=' . urlencode($_GET['artistname']));
-            }
+            header('Location: torrents.php?action=advanced&artistname=' . urlencode($_GET['artistname']));
             die();
         }
         list($FirstID, $Name) = $DB->next_record(MYSQLI_NUM, false);
