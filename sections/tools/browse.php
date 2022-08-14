@@ -69,7 +69,7 @@ View::show_header(t('server.tools.staff_tools'), '', 'PageToolHome');
         create_row(t('server.tools.global_notification'), "tools.php?action=global_notification", check_perms("users_mod"));
         create_row(t('server.tools.mass_pm'), "tools.php?action=mass_pm", check_perms("users_mod"));
         create_row(t('server.tools.news_post'), "forums.php?action=viewforum&forumid=12", check_perms("admin_manage_news"));
-        create_row(t('server.tools.album_of_the_month'), "tools.php?action=monthalbum", check_perms("users_mod"));
+        create_row(t('server.tools.featured_movie'), "tools.php?action=featuremovie", check_perms("users_mod"));
 
         if ($ToolsHTML) {
         ?>

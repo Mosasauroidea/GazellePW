@@ -19,7 +19,7 @@ TorrentCover variant="OneLine | FiveGrid"
   row-gap: var(--global-space-default);
 }
 .TorrentCover[variant='FiveGrid'] {
-  width: 870px;
+  width: 880px;
   margin: 0 auto;
 }
 @media (max-width: 768px) {

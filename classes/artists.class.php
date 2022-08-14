@@ -174,8 +174,8 @@ class Artists {
                 if (empty($OldArtist['Image']) && !empty($Image)) {
                     $Updates[] = "Image = '$Image'";
                 }
-                if (empty($OldArtist['Description']) && !empty($Body)) {
-                    $Updates[] = "Description = '$Body'";
+                if (empty($OldArtist['Body']) && !empty($Body)) {
+                    $Updates[] = "Body = '$Body'";
                 }
                 if (empty($OldArtist['Birthday']) && !empty($Birth)) {
                     $Updates[] = "Birthday = '$Birth'";

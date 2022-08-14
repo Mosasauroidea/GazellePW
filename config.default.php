@@ -101,6 +101,7 @@ $CONFIG['EDITING_TRASH_FORUM_ID'] = 0; // ID of forum to send editing threads to
 $CONFIG['ANNOUNCEMENT_FORUM_ID'] = 0;
 $CONFIG['NEWS_FORUM_ID'] = 0;
 $CONFIG['DONOR_FORUM'] = 0;
+$CONFIG['FEATURED_MOVIE_FORUM'] = 0;
 
 $CONFIG['ForumsRevealVoters'] = [];
 

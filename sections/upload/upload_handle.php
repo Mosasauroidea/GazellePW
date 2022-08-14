@@ -123,6 +123,9 @@ $IsNewGroup = empty($GroupID);
 //******************************************************************************//
 //--------------- Validate data in upload form ---------------------------------//
 
+
+
+
 $Validate = new VALIDATE;
 $Validate->SetFields(
     'codec',
@@ -180,6 +183,10 @@ if ($IsNewGroup) {
     if ($MainArtistCount < 1) {
         $Err = t('server.upload.enter_at_least_one_artist');
     }
+}
+
+if ($Properties['ReleaseType'] == 3 || $Properties['ReleaseType'] == 4) {
+    $Err = t('server.upload.select_valid_format');
 }
 
 if ($Err) { // Show the upload form, with the data the user entered

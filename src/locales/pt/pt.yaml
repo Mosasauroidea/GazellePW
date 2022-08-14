@@ -100,8 +100,6 @@ client.upload.desc_img_3_png: |-
   São necessárias pelo menos três capturas de tela PNG consulte <a href="wiki.php?action=article&id=51" target="_blank">ajuda</a>.
 client.upload.desc_img_hosts: |-
   Por favor, use hosts de imagem que são recomendados pela Regra de Upload <a href="rules.php?p=upload#2.2.1" target="_blank">2.1</a>.
-client.upload.englisht_name: |-
-  Nome em inglês
 client.upload.imdb_link_required: |-
   Link IMDb ou ID com formato correto é obrigatório!
 client.upload.mediainfo_complete_name_required: |-

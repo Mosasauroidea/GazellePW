@@ -80,7 +80,6 @@ $ReplyText = new TEXTAREA_PREVIEW(
 ?>
 
 <div id="reply_box">
-    <h3><?= $InputTitle ?></h3>
     <div>
         <form class="send_form center" name="reply" id="quickpostform" action="<?= $Action ?>" method="post" <? if (!check_perms('users_mod')) { ?> onsubmit="quickpostform.submit_button.disabled = true;" <? } ?>>
             <input type="hidden" name="action" value="<?= $InputAction ?>" />

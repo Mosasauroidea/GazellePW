@@ -71,7 +71,7 @@ Post-headerMultipleRows
 
 .Post-body {
   border-top: var(--Box-border);
-  padding: var(--global-space-lg);
+  padding: var(--global-space-default);
 }
 
 .Post-bodyActions {

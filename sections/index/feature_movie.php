@@ -1,5 +1,5 @@
 <?
-$FeaturedMovie = $Cache->get_value('album_of_the_month');
+$FeaturedMovie = $Cache->get_value('featured_movie');
 if ($FeaturedMovie === false) {
     $DB->query('
 		SELECT
@@ -15,7 +15,7 @@ if ($FeaturedMovie === false) {
 			JOIN torrents_group AS tg ON tg.ID = fa.GroupID
 		WHERE Ended = 0 AND type = 0');
     $FeaturedMovie = $DB->next_record();
-    $Cache->cache_value('album_of_the_month', $FeaturedMovie, 0);
+    $Cache->cache_value('featured_movie', $FeaturedMovie, 0);
 }
 if (is_number($FeaturedMovie['GroupID'])) {
 ?>

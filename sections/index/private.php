@@ -175,7 +175,7 @@ View::show_header(t('server.index.index'), 'comments', 'PageHome');
         <?  } ?>
 
         <!-- Featured Movie -->
-        <? include('month_movie.php'); ?>
+        <? include('feature_movie.php'); ?>
 
         <!-- Forum Latest Topic -->
         <?

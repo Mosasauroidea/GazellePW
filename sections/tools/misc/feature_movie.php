@@ -7,8 +7,7 @@ if (!check_perms('users_mod')) {
 if (isset($_POST['GroupID'])) {
     authorize();
 
-    //Album of the month forum ID
-    $ForumID = 43;
+    $ForumID = $CONFIG['FEATURED_MOVIE_FORUM'];
 
     $GroupID = trim($_POST['GroupID']);
 
@@ -29,25 +28,26 @@ if (isset($_POST['GroupID'])) {
 				tg.ArtistID,
 				tg.Name,
 				tg.WikiImage,
-				ag.Name AS Artist
+                tg.WikiBody,
+				tg.SubName,
+                tg.Year
 			FROM torrents_group AS tg
-				LEFT JOIN artists_group AS ag ON tg.ArtistID = ag.ArtistID
 			WHERE tg.id = ?', $GroupID);
 
-        $Album = $DB->next_record();
+        $Movie = $DB->next_record();
 
         //Make sure album exists
-        if (is_number($Album['ID'])) {
+        if (is_number($Movie['ID'])) {
             //Remove old albums with type = 0 (so we remove the previous AotM)
             $DB->prepared_query('DELETE FROM featured_albums WHERE Type = 0');
-            $Cache->delete_value('album_of_the_month');
+            $Cache->delete_value('featured_movie');
 
             //Freeleech torrents
             if (isset($_POST['FLTorrents'])) {
                 $DB->prepared_query('
 					SELECT ID
 					FROM torrents
-					WHERE GroupID = ?', $Album['ID']);
+					WHERE GroupID = ?', $Movie['ID']);
                 $TorrentIDs = $DB->collect('ID');
                 if (isset($_POST['NLOver']) && $FreeLeechType == 1) {
                     // Only use this checkbox if freeleech is selected
@@ -90,32 +90,32 @@ if (isset($_POST['GroupID'])) {
                     }
                 }
             }
-
-            //Get post title (album title)
-            if ($Album['ArtistID'] != '0') {
-                $Title = $Album['Artist'] . ' - ' . $Album['Name'];
-            } else {
-                $Title = $Album['Name'];
-            }
-
-            //Get post body
-            if (isset($_POST['Body']) && $_POST['Body'] != '') {
-                $Body = $_POST['Body'];
-            } else {
-                $Body = '[size=4]' . $Title . '[/size]' . "\n\n";
-                if (!empty($Album['WikiImage']))
-                    $Body .= '[img]' . $Album['WikiImage'] . '[/img]';
-            }
-
-            //Create forum post
-            $ThreadID = Misc::create_thread($ForumID, $LoggedUser[ID], $Title, $Body);
-
             //Add album of the month
             $DB->prepared_query('
 				INSERT INTO featured_albums
 					(GroupID,ThreadID,Started,Type)
 				VALUES
-					(?, ?, ?, ?)', db_string($GroupID), $ThreadID, sqltime(), 0);
+					(?, ?, ?, ?)', db_string($GroupID), 0, sqltime(), 0);
+            $FeatureID = G::$DB->inserted_id();
+
+            $Title = "#$FeatureID " . Torrents::group_name($Movie, false);
+
+            $Body = '[url=torrents.php?id=' . $GroupID . ']' . Torrents::group_name($Movie, false) .  "[/url]\n\n";
+            //Get post body
+            if (isset($_POST['Body']) && $_POST['Body'] != '') {
+                $Body .= "[quote]" . $_POST['Body'] . "[/quote]\n\n";
+            }
+            if (!empty($Movie['WikiImage']))
+                $Body .= '[img]' . $Movie['WikiImage'] . "[/img]\n\n";
+            $Body .= $Movie['WikiBody'] .  "\n\n";
+
+            //Create forum post
+            $ThreadID = Misc::create_thread($ForumID, $LoggedUser['ID'], $Title, $Body);
+
+            $DB->prepared_query("UPDATE featured_albums SET ThreadID = ?", $ThreadID);
+
+
+            $Cache->delete_value("forums_$ForumID");
 
 
             //Redirect to home page
@@ -130,22 +130,21 @@ if (isset($_POST['GroupID'])) {
 } else {
 
     //Show our beautiful header
-    View::show_header(t('server.tools.album_of_the_month'));
+    View::show_header(t('server.tools.featured_movie'));
 
 ?>
     <div class="BodyHeader">
-        <h2 class="BodyHeader-nav"><?= t('server.tools.album_of_the_month') ?></h2>
+        <h2 class="BodyHeader-nav"><?= t('server.tools.featured_movie') ?></h2>
     </div>
 
     <div class="thin BoxBody">
         <form class="create_form" name="album" method="post" action="">
-            <div class="pad">
-                <input type="hidden" name="action" value="monthalbum" />
+            <div class="">
+                <input type="hidden" name="action" value="featuremovie" />
                 <input type="hidden" name="auth" value="<?= $LoggedUser['AuthKey'] ?>" />
                 <h3><?= t('server.tools.album_id') ?></h3>
                 <input class="Input" type="text" name="GroupID" id="groupid" /> <br />
-                <h3><?= t('server.tools.body') ?></h3>
-                <div>(<?= t('server.tools.leave_blank_to_auto_generate') ?>)</div>
+                <h3><?= t('server.tools.pick_reason') ?></h3>
                 <textarea class="Input" name="Body" cols="95" rows="15"></textarea><br /><br />
                 <input type="checkbox" name="FLTorrents" checked />&nbsp;<?= t('server.tools.mark_torrents_as') ?>&nbsp;
                 <select class="Input" name="freeleechtype">
@@ -175,11 +174,9 @@ if (isset($_POST['GroupID'])) {
                         <option class="Select-option" value="<?= $Key ?>" <?= $FLType == 'Staff Pick' ? 'selected' : '' ?>><?= $FLType ?></option>
                     <?      } ?>
                 </select><br /><br />
-                <input type="checkbox" name="NLOver" checked />&nbsp;<?= t('server.tools.nl_torrents_over') ?>
-                <input class="Input" type="text" name="size" value="<?= isset($_POST['size']) ? $_POST['size'] : '1' ?>" size=1 />
+                <input type="checkbox" name="NLOver" />&nbsp;<?= t('server.tools.nl_torrents_over') ?>
+                <input class="Input is-small" type="text" name="size" value="<?= isset($_POST['size']) ? $_POST['size'] : '1' ?>" size=1 />
                 <select class="Input" name="scale">
-                    <option class="Select-option" value="k">KB</option>
-                    <option class="Select-option" value="m">MB</option>
                     <option class="Select-option" value="g" selected>GB</option>
                 </select><?= t('server.tools.nl_torrents_over_after') ?><br /><br />
 

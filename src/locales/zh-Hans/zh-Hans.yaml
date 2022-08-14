@@ -3493,8 +3493,8 @@ server.tools.age: |-
   提交时间
 server.tools.album_id: |-
   影片 ID
-server.tools.album_of_the_month: |-
-  月度电影
+server.tools.featured_movie: |-
+  推荐电影
 server.tools.all: |-
   全部
 server.tools.all_current_torrents: |-
@@ -3631,6 +3631,8 @@ server.tools.bitcoin_donation_balance: |-
   比特币捐助结算
 server.tools.body: |-
   正文
+server.tools.pick_reason: |-
+  推荐理由
 server.tools.bonus_number: |-
   积分数量
 server.tools.bonus_points_giving: |-

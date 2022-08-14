@@ -16,6 +16,7 @@ BBCodeToolbar
   justify-content: center;
   align-items: center;
   flex-wrap: wrap;
+  border-bottom: var(--global-border-box);
 }
 
 .BBCodeToolbar-alignRight {
@@ -29,7 +30,7 @@ BBCodeToolbar
   border: none;
   background: none;
   cursor: pointer;
-  padding: var(--global-space-default);
+  padding: var(--global-space-sm);
 }
 .BBCodeToolbar-button:disabled {
   cursor: default;
@@ -42,7 +43,7 @@ BBCodeToolbar
 
 /* click effect */
 .BBCodeToolbar-button:active:not(:disabled) {
-  border: var(--BBCodeToolbar-button-onActive-border);
+  /* border: var(--BBCodeToolbar-button-onActive-border);*/
   box-shadow: var(--BBCodeToolbar-button-onActive-boxShadow);
 }
 

@@ -559,8 +559,8 @@ switch ($_REQUEST['action']) {
     case 'take_mass_pm':
         include(CONFIG['SERVER_ROOT'] . '/sections/tools/managers/take_mass_pm.php');
         break;
-    case 'monthalbum':
-        include(CONFIG['SERVER_ROOT'] . '/sections/tools/misc/album_of_month.php');
+    case 'featuremovie':
+        include(CONFIG['SERVER_ROOT'] . '/sections/tools/misc/feature_movie.php');
         break;
     case 'badges':
         if (!check_perms('admin_manage_badges') || !CONFIG['ENABLE_BADGE']) error(403);
