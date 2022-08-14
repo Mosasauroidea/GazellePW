@@ -5216,6 +5216,12 @@ server.torrents.non_wiki_torrent_group_editing: |-
   种子组编辑
 server.torrents.nothing_found: |-
   无匹配结果！
+server.torrents.off25: |-
+  -25%%
+server.torrents.off50: |-
+  -50%%
+server.torrents.off75: |-
+  -75%%
 server.torrents.only_hnr: |-
   只显示H&R
 server.torrents.only_shows_free_torrents: |-
