@@ -106,7 +106,7 @@ if ($TorrentID) {
     }
     if ($TorrentID) {
         $TorrentDetail = Torrents::get_torrent($TorrentID);
-        $Title = Torrents::torrent_simple_view($TorrentDetail['Group'], $TorrentDetail, [
+        $Title = Torrents::torrent_simple_view($TorrentDetail['Group'], $TorrentDetail, true, [
             'SettingTorrentTitle' => G::$LoggedUser['SettingTorrentTitle'],
         ]);
     ?>

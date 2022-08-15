@@ -102,7 +102,7 @@ client.upload.desc_img_3_png: |-
   At least three PNG screenshots are required, see <a href="wiki.php?action=article&id=51" target="_blank">help</a>.
 client.upload.desc_img_hosts: |-
   Please use image hosts that are recommended by Upload Rule <a href="rules.php?p=upload#2.2.1" target="_blank">2.2.1</a>.
-client.upload.englisht_name: |-
+client.upload.english_name: |-
   English name
 client.upload.imdb: |-
   IMDb
@@ -3575,7 +3575,7 @@ server.tools.age: |-
   Age
 server.tools.album_id: |-
   Movie ID
-server.tools.album_of_the_month: |-
+server.tools.featured_movie: |-
   Featured Movie
 server.tools.all: |-
   All
@@ -5565,12 +5565,10 @@ server.torrents.torrent_deleted_successfully: |-
   Torrent was successfully deleted.
 server.torrents.torrent_group: |-
   Torrent Group:&nbsp;
-server.torrents.torrent_group_editing_note: |-
-  This is for editing the information related to the <strong>Original Release</strong> only.
 server.torrents.torrent_group_id_change_confirmation: |-
   Torrent Group ID Change Confirmation
 server.torrents.torrent_group_leech_status: |-
-  Torrent <strong>group</strong> leech status
+  Torrent group leech status
 server.torrents.torrent_group_meta_editing: |-
   Movie info editing
 server.torrents.torrents_count: |-
@@ -6156,7 +6154,6 @@ server.user.avatars_2: |-
 server.user.avatars_3: |-
   Replace all avatars with:
 server.user.avatars_title: |-
-  >-
   This option allows you to disable all avatars, show all avatars (with a placeholder for users without avatars), show all avatars &lt;em&gt;or&lt;/em&gt; an identicon set (for users without avatars), or replace all avatars with an identicon set of your choosing.' data-title-plain='This option allows you to disable all avatars, show all avatars (with a placeholder for users without avatars), show all avatars or an identicon set (for users without avatars), or replace all avatars with an
   identicon set of your choosing.
 server.user.badge_center: |-

@@ -375,9 +375,53 @@ if ($IsNewGroup) {
     // Create torrent group
     $DB->query(
         "INSERT INTO torrents_group
-			(ArtistID, CategoryID, Name, SubName, Year,  Time, WikiBody, WikiImage, ReleaseType, IMDBID, TrailerLink, IMDBRating, Duration, ReleaseDate, Region, Language, RTRating, DoubanRating, DoubanID, DoubanVote, IMDBVote)
+			(
+                ArtistID, 
+                CategoryID, 
+                Name, 
+                SubName, 
+                Year,  
+                Time, 
+                WikiBody, 
+                WikiImage, 
+                ReleaseType, 
+                IMDBID, 
+                TrailerLink, 
+                IMDBRating, 
+                Duration, 
+                ReleaseDate, 
+                Region, 
+                Language, 
+                RTRating, 
+                DoubanRating, 
+                DoubanID, 
+                DoubanVote, 
+                IMDBVote
+            )
 		VALUES
-            (0, $TypeID, " . $T['Name'] . ", " . $T['SubName'] . ", $T[Year],'" . sqltime() . "', '" . db_string($Body) . "', $T[Image], $T[ReleaseType], '" . $IMDBID . "', $T[TrailerLink], '" . $IMDBRating . "', '" . $Runtime . "', '" . $Released . "', '" . $Country . "', '" . $OMDBData->Language . "', '" . $RTRating . "', " . $DoubanRating . ", " . $DoubanID . ", " . $DoubanVote . ", " . $IMDBVote . ")"
+            (
+                0, 
+                $TypeID, 
+                " . $T['Name'] . ", 
+                " . $T['SubName'] . ", 
+                $T[Year],
+                '" . sqltime() . "', 
+                '" . db_string($Body) . "', 
+                $T[Image], 
+                $T[ReleaseType], 
+                '" . $IMDBID . "', 
+                $T[TrailerLink], 
+                '" . $IMDBRating . "', 
+                '" . $Runtime . "', 
+                '" . $Released . "', 
+                '" . $Country . "', 
+                '" . $OMDBData->Language . "', 
+                '" . $RTRating . "', 
+                " . $DoubanRating . ", 
+                " . $DoubanID . ", 
+                " . $DoubanVote . ", 
+                " . $IMDBVote .
+            ")"
     );
 
     $GroupID = $DB->inserted_id();
@@ -393,9 +437,34 @@ if ($IsNewGroup) {
     $Cache->increment('stats_group_count');
     $DB->query(
         "INSERT INTO wiki_torrents
-			(PageID, Body, UserID, Summary, Time, Image, IMDBID, IMDBRating, Duration, ReleaseDate, Region, Language, RTRating, DoubanRating, DoubanID, DoubanVote, IMDBVote)
+			(
+                PageID, 
+                Body, 
+                UserID, 
+                Summary, 
+                Time, 
+                Image, 
+                IMDBID, 
+                DoubanID, 
+                Year, 
+                Name, 
+                SubName,
+                ReleaseType)
 		VALUES
-			($GroupID, $T[GroupDescription], $LoggedUser[ID], 'Uploaded new torrent', '" . sqltime() . "', $T[Image], '" . $IMDBID . "', " . $IMDBRating . ", '" . $Runtime . "', '" . $Released . "', '" . $Country . "', '" . $Language . "', '" . $RTRating . "', " . $DoubanRating . ", " . $DoubanID . ", " . $DoubanVote . ", " . $IMDBVote . ")"
+			(
+                $GroupID, 
+                $T[GroupDescription], 
+                $LoggedUser[ID], 
+                'Uploaded new torrent', '" . sqltime() . "', 
+                $T[Image], 
+                '" . $IMDBID . "', 
+                " . $DoubanID . ", 
+                " . $T['Year'] . ",
+                " . $T['Name'] . ",
+                " . $T['SubName'] . ",
+                " . $T['ReleaseType'] . "
+                " .
+            ")"
     );
     $RevisionID = $DB->inserted_id();
 
@@ -514,7 +583,7 @@ Misc::write_log("Torrent $TorrentID ($LogName) was uploaded by " . $LoggedUser['
 if ($Checked) {
     Misc::write_log("Torrent $TorrentID was auto checked");
 }
-Torrents::write_group_log($GroupID, $TorrentID, $LoggedUser['ID'], 'uploaded (' . number_format($TotalSize / (1024 * 1024), 2) . ' MB)', 0);
+Torrents::write_group_log($GroupID, $TorrentID, $LoggedUser['ID'], "uploaded (" . number_format($TotalSize / (1024 * 1024 * 1024), 2) . ' GB)', 0);
 
 Torrents::update_hash($GroupID);
 $Debug->set_flag('upload: sphinx updated');

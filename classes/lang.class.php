@@ -20,17 +20,18 @@ class Lang {
         ], $Options);
         $Lang = self::getLang($Options['Lang']);
         $Value = self::_get($Key, $Lang, $Options);
-        if ($Value === false) {
+        if (empty($Value)) {
             $Value = self::_get($Key, self::EN, $Options);
         }
-        if ($Value == false) {
+        if (empty($Value)) {
             $Value = $Key;
         }
         return $Value;
     }
 
     private static function _get($Key, $Lang, $Options = []) {
-        $DefaultValue = $Options['DefaultValue'] ?: $Key;
+
+        $DefaultValue = $Options['DefaultValue'];
         $Values = $Options['Values'];
         $Count = $Options['Count'];
         $Locale = self::get_locale($Lang);
@@ -38,12 +39,12 @@ class Lang {
             $Suffix = ($Count === 1) ? '_one' : '_other';
             $Key = "${Key}${Suffix}";
         }
-        $Value = $Locale[$Key];
 
-        if (!isset($Locale[$Key])) {
+        $Value = $Locale[$Key];
+        if (!isset($Locale[$Key]) && !empty($DefaultValue)) {
             $Value = $DefaultValue;
         }
-        if (is_string($Value)) {
+        if (!empty($Value) && is_string($Value)) {
             $Value = sprintf($Value, ...$Values);
         }
 

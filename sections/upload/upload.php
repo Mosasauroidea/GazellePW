@@ -108,15 +108,18 @@ $HideDNU = check_perms('torrents_hide_dnu') && !$NewDNU;
         <div class="BodyHeader-nav">
             <?= t('server.upload.upload') ?>
         </div>
-        <div id="dnu_container" class="<?= (check_perms('torrents_hide_dnu') ? 'BoxBody' : '') ?>">
-            <h3 id="dnu_header"><?= t('server.upload.torrent_diff') ?></h3>
-            <p><?= $NewDNU ? '<strong class="u-colorWarning">' : '' ?><?= t('server.upload.last_update') ?>: <?= time_diff($Updated) ?><?= $NewDNU ? '</strong>' : '' ?></p>
-            <p><?= t('server.upload.upload_note') ?>
-                <? if ($HideDNU) { ?>
-                    <span id="showdnu"><a href="#" onclick="$('#dnulist').gtoggle(); this.innerHTML = (this.innerHTML == 'Hide' ? 'Show' : 'Hide'); return false;" class="brackets"><?= t('server.common.show') ?></a></span>
-                <?  } ?>
-            </p>
-            <div id="dnulist" class="TableContainer" class="<?= ($HideDNU ? 'hidden' : '') ?>">
+        <div id="dnu_container" class="Box">
+            <div class="Box-header">
+                <div id="dnu_header"><?= t('server.upload.torrent_diff') ?>
+                    <? if ($HideDNU) { ?>
+                        <span class="floatright" id="showdnu"><a href="#" onclick="$('#dnulist').gtoggle(); this.innerHTML = (this.innerHTML == '<?= t('server.common.hide') ?>' ? '<?= t('server.common.show') ?>' : '<?= t('server.common.hide') ?>'); return false;" class="brackets"><?= t('server.common.show') ?></a></span>
+                    <?  } ?>
+                </div>
+            </div>
+            <div id="dnulist" class="TableContainer Box-body <?= ($HideDNU ? 'hidden' : '') ?>">
+                <p><?= $NewDNU ? '<strong class="u-colorWarning">' : '' ?><?= t('server.upload.last_update') ?>: <?= time_diff($Updated) ?><?= $NewDNU ? '</strong>' : '' ?></p>
+                <p><?= t('server.upload.upload_note') ?>
+                </p>
                 <table class="TableUploadRule Table">
                     <tr class="Table-rowHeader">
                         <td class="Table-cell" width="50%"><strong><?= t('server.upload.name') ?></strong></td>

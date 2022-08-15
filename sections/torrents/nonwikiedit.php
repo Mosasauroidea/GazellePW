@@ -44,36 +44,6 @@ if (check_perms('torrents_freeleech') && (isset($_POST['freeleech']) xor isset($
     Torrents::freeleech_groups($GroupID, $Free, $FreeType);
 }
 
-//Escape fields
-$Year = db_string((int)$_POST['year']);
-// Get some info for the group log
-$DB->query("
-	SELECT Year
-	FROM torrents_group
-	WHERE ID = $GroupID");
-list($OldYear) = $DB->next_record();
-
-
-
-$DB->query("
-	UPDATE torrents_group
-	SET
-		Year = '$Year'
-	WHERE ID = $GroupID");
-
-if ($OldYear != $Year) {
-    $DB->query("
-		INSERT INTO group_log (GroupID, UserID, Time, Info)
-		VALUES ('$GroupID', " . $LoggedUser['ID'] . ", '" . sqltime() . "', '" . db_string("Year changed from $OldYear to $Year") . "')");
-}
-
-$DB->query("
-	SELECT ID
-	FROM torrents
-	WHERE GroupID = '$GroupID'");
-while (list($TorrentID) = $DB->next_record()) {
-    $Cache->delete_value("torrent_download_$TorrentID");
-}
 Torrents::update_hash($GroupID);
 $Cache->delete_value("torrents_details_$GroupID");
 

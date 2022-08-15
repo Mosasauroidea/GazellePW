@@ -3380,7 +3380,6 @@ server.subtitles.subtitle_file: |-
 server.subtitles.subtitle_names: |-
   字幕名
 server.subtitles.subtitle_rules: |-
-  >-
   <ul> <li id='r3.6.1'><a href='rules.php?p=upload#3.6.1'>1.</a> <strong>用户上传的字幕应与对应种子的视频文件同步，否则会被直接删除。</strong> </li> <li id='r3.6.2'><a href='rules.php?p=upload#3.6.2'>2.</a> <strong>站点允许的字幕格式有 .sub、.idx、.sup、.srt、.vtt、.ass、.smi、.ssa。</strong>此外，也允许压缩打包上传，支持 .rar、.zip、.7z、.tar、.tgz、.tar.gz。 </li> <li id='r3.6.3'><a href='rules.php?p=upload#3.6.3'>3.</a> <strong>字幕文件建议采用与对应视频文件相一致的文件命名以方便使用。</strong>在尾部增加用以标明语言的字段是允许的，如 “Monsters.Inc.2001.1080p.BluRay.DTS.x264.D-Z0N3.chs.srt”。 </li> <li
   id='r3.6.4'><a href='rules.php?p=upload#3.6.4'>4.</a> <strong>字幕文件应以 Unicode 编码为佳。</strong> </li> <li id='r3.6.5'><a href='rules.php?p=upload#3.6.5'>5.</a> <strong>对于单文件电影，请直接上传单个的字幕文件，不要将同一部电影的多类字幕文件一同打包上传。</strong>如，在一个压缩包内同时囊括简中 SRT、繁中 SRT、中英 ASS，这是不允许的，你应将它们分别上传。<strong>对于迷你剧，则可以将每一集对应的字幕合并打包上传。</strong>但应保证每一集所对应的字幕文件命名与视频文件相同。 </li> </ul>
 server.subtitles.subtitle_upload_warning: |-
@@ -5483,12 +5482,10 @@ server.torrents.torrent_deleted_successfully: |-
   种子已被成功删除
 server.torrents.torrent_group: |-
   种子组：
-server.torrents.torrent_group_editing_note: |-
-  该部分仅用于编辑与<strong>原始发行</strong>相关的信息。
 server.torrents.torrent_group_id_change_confirmation: |-
   种子组 ID 变更确认
 server.torrents.torrent_group_leech_status: |-
-  种子<strong>组</strong>优惠设置
+  种子组优惠设置
 server.torrents.torrent_group_meta_editing: |-
   影片信息编辑
 server.torrents.torrents_count: |-

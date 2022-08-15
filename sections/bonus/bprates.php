@@ -197,7 +197,7 @@ $Pages = Format::get_pages($Page, $TotalTorrents, CONFIG['TORRENTS_PER_PAGE']);
                         $MonthlyPoints = $DailyPoints * 30.436875;
                         $YearlyPoints = $DailyPoints * 365.2425;
                         $Torrent['Group'] = $Groups[$Torrent['GroupID']];
-                        $Name = Torrents::torrent_simple_view($Torrent['Group'], $Torrent, [
+                        $Name = Torrents::torrent_simple_view($Torrent['Group'], true, $Torrent, [
                             'SettingTorrentTitle' => G::$LoggedUser['SettingTorrentTitle'],
                         ]);
                         $DisplayName = '<a href="torrents.php?id=' . $GroupID . '&amp;torrentid=' . $Torrent['ID'] . '"  data-tooltip="' . t('server.common.view_torrent') . '" dir="ltr">' . $Name . '</a>';

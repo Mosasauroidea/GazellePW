@@ -46,8 +46,8 @@ if ($Data) {
 				wiki.body,
 				wiki.IMDBID,
                 wiki.SubName,
-                wiki.Birthday,
-                wiki.PlaceOfBirth
+                a.Birthday,
+                a.PlaceOfBirth
 			FROM wiki_artists AS wiki
 				LEFT JOIN artists_group AS a ON wiki.RevisionID = a.RevisionID
 			WHERE wiki.RevisionID = '$RevisionID' ";
@@ -260,7 +260,7 @@ $NumSnatches = 0;
 
 foreach ($TorrentList as $GroupID => $Group) {
     // $Tags array is for the sidebar on the right.
-    $TorrentTags = new Tags($Group['TagList'], false);
+    $TorrentTags = new Tags($Group['TagList'], true);
 
     foreach ($Group['Torrents'] as $TorrentID => $Torrent) {
         $NumTorrents++;

@@ -61,42 +61,38 @@ class Torrents {
 
             if (!$RevisionID) {
                 $SQL .= '
+				g.Name,
+				g.SubName,
+				g.Year,
 				g.WikiBody,
 				g.WikiImage, 
 				g.IMDBID,
-				g.IMDBRating, 
-				g.Duration,
-				g.ReleaseDate,
-				g.Region, 
-				g.Language, 
-				g.RTRating, 
-				g.DoubanRating,
-				g.IMDBVote, 
-				g.DoubanVote, 
 				g.DoubanID, 
 				g.RTTitle,';
             } else {
                 $SQL .= '
+				w.Name,
+				w.SubName,
+				w.Year,
 				w.Body as WikiBody,
 				w.Image as WikiImage,
 				w.IMDBID,
-				w.IMDBRating, 
-				w.Duration,
-				w.ReleaseDate,
-				w.Region, 
-				w.Language,
-				w.RTRating, 
-				w.DoubanRating, 
-				g.IMDBVote, 
-				g.DoubanVote, 
-				g.DoubanID, 
-				g.RTTitle,';
+				w.DoubanID, 
+				w.RTTitle,';
             }
 
             $SQL .= "
+				g.Region, 
+				g.ReleaseDate,
+				g.Language,
+				g.Duration,
+				g.DoubanRating, 
+				g.DoubanVote, 
+				g.RTRating, 
+				g.IMDBVote, 
+				g.IMDBRating, 
 				g.ID,
-				g.Name,
-				g.Year,
+				g.IMDBRating, 
 				g.ReleaseType,
 				g.CategoryID,
 				g.Time,
@@ -104,8 +100,7 @@ class Torrents {
 				GROUP_CONCAT(DISTINCT tags.ID SEPARATOR '|') as TorrentTagIDs,
 				GROUP_CONCAT(tt.UserID SEPARATOR '|') as TorrentTagUserIDs,
 				GROUP_CONCAT(tt.PositiveVotes SEPARATOR '|') as TagPositiveVotes,
-				GROUP_CONCAT(tt.NegativeVotes SEPARATOR '|') as TagNegativeVotes,
-				g.SubName
+				GROUP_CONCAT(tt.NegativeVotes SEPARATOR '|') as TagNegativeVotes
 			FROM torrents_group AS g
 				LEFT JOIN torrents_tags AS tt ON tt.GroupID = g.ID
 				LEFT JOIN tags ON tags.ID = tt.TagID";
@@ -833,13 +828,13 @@ WHERE ud.TorrentID=? AND ui.NotifyOnDeleteDownloaded='1' AND ud.UserID NOT IN ({
         }
 
         // Fetch album artists
-        G::$DB->query("
-			SELECT GROUP_CONCAT(aa.Name separator ' ')
+        G::$DB->query(
+            "SELECT GROUP_CONCAT(aa.Name separator ' ')
 			FROM torrents_artists AS ta
 				JOIN artists_alias AS aa ON aa.AliasID = ta.AliasID
 			WHERE ta.GroupID = $GroupID
-				AND ta.Importance IN ('1', '4', '5', '6')
-			GROUP BY ta.GroupID");
+			GROUP BY ta.GroupID"
+        );
         if (G::$DB->has_results()) {
             list($ArtistName) = G::$DB->next_record(MYSQLI_NUM, false);
         } else {
@@ -1545,6 +1540,7 @@ WHERE ud.TorrentID=? AND ui.NotifyOnDeleteDownloaded='1' AND ud.UserID NOT IN ({
                         ag.Image as Image,
                         ag.Birthday as Birthday,
                         ag.PlaceOfBirth as PlaceOfBirth,
+                        ag.SubName as SubName,
                         ag.Body as Body
                        FROM 
                         torrents_artists as ta
@@ -1559,19 +1555,32 @@ WHERE ud.TorrentID=? AND ui.NotifyOnDeleteDownloaded='1' AND ud.UserID NOT IN ({
         $Artists = G::$DB->to_array(false, MYSQLI_ASSOC, false);
         $IMDBIDs = [];
         foreach ($Artists as $Artist) {
-            if (empty($Artist['Image'])) {
+            if (!empty($Artist['IMDBID'])) {
                 $IMDBIDs[] = $Artist['IMDBID'];
             }
         }
         $ArtistInfos = MOVIE::get_artists_seq($IMDBIDs, $IMDBID, $Refresh);
         foreach ($Artists as $Artist) {
             $UpdateSQL = [];
+            $WikiChange = false;
+            $ArtistID = $Artist['ArtistID'];
+            $SubName = $Artist['SubName'];
+            $Name = $Artist['Name'];
+            $Body = $Artist['Body'];
+            $Image = $Artist['Image'];
             $ArtistInfo = $ArtistInfos[$Artist['IMDBID']];
-            if (empty($Artist['Image']) && $ArtistInfo && $ArtistInfo['Image']) {
-                $UpdateSQL[] = "Image = '" . db_string($ArtistInfo['Image']) . "'";
+            if (empty($ArtistInfo)) {
+                continue;
             }
-            if (empty($Artist['Body']) && $ArtistInfo && $ArtistInfo['Description']) {
+            if (empty($Image) && $ArtistInfo && !empty($ArtistInfo['Image'])) {
+                $UpdateSQL[] = "Image = '" . db_string($ArtistInfo['Image']) . "'";
+                $Image = db_string($ArtistInfo['Image']);
+                $WikiChange = true;
+            }
+            if (empty($Body) && $ArtistInfo && !empty($ArtistInfo['Description'])) {
                 $UpdateSQL[] = "Body = '" . db_string($ArtistInfo['Description']) . "'";
+                $Body = db_string($ArtistInfo['Description']);
+                $WikiChange = true;
             }
             if (empty($Artist['PlaceOfBirth']) && $ArtistInfo && $ArtistInfo['PlaceOfBirth']) {
                 $UpdateSQL[] = "PlaceOfBirth = '" . db_string($ArtistInfo['PlaceOfBirth']) . "'";
@@ -1579,20 +1588,25 @@ WHERE ud.TorrentID=? AND ui.NotifyOnDeleteDownloaded='1' AND ud.UserID NOT IN ({
             if (empty($Artist['Birthday']) && $ArtistInfo && $ArtistInfo['Birthday']) {
                 $UpdateSQL[] = "Birthday = '" . db_string($ArtistInfo['Birthday']) . "'";
             }
+            if ($WikiChange) {
+                G::$DB->query(
+                    "INSERT INTO wiki_artists
+			        (PageID, Body, Image, UserID, Summary, Time, IMDBID, SubName, Name)
+		        VALUES
+			        ('$ArtistID', '$Body', '$Image', '0', 'Auto load', '" . sqltime() . "', '$IMDBID', '$SubName', '$Name')"
+                );
+                $RevisionID = G::$DB->inserted_id();
+                $UpdateSQL[] = "RevisionID = $RevisionID";
+            }
             if (empty($UpdateSQL)) {
                 continue;
             }
-            $SQL = '
-                Update wiki_artists set ' . implode(',', $UpdateSQL) .
-                ' WHERE RevisionID = ' . $Artist['RevisionID'] . ' ';
-            G::$DB->query($SQL);
+            G::$DB->query("UPDATE artists_group SET " . implode(',', $UpdateSQL) . " WHERE ArtistID = $ArtistID");
             G::$Cache->delete_value('artist_' . $Artist['ArtistID']);
-            G::$Cache->delete_value('artist_groups_' . $Artist['ArtistID']);
-            G::$Cache->delete_value('groups_artists_' . $GroupID);
-            G::$Cache->delete_value("torrent_group_$GroupID");
-            G::$Cache->delete_value("torrents_details_$GroupID");
         }
-        echo "Update group $GroupID artist info success.\n";
+        G::$Cache->delete_value('groups_artists_' . $GroupID);
+        G::$Cache->delete_value("torrent_group_$GroupID");
+        G::$Cache->delete_value("torrents_details_$GroupID");
     }
 
     public static function update_movie_info($GroupID, $IMDBID, $DoubanID = null, $Force = true) {
@@ -1601,7 +1615,6 @@ WHERE ud.TorrentID=? AND ui.NotifyOnDeleteDownloaded='1' AND ud.UserID NOT IN ({
         }
         $OMDBData = MOVIE::get_omdb_data($IMDBID, $Force);
         $UpdateSQL = [];
-        $UpdateSQL[] = "IMDBID = '" . $IMDBID . "'";
         if ($OMDBData->imdbVotes && $OMDBData->imdbVotes != 'N/A') {
             $UpdateSQL[] = "IMDBVote = " . str_replace(',', '', $OMDBData->imdbVotes);
         }
@@ -1630,10 +1643,8 @@ WHERE ud.TorrentID=? AND ui.NotifyOnDeleteDownloaded='1' AND ud.UserID NOT IN ({
             $UpdateSQL[] = "RTRating = '" . $RTRating . "'";
         }
         $DoubanData = null;
-        if ($DoubanID) {
+        if (!empty($DoubanID)) {
             $DoubanData = MOVIE::get_douban_data_by_doubanid($DoubanID, $Force);
-        } else {
-            $DoubanData = MOVIE::get_douban_data($IMDBID, $Force);
         }
         if ($DoubanData && $DoubanData->rating) {
             $UpdateSQL[] = "DoubanRating = " . $DoubanData->rating;
@@ -1641,15 +1652,14 @@ WHERE ud.TorrentID=? AND ui.NotifyOnDeleteDownloaded='1' AND ud.UserID NOT IN ({
         if ($DoubanData && $DoubanData->votes) {
             $UpdateSQL[] = "DoubanVote = " . $DoubanData->votes;
         }
-        if ($DoubanData && $DoubanData->id) {
-            $UpdateSQL[] = "DoubanID = " . $DoubanData->id;
-        }
+
         $SQL = '
         Update torrents_group set ' . implode(',', $UpdateSQL) .
             ' WHERE ID = ' . $GroupID . ' ';
         G::$DB->query($SQL);
         G::$Cache->delete_value("torrent_group_$GroupID");
         G::$Cache->delete_value("torrents_details_$GroupID");
+        return $DoubanID;
     }
 
     //Used to get reports info on a unison cache in both browsing pages and torrent pages.

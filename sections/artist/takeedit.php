@@ -41,9 +41,9 @@ if ($_GET['action'] === 'revert') { // if we're reverting to a previous revision
 // Insert revision
 if (!$RevisionID) { // edit
     $DB->query(
-        "SELECT w.Body, w.Image, w.IMDBID, w.SubName, w.Birthday, w.PlaceOfBirth, w.Name from wiki_artists w left join artists_group a on a.RevisionID = w.RevisionID where a.ArtistID=$ArtistID"
+        "SELECT w.Body, w.Image, w.IMDBID, w.SubName, w.Name from wiki_artists w left join artists_group a on a.RevisionID = w.RevisionID where a.ArtistID=$ArtistID"
     );
-    list($OldBody, $OldyImage, $OldIMDBID, $OldSubName, $Birthday, $PlaceOfBirth, $OldName) = $DB->next_record(MYSQLI_NUM, false);
+    list($OldBody, $OldyImage, $OldIMDBID, $OldSubName, $OldName) = $DB->next_record(MYSQLI_NUM, false);
     $BodyChange = $Body != db_string($OldBody);
     $ImageChange = $Image != $OldyImage;
     $IMDBIDChange = $IMDBID != $OldIMDBID;
@@ -60,7 +60,7 @@ if (!$RevisionID) { // edit
     if ($IMDBIDChange) {
         $TotalSummary .= "修改IMDBID。";
     }
-    if ($CubNameChange) {
+    if ($SubNameChange) {
         $TotalSummary .= "修改子名称";
     }
     if ($NameChange) {
@@ -69,18 +69,20 @@ if (!$RevisionID) { // edit
     $TotalSummary .= $Summary ? " 原因：$Summary" : "";
     $DB->query("
 		INSERT INTO wiki_artists
-			(PageID, Body, Image, UserID, Summary, Time, IMDBID, SubName, Birthday, PlaceOfBirth, Name)
+			(PageID, Body, Image, UserID, Summary, Time, IMDBID, SubName, Name)
 		VALUES
-			('$ArtistID', '$Body', '$Image', '$UserID', '$TotalSummary', '" . sqltime() . "', '$IMDBID', '$SubName', '$Birthday', '$PlaceOfBirth', '$Name')");
+			('$ArtistID', '$Body', '$Image', '$UserID', '$TotalSummary', '" . sqltime() . "', '$IMDBID', '$SubName', '$Name')");
+    if ($SubNameChange) {
+    }
 } else { // revert
     G::$DB->query(
         "SELECT 
-        w.Body, w.Image, w.IMDBID, w.SubName, w.Birthday, w.PlaceOfBirth, w.Name from wiki_artists where RevisionID = '$RevisionID'"
+        w.Body, w.Image, w.IMDBID, w.SubName, w.Name from wiki_artists where RevisionID = '$RevisionID'"
     );
-    list($Body, $Image, $IMDBID, $SubName, $Birthday, $PlaceOfBirth, $Name) = $DB->next_record(MYSQLI_NUM, false);
+    list($Body, $Image, $IMDBID, $SubName, $Name) = $DB->next_record(MYSQLI_NUM, false);
     $DB->query(
-        "INSERT INTO wiki_artists (PageID, Body, Image, UserID, Summary, Time, IMDBID, SubName, Birthday, PlaceOfBirth, Name)
-		SELECT '$ArtistID', Body, Image, '$UserID', 'Reverted to revision $RevisionID', '" . sqltime() . "', 'IMDBID' , 'SubName', 'Birthday, 'PlaceOfBirth', 'Name'
+        "INSERT INTO wiki_artists (PageID, Body, Image, UserID, Summary, Time, IMDBID, SubName, Name)
+		SELECT '$ArtistID', Body, Image, '$UserID', 'Reverted to revision $RevisionID', '" . sqltime() . "', 'IMDBID' , 'SubName', 'Name'
 		FROM wiki_artists
 		WHERE RevisionID = '$RevisionID'"
     );
@@ -96,8 +98,6 @@ $DB->query(
         Body = '$Body',
         IMDBID = '$IMDBID',
         SubName = '$SubName',
-        Birthday = '$Birthday',
-        PlaceOfBirth = '$PlaceOfBirth',
 		RevisionID = '$RevisionID',
         Name = '$Name'
 	WHERE ArtistID = '$ArtistID'"

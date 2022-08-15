@@ -23,24 +23,24 @@ View::show_header(t('server.torrents.request_an_edit'), '', '', 'PageTorrentEdit
         <h2 class="BodyHeader-nav"><?= $Title ?></h2>
     </div>
     <div class="Box">
+        <div class="Box-header">
+            <?= t('server.common.rules') ?>
+        </div>
         <div class="Box-body">
             <?= t('server.torrents.you_are_req_note') ?>
         </div>
     </div>
-    <div class="Form-rowList" variant="header">
-        <div class="Form-rowHeader"><strong class="u-colorWarning"><?= t('server.torrents.edit_details') ?></strong></div>
-        <form action="torrents.php" method="POST">
-            <input type="hidden" name="action" value="takeeditrequest" />
-            <input type="hidden" name="groupid" value="<?= $GroupID ?>" />
-            <input type="hidden" name="auth" value="<?= G::$LoggedUser['AuthKey'] ?>" />
-            <div>
-                <? new TEXTAREA_PREVIEW('edit_details', 'edit_details'); ?>
-            </div>
-            <div class="Form-row">
-                <input class="Button" type="submit" value="<?= t('server.common.submit') ?>" />
-            </div>
-        </form>
-    </div>
+    <form class="Form-rowList" action="torrents.php" method="POST">
+        <input type="hidden" name="action" value="takeeditrequest" />
+        <input type="hidden" name="groupid" value="<?= $GroupID ?>" />
+        <input type="hidden" name="auth" value="<?= G::$LoggedUser['AuthKey'] ?>" />
+        <div>
+            <? new TEXTAREA_PREVIEW('edit_details', 'edit_details'); ?>
+        </div>
+        <div class="Form-row">
+            <input class="Button" type="submit" value="<?= t('server.common.submit') ?>" />
+        </div>
+    </form>
 </div>
 
 <?php

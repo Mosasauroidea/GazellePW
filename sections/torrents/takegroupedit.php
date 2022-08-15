@@ -50,26 +50,15 @@ if (!empty($_GET['action']) && $_GET['action'] == 'revert') { // if we're revert
         die();
     }
 } else { // with edit, the variables are passed with POST
-    $Body = $_POST['body'];
-    $Image = $_POST['image'];
-    $IMDBID = $_POST['imdbid'];
-    $DoubanID = $_POST['doubanid'] ? $_POST['doubanid'] : 'null';
-    $RTTitle = $_POST['rttitle'];
-    $ReleaseType = (int)$_POST['releasetype'];
-
-    if (($GroupInfo = $Cache->get_value('torrents_details_' . $GroupID))) {
-        $GroupCategoryID = $GroupInfo['CategoryID'];
-    } else {
-        $DB->query("
-			SELECT CategoryID
-			FROM torrents_group
-			WHERE ID = '$GroupID'");
-        list($GroupCategoryID) = $DB->next_record();
-    }
-    if ($GroupCategoryID == 1 && !isset($ReleaseTypes[$ReleaseType]) || $GroupCategoryID != 1 && $ReleaseType) {
-        error(403);
-    }
-
+    $Body = db_string($_POST['body']);
+    $Image = db_string($_POST['image']);
+    $IMDBID = db_string($_POST['imdbid']);
+    $DoubanID = db_string($_POST['doubanid']);
+    $RTTitle = db_string($_POST['rttitle']);
+    $Year = db_string(intval($_POST['year']));
+    $ReleaseType = db_string((int)$_POST['releasetype']);
+    $Name = db_string($_POST['name']);
+    $SubName = db_string($_POST['subname']);
     // Trickery
     if (!preg_match("/^" . IMAGE_REGEX . "$/i", $Image)) {
         $Image = '';
@@ -80,56 +69,81 @@ if (!empty($_GET['action']) && $_GET['action'] == 'revert') { // if we're revert
 
 // Insert revision
 if (empty($RevisionID)) { // edit
-    $DB->query("
-		INSERT INTO wiki_torrents
-			(PageID, Body, Image, UserID, Summary, Time, IMDBID, DoubanID, RTTitle)
+    $DB->query(
+        "INSERT INTO wiki_torrents
+			(
+                PageID, 
+                Body, 
+                Image, 
+                UserID, 
+                Summary, 
+                Time, 
+                IMDBID, 
+                DoubanID, 
+                RTTitle, 
+                Year, 
+                Name, 
+                SubName,
+                ReleaseType)
 		VALUES
-			('$GroupID', '" . db_string($Body) . "', '" . db_string($Image) . "', '$UserID', '$Summary', '" . sqltime() . "', '" . db_string($IMDBID) . "', " . db_string($DoubanID) . ", '" . db_string($RTtitle) . "')");
-
-    $DB->query("
-		UPDATE torrents_group
-		SET ReleaseType = '$ReleaseType'
-		WHERE ID = '$GroupID'");
-    Torrents::update_hash($GroupID);
+			(
+                '$GroupID', 
+                '" . $Body . "', 
+                '" . $Image . "', 
+                '$UserID', 
+                '$Summary', 
+                '" . sqltime() . "', 
+                '" . $IMDBID . "', 
+                " . $DoubanID . ", 
+                '" . $RTtitle . "',
+                '$UserID',
+                '" . $Name . "',
+                '" . $SubName . "',
+                '" . $ReleaseType . "'
+                )"
+    );
 } else { // revert
     $DB->query("
-		SELECT PageID, Body, Image, IMDBID, DoubanID, RTTitle
+		SELECT PageID, Body, Image, IMDBID, DoubanID, RTTitle, Year, Name, SubName, ReleaseType
 		FROM wiki_torrents
 		WHERE RevisionID = '$RevisionID'");
-    list($PossibleGroupID, $Body, $Image, $IMDBID, $DoubanID, $RTTitle) = $DB->next_record();
+    list($PossibleGroupID, $Body, $Image, $IMDBID, $DoubanID, $RTTitle, $Year, $Name, $SubName, $ReleaseType) = $DB->next_record();
     if ($PossibleGroupID != $GroupID) {
         error(404);
     }
 
     $DB->query("
 		INSERT INTO wiki_torrents
-			(PageID, Body, Image, UserID, Summary, Time, IMDBID, DoubanID, RTTitle)
-		SELECT '$GroupID', Body, Image, '$UserID', 'Reverted to revision $RevisionID', '" . sqltime() . "', IMDBID, DoubanID, RTTitle
-		FROM wiki_artists
+			(PageID, Body, Image, UserID, Summary, Time, IMDBID, DoubanID, RTTitle, Year, Name, SubName, ReleaseType)
+		SELECT '$GroupID', Body, Image, '$UserID', 'Reverted to revision $RevisionID', '" . sqltime() . "', IMDBID, DoubanID, RTTitle, Year, Name, SubName, ReleaseType
+		FROM wiki_torrents
 		WHERE RevisionID = '$RevisionID'");
 }
 
 $RevisionID = $DB->inserted_id();
 
-$Body = db_string($Body);
-$Image = db_string($Image);
-
 // Update torrents table (technically, we don't need the RevisionID column, but we can use it for a join which is nice and fast)
-$DB->query("
-	UPDATE torrents_group
+// TODO by qwerty write group log
+$DB->query(
+    "UPDATE torrents_group
 	SET
 		RevisionID = '$RevisionID',
 		WikiBody = '$Body',
 		WikiImage = '$Image',
         IMDBID = '$IMDBID',
-        DoubanID = '$DoubanID',
-        RTTitle = '$RTTitle'
-	WHERE ID='$GroupID'");
-Torrents::update_movie_info($GroupID, $IMDBID, $DoubanID, false);
+        DoubanID = '" . (empty($DoubanID) ? 'null' : $DoubanID) . "',
+        RTTitle = '$RTTitle',
+		ReleaseType = '$ReleaseType',
+        Year = $Year,
+        Name = '$Name',
+        SubName = '$SubName'
+	WHERE ID='$GroupID'"
+);
 
-// There we go, all done!
 
-$Cache->delete_value('torrents_details_' . $GroupID);
+Torrents::update_movie_info($GroupID, $IMDBID, $DoubanID, true);
+Torrents::update_hash($GroupID);
+
 $DB->query("
 	SELECT CollageID
 	FROM collages_torrents
@@ -164,7 +178,6 @@ foreach ($UserIDs as $UserID) {
     }
 }
 
-// TODO by qwerty 年份，名字被变更时，也需要处理
 $DB->query("
 	SELECT ID
 	FROM torrents

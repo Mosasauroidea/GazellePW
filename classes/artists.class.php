@@ -60,8 +60,8 @@ class Artists {
                 $IDs = "null";
             }
             $QueryID = G::$DB->get_query_id();
-            G::$DB->query("
-				SELECT ta.GroupID,
+            G::$DB->query(
+                "SELECT ta.GroupID,
 					ta.ArtistID,
 					ag.Name,
 					ta.Importance,
@@ -70,13 +70,12 @@ class Artists {
                     ag.SubName,
                     ag.IMDBID
 				FROM torrents_artists AS ta
-					JOIN artists_alias AS aa ON ta.AliasID = aa.AliasID
 				LEFT JOIN artists_group as ag ON ag.ArtistID = ta.ArtistID
 				WHERE ta.GroupID IN ($IDs)
 				ORDER BY ta.GroupID ASC,
 					ta.Importance ASC,
-					ta.Order ASC,
-					aa.Name ASC;");
+					ta.Order ASC;"
+            );
             while (list($GroupID, $ArtistID, $ArtistName, $ArtistImportance, $AliasID, $Image, $SubName, $IMDBID) = G::$DB->next_record(MYSQLI_BOTH, false)) {
                 $Results[$GroupID][$ArtistImportance][] = array('ArtistID' => $ArtistID, 'Name' => $ArtistName, 'AliasID' => $AliasID, 'Image' => $Image, 'SubName' => $SubName, 'IMDBID' => $IMDBID);
                 $New[$GroupID][$ArtistImportance][] = array('ArtistID' => $ArtistID, 'Name' => $ArtistName, 'AliasID' => $AliasID, 'Image' => $Image, 'SubName' => $SubName, 'IMDBID' => $IMDBID);
@@ -183,7 +182,7 @@ class Artists {
                 if (empty($OldArtist['PlaceOfBirth']) && !empty($Place)) {
                     $Updates[] = "PlaceOfBirth = '$Place'";
                 }
-                G::$DB->query("UPDATE artists_group SET " . implode(' , ', $Updates) . " WHERE ArtistID = $OldID");
+                G::$DB->prepared_query("UPDATE artists_group SET " . implode(' , ', $Updates) . " WHERE ArtistID = $OldID");
                 $Artist['ArtistID'] = $OldID;
                 G::$DB->prepared_query("SELECT ArtistID, AliasID, Redirect FROM artists_alias WHERE ArtistID = ?", $OldID);
                 while (list($ArtistID, $AliasID, $Redirect) = G::$DB->next_record(MYSQLI_NUM, false)) {
@@ -219,9 +218,9 @@ class Artists {
         if ($New) {
             $ArtistID = $Artist['ArtistID'];
             G::$DB->prepared_query("INSERT INTO wiki_artists
-							(PageID, Body, Image, UserID, Summary, Time, Birthday, PlaceOfBirth, IMDBID, Name)
+							(PageID, Body, Image, UserID, Summary, Time, IMDBID, Name)
 						VALUES
-							(?,?,?,?,?,?,?,?,?,?)", $ArtistID, $Body, $Image, $UserID, $Summary, sqltime(), $Birth, $Place, $IMDBID, $Name);
+							(?,?,?,?,?,?,?,?)", $ArtistID, $Body, $Image, $UserID, $Summary, sqltime(), $IMDBID, $Name);
             $RevisionID = G::$DB->inserted_id();
             G::$DB->prepared_query("UPDATE artists_group SET RevisionID = ? WHERE ArtistID = ?", $RevisionID, $ArtistID);
             G::$DB->prepared_query("INSERT INTO artists_alias (ArtistID, Name)

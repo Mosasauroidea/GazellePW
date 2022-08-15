@@ -49,6 +49,7 @@ $DB->query("
 		ag.Name AS ArtistName,
 		t.GroupID,
 		t.UserID,
+        t.Size,
 		bf.TorrentID AS BadFolders,
 		bfi.TorrentID AS BadFiles,
 		bns.TorrentID AS NoSub,
@@ -90,109 +91,72 @@ if (($LoggedUser['ID'] != $Properties['UserID'] && !check_perms('torrents_edit')
 
 View::show_header(t('server.torrents.browser_edit_torrent'), 'torrent', 'PageTorrentEdit');
 
+$Group = ['Name' => $Properties['Name'], 'SubName' => $Properties['SubName'], 'Year' => $Properties['Year'], 'ID' => $Properties['GroupID']];
+
 if (check_perms('torrents_edit') && (check_perms('users_mod') || $Properties['CategoryID'] == 1)) {
     if ($Properties['CategoryID'] == 1) {
 ?>
         <div class=LayoutBody>
             <div class="BodyHeader">
                 <div class="BodyHeader-nav">
-                    <?= t('server.common.edit') ?>
+                    <?= t('server.common.edit') . ' > ' . Torrents::torrent_simple_view($Group, $Properties, true, [
+                        'SettingTorrentTitle' => G::$LoggedUser['SettingTorrentTitle'],
+                    ]) ?>
                 </div>
             </div>
 
             <div class="BodyNavLinks">
                 <a class="brackets" href="#edit_torrent"><?= t('server.torrents.browser_edit_torrent') ?></a>
-                <a class="brackets" href="#group-change"><?= t('server.torrents.change_group') ?></a>
+                <a class="brackets" href="#change_group_id"><?= t('server.torrents.change_group') ?></a>
             </div>
-            <div>
-            <?  }
+        <?
     }
+}
 
-    if (!$Properties['RemasterYear'] || check_perms('edit_unknowns')) {
-        if (!isset($Err)) {
-            $Err = false;
-        }
-        $TorrentForm = new TORRENT_FORM($Properties, $Err, false);
-
-        $TorrentForm->head();
-        switch ($UploadForm) {
-            case 'Movies':
-                $TorrentForm->movie_form($GenreTags);
-                break;
-            default:
-                $TorrentForm->movie_form($GenreTags);
-        }
-        $TorrentForm->foot();
+if (!$Properties['RemasterYear'] || check_perms('edit_unknowns')) {
+    if (!isset($Err)) {
+        $Err = false;
     }
-    if (check_perms('torrents_edit') && (check_perms('users_mod') || $Properties['CategoryID'] == 1)) {
-            ?>
-            </div>
-            <div class="Form">
-                <form id="change_group_id" class="edit_form FormValidation" name="torrent_group" action="torrents.php" method="post">
-                    <input type="hidden" name="action" value="editgroupid" />
-                    <input type="hidden" name="auth" value="<?= $LoggedUser['AuthKey'] ?>" />
-                    <input type="hidden" name="torrentid" value="<?= $TorrentID ?>" />
-                    <input type="hidden" name="oldgroupid" value="<?= $Properties['GroupID'] ?>" />
-                    <table class="Form-rowList" variant="header">
-                        <tr class="Form-rowHeader">
-                            <td><?= t('server.torrents.change_group') ?></td>
-                        </tr>
-                        <tr class="Form-row">
-                            <td class="Form-label"><?= t('server.torrents.group_id') ?>:</td>
-                            <td class="Form-items">
-                                <input class="Input is-small" type="text" name="groupid" value="<?= $Properties['GroupID'] ?>" size="10" />
-                            </td>
-                        </tr>
-                        <tr class="Form-row">
-                            <td colspan="2" class="center">
-                                <input class="Button" type="submit" value="<?= t('server.common.submit') ?>" />
-                            </td>
-                        </tr>
-                    </table>
-                </form>
-                <?
-                if (false) {
-                ?>
-                    <div class="BodyHeader">
-                        <h2 class="BodyHeader-nav"><a name="group-split"><?= t('server.torrents.split_off_into_new_group') ?></a></h2>
-                    </div>
-                    <form class="FormOneLine" name="torrent_group" action="torrents.php" method="post">
-                        <input type="hidden" name="action" value="newgroup" />
-                        <input type="hidden" name="auth" value="<?= $LoggedUser['AuthKey'] ?>" />
-                        <input type="hidden" name="torrentid" value="<?= $TorrentID ?>" />
-                        <input type="hidden" name="oldgroupid" value="<?= $Properties['GroupID'] ?>" />
-                        <table class="Table">
-                            <tr>
-                                <td class="Form-label"><?= t('server.torrents.director') ?>:</td>
-                                <td>
-                                    <input class="Input Form-items" type="text" name="artist" value="<?= $Properties['ArtistName'] ?>" size="50" />
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="Form-label"><?= t('server.torrents.title') ?>:</td>
-                                <td>
-                                    <input class="Form-items Input" type="text" name="title" value="<?= $Properties['Name'] ?>" size="50" />
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="Form-label"><?= t('server.torrents.year') ?>:</td>
-                                <td>
-                                    <input class="Form-items Input" type="text" name="year" value="<?= $Properties['Year'] ?>" size="10" />
-                                </td>
-                            </tr>
-                            <tr class="Form-row>
-                            <td colspan=" 2" class="center">
-                                <input class="Button" type="submit" value="<?= t('server.common.sumbit') ?>" />
-                                </td>
-                            </tr>
-                        </table>
-                    </form>
-                <?
-                }
-                ?>
-            </div>
+    $TorrentForm = new TORRENT_FORM($Properties, $Err, false);
+
+    $TorrentForm->head();
+    switch ($UploadForm) {
+        case 'Movies':
+            $TorrentForm->movie_form($GenreTags);
+            break;
+        default:
+            $TorrentForm->movie_form($GenreTags);
+    }
+    $TorrentForm->foot();
+}
+if (check_perms('torrents_edit') && (check_perms('users_mod') || $Properties['CategoryID'] == 1)) {
+        ?>
+        <div class="Form">
+            <form id="change_group_id" class="edit_form FormValidation" name="torrent_group" action="torrents.php" method="post">
+                <input type="hidden" name="action" value="editgroupid" />
+                <input type="hidden" name="auth" value="<?= $LoggedUser['AuthKey'] ?>" />
+                <input type="hidden" name="torrentid" value="<?= $TorrentID ?>" />
+                <input type="hidden" name="oldgroupid" value="<?= $Properties['GroupID'] ?>" />
+                <table class="Form-rowList" variant="header">
+                    <tr class="Form-rowHeader">
+                        <td><?= t('server.torrents.change_group') ?></td>
+                    </tr>
+                    <tr class="Form-row">
+                        <td class="Form-label"><?= t('server.torrents.group_id') ?>:</td>
+                        <td class="Form-items">
+                            <input class="Input is-small" type="text" name="groupid" value="<?= $Properties['GroupID'] ?>" size="10" />
+                        </td>
+                    </tr>
+                    <tr class="Form-row">
+                        <td colspan="2" class="center">
+                            <input class="Button" type="submit" value="<?= t('server.common.submit') ?>" />
+                        </td>
+                    </tr>
+                </table>
+            </form>
+        </div>
         </div>
     <?
-    }
+}
 
-    View::show_footer([], 'upload/index.js'); ?>
+View::show_footer([], 'upload/index.js'); ?>

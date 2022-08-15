@@ -138,7 +138,7 @@ View::show_header($Title, 'browse,comments,torrent,bbcode,recommend,cover_art,su
     <div class="BodyHeader">
         <div class="BodyNavLinks">
             <? if (check_perms('site_edit_wiki')) { ?>
-                <a href="torrents.php?action=editgroup&amp;groupid=<?= $GroupID ?>" class="brackets"><?= t('server.torrents.editgroup') ?></a>
+                <a href="torrents.php?action=editgroup&amp;groupid=<?= $GroupID ?>" class="brackets"><?= t('server.common.edit') ?></a>
             <?  } ?>
             <a href="torrents.php?action=editrequest&amp;groupid=<?= $GroupID ?>" class="brackets"><?= t('server.torrents.editrequest') ?></a>
             <a href="torrents.php?action=history&amp;groupid=<?= $GroupID ?>" class="brackets"><?= t('server.torrents.viewhistory') ?></a>
