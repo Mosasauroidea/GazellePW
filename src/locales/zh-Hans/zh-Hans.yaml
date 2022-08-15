@@ -102,6 +102,8 @@ client.upload.desc_img_3_png: |-
   请添加至少三张 PNG 格式的电影原始分辨率（非播放分辨率）截图，操作方法请见 <a href="wiki.php?action=article&id=51" target="_blank">本文</a>。
 client.upload.desc_img_hosts: |-
   请使用发布规则 <a href="rules.php?p=upload#2.2.1" target="_blank">2.2.1</a> 所推荐的图床以保证截图的访问速度和有效时长。
+client.upload.english_name: |-
+  英文名
 client.upload.imdb: |-
   IMDb
 client.upload.imdb_link_required: |-
@@ -3493,7 +3495,7 @@ server.tools.age: |-
 server.tools.album_id: |-
   影片 ID
 server.tools.featured_movie: |-
-  推荐电影
+  电影推荐
 server.tools.all: |-
   全部
 server.tools.all_current_torrents: |-
