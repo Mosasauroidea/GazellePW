@@ -5100,7 +5100,7 @@ server.torrents.group_results: |-
 server.torrents.group_standard_resolution: |-
   SD
 server.torrents.group_title: |-
-  种子组标题
+  电影标题
 server.torrents.group_ultra_high_resolution: |-
   UHD
 server.torrents.guide_of_advanced_search: |-
@@ -5136,7 +5136,7 @@ server.torrents.hnrs: |-
 server.torrents.if_you_download_this: |-
   下载该种子后，你的分享率将降至%s。
 server.torrents.image: |-
-  海报外链
+  海报链接
 server.torrents.imdb_id: |-
   IMDb 编号
 server.torrents.imdb_language: |-

@@ -5181,7 +5181,7 @@ server.torrents.group_results: |-
 server.torrents.group_standard_resolution: |-
   Standard Definition
 server.torrents.group_title: |-
-  Group title
+  Movie Title
 server.torrents.group_ultra_high_resolution: |-
   Ultra High Definition
 server.torrents.guide_of_advanced_search: |-

@@ -94,9 +94,9 @@ if (empty($RevisionID)) { // edit
                 '$Summary', 
                 '" . sqltime() . "', 
                 '" . $IMDBID . "', 
-                " . $DoubanID . ", 
-                '" . $RTtitle . "',
-                '$UserID',
+                '" . $DoubanID . "', 
+                '" . $RTTitle . "',
+                '$Year',
                 '" . $Name . "',
                 '" . $SubName . "',
                 '" . $ReleaseType . "'
