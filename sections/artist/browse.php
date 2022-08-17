@@ -308,6 +308,9 @@ View::show_header(($SubName ? '[' . $SubName . '] ' : '') . $Name, 'browse,bbcod
 <div class="LayoutBody">
     <div class="BodyHeader">
         <div class="BodyNavLinks">
+            <? if (check_perms('site_edit_wiki')) { ?>
+                <a href="artist.php?action=edit&amp;artistid=<?= $ArtistID ?>" class="brackets"><?= t('server.common.edit') ?></a>
+            <? } ?>
             <a href="artist.php?action=editrequest&amp;artistid=<?= $ArtistID ?>" class="brackets"><?= t('server.artist.editrequest') ?></a>
             <? if (check_perms('site_submit_requests')) { ?>
                 <a href="requests.php?action=new&amp;artistid=<?= $ArtistID ?>" class="brackets"><?= t('server.artist.re_torrents') ?></a>
@@ -340,11 +343,7 @@ View::show_header(($SubName ? '[' . $SubName . '] ' : '') . $Name, 'browse,bbcod
             <?  } ?>
             <a href="#" id="subscribelink_artist<?= $ArtistID ?>" class="brackets" onclick="SubscribeComments('artist', <?= $ArtistID ?>);return false;"><?= Subscriptions::has_subscribed_comments('artist', $ArtistID) !== false ? t('server.torrents.unsubscribe') : t('server.torrents.subscribe') ?></a>
             <!--    <a href="#" id="recommend" class="brackets">Recommend</a> -->
-            <?
-            if (check_perms('site_edit_wiki')) {
-            ?>
-                <a href="artist.php?action=edit&amp;artistid=<?= $ArtistID ?>" class="brackets"><?= t('server.common.edit') ?></a>
-            <?  } ?>
+
             <a href="artist.php?action=history&amp;artistid=<?= $ArtistID ?>" class="brackets"><?= t('server.artist.viewhistory') ?></a>
             <? if ($RevisionID && check_perms('site_edit_wiki')) { ?>
                 <a href="artist.php?action=revert&amp;artistid=<?= $ArtistID ?>&amp;revisionid=<?= $RevisionID ?>&amp;auth=<?= $LoggedUser['AuthKey'] ?>" class="brackets"><?= t('server.artist.revert') ?></a>

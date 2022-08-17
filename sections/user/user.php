@@ -1032,7 +1032,17 @@ WHERE xs.uid =" . $UserID . " and xs.tstamp >= unix_timestamp(date_format(now(),
                 && (time() < strtotime($RatioWatchEnds))
                 && ($Downloaded * $RequiredRatio) > $Uploaded
             ) {
-                $RatioWatchText = sprintf(t('server.user.ratio_watch_text'), Format::get_size(($Downloaded * $RequiredRatio) - $Uploaded), time_diff($RatioWatchEnds), Format::get_size($Downloaded - $RatioWatchDownload))
+                $RatioWatchText = t(
+                    'server.user.ratio_watch_text',
+                    [
+                        'Values' =>
+                        [
+                            Format::get_size(($Downloaded * $RequiredRatio) - $Uploaded),
+                            time_diff($RatioWatchEnds),
+                            Format::get_size($Downloaded - $RatioWatchDownload),
+                        ]
+                    ]
+                );
             ?>
                 <div class="Box">
                     <div class="Box-header"><?= t('server.user.ratio_watch') ?></div>

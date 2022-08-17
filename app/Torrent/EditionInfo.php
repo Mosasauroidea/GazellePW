@@ -44,16 +44,11 @@ class EditionInfo {
     }
 
     public static function key(string $text): ?string {
-        // TODO by qwerty 硬编码中英双语
-        $L = ['en', 'chs'];
-        foreach ($L as $k => $v) {
-            $key = Lang::get_key('editioninfo', $text, $v);
-            if (!empty($key)) {
-                return $key;
-            }
+        $key = Lang::get_key('server.editioninfo', $text);
+        if (!empty($key)) {
+            return $key;
         }
-        // TODO by qwerty fix
-        return "invalid text";
+        return "";
     }
 
     public static function validate($Value) {

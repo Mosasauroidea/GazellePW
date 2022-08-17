@@ -136,6 +136,7 @@ class TorrentSearch {
         'taglist' => ',',
         'remtitle' => ',',
         'artistname' => ',',
+        'rmtitle' => ',',
         'subtitles' => ','
     );
 
@@ -604,8 +605,8 @@ class TorrentSearch {
     }
 
     private function search_remtitle($Field, $Term) {
-        if (isset(self::$FieldSeparators[$Term])) {
-            $Separator = self::$FieldSeparators[$Term];
+        if (isset(self::$FieldSeparators[$Field])) {
+            $Separator = self::$FieldSeparators[$Field];
         } else {
             $Separator = self::$FieldSeparators[''];
         }

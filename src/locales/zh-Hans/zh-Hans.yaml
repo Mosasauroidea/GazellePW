@@ -333,7 +333,7 @@ server.artist.change_artist_id: |-
 server.artist.confirm_merge: |-
   合并确认
 server.artist.confirm_merge_body: |-
-  请确认你想将 %s 作为异名别名合并到 %s 的名下。
+  请确认你想将 %s 合并到 %s 的名下。
 server.artist.delete_this_alias: |-
   删除此别名
 server.artist.edit_artist: |-
@@ -363,15 +363,13 @@ server.artist.loading: |-
 server.artist.make_into: |-
   移入艺人别名组
 server.artist.make_into_note: |-
-  将此艺人（%s）移入下方指定的艺人别名组，以使「%s」及其所属别名成为下填艺人的别名。
+  将此艺人移入下方指定的艺人别名组，以使其所属别名成为下填艺人的别名。
 server.artist.merging_artists: |-
   合并艺人
 server.artist.name: |-
   别名
 server.artist.no_changes_were_made: |-
   No changes were made as the target alias did not redirect anywhere.
-server.artist.non_redirecting_alias: |-
-  异名别名
 server.artist.number_of_groups: |-
   影片数
 server.artist.number_of_leechers: |-

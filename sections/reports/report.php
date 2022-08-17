@@ -138,7 +138,7 @@ View::show_header(t('server.reports.report_a') . $Type['title'], 'bbcode,jquery.
         <div class="Box-header"><?= t('server.reports.reporting_guidelines') ?></div>
         <div class="Box-body">
             <p><?= t('server.reports.reporting_guidelines_intro') ?></p>
-            <ul class="Postlist">
+            <ul class="PostList">
                 <?
                 foreach ($Type['guidelines'] as $Guideline) { ?>
                     <li><?= $Guideline ?></li>

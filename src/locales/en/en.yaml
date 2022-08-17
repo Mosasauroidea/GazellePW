@@ -363,15 +363,13 @@ server.artist.loading: |-
 server.artist.make_into: |-
   Make into non-redirecting alias
 server.artist.make_into_note: |-
-  Merges this artist (%s) into the artist specified below (without redirection), so that (%s) and its aliases will appear as a non-redirecting alias of the artist entered in the text box below.
+  Merges this artist into the artist specified below (without redirection), so that its aliases will appear as a non-redirecting alias of the artist entered in the text box below.
 server.artist.merging_artists: |-
   Merging Artists
 server.artist.name: |-
   name
 server.artist.no_changes_were_made: |-
   由于目标别名并未重定向到别处，因此未发生任何变动。
-server.artist.non_redirecting_alias: |-
-  Non-redirecting alias
 server.artist.number_of_groups: |-
   Number of groups
 server.artist.number_of_leechers: |-

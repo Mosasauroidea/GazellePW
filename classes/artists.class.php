@@ -162,28 +162,32 @@ class Artists {
             $OldArtist = G::$DB->next_record(MYSQLI_ASSOC);
             if ($OldArtist) {
                 $OldID = $OldArtist['ArtistID'];
-                // TODO by qwerty update artist info
                 $Updates = [];
-                if (!empty($Name)) {
+                if (!empty($Name) && $OldArtist['Name'] != $Name) {
                     $Updates[] = "Name = '$Name'";
                 }
-                if (!empty($SubName)) {
+                if (!empty($SubName) && $OldArtist['SubName'] != $SubName) {
                     $Updates[] = "SubName = '$SubName'";
                 }
                 if (empty($OldArtist['Image']) && !empty($Image)) {
                     $Updates[] = "Image = '$Image'";
+                } else if (!empty($OldArtist['Image'])) {
+                    $Image = $OldArtist['Image'];
                 }
                 if (empty($OldArtist['Body']) && !empty($Body)) {
                     $Updates[] = "Body = '$Body'";
+                } else if (!empty($OldArtist['Body'])) {
+                    $Body = $OldArtist['Body'];
                 }
-                if (empty($OldArtist['Birthday']) && !empty($Birth)) {
+                if (!empty($Birth)) {
                     $Updates[] = "Birthday = '$Birth'";
                 }
-                if (empty($OldArtist['PlaceOfBirth']) && !empty($Place)) {
+                if (!empty($Place)) {
                     $Updates[] = "PlaceOfBirth = '$Place'";
                 }
-                G::$DB->prepared_query("UPDATE artists_group SET " . implode(' , ', $Updates) . " WHERE ArtistID = $OldID");
                 $Artist['ArtistID'] = $OldID;
+                // update 
+                G::$DB->prepared_query("UPDATE artists_group SET " . implode(' , ', $Updates) . " WHERE ArtistID = $OldID");
                 G::$DB->prepared_query("SELECT ArtistID, AliasID, Redirect FROM artists_alias WHERE ArtistID = ?", $OldID);
                 while (list($ArtistID, $AliasID, $Redirect) = G::$DB->next_record(MYSQLI_NUM, false)) {
                     if ($Redirect) {
@@ -196,7 +200,7 @@ class Artists {
             } else {
                 G::$DB->prepared_query(
                     "INSERT INTO artists_group (Name, Body, Image, IMDBID, SubName, Birthday, PlaceOfBirth) 
-                VALUES (?, ?, ?, ?, ?, ?, ?)",
+        VALUES (?, ?, ?, ?, ?, ?, ?)",
                     $Name,
                     $Body,
                     $Image,
@@ -206,23 +210,22 @@ class Artists {
                     $Place
                 );
                 $Artist['ArtistID'] = G::$DB->inserted_id();
-                G::$Cache->increment('stats_artist_count');
                 $New = true;
             }
         } else {
             G::$DB->prepared_query("INSERT INTO artists_group (Name, SubName) VALUES (?, ?)", $Name, $SubName);
-            G::$Cache->increment('stats_artist_count');
             $Artist['ArtistID'] = G::$DB->inserted_id();
             $New = true;
         }
-        if ($New) {
-            $ArtistID = $Artist['ArtistID'];
-            G::$DB->prepared_query("INSERT INTO wiki_artists
-							(PageID, Body, Image, UserID, Summary, Time, IMDBID, Name)
+
+        $ArtistID = $Artist['ArtistID'];
+        G::$DB->prepared_query("INSERT INTO wiki_artists
+							(PageID, Body, Image, UserID, Summary, Time, IMDBID, Name, SubName)
 						VALUES
-							(?,?,?,?,?,?,?,?)", $ArtistID, $Body, $Image, $UserID, $Summary, sqltime(), $IMDBID, $Name);
-            $RevisionID = G::$DB->inserted_id();
-            G::$DB->prepared_query("UPDATE artists_group SET RevisionID = ? WHERE ArtistID = ?", $RevisionID, $ArtistID);
+							(?,?,?,?,?,?,?,?,?)", $ArtistID, $Body, $Image, $UserID, $Summary, sqltime(), $IMDBID, $Name, $SubName);
+        $RevisionID = G::$DB->inserted_id();
+        G::$DB->prepared_query("UPDATE artists_group SET RevisionID = ? WHERE ArtistID = ?", $RevisionID, $ArtistID);
+        if ($New) {
             G::$DB->prepared_query("INSERT INTO artists_alias (ArtistID, Name)
 						VALUES (?, ?)", $ArtistID, $Name);
             $AliasID = G::$DB->inserted_id();
@@ -237,6 +240,9 @@ class Artists {
             }
         }
         G::$DB->commit();
+        if ($New) {
+            G::$Cache->increment('stats_artist_count');
+        }
         return $Artist;
     }
 

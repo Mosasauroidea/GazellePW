@@ -1,10 +1,12 @@
 <?
 
 class Lang {
-    const DEFAULT_LANG = 'chs';
+
     const EN = 'en';
     const CHS = 'chs';
     const LANGS = [self::EN, self::CHS];
+    const DEFAULT_LANG = self::CHS;
+
     static $Locales = [];
 
     public static function is_default() {
@@ -20,6 +22,7 @@ class Lang {
         ], $Options);
         $Lang = self::getLang($Options['Lang']);
         $Value = self::_get($Key, $Lang, $Options);
+
         if (empty($Value)) {
             $Value = self::_get($Key, self::EN, $Options);
         }
@@ -44,7 +47,11 @@ class Lang {
         if (!isset($Locale[$Key]) && !empty($DefaultValue)) {
             $Value = $DefaultValue;
         }
+
         if (!empty($Value) && is_string($Value)) {
+            if ($Key == 'server.user.ratio_watch_text') {
+                var_dump($Value, $Values);
+            }
             $Value = sprintf($Value, ...$Values);
         }
 
@@ -64,9 +71,20 @@ class Lang {
         return $Locale;
     }
 
-    public static function get_key($Page, $Label = false, $Lang = false) {
-        $Locale = self::get($Page, false, $Lang);
-        return array_search($Label, $Locale);
+    // TODO by qwerty temp solution
+    public static function get_key($Prefix, $Value = false) {
+        foreach (self::LANGS as $Lang) {
+            $Locale = self::get_locale($Lang);
+            $Result =
+                array_filter($Locale, function ($element) use ($Value) {
+                    return isset($element) && strtolower($element) == strtolower($Value);
+                });
+            foreach ($Result as $K => $V) {
+                if (str_starts_with($K, $Prefix)) {
+                    return str_ireplace($Prefix . '.', '', $K);
+                }
+            }
+        }
     }
 
     public static function getUserLang($UserID) {

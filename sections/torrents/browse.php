@@ -1,7 +1,6 @@
 <?
 include(CONFIG['SERVER_ROOT'] . '/sections/torrents/functions.php');
 include(CONFIG['SERVER_ROOT'] . '/classes/torrenttable.class.php');
-
 $headlink = new class implements SortLink {
     function link($SortKey, $DefaultWay = 'desc') {
         global $OrderBy, $OrderWay;

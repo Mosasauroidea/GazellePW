@@ -41,7 +41,7 @@ if ($ConvID = (int)$_GET['id']) {
 ?>
     <div class="LayoutBody">
         <div class="BodyHeader">
-            <h2 class="BodyHeader-nav"><?= t('server.staffpm.staff_pm') ?> - <?= display_str($Subject) ?></h2>
+            <h2 class="BodyHeader-nav"><?= t('server.staffpm.staff_pm') ?> > <?= display_str($Subject) ?></h2>
             <div class="BodyNavLinks">
 
                 <?
@@ -69,8 +69,6 @@ if ($ConvID = (int)$_GET['id']) {
                 ?>
             </div>
         </div>
-        <br />
-        <br />
         <div id="inbox">
             <?
             // Get messages

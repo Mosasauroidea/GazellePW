@@ -4,50 +4,34 @@ authorize();
 if (!check_perms('torrents_edit')) {
   error(403);
 }
-if (!empty($_POST['newartistid']) && !empty($_POST['newartistname'])) {
+if (empty($_POST['newartistid'])) {
   error('Please enter a valid artist ID number or a valid artist name.');
 }
 $ArtistID = (int)$_POST['artistid'];
 $NewArtistID = (int)$_POST['newartistid'];
-$NewArtistName = $_POST['newartistname'];
 
 
 if (!is_number($ArtistID) || !$ArtistID) {
   error('Please select a valid artist to change.');
 }
-if (empty($NewArtistName) && (!$NewArtistID || !is_number($NewArtistID))) {
-  error('Please enter a valid artist ID number or a valid artist name.');
-}
 
 $DB->query("
-	SELECT Name
+	SELECT Name, SubName
 	FROM artists_group
 	WHERE ArtistID = $ArtistID
 	LIMIT 1");
-if (!(list($ArtistName) = $DB->next_record(MYSQLI_NUM, false))) {
+if (!(list($ArtistName, $ArtistSubName) = $DB->next_record(MYSQLI_NUM, false))) {
   error('An error has occurred.');
 }
 
-if ($NewArtistID > 0) {
-  // Make sure that's a real artist ID number, and grab the name
-  $DB->query("
-		SELECT Name
-		FROM artists_group
-		WHERE ArtistID = $NewArtistID
-		LIMIT 1");
-  if (!(list($NewArtistName) = $DB->next_record())) {
-    error('Please enter a valid artist ID number.');
-  }
-} else {
-  // Didn't give an ID, so try to grab based on the name
-  $DB->query("
-		SELECT ArtistID
-		FROM artists_alias
-		WHERE Name = '" . db_string($NewArtistName) . "'
-		LIMIT 1");
-  if (!(list($NewArtistID) = $DB->next_record())) {
-    error('No artist by that name was found.');
-  }
+// Make sure that's a real artist ID number, and grab the name
+$DB->query("
+SELECT Name, SubName
+FROM artists_group
+WHERE ArtistID = $NewArtistID
+LIMIT 1");
+if (!(list($NewArtistName, $NewArtistSubName) = $DB->next_record())) {
+  error('Please enter a valid artist ID number.');
 }
 
 if ($ArtistID == $NewArtistID) {
@@ -102,10 +86,13 @@ if (isset($_POST['confirm'])) {
   $NewArtistBookmarks[] = '0';
   $NewArtistBookmarks = implode(',', $NewArtistBookmarks);
 
+  $DB->query("SELECT AliasID FROM artists_alias WHERE ArtistID = $NewArtistID and Redirect = 0");
+  list($RedirectID) = G::$DB->next_record(MYSQLI_NUM);
   // Merge all of this artist's aliases onto the new artist
   $DB->query("
 		UPDATE artists_alias
-		SET ArtistID = $NewArtistID
+		SET ArtistID = $NewArtistID,
+    Redirect = $RedirectID
 		WHERE ArtistID = $ArtistID");
 
   // Update the torrent groups, requests, and bookmarks
@@ -168,7 +155,7 @@ if (isset($_POST['confirm'])) {
 		DELETE FROM artists_group
 		WHERE ArtistID = $ArtistID");
 
-  Misc::write_log("The artist $ArtistID ($ArtistName) was made into a non-redirecting alias of artist $NewArtistID ($NewArtistName) by user " . $LoggedUser['ID'] . " (" . $LoggedUser['Username'] . ')');
+  Misc::write_log("The artist $ArtistID ($ArtistName) was made into a alias of artist $NewArtistID ($NewArtistName) by user " . $LoggedUser['ID'] . " (" . $LoggedUser['Username'] . ')');
 
   header("Location: artist.php?action=edit&artistid=$NewArtistID");
 } else {
@@ -186,8 +173,8 @@ if (isset($_POST['confirm'])) {
     <div style="text-align: center;">
       <p id="confirm_merge_note">
         <?
-        $ArtistNameDisplay = display_str($ArtistName);
-        $NewArtistNameDisplay = display_str($NewArtistName);
+        $ArtistNameDisplay = display_str(Artists::display_artist(['Name' => $ArtistName, 'SubName' => $ArtistSubName], false));
+        $NewArtistNameDisplay = display_str(Artists::display_artist(['Name' => $NewArtistName, 'SubName' => $NewArtistSubName], false));
         ?>
         <?= t('server.artist.confirm_merge_body', ['Values' => [
           "<a href='artist.php?id=${ArtistID}'>${ArtistNameDisplay} (${ArtistID})</a>",

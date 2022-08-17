@@ -57,7 +57,16 @@ class AutoEnable {
 
         if (G::$DB->has_results() || !isset($UserID)) {
             // User already has/had a pending activation request or username is invalid
-            $Output = sprintf(t('server.login.re_enable_request_rejected'), CONFIG['BOT_DISABLED_CHAN'], CONFIG['BOT_SERVER']);
+            $Output = t(
+                'server.login.re_enable_request_rejected',
+                [
+                    'Values' =>
+                    [
+                        CONFIG['BOT_DISABLED_CHAN'],
+                        CONFIG['BOT_SERVER'],
+                    ]
+                ]
+            );
             if (isset($UserID)) {
                 Tools::update_user_notes($UserID, sqltime() . t('server.login.enable_request_rejected_from_ip') . "$IP\n\n");
             }

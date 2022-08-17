@@ -359,15 +359,13 @@ server.artist.loading: |-
 server.artist.make_into: |-
   Transformar em apelido sem redirecionamento
 server.artist.make_into_note: |-
-  Mescla este artista (%s) no artista especificado abaixo (sem redirecionamento), para que (%s) e seus aliases apareçam como um alias não redirecionado do artista inserido na caixa de texto abaixo.
+  Mescla este artista no artista especificado abaixo (sem redirecionamento), para que seus aliases apareçam como um alias não redirecionado do artista inserido na caixa de texto abaixo.
 server.artist.merging_artists: |-
   Mesclando Artistas
 server.artist.name: |-
   nome
 server.artist.no_changes_were_made: |-
   Como o pseudônimo de destino não é redirecionado para outro lugar, nada mudou.
-server.artist.non_redirecting_alias: |-
-  Pseudônimo não redirecionado
 server.artist.number_of_groups: |-
   Número de grupos
 server.artist.number_of_leechers: |-
