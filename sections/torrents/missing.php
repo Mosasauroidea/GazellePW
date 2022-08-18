@@ -143,7 +143,7 @@ HTML;
             foreach ($GroupInfo['Torrents'] as $T) {
                 $SnatchedCount += $T['Snatched'];
             }
-            $RequestCount = count(get_group_requests($GroupID));
+            $RequestCount = count(Requests::get_group_requests($GroupID));
             $SlotStatus = TorrentSlot::get_slot_group_status($GroupInfo['Torrents']);
             $SlotStatusClass = [];
             $text = [];

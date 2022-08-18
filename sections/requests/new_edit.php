@@ -17,10 +17,8 @@ if (!$NewRequest) {
         error(404);
     }
 }
-$RequestFormat = false;
 $GroupID = null;
 if (!empty($_GET['groupid']) && is_number($_GET['groupid'])) {
-    $RequestFormat = true;
     $GroupID = $_GET['groupid'];
 }
 
@@ -45,7 +43,7 @@ if (!$NewRequest) {
         $ReleaseType = $Request['ReleaseType'];
         $GroupID = $Request['GroupID'];
         $IMDBID = $Request['IMDBID'];
-        $Subtitle = $Request['Subtitle'];
+        $SubName = $Request['Subtitle'];
         $SourceTorrent = $Request['SourceTorrent'];
         $PurchasableAt = $Request['PurchasableAt'];
         $Description = $Request['Description'];
@@ -111,8 +109,9 @@ if (!$NewRequest) {
     }
 }
 
-if ($NewRequest && $RequestFormat) {
-    $ArtistForm = Artists::get_artist($_GET['groupid']);
+if ($NewRequest && $GroupID) {
+    $AllArtist = Artists::get_artist($_GET['groupid']);
+    $ArtistForm = [Artists::Director => $AllArtist[Artists::Director]];
     $DB->query("
 		SELECT
             tg.ID,
@@ -133,15 +132,14 @@ if ($NewRequest && $RequestFormat) {
         $GroupID = trim($_REQUEST['groupid']);
         $Title = $RequestInfo['Name'];
         $Year = $RequestInfo['Year'];
-        $SubTitle = $RequestInfo['SubName'];
+        $SubName = $RequestInfo['SubName'];
         $IMDBID = $RequestInfo['IMDBID'];
         $ReleaseType = $RequestInfo['ReleaseType'];
         $Tags = $RequestInfo['Tags'];
         $CategoryID = $RequestInfo['CategoryID'];
         $Image = $RequestInfo['WikiImage'];
-        $Disabled = ' readonly';
+        $Disabled = ' disabled';
         $DisabledFlag = true;
-        $Subtitle = $SubName;
     }
 }
 
@@ -164,7 +162,7 @@ View::show_header(($NewRequest ? t('server.requests.new_create') : t('server.req
         <h2 class="BodyHeader-nav"><?= t('server.requests.requests')  ?></h2>
     </div>
     <div class="BodyContent">
-        <form class="Form-rowList Form FormUpload FormRequestNew Box <?= ($RequestFormat ? "u-formUploadAutoFilled" : "") ?>" action="" method="post" id="request_form" onsubmit="globalapp.requestCalculate();" variant="header">
+        <form class="Form-rowList Form FormUpload FormRequestNew Box u-formUploadAutoFilled" action="" method="post" id="request_form" onsubmit="globalapp.requestCalculate();" variant="header">
             <div>
                 <? if (!$NewRequest) { ?>
                     <input type="hidden" name="requestid" value="<?= $RequestID ?>" />
@@ -196,163 +194,153 @@ View::show_header(($NewRequest ? t('server.requests.new_create') : t('server.req
                         </div>
                     </td>
                 </tr>
-                <?
-                if (!$RequestFormat) {
-                ?>
-                    <tr class="Form-row" id="imdb_tr">
-                        <td class="Form-label"><?= t('server.requests.link') ?>:</td>
-                        <td class="Form-items" id="imdbfield">
-                            <div class="Form-inputs">
-                                <input class="Input" type="text" id="imdb" name="imdb" size="45" placeholder="IMDB" value="<?= $IMDBID ?>" <?= $Disabled ?>>
-                                <input class="Input" type="text" id="group" name="group" size="45" placeholder="<?= t('server.requests.t_group') ?>" value="<?= $GroupID ? CONFIG['SITE_URL'] . '/torrents.php?id=' . $GroupID : '' ?>" <?= $Disabled ?>>
-                                <? if ($NewRequest) { ?>
-                                    <button id="imdb_button" class="Button autofill" variant="primary" type="button" onclick="globalapp.requestMovieAutofill()">
-                                        <span><?= t('server.upload.movie_fill') ?></span>
-                                        <span class="Loader"></span>
-                                    </button>
-                                    <div class="Checkbox">
-                                        <input class="Input" type="checkbox" name="no_imdb_link" id="no_imdb_link" onchange="globalapp.requestNoImdbId()" <?= $Disabled ?>>
-                                        <label class="Checkbox-label" data-tooltip="<?= t('server.requests.link_empty_warning') ?>" for="no_imdb_link">&nbsp;<?= t('server.requests.no_link') ?></label>
-                                    </div>
-                                <? } ?>
-                            </div>
+                <tr class="Form-row" id="imdb_tr">
+                    <td class="Form-label"><?= t('server.requests.link') ?>:</td>
+                    <td class="Form-items" id="imdbfield">
+                        <div class="Form-inputs">
+                            <input class="Input" type="text" id="imdb" name="imdb" size="45" placeholder="IMDB" value="<?= $IMDBID ?>" <?= $Disabled ?>>
+                            <input class="Input" type="text" id="group" name="group" size="45" placeholder="<?= t('server.requests.t_group') ?>" value="<?= $GroupID ? CONFIG['SITE_URL'] . '/torrents.php?id=' . $GroupID : '' ?>" <?= $Disabled ?>>
                             <? if ($NewRequest) { ?>
-                                <div class="u-formUploadNoImdbNote"><?= t('server.requests.auto_fill_note') ?></div>
+                                <button <?= $Disabled ?> id="imdb_button" class="Button autofill" variant="primary" type="button" onclick="globalapp.requestMovieAutofill()">
+                                    <span><?= t('server.upload.movie_fill') ?></span>
+                                    <span class="Loader"></span>
+                                </button>
+                                <div <?= $Disabled ?> class="Checkbox">
+                                    <input class="Input" type="checkbox" name="no_imdb_link" id="no_imdb_link" onchange="globalapp.requestNoImdbId()" <?= $Disabled ?>>
+                                    <label class="Checkbox-label" data-tooltip="<?= t('server.requests.link_empty_warning') ?>" for="no_imdb_link">&nbsp;<?= t('server.requests.no_link') ?></label>
+                                </div>
                             <? } ?>
-                        </td>
-                    </tr>
-                <?
-                }
-                ?>
+                        </div>
+                        <? if ($NewRequest) { ?>
+                            <div class="u-formUploadNoImdbNote"><?= t('server.requests.auto_fill_note') ?></div>
+                        <? } ?>
+                    </td>
+                </tr>
             </table>
 
             <div class="TableContainer <?= $NewRequest ? 'u-formUploadCollapse' : '' ?>">
                 <table class="Form">
-                    <?
-                    if (!$RequestFormat) {
-                    ?>
-                        <tr class="Form-row" id="releasetypes_tr">
-                            <td class="Form-label"><?= t('server.requests.release_list') ?>:</td>
-                            <td class="Form-items">
-                                <div class="Form-inputs">
-                                    <select class="Input" id="releasetype" name="releasetype">
-                                        <?
-                                        foreach ($ReleaseTypes as $Key) {
-                                            //echo '<h1>'.$ReleaseType.'</h1>'; die();
-                                        ?> <option class="Select-option" value="<?= $Key ?>" <?= !empty($ReleaseType) ? ($Key == $ReleaseType ? ' selected="selected"' : ($DisabledFlag ? 'disabled' : '')) : '' ?>><?= t('server.torrents.release_types')[$Key] ?></option>
-                                        <?
-                                        }
-                                        ?>
-                                    </select>
-                                </div>
-                            </td>
-                        </tr>
+                    <tr class="Form-row" id="releasetypes_tr">
+                        <td class="Form-label"><?= t('server.requests.release_list') ?>:</td>
+                        <td class="Form-items">
+                            <div class="Form-inputs">
+                                <select <?= $Disabled ?> class="Input" id="releasetype" name="releasetype">
+                                    <?
+                                    foreach ($ReleaseTypes as $Key) {
+                                        //echo '<h1>'.$ReleaseType.'</h1>'; die();
+                                    ?> <option class="Select-option" value="<?= $Key ?>" <?= !empty($ReleaseType) ? ($Key == $ReleaseType ? ' selected="selected"' : ($DisabledFlag ? 'disabled' : '')) : '' ?>><?= t('server.torrents.release_types')[$Key] ?></option>
+                                    <?
+                                    }
+                                    ?>
+                                </select>
+                            </div>
+                        </td>
+                    </tr>
 
-                        <tr class="Form-row">
-                            <td class="Form-label"><?= t('server.upload.movie_title') ?>:</td>
-                            <td class="Form-items">
-                                <div class="Form-inputs">
-                                    <input class="Input" type="text" id="name" name="name" <?= $Disabled ?> size="45" value="<?= (!empty($Title) ? $Title : '') ?>" />
-                                </div>
-                            </td>
-                        </tr>
-                        <tr class="Form-row">
-                            <td class="Form-label"><?= t('server.upload.sub_title') ?>:</td>
-                            <td class="Form-items">
-                                <div class="Form-inputs">
-                                    <input class="Input" type="text" id="subname" name="subname" <?= $Disabled ?> size="45" value="<?= (!empty($Subtitle) ? $Subtitle : '') ?>" />
-                                </div>
-                            </td>
-                        </tr>
-                        <tr class="Form-row" id="year_tr">
-                            <td class="Form-label"><?= t('server.requests.year') ?>:</td>
-                            <td class="Form-items">
-                                <div class="Form-inputs">
-                                    <input class="Input" type="text" id="year" name="year" <?= $Disabled ?> size="5" value="<?= (!empty($Year) ? $Year : '') ?>" />
-                                </div>
-                            </td>
-                        </tr>
-                        <tr class="Form-row" id="artist_tr">
-                            <td class="Form-label"><?= t('server.common.director') ?>:</td>
-                            <td class="Form-items is-artist u-formUploadArtistList" id="artistfields">
-                                <?
-                                if (!empty($ArtistForm)) {
-                                    $FirstArtist = true;
-                                    foreach ($ArtistForm as $Importance => $Artists) {
-                                        foreach ($Artists as $Artist) {
-                                ?>
-                                            <div class="Form-inputs">
-                                                <input class="Input is-small" type="text" id="artist_id" name="artist_ids[]" value="<?= display_str($Artist['IMDBID']) ?>" size="45" />
-                                                <input class="Input is-small" type="text" id="artist" name="artists[]" size="45" value="<?= display_str($Artist['Name']) ?>" <? Users::has_autocomplete_enabled('other'); ?><?= $Disabled ?> />
-                                                <input class="Input is-small" type="text" id="artist_sub" data-tooltip="<?= t('server.upload.sub_name') ?>" name="artists_sub[]" size="25" value="<?= display_str($Artist['SubName']) ?>" <? Users::has_autocomplete_enabled('other'); ?><?= $Disabled ?> />
-                                                <input type="hidden" id="importance" name="importance[]" value=1 />
-                                                <?
-                                                if ($FirstArtist) {
-                                                    if (!$Disabled) {
-                                                ?>
-                                                        <a href="javascript:globalapp.requestAddArtistField(true)" class="brackets">+</a> <a href="javascript:globalapp.globalapp.requestRemoveArtistField()" class="brackets">&minus;</a>
-                                                <?
-                                                    }
-                                                    $FirstArtist = false;
+                    <tr class="Form-row">
+                        <td class="Form-label"><?= t('server.upload.movie_title') ?>:</td>
+                        <td class="Form-items">
+                            <div class="Form-inputs">
+                                <input class="Input" type="text" id="name" name="name" <?= $Disabled ?> size="45" value="<?= (!empty($Title) ? $Title : '') ?>" />
+                            </div>
+                        </td>
+                    </tr>
+                    <tr class="Form-row">
+                        <td class="Form-label"><?= t('server.upload.sub_title') ?>:</td>
+                        <td class="Form-items">
+                            <div class="Form-inputs">
+                                <input class="Input" type="text" id="subname" name="subname" <?= $Disabled ?> size="45" value="<?= (!empty($SubName) ? $SubName : '') ?>" />
+                            </div>
+                        </td>
+                    </tr>
+                    <tr class="Form-row" id="year_tr">
+                        <td class="Form-label"><?= t('server.requests.year') ?>:</td>
+                        <td class="Form-items">
+                            <div class="Form-inputs">
+                                <input class="Input" type="text" id="year" name="year" <?= $Disabled ?> size="5" value="<?= (!empty($Year) ? $Year : '') ?>" />
+                            </div>
+                        </td>
+                    </tr>
+                    <tr class="Form-row" id="artist_tr">
+                        <td class="Form-label"><?= t('server.common.director') ?>:</td>
+                        <td class="Form-items is-artist u-formUploadArtistList" id="artistfields">
+                            <?
+                            if (!empty($ArtistForm)) {
+                                $FirstArtist = true;
+                                foreach ($ArtistForm as $Importance => $Artists) {
+                                    foreach ($Artists as $Artist) {
+                            ?>
+                                        <div class="Form-inputs">
+                                            <input class="Input is-small" type="text" id="artist_id" name="artist_ids[]" value="<?= display_str($Artist['IMDBID']) ?>" size="45" <?= $Disabled ?> />
+                                            <input class="Input is-small" type="text" id="artist" name="artists[]" size="45" value="<?= display_str($Artist['Name']) ?>" <? Users::has_autocomplete_enabled('other'); ?><?= $Disabled ?> />
+                                            <input class="Input is-small" type="text" id="artist_sub" data-tooltip="<?= t('server.upload.sub_name') ?>" name="artists_sub[]" size="25" value="<?= display_str($Artist['SubName']) ?>" <? Users::has_autocomplete_enabled('other'); ?><?= $Disabled ?> />
+                                            <input type="hidden" id="importance" name="importance[]" value=1 />
+                                            <?
+                                            if ($FirstArtist) {
+                                                if (!$Disabled) {
+                                            ?>
+                                                    <a id="add_artist" href="javascript:globalapp.requestAddArtistField(true)" class="brackets">+</a> <a id="remove_artist" href="javascript:globalapp.globalapp.requestRemoveArtistField()" class="brackets">&minus;</a>
+                                            <?
                                                 }
-                                                ?>
-                                            </div>
-                                    <?
-                                        }
+                                                $FirstArtist = false;
+                                            }
+                                            ?>
+                                        </div>
+                                <?
                                     }
-                                } else {
-                                    ?>
-                                    <div class="Form-inputs">
-                                        <input class="Input is-small" type="text" id="artist_id" name="artist_ids[]" size="45" placeholder="<?= t('server.upload.movie_imdb') ?>" />
-                                        <input class="Input is-small" type="text" id="artist" name="artists[]" size="45" <?
-                                                                                                                            Users::has_autocomplete_enabled('other'); ?><?= $Disabled ?> placeholder="<?= t('server.upload.english_name') ?>" />
-                                        <input class="Input is-small" type="text" id="artist_sub" name="artists_sub[]" size="25" placeholder="<?= t('server.upload.sub_name') ?>" <?
-                                                                                                                                                                                    Users::has_autocomplete_enabled('other'); ?><?= $Disabled ?> />
-                                        <input type="hidden" id="importance" name="importance[]" value=1 />
-                                        <a href="#" onclick="globalapp.requestAddArtistField(true); return false;" class="brackets add-artist">+</a>
-                                        <a href="#" onclick="globalapp.requestRemoveArtistField(); return false;" class="brackets remove-artist">&minus;</a>
-                                    </div>
-                                <? } ?>
-                                <div class="show-more hidden">
-                                    <a href='#' onclick="globalapp.requestArtistsShowMore(); return false"><?= t('server.upload.show_more') ?></a>
+                                }
+                            } else {
+                                ?>
+                                <div class="Form-inputs">
+                                    <input class="Input is-small" type="text" id="artist_id" name="artist_ids[]" size="45" placeholder="<?= t('server.upload.movie_imdb') ?>" />
+                                    <input class="Input is-small" type="text" id="artist" name="artists[]" size="45" <?
+                                                                                                                        Users::has_autocomplete_enabled('other'); ?><?= $Disabled ?> placeholder="<?= t('server.upload.english_name') ?>" />
+                                    <input class="Input is-small" type="text" id="artist_sub" name="artists_sub[]" size="25" placeholder="<?= t('server.upload.sub_name') ?>" <?
+                                                                                                                                                                                Users::has_autocomplete_enabled('other'); ?><?= $Disabled ?> />
+                                    <input type="hidden" id="importance" name="importance[]" value=1 />
+                                    <a id="add_artist" href="#" onclick="globalapp.requestAddArtistField(true); return false;" class="brackets add-artist">+</a>
+                                    <a id="remove_artist" href="#" onclick="globalapp.requestRemoveArtistField(); return false;" class="brackets remove-artist">&minus;</a>
                                 </div>
-                            </td>
-                        </tr>
-                        <? if ($NewRequest || $CanEdit) { ?>
-                            <tr class="Form-row" id="image_tr">
-                                <td class="Form-label"><?= t('server.requests.image') ?>:</td>
-                                <td class="Form-items">
-                                    <div class="Form-inputs">
-                                        <input class="Input" type="text" id="image" name="image" <?= $Disabled ?> size="45" value="<?= (!empty($Image) ? $Image : '') ?>" />
-                                    </div>
-                                </td>
-                            </tr>
-                        <?  } ?>
-                        <tr class="Form-row">
-                            <td class="Form-label"><?= t('server.requests.tags') ?>:</td>
+                            <? } ?>
+                            <div class="show-more hidden">
+                                <a href='#' onclick="globalapp.requestArtistsShowMore(); return false"><?= t('server.upload.show_more') ?></a>
+                            </div>
+                        </td>
+                    </tr>
+                    <? if ($NewRequest || $CanEdit) { ?>
+                        <tr class="Form-row" id="image_tr">
+                            <td class="Form-label"><?= t('server.requests.image') ?>:</td>
                             <td class="Form-items">
                                 <div class="Form-inputs">
-                                    <?
-                                    if ($GenreTags) {
-                                    ?>
-                                        <select class="Input" id="genre_tags" name="genre_tags" onchange="globalapp.requestAddTag(); return false;">
-                                            <option class="Select-option">---</option>
-                                            <? foreach (Misc::display_array($GenreTags) as $Genre) { ?>
-                                                <option class="Select-option" value="<?= $Genre ?>"><?= $Genre ?></option>
-                                            <?  } ?>
-                                        </select>
-                                    <?
-                                    }
-                                    ?>
-                                    <input class="Input" type="text" <?= $Disabled ?> id="tags" name="tags" size="45" value="<?= (!empty($Tags) ? display_str($Tags) : '') ?>" <? Users::has_autocomplete_enabled('other'); ?> />
-                                </div>
-                                <div>
-                                    <?= t('server.requests.tags_note') ?>
+                                    <input class="Input" type="text" id="image" name="image" <?= $Disabled ?> size="45" value="<?= (!empty($Image) ? $Image : '') ?>" />
                                 </div>
                             </td>
                         </tr>
+                    <?  } ?>
+                    <tr class="Form-row">
+                        <td class="Form-label"><?= t('server.requests.tags') ?>:</td>
+                        <td class="Form-items">
+                            <div class="Form-inputs">
+                                <?
+                                if ($GenreTags) {
+                                ?>
+                                    <select <?= $Disabled ?> class="Input" id="genre_tags" name="genre_tags" onchange="globalapp.requestAddTag(); return false;">
+                                        <option class="Select-option">---</option>
+                                        <? foreach (Misc::display_array($GenreTags) as $Genre) { ?>
+                                            <option class="Select-option" value="<?= $Genre ?>"><?= $Genre ?></option>
+                                        <?  } ?>
+                                    </select>
+                                <?
+                                }
+                                ?>
+                                <input class="Input" type="text" <?= $Disabled ?> id="tags" name="tags" size="45" value="<?= (!empty($Tags) ? display_str($Tags) : '') ?>" <? Users::has_autocomplete_enabled('other'); ?> />
+                            </div>
+                            <div>
+                                <?= t('server.requests.tags_note') ?>
+                            </div>
+                        </td>
+                    </tr>
                     <?
-                    }
                     if ($NewRequest || $CanEdit) {
                     ?>
                         <tr class="Form-row" id="sources_tr">

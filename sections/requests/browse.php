@@ -597,7 +597,6 @@ View::show_header($Title, '', 'PageRequestHome');
                         }
 
                         $ArtistForm = Requests::get_artists($RequestID);
-                        $ArtistLink = Artists::display_artists($ArtistForm, true, false);
                         $RequestName = Torrents::group_name($Request, false);
                         $FullName = "<a href=\"requests.php?action=view&amp;id=$RequestID\">$RequestName</a>";
                         $Tags = $Request['Tags'];

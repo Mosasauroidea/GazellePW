@@ -156,6 +156,7 @@ class Artists {
         $ArtistAliasList = $Artist['Alias'];
 
         $New = false;
+        $Change = false;
 
         if (!empty($IMDBID)) {
             G::$DB->prepared_query("SELECT * FROM artists_group WHERE IMDBID = ? FOR UPDATE", $IMDBID);
@@ -187,7 +188,6 @@ class Artists {
                 }
                 $Artist['ArtistID'] = $OldID;
                 // update 
-                G::$DB->prepared_query("UPDATE artists_group SET " . implode(' , ', $Updates) . " WHERE ArtistID = $OldID");
                 G::$DB->prepared_query("SELECT ArtistID, AliasID, Redirect FROM artists_alias WHERE ArtistID = ?", $OldID);
                 while (list($ArtistID, $AliasID, $Redirect) = G::$DB->next_record(MYSQLI_NUM, false)) {
                     if ($Redirect) {
@@ -196,6 +196,10 @@ class Artists {
                         $Artist['AliasID'] = $AliasID;
                     }
                     break;
+                }
+                if (count($Updates) > 0) {
+                    G::$DB->prepared_query("UPDATE artists_group SET " . implode(' , ', $Updates) . " WHERE ArtistID = $OldID");
+                    $Change = true;
                 }
             } else {
                 G::$DB->prepared_query(
@@ -219,26 +223,29 @@ class Artists {
         }
 
         $ArtistID = $Artist['ArtistID'];
-        G::$DB->prepared_query("INSERT INTO wiki_artists
+        if ($Change || $New) {
+            G::$DB->prepared_query("INSERT INTO wiki_artists
 							(PageID, Body, Image, UserID, Summary, Time, IMDBID, Name, SubName)
 						VALUES
 							(?,?,?,?,?,?,?,?,?)", $ArtistID, $Body, $Image, $UserID, $Summary, sqltime(), $IMDBID, $Name, $SubName);
-        $RevisionID = G::$DB->inserted_id();
-        G::$DB->prepared_query("UPDATE artists_group SET RevisionID = ? WHERE ArtistID = ?", $RevisionID, $ArtistID);
-        if ($New) {
-            G::$DB->prepared_query("INSERT INTO artists_alias (ArtistID, Name)
+            $RevisionID = G::$DB->inserted_id();
+            G::$DB->prepared_query("UPDATE artists_group SET RevisionID = ? WHERE ArtistID = ?", $RevisionID, $ArtistID);
+            if ($New) {
+                G::$DB->prepared_query("INSERT INTO artists_alias (ArtistID, Name)
 						VALUES (?, ?)", $ArtistID, $Name);
-            $AliasID = G::$DB->inserted_id();
-            $Artist['AliasID'] = $AliasID;
-            foreach ($ArtistAliasList as $key => $value) {
-                G::$DB->prepared_query("INSERT INTO artists_alias (ArtistID, Name, Redirect)
+                $AliasID = G::$DB->inserted_id();
+                $Artist['AliasID'] = $AliasID;
+                foreach ($ArtistAliasList as $key => $value) {
+                    G::$DB->prepared_query("INSERT INTO artists_alias (ArtistID, Name, Redirect)
 						VALUES (?, ?, ?)", $ArtistID, $value, $AliasID);
-            }
-            if ($SubName) {
-                G::$DB->prepared_query("INSERT INTO artists_alias (ArtistID, Name, Redirect)
+                }
+                if ($SubName) {
+                    G::$DB->prepared_query("INSERT INTO artists_alias (ArtistID, Name, Redirect)
 						VALUES (?, ?, ?)", $ArtistID, $SubName, $AliasID);
+                }
             }
         }
+
         G::$DB->commit();
         if ($New) {
             G::$Cache->increment('stats_artist_count');

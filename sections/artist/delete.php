@@ -22,13 +22,13 @@ if (!check_perms('site_delete_artist') || !check_perms('torrents_delete')) {
 View::show_header(t('server.artist.artist_deleted'), '', 'PageArtistDelete');
 
 $DB->query("
-	SELECT Name
+	SELECT Name, SubName
 	FROM artists_group
 	WHERE ArtistID = $ArtistID");
-list($Name) = $DB->next_record();
-
+$Artist = $DB->next_record();
+$Name = Artists::display_artist($Artist);
 $DB->query("
-	SELECT tg.Name, tg.ID
+	SELECT tg.Name, tg.ID, tg.SubName, tg.Year
 	FROM torrents_group AS tg
 		LEFT JOIN torrents_artists AS ta ON ta.GroupID = tg.ID
 	WHERE ta.ArtistID = $ArtistID");
@@ -36,24 +36,25 @@ $Count = $DB->record_count();
 if ($DB->has_results()) {
 ?>
     <div class="LayoutBody">
-        <div class="remove-artist-failed">
-            <?= t('server.artist.there_are_still_torrents_that_have') ?><a href="artist.php?id=<?= $ArtistID ?>" data-tooltip="<?= t('server.artist.view_artist') ?>" dir="ltr"><?= $Name ?></a><?= t('server.artist.as_an_artist') ?><br />
-            <?= t('server.artist.please_remove_the_artist_from_these_torrents') ?><br />
-            <div class="Box">
-                <div class="Box-body">
-                    <ul>
-                        <?
-                        while (list($GroupName, $GroupID) = $DB->next_record(MYSQLI_NUM, true)) {
-                        ?>
-                            <li>
-                                <a href="torrents.php?id=<?= $GroupID ?>" data-tooltip="<?= t('server.artist.view_torrent_group') ?>" dir="ltr"><?= $GroupName ?></a>
-                            </li>
-                        <?
-                        }
-                        ?>
-                    </ul>
-                </div>
+        <div class="BodyHeader">
+            <h2 class="BodyHeader-nav"><?= page_title_conn([t('server.common.delete'), $Name]) ?></h2>
+        </div>
+        <div class="BodyContent remove-artist-failed">
+            <div>
+                <?= t('server.artist.there_are_still_torrents_that_have') ?><a href="artist.php?id=<?= $ArtistID ?>" data-tooltip="<?= t('server.artist.view_artist') ?>" dir="ltr"><?= $Name ?></a><?= t('server.artist.as_an_artist') ?><br />
+                <?= t('server.artist.please_remove_the_artist_from_these_torrents') ?><br />
             </div>
+            <ul class="PostList">
+                <?
+                while ($Group = $DB->next_record(MYSQLI_ASSOC, true)) {
+                ?>
+                    <li>
+                        <?= Torrents::group_name($Group); ?>
+                    </li>
+                <?
+                }
+                ?>
+            </ul>
         </div>
     </div>
 <?

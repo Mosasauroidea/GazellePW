@@ -66,10 +66,10 @@ globalapp.requestVote = function requestVote(amount, requestid) {
         if (requestTax > 0) {
           Snackbar.notify(
             'Your vote of ' +
-              get_size(amount) +
-              ', adding a ' +
-              get_size(amount * (1 - $('#request_tax').raw().value)) +
-              ' bounty, has been added'
+            get_size(amount) +
+            ', adding a ' +
+            get_size(amount * (1 - $('#request_tax').raw().value)) +
+            ' bounty, has been added'
           )
         } else {
           Snackbar.notify('Your vote of ' + get_size(amount) + ' has been added')
@@ -250,7 +250,8 @@ globalapp.requestMovieAutofill = function requestMovieAutofill() {
         globalapp.requestArtistsShowMore({ hide: true })
       }
       if (data.FillSource == 'group') {
-        $('#imdb, #group, #image, #tags, #releasetype, #year, #name, #subname').prop('disabled', true)
+        $('#genre_tags, #imdb, #group, #image, #tags, #releasetype, #year, #name, #subname').prop('readonly', true)
+        $('#add_artist, #remove_artist').ghide()
       }
     },
     dataType: 'json',

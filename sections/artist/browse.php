@@ -79,36 +79,8 @@ if ($Data) {
 
 ob_start();
 
-// Requests
-$Requests = array();
-if (empty($LoggedUser['DisableRequests'])) {
-    $Requests = $Cache->get_value("artists_requests_$ArtistID");
-    if (!is_array($Requests)) {
-        $DB->query("
-			SELECT
-				r.ID,
-				r.CategoryID,
-				r.Title,
-				r.Year,
-				r.TimeAdded,
-				COUNT(rv.UserID) AS Votes,
-				SUM(rv.Bounty) AS Bounty
-			FROM requests AS r
-				LEFT JOIN requests_votes AS rv ON rv.RequestID = r.ID
-				LEFT JOIN requests_artists AS ra ON r.ID = ra.RequestID
-			WHERE ra.ArtistID = $ArtistID
-				AND r.TorrentID = 0
-			GROUP BY r.ID
-			ORDER BY Votes DESC");
+$Requests = Requests::get_artist_requests($ArtistID);
 
-        if ($DB->has_results()) {
-            $Requests = $DB->to_array('ID', MYSQLI_ASSOC, false);
-        } else {
-            $Requests = array();
-        }
-        $Cache->cache_value("artists_requests_$ArtistID", $Requests);
-    }
-}
 $NumRequests = count($Requests);
 
 
@@ -240,16 +212,18 @@ reset($TorrentList);
 if (!empty($UsedReleases)) { ?>
     <div class="BodyNavLinks">
         <?
+        if ($NumRequests > 0) {
+        ?>
+            <a href="#requests" class="brackets"><?= t('server.common.requests') ?></a>
+        <?
+        }
         foreach ($UsedReleases as $ReleaseID) {
             $DisplayName = sectionTitle($ReleaseID);
         ?>
             <a href="#torrents_<?= $ReleaseID ?>" class="brackets"><?= $DisplayName ?></a>
         <?
         }
-        if ($NumRequests > 0) {
         ?>
-            <a href="#requests" class="brackets"><?= t('server.common.requests') ?></a>
-        <? } ?>
     </div>
 <? }
 
@@ -282,20 +256,7 @@ foreach ($Importances as $Group) {
     $ReleaseType = $Group['ReleaseType'];
     $TorrentGroups[$ReleaseType][$Group['GroupID']] = $Group['GroupInfo'];
 }
-foreach ($TorrentGroups as $ReleaseType => $GroupInfo) {
-    $DisplayName =  sectionTitle($ReleaseType);
-?>
-    <h3 id="torrents_<?= $ReleaseType ?>"><strong><?= $DisplayName ?></strong>&nbsp;(<a href="#" onclick="$('.torrent_table_<?= $ReleaseType ?>').gtoggle(true); return false;"><?= t('server.artist.view') ?></a>)</h3>
-    <div class="Box">
-        <div class="Box-body torrent_table_<?= $ReleaseType ?>" id="torrent_table_<?= $ID ?>">
-            <?
-            $tableRender = new TorrentGroupCoverTableView($GroupInfo);
-            $tableRender->render();
-            ?>
-        </div>
-    </div>
-<?
-}
+
 
 $TorrentDisplayList = ob_get_clean();
 
@@ -312,10 +273,7 @@ View::show_header(($SubName ? '[' . $SubName . '] ' : '') . $Name, 'browse,bbcod
                 <a href="artist.php?action=edit&amp;artistid=<?= $ArtistID ?>" class="brackets"><?= t('server.common.edit') ?></a>
             <? } ?>
             <a href="artist.php?action=editrequest&amp;artistid=<?= $ArtistID ?>" class="brackets"><?= t('server.artist.editrequest') ?></a>
-            <? if (check_perms('site_submit_requests')) { ?>
-                <a href="requests.php?action=new&amp;artistid=<?= $ArtistID ?>" class="brackets"><?= t('server.artist.re_torrents') ?></a>
-                <?
-            }
+            <?
             if (check_perms('site_torrents_notify')) {
                 if (($Notify = $Cache->get_value('notify_artists_' . $LoggedUser['ID'])) === false) {
                     $DB->query("
@@ -328,7 +286,7 @@ View::show_header(($SubName ? '[' . $SubName . '] ' : '') . $Name, 'browse,bbcod
                     $Cache->cache_value('notify_artists_' . $LoggedUser['ID'], $Notify, 0);
                 }
                 if (stripos($Notify['Artists'], "|$Name|") === false) {
-                ?>
+            ?>
                     <a href="artist.php?action=notify&amp;artistid=<?= $ArtistID ?>&amp;auth=<?= $LoggedUser['AuthKey'] ?>" class="brackets"><?= t('server.artist.torrents_notify') ?></a>
                 <?  } else { ?>
                     <a href="artist.php?action=notifyremove&amp;artistid=<?= $ArtistID ?>&amp;auth=<?= $LoggedUser['AuthKey'] ?>" class="brackets"><?= t('server.artist.torrents_unnotify') ?></a>
@@ -565,68 +523,75 @@ View::show_header(($SubName ? '[' . $SubName . '] ' : '') . $Name, 'browse,bbcod
             <div class="TableContainer">
                 <table class="TableRequest Table" cellpadding="6" cellspacing="1" border="0" width="100%" id="requests">
                     <tr class="Table-rowHeader">
-                        <td class="Table-cell" style="width: 48%;">
+                        <td class="Table-cell">
                             <?= t('server.artist.request_name') ?>
                         </td>
-                        <td class="Table-cell">
+                        <td class="Table-cell TableRequest-cellValue">
                             <?= t('server.artist.vote') ?>
                         </td>
-                        <td class="Table-cell">
+                        <td class="Table-cell TableRequest-cellValue">
                             <?= t('server.artist.bounty') ?>
                         </td>
-                        <td class="Table-cell">
+                        <td class="Table-cell TableRequest-cellValue">
                             <?= t('server.artist.added') ?>
                         </td>
                     </tr>
                     <?
-                    $Tags = Requests::get_tags(array_keys($Requests));
-                    $Row = 'b';
-                    foreach ($Requests as $RequestID => $Request) {
-                        $CategoryName = $Categories[$Request['CategoryID'] - 1];
-                        $Title = display_str($Request['Title']);
-                        if ($CategoryName == 'Movies') {
-                            $ArtistForm = Requests::get_artists($RequestID);
-                            $ArtistLink = Artists::display_artists($ArtistForm, true, true);
-                            $FullName = $ArtistLink . "<a href=\"requests.php?action=view&amp;id=$RequestID\"><span dir=\"ltr\">$Title</span> [$Request[Year]]</a>";
-                        } elseif ($CategoryName == 'Audiobooks' || $CategoryName == 'Comedy') {
-                            $FullName = "<a href=\"requests.php?action=view&amp;id=$RequestID\"><span dir=\"ltr\">$Title</span> [$Request[Year]]</a>";
-                        } else {
-                            $FullName = "<a href=\"requests.php?action=view&amp;id=$RequestID\" dir=\"ltr\">$Title</a>";
-                        }
-
-                        if (!empty($Tags[$RequestID])) {
-                            $ReqTagList = array();
-                            foreach ($Tags[$RequestID] as $TagID => $TagName) {
-                                $ReqTagList[] = "<a href=\"requests.php?tags=$TagName\">" . display_str($TagName) . '</a>';
-                            }
-                            $ReqTagList = implode(', ', $ReqTagList);
-                        } else {
-                            $ReqTagList = '';
-                        }
+                    foreach ($Requests as $Request) {
+                        $RequestVotes = Requests::get_votes_array($Request['ID']);
+                        $RequestID = $Request['ID'];
+                        $RequestName = Torrents::group_name($Request, false);
+                        $FullName = "<a href=\"requests.php?action=view&amp;id=$RequestID\">$RequestName</a>";
+                        $Tags = $Request['Tags'];
                     ?>
-                        <tr class="TableRequest-row Table-row">
+                        <tr class="Table-row">
                             <td class="TableRequest-cellName Table-cell">
                                 <?= $FullName ?>
-                                <div class="tags"><?= $ReqTagList ?></div>
+                                <div class="torrent_info">
+                                    <?
+                                    ?>
+                                    <?= str_replace('|', ', ', $Request['CodecList']) . ' / ' . str_replace('|', ', ', $Request['SourceList']) . ' / ' . str_replace('|', ', ', $Request['ResolutionList']) . ' / ' . str_replace('|', ', ', $Request['ContainerList']) ?>
+                                </div>
                             </td>
-                            <td class="TableRequest-cellVotes Table-cell">
-                                <span id="vote_count_<?= $RequestID ?>"><?= $Request['Votes'] ?></span>
+                            <td class="TableRequest-cellVotes Table-cell TableRequest-cellValue">
+                                <span id="vote_count_<?= $Request['ID'] ?>"><?= count($RequestVotes['Voters']) ?></span>
                                 <? if (check_perms('site_vote')) { ?>
-                                    <input type="hidden" id="auth" name="auth" value="<?= $LoggedUser['AuthKey'] ?>" />
-                                    &nbsp;&nbsp; <a href="javascript:globalapp.requestVote(0, <?= $RequestID ?>)" class="brackets">+</a>
-                                <? } ?>
+                                    &nbsp;&nbsp; <a href="javascript:globalapp.requestVote(0, <?= $Request['ID'] ?>)" class="brackets">+</a>
+                                <?          } ?>
                             </td>
-                            <td class="TableRequest-cellBounty Table-cell">
-                                <span id="bounty_<?= $RequestID ?>"><?= Format::get_size($Request['Bounty']) ?></span>
+                            <td class="TableRequest-cellBounty Table-cell TableRequest-cellValue">
+                                <?= Format::get_size($RequestVotes['TotalBounty']) ?>
                             </td>
-                            <td class="TableRequest-cellCreatedAt TableRequest-cellTime Table-cell">
-                                <?= time_diff($Request['TimeAdded']) ?>
+                            <td class="TableRequest-cellCreatedAt TableRequest-cellValue Table-cell">
+                                <?= time_diff($Request['TimeAdded'], 1) ?>
                             </td>
                         </tr>
                     <?  } ?>
                 </table>
             </div>
-        <?
+
+            <?
+            foreach ($TorrentGroups as $ReleaseType => $GroupInfo) {
+                $DisplayName =  sectionTitle($ReleaseType);
+            ?>
+                <div class="Box">
+                    <div class="Box-header">
+                        <div id="torrents_<?= $ReleaseType ?>">
+                            <?= $DisplayName ?>
+                            <a class="floatright" href="#" onclick="$('.torrent_table_<?= $ReleaseType ?>').gtoggle(true); return false;">
+                                <?= t('server.artist.view') ?>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="Box-body torrent_table_<?= $ReleaseType ?>" id="torrent_table_<?= $ID ?>">
+                        <?
+                        $tableRender = new TorrentGroupCoverTableView($GroupInfo);
+                        $tableRender->render();
+                        ?>
+                    </div>
+                </div>
+            <?
+            }
         }
 
         // Similar Artist Map
@@ -654,7 +619,7 @@ View::show_header(($SubName ? '[' . $SubName . '] ' : '') . $Name, 'browse,bbcod
 
                 $Cache->cache_value("similar_positions_$ArtistID", $SimilarData, 3600 * 24);
             }
-        ?>
+            ?>
             <div id="similar_artist_map" class="box">
                 <div id="flipper_head" class="head">
                     <strong id="flipper_title"><?= t('server.artist.similar_artist_map') ?></strong>

@@ -415,7 +415,7 @@ if (count($_GET)) {
             if ($_GET['uploaded'] != 'buffer') {
                 $Where[] = implode(' AND ', num_compare('ROUND(Uploaded / 1024 / 1024 / 1024)', $_GET['uploaded'], $Upload1, $Upload2));
             } else {
-                $Where[] = implode(' AND ', num_compare('ROUND((Uploaded / 1024 / 1024 / 1024) - (Downloaded / 1024 / 1024 / 1023))', 'between', $Upload1 * 0.9, $Upload1 * 1.1));
+                $Where[] = implode(' AND ', num_compare('ROUND((Uploaded / 1024 / 1024 / 1024) - (Downloaded / 1024 / 1024 / 1024))', 'between', $Upload1 * 0.9, $Upload1 * 1.1));
             }
         }
 

@@ -55,7 +55,7 @@ $TagNegativeVotes = $TorrentDetails['TagNegativeVotes'];
 $RawName = Torrents::group_name($TorrentDetails, false);
 $DisplayName = "<span dir=\"ltr\">$RawName</span>";
 
-$Requests = get_group_requests($GroupID);
+$Requests = Requests::get_group_requests($GroupID);
 $HasRequest = false;
 if (empty($LoggedUser['DisableRequests']) && count($Requests) > 0) {
     $HasRequest = true;
@@ -990,6 +990,9 @@ View::show_header($Title, 'browse,comments,torrent,bbcode,recommend,cover_art,su
                             </td>
                             <td class="TableRequest-cellVotes Table-cell TableRequest-cellValue"><?= t('server.torrents.votes') ?></td>
                             <td class="TableRequest-cellBounty Table-cell TableRequest-cellValue"><?= t('server.torrents.bounty') ?></td>
+                            <td class="Table-cell TableRequest-cellValue">
+                                <?= t('server.requests.created') ?>
+                            </td>
                         </tr>
                         <? foreach ($Requests as $Request) {
                             $RequestVotes = Requests::get_votes_array($Request['ID']);
@@ -1013,6 +1016,9 @@ View::show_header($Title, 'browse,comments,torrent,bbcode,recommend,cover_art,su
                                 </td>
                                 <td class="TableRequest-cellBounty Table-cell TableRequest-cellValue">
                                     <?= Format::get_size($RequestVotes['TotalBounty']) ?>
+                                </td>
+                                <td class="TableRequest-cellCreatedAt TableRequest-cellValue Table-cell">
+                                    <?= time_diff($Request['TimeAdded'], 1) ?>
                                 </td>
                             </tr>
                         <?  } ?>

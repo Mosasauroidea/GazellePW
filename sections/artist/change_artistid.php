@@ -161,29 +161,33 @@ if (isset($_POST['confirm'])) {
 } else {
   View::show_header(t('server.artist.merging_artists'), 'PageChangeArtistId');
 ?>
-  <div class="BodyHeader">
-    <h2 class="BodyHeader-nav"><?= t('server.artist.confirm_merge') ?></h2>
-  </div>
-  <form class="merge_form" name="artist" action="artist.php" method="post">
-    <input type="hidden" name="action" value="change_artistid" />
-    <input type="hidden" name="auth" value="<?= $LoggedUser['AuthKey'] ?>" />
-    <input type="hidden" name="artistid" value="<?= $ArtistID ?>" />
-    <input type="hidden" name="newartistid" value="<?= $NewArtistID ?>" />
-    <input type="hidden" name="confirm" value="1" />
-    <div style="text-align: center;">
-      <p id="confirm_merge_note">
-        <?
-        $ArtistNameDisplay = display_str(Artists::display_artist(['Name' => $ArtistName, 'SubName' => $ArtistSubName], false));
-        $NewArtistNameDisplay = display_str(Artists::display_artist(['Name' => $NewArtistName, 'SubName' => $NewArtistSubName], false));
-        ?>
-        <?= t('server.artist.confirm_merge_body', ['Values' => [
-          "<a href='artist.php?id=${ArtistID}'>${ArtistNameDisplay} (${ArtistID})</a>",
-          "<a href='artist.php?id=${NewArtistID}'>${NewArtistNameDisplay} (${NewArtistID})</a>",
-        ]]) ?>
-      </p>
-      <input class="Button" type="submit" value="Confirm" />
+  <div class="LayoutBody">
+    <div class="BodyHeader">
+      <h2 class="BodyHeader-nav"><?= page_title_conn([t('server.artist.confirm_merge'), Artists::display_artist(['Name' => $ArtistName, 'SubName' => $ArtistSubName])]); ?></h2>
     </div>
-  </form>
+    <div class="BodyContent">
+      <form class="merge_form" name="artist" action="artist.php" method="post">
+        <input type="hidden" name="action" value="change_artistid" />
+        <input type="hidden" name="auth" value="<?= $LoggedUser['AuthKey'] ?>" />
+        <input type="hidden" name="artistid" value="<?= $ArtistID ?>" />
+        <input type="hidden" name="newartistid" value="<?= $NewArtistID ?>" />
+        <input type="hidden" name="confirm" value="1" />
+        <div>
+          <p id="confirm_merge_note">
+            <?
+            $ArtistNameDisplay = display_str(Artists::display_artist(['Name' => $ArtistName, 'SubName' => $ArtistSubName], false));
+            $NewArtistNameDisplay = display_str(Artists::display_artist(['Name' => $NewArtistName, 'SubName' => $NewArtistSubName], false));
+            ?>
+            <?= t('server.artist.confirm_merge_body', ['Values' => [
+              "<a href='artist.php?id=${ArtistID}'>${ArtistNameDisplay} (${ArtistID})</a>",
+              "<a href='artist.php?id=${NewArtistID}'>${NewArtistNameDisplay} (${NewArtistID})</a>",
+            ]]) ?>
+          </p>
+          <input class="Button" type="submit" value="Confirm" />
+        </div>
+      </form>
+    </div>
+  </div>
 <?
   View::show_footer();
 }

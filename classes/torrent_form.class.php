@@ -70,8 +70,8 @@ class TORRENT_FORM {
     }
 
     function head() {
+        $AnnounceURL = CONFIG['ANNOUNCE_URL'];
 ?>
-
         <div class="Form">
             <?
             if ($this->Error) {
@@ -80,6 +80,14 @@ class TORRENT_FORM {
             ?>
 
             <form class="Form-rowList FormUpload FormValidation Box <?= ($this->Error || ($this->Torrent && isset($this->Torrent['GroupID']))) ? "u-formUploadAutoFilled" : "" ?>" name="torrent" action="" enctype="multipart/form-data" method="post" id="upload_table">
+                <? if ($this->NewTorrent) { ?>
+                    <div style="text-align: center; margin: 5px 0px !important;">
+                        <?= t('server.upload.personal_announce') ?>:
+                        <br />
+                        <a onclick="return false" href="<?= $AnnounceURL . '/' . G::$LoggedUser['torrent_pass'] . '/announce' ?>"><?= t('server.upload.personal_announce_note') ?></a>
+                    </div>
+                <?      }
+                ?>
                 <div>
                     <input type="hidden" name="submit" value="true" />
                     <input type="hidden" name="auth" value="<?= G::$LoggedUser['AuthKey'] ?>" />

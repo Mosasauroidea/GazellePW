@@ -62,5 +62,6 @@ HeaderDonate
   text-align: center;
   font-size: 2rem;
   font-weight: bold;
+  font-style: italic;
   color: var(--global-color-success);
 }

@@ -245,4 +245,44 @@ class Requests {
         }
         return $RequestVotes;
     }
+
+    public static function get_group_requests($GroupID) {
+        if (empty($GroupID) || !is_number($GroupID)) {
+            return array();
+        }
+        global $DB, $Cache;
+
+        $Requests = $Cache->get_value("requests_group_$GroupID");
+        if ($Requests === false) {
+            $DB->query("
+			SELECT ID
+			FROM requests
+			WHERE GroupID = $GroupID
+				AND TimeFilled = '0000-00-00 00:00:00'");
+            $Requests = $DB->collect('ID');
+            $Cache->cache_value("requests_group_$GroupID", $Requests, 0);
+        }
+        return self::get_requests($Requests);
+    }
+
+    public static function get_artist_requests($ArtistID) {
+        $DB = G::$DB;
+        $Cache = G::$Cache;
+        $Requests = $Cache->get_value("artists_requests_$ArtistID");
+        if (!is_array($Requests)) {
+            $DB->query(
+                "SELECT
+				    r.ID
+			FROM requests AS r
+				LEFT JOIN requests_votes AS rv ON rv.RequestID = r.ID
+				LEFT JOIN requests_artists AS ra ON r.ID = ra.RequestID
+			WHERE ra.ArtistID = $ArtistID
+				AND r.TorrentID = 0
+			GROUP BY r.ID DESC"
+            );
+            $Requests = $DB->collect('ID');
+            $Cache->cache_value("artists_requests_$ArtistID", $Requests);
+        }
+        return self::get_requests($Requests);
+    }
 }
