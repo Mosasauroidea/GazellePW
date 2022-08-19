@@ -822,10 +822,22 @@ server.collages.manage_collage: |-
   Gerenciar coleção
 server.collages.manage_torrents: |-
   Gerenciar torrents
+server.collages.max_groups: |-
+  Máximo de grupos
+server.collages.max_groups_per_user: |-
+  Máximo de grupos por usuário
 server.collages.name: |-
   Nome
 server.collages.new_category: |-
   Categoria
+server.collages.new_category_note: |-
+  <li><strong>Tema:</strong> filmes relacionados a um determinado tema (como Wuxia Films, Filmes sobre a guerra de resistência contra o Japão);</li>
+  <li><strong>Introdução de gênero:</strong> introduções subjetivas sobre um gênero de filme;</li>
+  <li><strong>Empresa de produção:</strong> todos os filmes de uma determinada empresa de produção;</li>
+  <li><strong>Escolhas da equipe:</strong> filmes escolhidos pela equipe ou determinados usuários;</li>
+  <li><strong>Prêmios:</strong> todos os filmes que ganham ou são mencionados em um determinado prêmio (Golden Rooster Award, Hundred Flowers Award, etc.);</li>
+  <li><strong>Série:</strong> todos os filmes de uma determinada série (Homem de Ferro, Os Vingadores, etc.);</li>
+  <li><strong>Compilação crítica:</strong> todos os filmes de uma determinada compilação crítica (IMDb Top 1000, Douban Top 250 etc.);</li>
 server.collages.new_category_note2: |-
   <li><strong>Pessoal:</strong> Você pode colocar o que quiser aqui. Esta é a sua própria cor pessoal.</li>
 server.collages.new_create: |-
@@ -844,20 +856,46 @@ server.collages.personal_collage: |-
   Coleção pessoal
 server.collages.personal_collages: |-
   Coleções pessoais
+server.collages.please_select_a_category: |-
+  Por favor, selecione uma categoria
 server.collages.random_collages: |-
   Coleção aleatória
+server.collages.reason: |-
+  Motivo
 server.collages.recover_collages: |-
   Recuperar coleção
 server.collages.recover_deleted_collage: |-
   Recuperar coleção excluída
+server.collages.report: |-
+  Reportar
 server.collages.report_collage: |-
   Relatório de coleção
 server.collages.result_1: |-
   Você não marcou nenhuma coleção como favorito.
+server.collages.result_2: |-
+  Sua pesquisa não encontrou nada.
+server.collages.result_3: |-
+  Certifique-se de que todos os nomes estejam escritos corretamente ou tente tornar sua pesquisa menos específica.
+server.collages.search: |-
+  Pesquisa
+server.collages.search_ascending: |-
+  Ascendente
+server.collages.search_descending: |-
+  Descendente
+server.collages.search_descriptions: |-
+  Descrições
+server.collages.search_for: |-
+  Pesquisar em
 server.collages.search_name: |-
   Nome
+server.collages.search_subscribers: |-
+  Inscritos
 server.collages.search_time: |-
   Tempo
+server.collages.search_torrents: |-
+  Torrents
+server.collages.search_updated: |-
+  Atualizado
 server.collages.selected_collage_author: |-
   Autor
 server.collages.selected_collage_category: |-
@@ -868,14 +906,34 @@ server.collages.sorting: |-
   Classificação
 server.collages.statistics: |-
   Estatísticas
+server.collages.subscribe: |-
+  Inscrever-se
 server.collages.subscribed_collages: |-
   Coleções inscritas
+server.collages.subscribers: |-
+  Inscritos
 server.collages.tags: |-
   Tags (separadas por vírgula)
+server.collages.the_description_must_between: |-
+  A descrição deve ter entre 10 e 65535 caracteres
+server.collages.the_name_must_between: |-
+  O nome deve ter entre 3 e 100 caracteres
 server.collages.top_artists: |-
   Artistas Populares
+server.collages.top_contributors: |-
+  Maiores Contribuidores
 server.collages.top_tags: |-
   Top Tags
+server.collages.tweak: |-
+  Ajustar
+server.collages.tweak_title: |-
+  Modificar uma linha individual
+server.collages.type: |-
+  Tipo
+server.collages.unsubscribe: |-
+  Desinscrever
+server.collages.updated: |-
+  Atualizado
 server.collages.user_one: |-
   Usuário
 server.collages.user_s_personal_collage: |-
@@ -886,48 +944,210 @@ server.collages.your_bookmarked_collages: |-
   Suas coleções favoritas
 server.collages.your_personal_collage_must: |-
   O título da coleção pessoal deve incluir seu nome de usuário.
+server.comments.artist_comments: |-
+  Comentários do artista
+server.comments.artist_comments_left_by_user: |-
+  Comentários do artista deixados por %s
 server.comments.collages_created_by: |-
   coleções criadas por %s
 server.comments.comments_left_on_collages_user_created: |-
   Comentários deixados em coleções %s criados
 server.comments.comments_left_on_collages_user_has_contributed_to: |-
   Comentários restantes em coleções %s contribuíram para
+server.comments.comments_left_on_requests_user_created: |-
+  %s&nbsp;criado
+server.comments.comments_left_on_requests_user_has_voted_on: |-
+  Comentários restantes nas solicitações %s votaram em
+server.comments.comments_left_on_torrents_user_has_uploaded: |-
+  Comentários deixados em torrents %s enviados
 server.comments.display_comments_left_on_collages_user_has_contributed_to: |-
   Exibir comentários deixados em coleções %s contribuído para
 server.comments.display_comments_left_on_collages_user_has_made: |-
   Exibir comentários deixados em coleções %s feitos
+server.comments.display_comments_left_on_requests_user_created: |-
+  Exibir comentários restantes nas solicitações %s criadas
+server.comments.display_comments_left_on_requests_user_has_made: |-
+  Exibir comentários restantes nas solicitações %s feitas
+server.comments.display_comments_left_on_requests_user_has_voted_on: |-
+  Exibir comentários restantes nas solicitações %s votadas em
+server.comments.display_comments_left_on_torrents_user_has_made: |-
+  Mostrar comentários deixados nos torrents %s feitos
+server.comments.display_comments_left_on_torrents_user_has_uploaded: |-
+  Mostrar comentários deixados nos torrents %s enviados
+server.comments.display_comments_left_on_users_collages: |-
+  Mostrar comentários restantes em %s
+server.comments.no_results: |-
+  Sem resultados.
+server.comments.request_comments: |-
+  Solicitar comentários
+server.comments.request_comments_left_by_user: |-
+  Solicitar comentários deixados por %s
+server.comments.space_on_space: |-
+  &nbsp;em&nbsp;
+server.comments.torrent_comments: |-
+  Comentários do torrent
+server.comments.torrent_comments_left_by: |-
+  Comentários do torrent deixados por %s
+server.comments.user_has: |-
+  %s tem
+server.comments.username_space: |-
+  %s
+server.comments.you: |-
+  você
+server.comments.you_ve: |-
+  Você tem
 server.comments.your_collages: |-
   suas coleções
+server.common.actions: |-
+  Ações
+server.common.add_bookmark: |-
+  Adicionar favorito
+server.common.artists: |-
+  Artistas
+server.common.bonus: |-
+  Bônus
 server.common.collages: |-
   Playlists
+server.common.collapse_this_edition_title: |-
+  Recolher esta edição. Mantenha [Command] <em>(Mac)</em> ou [Ctrl] <em>(PC)</em> enquanto clica para recolher todas as edições nesse grupo de torrents.
+server.common.collapse_this_group_title: |-
+  Recolher este grupo. Mantenha [Command] <em>(Mac)</em> ou [Ctrl] <em>(PC)</em> enquanto clica para recolher todos os grupos nesta página.
+server.common.comma_separated: |-
+  Separados por vírgula
+server.common.comma_separated_edition: |-
+  Separados por vírgula
+server.common.countries_and_regions: |-
+  Países e regiões
 server.common.director: |-
   Diretor
+server.common.douban_rating: |-
+  Classificação Douban
 server.common.edit: |-
   Editar
+server.common.edition_info: |-
+  Informações da edição
+server.common.enable_requests: |-
+  &nbsp;Permitir solicitações
+server.common.error_403_description: |-
+  Você acabou de tentar acessar uma página que não tem permissão suficiente para visualizar.
+server.common.error_403_title: |-
+  Erro 403
+server.common.error_404_description: |-
+  Você acabou de tentar ir a uma página que não existe.
+server.common.error_404_title: |-
+  Erro 404
+server.common.external_subtitles: |-
+  Externo
+server.common.fltoken: |-
+  FL token
+server.common.format: |-
+  Formato
+server.common.github: |-
+  GitHub
+server.common.gpw_rating: |-
+  Classificação da GPW
 server.common.hide: |-
   Esconder
+server.common.image_host: |-
+  Host de imagem
+server.common.imdb_rating: |-
+  Classificação IMDb
+server.common.in_torrent_hard_subtitles: |-
+  Codificado
+server.common.in_torrent_subtitles: |-
+  Codificado
 server.common.include_all_aliases: |-
   Incluir todos os pseudônimos
+server.common.index: |-
+  Índice
+server.common.invalid_input_description: |-
+  Algo estava errado com a entrada fornecida com o seu pedido e o servidor se recusa a cumpri-la.
+server.common.invalid_input_title: |-
+  Entrada Inválida
+server.common.invalid_request_description: |-
+  Algo estava errado com sua solicitação e o servidor se recusa a cumpri-la.
+server.common.invalid_request_title: |-
+  Solicitação inválida
+server.common.lang_en: |-
+  Inglês
+server.common.language: |-
+  Idioma
+server.common.language_region: |-
+  Idioma e região
 server.common.log: |-
   Log
+server.common.logout: |-
+  Sair
+server.common.movie_name_title: |-
+  Título do filme ou ID IMDb
 server.common.my_badges: |-
   Medalhas
 server.common.my_comments: |-
   Comentários
+server.common.my_notify: |-
+  RSS
+server.common.n_fl_token_one: |-
+  1 token Freeleech
+server.common.n_fl_token_other: |-
+  %s tokens Freeleech
 server.common.no_torrent_tags: |-
   Sem tags de torrent
+server.common.not_seeded_sure_use_fl: |-
+  Aviso! Este torrent não esta em seed no momento, você tem certeza que quer usar %s aqui?
+server.common.profile: |-
+  Perfil
+server.common.rating: |-
+  Classificação
 server.common.remove: |-
   Remover
+server.common.remove_bookmark: |-
+  Remover favorito
+server.common.rename: |-
+  Renomear
+server.common.report: |-
+  Reportar
+server.common.rss: |-
+  RSS
+server.common.rt_rating: |-
+  Classificação de Tomatoes rating
+server.common.search: |-
+  Pesquisa
 server.common.seeders: |-
   Seeders
 server.common.size: |-
   Tamanho
+server.common.ssp: |-
+  Proxy
+server.common.subscribe: |-
+  Inscrever-se
+server.common.subtitle: |-
+  Legenda
+server.common.summary: |-
+  Sumário
+server.common.sure_use_fl: |-
+  Tem certeza que deseja usar %s aqui?
 server.common.tags: |-
   Tags
+server.common.telegram: |-
+  Telegram
 server.common.time: |-
   Tempo
+server.common.toggle: |-
+  Alternar
+server.common.top_10: |-
+  Top 10
 server.common.torrent: |-
   Torrent
+server.common.torrents: |-
+  Torrents
+server.common.type: |-
+  Tipo
+server.common.unexpected_error_description: |-
+  Ocorreu um erro inesperado.
+server.common.unexpected_error_title: |-
+  Erro Inesperado
+server.common.unsubscribe: |-
+  Desinscrever
 server.common.user: |-
   Usuário
 server.common.year: |-
@@ -938,14 +1158,112 @@ server.donate.history: |-
   Histórico
 server.donate.personal_collages: |-
   Coleção(ões) Pessoal
+server.editioninfo.2_disc_set: |-
+  Conjunto de 2-Discos
+server.editioninfo.2_in_1: |-
+  2em1
+server.editioninfo.2d_3d_edition: |-
+  Edição 2D/3D
+server.editioninfo.3d_anaglyph: |-
+  Anáglifo 3D
+server.editioninfo.3d_full_sbs: |-
+  SBS completo em 3D
+server.editioninfo.3d_half_ou: |-
+  Metade da UA 3D
+server.editioninfo.3d_half_sbs: |-
+  SBS 3D Metade
+server.editioninfo.4k_remaster: |-
+  Remasterização 4k
+server.editioninfo.4k_restoration: |-
+  Restauração 4K
+server.editioninfo.director_s_cut: |-
+  Corte do Diretor
+server.editioninfo.dolby_atmos: |-
+  Dolby Atmos
+server.editioninfo.dolby_vision: |-
+  Visão Dolby
+server.editioninfo.dts_x: |-
+  DTS:X
+server.editioninfo.dual_audio: |-
+  Dual Audio
+server.editioninfo.editions: |-
+  Edições
+server.editioninfo.english_dub: |-
+  Dublagem em Inglês
+server.editioninfo.extended_edition: |-
+  Edição Estendida
+server.editioninfo.extras: |-
+  Extras
+server.editioninfo.features: |-
+  Características
+server.editioninfo.hdr10: |-
+  HDR10
+server.editioninfo.hdr10plus: |-
+  HDR10+
+server.editioninfo.masters_of_cinema: |-
+  Mestres do Cinema
+server.editioninfo.remaster: |-
+  Remasterização
+server.editioninfo.remux: |-
+  Remux
+server.editioninfo.rifftrax: |-
+  Rifftrax
+server.editioninfo.theatrical_cut: |-
+  Corte Cinema
+server.editioninfo.uncut: |-
+  Uncut
+server.editioninfo.unrated: |-
+  Sem Avaliação
+server.editioninfo.warner_archive_collection: |-
+  Coleção de Arquivo Warner
+server.editioninfo.with_commentary: |-
+  Com comentários
+server.forums.after: |-
+  Depois
+server.forums.answers: |-
+  Respostas
+server.forums.as_system: |-
+  Como sistema
 server.forums.author: |-
   Autor
+server.forums.auto_locked: |-
+  Bloquear automaticamente
+server.forums.before: |-
+  Antes
+server.forums.blank: |-
+  Vazio
+server.forums.blank_show_results: |-
+  Em branco - Exibir os resultados!
 server.forums.body: |-
   Corpo
+server.forums.bonus: |-
+  Bônus
+server.forums.bonus_giver: |-
+  Doador Bônus
+server.forums.bonus_giving: |-
+  Doação de Bônus
+server.forums.bonus_reward: |-
+  Recompensa Bônus
 server.forums.by: |-
   por
+server.forums.by_user_just_now: |-
+  &nbsp;Agora mesmo
+server.forums.cant_like_yourself: |-
+  Você não pode curtir sua própria publicação.
+server.forums.catch_up: |-
+  Capturar até
+server.forums.change_specific_rules: |-
+  Alterar regras específicas
 server.forums.check_all: |-
   Selecionar todos
+server.forums.checkbox_merge: |-
+  Unir
+server.forums.checkbox_subscribe: |-
+  Inscrever-se
+server.forums.closed: |-
+  Fechado
+server.forums.comment_optional: |-
+  Comentário (opcional)
 server.forums.comments: |-
   Comentários
 server.forums.featured: |-
@@ -954,6 +1272,12 @@ server.forums.like: |-
   Curtir
 server.forums.locked: |-
   Bloqueado
+server.forums.report: |-
+  Reportar
+server.forums.search: |-
+  Pesquisa
+server.forums.search_in: |-
+  Pesquisar em
 server.forums.thread_id: |-
   ID do tópico
 server.forums.title: |-
@@ -965,6 +1289,8 @@ server.inbox.body: |-
 server.inbox.get_special_rank_two_pm: |-
   Parabéns por alcançar a [url=wiki.php?action=article&id=277]Classificação Especial nº 2[/url]! Você pode Você recebeu uma [url=badge.php]Distintivo de Doador[/url] Imunidade! Divirta-se!
   {{CONFIG['SITE_NAME']}} Equipe
+server.inbox.no_results: |-
+  Sem resultados.
 server.inbox.reply: |-
   Responder
 server.inbox.user: |-
@@ -987,6 +1313,8 @@ server.log.time: |-
   Tempo
 server.login.enter_valid_email: |-
   Por favor, insira um endereço de email válido.
+server.login.reason: |-
+  Motivo
 server.permissions.admin_manage_badges: |-
   Pode gerenciar medalhas
 server.permissions.events_reward_badges: |-
@@ -1009,6 +1337,8 @@ server.permissions.site_delete_tag: |-
   Pode excluir tags
 server.permissions.site_tag_aliases_read: |-
   Pode ver a lista de pseudônimos de tags
+server.permissions.torrents: |-
+  Torrents
 server.pub.space_new_collage_update_one: |-
   &nbsp;nova atualização de coleção
 server.pub.space_new_collage_update_other: |-
@@ -1025,6 +1355,10 @@ server.reports.new: |-
   Novo
 server.reports.no_collage_with_the_reported_id_found: |-
   Nenhuma coleção com o ID reportado foi encontrada
+server.reports.reason: |-
+  Motivo
+server.reports.report: |-
+  Reportar
 server.reports.report_collage_guide_1: |-
   A opção de coleção do relatório é reportar uma coleção que quebra uma das diretrizes de colagem encontradas na <a href="rules.php?p=collages">página de regras de coleção</a>.
 server.reports.report_collage_guide_2: |-
@@ -1039,6 +1373,14 @@ server.reports.user: |-
   Usuário
 server.reportsv2.comments: |-
   Comentários
+server.reportsv2.pm_reason: |-
+  Motivo
+server.reportsv2.reason: |-
+  Motivo
+server.reportsv2.report: |-
+  Reportar
+server.reportsv2.type: |-
+  Tipo
 server.requests.all: |-
   Todos
 server.requests.any: |-
@@ -1055,6 +1397,8 @@ server.requests.image: |-
   Imagem
 server.requests.name: |-
   Nome da solicitação
+server.requests.reason: |-
+  Motivo
 server.requests.search_terms: |-
   Termos de pesquisa
 server.requests.tags: |-
@@ -1065,6 +1409,8 @@ server.requests.tags_note: |-
   As tags devem ser separadas por vírgulas, e você deve usar um período ('.') para separar as palavras dentro de uma tag&#8202;&mdash;&#8202;ex. '<strong class='u-colorSuccess'>imdb.top.500</strong>'.
   <br /><br />
   Há uma lista de tags oficiais à esquerda da caixa de texto. Por favor, use estas tags em vez de marcadores 'não oficiais' (por exemplo, use o drama '<strong class='u-colorSuccess'>oficial</strong>' tag, em vez de uma tag '<strong class='u-colorWarning'>holy.crap</strong>' tag.).
+server.requests.top_contributors: |-
+  Maiores Contribuidores
 server.requests.year: |-
   Ano
 server.rules.collages_title: |-
@@ -1087,6 +1433,8 @@ server.sitehistory.comma_separated_tags: |-
   Tags separadas por vírgulas
 server.sitehistory.edit: |-
   Editar
+server.sitehistory.search: |-
+  Pesquisa
 server.sitehistory.tags: |-
   Tags
 server.sitehistory.tags_placeholder: |-
@@ -1095,6 +1443,8 @@ server.sitehistory.title: |-
   Título
 server.staffpm.preview: |-
   Pré-visualizar
+server.staffpm.reason: |-
+  Motivo
 server.staffpm.reply: |-
   Responder
 server.staffpm.resolved: |-
@@ -1103,6 +1453,10 @@ server.stats.stats: |-
   Estatísticas
 server.subtitles.new: |-
   Novo
+server.subtitles.reason: |-
+  Motivo
+server.subtitles.search: |-
+  Pesquisa
 server.subtitles.subtitle_rules: |-
   <ul>
   <li id='r3.6.1'></strong>1.</a> <strong>A legenda carregada por um usuário deve ser sincronizada com o arquivo de vídeo específico, caso contrário ela será apagada diretamente.</strong>
@@ -1116,12 +1470,18 @@ server.subtitles.subtitle_rules: |-
   <li id='r3.6.5'><a href='rules.php?p=upload#3.6.5'>5.</a> <strong>Por favor carregue um único arquivo de legenda para um filme. NÃO compile arquivos de legendas de idiomas diferentes. </strong>Por exemplo, incluindo a SRT simplificada chinesa, a SRT tradicional chinesa e a chinesa e a inglesa SRT em um único arquivo não é permitido. Devem ser enviados separadamente. <strong>Para miniseries, é permitido comprimir legendas para episódios juntos. </strong>você tem que ter certeza de que os nomes dos arquivos da legenda e do vídeo são correspondentes.
   </li>
   </ul>
+server.tools.Bonus: |-
+  Bônus
 server.tools.added: |-
   Adicionado
 server.tools.all: |-
   Todos
+server.tools.ascending: |-
+  Ascendente
 server.tools.author: |-
   Autor
+server.tools.auto_enable_requests_search: |-
+  Pesquisa
 server.tools.badge: |-
   Medalha(s)
 server.tools.badge_auto: |-
@@ -1154,6 +1514,8 @@ server.tools.badge_tag: |-
   Tag
 server.tools.badge_to: |-
   para
+server.tools.badge_type: |-
+  Tipo
 server.tools.badge_withdraw: |-
   Retirar
 server.tools.badges_giving: |-
@@ -1170,6 +1532,8 @@ server.tools.chinese_dubbed: |-
   Dublado em chinês
 server.tools.client_whitelist: |-
   Whitelist do Cliente
+server.tools.descending: |-
+  Descendente
 server.tools.description: |-
   Descrição
 server.tools.dnu_comment: |-
@@ -1180,6 +1544,10 @@ server.tools.enter_a_single_tag_to_search_for: |-
   Insira uma única tag para pesquisar.
 server.tools.h2_official_tags_manager: |-
   Gerenciador Oficial de Tags
+server.tools.handled_after: |-
+  Depois
+server.tools.handled_before: |-
+  Antes
 server.tools.history: |-
   Histórico
 server.tools.icon: |-
@@ -1210,24 +1578,38 @@ server.tools.paste_a_list_of_collage_or_torrent_group_urls: |-
   Colar uma lista de coleções de grupo ou de grupos de torrents
 server.tools.proper_tag: |-
   Tag adequada
+server.tools.reason: |-
+  Motivo
+server.tools.remark: |-
+  Motivo
 server.tools.remove: |-
   Remover
 server.tools.rename_to_merge_with_tag: |-
   Renomear para/mesclar com a tag
+server.tools.search_ip: |-
+  Pesquisa
 server.tools.sort: |-
   Ordenar
 server.tools.sort_by_bad_tags: |-
   Ordenar por tags ruins
 server.tools.sort_by_good_tags: |-
   Ordenar por tags boas
+server.tools.submitted_after: |-
+  Depois
+server.tools.submitted_before: |-
+  Antes
 server.tools.tag: |-
   Tag
 server.tools.tag_aliases: |-
   Pseudônimo de Tag
+server.tools.torrents: |-
+  Torrents
 server.tools.user: |-
   Usuário
 server.tools.view: |-
   Visualizar
+server.tools.year: |-
+  %s
 server.top10.all: |-
   Todos
 server.top10.any: |-
@@ -1252,6 +1634,12 @@ server.top10.tags_comma: |-
   Tags (separadas por vírgula)
 server.top10.top_10_tags: |-
   As 10 Principais Tags
+server.top10.top_torrents: |-
+  Torrents
+server.top10.torrents: |-
+  Torrents
+server.top10.type: |-
+  Tipo
 server.top10.user: |-
   Usuário
 server.torrents.add_tag: |-
@@ -1262,14 +1650,20 @@ server.torrents.any: |-
   Qualquer
 server.torrents.artist_alias_id: |-
   ID do Artista
+server.torrents.asc: |-
+  Ascendente
 server.torrents.bounty: |-
   Recompensa
+server.torrents.catch_up: |-
+  Capturar até
 server.torrents.cinematographer: |-
   Cinematográfico
 server.torrents.cn_quality_slot_requirements: |-
   Deve conter uma legenda chinesa codificada. Legendas não podem ser mais do que chinesa e inglês. A qualidade do vídeo deve ser a melhor possível.
 server.torrents.composer: |-
   Compositor
+server.torrents.desc: |-
+  Descendente
 server.torrents.director: |-
   Diretor
 server.torrents.diy_slot_requirements: |-
@@ -1296,6 +1690,8 @@ server.torrents.hide: |-
   Esconder
 server.torrents.hide_tags: |-
   Esconder Tags
+server.torrents.imdb_language: |-
+  Idioma
 server.torrents.like: |-
   Curtir
 server.torrents.movie_producer: |-
@@ -1306,6 +1702,8 @@ server.torrents.period: |-
   .
 server.torrents.quality_slot_requirements: |-
   É melhor conter uma legenda chinesa codificada. Um torrent sem legendas chinesas e inglesas seria marcado como "Trumpable". A qualidade do vídeo deve ser o melhor possível.
+server.torrents.reason: |-
+  Motivo
 server.torrents.remove: |-
   Remover
 server.torrents.remove_tag: |-
@@ -1314,16 +1712,28 @@ server.torrents.remux_slot_requirements: |-
   É melhor conter uma legenda chinesa codificada. Um torrent sem legendas chinesas e inglesas seria marcado como "Trumpable".&nbsp;
 server.torrents.reply: |-
   Responder
+server.torrents.report: |-
+  Reportar
 server.torrents.request_an_edit: |-
   Solicitar uma Edição
 server.torrents.revert: |-
   Reverter para esta revisão
+server.torrents.search: |-
+  Pesquisa
+server.torrents.search_empty_1: |-
+  Sua pesquisa não encontrou nada.
+server.torrents.search_empty_2: |-
+  Certifique-se de que todos os nomes estejam escritos corretamente ou tente tornar sua pesquisa menos específica.
+server.torrents.search_requests: |-
+  Pesquisa
 server.torrents.seeders: |-
   Seeders
 server.torrents.size: |-
   Tamanho
 server.torrents.sub_title: |-
   Título Chinês
+server.torrents.subscribe: |-
+  Inscrever-se
 server.torrents.tag: |-
   Tags
 server.torrents.tag_rules: |-
@@ -1346,6 +1756,8 @@ server.torrents.title: |-
   Título
 server.torrents.torrent: |-
   Torrent
+server.torrents.unsubscribe: |-
+  Desinscrever
 server.torrents.user: |-
   Usuário
 server.torrents.view_tags: |-
@@ -1382,6 +1794,8 @@ server.upload.copied: |-
   Copiado
 server.upload.director: |-
   Diretor
+server.upload.english: |-
+  Inglês
 server.upload.english_name: |-
   Nome em inglês
 server.upload.last_update: |-
@@ -1424,10 +1838,14 @@ server.upload.torrent_info_how_to_blockquote: |-
   Por favor consulte nossas <a href="rules.php?p=upload" target="_blank">regras</a> para mais informações sobre informações obrigatórias.<br/><br/>
   <strong>Legendas:</strong> Por favor observe as diferenças entre a legenda forçada e a legenda codificada, você pode ler <a href="wiki.php?action=article&id=44" target="_blank">esse artigo</a>.<br/><br/>
   <strong>Feature torrent:</strong> Somente <strong class="u-colorWarning">filmes não-chineses</strong> podem usar estas marcas (dialectos como Cantonês são considerados chineses).
+server.upload.type: |-
+  Tipo
 server.upload.writer: |-
   Escritor
 server.upload.year: |-
   Ano
+server.user.after: |-
+  Depois
 server.user.anyone: |-
   Qualquer
 server.user.at_least_one_of_these_tags: |-
@@ -1436,8 +1854,12 @@ server.user.autocomp_title: |-
   O preenchimento automático tentará prever a palavra ou frase que você está digitando. Selecionando &quot;Em todos os lugares&quot; ativará o preenchimento automático nos campos de artista e tag em todo o site. A seleção de &quot;Somente pesquisas&quot; ativará o preenchimento automático nas pesquisas.
 server.user.badge_center: |-
   Centro de Medalha
+server.user.before: |-
+  Antes
 server.user.bounty: |-
   Recompensa
+server.user.closed: |-
+  Fechado
 server.user.collage_covers_all: |-
   Todos
 server.user.collage_subscriptions_title: |-
@@ -1446,6 +1868,12 @@ server.user.comma_seperated_languages_list: |-
   Lista separada por vírgulas&#8202;&mdash;&#8202;por exemplo, Chinês, Japonês, Inglês
 server.user.comma_seperated_tags_list: |-
   Lista separada por vírgulas&#8202;&mdash;&#8202;por exemplo ação, ficção científica, suspense
+server.user.community_arts: |-
+  Comentários do artista
+server.user.community_comms: |-
+  Comentários do torrent
+server.user.community_reqs: |-
+  Solicitar comentários
 server.user.customtitle: |-
   Título Personalizado
 server.user.donorforum_4: |-
@@ -1466,6 +1894,8 @@ server.user.name: |-
   Nome
 server.user.next_userclass_title4: |-
   Tempo
+server.user.next_userclass_title5: |-
+  Torrents
 server.user.none_of_these_tags: |-
   Nenhuma destas tags
 server.user.order: |-
@@ -1480,6 +1910,10 @@ server.user.para_badgedisplay_label: |-
   Permitir que outras pessoas vejam todas as medalhas que você possui
 server.user.para_stats: |-
   Estatísticas
+server.user.reason: |-
+  Motivo
+server.user.report: |-
+  Reportar
 server.user.statistics: |-
   Estatísticas
 server.user.stats: |-
@@ -1496,6 +1930,8 @@ server.user.view: |-
   Visualizar
 server.user.vote: |-
   Votar
+server.userhistory.catch_up: |-
+  Capturar até
 server.userhistory.collage: |-
   Playlist
 server.userhistory.hide: |-
@@ -1504,6 +1940,8 @@ server.userhistory.new: |-
   Novo
 server.userhistory.no_subscribed_collages: |-
   Nenhuma coleção assinada
+server.userhistory.search: |-
+  Pesquisa
 server.userhistory.subscribed_collages: |-
   Coleções inscritas
 server.userhistory.time: |-
@@ -1522,14 +1960,20 @@ server.wiki.article_edit: |-
   Editar
 server.wiki.article_history: |-
   Histórico
+server.wiki.article_language: |-
+  Idioma
 server.wiki.article_language_detail: |-
   Por favor, selecione o idioma em que a sua página wiki foi escrita. Se o artigo estiver escrito em um idioma diferente do chinês, você precisa incluir o URL da Wiki para o artigo chinês. Se você não vê o idioma na lista, por favor envie uma mensagem privada com a ID/URL do Wiki após a criação.
+server.wiki.article_language_select: |-
+  Idioma
 server.wiki.body: |-
   Corpo
 server.wiki.chinese: |-
   Chinês
 server.wiki.delete_aliases: |-
   Apagar pseudônimos
+server.wiki.english: |-
+  Inglês
 server.wiki.history_author: |-
   Autor
 server.wiki.history_new: |-
@@ -1542,5 +1986,9 @@ server.wiki.order_by: |-
   Ordenar por
 server.wiki.revision_history: |-
   Histórico de revisões para %s
+server.wiki.search: |-
+  Pesquisa
+server.wiki.search_in: |-
+  Pesquisar em
 server.wiki.title: |-
   Título
