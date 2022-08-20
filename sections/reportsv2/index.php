@@ -57,11 +57,10 @@ if (isset($_REQUEST['action'])) {
         case 'takeuploaderreply':
             include(CONFIG['SERVER_ROOT'] . '/sections/reportsv2/takeuploaderreply.php');
             break;
+        case 'view':
+            include(CONFIG['SERVER_ROOT'] . '/sections/reportsv2/views.php');
+            break;
     }
 } else {
-    if (isset($_GET['view'])) {
-        include(CONFIG['SERVER_ROOT'] . '/sections/reportsv2/static.php');
-    } else {
-        include(CONFIG['SERVER_ROOT'] . '/sections/reportsv2/views.php');
-    }
+    include(CONFIG['SERVER_ROOT'] . '/sections/reportsv2/static.php');
 }

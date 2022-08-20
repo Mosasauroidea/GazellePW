@@ -1066,7 +1066,7 @@ WHERE xs.uid =" . $UserID . " and xs.tstamp >= unix_timestamp(date_format(now(),
             }
             if (CONFIG['ENABLE_BADGE']) {
             ?>
-                <div class="Box">
+                <div class="Post">
                     <script>
                         var i = 0;
 
@@ -1088,11 +1088,15 @@ WHERE xs.uid =" . $UserID . " and xs.tstamp >= unix_timestamp(date_format(now(),
                         }
                     </script>
 
-                    <div class="Box-header"><a href="/badges.php"><?= t('server.user.badge_center') ?></a>
-                        <span style="float: right;"><a href="#" onclick="badgesDisplay()"><?= t('server.common.hide') ?></a></span>
+                    <div class="Post-header">
+                        <div class="Post-headerLeft">
+                            <div class="Post-headerTitle"><a href="/badges.php"><?= t('server.user.badge_center') ?></a></div>
+                        </div>
+                        <div class="Post-headerActions">
+                            <span><a href="#" onclick="badgesDisplay()"><?= t('server.common.hide') ?></a></span>
+                        </div>
                     </div>
-
-                    <div id="badge_display_head" class="Box-body badge_display">
+                    <div id="badge_display_head" class="Post-body badge_display">
                         <?
 
                         foreach ($WearOrDisplay['Profile'] as $BadgeID) {
@@ -1134,13 +1138,17 @@ WHERE xs.uid =" . $UserID . " and xs.tstamp >= unix_timestamp(date_format(now(),
             }
             ?>
 
-            <div class="Box">
-                <div class="Box-header">
-                    <div><?= !empty($InfoTitle) ? $InfoTitle : t('server.user.infotitle'); ?>
-                        <a class="floatright" href="#" onclick="$('#profilediv').gtoggle(); this.innerHTML = (this.innerHTML == '<?= t('server.common.hide') ?>' ? '<?= t('server.common.show') ?>' : '<?= t('server.common.hide') ?>'); return false;"><?= t('server.common.hide') ?></a>
+            <div class="Post">
+                <div class="Post-header">
+                    <div class="Post-headerLeft">
+                        <div class="Post-headerTitle"><?= !empty($InfoTitle) ? $InfoTitle : t('server.user.infotitle'); ?>
+                        </div>
+                    </div>
+                    <div class="Post-headerActions">
+                        <a class=" floatright" href="#" onclick="$('#profilediv').gtoggle(); this.innerHTML = (this.innerHTML == '<?= t('server.common.hide') ?>' ? '<?= t('server.common.show') ?>' : '<?= t('server.common.hide') ?>'); return false;"><?= t('server.common.hide') ?></a>
                     </div>
                 </div>
-                <div class="Box-body HtmlText PostArticle profileinfo" id="profilediv">
+                <div class="Post-body HtmlText PostArticle profileinfo" id="profilediv">
                     <?
                     if (!$Info) {
                     ?>
@@ -1181,9 +1189,11 @@ WHERE xs.uid =" . $UserID . " and xs.tstamp >= unix_timestamp(date_format(now(),
                 }
                 if (!empty($RecentSnatches)) {
             ?>
-                    <div class="Box" id="recent_snatches">
-                        <div class="Box-header"> <?= t('server.user.last_torrents') ?></div>
-                        <div class="Box-body">
+                    <div class="Post" id="recent_snatches">
+                        <div class="Post-header">
+                            <div class="Post-headerTitle"><?= t('server.user.last_torrents') ?></div>
+                        </div>
+                        <div class="Post-body">
                             <?
                             $tableRender = new TorrentGroupCoverTableView($RecentSnatches);
                             $tableRender->render(['UseTorrentID' => true]);
@@ -1218,9 +1228,11 @@ WHERE xs.uid =" . $UserID . " and xs.tstamp >= unix_timestamp(date_format(now(),
                 }
                 if (!empty($RecentUploads)) {
                 ?>
-                    <div class="Box" id="recent_uploads">
-                        <div class="Box-header"> <?= t('server.user.last_uploads') ?></div>
-                        <div class="Box-body">
+                    <div class="Post" id="recent_uploads">
+                        <div class="Post-header">
+                            <div class="Post-headerTitle"><?= t('server.user.last_uploads') ?></div>
+                        </div>
+                        <div class="Post-body">
                             <?
                             $tableRender = new TorrentGroupCoverTableView($RecentUploads);
                             $tableRender->render(['UseTorrentID' => true]);
@@ -1230,12 +1242,11 @@ WHERE xs.uid =" . $UserID . " and xs.tstamp >= unix_timestamp(date_format(now(),
                 <?
                 }
             }
-
             $DB->query("
 	SELECT ID, Name
 	FROM collages
 	WHERE UserID = '$UserID'
-		AND CategoryID = '0'
+		AND CategoryID = '$PersonalCollageCategoryCat'
 		AND Deleted = '0'
 	ORDER BY Featured DESC,
 		Name ASC");
@@ -1244,76 +1255,41 @@ WHERE xs.uid =" . $UserID . " and xs.tstamp >= unix_timestamp(date_format(now(),
             foreach ($Collages as $CollageInfo) {
                 list($CollageID, $CName) = $CollageInfo;
                 $DB->query("
-		SELECT ct.GroupID,
-			tg.WikiImage,
-			tg.CategoryID
+		SELECT ct.GroupID
 		FROM collages_torrents AS ct
-			JOIN torrents_group AS tg ON tg.ID = ct.GroupID
 		WHERE ct.CollageID = '$CollageID'
 		ORDER BY ct.Sort
 		LIMIT 5");
-                $Collage = $DB->to_array(false, MYSQLI_ASSOC, false);
+                $GroupIDs = $DB->collect('GroupID');
+                $Groups = Torrents::get_groups($GroupIDs, true, false, false);
                 ?>
-                <table class="Table TableCollage" id="collage<?= $CollageID ?>_box" cellpadding="0" cellspacing="0" border="0">
-                    <tr class="Table-rowHeader">
-                        <td class="Table-cell" colspan="5">
-                            <span style="float: left;">
-                                <?= display_str($CName) ?> - <a href="collages.php?id=<?= $CollageID ?>">See full</a>
+                <div class="Post" id="collage<?= $CollageID ?>_box">
+                    <div class="Post-header">
+                        <div class="Post-headerLeft">
+                            <div class="Post-headerTitle">
+                                <?= $CName ?>
+                            </div>
+                        </div>
+                        <div class="Post-headerActions">
+                            <span>
+                                <a href="collages.php?id=<?= $CollageID ?>">See full</a>
                             </span>
-                            <span style="float: right;">
-                                <a href="#" onclick="$('#collage<?= $CollageID ?>_box .images').gtoggle(); this.innerHTML = (this.innerHTML == 'Hide' ? 'Show' : 'Hide'); return false;"><?= $FirstCol ? 'Hide' : 'Show' ?></a>
+                            -
+                            <span>
+                                <a href="#" onclick="$('#collage<?= $CollageID ?>_box .Post-body').gtoggle(); this.innerHTML = (this.innerHTML == 'Hide' ? 'Show' : 'Hide'); return false;"><?= $FirstCol ? 'Hide' : 'Show' ?></a>
                             </span>
-                        </td>
-                    </tr>
-                    <tr class="Table-row images<?= $FirstCol ? '' : ' hidden' ?>">
-                        <? foreach ($Collage as $C) {
-                            $Group = Torrents::get_groups(array($C['GroupID']), true, true, false);
-                            extract(Torrents::array_group($Group[$C['GroupID']]));
-                            $Name = Torrents::group_name($Group, false);
-
-                        ?>
-                            <td class="Table-cell">
-                                <a href="torrents.php?id=<?= $GroupID ?>">
-                                    <img data-tooltip="<?= $Name ?>" src="<?= ImageTools::process($C['WikiImage'], true) ?>" alt="<?= $Name ?>" width="107" />
-                                </a>
-                            </td>
-                        <?  } ?>
-                    </tr>
-                </table>
-            <?
-                $FirstCol = false;
-            }
-            ?>
-            <!-- for the "jump to staff tools" button -->
-            <a id="staff_tools"></a>
-            <?
-
-            // Linked accounts
-            if (check_perms('users_mod')) {
-                include(CONFIG['SERVER_ROOT'] . '/sections/user/linkedfunctions.php');
-                user_dupes_table($UserID);
-            }
-
-            if ((check_perms('users_view_invites')) && $Invited > 0) {
-                include(CONFIG['SERVER_ROOT'] . '/classes/invite_tree.class.php');
-                $Tree = new INVITE_TREE($UserID, array('visible' => false));
-            ?>
-                <div class="Box" id="invitetree_box">
-                    <div class="Box-header">
-                        <?= t('server.user.invite_tree') ?> <a href="#" onclick="$('#invitetree').gtoggle(); return false;"><?= t('server.user.view') ?></a>
+                        </div>
                     </div>
-                    <div id="invitetree" class="hidden Box-body">
-                        <? $Tree->make_tree(); ?>
+                    <div class="Post-body <?= $FirstCol ? '' : 'hidden' ?>">
+                        <?
+                        $tableRender = new TorrentGroupCoverTableView($Groups);
+                        $tableRender->render();
+                        ?>
                     </div>
                 </div>
                 <?
+                $FirstCol = false;
             }
-
-            if (check_perms('users_mod')) {
-                DonationsView::render_donation_history($donation->history($UserID));
-            }
-
-            // Requests
             if (empty($LoggedUser['DisableRequests']) && check_paranoia_here('requestsvoted_list')) {
                 $SphQL = new SphinxqlQuery();
                 $SphQLResult = $SphQL->select('id, votes, bounty')
@@ -1327,65 +1303,67 @@ WHERE xs.uid =" . $UserID . " and xs.tstamp >= unix_timestamp(date_format(now(),
                 if ($SphQLResult->has_results()) {
                     $SphRequests = $SphQLResult->to_array('id', MYSQLI_ASSOC);
                 ?>
-                    <div class="Box" id="requests_box">
-                        <div class="Box-header">
-                            <?= t('server.common.requests') ?> <a href="#" onclick="$('#requests').gtoggle(); return false;"><?= t('server.user.view') ?></a>
+                    <div class="Post" id="requests_box">
+                        <div class="Post-header">
+                            <div class="Post-headerLeft">
+                                <div class="Post-headerTitle">
+                                    <?= t('server.common.requests') ?>
+                                </div>
+                            </div>
+                            <div class="Post-headerActions">
+                                <a href="#" onclick="$('#requests').gtoggle(); return false;"><?= t('server.user.view') ?></a>
+                            </div>
                         </div>
-                        <div class="Box-body TableCotainer hidden" id="requests">
+                        <div class="Post-body TableCotainer hidden" id="requests">
                             <table class="Table TableRequest" cellpadding="6" cellspacing="1" border="0" width="100%">
                                 <tr class="Table-rowHeader">
                                     <td class="Table-cell">
                                         <?= t('server.user.name') ?>
                                     </td>
-                                    <td class="Table-cell">
+                                    <td class="Table-cell TableRequest-cellValue">
                                         <?= t('server.user.vote') ?>
                                     </td>
-                                    <td class="Table-cell">
+                                    <td class="Table-cell TableRequest-cellValue">
                                         <?= t('server.user.bounty') ?>
                                     </td>
-                                    <td class="Table-cell">
+                                    <td class="Table-cell TableRequest-cellValue">
                                         <?= t('server.user.add_time') ?>
                                     </td>
                                 </tr>
                                 <?
-                                $Row = 'a';
                                 $Requests = Requests::get_requests(array_keys($SphRequests));
                                 foreach ($SphRequests as $RequestID => $SphRequest) {
                                     $Request = $Requests[$RequestID];
-                                    $VotesCount = $SphRequest['votes'];
-                                    $Bounty = $SphRequest['bounty'] * 1024; // Sphinx stores bounty in kB
-                                    $CategoryName = $Categories[$Request['CategoryID'] - 1];
-                                    $FullName = "<a href=\"requests.php?action=view&amp;id=$RequestID\">$Request[Title]</a>";
+
+                                    $RequestVotes = Requests::get_votes_array($Request['ID']);
+                                    $RequestID = $Request['ID'];
+                                    $RequestName = Torrents::group_name($Request, false);
+                                    $FullName = "<a href=\"requests.php?action=view&amp;id=$RequestID\">$RequestName</a>";
+                                    $Tags = $Request['Tags'];
                                 ?>
-                                    <tr class="TableRequest-row Table-row">
-                                        <td class="Table-cell">
+                                    <tr class="Table-row">
+                                        <td class="TableRequest-cellName Table-cell">
                                             <?= $FullName ?>
-                                            <div class="tags">
+                                            <div class="torrent_info">
                                                 <?
-                                                $Tags = $Request['Tags'];
-                                                $TagList = array();
-                                                foreach ($Tags as $TagID => $TagName) {
-                                                    $TagList[] = "<a href=\"requests.php?tags=$TagName\">" . display_str($TagName) . '</a>';
-                                                }
-                                                $TagList = implode(', ', $TagList);
                                                 ?>
-                                                <?= $TagList ?>
+                                                <?= str_replace('|', ', ', $Request['CodecList']) . ' / ' . str_replace('|', ', ', $Request['SourceList']) . ' / ' . str_replace('|', ', ', $Request['ResolutionList']) . ' / ' . str_replace('|', ', ', $Request['ContainerList']) ?>
                                             </div>
                                         </td>
-                                        <td class="TableRequest-cell">
-                                            <span id="vote_count_<?= $RequestID ?>"><?= $VotesCount ?></span>
+                                        <td class="TableRequest-cellVotes Table-cell TableRequest-cellValue">
+                                            <span id="vote_count_<?= $Request['ID'] ?>"><?= count($RequestVotes['Voters']) ?></span>
                                             <? if (check_perms('site_vote')) { ?>
-                                                <a href="javascript:globalapp.requestVote(0, <?= $RequestID ?>)">+</a>
-                                            <? } ?>
+                                                &nbsp;&nbsp; <a href="javascript:globalapp.requestVote(0, <?= $Request['ID'] ?>)" class="brackets">+</a>
+                                            <?          } ?>
                                         </td>
-                                        <td class="Table-cell">
-                                            <span id="bounty_<?= $RequestID ?>"><?= Format::get_size($Bounty) ?></span>
+                                        <td class="TableRequest-cellBounty Table-cell TableRequest-cellValue">
+                                            <?= Format::get_size($RequestVotes['TotalBounty']) ?>
                                         </td>
-                                        <td class="Table-cell">
-                                            <?= time_diff($Request['TimeAdded']) ?>
+                                        <td class="TableRequest-cellCreatedAt TableRequest-cellValue Table-cell">
+                                            <?= time_diff($Request['TimeAdded'], 1) ?>
                                         </td>
                                     </tr>
-                                <? } ?>
+                                <?  } ?>
                             </table>
                         </div>
                     </div>
@@ -1393,6 +1371,35 @@ WHERE xs.uid =" . $UserID . " and xs.tstamp >= unix_timestamp(date_format(now(),
                 }
             }
 
+
+            if ((check_perms('users_view_invites')) && $Invited > 0) {
+                include(CONFIG['SERVER_ROOT'] . '/classes/invite_tree.class.php');
+                $Tree = new INVITE_TREE($UserID, array('visible' => false));
+                ?>
+                <div class="Post" id="invitetree_box">
+                    <div class="Post-header">
+                        <div class="Post-headerLeft">
+
+                            <div class="Post-headerTitle">
+                                <?= t('server.user.invite_tree') ?>
+                            </div>
+                        </div>
+                        <div class="Post-headerActions">
+                            <a href="#" onclick="$('#invitetree').gtoggle(); return false;"><?= t('server.user.view') ?></a>
+                        </div>
+                    </div>
+                    <div id="invitetree" class="hidden Post-body">
+                        <? $Tree->make_tree(); ?>
+                    </div>
+                </div>
+                <?
+            }
+
+            // Linked accounts
+
+            if (check_perms('users_mod')) {
+                DonationsView::render_donation_history($donation->history($UserID));
+            }
             $IsFLS = isset($LoggedUser['ExtraClasses'][CONFIG['USER_CLASS']['FLS_TEAM']]);
             if (check_perms('users_mod', $Class) || $IsFLS) {
                 $UserLevel = $LoggedUser['EffectiveClass'];
@@ -1416,57 +1423,66 @@ WHERE xs.uid =" . $UserID . " and xs.tstamp >= unix_timestamp(date_format(now(),
                 if ($DB->has_results()) {
                     $StaffPMs = $DB->to_array();
                 ?>
-                    <div class="Box" id="staffpms_box">
-                        <div class="Box-header">
-                            <?= t('server.user.staff_pm') ?> <a href="#" onclick="$('#staffpms').gtoggle(); return false;"><?= t('server.user.view') ?></a>
+                    <div class="Post" id="staffpms_box">
+                        <div class="Post-header">
+                            <div class="Post-headerLeft">
+                                <div class="Post-headerTitle">
+                                    <?= t('server.user.staff_pm') ?>
+                                </div>
+                            </div>
+                            <div class="Post-headerActions">
+                                <a href="#" onclick="$('#staffpms').gtoggle(); return false;"><?= t('server.user.view') ?></a>
+                            </div>
                         </div>
-                        <table class="Box-body Table TableUserInbox hidden" id="staffpms">
-                            <tr class="Form-rowHeader">
-                                <td class="Table-cell"><?= t('server.user.subject') ?></td>
-                                <td class="Table-cell"><?= t('server.user.date') ?></td>
-                                <td class="Table-cell"><?= t('server.user.assigned_to') ?></td>
-                                <td class="Table-cell"><?= t('server.user.replies') ?></td>
-                                <td class="Table-cell"><?= t('server.user.resolved_by') ?></td>
-                            </tr>
-                            <?
-                            foreach ($StaffPMs as $StaffPM) {
-                                list($ID, $Subject, $Status, $Level, $AssignedToUser, $Date, $Replies, $ResolverID) = $StaffPM;
-                                // Get assigned
-                                if ($AssignedToUser == '') {
-                                    // Assigned to class
-                                    $Assigned = ($Level == 0) ? 'First Line Support' : $ClassLevels[$Level]['Name'];
-                                    // No + on Sysops
-                                    if ($Assigned != 'Sysop') {
-                                        $Assigned .= '+';
-                                    }
-                                } else {
-                                    // Assigned to user
-                                    $Assigned = Users::format_username($UserID, true, true, true, true);
-                                }
-
-                                if ($ResolverID) {
-                                    $Resolver = Users::format_username($ResolverID, true, true, true, true);
-                                } else {
-                                    $Resolver = '(unresolved)';
-                                }
-
-                            ?>
-                                <tr class="Form-row">
-                                    <td class="Table-cell"><a href="staffpm.php?action=viewconv&amp;id=<?= $ID ?>"><?= display_str($Subject) ?></a></td>
-                                    <td class="Table-cell"><?= time_diff($Date, 2, true) ?></td>
-                                    <td class="Table-cell"><?= $Assigned ?></td>
-                                    <td class="Table-cell"><?= $Replies - 1 ?></td>
-                                    <td class="Table-cell"><?= $Resolver ?></td>
+                        <div class="Post-body hidden" id="staffpms">
+                            <table class="Table TableUserInbox">
+                                <tr class="Table-rowHeader">
+                                    <td class="Table-cell"><?= t('server.user.subject') ?></td>
+                                    <td class="Table-cell"><?= t('server.user.date') ?></td>
+                                    <td class="Table-cell"><?= t('server.user.assigned_to') ?></td>
+                                    <td class="Table-cell"><?= t('server.user.replies') ?></td>
+                                    <td class="Table-cell"><?= t('server.user.resolved_by') ?></td>
                                 </tr>
-                            <? } ?>
-                        </table>
+                                <?
+                                foreach ($StaffPMs as $StaffPM) {
+                                    list($ID, $Subject, $Status, $Level, $AssignedToUser, $Date, $Replies, $ResolverID) = $StaffPM;
+                                    // Get assigned
+                                    if ($AssignedToUser == '') {
+                                        // Assigned to class
+                                        $Assigned = ($Level == 0) ? 'First Line Support' : $ClassLevels[$Level]['Name'];
+                                        // No + on Sysops
+                                        if ($Assigned != 'Sysop') {
+                                            $Assigned .= '+';
+                                        }
+                                    } else {
+                                        // Assigned to user
+                                        $Assigned = Users::format_username($UserID, true, true, true, true);
+                                    }
+
+                                    if ($ResolverID) {
+                                        $Resolver = Users::format_username($ResolverID, true, true, true, true);
+                                    } else {
+                                        $Resolver = '(unresolved)';
+                                    }
+
+                                ?>
+                                    <tr class="Table-row">
+                                        <td class="Table-cell"><a href="staffpm.php?action=viewconv&amp;id=<?= $ID ?>"><?= display_str($Subject) ?></a></td>
+                                        <td class="Table-cell"><?= time_diff($Date, 2, true) ?></td>
+                                        <td class="Table-cell"><?= $Assigned ?></td>
+                                        <td class="Table-cell"><?= $Replies - 1 ?></td>
+                                        <td class="Table-cell"><?= $Resolver ?></td>
+                                    </tr>
+                                <? } ?>
+                            </table>
+                        </div>
                     </div>
                 <?
                 }
             }
 
             // Displays a table of forum warnings viewable only to Forum Moderators
-            if ($LoggedUser['Class'] == 650 && check_perms('users_warn', $Class)) {
+            if ($LoggedUser['Class'] > 650 && check_perms('users_warn', $Class)) {
                 $DB->query("
 		SELECT Comment
 		FROM users_warnings_forums
@@ -1474,9 +1490,12 @@ WHERE xs.uid =" . $UserID . " and xs.tstamp >= unix_timestamp(date_format(now(),
                 list($ForumWarnings) = $DB->next_record();
                 if ($DB->has_results()) {
                 ?>
-                    <div class="Box">
-                        <div class="Box-header"><?= t('server.user.forum_warnings') ?></div>
-                        <div class="Box-body">
+                    <div class="Post">
+                        <div class="Post-header">
+                            <div class="Post-headerTitle">
+                                <?= t('server.user.forum_warnings') ?></div>
+                        </div>
+                        <div class="Post-body">
                             <div id="forumwarningslinks" class="HtmlText AdminComment" style="width: 98%;">
                                 <?= Text::full_format($ForumWarnings) ?>
                             </div>
@@ -1485,526 +1504,549 @@ WHERE xs.uid =" . $UserID . " and xs.tstamp >= unix_timestamp(date_format(now(),
                 <?
                 }
             }
-            if (check_perms('users_mod', $Class)) { ?>
-                <form class="manage_form" name="user" id="form" action="user.php" method="post">
-                    <input type="hidden" name="action" value="moderate" />
-                    <input type="hidden" name="userid" value="<?= $UserID ?>" />
-                    <input type="hidden" name="auth" value="<?= $LoggedUser['AuthKey'] ?>" />
-
-                    <div class="Box" id="staff_notes_box">
-                        <div class="Box-header">
+            if (check_perms('users_mod')) {
+                include(CONFIG['SERVER_ROOT'] . '/sections/user/linkedfunctions.php');
+                user_dupes_table($UserID);
+            }
+            if (check_perms('users_mod', $Class)) {
+                ?>
+                <div class="Post" id="staff_notes_box">
+                    <div class="Post-header">
+                        <div class="Post-headerTitle">
                             <?= t('server.user.staff_note') ?>
                         </div>
-                        <div id="staffnotes" class="Box-body">
-                            <input type="hidden" name="comment_hash" value="<?= $CommentHash ?>" />
-                            <div id="admincommentlinks" class="HtmlText AdminComment" style="width: 98%;">
-                                <?= Text::full_format($AdminComment) ?>
-                            </div>
+                    </div>
+                    <div id="staffnotes" class="Post-body">
+                        <div id="admincommentlinks" class="HtmlText AdminComment" style="width: 98%;">
+                            <?= Text::full_format($AdminComment) ?>
                         </div>
                     </div>
+                </div>
+            <?
+            }
 
-                    <table class="Form-rowList" variant="header" id="user_info_box">
-                        <tr class="Form-rowHeader">
-                            <td class="Form-title" colspan="2">
-                                <?= t('server.user.info') ?>
-                            </td>
-                        </tr>
-                        <? if (check_perms('users_edit_usernames', $Class)) { ?>
-                            <tr class="Form-row">
-                                <td class="Form-label"><?= t('server.user.account') ?></td>
-                                <td class="Form-inputs"><input class="Input" type="text" size="20" name="Username" value="<?= display_str($Username) ?>" /></td>
-                            </tr>
-                        <?
-                        }
-                        if (check_perms('users_edit_titles')) {
-                        ?>
-                            <tr class="Form-row">
-                                <td class="Form-label"><?= t('server.user.customtitle') ?></td>
-                                <td class="Form-inputs"><input class="Input" type="text" name="Title" value="<?= display_str($CustomTitle) ?>" /></td>
-                            </tr>
-                        <?
-                        }
+            ?>
+            <!-- for the "jump to staff tools" button -->
+            <div class="Post" id="staff_tools">
+                <div class="Post-header">
+                    <div class="Post-headerTitle">
+                        <?= t('server.user.staff_tools') ?>
+                    </div>
+                </div>
+                <div class="Post-body">
+                    <?
 
-                        if (check_perms('users_promote_below', $Class) || check_perms('users_promote_to', $Class - 1)) {
-                        ?>
-                            <tr class="Form-row">
-                                <td class="Form-label"><?= t('server.user.promote_class') ?></td>
-                                <td class="Form-inputs">
-                                    <select class="Input" name="Class">
-                                        <?
-                                        foreach ($ClassLevels as $CurClass) {
-                                            if ($CurClass['Secondary']) {
-                                                continue;
-                                            } elseif ($LoggedUser['ID'] != $UserID && !check_perms('users_promote_to', $Class - 1) && $CurClass['Level'] == $LoggedUser['EffectiveClass']) {
-                                                break;
-                                            } elseif ($CurClass['Level'] > $LoggedUser['EffectiveClass']) {
-                                                break;
-                                            }
-                                            if ($Class === $CurClass['Level']) {
-                                                $Selected = ' selected="selected"';
-                                            } else {
-                                                $Selected = '';
-                                            }
-                                        ?>
-                                            <option class="Select-option" value="<?= $CurClass['ID'] ?>" <?= $Selected ?>><?= $CurClass['Name'] . ' (' . $CurClass['Level'] . ')' ?></option>
-                                        <?      } ?>
-                                    </select>
-                                </td>
-                            </tr>
-                        <?
-                        }
+                    if (check_perms('users_mod', $Class)) { ?>
+                        <form class="Form-rowList LayoutBody manage_form" variant="header" name="user" id="form" action="user.php" method="post">
+                            <input type="hidden" name="comment_hash" value="<?= $CommentHash ?>" />
+                            <input type="hidden" name="action" value="moderate" />
+                            <input type="hidden" name="userid" value="<?= $UserID ?>" />
+                            <input type="hidden" name="auth" value="<?= $LoggedUser['AuthKey'] ?>" />
 
-                        if (check_perms('users_give_donor')) {
-                        ?>
-                            <tr class="Form-row">
-                                <td class="Form-label"><?= t('server.user.donor') ?></td>
-                                <td class="Form-inputs"><input class="Input" type="checkbox" name="Donor" <? if ($Donor == 1) { ?> checked="checked" <? } ?> /></td>
-                            </tr>
-                        <?
-                        }
-                        if (check_perms('users_promote_below') || check_perms('users_promote_to')) { ?>
-                            <tr class="Form-row">
-                                <td class="Form-label"><?= t('server.user.se_class') ?></td>
-                                <td class="Form-inputs">
-                                    <?
-                                    $DB->query("
+                            <table class="" id="user_info_box">
+                                <tr class="Form-rowHeader UserModForm-rowHeader">
+                                    <td class="Form-title" colspan="2">
+                                        <?= t('server.user.info') ?>
+                                    </td>
+                                </tr>
+                                <? if (check_perms('users_edit_usernames', $Class)) { ?>
+                                    <tr class="Form-row">
+                                        <td class="Form-label"><?= t('server.user.account') ?></td>
+                                        <td class="Form-inputs"><input class="Input" type="text" size="20" name="Username" value="<?= display_str($Username) ?>" /></td>
+                                    </tr>
+                                <?
+                                }
+                                if (check_perms('users_edit_titles')) {
+                                ?>
+                                    <tr class="Form-row">
+                                        <td class="Form-label"><?= t('server.user.customtitle') ?></td>
+                                        <td class="Form-inputs"><input class="Input" type="text" name="Title" value="<?= display_str($CustomTitle) ?>" /></td>
+                                    </tr>
+                                <?
+                                }
+
+                                if (check_perms('users_promote_below', $Class) || check_perms('users_promote_to', $Class - 1)) {
+                                ?>
+                                    <tr class="Form-row">
+                                        <td class="Form-label"><?= t('server.user.promote_class') ?></td>
+                                        <td class="Form-inputs">
+                                            <select class="Input" name="Class">
+                                                <?
+                                                foreach ($ClassLevels as $CurClass) {
+                                                    if ($CurClass['Secondary']) {
+                                                        continue;
+                                                    } elseif ($LoggedUser['ID'] != $UserID && !check_perms('users_promote_to', $Class - 1) && $CurClass['Level'] == $LoggedUser['EffectiveClass']) {
+                                                        break;
+                                                    } elseif ($CurClass['Level'] > $LoggedUser['EffectiveClass']) {
+                                                        break;
+                                                    }
+                                                    if ($Class === $CurClass['Level']) {
+                                                        $Selected = ' selected="selected"';
+                                                    } else {
+                                                        $Selected = '';
+                                                    }
+                                                ?>
+                                                    <option class="Select-option" value="<?= $CurClass['ID'] ?>" <?= $Selected ?>><?= $CurClass['Name'] . ' (' . $CurClass['Level'] . ')' ?></option>
+                                                <?      } ?>
+                                            </select>
+                                        </td>
+                                    </tr>
+                                <?
+                                }
+
+                                if (check_perms('users_give_donor')) {
+                                ?>
+                                    <tr class="Form-row">
+                                        <td class="Form-label"><?= t('server.user.donor') ?></td>
+                                        <td class="Form-inputs"><input class="Input" type="checkbox" name="Donor" <? if ($Donor == 1) { ?> checked="checked" <? } ?> /></td>
+                                    </tr>
+                                <?
+                                }
+                                if (check_perms('users_promote_below') || check_perms('users_promote_to')) { ?>
+                                    <tr class="Form-row">
+                                        <td class="Form-label"><?= t('server.user.se_class') ?></td>
+                                        <td class="Form-inputs">
+                                            <?
+                                            $DB->query("
 			SELECT p.ID, p.Name, l.UserID
 			FROM permissions AS p
 				LEFT JOIN users_levels AS l ON l.PermissionID = p.ID AND l.UserID = '$UserID'
 			WHERE p.Secondary = 1
 			ORDER BY p.Name");
-                                    $i = 0;
-                                    while (list($PermID, $PermName, $IsSet) = $DB->next_record()) {
-                                        $i++;
-                                    ?>
-                                        <div class="Checkbox">
-                                            <input class="Input" type="checkbox" id="perm_<?= $PermID ?>" name="secondary_classes[]" value="<?= $PermID ?>" <? if ($IsSet) { ?> checked="checked" <? } ?> />
-                                            <label class="Checkbox-label" for="perm_<?= $PermID ?>"><?= $PermName ?></label>
-                                        </div>
-                                    <? if ($i % 3 == 0) {
-                                            echo "\t\t\t\t<br />\n";
-                                        }
-                                    } ?>
-                                </td>
-                            </tr>
-                        <?  }
-                        if (check_perms('users_make_invisible')) {
-                        ?>
-                            <tr class="Form-row">
-                                <td class="Form-label"><?= t('server.user.view_list') ?></td>
-                                <td class="Form-inputs">
-                                    <input class="Input" type="checkbox" name="Visible" <? if ($Visible == 1) { ?> checked="checked" <? } ?> />
-                                </td>
-                            </tr>
-                        <?
-                        }
+                                            $i = 0;
+                                            while (list($PermID, $PermName, $IsSet) = $DB->next_record()) {
+                                                $i++;
+                                            ?>
+                                                <div class="Checkbox">
+                                                    <input class="Input" type="checkbox" id="perm_<?= $PermID ?>" name="secondary_classes[]" value="<?= $PermID ?>" <? if ($IsSet) { ?> checked="checked" <? } ?> />
+                                                    <label class="Checkbox-label" for="perm_<?= $PermID ?>"><?= $PermName ?></label>
+                                                </div>
+                                            <? if ($i % 3 == 0) {
+                                                    echo "\t\t\t\t<br />\n";
+                                                }
+                                            } ?>
+                                        </td>
+                                    </tr>
+                                <?  }
+                                if (check_perms('users_make_invisible')) {
+                                ?>
+                                    <tr class="Form-row">
+                                        <td class="Form-label"><?= t('server.user.view_list') ?></td>
+                                        <td class="Form-inputs">
+                                            <input class="Input" type="checkbox" name="Visible" <? if ($Visible == 1) { ?> checked="checked" <? } ?> />
+                                        </td>
+                                    </tr>
+                                <?
+                                }
 
-                        if (check_perms('users_edit_ratio', $Class) || (check_perms('users_edit_own_ratio') && $UserID == $LoggedUser['ID'])) {
-                        ?>
-                            <tr class="Form-row">
-                                <td class="Form-label" data-tooltip="<?= t('server.user.uploaded_title') ?>"><?= t('server.user.uploaded') ?></td>
-                                <td class="Form-inputs">
-                                    <input type="hidden" name="OldUploaded" value="<?= $Uploaded ?>" />
-                                    <input class="Input" type="text" size="20" name="Uploaded" value="<?= $Uploaded ?>" />
-                                </td>
-                            </tr>
-                            <tr class="Form-row">
-                                <td class="Form-label" data-tooltip="<?= t('server.user.downloaded_title') ?>"><?= t('server.user.downloaded') ?></td>
-                                <td class="Form-inputs">
-                                    <input type="hidden" name="OldDownloaded" value="<?= $Downloaded ?>" />
-                                    <input class="Input" type="text" size="20" name="Downloaded" value="<?= $Downloaded ?>" />
-                                </td>
-                            </tr>
-                            <tr class="Form-row">
-                                <td class="Form-label" data-tooltip="<?= t('server.user.bonus_points_title') ?>"><?= t('server.user.bonus_points') ?></td>
-                                <td class="Form-inputs">
-                                    <input type="hidden" name="OldBonusPoints" value="<?= $BonusPoints ?>" />
-                                    <input class="Input" type="text" size="20" name="BonusPoints" value="<?= $BonusPoints ?>" />
-                                </td>
-                            </tr>
-                            <tr class="Form-row">
-                                <td class="Form-label" data-tooltip="<?= t('server.user.merge_from_title') ?>"><?= t('server.user.merge_from') ?></td>
-                                <td class="Form-inputs">
-                                    <input class="Input" type="text" size="40" name="MergeStatsFrom" />
-                                </td>
-                            </tr>
-                        <?
-                        }
+                                if (check_perms('users_edit_ratio', $Class) || (check_perms('users_edit_own_ratio') && $UserID == $LoggedUser['ID'])) {
+                                ?>
+                                    <tr class="Form-row">
+                                        <td class="Form-label" data-tooltip="<?= t('server.user.uploaded_title') ?>"><?= t('server.user.uploaded') ?></td>
+                                        <td class="Form-inputs">
+                                            <input type="hidden" name="OldUploaded" value="<?= $Uploaded ?>" />
+                                            <input class="Input" type="text" size="20" name="Uploaded" value="<?= $Uploaded ?>" />
+                                        </td>
+                                    </tr>
+                                    <tr class="Form-row">
+                                        <td class="Form-label" data-tooltip="<?= t('server.user.downloaded_title') ?>"><?= t('server.user.downloaded') ?></td>
+                                        <td class="Form-inputs">
+                                            <input type="hidden" name="OldDownloaded" value="<?= $Downloaded ?>" />
+                                            <input class="Input" type="text" size="20" name="Downloaded" value="<?= $Downloaded ?>" />
+                                        </td>
+                                    </tr>
+                                    <tr class="Form-row">
+                                        <td class="Form-label" data-tooltip="<?= t('server.user.bonus_points_title') ?>"><?= t('server.user.bonus_points') ?></td>
+                                        <td class="Form-inputs">
+                                            <input type="hidden" name="OldBonusPoints" value="<?= $BonusPoints ?>" />
+                                            <input class="Input" type="text" size="20" name="BonusPoints" value="<?= $BonusPoints ?>" />
+                                        </td>
+                                    </tr>
+                                    <tr class="Form-row">
+                                        <td class="Form-label" data-tooltip="<?= t('server.user.merge_from_title') ?>"><?= t('server.user.merge_from') ?></td>
+                                        <td class="Form-inputs">
+                                            <input class="Input" type="text" size="40" name="MergeStatsFrom" />
+                                        </td>
+                                    </tr>
+                                <?
+                                }
 
-                        if (check_perms('users_edit_invites')) {
-                        ?>
-                            <tr class="Form-row">
-                                <td class="Form-label" data-tooltip="Number of invites"><?= t('server.user.invite') ?></td>
-                                <td class="Form-inputs"><input class="Input" type="text" size="5" name="Invites" value="<?= $Invites ?>" /></td>
-                            </tr>
-                        <?
-                        }
+                                if (check_perms('users_edit_invites')) {
+                                ?>
+                                    <tr class="Form-row">
+                                        <td class="Form-label" data-tooltip="Number of invites"><?= t('server.user.invite') ?></td>
+                                        <td class="Form-inputs"><input class="Input" type="text" size="5" name="Invites" value="<?= $Invites ?>" /></td>
+                                    </tr>
+                                <?
+                                }
 
-                        if (check_perms('admin_manage_user_fls')) {
-                        ?>
-                            <tr class="Form-row">
-                                <td class="Form-label" data-tooltip="Number of FL tokens"><?= t('server.user.token') ?></td>
-                                <td class="Form-inputs"><input class="Input" type="text" size="5" name="FLTokens" value="<?= $FLTokens ?>" /></td>
-                            </tr>
-                        <?
-                        }
+                                if (check_perms('admin_manage_user_fls')) {
+                                ?>
+                                    <tr class="Form-row">
+                                        <td class="Form-label" data-tooltip="Number of FL tokens"><?= t('server.user.token') ?></td>
+                                        <td class="Form-inputs"><input class="Input" type="text" size="5" name="FLTokens" value="<?= $FLTokens ?>" /></td>
+                                    </tr>
+                                <?
+                                }
 
-                        if (check_perms('admin_manage_fls') || (check_perms('users_mod') && $OwnProfile)) {
-                        ?>
-                            <tr class="Form-row">
-                                <td class="Form-label" data-tooltip="<?= t('server.user.staff_mark_title') ?>"><?= t('server.user.staff_mark') ?></td>
-                                <td class="Form-inputs"><input class="Input" type="text" name="SupportFor" value="<?= display_str($SupportFor) ?>" /></td>
-                            </tr>
-                        <?
-                        }
+                                if (check_perms('admin_manage_fls') || (check_perms('users_mod') && $OwnProfile)) {
+                                ?>
+                                    <tr class="Form-row">
+                                        <td class="Form-label" data-tooltip="<?= t('server.user.staff_mark_title') ?>"><?= t('server.user.staff_mark') ?></td>
+                                        <td class="Form-inputs"><input class="Input" type="text" name="SupportFor" value="<?= display_str($SupportFor) ?>" /></td>
+                                    </tr>
+                                <?
+                                }
 
-                        if (check_perms('users_edit_reset_keys')) {
-                        ?>
-                            <tr class="Form-row">
-                                <td class="Form-label"><?= t('server.user.reset') ?></td>
-                                <td class="Form-inputs" id="reset_td">
-                                    <div class="Checkbox">
-                                        <input class="Input" type="checkbox" name="ResetRatioWatch" id="ResetRatioWatch" />
-                                        <label class="Checkbox-label" for="ResetRatioWatch"><?= t('server.user.ratio_watch') ?></label>
-                                    </div>
-                                    <div class="Checkbox">
-                                        <input class="Input" type="checkbox" name="ResetPasskey" id="ResetPasskey" />
-                                        <label class="Checkbox-label" for="ResetPasskey"><?= t('server.user.passkey') ?></label>
-                                    </div>
-                                    <div class="Checkbox">
-                                        <input class="Input" type="checkbox" name="ResetAuthkey" id="ResetAuthkey" />
-                                        <label class="Checkbox-label" for="ResetAuthkey"><?= t('server.user.authkey') ?></label>
-                                    </div>
-                                    <div class="Checkbox">
-                                        <input class="Input" type="checkbox" name="ResetIPHistory" id="ResetIPHistory" />
-                                        <label class="Checkbox-label" for="ResetIPHistory"><?= t('server.user.ip_history') ?></label>
-                                    </div>
-                                    <div class="Checkbox">
-                                        <input class="Input" type="checkbox" name="ResetEmailHistory" id="ResetEmailHistory" />
-                                        <label class="Checkbox-label" for="ResetEmailHistory"><?= t('server.user.email_history') ?></label>
-                                    </div>
-                                    <br />
-                                    <div class="Checkbox">
-                                        <input class="Input" type="checkbox" name="ResetSnatchList" id="ResetSnatchList" />
-                                        <label class="Checkbox-label" for="ResetSnatchList"><?= t('server.user.snatch_list') ?></label>
-                                    </div>
-                                    <div class="Checkbox">
-                                        <input class="Input" type="checkbox" name="ResetDownloadList" id="ResetDownloadList" />
-                                        <label class="Checkbox-label" for="ResetDownloadList"><?= t('server.user.download_list') ?></label>
-                                    </div>
-                                </td>
-                            </tr>
-                        <?
-                        }
+                                if (check_perms('users_edit_reset_keys')) {
+                                ?>
+                                    <tr class="Form-row">
+                                        <td class="Form-label"><?= t('server.user.reset') ?></td>
+                                        <td class="Form-inputs" id="reset_td">
+                                            <div class="Checkbox">
+                                                <input class="Input" type="checkbox" name="ResetRatioWatch" id="ResetRatioWatch" />
+                                                <label class="Checkbox-label" for="ResetRatioWatch"><?= t('server.user.ratio_watch') ?></label>
+                                            </div>
+                                            <div class="Checkbox">
+                                                <input class="Input" type="checkbox" name="ResetPasskey" id="ResetPasskey" />
+                                                <label class="Checkbox-label" for="ResetPasskey"><?= t('server.user.passkey') ?></label>
+                                            </div>
+                                            <div class="Checkbox">
+                                                <input class="Input" type="checkbox" name="ResetAuthkey" id="ResetAuthkey" />
+                                                <label class="Checkbox-label" for="ResetAuthkey"><?= t('server.user.authkey') ?></label>
+                                            </div>
+                                            <div class="Checkbox">
+                                                <input class="Input" type="checkbox" name="ResetIPHistory" id="ResetIPHistory" />
+                                                <label class="Checkbox-label" for="ResetIPHistory"><?= t('server.user.ip_history') ?></label>
+                                            </div>
+                                            <div class="Checkbox">
+                                                <input class="Input" type="checkbox" name="ResetEmailHistory" id="ResetEmailHistory" />
+                                                <label class="Checkbox-label" for="ResetEmailHistory"><?= t('server.user.email_history') ?></label>
+                                            </div>
+                                            <br />
+                                            <div class="Checkbox">
+                                                <input class="Input" type="checkbox" name="ResetSnatchList" id="ResetSnatchList" />
+                                                <label class="Checkbox-label" for="ResetSnatchList"><?= t('server.user.snatch_list') ?></label>
+                                            </div>
+                                            <div class="Checkbox">
+                                                <input class="Input" type="checkbox" name="ResetDownloadList" id="ResetDownloadList" />
+                                                <label class="Checkbox-label" for="ResetDownloadList"><?= t('server.user.download_list') ?></label>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                <?
+                                }
 
-                        if (check_perms('users_edit_password')) {
-                        ?>
-                            <tr class="Form-row">
-                                <td class="Form-label"><?= t('server.user.new_password') ?></td>
-                                <td class="Form-inputs">
-                                    <input class="Input" type="text" size="30" id="change_password" name="ChangePassword" />
-                                    <button class="Button" type="button" id="random_password"><?= t('server.user.generate') ?></button>
-                                </td>
-                            </tr>
+                                if (check_perms('users_edit_password')) {
+                                ?>
+                                    <tr class="Form-row">
+                                        <td class="Form-label"><?= t('server.user.new_password') ?></td>
+                                        <td class="Form-inputs">
+                                            <input class="Input" type="text" size="30" id="change_password" name="ChangePassword" />
+                                            <button class="Button" type="button" id="random_password"><?= t('server.user.generate') ?></button>
+                                        </td>
+                                    </tr>
 
-                            <tr class="Form-row">
-                                <td class="Form-label"><?= t('server.user.2fa') ?></td>
-                                <td class="Form-inputs">
-                                    <? if ($FA_Key) { ?>
-                                        <a href="user.php?action=2fa&page=user&do=disable&userid=<?= $UserID ?>"><?= t('server.user.close') ?></a>
-                                    <? } else { ?>
-                                        <?= t('server.user.closed') ?>
-                                    <? } ?>
-                                </td>
-                            </tr>
-                        <? } ?>
-                    </table>
-
-                    <? if (check_perms('users_warn')) { ?>
-                        <table class="Form-rowList" variant="header" id="warn_user_box">
-                            <tr class="Form-rowHeader">
-                                <td class="Form-title" colspan="2">
-                                    <?= t('server.user.warn') ?>
-                                </td>
-                            </tr>
-                            <tr class="Form-row">
-                                <td class="Form-label">
-                                    <?= t('server.user.warned') ?>
-                                </td>
-                                <td class="Form-inputs">
-                                    <input type="checkbox" name="Warned" <? if ($Warned != '0000-00-00 00:00:00') { ?> checked="checked" <? } ?> />
-                                </td>
-                            </tr>
-                            <? if ($Warned == '0000-00-00 00:00:00') { /* user is not warned */ ?>
-                                <tr class="Form-row">
-                                    <td class="Form-label">
-                                        <?= t('server.user.warn_time') ?>
-                                    </td>
-                                    <td class="Form-inputs">
-                                        <select class="Input" name="WarnLength">
-                                            <option class="Select-option" value="">---</option>
-                                            <option class="Select-option" value="1"><?= t('server.user.1_week') ?></option>
-                                            <option class="Select-option" value="2"><?= t('server.user.2_week') ?></option>
-                                            <option class="Select-option" value="4"><?= t('server.user.4_week') ?></option>
-                                            <option class="Select-option" value="8"><?= t('server.user.8_week') ?></option>
-                                        </select>
-                                    </td>
-                                </tr>
-                            <? } else { /* user is warned */ ?>
-                                <tr class="Form-row">
-                                    <td class="Form-label">
-                                        <?= t('server.user.warn_time') ?>
-                                    </td>
-                                    <td class="Form-inputs">
-                                        <select class="Input" name="ExtendWarning" onchange="ToggleWarningAdjust(this);">
-                                            <option class="Select-option">---</option>
-                                            <option class="Select-option" value="1"><?= t('server.user.1_week') ?></option>
-                                            <option class="Select-option" value="2"><?= t('server.user.2_week') ?></option>
-                                            <option class="Select-option" value="4"><?= t('server.user.4_week') ?></option>
-                                            <option class="Select-option" value="8"><?= t('server.user.8_week') ?></option>
-                                        </select>
-                                    </td>
-                                </tr>
-                                <tr class="Form-row" id="ReduceWarningTR">
-                                    <td class="Form-label">
-                                        <?= t('server.user.free_time') ?>
-                                    </td>
-                                    <td class="Form-inputs">
-                                        <select class="Input" name="ReduceWarning">
-                                            <option class="Select-option">---</option>
-                                            <option class="Select-option" value="1"><?= t('server.user.1_week') ?></option>
-                                            <option class="Select-option" value="2"><?= t('server.user.2_week') ?></option>
-                                            <option class="Select-option" value="4"><?= t('server.user.4_week') ?></option>
-                                            <option class="Select-option" value="8"><?= t('server.user.8_week') ?></option>
-                                        </select>
-                                    </td>
-                                </tr>
-                            <? } ?>
-                            <tr class="Form-row">
-                                <td class="Form-label" data-tooltip="<?= t('server.user.warn_reason_title') ?>">
-                                    <?= t('server.user.warn_reason') ?>
-                                </td>
-                                <td class="Form-inputs">
-                                    <input class="Input" type="text" name="WarnReason" />
-                                </td>
-                            </tr>
-                        <?  } ?>
-                        </table>
-                        <? if (check_perms('users_disable_any')) { ?>
-                            <table class="Form-rowList" variant="header">
-                                <tr class="Form-rowHeader">
-                                    <td class="Form-title" colspan="2">
-                                        <?= t('server.user.disable_account') ?>
-                                    </td>
-                                </tr>
-                                <tr class="Form-row">
-                                    <td class="Form-label"><?= t('server.user.account_disable') ?></td>
-                                    <td class="Form-inputs">
-                                        <input type="checkbox" name="LockAccount" id="LockAccount" <? if ($LockedAccount) { ?> checked="checked" <? } ?> />
-                                    </td>
-                                </tr>
-                                <tr class="Form-row">
-                                    <td class="Form-label"><?= t('server.user.reason') ?></td>
-                                    <td class="Form-inputs">
-                                        <select class="Input" name="LockReason">
-                                            <option class="Select-option" value="---">---</option>
-                                            <option class="Select-option" value="<?= STAFF_LOCKED ?>" <? if ($LockedAccount == STAFF_LOCKED) { ?> selected <? } ?>><?= t('server.user.admin_account') ?></option>
-                                        </select>
-                                    </td>
-                                </tr>
+                                    <tr class="Form-row">
+                                        <td class="Form-label"><?= t('server.user.2fa') ?></td>
+                                        <td class="Form-inputs">
+                                            <? if ($FA_Key) { ?>
+                                                <a href="user.php?action=2fa&page=user&do=disable&userid=<?= $UserID ?>"><?= t('server.user.close') ?></a>
+                                            <? } else { ?>
+                                                <?= t('server.user.closed') ?>
+                                            <? } ?>
+                                        </td>
+                                    </tr>
+                                <? } ?>
                             </table>
-                        <?  }  ?>
-                        <table class="Form-rowList" variant="header" id="user_privs_box">
-                            <tr class="Form-rowHeader">
-                                <td class="Form-title" colspan="2">
-                                    <?= t('server.user.user_po') ?>
-                                </td>
-                            </tr>
-                            <? if (check_perms('users_disable_posts') || check_perms('users_disable_any')) {
-                                $DB->query("
+
+                            <? if (check_perms('users_warn')) { ?>
+                                <table id="warn_user_box">
+                                    <tr class="Form-rowHeader UserModForm-rowHeader">
+                                        <td class="Form-title" colspan="2">
+                                            <?= t('server.user.warn') ?>
+                                        </td>
+                                    </tr>
+                                    <tr class="Form-row">
+                                        <td class="Form-label">
+                                            <?= t('server.user.warned') ?>
+                                        </td>
+                                        <td class="Form-inputs">
+                                            <input type="checkbox" name="Warned" <? if ($Warned != '0000-00-00 00:00:00') { ?> checked="checked" <? } ?> />
+                                        </td>
+                                    </tr>
+                                    <? if ($Warned == '0000-00-00 00:00:00') { /* user is not warned */ ?>
+                                        <tr class="Form-row">
+                                            <td class="Form-label">
+                                                <?= t('server.user.warn_time') ?>
+                                            </td>
+                                            <td class="Form-inputs">
+                                                <select class="Input" name="WarnLength">
+                                                    <option class="Select-option" value="">---</option>
+                                                    <option class="Select-option" value="1"><?= t('server.user.1_week') ?></option>
+                                                    <option class="Select-option" value="2"><?= t('server.user.2_week') ?></option>
+                                                    <option class="Select-option" value="4"><?= t('server.user.4_week') ?></option>
+                                                    <option class="Select-option" value="8"><?= t('server.user.8_week') ?></option>
+                                                </select>
+                                            </td>
+                                        </tr>
+                                    <? } else { /* user is warned */ ?>
+                                        <tr class="Form-row">
+                                            <td class="Form-label">
+                                                <?= t('server.user.warn_time') ?>
+                                            </td>
+                                            <td class="Form-inputs">
+                                                <select class="Input" name="ExtendWarning" onchange="ToggleWarningAdjust(this);">
+                                                    <option class="Select-option">---</option>
+                                                    <option class="Select-option" value="1"><?= t('server.user.1_week') ?></option>
+                                                    <option class="Select-option" value="2"><?= t('server.user.2_week') ?></option>
+                                                    <option class="Select-option" value="4"><?= t('server.user.4_week') ?></option>
+                                                    <option class="Select-option" value="8"><?= t('server.user.8_week') ?></option>
+                                                </select>
+                                            </td>
+                                        </tr>
+                                        <tr class="Form-row" id="ReduceWarningTR">
+                                            <td class="Form-label">
+                                                <?= t('server.user.free_time') ?>
+                                            </td>
+                                            <td class="Form-inputs">
+                                                <select class="Input" name="ReduceWarning">
+                                                    <option class="Select-option">---</option>
+                                                    <option class="Select-option" value="1"><?= t('server.user.1_week') ?></option>
+                                                    <option class="Select-option" value="2"><?= t('server.user.2_week') ?></option>
+                                                    <option class="Select-option" value="4"><?= t('server.user.4_week') ?></option>
+                                                    <option class="Select-option" value="8"><?= t('server.user.8_week') ?></option>
+                                                </select>
+                                            </td>
+                                        </tr>
+                                    <? } ?>
+                                    <tr class="Form-row">
+                                        <td class="Form-label" data-tooltip="<?= t('server.user.warn_reason_title') ?>">
+                                            <?= t('server.user.warn_reason') ?>
+                                        </td>
+                                        <td class="Form-inputs">
+                                            <input class="Input" type="text" name="WarnReason" />
+                                        </td>
+                                    </tr>
+                                <?  } ?>
+                                </table>
+                                <? if (check_perms('users_disable_any')) { ?>
+                                    <table>
+                                        <tr class="Form-rowHeader UserModForm-rowHeader">
+                                            <td class="Form-title" colspan="2">
+                                                <?= t('server.user.disable_account') ?>
+                                            </td>
+                                        </tr>
+                                        <tr class="Form-row">
+                                            <td class="Form-label"><?= t('server.user.account_disable') ?></td>
+                                            <td class="Form-inputs">
+                                                <input type="checkbox" name="LockAccount" id="LockAccount" <? if ($LockedAccount) { ?> checked="checked" <? } ?> />
+                                            </td>
+                                        </tr>
+                                        <tr class="Form-row">
+                                            <td class="Form-label"><?= t('server.user.reason') ?></td>
+                                            <td class="Form-inputs">
+                                                <select class="Input" name="LockReason">
+                                                    <option class="Select-option" value="---">---</option>
+                                                    <option class="Select-option" value="<?= STAFF_LOCKED ?>" <? if ($LockedAccount == STAFF_LOCKED) { ?> selected <? } ?>><?= t('server.user.admin_account') ?></option>
+                                                </select>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                <?  }  ?>
+                                <table id="user_privs_box">
+                                    <tr class="Form-rowHeader UserModForm-rowHeader">
+                                        <td class="Form-title" colspan="2">
+                                            <?= t('server.user.user_po') ?>
+                                        </td>
+                                    </tr>
+                                    <? if (check_perms('users_disable_posts') || check_perms('users_disable_any')) {
+                                        $DB->query("
 			SELECT DISTINCT Email, IP
 			FROM users_history_emails
 			WHERE UserID = $UserID
 			ORDER BY Time ASC");
-                                $Emails = $DB->to_array();
-                            ?>
-                                <tr class="Form-row">
-                                    <td class="Form-label"><?= t('server.user.user_disable') ?></td>
-                                    <td class="Form-inputs">
-                                        <div class="Checkbox">
-                                            <input class="Input" type="checkbox" name="DisablePosting" id="DisablePosting" <? if ($DisablePosting == 1) { ?> checked="checked" <? } ?> />
-                                            <label class="Checkbox-label" for="DisablePosting"><?= t('server.user.posting') ?></label>
-                                        </div>
-                                        <? if (check_perms('users_disable_any')) { ?>
-                                            <div class="Checkbox">
-                                                <input class="Input" type="checkbox" name="DisableAvatar" id="DisableAvatar" <? if ($DisableAvatar == 1) { ?> checked="checked" <? } ?> />
-                                                <label class="Checkbox-label" for="DisableAvatar"><?= t('server.user.avatar') ?></label>
-                                            </div>
-                                            <div class="Checkbox">
-                                                <input class="Input" type="checkbox" name="DisableForums" id="DisableForums" <? if ($DisableForums == 1) { ?> checked="checked" <? } ?> />
-                                                <label class="Checkbox-label" for="DisableForums"><?= t('server.user.forums') ?></label>
-                                            </div>
-                                            <div class="Checkbox">
-                                                <input class="Input" type="checkbox" name="DisableIRC" id="DisableIRC" <? if ($DisableIRC == 1) { ?> checked="checked" <? } ?> />
-                                                <label class="Checkbox-label" for="DisableIRC"><?= t('server.user.irc') ?></label>
-                                            </div>
-                                            <div class="Checkbox">
-                                                <input class="Input" type="checkbox" name="DisablePM" id="DisablePM" <? if ($DisablePM == 1) { ?> checked="checked" <? } ?> />
-                                                <label class="Checkbox-label" for="DisablePM"><?= t('server.user.pm') ?></label>
-                                            </div>
-                                            <br />
-                                            <div class="Checkbox">
-                                                <input class="Input" type="checkbox" name="DisableLeech" id="DisableLeech" <? if ($DisableLeech == 0) { ?> checked="checked" <? } ?> />
-                                                <label class="Checkbox-label" for="DisableLeech"><?= t('server.user.leech') ?></label>
-                                            </div>
-                                            <div class="Checkbox">
-                                                <input class="Input" type="checkbox" name="DisableRequests" id="DisableRequests" <? if ($DisableRequests == 1) { ?> checked="checked" <? } ?> />
-                                                <label class="Checkbox-label" for="DisableRequests"><?= t('server.common.requests') ?></label>
-                                            </div>
-                                            <div class="Checkbox">
-                                                <input class="Input" type="checkbox" name="DisableUpload" id="DisableUpload" <? if ($DisableUpload == 1) { ?> checked="checked" <? } ?> />
-                                                <label class="Checkbox-label" for="DisableUpload"><?= t('server.user.torrent_upload') ?></label>
-                                            </div>
-                                            <div class="Checkbox">
-                                                <input class="Input" type="checkbox" name="DisablePoints" id="DisablePoints" <? if ($DisablePoints == 1) { ?> checked="checked" <? } ?> />
-                                                <label class="Checkbox-label" for="DisablePoints"><?= t('server.user.bonus_points') ?></label>
-                                            </div>
-                                            <br />
-                                            <div class="Checkbox">
-                                                <input class="Input" type="checkbox" name="DisableTagging" id="DisableTagging" <? if ($DisableTagging == 1) { ?> checked="checked" <? } ?> />
-                                                <label class="Checkbox-label" for="DisableTagging" data-tooltip="<?= t('server.user.tagging_title') ?>"><?= t('server.user.tagging') ?></label>
-                                            </div>
-                                            <div class="Checkbox">
-                                                <input class="Input" type="checkbox" name="DisableWiki" id="DisableWiki" <? if ($DisableWiki == 1) { ?> checked="checked" <? } ?> />
-                                                <label class="Checkbox-label" for="DisableWiki"><?= t('server.user.wiki') ?></label>
-                                            </div>
-                                            <br />
-                                            <div class="Checkbox">
-                                                <input class="Input" type="checkbox" name="DisableInvites" id="DisableInvites" <? if ($DisableInvites == 1) { ?> checked="checked" <? } ?> />
-                                                <label class="Checkbox-label" for="DisableInvites"><?= t('server.user.invites') ?></label>
-                                            </div>
-                                            <br />
-                                            <div class="Checkbox">
-                                                <input class="Input" type="checkbox" name="DisableCheckAll" id="DisableCheckAll" <? if ($DisableCheckAll == 1) { ?> checked="checked" <? } ?> />
-                                                <label class="Checkbox-label" for="DisableCheckAll"><?= t('server.user.check_all_torrents') ?></label>
-                                            </div>
-                                            <div class="Checkbox">
-                                                <input class="Input" type="checkbox" name="DisableCheckSelf" id="DisableCheckSelf" <? if ($DisableCheckSelf == 1) { ?> checked="checked" <? } ?> />
-                                                <label class="Checkbox-label" for="DisableCheckSelf"><?= t('server.user.check_his_her_torrents') ?></label>
-                                            </div>
-                                    </td>
-                                </tr>
-                                <? if ($Emails) { ?>
+                                        $Emails = $DB->to_array();
+                                    ?>
+                                        <tr class="Form-row">
+                                            <td class="Form-label"><?= t('server.user.user_disable') ?></td>
+                                            <td class="Form-inputs">
+                                                <div class="Checkbox">
+                                                    <input class="Input" type="checkbox" name="DisablePosting" id="DisablePosting" <? if ($DisablePosting == 1) { ?> checked="checked" <? } ?> />
+                                                    <label class="Checkbox-label" for="DisablePosting"><?= t('server.user.posting') ?></label>
+                                                </div>
+                                                <? if (check_perms('users_disable_any')) { ?>
+                                                    <div class="Checkbox">
+                                                        <input class="Input" type="checkbox" name="DisableAvatar" id="DisableAvatar" <? if ($DisableAvatar == 1) { ?> checked="checked" <? } ?> />
+                                                        <label class="Checkbox-label" for="DisableAvatar"><?= t('server.user.avatar') ?></label>
+                                                    </div>
+                                                    <div class="Checkbox">
+                                                        <input class="Input" type="checkbox" name="DisableForums" id="DisableForums" <? if ($DisableForums == 1) { ?> checked="checked" <? } ?> />
+                                                        <label class="Checkbox-label" for="DisableForums"><?= t('server.user.forums') ?></label>
+                                                    </div>
+                                                    <div class="Checkbox">
+                                                        <input class="Input" type="checkbox" name="DisableIRC" id="DisableIRC" <? if ($DisableIRC == 1) { ?> checked="checked" <? } ?> />
+                                                        <label class="Checkbox-label" for="DisableIRC"><?= t('server.user.irc') ?></label>
+                                                    </div>
+                                                    <div class="Checkbox">
+                                                        <input class="Input" type="checkbox" name="DisablePM" id="DisablePM" <? if ($DisablePM == 1) { ?> checked="checked" <? } ?> />
+                                                        <label class="Checkbox-label" for="DisablePM"><?= t('server.user.pm') ?></label>
+                                                    </div>
+                                                    <br />
+                                                    <div class="Checkbox">
+                                                        <input class="Input" type="checkbox" name="DisableLeech" id="DisableLeech" <? if ($DisableLeech == 0) { ?> checked="checked" <? } ?> />
+                                                        <label class="Checkbox-label" for="DisableLeech"><?= t('server.user.leech') ?></label>
+                                                    </div>
+                                                    <div class="Checkbox">
+                                                        <input class="Input" type="checkbox" name="DisableRequests" id="DisableRequests" <? if ($DisableRequests == 1) { ?> checked="checked" <? } ?> />
+                                                        <label class="Checkbox-label" for="DisableRequests"><?= t('server.common.requests') ?></label>
+                                                    </div>
+                                                    <div class="Checkbox">
+                                                        <input class="Input" type="checkbox" name="DisableUpload" id="DisableUpload" <? if ($DisableUpload == 1) { ?> checked="checked" <? } ?> />
+                                                        <label class="Checkbox-label" for="DisableUpload"><?= t('server.user.torrent_upload') ?></label>
+                                                    </div>
+                                                    <div class="Checkbox">
+                                                        <input class="Input" type="checkbox" name="DisablePoints" id="DisablePoints" <? if ($DisablePoints == 1) { ?> checked="checked" <? } ?> />
+                                                        <label class="Checkbox-label" for="DisablePoints"><?= t('server.user.bonus_points') ?></label>
+                                                    </div>
+                                                    <br />
+                                                    <div class="Checkbox">
+                                                        <input class="Input" type="checkbox" name="DisableTagging" id="DisableTagging" <? if ($DisableTagging == 1) { ?> checked="checked" <? } ?> />
+                                                        <label class="Checkbox-label" for="DisableTagging" data-tooltip="<?= t('server.user.tagging_title') ?>"><?= t('server.user.tagging') ?></label>
+                                                    </div>
+                                                    <div class="Checkbox">
+                                                        <input class="Input" type="checkbox" name="DisableWiki" id="DisableWiki" <? if ($DisableWiki == 1) { ?> checked="checked" <? } ?> />
+                                                        <label class="Checkbox-label" for="DisableWiki"><?= t('server.user.wiki') ?></label>
+                                                    </div>
+                                                    <br />
+                                                    <div class="Checkbox">
+                                                        <input class="Input" type="checkbox" name="DisableInvites" id="DisableInvites" <? if ($DisableInvites == 1) { ?> checked="checked" <? } ?> />
+                                                        <label class="Checkbox-label" for="DisableInvites"><?= t('server.user.invites') ?></label>
+                                                    </div>
+                                                    <br />
+                                                    <div class="Checkbox">
+                                                        <input class="Input" type="checkbox" name="DisableCheckAll" id="DisableCheckAll" <? if ($DisableCheckAll == 1) { ?> checked="checked" <? } ?> />
+                                                        <label class="Checkbox-label" for="DisableCheckAll"><?= t('server.user.check_all_torrents') ?></label>
+                                                    </div>
+                                                    <div class="Checkbox">
+                                                        <input class="Input" type="checkbox" name="DisableCheckSelf" id="DisableCheckSelf" <? if ($DisableCheckSelf == 1) { ?> checked="checked" <? } ?> />
+                                                        <label class="Checkbox-label" for="DisableCheckSelf"><?= t('server.user.check_his_her_torrents') ?></label>
+                                                    </div>
+                                            </td>
+                                        </tr>
+                                        <? if ($Emails) { ?>
+                                            <tr class="Form-row">
+                                                <td class="Form-label"><?= t('server.user.hacked') ?></td>
+                                                <td class="Form-inputs">
+                                                    <div class="Checkbox">
+                                                        <input class="Input" type="checkbox" name="SendHackedMail" id="SendHackedMail" />
+                                                        <label class="Checkbox-label" for="SendHackedMail">
+                                                            <?= t('server.user.send_hacked_account_email_to') ?>
+                                                        </label>
+                                                    </div>
+                                                    <select class="Input" name="HackedEmail">
+                                                        <?
+                                                        foreach ($Emails as $Email) {
+                                                            list($Address, $IP) = $Email;
+                                                        ?>
+                                                            <option class="Select-option" value="<?= display_str($Address) ?>">
+                                                                <?= display_str($Address) ?> - <?= display_str($IP) ?>
+                                                            </option>
+                                                        <? } ?>
+                                                    </select>
+                                                </td>
+                                            </tr>
+                                        <? } ?>
+                                    <? } ?>
+                                <? } ?>
+                                <? if (check_perms('users_disable_any')) { ?>
                                     <tr class="Form-row">
-                                        <td class="Form-label"><?= t('server.user.hacked') ?></td>
+                                        <td class="Form-label"><?= t('server.user.account') ?></td>
                                         <td class="Form-inputs">
-                                            <div class="Checkbox">
-                                                <input class="Input" type="checkbox" name="SendHackedMail" id="SendHackedMail" />
-                                                <label class="Checkbox-label" for="SendHackedMail">
-                                                    <?= t('server.user.send_hacked_account_email_to') ?>
-                                                </label>
-                                            </div>
-                                            <select class="Input" name="HackedEmail">
-                                                <?
-                                                foreach ($Emails as $Email) {
-                                                    list($Address, $IP) = $Email;
-                                                ?>
-                                                    <option class="Select-option" value="<?= display_str($Address) ?>">
-                                                        <?= display_str($Address) ?> - <?= display_str($IP) ?>
-                                                    </option>
-                                                <? } ?>
+                                            <select class="Input" name="UserStatus">
+                                                <option class="Select-option" value="0" <? if ($Enabled == '0') { ?> selected="selected" <? } ?>><?= t('server.user.unconfirmed') ?></option>
+                                                <option class="Select-option" value="1" <? if ($Enabled == '1') { ?> selected="selected" <? } ?>><?= t('server.user.enabled') ?></option>
+                                                <option class="Select-option" value="2" <? if ($Enabled == '2') { ?> selected="selected" <? } ?>><?= t('server.user.disabled') ?></option>
+                                                <? if (check_perms('users_delete_users')) { ?>
+                                                    <optgroup class="Select-group" label="-- WARNING --">
+                                                        <option class="Select-option" value="delete"><?= t('server.user.delete_account') ?></option>
+                                                    </optgroup>
+                                                <?      } ?>
                                             </select>
                                         </td>
                                     </tr>
-                                <? } ?>
-                            <? } ?>
-                        <? } ?>
-                        <? if (check_perms('users_disable_any')) { ?>
-                            <tr class="Form-row">
-                                <td class="Form-label"><?= t('server.user.account') ?></td>
-                                <td class="Form-inputs">
-                                    <select class="Input" name="UserStatus">
-                                        <option class="Select-option" value="0" <? if ($Enabled == '0') { ?> selected="selected" <? } ?>><?= t('server.user.unconfirmed') ?></option>
-                                        <option class="Select-option" value="1" <? if ($Enabled == '1') { ?> selected="selected" <? } ?>><?= t('server.user.enabled') ?></option>
-                                        <option class="Select-option" value="2" <? if ($Enabled == '2') { ?> selected="selected" <? } ?>><?= t('server.user.disabled') ?></option>
-                                        <? if (check_perms('users_delete_users')) { ?>
-                                            <optgroup class="Select-group" label="-- WARNING --">
-                                                <option class="Select-option" value="delete"><?= t('server.user.delete_account') ?></option>
-                                            </optgroup>
-                                        <?      } ?>
-                                    </select>
-                                </td>
-                            </tr>
-                            <tr class="Form-row">
-                                <td class="Form-label"><?= t('server.user.user_reason') ?></td>
-                                <td class="Form-inputs">
-                                    <input class="Input" type="text" name="UserReason" />
-                                </td>
-                            </tr>
-                            <tr class="Form-row">
-                                <td class="Form-label" data-tooltip="<?= t('server.user.restricted_forums_title') ?>"><?= t('server.user.restricted_forums') ?></td>
-                                <td class="Form-inputs">
-                                    <input class="Input" type="text" name="RestrictedForums" value="<?= display_str($RestrictedForums) ?>" />
-                                </td>
-                            </tr>
-                            <tr class="Form-row">
-                                <td class="Form-label" data-tooltip="<?= t('server.user.permitted_forums_title') ?>"><?= t('server.user.permitted_forums') ?></td>
-                                <td class="Form-inputs">
-                                    <input class="Input" type="text" name="PermittedForums" value="<?= display_str($PermittedForums) ?>" />
-                                </td>
-                            </tr>
+                                    <tr class="Form-row">
+                                        <td class="Form-label"><?= t('server.user.user_reason') ?></td>
+                                        <td class="Form-inputs">
+                                            <input class="Input" type="text" name="UserReason" />
+                                        </td>
+                                    </tr>
+                                    <tr class="Form-row">
+                                        <td class="Form-label" data-tooltip="<?= t('server.user.restricted_forums_title') ?>"><?= t('server.user.restricted_forums') ?></td>
+                                        <td class="Form-inputs">
+                                            <input class="Input" type="text" name="RestrictedForums" value="<?= display_str($RestrictedForums) ?>" />
+                                        </td>
+                                    </tr>
+                                    <tr class="Form-row">
+                                        <td class="Form-label" data-tooltip="<?= t('server.user.permitted_forums_title') ?>"><?= t('server.user.permitted_forums') ?></td>
+                                        <td class="Form-inputs">
+                                            <input class="Input" type="text" name="PermittedForums" value="<?= display_str($PermittedForums) ?>" />
+                                        </td>
+                                    </tr>
 
-                        <?  } ?>
-                        </table>
-                        <? if (check_perms('users_logout')) { ?>
-                            <table class="Form-rowList" variant="header" id="session_box">
-                                <tr class="Form-rowHeader">
-                                    <td class="Form-title" colspan="2">
-                                        <?= t('server.user.session') ?>
-                                    </td>
-                                </tr>
-                                <tr class="Form-row">
-                                    <td class="Form-label"><?= t('server.user.reset_session') ?></td>
-                                    <td class="Form-inputs"><input type="checkbox" name="ResetSession" id="ResetSession" /></td>
-                                </tr>
-                                <tr class="Form-row">
-                                    <td class="Form-label"><?= t('server.user.logout') ?></td>
-                                    <td class="Form-inputs"><input type="checkbox" name="LogOut" id="LogOut" /></td>
-                                </tr>
-                            </table>
-                        <?
-                        }
-                        if (check_perms('users_mod')) {
-                            DonationsView::render_mod_donations($donationInfo['Rank'], $donationInfo['TotRank']);
-                        }
-                        ?>
-                        <table class="Form-rowList" variant="header" id="submit_box">
-                            <tr class="Form-rowHeader">
-                                <td class="Form-title" colspan="2"><?= t('server.user.submit') ?></td>
-                            </tr>
-                            <tr class="Form-row">
-                                <td class="Form-label" data-tooltip="<?= t('server.user.reason_title') ?>"><?= t('server.user.reason') ?>:</td>
-                                <td class="Form-inputs">
-                                    <textarea class="Input wide_input_text" rows="1" cols="35" name="Reason" id="Reason" onkeyup="resize('Reason');"></textarea>
-                                </td>
-                            </tr>
-                            <tr class="Form-row">
-                                <td class="Form-label"><?= t('server.user.paste_user_stats') ?>:</td>
-                                <td class="Form-inputs">
-                                    <button class="Button" type="button" id="paster"><?= t('server.user.paste') ?></button>
-                                </td>
-                            </tr>
+                                <?  } ?>
+                                </table>
+                                <? if (check_perms('users_logout')) { ?>
+                                    <table id="session_box">
+                                        <tr class="Form-rowHeader UserModForm-rowHeader">
+                                            <td class="Form-title" colspan="2">
+                                                <?= t('server.user.session') ?>
+                                            </td>
+                                        </tr>
+                                        <tr class="Form-row">
+                                            <td class="Form-label"><?= t('server.user.reset_session') ?></td>
+                                            <td class="Form-inputs"><input type="checkbox" name="ResetSession" id="ResetSession" /></td>
+                                        </tr>
+                                        <tr class="Form-row">
+                                            <td class="Form-label"><?= t('server.user.logout') ?></td>
+                                            <td class="Form-inputs"><input type="checkbox" name="LogOut" id="LogOut" /></td>
+                                        </tr>
+                                    </table>
+                                <?
+                                }
+                                if (check_perms('users_mod')) {
+                                    DonationsView::render_mod_donations($donationInfo['Rank'], $donationInfo['TotRank']);
+                                }
+                                ?>
+                                <table id="submit_box">
+                                    <tr class="Form-rowHeader UserModForm-rowHeader">
+                                        <td class="Form-title" colspan="2"><?= t('server.user.submit') ?></td>
+                                    </tr>
+                                    <tr class="Form-row">
+                                        <td class="Form-label" data-tooltip="<?= t('server.user.reason_title') ?>"><?= t('server.user.reason') ?>:</td>
+                                        <td class="Form-inputs">
+                                            <textarea class="Input wide_input_text" rows="1" cols="35" name="Reason" id="Reason" onkeyup="resize('Reason');"></textarea>
+                                        </td>
+                                    </tr>
+                                    <tr class="Form-row">
+                                        <td class="Form-label"><?= t('server.user.paste_user_stats') ?>:</td>
+                                        <td class="Form-inputs">
+                                            <button class="Button" type="button" id="paster"><?= t('server.user.paste') ?></button>
+                                        </td>
+                                    </tr>
 
-                            <tr class="Form-row">
-                                <td align="right" colspan="2">
-                                    <input class="Button" type="submit" value="Save changes" />
-                                </td>
-                            </tr>
-                        </table>
-                </form>
-            <?
-            }
-            ?>
+                                    <tr class="Form-row">
+                                        <td align="right" colspan="2">
+                                            <input class="Button" type="submit" value="Save changes" />
+                                        </td>
+                                    </tr>
+                                </table>
+                        </form>
+                    <?
+                    }
+                    ?>
+                </div>
+            </div>
         </div>
     </div>
 </div>

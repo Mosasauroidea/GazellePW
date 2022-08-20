@@ -43,13 +43,12 @@ table .disabled_flag {
   object-position: top;
 }
 
-/* 个人页捐赠框 */
-#staff_notes_box,
-.TableDonateBox,
-.TableDonorPoints {
-  margin-bottom: var(--global-space-lg);
-}
-
 #user .SidebarList-item {
   display: block;
+}
+
+.UserModForm-rowHeader {
+  border-radius: 0;
+  font-style: italic;
+  font-size: var(--global-fontSize-sm);
 }

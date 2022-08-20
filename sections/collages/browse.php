@@ -41,14 +41,11 @@ if (!empty($_GET['tags'])) {
 $Categories = [];
 if (!empty($_GET['cats'])) {
     foreach ($_GET['cats'] as $Cat => $Accept) {
-        if (!in_array($Cat, $CollageCats) || $Cat == $PersonalCollageCategoryCat) {
-            continue;
-        }
         $Categories[] = $Cat;
     }
 } else {
     foreach ($CollageCats as $Cat) {
-        if ($Cat == $PersonalCollageCategoryCat) {
+        if ($Cat == $PersonalCollageCategoryCat && empty($_GET['userid'])) {
             continue;
         }
         $Categories[] = $Cat;
@@ -276,9 +273,7 @@ View::show_header(t('server.collages.browse_collages'), '', 'PageCollageHome');
                                 <td class="Form-label"><?= t('server.collages.type') ?>:</td>
                                 <td class="Form-inputs">
                                     <? foreach ($CollageCats as $ID) {
-                                        if ($ID == $PersonalCollageCategoryCat) {
-                                            continue;
-                                        } ?>
+                                    ?>
                                         <div class="Checkbox">
                                             <input class="Input" type="checkbox" value="1" name="cats[<?= $ID ?>]" id="cats_<?= $ID ?>" <? if (in_array($ID, $Categories)) {
                                                                                                                                             echo ' checked="checked"';

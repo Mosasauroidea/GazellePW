@@ -93,7 +93,6 @@ class INVITE_TREE {
             // We store this in an output buffer, so we can show the summary at the top without having to loop through twice
             ob_start();
             while (list($ID, $Enabled, $Class, $Donor, $Uploaded, $Downloaded, $Paranoia, $TreePosition, $TreeLevel) = G::$DB->next_record(MYSQLI_NUM, false)) {
-
                 // Do stats
                 $Count++;
 

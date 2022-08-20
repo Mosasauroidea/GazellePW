@@ -35,7 +35,7 @@ Post-headerMultipleRows
   line-height: 1.5em;
 }
 .Post:not(:last-child) {
-  border-bottom: var(--Box-border);
+  /* border-bottom: var(--Box-border);*/
 }
 
 .Post-header {
@@ -43,6 +43,7 @@ Post-headerMultipleRows
   gap: var(--global-space-default);
   padding: var(--global-space-default);
   flex-wrap: wrap;
+  border-bottom: var(--Box-border);
 }
 @media (min-width: 768px) {
   .Post-header {
@@ -70,7 +71,6 @@ Post-headerMultipleRows
 }
 
 .Post-body {
-  border-top: var(--Box-border);
   padding: var(--global-space-default);
 }
 

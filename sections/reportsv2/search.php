@@ -68,7 +68,7 @@ if (!isset($dt_until)) {
         <h2 class="BodyHeader-nav"><?= t('server.reportsv2.search_reports') ?></h2>
         <? include('header.php'); ?>
     </div>
-    <div>
+    <div class="BodyContent Box">
         <form class="Form SearchPage" method="get" action="/reportsv2.php">
             <table>
                 <tr class="Form-row">

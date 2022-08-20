@@ -28,7 +28,7 @@ Box              // box with header
   border-bottom: var(--Box-border);
   border-top-left-radius: var(--global-borderRadius);
   border-top-right-radius: var(--global-borderRadius);
-  padding: 5px 10px;
+  padding: 5px 10px !important;
 }
 
 .Box-body {

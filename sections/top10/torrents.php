@@ -276,48 +276,52 @@ View::show_footer();
 
 // generate a table based on data from most recent query to $DB
 function generate_torrent_table($Caption, $Tag, $Details, $Limit) {
-    if (empty($Details)) {
-        return null;
-    }
 ?>
-    <h3><?= t('server.top10.top') ?> <?= "$Limit $Caption" ?>
-        <? if (empty($_GET['advanced'])) { ?>
-            <small class="top10_quantity_links">
-                <?
-                switch ($Limit) {
-                    case 100: ?>
-                        - <a href="top10.php?details=<?= $Tag ?>" class="brackets"><?= t('server.top10.top') ?> 10</a>
-                        - <span class="brackets"><?= t('server.top10.top') ?> 100</span>
-                        - <a href="top10.php?type=torrents&amp;limit=250&amp;details=<?= $Tag ?>" class="brackets"><?= t('server.top10.top') ?> 250</a>
-                    <? break;
-                    case 250: ?>
-                        - <a href="top10.php?details=<?= $Tag ?>" class="brackets"><?= t('server.top10.top') ?> 10</a>
-                        - <a href="top10.php?type=torrents&amp;limit=100&amp;details=<?= $Tag ?>" class="brackets"><?= t('server.top10.top') ?> 100</a>
-                        - <span class="brackets"><?= t('server.top10.top') ?> 250</span>
-                    <? break;
-                    default: ?>
-                        - <span class="brackets"><?= t('server.top10.top') ?> 10</span>
-                        - <a href="top10.php?type=torrents&amp;limit=100&amp;details=<?= $Tag ?>" class="brackets"><?= t('server.top10.top') ?> 100</a>
-                        - <a href="top10.php?type=torrents&amp;limit=250&amp;details=<?= $Tag ?>" class="brackets"><?= t('server.top10.top') ?> 250</a>
-                <? } ?>
-            </small>
-        <? } ?>
-    </h3>
-    <?
-    $TorrentLists = [];
-    if ($Details) {
-        $GroupIDs = [];
-        foreach ($Details as $Detail) {
-            $GroupIDs[] = $Detail['ID'];
-        }
-        $Groups = Torrents::get_groups($GroupIDs);
-        foreach ($Details as $Detail) {
-            $TorrentLists[] = Torrents::convert_torrent($Groups[$Detail['ID']], $Detail['TorrentID']);
-        }
-    }
-    $tableRender = new UngroupTorrentSimpleListView($TorrentLists);
-    $tableRender->with_number(true)->render([
-        'NoActions' => true
-    ]);
-    ?>
+    <div class="Post">
+        <div class="Post-header">
+            <div class="Post-headerLeft">
+                <div class="Post-headerTitle"><?= t('server.top10.top') ?> <?= "$Limit $Caption" ?></div>
+            </div>
+            <? if (empty($_GET['advanced'])) { ?>
+                <small class="Post-headerActions top10_quantity_links">
+                    <?
+                    switch ($Limit) {
+                        case 100: ?>
+                            <a href="top10.php?details=<?= $Tag ?>" class="brackets"><?= t('server.top10.top') ?> 10</a>
+                            - <span class="brackets"><?= t('server.top10.top') ?> 100</span>
+                            - <a href="top10.php?type=torrents&amp;limit=250&amp;details=<?= $Tag ?>" class="brackets"><?= t('server.top10.top') ?> 250</a>
+                        <? break;
+                        case 250: ?>
+                            <a href="top10.php?details=<?= $Tag ?>" class="brackets"><?= t('server.top10.top') ?> 10</a>
+                            - <a href="top10.php?type=torrents&amp;limit=100&amp;details=<?= $Tag ?>" class="brackets"><?= t('server.top10.top') ?> 100</a>
+                            - <span class="brackets"><?= t('server.top10.top') ?> 250</span>
+                        <? break;
+                        default: ?>
+                            <span class="brackets"><?= t('server.top10.top') ?> 10</span>
+                            - <a href="top10.php?type=torrents&amp;limit=100&amp;details=<?= $Tag ?>" class="brackets"><?= t('server.top10.top') ?> 100</a>
+                            - <a href="top10.php?type=torrents&amp;limit=250&amp;details=<?= $Tag ?>" class="brackets"><?= t('server.top10.top') ?> 250</a>
+                    <? } ?>
+                </small>
+            <? } ?>
+        </div>
+        <div class="Post-body">
+            <?
+            $TorrentLists = [];
+            if ($Details) {
+                $GroupIDs = [];
+                foreach ($Details as $Detail) {
+                    $GroupIDs[] = $Detail['ID'];
+                }
+                $Groups = Torrents::get_groups($GroupIDs);
+                foreach ($Details as $Detail) {
+                    $TorrentLists[] = Torrents::convert_torrent($Groups[$Detail['ID']], $Detail['TorrentID']);
+                }
+            }
+            $tableRender = new UngroupTorrentSimpleListView($TorrentLists);
+            $tableRender->with_number(true)->render([
+                'NoActions' => true
+            ]);
+            ?>
+        </div>
+    </div>
 <? } ?>

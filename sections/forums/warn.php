@@ -1,5 +1,4 @@
 <?php
-
 if (!check_perms('users_warn')) {
     error(404);
 }
@@ -25,6 +24,7 @@ View::show_header('Warn User', '', 'PageForumWarn');
             <input type="hidden" name="postid" value="<?= $PostID ?>" />
             <input type="hidden" name="userid" value="<?= $UserID ?>" />
             <input type="hidden" name="key" value="<?= $Key ?>" />
+            <input type="hidden" name="auth" value="<?= $LoggedUser['AuthKey'] ?>" />
             <input type="hidden" name="action" value="take_warn" />
             <table class="layout" align="center">
                 <tr>

@@ -520,78 +520,95 @@ View::show_header(($SubName ? '[' . $SubName . '] ' : '') . $Name, 'browse,bbcod
         if ($NumRequests > 0) {
 
         ?>
-            <div class="TableContainer">
-                <table class="TableRequest Table" cellpadding="6" cellspacing="1" border="0" width="100%" id="requests">
-                    <tr class="Table-rowHeader">
-                        <td class="Table-cell">
-                            <?= t('server.artist.request_name') ?>
-                        </td>
-                        <td class="Table-cell TableRequest-cellValue">
-                            <?= t('server.artist.vote') ?>
-                        </td>
-                        <td class="Table-cell TableRequest-cellValue">
-                            <?= t('server.artist.bounty') ?>
-                        </td>
-                        <td class="Table-cell TableRequest-cellValue">
-                            <?= t('server.artist.added') ?>
-                        </td>
-                    </tr>
-                    <?
-                    foreach ($Requests as $Request) {
-                        $RequestVotes = Requests::get_votes_array($Request['ID']);
-                        $RequestID = $Request['ID'];
-                        $RequestName = Torrents::group_name($Request, false);
-                        $FullName = "<a href=\"requests.php?action=view&amp;id=$RequestID\">$RequestName</a>";
-                        $Tags = $Request['Tags'];
-                    ?>
-                        <tr class="Table-row">
-                            <td class="TableRequest-cellName Table-cell">
-                                <?= $FullName ?>
-                                <div class="torrent_info">
-                                    <?
-                                    ?>
-                                    <?= str_replace('|', ', ', $Request['CodecList']) . ' / ' . str_replace('|', ', ', $Request['SourceList']) . ' / ' . str_replace('|', ', ', $Request['ResolutionList']) . ' / ' . str_replace('|', ', ', $Request['ContainerList']) ?>
-                                </div>
-                            </td>
-                            <td class="TableRequest-cellVotes Table-cell TableRequest-cellValue">
-                                <span id="vote_count_<?= $Request['ID'] ?>"><?= count($RequestVotes['Voters']) ?></span>
-                                <? if (check_perms('site_vote')) { ?>
-                                    &nbsp;&nbsp; <a href="javascript:globalapp.requestVote(0, <?= $Request['ID'] ?>)" class="brackets">+</a>
-                                <?          } ?>
-                            </td>
-                            <td class="TableRequest-cellBounty Table-cell TableRequest-cellValue">
-                                <?= Format::get_size($RequestVotes['TotalBounty']) ?>
-                            </td>
-                            <td class="TableRequest-cellCreatedAt TableRequest-cellValue Table-cell">
-                                <?= time_diff($Request['TimeAdded'], 1) ?>
-                            </td>
-                        </tr>
-                    <?  } ?>
-                </table>
-            </div>
-
-            <?
-            foreach ($TorrentGroups as $ReleaseType => $GroupInfo) {
-                $DisplayName =  sectionTitle($ReleaseType);
-            ?>
-                <div class="Box">
-                    <div class="Box-header">
-                        <div id="torrents_<?= $ReleaseType ?>">
-                            <?= $DisplayName ?>
-                            <a class="floatright" href="#" onclick="$('.torrent_table_<?= $ReleaseType ?>').gtoggle(true); return false;">
-                                <?= t('server.artist.view') ?>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="Box-body torrent_table_<?= $ReleaseType ?>" id="torrent_table_<?= $ID ?>">
-                        <?
-                        $tableRender = new TorrentGroupCoverTableView($GroupInfo);
-                        $tableRender->render();
-                        ?>
+            <div class="Post" id="requests">
+                <div class="Post-header">
+                    <div class="Post-headerTitle">
+                        <?= t('server.common.requests') ?>
                     </div>
                 </div>
-            <?
-            }
+                <div class="Post-body">
+                    <div class="TableContainer">
+                        <table class="TableRequest Table" cellpadding="6" cellspacing="1" border="0" width="100%">
+                            <tr class="Table-rowHeader">
+                                <td class="Table-cell">
+                                    <?= t('server.artist.request_name') ?>
+                                </td>
+                                <td class="Table-cell TableRequest-cellValue">
+                                    <?= t('server.artist.vote') ?>
+                                </td>
+                                <td class="Table-cell TableRequest-cellValue">
+                                    <?= t('server.artist.bounty') ?>
+                                </td>
+                                <td class="Table-cell TableRequest-cellValue">
+                                    <?= t('server.artist.added') ?>
+                                </td>
+                            </tr>
+                            <?
+                            foreach ($Requests as $Request) {
+                                $RequestVotes = Requests::get_votes_array($Request['ID']);
+                                $RequestID = $Request['ID'];
+                                $RequestName = Torrents::group_name($Request, false);
+                                $FullName = "<a href=\"requests.php?action=view&amp;id=$RequestID\">$RequestName</a>";
+                                $Tags = $Request['Tags'];
+                            ?>
+                                <tr class="Table-row">
+                                    <td class="TableRequest-cellName Table-cell">
+                                        <?= $FullName ?>
+                                        <div class="torrent_info">
+                                            <?
+                                            ?>
+                                            <?= str_replace('|', ', ', $Request['CodecList']) . ' / ' . str_replace('|', ', ', $Request['SourceList']) . ' / ' . str_replace('|', ', ', $Request['ResolutionList']) . ' / ' . str_replace('|', ', ', $Request['ContainerList']) ?>
+                                        </div>
+                                    </td>
+                                    <td class="TableRequest-cellVotes Table-cell TableRequest-cellValue">
+                                        <span id="vote_count_<?= $Request['ID'] ?>"><?= count($RequestVotes['Voters']) ?></span>
+                                        <? if (check_perms('site_vote')) { ?>
+                                            &nbsp;&nbsp; <a href="javascript:globalapp.requestVote(0, <?= $Request['ID'] ?>)" class="brackets">+</a>
+                                        <?          } ?>
+                                    </td>
+                                    <td class="TableRequest-cellBounty Table-cell TableRequest-cellValue">
+                                        <?= Format::get_size($RequestVotes['TotalBounty']) ?>
+                                    </td>
+                                    <td class="TableRequest-cellCreatedAt TableRequest-cellValue Table-cell">
+                                        <?= time_diff($Request['TimeAdded'], 1) ?>
+                                    </td>
+                                </tr>
+                            <?  } ?>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        <?
+        }
+        ?>
+
+        <?
+        foreach ($TorrentGroups as $ReleaseType => $GroupInfo) {
+            $DisplayName = sectionTitle($ReleaseType);
+        ?>
+            <div class="Post">
+                <div class="Post-header">
+                    <div class="Post-headerLeft">
+                        <div class="Post-headerTitle">
+                            <div id="torrents_<?= $ReleaseType ?>">
+                                <?= $DisplayName ?>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="Post-headerActions">
+                        <a href="#" onclick="$('.torrent_table_<?= $ReleaseType ?>').gtoggle(true); return false;">
+                            <?= t('server.artist.view') ?>
+                        </a>
+                    </div>
+                </div>
+                <div class="Post-body torrent_table_<?= $ReleaseType ?>" id="torrent_table_<?= $ID ?>">
+                    <?
+                    $tableRender = new TorrentGroupCoverTableView($GroupInfo);
+                    $tableRender->render();
+                    ?>
+                </div>
+            </div>
+        <?
         }
 
         // Similar Artist Map
@@ -619,7 +636,7 @@ View::show_header(($SubName ? '[' . $SubName . '] ' : '') . $Name, 'browse,bbcod
 
                 $Cache->cache_value("similar_positions_$ArtistID", $SimilarData, 3600 * 24);
             }
-            ?>
+        ?>
             <div id="similar_artist_map" class="box">
                 <div id="flipper_head" class="head">
                     <strong id="flipper_title"><?= t('server.artist.similar_artist_map') ?></strong>

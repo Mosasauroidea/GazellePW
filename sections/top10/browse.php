@@ -73,36 +73,47 @@ View::show_header(t('server.top10.top') . " $Limit " . t('server.top10.top_movie
 View::show_footer();
 
 function generate_torrent_table($Caption, $Tag, $Groups, $Limit) {
-    if (empty($Groups)) {
-        return null;
-    }
 ?>
-    <h3>
-        <?= t('server.top10.top') ?> <?= "$Limit $Caption" ?>
-        <? if (empty($_GET['advanced'])) { ?>
-            <small class="top10_quantity_links">
-                <?
-                switch ($Limit) {
-                    case 100: ?>
-                        - <a class="brackets" href="top10.php?details=<?= $Tag ?>"><?= t('server.top10.top') ?> 10</a>
-                        - <span class="brackets"><?= t('server.top10.top') ?> 100</span>
-                        - <a class="brackets" href="top10.php?type=movies&amp;limit=250&amp;details=<?= $Tag ?>"><?= t('server.top10.top') ?> 250</a>
-                    <? break;
-                    case 250: ?>
-                        - <a class="brackets" href="top10.php?details=<?= $Tag ?>"><?= t('server.top10.top') ?> 10</a>
-                        - <a class="brackets" href="top10.php?type=movies&amp;limit=100&amp;details=<?= $Tag ?>"><?= t('server.top10.top') ?> 100</a>
-                        - <span class="brackets"><?= t('server.top10.top') ?> 250</span>
-                    <? break;
-                    default: ?>
-                        - <span class="brackets"><?= t('server.top10.top') ?> 10</span>
-                        - <a class="brackets" href="top10.php?type=movies&amp;limit=100&amp;details=<?= $Tag ?>"><?= t('server.top10.top') ?> 100</a>
-                        - <a class="brackets" href="top10.php?type=movies&amp;limit=250&amp;details=<?= $Tag ?>"><?= t('server.top10.top') ?> 250</a>
-                <? } ?>
-            </small>
-        <? } ?>
-    </h3>
-    <?
-    $tableRender = new TorrentGroupCoverTableView($Groups);
-    $tableRender->render(['Variant' => 'FiveGrid']);
-    ?>
-<? } ?>
+    <div class="Post">
+        <div class="Post-header">
+            <div class="Post-headerLeft">
+                <div class="Post-headerTitle"><?= t('server.top10.top') ?> <?= "$Limit $Caption" ?>
+                </div>
+            </div>
+            <? if (empty($_GET['advanced'])) { ?>
+                <small class="Post-headerActions top10_quantity_links">
+                    <?
+                    switch ($Limit) {
+                        case 100: ?>
+                            <a class="brackets" href="top10.php?details=<?= $Tag ?>"><?= t('server.top10.top') ?> 10</a>
+                            - <span class="brackets"><?= t('server.top10.top') ?> 100</span>
+                            - <a class="brackets" href="top10.php?type=movies&amp;limit=250&amp;details=<?= $Tag ?>"><?= t('server.top10.top') ?> 250</a>
+                        <? break;
+                        case 250: ?>
+                            <a class="brackets" href="top10.php?details=<?= $Tag ?>"><?= t('server.top10.top') ?> 10</a>
+                            - <a class="brackets" href="top10.php?type=movies&amp;limit=100&amp;details=<?= $Tag ?>"><?= t('server.top10.top') ?> 100</a>
+                            - <span class="brackets"><?= t('server.top10.top') ?> 250</span>
+                        <? break;
+                        default: ?>
+                            <span class="brackets"><?= t('server.top10.top') ?> 10</span>
+                            - <a class="brackets" href="top10.php?type=movies&amp;limit=100&amp;details=<?= $Tag ?>"><?= t('server.top10.top') ?> 100</a>
+                            - <a class="brackets" href="top10.php?type=movies&amp;limit=250&amp;details=<?= $Tag ?>"><?= t('server.top10.top') ?> 250</a>
+                    <? } ?>
+                </small>
+            <? } ?>
+        </div>
+        <div class="Post-body">
+            <?
+            if (empty($Groups)) {
+                echo '<table>
+<tr class="Table-row">
+    <td class="center Table-cell Table-cellCenter" colspan="9">' . t('server.top10.found_no_torrents_matching_the_criteria') . '</td>
+</tr>
+</table></div></div>';
+                return;
+            }
+            $tableRender = new TorrentGroupCoverTableView($Groups);
+            $tableRender->render(['Variant' => 'FiveGrid']);
+            ?>
+        </div>
+    <? } ?>

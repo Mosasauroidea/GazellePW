@@ -223,6 +223,9 @@ switch ($_REQUEST['action']) {
         break;
     case 'take_update_rank':
         break;
+    case 'dupes':
+        include('manage_linked.php');
+        break;
     default:
         if (isset($_REQUEST['id'])) {
             include(CONFIG['SERVER_ROOT'] . '/sections/user/user.php');

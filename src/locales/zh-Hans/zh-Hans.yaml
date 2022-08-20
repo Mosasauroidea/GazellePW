@@ -2585,9 +2585,9 @@ server.reportsv2.multi_resolve_btn_title: |-
 server.reportsv2.multi_resolve_title: |-
   通过批量处理按钮，所有已勾选报告都会被一次性处理掉
 server.reportsv2.new_auto_assigned: |-
-  新 (已自动分配)
+  新 (自动分配)
 server.reportsv2.new_reports_auto_assigned: |-
-  自动分配的新报告
+  自动分配新报告
 server.reportsv2.new_reports_not_auto_assigned: |-
   未自动分配的新报告
 server.reportsv2.new_un_auto: |-
@@ -2595,7 +2595,7 @@ server.reportsv2.new_un_auto: |-
 server.reportsv2.no_new_reports: |-
   没有新的报告啦，芜湖！
 server.reportsv2.pl_to_other_relevant_torrent_s: |-
-  <strong>另一相关</strong>种子的永久链接 (PL)
+  <strong>另一相关</strong> 种子的永久链接 (PL)
 server.reportsv2.pm_reason: |-
   原因
 server.reportsv2.pm_uploader_reporter: |-

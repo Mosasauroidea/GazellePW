@@ -178,8 +178,12 @@ if (!empty($_REQUEST['confirm'])) {
             list($StyleID) = $DB->next_record();
             $AuthKey = Users::make_secret();
 
-            if ($InviteReason !== '') {
-                $InviteReason = db_string(sqltime() . " - $InviteReason");
+
+            if ($InviteReason != "") {
+                $InviterUserInfo = Users::user_info($InviterID);
+                $InviterUserName = $InviterUserInfo['Username'];
+                $InviteReason = ", Reason: $InviteReason";
+                $InviteReason = db_string(sqltime() . " - Invited by $InviterUserName$InviteReason");
             }
             $DB->query("
 				INSERT INTO users_info

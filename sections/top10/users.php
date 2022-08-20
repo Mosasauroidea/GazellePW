@@ -97,82 +97,93 @@ View::show_header(t('server.top10.top_10_users'), '', 'PageTop10User');
         $Items = create_items($DefaultItems, $Tag);
         $Details = array_slice($Details, 0, $Limit);
     ?>
-        <h3>
-            <?= t('server.top10.top') ?> <?= $Limit . ' ' . $Caption; ?>
-            <small class="top10_quantity_links">
-                <?
-                switch ($Limit) {
-                    case 100: ?>
-                        - <a href="top10.php?type=users&amp;details=<?= $Tag ?>" class="brackets"><?= t('server.top10.top') ?> 10</a>
-                        - <span class="brackets"><?= t('server.top10.top') ?> 100</span>
-                        - <a href="top10.php?type=users&amp;limit=250&amp;details=<?= $Tag ?>" class="brackets"><?= t('server.top10.top') ?> 250</a>
-                    <? break;
-                    case 250: ?>
-                        - <a href="top10.php?type=users&amp;details=<?= $Tag ?>" class="brackets"><?= t('server.top10.top') ?> 10</a>
-                        - <a href="top10.php?type=users&amp;limit=100&amp;details=<?= $Tag ?>" class="brackets"><?= t('server.top10.top') ?> 100</a>
-                        - <span class="brackets"><?= t('server.top10.top') ?> 250</span>
-                    <? break;
-                    default: ?>
-                        - <span class="brackets"><?= t('server.top10.top') ?> 10</span>
-                        - <a href="top10.php?type=users&amp;limit=100&amp;details=<?= $Tag ?>" class="brackets"><?= t('server.top10.top') ?> 100</a>
-                        - <a href="top10.php?type=users&amp;limit=250&amp;details=<?= $Tag ?>" class="brackets"><?= t('server.top10.top') ?> 250</a>
-                <? } ?>
-            </small>
-        </h3>
-        <div class="TableContainer">
-            <table class="TableTop10User Table">
-                <tr class="Table-rowHeader">
-                    <td class="Table-cell"><?= t('server.top10.rank') ?></td>
-                    <td class="Table-cell"><?= t('server.top10.user') ?></td>
-                    <? foreach ($Items as $Item) { ?>
-                        <? if ($Item === 'numul') { ?>
-                            <td class="Table-cell Table-cellRight"><?= t('server.top10.uploads') ?></td>
-                        <? } else if ($Item === 'bonus_points') { ?>
-                            <td class="Table-cell Table-cellRight"><?= t('server.user.bonus_points') ?></td>
-                        <? } else if ($Item === 'ul') { ?>
-                            <td class="Table-cell Table-cellRight"><?= t('server.user.uploaded') ?></td>
-                        <? } else if ($Item === 'dl') { ?>
-                            <td class="Table-cell Table-cellRight"><?= t('server.user.downloaded') ?></td>
-                        <? } else if ($Item === 'ratio') { ?>
-                            <td class="Table-cell Table-cellRight"><?= t('server.user.ratio') ?></td>
-                        <? } ?>
+        <div class="Post">
+            <div class="Post-header">
+                <div class="Post-headerLeft">
+                    <div class="Post-headerTitle">
+                        <?= t('server.top10.top') ?> <?= $Limit . ' ' . $Caption; ?>
+                    </div>
+                </div>
+                <small class="Post-headerActions top10_quantity_links">
+                    <?
+                    switch ($Limit) {
+                        case 100: ?>
+                            <a href="top10.php?type=users&amp;details=<?= $Tag ?>" class="brackets"><?= t('server.top10.top') ?> 10</a>
+                            - <span class="brackets"><?= t('server.top10.top') ?> 100</span>
+                            - <a href="top10.php?type=users&amp;limit=250&amp;details=<?= $Tag ?>" class="brackets"><?= t('server.top10.top') ?> 250</a>
+                        <? break;
+                        case 250: ?>
+                            <a href="top10.php?type=users&amp;details=<?= $Tag ?>" class="brackets"><?= t('server.top10.top') ?> 10</a>
+                            - <a href="top10.php?type=users&amp;limit=100&amp;details=<?= $Tag ?>" class="brackets"><?= t('server.top10.top') ?> 100</a>
+                            - <span class="brackets"><?= t('server.top10.top') ?> 250</span>
+                        <? break;
+                        default: ?>
+                            <span class="brackets"><?= t('server.top10.top') ?> 10</span>
+                            - <a href="top10.php?type=users&amp;limit=100&amp;details=<?= $Tag ?>" class="brackets"><?= t('server.top10.top') ?> 100</a>
+                            - <a href="top10.php?type=users&amp;limit=250&amp;details=<?= $Tag ?>" class="brackets"><?= t('server.top10.top') ?> 250</a>
                     <? } ?>
-                    <td class="Table-cell Table-cellRight"><?= t('server.top10.joined') ?></td>
-                </tr>
-                <?
-                // in the unlikely event that query finds 0 rows...
-                if (empty($Details)) {
-                    echo '
+                </small>
+            </div>
+            <div class="Post-body">
+                <div class="TableContainer">
+                    <?
+                    if (empty($Details)) {
+                        echo '<table>
 		<tr class="Table-row">
-			<td class="Table-cell Table-cellCenter" colspan="9">' . t('server.top10.found_no_users_matching_the_criteria') . '</td>
+			<td class="center Table-cell Table-cellCenter" colspan="9">' . t('server.top10.found_no_users_matching_the_criteria') . '</td>
 		</tr>
-		</table><br />';
-                    return;
-                }
-                $Rank = 0;
-                foreach ($Details as $Detail) {
-                    $Rank++;
-                    $IsAnonymous = preg_match("/&quot;(uploaded|downloaded|ratio|uploads\+|bonuspoints)&quot;/", $Detail['Paranoia']);
-                ?>
-                    <tr class="Table-row">
-                        <td class="Table-cell"><?= $Rank ?></td>
-                        <td class="Table-cell"><?= $IsAnonymous ?  t('server.user.anonymous') : Users::format_username($Detail['ID'], false, false, false) ?></td>
-                        <? foreach ($Items as $Item) { ?>
-                            <? if ($Item === 'numul') { ?>
-                                <td class="Table-cell Table-cellRight"><?= number_format($Detail['NumUploads']) ?></td>
-                            <? } else if ($Item === 'bonus_points') { ?>
-                                <td class="Table-cell Table-cellRight"><?= Format::human_format($Detail['BonusPoints'], ['Percision' => 0]) ?></td>
-                            <? } else if ($Item === 'ul') { ?>
-                                <td class="Table-cell Table-cellRight"><?= Format::get_size($Detail['Uploaded'], 0) ?></td>
-                            <? } else if ($Item === 'dl') { ?>
-                                <td class="Table-cell Table-cellRight"><?= Format::get_size($Detail['Downloaded'], 0) ?></td>
-                            <? } else if ($Item === 'ratio') { ?>
-                                <td class="Table-cell Table-cellRight"><?= Format::get_ratio_html($Detail['Uploaded'], $Detail['Downloaded']) ?></td>
+		</table></div></div></div>';
+                        return;
+                    }
+                    ?>
+                    <table class="TableTop10User Table">
+                        <tr class="Table-rowHeader">
+                            <td class="Table-cell"><?= t('server.top10.rank') ?></td>
+                            <td class="Table-cell"><?= t('server.top10.user') ?></td>
+                            <? foreach ($Items as $Item) { ?>
+                                <? if ($Item === 'numul') { ?>
+                                    <td class="Table-cell Table-cellRight"><?= t('server.top10.uploads') ?></td>
+                                <? } else if ($Item === 'bonus_points') { ?>
+                                    <td class="Table-cell Table-cellRight"><?= t('server.user.bonus_points') ?></td>
+                                <? } else if ($Item === 'ul') { ?>
+                                    <td class="Table-cell Table-cellRight"><?= t('server.user.uploaded') ?></td>
+                                <? } else if ($Item === 'dl') { ?>
+                                    <td class="Table-cell Table-cellRight"><?= t('server.user.downloaded') ?></td>
+                                <? } else if ($Item === 'ratio') { ?>
+                                    <td class="Table-cell Table-cellRight"><?= t('server.user.ratio') ?></td>
+                                <? } ?>
                             <? } ?>
+                            <td class="Table-cell Table-cellRight"><?= t('server.top10.joined') ?></td>
+                        </tr>
+                        <?
+                        // in the unlikely event that query finds 0 rows...
+
+                        $Rank = 0;
+                        foreach ($Details as $Detail) {
+                            $Rank++;
+                            $IsAnonymous = preg_match("/&quot;(uploaded|downloaded|ratio|uploads\+|bonuspoints)&quot;/", $Detail['Paranoia']);
+                        ?>
+                            <tr class="Table-row">
+                                <td class="Table-cell"><?= $Rank ?></td>
+                                <td class="Table-cell"><?= $IsAnonymous ?  t('server.user.anonymous') : Users::format_username($Detail['ID'], false, false, false) ?></td>
+                                <? foreach ($Items as $Item) { ?>
+                                    <? if ($Item === 'numul') { ?>
+                                        <td class="Table-cell Table-cellRight"><?= number_format($Detail['NumUploads']) ?></td>
+                                    <? } else if ($Item === 'bonus_points') { ?>
+                                        <td class="Table-cell Table-cellRight"><?= Format::human_format($Detail['BonusPoints'], ['Percision' => 0]) ?></td>
+                                    <? } else if ($Item === 'ul') { ?>
+                                        <td class="Table-cell Table-cellRight"><?= Format::get_size($Detail['Uploaded'], 0) ?></td>
+                                    <? } else if ($Item === 'dl') { ?>
+                                        <td class="Table-cell Table-cellRight"><?= Format::get_size($Detail['Downloaded'], 0) ?></td>
+                                    <? } else if ($Item === 'ratio') { ?>
+                                        <td class="Table-cell Table-cellRight"><?= Format::get_ratio_html($Detail['Uploaded'], $Detail['Downloaded']) ?></td>
+                                    <? } ?>
+                                <? } ?>
+                                <td class="Table-cell Table-cellRight"><?= $IsAnonymous ? '--' : (new DateTime($Detail['JoinDate']))->format('Y'); ?></td>
+                            </tr>
                         <? } ?>
-                        <td class="Table-cell Table-cellRight"><?= $IsAnonymous ? '--' : (new DateTime($Detail['JoinDate']))->format('Y'); ?></td>
-                    </tr>
-                <? } ?>
-            </table>
+                    </table>
+                </div>
+            </div>
         </div>
     <? } ?>

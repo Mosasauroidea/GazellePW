@@ -5,8 +5,8 @@ use Gazelle\Manager\Donation;
 class DonationsView {
     public static function render_mod_donations($Rank, $TotalRank) {
 ?>
-        <table class="TableDonateBox Table Form-rowList">
-            <tr class="Form-rowHeader">
+        <table class="TableDonateBox">
+            <tr class="Form-rowHeader UserModForm-rowHeader">
                 <td colspan="2"><?= t('server.user.donor_system_add_points') ?></td>
             </tr>
             <tr class="Form-row">
@@ -23,15 +23,10 @@ class DonationsView {
                 <td class="Form-label"><?= t('server.user.reason') ?>:</td>
                 <td class="Form-inputs"><input class="Input wide_input_text" type="text" name="donation_reason" /></td>
             </tr>
-            <tr class="Form-row">
-                <td align="right" colspan="2">
-                    <input class="Button" type="submit" name="donor_points_submit" value="Add donor points" />
-                </td>
-            </tr>
         </table>
 
-        <table class="TableDonorPoints Table Form-rowList" id="donor_points_box">
-            <tr class="Form-rowHeader">
+        <table class="TableDonorPoints" id="donor_points_box">
+            <tr class="Form-rowHeader UserModForm-rowHeader">
                 <td colspan="3" data-tooltip='<?= t('server.user.donor_system_modify_values_title') ?>'><?= t('server.user.donor_system_modify_values') ?></td>
             </tr>
             <tr class="Form-row">
@@ -45,11 +40,6 @@ class DonationsView {
             <tr class="Form-row">
                 <td class="Form-label"><?= t('server.user.reason') ?>:</td>
                 <td class="Form-inputs"><input class="Input wide_input_text" type="text" name="reason" /></td>
-            </tr>
-            <tr class="Form-row">
-                <td align="right" colspan="2">
-                    <input class="Button" type="submit" name="donor_values_submit" value="Change point values" />
-                </td>
             </tr>
         </table>
         <?
@@ -101,12 +91,18 @@ class DonationsView {
         for ($i = 1; $i <= 4; $i++) {
             if ($EnabledRewards['HasProfileInfo' . $i] && $ProfileRewards['ProfileInfo' . $i]) {
             ?>
-                <div class="Box">
-                    <div class="Box-header">
-                        <span><?= !empty($ProfileRewards['ProfileInfoTitle' . $i]) ? display_str($ProfileRewards['ProfileInfoTitle' . $i]) : "Extra Profile " . ($i + 1) ?></span>
-                        <span style="float: right;"><a href="#" onclick="$('#profilediv_<?= $i ?>').gtoggle(); this.innerHTML = (this.innerHTML == '<?= t('server.common.hide') ?>' ? '<?= t('server.common.show') ?>' : '<?= t('server.common.hide') ?>'); return false;" class="brackets"><?= t('server.common.hide') ?></a></span>
+                <div class="Post">
+                    <div class="Post-header">
+                        <div class="Post-headerLeft">
+                            <div class="Post-headerTitle">
+                                <span><?= !empty($ProfileRewards['ProfileInfoTitle' . $i]) ? display_str($ProfileRewards['ProfileInfoTitle' . $i]) : "Extra Profile " . ($i + 1) ?></span>
+                            </div>
+                        </div>
+                        <div class="Post-headerActions">
+                            <span><a href="#" onclick="$('#profilediv_<?= $i ?>').gtoggle(); this.innerHTML = (this.innerHTML == '<?= t('server.common.hide') ?>' ? '<?= t('server.common.show') ?>' : '<?= t('server.common.hide') ?>'); return false;" class="brackets"><?= t('server.common.hide') ?></a></span>
+                        </div>
                     </div>
-                    <div class="Box-body HtmlText PostArticle profileinfo" id="profilediv_<?= $i ?>">
+                    <div class="Post-body HtmlText PostArticle profileinfo" id="profilediv_<?= $i ?>">
                         <?= Text::full_format($ProfileRewards['ProfileInfo' . $i]) ?>
                     </div>
                 </div>
@@ -120,63 +116,62 @@ class DonationsView {
             return;
         }
         ?>
-        <div class="Box" id="donation_history_box">
-            <div class="Box-header">
-                <?= t('server.user.donation_history') ?> <a href="#" onclick="$('#donation_history').gtoggle(); return false;" class="brackets"><?= t('server.user.view') ?></a>
+        <div class="Post" id="donation_history_box">
+            <div class="Post-header">
+                <div class="Post-headerLeft">
+                    <div class="Post-headerTitle">
+                        <?= t('server.user.donation_history') ?>
+                    </div>
+                </div>
+                <div class="Post-headerActions">
+                    <a href="#" onclick="$('#donation_history').gtoggle(); return false;" class="brackets"><?= t('server.user.view') ?></a>
+                </div>
             </div>
-            <? $Row = 'b'; ?>
-            <div class="Box-body TableContainer hidden" id="donation_history">
+            <div class="Post-body TableContainer hidden" id="donation_history">
                 <table class="Table">
                     <tbody>
                         <tr class="Table-rowHeader">
                             <td class="Table-cell">
                                 <strong><?= t('server.user.source') ?></strong>
                             </td>
-                            <td class="Table-cell">
+                            <td class="Table-cell ">
                                 <strong><?= t('server.user.date') ?></strong>
                             </td>
                             <td class="Table-cell">
                                 <strong><?= t('server.user.amount_cny') ?></strong>
                             </td>
-                            <td class="Table-cell">
+                            <td class="Table-cell Table-cellRight">
                                 <strong><?= t('server.user.added_points') ?></strong>
                             </td>
-                            <td class="Table-cell">
+                            <td class="Table-cell Table-cellRight">
                                 <strong><?= t('server.user.total_points') ?></strong>
                             </td>
-                            <td class="Table-cell">
-                                <strong><?= t('server.user.email') ?></strong>
-                            </td>
-                            <td class="Table-cell" style="width: 30%;">
+                            <td class="Table-cell Table-cellRight" style="width: 30%;">
                                 <strong><?= t('server.user.reason') ?></strong>
                             </td>
                         </tr>
                         <? foreach ($DonationHistory as $Donation) { ?>
-                            <tr class="row<?= $Row ?>">
-                                <td>
+                            <tr class="Table-row">
+                                <td class="Table-cell">
                                     <?= display_str($Donation['Source']) ?> (<?= Users::format_username($Donation['AddedBy']) ?>)
                                 </td>
-                                <td>
+                                <td class="Table-cell">
                                     <?= $Donation['Time'] ?>
                                 </td>
-                                <td>
+                                <td class="Table-cell">
                                     <?= $Donation['Amount'] ?>
                                 </td>
-                                <td>
+                                <td class="Table-cell Table-cellRight">
                                     <?= $Donation['Rank'] ?>
                                 </td>
-                                <td>
+                                <td class="Table-cell Table-cellRight">
                                     <?= $Donation['TotalRank'] ?>
                                 </td>
-                                <td>
-                                    <?= display_str($Donation['Email']) ?>
-                                </td>
-                                <td>
+                                <td class="Table-cell Table-cellRight">
                                     <?= display_str($Donation['Reason']) ?>
                                 </td>
                             </tr>
                         <?
-                            $Row = $Row === 'b' ? 'a' : 'b';
                         }
                         ?>
                     </tbody>

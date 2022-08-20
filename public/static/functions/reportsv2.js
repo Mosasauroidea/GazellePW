@@ -1,11 +1,7 @@
 function ChangeReportType() {
-  $.post(
-    'reportsv2.php?action=ajax_report',
-    $('#reportform').serialize(),
-    function (response) {
-      $('#dynamic_form').html(response)
-    }
-  )
+  $.post('reportsv2.php?action=ajax_report', $('#reportform').serialize(), function (response) {
+    $('#dynamic_form').html(response)
+  })
 }
 
 function ChangeResolve(reportid) {
@@ -18,9 +14,7 @@ function ChangeResolve(reportid) {
     $('#categoryid' + reportid).val()
   $.getJSON(url, function (x) {
     $('#delete' + reportid).prop('checked', x[0] == '1')
-    if (
-      $('#uploaderid' + reportid).val() == $('#reporterid' + reportid).val()
-    ) {
+    if ($('#uploaderid' + reportid).val() == $('#reporterid' + reportid).val()) {
       $('#upload' + reportid).prop('checked', false)
       $('#warning' + reportid).val('0')
     } else {
@@ -33,10 +27,7 @@ function ChangeResolve(reportid) {
 
 function Load(reportid) {
   var type = $('#type' + reportid).val()
-  $('#resolve_type' + reportid + ' option[value="' + type + '"]').prop(
-    'selected',
-    true
-  )
+  $('#resolve_type' + reportid + ' option[value="' + type + '"]').prop('selected', true)
   // Can't use ChangeResolve() because we need it to block to do the uploader==reporter part
   var url =
     'reportsv2.php?action=ajax_change_resolve&id=' +
@@ -47,9 +38,7 @@ function Load(reportid) {
     $('#categoryid' + reportid).val()
   $.getJSON(url, function (x) {
     $('#delete' + reportid).prop('checked', x[0] == '1')
-    if (
-      $('#uploaderid' + reportid).val() == $('#reporterid' + reportid).val()
-    ) {
+    if ($('#uploaderid' + reportid).val() == $('#reporterid' + reportid).val()) {
       $('#upload' + reportid).prop('checked', false)
       $('#warning' + reportid).val('0')
     } else {
@@ -78,60 +67,48 @@ function HideErrors() {
 
 function TakeResolve(reportid) {
   $('#submit_' + reportid).disable()
-  $.post(
-    'reportsv2.php?action=takeresolve',
-    $('#reportform_' + reportid).serialize(),
-    function (response) {
-      if (response) {
-        ErrorBox(reportid, response)
+  $.post('reportsv2.php?action=takeresolve', $('#reportform_' + reportid).serialize(), function (response) {
+    if (response) {
+      ErrorBox(reportid, response)
+    } else {
+      if ($('#from_delete' + reportid).size()) {
+        window.location.search = '?id=' + $('#from_delete' + reportid).val()
       } else {
-        if ($('#from_delete' + reportid).size()) {
-          window.location.search = '?id=' + $('#from_delete' + reportid).val()
-        } else {
-          $('#report' + reportid).remove()
-          if ($('#dynamic').prop('checked')) {
-            NewReport(1)
-          }
+        $('#report' + reportid).remove()
+        if ($('#dynamic').prop('checked')) {
+          NewReport(1)
         }
       }
     }
-  )
+  })
 }
 
 function NewReport(q, view, id) {
-  var url = 'reportsv2.php?action=ajax_new_report&uniqurl=' + q
-  if (view) {
-    url += '&view=' + view
-  }
-  if (id) {
-    url += '&id=' + id
-  }
-  $.get(url, function (response) {
-    if (response) {
-      var div = $(response)
-      var id = div.data('reportid')
-      if (!$('#report' + id).size()) {
-        $('#all_reports').append(div)
-        $('#no_reports').remove()
-        if ($('#type', div).size()) {
-          Load(id)
+  for (var i = 0; i < q; i++) {
+    var url = 'reportsv2.php?action=ajax_new_report&uniqurl=' + i
+    if (view) {
+      url += '&view=' + view
+    }
+    if (id) {
+      url += '&id=' + id
+    }
+    $.get(url, function (response) {
+      if (response) {
+        var div = $(response)
+        var id = div.data('reportid')
+        if (!$('#report' + id).size()) {
+          $('#all_reports').append(div)
+        }
+      } else {
+        // No new reports at this time
+        if ($('.report').size() == 0 && !$('#no_reports').size()) {
+          $('#all_reports').append(
+            $('<div id="no_reports" class="box pad center"><strong>No new reports!</strong></div>')
+          )
         }
       }
-    } else {
-      // No new reports at this time
-      if (!$('.report').size() && !$('#no_reports') == 0) {
-        $('#all_reports').append(
-          $(
-            '<div id="no_reports" class="box pad center"><strong>No new reports! o/</strong></div>'
-          )
-        )
-      }
-    }
-    if (--q > 0) {
-      // Recursion to avoid grabbing the same report multiple times
-      NewReport(q, view, id)
-    }
-  })
+    })
+  }
 }
 
 function AddMore(view, id) {
@@ -144,48 +121,34 @@ function AddMore(view, id) {
 }
 
 function SendPM(reportid) {
-  $.post(
-    'reportsv2.php?action=ajax_take_pm',
-    $('#reportform_' + reportid).serialize(),
-    function (response) {
-      $('#uploader_pm_' + reportid).val(response)
-    }
-  )
+  $.post('reportsv2.php?action=ajax_take_pm', $('#reportform_' + reportid).serialize(), function (response) {
+    $('#uploader_pm_' + reportid).val(response)
+  })
 }
 
 function UpdateComment(reportid) {
-  $.post(
-    'reportsv2.php?action=ajax_update_comment',
-    $('#reportform_' + reportid).serialize(),
-    function (response) {
-      if (response) {
-        alert(response)
-      }
+  $.post('reportsv2.php?action=ajax_update_comment', $('#reportform_' + reportid).serialize(), function (response) {
+    if (response) {
+      alert(response)
     }
-  )
+  })
 }
 
 function GiveBack(reportid) {
   if (reportid) {
-    $.get(
-      'reportsv2.php?action=ajax_giveback_report&id=' + reportid,
-      function (response) {
-        if (response) {
-          alert(response)
-        }
+    $.get('reportsv2.php?action=ajax_giveback_report&id=' + reportid, function (response) {
+      if (response) {
+        alert(response)
       }
-    )
+    })
     $('#report' + reportid).remove()
   } else {
     $('#all_reports input[name="reportid"]').each(function () {
-      $.get(
-        'reportsv2.php?action=ajax_giveback_report&id=' + this.value,
-        function (response) {
-          if (response) {
-            alert(response)
-          }
+      $.get('reportsv2.php?action=ajax_giveback_report&id=' + this.value, function (response) {
+        if (response) {
+          alert(response)
         }
-      )
+      })
       $('#report' + this.value).remove()
     })
   }
@@ -193,18 +156,14 @@ function GiveBack(reportid) {
 
 function ManualResolve(reportid) {
   $('#resolve_type' + reportid)
-    .append(
-      '<option class="Select-option" value="manual">Manual Resolve</option>'
-    )
+    .append('<option class="Select-option" value="manual">Manual Resolve</option>')
     .val('manual')
   TakeResolve(reportid)
 }
 
 function Dismiss(reportid) {
   $('#resolve_type' + reportid)
-    .append(
-      '<option class="Select-option" value="dismiss">Invalid Report</option>'
-    )
+    .append('<option class="Select-option" value="dismiss">Invalid Report</option>')
     .val('dismiss')
   TakeResolve(reportid)
 }
@@ -215,31 +174,25 @@ function ClearReport(reportid) {
 
 function Grab(reportid) {
   if (reportid) {
-    $.get(
-      'reportsv2.php?action=ajax_grab_report&id=' + reportid,
-      function (response) {
+    $.get('reportsv2.php?action=ajax_grab_report&id=' + reportid, function (response) {
+      if (response == '1') {
+        $('#grab' + reportid).disable()
+        $('#report' + reportid).remove()
+      } else {
+        alert('Grab failed for some reason :/')
+      }
+    })
+  } else {
+    $('#all_reports input[name="reportid"]').each(function () {
+      var reportid = this.value
+      $.get('reportsv2.php?action=ajax_grab_report&id=' + reportid, function (response) {
         if (response == '1') {
           $('#grab' + reportid).disable()
           $('#report' + reportid).remove()
         } else {
-          alert('Grab failed for some reason :/')
+          alert("One of those grabs failed, sorry I can't be more useful :P")
         }
-      }
-    )
-  } else {
-    $('#all_reports input[name="reportid"]').each(function () {
-      var reportid = this.value
-      $.get(
-        'reportsv2.php?action=ajax_grab_report&id=' + reportid,
-        function (response) {
-          if (response == '1') {
-            $('#grab' + reportid).disable()
-            $('#report' + reportid).remove()
-          } else {
-            alert("One of those grabs failed, sorry I can't be more useful :P")
-          }
-        }
-      )
+      })
     })
   }
 }
@@ -276,16 +229,12 @@ function Switch(reportid, torrentid, otherid) {
     otherid: torrentid,
   }
 
-  $.post(
-    'reportsv2.php?action=ajax_create_report',
-    report,
-    function (response) {
-      //Returns new report ID.
-      if (isNaN(response)) {
-        alert(response)
-      } else {
-        window.location = 'reportsv2.php?view=report&id=' + response
-      }
+  $.post('reportsv2.php?action=ajax_create_report', report, function (response) {
+    //Returns new report ID.
+    if (isNaN(response)) {
+      alert(response)
+    } else {
+      window.location = 'reportsv2.php?view=report&id=' + response
     }
-  )
+  })
 }
