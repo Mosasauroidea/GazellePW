@@ -117,7 +117,6 @@ if (empty($_POST['description'])) {
 }
 
 if (empty($_POST['artist_ids'])) {
-    var_dump($_POST);
     $Err = t('server.requests.forgot_enter_artists');
 } else {
     $Artists = $_POST['artists'];

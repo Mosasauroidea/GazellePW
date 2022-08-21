@@ -90,22 +90,14 @@ foreach ($Groups as $ID => $Data) {
         $ArtistIDs[] = $value['ArtistID'];
     }
 
-    $DB->query("SELECT ArtistID, AliasID FROM artists_alias WHERE ArtistID in (" . implode(',', $ArtistIDs) . ") and Redirect = 0");
-    $ArtistID2AliasID = $DB->to_array('ArtistID', MYSQLI_ASSOC);
-
     $DB->query("DELETE FROM torrents_artists WHERE GroupID = $ID");
 
     foreach ($IMDBIDs as $Num => $IMDBID) {
         $ArtistID = $IMDBID2ArtistID[$IMDBID]['ArtistID'];
         $Importance = $Importances[$Num];
-
-        $AliasID = $ArtistID2AliasID[$ArtistID]['AliasID'];
-        if (empty($AliasID)) {
-            $AliasID = 0;
-        }
         $DB->query(
-            "INSERT IGNORE INTO torrents_artists (GroupID, ArtistID, AliasID, UserID, Importance, Credit, `Order`)
-                VALUES ($ID, " . $ArtistID . ', ' . $AliasID . ', ' . "0" . ", '$Importance', true, $Num)"
+            "INSERT IGNORE INTO torrents_artists (GroupID, ArtistID, UserID, Importance, Credit, `Order`)
+                VALUES ($ID, " . $ArtistID . ', ' . "0" . ", '$Importance', true, $Num)"
         );
     }
     $Cache->delete_value("groups_artists_$ID"); // Delete group artist cache

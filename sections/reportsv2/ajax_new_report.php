@@ -8,7 +8,7 @@ include(CONFIG['SERVER_ROOT'] . '/sections/torrents/functions.php');
 include(CONFIG['SERVER_ROOT'] . '/classes/torrenttable.class.php');
 include(CONFIG['SERVER_ROOT'] . '/sections/reportsv2/report_item.php');
 if (!check_perms('admin_reports')) {
-    error(403);
+	error(403);
 }
 
 
@@ -61,7 +61,7 @@ $DB->query("
 		LEFT JOIN torrents AS t ON t.ID = r.TorrentID
 		LEFT JOIN torrents_group AS tg ON tg.ID = t.GroupID
 		LEFT JOIN torrents_artists AS ta ON ta.GroupID = tg.ID AND ta.Importance = '1'
-		LEFT JOIN artists_alias AS aa ON aa.AliasID = ta.AliasID
+		LEFT JOIN artists_alias AS aa ON aa.ArtistID = ta.ArtistID
 		LEFT JOIN users_main AS resolver ON resolver.ID = r.ResolverID
 		LEFT JOIN users_main AS reporter ON reporter.ID = r.ReporterID
 		LEFT JOIN users_main AS uploader ON uploader.ID = t.UserID
@@ -71,13 +71,13 @@ $DB->query("
 	LIMIT 1");
 
 if (!$DB->has_results()) {
-    die();
+	die();
 }
 $Report = G::$DB->next_record();
 list(
-    $ReportID, $ReporterID, $ReporterName, $TorrentID, $Type, $UserComment, $UploaderReply, $ResolverID, $ResolverName, $Status, $ReportedTime, $LastChangeTime,
-    $ModComment, $Tracks, $Images, $ExtraIDs, $Links, $LogMessage, $GroupName, $GroupID, $ArtistID, $ArtistName, $Year, $CategoryID, $Time, $RemasterTitle,
-    $RemasterYear, $Codec, $Source, $Resolution, $Container, $Size, $UploaderID, $UploaderName
+	$ReportID, $ReporterID, $ReporterName, $TorrentID, $Type, $UserComment, $UploaderReply, $ResolverID, $ResolverName, $Status, $ReportedTime, $LastChangeTime,
+	$ModComment, $Tracks, $Images, $ExtraIDs, $Links, $LogMessage, $GroupName, $GroupID, $ArtistID, $ArtistName, $Year, $CategoryID, $Time, $RemasterTitle,
+	$RemasterYear, $Codec, $Source, $Resolution, $Container, $Size, $UploaderID, $UploaderName
 ) = Misc::display_array($Report, array('ModComment'));
 $DB->query("
 			UPDATE reportsv2

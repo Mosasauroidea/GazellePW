@@ -11,6 +11,21 @@ class Artists {
         self::Director, self::Writter, self::Producer, self::Composer, self::Cinematographer, self::Actor
     ];
 
+    public static function update_artist_alias($OldName, $Name, $ArtistID) {
+        G::$DB->prepared_query("SELECT AliasID FROM artists_alias WHERE ArtistID = $ArtistID and Name = '$OldName'");
+        list($AliasID) = G::$DB->next_record(MYSQLI_NUM);
+        if ($AliasID) {
+            if (empty($Name)) {
+                G::$DB->prepared_query("DELETE FROM artists_alias WHERE AliasID = $AliasID");
+            } else {
+                G::$DB->prepared_query("UPDATE artists_alias SET Name = '$Name' WHERE AliasID = $AliasID");
+            }
+        } else {
+            G::$DB->prepared_query("INSERT INTO artists_alias (ArtistID, Name)
+						VALUES (?, ?)", $ArtistID, $Name);
+        }
+    }
+
     public static function get_artist_name($Artist) {
         if (Lang::is_default() && !empty($Artist['SubName'])) {
             return $Artist['SubName'];
@@ -65,7 +80,6 @@ class Artists {
 					ta.ArtistID,
 					ag.Name,
 					ta.Importance,
-					ta.AliasID,
 					ag.Image,
                     ag.SubName,
                     ag.IMDBID
@@ -76,9 +90,9 @@ class Artists {
 					ta.Importance ASC,
 					ta.Order ASC;"
             );
-            while (list($GroupID, $ArtistID, $ArtistName, $ArtistImportance, $AliasID, $Image, $SubName, $IMDBID) = G::$DB->next_record(MYSQLI_BOTH, false)) {
-                $Results[$GroupID][$ArtistImportance][] = array('ArtistID' => $ArtistID, 'Name' => $ArtistName, 'AliasID' => $AliasID, 'Image' => $Image, 'SubName' => $SubName, 'IMDBID' => $IMDBID);
-                $New[$GroupID][$ArtistImportance][] = array('ArtistID' => $ArtistID, 'Name' => $ArtistName, 'AliasID' => $AliasID, 'Image' => $Image, 'SubName' => $SubName, 'IMDBID' => $IMDBID);
+            while (list($GroupID, $ArtistID, $ArtistName, $ArtistImportance, $Image, $SubName, $IMDBID) = G::$DB->next_record(MYSQLI_BOTH, false)) {
+                $Results[$GroupID][$ArtistImportance][] = array('ArtistID' => $ArtistID, 'Name' => $ArtistName, 'Image' => $Image, 'SubName' => $SubName, 'IMDBID' => $IMDBID);
+                $New[$GroupID][$ArtistImportance][] = array('ArtistID' => $ArtistID, 'Name' => $ArtistName, 'Image' => $Image, 'SubName' => $SubName, 'IMDBID' => $IMDBID);
             }
             G::$DB->set_query_id($QueryID);
             foreach ($DBs as $GroupID) {
@@ -140,6 +154,46 @@ class Artists {
         return G::$DB->to_array('IMDBID', MYSQLI_ASSOC);
     }
 
+    public static function new_artist($ArtistForm, $MovieIMDNBID, $Limit = 10) {
+        foreach ($ArtistForm[Artists::Actor] as $Num => $Artist) {
+            if ($Artist['IMDBID']) {
+                $IMDBIDs[] = $Artist['IMDBID'];
+            }
+        }
+        foreach ($ArtistForm as $key => $value) {
+            if ($key == Artists::Actor) {
+                continue;
+            }
+            foreach ($value as $Num => $Artist) {
+                if ($Artist['IMDBID']) {
+                    $IMDBIDs[] = $Artist['IMDBID'];
+                }
+            }
+        }
+        $FullArtistDetails = MOVIE::get_artists($IMDBIDs, $MovieIMDNBID, $Limit);
+        foreach ($ArtistForm as $Importance => $Artists) {
+            foreach ($Artists as $Num => $Artist) {
+                $Artist['Name'] = html_entity_decode($Artist['Name'], ENT_QUOTES);
+                $Artist['SubName'] = html_entity_decode($Artist['SubName'], ENT_QUOTES);
+                $ArtistDetail = MOVIE::get_default_artist($Artist['IMDBID']);
+                if ($Artist['IMDBID']) {
+                    $Detail = $FullArtistDetails[$Artist['IMDBID']];
+                    if ($Detail) {
+                        $ArtistDetail = $Detail;
+                    }
+                }
+
+                $Artist['Image'] = $ArtistDetail['Image'];
+                $Artist['Description'] = $ArtistDetail['Description'];
+                $Artist['Birthday'] = $ArtistDetail['Birthday'];
+                $Artist['PlaceOfBirth'] = $ArtistDetail['PlaceOfBirth'];
+                $Artist = Artists::add_artist($Artist);
+                $ArtistForm[$Importance][$Num] = $Artist;
+            }
+        }
+        return $ArtistForm;
+    }
+
     public static function add_artist($Artist, $Summary = "Auto load") {
         $UserID = G::$LoggedUser['ID'];
         if (empty($UserID)) {
@@ -163,11 +217,17 @@ class Artists {
             $OldArtist = G::$DB->next_record(MYSQLI_ASSOC);
             if ($OldArtist) {
                 $OldID = $OldArtist['ArtistID'];
+                $OldName = $OldArtist['Name'];
+                $OldSubName = $OldArtist['SubName'];
                 $Updates = [];
-                if (!empty($Name) && $OldArtist['Name'] != $Name) {
+                if (!empty($Name) && empty($OldName)) {
+                    G::$DB->prepared_query("INSERT INTO artists_alias (ArtistID, Name)
+						VALUES (?, ?)", $OldID, $Name);
                     $Updates[] = "Name = '$Name'";
                 }
-                if (!empty($SubName) && $OldArtist['SubName'] != $SubName) {
+                if (!empty($SubName) && empty($OldSubName)) {
+                    G::$DB->prepared_query("INSERT INTO artists_alias (ArtistID, Name)
+						VALUES (?, ?)", $OldID, $SubName);
                     $Updates[] = "SubName = '$SubName'";
                 }
                 if (empty($OldArtist['Image']) && !empty($Image)) {
@@ -187,16 +247,6 @@ class Artists {
                     $Updates[] = "PlaceOfBirth = '$Place'";
                 }
                 $Artist['ArtistID'] = $OldID;
-                // update 
-                G::$DB->prepared_query("SELECT ArtistID, AliasID, Redirect FROM artists_alias WHERE ArtistID = ?", $OldID);
-                while (list($ArtistID, $AliasID, $Redirect) = G::$DB->next_record(MYSQLI_NUM, false)) {
-                    if ($Redirect) {
-                        $Artist['AliasID'] = $Redirect;
-                    } else {
-                        $Artist['AliasID'] = $AliasID;
-                    }
-                    break;
-                }
                 if (count($Updates) > 0) {
                     G::$DB->prepared_query("UPDATE artists_group SET " . implode(' , ', $Updates) . " WHERE ArtistID = $OldID");
                     $Change = true;
@@ -233,15 +283,13 @@ class Artists {
             if ($New) {
                 G::$DB->prepared_query("INSERT INTO artists_alias (ArtistID, Name)
 						VALUES (?, ?)", $ArtistID, $Name);
-                $AliasID = G::$DB->inserted_id();
-                $Artist['AliasID'] = $AliasID;
                 foreach ($ArtistAliasList as $key => $value) {
-                    G::$DB->prepared_query("INSERT INTO artists_alias (ArtistID, Name, Redirect)
-						VALUES (?, ?, ?)", $ArtistID, $value, $AliasID);
+                    G::$DB->prepared_query("INSERT INTO artists_alias (ArtistID, Name)
+						VALUES (?, ?)", $ArtistID, $value);
                 }
                 if ($SubName) {
-                    G::$DB->prepared_query("INSERT INTO artists_alias (ArtistID, Name, Redirect)
-						VALUES (?, ?, ?)", $ArtistID, $SubName, $AliasID);
+                    G::$DB->prepared_query("INSERT INTO artists_alias (ArtistID, Name)
+						VALUES (?, ?)", $ArtistID, $SubName);
                 }
             }
         }

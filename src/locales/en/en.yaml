@@ -5518,7 +5518,7 @@ server.torrents.successfully_sent_re_seed_request_for_torrent: |-
 server.torrents.tag: |-
   Tags
 server.torrents.tag_rules: |-
-  View tagging rules
+  Tagging rules
 server.torrents.tags: |-
   Tags (comma-separated)
 server.torrents.the_destination_torrent_group_does_not_exist: |-

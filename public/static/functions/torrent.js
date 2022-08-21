@@ -114,6 +114,7 @@ function ArtistManager() {
     var elSubmitDiv = document.createElement('div')
     var elImportance = document.createElement('select')
     elImportance.name = 'importance'
+    elImportance.className = 'Input'
     elImportance.id = 'artists_importance'
     var elOpt = document.createElement('option')
     elOpt.value = 1
@@ -121,7 +122,7 @@ function ArtistManager() {
     elImportance.appendChild(elOpt)
     elOpt = document.createElement('option')
     elOpt.value = 2
-    elOpt.innerHTML = t('writter')
+    elOpt.innerHTML = t('client.common.writer')
     elImportance.appendChild(elOpt)
     elOpt = document.createElement('option')
     elOpt.value = 3
@@ -142,9 +143,10 @@ function ArtistManager() {
     elSubmitDiv.appendChild(elImportance)
     elSubmitDiv.appendChild(document.createTextNode(' '))
 
-    elSubmitDiv.className = 'body'
+    elSubmitDiv.className = 'FormOneLine'
     var elSubmit = document.createElement('input')
     elSubmit.type = 'button'
+    elSubmit.className = 'Button'
     elSubmit.value = 'Update'
     elSubmit.onclick = ArtistManagerSubmit
     elSubmitDiv.appendChild(elSubmit)
@@ -152,6 +154,7 @@ function ArtistManager() {
 
     var elDelButton = document.createElement('input')
     elDelButton.type = 'button'
+    elDelButton.className = 'Button'
     elDelButton.value = 'Delete'
     elDelButton.onclick = ArtistManagerDelete
     elSubmitDiv.appendChild(elDelButton)

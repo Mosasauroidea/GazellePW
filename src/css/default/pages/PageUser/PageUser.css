@@ -3,20 +3,20 @@
 }
 
 .donor_icon {
-  width: 15px;
-  height: 15px;
+  width: 16px;
+  height: 16px;
 }
 
 .warned-flag .icon,
 .disabled_flag .icon {
   color: #c83f3f;
-  width: 12px;
-  height: 12px;
+  width: 16px;
+  height: 16px;
 }
 .half-warned-flag .icon {
   color: #ffbf00;
-  width: 12px;
-  height: 12px;
+  width: 16px;
+  height: 16px;
 }
 table .warned-flag,
 table .half-warned-flag,

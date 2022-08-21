@@ -263,7 +263,7 @@ if ((empty($_GET['search']) || trim($_GET['search']) === '') && $Order != 'Name'
 			FROM $From
 				JOIN torrents_group AS tg ON tg.ID = t.GroupID
 				LEFT JOIN torrents_artists AS ta ON ta.GroupID = tg.ID
-				LEFT JOIN artists_alias AS aa ON aa.AliasID = ta.AliasID
+				LEFT JOIN artists_alias AS aa ON aa.ArtistID = ta.ArtistID
 			WHERE $UserField = '$UserID'
 				$ExtraWhere
 				$SearchWhere

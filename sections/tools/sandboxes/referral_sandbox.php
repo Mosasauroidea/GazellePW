@@ -64,7 +64,7 @@ View::show_header("Referral Sandbox");
         <div class="LayoutBody">
             <h3>Request</h3>
             <div class="BoxBody">
-                <?php var_dump($request); ?>
+                <?= $request ?>
             </div>
         </div>
         <div class="LayoutBody">
@@ -79,7 +79,7 @@ View::show_header("Referral Sandbox");
                     if (strpos($response['response'], '<html')) {
                         $response['response'] = 'HTML body';
                     }
-                    var_dump($response)
+                    echo $response;
                     ?>
                 </div>
             </div>

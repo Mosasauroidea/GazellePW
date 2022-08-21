@@ -168,6 +168,7 @@ $Pages = Format::get_pages($Page, $TotalTorrents, CONFIG['TORRENTS_PER_PAGE']);
 		t.Scene,
 		t.RemasterYear,
 		t.RemasterTitle,
+        t.Slot,
 		GREATEST(t.Seeders, 1) AS Seeders,
 		xfh.seedtime AS Seedtime,
 		(t.Size / (1024 * 1024 * 1024) * 1 *(
@@ -197,7 +198,7 @@ $Pages = Format::get_pages($Page, $TotalTorrents, CONFIG['TORRENTS_PER_PAGE']);
                         $MonthlyPoints = $DailyPoints * 30.436875;
                         $YearlyPoints = $DailyPoints * 365.2425;
                         $Torrent['Group'] = $Groups[$Torrent['GroupID']];
-                        $Name = Torrents::torrent_simple_view($Torrent['Group'], true, $Torrent, [
+                        $Name = Torrents::torrent_simple_view($Torrent['Group'], $Torrent, true, [
                             'SettingTorrentTitle' => G::$LoggedUser['SettingTorrentTitle'],
                         ]);
                         $DisplayName = '<a href="torrents.php?id=' . $GroupID . '&amp;torrentid=' . $Torrent['ID'] . '"  data-tooltip="' . t('server.common.view_torrent') . '" dir="ltr">' . $Name . '</a>';

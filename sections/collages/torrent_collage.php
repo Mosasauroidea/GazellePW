@@ -274,19 +274,23 @@ View::show_header($Name, 'browse,collage,bbcode,voting,recommend', 'PageCollageT
             <? } ?>
         </div>
         <div class="LayoutMainSidebar-main">
-            <div class="Box">
-                <div class="Box-header">
-                    <strong><?= t('server.collages.description') ?></strong>
+            <div class="Post">
+                <div class="Post-header">
+                    <div class="Post-headerTitle">
+                        <strong><?= t('server.collages.description') ?></strong>
+                    </div>
                 </div>
-                <div class="Box-body HtmlText">
+                <div class="Post-body HtmlText">
                     <?= Text::full_format($Description) ?>
                 </div>
             </div>
-            <div class="Box">
-                <div class="Box-header">
-                    <strong><?= t('server.index.moviegroups') ?></strong>
+            <div class="Post">
+                <div class="Post-header">
+                    <div class="Post-headerTitle">
+                        <strong><?= t('server.index.moviegroups') ?></strong>
+                    </div>
                 </div>
-                <div class="Box-body">
+                <div class="Post-body">
                     <?
                     $Groups = [];
                     foreach ($GroupIDs as $GroupID) {

@@ -86,13 +86,10 @@ if (isset($_POST['confirm'])) {
   $NewArtistBookmarks[] = '0';
   $NewArtistBookmarks = implode(',', $NewArtistBookmarks);
 
-  $DB->query("SELECT AliasID FROM artists_alias WHERE ArtistID = $NewArtistID and Redirect = 0");
-  list($RedirectID) = G::$DB->next_record(MYSQLI_NUM);
   // Merge all of this artist's aliases onto the new artist
   $DB->query("
 		UPDATE artists_alias
 		SET ArtistID = $NewArtistID,
-    Redirect = $RedirectID
 		WHERE ArtistID = $ArtistID");
 
   // Update the torrent groups, requests, and bookmarks

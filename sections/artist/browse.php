@@ -340,7 +340,7 @@ View::show_header(($SubName ? '[' . $SubName . '] ' : '') . $Name, 'browse,bbcod
             </div>
             <div class="MovieInfo-synopsis" data-tooltip="<?= t('server.torrents.fold_tooltip') ?>">
                 <p class="HtmlText">
-                    <?= $Body ? Text::full_format($Body) : t('server.artist.empty_introduction_note') ?>
+                    <?= $Body ? Text::full_format($Body) : '<i>' . t('server.artist.empty_introduction_note') . '</i>' ?>
                 </p>
             </div>
         </div>

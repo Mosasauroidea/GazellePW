@@ -1737,7 +1737,7 @@ server.torrents.subscribe: |-
 server.torrents.tag: |-
   Tags
 server.torrents.tag_rules: |-
-  Ver regras de tags
+  Regras de tags
 server.torrents.tags: |-
   Tags (separadas por vírgula)
 server.torrents.there_are_no_tags_to_display: |-

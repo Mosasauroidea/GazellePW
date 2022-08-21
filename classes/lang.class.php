@@ -49,9 +49,6 @@ class Lang {
         }
 
         if (!empty($Value) && is_string($Value)) {
-            if ($Key == 'server.user.ratio_watch_text') {
-                var_dump($Value, $Values);
-            }
             $Value = sprintf($Value, ...$Values);
         }
 

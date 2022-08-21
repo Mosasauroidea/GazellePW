@@ -3,83 +3,50 @@ authorize();
 
 $UserID = $LoggedUser['ID'];
 $GroupID = db_string($_POST['groupid']);
-$Importances = $_POST['importance'];
-$AliasNames = $_POST['aliasname'];
+$Importance = $_POST['importance'];
+$ArtistName = $_POST['artist'];
+$ArtistSubName = $_POST['artist_sub'];
+$ArtistIMDBID = $_POST['artist_id'];
+if (!in_array($Importance, Artists::Importances)) {
+    error(0);
+}
+$ArtistForm[$Importance][] = ['IMDBID' => $ArtistIMDBID, 'Name' => $ArtistName, 'SubName' => $ArtistSubName];
+
+if (empty($ArstitName) && empty($ArtistIMDBID)) {
+    error(0);
+}
 
 if (!is_number($GroupID) || !$GroupID) {
     error(0);
 }
 
 $DB->query("
-	SELECT Name
+	SELECT Name,IMDBID
 	FROM torrents_group
 	WHERE ID = $GroupID");
 if (!$DB->has_results()) {
     error(404);
 }
-list($GroupName) = $DB->next_record(MYSQLI_NUM, false);
+list($GroupName, $IMDBID) = $DB->next_record(MYSQLI_NUM, false);
 
-$Changed = false;
+$ArtistForm = Artists::new_artist($ArtistForm, $IMDBID);
+$ArtistID = $ArtistForm[$Importance][0]['ArtistID'];
+$DB->query(
+    "INSERT IGNORE INTO torrents_artists
+		(GroupID, ArtistID, Importance, UserID)
+	VALUES
+		('$GroupID', '$ArtistID', '$Importance', '$UserID')"
+);
 
-for ($i = 0; $i < count($AliasNames); $i++) {
-    $AliasName = Artists::normalise_artist_name($AliasNames[$i]);
-    $Importance = $Importances[$i];
-
-    if ($Importance != '1' && $Importance != '2' && $Importance != '3' && $Importance != '4' && $Importance != '5' && $Importance != '6') {
-        break;
-    }
-
-    if (strlen($AliasName) > 0) {
-        $DB->query("
-			SELECT AliasID, ArtistID, Redirect, Name
-			FROM artists_alias
-			WHERE Name = '" . db_string($AliasName) . "'");
-        while (list($AliasID, $ArtistID, $Redirect, $FoundAliasName) = $DB->next_record(MYSQLI_NUM, false)) {
-            if (!strcasecmp($AliasName, $FoundAliasName)) {
-                if ($Redirect) {
-                    $AliasID = $Redirect;
-                }
-                break;
-            }
-        }
-        if (!$AliasID) {
-            $AliasName = db_string($AliasName);
-            $DB->query("
-				INSERT INTO artists_group (Name)
-				VALUES ('$AliasName')");
-            $ArtistID = $DB->inserted_id();
-            $DB->query("
-				INSERT INTO artists_alias (ArtistID, Name)
-				VALUES ('$ArtistID', '$AliasName')");
-            $AliasID = $DB->inserted_id();
-        }
-
-        $DB->query("
-			SELECT Name
-			FROM artists_group
-			WHERE ArtistID = $ArtistID");
-        list($ArtistName) = $DB->next_record(MYSQLI_NUM, false);
-
-
-        $DB->query("
-			INSERT IGNORE INTO torrents_artists
-				(GroupID, ArtistID, AliasID, Importance, UserID)
-			VALUES
-				('$GroupID', '$ArtistID', '$AliasID', '$Importance', '$UserID')");
-
-        if ($DB->affected_rows()) {
-            $Changed = true;
-            Misc::write_log("Artist $ArtistID ($ArtistName) was added to the group $GroupID ($GroupName) as " . $ArtistTypes[$Importance] . ' by user ' . $LoggedUser['ID'] . ' (' . $LoggedUser['Username'] . ')');
-            Torrents::write_group_log($GroupID, 0, $LoggedUser['ID'], "added artist $ArtistName as " . $ArtistTypes[$Importance], 0);
-        }
-    }
-}
-
-if ($Changed) {
+if ($DB->affected_rows()) {
+    $Changed = true;
+    Misc::write_log("Artist $ArtistID ($ArtistName) was added to the group $GroupID ($GroupName) as " . $ArtistTypes[$Importance] . ' by user ' . $LoggedUser['ID'] . ' (' . $LoggedUser['Username'] . ')');
+    Torrents::write_group_log($GroupID, 0, $LoggedUser['ID'], "added artist $ArtistName as " . $ArtistTypes[$Importance], 0);
     $Cache->delete_value("torrents_details_$GroupID");
     $Cache->delete_value("groups_artists_$GroupID"); // Delete group artist cache
     Torrents::update_hash($GroupID);
 }
+
 
 $Location = (empty($_SERVER['HTTP_REFERER'])) ? "torrents.php?id={$GroupID}" : $_SERVER['HTTP_REFERER'];
 header("Location: {$Location}");

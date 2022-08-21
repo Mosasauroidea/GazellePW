@@ -23,8 +23,8 @@ $ImagePath = CONFIG['SERVER_ROOT'] . '/' . CONFIG['STATIC_SERVER'] . 'stylesprev
                 <div class="SidebarItem-header Box-header">
                     <?= t('server.tools.rendering_parameters') ?></div>
                 <ul class="SidebarList SidebarItem-body Box-body">
-                    <li class="SidebarList-item"><?= t('server.tools.server_root') ?>: <?= var_dump(CONFIG['SERVER_ROOT']); ?></li>
-                    <li class="SidebarList-item"><?= t('server.tools.static_server') ?>: <?= var_dump(CONFIG['STATIC_SERVER']); ?></li>
+                    <li class="SidebarList-item"><?= t('server.tools.server_root') ?>: <?= CONFIG['SERVER_ROOT']; ?></li>
+                    <li class="SidebarList-item"><?= t('server.tools.static_server') ?>: <?= CONFIG['STATIC_SERVER']; ?></li>
                     <li class="SidebarList-item"><?= t('server.tools.whoami') ?>: <? echo (shell_exec('whoami')); ?></li>
                     <li class="SidebarList-item"><?= t('server.tools.path') ?>: <? echo dirname(__FILE__); ?></li>
                     <li class="SidebarList-item"><?= t('server.tools.nodejs') ?>: <? echo (shell_exec('node -v;')); ?></li>

@@ -58,11 +58,6 @@ if (!empty($_REQUEST['action'])) {
             include(CONFIG['SERVER_ROOT'] . '/sections/torrents/takeedit.php');
             break;
 
-        case 'newgroup':
-            enforce_login();
-            include(CONFIG['SERVER_ROOT'] . '/sections/torrents/takenewgroup.php');
-            break;
-
         case 'peerlist':
             enforce_login();
             include(CONFIG['SERVER_ROOT'] . '/sections/torrents/peerlist.php');

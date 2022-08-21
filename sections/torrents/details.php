@@ -309,7 +309,14 @@ View::show_header($Title, 'browse,comments,torrent,bbcode,recommend,cover_art,su
             if (empty($LoggedUser['DisableTagging'])) {
             ?>
                 <div class="SidebarItemTagAdd SidebarItem Box">
-                    <div class="SidebarItem-header Box-header"><span><?= t('server.torrents.add_tag') ?></span></div>
+                    <div class="SidebarItem-header Box-header">
+                        <div class="SidebarItem-headerTitle">
+                            <span><?= t('server.torrents.add_tag') ?></span>
+                        </div>
+                        <div class="SidebarItem-headerActions">
+                            <span><a href="rules.php?p=tag" class="brackets"><?= t('server.torrents.tag_rules') ?></a></span>
+                        </div>
+                    </div>
                     <div class="SidebarItem-body Box-body">
                         <form class="FormOneLine FormTorrentAddTag" name="tags" action="torrents.php" method="post">
                             <input type="hidden" name="action" value="add_tag" />
@@ -318,7 +325,6 @@ View::show_header($Title, 'browse,comments,torrent,bbcode,recommend,cover_art,su
                             <input class="Input" type="text" name="tagname" id="tagname" size="20" <? Users::has_autocomplete_enabled('other'); ?> />
                             <input class="Button" type="submit" value="+" />
                         </form>
-                        <span><a href="rules.php?p=tag" class="brackets"><?= t('server.torrents.tag_rules') ?></a></span>
                     </div>
                 </div>
             <?
@@ -331,8 +337,12 @@ View::show_header($Title, 'browse,comments,torrent,bbcode,recommend,cover_art,su
             ?>
                 <div class="SidebarItemArtists SidebarItem Box is-limitHeight">
                     <div class="SidebarItem-header Box-header u-hoverToShow-hover">
-                        <span><?= t('server.common.artist') ?></span>
-                        <?= check_perms('torrents_edit') ? '<a class="u-hoverToShow-hide" onclick="ArtistManager(); return false;" href="#">' . t('server.common.edit') . '</a>' : '' ?>
+                        <div class="SidebarItem-headerTitle">
+                            <span><?= t('server.common.artist') ?></span>
+                        </div>
+                        <div class="SidebarItem-headerActions">
+                            <?= check_perms('torrents_edit') ? '<a class="u-hoverToShow-hide" onclick="ArtistManager(); return false;" href="#">' . t('server.common.edit') . '</a>' : '' ?>
+                        </div>
                     </div>
                     <ul class="SidebarItem-body Box-body SidebarList" id="artist_list">
                         <?
@@ -361,7 +371,7 @@ View::show_header($Title, 'browse,comments,torrent,bbcode,recommend,cover_art,su
                             print '<li class="SidebarList-item"><strong class="artists_label">' .  t('server.torrents.writer') . ':</strong></li>';
                             foreach ($Artists[2] as $Artist) {
                             ?>
-                                <li class="SidebarAritsts-item">
+                                <li class="SidebarList-item u-hoverToShow-hover">
                                     <?= Artists::display_artist($Artist) ?>
                                     <? if (check_perms('torrents_edit')) {
                                     ?>
@@ -466,16 +476,15 @@ View::show_header($Title, 'browse,comments,torrent,bbcode,recommend,cover_art,su
                     <div class="SidebarItemArtistAdd SidebarItem Box">
                         <div class="SidebarItem-header Box-header u-hoverToShow-hover">
                             <span><?= t('server.torrents.add_artist') ?></span>
-                            <a class="u-hoverToShow-hide" onclick="globalapp.browseAddArtistField(); return false;" href="#">+</a>
                         </div>
                         <div class="SidebarItem-body Box-body">
-                            <form class="FormOneLine FormTorrentAddArtist" name="artists" action="torrents.php" method="post">
-                                <div id="AddArtists">
-                                    <input type="hidden" name="action" value="add_alias" />
-                                    <input type="hidden" name="auth" value="<?= $LoggedUser['AuthKey'] ?>" />
-                                    <input type="hidden" name="groupid" value="<?= $GroupID ?>" />
-                                    <input class="Input" type="text" id="artist" name="aliasname[]" size="17" <? Users::has_autocomplete_enabled('other'); ?> />
-                                    <select class="Input" name="importance[]">
+                            <form class="FormTorrentAddArtist" name="artists" action="torrents.php" method="post">
+                                <input type="hidden" name="action" value="add_alias" />
+                                <input type="hidden" name="auth" value="<?= $LoggedUser['AuthKey'] ?>" />
+                                <input type="hidden" name="groupid" value="<?= $GroupID ?>" />
+                                <div class="Form-row FormOneLine">
+                                    <input class="Input" type="text" placeholder="<?= t('server.upload.movie_imdb') ?>" id="artist" name="artist_id" size="17" />
+                                    <select class="Input" name="importance">
                                         <option class="Select-option" value="1"><?= t('server.torrents.director') ?></option>
                                         <option class="Select-option" value="2"><?= t('server.torrents.writer') ?></option>
                                         <option class="Select-option" value="3"><?= t('server.torrents.movie_producer') ?></option>
@@ -484,7 +493,17 @@ View::show_header($Title, 'browse,comments,torrent,bbcode,recommend,cover_art,su
                                         <option class="Select-option" value="6"><?= t('client.common.actor') ?></option>
                                     </select>
                                 </div>
-                                <input class="Button" type="submit" value="<?= t('server.common.add') ?>" />
+                                <div class="Form-row FormOneLine">
+                                    <input class="Input" type="text" placeholder="<?= t('server.upload.english_name') ?>" id="artist" name="artist" size="17" />
+                                </div>
+                                <div class="Form-row FormOneLine">
+                                    <input class="Input" type="text" placeholder="<?= t('server.upload.sub_name') ?>" id="artist" name="artist_sub" size="17" />
+                                </div>
+
+
+                                <div class="Form-row">
+                                    <input class="Button" type="submit" value="<?= t('server.common.add') ?>" />
+                                </div>
                             </form>
                         </div>
                     </div>

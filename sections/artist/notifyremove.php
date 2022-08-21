@@ -26,8 +26,7 @@ list($ID, $Artists) = $DB->next_record(MYSQLI_NUM, false);
 $DB->query("
 	SELECT Name
 	FROM artists_alias
-	WHERE ArtistID = '$ArtistID'
-		AND Redirect = 0");
+	WHERE ArtistID = '$ArtistID'");
 while (list($Alias) = $DB->next_record(MYSQLI_NUM, false)) {
 	while (stripos($Artists, "|$Alias|") !== false) {
 		$Artists = str_ireplace("|$Alias|", '|', $Artists);

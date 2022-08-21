@@ -260,7 +260,7 @@ if ((empty($_GET['search']) || trim($_GET['search']) === '') && $Order != 'Name'
                 LEFT JOIN xbt_files_users AS xfu on xfu.uid = ud.UserID and xfu.fid = ud.TorrentID
 				JOIN torrents_group AS tg ON tg.ID = t.GroupID
 				LEFT JOIN torrents_artists AS ta ON ta.GroupID = tg.ID
-				LEFT JOIN artists_alias AS aa ON aa.AliasID = ta.AliasID
+				LEFT JOIN artists_alias AS aa ON aa.ArtistID = ta.ArtistID
                 LEFT JOIN torrents_hnr as th ON th.user_id= ud.UserID and th.torrent_id = ud.TorrentID
 			WHERE ud.UserID = '$UserID'
 				$SearchWhere

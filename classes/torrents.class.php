@@ -831,7 +831,7 @@ WHERE ud.TorrentID=? AND ui.NotifyOnDeleteDownloaded='1' AND ud.UserID NOT IN ({
         G::$DB->query(
             "SELECT GROUP_CONCAT(aa.Name separator ' ')
 			FROM torrents_artists AS ta
-				JOIN artists_alias AS aa ON aa.AliasID = ta.AliasID
+				JOIN artists_alias AS aa ON aa.ArtistID = ta.ArtistID
 			WHERE ta.GroupID = $GroupID
 			GROUP BY ta.GroupID"
         );
@@ -1110,7 +1110,7 @@ WHERE ud.TorrentID=? AND ui.NotifyOnDeleteDownloaded='1' AND ud.UserID NOT IN ({
             if ($Item == 'Processing' && !empty($Processing)) {
                 if ($Style) {
                     if ($Option['SettingTorrentTitle']['Alternative']) {
-                        if ($Data['Slot'] !== TorrentSlotType::None) {
+                        if ($Data['Slot'] != TorrentSlotType::None) {
                             $Slot = TorrentSlot::slot_name($Data['Slot']);
                             $Processing = icon("Torrent/slot_${Slot}");
                         }

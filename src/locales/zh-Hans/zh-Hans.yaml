@@ -5437,7 +5437,7 @@ server.torrents.successfully_sent_re_seed_request_for_torrent: |-
 server.torrents.tag: |-
   标签
 server.torrents.tag_rules: |-
-  查看标签规则
+  标签规则
 server.torrents.tags: |-
   标签 (逗号分隔)
 server.torrents.the_destination_torrent_group_does_not_exist: |-

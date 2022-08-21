@@ -141,26 +141,18 @@ View::show_header(t('server.artist.edit_artist'), 'PageArtistEdit');
                     <div class="Box-body">
                         <ul>
                             <?
-                            $NonRedirectingAliases = array();
-                            $DB->query("
-		SELECT AliasID, Name, UserID, Redirect
-		FROM artists_alias
-		WHERE ArtistID = '$ArtistID'");
-                            while (list($AliasID, $AliasName, $User, $Redirect) = $DB->next_record(MYSQLI_NUM, true)) {
-                                if ($AliasName == $Name) {
-                                    $DefaultRedirectID = $AliasID;
-                                }
+                            $DB->query(
+                                "SELECT AliasID, Name, UserID
+                            		FROM artists_alias
+		                            WHERE ArtistID = '$ArtistID'"
+                            );
+                            while (list($AliasID, $AliasName, $User) = $DB->next_record(MYSQLI_NUM, true)) {
                             ?>
                                 <li>
                                     <span data-tooltip="Alias ID"><?= $AliasID ?></span>. <span data-tooltip="Alias name"><?= $AliasName ?></span>
                                     <? if ($User) { ?>
                                         <a href="user.php?id=<?= $User ?>" data-tooltip="Alias creator" class="brackets"><?= t('server.artist.user') ?></a>
                                     <?      }
-                                    if ($Redirect) { ?>
-                                        (<?= t('server.artist.writes_redirect_to') ?> <span data-tooltip="Target alias ID"><?= $Redirect ?></span>)
-                                    <?      } else {
-                                        $NonRedirectingAliases[$AliasID] = $AliasName;
-                                    }
                                     ?>
 
                                     <a href="artist.php?action=delete_alias&amp;aliasid=<?= $AliasID ?>&amp;auth=<?= $LoggedUser['AuthKey'] ?>" data-tooltip="<?= t('server.artist.delete_this_alias') ?>" class="brackets">X</a>
@@ -178,18 +170,6 @@ View::show_header(t('server.artist.edit_artist'), 'PageArtistEdit');
                 </td>
                 <td class="Form-inputs">
                     <input class="Input is-small" type="text" name="name" size="20" value="<?= $Name ?>" />
-                </td>
-            </tr>
-            <tr class="Form-row">
-                <td class="Form-label">
-                    <?= t('server.artist.redirect_to') ?>:
-                </td>
-                <td class="Form-inputs">
-                    <select class="Input" name="redirect">
-                        <? foreach ($NonRedirectingAliases as $AliasID => $AliasName) { ?>
-                            <option class="Select-option" value="<?= $AliasID ?>" <?= $AliasID == $DefaultRedirectID ? " selected" : "" ?>><?= $AliasName ?></option>
-                        <?  } ?>
-                    </select>
                 </td>
             </tr>
             <tr class="Form-row">

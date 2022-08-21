@@ -37,13 +37,12 @@ if ($_GET['action'] === 'revert') { // if we're reverting to a previous revision
         $Image = '';
     }
 }
-
+G::$DB->query(
+    "SELECT a.Body, a.Image, a.IMDBID, a.SubName, a.Name from artists_group a where a.ArtistID=$ArtistID"
+);
+list($OldBody, $OldyImage, $OldIMDBID, $OldSubName, $OldName) = $DB->next_record(MYSQLI_NUM, false);
 // Insert revision
 if (!$RevisionID) { // edit
-    $DB->query(
-        "SELECT w.Body, w.Image, w.IMDBID, w.SubName, w.Name from wiki_artists w left join artists_group a on a.RevisionID = w.RevisionID where a.ArtistID=$ArtistID"
-    );
-    list($OldBody, $OldyImage, $OldIMDBID, $OldSubName, $OldName) = $DB->next_record(MYSQLI_NUM, false);
     $BodyChange = $Body != db_string($OldBody);
     $ImageChange = $Image != $OldyImage;
     $IMDBIDChange = $IMDBID != $OldIMDBID;
@@ -72,8 +71,6 @@ if (!$RevisionID) { // edit
 			(PageID, Body, Image, UserID, Summary, Time, IMDBID, SubName, Name)
 		VALUES
 			('$ArtistID', '$Body', '$Image', '$UserID', '$TotalSummary', '" . sqltime() . "', '$IMDBID', '$SubName', '$Name')");
-    if ($SubNameChange) {
-    }
 } else { // revert
     G::$DB->query(
         "SELECT 
@@ -86,6 +83,13 @@ if (!$RevisionID) { // edit
 		FROM wiki_artists
 		WHERE RevisionID = '$RevisionID'"
     );
+}
+
+if ($OldName != $Name) {
+    Artists::update_artist_alias($OldName, $Name, $ArtistID);
+}
+if ($SubName != $OldSubName) {
+    Artists::update_artist_alias($OldSubName, $SubName, $ArtistID);
 }
 
 $RevisionID = $DB->inserted_id();

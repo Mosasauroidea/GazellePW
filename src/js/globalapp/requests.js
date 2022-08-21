@@ -2,10 +2,12 @@ const minimumVote = 1 * 1024 * 1024 * 1024
 
 document.addEventListener('DOMContentLoaded', () => {
   const form = document.querySelector('.FormRequestNew')
-  form.onsubmit = function (e) {
-    $('input:disabled, select:disabled').prop('disabled', false)
-    $('#post').addClass('is-loading').prop('disabled', true)
-    return true
+  if (form) {
+    form.onsubmit = function (e) {
+      $('input:disabled, select:disabled').prop('disabled', false)
+      $('#post').addClass('is-loading').prop('disabled', true)
+      return true
+    }
   }
 })
 
@@ -66,10 +68,10 @@ globalapp.requestVote = function requestVote(amount, requestid) {
         if (requestTax > 0) {
           Snackbar.notify(
             'Your vote of ' +
-            get_size(amount) +
-            ', adding a ' +
-            get_size(amount * (1 - $('#request_tax').raw().value)) +
-            ' bounty, has been added'
+              get_size(amount) +
+              ', adding a ' +
+              get_size(amount * (1 - $('#request_tax').raw().value)) +
+              ' bounty, has been added'
           )
         } else {
           Snackbar.notify('Your vote of ' + get_size(amount) + ' has been added')

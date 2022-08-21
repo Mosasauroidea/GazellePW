@@ -12,7 +12,6 @@ $DB->query("
 	SELECT GROUP_CONCAT(Name SEPARATOR '|')
 	FROM artists_alias
 	WHERE ArtistID = '$ArtistID'
-		AND Redirect = 0
 	GROUP BY ArtistID");
 list($ArtistAliases) = $DB->next_record(MYSQLI_NUM, FALSE);
 

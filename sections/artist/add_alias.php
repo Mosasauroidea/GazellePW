@@ -5,12 +5,9 @@ if (!check_perms('torrents_edit')) {
     error(403);
 }
 $ArtistID = $_POST['artistid'];
-$Redirect = $_POST['redirect'];
-if (!$Redirect) {
-    error(0);
-}
+$AliasName = $_POST['name'];
 
-if (!is_number($ArtistID) || !($Redirect === 0 || is_number($Redirect)) || !$ArtistID) {
+if (!is_number($ArtistID) || !$ArtistID) {
     error(0);
 }
 
@@ -20,24 +17,10 @@ if ($AliasName == '') {
 
 if (!$CloneAliasID) {
     $DB->query("
-			SELECT ArtistID, Redirect
-			FROM artists_alias
-			WHERE AliasID = $Redirect");
-    if (!$DB->has_results()) {
-        error(t('server.artist.cannot_redirect'));
-    }
-    list($FoundArtistID, $FoundRedirect) = $DB->next_record();
-    if ($ArtistID != $FoundArtistID) {
-        error(t('server.artist.redirection_must_target'));
-    }
-    if ($FoundRedirect != 0) {
-        $Redirect = $FoundRedirect;
-    }
-    $DB->query("
 		INSERT INTO artists_alias
-			(ArtistID, Name, Redirect, UserID)
+			(ArtistID, Name, UserID)
 		VALUES
-			($ArtistID, '$DBAliasName', $Redirect, " . $LoggedUser['ID'] . ')');
+			($ArtistID, '$AliasName', " . $LoggedUser['ID'] . ')');
     $AliasID = $DB->inserted_id();
 
     $DB->query("

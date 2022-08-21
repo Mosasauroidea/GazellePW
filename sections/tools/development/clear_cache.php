@@ -107,7 +107,7 @@ if (isset($Keys) && $_GET['type'] == 'view') {
             <tr>
                 <td><?= display_str($Key) ?></td>
                 <td>
-                    <pre><? var_dump($Cache->get_value($Key)); ?></pre>
+                    <pre><?= $Cache->get_value($Key); ?></pre>
                 </td>
             </tr>
         <?  } ?>

@@ -331,47 +331,7 @@ if ($Properties['IMDBID']) {
     $RTRating = $RTRating ? $RTRating : '';
 }
 if ($IsNewGroup) {
-    $IMDBIDs = array();
-    if ($Properties['IMDBID']) {
-        // handle Actor first
-        foreach ($ArtistForm[Artists::Actor] as $Num => $Artist) {
-            if ($Artist['IMDBID']) {
-                $IMDBIDs[] = $Artist['IMDBID'];
-            }
-        }
-        foreach ($ArtistForm as $key => $value) {
-            if ($key == Artists::Actor) {
-                continue;
-            }
-            foreach ($value as $Num => $Artist) {
-                if ($Artist['IMDBID']) {
-                    $IMDBIDs[] = $Artist['IMDBID'];
-                }
-            }
-        }
-    }
-    $FullArtistDetails = MOVIE::get_artists($IMDBIDs, $Properties['IMDBID'], 10);
-
-    foreach ($ArtistForm as $Importance => $Artists) {
-        foreach ($Artists as $Num => $Artist) {
-            $Artist['Name'] = html_entity_decode($Artist['Name'], ENT_QUOTES);
-            $Artist['SubName'] = html_entity_decode($Artist['SubName'], ENT_QUOTES);
-            $ArtistDetail = MOVIE::get_default_artist($Artist['IMDBID']);
-            if ($Artist['IMDBID']) {
-                $Detail = $FullArtistDetails[$Artist['IMDBID']];
-                if ($Detail) {
-                    $ArtistDetail = $Detail;
-                }
-            }
-
-            $Artist['Image'] = $ArtistDetail['Image'];
-            $Artist['Description'] = $ArtistDetail['Description'];
-            $Artist['Birthday'] = $ArtistDetail['Birthday'];
-            $Artist['PlaceOfBirth'] = $ArtistDetail['PlaceOfBirth'];
-            $Artist = Artists::add_artist($Artist);
-            $ArtistForm[$Importance][$Num] = $Artist;
-        }
-    }
+    $ArtistForm = Artists::new_artist($ArtistForm, $Properties['IMDBID']);
     // Create torrent group
     $DB->query(
         "INSERT INTO torrents_group
@@ -428,8 +388,8 @@ if ($IsNewGroup) {
     foreach ($ArtistForm as $Importance => $Artists) {
         foreach ($Artists as $Num => $Artist) {
             $DB->query(
-                "INSERT IGNORE INTO torrents_artists (GroupID, ArtistID, AliasID, UserID, Importance, Credit, `Order`)
-					VALUES ($GroupID, " . $Artist['ArtistID'] . ', ' . $Artist['AliasID'] . ', ' . $LoggedUser['ID'] . ", '$Importance', true, $Num)"
+                "INSERT IGNORE INTO torrents_artists (GroupID, ArtistID, UserID, Importance, Credit, `Order`)
+					VALUES ($GroupID, " . $Artist['ArtistID'] . ', ' . $LoggedUser['ID'] . ", '$Importance', true, $Num)"
             );
         }
     }

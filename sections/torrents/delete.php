@@ -123,7 +123,7 @@ if (check_perms('admin_reports')) {
 			FROM torrents AS t
 				LEFT JOIN torrents_group AS tg ON tg.ID = t.GroupID
 				LEFT JOIN torrents_artists AS ta ON ta.GroupID = tg.ID AND ta.Importance = '1'
-				LEFT JOIN artists_alias AS aa ON aa.AliasID = ta.AliasID
+				LEFT JOIN artists_alias AS aa ON aa.ArtistID = ta.ArtistID
 				LEFT JOIN users_main AS uploader ON uploader.ID = t.UserID
 			WHERE t.ID = $TorrentID");
 

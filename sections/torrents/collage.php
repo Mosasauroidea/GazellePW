@@ -60,11 +60,9 @@
 		if (collageid) {
 			$('#s_c_span_category')[0].innerHTML = '<a href="wiki.php?action=article&id=243" target="_blank">' + collages[collageid].category + '</a>'
 			$('#s_c_span_author')[0].innerHTML = '<a href="user.php?id=' + collages[collageid].userid + '" target="_blank">' + collages[collageid].username + '</a>'
-			$('#s_c_span_description')[0].innerHTML = collages[collageid].description
 		} else {
 			$('#s_c_span_category')[0].innerHTML = ''
 			$('#s_c_span_author')[0].innerHTML = ''
-			$('#s_c_span_description')[0].innerHTML = ''
 		}
 	}
 	$(() => {
