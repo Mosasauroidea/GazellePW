@@ -96,6 +96,7 @@ $Properties['Allow'] = isset($_POST['allow']) ? 1 : 0;
 $Properties['TagList'] = $_POST['tags'];
 $Properties['Image'] = $_POST['image'];
 $Properties['GroupDescription'] = trim($_POST['desc']);
+$Properties['GroupMainDescription'] = trim($_POST['maindesc']);
 
 $Properties['RemasterTitle'] = trim($_POST['remaster_title']);
 if (!EditionInfo::validate($Properties['RemasterTitle'])) {
@@ -177,7 +178,7 @@ if ($IsNewGroup) {
             if ($Importance[$i] == Artists::Director) {
                 $MainArtistCount++;
             }
-            $ArtistForm[$Importance[$i]][] = array('Name' => Artists::normalise_artist_name($Artists[$i]), 'IMDBID' => isset($ArtistIMDBIDs[$i]) ? $ArtistIMDBIDs[$i] : null, 'SubName' => $ArtistSubName[$i]);
+            $ArtistForm[$Importance[$i]][] = array('Name' => db_string($Artists[$i]), 'IMDBID' => isset($ArtistIMDBIDs[$i]) ? $ArtistIMDBIDs[$i] : null, 'SubName' => db_string($ArtistSubName[$i]));
         }
     }
     if ($MainArtistCount < 1) {
@@ -284,6 +285,7 @@ if (!empty($Err)) { // Show the upload form, with the data the user entered
 //--------------- Start database stuff -----------------------------------------//
 
 $Body = $Properties['GroupDescription'];
+$MainBody = $Properties['GroupMainDescription'];
 
 // Trickery
 if (!preg_match('/^' . IMAGE_REGEX . '$/i', $Properties['Image'])) {
@@ -343,6 +345,7 @@ if ($IsNewGroup) {
                 Year,  
                 Time, 
                 WikiBody, 
+                MainWikiBody,
                 WikiImage, 
                 ReleaseType, 
                 IMDBID, 
@@ -367,6 +370,7 @@ if ($IsNewGroup) {
                 $T[Year],
                 '" . sqltime() . "', 
                 '" . db_string($Body) . "', 
+                '" . db_string($MainBody) . "', 
                 $T[Image], 
                 $T[ReleaseType], 
                 '" . $IMDBID . "', 
@@ -375,7 +379,7 @@ if ($IsNewGroup) {
                 '" . $Runtime . "', 
                 '" . $Released . "', 
                 '" . $Country . "', 
-                '" . $OMDBData->Language . "', 
+                '" . $Language . "', 
                 '" . $RTRating . "', 
                 " . $DoubanRating . ", 
                 " . $DoubanID . ", 
@@ -400,6 +404,7 @@ if ($IsNewGroup) {
 			(
                 PageID, 
                 Body, 
+                MainBody,
                 UserID, 
                 Summary, 
                 Time, 
@@ -414,6 +419,7 @@ if ($IsNewGroup) {
 			(
                 $GroupID, 
                 $T[GroupDescription], 
+                $T[GroupMainDescription], 
                 $LoggedUser[ID], 
                 'Uploaded new torrent', '" . sqltime() . "', 
                 $T[Image], 

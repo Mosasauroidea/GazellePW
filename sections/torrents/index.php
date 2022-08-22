@@ -57,7 +57,10 @@ if (!empty($_REQUEST['action'])) {
             enforce_login();
             include(CONFIG['SERVER_ROOT'] . '/sections/torrents/takeedit.php');
             break;
-
+        case 'autocomplete':
+            enforce_login();
+            include(CONFIG['SERVER_ROOT'] . '/sections/torrents/autocomplete.php');
+            break;
         case 'peerlist':
             enforce_login();
             include(CONFIG['SERVER_ROOT'] . '/sections/torrents/peerlist.php');

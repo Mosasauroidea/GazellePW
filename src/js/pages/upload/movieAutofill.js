@@ -27,8 +27,8 @@ globalapp.uploadMovieAutofill = function uploadMovieAutofill() {
           data.code === 1
             ? 'client.error.invalid_imdb_link_note'
             : data.code === 2
-            ? 'client.error.torrent_group_exists_note'
-            : 'client.error.imdb_unknown_error',
+              ? 'client.error.torrent_group_exists_note'
+              : 'client.error.imdb_unknown_error',
           data.code === 2 && { groupID: data.error.GroupID }
         )
         return
@@ -45,6 +45,9 @@ globalapp.uploadMovieAutofill = function uploadMovieAutofill() {
       }
       if (data.Plot) {
         $('#desc').val(data.Plot)
+      }
+      if (data.MainPlot) {
+        $('#maindesc').val(data.MainPlot)
       }
       if (data.Production) {
         $('#remaster_record_label').val(data.Production.replace(/, ?/, ' / '))

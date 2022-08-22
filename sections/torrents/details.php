@@ -26,7 +26,7 @@ $TorrentList = $TorrentCache['Torrents'];
 $View = isset($_GET['view']) ? $_GET['view'] : '';
 
 // Group details
-$WikiBody = $TorrentDetails['WikiBody'];
+$WikiBody = Lang::choose_content($TorrentDetails['MainWikiBody'], $TorrentDetails['WikiBody']);
 $WikiImage = $TorrentDetails['WikiImage'];
 $GropuID = $TorrentDetails['ID'];
 $IMDBID = $TorrentDetails['IMDBID'];
@@ -206,15 +206,21 @@ View::show_header($Title, 'browse,comments,torrent,bbcode,recommend,cover_art,su
                 <? if (!empty($Region)) { ?>
                     <span class="MovieInfo-fact" data-tooltip="<?= t('server.torrents.imdb_region') ?>">
                         <?= icon('movie-country') ?>
-                        <span><? print_r(implode(', ', array_slice(explode(',', $Region), 0, 2))) ?></span>
+                        <span><?= Torrents::format_region($Region) ?>
+                        </span>
                     </span>
                 <?  } ?>
                 <? if (!empty($Language)) { ?>
                     <span class="MovieInfo-fact" data-tooltip="<?= t('server.torrents.imdb_language') ?>">
                         <?= icon('movie-language') ?>
-                        <span><? print_r(implode(', ', array_slice(explode(',', $Language), 0, 2))) ?></span>
+                        <span><?= Torrents::format_language($Language) ?>
+                        </span>
                     </span>
                 <?  } ?>
+                <span class="TableTorrent-movieInfoFactsItem" data-tooltip="<?= t('server.upload.movie_type') ?>">
+                    <?= icon('movie-type') ?>
+                    <span><?= t('server.torrents.release_types')[$ReleaseType] ?></span>
+                </span>
             </div>
             <div class="MovieInfo-tags">
                 <? foreach ($TagNames as $TagName) { ?>
@@ -483,7 +489,12 @@ View::show_header($Title, 'browse,comments,torrent,bbcode,recommend,cover_art,su
                                 <input type="hidden" name="auth" value="<?= $LoggedUser['AuthKey'] ?>" />
                                 <input type="hidden" name="groupid" value="<?= $GroupID ?>" />
                                 <div class="Form-row FormOneLine">
-                                    <input class="Input" type="text" placeholder="<?= t('server.upload.movie_imdb') ?>" id="artist" name="artist_id" size="17" />
+                                    <input class="Input" type="text" <?= Users::has_autocomplete_enabled('search');
+                                                                        ?> id="artist" placeholder=" <?= t('server.artist.search_auto_fill') ?>" id="artist" name="artist_id" size="17" />
+
+                                </div>
+                                <div class="Form-row FormOneLine">
+                                    <input class="Input" type="text" placeholder="<?= t('server.upload.movie_imdb') ?>" id="artist_imdb" name="artist_id" size="17" />
                                     <select class="Input" name="importance">
                                         <option class="Select-option" value="1"><?= t('server.torrents.director') ?></option>
                                         <option class="Select-option" value="2"><?= t('server.torrents.writer') ?></option>
@@ -494,10 +505,10 @@ View::show_header($Title, 'browse,comments,torrent,bbcode,recommend,cover_art,su
                                     </select>
                                 </div>
                                 <div class="Form-row FormOneLine">
-                                    <input class="Input" type="text" placeholder="<?= t('server.upload.english_name') ?>" id="artist" name="artist" size="17" />
+                                    <input class="Input" type="text" placeholder="<?= t('server.upload.english_name') ?>" id="artist_name" name="artist" size="17" />
                                 </div>
                                 <div class="Form-row FormOneLine">
-                                    <input class="Input" type="text" placeholder="<?= t('server.upload.sub_name') ?>" id="artist" name="artist_sub" size="17" />
+                                    <input class="Input" type="text" placeholder="<?= t('server.upload.sub_name') ?>" id="artist_sub_name" name="artist_sub" size="17" />
                                 </div>
 
 

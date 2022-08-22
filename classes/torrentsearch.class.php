@@ -70,7 +70,6 @@ class TorrentSearch {
         'groupname' => 1,
         'editioninfo' => 1,
         'filelist' => 1,
-        'subtitle' => 1,
         'searchstr' => 1,
         'taglist' => 1,
         'description' => 1,
@@ -137,6 +136,8 @@ class TorrentSearch {
         'remtitle' => ',',
         'artistname' => ',',
         'rmtitle' => ',',
+        'region' => ',',
+        'language' => ',',
         'subtitles' => ','
     );
 
@@ -509,6 +510,12 @@ class TorrentSearch {
             $this->search_taglist($Term);
         } elseif ($Field === 'remtitle') {
             $this->search_remtitle($Field, $Term);
+        } elseif ($Field === 'language') {
+            $this->search_language($Field, $Term);
+        } elseif ($Field === 'region') {
+            $this->search_region($Field, $Term);
+        } elseif ($Field === 'subtitles') {
+            $this->search_subtitle($Field, $Term);
         } elseif ($Field === 'processing') {
             $this->search_processing($Term);
         } else {
@@ -613,6 +620,42 @@ class TorrentSearch {
         $Words = explode($Separator, $Term);
         foreach ($Words as $Word) {
             $this->add_word($Field, EditionInfo::key($Word));
+        }
+    }
+
+    private function search_region($Field, $Term) {
+        if (isset(self::$FieldSeparators[$Field])) {
+            $Separator = self::$FieldSeparators[$Field];
+        } else {
+            $Separator = self::$FieldSeparators[''];
+        }
+        $Words = explode($Separator, $Term);
+        foreach ($Words as $Word) {
+            $this->add_word($Field, Torrents::get_search_region(trim($Word)));
+        }
+    }
+
+    private function search_language($Field, $Term) {
+        if (isset(self::$FieldSeparators[$Field])) {
+            $Separator = self::$FieldSeparators[$Field];
+        } else {
+            $Separator = self::$FieldSeparators[''];
+        }
+        $Words = explode($Separator, $Term);
+        foreach ($Words as $Word) {
+            $this->add_word($Field, Torrents::get_search_language(trim($Word)));
+        }
+    }
+
+    private function search_subtitle($Field, $Term) {
+        if (isset(self::$FieldSeparators[$Field])) {
+            $Separator = self::$FieldSeparators[$Field];
+        } else {
+            $Separator = self::$FieldSeparators[''];
+        }
+        $Words = explode($Separator, $Term);
+        foreach ($Words as $Word) {
+            $this->add_word($Field, Torrents::get_search_subtitle(trim($Word)));
         }
     }
 

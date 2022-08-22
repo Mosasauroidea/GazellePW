@@ -25,6 +25,7 @@ if (empty($Properties) && !empty($_GET['groupid']) && is_number($_GET['groupid']
 			tg.Year,
 			tg.WikiImage AS Image,
 			tg.WikiBody AS GroupDescription,
+			tg.MainWikiBody AS GroupMainDescription,
 			tg.IMDBID,
 			tg.ReleaseType
 		FROM torrents_group AS tg

@@ -46,7 +46,7 @@ if (!$DB->has_results()) {
         $Cache->delete_value("bookmarks_group_ids_$UserID");
 
         $DB->query("
-			SELECT ID, ReleaseType, Name, SubName, Year, WikiBody, TagList
+			SELECT ID, ReleaseType, Name, SubName, Year, WikiBody, MainWikiBody, TagList
 			FROM torrents_group
 			WHERE ID = $PageID");
         $Group =  G::$DB->next_record(MYSQLI_ASSOC, false);
@@ -85,9 +85,10 @@ if (!$DB->has_results()) {
             }
             $TorrentID = $Torrent['ID'];
             $UploaderInfo = Users::user_info($UploaderID);
+            $Body = Lang::choose_content($Group['MainWikiBody'], $Group['WikiBody']);
             $Item = $Feed->item(
                 $Title,
-                Text::strip_bbcode($Group['WikiBody']),
+                Text::strip_bbcode($Body),
                 'torrents.php?action=download&amp;authkey=[[AUTHKEY]]&amp;torrent_pass=[[PASSKEY]]&amp;id=' . $TorrentID,
                 $UploaderInfo['Username'],
                 "torrents.php?id=$PageID",

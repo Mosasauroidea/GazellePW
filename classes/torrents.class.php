@@ -10,6 +10,53 @@ class Torrents {
     const SNATCHED_UPDATE_INTERVAL = 3600; // How often we want to update users' snatch lists
     const SNATCHED_UPDATE_AFTERDL = 300; // How long after a torrent download we want to update a user's snatch lists
 
+    public static function format_region($Region, $Limit = 10) {
+        $Regions = array_map(function ($value) {
+            // map
+            switch ($value) {
+                case 'USA':
+                    $value = "United States";
+                    break;
+                case 'UK':
+                    $value = 'United Kingdom';
+                    break;
+            }
+            return t('server.country.' . str_replace(' ', '_', trim(strtolower($value))), $value);
+        }, array_slice(explode(',', $Region), 0, $Limit));
+        return  implode(', ', $Regions);
+    }
+
+    public static function format_language($Language, $Limit = 10) {
+        $Languages = array_map(function ($value) {
+            return t('server.upload.' . trim(strtolower($value)), $value);
+        }, array_slice(explode(',', $Language), 0, $Limit));
+        return implode(', ', $Languages);
+    }
+
+    public static function get_search_language($Language) {
+        $key = Lang::get_key('server.upload', $Language);
+        if (!empty($key)) {
+            return Lang::getWithLang($key, Lang::EN);
+        }
+        return 'invalid';
+    }
+
+    public static function get_search_subtitle($Language) {
+        $key = Lang::get_key('server.upload', $Language);
+        if (!empty($key)) {
+            return str_ireplace('server.upload.', '', $key);
+        }
+        return 'invalid';
+    }
+
+    public static function get_search_region($Region) {
+        $key = Lang::get_key('server.country', $Region);
+        if (!empty($key)) {
+            return Lang::getWithLang($key, Lang::EN);
+        }
+        return 'invalid';
+    }
+
     public static function get_thumb_counts($GroupID) {
         G::$DB->query("
         select tt.id, 
@@ -65,6 +112,7 @@ class Torrents {
 				g.SubName,
 				g.Year,
 				g.WikiBody,
+                g.MainWikiBody,
 				g.WikiImage, 
 				g.IMDBID,
 				g.DoubanID, 
@@ -75,6 +123,7 @@ class Torrents {
 				w.SubName,
 				w.Year,
 				w.Body as WikiBody,
+                w.MainBody as MainWikiBody,
 				w.Image as WikiImage,
 				w.IMDBID,
 				w.DoubanID, 
@@ -116,7 +165,7 @@ class Torrents {
 			GROUP BY NULL";
 
             $DB->query($SQL);
-            $TorrentGroup = $DB->next_record(MYSQLI_ASSOC, ['Name', 'SubName', 'WikiBody']);
+            $TorrentGroup = $DB->next_record(MYSQLI_ASSOC, ['Name', 'SubName', 'WikiBody', 'MainWikiBody']);
             // Fetch the individual torrents
             $DB->query("
 			SELECT
@@ -844,7 +893,7 @@ WHERE ud.TorrentID=? AND ui.NotifyOnDeleteDownloaded='1' AND ud.UserID NOT IN ({
         G::$DB->query("
 			REPLACE INTO sphinx_delta
 				(ID, GroupID, GroupName, TagList, Year, CategoryID, Time, ReleaseType, Size, Snatched, Seeders, Leechers, Scene, Jinzhuan, Allow,
-				FreeTorrent,Description, FileList, VoteScore, ArtistName, 
+				FreeTorrent,Description, FileList, VoteScore, ArtistName, RemTitle,
 				IMDBRating, DoubanRating, Region, Language, IMDBID, Resolution, Container, Source, Codec, SubTitles,
                 Diy, Buy, ChineseDubbed, SpecialSub)
 			SELECT
@@ -853,7 +902,12 @@ WHERE ud.TorrentID=? AND ui.NotifyOnDeleteDownloaded='1' AND ud.UserID NOT IN ({
 				Leechers, CAST(Scene AS CHAR), CAST(Jinzhuan AS CHAR), CAST(Allow AS CHAR), 
 				CAST(FreeTorrent AS CHAR),Description,
 				(case when (t.Container = 'm2ts') then REPLACE(REPLACE(t.FilePath, '_', ' '), '/', ' ') else REPLACE(REPLACE(FileList, '_', ' '), '/', ' ') end) AS FileList, $VoteScore, '" . db_string($ArtistName) . "',
-				IMDBRating, DoubanRating, Region, Language, IMDBID, Resolution, Container, Source, Codec, Subtitles, 
+				REPLACE(RemasterTitle, '/', ' '), 
+                IMDBRating, DoubanRating, 
+                REPLACE(Region, ',', ' '),
+                REPLACE(Language, ',', ' '),
+                IMDBID, Resolution, Container, Source, Codec, 
+                REPLACE(Subtitles, ',', ' '),
                 Diy, Buy, ChineseDubbed, SpecialSub
 			FROM torrents AS t
 				JOIN torrents_group AS g ON g.ID = t.GroupID
@@ -1567,6 +1621,7 @@ WHERE ud.TorrentID=? AND ui.NotifyOnDeleteDownloaded='1' AND ud.UserID NOT IN ({
             $SubName = $Artist['SubName'];
             $Name = $Artist['Name'];
             $Body = $Artist['Body'];
+            $MainBody = $Artist['MainBody'];
             $Image = $Artist['Image'];
             $ArtistInfo = $ArtistInfos[$Artist['IMDBID']];
             if (empty($ArtistInfo)) {
@@ -1582,6 +1637,11 @@ WHERE ud.TorrentID=? AND ui.NotifyOnDeleteDownloaded='1' AND ud.UserID NOT IN ({
                 $Body = db_string($ArtistInfo['Description']);
                 $WikiChange = true;
             }
+            if (empty($MainBody) && $ArtistInfo && !empty($ArtistInfo['MainDescription'])) {
+                $UpdateSQL[] = "MainBody = '" . db_string($ArtistInfo['MainDescription']) . "'";
+                $MainBody = db_string($ArtistInfo['MainDescription']);
+                $WikiChange = true;
+            }
             if (empty($Artist['PlaceOfBirth']) && $ArtistInfo && $ArtistInfo['PlaceOfBirth']) {
                 $UpdateSQL[] = "PlaceOfBirth = '" . db_string($ArtistInfo['PlaceOfBirth']) . "'";
             }
@@ -1591,9 +1651,9 @@ WHERE ud.TorrentID=? AND ui.NotifyOnDeleteDownloaded='1' AND ud.UserID NOT IN ({
             if ($WikiChange) {
                 G::$DB->query(
                     "INSERT INTO wiki_artists
-			        (PageID, Body, Image, UserID, Summary, Time, IMDBID, SubName, Name)
+			        (PageID, Body, MainBody, Image, UserID, Summary, Time, IMDBID, SubName, Name)
 		        VALUES
-			        ('$ArtistID', '$Body', '$Image', '0', 'Auto load', '" . sqltime() . "', '$IMDBID', '$SubName', '$Name')"
+			        ('$ArtistID', '$Body', '$MainBody', '$Image', '0', 'Auto load', '" . sqltime() . "', '$IMDBID', '$SubName', '$Name')"
                 );
                 $RevisionID = G::$DB->inserted_id();
                 $UpdateSQL[] = "RevisionID = $RevisionID";

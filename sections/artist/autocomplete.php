@@ -6,14 +6,12 @@ header('Content-Type: application/json; charset=utf-8');
 
 $FullName = rawurldecode($_GET['query']);
 
-$MaxKeySize = 4;
-if (strtolower(substr($FullName, 0, 4)) == 'the ') {
-    $MaxKeySize += 4;
-}
+$MaxKeySize = 50;
 $KeySize = min($MaxKeySize, max(1, strlen($FullName)));
 
 $Letters = strtolower(substr($FullName, 0, $KeySize));
-//$AutoSuggest = $Cache->get('autocomplete_artist_' . $KeySize . '_' . $Letters);
+
+$AutoSuggest = $Cache->get('autocomplete_artist_' . $KeySize . '_' . $Letters);
 
 if (!$AutoSuggest) {
     $Limit = (($KeySize === $MaxKeySize) ? 250 : 10);
@@ -21,7 +19,8 @@ if (!$AutoSuggest) {
 		SELECT
 			a.ArtistID,
 			a.Name,
-            a.SubName
+            a.SubName,
+            a.IMDBID
 		FROM artists_group AS a
 			INNER JOIN torrents_artists AS ta ON ta.ArtistID=a.ArtistID
 			INNER JOIN torrents AS t ON t.GroupID=ta.GroupID
@@ -40,9 +39,13 @@ $Response = array(
     'suggestions' => array()
 );
 foreach ($AutoSuggest as $Suggestion) {
-    list($ID, $Name, $SubName) = $Suggestion;
+    list($ID, $Name, $SubName, $IMDBID) = $Suggestion;
     if (stripos($Name, $FullName) === 0 || stripos($SubName, $FullName) === 0) {
-        $Response['suggestions'][] = array('value' => $Name, 'data' => $ID);
+        $Value = $Name;
+        if ($SubName) {
+            $Value .= " ($SubName)";
+        }
+        $Response['suggestions'][] = array('value' => $Value, 'data' => $ID, 'name' => $Name, 'sub_name' => $SubName, 'imdb' => $IMDBID);
         if (++$Matched > 9) {
             break;
         }

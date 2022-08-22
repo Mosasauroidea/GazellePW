@@ -116,6 +116,7 @@ class Artists {
     		Name,
     		Image,
     		Body,
+            MainBody,
             SubName,
             IMDBID
     	FROM artists_group AS a
@@ -184,7 +185,8 @@ class Artists {
                 }
 
                 $Artist['Image'] = $ArtistDetail['Image'];
-                $Artist['Description'] = $ArtistDetail['Description'];
+                $Artist['Description'] = html_entity_decode($ArtistDetail['Description'], ENT_QUOTES);
+                $Artist['MainDescription'] = html_entity_decode($ArtistDetail['MainDescription'], ENT_QUOTES);
                 $Artist['Birthday'] = $ArtistDetail['Birthday'];
                 $Artist['PlaceOfBirth'] = $ArtistDetail['PlaceOfBirth'];
                 $Artist = Artists::add_artist($Artist);
@@ -201,12 +203,13 @@ class Artists {
         }
         G::$DB->begin_transaction();
         $IMDBID = $Artist['IMDBID'];
-        $Name = db_string($Artist['Name']);
-        $SubName = db_string($Artist['SubName']);
-        $Image = db_string($Artist['Image']);
-        $Body = db_string($Artist['Description']);
-        $Birth = db_string($Artist['Birthday']);
-        $Place = db_string($Artist['PlaceOfBirth']);
+        $Name = $Artist['Name'];
+        $SubName = $Artist['SubName'];
+        $Image = $Artist['Image'];
+        $Body = $Artist['Description'];
+        $MainBody = $Artist['MainDescription'];
+        $Birth = $Artist['Birthday'];
+        $Place = $Artist['PlaceOfBirth'];
         $ArtistAliasList = $Artist['Alias'];
 
         $New = false;
@@ -240,6 +243,11 @@ class Artists {
                 } else if (!empty($OldArtist['Body'])) {
                     $Body = $OldArtist['Body'];
                 }
+                if (empty($OldArtist['MainBody']) && !empty($MainBody)) {
+                    $Updates[] = "MainBody = '$MainBody'";
+                } else if (!empty($OldArtist['MainBody'])) {
+                    $Body = $OldArtist['MainBody'];
+                }
                 if (!empty($Birth)) {
                     $Updates[] = "Birthday = '$Birth'";
                 }
@@ -253,10 +261,11 @@ class Artists {
                 }
             } else {
                 G::$DB->prepared_query(
-                    "INSERT INTO artists_group (Name, Body, Image, IMDBID, SubName, Birthday, PlaceOfBirth) 
-        VALUES (?, ?, ?, ?, ?, ?, ?)",
+                    "INSERT INTO artists_group (Name, Body, MainBody, Image, IMDBID, SubName, Birthday, PlaceOfBirth) 
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?)",
                     $Name,
                     $Body,
+                    $MainBody,
                     $Image,
                     $IMDBID,
                     $SubName,
@@ -275,9 +284,9 @@ class Artists {
         $ArtistID = $Artist['ArtistID'];
         if ($Change || $New) {
             G::$DB->prepared_query("INSERT INTO wiki_artists
-							(PageID, Body, Image, UserID, Summary, Time, IMDBID, Name, SubName)
+							(PageID, Body, MainBody, Image, UserID, Summary, Time, IMDBID, Name, SubName)
 						VALUES
-							(?,?,?,?,?,?,?,?,?)", $ArtistID, $Body, $Image, $UserID, $Summary, sqltime(), $IMDBID, $Name, $SubName);
+							(?,?,?,?,?,?,?,?,?,?)", $ArtistID, $Body, $MainBody, $Image, $UserID, $Summary, sqltime(), $IMDBID, $Name, $SubName);
             $RevisionID = G::$DB->inserted_id();
             G::$DB->prepared_query("UPDATE artists_group SET RevisionID = ? WHERE ArtistID = ?", $RevisionID, $ArtistID);
             if ($New) {

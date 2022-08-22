@@ -312,6 +312,10 @@ server.artist.artist_id: |-
   Artist ID
 server.artist.artist_info: |-
   Artist information
+server.artist.chinese_biography: |-
+  Chinese artist biography
+server.artist.english_biography: |-
+  English artist biography
 server.artist.artist_name: |-
   Artist name
 server.artist.artist_x_deleted: |-
@@ -422,6 +426,8 @@ server.artist.switch_to_map: |-
   Switch to map
 server.artist.tag: |-
   Tags
+server.artist.search_auto_fill: |-
+  Search for auto fill
 server.artist.there_are_still_requests_that_have: |-
   There are still requests that have&nbsp;
 server.artist.there_are_still_torrents_that_have: |-
@@ -5769,6 +5775,10 @@ server.upload.dutch: |-
   Dutch
 server.upload.english: |-
   English
+server.upload.mandarin: |-
+  Mandarin
+server.upload.cantonese: |-
+  Cantonese
 server.upload.english_movie_synopsis: |-
   English Synopsis
 server.upload.english_name: |-
@@ -7671,3 +7681,459 @@ server.wiki.view_user: |-
   View user
 server.wiki.you_must_be_a_higher_user_class_to_view: |-
   You must be a higher user class to view this wiki article
+server.country.afghanistan: |-
+  Afghanistan
+server.country.aland_islands: |-
+  Aland Islands
+server.country.albania: |-
+  Albania
+server.country.algeria: |-
+  Algeria
+server.country.american_samoa: |-
+  American Samoa
+server.country.andorra: |-
+  Andorra
+server.country.angola: |-
+  Angola
+server.country.anguilla: |-
+  Anguilla
+server.country.antigua_and_barbuda: |-
+  Antigua and Barbuda
+server.country.argentina: |-
+  Argentina
+server.country.armenia: |-
+  Armenia
+server.country.aruba: |-
+  Aruba
+server.country.australia: |-
+  Australia
+server.country.austria: |-
+  Austria
+server.country.azerbaijan: |-
+  Azerbaijan
+server.country.bangladesh: |-
+  Bangladesh
+server.country.bahrain: |-
+  Bahrain
+server.country.bahamas: |-
+  Bahamas
+server.country.barbados: |-
+  Barbados
+server.country.belarus: |-
+  Belarus
+server.country.belgium: |-
+  Belgium
+server.country.taiwan: |-
+  Taiwan,China
+server.country.hong_kong: |-
+  Hong Kong,China
+server.country.belize: |-
+  Belize
+server.country.benin: |-
+  Benin
+server.country.bermuda: |-
+  Bermuda
+server.country.bhutan: |-
+  Bhutan
+server.country.bolivia: |-
+  Bolivia
+server.country.bosnia_and_herzegovina: |-
+  Bosnia and Herzegovina
+server.country.botswana: |-
+  Botswana
+server.country.bouvet_island: |-
+  Bouvet Island
+server.country.brazil: |-
+  Brazil
+server.country.brunei: |-
+  Brunei
+server.country.bulgaria: |-
+  Bulgaria
+server.country.burkina_faso: |-
+  Burkina Faso
+server.country.burundi: |-
+  Burundi
+server.country.cambodia: |-
+  Cambodia
+server.country.cameroon: |-
+  Cameroon
+server.country.canada: |-
+  Canada
+server.country.cape_verde: |-
+  Cape Verde
+server.country.central_african_republic: |-
+  Central African Republic
+server.country.chad: |-
+  Chad
+server.country.chile: |-
+  Chile
+server.country.christmas_islands: |-
+  Christmas Islands
+server.country.cocos_(keeling)_islands: |-
+  Cocos (keeling) Islands
+server.country.colombia: |-
+  Colombia
+server.country.comoros: |-
+  Comoros
+server.country.congo_(congo-kinshasa): |-
+  Congo (Congo-Kinshasa)
+server.country.congo: |-
+  Congo
+server.country.cook_islands: |-
+  Cook Islands
+server.country.costa_rica: |-
+  Costa Rica
+server.country.cote_d'ivoire: |-
+  Cote D'Ivoire
+server.country.china: |-
+  China
+server.country.croatia: |-
+  Croatia
+server.country.cuba: |-
+  Cuba
+server.country.czech: |-
+  Czech
+server.country.cyprus: |-
+  Cyprus
+server.country.denmark: |-
+  Denmark
+server.country.djibouti: |-
+  Djibouti
+server.country.dominica: |-
+  Dominica
+server.country.ecuador: |-
+  Ecuador
+server.country.egypt: |-
+  Egypt
+server.country.equatorial_guinea: |-
+  Equatorial Guinea
+server.country.eritrea: |-
+  Eritrea
+server.country.estonia: |-
+  Estonia
+server.country.ethiopia: |-
+  Ethiopia
+server.country.faroe_islands: |-
+  Faroe Islands
+server.country.fiji: |-
+  Fiji
+server.country.finland: |-
+  Finland
+server.country.france: |-
+  France
+server.country.metropolitanfrance: |-
+  MetropolitanFrance
+server.country.french_guiana: |-
+  French Guiana
+server.country.french_polynesia: |-
+  French Polynesia
+server.country.gabon: |-
+  Gabon
+server.country.gambia: |-
+  Gambia
+server.country.georgia: |-
+  Georgia
+server.country.germany: |-
+  Germany
+server.country.ghana: |-
+  Ghana
+server.country.gibraltar: |-
+  Gibraltar
+server.country.greece: |-
+  Greece
+server.country.grenada: |-
+  Grenada
+server.country.guadeloupe: |-
+  Guadeloupe
+server.country.guam: |-
+  Guam
+server.country.guatemala: |-
+  Guatemala
+server.country.guernsey: |-
+  Guernsey
+server.country.guinea-bissau: |-
+  Guinea-Bissau
+server.country.guinea: |-
+  Guinea
+server.country.guyana: |-
+  Guyana
+server.country.haiti: |-
+  Haiti
+server.country.honduras: |-
+  Honduras
+server.country.hungary: |-
+  Hungary
+server.country.iceland: |-
+  Iceland
+server.country.india: |-
+  India
+server.country.indonesia: |-
+  Indonesia
+server.country.iran: |-
+  Iran
+server.country.iraq: |-
+  Iraq
+server.country.ireland: |-
+  Ireland
+server.country.isle_of_man: |-
+  Isle of Man
+server.country.israel: |-
+  Israel
+server.country.italy: |-
+  Italy
+server.country.jamaica: |-
+  Jamaica
+server.country.japan: |-
+  Japan
+server.country.jersey: |-
+  Jersey
+server.country.jordan: |-
+  Jordan
+server.country.kazakhstan: |-
+  Kazakhstan
+server.country.kenya: |-
+  Kenya
+server.country.kiribati: |-
+  Kiribati
+server.country.korea_(south): |-
+  Korea (South)
+server.country.korea_(north): |-
+  Korea (North)
+server.country.kuwait: |-
+  Kuwait
+server.country.kyrgyzstan: |-
+  Kyrgyzstan
+server.country.laos: |-
+  Laos
+server.country.latvia: |-
+  Latvia
+server.country.lebanon: |-
+  Lebanon
+server.country.lesotho: |-
+  Lesotho
+server.country.liberia: |-
+  Liberia
+server.country.libya: |-
+  Libya
+server.country.liechtenstein: |-
+  Liechtenstein
+server.country.lithuania: |-
+  Lithuania
+server.country.luxembourg: |-
+  Luxembourg
+server.country.macedonia: |-
+  Macedonia
+server.country.malawi: |-
+  Malawi
+server.country.malaysia: |-
+  Malaysia
+server.country.madagascar: |-
+  Madagascar
+server.country.maldives: |-
+  Maldives
+server.country.mali: |-
+  Mali
+server.country.malta: |-
+  Malta
+server.country.marshall_islands: |-
+  Marshall Islands
+server.country.martinique: |-
+  Martinique
+server.country.mauritania: |-
+  Mauritania
+server.country.mauritius: |-
+  Mauritius
+server.country.mayotte: |-
+  Mayotte
+server.country.mexico: |-
+  Mexico
+server.country.micronesia: |-
+  Micronesia
+server.country.moldova: |-
+  Moldova
+server.country.monaco: |-
+  Monaco
+server.country.mongolia: |-
+  Mongolia
+server.country.montenegro: |-
+  Montenegro
+server.country.montserrat: |-
+  Montserrat
+server.country.morocco: |-
+  Morocco
+server.country.mozambique: |-
+  Mozambique
+server.country.myanmar: |-
+  Myanmar
+server.country.namibia: |-
+  Namibia
+server.country.nauru: |-
+  Nauru
+server.country.nepal: |-
+  Nepal
+server.country.netherlands: |-
+  Netherlands
+server.country.new_caledonia: |-
+  New Caledonia
+server.country.new_zealand: |-
+  New Zealand
+server.country.nicaragua: |-
+  Nicaragua
+server.country.niger: |-
+  Niger
+server.country.nigeria: |-
+  Nigeria
+server.country.niue: |-
+  Niue
+server.country.norfolk_island: |-
+  Norfolk Island
+server.country.norway: |-
+  Norway
+server.country.oman: |-
+  Oman
+server.country.pakistan: |-
+  Pakistan
+server.country.palau: |-
+  Palau
+server.country.palestine: |-
+  Palestine
+server.country.panama: |-
+  Panama
+server.country.papua_new_guinea: |-
+  Papua New Guinea
+server.country.peru: |-
+  Peru
+server.country.philippines: |-
+  Philippines
+server.country.pitcairn_islands: |-
+  Pitcairn Islands
+server.country.poland: |-
+  Poland
+server.country.portugal: |-
+  Portugal
+server.country.puerto_rico: |-
+  Puerto Rico
+server.country.qatar: |-
+  Qatar
+server.country.reunion: |-
+  Reunion
+server.country.romania: |-
+  Romania
+server.country.rwanda: |-
+  Rwanda
+server.country.russian_federation: |-
+  Russian Federation
+server.country.saint_helena: |-
+  Saint Helena
+server.country.saint_kitts-nevis: |-
+  Saint Kitts-Nevis
+server.country.saint_lucia: |-
+  Saint Lucia
+server.country.saint_vincent_and_the_grenadines: |-
+  Saint Vincent and the Grenadines
+server.country.el_salvador: |-
+  El Salvador
+server.country.samoa: |-
+  Samoa
+server.country.san_marino: |-
+  San Marino
+server.country.sao_tome_and_principe: |-
+  Sao Tome and Principe
+server.country.saudi_arabia: |-
+  Saudi Arabia
+server.country.senegal: |-
+  Senegal
+server.country.seychelles: |-
+  Seychelles
+server.country.sierra_leone: |-
+  Sierra Leone
+server.country.singapore: |-
+  Singapore
+server.country.serbia: |-
+  Serbia
+server.country.slovakia: |-
+  Slovakia
+server.country.slovenia: |-
+  Slovenia
+server.country.solomon_islands: |-
+  Solomon Islands
+server.country.somalia: |-
+  Somalia
+server.country.south_africa: |-
+  South Africa
+server.country.spain: |-
+  Spain
+server.country.sri_lanka: |-
+  Sri Lanka
+server.country.sudan: |-
+  Sudan
+server.country.suriname: |-
+  Suriname
+server.country.swaziland: |-
+  Swaziland
+server.country.sweden: |-
+  Sweden
+server.country.switzerland: |-
+  Switzerland
+server.country.syria: |-
+  Syria
+server.country.tajikistan: |-
+  Tajikistan
+server.country.tanzania: |-
+  Tanzania
+server.country.thailand: |-
+  Thailand
+server.country.trinidad_and_tobago: |-
+  Trinidad and Tobago
+server.country.timor-leste: |-
+  Timor-Leste
+server.country.togo: |-
+  Togo
+server.country.tokelau: |-
+  Tokelau
+server.country.tonga: |-
+  Tonga
+server.country.tunisia: |-
+  Tunisia
+server.country.turkey: |-
+  Turkey
+server.country.turkmenistan: |-
+  Turkmenistan
+server.country.tuvalu: |-
+  Tuvalu
+server.country.uganda: |-
+  Uganda
+server.country.ukraine: |-
+  Ukraine
+server.country.united_arab_emirates: |-
+  United Arab Emirates
+server.country.united_kingdom: |-
+  United Kingdom
+server.country.united_states: |-
+  United States
+server.country.uruguay: |-
+  Uruguay
+server.country.uzbekistan: |-
+  Uzbekistan
+server.country.vanuatu: |-
+  Vanuatu
+server.country.vatican_city: |-
+  Vatican City
+server.country.venezuela: |-
+  Venezuela
+server.country.vietnam: |-
+  Vietnam
+server.country.wallis_and_futuna: |-
+  Wallis and Futuna
+server.country.western_sahara: |-
+  Western Sahara
+server.country.yemen: |-
+  Yemen
+server.country.yugoslavia: |-
+  Yugoslavia
+server.country.zambia: |-
+  Zambia
+server.country.zimbabwe: |-
+  Zimbabwe
+server.country.macao: |-
+  Macao,China

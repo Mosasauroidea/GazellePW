@@ -103,3 +103,21 @@ span[style='color: green'] {
 span[style='color: blue'] {
   color: var(--global-background-selection);
 }
+
+.autocomplete-suggestions {
+  margin-top: 4px;
+  border: none;
+  white-space: nowrap;
+  width: unset !important;
+  background-color: var(--Input-background);
+  cursor: pointer;
+}
+
+.autocomplete-suggestions .autocomplete-suggestion {
+  line-height: 24px;
+  padding: 0 8px;
+}
+
+.autocomplete-suggestions .autocomplete-suggestion.autocomplete-selected {
+  background-color: var(--Input-onHover-background);
+}

@@ -22,6 +22,7 @@ $ArtistName = Artists::display_artist($Artist);
 $SubName = $Artist['SubName'];
 $Name = $Artist['Name'];
 $Body = $Artist['Body'];
+$MainBody = $Artist['MainBody'];
 $Image = $Artist['Image'];
 $IMDBID = $Artist['IMDBID'];
 
@@ -69,10 +70,17 @@ View::show_header(t('server.artist.edit_artist'), 'PageArtistEdit');
                 </td>
             </tr>
             <tr class="Form-row">
-                <td class="Form-label"><?= t('server.artist.artist_info') ?>:
+                <td class="Form-label"><?= t('server.artist.chinese_biography') ?>:
                 </td>
                 <td class="Form-items">
                     <textarea class=" Input" name="body" cols="91" rows="20"><?= $Body ?></textarea>
+                </td>
+            </tr>
+            <tr class="Form-row">
+                <td class="Form-label"><?= t('server.artist.english_biography') ?>:
+                </td>
+                <td class="Form-items">
+                    <textarea class=" Input" name="mainbody" cols="91" rows="20"><?= $MainBody ?></textarea>
                 </td>
             </tr>
 

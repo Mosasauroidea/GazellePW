@@ -46,9 +46,9 @@ class EditionInfo {
     public static function key(string $text): ?string {
         $key = Lang::get_key('server.editioninfo', $text);
         if (!empty($key)) {
-            return $key;
+            return str_ireplace('server.editioninfo.', '', $key);
         }
-        return "";
+        return "invalid";
     }
 
     public static function validate($Value) {

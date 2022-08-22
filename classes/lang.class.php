@@ -6,6 +6,8 @@ class Lang {
     const CHS = 'chs';
     const LANGS = [self::EN, self::CHS];
     const DEFAULT_LANG = self::CHS;
+    const MAIN_LANG = self::EN;
+    const SUB_LANG = self::CHS;
 
     static $Locales = [];
 
@@ -21,10 +23,10 @@ class Lang {
             'Count' => null,
         ], $Options);
         $Lang = self::getLang($Options['Lang']);
-        $Value = self::_get($Key, $Lang, $Options);
+        $Value = self::getWithLang($Key, $Lang, $Options);
 
         if (empty($Value)) {
-            $Value = self::_get($Key, self::EN, $Options);
+            $Value = self::getWithLang($Key, self::EN, $Options);
         }
         if (empty($Value)) {
             $Value = $Key;
@@ -32,7 +34,7 @@ class Lang {
         return $Value;
     }
 
-    private static function _get($Key, $Lang, $Options = []) {
+    public static function getWithLang($Key, $Lang, $Options = []) {
 
         $DefaultValue = $Options['DefaultValue'];
         $Values = $Options['Values'];
@@ -53,6 +55,21 @@ class Lang {
         }
 
         return $Value;
+    }
+
+    public static function choose_content($Content, $SubContent) {
+        $UserID = G::$LoggedUser['ID'];
+        $Lang = self::getUserLang($UserID);
+        if ($Lang == self::MAIN_LANG) {
+            if (!empty($Content)) {
+                return $Content;
+            }
+            return $SubContent;
+        }
+        if (!empty($SubContent)) {
+            return $SubContent;
+        }
+        return $Content;
     }
 
     private static function get_locale($Lang) {
@@ -78,7 +95,7 @@ class Lang {
                 });
             foreach ($Result as $K => $V) {
                 if (str_starts_with($K, $Prefix)) {
-                    return str_ireplace($Prefix . '.', '', $K);
+                    return  $K;
                 }
             }
         }

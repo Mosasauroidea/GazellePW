@@ -51,6 +51,7 @@ if (!empty($_GET['action']) && $_GET['action'] == 'revert') { // if we're revert
     }
 } else { // with edit, the variables are passed with POST
     $Body = db_string($_POST['body']);
+    $MainBody = db_string($_POST['mainbody']);
     $Image = db_string($_POST['image']);
     $IMDBID = db_string($_POST['imdbid']);
     $DoubanID = db_string($_POST['doubanid']);
@@ -74,6 +75,7 @@ if (empty($RevisionID)) { // edit
 			(
                 PageID, 
                 Body, 
+                MainBody,
                 Image, 
                 UserID, 
                 Summary, 
@@ -89,6 +91,7 @@ if (empty($RevisionID)) { // edit
 			(
                 '$GroupID', 
                 '" . $Body . "', 
+                '" . $MainBody . "', 
                 '" . $Image . "', 
                 '$UserID', 
                 '$Summary', 
@@ -104,18 +107,18 @@ if (empty($RevisionID)) { // edit
     );
 } else { // revert
     $DB->query("
-		SELECT PageID, Body, Image, IMDBID, DoubanID, RTTitle, Year, Name, SubName, ReleaseType
+		SELECT PageID, Body, MainBody, Image, IMDBID, DoubanID, RTTitle, Year, Name, SubName, ReleaseType
 		FROM wiki_torrents
 		WHERE RevisionID = '$RevisionID'");
-    list($PossibleGroupID, $Body, $Image, $IMDBID, $DoubanID, $RTTitle, $Year, $Name, $SubName, $ReleaseType) = $DB->next_record();
+    list($PossibleGroupID, $Body, $MainBody, $Image, $IMDBID, $DoubanID, $RTTitle, $Year, $Name, $SubName, $ReleaseType) = $DB->next_record();
     if ($PossibleGroupID != $GroupID) {
         error(404);
     }
 
     $DB->query("
 		INSERT INTO wiki_torrents
-			(PageID, Body, Image, UserID, Summary, Time, IMDBID, DoubanID, RTTitle, Year, Name, SubName, ReleaseType)
-		SELECT '$GroupID', Body, Image, '$UserID', 'Reverted to revision $RevisionID', '" . sqltime() . "', IMDBID, DoubanID, RTTitle, Year, Name, SubName, ReleaseType
+			(PageID, Body, MainBody, Image, UserID, Summary, Time, IMDBID, DoubanID, RTTitle, Year, Name, SubName, ReleaseType)
+		SELECT '$GroupID', Body, MainBody, Image, '$UserID', 'Reverted to revision $RevisionID', '" . sqltime() . "', IMDBID, DoubanID, RTTitle, Year, Name, SubName, ReleaseType
 		FROM wiki_torrents
 		WHERE RevisionID = '$RevisionID'");
 }
@@ -129,6 +132,7 @@ $DB->query(
 	SET
 		RevisionID = '$RevisionID',
 		WikiBody = '$Body',
+        MainWikiBody = '$MainBody',
 		WikiImage = '$Image',
         IMDBID = '$IMDBID',
         DoubanID = '" . (empty($DoubanID) ? 'null' : $DoubanID) . "',

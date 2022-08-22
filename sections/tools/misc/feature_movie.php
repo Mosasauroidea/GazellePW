@@ -29,6 +29,7 @@ if (isset($_POST['GroupID'])) {
 				tg.Name,
 				tg.WikiImage,
                 tg.WikiBody,
+                tg.MainWikiBody,
 				tg.SubName,
                 tg.Year
 			FROM torrents_group AS tg
@@ -107,7 +108,7 @@ if (isset($_POST['GroupID'])) {
             }
             if (!empty($Movie['WikiImage']))
                 $Body .= '[img]' . $Movie['WikiImage'] . "[/img]\n\n";
-            $Body .= $Movie['WikiBody'] .  "\n\n";
+            $Body .= Lang::choose_content($Movie['MainWikiBody'], $Movie['WikiBody']) .  "\n\n";
 
             //Create forum post
             $ThreadID = Misc::create_thread($ForumID, $LoggedUser['ID'], $Title, $Body);

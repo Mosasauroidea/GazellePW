@@ -36,14 +36,15 @@ if (!empty($_GET['revisionid'])) { // if they're viewing an old revision
 }
 
 if ($Data) {
-    list($K, list($Name, $Image, $Body, $IMDBID, $SubName, $Birthday, $PlaceOfBirth, $NumSimilar, $SimilarArray,,,)) = each($Data);
+    list($K, list($Name, $Image, $Body, $MainBody, $IMDBID, $SubName, $Birthday, $PlaceOfBirth, $NumSimilar, $SimilarArray,,,)) = each($Data);
 } else {
     if ($RevisionID) {
         $sql = "
 			SELECT
 				wiki.Name,
 				wiki.Image,
-				wiki.body,
+				wiki.Body,
+				wiki.MainBody,
 				wiki.IMDBID,
                 wiki.SubName,
                 a.Birthday,
@@ -57,6 +58,7 @@ if ($Data) {
 				a.Name,
 				a.Image,
 				a.Body,
+                a.MainBody,
 				a.IMDBID,
                 a.SubName,
                 a.Birthday,
@@ -72,7 +74,7 @@ if ($Data) {
         error(404);
     }
 
-    list($Name, $Image, $Body, $IMDBID, $SubName, $Birthday, $PlaceOfBirth) = $DB->next_record(MYSQLI_NUM, array(0, 2, 4));
+    list($Name, $Image, $Body, $MainBody, $IMDBID, $SubName, $Birthday, $PlaceOfBirth) = $DB->next_record(MYSQLI_NUM);
 }
 
 //----------------- Build list and get stats
@@ -340,7 +342,10 @@ View::show_header(($SubName ? '[' . $SubName . '] ' : '') . $Name, 'browse,bbcod
             </div>
             <div class="MovieInfo-synopsis" data-tooltip="<?= t('server.torrents.fold_tooltip') ?>">
                 <p class="HtmlText">
-                    <?= $Body ? Text::full_format($Body) : '<i>' . t('server.artist.empty_introduction_note') . '</i>' ?>
+                    <?
+                    $Content = Lang::choose_content(Text::full_format($MainBody), Text::full_format($Body));
+                    echo $Content ? $Content : '<i>' . t('server.artist.empty_introduction_note') . '</i>'
+                    ?>
                 </p>
             </div>
         </div>
@@ -392,6 +397,7 @@ View::show_header(($SubName ? '[' . $SubName . '] ' : '') . $Name, 'browse,bbcod
 		SELECT
 			s2.ArtistID,
 			a.Name,
+            a.SubName,
 			ass.Score,
 			ass.SimilarID
 		FROM artists_similar AS s1
@@ -417,7 +423,7 @@ View::show_header(($SubName ? '[' . $SubName . '] ' : '') . $Name, 'browse,bbcod
                 }
                 $First = true;
                 foreach ($SimilarArray as $SimilarArtist) {
-                    list($Artist2ID, $Artist2Name, $Score, $SimilarID) = $SimilarArtist;
+                    list($Artist2ID, $Artist2Name, $Artist2SubName, $Score, $SimilarID) = $SimilarArtist;
                     $Score = $Score / 100;
                     if ($First) {
                         $Max = $Score + 1;
@@ -425,20 +431,24 @@ View::show_header(($SubName ? '[' . $SubName . '] ' : '') . $Name, 'browse,bbcod
                     }
 
                     $FontSize = (ceil(((($Score - 2) / $Max - 2) * 4))) + 8;
+                    $ArtistDisplayName = Artists::display_artist(['Name' => $Artist2Name, 'SubName' => $Artist2SubName, 'ArtistID' => $Artist2ID])
 
                 ?>
-                    <li class="SidebarList-item">
-                        <span data-tooltip="<?= $Score ?>"><a href="artist.php?id=<?= $Artist2ID ?>" style="float: left; display: block;"><?= $Artist2Name ?></a></span>
-                        <div style="float: right; display: block; letter-spacing: -1px;">
-                            <a href="artist.php?action=vote_similar&amp;artistid=<?= $ArtistID ?>&amp;similarid=<?= $SimilarID ?>&amp;way=up" class="brackets vote_artist_up" data-tooltip="<?= t('server.artist.vote_up_similar_artist_title') ?>">
+                    <li class="SidebarList-item u-hoverToShow-hover">
+                        <span data-tooltip="<?= $Score ?>"><?= $ArtistDisplayName ?></span>
+                        <div class="SidebarList-actions">
+                            <? if (check_perms('site_delete_tag')) { ?>
+                                <a class="SidebarList-action u-hoverToShow-hide remove remove_artist" href="artist.php?action=delete_similar&amp;artistid=<?= $ArtistID ?>&amp;similarid=<?= $SimilarID ?>&amp;auth=<?= $LoggedUser['AuthKey'] ?>" class="brackets" data-tooltip="<?= t('server.artist.remove_similar_artist_title') ?>">
+                                    <?= icon('remove') ?>
+                                </a>
+                            <?      } ?>
+
+                            <a href=" artist.php?action=vote_similar&amp;artistid=<?= $ArtistID ?>&amp;similarid=<?= $SimilarID ?>&amp;way=up" class="SidebarList-action brackets vote_artist_up" data-tooltip="<?= t('server.artist.vote_up_similar_artist_title') ?>">
                                 <?= icon('vote-up') ?>
                             </a>
-                            <a href="artist.php?action=vote_similar&amp;artistid=<?= $ArtistID ?>&amp;similarid=<?= $SimilarID ?>&amp;way=down" class="brackets vote_artist_down" data-tooltip="<?= t('server.artist.vote_down_similar_artist_title') ?>">
+                            <a href="artist.php?action=vote_similar&amp;artistid=<?= $ArtistID ?>&amp;similarid=<?= $SimilarID ?>&amp;way=down" class="SidebarList-action brackets vote_artist_down" data-tooltip="<?= t('server.artist.vote_down_similar_artist_title') ?>">
                                 <?= icon('vote-down') ?>
                             </a>
-                            <? if (check_perms('site_delete_tag')) { ?>
-                                <span class="remove remove_artist"><a href="artist.php?action=delete_similar&amp;artistid=<?= $ArtistID ?>&amp;similarid=<?= $SimilarID ?>&amp;auth=<?= $LoggedUser['AuthKey'] ?>" class="brackets" data-tooltip="<?= t('server.artist.remove_similar_artist_title') ?>">X</a></span>
-                            <?      } ?>
                         </div>
                         <br style="clear: both;" />
                     </li>
@@ -450,12 +460,17 @@ View::show_header(($SubName ? '[' . $SubName . '] ' : '') . $Name, 'browse,bbcod
                 <strong><?= t('server.artist.add_similarartist') ?></strong>
             </div>
             <div class="SidebarItem-body Box-body">
-                <form class="FormOneLine FormAddSimilarArtist" name="similar_artists" action="artist.php" method="post">
+                <form class="FormAddSimilarArtist" name="similar_artists" action="artist.php" method="post">
                     <input type="hidden" name="action" value="add_similar" />
                     <input type="hidden" name="auth" value="<?= $LoggedUser['AuthKey'] ?>" />
                     <input type="hidden" name="artistid" value="<?= $ArtistID ?>" />
-                    <input class="Input" type="text" autocomplete="off" id="artistsimilar" name="artistname" size="20" <? Users::has_autocomplete_enabled('other'); ?> />
-                    <input class="Button" type="submit" value="+" />
+                    <div class="Form-row FormOneLine">
+                        <input class="Input" type="text" placeholder="<?= t('server.artist.search_auto_fill') ?>" autocomplete="off" id="artistsimilar" size="20" <? Users::has_autocomplete_enabled('other'); ?> />
+                    </div>
+                    <div class="Form-row FormOneLine">
+                        <input type="text" placeholder=" <?= t('server.artist.artist_id') ?>" class="Input" id="similar_artistid" name="similar_artistid" />
+                        <input class="Button" type="submit" value="+" />
+                    </div>
                 </form>
             </div>
         </div>
@@ -608,7 +623,7 @@ View::show_header(($SubName ? '[' . $SubName . '] ' : '') . $Name, 'browse,bbcod
                     ?>
                 </div>
             </div>
-        <?
+            <?
         }
 
         // Similar Artist Map
@@ -636,27 +651,31 @@ View::show_header(($SubName ? '[' . $SubName . '] ' : '') . $Name, 'browse,bbcod
 
                 $Cache->cache_value("similar_positions_$ArtistID", $SimilarData, 3600 * 24);
             }
-        ?>
-            <div id="similar_artist_map" class="box">
-                <div id="flipper_head" class="head">
-                    <strong id="flipper_title"><?= t('server.artist.similar_artist_map') ?></strong>
-                    <a id="flip_to" class="brackets" href="#" onclick="flipView(); return false;"><?= t('server.artist.switch_to_cloud') ?></a>
-                </div>
-                <div id="flip_view_1" style="display: block; width: 100%; height: <?= (HEIGHT) ?>px; position: relative; background-image: url(static/similar/<?= ($ArtistID) ?>.png?t=<?= (time()) ?>);">
-                    <?
-                    $Similar->write_artists();
-                    ?>
-                </div>
-                <div id="flip_view_2" style="display: none; width: <?= WIDTH ?>px; height: <?= HEIGHT ?>px;">
-                    <canvas width="<?= WIDTH ?>px" height="<?= (HEIGHT - 20) ?>px" id="similarArtistsCanvas"></canvas>
-                    <div id="artistTags" style="display: none;">
-                        <ul>
-                            <li></li>
-                        </ul>
+            if (false) {
+            ?>
+                <div id="similar_artist_map" class="box">
+                    <div id="flipper_head" class="head">
+                        <strong id="flipper_title"><?= t('server.artist.similar_artist_map') ?></strong>
+                        <a id="flip_to" class="brackets" href="#" onclick="flipView(); return false;"><?= t('server.artist.switch_to_cloud') ?></a>
                     </div>
-                    <strong style="margin-left: 10px;"><a id="currentArtist" href="#null"><?= t('server.artist.loading') ?></a></strong>
+                    <div id="flip_view_1" style="display: block; width: 100%; height: <?= (HEIGHT) ?>px; position: relative; background-image: url(static/similar/<?= ($ArtistID) ?>.png?t=<?= (time()) ?>);">
+                        <?
+                        $Similar->write_artists();
+                        ?>
+                    </div>
+                    <div id="flip_view_2" style="display: none; width: <?= WIDTH ?>px; height: <?= HEIGHT ?>px;">
+                        <canvas width="<?= WIDTH ?>px" height="<?= (HEIGHT - 20) ?>px" id="similarArtistsCanvas"></canvas>
+                        <div id="artistTags" style="display: none;">
+                            <ul>
+                                <li></li>
+                            </ul>
+                        </div>
+                        <strong style="margin-left: 10px;"><a id="currentArtist" href="#null"><?= t('server.artist.loading') ?></a></strong>
+                    </div>
                 </div>
-            </div>
+            <?
+            }
+            ?>
 
             <script type="text/javascript">
                 //<![CDATA[
@@ -750,6 +769,6 @@ if ($RevisionID) {
     $Key = "artist_$ArtistID";
 }
 
-$Data = array(array($Name, $Image, $Body, $IMDBID, $SubName, $Birthday, $PlaceOfBirth, $NumSimilar, $SimilarArray, array(), array()));
+$Data = array(array($Name, $Image, $Body, $MainBody, $IMDBID, $SubName, $Birthday, $PlaceOfBirth, $NumSimilar, $SimilarArray, array(), array()));
 
 $Cache->cache_value($Key, $Data, 3600);

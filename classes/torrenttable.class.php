@@ -742,7 +742,7 @@ class TorrentTableView {
             </a>
             <span class="TableTorrent-movieInfoFactsItem" data-tooltip="<?= t('server.torrents.imdb_region') ?>">
                 <?= icon('movie-country') ?>
-                <span><? print_r(implode(', ', array_slice(explode(',', $Group['Region']), 0, 2))) ?></span>
+                <span><?= Torrents::format_region($Group['Region'], 2) ?></span>
             </span>
             <span class="TableTorrent-movieInfoFactsItem" data-tooltip="<?= t('server.upload.movie_type') ?>">
                 <?= icon('movie-type') ?>

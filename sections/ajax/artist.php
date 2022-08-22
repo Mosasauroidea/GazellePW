@@ -42,14 +42,15 @@ if (!empty($_GET['revisionid'])) { // if they're viewing an old revision
     $RevisionID = false;
 }
 if ($Data) {
-    list($K, list($Name, $Image, $Body, $IMDBID, $NumSimilar, $SimilarArray,,,)) = each($Data);
+    list($K, list($Name, $Image, $Body, $MainBody, $IMDBID, $NumSimilar, $SimilarArray,,,)) = each($Data);
 } else {
     if ($RevisionID) {
         $sql = "
 			SELECT
 				a.Name,
 				wiki.Image,
-				wiki.body
+				wiki.Body,
+				wiki.MainBody
 			FROM wiki_artists AS wiki
 				LEFT JOIN artists_group AS a ON wiki.RevisionID = a.RevisionID
 			WHERE wiki.RevisionID = '$RevisionID' ";
@@ -58,7 +59,8 @@ if ($Data) {
 			SELECT
 				a.Name,
 				wiki.Image,
-				wiki.body
+				wiki.Body,
+				wiki.MainBody
 			FROM artists_group AS a
 				LEFT JOIN wiki_artists AS wiki ON wiki.RevisionID = a.RevisionID
 			WHERE a.ArtistID = '$ArtistID' ";
@@ -70,7 +72,7 @@ if ($Data) {
         ajax_json_error();
     }
 
-    list($Name, $Image, $Body, $IMDBID) = $DB->next_record(MYSQLI_NUM, array(0));
+    list($Name, $Image, $Body, $MainBody, $IMDBID) = $DB->next_record(MYSQLI_NUM, array(0));
 }
 
 // Requests
@@ -286,6 +288,7 @@ ajax_json_success(array(
     'hasBookmarked' => Bookmarks::has_bookmarked('artist', $ArtistID),
     'image' => $Image,
     'body' => Text::full_format($Body),
+    'mainBody' => Text::full_format($MainBody),
     'tags' => array_values($Tags),
     'similarArtists' => $JsonSimilar,
     'statistics' => array(

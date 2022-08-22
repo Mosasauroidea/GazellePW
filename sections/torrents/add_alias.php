@@ -10,7 +10,7 @@ $ArtistIMDBID = $_POST['artist_id'];
 if (!in_array($Importance, Artists::Importances)) {
     error(0);
 }
-$ArtistForm[$Importance][] = ['IMDBID' => $ArtistIMDBID, 'Name' => $ArtistName, 'SubName' => $ArtistSubName];
+$ArtistForm[db_string($Importance)][] = ['IMDBID' => $ArtistIMDBID, 'Name' => db_string($ArtistName), 'SubName' => db_string($ArtistSubName)];
 
 if (empty($ArstitName) && empty($ArtistIMDBID)) {
     error(0);

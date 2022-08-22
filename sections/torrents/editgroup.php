@@ -30,6 +30,7 @@ $DB->query("
         tg.RTTitle,
 		tg.WikiImage,
 		tg.WikiBody,
+        tg.MainWikiBody,
 		tg.Year,
 		tg.ReleaseType,
 		tg.CategoryID
@@ -45,6 +46,7 @@ $IMDBID = $Group['IMDBID'];
 $RTTitle = $Group['RTTItle'];
 $Image = $Group['WikiImage'];
 $Body = $Group['WikiBody'];
+$MainBody = $Group['MainWikiBody'];
 $DoubanID = $Group['DoubanID'];
 $Year = $Group['Year'];
 $ReleaseType = $Group['ReleaseType'];
@@ -142,6 +144,14 @@ View::show_header(t('server.torrents.edit_torrent_group'), '', 'PageTorrentEditG
                     </td>
                     <td class="Form-items">
                         <?php new TEXTAREA_PREVIEW('body', 'body', $Body, 91, 20, false, false); ?>
+                    </td>
+                </tr>
+                <tr class="Form-row">
+                    <td class="Form-label">
+                        <?= t('server.upload.english_movie_synopsis') ?>:
+                    </td>
+                    <td class="Form-items">
+                        <?php new TEXTAREA_PREVIEW('mainbody', 'mainbody', $MainBody, 91, 20, false, false); ?>
                     </td>
                 </tr>
                 <tr class="Form-row">

@@ -2,7 +2,7 @@
 
 require(CONFIG['SERVER_ROOT'] . '/sections/torrents/functions.php');
 
-$GroupAllowed = array('WikiBody', 'WikiImage', 'ID', 'Name', 'Year',  'ReleaseType', 'CategoryID', 'Time');
+$GroupAllowed = array('WikiBody', 'MainWikiBody', 'WikiImage', 'ID', 'Name', 'Year',  'ReleaseType', 'CategoryID', 'Time');
 $TorrentAllowed = array('ID', 'RemasterYear', 'RemasterTitle',  'Scene', 'FileCount', 'Size', 'Seeders', 'Leechers', 'Snatched', 'FreeTorrent', 'Time', 'Description', 'FileList', 'FilePath', 'UserID', 'Username');
 
 $GroupID = (int)$_GET['id'];
@@ -42,6 +42,7 @@ $TagList = explode('|', $TorrentDetails['GROUP_CONCAT(DISTINCT tags.Name SEPARAT
 
 $JsonTorrentDetails = array(
     'wikiBody'        => html_entity_decode(Text::full_format($TorrentDetails['WikiBody'])),
+    'MainwikiBody'        => html_entity_decode(Text::full_format($TorrentDetails['MainWikiBody'])),
     'wikiImage'       => $TorrentDetails['WikiImage'],
     'id'              => (int)$TorrentDetails['ID'],
     'name'            => $TorrentDetails['Name'],

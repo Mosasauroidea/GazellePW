@@ -562,14 +562,15 @@ if ($_REQUEST['action']) {
                             <? if ($UseAdvancedSearch) { ?>
                                 <input type="hidden" name="action" value="advanced" />
                             <?    } ?>
-                            <input class="Input InputHeader" type="text" id="torrentssearch" accesskey="t" spellcheck="false" placeholder="<?= t('server.index.moviegroups') ?>" name="<?= $UseAdvancedSearch ? 'groupname' : 'searchstr' ?>" size="17" />
+                            <input class="Input InputHeader" type="text" id="torrentssearch" autocomplete="off" <?= Users::has_autocomplete_enabled('search');
+                                                                                                                ?> accesskey="t" spellcheck="false" placeholder="<?= t('server.index.moviegroups') ?>" name="<?= $UseAdvancedSearch ? 'groupname' : 'searchstr' ?>" size="17" />
                         </form>
                     </li>
                     <li class="HeaderSearchList-item" id="searchbar_artists">
                         <span class="hidden">Artist: </span>
                         <form class="HeaderSearch-form" name="artists" action="artist.php" method="get">
-                            <input class="Input InputHeader" id="artistsearch" <?= Users::has_autocomplete_enabled('search');
-                                                                                ?> accesskey="a" spellcheck="false" autocomplete="off" placeholder="<?= t('server.common.artists') ?>" type="text" name="artistname" size="17" />
+                            <input class="Input InputHeader" id="artistsearch" autocomplete="off" <?= Users::has_autocomplete_enabled('search');
+                                                                                                    ?> accesskey="a" spellcheck="false" placeholder="<?= t('server.common.artists') ?>" type="text" name="artistname" size="17" />
                         </form>
                     </li>
                     <li class="HeaderSearchList-item" id="searchbar_requests">

@@ -199,7 +199,7 @@ View::show_header(t('server.torrents.header'), 'browse', 'PageTorrentHome');
                     <td class="Form-inputs is-splitEven">
                         <input class="Input" type="text" spellcheck="false" size="40" name="language" placeholder="<?= t('server.common.language') ?>" value="<? Format::form('language') ?>" />
                         <input class="Input" type="text" spellcheck="false" size="40" name="region" placeholder="<?= t('server.common.countries_and_regions') ?>" value="<? Format::form('region') ?>" />
-                        <input class="Input" type="text" spellcheck="false" size="40" name="subtitles" placeholder="<?= t('server.common.subtitle') ?>" value="<? Format::form('subtitle') ?>" />
+                        <input class="Input" type="text" spellcheck="false" size="40" name="subtitles" placeholder="<?= t('server.common.subtitle') ?>" value="<? Format::form('subtitles') ?>" />
                     </td>
                 </tr>
                 <tr class="Form-row is-rating is-advanced <?= $HideAdvanced ?>">

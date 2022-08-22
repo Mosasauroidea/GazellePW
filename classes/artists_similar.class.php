@@ -54,6 +54,7 @@ class ARTISTS_SIMILAR extends ARTIST {
 			SELECT
 				s2.ArtistID,
 				ag.Name,
+                ag.SubName,
 				ass.Score
 			FROM artists_similar AS s1
 				JOIN artists_similar AS s2 ON s1.SimilarID=s2.SimilarID AND s1.ArtistID!=s2.ArtistID
@@ -68,9 +69,13 @@ class ARTISTS_SIMILAR extends ARTIST {
         }
 
         // Build into array. Each artist is its own object in $this->Artists
-        while (list($ArtistID, $Name, $Score) = G::$DB->next_record(MYSQLI_NUM, false)) {
+        while (list($ArtistID, $Name, $SubName, $Score) = G::$DB->next_record(MYSQLI_NUM, false)) {
             if ($Score < 0) {
                 continue;
+            }
+            $UserID = G::$LoggedUser['ID'];
+            if (Lang::getUserLang($UserID) != Lang::EN) {
+                $Name = $SubName;
             }
             $this->Artists[$ArtistID] = new ARTIST($ArtistID, $Name);
             $this->Similar[$ArtistID] = array('ID' => $ArtistID, 'Score' => $Score);
@@ -362,7 +367,7 @@ class ARTISTS_SIMILAR extends ARTIST {
             }
             reset($this->xValues);
         }
-        $Img->make_png(CONFIG['SERVER_ROOT'] . '/static/similar/' . $this->ID . '.png');
+        $Img->make_png(CONFIG['SERVER_ROOT'] . '/public/static/similar/' . $this->ID . '.png');
     }
 
     function dump() {

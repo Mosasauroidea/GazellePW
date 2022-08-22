@@ -3,20 +3,20 @@ authorize();
 
 $UserID = $LoggedUser['ID'];
 $Artist1ID = db_string($_POST['artistid']);
-$Artist2Name = db_string($_POST['artistname']);
+$Artist2ID = db_string($_POST['similar_artistid']);
 
 if (!is_number($Artist1ID)) {
 	error(0);
 }
 
-if (empty($Artist2Name)) {
-	error('Blank artist name.');
+if (empty($Artist2ID)) {
+	error('Blank artist id.');
 }
 
 $DB->query("
 	SELECT ArtistID
 	FROM artists_group
-	WHERE Name LIKE '$Artist2Name'");
+	WHERE ArtistID LIKE '$Artist2ID'");
 list($Artist2ID) = $DB->next_record();
 
 if (!empty($Artist2ID)) { // artist was found in the database
