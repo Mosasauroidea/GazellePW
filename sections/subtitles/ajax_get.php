@@ -1,4 +1,7 @@
 <?
+
+use Gazelle\Torrent\Subtitle;
+
 $TorrentID = isset($_GET['torrentid']) ? $_GET['torrentid'] : null;
 // TODO by qwerty 获取失败
 if (!$TorrentID) {
@@ -19,7 +22,7 @@ if (empty($AllSubtitles)) {
     </tr>
     <?
 
-    $Labels = ['chinese_simplified', 'chinese_traditional', 'english', 'japanese', 'korean', 'no_subtitles', 'arabic', 'brazilian_port', 'bulgarian', 'croatian', 'czech', 'danish', 'dutch', 'estonian', 'finnish', 'french', 'german', 'greek', 'hebrew', 'hindi', 'hungarian', 'icelandic', 'indonesian', 'italian', 'latvian', 'lithuanian', 'norwegian', 'persian', 'polish', 'portuguese', 'romanian', 'russian', 'serbian', 'slovak', 'slovenian', 'spanish', 'swedish', 'thai', 'turkish', 'ukrainian', 'vietnamese'];
+    $Labels = Subtitle::allItem();
     foreach ($AllSubtitles as $Subtitle) {
         $LanguageArray = explode(',', $Subtitle['languages']);
         $IsNew = time_ago($Subtitle['upload_time']) < 60;
@@ -35,7 +38,7 @@ if (empty($AllSubtitles)) {
                 <?
                 foreach ($LanguageArray as $Language) {
                 ?>
-                    <?= icon("flag/$Language") ?>
+                    <?= Subtitle::icon($Language) ?>
                 <?
                 }
                 ?>

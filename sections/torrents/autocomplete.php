@@ -31,11 +31,11 @@ $Response = array(
 foreach ($AutoSuggest as $Suggestion) {
     list($GroupID, $Name, $SubName, $Year) = $Suggestion;
     if (stripos($Name, $FullName) === 0 || stripos($SubName, $FullName) === 0) {
-        $Value = $Name;
         if ($SubName) {
-            $Value .= " ($SubName)";
+            $Value = "[$SubName] ";
         }
-        $Value .= " [$Year]";
+        $Value .= $Name;
+        $Value .= " ($Year)";
         $Response['suggestions'][] = array('value' => $Value, 'data' => $GroupID);
         if (++$Matched > 9) {
             break;

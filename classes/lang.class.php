@@ -26,7 +26,7 @@ class Lang {
         $Value = self::getWithLang($Key, $Lang, $Options);
 
         if (empty($Value)) {
-            $Value = self::getWithLang($Key, self::EN, $Options);
+            $Value = self::getWithLang($Key, self::MAIN_LANG, $Options);
         }
         if (empty($Value)) {
             $Value = $Key;

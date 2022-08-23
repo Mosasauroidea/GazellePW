@@ -72,17 +72,6 @@ if (!$Properties) {
     error(404);
 }
 
-$GenreTags = $Cache->get_value('genre_tags');
-if (!$GenreTags) {
-    $DB->query('
-		SELECT Name
-		FROM tags
-		WHERE TagType=\'genre\'
-		ORDER BY Name');
-    $GenreTags = $DB->collect('Name');
-    $Cache->cache_value('genre_tags', $GenreTags, 3600 * 24);
-}
-
 $UploadForm = $Categories[$Properties['CategoryID'] - 1];
 
 if (($LoggedUser['ID'] != $Properties['UserID'] && !check_perms('torrents_edit')) || $LoggedUser['DisableWiki']) {
@@ -122,10 +111,10 @@ if (!$Properties['RemasterYear'] || check_perms('edit_unknowns')) {
     $TorrentForm->head();
     switch ($UploadForm) {
         case 'Movies':
-            $TorrentForm->movie_form($GenreTags);
+            $TorrentForm->movie_form();
             break;
         default:
-            $TorrentForm->movie_form($GenreTags);
+            $TorrentForm->movie_form();
     }
     $TorrentForm->foot();
 }

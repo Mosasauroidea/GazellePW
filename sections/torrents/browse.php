@@ -1,6 +1,12 @@
 <?
 include(CONFIG['SERVER_ROOT'] . '/sections/torrents/functions.php');
 include(CONFIG['SERVER_ROOT'] . '/classes/torrenttable.class.php');
+
+use Gazelle\Torrent\EditionInfo;
+use Gazelle\Torrent\Language;
+use Gazelle\Torrent\Region;
+use Gazelle\Torrent\Subtitle;
+
 $headlink = new class implements SortLink {
     function link($SortKey, $DefaultWay = 'desc') {
         global $OrderBy, $OrderWay;
@@ -159,6 +165,7 @@ if ($AdvancedSearch) {
     $HideBasic = '';
     $HideAdvanced = ' u-hidden';
 }
+$GenreTags = Tags::get_genre_tag();
 
 View::show_header(t('server.torrents.header'), 'browse', 'PageTorrentHome');
 //$TimeNow = new DateTime();
@@ -194,12 +201,40 @@ View::show_header(t('server.torrents.header'), 'browse', 'PageTorrentHome');
                         <input class="is-year Input" type="text" spellcheck="false" size="40" name="year" placeholder="<?= t('server.common.year') ?>" value="<? Format::form('year') ?>" />
                     </td>
                 </tr>
-                <tr class="Form-row is-languageRegion is-advanced <?= $HideAdvanced ?>">
-                    <td class="Form-label"><?= t('server.common.language_region') ?>:</td>
-                    <td class="Form-inputs is-splitEven">
-                        <input class="Input" type="text" spellcheck="false" size="40" name="language" placeholder="<?= t('server.common.language') ?>" value="<? Format::form('language') ?>" />
-                        <input class="Input" type="text" spellcheck="false" size="40" name="region" placeholder="<?= t('server.common.countries_and_regions') ?>" value="<? Format::form('region') ?>" />
-                        <input class="Input" type="text" spellcheck="false" size="40" name="subtitles" placeholder="<?= t('server.common.subtitle') ?>" value="<? Format::form('subtitles') ?>" />
+                <tr class="Form-row is-language is-advanced <?= $HideAdvanced ?>">
+                    <td class="Form-label"><?= t('server.common.language') ?>:</td>
+                    <td class="Form-inputs">
+                        <select class="Input" id="language_infos" onchange="globalapp.addTorrentItem('language', 'language_infos'); return false;">
+                            <option class="Select-option" value="">--</option>
+                            <? foreach (Language::allItem() as $Key) { ?>
+                                <option class="Select-option" value="<?= $Key ?>"><?= Language::text($Key)  ?></option>
+                            <? } ?>
+                        </select>
+                        <input class="Input" type="text" spellcheck="false" size="40" id="language" name="language" placeholder="<?= t('server.common.comma_separated') ?>" value="<? Format::form('language') ?>" />
+                    </td>
+                </tr>
+                <tr class="Form-row is-subtitle is-advanced <?= $HideAdvanced ?>">
+                    <td class="Form-label"><?= t('server.common.subtitle') ?>:</td>
+                    <td class="Form-inputs">
+                        <select class="Input" id="subtitle_infos" onchange="globalapp.addTorrentItem('subtitles', 'subtitle_infos'); return false;">
+                            <option class="Select-option" value="">--</option>
+                            <? foreach (Subtitle::allItem() as $Key) { ?>
+                                <option class="Select-option" value="<?= $Key ?>"><?= Subtitle::text($Key)  ?></option>
+                            <? } ?>
+                        </select>
+                        <input class="Input" type="text" spellcheck="false" size="40" id="subtitles" name="subtitles" placeholder="<?= t('server.common.comma_separated') ?>" value="<? Format::form('subtitles') ?>" />
+                    </td>
+                </tr>
+                <tr class="Form-row is-region is-advanced <?= $HideAdvanced ?>">
+                    <td class="Form-label"><?= t('server.common.countries_and_regions') ?>:</td>
+                    <td class="Form-inputs">
+                        <select class="Input" id="region_infos" onchange="globalapp.addTorrentItem('region', 'region_infos'); return false;">
+                            <option class="Select-option" value="">--</option>
+                            <? foreach (Region::allItem() as $Key) { ?>
+                                <option class="Select-option" value="<?= $Key ?>"><?= Region::text($Key)  ?></option>
+                            <? } ?>
+                        </select>
+                        <input class="Input" type="text" spellcheck="false" size="40" id="region" name="region" placeholder="<?= t('server.common.comma_separated') ?>" value="<? Format::form('region') ?>" />
                     </td>
                 </tr>
                 <tr class="Form-row is-rating is-advanced <?= $HideAdvanced ?>">
@@ -213,7 +248,13 @@ View::show_header(t('server.torrents.header'), 'browse', 'PageTorrentHome');
                 <tr class="Form-row is-editionInfo is-advanced <?= $HideAdvanced ?>">
                     <td class="Form-label"><?= t('server.common.edition_info') ?>:</td>
                     <td class="Form-inputs" colspan="3">
-                        <input class="Input" type="text" spellcheck="false" size="40" name="remtitle" value="<? Format::form('remtitle') ?>" placeholder="<?= t('server.common.comma_separated_edition') ?>" />
+                        <select class="Input" id="edition_infos" onchange="globalapp.addTorrentItem('remtitle', 'edition_infos'); return false;">
+                            <option class="Select-option" value="">--</option>
+                            <? foreach (EditionInfo::allEditionKey() as $Key) { ?>
+                                <option class="Select-option" value="<?= $Key ?>"><?= EditionInfo::text($Key)  ?></option>
+                            <? } ?>
+                        </select>
+                        <input class="Input" type="text" spellcheck="false" size="40" id="remtitle" name="remtitle" value="<? Format::form('remtitle') ?>" placeholder="<?= t('server.common.comma_separated_edition') ?>" />
                     </td>
                 </tr>
                 <tr class="Form-row is-fileList is-advanced <?= $HideAdvanced ?>">
@@ -224,51 +265,56 @@ View::show_header(t('server.torrents.header'), 'browse', 'PageTorrentHome');
                 </tr>
                 <tr class="Form-row is-ripSpecifics is-advanced <?= $HideAdvanced ?>">
                     <td class="Form-label"><?= t('server.torrents.ft_ripspecifics') ?>:</td>
-                    <td class="Form-inputs">
-                        <select class="Input" id="source" name="source">
-                            <option class="Select-option" value=""><?= t('server.torrents.source') ?></option>
-                            <? foreach ($Sources as $SourceName) { ?>
-                                <option class="Select-option" value="<?= display_str($SourceName); ?>" <? Format::selected('source', $SourceName) ?>><?= display_str($SourceName); ?></option>
-                            <?  } ?>
-                        </select>
-                        <select class="Input" name="codec">
-                            <option class="Select-option" value=""><?= t('server.torrents.codec') ?></option>
-                            <? foreach ($Codecs as $CodecName) { ?>
-                                <option class="Select-option" value="<?= display_str($CodecName); ?>" <? Format::selected('codec', $CodecName) ?>><?= display_str($CodecName); ?></option>
-                            <?  } ?>
-                        </select>
-                        <select class="Input" name="container">
-                            <option class="Select-option" value=""><?= t('server.torrents.container') ?></option>
-                            <? foreach ($Containers as $ContainerName) { ?>
-                                <option class="Select-option" value="<?= display_str($ContainerName); ?>" <? Format::selected('container', $ContainerName) ?>><?= display_str($ContainerName); ?></option>
-                            <?  } ?>
-                        </select>
-                        <select class="Input" name="resolution">
-                            <option class="Select-option" value=""><?= t('server.torrents.resolution') ?></option>
-                            <? foreach ($Resolutions as $ResolutionName) { ?>
-                                <option class="Select-option" value="<?= display_str($ResolutionName); ?>" <? Format::selected('resolution', $ResolutionName) ?>><?= display_str($ResolutionName); ?></option>
-                            <?  } ?>
-                        </select>
-                        <select class="Input" name="processing">
-                            <option class="Select-option" value=""><?= t('server.torrents.processing') ?></option>
-                            <? foreach ($Processings as $ProcessingName) { ?>
-                                <option class="Select-option" value="<?= display_str($ProcessingName); ?>" <? Format::selected('processing', $ProcessingName) ?>><?= display_str($ProcessingName); ?></option>
-                            <?  } ?>
-                        </select>
-                        <select class="Input" name="releasetype">
-                            <option class="Select-option" value=""><?= t('server.torrents.ft_releasetype') ?></option>
-                            <? foreach ($ReleaseTypes as $ID) { ?>
-                                <option class="Select-option" value="<?= display_str($ID); ?>" <? Format::selected('releasetype', $ID) ?>><?= display_str(t('server.torrents.release_types')[$ID]); ?></option>
-                            <?  } ?>
-                        </select>
-                        <select class="Input" name="freetorrent">
-                            <option class="Select-option" value=""><?= t('server.tools.sales_promotion_plan') ?></option>
-                            <option class="Select-option" value='1' <? $HideBasic ? Format::selected('freetorrent', '1') : '' ?>><?= t('server.torrents.freeleech') ?></option>
-                            <option class="Select-option" value='11' <? Format::selected('freetorrent', '11') ?>><?= t('server.torrents.off25') ?></option>
-                            <option class="Select-option" value='12' <? Format::selected('freetorrent', '12') ?>><?= t('server.torrents.off50') ?></option>
-                            <option class="Select-option" value='13' <? Format::selected('freetorrent', '13') ?>><?= t('server.torrents.off75') ?></option>
-                            <option class="Select-option" value='2' <? Format::selected('freetorrent', '2') ?>><?= t('server.torrents.neutral_leech') ?></option>
-                        </select>
+                    <td class="Form-items">
+                        <div class="Form-inputs">
+                            <select class="Input" name="releasetype">
+                                <option class="Select-option" value=""><?= t('server.torrents.ft_releasetype') ?></option>
+                                <? foreach ($ReleaseTypes as $ID) { ?>
+                                    <option class="Select-option" value="<?= display_str($ID); ?>" <? Format::selected('releasetype', $ID) ?>><?= display_str(t('server.torrents.release_types')[$ID]); ?></option>
+                                <?  } ?>
+                            </select>
+                            <select class="Input" name="freetorrent">
+                                <option class="Select-option" value=""><?= t('server.tools.sales_promotion_plan') ?></option>
+                                <option class="Select-option" value='1' <? $HideBasic ? Format::selected('freetorrent', '1') : '' ?>><?= t('server.torrents.freeleech') ?></option>
+                                <option class="Select-option" value='11' <? Format::selected('freetorrent', '11') ?>><?= t('server.torrents.off25') ?></option>
+                                <option class="Select-option" value='12' <? Format::selected('freetorrent', '12') ?>><?= t('server.torrents.off50') ?></option>
+                                <option class="Select-option" value='13' <? Format::selected('freetorrent', '13') ?>><?= t('server.torrents.off75') ?></option>
+                                <option class="Select-option" value='2' <? Format::selected('freetorrent', '2') ?>><?= t('server.torrents.neutral_leech') ?></option>
+                            </select>
+                        </div>
+                        <div class="Form-inputs">
+                            <select class="Input" id="source" name="source">
+                                <option class="Select-option" value=""><?= t('server.torrents.source') ?></option>
+                                <? foreach ($Sources as $SourceName) { ?>
+                                    <option class="Select-option" value="<?= display_str($SourceName); ?>" <? Format::selected('source', $SourceName) ?>><?= display_str($SourceName); ?></option>
+                                <?  } ?>
+                            </select>
+                            <select class="Input" name="codec">
+                                <option class="Select-option" value=""><?= t('server.torrents.codec') ?></option>
+                                <? foreach ($Codecs as $CodecName) { ?>
+                                    <option class="Select-option" value="<?= display_str($CodecName); ?>" <? Format::selected('codec', $CodecName) ?>><?= display_str($CodecName); ?></option>
+                                <?  } ?>
+                            </select>
+                            <select class="Input" name="container">
+                                <option class="Select-option" value=""><?= t('server.torrents.container') ?></option>
+                                <? foreach ($Containers as $ContainerName) { ?>
+                                    <option class="Select-option" value="<?= display_str($ContainerName); ?>" <? Format::selected('container', $ContainerName) ?>><?= display_str($ContainerName); ?></option>
+                                <?  } ?>
+                            </select>
+                            <select class="Input" name="resolution">
+                                <option class="Select-option" value=""><?= t('server.torrents.resolution') ?></option>
+                                <? foreach ($Resolutions as $ResolutionName) { ?>
+                                    <option class="Select-option" value="<?= display_str($ResolutionName); ?>" <? Format::selected('resolution', $ResolutionName) ?>><?= display_str($ResolutionName); ?></option>
+                                <?  } ?>
+                            </select>
+                            <select class="Input" name="processing">
+                                <option class="Select-option" value=""><?= t('server.torrents.processing') ?></option>
+                                <? foreach ($Processings as $ProcessingName) { ?>
+                                    <option class="Select-option" value="<?= display_str($ProcessingName); ?>" <? Format::selected('processing', $ProcessingName) ?>><?= display_str($ProcessingName); ?></option>
+                                <?  } ?>
+                            </select>
+                        </div>
+
                     </td>
                 </tr>
                 <tr class="Form-row is-special is-advanced <?= $HideAdvanced ?>">
@@ -305,6 +351,12 @@ View::show_header(t('server.torrents.header'), 'browse', 'PageTorrentHome');
                 <tr class="Form-row is-tagFilter is-advanced <?= $HideAdvanced ?>">
                     <td class="Form-label"><span data-tooltip="<?= t('server.common.tags') ?>"><?= t('server.common.tags') ?>:</span></td>
                     <td class="Form-inputs">
+                        <select class="Input" id="genre_tags" name="genre_tags" onchange="globalapp.addTorrentItem('tags', 'genre_tags'); return false;">
+                            <option class="Select-option" value="">--</option>
+                            <? foreach (Misc::display_array($GenreTags) as $Genre) { ?>
+                                <option class="Select-option" value="<?= $Genre ?>"><?= $Genre ?></option>
+                            <? } ?>
+                        </select>
                         <input class="Input" type="text" placeholder="<?= t('server.common.comma_separated') ?>" size="40" id="tags" name="taglist" value="<?= display_str($Search->get_terms('taglist')) ?>" <? Users::has_autocomplete_enabled('other'); ?> />
                         <div class="RadioGroup">
                             <div class="Radio">
@@ -349,39 +401,6 @@ View::show_header(t('server.torrents.header'), 'browse', 'PageTorrentHome');
                             <label for="group_results"><?= t('server.torrents.group_results') ?></label>
                         </div>
                     </td>
-                </tr>
-            </table>
-            <table class="SearchTorrent-tagList <? if (empty($LoggedUser['ShowTags'])) { ?> hidden<? } ?>" id="taglist">
-                <tr>
-                    <?
-                    $GenreTags = $Cache->get_value('genre_tags');
-                    if (!$GenreTags) {
-                        $DB->query('
-		SELECT Name
-		FROM tags
-		WHERE TagType = \'genre\'
-		ORDER BY Name');
-                        $GenreTags = $DB->collect('Name');
-                        $Cache->cache_value('genre_tags', $GenreTags, 3600 * 6);
-                    }
-
-                    $x = 0;
-                    foreach ($GenreTags as $Tag) {
-                    ?>
-                        <td width="12.5%"><a href="#" onclick="globalapp.browseAddTag('<?= $Tag ?>'); return false;"><?= $Tag ?></a></td>
-                        <?
-                        $x++;
-                        if ($x % 7 == 0) {
-                        ?>
-                </tr>
-                <tr>
-                <?
-                        }
-                    }
-                    if ($x % 7 != 0) { // Padding
-                ?>
-                <td colspan="<?= (7 - ($x % 7)) ?>"> </td>
-            <? } ?>
                 </tr>
             </table>
         </div>

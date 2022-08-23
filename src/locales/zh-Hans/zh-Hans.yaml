@@ -1006,7 +1006,7 @@ server.common.collapse_this_edition_title: |-
 server.common.collapse_this_group_title: |-
   折叠本影片。在左键单击的同时按住 [Command] <em>(Mac)</em> 或 [Ctrl] <em>(PC)</em> 键以折叠本页面所有的影片。
 server.common.comma_separated: |-
-  以英文逗号分隔各标签
+  以英文逗号分隔
 server.common.comma_separated_edition: |-
   以英文逗号分隔各版本信息
 server.common.countries_and_regions: |-
@@ -7997,7 +7997,7 @@ server.country.zambia: |-
 server.country.zimbabwe: |-
   津巴布韦
 server.country.taiwan: |-
-  中国台湾 
+  中国台湾
 server.country.hong_kong: |-
   中国香港
 server.country.macao: |-

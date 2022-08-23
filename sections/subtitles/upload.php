@@ -1,4 +1,7 @@
 <?
+
+use Gazelle\Torrent\Subtitle;
+
 //ini_set('max_file_uploads', 1);
 View::show_header(t('server.subtitles.h2_subtitles'), 'validate_subtitles', 'PageSubtitleHome');
 $TorrentID = isset($_GET['torrent_id']) ? $_GET['torrent_id'] : null;
@@ -11,6 +14,19 @@ $TorrentDetail = Torrents::get_torrent($TorrentID);
 $Title = Torrents::torrent_simple_view($TorrentDetail['Group'], $TorrentDetail, true, [
     'SettingTorrentTitle' => G::$LoggedUser['SettingTorrentTitle'],
 ]);
+
+function genSubcheckboxes($Labels, $Subtitles) {
+    foreach ($Labels as $Key => $Label) {
+        $Checked = strpos($Subtitles, $Label) === false ? "" : "checked='checked'";
+        $Icon = Subtitle::icon($Label);
+?>
+        <div class="subtitle">
+            <input id="<?= $Label ?>" type="checkbox" name="languages[]" value="<?= $Label ?>" <?= $Checked ?>>
+            <label class="Checkbox-label" for="<?= $Label ?>"><?= $Icon ?> <?= Subtitle::text($Label) ?></label>
+        </div>
+<?
+    }
+}
 ?>
 
 <div class="LayoutBody">
@@ -45,17 +61,9 @@ $Title = Torrents::torrent_simple_view($TorrentDetail['Group'], $TorrentDetail, 
                         <div id="subtitles_container" class="Form-errorContainer">
                             <div id="common_subtitles" class="grid_subtitles">
                                 <?
-                                function genSubcheckboxes($Labels, $Subtitles) {
-                                    for ($i = 0; $i < count($Labels); $i++) {
-                                        echo '<div class="subtitle">
-                                            <input id="' . $Labels[$i] . '" type="checkbox" name="languages[]" value="' . $Labels[$i] . '"' . (strpos($Subtitles, $Labels[$i]) === false ? "" : "checked=\"checked\"") . '>
-                                            <label for="' . $Labels[$i] . '">' .
-                                            icon("flag/$Labels[$i]") .  t("server.upload.${Labels[$i]}") . '
-                                            </label></div>';
-                                    }
-                                }
+
                                 $Labels = ['chinese_simplified', 'chinese_traditional', 'english', 'japanese', 'korean'];
-                                genSubcheckboxes($Labels, "");
+                                genSubcheckboxes(Subtitle::allItem(Subtitle::MainItem), "");
                                 ?>
                                 <a href="javascript:$('#other_subtitles').new_toggle()"><?= t('server.upload.show_more') ?></a>
                             </div>
@@ -63,7 +71,7 @@ $Title = Torrents::torrent_simple_view($TorrentDetail['Group'], $TorrentDetail, 
                                 <div class="grid_subtitles">
                                     <?
                                     $Labels = ['no_subtitles', 'arabic', 'brazilian_port', 'bulgarian', 'croatian', 'czech', 'danish', 'dutch', 'estonian', 'finnish', 'french', 'german', 'greek', 'hebrew', 'hindi', 'hungarian', 'icelandic', 'indonesian', 'italian', 'latvian', 'lithuanian', 'norwegian', 'persian', 'polish', 'portuguese', 'romanian', 'russian', 'serbian', 'slovak', 'slovenian', 'spanish', 'swedish', 'thai', 'turkish', 'ukrainian', 'vietnamese'];
-                                    genSubcheckboxes($Labels, "");
+                                    genSubcheckboxes(Subtitle::allItem(Subtitle::ExtraItem), "");
                                     ?>
                                 </div>
                             </div>

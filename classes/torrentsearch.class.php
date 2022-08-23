@@ -1,6 +1,9 @@
 <?
 
 use Gazelle\Torrent\EditionInfo;
+use Gazelle\Torrent\Language;
+use Gazelle\Torrent\Region;
+use Gazelle\Torrent\Subtitle;
 
 class TorrentSearch {
     const TAGS_ANY = 0;
@@ -631,7 +634,7 @@ class TorrentSearch {
         }
         $Words = explode($Separator, $Term);
         foreach ($Words as $Word) {
-            $this->add_word($Field, Torrents::get_search_region(trim($Word)));
+            $this->add_word($Field, Region::sphinx_key(trim($Word)));
         }
     }
 
@@ -643,7 +646,7 @@ class TorrentSearch {
         }
         $Words = explode($Separator, $Term);
         foreach ($Words as $Word) {
-            $this->add_word($Field, Torrents::get_search_language(trim($Word)));
+            $this->add_word($Field, Language::sphinxKey(trim($Word)));
         }
     }
 
@@ -655,7 +658,7 @@ class TorrentSearch {
         }
         $Words = explode($Separator, $Term);
         foreach ($Words as $Word) {
-            $this->add_word($Field, Torrents::get_search_subtitle(trim($Word)));
+            $this->add_word($Field, Subtitle::sphinxKey(trim($Word)));
         }
     }
 

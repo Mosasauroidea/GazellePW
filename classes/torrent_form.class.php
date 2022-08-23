@@ -2,6 +2,7 @@
 
 use Gazelle\Torrent\EditionInfo;
 use Gazelle\Torrent\EditionType;
+use Gazelle\Torrent\Subtitle;
 
 /********************************************************************************
  ************ Torrent form class *************** upload.php and torrents.php ****
@@ -26,6 +27,7 @@ class TORRENT_FORM {
     var $Disabled = '';
     var $DisabledFlag = false;
     var $AddFormat = false;
+    var $GenreTags = false;
 
     const TORRENT_INPUT_ACCEPT = ['application/x-bittorrent', '.torrent'];
     const JSON_INPUT_ACCEPT = ['application/json', '.json'];
@@ -47,11 +49,24 @@ class TORRENT_FORM {
         $this->Processings = $Processings;
         $this->Makers = $Makers;
         $this->TorrentID = $TorrentID;
+        $this->GenreTags = Tags::get_genre_tag();
 
         if ($this->Torrent && isset($this->Torrent['GroupID'])) {
             $this->Disabled = ' readonly';
             $this->DisabledFlag = true;
             $this->AddFormat = true;
+        }
+    }
+    function genSubcheckboxes($Labels, $Subtitles) {
+        foreach ($Labels as $Key => $Label) {
+            $Checked = strpos($Subtitles, $Label) === false ? "" : "checked='checked'";
+            $Icon = Subtitle::icon($Label);
+?>
+            <div class="Checkbox">
+                <input class="Input" type="checkbox" id="<?= $Label ?>" name="subtitles[]" value="<?= $Label ?>" <?= $Checked ?>>
+                <label class="Checkbox-label" for="<?= $Label ?>"><?= $Icon ?> <?= Subtitle::text($Label) ?></label>
+            </div>
+        <?
         }
     }
     function genRemasterTags($RemasterTags, $SelectedTitle) {
@@ -71,8 +86,7 @@ class TORRENT_FORM {
 
     function head() {
         $AnnounceURL = CONFIG['ANNOUNCE_URL'];
-?>
-        <div class="Form">
+        ?> <div class="Form">
             <?
             if ($this->Error) {
                 echo "\t" . '<p style="text-align: center;" class="u-colorWarning">' . $this->Error . "</p>\n";
@@ -265,7 +279,7 @@ class TORRENT_FORM {
     <?
             } //function foot
 
-            function movie_form($GenreTags) {
+            function movie_form() {
                 $QueryID = G::$DB->get_query_id();
                 $Torrent = $this->Torrent;
                 $IsRemaster = true;
@@ -483,9 +497,9 @@ class TORRENT_FORM {
                             <td class="Form-label"><?= t('server.upload.tags') ?><span class="u-colorWarning">*</span>:</td>
                             <td class="Form-items Form-errorContainer">
                                 <div class="Form-inputs">
-                                    <? if ($GenreTags) { ?>
+                                    <? if ($this->GenreTags) { ?>
                                         <select class="Input" id="genre_tags" name="genre_tags" onchange="globalapp.uploadAddTag(); return false;" <?= $this->Disabled ?>>
-                                            <? foreach (Misc::display_array($GenreTags) as $Genre) { ?>
+                                            <? foreach (Misc::display_array($this->GenreTags) as $Genre) { ?>
                                                 <option class="Select-option" value="<?= $Genre ?>"><?= $Genre ?></option>
                                             <? } ?>
                                         </select>
@@ -873,23 +887,11 @@ class TORRENT_FORM {
                             <div id="other_subtitles" class="<?= in_array($SubtitleType, [1, 2]) ? '' : 'hidden' ?>">
                                 <div class="FormUpload-flags">
                                     <?
-                                    function genSubcheckboxes($Labels, $Subtitles) {
-                                        for ($i = 0; $i < count($Labels); $i++) {
-                                            echo '<div class="Checkbox">
-                                        <input class="Input" type="checkbox" id="' . $Labels[$i] . '" name="subtitles[]" value="' . $Labels[$i] . '"' . (strpos($Subtitles, $Labels[$i]) === false ? "" : "checked=\"checked\"") . '>
-                                        <label class="Checkbox-label" for="' . $Labels[$i] . '">' .
-                                                icon("flag/$Labels[$i]") .  t("server.upload.${Labels[$i]}") . '
-                                        </label>
-                                    </div>';
-                                        }
-                                    }
-                                    $Labels = ['chinese_simplified', 'chinese_traditional', 'english', 'japanese', 'korean'];
-                                    genSubcheckboxes($Labels,  $Subtitles);
+                                    $this->genSubcheckboxes(Subtitle::allItem(Subtitle::MainItem),  $Subtitles);
                                     ?>
 
                                     <?
-                                    $Labels = ['arabic', 'brazilian_port', 'bulgarian', 'croatian', 'czech', 'danish', 'dutch', 'estonian', 'finnish', 'french', 'german', 'greek', 'hebrew', 'hindi', 'hungarian', 'icelandic', 'indonesian', 'italian', 'latvian', 'lithuanian', 'norwegian', 'persian', 'polish', 'portuguese', 'romanian', 'russian', 'serbian', 'slovak', 'slovenian', 'spanish', 'swedish', 'thai', 'turkish', 'ukrainian', 'vietnamese'];
-                                    genSubcheckboxes($Labels,  $Subtitles);
+                                    $this->genSubcheckboxes(Subtitle::allItem(Subtitle::ExtraItem),  $Subtitles);
                                     ?>
                                 </div>
                             </div>

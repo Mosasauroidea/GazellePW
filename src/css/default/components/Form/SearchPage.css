@@ -35,8 +35,8 @@
   gap: var(--global-space-sm);
 }
 
-.SearchPage .is-tagFilter .Form-inputs > Input {
-  width: 70%;
+.SearchPage :is(.is-tagFilter, .is-editionInfo, .is-language, .is-region, .is-subtitle) .Form-inputs > Input {
+  flex: 1;
 }
 
 /* SearchForum */

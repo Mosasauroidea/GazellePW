@@ -285,4 +285,20 @@ class Tags {
 
         return ['input' => $TagList, 'predicate' => implode(' ', $QueryParts)];
     }
+
+    public static function get_genre_tag() {
+        $Cache = G::$Cache;
+        $DB = G::$DB;
+        $GenreTags = $Cache->get_value('genre_tags');
+        if (!$GenreTags) {
+            $DB->query("
+		SELECT Name
+		FROM tags
+		WHERE TagType = 'genre'
+		ORDER BY Name");
+            $GenreTags = $DB->collect('Name');
+            $Cache->cache_value('genre_tags', $GenreTags, 3600 * 6);
+        }
+        return $GenreTags;
+    }
 }

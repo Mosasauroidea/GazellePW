@@ -2,6 +2,8 @@
 
 use Gazelle\Torrent\EditionType;
 use Gazelle\Torrent\EditionInfo;
+use Gazelle\Torrent\Region;
+use Gazelle\Torrent\Language;
 use Gazelle\Torrent\TorrentSlot;
 use Gazelle\Torrent\TorrentSlotType;
 
@@ -12,45 +14,20 @@ class Torrents {
 
     public static function format_region($Region, $Limit = 10) {
         $Regions = array_map(function ($value) {
-            // map
-            switch ($value) {
-                case 'USA':
-                    $value = "United States";
-                    break;
-                case 'UK':
-                    $value = 'United Kingdom';
-                    break;
-            }
-            return t('server.country.' . str_replace(' ', '_', trim(strtolower($value))), $value);
+            return Region::text($value);
         }, array_slice(explode(',', $Region), 0, $Limit));
         return  implode(', ', $Regions);
     }
 
     public static function format_language($Language, $Limit = 10) {
         $Languages = array_map(function ($value) {
-            return t('server.upload.' . trim(strtolower($value)), $value);
+            return Language::text($value);
         }, array_slice(explode(',', $Language), 0, $Limit));
         return implode(', ', $Languages);
     }
 
     public static function get_search_language($Language) {
         $key = Lang::get_key('server.upload', $Language);
-        if (!empty($key)) {
-            return Lang::getWithLang($key, Lang::EN);
-        }
-        return 'invalid';
-    }
-
-    public static function get_search_subtitle($Language) {
-        $key = Lang::get_key('server.upload', $Language);
-        if (!empty($key)) {
-            return str_ireplace('server.upload.', '', $key);
-        }
-        return 'invalid';
-    }
-
-    public static function get_search_region($Region) {
-        $key = Lang::get_key('server.country', $Region);
         if (!empty($key)) {
             return Lang::getWithLang($key, Lang::EN);
         }

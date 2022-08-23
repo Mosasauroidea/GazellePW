@@ -1,6 +1,7 @@
 <?
 
 use Gazelle\API\Torrent;
+use Gazelle\Torrent\Subtitle;
 
 interface SortLink {
     public function link($SortKey, $DefaultWay = 'desc');
@@ -587,7 +588,7 @@ class TorrentTableView {
                         <?  } ?>
                         <? if (!$Subtitles && !$ExternalSubtitleIDs) { ?>
                             <span class="TorrentDetailSubtitle-noSubtitle" data-tooltip="<?= t('server.upload.no_subtitles') ?>">
-                                <?= icon('flag/no_subtitles') ?>
+                                <?= Subtitle::icon(Subtitle::NoSubtitleitem) ?>
                             </span>
                         <? } ?>
                     </div>
