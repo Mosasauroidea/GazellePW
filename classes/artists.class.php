@@ -90,7 +90,7 @@ class Artists {
 					ta.Importance ASC,
 					ta.Order ASC;"
             );
-            while (list($GroupID, $ArtistID, $ArtistName, $ArtistImportance, $Image, $SubName, $IMDBID) = G::$DB->next_record(MYSQLI_BOTH, false)) {
+            while (list($GroupID, $ArtistID, $ArtistName, $ArtistImportance, $Image, $SubName, $IMDBID) = G::$DB->next_record(MYSQLI_BOTH)) {
                 $Results[$GroupID][$ArtistImportance][] = array('ArtistID' => $ArtistID, 'Name' => $ArtistName, 'Image' => $Image, 'SubName' => $SubName, 'IMDBID' => $IMDBID);
                 $New[$GroupID][$ArtistImportance][] = array('ArtistID' => $ArtistID, 'Name' => $ArtistName, 'Image' => $Image, 'SubName' => $SubName, 'IMDBID' => $IMDBID);
             }
@@ -174,8 +174,8 @@ class Artists {
         $FullArtistDetails = MOVIE::get_artists($IMDBIDs, $MovieIMDNBID, $Limit);
         foreach ($ArtistForm as $Importance => $Artists) {
             foreach ($Artists as $Num => $Artist) {
-                $Artist['Name'] = html_entity_decode($Artist['Name'], ENT_QUOTES);
-                $Artist['SubName'] = html_entity_decode($Artist['SubName'], ENT_QUOTES);
+                $Artist['Name'] = $Artist['Name'];
+                $Artist['SubName'] = $Artist['SubName'];
                 $ArtistDetail = MOVIE::get_default_artist($Artist['IMDBID']);
                 if ($Artist['IMDBID']) {
                     $Detail = $FullArtistDetails[$Artist['IMDBID']];
@@ -185,8 +185,8 @@ class Artists {
                 }
 
                 $Artist['Image'] = $ArtistDetail['Image'];
-                $Artist['Description'] = html_entity_decode($ArtistDetail['Description'], ENT_QUOTES);
-                $Artist['MainDescription'] = html_entity_decode($ArtistDetail['MainDescription'], ENT_QUOTES);
+                $Artist['Description'] = $ArtistDetail['Description'];
+                $Artist['MainDescription'] = $ArtistDetail['MainDescription'];
                 $Artist['Birthday'] = $ArtistDetail['Birthday'];
                 $Artist['PlaceOfBirth'] = $ArtistDetail['PlaceOfBirth'];
                 $Artist = Artists::add_artist($Artist);

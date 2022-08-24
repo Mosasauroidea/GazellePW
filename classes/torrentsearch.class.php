@@ -545,7 +545,7 @@ class TorrentSearch {
             if (isset($this->Terms['taglist']['exclude'])) {
                 $AllTags = array_merge($AllTags, $this->Terms['taglist']['exclude']);
             }
-            $this->RawTerms['taglist'] = str_replace('_', '.', implode(', ', $AllTags));
+            $this->RawTerms['taglist'] = str_replace('_', '.', implode(',', $AllTags));
         }
         if (isset($this->Terms['processing'])) {
             $this->Temrs['processing']['operator'] = self::SPH_BOOL_OR;
@@ -605,6 +605,8 @@ class TorrentSearch {
      * @param string $Term Given search expression
      */
     private function search_taglist($Term) {
+        $TagArray = explode(',', $Term);
+        $Term = implode(',', Tags::main_name($TagArray));
         $Term = strtr($Term, '.', '_');
         $this->add_field('taglist', $Term);
     }

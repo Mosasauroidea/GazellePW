@@ -1339,7 +1339,7 @@ WHERE xs.uid =" . $UserID . " and xs.tstamp >= unix_timestamp(date_format(now(),
                                     $RequestID = $Request['ID'];
                                     $RequestName = Torrents::group_name($Request, false);
                                     $FullName = "<a href=\"requests.php?action=view&amp;id=$RequestID\">$RequestName</a>";
-                                    $Tags = $Request['Tags'];
+
                                 ?>
                                     <tr class="Table-row">
                                         <td class="TableRequest-cellName Table-cell">

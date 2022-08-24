@@ -19,6 +19,13 @@ class MOVIE {
             } else {
                 $OMDBData = json_encode($curl->response, JSON_UNESCAPED_UNICODE);
                 G::$DB->query("INSERT INTO movie_info_cache (IMDBID, OMDBData, OMDBTime) VALUES('$IMDBID', '" . db_string($OMDBData) . "', '" . sqlTime() . "')  ON DUPLICATE KEY UPDATE OMDBData='" . db_string($OMDBData) . "', OMDBTime='" . sqlTime() . "'");
+                // query again? db_string escape?
+                G::$DB->query("SELECT OMDBData
+                FROM movie_info_cache
+                WHERE IMDBID='$IMDBID'");
+                if (G::$DB->has_results()) {
+                    list($OMDBData) = G::$DB->next_record(MYSQLI_NUM, false);
+                }
             }
         }
         if (!empty($OMDBData)) {
@@ -46,6 +53,12 @@ class MOVIE {
                     $DoubanID = $curl->response->data->douban->id;
                     $IMDBID = $curl->response->data->imdb->id;
                     G::$DB->query("INSERT INTO movie_info_cache (IMDBID, DoubanData, DoubanTime, DoubanID) VALUES('$IMDBID', '" . db_string($DoubanData) . "', '" . sqlTime() . "', $DoubanID)  ON DUPLICATE KEY UPDATE DoubanData=VALUES(DoubanData), DoubanTime=VALUES(DoubanTime), DoubanID=VALUES(DoubanID)");
+                    G::$DB->query("SELECT DoubanData 
+                    FROM movie_info_cache
+                    WHERE DoubanID='$DoubanID'");
+                    if (G::$DB->has_results()) {
+                        list($DoubanData) = G::$DB->next_record(MYSQLI_NUM, false);
+                    }
                 } else {
                     $DoubanID = 'null';
                 }
@@ -85,6 +98,12 @@ class MOVIE {
                     $DoubanID = 'null';
                 }
                 G::$DB->query("INSERT INTO movie_info_cache (IMDBID, DoubanData, DoubanTime, DoubanID) VALUES('$IMDBID', '" . db_string($DoubanData) . "', '" . sqlTime() . "', $DoubanID)  ON DUPLICATE KEY UPDATE DoubanData=VALUES(DoubanData), DoubanTime=VALUES(DoubanTime), DoubanID=VALUES(DoubanID)");
+                G::$DB->query("SELECT DoubanData 
+                FROM movie_info_cache
+                WHERE IMDBID='$IMDBID'");
+                if (G::$DB->has_results()) {
+                    list($DoubanData) = G::$DB->next_record(MYSQLI_NUM, false);
+                }
             }
         }
         if (!empty($DoubanData)) {
@@ -103,6 +122,7 @@ class MOVIE {
         $Info['Image'] = "";
         $Info['IMDBID'] = $IMDBID;
         $Info['Description'] = "";
+        $Info['MainDescription'] = "";
         $Info['Birthday'] = "";
         $Info['PlaceOfBirth'] = "";
         $Info['Alias'] = array();
@@ -243,6 +263,10 @@ class MOVIE {
                         TMDBTime=VALUES(TMDBTime),
                         MainTMDBTime=VALUES(MainTMDBTime)"
                 );
+                G::$DB->query("SELECT IMDBID, TMDBData, MainTMDBData, TMDBID
+                FROM artist_info_cache
+                WHERE IMDBID in ('" . implode("','", $NotFoundID) . "')");
+                $Data = array_merge($Data, G::$DB->to_array('IMDBID', MYSQLI_ASSOC));
             }
         }
         $Ret = [];
@@ -310,12 +334,17 @@ class MOVIE {
             $IMDBActorInfo['Cinematographers'] = $IMDBResult->cinematographer();
             $IMDBActorData = json_encode($IMDBActorInfo, JSON_UNESCAPED_UNICODE);
             G::$DB->query("INSERT INTO movie_info_cache (IMDBID, IMDBActorData, IMDBActorTime) VALUES('$IMDBID', '" . db_string($IMDBActorData) . "', '" . sqlTime() . "')  ON DUPLICATE KEY UPDATE IMDBActorData=VALUES(IMDBActorData), IMDBActorTime=VALUES(IMDBActorTime)");
+            G::$DB->query("SELECT IMDBActorData
+            FROM movie_info_cache
+            WHERE IMDBID='$IMDBID'");
+            if (G::$DB->has_results()) {
+                list($IMDBActorData) = G::$DB->next_record(MYSQLI_NUM, false);
+            }
         }
         return json_decode($IMDBActorData);
     }
 
     private static function get_imdb_data($IMDBID) {
-
         $IMDBConfig = new \Imdb\Config();
         $IMDBConfig->language = 'en-US';
         $IMDBResult = new \Imdb\Title($IMDBID, $IMDBConfig);
@@ -386,6 +415,15 @@ class MOVIE {
                             ON DUPLICATE KEY UPDATE 
                             IMDBActorData=VALUES(IMDBActorData), 
                             IMDBActorTime=VALUES(IMDBActorTime)");
+            G::$DB->query(
+                "SELECT 
+                    IMDBActorData
+                FROM movie_info_cache
+                WHERE IMDBID='$IMDBID'"
+            );
+            if (G::$DB->has_results()) {
+                list($IMDBActorData) = G::$DB->next_record(MYSQLI_NUM, false);
+            }
         }
 
         $omdb_key = CONFIG['OMDB_API_KEY'];
@@ -428,6 +466,15 @@ class MOVIE {
                     $TMDBID = 'null';
                 }
                 G::$DB->query("INSERT INTO movie_info_cache (IMDBID, TMDBData, TMDBTime, TMDBID) VALUES('$IMDBID', '" . db_string($TMDBData) . "', '" . sqlTime() . "', $TMDBID)  ON DUPLICATE KEY UPDATE TMDBData=VALUES(TMDBData), TMDBTime=VALUES(TMDBTime), TMDBID=VALUES(TMDBID)");
+                G::$DB->query(
+                    "SELECT 
+                        TMDBData
+                    FROM movie_info_cache
+                    WHERE IMDBID='$IMDBID'"
+                );
+                if (G::$DB->has_results()) {
+                    list($TMDBData) = G::$DB->next_record(MYSQLI_NUM, false);
+                }
             } else if ($instance->myTag == 'main-tmdb') {
                 $MainTMDBData = json_encode($instance->response, JSON_UNESCAPED_UNICODE);
                 if (count($instance->response->movie_results) > 0) {
@@ -436,6 +483,15 @@ class MOVIE {
                     $TMDBID = 'null';
                 }
                 G::$DB->query("INSERT INTO movie_info_cache (IMDBID, MainTMDBData, MainTMDBTime, TMDBID) VALUES('$IMDBID', '" . db_string($MainTMDBData) . "', '" . sqlTime() . "', $TMDBID)  ON DUPLICATE KEY UPDATE MainTMDBData=VALUES(MainTMDBData), MainTMDBTime=VALUES(MainTMDBTime), TMDBID=VALUES(TMDBID)");
+                G::$DB->query(
+                    "SELECT 
+                       MainTMDBData 
+                    FROM movie_info_cache
+                    WHERE IMDBID='$IMDBID'"
+                );
+                if (G::$DB->has_results()) {
+                    list($MainTMDBData) = G::$DB->next_record(MYSQLI_NUM, false);
+                }
             } else if ($instance->myTag == 'douban-actor') {
                 $DoubanActorData = json_encode($instance->response, JSON_UNESCAPED_UNICODE);
                 if ($instance->response->data->douban) {
@@ -444,6 +500,15 @@ class MOVIE {
                     $DoubanID = 'null';
                 }
                 G::$DB->query("INSERT INTO movie_info_cache (IMDBID, DoubanActorData, DoubanActorTime, DoubanID) VALUES('$IMDBID', '" . db_string($DoubanActorData) . "', '" . sqlTime() . "', $DoubanID)  ON DUPLICATE KEY UPDATE DoubanActorData=VALUES(DoubanActorData), DoubanActorTime=VALUES(DoubanActorTime), DoubanID=VALUES(DoubanID)");
+                G::$DB->query(
+                    "SELECT 
+                       DoubanActorData 
+                    FROM movie_info_cache
+                    WHERE IMDBID='$IMDBID'"
+                );
+                if (G::$DB->has_results()) {
+                    list($DoubanActorData) = G::$DB->next_record(MYSQLI_NUM, false);
+                }
             } else if ($instance->myTag == 'douban') {
                 $DoubanData = json_encode($instance->response, JSON_UNESCAPED_UNICODE);
                 if ($instance->response->data->douban) {
@@ -451,7 +516,16 @@ class MOVIE {
                 } else {
                     $DoubanID = 'null';
                 }
-                G::$DB->query("INSERT INTO movie_info_cache (IMDBID, DoubanData, DoubanActorTime, DoubanID) VALUES('$IMDBID', '" . db_string($DoubanData) . "', '" . sqlTime() . "', $DoubanID)  ON DUPLICATE KEY UPDATE DoubanData=VALUES(DoubanData), DoubanActorTime=VALUES(DoubanActorTime), DoubanID=VALUES(DoubanID)");
+                G::$DB->query("INSERT INTO movie_info_cache (IMDBID, DoubanData, DoubanTime, DoubanID) VALUES('$IMDBID', '" . db_string($DoubanData) . "', '" . sqlTime() . "', $DoubanID)  ON DUPLICATE KEY UPDATE DoubanData=VALUES(DoubanData), DoubanTime=VALUES(DoubanTime), DoubanID=VALUES(DoubanID)");
+                G::$DB->query(
+                    "SELECT 
+                       DoubanData 
+                    FROM movie_info_cache
+                    WHERE IMDBID='$IMDBID'"
+                );
+                if (G::$DB->has_results()) {
+                    list($DoubanData) = G::$DB->next_record(MYSQLI_NUM, false);
+                }
             }
         });
         $multi_curl->start();
@@ -461,7 +535,7 @@ class MOVIE {
             $Info['MainPlot'] = html_entity_decode($IMDBResult->plot()[0], ENT_QUOTES);
         }
         $Info['Year'] = $IMDBResult->year();
-        $Info['Genre'] = strtolower(implode(',', $IMDBResult->genres()));
+        $Info['Genre'] = strtolower(implode(',', array_values(Tags::get_sub_name($IMDBResult->genres()))));
         $Info['Type'] = $IMDBResult->movieType();
 
         if ($OMDBData) {

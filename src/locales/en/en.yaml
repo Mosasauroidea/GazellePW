@@ -720,7 +720,7 @@ server.bookmarks.year: |-
 server.bookmarks.your_bookmarked_artists: |-
   Your bookmarked artists
 server.bookmarks.your_bookmarked_torrent_groups: |-
-  Your bookmarked torrent groups
+  Your bookmarked movies
 server.collages.a_collage_with_that_name_already_exists_1: |-
   A collage with that name already exists but needs to be recovered, please <a href="staffpm.php">contact</a> the staff team!
 server.collages.add_comment: |-
@@ -1047,6 +1047,8 @@ server.common.date: |-
   Date
 server.common.delete: |-
   Delete
+server.common.modify: |-
+  Modify
 server.common.director: |-
   Director
 server.common.douban_rating: |-
@@ -1393,6 +1395,8 @@ server.editioninfo.extras: |-
   Extras
 server.editioninfo.features: |-
   Features
+server.editioninfo.medias: |-
+  Medias
 server.editioninfo.hdr10: |-
   HDR10
 server.editioninfo.hdr10plus: |-
@@ -3701,6 +3705,8 @@ server.tools.badges_giving: |-
   Badges giving
 server.tools.ban_reason: |-
   Ban Reason
+server.tools.tag_type: |-
+  Type
 server.tools.bans: |-
   Bans
 server.tools.base_salary: |-
@@ -4047,6 +4053,10 @@ server.tools.h2_manipulate_invite_tree: |-
   Manipulate Invite Tree
 server.tools.h2_official_tags_manager: |-
   Official Tags Manager
+server.tools.official_tag: |-
+  Official
+server.tools.other_tag: |-
+  Other
 server.tools.h2_os_and_browser_usage: |-
   OS and Browser Usage
 server.tools.h2_site_options: |-
@@ -4287,8 +4297,8 @@ server.tools.notes: |-
   Notes
 server.tools.numbers_and_such: |-
   Numbers and such
-server.tools.official_tags_manager: |-
-  Official tags manager
+server.tools.tags_manager: |-
+  Tags manager
 server.tools.offset: |-
   Offset
 server.tools.offsets_inserted: |-
@@ -4613,6 +4623,8 @@ server.tools.swarms_and_snatches: |-
   Swarms and snatches
 server.tools.tag: |-
   Tag
+server.tools.sub_tag: |-
+  Chinese Tag Name
 server.tools.tag_aliases: |-
   Tag Aliases
 server.tools.td_ip_address: |-
@@ -5871,7 +5883,7 @@ server.upload.movie_edition_information: |-
   Edition information
 server.upload.movie_edition_information_examples: |-
   Examples: |-
-  Part of a collection, special edition, or non-standard rip feature. See the edition guide <a href="#">here</a>. <strong>When choosing "Masters of Cinema" "The Criterion Collection" "Warner Archive Collection" "4K Restoration" "4K Remaster" "Remastered" or entering a custom information, you're strongly recommended to fill the specific year.</strong>
+  Part of a collection, special edition, dolby vision/atomos or non-standard rip feature. See the edition guide <a href="#">here</a>. <strong>When choosing "Masters of Cinema" "The Criterion Collection" "Warner Archive Collection" "4K Restoration" "4K Remaster" "Remastered" or entering a custom information, you're strongly recommended to fill the specific year.</strong>
 server.upload.movie_edition_information_label: |-
   Check this box if this torrent has extra edition information.
 server.upload.movie_feature: |-
@@ -8137,3 +8149,5 @@ server.country.zimbabwe: |-
   Zimbabwe
 server.country.macao: |-
   Macao,China
+server.common.minutes: |-
+  mins

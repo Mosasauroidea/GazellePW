@@ -50,7 +50,7 @@ foreach ($GroupIDs as $Idx => $GroupID) {
             }
         }
     }
-    new Tags($TagList);
+    new Tags(Torrents::tags($TorrentList[$GroupID]));
 }
 
 $GroupIDs = array_values($GroupIDs);
@@ -109,7 +109,7 @@ View::show_header($Title, 'browse,collage', 'PageBookmarkTorrent');
         <div class="SidebarItemTags SidebarItem Box">
             <div class="SidebarItem-header Box-header"><strong><?= t('server.bookmarks.top_tags') ?></strong></div>
             <div class="SidebarList SidebarItem-body Box-body">
-                <? Tags::format_top(5, 'torrents.php?taglist=', '', 'SidebarList-item') ?>
+                <? Tags::format_top(5, 'torrents.php?action=advanced&taglist=', '', 'SidebarList-item') ?>
             </div>
         </div>
         <div class="SidebarItemArtists SidebarItem Box">
@@ -144,8 +144,8 @@ View::show_header($Title, 'browse,collage', 'PageBookmarkTorrent');
         </div>
     </div>
 
-    <div class="Box">
-        <div class="Box-body">
+    <div class="Post">
+        <div class="Post-body">
             <?php
             $Groups = [];
             foreach ($GroupIDs as $GroupID) {

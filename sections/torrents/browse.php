@@ -357,7 +357,7 @@ View::show_header(t('server.torrents.header'), 'browse', 'PageTorrentHome');
                                 <option class="Select-option" value="<?= $Genre ?>"><?= $Genre ?></option>
                             <? } ?>
                         </select>
-                        <input class="Input" type="text" placeholder="<?= t('server.common.comma_separated') ?>" size="40" id="tags" name="taglist" value="<?= display_str($Search->get_terms('taglist')) ?>" <? Users::has_autocomplete_enabled('other'); ?> />
+                        <input class="Input" type="text" placeholder="<?= t('server.common.comma_separated') ?>" size="40" id="tags" name="taglist" value="<?= Format::form('taglist') ?>" />
                         <div class="RadioGroup">
                             <div class="Radio">
                                 <input class="Input" type="radio" name="tags_type" id="tags_type0" value="0" <? Format::selected('tags_type', 0, 'checked') ?> />

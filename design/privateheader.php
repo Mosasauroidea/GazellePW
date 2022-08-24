@@ -177,12 +177,7 @@ if ($NotificationsManager->is_traditional(NotificationsManager::TORRENTS)) {
     $NotificationsManager->clear_notifications_array();
 }
 
-if (check_perms('users_give_donor')) {
-    $Count = $donation->getPendingDonationCount();
-    if ($Count > 0) {
-        $Alerts[] = "<a class='Button ButtonHeader' href='tools.php?action=prepaid_card'>" . $Count . t('server.donate.has_pending_donation') . "</a>";
-    }
-}
+
 if (check_perms('admin_interviewer')) {
     // Interviewer code
     G::$DB->query("SELECT count(*) FROM `register_apply` WHERE `apply_status`=0 or `apply_status`=3");
@@ -194,6 +189,12 @@ if (check_perms('users_mod')) {
 }
 if (check_perms('staff_award')) {
     $ModBar[] = '<a class="Button ButtonHeader"  href="tools.php?action=award">' . t('server.pub.statistics') . '</a>';
+}
+if (check_perms('users_give_donor')) {
+    $Count = $donation->getPendingDonationCount();
+    if ($Count > 0) {
+        $ModBar[] = "<a class='Button ButtonHeader' href='tools.php?action=prepaid_card'>" . $Count . t('server.donate.has_pending_donation') . "</a>";
+    }
 }
 if (
     check_perms('users_mod')

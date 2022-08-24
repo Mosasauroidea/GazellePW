@@ -50,7 +50,6 @@ View::show_header(t('server.top10.top') . " $Limit " . t('server.top10.top_torre
 		g.Name,
 		g.CategoryID,
 		g.WikiImage,
-		g.TagList,
 		t.Scene,
 		t.RemasterYear,
 		g.Year,

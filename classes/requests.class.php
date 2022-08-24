@@ -36,7 +36,7 @@ class Requests {
 			SET ArtistList = (
 					SELECT GROUP_CONCAT(aa.Name SEPARATOR ' ')
 					FROM requests_artists AS ra
-						JOIN artists_alias AS aa ON aa.AliasID = ra.AliasID
+						JOIN artists_alias AS aa ON aa.ArtistID = ra.ArtistID
 					WHERE ra.RequestID = $RequestID
 					GROUP BY NULL
 					)
@@ -162,15 +162,14 @@ class Requests {
             G::$DB->query("
 				SELECT
 					ra.ArtistID,
-					aa.Name,
+					ag.Name,
 					ra.Importance,
                     ag.SubName,
                     ag.IMDBID
 				FROM requests_artists AS ra
-					JOIN artists_alias AS aa ON ra.AliasID = aa.AliasID
                     JOIN artists_group AS ag ON ag.ArtistID = ra.ArtistID
 				WHERE ra.RequestID = $RequestID
-				ORDER BY ra.Importance ASC, aa.Name ASC;");
+				ORDER BY ra.Importance ASC, ag.Name ASC;");
             $ArtistRaw = G::$DB->to_array();
             G::$DB->set_query_id($QueryID);
             foreach ($ArtistRaw as $ArtistRow) {

@@ -250,7 +250,7 @@ class Torrent extends \Gazelle\Base {
                 $i,
                 $torrentID,
                 $titleString,
-                $group['TagList']
+                ''
             );
         }
     }

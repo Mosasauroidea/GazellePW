@@ -45,47 +45,4 @@ class Collages {
         header('Location: collage.php?id=' . $CollageID);
         die();
     }
-
-    public static function collage_cover_row($Group) {
-        extract(Torrents::array_group($Group));
-        /**
-         * @var int    $GroupID
-         * @var string $GroupName
-         * @var string $GroupYear
-         * @var int    $GroupCategoryID
-         * @var array  $Artists
-         * @var array  $Artists
-         * @var string $TagList
-         * @var string $WikiImage
-         */
-
-        $DisplayName = '';
-        if (!empty($Artists[1]) || !empty($Artists[4]) || !empty($Artists[5]) || !empty($Artists[6])) {
-            unset($Artists[2]);
-            unset($Artists[3]);
-            $DisplayName .= Artists::display_artists($Artists, false);
-        } elseif (count($Artists) > 0) {
-            $DisplayName .= Artists::display_artists(array('1' => $Artists), false);
-        }
-        $DisplayName .= $GroupName;
-        if ($GroupYear > 0) {
-            $DisplayName = "$DisplayName [$GroupYear]";
-        }
-        $TorrentTags = new Tags($TagList);
-        $Tags = display_str($TorrentTags->format());
-        $PlainTags = implode(', ', $TorrentTags->get_tags());
-        ob_start();
-?>
-        <li class="image_group_<?= $GroupID ?>">
-            <a href="torrents.php?id=<?= $GroupID ?>" class="bookmark_<?= $GroupID ?>">
-                <? if ($WikiImage) { ?>
-                    <img src="<?= ImageTools::process($WikiImage, true) ?>" alt="<?= $DisplayName ?>" data-tooltip-interactive="<?= "$DisplayName ($PlainTags)" ?> " data-title-plain="<?= "$DisplayName ($PlainTags)" ?>" width="118" />
-                <?  } else { ?>
-                    <div style="width: 107px; padding: 5px;"><?= $DisplayName ?></div>
-                <?  } ?>
-            </a>
-        </li>
-<?
-        return ob_get_clean();
-    }
 }

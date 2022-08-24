@@ -236,7 +236,7 @@ $NumSnatches = 0;
 
 foreach ($TorrentList as $GroupID => $Group) {
     // $Tags array is for the sidebar on the right.
-    $TorrentTags = new Tags($Group['TagList'], true);
+    $TorrentTags = new Tags(Torrents::tags($Group), true);
 
     foreach ($Group['Torrents'] as $TorrentID => $Torrent) {
         $NumTorrents++;
@@ -343,7 +343,7 @@ View::show_header(($SubName ? '[' . $SubName . '] ' : '') . $Name, 'browse,bbcod
             <div class="MovieInfo-synopsis" data-tooltip="<?= t('server.torrents.fold_tooltip') ?>">
                 <p class="HtmlText">
                     <?
-                    $Content = Lang::choose_content(Text::full_format($MainBody), Text::full_format($Body));
+                    $Content = Lang::choose_content($MainBody, $Body);
                     echo $Content ? $Content : '<i>' . t('server.artist.empty_introduction_note') . '</i>'
                     ?>
                 </p>
@@ -371,7 +371,7 @@ View::show_header(($SubName ? '[' . $SubName . '] ' : '') . $Name, 'browse,bbcod
                 <strong><?= t('server.artist.tag') ?></strong>
             </div>
             <ul class="Sidebar-list SidebarItem-body Box-body">
-                <? Tags::format_top(50, 'torrents.php?taglist=', $Name, "Sidebar-item"); ?>
+                <? Tags::format_top(50, 'torrents.php?action=advanced&taglist=', $Name, "Sidebar-item"); ?>
             </ul>
         </div>
         <?

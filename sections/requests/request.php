@@ -142,10 +142,12 @@ View::show_header(t('server.requests.view_request') . ": $FullName", 'comments,b
                     <strong><?= t('server.requests.tags') ?></strong>
                 </div>
                 <ul class="SidebarList SidebarItem-body Box-body">
-                    <? foreach ($Request['Tags'] as $TagID => $TagName) { ?>
+                    <?
+                    $Tags = Tags::get_sub_name($Request['Tags']);
+                    foreach ($Tags as $Key => $Tag) {
+                    ?>
                         <li class="SidebarList-item">
-                            <a href="torrents.php?taglist=<?= $TagName ?>"><?= display_str($TagName) ?></a>
-                            <br style="clear: both;" />
+                            <a href="torrents.php?action=advanced&taglist=<?= $Tag ?>"><?= $Tag ?></a>
                         </li>
                     <?  } ?>
                 </ul>

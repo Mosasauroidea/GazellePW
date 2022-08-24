@@ -24,6 +24,7 @@ if ($Details == 'all' || $Details == 'ut') {
 			SELECT
 				t.ID,
 				t.Name,
+                t.SubName,
 				COUNT(tt.GroupID) AS Uses,
 				SUM(tt.PositiveVotes - 1) AS PosVotes,
 				SUM(tt.NegativeVotes - 1) AS NegVotes
@@ -45,6 +46,7 @@ if ($Details == 'all' || $Details == 'ur') {
 			SELECT
 				t.ID,
 				t.Name,
+                t.SubName,
 				COUNT(r.RequestID) AS Uses,
 				'',''
 			FROM tags AS t
@@ -65,6 +67,7 @@ if ($Details == 'all' || $Details == 'v') {
 			SELECT
 				t.ID,
 				t.Name,
+                t.SubName,
 				COUNT(tt.GroupID) AS Uses,
 				SUM(tt.PositiveVotes - 1) AS PosVotes,
 				SUM(tt.NegativeVotes - 1) AS NegVotes

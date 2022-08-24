@@ -240,9 +240,7 @@ View::show_header(t('server.tools.staff_tools'), '', 'PageToolHome');
         }
         create_row(t('server.tools.dnu_list'), "tools.php?action=dnu", check_perms("admin_dnu"));
         create_row(t('server.tools.multiple_freeleech'), "tools.php?action=multiple_freeleech", check_perms("users_mod"));
-        create_row(t('server.tools.tag_aliases'), "tools.php?action=tag_aliases", check_perms("users_mod"));
-        create_row(t('server.tools.batch_tag_editor'), "tools.php?action=edit_tags", check_perms("users_mod"));
-        create_row(t('server.tools.official_tags_manager'), "tools.php?action=official_tags", check_perms("users_mod"));
+        create_row(t('server.tools.tags_manager'), "tools.php?action=manage_tags", check_perms("users_mod"));
 
         if ($ToolsHTML) {
         ?>

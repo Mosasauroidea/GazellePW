@@ -200,12 +200,13 @@ if (empty($_POST['year'])) {
 $Director = [];
 for ($i = 0, $il = count($Artists); $i < $il; $i++) {
     if (trim($ArtistIDs[$i]) !== '') {
-        $Director[] = array('IMDBID' => trim($ArtistIDs[$i]), 'Name' => trim($Artists[$i]), 'SubName' => trim($ArtistsSubName[$i]));
+        $Director[] = array('IMDBID' => trim($ArtistIDs[$i]), 'Name' => db_string(trim($Artists[$i])), 'SubName' => db_string(trim($ArtistsSubName[$i])));
     }
 }
 if (count($Director) < 1) {
     $Err = t('server.requests.at_least_one_director');
 }
+
 
 if (!empty($Err)) {
     error($Err);
@@ -329,36 +330,16 @@ if ($GroupID) {
      * 2. For each artist that didn't exist, create an artist.
      * 3. Create a row in the requests_artists table for each artist, based on the ID.
 */
-$FullArtistDetails = MOVIE::get_artists($ArtistIDs, $IMDBID, 10);
-foreach ($Director as $Num => $Artist) {
-    //1. See if each artist given already exists and if it does, grab the ID.
-    $Artist['Name'] = html_entity_decode($Artist['Name'], ENT_QUOTES);
-    $Artist['SubName'] = html_entity_decode($Artist['SubName'], ENT_QUOTES);
-    $ArtistDetail = MOVIE::get_default_artist($Artist['IMDBID']);
-    if ($Artist['IMDBID']) {
-        $Detail = $FullArtistDetails[$Artist['IMDBID']];
-        if ($Detail) {
-            $ArtistDetail = $Detail;
-        }
-    }
-
-    $Artist['Image'] = $ArtistDetail['Image'];
-    $Artist['Description'] = $ArtistDetail['Description'];
-    $Artist['Birthday'] = $ArtistDetail['Birthday'];
-    $Artist['PlaceOfBirth'] = $ArtistDetail['PlaceOfBirth'];
-    $Artist = Artists::add_artist($Artist);
-    $Director[$Num] = $Artist;
-}
-
+$Director = Artists::new_artist([Artists::Director => $Director], $IMDBID)[Artists::Director];
 
 //3. Create a row in the requests_artists table for each artist, based on the ID.
 foreach ($Director as $Num => $Artist) {
     $Importance = Artists::Director;
     $DB->query("
 				INSERT IGNORE INTO requests_artists
-					(RequestID, ArtistID, AliasID, Importance)
+					(RequestID, ArtistID, Importance)
 				VALUES
-					($RequestID, " . $Artist['ArtistID'] . ', ' . $Artist['AliasID'] . ", '$Importance')");
+					($RequestID, " . $Artist['ArtistID'] .  ", '$Importance')");
     // $Cache->increment('stats_album_count');
     $Cache->delete_value('artists_requests_' . $Artist['id']);
 }
@@ -374,25 +355,18 @@ if (!$NewRequest) {
 }
 
 $Tags = array_unique(explode(',', $Tags));
+$Tags = Tags::main_name($Tags);
+$tagMan = new \Gazelle\Manager\Tag;
 foreach ($Tags as $Index => $Tag) {
-    $Tag = Misc::sanitize_tag($Tag);
-    $Tag = Misc::get_alias_tag($Tag);
     $Tags[$Index] = $Tag; //For announce
-    $DB->query("
-		INSERT INTO tags
-			(Name, UserID)
-		VALUES
-			('$Tag', " . $LoggedUser['ID'] . ")
-		ON DUPLICATE KEY UPDATE
-			Uses = Uses + 1");
-
-    $TagID = $DB->inserted_id();
-
-    $DB->query("
+    $TagID = $tagMan->create($Tag, $LoggedUser['ID']);
+    if ($TagID) {
+        $DB->query("
 		INSERT IGNORE INTO requests_tags
 			(TagID, RequestID)
 		VALUES
 			($TagID, $RequestID)");
+    }
 }
 
 if ($NewRequest) {

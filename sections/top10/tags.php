@@ -30,6 +30,7 @@ View::show_header(t('server.top10.top_10_tags'), '', 'PageTop10Tag');
 			SELECT
 				t.ID,
 				t.Name,
+                t.SubName,
 				COUNT(tt.GroupID) AS Uses,
 				SUM(tt.PositiveVotes-1) AS PosVotes,
 				SUM(tt.NegativeVotes-1) AS NegVotes
@@ -51,6 +52,7 @@ View::show_header(t('server.top10.top_10_tags'), '', 'PageTop10Tag');
 			SELECT
 				t.ID,
 				t.Name,
+                t.SubName,
 				COUNT(r.RequestID) AS Uses,
 				'',''
 			FROM tags AS t
@@ -71,6 +73,7 @@ View::show_header(t('server.top10.top_10_tags'), '', 'PageTop10Tag');
 			SELECT
 				t.ID,
 				t.Name,
+                t.SubName,
 				COUNT(tt.GroupID) AS Uses,
 				SUM(tt.PositiveVotes-1) AS PosVotes,
 				SUM(tt.NegativeVotes-1) AS NegVotes
@@ -95,7 +98,7 @@ View::show_header(t('server.top10.top_10_tags'), '', 'PageTop10Tag');
         if ($RequestsTable) {
             $URLString = 'requests.php?tags=';
         } else {
-            $URLString = 'torrents.php?taglist=';
+            $URLString = 'torrents.php?action=advanced&taglist=';
         }
     ?>
         <div class="Post">
@@ -151,11 +154,12 @@ View::show_header(t('server.top10.top_10_tags'), '', 'PageTop10Tag');
 
                         $Rank = 0;
                         foreach ($Details as $Detail) {
+                            $Name = Lang::choose_content($Detail['Name'], $Detail['SubName']);
                             $Rank++;
                         ?>
                             <tr class="Table-row">
                                 <td class="Table-cell"><?= $Rank ?></td>
-                                <td class="Table-cell"><a href="<?= $URLString ?><?= $Detail['Name'] ?>"><?= $Detail['Name'] ?></a></td>
+                                <td class="Table-cell"><a href="<?= $URLString ?><?= $Name ?>"><?= $Name ?></a></td>
                                 <td class="Table-cell Table-cellRight"><?= number_format($Detail['Uses']) ?></td>
                                 <? if ($ShowVotes) { ?>
                                     <td class="Table-cell Table-cellRight"><?= number_format($Detail['PosVotes']) ?></td>

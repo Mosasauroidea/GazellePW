@@ -105,7 +105,7 @@ if (!$NewRequest) {
                 }
             }
         }
-        $Tags = implode(', ', $Request['Tags']);
+        $Tags = implode(', ', array_values(Tags::get_sub_name($Request['Tags'])));
     }
 }
 
@@ -261,7 +261,7 @@ View::show_header(($NewRequest ? t('server.requests.new_create') : t('server.req
                                 foreach ($ArtistForm as $Importance => $Artists) {
                                     foreach ($Artists as $Artist) {
                             ?>
-                                        <div class="Form-inputs">
+                                        <div class="Form-inputs is-artist">
                                             <input class="Input is-small" type="text" id="artist_id" name="artist_ids[]" value="<?= display_str($Artist['IMDBID']) ?>" size="45" <?= $Disabled ?> />
                                             <input class="Input is-small" type="text" id="artist" name="artists[]" size="45" value="<?= display_str($Artist['Name']) ?>" <? Users::has_autocomplete_enabled('other'); ?><?= $Disabled ?> />
                                             <input class="Input is-small" type="text" id="artist_sub" data-tooltip="<?= t('server.upload.sub_name') ?>" name="artists_sub[]" size="25" value="<?= display_str($Artist['SubName']) ?>" <? Users::has_autocomplete_enabled('other'); ?><?= $Disabled ?> />
@@ -270,7 +270,7 @@ View::show_header(($NewRequest ? t('server.requests.new_create') : t('server.req
                                             if ($FirstArtist) {
                                                 if (!$Disabled) {
                                             ?>
-                                                    <a id="add_artist" href="javascript:globalapp.requestAddArtistField(true)" class="brackets">+</a> <a id="remove_artist" href="javascript:globalapp.globalapp.requestRemoveArtistField()" class="brackets">&minus;</a>
+                                                    <a id="add_artist" href="javascript:globalapp.requestAddArtistField(true)" class="brackets">+</a> <a id="remove_artist" href="javascript:globalapp.requestRemoveArtistField()" class="brackets">&minus;</a>
                                             <?
                                                 }
                                                 $FirstArtist = false;

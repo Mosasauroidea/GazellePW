@@ -12,6 +12,15 @@ class Torrents {
     const SNATCHED_UPDATE_INTERVAL = 3600; // How often we want to update users' snatch lists
     const SNATCHED_UPDATE_AFTERDL = 300; // How long after a torrent download we want to update a user's snatch lists
 
+
+    public static function tags($Group) {
+        $TorrentTags = $Group['TagList'];
+        if ($TorrentTags != '') {
+            $TorrentTags = explode(' ', $TorrentTags);
+        }
+        $Ret = Tags::get_sub_name($TorrentTags);
+        return implode(' ', array_values($Ret));
+    }
     public static function format_region($Region, $Limit = 10) {
         $Regions = array_map(function ($value) {
             return Region::text($value);
@@ -122,11 +131,11 @@ class Torrents {
 				g.ReleaseType,
 				g.CategoryID,
 				g.Time,
-				GROUP_CONCAT(DISTINCT tags.Name ORDER BY `TagID` SEPARATOR '|') as TorrentTags,
-				GROUP_CONCAT(DISTINCT tags.ID SEPARATOR '|') as TorrentTagIDs,
-				GROUP_CONCAT(tt.UserID SEPARATOR '|') as TorrentTagUserIDs,
-				GROUP_CONCAT(tt.PositiveVotes SEPARATOR '|') as TagPositiveVotes,
-				GROUP_CONCAT(tt.NegativeVotes SEPARATOR '|') as TagNegativeVotes
+				GROUP_CONCAT(DISTINCT tags.Name ORDER BY `TagID` SEPARATOR ' ') as TagList,
+				GROUP_CONCAT(DISTINCT tags.ID SEPARATOR ' ') as TorrentTagIDs,
+				GROUP_CONCAT(tt.UserID SEPARATOR ' ') as TorrentTagUserIDs,
+				GROUP_CONCAT(tt.PositiveVotes SEPARATOR ' ') as TagPositiveVotes,
+				GROUP_CONCAT(tt.NegativeVotes SEPARATOR ' ') as TagNegativeVotes
 			FROM torrents_group AS g
 				LEFT JOIN torrents_tags AS tt ON tt.GroupID = g.ID
 				LEFT JOIN tags ON tags.ID = tt.TagID";
@@ -142,7 +151,7 @@ class Torrents {
 			GROUP BY NULL";
 
             $DB->query($SQL);
-            $TorrentGroup = $DB->next_record(MYSQLI_ASSOC, ['Name', 'SubName', 'WikiBody', 'MainWikiBody']);
+            $TorrentGroup = $DB->next_record(MYSQLI_ASSOC);
             // Fetch the individual torrents
             $DB->query("
 			SELECT
@@ -209,7 +218,7 @@ class Torrents {
 			GROUP BY t.ID
 			ORDER BY t.ID");
 
-            $TorrentList = $DB->to_array('ID', MYSQLI_ASSOC, ['MediaInfo', 'Description']);
+            $TorrentList = $DB->to_array('ID', MYSQLI_ASSOC, ['MediaInfo']);
             uasort($TorrentList, 'Torrents::sort_torrent');
             if (count($TorrentList) === 0 && $ApiCall == false) {
                 header('Location: log.php?search=' . (empty($_GET['torrentid']) ? "Group+$GroupID" : "Torrent+$_GET[torrentid]"));
@@ -291,12 +300,30 @@ class Torrents {
             }
             $MovieWayIDs = implode(',', $MovieWayIDs);
             if ($MovieWayIDs) {
-                G::$DB->query("
-					SELECT
-						ID, Name, Year, TagList, ReleaseType, WikiImage, CategoryID, SubName, IMDBID, TrailerLink, IMDBRating, DoubanRating, RTRating, DoubanVote, IMDBVote, DoubanID, RTTitle, Region
-					FROM torrents_group
-					WHERE ID IN ($MovieWayIDs)");
-                while ($Group = G::$DB->next_record(MYSQLI_ASSOC, ['SubName', 'Name'])) {
+                G::$DB->query("SELECT
+						g.ID as ID, 
+                        g.Name as Name, 
+                        g.Year as Year, 
+                        GROUP_CONCAT(DISTINCT tags.Name ORDER BY `TagID` SEPARATOR ' ') as TagList,
+                        g.ReleaseType as ReleaseType, 
+                        g.WikiImage as WikiImage,
+                        g.CategoryID as CategoryID, 
+                        g.SubName as SubName, 
+                        g.IMDBID as IMDBID, 
+                        g.TrailerLink as TrailerLink, 
+                        g.IMDBRating as IMDBRating, 
+                        g.DoubanRating as DoubanRating, 
+                        g.RTRating as RTRating, 
+                        g.DoubanVote as DoubanVote, 
+                        g.IMDBVote as IMDBVote, 
+                        g.DoubanID as DoubanID, 
+                        g.RTTitle as RTTitle, 
+                        g.Region as Region
+					FROM torrents_group AS g
+                        LEFT JOIN torrents_tags AS tt ON tt.GroupID = g.ID
+				        LEFT JOIN tags ON tags.ID = tt.TagID
+					WHERE g.ID IN ($MovieWayIDs) Group by g.ID");
+                while ($Group = G::$DB->next_record(MYSQLI_ASSOC)) {
                     $NotFound[$Group['ID']] = $Group;
                     $NotFound[$Group['ID']]['Torrents'] = array();
                     $NotFound[$Group['ID']]['Artists'] = array();
@@ -830,18 +857,6 @@ WHERE ud.TorrentID=? AND ui.NotifyOnDeleteDownloaded='1' AND ud.UserID NOT IN ({
      */
     public static function update_hash($GroupID) {
         $QueryID = G::$DB->get_query_id();
-
-        G::$DB->query("
-			UPDATE torrents_group
-			SET TagList = (
-					SELECT REPLACE(GROUP_CONCAT(tags.Name SEPARATOR ' '), '.', '_')
-					FROM torrents_tags AS t
-						INNER JOIN tags ON tags.ID = t.TagID
-					WHERE t.GroupID = '$GroupID'
-					GROUP BY t.GroupID
-					)
-			WHERE ID = '$GroupID'");
-
         // Fetch album vote score
         G::$DB->query("
 			SELECT Score
@@ -869,12 +884,16 @@ WHERE ud.TorrentID=? AND ui.NotifyOnDeleteDownloaded='1' AND ud.UserID NOT IN ({
 
         G::$DB->query("
 			REPLACE INTO sphinx_delta
-				(ID, GroupID, GroupName, TagList, Year, CategoryID, Time, ReleaseType, Size, Snatched, Seeders, Leechers, Scene, Jinzhuan, Allow,
+				(ID, GroupID, GroupName, 
+                TagList, 
+                Year, CategoryID, Time, ReleaseType, Size, Snatched, Seeders, Leechers, Scene, Jinzhuan, Allow,
 				FreeTorrent,Description, FileList, VoteScore, ArtistName, RemTitle,
 				IMDBRating, DoubanRating, Region, Language, IMDBID, Resolution, Container, Source, Codec, SubTitles,
                 Diy, Buy, ChineseDubbed, SpecialSub)
 			SELECT
-				t.ID, g.ID, CONCAT_WS(' ', g.Name, g.SubName), TagList, Year, CategoryID, UNIX_TIMESTAMP(t.Time), ReleaseType,
+				t.ID, g.ID, CONCAT_WS(' ', g.Name, g.SubName), 
+                GROUP_CONCAT(DISTINCT tags.Name ORDER BY `TagID` SEPARATOR ' ') as TagList, 
+                Year, CategoryID, UNIX_TIMESTAMP(t.Time), ReleaseType,
 				Size, Snatched, Seeders,
 				Leechers, CAST(Scene AS CHAR), CAST(Jinzhuan AS CHAR), CAST(Allow AS CHAR), 
 				CAST(FreeTorrent AS CHAR),Description,
@@ -888,7 +907,9 @@ WHERE ud.TorrentID=? AND ui.NotifyOnDeleteDownloaded='1' AND ud.UserID NOT IN ({
                 Diy, Buy, ChineseDubbed, SpecialSub
 			FROM torrents AS t
 				JOIN torrents_group AS g ON g.ID = t.GroupID
-			WHERE g.ID = $GroupID");
+                LEFT JOIN torrents_tags AS tt ON tt.GroupID = g.ID
+				LEFT JOIN tags ON tags.ID = tt.TagID
+			WHERE g.ID = $GroupID Group by t.ID");
 
         G::$Cache->delete_value("torrents_details_$GroupID");
         G::$Cache->delete_value("torrent_group_$GroupID");
@@ -1716,7 +1737,7 @@ WHERE ud.TorrentID=? AND ui.NotifyOnDeleteDownloaded='1' AND ud.UserID NOT IN ({
 				FROM reportsv2
 				WHERE TorrentID = $TorrentID
 					AND Status != 'Resolved'");
-            $Reports = G::$DB->to_array(false, MYSQLI_ASSOC, false);
+            $Reports = G::$DB->to_array(false, MYSQLI_ASSOC);
             G::$DB->set_query_id($QueryID);
             G::$Cache->cache_value("reports_torrent_$TorrentID", $Reports, 0);
         }

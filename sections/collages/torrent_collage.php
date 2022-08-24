@@ -43,13 +43,13 @@ foreach ($GroupIDs as $Idx => $GroupID) {
         continue;
     }
     $Group = $TorrentList[$GroupID];
-    extract(Torrents::array_group($Group));
+    $Artists = $Group['Artists'];
     $UserID = $Contributors[$GroupID];
-    new Tags($TagList);
+    new Tags(Torrents::tags($Group));
 
     // Handle stats and stuff
     $Number++;
-    if ($UserID == $LoggedUser['ID']) {
+    if ($UserID == G::$LoggedUser['ID']) {
         $NumGroupsByUser++;
     }
 

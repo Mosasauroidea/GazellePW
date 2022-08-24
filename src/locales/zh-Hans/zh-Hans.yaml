@@ -701,7 +701,7 @@ server.bookmarks.year: |-
 server.bookmarks.your_bookmarked_artists: |-
   你收藏的艺人
 server.bookmarks.your_bookmarked_torrent_groups: |-
-  你收藏的种子组
+  你收藏的电影
 server.collages.a_collage_with_that_name_already_exists_1: |-
   同名合集已存在，但需要恢复，请 <a href="staffpm.php">联系</a> 管理组。
 server.collages.add_comment: |-
@@ -1015,6 +1015,8 @@ server.common.date: |-
   日期
 server.common.delete: |-
   删除
+server.common.modify: |-
+  修改
 server.common.director: |-
   导演
 server.common.douban_rating: |-
@@ -1361,6 +1363,8 @@ server.editioninfo.extras: |-
   额外内容
 server.editioninfo.features: |-
   特点
+server.editioninfo.medias: |-
+  媒体
 server.editioninfo.hdr10: |-
   HDR10
 server.editioninfo.hdr10plus: |-
@@ -3620,6 +3624,8 @@ server.tools.badges_giving: |-
   印记发放
 server.tools.ban_reason: |-
   封禁原因
+server.tools.tag_type: |-
+  标签类型
 server.tools.bans: |-
   禁用
 server.tools.base_salary: |-
@@ -3966,6 +3972,10 @@ server.tools.h2_manipulate_invite_tree: |-
   邀请树管理
 server.tools.h2_official_tags_manager: |-
   官方标签管理
+server.tools.official_tag: |-
+  官方
+server.tools.other_tag: |-
+  其他
 server.tools.h2_os_and_browser_usage: |-
   操作系统和浏览器使用统计
 server.tools.h2_site_options: |-
@@ -4206,8 +4216,8 @@ server.tools.notes: |-
   备注
 server.tools.numbers_and_such: |-
   数值以及其他信息
-server.tools.official_tags_manager: |-
-  官方标签管理
+server.tools.tags_manager: |-
+  标签管理
 server.tools.offset: |-
   偏移值
 server.tools.offsets_inserted: |-
@@ -4532,6 +4542,8 @@ server.tools.swarms_and_snatches: |-
   集群与竞争
 server.tools.tag: |-
   标签
+server.tools.sub_tag: |-
+  标签中文名
 server.tools.tag_aliases: |-
   标签别名
 server.tools.td_ip_address: |-
@@ -5767,7 +5779,7 @@ server.upload.movie_cover: |-
 server.upload.movie_edition_information: |-
   版本信息
 server.upload.movie_edition_information_examples: |-
-  例：珍藏集的一部分、特殊版本或非同寻常的特点。<a href="wiki.php?action=article&name=版本信息填写指南">点此</a> 阅读版本指南。<strong>当选择 “电影大师” “标准收藏” “华纳档案馆” “4K修复版” “4K重制版” “重制版” 或自定义版本信息时，强烈建议填写该版本所对应的年份。</strong>
+  例：珍藏集的一部分、特殊版本、杜比视界/全景声等非同寻常的特点。<a href="wiki.php?action=article&name=版本信息填写指南">点此</a> 阅读版本指南。<strong>当选择 “电影大师” “标准收藏” “华纳档案馆” “4K修复版” “4K重制版” “重制版” 或自定义版本信息时，强烈建议填写该版本所对应的年份。</strong>
 server.upload.movie_edition_information_label: |-
   如果种子来自特定的版本，请勾选此项。
 server.upload.movie_feature: |-
@@ -8002,3 +8014,5 @@ server.country.hong_kong: |-
   中国香港
 server.country.macao: |-
   中国澳门
+server.common.minutes: |-
+  分钟

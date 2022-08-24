@@ -50,24 +50,13 @@ $(document).ready(function () {
         $('#artist_sub_name').val(suggestion['sub_name'])
       },
     })
-  }
-
-  if (
-    url.path == 'torrents' ||
-    url.path == 'upload' ||
-    url.path == 'collages' ||
-    url.path == 'requests' ||
-    url.path == 'top10' ||
-    (url.path == 'requests' && url.query['action'] == 'new')
-  ) {
-    $('#tags' + SELECTOR).autocomplete({
-      deferRequestBy: 300,
-      delimiter: ',',
-      serviceUrl: TAGS_AUTOCOMPLETE_URL,
-    })
-    $('#tagname' + SELECTOR).autocomplete({
+    $('#tagsearch' + SELECTOR).autocomplete({
       deferRequestBy: 300,
       serviceUrl: TAGS_AUTOCOMPLETE_URL,
+      onSelect: function (suggestion) {
+        $('#tagname').val(suggestion['name'])
+        $('#tagsubname').val(suggestion['subname'])
+      }
     })
   }
 })

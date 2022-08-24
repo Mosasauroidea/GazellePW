@@ -319,7 +319,7 @@ if ($Properties['IMDBID']) {
     $Runtime = $OMDBData->Runtime && $OMDBData->Runtime != 'N/A' ? $OMDBData->Runtime : '';
     $Released = $OMDBData->Released && $OMDBData->Released != 'N/A' ? $OMDBData->Released : '';
     $Country = $OMDBData->Country && $OMDBData->Country != 'N/A' ? $OMDBData->Country : '';
-    $Lanuage = $OMDBData->Language && $OMDBData->Language != 'N/A' ? $OMDBData->Language : '';
+    $Language = $OMDBData->Language && $OMDBData->Language != 'N/A' ? $OMDBData->Language : '';
     foreach ($OMDBData->Ratings as $key => $value) {
         if ($value->Source == "Rotten Tomatoes") {
             $RTRating = $value->Value;
@@ -454,21 +454,12 @@ if ($IsNewGroup) {
 
 // Tags
 $Tags = explode(',', $Properties['TagList']);
+$Tags = Tags::main_name($Tags);
+$tagMan = new \Gazelle\Manager\Tag;
 if (!$Properties['GroupID']) {
     foreach ($Tags as $Tag) {
-        $Tag = Misc::sanitize_tag($Tag);
-        if (!empty($Tag)) {
-            $Tag = Misc::get_alias_tag($Tag);
-            $DB->query("
-				INSERT INTO tags
-					(Name, UserID)
-				VALUES
-					('$Tag', $LoggedUser[ID])
-				ON DUPLICATE KEY UPDATE
-					Uses = Uses + 1;
-			");
-            $TagID = $DB->inserted_id();
-
+        $TagID = $tagMan->create($Tag, $LoggedUser['ID']);
+        if ($TagID) {
             $DB->query("
 				INSERT INTO torrents_tags
 					(TagID, GroupID, UserID, PositiveVotes)
@@ -477,6 +468,7 @@ if (!$Properties['GroupID']) {
 				ON DUPLICATE KEY UPDATE
 					PositiveVotes = PositiveVotes + 1;
 			");
+            Tags::clear_all_cache();
         }
     }
 }

@@ -234,14 +234,11 @@ switch ($_REQUEST['action']) {
     case 'ocelot_info':
         include(CONFIG['SERVER_ROOT'] . '/sections/tools/data/ocelot_info.php');
         break;
-    case 'official_tags':
-        include(CONFIG['SERVER_ROOT'] . '/sections/tools/managers/official_tags.php');
+    case 'manage_tags':
+        include(CONFIG['SERVER_ROOT'] . '/sections/tools/managers/manage_tags.php');
         break;
     case 'edit_tags':
         include(CONFIG['SERVER_ROOT'] . '/sections/tools/misc/tags.php');
-        break;
-    case 'tag_aliases':
-        include(CONFIG['SERVER_ROOT'] . '/sections/tools/managers/tag_aliases.php');
         break;
     case 'change_log':
         include(CONFIG['SERVER_ROOT'] . '/sections/tools/managers/change_log.php');

@@ -2,8 +2,7 @@
 
 use Phinx\Migration\AbstractMigration;
 
-class ChineseTag extends AbstractMigration
-{
+class SubTag extends AbstractMigration {
     /**
      * Change Method.
      *
@@ -29,9 +28,7 @@ class ChineseTag extends AbstractMigration
      * Remember to call "create()" or "update()" and NOT "save()" when working
      * with the Table class.
      */
-    public function change()
-    {
-        $this->table('tags')->addColumn('SecondName')
-
+    public function change() {
+        $this->table('tags')->addColumn('SubName', 'string')->addIndex('SubName')->save();
     }
 }

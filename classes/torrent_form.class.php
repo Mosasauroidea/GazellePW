@@ -97,8 +97,9 @@ class TORRENT_FORM {
                 <? if ($this->NewTorrent) { ?>
                     <div style="text-align: center; margin: 5px 0px !important;">
                         <?= t('server.upload.personal_announce') ?>:
-                        <br />
-                        <a onclick="return false" href="<?= $AnnounceURL . '/' . G::$LoggedUser['torrent_pass'] . '/announce' ?>"><?= t('server.upload.personal_announce_note') ?></a>
+                        <div>
+                            <a onclick="return false" href="<?= $AnnounceURL . '/' . G::$LoggedUser['torrent_pass'] . '/announce' ?>"><?= t('server.upload.personal_announce_note') ?></a>
+                        </div>
                     </div>
                 <?      }
                 ?>
@@ -251,7 +252,6 @@ class TORRENT_FORM {
                                 <?
                                 if ($this->NewTorrent) {
                                 ?>
-                                    <br />
                                     <p>
                                         <?= t('server.upload.assurance') ?>
                                     </p>
@@ -297,6 +297,7 @@ class TORRENT_FORM {
                 $TorrentContainer = isset($Torrent['Container']) ? $Torrent['Container'] : null;
                 $TorrentResolution = isset($Torrent['Resolution']) ? $Torrent['Resolution'] : null;
                 $TorrentProcessing = isset($Torrent['Processing']) ? $Torrent['Processing'] : null;
+
                 $Subtitles = isset($Torrent['Subtitles']) ? $Torrent['Subtitles'] : null;
                 $Buy = isset($Torrent['Buy']) ? $Torrent['Buy'] : null;
                 $Diy = isset($Torrent['Diy']) ? $Torrent['Diy'] : null;
@@ -504,8 +505,7 @@ class TORRENT_FORM {
                                             <? } ?>
                                         </select>
                                     <? } ?>
-                                    <input class="Input" type="text" id="tags" name="tags" size="40" value="<?= display_str($Torrent['TagList']) ?>" <?
-                                                                                                                                                        Users::has_autocomplete_enabled('other'); ?><?= $this->Disabled ?> />
+                                    <input class="Input" type="text" id="tags" name="tags" size="40" value="" <? Users::has_autocomplete_enabled('other'); ?><?= $this->Disabled ?> />
                                 </div>
                             </td>
                         </tr>
@@ -596,6 +596,10 @@ class TORRENT_FORM {
                                         <?= t('server.editioninfo.features') ?>:
                                         <? $this->genRemasterTags(EditionInfo::allEditionKey(EditionType::Feature), $RemasterTitle); ?>
                                     </div>
+                                    <div>
+                                        <?= t('server.editioninfo.medias') ?>:
+                                        <? $this->genRemasterTags(EditionInfo::allEditionKey(EditionType::Medias), $RemasterTitle); ?>
+                                    </div>
                                 </div>
                                 <div class="items">
                                     <div class="item">
@@ -637,6 +641,48 @@ class TORRENT_FORM {
                         <div class="FormUpload-explain" id="torrent_info_how_to_blockquote" style="display: none">
                             <?= t('server.upload.torrent_info_how_to_blockquote') ?>
                         </div>
+                    </td>
+                </tr>
+                <tr class="Form-row is-mediainfo" id="mediainfo">
+                    <td class="Form-label">MediaInfo/BDInfo<span class="u-colorWarning">*</span>:</td>
+                    <td class="Form-items">
+                        <div class="FormUpload-mediaInfoActions">
+                            <a id="add-mediainfo" href="#" class="brackets">+</a>
+                            <a id="remove-mediainfo" href="#" class="brackets">&minus;</a>
+                        </div>
+                        <? if ($this->NewTorrent) {
+                            $GroupClass = "group1";
+                        } else {
+                            $GroupClass = "group0";
+                        } ?>
+                        <?
+                        if ($MediaInfos) {
+                            foreach ($MediaInfos as $MediaInfo) {
+                        ?>
+                                <div class="Form-errorContainer">
+                                    <div class="hidden">
+                                        <div class="BBCodePreview-html <?= $GroupClass ?>"></div>
+                                    </div>
+                                    <div>
+                                        <textarea class="Input BBCodePreview-text <?= $GroupClass ?>" name="mediainfo[]" data-type="mediainfo" placeholder="<?= t('server.upload.mediainfo_bdinfo_placeholder') ?>"><?= $MediaInfo ?></textarea>
+                                    </div>
+                                </div>
+                                <p class="upload_form_note"><?= t('server.upload.mediainfo_bdinfo_note') ?></p>
+                            <?
+                            }
+                        } else {
+                            ?>
+                            <div class="Form-errorContainer">
+                                <div class="hidden">
+                                    <div class="BBCodePreview-html <?= $GroupClass ?>"></div>
+                                </div>
+                                <div>
+                                    <textarea class="Input BBCodePreview-text <?= $GroupClass ?>" name="mediainfo[]" data-type="mediainfo" placeholder="<?= t('server.upload.mediainfo_bdinfo_placeholder') ?>"></textarea>
+                                </div>
+                            </div>
+                        <?
+                        }
+                        ?>
                     </td>
                 </tr>
                 <tr class="Form-row is-specification">
@@ -796,74 +842,6 @@ class TORRENT_FORM {
                         <span id="container_warning" class="u-colorWarning"></span>
                     </td>
                 </tr>
-                <?
-                if (check_perms("users_mod") && !$this->NewTorrent) {
-                ?>
-                    <tr class="Form-row">
-                        <td class="Form-label"><?= t('server.upload.staff_note') ?>:</td>
-                        <td class="Form-items">
-                            <div class="Form-inputs">
-                                <textarea class="Input" name="staff_note" id="staff_note"><?= $Note ?></textarea>
-                            </div>
-                        </td>
-                    </tr>
-                <?  } ?>
-                <tr class="Form-row">
-                    <td class="Form-label"></td>
-                    <td class="Form-items">
-                        <div class="FormUpload-mediaInfoActions">
-                            <a id="add-mediainfo" href="#" class="brackets">+</a>
-                            <a id="remove-mediainfo" href="#" class="brackets">&minus;</a>
-                        </div>
-                    </td>
-                </tr>
-                <tr class="Form-row is-mediainfo" id="mediainfo">
-                    <td class="Form-label">MediaInfo/BDInfo<span class="u-colorWarning">*</span>:</td>
-                    <td class="Form-items">
-                        <? if ($this->NewTorrent) {
-                            $GroupClass = "group1";
-                        } else {
-                            $GroupClass = "group0";
-                        } ?>
-                        <?
-                        if ($MediaInfos) {
-                            foreach ($MediaInfos as $MediaInfo) {
-                        ?>
-                                <div class="Form-errorContainer">
-                                    <div class="hidden">
-                                        <div class="BBCodePreview-html <?= $GroupClass ?>"></div>
-                                    </div>
-                                    <div>
-                                        <textarea class="Input BBCodePreview-text <?= $GroupClass ?>" name="mediainfo[]" data-type="mediainfo" placeholder="<?= t('server.upload.mediainfo_bdinfo_placeholder') ?>"><?= $MediaInfo ?></textarea>
-                                    </div>
-                                </div>
-                                <p class="upload_form_note"><?= t('server.upload.mediainfo_bdinfo_note') ?></p>
-                            <?
-                            }
-                        } else {
-                            ?>
-                            <div class="Form-errorContainer">
-                                <div class="hidden">
-                                    <div class="BBCodePreview-html <?= $GroupClass ?>"></div>
-                                </div>
-                                <div>
-                                    <textarea class="Input BBCodePreview-text <?= $GroupClass ?>" name="mediainfo[]" data-type="mediainfo" placeholder="<?= t('server.upload.mediainfo_bdinfo_placeholder') ?>"></textarea>
-                                </div>
-                            </div>
-                        <?
-                        }
-                        ?>
-                    </td>
-                </tr>
-
-                <tr class="Form-row is-description" id="description-container">
-                    <td class="Form-label"><?= t('server.upload.movie_torrent_description') ?><span class="u-colorWarning">*</span>:</td>
-                    <td class="Form-items">
-                        <div class="Form-errorContainer Form-vstack">
-                            <?php new TEXTAREA_PREVIEW('release_desc', 'release_desc', display_str($TorrentDescription), 60, 8, true, true, false); ?>
-                        </div>
-                    </td>
-                </tr>
                 <tr class="Form-row is-text">
                     <td class="Form-label">
                         <?= t('server.upload.movie_subtitles') ?><span class="u-colorWarning">*</span>:
@@ -931,7 +909,9 @@ class TORRENT_FORM {
                         </div>
                     </td>
                 </tr>
-                <? if (check_perms("torrents_trumpable")) { ?>
+
+                <?
+                if (check_perms("torrents_trumpable")) { ?>
                     <tr class="Form-row" id="trumpable_tr">
                         <td class="Form-label"><?= t('server.upload.movie_trumpable') ?>:</td>
                         <td class="Form-items">
@@ -953,14 +933,24 @@ class TORRENT_FORM {
                     </tr>
                 <?
                 }
+                ?>
+
+                <tr class="Form-row is-description" id="description-container">
+                    <td class="Form-label"><?= t('server.upload.movie_torrent_description') ?><span class="u-colorWarning">*</span>:</td>
+                    <td class="Form-items">
+                        <div class="Form-errorContainer Form-vstack">
+                            <?php new TEXTAREA_PREVIEW('release_desc', 'release_desc', display_str($TorrentDescription), 60, 8, true, true, false); ?>
+                        </div>
+                    </td>
+                </tr>
+
+                <?
                 if (check_perms('users_mod') || $this->NewTorrent) {
                 ?>
                     <tr class="Form-row">
                         <td class="Form-label"></td>
                         <td class="Form-items">
-                            <div>
-                                <strong class="how_to_toggle_container">[<a href="javascript:void(0);" onclick="$('#marks_how_to_blockquote').new_toggle();"><strong class="how_to_toggle"><?= t('server.upload.marks_how_to_toggle') ?></strong></a>]</strong>
-                            </div>
+
                         </td>
                     </tr>
                     <tr class="Form-row" id="marks_tr">
@@ -987,6 +977,9 @@ class TORRENT_FORM {
                                 </div>
                             </div>
                             <div style="padding: 10px 0 0;"><?= t('server.upload.marks_warning') ?></div>
+                            <div>
+                                <strong class="how_to_toggle_container">[<a href="javascript:void(0);" onclick="$('#marks_how_to_blockquote').new_toggle();"><strong class="how_to_toggle"><?= t('server.upload.marks_how_to_toggle') ?></strong></a>]</strong>
+                            </div>
                             <div class="FormUpload-explain" id="marks_how_to_blockquote" style="display: none;">
                                 <?= t('server.upload.marks_how_to_blockquote') ?>
                             </div>
@@ -995,6 +988,18 @@ class TORRENT_FORM {
                 <?
                 }
                 ?>
+                <?
+                if (check_perms("users_mod") && !$this->NewTorrent) {
+                ?>
+                    <tr class="Form-row">
+                        <td class="Form-label"><?= t('server.upload.staff_note') ?>:</td>
+                        <td class="Form-items">
+                            <div class="Form-inputs">
+                                <textarea class="Input" name="staff_note" id="staff_note"><?= $Note ?></textarea>
+                            </div>
+                        </td>
+                    </tr>
+                <?  } ?>
 
             </table>
         </div>

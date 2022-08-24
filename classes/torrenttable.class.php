@@ -721,7 +721,9 @@ class TorrentTableView {
     }
     protected function render_movie_info($Group) {
         $Artists = $Group['Artists'];
+        $Name = $Group['Name'];
         $Director = Artists::get_first_directors($Artists);
+        $RTTitle = empty($Group['RTTitle']) ? str_replace([':', '"'], '', str_replace(' ', '_', strtolower($Name))) : $Group['RTTitle'];
 
     ?>
         <div class="TableTorrent-movieInfoFacts ">
@@ -733,7 +735,7 @@ class TorrentTableView {
                 <?= icon('douban-gray') ?>
                 <span><?= !empty($Group['DoubanRating']) ? sprintf("%.1f", $Group['DoubanRating']) : '--' ?></span>
             </a>
-            <a class="TableTorrent-movieInfoFactsItem" data-tooltip="<?= t('server.common.rt_rating') ?>" target="_blank" href="https://www.rottentomatoes.com/m/<?= $Group['RTTitle'] ?>">
+            <a class="TableTorrent-movieInfoFactsItem" data-tooltip="<?= t('server.common.rt_rating') ?>" target="_blank" href="https://www.rottentomatoes.com/m/<?= $RTTitle ?>">
                 <?= icon('rotten-tomatoes-gray') ?>
                 <span><?= !empty($Group['RTRating']) ? $Group['RTRating'] : '--' ?></span>
             </a>
@@ -943,14 +945,12 @@ class GroupTorrentTableView extends TorrentTableView {
                 break;
             }
         }
+        $GroupID = $Group['ID'];
+        $ShowGroups = !(!empty(G::$LoggedUser['TorrentGrouping']) && G::$LoggedUser['TorrentGrouping'] == 1);
+        $TagsList = Torrents::tags($Group);
+        $TorrentTags = new Tags($TagsList);
     ?>
         <tr class="TableTorrent-rowMovieInfo Table-row <?= $this->WithCheck && $GroupChecked ? "torrent_all_checked " : "torrent_all_unchecked" ?> <?= $SnatchedGroupClass ?>" group-id="<?= $Group['ID'] ?>">
-            <?
-            $GroupID = $Group['ID'];
-            $ShowGroups = !(!empty(G::$LoggedUser['TorrentGrouping']) && G::$LoggedUser['TorrentGrouping'] == 1);
-            $TagsList =  $Group['TagList'];
-            $TorrentTags = new Tags($TagsList);
-            ?>
             <td class="TableTorrent-cellMovieInfo Table-cell TableTorrent-cellMovieInfoCollapse">
                 <div id="showimg_<?= $GroupID ?>" class="ToggleGroup <?= ($ShowGroups ? 'is-toHide' : '') ?>">
                     <a href="#" class="ToggleGroup-button" onclick="globalapp.toggleGroup(<?= $GroupID ?>, this, event)" data-tooltip="<?= t('server.common.collapse_this_group_title') ?>"></a>
@@ -966,7 +966,7 @@ class GroupTorrentTableView extends TorrentTableView {
                     <div class="TableTorrent-movieInfoContent">
                         <?= $this->render_group_name($Group); ?>
                         <?= $this->render_movie_info($Group) ?>
-                        <div class="TableTorrent-movieInfoTags"><i><?= $TorrentTags->format('torrents.php?action=basic&amp;taglist=', '', 'TableTorrent-movieInfoTagsItem') ?></i></div>
+                        <div class="TableTorrent-movieInfoTags"><i><?= $TorrentTags->format('torrents.php?action=advance&amp;taglist=', '', 'TableTorrent-movieInfoTagsItem') ?></i></div>
                     </div>
                 </div>
             </td>
@@ -1183,8 +1183,7 @@ class UngroupTorrentTableView  extends TorrentTableView {
         }
         $GroupInfo = $Torrent['Group'];
         $CategoryID = $GroupInfo['CategoryID'];
-        $TagsList =  $GroupInfo['TagList'];
-        $TorrentTags = new Tags($TagsList);
+        $TorrentTags = new Tags(Torrents::tags($GroupInfo));
         $TorrentID = $Torrent['ID'];
         $SnatchedTorrentClass = $Torrent['IsSnatched'] ? ' snatched_torrent' : '';
         $SnatchedGroupClass = Torrents::parse_group_snatched($GroupInfo) ? ' snatched_group' : '';
@@ -1209,7 +1208,7 @@ class UngroupTorrentTableView  extends TorrentTableView {
                         <?= $this->render_group_name($GroupInfo, true); ?>
                         <?= $this->render_movie_info($GroupInfo) ?>
                         <div class="TableTorrent-movieInfoTags">
-                            <i><?= $TorrentTags->format("torrents.php?action=basic&amp;taglist=", '', 'TableTorrent-movieInfoTagsItem') ?></i>
+                            <i><?= $TorrentTags->format("torrents.php?action=advance&amp;taglist=", '', 'TableTorrent-movieInfoTagsItem') ?></i>
                         </div>
                     </div>
                 </div>

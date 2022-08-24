@@ -1,4 +1,4 @@
-<?php
+<?
 
 use Gazelle\Torrent\TorrentSlot;
 use Gazelle\Torrent\TorrentSlotType;
@@ -40,14 +40,16 @@ $DoubanRating = $TorrentDetails['DoubanRating'];
 $IMDBVote = $TorrentDetails['IMDBVote'];
 $DoubanVote = $TorrentDetails['DoubanVote'];
 $DoubanID  = $TorrentDetails['DoubanID'];
-$RTTitle = $TorrentDetails['RTTitle'];
+$Name = $TorrentDetails['Name'];
+$RTTitle = empty($TorrentDetails['RTTitle']) ? str_replace(':', '', str_replace(' ', '_', strtolower($Name))) : $TorrentDetails['RTTitle'];
 $GroupName = (Lang::is_default() && !empty($TorrentDetails['SubName'])) ? $TorrentDetails['SubName'] : $TorrentDetails['Name'];
 $SubName = Lang::is_default() ? $TorrentDetails['Name'] : $TorrentDetails['SubName'];
 $GroupYear = $TorrentDetails['Year'];
 $ReleaseType = $TorrentDetails['ReleaseType'];
 $GroupCategoryID = $TorrentDetails['CategoryID'];
 $GroupTime = $TorrentDetails['Time'];
-$TorrentTags = $TorrentDetails['TorrentTags'];
+$TorrentTags = $TorrentDetails['TagList'];
+$TagSubList = $TorrentDetails['TagSubList'];
 $TorrentTagIDs = $TorrentDetails['TorrentTagIDs'];
 $TorrentTagUserIDs = $TorrentDetails['TorrentTagUserIDs'];
 $TagPositiveVotes = $TorrentDetails['TagPositiveVotes'];
@@ -81,18 +83,20 @@ $AltName = $RawName;
 $Tags = array();
 $TagNames = array();
 if ($TorrentTags != '') {
-    $TorrentTags = explode('|', $TorrentTags);
-    $TorrentTagIDs = explode('|', $TorrentTagIDs);
-    $TorrentTagUserIDs = explode('|', $TorrentTagUserIDs);
-    $TagPositiveVotes = explode('|', $TagPositiveVotes);
-    $TagNegativeVotes = explode('|', $TagNegativeVotes);
-
+    $TorrentTags = explode(' ', $TorrentTags);
+    $TorrentTagIDs = explode(' ', $TorrentTagIDs);
+    $TorrentTagUserIDs = explode(' ', $TorrentTagUserIDs);
+    $TagSubList = explode(' ', $TagSubList);
+    $TagPositiveVotes = explode(' ', $TagPositiveVotes);
+    $TagNegativeVotes = explode(' ', $TagNegativeVotes);
+    $SubNames = Tags::get_sub_name($TorrentTags);
     foreach ($TorrentTags as $TagKey => $TagName) {
         $Tags[$TagKey]['name'] = $TagName;
+        $Tags[$TagKey]['subname'] = $SubNames[$TagName];
         $Tags[$TagKey]['score'] = ($TagPositiveVotes[$TagKey] - $TagNegativeVotes[$TagKey]);
         $Tags[$TagKey]['id'] = $TorrentTagIDs[$TagKey];
         $Tags[$TagKey]['userid'] = $TorrentTagUserIDs[$TagKey];
-        $TagNames[] = $TagName;
+        $TagNames[] = $SubNames[$TagName];
     }
     uasort($Tags, 'compare');
 }
@@ -200,7 +204,7 @@ View::show_header($Title, 'browse,comments,torrent,bbcode,recommend,cover_art,su
                 <? if (!empty($Duration)) { ?>
                     <span class="MovieInfo-fact" data-tooltip="<?= t('server.torrents.imdb_runtime') ?>">
                         <?= icon('movie-runtime') ?>
-                        <span><?= $Duration . " min" ?></span>
+                        <span><?= $Duration . ' ' . t('server.common.minutes') ?></span>
                     </span>
                 <?  } ?>
                 <? if (!empty($Region)) { ?>
@@ -233,7 +237,7 @@ View::show_header($Title, 'browse,comments,torrent,bbcode,recommend,cover_art,su
 
         <div class="MovieInfo-synopsis" data-tooltip="<?= t('server.torrents.fold_tooltip') ?>">
             <p class="HtmlText">
-                <? print_r($WikiBody) ?>
+                <?= $WikiBody ?>
             </p>
         </div>
         <div class="MovieInfo-artists u-hideScrollbar">
@@ -276,7 +280,7 @@ View::show_header($Title, 'browse,comments,torrent,bbcode,recommend,cover_art,su
                     <ul class="SidebarList SidebarItem-body Box-body">
                         <? foreach ($Tags as $TagKey => $Tag) { ?>
                             <li class="SidebarList-item u-hoverToShow-hover">
-                                <a href="torrents.php?taglist=<?= $Tag['name'] ?>"><?= display_str($Tag['name']) ?></a>
+                                <a href="torrents.php?action=advanced&taglist=<?= Lang::choose_content($Tag['name'], $Tag['subname']) ?>"><?= display_str(Lang::choose_content($Tag['name'], $Tag['subname'])) ?></a>
                                 <div class="SidebarList-actions">
                                     <? if (check_perms('users_warn')) { ?>
                                         <a class="SidebarList-action u-hoverToShow-hide" href="user.php?id=<?= $Tag['userid'] ?>" data-tooltip="<?= t('server.torrents.view_the_profile_of_the_user_that_added_this_tag') ?>">
@@ -324,12 +328,23 @@ View::show_header($Title, 'browse,comments,torrent,bbcode,recommend,cover_art,su
                         </div>
                     </div>
                     <div class="SidebarItem-body Box-body">
-                        <form class="FormOneLine FormTorrentAddTag" name="tags" action="torrents.php" method="post">
+                        <form class="Fom-rowList FormTorrentAddTag" name="tags" action="torrents.php" method="post">
                             <input type="hidden" name="action" value="add_tag" />
                             <input type="hidden" name="auth" value="<?= $LoggedUser['AuthKey'] ?>" />
                             <input type="hidden" name="groupid" value="<?= $GroupID ?>" />
-                            <input class="Input" type="text" name="tagname" id="tagname" size="20" <? Users::has_autocomplete_enabled('other'); ?> />
-                            <input class="Button" type="submit" value="+" />
+                            <div class="Form-row FormOneLine">
+                                <input class="Input" type="text" <?= Users::has_autocomplete_enabled('search');
+                                                                    ?> id="tagsearch" placeholder="<?= t('server.artist.search_auto_fill') ?>" size="17" />
+                            </div>
+                            <div class="Form-row FormOneLine">
+                                <input class="Input" type="text" placeholder="<?= t('server.upload.english_name') ?>" id="tagname" name="tagname" size="17" />
+                            </div>
+                            <div class="Form-row FormOneLine">
+                                <input class="Input" type="text" placeholder="<?= t('server.upload.sub_name') ?>" id="tagsubname" name="tagsubname" size="17" />
+                            </div>
+                            <div class="Form-row">
+                                <input class="Button" type="submit" value="<?= t('server.common.add') ?>" />
+                            </div>
                         </form>
                     </div>
                 </div>

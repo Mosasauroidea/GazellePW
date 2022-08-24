@@ -1,4 +1,5 @@
 <?php
+$GenreTags = Tags::get_genre_tag();
 $SphQL = new SphinxqlQuery();
 $SphQL->select('id, votes, bounty')->from('requests, requests_delta');
 
@@ -245,7 +246,6 @@ if (!empty($_GET['tags'])) {
     }
 
     $TagFilter = Tags::tag_filter_sph($SearchTags, $EnableNegation, $TagType);
-    $TagNames = $TagFilter['input'];
 
     if (!empty($TagFilter['predicate'])) {
         $SphQL->where_match($TagFilter['predicate'], 'taglist', false);
@@ -255,6 +255,7 @@ if (!empty($_GET['tags'])) {
 } else {
     $_GET['tags_type'] = 0;
 }
+$TagNames = $_GET['tags'];
 
 if (isset($SearchWords)) {
     $QueryParts = array();
@@ -405,6 +406,12 @@ View::show_header($Title, '', 'PageRequestHome');
                     <tr class="Form-row is-tagFilter">
                         <td class="Form-label"><?= t('server.requests.tags_comma') ?>:</td>
                         <td class="Form-inputs">
+                            <select class="Input" id="genre_tags" name="genre_tags" onchange="globalapp.addTorrentItem('tags', 'genre_tags'); return false;">
+                                <option class="Select-option" value="">--</option>
+                                <? foreach (Misc::display_array($GenreTags) as $Genre) { ?>
+                                    <option class="Select-option" value="<?= $Genre ?>"><?= $Genre ?></option>
+                                <? } ?>
+                            </select>
                             <input class="Input" type="text" name="tags" id="tags" size="60" value="<?= !empty($TagNames) ? display_str($TagNames) : '' ?>" <? Users::has_autocomplete_enabled('other'); ?> />
                             <div class="RadioGroup">
                                 <div class="Radio">

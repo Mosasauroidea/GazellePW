@@ -13,7 +13,6 @@ if ($Top10 === false) {
 				g.Name,
                 g.SubName,
 				g.CategoryID,
-				g.TagList,
 				t.Scene,
 				t.RemasterYear,
 				g.Year,

@@ -91,7 +91,7 @@ View::show_header('Official Tags Manager');
                                 <td class="Table-cell" style="text-align: center;">
                                     <input type="checkbox" name="oldtags[]" value="<?= $list[$col][$row]['id'] ?>" />
                                 </td>
-                                <td class="Table-cell"><a href="torrents.php?taglist=<?= $list[$col][$row]['name'] ?>"><?= $list[$col][$row]['name'] ?></a></td>
+                                <td class="Table-cell"><a href="torrents.php?action=advanced&taglist=<?= $list[$col][$row]['name'] ?>"><?= $list[$col][$row]['name'] ?></a></td>
                                 <td class="Table-cell" style="text-align: right;"><?= number_format($list[$col][$row]['uses']) ?></td>
                         <?php   }
                         }

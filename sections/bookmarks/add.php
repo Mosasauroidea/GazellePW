@@ -46,10 +46,11 @@ if (!$DB->has_results()) {
         $Cache->delete_value("bookmarks_group_ids_$UserID");
 
         $DB->query("
-			SELECT ID, ReleaseType, Name, SubName, Year, WikiBody, MainWikiBody, TagList
+			SELECT ID, ReleaseType, Name, SubName, Year, WikiBody, MainWikiBody
 			FROM torrents_group
 			WHERE ID = $PageID");
         $Group =  G::$DB->next_record(MYSQLI_ASSOC, false);
+        // TODO by qwerty fix TagList
         $TagList = str_replace('_', '.', $Group['TagList']);
 
         $DB->query("

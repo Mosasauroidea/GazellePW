@@ -259,7 +259,7 @@ class Region {
 	}
 
 	private static function map($Region) {
-		if (in_array($Region, self::mapping)) {
+		if (array_key_exists($Region, self::mapping)) {
 			return self::mapping[$Region];
 		}
 		return $Region;
@@ -274,7 +274,7 @@ class Region {
 
 	public static function text($Item) {
 		$value = Region::map($Item);
-		return t('server.country.' . str_replace(' ', '_', trim(strtolower($value))), ['DefaultValue' => $value]);
+		return t('server.country.' . str_replace(' ', '_', trim(strtolower($value))), ['DefaultValue' => $Item]);
 	}
 	public static function sphinx_key($Text) {
 		$Text = Region::keyMap($Text);

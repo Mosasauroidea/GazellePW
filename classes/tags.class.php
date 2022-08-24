@@ -139,7 +139,7 @@ class Tags {
      * @param string $ArtistName Restrict tag search by this artist
      * @return string List of tag links
      */
-    public function format($Link = 'torrents.php?taglist=', $ArtistName = '', $ClassName = '') {
+    public function format($Link = 'torrents.php?action=advanced&taglist=', $ArtistName = '', $ClassName = '') {
         if (!empty($ArtistName)) {
             $ArtistName = "&amp;artistname=" . urlencode($ArtistName) . "&amp;action=advanced&amp;searchsubmit=1";
         }
@@ -157,7 +157,7 @@ class Tags {
      * @param string $Link  Page query where more items of this tag type can be found
      * @param string $ArtistName Optional artist
      */
-    public static function format_top($Max = 5, $Link = 'torrents.php?taglist=', $ArtistName = '', $ItemClass = '') {
+    public static function format_top($Max = 5, $Link = 'torrents.php?action=advanced&taglist=', $ArtistName = '', $ItemClass = '') {
         if (empty(self::$All)) { ?>
             <li class="<?= $ItemClass ?>"><?= t('server.common.no_torrent_tags') ?></li>
         <?
@@ -248,6 +248,8 @@ class Tags {
      */
     public static function tag_filter_sph($Tags, $EnableNegation, $TagType) {
         $QueryParts = [];
+        $Tags['include'] = Tags::main_name($Tags['include']);
+        $Tags['exclude'] = Tags::main_name($Tags['exclude']);
         $Tags = Tags::remove_aliases($Tags);
         $TagList = str_replace('_', '.', implode(', ', array_merge($Tags['include'], $Tags['exclude'])));
 
@@ -291,14 +293,64 @@ class Tags {
         $DB = G::$DB;
         $GenreTags = $Cache->get_value('genre_tags');
         if (!$GenreTags) {
-            $DB->query("
-		SELECT Name
+            $DB->query("SELECT Name, SubName
 		FROM tags
 		WHERE TagType = 'genre'
 		ORDER BY Name");
-            $GenreTags = $DB->collect('Name');
+            $GenreTags = $DB->to_array(false, MYSQLI_ASSOC, false);
             $Cache->cache_value('genre_tags', $GenreTags, 3600 * 6);
         }
+        $GenreTags = array_map(function ($value) {
+            return Lang::choose_content($value['Name'], $value['SubName']);
+        }, $GenreTags);
         return $GenreTags;
+    }
+
+    public static function get_all_tag() {
+        $Cache = G::$Cache;
+        $DB = G::$DB;
+        $GenreTags = $Cache->get_value('all_tags');
+        if (!$GenreTags) {
+            $DB->query(
+                "SELECT ID, Name, SubName, TagType, UserID, Uses
+		            FROM tags"
+            );
+            $GenreTags = $DB->to_array('Name', MYSQLI_ASSOC, false);
+            $Cache->cache_value('all_tags', $GenreTags, 3600 * 6);
+        }
+        return $GenreTags;
+    }
+
+    public static function clear_all_cache() {
+        G::$Cache->delete_value('all_tags');
+    }
+
+    public static function get_sub_name($Names) {
+        $AllTags = Tags::get_all_tag();
+        $Ret = [];
+        foreach ($Names as $Key => $Tag) {
+            $Ret[$Tag] = Lang::choose_content($Tag, $AllTags[strtolower($Tag)]['SubName']);
+        }
+        return $Ret;
+    }
+
+    public static function main_name($Tags) {
+        $AllTags = Tags::get_all_tag();
+        $Ret = [];
+        foreach ($Tags as $Key => $Tag) {
+            $Find = false;
+            $Tag = trim($Tag);
+            foreach ($AllTags as $Key2 => $Tag2) {
+                if ($Tag2['SubName'] == $Tag) {
+                    $Find = true;
+                    $Ret[] = $Tag2['Name'];
+                    break;
+                }
+            }
+            if (!$Find) {
+                $Ret[] = $Tag;
+            }
+        }
+        return $Ret;
     }
 }

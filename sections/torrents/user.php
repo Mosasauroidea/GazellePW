@@ -376,20 +376,7 @@ $Pages = Format::get_pages($Page, $TorrentCount, CONFIG['TORRENTS_PER_PAGE']);
                             </select>
                         </td>
                     </tr>
-                    <tr class="Form-row">
-                        <td class="Form-label"><strong><?= t('server.torrents.tags') ?>:</strong></td>
-                        <td class="Form-inputs">
-                            <input class="Input" type="text" name="tags" size="60" data-tooltip="Use !tag to exclude tag" value="<? Format::form('tags') ?>" />
-                            <div class="Radio">
-                                <input class="Input" type="radio" name="tags_type" id="tags_type0" value="0" <? Format::selected('tags_type', 0, 'checked') ?> />
-                                <label class="Radio-label" for="tags_type0"> <?= t('server.torrents.any') ?></label>
-                            </div>
-                            <div class="Radio">
-                                <input class="Input" type="radio" name="tags_type" id="tags_type1" value="1" <? Format::selected('tags_type', 1, 'checked') ?> />
-                                <label class="Radio-label" for="tags_type1"> <?= t('server.torrents.all') ?></label>
-                            </div>
-                        </td>
-                    </tr>
+
 
                     <tr class="Form-row">
                         <td class="Form-label"><strong><?= t('server.torrents.ft_order') ?>:</strong></td>

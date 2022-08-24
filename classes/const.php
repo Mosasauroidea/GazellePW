@@ -50,7 +50,7 @@ $CollageCats = [1, 2, 3, 4, 5, 6, 7, 8];
 
 $PersonalCollageCategoryCat = 1;
 
-$ReleaseTypes = [1, 2, 3, 4, 5, 6];
+$ReleaseTypes = [1, 2, 5, 6];
 
 // Ratio requirements, in descending order
 // Columns: Download amount, required ratio, grace period

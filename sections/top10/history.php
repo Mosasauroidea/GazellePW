@@ -66,13 +66,11 @@ View::show_header(t('server.top10.top_10_torrents_history'), '', 'PageTop10Histo
 			SELECT
 				tht.Rank,
 				tht.TitleString,
-				tht.TagString,
 				tht.TorrentID,
                 g.ID,
 				g.Name,
                 g.SubName,
 				g.CategoryID,
-				g.TagList,
 				t.Scene,
 				t.RemasterYear,
 				g.Year,

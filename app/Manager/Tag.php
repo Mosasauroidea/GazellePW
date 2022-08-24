@@ -92,6 +92,10 @@ class Tag extends \Gazelle\Base {
      * @return int ID of tag
      */
     public function create(string $name, int $userId) {
+        $name = $this->resolve($this->sanitize($name));
+        if (empty($name)) {
+            return false;
+        }
         $this->db->prepared_query(
             "
             INSERT INTO tags
@@ -100,7 +104,7 @@ class Tag extends \Gazelle\Base {
             ON DUPLICATE KEY UPDATE
                 Uses = Uses + 1
             ",
-            $this->resolve($this->sanitize($name)),
+            $name,
             $userId
         );
         return $this->db->inserted_id();

@@ -583,23 +583,24 @@ View::show_header($ThreadInfo['Title'] . ' &lt; ' . $Forums[$ForumID]['Name'] . 
                                 echo "\n"; ?>
                             </div>
                             <div class="TableForumPostHeader-actions" id="bar<?= $PostID ?>">
-
-                                <a href="#quickpost" id="quote_<?= $PostID ?>" onclick="Quote('<?= $PostID ?>', '<?= $Username ?>', true);" class="brackets"><?= t('server.forums.quote') ?></a>
-
+                                <?
+                                if (!$ThreadInfo['IsLocked']  || check_perms('site_moderate_forums')) {
+                                ?>
+                                    <a href="#quickpost" id="quote_<?= $PostID ?>" onclick="Quote('<?= $PostID ?>', '<?= $Username ?>', true);" class="brackets"><?= t('server.forums.quote') ?></a> -
+                                <?
+                                }
+                                ?>
                                 <? if ((!$ThreadInfo['IsLocked'] && Forums::check_forumperm($ForumID, 'Write') && $AuthorID == $LoggedUser['ID']) || check_perms('site_moderate_forums') || ($AuthorID == $LoggedUser['ID'] && isset($LoggedUser['ExtraClasses']['31']))) { ?>
-                                    - <a href="#post<?= $PostID ?>" onclick="Edit_Form('<?= $PostID ?>', '<?= $Key ?>');" class="brackets"><?= t('server.common.edit') ?></a>
+                                    <a href="#post<?= $PostID ?>" onclick="Edit_Form('<?= $PostID ?>', '<?= $Key ?>');" class="brackets"><?= t('server.common.edit') ?></a> -
                                 <?
 
                                 }
                                 if (check_perms('site_admin_forums') && $ThreadInfo['Posts'] > 1) { ?>
-                                    - <a href="#post<?= $PostID ?>" onclick="Delete('<?= $PostID ?>');" class="brackets"><?= t('server.common.delete') ?></a>
+                                    <a href="#post<?= $PostID ?>" onclick="Delete('<?= $PostID ?>');" class="brackets"><?= t('server.common.delete') ?></a> -
                                 <?
                                 }
-
                                 ?>
-
-
-                                - <a href="reports.php?action=report&amp;type=post&amp;id=<?= $PostID ?>" class="brackets"><?= t('server.forums.report') ?></a>
+                                <a href="reports.php?action=report&amp;type=post&amp;id=<?= $PostID ?>" class="brackets"><?= t('server.forums.report') ?></a>
                                 <?
                                 if (check_perms('users_warn') && $AuthorID != $LoggedUser['ID']) {
                                     $AuthorInfo = Users::user_info($AuthorID);

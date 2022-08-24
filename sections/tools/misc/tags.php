@@ -16,34 +16,7 @@ define('MODE_MERGE', 1);
 
 ?>
 <div class="LayoutBody">
-    <h3><?= t('server.tools.merge_rename_tags') ?></h3>
-    <form action="tools.php" method="get" name="tagform" id="tagform" onsubmit="return formVal();">
-        <input type="hidden" name="action" value="edit_tags" />
-        <table>
-            <tr>
-                <td class="label">
-                    <?= t('server.tools.tag') ?>:
-                </td>
-                <td>
-                    <input class="Input" type="text" name="tag" id="tag" />
-                </td>
-                <td class="label">
-                    <?= t('server.tools.rename_to_merge_with_tag') ?>:
-                </td>
-                <td>
-                    <input class="Input" type="text" name="replace" id="replace" />
-                </td>
-                <td class="label">
-                    <input type="checkbox" name="list" id="list" checked="checked" /> <label for="list"><?= t('server.tools.list_affected_rows') ?></label>
-                </td>
-            </tr>
-            <tr>
-                <td class="center" colspan="5">
-                    <input class="Button" type="submit" value="Rename/Merge Tags" />
-                </td>
-            </tr>
-        </table>
-    </form>
+
     <br />
     <?
     if (isset($_GET['tag']) || isset($_GET['replace'])) {
@@ -163,6 +136,7 @@ define('MODE_MERGE', 1);
 						AND GroupID IN (";
                     while (list($GroupID) = $DB->next_record()) {
                         $Query .= "$GroupID,";
+                        Torrents::update_hash($GroupID);
                     }
                     $Query = substr($Query, 0, -1) . ');';
                     $DB->query($Query);

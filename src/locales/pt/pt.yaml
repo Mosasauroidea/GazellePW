@@ -709,7 +709,7 @@ server.bookmarks.year: |-
 server.bookmarks.your_bookmarked_artists: |-
   Seus artistas favoritos
 server.bookmarks.your_bookmarked_torrent_groups: |-
-  Seus grupos de torrents favoritos
+  Seus filmes favoritos
 server.collages.a_collage_with_that_name_already_exists_1: |-
   Já existe uma playlist com esse nome mas precisa ser recuperada, por favor <a href="staffpm.php">entre em contato</a> com a staff!
 server.collages.add_comment: |-
@@ -1570,8 +1570,8 @@ server.tools.new_official_tag: |-
   Nova tag oficial
 server.tools.no_such_tag_found: |-
   Tag não encontrada
-server.tools.official_tags_manager: |-
-  Gerenciador de tags oficiais
+server.tools.tags_manager: |-
+  Gerenciador de tags
 server.tools.operations: |-
   Operações
 server.tools.paste_a_list_of_collage_or_torrent_group_urls: |-
