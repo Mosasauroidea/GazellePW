@@ -33,7 +33,7 @@ Dropdown is-open
   display: block;
   cursor: pointer;
   overflow: hidden;
-  padding: var(--global-space-sm) var(--global-space-lg);
+  padding: var(--global-space-sm) var(--global-space-default);
   text-overflow: ellipsis;
   white-space: nowrap;
   /* override button */

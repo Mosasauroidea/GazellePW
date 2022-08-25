@@ -191,7 +191,7 @@ if ($Sneaky) {
         <table class="layout border">
             <tr class="rowb">
                 <td colspan="8" class="center">
-                    <?= t('server.torrents.no_new_notifications_found') ?><a href="user.php?action=notify" class="brackets"><?= t('server.torrents.edit_notification_filters') ?></a>
+                    <?= t('server.torrents.no_new_notifications_found') ?><a href="user.php?action=notify" class="brackets"> </a>
                 </td>
             </tr>
         </table>

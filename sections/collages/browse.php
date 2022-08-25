@@ -355,10 +355,10 @@ View::show_header(t('server.collages.browse_collages'), '', 'PageCollageHome');
     <?
     }
     if (count($Collages) === 0) { ?>
-        <div class="Box">
-            <div class="Box-body" align="center">
+        <div>
+            <div class="center">
                 <? if ($BookmarkView) { ?>
-                    <h2><?= t('server.collages.result_1') ?></h2>
+                    <div><?= t('server.collages.result_1') ?></div>
                 <?      } else { ?>
                     <h2><?= t('server.collages.result_2') ?></h2>
                     <p><?= t('server.collages.result_3') ?></p>

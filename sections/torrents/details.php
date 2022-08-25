@@ -175,9 +175,9 @@ View::show_header($Title, 'browse,comments,torrent,bbcode,recommend,cover_art,su
             <img class="MovieInfo-poster" src="<?= ImageTools::process($WikiImage) ?>" onclick="lightbox.init(this, $(this).width());">
         </div>
         <div class="MovieInfo-titleContainer">
-            <a class="MovieInfo-title" href="/torrents.php?id=<?= $GroupID ?>">
+            <span class="MovieInfo-title">
                 <?= $GroupName ?>
-            </a>
+            </span>
             <i class="MovieInfo-year">(<? print_r($GroupYear) ?>)</i>
             <? if ($SubName) {
                 echo "<div class='MovieInfo-subTitle'>$SubName</div>";

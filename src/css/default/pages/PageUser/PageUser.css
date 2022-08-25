@@ -52,3 +52,17 @@ table .disabled_flag {
   font-style: italic;
   font-size: var(--global-fontSize-sm);
 }
+
+.RssTitle {
+  display: flex;
+  gap: 3px;
+}
+
+.RssTitle .rss.icon {
+  width: 20px;
+  height: 20px;
+}
+
+.RssTitle .rss.icon {
+  color: #ffa500;
+}

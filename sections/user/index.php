@@ -26,8 +26,12 @@ switch ($_REQUEST['action']) {
         include('thumb.php');
         break;
     case 'notify':
+        include('notify_list.php');
+        break;
+    case 'notify_edit':
         include('notify_edit.php');
         break;
+
     case 'notify_handle':
         include('notify_handle.php');
         break;

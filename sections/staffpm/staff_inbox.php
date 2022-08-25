@@ -72,7 +72,7 @@ $StaffPMs = $DB->query("
 	JOIN staff_pm_messages spm ON spm.ConvID = spc.ID
 	$WhereCondition
 	GROUP BY spc.ID
-	ORDER BY $SortStr spc.Level DESC, spc.Date DESC
+	ORDER BY $SortStr spc.Date DESC, spc.Level DESC
 	LIMIT $Limit
 ");
 

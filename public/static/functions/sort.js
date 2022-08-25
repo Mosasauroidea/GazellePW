@@ -106,11 +106,9 @@ $(function () {
       sortableTable.counter()
     },
     noteToggle: function () {
-      var span = $(
-        '<a href="#" class="brackets" data-tooltip="Toggle note">Hide</a>'
-      ).click(function (e) {
+      var span = $('<a href="#" class="floatright brackets" data-tooltip="Toggle note">Hide</a>').click(function (e) {
         e.preventDefault()
-        $('#drag_drop_textnote > :first-child').toggle()
+        $('#drag_drop_textnote > :last-child').toggle()
         var $this = $(this)
         $this.text($this.text() === 'Hide' ? 'Show' : 'Hide')
       })
@@ -119,9 +117,7 @@ $(function () {
     checks: function () {
       this.check
         .on('click', 'input', function () {
-          var s = this.checked
-            ? 'td.center :checkbox:not(:checked)'
-            : 'td.center :checked'
+          var s = this.checked ? 'td.center :checkbox:not(:checked)' : 'td.center :checked'
           $(s).click()
         })
         .find('span')

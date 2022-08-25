@@ -76,9 +76,11 @@ class MASS_USER_TORRENTS_TABLE_VIEW {
             <div class="BodyHeader">
                 <h2 class="BodyHeader-nav"><?= t('server.bookmarks.no_torrents_found') ?></h2>
             </div>
-            <div class="Box">
-                <div class="Box-body" align="center">
-                    <p><?= t('server.bookmarks.add_some_torrents_and_come_back_later') ?></p>
+            <div class="BodyContent">
+                <div class="Box">
+                    <div class="Box-body" align="center">
+                        <p><?= t('server.bookmarks.add_some_torrents_and_come_back_later') ?></p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -106,30 +108,27 @@ class MASS_USER_TORRENTS_TABLE_VIEW {
                 <div class="BodyHeader">
                     <h2 class="BodyHeader-nav"><?= display_str($this->Heading) ?></h2>
                 </div>
-
-                <table class="Table">
-                    <tr class="Table-rowHeader">
-                        <td class="Table-cell" id="sorting_head"><?= t('server.bookmarks.sorting') ?></td>
-                    </tr>
-                    <tr>
-                        <td id="drag_drop_textnote"><?= t('server.bookmarks.drag_drop_textnote_torrents') ?></td>
-                    </tr>
-                </table>
-
-                <form action="bookmarks.php" method="post" id="drag_drop_collage_form">
+                <form class="BodyContent" action="bookmarks.php" method="post" id="drag_drop_collage_form">
+                    <div class="Box" id="drag_drop_textnote">
+                        <div class="Box-header">
+                            <div class="Box-headerTitle" id="sorting_head"><?= t('server.bookmarks.sorting') ?></div>
+                        </div>
+                        <div class="Box-body">
+                            <td> <?= t('server.bookmarks.drag_drop_textnote_torrents') ?></td>
+                        </div>
+                    </div>
 
                     <?php $this->buttons(); ?>
 
                     <table class="TableManageCollage Table" id="manage_collage_table">
                         <thead>
                             <tr class="Table-rowHeader">
-                                <th class="Table-cell" style="width: 7%;" data-sorter="false"><?= t('server.bookmarks.order') ?></th>
-                                <th class="Table-cell" style="width: 1%;"><span><abbr data-tooltip="<?= t('server.bookmarks.current_order') ?>">#</abbr></span></th>
-                                <th class="Table-cell" style="width: 1%;"><span><?= t('server.bookmarks.year') ?></span></th>
-                                <th class="Table-cell" style="width: 15%;" data-sorter="ignoreArticles"><span><?= t('server.common.artist') ?></span></th>
-                                <th class="Table-cell" data-sorter="ignoreArticles"><span><?= t('server.common.torrent') ?></span></th>
-                                <th class="Table-cell" style="width: 5%;" data-sorter="relativeTime"><span><?= t('server.bookmarks.bookmarked') ?></span></th>
-                                <th class="Table-cell" style="width: 1%;" id="check_all" data-sorter="false"><span><?= t('server.bookmarks.remove') ?></span></th>
+                                <th class="Table-cell Table-cellLeft" data-sorter="false"><?= t('server.bookmarks.order') ?></th>
+                                <th class="Table-cell Table-cellLeft"><span><abbr data-tooltip="<?= t('server.bookmarks.current_order') ?>">#</abbr></span></th>
+                                <th class="Table-cell Table-cellLeft"><span><?= t('server.bookmarks.year') ?></span></th>
+                                <th class="Table-cell Table-cellLeft" data-sorter="ignoreArticles"><span><?= t('server.common.torrent') ?></span></th>
+                                <th class="Table-cell Table-cellLeft" data-sorter="relativeTime"><span><?= t('server.bookmarks.bookmarked') ?></span></th>
+                                <th class="Table-cell" id="check_all" data-sorter="false"><span><?= t('server.bookmarks.remove') ?></span></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -147,8 +146,8 @@ class MASS_USER_TORRENTS_TABLE_VIEW {
                         </tbody>
                     </table>
 
-                    <?php $this->buttons(); ?>
 
+                    <?php $this->buttons(); ?>
                     <div>
                         <input type="hidden" name="action" value="mass_edit" />
                         <input type="hidden" name="type" value="<?= display_str($this->EditType) ?>" />
@@ -168,18 +167,11 @@ class MASS_USER_TORRENTS_TABLE_VIEW {
                 public function body() {
                     if ($this->HasTorrents)
                         foreach ($this->TorrentList as $GroupID => $Group) {
-                            $Artists = array();
                             extract($Group);
                             extract($this->CollageDataList[$GroupID]);
 
                             $this->NumGroups++;
-
-                            if (!is_array($Artists)) {
-                                $Artists = array();
-                            }
-                            $DisplayName = self::display_name($Artists);
-                            $Group['Year'] = null;
-                            $TorrentLink = Torrents::display_simple_group_name($Group);
+                            $TorrentLink = Torrents::group_name($Group);
                             $Year = $Year > 0 ? $Year : '';
                             $DateAdded = date($Time);
 
@@ -206,7 +198,6 @@ class MASS_USER_TORRENTS_TABLE_VIEW {
             </td>
             <td><?= $this->NumGroups ?></td>
             <td><?= $GroupYear ? trim($GroupYear) : ' ' ?></td>
-            <td><?= $DisplayName ? trim($DisplayName) : ' ' ?></td>
             <td><?= $TorrentLink ? trim($TorrentLink) : ' ' ?></td>
             <td class="nobr" data-tooltip="<?= $DateAdded ?>"><?= $DateAdded ? time_diff($DateAdded) : ' ' ?></td>
             <td class="center"><input type="checkbox" name="remove[<?= $GroupID ?>]" value="" /></td>

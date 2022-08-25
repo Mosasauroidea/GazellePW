@@ -52,10 +52,10 @@ View::show_header($Title, 'browse', 'PageBookmarkArtists');
             <a href="bookmarks.php?type=requests" class="brackets"><?= t('server.common.requests') ?></a>
         </div>
     </div>
-    <div class="Box">
-        <div class="Box-body" align="center">
+    <div>
+        <div class="center">
             <? if (count($ArtistList) === 0) { ?>
-                <h2><?= t('server.bookmarks.no_bookmarked_artists') ?></h2>
+                <div><?= t('server.bookmarks.no_bookmarked_artists') ?></div>
         </div>
     </div>
 </div>

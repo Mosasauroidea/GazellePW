@@ -377,8 +377,8 @@ View::show_header($Title, '', 'PageRequestHome');
     <?
     if ($BookmarkView && $NumResults === 0) {
     ?>
-        <div class="BoxBody" align="center">
-            <h2><?= t('server.requests.you_have_not_bookmarked_any_request') ?></h2>
+        <div class="center">
+            <div><?= t('server.requests.you_have_not_bookmarked_any_request') ?></div>
         </div>
     <?
     } else { ?>

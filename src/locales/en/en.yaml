@@ -6641,6 +6641,12 @@ server.user.notification_filter_name_note: |-
   A name for the notification filter set to tell different filters apart
 server.user.notify_me_of_all_new_torrents_with: |-
   Notify me of all new torrents with...
+server.user.create_new_torrent_notify: |-
+  Create new notification filter
+server.user.new_torrent_notify_list: |-
+  Notification filter list
+server.user.new_torrent_notify_name: |-
+  Notification filter name
 server.user.notify_my_android: |-
   Notify My Android
 server.user.notifyondeletedownloaded: |-

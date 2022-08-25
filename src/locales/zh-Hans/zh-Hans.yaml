@@ -659,7 +659,7 @@ server.bookmarks.current_order: |-
 server.bookmarks.dont_notify_new: |-
   关闭新种提醒
 server.bookmarks.drag_drop_textnote_torrents: |-
-  <ul> <li>单击列标题的按钮以自动排序。</li> <li>按住 [Shift] 键并单击其他列标题，同时对多个列排序。</li> <li>拖放任意行以改变其顺序。</li> <li>双击以快速勾选一行。</li> </ul>'
+  <ul> <li>单击列标题的按钮以自动排序。</li> <li>按住 [Shift] 键并单击其他列标题，同时对多个列排序。</li> <li>拖放任意行以改变其顺序。</li> <li>双击以快速勾选一行。</li> </ul>
 server.bookmarks.manage_torrents: |-
   管理种子
 server.bookmarks.no_bookmarked_artists: |-
@@ -5024,7 +5024,7 @@ server.torrents.edit_details: |-
 server.torrents.edit_filters: |-
   编辑过滤器
 server.torrents.edit_notification_filters: |-
-  编辑推送过滤器
+  编辑推送
 server.torrents.edit_summary: |-
   编辑摘要
 server.torrents.edit_torrent_group: |-
@@ -6518,6 +6518,12 @@ server.user.notification_filter_name_note: |-
   用以区分不同的过滤器
 server.user.notify_me_of_all_new_torrents_with: |-
   新种推送
+server.user.create_new_torrent_notify: |-
+  新建推送
+server.user.new_torrent_notify_list: |-
+  推送列表
+server.user.new_torrent_notify_name: |-
+  推送名称
 server.user.notify_my_android: |-
   推送到我的智能设备
 server.user.notifyondeletedownloaded: |-

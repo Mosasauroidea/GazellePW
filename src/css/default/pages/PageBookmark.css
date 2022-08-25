@@ -1,0 +1,12 @@
+#bookmarks .RssTitle .rss.icon {
+  width: 30px;
+  height: 30px;
+}
+
+#bookmarks .RssTitle .rss.icon {
+  color: #ffa500;
+}
+#bookmarks .RssTitle {
+  display: flex;
+  gap: 3px;
+}

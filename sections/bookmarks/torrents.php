@@ -62,8 +62,14 @@ View::show_header($Title, 'browse,collage', 'PageBookmarkTorrent');
 <div class="LayoutBody">
     <div class="BodyHeader">
         <h2 class="BodyHeader-nav">
-            <? if (!$Sneaky) { ?><a href="feeds.php?feed=torrents_bookmarks_t_<?= $LoggedUser['torrent_pass'] ?>&amp;user=<?= $LoggedUser['ID'] ?>&amp;auth=<?= $LoggedUser['RSS_Auth'] ?>&amp;passkey=<?= $LoggedUser['torrent_pass'] ?>&amp;authkey=<?= $LoggedUser['AuthKey'] ?>&amp;name=<?= urlencode(CONFIG['SITE_NAME'] . ': Bookmarked Torrents') ?>"><img src="<?= CONFIG['STATIC_SERVER'] ?>/common/symbols/rss.png" alt="RSS feed" /></a>&nbsp;
-                <? } ?><?= $Title ?></h2>
+            <div class="RssTitle">
+                <? if (!$Sneaky) {
+                ?><a data-tooltip="<?= t('server.user.rss_address') ?>" href="feeds.php?feed=torrents_bookmarks_t_<?= $LoggedUser['torrent_pass'] ?>&amp;user=<?= $LoggedUser['ID'] ?>&amp;auth=<?= $LoggedUser['RSS_Auth'] ?>&amp;passkey=<?= $LoggedUser['torrent_pass'] ?>&amp;authkey=<?= $LoggedUser['AuthKey'] ?>&amp;name=<?= urlencode(CONFIG['SITE_NAME'] . ': Bookmarked Torrents') ?>">
+                        <?= icon('rss') ?></a>
+                    <?
+                } ?><?= $Title ?>
+            </div>
+        </h2>
         <div class="BodyNavLinks">
             <a href="bookmarks.php?type=torrents" class="brackets"><?= t('server.common.torrents') ?></a>
             <a href="bookmarks.php?type=artists" class="brackets"><?= t('server.common.artists') ?></a>
@@ -84,9 +90,9 @@ View::show_header($Title, 'browse,collage', 'PageBookmarkTorrent');
         </div>
     </div>
     <? if (count($TorrentList) === 0) { ?>
-        <div class="Box">
-            <div class="Box-body" align="center">
-                <h2><?= t('server.bookmarks.no_bookmarked_torrents') ?></h2>
+        <div>
+            <div class="center">
+                <div><?= t('server.bookmarks.no_bookmarked_torrents') ?></div>
             </div>
         </div>
 </div>
