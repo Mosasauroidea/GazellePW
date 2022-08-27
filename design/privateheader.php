@@ -521,7 +521,6 @@ if ($_REQUEST['action']) {
                             <a class="DropdownMenu-item is-comments" href="comments.php"> <?= t('server.common.my_comments') ?></a>
                             <a class="DropdownMenu-item is-friends" href="friends.php"> <?= t('server.common.my_friends') ?></a>
                             <a class="DropdownMenu-item is-missing" href="torrents.php?type=missing"> <?= t('server.common.missing') ?></a>
-                            <? if (isset(G::$LoggedUser['SSPAccess'])) { ?> <a class="DropdownMenu-item is-ssp" href="ssp.php"> <?= t('server.common.ssp') ?></a> <?  } ?>
                             <a class="DropdownMenu-item is-logout" href="logout.php?auth=<?= G::$LoggedUser['AuthKey'] ?>"> <?= t('server.common.logout') ?></a>
                         </div>
                     </li>

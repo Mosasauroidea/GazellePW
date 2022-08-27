@@ -5,16 +5,22 @@
         }
     }
 </script>
-<div id="compose" class="Box-body <?= ($Hidden ? 'hidden' : '') ?>">
-    <form class="send_form" name="staff_message" action="staffpm.php" method="post">
+<div id="compose" class="Box Box-body <?= ($Hidden ? 'hidden' : '') ?>">
+    <form class="Form-rowList send_form" name="staff_message" action="staffpm.php" method="post">
         <input type="hidden" name="action" value="takepost" />
-        <h3><label for="subject"><?= t('server.staff.subject') ?></label></h3>
-        <input class="Input" type="text" size="95" name="subject" id="subject" required />
-        <h3><label for="message"><?= t('server.staff.message') ?></label></h3>
-        <?
-        $TextPrev = new TEXTAREA_PREVIEW('message', 'message', '', 95, 10, true, true, false, array(), true);
-        ?>
-        <div class="Post-bodyActions">
+        <div class="Form-row">
+            <div class="Form-label"><label for="subject"><?= t('server.staff.subject') ?></label></div>
+            <div class="Form-inputs"><input class="Input" type="text" size="95" name="subject" id="subject" required /></div>
+        </div>
+        <div class="Form-row">
+            <div class="Form-label"><label for="message"><?= t('server.staff.message') ?></label></div>
+            <div class="Form-items">
+                <?
+                $TextPrev = new TEXTAREA_PREVIEW('message', 'message', '', 95, 10, true, true, false, array(), true);
+                ?>
+            </div>
+        </div>
+        <div class="Form-row Post-bodyActions">
             <strong><?= t('server.staff.send_to') ?>: </strong>
             <select class="Input" id="select-level" name="level" onchange="addPM()">
                 <? if (!isset(G::$LoggedUser['LockedAccount'])) { ?>

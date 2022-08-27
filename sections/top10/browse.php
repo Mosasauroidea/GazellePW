@@ -116,4 +116,5 @@ function generate_torrent_table($Caption, $Tag, $Groups, $Limit) {
             $tableRender->render(['Variant' => 'FiveGrid']);
             ?>
         </div>
-    <? } ?>
+    </div>
+<? } ?>

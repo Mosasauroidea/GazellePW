@@ -55,9 +55,12 @@ if (isset($_POST['auth'])) {
             $Roles = ApplicantRole::get_list(true);
             if (count($Roles)) {
         ?>
-                <div class="Box">
-                    <div class="Box-header"><?= t('server.apply.current_roles') ?></div>
-                    <div class="Box-body">
+                <div class="Post">
+                    <div class="Post-header">
+                        <div class="Post-headerTitle">
+                            <?= t('server.apply.current_roles') ?></div>
+                    </div>
+                    <div class="Post-body">
                         <? if ($Saved) { ?>
                             <p>
                                 <?= t('server.apply.the_role_was', ['Values' => [
@@ -66,33 +69,28 @@ if (isset($_POST['auth'])) {
                                 ]]) ?>
                             </p>
                         <? } ?>
-
-
-                        <table>
-                            <? foreach ($Roles as $title => $info) { ?>
-                                <tr>
-                                    <td>
-                                        <div class="head">
-                                            <h2><?= $title ?></h2>
-                                            (<?= $info['published'] ? t('server.apply.published') : t('server.apply.archived') ?>)
-                                            <?= t('server.apply.role_created_by', ['Values' => [
-                                                time_diff($info['created'], 2),
-                                                Users::format_username($info['user_id']),
-                                                ($info['modified'] == $info['created'] ? '' : t('server.apply.role_created_by_4') . time_diff($info['modified'], 2))
-                                            ]]) ?>
-                                            <input class="Button" type="submit" name="edit-<?= $info['id'] ?>" value="Edit" />
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <div class="HtmlText PostArticle">
-                                            <?= Text::full_format($info['description']) ?>
-                                        </div>
-                                    </td>
-                                </tr>
-                            <? } /* foreach */ ?>
-                        </table>
+                        <? foreach ($Roles as $title => $info) { ?>
+                            <div class="Box">
+                                <div class="Box-header Post-header">
+                                    <div class="Post-headerLeft">
+                                        <div class="Post-headerTitle">
+                                            <?= $title ?></div>
+                                    </div>
+                                    <div class="Post-headerActions">
+                                        (<?= $info['published'] ? t('server.apply.published') : t('server.apply.archived') ?>)
+                                        <?= t('server.apply.role_created_by', ['Values' => [
+                                            time_diff($info['created'], 2),
+                                            Users::format_username($info['user_id']),
+                                            ($info['modified'] == $info['created'] ? '' : t('server.apply.role_created_by_4') . time_diff($info['modified'], 2))
+                                        ]]) ?>
+                                        <input class="Button" type="submit" name="edit-<?= $info['id'] ?>" value="Edit" />
+                                    </div>
+                                </div>
+                                <div class="Box-body HtmlText PostArticle">
+                                    <?= Text::full_format($info['description']) ?>
+                                </div>
+                            </div>
+                        <? } /* foreach */ ?>
                     </div>
                 </div>
             <?

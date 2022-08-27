@@ -210,40 +210,47 @@ if ($Sneaky) {
 
         foreach ($FilterGroups as $FilterID => $FilterResults) {
         ?>
-            <div class="header">
-                <h3>
-                    <? if ($FilterResults['FilterLabel'] !== false) { ?>
-                        <? $NewFilterID = $FilterID . ($Sneaky ? "&amp;userid=$UserID" : '') ?>
-                        <?= t('server.torrents.matches_for', ['Values' => [
-                            "<a href='torrents.php?action=notify&amp;filterid=${NewFilterID}>${FilterResults['FilterLabel']}</a>"
-                        ]]) ?>
-                    <? } else { ?>
-                        <?= t('server.torrents.matches_for_unknown_filter', ['Values' => [
-                            "[${FilterID}]"
-                        ]]) ?>
-                    <? } ?>
-                </h3>
-            </div>
-            <div class="BodyNavLinks notify_filter_links">
-                <? if (!$Sneaky) { ?>
-                    <a class="brackets" href="#" onclick="globalapp.rssClearSelected(event, <?= $FilterID ?>)"><?= t('server.torrents.clear_selected_in_filter') ?></a>
-                    <a href="torrents.php?action=notify_clear_filter&amp;filterid=<?= $FilterID ?>&amp;auth=<?= $LoggedUser['AuthKey'] ?>" class="brackets"><?= t('server.torrents.clear_all_old_in_filter') ?></a>
-                    <a href="torrents.php?action=notify_catchup_filter&amp;filterid=<?= $FilterID ?>&amp;auth=<?= $LoggedUser['AuthKey'] ?>" class="brackets"><?= t('server.torrents.mark_all_in_filter_as_read') ?></a>
-                <? } ?>
-            </div>
-            <form class="torrent-table" name="torrents" id="notificationform_<?= $FilterID ?>" action="">
-                <?
-                unset($FilterResults['FilterLabel']);
-                $TorrentLists = [];
-                foreach ($FilterResults as $Result) {
-                    $TorrentID = $Result['TorrentID'];
-                    $TorrentLists[] = Torrents::convert_torrent($TorrentGroups[$Result['GroupID']], $TorrentID);
-                }
-                $tableRender = new UngroupTorrentSimpleListView($TorrentLists);
-                $tableRender->with_filter_id($FilterID)->render();
+            <div class="Post">
+                <div class="Post-header">
+                    <div class="Post-headerTitle">
+                        <? if ($FilterResults['FilterLabel'] !== false) {
+                            $NewFilterID = $FilterID . ($Sneaky ? "&amp;userid=$UserID" : '');
+                            $LabelName = $FilterResults['FilterLabel'];
+                        ?>
+                            <?= t('server.torrents.matches_for', ['Values' => [
+                                "<a href='torrents.php?action=notify&amp;filterid=$NewFilterID'>$LabelName</a>"
+                            ]]) ?>
+                        <? } else {
+                        ?>
+                            <?= t('server.torrents.matches_for_unknown_filter', ['Values' => [
+                                "[${FilterID}]"
+                            ]]) ?>
+                        <? } ?>
+                    </div>
+                </div>
+                <div class="Post-body LayoutPage">
+                    <div class="BodyNavLinks notify_filter_links">
+                        <? if (!$Sneaky) { ?>
+                            <a class="brackets" href="#" onclick="globalapp.rssClearSelected(event, <?= $FilterID ?>)"><?= t('server.torrents.clear_selected_in_filter') ?></a>
+                            <a href="torrents.php?action=notify_clear_filter&amp;filterid=<?= $FilterID ?>&amp;auth=<?= $LoggedUser['AuthKey'] ?>" class="brackets"><?= t('server.torrents.clear_all_old_in_filter') ?></a>
+                            <a href="torrents.php?action=notify_catchup_filter&amp;filterid=<?= $FilterID ?>&amp;auth=<?= $LoggedUser['AuthKey'] ?>" class="brackets"><?= t('server.torrents.mark_all_in_filter_as_read') ?></a>
+                        <? } ?>
+                    </div>
+                    <form class="torrent-table" name="torrents" id="notificationform_<?= $FilterID ?>" action="">
+                        <?
+                        unset($FilterResults['FilterLabel']);
+                        $TorrentLists = [];
+                        foreach ($FilterResults as $Result) {
+                            $TorrentID = $Result['TorrentID'];
+                            $TorrentLists[] = Torrents::convert_torrent($TorrentGroups[$Result['GroupID']], $TorrentID);
+                        }
+                        $tableRender = new UngroupTorrentSimpleListView($TorrentLists);
+                        $tableRender->with_filter_id($FilterID)->render();
 
-                ?>
-            </form>
+                        ?>
+                    </form>
+                </div>
+            </div>
         <?
         }
     }

@@ -10,14 +10,12 @@ class EditionType {
     const Collection = 3;
     const Remaster = 4;
     const ThreeD = 5;
-    const Medias = 6;
 }
 
 class EditionInfo {
     const collections = ['masters_of_cinema', 'the_criterion_collection', 'warner_archive_collection'];
     const editions = ['director_s_cut', 'extended_edition', 'rifftrax', 'theatrical_cut', 'uncut', 'unrated'];
-    const features = ['2_disc_set', '2_in_1', '4k_restoration', '4k_remaster', 'remaster',  'dual_audio', 'english_dub', 'extras',  'with_commentary'];
-    const medias = ['10_bit', 'dts_x', 'dolby_atmos', 'dolby_vision', 'hdr10', 'hdr10plus', '2d_3d_edition', '3d_anaglyph', '3d_full_sbs', '3d_half_ou', '3d_half_sbs'];
+    const features = ['10_bit', 'dts_x', 'dolby_atmos', 'dolby_vision', 'hdr10', 'hdr10plus', '2d_3d_edition', '3d_anaglyph', '3d_full_sbs', '3d_half_ou', '3d_half_sbs', '2_disc_set', '2_in_1', '4k_restoration', '4k_remaster', 'remaster',  'dual_audio', 'english_dub', 'extras',  'with_commentary'];
     const remasters = ['remaster', '4k_remaster', '4k_restoration', 'warner_archive_collection', 'masters_of_cinema', 'the_criterion_collection'];
     const threeD = ['3d_anaglyph', '3d_full_sbs', '3d_half_ou', '3d_half_sbs'];
 
@@ -33,8 +31,6 @@ class EditionInfo {
                 return self::remasters;
             case EditionType::ThreeD:
                 return self::threeD;
-            case EditionType::Medias:
-                return self::medias;
         }
         return array_merge(self::collections, self::editions, self::features);
     }

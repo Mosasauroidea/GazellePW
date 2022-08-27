@@ -182,7 +182,6 @@ class MOVIE {
                 }
             }
         }
-
         $MissData = [];
         $key = CONFIG['TMDB_API_KEY'];
         if (!empty($key)) {
@@ -344,7 +343,7 @@ class MOVIE {
         return json_decode($IMDBActorData);
     }
 
-    private static function get_imdb_data($IMDBID) {
+    public static function get_imdb_data($IMDBID) {
         $IMDBConfig = new \Imdb\Config();
         $IMDBConfig->language = 'en-US';
         $IMDBResult = new \Imdb\Title($IMDBID, $IMDBConfig);
@@ -367,6 +366,37 @@ class MOVIE {
         $Info['Type'] = 'Movie';
         $Info['Genre'] = implode(',', explode('|', $Group['TorrentTags']));
         return $Info;
+    }
+
+    public static function get_main_tmdb_info($IMDBID, $Refresh = false) {
+        G::$DB->query("SELECT 
+            MainTMDBData
+        FROM movie_info_cache
+        WHERE IMDBID='$IMDBID'");
+        if (G::$DB->has_results()) {
+            list($MainTMDBData) = G::$DB->next_record(MYSQLI_NUM, false);
+        }
+        $key = CONFIG['TMDB_API_KEY'];
+        if (!empty($key) && (empty($MainTMDBData) || $Refresh)) {
+            $curl = new Curl();
+            $curl->get('https://api.themoviedb.org/3/find/' . $IMDBID, ['api_key' => $key, 'language' => self::tmdb_lang(Lang::MAIN_LANG), 'external_source' => 'imdb_id']);
+            if ($curl->error) {
+            } else {
+                $OMDBData = json_encode($curl->response, JSON_UNESCAPED_UNICODE);
+                G::$DB->query("INSERT INTO movie_info_cache (IMDBID, MainTMDBData, MainTMDBTime) VALUES('$IMDBID', '" . db_string($MainTMDBData) . "', '" . sqlTime() . "')  ON DUPLICATE KEY UPDATE MAINTMDBData='" . db_string($MainTMDBData) . "', MAINTMDBTime='" . sqlTime() . "'");
+                // query again? db_string escape?
+                G::$DB->query("SELECT MainTMDBData 
+                FROM movie_info_cache
+                WHERE IMDBID='$IMDBID'");
+                if (G::$DB->has_results()) {
+                    list($MainTMDBData) = G::$DB->next_record(MYSQLI_NUM, false);
+                }
+            }
+        }
+        if (!empty($MainTMDBData)) {
+            return json_decode($MainTMDBData);
+        }
+        return null;
     }
 
     public static function get_movie_fill_info($IMDBID, $Refresh = false) {
@@ -531,8 +561,11 @@ class MOVIE {
         $multi_curl->start();
 
         $Info['Title'] = html_entity_decode($IMDBResult->title(), ENT_QUOTES);
-        if (count($IMDBResult->plot())) {
-            $Info['MainPlot'] = html_entity_decode($IMDBResult->plot()[0], ENT_QUOTES);
+        if (count($IMDBResult->plot()) > 0) {
+            $IMDBPlot = html_entity_decode($IMDBResult->plot()[0], ENT_QUOTES);
+            if ($IMDBPlot != 'N/A') {
+                $Info['MainPlot'] = $IMDBPlot;
+            }
         }
         $Info['Year'] = $IMDBResult->year();
         $Info['Genre'] = strtolower(implode(',', array_values(Tags::get_sub_name($IMDBResult->genres()))));
@@ -543,7 +576,7 @@ class MOVIE {
             if (empty($Info['Title'])) {
                 $Info['Title'] = $OMDBResult->Title;
             }
-            if (empty($Info['MainPlot'])) {
+            if (empty($Info['MainPlot']) && $OMDBResult->Plot != 'N/A') {
                 $Info['MainPlot'] = $OMDBResult->Plot;
             }
             if (empty($Info['Year'])) {
@@ -579,7 +612,7 @@ class MOVIE {
             if (count($MainTMDBResult->movie_results) > 0) {
                 $MainTMDBSimpleInfo = $MainTMDBResult->movie_results[0];
                 $Info['Title'] = $MainTMDBSimpleInfo->title;
-                if (empty($Info['MainPlot'])) {
+                if (empty($Info['MainPlot']) && $MainTMDBSimpleInfo->overview != 'N/A') {
                     $Info['MainPlot'] = $MainTMDBSimpleInfo->overview;
                 }
             }
@@ -688,9 +721,29 @@ class MOVIE {
                 }
             }
         }
-
         return $Info;
     }
+    public static function get_main_plot($IMDBID) {
+        $IMDBResult = Movie::get_imdb_data($IMDBID);
+        if (count($IMDBResult->plot()) > 0) {
+            $IMDBPlot = html_entity_decode($IMDBResult->plot()[0], ENT_QUOTES);
+            if ($IMDBPlot != 'N/A') {
+                return $IMDBPlot;
+            }
+        }
+        $OMDBResult = Movie::get_omdb_data($IMDBID);
+        if (!empty($OMDBResult->Plot && $OMDBResult->Plot != 'N/A')) {
+            return $OMDBResult->Plot;
+        }
+        $MainTMDBResult = Movie::get_main_tmdb_info($IMDBID);
+        if (count($MainTMDBResult->movie_results) > 0) {
+            $MainTMDBSimpleInfo = $MainTMDBResult->movie_results[0];
+            if ($MainTMDBSimpleInfo->overview != 'N/A')
+                return  $MainTMDBSimpleInfo->overview;
+        }
+        return '';
+    }
+
     public static function upload_movie_poster($IMDBID, $url) {
         return self::upload_image('site/movie/imdb/' . $IMDBID . '-' . uniqid() . '.jpg', $url);
     }

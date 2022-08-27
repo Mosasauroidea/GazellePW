@@ -150,41 +150,39 @@ $DB->query("
             </div>
             <div class="center" colspan="6"><input class="Button" type="submit" value="Manage conversation" /></div>
         </form>
-        <?
-        $DB->query("
+    </div>
+    <?
+    $DB->query("
 	SELECT SupportFor
 	FROM users_info
 	WHERE UserID = " . $LoggedUser['ID']);
-        list($FLS) = $DB->next_record();
-        if ((check_perms('users_mod') || $FLS != '') && (!$ForwardedID || $ForwardedID == $LoggedUser['ID'])) {
-        ?>
-            <form class="Box send_form Form-row" name="forward" action="inbox.php" method="post">
-                <div class="Box-body">
-                    <input type="hidden" name="action" value="forward" />
-                    <input type="hidden" name="convid" value="<?= $ConvID ?>" />
-                    <input type="hidden" name="auth" value="<?= $LoggedUser['AuthKey'] ?>" />
-                    <label for="receiverid"><?= t('server.inbox.forward_to') ?></label>
-                    <select class="Input" id="receiverid" name="receiverid">
-                        <?
-                        foreach ($StaffIDs as $StaffID => $StaffName) {
-                            if ($StaffID == $LoggedUser['ID'] || in_array($StaffID, $ReceiverIDs)) {
-                                continue;
-                            }
-                        ?>
-                            <option class="Select-option" value="<?= $StaffID ?>"><?= $StaffName ?></option>
-                        <?
-                        }
-                        ?>
-                    </select>
-                    <input class="Button" type="submit" value="Forward" />
-                </div>
-            </form>
-    </div>
-<?
-        }
+    list($FLS) = $DB->next_record();
+    if ((check_perms('users_mod') || $FLS != '') && (!$ForwardedID || $ForwardedID == $LoggedUser['ID'])) {
+    ?>
+        <form class="send_form Form-row" name="forward" action="inbox.php" method="post">
+            <input type="hidden" name="action" value="forward" />
+            <input type="hidden" name="convid" value="<?= $ConvID ?>" />
+            <input type="hidden" name="auth" value="<?= $LoggedUser['AuthKey'] ?>" />
+            <label for="receiverid"><?= t('server.inbox.forward_to') ?></label>
+            <select class="Input" id="receiverid" name="receiverid">
+                <?
+                foreach ($StaffIDs as $StaffID => $StaffName) {
+                    if ($StaffID == $LoggedUser['ID'] || in_array($StaffID, $ReceiverIDs)) {
+                        continue;
+                    }
+                ?>
+                    <option class="Select-option" value="<?= $StaffID ?>"><?= $StaffName ?></option>
+                <?
+                }
+                ?>
+            </select>
+            <input class="Button" type="submit" value="Forward" />
+        </form>
+    <?
+    }
 
-        //And we're done!
-?>
+    //And we're done!
+    ?>
 </div>
 <?
 View::show_footer();

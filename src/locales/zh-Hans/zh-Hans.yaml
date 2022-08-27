@@ -1363,8 +1363,6 @@ server.editioninfo.extras: |-
   额外内容
 server.editioninfo.features: |-
   特点
-server.editioninfo.medias: |-
-  媒体
 server.editioninfo.hdr10: |-
   HDR10
 server.editioninfo.hdr10plus: |-
@@ -7900,8 +7898,8 @@ server.country.romania: |-
   罗马尼亚
 server.country.rwanda: |-
   卢旺达
-server.country.russian_federation: |-
-  俄罗斯联邦
+server.country.russia: |-
+  俄罗斯
 server.country.saint_helena: |-
   圣赫勒拿
 server.country.saint_kitts-nevis: |-

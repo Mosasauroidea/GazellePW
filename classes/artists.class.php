@@ -206,8 +206,8 @@ class Artists {
         $Name = $Artist['Name'];
         $SubName = $Artist['SubName'];
         $Image = $Artist['Image'];
-        $Body = $Artist['Description'];
-        $MainBody = $Artist['MainDescription'];
+        $Body = db_string($Artist['Description']);
+        $MainBody = db_string($Artist['MainDescription']);
         $Birth = $Artist['Birthday'];
         $Place = $Artist['PlaceOfBirth'];
         $ArtistAliasList = $Artist['Alias'];
@@ -246,7 +246,7 @@ class Artists {
                 if (empty($OldArtist['MainBody']) && !empty($MainBody)) {
                     $Updates[] = "MainBody = '$MainBody'";
                 } else if (!empty($OldArtist['MainBody'])) {
-                    $Body = $OldArtist['MainBody'];
+                    $MainBody = $OldArtist['MainBody'];
                 }
                 if (!empty($Birth)) {
                     $Updates[] = "Birthday = '$Birth'";

@@ -78,7 +78,6 @@ switch ($Document) {
     case 'top10':
     case 'activity':
     case 'badges':
-    case 'ssp':
     case 'subtitles':
         $Valid = true;
         break;

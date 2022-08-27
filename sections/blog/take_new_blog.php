@@ -6,7 +6,6 @@ if (empty($_POST['title']) || empty($_POST['body'])) {
 }
 
 $ThreadID = !isset($_POST['thread']) || $_POST['thread'] === '' ? '' : max(0, intval($_POST['thread']));
-
 if ($ThreadID > 0) {
     $DB->prepared_query("
 		SELECT ForumID
@@ -23,6 +22,7 @@ if ($ThreadID > 0) {
 } else {
     $ThreadID = null;
 }
+var_dump($ThreadID);
 
 $Important = isset($_POST['important']) ? '1' : '0';
 $DB->prepared_query("

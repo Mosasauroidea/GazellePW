@@ -9,6 +9,7 @@ class Region {
 	private const mapping = [
 		'UK' => 'United Kingdom',
 		'USA' => 'United States',
+		'Russia' => 'Russian Federation',
 	];
 
 	private const keyMapping = [
@@ -192,7 +193,7 @@ class Region {
 		'reunion',
 		'romania',
 		'rwanda',
-		'russian_federation',
+		'russia',
 		'saint_helena',
 		'saint_kitts-nevis',
 		'saint_lucia',

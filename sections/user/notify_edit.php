@@ -141,7 +141,7 @@ View::show_header(t('server.user.manage_notifications'), 'jquery.validate,form_v
         <? if (!$NewFilter) { ?>
             <input type="hidden" name="id<?= $i ?>" value="<?= $N['ID'] ?>" />
         <?  } ?>
-        <table class="Table" <?= (!$NewFilter ? 'id="filter_' . $N['ID'] . '"' : '') ?>>
+        <table <?= (!$NewFilter ? 'id="filter_' . $N['ID'] . '"' : '') ?>>
             <tr class="Form-rowHeader">
                 <td>
                     <?
@@ -150,7 +150,7 @@ View::show_header(t('server.user.manage_notifications'), 'jquery.validate,form_v
                         <?= t('server.user.create_new_torrent_notify') ?>
                     <?
                     } else {
-                        echo page_title_conn(['server.torrents.edit_notification_filters', $N['Label']]);
+                        echo page_title_conn([t('server.torrents.edit_notification_filters'), $N['Label']]);
                     }
                     ?>
                 </td>

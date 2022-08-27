@@ -596,10 +596,6 @@ class TORRENT_FORM {
                                         <?= t('server.editioninfo.features') ?>:
                                         <? $this->genRemasterTags(EditionInfo::allEditionKey(EditionType::Feature), $RemasterTitle); ?>
                                     </div>
-                                    <div>
-                                        <?= t('server.editioninfo.medias') ?>:
-                                        <? $this->genRemasterTags(EditionInfo::allEditionKey(EditionType::Medias), $RemasterTitle); ?>
-                                    </div>
                                 </div>
                                 <div class="items">
                                     <div class="item">

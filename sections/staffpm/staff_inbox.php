@@ -110,19 +110,17 @@ $Row = 'a';
                 <span data-tooltip="This is the inbox where replies to Staff PMs you have sent are."><a href="staffpm.php?action=userinbox" class="brackets"><?= t('server.staffpm.personal_staff_inbox') ?></a></span>
             <?  } ?>
         </div>
+        <div class="BodyNavLinks">
+            <?= $Pages ?>
+        </div>
     </div>
-    <br />
-    <br />
-    <div class="BodyNavLinks">
-        <?= $Pages ?>
-    </div>
-    <div class="BoxBody" id="inbox">
+    <form class="BodyContent manage_form" name="staff_messages" method="post" action="staffpm.php" id="messageform">
         <?
 
         if (!$DB->has_results()) {
             // No messages
         ?>
-            <h2><?= t('server.staffpm.no_messages') ?></h2>
+            <div class="center"><?= t('server.staffpm.no_messages') ?></div>
             <?
 
         } else {
@@ -130,90 +128,88 @@ $Row = 'a';
             if ($ViewString != 'Resolved' && $IsStaff) {
                 // Open multiresolve form
             ?>
-                <form class="manage_form" name="staff_messages" method="post" action="staffpm.php" id="messageform">
-                    <input type="hidden" name="action" value="multiresolve" />
-                    <input type="hidden" name="view" value="<?= strtolower($View) ?>" />
-                <?
+                <input type="hidden" name="action" value="multiresolve" />
+                <input type="hidden" name="view" value="<?= strtolower($View) ?>" />
+            <?
             }
 
             // Table head
-                ?>
-                <div class="TableContainer">
-                    <table class="Table TableUserInbox <?= ($ViewString != 'Resolved' && $IsStaff) ? ' checkboxes' : '' ?>">
-                        <tr class="Table-rowHeader">
+            ?>
+            <div class="TableContainer">
+                <table class="Table TableUserInbox <?= ($ViewString != 'Resolved' && $IsStaff) ? ' checkboxes' : '' ?>">
+                    <tr class="Table-rowHeader">
+                        <? if ($ViewString != 'Resolved' && $IsStaff) { ?>
+                            <td class="Table-cell" width="10"><input type="checkbox" onclick="toggleChecks('messageform', this);" /></td>
+                        <?  } ?>
+                        <td class="Table-cell" width="50%"><?= t('server.staffpm.subject') ?></td>
+                        <td class="Table-cell"><?= t('server.staffpm.sender') ?></td>
+                        <td class="Table-cell"><?= t('server.staffpm.date') ?></td>
+                        <td class="Table-cell"><?= t('server.staffpm.assigned_to') ?></td>
+                        <td class="Table-cell"><?= t('server.staffpm.replies') ?></td>
+                        <? if ($ViewString == 'Resolved') { ?>
+                            <td class="Table-cell"><?= t('server.staffpm.resolved_by') ?></td>
+                        <?  } ?>
+                    </tr>
+                    <?
+
+                    // List messages
+                    while (list($ID, $Subject, $UserID, $Status, $Level, $AssignedToUser, $Date, $Unread, $NumReplies, $ResolverID) = $DB->next_record()) {
+                        //$UserInfo = Users::user_info($UserID);
+                        $UserStr = Users::format_username($UserID, true, true, true, true);
+
+                        // Get assigned
+                        if ($AssignedToUser == '') {
+                            // Assigned to class
+                            $Assigned = ($Level == 0) ? 'First Line Support' : $ClassLevels[$Level]['Name'];
+                            // No + on Sysops
+                            if ($Assigned != 'Sysop') {
+                                $Assigned .= '+';
+                            }
+                        } else {
+                            // Assigned to user
+                            // $UserInfo = Users::user_info($AssignedToUser);
+                            $Assigned = Users::format_username($AssignedToUser, true, true, true, true);
+                        }
+
+                        // Get resolver
+                        if ($ViewString == 'Resolved') {
+                            //$UserInfo = Users::user_info($ResolverID);
+                            $ResolverStr = Users::format_username($ResolverID, true, true, true, true);
+                        }
+
+                        // Table row
+                    ?>
+                        <tr class="Table-row">
                             <? if ($ViewString != 'Resolved' && $IsStaff) { ?>
-                                <td class="Table-cell" width="10"><input type="checkbox" onclick="toggleChecks('messageform', this);" /></td>
-                            <?  } ?>
-                            <td class="Table-cell" width="50%"><?= t('server.staffpm.subject') ?></td>
-                            <td class="Table-cell"><?= t('server.staffpm.sender') ?></td>
-                            <td class="Table-cell"><?= t('server.staffpm.date') ?></td>
-                            <td class="Table-cell"><?= t('server.staffpm.assigned_to') ?></td>
-                            <td class="Table-cell"><?= t('server.staffpm.replies') ?></td>
+                                <td class="Table-cell Table-cellCenter"><input type="checkbox" name="id[]" value="<?= $ID ?>" /></td>
+                            <?      } ?>
+                            <td class="Table-cell"><a href="staffpm.php?action=viewconv&amp;id=<?= $ID ?>"><?= display_str($Subject) ?></a></td>
+                            <td class="Table-cell"><?= $UserStr ?></td>
+                            <td class="Table-cell"><?= time_diff($Date, 2, true) ?></td>
+                            <td class="Table-cell"><?= $Assigned ?></td>
+                            <td class="Table-cell"><?= $NumReplies - 1 ?></td>
                             <? if ($ViewString == 'Resolved') { ?>
-                                <td class="Table-cell"><?= t('server.staffpm.resolved_by') ?></td>
-                            <?  } ?>
+                                <td class="Table-cell"><?= $ResolverStr ?></td>
+                            <?      } ?>
                         </tr>
-                        <?
+                    <?
 
-                        // List messages
-                        while (list($ID, $Subject, $UserID, $Status, $Level, $AssignedToUser, $Date, $Unread, $NumReplies, $ResolverID) = $DB->next_record()) {
-                            //$UserInfo = Users::user_info($UserID);
-                            $UserStr = Users::format_username($UserID, true, true, true, true);
+                        $DB->set_query_id($StaffPMs);
+                    } //while
 
-                            // Get assigned
-                            if ($AssignedToUser == '') {
-                                // Assigned to class
-                                $Assigned = ($Level == 0) ? 'First Line Support' : $ClassLevels[$Level]['Name'];
-                                // No + on Sysops
-                                if ($Assigned != 'Sysop') {
-                                    $Assigned .= '+';
-                                }
-                            } else {
-                                // Assigned to user
-                                // $UserInfo = Users::user_info($AssignedToUser);
-                                $Assigned = Users::format_username($AssignedToUser, true, true, true, true);
-                            }
-
-                            // Get resolver
-                            if ($ViewString == 'Resolved') {
-                                //$UserInfo = Users::user_info($ResolverID);
-                                $ResolverStr = Users::format_username($ResolverID, true, true, true, true);
-                            }
-
-                            // Table row
-                        ?>
-                            <tr class="Table-row">
-                                <? if ($ViewString != 'Resolved' && $IsStaff) { ?>
-                                    <td class="Table-cell Table-cellCenter"><input type="checkbox" name="id[]" value="<?= $ID ?>" /></td>
-                                <?      } ?>
-                                <td class="Table-cell"><a href="staffpm.php?action=viewconv&amp;id=<?= $ID ?>"><?= display_str($Subject) ?></a></td>
-                                <td class="Table-cell"><?= $UserStr ?></td>
-                                <td class="Table-cell"><?= time_diff($Date, 2, true) ?></td>
-                                <td class="Table-cell"><?= $Assigned ?></td>
-                                <td class="Table-cell"><?= $NumReplies - 1 ?></td>
-                                <? if ($ViewString == 'Resolved') { ?>
-                                    <td class="Table-cell"><?= $ResolverStr ?></td>
-                                <?      } ?>
-                            </tr>
-                        <?
-
-                            $DB->set_query_id($StaffPMs);
-                        } //while
-
-                        // Close table and multiresolve form
-                        ?>
-                    </table>
+                    // Close table and multiresolve form
+                    ?>
+                </table>
+            </div>
+            <? if ($ViewString != 'Resolved' && $IsStaff) { ?>
+                <div class="submit_div">
+                    <input class="Button" type="submit" value="Resolve selected" />
                 </div>
-                <? if ($ViewString != 'Resolved' && $IsStaff) { ?>
-                    <div class="submit_div">
-                        <input class="Button" type="submit" value="Resolve selected" />
-                    </div>
-                </form>
         <?
-                }
-            } //if (!$DB->has_results())
+            }
+        } //if (!$DB->has_results())
         ?>
-    </div>
+    </form>
     <div class="BodyNavLinks">
         <?= $Pages ?>
     </div>
