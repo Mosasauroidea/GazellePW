@@ -208,8 +208,8 @@ class Artists {
         $Image = $Artist['Image'];
         $Body = db_string($Artist['Description']);
         $MainBody = db_string($Artist['MainDescription']);
-        $Birth = $Artist['Birthday'];
-        $Place = $Artist['PlaceOfBirth'];
+        $Birth = db_string($Artist['Birthday']);
+        $Place = db_string($Artist['PlaceOfBirth']);
         $ArtistAliasList = $Artist['Alias'];
 
         $New = false;
