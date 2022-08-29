@@ -61,6 +61,7 @@ Where
   display: flex;
   gap: var(--global-space-sm);
   flex-wrap: wrap;
+  align-items: center;
 }
 
 /* body */
