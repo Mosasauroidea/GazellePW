@@ -46,12 +46,19 @@
 					<?= icon('BBCodeToolbar/comparison', 'BBCodeToolbar-icon') ?>
 				</button>
 			<? } ?>
-
-			<button type="button" class="BBCodeToolbar-button BBCodeToolbar-alignRight u-loading" onclick="globalapp.imgUploadFillBBCode('<?= $ID ?>', '.BBCodeToolbar-button.u-loading')">
-				<?= icon('BBCodeToolbar/cloudUpload', 'BBCodeToolbar-icon u-loading-a') ?>
-				<?= icon('loading', 'BBCodeToolbar-icon is-loading u-loading-b') ?>
+			<div class="BBCodeToolbar-alignRight">
+				<div class="BBCodeToolbar-uploadProgress" style="display:none">
+					<div class="BBCodeToolbar-uploadProgressText">
+					</div>
+					<div class="BBCodeToolbar-uploadProgressBarBorder">
+						<div class="BBCodeToolbar-uploadProgressBar" style="width: 0%;"></div>
+					</div>
+				</div>
+			</div>
+			<button type="button" onclick="$(this).next().click()" class=" BBCodeToolbar-button BBCodeToolbar-uploadButton">
+				<?= icon('BBCodeToolbar/cloudUpload', 'BBCodeToolbar-icon') ?>
 			</button>
-
+			<input class="BBCodeToolBar-imageUpload hidden Input" type="file" name="images[]" size="60" accept="image/gif,image/jpeg,image/jpg,image/png" multiple>
 			<button type="button" class="BBCodeToolbar-button u-bbcodePreview-button  button_preview_<?= $NID ?>" data-id="<?= $NID ?>">
 				<?= icon('BBCodeToolbar/eyeSlash', "hidden BBCodeToolbar-icon button_preview_.$NID") ?>
 				<?= icon('BBCodeToolbar/eye', "BBCodeToolbar-icon") ?>

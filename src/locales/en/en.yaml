@@ -1,3 +1,9 @@
+client.upload.copied: |-
+  Copied
+client.upload.uploading: |-
+  Uploading:
+client.upload.uploaded: |-
+  Uploaded
 client.bbcode.edit: |-
   Edit
 client.bbcode.loading: |-
@@ -2569,6 +2575,8 @@ server.reportsv2.all_reports_for_torrents_uploaded_by_user: |-
   All reports for torrents uploaded by user %s;
 server.reportsv2.all_the_old_smelly_reports: |-
   All the old smelly reports
+server.reportsv2.relevant_other_torrents: |-
+  Relevant other torrents
 server.reportsv2.all_torrents_reported_by: |-
   All torrents reported by %s
 server.reportsv2.all_torrents_reported_by_user: |-

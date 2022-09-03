@@ -2,6 +2,7 @@
 
 interface ImageStorage {
     public function upload($Name, $Content);
+    public function multi_upload($Datas);
 }
 
 /**
@@ -131,7 +132,7 @@ class ImageTools {
      * @return boolean
      */
     public static function valid_extension($Ext) {
-        //      return @self::$Extensions[$Ext] === true;
+        $Ext = strtolower($Ext);
         return !empty(self::$Extensions[$Ext]) && (self::$Extensions[$Ext] === true);
     }
 
@@ -282,5 +283,14 @@ class ImageTools {
             return "";
         }
         return self::$Provider->upload($Name, $data);
+    }
+
+    public static function multi_fetch_upload($Datas) {
+        $ContentDatas = [];
+        foreach ($Datas as $Data) {
+            $data = file_get_contents($Data['Url']);
+            $ContentDatas[] = ['Content' => $data, 'Name' => $Data['Name']];
+        }
+        return self::$Provider->multi_upload($ContentDatas);
     }
 }

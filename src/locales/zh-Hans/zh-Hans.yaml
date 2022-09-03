@@ -1,3 +1,9 @@
+client.upload.copied: |-
+  复制成功
+client.upload.uploading: |-
+  上传中：
+client.upload.uploaded: |-
+  上传完成
 client.bbcode.edit: |-
   编辑
 client.bbcode.loading: |-
@@ -2592,6 +2598,8 @@ server.reportsv2.multi_resolve_btn_title: |-
   采用各自的解决方案处理所有已勾选报告
 server.reportsv2.multi_resolve_title: |-
   通过批量处理按钮，所有已勾选报告都会被一次性处理掉
+server.reportsv2.relevant_other_torrents: |-
+  相关种子
 server.reportsv2.new_auto_assigned: |-
   新 (自动分配)
 server.reportsv2.new_reports_auto_assigned: |-

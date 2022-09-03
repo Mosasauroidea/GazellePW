@@ -61,6 +61,8 @@
     /* Button */
     --Button-default-border: 1px solid #464646;
     --Button-default-boxShadow: 0 0 5px 2px rgba(37, 37, 37, 0.07);
+    --Button-primary-background: var(--HeaderAnnounceItem-link-background);
+    --Button-primary-color: #000;
 
     /* Header */
     --Header-background: transparent;
@@ -132,6 +134,13 @@
     --Chart-gridLine: #434c56;
     --Chart-axisText: #768390;
     --Chart-axisLine: #434c56;
+
+    /* ProgressBar */
+    --ProgressBar-percent-color: #aaa;
+    --ProgressBar-background: #aaa;
+    --ProgressBar-onHover-background: #fff;
+    --ProgressBarBorder-border: 2px solid #aaa;
+    --ProgressBarBorder-onHover-border: 2px solid #fff;
   }
 }
 

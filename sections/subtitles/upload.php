@@ -31,7 +31,8 @@ function genSubcheckboxes($Labels, $Subtitles) {
 
 <div class="LayoutBody">
     <div class="BodyHeader">
-        <div id="subtitle_for_torrent_title" class="BodyHeader-nav"><?= t('server.subtitles.upload_a_subtitle') . ' > ' . $Title ?></div>
+        <div id="subtitle_for_torrent_title" class="BodyHeader-nav"><?= t('server.subtitles.upload_a_subtitle') ?></div>
+        <div><?= $Title ?></div>
     </div>
 
     <div class="BodyContent">

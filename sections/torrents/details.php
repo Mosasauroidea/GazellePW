@@ -1,5 +1,6 @@
 <?
 
+use Gazelle\Manager\Tag;
 use Gazelle\Torrent\TorrentSlot;
 use Gazelle\Torrent\TorrentSlotType;
 
@@ -41,7 +42,9 @@ $IMDBVote = $TorrentDetails['IMDBVote'];
 $DoubanVote = $TorrentDetails['DoubanVote'];
 $DoubanID  = $TorrentDetails['DoubanID'];
 $Name = $TorrentDetails['Name'];
-$RTTitle = empty($TorrentDetails['RTTitle']) ? str_replace(':', '', str_replace(' ', '_', strtolower($Name))) : $TorrentDetails['RTTitle'];
+
+$RTTitle = empty($TorrentDetails['RTTitle']) ? Torrents::sanitizeName(html_entity_decode($Name)) : $TorrentDetails['RTTitle'];
+
 $GroupName = (Lang::is_default() && !empty($TorrentDetails['SubName'])) ? $TorrentDetails['SubName'] : $TorrentDetails['Name'];
 $SubName = Lang::is_default() ? $TorrentDetails['Name'] : $TorrentDetails['SubName'];
 $GroupYear = $TorrentDetails['Year'];
@@ -757,7 +760,28 @@ View::show_header($Title, 'browse,comments,torrent,bbcode,recommend,cover_art,su
                         <tr class="TableTorrent-rowTitle Table-row releases_<?= $ReleaseType ?>  <?= $SnatchedGroupClass . $SnatchedTorrentClass ?>" id="torrent<?= $TorrentID ?>" group-id="<?= $GroupID ?>" edition-id="<?= $EditionID ?>" data-slot="<?= TorrentSlot::slot_name($Slot) ?>" data-source="<?= $Source ?>" data-codec="<?= $Codec ?>" data-container="<?= $Container ?>" data-resolution="<?= $Resolution ?>" data-processing="<?= $Processing ?>">
                             <td class="Table-cell">
                                 <div class="TableTorrent-title">
-                                    <div class="TableTorrent-titleCheck">
+                                    <span class="TableTorrent-titleActions">
+                                        [
+                                        <a href="torrents.php?action=download&amp;id=<?= $TorrentID ?>&amp;authkey=<?= $LoggedUser['AuthKey'] ?>&amp;torrent_pass=<?= $LoggedUser['torrent_pass'] ?>" data-tooltip="<?= t('server.common.download') ?>"><?= ($HasFile ? 'DL' : 'Missing') ?></a>
+                                        <? if ($CanUseToken) { ?>
+                                            |
+                                            <a href="torrents.php?action=download&amp;id=<?= $TorrentID ?>&amp;authkey=<?= $LoggedUser['AuthKey'] ?>&amp;torrent_pass=<?= $LoggedUser['torrent_pass'] ?>&amp;usetoken=1" data-tooltip="<?= t('server.common.use_fl_tokens') ?>" onclick="return confirm('<?= FL_confirmation_msg($Seeders, $Size) ?>');">FL</a>
+                                        <? } ?>
+                                        |
+                                        <a href="reportsv2.php?action=report&amp;id=<?= $TorrentID ?>" data-tooltip="<?= t('server.torrents.report') ?>">RP</a>
+                                        <? if ($CanEdit) { ?>
+                                            |
+                                            <a href="torrents.php?action=edit&amp;id=<?= $TorrentID ?>" data-tooltip="<?= t('server.common.edit') ?>">ED</a>
+                                        <? }
+                                        if ($CanDelete) { ?>
+                                            |
+                                            <a href="torrents.php?action=delete&amp;torrentid=<?= $TorrentID ?>" data-tooltip="<?= t('server.torrents.remove') ?>">RM</a>
+                                        <? } ?>
+                                        |
+                                        <a href="torrents.php?torrentid=<?= $TorrentID ?>" data-tooltip="<?= t('server.torrents.permalink') ?>">PL</a>
+                                        ]
+                                    </span>
+                                    <span class="TableTorrent-titleCheck">
                                         <?
                                         if ($CheckAllTorrents || ($CheckSelfTorrents && $UserID == $LoggedUser['ID'])) {
                                             if (!$CheckAllTorrents) {
@@ -787,34 +811,14 @@ View::show_header($Title, 'browse,comments,torrent,bbcode,recommend,cover_art,su
                                                 <?= icon("Table/" . ($TorrentChecked ? "checked" : "unchecked")) ?>
                                             </i>
                                         <? } ?>
-                                    </div>
+                                    </span>
                                     <a class="TableTorrent-titleTitle" data-tooltip-html href="#" onclick="globalapp.toggleTorrentDetail(event, '#torrent_detail_<?= $TorrentID ?>')">
                                         <?= $ExtraInfo; ?>
                                         <div data-tooltip-html-content>
                                             <div><?= t('server.torrents.' . TorrentSlot::slot_name($Slot) . '_slot') ?></div>
                                         </div>
                                     </a>
-                                    <span class="TableTorrent-titleActions">
-                                        [
-                                        <a href="torrents.php?action=download&amp;id=<?= $TorrentID ?>&amp;authkey=<?= $LoggedUser['AuthKey'] ?>&amp;torrent_pass=<?= $LoggedUser['torrent_pass'] ?>" data-tooltip="<?= t('server.common.download') ?>"><?= ($HasFile ? 'DL' : 'Missing') ?></a>
-                                        <? if ($CanUseToken) { ?>
-                                            |
-                                            <a href="torrents.php?action=download&amp;id=<?= $TorrentID ?>&amp;authkey=<?= $LoggedUser['AuthKey'] ?>&amp;torrent_pass=<?= $LoggedUser['torrent_pass'] ?>&amp;usetoken=1" data-tooltip="<?= t('server.common.use_fl_tokens') ?>" onclick="return confirm('<?= FL_confirmation_msg($Seeders, $Size) ?>');">FL</a>
-                                        <? } ?>
-                                        |
-                                        <a href="reportsv2.php?action=report&amp;id=<?= $TorrentID ?>" data-tooltip="<?= t('server.torrents.report') ?>">RP</a>
-                                        <? if ($CanEdit) { ?>
-                                            |
-                                            <a href="torrents.php?action=edit&amp;id=<?= $TorrentID ?>" data-tooltip="<?= t('server.common.edit') ?>">ED</a>
-                                        <? }
-                                        if ($CanDelete) { ?>
-                                            |
-                                            <a href="torrents.php?action=delete&amp;torrentid=<?= $TorrentID ?>" data-tooltip="<?= t('server.torrents.remove') ?>">RM</a>
-                                        <? } ?>
-                                        |
-                                        <a href="torrents.php?torrentid=<?= $TorrentID ?>" data-tooltip="<?= t('server.torrents.permalink') ?>">PL</a>
-                                        ]
-                                    </span>
+
                             </td>
                             <td class="TableTorrent-cellSize Table-cell TableTorrent-cellStat TableTorrent-cellStatSize"><?= Format::get_size($Size) ?></td>
                             <td class="TableTorrent-cellSnatches Table-cell TableTorrent-cellStat"><?= number_format($Snatched) ?></td>
@@ -864,8 +868,15 @@ View::show_header($Title, 'browse,comments,torrent,bbcode,recommend,cover_art,su
                                     <?= icon('torrent-size') ?>
                                 </span>
                             </td>
-                            <td class="TableTorrent-cellSlotName Table-cell">
+                            <td class="TableTorrent-cellSlotName Table-cell Table-cellRight">
                                 <span><?= t('server.torrents.slot_action') ?></span>
+                                <?
+                                if (check_perms("torrents_slot_edit")) {
+                                ?>
+                                    <a href="#" onclick="$('#slot').submit(); return false"> <?= t('server.apply.saved') ?></a>
+                                <?
+                                }
+                                ?>
                             </td>
                         </tr>
 
@@ -893,7 +904,7 @@ View::show_header($Title, 'browse,comments,torrent,bbcode,recommend,cover_art,su
                             if ($NewEdition) {
                                 $EditionID++;
                         ?>
-                                <tr class="TableTorrent-rowCategory Table-row" group-id="<?= $GroupID ?>">
+                                <tr class=" TableTorrent-rowCategory Table-row" group-id="<?= $GroupID ?>">
                                     <td class="TableTorrent-cellCategory Table-cell" colspan="3">
                                         <a class="u-toggleEdition-button" href="#" onclick="globalapp.toggleEdition(event, <?= $GroupID ?>, <?= $EditionID ?>)" data-tooltip="<?= t('server.common.collapse_this_edition_title') ?>">&minus;</a>
                                         <?= $NewEdition ?>
@@ -914,7 +925,7 @@ View::show_header($Title, 'browse,comments,torrent,bbcode,recommend,cover_art,su
                                 if (count($MissSlotNames) > 0) {
                                 ?>
                                     <tr class="TableTorrent-rowEmptySlotNote Table-row releases_<?= $ReleaseType ?>" group-id="<?= $GroupID ?>" edition-id="<?= $EditionID ?>">
-                                        <td class="TableTorrent-cellEmptySlotNote" colspan="3"><i><?= t('server.torrents.' . TorrentSlot::empty_slot_title(TorrentSlot::get_slot_resolution($Resolution))) ?></i><?= implode(' / ', $MissSlotNames) ?></td>
+                                        <td class="Table-cell TableTorrent-cellEmptySlotNote" colspan="3"><i><?= t('server.torrents.' . TorrentSlot::empty_slot_title(TorrentSlot::get_slot_resolution($Resolution))) ?></i><?= implode(' / ', $MissSlotNames) ?></td>
                                     </tr>
                                 <?
                                 }
@@ -939,7 +950,7 @@ View::show_header($Title, 'browse,comments,torrent,bbcode,recommend,cover_art,su
                                     <?
                                     if (check_perms("torrents_slot_edit")) {
                                     ?>
-                                        <td class="TableTorrent-cellSlotName Table-cell">
+                                        <td class="TableTorrent-cellSlotName Table-cellRight Table-cell">
                                             <input type="hidden" name="torrents[]" value="<?= $TorrentID ?>" />
                                             <select class="Input" name="slots[]">
                                                 <?
@@ -976,7 +987,7 @@ View::show_header($Title, 'browse,comments,torrent,bbcode,recommend,cover_art,su
                                             $SlotName .= '*';
                                         }
                                     ?>
-                                        <td class="TableTorrent-cellSlotName Table-cell"><?= $SlotName ?></td>
+                                        <td class="TableTorrent-cellSlotName Table-cellRight Table-cell"><?= $SlotName ?></td>
                                     <?
                                     }
                                     ?>
@@ -1003,15 +1014,7 @@ View::show_header($Title, 'browse,comments,torrent,bbcode,recommend,cover_art,su
                             $LastTorrent = $Torrent;
                         } ?>
 
-                        <?
-                        if (check_perms("torrents_slot_edit")) {
-                        ?>
-                            <tr class="submit_tr">
-                                <td colspan="3" class="center no_padding"><input class="Button" type="submit" /></td>
-                            </tr>
-                        <?
-                        }
-                        ?>
+
                     </table>
                 </div>
             </form>

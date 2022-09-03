@@ -157,7 +157,7 @@
   --Button-default-onHover-color: var(--global-onHover-color-onPrimary);
   --Button-default-onHover-boxShadow: var(--Button-default-boxShadow);
   --Button-default-onHover-border: var(--Button-default-border);
-  --Button-primary-background: var(--Button-default-background);
+  --Button-primary-background: var(--Header-background);
   --Button-primary-color: var(--Button-default-color);
   --Button-primary-border: var(--Button-default-border);
   --Button-primary-boxShadow: var(--Button-default-boxShadow);
@@ -241,6 +241,13 @@
   --Chart-gridLine: #d0d7de;
   --Chart-axisText: #57606a;
   --Chart-axisLine: #d0d7de;
+
+  /* ProgressBar */
+  --ProgressBar-percent-color: #004070;
+  --ProgressBar-background: #004070;
+  --ProgressBar-onHover-background: #1958bd;
+  --ProgressBarBorder-border: 2px solid #004070;
+  --ProgressBarBorder-onHover-border: 2px solid #1958bd;
 
   /* End */
   --global-zIndex-default: 10;

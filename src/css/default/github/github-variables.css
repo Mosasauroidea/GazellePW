@@ -173,6 +173,13 @@
   var(--color-canvas-inset);
   --TableTorrent-movieInfo-background:
   var(--color-canvas-subtle);
+
+  /* ProgressBar */
+  --ProgressBar-percent-color: #aaa;
+  --ProgressBar-background: #aaa;
+  --ProgressBar-onHover-background: #fff;
+  --ProgressBarBorder-border: 2px solid #aaa;
+  --ProgressBarBorder-onHover-border: 2px solid #fff;
 }
 
 :root {

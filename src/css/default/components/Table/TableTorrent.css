@@ -147,18 +147,21 @@ cell
 }
 
 /* Title */
-.TableTorrent-title {
-  display: flex;
-  gap: var(--global-space-sm);
-  align-items: center;
+.TableTorrent-titleCheck {
+  vertical-align: middle;
+  display: inline-flex;
 }
 .TableTorrent-titleCheck .icon {
   width: 13px;
   height: 13px;
 }
 .TableTorrent-titleActions {
-  margin-left: auto;
-  white-space: nowrap;
+  float: right;
+  margin-left: 10px;
+}
+
+.TableTorrent-titleCheck .TableTorrent-check {
+  vertical-align: middle;
 }
 
 /* Slot */

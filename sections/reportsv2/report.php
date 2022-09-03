@@ -28,7 +28,7 @@ View::show_header(t('server.reportsv2.report'), 'reportsv2,browse,torrent,bbcode
 
 <div class="LayoutBody">
     <div class="BodyHeader">
-        <h2 class="BodyHeader-nav"><?= page_title_conn([t('server.reportsv2.report'), $HeadTitle]) ?></h2>
+        <h2 class="BodyHeader-nav"><?= t('server.reportsv2.report') ?></h2>
     </div>
     <?
     $DetailOption = new DetailOption;

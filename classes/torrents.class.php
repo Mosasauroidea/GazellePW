@@ -1087,9 +1087,9 @@ WHERE ud.TorrentID=? AND ui.NotifyOnDeleteDownloaded='1' AND ud.UserID NOT IN ({
         $Ret = $GroupName . ' (' . $Year . ')';
         if ($Link) {
             $GroupID = $Group['ID'];
-            $Ret = "<a href='torrents.php?id=$GroupID'>$Ret</a>";
+            $Ret = "<a class='TorrentTitle-item' href='torrents.php?id=$GroupID'>$Ret</a>";
         }
-        return $Ret;
+        return "<span class='TorrentTitle-item'>$Ret</span>";
     }
     public static function torrent_name($Torrent, $WithLink = true, $WithMedia = true, $WithSize = true) {
         $Size = Format::get_size($Torrent['Size']);
@@ -1185,7 +1185,7 @@ WHERE ud.TorrentID=? AND ui.NotifyOnDeleteDownloaded='1' AND ud.UserID NOT IN ({
         if ($Link) {
             $TorrentInfo = "<a class='$Class' href='torrents.php?id=$GroupID&amp;torrentid=$TorrentID#torrent$TorrentID'>" . $TorrentInfo . "</a>";
         }
-        return Torrents::group_name($Group, $Link) . "&nbsp;&raquo;&nbsp;" . $TorrentInfo;
+        return Torrents::group_name($Group, $Link) . "<span class='TorrentTitle-item'>&nbsp;&raquo;&nbsp;</span>" . $TorrentInfo;
     }
 
     /**
@@ -1199,7 +1199,7 @@ WHERE ud.TorrentID=? AND ui.NotifyOnDeleteDownloaded='1' AND ud.UserID NOT IN ({
     public static function torrent_info($Data, $ShowMedia = true, $Option = []) {
         $Option = array_merge(['Self' => true, 'Class' => ''], $Option);
         $Info = array();
-        $Separator = '/';
+        $Separator = '<span class="TorrentTitle-item"> / </span>';
         if ($ShowMedia) {
             $Info = self::torrent_media_info($Data, true, $Option);
         }
@@ -1269,7 +1269,7 @@ WHERE ud.TorrentID=? AND ui.NotifyOnDeleteDownloaded='1' AND ud.UserID NOT IN ({
         if ($Option['SettingTorrentTitle']['ReleaseGroup']) {
             $ReleaseGroup = $Data['ReleaseGroup'] ?: self::release_group($Data);
             if ($ReleaseGroup) {
-                $Info[] = "<span class='TorrenTitle-item is-releaseGroup'>$ReleaseGroup</span>";
+                $Info[] = "<span class='TorrentTitle-item is-releaseGroup'>$ReleaseGroup</span>";
             }
         }
         if (
@@ -2049,5 +2049,25 @@ WHERE ud.TorrentID=? AND ui.NotifyOnDeleteDownloaded='1' AND ud.UserID NOT IN ({
             return 1;
         }
         return $Torrent['FreeTorrent'];
+    }
+    public static function sanitizeName($Name) {
+        return preg_replace(
+            '/_+/',
+            '_',         // remove doubled-up underscore 
+            trim(                                 // trim leading, trailing underscore 
+                preg_replace(
+                    '/[^a-z0-9_]+/',
+                    '', // remove non alphanum, underscore
+                    str_replace(
+                        [' ', '-'],
+                        '_',  // dash and internal space to underscore
+                        strtolower(               // lowercase
+                            trim($Name)            // whitespace
+                        )
+                    )
+                ),
+                '.' // trim-a-dot
+            )
+        );
     }
 }

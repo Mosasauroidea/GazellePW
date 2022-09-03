@@ -1,29 +1,75 @@
-.ImageHost {
-  display: flex;
-  flex-direcion: column;
-  align-items: center;
-  gap: var(--global-space-default);
-}
-
 .ImageHost-dropArea {
-  width: 500px;
-  height: 200px;
+  width: 100%;
   display: flex;
-  align-items: center;
-  justify-content: center;
+  min-height: 250px;
+  align-items: flex-start;
+  justify-content: flex-start;
   border: var(--Box-border);
   border-style: dashed;
   border-width: 5px;
-  borderradiuis: var(--global-borderRadius);
+  border-radius: var(--global-borderRadius);
+  flex-direction: column;
+  gap: var(--global-space-default);
+  padding: var(--global-space-default);
 }
 
-.ImageHost-Result {
+.ImageHost-imageContainer {
+  gap: var(--global-space-default);
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.ImageHost-imageItem {
+  max-width: 180px;
+  max-height: 180px;
+  cursor: pointer;
+}
+
+.ImageHost-actions {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: var(--global-space-default);
+  margin-top: auto;
+}
+
+.ImageHost-progress {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: var(--global-space-default);
+  flex-direction: column;
+}
+
+.ImageHost-text {
+  font-weight: bold;
+}
+
+.ImageHost-progressBarBorder {
+  border: var(--ProgressBarBorder-border);
+  border-radius: var(--global-borderRadius);
+  padding: 2px;
+  width: 100%;
+  height: 15px;
+}
+
+.ImageHost-progressBar {
+  background: var(--HeaderDonate-progressBar-background);
+  height: 100%;
+}
+
+.ImageHost-body {
   display: flex;
   gap: var(--global-space-default);
+  justify-content: center;
+  align-items: stretch;
 }
 
-.ImageHost-Result .icon {
-  cursor: pointer;
-  width: 24px;
-  height: 24px;
+#image_host_body_bbcode {
+  width: 53%;
+}
+#image_host_body_link {
+  width: 47%;
 }

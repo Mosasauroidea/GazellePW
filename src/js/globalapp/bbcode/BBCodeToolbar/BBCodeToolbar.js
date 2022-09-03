@@ -21,12 +21,72 @@ export default class BBCodeToolbar {
       }
       commands[cmdName].exec(this)
     })
-
     for (const cmd of Object.values(commands)) {
       if (cmd.hotkey) {
         this.bindHotKey(cmd.hotkey, () => cmd.exec(this))
       }
     }
+    this.registerUploadTool()
+  }
+
+  registerUploadTool() {
+    const progressBar = $(this.toolbarEl).find('.BBCodeToolbar-uploadProgressBar')
+    const progress = $(this.toolbarEl).find('.BBCodeToolbar-uploadProgress')
+    const progressText = $(this.toolbarEl).find('.BBCodeToolbar-uploadProgressText')
+    const input = $(this.toolbarEl).find('.BBCodeToolBar-imageUpload')
+    const button = $(this.toolbarEl).find('.BBCodeToolbar-uploadButton')
+    const textarea = this.textareaEl
+    const replacedName = '{{ IMAGE }}'
+    const threshold = 90
+    input.fileupload({
+      dataType: 'json',
+      loadImageMaxFileSize: 52428800,
+      imageMaxWidth: 7680,
+      imageMaxHeight: 4320,
+      singleFileUploads: false,
+      acceptFileTypes: /(\.|\/)(gif|jpe?g|png)$/i,
+      maxFileSize: 52428800,
+      dropZone: $(this.textareaEl),
+      pasteZone: $(this.textareaEl),
+      url: 'upload.php?action=imgupload',
+      progressall: function (e, data) {
+        var progress = parseInt((data.loaded / data.total) * 100, 10)
+        if (progress > threshold) {
+          progress = threshold
+        }
+        progressBar.css('width', progress + '%')
+        progressText.text(t('client.upload.uploading') + progress + '%')
+      },
+      formData: input.serializeArray(),
+      add: function (e, data) {
+        data.submit()
+        progress.show()
+        button.prop('disabled', true)
+        textarea.value = textarea.value + replacedName
+      },
+      done: function (e, data) {
+        if (data.result.error) {
+          progressText.text(data.result.error)
+          textarea.value = textarea.value.replace(replacedName, '')
+        } else {
+          let newText = ''
+          data.result.files.forEach((file, index) => {
+            newText += '[img]' + file.name + '[/img]\n'
+          })
+          textarea.value = textarea.value.replace(replacedName, newText)
+          progressText.text(t('client.upload.uploaded'))
+          progressBar.css('width', '100%')
+        }
+        progress.fadeOut(5000)
+        button.prop('disabled', false)
+      },
+      fail: function (e) {
+        textarea.value = textarea.value.replace(replacedName, '')
+        button.prop('disabled', false)
+        progressText.text('Unknown error')
+        progress.fadeOut(5000)
+      },
+    })
   }
 
   surroundSelectedText(before, after, type) {

@@ -1,15 +1,30 @@
 <?
-if (empty($_FILES['file'])) {
-    error('invalid request');
+if (empty($_FILES['images'])) {
+    ajax_json_error('invalid request');
 }
 
-$temp = explode(".", $_FILES["file"]["name"]);
-$extension = end($temp);        // 获取文件后缀名
-if (!ImageTools::valid_extension($extension)) {
-    error('invalid ext');
-}
+$names = $_FILES["images"]['name'];
+$tmp_names = $_FILES["images"]['tmp_name'];
+
 $user_id = $LoggedUser['ID'];
-
-$path = 'user/' . $user_id . '/' . date('Ymd', time()) . '/' . uniqid() . '.' . $extension;
-$RetPath = ImageTools::fetch_upload($path, $_FILES["file"]["tmp_name"]);
-echo json_encode(['name' => $RetPath]);
+$Data = [];
+for ($i = 0; $i < count($names); $i += 1) {
+    $name = $names[$i];
+    $tmp_name = $tmp_names[$i];
+    $extension = strtolower(end(explode(".", $name)));        // 获取文件后缀名
+    if (!ImageTools::valid_extension($extension)) {
+        ajax_json_error("Invalid ext: $extension");
+    }
+    $path = 'user/' . $user_id . '/' . date('Ymd', time()) . '/' . uniqid() . '.' . $extension;
+    $Data[] = ['Url' => $tmp_name, 'Name' => $path];
+}
+try {
+    $RetPath = ImageTools::multi_fetch_upload($Data);
+} catch (Exception $e) {
+    ajax_json_error($e->getMessage());
+}
+$Ret = [];
+foreach ($RetPath as $RetName) {
+    $Ret[] = ['name' => $RetName];
+}
+echo json_encode(['files' => $Ret]);

@@ -4,12 +4,8 @@ TorrentTitle TorrentTitle--standalone   # settings - torrent title
 */
 
 .TorrentTitle {
-  display: inline-flex;
-  align-items: center;
-  flex-wrap: wrap;
-  white-space: pre-wrap;
-  column-gap: 5px;
   line-height: 1.2;
+  vertical-align: middle;
 }
 .TableTorrent.is-alternative .TorrentTitle {
   font-family: var(--global-fontFamilyMonospace);
@@ -17,13 +13,38 @@ TorrentTitle TorrentTitle--standalone   # settings - torrent title
 
 /* item */
 .TorrentTitle-item.bg {
-  background-color: #0055ff;
   color: #fff;
   padding: 1px 3.5px;
   display: inline-block;
   font-size: 0.8em;
   border-radius: 3px;
 }
+
+.TorrentTitle-item {
+  vertical-align: middle;
+  margin: 3px 0px;
+}
+
+.TorrentTitle-item.torrent_discount.free {
+  background-color: #0055ff;
+}
+
+.TorrentTitle-item.torrent_discount.three_fourth_off {
+  background-color: #622ca8;
+}
+
+.TorrentTitle-item.torrent_discount.two_fourth_off {
+  background-color: #8d4b44;
+}
+
+.TorrentTitle-item.torrent_discount.one_fourth_off {
+  background-color: #3e6e7b;
+}
+
+.TorrentTitle-item.torrent_discount.neutral {
+  background-color: #55666f;
+}
+
 .TorrentTitle-item.bg:is(.tl_buy, .tl_diy) {
   background-color: #d46d3d;
 }

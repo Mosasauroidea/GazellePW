@@ -1127,7 +1127,7 @@ echo $Val->GenerateJS('userform');
                                 <?= t('server.user.st_2fa_note1') ?> <strong class="<?= $TwoFAKey ? 'u-colorSuccess' : 'u-colorWarning'; ?>"><?= $TwoFAKey ? t('server.user.st_2fa_enabled') : t('server.user.st_2fa_disabled'); ?></strong>
                             </div>
                             <div>
-                                <a class="Link" href="user.php?action=2fa&do=<?= $TwoFAKey ? 'disable' : 'enable'; ?>&userid=<?= G::$LoggedUser['ID'] ?>"><?= t('server.user.st_2fa_note3') . ($TwoFAKey ? t('server.user.st_2fa_disable') : t('server.user.st_2fa_enable')) . t('server.user.st_2fa_after') ?></a>
+                                <a class="Link" href="user.php?action=2fa&do=<?= $TwoFAKey ? 'disable' : 'enable'; ?>&userid=<?= $UserID ?>"><?= t('server.user.st_2fa_note3') . ($TwoFAKey ? t('server.user.st_2fa_disable') : t('server.user.st_2fa_enable')) . t('server.user.st_2fa_after') ?></a>
                             </div>
                         </td>
                     </tr>

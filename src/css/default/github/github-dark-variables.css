@@ -16,8 +16,8 @@
     padding: inherit;
   }
   :root {
-    --global-fontFamily: -apple-system, BlinkMacSystemFont, 'Segoe UI',
-      Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji';
+    --global-fontFamily: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif,
+      'Apple Color Emoji', 'Segoe UI Emoji';
     --global-fontSize-desktop: 16px;
     --global-fontSize-mobile: 14px;
     --global-fontSize-sm: 0.875rem;
@@ -50,8 +50,7 @@
     --Button-default-background: var(--color-btn-bg);
     --Button-default-color: var(--color-btn-text);
     --Button-default-border: 1px solid var(--color-btn-border);
-    --Button-default-boxShadow: var(--color-btn-shadow),
-      var(--color-btn-inset-shadow);
+    --Button-default-boxShadow: var(--color-btn-shadow), var(--color-btn-inset-shadow);
     --Button-default-onHover-background: var(--color-btn-hover-bg);
     --Button-default-onHover-color: var(--Button-default-color);
     --Button-default-onHover-boxShadow: var(--Button-default-boxShadow);
@@ -59,8 +58,7 @@
     --Button-primary-background: var(--color-btn-primary-bg);
     --Button-primary-color: var(--color-btn-primary-text);
     --Button-primary-border: var(--color-btn-primary-border);
-    --Button-primary-boxShadow: var(--color-btn-primary-shadow),
-      var(--color-btn-primary-inset-shadow);
+    --Button-primary-boxShadow: var(--color-btn-primary-shadow), var(--color-btn-primary-inset-shadow);
     --Button-primary-onHover-background: var(--color-btn-primary-hover-bg);
     --Button-primary-onHover-color: var(--Button-primary-color);
     --Button-primary-onHover-border: var(--color-btn-primary-hover-border);
@@ -119,5 +117,12 @@
     /* Table */
     --TableTorrent-category-background: var(--color-canvas-inset);
     --TableTorrent-movieInfo-background: var(--color-canvas-subtle);
+
+    /* ProgressBar */
+    --ProgressBar-percent-color: #aaa;
+    --ProgressBar-background: #aaa;
+    --ProgressBar-onHover-background: #fff;
+    --ProgressBarBorder-border: 2px solid #aaa;
+    --ProgressBarBorder-onHover-border: 2px solid #fff;
   }
 }

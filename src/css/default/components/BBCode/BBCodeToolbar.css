@@ -63,3 +63,24 @@ BBCodeToolbar
   border-radius: var(--global-borderRadius);
   margin-bottom: var(--global-space-sm);
 }
+
+.BBCodeToolbar-uploadProgressBarBorder {
+  border: var(--ProgressBarBorder-border);
+  border-radius: var(--global-borderRadius);
+  padding: 2px;
+  width: 100px;
+  height: 15px;
+}
+
+.BBCodeToolbar-uploadProgressBar {
+  background: var(--HeaderDonate-progressBar-background);
+  height: 100%;
+}
+
+.BBCodeToolbar-uploadProgress {
+  display: flex;
+  gap: var(--global-space-default);
+  justify-content: center;
+  align-items: center;
+  padding-right: 10px;
+}

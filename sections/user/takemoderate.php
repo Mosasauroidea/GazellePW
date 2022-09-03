@@ -835,12 +835,16 @@ if ($DeleteKeys) {
 
 $Summary = '';
 // Create edit summary
-if ($EditSummary) {
-    $Summary = implode(', ', $EditSummary) . ' by ' . $LoggedUser['Username'];
-    $Summary = sqltime() . ' - ' . ucfirst($Summary);
+if ($EditSummary || $Reason) {
+    if ($EditSummary) {
+        $Summary = implode(', ', $EditSummary) . ' by ' . $LoggedUser['Username'];
+        $Summary = sqltime() . ' - ' . ucfirst($Summary);
 
-    if ($Reason) {
-        $Summary .= "\nReason: $Reason";
+        if ($Reason) {
+            $Summary .= "\nReason: $Reason";
+        }
+    } else {
+        $Summary .=  sqltime() . ' - ' . "Comment: " . $Reason . " by " . $LoggedUser['Username'];
     }
     $AdminComment = $Cur['AdminComment'];
     $Summary .= "\n\n$AdminComment";

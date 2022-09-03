@@ -192,6 +192,24 @@ function render_item($Idx, $Report) {
                             </tr>
                         <? } ?>
                         <?
+                        if ($ExtraIDs) {
+                        ?>
+                            <tr class="Form-row">
+                                <td class="Form-label Table-cellRight"><?= t('server.reportsv2.relevant_other_torrents') ?>:</td>
+                                <td class="Form-items">
+                                    <?
+                                    $Extras = explode(' ', $ExtraIDs);
+                                    $Value = '';
+                                    foreach ($Extras as $ExtraID) {
+                                        $Value = site_url() . "torrents.php?torrentid=$ExtraID ";
+                                    ?>
+                                        <a href="<?= $Value ?>"><?= $Value ?></a>
+                                    <?
+                                    } ?>
+                                </td>
+                            </tr>
+                            <?
+                        }
                         if ($GroupID) {
                             $DB->query(
                                 "select ft.id, body
@@ -204,7 +222,7 @@ function render_item($Idx, $Report) {
                             //[quote=Comments]两位艺人应该分开，已经单独添加，申请删除合并[/quote]
                             if ($DB->has_results()) {
                                 $EditTopics = $DB->to_array();
-                        ?>
+                            ?>
                                 <tr class="Form-row">
                                     <td class="Form-label Table-cellRight"><?= t('server.reportsv2.edit_request_about_this_torrent') ?>:</td>
                                     <td class="Form-items">
@@ -356,18 +374,7 @@ function render_item($Idx, $Report) {
                             <tr class="Form-row">
                                 <td class="Form-label Table-cellRight"><strong><?= t('server.reportsv2.extra') ?></strong> <?= t('server.reportsv2.space_log_message') ?>:</td>
                                 <td class="Form-inputs">
-                                    <input style="width:unset" class="Input" type="text" name="log_message" id="log_message<?= $ReportID ?>" size="40" <?
-                                                                                                                                                        if ($ExtraIDs) {
-                                                                                                                                                            $Extras = explode(' ', $ExtraIDs);
-                                                                                                                                                            $Value = '';
-                                                                                                                                                            foreach ($Extras as $ExtraID) {
-                                                                                                                                                                $Value .= site_url() . "torrents.php?torrentid=$ExtraID ";
-                                                                                                                                                            }
-                                                                                                                                                            echo ' value="' . trim($Value) . '"';
-                                                                                                                                                        } elseif (isset($ReportType['extra_log'])) {
-                                                                                                                                                            printf(' value="%s"', $ReportType['extra_log']);
-                                                                                                                                                        } ?> />
-                                    <div>
+                                    <input style="width:unset" class="Input" type="text" name="log_message" id="log_message<?= $ReportID ?>" size="40" value="<?= $ReportType['extra_log'] ?>" />
                                 </td>
                             </tr>
                             <tr class="Form-row">
