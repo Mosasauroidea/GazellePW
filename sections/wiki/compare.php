@@ -90,7 +90,7 @@ if ($Edit > $LoggedUser['EffectiveClass']) {
     error(404);
 }
 
-View::show_header('Compare Article Revisions', '', 'PageWikiCompare');
+View::show_header(t('server.wiki.compare') .  $Title . t('server.wiki.revisions'), '', 'PageWikiCompare');
 $Diff2 = get_body($ArticleID, $_GET['new']);
 $Diff1 = get_body($ArticleID, $_GET['old']);
 ?>

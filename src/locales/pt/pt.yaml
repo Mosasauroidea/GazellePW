@@ -245,7 +245,7 @@ server.apply.resolved_applications: |-
 server.apply.role: |-
   Funções
 server.apply.role_created_by: |-
-  Função criada %s por %s %s.
+  Criada por %s
 server.apply.role_created_by_4: |-
   última modificação&nbsp;
 server.apply.role_title: |-
@@ -399,7 +399,7 @@ server.artist.request_name: |-
 server.artist.revert: |-
   Reverter para esta revisão
 server.artist.revision_history: |-
-  Histórico de revisões para %s
+  Histórico de revisões
 server.artist.similar_artist_cloud: |-
   Nuvem de Artista Similar
 server.artist.similar_artist_map: |-

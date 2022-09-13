@@ -35,15 +35,7 @@
   margin: 0;
   width: 100%;
 }
-#forums
-  #thread_notes
-  + a
-  + form
-  > #thread_notes_table
-  > tbody
-  > tr:last-child
-  > td
-  #topic_notes {
+#forums #thread_notes + a + form > #thread_notes_table > tbody > tr:last-child > td #topic_notes {
   margin-bottom: 1rem !important;
   width: 100% !important;
 }
@@ -55,12 +47,7 @@
   width: 20%;
   text-align: right;
 }
-#forums
-  form.search_form
-  > table.layout
-  > tbody
-  > tr
-  > td:first-child[colspan='2'] {
+#forums form.search_form > table.layout > tbody > tr > td:first-child[colspan='2'] {
   text-align: center;
 }
 #forums #searchthread form.search_form > table.layout.border > tbody {
@@ -71,21 +58,11 @@
   grid-template-columns: 1fr 40% 1fr;
   align-items: center;
 }
-#forums
-  #searchthread
-  form.search_form
-  > table.layout.border
-  tr
-  > td:first-child {
+#forums #searchthread form.search_form > table.layout.border tr > td:first-child {
   width: 100%;
   text-align: right;
 }
-#forums
-  #searchthread
-  form.search_form
-  > table.layout.border
-  tr
-  > td:first-child:last-child {
+#forums #searchthread form.search_form > table.layout.border tr > td:first-child:last-child {
   grid-column: 1 / 4;
   text-align: center;
 }
@@ -111,8 +88,21 @@ form.edit_form      -> 编辑主题
 
 #forums .TableForumPostHeader-like {
   color: var(--global-color-rewardButton);
+  display: flex;
+  align-items: center;
 }
 
 #forums .TableForumPostHeader-like .icon {
   color: var(--global-color-rewardButton);
+}
+
+.TableForum-jumpToLastRead {
+  color: var(--global-color);
+}
+
+.TableForumPostBody-actionReward {
+  display: flex;
+  gap: var(--global-space-sm);
+  align-items: center;
+  padding-top: 3px;
 }

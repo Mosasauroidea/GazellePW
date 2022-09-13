@@ -155,7 +155,7 @@ if ($Type != "rescore" && $Type != "lossyapproval" && $Type != "upload_contest" 
 		LEFT JOIN users_info AS ui ON ui.UserID = t.UserID
 	WHERE t.ID = '$TorrentID' and ui.ReportedAlerts = '1'");
     if ($DB->has_results()) {
-        $Data = $DB->next_record(MYSQLI_ASSOC, false);
+        $Data = G::$DB->next_record(MYSQLI_ASSOC);
         list(
             $UserID, $GroupID, $Size, $InfoHash, $Name, $SubName, $Year, $Time, $Source, $Codec, $Container, $Resolution,
             $RemasterTitle, $RemasterYear

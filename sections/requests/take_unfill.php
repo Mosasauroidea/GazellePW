@@ -20,8 +20,13 @@ $DB->query("
 	FROM requests AS r
 		LEFT JOIN users_main AS u ON u.ID = FillerID
 	WHERE r.ID = $RequestID");
-list($CategoryID, $UserID, $FillerID, $Title, $Uploaded, $GroupID) = $DB->next_record();
-
+$Request = Requests::get_request($RequestID);
+$FullName = Torrents::group_name($Request, false);
+$CategoryID = $Request['CategoryID'];
+$UserID = $Request['UserID'];
+$FillerID = $Request['FillerID'];
+$Uploaded = $Request['Uploaded'];
+$GruopID = $Request['GroupID'];
 if ((($LoggedUser['ID'] !== $UserID && $LoggedUser['ID'] !== $FillerID) && !check_perms('site_moderate_requests')) || $FillerID === '0') {
 	error(403);
 }
@@ -37,8 +42,6 @@ $DB->query("
 
 $CategoryName = $Categories[$CategoryID - 1];
 
-
-$FullName = $Title;
 
 $RequestVotes = Requests::get_votes_array($RequestID);
 
@@ -59,7 +62,17 @@ if ($RequestVotes['TotalBounty'] > $Uploaded) {
 		WHERE ID = $FillerID");
 }
 $FillerLang = Lang::getUserLang($FillerID);
-Misc::send_pm($FillerID, 0, t('server.inbox.request_filled_unfilled', ['Values' => [$FillerLang]]), t('server.inbox.the_request_url', ['Values' => [$FillerLang]]) . site_url() . "requests.php?action=view&amp;id=$RequestID]$FullName" . t('server.inbox.url_was_unfilled_by_url', ['Values' => [$FillerLang]]) . site_url() . 'user.php?id=' . $LoggedUser['ID'] . ']' . $LoggedUser['Username'] . t('server.inbox.url_for_the_reason_quote', ['Values' => [$FillerLang]]) . $_POST['reason'] . t('server.inbox.quote_if_disagree_unfill_please_url', ['Values' => [$FillerLang]]) . site_url() . "reports.php?action=report&amp;type=request&amp;id=" . $RequestID . t('server.inbox.report_request_and_explain', ['Values' => [$FillerLang]]));
+Misc::send_pm_with_tpl(
+	$FillerID,
+	'request_filled_unfilled',
+	[
+		'RequestID' => $RequestID,
+		'FullName' => $FullName,
+		'Reason' => $_POST['reason'],
+		'LoggedUserID' =>  $LoggedUser['ID'],
+		'LoggedUserUsername' =>  $LoggedUser['Username'],
+	]
+);
 
 $Cache->delete_value("user_stats_$FillerID");
 

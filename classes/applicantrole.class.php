@@ -159,7 +159,7 @@ class ApplicantRole {
 				ORDER BY r.Title
 			");
             $list = [];
-            while (($row = G::$DB->next_record(MYSQLI_ASSOC))) {
+            while (($row = G::$DB->next_record(MYSQLI_ASSOC, false))) {
                 $list[$row['role']] = [
                     'id'          => $row['role_id'],
                     'published'   => $row['Published'] ? 1 : 0,

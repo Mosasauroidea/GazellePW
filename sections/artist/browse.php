@@ -266,10 +266,15 @@ $TorrentDisplayList = ob_get_clean();
 
 // Comments (must be loaded before View::show_header so that subscriptions and quote notifications are handled properly)
 list($NumComments, $Page, $Thread, $LastRead) = Comments::load('artist', $ArtistID);
-View::show_header(($SubName ? '[' . $SubName . '] ' : '') . $Name, 'browse,bbcode,comments,voting,recommend,subscriptions', 'PageArtistHome');
+
+$ArtistHeaderName = Artists::display_artist(['Name' => $Name, 'SubName' => $SubName], false);
+View::show_header($ArtistHeaderName, 'browse,bbcode,comments,voting,recommend,subscriptions', 'PageArtistHome');
 ?>
 <div class="LayoutBody">
     <div class="BodyHeader">
+        <div class="BodyHeader-nav">
+            <?= t('server.common.artists') ?>
+        </div>
         <div class="BodyNavLinks">
             <? if (check_perms('site_edit_wiki')) { ?>
                 <a href="artist.php?action=edit&amp;artistid=<?= $ArtistID ?>" class="brackets"><?= t('server.common.edit') ?></a>
@@ -301,8 +306,14 @@ View::show_header(($SubName ? '[' . $SubName . '] ' : '') . $Name, 'browse,bbcod
             <?  } else { ?>
                 <a href="#" id="bookmarklink_artist_<?= $ArtistID ?>" onclick="Bookmark('artist', <?= $ArtistID ?>, '<?= t('server.common.remove_bookmark') ?>'); return false;" class="brackets"><?= t('server.common.add_bookmark') ?></a>
             <?  } ?>
-            <a href="#" id="subscribelink_artist<?= $ArtistID ?>" class="brackets" onclick="SubscribeComments('artist', <?= $ArtistID ?>);return false;"><?= Subscriptions::has_subscribed_comments('artist', $ArtistID) !== false ? t('server.torrents.unsubscribe') : t('server.torrents.subscribe') ?></a>
-            <!--    <a href="#" id="recommend" class="brackets">Recommend</a> -->
+            <?
+            if (Subscriptions::has_subscribed_comments('artist', $ArtistID) !== false) {
+            ?>
+                <a href="#" id="subscribelink_artist<?= $ArtistID ?>" class="brackets" onclick="SubscribeComments('artist', <?= $ArtistID ?>, '<?= t('server.torrents.subscribe') ?>');return false;"><?= t('server.torrents.unsubscribe') ?></a>
+            <?
+            } else { ?>
+                <a href="#" id="subscribelink_artist<?= $ArtistID ?>" class="brackets" onclick="SubscribeComments('artist', <?= $ArtistID ?>,  '<?= t('server.torrents.unsubscribe') ?>');return false;"><?= t('server.torrents.subscribe') ?></a>
+            <? } ?>
 
             <a href="artist.php?action=history&amp;artistid=<?= $ArtistID ?>" class="brackets"><?= t('server.artist.viewhistory') ?></a>
             <? if ($RevisionID && check_perms('site_edit_wiki')) { ?>
@@ -535,13 +546,13 @@ View::show_header(($SubName ? '[' . $SubName . '] ' : '') . $Name, 'browse,bbcod
         if ($NumRequests > 0) {
 
         ?>
-            <div class="Post" id="requests">
-                <div class="Post-header">
-                    <div class="Post-headerTitle">
+            <div class="Box is-noBorder" id="requests">
+                <div class="Box-header">
+                    <div class="Box-headerTitle">
                         <?= t('server.common.requests') ?>
                     </div>
                 </div>
-                <div class="Post-body">
+                <div class="Box-body">
                     <div class="TableContainer">
                         <table class="TableRequest Table" cellpadding="6" cellspacing="1" border="0" width="100%">
                             <tr class="Table-rowHeader">
@@ -601,22 +612,22 @@ View::show_header(($SubName ? '[' . $SubName . '] ' : '') . $Name, 'browse,bbcod
         foreach ($TorrentGroups as $ReleaseType => $GroupInfo) {
             $DisplayName = sectionTitle($ReleaseType);
         ?>
-            <div class="Post">
-                <div class="Post-header">
-                    <div class="Post-headerLeft">
-                        <div class="Post-headerTitle">
+            <div class="Box is-noBorder">
+                <div class="Box-header">
+                    <div class="Box-headerLeft">
+                        <div class="Box-headerTitle">
                             <div id="torrents_<?= $ReleaseType ?>">
                                 <?= $DisplayName ?>
                             </div>
                         </div>
                     </div>
-                    <div class="Post-headerActions">
+                    <div class="Box-headerActions">
                         <a href="#" onclick="$('.torrent_table_<?= $ReleaseType ?>').gtoggle(true); return false;">
                             <?= t('server.artist.view') ?>
                         </a>
                     </div>
                 </div>
-                <div class="Post-body torrent_table_<?= $ReleaseType ?>" id="torrent_table_<?= $ID ?>">
+                <div class="Box-body torrent_table_<?= $ReleaseType ?>" id="torrent_table_<?= $ID ?>">
                     <?
                     $tableRender = new TorrentGroupCoverTableView($GroupInfo);
                     $tableRender->render();

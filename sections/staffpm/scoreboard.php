@@ -71,11 +71,11 @@ View::show_header('Staff Inbox', 'PageStaffPMScoreboard');
         $DB->prepared_query($BaseSQL, 1, 1, $LoggedUser['Class'], ...$SupportStaff);
         $Results = $DB->to_array();
         ?>
-        <div class="Post">
-            <div class="Post-header">
-                <div class="Post-headerTitle">Inbox actions in the last 24 hours</div>
+        <div class="Box is-noBorder">
+            <div class="Box-header">
+                <div class="Box-headerTitle">Inbox actions in the last 24 hours</div>
             </div>
-            <div class="Post-body">
+            <div class="Box-body">
                 <table class="Table">
                     <tr class="Table-rowHeader">
                         <td class="Table-cell">Username</td>
@@ -99,11 +99,11 @@ View::show_header('Staff Inbox', 'PageStaffPMScoreboard');
         $DB->prepared_query($BaseSQL, 7, 7, $LoggedUser['Class'], ...$SupportStaff);
         $Results = $DB->to_array();
         ?>
-        <div class="Post">
-            <div class="Post-header">
-                <div class="Post-headerTitle">Inbox actions in the last week</div>
+        <div class="Box is-noBorder">
+            <div class="Box-header">
+                <div class="Box-headerTitle">Inbox actions in the last week</div>
             </div>
-            <div class="Post-body">
+            <div class="Box-body">
                 <table class="Table">
                     <tr class="Table-rowHeader">
                         <td class="Table-cell">Username</td>
@@ -127,11 +127,11 @@ View::show_header('Staff Inbox', 'PageStaffPMScoreboard');
         $DB->prepared_query($BaseSQL, 30, 30, $LoggedUser['Class'], ...$SupportStaff);
         $Results = $DB->to_array();
         ?>
-        <div class="Post">
-            <div class="Post-header">
-                <div class="Post-headerTitle">Inbox actions in the last month</div>
+        <div class="Box is-noBorder">
+            <div class="Box-header">
+                <div class="Box-headerTitle">Inbox actions in the last month</div>
             </div>
-            <div class="Post-body">
+            <div class="Box-body">
                 <table class="Table">
                     <tr class="Table-rowHeader">
                         <td class="Table-cell">Username</td>
@@ -155,11 +155,11 @@ View::show_header('Staff Inbox', 'PageStaffPMScoreboard');
         $DB->prepared_query($BaseSQL, 365000, 365000, $LoggedUser['Class'], ...$SupportStaff);
         $Results = $DB->to_array();
         ?>
-        <div class="Post">
-            <div class="Post-header">
-                <div class="Post-headerTitle">Inbox actions total</div>
+        <div class="Box is-noBorder">
+            <div class="Box-header">
+                <div class="Box-headerTitle">Inbox actions total</div>
             </div>
-            <div class="Post-body">
+            <div class="Box-body">
                 <table class="Table">
                     <tr class="Table-rowHeader">
                         <td class="Table-cell">Username</td>

@@ -87,6 +87,11 @@ if (check_perms('admin_manage_blog')) {
 }
 ?>
 <div class="LayoutBody">
+    <div class="BodyHeader">
+        <div class="BodyHeader-nav">
+            <?= t('server.blog.staff_blog') ?>
+        </div>
+    </div>
 
     <form class="<?= ((empty($_GET['action'])) ? 'create_form' : 'edit_form') ?>" id="blog_post" name="blog_post" action="staffblog.php" method="post">
         <input type="hidden" name="action" value="<?= ((empty($_GET['action'])) ? 'takenewblog' : 'takeeditblog') ?>" />
@@ -148,10 +153,7 @@ if (check_perms('admin_manage_blog')) {
                         <span class="Post-headerTitle"><?= $Title ?></span>
                     </div>
                     <div class="Post-headerActions">
-                        <span><?= t('server.blog.posted') ?></span>
                         <?= time_diff($BlogTime); ?>
-                        <?= t('server.blog.by') ?> <a href="user.php?name=<?= $Author ?>"><?= $Author ?></a>
-
                         - <a href="forums.php?action=viewthread&amp;threadid=<?= $ThreadID ?>"><?= t('server.index.discuss') ?></a>
                         <? if (check_perms('admin_manage_blog')) { ?>
                             - <a href="staffblog.php?action=editblog&amp;id=<?= $BlogID ?>" class="brackets"><?= t('server.common.edit') ?></a>

@@ -4,7 +4,7 @@
 {% block body %}
 Hi {{ UserName }},
 
-用户 [url=user.php?id={{ LoggedUserID }}]{{ LoggedUserUserName }}[/url] 为你在 {{ Date }} {{ Action }} 的种子 [url=torrents.php?id={{ GroupID }}&torrentid={{ TorrentID }}]{{ Name }}[/url] 提交了一个续种请求。该种子现在无人做种，我们需要你来帮忙复活它！
+用户 [url=user.php?id={{ LoggedUserID }}]{{ LoggedUserName }}[/url] 为你在 {{ Date }} {{ Action }} 的种子 [url=torrents.php?id={{ GroupID }}&torrentid={{ TorrentID }}]{{ Name }}[/url] 提交了一个续种请求。该种子现在无人做种，我们需要你来帮忙复活它！
 
 在各个客户端上，续种操作会有所不同，但原理一致。思路是下载种子文件，然后在客户端中加载，然后指向内容文件存放的位置，然后执行完整性校验。
 

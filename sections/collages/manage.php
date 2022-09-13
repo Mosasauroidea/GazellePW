@@ -35,12 +35,13 @@ if (count($GroupIDs) > 0) {
     $TorrentList = array();
 }
 
-View::show_header(t('server.collages.manage_collage') . ": $Name", 'jquery-ui,jquery.tablesorter,sort', 'PageCollageManage');
+View::show_header(t('server.collages.manage_collage'), 'jquery-ui,jquery.tablesorter,sort', 'PageCollageManage');
 
 ?>
 <div class="LayoutBody">
     <div class="BodyHeader">
-        <h2 class="BodyHeader-nav"><?= t('server.collages.manage_collage') ?> > <a href="collages.php?id=<?= $CollageID ?>"><?= $Name ?></a></h2>
+        <div class="BodyHeader-nav"><?= t('server.collages.manage_collage') ?></div>
+        <div class="BodyHeader-subNav"><a href="collages.php?id=<?= $CollageID ?>"><?= $Name ?></a></div>
     </div>
     <div class="BodyContent">
         <div class="Box">
@@ -53,7 +54,7 @@ View::show_header(t('server.collages.manage_collage') . ": $Name", 'jquery-ui,jq
         </div>
 
         <div class="drag_drop_save hidden">
-            <input class="Button" collage-manage-save type="button" name="submit" value="Save All Changes" />
+            <input class="Button" collage-manage-save type="button" name="submit" value="<?= t('server.apply.saved') ?>" />
         </div>
         <table class="TableManageCollage Table" id="manage_collage_table">
             <thead>
@@ -92,8 +93,8 @@ View::show_header(t('server.collages.manage_collage') . ": $Name", 'jquery-ui,jq
                                 <input type="hidden" name="auth" value="<?= $LoggedUser['AuthKey'] ?>" />
                                 <input type="hidden" name="collageid" value="<?= $CollageID ?>" />
                                 <input type="hidden" name="groupid" value="<?= $GroupID ?>" />
-                                <input class="Button" type="submit" name="submit" value="Edit" />
-                                <input class="Button" type="submit" name="submit" value="Remove" />
+                                <button class="Button" type="submit" name="submit" value="Edit"><?= t('server.common.edit') ?> </button>
+                                <button class="Button" type="submit" name="submit" value="Remove"><?= t('server.common.remove') ?> </button>
                             </td>
                         </form>
                     </tr>
@@ -101,7 +102,7 @@ View::show_header(t('server.collages.manage_collage') . ": $Name", 'jquery-ui,jq
             </tbody>
         </table>
         <div class="drag_drop_save hidden">
-            <input class="Button" collage-manage-save type="button" name="submit" value="Save All Changes" />
+            <input class="Button" collage-manage-save type="button" name="submit" value="<?= t('server.apply.saved') ?>" />
         </div>
         <form class="dragdrop_form hidden" name="collage" action="collages.php" method="post" id="drag_drop_collage_form">
             <div>

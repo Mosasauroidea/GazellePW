@@ -42,9 +42,7 @@ var json = {
 var ajax = {
   get: function (url, callback) {
     var req =
-      typeof window.ActiveXObject === 'undefined'
-        ? new XMLHttpRequest()
-        : new ActiveXObject('Microsoft.XMLHTTP')
+      typeof window.ActiveXObject === 'undefined' ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP')
     if (callback !== undefined) {
       req.onreadystatechange = function () {
         if (req.readyState !== 4 || req.status !== 200) {
@@ -57,9 +55,7 @@ var ajax = {
     req.send(null)
   },
   post: function (url, data, callback) {
-    var req = isset(window.ActiveXObject)
-      ? new ActiveXObject('Microsoft.XMLHTTP')
-      : new XMLHttpRequest()
+    var req = isset(window.ActiveXObject) ? new ActiveXObject('Microsoft.XMLHTTP') : new XMLHttpRequest()
     var params = ajax.serialize(data)
     if (callback !== undefined) {
       req.onreadystatechange = function () {
@@ -93,28 +89,24 @@ var ajax = {
           case 'password':
           case 'textarea':
           case 'select-one':
-            query +=
-              element.name + '=' + encodeURIComponent(element.value) + '&'
+            query += element.name + '=' + encodeURIComponent(element.value) + '&'
             break
           case 'select-multiple':
             for (var j = 0, jl = element.options.length; j < jl; j++) {
               var current = element.options[j]
               if (current.selected) {
-                query +=
-                  element.name + '=' + encodeURIComponent(current.value) + '&'
+                query += element.name + '=' + encodeURIComponent(current.value) + '&'
               }
             }
             break
           case 'radio':
             if (element.checked) {
-              query +=
-                element.name + '=' + encodeURIComponent(element.value) + '&'
+              query += element.name + '=' + encodeURIComponent(element.value) + '&'
             }
             break
           case 'checkbox':
             if (element.checked) {
-              query +=
-                element.name + '=' + encodeURIComponent(element.value) + '&'
+              query += element.name + '=' + encodeURIComponent(element.value) + '&'
             }
             break
         }
@@ -125,74 +117,43 @@ var ajax = {
 }
 //Bookmarks
 function Bookmark(type, id, newName) {
-  var bmLinks = $(
-    '#bookmarklink_' + type + '_' + id + ', .bookmarklink_' + type + '_' + id
-  )
+  var bmLinks = $('#bookmarklink_' + type + '_' + id + ', .bookmarklink_' + type + '_' + id)
   var oldName = newName && bmLinks.html()
-  ajax.get(
-    'bookmarks.php?action=add&type=' + type + '&auth=' + authkey + '&id=' + id,
-    function () {
-      bmLinks
-        .parent('.remove_bookmark, .add_bookmark')
-        .toggleClass('add_bookmark remove_bookmark')
-      if (newName) {
-        bmLinks.html(newName)
-      }
-      bmLinks
-        .attr('title', 'Remove bookmark')
-        .removeAttr('onclick')
-        .off('click')
-        .click(function () {
-          Unbookmark(type, id, oldName)
-          return false
-        })
+  ajax.get('bookmarks.php?action=add&type=' + type + '&auth=' + authkey + '&id=' + id, function () {
+    if (newName) {
+      bmLinks.html(newName)
     }
-  )
+    bmLinks
+      .removeAttr('onclick')
+      .off('click')
+      .click(function () {
+        Unbookmark(type, id, oldName)
+        return false
+      })
+  })
 }
 
 function Unbookmark(type, id, newName) {
   if (window.location.pathname.indexOf('bookmarks.php') != -1) {
-    ajax.get(
-      'bookmarks.php?action=remove&type=' +
-        type +
-        '&auth=' +
-        authkey +
-        '&id=' +
-        id,
-      function () {
-        $('#group_' + id).remove()
-        $(`[group-id="${id}]`).remove()
-        $('.bookmark_' + id).remove()
-      }
-    )
+    ajax.get('bookmarks.php?action=remove&type=' + type + '&auth=' + authkey + '&id=' + id, function () {
+      $('#group_' + id).remove()
+      $(`[group-id="${id}]`).remove()
+      $('.bookmark_' + id).remove()
+    })
   } else {
-    var bmLinks = $(
-      '#bookmarklink_' + type + '_' + id + ', .bookmarklink_' + type + '_' + id
-    )
+    var bmLinks = $('#bookmarklink_' + type + '_' + id + ', .bookmarklink_' + type + '_' + id)
     var oldName = newName && bmLinks.html()
-    ajax.get(
-      'bookmarks.php?action=remove&type=' +
-        type +
-        '&auth=' +
-        authkey +
-        '&id=' +
-        id,
-      function () {
-        bmLinks
-          .parent('.remove_bookmark, .add_bookmark')
-          .toggleClass('add_bookmark remove_bookmark')
-        if (newName) {
-          bmLinks.html(newName)
-        }
-        bmLinks
-          .attr('title', 'Add bookmark')
-          .removeAttr('onclick')
-          .off('click')
-          .click(function () {
-            Bookmark(type, id, oldName)
-            return false
-          })
+    ajax.get('bookmarks.php?action=remove&type=' + type + '&auth=' + authkey + '&id=' + id, function () {
+      if (newName) {
+        bmLinks.html(newName)
       }
-    )
+      bmLinks
+        .removeAttr('onclick')
+        .off('click')
+        .click(function () {
+          Bookmark(type, id, oldName)
+          return false
+        })
+    })
   }
 }

@@ -25,11 +25,11 @@ list($UserID, $Username, $PermissionID) = array_values(Users::user_info($UserID)
 include(CONFIG['SERVER_ROOT'] . '/classes/invite_tree.class.php');
 $Tree = new INVITE_TREE($UserID);
 
-View::show_header($Username . t('server.user.username_invites_tree'), '', 'PageUserInviteTree');
+View::show_header(t('server.user.tree'), '', 'PageUserInviteTree');
 ?>
 <div class="LayoutBody">
     <div class="BodyHeader">
-        <h2 class="BodyHeader-nav"><?= Users::format_username($UserID, false, false, false) ?> &gt; <a href="user.php?action=invite&amp;userid=<?= $UserID ?>"><?= t('server.user.invites') ?></a> &gt; <?= t('server.user.tree') ?></h2>
+        <h2 class="BodyHeader-nav"><?= t('server.user.tree') ?></h2>
     </div>
     <div class="BoxBody">
         <? $Tree->make_tree(); ?>

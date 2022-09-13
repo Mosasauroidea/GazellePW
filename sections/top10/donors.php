@@ -32,15 +32,13 @@ View::show_header(t('server.top10.top_10_donors'), '', 'PageTop10Donor');
     function generate_user_table($Caption, $Results, $Limit) {
         global $Time, $IsMod;
     ?>
-        <div class="Post">
-            <div class="Post-header">
-                <div class="Post-headerLeft">
-                    <div class="Post-headerTitle">
-                        <?= t('server.top10.top') ?> <?= "$Limit $Caption"; ?>
-                    </div>
+        <div class="Box is-noBorder">
+            <div class="Box-header">
+                <div class="Box-headerTitle">
+                    <?= t('server.top10.top') ?> <?= "$Limit $Caption"; ?>
                 </div>
 
-                <small class="Post-headerActions top10_quantity_links">
+                <small class="Box-headerActions top10_quantity_links">
                     <?
                     switch ($Limit) {
                         case 100: ?>
@@ -60,7 +58,7 @@ View::show_header(t('server.top10.top_10_donors'), '', 'PageTop10Donor');
                     <?  } ?>
                 </small>
             </div>
-            <div class="Post-body">
+            <div class="Box-body">
                 <div class="TableContainer">
                     <?
                     if (empty($Results)) {

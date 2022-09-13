@@ -31,11 +31,14 @@ TableMediaInfo varaint='mediainfo | bdinfo'
 }
 
 .TableMediaInfo .General .key {
-  min-width: 60px;
+  min-width: 70px;
+  vertical-align: top;
 }
 .TableMediaInfo .Video .key {
   min-width: 70px;
+  vertical-align: top;
 }
 .TableMediaInfo .Audio .key {
-  min-width: 20px;
+  min-width: 30px;
+  vertical-align: top;
 }

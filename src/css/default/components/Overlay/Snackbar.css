@@ -34,7 +34,7 @@ Snackbar
   max-width: 80%;
   font-size: 1.5rem;
   min-width: 100px;
-  padding: 5px;
+  padding: 5px 10px;
   display: flex;
   align-items: center;
   justify-content: center;

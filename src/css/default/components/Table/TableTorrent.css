@@ -309,7 +309,6 @@ TableTorrent-movieInfo
 
 .TableTorrent-movieInfoYear {
   color: var(--TableTorrent-movieInfoYear-color);
-  font-size: 80%;
   font-style: italic;
 }
 
@@ -497,4 +496,9 @@ ToggleGroup is-toHide
 
 #subtitles_container {
   width: 100%;
+}
+
+.TableTorrent .TableTorrent-rowDetail .TableTorrent-cellDetail {
+  padding-top: var(--global-space-default);
+  padding-bottom: var(--global-space-default);
 }

@@ -65,6 +65,7 @@ globalapp.requestVote = function requestVote(amount, requestid) {
         const requestTax = $('#request_tax').raw().value
         $('#total_bounty').raw().value = totalBounty
         $('#formatted_bounty').raw().innerHTML = get_size(totalBounty)
+        $('#movieinfo_bountry').raw().innerHTML = get_size(totalBounty)
         if (requestTax > 0) {
           Snackbar.notify(
             'Your vote of ' +

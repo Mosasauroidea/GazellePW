@@ -43,7 +43,6 @@ SidebarList
 }
 
 .SidebarItem-body:not(.SidebarList) {
-  padding: var(--global-space-default);
 }
 
 .SidebarItem.is-limitHeight .SidebarItem-body {

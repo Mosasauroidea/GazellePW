@@ -6,7 +6,9 @@ View::show_header(t('server.donate.donate'), '', 'PageDonateStep1');
     <div class="BodyHeader">
         <h2 class="BodyHeader-nav"><?= t('server.donate.donate') ?></h2>
     </div>
-    <div class="BoxBody donation_info HtmlText" id="Donate-Overview-mdx"></div>
+    <div class="Post">
+        <div class="PostBody PostArticle donation_info HtmlText" id="Donate-Overview-mdx"></div>
+    </div>
 </div>
 
 <?

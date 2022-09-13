@@ -139,7 +139,6 @@ Where
 }
 
 .MovieInfo-year {
-  font-size: 80%;
   color: var(--MovieInfo-year-color);
 }
 
@@ -158,4 +157,11 @@ Where
 
 .MovieInfo .lack_of_info {
   filter: grayscale(1);
+}
+
+.MovieInfo-requestInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  font-weight: bold;
 }

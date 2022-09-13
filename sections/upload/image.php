@@ -34,11 +34,11 @@ View::show_header(t('server.upload.image_host'), '', 'PageImageHost');
 
         <div class="hidden ImageHost-body">
             <div class="Box" id="image_host_body_bbcode">
-                <div class="Box-header Post-header">
-                    <div class="Post-headerLeft">
-                        <div class="Post-headerTitle">BBCode</div>
+                <div class="Box-header">
+                    <div class="Box-headerLeft">
+                        <div class="Box-headerTitle">BBCode</div>
                     </div>
-                    <div class="Post-headerActions">
+                    <div class="Box-headerActions">
                         <a href="#">
                             <?= t('server.upload.copy') ?>
                         </a>
@@ -49,11 +49,11 @@ View::show_header(t('server.upload.image_host'), '', 'PageImageHost');
                 </div>
             </div>
             <div class="Box" id="image_host_body_link">
-                <div class="Box-header Post-header">
-                    <div class="Post-headerLeft">
-                        <div class="Post-headerTitle"><?= t('server.reportsv2.image_s') ?></div>
+                <div class="Box-header">
+                    <div class="Box-headerLeft">
+                        <div class="Box-headerTitle"><?= t('server.reportsv2.image_s') ?></div>
                     </div>
-                    <div class="Post-headerActions">
+                    <div class="Box-headerActions">
                         <a href="#">
                             <?= t('server.upload.copy') ?>
                         </a>

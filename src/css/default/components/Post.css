@@ -29,6 +29,7 @@ Post-headerMultipleRows
   display: flex;
   flex-direction: column;
   padding: 0;
+  gap: var(--global-space-lg);
 }
 
 .Post {
@@ -88,4 +89,10 @@ Post-headerMultipleRows
 
 .preview_submit {
   text-align: center;
+}
+
+.PostList-actions {
+  font-style: italic;
+  padding: var(--global-space-default);
+  border-top: 1px dashed var(--global-color-border);
 }

@@ -40,8 +40,6 @@ Where
   User - Tracker IP view # userhistory/ip_tracker_history.php
   User - Passkey view    # userhistory/passkey_history.php
   User - password view   # userhistory/password_history.php
-  Application            # managers/apply_list.php
-  
 */
 
 .TableContainer {
@@ -53,9 +51,9 @@ Where
   border-collapse: separate;
   border-spacing: 0;
   background: var(--Box-background);
-  border: var(--Box-border);
   border-radius: var(--global-borderRadius);
   width: 100%;
+  border: var(--Box-border);
 }
 
 /* cell */
@@ -71,6 +69,10 @@ Where
 
 .Table[last-tr-hidden] .Table-row:nth-last-child(2) .Table-cell {
   border-bottom: none;
+  /* 电影详情最后一个tr是hidden  */
+}
+.Table[last-tr-hidden] .Table-row:nth-last-child(1) .Table-cell {
+  border-top: var(--Box-border);
   /* 电影详情最后一个tr是hidden  */
 }
 

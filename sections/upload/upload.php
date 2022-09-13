@@ -75,7 +75,9 @@ if (empty($Err)) {
     $Err = null;
 }
 $TorrentForm = new TORRENT_FORM($Properties, $Err);
-
+if (!empty($_GET['groupid'])) {
+    $Name = Torrents::group_name($Properties, true);
+}
 
 
 $DB->query('
@@ -100,47 +102,57 @@ $HideDNU = check_perms('torrents_hide_dnu') && !$NewDNU;
         <div class="BodyHeader-nav">
             <?= t('server.upload.upload') ?>
         </div>
-        <div id="dnu_container" class="Box">
-            <div class="Box-header">
-                <div id="dnu_header"><?= t('server.upload.torrent_diff') ?>
+        <? if ($Name) { ?>
+            <div class="BodyHeader-subNav">
+                <?= $Name ?>
+            </div>
+        <? } ?>
+        <? if (!$Name) { ?>
+            <div id="dnu_container" class="Box is-noBorder">
+                <div class="Box-header">
+                    <div class="Box-headerTitle"><?= t('server.upload.torrent_diff') ?></div>
                     <? if ($HideDNU) { ?>
-                        <span class="floatright" id="showdnu"><a href="#" onclick="$('#dnulist').gtoggle(); this.innerHTML = (this.innerHTML == '<?= t('server.common.hide') ?>' ? '<?= t('server.common.show') ?>' : '<?= t('server.common.hide') ?>'); return false;" class="brackets"><?= t('server.common.show') ?></a></span>
+                        <div class="Box-headerActions" id="showdnu">
+                            <a href="#" onclick="globalapp.toggleAny(event, '#dnulist')">
+                                <span class="u-toggleAny-show <?= $HideDNU ? '' : 'u-hidden' ?>"><?= t('server.common.show') ?></span>
+                                <span class="u-toggleAny-hide <?= $HideDNU ? 'u-hidden' : '' ?>"><?= t('server.common.hide') ?></span>
+                            </a>
+                        </div>
                     <?  } ?>
                 </div>
-            </div>
-            <div id="dnulist" class="TableContainer Box-body <?= ($HideDNU ? 'hidden' : '') ?>">
-                <p><?= $NewDNU ? '<strong class="u-colorWarning">' : '' ?><?= t('server.upload.last_update') ?>: <?= time_diff($Updated) ?><?= $NewDNU ? '</strong>' : '' ?></p>
-                <p><?= t('server.upload.upload_note') ?>
-                </p>
-                <table class="TableUploadRule Table">
-                    <tr class="Table-rowHeader">
-                        <td class="Table-cell" width="50%"><strong><?= t('server.upload.name') ?></strong></td>
-                        <td class="Table-cell"><strong><?= t('server.upload.explain') ?></strong></td>
-                    </tr>
-                    <? $TimeDiff = strtotime('-1 month', strtotime('now'));
-                    foreach ($DNU as $BadUpload) {
-                        list($Name, $Comment, $Updated) = $BadUpload;
-                    ?>
-                        <tr class="Table-row">
-                            <td class="Table-cell">
-                                <div class="HtmlText">
-                                    <?= Text::full_format($Name) . "\n" ?>
-                                    <? if ($TimeDiff < strtotime($Updated)) { ?>
-                                        <strong class="u-colorWarning">(New!)</strong>
-                                    <? } ?>
-                                </div>
-                            </td>
-                            <td class="Table-cell">
-                                <div class="HtmlText">
-                                    <?= Text::full_format($Comment) ?>
-                                </div>
-                            </td>
+                <div id="dnulist" class="TableContainer Box-body <?= ($HideDNU ? 'u-hidden' : '') ?>">
+                    <p><?= $NewDNU ? '<strong class="u-colorWarning">' : '' ?><?= t('server.upload.last_update') ?>: <?= time_diff($Updated) ?><?= $NewDNU ? '</strong>' : '' ?></p>
+                    <p><?= t('server.upload.upload_note') ?>
+                    </p>
+                    <table class="TableUploadRule Table">
+                        <tr class="Table-rowHeader">
+                            <td class="Table-cell" width="50%"><strong><?= t('server.upload.name') ?></strong></td>
+                            <td class="Table-cell"><strong><?= t('server.upload.explain') ?></strong></td>
                         </tr>
-                    <? } ?>
-                </table>
+                        <? $TimeDiff = strtotime('-1 month', strtotime('now'));
+                        foreach ($DNU as $BadUpload) {
+                            list($Name, $Comment, $Updated) = $BadUpload;
+                        ?>
+                            <tr class="Table-row">
+                                <td class="Table-cell">
+                                    <div class="HtmlText">
+                                        <?= Text::full_format($Name) . "\n" ?>
+                                        <? if ($TimeDiff < strtotime($Updated)) { ?>
+                                            <strong class="u-colorWarning">(New!)</strong>
+                                        <? } ?>
+                                    </div>
+                                </td>
+                                <td class="Table-cell">
+                                    <div class="HtmlText">
+                                        <?= Text::full_format($Comment) ?>
+                                    </div>
+                                </td>
+                            </tr>
+                        <? } ?>
+                    </table>
+                </div>
             </div>
-        </div>
-        <?= ($HideDNU ? '<br />' : '') ?>
+        <? } ?>
     </div>
 
     <div class="BodyContent">

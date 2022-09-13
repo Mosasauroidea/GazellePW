@@ -20,22 +20,21 @@ function Cancel() {
   document.getElementById('choices').raw().value = ''
 }
 
-function CollageSubscribe(collageid) {
-  ajax.get(
-    'userhistory.php?action=collage_subscribe&collageid=' +
-      collageid +
-      '&auth=' +
-      authkey,
-    function () {
-      var subscribeLink = $('#subscribelink' + collageid).raw()
-      if (subscribeLink) {
-        subscribeLink.firstChild.nodeValue =
-          subscribeLink.firstChild.nodeValue.charAt(0) == 'U'
-            ? 'Subscribe'
-            : 'Unsubscribe'
-      }
+function CollageSubscribe(collageid, newName) {
+  ajax.get('userhistory.php?action=collage_subscribe&collageid=' + collageid + '&auth=' + authkey, function () {
+    var subscribeLink = $('#subscribelink' + collageid)
+    oldName = subscribeLink.html()
+    if (newName) {
+      subscribeLink.html(newName)
     }
-  )
+    subscribeLink
+      .removeAttr('onclick')
+      .off('click')
+      .click(function () {
+        CollageSubscribe(collageid, oldName)
+        return false
+      })
+  })
 }
 
 var collageShow = {
@@ -66,9 +65,7 @@ var collageShow = {
     } else {
       $('.tooltip_interactive', ul).each(function () {
         if ($(this).data('title-plain')) {
-          $(this)
-            .attr('title', $(this).data('title-plain'))
-            .removeData('title-plain')
+          $(this).attr('title', $(this).data('title-plain')).removeData('title-plain')
         }
       })
     }

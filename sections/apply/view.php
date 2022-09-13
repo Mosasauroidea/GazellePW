@@ -41,49 +41,51 @@ $Resolved = (isset($_GET['status']) && $_GET['status'] === 'resolved');
 ?>
 
 <div class="LayoutBody">
-    <div class="BodyNavLinks">
-        <a href="/apply.php" class="brackets"><?= t('server.apply.apply') ?></a>
-        <? if (!$IS_STAFF && isset($ID)) { ?>
-            <a href="/apply.php?action=view" class="brackets"><?= t('server.apply.view_your_application') ?></a>
-            <?
-        }
-        if ($IS_STAFF) {
-            if ($Resolved || (!$Resolved and isset($ID))) {
-            ?>
-                <a href="/apply.php?action=view" class="brackets"><?= t('server.apply.current_applications') ?></a>
+    <div class="BodyHeader">
+        <? if ($App) { ?>
+            <div class="BodyHeader-nav head">
+                <?= $App->role_title() ?>
+            </div>
+        <? } ?>
+        <div class="BodyNavLinks">
+            <a href="/apply.php" class="brackets"><?= t('server.apply.apply') ?></a>
+            <? if (!$IS_STAFF && isset($ID)) { ?>
+                <a href="/apply.php?action=view" class="brackets"><?= t('server.apply.view_your_application') ?></a>
+                <?
+            }
+            if ($IS_STAFF) {
+                if ($Resolved || (!$Resolved and isset($ID))) {
+                ?>
+                    <a href="/apply.php?action=view" class="brackets"><?= t('server.apply.current_applications') ?></a>
+                <?
+                }
+                if (!$Resolved) {
+                ?>
+                    <a href="/apply.php?action=view&status=resolved" class="brackets"><?= t('server.apply.resolved_applications') ?></a>
+                <?  } ?>
+                <a href="/apply.php?action=admin" class="brackets"><?= t('server.apply.manage_roles') ?></a>
             <?
             }
-            if (!$Resolved) {
             ?>
-                <a href="/apply.php?action=view&status=resolved" class="brackets"><?= t('server.apply.resolved_applications') ?></a>
-            <?  } ?>
-            <a href="/apply.php?action=admin" class="brackets"><?= t('server.apply.manage_roles') ?></a>
-        <?
-        }
-        ?>
+        </div>
     </div>
 
     <? if (isset($ID)) { ?>
-        <h2 class="head" <?= $App->is_resolved() ? ' style="font-style: italic;"' : '' ?>>
-            <?= $App->role_title() ?>
-        </h2>
+
         <? if ($IS_STAFF) { ?>
             <div class="Box" id="user_application_reply_box">
                 <div class="Box-header">
-                    <div>
-                        <div>
-                            <?= t('server.apply.application_received_from', [
-                                'Values' => [Users::format_username($App->user_id(), true, true, true, true, true, false), time_diff($App->created(), 2)]
-                            ]) ?>
-                        </div>
-                        <div class="floatright">
-                            <form name="role_resolve" method="POST" action="/apply.php?action=view&amp;id=<?= $ID ?>">
-                                <input class="Button" type="submit" name="resolve" value="<?= $App->is_resolved() ? 'Reopen' : 'Resolve' ?>" />
-                                <input type="hidden" name="id" value="<?= $ID ?>" />
-                                <input type="hidden" name="auth" value="<?= $LoggedUser['AuthKey'] ?>" />
-                            </form>
-                        </div>
-
+                    <div class="Box-headerTitle">
+                        <?= Users::format_username($App->user_id(), true, true, true, true, true, false) ?>
+                    </div>
+                    <div class="Box-headerActions">
+                        <form name="role_resolve" id="form<?= $ID ?>" method="POST" action="/apply.php?action=view&amp;id=<?= $ID ?>">
+                            <?= time_diff($App->created()) ?>
+                            - <a href="javascript:{}" onclick="document.getElementById('form<?= $ID ?>').submit();"><?= $App->is_resolved() ? t('server.apply.reopen') : t('server.apply.resolve') ?></a>
+                            <input type="hidden" name="resolve" value="<?= $App->is_resolved() ? 'Reopen' : 'Resolve' ?>" />
+                            <input type="hidden" name="id" value="<?= $ID ?>" />
+                            <input type="hidden" name="auth" value="<?= $LoggedUser['AuthKey'] ?>" />
+                        </form>
                     </div>
                 </div>
                 <div class="Box-body HtmlText PostArticle" id="user_application_reply_text">
@@ -100,13 +102,17 @@ $Resolved = (isset($_GET['status']) && $_GET['status'] === 'resolved');
         ?>
             <div class="Box" style="border-color: <?= $IS_STAFF ? ($note['visibility'] == 'staff' ? '#FF8017' : '#347235') : '#808080' ?>;">
                 <div class="Box-header u-flex">
-                    <div>
+                    <div class="Box-headerTitle">
                         <?= $UserName ?>
-                        -
-                        <?= time_diff($note['created'], 2) ?>
                     </div>
-                    <div class="u-marginLeftAuto">
-                        <input class="Button" type="submit" name="note-delete-<?= $note['id'] ?>" value="delete" />
+                    <div class="Box-headerActions">
+                        <form id="note<?= $note['id'] ?>" name="thread_note_replay" method="POST" action="/apply.php?action=view&id=<?= $ID ?>">
+                            <input type="hidden" name="id" value="<?= $ID ?>" />
+                            <input type="hidden" name="auth" value="<?= $LoggedUser['AuthKey'] ?>" />
+                            <?= time_diff($note['created'], 2) ?>
+                            - <a href="javascript:{}" onclick="document.getElementById('note<?= $note['id'] ?>').submit();"><?= t('server.common.delete') ?></a>
+                            <input type="hidden" name="note-delete-<?= $note['id'] ?>" value="delete" />
+                        </form>
                     </div>
                 </div>
                 <div class="Box-body HtmlText PostArticle">
@@ -144,7 +150,7 @@ $Resolved = (isset($_GET['status']) && $_GET['status'] === 'resolved');
                             <div style="text-align: center;">
                                 <input type="hidden" name="id" value="<?= $ID ?>" />
                                 <input type="hidden" name="auth" value="<?= $LoggedUser['AuthKey'] ?>" />
-                                <input class="Button" type="submit" id="submit" value="Save" />
+                                <button class="Button" type="submit" id="submit" value="Save"><?= t('server.apply.reply') ?></button>
                             </div>
                         </td>
                     </tr>

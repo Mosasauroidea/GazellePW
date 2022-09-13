@@ -4,7 +4,9 @@ View::show_header(t('server.rules.tags_title'), '', 'PageRuleTag');
 
 <div class="LayoutBody">
     <? include('jump.php'); ?>
-    <div class="HtmlText BoxBody" id="Rules-Tags-mdx" mdx></div>
+    <div class="Post">
+        <div class="HtmlText Post-body" id="Rules-Tags-mdx" mdx></div>
+    </div>
 </div>
 
 <script>

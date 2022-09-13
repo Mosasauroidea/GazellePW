@@ -14,7 +14,9 @@ if (!$WhitelistedClients = $Cache->get_value('whitelisted_clients')) {
 
 <div class="LayoutBody">
     <? include('jump.php'); ?>
-    <div class="HtmlText BoxBody" id="Rules-Clients-mdx" mdx></div>
+    <div class="Post">
+        <div class="HtmlText Post-body" id="Rules-Clients-mdx" mdx></div>
+    </div>
 </div>
 
 <script>

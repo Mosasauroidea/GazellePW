@@ -98,9 +98,12 @@ View::show_header(t('server.forums.forums') . '&gt; ' . $Forums[$ForumID]['Name'
                 </a>
             </div>
             <div class="BodyNavLinks-expand hidden" id="searchforum">
-                <h3 class="BodyNavLinks-expandHeader"><?= t('server.forums.search_this_forum') ?>:</h3>
                 <form class="Form FormForumSearch" name="forum" action="forums.php" method="get">
-                    <table class="Form-rowList">
+                    <table class="Form-rowList" variant="header">
+                        <tr class="Form-rowHeader">
+                            <td class="Form-title"><?= t('server.forums.search_this_forum') ?>
+                            </td>
+                        </tr>
                         <tr class="Form-row">
                             <td class="Form-label">
                                 <input type="hidden" name="action" value="search" />
@@ -132,20 +135,20 @@ View::show_header(t('server.forums.forums') . '&gt; ' . $Forums[$ForumID]['Name'
                         </tr>
                         <tr class="Form-row">
                             <td class="Form-submit" colspan="2">
-                                <input class="Button" type="submit" name="submit" value="Search" />
+                                <button class="Button" type="submit" name="submit" value="Search"><?= t('server.common.search') ?></button>
                             </td>
                         </tr>
                     </table>
             </div>
             </form>
         </div>
-        <? if (check_perms('site_moderate_forums')) { ?>
-            <div class="BodyNavLinks">
+
+        <div class="BodyNavLinks">
+            <a href="forums.php?action=catchup&amp;forumid=<?= $ForumID ?>&amp;auth=<?= $LoggedUser['AuthKey'] ?>" class="brackets"><?= t('server.forums.catch_up') ?></a>
+            <? if (check_perms('site_moderate_forums')) { ?>
                 <a href="forums.php?action=edit_rules&amp;forumid=<?= $ForumID ?>" class="brackets"><?= t('server.forums.change_specific_rules') ?></a>
-            </div>
-        <?  } ?>
-        <? if (!empty($Forums[$ForumID]['SpecificRules'])) { ?>
-            <div class="BodyNavLinks">
+            <?  } ?>
+            <? if (!empty($Forums[$ForumID]['SpecificRules'])) { ?>
                 <strong><?= t('server.forums.forum_specific_rules') ?></strong>
                 <? foreach ($Forums[$ForumID]['SpecificRules'] as $ThreadIDs) {
                     $Thread = Forums::get_thread_info($ThreadIDs);
@@ -156,8 +159,8 @@ View::show_header(t('server.forums.forums') . '&gt; ' . $Forums[$ForumID]['Name'
                     <br />
                     <a href="forums.php?action=viewthread&amp;threadid=<?= $ThreadIDs ?>" class="brackets"><?= display_str($Thread['Title']) ?></a>
                 <?      } ?>
-            </div>
-        <?  } ?>
+            <?  } ?>
+        </div>
     </div>
     <div class="BodyContent">
         <div class="BodyNavLinks pager">
@@ -301,7 +304,6 @@ View::show_header(t('server.forums.forums') . '&gt; ' . $Forums[$ForumID]['Name'
         <div class="BodyNavLinks pager">
             <?= $Pages ?>
         </div>
-        <div class="BodyNavLinks"><a href="forums.php?action=catchup&amp;forumid=<?= $ForumID ?>&amp;auth=<?= $LoggedUser['AuthKey'] ?>" class="brackets"><?= t('server.forums.catch_up') ?></a></div>
     </div>
 </div>
 <? View::show_footer(); ?>

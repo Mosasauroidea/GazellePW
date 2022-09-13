@@ -148,7 +148,7 @@ $DB->query("
                 <input type="checkbox" id="delete" name="delete" />
                 <label for="delete"><?= t('server.inbox.delete_conversation') ?></label>
             </div>
-            <div class="center" colspan="6"><input class="Button" type="submit" value="Manage conversation" /></div>
+            <div class="center" colspan="6"><button class="Button" type="submit" value="Manage conversation"><?= t('server.inbox.manage_conversation') ?></button></div>
         </form>
     </div>
     <?
@@ -176,7 +176,7 @@ $DB->query("
                 }
                 ?>
             </select>
-            <input class="Button" type="submit" value="Forward" />
+            <button class="Button" type="submit" value="Forward"><?= t('server.inbox.forward_conversation') ?></button>
         </form>
     <?
     }

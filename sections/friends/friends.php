@@ -67,65 +67,69 @@ list($Results) = $DB->next_record();
         echo $Pages;
         ?>
     </div>
-    <div class="Box">
-        <div class="Box-body">
-            <?
-            if ($Results == 0) {
-                echo '<p>' . t('server.friends.you_have_no_friends') . '</p>';
-            }
-            // Start printing out friends
-            foreach ($Friends as $Friend) {
-                list($FriendID, $Comment, $Username, $Uploaded, $Downloaded, $Class, $Paranoia, $LastAccess, $Avatar) = $Friend;
-            ?>
-                <form class="manage_form" name="friends" action="friends.php" method="post">
-                    <input type="hidden" name="auth" value="<?= $LoggedUser['AuthKey'] ?>" />
-                    <div class="TableContainer">
-                        <table class="TableUserFriend Table">
-                            <tr class="Table-rowHeader">
-                                <td class="Table-cell" colspan="<?= (Users::has_avatars_enabled() ? 3 : 2) ?>">
-                                    <span style="float: left;"><?= Users::format_username($FriendID, true, true, true, true) ?>
-                                        <? if (check_paranoia('ratio', $Paranoia, $Class, $FriendID)) { ?>
-                                            &nbsp;<?= t('server.friends.ratio') ?>: <strong><?= Format::get_ratio_html($Uploaded, $Downloaded) ?></strong>
-                                        <?
-                                        }
-                                        if (check_paranoia('uploaded', $Paranoia, $Class, $FriendID)) {
-                                        ?>
-                                            &nbsp;<?= t('server.friends.up') ?>: <strong><?= Format::get_size($Uploaded) ?></strong>
-                                        <?
-                                        }
-                                        if (check_paranoia('downloaded', $Paranoia, $Class, $FriendID)) {
-                                        ?>
-                                            &nbsp;<?= t('server.friends.down') ?>: <strong><?= Format::get_size($Downloaded) ?></strong>
-                                        <?  } ?>
-                                    </span>
-                                    <? if (check_paranoia('lastseen', $Paranoia, $Class, $FriendID)) { ?>
-                                        <span style="float: right;"><?= time_diff($LastAccess) ?></span>
-                                    <?  } ?>
-                                </td>
-                            </tr>
-                            <tr>
-                                <? if (Users::has_avatars_enabled()) { ?>
-                                    <td class="col_avatar avatar" width="160px" valign="top">
-                                        <?= Users::show_avatar($Avatar, $FriendID, $Username, $HeavyInfo['DisableAvatars']) ?>
-                                    </td>
+    <?
+    if ($Results == 0) {
+        echo '<p>' . t('server.friends.you_have_no_friends') . '</p>';
+    }
+    // Start printing out friends
+    foreach ($Friends as $Friend) {
+        list($FriendID, $Comment, $Username, $Uploaded, $Downloaded, $Class, $Paranoia, $LastAccess, $Avatar) = $Friend;
+    ?>
+        <form class="manage_form" name="friends" action="friends.php" method="post">
+            <input type="hidden" name="auth" value="<?= $LoggedUser['AuthKey'] ?>" />
+            <div class="TableContainer">
+                <table class="TableUserFriend Table">
+                    <tr class="Table-rowHeader">
+                        <td class="Table-cell" colspan="<?= (Users::has_avatars_enabled() ? 3 : 2) ?>">
+                            <span style="float: left;"><?= Users::format_username($FriendID, true, true, true, true) ?>
+                                <? if (check_paranoia('ratio', $Paranoia, $Class, $FriendID)) { ?>
+                                    &nbsp;<?= t('server.friends.ratio') ?>: <strong><?= Format::get_ratio_html($Uploaded, $Downloaded) ?></strong>
+                                <?
+                                }
+                                if (check_paranoia('uploaded', $Paranoia, $Class, $FriendID)) {
+                                ?>
+                                    &nbsp;<?= t('server.friends.up') ?>: <strong><?= Format::get_size($Uploaded) ?></strong>
+                                <?
+                                }
+                                if (check_paranoia('downloaded', $Paranoia, $Class, $FriendID)) {
+                                ?>
+                                    &nbsp;<?= t('server.friends.down') ?>: <strong><?= Format::get_size($Downloaded) ?></strong>
                                 <?  } ?>
-                                <td valign="top">
-                                    <input type="hidden" name="friendid" value="<?= $FriendID ?>" />
+                            </span>
+                            <span style="float: right">
+                                <? if (check_paranoia('lastseen', $Paranoia, $Class, $FriendID)) { ?>
+                                    <span><?= time_diff($LastAccess) ?></span>
+                                <?  } ?>
 
-                                    <textarea class="Input" name="comment" rows="4" cols="65"><?= $Comment ?></textarea>
-                                </td>
-                                <td class="left" valign="top">
-                                    <input class="Button" type="submit" name="action" value="Update" /><br />
-                                    <input class="Button" type="submit" name="action" value="Remove friend" /><br />
-                                    <input class="Button" type="submit" name="action" value="Contact" /><br />
-                                </td>
-                            </tr>
-                        </table>
-                    </div>
-                </form>
-            <?  }  ?>
-        </div>
-    </div>
+                            </span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <? if (Users::has_avatars_enabled()) { ?>
+                            <td class="col_avatar avatar" width="160px" valign="top">
+                                <?= Users::show_avatar($Avatar, $FriendID, $Username, $HeavyInfo['DisableAvatars']) ?>
+                            </td>
+                        <?  } ?>
+                        <td valign="top">
+                            <input type="hidden" name="friendid" value="<?= $FriendID ?>" />
+                            <? new TEXTAREA_PREVIEW('comment', "comment$FriendID", '', 60, 8, true, true, false); ?>
+                        </td>
+
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>
+                            <div style="float: right">
+                                <button class="Button" type="submit" name="action" value="Update"><?= t('server.common.update') ?></button>
+                                <button class="Button" type="submit" name="action" value="Remove friend"><?= t('server.common.remove') ?></button>
+                                <button class="Button" type="submit" name="action" value="Contact"><?= t('server.reports.contact') ?></button>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </form>
+    <?  }  ?>
     <div class="BodyNavLinks">
         <?= $Pages ?>
     </div>

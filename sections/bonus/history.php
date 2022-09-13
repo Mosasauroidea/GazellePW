@@ -36,7 +36,7 @@ if ($Summary['nr'] > 0) {
         <? if ($Summary['total']) { ?>
             <h3><?= $WhoSpent ?> <?= number_format($Summary['total']) ?> <?= t('server.bonus.bonus_points_to_purchase') ?> <?= $Summary['nr'] ?> <?= $Summary['nr'] == 1 ? t('server.bonus.item') : t('server.bonus.items') ?><?= t('server.bonus.period') ?></h3>
         <? } else { ?>
-            <h3><?= t('server.bonus.no_purchase_history') ?></h3>
+            <div class="center"><?= t('server.bonus.no_purchase_history') ?></div>
             <?
         }
         if (isset($History)) {

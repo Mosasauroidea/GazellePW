@@ -6,9 +6,10 @@ use Gazelle\Torrent\Region;
 use Gazelle\Torrent\Language;
 use Gazelle\Torrent\TorrentSlot;
 use Gazelle\Torrent\TorrentSlotType;
+use Illuminate\Support\Facades\File;
 
 class Torrents {
-    const FILELIST_DELIM = 0xF7; // Hex for &divide; Must be the same as phrase_boundary in sphinx.conf!
+    const FILELIST_DELIM = 0xF7; // Hex for &divide; Must be the same as phrase_boundary in manticore.conf!
     const SNATCHED_UPDATE_INTERVAL = 3600; // How often we want to update users' snatch lists
     const SNATCHED_UPDATE_AFTERDL = 300; // How long after a torrent download we want to update a user's snatch lists
 
@@ -151,7 +152,7 @@ class Torrents {
 			GROUP BY NULL";
 
             $DB->query($SQL);
-            $TorrentGroup = $DB->next_record(MYSQLI_ASSOC);
+            $TorrentGroup = $DB->next_record(MYSQLI_ASSOC, false);
             // Fetch the individual torrents
             $DB->query("
 			SELECT
@@ -391,7 +392,7 @@ class Torrents {
                             LEFT JOIN reportsv2 as rt on rt.TorrentID = t.id AND rt.Status != 'Resolved'
 						WHERE t.GroupID IN ($IDs)
 						GROUP BY t.ID ORDER BY t.ID");
-                    while ($Torrent = G::$DB->next_record(MYSQLI_ASSOC, ['MediaInfo'])) {
+                    while ($Torrent = G::$DB->next_record(MYSQLI_ASSOC, false)) {
                         $NotFound[$Torrent['GroupID']]['Torrents'][$Torrent['ID']] = $Torrent;
                     }
                 }
@@ -889,7 +890,7 @@ WHERE ud.TorrentID=? AND ui.NotifyOnDeleteDownloaded='1' AND ud.UserID NOT IN ({
                 Year, CategoryID, Time, ReleaseType, Size, Snatched, Seeders, Leechers, Scene, Jinzhuan, Allow,
 				FreeTorrent,Description, FileList, VoteScore, ArtistName, RemTitle,
 				IMDBRating, DoubanRating, Region, Language, IMDBID, Resolution, Container, Source, Codec, SubTitles,
-                Diy, Buy, ChineseDubbed, SpecialSub)
+                Diy, Buy, ChineseDubbed, SpecialSub, Checked)
 			SELECT
 				t.ID, g.ID, CONCAT_WS(' ', g.Name, g.SubName), 
                 GROUP_CONCAT(DISTINCT tags.Name ORDER BY `TagID` SEPARATOR ' ') as TagList, 
@@ -904,7 +905,7 @@ WHERE ud.TorrentID=? AND ui.NotifyOnDeleteDownloaded='1' AND ud.UserID NOT IN ({
                 REPLACE(Language, ',', ' '),
                 IMDBID, Resolution, Container, Source, Codec, 
                 REPLACE(Subtitles, ',', ' '),
-                Diy, Buy, ChineseDubbed, SpecialSub
+                Diy, Buy, ChineseDubbed, SpecialSub, Checked
 			FROM torrents AS t
 				JOIN torrents_group AS g ON g.ID = t.GroupID
                 LEFT JOIN torrents_tags AS tt ON tt.GroupID = g.ID
@@ -1072,7 +1073,7 @@ WHERE ud.TorrentID=? AND ui.NotifyOnDeleteDownloaded='1' AND ud.UserID NOT IN ({
         return implode(' / ', $t);
     }
 
-    public static function group_name($Group, $Link = true) {
+    public static function group_name($Group, $Link = true, $Class = '') {
         global $LoggedUser;
         $lang = Lang::getUserLang($LoggedUser['ID']);
         $GroupName = $Group['Name'];
@@ -1087,15 +1088,15 @@ WHERE ud.TorrentID=? AND ui.NotifyOnDeleteDownloaded='1' AND ud.UserID NOT IN ({
         $Ret = $GroupName . ' (' . $Year . ')';
         if ($Link) {
             $GroupID = $Group['ID'];
-            $Ret = "<a class='TorrentTitle-item' href='torrents.php?id=$GroupID'>$Ret</a>";
+            $Ret = "<a class='$Class' href='torrents.php?id=$GroupID'>" . display_str($Ret) . "</a>";
         }
-        return "<span class='TorrentTitle-item'>$Ret</span>";
+        return $Ret;
     }
     public static function torrent_name($Torrent, $WithLink = true, $WithMedia = true, $WithSize = true) {
         $Size = Format::get_size($Torrent['Size']);
         $Info = self::torrent_media_info($Torrent);
         $Group = $Torrent['Group'];
-        $GroupName = !empty($Group['SubName']) ? $Group['SubName'] : $Group['Name'];
+        $GroupName = Lang::choose_content($Group['Name'], $Group['SubName']);
         $Year = $Group['Year'];
         $Ret = $GroupName . ' (' . $Year . ') - ' . implode(' / ', $Info) . ($WithSize ? ' - ' . $Size : '');
         if ($WithLink) {
@@ -1185,7 +1186,7 @@ WHERE ud.TorrentID=? AND ui.NotifyOnDeleteDownloaded='1' AND ud.UserID NOT IN ({
         if ($Link) {
             $TorrentInfo = "<a class='$Class' href='torrents.php?id=$GroupID&amp;torrentid=$TorrentID#torrent$TorrentID'>" . $TorrentInfo . "</a>";
         }
-        return Torrents::group_name($Group, $Link) . "<span class='TorrentTitle-item'>&nbsp;&raquo;&nbsp;</span>" . $TorrentInfo;
+        return "<div class='TorrentTitle'><span class='TorrentTitle-item'>" . Torrents::group_name($Group, $Link, 'TorrentTitle-item') . "</span><span class='TorrentTitle-item'> - </span>" . $TorrentInfo . "</div>";
     }
 
     /**
@@ -1329,9 +1330,9 @@ WHERE ud.TorrentID=? AND ui.NotifyOnDeleteDownloaded='1' AND ud.UserID NOT IN ({
         $Result = "<span class='TorrentTitle $Class u-sortable'>";
         $ResultInner = [];
         foreach ($Items as $Item) {
-            $ResultInner[] = "<span class='TorrentTitle-item u-sortable-item'>$Item</span>";
+            $ResultInner[] = "<span class='TorrentTitle-item u-sortable-item'><span data-value='" . $Item . "'>" . t('server.torrents.' . strtolower($Item)) . "</span></span>";
         }
-        return $Result . implode('/', $ResultInner) . '</span>';
+        return $Result . implode(' / ', $ResultInner) . '</span>';
     }
 
     public static function release_group($Torrent) {
@@ -2069,5 +2070,50 @@ WHERE ud.TorrentID=? AND ui.NotifyOnDeleteDownloaded='1' AND ud.UserID NOT IN ({
                 '.' // trim-a-dot
             )
         );
+    }
+    public static function build_file_tree($FilePath, $FileList) {
+        $FileList = array_map(function ($value) use ($FilePath) {
+            if (!empty($FilePath)) {
+                return [array_merge([$FilePath], explode('/', $value[0])), $value[1]];
+            }
+            return [explode('/', $value[0]), $value[1]];
+        }, $FileList);
+        $Root = [];
+        foreach ($FileList as $File) {
+            self::_group_File($Root, $File[0], $File[1]);
+        }
+        return $Root;
+    }
+    private static function _group_file(&$Root, $Fragment, $Size) {
+        if (count($Fragment) == 1) {
+            $Root[$Fragment[0]] = ['size' => $Size, 'children' => []];
+        } else {
+            self::_group_file($Root[$Fragment[0]]['children'], array_slice($Fragment, 1), $Size);
+            $Root[$Fragment[0]]['size'] += $Size;
+        }
+        return;
+    }
+}
+
+class TorrentFile {
+    public $name = '';
+    public $size = 0;
+    public function __construct($name, $size) {
+        $this->name = $name;
+        $this->size = $size;
+    }
+}
+
+class FileNode {
+    public $name = '';
+    public $children = [];
+    public $size = 0;
+    public function __construct($name,  $size) {
+        $this->name = $name;
+        $this->size = $size;
+    }
+
+    public function addChild(FileNode $child) {
+        $this->children[$child->name] = $child;
     }
 }

@@ -148,7 +148,7 @@ class Tags {
                 $this->TagLink[$Tag] = '<a class="' . $ClassName . '" href="' . $Link . $Tag . $ArtistName . '">' . $Tag . '</a>';
             }
         }
-        return implode(', ', $this->TagLink);
+        return implode(' ', $this->TagLink);
     }
 
     /**

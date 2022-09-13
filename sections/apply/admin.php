@@ -50,56 +50,54 @@ if (isset($_POST['auth'])) {
         </div>
     </div>
 
-    <form method="post" class="LayoutBody" action="/apply.php?action=admin">
-        <? if (!$EDIT_ID) {
-            $Roles = ApplicantRole::get_list(true);
-            if (count($Roles)) {
-        ?>
-                <div class="Post">
-                    <div class="Post-header">
-                        <div class="Post-headerTitle">
-                            <?= t('server.apply.current_roles') ?></div>
-                    </div>
-                    <div class="Post-body">
-                        <? if ($Saved) { ?>
-                            <p>
-                                <?= t('server.apply.the_role_was', ['Values' => [
-                                    $AppRole->title(),
-                                    $Saved,
-                                ]]) ?>
-                            </p>
-                        <? } ?>
-                        <? foreach ($Roles as $title => $info) { ?>
+    <? if (!$EDIT_ID) {
+        $Roles = ApplicantRole::get_list(true);
+        if (count($Roles)) {
+    ?>
+            <div class="Box is-noBorder">
+                <div class="Box-header">
+                    <div class="Box-headerTitle">
+                        <?= t('server.apply.current_roles') ?></div>
+                </div>
+                <div class="Box-body BoxList">
+                    <? foreach ($Roles as $title => $info) { ?>
+                        <form id="role_edit" method="post" class="LayoutBody" action="/apply.php?action=admin">
                             <div class="Box">
-                                <div class="Box-header Post-header">
-                                    <div class="Post-headerLeft">
-                                        <div class="Post-headerTitle">
-                                            <?= $title ?></div>
+                                <div class="Box-header">
+                                    <div class="Box-headerLeft">
+                                        <div class="Box-headerTitle">
+                                            <?= display_str($title) ?></div>
                                     </div>
-                                    <div class="Post-headerActions">
-                                        (<?= $info['published'] ? t('server.apply.published') : t('server.apply.archived') ?>)
-                                        <?= t('server.apply.role_created_by', ['Values' => [
-                                            time_diff($info['created'], 2),
-                                            Users::format_username($info['user_id']),
-                                            ($info['modified'] == $info['created'] ? '' : t('server.apply.role_created_by_4') . time_diff($info['modified'], 2))
-                                        ]]) ?>
-                                        <input class="Button" type="submit" name="edit-<?= $info['id'] ?>" value="Edit" />
+                                    <div class="Box-headerActions">
+                                        <input type="hidden" name="auth" value="<?= $LoggedUser['AuthKey'] ?>" />
+                                        <? if ($EDIT_ID) { ?>
+                                            <input type="hidden" name="edit" value="<?= $EDIT_ID ?>" />
+                                        <?  } ?>
+                                        <input type="hidden" name="user_id" value="<?= $LoggedUser['ID'] ?>" />
+                                        <strong><?= $info['published'] ? t('server.apply.published') : t('server.apply.archived') ?></strong>
+                                        - <?= $info['modified'] == $info['created'] ? time_diff($info['created'], 2) :  time_diff($info['modified'], 2) ?>
+                                        - <?= t('server.apply.role_created_by', ['Values' => [Users::format_username($info['user_id'])]]) ?>
+                                        <input type="hidden" name="edit-<?= $info['id'] ?>" value="Edit" />
+                                        - <a href="javascript:{}" onclick="document.getElementById('role_edit').submit();"><?= t('server.common.edit') ?></a>
+
                                     </div>
                                 </div>
                                 <div class="Box-body HtmlText PostArticle">
                                     <?= Text::full_format($info['description']) ?>
                                 </div>
                             </div>
-                        <? } /* foreach */ ?>
-                    </div>
+                        </form>
+                    <? } /* foreach */ ?>
                 </div>
-            <?
-            } else {
-            ?>
-                <p><?= t('server.apply.no_current_roles') ?></p>
-        <?  }
-        } /* !$EDIT_ID */ ?>
+            </div>
+        <?
+        } else {
+        ?>
+            <p><?= t('server.apply.no_current_roles') ?></p>
+    <?  }
+    } /* !$EDIT_ID */ ?>
 
+    <form method="post" class="LayoutBody" action="/apply.php?action=admin">
         <div class="Form-rowList" variant="header">
 
             <?
@@ -142,7 +140,7 @@ if (isset($_POST['auth'])) {
                             <input type="hidden" name="edit" value="<?= $EDIT_ID ?>" />
                         <?  } ?>
                         <input type="hidden" name="user_id" value="<?= $LoggedUser['ID'] ?>" />
-                        <input class="Button" type="submit" id="submit" value="Save Role" />
+                        <button class="Button" type="submit" id="submit" value="Save Role"><?= t('client.common.save') ?></button>
                     </td>
                 </tr>
                 </tr>

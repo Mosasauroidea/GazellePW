@@ -264,31 +264,19 @@ echo $Val->GenerateJS('userform');
                                     </label>
                                 </div>
                             </div>
-                            <? if (CONFIG['IS_DEV']) { ?>
-                                <div>
-                                    <input id="SettingTorrentTitleInput" type="hidden" name="settingTorrentTitleItems" value='<?= implode(',', $SettingTorrentTitle['Items'])  ?>' />
-                                    <?= Torrents::settingTorrentTitle(
-                                        $SettingTorrentTitle,
-                                        [
-                                            'Class' => 'TorrentTitle--standalone is-edit'
-                                        ]
-                                    ) ?>
-                                    <button class="Button" size="tiny" onclick="globalapp.userEditSettingTorrentTitleReset()" type="submit">
-                                        <?= t('server.user.reset') ?>
-                                    </button>
-                                </div>
-                            <? } ?>
+
                             <?
                             $TableTorrentClass = $SettingTorrentTitle['Alternative'] ? 'is-alternative' : '';
                             ?>
-                            <div class="TorrentTitle-previews TableTorrent TableTorrent--preview <?= $TableTorrentClass ?>">
+                            <div class="Form-inputs TorrentTitle-previews TableTorrent TableTorrent--preview <?= $TableTorrentClass ?>">
+                                <strong><?= t('server.user.donorforum_4') ?>:</strong>
                                 <?
                                 $Previews = [
                                     ['Codec' => 'x265', 'Source' => 'WEB', 'Resolution' => '720p', 'Container' => 'MKV', 'Processing' => 'Encode', 'Slot' => TorrentSlotType::EnglishQuality, 'RemasterTitle' => 'dolby_vision / dolby_atmos / masters_of_cinema', 'ReleaseGroup' => 'Release Group'],
-                                    ['Codec' => 'x265', 'Source' => 'WEB', 'Resolution' => '720p', 'Container' => 'MKV', 'Processing' => 'Encode', 'Slot' => TorrentSlotType::ChineseQuality, 'RemasterTitle' => 'the_criterion_collection', 'ReleaseGroup' => 'Release Group'],
                                 ];
                                 ?>
-                                <? foreach ($Previews as $Preview) { ?>
+                                <? foreach ($Previews as $Preview) {
+                                ?>
                                     <div>
                                         <?= Torrents::torrent_info(
                                             $Preview,
@@ -301,6 +289,25 @@ echo $Val->GenerateJS('userform');
                                     </div>
                                 <? } ?>
                             </div>
+                        </td>
+                    </tr>
+                    <tr class="Form-row is-torrentTitle" id="custom_torrent_title">
+                        <td class="Form-label" data-tooltip="<?= t('server.user.torrent_title_drag_note') ?>">
+                            <strong>
+                                <?= t('server.user.setting_torrent_title_seq') ?>
+                            </strong>
+                        </td>
+                        <td class="Form-inputs">
+                            <input id="SettingTorrentTitleInput" type="hidden" name="settingTorrentTitleItems" value='<?= implode(',', $SettingTorrentTitle['Items'])  ?>' />
+                            <?= Torrents::settingTorrentTitle(
+                                $SettingTorrentTitle,
+                                [
+                                    'Class' => 'TorrentTitle--standalone is-edit'
+                                ]
+                            ) ?>
+                            <button class="Button" size="tiny" onclick="globalapp.userEditSettingTorrentTitleReset()" type="submit">
+                                <?= t('server.user.reset') ?>
+                            </button>
                         </td>
                     </tr>
                     <? if (check_perms('site_advanced_search')) { ?>
@@ -624,28 +631,21 @@ echo $Val->GenerateJS('userform');
                             <?= t('server.user.st_personal') ?>
                         </td>
                     </tr>
-                    <script>
-                        function avatar_upload(url) {
-                            $("#avatar").val(url)
-                        }
-
-                        function avatar_2_upload(url) {
-                            $("#second_avatar").val(url)
-                        }
-                    </script>
                     <tr class="Form-row" id="pers_avatar_tr">
                         <td class="Form-label" data-tooltip-interactive="<?= t('server.user.st_avatar_title') ?>"><strong><?= t('server.user.st_avatar') ?></strong></td>
-                        <td class="Form-inputs">
-                            <input class="Input" type="text" size="50" name="avatar" id="avatar" value="<?= display_str($Avatar) ?>" readonly />
-                            <input class="Button" type="button" onclick="globalapp.UploadImage(false, avatar_upload)" value="上传">
+                        <td class="Form-items">
+                            <div class="FormOneLine">
+                                <input class="Input" type="text" size="50" name="avatar" id="avatar" value="<?= display_str($Avatar) ?>" />
+                            </div>
                         </td>
                     </tr>
                     <? if ($HasSecondAvatar) { ?>
                         <tr class="Form-row" id="pers_avatar2_tr">
                             <td class="Form-label" data-tooltip-interactive="<?= t('server.user.st_avatar_2_title') ?>"><strong><?= t('server.user.st_avatar_2') ?></strong></td>
-                            <td class="Form-inputs">
-                                <input class="Input" type="text" size="50" name="second_avatar" id="second_avatar" value="<?= $Rewards['SecondAvatar'] ?>" readonly />
-                                <input class="Button" type="button" onclick="globalapp.UploadImage(false, avatar_2_upload)" value="上传">
+                            <td class="Form-items">
+                                <div class="FormOneLine">
+                                    <input class="Input" type="text" size="50" name="second_avatar" id="second_avatar" value="<?= $Rewards['SecondAvatar'] ?>" />
+                                </div>
                             </td>
                         </tr>
                     <?  }
@@ -685,16 +685,12 @@ echo $Val->GenerateJS('userform');
                         <tr class="Form-row" id="pers_donorforum_tr">
                             <td class="Form-label" data-tooltip="<?= t('server.user.st_donorforum_title') ?>"><strong><?= t('server.user.st_donorforum') ?></strong></td>
                             <td class="Form-items">
-                                <div>
+                                <div class="Form-inputs">
                                     <label>
                                         <strong><?= t('server.user.donorforum_1') ?>:</strong>
-                                        <input class="Input" type="text" id="input-donor_title_prefix" size="30" maxlength="30" name="donor_title_prefix" id="donor_title_prefix" value="<?= $DonorTitles['Prefix'] ?>" /></label>
-                                </div>
-                                <div>
+                                        <input class="Input is-small" type="text" id="input-donor_title_prefix" size="30" maxlength="30" name="donor_title_prefix" id="donor_title_prefix" value="<?= $DonorTitles['Prefix'] ?>" /></label>
                                     <label for="input-donor_title_suffix"><strong><?= t('server.user.donorforum_2') ?>:</strong>
-                                        <input class="Input" type="text" id="input-donor_title_suffix" size="30" maxlength="30" name="donor_title_suffix" id="donor_title_suffix" value="<?= $DonorTitles['Suffix'] ?>" /></label>
-                                </div>
-                                <div>
+                                        <input class="Input is-small" type="text" id="input-donor_title_suffix" size="30" maxlength="30" name="donor_title_suffix" id="donor_title_suffix" value="<?= $DonorTitles['Suffix'] ?>" /></label>
                                     <label for="input-donor_title_comma"><strong><?= t('server.user.donorforum_3') ?>:</strong>
                                         <input id="input-donor_title_comma" type="checkbox" id="donor_title_comma" name="donor_title_comma" <?= !$DonorTitles['UseComma'] ? ' checked="checked"' : '' ?> /></label>
                                 </div>
@@ -777,7 +773,7 @@ echo $Val->GenerateJS('userform');
                         <tr class="Form-row" id="pers_unlimitedcolor_tr">
                             <td class="Form-label" data-tooltip="<?= t('server.user.unlimitedcolor_title') ?>"><strong><?= t('server.user.unlimitedcolor') ?></strong></td>
                             <td class="Form-inputs">
-                                <input class="Input" type="text" onkeyup="previewColorUsername()" size="50" name="unlimitedcolor" placeholder="<?= t('server.user.unlimitedcolor_placeholder') ?>" id="unlimitedcolor" value="<?= display_str($Rewards['ColorUsername']) ?>" />
+                                <input class="is-small Input" type="text" onkeyup="previewColorUsername()" size="50" name="unlimitedcolor" placeholder="<?= t('server.user.unlimitedcolor_placeholder') ?>" id="unlimitedcolor" value="<?= display_str($Rewards['ColorUsername']) ?>" />
                             </td>
                         </tr>
                     <?  } else if ($HasLimitedColorName) {
@@ -806,7 +802,7 @@ echo $Val->GenerateJS('userform');
                     if ($HasGradientsColor) { ?>
                         <tr class="Form-row" id="pers_gradientscolor_tr">
                             <td class="Form-label" data-tooltip="<?= t('server.user.gradientscolor_title') ?>"><strong><?= t('server.user.gradientscolor') ?></strong></td>
-                            <td class="Form-inputs"><input class="Input" type="text" onkeyup="previewColorUsername()" size="50" name="gradientscolor" placeholder="<?= t('server.user.gradientscolor_placeholder') ?>" id="gradientscolor" value="<?= display_str($Rewards['GradientsColor']) ?>" />
+                            <td class="Form-inputs"><input class="is-small Input" type="text" onkeyup="previewColorUsername()" size="50" name="gradientscolor" placeholder="<?= t('server.user.gradientscolor_placeholder') ?>" id="gradientscolor" value="<?= display_str($Rewards['GradientsColor']) ?>" />
                             </td>
                         </tr>
                     <?  }
@@ -1052,7 +1048,7 @@ echo $Val->GenerateJS('userform');
                     <tr class="Form-row" id="acc_irckey_tr">
                         <td class="Form-label"><strong><?= t('server.user.irckey') ?></strong></td>
                         <td class="Form-items">
-                            <div class="Form-inputs">
+                            <div class="FormOneLine">
                                 <input class="Input" type="text" size="50" name="irckey" id="irckey" value="<?= display_str($IRCKey) ?>" />
                                 <input class="Button" type="button" onclick="RandomIRCKey();" value="<?= t('server.user.irckey_title') ?>" />
                             </div>
@@ -1097,22 +1093,19 @@ echo $Val->GenerateJS('userform');
                     <tr class="Form-row" id="acc_password_tr">
                         <td class="Form-label"><strong><?= t('server.user.st_password') ?></strong></td>
                         <td class="Form-items">
-                            <div>
-                                <label>
-                                    <?= t('server.user.st_password_old') ?>:
-                                    <input class="Input" type="password" size="40" name="cur_pass" id="cur_pass" value="" />
-                                </label>
+                            <div class="FormOneLine">
+                                <div><?= t('server.user.st_password_old') ?>:</div>
+                                <input class="Input is-small" type="password" size="40" name="cur_pass" id="cur_pass" value="" />
                             </div>
-                            <div>
-                                <label>
-                                    <?= t('server.user.st_password_new') ?>:
-                                    <input class="Input" type="password" size="40" name="new_pass_1" id="new_pass_1" value="" /> <strong id="pass_strength"></strong>
-                                </label>
+                            <div class="FormOneLine">
+                                <div><?= t('server.user.st_password_new') ?>:</div>
+                                <input class="is-small Input" type="password" size="40" name="new_pass_1" id="new_pass_1" value="" />
+                                <strong id="pass_strength"></strong>
                             </div>
-                            <div>
-                                <label><?= t('server.user.st_password_re') ?>:
-                                    <input class="Input" type="password" size="40" name="new_pass_2" id="new_pass_2" value="" /> <strong id="pass_match"></strong>
-                                </label>
+                            <div class="FormOneLine">
+                                <div><?= t('server.user.st_password_re') ?>:</div>
+                                <input class="is-small Input" type="password" size="40" name="new_pass_2" id="new_pass_2" value="" />
+                                <strong id="pass_match"></strong>
                             </div>
                             <div class="setting_description">
                                 <?= t('server.user.st_password_note') ?>
@@ -1125,8 +1118,6 @@ echo $Val->GenerateJS('userform');
                         <td class="Form-items">
                             <div>
                                 <?= t('server.user.st_2fa_note1') ?> <strong class="<?= $TwoFAKey ? 'u-colorSuccess' : 'u-colorWarning'; ?>"><?= $TwoFAKey ? t('server.user.st_2fa_enabled') : t('server.user.st_2fa_disabled'); ?></strong>
-                            </div>
-                            <div>
                                 <a class="Link" href="user.php?action=2fa&do=<?= $TwoFAKey ? 'disable' : 'enable'; ?>&userid=<?= $UserID ?>"><?= t('server.user.st_2fa_note3') . ($TwoFAKey ? t('server.user.st_2fa_disable') : t('server.user.st_2fa_enable')) . t('server.user.st_2fa_after') ?></a>
                             </div>
                         </td>

@@ -208,101 +208,103 @@ if ($ShowGrouped) {
             ?>
         </div>
     </div>
-    <?
-    if (empty($Results)) {
-    ?>
-        <div class="center">
-            <?= t('server.userhistory.no_topics') ?><?= $ShowUnread ? t('server.userhistory.with_unread_posts') : '' ?>
-        </div>
-    <?
-    } else {
-    ?>
-        <div class="BodyNavLinks">
-            <?
-            $Pages = Format::get_pages($Page, $Results, $PerPage, 11);
-            echo $Pages;
-            ?>
-        </div>
+    <div class="BodyContent">
         <?
-        $QueryID = $DB->get_query_id();
-        while (list($PostID, $AddedTime, $Body, $EditedUserID, $EditedTime, $EditedUsername, $TopicID, $ThreadTitle, $LastPostID, $LastRead, $Locked, $Sticky) = $DB->next_record()) {
+        if (empty($Results)) {
         ?>
-            <div class="TableContainer">
-                <table class="TableForumPost Table <?= !Users::has_avatars_enabled() ? ' noavatar' : '' ?>" id="post<?= $PostID ?>">
-                    <tr class="Table-rowHeader">
-                        <td class="Table-cell" colspan="<?= Users::has_avatars_enabled() ? 2 : 1 ?>">
-                            <div class="TableForumPostHeader">
-                                <div class="TableForumPostHeader-info">
-                                    <?= time_diff($AddedTime) ?>
-                                    <?= t('server.userhistory.in') ?>
-                                    <a href="forums.php?action=viewthread&amp;threadid=<?= $TopicID ?>&amp;postid=<?= $PostID ?>#post<?= $PostID ?>" data-tooltip="<?= display_str($ThreadTitle) ?>">
-                                        <?= Format::cut_string($ThreadTitle, 200) ?>
-                                    </a>
-                                    <?
-                                    if ($ViewingOwn) {
-                                        if ((!$Locked || $Sticky) && (!$LastRead || $LastRead < $LastPostID)) { ?>
-                                            <span class="u-colorWarning">(<?= t('server.userhistory.new') ?>!)</span>
+            <div class="center">
+                <?= t('server.userhistory.no_topics') ?><?= $ShowUnread ? t('server.userhistory.with_unread_posts') : '' ?>
+            </div>
+        <?
+        } else {
+        ?>
+            <div class="BodyNavLinks">
+                <?
+                $Pages = Format::get_pages($Page, $Results, $PerPage, 11);
+                echo $Pages;
+                ?>
+            </div>
+            <?
+            $QueryID = $DB->get_query_id();
+            while (list($PostID, $AddedTime, $Body, $EditedUserID, $EditedTime, $EditedUsername, $TopicID, $ThreadTitle, $LastPostID, $LastRead, $Locked, $Sticky) = $DB->next_record()) {
+            ?>
+                <div class="TableContainer">
+                    <table class="TableForumPost Table <?= !Users::has_avatars_enabled() ? ' noavatar' : '' ?>" id="post<?= $PostID ?>">
+                        <tr class="Table-rowHeader">
+                            <td class="Table-cell" colspan="<?= Users::has_avatars_enabled() ? 2 : 1 ?>">
+                                <div class="TableForumPostHeader">
+                                    <div class="TableForumPostHeader-info">
+                                        <?= time_diff($AddedTime) ?>
+                                        <?= t('server.userhistory.in') ?>
+                                        <a href="forums.php?action=viewthread&amp;threadid=<?= $TopicID ?>&amp;postid=<?= $PostID ?>#post<?= $PostID ?>" data-tooltip="<?= display_str($ThreadTitle) ?>">
+                                            <?= Format::cut_string($ThreadTitle, 200) ?>
+                                        </a>
                                         <?
-                                        }
-                                        ?>
-                                        <? if (!empty($LastRead)) { ?>
-                                            <a class="TableForum-jumpToLastRead" data-tooltip="<?= t('server.common.jump_to_last_read') ?>" href="forums.php?action=viewthread&amp;threadid=<?= $TopicID ?>&amp;postid=<?= $LastRead ?>#post<?= $LastRead ?>">
-                                                <?= icon("Forum/jump-to-last-read") ?>
-                                            </a>
-                                        <? }
-                                    } else {
-                                        ?>
-                                        </span>
-                                    <? }
-                                    ?>
-                                </div>
-                                <div class="TableForumPostHeader-actions" id="bar<?= $PostID ?>">
-                                    <? if ($ViewingOwn && !in_array($TopicID, $UserSubscriptions)) { ?>
-                                        <a href="#" onclick="Subscribe(<?= $TopicID ?>); $('.subscribelink<?= $TopicID ?>').remove(); return false;" class="brackets subscribelink<?= $TopicID ?>"><?= t('server.common.subscribe') ?></a>
-                                    <? } ?>
-                                </div>
-                            </div>
-                        </td>
-                    </tr>
-                    <?
-                    if (!$ShowGrouped) {
-                    ?>
-                        <tr class="TableForumPost-cellContent Table-row">
-                            <? if (Users::has_avatars_enabled()) { ?>
-                                <td class="TableForumPost-cellAvatar Table-cell">
-                                    <?= Users::show_avatar($Avatar, $UserID, $Username, $HeavyInfo['DisableAvatars']) ?>
-                                </td>
-                            <?  } ?>
-                            <td class="TableForumPost-cellBody Table-cell">
-                                <div class="TableForumPostBody" id="content<?= $PostID ?>">
-                                    <div class="TableForumPostBody-text HtmlText PostArticle">
-                                        <?= Text::full_format($Body) ?>
-                                    </div>
-                                    <div class="TableForumPostBody-actions">
-                                        <? if ($EditedUserID) { ?>
-                                            <br />
-                                            <br />
-                                            <span class="last_edited">
-                                                <? if (check_perms('site_moderate_forums')) { ?>
-                                                    <a href="#content<?= $PostID ?>" onclick="LoadEdit(<?= $PostID ?>, 1);">&laquo;</a>
-                                                <?              } ?>
-                                                <?= t('server.userhistory.last_edited_by') ?>
-                                                <?= Users::format_username($EditedUserID, false, false, false) ?> <?= time_diff($EditedTime, 2, true, true) ?>
+                                        if ($ViewingOwn) {
+                                            if ((!$Locked || $Sticky) && (!$LastRead || $LastRead < $LastPostID)) { ?>
+                                                <span class="u-colorWarning">(<?= t('server.userhistory.new') ?>!)</span>
+                                            <?
+                                            }
+                                            ?>
+                                            <? if (!empty($LastRead)) { ?>
+                                                <a class="TableForum-jumpToLastRead" data-tooltip="<?= t('server.common.jump_to_last_read') ?>" href="forums.php?action=viewthread&amp;threadid=<?= $TopicID ?>&amp;postid=<?= $LastRead ?>#post<?= $LastRead ?>">
+                                                    <?= icon("Forum/jump-to-last-read") ?>
+                                                </a>
+                                            <? }
+                                        } else {
+                                            ?>
                                             </span>
-                                        <?          } ?>
+                                        <? }
+                                        ?>
+                                    </div>
+                                    <div class="TableForumPostHeader-actions" id="bar<?= $PostID ?>">
+                                        <? if ($ViewingOwn && !in_array($TopicID, $UserSubscriptions)) { ?>
+                                            <a href="#" onclick="Subscribe(<?= $TopicID ?>); $('.subscribelink<?= $TopicID ?>').remove(); return false;" class="brackets subscribelink<?= $TopicID ?>"><?= t('server.common.subscribe') ?></a>
+                                        <? } ?>
                                     </div>
                                 </div>
                             </td>
                         </tr>
-                    <?      }
-                    $DB->set_query_id($QueryID);
-                    ?>
-                </table>
+                        <?
+                        if (!$ShowGrouped) {
+                        ?>
+                            <tr class="TableForumPost-cellContent Table-row">
+                                <? if (Users::has_avatars_enabled()) { ?>
+                                    <td class="TableForumPost-cellAvatar Table-cell">
+                                        <?= Users::show_avatar($Avatar, $UserID, $Username, $HeavyInfo['DisableAvatars']) ?>
+                                    </td>
+                                <?  } ?>
+                                <td class="TableForumPost-cellBody Table-cell">
+                                    <div class="TableForumPostBody" id="content<?= $PostID ?>">
+                                        <div class="TableForumPostBody-text HtmlText PostArticle">
+                                            <?= Text::full_format($Body) ?>
+                                        </div>
+                                        <div class="TableForumPostBody-actions">
+                                            <? if ($EditedUserID) { ?>
+                                                <br />
+                                                <br />
+                                                <span class="last_edited">
+                                                    <? if (check_perms('site_moderate_forums')) { ?>
+                                                        <a href="#content<?= $PostID ?>" onclick="LoadEdit(<?= $PostID ?>, 1);">&laquo;</a>
+                                                    <?              } ?>
+                                                    <?= t('server.userhistory.last_edited_by') ?>
+                                                    <?= Users::format_username($EditedUserID, false, false, false) ?> <?= time_diff($EditedTime, 2, true, true) ?>
+                                                </span>
+                                            <?          } ?>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        <?      }
+                        $DB->set_query_id($QueryID);
+                        ?>
+                    </table>
+                </div>
+            <?  } ?>
+            <div class="BodyNavLinks">
+                <?= $Pages ?>
             </div>
-        <?  } ?>
-        <div class="BodyNavLinks">
-            <?= $Pages ?>
-        </div>
-    <? } ?>
+        <? } ?>
+    </div>
 </div>
 <? View::show_footer(); ?>

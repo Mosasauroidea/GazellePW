@@ -45,7 +45,7 @@ View::show_header(t('server.user.manage_notifications'), 'jquery.validate,form_v
                     <tr class="Table-row">
                         <td class="Tabel-cell Table-cellLeft">
                             <div class="RssTitle">
-                                <a data-tooltip="<?= t('server.user.rss_address') ?>" href="feeds.php?feed=torrents_notify_<?= $ID ?>_<?= $LoggedUser['torrent_pass'] ?>&amp;user=<?= $LoggedUser['ID'] ?>&amp;auth=<?= $LoggedUser['RSS_Auth'] ?>&amp;passkey=<?= $LoggedUser['torrent_pass'] ?>&amp;authkey=<?= $LoggedUser['AuthKey'] ?>&amp;name=<?= urlencode($N['Label']) ?>">
+                                <a target="_blank" data-tooltip="<?= t('server.user.rss_address') ?>" href="feeds.php?feed=torrents_notify_<?= $ID ?>_<?= $LoggedUser['torrent_pass'] ?>&amp;user=<?= $LoggedUser['ID'] ?>&amp;auth=<?= $LoggedUser['RSS_Auth'] ?>&amp;passkey=<?= $LoggedUser['torrent_pass'] ?>&amp;authkey=<?= $LoggedUser['AuthKey'] ?>&amp;name=<?= urlencode($N['Label']) ?>">
                                     <?= icon('rss') ?></a>
                                 <?= $Label ?>
                             </div>

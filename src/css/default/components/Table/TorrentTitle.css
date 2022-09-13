@@ -4,8 +4,6 @@ TorrentTitle TorrentTitle--standalone   # settings - torrent title
 */
 
 .TorrentTitle {
-  line-height: 1.2;
-  vertical-align: middle;
 }
 .TableTorrent.is-alternative .TorrentTitle {
   font-family: var(--global-fontFamilyMonospace);
@@ -23,6 +21,7 @@ TorrentTitle TorrentTitle--standalone   # settings - torrent title
 .TorrentTitle-item {
   vertical-align: middle;
   margin: 3px 0px;
+  line-height: 1.5em;
 }
 
 .TorrentTitle-item.torrent_discount.free {

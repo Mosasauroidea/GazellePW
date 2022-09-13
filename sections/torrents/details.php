@@ -10,8 +10,6 @@ function compare($X, $Y) {
 }
 header('Access-Control-Allow-Origin: *');
 
-define('MAX_PERS_COLLAGES', 3); // How many personal collages should be shown by default
-define('MAX_COLLAGES', 5); // How many normal collages should be shown by default
 
 $GroupID = ceil($_GET['id']);
 if (!empty($_GET['revisionid']) && is_number($_GET['revisionid'])) {
@@ -101,6 +99,7 @@ if ($TorrentTags != '') {
         $Tags[$TagKey]['userid'] = $TorrentTagUserIDs[$TagKey];
         $TagNames[] = $SubNames[$TagName];
     }
+    $TagsFormat = new Tags(implode(' ', $TagNames));
     uasort($Tags, 'compare');
 }
 
@@ -143,6 +142,9 @@ View::show_header($Title, 'browse,comments,torrent,bbcode,recommend,cover_art,su
 ?>
 <div class="LayoutBody">
     <div class="BodyHeader">
+        <div class="BodyHeader-nav">
+            <?= t('server.torrents.header') ?>
+        </div>
         <div class="BodyNavLinks">
             <? if (check_perms('site_edit_wiki')) { ?>
                 <a href="torrents.php?action=editgroup&amp;groupid=<?= $GroupID ?>" class="brackets"><?= t('server.common.edit') ?></a>
@@ -159,8 +161,7 @@ View::show_header($Title, 'browse,comments,torrent,bbcode,recommend,cover_art,su
             <?  } else { ?>
                 <a href="#" id="bookmarklink_torrent_<?= $GroupID ?>" class="add_bookmark brackets" onclick="Bookmark('torrent', <?= $GroupID ?>, '<?= t('server.common.remove_bookmark') ?>'); return false;"><?= t('server.common.add_bookmark') ?></a>
             <?  } ?>
-            <a href="#" id="subscribelink_torrents<?= $GroupID ?>" class="brackets" onclick="SubscribeComments('torrents', <?= $GroupID ?>); return false;"><?= Subscriptions::has_subscribed_comments('torrents', $GroupID) !== false ? t('server.torrents.unsubscribe') : t('server.torrents.subscribe') ?></a>
-            <!-- <a href="#" id="recommend" class="brackets">Recommend</a> -->
+            <a href="#" id="subscribelink_torrents<?= $GroupID ?>" class="brackets" onclick="SubscribeComments('torrents', <?= $GroupID ?>, '<?= Subscriptions::has_subscribed_comments('torrents', $GroupID) !== false ? t('server.torrents.subscribe') : t('server.torrents.unsubscribe') ?>'); return false;"><?= Subscriptions::has_subscribed_comments('torrents', $GroupID) !== false ? t('server.torrents.unsubscribe') : t('server.torrents.subscribe') ?></a>
             <?
             if ($Categories[$GroupCategoryID - 1] == 'Movies') { ?>
                 <a href="upload.php?groupid=<?= $GroupID ?>" class="brackets"><?= t('server.torrents.add_format') ?></a>
@@ -179,11 +180,11 @@ View::show_header($Title, 'browse,comments,torrent,bbcode,recommend,cover_art,su
         </div>
         <div class="MovieInfo-titleContainer">
             <span class="MovieInfo-title">
-                <?= $GroupName ?>
+                <?= display_str($GroupName) ?>
             </span>
             <i class="MovieInfo-year">(<? print_r($GroupYear) ?>)</i>
             <? if ($SubName) {
-                echo "<div class='MovieInfo-subTitle'>$SubName</div>";
+                echo "<div class='MovieInfo-subTitle'>" . display_str($SubName) . "</div>";
             } ?>
         </div>
         <div class="MovieInfo-tagContainer">
@@ -230,17 +231,16 @@ View::show_header($Title, 'browse,comments,torrent,bbcode,recommend,cover_art,su
                 </span>
             </div>
             <div class="MovieInfo-tags">
-                <? foreach ($TagNames as $TagName) { ?>
-                    <span class="MovieInfo-tag" data-tooltip="<?= t('server.torrents.tag') ?>">
-                        <i><?= $TagName ?></i>
-                    </span>
-                <? } ?>
+                <i>
+                    <?= $TagsFormat->format('torrents.php?action=advanced&amp;taglist=', '', 'MovieInfo-tag')
+                    ?>
+                </i>
             </div>
         </div>
 
-        <div class="MovieInfo-synopsis" data-tooltip="<?= t('server.torrents.fold_tooltip') ?>">
+        <div class=" MovieInfo-synopsis" data-tooltip="<?= t('server.torrents.fold_tooltip') ?>">
             <p class="HtmlText">
-                <?= $WikiBody ?>
+                <?= display_str($WikiBody) ?>
             </p>
         </div>
         <div class="MovieInfo-artists u-hideScrollbar">
@@ -873,7 +873,7 @@ View::show_header($Title, 'browse,comments,torrent,bbcode,recommend,cover_art,su
                                 <?
                                 if (check_perms("torrents_slot_edit")) {
                                 ?>
-                                    <a href="#" onclick="$('#slot').submit(); return false"> <?= t('server.apply.saved') ?></a>
+                                    | <a href="#" onclick="$('#slot').submit(); return false"> <?= t('server.apply.saved') ?></a>
                                 <?
                                 }
                                 ?>
@@ -1104,4 +1104,4 @@ View::show_header($Title, 'browse,comments,torrent,bbcode,recommend,cover_art,su
     </div>
 </div>
 <?
-View::show_footer();
+View::show_footer([], 'torrents/index.js');

@@ -365,7 +365,7 @@ View::show_header($Title, '', 'PageRequestHome');
                 <? } ?>
                 <a class="Link" href="bookmarks.php?type=requests"><?= t('server.requests.bookmarked_requests') ?></a>
             <?  } else { ?>
-                <a class="Link" href="bookmarks.php?type=torrents"><?= t('server.common.torrents') ?></a>
+                <a class="Link" href="bookmarks.php?type=torrents"><?= t('server.index.moviegroups') ?></a>
                 <a class="Link" href="bookmarks.php?type=artists"><?= t('server.common.artists') ?></a>
                 <? if (CONFIG['ENABLE_COLLAGES']) { ?>
                     <a class="Link" href="bookmarks.php?type=collages"><?= t('server.requests.collages') ?></a>
@@ -401,28 +401,6 @@ View::show_header($Title, '', 'PageRequestHome');
                             <input class="Input" type="text" name="search" size="75" value="<? if (isset($_GET['search'])) {
                                                                                                 echo display_str($_GET['search']);
                                                                                             } ?>" />
-                        </td>
-                    </tr>
-                    <tr class="Form-row is-tagFilter">
-                        <td class="Form-label"><?= t('server.requests.tags_comma') ?>:</td>
-                        <td class="Form-inputs">
-                            <select class="Input" id="genre_tags" name="genre_tags" onchange="globalapp.addTorrentItem('tags', 'genre_tags'); return false;">
-                                <option class="Select-option" value="">--</option>
-                                <? foreach (Misc::display_array($GenreTags) as $Genre) { ?>
-                                    <option class="Select-option" value="<?= $Genre ?>"><?= $Genre ?></option>
-                                <? } ?>
-                            </select>
-                            <input class="Input" type="text" name="tags" id="tags" size="60" value="<?= !empty($TagNames) ? display_str($TagNames) : '' ?>" <? Users::has_autocomplete_enabled('other'); ?> />
-                            <div class="RadioGroup">
-                                <div class="Radio">
-                                    <input class="Input" type="radio" name="tags_type" id="tags_type0" value="0" <? Format::selected('tags_type', 0, 'checked') ?> />
-                                    <label class="Radio-label" for="tags_type0"><?= t('server.requests.any') ?> </label>
-                                </div>
-                                <div class="Radio">
-                                    <input class="Input" type="radio" name="tags_type" id="tags_type1" value="1" <? Format::selected('tags_type', 1, 'checked') ?> />
-                                    <label class="Radio-label" for="tags_type1"><?= t('server.requests.all') ?></label>
-                                </div>
-                            </div>
                         </td>
                     </tr>
                     <tr class="Form-row is-includeFilled">
@@ -640,12 +618,12 @@ View::show_header($Title, '', 'PageRequestHome');
                                     <a href="user.php?id=<?= $FillerInfo['ID'] ?>"><?= $FillerInfo['Username'] ?></a>
                                 <?
                                 } else { ?>
-                                    &mdash;
+                                    --
                                 <?
                                 } ?>
                             </td>
                             <td class="TableRequest-cellRequestedBy Table-cell">
-                                <a href="user.php?id=<?= $Request['UserID'] ?>"><?= Users::format_username($Request['UserID'], false, false, false) ?></a>
+                                <?= Users::format_username($Request['UserID'], false, false, false) ?>
                             </td>
                             <td class="TableRequest-cellCreatedAt TableRequest-cellTime Table-cell">
                                 <?= time_diff($Request['TimeAdded'], 1) ?>

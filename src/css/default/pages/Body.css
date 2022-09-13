@@ -60,6 +60,10 @@ Where
   margin: 0;
 }
 
+.BodyHeader-subNav {
+  font-size: 1.3rem;
+}
+
 /* BodyNavLinks */
 .BodyNavLinks {
   display: flex;

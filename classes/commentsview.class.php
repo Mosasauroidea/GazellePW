@@ -28,7 +28,7 @@ class CommentsView {
      */
     public static function render_comment($AuthorID, $PostID, $Body, $AddedTime, $EditedUserID, $EditedTime, $Link, $Unread = false, $Header = '', $Tools = true) {
         $UserInfo = Users::user_info($AuthorID);
-        $Header = '<strong>' . Users::format_username($AuthorID, true, true, true, true, false, false, false, true) . '</strong> ' . time_diff($AddedTime) . $Header;
+        $Header = '<strong>' . Users::format_username($AuthorID, true, true, true, true, false, false, false, true) . '</strong> ' . $Header;
 ?>
         <div class="TableContainer">
             <table class="TableForumPost Table <?= (!Users::has_avatars_enabled() ? ' noavatar' : '') . ($Unread ? ' forum_unread' : '') ?>" id="post<?= $PostID ?>">
@@ -40,13 +40,14 @@ class CommentsView {
                                 <?= $Header ?>
                             </div>
                             <div class="TableForumPostHeader-actions" id="bar<?= $PostID ?>">
+                                <?= time_diff($AddedTime) ?>
                                 <? if ($Tools) { ?>
-                                    <a href="#quickpost" onclick="Quote('<?= $PostID ?>','<?= $UserInfo['Username'] ?>', true);" class="brackets"><?= t('server.forums.quote') ?></a>
+                                    - <a href="#quickpost" onclick="Quote('<?= $PostID ?>','<?= $UserInfo['Username'] ?>', true);" class="brackets"><?= t('server.forums.quote') ?></a>
                                     <? if ($AuthorID == G::$LoggedUser['ID'] || check_perms('site_moderate_forums')) { ?>
-                                        - <a href="#post<?= $PostID ?>" onclick="Edit_Form('<?= $PostID ?>','<?= $Key ?>');" class="brackets"><?= t('server.common.edit') ?></a>
+                                        - <a onclick="globalapp.editForm('<?= $PostID ?>');" class="brackets"><?= t('server.common.edit') ?></a>
                                     <? } ?>
                                     <? if (check_perms('site_moderate_forums')) { ?>
-                                        - <a href="#post<?= $PostID ?>" onclick="Delete('<?= $PostID ?>');" class="brackets"><?= t('server.common.delete') ?></a>
+                                        - <a onclick="Delete('<?= $PostID ?>');" class="brackets"><?= t('server.common.delete') ?></a>
                                     <? } ?>
                                     - <a href="reports.php?action=report&amp;type=comment&amp;id=<?= $PostID ?>" class="brackets"><?= t('server.forums.report') ?></a>
                                     <? if (check_perms('users_warn') && $AuthorID != G::$LoggedUser['ID'] && G::$LoggedUser['Class'] >= $UserInfo['Class']) { ?>
@@ -71,6 +72,12 @@ class CommentsView {
                             <div class="TableForumPostBody-text HtmlText PostArticle">
                                 <?= Text::full_format($Body) ?>
                             </div>
+                            <form class="TableForumPostBody-edit hidden" id="edit_form_<?= $PostID ?>">
+                                <input type="hidden" name="auth" value="<?= G::$LoggedUser['AuthKey'] ?>" />
+                                <input type="hidden" name="key" value="<?= $Key ?>" />
+                                <input type="hidden" name="postid" value="<?= $PostID ?>" />
+                                <? new TEXTAREA_PREVIEW('body', "edit_content_$PostID", '', 60, 8, true, true, false); ?>
+                            </form>
                             <div class="TableForumPostBody-actions">
                                 <? if ($EditedUserID) { ?>
                                     <div class="TableForumPostBody-divider"></div>

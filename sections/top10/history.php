@@ -97,49 +97,52 @@ View::show_header(t('server.top10.top_10_torrents_history'), '', 'PageTop10Histo
         }
     ?>
 
-        <br />
-        <div class="pad box">
-            <h3>
-                <?= t('server.top10.top_10_for', ['Values' => [
-                    ($Type == 'day' ? $Date : t('server.top10.the_first_week_after', ['Values' => [$Date]]))
-                ]]) ?>
-            </h3>
-            <?
-            $TableTorrentClass = G::$LoggedUser['SettingTorrentTitle']['Alternative'] ? 'is-alternative' : '';
-            ?>
-            <table class="TableTorrent Table $TableTorrentClass">
-                <tr class="Table-rowHeader">
-                    <td class="Table-cell" style="width: 15px;"></td>
-                    <td class="Table-cell"></td>
-                    <td class="Table-cell"><?= t('server.top10.name') ?></td>
-                </tr>
+        <div class="Box is-noBorder">
+            <div class="Box-header">
+                <div class="Box-headerTitle">
+                    <?= t('server.top10.top_10_for', ['Values' => [
+                        ($Type == 'day' ? $Date : t('server.top10.the_first_week_after', ['Values' => [$Date]]))
+                    ]]) ?>
+                </div>
+            </div>
+            <div class="Box-body">
                 <?
-                foreach ($Details as $Torrent) {
-                    $GroupID = $Torrent['ID'];
-                    $TorrentID = $Torrent['TorrentID'];
-                    if ($GroupID) {
-                        $TorrentDetail = Torrents::get_torrent($TorrentID);
-                        $TitleString = Torrents::torrent_name($TorrentDetail);
-                    } else {
-                        $TitleString = "$TitleString (Deleted)";
-                    } // if ($GroupID)
-                    $TorrentTags = new Tags($TagString);
+                $TableTorrentClass = G::$LoggedUser['SettingTorrentTitle']['Alternative'] ? 'is-alternative' : '';
                 ?>
-                    <tr class="Table-row <?= $Highlight ?>">
-                        <td class="Table-cell"><strong><?= $Rank ?></strong></td>
-                        <td class="Table-cell">
-                            <div data-tooltip="<?= $TorrentTags->title() ?>" class="<?= Format::css_category($GroupCategoryID) ?> <?= $TorrentTags->css_name() ?>"></div>
-                        </td>
-                        <td class="Table-cell">
-                            <span><?= ($GroupID ? '<a href="torrents.php?action=download&amp;id=' . $TorrentID . '&amp;authkey=' . $LoggedUser['AuthKey'] . '&amp;torrent_pass=' . $LoggedUser['torrent_pass'] . ' data-tooltip="Download" class="brackets">DL</a>' : '(Deleted)') ?></span>
-                            <?= $TitleString ?>
-                            <div class="tags"><?= $TorrentTags->format() ?></div>
-                        </td>
+                <table class="TableTorrent Table $TableTorrentClass">
+                    <tr class="Table-rowHeader">
+                        <td class="Table-cell" style="width: 15px;"></td>
+                        <td class="Table-cell"></td>
+                        <td class="Table-cell"><?= t('server.top10.name') ?></td>
                     </tr>
-                <?
-                } //foreach ($Details as $Detail)
-                ?>
-            </table><br />
+                    <?
+                    foreach ($Details as $Torrent) {
+                        $GroupID = $Torrent['ID'];
+                        $TorrentID = $Torrent['TorrentID'];
+                        if ($GroupID) {
+                            $TorrentDetail = Torrents::get_torrent($TorrentID);
+                            $TitleString = Torrents::torrent_simple_view($TorrentDetail['Group'], $TorrentDetail);
+                        } else {
+                            $TitleString = "$TitleString (Deleted)";
+                        } // if ($GroupID)
+                        $TorrentTags = new Tags($TagString);
+                    ?>
+                        <tr class="Table-row <?= $Highlight ?>">
+                            <td class="Table-cell"><strong><?= $Rank ?></strong></td>
+                            <td class="Table-cell">
+                                <div data-tooltip="<?= $TorrentTags->title() ?>" class="<?= Format::css_category($GroupCategoryID) ?> <?= $TorrentTags->css_name() ?>"></div>
+                            </td>
+                            <td class="Table-cell">
+                                <span><?= ($GroupID ? '<a href="torrents.php?action=download&amp;id=' . $TorrentID . '&amp;authkey=' . $LoggedUser['AuthKey'] . '&amp;torrent_pass=' . $LoggedUser['torrent_pass'] . ' data-tooltip="Download" class="brackets">DL</a>' : '(Deleted)') ?></span>
+                                <?= $TitleString ?>
+                                <div class="tags"><?= $TorrentTags->format() ?></div>
+                            </td>
+                        </tr>
+                    <?
+                    } //foreach ($Details as $Detail)
+                    ?>
+                </table>
+            </div>
         </div>
 </div>
 <?

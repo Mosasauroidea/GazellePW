@@ -216,36 +216,38 @@ View::show_header(t('server.reportsv2.reports_v2'), 'reportsv2,bbcode,browse', '
         <h2 class="BodyHeader-nav"><?= $Title ?></h2>
         <? include('header.php'); ?>
     </div>
-    <div>
-        <? if ($View !== 'resolved') { ?>
-            <span data-tooltip=" <?= t('server.reportsv2.multi_resolve_btn_title') ?>"><input class="Button" type="button" onclick="MultiResolve();" value="<?= t('server.reportsv2.multi_resolve') ?>" /></span>
-            <span data-tooltip="<?= t('server.reportsv2.claim_all_btn_title') ?>"><input class="Button" type="button" onclick="Grab();" value="<?= t('server.reportsv2.claim_all') ?>" /></span>
-        <?  }
-        if ($View === 'staff' && $LoggedUser['ID'] == $ID) { ?>
-            <span data-tooltip="<?= t('server.reportsv2.unclaim_all_btn_title') ?>"><input class="Button" type="button" onclick="GiveBack();" value="<?= t('server.reportsv2.unclaim_all') ?>" /></span>
-        <?  } ?>
-    </div>
-    <? if ($PageLinks) { ?>
-        <div class="BodyNavLinks">
-            <?= $PageLinks ?>
+    <div class="BodyContent">
+        <div>
+            <? if ($View !== 'resolved') { ?>
+                <span data-tooltip=" <?= t('server.reportsv2.multi_resolve_btn_title') ?>"><input class="Button" type="button" onclick="MultiResolve();" value="<?= t('server.reportsv2.multi_resolve') ?>" /></span>
+                <span data-tooltip="<?= t('server.reportsv2.claim_all_btn_title') ?>"><input class="Button" type="button" onclick="Grab();" value="<?= t('server.reportsv2.claim_all') ?>" /></span>
+            <?  }
+            if ($View === 'staff' && $LoggedUser['ID'] == $ID) { ?>
+                <span data-tooltip="<?= t('server.reportsv2.unclaim_all_btn_title') ?>"><input class="Button" type="button" onclick="GiveBack();" value="<?= t('server.reportsv2.unclaim_all') ?>" /></span>
+            <?  } ?>
         </div>
-    <?  } ?>
-    <div id="all_reports">
-        <? if (count($Reports) === 0) { ?>
-            <div class="BoxBody">
-                <strong><?= t('server.reportsv2.no_new_reports') ?></strong>
+        <? if ($PageLinks) { ?>
+            <div class="BodyNavLinks">
+                <?= $PageLinks ?>
             </div>
-        <?  } else { ?>
-            <?
-            foreach ($Reports as $Idx => $Report) {
-                render_item($Idx, $Report)
-            ?>
+        <?  } ?>
+        <div id="all_reports">
+            <? if (count($Reports) === 0) { ?>
+                <div class="BoxBody">
+                    <strong><?= t('server.reportsv2.no_new_reports') ?></strong>
+                </div>
+            <?  } else { ?>
+                <?
+                foreach ($Reports as $Idx => $Report) {
+                    render_item($Idx, $Report)
+                ?>
+                <? } ?>
             <? } ?>
+        </div>
+        <? if ($PageLinks) { ?>
+            <div class="BodyNavLinks pager"><?= $PageLinks ?></div>
         <? } ?>
     </div>
-    <? if ($PageLinks) { ?>
-        <div class="BodyNavLinks pager"><?= $PageLinks ?></div>
-    <? } ?>
 </div>
 
 <? View::show_footer(); ?>

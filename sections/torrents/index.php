@@ -70,6 +70,10 @@ if (!empty($_REQUEST['action'])) {
             enforce_login();
             include(CONFIG['SERVER_ROOT'] . '/sections/torrents/snatchlist.php');
             break;
+        case 'reportlist':
+            enforce_login();
+            include(CONFIG['SERVER_ROOT'] . '/sections/torrents/reportlist.php');
+            break;
 
         case 'downloadlist':
             enforce_login();

@@ -20,12 +20,7 @@ $DB->query("
 	UPDATE torrents
 	SET LastReseedRequest = NOW()
 	WHERE ID = '$TorrentID'");
-
-$Group = Torrents::get_groups(array($GroupID));
-extract(Torrents::array_group($Group[$GroupID]));
-
-$Name = Artists::display_artists(array('1' => $Artists), false, true);
-$Name .= $GroupName;
+$Torrent = TOrrents::get_torrent($TorrentID);
 
 $usersToNotify = array();
 
@@ -50,6 +45,7 @@ if ($DB->has_results()) {
 }
 
 $usersToNotify[$UploaderID] = array("uploaded", strtotime($UploadedTime));
+$Name = Torrents::torrent_name($Torrent, false);
 
 foreach ($usersToNotify as $UserID => $info) {
     $Username = Users::user_info($UserID)['Username'];
@@ -78,8 +74,8 @@ View::show_header('', '', 'PageTorrentReseed');
     <div class="BodyHeader">
         <h2 class="BodyHeader-nav"><?= t('server.torrents.successfully_sent_re_seed_request') ?></h2>
     </div>
-    <div class="BoxBody thin">
-        <p><?= t('server.torrents.successfully_sent_re_seed_request_for_torrent') ?><a href="torrents.php?id=<?= $GroupID ?>&torrentid=<?= $TorrentID ?>"><?= display_str($Name) ?></a><?= t('server.torrents.space_to_space') ?><?= t('server.torrents.n_user', ['Count' => $NumUsers, 'Values' => [$NumUsers]]) ?></p>
+    <div>
+        <p><?= t('server.torrents.successfully_sent_re_seed_request_for_torrent') ?><?= Torrents::torrent_simple_view($Torrent['Group'], $Torrent) ?><?= t('server.torrents.space_to_space') ?><?= t('server.torrents.n_user', ['Count' => $NumUsers, 'Values' => [$NumUsers]]) ?></p>
     </div>
 </div>
 <?

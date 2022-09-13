@@ -34,21 +34,22 @@ switch ($Short) {
         if (!$DB->has_results()) {
             error(404);
         }
-        list($Name, $Desc, $Filled, $CategoryID, $Year) = $DB->next_record();
+        $Request = Requests::get_request($ID);
+        $Name = Torrents::group_name($Request);
+        $Desc = $Request['Description'];
+        $Filled = $Request['TorrentID'];
+        $CategoryID = $Request['CategoryID'];
+        $Year = $Request['Year'];
         if ($Filled || ($CategoryID != 0)) {
             error(403);
         }
         break;
 
     case 'request':
-        $DB->query("
-			SELECT Title, Description, TorrentID
-			FROM requests
-			WHERE ID = $ID");
-        if (!$DB->has_results()) {
-            error(404);
-        }
-        list($Name, $Desc, $Filled) = $DB->next_record();
+        $Request = Requests::get_request($ID);
+        $Name = Torrents::group_name($Request);
+        $Desc = $Request['Description'];
+        $Filled = $Request['TorrentID'];
         break;
 
     case 'collage':
@@ -132,7 +133,8 @@ View::show_header(t('server.reports.report_a') . $Type['title'], 'bbcode,jquery.
 ?>
 <div class="LayoutBody">
     <div class="BodyHeader">
-        <h2 class="BodyHeader-nav"><?= t('server.reports.h2_report') ?><?= $Type['title'] ?></h2>
+        <div class="BodyHeader-nav"><?= t('server.reports.h2_report') ?><?= $Type['title'] ?></div>
+        <div class="BodyHeader-subNav"><?= $Name ?></div>
     </div>
     <div class="Box">
         <div class="Box-header"><?= t('server.reports.reporting_guidelines') ?></div>
@@ -147,164 +149,168 @@ View::show_header(t('server.reports.report_a') . $Type['title'], 'bbcode,jquery.
             <p><?= t('server.reports.reporting_guidelines_summary') ?></p>
         </div>
     </div>
-    <div class="Form-rowList" variant="header">
-        <?
+    <form class="create_form" name="report" id="report_form" action="" method="post">
+        <input type="hidden" name="action" value="takereport" />
+        <input type="hidden" name="auth" value="<?= $LoggedUser['AuthKey'] ?>" />
+        <input type="hidden" name="id" value="<?= $ID ?>" />
+        <input type="hidden" name="type" value="<?= $Short ?>" />
 
-        switch ($Short) {
-            case 'user':
-        ?>
-                <div class="Form-rowHeader"><?= t('server.reports.reporting_the_user') ?> > <?= display_str($Username) ?></div>
+        <div class="Form-rowList" variant="header">
             <?
-                break;
-            case 'request_update':
-            ?>
-                <p><?= t('server.reports.reporting_the_request') ?>:</p>
-                <table class=" TableReportDetail">
-                    <tr class="Table-rowHeader">
-                        <td class="Table-cell"><?= t('server.reports.title') ?></td>
-                        <td class="Table-cell"><?= t('server.reports.description') ?></td>
-                        <td class="Table-cell"><?= t('server.reports.filled') ?>?</td>
-                    </tr>
-                    <tr class="Table-row">
-                        <td class="Table-cell">
-                            <?= display_str($Name) ?>
-                        </td>
-                        <td class="Table-cell">
-                            <div class="HtmlText">
-                                <?= Text::full_format($Desc) ?>
-                            </div>
-                        </td>
-                        <td class="Table-cell">
-                            <strong><?= ($Filled == 0 ? t('server.reports.no') : t('server.reports.yes')) ?></strong>
-                        </td>
-                    </tr>
-                </table>
-                <br />
 
-                <div class="BoxBody center">
-                    <p><strong><?= t('server.reports.way_to_increase_turnover_rate') ?></strong></p>
-                    <form class="create_form" id="report_form" name="report" action="" method="post">
-                        <input type="hidden" name="action" value="takereport" />
-                        <input type="hidden" name="auth" value="<?= $LoggedUser['AuthKey'] ?>" />
-                        <input type="hidden" name="id" value="<?= $ID ?>" />
-                        <input type="hidden" name="type" value="<?= $Short ?>" />
-                        <table class="layout">
-                            <tr>
-                                <td class="label"><?= t('server.reports.year_required') ?></td>
-                                <td>
-                                    <input class="Input required" type="text" size="4" name="year" />
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="label"><?= t('server.reports.release_type') ?></td>
-                                <td>
-                                    <select class="Input" id="releasetype" name="releasetype">
-                                        <option class="Select-option" value="0">---</option>
-                                        <? foreach ($ReleaseTypes as $Key => $Val) { ?>
-                                            <option class="Select-option" value="<?= $Key ?>" <?= (!empty($ReleaseType) ? ($Key == $ReleaseType ? ' selected="selected"' : '') : '') ?>><?= $Val ?></option>
-                                        <?      } ?>
-                                    </select>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="label"><?= t('server.reports.comment') ?></td>
-                                <td>
-                                    <textarea class="Input" rows="8" cols="80" name="comment" class="required"></textarea>
-                                </td>
-                            </tr>
-                        </table>
-                        <br />
-                        <br />
-                        <input class="Button" type="submit" value="Submit report" />
-                    </form>
-                </div>
-            <?
-                break;
-            case 'request':
+            switch ($Short) {
+                case 'user':
             ?>
-                <div class="Form-rowHeader"><?= t('server.reports.h2_report') ?><?= $Type['title'] ?> </div>
-                <div class="Form-row">
-                    <div class="Form-label"><?= t('server.reports.title') ?>:</div>
-                    <div class="Form-inputs"><?= display_str($Name) ?></div>
-                </div>
-                <div class="Form-row">
-                    <div class="Form-label"><?= t('server.reports.description') ?>:</div>
-                    <div class="Form-inputs HtmlText PostArticle"><?= Text::full_format($Desc) ?></div>
-                </div>
-                <div class="Form-row">
-                    <div class="Form-label"><?= t('server.reports.filled') ?>:</div>
-                    <div class="Form-inputs HtmlText PostArticle"><strong><?= ($Filled == 0 ? t('server.reports.no') : t('server.reports.yes')) ?></strong></div>
-                </div>
+                    <div class="Form-rowHeader"><?= t('server.reports.reporting_the_user') ?> > <?= display_str($Username) ?></div>
+                <?
+                    break;
+                case 'request_update':
+                ?>
+                    <p><?= t('server.reports.reporting_the_request') ?>:</p>
+                    <table class=" TableReportDetail">
+                        <tr class="Table-rowHeader">
+                            <td class="Table-cell"><?= t('server.reports.title') ?></td>
+                            <td class="Table-cell"><?= t('server.reports.description') ?></td>
+                            <td class="Table-cell"><?= t('server.reports.filled') ?>?</td>
+                        </tr>
+                        <tr class="Table-row">
+                            <td class="Table-cell">
+                                <?= $Name ?>
+                            </td>
+                            <td class="Table-cell">
+                                <div class="HtmlText">
+                                    <?= Text::full_format($Desc) ?>
+                                </div>
+                            </td>
+                            <td class="Table-cell">
+                                <strong><?= ($Filled == 0 ? t('server.reports.no') : t('server.reports.yes')) ?></strong>
+                            </td>
+                        </tr>
+                    </table>
+                    <br />
 
-            <?
-                break;
-            case 'collage':
-            ?>
-                <div class="Form-rowHeader"><?= t('server.reports.h2_report') ?><?= $Type['title'] ?> ><?= display_str($Name) ?></div>
-            <?
-                break;
-            case 'thread':
-            ?>
-                <div class="Form-rowHeader"><?= t('server.reports.h2_report') ?><?= $Type['title'] ?> </div>
-                <div class="Form-row">
-                    <div class="Form-label"><?= t('server.reports.username') ?>:</div>
-                    <div class="Form-inputs"><?= display_str($Username) ?></div>
-                </div>
-                <div class="Form-row">
-                    <div class="Form-label"><?= t('server.reports.title') ?>:</div>
-                    <div class="Form-inputs HtmlText PostArticle"><?= Text::full_format($Title) ?></div>
-                </div>
+                    <div class="BoxBody center">
+                        <p><strong><?= t('server.reports.way_to_increase_turnover_rate') ?></strong></p>
+                        <form class="create_form" id="report_form" name="report" action="" method="post">
+                            <input type="hidden" name="action" value="takereport" />
+                            <input type="hidden" name="auth" value="<?= $LoggedUser['AuthKey'] ?>" />
+                            <input type="hidden" name="id" value="<?= $ID ?>" />
+                            <input type="hidden" name="type" value="<?= $Short ?>" />
+                            <table class="layout">
+                                <tr>
+                                    <td class="label"><?= t('server.reports.year_required') ?></td>
+                                    <td>
+                                        <input class="Input required" type="text" size="4" name="year" />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="label"><?= t('server.reports.release_type') ?></td>
+                                    <td>
+                                        <select class="Input" id="releasetype" name="releasetype">
+                                            <option class="Select-option" value="0">---</option>
+                                            <? foreach ($ReleaseTypes as $Key => $Val) { ?>
+                                                <option class="Select-option" value="<?= $Key ?>" <?= (!empty($ReleaseType) ? ($Key == $ReleaseType ? ' selected="selected"' : '') : '') ?>><?= $Val ?></option>
+                                            <?      } ?>
+                                        </select>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="label"><?= t('server.reports.comment') ?></td>
+                                    <td>
+                                        <textarea class="Input" rows="8" cols="80" name="comment" class="required"></textarea>
+                                    </td>
+                                </tr>
+                            </table>
+                            <br />
+                            <br />
+                            <input class="Button" type="submit" value="Submit report" />
+                        </form>
+                    </div>
+                <?
+                    break;
+                case 'request':
+                ?>
+                    <div class="Form-rowHeader"><?= t('server.reports.h2_report') ?><?= $Type['title'] ?> </div>
+                    <div class="Form-row">
+                        <div class="Form-label"><?= t('server.reports.title') ?>:</div>
+                        <div class="Form-inputs"><?= $Name ?></div>
+                    </div>
+                    <div class="Form-row">
+                        <div class="Form-label"><?= t('server.reports.description') ?>:</div>
+                        <div class="Form-inputs HtmlText PostArticle"><?= Text::full_format($Desc) ?></div>
+                    </div>
+                    <div class="Form-row">
+                        <div class="Form-label"><?= t('server.reports.filled') ?>:</div>
+                        <div class="Form-inputs HtmlText PostArticle"><strong><?= ($Filled == 0 ? t('server.reports.no') : t('server.reports.yes')) ?></strong></div>
+                    </div>
 
-            <?
-                break;
-            case 'post':
-            ?>
-                <div class="Form-rowHeader"><?= t('server.reports.h2_report') ?><?= $Type['title'] ?> </div>
-                <div class="Form-row">
-                    <div class="Form-label"><?= t('server.reports.username') ?>:</div>
-                    <div class="Form-inputs"><?= display_str($Username) ?></div>
-                </div>
-                <div class="Form-row">
-                    <div class="Form-label"><?= t('server.reports.body') ?>:</div>
-                    <div class="Form-inputs HtmlText PostArticle"><?= Text::full_format($Body) ?></div>
-                </div>
-            <?
-                break;
-            case 'comment':
-            ?>
-                <div class="Form-rowHeader"><?= t('server.reports.h2_report') ?><?= $Type['title'] ?> </div>
-                <div class="Form-row">
-                    <div class="Form-label"><?= t('server.reports.username') ?>:</div>
-                    <div class="Form-inputs"><?= display_str($Username) ?></div>
-                </div>
-                <div class="Form-row">
-                    <div class="Form-label"><?= t('server.reports.body') ?>:</div>
-                    <div class="Form-inputs HtmlText PostArticle"><?= Text::full_format($Body) ?></div>
-                </div>
+                <?
+                    break;
+                case 'collage':
+                ?>
+                    <div class="Form-rowHeader"><?= t('server.reports.h2_report') ?><?= $Type['title'] ?> </div>
+                <?
+                    break;
+                case 'thread':
+                ?>
+                    <div class="Form-rowHeader"><?= t('server.reports.h2_report') ?><?= $Type['title'] ?> </div>
+                    <div class="Form-row">
+                        <div class="Form-label"><?= t('server.reports.username') ?>:</div>
+                        <div class="Form-inputs"><?= display_str($Username) ?></div>
+                    </div>
+                    <div class="Form-row">
+                        <div class="Form-label"><?= t('server.reports.title') ?>:</div>
+                        <div class="Form-inputs HtmlText PostArticle"><?= Text::full_format($Title) ?></div>
+                    </div>
 
-            <?
-                break;
-        }
-        if (empty($NoReason)) {
-            ?>
-            <form class="create_form" name="report" id="report_form" action="" method="post">
-                <input type="hidden" name="action" value="takereport" />
-                <input type="hidden" name="auth" value="<?= $LoggedUser['AuthKey'] ?>" />
-                <input type="hidden" name="id" value="<?= $ID ?>" />
-                <input type="hidden" name="type" value="<?= $Short ?>" />
+                <?
+                    break;
+                case 'post':
+                ?>
+                    <div class="Form-rowHeader"><?= t('server.reports.h2_report') ?><?= $Type['title'] ?> </div>
+                    <div class="Form-row">
+                        <div class="Form-label"><?= t('server.reports.username') ?>:</div>
+                        <div class="Form-inputs"><?= display_str($Username) ?></div>
+                    </div>
+                    <div class="Form-row">
+                        <div class="Form-label"><?= t('server.reports.body') ?>:</div>
+                        <div class="Form-inputs HtmlText PostArticle"><?= Text::full_format($Body) ?></div>
+                    </div>
+                <?
+                    break;
+                case 'comment':
+                ?>
+                    <div class="Form-rowHeader"><?= t('server.reports.h2_report') ?><?= $Type['title'] ?> </div>
+                    <div class="Form-row">
+                        <div class="Form-label"><?= t('server.reports.username') ?>:</div>
+                        <div class="Form-inputs"><?= display_str($Username) ?></div>
+                    </div>
+                    <div class="Form-row">
+                        <div class="Form-label"><?= t('server.reports.body') ?>:</div>
+                        <div class="Form-inputs HtmlText PostArticle"><?= Text::full_format($Body) ?></div>
+                    </div>
+
+                <?
+                    break;
+            }
+            if (empty($NoReason)) {
+                ?>
                 <div class="Form-row">
+                    <div class="Form-label">
+                        <?= t('server.user.reason') ?>:
+                    </div>
                     <div class="Form-items">
                         <? new TEXTAREA_PREVIEW('reason', 'reason', '', 60, 8, true, true, false, ['placeholder:"' . t('server.reports.reason') . '"']); ?>
                     </div>
                 </div>
                 <div class="Form-row">
-                    <input class="Button" type="submit" value="Submit report" />
+                    <input class="Button" type="submit" value="<?= t('server.tools.reports_submitted') ?>" />
                 </div>
-            </form>
-    </div>
+    </form>
+</div>
 <?
 
-        } /* close <div class="LayoutBody"> */ ?>
+            } /* close <div class="LayoutBody"> */ ?>
 </div>
 <?
 View::show_footer();

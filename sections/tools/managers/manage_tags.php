@@ -65,59 +65,17 @@ $orderby = ($_GET['order'] === 'badtags' ? 'BadTag' : 'AliasTag');
         <h2 class="BodyHeader-nav"><?= t('server.tools.tags_manager') ?></h2>
     </div>
     <div class="BodyContent">
-        <div class="Post">
-            <div class="Post-header">
-                <div class="Post-headerTitle">
-                    <?= t('server.tools.merge_rename_tags') ?>
-                </div>
-            </div>
-            <div class="Post-body">
-                <form action="tools.php" method="get" name="tagform" id="tagform" onsubmit="return formVal();">
-                    <input type="hidden" name="action" value="edit_tags" />
-                    <table class="Table">
-                        <tr class="Form-row">
-                            <td class="Form-label">
-                                <?= t('server.tools.tag') ?>:
-                            </td>
-                            <td class="Form-inputs">
-                                <input class="Input is-small" type="text" name="tag" id="tag" />
-                            </td>
-                        </tr>
-                        <tr class="Form-row">
-                            <td class="Form-label">
-                                <?= t('server.tools.rename_to_merge_with_tag') ?>:
-                            </td>
-                            <td class="Form-inputs">
-                                <input class="Input is-small" type="text" name="replace" id="replace" />
-                            </td>
-                        </tr>
-                        <tr class="Form-row">
-                            <td class="Form-label">
-                            </td>
-                            <td class="Form-inputs">
-                                <input type="checkbox" name="list" id="list" checked="checked" /> <label for="list"><?= t('server.tools.list_affected_rows') ?></label>
-                            </td>
-                        </tr>
-                        <tr class="Form-row">
-                            <td>
-                                <input class="Button" type="submit" value="Rename/Merge Tags" />
-                            </td>
-                        </tr>
-                    </table>
-                </form>
-            </div>
-        </div>
         <div class="BodyNavLinks">
             <a href="tools.php?action=manage_tags&amp;order=goodtags" class="brackets"><?= t('server.tools.sort_by_good_tags') ?></a>
             <a href="tools.php?action=manage_tags&amp;order=badtags" class="brackets"><?= t('server.tools.sort_by_bad_tags') ?></a>
         </div>
-        <div class="Post">
-            <div class="Post-header">
-                <div class="Post-headerTitle">
+        <div class="Box is-noBorder">
+            <div class="Box-header">
+                <div class="Box-headerTitle">
                     <?= t('server.tools.tag_aliases') ?>
                 </div>
             </div>
-            <div class="Post-body">
+            <div class="Box-body">
                 <table class="TableTagAlias Table">
                     <tr class="Table-rowHeader">
                         <td class="Table-cell"><?= t('server.tools.proper_tag') ?></td>
@@ -173,13 +131,13 @@ $orderby = ($_GET['order'] === 'badtags' ? 'BadTag' : 'AliasTag');
                 </table>
             </div>
         </div>
-        <div class="Post">
-            <div class="Post-header">
-                <div class="Post-headerTitle">
+        <div class="Box is-noBorder">
+            <div class="Box-header">
+                <div class="Box-headerTitle">
                     <?= t('server.tools.h2_official_tags_manager') ?>
                 </div>
             </div>
-            <div class="Post-body">
+            <div class="Box-body">
                 <table class="Table">
                     <tr class="Table-rowHeader">
                         <td class="Table-cell"><?= t('server.tools.tag') ?></td>
@@ -219,7 +177,45 @@ $orderby = ($_GET['order'] === 'badtags' ? 'BadTag' : 'AliasTag');
                 </table>
             </div>
         </div>
+        <form action="tools.php" method="get" name="tagform" id="tagform" onsubmit="return formVal();">
+            <input type="hidden" name="action" value="edit_tags" />
 
+            <table class="Table Form-rowList">
+                <tr class="Form-rowHeader">
+                    <td>
+                        <?= t('server.tools.merge_rename_tags') ?>
+                    </td>
+                </tr>
+                <tr class="Form-row">
+                    <td class="Form-label">
+                        <?= t('server.tools.tag') ?>:
+                    </td>
+                    <td class="Form-inputs">
+                        <input class="Input is-small" type="text" name="tag" id="tag" />
+                    </td>
+                </tr>
+                <tr class="Form-row">
+                    <td class="Form-label">
+                        <?= t('server.tools.rename_to_merge_with_tag') ?>:
+                    </td>
+                    <td class="Form-inputs">
+                        <input class="Input is-small" type="text" name="replace" id="replace" />
+                    </td>
+                </tr>
+                <tr class="Form-row">
+                    <td class="Form-label">
+                    </td>
+                    <td class="Form-inputs">
+                        <input type="checkbox" name="list" id="list" checked="checked" /> <label for="list"><?= t('server.tools.list_affected_rows') ?></label>
+                    </td>
+                </tr>
+                <tr class="Form-row">
+                    <td>
+                        <input class="Button" type="submit" value="Rename/Merge Tags" />
+                    </td>
+                </tr>
+            </table>
+        </form>
     </div>
 </div>
 <? View::show_footer(); ?>

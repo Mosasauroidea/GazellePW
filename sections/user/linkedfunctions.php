@@ -202,53 +202,62 @@ function user_dupes_table($UserID) {
         <input type="hidden" name="userid" value="<?= $UserID ?>" />
         <input type="hidden" id="auth" name="auth" value="<?= $LoggedUser['AuthKey'] ?>" />
         <input type="hidden" id="form_comment_hash" name="form_comment_hash" value="<?= $CommentHash ?>" />
-        <div class="Post" id="l_a_box">
-            <div class="Post-header">
-                <div class="Post-headerLeft">
-                    <div class="Post-headerTitle">
-                        <?= t('server.user.linked_account') ?> (<?= max($DupeCount - 1, 0) ?>)
+        <div class="Form-rowList" variant="header" id="l_a_box">
+            <div class="Form-rowHeader">
+                <?= t('server.user.linked_account') ?> (<?= max($DupeCount - 1, 0) ?>)
+            </div>
+            <? if (count($Dupes) > 0) { ?>
+                <div class="Form-row">
+                    <div class="Form-label">
+                        <?= t('server.user.linked_account') ?>:
+                    </div>
+                    <div class="Form-items">
+                        <ul>
+                            <?
+                            $i = 0;
+                            foreach ($Dupes as $Dupe) {
+                                $i++;
+                                list($DupeID) = $Dupe;
+                                $DupeInfo = Users::user_info($DupeID);
+                            ?>
+                                <li class="Table-cell"><?= Users::format_username($DupeID, true, true, true, true) ?>
+                                    <a href="user.php?action=dupes&amp;dupeaction=remove&amp;auth=<?= $LoggedUser['AuthKey'] ?>&amp;userid=<?= $UserID ?>&amp;removeid=<?= $DupeID ?>" onclick="return confirm('Are you sure you wish to remove <?= $DupeInfo['Username'] ?> from this group?');" class="brackets" data-tooltip="Remove linked account">X</a>
+                                </li>
+                            <?
+                            }
+                            ?>
+                        </ul>
                     </div>
                 </div>
-                <div class="Post-headerActions">
-                    <a href="#" onclick="$('.linkedaccounts').gtoggle(); return false;" class="brackets"><?= t('server.user.view') ?></a>
-                </div>
-            </div>
-            <div class="Post-body LayoutBody linkedaccounts hidden">
-                <ul>
-                    <?
-                    $i = 0;
-                    foreach ($Dupes as $Dupe) {
-                        $i++;
-                        list($DupeID) = $Dupe;
-                        $DupeInfo = Users::user_info($DupeID);
-                    ?>
-                        <li class="Table-cell"><?= Users::format_username($DupeID, true, true, true, true) ?>
-                            <a href="user.php?action=dupes&amp;dupeaction=remove&amp;auth=<?= $LoggedUser['AuthKey'] ?>&amp;userid=<?= $UserID ?>&amp;removeid=<?= $DupeID ?>" onclick="return confirm('Are you sure you wish to remove <?= $DupeInfo['Username'] ?> from this group?');" class="brackets" data-tooltip="Remove linked account">X</a>
-                        </li>
-                    <?
-                    }
-                    ?>
-                </ul>
-                <div>
+            <? } ?>
+            <div class="Form-row">
+                <div class="Form-label">
                     <label for="target">Link this user with: </label>
+                </div>
+                <div class="Form-inputs">
                     <input class="Input is-small" type="text" name="target" id="target" />
                 </div>
-                <div>
-                    <strong>Comments:</strong>
-                    <div id="dupecomments" class="HtmlText <?= ($DupeCount ? '' : 'hidden') ?>">
-                        <?= Text::full_format($Comments) ?>
-                    </div>
+            </div>
+            <div class="Form-row">
+                <div class="Form-label">
+                    Comments:
+                </div>
+                <div class="Form-items">
                     <div id="editdupecomments" class="<?= ($DupeCount ? 'hidden' : '') ?>">
                         <textarea class="Input" name="dupecomments" onkeyup="resize('dupecommentsbox');" id="dupecommentsbox" cols="65" rows="5"><?= display_str($Comments) ?></textarea>
                     </div>
-                    <span style="float: right;"><a href="#" onclick="$('#dupecomments').gtoggle(); $('#editdupecomments').gtoggle(); resize('dupecommentsbox'); return false;" class="brackets">Edit linked account comments</a></span>
                 </div>
-
-                <div>
-                    <label for="ignore_comments">Do not update staff notes</label>
+            </div>
+            <div class="Form-row">
+                <div class="Form-label">
+                </div>
+                <div class="Form-inputs">
                     <input type="checkbox" name="ignore_comments" id="ignore_comments" />
-                    <input class="Button" type="submit" value="Update" id="submitlink" />
+                    <label for="ignore_comments">Do not update staff notes</label>
                 </div>
+            </div>
+            <div class="Form-row">
+                <input class="Button" type="submit" value="Update" id="submitlink" />
             </div>
         </div>
     </form>

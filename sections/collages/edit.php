@@ -34,7 +34,10 @@ if (!empty($Err)) {
 ?>
 <div class="LayoutBody">
     <div class="BodyHeader">
-        <h2 class="BodyHeader-nav"><?= t('server.collages.collage') ?> </h2>
+        <div class="BodyHeader-nav"><?= t('server.collages.collage') ?> </div>
+        <div class="BodyHeader-subNav">
+            <a href="collages.php?id=<?= $CollageID ?>"><?= $Name ?></a>
+        </div>
     </div>
     <form class="edit_form" name="collage" action="collages.php" method="post">
         <input type="hidden" name="action" value="edit_handle" />
@@ -43,7 +46,7 @@ if (!empty($Err)) {
         <table id="edit_collage" class="Form-rowList" variant="header">
             <tr class="Form-rowHeader">
                 <td class="Form-title">
-                    <?= t('server.collages.edit_collage') ?> > <a href="collages.php?id=<?= $CollageID ?>"><?= $Name ?></a>
+                    <?= t('server.collages.edit_collage') ?>
                 </td>
             </tr>
             <tr class="Form-row">

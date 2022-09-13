@@ -5,43 +5,39 @@ use Gazelle\Manager\Donation;
 class DonationsView {
     public static function render_mod_donations($Rank, $TotalRank) {
 ?>
-        <table class="TableDonateBox">
-            <tr class="Form-rowHeader UserModForm-rowHeader">
-                <td colspan="2"><?= t('server.user.donor_system_add_points') ?></td>
-            </tr>
-            <tr class="Form-row">
-                <td class="Form-label"><?= t('server.user.value') ?>:</td>
-                <td class="Form-inputs">
-                    <input class="Input is-small" type="text" name="donation_value" onkeypress="return isNumberKey(event);" />
-                    <select class="Input" name="donation_currency">
-                        <option class="Select-option" value="CNY"><?= t('server.user.cny') ?></option>
-                        <option class="Select-option" value="BTC"><?= t('server.user.btc') ?></option>
-                    </select>
-                </td>
-            </tr>
-            <tr class="Form-row">
-                <td class="Form-label"><?= t('server.user.reason') ?>:</td>
-                <td class="Form-inputs"><input class="Input wide_input_text" type="text" name="donation_reason" /></td>
-            </tr>
-        </table>
+        <tr class="Form-rowSubHeader">
+            <td colspan="2"><?= t('server.user.donor_system_add_points') ?></td>
+        </tr>
+        <tr class="Form-row">
+            <td class="Form-label"><?= t('server.user.value') ?>:</td>
+            <td class="Form-inputs">
+                <input class="Input is-small" type="text" name="donation_value" onkeypress="return isNumberKey(event);" />
+                <select class="Input" name="donation_currency">
+                    <option class="Select-option" value="CNY"><?= t('server.user.cny') ?></option>
+                    <option class="Select-option" value="BTC"><?= t('server.user.btc') ?></option>
+                </select>
+            </td>
+        </tr>
+        <tr class="Form-row">
+            <td class="Form-label"><?= t('server.user.reason') ?>:</td>
+            <td class="Form-inputs"><input class="Input wide_input_text" type="text" name="donation_reason" /></td>
+        </tr>
 
-        <table class="TableDonorPoints" id="donor_points_box">
-            <tr class="Form-rowHeader UserModForm-rowHeader">
-                <td colspan="3" data-tooltip='<?= t('server.user.donor_system_modify_values_title') ?>'><?= t('server.user.donor_system_modify_values') ?></td>
-            </tr>
-            <tr class="Form-row">
-                <td class="Form-label" data-tooltip="<?= t('server.user.active_points_title') ?>"><?= t('server.user.active_points') ?>:</td>
-                <td class="Form-inputs"><input class="Input is-small" type="text" name="donor_rank" onkeypress="return isNumberKey(event);" value="<?= $Rank ?>" /></td>
-            </tr>
-            <tr class="Form-row">
-                <td class="Form-label" data-tooltip="<?= t('server.user.total_points_title') ?>"><?= t('server.user.total_points') ?>:</td>
-                <td class="Form-inputs"><input class="Input is-small" type="text" name="total_donor_rank" onkeypress="return isNumberKey(event);" value="<?= $TotalRank ?>" /></td>
-            </tr>
-            <tr class="Form-row">
-                <td class="Form-label"><?= t('server.user.reason') ?>:</td>
-                <td class="Form-inputs"><input class="Input wide_input_text" type="text" name="reason" /></td>
-            </tr>
-        </table>
+        <tr class="Form-rowSubHeader">
+            <td colspan="3" data-tooltip='<?= t('server.user.donor_system_modify_values_title') ?>'><?= t('server.user.donor_system_modify_values') ?></td>
+        </tr>
+        <tr class="Form-row">
+            <td class="Form-label" data-tooltip="<?= t('server.user.active_points_title') ?>"><?= t('server.user.active_points') ?>:</td>
+            <td class="Form-inputs"><input class="Input is-small" type="text" name="donor_rank" onkeypress="return isNumberKey(event);" value="<?= $Rank ?>" /></td>
+        </tr>
+        <tr class="Form-row">
+            <td class="Form-label" data-tooltip="<?= t('server.user.total_points_title') ?>"><?= t('server.user.total_points') ?>:</td>
+            <td class="Form-inputs"><input class="Input is-small" type="text" name="total_donor_rank" onkeypress="return isNumberKey(event);" value="<?= $TotalRank ?>" /></td>
+        </tr>
+        <tr class="Form-row">
+            <td class="Form-label"><?= t('server.user.reason') ?>:</td>
+            <td class="Form-inputs"><input class="Input wide_input_text" type="text" name="reason" /></td>
+        </tr>
         <?
     }
 
@@ -99,7 +95,10 @@ class DonationsView {
                             </div>
                         </div>
                         <div class="Post-headerActions">
-                            <span><a href="#" onclick="$('#profilediv_<?= $i ?>').gtoggle(); this.innerHTML = (this.innerHTML == '<?= t('server.common.hide') ?>' ? '<?= t('server.common.show') ?>' : '<?= t('server.common.hide') ?>'); return false;" class="brackets"><?= t('server.common.hide') ?></a></span>
+                            <a href="#" onclick="globalapp.toggleAny(event, '#profilediv_<?= $i ?>');return false;">
+                                <span class="u-toggleAny-show u-hidden"><?= t('server.common.show') ?></span>
+                                <span class="u-toggleAny-hide"><?= t('server.common.hide') ?></span>
+                            </a>
                         </div>
                     </div>
                     <div class="Post-body HtmlText PostArticle profileinfo" id="profilediv_<?= $i ?>">
@@ -116,18 +115,20 @@ class DonationsView {
             return;
         }
         ?>
-        <div class="Post" id="donation_history_box">
-            <div class="Post-header">
-                <div class="Post-headerLeft">
-                    <div class="Post-headerTitle">
-                        <?= t('server.user.donation_history') ?>
-                    </div>
+        <div class="Box is-noBorder" id="donation_history_box">
+            <div class="Box-header">
+                <div class="Box-headerTitle">
+                    <?= t('server.user.donation_history') ?>
                 </div>
-                <div class="Post-headerActions">
-                    <a href="#" onclick="$('#donation_history').gtoggle(); return false;" class="brackets"><?= t('server.user.view') ?></a>
+
+                <div class="Box-headerActions">
+                    <a href="#" onclick="globalapp.toggleAny(event, '#donation_history');return false;">
+                        <span class="u-toggleAny-show"><?= t('server.common.show') ?></span>
+                        <span class="u-toggleAny-hide u-hidden"><?= t('server.common.hide') ?></span>
+                    </a>
                 </div>
             </div>
-            <div class="Post-body TableContainer hidden" id="donation_history">
+            <div class="Box-body TableContainer u-hidden" id="donation_history">
                 <table class="Table">
                     <tbody>
                         <tr class="Table-rowHeader">

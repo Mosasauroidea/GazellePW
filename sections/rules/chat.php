@@ -4,7 +4,9 @@ View::show_header(t('server.rules.chat_title'), '', 'PageRuleChat');
 
 <div class="LayoutBody">
     <? include('jump.php'); ?>
-    <div class="HtmlText BoxBody" id="Rules-Chat-mdx" mdx></div>
+    <div class="Post">
+        <div class="HtmlText Post-body" id="Rules-Chat-mdx" mdx></div>
+    </div>
 </div>
 
 <script>

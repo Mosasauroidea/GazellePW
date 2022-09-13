@@ -34,22 +34,27 @@ View::show_header(t('server.inbox.compose'), 'inbox,bbcode,jquery.validate,form_
             ]]) ?>
         </h2>
     </div>
-    <form class="Box send_form" name="message" action="inbox.php" method="post" id="messageform">
-        <div class="Box-body">
-            <input type="hidden" name="action" value="takecompose" />
-            <input type="hidden" name="toid" value="<?= $ToID ?>" />
-            <input type="hidden" name="auth" value="<?= $LoggedUser['AuthKey'] ?>" />
-            <div class="Box" id="quickpost">
-                <div class="Box-body">
-                    <h3><?= t('server.inbox.subject') ?></h3>
+    <form class="Form send_form" name="message" action="inbox.php" method="post" id="messageform">
+        <input type="hidden" name="action" value="takecompose" />
+        <input type="hidden" name="toid" value="<?= $ToID ?>" />
+        <input type="hidden" name="auth" value="<?= $LoggedUser['AuthKey'] ?>" />
+        <div class="Form-rowList" id="quickpost">
+            <div class="Form-row">
+                <div class="Form-label"><?= t('server.inbox.subject') ?></div>
+                <div class="Form-inputs">
                     <input class="Input required" type="text" name="subject" size="95" value="<?= (!empty($Subject) ? $Subject : '') ?>" />
-                    <h3><?= t('server.inbox.body') ?></h3>
-                    <? new TEXTAREA_PREVIEW('body', 'body', $Body, 60, 8); ?>
-                    <div id="buttons" class="Post-bodyActions">
-                        <input class="Button" type="submit" value="<?= t('server.inbox.send_message') ?>" />
-                    </div>
                 </div>
-
+            </div>
+            <div class="Form-row">
+                <div class="Form-label"><?= t('server.inbox.body') ?></div>
+                <div class="Form-items">
+                    <? new TEXTAREA_PREVIEW('body', 'body', $Body, 60, 8); ?>
+                </div>
+            </div>
+            <div class="Form-row">
+                <div id="buttons">
+                    <input class="Button" type="submit" value="<?= t('server.inbox.send_message') ?>" />
+                </div>
             </div>
         </div>
     </form>

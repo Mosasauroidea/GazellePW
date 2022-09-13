@@ -12,7 +12,8 @@ $Title = Torrents::group_name($Group);
 
 <div class="LayoutBody">
     <div class="BodyHeader">
-        <h2 class="BodyHeader-nav"><?= page_title_conn([t('server.torrents.history_for_after'), $Title]) ?></h2>
+        <div class="BodyHeader-nav"><?= t('server.torrents.history_for_after') ?></div>
+        <div class="BodyHeader-subNav"><?= $Title ?></div>
     </div>
     <div class="TableContainer">
         <table class="TableGroupHistory Table">

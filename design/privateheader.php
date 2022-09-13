@@ -177,13 +177,6 @@ if ($NotificationsManager->is_traditional(NotificationsManager::TORRENTS)) {
     $NotificationsManager->clear_notifications_array();
 }
 
-
-if (check_perms('admin_interviewer')) {
-    // Interviewer code
-    G::$DB->query("SELECT count(*) FROM `register_apply` WHERE `apply_status`=0 or `apply_status`=3");
-    list($ApplyCount) = G::$DB->next_record();
-    $ModBar[] = '<a class="Button ButtonHeader"  href="tools.php?action=apply_list">' . ($ApplyCount ? "$ApplyCount " : "") . t('server.pub.user_manage') . '</a>';
-}
 if (check_perms('users_mod')) {
     $ModBar[] = '<a class="Button ButtonHeader"  href="tools.php">' . t('server.pub.toolbox') . '</a>';
 }

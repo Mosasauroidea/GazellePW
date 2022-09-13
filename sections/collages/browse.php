@@ -171,12 +171,31 @@ View::show_header(t('server.collages.browse_collages'), '', 'PageCollageHome');
 ?>
 <div class="LayoutBody">
     <div class="BodyHeader">
-        <? if ($BookmarkView) { ?>
-            <div class="BodyHeader-nav"><?= t('server.collages.your_bookmarked_collages') ?></div>
-        <?  } else { ?>
-            <div class="BodyHeader-nav"><?= t('server.collages.browse_collages') ?><?= (!empty($UserLink) ? (isset($CollageIDs) ? " with contributions by $UserLink" : " started by $UserLink") : '') ?></div>
-        <?  } ?>
         <?
+        if ($BookmarkView) { ?>
+            <div class="BodyHeader-nav"><?= t('server.collages.your_bookmarked_collages') ?></div>
+            <?
+        } else if (!empty($UserLink)) {
+            if (isset($CollageIDs)) {
+            ?>
+                <div class="BodyHeader-nav">
+                    <?= t('server.collages.contributed_collages_browse', ['Values' => [$UserLink]]); ?>
+                </div>
+            <?
+            } else if (isset($UserLink)) {
+            ?>
+                <div class="BodyHeader-nav">
+                    <?= t('server.collages.started_collages_browse', ['Values' => [$UserLink]]) ?>
+                </div>
+            <?
+            }
+        } else {
+            ?>
+            <div class="BodyHeader-nav">
+                <?= t('server.collages.browse_collages') ?>
+            </div>
+        <?
+        }
         if (!$BookmarkView) {
         ?>
             <div class="BodyNavLinks">
@@ -231,7 +250,7 @@ View::show_header(t('server.collages.browse_collages'), '', 'PageCollageHome');
 
             <div>
                 <div class="BodyNavLinks">
-                    <a href="bookmarks.php?type=torrents" class="brackets"><?= t('server.common.torrents') ?></a>
+                    <a href="bookmarks.php?type=torrents" class="brackets"><?= t('server.index.moviegroups') ?></a>
                     <a href="bookmarks.php?type=artists" class="brackets"><?= t('server.common.artists') ?></a>
                     <a href="bookmarks.php?type=collages" class="brackets"><?= t('server.collages.collage') ?></a>
                     <a href="bookmarks.php?type=requests" class="brackets"><?= t('server.common.requests') ?></a>
@@ -253,7 +272,7 @@ View::show_header(t('server.collages.browse_collages'), '', 'PageCollageHome');
                                     <input class="Input" type="text" name="search" size="70" value="<?= (!empty($_GET['search']) ? display_str($_GET['search']) : '') ?>" />
                                 </td>
                             </tr>
-                            <tr class="Form-row is-tags">
+                            <tr class="Form-row is-tagFilter">
                                 <td class="Form-label"><?= t('server.collages.tags') ?>:</td>
                                 <td class="Form-inputs">
                                     <input class="Input" type="text" id="tags" name="tags" size="70" value="<?= (!empty($_GET['tags']) ? display_str($_GET['tags']) : '') ?>" <? Users::has_autocomplete_enabled('other'); ?> />
@@ -388,8 +407,6 @@ View::show_header(t('server.collages.browse_collages'), '', 'PageCollageHome');
             list($ID, $Name, $NumTorrents, $TagList, $CategoryID, $UserID, $Subscribers, $Updated) = $Collage;
             $Row = $Row === 'a' ? 'b' : 'a';
             $TorrentTags = new Tags($TagList);
-
-            //Print results
         ?>
             <tr class="Table-row <?= ($BookmarkView) ? " bookmark_$ID" : ''; ?>">
                 <td class="Table-cell td_collage_category">
@@ -397,12 +414,7 @@ View::show_header(t('server.collages.browse_collages'), '', 'PageCollageHome');
                 </td>
                 <td class="Table-cell">
                     <a href="collages.php?id=<?= $ID ?>"><?= $Name ?></a>
-                    <? if ($BookmarkView) { ?>
-                        <span class="floatright">
-                            <a href="#" onclick="Unbookmark('collage', <?= $ID ?>, ''); return false;" class="brackets"><?= t('server.common.remove_bookmark') ?></a>
-                        </span>
-                    <?  } ?>
-                    <div class="tags"><?= $TorrentTags->format('collages.php?action=search&amp;tags=') ?></div>
+                    <div class="tags"><i><?= $TorrentTags->format('collages.php?action=search&amp;tags=') ?></i></div>
                 </td>
                 <td class="Table-cell Table-cellRight td_torrent_count number_column"><?= number_format((int)$NumTorrents) ?></td>
                 <td class="Table-cell Table-cellRight td_subscribers number_column"><?= number_format((int)$Subscribers) ?></td>

@@ -31,7 +31,8 @@ View::show_header(t('server.artist.edit_artist'), 'PageArtistEdit');
 ?>
 <div class="LayoutBody">
     <div class="BodyHeader">
-        <h2 class="BodyHeader-nav"><?= t('server.common.edit') ?> > <?= $ArtistName ?></h2>
+        <div class="BodyHeader-nav"><?= t('server.artist.edit_artist')  ?></div>
+        <div class="BodyHeader-subNav"><?= $ArtistName ?></div>
     </div>
     <form class="edit_form Form-rowList" name="artist" action="artist.php" method="post">
         <input type="hidden" name="action" value="edit" />

@@ -3,7 +3,7 @@ include(CONFIG['SERVER_ROOT'] . '/classes/torrenttable.class.php');
 require(CONFIG['SERVER_ROOT'] . '/classes/top10_movies.class.php');
 Text::$TOC = true;
 
-$NewsCount = 5;
+$NewsCount = 3;
 if (!$News = $Cache->get_value('news')) {
     $ForumID = CONFIG['NEWS_FORUM_ID'];
     $DB->query("SELECT `ID`, `Title`, `CreatedTime` , `IsSticky` FROM `forums_topics` WHERE `ForumID` = '$ForumID' AND  `IsNotice` = '1'  ORDER BY `IsSticky` DESC, `CreatedTime` DESC LIMIT $NewsCount");
@@ -122,7 +122,7 @@ View::show_header(t('server.index.index'), 'comments', 'PageHome');
                     <div class="SidebarItem-body Box-body">
                         <div class="Poll">
                             <a class="Poll-question" href="forums.php?action=viewthread&amp;threadid=<?= $TopicID ?>">
-                                <?= display_str($Question) . " (" . t('server.forums.limited1') . " $MaxCount " . t('server.forums.limited2') . ")" ?>
+                                <?= display_str($Question) . " (" . t('server.forums.limited', ['Values' => [$MaxCount]])  .  ")" ?>
                             </a>
                             <? if ($UserResponse !== null || $Closed) { ?>
                                 <ul class="Poll-answers">
@@ -217,7 +217,8 @@ View::show_header(t('server.index.index'), 'comments', 'PageHome');
 			um.Username,
 			b.Title,
 			b.Body,
-			b.Time
+			b.Time,
+            b.ThreadID
 		FROM staff_blog AS b
 			LEFT JOIN users_main AS um ON b.UserID = um.ID
 		ORDER BY Time DESC");
@@ -493,13 +494,13 @@ View::show_header(t('server.index.index'), 'comments', 'PageHome');
         );
         if (count($Data) > 0) {
         ?>
-            <div class="IndexTop10Movie Post">
-                <div class="Post-header">
-                    <div class="Post-headerTitle">
+            <div class="IndexTop10Movie Box">
+                <div class="Box-header">
+                    <div class="Box-headerTitle">
                         <?= t('server.index.popular_movies') ?>
                     </div>
                 </div>
-                <div class="Post-body">
+                <div class="Box-body">
                     <?
 
                     $tableRender = new TorrentGroupCoverTableView($Data);
@@ -513,60 +514,59 @@ View::show_header(t('server.index.index'), 'comments', 'PageHome');
         }
         ?>
         <!-- Anouncements -->
-        <div class="Post">
-            <div class="Post-header">
-                <div class="Post-headerTitle">
-                    <a href="forums.php?action=viewforum&amp;forumid=<?= CONFIG['NEWS_FORUM_ID'] ?>">
-                        <?= t('server.index.announcements') ?>
-                    </a>
-                </div>
-            </div>
-            <div class="LayoutPage Post-body">
-                <?
-                $Count = 0;
-                foreach ($News as $NewsItem) {
-                    list($NewsID, $Title, $Body, $NewsTime, $IsSticky) = $NewsItem;
-                    if (strtotime($NewsTime) > time()) {
-                        continue;
-                    }
-                ?>
-                    <div id="news<?= $NewsID ?>" class="Post Box news_post ">
-                        <div class="Post-header Box-header">
-                            <div class="Post-headerLeft">
-                                <a class="Post-headerTitle HtmlText  <?= $IsSticky ? 'is-sticky' : '' ?>" href="#" onclick="$('#newsbody<?= $NewsID ?>').gtoggle(); return false;">
-                                    <?= Text::full_format($Title) ?>
-                                </a>
-                            </div>
-                            <div class="Post-headerActions">
-                                <?= time_diff($NewsTime); ?>
-                                <a class="brackets" href="forums.php?action=viewthread&amp;threadid=<?= $NewsID ?>">
-                                    <?= t('server.index.discuss') ?>
-                                </a>
-                            </div>
+        <div class="PostList">
+            <!--
+            
+    -->
+            <?
+            $Count = 0;
+            foreach ($News as $NewsItem) {
+                list($NewsID, $Title, $Body, $NewsTime, $IsSticky) = $NewsItem;
+                if (strtotime($NewsTime) > time()) {
+                    continue;
+                }
+            ?>
+                <div id="news<?= $NewsID ?>" class="Post news_post ">
+                    <div class="Post-header">
+                        <div class="Post-headerLeft">
+                            <a class="Post-headerTitle HtmlText  <?= $IsSticky ? 'is-sticky' : '' ?>" href="#" onclick="$('#newsbody<?= $NewsID ?>').gtoggle(); return false;">
+                                <?= Text::full_format($Title) ?>
+                            </a>
+                        </div>
+                        <div class="Post-headerActions">
+                            <?= time_diff($NewsTime); ?>
+                            - <a class="brackets" href="forums.php?action=viewthread&amp;threadid=<?= $NewsID ?>">
+                                <?= t('server.index.discuss') ?>
+                            </a>
+                        </div>
 
-                        </div>
-                        <div id="newsbody<?= $NewsID ?>" class="HtmlText PostArticle Box-body Post-body <?= ($Count < 3 ?: "hidden") ?>">
-                            <?= Text::full_format($Body) ?>
-                        </div>
                     </div>
-                    <?
-                    if (++$Count > ($NewsCount - 1)) {
-                        break;
-                    }
-                    ?>
-                <? } ?>
+                    <div id="newsbody<?= $NewsID ?>" class="HtmlText PostArticle Post-body">
+                        <?= Text::full_format($Body) ?>
+                    </div>
+                </div>
+                <?
+                if (++$Count > ($NewsCount - 1)) {
+                    break;
+                }
+                ?>
+            <? } ?>
+            <div class="PostList-actions">
+                <a href="forums.php?action=viewforum&amp;forumid=<?= CONFIG['NEWS_FORUM_ID'] ?>">
+                    <?= t('server.torrents.view_all') ?>
+                </a>
             </div>
         </div>
         <? if (CONFIG['IS_DEV']) { ?>
-            <div class="Home-stats Post">
-                <div class="Post-header">
-                    <div class="Post-headerTitle">
+            <div class="Home-stats Box">
+                <div class="Box-header">
+                    <div class="Box-headerTitle">
                         <a href="/stats.php">
                             <?= t('server.index.stats') ?>
                         </a>
                     </div>
                 </div>
-                <div class="Post-body" id="root-stats"></div>
+                <div class="Box-body" id="root-stats"></div>
             </div>
         <? } ?>
     </div>

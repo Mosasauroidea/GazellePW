@@ -92,46 +92,45 @@ class TORRENT_FORM {
                 echo "\t" . '<p style="text-align: center;" class="u-colorWarning">' . $this->Error . "</p>\n";
             }
             ?>
-
-            <form class="Form-rowList FormUpload FormValidation Box <?= ($this->Error || ($this->Torrent && isset($this->Torrent['GroupID']))) ? "u-formUploadAutoFilled" : "" ?>" name="torrent" action="" enctype="multipart/form-data" method="post" id="upload_table">
-                <? if ($this->NewTorrent) { ?>
-                    <div style="text-align: center; margin: 5px 0px !important;">
-                        <?= t('server.upload.personal_announce') ?>:
-                        <div>
-                            <a onclick="return false" href="<?= $AnnounceURL . '/' . G::$LoggedUser['torrent_pass'] . '/announce' ?>"><?= t('server.upload.personal_announce_note') ?></a>
-                        </div>
-                    </div>
-                <?      }
-                ?>
-                <div>
-                    <input type="hidden" name="submit" value="true" />
-                    <input type="hidden" name="auth" value="<?= G::$LoggedUser['AuthKey'] ?>" />
-                    <? if (!$this->NewTorrent) { ?>
-                        <input type="hidden" name="action" value="takeedit" />
-                        <input type="hidden" name="torrentid" value="<?= display_str($this->TorrentID) ?>" />
-                        <input type="hidden" name="type" value="<?= display_str($this->Torrent['CategoryID']) ?>" />
-                        <?
-                    } else {
-                        if ($this->Torrent && $this->Torrent['GroupID']) {
-                        ?>
-                            <input type="hidden" name="groupid" value="<?= display_str($this->Torrent['GroupID']) ?>" />
-                        <?
-                        }
-                        if ($this->Torrent && isset($this->Torrent['RequestID'])) {
-                        ?>
-                            <input type="hidden" name="requestid" value="<?= display_str($this->Torrent['RequestID']) ?>" />
+            <form variant="header" class="Form-rowList FormUpload FormValidation <?= ($this->Error || ($this->Torrent && isset($this->Torrent['GroupID']))) ? "u-formUploadAutoFilled" : "" ?>" name="torrent" action="" enctype="multipart/form-data" method="post" id="upload_table">
+                <input type="hidden" name="submit" value="true" />
+                <input type="hidden" name="auth" value="<?= G::$LoggedUser['AuthKey'] ?>" />
+                <? if (!$this->NewTorrent) { ?>
+                    <input type="hidden" name="action" value="takeedit" />
+                    <input type="hidden" name="torrentid" value="<?= display_str($this->TorrentID) ?>" />
+                    <input type="hidden" name="type" value="<?= display_str($this->Torrent['CategoryID']) ?>" />
                     <?
-                        }
-                    }
+                } else {
+                    if ($this->Torrent && $this->Torrent['GroupID']) {
                     ?>
-                </div>
-                <? if ($this->NewTorrent) { ?>
-                    <table class="Form-rowList">
-                        <? if ($this->Torrent['GroupID']) { ?>
-                            <tr class="Form-rowHeader">
-                                <td class="Form-title"><?= t('server.torrents.add_format') ?> &gt; <?= $this->group_name($this->Torrent, true) ?></td>
-                            </tr>
-                        <? } ?>
+                        <input type="hidden" name="groupid" value="<?= display_str($this->Torrent['GroupID']) ?>" />
+                    <?
+                    }
+                    if ($this->Torrent && isset($this->Torrent['RequestID'])) {
+                    ?>
+                        <input type="hidden" name="requestid" value="<?= display_str($this->Torrent['RequestID']) ?>" />
+                <?
+                    }
+                }
+                ?>
+                <table>
+                    <? if ($this->Torrent['GroupID'] && $this->NewTorrent) { ?>
+                        <tr class="Form-rowHeader">
+                            <td class="Form-title"><?= t('server.torrents.add_format') ?> </td>
+                        </tr>
+                    <? } else if (!$this->Torrent['GroupID']) {
+                    ?>
+                        <tr class="Form-rowHeader">
+                            <td class="Form-title"><?= t('server.upload.upload_torrents') ?> </td>
+                        </tr>
+                    <? }
+                    if ($this->NewTorrent) { ?>
+                        <tr class="Form-row">
+                            <td>
+                                <?= t('server.upload.personal_announce') ?>:
+                                <a onclick="return false" href="<?= $AnnounceURL . '/' . G::$LoggedUser['torrent_pass'] . '/announce' ?>"><?= t('server.upload.personal_announce_note') ?></a>
+                            </td>
+                        </tr>
                         <tr class="Form-row is-file">
                             <td class="Form-label">
                                 <?= t('server.upload.torrent_file') ?><span class="u-colorWarning">*</span>:
@@ -150,11 +149,6 @@ class TORRENT_FORM {
                                     <select class="Input" id="categories" name="type" onchange="globalapp.uploadCategories()" <?= $this->Disabled ?>>
                                         <?
                                         foreach (Misc::display_array($this->Categories) as $Index => $Cat) {
-                                            if ($Cat == "Applications") {
-                                                if (!check_perms('users_mod')) {
-                                                    continue;
-                                                }
-                                            }
                                             echo "\t\t\t\t\t\t<option value=\"$Index\"";
                                             if ($Cat == $this->Torrent['CategoryName']) {
                                                 echo ' selected="selected"';
@@ -166,8 +160,8 @@ class TORRENT_FORM {
                                 </div>
                             </td>
                         </tr>
-                    </table>
-                <?      }/*if*/ ?>
+                    <?      }/*if*/ ?>
+                </table>
                 <div id="dynamic_form">
                 <?
             } // function head
@@ -376,7 +370,13 @@ class TORRENT_FORM {
                             <div class="Form-inputs">
                                 <input class="Input" type="text" id="subname" name="subname" size="45" value="<?= display_str($Torrent['SubName']) ?>" <?= $this->Disabled ?> />
                             </div>
-                            <div class="FormUpload-explain" class="x" id="title_how_to_blockquote" style="display: none">
+
+                        </td>
+                    </tr>
+                    <tr class="Form-row">
+                        <td class="Form-label"></td>
+                        <td class="Form-items" id="title_how_to_blockquote" style="display: none">
+                            <div class="FormUpload-explain">
                                 <?= t('server.upload.title_how_to_blockquote') ?>
                             </div>
                         </td>
@@ -506,6 +506,9 @@ class TORRENT_FORM {
                                         </select>
                                     <? } ?>
                                     <input class="Input" type="text" id="tags" name="tags" size="40" value="" <? Users::has_autocomplete_enabled('other'); ?><?= $this->Disabled ?> />
+                                    <div>
+                                        <?= t('server.requests.tags_note') ?>
+                                    </div>
                                 </div>
                             </td>
                         </tr>
@@ -976,6 +979,13 @@ class TORRENT_FORM {
                             <div>
                                 <strong class="how_to_toggle_container">[<a href="javascript:void(0);" onclick="$('#marks_how_to_blockquote').new_toggle();"><strong class="how_to_toggle"><?= t('server.upload.marks_how_to_toggle') ?></strong></a>]</strong>
                             </div>
+
+                        </td>
+                    </tr>
+                    <tr class="Form-row">
+                        <td class="Form-label">
+                        </td>
+                        <td class="Form-items">
                             <div class="FormUpload-explain" id="marks_how_to_blockquote" style="display: none;">
                                 <?= t('server.upload.marks_how_to_blockquote') ?>
                             </div>

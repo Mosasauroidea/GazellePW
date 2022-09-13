@@ -4,7 +4,7 @@ echo $Val->GenerateJS('registerform');
 ?>
 <script src="<?= CONFIG['STATIC_SERVER'] ?>functions/validate.js" type="text/javascript"></script>
 <script src="<?= CONFIG['STATIC_SERVER'] ?>functions/password_validate.js" type="text/javascript"></script>
-<form class="create_form" name="user" id="registerform" method="post" action="" onsubmit="return formVal();">
+<form class="Form create_form" name="user" id="registerform" method="post" action="" onsubmit="return formVal();">
     <div id="form-body">
         <input type="hidden" name="auth" value="<?= $LoggedUser['AuthKey'] ?>" />
         <?

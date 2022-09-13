@@ -60,7 +60,7 @@ $Conditions = $Join = array();
 switch ($Action) {
     case 'artist':
         $Field1 = 'artists_group.ArtistID';
-        $Field2 = 'artists_group.Name';
+        $Field2 = 'artists_group.Name as Name, artists_group.SubName as SubName';
         $Table = 'artists_group';
         $Title = t('server.comments.artist_comments_left_by_user', ['Values' => [
             ($Self ? t('server.comments.you') : t('server.comments.username_space', ['Values' => [$Username]]))
@@ -72,7 +72,7 @@ switch ($Action) {
         break;
     case 'collages':
         $Field1 = 'collages.ID';
-        $Field2 = 'collages.Name';
+        $Field2 = 'collages.Name, collages.Name as SubName';
         $Table = 'collages';
         $Conditions[] = "collages.Deleted = '0'";
         if ($Type == 'created') {
@@ -107,7 +107,7 @@ switch ($Action) {
         break;
     case 'requests':
         $Field1 = 'requests.ID';
-        $Field2 = 'requests.Title';
+        $Field2 = 'requests.Title as Name, requests.SubTitle as SubTitle';
         $Table = 'requests';
         if ($Type == 'created') {
             $Conditions[] = "requests.UserID = $UserID";
@@ -143,7 +143,7 @@ switch ($Action) {
     default:
         $Action = 'torrents';
         $Field1 = 'torrents.GroupID';
-        $Field2 = 'torrents_group.Name';
+        $Field2 = 'torrents_group.Name as Name, torrents_group.SubName as SubName';
         $Table = 'torrents';
         $Join[] = 'JOIN torrents_group ON torrents.GroupID = torrents_group.ID';
         if ($Type == 'uploaded') {
@@ -200,18 +200,6 @@ list($Results) = $DB->next_record();
 $Pages = Format::get_pages($Page, $Results, $PerPage, 11);
 
 $DB->set_query_id($Comments);
-if ($Action == 'requests') {
-    $RequestIDs = array_flip(array_flip($DB->collect('PageID')));
-    $Artists = array();
-    foreach ($RequestIDs as $RequestID) {
-        $Artists[$RequestID] = Requests::get_artists($RequestID);
-    }
-    $DB->set_query_id($Comments);
-} elseif ($Action == 'torrents') {
-    $GroupIDs = array_flip(array_flip($DB->collect('PageID')));
-    $Artists = Artists::get_artists($GroupIDs);
-    $DB->set_query_id($Comments);
-}
 
 $LinkID = (!$Self ? '&amp;id=' . $UserID : '');
 $ActionLinks = $TypeLinks = array();
@@ -303,8 +291,13 @@ View::show_header($Title, 'bbcode,comments', 'PageCommentHome');
         <h2 class="BodyHeader-nav"><?= $Header ?></h2>
         <? if ($Links !== '') { ?>
             <div class="BodyNavLinks">
-                <?= $Links ?>
+                <?= implode(' ', $ActionLinks)  ?>
             </div>
+            <? if (count($TypeLinks)) { ?>
+                <div class="BodyNavLinks">
+                    <?= implode(' ', $TypeLinks) ?>
+                </div>
+            <? } ?>
         <? } ?>
     </div>
     <div class="BodyNavLinks">
@@ -313,8 +306,9 @@ View::show_header($Title, 'bbcode,comments', 'PageCommentHome');
     <?
     if ($Count > 0) {
         $DB->set_query_id($Comments);
-        while (list($AuthorID, $Page, $PageID, $Name, $PostID, $Body, $AddedTime, $EditedTime, $EditedUserID) = $DB->next_record()) {
+        while (list($AuthorID, $Page, $PageID, $Name, $SubName, $PostID, $Body, $AddedTime, $EditedTime, $EditedUserID) = $DB->next_record()) {
             $Link = Comments::get_url($Page, $PageID, $PostID);
+            $Name =  Lang::choose_content($Name, $SubName);
             switch ($Page) {
                 case 'artist':
                     $Header = t('server.comments.space_on_space') . "<a href=\"artist.php?id=$PageID\">$Name</a>";
@@ -326,7 +320,7 @@ View::show_header($Title, 'bbcode,comments', 'PageCommentHome');
                     $Header = t('server.comments.space_on_space') . Artists::display_artists($Artists[$PageID]) . " <a href=\"requests.php?action=view&id=$PageID\">$Name</a>";
                     break;
                 case 'torrents':
-                    $Header = t('server.comments.space_on_space') . Artists::display_artists($Artists[$PageID]) . " <a href=\"torrents.php?id=$PageID\">$Name</a>";
+                    $Header = t('server.comments.space_on_space') . " <a href=\"torrents.php?id=$PageID\">$Name</a>";
                     break;
             }
             CommentsView::render_comment($AuthorID, $PostID, $Body, $AddedTime, $EditedUserID, $EditedTime, $Link, false, $Header, false);

@@ -33,7 +33,7 @@ $DB->query("
 		LEFT JOIN artists_group AS ag ON ag.ArtistID = tg.ArtistID
 		LEFT JOIN xbt_snatched AS x ON x.fid = t.ID
 	WHERE t.ID = '$TorrentID'");
-$Data = $DB->next_record(MYSQLI_ASSOC, false);
+$Data = G::$DB->next_record(MYSQLI_ASSOC, false);
 list(
 	$UserID, $GroupID, $Size, $InfoHash, $Name, $SubName, $Year, $Time, $Codec, $Source, $Resolution, $Container, $Processing,
 	$RemasterTitle, $RemasterYear, $Snatches

@@ -64,14 +64,14 @@ View::show_header($Title, 'browse,collage', 'PageBookmarkTorrent');
         <h2 class="BodyHeader-nav">
             <div class="RssTitle">
                 <? if (!$Sneaky) {
-                ?><a data-tooltip="<?= t('server.user.rss_address') ?>" href="feeds.php?feed=torrents_bookmarks_t_<?= $LoggedUser['torrent_pass'] ?>&amp;user=<?= $LoggedUser['ID'] ?>&amp;auth=<?= $LoggedUser['RSS_Auth'] ?>&amp;passkey=<?= $LoggedUser['torrent_pass'] ?>&amp;authkey=<?= $LoggedUser['AuthKey'] ?>&amp;name=<?= urlencode(CONFIG['SITE_NAME'] . ': Bookmarked Torrents') ?>">
+                ?><a target="_blank" data-tooltip="<?= t('server.user.rss_address') ?>" href="feeds.php?feed=torrents_bookmarks_t_<?= $LoggedUser['torrent_pass'] ?>&amp;user=<?= $LoggedUser['ID'] ?>&amp;auth=<?= $LoggedUser['RSS_Auth'] ?>&amp;passkey=<?= $LoggedUser['torrent_pass'] ?>&amp;authkey=<?= $LoggedUser['AuthKey'] ?>&amp;name=<?= urlencode(CONFIG['SITE_NAME'] . ': Bookmarked Torrents') ?>">
                         <?= icon('rss') ?></a>
                     <?
                 } ?><?= $Title ?>
             </div>
         </h2>
         <div class="BodyNavLinks">
-            <a href="bookmarks.php?type=torrents" class="brackets"><?= t('server.common.torrents') ?></a>
+            <a href="bookmarks.php?type=torrents" class="brackets"><?= t('server.index.moviegroups') ?></a>
             <a href="bookmarks.php?type=artists" class="brackets"><?= t('server.common.artists') ?></a>
             <?
             if (CONFIG['ENABLE_COLLAGES']) {
@@ -135,7 +135,7 @@ View::show_header($Title, 'browse,collage', 'PageBookmarkTorrent');
                         }
                 ?>
                         <li class="SidebarList-item">
-                            <a href="artist.php?id=<?= $ID ?>"><?= Artists::display_artist($Artist['data']) ?></a> (<?= number_format($Artist['count']) ?>)
+                            <div><a href="artist.php?id=<?= $ID ?>"><?= Artists::display_artist($Artist['data']) ?></a> (<?= number_format($Artist['count']) ?>)</div>
                         </li>
                 <?
                     }
@@ -150,8 +150,8 @@ View::show_header($Title, 'browse,collage', 'PageBookmarkTorrent');
         </div>
     </div>
 
-    <div class="Post">
-        <div class="Post-body">
+    <div class="Box is-noBorder">
+        <div class="Box-body">
             <?php
             $Groups = [];
             foreach ($GroupIDs as $GroupID) {

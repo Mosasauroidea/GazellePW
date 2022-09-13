@@ -63,6 +63,7 @@ class TorrentSearch {
         'buy' => false,
         'chinesedubbed' => false,
         'specialsub' => false,
+        'checked' => false,
     );
 
     /**
@@ -103,6 +104,7 @@ class TorrentSearch {
         'buy' => 1,
         'chinesedubbed' => 1,
         'specialsub' => 1,
+        'checked' => 1,
     );
 
     /**
@@ -937,6 +939,11 @@ class TorrentSearch {
         }
         if (isset($this->UsedTorrentAttrs['specialsub'])) {
             if ((int)$Torrent['SpecialSub'] != 1) {
+                return false;
+            }
+        }
+        if (isset($this->UsedTorrentAttrs['checked'])) {
+            if ((int)$Torrent['Checked'] != (int)$Torrent['Checked']) {
                 return false;
             }
         }

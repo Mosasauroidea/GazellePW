@@ -22,37 +22,38 @@ list($FrontLineSupport, $Staff) = $SupportStaff;
     <a href="apply.php"><?= t('server.staff.role_applications') ?></a>
 </div> -->
     <?  } ?>
-    <div class="Post">
-        <div class="Post-header">
-            <span class="Post-headerTitle"><?= t('server.staff.contact_staff') ?></span>
+    <div class="Box is-noBorder">
+        <div class="Box-header">
+            <span class="Box-headerTitle"><?= t('server.staff.contact_staff') ?></span>
         </div>
-        <div class="Post-body"><?= t('server.staff.contact_staff_note') ?></div>
-        <? View::parse('generic/reply/staffpm.php', array('Hidden' => $action == 'donate' ? false : true)); ?>
+        <div class="Box-body"><?= t('server.staff.contact_staff_note') ?>
+            <? View::parse('generic/reply/staffpm.php', array('Hidden' => $action == 'donate' ? false : true)); ?>
+        </div>
     </div>
-    <div class="Post"" id=" role-apply">
-        <div class="Post-header">
-            <span class="Post-headerTitle"><?= t('server.staff.role_applications') ?></span>
-            <div class="Post-headerActions"><?= t('server.staff.role_applications_sub') ?></div>
+    <div class="Box is-noBorder" id=" role-apply">
+        <div class="Box-header">
+            <span class="Box-headerTitle"><?= t('server.staff.role_applications') ?></span>
+            <div class="Box-headerActions"><?= t('server.staff.role_applications_sub') ?></div>
         </div>
-        <div class="Post-body">
+        <div class="Box-body">
             <?= t('server.staff.role_applications_note') ?>
             <div><?= t('server.apply.referral_note') ?></div>
         </div>
         <? View::parse('generic/reply/staffpm.php', array('Hidden' => true)); ?>
     </div>
-    <div class="Post">
-        <div class="Post-header">
-            <strong class="Post-headerTitle"><?= t('server.staff.community_help') ?></strong>
+    <div class="Box is-noBorder">
+        <div class="Box-header">
+            <strong class="Box-headerTitle"><?= t('server.staff.community_help') ?></strong>
         </div>
-        <div class="Post-body">
-            <?= t('server.staff.fl_support_note') ?><br />
-            <div class="Post">
-                <div class="Post-header">
-                    <div class="Post-headerTitle">
+        <div class="Box-body">
+            <?= t('server.staff.fl_support_note') ?>
+            <div class="Box is-noBorder">
+                <div class="Box-header">
+                    <div class="Box-headerTitle">
                         <div id="fls"><i><?= t('server.staff.first_line_support') ?></i></div>
                     </div>
                 </div>
-                <div class="Post-body">
+                <div class="Box-body">
                     <table class="TableUser Table">
                         <tr class="Table-rowHeader">
                             <td class="Table-cell" style="width: 130px;"><?= t('server.staff.username') ?></td>
@@ -68,13 +69,13 @@ list($FrontLineSupport, $Staff) = $SupportStaff;
                     </table>
                 </div>
             </div>
-            <div class="Post">
-                <div class="Post-header">
-                    <div class="Post-headerTitle">
+            <div class="Box is-noBorder">
+                <div class="Box-header">
+                    <div class="Box-headerTitle">
                         <div id="fls"><i><?= t('server.staff.torrent_inspector') ?></i></div>
                     </div>
                 </div>
-                <div class="Post-body">
+                <div class="Box-body">
                     <table class="TableUser Table">
                         <tr class="Table-rowHeader">
                             <td class="Table-cell" style="width: 130px;"><?= t('server.staff.username') ?></td>
@@ -100,53 +101,55 @@ list($FrontLineSupport, $Staff) = $SupportStaff;
                 continue;
             }
     ?>
-            <div class="Post">
-                <div class="Post-header">
-                    <div class="Post-headerTitle"><?= $SectionName ?></div>
+            <div class="Box is-noBorder">
+                <div class="Box-header">
+                    <div class="Box-headerTitle"><?= $SectionName ?></div>
                 </div>
-                <div class="Post-body">
-                    <?
-                    $CurClass = 0;
-                    $CloseTable = false;
-                    foreach ($StaffSection as $StaffMember) {
-                        list($ID, $ClassID, $Class, $ClassName, $StaffGroup, $Username, $Paranoia, $LastAccess, $Remark) = $StaffMember;
-                        if ($Class != $CurClass) { // Start new class of staff members
-                            $Row = 'a';
-                            if ($CloseTable) {
-                                $CloseTable = false;
-                                // the "\t" and "\n" are used here to make the HTML look pretty
-                                echo "\t\t</table></div></div>";
-                            }
-                            $CurClass = $Class;
-                            $CloseTable = true;
+                <div class="Box-body">
+                    <div class="BoxList">
+                        <?
+                        $CurClass = 0;
+                        $CloseTable = false;
+                        foreach ($StaffSection as $StaffMember) {
+                            list($ID, $ClassID, $Class, $ClassName, $StaffGroup, $Username, $Paranoia, $LastAccess, $Remark) = $StaffMember;
+                            if ($Class != $CurClass) { // Start new class of staff members
+                                $Row = 'a';
+                                if ($CloseTable) {
+                                    $CloseTable = false;
+                                    // the "\t" and "\n" are used here to make the HTML look pretty
+                                    echo "</table></div></div>";
+                                }
+                                $CurClass = $Class;
+                                $CloseTable = true;
 
-                            $HTMLID = str_replace(' ', '_', strtolower($ClassName));
-                    ?>
-                            <div class="Post">
-                                <div class="Post-header">
-                                    <div class="Post-headerTitle">
-                                        <i id="<?= $HTMLID ?>"><?= $ClassName ?></i>
+                                $HTMLID = str_replace(' ', '_', strtolower($ClassName));
+                        ?>
+                                <div class="Box is-noBorder">
+                                    <div class="Box-header">
+                                        <div class="Box-headerTitle">
+                                            <i id="<?= $HTMLID ?>"><?= $ClassName ?></i>
+                                        </div>
+                                    </div>
+                                    <div class="Box-body">
+                                        <table class="TableUser Table">
+                                            <tr class="Table-rowHeader">
+                                                <td class="Table-cell" style="width: 130px;"><?= t('server.staff.username') ?></td>
+                                                <td class="Table-cell" style="width: 200px;"><?= t('server.staff.lastseen') ?></td>
+                                                <td class="Table-cell"><?= t('server.staff.remark') ?></td>
+                                            </tr>
+                                    <?
+                                } // End new class header
+
+                                $HiddenBy = t('server.staff.hidden_by_staff_member');
+
+                                // Display staff members for this class
+                                $Row = make_staff_row($Row, $ID, $Paranoia, $Class, $LastAccess, $Remark, $HiddenBy);
+                            }
+                                    ?>
+                                        </table>
                                     </div>
                                 </div>
-                                <div class="Post-body">
-                                    <table class="TableUser Table">
-                                        <tr class="Table-rowHeader">
-                                            <td class="Table-cell" style="width: 130px;"><?= t('server.staff.username') ?></td>
-                                            <td class="Table-cell" style="width: 200px;"><?= t('server.staff.lastseen') ?></td>
-                                            <td class="Table-cell"><?= t('server.staff.remark') ?></td>
-                                        </tr>
-                                <?
-                            } // End new class header
-
-                            $HiddenBy = t('server.staff.hidden_by_staff_member');
-
-                            // Display staff members for this class
-                            $Row = make_staff_row($Row, $ID, $Paranoia, $Class, $LastAccess, $Remark, $HiddenBy);
-                        }
-                                ?>
-                                    </table>
-                                </div>
-                            </div>
+                    </div>
                 </div>
             </div>
     <?

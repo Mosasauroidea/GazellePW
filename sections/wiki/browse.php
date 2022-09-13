@@ -154,8 +154,8 @@ View::show_header($Title, 'wiki,bbcode', 'PageWikiHome');
             <? } ?>
         </div>
         <div class="LayoutMainSidebar-main">
-            <div class="Box wiki_article">
-                <div class="Post-body Box-body HtmlText PostArticle">
+            <div class="Post wiki_article">
+                <div class="Post-body  HtmlText PostArticle">
                     <?= $TextBody ?>
                 </div>
             </div>

@@ -23,7 +23,7 @@ class TorrentGroupCoverTableView extends GroupTorrentTableView {
                     <div class="TorrentCover-imageContainer">
                         <img class="TorrentCover-image" src="<?= ImageTools::process($RS['WikiImage'], false) ?>" />
                     </div>
-                    <b><?= $Name ?></b>
+                    <b><?= display_str($Name) ?></b>
                 </a>
             <? } ?>
         </div>
@@ -283,6 +283,7 @@ class TorrentTableView {
         $LastActive = $Torrent['last_action'];
         $CustomTrumpable = $Torrent['CustomTrumpable'];
         $Dead = Torrents::is_torrent_dead($Torrent);
+        $Reported = !empty($Torrent['ReportID']);
         $TrumpableMsg = '';
         $TrumpableAddExtra = '';
 
@@ -312,91 +313,33 @@ class TorrentTableView {
             $TrumpableMsg .= $TrumpableAddExtra . t('server.upload.dead_torrent');
             $TrumpableAddExtra = ' / ';
         }
-        $Reported = false;
-        $Reports = Torrents::get_reports($TorrentID);
-        $NumReports = count($Reports);
-        // 如果不展示report，这里直接赋值0 bad
-        if (!$ShowReport) {
-            $NumReports = 0;
-        }
-
-        if ($NumReports > 0) {
-            $Reported = true;
-            include(CONFIG['SERVER_ROOT'] . '/classes/reportsv2_type.php');
-            $ResolveType['resolve_options']['pm'];
-            $ReportInfo = '
-        <div class="TableContainer">
-            <table class="TableReportInfo Table">
-                <tr class="Table-rowHeader">
-                    <td class="Table-cell">'
-                . t('server.torrents.this_torrent_has_active_reports', ['Values' => [
-                    $NumReports,
-                    t('server.torrents.this_torrent_has_active_reports_count', ['Count' => $NumReports, 'Values' => [$NumReports]])
-                ]])
-                . ":</td>
-                </tr>";
-            foreach ($Reports as $Report) {
-                $ReportID = $Report['ID'];
-                if (check_perms('admin_reports')) {
-                    $ReporterID = $Report['ReporterID'];
-                    $Reporter = Users::user_info($ReporterID);
-                    $ReporterName = $Reporter['Username'];
-                    $ReportLinks = "<a href=\"user.php?id=$ReporterID\">$ReporterName</a> <a href=\"reportsv2.php?view=report&amp;id=$Report[ID]\">" . t('server.torrents.reported_it') . "</a>";
-                    $UploaderLinks = Users::format_username($UserID, false, false, false) . " " . t('server.torrents.reply_at');
-                } else {
-                    $ReportLinks = t('server.torrents.someone_reported_it');
-                    $UploaderLinks = t('server.torrents.uploader_replied_it');
-                }
-
-                if (isset($Types[$GroupCategoryID][$Report['Type']])) {
-                    $ReportType = $Types[$GroupCategoryID][$Report['Type']];
-                } elseif (isset($Types['master'][$Report['Type']])) {
-                    $ReportType = $Types['master'][$Report['Type']];
-                } else {
-                    //There was a type but it wasn't an option!
-                    $ReportType = $Types['master']['other'];
-                }
-                $CanReply = $UserID == G::$LoggedUser['ID'] && !$Report['UploaderReply'] && !$ReadOnly;
-                $ReportInfo .= "
-                <tr class='Table-row'>
-                    <td class='Table-cell'>"
-                    . "$ReportLinks"
-                    . t('server.torrents.at', ['Values' => [
-                        time_diff($Report['ReportedTime'], 2, true, true)
-                    ]])
-                    . t('server.torrents.for_the_reason')
-                    . $ReportType['title']
-                    . '":'
-                    . ($CanReply ? ('<a class="floatright report_reply_btn" onclick="$(\'.can_reply_' . $ReportID . '\').toggle()" href="javascript:void(0)">' . t('server.torrents.reply') . '</a>') : "")
-                    . '<blockquote>' . Text::full_format($Report['UserComment']) . ($Report['UploaderReply'] ? ('
-                            <hr class="report_inside_line">' . $UploaderLinks . ' ' . time_diff($Report['ReplyTime'], 2, true, true) . ':<br>' . Text::full_format($Report['UploaderReply'])) : '') . '
-                        </blockquote>
-                    </td>
-                </tr>';
-                $area = new TEXTAREA_PREVIEW('uploader_reply', '', '', 50, 10, true, true, true, array(
-                    'placeholder="' . t('server.torrents.reply_it_patiently') . '"'
-                ), false);
-                $ReportInfo .= $CanReply ? '
-                <tr class="Table-row report_reply_tr can_reply_' . $ReportID . '" style="display: none;">
-                    <td class="Table-cell Table-cellCenter report_reply_td">
-                        <form action="reportsv2.php?action=takeuploaderreply" method="POST">
-                            <input type="hidden" name="reportid" value="' . $ReportID . '">
-                            <input type="hidden" name="torrentid" value="' . $TorrentID . '">
-                            ' . $area->getBuffer() . '
-                            <div class="submit_div preview_submit">
-                                <input class="Button" type="submit">
-                            </div>
-                        </form>
-                    </td>
-                </tr>' : "";
-            }
-            $ReportInfo .= "\n\t\t
-            </table>
-        </div>";
-        }
     ?>
 
         <div class="TorrentDetail">
+            <div class="TorrentDetail-row is-viewActionsContainer">
+                <div class="TorrentDetail-links is-viewActions">
+                    <? if (!$ReadOnly) { ?>
+                        <a class="Link" href="#" onclick="show_peers('<?= $TorrentID ?>', 0, '<?= $this->DetailView ?>'); return false;"><?= t('server.torrents.view_peer_list') ?></a>
+                        <? if (check_perms('site_view_torrent_snatchlist')) { ?>
+                            <a class="Link" href="#" onclick="show_downloads('<?= $TorrentID ?>', 0, '<?= $this->DetailView ?>'); return false;" data-tooltip="<?= t('server.torrents.show_downloads_title') ?>"><?= t('server.torrents.view_download_list') ?></a>
+                            <a class="Link" href="#" onclick="show_snatches('<?= $TorrentID ?>', 0, '<?= $this->DetailView ?>'); return false;" data-tooltip="<?= t('server.torrents.show_snatches_title') ?>"><?= t('server.torrents.view_snatch_list') ?></a>
+                        <?  } ?>
+                        <a class="Link" href="#" onclick="show_giver('<?= $TorrentID ?>', 0, '<?= $this->DetailView ?>'); return false;"><?= t('server.torrents.giver_list') ?></a>
+                    <?  } ?>
+                    <a class="Link" href="#" onclick="show_files('<?= $TorrentID ?>', '<?= $this->DetailView ?>'); return false;"><?= t('server.torrents.view_file_list') ?></a>
+                    <? if ($Reported) { ?>
+                        <a class="Link" href="#" onclick="show_reported('<?= $TorrentID ?>','<?= $this->DetailView ?>'); return false;"><?= t('server.torrents.view_report_information') ?></a>
+                    <?  } ?>
+                </div>
+                <div class="TorrentDetail-giverList hidden" id="<?= $this->DetailView ?>_giver_<?= $TorrentID ?>"></div>
+                <div class="TorrentDetail-peerList hidden" id="<?= $this->DetailView ?>_peers_<?= $TorrentID ?>"></div>
+                <div class="TorrntDetail-downloadList hidden" id="<?= $this->DetailView ?>_downloads_<?= $TorrentID ?>"></div>
+                <div class="TorrentDetail-snatchList hidden" id="<?= $this->DetailView ?>_snatches_<?= $TorrentID ?>"></div>
+                <div class="TorrentDetail-fileList hidden" id="<?= $this->DetailView ?>_files_<?= $TorrentID ?>"></div>
+                <? if ($Reported) { ?>
+                    <div class="TorrentDetail-reportedList hidden" id="<?= $this->DetailView ?>_reported_<?= $TorrentID ?>"></div>
+                <?  } ?>
+            </div>
             <div class="TorrentDetail-row is-uploadContainer is-block" id="release_<?= $TorrentID ?>">
                 <div class="TorrentDetail-uploader">
                     <div class="TorrentDetail-uploaderInfo">
@@ -412,29 +355,20 @@ class TorrentTableView {
                             // displaying "Last active: 2000+ years" as that's dumb
                             if (time() - strtotime($LastActive) > 1576800000) {
                         ?>
-                                <span>|</span>
+                                <span>,&nbsp;</span>
                                 <?= t('server.torrents.last_active') ?>:<?= t('server.torrents.never') ?>
                             <?
                             } elseif ($LastActive != '0000-00-00 00:00:00' && time() - strtotime($LastActive) >= 1209600) {
                             ?>
-                                <span>|</span><strong><?= t('server.torrents.last_active') ?> <?= time_diff($LastActive); ?></strong>
+                                <span>,&nbsp;</span><strong><?= t('server.torrents.last_active') ?> <?= time_diff($LastActive); ?></strong>
                             <?
                             } else {
-                            ?><span>|</span> <?= t('server.torrents.last_active') ?> <?= time_diff($LastActive); ?>
-                            <?
+                            ?><span>,&nbsp;</span> <?= t('server.torrents.last_active') ?> <?= time_diff($LastActive); ?>
+                        <?
                             }
                         }
-                        if (
-                            !$ReadOnly &&
-                            (($Seeders == 0  &&
-                                $LastActive != '0000-00-00 00:00:00' &&
-                                time() - strtotime($LastActive) >= 345678 &&
-                                time() - strtotime($LastReseedRequest) >= 864000) ||
-                                check_perms('users_mod'))
-                        ) {
-                            ?><span>|</span> <a href="torrents.php?action=reseed&amp;torrentid=<?= $TorrentID ?>&amp;groupid=<?= $GroupID ?>" class="brackets" onclick="return confirm('<?= t('server.torrents.request_re_seed_confirm') ?>');"><?= t('server.torrents.request_re_seed') ?></a>
-                        <?
-                        } ?>
+                        ?>
+
                     </div>
                     <? if (!$ReadOnly) { ?>
                         <div class="TorrentDetail-likeContainer ButtonGroup ButtonGroup--wide">
@@ -470,6 +404,7 @@ class TorrentTableView {
                             </div>
                         </div>
                     <? } ?>
+
                 </div>
                 <? if (!$ReadOnly) { ?>
                     <div class="TorrentDetail-ratioCalc">
@@ -479,10 +414,7 @@ class TorrentTableView {
                         <?= t('server.torrents.if_you_download_this', ['Values' => [$NewRatio]]) ?>
                     </div>
                 <? } ?>
-            </div>
-            <?
-            if ($TrumpableMsg) { ?>
-                <div class="TorrentDetail-trumpable TorrentDetail-row is-block">
+                <div class="TorrentDetail-trumpable">
                     <span class="TorrentDetail-trumpableTitle">
                         <?= t('server.torrents.trumpable_reason') ?>:
                     </span>
@@ -490,187 +422,187 @@ class TorrentTableView {
                         <?= $TrumpableMsg ?>
                     </span>
                 </div>
-            <?
-            } ?>
-
-            <?
-            if (!$ReadOnly) {
-            ?>
-                <div class="TorrentDetail-row is-rewardContainer">
-                    <div class="TorrentDetail-rewardList ButtonGroup" id="sendbonus_<?= $TorrentID ?>">
-                        <? $Sended = isset($BonusSended) ? explode(',', $BonusSended['Sended']) : []; ?>
-                        <div class="TorrentDetail-reward">
-                            <span class="TorrentDetail-rewardButton is-active" data-tooltip="<?= G::$LoggedUser['ID'] == $UserID ? t('server.torrents.you_cant_reward_yourself') : t('server.torrents.you_have_rewarded') ?>" style="<?= in_array(5, $Sended) || G::$LoggedUser['ID'] == $UserID ? "" : "display: none;" ?>" id="bonus5<?= $TorrentID ?>">
-                                <?= icon('bonus-active') ?>
-                            </span>
-                            <a class="TorrentDetail-rewardButton is-toReward" data-tooltip="<?= t('server.torrents.reward_5_bonus_to_uploader') ?>" style="<?= in_array(5, $Sended) || G::$LoggedUser['ID'] == $UserID ? "display: none;" : "" ?>" id="abonus5<?= $TorrentID ?>" href="javascript:void(0);" onclick="sendbonus(<?= $TorrentID ?>, 5)">
-                                <?= icon('bonus-active') ?>
-                            </a>
-                            <span>5</span>
-                        </div>
-                        <div class="TorrentDetail-reward">
-                            <span class="TorrentDetail-rewardButton is-active" data-tooltip="<?= G::$LoggedUser['ID'] == $UserID ? t('server.torrents.you_cant_reward_yourself') : t('server.torrents.you_have_rewarded') ?>" style="<?= in_array(30, $Sended) || G::$LoggedUser['ID'] == $UserID ? "" : "display: none;" ?>" id="bonus30<?= $TorrentID ?>">
-                                <?= icon('bonus-active') ?>
-                            </span>
-                            <a class="TorrentDetail-rewardButton is-toReward" data-tooltip="<?= t('server.torrents.reward_30_bonus_to_uploader') ?>" style="<?= in_array(30, $Sended) || G::$LoggedUser['ID'] == $UserID ? "display: none;" : "" ?>" id="abonus30<?= $TorrentID ?>" href="javascript:void(0);" onclick="sendbonus(<?= $TorrentID ?>, 30)">
-                                <?= icon('bonus-active') ?>
-                            </a>
-                            <span>30</span>
-                        </div>
-                        <div class="TorrentDetail-reward">
-                            <span class="TorrentDetail-rewardButton is-active" data-tooltip="<?= G::$LoggedUser['ID'] == $UserID ? t('server.torrents.you_cant_reward_yourself') : t('server.torrents.you_have_rewarded') ?>" style="<?= in_array(100, $Sended) || G::$LoggedUser['ID'] == $UserID ? "" : "display: none;" ?>" id="bonus100<?= $TorrentID ?>">
-                                <?= icon('bonus-active') ?>
-                            </span>
-                            <a class="TorrentDetail-rewardButton is-toReward" data-tooltip="<?= t('server.torrents.reward_100_bonus_to_uploader') ?>" style="<?= in_array(100, $Sended) || G::$LoggedUser['ID'] == $UserID ? "display: none;" : "" ?>" id="abonus100<?= $TorrentID ?>" href="javascript:void(0);" onclick="sendbonus(<?= $TorrentID ?>, 100)">
-                                <?= icon('bonus-active') ?>
-                            </a>
-                            <span>100</span>
-                        </div>
-                        <div class="TorrentDetail-reward">
-                            <span class="TorrentDetail-rewardButton is-active" data-tooltip="<?= G::$LoggedUser['ID'] == $UserID ? t('server.torrents.you_cant_reward_yourself') : t('server.torrents.you_have_rewarded') ?>" style="<?= in_array(300, $Sended) || G::$LoggedUser['ID'] == $UserID ? "" : "display: none;" ?>" id="bonus300<?= $TorrentID ?>">
-                                <?= icon('bonus-active') ?>
-                            </span>
-                            <a class="TorrentDetail-rewardButton is-toReward" data-tooltip="<?= t('server.torrents.reward_300_bonus_to_uploader') ?>" style="<?= in_array(300, $Sended) || G::$LoggedUser['ID'] == $UserID ? "display: none;" : "" ?>" id="abonus300<?= $TorrentID ?>" href="javascript:void(0);" onclick="sendbonus(<?= $TorrentID ?>, 300)">
-                                <?= icon('bonus-active') ?>
-                            </a>
-                            <span>300</span>
-                        </div>
-                    </div>
-                </div>
-
-                <? if (check_perms('site_moderate_requests')) { ?>
-                    <div class="TorrentDetail-row is-pmContainer">
-                        <div class="TorrentDetail-links is-massPM">
+                <div class="ButtonGroup TorrentDetail-postMessageList">
+                    <?
+                    if (
+                        !$ReadOnly &&
+                        (($Seeders == 0  &&
+                            $LastActive != '0000-00-00 00:00:00' &&
+                            time() - strtotime($LastActive) >= 345678 &&
+                            time() - strtotime($LastReseedRequest) >= 864000) ||
+                            check_perms('users_mod'))
+                    ) {
+                    ?><a href="torrents.php?action=reseed&amp;torrentid=<?= $TorrentID ?>&amp;groupid=<?= $GroupID ?>" class="brackets" onclick="return confirm('<?= t('server.torrents.request_re_seed_confirm') ?>');"><?= t('server.torrents.request_re_seed') ?></a>
+                    <?
+                    } ?>
+                    <? if (check_perms('site_moderate_requests')) { ?>
+                        <span class="is-massPM">
                             <a class="Link" href="torrents.php?action=masspm&amp;id=<?= $GroupID ?>&amp;torrentid=<?= $TorrentID ?>">
                                 <?= t('server.torrents.masspm') ?>
                             </a>
-                        </div>
+                        </span>
                     <?
-                } ?>
-                    </div>
-                <? } ?>
-                <div class="TorrentDetail-row is-viewActionsContainer">
-                    <div class="TorrentDetail-links is-viewActions">
-                        <? if (!$ReadOnly) { ?>
-                            <a class="Link" href="#" onclick="show_peers('<?= $TorrentID ?>', 0, '<?= $this->DetailView ?>'); return false;"><?= t('server.torrents.view_peer_list') ?></a>
-                            <? if (check_perms('site_view_torrent_snatchlist')) { ?>
-                                <a class="Link" href="#" onclick="show_downloads('<?= $TorrentID ?>', 0, '<?= $this->DetailView ?>'); return false;" data-tooltip="<?= t('server.torrents.show_downloads_title') ?>"><?= t('server.torrents.view_download_list') ?></a>
-                                <a class="Link" href="#" onclick="show_snatches('<?= $TorrentID ?>', 0, '<?= $this->DetailView ?>'); return false;" data-tooltip="<?= t('server.torrents.show_snatches_title') ?>"><?= t('server.torrents.view_snatch_list') ?></a>
-                            <?  } ?>
-                            <a class="Link" href="#" onclick="show_giver('<?= $TorrentID ?>', 0, '<?= $this->DetailView ?>'); return false;"><?= t('server.torrents.giver_list') ?></a>
-                        <?  } ?>
-                        <a class="Link" href="#" onclick="show_files('<?= $TorrentID ?>', '<?= $this->DetailView ?>'); return false;"><?= t('server.torrents.view_file_list') ?></a>
-                        <? if ($Reported) { ?>
-                            <a class="Link" href="#" onclick="show_reported('<?= $TorrentID ?>','<?= $this->DetailView ?>'); return false;"><?= t('server.torrents.view_report_information') ?></a>
-                        <?  } ?>
-                    </div>
-                    <div class="TorrentDetail-giverList hidden" id="<?= $this->DetailView ?>_giver_<?= $TorrentID ?>"></div>
-                    <div class="TorrentDetail-peerList hidden" id="<?= $this->DetailView ?>_peers_<?= $TorrentID ?>"></div>
-                    <div class="TorrntDetail-downloadList hidden" id="<?= $this->DetailView ?>_downloads_<?= $TorrentID ?>"></div>
-                    <div class="TorrentDetail-snatchList hidden" id="<?= $this->DetailView ?>_snatches_<?= $TorrentID ?>"></div>
-                    <div class="TorrentDetail-fileList hidden" id="<?= $this->DetailView ?>_files_<?= $TorrentID ?>"></div>
-                    <? if ($Reported) { ?>
-                        <div class="TorrentDetail-reportedList hidden" id="<?= $this->DetailView ?>_reported_<?= $TorrentID ?>"><?= $ReportInfo ?></div>
-                    <?  } ?>
+                    } ?>
                 </div>
-
-                <? if ($Note) { ?>
-                    <div class="TorrentDetail-row is-staffNote is-block">
-                        <span class='u-colorWarning'><strong><?= t('server.upload.staff_note') ?>:</strong></span>
-                        <?= Text::full_format($Note) ?>
+                <?
+                if (!$ReadOnly) {
+                ?>
+                    <div class="is-rewardContainer">
+                        <div class="TorrentDetail-rewardList ButtonGroup" id="sendbonus_<?= $TorrentID ?>">
+                            <? $Sended = isset($BonusSended) ? explode(',', $BonusSended['Sended']) : []; ?>
+                            <div class="TorrentDetail-reward">
+                                <span class="TorrentDetail-rewardButton is-active" data-tooltip="<?= G::$LoggedUser['ID'] == $UserID ? t('server.torrents.you_cant_reward_yourself') : t('server.torrents.you_have_rewarded') ?>" style="<?= in_array(5, $Sended) || G::$LoggedUser['ID'] == $UserID ? "" : "display: none;" ?>" id="bonus5<?= $TorrentID ?>">
+                                    <?= icon('bonus-active') ?>
+                                </span>
+                                <a class="TorrentDetail-rewardButton is-toReward" data-tooltip="<?= t('server.torrents.reward_5_bonus_to_uploader') ?>" style="<?= in_array(5, $Sended) || G::$LoggedUser['ID'] == $UserID ? "display: none;" : "" ?>" id="abonus5<?= $TorrentID ?>" href="javascript:void(0);" onclick="sendbonus(<?= $TorrentID ?>, 5)">
+                                    <?= icon('bonus-active') ?>
+                                </a>
+                                <span>5</span>
+                            </div>
+                            <div class="TorrentDetail-reward">
+                                <span class="TorrentDetail-rewardButton is-active" data-tooltip="<?= G::$LoggedUser['ID'] == $UserID ? t('server.torrents.you_cant_reward_yourself') : t('server.torrents.you_have_rewarded') ?>" style="<?= in_array(30, $Sended) || G::$LoggedUser['ID'] == $UserID ? "" : "display: none;" ?>" id="bonus30<?= $TorrentID ?>">
+                                    <?= icon('bonus-active') ?>
+                                </span>
+                                <a class="TorrentDetail-rewardButton is-toReward" data-tooltip="<?= t('server.torrents.reward_30_bonus_to_uploader') ?>" style="<?= in_array(30, $Sended) || G::$LoggedUser['ID'] == $UserID ? "display: none;" : "" ?>" id="abonus30<?= $TorrentID ?>" href="javascript:void(0);" onclick="sendbonus(<?= $TorrentID ?>, 30)">
+                                    <?= icon('bonus-active') ?>
+                                </a>
+                                <span>30</span>
+                            </div>
+                            <div class="TorrentDetail-reward">
+                                <span class="TorrentDetail-rewardButton is-active" data-tooltip="<?= G::$LoggedUser['ID'] == $UserID ? t('server.torrents.you_cant_reward_yourself') : t('server.torrents.you_have_rewarded') ?>" style="<?= in_array(100, $Sended) || G::$LoggedUser['ID'] == $UserID ? "" : "display: none;" ?>" id="bonus100<?= $TorrentID ?>">
+                                    <?= icon('bonus-active') ?>
+                                </span>
+                                <a class="TorrentDetail-rewardButton is-toReward" data-tooltip="<?= t('server.torrents.reward_100_bonus_to_uploader') ?>" style="<?= in_array(100, $Sended) || G::$LoggedUser['ID'] == $UserID ? "display: none;" : "" ?>" id="abonus100<?= $TorrentID ?>" href="javascript:void(0);" onclick="sendbonus(<?= $TorrentID ?>, 100)">
+                                    <?= icon('bonus-active') ?>
+                                </a>
+                                <span>100</span>
+                            </div>
+                            <div class="TorrentDetail-reward">
+                                <span class="TorrentDetail-rewardButton is-active" data-tooltip="<?= G::$LoggedUser['ID'] == $UserID ? t('server.torrents.you_cant_reward_yourself') : t('server.torrents.you_have_rewarded') ?>" style="<?= in_array(300, $Sended) || G::$LoggedUser['ID'] == $UserID ? "" : "display: none;" ?>" id="bonus300<?= $TorrentID ?>">
+                                    <?= icon('bonus-active') ?>
+                                </span>
+                                <a class="TorrentDetail-rewardButton is-toReward" data-tooltip="<?= t('server.torrents.reward_300_bonus_to_uploader') ?>" style="<?= in_array(300, $Sended) || G::$LoggedUser['ID'] == $UserID ? "display: none;" : "" ?>" id="abonus300<?= $TorrentID ?>" href="javascript:void(0);" onclick="sendbonus(<?= $TorrentID ?>, 300)">
+                                    <?= icon('bonus-active') ?>
+                                </a>
+                                <span>300</span>
+                            </div>
+                        </div>
                     </div>
                 <? } ?>
+            </div>
+            <?
+            if ($TrumpableMsg) { ?>
 
-                <div class="TorrentDetail-row is-subtitle is-block TorrentDetailSubtitle" id="subtitles_box">
-                    <div class="TorrentDetailSubtitle-header" id="subtitles_box_header">
-                        <strong class="TorrentDetailSubtitle-title" id="subtitles_box_title"><?= t('server.common.subtitles') ?>:</strong>
+            <?
+            } ?>
+
+
+            <? if ($Note) { ?>
+                <div class="TorrentDetail-row is-staffNote is-block">
+                    <span class='u-colorWarning'><strong><?= t('server.upload.staff_note') ?>:</strong></span>
+                    <?= Text::full_format($Note) ?>
+                </div>
+            <? } ?>
+
+            <div class="TorrentDetail-row is-subtitle is-block TorrentDetailSubtitle" id="subtitles_box">
+                <div class="TorrentDetailSubtitle-header" id="subtitles_box_header">
+                    <strong class="TorrentDetailSubtitle-title" id="subtitles_box_title"><?= t('server.common.subtitles') ?>:
+
+                    </strong>
+                    <? if (!$Subtitles && !$ExternalSubtitleIDs) { ?>
+                        <span class="TorrentDetailSubtitle-noSubtitle" data-tooltip="<?= t('server.upload.no_subtitles') ?>">
+                            <?= Subtitle::icon(Subtitle::NoSubtitleitem) ?>
+                        </span>
+                    <? } ?>
+                    <span class="floatright">
                         <? if (!$ReadOnly) { ?>
-                            <span class="floatright"><a href="subtitles.php?action=upload&torrent_id=<?= $TorrentID ?>"><?= t('server.torrents.add_subtitles') ?></a></span>
+                            <a href="subtitles.php?action=upload&torrent_id=<?= $TorrentID ?>"><?= t('server.torrents.add_subtitles') ?></a>
+
                         <?  } ?>
-                        <? if (!$Subtitles && !$ExternalSubtitleIDs) { ?>
-                            <span class="TorrentDetailSubtitle-noSubtitle" data-tooltip="<?= t('server.upload.no_subtitles') ?>">
-                                <?= Subtitle::icon(Subtitle::NoSubtitleitem) ?>
+                        <? if ($ExternalSubtitleIDs) { ?>
+                            | <a class="Link" href="#" onclick="BrowseExternalSub(<?= $TorrentID ?>); return false;"><?= t('server.index.details') ?></a>
+                        <? } ?>
+                    </span>
+
+                </div>
+                <?
+                if ($Subtitles) {
+
+                    $SubtitleArray = explode(',', $Subtitles);
+                ?>
+                    <div class="TorrentDetailSubtitle-list is-internal" id="subtitles_box_in_torrent">
+                        <span class="TorrentDetailSubtitle-listTitle"><?= $SubtitleType == 1 ? t('server.common.in_torrent_subtitles') : t('server.common.in_torrent_hard_subtitles'); ?>:</span>
+                        <? foreach ($SubtitleArray as $Subtitle) { ?>
+                            <span class="TorrentDetailSubtitle-listItem" data-tooltip="<?= t("server.upload.$Subtitle") ?>">
+                                <?= icon("flag/$Subtitle") ?>
                             </span>
                         <? } ?>
                     </div>
-                    <?
-                    if ($Subtitles) {
-
-                        $SubtitleArray = explode(',', $Subtitles);
-                    ?>
-                        <div class="TorrentDetailSubtitle-list is-internal" id="subtitles_box_in_torrent">
-                            <span class="TorrentDetailSubtitle-listTitle"><?= $SubtitleType == 1 ? t('server.common.in_torrent_subtitles') : t('server.common.in_torrent_hard_subtitles'); ?>:</span>
-                            <? foreach ($SubtitleArray as $Subtitle) { ?>
-                                <span class="TorrentDetailSubtitle-listItem" data-tooltip="<?= t("server.upload.$Subtitle") ?>">
-                                    <?= icon("flag/$Subtitle") ?>
-                                </span>
-                            <? } ?>
-                        </div>
-                    <?
-                    }
-                    if ($ExternalSubtitleIDs) {
-                        $ExternalSubtitleIDArray = explode('|', $ExternalSubtitleIDs);
-                        $ExternalSubtitleArray = explode('|', $ExternalSubtitles);
-                    ?>
-                        <div class="TorrentDetailSubtitle-list is-external" id="subtitles_box_external">
-                            <span class="TorrentDetailSubtitle-listTitle">
-                                <?= t('server.common.external_subtitles') ?>:
-                            </span>
-                            <?
-                            foreach ($ExternalSubtitleIDArray as $index => $ExternalSubtitleID) {
-                                $SubtitleLanguages = $ExternalSubtitleArray[$index];
-                                $SubtitleLanguagesArray = explode(',', $SubtitleLanguages);
-                                if (in_array('chinese_simplified', $SubtitleLanguagesArray)) {
-                            ?>
-                                    <a class="TorrentDetailSubtitle-listItem" href="subtitles.php?action=download&id= <?= $ExternalSubtitleID ?>" data-tooltip="<?= t('server.upload.chinese_simplified') ?>">
-                                        <?= icon('flag/chinese_simplified') ?>
-                                    </a>
-                                <?
-                                } else if (in_array('chinese_traditional', $SubtitleLanguagesArray)) { ?>
-                                    <a class=" TorrentDetailSubtitle-listItem" href="subtitles.php?action=download&id=<?= $ExternalSubtitleID ?>" data-tooltip="<?= t('server.upload.chinese_traditional') ?>">
-                                        <?= icon('flag/chinese_traditional') ?>
-                                    </a>
-                                <?
-                                } else if ($SubtitleLanguagesArray[0]) { ?>
-                                    <a class=" TorrentDetailSubtitle-listItem" href="subtitles.php?action=download&id=<?= $ExternalSubtitleID ?>" data-tooltip="<?= t("server.upload.${SubtitleLanguagesArray[0]}") ?>">
-                                        <?= icon("flag/$SubtitleLanguagesArray[0]") ?>
-                                    </a>
-                            <?
-                                }
-                            }
-                            ?>
-                            | <a class="Link" href="#" onclick="BrowseExternalSub(<?= $TorrentID ?>); return false;"><?= t('server.index.details') ?></a>
-                        </div>
-                        <div id="external_subtitle_container_<?= $TorrentID ?>" class="hidden"></div>
-                    <?  } ?>
-
-                </div>
-
-
-                <? if (!empty($MediaInfos)) { ?>
-                    <div class=" TorrentDetail-row is-mediainfo is-block">
-                        <strong class="TorrentDetailSubtitle-title" id="subtitles_box_title"><?= t('server.torrents.media_info') ?>:</strong>
+                <?
+                }
+                if ($ExternalSubtitleIDs) {
+                    $ExternalSubtitleIDArray = explode('|', $ExternalSubtitleIDs);
+                    $ExternalSubtitleArray = explode('|', $ExternalSubtitles);
+                ?>
+                    <div class="TorrentDetailSubtitle-list is-external" id="subtitles_box_external">
+                        <span class="TorrentDetailSubtitle-listTitle">
+                            <?= t('server.common.external_subtitles') ?>:
+                        </span>
                         <?
-                        $Index = 0;
-                        $MediaInfoObj = json_decode($MediaInfos);
-                        if (is_array($MediaInfoObj)) {
-                            foreach ($MediaInfoObj as $MediaInfo) {
-                                $MediaInfo = ltrim(trim($MediaInfo), '[mediainfo]');
-                                $MediaInfo = ltrim(trim($MediaInfo), '[bdinfo]');
-                                $MediaInfo = rtrim(trim($MediaInfo), '[/mediainfo]');
-                                $MediaInfo = rtrim(trim($MediaInfo), '[/bdinfo]');
-                                echo ($Index > 0 ? "<br>" : "") . Text::full_format('[mediainfo]' . $MediaInfo . '[/mediainfo]');
-                                $Index++;
+                        foreach ($ExternalSubtitleIDArray as $index => $ExternalSubtitleID) {
+                            $SubtitleLanguages = $ExternalSubtitleArray[$index];
+                            $SubtitleLanguagesArray = explode(',', $SubtitleLanguages);
+                            if (in_array('chinese_simplified', $SubtitleLanguagesArray)) {
+                        ?>
+                                <a class="TorrentDetailSubtitle-listItem" href="subtitles.php?action=download&id= <?= $ExternalSubtitleID ?>" data-tooltip="<?= t('server.upload.chinese_simplified') ?>">
+                                    <?= icon('flag/chinese_simplified') ?>
+                                </a>
+                            <?
+                            } else if (in_array('chinese_traditional', $SubtitleLanguagesArray)) { ?>
+                                <a class=" TorrentDetailSubtitle-listItem" href="subtitles.php?action=download&id=<?= $ExternalSubtitleID ?>" data-tooltip="<?= t('server.upload.chinese_traditional') ?>">
+                                    <?= icon('flag/chinese_traditional') ?>
+                                </a>
+                            <?
+                            } else if ($SubtitleLanguagesArray[0]) { ?>
+                                <a class=" TorrentDetailSubtitle-listItem" href="subtitles.php?action=download&id=<?= $ExternalSubtitleID ?>" data-tooltip="<?= t("server.upload.${SubtitleLanguagesArray[0]}") ?>">
+                                    <?= icon("flag/$SubtitleLanguagesArray[0]") ?>
+                                </a>
+                        <?
                             }
                         }
                         ?>
+
                     </div>
-                <? } ?>
-                <? if (!empty($Description)) { ?>
-                    <div class="TorrentDetail-row is-description is-block">
-                        <?= Text::full_format($Description) ?>
-                    </div>
-                <? } ?>
+                    <div id="external_subtitle_container_<?= $TorrentID ?>" class="hidden"></div>
+                <?  } ?>
+
+            </div>
+
+
+            <? if (!empty($MediaInfos)) { ?>
+                <div class=" TorrentDetail-row is-mediainfo is-block">
+                    <strong class="TorrentDetailSubtitle-title" id="subtitles_box_title"><?= t('server.torrents.media_info') ?>:</strong>
+                    <?
+                    $Index = 0;
+                    $MediaInfoObj = json_decode($MediaInfos);
+                    if (is_array($MediaInfoObj)) {
+                        foreach ($MediaInfoObj as $MediaInfo) {
+                            $MediaInfo = ltrim(trim($MediaInfo), '[mediainfo]');
+                            $MediaInfo = ltrim(trim($MediaInfo), '[bdinfo]');
+                            $MediaInfo = rtrim(trim($MediaInfo), '[/mediainfo]');
+                            $MediaInfo = rtrim(trim($MediaInfo), '[/bdinfo]');
+                            echo ($Index > 0 ? "<br>" : "") . Text::full_format('[mediainfo]' . $MediaInfo . '[/mediainfo]');
+                            $Index++;
+                        }
+                    }
+                    ?>
+                </div>
+            <? } ?>
+            <? if (!empty($Description)) { ?>
+                <div class="TorrentDetail-row is-description is-block">
+                    <?= Text::full_format($Description) ?>
+                </div>
+            <? } ?>
         </div>
     <?
     }
@@ -681,7 +613,7 @@ class TorrentTableView {
         $GroupYear = $GroupInfo['Year'];
     ?>
         <span class="TableTorrent-movieInfoTitle">
-            <a href="\torrents.php?id=<?= $GroupID ?>"><?= $GroupName ?></a>
+            <a href="\torrents.php?id=<?= $GroupID ?>"><?= display_str($GroupName) ?></a>
             <span class="TableTorrent-movieInfoYear">(<? print_r($GroupYear) ?>)</span>
         </span>
         <? if (Bookmarks::has_bookmarked('torrent', $GroupID)) { ?>
@@ -715,7 +647,7 @@ class TorrentTableView {
 
         <div class="TableTorrent-movieInfoSubtitle">
             <? if ($SubName) {
-                echo "$SubName";
+                echo display_str($SubName);
             } ?>
         </div>
     <?
@@ -777,22 +709,7 @@ class TorrentTableView {
         }
         ?>
         <td class="Table-cell TableTorrent-cellHeaderUncheckedStatistic">
-            <span><?= t('server.torrents.name') ?><?= ($this->WithYear ? '/' . $this->header_elem(t('server.torrents.year'), true, 'year') : '') ?></span>
-            <? if ($this->WithCheck) {
-                if ($this->CheckAllTorrents) {
-                    if ($this->AllUncheckedCnt < 50) {
-                        $CntColor = "#009900";
-                    } else if ($this->AllUncheckedCnt < 100) {
-                        $CntColor = "#99CC33";
-                    } else if ($this->AllUncheckedCnt < 200) {
-                        $CntColor = "#F2C300";
-                    } else {
-                        $CntColor = "#CF3434";
-                    }
-            ?>
-                    <span><?= t('server.torrents.unchecked_torrents') ?>:<?= $this->PageUncheckedCnt ?>/<span style="color: <?= $CntColor ?>;font-weight: bold;"><?= $this->AllUncheckedCnt ?></span></span>
-            <? }
-            } ?>
+            <span><?= t('server.torrents.name') ?><?= ($this->WithYear ? ' /' . $this->header_elem(t('server.torrents.year'), true, 'year') : '') ?></span>
         </td>
         <?
         if ($this->WithTime) {
@@ -834,16 +751,6 @@ class GroupTorrentTableView extends TorrentTableView {
             $this->CheckSelfTorrents = !G::$LoggedUser['DisableCheckSelf'];
         } else {
             $this->CheckSelfTorrents = false;
-        }
-        if ($this->CheckAllTorrents) {
-            G::$DB->query("select count(*) from torrents where Checked=0");
-            list($this->AllUncheckedCnt) = G::$DB->next_record();
-            foreach ($this->torrents() as $Torrent) {
-                $TorrentChecked = $Torrent['Checked'];
-                if (!$TorrentChecked) {
-                    $this->PageUncheckedCnt++;
-                }
-            }
         }
     }
     private function set_groups($Groups): ?GroupTorrentTableView {
@@ -1149,13 +1056,13 @@ class UngroupTorrentTableView  extends TorrentTableView {
                             <a href="torrents.php?action=download&amp;id=<?= $TorrentID ?>&amp;authkey=<?= $LoggedUser['AuthKey'] ?>&amp;torrent_pass=<?= $LoggedUser['torrent_pass'] ?>&amp;usetoken=1" data-tooltip="Use a FL Token" onclick="return confirm('<?= FL_confirmation_msg($Torrent['Seeders'], $Torrent['Size']) ?>');">FL</a>
                         <? } ?>
                         ]
-                        <a class="<?= $SnatchedTorrentClass ?>" data-tooltip="<?= $FileName ?>" href="torrents.php?id=<?= $GroupID ?>&amp;torrentid=<?= $TorrentID ?>#torrent<?= $TorrentID ?>">
-                            <?= Torrents::torrent_info($Torrent, true, [
-                                'SettingTorrentTitle' => G::$LoggedUser['SettingTorrentTitle']
-                            ]) ?>
-                        </a>
-
                     </span>
+                    <a class="<?= $SnatchedTorrentClass ?>" data-tooltip="<?= $FileName ?>" href="torrents.php?id=<?= $GroupID ?>&amp;torrentid=<?= $TorrentID ?>#torrent<?= $TorrentID ?>">
+                        <?= Torrents::torrent_info($Torrent, true, [
+                            'SettingTorrentTitle' => G::$LoggedUser['SettingTorrentTitle']
+                        ]) ?>
+                    </a>
+
                 </div>
             </td>
             <? if ($this->WithTime) { ?>

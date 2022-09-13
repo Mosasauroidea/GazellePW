@@ -41,61 +41,64 @@ View::show_header(t('server.apply.apply'), 'apply,bbcode', 'PageApplyApply');
     <?
     $Roles = ApplicantRole::get_list();
     if (count($Roles)) { ?>
-        <div class="Post LayoutBody">
-            <div class="Post-header">
-                <div class="Post-headerTitle">
+        <div class="Box is-noBorder">
+            <div class="Box-header">
+                <div class="Box-headerTitle">
                     <?= t('server.apply.open_roles') ?></div>
             </div>
-            <div class="Post-body HtmlText LayoutBody">
-                <div><?= t('server.apply.referral_note') ?></div>
-                <? foreach ($Roles as $title => $info) { ?>
-                    <div class="Box">
-                        <div class="Box-header">
-                            <div class="head"><?= $title ?></div>
-                        </div>
-                        <div class="Box-body" role_container">
-                            <div class="HtmlText PostArticle">
-                                <?= Text::full_format($info['description']) ?>
+            <div class="Box-body">
+                <div class="BoxList HtmlText">
+                    <div><?= t('server.apply.referral_note') ?></div>
+                    <? foreach ($Roles as $title => $info) { ?>
+                        <div class="Box">
+                            <div class="Box-header">
+                                <div class="head"><?= $title ?></div>
+                            </div>
+                            <div class="Box-body" role_container">
+                                <div class="HtmlText PostArticle">
+                                    <?= Text::full_format($info['description']) ?>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                <?  } /* foreach */ ?>
-            </div>
-        <? } ?>
-
-        <? if (count($Roles) == 0) { ?>
-            <div class="Box">
-                <div class="Box-body">
-                    <p><?= t('server.apply.thanks_for_your_interest_in_helping') ?></p>
+                    <?  } /* foreach */ ?>
                 </div>
             </div>
-            <?
-        } else {
-            if ($Error) {
-            ?>
-                <div class="important"><?= $Error ?></div>
-            <?
-            }
-            ?>
-            <form class="send_form" id="applicationform" name="apply" action="/apply.php?action=save" method="post">
-                <div id="quickpost">
-                    <? new TEXTAREA_PREVIEW('body', 'body', $Body, 95, 20, true, true, false, ['placeholder="' . t('server.apply.at_least_80_characters') . '"']) ?>
-                    <div class="preview_submit">
-                        <div><?= t('server.apply.role') ?>:
-                            <select class="Input" name="role">
-                                <option class="Select-option" value="">---</option>
-                                <? foreach (array_keys($Roles) as $title) { ?>
-                                    <option class="Select-option" value="<?= $title ?>" <?= $Role == $title ? ' selected' : '' ?>><?= $title ?></option>
-                                <?  } ?>
-                            </select>
-                            <input type="hidden" name="auth" value="<?= $LoggedUser['AuthKey'] ?>" />
-                            <input class="Button" type="submit" value="<?= t('server.common.submit') ?>" />
-                        </div>
-
-                    </div>
-                </div>
-            </form>
-        <? } /* else */ ?>
         </div>
+    <? } ?>
 
-        <? View::show_footer();
+    <? if (count($Roles) == 0) { ?>
+        <div class="Box">
+            <div class="Box-body">
+                <p><?= t('server.apply.thanks_for_your_interest_in_helping') ?></p>
+            </div>
+        </div>
+        <?
+    } else {
+        if ($Error) {
+        ?>
+            <div class="important"><?= $Error ?></div>
+        <?
+        }
+        ?>
+        <form class="send_form" id="applicationform" name="apply" action="/apply.php?action=save" method="post">
+            <div id="quickpost">
+                <? new TEXTAREA_PREVIEW('body', 'body', $Body, 95, 20, true, true, false, ['placeholder="' . t('server.apply.at_least_80_characters') . '"']) ?>
+                <div class="preview_submit">
+                    <div><?= t('server.apply.role') ?>:
+                        <select class="Input" name="role">
+                            <option class="Select-option" value="">---</option>
+                            <? foreach (array_keys($Roles) as $title) { ?>
+                                <option class="Select-option" value="<?= $title ?>" <?= $Role == $title ? ' selected' : '' ?>><?= $title ?></option>
+                            <?  } ?>
+                        </select>
+                        <input type="hidden" name="auth" value="<?= $LoggedUser['AuthKey'] ?>" />
+                        <input class="Button" type="submit" value="<?= t('server.common.submit') ?>" />
+                    </div>
+
+                </div>
+            </div>
+        </form>
+    <? } /* else */ ?>
+</div>
+
+<? View::show_footer();

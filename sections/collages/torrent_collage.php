@@ -105,7 +105,7 @@ View::show_header($Name, 'browse,collage,bbcode,voting,recommend', 'PageCollageT
         </div>
         <div class="BodyNavLinks">
             <? if (check_perms('site_collages_subscribe')) { ?>
-                <a href="#" id="subscribelink<?= $CollageID ?>" class="brackets" onclick="CollageSubscribe(<?= $CollageID ?>); return false;"><?= (in_array($CollageID, $CollageSubscriptions) ? t('server.collages.unsubscribe') : t('server.collages.subscribe')) ?></a>
+                <a href="#" id="subscribelink<?= $CollageID ?>" class="brackets" onclick="CollageSubscribe(<?= $CollageID ?>, '<?= (in_array($CollageID, $CollageSubscriptions) ? t('server.collages.subscribe') : t('server.collages.unsubscribe')) ?>'); return false;"><?= (in_array($CollageID, $CollageSubscriptions) ? t('server.collages.unsubscribe') : t('server.collages.subscribe')) ?></a>
             <?
             }
             if (check_perms('site_collages_delete') || (check_perms('site_edit_wiki') && !$Locked)) {
@@ -129,7 +129,7 @@ View::show_header($Name, 'browse,collage,bbcode,voting,recommend', 'PageCollageT
             if (check_perms('site_collages_manage') && !$Locked) {
             ?>
                 <a href="collages.php?action=manage&amp;collageid=<?= $CollageID ?>" class="brackets">
-                    <?= t('server.collages.manage_torrents') ?></a>
+                    <?= t('server.collages.manage_collage') ?></a>
             <?  } ?>
             <a href="reports.php?action=report&amp;type=collage&amp;id=<?= $CollageID ?>" class="brackets">
                 <?= t('server.collages.report_collage') ?></a>
@@ -235,8 +235,8 @@ View::show_header($Name, 'browse,collage,bbcode,voting,recommend', 'PageCollageT
                 <div class="SidebarItemCollageTorrentAdd SidebarItem Box">
                     <div class="SidebarItem-header Box-header">
                         <strong><?= t('server.collages.add_torrent_group') ?></strong>
-                        <span class="floatright">
-                            <a href="#" onclick="$('.add_torrent_container').toggle_class('hidden'); this.innerHTML = (this.innerHTML == '<?= $BatchAdd ?>' ? '<?= $IndividualAdd ?>' : '<?= $BatchAdd ?>'); return false;" class="brackets"><?= t('server.collages.batch_add') ?></a></span>
+                        <div class="SidebarItem-headerActions"> <a href="#" onclick="$('.add_torrent_container').toggle_class('hidden'); this.innerHTML = (this.innerHTML == '<?= $BatchAdd ?>' ? '<?= $IndividualAdd ?>' : '<?= $BatchAdd ?>'); return false;" class="brackets"><?= t('server.collages.batch_add') ?></a>
+                        </div>
                     </div>
                     <div class="pad add_torrent_container">
                         <form class="FormOneLine FormCollageAddTorrentGroup" name="torrent" action="collages.php" method="post">
@@ -274,23 +274,23 @@ View::show_header($Name, 'browse,collage,bbcode,voting,recommend', 'PageCollageT
             <? } ?>
         </div>
         <div class="LayoutMainSidebar-main">
-            <div class="Post">
-                <div class="Post-header">
-                    <div class="Post-headerTitle">
+            <div class="Box is-noBorder">
+                <div class="Box-header">
+                    <div class="Box-headerTitle">
                         <strong><?= t('server.collages.description') ?></strong>
                     </div>
                 </div>
-                <div class="Post-body HtmlText">
+                <div class="Box-body HtmlText">
                     <?= Text::full_format($Description) ?>
                 </div>
             </div>
-            <div class="Post">
-                <div class="Post-header">
-                    <div class="Post-headerTitle">
+            <div class="Box is-noBorder">
+                <div class="Box-header">
+                    <div class="Box-headerTitle">
                         <strong><?= t('server.index.moviegroups') ?></strong>
                     </div>
                 </div>
-                <div class="Post-body">
+                <div class="Box-body">
                     <?
                     $Groups = [];
                     foreach ($GroupIDs as $GroupID) {

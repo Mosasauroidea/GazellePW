@@ -65,6 +65,11 @@ TorrentDetail
   justify-content: center;
 }
 
+.TorrentDetail-postMessageList {
+  display: flex;
+  justify-content: center;
+}
+
 .TorrentDetail-links {
   display: flex;
   justify-content: center;
@@ -95,12 +100,8 @@ TorrentDetail
   gap: var(--global-space-default);
 }
 
-.FormTorrentAddArtist .Button {
-}
-
 .FormCollageRow {
   justify-content: left;
-  padding: 5px 0px;
 }
 
 .FormCollageRow #select_collage {
@@ -117,4 +118,37 @@ TorrentDetail
   align-items: center;
   column-gap: var(--global-space-sm);
   flex-wrap: wrap;
+}
+
+.TorrentDetailfileList-fileItem {
+  display: flex;
+  align-items: center;
+}
+.TorrentDetailfileList-fileSize {
+  margin-left: auto;
+}
+
+.TorrentDetailfileListItem-fileListItem {
+  padding-right: 0px;
+  padding-left: 16px;
+  padding-top: 3px;
+  padding-bottom: 3px;
+}
+
+.TorrentDetailfileListItem-fileListItem[variant='root'] {
+  padding-left: 0px;
+}
+
+.TorrentDetailfileList-fileName {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+
+.TorrentDetailSubtitle-title {
+  vertical-align: middle;
+}
+
+.TorrentDetailSubtitle-noSubtitle {
+  vertical-align: middle;
 }

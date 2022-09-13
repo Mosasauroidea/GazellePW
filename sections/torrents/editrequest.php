@@ -12,15 +12,13 @@ $TorrentDetails = $TorrentCache;
 $TorrentList = $TorrentCache['Torrents'];
 
 $Name = Torrents::group_name($TorrentDetails);
-
-$Title = page_title_conn([t('server.torrents.request_an_edit'), $Name]);
-
 View::show_header(t('server.torrents.request_an_edit'), '', '', 'PageTorrentEditRequest');
 
 ?>
 <div class="LayoutBody">
     <div class="BodyHeader">
-        <h2 class="BodyHeader-nav"><?= $Title ?></h2>
+        <h2 class="BodyHeader-nav"><?= t('server.torrents.request_an_edit') ?></h2>
+        <div class="BodyHeader-subNav"><?= $Name ?></div>
     </div>
     <div class="Box">
         <div class="Box-header">

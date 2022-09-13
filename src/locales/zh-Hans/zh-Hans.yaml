@@ -1,5 +1,9 @@
 client.upload.copied: |-
   复制成功
+client.common.save: |-
+  保存
+client.common.cancel: |-
+  取消
 client.upload.uploading: |-
   上传中：
 client.upload.uploaded: |-
@@ -255,7 +259,7 @@ server.apply.resolved_applications: |-
 server.apply.role: |-
   职位
 server.apply.role_created_by: |-
-  职位于 %s 由 %s 创建 %s。
+  %s 创建
 server.apply.role_created_by_4: |-
   ，最近修改于&nbsp;
 server.apply.role_title: |-
@@ -309,7 +313,7 @@ server.artist.added: |-
 server.artist.aliases_list: |-
   艺人当前别名列表
 server.artist.an_alias_already_exists: |-
-  An alias by that name already exists <a href="artist.php?id=%s">here</a>. You can try renaming that artist to this one.
+  此别名已存在，请见 <a href="artist.php?id=%s">此处</a>。你可以尝试将艺术家重命名为此名。
 server.artist.artist_aliases: |-
   艺人别名组
 server.artist.artist_deleted: |-
@@ -379,7 +383,7 @@ server.artist.merging_artists: |-
 server.artist.name: |-
   别名
 server.artist.no_changes_were_made: |-
-  No changes were made as the target alias did not redirect anywhere.
+  由于目标别名没有任何重定向目标，因此改动并未执行。
 server.artist.number_of_groups: |-
   影片数
 server.artist.number_of_leechers: |-
@@ -401,7 +405,7 @@ server.artist.re_torrents: |-
 server.artist.redirect_to: |-
   目标艺人名
 server.artist.redirection_must_target: |-
-  Redirection must target an alias for the current artist.
+  当前艺术家的重定向必须指向一个别名。
 server.artist.remove_similar_artist_title: |-
   删除该相似艺人
 server.artist.rename: |-
@@ -413,7 +417,7 @@ server.artist.request_name: |-
 server.artist.revert: |-
   还原该版
 server.artist.revision_history: |-
-  %s的历史版本
+  历史版本
 server.artist.similar_artist_cloud: |-
   相似艺人浮云图
 server.artist.similar_artist_map: |-
@@ -733,7 +737,7 @@ server.collages.batch_add: |-
 server.collages.bookmarks_collages: |-
   合集收藏
 server.collages.browse_collages: |-
-  浏览合集
+  合集
 server.collages.built_by_n_users: |-
   贡献者共计%s%s
 server.collages.category: |-
@@ -788,7 +792,7 @@ server.collages.delete_warning: |-
 server.collages.description: |-
   描述
 server.collages.drag_drop_textnote: |-
-  <ul> <li>单击列标题的按钮以自动排序。</li> <li>按住 [Shift] 键并单击其他列标题，同时对多个列排序。</li> <li>拖放任意行以改变其顺序。</li> <li>结束排序，请点击 “Save All Changes” 以保存结果。</li> <li>点击 “Edit” 或 “Remove” 来修改单个条目。</li> </ul>
+  <ul> <li>单击列标题的按钮以自动排序。</li> <li>按住 [Shift] 键并单击其他列标题，同时对多个列排序。</li> <li>拖放任意行以改变其顺序。</li> <li>结束排序，请点击 “保存” 以保存结果。</li> <li>点击 “Edit” 或 “Remove” 来修改单个条目。</li> </ul>
 server.collages.edit_collage: |-
   编辑合集
 server.collages.edit_description: |-
@@ -812,7 +816,7 @@ server.collages.locked: |-
 server.collages.manage_collage: |-
   管理合集
 server.collages.manage_torrents: |-
-  管理种子
+  管理电影
 server.collages.max_groups: |-
   影片数上限
 server.collages.max_groups_per_user: |-
@@ -932,7 +936,7 @@ server.collages.user_s_personal_collage: |-
 server.collages.you_may_not_create_a_personal_collage: |-
   你不能再创建私人合集了。
 server.collages.your_bookmarked_collages: |-
-  已收藏合集
+  你收藏的合集
 server.collages.your_personal_collage_must: |-
   你的私人合集名称内须含有你的用户名。
 server.comments.artist_comments: |-
@@ -1324,7 +1328,7 @@ server.donate.what_will_receive: |-
 server.donate.what_wont_receive: |-
   捐助之后你不能获得
 server.donate.why_donate: |-
-  关于捐助<strong class="u-colorWarning" style="font-size: 14px">（必读）</strong>
+  关于捐助<strong class="u-colorWarning">（必读）</strong>
 server.donate.yuan: |-
   元
 server.editioninfo.10_bit: |-
@@ -1438,7 +1442,7 @@ server.forums.checkbox_subscribe: |-
 server.forums.closed: |-
   已结束
 server.forums.comment_optional: |-
-  评论 (可选)
+  评论（可选）
 server.forums.comments: |-
   评论
 server.forums.confirm: |-
@@ -1580,7 +1584,7 @@ server.forums.topic_creation_time: |-
 server.forums.topics: |-
   主题
 server.forums.unknown_username: |-
-  &nbsp;(未知用户名)
+  &nbsp;（未知用户名）
 server.forums.unsticky_title: |-
   取消置顶
 server.forums.username: |-
@@ -2187,7 +2191,7 @@ server.pub.new_subscription_other: |-
 server.pub.not_allowed_email: |-
   本站禁止 ProtonMail！
 server.pub.note: |-
-  此处显示的所有文件实际上都不在此服务器上保存。链接仅由该网站的用户提供。这些 BitTorrent 文件用于分发备份文件。通过下载 BitTorrent 文件，你声称自己拥有原始文件。如果这些文件以任何方式被误用，本网站的管理员不承担任何责任，也不对其用户发布的内容或其任何其他操作负责。
+  本站服务器并未存储所显示的一切文件，相关链接仅由本站用户提供。这些种子文件仅用于备份目的。下载种子文件即意味着你已拥有原始文件。若相关文件以任何形式被滥用，本站管理员不承担任何责任，也不对用户发布的内容或其任何操作负责。
 server.pub.other_report: |-
   &nbsp;其他报告
 server.pub.other_reports: |-
@@ -2884,11 +2888,11 @@ server.requests.basic_info: |-
 server.requests.bookmarked_requests: |-
   求种收藏
 server.requests.bookmarks: |-
-  求种收藏
+  你收藏的求种
 server.requests.bounty: |-
   报酬
 server.requests.by_user: |-
-  ，发起人是
+  发起人
 server.requests.codec_list: |-
   编码
 server.requests.collages: |-
@@ -2902,7 +2906,7 @@ server.requests.cover: |-
 server.requests.created: |-
   发布时间
 server.requests.created_by: |-
-  ，发起人是
+  发起人
 server.requests.custom_vote: |-
   自定义赞助
 server.requests.custom_vote_title: |-
@@ -2918,7 +2922,7 @@ server.requests.entered_bounty_not_number: |-
 server.requests.entered_year_not_number: |-
   你填的年份不是数字。
 server.requests.fill_a_request_how_to_blockquote: |-
-  先搜索是否已有符合的资源，再根据下述不同情况，将应求种的<strong>永久链接（PL）</strong>填入下列框中以完成应求。 <ul> <li>若已有符合的种子，直接填入其 PL；</li> <li>若没有符合的种子，但存在该影片组，请使用影片详情页面的 “添加格式” 上传新种并填入其 PL；</li> <li>若没有符合的种子且不存在该影片组，请使用下面的 “Upload request” 按钮来上传新种并填入其 PL。</li></ul>
+  先搜索是否已有符合的资源，再根据下述不同情况，将应求种的<strong>永久链接（PL）</strong>填入下列框中以完成应求。 <ul> <li>若已有符合的种子，直接填入其 PL；</li> <li>若没有符合的种子，但存在该影片组，请使用影片详情页面的 “添加格式” 上传新种并填入其 PL；</li> <li>若没有符合的种子且不存在该影片组，请使用 “发布应求” 按钮来上传新种并填入其 PL。</li></ul>
 server.requests.fill_a_request_how_to_toggle: |-
   &nbsp;应求方法&nbsp;
 server.requests.fill_request: |-
@@ -2976,7 +2980,7 @@ server.requests.min_bounty: |-
 server.requests.my_requests: |-
   我的求种
 server.requests.name: |-
-  资源名
+  名称
 server.requests.new_create: |-
   发布求种
 server.requests.new_edit: |-
@@ -3002,7 +3006,7 @@ server.requests.purchasable_at: |-
 server.requests.purchasable_at_placeholder: |-
   选填，用以指向当前可购买片源的网店链接（不允许填预售链接）
 server.requests.quick_vote: |-
-  快速投票
+  快速赞助
 server.requests.ratio: |-
   分享率
 server.requests.reason: |-
@@ -3060,7 +3064,7 @@ server.requests.tags: |-
 server.requests.tags_comma: |-
   标签 (逗号分隔)
 server.requests.tags_note: |-
-  标签应以英文逗号（“,”）分隔，你应使用英文点号（“.”）来分隔标签内的单词——例如 “<strong class='u-colorSuccess'>imdb.top.500</strong>”。<br />请使用左侧文本框的官方标签，而不是 “非官方” 标签（例如使用官方的 “<strong class='u-colorSuccess'>drama</strong>” 标签, 而不是非官方的 “<strong class='u-colorWarning'>holy.crap</strong>” 标签）。
+  标签应以英文逗号（“,”）分隔，你应使用英文点号（“.”）来分隔标签内的单词——例如 “<strong class='u-colorSuccess'>imdb.top.500</strong>”。<br />请使用左侧文本框的官方标签，而不是 “非官方” 标签（例如使用官方的 “<strong class='u-colorSuccess'>剧情</strong>” 标签, 而不是非官方的 “<strong class='u-colorWarning'>holy.crap</strong>” 标签）。
 server.requests.this_request: |-
   该求种
 server.requests.top_contributors: |-
@@ -3086,7 +3090,7 @@ server.requests.vote_requests: |-
 server.requests.will_be: |-
   将会
 server.requests.year: |-
-  首次公映年份
+  年
 server.requests.yes: |-
   是
 server.requests.you_do_not_have_enough_uploaded: |-
@@ -3897,7 +3901,7 @@ server.tools.examined: |-
 server.tools.expires: |-
   过期时间
 server.tools.explanation_thread: |-
-  数据统计及工资计算说明具体请参见 <a href="forums.php?action=viewthread&threadid=123">该贴</a>
+  数据统计及工资计算说明具体请参见 <a href="forums.php?action=viewthread&threadid=123">该帖</a>
 server.tools.failed_to_get_stats_for_user: |-
   获取用户 %s 的数据失败
 server.tools.failed_to_get_tracker_info: |-
@@ -3943,7 +3947,7 @@ server.tools.gamble_title: |-
 server.tools.get_select: |-
   获取/选取
 server.tools.get_select_success: |-
-  获取/选取 (成功)
+  获取/选取（成功）
 server.tools.get_stats_for_user: |-
   获取指定用户的数据
 server.tools.global_cache: |-
@@ -4297,7 +4301,7 @@ server.tools.plz_supply_a_valid_album_id: |-
 server.tools.points_to_add: |-
   欲发放的积分数额
 server.tools.posts: |-
-  站内发贴数
+  站内发帖数
 server.tools.prepaid_card_donor: |-
   移动充值卡捐助
 server.tools.processing: |-
@@ -5140,13 +5144,13 @@ server.torrents.hd_untouched: |-
 server.torrents.hd_untouched_title: |-
   Remux 槽／原盘槽／DIY 槽
 server.torrents.header: |-
-  浏览种子
+  电影
 server.torrents.hide: |-
   隐藏
 server.torrents.hide_tags: |-
   隐藏标签
 server.torrents.history_for_after: |-
-  &nbsp;编辑记录
+  编辑记录
 server.torrents.history_for_group_after: |-
   编辑记录
 server.torrents.hit_and_run: |-
@@ -5188,9 +5192,9 @@ server.torrents.like: |-
 server.torrents.list_of_downloaders: |-
   下载列表
 server.torrents.list_of_giver: |-
-  打赏者列表
+  打赏列表
 server.torrents.list_of_giver_title: |-
-  给该种子的发布人打赏积分的用户名单
+  打赏用户名单
 server.torrents.list_of_snatchers: |-
   完成列表
 server.torrents.location: |-
@@ -5256,7 +5260,7 @@ server.torrents.other: |-
 server.torrents.peer: |-
   同伴
 server.torrents.peer_list: |-
-  同伴列表
+  做种列表
 server.torrents.people_who_like_this_album_also_liked: |-
   喜欢这部影片的用户也喜欢……
 server.torrents.period: |-
@@ -5345,9 +5349,9 @@ server.torrents.resolve: |-
 server.torrents.retention_slot: |-
   存档槽
 server.torrents.retention_slot_requirements: |-
-  应小于质量类槽位体积的 80%%。压制质量达到一般要求即可。
+  应小于质量类槽位体积的 80%。压制质量达到一般要求即可。
 server.torrents.retention_type_slot: |-
-  存档槽类 (含存档和特色)
+  存档槽类（含存档和特色）
 server.torrents.revert: |-
   还原该版
 server.torrents.revert_confirm: |-
@@ -5391,9 +5395,9 @@ server.torrents.search_empty_2: |-
 server.torrents.search_for: |-
   搜索关键词
 server.torrents.search_requests: |-
-  搜索悬赏
+  搜索
 server.torrents.search_torrents: |-
-  搜索种子
+  搜索
 server.torrents.seeders: |-
   做种数
 server.torrents.seeding_status: |-
@@ -5457,13 +5461,13 @@ server.torrents.subscribe: |-
 server.torrents.successfully_sent_re_seed_request: |-
   续种请求发送成功
 server.torrents.successfully_sent_re_seed_request_for_torrent: |-
-  已成功为种子&nbsp;
+  已成功将种子&nbsp;
 server.torrents.tag: |-
   标签
 server.torrents.tag_rules: |-
   标签规则
 server.torrents.tags: |-
-  标签 (逗号分隔)
+  标签（逗号分隔）
 server.torrents.the_destination_torrent_group_does_not_exist: |-
   目标种子组不存在！
 server.torrents.there_are_no_tags_to_display: |-
@@ -5533,7 +5537,13 @@ server.torrents.uhd_untouched: |-
 server.torrents.uhd_untouched_title: |-
   Remux 槽／原盘槽／DIY 槽
 server.torrents.unchecked_torrents: |-
-  未检查统计
+  未检查
+server.torrents.unchecked_torrents_results_note: |-
+  （%s个未检查）
+server.torrents.checking_status: |-
+  检查状态
+server.torrents.checked_torrents: |-
+  已检查
 server.torrents.undo_delete: |-
   撤销删除
 server.torrents.unsubscribe: |-
@@ -5910,6 +5920,8 @@ server.upload.sub_title: |-
   中文标题
 server.upload.swedish: |-
   瑞典语
+server.upload.upload_torrents: |-
+  发布种子
 server.upload.tags: |-
   标签
 server.upload.thai: |-
@@ -5927,7 +5939,6 @@ server.upload.torrent_diff: |-
 server.upload.torrent_file: |-
   种子文件
 server.upload.torrent_info_how_to_blockquote: |-
-  >-
   <strong>MediaInfo 与规格：</strong>在「MediaInfo/BDInfo」区域按规范粘贴上 MediaInfo（<a href="wiki.php?action=article&name=MediaInfo+使用指南" target="_blank">指南</a>）或 BDInfo（<a href="wiki.php?action=article&name=BDInfo+使用指南" target="_blank">指南</a>）日志，然后在文本框外单击，上方四个带「自动检测」字样的选项就会自动填好。<br/> <strong class="u-colorWarning">请务必在自动填写完毕后再次确认信息是否正确。</strong><br/><br/> <strong>种子描述：</strong>我们要求你至少提供三张 PNG 截图（<a href="wiki.php?action=article&name=原始分辨率截图指南" target="_blank">指南</a>）。<br/>
   另外建议将文本说明放在前面，截图放在后面，特效字幕截图和画面截图分开，参考 <a href="torrents.php?torrentid=1" target="_blank">此种子</a>。<br/>有关必需信息的更多规定，请参阅我们的 <a href="rules.php?p=upload" target="_blank">规则页面</a>。<br/><br/> <strong>字幕：</strong>请注意区分强制字幕和硬编码字幕这两个不同的概念，具体阐释请参见 <a href="wiki.php?action=article&id=44" target="_blank">字幕格式</a> 的「强制字幕」一节。<br/><br/> <strong>特色槽选项：</strong>仅适用于<strong class="u-colorWarning">外语电影</strong>（粤语等方言不被视为外语）。
 server.upload.torrent_info_how_to_toggle: |-
@@ -5975,7 +5986,9 @@ server.user.SettingAlternative: |-
 server.user.SettingShowReleaseGroup: |-
   显示制作组
 server.user.SettingTorrentTitle: |-
-  种子标题
+  标题样式
+server.user.setting_torrent_title_seq: |-
+  标题顺序
 server.user.SettingTorrentTitleTooltip: |-
   保存设置查看结果
 server.user.above: |-
@@ -6396,7 +6409,7 @@ server.user.irckey_note_1: |-
   <p class='min_padding'>完成设置后，你在 <a href='wiki.php?action=article&amp;id=248'>本站 IRC</a> 通过
 server.user.irckey_note_2: |-
   的认证时，将不使用站点密码，而是使用此 key。<span style='white-space: nowrap;'>请注意：</span></p>
-  <ul>
+  <ul class="List">
   <li>此 key 明文显示且应不同于你的站点密码。</li>
   <li>IRC key 的长度必须在 6 到 32 字符之间。</li>
   </ul>
@@ -6953,7 +6966,7 @@ server.user.st_password: |-
 server.user.st_password_new: |-
   新密码
 server.user.st_password_note: |-
-  密码强度要求： <ul> <li>密码大于等于 8 字符，包含至少 1 个小写和大写字母，且包含至少 1 个数字或符号</li> <li>或大于等于 20 字符</li> </ul>
+  密码强度要求： <ul class="List"> <li>密码大于等于 8 字符，包含至少 1 个小写和大写字母，且包含至少 1 个数字或符号</li> <li>或大于等于 20 字符</li> </ul>
 server.user.st_password_old: |-
   当前密码
 server.user.st_password_re: |-
@@ -6967,7 +6980,7 @@ server.user.st_presets: |-
 server.user.st_presets_0: |-
   全部显示
 server.user.st_presets_1: |-
-  仅显示数据
+  仅显示数量
 server.user.st_presets_2: |-
   全部隐藏
 server.user.st_profinfo1: |-
@@ -8028,3 +8041,33 @@ server.country.macao: |-
   中国澳门
 server.common.minutes: |-
   分钟
+server.collages.contributed_collages_browse: |-
+  %s 建设的合集
+server.collages.started_collages_browse: |-
+  %s 发起的合集
+server.common.save_all_change: |-
+  保存
+server.torrents.report_info: |-
+  报告信息
+server.collages.not_torrent_link: |-
+  需填写站内种子地址
+server.requests.delete_request: |-
+  删除求种
+server.requests.unfill_request: |-
+  取消应求
+server.requests.filled_user: |-
+  应求人
+server.common.open: |-
+  开启
+server.common.close: |-
+  关闭
+server.apply.resolve: |-
+  解决
+server.apply.reopen: |-
+  重新打开
+server.user.torrent_title_drag_note: |-
+  左右拖拽下方项目以排序
+server.bookmarks.delete_checked: |-
+  删除选中
+server.common.update: |-
+  更新

@@ -109,7 +109,7 @@ View::show_header(t('server.user.invites'), '', 'PageUserInvite');
 ?>
 <div class="LayoutBody">
     <div class="BodyHeader">
-        <h2 class="BodyHeader-nav"><?= Users::format_username($UserID, false, false, false) ?> &gt; <?= t('server.user.invites') ?></h2>
+        <h2 class="BodyHeader-nav"><?= t('server.user.invites') ?></h2>
         <div class="BodyNavLinks">
             <a href="user.php?action=invitetree<? if ($Sneaky) {
                                                     echo '&amp;userid=' . $UserID;
@@ -200,11 +200,11 @@ View::show_header(t('server.user.invites'), '', 'PageUserInvite');
         </div>
     <? } ?>
     <? if (!empty($Pending)) { ?>
-        <div class="Post">
-            <div class="Post-header">
-                <div class="Post-headerTitle" id="pending_invites_header"><?= t('server.user.pending_invites') ?></div>
+        <div class="Box is-noBorder">
+            <div class="Box-header">
+                <div class="Box-headerTitle" id="pending_invites_header"><?= t('server.user.pending_invites') ?></div>
             </div>
-            <div class="Post-body" id="pending_invites_container">
+            <div class="Box-body" id="pending_invites_container">
                 <table class="TableInvite Table">
                     <tr class="Table-rowHeader">
                         <td class="Table-cell"><?= t('server.user.email_address') ?></td>
@@ -227,11 +227,11 @@ View::show_header(t('server.user.invites'), '', 'PageUserInvite');
             </div>
         </div>
     <? } ?>
-    <div class="Post">
-        <div class="Post-header">
-            <div class="Post-headerTitle" id="invite_table_header"><?= t('server.user.invitee_list') ?></div>
+    <div class="Box is-noBorder">
+        <div class="Box-header">
+            <div class="Box-headerTitle" id="invite_table_header"><?= t('server.user.invitee_list') ?></div>
         </div>
-        <div class="Post-body TableContainer" id="invite_table_container">
+        <div class="Box-body TableContainer" id="invite_table_container">
             <table class="Table TableInvite">
                 <tr class="Table-rowHeader">
                     <td class="Table-cell Table-cell"><a href="user.php?action=invite&amp;order=username&amp;sort=<?= (($CurrentOrder == 'username') ? $NewSort : 'desc') ?>&amp;<?= $CurrentURL ?>"><?= t('server.user.username') ?></a></td>

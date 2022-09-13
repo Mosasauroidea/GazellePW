@@ -394,37 +394,10 @@ $Pages = Format::get_pages($Page, $TorrentCount, CONFIG['TORRENTS_PER_PAGE']);
                         </td>
                     </tr>
                 </table>
-
-                <table class="layout cat_list">
-                    <?
-                    $x = 0;
-                    reset($Categories);
-                    foreach ($Categories as $CatKey => $CatName) {
-                        if ($x % 7 === 0) {
-                            if ($x > 0) {
-                    ?>
-                                </tr>
-                            <?        } ?>
-                            <tr class="Form-row">
-                            <?
-                        }
-                        $x++;
-                            ?>
-                            <td class="Form-inputs">
-                                <div class="Checkbox">
-                                    <input class="Input" type="checkbox" name="categories[<?= ($CatKey + 1) ?>]" id="cat_<?= ($CatKey + 1) ?>" value="1" <? if (isset($_GET['categories'][$CatKey + 1])) { ?> checked="checked" <? } ?> />
-                                    <label class="Checkbox-label" for="cat_<?= ($CatKey + 1) ?>"><?= $CatName ?></label>
-                                </div>
-                            </td>
-                        <?
-                    }
-                        ?>
-                            </tr>
-                </table>
             </div>
             <div class="SearchPageFooter">
                 <div class="SearchPageFooter-actions">
-                    <input class="Button" type="submit" value="Search torrents" />
+                    <button class="Button" type="submit" value="Search torrents"><?= t('server.common.search') ?></button>
                 </div>
             </div>
         </form>

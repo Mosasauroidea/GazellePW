@@ -16,8 +16,54 @@ if (!in_array($Section, array('inbox', 'sentbox'))) {
 }
 
 list($Page, $Limit) = Format::page_limit(CONFIG['MESSAGES_PER_PAGE']);
+$Sort = empty($_GET['sort']) || $_GET['sort'] !== 'unread' ? 'Date DESC' : "cu.Unread = '1' DESC, DATE DESC";
+$sql = "
+	SELECT
+		SQL_CALC_FOUND_ROWS
+		c.ID,
+		c.Subject,
+		cu.Unread,
+		cu.Sticky,
+		cu.ForwardedTo,
+		cu2.UserID,";
+$sql .= $Section === 'sentbox' ? ' cu.SentDate ' : ' cu.ReceivedDate ';
+$sql .= "AS Date
+	FROM pm_conversations AS c
+		LEFT JOIN pm_conversations_users AS cu ON cu.ConvID = c.ID AND cu.UserID = '$UserID'
+		LEFT JOIN pm_conversations_users AS cu2 ON cu2.ConvID = c.ID AND cu2.UserID != '$UserID' AND cu2.ForwardedTo = 0
+		LEFT JOIN users_main AS um ON um.ID = cu2.UserID";
 
-View::show_header(t('server.inbox.inbox'), '', 'PageInboxHome');
+if (!empty($_GET['search']) && $_GET['searchtype'] === 'message') {
+    $sql .= ' JOIN pm_messages AS m ON c.ID = m.ConvID';
+}
+$sql .= ' WHERE ';
+if (!empty($_GET['search'])) {
+    $Search = db_string($_GET['search']);
+    if ($_GET['searchtype'] === 'user') {
+        $sql .= "um.Username LIKE '$Search' AND ";
+    } elseif ($_GET['searchtype'] === 'subject') {
+        $Words = explode(' ', $Search);
+        $sql .= "c.Subject LIKE '%" . implode("%' AND c.Subject LIKE '%", $Words) . "%' AND ";
+    } elseif ($_GET['searchtype'] === 'message') {
+        $Words = explode(' ', $Search);
+        $sql .= "m.Body LIKE '%" . implode("%' AND m.Body LIKE '%", $Words) . "%' AND ";
+    }
+}
+$sql .= $Section === 'sentbox' ? ' cu.InSentbox' : ' cu.InInbox';
+$sql .= " = '1'";
+
+$sql .= "
+	GROUP BY c.ID
+	ORDER BY cu.Sticky, $Sort
+	LIMIT $Limit";
+$Results = $DB->query($sql);
+$DB->query('SELECT FOUND_ROWS()');
+list($NumResults) = $DB->next_record();
+$DB->set_query_id($Results);
+$Count = $DB->record_count();
+$Datas = G::$DB->to_array(false, MYSQLI_NUM);
+
+View::show_header(($Section === 'sentbox' ? t('server.inbox.sentbox') : t('server.inbox.inbox')), '', 'PageInboxHome');
 ?>
 <div class="LayoutBody">
     <div class="BodyHeader">
@@ -31,123 +77,84 @@ View::show_header(t('server.inbox.inbox'), '', 'PageInboxHome');
             <? }
 
             ?>
+        </div>
+        <div class="BodyNavLinks">
             <?
-
-            $Sort = empty($_GET['sort']) || $_GET['sort'] !== 'unread' ? 'Date DESC' : "cu.Unread = '1' DESC, DATE DESC";
-
-            $sql = "
-	SELECT
-		SQL_CALC_FOUND_ROWS
-		c.ID,
-		c.Subject,
-		cu.Unread,
-		cu.Sticky,
-		cu.ForwardedTo,
-		cu2.UserID,";
-            $sql .= $Section === 'sentbox' ? ' cu.SentDate ' : ' cu.ReceivedDate ';
-            $sql .= "AS Date
-	FROM pm_conversations AS c
-		LEFT JOIN pm_conversations_users AS cu ON cu.ConvID = c.ID AND cu.UserID = '$UserID'
-		LEFT JOIN pm_conversations_users AS cu2 ON cu2.ConvID = c.ID AND cu2.UserID != '$UserID' AND cu2.ForwardedTo = 0
-		LEFT JOIN users_main AS um ON um.ID = cu2.UserID";
-
-            if (!empty($_GET['search']) && $_GET['searchtype'] === 'message') {
-                $sql .= ' JOIN pm_messages AS m ON c.ID = m.ConvID';
-            }
-            $sql .= ' WHERE ';
-            if (!empty($_GET['search'])) {
-                $Search = db_string($_GET['search']);
-                if ($_GET['searchtype'] === 'user') {
-                    $sql .= "um.Username LIKE '$Search' AND ";
-                } elseif ($_GET['searchtype'] === 'subject') {
-                    $Words = explode(' ', $Search);
-                    $sql .= "c.Subject LIKE '%" . implode("%' AND c.Subject LIKE '%", $Words) . "%' AND ";
-                } elseif ($_GET['searchtype'] === 'message') {
-                    $Words = explode(' ', $Search);
-                    $sql .= "m.Body LIKE '%" . implode("%' AND m.Body LIKE '%", $Words) . "%' AND ";
-                }
-            }
-            $sql .= $Section === 'sentbox' ? ' cu.InSentbox' : ' cu.InInbox';
-            $sql .= " = '1'";
-
-            $sql .= "
-	GROUP BY c.ID
-	ORDER BY cu.Sticky, $Sort
-	LIMIT $Limit";
-            $Results = $DB->query($sql);
-            $DB->query('SELECT FOUND_ROWS()');
-            list($NumResults) = $DB->next_record();
-            $DB->set_query_id($Results);
-            $Count = $DB->record_count();
-
             $Pages = Format::get_pages($Page, $NumResults, CONFIG['MESSAGES_PER_PAGE'], 9);
-            echo "\t\t$Pages\n";
+            echo "$Pages";
             ?>
         </div>
     </div>
 
     <div class="BodyContent">
         <? if ($Count == 0 && empty($_GET['search'])) { ?>
-            <h2><?= t('server.inbox.your') ?><?= ($Section === 'sentbox' ? t('server.inbox.sentbox') : t('server.inbox.inbox')) ?><?= t('server.inbox.is_empty') ?></h2>
+            <div class="BoxBody">
+                <?= t('server.inbox.your') ?><?= ($Section === 'sentbox' ? t('server.inbox.sentbox') : t('server.inbox.inbox')) ?><?= t('server.inbox.is_empty') ?>
+            </div>
         <? } else { ?>
-            <form class="Form SearchInbox u-vstack" name="<?= ($Section === 'sentbox' ? 'sentbox' : 'inbox') ?>" action="inbox.php" method="get" id="searchbox">
-                <div class="SearchInbox-row">
-                    <input type="hidden" name="action" value="<?= $Section ?>" />
-                    <div class="Radio">
-                        <input class="Input" type="radio" name="searchtype" value="user" id="radio-user" <?= (empty($_GET['searchtype']) || $_GET['searchtype'] === 'user' ? ' checked="checked"' : '') ?> />
-                        <label class="Radio-label" for="radio-user"><?= t('server.inbox.user') ?></label>
-                    </div>
-                    <div class="Radio">
-                        <input class="Input" type="radio" name="searchtype" value="subject" id="radio-subject" <?= (!empty($_GET['searchtype']) && $_GET['searchtype'] === 'subject' ? ' checked="checked"' : '') ?> />
-                        <label class="Radio-label" for="radio-subject"><?= t('server.inbox.subject') ?></label>
-                    </div>
-                    <div class="Radio">
-                        <input class="Input" type="radio" name="searchtype" value="message" id="radio-message" <?= (!empty($_GET['searchtype']) && $_GET['searchtype'] === 'message' ? ' checked="checked"' : '') ?> />
-                        <label class="Radio-label" for="radio-message"><?= t('server.inbox.message') ?></label>
-                    </div>
-                    <span class="SearchInbox-actions">
-                        <?          // provide a temporary toggle for sorting PMs
-                        $ToggleTitle = 'Temporary toggle switch for sorting PMs. To permanently change the sorting behavior, edit the setting in your profile.';
-                        $BaseURL = "inbox.php?action={$_GET['action']}";
+            <div class="Box">
+                <form class="Box-body Form SearchInbox u-vstack" name="<?= ($Section === 'sentbox' ? 'sentbox' : 'inbox') ?>" action="inbox.php" method="get" id="searchbox">
+                    <div class="SearchInbox-row">
+                        <input type="hidden" name="action" value="<?= $Section ?>" />
+                        <div class="Radio">
+                            <input class="Input" type="radio" name="searchtype" value="user" id="radio-user" <?= (empty($_GET['searchtype']) || $_GET['searchtype'] === 'user' ? ' checked="checked"' : '') ?> />
+                            <label class="Radio-label" for="radio-user"><?= t('server.inbox.user') ?></label>
+                        </div>
+                        <div class="Radio">
+                            <input class="Input" type="radio" name="searchtype" value="subject" id="radio-subject" <?= (!empty($_GET['searchtype']) && $_GET['searchtype'] === 'subject' ? ' checked="checked"' : '') ?> />
+                            <label class="Radio-label" for="radio-subject"><?= t('server.inbox.subject') ?></label>
+                        </div>
+                        <div class="Radio">
+                            <input class="Input" type="radio" name="searchtype" value="message" id="radio-message" <?= (!empty($_GET['searchtype']) && $_GET['searchtype'] === 'message' ? ' checked="checked"' : '') ?> />
+                            <label class="Radio-label" for="radio-message"><?= t('server.inbox.message') ?></label>
+                        </div>
+                        <span class="SearchInbox-actions">
+                            <?          // provide a temporary toggle for sorting PMs
+                            $ToggleTitle = 'Temporary toggle switch for sorting PMs. To permanently change the sorting behavior, edit the setting in your profile.';
+                            $BaseURL = "inbox.php?action={$_GET['action']}";
 
-                        if ($_GET['sort'] === 'unread') { ?>
-                            <a href="<?= $BaseURL ?>" class="brackets" data-tooltip="<?= $ToggleTitle ?>"><?= t('server.inbox.list_latest_first') ?></a>
-                        <?      } else { ?>
-                            <a href="<?= $BaseURL ?>&sort=unread" class="brackets" data-tooltip="<?= $ToggleTitle ?>"><?= t('server.inbox.list_unread_first') ?></a>
-                        <?      } ?>
-                    </span>
-                </div>
-                <div class="SearchInbox-row">
-                    <input class="Input" type="text" name="text" placeholder="<?= (!empty($_GET['search']) ? display_str($_GET['search']) : t('server.inbox.placeholder_search') . ($Section === 'sentbox' ? t('server.inbox.sentbox') : t('server.inbox.inbox'))) ?>" />
-                </div>
-            </form>
-            <form class="u-vstack manage_form" name="messages" action="inbox.php" method="post" id="messageform">
-                <input type="hidden" name="action" value="masschange" />
-                <input type="hidden" name="auth" value="<?= $LoggedUser['AuthKey'] ?>" />
-                <div>
-                    <input class="Button" type="submit" name="read" value="<?= t('server.inbox.mark_as_read') ?>" />&nbsp;
-                    <input class="Button" type="submit" name="unread" value="<?= t('server.inbox.mark_as_unread') ?>" />&nbsp;
-                    <input class="Button" type="submit" name="delete" value="<?= t('server.inbox.delete_messages') ?>" />
-                </div>
-
-                <div class="TableContainer">
-                    <table class="TableUserInbox Table">
-                        <tr class="Table-rowHeader">
-                            <td class="Table-cell" width="10px"><input type="checkbox" onclick="toggleChecks('messageform', this);" /></td>
-                            <td class="Table-cell" width="50%"><?= t('server.inbox.subject') ?></td>
-                            <td class="Table-cell"><?= ($Section === 'sentbox' ? t('server.inbox.receiver') : t('server.inbox.sender')) ?></td>
-                            <td class="Table-cell"><?= t('server.inbox.date') ?></td>
-                            <? if (check_perms('users_mod')) { ?>
-                                <td class="Table-cell"><?= t('server.inbox.forwarded_to') ?></td>
+                            if ($_GET['sort'] === 'unread') { ?>
+                                <a href="<?= $BaseURL ?>" class="brackets" data-tooltip="<?= $ToggleTitle ?>"><?= t('server.inbox.list_latest_first') ?></a>
+                            <?      } else { ?>
+                                <a href="<?= $BaseURL ?>&sort=unread" class="brackets" data-tooltip="<?= $ToggleTitle ?>"><?= t('server.inbox.list_unread_first') ?></a>
                             <?      } ?>
-                        </tr>
-                        <?
-                        if ($Count == 0) { ?>
-                            <tr class="Table-row">
-                                <td class="Table-cell" colspan="5"><?= t('server.inbox.no_results') ?></td>
+                        </span>
+                    </div>
+                    <div class="SearchInbox-row">
+                        <input class="Input" type="text" name="search" placeholder="<?= (!empty($_GET['search']) ? display_str($_GET['search']) : t('server.inbox.placeholder_search') . ($Section === 'sentbox' ? t('server.inbox.sentbox') : t('server.inbox.inbox'))) ?>" />
+                    </div>
+                    <div class="SearchInbox-actions">
+                        <button class="Button" type="submit"><?= t('server.common.search') ?></button>
+                    </div>
+                </form>
+            </div>
+            <? if ($Count == 0) { ?>
+                <div class="center"><?= t('server.inbox.no_results') ?></div>
+            <? } else { ?>
+                <form class="u-vstack manage_form" name="messages" action="inbox.php" method="post" id="messageform">
+                    <input type="hidden" name="action" value="masschange" />
+                    <input type="hidden" name="auth" value="<?= $LoggedUser['AuthKey'] ?>" />
+                    <div>
+                        <input class="Button" type="submit" name="read" value="<?= t('server.inbox.mark_as_read') ?>" />&nbsp;
+                        <input class="Button" type="submit" name="unread" value="<?= t('server.inbox.mark_as_unread') ?>" />&nbsp;
+                        <input class="Button" type="submit" name="delete" value="<?= t('server.inbox.delete_messages') ?>" />
+                    </div>
+
+                    <div class="TableContainer">
+                        <table class="TableUserInbox Table">
+                            <tr class="Table-rowHeader">
+                                <td class="Table-cell" width="10px"><input type="checkbox" onclick="toggleChecks('messageform', this);" /></td>
+                                <td class="Table-cell" width="50%"><?= t('server.inbox.subject') ?></td>
+                                <td class="Table-cell"><?= ($Section === 'sentbox' ? t('server.inbox.receiver') : t('server.inbox.sender')) ?></td>
+                                <td class="Table-cell"><?= t('server.inbox.date') ?></td>
+                                <? if (check_perms('users_mod')) { ?>
+                                    <td class="Table-cell"><?= t('server.inbox.forwarded_to') ?></td>
+                                <?      } ?>
                             </tr>
-                            <?  } else {
-                            while (list($ConvID, $Subject, $Unread, $Sticky, $ForwardedID, $SenderID, $Date) = $DB->next_record()) {
+                            <?
+                            foreach ($Datas as $Data) {
+
+                                list($ConvID, $Subject, $Unread, $Sticky, $ForwardedID, $SenderID, $Date) = $Data;
                                 if ($Unread === '1') {
                                     $RowClass = 'unreadpm';
                                 } else {
@@ -164,7 +171,7 @@ View::show_header(t('server.inbox.inbox'), '', 'PageInboxHome');
                                             echo '<strong>';
                                         }
                                         if ($Sticky) {
-                                            echo 'Sticky: ';
+                                            echo t('server.inbox.sticky') . ': ';
                                         }
                                         echo "\n";
                                         ?>
@@ -181,18 +188,18 @@ View::show_header(t('server.inbox.inbox'), '', 'PageInboxHome');
                                         <td class="Table-cell"><?= (($ForwardedID && $ForwardedID != $LoggedUser['ID']) ? Users::format_username($ForwardedID, false, false, false) : '') ?></td>
                                     <?          } ?>
                                 </tr>
-                        <?
+                            <?
                                 $DB->set_query_id($Results);
-                            }
-                        } ?>
-                    </table>
-                </div>
-                <div>
-                    <input class="Button" type="submit" name="read" value="<?= t('server.inbox.mark_as_read') ?>" />&nbsp;
-                    <input class="Button" type="submit" name="unread" value="<?= t('server.inbox.mark_as_unread') ?>" />&nbsp;
-                    <input class="Button" type="submit" name="delete" value="<?= t('server.inbox.delete_messages') ?>" />
-                </div>
-            </form>
+                            } ?>
+                        </table>
+                    </div>
+                    <div>
+                        <input class="Button" type="submit" name="read" value="<?= t('server.inbox.mark_as_read') ?>" />&nbsp;
+                        <input class="Button" type="submit" name="unread" value="<?= t('server.inbox.mark_as_unread') ?>" />&nbsp;
+                        <input class="Button" type="submit" name="delete" value="<?= t('server.inbox.delete_messages') ?>" />
+                    </div>
+                </form>
+            <? } ?>
         <? } ?>
         <div class="BodyNavLinks">
             <? echo "\t\t$Pages\n"; ?>

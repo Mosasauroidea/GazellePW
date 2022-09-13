@@ -115,7 +115,7 @@ class Requests {
 				FROM requests
 				WHERE ID IN ($IDs)
 				ORDER BY ID");
-            $Requests = G::$DB->to_array(false, MYSQLI_ASSOC, true);
+            $Requests = G::$DB->to_array(false, MYSQLI_ASSOC, false);
             $Tags = self::get_tags(G::$DB->collect('ID', false));
             foreach ($Requests as $Request) {
                 unset($NotFound[$Request['ID']]);

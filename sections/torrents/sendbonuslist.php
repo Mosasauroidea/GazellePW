@@ -27,43 +27,45 @@ $DB->query('SELECT FOUND_ROWS()');
 list($NumResults) = $DB->next_record();
 
 ?>
-<h4 data-tooltip="<?= t('server.torrents.list_of_giver_title') ?>"><?= t('server.torrents.list_of_giver') ?></h4>
+<div class="TorrentDetail-row is-sendbonusList is-block">
+    <strong class="TorrentDetailSendBonusList-title" id="sendbonuslist_box_title"><?= t('server.torrents.list_of_giver_title') ?>:</strong>
 
-<? if ($NumResults > 100) { ?>
-    <div class="BodyNavLinks"><?= js_pages('show_snatches', $_GET['torrentid'], $NumResults, $Page) ?></div>
-<? } ?>
-<div class="TableContainer">
-    <table class="TableTorrentSeedBonus Table">
-        <tr class="Table-rowHeader">
-            <td class="Table-cell"><?= t('server.torrents.user') ?></td>
-            <td class="Table-cell"><?= t('server.torrents.gift_points_pre_tax') ?></td>
+    <? if ($NumResults > 100) { ?>
+        <div class="BodyNavLinks"><?= js_pages('show_snatches', $_GET['torrentid'], $NumResults, $Page) ?></div>
+    <? } ?>
+    <div class="TableContainer">
+        <table class="TableTorrentSeedBonus Table">
+            <tr class="Table-rowHeader">
+                <td class="Table-cell"><?= t('server.torrents.user') ?></td>
+                <td class="Table-cell"><?= t('server.torrents.gift_points_pre_tax') ?></td>
 
-            <td class="Table-cell"><?= t('server.torrents.user') ?></td>
-            <td class="Table-cell"><?= t('server.torrents.gift_points_pre_tax') ?></td>
-        </tr>
-        <tr>
+                <td class="Table-cell"><?= t('server.torrents.user') ?></td>
+                <td class="Table-cell"><?= t('server.torrents.gift_points_pre_tax') ?></td>
+            </tr>
+            <tr>
+                <?
+                $i = 0;
+
+                foreach ($Results as $ID => $Data) {
+                    list($GiverID, $Bonus) = array_values($Data);
+                    if (!$GiverID && !$Bonus) continue;
+                    if ($i % 2 == 0 && $i > 0) {
+                ?>
+            </tr>
+            <tr class="Table-row">
             <?
-            $i = 0;
-
-            foreach ($Results as $ID => $Data) {
-                list($GiverID, $Bonus) = array_values($Data);
-                if (!$GiverID && !$Bonus) continue;
-                if ($i % 2 == 0 && $i > 0) {
+                    }
             ?>
-        </tr>
-        <tr class="Table-row">
+            <td class="Table-cell"><?= Users::format_username($GiverID, true, true, true, true) ?></td>
+            <td class="Table-cell"><?= $Bonus ?></td>
         <?
+                    $i++;
                 }
         ?>
-        <td class="Table-cell"><?= Users::format_username($GiverID, true, true, true, true) ?></td>
-        <td class="Table-cell"><?= $Bonus ?></td>
-    <?
-                $i++;
-            }
-    ?>
-        </tr>
-    </table>
+            </tr>
+        </table>
+    </div>
+    <? if ($NumResults > 100) { ?>
+        <div class="BodyNavLinks"><?= js_pages('show_giver', $_GET['torrentid'], $NumResults, $Page) ?></div>
+    <? } ?>
 </div>
-<? if ($NumResults > 100) { ?>
-    <div class="BodyNavLinks"><?= js_pages('show_giver', $_GET['torrentid'], $NumResults, $Page) ?></div>
-<? } ?>

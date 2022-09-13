@@ -46,26 +46,6 @@ View::show_header(t('server.top10.top_10_tags'), '', 'PageTop10Tag');
         generate_tag_table(t('server.top10.most_used_torrent_tags'), 'ut', $TopUsedTags, $Limit);
     }
 
-    if ($Details == 'all' || $Details == 'ur') {
-        if (!$TopRequestTags = $Cache->get_value('toprequesttag_' . $Limit)) {
-            $DB->query("
-			SELECT
-				t.ID,
-				t.Name,
-                t.SubName,
-				COUNT(r.RequestID) AS Uses,
-				'',''
-			FROM tags AS t
-				JOIN requests_tags AS r ON r.TagID=t.ID
-			GROUP BY r.TagID
-			ORDER BY Uses DESC
-			LIMIT $Limit");
-            $TopRequestTags = $DB->to_array();
-            $Cache->cache_value('toprequesttag_' . $Limit, $TopRequestTags, 3600 * 12);
-        }
-
-        generate_tag_table(t('server.top10.most_used_request_tags'), 'ur', $TopRequestTags, $Limit, false, true);
-    }
 
     if ($Details == 'all' || $Details == 'v') {
         if (!$TopVotedTags = $Cache->get_value('topvotedtag_' . $Limit)) {
@@ -88,6 +68,26 @@ View::show_header(t('server.top10.top_10_tags'), '', 'PageTop10Tag');
 
         generate_tag_table(t('server.top10.most_highly_voted_tags'), 'v', $TopVotedTags, $Limit);
     }
+    if ($Details == 'all' || $Details == 'ur') {
+        if (!$TopRequestTags = $Cache->get_value('toprequesttag_' . $Limit)) {
+            $DB->query("
+			SELECT
+				t.ID,
+				t.Name,
+                t.SubName,
+				COUNT(r.RequestID) AS Uses,
+				'',''
+			FROM tags AS t
+				JOIN requests_tags AS r ON r.TagID=t.ID
+			GROUP BY r.TagID
+			ORDER BY Uses DESC
+			LIMIT $Limit");
+            $TopRequestTags = $DB->to_array();
+            $Cache->cache_value('toprequesttag_' . $Limit, $TopRequestTags, 3600 * 12);
+        }
+
+        generate_tag_table(t('server.top10.most_used_request_tags'), 'ur', $TopRequestTags, $Limit, false, true);
+    }
 
     echo '</div>';
     View::show_footer();
@@ -101,14 +101,12 @@ View::show_header(t('server.top10.top_10_tags'), '', 'PageTop10Tag');
             $URLString = 'torrents.php?action=advanced&taglist=';
         }
     ?>
-        <div class="Post">
-            <div class="Post-header">
-                <div class="Post-headerLeft">
-                    <div class="Post-headerTitle">
-                        <?= t('server.top10.top') ?> <?= $Limit . ' ' . $Caption ?>
-                    </div>
+        <div class="Box is-noBorder">
+            <div class="Box-header">
+                <div class="Box-headerTitle">
+                    <?= t('server.top10.top') ?> <?= $Limit . ' ' . $Caption ?>
                 </div>
-                <small class="Post-headerActions top10_quantity_links">
+                <small class="Box-headerActions top10_quantity_links">
                     <?
                     switch ($Limit) {
                         case 100: ?>
@@ -128,7 +126,7 @@ View::show_header(t('server.top10.top_10_tags'), '', 'PageTop10Tag');
                     <?  } ?>
                 </small>
             </div>
-            <div class="Post-body">
+            <div class="Box-body">
                 <div class="TableContainer">
                     <?
                     if (empty($Details)) {

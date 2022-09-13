@@ -51,7 +51,7 @@
 	function openCollage() {
 		var collageid = $('#select_collage').val()
 		if (collageid) {
-			window.open("collages.php?id=" + collageid);
+			window.location.replace("collages.php?id=" + collageid);
 		}
 	}
 
@@ -74,26 +74,24 @@
 		<span><?= t('server.collages.add_to_collage') ?></span>
 	</div>
 	<div class="SidebarItem-body Box-body">
-		<div class="FormOneLine FormCollageSearch">
+		<div class="Form-row FormOneLine FormCollageSearch">
 			<input class="Input" type="text" id="collage_title" name="title" placeholder="<?= t('server.collages.collage_search') ?>" />
 			<input class="Button" type="button" value="<?= t('server.collages.search') ?>" onclick="search(false)" />
 		</div>
-		<div class="FormCollageAdd">
-			<div class="Form-row FormCollageRow">
-				<select class="Input" id="select_collage" onchange="selectCollage()"></select>
-			</div>
-			<div class="Form-row FormCollageRow" id="selected_collage_category">
-				<span><?= t('server.collages.selected_collage_category') ?>: </span>
-				<span id="s_c_span_category"></span>
-			</div>
-			<div class="Form-row FormCollageRow" id="selected_collage_author">
-				<span><?= t('server.collages.selected_collage_author') ?>: </span>
-				<span id="s_c_span_author"></span>
-			</div>
-			<div class="Form-row ButtonGroup center">
-				<input class="Button" type="button" value="<?= t('server.collages.open_collage') ?>" onclick="openCollage()" />
-				<input class="Button" type="button" value="<?= t('server.collages.add_to_collage') ?>" onclick="addCollage(<?= $GroupID ?>)" />
-			</div>
+		<div class="Form-row FormCollageRow">
+			<select class="Input" id="select_collage" onchange="selectCollage()"></select>
+		</div>
+		<div class="Form-row FormCollageRow" id="selected_collage_category">
+			<span><?= t('server.collages.selected_collage_category') ?>: </span>
+			<span id="s_c_span_category"></span>
+		</div>
+		<div class="Form-row FormCollageRow" id="selected_collage_author">
+			<span><?= t('server.collages.selected_collage_author') ?>: </span>
+			<span id="s_c_span_author"></span>
+		</div>
+		<div class="Form-row ButtonGroup center">
+			<input class="Button" type="button" value="<?= t('server.collages.open_collage') ?>" onclick="openCollage()" />
+			<input class="Button" type="button" value="<?= t('server.collages.add_to_collage') ?>" onclick="addCollage(<?= $GroupID ?>)" />
 		</div>
 	</div>
 </div>

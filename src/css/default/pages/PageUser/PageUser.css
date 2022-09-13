@@ -48,9 +48,6 @@ table .disabled_flag {
 }
 
 .UserModForm-rowHeader {
-  border-radius: 0;
-  font-style: italic;
-  font-size: var(--global-fontSize-sm);
 }
 
 .RssTitle {

@@ -47,7 +47,6 @@ View::show_header(t('server.tools.staff_tools'), '', 'PageToolHome');
         create_row(t('server.tools.permissions_manager'), "tools.php?action=permissions", check_perms("admin_manage_permissions"));
         create_row(t('server.tools.staff_page_group_manager'), "tools.php?action=staff_groups", check_perms("admin_manage_permissions"));
         create_row(t('server.tools.special_users'), "tools.php?action=special_users", check_perms("admin_manage_permissions"));
-        create_row(t('server.tools.application_manager'), "tools.php?action=apply_list", check_perms("admin_interviewer"));
 
         if ($ToolsHTML) {
         ?>

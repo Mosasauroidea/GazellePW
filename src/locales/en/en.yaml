@@ -1,5 +1,9 @@
 client.upload.copied: |-
   Copied
+client.common.save: |-
+  Save
+client.common.cancel: |-
+  Cancel
 client.upload.uploading: |-
   Uploading:
 client.upload.uploaded: |-
@@ -255,7 +259,7 @@ server.apply.resolved_applications: |-
 server.apply.role: |-
   Role
 server.apply.role_created_by: |-
-  Role created %s by %s %s.
+  Created %s
 server.apply.role_created_by_4: |-
   last modified&nbsp;
 server.apply.role_title: |-
@@ -413,7 +417,7 @@ server.artist.request_name: |-
 server.artist.revert: |-
   Revert to this revision
 server.artist.revision_history: |-
-  Revision history for %s
+  Revision history
 server.artist.similar_artist_cloud: |-
   Similar Artist Cloud
 server.artist.similar_artist_map: |-
@@ -752,7 +756,7 @@ server.collages.batch_add: |-
 server.collages.bookmarks_collages: |-
   Bookmarked collages
 server.collages.browse_collages: |-
-  Browse collages
+  Collages
 server.collages.built_by_n_users: |-
   Built by %s %s
 server.collages.category: |-
@@ -812,7 +816,7 @@ server.collages.drag_drop_textnote: |-
     <li>Click on the headings to organize columns automatically.</li>
     <li>Sort multiple columns simultaneously by holding down the shift key and clicking other column headers.</li>
     <li>Click and drag any row to change its order.</li>
-    <li>Press "Save All Changes" when you are finished sorting.</li>
+    <li>Press "Save" when you are finished sorting.</li>
     <li>Press "Edit" or "Remove" to simply modify one entry.</li>
   </ul>
 server.collages.edit_collage: |-
@@ -838,7 +842,7 @@ server.collages.locked: |-
 server.collages.manage_collage: |-
   Manage collage
 server.collages.manage_torrents: |-
-  Manage torrents
+  Manage movies
 server.collages.max_groups: |-
   Max groups
 server.collages.max_groups_per_user: |-
@@ -2945,11 +2949,11 @@ server.requests.basic_info: |-
 server.requests.bookmarked_requests: |-
   Bookmarked requests
 server.requests.bookmarks: |-
-  Bookmarks
+  Your bookmarked requests
 server.requests.bounty: |-
   Bounty
 server.requests.by_user: |-
-  , by user
+  User
 server.requests.codec_list: |-
   Codec
 server.requests.collages: |-
@@ -2963,7 +2967,7 @@ server.requests.cover: |-
 server.requests.created: |-
   Created
 server.requests.created_by: |-
-  &nbsp;by
+  Created by
 server.requests.custom_vote: |-
   Custom Vote
 server.requests.custom_vote_title: |-
@@ -2984,7 +2988,7 @@ server.requests.fill_a_request_how_to_blockquote: |-
   <ul>
   <li>If the torrent which meets demands exists, paste permalink directly;</li>
   <li>If the torrent doesn't exist, but release group exists, please upload the torrent by "Add format" and paste its permalink;</li>
-  <li>If the torrent or the release group neither exists, please use "Upload request" button below to upload a new one and paste its permalink.</li></ul>
+  <li>If the torrent or the release group neither exists, please use "Upload request" button to upload a new one and paste its permalink.</li></ul>
 server.requests.fill_a_request_how_to_toggle: |-
   How to fill a request
 server.requests.fill_request: |-
@@ -3042,7 +3046,7 @@ server.requests.min_bounty: |-
 server.requests.my_requests: |-
   My requests
 server.requests.name: |-
-  Request Name
+  Name
 server.requests.new_create: |-
   Create a request
 server.requests.new_edit: |-
@@ -5221,7 +5225,7 @@ server.torrents.hd_untouched: |-
 server.torrents.hd_untouched_title: |-
   Remux / Untouched / DIY
 server.torrents.header: |-
-  Browse Torrents
+  Movies
 server.torrents.hide: |-
   Hide
 server.torrents.hide_tags: |-
@@ -5271,7 +5275,7 @@ server.torrents.list_of_downloaders: |-
 server.torrents.list_of_giver: |-
   List of Giver
 server.torrents.list_of_giver_title: |-
-  List of users that rewarded bonus to the uploader
+  List of users that rewarded bonus
 server.torrents.list_of_snatchers: |-
   List of Snatchers
 server.torrents.location: |-
@@ -5474,7 +5478,7 @@ server.torrents.search_for: |-
 server.torrents.search_requests: |-
   Search
 server.torrents.search_torrents: |-
-  Filter torrents
+  Search
 server.torrents.seeders: |-
   Seeders
 server.torrents.seeding_status: |-
@@ -5614,7 +5618,13 @@ server.torrents.uhd_untouched: |-
 server.torrents.uhd_untouched_title: |-
   Remux / Untouched / DIY
 server.torrents.unchecked_torrents: |-
-  Unchecked torrents
+  Unchecked
+server.torrents.checking_status: |-
+  Checking status
+server.torrents.unchecked_torrents_results_note: |-
+  (%d unchecked)
+server.torrents.checked_torrents: |-
+  Checked
 server.torrents.undo_delete: |-
   Undo delete
 server.torrents.unsubscribe: |-
@@ -6092,7 +6102,9 @@ server.user.SettingAlternative: |-
 server.user.SettingShowReleaseGroup: |-
   Show Release Group
 server.user.SettingTorrentTitle: |-
-  Torrent Title
+  Title Style
+server.user.setting_torrent_title_seq: |-
+  Sequence
 server.user.SettingTorrentTitleTooltip: |-
   Save profile to see the result
 server.user.above: |-
@@ -6517,7 +6529,7 @@ server.user.irckey_note_1: |-
   <p class='min_padding'>If set, this key will be used instead of your site password when authenticating with
 server.user.irckey_note_2: |-
   on the <a href=&quot;wiki.php?action=article&amp;id=248&quot;>site's IRC network</a>. <span style='white-space: nowrap;'>Please note:</span></p>
-  <ul>
+  <ul class="List">
     <li>This value is stored in plaintext and should not be your password.</li>
     <li>IRC keys must be between 6 and 32 characters.</li>
   </ul>
@@ -7079,7 +7091,7 @@ server.user.st_password_new: |-
   New password
 server.user.st_password_note: |-
   A strong password:
-  <ul>
+  <ul class="List">
     <li>is 8 characters or longer, contains at least 1 lowercase and uppercase letter, and contains at least a number or symbol</li>
     <li>Or is 20 characters or longer.</li>
   </ul>
@@ -7748,9 +7760,9 @@ server.country.belarus: |-
 server.country.belgium: |-
   Belgium
 server.country.taiwan: |-
-  Taiwan,China
+  Taiwan, China
 server.country.hong_kong: |-
-  Hong Kong,China
+  Hong Kong, China
 server.country.belize: |-
   Belize
 server.country.benin: |-
@@ -8160,6 +8172,36 @@ server.country.zambia: |-
 server.country.zimbabwe: |-
   Zimbabwe
 server.country.macao: |-
-  Macao,China
+  Macao, China
 server.common.minutes: |-
   mins
+server.upload.upload_torrents: |-
+  Upload torrent
+server.collages.contributed_collages_browse: |-
+  Collages with contributions by %s
+server.collages.started_collages_browse: |-
+  Collages started by %s
+server.torrents.report_info: |-
+  Report info
+server.collages.not_torrent_link: |-
+  The URL must be a link to a torrent on the site.
+server.requests.delete_request: |-
+  Delete request
+server.requests.unfill_request: |-
+  Unfill request
+server.requests.filled_user: |-
+  Filled user
+server.common.open: |-
+  Open
+server.common.close: |-
+  Close
+server.apply.resolve: |-
+  Resolve
+server.apply.reopen: |-
+  Reopen
+server.user.torrent_title_drag_note: |-
+  Drag the items below left or right to sort
+server.bookmarks.delete_checked: |-
+  Delete checked
+server.common.update: |-
+  Update

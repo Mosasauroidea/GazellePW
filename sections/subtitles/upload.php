@@ -31,8 +31,8 @@ function genSubcheckboxes($Labels, $Subtitles) {
 
 <div class="LayoutBody">
     <div class="BodyHeader">
-        <div id="subtitle_for_torrent_title" class="BodyHeader-nav"><?= t('server.subtitles.upload_a_subtitle') ?></div>
-        <div><?= $Title ?></div>
+        <div id="subtitle_for_torrent_title" class="BodyHeader-nav"><?= t('server.common.subtitles') ?></div>
+        <div class="BodyHeader-subNav"><?= $Title ?></div>
     </div>
 
     <div class="BodyContent">
@@ -52,6 +52,11 @@ function genSubcheckboxes($Labels, $Subtitles) {
         <form id="subtitle_upload_form" action="subtitles.php" method='post' enctype="multipart/form-data" accept-charset='UTF-8'>
             <input type="hidden" name="torrent_pl_link" id="subtitle_torrent_pl" value="<?= site_url() . '/torrents.php?torrentid=' . $TorrentID ?>" />
             <table variant="header" class="Form-rowList" id="subtitle_upload_table">
+                <tr class="Form-rowHeader">
+                    <td class="Form-title">
+                        <?= t('server.subtitles.upload_a_subtitle') ?>
+                    </td>
+                </tr>
                 <tr class="Form-row">
                     <td class="Form-label"><?= t('server.subtitles.subtitle_file') ?>:</td>
                     <td class="Form-inputs"><input id="file" name="file_input" type="file" accept=".sub,.idx,.sup,.srt,.vtt,.ass,.zip,.rar,.7z,.smi,.ssa"></td>

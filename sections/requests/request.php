@@ -30,7 +30,7 @@ if ($Request['CategoryID'] === '0') {
 
 //Do we need to get artists?
 $ArtistForm = Requests::get_artists($RequestID);
-$ArtistName = Artists::display_artists($ArtistForm, false, true);
+$ArtistName = Artists::display_artists($ArtistForm, false, false);
 $RequestGroupName = Torrents::group_name($Request, false);
 
 if ($IsFilled) {
@@ -61,12 +61,15 @@ $CanEdit = ($UserCanEdit || $ProjectCanEdit || check_perms('site_moderate_reques
 // Comments (must be loaded before View::show_header so that subscriptions and quote notifications are handled properly)
 list($NumComments, $Page, $Thread, $LastRead) = Comments::load('requests', $RequestID);
 
+$GroupName = (Lang::is_default() && !empty($Request['SubName'])) ? $Request['SubName'] : $Request['Name'];
+$SubName = Lang::is_default() ? $Request['Name'] : $Request['SubName'];
+$GroupYear = $Request['Year'];
 View::show_header(t('server.requests.view_request') . ": $FullName", 'comments,bbcode,subscriptions', 'PageRequestShow');
 
 ?>
 <div class="LayoutBody">
     <div class="BodyHeader">
-        <h2 class="BodyHeader-nav"><a href="requests.php"><?= t('server.common.requests') ?></a> &gt; <?= $DisplayLink ?></h2>
+        <div class="BodyHeader-nav"><?= t('server.common.requests') ?></div>
         <div class="BodyNavLinks">
             <? if ($CanEdit) { ?>
                 <a href="requests.php?action=edit&amp;id=<?= $RequestID ?>" class="brackets"><?= t('server.common.edit') ?></a>
@@ -79,7 +82,7 @@ View::show_header(t('server.requests.view_request') . ": $FullName", 'comments,b
             <?  } else { ?>
                 <a href="#" id="bookmarklink_request_<?= $RequestID ?>" onclick="Bookmark('request', <?= $RequestID ?>, '<?= t('server.common.remove_bookmark') ?>'); return false;" class="brackets"><?= t('server.common.add_bookmark') ?></a>
             <?  } ?>
-            <a href="#" id="subscribelink_requests<?= $RequestID ?>" class="brackets" onclick="SubscribeComments('requests',<?= $RequestID ?>);return false;"><?= Subscriptions::has_subscribed_comments('requests', $RequestID) !== false ? t('server.common.unsubscribe') : t('server.common.subscribe') ?></a>
+            <a href="#" id="subscribelink_requests<?= $RequestID ?>" class="brackets" onclick="SubscribeComments('requests',<?= $RequestID ?>, '<?= Subscriptions::has_subscribed_comments('requests', $RequestID) !== false ? t('server.torrents.subscribe') : t('server.torrents.unsubscribe') ?>');return false;"><?= Subscriptions::has_subscribed_comments('requests', $RequestID) !== false ? t('server.torrents.unsubscribe') : t('server.torrents.subscribe') ?></a>
             <a href="reports.php?action=report&amp;type=request&amp;id=<?= $RequestID ?>" class="brackets"><?= t('server.requests.report_request') ?></a>
             <? if (!$IsFilled) { ?>
                 <a href="upload.php?requestid=<?= $RequestID ?><?= ($Request['GroupID'] ? "&amp;groupid=$Request[GroupID]" : '') ?>" class="brackets"><?= t('server.requests.upload_request') ?></a>
@@ -87,69 +90,167 @@ View::show_header(t('server.requests.view_request') . ": $FullName", 'comments,b
             if (!$IsFilled && ($Request['CategoryID'] === '0')) { ?>
                 <a href="reports.php?action=report&amp;type=request_update&amp;id=<?= $RequestID ?>" class="brackets"><?= t('server.requests.request_update') ?></a>
             <? } ?>
-
             <?
-            // Create a search URL to WorldCat and Google based on title
-            $encoded_title = urlencode(preg_replace("/\([^\)]+\)/", '', $Request['Title']));
-            $encoded_artist = substr(str_replace('&amp;', 'and', $ArtistName), 0, -3);
-            $encoded_artist = str_ireplace('Directed By', '', $encoded_artist);
-            $encoded_artist = preg_replace("/\([^\)]+\)/", '', $encoded_artist);
-            $encoded_artist = urlencode($encoded_artist);
-
-            $google_url  = "https://www.blu-ray.com/search/?quicksearch=1&quicksearch_country=all&section=bluraymovies&quicksearch_keyword=" . "$encoded_title";
+            $google_url  = "https://www.blu-ray.com/search/?quicksearch=1&quicksearch_country=all&section=bluraymovies&quicksearch_keyword=" . $Request['Name'];
             ?>
-            <a href="<? echo $google_url; ?>" class="brackets"><?= t('server.requests.find_in_stores') ?></a>
+            <a target="_blank" href="<? echo $google_url; ?>" class="brackets"><?= t('server.requests.find_in_stores') ?></a>
         </div>
+    </div>
+    <div class="MovieInfo MovieInfoMovie Box">
+        <div class="MovieInfo-left">
+            <img class="MovieInfo-poster" src="<?= ImageTools::process($Request['Image']) ?>" onclick="lightbox.init(this, $(this).width());">
+        </div>
+        <div class="MovieInfo-titleContainer">
+            <span class="MovieInfo-title">
+                <?= display_str($GroupName) ?>
+            </span>
+            <i class="MovieInfo-year">(<? print_r($GroupYear) ?>)</i>
+            <? if ($SubName) {
+                echo "<div class='MovieInfo-subTitle'>" . display_str($SubName) . "</div>";
+            } ?>
+        </div>
+        <div class="MovieInfo-tagContainer">
+            <div class="MovieInfo-facts">
+                <a class="MovieInfo-fact" data-tooltip="<?= t('server.common.imdb_rating') ?>" target="_blank" href="https://www.imdb.com/title/<? print_r($Request['IMDBID']) ?>">
+                    <?= icon('imdb') ?>
+                    <span>--</span>
+                </a>
+                <a class="MovieInfo-fact" data-tooltip="<?= t('server.upload.director') ?>" href="/artist.php?id=<?= $Director['ArtistID'] ?>" dir="ltr">
+                    <?= icon('movie-director') ?>
+                    <span><?= $ArtistName ?></span>
+                </a>
+                <span class="TableTorrent-movieInfoFactsItem" data-tooltip="<?= t('server.upload.movie_type') ?>">
+                    <?= icon('movie-type') ?>
+                    <span><?= $ReleaseName ?></span>
+                </span>
+                <span class="TableTorrent-movieInfoFactsItem" data-tooltip="<?= t('server.requests.bounty') ?>">
+                    <?= icon('uploaded') ?>
+                    <div id="movieinfo_bountry"><?= Format::get_size($RequestVotes['TotalBounty']) ?></div>
+                </span>
+                <?
+                if ($Request['GroupID']) {
+                ?>
+                    <span class="TableTorrent-movieInfoFactsItem" data-tooltip="<?= t('server.requests.torrent_group') ?>">
+                        <a href="torrents.php?id=<?= $Request['GroupID'] ?>">torrents.php?id=<?= $Request['GroupID'] ?></a>
+                    </span>
+                <?
+                }
+                ?>
+            </div>
+            <div class="MovieInfo-tags">
+                <?
+                $TagNames = [];
+                $Tags = Tags::get_sub_name($Request['Tags']);
+                foreach ($Tags as $TagKey => $TagName) {
+                    $TagNames[] = $TagName;
+                }
+                $TagsFormat = new Tags(implode(' ', $TagNames));
+                ?>
+                <i>
+                    <?= $TagsFormat->format('torrents.php?action=advanced&amp;taglist=', '', 'MovieInfo-tag')
+                    ?>
+                </i>
+            </div>
+        </div>
+
+        <div class=" MovieInfo-synopsis" data-tooltip="<?= t('server.torrents.fold_tooltip') ?>">
+            <p class="HtmlText">
+                <?= Text::full_format($Request['Description']); ?>
+            </p>
+        </div>
+        <table class="RequestDetailTable Table">
+            <tr class="Table-row">
+                <td class="Table-cell">
+                    <?= t('server.requests.acceptable_codecs') ?>:
+                </td>
+                <td class="Table-cell">
+                    <?= $CodecString ?>
+                </td>
+            </tr>
+            <tr class="Table-row">
+                <td class="Table-cell">
+                    <?= t('server.requests.acceptable_containers') ?>:
+                </td>
+                <td class="Table-cell">
+                    <?= $ContainerString ?>
+                </td>
+            </tr>
+            <tr class="Table-row">
+                <td class="Table-cell">
+                    <?= t('server.requests.acceptable_resolutions') ?>:
+                </td>
+                <td class="Table-cell">
+                    <?= $ResolutionString ?>
+                </td>
+            </tr>
+            <tr class="Table-row">
+                <td class="Table-cell">
+                    <?= t('server.requests.acceptable_sources') ?>:
+                </td>
+                <td class="Table-cell">
+                    <?= $SourceString ?>
+                </td>
+            </tr>
+            <?
+            if ($Request['SourceTorrent']) {
+            ?>
+                <tr class="Table-row">
+                    <td class="Table-cell">
+                        <?= t('server.requests.source_torrent') ?>:
+                    </td>
+                    <td class="Table-cell">
+                        <?= $Request['SourceTorrent'] ?>
+                    </td>
+                </tr>
+
+            <?  } ?>
+            <? if ($Request['PurchasableAt']) { ?>
+                <tr class="Table-row">
+                    <td class="Table-cell">
+                        <?= t('server.requests.purchasable_at') ?>:
+                    </td>
+                    <td class="Table-cell">
+                        <?= $Request['PurchasableAt'] ?>
+                    </td>
+                </tr>
+            <? } ?>
+        </table>
+
     </div>
     <div class="LayoutMainSidebar">
         <div class="Sidebar LayoutMainSidebar-sidebar">
-            <? if ($Request['CategoryID'] !== '0') { ?>
-                <div class="SidebarItemPoster SidebarItem Box">
-                    <div class="SidebarItem-header Box-header">
-                        <strong><?= t('server.requests.cover') ?></strong>
-                    </div>
-                    <div class="SidebarItem-body Box-body">
-                        <?
-                        if (!empty($Request['Image'])) {
-                        ?>
-                            <img style="width: 100%;" src="<?= ImageTools::process($Request['Image'], true) ?>" alt="<?= $FullName ?>" onclick="lightbox.init(this, 220);" />
-                        <?      } else { ?>
-                            <img style="width: 100%;" src="<?= CONFIG['STATIC_SERVER'] ?>common/noartwork/<?= $CategoryIcons[$Request['CategoryID'] - 1] ?>" alt="<?= $CategoryName ?>" data-tooltip="<?= $CategoryName ?>" height="220" border="0" />
-                        <?      } ?>
-                    </div>
-                </div>
-            <?
-            }
-            ?>
-            <div class="SidebarItemArtists SidebarItem Box">
+            <div class="SidebarItemRequestInfo SidebarItem Box">
                 <div class="SidebarItem-header Box-header">
-                    <strong><?= t('server.common.director') ?></strong>
+                    <strong>
+                        <?= t('server.requests.basic_info') ?></strong>
                 </div>
                 <ul class="SidebarList SidebarItem-body Box-body">
+                    <li class="SidebarList-item"><?= t('server.requests.created') ?>:&nbsp;<?= time_diff($Request['TimeAdded']) ?></li>
+                    <li class="SidebarList-item"><?= t('server.requests.created_by') ?>:&nbsp; <strong><?= Users::format_username($Request['UserID'], false, false, false) ?></strong></li>
+                    <li class="SidebarList-item"><?= t('server.requests.bounty') ?>:&nbsp;<div id="formatted_bounty"><?= Format::get_size($RequestVotes['TotalBounty']) ?></div>
+                    </li>
+                    <? if ($Request['LastVote'] > $Request['TimeAdded']) { ?>
+                        <li class="SidebarList-item"><?= t('server.requests.last_voted') ?>:&nbsp;<?= time_diff($Request['LastVote']) ?> </li>
+                    <? } ?>
                     <?
-                    foreach ($ArtistForm[Artists::Director] as $Artist) {
+                    if ($Request['GroupID']) {
                     ?>
-                        <li class="SidebarList-item">
-                            <?= Artists::display_artist($Artist) ?>
-                        </li>
+                        <li class="SidebarList-item"><?= t('server.requests.torrent_group') ?>:&nbsp;<a href="torrents.php?id=<?= $Request['GroupID'] ?>">torrents.php?id=<?= $Request['GroupID'] ?></a> </li>
                     <?
                     }
                     ?>
-                </ul>
-            </div>
-            <div class="SidebarItemTags SidebarItem Box">
-                <div class="SidebarItem-header Box-header">
-                    <strong><?= t('server.requests.tags') ?></strong>
-                </div>
-                <ul class="SidebarList SidebarItem-body Box-body">
-                    <?
-                    $Tags = Tags::get_sub_name($Request['Tags']);
-                    foreach ($Tags as $Key => $Tag) {
+                    <? if ($IsFilled) {
+                        $TimeCompare = 1267643718; // Requests v2 was implemented 2010-03-03 20:15:18
                     ?>
-                        <li class="SidebarList-item">
-                            <a href="torrents.php?action=advanced&taglist=<?= $Tag ?>"><?= $Tag ?></a>
+                        <li class="SidebarList-item"><?= t('server.index.filled') ?>:&nbsp; <strong><a href="torrents.php?<?= (strtotime($Request['TimeFilled']) < $TimeCompare ? 'id=' : 'torrentid=') . $Request['TorrentID'] ?>"><?= t('server.requests.yes') ?></a></strong>
+                            <? if ($LoggedUser['ID'] == $Request['UserID'] || $LoggedUser['ID'] == $Request['FillerID'] || check_perms('site_moderate_requests')) { ?>
+                                &nbsp;|&nbsp; <strong><a data-tooltip="<?= t('server.requests.unfilling_a_request_without_reason') ?>" href="requests.php?action=unfill&amp;id=<?= $RequestID ?>" class="brackets"><?= t('server.requests.unfill') ?></a></strong>
+                            <?  } ?>
                         </li>
-                    <?  } ?>
+                        <li class="SidebarList-item"><?= t('server.requests.filled_user') ?>:&nbsp; <?= Users::format_username($Request['FillerID'], false, false, false) ?></li>
+                    <? } else { ?>
+                        <li class="SidebarList-item"><?= t('server.index.filled') ?>:&nbsp;<?= t('server.reports.no') ?></li>
+                    <? } ?>
                 </ul>
             </div>
             <div class="SidebarItemVotes SidebarItem Box">
@@ -195,114 +296,59 @@ View::show_header(t('server.requests.view_request') . ": $FullName", 'comments,b
                     ?>
                 </table>
             </div>
-        </div>
-        <div class="LayoutMainSidebar-main">
-            <div class="Box box_request_desc requests__description">
-                <div class="Box-header"><strong><?= t('server.requests.description') ?></strong></div>
-                <div class="Box-body HtmlText PostArticle">
-                    <?= Text::full_format($Request['Description']); ?>
+            <div class="SidebarItemArtists SidebarItem Box">
+                <div class="SidebarItem-header Box-header">
+                    <strong><?= t('server.common.director') ?></strong>
                 </div>
-            </div>
-            <div class="TableContainer">
-                <table class="Form-rowList FormRequestFill Table">
-                    <tr class="Form-rowHeader">
-                        <td class="Form-itle"><?= t('server.requests.basic_info') ?></td>
-                    </tr>
-                    <tr class="Form-row">
-                        <td class="Form-label"><?= t('server.requests.created') ?></td>
-                        <td class="Form-items">
-                            <div>
-                                <?= time_diff($Request['TimeAdded']) ?><?= t('server.requests.created_by') ?>
-                                <strong><?= Users::format_username($Request['UserID'], false, false, false) ?></strong>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr class="Form-row">
-                        <td class="Form-label"><?= t('server.upload.movie_imdb') ?></td>
-                        <td class="Form-items">
-                            <div>
-                                <a target="_blank" href="<?= "https://www.imdb.com/title/" . $Request['IMDBID'] ?>"><?= $Request['IMDBID'] ?></a>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr class="Form-row">
-                        <td class="Form-label"><?= t('server.upload.movie_type') ?></td>
-                        <td class="Form-items"><?= $ReleaseName ?></td>
-                    </tr>
-                    <tr class="Form-row">
-                        <td class="Form-label"><?= t('server.requests.acceptable_codecs') ?></td>
-                        <td class="Form-items"><?= $CodecString ?></td>
-                    </tr>
-                    <tr class="Form-row">
-                        <td class="Form-label"><?= t('server.requests.acceptable_containers') ?></td>
-                        <td class="Form-items"><?= $ContainerString ?></td>
-                    </tr>
-                    <tr class="Form-row">
-                        <td class="Form-label"><?= t('server.requests.acceptable_resolutions') ?></td>
-                        <td class="Form-items"><?= $ResolutionString ?></td>
-                    </tr>
-                    <tr class="Form-row">
-                        <td class="Form-label"><?= t('server.requests.acceptable_sources') ?></td>
-                        <td class="Form-items"><?= $SourceString ?></td>
-                    </tr>
+                <ul class="SidebarList SidebarItem-body Box-body">
                     <?
-                    if ($Request['GroupID']) {
+                    foreach ($ArtistForm[Artists::Director] as $Artist) {
                     ?>
-                        <tr class="Form-row">
-                            <td class="Form-label"><?= t('server.requests.torrent_group') ?></td>
-                            <td class="Form-items">
-                                <a href="torrents.php?id=<?= $Request['GroupID'] ?>">torrents.php?id=<?= $Request['GroupID'] ?></a>
-                            </td>
-                        </tr>
+                        <li class="SidebarList-item">
+                            <?= Artists::display_artist($Artist) ?>
+                        </li>
                     <?
                     }
-                    if ($Request['SourceTorrent']) {
                     ?>
-                        <tr class="Form-row">
-                            <td class="Form-label"><?= t('server.requests.source_torrent') ?>:</td>
-                            <td class="Form-items"><?= $Request['SourceTorrent'] ?></td>
+                </ul>
+            </div>
+            <div class="SidebarItemTags SidebarItem Box">
+                <div class="SidebarItem-header Box-header">
+                    <strong><?= t('server.requests.tags') ?></strong>
+                </div>
+                <ul class="SidebarList SidebarItem-body Box-body">
+                    <?
+                    $Tags = Tags::get_sub_name($Request['Tags']);
+                    foreach ($Tags as $Key => $Tag) {
+                    ?>
+                        <li class="SidebarList-item">
+                            <a href="torrents.php?action=advanced&taglist=<?= $Tag ?>"><?= $Tag ?></a>
+                        </li>
+                    <?  } ?>
+                </ul>
+            </div>
+        </div>
+        <div class="LayoutMainSidebar-main">
+            <div class="TableContainer">
+                <? if ($CanVote) { ?>
+                    <table class="Form-rowList FormRequestFill Table">
+                        <tr class="Form-rowHeader">
+                            <td class="Form-itle"><?= t('server.common.actions') ?></td>
                         </tr>
 
-                    <?  } ?>
-                    <? if ($Request['PurchasableAt']) { ?>
                         <tr class="Form-row">
-                            <td class="Form-label"><?= t('server.requests.purchasable_at') ?>:</td>
-                            <td class="Form-items"><?= $Request['PurchasableAt'] ?></td>
-                        </tr>
-                    <? } ?>
-                    <? if ($Request['LastVote'] > $Request['TimeAdded']) { ?>
-                        <tr class="Form-row">
-                            <td class="Form-label"><?= t('server.requests.last_voted') ?></td>
-                            <td class="Form-items"><?= time_diff($Request['LastVote']) ?></td>
-                        </tr>
-                    <? } ?>
-                    <tr class="Form-row" id="bounty">
-                        <td class="Form-label"><?= t('server.requests.bounty') ?></td>
-                        <td class="Form-items" id="formatted_bounty"><?= Format::get_size($RequestVotes['TotalBounty']) ?></td>
-                    </tr>
-                </table>
-            </div>
-            <div class="TableContainer">
-                <table class="Form-rowList FormRequestFill Table">
-                    <tr class="Form-rowHeader">
-                        <td class="Form-itle"><?= t('server.common.actions') ?></td>
-                    </tr>
-                    <tr class="Form-row">
-                        <td class="Form-label"><?= t('server.requests.quick_vote') ?></td>
-                        <td class="Form-items">
-                            <div>
-                                <span id="votecount"><?= number_format($VoteCount) ?></span>
-                                <? if ($CanVote) { ?>
+                            <td class="Form-label"><?= t('server.requests.quick_vote') ?></td>
+                            <td class="Form-items">
+                                <div>
+                                    <span id="votecount"><?= number_format($VoteCount) ?></span>
                                     &nbsp;&nbsp;<a href="javascript:globalapp.requestVote(0)" class="brackets"><strong>+</strong></a>
                                     <strong><?= t('server.requests.costs') ?> <?= Format::get_size($MinimumVote, 0) ?></strong>
-                                <?  } ?>
-                            </div>
-                        </td>
-                    </tr>
-                    <? if ($CanVote) { ?>
+                                </div>
+                            </td>
+                        </tr>
                         <tr class="Form-row" id="voting">
                             <td class="Form-label" data-tooltip="<?= t('server.requests.custom_vote_title') ?>">
-                                <?= t('server.requests.custom_vote') ?>
+                                <?= t('server.requests.custom_vote') ?>:
                             </td>
                             <td class="Form-items">
                                 <div class="Form-inputs">
@@ -331,71 +377,44 @@ View::show_header(t('server.requests.view_request') . ": $FullName", 'comments,b
                                             <?= t('server.requests.if_you_add_the_entered') ?>
                                             <strong><span id="new_bounty">0.00 GB</span></strong>
                                             <?= t('server.requests.of_bounty_your_new_stats') ?>:
-                                        </div>
-                                        <div>
                                             <?= t('server.requests.uploaded') ?>: <span id="new_uploaded"><?= Format::get_size($LoggedUser['BytesUploaded']) ?></span>
                                             <span>,</span>
                                             <?= t('server.requests.ratio') ?>: <span id="new_ratio"><?= Format::get_ratio_html($LoggedUser['BytesUploaded'], $LoggedUser['BytesDownloaded']) ?></span>
                                         </div>
+
                                     </form>
                                 </div>
                             </td>
                         </tr>
-                    <? } ?>
-
-                    <?
-                    if ($IsFilled) {
-                        $TimeCompare = 1267643718; // Requests v2 was implemented 2010-03-03 20:15:18
-                    ?>
                         <tr class="Form-row">
-                            <td class="Form-label"><?= t('server.requests.filled') ?></td>
+                            <td class="Form-label" valign="top"><?= t('server.requests.fill_request') ?>:</td>
                             <td class="Form-items">
-                                <div>
-                                    <strong><a href="torrents.php?<?= (strtotime($Request['TimeFilled']) < $TimeCompare ? 'id=' : 'torrentid=') . $Request['TorrentID'] ?>"><?= t('server.requests.yes') ?></a></strong><?= t('server.requests.by_user') ?>
-                                    <?= Users::format_username($Request['FillerID'], false, false, false) ?>
-                                    <? if ($LoggedUser['ID'] == $Request['UserID'] || $LoggedUser['ID'] == $Request['FillerID'] || check_perms('site_moderate_requests')) { ?>
-                                        <strong><a href="requests.php?action=unfill&amp;id=<?= $RequestID ?>" class="brackets"><?= t('server.requests.unfill') ?></a></strong>
-                                        <?= t('server.requests.unfilling_a_request_without_reason') ?>
-                                    <?  } ?>
-                                </div>
-                            </td>
-                        </tr>
-                    <?  } else { ?>
-                        <tr class="Form-row">
-                            <td class="Form-label" valign="top"><?= t('server.requests.fill_request') ?></td>
-                            <td class="Form-items">
-                                <div>
-                                    <strong style="margin-bottom: 10px;">[<a href="javascript:void(0);" onclick="$('#fill_a_request_how_to_blockquote').toggle();"><strong class="how_to_toggle"><?= t('server.requests.fill_a_request_how_to_toggle') ?></strong></a>]</strong>
-                                </div>
-                                <div>
-                                    <blockquote id="fill_a_request_how_to_blockquote" style="display: none; margin: 5px 0;"><?= t('server.requests.fill_a_request_how_to_blockquote') ?></blockquote>
-                                </div>
-                                <div>
-                                    <a href="upload.php?requestid=<?= $RequestID ?><?= ($Request['GroupID'] ? "&amp;groupid=$Request[GroupID]" : '') ?>"><input class="Button" type="button" id="upload" value="Upload request" /></a> <?= t('server.requests.fill_request_explanation') ?>
-                                </div>
                                 <form class="u-vstack edit_form" name="request" action="" method="post">
                                     <div class="field_div">
                                         <input type="hidden" name="action" value="takefill" />
                                         <input type="hidden" name="auth" value="<?= $LoggedUser['AuthKey'] ?>" />
                                         <input type="hidden" name="requestid" value="<?= $RequestID ?>" />
-                                        <input class="Input" type="text" size="50" name="link" <?= (!empty($Link) ? " value=\"$Link\"" : '') ?> />
-                                        <br />
-                                        <strong><?= t('server.requests.should_be_pl_to_the_torrent') ?>
-                                            <?= site_url() ?>torrents.php?torrentid=xxxx).</strong>
+                                        <input placeholder="<?= t('server.requests.should_be_pl_to_the_torrent') ?><?= site_url() ?>torrents.php?torrentid=xxxx" class="Input" type="text" size="50" name="link" <?= (!empty($Link) ? " value=\"$Link\"" : '') ?> />
                                     </div>
-                                    <? if (check_perms('site_moderate_requests')) { ?>
-                                        <div class="field_div">
+                                    <div class="field_div">
+                                        <? if (check_perms('site_moderate_requests')) { ?>
                                             <?= t('server.requests.for_user') ?>: <input class="Input is-small" type="text" size="25" name="user" <?= (!empty($FillerUsername) ? " value=\"$FillerUsername\"" : '') ?> />
-                                        </div>
-                                    <?      } ?>
-                                    <div class="submit_div">
-                                        <input class="Button" type="submit" value="Fill request" />
+                                        <?      } ?>
+                                        <button class="Button" type="submit" value="Fill request" /><?= t('server.requests.fill_request') ?></button>
+                                        <a href="upload.php?requestid=<?= $RequestID ?><?= ($Request['GroupID'] ? "&amp;groupid=$Request[GroupID]" : '') ?>"><button class="Button" type="button" id="upload" value="Upload request"><?= t('server.requests.upload_request') ?></button></a>
+                                        <strong style="margin-bottom: 10px;">[<a href="javascript:void(0);" onclick="$('#fill_a_request_how_to_blockquote').toggle();"><strong class="how_to_toggle"><?= t('server.requests.fill_a_request_how_to_toggle') ?></strong></a>]</strong>
                                     </div>
                                 </form>
                             </td>
                         </tr>
-                    <? } ?>
-                </table>
+                        <tr class="Form-row">
+                            <td class="Form-label"></td>
+                            <td class="Form-items">
+                                <blockquote id="fill_a_request_how_to_blockquote" style="display: none; margin: 5px 0;"><?= t('server.requests.fill_a_request_how_to_blockquote') ?></blockquote>
+                            </td>
+                        </tr>
+                    </table>
+                <? } ?>
             </div>
             <div id="request_comments">
                 <div class="BodyNavLinks">
@@ -425,6 +444,7 @@ View::show_header(t('server.requests.view_request') . ": $FullName", 'comments,b
                 ?>
             </div>
         </div>
+
     </div>
 </div>
 <? View::show_footer(); ?>

@@ -90,7 +90,7 @@ $ReplyText = new TEXTAREA_PREVIEW(
                 echo $ReplyText->getBuffer();
                 ?>
             </div>
-            <div class="preview_submit">
+            <div class="Form-row FormOneLine">
                 <?
                 if (isset($SubscribeBox) && !isset($ForumID) && Subscriptions::has_subscribed_comments($Document, $InputID) === false) {
                 ?>

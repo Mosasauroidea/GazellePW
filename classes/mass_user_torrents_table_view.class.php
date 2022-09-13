@@ -123,8 +123,8 @@ class MASS_USER_TORRENTS_TABLE_VIEW {
                     <table class="TableManageCollage Table" id="manage_collage_table">
                         <thead>
                             <tr class="Table-rowHeader">
-                                <th class="Table-cell Table-cellLeft" data-sorter="false"><?= t('server.bookmarks.order') ?></th>
-                                <th class="Table-cell Table-cellLeft"><span><abbr data-tooltip="<?= t('server.bookmarks.current_order') ?>">#</abbr></span></th>
+                                <th width=50px class="Table-cell Table-cellLeft" data-sorter="false"><?= t('server.bookmarks.order') ?></th>
+                                <th width=50px class="Table-cell Table-cellLeft"><span><abbr data-tooltip="<?= t('server.bookmarks.current_order') ?>">#</abbr></span></th>
                                 <th class="Table-cell Table-cellLeft"><span><?= t('server.bookmarks.year') ?></span></th>
                                 <th class="Table-cell Table-cellLeft" data-sorter="ignoreArticles"><span><?= t('server.common.torrent') ?></span></th>
                                 <th class="Table-cell Table-cellLeft" data-sorter="relativeTime"><span><?= t('server.bookmarks.bookmarked') ?></span></th>
@@ -223,8 +223,8 @@ class MASS_USER_TORRENTS_TABLE_VIEW {
                 public function buttons() {
     ?>
         <div class="drag_drop_save">
-            <input class="Button" type="submit" name="update" value="Update ranking" data-tooltip="Save your rank" />
-            <input class="Button" type="submit" name="delete" value="Delete checked" data-tooltip="Remove items" />
+            <button class="Button" type="submit" name="update" value="Update ranking" data-tooltip="Save your rank"><?= t('client.common.save') ?></button>
+            <button class="Button" type="submit" name="delete" value="Delete checked" data-tooltip="Remove items"><?= t('server.bookmarks.delete_checked') ?></button>
         </div>
 <?php
                 }

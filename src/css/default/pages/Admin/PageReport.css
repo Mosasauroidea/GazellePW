@@ -65,7 +65,7 @@
 #reportsv2 #all_reports {
   display: flex;
   flex-direction: column;
-  row-gap: var(--global-space-lg);
+  row-gap: var(--global-space-sm);
 }
 
 #reportsv2 #reports_rule {

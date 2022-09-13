@@ -88,15 +88,15 @@ if (check_perms('torrents_edit') && (check_perms('users_mod') || $Properties['Ca
         <div class=LayoutBody>
             <div class="BodyHeader">
                 <div class="BodyHeader-nav">
-                    <?= t('server.common.edit')  ?>
+                    <?= t('server.torrents.browser_edit_torrent')  ?>
+
                 </div>
-                <div>
+                <div class="BodyHeader-subNav">
                     <?= Torrents::torrent_simple_view($Group, $Properties, true, [
                         'SettingTorrentTitle' => G::$LoggedUser['SettingTorrentTitle'],
                     ]) ?>
                 </div>
             </div>
-
             <div class="BodyNavLinks">
                 <a class="brackets" href="#edit_torrent"><?= t('server.torrents.browser_edit_torrent') ?></a>
                 <a class="brackets" href="#change_group_id"><?= t('server.torrents.change_group') ?></a>

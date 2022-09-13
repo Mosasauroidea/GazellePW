@@ -28,23 +28,24 @@ $DB->query("
 $Artist = $DB->next_record();
 $Name = Artists::display_artist($Artist);
 $DB->query("
-	SELECT tg.Name, tg.ID, tg.SubName, tg.Year
+	SELECT distinct(tg.ID), tg.Name, tg.SubName, tg.Year
 	FROM torrents_group AS tg
-		LEFT JOIN torrents_artists AS ta ON ta.GroupID = tg.ID
+		JOIN torrents_artists AS ta ON ta.GroupID = tg.ID
 	WHERE ta.ArtistID = $ArtistID");
 $Count = $DB->record_count();
 if ($DB->has_results()) {
 ?>
     <div class="LayoutBody">
         <div class="BodyHeader">
-            <h2 class="BodyHeader-nav"><?= page_title_conn([t('server.common.delete'), $Name]) ?></h2>
+            <div class="BodyHeader-nav"><?= t('server.common.delete') ?></div>
+            <div class="BodyHeader-subNav"><?= $Name ?></div>
         </div>
         <div class="BodyContent remove-artist-failed">
             <div>
                 <?= t('server.artist.there_are_still_torrents_that_have') ?><a href="artist.php?id=<?= $ArtistID ?>" data-tooltip="<?= t('server.artist.view_artist') ?>" dir="ltr"><?= $Name ?></a><?= t('server.artist.as_an_artist') ?><br />
                 <?= t('server.artist.please_remove_the_artist_from_these_torrents') ?><br />
             </div>
-            <ul class="PostList">
+            <ul>
                 <?
                 while ($Group = $DB->next_record(MYSQLI_ASSOC, true)) {
                 ?>

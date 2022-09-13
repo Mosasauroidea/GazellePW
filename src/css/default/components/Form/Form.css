@@ -13,6 +13,8 @@ Form-rowList              # optional
 Form-rowList variant="header" 
   Form-rowHeader 
     Form-title
+  Form-rowSubHeader # sub title
+    Form-title
 
 Form-rowList variant="alignLeft"   # sitehistory.php
   Form-row
@@ -43,6 +45,23 @@ FormOneLine Search<Name>
   font-size: var(--global-fontSize-lg);
   white-space: nowrap;
   padding: 5px 8px;
+}
+
+.Form-rowList[variant='header'] .Form-rowSubHeader {
+  border-bottom: 1px dashed var(--global-color-border);
+}
+
+.Form-rowSubHeader {
+  display: flex;
+  padding: 2px;
+  white-space: nowrap;
+  border-radius: 0;
+  color: var(--global-color-border);
+  font-style: italic;
+  justify-content: center;
+  font-size: var(--global-fontSize-sm);
+  margin: 10px 0px;
+  gap: var(--global-space-sm);
 }
 
 .Form-actions {
@@ -77,10 +96,10 @@ FormOneLine Search<Name>
   justify-content: flex-start;
 }
 .Form-rowList[variant='header'] .Form-row:nth-child(2) {
-  margin-top: var(--global-space-default);
+  margin-top: var(--global-space-sm);
 }
 .Form-rowList[variant='header'] .Form-row:last-child {
-  margin-bottom: var(--global-space-default);
+  margin-bottom: var(--global-space-sm);
 }
 @media (min-width: 768px) {
   .Form-row {
@@ -107,7 +126,7 @@ FormOneLine Search<Name>
 }
 @media (min-width: 768px) {
   .Form-label {
-    width: 10%;
+    width: 15%;
   }
   .SearchPage .Form-label {
     width: 20%;
@@ -135,7 +154,7 @@ FormOneLine Search<Name>
 }
 @media (min-width: 768px) {
   .Form-items {
-    width: 60%;
+    width: 70%;
   }
   .LayoutMainSidebar-main .Form-items {
     width: 78%;
@@ -151,7 +170,7 @@ FormOneLine Search<Name>
 }
 @media (min-width: 768px) {
   .Form-inputs {
-    width: 60%;
+    width: 70%;
   }
   .Form-items .Form-inputs {
     width: 100%;
@@ -173,7 +192,7 @@ FormOneLine Search<Name>
 
 .FormOneLine {
   display: flex;
-  gap: var(--global-space-default);
+  gap: var(--global-space-sm);
   align-items: center;
 }
 

@@ -1,5 +1,5 @@
 <?php
-View::show_header('Blog', 'bbcode', 'PageBlogHome');
+View::show_header(t('server.index.blog_note'), 'bbcode', 'PageBlogHome');
 ?>
 <div class="LayoutBody">
     <div class="BodyHeader">
@@ -53,9 +53,8 @@ View::show_header('Blog', 'bbcode', 'PageBlogHome');
                     <div class="Post-headerLeft">
                         <span class="Post-headerTitle"><?= $Title ?></span>
                     </div>
-                    <div class="Post-headerActions"><?= t('server.blog.posted') ?>
-                        <?= time_diff($BlogTime); ?> <?= t('server.blog.by') ?>
-                        <a href="user.php?id=<?= $AuthorID ?>"><?= $Author ?></a>
+                    <div class="Post-headerActions">
+                        <?= time_diff($BlogTime); ?>
                         <?php if (check_perms('admin_manage_blog')) { ?>
                             - <a href="blog.php?action=neweditblog&amp;id=<?= $BlogID ?>" class="brackets"><?= t('server.common.edit') ?></a>
                             - <a href="blog.php?action=deleteblog&amp;id=<?= $BlogID ?>&amp;auth=<?= G::$LoggedUser['AuthKey'] ?>" class="brackets"><?= t('server.common.delete') ?></a>

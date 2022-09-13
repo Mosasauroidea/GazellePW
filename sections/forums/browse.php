@@ -5,6 +5,7 @@ View::show_header(t('server.forums.forums'), '', 'PageForumHome');
 <div class="LayoutBody">
     <div class="BodyHeader">
         <div class="BodyHeader-nav"><?= t('server.forums.forums') ?></div>
+        <div class="BodyNavLinks"><a href="forums.php?action=catchup&amp;forumid=all&amp;auth=<?= $LoggedUser['AuthKey'] ?>" class="brackets"><?= t('server.forums.catch_up') ?></a></div>
     </div>
     <div class="BodyContent">
         <?
@@ -31,15 +32,17 @@ View::show_header(t('server.forums.forums'), '', 'PageForumHome');
                     </table>
     </div>
 </div>
+</div>
 <?
                 }
 ?>
-<div class="Post">
-    <div class="Post-header">
-        <div class="Post-headerTitle">
-            <?= $ForumCats[$CategoryID] ?></div>
+<div class="Box is-noBorder">
+    <div class="Box-header">
+        <div class="Box-headerTitle">
+            <?= $ForumCats[$CategoryID] ?>
+        </div>
     </div>
-    <div class="Post-body">
+    <div class="Box-body">
         <div class="TableContainer">
             <table class="TableForum Table">
                 <tr class="Table-rowHeader">
@@ -102,7 +105,7 @@ View::show_header(t('server.forums.forums'), '', 'PageForumHome');
         </div>
     </div>
 </div>
-<div class="BodyNavLinks"><a href="forums.php?action=catchup&amp;forumid=all&amp;auth=<?= $LoggedUser['AuthKey'] ?>" class="brackets"><?= t('server.forums.catch_up') ?></a></div>
+</div>
 </div>
 
 <? View::show_footer(); ?>

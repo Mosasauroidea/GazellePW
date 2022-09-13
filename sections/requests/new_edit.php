@@ -127,17 +127,17 @@ if ($NewRequest && $GroupID) {
 			JOIN torrents_tags AS tt ON tt.GroupID = tg.ID
 			JOIN tags AS t ON t.ID = tt.TagID
 		WHERE tg.ID = " . $_GET['groupid']);
-    if ($RequestInfo = $DB->next_record(MYSQLI_ASSOC)) {
+    if ($Request = $DB->next_record(MYSQLI_ASSOC)) {
 
         $GroupID = trim($_REQUEST['groupid']);
-        $Title = $RequestInfo['Name'];
-        $Year = $RequestInfo['Year'];
-        $SubName = $RequestInfo['SubName'];
-        $IMDBID = $RequestInfo['IMDBID'];
-        $ReleaseType = $RequestInfo['ReleaseType'];
-        $Tags = $RequestInfo['Tags'];
-        $CategoryID = $RequestInfo['CategoryID'];
-        $Image = $RequestInfo['WikiImage'];
+        $Title = $Request['Name'];
+        $Year = $Request['Year'];
+        $SubName = $Request['SubName'];
+        $IMDBID = $Request['IMDBID'];
+        $ReleaseType = $Reques['ReleaseType'];
+        $Tags = $Request['Tags'];
+        $CategoryID = $Request['CategoryID'];
+        $Image = $Request['WikiImage'];
         $Disabled = ' disabled';
         $DisabledFlag = true;
     }
@@ -150,7 +150,10 @@ View::show_header(($NewRequest ? t('server.requests.new_create') : t('server.req
 ?>
 <div class="LayoutBody">
     <div class="BodyHeader">
-        <h2 class="BodyHeader-nav"><?= t('server.requests.requests')  ?></h2>
+        <div class="BodyHeader-nav"><?= t('server.requests.requests')  ?></div>
+        <? if (isset($GroupID)) { ?>
+            <div class="BodyHeader-subNav"><?= Torrents::group_name($Request)  ?></div>
+        <? } ?>
     </div>
     <div class="BodyContent">
         <form class="Form-rowList Form FormUpload FormRequestNew Box u-formUploadAutoFilled" action="" method="post" id="request_form" onsubmit="globalapp.requestCalculate();" variant="header">
@@ -164,7 +167,7 @@ View::show_header(($NewRequest ? t('server.requests.new_create') : t('server.req
 
             <table>
                 <tr class="Form-rowHeader">
-                    <td class="Form-title"><?= $NewRequest ? t('server.requests.new_create') . (isset($GroupID) ? ' > ' . Torrents::group_name($RequestInfo) : '') : t('server.requests.new_edit')  ?></td>
+                    <td class="Form-title"><?= $NewRequest ? t('server.requests.new_create')  : t('server.requests.new_edit')  ?></td>
                 </tr>
                 <tr class="Form-row">
                     <td colspan="2" class="center"><?= t('server.requests.new_rules') ?></td>
@@ -188,9 +191,9 @@ View::show_header(($NewRequest ? t('server.requests.new_create') : t('server.req
                 <tr class="Form-row" id="imdb_tr">
                     <td class="Form-label"><?= t('server.requests.link') ?>:</td>
                     <td class="Form-items" id="imdbfield">
+                        <input class="Input" type="text" id="imdb" name="imdb" size="45" placeholder="IMDB" value="<?= $IMDBID ?>" <?= $Disabled ?>>
                         <div class="Form-inputs">
-                            <input class="Input" type="text" id="imdb" name="imdb" size="45" placeholder="IMDB" value="<?= $IMDBID ?>" <?= $Disabled ?>>
-                            <input class="Input" type="text" id="group" name="group" size="45" placeholder="<?= t('server.requests.t_group') ?>" value="<?= $GroupID ? CONFIG['SITE_URL'] . '/torrents.php?id=' . $GroupID : '' ?>" <?= $Disabled ?>>
+                            <input class=" Input" type="text" id="group" name="group" size="45" placeholder="<?= t('server.requests.t_group') ?>" value="<?= $GroupID ? CONFIG['SITE_URL'] . '/torrents.php?id=' . $GroupID : '' ?>" <?= $Disabled ?>>
                             <? if ($NewRequest) { ?>
                                 <button <?= $Disabled ?> id="imdb_button" class="Button autofill" variant="primary" type="button" onclick="globalapp.requestMovieAutofill()">
                                     <span><?= t('server.upload.movie_fill') ?></span>
@@ -200,11 +203,10 @@ View::show_header(($NewRequest ? t('server.requests.new_create') : t('server.req
                                     <input class="Input" type="checkbox" name="no_imdb_link" id="no_imdb_link" onchange="globalapp.requestNoImdbId()" <?= $Disabled ?>>
                                     <label class="Checkbox-label" data-tooltip="<?= t('server.requests.link_empty_warning') ?>" for="no_imdb_link">&nbsp;<?= t('server.requests.no_link') ?></label>
                                 </div>
-                            <? } ?>
                         </div>
-                        <? if ($NewRequest) { ?>
-                            <div class="u-formUploadNoImdbNote"><?= t('server.requests.auto_fill_note') ?></div>
-                        <? } ?>
+
+                        <div class="u-formUploadNoImdbNote"><?= t('server.requests.auto_fill_note') ?></div>
+                    <? } ?>
                     </td>
                 </tr>
             </table>
@@ -449,13 +451,13 @@ View::show_header(($NewRequest ? t('server.requests.new_create') : t('server.req
                         </tr>
                         <tr class="Form-row">
                             <td class="Form-submit" colspan="2">
-                                <input class="Button" type="submit" id="button" value="Create request" />
+                                <button class="Button" type="submit" id="button" value="Create request" /><?= t('server.requests.new_create') ?></button>
                             </td>
                         </tr>
                     <?  } else { ?>
                         <tr class="Form-row">
                             <td class="Form-submit" colspan="2">
-                                <input class="Button" type="submit" id="button" value="Edit request" />
+                                <button class="Button" type="submit" id="button" value="Edit request" /><?= t('server.common.edit') ?></button>
                             </td>
                         </tr>
                     <?  } ?>

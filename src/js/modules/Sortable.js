@@ -5,9 +5,7 @@ export default function sortable({ onDragEnd } = {}) {
   for (const item of items) {
     item.setAttribute('draggable', 'true')
     item.addEventListener('dragstart', handleDragStart)
-    item.addEventListener('dragend', (event) =>
-      handleDragEnd(event, { onDragEnd })
-    )
+    item.addEventListener('dragend', (event) => handleDragEnd(event, { onDragEnd }))
     item.addEventListener('dragenter', handleDragEnter)
     item.addEventListener('dragover', handleDragOver)
     item.addEventListener('dragleave', handleDragLeave)
@@ -21,7 +19,7 @@ const handleDragStart = (event) => {
   const target = event.currentTarget
   target.classList.add('u-sortable-item--isStart')
   startElement = target
-  event.dataTransfer.setData('text/plain', target.textContent)
+  event.dataTransfer.setData('text/plain', target.innerHTML)
   event.dataTransfer.effectAllowed = 'move'
 }
 
@@ -49,7 +47,7 @@ const handleDrop = (event) => {
   const target = event.currentTarget
   target.classList.remove('u-sortable-item--isOver')
   if (target !== startElement) {
-    startElement.textContent = target.textContent
-    target.textContent = event.dataTransfer.getData('text/plain')
+    startElement.innerHTML = target.innerHTML
+    target.innerHTML = event.dataTransfer.getData('text/plain')
   }
 }

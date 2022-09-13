@@ -28,17 +28,9 @@ View::show_header(t('server.reportsv2.report'), 'reportsv2,browse,torrent,bbcode
 
 <div class="LayoutBody">
     <div class="BodyHeader">
-        <h2 class="BodyHeader-nav"><?= t('server.reportsv2.report') ?></h2>
+        <div class="BodyHeader-nav"><?= t('server.reportsv2.report') ?></div>
+        <div class="BodyHeader-subNav"><?= $HeadTitle ?></div>
     </div>
-    <?
-    $DetailOption = new DetailOption;
-    $DetailOption->WithReport = false;
-    $DetailOption->ReadOnly = true;
-    $tableRender = new UngroupTorrentSimpleListView([$Torrent]);
-    $tableRender->with_self(false)->with_detail('report', $DetailOption)->render();
-    ?>
-
-
     <form class="create_form Form Form-rowList" variant="header" name="report" action="reportsv2.php?action=takereport" enctype="multipart/form-data" method="post" id="reportform">
         <div>
             <input type="hidden" name="submit" value="true" />

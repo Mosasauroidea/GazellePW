@@ -1,58 +1,54 @@
-function Subscribe(topicid) {
+function Subscribe(topicid, newName) {
+  ajax.get('userhistory.php?action=thread_subscribe&topicid=' + topicid + '&auth=' + authkey, function () {
+    var subscribeLink = $('#subscribelink' + topicid)
+    var oldName = subscribeLink.html()
+    if (newName) {
+      subscribeLink.html(newName)
+    }
+    subscribeLink
+      .removeAttr('onclick')
+      .off('click')
+      .click(function () {
+        Subscribe(topicid, oldName)
+        return false
+      })
+  })
+}
+
+function SubscribeComments(page, pageid, newName) {
   ajax.get(
-    'userhistory.php?action=thread_subscribe&topicid=' +
-      topicid +
-      '&auth=' +
-      authkey,
+    'userhistory.php?action=comments_subscribe&page=' + page + '&pageid=' + pageid + '&auth=' + authkey,
     function () {
-      var subscribeLink = $('#subscribelink' + topicid).raw()
-      if (subscribeLink) {
-        if (subscribeLink.firstChild.nodeValue.charAt(0) == '[') {
-          subscribeLink.firstChild.nodeValue =
-            subscribeLink.firstChild.nodeValue.charAt(1) == 'U'
-              ? '[Subscribe]'
-              : '[Unsubscribe]'
-        } else {
-          subscribeLink.firstChild.nodeValue =
-            subscribeLink.firstChild.nodeValue.charAt(0) == 'U'
-              ? 'Subscribe'
-              : 'Unsubscribe'
-        }
+      var subscribeLink = $('#subscribelink_' + page + pageid)
+      var oldName = subscribeLink.html()
+      if (newName) {
+        subscribeLink.html(newName)
       }
+      subscribeLink
+        .removeAttr('onclick')
+        .off('click')
+        .click(function () {
+          SubscribeComments(page, pageid, oldName)
+          return false
+        })
     }
   )
 }
 
-// TODO 多语言
-function SubscribeComments(page, pageid) {
-  ajax.get(
-    'userhistory.php?action=comments_subscribe&page=' +
-      page +
-      '&pageid=' +
-      pageid +
-      '&auth=' +
-      authkey,
-    function () {
-      var subscribeLink = $('#subscribelink_' + page + pageid).raw()
-      if (subscribeLink) {
-        subscribeLink.firstChild.nodeValue =
-          subscribeLink.firstChild.nodeValue.charAt(0) == '退'
-            ? '订阅评论'
-            : '退订评论'
-      }
-    }
-  )
-}
-
-function Collapse() {
-  var collapseLink = $('#collapselink').raw()
-  var hide = collapseLink.innerHTML.substr(0, 1) == 'H' ? 1 : 0
+function Collapse(newName) {
+  var collapseLink = $('#collapselink')
   if ($('.Table-row').results() > 0) {
     $('.Table-row').gtoggle()
-  }
-  if (hide) {
-    collapseLink.innerHTML = 'Show post bodies'
-  } else {
-    collapseLink.innerHTML = 'Hide post bodies'
+    var oldName = collapseLink.html()
+    if (newName) {
+      collapseLink.html(newName)
+    }
+    collapseLink
+      .removeAttr('onclick')
+      .off('click')
+      .click(function () {
+        Collapse(oldName)
+        return false
+      })
   }
 }

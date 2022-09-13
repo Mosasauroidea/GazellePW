@@ -52,7 +52,6 @@ $Year = $Group['Year'];
 $ReleaseType = $Group['ReleaseType'];
 $CategoryID = $Group['CategoryID'];
 
-
 View::show_header(t('server.torrents.edit_torrent_group'), '', 'PageTorrentEditGroup');
 
 // Start printing form
@@ -60,7 +59,8 @@ View::show_header(t('server.torrents.edit_torrent_group'), '', 'PageTorrentEditG
 <div class="LayoutBody">
 
     <div class="BodyHeader">
-        <h2 class="BodyHeader-nav"><?= page_title_conn([t('server.common.edit'), Torrents::group_name($Group)]) ?></h2>
+        <div class="BodyHeader-nav"><?= t('server.torrents.edit_torrent_group') ?></div>
+        <div class="BodyHeader-subNav"><?= Torrents::group_name($Group) ?></div>
     </div>
     <div class="BodyNavLinks">
         <a class="brackets" href="#movie_info_edit"><?= t('server.torrents.torrent_group_meta_editing') ?></a>

@@ -47,15 +47,23 @@ if ($Snatches > 4 && !check_perms('torrents_delete')) { // Should this be torren
 
 
 View::show_header(t('server.torrents.delete_torrent'), 'reportsv2', 'PageTorrentDelete');
+$TorrentDetail = Torrents::get_torrent($TorrentID);
+$HeadTitle = Torrents::torrent_simple_view($TorrentDetail['Group'], $TorrentDetail, true, [
+    'SettingTorrentTitle' => G::$LoggedUser['SettingTorrentTitle'],
+]);
 
 ?>
 <div class="LayoutBody">
-    <div class="Form-rowList" id="torrent_delete_reason" variant="header">
-        <div class="Form-rowHeader"><?= t('server.torrents.delete_torrent') ?></div>
-        <form class="delete_form" name="torrent" action="torrents.php" method="post">
-            <input type="hidden" name="action" value="takedelete" />
-            <input type="hidden" name="auth" value="<?= $LoggedUser['AuthKey'] ?>" />
-            <input type="hidden" name="torrentid" value="<?= $TorrentID ?>" />
+    <div class="BodyHeader">
+        <div class="BodyHeader-nav"><?= t('server.common.delete') ?></div>
+        <div class="BodyHeader-subNav"><?= $HeadTitle ?></div>
+    </div>
+    <form class="delete_form" name="torrent" action="torrents.php" method="post">
+        <input type="hidden" name="action" value="takedelete" />
+        <input type="hidden" name="auth" value="<?= $LoggedUser['AuthKey'] ?>" />
+        <input type="hidden" name="torrentid" value="<?= $TorrentID ?>" />
+        <div class="Form-rowList" id="torrent_delete_reason" variant="header">
+            <div class="Form-rowHeader"><?= t('server.torrents.delete_torrent') ?></div>
             <div class="Form-row">
                 <p><strong class="u-colorWarning"><?= t('server.torrents.delete_torrent_note') ?></strong></p>
             </div>
@@ -80,8 +88,8 @@ View::show_header(t('server.torrents.delete_torrent'), 'reportsv2', 'PageTorrent
             <div class="Form-row">
                 <input class="Button" value="<?= t('server.common.delete') ?>" type="submit" />
             </div>
-        </form>
-    </div>
+        </div>
+    </form>
 </div>
 <?
 if (check_perms('admin_reports')) {
@@ -151,12 +159,6 @@ if (check_perms('admin_reports')) {
         $RawName = Torrents::torrent_name($TorrentDetail, false);
         $LinkName = "<a href=\"torrents.php?torrentid=$TorrentID\">$RawName</a>";
         $BBName = "[url=torrents.php?torrentid=$TorrentID] $RawName [/url]";
-
-        $DetailOption = new DetailOption;
-        $DetailOption->WithReport = false;
-        $DetailOption->ReadOnly = true;
-        $tableRender = new UngroupTorrentSimpleListView([$TorrentDetail]);
-        $tableRender->with_self(false)->with_detail('report', $DetailOption)->render();
         ?>
         <div id="report<?= $ReportID ?>" class="report">
             <form class="create_form" name="report" id="reportform_<?= $ReportID ?>" action="reports.php" method="post">
@@ -180,6 +182,9 @@ if (check_perms('admin_reports')) {
                 </div>
                 <div class="TableContainer">
                     <table cellpadding="5" class="Form-rowList" variant="header">
+                        <tr class="Form-rowHeader">
+                            <td class="Form-title"><?= t('server.reportsv2.report_a_torrent') ?></td>
+                        </tr>
                         <tr class="Form-row">
                             <td colspan="4">
                                 <? if ($GroupID) { ?>

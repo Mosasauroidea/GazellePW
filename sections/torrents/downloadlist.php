@@ -45,48 +45,50 @@ if (count($UserIDs) > 0) {
     $Seeding = $DB->to_array('uid');
 }
 ?>
-<h4 data-tooltip="<?= t('server.torrents.show_downloads_title') ?>"><?= t('server.torrents.list_of_downloaders') ?></h4>
-<? if ($NumResults > 100) { ?>
-    <div class="BodyNavLinks"><?= js_pages('show_downloads', $_GET['torrentid'], $NumResults, $Page) ?></div>
-<? } ?>
-<div class="TableContainer">
-    <table class="TableTorrent Table">
-        <tr class="Table-rowHeader">
-            <td class="Table-cell"><?= t('server.torrents.user') ?></td>
-            <td class="Table-cell"><?= t('server.torrents.time') ?></td>
-            <td class="Table-cell"><?= t('server.torrents.user') ?></td>
-            <td class="Table-cell"><?= t('server.torrents.time') ?></td>
-        </tr>
-        <tr>
-            <?
-            $i = 0;
+<div class="TorrentDetail-row is-downloadList is-block">
+    <strong class="TorrentDetailDownloadList-title" id="download_box_title"><?= t('server.torrents.list_of_downloaders') ?>:</strong>
+    <? if ($NumResults > 100) { ?>
+        <div class="BodyNavLinks"><?= js_pages('show_downloads', $_GET['torrentid'], $NumResults, $Page) ?></div>
+    <? } ?>
+    <div class="TableContainer">
+        <table class="TableTorrent Table">
+            <tr class="Table-rowHeader">
+                <td class="Table-cell"><?= t('server.torrents.user') ?></td>
+                <td class="Table-cell"><?= t('server.torrents.time') ?></td>
+                <td class="Table-cell"><?= t('server.torrents.user') ?></td>
+                <td class="Table-cell"><?= t('server.torrents.time') ?></td>
+            </tr>
+            <tr>
+                <?
+                $i = 0;
 
-            foreach ($Results as $ID => $Data) {
-                list($SnatcherID, $Timestamp) = array_values($Data);
+                foreach ($Results as $ID => $Data) {
+                    list($SnatcherID, $Timestamp) = array_values($Data);
 
-                $User = Users::format_username($SnatcherID, true, true, true, true);
+                    $User = Users::format_username($SnatcherID, true, true, true, true);
 
-                if (!array_key_exists($SnatcherID, $Snatched) && $SnatcherID != $UserID) {
-                    $User = '<span style="font-style: italic;">' . $User . '</span>';
-                    if (array_key_exists($SnatcherID, $Seeding)) {
-                        $User = '<strong>' . $User . '</strong>';
+                    if (!array_key_exists($SnatcherID, $Snatched) && $SnatcherID != $UserID) {
+                        $User = '<span style="font-style: italic;">' . $User . '</span>';
+                        if (array_key_exists($SnatcherID, $Seeding)) {
+                            $User = '<strong>' . $User . '</strong>';
+                        }
                     }
-                }
-                if ($i % 2 == 0 && $i > 0) { ?>
-        </tr>
-        <tr>
+                    if ($i % 2 == 0 && $i > 0) { ?>
+            </tr>
+            <tr>
+            <?
+                    }
+            ?>
+            <td class="Table-cell"><?= $User ?></td>
+            <td class="Table-cell"><?= time_diff($Timestamp) ?></td>
         <?
+                    $i++;
                 }
         ?>
-        <td class="Table-cell"><?= $User ?></td>
-        <td class="Table-cell"><?= time_diff($Timestamp) ?></td>
-    <?
-                $i++;
-            }
-    ?>
-        </tr>
-    </table>
+            </tr>
+        </table>
+    </div>
+    <? if ($NumResults > 100) { ?>
+        <div class="BodyNavLinks"><?= js_pages('show_downloads', $_GET['torrentid'], $NumResults, $Page) ?></div>
+    <? } ?>
 </div>
-<? if ($NumResults > 100) { ?>
-    <div class="BodyNavLinks"><?= js_pages('show_downloads', $_GET['torrentid'], $NumResults, $Page) ?></div>
-<? } ?>

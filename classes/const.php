@@ -206,3 +206,6 @@ define('DURATION', [
 	'12h' => 12 * 3600 * 1000,
 	'24h' => 24 * 3600 * 1000,
 ]);
+
+define('MAX_PERS_COLLAGES', 3); // How many personal collages should be shown by default
+define('MAX_COLLAGES', 5); // How many normal collages should be shown by default

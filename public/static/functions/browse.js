@@ -132,12 +132,21 @@ function show_files(TorrentID, View) {
 }
 
 function show_reported(TorrentID, View) {
+  if ($('#' + View + '_reported_' + TorrentID).raw().innerHTML === '') {
+    $('#' + View + '_reported_' + TorrentID)
+      .gshow()
+      .raw().innerHTML = '<h4>Loading...</h4>'
+    ajax.get('torrents.php?action=reportlist&torrentid=' + TorrentID, function (response) {
+      $('#' + View + '_reported_' + TorrentID).raw().innerHTML = response
+    })
+  } else {
+    $('#' + View + '_reported_' + TorrentID).gtoggle()
+  }
   $('#' + View + '_files_' + TorrentID).ghide()
   $('#' + View + '_viewlog_' + TorrentID).ghide()
   $('#' + View + '_peers_' + TorrentID).ghide()
   $('#' + View + '_snatches_' + TorrentID).ghide()
   $('#' + View + '_downloads_' + TorrentID).ghide()
-  $('#' + View + '_reported_' + TorrentID).gtoggle()
   $('#' + View + '_giver_' + TorrentID).ghide()
 }
 

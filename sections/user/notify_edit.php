@@ -162,7 +162,7 @@ View::show_header(t('server.user.manage_notifications'), 'jquery.validate,form_v
                         <input class="Input required" type="text" name="label<?= $i ?>" placeholder="<?= t('server.user.notification_filter_name_note') ?>" />
                     </td>
                 </tr>
-                <tr class="Form-row">
+                <tr class="Form-rowSubHeader">
                     <td colspan="2" class="center">
                         <span><?= t('server.user.all_fields_below_here_are_optional') ?></span>
                     </td>

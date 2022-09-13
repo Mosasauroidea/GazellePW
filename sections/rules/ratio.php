@@ -4,7 +4,9 @@ View::show_header(t('server.rules.ratio_title'), '', 'PageRuleRatio');
 
 <div class="LayoutBody">
     <? include('jump.php'); ?>
-    <div class="HtmlText BoxBody" id="Rules-Ratio-mdx" mdx></div>
+    <div class="Post">
+        <div class="HtmlText Post-body" id="Rules-Ratio-mdx" mdx></div>
+    </div>
 </div>
 
 <script>

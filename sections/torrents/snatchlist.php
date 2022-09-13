@@ -27,43 +27,44 @@ $DB->query('SELECT FOUND_ROWS()');
 list($NumResults) = $DB->next_record();
 
 ?>
-<h4 data-tooltip="<?= t('server.torrents.show_snatches_title') ?>"><?= t('server.torrents.list_of_snatchers') ?></h4>
+<div class="TorrentDetail-row is-snatchedList is-block">
+    <strong class="TorrentDetailSnatchedList-title" id="snatched_box_title"><?= t('server.torrents.list_of_snatchers') ?>:</strong>
+    <? if ($NumResults > 100) { ?>
+        <div class="BodyNavLinks"><?= js_pages('show_snatches', $_GET['torrentid'], $NumResults, $Page) ?></div>
+    <? } ?>
+    <div class="TableContainer">
+        <table class="TableTorrentSnatchList Table">
+            <tr class="Table-rowHeader">
+                <td class="Table-cell"><?= t('server.torrents.user') ?></td>
+                <td class="Table-cell"><?= t('server.torrents.time') ?></td>
 
-<? if ($NumResults > 100) { ?>
-    <div class="BodyNavLinks"><?= js_pages('show_snatches', $_GET['torrentid'], $NumResults, $Page) ?></div>
-<? } ?>
-<div class="TableContainer">
-    <table class="TableTorrentSnatchList Table">
-        <tr class="Table-rowHeader">
-            <td class="Table-cell"><?= t('server.torrents.user') ?></td>
-            <td class="Table-cell"><?= t('server.torrents.time') ?></td>
+                <td class="Table-cell"><?= t('server.torrents.user') ?></td>
+                <td class="Table-cell"><?= t('server.torrents.time') ?></td>
+            </tr>
+            <tr>
+                <?
+                $i = 0;
 
-            <td class="Table-cell"><?= t('server.torrents.user') ?></td>
-            <td class="Table-cell"><?= t('server.torrents.time') ?></td>
-        </tr>
-        <tr>
+                foreach ($Results as $ID => $Data) {
+                    list($SnatcherID, $Timestamp) = array_values($Data);
+
+                    if ($i % 2 == 0 && $i > 0) {
+                ?>
+            </tr>
+            <tr class="Table-row">
             <?
-            $i = 0;
-
-            foreach ($Results as $ID => $Data) {
-                list($SnatcherID, $Timestamp) = array_values($Data);
-
-                if ($i % 2 == 0 && $i > 0) {
+                    }
             ?>
-        </tr>
-        <tr class="Table-row">
+            <td class="Table-cell"><?= Users::format_username($SnatcherID, true, true, true, true) ?></td>
+            <td class="Table-cell"><?= time_diff($Timestamp) ?></td>
         <?
+                    $i++;
                 }
         ?>
-        <td class="Table-cell"><?= Users::format_username($SnatcherID, true, true, true, true) ?></td>
-        <td class="Table-cell"><?= time_diff($Timestamp) ?></td>
-    <?
-                $i++;
-            }
-    ?>
-        </tr>
-    </table>
+            </tr>
+        </table>
+    </div>
+    <? if ($NumResults > 100) { ?>
+        <div class="BodyNavLinks"><?= js_pages('show_snatches', $_GET['torrentid'], $NumResults, $Page) ?></div>
+    <? } ?>
 </div>
-<? if ($NumResults > 100) { ?>
-    <div class="BodyNavLinks"><?= js_pages('show_snatches', $_GET['torrentid'], $NumResults, $Page) ?></div>
-<? } ?>

@@ -166,7 +166,11 @@ if ($AdvancedSearch) {
     $HideAdvanced = ' u-hidden';
 }
 $GenreTags = Tags::get_genre_tag();
-
+$CheckAllTorrents = check_perms('torrents_check') && !G::$LoggedUser['DisableCheckAll'];
+if ($CheckAllTorrents) {
+    G::$DB->query("select count(*) from torrents where Checked=0");
+    list($AllUncheckedCnt) = G::$DB->next_record();
+}
 View::show_header(t('server.torrents.header'), 'browse', 'PageTorrentHome');
 //$TimeNow = new DateTime();
 //$TimeUntil = new DateTime('2016-12-16 03:50:00');
@@ -174,6 +178,11 @@ View::show_header(t('server.torrents.header'), 'browse', 'PageTorrentHome');
 //$Left = $Interval->format("%i MINS, %s SECONDS");
 ?>
 <div class="LayoutBody">
+    <div class="BodyHeader">
+        <div class="BodyHeader-nav">
+            <?= t('server.torrents.header') ?>
+        </div>
+    </div>
     <form class="Form SearchPage Box SearchTorrent" name="torrents" method="get" action="" onsubmit="$(this).disableUnset();">
         <div class="SearchPageHeader">
             <div class="SearchPageHeader-title">
@@ -185,8 +194,8 @@ View::show_header(t('server.torrents.header'), 'browse', 'PageTorrentHome');
                 <a href="wiki.php?action=article&name=%E9%AB%98%E7%BA%A7%E6%90%9C%E7%B4%A2%E6%8C%87%E5%8D%97" target="_blank" data-tooltip="<?= t('server.torrents.guide_of_advanced_search') ?>">[?]</a>
             </div>
             <div class="SearchPageHeader-actions">
-                <a href="#" onclick="globalapp.toggleAny(event, '.SearchPageBody', { updateText: true }); globalapp.toggleAny(event, '.SearchPageFooter', { updateText: true })" id="ft_toggle" class="brackets">
-                    <span class="u-toggleAny-show <?= $HideFilter ?: 'u-hidden' ?>"><?= t('server.common.show') ?></span>
+                <a href="#" onclick="globalapp.toggleAny(event, '.SearchPageBody, .SearchPageFooter');" id="ft_toggle" class="brackets">
+                    <span class="u-toggleAny-show <?= $HideFilter ? '' : 'u-hidden' ?>"><?= t('server.common.show') ?></span>
                     <span class="u-toggleAny-hide <?= $HideFilter ? 'u-hidden' : '' ?>"><?= t('server.common.hide') ?></span>
                 </a>
             </div>
@@ -281,6 +290,17 @@ View::show_header(t('server.torrents.header'), 'browse', 'PageTorrentHome');
                                 <option class="Select-option" value='13' <? Format::selected('freetorrent', '13') ?>><?= t('server.torrents.off75') ?></option>
                                 <option class="Select-option" value='2' <? Format::selected('freetorrent', '2') ?>><?= t('server.torrents.neutral_leech') ?></option>
                             </select>
+                            <?
+                            if ($CheckAllTorrents) {
+                            ?>
+                                <select class="Input" name="checked">
+                                    <option class="Select-option" value=""><?= t('server.torrents.checking_status') ?></option>
+                                    <option class="Select-option" value='1' <? Format::selected('checked', '1') ?>><?= t('server.torrents.checked_torrents') ?></option>
+                                    <option class="Select-option" value='0' <? Format::selected('checked', '0') ?>><?= t('server.torrents.unchecked_torrents') ?></option>
+                                </select>
+                            <?
+                            }
+                            ?>
                         </div>
                         <div class="Form-inputs">
                             <select class="Input" id="source" name="source">
@@ -408,6 +428,12 @@ View::show_header(t('server.torrents.header'), 'browse', 'PageTorrentHome');
             <div class="SearchPageFooter-resultCount">
                 <?= number_format($RealNumResults) ?> <?= t('server.torrents.space_results') ?>
                 <?= !check_perms('site_search_many') ? "(" . t('server.torrents.showing_first_n_matches', ['Values' => [$NumResults]]) . ")" : "" ?>
+                <?
+                if ($CheckAllTorrents) {
+                ?>
+                    <span><?= t('server.torrents.unchecked_torrents_results_note', ['Values' => [$AllUncheckedCnt]]) ?></span>
+                <? }
+                ?>
             </div>
             <div class="SearchPageFooter-actions">
                 <input class="Button" type="submit" value="<?= t('server.torrents.search_torrents') ?>" />
@@ -430,9 +456,9 @@ View::show_header(t('server.torrents.header'), 'browse', 'PageTorrentHome');
         $text1 = t('server.torrents.search_empty_1');
         $text2 = t('server.torrents.search_empty_2');
         print <<<HTML
-<div class="BoxBody" align="center">
-	<h2>$text1</h2>
-	<p>$text2</p>
+<div class="BoxBody is-noBorder center">
+	    <h2>$text1</h2>
+	    <p>$text2</p>
 </div>
 </div>
 HTML;

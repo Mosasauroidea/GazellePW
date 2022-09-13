@@ -26,7 +26,8 @@ iframe {
   max-width: 100%;
 }
 
-ul {
+ul,
+ol {
   list-style-type: none;
 }
 

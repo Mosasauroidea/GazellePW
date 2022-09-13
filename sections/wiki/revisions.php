@@ -13,7 +13,9 @@ if ($Edit > $LoggedUser['EffectiveClass']) {
     error(403);
 }
 
-View::show_header("Revisions of " . $Title, '', 'PageWikiRevision');
+View::show_header(t('server.wiki.revision_history', ['Values' => [
+    $Title
+]]), '', 'PageWikiRevision');
 ?>
 <div class="LayoutBody">
     <div class="BodyHeader">
@@ -23,9 +25,12 @@ View::show_header("Revisions of " . $Title, '', 'PageWikiRevision');
             ]]) ?>
         </h2>
     </div>
-    <form action="wiki.php" method="get">
-        <input type="hidden" name="action" id="action" value="<? t('server.wiki.compare') ?>" />
+    <form class="BodyContent" action="wiki.php" method="get">
+        <input type="hidden" name="action" id="action" value="compare" />
         <input type="hidden" name="id" id="id" value="<?= $ArticleID ?>" />
+        <div>
+            <button class="Button" type="submit" value="Compare"><?= t('server.wiki.compare') ?></button>
+        </div>
         <div class="TableContainer">
             <table class="TableWikiRevision Table">
                 <tr class="Table-rowHeader">
@@ -66,9 +71,7 @@ View::show_header("Revisions of " . $Title, '', 'PageWikiRevision');
                 <? } ?>
             </table>
         </div>
-        <div class="center">
-            <input class="Button" type="submit" value="Compare" />
-        </div>
+
     </form>
 </div>
 <? View::show_footer(); ?>

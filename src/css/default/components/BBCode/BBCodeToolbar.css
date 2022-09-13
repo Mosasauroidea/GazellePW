@@ -61,7 +61,6 @@ BBCodeToolbar
 .u-bbcodeEditor {
   border: var(--Box-border);
   border-radius: var(--global-borderRadius);
-  margin-bottom: var(--global-space-sm);
 }
 
 .BBCodeToolbar-uploadProgressBarBorder {

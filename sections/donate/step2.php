@@ -16,8 +16,13 @@ list($Revision, $Title, $Body, $Read, $Edit, $Date, $AuthorID, $AuthorName, $Ali
 ?>
 
 <div class="LayoutBody" id="donate_information">
-    <form class=" send_form pad" name="donate" action="donate.php" method="post">
-        <h2><?= t('server.donate.donate') ?></h2>
+    <div class="BodyHeader">
+        <h2 class="BodyHeader-nav">
+            <?= t('server.donate.donate') ?>
+        </h2>
+    </div>
+    <form class="Form send_form pad" name="donate" action="donate.php" method="post">
+
         <input type="hidden" name="action" value="donate" />
         <div class="Form-rowList" variant="header">
             <div class="Form-rowHeader">
@@ -50,58 +55,65 @@ list($Revision, $Title, $Body, $Read, $Edit, $Date, $AuthorID, $AuthorName, $Ali
             </div>
         </div>
     </form>
+    <?
+    if (count($PrepaidCardDonations) > 0) {
+    ?>
+        <div class="Box is-noBorder">
+            <div class="Box-header">
+                <div class="Box-headerTitle">
+                    <?= t('server.donate.history') ?>
+                </div>
+            </div>
+            <div class="Box-body">
+                <div class="TableContainer">
+                    <table class="TableDonate Table">
+                        <tr class="Table-rowHeader">
+                            <td class="Table-cell"><?= t('server.donate.added_time') ?></td>
+                            <td class="Table-cell"><?= t('server.donate.card_num') ?></td>
+                            <td class="Table-cell"><?= t('server.donate.card_secret') ?></td>
+                            <td class="Table-cell"><?= t('server.donate.face_value') ?></td>
+                            <td class="Table-cell"><?= t('server.donate.status') ?></td>
+                        </tr>
+                        <?
+                        $Row = 'a';
+                        foreach ($PrepaidCardDonations as $Item) {
+                            list(,, $CreateTime, $CardNum, $CardSecret, $FaceValue, $Status) = $Item;
+                            $Row = $Row === 'a' ? 'b' : 'a';
+                        ?>
+                            <tr class="Table-row">
+                                <td class="Table-cell"><?= $CreateTime ?></td>
+                                <td class="Table-cell"><?= $CardNum ?></td>
+                                <td class="Table-cell"><?= $CardSecret ?></td>
+                                <td class="Table-cell"><?= $FaceValue ?></td>
+                                <td class="Table-cell">
+                                    <? if ($Status == PrepaidCardStatus::Pending) {
+                                        echo t('server.donate.pending');
+                                    } else if ($Status == PrepaidCardStatus::Passed) {
+                                        echo '<span class="u-colorSuccess">' . t('server.donate.success') . '</span>';
+                                    } else if ($Status == PrepaidCardStatus::Reject) {
+                                        echo '<span class="u-colorWarning">' . t('server.donate.failed') . '</span>';
+                                    } ?>
+                                </td>
+                            </tr>
+                        <?  } ?>
+                    </table>
+                </div>
+            </div>
+        </div>
+    <?
+    }
+    ?>
+    <div class="Post donation_info">
+        <div class="Post-header">
+            <div class="Post-headerTitle donation_info_title">
+                <?= t('server.donate.tutorials') ?>
+            </div>
+        </div>
+        <div id="donate_guide" class="Post-body HtmlText PostArticle">
+            <?= Text::full_format($Body) ?>
+        </div>
+    </div>
 </div>
-<?
-if (count($PrepaidCardDonations) > 0) {
-?>
-    <h3><?= t('server.donate.history') ?>
-    </h3>
 
-    <div class="TableContainer">
-        <table class="TableDonate Table">
-            <tr class="Table-rowHeader">
-                <td class="Table-cell"><?= t('server.donate.added_time') ?></td>
-                <td class="Table-cell"><?= t('server.donate.card_num') ?></td>
-                <td class="Table-cell"><?= t('server.donate.card_secret') ?></td>
-                <td class="Table-cell"><?= t('server.donate.face_value') ?></td>
-                <td class="Table-cell"><?= t('server.donate.status') ?></td>
-            </tr>
-            <?
-            $Row = 'a';
-            foreach ($PrepaidCardDonations as $Item) {
-                list(,, $CreateTime, $CardNum, $CardSecret, $FaceValue, $Status) = $Item;
-                $Row = $Row === 'a' ? 'b' : 'a';
-            ?>
-                <tr class="Table-row">
-                    <td class="Table-cell"><?= $CreateTime ?></td>
-                    <td class="Table-cell"><?= $CardNum ?></td>
-                    <td class="Table-cell"><?= $CardSecret ?></td>
-                    <td class="Table-cell"><?= $FaceValue ?></td>
-                    <td class="Table-cell">
-                        <? if ($Status == PrepaidCardStatus::Pending) {
-                            echo t('server.donate.pending');
-                        } else if ($Status == PrepaidCardStatus::Passed) {
-                            echo '<span class="u-colorSuccess">' . t('server.donate.success') . '</span>';
-                        } else if ($Status == PrepaidCardStatus::Reject) {
-                            echo '<span class="u-colorWarning">' . t('server.donate.failed') . '</span>';
-                        } ?>
-                    </td>
-                </tr>
-            <?  } ?>
-        </table>
-    </div>
-<?
-}
-?>
-<div class="Box donation_info">
-    <div class="Box-header">
-        <strong class="donation_info_title">
-            <?= t('server.donate.tutorials') ?>
-        </strong>
-    </div>
-    <div id="donate_guide" class="Box-body HtmlText PostArticle">
-        <?= Text::full_format($Body) ?>
-    </div>
-</div>
 
 <? View::show_footer();
