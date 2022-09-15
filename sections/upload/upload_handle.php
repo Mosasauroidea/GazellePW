@@ -580,7 +580,7 @@ if (trim($Properties['Image']) != '') {
                 array_pop($RecentUploads);
             }
             array_unshift($RecentUploads, array(
-                'ID' => $GroupID,
+                'TorrentID' => $GroupID,
                 'Name' => trim($Properties['Name']),
                 'SubName' => trim($Properties['SubName']),
                 'Year' => trim($Properties['Year']),
@@ -656,15 +656,15 @@ foreach ($RemasterTitleRSS as $RT) {
     }
 }
 
-if ($T['FreeLeech'] == '1') {
+if ($T['FreeLeech'] == Torrents::FREE) {
     $Details .= ' / Freeleech!';
-} else if ($T['FreeLeech'] == '2') {
+} else if ($T['FreeLeech'] == Torrents::Neutral) {
     $Details .= ' / Neutral Leech!';
-} else if ($T['FreeLeech'] == '11') {
+} else if ($T['FreeLeech'] == Torrents::OneFourthOff) {
     $Details .= ' / 25% off!';
-} else if ($T['FreeLeech'] == '12') {
+} else if ($T['FreeLeech'] == Torrents::TwoFourthOff) {
     $Details .= ' / 50% off!';
-} else if ($T['FreeLeech'] == '13') {
+} else if ($T['FreeLeech'] == Torrents::ThreeFourthOff) {
     $Details .= ' / 75% off!';
 }
 

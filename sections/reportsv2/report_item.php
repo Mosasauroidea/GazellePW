@@ -227,9 +227,12 @@ function render_item($Idx, $Report) {
                     <? if ($GroupID) { ?>
                         <tr class="Form-row">
                             <td class="Form-label Table-cellRight Table-cellTop"><?= t('server.reportsv2.uploaded_by') ?>:</td>
-                            <td class="Form-inputs"><a href="user.php?id=<?= $UploaderID ?>"><?= $UploaderName ?></a>
-                                <div class="Table-cellRight Table-cellTop"><?= t('server.reportsv2.upload_time') ?>:</div>
-                                <div><?= $Time ?></div>
+                            <td class="Form-items">
+                                <div class="Form-inputs">
+                                    <a href="user.php?id=<?= $UploaderID ?>"><?= $UploaderName ?></a>
+                                    <div class="Table-cellRight Table-cellTop"><?= t('server.reportsv2.upload_time') ?>:</div>
+                                    <div><?= $Time ?></div>
+                                </div>
                                 <?
                                 $DB->query("
 						SELECT t.UserID
@@ -371,7 +374,17 @@ function render_item($Idx, $Report) {
                         <tr class="Form-row">
                             <td class="Form-label Table-cellRight"><strong><?= t('server.reportsv2.extra') ?></strong> <?= t('server.reportsv2.space_log_message') ?>:</td>
                             <td class="Form-inputs">
-                                <input style="width:unset" class="Input" type="text" name="log_message" id="log_message<?= $ReportID ?>" size="40" value="<?= $ReportType['extra_log'] ?>" />
+                                <input style="width:unset" class="Input" type="text" name="log_message" id="log_message<?= $ReportID ?>" size="40" <?
+                                                                                                                                                    if ($ExtraIDs) {
+                                                                                                                                                        $Extras = explode(' ', $ExtraIDs);
+                                                                                                                                                        $Value = '';
+                                                                                                                                                        foreach ($Extras as $ExtraID) {
+                                                                                                                                                            $Value .= site_url() . "torrents.php?torrentid=$ExtraID ";
+                                                                                                                                                        }
+                                                                                                                                                        echo ' value="' . trim($Value) . '"';
+                                                                                                                                                    } elseif (isset($ReportType['extra_log'])) {
+                                                                                                                                                        printf(' value="%s"', $ReportType['extra_log']);
+                                                                                                                                                    } ?> />
                             </td>
                         </tr>
                         <tr class="Form-row">

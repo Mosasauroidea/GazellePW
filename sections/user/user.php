@@ -2035,7 +2035,7 @@ WHERE xs.uid =" . $UserID . " and xs.tstamp >= unix_timestamp(date_format(now(),
                         </tr>
                         <tr class="Form-row">
                             <td colspan="2">
-                                <input class="Button" type="submit" value="Save changes" />
+                                <button class="Button" type="submit" value="Save changes"><?= t('client.common.save') ?></button>
                             </td>
                         </tr>
                         </table>

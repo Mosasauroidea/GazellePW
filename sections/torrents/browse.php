@@ -284,11 +284,11 @@ View::show_header(t('server.torrents.header'), 'browse', 'PageTorrentHome');
                             </select>
                             <select class="Input" name="freetorrent">
                                 <option class="Select-option" value=""><?= t('server.tools.sales_promotion_plan') ?></option>
-                                <option class="Select-option" value='1' <? $HideBasic ? Format::selected('freetorrent', '1') : '' ?>><?= t('server.torrents.freeleech') ?></option>
-                                <option class="Select-option" value='11' <? Format::selected('freetorrent', '11') ?>><?= t('server.torrents.off25') ?></option>
-                                <option class="Select-option" value='12' <? Format::selected('freetorrent', '12') ?>><?= t('server.torrents.off50') ?></option>
-                                <option class="Select-option" value='13' <? Format::selected('freetorrent', '13') ?>><?= t('server.torrents.off75') ?></option>
-                                <option class="Select-option" value='2' <? Format::selected('freetorrent', '2') ?>><?= t('server.torrents.neutral_leech') ?></option>
+                                <option class="Select-option" value='<?= Torrents::FREE ?>' <? $HideBasic ? Format::selected('freetorrent', Torrents::FREE) : '' ?>><?= t('server.torrents.freeleech') ?></option>
+                                <option class="Select-option" value='<?= Torrents::OneFourthOff ?>' <? Format::selected('freetorrent', Torrents::OneFourthOff) ?>><?= t('server.torrents.off25') ?></option>
+                                <option class="Select-option" value='<?= Torrents::TwoFourthOff ?>' <? Format::selected('freetorrent', Torrents::TwoFourthOff) ?>><?= t('server.torrents.off50') ?></option>
+                                <option class="Select-option" value='<?= Torrents::ThreeFourthOff ?>' <? Format::selected('freetorrent', Torrents::ThreeFourthOff) ?>><?= t('server.torrents.off75') ?></option>
+                                <option class="Select-option" value='<?= Torrents::Neutral ?>' <? Format::selected('freetorrent', Torrents::Neutral) ?>><?= t('server.torrents.neutral_leech') ?></option>
                             </select>
                             <?
                             if ($CheckAllTorrents) {

@@ -101,7 +101,7 @@ $Artists = $Info['Artists'];
 
 // If he's trying use a token on this, we need to make sure he has one,
 // deduct it, add this to the FLs table, and update his cache key.
-if ($_REQUEST['usetoken'] && in_array($FreeTorrent, ['0', '11', '12', '13']) && !Torrents::global_freeleech()) {
+if ($_REQUEST['usetoken'] && in_array($FreeTorrent, [Torrents::Normal, Torrents::OneFourthOff, Torrents::TwoFourthOff, Torrents::ThreeFourthOff]) && !Torrents::global_freeleech()) {
     if (isset($LoggedUser)) {
         $FLTokens = $LoggedUser['FLTokens'];
         if ($LoggedUser['CanLeech'] != '1') {
@@ -179,7 +179,7 @@ if ($CategoryID == '1' && $Image != '' && $TorrentUploaderID != $UserID) {
     $RecentSnatches = $Cache->get_value("recent_snatches_$UserID");
     if (!empty($RecentSnatches)) {
         $Snatch = array(
-            'ID' => $GroupID,
+            'TorrentID' => $GroupID,
             'Name' => $Name,
             'SubName' => $SubName,
             'Year' => $Year,

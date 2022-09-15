@@ -71,13 +71,13 @@ if (!$DB->has_results()) {
             }
             if (Torrents::torrent_freeleech($Torrent)) {
                 $Details .= ' / Freeleech!';
-            } else if ($Torrent['FreeTorrent'] == '2') {
+            } else if ($Torrent['FreeTorrent'] == Torrents::Neutral) {
                 $Details .= ' / Neutral Leech!';
-            } else if ($Torrent['FreeTorrent'] == '11') {
+            } else if ($Torrent['FreeTorrent'] == Torrents::OneFourthOff) {
                 $Details .= ' / 25% off!';
-            } else if ($Torrent['FreeLTorrent'] == '12') {
+            } else if ($Torrent['FreeLTorrent'] == Torrents::TwoFourthOff) {
                 $Details .= ' / 50% off!';
-            } else if ($Torrent['FreeTOrrent'] == '13') {
+            } else if ($Torrent['FreeTOrrent'] == Torrents::ThreeFourthOff) {
                 $Details .= ' / 75% off!';
             }
 

@@ -1,3 +1,7 @@
+:root {
+  color-scheme: light dark;
+}
+
 html {
   font-size: var(--global-fontSize-desktop);
 }

@@ -111,7 +111,8 @@ class MASS_USER_TORRENTS_TABLE_VIEW {
                 <form class="BodyContent" action="bookmarks.php" method="post" id="drag_drop_collage_form">
                     <div class="Box" id="drag_drop_textnote">
                         <div class="Box-header">
-                            <div class="Box-headerTitle" id="sorting_head"><?= t('server.bookmarks.sorting') ?></div>
+                            <div class="Box-headerTitle"><?= t('server.bookmarks.sorting') ?></div>
+                            <div class="Box-headerActions" id="sorting_head"></div>
                         </div>
                         <div class="Box-body">
                             <td> <?= t('server.bookmarks.drag_drop_textnote_torrents') ?></td>

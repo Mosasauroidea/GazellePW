@@ -13,6 +13,12 @@ class Torrents {
     const SNATCHED_UPDATE_INTERVAL = 3600; // How often we want to update users' snatch lists
     const SNATCHED_UPDATE_AFTERDL = 300; // How long after a torrent download we want to update a user's snatch lists
 
+    const Normal = 0;
+    const FREE = 1;
+    const Neutral = 2;
+    const OneFourthOff = 11;
+    const TwoFourthOff = 12;
+    const ThreeFourthOff = 13;
 
     public static function tags($Group) {
         $TorrentTags = $Group['TagList'];
@@ -34,6 +40,23 @@ class Torrents {
             return Language::text($value);
         }, array_slice(explode(',', $Language), 0, $Limit));
         return implode(', ', $Languages);
+    }
+
+    public static function get_actual_size($Torrent) {
+        $Size = $Torrent['Size'];
+        switch ($Torrent['FreeTorrent']) {
+            case self::FREE:
+            case self::Neutral:
+                return 0;
+            case self::OneFourthOff:
+                return 0.75 * $Size;
+            case self::TwoFourthOff:
+                return 0.5 * $Size;
+            case self::ThreeFourthOff:
+                return 0.25 * $Size;
+            default:
+                return $Size;
+        }
     }
 
     public static function get_search_language($Language) {
@@ -1293,15 +1316,15 @@ WHERE ud.TorrentID=? AND ui.NotifyOnDeleteDownloaded='1' AND ud.UserID NOT IN ({
         if (self::global_freeleech()) {
             $Info[] = Format::torrent_label(t('server.torrents.fld'), 'tl_free bg torrent_discount free');
         } else if (isset($Data['FreeTorrent'])) {
-            if ($Data['FreeTorrent'] == '1') {
+            if ($Data['FreeTorrent'] == self::FREE) {
                 $Info[] = Format::torrent_label(t('server.torrents.fld'), 'tl_free bg torrent_discount free', ($Data['FreeEndTime'] ? t('server.torrents.free_left', ['Values' => [time_diff($Data['FreeEndTime'], 2, false)]]) : ""));
-            } else if ($Data['FreeTorrent'] == '2') {
+            } else if ($Data['FreeTorrent'] == self::Neutral) {
                 $Info[] = Format::torrent_label('Neutral Leech!', 'bg torrent_discount neutral');
-            } else if ($Data['FreeTorrent'] == '11') {
+            } else if ($Data['FreeTorrent'] == self::OneFourthOff) {
                 $Info[] = Format::torrent_label('-25%', 'bg torrent_discount one_fourth_off', ($Data['FreeEndTime'] ? t('server.torrents.free_left', ['Values' => [time_diff($Data['FreeEndTime'], 2, false)]]) : ""));
-            } else if ($Data['FreeTorrent'] == '12') {
+            } else if ($Data['FreeTorrent'] == self::TwoFourthOff) {
                 $Info[] = Format::torrent_label('-50%', 'bg torrent_discount two_fourth_off', ($Data['FreeEndTime'] ? t('server.torrents.free_left', ['Values' => [time_diff($Data['FreeEndTime'], 2, false)]]) : ""));
-            } else if ($Data['FreeTorrent'] == '13') {
+            } else if ($Data['FreeTorrent'] == self::ThreeFourthOff) {
                 $Info[] = Format::torrent_label('-75%', 'bg torrent_discount three_fourth_off', ($Data['FreeEndTime'] ? t('server.torrents.free_left', ['Values' => [time_diff($Data['FreeEndTime'], 2, false)]]) : ""));
             }
         }
@@ -1461,8 +1484,8 @@ WHERE ud.TorrentID=? AND ui.NotifyOnDeleteDownloaded='1' AND ud.UserID NOT IN ({
 
         return (G::$LoggedUser['FLTokens'] >= 1
             && !$Torrent['PersonalFL']
-            && (in_array($Torrent['FreeTorrent'], ['11', '12', '13']) || empty($Torrent['FreeTorrent']))
-            && G::$LoggedUser['CanLeech'] == '1');
+            && (in_array($Torrent['FreeTorrent'], [self::OneFourthOff, self::TwoFourthOff, self::ThreeFourthOff]) || empty($Torrent['FreeTorrent']))
+            && G::$LoggedUser['CanLeech'] == self::FREE);
     }
 
     /**
@@ -1969,16 +1992,16 @@ WHERE ud.TorrentID=? AND ui.NotifyOnDeleteDownloaded='1' AND ud.UserID NOT IN ({
     public static function build_irc_msg($UploaderName, $Torrent) {
         $Freeleech = '';
         switch ($Torrent['FreeTorrent']) {
-            case 1:
+            case self::FREE:
                 $Freeleech = 'Freeleech!';
                 break;
-            case 11:
+            case self::OneFourthOff:
                 $Freeleech = '25% off!';
                 break;
-            case 12:
+            case self::ThreeFourthOff:
                 $Freeleech = '50% off!';
                 break;
-            case 13:
+            case self::ThreeFourthOff:
                 $Freeleech = '75% off!';
                 break;
         }
@@ -2035,7 +2058,14 @@ WHERE ud.TorrentID=? AND ui.NotifyOnDeleteDownloaded='1' AND ud.UserID NOT IN ({
         }
     }
     public static function freeleech_option() {
-        return array(0 => "Normal", 1 => "Free", 2 => "Neutral", 11 => "-25%", 12 => "-50%", 13 => "-75%");
+        return array(
+            self::Normal => "Normal",
+            self::FREE => "Free",
+            self::Neutral => "Neutral",
+            self::OneFourthOff => "-25%",
+            self::TwoFourthOff => "-50%",
+            self::ThreeFourthOff => "-75%"
+        );
     }
 
     public static function global_freeleech() {
@@ -2043,7 +2073,7 @@ WHERE ud.TorrentID=? AND ui.NotifyOnDeleteDownloaded='1' AND ud.UserID NOT IN ({
     }
 
     public static function torrent_freeleech($Torrent) {
-        return $Torrent['FreeTorrent'] == 1 || self::global_freeleech();
+        return $Torrent['FreeTorrent'] == self::FREE || self::global_freeleech();
     }
     public static function torrent_freetype($Torrent) {
         if (self::global_freeleech()) {

@@ -264,7 +264,6 @@ class TorrentTableView {
         $GroupID = $Group['ID'];
         $GroupCategoryID = $Group['CategoryID'];
         $TorrentID = $Torrent['ID'];
-        $Size = $Torrent['Size'];
         $Seeders = $Torrent['Seeders'];
         $TorrentTime = $Torrent['Time'];
         $Subtitles = $Torrent['Subtitles'];
@@ -409,7 +408,7 @@ class TorrentTableView {
                 <? if (!$ReadOnly) { ?>
                     <div class="TorrentDetail-ratioCalc">
                         <?
-                        $NewRatio = Format::get_ratio_html(G::$LoggedUser['BytesUploaded'], G::$LoggedUser['BytesDownloaded'] + $Size);
+                        $NewRatio = Format::get_ratio_html(G::$LoggedUser['BytesUploaded'], G::$LoggedUser['BytesDownloaded'] + Torrents::get_actual_size($Torrent));
                         ?>
                         <?= t('server.torrents.if_you_download_this', ['Values' => [$NewRatio]]) ?>
                     </div>
