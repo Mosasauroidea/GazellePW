@@ -400,6 +400,9 @@ View::show_header(t('server.torrents.header'), 'browse', 'PageTorrentHome');
                             <option class="Select-option" value="snatched" <? Format::selected('order_by', 'snatched') ?>><?= t('server.common.snatched') ?></option>
                             <option class="Select-option" value="seeders" <? Format::selected('order_by', 'seeders') ?>><?= t('server.common.seeders') ?></option>
                             <option class="Select-option" value="leechers" <? Format::selected('order_by', 'leechers') ?>><?= t('server.common.leechers') ?></option>
+                            <option class="Select-option" value="doubanrating" <? Format::selected('order_by', 'doubanrating') ?>><?= t('server.common.douban_rating') ?></option>
+                            <option class="Select-option" value="imdbrating" <? Format::selected('order_by', 'imdbrating') ?>><?= t('server.common.imdb_rating') ?></option>
+                            <option class="Select-option" value="rtrating" <? Format::selected('order_by', 'rtrating') ?>><?= t('server.common.rt_rating') ?></option>
                             <option class="Select-option" value="random" <? Format::selected('order_by', 'random') ?>><?= t('server.torrents.random') ?></option>
                         </select>
                         <select class="Input" name="order_way">

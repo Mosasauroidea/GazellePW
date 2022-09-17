@@ -622,8 +622,9 @@ View::show_header($ArtistHeaderName, 'browse,bbcode,comments,voting,recommend,su
                         </div>
                     </div>
                     <div class="Box-headerActions">
-                        <a href="#" onclick="$('.torrent_table_<?= $ReleaseType ?>').gtoggle(true); return false;">
-                            <?= t('server.artist.view') ?>
+                        <a href="#" onclick="globalapp.toggleAny(event, '.torrent_table_<?= $ReleaseType ?>');return false;">
+                            <span class="u-toggleAny-show u-hidden"><?= t('server.common.show') ?></span>
+                            <span class="u-toggleAny-hide"><?= t('server.common.hide') ?></span>
                         </a>
                     </div>
                 </div>

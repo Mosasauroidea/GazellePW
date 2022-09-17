@@ -21,7 +21,10 @@ class TorrentSearch {
         'seeders' => 'seeders',
         'leechers' => 'leechers',
         'snatched' => 'snatched',
-        'random' => 1
+        'random' => 1,
+        'rtrating' => 'rtrating',
+        'imdbrating' => 'imdbrating',
+        'doubanrating' => 'doubanrating',
     );
 
     /**
@@ -34,6 +37,9 @@ class TorrentSearch {
         'seeders' => 'sumseeders',
         'leechers' => 'sumleechers',
         'snatched' => 'sumsnatched',
+        'rtrating' => 'rtrating',
+        'imdbrating' => 'imdbrating',
+        'doubanrating' => 'doubanrating',
         'random' => 1
     );
 
