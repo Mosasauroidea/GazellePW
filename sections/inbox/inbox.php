@@ -78,12 +78,7 @@ View::show_header(($Section === 'sentbox' ? t('server.inbox.sentbox') : t('serve
 
             ?>
         </div>
-        <div class="BodyNavLinks">
-            <?
-            $Pages = Format::get_pages($Page, $NumResults, CONFIG['MESSAGES_PER_PAGE'], 9);
-            echo "$Pages";
-            ?>
-        </div>
+
     </div>
 
     <div class="BodyContent">
@@ -131,6 +126,12 @@ View::show_header(($Section === 'sentbox' ? t('server.inbox.sentbox') : t('serve
             <? if ($Count == 0) { ?>
                 <div class="center"><?= t('server.inbox.no_results') ?></div>
             <? } else { ?>
+                <div class="BodyNavLinks">
+                    <?
+                    $Pages = Format::get_pages($Page, $NumResults, CONFIG['MESSAGES_PER_PAGE'], 9);
+                    echo "$Pages";
+                    ?>
+                </div>
                 <form class="u-vstack manage_form" name="messages" action="inbox.php" method="post" id="messageform">
                     <input type="hidden" name="action" value="masschange" />
                     <input type="hidden" name="auth" value="<?= $LoggedUser['AuthKey'] ?>" />

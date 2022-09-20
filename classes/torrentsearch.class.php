@@ -437,6 +437,11 @@ class TorrentSearch {
                     return;
                 }
                 break;
+            case 'checked':
+                if (!$this->search_checked($Value)) {
+                    return;
+                }
+                break;
             case 'rtrating':
                 if (!$this->search_rtrating($Value)) {
                     return;
@@ -697,6 +702,14 @@ class TorrentSearch {
         }
         return true;
     }
+    private function search_checked($Term) {
+        if ($Term == 1) {
+            $this->SphQL->where_gt('checked', 1, true);
+        } else {
+            $this->SphQL->where('checked', 0);
+        }
+        $this->UsedTorrentAttrs['checked'] = $Term;
+    }
     private function search_doubanrating($Term) {
         $DoubanRatings = explode('-', $Term);
         if (count($DoubanRatings) === 1 && is_numeric($DoubanRatings[0])) {
@@ -949,7 +962,7 @@ class TorrentSearch {
             }
         }
         if (isset($this->UsedTorrentAttrs['checked'])) {
-            if ((int)$Torrent['Checked'] != (int)$Torrent['Checked']) {
+            if ($this->UsedTorrentAttrs['checked'] != (int)$Torrent['Checked']) {
                 return false;
             }
         }

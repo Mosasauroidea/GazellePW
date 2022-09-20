@@ -50,6 +50,7 @@ export default defineConfig({
         'src/js/globalapp/index.js',
         'src/js/pages/sitehistory/index.js',
         'src/js/pages/upload/index.js',
+        'src/js/pages/imgupload/index.js',
         'src/js/pages/torrents/index.js',
         'src/js/pages/home.jsx',
         'src/js/pages/userEdit.js',

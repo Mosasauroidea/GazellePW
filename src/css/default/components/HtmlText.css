@@ -42,6 +42,10 @@ HtmlText mdx
   list-style-type: disc;
 }
 
+.HtmlText ol {
+  list-style-type: decimal;
+}
+
 .HtmlText li {
   padding: 0;
 }

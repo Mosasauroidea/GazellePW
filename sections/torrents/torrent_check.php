@@ -36,6 +36,7 @@ $Checked = intval($_GET['checked']);
 $Cache->cache_value("torrent_checked_$TorrentID", $Checked ? $LoggedUser['ID'] : 0);
 $DB->query("UPDATE `torrents` SET `Checked`=" . ($Checked ? $LoggedUser['ID'] : 0) . " WHERE `ID`=$TorrentID");
 $GroupID = Torrents::torrentid_to_groupid($TorrentID);
+Torrents::update_hash($GroupID);
 G::$Cache->delete_value("torrent_group_$GroupID");
 G::$Cache->delete_value("torrents_details_$GroupID");
 $DB->query("insert into torrents_check (UserID, TorrentID, Type) values (" . $LoggedUser['ID'] . ", $TorrentID, " . ($Checked ? "1" : "0") . ")");

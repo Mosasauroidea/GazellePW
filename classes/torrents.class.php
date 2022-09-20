@@ -928,7 +928,7 @@ WHERE ud.TorrentID=? AND ui.NotifyOnDeleteDownloaded='1' AND ud.UserID NOT IN ({
                 REPLACE(Language, ',', ' '),
                 IMDBID, Resolution, Container, Source, Codec, 
                 REPLACE(Subtitles, ',', ' '),
-                Diy, Buy, ChineseDubbed, SpecialSub, Checked
+                Diy, Buy, ChineseDubbed, SpecialSub, Checked 
 			FROM torrents AS t
 				JOIN torrents_group AS g ON g.ID = t.GroupID
                 LEFT JOIN torrents_tags AS tt ON tt.GroupID = g.ID

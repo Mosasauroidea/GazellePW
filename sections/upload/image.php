@@ -68,4 +68,4 @@ View::show_header(t('server.upload.image_host'), '', 'PageImageHost');
     </div>
 </div>
 <?
-View::show_footer([], 'upload/imageUpload.js');
+View::show_footer([], 'imgupload/index.js');
