@@ -413,14 +413,16 @@ class TorrentTableView {
                         <?= t('server.torrents.if_you_download_this', ['Values' => [$NewRatio]]) ?>
                     </div>
                 <? } ?>
-                <div class="TorrentDetail-trumpable">
-                    <span class="TorrentDetail-trumpableTitle">
-                        <?= t('server.torrents.trumpable_reason') ?>:
-                    </span>
-                    <span class="TorrentDetail-trumpableMessage">
-                        <?= $TrumpableMsg ?>
-                    </span>
-                </div>
+                <? if ($TrumpableMsg) { ?>
+                    <div class="TorrentDetail-trumpable">
+                        <span class="TorrentDetail-trumpableTitle">
+                            <?= t('server.torrents.trumpable_reason') ?>:
+                        </span>
+                        <span class="TorrentDetail-trumpableMessage">
+                            <?= $TrumpableMsg ?>
+                        </span>
+                    </div>
+                <? } ?>
                 <div class="ButtonGroup TorrentDetail-postMessageList">
                     <?
                     if (

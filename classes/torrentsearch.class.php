@@ -962,7 +962,10 @@ class TorrentSearch {
             }
         }
         if (isset($this->UsedTorrentAttrs['checked'])) {
-            if ($this->UsedTorrentAttrs['checked'] != (int)$Torrent['Checked']) {
+            if ($Torrent['Checked'] > 0 && $this->UsedTorrentAttrs['checked'] == 0) {
+                return false;
+            }
+            if ($Torrent['Checked'] == 0 && $this->UsedTorrentAttrs['checked'] == 1) {
                 return false;
             }
         }

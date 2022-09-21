@@ -5539,7 +5539,7 @@ server.torrents.uhd_untouched_title: |-
 server.torrents.unchecked_torrents: |-
   未检查
 server.torrents.unchecked_torrents_results_note: |-
-  （%s个未检查）
+  （共%s个未检查）
 server.torrents.checking_status: |-
   检查状态
 server.torrents.checked_torrents: |-

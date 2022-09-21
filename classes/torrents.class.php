@@ -1368,7 +1368,7 @@ WHERE ud.TorrentID=? AND ui.NotifyOnDeleteDownloaded='1' AND ud.UserID NOT IN ({
         if ($Torrent['FilePath']) {
             return $Torrent['FilePath'];
         }
-        $FileList = explode("\n", $Torrent['FileList']);
+        $FileList = explode("\n", display_str($Torrent['FileList']));
         $FileInfo = Torrents::filelist_get_file($FileList[0]);
         return $FileInfo['name'];
     }

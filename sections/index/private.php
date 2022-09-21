@@ -494,7 +494,7 @@ View::show_header(t('server.index.index'), 'comments', 'PageHome');
         );
         if (count($Data) > 0) {
         ?>
-            <div class="IndexTop10Movie Box">
+            <div class="IndexTop10Movie Box is-noBorder">
                 <div class="Box-header">
                     <div class="Box-headerTitle">
                         <?= t('server.index.popular_movies') ?>

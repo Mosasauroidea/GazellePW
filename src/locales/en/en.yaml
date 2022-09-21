@@ -5622,7 +5622,7 @@ server.torrents.unchecked_torrents: |-
 server.torrents.checking_status: |-
   Checking status
 server.torrents.unchecked_torrents_results_note: |-
-  (%d unchecked)
+  (%d unchecked total)
 server.torrents.checked_torrents: |-
   Checked
 server.torrents.undo_delete: |-
