@@ -529,14 +529,18 @@ View::show_header(t('server.index.index'), 'comments', 'PageHome');
                 <div id="news<?= $NewsID ?>" class="Post news_post ">
                     <div class="Post-header">
                         <div class="Post-headerLeft">
-                            <a class="Post-headerTitle HtmlText  <?= $IsSticky ? 'is-sticky' : '' ?>" href="#" onclick="$('#newsbody<?= $NewsID ?>').gtoggle(); return false;">
+                            <div class="Post-headerTitle HtmlText  <?= $IsSticky ? 'is-sticky' : '' ?>" href="#">
                                 <?= Text::full_format($Title) ?>
-                            </a>
+                            </div>
                         </div>
                         <div class="Post-headerActions">
                             <?= time_diff($NewsTime); ?>
                             - <a class="brackets" href="forums.php?action=viewthread&amp;threadid=<?= $NewsID ?>">
                                 <?= t('server.index.discuss') ?>
+                            </a>
+                            - <a href="#" onclick="globalapp.toggleAny(event, '#newsbody<?= $NewsID ?>');return false;">
+                                <span class="u-toggleAny-show u-hidden"><?= t('server.common.show') ?></span>
+                                <span class="u-toggleAny-hide"><?= t('server.common.hide') ?></span>
                             </a>
                         </div>
 
