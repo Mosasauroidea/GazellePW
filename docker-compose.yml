@@ -2,7 +2,7 @@ version: '3'
 
 services:
   web:
-    image: gpw-web
+    build: .
     container_name: gpw-web
     ports:
       - 9000:80
