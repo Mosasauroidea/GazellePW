@@ -6025,6 +6025,10 @@ server.user.anyone: |-
   任意
 server.user.api_key: |-
   API 密钥
+server.user.api_note: |-
+  重置您的 API 密钥。您必须在使用旧 API 的所有应用程序中更新 API。
+server.user.api_copy: |-
+ 复制到剪贴板
 server.user.are_you_sure_delete_notification_filter: |-
   你确定要删除这个推送过滤器吗？
 server.user.are_you_sure_you_want_to_delete_this_invite: |-
@@ -6395,6 +6399,8 @@ server.user.ip_address: |-
   IP 地址
 server.user.ip_history: |-
   IP 历史
+server.user.api: |-
+  接口密钥
 server.user.irc: |-
   IRC
 server.user.irc_no: |-
@@ -6893,6 +6899,10 @@ server.user.st_2fa_period: |-
   两步验证。
 server.user.st_access: |-
   访问设置
+server.user.st_token_settings: |-
+  接口令牌设置
+server.user.st_token_settings_description: |-
+  与 API 令牌相关的设置，以便与 GPW API 进行交互
 server.user.st_access_title: |-
   这些设置控制着你登录和访问 {{CONFIG['SITE_NAME']}} 时的具体细节，包括 IRC 以及 tracker。
 server.user.st_all: |-
