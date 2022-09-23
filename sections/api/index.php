@@ -13,7 +13,8 @@ $available = [
     'request',
     'artist',
     'collage',
-    'torrent'
+    'torrent',
+    "upload"
 ];
 
 if (in_array($_GET['action'], $available)) {
@@ -28,25 +29,24 @@ if (in_array($_GET['action'], $available)) {
     json_error('invalid action');
 }
 
-if (empty($_GET['aid']) || empty($_GET['token'])) {
+if (empty($_GET['api_key'])) {
     json_error('invalid parameters');
 }
 
-$app_id = intval($_GET['aid']);
-$token = $_GET['token'];
+$token = $_GET['api_key'];
 
-$app = $Cache->get_value("api_apps_{$app_id}");
+$app = $Cache->get_value("api_apps_{$token}");
 if (!is_array($app)) {
     $DB->prepared_query("
-        SELECT Token, Name
+        SELECT Token, Name, UserID
         FROM api_applications
-        WHERE ID = ?
-        LIMIT 1", $app_id);
+        WHERE Token = ?
+        LIMIT 1", $token);
     if ($DB->record_count() === 0) {
-        json_error('invalid app');
+        json_error('invalid token');
     }
     $app = $DB->to_array(false, MYSQLI_ASSOC);
-    $Cache->cache_value("api_apps_{$app_id}", $app, 0);
+    $Cache->cache_value("api_apps_{$token}", $app, 0);
 }
 $app = $app[0];
 
