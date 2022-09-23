@@ -230,6 +230,9 @@ switch ($_REQUEST['action']) {
     case 'dupes':
         include('manage_linked.php');
         break;
+    case 'token':
+        include("token.php");
+        break;
     default:
         if (isset($_REQUEST['id'])) {
             include(CONFIG['SERVER_ROOT'] . '/sections/user/user.php');

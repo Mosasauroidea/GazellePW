@@ -153,6 +153,74 @@ if (isset($_POST['p_donor_stats'])) {
 // End building $Paranoia
 
 
+// API Key Helpers
+
+function doesUserHasToken(int $UserID, $DB): bool {
+    return $DB->scalar("
+        SELECT 1
+        FROM api_applications
+        WHERE UserID = $UserID"
+    ) === 1;
+}
+
+function hasApiToken(int $userId, string $token, $DB): bool {
+    return $DB->scalar("
+        SELECT 1
+        FROM api_applications
+        WHERE UserID = $userId
+            AND Token = '$token'"
+    ) === 1;
+}
+
+function revokeApiTokenById(int $UserID, $DB): int {
+    $DB->prepared_query("
+        DELETE FROM api_applications
+        WHERE UserID = ? ", $UserID
+    );
+    return $DB->affected_rows();
+}
+
+function createApiToken(int $UserID, string $key, $DB): string {
+    $suffix = sprintf('%014d', $UserID);
+    $name = "API_TOKEN";
+
+    while (true) {
+        // prevent collisions with an existing token name
+        $token = base64UrlEncode(encrypt(random_bytes(32) . $suffix, $key));
+        if (!hasApiToken($UserID, $token, $DB))
+            break;
+    }
+
+    $DB->prepared_query("
+        INSERT INTO api_applications
+               (UserID, Name, Token)
+        VALUES (?,       ?,    ?)", $UserID, $name, $token
+    );
+    return $token;
+}
+
+function encrypt($plaintext, $key): string {
+    $iv_size = openssl_cipher_iv_length('AES-128-CBC');
+    $iv = openssl_random_pseudo_bytes($iv_size);
+    return base64_encode($iv.openssl_encrypt($plaintext, 'AES-128-CBC', $key,
+        OPENSSL_RAW_DATA, $iv));
+}
+
+function base64UrlEncode($data): string {
+    return rtrim(strtr(base64_encode($data), '+/', '-_'), '=');
+}
+// API Key Helpers
+
+// Reset API Key
+if(isset($_POST["resetApiKey"])){
+
+    if (doesUserHasToken($UserID, $DB)) {
+        // User has already created a token. We'll delete the entry here.
+        revokeApiTokenById($UserID, $DB);
+    }
+    createApiToken($UserID, CONFIG['ENCKEY'], $DB);
+}
+
 // Email change
 $DB->query("
 	SELECT Email
