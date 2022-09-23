@@ -7,6 +7,7 @@ use Gazelle\Torrent\Language;
 use Gazelle\Torrent\TorrentSlot;
 use Gazelle\Torrent\TorrentSlotType;
 use Illuminate\Support\Facades\File;
+use Gazelle\Util\Time;
 
 class Torrents {
     const FILELIST_DELIM = 0xF7; // Hex for &divide; Must be the same as phrase_boundary in manticore.conf!
@@ -586,6 +587,16 @@ class Torrents {
 				(GroupID, TorrentID, UserID, Info, Time, Hidden)
 			VALUES
 				($GroupID, $TorrentID, $UserID, '" . db_string($Message) . "', '" . sqltime() . "', $Hidden)");
+        G::$DB->set_query_id($QueryID);
+    }
+
+    public static function write_group_log_with_time($GroupID, $TorrentID, $UserID, $Message, $Hidden) {
+        $QueryID = G::$DB->get_query_id();
+        G::$DB->query("
+			INSERT INTO group_log
+				(GroupID, TorrentID, UserID, Info, Time, Hidden)
+			VALUES
+				($GroupID, $TorrentID, $UserID, '" . db_string($Message) . "', '" . Time::sqlTime() . "', $Hidden)");
         G::$DB->set_query_id($QueryID);
     }
 

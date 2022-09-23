@@ -5,6 +5,7 @@ use Mailgun\Mailgun;
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
+use Gazelle\Util\Time;
 
 class Misc {
     /**
@@ -491,6 +492,20 @@ class Misc {
         G::$DB->query("
 			INSERT INTO log (Message, Time)
 			VALUES ('" . db_string($Message) . "', '" . sqltime() . "')");
+        G::$DB->set_query_id($QueryID);
+    }
+
+    /*
+     * Write a message to the system log using Time
+     *
+     * @param string $Message the message to write.
+     */
+    public static function write_log_with_time($Message) {
+        global $Time;
+        $QueryID = G::$DB->get_query_id();
+        G::$DB->query("
+			INSERT INTO log (Message, Time)
+			VALUES ('" . db_string($Message) . "', '" . Time::sqlTime() . "')");
         G::$DB->set_query_id($QueryID);
     }
 
