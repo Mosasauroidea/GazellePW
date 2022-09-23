@@ -51,6 +51,13 @@ if (!is_array($Paranoia)) {
     $Paranoia = array();
 }
 
+// Fetching API Token
+$apiToken = $DB->query("
+    SELECT Token FROM api_applications
+    WHERE UserID = $UserID",  
+);
+list($apiToken) = $DB->next_record();
+
 function paranoia_level($Setting) {
     global $Paranoia;
     // 0: very paranoid; 1: stats allowed, list disallowed; 2: not paranoid
@@ -133,6 +140,11 @@ echo $Val->GenerateJS('userform');
                         <li class="SidebarList-item">
                             <a class="Link" href="#access_settings" data-tooltip="<?= t('server.user.st_access_title') ?>">
                                 <?= t('server.user.st_access') ?>
+                            </a>
+                        </li>
+                        <li class="SidebarList-item">
+                            <a class="Link" href="#token_settings" data-tooltip="<?= t('server.user.st_token_settings_description') ?>">
+                                <?= t('server.user.st_token_settings') ?>
                             </a>
                         </li>
                         <li class="SidebarList-item">
@@ -1120,6 +1132,30 @@ echo $Val->GenerateJS('userform');
                                 <?= t('server.user.st_2fa_note1') ?> <strong class="<?= $TwoFAKey ? 'u-colorSuccess' : 'u-colorWarning'; ?>"><?= $TwoFAKey ? t('server.user.st_2fa_enabled') : t('server.user.st_2fa_disabled'); ?></strong>
                                 <a class="Link" href="user.php?action=2fa&do=<?= $TwoFAKey ? 'disable' : 'enable'; ?>&userid=<?= $UserID ?>"><?= t('server.user.st_2fa_note3') . ($TwoFAKey ? t('server.user.st_2fa_disable') : t('server.user.st_2fa_enable')) . t('server.user.st_2fa_after') ?></a>
                             </div>
+                        </td>
+                    </tr>
+
+                </table>
+
+                <table class="Form-rowList" variant="header" id="token_settings">
+                    <tr class="Form-rowHeader">
+                        <td class="Form-title" colspan="2">
+                            <?= t('server.user.st_token_settings') ?>
+                        </td>
+                    </tr>
+                    <tr class="Form-row" id="api_token">
+                        <td class="Form-label" ><strong><?= t('server.user.api') ?></strong></td>
+                        <td class="Form-inputs">
+                            <div>
+                                <input id="input-resetApiKey" type="checkbox" name="resetApiKey" id="resetApiKey" />
+                                <label for="input-resetApiKey"><?= t('server.user.api_note') ?></label>
+                            </div>
+                        <?php if (isset($apiToken)){ ?>
+                            <div class="FormOneLine">
+                                <input class="Input" type="text" size="50" disabled  name="api_token_value" id="api_token_value" value="<?php echo "$apiToken" ?>" />
+                                <!-- <input class="Button" type="button" onclick="copy('#api_token_value');" value="<?= t('server.user.api_copy') ?>" /> -->
+                            </div>
+                        <?php } ?>
                         </td>
                     </tr>
                 </table>
