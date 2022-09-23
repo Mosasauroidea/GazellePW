@@ -1,4 +1,7 @@
 <?
+
+use Gazelle\Util\Time;
+
 class Artists {
 
     const Director = 1;
@@ -286,7 +289,7 @@ class Artists {
             G::$DB->prepared_query("INSERT INTO wiki_artists
 							(PageID, Body, MainBody, Image, UserID, Summary, Time, IMDBID, Name, SubName)
 						VALUES
-							(?,?,?,?,?,?,?,?,?,?)", $ArtistID, $Body, $MainBody, $Image, $UserID, $Summary, sqltime(), $IMDBID, $Name, $SubName);
+							(?,?,?,?,?,?,?,?,?,?)", $ArtistID, $Body, $MainBody, $Image, $UserID, $Summary, Time::sqltime(), $IMDBID, $Name, $SubName);
             $RevisionID = G::$DB->inserted_id();
             G::$DB->prepared_query("UPDATE artists_group SET RevisionID = ? WHERE ArtistID = ?", $RevisionID, $ArtistID);
             if ($New) {

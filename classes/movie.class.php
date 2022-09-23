@@ -2,6 +2,7 @@
 
 use Curl\MultiCurl;
 use Curl\Curl;
+use Gazelle\Util\Time;
 
 class MOVIE {
     public static function get_omdb_data($IMDBID, $Refresh = false) {
@@ -241,7 +242,7 @@ class MOVIE {
                     $TMDBID = $value['TMDBID'] ? $value['TMDBID'] : 'null';
                     $TMDBData = $value['TMDBData'] ? $value['TMDBData'] : '';
                     $MainTMDBData = $value['MainTMDBData'] ? $value['MainTMDBData'] : '';
-                    $SQL[] = "('" . $key . "', " . $TMDBID . ", '" . db_string($TMDBData) . "', '" . db_string($MainTMDBData) . "', '" . sqltime() . "', " . "'" . sqltime() . "')";
+                    $SQL[] = "('" . $key . "', " . $TMDBID . ", '" . db_string($TMDBData) . "', '" . db_string($MainTMDBData) . "', '" . Time::sqltime() . "', " . "'" . Time::sqltime() . "')";
                 }
                 $FinalSQL = implode(',', $SQL);
                 G::$DB->query(
