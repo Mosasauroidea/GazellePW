@@ -6517,6 +6517,12 @@ server.user.ip_address: |-
   IP address
 server.user.ip_history: |-
   IP history
+server.user.api: |-
+ API Key
+server.user.api_note: |-
+  Reset your api key. You'll have to update the api in all applications that uses the old one.
+server.user.api_copy: |-
+ Copy to clipboard
 server.user.irc: |-
   IRC
 server.user.irc_no: |-
@@ -7015,6 +7021,10 @@ server.user.st_2fa_note3: |-
   Click here to&nbsp;
 server.user.st_2fa_period: |-
   Two-factor Authentication.&nbsp;
+server.user.st_token_settings: |-
+  API Token Settings
+server.user.st_token_settings_description: |-
+  Settings related to API token to interact with GPW APIs
 server.user.st_access: |-
   Access Settings
 server.user.st_access_title: |-
