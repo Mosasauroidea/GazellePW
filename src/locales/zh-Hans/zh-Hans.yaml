@@ -6754,7 +6754,7 @@ server.user.ratio: |-
 server.user.ratio_watch: |-
   分享率监控
 server.user.ratio_watch_text: |-
-  此用户当前正处于分享率监控重，在%s前必须上传%s，否则他的下载权限会被封禁， 列入分享率监控时之后新增的下载量为：%s
+  此用户当前正处于分享率监控中，其必须上传%s（在%s前），否则其下载权限会被封禁， 列入分享率监控后新增的下载量为：%s
 server.user.reason: |-
   原因
 server.user.reason_title: |-

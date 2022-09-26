@@ -23,15 +23,19 @@ export default function mediainfoAutofill(text) {
 
   for (const [key, value] of Object.entries(fields)) {
     const selector = `#${key}`
-    if (isString(value)) {
-      // 当选择自动填充的时候才修改
-      if ($(selector).val() === '' && !$(selector).prop('disabled')) {
-        $(selector).val(value)
+    try {
+      if (isString(value)) {
+        // 当选择自动填充的时候才修改
+        if ($(selector).val() === '' && !$(selector).prop('disabled')) {
+          $(selector).val(value)
+        }
+      } else if (isBoolean(value)) {
+        $(selector).prop('checked', value)
+      } else if (value === SHOW) {
+        $(selector).show()
       }
-    } else if (isBoolean(value)) {
-      $(selector).prop('checked', value)
-    } else if (value === SHOW) {
-      $(selector).show()
+    } catch (error) {
+      console.log('invalid selector: ' + error.message)
     }
   }
 
