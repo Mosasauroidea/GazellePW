@@ -19,7 +19,7 @@ class MOVIE {
             if ($curl->error) {
             } else {
                 $OMDBData = json_encode($curl->response, JSON_UNESCAPED_UNICODE);
-                G::$DB->query("INSERT INTO movie_info_cache (IMDBID, OMDBData, OMDBTime) VALUES('$IMDBID', '" . db_string($OMDBData) . "', '" . sqlTime() . "')  ON DUPLICATE KEY UPDATE OMDBData='" . db_string($OMDBData) . "', OMDBTime='" . sqlTime() . "'");
+                G::$DB->query("INSERT INTO movie_info_cache (IMDBID, OMDBData, OMDBTime) VALUES('$IMDBID', '" . db_string($OMDBData) . "', '" . Time::sqlTime() . "')  ON DUPLICATE KEY UPDATE OMDBData='" . db_string($OMDBData) . "', OMDBTime='" . Time::sqlTime() . "'");
                 // query again? db_string escape?
                 G::$DB->query("SELECT OMDBData
                 FROM movie_info_cache
@@ -53,7 +53,7 @@ class MOVIE {
                 if ($curl->response && $curl->response->data && $curl->response->data->douban) {
                     $DoubanID = $curl->response->data->douban->id;
                     $IMDBID = $curl->response->data->imdb->id;
-                    G::$DB->query("INSERT INTO movie_info_cache (IMDBID, DoubanData, DoubanTime, DoubanID) VALUES('$IMDBID', '" . db_string($DoubanData) . "', '" . sqlTime() . "', $DoubanID)  ON DUPLICATE KEY UPDATE DoubanData=VALUES(DoubanData), DoubanTime=VALUES(DoubanTime), DoubanID=VALUES(DoubanID)");
+                    G::$DB->query("INSERT INTO movie_info_cache (IMDBID, DoubanData, DoubanTime, DoubanID) VALUES('$IMDBID', '" . db_string($DoubanData) . "', '" . Time::sqlTime() . "', $DoubanID)  ON DUPLICATE KEY UPDATE DoubanData=VALUES(DoubanData), DoubanTime=VALUES(DoubanTime), DoubanID=VALUES(DoubanID)");
                     G::$DB->query("SELECT DoubanData 
                     FROM movie_info_cache
                     WHERE DoubanID='$DoubanID'");
@@ -98,7 +98,7 @@ class MOVIE {
                 } else {
                     $DoubanID = 'null';
                 }
-                G::$DB->query("INSERT INTO movie_info_cache (IMDBID, DoubanData, DoubanTime, DoubanID) VALUES('$IMDBID', '" . db_string($DoubanData) . "', '" . sqlTime() . "', $DoubanID)  ON DUPLICATE KEY UPDATE DoubanData=VALUES(DoubanData), DoubanTime=VALUES(DoubanTime), DoubanID=VALUES(DoubanID)");
+                G::$DB->query("INSERT INTO movie_info_cache (IMDBID, DoubanData, DoubanTime, DoubanID) VALUES('$IMDBID', '" . db_string($DoubanData) . "', '" . Time::sqlTime() . "', $DoubanID)  ON DUPLICATE KEY UPDATE DoubanData=VALUES(DoubanData), DoubanTime=VALUES(DoubanTime), DoubanID=VALUES(DoubanID)");
                 G::$DB->query("SELECT DoubanData 
                 FROM movie_info_cache
                 WHERE IMDBID='$IMDBID'");
@@ -333,7 +333,7 @@ class MOVIE {
             $IMDBActorInfo['Composers'] = $IMDBResult->composer();
             $IMDBActorInfo['Cinematographers'] = $IMDBResult->cinematographer();
             $IMDBActorData = json_encode($IMDBActorInfo, JSON_UNESCAPED_UNICODE);
-            G::$DB->query("INSERT INTO movie_info_cache (IMDBID, IMDBActorData, IMDBActorTime) VALUES('$IMDBID', '" . db_string($IMDBActorData) . "', '" . sqlTime() . "')  ON DUPLICATE KEY UPDATE IMDBActorData=VALUES(IMDBActorData), IMDBActorTime=VALUES(IMDBActorTime)");
+            G::$DB->query("INSERT INTO movie_info_cache (IMDBID, IMDBActorData, IMDBActorTime) VALUES('$IMDBID', '" . db_string($IMDBActorData) . "', '" . Time::sqlTime() . "')  ON DUPLICATE KEY UPDATE IMDBActorData=VALUES(IMDBActorData), IMDBActorTime=VALUES(IMDBActorTime)");
             G::$DB->query("SELECT IMDBActorData
             FROM movie_info_cache
             WHERE IMDBID='$IMDBID'");
@@ -384,7 +384,7 @@ class MOVIE {
             if ($curl->error) {
             } else {
                 $OMDBData = json_encode($curl->response, JSON_UNESCAPED_UNICODE);
-                G::$DB->query("INSERT INTO movie_info_cache (IMDBID, MainTMDBData, MainTMDBTime) VALUES('$IMDBID', '" . db_string($MainTMDBData) . "', '" . sqlTime() . "')  ON DUPLICATE KEY UPDATE MAINTMDBData='" . db_string($MainTMDBData) . "', MAINTMDBTime='" . sqlTime() . "'");
+                G::$DB->query("INSERT INTO movie_info_cache (IMDBID, MainTMDBData, MainTMDBTime) VALUES('$IMDBID', '" . db_string($MainTMDBData) . "', '" . Time::sqlTime() . "')  ON DUPLICATE KEY UPDATE MAINTMDBData='" . db_string($MainTMDBData) . "', MAINTMDBTime='" . Time::sqlTime() . "'");
                 // query again? db_string escape?
                 G::$DB->query("SELECT MainTMDBData 
                 FROM movie_info_cache
@@ -441,7 +441,7 @@ class MOVIE {
                         ) VALUES(
                             '$IMDBID', 
                             '" . db_string($IMDBActorData) . "', 
-                            '" . sqlTime() . "'
+                            '" . Time::sqlTime() . "'
                             )  
                             ON DUPLICATE KEY UPDATE 
                             IMDBActorData=VALUES(IMDBActorData), 
@@ -488,7 +488,7 @@ class MOVIE {
         $multi_curl->success(function ($instance) use (&$OMDBData, &$TMDBData, &$MainTMDBData, &$DoubanActorData, $IMDBID) {
             if ($instance->myTag == 'omdb') {
                 $OMDBData = json_encode($instance->response, JSON_UNESCAPED_UNICODE);
-                G::$DB->query("INSERT INTO movie_info_cache (IMDBID, OMDBData, OMDBTime) VALUES('$IMDBID', '" . db_string($OMDBData) . "', '" . sqlTime() . "')  ON DUPLICATE KEY UPDATE OMDBData=VALUES(OMDBData), OMDBTime=VALUES(OMDBTime)");
+                G::$DB->query("INSERT INTO movie_info_cache (IMDBID, OMDBData, OMDBTime) VALUES('$IMDBID', '" . db_string($OMDBData) . "', '" . Time::sqlTime() . "')  ON DUPLICATE KEY UPDATE OMDBData=VALUES(OMDBData), OMDBTime=VALUES(OMDBTime)");
             } else if ($instance->myTag == 'tmdb') {
                 $TMDBData = json_encode($instance->response, JSON_UNESCAPED_UNICODE);
                 if (count($instance->response->movie_results) > 0) {
@@ -496,7 +496,7 @@ class MOVIE {
                 } else {
                     $TMDBID = 'null';
                 }
-                G::$DB->query("INSERT INTO movie_info_cache (IMDBID, TMDBData, TMDBTime, TMDBID) VALUES('$IMDBID', '" . db_string($TMDBData) . "', '" . sqlTime() . "', $TMDBID)  ON DUPLICATE KEY UPDATE TMDBData=VALUES(TMDBData), TMDBTime=VALUES(TMDBTime), TMDBID=VALUES(TMDBID)");
+                G::$DB->query("INSERT INTO movie_info_cache (IMDBID, TMDBData, TMDBTime, TMDBID) VALUES('$IMDBID', '" . db_string($TMDBData) . "', '" . Time::sqlTime() . "', $TMDBID)  ON DUPLICATE KEY UPDATE TMDBData=VALUES(TMDBData), TMDBTime=VALUES(TMDBTime), TMDBID=VALUES(TMDBID)");
                 G::$DB->query(
                     "SELECT 
                         TMDBData
@@ -513,7 +513,7 @@ class MOVIE {
                 } else {
                     $TMDBID = 'null';
                 }
-                G::$DB->query("INSERT INTO movie_info_cache (IMDBID, MainTMDBData, MainTMDBTime, TMDBID) VALUES('$IMDBID', '" . db_string($MainTMDBData) . "', '" . sqlTime() . "', $TMDBID)  ON DUPLICATE KEY UPDATE MainTMDBData=VALUES(MainTMDBData), MainTMDBTime=VALUES(MainTMDBTime), TMDBID=VALUES(TMDBID)");
+                G::$DB->query("INSERT INTO movie_info_cache (IMDBID, MainTMDBData, MainTMDBTime, TMDBID) VALUES('$IMDBID', '" . db_string($MainTMDBData) . "', '" . Time::sqlTime() . "', $TMDBID)  ON DUPLICATE KEY UPDATE MainTMDBData=VALUES(MainTMDBData), MainTMDBTime=VALUES(MainTMDBTime), TMDBID=VALUES(TMDBID)");
                 G::$DB->query(
                     "SELECT 
                        MainTMDBData 
@@ -530,7 +530,7 @@ class MOVIE {
                 } else {
                     $DoubanID = 'null';
                 }
-                G::$DB->query("INSERT INTO movie_info_cache (IMDBID, DoubanActorData, DoubanActorTime, DoubanID) VALUES('$IMDBID', '" . db_string($DoubanActorData) . "', '" . sqlTime() . "', $DoubanID)  ON DUPLICATE KEY UPDATE DoubanActorData=VALUES(DoubanActorData), DoubanActorTime=VALUES(DoubanActorTime), DoubanID=VALUES(DoubanID)");
+                G::$DB->query("INSERT INTO movie_info_cache (IMDBID, DoubanActorData, DoubanActorTime, DoubanID) VALUES('$IMDBID', '" . db_string($DoubanActorData) . "', '" . Time::sqlTime() . "', $DoubanID)  ON DUPLICATE KEY UPDATE DoubanActorData=VALUES(DoubanActorData), DoubanActorTime=VALUES(DoubanActorTime), DoubanID=VALUES(DoubanID)");
                 G::$DB->query(
                     "SELECT 
                        DoubanActorData 
@@ -547,7 +547,7 @@ class MOVIE {
                 } else {
                     $DoubanID = 'null';
                 }
-                G::$DB->query("INSERT INTO movie_info_cache (IMDBID, DoubanData, DoubanTime, DoubanID) VALUES('$IMDBID', '" . db_string($DoubanData) . "', '" . sqlTime() . "', $DoubanID)  ON DUPLICATE KEY UPDATE DoubanData=VALUES(DoubanData), DoubanTime=VALUES(DoubanTime), DoubanID=VALUES(DoubanID)");
+                G::$DB->query("INSERT INTO movie_info_cache (IMDBID, DoubanData, DoubanTime, DoubanID) VALUES('$IMDBID', '" . db_string($DoubanData) . "', '" . Time::sqlTime() . "', $DoubanID)  ON DUPLICATE KEY UPDATE DoubanData=VALUES(DoubanData), DoubanTime=VALUES(DoubanTime), DoubanID=VALUES(DoubanID)");
                 G::$DB->query(
                     "SELECT 
                        DoubanData 
