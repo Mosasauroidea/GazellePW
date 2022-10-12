@@ -498,8 +498,6 @@ class Upload extends AbstractAPI {
         // Torrent
 
         $Slot = TorrentSlot::CalSlot($Properties);
-        echo $LoggedUser["ID"];
-        echo "$LoggedUser[ID]";
 
         $this->db->query(
             "INSERT INTO torrents

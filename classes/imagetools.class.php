@@ -282,6 +282,9 @@ class ImageTools {
             error_log($e->getMessage());
             return "";
         }
+        if (self::$Provider == null) {
+            self::$Provider = new LocalImage();
+        }
         return self::$Provider->upload($Name, $data);
     }
 
