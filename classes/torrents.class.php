@@ -1235,6 +1235,7 @@ WHERE ud.TorrentID=? AND ui.NotifyOnDeleteDownloaded='1' AND ud.UserID NOT IN ({
         $t = [];
         if (!empty($Data['RemasterTitle'])) {
             $EditionInfo = explode(' / ', $Data['RemasterTitle']);
+            sort($EditionInfo);
             $remaster_labels = EditionInfo::allEditionKey(EditionType::Remaster);
             $t = array_filter(
                 $remaster_labels,

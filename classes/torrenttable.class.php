@@ -316,6 +316,28 @@ class TorrentTableView {
 
         <div class="TorrentDetail">
             <div class="TorrentDetail-row is-viewActionsContainer">
+                <div class="ButtonGroup TorrentDetail-postMessageList">
+                    <?
+                    if (
+                        !$ReadOnly &&
+                        (($Seeders == 0  &&
+                            $LastActive != '0000-00-00 00:00:00' &&
+                            time() - strtotime($LastActive) >= 345678 &&
+                            time() - strtotime($LastReseedRequest) >= 864000) ||
+                            check_perms('users_mod'))
+                    ) {
+                    ?><a href="torrents.php?action=reseed&amp;torrentid=<?= $TorrentID ?>&amp;groupid=<?= $GroupID ?>" class="brackets" onclick="return confirm('<?= t('server.torrents.request_re_seed_confirm') ?>');"><?= t('server.torrents.request_re_seed') ?></a>
+                    <?
+                    } ?>
+                    <? if (check_perms('site_moderate_requests')) { ?>
+                        <span class="is-massPM">
+                            <a class="Link" href="torrents.php?action=masspm&amp;id=<?= $GroupID ?>&amp;torrentid=<?= $TorrentID ?>">
+                                <?= t('server.torrents.masspm') ?>
+                            </a>
+                        </span>
+                    <?
+                    } ?>
+                </div>
                 <div class="TorrentDetail-links is-viewActions">
                     <? if (!$ReadOnly) { ?>
                         <a class="Link" href="#" onclick="show_peers('<?= $TorrentID ?>', 0, '<?= $this->DetailView ?>'); return false;"><?= t('server.torrents.view_peer_list') ?></a>
@@ -423,28 +445,7 @@ class TorrentTableView {
                         </span>
                     </div>
                 <? } ?>
-                <div class="ButtonGroup TorrentDetail-postMessageList">
-                    <?
-                    if (
-                        !$ReadOnly &&
-                        (($Seeders == 0  &&
-                            $LastActive != '0000-00-00 00:00:00' &&
-                            time() - strtotime($LastActive) >= 345678 &&
-                            time() - strtotime($LastReseedRequest) >= 864000) ||
-                            check_perms('users_mod'))
-                    ) {
-                    ?><a href="torrents.php?action=reseed&amp;torrentid=<?= $TorrentID ?>&amp;groupid=<?= $GroupID ?>" class="brackets" onclick="return confirm('<?= t('server.torrents.request_re_seed_confirm') ?>');"><?= t('server.torrents.request_re_seed') ?></a>
-                    <?
-                    } ?>
-                    <? if (check_perms('site_moderate_requests')) { ?>
-                        <span class="is-massPM">
-                            <a class="Link" href="torrents.php?action=masspm&amp;id=<?= $GroupID ?>&amp;torrentid=<?= $TorrentID ?>">
-                                <?= t('server.torrents.masspm') ?>
-                            </a>
-                        </span>
-                    <?
-                    } ?>
-                </div>
+
                 <?
                 if (!$ReadOnly) {
                 ?>

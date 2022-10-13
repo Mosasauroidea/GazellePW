@@ -532,10 +532,10 @@ View::show_header(t('server.index.index'), 'comments', 'PageHome');
                             <div class="Post-headerTitle HtmlText  <?= $IsSticky ? 'is-sticky' : '' ?>" href="#">
                                 <?= Text::full_format($Title) ?>
                             </div>
+                            - <?= time_diff($NewsTime); ?>
                         </div>
                         <div class="Post-headerActions">
-                            <?= time_diff($NewsTime); ?>
-                            - <a class="brackets" href="forums.php?action=viewthread&amp;threadid=<?= $NewsID ?>">
+                            <a class="brackets" href="forums.php?action=viewthread&amp;threadid=<?= $NewsID ?>">
                                 <?= t('server.index.discuss') ?>
                             </a>
                             - <a href="#" onclick="globalapp.toggleAny(event, '#newsbody<?= $NewsID ?>');return false;">
