@@ -8,7 +8,6 @@ RUN apt-get update \
     && apt-get install -y --no-install-recommends \
     build-essential \
     ca-certificates \
-    composer \
     cron \
     curl \
     git \
@@ -54,6 +53,9 @@ RUN apt-get update \
 
 # Python tools layer
 RUN pip3 install chardet 
+
+RUN curl -s https://getcomposer.org/installer | php
+RUN mv composer.phar /usr/bin/composer
 
 # Puppeteer layer
 # This installs the necessary packages to run the bundled version of chromium for puppeteer

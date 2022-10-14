@@ -129,10 +129,7 @@ TorrentDetail
 }
 
 .TorrentDetailfileListItem-fileListItem {
-  padding-right: 0px;
-  padding-left: 16px;
-  padding-top: 3px;
-  padding-bottom: 3px;
+  padding: 0px 0px 0px 12px;
 }
 
 .TorrentDetailfileListItem-fileListItem[variant='root'] {
