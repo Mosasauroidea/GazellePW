@@ -294,6 +294,10 @@ class ImageTools {
             $data = file_get_contents($Data['Url']);
             $ContentDatas[] = ['Content' => $data, 'Name' => $Data['Name']];
         }
+        if (self::$Provider == null) {
+            self::$Provider = new LocalImage();
+        }
+        
         return self::$Provider->multi_upload($ContentDatas);
     }
 }
