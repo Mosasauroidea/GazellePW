@@ -15,7 +15,8 @@ $available = [
     'collage',
     'torrent',
     "upload",
-    'movie_info'
+    'movie_info',
+    "imgupload"
 ];
 
 if (in_array($_GET['action'], $available)) {
