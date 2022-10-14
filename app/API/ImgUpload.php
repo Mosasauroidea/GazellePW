@@ -14,28 +14,20 @@ class ImgUpload extends AbstractAPI {
         }
         
         // Checking whether there is an image
-        if (empty($_FILES['images'])) {
+        if (empty($_POST['name']) || empty($_POST['urls'])) {
             $response["Error"] = "Invalid Request";
             return $response;
         }
 
         $user_id = $LoggedUser['UserID'];
-        $names = $_FILES["images"]['name'];
-        $tmp_names = $_FILES["images"]['tmp_name'];
+        $names = $_POST['name'];
+        $urls = $_POST['urls'];
         $Data = [];
         
         for ($i = 0; $i < count($names); $i += 1) {
             $name = $names[$i];
-            $tmp_name = $tmp_names[$i];
-            $extension = strtolower(end(explode(".", $name)));
-            if (!\ImageTools::valid_extension($extension)) {
-                $response["Error"] = "Invalid ext: $extension";
-                $response["name"] = "$name";
-                $response["tmp_name"] = "$tmp_name";
-                return $response;
-            }
-            $path = 'user/' . $user_id . '/' . date('Ymd', time()) . '/' . uniqid() . '.' . $extension;
-            $Data[] = ['Url' => $tmp_name, 'Name' => $path];
+            $url = $urls[$i];
+            $Data[] = ['Url' => $url, 'Name' => $name];
         }
 
         try {
