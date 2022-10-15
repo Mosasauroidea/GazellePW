@@ -155,16 +155,16 @@ if (isset($_POST['p_donor_stats'])) {
 
 // API Key Helpers
 
-function doesUserHasToken(int $UserID, $DB): bool {
-    return $DB->scalar("
+function doesUserHasToken(int $UserID): bool {
+    return G::$DB->scalar("
         SELECT 1
         FROM api_applications
         WHERE UserID = $UserID"
     ) === 1;
 }
 
-function hasApiToken(int $userId, string $token, $DB): bool {
-    return $DB->scalar("
+function hasApiToken(int $userId, string $token): bool {
+    return G::$DB->scalar("
         SELECT 1
         FROM api_applications
         WHERE UserID = $userId
@@ -172,26 +172,26 @@ function hasApiToken(int $userId, string $token, $DB): bool {
     ) === 1;
 }
 
-function revokeApiTokenById(int $UserID, $DB): int {
-    $DB->prepared_query("
+function revokeApiTokenById(int $UserID): int {
+    G::$DB->prepared_query("
         DELETE FROM api_applications
         WHERE UserID = ? ", $UserID
     );
-    return $DB->affected_rows();
+    return G::$DB->affected_rows();
 }
 
-function createApiToken(int $UserID, string $key, $DB): string {
+function createApiToken(int $UserID, string $key): string {
     $suffix = sprintf('%014d', $UserID);
     $name = "API_TOKEN";
 
     while (true) {
         // prevent collisions with an existing token name
         $token = base64UrlEncode(encrypt(random_bytes(32) . $suffix, $key));
-        if (!hasApiToken($UserID, $token, $DB))
+        if (!hasApiToken($UserID, $token))
             break;
     }
 
-    $DB->prepared_query("
+    G::$DB->prepared_query("
         INSERT INTO api_applications
                (UserID, Name, Token)
         VALUES (?,       ?,    ?)", $UserID, $name, $token
@@ -202,8 +202,7 @@ function createApiToken(int $UserID, string $key, $DB): string {
 function encrypt($plaintext, $key): string {
     $iv_size = openssl_cipher_iv_length('AES-128-CBC');
     $iv = openssl_random_pseudo_bytes($iv_size);
-    return base64_encode($iv.openssl_encrypt($plaintext, 'AES-128-CBC', $key,
-        OPENSSL_RAW_DATA, $iv));
+    return base64_encode($iv.openssl_encrypt($plaintext, 'AES-128-CBC', $key, OPENSSL_RAW_DATA, $iv));
 }
 
 function base64UrlEncode($data): string {
@@ -214,11 +213,11 @@ function base64UrlEncode($data): string {
 // Reset API Key
 if(isset($_POST["resetApiKey"])){
 
-    if (doesUserHasToken($UserID, $DB)) {
+    if (doesUserHasToken($UserID)) {
         // User has already created a token. We'll delete the entry here.
-        revokeApiTokenById($UserID, $DB);
+        revokeApiTokenById($UserID);
     }
-    createApiToken($UserID, CONFIG['ENCKEY'], $DB);
+    createApiToken($UserID, CONFIG['ENCKEY']);
 }
 
 // Email change
