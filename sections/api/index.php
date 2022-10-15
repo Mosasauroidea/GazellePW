@@ -1,5 +1,7 @@
 <?php
 
+\ImageTools::init();
+
 function getClassObject($name, $twig, $config) {
     $name = "Gazelle\\API\\" . str_replace("_", "", ucwords($name, "_"));
     return new $name($twig, $config);
