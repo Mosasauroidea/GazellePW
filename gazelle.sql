@@ -30,6 +30,7 @@ CREATE TABLE `api_applications` (
   PRIMARY KEY (`ID`) USING BTREE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=COMPACT;
 
+ALTER TABLE `api_applications` ADD UNIQUE(`UserID`);
 
 --
 -- Table structure for table `api_users`
