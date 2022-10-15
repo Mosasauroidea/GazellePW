@@ -143,11 +143,6 @@ echo $Val->GenerateJS('userform');
                             </a>
                         </li>
                         <li class="SidebarList-item">
-                            <a class="Link" href="#token_settings" data-tooltip="<?= t('server.user.st_token_settings_description') ?>">
-                                <?= t('server.user.st_token_settings') ?>
-                            </a>
-                        </li>
-                        <li class="SidebarList-item">
                             <input class="Input" type="text" id="settings_search" onclick="location.href='#'" placeholder="<?= t('server.user.st_search') ?>" />
                         </li>
                         <li class="SidebarList-item">
@@ -1135,14 +1130,6 @@ echo $Val->GenerateJS('userform');
                         </td>
                     </tr>
 
-                </table>
-
-                <table class="Form-rowList" variant="header" id="token_settings">
-                    <tr class="Form-rowHeader">
-                        <td class="Form-title" colspan="2">
-                            <?= t('server.user.st_token_settings') ?>
-                        </td>
-                    </tr>
                     <tr class="Form-row" id="api_token">
                         <td class="Form-label" ><strong><?= t('server.user.api') ?></strong></td>
                         <td class="Form-inputs">
@@ -1158,6 +1145,7 @@ echo $Val->GenerateJS('userform');
                         <?php } ?>
                         </td>
                     </tr>
+
                 </table>
             </div>
         </div>

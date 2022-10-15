@@ -6901,8 +6901,6 @@ server.user.st_2fa_period: |-
   两步验证。
 server.user.st_access: |-
   访问设置
-server.user.st_token_settings: |-
-  接口令牌设置
 server.user.st_token_settings_description: |-
   与 API 令牌相关的设置，以便与 GPW API 进行交互
 server.user.st_access_title: |-

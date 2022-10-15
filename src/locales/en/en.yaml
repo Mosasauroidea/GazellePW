@@ -7021,8 +7021,6 @@ server.user.st_2fa_note3: |-
   Click here to&nbsp;
 server.user.st_2fa_period: |-
   Two-factor Authentication.&nbsp;
-server.user.st_token_settings: |-
-  API Token Settings
 server.user.st_token_settings_description: |-
   Settings related to API token to interact with GPW APIs
 server.user.st_access: |-
