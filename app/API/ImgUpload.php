@@ -14,20 +14,20 @@ class ImgUpload extends AbstractAPI {
         }
         
         // Checking whether there is an image
-        if (empty($_POST['name']) || empty($_POST['urls'])) {
+        if (empty($_POST['urls'])) {
             $response["Error"] = "Invalid Request";
             return $response;
         }
 
         $user_id = $LoggedUser['UserID'];
-        $names = $_POST['name'];
         $urls = $_POST['urls'];
         $Data = [];
         
-        for ($i = 0; $i < count($names); $i += 1) {
-            $name = $names[$i];
+        for ($i = 0; $i < count($urls); $i += 1) {
             $url = $urls[$i];
-            $Data[] = ['Url' => $url, 'Name' => $name];
+            $extension = strtolower(end(explode(".", $url)));
+            $path = 'user/' . $user_id . '/' . date('Ymd', time()) . '/' . uniqid() . '.' . $extension;
+            $Data[] = ['Url' => $url, 'Name' => $path];
         }
 
         try {
