@@ -25,13 +25,17 @@ $Cache = new CACHE($CONFIG['MemcachedServers']);
 $DB = new DB_MYSQL;
 $Debug = new DEBUG;
 $Twig = new Twig\Environment(
-    new \Twig\Loader\FilesystemLoader(__DIR__ . '/../templates'),
+    new \Twig\Loader\FilesystemLoader([
+        __DIR__ . '/../templates',
+        __DIR__ . '/../src/locales',
+    ]),
     [
         'debug' => CONFIG['DEBUG_MODE'],
         'cache' => __DIR__ . '/../cache/twig'
     ]
 );
 $Debug->handle_errors();
+ImageTools::init(CONFIG['IMAGE_PROVIDER']);
 
 G::$Cache = &$Cache;
 G::$DB = &$DB;
