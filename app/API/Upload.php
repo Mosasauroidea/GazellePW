@@ -233,7 +233,7 @@ class Upload extends AbstractAPI {
                 $this->db->query("
                     INSERT INTO torrents_files (TorrentID, File)
                     VALUES ($ID, '$TorEnc')");
-                $Err = 'Thank you for fixing this torrent!'; # TODO: what the hell is this????
+                $Err = 'Thank you for fixing this torrent!';
             }
         }
 
