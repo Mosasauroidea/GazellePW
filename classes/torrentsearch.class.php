@@ -591,8 +591,6 @@ class TorrentSearch {
             } else {
                 // Supports Hello.World 
                 $Word = str_replace('.', ' ', $Word);
-                // Supports *he*
-                $Word = "*$Word*";
                 $this->add_word('searchstr', $Word);
             }
         }

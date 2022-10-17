@@ -30,6 +30,7 @@ $Time = timeConvert($Year, $Quarter, $Month);
 $AwardDatas = [
     getAwardData("Sysop", $Time),
     getAwardData("Administrator", $Time),
+    getAwardData("Developer", $Time),
     getAwardData("Senior Moderator", $Time),
     getAwardData("Moderator", $Time),
     getAwardData("Torrent Moderator", $Time),
@@ -38,7 +39,6 @@ $AwardDatas = [
     getAwardData("First Line Support", $Time),
     getAwardData("Interviewer", $Time),
     getAwardData("Translators", $Time),
-    getAwardData("Developer", $Time),
 ];
 $MaxValue = [
     'DownloadCount' => 0,

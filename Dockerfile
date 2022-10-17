@@ -1,11 +1,15 @@
-FROM debian:buster-slim
+FROM ubuntu:18.04
 
 WORKDIR /var/www
 
 # Software package layer
 # Nodesource setup comes after yarnpkg because it runs `apt-get update`
-RUN apt-get update \
-    && apt-get install -y --no-install-recommends \
+
+RUN apt-get update
+RUN apt install -y software-properties-common
+RUN add-apt-repository ppa:ondrej/php
+
+RUN  DEBIAN_FRONTEND=noninteractive TZ=Etc/UTC apt-get install -y --no-install-recommends \
     build-essential \
     ca-certificates \
     cron \
@@ -22,25 +26,24 @@ RUN apt-get update \
     mariadb-client \
     netcat-openbsd \
     nginx \
-    php7.3-cli \
-    php7.3-curl \
-    php7.3-fpm \
-    php7.3-gd \
-    php7.3-mbstring \
-    php7.3-mysql \
-    php7.3-xml \
-    php7.3-zip \
-    php7.3-yaml \
-    php-apcu \
-    php-bcmath \
-    php-memcached \
-    php-xdebug \
+    php7.4-cli \
+    php7.4-curl \
+    php7.4-fpm \
+    php7.4-gd \
+    php7.4-mbstring \
+    php7.4-mysql \
+    php7.4-xml \
+    php7.4-zip \
+    php7.4-yaml \
+    php7.4-apcu \
+    php7.4-bcmath \
+    php7.4-memcached \
+    php7.4-xdebug \
     python3 \
     python3-pip \
     python3-setuptools \
     python3-wheel \
     python3-dev \
-    software-properties-common \
     unzip \
     wget \
     zlib1g-dev \
@@ -114,17 +117,16 @@ RUN npm install --save-dev @commitlint/config-conventional @commitlint/cli
 # ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD true
 
 COPY . /var/www
-
 # Permissions and configuration layer
 RUN useradd -ms /bin/bash gazelle \
     && chown -R gazelle:gazelle /var/www \
-    && cp /var/www/.docker/web/php.ini /etc/php/7.3/cli/php.ini \
-    && cp /var/www/.docker/web/php.ini /etc/php/7.3/fpm/php.ini \
-    && cp /var/www/.docker/web/xdebug.ini /etc/php/7.3/mods-available/xdebug.ini \
+    && cp /var/www/.docker/web/php.ini /etc/php/7.4/cli/php.ini \
+    && cp /var/www/.docker/web/php.ini /etc/php/7.4/fpm/php.ini \
+    && cp /var/www/.docker/web/xdebug.ini /etc/php/7.4/mods-available/xdebug.ini \
     && rm -f /etc/nginx/sites-enabled/default
 
 EXPOSE 80/tcp
-EXPOSE 3306/tcp
-EXPOSE 34000/tcp
+EXPOSE 9002/tcp
+EXPOSE 35729/tcp
 
 ENTRYPOINT [ "/bin/bash", "/var/www/.docker/web/entrypoint.sh" ]

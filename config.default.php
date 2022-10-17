@@ -50,9 +50,9 @@ $CONFIG['TG_DISBALE_CHANNEL'] = "https://t.me/disabled";
 $CONFIG['TG_GROUP'] = "https://t.me/group";
 
 // Sphinx details
-$CONFIG['SPHINX_HOST'] = 'sphinxsearch';  // TODO: not used
+$CONFIG['SPHINX_HOST'] = 'manticoresearch';  // TODO: not used
 $CONFIG['SPHINX_PORT'] = 9312; // TODO: not used
-$CONFIG['SPHINXQL_HOST'] = "sphinxsearch";
+$CONFIG['SPHINXQL_HOST'] = "manticoresearch";
 $CONFIG['SPHINXQL_PORT'] = 9306;
 $CONFIG['SPHINXQL_SOCK'] = false;
 $CONFIG['SPHINX_MAX_MATCHES'] = 1000; // Must be <= the server's max_matches variable (default 1000)
@@ -222,3 +222,4 @@ $CONFIG['DONATE_MONTH_GOAL'] = 75;
 $CONFIG['GLOBAL_FREELEECH'] = false;
 
 $CONFIG['FEATURE_EMAIL_REENABLE'] = true;
+$CONFIG['FREE_PROBABILITY'] = 20;

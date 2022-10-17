@@ -9,7 +9,7 @@ HeaderInfo
   order: 0;
   grid-column: 1 / -1;
   display: grid;
-  grid-template-columns: 500px auto 500px;
+  grid-template-columns: repeat(3, 1fr);
   align-items: center;
   height: 35px;
   border-bottom: var(--Header-border);

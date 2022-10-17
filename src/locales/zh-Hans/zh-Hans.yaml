@@ -3867,7 +3867,7 @@ server.tools.economy: |-
 server.tools.edit_an_announcement: |-
   编辑公告:</br>(不会触发公告广播)
 server.tools.edit_requests_handled: |-
-  处理申请编辑
+  编辑请求
 server.tools.email: |-
   邮箱
 server.tools.email_address: |-
@@ -4301,7 +4301,7 @@ server.tools.plz_supply_a_valid_album_id: |-
 server.tools.points_to_add: |-
   欲发放的积分数额
 server.tools.posts: |-
-  站内发帖数
+  发帖数
 server.tools.prepaid_card_donor: |-
   移动充值卡捐助
 server.tools.processing: |-
