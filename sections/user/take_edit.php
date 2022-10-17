@@ -212,12 +212,13 @@ function base64UrlEncode($data): string {
 
 // Reset API Key
 if(isset($_POST["resetApiKey"])){
-
+    G::$DB->begin_transaction();
     if (doesUserHasToken($UserID)) {
         // User has already created a token. We'll delete the entry here.
         revokeApiTokenById($UserID);
     }
     createApiToken($UserID, CONFIG['ENCKEY']);
+    G::$DB->commit();
 }
 
 // Email change
