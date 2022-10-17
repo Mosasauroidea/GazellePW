@@ -1,6 +1,7 @@
 <?php
 
 use Gazelle\Manager\Donation;
+use Gazelle\Util\Crypto;
 
 authorize();
 
@@ -186,7 +187,7 @@ function createApiToken(int $UserID, string $key): string {
 
     while (true) {
         // prevent collisions with an existing token name
-        $token = base64UrlEncode(encrypt(random_bytes(32) . $suffix, $key));
+        $token = base64UrlEncode(Crypto::encrypt(random_bytes(32) . $suffix, $key));
         if (!hasApiToken($UserID, $token))
             break;
     }
@@ -197,12 +198,6 @@ function createApiToken(int $UserID, string $key): string {
         VALUES (?,       ?,    ?)", $UserID, $name, $token
     );
     return $token;
-}
-
-function encrypt($plaintext, $key): string {
-    $iv_size = openssl_cipher_iv_length('AES-128-CBC');
-    $iv = openssl_random_pseudo_bytes($iv_size);
-    return base64_encode($iv.openssl_encrypt($plaintext, 'AES-128-CBC', $key, OPENSSL_RAW_DATA, $iv));
 }
 
 function base64UrlEncode($data): string {
