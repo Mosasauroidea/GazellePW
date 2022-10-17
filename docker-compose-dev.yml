@@ -2,7 +2,7 @@ version: '3'
 
 services:
   web:
-    image: gpw-web
+    build: .
     container_name: gpw-web
     ports:
       - 9000:80
@@ -50,15 +50,15 @@ services:
       - MYSQL_PASSWORD=password
       - MYSQL_ROOT_PASSWORD=em%G9Lrey4^N
 
-  manticoresearch:
-    build: ./.docker/manticore
-    container_name: gpw-manticoresearch
+  sphinxsearch:
+    build: ./.docker/sphinxsearch
+    container_name: gpw-sphinxsearch
     depends_on:
       - mysql
       - web
     volumes:
-      - manticore-data:/var/lib/manticore
-      - ./.docker/manticore/manticore.conf:/var/lib/manticore/conf/manticore.conf
+      - sphinx-data:/var/lib/sphinxsearch/data/
+      - ./.docker/sphinxsearch/sphinx.conf:/var/lib/sphinxsearch/conf/sphinx.conf
     environment:
       # These should match what you set for your mysql container above
       - MYSQL_USER=gazelle
@@ -67,4 +67,4 @@ services:
 volumes:
   node-modules:
   mysql-data:
-  manticore-data:
+  sphinx-data:
