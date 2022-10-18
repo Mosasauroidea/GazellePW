@@ -69,7 +69,7 @@ if ($ConvID = (int)$_GET['id']) {
                 ?>
             </div>
         </div>
-        <div id="inbox">
+        <div class="BoxList" id="inbox">
             <?
             // Get messages
             $StaffPMs = $DB->query("
@@ -94,19 +94,23 @@ if ($ConvID = (int)$_GET['id']) {
                     }
                 }
             ?>
-                <div class="box vertical_space" id="post<?= $MessageID ?>">
-                    <div class="head">
-                        <?              /* TODO: the inline style in the <a> tag is an ugly hack. get rid of it. */ ?>
-                        <a class="postid" href="staffpm.php?action=viewconv&amp;id=<?= $ConvID ?>#post<?= $MessageID ?>" style="font-weight: normal;">#<?= $MessageID ?></a>
-                        <strong>
-                            <?= $UserString ?>
-                        </strong>
-                        <?= time_diff($SentDate, 2, true) ?>
-                        <? if ($Status != 'Resolved') { ?>
-                            - <a href="#quickpost" onclick="Quote('<?= $MessageID ?>', '<?= $Username ?>');" class="brackets"><?= t('server.staffpm.quote') ?></a>
-                        <?      } ?>
+                <div class="Box" id="post<?= $MessageID ?>">
+                    <div class="Box-header">
+                        <div class="Box-headerTitle">
+                            <?              /* TODO: the inline style in the <a> tag is an ugly hack. get rid of it. */ ?>
+                            <a class="postid" href="staffpm.php?action=viewconv&amp;id=<?= $ConvID ?>#post<?= $MessageID ?>" style="font-weight: normal;">#<?= $MessageID ?></a>
+                            <strong>
+                                <?= $UserString ?>
+                            </strong>
+                            - <?= time_diff($SentDate, 2, true) ?>
+                        </div>
+                        <div class="Box-headerActions">
+                            <? if ($Status != 'Resolved') { ?>
+                                <a href="#quickpost" onclick="Quote('<?= $MessageID ?>', '<?= $Username ?>');" class="brackets"><?= t('server.staffpm.quote') ?></a>
+                            <?      } ?>
+                        </div>
                     </div>
-                    <div class="body HtmlText">
+                    <div class="Box-body HtmlText">
                         <?= Text::full_format($Message) ?>
                     </div>
                 </div>
@@ -156,8 +160,7 @@ if ($ConvID = (int)$_GET['id']) {
 
             // Reply box and buttons
             ?>
-            <div class="Form-rowList" variant="header">
-                <div class="Form-rowHeader"><?= t('server.staffpm.reply') ?></div>
+            <div class="Form-rowList">
                 <div id="reply_box">
                     <div id="buttons" class="center">
                         <form class="manage_form" name="staff_messages" action="staffpm.php" method="post" id="messageform">

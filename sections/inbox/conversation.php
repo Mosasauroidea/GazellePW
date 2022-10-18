@@ -85,10 +85,12 @@ $DB->query("
     while (list($SentDate, $SenderID, $Body, $MessageID) = $DB->next_record()) { ?>
         <div class="Box">
             <div class="Box-header" style="overflow: hidden;">
-                <div style="float: left;">
-                    <strong><?= $Users[(int)$SenderID]['UserStr'] ?></strong> <?= time_diff($SentDate) ?>
+                <div class="Box-headerTitle">
+                    <strong><?= $Users[(int)$SenderID]['UserStr'] ?></strong> - <?= time_diff($SentDate) ?>
+                </div>
+                <div class="Box-headerActions">
                     <? if ($SenderID > 0) { ?>
-                        - <a href="#quickpost" onclick="Quote('<?= $MessageID ?>','<?= $Users[(int)$SenderID]['Username'] ?>');" class="brackets"><?= t('server.inbox.quote') ?></a>
+                        <a href="#quickpost" onclick="Quote('<?= $MessageID ?>','<?= $Users[(int)$SenderID]['Username'] ?>');" class="brackets"><?= t('server.inbox.quote') ?></a>
                     <?  } ?>
                 </div>
             </div>

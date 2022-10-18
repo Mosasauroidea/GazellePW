@@ -1,3 +1,11 @@
+client.upload.copied: |-
+  Copiado
+client.common.save: |-
+  Salvar
+client.common.cancel: |-
+  Cancelar
+client.upload.uploading: |-
+  Enviando:
 client.bbcode.edit: |-
   Editar
 client.bbcode.loading: |-
@@ -308,6 +316,10 @@ server.artist.artist_id: |-
   ID do Artista
 server.artist.artist_info: |-
   Informação do artista
+server.artist.chinese_biography: |-
+  Biografia do artista chinês
+server.artist.english_biography: |-
+  Biografia do artista inglês
 server.artist.artist_name: |-
   Nome do artista
 server.artist.artist_x_deleted: |-
@@ -398,8 +410,6 @@ server.artist.request_name: |-
   Nome da solicitação
 server.artist.revert: |-
   Reverter para esta revisão
-server.artist.revision_history: |-
-  Histórico de revisões
 server.artist.similar_artist_cloud: |-
   Nuvem de Artista Similar
 server.artist.similar_artist_map: |-
@@ -418,6 +428,8 @@ server.artist.switch_to_map: |-
   Mudar para mapa
 server.artist.tag: |-
   Tags
+server.artist.search_auto_fill: |-
+  Procurar o preenchimento automático
 server.artist.there_are_still_requests_that_have: |-
   Ainda há solicitações que têm&nbsp;
 server.artist.there_are_still_torrents_that_have: |-
@@ -735,7 +747,7 @@ server.collages.batch_add: |-
 server.collages.bookmarks_collages: |-
   Lista de favoritos de playlists
 server.collages.browse_collages: |-
-  Procurar playlists
+  Playlists
 server.collages.built_by_n_users: |-
   Feito por %s %s
 server.collages.category: |-
@@ -904,6 +916,8 @@ server.collages.selected_collage_description: |-
   Descrição
 server.collages.sorting: |-
   Classificação
+server.collages.start_collages: |-
+  Coleções que você começou
 server.collages.statistics: |-
   Estatísticas
 server.collages.subscribe: |-
@@ -914,6 +928,8 @@ server.collages.subscribers: |-
   Inscritos
 server.collages.tags: |-
   Tags (separadas por vírgula)
+server.collages.that_collage_already_exists_1: |-
+  Essa coleção já existe mas precisa ser recuperada; por favor <a href="staffpm.php">contate</a> a equipe de equipe!
 server.collages.the_description_must_between: |-
   A descrição deve ter entre 10 e 65535 caracteres
 server.collages.the_name_must_between: |-
@@ -948,6 +964,10 @@ server.comments.artist_comments: |-
   Comentários do artista
 server.comments.artist_comments_left_by_user: |-
   Comentários do artista deixados por %s
+server.comments.collage_comments: |-
+  Comentários da coleção
+server.comments.collage_comments_left_by_user: |-
+  Comentários da coleção deixados por %s
 server.comments.collages_created_by: |-
   coleções criadas por %s
 server.comments.comments_left_on_collages_user_created: |-
@@ -1018,6 +1038,10 @@ server.common.comma_separated_edition: |-
   Separados por vírgula
 server.common.countries_and_regions: |-
   Países e regiões
+server.common.date: |-
+  Data
+server.common.modify: |-
+  Modificar
 server.common.director: |-
   Diretor
 server.common.douban_rating: |-
@@ -1042,6 +1066,8 @@ server.common.fltoken: |-
   FL token
 server.common.format: |-
   Formato
+server.common.forums: |-
+  Fóruns
 server.common.github: |-
   GitHub
 server.common.gpw_rating: |-
@@ -1056,6 +1082,8 @@ server.common.in_torrent_hard_subtitles: |-
   Codificado
 server.common.in_torrent_subtitles: |-
   Codificado
+server.common.inbox: |-
+  Recebidas
 server.common.include_all_aliases: |-
   Incluir todos os pseudônimos
 server.common.index: |-
@@ -1068,6 +1096,10 @@ server.common.invalid_request_description: |-
   Algo estava errado com sua solicitação e o servidor se recusa a cumpri-la.
 server.common.invalid_request_title: |-
   Solicitação inválida
+server.common.jump_to_last_read: |-
+  Ir para a última leitura
+server.common.lang_chs: |-
+  简体中文
 server.common.lang_en: |-
   Inglês
 server.common.language: |-
@@ -1082,8 +1114,12 @@ server.common.movie_name_title: |-
   Título do filme ou ID IMDb
 server.common.my_badges: |-
   Medalhas
+server.common.my_bookmarks: |-
+  Favoritos
 server.common.my_comments: |-
   Comentários
+server.common.my_friends: |-
+  Amigos
 server.common.my_notify: |-
   RSS
 server.common.n_fl_token_one: |-
@@ -1098,6 +1134,8 @@ server.common.profile: |-
   Perfil
 server.common.rating: |-
   Classificação
+server.common.ratio: |-
+  Ratio
 server.common.remove: |-
   Remover
 server.common.remove_bookmark: |-
@@ -1148,16 +1186,106 @@ server.common.unexpected_error_title: |-
   Erro Inesperado
 server.common.unsubscribe: |-
   Desinscrever
+server.common.use_fl_tokens: |-
+  Usar Token(s) FL
 server.common.user: |-
   Usuário
+server.common.view_torrent: |-
+  Ver torrent
 server.common.year: |-
   Ano
 server.donate.added_time: |-
   Tempo
+server.donate.bronze_rank: |-
+  Bronze
+server.donate.card_num: |-
+  Número do cartão
+server.donate.card_num_length: |-
+  17 digits
+server.donate.card_secret: |-
+  Cvv do Cartão
+server.donate.card_secret_length: |-
+  18 digitos
+server.donate.copper_rank: |-
+  Cobre
+server.donate.diamond_rank: |-
+  Diamante
+server.donate.donate: |-
+  Doar
+server.donate.donate_error: |-
+  Erro no sistema
+server.donate.donor_ranks: |-
+  Ranks de doador
+server.donate.duplicated_card: |-
+  Este cartão pré-pago foi usado!
+server.donate.face_value: |-
+  Valor da Face
+server.donate.failed: |-
+  Falhou
+server.donate.gold_rank: |-
+  Ouro
+server.donate.has_pending_donation: |-
+  &nbsp;doação pendente
 server.donate.history: |-
   Histórico
+server.donate.how_to_donate: |-
+  Como fazer doação?
+server.donate.incorrect_card_num: |-
+  Número de cartão incorreto!
+server.donate.incorrect_card_secret: |-
+  Cvv do cartão incorreto!
+server.donate.incorrect_face_value: |-
+  Valor da face incorreto!
+server.donate.invites: |-
+  Convite(s)
+server.donate.pending: |-
+  Pendente
 server.donate.personal_collages: |-
   Coleção(ões) Pessoal
+server.donate.prepaid_card: |-
+  Cartão pré-pago
+server.donate.profile_info: |-
+  Info. do perfil
+server.donate.progress: |-
+  Doação (objetivo anual: %d%% alcançado)
+server.donate.red_rank: |-
+  Vermelho
+server.donate.silver_rank: |-
+  Prata
+server.donate.status: |-
+  Status
+server.donate.success: |-
+  Sucesso
+server.donate.tutorials: |-
+  Manual
+server.donate.unlockable_reward: |-
+  Recompensa desbloqueável
+server.donate.unlockable_reward_1: |-
+  Imunidade de inatividade
+server.donate.unlockable_reward_2: |-
+  Texto personalizado do ícone do doador Mouseover
+server.donate.unlockable_reward_3: |-
+  Texto personalizado para Avatar Mouseover
+server.donate.unlockable_reward_4: |-
+  Ícone do Doador Linkável
+server.donate.unlockable_reward_5: |-
+  Ícone personalizado de doador, Fórum de Doadores
+server.donate.view_donor_perks_img: |-
+  Ver Infográfico de Perks do Rank de Doador
+server.donate.view_donor_system_faq: |-
+  Ver Documento FAQ do Sistema de Doadores
+server.donate.want_donate: |-
+  Doar!
+server.donate.what_will_receive: |-
+  O que você receberá ao doar
+server.donate.what_wont_receive: |-
+  O que você não receberá por doar
+server.donate.why_donate: |-
+  Sobre a doação <strong class="u-colorWarning" style="font-size: 14px">(IMPORTANTE)</strong>
+server.donate.yuan: |-
+  Yuan
+server.editioninfo.10_bit: |-
+  10-bit
 server.editioninfo.2_disc_set: |-
   Conjunto de 2-Discos
 server.editioninfo.2_in_1: |-
@@ -1176,6 +1304,8 @@ server.editioninfo.4k_remaster: |-
   Remasterização 4k
 server.editioninfo.4k_restoration: |-
   Restauração 4K
+server.editioninfo.collections: |-
+  Coleções
 server.editioninfo.director_s_cut: |-
   Corte do Diretor
 server.editioninfo.dolby_atmos: |-
@@ -1208,6 +1338,8 @@ server.editioninfo.remux: |-
   Remux
 server.editioninfo.rifftrax: |-
   Rifftrax
+server.editioninfo.the_criterion_collection: |-
+  A Coleção de Critérios
 server.editioninfo.theatrical_cut: |-
   Corte Cinema
 server.editioninfo.uncut: |-
@@ -1266,55 +1398,360 @@ server.forums.comment_optional: |-
   Comentário (opcional)
 server.forums.comments: |-
   Comentários
+server.forums.confirm: |-
+  Confirmar
+server.forums.create_one: |-
+  Crie uma!
+server.forums.customize: |-
+  Personalizar
+server.forums.delete_poll_option: |-
+  Excluir opção de enquete
+server.forums.delete_poll_option_title: |-
+  Você tem certeza que deseja excluir esta opção da enquete?
+server.forums.delete_thread: |-
+  Excluir tópico
+server.forums.dont_auto_locked: |-
+  Não bloqueado automaticamente
+server.forums.edit_forum_specific_rules: |-
+  Editar regras específicas do fórum
+server.forums.edit_thread: |-
+  Editar tópico
+server.forums.either_the_thread_is_locked_or: |-
+  O tópico está bloqueado, ou você não tem permissão para editar este post.
 server.forums.featured: |-
   Destaques
+server.forums.forum: |-
+  Fórum
+server.forums.forum_specific_rules: |-
+  Regras específicas do fórum
+server.forums.forums: |-
+  Fóruns
+server.forums.forums_greater_than_search: |-
+  Fóruns &gt; Pesquisar
+server.forums.index_refresh: |-
+  Mostrar na página inicial
+server.forums.jump_to_last_read: |-
+  Ir para a última leitura
+server.forums.last_edit_by: |-
+  Última edição por %s
+server.forums.last_edited_by: |-
+  Última edição por %s
+server.forums.last_post: |-
+  Última postagem
+server.forums.last_post_time: |-
+  Hora da última postagem
+server.forums.latest: |-
+  Últimos
 server.forums.like: |-
   Curtir
+server.forums.limited: |-
+  Limitado a %s opções
 server.forums.locked: |-
   Bloqueado
+server.forums.missing_votes: |-
+  Votos faltantes
+server.forums.move_thread: |-
+  Mover tópico
+server.forums.new_thread: |-
+  Novo tópico
+server.forums.new_topic: |-
+  Novo Tópico
+server.forums.no_threads_in_forum: |-
+  Não há tópicos para exibir neste fórum!
+server.forums.only_starter: |-
+  Somente o autor do tópico pode ver as postagens
+server.forums.only_tc: |-
+  Somente TC
+server.forums.personal_reward: |-
+  Recompensa pessoal
+server.forums.please_select_an_option: |-
+  Por favor, selecione uma opção.
+server.forums.poll: |-
+  Enquete
+server.forums.poll_settings: |-
+  Configurações de Enquete
+server.forums.post_bodies: |-
+  Corpos da publicação
+server.forums.post_by: |-
+  Postar por
+server.forums.post_comment: |-
+  Publicar comentário
+server.forums.post_created: |-
+  Publicação criada
+server.forums.post_reply: |-
+  Publicar resposta
+server.forums.posted_by: |-
+  Postado por
+server.forums.posts: |-
+  Postagens
+server.forums.question: |-
+  Pergunta
+server.forums.quote: |-
+  Cotação
+server.forums.ranking: |-
+  Classificação
+server.forums.replies: |-
+  Respostas
 server.forums.report: |-
   Reportar
 server.forums.search: |-
   Pesquisa
+server.forums.search_for: |-
+  Pesquisar por
+server.forums.search_forums: |-
+  Fóruns
 server.forums.search_in: |-
   Pesquisar em
+server.forums.search_this_forum: |-
+  Pesquisar neste fórum
+server.forums.search_this_thread: |-
+  Pesquisar neste tópico
+server.forums.service_stats: |-
+  Atualizar
+server.forums.sticky: |-
+  Fixo
+server.forums.sticky_title: |-
+  Fixar esta postagem
+server.forums.submit_poll_title: |-
+  Tem certeza que deseja incluir esta enquete?
+server.forums.subscribe_to_topic: |-
+  Inscrever-se no tópico
+server.forums.the_same_as_thread: |-
+  O mesmo que o tópico
+server.forums.there_are_no_topics: |-
+  Não há tópicos aqui.&nbsp;
 server.forums.thread_id: |-
   ID do tópico
+server.forums.thread_notes: |-
+  Notas do tópico
 server.forums.title: |-
   Título
+server.forums.titles: |-
+  Títulos
+server.forums.topic: |-
+  Tópico
+server.forums.topic_created: |-
+  Tópico criado
+server.forums.topic_creation_time: |-
+  Data criação do tópico
+server.forums.topics: |-
+  Tópicos
+server.forums.unknown_username: |-
+  &nbsp;(nome desconhecido)
+server.forums.unsticky_title: |-
+  Desfixar este post
+server.forums.username: |-
+  Usuário
 server.forums.view: |-
   Visualizar
+server.forums.voters: |-
+  Votores
+server.forums.votes: |-
+  Votações
+server.forums.warn: |-
+  Avisar
+server.forums.you_can_t_award_yourself: |-
+  : ├
+  Você não pode se premiar
+server.forums.your_posting_privileges_removed: |-
+  Seus privilégios de publicação foram removidos.
+server.friends.down: |-
+  Down
+server.friends.friends: |-
+  Amigos
+server.friends.friends_list: |-
+  Lista de amigos
+server.friends.ratio: |-
+  Ratio
+server.friends.up: |-
+  Up
+server.friends.you_have_no_friends: |-
+  Você não tem amigos! :(
+server.inbox.a_recipient_does_not_exist: |-
+  Não existe um destinatário.
+server.inbox.back_to_inbox: |-
+  Voltar à caixa de entrada
 server.inbox.body: |-
   Corpo
+server.inbox.cannot_send_msg_without_body: |-
+  Você não pode enviar uma mensagem sem um corpo.
+server.inbox.cannot_send_msg_without_subject: |-
+  Você não pode enviar uma mensagem sem um assunto.
+server.inbox.compose: |-
+  Escrever
+server.inbox.date: |-
+  Data
+server.inbox.delete_conversation: |-
+  Excluir conversa
+server.inbox.delete_messages: |-
+  Excluir mensagem(ns)
+server.inbox.expire_rank_pm: |-
+  Seu Ranking de Doadores irá expirar em dois dias, você terá um período extra de graça de dois dias. Depois disso, seu Rank de Doador irá -1.
+server.inbox.expire_rank_sbj: |-
+  Seu Ranking de Doadores reduzirá em breve
+server.inbox.forward_conversation: |-
+  Encaminhar conversa
+server.inbox.forward_to: |-
+  Encaminhar para
+server.inbox.forwarded_to: |-
+  Encaminhado para
+server.inbox.get_special_rank_five_pm: |-
+  Parabéns por alcançar [url=wiki.php?action=article&id=277]Classificação Especial #5[/url]! Você é doador de diamantes agora. Você ativou todos os prêmios de doação permanentemente. Obrigado pela sua gentileza!
+
+  Equipe{{CONFIG['SITE_NAME']}}
+server.inbox.get_special_rank_five_sbj: |-
+  Você alcançou a Classificação Especial de Doadores
+server.inbox.get_special_rank_four_pm: |-
+  Parabéns por alcançar [url=wiki. hp?action=article&id=277]Classificação Especial #4[/url]! Você recebeu [b]segundo avatar[/b]! Seu avatar normal vai "virar" para este quando alguém passar seu mouse sobre a imagem.
+
+  Cajado{{CONFIG['SITE_NAME']}}
+server.inbox.get_special_rank_four_sbj: |-
+  Você alcançou a Classificação Especial de Doadores
+server.inbox.get_special_rank_one_pm: |-
+  Parabéns por alcançar [url=wiki.php?action=article&id=277]Rank Especial #1[/url]! Você pode ser recompensado com [url=wiki.php?action=article&id=91]Inatividade[/url] Imunito! Divirta-se!
+  Equipe{{CONFIG['SITE_NAME']}}
+server.inbox.get_special_rank_one_sbj: |-
+  Você alcançou a Classificação Especial de Doadores
+server.inbox.get_special_rank_three_pm: |-
+  Parabéns por alcançar [url=wiki. hp?action=article&id=277]Classificação Especial #3[/url]! Você recebeu [b]um usuário escolha[/b]! Esta escolha de usuário será destaque na página inicial de {{CONFIG['SITE_NAME']}} durante um evento futuro. Depois de enviar a sua escolha, não há garantia de quanto tempo levará até que sua escolha seja destacada. As escolhas serão destacadas numa base de primeira apresentação e servida. Siga as seguintes diretrizes ao fazer a sua seleção:
+
+  [*]Escolha algo que não foi escolhido. Você pode dizer se uma picareta já foi usada anteriormente olhando as colagens que ela tem.
+  [*]Complete a forma contida de forma cuidadosa e completa.
+  [*]Envie uma [url=staffpm. hp]Staff PM[/url] para solicitar mais informações sobre a formatação da sua escolha e a hora em que ela será publicada.
+
+  {{CONFIG['SITE_NAME']}} Staff
+server.inbox.get_special_rank_three_sbj: |-
+  Você alcançou a Classificação Especial de Doadores
 server.inbox.get_special_rank_two_pm: |-
   Parabéns por alcançar a [url=wiki.php?action=article&id=277]Classificação Especial nº 2[/url]! Você pode Você recebeu uma [url=badge.php]Distintivo de Doador[/url] Imunidade! Divirta-se!
   {{CONFIG['SITE_NAME']}} Equipe
+server.inbox.get_special_rank_two_sbj: |-
+  Você alcançou a Classificação Especial de Doadores
+server.inbox.inbox: |-
+  Recebidas
+server.inbox.is_empty: |-
+  &nbsp;está vazio.
+server.inbox.list_latest_first: |-
+  Listar mais recentes primeiro
+server.inbox.list_unread_first: |-
+  Listar primeiro as não lidas
+server.inbox.manage_conversation: |-
+  Gerenciar conversa
+server.inbox.mark_as_read: |-
+  Marcar como lido
+server.inbox.mark_as_unread: |-
+  Marcar como não lida
+server.inbox.message: |-
+  Mensagem
+server.inbox.message_from: |-
+  Mensagem de %s
 server.inbox.no_results: |-
   Sem resultados.
+server.inbox.placeholder_search: |-
+  Procurar&nbsp;
+server.inbox.quote: |-
+  Cotação
+server.inbox.quote_if_disagree_unfill_please_url: |-
+  [/quote]
+  Se você acha que este pedido foi injustamente não atendido, por favor [url=
+server.inbox.receiver: |-
+  Receptor
 server.inbox.reply: |-
   Responder
+server.inbox.report_request_and_explain: |-
+  ]relate o pedido[/url] e explique por que esse pedido não deveria ter sido não atendido.
+server.inbox.request_filled_unfilled: |-
+  Um pedido que você preencheu não foi preenchido
+server.inbox.send_a_message_to_user: |-
+  Enviar uma mensagem para %s
+server.inbox.send_message: |-
+  Enviar mensagem
+server.inbox.sender: |-
+  Remetente
+server.inbox.sentbox: |-
+  Enviadas
+server.inbox.sticky: |-
+  Fixo
+server.inbox.subject: |-
+  Assunto
+server.inbox.the_request_url: |-
+  A solicitação "[url=
+server.inbox.this_recipient_does_not_exist: |-
+  Este destinatário não existe.
+server.inbox.url_for_the_reason_quote: |-
+  [/url] pelo motivo: [quote]
+server.inbox.url_was_unfilled_by_url: |-
+  [/url]" não foi preenchido por [url=
 server.inbox.user: |-
   Usuário
+server.inbox.view_conversation_space: |-
+  Ver conversa&nbsp;
+server.inbox.you_cannot_start_a_conversation_with_yourself: |-
+  Você não pode iniciar uma conversa consigo mesmo!
+server.inbox.your: |-
+  Seu&nbsp;
+server.index.add_more: |-
+  Clique para carregar mais notícias
+server.index.announcements: |-
+  Avisos
+server.index.blank: |-
+  Branco&#8202;&mdash;&#8202;Mostrar os resultados!
+server.index.blog_note: |-
+  Blog
+server.index.cleader: |-
+  Ranking do concurso
+server.index.click_here: |-
+  clique aqui
 server.index.collage: |-
   Playlists
+server.index.day_visit: |-
+  Usuários ativos hoje
+server.index.details: |-
+  Detalhes
+server.index.discuss: |-
+  Discutir
+server.index.enable_users: |-
+  Usuários habilitados
+server.index.featured_item: |-
+  Filme em Destaque
+server.index.filled: |-
+  concluída
+server.index.fproduct: |-
+  Produto em destaque
+server.index.fproduct_title: |-
+  Imagem do Produto em Destaque
 server.index.hide: |-
   Esconder
+server.index.index: |-
+  Notícias
+server.index.latest_thread: |-
+  Último tópico
 server.index.period: |-
   .
+server.index.poll: |-
+  Enquete
 server.index.staff_note: |-
   Blog da Staff
 server.index.stats: |-
   Estatísticas
+server.index.topic: |-
+  Tópico
 server.index.vote: |-
   Votar
+server.log.message: |-
+  Mensagem
 server.log.period: |-
   .
+server.log.search_for: |-
+  Pesquisar por
 server.log.time: |-
   Tempo
 server.login.enter_valid_email: |-
   Por favor, insira um endereço de email válido.
 server.login.reason: |-
   Motivo
+server.login.username: |-
+  Usuário
 server.permissions.admin_manage_badges: |-
   Pode gerenciar medalhas
 server.permissions.events_reward_badges: |-
@@ -1345,10 +1782,16 @@ server.pub.space_new_collage_update_other: |-
   &nbsp;novas atualizações de coleção
 server.pub.statistics: |-
   Estatísticas
+server.referral.username: |-
+  Usuário
+server.register.username: |-
+  Usuário
 server.reports.body: |-
   Corpo
 server.reports.collage: |-
   Playlist
+server.reports.compose: |-
+  Escrever
 server.reports.description: |-
   Descrição
 server.reports.new: |-
@@ -1365,12 +1808,20 @@ server.reports.report_collage_guide_2: |-
   As regras de coleção são um conceito interpretado, e cabe ao pessoal interpretar estas regras. Se você sente que esta coleção pode ser um caso de fronteira entre permitido e não permitido, Sinta-se livre para o relatar e vamos analisá-lo.
 server.reports.reporting_the_collage: |-
   Você está relatando a coleção
+server.reports.send_a_message_to: |-
+  Enviar uma mensagem para %s
 server.reports.stats: |-
   Estatísticas
+server.reports.subject: |-
+  Assunto
 server.reports.title: |-
   Título
 server.reports.user: |-
   Usuário
+server.reports.username: |-
+  Usuário
+server.reports.you_cannot_start_a_conversation_with_yourself: |-
+  Você não pode iniciar uma conversa consigo mesmo!
 server.reportsv2.comments: |-
   Comentários
 server.reportsv2.pm_reason: |-
@@ -1381,12 +1832,16 @@ server.reportsv2.report: |-
   Reportar
 server.reportsv2.type: |-
   Tipo
+server.reportsv2.username: |-
+  Usuário
 server.requests.all: |-
   Todos
 server.requests.any: |-
   Qualquer
 server.requests.bounty: |-
   Recompensa
+server.requests.by_user: |-
+  Usuário
 server.requests.collages: |-
   Playlists
 server.requests.description: |-
@@ -1396,7 +1851,7 @@ server.requests.forgot_enter_tags: |-
 server.requests.image: |-
   Imagem
 server.requests.name: |-
-  Nome da solicitação
+  Nome
 server.requests.reason: |-
   Motivo
 server.requests.search_terms: |-
@@ -1417,6 +1872,10 @@ server.rules.collages_title: |-
   Playlists
 server.rules.collages_title_de: |-
   Estas são as regras que regem as coleções.
+server.rules.ratio: |-
+  Ratio
+server.rules.ratio_title: |-
+  Ratio
 server.rules.tags_title: |-
   Tagging(Marcação)
 server.rules.tags_title_de: |-
@@ -1431,6 +1890,8 @@ server.sitehistory.choose_tags: |-
   Selecionar tags
 server.sitehistory.comma_separated_tags: |-
   Tags separadas por vírgulas
+server.sitehistory.date: |-
+  Data
 server.sitehistory.edit: |-
   Editar
 server.sitehistory.search: |-
@@ -1441,14 +1902,32 @@ server.sitehistory.tags_placeholder: |-
   Tags separadas por vírgula; use pontos / pontos para espaços
 server.sitehistory.title: |-
   Título
+server.staff.donation: |-
+  Doar
+server.staff.message: |-
+  Mensagem
+server.staff.subject: |-
+  Assunto
+server.staff.username: |-
+  Usuário
+server.staffpm.date: |-
+  Data
 server.staffpm.preview: |-
   Pré-visualizar
+server.staffpm.quote: |-
+  Cotação
 server.staffpm.reason: |-
   Motivo
+server.staffpm.replies: |-
+  Respostas
 server.staffpm.reply: |-
   Responder
 server.staffpm.resolved: |-
   Resolvido
+server.staffpm.sender: |-
+  Remetente
+server.staffpm.subject: |-
+  Assunto
 server.stats.stats: |-
   Estatísticas
 server.subtitles.new: |-
@@ -1474,8 +1953,12 @@ server.tools.Bonus: |-
   Bônus
 server.tools.added: |-
   Adicionado
+server.tools.featured_movie: |-
+  Filme em Destaque
 server.tools.all: |-
   Todos
+server.tools.announcements: |-
+  Avisos
 server.tools.ascending: |-
   Ascendente
 server.tools.author: |-
@@ -1520,10 +2003,14 @@ server.tools.badge_withdraw: |-
   Retirar
 server.tools.badges_giving: |-
   Medalhas dando
+server.tools.tag_type: |-
+  Tipo
 server.tools.batch_tag_editor: |-
   Editor de Tags em Lote
 server.tools.body: |-
   Corpo
+server.tools.byuserid: |-
+  Remetente
 server.tools.cannot_merge_tag_with_itself: |-
   Não é possível mesclar a tag %s com ela mesmo!
 server.tools.category: |-
@@ -1532,6 +2019,8 @@ server.tools.chinese_dubbed: |-
   Dublado em chinês
 server.tools.client_whitelist: |-
   Whitelist do Cliente
+server.tools.date: |-
+  Data
 server.tools.descending: |-
   Descendente
 server.tools.description: |-
@@ -1542,6 +2031,8 @@ server.tools.enter_a_single_replacement_tag: |-
   Insira uma única tag de substituição.
 server.tools.enter_a_single_tag_to_search_for: |-
   Insira uma única tag para pesquisar.
+server.tools.forum_category_control_panel_forums: |-
+  Fóruns
 server.tools.h2_official_tags_manager: |-
   Gerenciador Oficial de Tags
 server.tools.handled_after: |-
@@ -1564,6 +2055,8 @@ server.tools.max_collages: |-
   Número máximo de coleções pessoais
 server.tools.merge_rename_tags: |-
   Mesclar/Renomear Tags
+server.tools.message: |-
+  Mensagem
 server.tools.name: |-
   Nome
 server.tools.new_official_tag: |-
@@ -1576,8 +2069,14 @@ server.tools.operations: |-
   Operações
 server.tools.paste_a_list_of_collage_or_torrent_group_urls: |-
   Colar uma lista de coleções de grupo ou de grupos de torrents
+server.tools.pending: |-
+  Pendente
+server.tools.posts: |-
+  Postagens
 server.tools.proper_tag: |-
   Tag adequada
+server.tools.ratio: |-
+  Ratio
 server.tools.reason: |-
   Motivo
 server.tools.remark: |-
@@ -1594,6 +2093,10 @@ server.tools.sort_by_bad_tags: |-
   Ordenar por tags ruins
 server.tools.sort_by_good_tags: |-
   Ordenar por tags boas
+server.tools.status: |-
+  Status
+server.tools.subject: |-
+  Assunto
 server.tools.submitted_after: |-
   Depois
 server.tools.submitted_before: |-
@@ -1606,6 +2109,8 @@ server.tools.torrents: |-
   Torrents
 server.tools.user: |-
   Usuário
+server.tools.username: |-
+  Usuário
 server.tools.view: |-
   Visualizar
 server.tools.year: |-
@@ -1614,6 +2119,8 @@ server.top10.all: |-
   Todos
 server.top10.any: |-
   Qualquer
+server.top10.date: |-
+  Data
 server.top10.found_no_tags_matching_the_criteria: |-
   Não foram encontradas tags correspondentes ao critério
 server.top10.hide: |-
@@ -1626,6 +2133,8 @@ server.top10.most_used_torrent_tags: |-
   Tags Torrent mais usadas
 server.top10.name: |-
   Nome
+server.top10.ratio: |-
+  Ratio
 server.top10.tag: |-
   Tag
 server.top10.tags: |-
@@ -1662,6 +2171,8 @@ server.torrents.cn_quality_slot_requirements: |-
   Deve conter uma legenda chinesa codificada. Legendas não podem ser mais do que chinesa e inglês. A qualidade do vídeo deve ser a melhor possível.
 server.torrents.composer: |-
   Compositor
+server.torrents.date: |-
+  Data
 server.torrents.desc: |-
   Descendente
 server.torrents.director: |-
@@ -1686,6 +2197,8 @@ server.torrents.ft_year: |-
   Ano
 server.torrents.ftb_searchstr: |-
   Termos de pesquisa
+server.torrents.guide_of_advanced_search: |-
+  Manual
 server.torrents.hide: |-
   Esconder
 server.torrents.hide_tags: |-
@@ -1724,7 +2237,11 @@ server.torrents.search_empty_1: |-
   Sua pesquisa não encontrou nada.
 server.torrents.search_empty_2: |-
   Certifique-se de que todos os nomes estejam escritos corretamente ou tente tornar sua pesquisa menos específica.
+server.torrents.search_for: |-
+  Pesquisar por
 server.torrents.search_requests: |-
+  Pesquisa
+server.torrents.search_torrents: |-
   Pesquisa
 server.torrents.seeders: |-
   Seeders
@@ -1770,6 +2287,8 @@ server.torrents.vote_this_tag_down: |-
   Vote deslike nesta tag
 server.torrents.vote_this_tag_up: |-
   Vote like nesta tag
+server.torrents.votes: |-
+  Votações
 server.torrents.writer: |-
   Escritor
 server.torrents.year: |-
@@ -1870,20 +2389,30 @@ server.user.comma_seperated_tags_list: |-
   Lista separada por vírgulas&#8202;&mdash;&#8202;por exemplo ação, ficção científica, suspense
 server.user.community_arts: |-
   Comentários do artista
+server.user.community_colls: |-
+  Comentários da coleção
 server.user.community_comms: |-
   Comentários do torrent
 server.user.community_reqs: |-
   Solicitar comentários
+server.user.compose: |-
+  Enviar mensagem
 server.user.customtitle: |-
   Título Personalizado
+server.user.date: |-
+  Data
 server.user.donorforum_4: |-
   Pré-visualizar
 server.user.filt_tr_show_tags: |-
   Exibir filtros de tags oficiais
 server.user.filt_tr_title: |-
   A exibição de controles de filtro mostrará as opções de filtragem de torrent no menu de pesquisa de torrent por padrão. A exibição de filtros para tags oficiais listará filtros clicáveis para tags oficiais no menu de pesquisa de torrent por padrão.
+server.user.forums: |-
+  Fóruns
 server.user.history: |-
   Histórico
+server.user.limitedcolor_red: |-
+  Vermelho
 server.user.locked: |-
   Bloqueado
 server.user.mature_title: |-
@@ -1892,6 +2421,8 @@ server.user.mature_title: |-
   políticas flexíveis de conteúdo maduro para todas as áreas da comunidade. Escolher exibir conteúdo adulto permitirá que você clique para visualizar qualquer conteúdo postado sob as tags [mature]. Se você optar por não exibir conteúdo adulto, todo o conteúdo marcado com tags [mature] ficará oculto para você.
 server.user.name: |-
   Nome
+server.user.next_userclass_title3: |-
+  Ratio
 server.user.next_userclass_title4: |-
   Tempo
 server.user.next_userclass_title5: |-
@@ -1908,16 +2439,24 @@ server.user.para_badgedisplay: |-
   Mostrar todas as medalhas
 server.user.para_badgedisplay_label: |-
   Permitir que outras pessoas vejam todas as medalhas que você possui
+server.user.para_ratio: |-
+  Ratio
 server.user.para_stats: |-
   Estatísticas
+server.user.ratio: |-
+  Ratio
 server.user.reason: |-
   Motivo
+server.user.replies: |-
+  Respostas
 server.user.report: |-
   Reportar
 server.user.statistics: |-
   Estatísticas
 server.user.stats: |-
   Estatísticas
+server.user.subject: |-
+  Assunto
 server.user.tagging: |-
   Tagging(Marcação)
 server.user.tagging_title: |-
@@ -1926,14 +2465,22 @@ server.user.theme: |-
   Tema
 server.user.theme_auto: |-
   Auto
+server.user.username: |-
+  Usuário
 server.user.view: |-
   Visualizar
 server.user.vote: |-
   Votar
+server.user.warn: |-
+  Avisar
 server.userhistory.catch_up: |-
   Capturar até
 server.userhistory.collage: |-
   Playlist
+server.userhistory.forum: |-
+  Fórum
+server.userhistory.forums: |-
+  Fóruns
 server.userhistory.hide: |-
   Esconder
 server.userhistory.new: |-
@@ -1946,6 +2493,8 @@ server.userhistory.subscribed_collages: |-
   Coleções inscritas
 server.userhistory.time: |-
   Tempo
+server.userhistory.topic: |-
+  Tópico
 server.userhistory.torrent: |-
   Torrent
 server.wiki.add_alias: |-
@@ -1972,6 +2521,8 @@ server.wiki.chinese: |-
   Chinês
 server.wiki.delete_aliases: |-
   Apagar pseudônimos
+server.wiki.details: |-
+  Detalhes
 server.wiki.english: |-
   Inglês
 server.wiki.history_author: |-
@@ -1988,6 +2539,8 @@ server.wiki.revision_history: |-
   Histórico de revisões para %s
 server.wiki.search: |-
   Pesquisa
+server.wiki.search_for: |-
+  Pesquisar por
 server.wiki.search_in: |-
   Pesquisar em
 server.wiki.title: |-

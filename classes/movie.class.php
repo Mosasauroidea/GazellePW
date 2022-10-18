@@ -347,6 +347,7 @@ class MOVIE {
     public static function get_imdb_data($IMDBID) {
         $IMDBConfig = new \Imdb\Config();
         $IMDBConfig->language = 'en-US';
+        $IMDBConfig->cachedir = CONFIG['SERVER_ROOT'] . '/.cache/imdbphp';
         $IMDBResult = new \Imdb\Title($IMDBID, $IMDBConfig);
         return $IMDBResult;
     }

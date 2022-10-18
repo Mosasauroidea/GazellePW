@@ -6,6 +6,9 @@
   display: grid;
   grid-template-columns: auto 1fr;
 }
+#tools div#salary-table div{
+  white-space: nowrap;
+}
 #tools div#salary-table > div#table-head-left > div,
 #tools div#salary-table > div#table-right-scroll > div#table-head-top > div,
 #tools div#salary-table > div#table-right-scroll > div#table-content > div {
@@ -16,8 +19,8 @@
 }
 #tools div#salary-table > div#table-head-left {
   display: grid;
-  grid-template-columns: 50px 100px;
-  grid-template-rows: 86px;
+  grid-template-columns: repeat(2, auto);
+  grid-template-rows: 79px;
   border-bottom-left-radius: 4px;
 }
 #tools div#salary-table > div#table-head-left > div {
@@ -70,9 +73,9 @@
 #tools div#salary-table > div#table-right-scroll > div#table-head-top {
   display: grid;
   grid-template-columns: repeat(9, 1fr);
-  grid-template-rows: auto 53px;
+  grid-template-rows: 40px 40px;
   background-color: var(--global-colorTransparent-box);
-  min-width: 800px;
+  min-width: 1200px;
 }
 #tools div#salary-table > div#table-right-scroll > div#table-head-top.fixed {
   position: fixed !important;
@@ -114,7 +117,7 @@
 }
 #tools div#salary-table > div#table-right-scroll > div#table-content {
   display: grid;
-  min-width: 800px;
+  min-width: 1200px;
   border-bottom-right-radius: 4px;
 }
 #tools div#salary-table > div#table-right-scroll > div#table-content > div {

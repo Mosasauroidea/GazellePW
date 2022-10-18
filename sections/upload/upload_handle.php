@@ -483,7 +483,7 @@ if (in_array($Properties['Processing'], ['Untouched', 'DIY', 'Remux', 'BD25', 'B
 }
 // 20% 几率免费 
 $isFree = random_int(0, 100);
-if ($isFree < 20) {
+if ($isFree < CONFIG['FREE_PROBABILITY']) {
     $T['FreeLeech'] = 1;
 }
 // 自制或者自购直接免费

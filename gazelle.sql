@@ -1,4 +1,4 @@
-SET NAMES utf8;
+SET NAMES utf8mb4;
 SET FOREIGN_KEY_CHECKS = 0;
 
 USE `gazelle`;
@@ -14,7 +14,7 @@ CREATE TABLE `activity` (
   `Time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `Display` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Table structure for table `api_applications`
@@ -28,7 +28,7 @@ CREATE TABLE `api_applications` (
   `Token` char(32) NOT NULL,
   `Name` varchar(50) NOT NULL,
   PRIMARY KEY (`ID`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=COMPACT;
 
 --
 -- Table structure for table `api_users`
@@ -44,7 +44,7 @@ CREATE TABLE `api_users` (
   `Time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `Access` text NOT NULL,
   PRIMARY KEY (`UserID`,`AppID`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=COMPACT;
 
 
 --
@@ -69,7 +69,7 @@ CREATE TABLE `applicant` (
   CONSTRAINT `applicant_ibfk_1` FOREIGN KEY (`RoleID`) REFERENCES `applicant_role` (`ID`),
   CONSTRAINT `applicant_ibfk_2` FOREIGN KEY (`ThreadID`) REFERENCES `thread` (`ID`),
   CONSTRAINT `applicant_ibfk_3` FOREIGN KEY (`UserID`) REFERENCES `users_main` (`ID`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 ROW_FORMAT=COMPACT;
 
 
 --
@@ -89,7 +89,7 @@ CREATE TABLE `applicant_role` (
   PRIMARY KEY (`ID`) USING BTREE,
   KEY `UserID` (`UserID`) USING BTREE,
   CONSTRAINT `applicant_role_ibfk_1` FOREIGN KEY (`UserID`) REFERENCES `users_main` (`ID`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 ROW_FORMAT=COMPACT;
 
 
 --
@@ -104,7 +104,7 @@ CREATE TABLE `apply_question` (
   `iterm_id` bigint(20) NOT NULL,
   `sort` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 
 --
@@ -119,7 +119,7 @@ CREATE TABLE `apply_question_answer` (
   `answer` varchar(1024) DEFAULT NULL,
   `remark` varchar(1024) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 
 --
@@ -136,7 +136,7 @@ CREATE TABLE `apply_question_iterm` (
   `type` tinyint(4) DEFAULT '0' COMMENT '0-?? 1-?? 2-??',
   `allow_empty` tinyint(1) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 
 --
@@ -158,7 +158,7 @@ CREATE TABLE `apply_user` (
   `check_description` varchar(1024) DEFAULT NULL,
   `check_time` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 
 --
@@ -174,7 +174,7 @@ CREATE TABLE `apply_user_answer` (
   `iterm_id` bigint(20) DEFAULT NULL,
   `answer` blob,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 
 --
@@ -189,7 +189,7 @@ CREATE TABLE `artist_info_cache` (
   `TMDBData` longtext,
   `TMDBTime` datetime NOT NULL,
   PRIMARY KEY (`IMDBID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 
 --
@@ -208,7 +208,7 @@ CREATE TABLE `artists_alias` (
   KEY `ArtistID` (`ArtistID`,`Name`) USING BTREE,
   KEY `Name` (`Name`),
   KEY `Redirect` (`Redirect`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=COMPACT;
 
 
 --
@@ -224,7 +224,7 @@ CREATE TABLE `artists_group` (
   `LastCommentID` int(10) NOT NULL DEFAULT '0',
   PRIMARY KEY (`ArtistID`) USING BTREE,
   KEY `Name` (`Name`,`RevisionID`) USING BTREE
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 ROW_FORMAT=COMPACT;
 
 
 --
@@ -238,7 +238,7 @@ CREATE TABLE `artists_similar` (
   `SimilarID` int(12) NOT NULL DEFAULT '0',
   PRIMARY KEY (`ArtistID`,`SimilarID`) USING BTREE,
   KEY `ArtistID` (`ArtistID`,`SimilarID`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=COMPACT;
 
 
 --
@@ -252,7 +252,7 @@ CREATE TABLE `artists_similar_scores` (
   `Score` int(10) NOT NULL DEFAULT '0',
   PRIMARY KEY (`SimilarID`) USING BTREE,
   KEY `Score` (`Score`) USING BTREE
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 ROW_FORMAT=COMPACT;
 
 
 --
@@ -266,7 +266,7 @@ CREATE TABLE `artists_similar_votes` (
   `UserID` int(10) NOT NULL,
   `Way` enum('up','down') NOT NULL DEFAULT 'up',
   PRIMARY KEY (`SimilarID`,`UserID`,`Way`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=COMPACT;
 
 
 --
@@ -283,7 +283,7 @@ CREATE TABLE `artists_tags` (
   `UserID` int(10) NOT NULL,
   PRIMARY KEY (`TagID`,`ArtistID`) USING BTREE,
   KEY `TagID` (`TagID`,`ArtistID`,`PositiveVotes`,`NegativeVotes`,`UserID`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=COMPACT;
 
 
 --
@@ -295,7 +295,7 @@ DROP TABLE IF EXISTS `bad_passwords`;
 CREATE TABLE `bad_passwords` (
   `Password` char(32) NOT NULL,
   PRIMARY KEY (`Password`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=COMPACT;
 
 
 --
@@ -313,7 +313,7 @@ CREATE TABLE `badges` (
   `Profile` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`ID`),
   UNIQUE KEY `UserID` (`UserID`,`BadgeID`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4;
 
 
 --
@@ -331,7 +331,7 @@ CREATE TABLE `badges_item` (
   `Count` int(11) NOT NULL,
   PRIMARY KEY (`ID`),
   UNIQUE KEY `Label` (`Label`,`Level`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4;
 
 
 --
@@ -350,7 +350,7 @@ CREATE TABLE `badges_label` (
   `Father` tinyint(1) NOT NULL DEFAULT '1',
   `Progress` tinyint(1) NOT NULL DEFAULT '1',
   PRIMARY KEY (`Label`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 
 --
@@ -370,7 +370,7 @@ CREATE TABLE `blog` (
   PRIMARY KEY (`ID`) USING BTREE,
   KEY `UserID` (`UserID`) USING BTREE,
   KEY `Time` (`Time`) USING BTREE
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 ROW_FORMAT=COMPACT;
 
 
 --
@@ -391,7 +391,7 @@ CREATE TABLE `bonus_history` (
   KEY `bonus_history_fk_item` (`ItemID`) USING BTREE,
   CONSTRAINT `bonus_history_fk_item` FOREIGN KEY (`ItemID`) REFERENCES `bonus_item` (`ID`),
   CONSTRAINT `bonus_history_fk_user` FOREIGN KEY (`UserID`) REFERENCES `users_main` (`ID`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 ROW_FORMAT=COMPACT;
 
 
 --
@@ -413,7 +413,7 @@ CREATE TABLE `bonus_item` (
   `Rank` int(6) NOT NULL,
   PRIMARY KEY (`ID`) USING BTREE,
   UNIQUE KEY `Label` (`Label`) USING BTREE
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 ROW_FORMAT=COMPACT;
 
 
 --
@@ -428,7 +428,7 @@ CREATE TABLE `bookmarks_artists` (
   `Time` datetime NOT NULL,
   KEY `UserID` (`UserID`) USING BTREE,
   KEY `ArtistID` (`ArtistID`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=COMPACT;
 
 
 --
@@ -443,7 +443,7 @@ CREATE TABLE `bookmarks_collages` (
   `Time` datetime NOT NULL,
   KEY `UserID` (`UserID`) USING BTREE,
   KEY `CollageID` (`CollageID`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=COMPACT;
 
 
 --
@@ -458,7 +458,7 @@ CREATE TABLE `bookmarks_requests` (
   `Time` datetime NOT NULL,
   KEY `UserID` (`UserID`) USING BTREE,
   KEY `RequestID` (`RequestID`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=COMPACT;
 
 
 --
@@ -475,7 +475,7 @@ CREATE TABLE `bookmarks_torrents` (
   UNIQUE KEY `groups_users` (`GroupID`,`UserID`) USING BTREE,
   KEY `UserID` (`UserID`) USING BTREE,
   KEY `GroupID` (`GroupID`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=COMPACT;
 
 
 --
@@ -495,7 +495,7 @@ CREATE TABLE `calendar` (
   `Importance` tinyint(1) DEFAULT NULL,
   `Team` tinyint(1) DEFAULT '1',
   PRIMARY KEY (`ID`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=COMPACT;
 
 
 --
@@ -510,7 +510,7 @@ CREATE TABLE `changelog` (
   `Message` text NOT NULL,
   `Author` varchar(30) NOT NULL,
   PRIMARY KEY (`ID`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=COMPACT;
 
 
 --
@@ -538,7 +538,7 @@ CREATE TABLE `collages` (
   UNIQUE KEY `Name` (`Name`) USING BTREE,
   KEY `UserID` (`UserID`) USING BTREE,
   KEY `CategoryID` (`CategoryID`) USING BTREE
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 ROW_FORMAT=COMPACT;
 
 
 --
@@ -556,7 +556,7 @@ CREATE TABLE `collages_artists` (
   PRIMARY KEY (`CollageID`,`ArtistID`) USING BTREE,
   KEY `UserID` (`UserID`) USING BTREE,
   KEY `Sort` (`Sort`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=COMPACT;
 
 
 --
@@ -574,7 +574,7 @@ CREATE TABLE `collages_torrents` (
   PRIMARY KEY (`CollageID`,`GroupID`) USING BTREE,
   KEY `UserID` (`UserID`) USING BTREE,
   KEY `Sort` (`Sort`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=COMPACT;
 
 
 --
@@ -595,7 +595,7 @@ CREATE TABLE `comments` (
   PRIMARY KEY (`ID`) USING BTREE,
   KEY `Page` (`Page`,`PageID`) USING BTREE,
   KEY `AuthorID` (`AuthorID`) USING BTREE
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 ROW_FORMAT=COMPACT;
 
 
 --
@@ -612,7 +612,7 @@ CREATE TABLE `comments_edits` (
   `Body` mediumtext,
   KEY `EditUser` (`EditUser`) USING BTREE,
   KEY `PostHistory` (`Page`,`PostID`,`EditTime`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=COMPACT;
 
 
 --
@@ -629,7 +629,7 @@ CREATE TABLE `comments_edits_tmp` (
   `Body` mediumtext,
   KEY `EditUser` (`EditUser`) USING BTREE,
   KEY `PostHistory` (`Page`,`PostID`,`EditTime`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=COMPACT;
 
 
 --
@@ -645,7 +645,7 @@ CREATE TABLE `concerts` (
   PRIMARY KEY (`ID`) USING BTREE,
   KEY `ConcertID` (`ConcertID`) USING BTREE,
   KEY `TopicID` (`TopicID`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=COMPACT;
 
 
 --
@@ -657,7 +657,7 @@ DROP TABLE IF EXISTS `contest`;
 CREATE TABLE `contest` (
   `ID` int(11) NOT NULL AUTO_INCREMENT,
   `ContestTypeID` int(11) NOT NULL,
-  `Name` varchar(80) CHARACTER SET utf8 COLLATE utf8_swedish_ci NOT NULL,
+  `Name` varchar(80)  NOT NULL,
   `Banner` varchar(128) NOT NULL DEFAULT '',
   `DateBegin` datetime NOT NULL,
   `DateEnd` datetime NOT NULL,
@@ -668,7 +668,7 @@ CREATE TABLE `contest` (
   UNIQUE KEY `Name` (`Name`) USING BTREE,
   KEY `contest_type_fk` (`ContestTypeID`) USING BTREE,
   CONSTRAINT `contest_type_fk` FOREIGN KEY (`ContestTypeID`) REFERENCES `contest_type` (`ID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=COMPACT;
 
 
 --
@@ -681,13 +681,13 @@ CREATE TABLE `contest_leaderboard` (
   `ContestID` int(11) NOT NULL,
   `UserID` int(11) NOT NULL,
   `LastTorrentID` int(11) NOT NULL,
-  `LastTorrentName` varchar(80) CHARACTER SET utf8 COLLATE utf8_swedish_ci NOT NULL,
-  `ArtistList` varchar(80) CHARACTER SET utf8 COLLATE utf8_swedish_ci NOT NULL,
-  `ArtistNames` varchar(200) CHARACTER SET utf8 COLLATE utf8_swedish_ci NOT NULL,
+  `LastTorrentName` varchar(80)  NOT NULL,
+  `ArtistList` varchar(80 NOT NULL,
+  `ArtistNames` varchar(200) NOT NULL,
   `LastUpload` datetime NOT NULL,
   KEY `contest_fk` (`ContestID`) USING BTREE,
   CONSTRAINT `contest_fk` FOREIGN KEY (`ContestID`) REFERENCES `contest` (`ID`) ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=COMPACT;
 
 
 --
@@ -698,10 +698,10 @@ DROP TABLE IF EXISTS `contest_type`;
 
 CREATE TABLE `contest_type` (
   `ID` int(11) NOT NULL AUTO_INCREMENT,
-  `Name` varchar(32) COLLATE utf8_swedish_ci NOT NULL,
+  `Name` varchar(32) i NOT NULL,
   PRIMARY KEY (`ID`) USING BTREE,
   UNIQUE KEY `Name` (`Name`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_swedish_ci ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8_swedish_ci ROW_FORMAT=COMPACT;
 
 
 --
@@ -719,7 +719,7 @@ CREATE TABLE `cover_art` (
   `Time` datetime DEFAULT NULL,
   PRIMARY KEY (`ID`) USING BTREE,
   UNIQUE KEY `GroupID` (`GroupID`,`Image`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC;
 
 
 --
@@ -733,7 +733,7 @@ CREATE TABLE `currency_conversion_rates` (
   `Rate` decimal(9,4) DEFAULT NULL,
   `Time` datetime DEFAULT NULL,
   PRIMARY KEY (`Currency`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=COMPACT;
 
 
 --
@@ -751,7 +751,7 @@ CREATE TABLE `do_not_upload` (
   `Sequence` mediumint(8) NOT NULL,
   PRIMARY KEY (`ID`) USING BTREE,
   KEY `Time` (`Time`) USING BTREE
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 ROW_FORMAT=COMPACT;
 
 
 --
@@ -774,7 +774,7 @@ CREATE TABLE `donations` (
   KEY `UserID` (`UserID`) USING BTREE,
   KEY `Time` (`Time`) USING BTREE,
   KEY `Amount` (`Amount`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=COMPACT;
 
 
 --
@@ -787,7 +787,7 @@ CREATE TABLE `donations_bitcoin` (
   `BitcoinAddress` varchar(34) NOT NULL,
   `Amount` decimal(24,8) NOT NULL,
   KEY `BitcoinAddress` (`BitcoinAddress`,`Amount`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=COMPACT;
 
 
 --
@@ -806,7 +806,7 @@ CREATE TABLE `donations_prepaid_card` (
   `status` enum('1','2','3') NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `card_num` (`card_num`,`card_secret`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4;
 
 
 --
@@ -821,7 +821,7 @@ CREATE TABLE `donor_forum_usernames` (
   `Suffix` varchar(30) NOT NULL DEFAULT '',
   `UseComma` tinyint(1) DEFAULT '1',
   PRIMARY KEY (`UserID`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=COMPACT;
 
 
 --
@@ -848,7 +848,7 @@ CREATE TABLE `donor_rewards` (
   `ColorUsername` varchar(45) DEFAULT NULL,
   `GradientsColor` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`UserID`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=COMPACT;
 
 
 --
@@ -861,7 +861,7 @@ CREATE TABLE `dupe_groups` (
   `ID` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `Comments` text,
   PRIMARY KEY (`ID`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=COMPACT;
 
 
 --
@@ -877,7 +877,7 @@ CREATE TABLE `email_blacklist` (
   `Time` datetime NOT NULL,
   `Comment` text NOT NULL,
   PRIMARY KEY (`ID`) USING BTREE
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 ROW_FORMAT=COMPACT;
 
 
 --
@@ -899,7 +899,7 @@ CREATE TABLE `events_reward_log` (
   `Remark` varchar(45) DEFAULT NULL,
   `Time` datetime DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4;
 
 
 --
@@ -915,7 +915,7 @@ CREATE TABLE `featured_albums` (
   `Started` datetime NOT NULL,
   `Ended` datetime NOT NULL,
   `Type` tinyint(4) NOT NULL DEFAULT '0'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=COMPACT;
 
 
 --
@@ -931,7 +931,7 @@ CREATE TABLE `featured_merch` (
   `Started` datetime NOT NULL,
   `Ended` datetime NOT NULL,
   `ArtistID` int(10) unsigned DEFAULT '0'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=COMPACT;
 
 
 --
@@ -961,7 +961,7 @@ CREATE TABLE `forums` (
   PRIMARY KEY (`ID`) USING BTREE,
   KEY `Sort` (`Sort`) USING BTREE,
   KEY `MinClassRead` (`MinClassRead`) USING BTREE
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 ROW_FORMAT=COMPACT;
 
 
 --
@@ -976,7 +976,7 @@ CREATE TABLE `forums_categories` (
   `Sort` int(6) unsigned NOT NULL DEFAULT '0',
   PRIMARY KEY (`ID`) USING BTREE,
   KEY `Sort` (`Sort`) USING BTREE
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 ROW_FORMAT=COMPACT;
 
 
 --
@@ -991,7 +991,7 @@ CREATE TABLE `forums_last_read_topics` (
   `PostID` int(10) NOT NULL,
   PRIMARY KEY (`UserID`,`TopicID`) USING BTREE,
   KEY `TopicID` (`TopicID`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=COMPACT;
 
 
 --
@@ -1008,7 +1008,7 @@ CREATE TABLE `forums_polls` (
   `Closed` enum('0','1') NOT NULL DEFAULT '0',
   `MaxCount` int(11) NOT NULL DEFAULT '1',
   PRIMARY KEY (`TopicID`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=COMPACT;
 
 
 --
@@ -1022,7 +1022,7 @@ CREATE TABLE `forums_polls_votes` (
   `UserID` int(10) unsigned NOT NULL,
   `Vote` tinyint(3) unsigned NOT NULL,
   PRIMARY KEY (`TopicID`,`UserID`,`Vote`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=COMPACT;
 
 
 --
@@ -1042,7 +1042,7 @@ CREATE TABLE `forums_posts` (
   PRIMARY KEY (`ID`) USING BTREE,
   KEY `TopicID` (`TopicID`) USING BTREE,
   KEY `AuthorID` (`AuthorID`) USING BTREE
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 ROW_FORMAT=COMPACT;
 
 
 --
@@ -1063,7 +1063,7 @@ CREATE TABLE `forums_posts_jf_log` (
   `Comment` varchar(100) NOT NULL,
   `Sys` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4;
 
 
 --
@@ -1075,7 +1075,7 @@ DROP TABLE IF EXISTS `forums_specific_rules`;
 CREATE TABLE `forums_specific_rules` (
   `ForumID` int(6) unsigned DEFAULT NULL,
   `ThreadID` int(10) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=COMPACT;
 
 
 --
@@ -1093,7 +1093,7 @@ CREATE TABLE `forums_topic_notes` (
   PRIMARY KEY (`ID`) USING BTREE,
   KEY `TopicID` (`TopicID`) USING BTREE,
   KEY `AuthorID` (`AuthorID`) USING BTREE
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 ROW_FORMAT=COMPACT;
 
 
 --
@@ -1126,7 +1126,7 @@ CREATE TABLE `forums_topics` (
   KEY `LastPostID` (`LastPostID`) USING BTREE,
   KEY `Title` (`Title`) USING BTREE,
   KEY `CreatedTime` (`CreatedTime`) USING BTREE
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 ROW_FORMAT=COMPACT;
 
 
 --
@@ -1139,7 +1139,7 @@ CREATE TABLE `freetorrents_timed` (
   `TorrentID` int(11) NOT NULL,
   `EndTime` datetime NOT NULL,
   PRIMARY KEY (`TorrentID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 
 --
@@ -1155,7 +1155,7 @@ CREATE TABLE `friends` (
   PRIMARY KEY (`UserID`,`FriendID`) USING BTREE,
   KEY `UserID` (`UserID`) USING BTREE,
   KEY `FriendID` (`FriendID`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=COMPACT;
 
 
 --
@@ -1169,7 +1169,7 @@ CREATE TABLE `geoip_country` (
   `EndIP` int(11) unsigned NOT NULL,
   `Code` varchar(2) NOT NULL,
   PRIMARY KEY (`StartIP`,`EndIP`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=COMPACT;
 
 
 --
@@ -1190,7 +1190,7 @@ CREATE TABLE `group_log` (
   KEY `GroupID` (`GroupID`) USING BTREE,
   KEY `TorrentID` (`TorrentID`) USING BTREE,
   KEY `UserID` (`UserID`) USING BTREE
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 ROW_FORMAT=COMPACT;
 
 
 --
@@ -1210,7 +1210,7 @@ CREATE TABLE `invite_tree` (
   KEY `TreePosition` (`TreePosition`) USING BTREE,
   KEY `TreeID` (`TreeID`) USING BTREE,
   KEY `TreeLevel` (`TreeLevel`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=COMPACT;
 
 
 --
@@ -1229,7 +1229,7 @@ CREATE TABLE `invites` (
   PRIMARY KEY (`InviteKey`) USING BTREE,
   KEY `Expires` (`Expires`) USING BTREE,
   KEY `InviterID` (`InviterID`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=COMPACT;
 
 
 --
@@ -1245,7 +1245,7 @@ CREATE TABLE `invites_history` (
   `Email` varchar(255) NOT NULL,
   `InviteKey` char(32) NOT NULL,
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4;
 
 
 --
@@ -1261,7 +1261,7 @@ CREATE TABLE `invites_typed` (
   `Type` enum('time','count') NOT NULL,
   `Used` tinyint(4) NOT NULL DEFAULT '0',
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4;
 
 
 --
@@ -1278,7 +1278,7 @@ CREATE TABLE `ip_bans` (
   PRIMARY KEY (`ID`) USING BTREE,
   UNIQUE KEY `FromIP_2` (`FromIP`,`ToIP`) USING BTREE,
   KEY `ToIP` (`ToIP`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=COMPACT;
 
 
 --
@@ -1291,7 +1291,7 @@ CREATE TABLE `ip_lock` (
   `UserID` int(11) NOT NULL,
   `IPs` varchar(150) NOT NULL,
   PRIMARY KEY (`UserID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Table structure for table `last_sent_email`
@@ -1302,7 +1302,7 @@ DROP TABLE IF EXISTS `last_sent_email`;
 CREATE TABLE `last_sent_email` (
   `UserID` int(10) NOT NULL,
   PRIMARY KEY (`UserID`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=COMPACT;
 
 
 --
@@ -1316,7 +1316,7 @@ CREATE TABLE `locked_accounts` (
   `Type` tinyint(1) NOT NULL,
   PRIMARY KEY (`UserID`) USING BTREE,
   CONSTRAINT `fk_user_id` FOREIGN KEY (`UserID`) REFERENCES `users_main` (`ID`) ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=COMPACT;
 
 
 --
@@ -1331,7 +1331,7 @@ CREATE TABLE `log` (
   `Time` datetime NOT NULL,
   PRIMARY KEY (`ID`) USING BTREE,
   KEY `Time` (`Time`) USING BTREE
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 ROW_FORMAT=COMPACT;
 
 
 --
@@ -1351,7 +1351,7 @@ CREATE TABLE `login_attempts` (
   PRIMARY KEY (`ID`) USING BTREE,
   KEY `UserID` (`UserID`) USING BTREE,
   KEY `IP` (`IP`) USING BTREE
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 ROW_FORMAT=COMPACT;
 
 
 --
@@ -1368,7 +1368,7 @@ CREATE TABLE `login_link` (
   `Time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `Used` enum('0','1') NOT NULL DEFAULT '0',
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 
 --
@@ -1394,7 +1394,7 @@ CREATE TABLE `movie_info_cache` (
   `TMDBID` int(11) DEFAULT NULL,
   PRIMARY KEY (`IMDBID`),
   KEY `DoubanID` (`DoubanID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 
 --
@@ -1408,7 +1408,7 @@ CREATE TABLE `new_info_hashes` (
   `InfoHash` binary(20) DEFAULT NULL,
   PRIMARY KEY (`TorrentID`) USING BTREE,
   KEY `InfoHash` (`InfoHash`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=COMPACT;
 
 
 --
@@ -1426,7 +1426,7 @@ CREATE TABLE `news` (
   PRIMARY KEY (`ID`) USING BTREE,
   KEY `UserID` (`UserID`) USING BTREE,
   KEY `Time` (`Time`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=COMPACT;
 
 
 --
@@ -1442,7 +1442,7 @@ CREATE TABLE `ocelot_query_times` (
   `querylength` int(11) NOT NULL,
   `timespent` int(11) NOT NULL,
   UNIQUE KEY `starttime` (`starttime`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=COMPACT;
 
 
 --
@@ -1465,7 +1465,7 @@ CREATE TABLE `permissions` (
   KEY `DisplayStaff` (`DisplayStaff`) USING BTREE,
   KEY `StaffGroup` (`StaffGroup`) USING BTREE,
   CONSTRAINT `permissions_ibfk_1` FOREIGN KEY (`StaffGroup`) REFERENCES `staff_groups` (`ID`) ON DELETE SET NULL ON UPDATE CASCADE
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 ROW_FORMAT=COMPACT;
 
 
 --
@@ -1481,7 +1481,7 @@ CREATE TABLE `phinxlog` (
   `end_time` timestamp NULL DEFAULT NULL,
   `breakpoint` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`version`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=COMPACT;
 
 
 --
@@ -1494,7 +1494,7 @@ CREATE TABLE `pm_conversations` (
   `ID` int(12) NOT NULL AUTO_INCREMENT,
   `Subject` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`ID`) USING BTREE
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 ROW_FORMAT=COMPACT;
 
 
 --
@@ -1522,7 +1522,7 @@ CREATE TABLE `pm_conversations_users` (
   KEY `ReceivedDate` (`ReceivedDate`) USING BTREE,
   KEY `Sticky` (`Sticky`) USING BTREE,
   KEY `ForwardedTo` (`ForwardedTo`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=COMPACT;
 
 
 --
@@ -1539,7 +1539,7 @@ CREATE TABLE `pm_messages` (
   `Body` text,
   PRIMARY KEY (`ID`) USING BTREE,
   KEY `ConvID` (`ConvID`) USING BTREE
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 ROW_FORMAT=COMPACT;
 
 
 --
@@ -1552,7 +1552,7 @@ CREATE TABLE `push_notifications_usage` (
   `PushService` varchar(10) NOT NULL,
   `TimesUsed` int(10) NOT NULL DEFAULT '0',
   PRIMARY KEY (`PushService`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=COMPACT;
 
 
 --
@@ -1584,7 +1584,7 @@ CREATE TABLE `register_apply` (
   `c_opencd` int(1) unsigned zerofill NOT NULL,
   `c_others` int(1) unsigned zerofill NOT NULL,
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 
 --
@@ -1602,7 +1602,7 @@ CREATE TABLE `register_apply_link` (
   `Used` int(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`ID`),
   UNIQUE KEY `ApplyKey` (`ApplyKey`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 
 --
@@ -1616,7 +1616,7 @@ CREATE TABLE `register_apply_log` (
   `ApplyID` int(10) NOT NULL,
   `ApplyStatus` int(1) NOT NULL,
   `Time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 
 --
@@ -1643,7 +1643,7 @@ CREATE TABLE `reports` (
   KEY `Type` (`Type`) USING BTREE,
   KEY `ResolvedTime` (`ResolvedTime`) USING BTREE,
   KEY `ResolverID` (`ResolverID`) USING BTREE
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 ROW_FORMAT=COMPACT;
 
 
 --
@@ -1663,7 +1663,7 @@ CREATE TABLE `reports_email_blacklist` (
   PRIMARY KEY (`ID`) USING BTREE,
   KEY `Time` (`Time`) USING BTREE,
   KEY `UserID` (`UserID`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=COMPACT;
 
 
 --
@@ -1696,7 +1696,7 @@ CREATE TABLE `reportsv2` (
   KEY `LastChangeTime` (`LastChangeTime`) USING BTREE,
   KEY `TorrentID` (`TorrentID`) USING BTREE,
   KEY `ResolverID` (`ResolverID`) USING BTREE
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 ROW_FORMAT=COMPACT;
 
 
 --
@@ -1739,7 +1739,7 @@ CREATE TABLE `requests` (
   KEY `TimeFilled` (`TimeFilled`) USING BTREE,
   KEY `LastVote` (`LastVote`) USING BTREE,
   KEY `GroupID` (`GroupID`) USING BTREE
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 ROW_FORMAT=COMPACT;
 
 
 --
@@ -1754,7 +1754,7 @@ CREATE TABLE `requests_artists` (
   `AliasID` int(10) NOT NULL,
   `Importance` enum('1','2','3','4','5','6','7') DEFAULT NULL,
   PRIMARY KEY (`RequestID`,`AliasID`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=COMPACT;
 
 
 --
@@ -1769,7 +1769,7 @@ CREATE TABLE `requests_tags` (
   PRIMARY KEY (`TagID`,`RequestID`) USING BTREE,
   KEY `TagID` (`TagID`) USING BTREE,
   KEY `RequestID` (`RequestID`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=COMPACT;
 
 
 --
@@ -1786,7 +1786,7 @@ CREATE TABLE `requests_votes` (
   KEY `RequestID` (`RequestID`) USING BTREE,
   KEY `UserID` (`UserID`) USING BTREE,
   KEY `Bounty` (`Bounty`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=COMPACT;
 
 
 --
@@ -1800,7 +1800,7 @@ CREATE TABLE `schedule` (
   `NextDay` int(2) NOT NULL DEFAULT '0',
   `NextBiWeekly` int(2) NOT NULL DEFAULT '0',
   `NextMonth` int(2) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=COMPACT;
 
 
 --
@@ -1820,7 +1820,7 @@ CREATE TABLE `site_history` (
   `Date` datetime DEFAULT NULL,
   `Body` mediumtext,
   PRIMARY KEY (`ID`) USING BTREE
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 ROW_FORMAT=COMPACT;
 
 
 --
@@ -1837,7 +1837,7 @@ CREATE TABLE `site_options` (
   PRIMARY KEY (`ID`) USING BTREE,
   UNIQUE KEY `Name` (`Name`) USING BTREE,
   KEY `name_index` (`Name`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=COMPACT;
 
 
 --
@@ -1850,7 +1850,7 @@ CREATE TABLE `sphinx_a` (
   `gid` int(11) DEFAULT NULL,
   `aname` text,
   KEY `gid` (`gid`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=COMPACT;
 
 
 --
@@ -1898,7 +1898,7 @@ CREATE TABLE `sphinx_delta` (
   PRIMARY KEY (`ID`) USING BTREE,
   KEY `GroupID` (`GroupID`) USING BTREE,
   KEY `Size` (`Size`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC;
 
 
 --
@@ -1926,7 +1926,7 @@ CREATE TABLE `sphinx_hash` (
   `RemasterTitle` varchar(512) DEFAULT NULL,
   `FileList` mediumtext,
   PRIMARY KEY (`ID`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC;
 
 
 --
@@ -1939,7 +1939,7 @@ CREATE TABLE `sphinx_index_last_pos` (
   `Type` varchar(16) NOT NULL DEFAULT '',
   `ID` int(11) DEFAULT NULL,
   PRIMARY KEY (`Type`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=COMPACT;
 
 
 --
@@ -1977,7 +1977,7 @@ CREATE TABLE `sphinx_requests` (
   KEY `Year` (`Year`) USING BTREE,
   KEY `TimeFilled` (`TimeFilled`) USING BTREE,
   KEY `LastVote` (`LastVote`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=COMPACT;
 
 
 --
@@ -2016,7 +2016,7 @@ CREATE TABLE `sphinx_requests_delta` (
   KEY `Year` (`Year`) USING BTREE,
   KEY `TimeFilled` (`TimeFilled`) USING BTREE,
   KEY `LastVote` (`LastVote`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=COMPACT;
 
 
 --
@@ -2054,7 +2054,7 @@ CREATE TABLE `sphinx_t` (
   `processing` varchar(255) NOT NULL,
   PRIMARY KEY (`id`) USING BTREE,
   KEY `gid_remident` (`gid`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=COMPACT;
 
 
 --
@@ -2078,7 +2078,7 @@ CREATE TABLE `sphinx_tg` (
   `language` varchar(100) DEFAULT NULL,
   `rtrating` varchar(255) NOT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=COMPACT;
 
 
 --
@@ -2094,7 +2094,7 @@ CREATE TABLE `staff_answers` (
   `Date` datetime NOT NULL,
   PRIMARY KEY (`QuestionID`,`UserID`) USING BTREE,
   KEY `UserID` (`UserID`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=COMPACT;
 
 
 --
@@ -2113,7 +2113,7 @@ CREATE TABLE `staff_blog` (
   PRIMARY KEY (`ID`) USING BTREE,
   KEY `UserID` (`UserID`) USING BTREE,
   KEY `Time` (`Time`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=COMPACT;
 
 
 --
@@ -2127,7 +2127,7 @@ CREATE TABLE `staff_blog_visits` (
   `Time` datetime NOT NULL,
   UNIQUE KEY `UserID` (`UserID`) USING BTREE,
   CONSTRAINT `staff_blog_visits_ibfk_1` FOREIGN KEY (`UserID`) REFERENCES `users_main` (`ID`) ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=COMPACT;
 
 
 --
@@ -2142,7 +2142,7 @@ CREATE TABLE `staff_groups` (
   `Name` text NOT NULL,
   PRIMARY KEY (`ID`) USING BTREE,
   UNIQUE KEY `Name` (`Name`(50)) USING BTREE
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 ROW_FORMAT=COMPACT;
 
 
 --
@@ -2155,7 +2155,7 @@ CREATE TABLE `staff_ignored_questions` (
   `QuestionID` int(10) NOT NULL,
   `UserID` int(10) NOT NULL,
   PRIMARY KEY (`QuestionID`,`UserID`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=COMPACT;
 
 
 --
@@ -2177,7 +2177,7 @@ CREATE TABLE `staff_pm_conversations` (
   PRIMARY KEY (`ID`) USING BTREE,
   KEY `StatusAssigned` (`Status`,`AssignedToUser`) USING BTREE,
   KEY `StatusLevel` (`Status`,`Level`) USING BTREE
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 ROW_FORMAT=COMPACT;
 
 
 --
@@ -2193,7 +2193,7 @@ CREATE TABLE `staff_pm_messages` (
   `Message` text,
   `ConvID` int(11) DEFAULT NULL,
   PRIMARY KEY (`ID`) USING BTREE
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 ROW_FORMAT=COMPACT;
 
 
 --
@@ -2207,7 +2207,7 @@ CREATE TABLE `staff_pm_responses` (
   `Message` text,
   `Name` text,
   PRIMARY KEY (`ID`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=COMPACT;
 
 
 --
@@ -2222,7 +2222,7 @@ CREATE TABLE `styles_backup` (
   `StyleURL` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`UserID`) USING BTREE,
   KEY `StyleURL` (`StyleURL`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=COMPACT;
 
 
 --
@@ -2237,7 +2237,7 @@ CREATE TABLE `stylesheets` (
   `Description` varchar(255) NOT NULL,
   `Default` enum('0','1') NOT NULL DEFAULT '0',
   PRIMARY KEY (`ID`) USING BTREE
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 ROW_FORMAT=COMPACT;
 
 
 --
@@ -2259,7 +2259,7 @@ CREATE TABLE `subtitles` (
   `name` varchar(255) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `torrent_id` (`torrent_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4;
 
 
 --
@@ -2272,7 +2272,7 @@ CREATE TABLE `subtitles_files` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `File` mediumblob NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4;
 
 
 --
@@ -2288,7 +2288,7 @@ CREATE TABLE `tag_aliases` (
   PRIMARY KEY (`ID`) USING BTREE,
   KEY `BadTag` (`BadTag`) USING BTREE,
   KEY `AliasTag` (`AliasTag`) USING BTREE
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 ROW_FORMAT=COMPACT;
 
 
 --
@@ -2308,7 +2308,7 @@ CREATE TABLE `tags` (
   KEY `TagType` (`TagType`) USING BTREE,
   KEY `Uses` (`Uses`) USING BTREE,
   KEY `UserID` (`UserID`) USING BTREE
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 ROW_FORMAT=COMPACT;
 
 
 --
@@ -2324,7 +2324,7 @@ CREATE TABLE `thread` (
   PRIMARY KEY (`ID`) USING BTREE,
   KEY `ThreadTypeID` (`ThreadTypeID`) USING BTREE,
   CONSTRAINT `thread_ibfk_1` FOREIGN KEY (`ThreadTypeID`) REFERENCES `thread_type` (`ID`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 ROW_FORMAT=COMPACT;
 
 
 --
@@ -2345,7 +2345,7 @@ CREATE TABLE `thread_note` (
   KEY `UserID` (`UserID`) USING BTREE,
   CONSTRAINT `thread_note_ibfk_1` FOREIGN KEY (`ThreadID`) REFERENCES `thread` (`ID`),
   CONSTRAINT `thread_note_ibfk_2` FOREIGN KEY (`UserID`) REFERENCES `users_main` (`ID`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 ROW_FORMAT=COMPACT;
 
 
 --
@@ -2359,7 +2359,7 @@ CREATE TABLE `thread_type` (
   `Name` varchar(20) NOT NULL,
   PRIMARY KEY (`ID`) USING BTREE,
   UNIQUE KEY `Name` (`Name`) USING BTREE
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 ROW_FORMAT=COMPACT;
 
 
 --
@@ -2375,7 +2375,7 @@ CREATE TABLE `thumb` (
   `ToUserID` int(10) NOT NULL,
   `Time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`ItemID`,`Type`,`FromUserID`,`ToUserID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 
 --
@@ -2390,7 +2390,7 @@ CREATE TABLE `tokens_typed` (
   `Type` enum('count','time') NOT NULL,
   `UserID` int(10) NOT NULL,
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4;
 
 
 --
@@ -2404,7 +2404,7 @@ CREATE TABLE `top10_history` (
   `Date` datetime NOT NULL,
   `Type` enum('Daily','Weekly') DEFAULT NULL,
   PRIMARY KEY (`ID`) USING BTREE
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 ROW_FORMAT=COMPACT;
 
 
 --
@@ -2419,7 +2419,7 @@ CREATE TABLE `top10_history_torrents` (
   `TorrentID` int(10) NOT NULL DEFAULT '0',
   `TitleString` varchar(150) NOT NULL DEFAULT '',
   `TagString` varchar(100) NOT NULL DEFAULT ''
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=COMPACT;
 
 
 --
@@ -2485,7 +2485,7 @@ CREATE TABLE `torrents` (
   KEY `last_action` (`last_action`) USING BTREE,
   KEY `Time` (`Time`) USING BTREE,
   KEY `FreeTorrent` (`FreeTorrent`) USING BTREE
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 ROW_FORMAT=COMPACT;
 
 
 --
@@ -2508,7 +2508,7 @@ CREATE TABLE `torrents_artists` (
   KEY `Importance` (`Importance`) USING BTREE,
   KEY `GroupID` (`GroupID`) USING BTREE,
   KEY `UserID` (`UserID`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=COMPACT;
 
 
 --
@@ -2521,7 +2521,7 @@ CREATE TABLE `torrents_bad_files` (
   `TorrentID` int(11) NOT NULL DEFAULT '0',
   `UserID` int(11) NOT NULL DEFAULT '0',
   `TimeAdded` datetime NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=COMPACT;
 
 
 --
@@ -2535,7 +2535,7 @@ CREATE TABLE `torrents_bad_folders` (
   `UserID` int(11) NOT NULL,
   `TimeAdded` datetime NOT NULL,
   PRIMARY KEY (`TorrentID`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=COMPACT;
 
 
 --
@@ -2553,7 +2553,7 @@ CREATE TABLE `torrents_balance_history` (
   UNIQUE KEY `TorrentID_2` (`TorrentID`,`Time`) USING BTREE,
   UNIQUE KEY `TorrentID_3` (`TorrentID`,`balance`) USING BTREE,
   KEY `Time` (`Time`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=COMPACT;
 
 
 --
@@ -2570,7 +2570,7 @@ CREATE TABLE `torrents_check` (
   `Message` varchar(250) DEFAULT NULL,
   `Time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4;
 
 
 --
@@ -2585,7 +2585,7 @@ CREATE TABLE `torrents_custom_trumpable` (
   `TimeAdded` datetime NOT NULL,
   `CustomTrumpable` text NOT NULL,
   PRIMARY KEY (`TorrentID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 
 --
@@ -2598,7 +2598,7 @@ CREATE TABLE `torrents_files` (
   `TorrentID` int(10) NOT NULL,
   `File` mediumblob NOT NULL,
   PRIMARY KEY (`TorrentID`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC;
 
 
 --
@@ -2641,7 +2641,7 @@ CREATE TABLE `torrents_group` (
   KEY `Time` (`Time`) USING BTREE,
   KEY `RevisionID` (`RevisionID`) USING BTREE,
   KEY `IMDBID` (`IMDBID`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 ROW_FORMAT=COMPACT;
 
 
 --
@@ -2655,7 +2655,7 @@ CREATE TABLE `torrents_hard_sub` (
   `UserID` int(11) NOT NULL,
   `TimeAdded` datetime NOT NULL,
   PRIMARY KEY (`TorrentID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 
 --
@@ -2669,7 +2669,7 @@ CREATE TABLE `torrents_no_sub` (
   `UserID` int(11) NOT NULL,
   `TimeAdded` datetime NOT NULL,
   PRIMARY KEY (`TorrentID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 
 --
@@ -2687,7 +2687,7 @@ CREATE TABLE `torrents_peerlists` (
   PRIMARY KEY (`TorrentID`) USING BTREE,
   KEY `GroupID` (`GroupID`) USING BTREE,
   KEY `Stats` (`TorrentID`,`Seeders`,`Leechers`,`Snatches`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=COMPACT;
 
 
 --
@@ -2705,7 +2705,7 @@ CREATE TABLE `torrents_peerlists_compare` (
   PRIMARY KEY (`TorrentID`) USING BTREE,
   KEY `GroupID` (`GroupID`) USING BTREE,
   KEY `Stats` (`TorrentID`,`Seeders`,`Leechers`,`Snatches`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=COMPACT;
 
 
 --
@@ -2720,7 +2720,7 @@ CREATE TABLE `torrents_recommended` (
   `Time` datetime NOT NULL,
   PRIMARY KEY (`GroupID`) USING BTREE,
   KEY `Time` (`Time`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=COMPACT;
 
 
 --
@@ -2735,7 +2735,7 @@ CREATE TABLE `torrents_send_bonus` (
   `Bonus` int(11) NOT NULL,
   `Time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`TorrentID`,`FromUserID`,`Bonus`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 
 --
@@ -2756,7 +2756,7 @@ CREATE TABLE `torrents_tags` (
   KEY `PositiveVotes` (`PositiveVotes`) USING BTREE,
   KEY `NegativeVotes` (`NegativeVotes`) USING BTREE,
   KEY `UserID` (`UserID`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=COMPACT;
 
 
 --
@@ -2771,7 +2771,7 @@ CREATE TABLE `torrents_tags_votes` (
   `UserID` int(10) NOT NULL,
   `Way` enum('up','down') NOT NULL DEFAULT 'up',
   PRIMARY KEY (`GroupID`,`TagID`,`UserID`,`Way`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=COMPACT;
 
 
 --
@@ -2788,7 +2788,7 @@ CREATE TABLE `torrents_votes` (
   PRIMARY KEY (`GroupID`) USING BTREE,
   KEY `Score` (`Score`) USING BTREE,
   CONSTRAINT `torrents_votes_ibfk_1` FOREIGN KEY (`GroupID`) REFERENCES `torrents_group` (`ID`) ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=COMPACT;
 
 
 --
@@ -2803,7 +2803,7 @@ CREATE TABLE `upload_contest` (
   PRIMARY KEY (`TorrentID`) USING BTREE,
   KEY `UserID` (`UserID`) USING BTREE,
   CONSTRAINT `upload_contest_ibfk_1` FOREIGN KEY (`UserID`) REFERENCES `users_main` (`ID`) ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=COMPACT;
 
 
 --
@@ -2819,7 +2819,7 @@ CREATE TABLE `user_questions` (
   `Date` datetime NOT NULL,
   PRIMARY KEY (`ID`) USING BTREE,
   KEY `Date` (`Date`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=COMPACT;
 
 
 --
@@ -2834,7 +2834,7 @@ CREATE TABLE `users_collage_subs` (
   `LastVisit` datetime DEFAULT NULL,
   PRIMARY KEY (`UserID`,`CollageID`) USING BTREE,
   KEY `CollageID` (`CollageID`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=COMPACT;
 
 
 --
@@ -2850,7 +2850,7 @@ CREATE TABLE `users_comments_last_read` (
   `PostID` int(10) NOT NULL,
   PRIMARY KEY (`UserID`,`Page`,`PageID`) USING BTREE,
   KEY `Page` (`Page`,`PageID`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=COMPACT;
 
 
 --
@@ -2876,7 +2876,7 @@ CREATE TABLE `users_donor_ranks` (
   KEY `SpecialRank` (`SpecialRank`) USING BTREE,
   KEY `Rank` (`Rank`) USING BTREE,
   KEY `TotalRank` (`TotalRank`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=COMPACT;
 
 
 --
@@ -2892,7 +2892,7 @@ CREATE TABLE `users_downloads` (
   PRIMARY KEY (`UserID`,`TorrentID`,`Time`) USING BTREE,
   KEY `TorrentID` (`TorrentID`) USING BTREE,
   KEY `UserID` (`UserID`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=COMPACT;
 
 
 --
@@ -2908,7 +2908,7 @@ CREATE TABLE `users_dupes` (
   KEY `GroupID` (`GroupID`) USING BTREE,
   CONSTRAINT `users_dupes_ibfk_1` FOREIGN KEY (`UserID`) REFERENCES `users_main` (`ID`) ON DELETE CASCADE,
   CONSTRAINT `users_dupes_ibfk_2` FOREIGN KEY (`GroupID`) REFERENCES `dupe_groups` (`ID`) ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=COMPACT;
 
 
 --
@@ -2922,7 +2922,7 @@ CREATE TABLE `users_enable_recommendations` (
   `Enable` tinyint(1) DEFAULT NULL,
   PRIMARY KEY (`ID`) USING BTREE,
   KEY `Enable` (`Enable`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=COMPACT;
 
 
 --
@@ -2947,7 +2947,7 @@ CREATE TABLE `users_enable_requests` (
   KEY `CheckedBy` (`CheckedBy`) USING BTREE,
   CONSTRAINT `users_enable_requests_ibfk_1` FOREIGN KEY (`UserID`) REFERENCES `users_main` (`ID`),
   CONSTRAINT `users_enable_requests_ibfk_2` FOREIGN KEY (`CheckedBy`) REFERENCES `users_main` (`ID`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 ROW_FORMAT=COMPACT;
 
 
 --
@@ -2966,7 +2966,7 @@ CREATE TABLE `users_freeleeches` (
   PRIMARY KEY (`UserID`,`TorrentID`) USING BTREE,
   KEY `Time` (`Time`) USING BTREE,
   KEY `Expired_Time` (`Expired`,`Time`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=COMPACT;
 
 
 --
@@ -2982,7 +2982,7 @@ CREATE TABLE `users_freeleeches_time` (
   `Time` datetime NOT NULL,
   PRIMARY KEY (`ID`),
   KEY `UserID` (`UserID`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4;
 
 
 --
@@ -3000,7 +3000,7 @@ CREATE TABLE `users_freetorrents` (
   `Downloaded` bigint(20) unsigned NOT NULL DEFAULT '0',
   PRIMARY KEY (`UserID`,`TorrentID`,`FreeTorrent`),
   KEY `Time` (`Time`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=COMPACT;
 
 
 --
@@ -3012,7 +3012,7 @@ DROP TABLE IF EXISTS `users_geodistribution`;
 CREATE TABLE `users_geodistribution` (
   `Code` varchar(2) NOT NULL,
   `Users` int(10) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=COMPACT;
 
 
 --
@@ -3027,7 +3027,7 @@ CREATE TABLE `users_history_emails` (
   `Time` datetime DEFAULT NULL,
   `IP` varchar(15) DEFAULT NULL,
   KEY `UserID` (`UserID`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=COMPACT;
 
 
 --
@@ -3046,7 +3046,7 @@ CREATE TABLE `users_history_ips` (
   KEY `IP` (`IP`) USING BTREE,
   KEY `StartTime` (`StartTime`) USING BTREE,
   KEY `EndTime` (`EndTime`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=COMPACT;
 
 
 --
@@ -3061,7 +3061,7 @@ CREATE TABLE `users_history_passkeys` (
   `NewPassKey` varchar(32) DEFAULT NULL,
   `ChangeTime` datetime DEFAULT NULL,
   `ChangerIP` varchar(15) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=COMPACT;
 
 
 --
@@ -3075,7 +3075,7 @@ CREATE TABLE `users_history_passwords` (
   `ChangeTime` datetime DEFAULT NULL,
   `ChangerIP` varchar(15) DEFAULT NULL,
   KEY `User_Time` (`UserID`,`ChangeTime`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=COMPACT;
 
 
 --
@@ -3155,7 +3155,7 @@ CREATE TABLE `users_info` (
   KEY `AuthKey` (`AuthKey`) USING BTREE,
   KEY `ResetKey` (`ResetKey`) USING BTREE,
   KEY `Found` (`Found`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=COMPACT;
 
 
 --
@@ -3169,7 +3169,7 @@ CREATE TABLE `users_last_month` (
   `Downloaded` bigint(20) unsigned NOT NULL,
   `TorrentCnt` int(11) NOT NULL,
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 
 --
@@ -3183,7 +3183,7 @@ CREATE TABLE `users_levels` (
   `PermissionID` int(10) unsigned NOT NULL,
   PRIMARY KEY (`UserID`,`PermissionID`) USING BTREE,
   KEY `PermissionID` (`PermissionID`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=COMPACT;
 
 
 --
@@ -3242,7 +3242,7 @@ CREATE TABLE `users_main` (
   KEY `RequiredRatio` (`RequiredRatio`) USING BTREE,
   KEY `cc_index` (`ipcc`) USING BTREE,
   KEY `PermissionID` (`PermissionID`) USING BTREE
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 ROW_FORMAT=COMPACT;
 
 
 --
@@ -3267,7 +3267,7 @@ CREATE TABLE `users_notifications_settings` (
   `TorrentAlerts` tinyint(1) DEFAULT '1',
   `ForumAlerts` tinyint(1) DEFAULT '1',
   PRIMARY KEY (`UserID`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=COMPACT;
 
 
 --
@@ -3313,7 +3313,7 @@ CREATE TABLE `users_notify_filters` (
   KEY `UserID` (`UserID`) USING BTREE,
   KEY `FromYear` (`FromYear`) USING BTREE,
   KEY `ToYear` (`ToYear`) USING BTREE
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 ROW_FORMAT=COMPACT;
 
 
 --
@@ -3331,7 +3331,7 @@ CREATE TABLE `users_notify_quoted` (
   `UnRead` tinyint(1) NOT NULL DEFAULT '1',
   `Date` datetime NOT NULL,
   PRIMARY KEY (`UserID`,`Page`,`PostID`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=COMPACT;
 
 
 --
@@ -3349,7 +3349,7 @@ CREATE TABLE `users_notify_torrents` (
   PRIMARY KEY (`UserID`,`TorrentID`) USING BTREE,
   KEY `TorrentID` (`TorrentID`) USING BTREE,
   KEY `UserID_Unread` (`UserID`,`UnRead`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=COMPACT;
 
 
 --
@@ -3365,7 +3365,7 @@ CREATE TABLE `users_points` (
   PRIMARY KEY (`UserID`,`GroupID`) USING BTREE,
   KEY `UserID` (`UserID`) USING BTREE,
   KEY `GroupID` (`GroupID`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=COMPACT;
 
 
 --
@@ -3381,7 +3381,7 @@ CREATE TABLE `users_points_requests` (
   PRIMARY KEY (`RequestID`) USING BTREE,
   KEY `UserID` (`UserID`) USING BTREE,
   KEY `RequestID` (`RequestID`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=COMPACT;
 
 
 --
@@ -3395,7 +3395,7 @@ CREATE TABLE `users_push_notifications` (
   `PushService` tinyint(1) NOT NULL DEFAULT '0',
   `PushOptions` text NOT NULL,
   PRIMARY KEY (`UserID`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=COMPACT;
 
 
 --
@@ -3421,7 +3421,7 @@ CREATE TABLE `users_sessions` (
   KEY `LastUpdate` (`LastUpdate`) USING BTREE,
   KEY `Active` (`Active`) USING BTREE,
   KEY `ActiveAgeKeep` (`Active`,`LastUpdate`,`KeepLogged`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=COMPACT;
 
 
 --
@@ -3434,7 +3434,7 @@ CREATE TABLE `users_subscriptions` (
   `UserID` int(10) NOT NULL,
   `TopicID` int(10) NOT NULL,
   PRIMARY KEY (`UserID`,`TopicID`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=COMPACT;
 
 
 --
@@ -3448,7 +3448,7 @@ CREATE TABLE `users_subscriptions_comments` (
   `Page` enum('artist','collages','requests','torrents') NOT NULL,
   `PageID` int(10) NOT NULL,
   PRIMARY KEY (`UserID`,`Page`,`PageID`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=COMPACT;
 
 
 --
@@ -3462,7 +3462,7 @@ CREATE TABLE `users_summary` (
   `Groups` int(10) NOT NULL DEFAULT '0',
   PRIMARY KEY (`UserID`),
   CONSTRAINT `users_summary_ibfk_1` FOREIGN KEY (`UserID`) REFERENCES `users_main` (`ID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 
 --
@@ -3482,7 +3482,7 @@ CREATE TABLE `users_torrent_history` (
   PRIMARY KEY (`UserID`,`NumTorrents`,`Date`) USING BTREE,
   KEY `Finished` (`Finished`) USING BTREE,
   KEY `Date` (`Date`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=COMPACT;
 
 
 --
@@ -3496,7 +3496,7 @@ CREATE TABLE `users_torrent_history_snatch` (
   `NumSnatches` int(10) unsigned NOT NULL DEFAULT '0',
   PRIMARY KEY (`UserID`) USING BTREE,
   KEY `NumSnatches` (`NumSnatches`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=COMPACT;
 
 
 --
@@ -3511,7 +3511,7 @@ CREATE TABLE `users_torrent_history_temp` (
   `SumTime` bigint(20) unsigned NOT NULL DEFAULT '0',
   `SeedingAvg` int(6) unsigned NOT NULL DEFAULT '0',
   PRIMARY KEY (`UserID`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=COMPACT;
 
 
 --
@@ -3532,7 +3532,7 @@ CREATE TABLE `users_torrents` (
   `start_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `end_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`fid`,`uid`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC;
 
 
 --
@@ -3553,7 +3553,7 @@ CREATE TABLE `users_votes` (
   KEY `Vote` (`Type`,`GroupID`,`UserID`) USING BTREE,
   CONSTRAINT `users_votes_ibfk_1` FOREIGN KEY (`GroupID`) REFERENCES `torrents_group` (`ID`) ON DELETE CASCADE,
   CONSTRAINT `users_votes_ibfk_2` FOREIGN KEY (`UserID`) REFERENCES `users_main` (`ID`) ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=COMPACT;
 
 
 --
@@ -3566,7 +3566,7 @@ CREATE TABLE `users_warnings_forums` (
   `UserID` int(10) unsigned NOT NULL,
   `Comment` text NOT NULL,
   PRIMARY KEY (`UserID`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=COMPACT;
 
 
 --
@@ -3580,7 +3580,7 @@ CREATE TABLE `wiki_aliases` (
   `UserID` int(10) NOT NULL,
   `ArticleID` int(10) DEFAULT NULL,
   PRIMARY KEY (`Alias`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=COMPACT;
 
 
 --
@@ -3602,7 +3602,7 @@ CREATE TABLE `wiki_articles` (
   `Father` int(11) NOT NULL,
   `Lang` varchar(15) NOT NULL DEFAULT 'chs',
   PRIMARY KEY (`ID`) USING BTREE
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 ROW_FORMAT=COMPACT;
 
 
 --
@@ -3627,7 +3627,7 @@ CREATE TABLE `wiki_artists` (
   KEY `PageID` (`PageID`) USING BTREE,
   KEY `UserID` (`UserID`) USING BTREE,
   KEY `Time` (`Time`) USING BTREE
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 ROW_FORMAT=COMPACT;
 
 
 --
@@ -3644,7 +3644,7 @@ CREATE TABLE `wiki_revisions` (
   `Date` datetime DEFAULT NULL,
   `Author` int(10) DEFAULT NULL,
   KEY `ID_Revision` (`ID`,`Revision`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=COMPACT;
 
 
 --
@@ -3678,7 +3678,7 @@ CREATE TABLE `wiki_torrents` (
   KEY `UserID` (`UserID`) USING BTREE,
   KEY `Time` (`Time`) USING BTREE,
   KEY `IMDBID` (`IMDBID`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 ROW_FORMAT=COMPACT;
 
 
 --
@@ -3693,7 +3693,7 @@ CREATE TABLE `xbt_client_whitelist` (
   `vstring` varchar(200) DEFAULT '',
   PRIMARY KEY (`id`) USING BTREE,
   UNIQUE KEY `peer_id` (`peer_id`) USING BTREE
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 ROW_FORMAT=COMPACT;
 
 
 --
@@ -3709,7 +3709,7 @@ CREATE TABLE `xbt_files_history` (
   `downloaded` bigint(20) NOT NULL DEFAULT '0',
   `uploaded` bigint(20) NOT NULL DEFAULT '0',
   PRIMARY KEY (`fid`,`uid`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 
 --
@@ -3742,7 +3742,7 @@ CREATE TABLE `xbt_files_users` (
   KEY `fid_idx` (`fid`) USING BTREE,
   KEY `mtime_idx` (`mtime`) USING BTREE,
   KEY `uid_active` (`uid`,`active`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=COMPACT;
 
 
 --
@@ -3761,7 +3761,7 @@ CREATE TABLE `xbt_snatched` (
   KEY `fid` (`fid`) USING BTREE,
   KEY `tstamp` (`tstamp`) USING BTREE,
   KEY `uid_tstamp` (`uid`,`tstamp`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=COMPACT;
 
 -- ----------------------------
 -- Function structure for binomial_ci

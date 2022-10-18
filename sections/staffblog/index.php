@@ -151,10 +151,10 @@ if (check_perms('admin_manage_blog')) {
                 <div class="Post-header">
                     <div class="Post-headerLeft">
                         <span class="Post-headerTitle"><?= $Title ?></span>
+                        - <?= time_diff($BlogTime); ?>
                     </div>
                     <div class="Post-headerActions">
-                        <?= time_diff($BlogTime); ?>
-                        - <a href="forums.php?action=viewthread&amp;threadid=<?= $ThreadID ?>"><?= t('server.index.discuss') ?></a>
+                        <a href="forums.php?action=viewthread&amp;threadid=<?= $ThreadID ?>"><?= t('server.index.discuss') ?></a>
                         <? if (check_perms('admin_manage_blog')) { ?>
                             - <a href="staffblog.php?action=editblog&amp;id=<?= $BlogID ?>" class="brackets"><?= t('server.common.edit') ?></a>
                             - <a href="staffblog.php?action=deleteblog&amp;id=<?= $BlogID ?>&amp;auth=<?= $LoggedUser['AuthKey'] ?>" onclick="return confirm('<?= t('server.blog.do_you_want_to_delete_this') ?>');" class="brackets"><?= t('server.common.delete') ?></a>

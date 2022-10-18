@@ -12,7 +12,7 @@ while ! mysql -h mysql -u "$MYSQL_USER" -p"$MYSQL_PASSWORD" -e "show databases;"
 done
 
 counter=1
-while ! curl --fail http://web > /dev/null 2>&1; do
+while ! curl --fail http://gpw-web > /dev/null 2>&1; do
     sleep 1
     counter=$((counter + 1))
     if [ $((counter % 20)) -eq 0 ]; then
@@ -20,9 +20,9 @@ while ! curl --fail http://web > /dev/null 2>&1; do
     fi
 done
 
-indexer -c /var/lib/sphinxsearch/conf/sphinx.conf --all
+indexer -c /var/lib/manticore/conf/manticore.conf --all
 
 service cron start
-crontab /var/lib/sphinxsearch/conf/crontab
+crontab /var/lib/manticore/conf/crontab
 
-searchd --nodetach --config /var/lib/sphinxsearch/conf/sphinx.conf
+searchd --nodetach --config /var/lib/manticore/conf/manticore.conf

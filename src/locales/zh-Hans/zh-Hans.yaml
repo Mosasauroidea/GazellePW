@@ -1,5 +1,5 @@
 client.upload.copied: |-
-  复制成功
+  已复制
 client.common.save: |-
   保存
 client.common.cancel: |-
@@ -7,7 +7,7 @@ client.common.cancel: |-
 client.upload.uploading: |-
   上传中：
 client.upload.uploaded: |-
-  上传完成
+  上传成功
 client.bbcode.edit: |-
   编辑
 client.bbcode.loading: |-
@@ -434,10 +434,10 @@ server.artist.switch_to_cloud: |-
   切换到浮云图
 server.artist.switch_to_map: |-
   切换到关系图
-server.artist.search_auto_fill: |-
-  搜索以自动填充
 server.artist.tag: |-
   标签
+server.artist.search_auto_fill: |-
+  搜索以自动填充
 server.artist.there_are_still_requests_that_have: |-
   当前仍有一些求种包含&nbsp;
 server.artist.there_are_still_torrents_that_have: |-
@@ -904,7 +904,7 @@ server.collages.subscribed_collages: |-
 server.collages.subscribers: |-
   订阅数
 server.collages.tags: |-
-  标签 (逗号分隔)
+  标签 （逗号分隔）
 server.collages.that_collage_already_exists_1: |-
   同名合集已存在，但需要恢复，请 <a href="staffpm.php">联系</a> 管理组。
 server.collages.the_description_must_between: |-
@@ -2518,6 +2518,8 @@ server.reportsv2.all_reports_for_torrents_uploaded_by_user: |-
   由用户 %s 所发布种子的所有报告
 server.reportsv2.all_the_old_smelly_reports: |-
   陈芝麻烂谷子的报告
+server.reportsv2.relevant_other_torrents: |-
+  相关种子
 server.reportsv2.all_torrents_reported_by: |-
   所有被 %s 报告的种子
 server.reportsv2.all_torrents_reported_by_user: |-
@@ -2602,8 +2604,6 @@ server.reportsv2.multi_resolve_btn_title: |-
   采用各自的解决方案处理所有已勾选报告
 server.reportsv2.multi_resolve_title: |-
   通过批量处理按钮，所有已勾选报告都会被一次性处理掉
-server.reportsv2.relevant_other_torrents: |-
-  相关种子
 server.reportsv2.new_auto_assigned: |-
   新 (自动分配)
 server.reportsv2.new_reports_auto_assigned: |-
@@ -3090,7 +3090,7 @@ server.requests.vote_requests: |-
 server.requests.will_be: |-
   将会
 server.requests.year: |-
-  年
+  首次公映年份
 server.requests.yes: |-
   是
 server.requests.you_do_not_have_enough_uploaded: |-
@@ -3635,7 +3635,7 @@ server.tools.badges_giving: |-
 server.tools.ban_reason: |-
   封禁原因
 server.tools.tag_type: |-
-  标签类型
+  类别
 server.tools.bans: |-
   禁用
 server.tools.base_salary: |-
@@ -3867,7 +3867,7 @@ server.tools.economy: |-
 server.tools.edit_an_announcement: |-
   编辑公告:</br>(不会触发公告广播)
 server.tools.edit_requests_handled: |-
-  处理申请编辑
+  编辑请求
 server.tools.email: |-
   邮箱
 server.tools.email_address: |-
@@ -5395,7 +5395,7 @@ server.torrents.search_empty_2: |-
 server.torrents.search_for: |-
   搜索关键词
 server.torrents.search_requests: |-
-  搜索
+  搜索悬赏
 server.torrents.search_torrents: |-
   搜索
 server.torrents.seeders: |-
@@ -5538,10 +5538,10 @@ server.torrents.uhd_untouched_title: |-
   Remux 槽／原盘槽／DIY 槽
 server.torrents.unchecked_torrents: |-
   未检查
-server.torrents.unchecked_torrents_results_note: |-
-  （共%s个未检查）
 server.torrents.checking_status: |-
   检查状态
+server.torrents.unchecked_torrents_results_note: |-
+  （共%s个未检查）
 server.torrents.checked_torrents: |-
   已检查
 server.torrents.undo_delete: |-
@@ -5920,8 +5920,6 @@ server.upload.sub_title: |-
   中文标题
 server.upload.swedish: |-
   瑞典语
-server.upload.upload_torrents: |-
-  发布种子
 server.upload.tags: |-
   标签
 server.upload.thai: |-
@@ -6403,6 +6401,10 @@ server.user.ip_history: |-
   IP 历史
 server.user.api: |-
   接口密钥
+server.user.api_note: |-
+  重置您的 API 密钥。您必须在使用旧 API 的所有应用程序中更新 API。
+server.user.api_copy: |-
+  复制到剪贴板
 server.user.irc: |-
   IRC
 server.user.irc_no: |-
@@ -6548,7 +6550,7 @@ server.user.create_new_torrent_notify: |-
 server.user.new_torrent_notify_list: |-
   推送列表
 server.user.new_torrent_notify_name: |-
-  推送名称
+  推送过滤器名称
 server.user.notify_my_android: |-
   推送到我的智能设备
 server.user.notifyondeletedownloaded: |-
@@ -6760,7 +6762,7 @@ server.user.ratio: |-
 server.user.ratio_watch: |-
   分享率监控
 server.user.ratio_watch_text: |-
-  此用户当前正处于分享率监控重，在%s前必须上传%s，否则他的下载权限会被封禁， 列入分享率监控时之后新增的下载量为：%s
+  此用户当前正处于分享率监控中，其必须上传%s（在%s前），否则其下载权限会被封禁， 列入分享率监控后新增的下载量为：%s
 server.user.reason: |-
   原因
 server.user.reason_title: |-
@@ -6899,6 +6901,8 @@ server.user.st_2fa_note3: |-
   点击此处
 server.user.st_2fa_period: |-
   两步验证。
+server.user.st_token_settings_description: |-
+  与 API 令牌相关的设置，以便与 GPW API 进行交互
 server.user.st_access: |-
   访问设置
 server.user.st_token_settings_description: |-
@@ -7633,6 +7637,10 @@ server.country.belarus: |-
   白俄罗斯
 server.country.belgium: |-
   比利时
+server.country.taiwan: |-
+  中国台湾
+server.country.hong_kong: |-
+  中国香港
 server.country.belize: |-
   伯利兹
 server.country.benin: |-
@@ -8041,20 +8049,16 @@ server.country.zambia: |-
   赞比亚
 server.country.zimbabwe: |-
   津巴布韦
-server.country.taiwan: |-
-  中国台湾
-server.country.hong_kong: |-
-  中国香港
 server.country.macao: |-
   中国澳门
 server.common.minutes: |-
-  分钟
+  分
+server.upload.upload_torrents: |-
+  上传种子
 server.collages.contributed_collages_browse: |-
   %s 建设的合集
 server.collages.started_collages_browse: |-
   %s 发起的合集
-server.common.save_all_change: |-
-  保存
 server.torrents.report_info: |-
   报告信息
 server.collages.not_torrent_link: |-

@@ -32,7 +32,7 @@
     "kriswallsmith/buzz": "^1.2",
     "nyholm/psr7": "^1.4",
     "aws/aws-sdk-php": "^3.185",
-    "twig/twig": "^2.0",
+    "twig/twig": "^2.15.3",
     "d11wtq/boris": "^1.0",
     "phpmailer/phpmailer": "^6.6"
   },
@@ -44,5 +44,10 @@
   "scripts": {
     "test": "phpunit",
     "phpstan": "phpstan analyse"
+  },
+  "config": {
+    "allow-plugins": {
+      "kylekatarnls/update-helper": true
+    }
   }
 }

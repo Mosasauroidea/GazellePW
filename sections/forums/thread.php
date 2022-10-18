@@ -581,9 +581,9 @@ View::show_header($ThreadInfo['Title'] . ' &lt; ' . $Forums[$ForumID]['Name'] . 
                             <div class="TableForumPostHeader-info">
                                 <a class="TableForumPost-postId" href="forums.php?action=viewthread&amp;threadid=<?= $ThreadID ?>&amp;postid=<?= $PostID ?>#post<?= $PostID ?>">#<?= $PostID ?></a>
                                 <?= Users::format_username($AuthorID, true, true, true, true, true, $IsDonorForum, false, true); ?>
+                                - <?= time_diff($AddedTime, 2); ?>
                             </div>
                             <div class="TableForumPostHeader-actions" id="bar<?= $PostID ?>">
-                                <?= time_diff($AddedTime, 2); ?> -
                                 <?
                                 if (!$ThreadInfo['IsLocked']  || check_perms('site_moderate_forums')) {
                                 ?>

@@ -38,11 +38,11 @@ class CommentsView {
                             <div class="TableForumPostHeader-info">
                                 <a class="TableForumPost-postId" href="<?= $Link ?>">#<?= $PostID ?></a>
                                 <?= $Header ?>
+                                - <?= time_diff($AddedTime) ?>
                             </div>
                             <div class="TableForumPostHeader-actions" id="bar<?= $PostID ?>">
-                                <?= time_diff($AddedTime) ?>
                                 <? if ($Tools) { ?>
-                                    - <a href="#quickpost" onclick="Quote('<?= $PostID ?>','<?= $UserInfo['Username'] ?>', true);" class="brackets"><?= t('server.forums.quote') ?></a>
+                                    <a href="#quickpost" onclick="Quote('<?= $PostID ?>','<?= $UserInfo['Username'] ?>', true);" class="brackets"><?= t('server.forums.quote') ?></a>
                                     <? if ($AuthorID == G::$LoggedUser['ID'] || check_perms('site_moderate_forums')) { ?>
                                         - <a onclick="globalapp.editForm('<?= $PostID ?>');" class="brackets"><?= t('server.common.edit') ?></a>
                                     <? } ?>
