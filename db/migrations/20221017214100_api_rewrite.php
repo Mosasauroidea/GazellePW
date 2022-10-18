@@ -29,6 +29,6 @@ class TorrentSphinxChecked extends AbstractMigration {
      * with the Table class.
      */
     public function change() {
-        $this->table('api_applications')->addIndex('UserID')->save();
+        $this->table('api_applications')->addIndex('UserID',['unique' => true])->save();
     }
 }
