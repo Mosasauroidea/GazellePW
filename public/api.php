@@ -31,7 +31,7 @@ $Twig = new Twig\Environment(
     ]),
     [
         'debug' => CONFIG['DEBUG_MODE'],
-        'cache' => __DIR__ . '/../cache/twig'
+        'cache' => __DIR__ . '/../.cache/twig'
     ]
 );
 $Debug->handle_errors();
