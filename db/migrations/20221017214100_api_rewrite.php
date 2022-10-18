@@ -2,7 +2,7 @@
 
 use Phinx\Migration\AbstractMigration;
 
-class TorrentSphinxChecked extends AbstractMigration {
+class ApiRewrite extends AbstractMigration {
     /**
      * Change Method.
      *
