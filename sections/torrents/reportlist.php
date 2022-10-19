@@ -22,11 +22,10 @@ include(CONFIG['SERVER_ROOT'] . '/classes/reportsv2_type.php');
             $Reporter = Users::user_info($ReporterID);
             $ReporterName = $Reporter['Username'];
             $ReportLinks = "<a href=\"user.php?id=$ReporterID\">$ReporterName</a> " . t('server.torrents.reported_it');
-            $UploaderLinks = Users::format_username($UserID, false, false, false) . " " . t('server.torrents.reply_at');
         } else {
             $ReportLinks = t('server.torrents.someone_reported_it');
-            $UploaderLinks = t('server.torrents.uploader_replied_it');
         }
+        $UploaderLinks = t('server.torrents.uploader_replied_it');
 
         if (isset($Types[1][$Report['Type']])) {
             $ReportType = $Types[1][$Report['Type']];

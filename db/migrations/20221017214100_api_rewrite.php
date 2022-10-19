@@ -29,6 +29,6 @@ class ApiRewrite extends AbstractMigration {
      * with the Table class.
      */
     public function change() {
-        $this->table('api_applications')->addIndex('UserID',['unique' => true])->save();
+        $this->table('api_applications')->addIndex('UserID', ['unique' => true])->save();
     }
 }
