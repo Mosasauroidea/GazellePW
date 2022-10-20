@@ -7,12 +7,8 @@
 2. Execute-o
 
 ```shell
-# Construir imagem do Docker
-# Para CPU x86
-docker build -t gpw-web:latest .
-# Para CPU ARM (Macbook M1)
-docker buildx create --use
-docker buildx build --platform linux/amd64 --load -t gpw-web:latest .
+git clone https://github.com/Mosasauroidea/GazellePW.git
+cd GazellePW
 
 # Iniciar container
 docker-compose -p gazelle up

@@ -11,13 +11,6 @@
 git clone https://github.com/Mosasauroidea/GazellePW.git
 cd GazellePW
 
-# 创建Docker镜像
-# x86 处理器
-docker build -t gpw-web:latest .
-# ARM 处理器 (Macbook M1)
-docker buildx create --use
-docker buildx build --platform linux/amd64 --load -t gpw-web:latest .
-
 # 运行
 docker-compose -p gazelle up
 ```

@@ -2,7 +2,8 @@ version: '3'
 
 services:
   web:
-    image: gpw-web
+    build: .
+    platform: linux/amd64
     container_name: gpw-web
     ports:
       - 9000:80
@@ -52,6 +53,7 @@ services:
 
   manticoresearch:
     build: ./.docker/manticore
+    platform: linux/amd64
     container_name: gpw-manticoresearch
     depends_on:
       - mysql

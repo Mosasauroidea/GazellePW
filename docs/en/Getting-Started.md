@@ -11,13 +11,6 @@
 git clone https://github.com/Mosasauroidea/GazellePW.git
 cd GazellePW
 
-# Build Docker image
-# For x86 CPU
-docker build -t gpw-web:latest .
-# For ARM CPU (Macbook M1)
-docker buildx create --use
-docker buildx build --platform linux/amd64 --load -t gpw-web:latest .
-
 # Start
 docker-compose -p gazelle up
 ```
