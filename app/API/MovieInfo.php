@@ -4,10 +4,10 @@ namespace Gazelle\API;
 
 class MovieInfo extends AbstractAPI {
     public function run() {
-        $response= array();
+        $response = array();
         if (isset($_GET['imdbid'])) {
             $IMDBID = $_GET['imdbid'];
-        
+
             if (preg_match('/^tt\d+$/', $IMDBID)) {
                 $this->db->query("select ID from torrents_group where IMDBID='$IMDBID'");
                 list($GroupID) = $this->db->next_record();
@@ -24,7 +24,7 @@ class MovieInfo extends AbstractAPI {
                             $response["status"] = "success";
                             $response["response"] = $Ret;
                         }
-                    } catch (Exception $e) {
+                    } catch (\Exception $e) {
                         $response["status"] = "error";
                         $response["message"] = $e->getMessage();
                     }

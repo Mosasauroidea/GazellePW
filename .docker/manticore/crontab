@@ -1,2 +1,2 @@
-*         *  *   *    *       /usr/bin/indexer -c /var/lib/sphinxsearch/conf/manticore.conf --rotate requests_delta log_delta delta
-5         *  *   *    *       /usr/bin/indexer -c /var/lib/sphinxsearch/conf/manticore.conf --rotate --all
+*         *  *   *    *       /usr/bin/indexer -c /var/lib/manticore/conf/manticore.conf --rotate requests_delta log_delta delta
+5         *  *   *    *       /usr/bin/indexer -c /var/lib/manticore/conf/manticore.conf --rotate --all

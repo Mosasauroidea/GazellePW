@@ -41,6 +41,8 @@ class ImageTools {
         'fastpic.ru',
     );
 
+    private static $Whitelist = ['kshare.club', 'pixhost.to', 'ptpimg.me', 'img.pterclub.com', 'yes.ilikeshots.club', 'imgbox.com'];
+
     /**
      * Array of image hosts that provide thumbnailing
      * @var array $Thumbs
@@ -112,6 +114,25 @@ class ImageTools {
                 }
                 return true;
             }
+        }
+        return false;
+    }
+
+    /**
+     * Checks if a link's host is (not) good, otherwise displays an error.
+     * @param string $Url Link to an image
+     * @return boolean
+     */
+    public static function whitelisted($Url, $ShowError = true) {
+        foreach (self::$Whitelist as &$Value) {
+            $Whitelisted = stripos($Url, $Value);
+            if ($Whitelisted == true) {
+                return true;
+            }
+        }
+        $ParsedUrl = parse_url($Url);
+        if ($ShowError) {
+            error($ParsedUrl['host'] . ' is not an allowed image host. Please use a different host.');
         }
         return false;
     }

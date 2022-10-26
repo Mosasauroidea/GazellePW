@@ -170,8 +170,8 @@ function ajax_json_error_with_code($Code, $Message = "") {
     die();
 }
 
-function json_error($Code) {
-    echo json_encode(add_json_info(['status' => 'failure', 'error' => $Code, 'response' => []]));
+function json_error($Message) {
+    echo json_encode(add_json_info(['status' => 'failure', 'erro' => $Message, 'response' => []]));
     die();
 }
 

@@ -516,7 +516,6 @@ class TORRENT_FORM {
                             <td class="Form-label"><?= t('server.upload.english_movie_synopsis') ?><span class="u-colorWarning">*</span>:</td>
                             <td class="Form-items Form-errorContainer">
                                 <? new TEXTAREA_PREVIEW('maindesc', 'maindesc', display_str($Torrent['MainGroupDescription']), 60, 8, false, false, false, array($this->Disabled)); ?>
-                                <h7><?= t('server.upload.chinese_movie_synopsis_note') ?></h7>
                             </td>
                         </tr>
                         <tr class="Form-row">
@@ -559,7 +558,7 @@ class TORRENT_FORM {
                     <td class="Form-items">
                         <div class="Form-inputs">
                             <div class="Checkbox">
-                                <input class="Input" type="checkbox" id="not_main_movie" name="not_main_movie" <?= $Torrent['NotMainMovie'] ? "checked" : "" ?> <?= $this->Disabled ?> />
+                                <input class="Input" type="checkbox" id="not_main_movie" name="not_main_movie" <?= $Torrent['NotMainMovie'] == '1' ? "checked" : "" ?> <?= $this->Disabled ?> />
                                 <label class="Checkbox-label" for="not_main_movie"><?= t('server.upload.not_main_movie_label') ?></label>
                             </div>
                         </div>

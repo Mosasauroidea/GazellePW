@@ -822,7 +822,7 @@ View::show_header($Title, 'browse,comments,torrent,bbcode,recommend,cover_art,su
                             </td>
                             <td class="TableTorrent-cellSize Table-cell TableTorrent-cellStat TableTorrent-cellStatSize"><?= Format::get_size($Size) ?></td>
                             <td class="TableTorrent-cellSnatches Table-cell TableTorrent-cellStat"><?= number_format($Snatched) ?></td>
-                            <td class="TableTorrent-cellSeeders Table-cell TableTorrent-cellStat"><?= number_format($Seeders) ?></td>
+                            <td class="TableTorrent-cellSeeders Table-cell TableTorrent-cellStat <?= (($Seeders == 0) ? ' u-colorRatio00' : '') ?>"><?= number_format($Seeders) ?></td>
                             <td class="TableTorrent-cellLeechers Table-cell TableTorrent-cellStat"><?= number_format($Leechers) ?></td>
                         </tr>
                         <tr class="TableTorrent-rowDetail Table-row u-toggleEdition-alwaysHidden releases_<?= $ReleaseType ?>  <? if (!isset($_GET['torrentid']) || $_GET['torrentid'] != $TorrentID) { ?>u-hidden<? } ?>" id="torrent_detail_<?= $TorrentID; ?>" group-id="<?= $GroupID ?>" edition-id="<?= $EditionID ?>">

@@ -25,7 +25,7 @@ if (!empty($_REQUEST['action'])) {
             error(404);
     }
 } elseif (!empty($_POST['submit'])) {
-    include(CONFIG['SERVER_ROOT'] . '/sections/upload/upload_handle.php');
+    include(CONFIG['SERVER_ROOT'] . '/sections/upload/upload_handle_v2.php');
 } else {
     include(CONFIG['SERVER_ROOT'] . '/sections/upload/upload.php');
 }

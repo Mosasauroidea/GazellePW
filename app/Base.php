@@ -9,8 +9,11 @@ abstract class Base {
     /** @var \CACHE */
     protected $cache;
 
+    protected $user;
+
     public function __construct() {
         $this->cache = \G::$Cache;
         $this->db = \G::$DB;
+        $this->user = \G::$LoggedUser;
     }
 }

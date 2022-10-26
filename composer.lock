@@ -58,16 +58,16 @@
         },
         {
             "name": "aws/aws-sdk-php",
-            "version": "3.238.5",
+            "version": "3.239.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aws/aws-sdk-php.git",
-                "reference": "2f5440652fa7a6f20a1bb15926dd8248c24c733c"
+                "reference": "33ae76381b77a1a2580817996dcc7b9e931ae5f4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/2f5440652fa7a6f20a1bb15926dd8248c24c733c",
-                "reference": "2f5440652fa7a6f20a1bb15926dd8248c24c733c",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/33ae76381b77a1a2580817996dcc7b9e931ae5f4",
+                "reference": "33ae76381b77a1a2580817996dcc7b9e931ae5f4",
                 "shasum": ""
             },
             "require": {
@@ -146,9 +146,9 @@
             "support": {
                 "forum": "https://forums.aws.amazon.com/forum.jspa?forumID=80",
                 "issues": "https://github.com/aws/aws-sdk-php/issues",
-                "source": "https://github.com/aws/aws-sdk-php/tree/3.238.5"
+                "source": "https://github.com/aws/aws-sdk-php/tree/3.239.0"
             },
-            "time": "2022-10-14T18:15:06+00:00"
+            "time": "2022-10-18T18:17:00+00:00"
         },
         {
             "name": "cakephp/cache",
