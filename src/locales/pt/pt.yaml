@@ -1152,6 +1152,8 @@ server.common.search: |-
   Pesquisa
 server.common.seeders: |-
   Seeders
+server.common.show: |-
+  Mostrar
 server.common.size: |-
   Tamanho
 server.common.ssp: |-
@@ -1726,30 +1728,140 @@ server.index.index: |-
   Notícias
 server.index.latest_thread: |-
   Último tópico
+server.index.links: |-
+  Links
+server.index.mon_visit: |-
+  Usuários ativos neste mês
+server.index.moviegroups: |-
+  Filmes
+server.index.mystery: |-
+  É um mistério!
+server.index.peers: |-
+  Peers
 server.index.period: |-
   .
 server.index.poll: |-
   Enquete
+server.index.popular_movies: |-
+  Filmes Populares
+server.index.product_note: |-
+  Você talvez queira colocar uma imagem aqui.
+server.index.product_page: |-
+  Página do Produto
+server.index.s_l_ratio: |-
+  Seeder/leecher ratio
+server.index.show: |-
+  Mostrar
+server.index.snatches: |-
+  Snatches
 server.index.staff_note: |-
   Blog da Staff
 server.index.stats: |-
   Estatísticas
 server.index.topic: |-
   Tópico
+server.index.user_limit: |-
+  Máximo de usuários
+server.index.visit: |-
+  Visitar
 server.index.vote: |-
   Votar
+server.index.wek_visit: |-
+  Usuários ativos nesta semana
 server.log.message: |-
   Mensagem
+server.log.nothing_found: |-
+  Nada encontrado!
 server.log.period: |-
   .
 server.log.search_for: |-
   Pesquisar por
+server.log.search_request_failed: |-
+  A pesquisa falhou
+server.log.site_log: |-
+  Log do site
 server.log.time: |-
   Tempo
+server.login.2fa_key: |-
+  Chave 2FA
+server.login.approved: |-
+  aprovado
+server.login.attempts: |-
+  Você tem %s tentativas restantes.<br />
+  <strong>AVISO:</strong> Você será banido por 6 horas depois que suas tentativas de login acabarem!
+server.login.back: |-
+  Voltar
+server.login.cookies_disabled: |-
+  Parece que você está com cookies desativados.
+server.login.denied: |-
+  negado
+server.login.disabled: |-
+  Desativado
+server.login.disabled_note1: |-
+  Sua conta foi desativada.<br />
+  Isto deve-se a inatividade ou violação de regra(s).<br /><br /></p>
+server.login.disabled_note2: |-
+  Se você acredita que sua conta estava em boa posição e foi desativada por inatividade, você pode solicitar que seja reativado via e-mail usando o formulário abaixo.<br />
+  Observe que você precisará acessar a conta de e-mail associada à sua conta em {{CONFIG['SITE_NAME']}} para que isso funcione;<br />
+  se não o fizer, por favor veja a seção após este formulário.<br /><br />
+server.login.disabled_note3: |-
+  Se você não tem certeza por que sua conta está desativada, ou deseja discutir isso com a equipe, entre: <a href="{{CONFIG['TG_DISBALE_CHANNEL']}}">Telegram Disable Channel</a>.<br />
+  <br />
+  <strong>Antes de entrar no canal de desativação, por favor, leia as nossas <br /> <span style="color: gold;">Regras Douradas</span> que podem ser encontradas <a href="#" onclick="toggle_visibility('golden_rules')">aqui</a>.</strong> <br /><br />
+  Depois de entrar no canal, leia o anúncio primeiro.<br />
+  <br />
+  <strong>Seja honesto.</strong> Neste ponto, mentindo não vai te levar a lugar nenhum.
+server.login.email: |-
+  Endereço de Email
+server.login.email_address_placeholder: |-
+  Endereço de email
+server.login.email_send: |-
+  Um e-mail foi enviado para você, por favor, siga as instruções desse e-mail para redefinir sua senha.
+server.login.enable_request_id_by_user: |-
+  &nbsp;- Ativar a solicitação %s por&nbsp;
+server.login.enable_request_id_unresolved_by: |-
+  &nbsp;- Ativar o pedido %s não resolvido por&nbsp;
+server.login.enable_request_received_from_ip: |-
+  &nbsp;- Ativar o pedido %s recebido de&nbsp;
+server.login.enable_request_rejected_from_ip: |-
+  &nbsp;- Ativar solicitação rejeitada de&nbsp;
 server.login.enter_valid_email: |-
   Por favor, insira um endereço de email válido.
+server.login.err_1: |-
+  Sua conta não foi confirmada.<br />Por favor, verifique seu e-mail.
+server.login.err_2: |-
+  Seu nome de usuário ou senha estavam incorretos.
+server.login.find_pw: |-
+  Recupere aqui!
+server.login.forget_pw: |-
+  Perdeu sua senha?
+server.login.invalid_token: |-
+  Token inválido.
+server.login.login: |-
+  Login
+server.login.new_password: |-
+  Nova senha&nbsp;
+server.login.outcome_approved: |-
+  Aprovado
+server.login.outcome_discarded: |-
+  Descartado
+server.login.outcome_rejected: |-
+  Rejeitado
+server.login.password: |-
+  Senha
+server.login.password_send: |-
+  Sua senha foi redefinida com sucesso.<br />
+  Por favor <a href='login.php'>clique aqui</a> para iniciar a sessão usando sua nova senha.
+server.login.re_enable_request_received: |-
+  Seu pedido para reativar sua conta foi recebido. Você pode esperar uma mensagem de resposta no seu e-mail dentro de 72 horas.<br />Se você não receber um e-mail após 72 horas se passar, por favor, visite-nos no IRC ou <a href='https://t.me/joinchat/KNqyAh4_iO9jY2U1'>Telegram</a> para obter assistência.
+server.login.re_enable_request_rejected: |-
+  Seu pedido para reativar sua conta foi rejeitado.<br />Isso pode ser porque um pedido já está pendente para o seu nome de usuário, ou porque um pedido recente foi negado.<br /><br />Você é encorajado a discutir isso com a equipe, visitando %s em %s
+server.login.re_new_password: |-
+  Confirme a senha&nbsp;
 server.login.reason: |-
   Motivo
+server.login.recovery: |-
+  Recuperar Senha
 server.login.username: |-
   Usuário
 server.permissions.admin_manage_badges: |-
@@ -1776,14 +1888,20 @@ server.permissions.site_tag_aliases_read: |-
   Pode ver a lista de pseudônimos de tags
 server.permissions.torrents: |-
   Torrents
+server.pub.login: |-
+  Login
 server.pub.space_new_collage_update_one: |-
   &nbsp;nova atualização de coleção
 server.pub.space_new_collage_update_other: |-
   &nbsp;novas atualizações de coleção
 server.pub.statistics: |-
   Estatísticas
+server.referral.email_address: |-
+  Endereço de email
 server.referral.username: |-
   Usuário
+server.register.password: |-
+  Senha
 server.register.username: |-
   Usuário
 server.reports.body: |-
@@ -2027,6 +2145,8 @@ server.tools.description: |-
   Descrição
 server.tools.dnu_comment: |-
   Observação
+server.tools.email_address: |-
+  Endereço de Email
 server.tools.enter_a_single_replacement_tag: |-
   Insira uma única tag de substituição.
 server.tools.enter_a_single_tag_to_search_for: |-
@@ -2067,6 +2187,12 @@ server.tools.tags_manager: |-
   Gerenciador de tags
 server.tools.operations: |-
   Operações
+server.tools.outcome_approved: |-
+  Aprovado
+server.tools.outcome_discarded: |-
+  Descartado
+server.tools.password: |-
+  Senha
 server.tools.paste_a_list_of_collage_or_torrent_group_urls: |-
   Colar uma lista de coleções de grupo ou de grupos de torrents
 server.tools.pending: |-
@@ -2079,6 +2205,8 @@ server.tools.ratio: |-
   Ratio
 server.tools.reason: |-
   Motivo
+server.tools.rejected: |-
+  Rejeitado
 server.tools.remark: |-
   Motivo
 server.tools.remove: |-
@@ -2087,6 +2215,10 @@ server.tools.rename_to_merge_with_tag: |-
   Renomear para/mesclar com a tag
 server.tools.search_ip: |-
   Pesquisa
+server.tools.seeder_leecher_ratio: |-
+  Seeder/leecher ratio
+server.tools.snatches: |-
+  Snatches
 server.tools.sort: |-
   Ordenar
 server.tools.sort_by_bad_tags: |-
@@ -2131,10 +2263,14 @@ server.top10.most_used_request_tags: |-
   Tags de solicitação mais usadas
 server.top10.most_used_torrent_tags: |-
   Tags Torrent mais usadas
+server.top10.movies: |-
+  Filmes
 server.top10.name: |-
   Nome
 server.top10.ratio: |-
   Ratio
+server.top10.show: |-
+  Mostrar
 server.top10.tag: |-
   Tag
 server.top10.tags: |-
@@ -2143,6 +2279,8 @@ server.top10.tags_comma: |-
   Tags (separadas por vírgula)
 server.top10.top_10_tags: |-
   As 10 Principais Tags
+server.top10.top_movies: |-
+  Filmes
 server.top10.top_torrents: |-
   Torrents
 server.top10.torrents: |-
@@ -2199,6 +2337,8 @@ server.torrents.ftb_searchstr: |-
   Termos de pesquisa
 server.torrents.guide_of_advanced_search: |-
   Manual
+server.torrents.header: |-
+  Filmes
 server.torrents.hide: |-
   Esconder
 server.torrents.hide_tags: |-
@@ -2211,6 +2351,8 @@ server.torrents.movie_producer: |-
   Produtor
 server.torrents.name: |-
   Nome
+server.torrents.nothing_found: |-
+  Nada encontrado!
 server.torrents.period: |-
   .
 server.torrents.quality_slot_requirements: |-
@@ -2245,6 +2387,8 @@ server.torrents.search_torrents: |-
   Pesquisa
 server.torrents.seeders: |-
   Seeders
+server.torrents.show: |-
+  Mostrar
 server.torrents.size: |-
   Tamanho
 server.torrents.sub_title: |-
@@ -2395,14 +2539,20 @@ server.user.community_comms: |-
   Comentários do torrent
 server.user.community_reqs: |-
   Solicitar comentários
+server.user.community_show: |-
+  Mostrar
 server.user.compose: |-
   Enviar mensagem
 server.user.customtitle: |-
   Título Personalizado
 server.user.date: |-
   Data
+server.user.disabled: |-
+  Desativado
 server.user.donorforum_4: |-
   Pré-visualizar
+server.user.email_address: |-
+  Endereço de Email
 server.user.filt_tr_show_tags: |-
   Exibir filtros de tags oficiais
 server.user.filt_tr_title: |-
@@ -2451,6 +2601,10 @@ server.user.replies: |-
   Respostas
 server.user.report: |-
   Reportar
+server.user.st_2fa_disabled: |-
+  Desativado
+server.user.st_email: |-
+  Endereço de Email
 server.user.statistics: |-
   Estatísticas
 server.user.stats: |-
@@ -2489,6 +2643,8 @@ server.userhistory.no_subscribed_collages: |-
   Nenhuma coleção assinada
 server.userhistory.search: |-
   Pesquisa
+server.userhistory.show: |-
+  Mostrar
 server.userhistory.subscribed_collages: |-
   Coleções inscritas
 server.userhistory.time: |-

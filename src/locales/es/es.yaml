@@ -1,0 +1,1989 @@
+client.upload.copied: |-
+  Copiado
+client.common.save: |-
+  Guardar
+client.common.cancel: |-
+  Cancelar
+client.upload.uploading: |-
+  Subiendo:
+client.bbcode.edit: |-
+  Editar
+client.bbcode.loading: |-
+  Cargando...
+client.bbcode.preview: |-
+  Vista previa
+client.common.actor: |-
+  Actor
+client.common.are_you_sure_cannot_undone: |-
+  ¿Estás seguro de que deseas hacer esto? ¡Esto no se puede deshacer!
+client.common.are_you_sure_you_want_to_cancel: |-
+  ¿Estás seguro de que quieres cancelar?
+client.common.are_you_sure_you_wish_to_delete_this_post: |-
+  ¿Estás seguro de que deseas eliminar este mensaje?
+client.common.check_all: |-
+  Marcar todos
+client.common.cinematographer: |-
+  Cinematógrafo
+client.common.collapse_this_group: |-
+  Colapsa este grupo. Mantén [Command] <em>(Mac)</em> o [Ctrl] <em>(PC)</em> mientras haces clic para colapsar todos los grupos {{section}}
+client.common.composer: |-
+  Compositor
+client.common.confirm_purchase: |-
+  ¿Estás seguro de que quieres comprar {{item}}?
+client.common.confirm_username: |-
+  Ingresa el nombre de usuario al que dar tokens:
+client.common.copied: |-
+  Copiado
+client.common.director: |-
+  Director
+client.common.expand_this_group: |-
+  Expande este grupo. Mantén [Command] <em>(Mac)</em> o [Ctrl] <em>(PC)</em> mientras haces clic para expandir todos los grupos {{section}}
+client.common.hide: |-
+  Ocultar
+client.common.in_this_release_type: |-
+  en este tipo de publicación.
+client.common.like: |-
+  Me gusta
+client.common.on_this_page: |-
+  en esta página.
+client.common.producer: |-
+  Productor
+client.common.uncheck_all: |-
+  Desmarcar todos
+client.common.view: |-
+  Ver
+client.common.writer: |-
+  Escritor
+client.error.imdb_unknown_error: |-
+  Error desconocido, por favor contacte con el soporte.
+client.error.invalid_imdb_link_note: |-
+  Por favor, introduzca un enlace IMDb válido como "tt1234567" o "https://www.imdb.com/title/tt1234567".
+client.error.request_torrent_group_exists_note: |-
+  La película <a href='/torrents.php?id={{groupID}}'>ya existe</a> en el sitio. Por favor, asegúrate de que el formato que solicitas no existe y utiliza el enlace [Formato de solicitud] para solicitar el formato esperado de la película.
+client.other.client_whitelist: |-
+  Lista blanca de clientes
+client.screenshot_comparison.help: |-
+  Presiona ? para leer la ayuda
+client.screenshot_comparison.loading: |-
+  Cargando...
+client.staffpm.error: |-
+  Algo salió mal.
+client.staffpm.response_created: |-
+  Respuesta creada correctamente
+client.staffpm.response_deleted: |-
+  Respuesta eliminada correctamente.
+client.staffpm.response_edited: |-
+  Respuesta editada correctamente.
+client.stats.torrentByDay: |-
+  Subidas Diarias de Torrents
+client.stats.torrentByMonth: |-
+  Subidas Mensuales de Torrents
+client.stats.torrentByYear: |-
+  Subidas Anuales de Torrents
+client.upload.movie_title_required: |-
+  ¡Por favor, especifique el título!
+client.upload.poster_required: |-
+  ¡Por favor, especifique el póster! Si no puede encontrar ninguno entonces tome una foto de la película y escriba el título de la película en ella.
+client.upload.resolution_required: |-
+  Por favor, seleccione una resolución.
+client.upload.source_required: |-
+  Por favor, seleccione el origen. Si no está seguro entonces seleccione Otro e introduzca Desconocido.
+client.upload.sub_name: |-
+  Nombre chino
+client.upload.subtitles_required: |-
+  ¡Por favor, especifique los subtítulos o seleccione "Sin Subtítulos" si no hay ninguno!
+client.upload.subtitles_with_mediainfo: |-
+  MediaInfo proporciona subtítulos, por favor especifique los subtítulos.
+client.upload.tag_required: |-
+  ¡Por favor, especifique al menos un género!
+client.upload.torrent_file_required: |-
+  ¡Por favor, seleccione un archivo torrent!
+client.upload.year_required: |-
+  ¡Por favor, especifique el año del lanzamiento original!
+client.validation.please_enter_a_valid_credit_card_number: |-
+  Por favor, introduzca un número de tarjeta de crédito válido.
+client.validation.please_enter_a_valid_date: |-
+  Por favor, introduzca una fecha válida.
+client.validation.please_enter_a_valid_date_iso: |-
+  Por favor, introduzca una fecha válida (ISO).
+client.validation.please_enter_a_valid_date_number: |-
+  Por favor, introduzca un número válido.
+client.validation.please_enter_a_valid_email_address: |-
+  Por favor, introduzca una dirección de correo electrónico válida.
+client.validation.please_enter_a_valid_url: |-
+  Por favor, introduzca una URL válida.
+client.validation.please_enter_a_value_between_x_and_y: |-
+  Por favor, introduzca un valor entre {0} y {1}.
+client.validation.please_enter_a_value_between_x_and_y_characters_long: |-
+  Por favor, introduzca un valor entre {0} y {1} caracteres de largo.
+client.validation.please_enter_a_value_greater_than_or_equal_to_n: |-
+  Por favor, introduzca un valor mayor o igual a {0}.
+client.validation.please_enter_a_value_less_than_or_equal_to_n: |-
+  Por favor, introduzca un valor menor o igual a {0}.
+client.validation.please_enter_at_least_n_characters: |-
+  Por favor, escriba al menos {0} caracteres.
+client.validation.please_enter_no_more_than_n_characters: |-
+  Por favor, escriba no más de {0} caracteres.
+client.validation.please_enter_only_digits: |-
+  Por favor, escriba solo dígitos.
+server.apply.apply: |-
+  Aplicar
+server.apply.archived: |-
+  archivado
+server.apply.at_least_80_characters: |-
+  Al menos 80 caracteres, ¡ahora convéncenos!
+server.apply.blank_applications: |-
+  &nbsp;Aplicaciones
+server.apply.choose_a_role_from_the_list: |-
+  Elige un rol de la lista siguiente
+server.apply.comments: |-
+  Comentarios
+server.apply.current_roles: |-
+  Roles Actuales
+server.apply.date_created: |-
+  Fecha de creación
+server.apply.description: |-
+  Descripción
+server.apply.edit_role: |-
+  Editar
+server.apply.last_comment_added: |-
+  Último comentario añadido
+server.apply.last_comment_from: |-
+  Último comentario de
+server.apply.manage_roles: |-
+  Administrar roles
+server.apply.manage_roles_at: |-
+  Administrar roles en {{CONFIG['SITE_NAME']}}
+server.apply.new_role: |-
+  Nuevo
+server.apply.no_current_roles: |-
+  No hay roles actuales. Crea uno usando el formulario siguiente.
+server.apply.open_roles: |-
+  Roles Abiertos
+server.apply.public: |-
+  público
+server.apply.published: |-
+  publicado
+server.apply.reply: |-
+  Responder
+server.apply.resolved: |-
+  Resuelto
+server.apply.resolved_applications: |-
+  Aplicaciones resueltas
+server.apply.role: |-
+  Rol
+server.apply.role_created_by: |-
+  Creado %s
+server.apply.role_created_by_4: |-
+  última modificación&nbsp;
+server.apply.role_title: |-
+  Título
+server.apply.saved: |-
+  guardado
+server.apply.space_role: |-
+  &nbsp;Rol
+server.apply.staff: |-
+  staff
+server.apply.updated: |-
+  actualizado
+server.apply.view_applications: |-
+  Ver Aplicaciones
+server.apply.view_your_application: |-
+  Ver tu aplicación
+server.apply.visibility: |-
+  Visibilidad
+server.artist.1021: |-
+  Director
+server.artist.1022: |-
+  Escritor
+server.artist.1023: |-
+  Productor
+server.artist.1024: |-
+  Compositor
+server.artist.1025: |-
+  Cinematógrafo
+server.artist.1026: |-
+  Actor
+server.artist.add_similarartist: |-
+  Añadir artista similar
+server.artist.added: |-
+  Añadido
+server.artist.aliases_list: |-
+  Lista de alias existentes de artistas
+server.artist.artist_deleted: |-
+  Artista eliminado
+server.artist.artist_info: |-
+  Información del artista
+server.artist.chinese_biography: |-
+  Biografía del artista en chino
+server.artist.english_biography: |-
+  Biografía del artista en inglés
+server.artist.artist_name: |-
+  Nombre del artista
+server.artist.artist_x_deleted: |-
+  Artista "%s" eliminado!
+server.artist.artistcomments: |-
+  Comentarios
+server.artist.bounty: |-
+  Recompensa
+server.artist.change_artist_id: |-
+  Cambiar ID del artista
+server.artist.confirm_merge: |-
+  Confirmar fusión
+server.artist.delete_this_alias: |-
+  Eliminar este alias
+server.artist.edit_artist: |-
+  Editar Artista
+server.artist.edit_details: |-
+  Editar Detalles
+server.artist.edit_summary: |-
+  Editar resumen
+server.artist.editrequest: |-
+  Solicitar un cambio
+server.artist.empty_introduction_note: |-
+  (No hay introducción para este artista, por favor añada una en la página de edición.)
+server.artist.image: |-
+  Imagen
+server.artist.imdb_artist_id: |-
+  ID del artista de IMDb
+server.artist.imdb_link: |-
+  Enlace de IMDb
+server.artist.info: |-
+  Info
+server.artist.loading: |-
+  Cargando...
+server.artist.name: |-
+  nombre
+server.artist.number_of_groups: |-
+  Número de grupos
+server.artist.number_of_leechers: |-
+  Número de leechers
+server.artist.number_of_seeders: |-
+  Número de seeders
+server.artist.number_of_snatches: |-
+  Número de snatches
+server.artist.number_of_torrents: |-
+  Número de torrents
+server.artist.or: |-
+  O
+server.artist.re_torrents: |-
+  Añadir solicitud
+server.artist.remove_similar_artist_title: |-
+  Eliminar este artista similar
+server.artist.rename: |-
+  Renombrar este artista
+server.artist.request_an_edit: |-
+  Solicitar una modificación
+server.artist.request_name: |-
+  Solicitar Nombre
+server.artist.similarartist: |-
+  Artistas similares
+server.artist.similarartist_note: |-
+  Ninguno encontrado
+server.artist.statistics: |-
+  Estadísticas
+server.artist.sub_name: |-
+  Nombre chino
+server.artist.tag: |-
+  Etiquetas
+server.artist.torrents_unnotify: |-
+  No notificar las nuevas subidas
+server.artist.user: |-
+  Usuario
+server.artist.view: |-
+  Ver
+server.artist.view_artist: |-
+  Ver artista
+server.artist.view_torrent_group: |-
+  Ver grupo de torrents
+server.artist.viewhistory: |-
+  Ver historial
+server.artist.vote: |-
+  Votar
+server.badges.badge_exchange: |-
+  Intercambio
+server.badges.badge_introduction: |-
+  Introducción
+server.badges.badge_log_detail: |-
+  Registro
+server.badges.badge_name: |-
+  Nombre
+server.badges.badge_obtained_time: |-
+  Tiempo
+server.badges.badge_preview: |-
+  Vista previa
+server.badges.badge_price: |-
+  Precio
+server.badges.badge_store: |-
+  Tienda de Insignias
+server.blog.staff_blog: |-
+  Blog del Staff
+server.blog.thread_id: |-
+  ID del hilo
+server.blog.title: |-
+  Título
+server.bonus.bbcode_allowed: |-
+  BBCode permitido
+server.bonus.bonus_points_shop: |-
+  Tienda de Puntos Extras
+server.bonus.bp_day: |-
+  PE/día
+server.bonus.bp_hour: |-
+  PE/hora
+server.bonus.bp_month: |-
+  PE/mes
+server.bonus.bp_week: |-
+  PE/semana
+server.bonus.bp_year: |-
+  PE/año
+server.bonus.custom_title: |-
+  Título personalizado
+server.bonus.description: |-
+  Descripción
+server.bonus.eliminate_a_hnr: |-
+  Eliminar un H&R
+server.bonus.history: |-
+  Historial
+server.bonus.invite: |-
+  1 Invitación
+server.bonus.item: |-
+  item
+server.bonus.items: |-
+  items
+server.bonus.need_higher_user_class: |-
+  Se requiere una clase de usuario mayor
+server.bonus.other-1: |-
+  1 Token Freeleech para Otro
+server.bonus.other-2: |-
+  10 Token Freeleech para Otro
+server.bonus.other-3: |-
+  50 Token Freeleech para Otro
+server.bonus.period: |-
+  .
+server.bonus.points: |-
+  Puntos
+server.bonus.points_price: |-
+  Puntos
+server.bonus.purchase: |-
+  Comprar
+server.bonus.purchased: |-
+  comprado!
+server.bonus.seeders: |-
+  Seeders
+server.bonus.size: |-
+  Tamaño
+server.bonus.statistical_size: |-
+  Tamaño estadístico
+server.bonus.th_for: |-
+  Para
+server.bonus.th_item: |-
+  Item
+server.bonus.th_price: |-
+  Precio
+server.bonus.th_purchase_date: |-
+  Fecha de compra
+server.bonus.title-bb-n: |-
+  Título Personalizado (Sin BBCode)
+server.bonus.title-bb-y: |-
+  Título Personalizado (BBCode permitido)
+server.bonus.title-off: |-
+  Eliminar Título Personalizado
+server.bonus.token-1: |-
+  1 Token Freeleech
+server.bonus.token-2: |-
+  10 Tokens Freeleech
+server.bonus.token-3: |-
+  50 Tokens Freeleech
+server.bonus.token-4: |-
+  100 Tokens Freeleech
+server.bonus.too_expensive: |-
+  Demasiado Caro
+server.bonus.torrent: |-
+  Torrent
+server.bonus.total_points: |-
+  Puntos
+server.bonus.total_torrents: |-
+  Torrents Totales
+server.bonus.upload-1: |-
+  5GB de subida
+server.bonus.upload-2: |-
+  50GB de subida
+server.bonus.upload-3: |-
+  250GB de subida
+server.bonus.upload-4: |-
+  500GB de subida
+server.bookmarks.dont_notify_new: |-
+  No notificar las nuevas subidas
+server.bookmarks.no_torrents_found: |-
+  No se han encontrado torrents.
+server.bookmarks.order: |-
+  Orden
+server.bookmarks.organize_bookmarks: |-
+  Organizar Marcadores
+server.bookmarks.organize_torrent_bookmarks: |-
+  Organizar Marcadores de Torrents
+server.bookmarks.remove: |-
+  Eliminar
+server.bookmarks.remove_snatched: |-
+  Eliminar snatched
+server.bookmarks.sorting: |-
+  Clasificación
+server.bookmarks.stats: |-
+  Estadísticas
+server.bookmarks.top_artists: |-
+  Top Artistas
+server.bookmarks.top_tags: |-
+  Top Etiquetas
+server.bookmarks.torrent_groups: |-
+  Grupos de torrents
+server.bookmarks.year: |-
+  Año
+server.bookmarks.your_bookmarked_artists: |-
+  Tus artistas marcados
+server.bookmarks.your_bookmarked_torrent_groups: |-
+  Tus películas marcadas
+server.collages.adder: |-
+  Usuario
+server.collages.category: |-
+  Categoría
+server.collages.collagecats:
+  '1': |-
+    Personal
+  '2': |-
+    Tema
+  '3': |-
+    Genre introduction
+  '4': |-
+    Series
+  '5': |-
+    Production Company
+  '6': |-
+    Recomendaciones del staff
+  '7': |-
+    Critical Compilation
+  '8': |-
+    Premios
+server.collages.comments: |-
+  Comentarios
+server.collages.create_collages: |-
+  Nuevo collage
+server.collages.delete_collage: |-
+  Eliminar collage
+server.collages.description: |-
+  Descripción
+server.collages.edit_tags: |-
+  Etiquetas
+server.collages.featured: |-
+  Destacado
+server.collages.ft_order: |-
+  Ordenar por
+server.collages.ftb_searchstr: |-
+  Buscar términos
+server.collages.individual_add: |-
+  Añadido individual
+server.collages.last_updated: |-
+  Última actualización
+server.collages.locked: |-
+  Bloqueado
+server.collages.manage_collage: |-
+  Administrar collage
+server.collages.manage_torrents: |-
+  Administrar películas
+server.collages.max_groups: |-
+  Grupos máximos
+server.collages.max_groups_per_user: |-
+  Grupos máximos por usuario
+server.collages.name: |-
+  Nombre
+server.collages.new_category: |-
+  Categoría
+server.collages.new_create: |-
+  Crear collage
+server.collages.new_description: |-
+  Descripción
+server.collages.new_name: |-
+  Nombre
+server.collages.open_collage: |-
+  Abrir collage
+server.collages.order: |-
+  Orden
+server.collages.personal_collage: |-
+  Collage personal
+server.collages.personal_collages: |-
+  Collages personales
+server.collages.please_select_a_category: |-
+  Por favor, seleccione una categoría
+server.collages.random_collages: |-
+  Collage random
+server.collages.reason: |-
+  Razón
+server.collages.recover_collages: |-
+  Recuperar collage
+server.collages.recover_deleted_collage: |-
+  Recuperar collage eliminado
+server.collages.report: |-
+  Reportar
+server.collages.search_ascending: |-
+  Ascendente
+server.collages.search_descending: |-
+  Descendente
+server.collages.search_descriptions: |-
+  Descripciones
+server.collages.search_for: |-
+  Buscar en
+server.collages.search_name: |-
+  Nombre
+server.collages.search_subscribers: |-
+  Suscriptores
+server.collages.search_time: |-
+  Tiempo
+server.collages.search_torrents: |-
+  Torrents
+server.collages.search_updated: |-
+  Actualizado
+server.collages.selected_collage_category: |-
+  Categoría
+server.collages.selected_collage_description: |-
+  Descripción
+server.collages.sorting: |-
+  Clasificación
+server.collages.statistics: |-
+  Estadísticas
+server.collages.subscribe: |-
+  Suscribirse
+server.collages.subscribers: |-
+  Suscriptores
+server.collages.tags: |-
+  Etiquetas (separadas por comas)
+server.collages.top_artists: |-
+  Top Artistas
+server.collages.top_contributors: |-
+  Top Contribuidores
+server.collages.top_tags: |-
+  Top Etiquetas
+server.collages.type: |-
+  Tipo
+server.collages.unsubscribe: |-
+  Desuscribirse
+server.collages.updated: |-
+  Actualizado
+server.collages.user_one: |-
+  Usuario
+server.collages.user_other: |-
+  Usuarios
+server.comments.no_results: |-
+  Sin resultados.
+server.comments.username_space: |-
+  %s
+server.common.actions: |-
+  Acciones
+server.common.add_bookmark: |-
+  Añadir marcador
+server.common.artists: |-
+  Artistas
+server.common.bonus: |-
+  Bonus
+server.common.comma_separated: |-
+  Separados por comas
+server.common.comma_separated_edition: |-
+  Separados por comas
+server.common.delete: |-
+  Eliminar
+server.common.modify: |-
+  Modificar
+server.common.director: |-
+  Director
+server.common.edit: |-
+  Editar
+server.common.edition_info: |-
+  Información de la edición
+server.common.enable_requests: |-
+  &nbsp;Habilitar solicitudes
+server.common.error_403_title: |-
+  Error 403
+server.common.error_404_title: |-
+  Error 404
+server.common.external_subtitles: |-
+  Externo
+server.common.fltoken: |-
+  Token FL
+server.common.format: |-
+  Formato
+server.common.github: |-
+  GitHub
+server.common.gpw_rating: |-
+  Valoración GPW
+server.common.hide: |-
+  Ocultar
+server.common.image_host: |-
+  Host de imágenes
+server.common.imdb_rating: |-
+  Calificación IMDb
+server.common.index: |-
+  Índice
+server.common.lang_en: |-
+  Inglés
+server.common.language: |-
+  Idioma
+server.common.language_region: |-
+  Idioma y región
+server.common.log: |-
+  Registro
+server.common.logout: |-
+  Cerrar sesión
+server.common.movie_name_title: |-
+  Título de la película o ID de IMDb
+server.common.my_bookmarks: |-
+  Marcadores
+server.common.my_comments: |-
+  Comentarios
+server.common.my_friends: |-
+  Amigos
+server.common.my_notify: |-
+  RSS
+server.common.n_fl_token_one: |-
+  1 token Freeleech
+server.common.n_fl_token_other: |-
+  %s Tokens Freeleech
+server.common.profile: |-
+  Perfil
+server.common.rating: |-
+  Calificación
+server.common.ratio: |-
+  Ratio
+server.common.remove: |-
+  Eliminar
+server.common.remove_bookmark: |-
+  Eliminar marcador
+server.common.rename: |-
+  Renombrar
+server.common.report: |-
+  Reportar
+server.common.revision: |-
+  Revisión
+server.common.rss: |-
+  RSS
+server.common.rt_rating: |-
+  Calificación de Rotten Tomatoes
+server.common.seeders: |-
+  Seeders
+server.common.size: |-
+  Tamaño
+server.common.ssp: |-
+  Proxy
+server.common.subscribe: |-
+  Suscribirse
+server.common.subtitle: |-
+  Subtítulo
+server.common.summary: |-
+  Resumen
+server.common.tags: |-
+  Etiquetas
+server.common.telegram: |-
+  Telegram
+server.common.time: |-
+  Tiempo
+server.common.toggle: |-
+  Cambiar
+server.common.top_10: |-
+  Top 10
+server.common.torrent: |-
+  Torrent
+server.common.torrents: |-
+  Torrents
+server.common.type: |-
+  Tipo
+server.common.unsubscribe: |-
+  Desuscribirse
+server.common.use_fl_tokens: |-
+  Usar Token(s) FL
+server.common.user: |-
+  Usuario
+server.common.users: |-
+  Usuarios
+server.common.view_torrent: |-
+  Ver torrent
+server.common.year: |-
+  Año
+server.donate.added_time: |-
+  Tiempo
+server.donate.bronze_rank: |-
+  Bronce
+server.donate.card_num: |-
+  Número de Tarjeta
+server.donate.card_num_length: |-
+  17 dígitos
+server.donate.card_secret_length: |-
+  18 dígitos
+server.donate.copper_rank: |-
+  Cobre
+server.donate.diamond_rank: |-
+  Diamante
+server.donate.donate: |-
+  Donar
+server.donate.donate_error: |-
+  Error del sistema
+server.donate.donor_ranks: |-
+  Rangos de donantes
+server.donate.failed: |-
+  Fallido
+server.donate.gold_rank: |-
+  Oro
+server.donate.has_pending_donation: |-
+  &nbsp;donación pendiente
+server.donate.history: |-
+  Historial
+server.donate.how_to_donate: |-
+  ¿Como donar?
+server.donate.incorrect_card_num: |-
+  ¡Número de tarjeta incorrecto!
+server.donate.pending: |-
+  Pendiente
+server.donate.prepaid_card: |-
+  Tarjeta prepago
+server.donate.yuan: |-
+  Yuan
+server.editioninfo.10_bit: |-
+  10-bit
+server.editioninfo.dolby_atmos: |-
+  Dolby Atmos
+server.editioninfo.dolby_vision: |-
+  Dolby Vision
+server.editioninfo.dts_x: |-
+  DTS:X
+server.editioninfo.dual_audio: |-
+  Dual Audio
+server.editioninfo.editions: |-
+  Ediciones
+server.editioninfo.english_dub: |-
+  Doblaje en Inglés
+server.editioninfo.extended_edition: |-
+  Edición Extendida
+server.editioninfo.extras: |-
+  Extras
+server.editioninfo.features: |-
+  Características
+server.editioninfo.hdr10: |-
+  HDR10
+server.editioninfo.hdr10plus: |-
+  HDR10+
+server.editioninfo.masters_of_cinema: |-
+  Masters of Cinema
+server.editioninfo.remux: |-
+  Remux
+server.editioninfo.rifftrax: |-
+  Rifftrax
+server.editioninfo.uncut: |-
+  Sin cortes
+server.editioninfo.unrated: |-
+  Sin calificación
+server.forums.after: |-
+  Después
+server.forums.answers: |-
+  Respuestas
+server.forums.before: |-
+  Antes
+server.forums.blank: |-
+  En blanco
+server.forums.bonus: |-
+  Bonus
+server.forums.by_user_just_now: |-
+  &nbsp;Ahora mismo
+server.forums.check_all: |-
+  Marcar todos
+server.forums.checkbox_subscribe: |-
+  Suscribirse
+server.forums.comments: |-
+  Comentarios
+server.forums.featured: |-
+  Destacado
+server.forums.like: |-
+  Me gusta
+server.forums.locked: |-
+  Bloqueado
+server.forums.move_thread: |-
+  Mover hilo
+server.forums.new_thread: |-
+  Nuevo hilo
+server.forums.poll: |-
+  Encuesta
+server.forums.poll_settings: |-
+  Configuración de encuesta
+server.forums.posts: |-
+  Publicaciones
+server.forums.ranking: |-
+  Ranking
+server.forums.replies: |-
+  Respuestas
+server.forums.report: |-
+  Reportar
+server.forums.search_for: |-
+  Buscar
+server.forums.search_in: |-
+  Buscar en
+server.forums.service_stats: |-
+  Refrescar
+server.forums.thread_id: |-
+  ID del hilo
+server.forums.title: |-
+  Título
+server.forums.titles: |-
+  Títulos
+server.forums.topic: |-
+  Tema
+server.forums.topic_created: |-
+  Tema creado
+server.forums.topics: |-
+  Temas
+server.forums.username: |-
+  Nombre de usuario
+server.forums.view: |-
+  Ver
+server.forums.voters: |-
+  Votantes
+server.forums.votes: |-
+  Votos
+server.forums.warn: |-
+  Aviso
+server.friends.friends: |-
+  Amigos
+server.friends.friends_list: |-
+  Lista de amigos
+server.friends.ratio: |-
+  Ratio
+server.inbox.mark_as_read: |-
+  Marcar como leído
+server.inbox.mark_as_unread: |-
+  Marcar como no leído
+server.inbox.message: |-
+  Mensaje
+server.inbox.no_results: |-
+  Sin resultados.
+server.inbox.receiver: |-
+  Destinatario
+server.inbox.reply: |-
+  Responder
+server.inbox.sender: |-
+  Remitente
+server.inbox.subject: |-
+  Asunto
+server.inbox.user: |-
+  Usuario
+server.inbox.view_conversation_space: |-
+  Ver conversación&nbsp;
+server.inbox.your: |-
+  Tu&nbsp;
+server.index.add_more: |-
+  Haz clic para cargar más noticias
+server.index.announcements: |-
+  Anuncios
+server.index.blog_note: |-
+  Blog
+server.index.click_here: |-
+  haz clic aquí
+server.index.day_visit: |-
+  Usuarios activos hoy
+server.index.details: |-
+  Detalles
+server.index.discuss: |-
+  Discutir
+server.index.enable_users: |-
+  Usuarios activados
+server.index.featured_item: |-
+  Película destacada
+server.index.filled: |-
+  completado
+server.index.fproduct: |-
+  Producto destacado
+server.index.hide: |-
+  Ocultar
+server.index.index: |-
+  Noticias
+server.index.latest_thread: |-
+  Último tema
+server.index.links: |-
+  Enlaces
+server.index.moviegroups: |-
+  Películas
+server.index.peers: |-
+  Peers
+server.index.period: |-
+  .
+server.index.poll: |-
+  Encuesta
+server.index.popular_movies: |-
+  Películas populares
+server.index.staff_note: |-
+  Blog del Staff
+server.index.stats: |-
+  Estadísticas
+server.index.topic: |-
+  Tema
+server.index.vote: |-
+  Votar
+server.log.message: |-
+  Mensaje
+server.log.period: |-
+  .
+server.log.search_for: |-
+  Buscar
+server.log.time: |-
+  Tiempo
+server.login.enter_valid_email: |-
+  Por favor, introduzca una dirección de correo electrónico válida.
+server.login.forget_pw: |-
+  ¿Has perdido tu contraseña?
+server.login.invalid_token: |-
+  Token inválido.
+server.login.login: |-
+  Iniciar sesión
+server.login.new_password: |-
+  Nueva Contraseña&nbsp;
+server.login.outcome_approved: |-
+  Aprobado
+server.login.outcome_discarded: |-
+  Descartado
+server.login.outcome_rejected: |-
+  Rechazado
+server.login.password: |-
+  Contraseña
+server.login.re_new_password: |-
+  Confirmar Contraseña&nbsp;
+server.login.reason: |-
+  Razón
+server.login.recovery: |-
+  Recuperar Contraseña
+server.login.username: |-
+  Nombre de usuario
+server.permissions.administrative: |-
+  Administrativo
+server.permissions.site: |-
+  Sitio
+server.permissions.torrents: |-
+  Torrents
+server.permissions.torrents_delete: |-
+  Puede eliinar torrents
+server.permissions.torrents_edit: |-
+  Puede editar cualquier torrent
+server.permissions.torrents_freeleech: |-
+  Puede hacer torrents freelech
+server.permissions.users: |-
+  Usuarios
+server.permissions.users_delete_users: |-
+  Puede eliminar la cuenta de cualquiera
+server.permissions.users_edit_avatars: |-
+  Puede editar avatares
+server.pub.a: |-
+  un
+server.pub.login: |-
+  Iniciar sesión
+server.pub.new_quote_one: |-
+  Nueva cita
+server.pub.new_quote_other: |-
+  Nuevas citas
+server.pub.statistics: |-
+  Estadísticas
+server.referral.exclamation_mark: |-
+  !
+server.referral.username: |-
+  Nombre de usuario
+server.register.email: |-
+  Email
+server.register.password: |-
+  Contraseña
+server.register.username: |-
+  Nombre de usuario
+server.reports.description: |-
+  Descripción
+server.reports.new: |-
+  Nuevo
+server.reports.no: |-
+  No
+server.reports.old: |-
+  Antiguo
+server.reports.reason: |-
+  Razón
+server.reports.release_type: |-
+  Tipo de lanzamiento
+server.reports.report: |-
+  Reportar
+server.reports.stats: |-
+  Estadísticas
+server.reports.subject: |-
+  Asunto
+server.reports.title: |-
+  Título
+server.reports.user: |-
+  Usuario
+server.reports.username: |-
+  Nombre de usuario
+server.reportsv2.comments: |-
+  Comentarios
+server.reportsv2.pm_reason: |-
+  Razón
+server.reportsv2.reason: |-
+  Razón
+server.reportsv2.report: |-
+  Reportar
+server.reportsv2.type: |-
+  Tipo
+server.reportsv2.username: |-
+  Nombre de usuario
+server.requests.bounty: |-
+  Recompensa
+server.requests.by_user: |-
+  Usuario
+server.requests.description: |-
+  Descripción
+server.requests.image: |-
+  Imagen
+server.requests.name: |-
+  Nombre
+server.requests.reason: |-
+  Razón
+server.requests.search_terms: |-
+  Buscar términos
+server.requests.tags: |-
+  Etiquetas
+server.requests.tags_comma: |-
+  Etiquetas (separadas por comas)
+server.requests.top_contributors: |-
+  Top Contribuidores
+server.requests.year: |-
+  Año
+server.rules.ratio: |-
+  Ratio
+server.rules.ratio_title: |-
+  Ratio
+server.rules.type: |-
+  Categoría
+server.sitehistory.category: |-
+  Categoría
+server.sitehistory.edit: |-
+  Editar
+server.sitehistory.tags: |-
+  Etiquetas
+server.sitehistory.title: |-
+  Título
+server.staff.donation: |-
+  Donar
+server.staff.message: |-
+  Mensaje
+server.staff.subject: |-
+  Asunto
+server.staff.username: |-
+  Nombre de usuario
+server.staffpm.preview: |-
+  Vista previa
+server.staffpm.reason: |-
+  Razón
+server.staffpm.replies: |-
+  Respuestas
+server.staffpm.reply: |-
+  Responder
+server.staffpm.resolved: |-
+  Resuelto
+server.staffpm.sender: |-
+  Remitente
+server.staffpm.subject: |-
+  Asunto
+server.stats.stats: |-
+  Estadísticas
+server.subtitles.new: |-
+  Nuevo
+server.subtitles.reason: |-
+  Razón
+server.tools.Bonus: |-
+  Bonus
+server.tools.added: |-
+  Añadido
+server.tools.featured_movie: |-
+  Película destacada
+server.tools.announcements: |-
+  Anuncios
+server.tools.ascending: |-
+  Ascendente
+server.tools.badge_image: |-
+  Imagen
+server.tools.badge_type: |-
+  Tipo
+server.tools.tag_type: |-
+  Tipo
+server.tools.byuserid: |-
+  Remitente
+server.tools.category: |-
+  Categoría
+server.tools.client_whitelist: |-
+  Lista blanca de clientes
+server.tools.descending: |-
+  Descendente
+server.tools.description: |-
+  Descripción
+server.tools.email: |-
+  Email
+server.tools.handled_after: |-
+  Después
+server.tools.handled_before: |-
+  Antes
+server.tools.history: |-
+  Historial
+server.tools.introduction: |-
+  Introducción
+server.tools.message: |-
+  Mensaje
+server.tools.name: |-
+  Nombre
+server.tools.no: |-
+  No
+server.tools.outcome_approved: |-
+  Aprobado
+server.tools.outcome_discarded: |-
+  Descartado
+server.tools.password: |-
+  Contraseña
+server.tools.pending: |-
+  Pendiente
+server.tools.permanent: |-
+  Permanente
+server.tools.permission_name: |-
+  Nombre del permiso
+server.tools.permissions_manager: |-
+  Administrador de permisos
+server.tools.php_processes: |-
+  Procesos PHP
+server.tools.please_enter_a_comment_to_add_to_the_users_affected: |-
+  Por favor, introduzca un comentario para añadir a los usuarios afectados.
+server.tools.please_enter_properly_formatted_urls: |-
+  Por favor, introduzca las URLs con formato correcto
+server.tools.plz_supply_a_valid_album_id: |-
+  Por favor, introduzca un ID de película válido
+server.tools.points_to_add: |-
+  Puntos a añadir
+server.tools.posts: |-
+  Publicaciones
+server.tools.publish_a_new_announcement: |-
+  Publicar un Nuevo Anuncio
+server.tools.puppeteer: |-
+  Puppeteer
+server.tools.queue: |-
+  Cola
+server.tools.queuing: |-
+  En cola
+server.tools.range: |-
+  Alcance
+server.tools.rank: |-
+  Rango
+server.tools.ratio: |-
+  Ratio
+server.tools.reason: |-
+  Razón
+server.tools.registered: |-
+  Registrado
+server.tools.registration_date: |-
+  Fecha de registro
+server.tools.reject: |-
+  Rechazar
+server.tools.rejected: |-
+  Rechazado
+server.tools.remaining: |-
+  Restante
+server.tools.remark: |-
+  Razón
+server.tools.remove: |-
+  Eliminar
+server.tools.required_ratio: |-
+  Ratio requerido
+server.tools.rewards: |-
+  Recompensas
+server.tools.row_size: |-
+  Tamaño de fila
+server.tools.rows: |-
+  Filas
+server.tools.schema: |-
+  Esquema
+server.tools.subject: |-
+  Asunto
+server.tools.submitted_after: |-
+  Después
+server.tools.submitted_before: |-
+  Antes
+server.tools.torrents: |-
+  Torrents
+server.tools.user: |-
+  Usuario
+server.tools.username: |-
+  Nombre de usuario
+server.tools.users: |-
+  Usuarios
+server.tools.view: |-
+  Ver
+server.tools.year: |-
+  %s
+server.top10.hide: |-
+  Ocultar
+server.top10.movies: |-
+  Películas
+server.top10.name: |-
+  Nombre
+server.top10.rank: |-
+  Rango
+server.top10.ratio: |-
+  Ratio
+server.top10.tags: |-
+  Etiquetas
+server.top10.tags_comma: |-
+  Etiquetas (separadas por comas)
+server.top10.top_movies: |-
+  Películas
+server.top10.top_torrents: |-
+  Torrents
+server.top10.torrents: |-
+  Torrents
+server.top10.type: |-
+  Tipo
+server.top10.user: |-
+  Usuario
+server.top10.users: |-
+  Usuarios
+server.torrents.asc: |-
+  Ascendente
+server.torrents.bounty: |-
+  Recompensa
+server.torrents.cinematographer: |-
+  Cinematógrafo
+server.torrents.composer: |-
+  Compositor
+server.torrents.desc: |-
+  Descendente
+server.torrents.director: |-
+  Director
+server.torrents.edit_details: |-
+  Editar Detalles
+server.torrents.edit_summary: |-
+  Editar resumen
+server.torrents.editrequest: |-
+  Solicitar un cambio
+server.torrents.eliminate_a_hnr: |-
+  Eliminar un H&R
+server.torrents.ft_order: |-
+  Ordenar por
+server.torrents.ft_releasetype: |-
+  Tipo de lanzamiento
+server.torrents.ft_year: |-
+  Año
+server.torrents.ftb_searchstr: |-
+  Buscar términos
+server.torrents.header: |-
+  Películas
+server.torrents.hide: |-
+  Ocultar
+server.torrents.imdb_language: |-
+  Idioma
+server.torrents.like: |-
+  Me gusta
+server.torrents.movie_producer: |-
+  Productor
+server.torrents.name: |-
+  Nombre
+server.torrents.no: |-
+  No
+server.torrents.period: |-
+  .
+server.torrents.reason: |-
+  Razón
+server.torrents.release_type: |-
+  Tipo de lanzamiento
+server.torrents.remove: |-
+  Eliminar
+server.torrents.reply: |-
+  Responder
+server.torrents.report: |-
+  Reportar
+server.torrents.request_an_edit: |-
+  Solicitar una modificación
+server.torrents.search_for: |-
+  Buscar
+server.torrents.seeders: |-
+  Seeders
+server.torrents.size: |-
+  Tamaño
+server.torrents.subscribe: |-
+  Suscribirse
+server.torrents.tag: |-
+  Etiquetas
+server.torrents.tags: |-
+  Etiquetas (separadas por comas)
+server.torrents.time: |-
+  Tiempo
+server.torrents.title: |-
+  Título
+server.torrents.torrent: |-
+  Torrent
+server.torrents.unsubscribe: |-
+  Desuscribirse
+server.torrents.user: |-
+  Usuario
+server.torrents.viewhistory: |-
+  Ver historial
+server.torrents.votes: |-
+  Votos
+server.torrents.writer: |-
+  Escritor
+server.torrents.year: |-
+  Año
+server.upload.cinematographer: |-
+  Cinematógrafo
+server.upload.composer: |-
+  Compositor
+server.upload.copied: |-
+  Copiado
+server.upload.director: |-
+  Director
+server.upload.english: |-
+  Inglés
+server.upload.last_update: |-
+  Última actualización
+server.upload.movie_producer: |-
+  Productor
+server.upload.name: |-
+  Nombre
+server.upload.period: |-
+  .
+server.upload.preview: |-
+  Vista previa
+server.upload.sub_name: |-
+  Nombre chino
+server.upload.tags: |-
+  Etiquetas
+server.upload.type: |-
+  Tipo
+server.upload.writer: |-
+  Escritor
+server.upload.year: |-
+  Año
+server.user.after: |-
+  Después
+server.user.before: |-
+  Antes
+server.user.bounty: |-
+  Recompensa
+server.user.customtitle: |-
+  Título personalizado
+server.user.donorforum_4: |-
+  Vista previa
+server.user.email: |-
+  Email
+server.user.history: |-
+  Historial
+server.user.irc_no: |-
+  No
+server.user.locked: |-
+  Bloqueado
+server.user.name: |-
+  Nombre
+server.user.next_userclass_title3: |-
+  Ratio
+server.user.next_userclass_title4: |-
+  Tiempo
+server.user.next_userclass_title5: |-
+  Torrents
+server.user.no: |-
+  No
+server.user.order: |-
+  Orden
+server.user.p_email: |-
+  Email
+server.user.p_personal: |-
+  Personal
+server.user.para_emailshowtotc: |-
+  Email
+server.user.para_ratio: |-
+  Ratio
+server.user.para_reratio: |-
+  Ratio requerido
+server.user.para_stats: |-
+  Estadísticas
+server.user.ratio: |-
+  Ratio
+server.user.reason: |-
+  Razón
+server.user.replies: |-
+  Respuestas
+server.user.report: |-
+  Reportar
+server.user.st_lastactivity: |-
+  Actividad reciente
+server.user.st_notification: |-
+  Configuración de Notificaciones
+server.user.st_paranoia: |-
+  Configuración de Paranoia
+server.user.st_password: |-
+  Cambiar contraseña
+server.user.st_password_note: |-
+  Una contraseña segura:
+  <ul class="List">
+  <li>es de 8 caracteres o más, contiene al menos 1 letra minúscula y mayúscula, y contiene al menos un número o símbolo</li>
+  <li>O es de 20 caracteres o más.</li>
+  </ul>
+server.user.st_password_old: |-
+  Contraseña actual
+server.user.st_password_re: |-
+  Confirmar nueva contraseña
+server.user.st_personal: |-
+  Configuración Personal
+server.user.st_personal_title: |-
+  Estos ajustes alteran la apariencia de tu perfil y publicaciones.
+server.user.st_presets: |-
+  Ajustes por defecto
+server.user.st_presets_0: |-
+  Mostrar todo
+server.user.st_presets_1: |-
+  Mostrar sólo estadísticas
+server.user.st_presets_2: |-
+  No mostrar nada
+server.user.st_profinfo1: |-
+  Información de perfil 1
+server.user.st_profinfo2: |-
+  Información de perfil 2
+server.user.st_profinfo3: |-
+  Información de perfil 3
+server.user.st_profinfo4: |-
+  Información de perfil 4
+server.user.st_profinfo5: |-
+  Información de perfil 5
+server.user.st_proftitle1: |-
+  Título del perfil 1
+server.user.st_proftitle2: |-
+  Título del perfil 2
+server.user.st_proftitle3: |-
+  Título del perfil 3
+server.user.st_proftitle4: |-
+  Título del perfil 4
+server.user.st_proftitle5: |-
+  Título del perfil 5
+server.user.st_save: |-
+  Guardar perfil
+server.user.statistics: |-
+  Estadísticas
+server.user.stats: |-
+  Estadísticas
+server.user.subject: |-
+  Asunto
+server.user.theme: |-
+  Tema
+server.user.theme_dark: |-
+  Oscuro
+server.user.theme_light: |-
+  Claro
+server.user.token_history: |-
+  Historial de tokens
+server.user.torrent_notifications: |-
+  Notificaciones de torrents
+server.user.total_donor_points: |-
+  Puntos de donante totales
+server.user.traditional: |-
+  Tradicional
+server.user.u_bounty: |-
+  Recompensa gastada
+server.user.username: |-
+  Nombre de usuario
+server.user.view: |-
+  Ver
+server.user.vote: |-
+  Votar
+server.user.warn: |-
+  Aviso
+server.userhistory.email: |-
+  Email
+server.userhistory.hide: |-
+  Ocultar
+server.userhistory.new: |-
+  Nuevo
+server.userhistory.no: |-
+  No
+server.userhistory.old: |-
+  Antiguo
+server.userhistory.time: |-
+  Tiempo
+server.userhistory.topic: |-
+  Tema
+server.userhistory.torrent: |-
+  Torrent
+server.userhistory.view_all_ip_address: |-
+  Ver todas las direcciones IP
+server.userhistory.view_ip_addresses_with_users: |-
+  Ver direcciones IP con usuarios
+server.wiki.add_alias: |-
+  Añadir alias
+server.wiki.aliases: |-
+  Alias
+server.wiki.all_articles: |-
+  Buscar artículos
+server.wiki.article: |-
+  Artículo
+server.wiki.article_access_detail: |-
+  Hay algunas situaciones en las que la visualización o edición de un artículo debe restringirse a una clase determinada.
+server.wiki.article_delete: |-
+  Eliminar
+server.wiki.article_delete_confirm1: |-
+  ¿Estás seguro de que quieres eliminarlo?&nbsp;
+server.wiki.article_edit: |-
+  Editar
+server.wiki.article_history: |-
+  Historial
+server.wiki.article_language: |-
+  Idioma
+server.wiki.article_language_select: |-
+  Idioma
+server.wiki.chinese: |-
+  Chino
+server.wiki.compare: |-
+  Comparar
+server.wiki.create_an_article: |-
+  Crear un artículo
+server.wiki.delete_aliases: |-
+  Eliminar alias
+server.wiki.details: |-
+  Detalles
+server.wiki.english: |-
+  Inglés
+server.wiki.for_an_similar_article: |-
+  &nbsp;para un artículo similar a este.
+server.wiki.history_new: |-
+  Nuevo
+server.wiki.history_old: |-
+  Antiguo
+server.wiki.history_revision: |-
+  Revisión
+server.wiki.history_title: |-
+  Título
+server.wiki.last_updated_on: |-
+  Última actualización en
+server.wiki.last_upload: |-
+  Última actualización
+server.wiki.no_article_found: |-
+  No se encontraron artículos
+server.wiki.order_by: |-
+  Ordenar por
+server.wiki.other_languages: |-
+  Otros Idiomas
+server.wiki.read: |-
+  Leer
+server.wiki.revision_history: |-
+  Historial de revisiones para %s
+server.wiki.revisions: |-
+  Revisiones
+server.wiki.search_articles: |-
+  Buscar artículos
+server.wiki.search_for: |-
+  Buscar
+server.wiki.search_in: |-
+  Buscar en
+server.wiki.title: |-
+  Título
+server.wiki.toc: |-
+  Tabla de Contenidos
+server.wiki.version: |-
+  Versión
+server.wiki.view_user: |-
+  Ver usuario
+server.wiki.you_must_be_a_higher_user_class_to_view: |-
+  Debes pertenecer a una clase de usuario superior para ver este artículo de la wiki
+server.country.afghanistan: |-
+  Afganistán
+server.country.aland_islands: |-
+  Islas Aland
+server.country.albania: |-
+  Albania
+server.country.algeria: |-
+  Algeria
+server.country.american_samoa: |-
+  Samoa Americana
+server.country.andorra: |-
+  Andorra
+server.country.angola: |-
+  Angola
+server.country.anguilla: |-
+  Anguila
+server.country.antigua_and_barbuda: |-
+  Antigua y Barbuda
+server.country.argentina: |-
+  Argentina
+server.country.armenia: |-
+  Armenia
+server.country.aruba: |-
+  Aruba
+server.country.australia: |-
+  Australia
+server.country.austria: |-
+  Austria
+server.country.azerbaijan: |-
+  Azerbaiyán
+server.country.bangladesh: |-
+  Bangladés
+server.country.bahrain: |-
+  Bahréin
+server.country.bahamas: |-
+  Bahamas
+server.country.barbados: |-
+  Barbados
+server.country.belarus: |-
+  Bielorrusia
+server.country.belgium: |-
+  Bélgica
+server.country.taiwan: |-
+  Taiwán, China
+server.country.hong_kong: |-
+  Hong Kong, China
+server.country.belize: |-
+  Belice
+server.country.benin: |-
+  Benín
+server.country.bermuda: |-
+  Bermudas
+server.country.bhutan: |-
+  Bután
+server.country.bolivia: |-
+  Bolivia
+server.country.bosnia_and_herzegovina: |-
+  Bosnia y Herzegovina
+server.country.botswana: |-
+  Botsuana
+server.country.bouvet_island: |-
+  Isla Bouvet
+server.country.brazil: |-
+  Brasil
+server.country.brunei: |-
+  Brunéi
+server.country.bulgaria: |-
+  Bulgaria
+server.country.burkina_faso: |-
+  Burkina Faso
+server.country.burundi: |-
+  Burundi
+server.country.cambodia: |-
+  Cambodia
+server.country.cameroon: |-
+  Camerún
+server.country.canada: |-
+  Canadá
+server.country.cape_verde: |-
+  Cabo Verde
+server.country.central_african_republic: |-
+  República Centroafricana
+server.country.chad: |-
+  Chad
+server.country.chile: |-
+  Chile
+server.country.christmas_islands: |-
+  Isla de Navidad
+server.country.cocos_(keeling)_islands: |-
+  Islas Cocos (Keeling)
+server.country.colombia: |-
+  Colombia
+server.country.comoros: |-
+  Comoras
+server.country.congo_(congo-kinshasa): |-
+  Congo (Congo-Kinsasa)
+server.country.congo: |-
+  Congo
+server.country.cook_islands: |-
+  Islas Cook
+server.country.costa_rica: |-
+  Costa Rica
+server.country.cote_d'ivoire: |-
+  Costa de Marfil
+server.country.china: |-
+  China
+server.country.croatia: |-
+  Croacia
+server.country.cuba: |-
+  Cuba
+server.country.cyprus: |-
+  Chipre
+server.country.denmark: |-
+  Dinamarca
+server.country.djibouti: |-
+  Yibuti
+server.country.dominica: |-
+  Dominica
+server.country.ecuador: |-
+  Ecuador
+server.country.egypt: |-
+  Egipto
+server.country.equatorial_guinea: |-
+  Guinea Ecuatorial
+server.country.eritrea: |-
+  Eritrea
+server.country.estonia: |-
+  Estonia
+server.country.ethiopia: |-
+  Etiopía
+server.country.faroe_islands: |-
+  Islas Feroe
+server.country.fiji: |-
+  Fiyi
+server.country.finland: |-
+  Finlandia
+server.country.france: |-
+  Francia
+server.country.metropolitanfrance: |-
+  Francia metropolitana
+server.country.french_guiana: |-
+  Guayana Francesa
+server.country.french_polynesia: |-
+  Polinesia Francesa
+server.country.gabon: |-
+  Gabón
+server.country.gambia: |-
+  Gambia
+server.country.georgia: |-
+  Georgia
+server.country.germany: |-
+  Alemania
+server.country.ghana: |-
+  Ghana
+server.country.gibraltar: |-
+  Gibraltar
+server.country.greece: |-
+  Grecia
+server.country.grenada: |-
+  Granada
+server.country.guadeloupe: |-
+  Guadalupe
+server.country.guam: |-
+  Guam
+server.country.guatemala: |-
+  Guatemala
+server.country.guernsey: |-
+  Guernsey
+server.country.guinea-bissau: |-
+  Guinea-Bisáu
+server.country.guinea: |-
+  Guinea
+server.country.guyana: |-
+  Guyana
+server.country.haiti: |-
+  Haití
+server.country.honduras: |-
+  Honduras
+server.country.hungary: |-
+  Hungría
+server.country.iceland: |-
+  Islandia
+server.country.india: |-
+  India
+server.country.indonesia: |-
+  Indonesia
+server.country.iran: |-
+  Irán
+server.country.mauritius: |-
+  Mauricio
+server.country.mayotte: |-
+  Mayotte
+server.country.mexico: |-
+  México
+server.country.micronesia: |-
+  Micronesia
+server.country.moldova: |-
+  Moldavia
+server.country.monaco: |-
+  Mónaco
+server.country.mongolia: |-
+  Mongolia
+server.country.montenegro: |-
+  Montenegro
+server.country.montserrat: |-
+  Montserrat
+server.country.morocco: |-
+  Marruecos
+server.country.mozambique: |-
+  Mozambique
+server.country.myanmar: |-
+  Myanmar
+server.country.namibia: |-
+  Namibia
+server.country.nauru: |-
+  Nauru
+server.country.nepal: |-
+  Nepal
+server.country.netherlands: |-
+  Países Bajos
+server.country.new_caledonia: |-
+  Nueva Caledonia
+server.country.new_zealand: |-
+  Nueva Zelanda
+server.country.nicaragua: |-
+  Nicaragua
+server.country.niger: |-
+  Niger
+server.country.nigeria: |-
+  Nigeria
+server.country.niue: |-
+  Niue
+server.country.norfolk_island: |-
+  Isla Norfolk
+server.country.norway: |-
+  Noruega
+server.country.oman: |-
+  Omán
+server.country.pakistan: |-
+  Pakistán
+server.country.palau: |-
+  Palau
+server.country.palestine: |-
+  Palestina
+server.country.panama: |-
+  Panamá
+server.country.papua_new_guinea: |-
+  Papúa Nueva Guinea
+server.country.peru: |-
+  Perú
+server.country.philippines: |-
+  Filipinas
+server.country.pitcairn_islands: |-
+  Islas Pitcairn
+server.country.poland: |-
+  Polonia
+server.country.portugal: |-
+  Portugal
+server.country.puerto_rico: |-
+  Puerto Rico
+server.country.qatar: |-
+  Catar
+server.country.reunion: |-
+  Reunión
+server.country.romania: |-
+  Rumanía
+server.country.rwanda: |-
+  Ruanda
+server.country.russia: |-
+  Rusia
+server.country.saint_helena: |-
+  Santa Helena
+server.country.saint_kitts-nevis: |-
+  San Cristóbal y Nieves
+server.country.saint_lucia: |-
+  Santa Lucía
+server.country.saint_vincent_and_the_grenadines: |-
+  San Vicente y las Granadinas
+server.country.el_salvador: |-
+  El Salvador
+server.country.samoa: |-
+  Samoa
+server.country.san_marino: |-
+  San Marino
+server.country.sao_tome_and_principe: |-
+  Santo Tomé y Príncipe
+server.country.saudi_arabia: |-
+  Arabia Saudí
+server.country.senegal: |-
+  Senegal
+server.country.seychelles: |-
+  Seychelles
+server.country.sierra_leone: |-
+  Sierra Leona
+server.country.singapore: |-
+  Singapur
+server.country.serbia: |-
+  Serbia
+server.country.slovakia: |-
+  Eslovaquia
+server.country.slovenia: |-
+  Eslovenia
+server.country.solomon_islands: |-
+  Islas Salomón
+server.country.somalia: |-
+  Somalia
+server.country.south_africa: |-
+  Sudáfrica
+server.country.spain: |-
+  España
+server.country.sri_lanka: |-
+  Sri Lanka
+server.country.sudan: |-
+  Sudán
+server.country.suriname: |-
+  Surinam
+server.country.swaziland: |-
+  Suazilandia
+server.country.sweden: |-
+  Suecia
+server.country.switzerland: |-
+  Suiza
+server.country.syria: |-
+  Siria
+server.country.tajikistan: |-
+  Tayikistán
+server.country.tanzania: |-
+  Tanzania
+server.country.thailand: |-
+  Tailandia
+server.country.trinidad_and_tobago: |-
+  Trinidad y Tobago
+server.country.timor-leste: |-
+  Timor Oriental
+server.country.togo: |-
+  Togo
+server.country.tokelau: |-
+  Tokelau
+server.country.tonga: |-
+  Tonga
+server.country.tunisia: |-
+  Túnez
+server.country.turkey: |-
+  Turquía
+server.country.turkmenistan: |-
+  Turkmenistan
+server.country.tuvalu: |-
+  Tuvalu
+server.country.uganda: |-
+  Uganda
+server.country.ukraine: |-
+  Ucrania
+server.country.united_arab_emirates: |-
+  Emiratos Árabes Unidos
+server.country.united_kingdom: |-
+  Reino Unido
+server.country.united_states: |-
+  Estados Unidos
+server.country.uruguay: |-
+  Uruguay
+server.country.uzbekistan: |-
+  Uzbekistán
+server.country.vanuatu: |-
+  Vanuatu
+server.country.vatican_city: |-
+  Ciudad del Vaticano
+server.country.venezuela: |-
+  Venezuela
+server.country.vietnam: |-
+  Vietnam
+server.country.wallis_and_futuna: |-
+  Wallis y Futuna
+server.country.western_sahara: |-
+  Sahara Occidental
+server.country.yemen: |-
+  Yemen
+server.country.yugoslavia: |-
+  Yugoslavia
+server.country.zambia: |-
+  Zambia
+server.country.zimbabwe: |-
+  Zimbabue
+server.country.macao: |-
+  Macao, China
+server.torrents.report_info: |-
+  Información del reporte
+server.collages.not_torrent_link: |-
+  La URL debe ser un enlace a un torrent en el sitio.
+server.requests.delete_request: |-
+  Eliminar solicitud
+server.requests.unfill_request: |-
+  Descompletar solicitud
+server.common.open: |-
+  Abrir
+server.apply.reopen: |-
+  Reabrir
+server.common.update: |-
+  Actualizar
