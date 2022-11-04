@@ -1249,7 +1249,7 @@ server.donate.prepaid_card: |-
 server.donate.profile_info: |-
   Info. do perfil
 server.donate.progress: |-
-  Doação (objetivo anual: %d%% alcançado)
+  Doação (objetivo anual: %s%% alcançado)
 server.donate.red_rank: |-
   Vermelho
 server.donate.silver_rank: |-

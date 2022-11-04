@@ -778,39 +778,41 @@ View::show_header($ThreadInfo['Title'] . ' &lt; ' . $Forums[$ForumID]['Name'] . 
                                     </script>
                                     <div class="TableForumPostBody-actionReward">
                                         <span><?= t('server.forums.bonus_reward') ?></span>
-                                        <select class="Input" id="select_<?= $PostID ?>">
-                                            <?
-                                            if (check_perms('admin_send_bonus')) {
-                                            ?>
-                                                <option class="Select-option" value="10" id="psn_<?= $PostID ?>">10</option>
-                                                <option class="Select-option" value="50" id="psn_<?= $PostID ?>">50</option>
-                                                <option class="Select-option" value="200" id="psn_<?= $PostID ?>">200</option>
-                                                <option class="Select-option" value="500" id="psn_<?= $PostID ?>">500</option>
-                                                <option class="Select-option" value="100" id="sysn_<?= $PostID ?>" style="display:none;">100</option>
-                                                <option class="Select-option" value="500" id="sysn_<?= $PostID ?>" style="display:none;">500</option>
-                                                <option class="Select-option" value="1000" id="sysn_<?= $PostID ?>" style="display:none;">1000</option>
-                                                <option class="Select-option" value="3000" id="sysn_<?= $PostID ?>" style="display:none;">3000</option>
-                                                <option class="Select-option" value="0" id="sysn_<?= $PostID ?>" style="display:none;"><?= t('server.forums.customize') ?></option>
-                                            <?
-                                            } else if (isset($LoggedUser['ExtraClasses']['31'])) {
-                                            ?>
-                                                <option class="Select-option" value="0" id="sysn_<?= $PostID ?>">TC</option>
-                                                <option class="Select-option" value="10" id="psn_<?= $PostID ?>" style="display:none;">10</option>
-                                                <option class="Select-option" value="50" id="psn_<?= $PostID ?>" style="display:none;">50</option>
-                                                <option class="Select-option" value="200" id="psn_<?= $PostID ?>" style="display:none;">200</option>
-                                                <option class="Select-option" value="500" id="psn_<?= $PostID ?>" style="display:none;">500</option>
-                                            <?
-                                            } else {
-                                            ?>
-                                                <option class="Select-option" value="10">10</option>
-                                                <option class="Select-option" value="50">50</option>
-                                                <option class="Select-option" value="200">200</option>
-                                                <option class="Select-option" value="500">500</option>
-                                            <?
-                                            }
-                                            ?>
-                                        </select>
-                                        <input class="Input" type="number" id="input_<?= $PostID ?>" max="5000" min="1" style="display: none;">
+                                        <div>
+                                            <select class="Input" id="select_<?= $PostID ?>">
+                                                <?
+                                                if (check_perms('admin_send_bonus')) {
+                                                ?>
+                                                    <option class="Select-option" value="10" id="psn_<?= $PostID ?>">10</option>
+                                                    <option class="Select-option" value="50" id="psn_<?= $PostID ?>">50</option>
+                                                    <option class="Select-option" value="200" id="psn_<?= $PostID ?>">200</option>
+                                                    <option class="Select-option" value="500" id="psn_<?= $PostID ?>">500</option>
+                                                    <option class="Select-option" value="100" id="sysn_<?= $PostID ?>" style="display:none;">100</option>
+                                                    <option class="Select-option" value="500" id="sysn_<?= $PostID ?>" style="display:none;">500</option>
+                                                    <option class="Select-option" value="1000" id="sysn_<?= $PostID ?>" style="display:none;">1000</option>
+                                                    <option class="Select-option" value="3000" id="sysn_<?= $PostID ?>" style="display:none;">3000</option>
+                                                    <option class="Select-option" value="0" id="sysn_<?= $PostID ?>" style="display:none;"><?= t('server.forums.customize') ?></option>
+                                                <?
+                                                } else if (isset($LoggedUser['ExtraClasses']['31'])) {
+                                                ?>
+                                                    <option class="Select-option" value="0" id="sysn_<?= $PostID ?>">TC</option>
+                                                    <option class="Select-option" value="10" id="psn_<?= $PostID ?>" style="display:none;">10</option>
+                                                    <option class="Select-option" value="50" id="psn_<?= $PostID ?>" style="display:none;">50</option>
+                                                    <option class="Select-option" value="200" id="psn_<?= $PostID ?>" style="display:none;">200</option>
+                                                    <option class="Select-option" value="500" id="psn_<?= $PostID ?>" style="display:none;">500</option>
+                                                <?
+                                                } else {
+                                                ?>
+                                                    <option class="Select-option" value="10">10</option>
+                                                    <option class="Select-option" value="50">50</option>
+                                                    <option class="Select-option" value="200">200</option>
+                                                    <option class="Select-option" value="500">500</option>
+                                                <?
+                                                }
+                                                ?>
+                                            </select>
+                                            <input class="Input is-small" type="number" id="input_<?= $PostID ?>" style="display: none;">
+                                        </div>
                                         <?
                                         if (check_perms('admin_send_bonus')) {
                                         ?>

@@ -53,6 +53,7 @@ class Donation extends \Gazelle\Base {
 
     public function moderatorAdjust(int $UserID, int $Rank, int $TotalRank, string $Reason, int $who) {
         $this->donate($UserID, [
+            'Manipulation' => 'Direct',
             "Source" => "Modify Values",
             "Rank" => (int)$Rank,
             "TotalRank" => (int)$TotalRank,

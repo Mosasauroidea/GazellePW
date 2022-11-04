@@ -252,7 +252,8 @@ class Region {
 		'zimbabwe',
 		'taiwan',
 		'hong_kong',
-		'macao'
+		'macao',
+		'soviet_union',
 	];
 
 	public static function allItem($Type = null) {

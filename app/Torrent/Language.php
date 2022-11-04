@@ -45,7 +45,8 @@ class Language {
 		'ukrainian',
 		'vietnamese',
 		'mandarin',
-		'cantonese'
+		'cantonese',
+		'min_nan'
 	];
 
 	public static function allItem() {
@@ -53,7 +54,7 @@ class Language {
 	}
 
 	public static function text($Item) {
-		return t('server.upload.' . trim(strtolower($Item)),  ['DefaultValue' => $Item]);
+		return t('server.upload.' .  str_replace(' ', '_', trim(strtolower($Item))),  ['DefaultValue' => $Item]);
 	}
 
 	public static function sphinxKey($Text) {

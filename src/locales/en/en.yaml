@@ -1326,7 +1326,7 @@ server.donate.prepaid_card: |-
 server.donate.profile_info: |-
   Profile info(s)
 server.donate.progress: |-
-  Donation (Annual goal: %d%% achieved)
+  Donation (Annual goal: %s%% achieved)
 server.donate.red_rank: |-
   Red
 server.donate.silver_rank: |-
@@ -6518,11 +6518,11 @@ server.user.ip_address: |-
 server.user.ip_history: |-
   IP history
 server.user.api: |-
- API Key
+  API Key
 server.user.api_note: |-
   Reset your api key. You'll have to update the api in all applications that uses the old one.
 server.user.api_copy: |-
- Copy to clipboard
+  Copy to clipboard
 server.user.irc: |-
   IRC
 server.user.irc_no: |-
@@ -8213,3 +8213,7 @@ server.bookmarks.delete_checked: |-
   Delete checked
 server.common.update: |-
   Update
+server.country.soviet_union: |-
+  Soviet Union
+server.upload.min_nan: |-
+  Min Nan 

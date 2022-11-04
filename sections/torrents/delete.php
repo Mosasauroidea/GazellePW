@@ -316,12 +316,15 @@ if (check_perms('admin_reports')) {
                         <tr class="Form-row">
                             <td class="Form-label"><strong><?= t('server.torrents.extra') ?></strong><?= t('server.torrents.space_log_message') ?>:</td>
                             <td class="Form-inputs">
-                                <input class="Input" style="width:unset" type="text" name="log_message" id="log_message<?= $ReportID ?>" size="40" />
-                                <div class="label"><strong><?= t('server.torrents.extra') ?></strong><?= t('server.torrents.space_staff_notes') ?>:</div>
-                                <div>
-                                    <input class="Input" type="text" name="admin_message" id="admin_message<?= $ReportID ?>" size="40" />
-                                </div>
+                                <input class="Input" type="text" name="log_message" id="log_message<?= $ReportID ?>" size="40" />
                             </td>
+                        </tr>
+                        <tr class="Form-row">
+                            <td class="Form-label"><strong><?= t('server.torrents.extra') ?></strong><?= t('server.torrents.space_staff_notes') ?>:</td>
+                            <div>
+                                <td class="Form-inputs">
+                                    <input class="Input" type="text" name="admin_message" id="admin_message<?= $ReportID ?>" size="40" />
+                                </td>
                         </tr>
                         <tr class="Form-row">
                             <td colspan="4" style="text-align: center;">

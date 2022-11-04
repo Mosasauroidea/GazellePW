@@ -19,6 +19,7 @@ if (empty($Properties) && !empty($_GET['groupid']) && is_number($_GET['groupid']
     $DB->query('
 		SELECT
 			tg.ID as GroupID,
+            tg.ID,
 			tg.CategoryID,
 			tg.Name,
 			tg.SubName,

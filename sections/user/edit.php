@@ -52,9 +52,10 @@ if (!is_array($Paranoia)) {
 }
 
 // Fetching API Token
-$apiToken = $DB->query("
+$apiToken = $DB->query(
+    "
     SELECT Token FROM api_applications
-    WHERE UserID = $UserID",  
+    WHERE UserID = $UserID",
 );
 list($apiToken) = $DB->next_record();
 
@@ -236,8 +237,11 @@ echo $Val->GenerateJS('userform');
                     <? if (check_perms('users_mod')) { ?>
                         <tr class="Form-row" id="site_autostats_tr">
                             <td class="Form-label" data-tooltip="<?= t('server.user.base_stats_title') ?>"><strong><?= t('server.user.base_stats') ?></strong></td>
-                            <td class="Form-inputs"><input id="input-autoload_comm_stats" type="checkbox" name="autoload_comm_stats" <? Format::selected('AutoloadCommStats', 1, 'checked', $SiteOptions); ?> />
-                                <label for="input-autoload_comm_stats"><?= t('server.user.base_stats_note') ?></label>
+                            <td class="Form-inputs">
+                                <div class="Checkbox">
+                                    <input class="Input" id="input-autoload_comm_stats" type="checkbox" name="autoload_comm_stats" <? Format::selected('AutoloadCommStats', 1, 'checked', $SiteOptions); ?> />
+                                    <label class="Checkbox-label" for="input-autoload_comm_stats"><?= t('server.user.base_stats_note') ?></label>
+                                </div>
                             </td>
                         </tr>
                     <?  } ?>
@@ -1131,18 +1135,18 @@ echo $Val->GenerateJS('userform');
                     </tr>
 
                     <tr class="Form-row" id="api_token">
-                        <td class="Form-label" ><strong><?= t('server.user.api') ?></strong></td>
+                        <td class="Form-label"><strong><?= t('server.user.api') ?></strong></td>
                         <td class="Form-inputs">
                             <div>
                                 <input id="input-resetApiKey" type="checkbox" name="resetApiKey" id="resetApiKey" />
                                 <label for="input-resetApiKey"><?= t('server.user.api_note') ?></label>
                             </div>
-                        <?php if (isset($apiToken)){ ?>
-                            <div class="FormOneLine">
-                                <input class="Input" type="text" size="50" disabled  name="api_token_value" id="api_token_value" value="<?php echo "$apiToken" ?>" />
-                                <!-- <input class="Button" type="button" onclick="copy('#api_token_value');" value="<?= t('server.user.api_copy') ?>" /> -->
-                            </div>
-                        <?php } ?>
+                            <?php if (isset($apiToken)) { ?>
+                                <div class="FormOneLine">
+                                    <input class="Input" type="text" size="50" disabled name="api_token_value" id="api_token_value" value="<?php echo "$apiToken" ?>" />
+                                    <!-- <input class="Button" type="button" onclick="copy('#api_token_value');" value="<?= t('server.user.api_copy') ?>" /> -->
+                                </div>
+                            <?php } ?>
                         </td>
                     </tr>
 

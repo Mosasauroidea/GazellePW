@@ -174,9 +174,12 @@ if (!check_perms('users_mod', $Cur['Class'])) {
     die();
 }
 $donation = new Donation();
-if (!empty($_POST['donor_points_submit']) && !empty($_POST['donation_value']) && is_numeric($_POST['donation_value'])) {
+$OldDonation = $donation->info($LoggedUser['ID']);
+$OldRank = $OldDonation['Rank'] >= MAX_RANK ? MAX_RANK : $OldDonation['Rank'];
+$OldTotalRank = $OldDonation['TotalRank'];
+if (!empty($_POST['donation_value']) && is_numeric($_POST['donation_value'])) {
     $donation->moderatorDonate($UserID, $_POST['donation_value'], $_POST['donation_currency'], $_POST['donation_reason'], DonationSource::AddPoint, $LoggedUser['ID']);
-} elseif (!empty($_POST['donor_values_submit'])) {
+} elseif ($OldRank != $_POST['donor_rank'] || $OldTotalRank != $_POST['total_donor_rank']) {
     $donation->moderatorAdjust($UserID, $_POST['donor_rank'], $_POST['total_donor_rank'], $_POST['reason'], $LoggedUser['ID']);
 }
 

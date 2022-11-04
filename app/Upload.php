@@ -13,7 +13,6 @@ class UploadedTorrent {
 }
 
 class Upload extends Base {
-
     private $validate;
     private $isNewGroup;
     private $properties;
@@ -47,7 +46,7 @@ class Upload extends Base {
         $LogName = Torrents::torrent_name($this->properties, false);
         $TotalSize = $this->properties['Size'];
         Misc::write_log("Torrent $TorrentID ($LogName) was uploaded by " . $this->user['Username']);
-        Torrents::write_group_log($GroupID, $TorrentID, $this->user['ID'], "uploaded (" . number_format($TotalSize / (1024 * 1024 * 1024), 2) . ' GB)', 0);
+        Torrents::write_group_log($GroupID, $TorrentID, $this->user['ID'], "uploaded (" . number_format($TotalSize / (1024 * 1024 * 1024), 2) . ' GiB)', 0);
 
         $this->clearCache();
         Tracker::update_tracker('add_torrent', array('id' => $TorrentID, 'info_hash' => rawurlencode($this->properties['InfoHash']), 'freetorrent' => $this->properties['FreeLeech']));
@@ -421,6 +420,14 @@ class Upload extends Base {
     private function upload() {
         $this->db->begin_transaction();
         try {
+            $IMDBID = $this->properties['IMDBID'];
+            $this->db->prepared_query("SELECT * FROM torrents_group WHERE IMDBID = ?", $IMDBID);
+            if ($this->db->record_count() > 0) {
+                $ExistedGroup = $this->db->next_record(MYSQLI_ASSOC);
+                $this->isNewGroup = false;
+                $this->properties['Group'] = $ExistedGroup;
+                $this->properties['GroupID'] = $ExistedGroup['ID'];
+            }
             if ($this->isNewGroup) {
                 $ArtistForm = $this->properties['Artists'];
                 $Name = db_string($this->properties['Name']);
@@ -432,17 +439,15 @@ class Upload extends Base {
                 $ReleaseType = $this->properties['ReleaseType'];
                 $TrailerLink = $this->properties['TrailerLink'];
                 $MovieData = $this->properties['MovieData'];
-                $IMDBID = $this->properties['IMDBID'];
                 // Create torrent group
-                $properties['Group'] = $this->db->scalar(
+                $this->db->prepared_query(
                     "INSERT INTO torrents_group
-			(
-                ArtistID, CategoryID, Name, SubName, Year,  Time, WikiBody, MainWikiBody,WikiImage, ReleaseType, IMDBID, TrailerLink, 
-                IMDBRating, Duration, ReleaseDate, Region, Language, RTRating, DoubanRating, DoubanID, DoubanVote, IMDBVote
-            )
-		VALUES
-            (
-                ?,   ?,   ?,   ?,   ?,   ?,   ?,   ?,   ?,   ?,   ?,   ?,   ?,   ?,   ?,   ?,   ?,   ?,   ?,   ?,   ?,   ?)",
+		              (
+                          ArtistID, CategoryID, Name, SubName, Year,  Time, WikiBody, MainWikiBody,WikiImage, ReleaseType, IMDBID, TrailerLink, 
+                          IMDBRating, Duration, ReleaseDate, Region, Language, RTRating, DoubanRating, DoubanID, DoubanVote, IMDBVote
+                      )
+		              VALUES
+                      (?,   ?,   ?,   ?,   ?,   ?,   ?,   ?,   ?,   ?,   ?,   ?,   ?,   ?,   ?,   ?,   ?,   ?,   ?,   ?,   ?,   ?)",
                     0,
                     1,
                     $Name,
@@ -466,8 +471,11 @@ class Upload extends Base {
                     $MovieData['DoubanVote'],
                     $MovieData['IMDBVote']
                 );
-
                 $GroupID = $this->db->inserted_id();
+                $this->properties['GroupID'] = $GroupID;
+                $this->db->prepared_query("SELECT * FROM torrents_group WHERE ID = ?", $GroupID);
+                $ExistedGroup = $this->db->next_record(MYSQLI_ASSOC);
+                $this->properties['Group'] = $ExistedGroup;
                 foreach ($ArtistForm as $Importance => $Artists) {
                     foreach ($Artists as $Num => $Artist) {
                         $this->db->query(

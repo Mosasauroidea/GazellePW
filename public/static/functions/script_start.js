@@ -101,31 +101,31 @@ function get_size(size) {
       ext = ' B'
       break
     case 1:
-      ext = ' KB'
+      ext = ' KiB'
       break
     case 2:
-      ext = ' MB'
+      ext = ' MiB'
       break
     case 3:
-      ext = ' GB'
+      ext = ' GiB'
       break
     case 4:
-      ext = ' TB'
+      ext = ' TiB'
       break
     case 5:
-      ext = ' PB'
+      ext = ' PiB'
       break
     case 6:
-      ext = ' EB'
+      ext = ' EiB'
       break
     case 7:
-      ext = ' ZB'
+      ext = ' ZiB'
       break
     case 8:
-      ext = ' EB'
+      ext = ' EiB'
       break
     default:
-      '0.00 MB'
+      '0.00 MiB'
   }
   return size.toFixed(2) + ext
 }
@@ -197,10 +197,7 @@ function in_array(needle, haystack, strict) {
     strict = false
   }
   for (var key in haystack) {
-    if (
-      (haystack[key] == needle && strict === false) ||
-      haystack[key] === needle
-    ) {
+    if ((haystack[key] == needle && strict === false) || haystack[key] === needle) {
       return true
     }
   }
@@ -212,10 +209,7 @@ function array_search(needle, haystack, strict) {
     strict = false
   }
   for (var key in haystack) {
-    if (
-      (strict === false && haystack[key] == needle) ||
-      haystack[key] === needle
-    ) {
+    if ((strict === false && haystack[key] == needle) || haystack[key] === needle) {
       return key
     }
   }
@@ -288,11 +282,7 @@ function slidetips(Id, interval, to, step) {
     step = step ? Math.abs(step) : obj.offsetHeight > 500 || to > 500 ? 50 : 30 // 30 -> dynamic
   interval = interval == undefined ? 10 : interval // 1 -> 10
   step = (to > 0 ? 1 : -1) * step
-  obj.style.height =
-    (H =
-      (H = isNaN((H = parseInt(obj.style.height))) ? 0 : H) + step < 0
-        ? 0
-        : H + step) + 'px'
+  obj.style.height = (H = (H = isNaN((H = parseInt(obj.style.height))) ? 0 : H) + step < 0 ? 0 : H + step) + 'px'
   if (H <= 0) {
     obj.style.display = 'none'
     obj.style.overflow = 'hidden'
@@ -307,10 +297,7 @@ function slidetips(Id, interval, to, step) {
     obj._expand = true
     obj._slideStart = false
   } else {
-    setTimeout(
-      "slidetips('" + Id + "' , " + interval + ', ' + to + ', ' + step + ');',
-      interval
-    )
+    setTimeout("slidetips('" + Id + "' , " + interval + ', ' + to + ', ' + step + ');', interval)
   }
 }
 

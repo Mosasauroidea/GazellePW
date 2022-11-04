@@ -5,14 +5,20 @@ ini_set('max_file_uploads', 100);
 define('MAX_FILENAME_LENGTH', 255);
 
 use Gazelle\Upload;
+use Gazelle\Exception\InvalidParamException;
 
 $IsNewGroup = empty($_POST['groupid']);
 
 $uploader = new Upload($IsNewGroup);
 try {
     $uploadedTorrent = $uploader->uploadTorrent($_POST, $_FILES);
-} catch (Exception $e) {
+} catch (InvalidParamException $e) {
     $Err = $e->getMessage();
+    include(CONFIG['SERVER_ROOT'] . '/sections/upload/upload.php');
+    die();
+} catch (Exception $e) {
+    error_log($e->getMessage());
+    $Err = 'internal error';
     include(CONFIG['SERVER_ROOT'] . '/sections/upload/upload.php');
     die();
 }

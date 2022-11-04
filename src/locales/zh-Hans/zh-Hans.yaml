@@ -1294,7 +1294,7 @@ server.donate.prepaid_card: |-
 server.donate.profile_info: |-
   个人介绍
 server.donate.progress: |-
-  捐助（已达到年目标的 %d%%）
+  捐助（已达到年目标的 %s%%）
 server.donate.red_rank: |-
   爱心
 server.donate.silver_rank: |-
@@ -7591,6 +7591,8 @@ server.wiki.you_must_be_a_higher_user_class_to_view: |-
   你的用户等级不足以阅读本文
 server.country.afghanistan: |-
   阿富汗
+server.country.soviet_union: |-
+  苏联
 server.country.aland_islands: |-
   奥兰群岛
 server.country.albania: |-
@@ -8077,3 +8079,5 @@ server.bookmarks.delete_checked: |-
   删除选中
 server.common.update: |-
   更新
+server.upload.min_nan: |-
+  闽南语
