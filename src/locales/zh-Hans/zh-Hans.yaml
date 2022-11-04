@@ -7591,8 +7591,6 @@ server.wiki.you_must_be_a_higher_user_class_to_view: |-
   你的用户等级不足以阅读本文
 server.country.afghanistan: |-
   阿富汗
-server.country.soviet_union: |-
-  苏联
 server.country.aland_islands: |-
   奥兰群岛
 server.country.albania: |-
@@ -8079,5 +8077,7 @@ server.bookmarks.delete_checked: |-
   删除选中
 server.common.update: |-
   更新
+server.country.soviet_union: |-
+  苏联
 server.upload.min_nan: |-
   闽南语
