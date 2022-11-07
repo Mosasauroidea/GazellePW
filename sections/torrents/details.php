@@ -225,7 +225,7 @@ View::show_header($Title, 'browse,comments,torrent,bbcode,recommend,cover_art,su
                         </span>
                     </span>
                 <?  } ?>
-                <span class="TableTorrent-movieInfoFactsItem" data-tooltip="<?= t('server.upload.movie_type') ?>">
+                <span class="MovieInfo-fact" data-tooltip="<?= t('server.upload.movie_type') ?>">
                     <?= icon('movie-type') ?>
                     <span><?= t('server.torrents.release_types')[$ReleaseType] ?></span>
                 </span>

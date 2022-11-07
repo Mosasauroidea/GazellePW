@@ -15,12 +15,15 @@ $DB->query("
 		r.UserID,
 		r.FillerID,
 		r.Title,
+		r.Title as Name,
+		r.Subtitle as SubName,
+		r.Year,
 		u.Uploaded,
 		r.GroupID
 	FROM requests AS r
 		LEFT JOIN users_main AS u ON u.ID = FillerID
 	WHERE r.ID = $RequestID");
-$Request = Requests::get_request($RequestID);
+$Request = G::$DB->next_record(MYSQLI_ASSOC);
 $FullName = Torrents::group_name($Request, false);
 $CategoryID = $Request['CategoryID'];
 $UserID = $Request['UserID'];
@@ -44,7 +47,6 @@ $CategoryName = $Categories[$CategoryID - 1];
 
 
 $RequestVotes = Requests::get_votes_array($RequestID);
-
 if ($RequestVotes['TotalBounty'] > $Uploaded) {
 	// If we can't take it all out of upload, zero that out and add whatever is left as download.
 	$DB->query("

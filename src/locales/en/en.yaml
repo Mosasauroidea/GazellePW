@@ -8216,4 +8216,10 @@ server.common.update: |-
 server.country.soviet_union: |-
   Soviet Union
 server.upload.min_nan: |-
-  Min Nan 
+  Min Nan
+server.upload.japanese_sign_language: |-
+  Japanese Sign Language
+server.upload.chinese: |-
+  Chinese
+server.upload.catalan: |-
+  Catalan

@@ -63,27 +63,27 @@ class Upload extends Base {
 
     private function initValidate() {
         global $ReleaseTypes, $Codecs, $Sources, $Containers, $Processings, $Resolutions;
-        $this->validate->SetFields('codec', '1', 'inarray', 'codec', ['inArray' => $Codecs]);
-        $this->validate->SetFields('resolution', '1', 'inarray', 'resolution', ['inArray' => $Resolutions]);
-        $this->validate->SetFields('container', '1', 'inarray', 'container', ['inArray' => $Containers]);
-        $this->validate->SetFields('source', '1', 'inarray', 'source', ['inArray' => $Sources]);
-        $this->validate->SetFields('processing', '1', 'inarray', 'processing', ['inArray' => $Processings]);
+        $this->validate->SetFields('codec', '1', 'inarray', 'codec', ['inarray' => $Codecs]);
+        $this->validate->SetFields('resolution', '1', 'inarray', 'resolution', ['inarray' => $Resolutions]);
+        $this->validate->SetFields('container', '1', 'inarray', 'container', ['inarray' => $Containers]);
+        $this->validate->SetFields('source', '1', 'inarray', 'source', ['inarray' => $Sources]);
+        $this->validate->SetFields('processing', '0', 'inarray', 'processing', ['inarray' => $Processings]);
 
         $this->validate->SetFields('release_desc', '1', 'string', 'allow',  ['maxlength' => 65535]);
         $this->validate->SetFields('staff_note', '0', 'string', 'staff note.', ['maxlength' => 65535]);
 
-        $this->validate->SetFields('subtitle_type', '1', 'inarray', 'subtitle type.', ['inArray' => [1, 2, 3]]);
-        $this->validate->SetFields('no_sub', '0', 'inarray', 'no sub', ['inArray' => [0, 1]]);
-        $this->validate->SetFields('not_main_movie', '0', 'inarray', 'not main movie', ['inArray' => [0, 1]]);
-        $this->validate->SetFields('special_effects_subtitles', '0', 'inarray', 'special effects subtitles', ['inArray' => [0, 1]]);
-        $this->validate->SetFields('chinese_dubbed', '0', 'inarray', 'chinese dubbed', ['inArray' => [0, 1]]);
+        $this->validate->SetFields('subtitle_type', '1', 'inarray', 'subtitle type.', ['inarray' => [1, 2, 3]]);
+        $this->validate->SetFields('no_sub', '0', 'inarray', 'no sub', ['inarray' => [0, 1]]);
+        $this->validate->SetFields('not_main_movie', '0', 'inarray', 'not main movie', ['inarray' => [0, 1]]);
+        $this->validate->SetFields('special_effects_subtitles', '0', 'inarray', 'special effects subtitles', ['inarray' => [0, 1]]);
+        $this->validate->SetFields('chinese_dubbed', '0', 'inarray', 'chinese dubbed', ['inarray' => [0, 1]]);
         $this->validate->SetFields('remaster_year', '0', 'number', 'remaster year');
         $this->validate->SetFields('remaster_title', '0', 'string', 'remaster title');
-        $this->validate->SetFields('scene', '0', 'inarray', 'scene', ['inArray' => [0, 1]]);
-        $this->validate->SetFields('jinzhuan', '0', 'inarray', 'jin zhuan', ['inArray' => [0, 1]]);
-        $this->validate->SetFields('diy', '0', 'inarray', 'diy', ['inArray' => [0, 1]]);
-        $this->validate->SetFields('buy', '0', 'inarray', 'buy', ['inArray' => [0, 1]]);
-        $this->validate->SetFields('allow', '0', 'inarray', 'allow', ['inArray' => [0, 1]]);
+        $this->validate->SetFields('scene', '0', 'inarray', 'scene', ['inarray' => [0, 1]]);
+        $this->validate->SetFields('jinzhuan', '0', 'inarray', 'jin zhuan', ['inarray' => [0, 1]]);
+        $this->validate->SetFields('diy', '0', 'inarray', 'diy', ['inarray' => [0, 1]]);
+        $this->validate->SetFields('buy', '0', 'inarray', 'buy', ['inarray' => [0, 1]]);
+        $this->validate->SetFields('allow', '0', 'inarray', 'allow', ['inarray' => [0, 1]]);
 
         if ($this->isNewGroup) {
             $this->validate->SetFields('name', '1', 'string', 'Title must be between 2 and 200 characters.');
@@ -92,7 +92,7 @@ class Upload extends Base {
             $this->validate->SetFields('image', '1', 'link', 'Image link must be between 2 and 200 characters.');
             $this->validate->SetFields('year', '1', 'number', 'year.');
             $this->validate->SetFields('imdb', '1', 'regex', 'imdb id', ['regex' => '/' . IMDB_REGEX . '/']);
-            $this->validate->SetFields('releasetype', '1', 'inarray', 'release type', ['inArray' => $ReleaseTypes]);
+            $this->validate->SetFields('releasetype', '1', 'inarray', 'release type', ['inarray' => $ReleaseTypes]);
         } else {
             $this->validate->SetFields('groupid', '1', 'number', 'group id');
         }
@@ -181,6 +181,9 @@ class Upload extends Base {
         $properties['Processing'] = $Params['processing'];
         if ($Params['processing_other']) {
             $properties['Processing'] = $Params['processing_other'];
+        }
+        if (empty($properties['Processing'])) {
+            $properties['Processing'] = '';
         }
 
         $properties['NotMainMovie'] = isset($Params['not_main_movie']) ? '1' : '0';

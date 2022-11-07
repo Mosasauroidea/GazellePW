@@ -26,7 +26,7 @@ foreach ($UserDemoteCriteria as $L) {
 		WHERE ID = $UserID");
 		G::$DB->query("UPDATE users_info 
 		SET
-			AdminComment = CONCAT('" . sqltime() . " - Class changed to " . Users::make_class_string($User['To']) . " by System\n\n', AdminComment)
+			AdminComment = CONCAT('" . sqltime() . " - Class changed to " . Users::make_class_string($NewClass) . " by System\n\n', AdminComment)
 		WHERE UserID = $UserID");
 		$Cache->delete_value("user_info_$UserID");
 		$Cache->delete_value("user_info_heavy_$UserID");

@@ -46,7 +46,10 @@ class Language {
 		'vietnamese',
 		'mandarin',
 		'cantonese',
-		'min_nan'
+		'min_nan',
+		'japanese_sign_language',
+		'chinese',
+		'catalan',
 	];
 
 	public static function allItem() {

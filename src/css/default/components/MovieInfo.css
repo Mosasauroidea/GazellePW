@@ -53,11 +53,8 @@ Where
 .MovieInfo-facts {
   border-radius: var(--global-borderRadius);
   display: inline-flex;
-  background: var(--MovieInfo-button-background);
-  border: var(--MovieInfo-button-border);
   width: fit-content;
   margin-bottom: var(--global-space-sm);
-
   flex-wrap: wrap;
 }
 
@@ -68,9 +65,13 @@ Where
   color: var(--Movieinfo-button-color);
   align-items: center;
   gap: var(--global-space-sm);
-}
-.MovieInfo-fact:not(:last-child) {
+  background: var(--MovieInfo-button-background);
+  border-top: var(--MovieInfo-button-border);
+  border-bottom: var(--MovieInfo-button-border);
   border-right: var(--MovieInfo-button-border);
+}
+.MovieInfo-fact:is(:first-child) {
+  border-left: var(--MovieInfo-button-border);
 }
 .MovieInfo-fact:hover {
   color: var(--Movieinfo-button-onHover-color);

@@ -8081,3 +8081,9 @@ server.country.soviet_union: |-
   苏联
 server.upload.min_nan: |-
   闽南语
+server.upload.japanese_sign_language: |-
+  日本手语
+server.upload.chinese: |-
+  汉语
+server.upload.catalan: |-
+  加泰隆语
