@@ -209,10 +209,10 @@ class Artists {
         $Name = $Artist['Name'];
         $SubName = $Artist['SubName'];
         $Image = $Artist['Image'];
-        $Body = db_string($Artist['Description']);
-        $MainBody = db_string($Artist['MainDescription']);
-        $Birth = db_string($Artist['Birthday']);
-        $Place = db_string($Artist['PlaceOfBirth']);
+        $Body = $Artist['Description'];
+        $MainBody = $Artist['MainDescription'];
+        $Birth = $Artist['Birthday'];
+        $Place = $Artist['PlaceOfBirth'];
         $ArtistAliasList = $Artist['Alias'];
 
         $New = false;
@@ -229,37 +229,37 @@ class Artists {
                 if (!empty($Name) && empty($OldName)) {
                     G::$DB->prepared_query("INSERT INTO artists_alias (ArtistID, Name)
 						VALUES (?, ?)", $OldID, $Name);
-                    $Updates[] = "Name = '$Name'";
+                    $Updates[] = "Name = '" . db_string($Name) . "'";
                 }
                 if (!empty($SubName) && empty($OldSubName)) {
                     G::$DB->prepared_query("INSERT INTO artists_alias (ArtistID, Name)
 						VALUES (?, ?)", $OldID, $SubName);
-                    $Updates[] = "SubName = '$SubName'";
+                    $Updates[] = "SubName = '" . db_string($SubName) . "'";
                 }
                 if (empty($OldArtist['Image']) && !empty($Image)) {
-                    $Updates[] = "Image = '$Image'";
+                    $Updates[] = "Image = '" . db_string($Image) . "'";
                 } else if (!empty($OldArtist['Image'])) {
                     $Image = $OldArtist['Image'];
                 }
                 if (empty($OldArtist['Body']) && !empty($Body)) {
-                    $Updates[] = "Body = '$Body'";
+                    $Updates[] = "Body = '" . db_string($Body) . "'";
                 } else if (!empty($OldArtist['Body'])) {
                     $Body = $OldArtist['Body'];
                 }
                 if (empty($OldArtist['MainBody']) && !empty($MainBody)) {
-                    $Updates[] = "MainBody = '$MainBody'";
+                    $Updates[] = "MainBody = '" . db_string($MainBody) . "'";
                 } else if (!empty($OldArtist['MainBody'])) {
                     $MainBody = $OldArtist['MainBody'];
                 }
                 if (!empty($Birth)) {
-                    $Updates[] = "Birthday = '$Birth'";
+                    $Updates[] = "Birthday = '" . db_string($Birth) . "'";
                 }
                 if (!empty($Place)) {
-                    $Updates[] = "PlaceOfBirth = '$Place'";
+                    $Updates[] = "PlaceOfBirth = '" . db_string($Place) . "'";
                 }
                 $Artist['ArtistID'] = $OldID;
                 if (count($Updates) > 0) {
-                    G::$DB->prepared_query("UPDATE artists_group SET " . implode(' , ', $Updates) . " WHERE ArtistID = $OldID");
+                    G::$DB->query("UPDATE artists_group SET " . implode(' , ', $Updates) . " WHERE ArtistID = $OldID");
                     $Change = true;
                 }
             } else {

@@ -16,7 +16,7 @@ class Upload extends AbstractAPI {
 
     private function uploadTorrent() {
         $IsNewGroup = empty($_POST['groupid']);
-        $uploader = new Uploader($IsNewGroup);
+        $uploader = new Uploader($IsNewGroup, true);
         try {
             $uploadedTorrent = $uploader->uploadTorrent($_POST, $_FILES);
         } catch (InvalidParamException $e) {

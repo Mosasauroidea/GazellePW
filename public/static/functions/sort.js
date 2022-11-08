@@ -105,6 +105,15 @@ $(function () {
       sortableTable.color()
       sortableTable.counter()
     },
+    noteToggle: function () {
+      var span = $('<a href="#" class="brackets tooltip" title="Toggle note">Hide</a>').click(function (e) {
+        e.preventDefault()
+        $('#drag_drop_textnote > :first-child').toggle()
+        var $this = $(this)
+        $this.text($this.text() === 'Hide' ? 'Show' : 'Hide')
+      })
+      $('#sorting_head').append(' ', span)
+    },
     checks: function () {
       this.check
         .on('click', 'input', function () {

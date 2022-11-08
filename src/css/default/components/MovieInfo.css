@@ -66,13 +66,9 @@ Where
   align-items: center;
   gap: var(--global-space-sm);
   background: var(--MovieInfo-button-background);
-  border-top: var(--MovieInfo-button-border);
-  border-bottom: var(--MovieInfo-button-border);
-  border-right: var(--MovieInfo-button-border);
+  border: var(--MovieInfo-button-border);
 }
-.MovieInfo-fact:is(:first-child) {
-  border-left: var(--MovieInfo-button-border);
-}
+
 .MovieInfo-fact:hover {
   color: var(--Movieinfo-button-onHover-color);
   background: var(--MovieInfo-button-onHover-background);

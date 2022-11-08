@@ -340,15 +340,15 @@ View::show_header($ArtistHeaderName, 'browse,bbcode,comments,voting,recommend,su
             <div class="MovieInfo-facts">
                 <span class="MovieInfo-fact" data-tooltip="<?= t('server.artist.imdb_born_date') ?>">
                     <?= icon("MovieInfo/birthday") ?>
-                    <span><?= $Birthday ?></span>
+                    <span><?= $Birthday ? $Birthday : '--' ?></span>
                 </span>
                 <span class="MovieInfo-fact" data-tooltip="<?= t('server.artist.imdb_born_area') ?>">
                     <?= icon("MovieInfo/place-of-birth") ?>
-                    <span><?= $PlaceOfBirth ?></span>
+                    <span><?= $PlaceOfBirth ? $PlaceOfBirth : '--' ?></span>
                 </span>
                 <span class="MovieInfo-fact" data-tooltip="<?= t('server.artist.imdb_link') ?>">
                     <?= icon("imdb-gray") ?>
-                    <a target="_blank" href="<? echo "https://www.imdb.com/name/" . $IMDBID ?>"><? print_r($IMDBID) ?></a>
+                    <a target="_blank" href="<? echo "https://www.imdb.com/name/" . $IMDBID ?>"><?= $IMDBID ? $IMDBID : '--' ?></a>
                 </span>
             </div>
             <div class="MovieInfo-synopsis" data-tooltip="<?= t('server.torrents.fold_tooltip') ?>">

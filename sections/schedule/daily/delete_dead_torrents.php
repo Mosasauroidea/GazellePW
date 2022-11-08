@@ -7,12 +7,7 @@ sleep(10);
 $DB->query("
 		SELECT
 			t.ID,
-			t.GroupID,
-			tg.Name,
-			t.UserID,
-			HEX(t.info_hash) AS InfoHash
 		FROM torrents AS t
-			JOIN torrents_group AS tg ON tg.ID = t.GroupID
 		WHERE
 			(t.Time < '" . time_minus(3600 * 24 * 2) . "' AND t.last_action = 0)");
 $Torrents = $DB->to_array(false, MYSQLI_NUM, false);
@@ -26,24 +21,27 @@ $InactivityExceptionsMade = array(
 );
 $i = 0;
 foreach ($Torrents as $Torrent) {
-    list($ID, $GroupID, $Name, $UserID, $InfoHash) = $Torrent;
+    list($ID) = $Torrent;
     if (array_key_exists($UserID, $InactivityExceptionsMade) && (time() < $InactivityExceptionsMade[$UserID])) {
         // don't delete the torrent!
         continue;
     }
-    $ArtistName = Artists::display_artists(Artists::get_artist($GroupID), false, false, false, $UserID);
-    if ($ArtistName) {
-        $Name = "$ArtistName - $Name";
-    }
+
+    $TorrentInfo = Torrents::get_torrent($ID);
+
+    $TorrentName = Torrents::torrent_name($TorrentInfo, false);
+    $InfoHash = $TorrentInfo['InfoHash'];
+    $UserID = $TorrentInfo['UserID'];
+    $GroupID = $TorrentInfo['GroupID'];
 
     Torrents::delete_torrent($ID, $GroupID);
-    $LogEntries[] = db_string("Torrent $ID ($Name) (" . strtoupper($InfoHash) . ") was deleted for inactivity (unseeded)");
+    $LogEntries[] = db_string("Torrent $ID ($TorrentName) (" . strtoupper($InfoHash) . ") was deleted for inactivity (unseeded)");
 
     if (!array_key_exists($UserID, $DeleteNotes)) {
         $DeleteNotes[$UserID] = array('Count' => 0, 'Msg' => '');
     }
 
-    $DeleteNotes[$UserID]['Msg'] .= "\n$Name";
+    $DeleteNotes[$UserID]['Msg'] .= "\n$TorrentName";
     $DeleteNotes[$UserID]['Count']++;
 
     ++$i;

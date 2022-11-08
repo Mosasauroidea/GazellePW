@@ -50,8 +50,8 @@ if (!empty($_GET['action']) && $_GET['action'] == 'revert') { // if we're revert
         die();
     }
 } else { // with edit, the variables are passed with POST
-    $Body = db_string($_POST['body']);
-    $MainBody = db_string($_POST['mainbody']);
+    $Body = db_string(preg_replace("/\r|\n/", "", trim($_POST['body'])));
+    $MainBody = db_string(preg_replace("/\r|\n/", "", trim($_POST['mainbody'])));
     $Image = db_string($_POST['image']);
     $IMDBID = db_string($_POST['imdbid']);
     $DoubanID = db_string($_POST['doubanid']);

@@ -928,6 +928,9 @@ class TorrentSearch {
                     unset($this->Groups[$GroupID]['Torrents'][$TorrentID]);
                 }
             }
+            if (count($this->Groups[$GroupID]['Torrents']) == 0) {
+                unset($this->Groups[$GroupID]);
+            }
         }
     }
 

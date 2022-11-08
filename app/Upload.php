@@ -18,13 +18,15 @@ class Upload extends Base {
     private $properties;
     private $notification;
     private $fileChecker;
+    private $useAPI = false;
 
-    public function __construct($IsNewGroup) {
+    public function __construct($IsNewGroup, $UseAPI = false) {
         parent::__construct();
         $this->notification = new Notification;
         $this->validate = new VALIDATE;
         $this->isNewGroup = $IsNewGroup;
         $this->fileChecker = new FileChecker;
+        $this->useAPI = $UseAPI;
         $this->initValidate();
     }
 
@@ -45,8 +47,8 @@ class Upload extends Base {
 
         $LogName = Torrents::torrent_name($this->properties, false);
         $TotalSize = $this->properties['Size'];
-        Misc::write_log("Torrent $TorrentID ($LogName) was uploaded by " . $this->user['Username']);
-        Torrents::write_group_log($GroupID, $TorrentID, $this->user['ID'], "uploaded (" . number_format($TotalSize / (1024 * 1024 * 1024), 2) . ' GiB)', 0);
+        Misc::write_log("Torrent $TorrentID ($LogName) was uploaded by " . $this->user['Username'] . ($this->useAPI ? ' using the api' : ''));
+        Torrents::write_group_log($GroupID, $TorrentID, $this->user['ID'], "uploaded (" . number_format($TotalSize / (1024 * 1024 * 1024), 2) . ' GiB) " . "', 0);
 
         $this->clearCache();
         Tracker::update_tracker('add_torrent', array('id' => $TorrentID, 'info_hash' => rawurlencode($this->properties['InfoHash']), 'freetorrent' => $this->properties['FreeLeech']));
@@ -157,8 +159,8 @@ class Upload extends Base {
 
         $properties['TrailerLink'] = $Params['trailer_link'];
         $properties['TagList'] = $Params['tags'];
-        $properties['Body'] = trim($Params['desc']);
-        $properties['MainBody'] = trim($Params['maindesc']);
+        $properties['Body'] = preg_replace("/\r|\n/", "", trim($Params['desc']));
+        $properties['MainBody'] = preg_replace("/\r|\n/", "", trim($Params['maindesc']));
         $properties['Image'] = $Params['image'];
         $properties['ReleaseType'] = $Params['releasetype'];
 
@@ -230,7 +232,7 @@ class Upload extends Base {
 
         for ($i = 0, $il = count($Artists); $i < $il; $i++) {
             if (trim($Artists[$i]) != '') {
-                $ArtistForm[$Importance[$i]][] = array('Name' => db_string($Artists[$i]), 'IMDBID' => isset($ArtistIMDBIDs[$i]) ? $ArtistIMDBIDs[$i] : null, 'SubName' => db_string($ArtistSubName[$i]));
+                $ArtistForm[$Importance[$i]][] = array('Name' => $Artists[$i], 'IMDBID' => isset($ArtistIMDBIDs[$i]) ? $ArtistIMDBIDs[$i] : null, 'SubName' => $ArtistSubName[$i]);
             }
         }
         $properties['Artists'] = $ArtistForm;
@@ -281,7 +283,7 @@ class Upload extends Base {
                 FROM torrents_files
                 WHERE TorrentID = $ID");
             if ($this->db->has_results()) {
-                throw new \Exception('The exact same torrent file already exists on the site!');
+                throw new \Gazelle\Exception\InvalidParamException('The exact same torrent file already exists on the site!');
             } else {
                 // A lost torrent
                 $this->db->query("
@@ -433,12 +435,12 @@ class Upload extends Base {
             }
             if ($this->isNewGroup) {
                 $ArtistForm = $this->properties['Artists'];
-                $Name = db_string($this->properties['Name']);
-                $SubName = db_string($this->properties['SubName']);
-                $Year = db_string($this->properties['Year']);
-                $Body = db_string($this->properties['Body']);
-                $MainBody = db_string($this->properties['MainBody']);
-                $Image = db_string($this->properties['Image']);
+                $Name = $this->properties['Name'];
+                $SubName = $this->properties['SubName'];
+                $Year = $this->properties['Year'];
+                $Body = $this->properties['Body'];
+                $MainBody = $this->properties['MainBody'];
+                $Image = $this->properties['Image'];
                 $ReleaseType = $this->properties['ReleaseType'];
                 $TrailerLink = $this->properties['TrailerLink'];
                 $MovieData = $this->properties['MovieData'];
@@ -558,19 +560,19 @@ class Upload extends Base {
                 $this->properties['GroupID'],
                 $this->user['ID'],
                 $this->properties['RemasterYear'],
-                db_string($this->properties['RemasterTitle']),
+                $this->properties['RemasterTitle'],
                 $this->properties['Scene'],
                 $this->properties['Jinzhuan'],
                 $this->properties['Diy'],
                 $this->properties['Buy'],
                 $this->properties['Allow'],
-                db_string($this->properties['InfoHash']),
+                $this->properties['InfoHash'],
                 $this->properties['NumFiles'],
-                db_string($this->properties['FileString']),
-                db_string($this->properties['FilePath']),
+                $this->properties['FileString'],
+                $this->properties['FilePath'],
                 $this->properties['Size'],
                 Time::sqltime(),
-                db_string($this->properties['TorrentDescription']),
+                $this->properties['TorrentDescription'],
                 strval($this->properties['FreeLeech']),
                 $this->properties['FreeLeechType'],
                 $Checked,
@@ -579,14 +581,14 @@ class Upload extends Base {
                 $this->properties['Codec'],
                 $this->properties['Container'],
                 $this->properties['Resolution'],
-                db_string($this->properties['Subtitles']),
-                db_string($this->properties['Makers']),
+                $this->properties['Subtitles'],
+                $this->properties['Makers'],
                 $this->properties['Processing'],
-                db_string($this->properties['RemasterCustomTitle']),
+                $this->properties['RemasterCustomTitle'],
                 $this->properties['ChineseDubbed'],
                 $this->properties['SpecialSub'],
                 $this->properties['MediaInfo'],
-                db_string($this->properties['Note']),
+                $this->properties['Note'],
                 $this->properties['SubtitleType'],
                 $this->properties['Slot']
             );
@@ -618,7 +620,7 @@ class Upload extends Base {
                 VALUES ($TorrentID, $UserID, '" . sqltime() . "')");
             }
 
-            if (isset($this->properties['BadFolders'])) {
+            if ($this->properties['BadFolders']) {
                 $this->db->query("
                 INSERT INTO torrents_bad_folders
                 VALUES ($TorrentID, $UserID, '" . sqltime() . "')");

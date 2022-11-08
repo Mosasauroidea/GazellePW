@@ -7,16 +7,10 @@ sleep(10);
 $DB->query("
 		SELECT
 			t.ID,
-			t.GroupID,
-			tg.Name,
-			t.UserID,
-			HEX(t.info_hash) AS InfoHash,
-			t.dead_time
 		FROM torrents as t
-			JOIN torrents_group AS tg ON tg.ID = t.GroupID 
 		WHERE
 			(t.last_action < '" . time_minus(3600 * 24 * 28) . "' AND t.last_action != 0 AND t.dead_time < t.last_action)");
-$Torrents = $DB->to_array(false, MYSQLI_NUM, false);
+$Torrents = G::$DB->to_array(false, MYSQLI_NUM, false);
 echo 'Found ' . count($Torrents) . " inactive torrents to be marked dead.\n";
 
 $LogEntries = $DeleteNotes = array();
@@ -27,18 +21,18 @@ $InactivityExceptionsMade = array(
 );
 $i = 0;
 foreach ($Torrents as $Torrent) {
-    list($ID, $GroupID, $Name, $UserID, $InfoHash, $Dead) = $Torrent;
+    list($ID) = $Torrent;
     if (array_key_exists($UserID, $InactivityExceptionsMade) && (time() < $InactivityExceptionsMade[$UserID])) {
         // don't delete the torrent!
         continue;
     }
-
     $DB->query("UPDATE torrents SET dead_time = '" . sqltime() . "' WHERE ID = " . $ID);
 
-    $ArtistName = Artists::display_artists(Artists::get_artist($GroupID), false, false, false, $UserID);
-    if ($ArtistName) {
-        $Name = "$ArtistName - $Name";
-    }
+    $TorrentInfo = Torrents::get_torrent($ID);
+
+    $TorrentName = Torrents::torrent_name($TorrentInfo, false);
+    $InfoHash = $TorrentInfo['InfoHash'];
+    $UserID = $TorrentInfo['UserID'];
     $Result = $DB->query("
 			SELECT
 				uid
@@ -48,10 +42,10 @@ foreach ($Torrents as $Torrent) {
     if (!array_key_exists($UserID, $DeleteNotses)) {
         $DeleteNotes[$UserID] = array('Count' => 0, 'Msg' => '');
     }
-    $DeleteNotes[$UserID]['Msg'] .= "\n[url=" . site_url() . "torrents.php?torrentid=$ID]" . $Name . "[/url]";
+    $DeleteNotes[$UserID]['Msg'] .= "\n[url=" . site_url() . "torrents.php?torrentid=$ID]" . $TorrentName . "[/url]";
     $DeleteNotes[$UserID]['Count']++;
 
-    $LogEntries[] = db_string("Torrent $ID ($Name) (" . strtoupper($InfoHash) . ") was marked dead for inactivity (unseeded)");
+    $LogEntries[] = db_string("Torrent $ID ($TorrentName) (" . strtoupper($InfoHash) . ") was marked dead for inactivity (unseeded)");
 
     ++$i;
 }
