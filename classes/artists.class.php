@@ -391,10 +391,11 @@ class Artists {
     public static function delete_artist($ArtistID) {
         $QueryID = G::$DB->get_query_id();
         G::$DB->query("
-			SELECT Name
+			SELECT Name, SubName
 			FROM artists_group
 			WHERE ArtistID = " . $ArtistID);
-        list($Name) = G::$DB->next_record(MYSQLI_NUM, false);
+        $Artist = G::$DB->next_record(MYSQLI_ASSOC, false);
+        $Name = Artists::display_artist($Artist, false);
 
         // Delete requests
         G::$DB->query("

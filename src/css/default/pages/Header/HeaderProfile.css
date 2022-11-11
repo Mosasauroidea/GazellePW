@@ -17,6 +17,7 @@ HeaderProfile
 .HeaderProfile-avatar {
   width: 24px;
   height: 24px;
+  border-radius: var(--global-borderRadius);
 }
 
 @media (max-width: 768px) {

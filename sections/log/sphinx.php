@@ -12,13 +12,13 @@ if (empty($_GET['search']) || trim($_GET['search']) == '') {
 		FROM log
 		ORDER BY ID DESC
 		LIMIT $Offset, " . CONFIG['LOG_ENTRIES_PER_PAGE']);
-    $NumResults = $DB->record_count();
+    $NumResults = G::$DB->record_count();
     if (!$NumResults) {
         $TotalMatches = 0;
     } elseif ($NumResults == CONFIG['LOG_ENTRIES_PER_PAGE']) {
         // This is a lot faster than SQL_CALC_FOUND_ROWS
         $SphQL = new SphinxqlQuery();
-        $Result = $SphQL->select('id')->from('log, log_delta')->limit(0, 1, 1)->query();
+        $Result = $SphQL->set('cutoff', 0)->select('id')->from('log, log_delta')->limit(0, 1, 1)->query();
         $Debug->log_var($Result, '$Result');
         $TotalMatches = min(CONFIG['SPHINX_MAX_MATCHES'], $Result->get_meta('total_found'));
     } else {

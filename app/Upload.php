@@ -428,7 +428,7 @@ class Upload extends Base {
             $IMDBID = $this->properties['IMDBID'];
             $this->db->prepared_query("SELECT * FROM torrents_group WHERE IMDBID = ?", $IMDBID);
             if ($this->db->record_count() > 0) {
-                $ExistedGroup = $this->db->next_record(MYSQLI_ASSOC);
+                $ExistedGroup = $this->db->next_record(MYSQLI_ASSOC, false);
                 $this->isNewGroup = false;
                 $this->properties['Group'] = $ExistedGroup;
                 $this->properties['GroupID'] = $ExistedGroup['ID'];
@@ -478,9 +478,7 @@ class Upload extends Base {
                 );
                 $GroupID = $this->db->inserted_id();
                 $this->properties['GroupID'] = $GroupID;
-                $this->db->prepared_query("SELECT * FROM torrents_group WHERE ID = ?", $GroupID);
-                $ExistedGroup = $this->db->next_record(MYSQLI_ASSOC);
-                $this->properties['Group'] = $ExistedGroup;
+
                 foreach ($ArtistForm as $Importance => $Artists) {
                     foreach ($Artists as $Num => $Artist) {
                         $this->db->query(
@@ -548,6 +546,9 @@ class Upload extends Base {
                 );
                 list($properties['ReleaseType']) = $this->db->next_record();
             }
+            $this->db->prepared_query("SELECT * FROM torrents_group WHERE ID = ?", $GroupID);
+            $ExistedGroup = $this->db->next_record(MYSQLI_ASSOC);
+            $this->properties['Group'] = $ExistedGroup;
             // Use this section to control freeleeches
             $Checked = 0;
             $UserID = $this->user['ID'];
