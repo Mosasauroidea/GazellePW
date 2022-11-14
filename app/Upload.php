@@ -364,12 +364,13 @@ class Upload extends Base {
                 if (count($RecentUploads) === 5) {
                     array_pop($RecentUploads);
                 }
+                $Group = $this->properties['Group'];
                 array_unshift($RecentUploads, array(
                     'TorrentID' => $GroupID,
-                    'Name' => trim($this->properties['Name']),
-                    'SubName' => trim($this->properties['SubName']),
-                    'Year' => trim($this->properties['Year']),
-                    'WikiImage' => trim($this->properties['Image'])
+                    'Name' => trim($Group['Name']),
+                    'SubName' => trim($Group['SubName']),
+                    'Year' => trim($Group['Year']),
+                    'WikiImage' => trim($Group['WikiImage'])
                 ));
                 $this->cache->cache_value("recent_uploads_$UserID", $RecentUploads, 0);
             } while (0);
