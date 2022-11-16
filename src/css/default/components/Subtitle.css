@@ -1,0 +1,11 @@
+.Subtitle-item {
+  display: flex;
+  gap: 5px;
+  align-items: center;
+}
+
+.Subtitle-itemLabel {
+  display: flex;
+  gap: 3px;
+  align-items: center;
+}

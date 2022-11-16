@@ -99,9 +99,9 @@ if ($TorrentTags != '') {
         $Tags[$TagKey]['userid'] = $TorrentTagUserIDs[$TagKey];
         $TagNames[] = $SubNames[$TagName];
     }
-    $TagsFormat = new Tags(implode(' ', $TagNames));
     uasort($Tags, 'compare');
 }
+$TagsFormat = new Tags(implode(' ', $TagNames));
 
 
 

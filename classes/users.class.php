@@ -550,6 +550,7 @@ class Users {
             '38' => 'CT', // Charlie Team
             '39' => 'DT', // Delta Team
             '56' => 'TI',
+            '62' => 'A',
         );
 
         if ($UserID == 0) {

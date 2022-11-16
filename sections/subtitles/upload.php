@@ -20,9 +20,9 @@ function genSubcheckboxes($Labels, $Subtitles) {
         $Checked = strpos($Subtitles, $Label) === false ? "" : "checked='checked'";
         $Icon = Subtitle::icon($Label);
 ?>
-        <div class="subtitle">
+        <div class="Subtitle-item">
             <input id="<?= $Label ?>" type="checkbox" name="languages[]" value="<?= $Label ?>" <?= $Checked ?>>
-            <label class="Checkbox-label" for="<?= $Label ?>"><?= $Icon ?> <?= Subtitle::text($Label) ?></label>
+            <label class="Checkbox-label Subtitle-itemLabel" for="<?= $Label ?>"><?= $Icon ?> <?= Subtitle::text($Label) ?></label>
         </div>
 <?
     }

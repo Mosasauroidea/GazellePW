@@ -142,7 +142,7 @@ $Resolved = (isset($_GET['status']) && $_GET['status'] === 'resolved');
                     <tr class="Form-row">
                         <td class="Form-label"><?= t('server.apply.reply') ?></td>
                         <td class="Form-items">
-                            <?= new TEXTAREA_PREVIEW('note_reply', 'note_reply', '', 60, 8, true, true) ?>
+                            <? new TEXTAREA_PREVIEW('note_reply', 'note_reply', '', 60, 8, true, true) ?>
                         </td>
                     </tr>
                     <tr class="Form-row">

@@ -62,9 +62,9 @@ class TORRENT_FORM {
             $Checked = strpos($Subtitles, $Label) === false ? "" : "checked='checked'";
             $Icon = Subtitle::icon($Label);
 ?>
-            <div class="Checkbox">
+            <div class="Checkbox Subtitle-item">
                 <input class="Input" type="checkbox" id="<?= $Label ?>" name="subtitles[]" value="<?= $Label ?>" <?= $Checked ?>>
-                <label class="Checkbox-label" for="<?= $Label ?>"><?= $Icon ?> <?= Subtitle::text($Label) ?></label>
+                <label class="Checkbox-label Subtitle-itemLabel" for="<?= $Label ?>"><?= $Icon ?> <?= Subtitle::text($Label) ?></label>
             </div>
         <?
         }

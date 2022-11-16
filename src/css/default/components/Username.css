@@ -2,6 +2,7 @@
   display: inline-flex;
   align-items: center;
   flex-wrap: wrap;
+  gap: 3px;
 }
 .TableTop10User .Username {
   flex-wrap: nowrap;

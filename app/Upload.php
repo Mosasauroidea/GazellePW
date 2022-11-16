@@ -134,6 +134,9 @@ class Upload extends Base {
             if (!ImageTools::whitelisted($Params['image'], false)) {
                 throw new Exception\InvalidParamException('image host');
             }
+            if (count($Params['tags']) < 1) {
+                throw new Exception\InvalidParamException('tags');
+            }
         }
 
         $File = $Files['file_input']; // This is our torrent file
@@ -366,7 +369,8 @@ class Upload extends Base {
                 }
                 $Group = $this->properties['Group'];
                 array_unshift($RecentUploads, array(
-                    'TorrentID' => $GroupID,
+                    'TorrentID' => $TorrentID,
+                    'ID' => $GroupID,
                     'Name' => trim($Group['Name']),
                     'SubName' => trim($Group['SubName']),
                     'Year' => trim($Group['Year']),
