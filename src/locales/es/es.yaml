@@ -80,6 +80,12 @@ client.stats.torrentByMonth: |-
   Subidas Mensuales de Torrents
 client.stats.torrentByYear: |-
   Subidas Anuales de Torrents
+client.upload.codec_required: |-
+  Por favor, seleccione un codec.
+client.upload.container_required: |-
+  Por favor, seleccione un contenedor.
+client.upload.desc_img_3_png: |-
+  Se requieren al menos tres capturas de pantalla PNG, mira <a href="wiki.php?action=article&id=51" target="_blank">ayuda</a>.
 client.upload.movie_title_required: |-
   ¡Por favor, especifique el título!
 client.upload.poster_required: |-
@@ -126,6 +132,10 @@ client.validation.please_enter_no_more_than_n_characters: |-
   Por favor, escriba no más de {0} caracteres.
 client.validation.please_enter_only_digits: |-
   Por favor, escriba solo dígitos.
+client.validation.this_field_is_required: |-
+  Este campo es obligatorio.
+server.apply.applicant: |-
+  Solicitante
 server.apply.apply: |-
   Aplicar
 server.apply.archived: |-
@@ -138,6 +148,10 @@ server.apply.choose_a_role_from_the_list: |-
   Elige un rol de la lista siguiente
 server.apply.comments: |-
   Comentarios
+server.apply.current: |-
+  Actual
+server.apply.current_applications: |-
+  Aplicaciones actuales
 server.apply.current_roles: |-
   Roles Actuales
 server.apply.date_created: |-
@@ -212,6 +226,8 @@ server.artist.aliases_list: |-
   Lista de alias existentes de artistas
 server.artist.artist_deleted: |-
   Artista eliminado
+server.artist.artist_id: |-
+  ID del artista
 server.artist.artist_info: |-
   Información del artista
 server.artist.chinese_biography: |-
@@ -316,6 +332,22 @@ server.badges.badge_price: |-
   Precio
 server.badges.badge_store: |-
   Tienda de Insignias
+server.badges.index_badge: |-
+  Medallas
+server.badges.sold_out: |-
+  Agotado
+server.blog.by: |-
+  por
+server.blog.edit_blog_post: |-
+  Editar post del blog
+server.blog.important: |-
+  Importante
+server.blog.please_enter_a_title: |-
+  Por favor, introduzca un título.
+server.blog.posted: |-
+  publicado
+server.blog.remove_link: |-
+  Eliminar link
 server.blog.staff_blog: |-
   Blog del Staff
 server.blog.thread_id: |-
@@ -446,6 +478,10 @@ server.collages.adder: |-
   Usuario
 server.collages.category: |-
   Categoría
+server.collages.collage: |-
+  Collage
+server.collages.collage_id: |-
+  ID del collage
 server.collages.collagecats:
   '1': |-
     Personal
@@ -523,6 +559,8 @@ server.collages.recover_deleted_collage: |-
   Recuperar collage eliminado
 server.collages.report: |-
   Reportar
+server.collages.report_collage: |-
+  Reportar collage
 server.collages.search_ascending: |-
   Ascendente
 server.collages.search_descending: |-
@@ -627,12 +665,16 @@ server.common.language: |-
   Idioma
 server.common.language_region: |-
   Idioma y región
+server.common.leechers: |-
+  Leechers
 server.common.log: |-
   Registro
 server.common.logout: |-
   Cerrar sesión
 server.common.movie_name_title: |-
   Título de la película o ID de IMDb
+server.common.my_badges: |-
+  Medallas
 server.common.my_bookmarks: |-
   Marcadores
 server.common.my_comments: |-
@@ -787,6 +829,8 @@ server.forums.blank: |-
   En blanco
 server.forums.bonus: |-
   Bonus
+server.forums.by: |-
+  por
 server.forums.by_user_just_now: |-
   &nbsp;Ahora mismo
 server.forums.check_all: |-
@@ -993,6 +1037,8 @@ server.register.password: |-
   Contraseña
 server.register.username: |-
   Nombre de usuario
+server.reports.collage: |-
+  Collage
 server.reports.description: |-
   Descripción
 server.reports.new: |-
@@ -1027,6 +1073,8 @@ server.reportsv2.report: |-
   Reportar
 server.reportsv2.type: |-
   Tipo
+server.reportsv2.types.master.dupe.title: |-
+  Copia
 server.reportsv2.username: |-
   Nombre de usuario
 server.requests.bounty: |-
@@ -1199,16 +1247,108 @@ server.tools.row_size: |-
   Tamaño de fila
 server.tools.rows: |-
   Filas
+server.tools.schedule: |-
+  Programación
 server.tools.schema: |-
   Esquema
+server.tools.service: |-
+  Servicio
+server.tools.service_stats: |-
+  Estadísticas del servicio
+server.tools.show_all: |-
+  Mostrar todo
+server.tools.site_info: |-
+  Info del sitio
+server.tools.site_information: |-
+  Información del sitio
+server.tools.site_options: |-
+  Opciones del sitio
+server.tools.size_limitation: |-
+  Limitación de tamaño
+server.tools.size_per_day_this_month: |-
+  Tamaño por día este mes
+server.tools.size_per_day_this_week: |-
+  Tamaño por día esta semana
+server.tools.size_this_month: |-
+  Tamaño este mes
+server.tools.size_this_week: |-
+  Tamaño esta semana
+server.tools.size_today: |-
+  Tamaño hoy
+server.tools.someone_invites: |-
+  Añadir invitaciones
+server.tools.someone_tokens: |-
+  Añadir tokens
+server.tools.space_invite_one: |-
+  1 invitación
+server.tools.space_invite_other: |-
+  %s invitaciones
+server.tools.space_token_one: |-
+  1 token
+server.tools.special: |-
+  Especial
 server.tools.subject: |-
   Asunto
 server.tools.submitted_after: |-
   Después
 server.tools.submitted_before: |-
   Antes
+server.tools.tag_aliases: |-
+  Alias de etiquetas
+server.tools.td_ip_address: |-
+  Dirección IP
+server.tools.temporary: |-
+  Temporal
+server.tools.timer: |-
+  Temporizador
+server.tools.tips: |-
+  Sugerencias
+server.tools.token_type: |-
+  Tipo de token
+server.tools.tokens: |-
+  Tokens
+server.tools.tokens_to_add: |-
+  Tokens a añadir
+server.tools.tokens_to_set: |-
+  Tokens a establecer
+server.tools.tokenstime: |-
+  Tokens expirados
+server.tools.tools: |-
+  Herramientas
+server.tools.torrent_checked: |-
+  Torrent Verificado
+server.tools.torrent_groups: |-
+  Grupos de torrents
+server.tools.torrent_management: |-
+  Gestión de torrents
 server.tools.torrents: |-
   Torrents
+server.tools.torrents_this_month: |-
+  Torrents este mes
+server.tools.torrents_this_week: |-
+  Torrents esta semana
+server.tools.torrents_today: |-
+  Torrents hoy
+server.tools.total: |-
+  Total
+server.tools.total_amount: |-
+  Cantidad total
+server.tools.total_buffer: |-
+  Búfer total
+server.tools.total_download: |-
+  Descarga total
+server.tools.total_files: |-
+  Archivos totales
+server.tools.total_leechers: |-
+  Leechers totales
+server.tools.total_points: |-
+  Puntos totales
+server.tools.total_reads: |-
+  Lecturas totales
+server.tools.total_seeders: |-
+  Seeders totales
+server.tools.total_size: |-
+  Tamaño total
 server.tools.user: |-
   Usuario
 server.tools.username: |-
@@ -1219,12 +1359,36 @@ server.tools.view: |-
   Ver
 server.tools.year: |-
   %s
+server.top10.day: |-
+  Día
+server.top10.dl_speed: |-
+  Velocidad de descarga
+server.top10.donors: |-
+  Donantes
+server.top10.downloaders: |-
+  Descargadores
+server.top10.fastest_downloaders: |-
+  Descargadores más rapidos
+server.top10.favorites: |-
+  Favoritos
+server.top10.free: |-
+  freeleech
+server.top10.ft_torrents: |-
+  Filtrar torrents
 server.top10.hide: |-
   Ocultar
 server.top10.movies: |-
   Películas
 server.top10.name: |-
   Nombre
+server.top10.original: |-
+  Original
+server.top10.original_uploaders: |-
+  Uploaders originales
+server.top10.original_uploads: |-
+  Subidas originales
+server.top10.position: |-
+  Posición
 server.top10.rank: |-
   Rango
 server.top10.ratio: |-
@@ -1233,8 +1397,26 @@ server.top10.tags: |-
   Etiquetas
 server.top10.tags_comma: |-
   Etiquetas (separadas por comas)
+server.top10.top: |-
+  Top
+server.top10.top_10_donors: |-
+  Top 10 de Donantes
+server.top10.top_10_for: |-
+  Top 10 para %s
+server.top10.top_10_original_uploaders: |-
+  Top 10 de Uploaders Originales
+server.top10.top_10_tags: |-
+  Top 10 de Etiquetas
+server.top10.top_10_torrents: |-
+  Top 10 de Torrents
+server.top10.top_10_users: |-
+  Top 10 de Usuarios
+server.top10.top_donors: |-
+  Top de Donantes
 server.top10.top_movies: |-
   Películas
+server.top10.top_n_donors: |-
+  Top de Donantes
 server.top10.top_torrents: |-
   Torrents
 server.top10.torrents: |-
@@ -1245,20 +1427,56 @@ server.top10.user: |-
   Usuario
 server.top10.users: |-
   Usuarios
+server.torrents.add_format: |-
+  Añadir formato
+server.torrents.add_subtitles: |-
+  Añadir subtítulos
+server.torrents.add_tag: |-
+  Añadir etiqueta
+server.torrents.advanced: |-
+  Avanzado
+server.torrents.artist_alias_id: |-
+  ID del artista
 server.torrents.asc: |-
   Ascendente
+server.torrents.base: |-
+  Básico
+server.torrents.basic: |-
+  Básico
+server.torrents.because: |-
+  porque
 server.torrents.bounty: |-
   Recompensa
+server.torrents.browser_edit_torrent: |-
+  Editar torrent
+server.torrents.change_category: |-
+  Cambiar categoría
+server.torrents.change_group: |-
+  Cambiar grupo
+server.torrents.checked_by: |-
+  Verificado por %s
+server.torrents.chi: |-
+  chi
 server.torrents.cinematographer: |-
   Cinematógrafo
 server.torrents.composer: |-
   Compositor
+server.torrents.connectable: |-
+  Conectable
+server.torrents.dead: |-
+  Muerto
+server.torrents.delete_torrent: |-
+  Eliminar torrent
 server.torrents.desc: |-
   Descendente
 server.torrents.director: |-
   Director
+server.torrents.dupe: |-
+  Copia
 server.torrents.edit_details: |-
   Editar Detalles
+server.torrents.edit_filters: |-
+  Editar filtros
 server.torrents.edit_summary: |-
   Editar resumen
 server.torrents.editrequest: |-
@@ -1273,14 +1491,44 @@ server.torrents.ft_year: |-
   Año
 server.torrents.ftb_searchstr: |-
   Buscar términos
+server.torrents.group_standard_resolution: |-
+  Definición Estandar
+server.torrents.group_title: |-
+  Título de la película
+server.torrents.group_ultra_high_resolution: |-
+  Ultra Alta Definición
+server.torrents.has_been_checked: |-
+  Ha sido
+server.torrents.has_not_been_checked: |-
+  No ha sido
 server.torrents.header: |-
   Películas
 server.torrents.hide: |-
   Ocultar
+server.torrents.hit_and_run: |-
+  H&R
+server.torrents.hnr_is_not_opened_now: |-
+  H&R no está abierto ahora
+server.torrents.hnrs: |-
+  H&Rs
+server.torrents.if_you_download_this: |-
+  Si descargas esto, tu ratio se convertirá en%s.
+server.torrents.image: |-
+  Póster
+server.torrents.imdb_id: |-
+  ID de IMDb
 server.torrents.imdb_language: |-
   Idioma
+server.torrents.imdb_plot: |-
+  Sinopsis
+server.torrents.imdb_region: |-
+  País/Área
+server.torrents.leechers: |-
+  Leechers
 server.torrents.like: |-
   Me gusta
+server.torrents.media_info: |-
+  Media info
 server.torrents.movie_producer: |-
   Productor
 server.torrents.name: |-
@@ -1327,10 +1575,14 @@ server.torrents.viewhistory: |-
   Ver historial
 server.torrents.votes: |-
   Votos
+server.torrents.votes_total: |-
+  Total
 server.torrents.writer: |-
   Escritor
 server.torrents.year: |-
   Año
+server.upload.because: |-
+  porque
 server.upload.cinematographer: |-
   Cinematógrafo
 server.upload.composer: |-
@@ -1361,6 +1613,8 @@ server.upload.writer: |-
   Escritor
 server.upload.year: |-
   Año
+server.user.advanced: |-
+  Avanzado
 server.user.after: |-
   Después
 server.user.before: |-
@@ -1375,6 +1629,8 @@ server.user.email: |-
   Email
 server.user.history: |-
   Historial
+server.user.ip_address: |-
+  Dirección IP
 server.user.irc_no: |-
   No
 server.user.locked: |-
@@ -1475,12 +1731,18 @@ server.user.theme_dark: |-
   Oscuro
 server.user.theme_light: |-
   Claro
+server.user.token: |-
+  Tokens
 server.user.token_history: |-
   Historial de tokens
+server.user.token_number: |-
+  Tokens
 server.user.torrent_notifications: |-
   Notificaciones de torrents
 server.user.total_donor_points: |-
   Puntos de donante totales
+server.user.total_points: |-
+  Puntos totales
 server.user.traditional: |-
   Tradicional
 server.user.u_bounty: |-
@@ -1493,10 +1755,14 @@ server.user.vote: |-
   Votar
 server.user.warn: |-
   Aviso
+server.userhistory.collage: |-
+  Collage
 server.userhistory.email: |-
   Email
 server.userhistory.hide: |-
   Ocultar
+server.userhistory.ip_address: |-
+  Dirección IP
 server.userhistory.new: |-
   Nuevo
 server.userhistory.no: |-
@@ -1987,3 +2253,5 @@ server.apply.reopen: |-
   Reabrir
 server.common.update: |-
   Actualizar
+server.upload.chinese: |-
+  Chino
