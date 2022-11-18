@@ -6,7 +6,7 @@ sleep(10);
 // expire in 28 days
 $DB->query("
 		SELECT
-			t.ID,
+			t.ID
 		FROM torrents as t
 		WHERE
 			(t.last_action < '" . time_minus(3600 * 24 * 28) . "' AND t.last_action != 0 AND t.dead_time < t.last_action)");
