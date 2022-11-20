@@ -61,12 +61,17 @@ if (isset($_POST['auth'])) {
                 </div>
                 <div class="Box-body BoxList">
                     <? foreach ($Roles as $title => $info) { ?>
-                        <form id="role_edit" method="post" class="LayoutBody" action="/apply.php?action=admin">
+                        <form id="role_edit<?= $info['id'] ?>" method="post" class="LayoutBody" action="/apply.php?action=admin">
                             <div class="Box">
                                 <div class="Box-header">
                                     <div class="Box-headerLeft">
                                         <div class="Box-headerTitle">
-                                            <?= display_str($title) ?></div>
+                                            <?= display_str($title) ?>
+                                        </div>
+                                        - <?= $info['published'] ? t('server.apply.published') : t('server.apply.archived') ?>
+                                        - <?= $info['modified'] == $info['created'] ? time_diff($info['created'], 2) :  time_diff($info['modified'], 2) ?>
+                                        - <?= t('server.apply.role_created_by', ['Values' => [Users::format_username($info['user_id'])]]) ?>
+                                        <input type="hidden" name="edit-<?= $info['id'] ?>" value="Edit" />
                                     </div>
                                     <div class="Box-headerActions">
                                         <input type="hidden" name="auth" value="<?= $LoggedUser['AuthKey'] ?>" />
@@ -74,11 +79,7 @@ if (isset($_POST['auth'])) {
                                             <input type="hidden" name="edit" value="<?= $EDIT_ID ?>" />
                                         <?  } ?>
                                         <input type="hidden" name="user_id" value="<?= $LoggedUser['ID'] ?>" />
-                                        <strong><?= $info['published'] ? t('server.apply.published') : t('server.apply.archived') ?></strong>
-                                        - <?= $info['modified'] == $info['created'] ? time_diff($info['created'], 2) :  time_diff($info['modified'], 2) ?>
-                                        - <?= t('server.apply.role_created_by', ['Values' => [Users::format_username($info['user_id'])]]) ?>
-                                        <input type="hidden" name="edit-<?= $info['id'] ?>" value="Edit" />
-                                        - <a href="javascript:{}" onclick="document.getElementById('role_edit').submit();"><?= t('server.common.edit') ?></a>
+                                        <a href="javascript:{}" onclick="document.getElementById('role_edit<?= $info['id'] ?>').submit();"><?= t('server.common.edit') ?></a>
 
                                     </div>
                                 </div>
@@ -128,9 +129,7 @@ if (isset($_POST['auth'])) {
                     <td class="Form-label"><?= t('server.apply.description') ?></td>
                     <td class="Form-items">
                         <?
-                        $text = new TEXTAREA_PREVIEW('description', 'description', $EDIT_ID ? $AppRole->description() : '', 60, 8, true, true);
-                        $id = $text->getID();
-                        echo $text;
+                        new TEXTAREA_PREVIEW('description', 'description', $EDIT_ID ? $AppRole->description() : '', 60, 8, true, true);
                         ?>
                     </td>
                 <tr class="Form-row">

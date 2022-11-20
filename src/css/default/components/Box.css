@@ -41,6 +41,10 @@ Box              // box with header
   font-weight: bold;
 }
 
+.Box .Box-headerTitle {
+  display: inline;
+}
+
 .Box:not(.is-noBorder) .Box-header {
   background: var(--Box-header-background);
 }
