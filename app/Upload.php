@@ -258,7 +258,7 @@ class Upload extends Base {
         }
 
         // limit free
-        $properties['FreeEndTime'] = time_plus(3600 * 48);
+        $properties['FreeEndTime'] = Time::timePlus(3600 * 48);
 
         $properties['Slot'] = TorrentSlot::CalSlot($properties);
         $this->properties = $properties;
