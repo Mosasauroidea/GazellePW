@@ -491,7 +491,7 @@ class Misc {
         $QueryID = G::$DB->get_query_id();
         G::$DB->query("
 			INSERT INTO log (Message, Time)
-			VALUES ('" . db_string($Message) . "', '" . sqltime() . "')");
+			VALUES ('" . db_string($Message) . "', '" . Time::sqlTime() . "')");
         G::$DB->set_query_id($QueryID);
     }
 

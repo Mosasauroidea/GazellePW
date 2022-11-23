@@ -586,7 +586,7 @@ class Torrents {
 			INSERT INTO group_log
 				(GroupID, TorrentID, UserID, Info, Time, Hidden)
 			VALUES
-				($GroupID, $TorrentID, $UserID, '" . db_string($Message) . "', '" . sqltime() . "', $Hidden)");
+				($GroupID, $TorrentID, $UserID, '" . db_string($Message) . "', '" . Time::sqlTime() . "', $Hidden)");
         G::$DB->set_query_id($QueryID);
     }
 

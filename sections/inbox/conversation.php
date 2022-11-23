@@ -112,79 +112,78 @@ $DB->query("
 
     if (!empty($ReceiverIDs) && (empty($LoggedUser['DisablePM']) || array_intersect($ReceiverIDs, array_keys($StaffIDs)))) {
     ?>
-        <h3><?= t('server.inbox.reply') ?></h3>
-        <form class="Box send_form" name="reply" action="inbox.php" method="post" id="messageform">
-            <div class="Box-body">
+        <div>
+            <form class="send_form" name="reply" action="inbox.php" method="post" id="messageform">
                 <input type="hidden" name="action" value="takecompose" />
                 <input type="hidden" name="auth" value="<?= $LoggedUser['AuthKey'] ?>" />
                 <input type="hidden" name="toid" value="<?= implode(',', $ReceiverIDs) ?>" />
                 <input type="hidden" name="convid" value="<?= $ConvID ?>" />
-                <textarea class="Input" id="quickpost" class="required" name="body" cols="90" rows="10" onkeyup="resize('quickpost');"></textarea> <br />
                 <div id="preview" class="box vertical_space body hidden"></div>
-                <div id="buttons" class="center">
-                    <input class="Button" type="button" value="Preview" onclick="Quick_Preview();" />
-                    <input class="Button" type="submit" value="<?= t('server.inbox.send_message') ?>" />
+                <? new TEXTAREA_PREVIEW('body', 'quickpost', '', 60, 8, true, true, false); ?>
+                <div id="buttons" class="Form-row FormOneLine">
+                    <input variant="primary" class="Button" type="submit" value="<?= t('server.inbox.send_message') ?>" />
                 </div>
-            </div>
-        </form>
-    <?
+            </form>
+        <?
     }
-    ?>
-    <div class="Form-row">
-        <form class="manage_form Form-row" name="messages" action="inbox.php" method="post">
-            <input type="hidden" name="action" value="takeedit" />
-            <input type="hidden" name="convid" value="<?= $ConvID ?>" />
-            <input type="hidden" name="auth" value="<?= $LoggedUser['AuthKey'] ?>" />
+        ?>
+        <div class="Form-row">
+            <form class="manage_form Form-row" name="messages" action="inbox.php" method="post">
+                <input type="hidden" name="action" value="takeedit" />
+                <input type="hidden" name="convid" value="<?= $ConvID ?>" />
+                <input type="hidden" name="auth" value="<?= $LoggedUser['AuthKey'] ?>" />
 
-            <div class="label">
-                <input type="checkbox" id="sticky" name="sticky" <? if ($Sticky) {
-                                                                        echo ' checked="checked"';
-                                                                    } ?> />
-                <label for="sticky"><?= t('server.inbox.sticky') ?></label>
-            </div>
-            <div class="label">
-                <input type="checkbox" id="mark_unread" name="mark_unread" />
-                <label for="mark_unread"><?= t('server.inbox.mark_as_unread') ?></label>
-            </div>
-            <div class="label">
-                <input type="checkbox" id="delete" name="delete" />
-                <label for="delete"><?= t('server.inbox.delete_conversation') ?></label>
-            </div>
-            <div class="center" colspan="6"><button class="Button" type="submit" value="Manage conversation"><?= t('server.inbox.manage_conversation') ?></button></div>
-        </form>
-    </div>
-    <?
-    $DB->query("
+                <div class="label">
+                    <input type="checkbox" id="sticky" name="sticky" <? if ($Sticky) {
+                                                                            echo ' checked="checked"';
+                                                                        } ?> />
+                    <label for="sticky"><?= t('server.inbox.sticky') ?></label>
+                </div>
+                <div class="label">
+                    <input type="checkbox" id="mark_unread" name="mark_unread" />
+                    <label for="mark_unread"><?= t('server.inbox.mark_as_unread') ?></label>
+                </div>
+                <div class="label">
+                    <input type="checkbox" id="delete" name="delete" />
+                    <label for="delete"><?= t('server.inbox.delete_conversation') ?></label>
+                </div>
+                <div class="center" colspan="6"><button class="Button" type="submit" value="Manage conversation"><?= t('server.inbox.manage_conversation') ?></button></div>
+            </form>
+        </div>
+
+        <?
+        $DB->query("
 	SELECT SupportFor
 	FROM users_info
 	WHERE UserID = " . $LoggedUser['ID']);
-    list($FLS) = $DB->next_record();
-    if ((check_perms('users_mod') || $FLS != '') && (!$ForwardedID || $ForwardedID == $LoggedUser['ID'])) {
-    ?>
-        <form class="send_form Form-row" name="forward" action="inbox.php" method="post">
-            <input type="hidden" name="action" value="forward" />
-            <input type="hidden" name="convid" value="<?= $ConvID ?>" />
-            <input type="hidden" name="auth" value="<?= $LoggedUser['AuthKey'] ?>" />
-            <label for="receiverid"><?= t('server.inbox.forward_to') ?></label>
-            <select class="Input" id="receiverid" name="receiverid">
-                <?
-                foreach ($StaffIDs as $StaffID => $StaffName) {
-                    if ($StaffID == $LoggedUser['ID'] || in_array($StaffID, $ReceiverIDs)) {
-                        continue;
+        list($FLS) = $DB->next_record();
+        if ((check_perms('users_mod') || $FLS != '') && (!$ForwardedID || $ForwardedID == $LoggedUser['ID'])) {
+        ?>
+            <form class="send_form Form-row" name="forward" action="inbox.php" method="post">
+                <input type="hidden" name="action" value="forward" />
+                <input type="hidden" name="convid" value="<?= $ConvID ?>" />
+                <input type="hidden" name="auth" value="<?= $LoggedUser['AuthKey'] ?>" />
+                <label for="receiverid"><?= t('server.inbox.forward_to') ?></label>
+                <select class="Input" id="receiverid" name="receiverid">
+                    <?
+                    foreach ($StaffIDs as $StaffID => $StaffName) {
+                        if ($StaffID == $LoggedUser['ID'] || in_array($StaffID, $ReceiverIDs)) {
+                            continue;
+                        }
+                    ?>
+                        <option class="Select-option" value="<?= $StaffID ?>"><?= $StaffName ?></option>
+                    <?
                     }
-                ?>
-                    <option class="Select-option" value="<?= $StaffID ?>"><?= $StaffName ?></option>
-                <?
-                }
-                ?>
-            </select>
-            <button class="Button" type="submit" value="Forward"><?= t('server.inbox.forward_conversation') ?></button>
-        </form>
-    <?
-    }
+                    ?>
+                </select>
+                <button class="Button" type="submit" value="Forward"><?= t('server.inbox.forward_conversation') ?></button>
+            </form>
+        <?
+        }
 
-    //And we're done!
-    ?>
+        //And we're done!
+        ?>
+        </div>
 </div>
 <?
 View::show_footer();
