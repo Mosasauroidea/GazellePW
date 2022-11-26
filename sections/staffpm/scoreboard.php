@@ -3,6 +3,9 @@ require(__DIR__ . '/../staff/functions.php');
 $View   = ($_REQUEST['view'] ?? 'staff');
 $Action = ($_REQUEST['action'] ?? 'stats');
 
+if (!$IsStaff && !$IsFLS) {
+    error(403);
+}
 View::show_header('Staff Inbox', 'PageStaffPMScoreboard');
 ?>
 <div class="LayoutBody">
@@ -41,7 +44,7 @@ View::show_header('Staff Inbox', 'PageStaffPMScoreboard');
                 AND spc.Date > now() - INTERVAL ? DAY)";
         } else {
             $IN    = "IN";
-            $COL   = "Resolved";
+            $COL   = t('server.staffpm.resolved_num');
             $EXTRA = "(SELECT count(*)
                 FROM staff_pm_conversations AS spc
                 WHERE spc.ResolverID=um.ID
@@ -73,13 +76,13 @@ View::show_header('Staff Inbox', 'PageStaffPMScoreboard');
         ?>
         <div class="Box is-noBorder">
             <div class="Box-header">
-                <div class="Box-headerTitle">Inbox actions in the last 24 hours</div>
+                <div class="Box-headerTitle"><?= t('server.staffpm.inbox_action_last_24_hours') ?></div>
             </div>
             <div class="Box-body">
                 <table class="Table">
                     <tr class="Table-rowHeader">
-                        <td class="Table-cell">Username</td>
-                        <td class="Table-cell">Replies</td>
+                        <td class="Table-cell"><?= t('server.staff.username') ?></td>
+                        <td class="Table-cell"><?= t('server.staffpm.replies') ?></td>
                         <td class="Table-cell"><?= $COL ?></td>
                     </tr>
                     <?php
@@ -101,13 +104,13 @@ View::show_header('Staff Inbox', 'PageStaffPMScoreboard');
         ?>
         <div class="Box is-noBorder">
             <div class="Box-header">
-                <div class="Box-headerTitle">Inbox actions in the last week</div>
+                <div class="Box-headerTitle"><?= t('server.staffpm.inbox_action_last_week') ?></div>
             </div>
             <div class="Box-body">
                 <table class="Table">
                     <tr class="Table-rowHeader">
-                        <td class="Table-cell">Username</td>
-                        <td class="Table-cell">Replies</td>
+                        <td class="Table-cell"><?= t('server.staff.username') ?></td>
+                        <td class="Table-cell"><?= t('server.staffpm.replies') ?></td>
                         <td class="Table-cell"><?= $COL ?></td>
                     </tr>
                     <?php
@@ -129,13 +132,13 @@ View::show_header('Staff Inbox', 'PageStaffPMScoreboard');
         ?>
         <div class="Box is-noBorder">
             <div class="Box-header">
-                <div class="Box-headerTitle">Inbox actions in the last month</div>
+                <div class="Box-headerTitle"><?= t('server.staffpm.inbox_action_last_month') ?></div>
             </div>
             <div class="Box-body">
                 <table class="Table">
                     <tr class="Table-rowHeader">
-                        <td class="Table-cell">Username</td>
-                        <td class="Table-cell">Replies</td>
+                        <td class="Table-cell"><?= t('server.staff.username') ?></td>
+                        <td class="Table-cell"><?= t('server.staffpm.replies') ?></td>
                         <td class="Table-cell"><?= $COL ?></td>
                     </tr>
                     <?php
@@ -157,13 +160,13 @@ View::show_header('Staff Inbox', 'PageStaffPMScoreboard');
         ?>
         <div class="Box is-noBorder">
             <div class="Box-header">
-                <div class="Box-headerTitle">Inbox actions total</div>
+                <div class="Box-headerTitle"><?= t('server.staffpm.inbox_actions_total') ?></div>
             </div>
             <div class="Box-body">
                 <table class="Table">
                     <tr class="Table-rowHeader">
-                        <td class="Table-cell">Username</td>
-                        <td class="Table-cell">Replies</td>
+                        <td class="Table-cell"><?= t('server.staff.username') ?></td>
+                        <td class="Table-cell"><?= t('server.staffpm.replies') ?></td>
                         <td class="Table-cell"><?= $COL ?></td>
                     </tr>
                     <?php

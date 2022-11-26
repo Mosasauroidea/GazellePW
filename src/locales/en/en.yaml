@@ -8223,3 +8223,37 @@ server.upload.chinese: |-
   Chinese
 server.upload.catalan: |-
   Catalan
+server.staffpm.common_answers: |-
+  Common answers
+server.common.resolve: |-
+  Resolve
+server.staffpm.assign: |-
+  Assign
+server.staffpm.set_message: |-
+  Set message
+server.staffpm.create_edit_message: |-
+  Manage
+server.staffpm.make_donate: |-
+  Make Donate
+server.staffpm.resolve_selected: |-
+  Resolve selected
+server.staffpm.manage_common_response: |-
+  Manage common responses
+server.staffpm.back_to_conversation: |-
+  Back to conversation
+server.common.name: |-
+  Name
+server.common.content: |-
+  Content
+server.common.new: |-
+  Create
+server.staffpm.inbox_action_last_24_hours: |-
+  Inbox actions in the last 24 hours
+server.staffpm.inbox_action_last_week: |-
+  Inbox actions in the last week
+server.staffpm.inbox_action_last_month: |-
+  Inbox actions in the last month
+server.staffpm.inbox_actions_total: |-
+  Inbox actions total
+server.staffpm.resolved_num: |-
+  Resolved

@@ -61,11 +61,6 @@ if ($ConvID = (int)$_GET['id']) {
                     <a href="staffpm.php?action=scoreboard" class="brackets"><?= t('server.staffpm.view_scoreboard') ?></a>
                 <?
                 }
-                if (!$IsStaff && !$IsFLS) {
-                ?>
-                    <a href="staffpm.php" class="brackets"><?= t('server.staffpm.view_scoreboard') ?></a>
-                <?
-                }
                 ?>
             </div>
         </div>
@@ -119,86 +114,50 @@ if ($ConvID = (int)$_GET['id']) {
                 $DB->set_query_id($StaffPMs);
             }
 
-            // Common responses
-            if ($IsFLS && $Status != 'Resolved') {
-            ?>
-                <div id="common_answers" class="hidden">
-                    <div class="box vertical_space">
-                        <div class="head">
-                            <strong><?= t('server.staffpm.preview') ?></strong>
-                        </div>
-                        <div id="common_answers_body" class="body"><?= t('server.staffpm.select_an_answer_from_the_drop_down_to_view_it') ?></div>
-                    </div>
-                    <br />
-                    <div class="center">
-                        <select class="Input" id="common_answers_select" onchange="UpdateMessage();">
-                            <option id="first_common_response"><?= t('server.staffpm.select_a_message') ?></option>
-                            <?
-                            // List common responses
-                            $DB->query("
-			SELECT ID, Name
-			FROM staff_pm_responses
-			ORDER BY Name ASC");
-                            while (list($ID, $Name) = $DB->next_record()) {
-                            ?>
-                                <option class="Select-option" value="<?= $ID ?>"><?= $Name ?></option>
-                            <?      } ?>
-                        </select>
-                        <input class="Button" type="button" value="Set message" onclick="SetMessage();" />
-                        <input class="Button" type="button" value="Create new / Edit" onclick="location.href='staffpm.php?action=responses&amp;convid=<?= $ConvID ?>';" />
-                    </div>
-                </div>
-            <?
-            }
-
-            // Ajax assign response div
-            if ($IsStaff) {
-            ?>
-                <div id="ajax_message" class="hidden center alertbar"></div>
-            <?
-            }
-
             // Reply box and buttons
             ?>
-            <div class="Form-rowList">
-                <div id="reply_box">
-                    <div id="buttons" class="center">
-                        <form class="manage_form" name="staff_messages" action="staffpm.php" method="post" id="messageform">
-                            <input type="hidden" name="action" value="takepost" />
-                            <input type="hidden" name="convid" value="<?= $ConvID ?>" id="convid" />
+            <div id="reply_box" class="BoxList">
+                <form class="manage_form" name="staff_messages" action="staffpm.php" method="post" id="messageform">
+                    <input type="hidden" name="action" value="takepost" />
+                    <input type="hidden" name="convid" value="<?= $ConvID ?>" id="convid" />
+                    <?
+                    if ($Status != 'Resolved') {
+                        $TextPrev = new TEXTAREA_PREVIEW('message', 'quickpost', '', 90, 10, true, true, false, array(), true);
+                    }
+                    ?>
+                    <div class="Form-row">
+                        <?
+                        if ($Status != 'Resolved') { ?>
+                            <input variant="primary" class="Button" type="submit" value="<?= t('server.inbox.send_message') ?>" />
+                            <input class="Button" type="button" value="<?= t('server.common.resolve') ?>" onclick="location.href='staffpm.php?action=resolve&amp;id=<?= $ConvID ?>';" />
+
                             <?
-                            if ($Status != 'Resolved') {
-                                $TextPrev = new TEXTAREA_PREVIEW('message', 'quickpost', '', 90, 10, true, true, false, array(), true);
-                            }
+                            // Assign to
+                            if ($IsStaff) {
+                                // Staff assign dropdown
                             ?>
-                            <div class="Form-row">
-                                <?
-                                // Assign to
-                                if ($IsStaff) {
-                                    // Staff assign dropdown
-                                ?>
-                                    <select class="Input" id="assign_to" name="assign">
-                                        <optgroup class="Select-group" label="User classes">
-                                            <?      // FLS "class"
-                                            $Selected = ((!$AssignedToUser && $PMLevel == 0) ? ' selected="selected"' : '');
-                                            ?>
-                                            <option class="Select-option" value="class_0" <?= $Selected ?>><?= t('server.staffpm.first_line_support') ?></option>
-                                            <?      // Staff classes
-                                            foreach ($ClassLevels as $Class) {
-                                                // Create one <option class="Select-option"> for each staff user class
-                                                if ($Class['Level'] >= 650) {
-                                                    $Selected = ((!$AssignedToUser && ($PMLevel == $Class['Level'])) ? ' selected="selected"' : '');
-                                            ?>
-                                                    <option class="Select-option" value="class_<?= $Class['Level'] ?>" <?= $Selected ?>><?= $Class['Name'] ?></option>
-                                            <?
-                                                }
+                                | <select class="Input" id="assign_to" name="assign">
+                                    <optgroup class="Select-group" label="User classes">
+                                        <?      // FLS "class"
+                                        $Selected = ((!$AssignedToUser && $PMLevel == 0) ? ' selected="selected"' : '');
+                                        ?>
+                                        <option class="Select-option" value="class_0" <?= $Selected ?>><?= t('server.staffpm.first_line_support') ?></option>
+                                        <?      // Staff classes
+                                        foreach ($ClassLevels as $Class) {
+                                            // Create one <option class="Select-option"> for each staff user class
+                                            if ($Class['Level'] >= 650) {
+                                                $Selected = ((!$AssignedToUser && ($PMLevel == $Class['Level'])) ? ' selected="selected"' : '');
+                                        ?>
+                                                <option class="Select-option" value="class_<?= $Class['Level'] ?>" <?= $Selected ?>><?= $Class['Name'] ?></option>
+                                        <?
                                             }
-                                            ?>
-                                        </optgroup>
-                                        <optgroup class="Select-group" label="Staff">
-                                            <?      // Staff members
-                                            $DB->query(
-                                                "
+                                        }
+                                        ?>
+                                    </optgroup>
+                                    <optgroup class="Select-group" label="Staff">
+                                        <?      // Staff members
+                                        $DB->query(
+                                            "
 			SELECT
 				m.ID,
 				m.Username
@@ -206,18 +165,18 @@ if ($ConvID = (int)$_GET['id']) {
 				JOIN users_main AS m ON m.PermissionID = p.ID
 			WHERE p.DisplayStaff = '1'
 			ORDER BY p.Level DESC, m.Username ASC"
-                                            );
-                                            while (list($ID, $Name) = $DB->next_record()) {
-                                                // Create one <option class="Select-option"> for each staff member
-                                                $Selected = (($AssignedToUser == $ID) ? ' selected="selected"' : '');
-                                            ?>
-                                                <option class="Select-option" value="user_<?= $ID ?>" <?= $Selected ?>><?= $Name ?></option>
-                                            <?      } ?>
-                                        </optgroup>
-                                        <optgroup class="Select-group" label="First Line Support">
-                                            <?
-                                            // FLS users
-                                            $DB->query("
+                                        );
+                                        while (list($ID, $Name) = $DB->next_record()) {
+                                            // Create one <option class="Select-option"> for each staff member
+                                            $Selected = (($AssignedToUser == $ID) ? ' selected="selected"' : '');
+                                        ?>
+                                            <option class="Select-option" value="user_<?= $ID ?>" <?= $Selected ?>><?= $Name ?></option>
+                                        <?      } ?>
+                                    </optgroup>
+                                    <optgroup class="Select-group" label="First Line Support">
+                                        <?
+                                        // FLS users
+                                        $DB->query("
 			SELECT
 				m.ID,
 				m.Username
@@ -228,65 +187,105 @@ if ($ConvID = (int)$_GET['id']) {
 				AND i.SupportFor != ''
 			ORDER BY m.Username ASC
 		");
-                                            while (list($ID, $Name) = $DB->next_record()) {
-                                                // Create one <option class="Select-option"> for each FLS user
-                                                $Selected = (($AssignedToUser == $ID) ? ' selected="selected"' : '');
-                                            ?>
-                                                <option class="Select-option" value="user_<?= $ID ?>" <?= $Selected ?>><?= $Name ?></option>
-                                            <?      } ?>
-                                        </optgroup>
-                                    </select>
-                                    <input class="Button" type="button" onclick="Assign();" value="Assign" />
-                                <?  } elseif ($IsFLS) { /* FLS assign button */ ?>
-                                    <input class="Button" type="button" value="Assign to staff" onclick="location.href='staffpm.php?action=assign&amp;to=staff&amp;convid=<?= $ConvID ?>';" />
-                                    <input class="Button" type="button" value="Assign to forum staff" onclick="location.href='staffpm.php?action=assign&amp;to=forum&amp;convid=<?= $ConvID ?>';" />
-                                <?
-                                }
+                                        while (list($ID, $Name) = $DB->next_record()) {
+                                            // Create one <option class="Select-option"> for each FLS user
+                                            $Selected = (($AssignedToUser == $ID) ? ' selected="selected"' : '');
+                                        ?>
+                                            <option class="Select-option" value="user_<?= $ID ?>" <?= $Selected ?>><?= $Name ?></option>
+                                        <?      } ?>
+                                    </optgroup>
+                                </select>
+                                <input class="Button" type="button" onclick="Assign();" value="<?= t('server.staffpm.assign') ?>" />
 
-                                if ($Status != 'Resolved') { ?>
-                                    <input class="Button" type="button" value="Resolve" onclick="location.href='staffpm.php?action=resolve&amp;id=<?= $ConvID ?>';" />
-                                    <? if ($IsFLS) { /* Moved by request */ ?>
-                                        <input class="Button" type="button" value="Common answers" onclick="$('#common_answers').gtoggle();" />
-                                    <?      } ?>
-                                    <input class="Button hidden button_preview_<?= $TextPrev->getID() ?>" type="button" id="previewbtn" value="Preview" />
-                                    <input class="Button" type="submit" value="<?= t('server.inbox.send_message') ?>" />
-                                <?  } else { ?>
-                                    <input class="Button" type="button" value="Unresolve" onclick="location.href='staffpm.php?action=unresolve&amp;id=<?= $ConvID ?>';" />
+                            <?  } elseif ($IsFLS) { /* FLS assign button */ ?>
+                                <input class="Button" type="button" value="Assign to staff" onclick="location.href='staffpm.php?action=assign&amp;to=staff&amp;convid=<?= $ConvID ?>';" />
+                                <input class="Button" type="button" value="Assign to forum staff" onclick="location.href='staffpm.php?action=assign&amp;to=forum&amp;convid=<?= $ConvID ?>';" />
+                            <?
+                            }
+
+
+                            ?>
+                        <?  } else { ?>
+                            <input class="Button" type="button" value="<?= t('server.staffpm.unresolved') ?>" onclick="location.href='staffpm.php?action=unresolve&amp;id=<?= $ConvID ?>';" />
+                        <?
+                        }
+                        ?>
+                    </div>
+
+                    <?
+
+                    if ($IsStaff) {
+                    ?>
+                        <div id="ajax_message" class="Form-row hidden">
+                        </div>
+                    <?
+                    }
+                    ?>
+
+                </form>
+                <? if ($IsFLS  && $Status != 'Resolved') { /* Moved by request */ ?>
+                    <div class="Form-rowList" variant="header">
+                        <div class="Form-rowHeader">
+                            <?= t('server.staffpm.common_answers') ?>
+                            <div class="Form-actions">
+                                <a href="#" class="brackets" onclick="location.href='staffpm.php?action=responses&amp;convid=<?= $ConvID ?>'"><?= t('server.staffpm.create_edit_message') ?></a>
+                            </div>
+                        </div>
+                        <div class=" Form-row">
+                            <div class="Form-label">
+                                <?= t('server.staffpm.preview') ?>:
+                            </div>
+                            <div class="Form-items">
+                                <div id="common_answers_body" class="Box-body"><i><?= t('server.staffpm.select_an_answer_from_the_drop_down_to_view_it') ?></i></div>
+                            </div>
+                        </div>
+                        <div class="Form-row FormOneLine">
+                            <select class="Input" id="common_answers_select" onchange="UpdateMessage();">
+                                <option id="first_common_response"><?= t('server.staffpm.select_a_message') ?></option>
                                 <?
-                                }
-                                if (check_perms('users_give_donor')) { ?>
-                                    <input class="Button" type="button" value="Make Donor" onclick="$('#make_donor_form').gtoggle(); return false;" />
-                                <?  } ?>
+                                // List common responses
+                                $DB->query("
+			SELECT ID, Name
+			FROM staff_pm_responses
+			ORDER BY Name ASC");
+                                while (list($ID, $Name) = $DB->next_record()) {
+                                ?>
+                                    <option class="Select-option" value="<?= $ID ?>"><?= $Name ?></option>
+                                <?      } ?>
+                            </select>
+                            <input class="Button" type="button" value="<?= t('server.staffpm.set_message') ?>" onclick="SetMessage();" />
+                        </div>
+                    </div>
+                <?      } ?>
+
+                <? if (check_perms('users_give_donor') && $Status != 'Resolved') { ?>
+                    <div id="make_donor_form">
+                        <form action="staffpm.php" method="post">
+                            <input type="hidden" name="action" value="make_donor" />
+                            <input type="hidden" name="auth" value="<?= $LoggedUser['AuthKey'] ?>" />
+                            <input type="hidden" name="id" value="<?= $ConvID ?>" />
+                            <div class="Form-rowList" variant="header">
+                                <div class="Form-rowHeader">
+                                    <?= t('server.staffpm.make_donate') ?>
+                                </div>
+                                <div class="Form-row">
+                                    <div class="Form-label"><?= t('server.staffpm.amount') ?>: </div>
+                                    <div class="Form-inputs"><input class="Input" type="text" name="donation_amount" onkeypress="return isNumberKey(event);" /></div>
+                                </div>
+                                <div class="Form-row">
+                                    <div class="Form-label"><?= t('server.staffpm.reason') ?>: </div>
+                                    <div class="Form-inputs"><input class="Input" type="text" name="donation_reason" /></div>
+                                </div>
+                                <div class="Form-row">
+                                    <select class="Input" name="donation_currency">
+                                        <option class="Select-option" value="CNY"><?= t('server.user.cny') ?></option>
+                                    </select>
+                                    <input class="Button" type="submit" value="<?= t('server.common.submit') ?>" />
+                                </div>
                             </div>
                         </form>
-                        <? if (check_perms('users_give_donor')) { ?>
-                            <div id="make_donor_form" class="hidden">
-                                <form action="staffpm.php" method="post">
-                                    <input type="hidden" name="action" value="make_donor" />
-                                    <input type="hidden" name="auth" value="<?= $LoggedUser['AuthKey'] ?>" />
-                                    <input type="hidden" name="id" value="<?= $ConvID ?>" />
-                                    <div class="Form-row">
-                                        <div class="Form-label"><?= t('server.staffpm.amount') ?>: </div>
-                                        <div class="Form-inputs"><input class="Input" type="text" name="donation_amount" onkeypress="return isNumberKey(event);" /></div>
-                                    </div>
-                                    <div class="Form-row">
-                                        <div class="Form-label"><?= t('server.staffpm.reason') ?>: </div>
-                                        <div class="Form-inputs"><input class="Input" type="text" name="donation_reason" /></div>
-                                    </div>
-                                    <div class="Form-row">
-                                        <select class="Input" name="donation_source">
-                                            <option class="Select-option" value="Flattr"><?= t('server.staffpm.flattr') ?></option>
-                                        </select>
-                                        <select class="Input" name="donation_currency">
-                                            <option class="Select-option" value="EUR"><?= t('server.staffpm.eur') ?></option>
-                                        </select>
-                                        <input class="Button" type="submit" value="<?= t('server.common.submit') ?>" />
-                                    </div>
-                                </form>
-                            </div>
-                        <?  } ?>
                     </div>
-                </div>
+                <?  } ?>
             </div>
         </div>
     </div>

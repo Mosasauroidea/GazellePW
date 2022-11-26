@@ -45,7 +45,7 @@ $WhereCondition = "
 	WHERE (LEAST($LevelCap, spc.Level) <= $UserLevel OR spc.AssignedToUser = '" . $LoggedUser['ID'] . "')
 	  AND spc.Status IN ('$Status')";
 
-if ($ViewString == 'Your Unanswered') {
+if ($View == 'my') {
     if ($UserLevel >= $Classes[CONFIG['USER_CLASS']['MOD']]['Level']) {
         $WhereCondition .= " AND spc.Level >= " . $Classes[CONFIG['USER_CLASS']['MOD']]['Level'];
     } else if ($UserLevel >= $Classes[CONFIG['USER_CLASS']['FORUM_MOD']]['Level']) {
@@ -125,7 +125,7 @@ $Row = 'a';
 
         } else {
             // Messages, draw table
-            if ($ViewString != 'Resolved' && $IsStaff) {
+            if ($View != 'resolved' && $IsStaff) {
                 // Open multiresolve form
             ?>
                 <input type="hidden" name="action" value="multiresolve" />
@@ -134,19 +134,25 @@ $Row = 'a';
             }
 
             // Table head
+            if ($View != 'resolved' && $IsStaff) { ?>
+                <div class="submit_div">
+                    <input class="Button" type="submit" value="<?= t('server.staffpm.resolve_selected') ?>" />
+                </div>
+            <?
+            }
             ?>
             <div class="TableContainer">
-                <table class="Table TableUserInbox <?= ($ViewString != 'Resolved' && $IsStaff) ? ' checkboxes' : '' ?>">
+                <table class="Table TableUserInbox <?= ($View != 'resolved' && $IsStaff) ? ' checkboxes' : '' ?>">
                     <tr class="Table-rowHeader">
-                        <? if ($ViewString != 'Resolved' && $IsStaff) { ?>
+                        <? if ($View != 'resolved' && $IsStaff) { ?>
                             <td class="Table-cell" width="10"><input type="checkbox" onclick="toggleChecks('messageform', this);" /></td>
                         <?  } ?>
-                        <td class="Table-cell" width="50%"><?= t('server.staffpm.subject') ?></td>
+                        <td class="Table-cell"><?= t('server.staffpm.subject') ?></td>
                         <td class="Table-cell"><?= t('server.staffpm.sender') ?></td>
                         <td class="Table-cell"><?= t('server.staffpm.date') ?></td>
                         <td class="Table-cell"><?= t('server.staffpm.assigned_to') ?></td>
                         <td class="Table-cell"><?= t('server.staffpm.replies') ?></td>
-                        <? if ($ViewString == 'Resolved') { ?>
+                        <? if ($View == 'resolved') { ?>
                             <td class="Table-cell"><?= t('server.staffpm.resolved_by') ?></td>
                         <?  } ?>
                     </tr>
@@ -172,7 +178,7 @@ $Row = 'a';
                         }
 
                         // Get resolver
-                        if ($ViewString == 'Resolved') {
+                        if ($View == 'resolved') {
                             //$UserInfo = Users::user_info($ResolverID);
                             $ResolverStr = Users::format_username($ResolverID, true, true, true, true);
                         }
@@ -180,7 +186,7 @@ $Row = 'a';
                         // Table row
                     ?>
                         <tr class="Table-row">
-                            <? if ($ViewString != 'Resolved' && $IsStaff) { ?>
+                            <? if ($View != 'resolved' && $IsStaff) { ?>
                                 <td class="Table-cell Table-cellCenter"><input type="checkbox" name="id[]" value="<?= $ID ?>" /></td>
                             <?      } ?>
                             <td class="Table-cell"><a href="staffpm.php?action=viewconv&amp;id=<?= $ID ?>"><?= display_str($Subject) ?></a></td>
@@ -188,7 +194,7 @@ $Row = 'a';
                             <td class="Table-cell"><?= time_diff($Date, 2, true) ?></td>
                             <td class="Table-cell"><?= $Assigned ?></td>
                             <td class="Table-cell"><?= $NumReplies - 1 ?></td>
-                            <? if ($ViewString == 'Resolved') { ?>
+                            <? if ($View == 'resolved') { ?>
                                 <td class="Table-cell"><?= $ResolverStr ?></td>
                             <?      } ?>
                         </tr>
@@ -201,12 +207,7 @@ $Row = 'a';
                     ?>
                 </table>
             </div>
-            <? if ($ViewString != 'Resolved' && $IsStaff) { ?>
-                <div class="submit_div">
-                    <input class="Button" type="submit" value="Resolve selected" />
-                </div>
         <?
-            }
         } //if (!$DB->has_results())
         ?>
     </form>

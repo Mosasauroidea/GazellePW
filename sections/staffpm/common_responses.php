@@ -9,81 +9,99 @@ View::show_header('Staff PMs', 'staffpm', 'PageStaffPMResponse');
 ?>
 <div class="LayoutBody">
     <div class="BodyHeader">
-        <h2 class="BodyHeader-nav">Staff PMs - Manage common responses</h2>
+        <h2 class="BodyHeader-nav"> <?= t('server.staffpm.staff_pm') ?> > <?= t('server.staffpm.manage_common_response') ?></h2>
         <div class="BodyNavLinks">
-            <? if ($IsStaff) { ?>
-                <a href="staffpm.php" class="brackets">View your unanswered</a>
-            <?  } ?>
-            <a href="staffpm.php?view=unanswered" class="brackets">View all unanswered</a>
-            <a href="staffpm.php?view=open" class="brackets">View unresolved</a>
-            <a href="staffpm.php?view=resolved" class="brackets">View resolved</a>
-            <? if ($ConvID = (int)$_GET['convid']) { ?>
-                <a href="staffpm.php?action=viewconv&amp;id=<?= $ConvID ?>" class="brackets">Back to conversation</a>
-            <?  } ?>
+
+            <?
+            if ($IsStaff) {
+            ?>
+                <a href="staffpm.php" class="brackets"><?= t('server.staffpm.view_your_unanswered') ?></a>
+            <?
+            }
+            if ($IsFLS) {
+            ?>
+                <a href="staffpm.php?view=unanswered" class="brackets"><?= t('server.staffpm.view_all_unanswered') ?></a>
+                <a href="staffpm.php?view=open" class="brackets"><?= t('server.staffpm.view_unresolved') ?></a>
+                <a href="staffpm.php?view=resolved" class="brackets"><?= t('server.staffpm.view_resolved') ?></a>
+            <?
+            }
+            if ($ConvID = (int)$_GET['convid']) { ?>
+                <a href="staffpm.php?action=viewconv&amp;id=<?= $ConvID ?>" class="brackets"><?= t('server.staffpm.back_to_conversation') ?></a>
+            <?  }
+            ?>
         </div>
     </div>
-    <br />
-    <br />
-    <div id="commonresponses" class="center">
-        <br />
-        <div id="ajax_message_0" class="hidden center alertbar"></div>
-        <br />
-        <div class="center">
-            <h3>Create new response:</h3>
-        </div>
-        <div id="response_new" class="box">
-            <form class="send_form" name="response" id="response_form_0" action="">
-                <div class="head">
-                    <strong>Name:</strong>
-                    <input class="Input" type="text" onfocus="if (this.value == 'New name') { this.value = ''; }" onblur="if (this.value == '') { this.value = 'New name'; }" id="response_name_0" size="87" value="New name" />
+    <div id="commonresponses">
+        <form id="response_new" class="Form send_form" name="response" id="response_form_0" action="">
+            <div class="Form-rowList" variant="header">
+                <div class="Form-rowHeader"><?= t('server.common.new') ?></div>
+                <div class="Form-row">
+                    <div class="Form-label">
+                        <?= t('server.common.name') ?>:
+                    </div>
+                    <div class="Form-inputs">
+                        <input class="Input" type="text" id="response_name_0" size="87" />
+                    </div>
                 </div>
-                <div class="pad">
-                    <textarea class="Input" onfocus="if (this.value == 'New message') { this.value = ''; }" onblur="if (this.value == '') { this.value = 'New message'; }" rows="10" cols="87" id="response_message_0">New message</textarea>
-                    <br />
-                    <input class="Button" type="button" value="Save" id="save_0" onclick="SaveMessage(0);" />
+                <div class="Form-row">
+                    <div class="Form-label">
+                        <?= t('server.common.content') ?>:
+                    </div>
+                    <div class="Form-items">
+                        <? new TEXTAREA_PREVIEW('', 'response_message_0', $Event['Body'], 60, 8, true, true, false); ?>
+                    </div>
                 </div>
-            </form>
-        </div>
-        <br />
-        <br />
-        <div class="center">
-            <h3>Edit old responses:</h3>
-        </div>
-        <?
-
-        // List common responses
-        $DB->query("
+                <div class="Form-row FormOneLine">
+                    <input class="Button" type="button" value="<?= t('client.common.save') ?>" id="save_0" onclick="SaveMessage(0);" />
+                </div>
+                <div class="Form-row FormOneLine">
+                    <div id="ajax_message_0" class="hidden center alertbar"></div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <?
+    // List common responses
+    $DB->query("
 	SELECT ID, Message, Name
 	FROM staff_pm_responses
 	ORDER BY Name ASC");
-        while (list($ID, $Message, $Name) = $DB->next_record()) {
+    while (list($ID, $Message, $Name) = $DB->next_record()) {
 
-        ?>
-            <br />
-            <div id="ajax_message_<?= $ID ?>" class="hidden center alertbar"></div>
-            <br />
-            <div id="response_<?= $ID ?>" class="box">
-                <form class="send_form" name="response" id="response_form_<?= $ID ?>" action="">
-                    <div class="head">
-                        <strong>Name:</strong>
-                        <input type="hidden" name="id" value="<?= $ID ?>" />
-                        <input class="Input" type="text" name="name" id="response_name_<?= $ID ?>" size="87" value="<?= display_str($Name) ?>" />
-                    </div>
-                    <div class="pad">
-                        <div class="BoxBody HtmlText hidden" style="text-align: left;" id="response_div_<?= $ID ?>">
-                            <?= Text::full_format($Message) ?>
+    ?>
+        <div id="response_<?= $ID ?>">
+            <form class="Form send_form" name="response" id="response_form_<?= $ID ?>" action="">
+                <input type="hidden" name="id" value="<?= $ID ?>" />
+                <div class="Form-rowList" variant="header">
+                    <div class="Form-rowHeader"><?= t('server.common.edit') ?></div>
+                    <div class="Form-row">
+                        <div class="Form-label">
+                            <?= t('server.common.name') ?>:
                         </div>
-                        <textarea class="Input" rows="10" cols="87" id="response_message_<?= $ID ?>" name="message"><?= display_str($Message) ?></textarea>
-                        <br />
-                        <input class="Button" type="button" value="Toggle preview" onclick="PreviewResponse(<?= $ID ?>);" />
-                        <input class="Button" type="button" value="Delete" onclick="DeleteMessage(<?= $ID ?>);" />
-                        <input class="Button" type="button" value="Save" id="save_<?= $ID ?>" onclick="SaveMessage(<?= $ID ?>);" />
+                        <div class="Form-inputs">
+                            <input class="Input" type="text" name="name" id="response_name_<?= $ID ?>" size="87" value="<?= display_str($Name) ?>" />
+                        </div>
                     </div>
-                </form>
-            </div>
-        <?
-        }
-        ?>
-    </div>
+                    <div class="Form-row">
+                        <div class="Form-label">
+                            <?= t('server.common.content') ?>:
+                        </div>
+                        <div class="Form-items">
+                            <? new TEXTAREA_PREVIEW('message', "response_message_$ID",  display_str($Message), 60, 8, true, true, false); ?>
+                        </div>
+                    </div>
+                    <div class="Form-row FormOneLine">
+                        <input variant="primary" class="Button" type="button" value="<?= t('client.common.save') ?>" id="save_<?= $ID ?>" onclick="SaveMessage(<?= $ID ?>);" />
+                        <input class="Button" type="button" value="<?= t('server.common.delete') ?>" onclick="DeleteMessage(<?= $ID ?>);" />
+                    </div>
+                    <div class="Form-row FormOneLine">
+                        <div id="ajax_message_<?= $ID ?>" class="hidden center alertbar"></div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    <?
+    }
+    ?>
 </div>
 <? View::show_footer(); ?>

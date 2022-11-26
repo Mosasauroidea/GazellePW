@@ -3242,13 +3242,13 @@ server.staff.torrent_inspector: |-
 server.staff.username: |-
   用户名
 server.staffpm.amount: |-
-  总量
+  数额
 server.staffpm.assigned_to: |-
-  发件对象
+  收件对象
 server.staffpm.compose_new: |-
   撰写私信
 server.staffpm.date: |-
-  时间
+  更新时间
 server.staffpm.eur: |-
   欧元
 server.staffpm.first_line_support: |-
@@ -8087,3 +8087,37 @@ server.upload.chinese: |-
   汉语
 server.upload.catalan: |-
   加泰隆语
+server.staffpm.common_answers: |-
+  通用回复
+server.common.resolve: |-
+  解决
+server.staffpm.assign: |-
+  分配
+server.staffpm.set_message: |-
+  设置消息
+server.staffpm.create_edit_message: |-
+  管理
+server.staffpm.make_donate: |-
+  记录捐赠
+server.staffpm.resolve_selected: |-
+  批量解决
+server.staffpm.manage_common_response: |-
+  管理通用回复
+server.staffpm.back_to_conversation: |-
+  返回对话
+server.common.name: |-
+  名称
+server.common.content: |-
+  内容
+server.common.new: |-
+  新建
+server.staffpm.inbox_action_last_24_hours: |-
+  过去24小时的处理动作
+server.staffpm.inbox_action_last_week: |-
+  上周的处理动作
+server.staffpm.inbox_action_last_month: |-
+  上个月的处理动作
+server.staffpm.inbox_actions_total: |-
+  总数
+server.staffpm.resolved_num: |-
+  解决数

@@ -33,7 +33,7 @@ function SaveMessage(id) {
       document.getElementById(ajax_message).textContent = t('client.staffpm.error')
     }
     $('#' + ajax_message).gshow()
-    var t = setTimeout("$('#" + ajax_message + "').ghide()", 2000)
+    setTimeout("$('#" + ajax_message + "').ghide()", 2000)
   })
 }
 
@@ -52,7 +52,7 @@ function DeleteMessage(id) {
       document.getElementById(ajax_message).textContent = t('client.staffpm.error')
     }
     $('#' + ajax_message).gshow()
-    var t = setTimeout("$('#" + ajax_message + "').ghide()", 2000)
+    setTimeout("$('#" + ajax_message + "').ghide()", 2000)
   })
 }
 
@@ -68,7 +68,7 @@ function Assign() {
       document.getElementById('ajax_message').textContent = t('client.staffpm.error')
     }
     $('#ajax_message').gshow()
-    var t = setTimeout("$('#ajax_message').ghide()", 2000)
+    setTimeout("$('#ajax_message').ghide()", 2000)
   })
 }
 

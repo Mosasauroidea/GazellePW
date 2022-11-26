@@ -12,7 +12,7 @@ $DB->query(
 		JOIN permissions AS p ON p.ID = m.PermissionID
 	WHERE i.UserID = " . $LoggedUser['ID']
 );
-list($SupportFor, $DisplayStaff) = $DB->next_record();
+list($SupportFor, $DisplayStaff) = G::$DB->next_record(MYSQLI_BOTH, false);
 
 if (!$IsFLS) {
     // Logged in user is not FLS or Staff
@@ -24,7 +24,7 @@ if ($ID = (int)$_GET['id']) {
 		SELECT Message
 		FROM staff_pm_responses
 		WHERE ID = $ID");
-    list($Message) = $DB->next_record();
+    list($Message) = G::$DB->next_record(MYSQLI_BOTH, false);
     if ($_GET['plain'] == 1) {
         echo $Message;
     } else {

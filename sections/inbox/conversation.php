@@ -127,29 +127,27 @@ $DB->query("
         <?
     }
         ?>
-        <div class="Form-row">
-            <form class="manage_form Form-row" name="messages" action="inbox.php" method="post">
-                <input type="hidden" name="action" value="takeedit" />
-                <input type="hidden" name="convid" value="<?= $ConvID ?>" />
-                <input type="hidden" name="auth" value="<?= $LoggedUser['AuthKey'] ?>" />
+        <form class="manage_form Form-row" name="messages" action="inbox.php" method="post">
+            <input type="hidden" name="action" value="takeedit" />
+            <input type="hidden" name="convid" value="<?= $ConvID ?>" />
+            <input type="hidden" name="auth" value="<?= $LoggedUser['AuthKey'] ?>" />
 
-                <div class="label">
-                    <input type="checkbox" id="sticky" name="sticky" <? if ($Sticky) {
-                                                                            echo ' checked="checked"';
-                                                                        } ?> />
-                    <label for="sticky"><?= t('server.inbox.sticky') ?></label>
-                </div>
-                <div class="label">
-                    <input type="checkbox" id="mark_unread" name="mark_unread" />
-                    <label for="mark_unread"><?= t('server.inbox.mark_as_unread') ?></label>
-                </div>
-                <div class="label">
-                    <input type="checkbox" id="delete" name="delete" />
-                    <label for="delete"><?= t('server.inbox.delete_conversation') ?></label>
-                </div>
-                <div class="center" colspan="6"><button class="Button" type="submit" value="Manage conversation"><?= t('server.inbox.manage_conversation') ?></button></div>
-            </form>
-        </div>
+            <div class="label">
+                <input type="checkbox" id="sticky" name="sticky" <? if ($Sticky) {
+                                                                        echo ' checked="checked"';
+                                                                    } ?> />
+                <label for="sticky"><?= t('server.inbox.sticky') ?></label>
+            </div>
+            <div class="label">
+                <input type="checkbox" id="mark_unread" name="mark_unread" />
+                <label for="mark_unread"><?= t('server.inbox.mark_as_unread') ?></label>
+            </div>
+            <div class="label">
+                <input type="checkbox" id="delete" name="delete" />
+                <label for="delete"><?= t('server.inbox.delete_conversation') ?></label>
+            </div>
+            <div class="center" colspan="6"><button class="Button" type="submit" value="Manage conversation"><?= t('server.inbox.manage_conversation') ?></button></div>
+        </form>
 
         <?
         $DB->query("
