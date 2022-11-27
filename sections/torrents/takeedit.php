@@ -309,7 +309,7 @@ if (check_perms('torrents_trumpable')) {
     $DB->query("
 	DELETE FROM torrents_custom_trumpable
 	WHERE TorrentID = '$TorrentID'");
-    if ($Properties['CustomTrumpable']) {
+    if (!empty($Properties['CustomTrumpable'])) {
         $DB->query("
 			INSERT INTO torrents_custom_trumpable
 			VALUES ($TorrentID, $LoggedUser[ID], '" . sqltime() . "', '" . db_string(trim($Properties['CustomTrumpable'])) . "')");

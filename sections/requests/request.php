@@ -119,18 +119,18 @@ View::show_header(t('server.requests.view_request') . ": $FullName", 'comments,b
                     <?= icon('movie-director') ?>
                     <span><?= $ArtistName ?></span>
                 </a>
-                <span class="TableTorrent-movieInfoFactsItem" data-tooltip="<?= t('server.upload.movie_type') ?>">
+                <span class="MovieInfo-fact TableTorrent-movieInfoFactsItem" data-tooltip="<?= t('server.upload.movie_type') ?>">
                     <?= icon('movie-type') ?>
                     <span><?= $ReleaseName ?></span>
                 </span>
-                <span class="TableTorrent-movieInfoFactsItem" data-tooltip="<?= t('server.requests.bounty') ?>">
+                <span class="MovieInfo-fact TableTorrent-movieInfoFactsItem" data-tooltip="<?= t('server.requests.bounty') ?>">
                     <?= icon('uploaded') ?>
                     <div id="movieinfo_bountry"><?= Format::get_size($RequestVotes['TotalBounty']) ?></div>
                 </span>
                 <?
                 if ($Request['GroupID']) {
                 ?>
-                    <span class="TableTorrent-movieInfoFactsItem" data-tooltip="<?= t('server.requests.torrent_group') ?>">
+                    <span class="MovieInfo-fact TableTorrent-movieInfoFactsItem" data-tooltip="<?= t('server.requests.torrent_group') ?>">
                         <a href="torrents.php?id=<?= $Request['GroupID'] ?>">torrents.php?id=<?= $Request['GroupID'] ?></a>
                     </span>
                 <?
