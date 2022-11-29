@@ -89,7 +89,7 @@ if (isset($_POST['confirm'])) {
   // Merge all of this artist's aliases onto the new artist
   $DB->query("
 		UPDATE artists_alias
-		SET ArtistID = $NewArtistID,
+		SET ArtistID = $NewArtistID
 		WHERE ArtistID = $ArtistID");
 
   // Update the torrent groups, requests, and bookmarks
