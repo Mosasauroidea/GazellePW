@@ -389,10 +389,13 @@ echo $Val->GenerateJS('userform');
                         <td class="Form-label" data-tooltip="<?= t('server.user.torrents_artists_display_type_title') ?>"><strong><?= t('server.user.torrents_artists_display_type') ?></strong></td>
                         <td class="Form-items">
                             <div>
-                                <a class="Link" href="#" id="toggle_sortable"><?= t('server.user.expand') ?></a>
+                                <a class="Link" href="#" onclick="globalapp.toggleAny(event, '#sortable_container, #reset_sortable');return false;">
+                                    <span class="u-toggleAny-show "><?= t('server.common.show') ?></span>
+                                    <span class="u-toggleAny-hide u-hidden"><?= t('server.common.hide') ?></span>
+                                </a>
+                                <a class="Link u-hidden" href="#" id="reset_sortable"><?= t('server.user.reset_to_default') ?></a>
                             </div>
-                            <div id="sortable_container" style="display: none;">
-                                <a class="Link" href="#" id="reset_sortable"><?= t('server.user.reset_to_default') ?></a>
+                            <div id="sortable_container" class="u-hidden">
                                 <p><?= t('server.user.drag_and_drop_change_order') ?></p>
                                 <ul class="sortable_list" id="sortable">
                                     <? Users::release_order($SiteOptions) ?>

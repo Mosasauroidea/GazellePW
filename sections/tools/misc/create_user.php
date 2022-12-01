@@ -5,7 +5,7 @@ if (!check_perms('admin_create_users')) {
 }
 
 //Show our beautiful header
-View::show_header('Create a User');
+View::show_header(t('server.tools.create_a_user'));
 
 //Make sure the form was sent
 if (isset($_POST['Username'])) {
@@ -88,30 +88,35 @@ if (isset($_POST['Username'])) {
 } else {
 
 ?>
-    <div class="BodyHeader">
-        <h2 class="BodyHeader-nav"><?= t('server.tools.create_a_user') ?></h2>
-    </div>
+    <div class="LayoutBody">
+        <div class="BodyHeader">
+            <div class="BodyHeader-nav"><?= t('server.tools.create_a_user') ?></div>
+        </div>
 
-    <div class="thin BoxBody">
         <form class="create_form" name="user" method="post" action="">
             <input type="hidden" name="action" value="create_user" />
             <input type="hidden" name="auth" value="<?= $LoggedUser['AuthKey'] ?>" />
-            <table class="layout" cellpadding="2" cellspacing="1" border="0" align="center">
-                <tr valign="top">
-                    <td align="right" class="label"><?= t('server.tools.username') ?>:</td>
-                    <td align="left"><input class="Input" type="text" name="Username" id="username" /></td>
-                </tr>
-                <tr valign="top">
-                    <td align="right" class="label"><?= t('server.tools.email_address') ?>:</td>
-                    <td align="left"><input class="Input" type="email" name="Email" id="email" /></td>
-                </tr>
-                <tr valign="top">
-                    <td align="right" class="label"><?= t('server.tools.password') ?>:</td>
-                    <td align="left"><input class="Input" type="password" name="Password" id="password" /></td>
-                </tr>
+            <table class="layout Form-rowList" cellpadding="2" cellspacing="1" variant="header">
+                <tr class="Form-rowHeader">
+                    <td>
+                        <?= t('server.tools.create_a_user') ?>
+                    </td>
                 <tr>
-                    <td colspan="2" align="right">
-                        <input class="Button" type="submit" name="submit" value="Create User" />
+                <tr class="Form-row">
+                    <td class="Form-label"><?= t('server.tools.username') ?>:</td>
+                    <td class="Form-inputs"><input autocomplete="off" class="Input" type="text" name="Username" id="username" /></td>
+                </tr>
+                <tr class="Form-row">
+                    <td class="Form-label"><?= t('server.tools.email_address') ?>:</td>
+                    <td class="Form-inputs"><input autocomplete="off" class="Input" type="email" name="Email" id="email" /></td>
+                </tr>
+                <tr class="Form-row">
+                    <td class="Form-label"><?= t('server.tools.password') ?>:</td>
+                    <td class="Form-inputs"><input autocomplete="new-password" class="Input" type="password" name="Password" id="password" /></td>
+                </tr>
+                <tr class="Form-row FormOneLine">
+                    <td>
+                        <input class="Button" type="submit" name="submit" value="<?= t('server.common.submit') ?>" />
                     </td>
                 </tr>
             </table>

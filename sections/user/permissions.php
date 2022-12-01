@@ -61,19 +61,19 @@ $MaxCollages = $Customs['MaxCollages'] + $Delta['MaxCollages'];
 
 function display_perm($Key) {
     global $Defaults, $Permissions;
-    $Perm = "<input id=\"default_$Key\" type=\"checkbox\" disabled=\"disabled\"";
+    $Perm = "<div class=\"Checkbox\"> <input id=\"default_$Key\" type=\"checkbox\" disabled=\"disabled\"";
     if (isset($Defaults[$Key]) && $Defaults[$Key]) {
         $Perm .= ' checked="checked"';
     }
-    $Perm .= " /><input type=\"checkbox\" name=\"perm_$Key\" id=\"$Key\" value=\"1\"";
+    $Perm .= " /><input class=\"Input\" type=\"checkbox\" name=\"perm_$Key\" id=\"$Key\" value=\"1\"";
     if (isset($Permissions[$Key]) && $Permissions[$Key]) {
         $Perm .= ' checked="checked"';
     }
-    $Perm .= " /> <label for=\"$Key\">" . t("server.permissions.$Key")  . "</label><br />";
+    $Perm .= " /> <label class=\"Checkbox-label\" for=\"$Key\">" . t("server.permissions.$Key")  . "</label></div>";
     echo "$Perm\n";
 }
 
-View::show_header("$Username &gt; Permissions", '', 'PageUserPermission');
+View::show_header("$Username &gt; " .  t('server.tools.user_permission_manage'), '', 'PageUserPermission');
 ?>
 <script type="text/javascript">
     //<![CDATA[
@@ -87,28 +87,38 @@ View::show_header("$Username &gt; Permissions", '', 'PageUserPermission');
     }
     //]]>
 </script>
-<div class="BodyHeader">
-    <h2 class="BodyHeader-nav"><?= Users::format_username($UserID, false, false, false) ?> &gt; Permissions</h2>
-    <div class="BodyNavLinks">
-        <a href="#" onclick="reset(); return false;" class="brackets">Defaults</a>
+<div class="LayoutBody">
+    <div class="BodyHeader">
+        <h2 class="BodyHeader-nav"><?= Users::format_username($UserID, false, false, false) ?> &gt; <?= t('server.tools.user_permission_manage') ?></h2>
     </div>
+    <form class="manage_form" name="permissions" id="permissionsform" method="post" action="">
+        <input type="hidden" name="action" value="permissions" />
+        <input type="hidden" name="auth" value="<?= $LoggedUser['AuthKey'] ?>" />
+        <input type="hidden" name="id" value="<?= $_REQUEST['userid'] ?>" />
+
+        <table class="Form-rowList layout permission_head" variant="header">
+            <tr class="Form-rowHeader">
+                <td>
+                    <?= t('server.tools.user_permission_manage') ?>
+                </td>
+                <td class="Form-actions">
+                    <a href="#" onclick="reset(); return false;" class="brackets"><?= t('server.user.reset') ?></a>
+                </td>
+            </tr>
+            <tr class="Form-row">
+                <td>
+                    <i> <?= t('server.tools.user_permission_note') ?></i>
+                </td>
+            </tr>
+            <tr class="Form-row">
+                <td class="Form-label"><?= t('server.tools.max_collages') ?></td>
+                <td class="Form-inputs"><input class="is-small Input" type="text" name="maxcollages" size="5" value="<?= ($MaxCollages ? $MaxCollages : '0') ?>" /></td>
+            </tr>
+            <?
+            permissions_form();
+            ?>
+        </table>
+
+    </form>
 </div>
-<div class="BoxBody">
-    <p>Before using permissions, please understand that it allows you to both add and remove access to specific features. If you think that to add access to a feature, you need to uncheck everything else, <strong>YOU ARE WRONG</strong>. The check boxes on the left, which are grayed out, are the standard permissions granted by their class (and donor/artist status). Any changes you make to the right side will overwrite this. It's not complicated, and if you screw up, click the "Defaults" link at the top. It will reset the user to their respective features granted by class, then you can select or deselect the one or two things you want to change. <strong>DO NOT DESELECT EVERYTHING.</strong> If you need further clarification, ask a developer before using this tool.</p>
-</div>
-<br />
-<form class="manage_form" name="permissions" id="permissionsform" method="post" action="">
-    <table class="layout permission_head">
-        <tr>
-            <td class="label">Extra personal collages</td>
-            <td><input class="Input" type="text" name="maxcollages" size="5" value="<?= ($MaxCollages ? $MaxCollages : '0') ?>" /></td>
-        </tr>
-    </table>
-    <input type="hidden" name="action" value="permissions" />
-    <input type="hidden" name="auth" value="<?= $LoggedUser['AuthKey'] ?>" />
-    <input type="hidden" name="id" value="<?= $_REQUEST['userid'] ?>" />
-    <?
-    permissions_form();
-    ?>
-</form>
 <? View::show_footer(); ?>

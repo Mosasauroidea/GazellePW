@@ -29,14 +29,14 @@ class Torrents {
         $Ret = Tags::get_sub_name($TorrentTags);
         return implode(' ', array_values($Ret));
     }
-    public static function format_region($Region, $Limit = 10) {
+    public static function format_region($Region, $Limit = 1) {
         $Regions = array_map(function ($value) {
             return Region::text($value);
         }, array_slice(explode(',', $Region), 0, $Limit));
         return  implode(', ', $Regions);
     }
 
-    public static function format_language($Language, $Limit = 10) {
+    public static function format_language($Language, $Limit = 3) {
         $Languages = array_map(function ($value) {
             return Language::text($value);
         }, array_slice(explode(',', $Language), 0, $Limit));
@@ -923,7 +923,7 @@ WHERE ud.TorrentID=? AND ui.NotifyOnDeleteDownloaded='1' AND ud.UserID NOT IN ({
                 TagList, 
                 Year, CategoryID, Time, ReleaseType, Size, Snatched, Seeders, Leechers, Scene, Jinzhuan, Allow,
 				FreeTorrent,Description, FileList, VoteScore, ArtistName, RemTitle,
-				IMDBRating, DoubanRating, Region, Language, IMDBID, Resolution, Container, Source, Codec, SubTitles,
+				IMDBRating, DoubanRating, RTRating, Region, Language, IMDBID, Resolution, Container, Source, Codec, Processing, Subtitles,
                 Diy, Buy, ChineseDubbed, SpecialSub, Checked)
 			SELECT
 				t.ID, g.ID, CONCAT_WS(' ', g.Name, g.SubName), 
@@ -934,12 +934,11 @@ WHERE ud.TorrentID=? AND ui.NotifyOnDeleteDownloaded='1' AND ud.UserID NOT IN ({
 				CAST(FreeTorrent AS CHAR),Description,
 				(case when (t.Container = 'm2ts') then REPLACE(REPLACE(t.FilePath, '_', ' '), '/', ' ') else REPLACE(REPLACE(FileList, '_', ' '), '/', ' ') end) AS FileList, $VoteScore, '" . db_string($ArtistName) . "',
 				REPLACE(RemasterTitle, '/', ' '), 
-                IMDBRating, DoubanRating, 
-                REPLACE(Region, ',', ' '),
-                REPLACE(Language, ',', ' '),
-                IMDBID, Resolution, Container, Source, Codec, 
-                REPLACE(Subtitles, ',', ' '),
-                Diy, Buy, ChineseDubbed, SpecialSub, Checked 
+                IMDBRating, DoubanRating, RTRating,
+                REPLACE(SUBSTRING_INDEX(g.Region, ',', 1), ',', ' '),
+                REPLACE(SUBSTRING_INDEX(g.Language, ',', 2), ',', ' '),
+                IMDBID, Resolution, Container, Source, Codec, Processing,
+                t.Subtitles, Diy, Buy, ChineseDubbed, SpecialSub, Checked 
 			FROM torrents AS t
 				JOIN torrents_group AS g ON g.ID = t.GroupID
                 LEFT JOIN torrents_tags AS tt ON tt.GroupID = g.ID
@@ -1846,7 +1845,7 @@ WHERE ud.TorrentID=? AND ui.NotifyOnDeleteDownloaded='1' AND ud.UserID NOT IN ({
     }
 
     public static function get_processing_list($a) {
-        if ($a == 'Untouched') {
+        if ($a == 'untouched') {
             return ['BD25', 'BD66', 'BD50', 'BD100', 'DVD9', 'DVD5'];
         }
         return [$a];

@@ -35,50 +35,27 @@ function AlterParanoia() {
   }
   var showDownload =
     $('input[name=p_downloaded]').raw().checked ||
-    ($('input[name=p_uploaded]').raw().checked &&
-      $('input[name=p_ratio]').raw().checked)
-  if (
-    $('input[name=p_seeding_c]').raw().checked &&
-    $('input[name=p_snatched_c]').raw().checked &&
-    showDownload
-  ) {
+    ($('input[name=p_uploaded]').raw().checked && $('input[name=p_ratio]').raw().checked)
+  if ($('input[name=p_seeding_c]').raw().checked && $('input[name=p_snatched_c]').raw().checked && showDownload) {
     $('input[type=checkbox][name=p_requiredratio]').raw().checked = true
     $('input[type=checkbox][name=p_requiredratio]').raw().disabled = true
   } else {
     $('input[type=checkbox][name=p_requiredratio]').raw().disabled = false
   }
-  $('input[name=p_torrentcomments_l]').raw().disabled = !$(
-    'input[name=p_torrentcomments_c]'
-  ).raw().checked
-  $('input[name=p_collagecontribs_l]').raw().disabled = !$(
-    'input[name=p_collagecontribs_c]'
-  ).raw().checked
+  $('input[name=p_torrentcomments_l]').raw().disabled = !$('input[name=p_torrentcomments_c]').raw().checked
+  $('input[name=p_collagecontribs_l]').raw().disabled = !$('input[name=p_collagecontribs_c]').raw().checked
   $('input[name=p_requestsfilled_list]').raw().disabled = !(
-    $('input[name=p_requestsfilled_count]').raw().checked &&
-    $('input[name=p_requestsfilled_bounty]').raw().checked
+    $('input[name=p_requestsfilled_count]').raw().checked && $('input[name=p_requestsfilled_bounty]').raw().checked
   )
   $('input[name=p_requestsvoted_list]').raw().disabled = !(
-    $('input[name=p_requestsvoted_count]').raw().checked &&
-    $('input[name=p_requestsvoted_bounty]').raw().checked
+    $('input[name=p_requestsvoted_count]').raw().checked && $('input[name=p_requestsvoted_bounty]').raw().checked
   )
-  $('input[name=p_uploads_l]').raw().disabled = !$(
-    'input[name=p_uploads_c]'
-  ).raw().checked
-  $('input[name=p_uniquegroups_l]').raw().disabled = !$(
-    'input[name=p_uniquegroups_c]'
-  ).raw().checked
-  $('input[name=p_seeding_l]').raw().disabled = !$(
-    'input[name=p_seeding_c]'
-  ).raw().checked
-  $('input[name=p_leeching_l]').raw().disabled = !$(
-    'input[name=p_leeching_c]'
-  ).raw().checked
-  $('input[name=p_snatched_l]').raw().disabled = !$(
-    'input[name=p_snatched_c]'
-  ).raw().checked
-  $('input[name=p_originals_l]').raw().disabled = !$(
-    'input[name=p_originals_c]'
-  ).raw().checked
+  $('input[name=p_uploads_l]').raw().disabled = !$('input[name=p_uploads_c]').raw().checked
+  $('input[name=p_uniquegroups_l]').raw().disabled = !$('input[name=p_uniquegroups_c]').raw().checked
+  $('input[name=p_seeding_l]').raw().disabled = !$('input[name=p_seeding_c]').raw().checked
+  $('input[name=p_leeching_l]').raw().disabled = !$('input[name=p_leeching_c]').raw().checked
+  $('input[name=p_snatched_l]').raw().disabled = !$('input[name=p_snatched_c]').raw().checked
+  $('input[name=p_originals_l]').raw().disabled = !$('input[name=p_originals_c]').raw().checked
   UncheckIfDisabled($('input[name=p_torrentcomments_l]').raw())
   UncheckIfDisabled($('input[name=p_collagecontribs_l]').raw())
   UncheckIfDisabled($('input[name=p_requestsfilled_list]').raw())
@@ -114,9 +91,7 @@ function AlterParanoia() {
     $('input[name=p_collages_l]').raw().checked = true
   } else {
     $('input[name=p_collages_c]').raw().disabled = false
-    $('input[name=p_collages_l]').raw().disabled = !$(
-      'input[name=p_collages_c]'
-    ).raw().checked
+    $('input[name=p_collages_l]').raw().disabled = !$('input[name=p_collages_c]').raw().checked
     UncheckIfDisabled($('input[name=p_collages_l]').raw())
   }
 }
@@ -137,15 +112,9 @@ function ParanoiaReset(checkbox, drops) {
   }
   var checkboxes = $(':checkbox')
   for (var i = 0; i < checkboxes.results(); i++) {
-    if (
-      checkboxes.raw(i).name.match(/^p_/) &&
-      checkboxes.raw(i).name != 'p_lastseen'
-    ) {
+    if (checkboxes.raw(i).name.match(/^p_/) && checkboxes.raw(i).name != 'p_lastseen') {
       if (checkbox == 3) {
-        checkboxes.raw(i).checked = !(
-          checkboxes.raw(i).name.match(/_list$/) ||
-          checkboxes.raw(i).name.match(/_l$/)
-        )
+        checkboxes.raw(i).checked = !(checkboxes.raw(i).name.match(/_list$/) || checkboxes.raw(i).name.match(/_l$/))
       } else {
         checkboxes.raw(i).checked = checkbox
       }
@@ -203,17 +172,8 @@ function userform_submit() {
   return formVal()
 }
 
-function togglePassKey(key) {
-  if ($('#passkey').raw().innerHTML == 'View') {
-    $('#passkey').raw().innerHTML = key
-  } else {
-    $('#passkey').raw().innerHTML = 'View'
-  }
-}
-
 function RandomIRCKey() {
-  var irckeyChars =
-    '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz'
+  var irckeyChars = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz'
   var randIRCKeyLen = 32
   var randIRCKey = Array(randIRCKeyLen)
     .fill(irckeyChars)
@@ -232,17 +192,14 @@ function Unbind_tg(id) {
 }
 function commStats(userid) {
   $('.user_commstats').html('Loading...')
-  ajax.get(
-    'ajax.php?action=community_stats&userid=' + userid,
-    function (JSONresponse) {
-      var response = JSON.parse(JSONresponse) || false
-      if (!response || response.status == 'failure') {
-        $('.user_commstats').html('An error occurred')
-        return
-      }
-      displayCommStats(response.response)
+  ajax.get('ajax.php?action=community_stats&userid=' + userid, function (JSONresponse) {
+    var response = JSON.parse(JSONresponse) || false
+    if (!response || response.status == 'failure') {
+      $('.user_commstats').html('An error occurred')
+      return
     }
-  )
+    displayCommStats(response.response)
+  })
 }
 
 function displayCommStats(stats) {
@@ -280,8 +237,7 @@ function displayCommStats(stats) {
 $(document).ready(function () {
   $('#random_password').click(function () {
     var length = 15,
-      charset =
-        'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()_+-=<>?',
+      charset = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()_+-=<>?',
       password = ''
     for (var i = 0, n = charset.length; i < length; ++i) {
       password += charset.charAt(Math.floor(Math.random() * n))

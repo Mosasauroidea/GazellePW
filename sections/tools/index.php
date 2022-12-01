@@ -531,13 +531,16 @@ switch ($_REQUEST['action']) {
         include(CONFIG['SERVER_ROOT'] . '/sections/tools/sandboxes/bbcode_sandbox.php');
         break;
     case 'calendar':
-        include(CONFIG['SERVER_ROOT'] . '/sections/tools/managers/calendar.php');
+        // include(CONFIG['SERVER_ROOT'] . '/sections/tools/managers/calendar.php');
+        error(403);
         break;
     case 'get_calendar_event':
-        include(CONFIG['SERVER_ROOT'] . '/sections/tools/managers/ajax_get_calendar_event.php');
+        // include(CONFIG['SERVER_ROOT'] . '/sections/tools/managers/ajax_get_calendar_event.php');
+        error(403);
         break;
     case 'take_calendar_event':
-        include(CONFIG['SERVER_ROOT'] . '/sections/tools/managers/ajax_take_calendar_event.php');
+        // include(CONFIG['SERVER_ROOT'] . '/sections/tools/managers/ajax_take_calendar_event.php');
+        error(403);
         break;
     case 'stylesheets':
         include(CONFIG['SERVER_ROOT'] . '/sections/tools/managers/stylesheets_list.php');

@@ -126,4 +126,10 @@ class View {
             return include $Template;
         }
     }
+
+    public static function line($Str) {
+?>
+        <div><?= $Str ?></div>
+<?
+    }
 }

@@ -26,6 +26,7 @@ if ($CanEdit && isset($_POST['perform'])) {
 			DELETE FROM changelog
 			WHERE ID = '$ID'");
     }
+    header('Location:tools.php?action=change_log');
 }
 
 $DB->query("
@@ -42,71 +43,81 @@ $ChangeLog = $DB->to_array();
 $DB->query('SELECT FOUND_ROWS()');
 list($NumResults) = $DB->next_record();
 
-View::show_header('Gazelle Change Log', 'datetime_picker', 'datetime_picker');
+View::show_header(t('server.tools.change_log'), 'datetime_picker');
 ?>
 <div class="LayoutBody">
     <div class="BodyHeader">
-        <h2 class="BodyHeader-nav"><?= t('server.tools.gz_change_log') ?></h2>
-        <div class="BodyNavLinks">
-            <?
-            $Pages = Format::get_pages($Page, $NumResults, $PerPage, 11);
-            echo "\t\t$Pages\n";
-            ?>
-        </div>
+        <h2 class="BodyHeader-nav"><?= t('server.tools.change_log') ?></h2>
+
     </div>
     <? if ($CanEdit) { ?>
-        <div class="box box2 edit_changelog">
-            <div class="head">
-                <strong><?= t('server.tools.manually_submit_a_log') ?></strong>
-            </div>
-            <div class="pad">
-                <form method="post" action="">
-                    <input type="hidden" name="perform" value="add" />
-                    <input type="hidden" name="auth" value="<?= $LoggedUser['AuthKey'] ?>" />
-                    <div class="field_div" id="cl_message">
-                        <span class="label"><?= t('server.tools.commit_message') ?>:</span>
-                        <!-- <br /> -->
+        <form method="post" action="">
+            <input type="hidden" name="perform" value="add" />
+            <input type="hidden" name="auth" value="<?= $LoggedUser['AuthKey'] ?>" />
+            <div class="box box2 edit_changelog Form-rowList" variant="header">
+                <div class="Form-rowHeader">
+                    <strong><?= t('server.tools.manually_submit_a_log') ?></strong>
+                </div>
+                <div class="Form-row" id="cl_message">
+                    <div class="Form-label"><?= t('server.tools.commit_message') ?>:</div>
+                    <div class="Form-items">
                         <textarea class="Input" name="message" rows="2"></textarea>
                     </div>
-                    <div class="field_div" id="cl_date">
-                        <span class="label"><?= t('server.tools.date') ?>:</span>
-                        <!-- <br /> -->
-                        <input class="Input" type="text" name="date" />
-                    </div>
-                    <div class="field_div" id="cl_author">
-                        <span class="label"><?= t('server.tools.author') ?>:</span>
-                        <!-- <br /> -->
-                        <input class="Input" type="text" name="author" value="<?= $LoggedUser['Username'] ?>" />
-                    </div>
-                    <div class="submit_div" id="cl_submit">
-                        <input class="Button" type="submit" value="<?= t('server.common.submit') ?>" />
-                    </div>
-                </form>
+                </div>
+                <div class="Form-row" id="cl_date">
+                    <div class="Form-label"><?= t('server.tools.date') ?>:</div>
+                    <div class="Form-inputs"><input class="Input" type="date" name="date" /></div>
+                </div>
+                <div class="Form-row" id="cl_author">
+                    <span class="Form-label"><?= t('server.tools.author') ?>:</span>
+                    <div class="Form-inputs"><input class="Input" type="text" name="author" value="<?= $LoggedUser['Username'] ?>" /></div>
+                </div>
+                <div class="Form-row" id="cl_submit">
+                    <input class="Button" type="submit" value="<?= t('server.common.submit') ?>" />
+                </div>
             </div>
-        </div>
+        </form>
     <?
     }
-
-    foreach ($ChangeLog as $Change) {
     ?>
-        <div class="box box2 change_log_entry">
-            <div class="head">
-                <span><?= $Change['Time2'] ?> by <?= $Change['Author'] ?></span>
-                <? if ($CanEdit) { ?>
-                    <span style="float: right;">
-                        <form id="delete_<?= $Change['ID'] ?>" method="post" action="">
-                            <input type="hidden" name="perform" value="remove" />
-                            <input type="hidden" name="auth" value="<?= $LoggedUser['AuthKey'] ?>" />
-                            <input type="hidden" name="change_id" value="<?= $Change['ID'] ?>" />
-                        </form>
-                        <a href="#" onclick="$('#delete_<?= $Change['ID'] ?>').raw().submit(); return false;" class="brackets"><?= t('server.common.delete') ?></a>
-                    </span>
-                <?      } ?>
+    <div class="BodyNavLinks">
+        <?
+        $Pages = Format::get_pages($Page, $NumResults, $PerPage, 11);
+        echo "\t\t$Pages\n";
+        ?>
+    </div>
+    <div class="BoxList">
+        <?
+
+        foreach ($ChangeLog as $Change) {
+        ?>
+            <div class="Box">
+                <div class="Box-header">
+                    <div class="Box-headerTitle">
+                        <?= $Change['Time2'] ?> - <?= $Change['Author'] ?>
+                    </div>
+                    <? if ($CanEdit) { ?>
+                        <div class="Box-headerActions">
+                            <form id="delete_<?= $Change['ID'] ?>" method="post" action="">
+                                <input type="hidden" name="perform" value="remove" />
+                                <input type="hidden" name="auth" value="<?= $LoggedUser['AuthKey'] ?>" />
+                                <input type="hidden" name="change_id" value="<?= $Change['ID'] ?>" />
+                            </form>
+                            <a href="#" onclick="$('#delete_<?= $Change['ID'] ?>').raw().submit(); return false;" class="brackets"><?= t('server.common.delete') ?></a>
+                        </div>
+                    <?      } ?>
+                </div>
+                <div class="Box-body">
+                    <?= $Change['Message'] ?>
+                </div>
             </div>
-            <div class="pad">
-                <?= $Change['Message'] ?>
-            </div>
-        </div>
-    <?  } ?>
+        <?  } ?>
+    </div>
+    <div class="BodyNavLinks">
+        <?
+        $Pages = Format::get_pages($Page, $NumResults, $PerPage, 11);
+        echo "\t\t$Pages\n";
+        ?>
+    </div>
 </div>
 <? View::show_footer(); ?>

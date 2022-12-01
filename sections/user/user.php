@@ -861,7 +861,13 @@ WHERE xs.uid =" . $UserID . " and xs.tstamp >= unix_timestamp(date_format(now(),
                         <li class="SidebarList-item"><?= t('server.user.p_host') ?>: <?= Tools::get_host_by_ajax($IP) ?></li>
                     <? } ?>
                     <? if (check_perms('users_view_keys', $Class) || $OwnProfile) { ?>
-                        <li class="SidebarList-item"><?= t('server.user.p_passkey') ?>: <a href="#" id="passkey" onclick="togglePassKey('<?= display_str($torrent_pass) ?>'); return false;"><?= t('server.user.view') ?></a></li>
+                        <li class="SidebarList-item"><?= t('server.user.p_passkey') ?>:
+                            <a href="#" id="passkey" onclick="globalapp.toggleAny(event, '#passkey_value');return false;">
+                                <span class="u-toggleAny-show "><?= t('server.common.show') ?></span>
+                                <span class="u-toggleAny-hide u-hidden"><?= t('server.common.hide') ?></span>
+                            </a>
+                            <div id="passkey_value" class="u-hidden"><?= display_str($torrent_pass) ?></div>
+                        </li>
                     <? } ?>
                     <? if (Applicant::user_is_applicant($UserID) && (check_perms('admin_manage_applicants') || $OwnProfile)) { ?>
                         <li class="SidebarList-item"><?= t('server.user.p_inviter') ?>: <a href="/apply.php?action=view"><?= t('server.user.view') ?></a></li>

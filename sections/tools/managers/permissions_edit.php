@@ -17,7 +17,6 @@ echo $Val->GenerateJS('permissionsform');
     <div class="BodyNavLinks">
         <a href="tools.php?action=permissions" class="brackets"><?= t('server.tools.back_to_permission_list') ?></a>
         <a href="tools.php?action=privilege_matrix" class="brackets">Privilege Matrix</a>
-        <a href="tools.php" class="brackets"><?= t('server.tools.back_to_tools') ?></a>
     </div>
     <table class="permission_head layout">
         <tr>

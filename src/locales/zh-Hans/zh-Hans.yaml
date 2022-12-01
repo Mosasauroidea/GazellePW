@@ -1977,7 +1977,7 @@ server.permissions.admin_update_geoip: |-
 server.permissions.admin_whitelist: |-
   能够管理客户端白名单
 server.permissions.administrative: |-
-  站管
+  管理员权限
 server.permissions.edit_unknowns: |-
   能够编辑未知发行信息
 server.permissions.events_reward_badges: |-
@@ -2007,7 +2007,7 @@ server.permissions.show_admin_team: |-
 server.permissions.show_staff_username: |-
   显示工作人员用户名
 server.permissions.site: |-
-  站点
+  站点权限
 server.permissions.site_admin_forums: |-
   能够支配论坛
 server.permissions.site_advanced_search: |-
@@ -2083,7 +2083,7 @@ server.permissions.site_vote: |-
 server.permissions.staff_award: |-
   能够发放奖励
 server.permissions.torrents: |-
-  种子
+  种子权限
 server.permissions.torrents_add_artist: |-
   能够将艺人添加到任意种子组
 server.permissions.torrents_check: |-
@@ -2109,7 +2109,7 @@ server.permissions.torrents_slot_edit: |-
 server.permissions.torrents_trumpable: |-
   能够勾选种子的可替代标记
 server.permissions.users: |-
-  用户
+  用户权限
 server.permissions.users_delete_users: |-
   能够删除任何用户的账号
 server.permissions.users_disable_any: |-
@@ -3531,7 +3531,7 @@ server.tools.also_add_tokens_to_leech_disabled_users: |-
 server.tools.amount: |-
   总量
 server.tools.announcements: |-
-  通告
+  通告管理
 server.tools.application_email: |-
   申请邮箱
 server.tools.application_ip: |-
@@ -4129,7 +4129,7 @@ server.tools.manipulate_invite_tree: |-
 server.tools.manual: |-
   手动
 server.tools.manually_submit_a_log: |-
-  手工提交更新日志
+  手工提交
 server.tools.mark_torrents_as: |-
   将种子设置为
 server.tools.mass_pm: |-
@@ -6630,7 +6630,7 @@ server.user.p_irc: |-
 server.user.p_paranoiaLevel: |-
   隐私等级
 server.user.p_passkey: |-
-  密钥
+  Passkey
 server.user.p_passwordage: |-
   密码年龄
 server.user.p_personal: |-
@@ -6694,9 +6694,9 @@ server.user.para_upltor: |-
 server.user.para_uplunique: |-
   已发布种子 (独特分组)
 server.user.passkey: |-
-  密钥
+  Passkey
 server.user.passkeys: |-
-  密钥
+  Passkeys
 server.user.passwords: |-
   密码
 server.user.paste: |-
@@ -8121,3 +8121,7 @@ server.staffpm.inbox_actions_total: |-
   总数
 server.staffpm.resolved_num: |-
   解决数
+server.tools.user_permission_note: |-
+  本工具可供你增删特定权限。不要误以为赋予某权限需要取消其他权限的勾选。左栏灰色的选框是该用户所在用户组的标准权限情况（还有捐助者／艺术家身份）。你在右栏进行的任何修改会覆盖左栏的默认是设置。很好理解吧？如果搞糊涂了，就点击顶部的 “重置为默认” 即可，它会将所有选框重设为该用户等级的默认状态，然后你再根据需要去勾选相应的权限即可。<strong>千万不要取消所有选框。</strong>如果你需要更详细的说明，就去询问开发吧。
+server.tools.user_permission_manage: |-
+  权限管理

@@ -2,9 +2,12 @@
 if (!check_perms('admin_manage_permissions')) {
     error(403);
 }
-View::show_header('Special Users List', '', 'PageToolSpecialUser');
+View::show_header(t('server.tools.special_users'), '', 'PageToolSpecialUser');
 ?>
 <div class="LayoutBody">
+    <div class="BodyHeader">
+        <div class="BodyHeader-nav"><?= t('server.tools.special_users') ?></div>
+    </div>
     <?
     $DB->query("
 	SELECT ID
@@ -12,8 +15,7 @@ View::show_header('Special Users List', '', 'PageToolSpecialUser');
 	WHERE CustomPermissions != ''
 		AND CustomPermissions != 'a:0:{}'");
     if ($DB->has_results()) {
-    ?>
-        <table class="Table">
+    ?> <table class="Table">
             <tr class="Table-rowHeader">
                 <td class="Table-cell"><?= t('server.tools.user') ?></td>
                 <td class="Table-cell"><?= t('server.tools.access') ?></td>
@@ -28,9 +30,8 @@ View::show_header('Special Users List', '', 'PageToolSpecialUser');
             <?  } ?>
         </table>
     <?
-    } else { ?>
-        <h2 align="center"><?= t('server.tools.no_special_users') ?></h2>
-    <?
+    } else {
+        View::line(t('server.tools.no_special_users'));
     } ?>
 </div>
 <? View::show_footer(); ?>

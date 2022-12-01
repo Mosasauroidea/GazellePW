@@ -25,13 +25,6 @@ $(document).ready(function () {
       update: serialize,
     })
 
-  $('#toggle_sortable').click(function (e) {
-    e.preventDefault()
-    $('#sortable_container').slideToggle(function () {
-      $('#toggle_sortable').text($(this).is(':visible') ? 'Collapse' : 'Expand')
-    })
-  })
-
   $('#reset_sortable').click(function (e) {
     e.preventDefault()
     $('#sortable').html(sortable_list_default) // var sortable_list_default is found on edit.php

@@ -106,7 +106,6 @@ $CurrentLang = Lang::getCurrentLangStandard();
     if ($NotificationsManager->is_skipped(NotificationsManager::SUBSCRIPTIONS)) {
         $NewSubscriptions = Subscriptions::has_new_subscriptions();
     }
-    $Scripts = array_merge(['jquery', 'script_start', 'ajax.class', 'cookie.class', 'global', 'jquery.autocomplete', 'autocomplete', 'jquery.countdown.min', 'bbcode'], explode(',', $JSIncludes));
     ?>
 </head>
 

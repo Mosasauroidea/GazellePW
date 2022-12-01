@@ -8,7 +8,6 @@ View::show_header(t('server.tools.manage_stylesheets'));
     <div class="BodyHeader">
         <h2 class="BodyHeader-nav"><?= t('server.tools.manage_stylesheets') ?></h2>
         <div class="BodyNavLinks">
-            <a href="tools.php" class="brackets"><?= t('server.tools.back_to_tools') ?></a>
         </div>
     </div>
     <?php

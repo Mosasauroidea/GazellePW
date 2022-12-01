@@ -30,7 +30,12 @@ function create_row($Title, $URL, $HasPermission = false, $Tooltip = false) {
     if ($HasPermission) {
         global $ToolsHTML;
         $TooltipHTML = $Tooltip !== false ? " data-tooltip=\"$Tooltip\"" : "";
-        $ToolsHTML .= "\t\t\t\t<tr class='Table-row'><td class='Table-cell'><a class='Link' href=\"$URL\"$TooltipHTML>$Title</a></td></tr>\n";
+        $ToolsHTML .= "\t\t\t\t<tr class='Table-row'><td class='Table-cell'>";
+        if (!empty($URL)) {
+            $ToolsHTML .= "<a class='Link' href=\"$URL\"$TooltipHTML>$Title</a></td></tr>\n";
+        } else {
+            $ToolsHTML .= "$Title</td></tr>\n";
+        }
     }
 }
 
@@ -42,7 +47,6 @@ View::show_header(t('server.tools.staff_tools'), '', 'PageToolHome');
         <?
         // begin Administration category
         $ToolsHTML = "";
-        create_row(t('server.tools.client_whitelist'), "tools.php?action=whitelist", check_perms("admin_whitelist"));
         create_row(t('server.tools.create_user'), "tools.php?action=create_user", check_perms("admin_create_users"));
         create_row(t('server.tools.permissions_manager'), "tools.php?action=permissions", check_perms("admin_manage_permissions"));
         create_row(t('server.tools.staff_page_group_manager'), "tools.php?action=staff_groups", check_perms("admin_manage_permissions"));
@@ -63,7 +67,7 @@ View::show_header(t('server.tools.staff_tools'), '', 'PageToolHome');
 
         // begin Announcements category
         $ToolsHTML = "";
-        create_row(t('server.tools.calendar'), "tools.php?action=calendar", Calendar::can_view());
+        create_row(t('server.tools.calendar'), /*"tools.php?action=calendar"*/ "", Calendar::can_view());
         create_row(t('server.tools.change_log'), "tools.php?action=change_log", check_perms("users_mod"));
         create_row(t('server.tools.global_notification'), "tools.php?action=global_notification", check_perms("users_mod"));
         create_row(t('server.tools.mass_pm'), "tools.php?action=mass_pm", check_perms("users_mod"));
@@ -146,6 +150,7 @@ View::show_header(t('server.tools.staff_tools'), '', 'PageToolHome');
 
         // begin Managers category
         $ToolsHTML = "";
+        create_row(t('server.tools.client_whitelist'), "tools.php?action=whitelist", check_perms("admin_whitelist"));
         create_row(t('server.tools.stylesheets'), "tools.php?action=stylesheets", check_perms("admin_manage_stylesheets"));
         create_row(t('server.tools.email_blacklist'), "tools.php?action=email_blacklist", check_perms("users_view_email"));
         create_row(t('server.tools.ip_address_bans'), "tools.php?action=ip_ban", check_perms("admin_manage_ipbans"));

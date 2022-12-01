@@ -132,183 +132,173 @@ $PermissionsArray = [
 
 function permissions_form() {
 ?>
-    <div class="Permissions">
-        <div class="TableContainer permission_container">
-            <table class="Table">
-                <tr class="Table-rowHeader">
-                    <td class="Table-cell"><?= t('server.permissions.site') ?></td>
-                </tr>
-                <tr>
-                    <td>
-                        <?
-                        display_perm('site_leech');
-                        display_perm('site_upload');
-                        display_perm('site_vote');
-                        display_perm('site_submit_requests');
-                        display_perm('site_advanced_search');
-                        display_perm('site_top10');
-                        display_perm('site_torrents_notify');
-                        display_perm('site_collages_create');
-                        display_perm('site_collages_manage');
-                        display_perm('site_collages_delete');
-                        display_perm('site_collages_subscribe');
-                        display_perm('site_collages_personal');
-                        display_perm('site_collages_renamepersonal');
-                        display_perm('site_advanced_top10');
-                        display_perm('site_album_votes');
-                        display_perm('site_make_bookmarks');
-                        display_perm('site_edit_wiki');
-                        display_perm('site_can_invite_always');
-                        display_perm('site_can_invite');
-                        display_perm('site_send_unlimited_invites');
-                        display_perm('site_moderate_requests');
-                        display_perm('site_delete_artist');
-                        display_perm('forums_polls_create');
-                        display_perm('forums_polls_moderate');
-                        display_perm('site_moderate_forums');
-                        display_perm('site_admin_forums');
-                        display_perm('site_view_flow');
-                        display_perm('site_view_full_log');
-                        display_perm('site_view_torrent_snatchlist');
-                        display_perm('site_recommend_own');
-                        display_perm('site_manage_recommendations');
-                        display_perm('site_delete_tag');
-                        display_perm('site_disable_ip_history');
-                        display_perm('zip_downloader');
-                        display_perm('site_debug');
-                        display_perm('site_proxy_images');
-                        display_perm('site_search_many');
-                        display_perm('site_collages_recover');
-                        display_perm('project_team');
-                        display_perm('site_tag_aliases_read');
-                        display_perm('forums_see_hidden');
-                        display_perm('show_admin_team');
-                        display_perm('show_staff_username');
-                        ?>
-                    </td>
-                </tr>
-            </table>
-        </div>
-        <div class="TableContainer permission_container">
-            <table class="Table">
-                <tr class="Table-rowHeader">
-                    <td class="Table-cell"><?= t('server.permissions.users') ?></td>
-                </tr>
-                <tr>
-                    <td>
-                        <?
-                        display_perm('users_edit_usernames');
-                        display_perm('users_edit_ratio');
-                        display_perm('users_edit_own_ratio');
-                        display_perm('users_edit_titles');
-                        display_perm('users_edit_avatars');
-                        display_perm('users_edit_invites');
-                        display_perm('users_edit_watch_hours');
-                        display_perm('users_edit_reset_keys');
-                        display_perm('users_edit_profiles');
-                        display_perm('users_view_friends');
-                        display_perm('users_reset_own_keys');
-                        display_perm('users_edit_password');
-                        display_perm('users_promote_below');
-                        display_perm('users_promote_to');
-                        display_perm('users_give_donor');
-                        display_perm('users_warn');
-                        display_perm('users_disable_users');
-                        display_perm('users_disable_posts');
-                        display_perm('users_disable_any');
-                        display_perm('users_delete_users');
-                        display_perm('users_view_invites');
-                        display_perm('users_view_seedleech');
-                        display_perm('users_view_uploaded');
-                        display_perm('users_view_keys');
-                        display_perm('users_view_ips');
-                        display_perm('users_view_email');
-                        display_perm('users_invite_notes');
-                        display_perm('users_override_paranoia');
-                        display_perm('users_make_invisible');
-                        display_perm('users_logout');
-                        display_perm('users_mod');
-                        display_perm('staff_award');
-                        display_perm('users_view_disabled');
-                        ?>
-                        <?= t('server.permissions.only_applicable_to_lower_class') ?>
-                    </td>
-                </tr>
-            </table>
-        </div>
-        <div class="TableContainer permission_container">
-            <table class="Table">
-                <tr class="Table-rowHeader">
-                    <td class="Table-cell"><?= t('server.permissions.torrents') ?></td>
-                </tr>
-                <tr>
-                    <td>
-                        <?
-                        display_perm('torrents_edit');
-                        display_perm('torrents_check');
-                        display_perm('self_torrents_check');
-                        display_perm('torrents_check_log');
-                        display_perm('torrents_delete');
-                        display_perm('torrents_delete_fast');
-                        display_perm('torrents_freeleech');
-                        display_perm('torrents_search_fast');
-                        display_perm('torrents_add_artist');
-                        display_perm('edit_unknowns');
-                        display_perm('torrents_hide_dnu');
-                        display_perm('torrents_fix_ghosts');
-                        display_perm('torrents_trumpable');
-                        display_perm('torrents_slot_edit');
-                        ?>
-                    </td>
-                </tr>
-            </table>
-        </div>
-        <div class="TableContainer permission_container">
-            <table class="Table">
-                <tr class="Table-rowHeader">
-                    <td class="Table-cell"><?= t('server.permissions.administrative') ?></td>
-                </tr>
-                <tr>
-                    <td>
-                        <?
-                        display_perm('admin_manage_news');
-                        display_perm('admin_manage_blog');
-                        display_perm('admin_manage_polls');
-                        display_perm('admin_manage_forums');
-                        display_perm('admin_manage_fls');
-                        display_perm('admin_manage_user_fls');
-                        display_perm('admin_manage_badges');
-                        display_perm('admin_manage_applicants');
-                        display_perm('admin_send_bonus');
-                        display_perm('admin_reports');
-                        display_perm('admin_bp_history');
-                        display_perm('admin_advanced_user_search');
-                        display_perm('admin_create_users');
-                        display_perm('admin_donor_log');
-                        display_perm('admin_manage_stylesheets');
-                        display_perm('admin_manage_ipbans');
-                        display_perm('admin_dnu');
-                        display_perm('admin_clear_cache');
-                        display_perm('admin_whitelist');
-                        display_perm('admin_manage_permissions');
-                        display_perm('admin_schedule');
-                        display_perm('admin_login_watch');
-                        display_perm('admin_manage_wiki');
-                        display_perm('admin_update_geoip');
-                        display_perm('admin_interviewer');
-                        display_perm('events_reward_tokens');
-                        display_perm('events_reward_bonus');
-                        display_perm('events_reward_invites');
-                        display_perm('events_reward_badges');
-                        display_perm('events_reward_history');
-                        ?>
-                    </td>
-                </tr>
-            </table>
-        </div>
-        <div class="submit_container">
-            <input class="Button" type="submit" name="submit" value="Save Permission Class" />
-        </div>
+
+    <tr class="Form-row">
+        <td class="Form-label"><?= t('server.permissions.site') ?></td>
+        <td class="Form-items">
+            <div class="PermissionCheckbox-list ">
+                <?
+                display_perm('site_leech');
+                display_perm('site_upload');
+                display_perm('site_vote');
+                display_perm('site_submit_requests');
+                display_perm('site_advanced_search');
+                display_perm('site_top10');
+                display_perm('site_torrents_notify');
+                display_perm('site_collages_create');
+                display_perm('site_collages_manage');
+                display_perm('site_collages_delete');
+                display_perm('site_collages_subscribe');
+                display_perm('site_collages_personal');
+                display_perm('site_collages_renamepersonal');
+                display_perm('site_advanced_top10');
+                display_perm('site_album_votes');
+                display_perm('site_make_bookmarks');
+                display_perm('site_edit_wiki');
+                display_perm('site_can_invite_always');
+                display_perm('site_can_invite');
+                display_perm('site_send_unlimited_invites');
+                display_perm('site_moderate_requests');
+                display_perm('site_delete_artist');
+                display_perm('forums_polls_create');
+                display_perm('forums_polls_moderate');
+                display_perm('site_moderate_forums');
+                display_perm('site_admin_forums');
+                display_perm('site_view_flow');
+                display_perm('site_view_full_log');
+                display_perm('site_view_torrent_snatchlist');
+                display_perm('site_recommend_own');
+                display_perm('site_manage_recommendations');
+                display_perm('site_delete_tag');
+                display_perm('site_disable_ip_history');
+                display_perm('zip_downloader');
+                display_perm('site_debug');
+                display_perm('site_proxy_images');
+                display_perm('site_search_many');
+                display_perm('site_collages_recover');
+                display_perm('project_team');
+                display_perm('site_tag_aliases_read');
+                display_perm('forums_see_hidden');
+                display_perm('show_admin_team');
+                display_perm('show_staff_username');
+                ?>
+            </div>
+        </td>
+    </tr>
+
+    <tr class="Form-row">
+        <td class="Form-label"><?= t('server.permissions.users') ?></td>
+        <td class="Form-items">
+            <div class="PermissionCheckbox-list ">
+                <?
+                display_perm('users_edit_usernames');
+                display_perm('users_edit_ratio');
+                display_perm('users_edit_own_ratio');
+                display_perm('users_edit_titles');
+                display_perm('users_edit_avatars');
+                display_perm('users_edit_invites');
+                display_perm('users_edit_watch_hours');
+                display_perm('users_edit_reset_keys');
+                display_perm('users_edit_profiles');
+                display_perm('users_view_friends');
+                display_perm('users_reset_own_keys');
+                display_perm('users_edit_password');
+                display_perm('users_promote_below');
+                display_perm('users_promote_to');
+                display_perm('users_give_donor');
+                display_perm('users_warn');
+                display_perm('users_disable_users');
+                display_perm('users_disable_posts');
+                display_perm('users_disable_any');
+                display_perm('users_delete_users');
+                display_perm('users_view_invites');
+                display_perm('users_view_seedleech');
+                display_perm('users_view_uploaded');
+                display_perm('users_view_keys');
+                display_perm('users_view_ips');
+                display_perm('users_view_email');
+                display_perm('users_invite_notes');
+                display_perm('users_override_paranoia');
+                display_perm('users_make_invisible');
+                display_perm('users_logout');
+                display_perm('users_mod');
+                display_perm('staff_award');
+                display_perm('users_view_disabled');
+                ?>
+            </div>
+        </td>
+    </tr>
+    <tr class="Form-row">
+        <td class="Form-label"><?= t('server.permissions.torrents') ?></td>
+        <td class="Form-items">
+            <div class="PermissionCheckbox-list ">
+                <?
+                display_perm('torrents_edit');
+                display_perm('torrents_check');
+                display_perm('self_torrents_check');
+                display_perm('torrents_check_log');
+                display_perm('torrents_delete');
+                display_perm('torrents_delete_fast');
+                display_perm('torrents_freeleech');
+                display_perm('torrents_search_fast');
+                display_perm('torrents_add_artist');
+                display_perm('edit_unknowns');
+                display_perm('torrents_hide_dnu');
+                display_perm('torrents_fix_ghosts');
+                display_perm('torrents_trumpable');
+                display_perm('torrents_slot_edit');
+                ?>
+            </div>
+        </td>
+    </tr>
+    <tr class="Form-row">
+        <td class="Form-label"><?= t('server.permissions.administrative') ?></td>
+        <td class="Form-items">
+            <div class="PermissionCheckbox-list ">
+                <?
+                display_perm('admin_manage_news');
+                display_perm('admin_manage_blog');
+                display_perm('admin_manage_polls');
+                display_perm('admin_manage_forums');
+                display_perm('admin_manage_fls');
+                display_perm('admin_manage_user_fls');
+                display_perm('admin_manage_badges');
+                display_perm('admin_manage_applicants');
+                display_perm('admin_send_bonus');
+                display_perm('admin_reports');
+                display_perm('admin_bp_history');
+                display_perm('admin_advanced_user_search');
+                display_perm('admin_create_users');
+                display_perm('admin_donor_log');
+                display_perm('admin_manage_stylesheets');
+                display_perm('admin_manage_ipbans');
+                display_perm('admin_dnu');
+                display_perm('admin_clear_cache');
+                display_perm('admin_whitelist');
+                display_perm('admin_manage_permissions');
+                display_perm('admin_schedule');
+                display_perm('admin_login_watch');
+                display_perm('admin_manage_wiki');
+                display_perm('admin_update_geoip');
+                display_perm('admin_interviewer');
+                display_perm('events_reward_tokens');
+                display_perm('events_reward_bonus');
+                display_perm('events_reward_invites');
+                display_perm('events_reward_badges');
+                display_perm('events_reward_history');
+                ?>
+            </div>
+        </td>
+    <tr class="Form-row">
+        <td>
+            <i><?= t('server.permissions.only_applicable_to_lower_class') ?></i>
+        </td>
+    </tr>
+    <tr class="Form-row">
+        <td>
+            <input class="Button" type="submit" name="submit" value="<?= t('server.common.submit') ?>" />
+        </td>
+    </tr>
     </div>
 <?
 }
