@@ -134,7 +134,7 @@ View::show_header($Name, 'browse,collage,bbcode,voting,recommend', 'PageCollageT
             <a href="reports.php?action=report&amp;type=collage&amp;id=<?= $CollageID ?>" class="brackets">
                 <?= t('server.collages.report_collage') ?></a>
             <? if (check_perms('site_collages_delete') || $CreatorID == $LoggedUser['ID']) { ?>
-                <a href="collages.php?action=delete&amp;collageid=<?= $CollageID ?>&amp;auth=<?= $LoggedUser['AuthKey'] ?>" class="brackets" onclick="return confirm('<?= t('server.collages.delete_confirm') ?>');">
+                <a href="collages.php?action=delete&amp;collageid=<?= $CollageID ?>&amp;auth=<?= $LoggedUser['AuthKey'] ?>" class="brackets">
                     <?= t('server.common.delete') ?></a>
             <?  } ?>
         </div>
@@ -274,23 +274,23 @@ View::show_header($Name, 'browse,collage,bbcode,voting,recommend', 'PageCollageT
             <? } ?>
         </div>
         <div class="LayoutMainSidebar-main">
-            <div class="Box is-noBorder">
-                <div class="Box-header">
-                    <div class="Box-headerTitle">
+            <div class="Group">
+                <div class="Group-header">
+                    <div class="Group-headerTitle">
                         <strong><?= t('server.collages.description') ?></strong>
                     </div>
                 </div>
-                <div class="Box-body HtmlText">
+                <div class="Group-body HtmlText">
                     <?= Text::full_format($Description) ?>
                 </div>
             </div>
-            <div class="Box is-noBorder">
-                <div class="Box-header">
-                    <div class="Box-headerTitle">
+            <div class="Group">
+                <div class="Group-header">
+                    <div class="Group-headerTitle">
                         <strong><?= t('server.index.moviegroups') ?></strong>
                     </div>
                 </div>
-                <div class="Box-body">
+                <div class="Group-body">
                     <?
                     $Groups = [];
                     foreach ($GroupIDs as $GroupID) {

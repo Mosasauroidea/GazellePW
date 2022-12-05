@@ -50,9 +50,12 @@ Where
   display: table;
   border-collapse: separate;
   border-spacing: 0;
-  background: var(--Box-background);
   border-radius: var(--global-borderRadius);
   width: 100%;
+}
+
+.Table:not(.is-inner) {
+  background: var(--Box-background);
   border: var(--Box-border);
 }
 
@@ -93,8 +96,12 @@ Where
 }
 
 /* cellHeader */
-.Table :is(.Table-cellHeader, .Table-rowHeader .Table-cell) {
+.Table:not(.is-inner) :is(.Table-cellHeader, .Table-rowHeader .Table-cell) {
   background: var(--Box-header-background);
+}
+
+.Table:is(.is-inner) :is(.Table-cellHeader, .Table-rowHeader .Table-cell) {
+  font-weight: bold;
 }
 
 .Table :is(.Table-cellHeader, .Table-rowHeader .Table-cell):first-child {

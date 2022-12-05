@@ -128,7 +128,7 @@ if (!$NoPoll) { // god, I hate double negatives...
 			('$TopicID', '" . db_string($Question) . "', '" . db_string(serialize($Answers)) . "', $MaxCount)");
     $Cache->cache_value("polls_$TopicID", array($Question, $Answers, $Votes, '0000-00-00 00:00:00', '0', $MaxCount), 0);
 
-    if ($ForumID == STAFF_FORUM) {
+    if ($ForumID == CONFIG['STAFF_FORUM']) {
         send_irc('PRIVMSG ' . CONFIG['ADMIN_CHAN'] . ' :!mod Poll created by ' . $LoggedUser['Username'] . ": \"$Question\" " . site_url() . "forums.php?action=viewthread&threadid=$TopicID");
     }
 }

@@ -23,25 +23,30 @@ if ($_POST['collage_id'] && is_number($_POST['collage_id'])) {
         header("Location: collages.php?id=$CollageID");
     }
 }
-View::show_header(t('server.collages.collage_recovery'), '', 'PageCollageRecovery');
+View::show_header(t('server.collages.collage'), '', 'PageCollageRecovery');
 ?>
-<div class="thin center">
-    <div class="box" id="collage_recover_box">
-        <div class="head colhead"><?= t('server.collages.recover_deleted_collage') ?></div>
-        <div class="pad">
-            <form class="undelete_form" name="collage" action="collages.php" method="post">
-                <input type="hidden" name="action" value="recover" />
-                <input type="hidden" name="auth" value="<?= $LoggedUser['AuthKey'] ?>" />
-                <div class="field_div">
-                    <strong><?= t('server.collages.collage_id') ?>: </strong>
+<div class="LayoutBody">
+    <div class="BodyHeader">
+        <h2 class="BodyHeader-nav"><?= t('server.collages.collage') ?></h2>
+    </div>
+    <form class="Form undelete_form" name="collage" action="collages.php" method="post">
+        <input type="hidden" name="action" value="recover" />
+        <input type="hidden" name="auth" value="<?= $LoggedUser['AuthKey'] ?>" />
+        <div class="Form-rowList" variant="header">
+            <div class="Form-rowHeader">
+                <?= t('server.collages.recover_deleted_collage') ?>
+            </div>
+            <div class="Form-row">
+                <div class="Form-label"><?= t('server.collages.collage_id') ?>: </div>
+                <div class="Form-inputs">
                     <input class="Input" type="text" name="collage_id" size="8" />
                 </div>
-                <div class="submit_div">
-                    <input value="Recover!" type="submit" />
-                </div>
-            </form>
+            </div>
+            <div class="Form-row">
+                <button class="Button" value="Recover!" type="submit"><?= t('server.collages.recover_collages') ?></button>
+            </div>
         </div>
-    </div>
+    </form>
 </div>
 <?
 View::show_footer();

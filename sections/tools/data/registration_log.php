@@ -6,8 +6,8 @@ View::show_header(t('server.tools.registration_log'), '', 'PageToolRegistrationL
 define('USERS_PER_PAGE', 50);
 list($Page, $Limit) = Format::page_limit(USERS_PER_PAGE);
 
-$AfterDate = $_POST['after_date'];
-$BeforeDate = $_POST['before_date'];
+$AfterDate = $_GET['after_date'];
+$BeforeDate = $_GET['before_date'];
 $DateSearch = false;
 if (!empty($AfterDate) && !empty($BeforeDate)) {
     list($Y, $M, $D) = explode('-', $AfterDate);
@@ -22,7 +22,6 @@ if (!empty($AfterDate) && !empty($BeforeDate)) {
     $BeforeDate = db_string($BeforeDate);
     $DateSearch = true;
 }
-
 $RS = "
 	SELECT
 		SQL_CALC_FOUND_ROWS
@@ -77,76 +76,103 @@ $QueryID = $DB->query($RS);
 $DB->query('SELECT FOUND_ROWS()');
 list($Results) = $DB->next_record();
 $DB->set_query_id($QueryID);
+$Pages = Format::get_pages($Page, $Results, USERS_PER_PAGE, 11);
 ?>
-
-<form action="" method="post" acclass="thin BoxBody">
-    <input type="hidden" name="action" value="registration_log" />
-    <?= t('server.tools.joined_after') ?>: <input class="Input" type="date" name="after_date" />
-    <?= t('server.tools.joined_before') ?>: <input class="Input" type="date" name="before_date" />
-    <input class="Button" type="submit" />
-</form>
-
-<?
-if ($DB->has_results()) {
-?>
-    <div class="BodyNavLinks">
-        <?
-        $Pages = Format::get_pages($Page, $Results, USERS_PER_PAGE, 11);
-        echo $Pages;
-        ?>
+<div class="LayoutPage">
+    <div class="BodyHeader">
+        <h2 class="BodyHeader-nav"><?= t('server.tools.registration_log') ?></h2>
     </div>
+    <form class="Form SearchPage Box" action="" method="get" acclass="thin BoxBody">
+        <input type="hidden" name="action" value="registration_log" />
+        <div class="SearchPageBody">
+            <div class="Form-rowList">
+                <div class="Form-row">
+                    <div cass="Form-label">
+                        <?= t('server.tools.joined_after') ?>:
+                    </div>
+                    <div class="Form-inputs">
+                        <input class="Input" type="date" name="after_date" value="<<?= $AfterDate ?>" />
+                    </div>
+                </div>
+                <div class="Form-row">
+                    <div cass="Form-label">
+                        <?= t('server.tools.joined_before') ?>:
+                    </div>
+                    <div class="Form-inputs">
+                        <input class="Input" type="date" name="before_date" />
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="SearchPageFooter">
+            <div class="SearchPageFooter-actions">
+                <input class="Button" type="submit" value="<?= t('server.common.search') ?>" />
+            </div>
+        </div>
+    </form>
 
-    <table class="Table">
-        <tr class="Table-rowHeader">
-            <td class="Table-cell"><?= t('server.tools.user') ?></td>
-            <td class="Table-cell"><?= t('server.tools.ratio') ?></td>
-            <td class="Table-cell"><?= t('server.tools.email') ?></td>
-            <td class="Table-cell"><?= t('server.tools.ip_address') ?></td>
-            <td class="Table-cell"><?= t('server.tools.country') ?></td>
-            <td class="Table-cell"><?= t('server.tools.host') ?></td>
-            <td class="Table-cell"><?= t('server.tools.registered') ?></td>
-        </tr>
-        <?
-        while (list($UserID, $IP, $IPCC, $Email, $Username, $PermissionID, $Uploaded, $Downloaded, $Enabled, $Donor, $Warned, $Joined, $Uses, $InviterID, $InviterIP, $InviterIPCC, $InviterEmail, $InviterUsername, $InviterPermissionID, $InviterUploaded, $InviterDownloaded, $InviterEnabled, $InviterDonor, $InviterWarned, $InviterJoined, $InviterUses) = $DB->next_record()) {
-            $Row = $IP === $InviterIP ? 'a' : 'b';
-        ?>
-            <tr class="Table-row">
-                <td class="Table-cell"><?= Users::format_username($UserID, true, true, true, true) ?><br /><?= Users::format_username($InviterID, true, true, true, true) ?></td>
-                <td class="Table-cell"><?= Format::get_ratio_html($Uploaded, $Downloaded) ?><br /><?= Format::get_ratio_html($InviterUploaded, $InviterDownloaded) ?></td>
-                <td class="Table-cell">
-                    <span style="float: left;"><?= display_str($Email) ?></span>
-                    <span style="float: right;"><a href="userhistory.php?action=email&amp;userid=<?= $UserID ?>" data-tooltip="<?= t('server.tools.history') ?>" class="brackets">H</a> <a href="/user.php?action=search&amp;email_history=on&amp;email=<?= display_str($Email) ?>" data-tooltip="<?= t('server.tools.search') ?>" class="brackets">S</a></span><br />
-                    <span style="float: left;"><?= display_str($InviterEmail) ?></span>
-                    <span style="float: right;"><a href="userhistory.php?action=email&amp;userid=<?= $InviterID ?>" data-tooltip="<?= t('server.tools.history') ?>" class="brackets">H</a> <a href="/user.php?action=search&amp;email_history=on&amp;email=<?= display_str($InviterEmail) ?>" data-tooltip="<?= t('server.tools.search') ?>" class="brackets">S</a></span><br />
-                </td>
-                <td class="Table-cell">
-                    <span style="float: left;"><?= display_str($IP) ?></span>
-                    <span style="float: right;"><?= display_str($Uses) ?> <a href="userhistory.php?action=ips&amp;userid=<?= $UserID ?>" data-tooltip="<?= t('server.tools.history') ?>" class="brackets">H</a> <a href="/user.php?action=search&amp;ip_history=on&amp;ip=<?= display_str($IP) ?>" data-tooltip="<?= t('server.tools.search') ?>" class="brackets">S</a> <a href="http://whatismyipaddress.com/ip/<?= display_str($IP) ?>" data-tooltip="<?= t('server.tools.wi') ?>" class="brackets">WI</a></span><br />
-                    <span style="float: left;"><?= display_str($InviterIP) ?></span>
-                    <span style="float: right;"><?= display_str($InviterUses) ?> <a href="userhistory.php?action=ips&amp;userid=<?= $InviterID ?>" data-tooltip="<?= t('server.tools.history') ?>" class="brackets">H</a> <a href="/user.php?action=search&amp;ip_history=on&amp;ip=<?= display_str($InviterIP) ?>" data-tooltip="<?= t('server.tools.search') ?>" class="brackets">S</a> <a href="http://whatismyipaddress.com/ip/<?= display_str($InviterIP) ?>" data-tooltip="<?= t('server.tools.wi') ?>" class="brackets">WI</a></span><br />
-                </td>
-                <td class="Table-cell">
-                    <?= $IPCC ?> <br />
-                    <?= $InviterIPCC ?>
-                </td>
-                <td class="Table-cell">
-                    <?= Tools::get_host_by_ajax($IP) ?><br />
-                    <?= Tools::get_host_by_ajax($InviterIP) ?>
-                </td>
-                <td class="Table-cell">
-                    <?= time_diff($Joined) ?><br />
-                    <?= time_diff($InviterJoined) ?>
-                </td>
+    <?
+    if ($DB->has_results()) {
+    ?>
+        <? View::pages($Pages) ?>
+        <table class="Table">
+            <tr class="Table-rowHeader">
+                <td class="Table-cell"><?= t('server.tools.user') ?></td>
+                <td class="Table-cell"><?= t('server.tools.ratio') ?></td>
+                <td class="Table-cell"><?= t('server.tools.email') ?></td>
+                <td class="Table-cell"><?= t('server.tools.ip_address') ?></td>
+                <td class="Table-cell"><?= t('server.tools.country') ?></td>
+                <td class="Table-cell"><?= t('server.tools.host') ?></td>
+                <td class="Table-cell"><?= t('server.tools.registered') ?></td>
             </tr>
-        <?  } ?>
-    </table>
-    <div class="BodyNavLinks">
-        <? echo $Pages; ?>
-    </div>
+            <?
+            while (list($UserID, $IP, $IPCC, $Email, $Username, $PermissionID, $Uploaded, $Downloaded, $Enabled, $Donor, $Warned, $Joined, $Uses, $InviterID, $InviterIP, $InviterIPCC, $InviterEmail, $InviterUsername, $InviterPermissionID, $InviterUploaded, $InviterDownloaded, $InviterEnabled, $InviterDonor, $InviterWarned, $InviterJoined, $InviterUses) = $DB->next_record()) {
+                $Row = $IP === $InviterIP ? 'a' : 'b';
+            ?>
+                <tr class="Table-row">
+                    <td class="Table-cell"><?= Users::format_username($UserID, true, true, true, true) ?><br /><?= Users::format_username($InviterID, true, true, true, true) ?></td>
+                    <td class="Table-cell"><?= Format::get_ratio_html($Uploaded, $Downloaded) ?><br /><?= Format::get_ratio_html($InviterUploaded, $InviterDownloaded) ?></td>
+                    <td class="Table-cell">
+                        <span><?= display_str($Email) ?></span>
+                        <span style="float:right"><a href="userhistory.php?action=email&amp;userid=<?= $UserID ?>" data-tooltip="<?= t('server.tools.history') ?>" class="brackets">H</a> <a href="/user.php?action=search&amp;email_history=on&amp;email=<?= display_str($Email) ?>" data-tooltip="<?= t('server.common.search') ?>" class="brackets">S</a></span><br />
+                        <span><?= display_str($InviterEmail) ?></span>
+                        <? if ($InviterEmail) { ?>
+                            <span style="float:right"><a href="userhistory.php?action=email&amp;userid=<?= $InviterID ?>" data-tooltip="<?= t('server.tools.history') ?>" class="brackets">H</a> <a href="/user.php?action=search&amp;email_history=on&amp;email=<?= display_str($InviterEmail) ?>" data-tooltip="<?= t('server.common.search') ?>" class="brackets">S</a></span><br />
+                        <? } ?>
+                    </td>
+                    <td class="Table-cell">
+                        <span><?= display_str($IP) ?></span>
+                        (<span><?= display_str($Uses) ?></span>)
+                        <span style="float:right"><a href="userhistory.php?action=ips&amp;userid=<?= $UserID ?>" data-tooltip="<?= t('server.tools.history') ?>" class="brackets">H</a> <a href="/user.php?action=search&amp;ip_history=on&amp;ip=<?= display_str($IP) ?>" data-tooltip="<?= t('server.common.search') ?>" class="brackets">S</a> <a href="http://whatismyipaddress.com/ip/<?= display_str($IP) ?>" data-tooltip="<?= t('server.tools.wi') ?>" class="brackets">WI</a></span><br />
+                        <span><?= display_str($InviterIP) ?></span>
+                        <? if ($InviterIP) { ?>
+                            (<span> <?= display_str($InviterUses) ?></span>)
+                            <span style="float:right"> <a href="userhistory.php?action=ips&amp;userid=<?= $InviterID ?>" data-tooltip="<?= t('server.tools.history') ?>" class="brackets">H</a> <a href="/user.php?action=search&amp;ip_history=on&amp;ip=<?= display_str($InviterIP) ?>" data-tooltip="<?= t('server.common.search') ?>" class="brackets">S</a> <a href="http://whatismyipaddress.com/ip/<?= display_str($InviterIP) ?>" data-tooltip="<?= t('server.tools.wi') ?>" class="brackets">WI</a></span><br />
+                        <? } ?>
+                    </td>
+                    <td class="Table-cell">
+                        <?= $IPCC ?> <br />
+                        <?= $InviterIPCC ?>
+                    </td>
+                    <td class="Table-cell">
+                        <?= Tools::get_host_by_ajax($IP) ?><br />
+                        <?= Tools::get_host_by_ajax($InviterIP) ?>
+                    </td>
+                    <td class="Table-cell">
+                        <?= time_diff($Joined) ?><br />
+                        <?= time_diff($InviterJoined) ?>
+                    </td>
+                </tr>
+            <?  } ?>
+        </table>
+        <? View::pages($Pages) ?>
+
+    <?
+    } else {
+        View::line(t('server.tools.there_have_been_no_new_registrations_in_the_past_72_hours'));
+    }
+    ?>
+</div>
 <?
-} else { ?>
-    <h2 align="center"><?= t('server.tools.there_have_been_no_new_registrations_in_the_past_72_hours') ?></h2>
-<?
-}
 View::show_footer();
 ?>

@@ -212,9 +212,9 @@ if ($Sneaky) {
             <?
             foreach ($FilterGroups as $FilterID => $FilterResults) {
             ?>
-                <div class="Box is-noBorder">
-                    <div class="Box-header">
-                        <div class="Box-headerTitle">
+                <div class="Group">
+                    <div class="Group-header">
+                        <div class="Group-headerTitle">
                             <? if ($FilterResults['FilterLabel'] !== false) {
                                 $NewFilterID = $FilterID . ($Sneaky ? "&amp;userid=$UserID" : '');
                                 $LabelName = $FilterResults['FilterLabel'];
@@ -230,7 +230,7 @@ if ($Sneaky) {
                             <? } ?>
                         </div>
                     </div>
-                    <div class="Box-body LayoutPage">
+                    <div class="Group-body">
                         <div class="BodyNavLinks notify_filter_links">
                             <? if (!$Sneaky) { ?>
                                 <a class="brackets" href="#" onclick="globalapp.rssClearSelected(event, <?= $FilterID ?>)"><?= t('server.torrents.clear_selected_in_filter') ?></a>

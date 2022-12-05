@@ -494,13 +494,13 @@ View::show_header(t('server.index.index'), 'comments', 'PageHome');
         );
         if (count($Data) > 0) {
         ?>
-            <div class="IndexTop10Movie Box is-noBorder">
-                <div class="Box-header">
-                    <div class="Box-headerTitle">
+            <div class="IndexTop10Movie Group">
+                <div class="Group-header">
+                    <div class="Group-headerTitle">
                         <?= t('server.index.popular_movies') ?>
                     </div>
                 </div>
-                <div class="Box-body">
+                <div class="Group-body">
                     <?
 
                     $tableRender = new TorrentGroupCoverTableView($Data);
@@ -513,64 +513,70 @@ View::show_header(t('server.index.index'), 'comments', 'PageHome');
         <?
         }
         ?>
-        <!-- Anouncements -->
-        <div class="PostList">
-            <!--
-            
-    -->
-            <?
-            $Count = 0;
-            foreach ($News as $NewsItem) {
-                list($NewsID, $Title, $Body, $NewsTime, $IsSticky) = $NewsItem;
-                if (strtotime($NewsTime) > time()) {
-                    continue;
-                }
-            ?>
-                <div id="news<?= $NewsID ?>" class="Post news_post ">
-                    <div class="Post-header">
-                        <div class="Post-headerLeft">
-                            <div class="Post-headerTitle HtmlText  <?= $IsSticky ? 'is-sticky' : '' ?>" href="#">
-                                <?= Text::full_format($Title) ?>
-                            </div>
-                            - <?= time_diff($NewsTime); ?>
-                        </div>
-                        <div class="Post-headerActions">
-                            <a class="brackets" href="forums.php?action=viewthread&amp;threadid=<?= $NewsID ?>">
-                                <?= t('server.index.discuss') ?>
-                            </a>
-                            - <a href="#" onclick="globalapp.toggleAny(event, '#newsbody<?= $NewsID ?>');return false;">
-                                <span class="u-toggleAny-show u-hidden"><?= t('server.common.show') ?></span>
-                                <span class="u-toggleAny-hide"><?= t('server.common.hide') ?></span>
-                            </a>
-                        </div>
-
-                    </div>
-                    <div id="newsbody<?= $NewsID ?>" class="HtmlText PostArticle Post-body">
-                        <?= Text::full_format($Body) ?>
+        <? if (count($News) > 0) { ?>
+            <!-- Anouncements -->
+            <div class="Group">
+                <div class="Group-header">
+                    <div class="Group-headerTitle">
+                        <?= t('server.index.announcements') ?>
                     </div>
                 </div>
-                <?
-                if (++$Count > ($NewsCount - 1)) {
-                    break;
-                }
-                ?>
-            <? } ?>
-            <div class="PostList-actions">
-                <a href="forums.php?action=viewforum&amp;forumid=<?= CONFIG['NEWS_FORUM_ID'] ?>">
-                    <?= t('server.torrents.view_all') ?>
-                </a>
+                <div class="Group-body">
+                    <?
+                    $Count = 0;
+                    foreach ($News as $NewsItem) {
+                        list($NewsID, $Title, $Body, $NewsTime, $IsSticky) = $NewsItem;
+                        if (strtotime($NewsTime) > time()) {
+                            continue;
+                        }
+                    ?>
+                        <div id="news<?= $NewsID ?>" class="Post news_post ">
+                            <div class="Post-header">
+                                <div class="Post-headerLeft">
+                                    <div class="Post-headerTitle HtmlText  <?= $IsSticky ? 'is-sticky' : '' ?>" href="#">
+                                        <?= Text::full_format($Title) ?>
+                                    </div>
+                                    - <?= time_diff($NewsTime); ?>
+                                </div>
+                                <div class="Post-headerActions">
+                                    <a class="brackets" href="forums.php?action=viewthread&amp;threadid=<?= $NewsID ?>">
+                                        <?= t('server.index.discuss') ?>
+                                    </a>
+                                    - <a href="#" onclick="globalapp.toggleAny(event, '#newsbody<?= $NewsID ?>');return false;">
+                                        <span class="u-toggleAny-show u-hidden"><?= t('server.common.show') ?></span>
+                                        <span class="u-toggleAny-hide"><?= t('server.common.hide') ?></span>
+                                    </a>
+                                </div>
+
+                            </div>
+                            <div id="newsbody<?= $NewsID ?>" class="HtmlText PostArticle Post-body">
+                                <?= Text::full_format($Body) ?>
+                            </div>
+                        </div>
+                        <?
+                        if (++$Count > ($NewsCount - 1)) {
+                            break;
+                        }
+                        ?>
+                    <? } ?>
+                    <div class="PostList-actions">
+                        <a href="forums.php?action=viewforum&amp;forumid=<?= CONFIG['NEWS_FORUM_ID'] ?>">
+                            <?= t('server.torrents.view_all') ?>
+                        </a>
+                    </div>
+                </div>
             </div>
-        </div>
+        <? } ?>
         <? if (CONFIG['IS_DEV']) { ?>
-            <div class="Home-stats Box">
-                <div class="Box-header">
-                    <div class="Box-headerTitle">
+            <div class="Home-stats Group">
+                <div class="Group-header">
+                    <div class="Group-headerTitle">
                         <a href="/stats.php">
                             <?= t('server.index.stats') ?>
                         </a>
                     </div>
                 </div>
-                <div class="Box-body" id="root-stats"></div>
+                <div class="Group-body" id="root-stats"></div>
             </div>
         <? } ?>
     </div>

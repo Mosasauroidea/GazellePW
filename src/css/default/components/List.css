@@ -2,3 +2,9 @@
   list-style-type: unset;
   list-style-position: inside;
 }
+.List li {
+  padding-top: var(--global-space-sm);
+  padding-left: var(--global-space-lg);
+  padding-right: 0;
+  padding-bottom: 0;
+}

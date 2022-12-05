@@ -26,6 +26,7 @@ G::$Router->addGet('viewthread', CONFIG['SERVER_ROOT'] . '/sections/forums/threa
 G::$Router->addGet('viewtopic', CONFIG['SERVER_ROOT'] . '/sections/forums/thread.php');
 G::$Router->addGet('ajax_get_edit', CONFIG['SERVER_ROOT'] . '/sections/forums/ajax_get_edit.php');
 G::$Router->addGet('ajax_get_jf', CONFIG['SERVER_ROOT'] . '/sections/forums/ajax_get_jf.php');
+G::$Router->addGet('ajax_refresh', CONFIG['SERVER_ROOT'] . '/sections/forums/ajax_refresh.php');
 G::$Router->addGet('new', CONFIG['SERVER_ROOT'] . '/sections/forums/newthread.php');
 G::$Router->addGet('takeedit', CONFIG['SERVER_ROOT'] . '/sections/forums/takeedit.php');
 G::$Router->addGet('get_post', CONFIG['SERVER_ROOT'] . '/sections/forums/get_post.php');

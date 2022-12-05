@@ -36,67 +36,62 @@ $DB->query("
 		AND BanReason = '2'");
 list($TotalDisabled) = $DB->next_record();
 $DB->set_query_id($RS);
+$Pages = Format::get_pages($Page, $Results, USERS_PER_PAGE, 11);
 ?>
-<div class="BodyHeader">
-    <h2 class="BodyHeader-nav"><?= t('server.tools.h2_upscale_pool') ?></h2>
-</div>
-<?
-if ($DB->has_results()) {
-?>
-    <div class="BoxBody thin" id="users_on_ratio_watch_number">
-        <p>
+<div class="LayoutPage">
+    <div class="BodyHeader">
+        <h2 class="BodyHeader-nav"><?= t('server.tools.h2_upscale_pool') ?></h2>
+    </div>
+    <?
+    if ($DB->has_results()) {
+    ?>
+        <div id="users_on_ratio_watch_number">
             <?= t('server.tools.there_are_currently_enabled_users_on_ratio_watch', ['Values' => [
                 number_format($Results),
                 number_format($TotalDisabled)
             ]]) ?>
-        </p>
-    </div>
-    <div class="BodyNavLinks">
-        <?
-        $Pages = Format::get_pages($Page, $Results, USERS_PER_PAGE, 11);
-        echo $Pages;
-        ?>
-    </div>
-    <table class="Table">
-        <tr class="Table-rowHeader">
-            <td class="Table-cell"><?= t('server.tools.user') ?></td>
-            <td class="Table-cell Table-cellRight"><?= t('server.tools.uploaded') ?></td>
-            <td class="Table-cell Table-cellRight"><?= t('server.tools.downloaded') ?></td>
-            <td class="Table-cell Table-cellRight"><?= t('server.tools.ratio') ?></td>
-            <td class="Table-cell Table-cellRight"><?= t('server.tools.required_ratio') ?></td>
-            <td class="Table-cell Table-cellRight" data-tooltip="<?= t('server.tools.deficit_title') ?>"><?= t('server.tools.deficit') ?></td>
-            <td class="Table-cell Table-cellRight" data-tooltip="<?= t('server.tools.gamble_title') ?>"><?= t('server.tools.gamble') ?></td>
-            <td class="Table-cell Table-cellRight"><?= t('server.tools.registration_date') ?></td>
-            <td class="Table-cell Table-cellRight" data-tooltip="<?= t('server.tools.ratio_watch_ended_ends_title') ?>"><?= t('server.tools.ratio_watch_ended_ends') ?></td>
-            <td class="Table-cell Table-cellRight"><?= t('server.tools.life_span') ?></td>
-        </tr>
-        <?
-        while (list($UserID, $Username, $Uploaded, $Downloaded, $PermissionID, $Enabled, $Donor, $Warned, $Joined, $RatioWatchEnds, $RatioWatchDownload, $RequiredRatio) = $DB->next_record()) {
-        ?>
-            <tr class="Table-row">
-                <td class="Table-cell"><?= Users::format_username($UserID, true, true, true, true) ?></td>
-                <td class="Table-cell Table-cellRight"><?= Format::get_size($Uploaded) ?></td>
-                <td class="Table-cell Table-cellRight"><?= Format::get_size($Downloaded) ?></td>
-                <td class="Table-cell Table-cellRight"><?= Format::get_ratio_html($Uploaded, $Downloaded) ?></td>
-                <td class="Table-cell Table-cellRight"><?= number_format($RequiredRatio, 2) ?></td>
-                <td class="Table-cell Table-cellRight"><? if (($Downloaded * $RequiredRatio) > $Uploaded) {
-                                                            echo Format::get_size(($Downloaded * $RequiredRatio) - $Uploaded);
-                                                        } ?></td>
-                <td class="Table-cell Table-cellRight"><?= Format::get_size($Downloaded - $RatioWatchDownload) ?></td>
-                <td class="Table-cell Table-cellRight"><?= time_diff($Joined, 2) ?></td>
-                <td class="Table-cell Table-cellRight"><?= time_diff($RatioWatchEnds) ?></td>
-                <td class="Table-cell Table-cellRight"><?= time_diff(strtotime($Joined), strtotime($RatioWatchEnds)) ?></td>
+        </div>
+        <? View::pages($Pages); ?>
+        <table class="Table">
+            <tr class="Table-rowHeader">
+                <td class="Table-cell"><?= t('server.tools.user') ?></td>
+                <td class="Table-cell Table-cellRight"><?= t('server.tools.uploaded') ?></td>
+                <td class="Table-cell Table-cellRight"><?= t('server.tools.downloaded') ?></td>
+                <td class="Table-cell Table-cellRight"><?= t('server.tools.ratio') ?></td>
+                <td class="Table-cell Table-cellRight"><?= t('server.tools.required_ratio') ?></td>
+                <td class="Table-cell Table-cellRight" data-tooltip="<?= t('server.tools.deficit_title') ?>"><?= t('server.tools.deficit') ?></td>
+                <td class="Table-cell Table-cellRight" data-tooltip="<?= t('server.tools.gamble_title') ?>"><?= t('server.tools.gamble') ?></td>
+                <td class="Table-cell Table-cellRight"><?= t('server.tools.registration_date') ?></td>
+                <td class="Table-cell Table-cellRight" data-tooltip="<?= t('server.tools.ratio_watch_ended_ends_title') ?>"><?= t('server.tools.ratio_watch_ended_ends') ?></td>
+                <td class="Table-cell Table-cellRight"><?= t('server.tools.life_span') ?></td>
             </tr>
-        <?  } ?>
-    </table>
-    <div class="BodyNavLinks">
-        <? echo $Pages; ?>
-    </div>
+            <?
+            while (list($UserID, $Username, $Uploaded, $Downloaded, $PermissionID, $Enabled, $Donor, $Warned, $Joined, $RatioWatchEnds, $RatioWatchDownload, $RequiredRatio) = $DB->next_record()) {
+            ?>
+                <tr class="Table-row">
+                    <td class="Table-cell"><?= Users::format_username($UserID, true, true, true, true) ?></td>
+                    <td class="Table-cell Table-cellRight"><?= Format::get_size($Uploaded) ?></td>
+                    <td class="Table-cell Table-cellRight"><?= Format::get_size($Downloaded) ?></td>
+                    <td class="Table-cell Table-cellRight"><?= Format::get_ratio_html($Uploaded, $Downloaded) ?></td>
+                    <td class="Table-cell Table-cellRight"><?= number_format($RequiredRatio, 2) ?></td>
+                    <td class="Table-cell Table-cellRight"><? if (($Downloaded * $RequiredRatio) > $Uploaded) {
+                                                                echo Format::get_size(($Downloaded * $RequiredRatio) - $Uploaded);
+                                                            } ?></td>
+                    <td class="Table-cell Table-cellRight"><?= Format::get_size($Downloaded - $RatioWatchDownload) ?></td>
+                    <td class="Table-cell Table-cellRight"><?= time_diff($Joined, 2) ?></td>
+                    <td class="Table-cell Table-cellRight"><?= time_diff($RatioWatchEnds) ?></td>
+                    <td class="Table-cell Table-cellRight"><?= time_diff(strtotime($Joined), strtotime($RatioWatchEnds)) ?></td>
+                </tr>
+            <?  } ?>
+        </table>
+        <? View::pages($Pages); ?>
+    <?
+    } else {
+        View::line(t('server.tools.there_are_currently_no_users_on_ratio_watch'));
+    }
+    ?>
+</div>
 <?
-} else { ?>
-    <h2 align="center"><?= t('server.tools.there_are_currently_no_users_on_ratio_watch') ?></h2>
-<?
-}
 
 View::show_footer();
 ?>

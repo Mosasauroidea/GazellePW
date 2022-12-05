@@ -180,7 +180,11 @@ View::show_header($ThreadInfo['Title'] . ' &lt; ' . $Forums[$ForumID]['Name'] . 
                 <a href="reports.php?action=report&amp;type=thread&amp;id=<?= $ThreadID ?>" class="brackets"><?= t('server.forums.report') ?></a>
                 <a href="#" onclick="Subscribe(<?= $ThreadID ?>, '<?= (in_array($ThreadID, $UserSubscriptions) ? t('server.common.subscribe') :  t('server.common.unsubscribe')) ?>');return false;" id="subscribelink<?= $ThreadID ?>" class="brackets"><?= (in_array($ThreadID, $UserSubscriptions) ? t('server.common.unsubscribe') :  t('server.common.subscribe')) ?></a>
                 <a href="#" onclick="$('#searchthread').gtoggle(); return false;" class="brackets"><?= t('server.forums.search') ?></a>
-                <? if (check_perms('site_debug')) { ?> <a href="tools.php?action=service_stats" class="brackets"><?= t('server.forums.service_stats') ?></a> <? } ?>
+
+                <? if (check_perms('site_debug') && $ForumID == CONFIG['NEWS_FORUM_ID']) { ?>
+                    <a href="#" data-tooltip="<?= t('server.tools.publish_a_new_announcement_tooltip') ?>" onclick="Refresh(false)" class="brackets"><?= t('server.tools.publish_a_new_announcement') ?></a>
+                    <a href="#" data-tooltip="<?= t('server.tools.edit_an_announcement_note') ?>" onclick="Refresh(true)" class="brackets"><?= t('server.tools.edit_an_announcement') ?></a>
+                <? } ?>
             </div>
             <form class="Form FormForumThreadSearch" name="forum_thread" action="forums.php" method="get">
                 <input type="hidden" name="action" value="search" />
@@ -375,7 +379,7 @@ View::show_header($ThreadInfo['Title'] . ' &lt; ' . $Forums[$ForumID]['Name'] . 
                             <a href="forums.php?action=change_vote&amp;threadid=<?= $ThreadID ?>&amp;auth=<?= $LoggedUser['AuthKey'] ?>&amp;vote=0"><?= ($UserResponse == '0' ? '&raquo; ' : '') ?><?= t('server.forums.blank') ?></a> - <?= $StaffVotes[0] ?>(<?= number_format(((float) $Votes[0] / $TotalVotes) * 100, 2) ?>%)
                         </li>
                     </ul>
-                    <? if ($ForumID == STAFF_FORUM) { ?>
+                    <? if ($ForumID == CONFIG['STAFF_FORUM']) { ?>
                         <br />
                         <strong><?= t('server.forums.votes') ?>:</strong> <?= number_format($StaffCount - count($StaffNames)) ?> / <?= $StaffCount ?> current staff, <?= number_format($TotalVotes) ?> <?= t('server.forums.missing_votes') ?>
                         <br />
@@ -407,7 +411,7 @@ View::show_header($ThreadInfo['Title'] . ' &lt; ' . $Forums[$ForumID]['Name'] . 
                                 <label class="Checkbox-label" for="answer_0"><?= t('server.forums.blank_show_results') ?></label><br />
                             </li>
                         </ul>
-                        <? if ($ForumID == STAFF_FORUM) { ?>
+                        <? if ($ForumID == CONFIG['STAFF_FORUM']) { ?>
                             <a href="#" onclick="AddPollOption(<?= $ThreadID ?>); return false;" class="brackets">+</a>
                         <? } ?>
                         <button class="Poll-voteFormSubmit Button" type="button" onclick="ajax.post('index.php','poll',function(response) { $('#PollContainer').raw().innerHTML = response});" value="Vote"><?= t('server.forums.poll') ?></button>
@@ -869,40 +873,39 @@ View::show_header($ThreadInfo['Title'] . ' &lt; ' . $Forums[$ForumID]['Name'] . 
         $Notes = G::$DB->to_array();
 
     ?>
-        <div class="Box is-noBorder">
-            <div class="Box-header">
-                <div class="Box-headerTitle"><?= t('server.forums.thread_notes') ?></div>
-                <div class="Box-headerActions">
+        <div class="Group">
+            <div class="Group-header">
+                <div class="Group-headerTitle"><?= t('server.forums.thread_notes') ?></div>
+                <div class="Group-headerActions">
                     <a href="#" onclick="globalapp.toggleAny(event,'#thread_notes_table'); return false;">
                         <span class="u-toggleAny-show"><?= t('server.common.show') ?></span>
                         <span class="u-toggleAny-hide u-hidden"><?= t('server.common.hide') ?></span>
                     </a>
                 </div>
             </div>
-            <div class="Box-body u-hidden" id="thread_notes_table">
-                <div class="BoxList">
-                    <?
-                    foreach ($Notes as $Note) {
-                    ?>
+            <div class="Group-body u-hidden" id="thread_notes_table">
 
-                        <div class="Box">
-                            <div class="Box-header">
-                                <?= Users::format_username($Note['AuthorID']) ?> (<?= time_diff($Note['AddedTime'], 2, true, true) ?>)
-                            </div>
-                            <div class="Box-body">
-                                <?= Text::full_format($Note['Body']) ?>
-                            </div>
+                <?
+                foreach ($Notes as $Note) {
+                ?>
+
+                    <div class="Box">
+                        <div class="Box-header">
+                            <?= Users::format_username($Note['AuthorID']) ?> (<?= time_diff($Note['AddedTime'], 2, true, true) ?>)
                         </div>
-                    <?
-                    }
-                    ?>
-                </div>
+                        <div class="Box-body">
+                            <?= Text::full_format($Note['Body']) ?>
+                        </div>
+                    </div>
+                <?
+                }
+                ?>
                 <form action="forums.php" method="post">
                     <input type="hidden" name="action" value="take_topic_notes" />
                     <input type="hidden" name="auth" value="<?= $LoggedUser['AuthKey'] ?>" />
                     <input type="hidden" name="topicid" value="<?= $ThreadID ?>" />
                     <? new TEXTAREA_PREVIEW('body', 'topic_notes', '', 60, 8, true, true, false); ?>
-                    <div class="Form-row"><button class="Button" type="submit" value="Save"><?= t('server.common.save_all_change') ?></button></div>
+                    <div class="Form-row"><button class="Button" type="submit" value="Save"><?= t('client.common.save') ?></button></div>
                 </form>
             </div>
         </div>

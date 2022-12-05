@@ -4,11 +4,7 @@ if (!check_perms('admin_donor_log')) {
     error(403);
 }
 
-include(CONFIG['SERVER_ROOT'] . '/sections/donate/config.php');
-include(CONFIG['SERVER_ROOT'] . '/sections/donate/const.php');
-
-define('DONATIONS_PER_PAGE', 50);
-list($Page, $Limit) = Format::page_limit(DONATIONS_PER_PAGE);
+list($Page, $Limit) = Format::page_limit(CONFIG['DONATIONS_PER_PAGE']);
 
 $AfterDate = $_GET['after_date'];
 $BeforeDate = $_GET['before_date'];
@@ -92,94 +88,95 @@ if (empty($_GET['email']) && empty($_GET['username']) && empty($_GET['source']) 
     $Cache->cache_value('donation_timeline', $DonationTimeline, mktime(0, 0, 0, date('n') + 1, 2));
 }
 
-View::show_header('Donation log', '', 'PageToolDonationLog');
-if (empty($_GET['email']) && empty($_GET['source']) && empty($_GET['username']) && !isset($_GET['page'])) {
+$Pages = Format::get_pages($Page, $Results, CONFIG['DONATIONS_PER_PAGE'], 11);
+View::show_header(t('server.tools.donation_log'), '', 'PageToolDonationLog');
 ?>
-    <div class="BoxBody">
-        <img src="<?= $DonationTimeline ?>" alt="Donation timeline. The &quot;y&quot; axis is donation amount." />
+<div class="LayoutBody">
+    <div class="BodyHeader">
+        <div class="BodyHeader-nav">
+            <?= t('server.tools.donation_log') ?>
+        </div>
     </div>
-    <br />
-<? } ?>
-<div class="BodyContent">
-    <form class="Form SearchPage Box SearchDonate" name="donation_log" action="" method="get">
-        <input type="hidden" name="action" value="donation_log" />
-        <table class="Form-rowList">
-            <tr class="Form-row">
-                <td class="Form-label"><strong>Username:</strong></td>
-                <td class="Form-inputs">
-                    <input class="Input" type="text" name="username" size="60" value="<? if (!empty($_GET['username'])) {
-                                                                                            echo display_str($_GET['username']);
-                                                                                        } ?>" />
-                </td>
-            </tr>
-            <tr class="Form-row">
-                <td class="Form-label"><strong>Email:</strong></td>
-                <td class="Form-inputs">
-                    <input class="Input" type="text" name="email" size="60" value="<? if (!empty($_GET['email'])) {
-                                                                                        echo display_str($_GET['email']);
-                                                                                    } ?>" />
-                </td>
-            </tr>
-            <tr class="Form-row">
-                <td class="Form-label"><strong>Source:</strong></td>
-                <td class="Form-inputs">
-                    <input class="Input" type="text" name="source" size="60" value="<? if (!empty($_GET['source'])) {
-                                                                                        echo display_str($_GET['source']);
-                                                                                    } ?>" />
-                </td>
-            </tr>
-            <tr class="Form-row">
-                <td class="Form-label"><strong>Date Range:</strong></td>
-                <td class="Form-inputs">
-                    <input class="Input" type="date" name="after_date" />
-                    <input class="Input" type="date" name="before_date" />
-                </td>
-            </tr>
-            <tr class="Form-row">
-                <td class="Form-submit">
-                    <input class="Button" type="submit" value="Search donation log" />
-                </td>
-            </tr>
-        </table>
-    </form>
-</div>
-<br />
-<div class="BodyNavLinks">
     <?
-    $Pages = Format::get_pages($Page, $Results, DONATIONS_PER_PAGE, 11);
-    echo $Pages;
+    if (empty($_GET['email']) && empty($_GET['source']) && empty($_GET['username']) && !isset($_GET['page'])) {
     ?>
-</div>
-<table class="Table">
-    <tr class="Table-rowHeader">
-        <td class="Table-cell">User</td>
-        <td class="Table-cell">Amount</td>
-        <td class="Table-cell">Email</td>
-        <td class="Table-cell">Source</td>
-        <td class="Table-cell">Reason</td>
-        <td class="Table-cell">Time</td>
-    </tr>
-    <?
-    $PageTotal = 0;
-    foreach ($Donations as $Donation) {
-        $PageTotal += $Donation['Amount']; ?>
-        <tr class="Table-row">
-            <td class="Table-cell"><?= Users::format_username($Donation['UserID'], true) ?> (<?= Users::format_username($Donation['AddedBy']) ?>)</td>
-            <td class="Table-cell"><?= display_str($Donation['Amount']) ?></td>
-            <td class="Table-cell"><?= display_str($Donation['Email']) ?></td>
-            <td class="Table-cell"><?= display_str($Donation['Source']) ?></td>
-            <td class="Table-cell"><?= display_str($Donation['Reason']) ?></td>
-            <td class="Table-cell"><?= time_diff($Donation['Time']) ?></td>
+        <div class="BoxBody">
+            <img src="<?= $DonationTimeline ?>" alt="Donation timeline. The &quot;y&quot; axis is donation amount." />
+        </div>
+    <? } ?>
+    <form class="Form Box SearchPage SearchDonate" name="donation_log" action="" method="get">
+        <input type="hidden" name="action" value="donation_log" />
+        <div class="SearchPageBody">
+            <table class="Form-rowList">
+                <tr class="Form-row">
+                    <td class="Form-label"><?= t('server.tools.username') ?>:</td>
+                    <td class="Form-inputs">
+                        <input class="Input" type="text" name="username" size="60" value="<? if (!empty($_GET['username'])) {
+                                                                                                echo display_str($_GET['username']);
+                                                                                            } ?>" />
+                    </td>
+                </tr>
+                <tr class="Form-row">
+                    <td class="Form-label"><?= t('server.tools.donation_source') ?>:</td>
+                    <td class="Form-inputs">
+                        <input class="Input" type="text" name="source" size="60" value="<? if (!empty($_GET['source'])) {
+                                                                                            echo display_str($_GET['source']);
+                                                                                        } ?>" />
+                    </td>
+                </tr>
+                <tr class="Form-row">
+                    <td class="Form-label"><?= t('server.common.date_range') ?></td>
+                    <td class="Form-inputs">
+                        <input class="Input" type="date" name="after_date" />
+                        <input class="Input" type="date" name="before_date" />
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div class="SearchPageFooter">
+            <div class="SearchPageFooter-actions">
+                <input class="Button" type="submit" value="<?= t('server.common.search') ?>" />
+            </div>
+        </div>
+    </form>
+    <? if ($Pages) { ?>
+        <div class="BodyNavLinks">
+            <?
+            echo $Pages;
+            ?>
+        </div>
+    <? } ?>
+    <table class="Table">
+        <tr class="Table-rowHeader">
+            <td class="Table-cell"><?= t('server.common.user') ?></td>
+            <td class="Table-cell"><?= t('server.tools.amount') ?></td>
+            <td class="Table-cell"><?= t('server.tools.donation_source') ?></td>
+            <td class="Table-cell"><?= t('server.common.reason') ?></td>
+            <td class="Table-cell"><?= t('server.common.time') ?></td>
         </tr>
-    <?  } ?>
-    <tr class="Table-rowHeader">
-        <td class="Table-cell">Page Total</td>
-        <td class="Table-cell"><?= $PageTotal ?></td>
-        <td class="Table-cell">Total</td>
-        <td class="Table-cell" colspan="3"><?= $Total ?></td>
-    </tr>
-</table>
-<div class="BodyNavLinks">
-    <?= $Pages ?>
+        <?
+        $PageTotal = 0;
+        foreach ($Donations as $Donation) {
+            $PageTotal += $Donation['Amount']; ?>
+            <tr class="Table-row">
+                <td class="Table-cell"><?= Users::format_username($Donation['UserID'], true) ?> (<?= Users::format_username($Donation['AddedBy']) ?>)</td>
+                <td class="Table-cell"><?= display_str($Donation['Amount']) ?></td>
+                <td class="Table-cell"><?= t('server.tools.donation_' . str_replace(' ', '_', strtolower(display_str($Donation['Source'])))) ?></td>
+                <td class="Table-cell"><?= display_str($Donation['Reason']) ?></td>
+                <td class="Table-cell"><?= time_diff($Donation['Time']) ?></td>
+            </tr>
+        <?  } ?>
+
+    </table>
+    <div>
+        <?= t('server.tools.page_total') ?>: <?= $PageTotal ?> &nbsp;<?= t('server.tools.amount') ?>: <?= $Total ?>
+    </div>
+    <? if ($Pages) { ?>
+        <div class="BodyNavLinks">
+            <?
+            echo $Pages;
+            ?>
+        </div>
+    <? } ?>
 </div>
 <? View::show_footer(); ?>

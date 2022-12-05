@@ -97,15 +97,15 @@ View::show_header(t('server.top10.top_10_torrents_history'), '', 'PageTop10Histo
         }
     ?>
 
-        <div class="Box is-noBorder">
-            <div class="Box-header">
-                <div class="Box-headerTitle">
+        <div class="Group">
+            <div class="Group-header">
+                <div class="Group-headerTitle">
                     <?= t('server.top10.top_10_for', ['Values' => [
                         ($Type == 'day' ? $Date : t('server.top10.the_first_week_after', ['Values' => [$Date]]))
                     ]]) ?>
                 </div>
             </div>
-            <div class="Box-body">
+            <div class="Group-body">
                 <?
                 $TableTorrentClass = G::$LoggedUser['SettingTorrentTitle']['Alternative'] ? 'is-alternative' : '';
                 ?>

@@ -10,20 +10,22 @@ include(CONFIG['SERVER_ROOT'] . '/sections/log/sphinx.php');
         <h2 class="BodyHeader-nav"><?= t('server.log.site_log') ?></h2>
     </div>
     <form class="Form SearchPage Box SearchLog" name="log" action="" method="get">
-        <table class="Form-rowList">
-            <tr class="Form-row">
-                <td class="Form-label"><?= t('server.log.search_for') ?>:</td>
-                <td class="Form-inputs">
-                    <input class="Input" type="text" name="search" size="60" <?= (!empty($_GET['search']) ? ' value="' . display_str($_GET['search']) . '"' : '') ?> />
-                </td>
+        <div class="SearchPageBody">
+            <table class="Form-rowList">
+                <tr class="Form-row">
+                    <td class="Form-label"><?= t('server.log.search_for') ?>:</td>
+                    <td class="Form-inputs">
+                        <input class="Input" type="text" name="search" size="60" <?= (!empty($_GET['search']) ? ' value="' . display_str($_GET['search']) . '"' : '') ?> />
+                    </td>
 
-            </tr>
-            <tr class="Form-row">
-                <td clas="Form-submit" colspan="2">
-                    <input class="Button" type="submit" value="Search log" />
-                </td>
-            </tr>
-        </table>
+                </tr>
+            </table>
+        </div>
+        <div class="SearchPageFooter">
+            <div class="SearchPageFooter-actions">
+                <input class="Button" type="submit" value="<?= t('server.common.search') ?>" />
+            </div>
+        </div>
     </form>
 
     <? if ($TotalMatches > CONFIG['LOG_ENTRIES_PER_PAGE']) { ?>

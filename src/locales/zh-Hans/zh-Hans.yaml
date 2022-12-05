@@ -806,7 +806,7 @@ server.collages.featured_title: |-
 server.collages.ft_order: |-
   排序
 server.collages.ftb_searchstr: |-
-  搜索关键词
+  关键词
 server.collages.individual_add: |-
   单个添加
 server.collages.last_updated: |-
@@ -1040,7 +1040,7 @@ server.common.edit: |-
 server.common.edition_info: |-
   版本信息
 server.common.enable_requests: |-
-  &nbsp;账号恢复申请
+  账号恢复申请
 server.common.error: |-
   错误
 server.common.error_403_description: |-
@@ -1812,11 +1812,11 @@ server.log.nothing_found: |-
 server.log.period: |-
   。
 server.log.search_for: |-
-  搜索关键词
+  关键词
 server.log.search_request_failed: |-
   搜索请求失败
 server.log.site_log: |-
-  站点日志
+  日志
 server.log.time: |-
   时间
 server.login.2fa_key: |-
@@ -1981,15 +1981,15 @@ server.permissions.administrative: |-
 server.permissions.edit_unknowns: |-
   能够编辑未知发行信息
 server.permissions.events_reward_badges: |-
-  能够访问整合奖励发放的印记模块
+  能够访问奖励发放的印记模块
 server.permissions.events_reward_bonus: |-
-  能够访问整合奖励发放的积分模块
+  能够访问奖励发放的积分模块
 server.permissions.events_reward_history: |-
-  能够访问整合奖励发放的发放历史
+  能够访问奖励发放的发放历史
 server.permissions.events_reward_invites: |-
-  能够访问整合奖励发放的邀请模块
+  能够访问奖励发放的邀请模块
 server.permissions.events_reward_tokens: |-
-  能够访问整合奖励发放的令牌模块
+  能够访问奖励发放的令牌模块
 server.permissions.forums_polls_create: |-
   能够在论坛发起投票
 server.permissions.forums_polls_moderate: |-
@@ -3459,7 +3459,7 @@ server.tools.above: |-
 server.tools.access: |-
   操作
 server.tools.activity: |-
-  活动
+  累计活动
 server.tools.add: |-
   补充
 server.tools.add_all: |-
@@ -3511,7 +3511,7 @@ server.tools.affected_torrent_groups: |-
 server.tools.age: |-
   提交时间
 server.tools.album_id: |-
-  影片 ID
+  电影 ID
 server.tools.featured_movie: |-
   电影推荐
 server.tools.all: |-
@@ -3547,7 +3547,7 @@ server.tools.ascending: |-
 server.tools.author: |-
   作者
 server.tools.auto_enable_requests: |-
-  自动恢复申请
+  账号恢复申请
 server.tools.auto_enable_requests_checked: |-
   已核实
 server.tools.auto_enable_requests_invalid_email: |-
@@ -3559,7 +3559,7 @@ server.tools.auto_enable_requests_ip_overlap: |-
 server.tools.auto_enable_requests_ip_overlap_title: |-
   提交申请的 IP 与其他账号重叠
 server.tools.auto_enable_requests_main: |-
-  主页
+  全部
 server.tools.auto_enable_requests_main_title: |-
   默认页面
 server.tools.auto_enable_requests_manual_disable: |-
@@ -3619,7 +3619,7 @@ server.tools.badge_progress: |-
 server.tools.badge_query: |-
   查询
 server.tools.badge_send: |-
-  印记发放
+  印记
 server.tools.badge_sort: |-
   排序
 server.tools.badge_tag: |-
@@ -3643,7 +3643,7 @@ server.tools.base_salary: |-
 server.tools.batch_tag_editor: |-
   标签批量编辑
 server.tools.bbcode_sandbox: |-
-  BBCode 样式预览
+  BBCode 预览
 server.tools.below: |-
   小于
 server.tools.bitcoin_address: |-
@@ -3667,9 +3667,9 @@ server.tools.browser: |-
 server.tools.browser_usage: |-
   浏览器使用统计
 server.tools.btc_donations_balance: |-
-  比特币捐助 (结算)
+  结算
 server.tools.btc_donations_unprocessed: |-
-  比特币捐助 (未处理)
+  未处理
 server.tools.build_preview: |-
   构建预览
 server.tools.byuserid: |-
@@ -3677,7 +3677,7 @@ server.tools.byuserid: |-
 server.tools.cache: |-
   缓存
 server.tools.cache_decrement: |-
-  缓存减量
+  缓存 Decr
 server.tools.cache_evicted: |-
   缓存释放
 server.tools.cache_flushes: |-
@@ -3685,31 +3685,31 @@ server.tools.cache_flushes: |-
 server.tools.cache_flushes_title: |-
   定期刷新缓存会无法利用其优势，请尽可能研究使用缓存处理或删除来代替全局刷新。
 server.tools.cache_increment: |-
-  缓存增量
+  缓存 Incr
 server.tools.calendar: |-
   日历
 server.tools.cannot_merge_tag_with_itself: |-
   无法将标签 %s 与自身合并！
 server.tools.cas_update_success: |-
-  自动控制/更新 (成功)
+  CAS / Update  (成功)
 server.tools.cas_update_success_title_1: |-
-  在已发布的自动控制指令中，有超过 30%% 是不必要的时间和资源浪费。
+  CAS 命中情况不足 70%% 这可能存在浪费。
 server.tools.cas_update_success_title_2: |-
-  使用 -C 参数禁用自动控制，因为用不着，所以可以节省资源。
+  可以使用 -C 参数禁用 CAS，这样可以节省资源。
 server.tools.cas_updates: |-
-  自动控制/更新
+  CAS / Update （成功）
 server.tools.cashe_current_index: |-
-  缓存当前索引
+  当前Key数量
 server.tools.cashe_storage: |-
   缓存空间占用
 server.tools.cashe_storage_title: |-
-  当空间占用超过 85%% 时开始释放
+  空间占用超过 85%%
 server.tools.cashe_total_index: |-
-  缓存全部索引
+  全部Key数量
 server.tools.category: |-
   分区
 server.tools.category_manager: |-
-  论坛分区管理
+  分区管理
 server.tools.certain_size_torrents: |-
   指定大小的种子
 server.tools.certain_torrent_groups: |-
@@ -3729,17 +3729,17 @@ server.tools.class_level: |-
 server.tools.clear: |-
   清除
 server.tools.clear_a_cache_key: |-
-  清除缓存数据
+  缓存数据管理
 server.tools.clear_common_cashes: |-
-  清除公用缓存
+  快捷清除
 server.tools.clear_view_a_cache_key: |-
-  清除／查看缓存数据
+  缓存数据管理
 server.tools.clears_out: |-
   清除
 server.tools.click_to_see: |-
   点此查看
 server.tools.client: |-
-  客户端
+  客户端名称
 server.tools.client_screenshots: |-
   客户端截图
 server.tools.client_whitelist: |-
@@ -3755,11 +3755,11 @@ server.tools.comment_checked_by: |-
 server.tools.commit_message: |-
   具体信息
 server.tools.community: |-
-  社群
+  社区管理
 server.tools.compose_mass_pm: |-
   撰写群发私信
 server.tools.concurrency: |-
-  并发
+  QPS
 server.tools.connections: |-
   连接
 server.tools.controls: |-
@@ -3789,19 +3789,19 @@ server.tools.current_users_in_this_class: |-
 server.tools.data: |-
   流量
 server.tools.data_read: |-
-  数据读取
+  数据读取量
 server.tools.data_size: |-
   数据大小
 server.tools.data_write: |-
-  数据写入
+  数据写入量
 server.tools.database: |-
   数据库
 server.tools.database_slow: |-
-  数据库降速
+  数据库慢查询
 server.tools.database_slow_title: |-
-  允许降速至 1/7500 查询指令以减少对性能的影响。
+  慢查询数量过多。
 server.tools.database_specifics: |-
-  数据库详情
+  数据库数据
 server.tools.date: |-
   日期
 server.tools.date_added: |-
@@ -3815,9 +3815,9 @@ server.tools.deficit_title: |-
 server.tools.delete_failed: |-
   删除失败
 server.tools.delete_success: |-
-  删除 (成功)
+  Delete (成功)
 server.tools.delete_success_title: |-
-  在已发出的删除命令中，有 30%% 以上是不必要的，浪费了时间和资源。
+  30%以上的删除命令没有命中，存在优化空间。
 server.tools.deleted_on: |-
   删除时间
 server.tools.deletes: |-
@@ -3829,9 +3829,9 @@ server.tools.description: |-
 server.tools.developer_sandboxes: |-
   开发人员沙盒
 server.tools.development: |-
-  开发
+  开发工具
 server.tools.disable_entire_tree: |-
-  砍掉整棵树
+  封禁整棵树的账号
 server.tools.disable_invites_privileges: |-
   封禁整棵树的邀请权限
 server.tools.dnu_added: |-
@@ -3855,17 +3855,19 @@ server.tools.drag_and_drop_table_rows_to_reorder: |-
 server.tools.drive: |-
   光驱
 server.tools.dupe_ips: |-
-  重叠的 IP
+  重叠的 IP 地址
 server.tools.dupes: |-
   重叠人数
 server.tools.duplicate_ip_addresses: |-
   重叠的 IP 地址
 server.tools.economic_stats: |-
-  站点总体统计
+  站点统计
 server.tools.economy: |-
-  站点总体统计
+  站点统计
 server.tools.edit_an_announcement: |-
-  编辑公告:</br>(不会触发公告广播)
+  更新公告
+server.tools.edit_an_announcement_note: |-
+  不会触发公告广播
 server.tools.edit_requests_handled: |-
   编辑请求
 server.tools.email: |-
@@ -3873,11 +3875,11 @@ server.tools.email: |-
 server.tools.email_address: |-
   邮箱
 server.tools.email_blacklist: |-
-  电子邮箱黑名单
+  邮箱黑名单
 server.tools.email_blacklist_comment: |-
   备注
 server.tools.enable_requests: |-
-  账号启用申请
+  账号恢复申请
 server.tools.engine: |-
   引擎
 server.tools.enter_a_single_replacement_tag: |-
@@ -3891,9 +3893,9 @@ server.tools.equal: |-
 server.tools.error: |-
   错误
 server.tools.events_reward: |-
-  整合奖励发放
+  奖励发放
 server.tools.events_reward_history: |-
-  奖励发放历史
+  发放历史
 server.tools.events_reward_pm: |-
   奖励原因
 server.tools.examined: |-
@@ -3919,7 +3921,7 @@ server.tools.files_this_week: |-
 server.tools.files_today: |-
   今日文件数
 server.tools.finances: |-
-  捐助
+  资金管理
 server.tools.fl: |-
   免费种子
 server.tools.fl_tokens_giving: |-
@@ -3929,25 +3931,25 @@ server.tools.floating_wage: |-
 server.tools.for_reason: |-
   理由是
 server.tools.forum_category_control_panel: |-
-  论坛分区管理
+  分区管理
 server.tools.forum_category_control_panel_forums: |-
   版块数
 server.tools.forum_category_management: |-
-  论坛分区管理
+  分区管理
 server.tools.forum_control_panel: |-
-  论坛版块管理
+  版块管理
 server.tools.forum_management: |-
   论坛管理
 server.tools.forum_manager: |-
-  论坛版块管理
+  版块管理
 server.tools.gamble: |-
   赌博
 server.tools.gamble_title: |-
   用户在分享率监控期间的下载量
 server.tools.get_select: |-
-  获取/选取
+  Get / Select （成功）
 server.tools.get_select_success: |-
-  获取/选取（成功）
+  读取（成功）
 server.tools.get_stats_for_user: |-
   获取指定用户的数据
 server.tools.global_cache: |-
@@ -3955,7 +3957,7 @@ server.tools.global_cache: |-
 server.tools.global_notification: |-
   全站通告
 server.tools.global_torrents_sales_promotion_management: |-
-  全局种子促销管理
+  批量促销管理
 server.tools.grade_1: |-
   一档
 server.tools.grade_2: |-
@@ -3975,7 +3977,7 @@ server.tools.group_number: |-
 server.tools.gz_change_log: |-
   Gazelle 更新日志
 server.tools.h2_global_torrents_sales_promotion_management: |-
-  全局种子促销管理
+  批量促销管理
 server.tools.h2_ip_address_bans: |-
   IP 地址封禁
 server.tools.h2_manipulate_invite_tree: |-
@@ -4039,9 +4041,9 @@ server.tools.include_checked: |-
 server.tools.incomplete: |-
   待补充
 server.tools.increment_decrement: |-
-  增量/减量
+  Incr / Decr
 server.tools.increment_decrement_success: |-
-  增量/减量 (成功)
+  Incr/Decr  (成功)
 server.tools.index_size: |-
   索引大小
 server.tools.internal_torrent: |-
@@ -4107,7 +4109,7 @@ server.tools.list_affected_rows: |-
 server.tools.login_watch: |-
   登录监控
 server.tools.main_stats: |-
-  主要数据
+  整体数据
 server.tools.manage: |-
   管理
 server.tools.manage_badges: |-
@@ -4117,9 +4119,9 @@ server.tools.manage_email_blacklist: |-
 server.tools.manage_permissions: |-
   权限管理
 server.tools.manage_stylesheets: |-
-  层叠样式表管理
+  主题管理
 server.tools.manage_the_dnu_list: |-
-  禁止发布列表管理
+  禁止发布列表
 server.tools.managers: |-
   站点管理
 server.tools.mandatory_comment: |-
@@ -4133,7 +4135,7 @@ server.tools.manually_submit_a_log: |-
 server.tools.mark_torrents_as: |-
   将种子设置为
 server.tools.mass_pm: |-
-  私信群发
+  群发私信
 server.tools.mass_pm_class: |-
   用户群
 server.tools.max_collages: |-
@@ -4151,7 +4153,7 @@ server.tools.mean_leechers_per_torrent: |-
 server.tools.mean_leeching_per_user: |-
   单人平均下载数
 server.tools.mean_leeching_per_user_in_at_least_1_swarm: |-
-  参与至少一个集群用户的平均下载数
+  参与至少一个种子的用户的平均下载数
 server.tools.mean_ratio: |-
   平均分享率
 server.tools.mean_seeders_per_torrent: |-
@@ -4159,13 +4161,13 @@ server.tools.mean_seeders_per_torrent: |-
 server.tools.mean_seeding_per_user: |-
   单人平均做种数
 server.tools.mean_seeding_per_user_in_at_least_1_swarm: |-
-  参与至少一个集群用户的平均做种数
+  参与至少一个种子的用户的平均做种数
 server.tools.mean_snatches_per_torrent: |-
   单种平均完成数
 server.tools.mean_snatches_per_user: |-
   单人平均完成数
 server.tools.mean_snatches_per_user_in_at_least_1_swarm: |-
-  参与至少一个集群用户的平均完成数
+  参与至少一个种子的用户的平均完成数
 server.tools.mean_torrent_size: |-
   种子平均大小
 server.tools.mean_torrents_per_user: |-
@@ -4189,7 +4191,7 @@ server.tools.month: |-
 server.tools.multi_key: |-
   多个键值
 server.tools.multiple_freeleech: |-
-  批量免费设置
+  批量促销管理
 server.tools.name: |-
   名称
 server.tools.navigation_manager: |-
@@ -4201,7 +4203,7 @@ server.tools.new_donations_from: |-
 server.tools.new_official_tag: |-
   新增官方标签
 server.tools.news_post: |-
-  公告发布
+  发布公告
 server.tools.nl: |-
   中性种子
 server.tools.nl_torrents_over: |-
@@ -4211,13 +4213,13 @@ server.tools.nl_torrents_over_after: |-
 server.tools.no: |-
   否
 server.tools.no_new_pending_auto_enable_requests: |-
-  没有新的待处理自动恢复申请
+  没有新的待处理恢复申请
 server.tools.no_special_users: |-
   尚无特殊用户。
 server.tools.no_such_tag_found: |-
   未找到该标签
 server.tools.no_unprocessed_bitcoin_donations: |-
-  没有未处理的比特币捐助
+  未处理
 server.tools.nodejs: |-
   NodeJS
 server.tools.normal: |-
@@ -4225,7 +4227,7 @@ server.tools.normal: |-
 server.tools.notes: |-
   备注
 server.tools.numbers_and_such: |-
-  数值以及其他信息
+  数据
 server.tools.tags_manager: |-
   标签管理
 server.tools.offset: |-
@@ -4265,7 +4267,7 @@ server.tools.outcome_denied: |-
 server.tools.outcome_discarded: |-
   已遗弃
 server.tools.overall_stats: |-
-  总体统计
+  统计
 server.tools.pass: |-
   通过
 server.tools.passed: |-
@@ -4277,7 +4279,7 @@ server.tools.paste_a_list_of_collage_or_torrent_group_urls: |-
 server.tools.path: |-
   路径
 server.tools.peer_id: |-
-  同伴 ID
+  Peer ID
 server.tools.pend: |-
   待定
 server.tools.pending: |-
@@ -4309,7 +4311,9 @@ server.tools.processing: |-
 server.tools.proper_tag: |-
   正确标签
 server.tools.publish_a_new_announcement: |-
-  发布新公告:</br>(会触发公告广播)
+  发布公告
+server.tools.publish_a_new_announcement_tooltip: |-
+  会触发公告广播
 server.tools.puppeteer: |-
   操作人
 server.tools.qq_group: |-
@@ -4349,7 +4353,7 @@ server.tools.registered: |-
 server.tools.registration_date: |-
   注册时间
 server.tools.registration_log: |-
-  注册日志
+  用户注册日志
 server.tools.reject: |-
   拒绝
 server.tools.rejected: |-
@@ -4375,7 +4379,7 @@ server.tools.reports_submitted: |-
 server.tools.required_ratio: |-
   合格分享率
 server.tools.rerender_stylesheet_gallery_images: |-
-  重新渲染层叠样式表图库
+  重新渲染主题预览图
 server.tools.resolution: |-
   分辨率
 server.tools.rewarded_times: |-
@@ -4395,9 +4399,9 @@ server.tools.sales_promotion_range: |-
 server.tools.sales_promotion_rules_history: |-
   促销规则历史记录
 server.tools.schedule: |-
-  计划任务
+  执行计划任务
 server.tools.schema: |-
-  模式
+  表结构
 server.tools.search_ip: |-
   搜索
 server.tools.second_avatar: |-
@@ -4419,15 +4423,15 @@ server.tools.send_rewards: |-
 server.tools.server_root: |-
   服务器根目录
 server.tools.service: |-
-  服务器
+  服务
 server.tools.service_stats: |-
   服务器数据
 server.tools.set_global_notification: |-
   设置全站通告
 server.tools.set_insert: |-
-  存入/插入
+  Set / Insert
 server.tools.set_insert_success: |-
-  存入/插入 (成功)
+  Insert / Set (成功)
 server.tools.should_edit: |-
   此 ID 已有 IP 限制条目，请编辑而不是重复添加！
 server.tools.show_abusers: |-
@@ -4441,7 +4445,7 @@ server.tools.show_on_staff_page: |-
 server.tools.site_activities: |-
   活跃站点
 server.tools.site_info: |-
-  站点信息
+  开发信息
 server.tools.site_information: |-
   站点信息
 server.tools.site_options: |-
@@ -4463,11 +4467,11 @@ server.tools.size_today: |-
 server.tools.snatches: |-
   完成
 server.tools.someone_bonus: |-
-  奖励积分
+  积分
 server.tools.someone_invites: |-
-  奖励邀请
+  邀请
 server.tools.someone_tokens: |-
-  发放令牌
+  令牌
 server.tools.sort: |-
   排序
 server.tools.sort_by_bad_labels: |-
@@ -4521,7 +4525,7 @@ server.tools.statistical_settlement_time_dividing_query_panel: |-
 server.tools.status: |-
   状态
 server.tools.stylesheets: |-
-  层叠样式表
+  主题管理
 server.tools.subject: |-
   主题
 server.tools.submit: |-
@@ -4569,7 +4573,7 @@ server.tools.there_are_currently_no_users_on_ratio_watch: |-
 server.tools.there_are_no_permission_classes: |-
   尚无用户组。
 server.tools.there_are_no_stylesheets: |-
-  目前还没有层叠样式表。
+  目前还没有主题。
 server.tools.there_are_no_users_with_more_than_n_ip_overlaps: |-
   当前没有 IP 重叠数超过 %s 的用户。
 server.tools.there_have_been_no_new_registrations_in_the_past_72_hours: |-
@@ -4603,9 +4607,9 @@ server.tools.torrent_groups: |-
 server.tools.torrent_management: |-
   种子管理
 server.tools.torrent_stats: |-
-  种子总体统计
+  种子统计
 server.tools.torrents: |-
-  种子
+  种子管理
 server.tools.torrents_per_day_this_month: |-
   本月日均种子数
 server.tools.torrents_per_day_this_week: |-
@@ -4631,7 +4635,7 @@ server.tools.total_leechers: |-
 server.tools.total_points: |-
   总点数
 server.tools.total_reads: |-
-  总读取
+  读取
 server.tools.total_request_bounty: |-
   求种报酬总量
 server.tools.total_seeders: |-
@@ -4645,11 +4649,11 @@ server.tools.total_torrents: |-
 server.tools.total_upload: |-
   总上传量
 server.tools.total_users_in_at_least_1_swarm: |-
-  参与至少一个集群的用户总数
+  参与至少一个种子的用户总数
 server.tools.total_wages: |-
   总工资
 server.tools.total_writes: |-
-  总写入
+  写入
 server.tools.tracker_info: |-
   Tracker 信息
 server.tools.tracker_screenshots: |-
@@ -4657,7 +4661,7 @@ server.tools.tracker_screenshots: |-
 server.tools.unprocessed_amount_total: |-
   未处理总量 (共计
 server.tools.unprocessed_bitcoin_donations: |-
-  未处理的比特币捐助
+  未处理
 server.tools.unresolve: |-
   未解决
 server.tools.unused_invites_have_been_sent: |-
@@ -4695,7 +4699,7 @@ server.tools.user_stats: |-
 server.tools.userid: |-
   用户 ID
 server.tools.userids: |-
-  获奖 ID
+  目标用户
 server.tools.username: |-
   用户名
 server.tools.username_search: |-
@@ -5110,7 +5114,7 @@ server.torrents.ft_ripspecifics: |-
 server.torrents.ft_year: |-
   发行年份
 server.torrents.ftb_searchstr: |-
-  搜索关键词
+  关键词
 server.torrents.gift_points_pre_tax: |-
   打赏积分（税前）
 server.torrents.giver_list: |-
@@ -5393,7 +5397,7 @@ server.torrents.search_empty_1: |-
 server.torrents.search_empty_2: |-
   确保所有名称拼写正确，或尝试模糊搜索。
 server.torrents.search_for: |-
-  搜索关键词
+  关键词
 server.torrents.search_requests: |-
   搜索悬赏
 server.torrents.search_torrents: |-
@@ -6348,7 +6352,7 @@ server.user.hacked: |-
 server.user.hidden_text: |-
   隐藏内容
 server.user.hide_gallery: |-
-  收起样式预览
+  收起预览
 server.user.history: |-
   历史
 server.user.inbox_messages: |-
@@ -6850,7 +6854,7 @@ server.user.show_bounty: |-
 server.user.show_count: |-
   显示数量
 server.user.show_gallery: |-
-  展开样式预览
+  展开预览
 server.user.show_list: |-
   显示列表
 server.user.snatch_list: |-
@@ -7062,13 +7066,13 @@ server.user.statistics: |-
 server.user.stats: |-
   统计
 server.user.style: |-
-  预置样式
+  主题
 server.user.style_tool: |-
   风格工具提示
 server.user.style_tool_title: |-
   当悬停带有额外信息的元素 (例如这个元素) 时，使用样式化的工具提示而不是浏览器的默认值
 server.user.stylesheet: |-
-  层叠样式表
+  主题
 server.user.stylesheet_title: |-
   选择一个样式会变更 {{CONFIG['SITE_NAME']}} 的视觉外观。
 server.user.subject: |-
@@ -7106,7 +7110,7 @@ server.user.the_total_amount_uplaoded_by_direct_invitees_was_: |-
 server.user.the_total_amount_uploaded_by_the_entire_tree_was: |-
   整棵邀请树的上传总量为&nbsp;
 server.user.theme: |-
-  主题
+  深色模式
 server.user.theme_auto: |-
   自动
 server.user.theme_dark: |-
@@ -8125,3 +8129,57 @@ server.tools.user_permission_note: |-
   本工具可供你增删特定权限。不要误以为赋予某权限需要取消其他权限的勾选。左栏灰色的选框是该用户所在用户组的标准权限情况（还有捐助者／艺术家身份）。你在右栏进行的任何修改会覆盖左栏的默认是设置。很好理解吧？如果搞糊涂了，就点击顶部的 “重置为默认” 即可，它会将所有选框重设为该用户等级的默认状态，然后你再根据需要去勾选相应的权限即可。<strong>千万不要取消所有选框。</strong>如果你需要更详细的说明，就去询问开发吧。
 server.tools.user_permission_manage: |-
   权限管理
+server.tools.unban: |-
+  解封
+server.tools.ban_ip: |-
+  封禁 IP
+server.common.no_results: |-
+  空空如也。
+server.tools.approve_selected: |-
+  批量通过
+server.tools.reject_selected: |-
+  批量拒绝
+server.tools.discard_selected: |-
+  批量丢弃
+server.tools.approve: |-
+  通过
+server.tools.discard: |-
+  丢弃
+server.common.search_box: |-
+  搜索箱
+server.tools.bitcoin_donations: |-
+  比特币捐助
+server.tools.donation_log: |-
+  捐助日志
+server.tools.donation_source: |-
+  来源
+server.common.date_range: |-
+  时间范围
+server.common.reason: |-
+  原因
+server.tools.page_total: |-
+  当前页总量
+server.tools.donation_add_points: |-
+  手动添加点数
+server.tools.donation_modify_values: |-
+  手动数额修改
+server.tools.donation_prepaid_card: |-
+  移动充值卡
+server.tools.donation_staff_pm: |-
+  管理组私信
+server.tools.new_email_blacklist: |-
+  添加黑名单
+server.tools.ip_range: |-
+  IP 地址范围
+server.common.invalid_param: |
+  输入无效
+server.tools.cache_usage: |-
+  缓存使用情况
+server.tools.cache_hit_rate: |-
+  缓存命中率
+server.tools.total_value: |-
+  合计
+server.tool.timestamps: |-
+  时间戳
+server.common.see_full: |-
+  查看全部

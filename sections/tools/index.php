@@ -581,6 +581,15 @@ switch ($_REQUEST['action']) {
         if (!check_perms('events_reward_history')) error(403);
         include(CONFIG['SERVER_ROOT'] . '/sections/tools/managers/events_reward_history.php');
         break;
+    case 'navigation':
+        include(CONFIG['SERVER_ROOT'] . '/sections/tools/managers/navigation_list.php');
+        break;
+    case 'navigation_alter':
+        include(CONFIG['SERVER_ROOT'] . '/sections/tools/managers/navigation_alter.php');
+        break;
+    case 'donation_log':
+        include(CONFIG['SERVER_ROOT'] . '/sections/tools/finances/donation_log.php');
+        break;
     default:
         include(CONFIG['SERVER_ROOT'] . '/sections/tools/browse.php');
 }

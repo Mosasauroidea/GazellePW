@@ -1084,4 +1084,17 @@ class Users {
             'uploadCount' => (int) $result['Uploads'],
         ];
     }
+    public static              function get_nav_items(): array {
+        $list = G::$Cache->get_value("nav_items");
+        if (!$list) {
+            $QueryID = G::$DB->get_query_id();
+            G::$DB->prepared_query("
+                SELECT id, tag, title, target, tests, test_user, mandatory, initial
+                FROM nav_items");
+            $list = G::$DB->to_array("id", MYSQLI_ASSOC, false);
+            G::$Cache->cache_value("nav_items", $list, 0);
+            G::$DB->set_query_id($QueryID);
+        }
+        return $list;
+    }
 }

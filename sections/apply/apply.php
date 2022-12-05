@@ -24,7 +24,7 @@ View::show_header(t('server.apply.apply'), 'apply,bbcode', 'PageApplyApply');
 
 <div class="LayoutBody">
     <div class="BodyHeader">
-        <h2 class="BodyHeader-nav"><?= t('server.apply.apply_for_a_role_at') ?></h2>
+        <h2 class="BodyHeader-nav"><?= t('server.apply.apply') ?></h2>
         <? if (check_perms('admin_manage_applicants') || Applicant::user_is_applicant($LoggedUser['ID'])) { ?>
             <div class="BodyNavLinks">
                 <? if (check_perms('admin_manage_applicants')) { ?>
@@ -41,27 +41,25 @@ View::show_header(t('server.apply.apply'), 'apply,bbcode', 'PageApplyApply');
     <?
     $Roles = ApplicantRole::get_list();
     if (count($Roles)) { ?>
-        <div class="Box is-noBorder">
-            <div class="Box-header">
-                <div class="Box-headerTitle">
+        <div class="Group">
+            <div class="Group-header">
+                <div class="Group-headerTitle">
                     <?= t('server.apply.open_roles') ?></div>
             </div>
-            <div class="Box-body">
-                <div class="BoxList HtmlText">
-                    <div><?= t('server.apply.referral_note') ?></div>
-                    <? foreach ($Roles as $title => $info) { ?>
-                        <div class="Box">
-                            <div class="Box-header">
-                                <div class="head"><?= $title ?></div>
-                            </div>
-                            <div class="Box-body" role_container">
-                                <div class="HtmlText PostArticle">
-                                    <?= Text::full_format($info['description']) ?>
-                                </div>
+            <div class="Group-body">
+                <div><?= t('server.apply.referral_note') ?></div>
+                <? foreach ($Roles as $title => $info) { ?>
+                    <div class="Box">
+                        <div class="Box-header">
+                            <div class="head"><?= $title ?></div>
+                        </div>
+                        <div class="Box-body" role_container">
+                            <div class="HtmlText PostArticle">
+                                <?= Text::full_format($info['description']) ?>
                             </div>
                         </div>
-                    <?  } /* foreach */ ?>
-                </div>
+                    </div>
+                <?  } /* foreach */ ?>
             </div>
         </div>
     <? } ?>
@@ -81,9 +79,10 @@ View::show_header(t('server.apply.apply'), 'apply,bbcode', 'PageApplyApply');
         }
         ?>
         <form class="send_form" id="applicationform" name="apply" action="/apply.php?action=save" method="post">
+            <input type="hidden" name="auth" value="<?= $LoggedUser['AuthKey'] ?>" />
             <div id="quickpost">
                 <? new TEXTAREA_PREVIEW('body', 'body', $Body, 95, 20, true, true, false, ['placeholder="' . t('server.apply.at_least_80_characters') . '"']) ?>
-                <div class="preview_submit">
+                <div class="Form-row">
                     <div><?= t('server.apply.role') ?>:
                         <select class="Input" name="role">
                             <option class="Select-option" value="">---</option>
@@ -91,10 +90,8 @@ View::show_header(t('server.apply.apply'), 'apply,bbcode', 'PageApplyApply');
                                 <option class="Select-option" value="<?= $title ?>" <?= $Role == $title ? ' selected' : '' ?>><?= $title ?></option>
                             <?  } ?>
                         </select>
-                        <input type="hidden" name="auth" value="<?= $LoggedUser['AuthKey'] ?>" />
                         <input class="Button" type="submit" value="<?= t('server.common.submit') ?>" />
                     </div>
-
                 </div>
             </div>
         </form>

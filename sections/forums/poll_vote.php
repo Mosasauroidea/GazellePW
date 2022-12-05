@@ -137,7 +137,7 @@ if (!isset($_POST['vote']) || !count($_POST['vote'])) {
 ?>
     <ul class="Poll-answers">
         <?
-        if ($ForumID != STAFF_FORUM) {
+        if ($ForumID != CONFIG['STAFF_FORUM']) {
             for ($i = 1, $il = count($Answers); $i <= $il; $i++) {
                 if (!empty($Votes[$i]) && $TotalVotes > 0) {
                     $Ratio = $Votes[$i] / $MaxVotes;

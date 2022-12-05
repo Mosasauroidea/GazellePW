@@ -2,17 +2,29 @@
 if (!check_perms('site_debug')) {
     error(403);
 }
-View::show_header('PHP Processes', '', 'PageToolProcessInfo');
-$PIDList = trim(`ps -C php-fpm -o pid --no-header`);
+View::show_header(t('server.tools.php_processes'), '', 'PageToolProcessInfo');
+
+// From Opsnet/Gazelle
+preg_match('/.*\/(.*)/', PHP_BINARY, $match, PREG_UNMATCHED_AS_NULL);
+$binary = $match[1] ?? 'php-fpm';
+$PIDList = trim(`ps -C $binary -o pid --no-header`);
+
 $PIDs = explode("\n", $PIDList);
 $Debug->log_var($PIDList, 'PID list');
 $Debug->log_var($PIDs, 'PIDs');
 ?>
 <div class="LayoutBody">
+    <div class="BodyHeader">
+        <h2 class="BodyHeader-nav"><?= t('server.tools.php_processes') ?></h2>
+    </div>
+    <?= count($PIDs) . ' processes' ?>
     <table class="TableProcessIinfo Table">
         <tr class="Table-rowHeader">
-            <td class="Table-cell" colspan="2">
-                <?= count($PIDs) . ' processes' ?>
+            <td class="Table-cellHeader">
+                PID
+            </td>
+            <td class="Table-cellHeader">
+                Info
             </td>
         </tr>
         <?

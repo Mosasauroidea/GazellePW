@@ -117,15 +117,15 @@ if (!check_perms('users_mod')) {
 if (isset($_POST['action'])) {
     switch ($_POST['add_all']) {
         case '-1':
-            error(403);
+            error(t('server.common.invalid_param'));
             break;
         case '0':
             $Usernames = db_string($_POST['usernames']);
             if (!$Usernames) {
-                error("请输入用户名！");
+                error(t('server.common.invalid_param'));
             }
             if (!($UserIDs = getUserIDs($Usernames))) {
-                error("用户名有误！");
+                error(t('server.common.invalid_param'));
             }
             break;
         case '1':
@@ -138,78 +138,88 @@ if (isset($_POST['action'])) {
             $UserIDs = G::$DB->collect("ID");
             break;
     }
-    if (isset($_POST['tokens'])) {
+    $Send = false;
+    if (!empty($_POST['tokens_numbers'])) {
         if (!check_perms('events_reward_tokens')) error(403);
         if ($_POST['tokens_permanent'] === "" || empty($_POST['tokens_numbers'])) {
-            error(403);
+            error(t('server.common.invalid_param'));
         }
         $TokensPermanent = $_POST['tokens_permanent'] ? true : false;
         if (!$TokensPermanent) {
             $TokensTime = db_string($_POST['tokens_time']);
             if (empty($TokensTime)) {
-                error(403);
+                error(t('server.common.invalid_param'));
             }
         } else {
             $TokensTime = false;
         }
         $TokensNumbers = intval($_POST['tokens_numbers']);
         if ($TokensNumbers <= 0) {
-            error("数量小于等于零！");
+            error(t('server.common.invalid_param'));
         }
         $SendToLeechDisabled = isset($_POST['leechdisabled']);
+        $Send = true;
     }
-    if (isset($_POST['invites'])) {
+    if (!empty($_POST['invites_numbers'])) {
         if (!check_perms('events_reward_invites')) error(403);
         if ($_POST['invites_permanent'] === "" || empty($_POST['invites_numbers'])) {
-            error(403);
+            error(t('server.common.invalid_param'));
         }
         $InvitesPermanent = $_POST['invites_permanent'] ? true : false;
         if (!$InvitesPermanent) {
             $InvitesTime = db_string($_POST['invites_time']);
             if (empty($InvitesTime)) {
-                error(403);
+                error(t('server.common.invalid_param'));
             }
         } else {
             $InvitesTime = false;
         }
         $InvitesNumbers = intval($_POST['invites_numbers']);
         if ($InvitesNumbers <= 0) {
-            error("数量小于等于零！");
+            error(t('server.common.invalid_param'));
         }
+        $Send = true;
     }
-    if (isset($_POST['bonus'])) {
-        if (!check_perms('events_reward_bonus')) error(403);
+    if (!empty($_POST['bonus_numbers'])) {
+        if (!check_perms('events_reward_bonus')) {
+            error(t('server.common.invalid_param'));
+        }
         if (empty($_POST['bonus_numbers'])) {
-            error(403);
+            error(t('server.common.invalid_param'));
         }
         $BonusNumbers = intval($_POST['bonus_numbers']);
         if ($BonusNumbers <= 0) {
-            error("数量小于等于零！");
+            error(t('server.common.invalid_param'));
         }
+        $Send = true;
     }
-    if (isset($_POST['badges'])) {
+    if (!empty($_POST['badgeid'])) {
         if (!check_perms('events_reward_badges')) error(403);
         if (empty($_POST['badgeid'])) {
-            error(403);
+            error(t('server.common.invalid_param'));
         }
         $BadgeID = intval($_POST['badgeid']);
+        $Send = true;
+    }
+    if (!$Send) {
+        error(t('server.common.invalid_param'));
     }
     $PM = db_string($_POST['pm']);
     eventsRewardLog($UserIDs, $InvitesNumbers, $InvitesTime, $TokensNumbers, $TokensTime, $BonusNumbers, $BadgeID, $PM);
-    if (isset($_POST['tokens'])) {
+    if (!empty($_POST['tokens_numbers'])) {
         addTokens($UserIDs, $TokensNumbers, $TokensTime, $SendToLeechDisabled);
     }
-    if (isset($_POST['invites'])) {
+    if (!empty($_POST['invites_numbers'])) {
         addInvites($UserIDs, $InvitesNumbers, $InvitesTime);
     }
-    if (isset($_POST['bonus'])) {
+    if (!empty($_POST['bonus_numbers'])) {
         addBonus($UserIDs, $BonusNumbers);
     }
-    if (isset($_POST['badges'])) {
+    if (!empty($_POST['badgeid'])) {
         addBadges($UserIDs, $BadgeID);
     }
     sendRewardPM($UserIDs, $InvitesNumbers, $InvitesTime, $TokensNumbers, $TokensTime, $BonusNumbers, $BadgeID);
-    header("Location: tools.php?action=events_reward");
+    header("Location: tools.php?action=events_reward_history");
     exit();
 }
 View::show_header(t('server.tools.events_reward'));
@@ -218,7 +228,7 @@ $Badges = Badges::get_badges_by_id();
 $BadgeLabels = Badges::get_badge_labels();
 ?>
 
-<div class="BoxBody">
+<div class="LayoutBody">
     <script>
         function check() {
             var str = '发放用户：'
@@ -275,99 +285,141 @@ $BadgeLabels = Badges::get_badge_labels();
             return confirm(str);
         }
     </script>
-    <form class="LayoutBody" method="post" onsubmit="return check()">
-        <input type="hidden" name="action" value="events_reward" />
-        <div class="BodyHeader">
-            <h2 class="BodyHeader-nav"><?= t('server.tools.events_reward') ?></h2>
-        </div>
+    <div class="BodyHeader">
+        <h2 class="BodyHeader-nav"><?= t('server.tools.events_reward') ?></h2>
         <div class="BodyNavLinks">
-            <div class="center"><a href="tools.php?action=events_reward_history" class="brackets"><?= t('server.tools.events_reward_history') ?></a></div>
+            <div><a href="tools.php?action=events_reward_history" class="brackets"><?= t('server.tools.events_reward_history') ?></a></div>
         </div>
-        <div id="add_to">
-            <span><?= t('server.tools.add_to') ?>:</span>
-            <label><input id="add_all_1" type="radio" name="add_all" value="1" onclick="$('.add_disabled').show();$('#usernames').hide()"><?= t('server.tools.add_all') ?></label>
-            <label><input id="add_all_0" type="radio" name="add_all" value="0" onclick="$('.add_disabled').hide();$('#usernames').show()"><?= t('server.tools.add_part') ?></label>
-            <input class="add_disabled" id="add_disabled" name="add_disabled" style="display: none;" type="checkbox"><label style="display: none;" class="add_disabled" for="add_disabled"><?= t('server.tools.add_to_disabled_users') ?></label>
-            <textarea class="Input" id="usernames" name="usernames" style="display: none;" placeholder="<?= t('server.tools.add_to_placeholder') ?>"></textarea>
-        </div>
-        <? if (check_perms('events_reward_tokens')) { ?>
-            <div class="Box events_reward_container">
-                <div class="Box-header">
-                    </label><input type="checkbox" id="someone_tokens_input" name="tokens" onclick="$('#someone_tokens').toggle()"><label for="someone_tokens_input"><?= t('server.tools.someone_tokens') ?>
+    </div>
+    <form class="Form" method="post" onsubmit="return check()">
+        <input type="hidden" name="action" value="events_reward" />
+        <div class="Form-rowList" variant="header">
+            <div class="Form-rowHeader">
+                <?= t('server.tools.events_reward') ?>
+            </div>
+            <div class="Form-row" id="add_to">
+                <div class="Form-label"><?= t('server.tools.add_to') ?>:</div>
+                <div class="Form-inputs">
+                    <div class="RadioGroup">
+                        <div class="Radio">
+                            <input class="Input" id="add_all_1" type="radio" name="add_all" value="1" onclick="$('.add_disabled').show();$('#usernames').hide()" /><label class="Radio-label" for="add_all_1"><?= t('server.tools.add_all') ?></label>
+                        </div>
+                        <div class="Radio">
+                            <input class="Input" id="add_all_0" type="radio" name="add_all" value="0" onclick="$('.add_disabled').hide();$('#usernames').show()" /><label class="Radio-label" for="add_all_0"><?= t('server.tools.add_part') ?></label>
+                        </div>
+                    </div>
+                    <div class="Checkbox">
+                        <input class="Input add_disabled" id="add_disabled" name="add_disabled" style="display: none;" type="checkbox" />
+                        <label style="display: none;" class="Checkbox-label  add_disabled" for="add_disabled"><?= t('server.tools.add_to_disabled_users') ?></label>
+                    </div>
+                    <textarea class="Input" id="usernames" name="usernames" style="display: none;" placeholder="<?= t('server.tools.add_to_placeholder') ?>"></textarea>
                 </div>
-                <div class="Box-body" id="someone_tokens" style="display: none;">
-                    <div>
-                        <span><?= t('server.tools.token_type') ?>:</span>
-                        <label><input id="tokens_permanent_1" type="radio" name="tokens_permanent" value="1" onclick="$('#tokens_time').hide()"><?= t('server.tools.permanent') ?></label>
-                        <label><input id="tokens_permanent_0" type="radio" name="tokens_permanent" value="0" onclick="$('#tokens_time').show()"><?= t('server.tools.temporary') ?></label>
+            </div>
+            <? if (check_perms('events_reward_tokens')) { ?>
+                <div class="Form-rowSubHeader">
+                    <?= t('server.tools.someone_tokens') ?>
+                </div>
+                <div class="Form-row">
+                    <div class="Form-label"><?= t('server.tools.token_type') ?>:</div>
+                    <div class="Form-inputs">
+                        <div class="RadioGroup">
+                            <div class="Radio">
+                                <input class="Input" id="tokens_permanent_1" type="radio" name="tokens_permanent" value="1" onclick="$('#tokens_time').hide()" />
+                                <label class="Radio-label" for="tokens_permanent_1"><?= t('server.tools.permanent') ?></label>
+                            </div>
+                            <div class="Radio">
+                                <input class="Input" id="tokens_permanent_0" type="radio" name="tokens_permanent" value="0" onclick="$('#tokens_time').show()" />
+                                <label class="Radio-label" for="tokens_permanent_0"><?= t('server.tools.temporary') ?></label>
+                            </div>
+                        </div>
                         <input id="tokens_time" type="date" name="tokens_time" style="display: none;" />
                     </div>
-                    <div><span><?= t('server.tools.token_number') ?>:</span>
+                </div>
+                <div class="Form-row">
+                    <div class="Form-label"><?= t('server.tools.token_number') ?>:</div>
+                    <div class="Form-inputs">
                         <input class="Input is-small" type="number" id="tokens_numbers" name="tokens_numbers">
                     </div>
-                    <div><input id="leechdisabled" name="leechdisabled" type="checkbox"><label for="leechdisabled"><?= t('server.tools.leechdisabled') ?></label< /div>
+                </div>
+                <div class="Form-row">
+                    <div class="Form-label">
+                    </div>
+                    <div class="Form-inputs">
+                        <div class="Checkbox">
+                            <input class="Input" id="leechdisabled" name="leechdisabled" type="checkbox">
+                            <label class="Checkbox-label" for="leechdisabled"><?= t('server.tools.leechdisabled') ?></label>
+                        </div>
                     </div>
                 </div>
-            </div>
-        <? }
-        if (check_perms('events_reward_invites')) { ?>
-            <div class="Box events_reward_container">
-                <div class="Box-header">
-                    <input type="checkbox" id="someone_invites_input" name="invites" onclick="$('#someone_invites').toggle()"><label for="someone_invites_input"><?= t('server.tools.someone_invites') ?></label>
+            <? }
+            if (check_perms('events_reward_invites')) { ?>
+                <div class="Form-rowSubHeader">
+                    <?= t('server.tools.someone_invites') ?>
                 </div>
-                <div class="Box-body" id="someone_invites" style="display: none;">
-                    <div>
-                        <span><?= t('server.tools.invites_type') ?>:</span>
-                        <label><input id="invites_permanent_1" type="radio" name="invites_permanent" value="1" onclick="$('#invites_time').hide()"><?= t('server.tools.permanent') ?></label>
-                        <label><input id="invites_permanent_0" type="radio" name="invites_permanent" value="0" onclick="$('#invites_time').show()"><?= t('server.tools.temporary') ?></label>
+                <div class="Form-row">
+                    <div class="Form-label"><?= t('server.tools.invites_type') ?>:</div>
+                    <div class="Form-inputs">
+                        <div class="RadioGroup">
+                            <div class="Radio">
+                                <input class="Input" id="invites_permanent_1" type="radio" name="invites_permanent" value="1" onclick="$('#invites_time').hide()" />
+                                <label class="Radio-label" for="invites_permanent_1"><?= t('server.tools.permanent') ?></label>
+                            </div>
+                            <div class="Radio">
+                                <input class="Input" id="invites_permanent_0" type="radio" name="invites_permanent" value="0" onclick="$('#invites_time').show()" />
+                                <label for="invites_permanent_0" class="Radio-label"><?= t('server.tools.temporary') ?></label>
+                            </div>
+                        </div>
                         <input id="invites_time" type="date" name="invites_time" style="display: none;" />
                     </div>
-                    <div><span><?= t('server.tools.invites_number') ?>:</span>
-                        <input class="Input is-small" type="number" id="invites_numbers" name="invites_numbers">
+                </div>
+                <div class="Form-row">
+                    <div class="Form-label"><?= t('server.tools.invites_number') ?>:</div>
+                    <div class="Form-inputs">
+                        <input class="Input is-small" type="number" id="invites_numbers" name="invites_numbers" />
                     </div>
                 </div>
-            </div>
-        <? }
-        if (check_perms('events_reward_bonus')) { ?>
-            <div class="Box events_reward_container">
-                <div class="Box-header">
-                    <input type="checkbox" id="someone_bonus_input" name="bonus" onclick="$('#someone_bonus').toggle()"><label for="someone_bonus_input"><?= t('server.tools.someone_bonus') ?></label>
+            <? }
+            if (check_perms('events_reward_bonus')) { ?>
+                <div class="Form-rowSubHeader">
+                    <?= t('server.tools.someone_bonus') ?>
                 </div>
-                <div class="Box-body" id="someone_bonus" style="display: none;">
-                    <div><span><?= t('server.tools.bonus_number') ?>:</span>
-                        <input class="Input is-small" type="number" id="bonus_numbers" name="bonus_numbers">
+                <div class="Form-row">
+                    <div class="Form-label"><?= t('server.tools.bonus_number') ?>:</div>
+                    <div class="Form-inputs">
+                        <input class="Input is-small" type="number" id="bonus_numbers" name="bonus_numbers" />
                     </div>
                 </div>
-            </div>
-        <? }
-        if (check_perms('events_reward_badges') && CONFIG['ENABLE_BADGE']) { ?>
-            <div class="Box events_reward_container">
-                <div class="Box-header">
-                    <input type="checkbox" id="someone_badges_input" name="badges" onclick="$('#someone_badges').toggle()"><label for="someone_badges_input"><?= t('server.tools.badge_send') ?></label>
+            <? }
+            if (check_perms('events_reward_badges') && CONFIG['ENABLE_BADGE']) { ?>
+                <div class="Form-rowSubHeader">
+                    <?= t('server.tools.badge_send') ?>
                 </div>
-                <div class="Box-body" id="someone_badges" style="display: none;">
-                    <div><span><?= t('server.tools.badge_send') ?>:</span>
+                <div class="Form-row">
+                    <div class="Form-label"><?= t('server.tools.badge_send') ?>:</div>
+                    <div class="Form-inputs">
                         <select class="Input" id="badgeid" name='badgeid'>
                             <?
                             foreach ($Badges as $Badge) {
-                                echo "<option value='" . $Badge['ID'] . "'>" . $Badge['Level'] . "-" . $BadgeLabels[$Badge['Label']]['Remark'] . "</option>";
+                                echo "<option  class='Select-option' value='" . $Badge['ID'] . "'>" . $Badge['Level'] . "-" . $BadgeLabels[$Badge['Label']]['Remark'] . "</option>";
                             }
                             ?>
                         </select>
                     </div>
                 </div>
+            <? } ?>
+            <div class="Form-rowSubHeader">
+                <?= t('server.tools.reason') ?>
             </div>
-        <? } ?>
-        <div class="Box events_reward_container">
-            <div class="Box-header">
-                <?= t('server.tools.events_reward_pm') ?>
+            <div class="Form-row">
+                <div class="Form-label"><?= t('server.tools.reason') ?>:</div>
+                <div class="Form-inputs">
+                    <input class="Input" type="text" id="pm" name="pm" placeholder="<?= t('server.tools.reason_placeholder') ?>" size="80" />
+                </div>
             </div>
-            <div class="Box-body">
-                <span><?= t('server.tools.reason') ?>:</span>
-                <input class="Input" type="text" id="pm" name="pm" placeholder="<?= t('server.tools.reason_placeholder') ?>" size="80" />
+            <div class="Form-row">
+                <div><input class="Button" type="submit" value="<?= t('server.tools.send_rewards') ?>"></div>
             </div>
         </div>
-        <div class="center"><input class="Button" type="submit" value="<?= t('server.tools.send_rewards') ?>"></div>
     </form>
 </div>
 <?

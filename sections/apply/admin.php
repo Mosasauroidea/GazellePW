@@ -54,12 +54,12 @@ if (isset($_POST['auth'])) {
         $Roles = ApplicantRole::get_list(true);
         if (count($Roles)) {
     ?>
-            <div class="Box is-noBorder">
-                <div class="Box-header">
-                    <div class="Box-headerTitle">
+            <div class="Group">
+                <div class="Group-header">
+                    <div class="Group-headerTitle">
                         <?= t('server.apply.current_roles') ?></div>
                 </div>
-                <div class="Box-body BoxList">
+                <div class="Group-body">
                     <? foreach ($Roles as $title => $info) { ?>
                         <form id="role_edit<?= $info['id'] ?>" method="post" class="LayoutBody" action="/apply.php?action=admin">
                             <div class="Box">

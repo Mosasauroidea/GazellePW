@@ -134,57 +134,89 @@ if (isset($_POST['GroupID'])) {
     View::show_header(t('server.tools.featured_movie'));
 
 ?>
-    <div class="BodyHeader">
-        <h2 class="BodyHeader-nav"><?= t('server.tools.featured_movie') ?></h2>
-    </div>
+    <div class="LayoutBody">
+        <div class="BodyHeader">
+            <h2 class="BodyHeader-nav"><?= t('server.tools.featured_movie') ?></h2>
+        </div>
 
-    <div class="thin BoxBody">
         <form class="create_form" name="album" method="post" action="">
-            <div class="">
-                <input type="hidden" name="action" value="featuremovie" />
-                <input type="hidden" name="auth" value="<?= $LoggedUser['AuthKey'] ?>" />
-                <h3><?= t('server.tools.album_id') ?></h3>
-                <input class="Input" type="text" name="GroupID" id="groupid" /> <br />
-                <h3><?= t('server.tools.pick_reason') ?></h3>
-                <textarea class="Input" name="Body" cols="95" rows="15"></textarea><br /><br />
-                <input type="checkbox" name="FLTorrents" checked />&nbsp;<?= t('server.tools.mark_torrents_as') ?>&nbsp;
-                <select class="Input" name="freeleechtype">
-                    <option class="Select-option" value="1" selected><?= t('server.tools.fl') ?></option>
-                    <option class="Select-option" value="2"><?= t('server.tools.nl') ?></option>
-                    <option class="Select-option" value="0"><?= t('server.tools.normal') ?></option>
-                </select>
-                <script>
-                    $(document).ready(() => {
-                        $("#limit-time").click(() => {
-                            if ($("#limit-time")[0].checked) {
-                                $("#input-free-date,#input-free-time").show()
-                                const d = new Date()
-                                $("#input-free-date")[0].value = d.getFullYear() + "-" + ("0" + (d.getMonth() + 1)).substr(-2) + "-" + ("0" + d.getDate()).substr(-2)
-                                $("#input-free-time")[0].value = ("0" + d.getHours()).substr(-2) + ":" + ("0" + d.getMinutes()).substr(-2)
-                            } else {
-                                $("#input-free-date,#input-free-time").hide()
-                            }
-                        })
-                    })
-                </script>
-                <input type="checkbox" id="limit-time" name="limit-time" <?= $Torrent['FreeEndTime'] ? " checked=\"checked\"" : "" ?> />&nbsp;<label for="limit-time" style="display: inline;"><?= t('server.tools.timer') ?></label>&nbsp;
-                <input id="input-free-date" name="free-date" type="date" style="display:none;" /><input id="input-free-time" name="free-time" type="time" style="display:none;" />
-                &nbsp;<?= t('server.tools.for_reason') ?>&nbsp;<select class="Input" name="freeleechreason">
-                    <? $FL = array('N/A', 'Staff Pick', 'Perma-FL');
-                    foreach ($FL as $Key => $FLType) { ?>
-                        <option class="Select-option" value="<?= $Key ?>" <?= $FLType == 'Staff Pick' ? 'selected' : '' ?>><?= $FLType ?></option>
-                    <?      } ?>
-                </select><br /><br />
-                <input type="checkbox" name="NLOver" />&nbsp;<?= t('server.tools.nl_torrents_over') ?>
-                <input class="Input is-small" type="text" name="size" value="<?= isset($_POST['size']) ? $_POST['size'] : '1' ?>" size=1 />
-                <select class="Input" name="scale">
-                    <option class="Select-option" value="g" selected>GB</option>
-                </select><?= t('server.tools.nl_torrents_over_after') ?><br /><br />
-
-                <div class="center">
+            <input type="hidden" name="action" value="featuremovie" />
+            <input type="hidden" name="auth" value="<?= $LoggedUser['AuthKey'] ?>" />
+            <div class="Form-rowList" variant="header">
+                <div class="Form-rowHeader">
+                    <?= t('server.tools.featured_movie') ?>
+                </div>
+                <div class="Form-row">
+                    <div class="Form-label"><?= t('server.tools.album_id') ?></div>
+                    <div class="Form-inputs">
+                        <input class="Input" type="text" name="GroupID" id="groupid" />
+                    </div>
+                </div>
+                <div class="Form-row">
+                    <div class="Form-label"><?= t('server.tools.pick_reason') ?></div>
+                    <div class="Form-items">
+                        <? new TEXTAREA_PREVIEW("Body") ?>
+                    </div>
+                </div>
+                <div class="Form-row">
+                    <div class="Form-label">
+                    </div>
+                    <div class="Form-inputs">
+                        <div class="Checkbox">
+                            <input class="Input" type="checkbox" name="FLTorrents" checked />
+                            <label class="Checkbox-label"> <?= t('server.tools.mark_torrents_as') ?></label>
+                        </div>
+                        <select class="Input" name="freeleechtype">
+                            <option class="Select-option" value="1" selected><?= t('server.tools.fl') ?></option>
+                            <option class="Select-option" value="2"><?= t('server.tools.nl') ?></option>
+                            <option class="Select-option" value="0"><?= t('server.tools.normal') ?></option>
+                        </select>
+                        <script>
+                            $(document).ready(() => {
+                                $("#limit-time").click(() => {
+                                    if ($("#limit-time")[0].checked) {
+                                        $("#input-free-date,#input-free-time").show()
+                                        const d = new Date()
+                                        $("#input-free-date")[0].value = d.getFullYear() + "-" + ("0" + (d.getMonth() + 1)).substr(-2) + "-" + ("0" + d.getDate()).substr(-2)
+                                        $("#input-free-time")[0].value = ("0" + d.getHours()).substr(-2) + ":" + ("0" + d.getMinutes()).substr(-2)
+                                    } else {
+                                        $("#input-free-date,#input-free-time").hide()
+                                    }
+                                })
+                            })
+                        </script>
+                        <div class="Checkbox">
+                            <input class="Input" type="checkbox" id="limit-time" name="limit-time" <?= $Torrent['FreeEndTime'] ? " checked=\"checked\"" : "" ?> />
+                            <label class="Checkbox-label" for="limit-time" style="display: inline;"><?= t('server.tools.timer') ?></label>&nbsp;
+                        </div>
+                        <input id="input-free-date" name="free-date" type="date" style="display:none;" />
+                        <input id="input-free-time" name="free-time" type="time" style="display:none;" />
+                        <?= t('server.tools.for_reason') ?>
+                        <select class="Input" name="freeleechreason">
+                            <? $FL = array('N/A', 'Staff Pick', 'Perma-FL');
+                            foreach ($FL as $Key => $FLType) { ?>
+                                <option class="Select-option" value="<?= $Key ?>" <?= $FLType == 'Staff Pick' ? 'selected' : '' ?>><?= $FLType ?></option>
+                            <?      } ?>
+                        </select>
+                    </div>
+                </div>
+                <div class="Form-row">
+                    <div class="Form-label">
+                    </div>
+                    <div class="Form-inputs">
+                        <div class="Checkbox">
+                            <input class="Input" type="checkbox" name="NLOver" />
+                            <label class="Checkbox-label"><?= t('server.tools.nl_torrents_over') ?></label>
+                        </div>
+                        <input class="Input is-small" type="number" name="size" value="<?= isset($_POST['size']) ? $_POST['size'] : '1' ?>" size=1 />
+                        <select class="Input" name="scale">
+                            <option class="Select-option" value="g" selected>GB</option>
+                        </select><?= t('server.tools.nl_torrents_over_after') ?>
+                    </div>
+                </div>
+                <div class="Form-row">
                     <input class="Button" type="submit" name="submit" value="<?= t('server.common.submit') ?>" />
                 </div>
-            </div>
         </form>
     </div>
 <?

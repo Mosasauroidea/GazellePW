@@ -7,8 +7,7 @@ if (!check_perms('admin_donor_log')) {
 include(CONFIG['SERVER_ROOT'] . '/sections/donate/config.php');
 include(CONFIG['SERVER_ROOT'] . '/sections/donate/const.php');
 
-define('DONATIONS_PER_PAGE', 50);
-list($Page, $Limit) = Format::page_limit(DONATIONS_PER_PAGE);
+list($Page, $Limit) = Format::page_limit(CONFIG['DONATIONS_PER_PAGE']);
 
 $AfterDate = $_GET['after_date'];
 $BeforeDate = $_GET['before_date'];
@@ -146,7 +145,7 @@ if (empty($_GET['email']) && empty($_GET['source']) && empty($_GET['username']) 
 <br />
 <div class="BodyNavLinks">
     <?
-    $Pages = Format::get_pages($Page, $Results, DONATIONS_PER_PAGE, 11);
+    $Pages = Format::get_pages($Page, $Results, CONFIG['DONATIONS_PER_PAGE'], 11);
     echo $Pages;
     ?>
 </div>

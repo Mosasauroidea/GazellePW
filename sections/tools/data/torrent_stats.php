@@ -35,9 +35,12 @@ if (!$TorrentStats = $Cache->get_value('new_torrent_stats')) {
 
 ?>
 <div class="LayoutBody">
-    <div class="box">
-        <div class="head"><?= t('server.tools.overall_stats') ?></div>
-        <div class="pad">
+    <div class="BodyHeader">
+        <h2 class="BodyHeader-nav"><?= t('server.tools.torrent_stats') ?></h2>
+    </div>
+    <div class="Box">
+        <div class="Box-header"><?= t('server.tools.overall_stats') ?></div>
+        <div class="Box-body">
             <ul class="stats nobullet">
                 <li><strong><?= t('server.tools.total_torrents') ?>: </strong><?= number_format($TorrentCount) ?></li>
                 <li><strong><?= t('server.tools.total_size') ?>: </strong><?= Format::get_size($TotalSize) ?></li>
@@ -50,10 +53,9 @@ if (!$TorrentStats = $Cache->get_value('new_torrent_stats')) {
             </ul>
         </div>
     </div>
-    <br />
-    <div class="box">
-        <div class="head"><?= t('server.tools.upload_frequency') ?></div>
-        <div class="pad">
+    <div class="Box">
+        <div class="Box-header"><?= t('server.tools.upload_frequency') ?></div>
+        <div class="Box-body">
             <ul class="stats nobullet">
                 <li><strong><?= t('server.tools.torrents_today') ?>: </strong><?= number_format($DayNum) ?></li>
                 <li><strong><?= t('server.tools.size_today') ?>: </strong><?= Format::get_size($DaySize) ?></li>

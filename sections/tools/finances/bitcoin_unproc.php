@@ -2,7 +2,7 @@
 if (!check_perms('users_mod')) {
     error(403);
 }
-$Title = t('server.tools.unprocessed_bitcoin_donations');
+$Title = t('server.tools.bitcoin_donations');
 View::show_header($Title, '', 'PageToolBitcoinUnproc');
 
 // Find all donors
@@ -17,7 +17,12 @@ $OldDonations = G::$DB->to_pair(0, 1, false);
 <div class="LayoutBody">
     <div class="BodyHeader">
         <h2 class="BodyHeader-nav"><?= $Title ?></h2>
+        <h2 class="BodyHeader-subNav"><?= t('server.tools.btc_donations_unprocessed') ?></h2>
+        <div class="BodyNavLinks">
+            <a href="tools.php?action=bitcoin_balance" class="brackets"><?= t('server.tools.btc_donations_balance') ?></a>
+        </div>
     </div>
+
     <div class="box2">
         <div class="pad"><?= t('server.tools.do_not_process_these_donations_manually') ?></div>
     </div>

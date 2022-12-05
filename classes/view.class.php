@@ -130,6 +130,16 @@ class View {
     public static function line($Str) {
 ?>
         <div><?= $Str ?></div>
+        <?
+    }
+
+    public static function pages($Pages) {
+        if ($Pages) {
+        ?>
+            <div class="BodyNavLinks">
+                <?= $Pages ?>
+            </div>
 <?
+        }
     }
 }

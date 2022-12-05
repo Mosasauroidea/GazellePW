@@ -106,7 +106,6 @@ class Misc {
         return self::send_pm($ToID, $FromID, $Subject, $Body, $ConvID);
     }
 
-
     /**
      * Sends a PM from $FromId to $ToId.
      *

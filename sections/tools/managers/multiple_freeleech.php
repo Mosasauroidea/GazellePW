@@ -85,6 +85,7 @@ if (isset($_POST['torrents'])) {
 ?>
 <div class="LayoutBody">
     <h2><?= t('server.tools.h2_global_torrents_sales_promotion_management') ?></h2>
+    <? /*
     <div class="TableContainer pad box" id="torrent_sale_management">
         <table id="torrent_sale_management_table">
             <tr>
@@ -270,7 +271,7 @@ if (isset($_POST['torrents'])) {
             </tr>
         </table>
     </div>
-
+*/ ?>
 
 
 

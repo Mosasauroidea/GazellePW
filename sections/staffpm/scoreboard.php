@@ -74,11 +74,11 @@ View::show_header('Staff Inbox', 'PageStaffPMScoreboard');
         $DB->prepared_query($BaseSQL, 1, 1, $LoggedUser['Class'], ...$SupportStaff);
         $Results = $DB->to_array();
         ?>
-        <div class="Box is-noBorder">
-            <div class="Box-header">
-                <div class="Box-headerTitle"><?= t('server.staffpm.inbox_action_last_24_hours') ?></div>
+        <div class="Group">
+            <div class="Group-header">
+                <div class="Group-headerTitle"><?= t('server.staffpm.inbox_action_last_24_hours') ?></div>
             </div>
-            <div class="Box-body">
+            <div class="Group-body">
                 <table class="Table">
                     <tr class="Table-rowHeader">
                         <td class="Table-cell"><?= t('server.staff.username') ?></td>
@@ -102,11 +102,11 @@ View::show_header('Staff Inbox', 'PageStaffPMScoreboard');
         $DB->prepared_query($BaseSQL, 7, 7, $LoggedUser['Class'], ...$SupportStaff);
         $Results = $DB->to_array();
         ?>
-        <div class="Box is-noBorder">
-            <div class="Box-header">
-                <div class="Box-headerTitle"><?= t('server.staffpm.inbox_action_last_week') ?></div>
+        <div class="Group">
+            <div class="Group-header">
+                <div class="Group-headerTitle"><?= t('server.staffpm.inbox_action_last_week') ?></div>
             </div>
-            <div class="Box-body">
+            <div class="Group-body">
                 <table class="Table">
                     <tr class="Table-rowHeader">
                         <td class="Table-cell"><?= t('server.staff.username') ?></td>
@@ -130,11 +130,11 @@ View::show_header('Staff Inbox', 'PageStaffPMScoreboard');
         $DB->prepared_query($BaseSQL, 30, 30, $LoggedUser['Class'], ...$SupportStaff);
         $Results = $DB->to_array();
         ?>
-        <div class="Box is-noBorder">
-            <div class="Box-header">
-                <div class="Box-headerTitle"><?= t('server.staffpm.inbox_action_last_month') ?></div>
+        <div class="Group">
+            <div class="Group-header">
+                <div class="Group-headerTitle"><?= t('server.staffpm.inbox_action_last_month') ?></div>
             </div>
-            <div class="Box-body">
+            <div class="Group-body">
                 <table class="Table">
                     <tr class="Table-rowHeader">
                         <td class="Table-cell"><?= t('server.staff.username') ?></td>
@@ -158,11 +158,11 @@ View::show_header('Staff Inbox', 'PageStaffPMScoreboard');
         $DB->prepared_query($BaseSQL, 365000, 365000, $LoggedUser['Class'], ...$SupportStaff);
         $Results = $DB->to_array();
         ?>
-        <div class="Box is-noBorder">
-            <div class="Box-header">
-                <div class="Box-headerTitle"><?= t('server.staffpm.inbox_actions_total') ?></div>
+        <div class="Group">
+            <div class="Group-header">
+                <div class="Group-headerTitle"><?= t('server.staffpm.inbox_actions_total') ?></div>
             </div>
-            <div class="Box-body">
+            <div class="Group-body">
                 <table class="Table">
                     <tr class="Table-rowHeader">
                         <td class="Table-cell"><?= t('server.staff.username') ?></td>

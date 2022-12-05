@@ -459,7 +459,7 @@ View::show_header(t('server.torrents.header'), 'browse', 'PageTorrentHome');
         $text1 = t('server.torrents.search_empty_1');
         $text2 = t('server.torrents.search_empty_2');
         print <<<HTML
-<div class="BoxBody is-noBorder center">
+<div class="center">
 	    <h2>$text1</h2>
 	    <p>$text2</p>
 </div>

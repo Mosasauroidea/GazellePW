@@ -42,9 +42,12 @@ $StaffPMs = $DB->query(
         ?>
             <form class="manage_form" name="staff_messages" method="post" action="staffpm.php" id="messageform">
                 <input type="hidden" name="action" value="multiresolve" />
-                <div class="Box is-noBorder">
-                    <div class="Box-header"><?= t('server.staffpm.open_messages') ?></div>
-                    <div class="Box-body BoxList">
+                <div class="Group">
+                    <div class="Group-header">
+                        <div class="Group-headerTitle">
+                            <?= t('server.staffpm.open_messages') ?></div>
+                    </div>
+                    <div class="Group-body">
                         <div class="TableContainer">
                             <table class="Table TableUserInbox">
                                 <tr class="Table-rowHeader">
@@ -76,9 +79,9 @@ $StaffPMs = $DB->query(
                     </div>
                 </div>
             </form>
-            <div class="Box is-noBorder">
-                <div class="Box-header"><?= t('server.staffpm.resolved_messages') ?></div>
-                <div class="Box-body">
+            <div class="Group">
+                <div class="Group-header"><?= t('server.staffpm.resolved_messages') ?></div>
+                <div class="Group-body">
                     <div class="TableContainer">
                         <table class="TableUserInbox Table">
                             <tr class="Table-rowHeader">

@@ -7,8 +7,6 @@ View::show_header(t('server.tools.manage_stylesheets'));
 <div class="LayoutBody">
     <div class="BodyHeader">
         <h2 class="BodyHeader-nav"><?= t('server.tools.manage_stylesheets') ?></h2>
-        <div class="BodyNavLinks">
-        </div>
     </div>
     <?php
     $DB->prepared_query("
@@ -47,9 +45,8 @@ View::show_header(t('server.tools.manage_stylesheets'));
             <?php    } ?>
         </table>
     <?php
-    } else { ?>
-        <h2 align="center"><?= t('server.tools.there_are_no_stylesheets') ?></h2>
-    <?php
+    } else {
+        View::line(t('server.tools.there_are_no_stylesheets'));
     } ?>
 </div>
 <?php

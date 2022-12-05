@@ -15,37 +15,41 @@ if (!check_perms('site_collages_delete') && $UserID != $LoggedUser['ID']) {
     error(403);
 }
 
-View::show_header('Delete collage', '', 'PageCollageDelete');
+View::show_header(t('server.collages.collage'), '', 'PageCollageDelete');
 ?>
-<div class="thin center">
-    <div class="box" id="collage_delete_box">
-        <div class="head colhead">
-            <?= t('server.collages.delete_collage') ?>
-        </div>
-        <div class="pad">
-            <form class="delete_form" name="collage" action="collages.php" method="post">
-                <input type="hidden" name="action" value="take_delete" />
-                <input type="hidden" name="auth" value="<?= $LoggedUser['AuthKey'] ?>" />
-                <input type="hidden" name="collageid" value="<?= $CollageID ?>" />
-                <?
-                if ($CategoryID == $PersonalCollageCategoryCat) {
-                ?>
-                    <div class="alertbar" style="margin-bottom: 1em;">
-                        <strong><?= t('server.collages.delete_warning') ?></strong>
-                    </div>
-                <?
-                }
-                ?>
-                <div class="field_div">
-                    <strong><?= t('server.collages.reason') ?>: </strong>
-                    <input class="Input" type="text" name="reason" size="40" />
-                </div>
-                <div class="submit_div">
-                    <input value="Delete" type="submit" />
-                </div>
-            </form>
-        </div>
+<div class="LayoutBody">
+    <div class="BodyHeader">
+        <h2 class="BodyHeader-nav"><?= t('server.collages.collage') ?></h2>
     </div>
+    <form class="Form delete_form" name="collage" action="collages.php" method="post">
+        <input type="hidden" name="action" value="take_delete" />
+        <input type="hidden" name="auth" value="<?= $LoggedUser['AuthKey'] ?>" />
+        <input type="hidden" name="collageid" value="<?= $CollageID ?>" />
+        <div class="Form-rowList" variant="header">
+            <div class="Form-rowHeader">
+                <?= t('server.collages.delete_collage') ?>
+            </div>
+            <?
+            if ($CategoryID == $PersonalCollageCategoryCat) {
+            ?>
+                <div class="Form-row alertbar">
+                    <strong><?= t('server.collages.delete_warning') ?></strong>
+                </div>
+            <?
+            }
+            ?>
+            <div class="Form-row">
+                <div class="Form-label"><?= t('server.collages.reason') ?>: </div>
+                <div class="Form-inputs">
+                    <input class="Input" type="text" name="reason" size="40" />
+                    </dvi>
+                </div>
+            </div>
+            <div class="Form-row">
+                <button class="Button" value="Delete" type="submit"><?= t('server.common.delete') ?></button>
+            </div>
+        </div>
+    </form>
 </div>
 <?
 View::show_footer();

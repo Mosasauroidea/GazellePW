@@ -40,43 +40,45 @@ $DB->query('SELECT FOUND_ROWS()');
 list($Results) = $DB->next_record();
 $DB->set_query_id($RS);
 
-if ($DB->has_results()) {
+$Pages = Format::get_pages($Page, $Results, USERS_PER_PAGE, 11);
 ?>
+<div class="LayoutPage">
     <div class="BodyHeader">
         <h2 class="BodyHeader-nav"><?= t('server.tools.dupe_ips') ?></h2>
     </div>
-    <div class="BodyNavLinks">
-        <?
-        $Pages = Format::get_pages($Page, $Results, USERS_PER_PAGE, 11);
-        echo $Pages;
-        ?>
-    </div>
-    <table class="Table">
-        <tr class="Table-rowHeader">
-            <td class="Table-cell"><?= t('server.tools.user') ?></td>
-            <td class="Table-cell"><?= t('server.tools.td_ip_address') ?></td>
-            <td class="Table-cell"><?= t('server.tools.dupes') ?></td>
-            <td class="Table-cell"><?= t('server.tools.registered') ?></td>
-        </tr>
-        <?
-        while (list($UserID, $IP, $Username, $PermissionID, $Enabled, $Donor, $Warned, $Joined, $Uses) = $DB->next_record()) {
-        ?>
-            <tr class="Table-row">
-                <td class="Table-cell"><?= Users::format_username($UserID, true, true, true, true) ?></td>
-                <td class="Table-cell">
-                    <span style="float: left;"><?= Tools::get_host_by_ajax($IP) . " ($IP)" ?></span><span style="float: right;"><a href="userhistory.php?action=ips&amp;userid=<?= $UserID ?>" data-tooltip="<?= t('server.tools.history') ?>" class="brackets">H</a> <a href="user.php?action=search&amp;ip_history=on&amp;ip=<?= display_str($IP) ?>" data-tooltip="<?= t('server.tools.search') ?>" class="brackets">S</a></span>
-                </td>
-                <td class="Table-cell"><?= display_str($Uses) ?></td>
-                <td class="Table-cell"><?= time_diff($Joined) ?></td>
+    <?
+    if ($DB->has_results()) {
+    ?>
+        <? View::pages($Pages) ?>
+        <table class="Table">
+            <tr class="Table-rowHeader">
+                <td class="Table-cell"><?= t('server.tools.user') ?></td>
+                <td class="Table-cell"><?= t('server.tools.td_ip_address') ?></td>
+                <td class="Table-cell"><?= t('server.tools.dupes') ?></td>
+                <td class="Table-cell"><?= t('server.tools.registered') ?></td>
             </tr>
-        <?  } ?>
-    </table>
-    <div class="BodyNavLinks">
-        <? echo $Pages; ?>
-    </div>
-<?  } else { ?>
-    <h2 align="center"><?= t('server.tools.there_are_no_users_with_more_than_n_ip_overlaps', ['Values' => [IP_OVERLAPS]]) ?></h2>
+            <?
+            while (list($UserID, $IP, $Username, $PermissionID, $Enabled, $Donor, $Warned, $Joined, $Uses) = $DB->next_record()) {
+            ?>
+                <tr class="Table-row">
+                    <td class="Table-cell"><?= Users::format_username($UserID, true, true, true, true) ?></td>
+                    <td class="Table-cell">
+                        <?= Tools::get_host_by_ajax($IP) . " ($IP)" ?>
+                        <a href="userhistory.php?action=ips&amp;userid=<?= $UserID ?>" class="brackets"><?= t('server.tools.history') ?></a>
+                        <a href="user.php?action=search&amp;ip_history=on&amp;ip=<?= display_str($IP) ?>" data-tooltip="" class="brackets"><?= t('server.common.search') ?></a>
+                    </td>
+                    <td class="Table-cell"><?= display_str($Uses) ?></td>
+                    <td class="Table-cell"><?= time_diff($Joined) ?></td>
+                </tr>
+            <?  } ?>
+        </table>
+
+        <? View::pages($Pages) ?>
+    <?  } else {
+        View::line('server.tools.there_are_no_users_with_more_than_n_ip_overlaps', ['Values' => [IP_OVERLAPS]]);
+    }
+    ?>
+</div>
 <?
-}
 View::show_footer();
 ?>

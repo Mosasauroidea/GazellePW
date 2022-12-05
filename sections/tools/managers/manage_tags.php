@@ -69,13 +69,13 @@ $orderby = ($_GET['order'] === 'badtags' ? 'BadTag' : 'AliasTag');
             <a href="tools.php?action=manage_tags&amp;order=goodtags" class="brackets"><?= t('server.tools.sort_by_good_tags') ?></a>
             <a href="tools.php?action=manage_tags&amp;order=badtags" class="brackets"><?= t('server.tools.sort_by_bad_tags') ?></a>
         </div>
-        <div class="Box is-noBorder">
-            <div class="Box-header">
-                <div class="Box-headerTitle">
+        <div class="Group">
+            <div class="Group-header">
+                <div class="Group-headerTitle">
                     <?= t('server.tools.tag_aliases') ?>
                 </div>
             </div>
-            <div class="Box-body">
+            <div class="Group-body">
                 <table class="TableTagAlias Table">
                     <tr class="Table-rowHeader">
                         <td class="Table-cell"><?= t('server.tools.proper_tag') ?></td>
@@ -131,13 +131,13 @@ $orderby = ($_GET['order'] === 'badtags' ? 'BadTag' : 'AliasTag');
                 </table>
             </div>
         </div>
-        <div class="Box is-noBorder">
-            <div class="Box-header">
-                <div class="Box-headerTitle">
+        <div class="Group">
+            <div class="Group-header">
+                <div class="Group-headerTitle">
                     <?= t('server.tools.h2_official_tags_manager') ?>
                 </div>
             </div>
-            <div class="Box-body">
+            <div class="Group-body">
                 <table class="Table">
                     <tr class="Table-rowHeader">
                         <td class="Table-cell"><?= t('server.tools.tag') ?></td>

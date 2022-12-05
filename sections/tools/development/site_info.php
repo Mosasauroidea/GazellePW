@@ -71,7 +71,6 @@ View::show_header('Site Information', '', 'PageToolSiteInfo');
     div#phpinfo {
         color: #222;
         font-family: sans-serif;
-        display: none;
     }
 
     div#phpinfo pre {
@@ -164,75 +163,110 @@ View::show_header('Site Information', '', 'PageToolSiteInfo');
     }
 </style>
 <div class="LayoutBody">
-    <h3>Timestamps</h3>
-    <div class="BoxBody">
-        <span style="width: 50px; display: inline-block">PHP:</span> <?= $PHPTimeStamp ?><br />
-        <span style="width: 50px; display: inline-block">DB:</span> <?= $DBTimeStamp ?>
+    <div class="BodyHeader">
+        <div class="BodyHeader-nav">
+            <?= t('server.tools.site_info') ?>
+        </div>
+    </div>
+    <div class="Group">
+        <div class="Group-header">
+            <div class="Group-headerTitle">
+                <?= t('server.tools.timestamps') ?>
+            </div>
+        </div>
+        <div class="Gruop-body BoxBody">
+            <span style="width: 50px; display: inline-block">PHP:</span> <?= $PHPTimeStamp ?><br />
+            <span style="width: 50px; display: inline-block">DB:</span> <?= $DBTimeStamp ?>
+        </div>
+    </div>
+    <div class="Group">
+        <div class="Group-header">
+            <div class="Group-headerTitle">
+                PHP
+            </div>
+        </div>
+        <div class="BoxBody Group-body">
+            <div>PHP Version: <?= phpversion(); ?></div>
+            <div>PHP Info:
+                <a href="#" onclick="globalapp.toggleAny(event, '#phpinfo');return false;">
+                    <span class="u-toggleAny-show"><?= t('server.common.show') ?></span>
+                    <span class="u-toggleAny-hide u-hidden"><?= t('server.common.hide') ?></span>
+                </a>
+            </div>
+            <div class="u-hidden" id="phpinfo"><?= $Data ?></div>
+        </div>
     </div>
 
-    <h3>PHP</h3>
-    <div class="BoxBody">
-        PHP Version: <?= phpversion(); ?><br />
-        <a onclick="toggle_display('phpinfo')" href='javascript:void(0)'>Toggle PHP Info</a><br />
-        <div id="phpinfo"><?= $Data ?></div>
+    <div class="Group">
+        <div class="Group-header">
+            <div class="Group-headerTitle">
+                Git
+            </div>
+        </div>
+        <div class="Group-body BoxBody">
+            <span style="width: 150px; display: inline-block;">Branch:</span> <?= $GitBranch ?>
+            <span style="width: 150px; display: inline-block;">Local Hash:</span> <?= $GitHash ?>
+            <span style="width: 150px; display: inline-block;">Remote Hash:</span> <?= $RemoteHash ?>
+            <span style="width: 150px; display: inline-block;">Tag:</span> <?= $Tag ?>
+        </div>
     </div>
-
-    <h3>Git</h3>
-    <div class="BoxBody">
-        <span style="width: 150px; display: inline-block;">Branch:</span> <?= $GitBranch ?><br />
-        <span style="width: 150px; display: inline-block;">Local Hash:</span> <?= $GitHash ?><br />
-        <span style="width: 150px; display: inline-block;">Remote Hash:</span> <?= $RemoteHash ?><br />
-        <span style="width: 150px; display: inline-block;">Tag:</span> <?= $Tag ?>
-    </div>
-
-    <h3>Composer</h3>
-    <div class="BoxBody">
-        Composer Version: <?= $ComposerVersion ?><br />
-        <table class="Table">
-            <tr class="Table-rowHeader">
-                <td class="Table-cell">Package</td>
-                <td class="Table-cell">Version</td>
-                <td class="Table-cell">Installed</td>
-                <td class="Table-cell">Locked</td>
-            </tr>
-            <?php
-            foreach ($Packages as $Package) {
-                $Installed = $Package['Installed'] ?? '';
-                $Locked = $Package['Locked'] ?? '';
-            ?>
-                <tr class="Table-row">
-                    <td class="Table-cell"><?= $Package['Name'] ?></td>
-                    <td class="Table-cell"><?= $Package['Version'] ?></td>
-                    <td class="Table-cell"><?= $Installed ?></td>
-                    <td class="Table-cell"><?= $Locked ?></td>
+    <div class="Group">
+        <div class="Group-header">
+            <div class="Group-headerTitle">
+                <div data-tooltip="Composer Version: <?= $ComposerVersion ?>">Composer</div>
+            </div>
+        </div>
+        <div class="Group-body">
+            <table class="Table">
+                <tr class="Table-rowHeader">
+                    <td class="Table-cell">Package</td>
+                    <td class="Table-cell">Version</td>
+                    <td class="Table-cell">Installed</td>
+                    <td class="Table-cell">Locked</td>
                 </tr>
-            <?php
-            }
-            ?>
-        </table>
+                <?php
+                foreach ($Packages as $Package) {
+                    $Installed = $Package['Installed'] ?? '';
+                    $Locked = $Package['Locked'] ?? '';
+                ?>
+                    <tr class="Table-row">
+                        <td class="Table-cell"><?= $Package['Name'] ?></td>
+                        <td class="Table-cell"><?= $Package['Version'] ?></td>
+                        <td class="Table-cell"><?= $Installed ?></td>
+                        <td class="Table-cell"><?= $Locked ?></td>
+                    </tr>
+                <?php
+                }
+                ?>
+            </table>
+        </div>
     </div>
-
-    <h3>Phinx</h3>
-    <div class="BoxBody">
-        <?= $PhinxVersion ?><br />
-        <table class="Table">
-            <tr class='Table-rowHeader'>
-                <td class="Table-cell">Status</td>
-                <td class="Table-cell">Migration ID</td>
-                <td class="Table-cell">Migration Name</td>
-            </tr>
-            <?php
-            foreach ($PhinxMigrations as $Migration) {
-            ?>
-                <tr class="Table-row">
-                    <td class="Table-cell"><?= $Migration['migration_status'] ?></td>
-                    <td class="Table-cell"><?= $Migration['migration_id'] ?></td>
-                    <td class="Table-cell"><?= $Migration['migration_name'] ?></td>
+    <div class="Group">
+        <div class="Group-header">
+            <div class="Group-headerTitle">
+                <div data-tooltip="<?= $PhinxVersion ?>">Phinx</div>
+            </div>
+        </div>
+        <div class="Group-body">
+            <table class="Table">
+                <tr class='Table-rowHeader'>
+                    <td class="Table-cell">Status</td>
+                    <td class="Table-cell">Migration ID</td>
+                    <td class="Table-cell">Migration Name</td>
                 </tr>
-            <?php
-            }
-            ?>
-        </table>
+                <?php
+                foreach ($PhinxMigrations as $Migration) {
+                ?>
+                    <tr class="Table-row">
+                        <td class="Table-cell"><?= $Migration['migration_status'] ?></td>
+                        <td class="Table-cell"><?= $Migration['migration_id'] ?></td>
+                        <td class="Table-cell"><?= $Migration['migration_name'] ?></td>
+                    </tr>
+                <?php
+                }
+                ?>
+            </table>
+        </div>
     </div>
 </div>
 <?php

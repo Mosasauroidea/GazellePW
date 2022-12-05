@@ -58,13 +58,13 @@ list($Revision, $Title, $Body, $Read, $Edit, $Date, $AuthorID, $AuthorName, $Ali
     <?
     if (count($PrepaidCardDonations) > 0) {
     ?>
-        <div class="Box is-noBorder">
-            <div class="Box-header">
-                <div class="Box-headerTitle">
+        <div class="Gruop">
+            <div class="Group-header">
+                <div class="Group-headerTitle">
                     <?= t('server.donate.history') ?>
                 </div>
             </div>
-            <div class="Box-body">
+            <div class="Group-body">
                 <div class="TableContainer">
                     <table class="TableDonate Table">
                         <tr class="Table-rowHeader">

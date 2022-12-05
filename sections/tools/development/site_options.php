@@ -7,32 +7,33 @@ if (!check_perms('admin_manage_permissions')) {
     View::show_header(t('server.tools.h2_site_options'), '', 'PageToolSiteOption');
     $DB->query("SELECT Name, Value, Comment FROM site_options");
 ?>
-    <div class="BodyHeader">
-        <h2 class="BodyHeader-nav"><?= t('server.tools.h2_site_options') ?></h2>
-    </div>
-    <div class="TableContainer">
-        <table class="Table">
-            <tr class="Table-rowHeader">
-                <td class="Table-cell"><?= t('server.tools.name') ?></td>
-                <td class="Table-cell"><?= t('server.tools.value') ?></td>
-                <td class="Table-cell"><?= t('server.tools.comment') ?></td>
-            </tr>
-            <?
-            $Row = 'a';
-            while (list($Name, $Value, $Comment) = $DB->next_record()) {
-                $Row = $Row === 'a' ? 'b' : 'a';
-            ?>
-                <tr class="Table-row">
-                    <td class="Table-cell"><?= $Name ?></td>
-                    <td class="Table-cell"><?= $Value ?></td>
-                    <td class="Table-cell"><?= $Comment ?></td>
+    <div class="LayoutBody">
+        <div class="BodyHeader">
+            <h2 class="BodyHeader-nav"><?= t('server.tools.h2_site_options') ?></h2>
+        </div>
+        <div class="TableContainer">
+            <table class="Table">
+                <tr class="Table-rowHeader">
+                    <td class="Table-cell"><?= t('server.tools.name') ?></td>
+                    <td class="Table-cell"><?= t('server.tools.value') ?></td>
+                    <td class="Table-cell"><?= t('server.tools.comment') ?></td>
                 </tr>
-            <?
-            }
-            ?>
-        </table>
-    </div>
-<?
+                <?
+                $Row = 'a';
+                while (list($Name, $Value, $Comment) = $DB->next_record()) {
+                    $Row = $Row === 'a' ? 'b' : 'a';
+                ?>
+                    <tr class="Table-row">
+                        <td class="Table-cell"><?= $Name ?></td>
+                        <td class="Table-cell"><?= $Value ?></td>
+                        <td class="Table-cell"><?= $Comment ?></td>
+                    </tr>
+                <?
+                }
+                ?>
+            </table>
+        </div>
+    <?
     View::show_footer();
     die();
 }
@@ -92,65 +93,83 @@ $DB->query("
 ");
 
 View::show_header(t('server.tools.h2_site_options'), '', 'PageToolSiteOption');
-?>
-
-<div class="BodyHeader">
-    <h2 class="BodyHeader-nav"><?= t('server.tools.h2_site_options') ?></h2>
-</div>
-<div class="TableContainer">
-    <table class="Table">
-        <tr class="Table-rowHeader">
-            <td class="Table-cell">
-                <span data-tooltip="<?= t('server.tools.words_must_be_separated_by_underscores') ?>"><?= t('server.tools.name') ?></span>
-            </td>
-            <td class="Table-cell"><?= t('server.tools.value') ?></td>
-            <td class="Table-cell"><?= t('server.tools.comment') ?></td>
-            <td class="Table-cell"><?= t('server.tools.submit') ?></td>
-        </tr>
-        <tr class="Table-row">
-            <form class="create_form" name="site_option" action="" method="post">
-                <input type="hidden" name="action" value="site_options" />
-                <input type="hidden" name="auth" value="<?= $LoggedUser['AuthKey'] ?>" />
-                <td class="Table-cell">
-                    <input class="Input" type="text" size="40" name="name" />
-                </td>
-                <td class="Table-cell">
-                    <input class="Input" type="text" size="20" name="value" />
-                </td>
-                <td class="Table-cell">
-                    <input class="Input" type="text" size="75" name="comment" />
-                </td>
-                <td class="Table-cell">
-                    <input class="Button" type="submit" name="submit" value="Create" />
-                </td>
-            </form>
-        </tr>
-        <?
-        while (list($ID, $Name, $Value, $Comment) = $DB->next_record()) {
-        ?>
-            <tr class="Table-row">
-                <form class="manage_form" name="site_option" action="" method="post">
-                    <input type="hidden" name="id" value="<?= $ID ?>" />
-                    <input type="hidden" name="action" value="site_options" />
-                    <input type="hidden" name="auth" value="<?= $LoggedUser['AuthKey'] ?>" />
-                    <td class="Table-cell">
-                        <input class="Input" type="text" size="40" name="name" value="<?= $Name ?>" />
+    ?>
+    <div class="LayoutPage">
+        <div class="BodyHeader">
+            <h2 class="BodyHeader-nav"><?= t('server.tools.h2_site_options') ?></h2>
+        </div>
+        <form class="create_form" name="site_option" action="" method="post">
+            <input type="hidden" name="action" value="site_options" />
+            <input type="hidden" name="auth" value="<?= $LoggedUser['AuthKey'] ?>" />
+            <table class="Form-rowList" variant="header">
+                <tr class="Form-row">
+                    <td class="Form-label">
+                        <span data-tooltip="<?= t('server.tools.words_must_be_separated_by_underscores') ?>"><?= t('server.tools.name') ?></span>
                     </td>
-                    <td class="Table-cell">
-                        <input class="Input" type="text" size="20" name="value" value="<?= $Value ?>" />
+                    <td class="Form-inputs">
+                        <input class="Input" type="text" size="40" name="name" />
                     </td>
-                    <td class="Table-cell">
-                        <input class="Input" type="text" size="75" name="comment" value="<?= $Comment ?>" />
+                </tr>
+                <tr class="Form-row">
+                    <td class="Form-label">
+                        <?= t('server.tools.value') ?>
                     </td>
-                    <td class="Table-cell">
-                        <input class="Button" type="submit" name="submit" value="Edit" />
-                        <input class="Button" type="submit" name="submit" value="Delete" />
+                    <td class="Form-inputs">
+                        <input class="Input" type="text" size="20" name="value" />
                     </td>
-                </form>
-            </tr>
-        <?
-        }
-        ?>
-    </table>
-</div>
-<? View::show_footer(); ?>
+                </tr>
+                <tr class="Form-row">
+                    <td class="Form-label">
+                        <?= t('server.tools.comment') ?>
+                    </td>
+                    <td class="Form-inputs">
+                        <input class="Input" type="text" size="75" name="comment" />
+                    </td>
+                </tr>
+                <tr class="Form-row">
+                    <td>
+                        <button class="Button" type="submit" name="submit" value="Create"><?= t('server.common.new') ?></button>
+                    </td>
+                </tr>
+            </table>
+        </form>
+        <div class="TableContainer">
+            <table class="Table">
+                <tr class="Table-rowHeader">
+                    <td class="Table-cell">
+                        <span data-tooltip="<?= t('server.tools.words_must_be_separated_by_underscores') ?>"><?= t('server.tools.name') ?></span>
+                    </td>
+                    <td class="Table-cell"><?= t('server.tools.value') ?></td>
+                    <td class="Table-cell"><?= t('server.tools.comment') ?></td>
+                    <td class="Table-cell"><?= t('server.tools.submit') ?></td>
+                </tr>
+                <?
+                while (list($ID, $Name, $Value, $Comment) = $DB->next_record()) {
+                ?>
+                    <tr class="Table-row">
+                        <form class="manage_form" name="site_option" action="" method="post">
+                            <input type="hidden" name="id" value="<?= $ID ?>" />
+                            <input type="hidden" name="action" value="site_options" />
+                            <input type="hidden" name="auth" value="<?= $LoggedUser['AuthKey'] ?>" />
+                            <td class="Table-cell">
+                                <input class="Input" type="text" size="40" name="name" value="<?= $Name ?>" />
+                            </td>
+                            <td class="Table-cell">
+                                <input class="Input" type="text" size="20" name="value" value="<?= $Value ?>" />
+                            </td>
+                            <td class="Table-cell">
+                                <input class="Input" type="text" size="75" name="comment" value="<?= $Comment ?>" />
+                            </td>
+                            <td class="Table-cell">
+                                <button class="Button" type="submit" name="submit" value="Edit"><?= t('server.common.edit') ?></button>
+                                <button class="Button" type="submit" name="submit" value="Delete"><?= t('server.common.delete') ?></button>
+                            </td>
+                        </form>
+                    </tr>
+                <?
+                }
+                ?>
+            </table>
+        </div>
+    </div>
+    <? View::show_footer(); ?>

@@ -109,11 +109,11 @@ $HideDNU = check_perms('torrents_hide_dnu') && !$NewDNU;
             </div>
         <? } ?>
         <? if (!$Name) { ?>
-            <div id="dnu_container" class="Box is-noBorder">
-                <div class="Box-header">
-                    <div class="Box-headerTitle"><?= t('server.upload.torrent_diff') ?></div>
+            <div id="dnu_container" class="Group">
+                <div class="Group-header">
+                    <div class="Group-headerTitle"><?= t('server.upload.torrent_diff') ?></div>
                     <? if ($HideDNU) { ?>
-                        <div class="Box-headerActions" id="showdnu">
+                        <div class="Group-headerActions" id="showdnu">
                             <a href="#" onclick="globalapp.toggleAny(event, '#dnulist')">
                                 <span class="u-toggleAny-show <?= $HideDNU ? '' : 'u-hidden' ?>"><?= t('server.common.show') ?></span>
                                 <span class="u-toggleAny-hide <?= $HideDNU ? 'u-hidden' : '' ?>"><?= t('server.common.hide') ?></span>
@@ -121,10 +121,10 @@ $HideDNU = check_perms('torrents_hide_dnu') && !$NewDNU;
                         </div>
                     <?  } ?>
                 </div>
-                <div id="dnulist" class="TableContainer Box-body <?= ($HideDNU ? 'u-hidden' : '') ?>">
-                    <p><?= $NewDNU ? '<strong class="u-colorWarning">' : '' ?><?= t('server.upload.last_update') ?>: <?= time_diff($Updated) ?><?= $NewDNU ? '</strong>' : '' ?></p>
-                    <p><?= t('server.upload.upload_note') ?>
-                    </p>
+                <div id="dnulist" class="TableContainer Group-body <?= ($HideDNU ? 'u-hidden' : '') ?>">
+                    <div><?= $NewDNU ? '<strong class="u-colorWarning">' : '' ?><?= t('server.upload.last_update') ?>: <?= time_diff($Updated) ?><?= $NewDNU ? '</strong>' : '' ?></div>
+                    <div><?= t('server.upload.upload_note') ?>
+                    </div>
                     <table class="TableUploadRule Table">
                         <tr class="Table-rowHeader">
                             <td class="Table-cell" width="50%"><strong><?= t('server.upload.name') ?></strong></td>

@@ -200,11 +200,11 @@ View::show_header(t('server.user.invites'), '', 'PageUserInvite');
         </div>
     <? } ?>
     <? if (!empty($Pending)) { ?>
-        <div class="Box is-noBorder">
-            <div class="Box-header">
+        <div class="Group">
+            <div class="Group-header">
                 <div class="Box-headerTitle" id="pending_invites_header"><?= t('server.user.pending_invites') ?></div>
             </div>
-            <div class="Box-body" id="pending_invites_container">
+            <div class="Group-body" id="pending_invites_container">
                 <table class="TableInvite Table">
                     <tr class="Table-rowHeader">
                         <td class="Table-cell"><?= t('server.user.email_address') ?></td>
@@ -227,11 +227,11 @@ View::show_header(t('server.user.invites'), '', 'PageUserInvite');
             </div>
         </div>
     <? } ?>
-    <div class="Box is-noBorder">
-        <div class="Box-header">
-            <div class="Box-headerTitle" id="invite_table_header"><?= t('server.user.invitee_list') ?></div>
+    <div class="Group">
+        <div class="Group-header">
+            <div class="Group-headerTitle" id="invite_table_header"><?= t('server.user.invitee_list') ?></div>
         </div>
-        <div class="Box-body TableContainer" id="invite_table_container">
+        <div class="Group-body TableContainer" id="invite_table_container">
             <table class="Table TableInvite">
                 <tr class="Table-rowHeader">
                     <td class="Table-cell Table-cell"><a href="user.php?action=invite&amp;order=username&amp;sort=<?= (($CurrentOrder == 'username') ? $NewSort : 'desc') ?>&amp;<?= $CurrentURL ?>"><?= t('server.user.username') ?></a></td>

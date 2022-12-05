@@ -15,6 +15,38 @@ View::show_header(t('server.tools.staff_group_management'));
     <div class="BodyHeader">
         <h2 class="BodyHeader-nav"><?= t('server.tools.staff_group_management') ?></h2>
     </div>
+    <form class="create_form" name="groups" action="" method="post">
+        <input type="hidden" name="action" value="staff_groups_alter" />
+        <input type="hidden" name="auth" value="<?= $LoggedUser['AuthKey'] ?>" />
+        <table class="Form-rowList" variant="header">
+            <tr class="Form-rowHeader">
+                <td>
+                    <?= t('server.tools.create_group') ?>
+                </td>
+            </tr>
+            <tr class="Form-row">
+                <td class="Form-label">
+                    <?= t('server.tools.sort') ?>
+                </td>
+                <td class="Form-inputs">
+                    <input class="Input is-small" type="text" size="10" name="sort" />
+                </td>
+            </tr>
+            <tr class="Form-row">
+                <td class="Form-label">
+                    <?= t('server.tools.name') ?>
+                </td>
+                <td class="Form-inputs">
+                    <input class="Input" type="text" size="30" name="name" />
+                </td>
+            </tr>
+            <tr class="Form-row">
+                <td>
+                    <button class="Button" type="submit" name="submit" value="Create"><?= t('server.common.new') ?></button>
+                </td>
+            </tr>
+        </table>
+    </form>
     <table class="Table">
         <tr class="Table-rowHeader">
             <td class="Table-cell"><?= t('server.tools.sort') ?></td>
@@ -48,38 +80,7 @@ View::show_header(t('server.tools.staff_group_management'));
         ?>
 
     </table>
-    <form class="create_form" name="groups" action="" method="post">
-        <input type="hidden" name="action" value="staff_groups_alter" />
-        <input type="hidden" name="auth" value="<?= $LoggedUser['AuthKey'] ?>" />
-        <table class="Form-rowList" variant="header">
-            <tr class="Form-rowHeader">
-                <td>
-                    <?= t('server.tools.create_group') ?>
-                </td>
-            </tr>
-            <tr class="Form-row">
-                <td class="Form-label">
-                    <?= t('server.tools.sort') ?>
-                </td>
-                <td class="Form-inputs">
-                    <input class="Input" type="text" size="10" name="sort" />
-                </td>
-            </tr>
-            <tr class="Form-row">
-                <td class="Form-label">
-                    <?= t('server.tools.name') ?>
-                </td>
-                <td class="Form-inputs">
-                    <input class="Input" type="text" size="30" name="name" />
-                </td>
-            </tr>
-            <tr class="Form-row">
-                <td>
-                    <input class="Button" type="submit" name="submit" value="Create" />
-                </td>
-            </tr>
-        </table>
-    </form>
+
 </div>
 <?php
 View::show_footer();

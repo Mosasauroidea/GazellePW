@@ -131,7 +131,6 @@ $Pages = Format::get_pages($Page, $TotalTorrents, CONFIG['TORRENTS_PER_PAGE']);
             </tbody>
         </table>
     </div>
-    <br />
     <?
     $LinkTail = "&order_way=" . ($OrderWay == "asc" ? "desc" : "asc") . ($Page != 1 ? "&page=$Page" : "");
     ?>

@@ -546,13 +546,13 @@ View::show_header($ArtistHeaderName, 'browse,bbcode,comments,voting,recommend,su
         if ($NumRequests > 0) {
 
         ?>
-            <div class="Box is-noBorder" id="requests">
-                <div class="Box-header">
-                    <div class="Box-headerTitle">
+            <div class="Group" id="requests">
+                <div class="Group-header">
+                    <div class="Group-headerTitle">
                         <?= t('server.common.requests') ?>
                     </div>
                 </div>
-                <div class="Box-body">
+                <div class="Group-body">
                     <div class="TableContainer">
                         <table class="TableRequest Table" cellpadding="6" cellspacing="1" border="0" width="100%">
                             <tr class="Table-rowHeader">
@@ -612,23 +612,21 @@ View::show_header($ArtistHeaderName, 'browse,bbcode,comments,voting,recommend,su
         foreach ($TorrentGroups as $ReleaseType => $GroupInfo) {
             $DisplayName = sectionTitle($ReleaseType);
         ?>
-            <div class="Box is-noBorder">
-                <div class="Box-header">
-                    <div class="Box-headerLeft">
-                        <div class="Box-headerTitle">
-                            <div id="torrents_<?= $ReleaseType ?>">
-                                <?= $DisplayName ?>
-                            </div>
+            <div class="Group">
+                <div class="Group-header">
+                    <div class="Group-headerTitle">
+                        <div id="torrents_<?= $ReleaseType ?>">
+                            <?= $DisplayName ?>
                         </div>
                     </div>
-                    <div class="Box-headerActions">
+                    <div class="Group-headerActions">
                         <a href="#" onclick="globalapp.toggleAny(event, '.torrent_table_<?= $ReleaseType ?>');return false;">
                             <span class="u-toggleAny-show u-hidden"><?= t('server.common.show') ?></span>
                             <span class="u-toggleAny-hide"><?= t('server.common.hide') ?></span>
                         </a>
                     </div>
                 </div>
-                <div class="Box-body torrent_table_<?= $ReleaseType ?>" id="torrent_table_<?= $ID ?>">
+                <div class="Group-body torrent_table_<?= $ReleaseType ?>" id="torrent_table_<?= $ID ?>">
                     <?
                     $tableRender = new TorrentGroupCoverTableView($GroupInfo);
                     $tableRender->render();

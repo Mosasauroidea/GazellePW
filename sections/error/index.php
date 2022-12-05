@@ -55,11 +55,7 @@ if (!empty($_GET['e']) && in_array($_GET['e'], $Errors)) {
                     <?= $Title ?>
                 </h2>
             </div>
-            <div class="Box">
-                <div class="Box-body">
-                    <p><?= $Description ?></p>
-                </div>
-            </div>
+            <p><?= $Description ?></p>
         </div>
 <?
         View::show_footer();

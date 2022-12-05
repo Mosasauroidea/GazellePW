@@ -61,7 +61,7 @@ View::show_header(t('server.tools.change_log'), 'datetime_picker');
                 <div class="Form-row" id="cl_message">
                     <div class="Form-label"><?= t('server.tools.commit_message') ?>:</div>
                     <div class="Form-items">
-                        <textarea class="Input" name="message" rows="2"></textarea>
+                        <? new TEXTAREA_PREVIEW('message', '', '', 60, 8); ?>
                     </div>
                 </div>
                 <div class="Form-row" id="cl_date">

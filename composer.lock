@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "926cecce047014016ef1d38e7796efcc",
+    "content-hash": "d4d62ae98c770ea574583934ac93a8fe",
     "packages": [
         {
             "name": "aws/aws-crt-php",
@@ -3663,6 +3663,68 @@
                 "source": "https://github.com/symfony/yaml/tree/3.3"
             },
             "time": "2018-01-20T15:04:53+00:00"
+        },
+        {
+            "name": "tronovav/geoip2-update",
+            "version": "v2.1.23",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/tronovav/geoip2-update.git",
+                "reference": "ce7077b4a84e75aca001c1b324f9807680576bb5"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/tronovav/geoip2-update/zipball/ce7077b4a84e75aca001c1b324f9807680576bb5",
+                "reference": "ce7077b4a84e75aca001c1b324f9807680576bb5",
+                "shasum": ""
+            },
+            "require": {
+                "ext-curl": "*",
+                "php": ">=5.3"
+            },
+            "suggest": {
+                "ext-zip": "Required for updating the CSV databases."
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "tronovav\\GeoIP2Update\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Andrey Tronov",
+                    "email": "newtronov@gmail.com"
+                }
+            ],
+            "description": "Update GeoIP2/GeoLite2 databases from your script, program or via composer.",
+            "keywords": [
+                "geoip",
+                "geoip2",
+                "geolite2",
+                "geolocation",
+                "maxmind"
+            ],
+            "support": {
+                "email": "newtronov@gmail.com",
+                "issues": "https://github.com/tronovav/geoip2-update/issues",
+                "source": "https://github.com/tronovav/geoip2-update/tree/v2.1.23"
+            },
+            "funding": [
+                {
+                    "url": "https://donate.stream/tronovav",
+                    "type": "other"
+                },
+                {
+                    "url": "https://yoomoney.ru/to/410016198845596",
+                    "type": "other"
+                }
+            ],
+            "time": "2022-07-11T13:27:47+00:00"
         },
         {
             "name": "twig/twig",

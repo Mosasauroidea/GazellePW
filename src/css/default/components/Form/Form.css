@@ -33,7 +33,6 @@ FormOneLine Search<Name>
   border: var(--Box-border);
   border-radius: var(--global-borderRadius);
   width: 100%;
-  margin-bottom: var(--global-space-lg);
 }
 
 .Form-rowHeader {

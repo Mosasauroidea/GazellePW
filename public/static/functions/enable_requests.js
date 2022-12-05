@@ -1,10 +1,10 @@
 ;(function () {
   var ids = Array()
   $(document).ready(function () {
-    $('input[id^=check_all]').click(function () {
+    $('button[id^=check_all]').click(function () {
       // Check or uncheck all requests
       var checked = $(this).attr('checked') == 'checked' ? true : false
-      $('input[id^=multi]').each(function () {
+      $('button[id^=multi]').each(function () {
         $(this).attr('checked', checked)
         var id = $(this).data('id')
         if (checked && $.inArray(id, ids) == -1) {
@@ -16,7 +16,7 @@
         }
       })
     })
-    $('input[id^=multi]').click(function () {
+    $('button[id^=multi]').click(function () {
       // Put the ID in the array if checked, or removed if unchecked
       var checked = $(this).attr('checked') == 'checked' ? true : false
       var id = $(this).data('id')
@@ -28,7 +28,7 @@
         })
       }
     })
-    $('input[id^=outcome]').click(function () {
+    $('button[id^=outcome]').click(function () {
       if ($(this).val() != 'Discard' && !confirm(t('client.common.are_you_sure_cannot_undone'))) {
         return false
       }

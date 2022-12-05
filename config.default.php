@@ -28,6 +28,7 @@ $CONFIG['SITE_SALT'] = ''; // TODO: not used. Random key. Default site wide salt
 $CONFIG['SCHEDULE_KEY'] = "OL9n0m2JxhBxYyMvXWJg"; // Random key. This key must be the argument to schedule.php for the schedule to work.
 $CONFIG['RSS_HASH'] = ""; //Random key. Used for generating unique RSS auth key.
 $CONFIG['CRYPT_HASH_PREFIX'] = "$2y$07$"; // TODO: not used.
+$CONFIG['GEOIP_LICENSE_KEY'] = '';
 
 // MySQL details
 $CONFIG['SQLHOST'] = "mysql"; //The MySQL host ip/fqdn
@@ -103,6 +104,7 @@ $CONFIG['NEWS_FORUM_ID'] = 0;
 $CONFIG['DONOR_FORUM'] = 0;
 $CONFIG['FEATURED_MOVIE_FORUM'] = 0;
 $CONFIG['STAFF_BLOG_FORUM'] = 0;
+$CONFIG['STAFF_FORUM'] = 0;
 
 $CONFIG['ForumsRevealVoters'] = [];
 
@@ -134,6 +136,7 @@ $CONFIG['TORRENTS_PER_PAGE'] = 50;
 $CONFIG['REQUESTS_PER_PAGE'] = 25;
 $CONFIG['MESSAGES_PER_PAGE'] = 25;
 $CONFIG['LOG_ENTRIES_PER_PAGE'] = 50;
+$CONFIG['DONATIONS_PER_PAGE'] = 50;
 
 // Cache catalogues
 $CONFIG['THREAD_CATALOGUE'] = 500; // posts per cache key.

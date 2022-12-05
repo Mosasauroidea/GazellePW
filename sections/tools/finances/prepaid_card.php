@@ -14,13 +14,15 @@ $PageView = Format::get_pages($Page, $All, $CountPerPage);
 $Title = t('server.tools.prepaid_card_donor');
 View::show_header($Title, 'PageToolPrepaidCard');
 ?>
-<div class="BodyHeader">
-    <h2 class="BodyHeader-nav"><?= $Title ?></h2>
-</div>
 <div class="LayoutBody">
-    <div class="BodyNavLinks">
-        <?= $PageView ?>
+    <div class="BodyHeader">
+        <h2 class="BodyHeader-nav"><?= $Title ?></h2>
     </div>
+    <? if ($PageView) { ?>
+        <div class="BodyNavLinks">
+            <?= $PageView ?>
+        </div>
+    <? } ?>
     <div class="TableContainer">
         <table class="TableDonateManager Table">
             <tr class="Table-rowHeader">
@@ -70,10 +72,11 @@ View::show_header($Title, 'PageToolPrepaidCard');
             </tr>
         </table>
     </div>
-    <div class="BodyNavLinks">
-        <?= $PageView ?>
-    </div>
-
+    <? if ($PageView) { ?>
+        <div class="BodyNavLinks">
+            <?= $PageView ?>
+        </div>
+    <? } ?>
 </div>
 <?
 View::show_footer();

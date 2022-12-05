@@ -41,9 +41,9 @@ if ($_POST['id']) {
         $MaxPosition = 1000000;
     } // $MaxPermission is null if the user is the last one in that tree on that level
     if (!$TreeID) {
-        return;
-    }
-    $DB->query("
+        $Msg = "Successfully!";
+    } else {
+        $DB->query("
 			SELECT
 				UserID
 			FROM invite_tree
@@ -52,28 +52,29 @@ if ($_POST['id']) {
 				AND TreePosition < $MaxPosition
 				AND TreeLevel > $TreeLevel
 			ORDER BY TreePosition");
-    $BanList = array();
+        $BanList = array();
 
-    while (list($Invitee) = $DB->next_record()) {
-        $BanList[] = $Invitee;
-    }
+        while (list($Invitee) = $DB->next_record()) {
+            $BanList[] = $Invitee;
+        }
 
-    foreach ($BanList as $Key => $InviteeID) {
-        if ($_POST['perform'] === 'nothing') {
-            Tools::update_user_notes($InviteeID, $Comment . "\n\n");
-            $Msg = "Successfully commented on entire invite tree!";
-        } elseif ($_POST['perform'] === 'disable') {
-            Tools::disable_users($InviteeID, $Comment);
-            $Msg = "Successfully banned entire invite tree!";
-        } elseif ($_POST['perform'] === 'inviteprivs') { // DisableInvites =1
-            Tools::update_user_notes($InviteeID, $Comment . "\n\n");
-            $DB->query("
+        foreach ($BanList as $Key => $InviteeID) {
+            if ($_POST['perform'] === 'nothing') {
+                Tools::update_user_notes($InviteeID, $Comment . "\n\n");
+                $Msg = "Successfully commented on entire invite tree!";
+            } elseif ($_POST['perform'] === 'disable') {
+                Tools::disable_users($InviteeID, $Comment);
+                $Msg = "Successfully banned entire invite tree!";
+            } elseif ($_POST['perform'] === 'inviteprivs') { // DisableInvites =1
+                Tools::update_user_notes($InviteeID, $Comment . "\n\n");
+                $DB->query("
 				UPDATE users_info
 				SET DisableInvites = '1'
 				WHERE UserID = '$InviteeID'");
-            $Msg = "Successfully removed invite privileges from entire tree!";
-        } else {
-            error(403);
+                $Msg = "Successfully removed invite privileges from entire tree!";
+            } else {
+                error(403);
+            }
         }
     }
 }
@@ -83,24 +84,27 @@ if ($_POST['id']) {
     <div class="BodyHeader">
         <h2 class="BodyHeader-nav"><?= t('server.tools.h2_manipulate_invite_tree') ?></h2>
     </div>
-    <? if ($Msg) { ?>
-        <div class="center">
-            <p class="u-colorWarning" style="text-align: center;"><?= $Msg ?></p>
-        </div>
-    <?  } ?>
-    <form class="manage_form" name="user" action="" method="post">
+
+    <form class="Form manage_form" name="user" action="" method="post">
         <input type="hidden" id="action" name="action" value="manipulate_tree" />
         <input type="hidden" name="auth" value="<?= $LoggedUser['AuthKey'] ?>" />
-        <table class="layout">
-            <tr>
-                <td class="label"><strong><?= t('server.tools.userid') ?>:</strong></td>
-                <td><input class="Input" type="text" size="10" name="id" id="id" /></td>
-                <td class="label"><strong><?= t('server.tools.mandatory_comment') ?>:</strong></td>
-                <td><input class="Input" type="text" size="40" name="comment" id="comment" /></td>
+        <table class="Form-rowList" variant="header">
+            <tr class="Form-rowHeader">
+                <td>
+                    <?= t('server.tools.h2_manipulate_invite_tree') ?>
+                </td>
             </tr>
-            <tr>
-                <td class="label"><strong><?= t('server.common.actions') ?>:</strong></td>
-                <td colspan="2">
+            <tr class="Form-row">
+                <td class="Form-label"><strong><?= t('server.tools.userid') ?>:</strong></td>
+                <td class="Form-inputs"><input class="Input" type="text" size="10" name="id" id="id" /></td>
+            </tr>
+            <tr class="Form-row">
+                <td class="Form-label"><strong><?= t('server.tools.mandatory_comment') ?>:</strong></td>
+                <td class="Form-inputs"><input class="Input" type="text" size="40" name="comment" id="comment" /></td>
+            </tr>
+            <tr class="Form-row">
+                <td class="Form-label"><strong><?= t('server.common.actions') ?>:</strong></td>
+                <td class="Form-inputs">
                     <select class="Input" name="perform">
                         <option class="Select-option" value="nothing" <?
                                                                         if ($_POST['perform'] === 'nothing') {
@@ -116,8 +120,19 @@ if ($_POST['id']) {
                                                                             } ?>><?= t('server.tools.disable_invites_privileges') ?></option>
                     </select>
                 </td>
-                <td align="left"><input class="Button" type="submit" value="Go" /></td>
             </tr>
+            <tr class="Form-row">
+                <td><input class="Button" type="submit" value="<?= t('server.common.submit') ?>" /></td>
+            </tr> <? if ($Msg) { ?>
+                <tr class="Form-row">
+                    <td>
+
+                        <div class="center">
+                            <p class="u-colorWarning" style="text-align: center;"><?= $Msg ?></p>
+                        </div>
+                    </td>
+                </tr>
+            <?  } ?>
         </table>
     </form>
 </div>

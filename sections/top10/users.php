@@ -97,12 +97,12 @@ View::show_header(t('server.top10.top_10_users'), '', 'PageTop10User');
         $Items = create_items($DefaultItems, $Tag);
         $Details = array_slice($Details, 0, $Limit);
     ?>
-        <div class="Box is-noBorder">
-            <div class="Box-header">
-                <div class="Box-headerTitle">
+        <div class="Group">
+            <div class="Group-header">
+                <div class="Group-headerTitle">
                     <?= t('server.top10.top') ?> <?= $Limit . ' ' . $Caption; ?>
                 </div>
-                <small class="Box-headerActions top10_quantity_links">
+                <small class="Group-headerActions top10_quantity_links">
                     <?
                     switch ($Limit) {
                         case 100: ?>
@@ -122,7 +122,7 @@ View::show_header(t('server.top10.top_10_users'), '', 'PageTop10User');
                     <? } ?>
                 </small>
             </div>
-            <div class="Box-body">
+            <div class="Group-body">
                 <div class="TableContainer">
                     <?
                     if (empty($Details)) {

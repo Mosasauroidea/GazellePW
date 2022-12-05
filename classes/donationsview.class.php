@@ -99,20 +99,20 @@ class DonationsView {
             return;
         }
         ?>
-        <div class="Box is-noBorder" id="donation_history_box">
-            <div class="Box-header">
-                <div class="Box-headerTitle">
+        <div class="Group" id="donation_history_box">
+            <div class="Group-header">
+                <div class="Group-headerTitle">
                     <?= t('server.user.donation_history') ?>
                 </div>
 
-                <div class="Box-headerActions">
+                <div class="Group-headerActions">
                     <a href="#" onclick="globalapp.toggleAny(event, '#donation_history');return false;">
                         <span class="u-toggleAny-show"><?= t('server.common.show') ?></span>
                         <span class="u-toggleAny-hide u-hidden"><?= t('server.common.hide') ?></span>
                     </a>
                 </div>
             </div>
-            <div class="Box-body TableContainer u-hidden" id="donation_history">
+            <div class="Group-body TableContainer u-hidden" id="donation_history">
                 <table class="Table">
                     <tbody>
                         <tr class="Table-rowHeader">

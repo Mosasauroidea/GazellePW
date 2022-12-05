@@ -40,65 +40,66 @@ if (isset($_GET['id'])) {
     exit();
 }
 View::show_header(t('server.tools.events_reward_history'));
-$DB->query("SELECT * from events_reward_log");
+$DB->query("SELECT * from events_reward_log ORDER BY ID DESC");
 $Histories = $DB->to_array(false, MYSQLI_ASSOC);
 ?>
-
-<div class="BodyHeader">
-    <h2 class="BodyHeader-nav"><?= t('server.tools.events_reward_history') ?></h2>
-</div>
-<div class="BodyNavLinks">
-    <div class="center"><a href="tools.php?action=events_reward" class="brackets"><?= t('server.tools.events_reward') ?></a></div>
-</div>
-<div class="TableContainer">
-    <table class="TableEventRewardHistory Table">
-        <tr class="Table-rowHeader">
-            <th class="Table-cell"><?= t('server.tools.userids') ?></th>
-            <th class="Table-cell"><?= t('server.tools.byuserid') ?></th>
-            <th class="Table-cell"><?= t('server.tools.events_reward') ?></th>
-            <th class="Table-cell"><?= t('server.tools.remark') ?></th>
-            <th class="Table-cell"><?= t('server.tools.time') ?></th>
-        </tr>
-        <?
-        foreach ($Histories as $Recode) {
-        ?>
-            <tr class="Table-row">
-                <td class="Table-cell"><?= strlen($Recode['UserIDs']) > 15 ? '<a target="_blank" href="tools.php?action=events_reward_history&id=' . $Recode['ID'] . '">' . t('server.tools.show_all') . '</a>' : userIDs2Usernames($Recode['UserIDs'], ' ') ?></td>
-                <td class="Table-cell"><?= Users::format_username($Recode['ByUserID']) ?></td>
-                <td class="Table-cell"><?
-                                        $Strs = [];
-                                        if ($Recode['Invites']) {
-                                            $Str = t('server.tools.space_invite', ['Count' => $Recode['Invites'], 'Values' => [$Recode['Invites']]]);
-                                            if ($Recode['InvitesTime']) {
-                                                $Str .= " (" . substr($Recode['InvitesTime'], 0, 10) . ")";
-                                            }
-                                            $Strs[] = $Str;
-                                        }
-                                        if ($Recode['Tokens']) {
-                                            $Str = t('server.tools.space_token', ['Count' => $Recode['Tokens'], 'Values' => [$Recode['Tokens']]]);
-                                            if ($Recode['TokensTime']) {
-                                                $Str .= " (" . substr($Recode['TokensTime'], 0, 10) . ")";
-                                            }
-                                            $Strs[] = $Str;
-                                        }
-                                        if ($Recode['Bonus']) {
-                                            $Strs[] = $Recode['Bonus'] . t('server.tools.space_bonus');
-                                        }
-                                        if ($Recode['Badge']) {
-                                            $Badge = Badges::get_badges_by_id($Recode['Badge']);
-                                            $Strs[] = t("server.badges.${Badge['Label']}_badge_name");
-                                        }
-                                        if (count($Strs)) {
-                                            echo implode(", ", $Strs);
-                                        }
-                                        ?></td>
-                <td class="Table-cell"><?= $Recode['Remark'] ?></td>
-                <td class="Table-cell"><?= $Recode['Time'] ?></td>
+<div class="LayoutPage">
+    <div class="BodyHeader">
+        <h2 class="BodyHeader-nav"><?= t('server.tools.events_reward_history') ?></h2>
+    </div>
+    <div class="BodyNavLinks">
+        <div class="center"><a href="tools.php?action=events_reward" class="brackets"><?= t('server.tools.events_reward') ?></a></div>
+    </div>
+    <div class="TableContainer">
+        <table class="TableEventRewardHistory Table">
+            <tr class="Table-rowHeader">
+                <th class="Table-cell"><?= t('server.tools.userids') ?></th>
+                <th class="Table-cell"><?= t('server.tools.byuserid') ?></th>
+                <th class="Table-cell"><?= t('server.tools.events_reward') ?></th>
+                <th class="Table-cell"><?= t('server.tools.remark') ?></th>
+                <th class="Table-cell"><?= t('server.tools.time') ?></th>
             </tr>
-        <?
-        }
-        ?>
-    </table>
+            <?
+            foreach ($Histories as $Recode) {
+            ?>
+                <tr class="Table-row">
+                    <td class="Table-cell"><?= strlen($Recode['UserIDs']) > 15 ? '<a target="_blank" href="tools.php?action=events_reward_history&id=' . $Recode['ID'] . '">' . t('server.tools.show_all') . '</a>' : userIDs2Usernames($Recode['UserIDs'], ' ') ?></td>
+                    <td class="Table-cell"><?= Users::format_username($Recode['ByUserID']) ?></td>
+                    <td class="Table-cell"><?
+                                            $Strs = [];
+                                            if ($Recode['Invites']) {
+                                                $Str = t('server.tools.space_invite', ['Count' => $Recode['Invites'], 'Values' => [$Recode['Invites']]]);
+                                                if ($Recode['InvitesTime']) {
+                                                    $Str .= " (" . substr($Recode['InvitesTime'], 0, 10) . ")";
+                                                }
+                                                $Strs[] = $Str;
+                                            }
+                                            if ($Recode['Tokens']) {
+                                                $Str = t('server.tools.space_token', ['Count' => $Recode['Tokens'], 'Values' => [$Recode['Tokens']]]);
+                                                if ($Recode['TokensTime']) {
+                                                    $Str .= " (" . substr($Recode['TokensTime'], 0, 10) . ")";
+                                                }
+                                                $Strs[] = $Str;
+                                            }
+                                            if ($Recode['Bonus']) {
+                                                $Strs[] = $Recode['Bonus'] . t('server.tools.space_bonus');
+                                            }
+                                            if ($Recode['Badge']) {
+                                                $Badge = Badges::get_badges_by_id($Recode['Badge']);
+                                                $Strs[] = t("server.badges.${Badge['Label']}_badge_name");
+                                            }
+                                            if (count($Strs)) {
+                                                echo implode(", ", $Strs);
+                                            }
+                                            ?></td>
+                    <td class="Table-cell"><?= $Recode['Remark'] ?></td>
+                    <td class="Table-cell"><?= $Recode['Time'] ?></td>
+                </tr>
+            <?
+            }
+            ?>
+        </table>
+    </div>
 </div>
 <?
 View::show_footer()

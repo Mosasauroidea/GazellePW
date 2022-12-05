@@ -103,9 +103,12 @@ $TotalLeechers = $TotalPeers - $TotalSeeders;
 
 ?>
 <div class="LayoutBody">
-    <div class="box">
-        <div class="head"><?= t('server.tools.overall_stats') ?></div>
-        <div class="pad">
+    <div class="BodyHeader">
+        <h2 class="BodyHeader-nav"><?= t('server.tools.economic_stats') ?></h2>
+    </div>
+    <div class="Box">
+        <div class="Box-header"><?= t('server.tools.overall_stats') ?></div>
+        <div class="Box-body">
             <ul class="stats nobullet">
                 <li><strong><?= t('server.tools.total_upload') ?>: </strong><?= Format::get_size($TotalUpload) ?></li>
                 <li><strong><?= t('server.tools.total_download') ?>: </strong><?= Format::get_size($TotalDownload) ?></li>
@@ -119,12 +122,6 @@ $TotalLeechers = $TotalPeers - $TotalSeeders;
                 <li><strong><?= t('server.tools.total_request_bounty') ?>: </strong><?= Format::get_size($TotalBounty) ?></li>
                 <li><strong><?= t('server.tools.available_request_bounty') ?>: </strong><?= Format::get_size($AvailableBounty) ?></li>
             </ul>
-        </div>
-    </div>
-    <br />
-    <div class="box">
-        <div class="head"><?= t('server.tools.swarms_and_snatches') ?></div>
-        <div class="pad">
             <ul class="stats nobullet">
                 <li><strong><?= t('server.tools.total_seeders') ?>: </strong><?= number_format($TotalSeeders) ?></li>
                 <li><strong><?= t('server.tools.total_leechers') ?>: </strong><?= number_format($TotalLeechers) ?></li>

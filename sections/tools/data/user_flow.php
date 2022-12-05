@@ -114,21 +114,20 @@ $RS = $DB->query("
 $DB->query('SELECT FOUND_ROWS()');
 list($Results) = $DB->next_record();
 
+$Pages = Format::get_pages($Page, $Results, DAYS_PER_PAGE, 11);
 View::show_header(t('server.tools.h2_user_flow'), '', 'PageToolUserFlow');
 $DB->set_query_id($RS);
 ?>
 <div class="LayoutBody">
+	<div class="BodyHeader">
+		<h2 class="BodyHeader-nav"><?= t('server.tools.user_flow') ?></h2>
+	</div>
 	<? if (!isset($_GET['page'])) { ?>
 		<div class="BoxBody">
 			<img src="https://chart.googleapis.com/chart?cht=lc&amp;chs=820x160&amp;chco=000D99,99000D&amp;chg=0,-1,1,1&amp;chxt=y,x&amp;chxs=0,h&amp;chxl=1:|<?= implode('|', $Labels) ?>&amp;chxr=0,0,<?= $Max ?>&amp;chd=t:<?= implode(',', $InFlow) ?>|<?= implode(',', $OutFlow) ?>&amp;chls=2,4,0&amp;chdl=New+Registrations|Disabled+Users&amp;chf=bg,s,FFFFFF00" alt="<?= t('server.tools.user_flow_vs_time') ?>" />
 		</div>
 	<?  } ?>
-	<div class="BodyNavLinks">
-		<?
-		$Pages = Format::get_pages($Page, $Results, DAYS_PER_PAGE, 11);
-		echo $Pages;
-		?>
-	</div>
+	<? View::pages($Pages) ?>
 	<table class="TableUserFlow Table">
 		<tr class="Table-rowHeader">
 			<td class="Table-cell"><?= t('server.tools.date') ?></td>
@@ -155,8 +154,6 @@ $DB->set_query_id($RS);
 			</tr>
 		<?  } ?>
 	</table>
-	<div class="BodyNavLinks">
-		<?= $Pages ?>
-	</div>
+	<? View::pages($Pages) ?>
 </div>
 <? View::show_footer(); ?>

@@ -1050,11 +1050,11 @@ WHERE xs.uid =" . $UserID . " and xs.tstamp >= unix_timestamp(date_format(now(),
                     ]
                 );
             ?>
-                <div class="Box is-noBorder">
-                    <div class="Box-headerTitle">
-                        <div class="Box-header"><?= t('server.user.ratio_watch') ?></div>
+                <div class="Group">
+                    <div class="Group-headerTitle">
+                        <div class="Group-header"><?= t('server.user.ratio_watch') ?></div>
                     </div>
-                    <div class="Box-body"><?= $RatioWatchText ?></div>
+                    <div class="Group-body"><?= $RatioWatchText ?></div>
                 </div>
             <?
             }
@@ -1074,7 +1074,7 @@ WHERE xs.uid =" . $UserID . " and xs.tstamp >= unix_timestamp(date_format(now(),
             }
             if (CONFIG['ENABLE_BADGE']) {
             ?>
-                <div class="Box is-noBorder">
+                <div class="Group">
                     <script>
                         var i = 0;
 
@@ -1096,13 +1096,13 @@ WHERE xs.uid =" . $UserID . " and xs.tstamp >= unix_timestamp(date_format(now(),
                         }
                     </script>
 
-                    <div class="Box-header">
-                        <div class="Box-headerTitle"><a href="/badges.php"><?= t('server.user.badge_center') ?></a></div>
-                        <div class="Box-headerActions">
+                    <div class="Group-header">
+                        <div class="Group-headerTitle"><a href="/badges.php"><?= t('server.user.badge_center') ?></a></div>
+                        <div class="Group-headerActions">
                             <span><a href="#" onclick="badgesDisplay()"><?= t('server.common.hide') ?></a></span>
                         </div>
                     </div>
-                    <div id="badge_display_head" class="Box-body badge_display">
+                    <div id="badge_display_head" class="Group-body badge_display">
                         <?
 
                         foreach ($WearOrDisplay['Profile'] as $BadgeID) {
@@ -1144,33 +1144,45 @@ WHERE xs.uid =" . $UserID . " and xs.tstamp >= unix_timestamp(date_format(now(),
             }
             ?>
 
-            <div class="Post">
-                <div class="Post-header">
-                    <div class="Post-headerLeft">
-                        <div class="Post-headerTitle"><?= !empty($InfoTitle) ? $InfoTitle : t('server.user.infotitle'); ?>
-                        </div>
-                    </div>
-                    <div class="Post-headerActions">
-                        <a href="#" onclick="globalapp.toggleAny(event, '#profilediv');return false;">
-                            <span class="u-toggleAny-show u-hidden"><?= t('server.common.show') ?></span>
-                            <span class="u-toggleAny-hide"><?= t('server.common.hide') ?></span>
-                        </a>
+            <div class="Group">
+                <div class="Group-header">
+                    <div class="Group-headerTitle">
+                        <?= t('server.user.infotitle') ?>
                     </div>
                 </div>
-                <div class="Post-body HtmlText PostArticle profileinfo" id="profilediv">
+                <div class="Group-body">
+                    <div class="Post">
+                        <div class="Post-header">
+                            <div class="Post-headerLeft">
+                                <div class="Post-headerTitle"><?= !empty($InfoTitle) ? $InfoTitle : t('server.user.infotitle'); ?>
+                                </div>
+                            </div>
+                            <div class="Post-headerActions">
+                                <a href="#" onclick="globalapp.toggleAny(event, '#profilediv');return false;">
+                                    <span class="u-toggleAny-show u-hidden"><?= t('server.common.show') ?></span>
+                                    <span class="u-toggleAny-hide"><?= t('server.common.hide') ?></span>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="Post-body HtmlText PostArticle profileinfo" id="profilediv">
+                            <?
+                            if (!$Info) {
+                            ?>
+                                <?= t('server.user.no_infotitle') ?>
+                            <?
+                            } else {
+                                echo Text::full_format($Info);
+                            }
+                            ?>
+                        </div>
+                    </div>
                     <?
-                    if (!$Info) {
-                    ?>
-                        <?= t('server.user.no_infotitle') ?>
-                    <?
-                    } else {
-                        echo Text::full_format($Info);
-                    }
+                    DonationsView::render_profile_rewards($EnabledRewards, $ProfileRewards);
                     ?>
                 </div>
             </div>
             <?
-            DonationsView::render_profile_rewards($EnabledRewards, $ProfileRewards);
+
 
             if (check_paranoia_here('snatched')) {
                 $RecentSnatches = $Cache->get_value("recent_snatches_$UserID");
@@ -1198,13 +1210,13 @@ WHERE xs.uid =" . $UserID . " and xs.tstamp >= unix_timestamp(date_format(now(),
                 }
                 if (!empty($RecentSnatches)) {
             ?>
-                    <div class="Box is-noBorder" id="recent_snatches">
-                        <div class="Box-header">
-                            <div class="Box-headerTitle">
+                    <div class="Group" id="recent_snatches">
+                        <div class="Group-header">
+                            <div class="Group-headerTitle">
                                 <?= t('server.user.last_torrents') ?>
                             </div>
                         </div>
-                        <div class="Box-body">
+                        <div class="Group-body">
                             <?
                             $tableRender = new TorrentGroupCoverTableView($RecentSnatches);
                             $tableRender->render(['UseTorrentID' => true]);
@@ -1239,13 +1251,13 @@ WHERE xs.uid =" . $UserID . " and xs.tstamp >= unix_timestamp(date_format(now(),
                 }
                 if (!empty($RecentUploads)) {
                 ?>
-                    <div class="Box is-noBorder" id="recent_uploads">
-                        <div class="Box-header">
-                            <div class="Box-headerTitle">
+                    <div class="Group" id="recent_uploads">
+                        <div class="Group-header">
+                            <div class="Group-headerTitle">
                                 <?= t('server.user.last_uploads') ?>
                             </div>
                         </div>
-                        <div class="Box-body">
+                        <div class="Group-body">
                             <?
                             $tableRender = new TorrentGroupCoverTableView($RecentUploads);
                             $tableRender->render(['UseTorrentID' => true]);
@@ -1276,25 +1288,23 @@ WHERE xs.uid =" . $UserID . " and xs.tstamp >= unix_timestamp(date_format(now(),
                 $GroupIDs = $DB->collect('GroupID');
                 $Groups = Torrents::get_groups($GroupIDs, true, false, false);
                 ?>
-                <div class="Box is-noBorder" id="collage<?= $CollageID ?>_box">
-                    <div class="Box-header">
-                        <div class="Box-headerTitle">
+                <div class="Group" id="collage<?= $CollageID ?>_box">
+                    <div class="Group-header">
+                        <div class="Group-headerTitle">
                             <?= $CName ?>
                         </div>
-                        <div class="Box-headerActions">
+                        <div class="Group-headerActions">
                             <span>
-                                <a href="collages.php?id=<?= $CollageID ?>">See full</a>
-                            </span>
-                            -
-                            <span>
-                                <a href="#" onclick="globalapp.toggleAny(event, '#collage<?= $CollageID ?>_box .Box-body');return false;">
+                                <a href="collages.php?id=<?= $CollageID ?>"><?= t('server.common.see_full') ?></a>
+                            </span> - <span>
+                                <a href="#" onclick="globalapp.toggleAny(event, '#collage<?= $CollageID ?>_box .Group-body');return false;">
                                     <span class="u-toggleAny-show <?= $FirstCol ? 'u-hidden' : '' ?>"><?= t('server.common.show') ?></span>
                                     <span class="u-toggleAny-hide <?= $FirstCol ? '' : 'u-hidden' ?>"><?= t('server.common.hide') ?></span>
                                 </a>
                             </span>
                         </div>
                     </div>
-                    <div class="Box-body <?= $FirstCol ? '' : 'u-hidden' ?>">
+                    <div class="Group-body <?= $FirstCol ? '' : 'u-hidden' ?>">
                         <?
                         $tableRender = new TorrentGroupCoverTableView($Groups);
                         $tableRender->render();
@@ -1317,19 +1327,19 @@ WHERE xs.uid =" . $UserID . " and xs.tstamp >= unix_timestamp(date_format(now(),
                 if ($SphQLResult->has_results()) {
                     $SphRequests = $SphQLResult->to_array('id', MYSQLI_ASSOC);
                 ?>
-                    <div class="Box is-noBorder" id="requests_box">
-                        <div class="Box-header">
-                            <div class="Box-headerTitle">
+                    <div class="Group" id="requests_box">
+                        <div class="Group-header">
+                            <div class="Group-headerTitle">
                                 <?= t('server.common.requests') ?>
                             </div>
-                            <div class="Box-headerActions">
+                            <div class="Group-headerActions">
                                 <a href="#" onclick="globalapp.toggleAny(event, '#requests');return false;">
                                     <span class="u-toggleAny-show"><?= t('server.common.show') ?></span>
                                     <span class="u-toggleAny-hide u-hidden"><?= t('server.common.hide') ?></span>
                                 </a>
                             </div>
                         </div>
-                        <div class="Box-body TableCotainer u-hidden" id="requests">
+                        <div class="Group-body TableCotainer u-hidden" id="requests">
                             <table class="Table TableRequest" cellpadding="6" cellspacing="1" border="0" width="100%">
                                 <tr class="Table-rowHeader">
                                     <td class="Table-cell">
@@ -1391,26 +1401,24 @@ WHERE xs.uid =" . $UserID . " and xs.tstamp >= unix_timestamp(date_format(now(),
                 include(CONFIG['SERVER_ROOT'] . '/classes/invite_tree.class.php');
                 $Tree = new INVITE_TREE($UserID, array('visible' => false));
                 ?>
-                <div class="Box is-noBorder" id="invitetree_box">
-                    <div class="Box-header">
-                        <div class="Box-headerTitle">
+                <div class="Group" id="invitetree_box">
+                    <div class="Group-header">
+                        <div class="Group-headerTitle">
                             <?= t('server.user.invite_tree') ?>
                         </div>
-                        <div class="Box-headerActions">
+                        <div class="Group-headerActions">
                             <a href="#" onclick="globalapp.toggleAny(event, '#invitetree');return false;">
                                 <span class="u-toggleAny-show"><?= t('server.common.show') ?></span>
                                 <span class="u-toggleAny-hide u-hidden"><?= t('server.common.hide') ?></span>
                             </a>
                         </div>
                     </div>
-                    <div id="invitetree" class="u-hidden Box-body">
+                    <div id="invitetree" class="u-hidden Group-body">
                         <? $Tree->make_tree(); ?>
                     </div>
                 </div>
                 <?
             }
-
-            // Linked accounts
 
             if (check_perms('users_mod')) {
                 DonationsView::render_donation_history($donation->history($UserID));
@@ -1438,19 +1446,19 @@ WHERE xs.uid =" . $UserID . " and xs.tstamp >= unix_timestamp(date_format(now(),
                 if ($DB->has_results()) {
                     $StaffPMs = $DB->to_array();
                 ?>
-                    <div class="Box is-noBorder" id="staffpms_box">
-                        <div class="Box-header">
-                            <div class="Box-headerTitle">
+                    <div class="Group" id="staffpms_box">
+                        <div class="Group-header">
+                            <div class="Group-headerTitle">
                                 <?= t('server.user.staff_pm') ?>
                             </div>
-                            <div class="Box-headerActions">
+                            <div class="Group-headerActions">
                                 <a href="#" onclick="globalapp.toggleAny(event, '#staffpms');return false;">
                                     <span class="u-toggleAny-show"><?= t('server.common.show') ?></span>
                                     <span class="u-toggleAny-hide u-hidden"><?= t('server.common.hide') ?></span>
                                 </a>
                             </div>
                         </div>
-                        <div class="Box-body u-hidden" id="staffpms">
+                        <div class="Group-body u-hidden" id="staffpms">
                             <table class="Table TableUserInbox">
                                 <tr class="Table-rowHeader">
                                     <td class="Table-cell"><?= t('server.user.subject') ?></td>
@@ -1520,19 +1528,16 @@ WHERE xs.uid =" . $UserID . " and xs.tstamp >= unix_timestamp(date_format(now(),
                 <?
                 }
             }
-            if (check_perms('users_mod')) {
-                include(CONFIG['SERVER_ROOT'] . '/sections/user/linkedfunctions.php');
-                user_dupes_table($UserID);
-            }
+
             if (check_perms('users_mod', $Class)) {
                 ?>
-                <div class="Box is-noBorder" id="staff_notes_box">
-                    <div class="Box-header">
-                        <div class="Box-headerTitle">
+                <div class="Group" id="staff_notes_box">
+                    <div class="Group-header">
+                        <div class="Group-headerTitle">
                             <?= t('server.user.staff_note') ?>
                         </div>
                     </div>
-                    <div id="staffnotes" class="Box-body">
+                    <div id="staffnotes" class="Group-body">
                         <div id="admincommentlinks" class="HtmlText AdminComment" style="width: 98%;">
                             <?= Text::full_format($AdminComment) ?>
                         </div>
@@ -1545,6 +1550,10 @@ WHERE xs.uid =" . $UserID . " and xs.tstamp >= unix_timestamp(date_format(now(),
             <!-- for the "jump to staff tools" button -->
 
             <?
+            if (check_perms('users_mod')) {
+                include(CONFIG['SERVER_ROOT'] . '/sections/user/linkedfunctions.php');
+                user_dupes_table($UserID);
+            }
 
             if (check_perms('users_mod', $Class)) { ?>
                 <form id="staff_tools" class="Form manage_form" name="user" id="form" action="user.php" method="post">

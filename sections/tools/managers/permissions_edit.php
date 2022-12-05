@@ -25,7 +25,7 @@ echo $Val->GenerateJS('permissionsform');
         </tr>
         <tr>
             <td class="label"><?= t('server.tools.class_level') ?></td>
-            <td><input class="Input" type="text" name="level" id="level" value="<?= !empty($level) ? display_str($level) : '' ?>" /></td>
+            <td><input class="Input is-small" type="text" name="level" id="level" value="<?= !empty($level) ? display_str($level) : '' ?>" /></td>
         </tr>
         <tr>
             <td class="label"><?= t('server.tools.secondary_class') ?></td>

@@ -3700,7 +3700,7 @@ server.tools.badge_progress: |-
 server.tools.badge_query: |-
   Query
 server.tools.badge_send: |-
-  Send
+  Badge
 server.tools.badge_sort: |-
   Sort
 server.tools.badge_tag: |-
@@ -3748,9 +3748,9 @@ server.tools.browser: |-
 server.tools.browser_usage: |-
   Browser Usage
 server.tools.btc_donations_balance: |-
-  Bitcoin donations (balance)
+  Balance
 server.tools.btc_donations_unprocessed: |-
-  Bitcoin donations (unprocessed)
+  Unprocessed
 server.tools.build_preview: |-
   Build preview
 server.tools.byuserid: |-
@@ -3780,13 +3780,13 @@ server.tools.cas_update_success_title_2: |-
 server.tools.cas_updates: |-
   CAS/Updates
 server.tools.cashe_current_index: |-
-  Cache Current Index
+  Current Item
 server.tools.cashe_storage: |-
   Cache Storage
 server.tools.cashe_storage_title: |-
   Evictions begin when storage exceeds 85%%
 server.tools.cashe_total_index: |-
-  Cache Total Index
+  Total Item
 server.tools.category: |-
   Category
 server.tools.category_manager: |-
@@ -3947,6 +3947,8 @@ server.tools.economy: |-
   Economy
 server.tools.edit_an_announcement: |-
   Edit an Announcement
+server.tools.edit_an_announcement_note: |-
+  Won't notice user
 server.tools.edit_requests_handled: |-
   Edit requests handled
 server.tools.email: |-
@@ -4391,6 +4393,8 @@ server.tools.proper_tag: |-
   Proper tag
 server.tools.publish_a_new_announcement: |-
   Publish a New Announcement
+server.tools.publish_a_new_announcement_tooltip: |-
+  Will notice user
 server.tools.puppeteer: |-
   Puppeteer
 server.tools.qq_group: |-
@@ -4544,11 +4548,11 @@ server.tools.size_today: |-
 server.tools.snatches: |-
   Snatches
 server.tools.someone_bonus: |-
-  Add Bonus
+  Bonus
 server.tools.someone_invites: |-
-  Add invites
+  Invites
 server.tools.someone_tokens: |-
-  Add tokens
+  Tokens
 server.tools.sort: |-
   Sort
 server.tools.sort_by_bad_labels: |-
@@ -4602,7 +4606,7 @@ server.tools.statistical_settlement_time_dividing_query_panel: |-
 server.tools.status: |-
   Status
 server.tools.stylesheets: |-
-  Stylesheets
+  Themes
 server.tools.subject: |-
   Subject
 server.tools.submit: |-
@@ -7192,7 +7196,7 @@ server.user.statistics: |-
 server.user.stats: |-
   Stats
 server.user.style: |-
-  Stylesheet
+  Theme
 server.user.style_tool: |-
   Styled tooltips
 server.user.style_tool_title: |-
@@ -7236,7 +7240,7 @@ server.user.the_total_amount_uplaoded_by_direct_invitees_was_: |-
 server.user.the_total_amount_uploaded_by_the_entire_tree_was: |-
   The total amount uploaded by the entire tree was&nbsp;
 server.user.theme: |-
-  Theme
+  Dark mode
 server.user.theme_auto: |-
   Auto
 server.user.theme_dark: |-
@@ -8261,3 +8265,57 @@ server.tools.user_permission_note: |-
   Before using permissions, please understand that it allows you to both add and remove access to specific features. If you think that to add access to a feature, you need to uncheck everything else, <strong>YOU ARE WRONG</strong>. The check boxes on the left, which are grayed out, are the standard permissions granted by their class (and donor/artist status). Any changes you make to the right side will overwrite this. It's not complicated, and if you screw up, click the "Defaults" link at the top. It will reset the user to their respective features granted by class, then you can select or deselect the one or two things you want to change. <strong>DO NOT DESELECT EVERYTHING.</strong> If you need further clarification, ask a developer before using this tool.
 server.tools.user_permission_manage: |-
   Permission manage
+server.tools.unban: |-
+  Unban
+server.tools.ban_ip: |-
+  Ban IP
+server.common.no_results: |-
+  No results.
+server.tools.approve_selected: |-
+  Approve Selected
+server.tools.reject_selected: |-
+  Reject Selected
+server.tools.discard_selected: |-
+  Discard Selected
+server.tools.approve: |-
+  Approve
+server.tools.discard: |-
+  Discard
+server.common.search_box: |-
+  Search Box
+server.tools.bitcoin_donations: |-
+  Bitcoin donations
+server.tools.donation_log: |-
+  Donation log
+server.tools.donation_source: |-
+  Source
+server.common.date_range: |-
+  Date Range
+server.common.reason: |-
+  Reason
+server.tools.page_total: |-
+  Page total
+server.tools.donation_add_points: |-
+  Add Points
+server.tools.donation_modify_values: |-
+  Modify Values
+server.tools.donation_prepaid_card: |-
+  Prepaid Card
+server.tools.donation_staff_pm: |-
+  Staff PM
+server.tools.new_email_blacklist: |-
+  Add Email Blacklist
+server.tools.ip_range: |-
+  IP address range
+server.common.invalid_param: |
+  Invalid param
+server.tools.cache_usage: |-
+  Cache usage
+server.tools.cache_hit_rate: |-
+  Cache hit rate
+server.tools.total_value: |-
+  Total
+server.tools.timestamps: |-
+  Timestamps
+server.common.see_full: |-
+  See full

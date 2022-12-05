@@ -29,9 +29,11 @@ View::show_header(t('server.tools.tracker_info'), '', 'PageToolOcelotInfo');
     <div class="BodyHeader">
         <h2 class="BodyHeader-nav"><?= t('server.tools.tracker_info') ?></h2>
     </div>
-    <div class="BodyNavLinks">
-        <a href="?action=<?= $_REQUEST['action'] ?>" class="brackets"><?= t('server.tools.main_stats') ?></a>
-    </div>
+    <? if (!empty($_GET['userid'])) { ?>
+        <div class="BodyNavLinks">
+            <a href="?action=<?= $_REQUEST['action'] ?>" class="brackets"><?= t('server.tools.main_stats') ?></a>
+        </div>
+    <? } ?>
     <div class="LayoutMainSidebar">
         <div class="Sidebar LayoutMainSidebar-sidebar">
             <div class="SidebarItem Box">
@@ -39,11 +41,12 @@ View::show_header(t('server.tools.tracker_info'), '', 'PageToolOcelotInfo');
                     <strong><?= t('server.tools.user_stats') ?></strong>
                 </div>
                 <div class="SidebarItem-body Box-body">
-                    <form class="FormOneLine FormToolUserStat" method="get" action="">
+                    <form class="FormToolUserStat" method="get" action="">
                         <input type="hidden" name="action" value="ocelot_info" />
-                        <span class="label"><?= t('server.tools.get_stats_for_user') ?></span><br />
-                        <input class="Input" type="text" name="userid" placeholder="<?= t('server.tools.user_id') ?>" value="<? Format::form('userid') ?>" />
-                        <input class="Button" type="submit" value="Go" />
+                        <div class="FormOneLine Form-row">
+                            <input class="Input" type="text" name="userid" placeholder="<?= t('server.tools.user_id') ?>" value="<? Format::form('userid') ?>" />
+                            <input class="Button" type="submit" value="<?= t('server.common.search') ?>" />
+                        </div>
                     </form>
                 </div>
             </div>

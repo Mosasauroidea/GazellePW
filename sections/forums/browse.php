@@ -36,13 +36,13 @@ View::show_header(t('server.forums.forums'), '', 'PageForumHome');
 <?
                 }
 ?>
-<div class="Box is-noBorder">
-    <div class="Box-header">
-        <div class="Box-headerTitle">
+<div class="Group">
+    <div class="Group-header">
+        <div class="Group-headerTitle">
             <?= $ForumCats[$CategoryID] ?>
         </div>
     </div>
-    <div class="Box-body">
+    <div class="Group-body">
         <div class="TableContainer">
             <table class="TableForum Table">
                 <tr class="Table-rowHeader">

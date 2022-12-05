@@ -1,5 +1,5 @@
 <?php
-if (!check_perms('admin_manage_navigation')) {
+if (!check_perms('admin_manage_forums')) {
     error(403);
 }
 

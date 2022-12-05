@@ -7,7 +7,7 @@ This page is run every 15 minutes, by cron.
 
 \*************************************************************************/
 
-set_time_limit(50000);
+set_time_limit(120000);
 ob_end_flush();
 gc_enable();
 
@@ -103,8 +103,13 @@ if (PHP_SAPI === 'cli') {
 
 if (check_perms('admin_schedule')) {
     authorize();
-    View::show_header('', '', 'PageScheduleHome');
-    echo '<pre>';
+    View::show_header(t('server.tools.schedule'), '', 'PageScheduleHome');
+?>
+    <div class="LayoutPage">
+        <div class="BodyHeader">
+            <h2 class="BodyHeader-nav"><?= t('server.tools.schedule') ?></h2>
+        </div>
+    <?
 }
 
 $DB->query("

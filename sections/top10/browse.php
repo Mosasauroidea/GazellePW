@@ -74,12 +74,12 @@ View::show_footer();
 
 function generate_torrent_table($Caption, $Tag, $Groups, $Limit) {
 ?>
-    <div class="Box is-noBorder">
-        <div class="Box-header">
-            <div class="Box-headerTitle"><?= t('server.top10.top') ?> <?= "$Limit $Caption" ?>
+    <div class="Group">
+        <div class="Group-header">
+            <div class="Group-headerTitle"><?= t('server.top10.top') ?> <?= "$Limit $Caption" ?>
             </div>
             <? if (empty($_GET['advanced'])) { ?>
-                <small class="Box-headerActions top10_quantity_links">
+                <small class="Group-headerActions top10_quantity_links">
                     <?
                     switch ($Limit) {
                         case 100: ?>
@@ -100,7 +100,7 @@ function generate_torrent_table($Caption, $Tag, $Groups, $Limit) {
                 </small>
             <? } ?>
         </div>
-        <div class="Box-body">
+        <div class="Group-body">
             <?
             if (empty($Groups)) {
                 echo '<table>

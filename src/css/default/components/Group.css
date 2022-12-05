@@ -1,0 +1,28 @@
+.Group {
+  padding-bottom: var(--global-space-lg);
+}
+
+.Group-header {
+  padding-bottom: var(--global-space-default);
+  display: flex;
+  justify-self: flex-start;
+}
+.Group-headerTitle {
+  font-size: 1.3rem;
+  font-weight: bold;
+  color: var(--global-color-placeholder);
+}
+
+.Group-headerActions {
+  display: flex;
+  align-items: flex-end;
+  margin-left: auto;
+  gap: var(--global-space-sm);
+}
+
+.Group-body {
+  display: flex;
+  gap: var(--global-space-default);
+  flex-wrap: wrap;
+  flex-direction: column;
+}

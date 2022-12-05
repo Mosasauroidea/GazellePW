@@ -53,7 +53,7 @@ Post-headerMultipleRows
 }
 
 .Post-headerTitle {
-  font-size: var(--global-fontSize-lg);
+  font-size: 1.3rem;
   font-weight: bold;
   display: inline;
 }

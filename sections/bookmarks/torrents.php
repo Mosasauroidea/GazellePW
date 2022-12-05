@@ -150,18 +150,14 @@ View::show_header($Title, 'browse,collage', 'PageBookmarkTorrent');
         </div>
     </div>
 
-    <div class="Box is-noBorder">
-        <div class="Box-body">
-            <?php
-            $Groups = [];
-            foreach ($GroupIDs as $GroupID) {
-                $Groups[] = $TorrentList[$GroupID];
-            }
-            $tableRender = new TorrentGroupCoverTableView($Groups);
-            $tableRender->render();
-            ?>
-        </div>
-    </div>
+    <?php
+    $Groups = [];
+    foreach ($GroupIDs as $GroupID) {
+        $Groups[] = $TorrentList[$GroupID];
+    }
+    $tableRender = new TorrentGroupCoverTableView($Groups);
+    $tableRender->render();
+    ?>
 </div>
 
 <?php

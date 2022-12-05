@@ -130,23 +130,25 @@ $DB->query("SELECT FOUND_ROWS()");
 list($NumResults) = $DB->next_record();
 $DB->set_query_id($QueryID);
 ?>
-
-<div class="BodyHeader">
-    <h2 class="BodyHeader-nav"><?= t('server.tools.auto_enable_requests') ?></h2>
-</div>
-<div class="BodyNavLinks">
-    <a class="brackets" href="tools.php?action=enable_requests" data-tooltip="<?= t('server.tools.auto_enable_requests_main_title') ?>"><?= t('server.tools.auto_enable_requests_main') ?></a>
-    <a class="brackets" href="tools.php?action=enable_requests&amp;view=perfect&amp;<?= Format::get_url(array('view', 'action')) ?>" data-tooltip="<?= t('server.tools.auto_enable_requests_perfect_title') ?>"><?= t('server.tools.auto_enable_requests_perfect') ?></a>
-    <a class="brackets" href="tools.php?action=enable_requests&amp;view=minus_ip&amp;<?= Format::get_url(array('view', 'action')) ?>" data-tooltip="<?= t('server.tools.auto_enable_requests_perfect_minus_ip_title') ?>"><?= t('server.tools.auto_enable_requests_perfect_minus_ip') ?></a>
-    <a class="brackets" href="tools.php?action=enable_requests&amp;view=invalid_email&amp;<?= Format::get_url(array('view', 'action')) ?>" data-tooltip="<?= t('server.tools.auto_enable_requests_invalid_email_title') ?>"><?= t('server.tools.auto_enable_requests_invalid_email') ?></a>
-    <a class="brackets" href="tools.php?action=enable_requests&amp;view=ip_overlap&amp;<?= Format::get_url(array('view', 'action')) ?>" data-tooltip="<?= t('server.tools.auto_enable_requests_ip_overlap_title') ?>"><?= t('server.tools.auto_enable_requests_ip_overlap') ?></a>
-    <a class="brackets" href="tools.php?action=enable_requests&amp;view=manual_disable&amp;<?= Format::get_url(array('view', 'action')) ?>" data-tooltip="<?= t('server.tools.auto_enable_requests_manual_disable_title') ?>"><?= t('server.tools.auto_enable_requests_manual_disable') ?></a>
-    <a class="brackets" href="" data-tooltip="<?= t('server.tools.auto_enable_requests_search_title') ?>" onclick="$('#search_form').gtoggle(); return false;"><?= t('server.tools.auto_enable_requests_search') ?></a>
-    <a class="brackets" href="" data-tooltip="<?= t('server.tools.auto_enable_requests_scores_title') ?>" onclick="$('#scores').gtoggle(); return false;"><?= t('server.tools.auto_enable_requests_scores') ?></a>
-</div><br />
 <div class="LayoutBody">
-    <div class="TableContainer">
-        <table class="Table hidden" id="scores" style="width: 50%; margin: 0 auto;">
+    <div class="BodyHeader">
+        <h2 class="BodyHeader-nav"><?= t('server.tools.auto_enable_requests') ?></h2>
+        <div class="BodyNavLinks">
+            <a class="brackets" href="" data-tooltip="<?= t('server.tools.auto_enable_requests_search_title') ?>" onclick="$('#search_form').gtoggle(); return false;"><?= t('server.tools.auto_enable_requests_search') ?></a>
+            <a class="brackets" href="" data-tooltip="<?= t('server.tools.auto_enable_requests_scores_title') ?>" onclick="$('#scores').gtoggle(); return false;"><?= t('server.tools.auto_enable_requests_scores') ?></a>
+        </div>
+        <div class="BodyNavLinks">
+            <a class="brackets" href="tools.php?action=enable_requests" data-tooltip="<?= t('server.tools.auto_enable_requests_main_title') ?>"><?= t('server.tools.auto_enable_requests_main') ?></a>
+            <a class="brackets" href="tools.php?action=enable_requests&amp;view=perfect&amp;<?= Format::get_url(array('view', 'action')) ?>" data-tooltip="<?= t('server.tools.auto_enable_requests_perfect_title') ?>"><?= t('server.tools.auto_enable_requests_perfect') ?></a>
+            <a class="brackets" href="tools.php?action=enable_requests&amp;view=minus_ip&amp;<?= Format::get_url(array('view', 'action')) ?>" data-tooltip="<?= t('server.tools.auto_enable_requests_perfect_minus_ip_title') ?>"><?= t('server.tools.auto_enable_requests_perfect_minus_ip') ?></a>
+            <a class="brackets" href="tools.php?action=enable_requests&amp;view=invalid_email&amp;<?= Format::get_url(array('view', 'action')) ?>" data-tooltip="<?= t('server.tools.auto_enable_requests_invalid_email_title') ?>"><?= t('server.tools.auto_enable_requests_invalid_email') ?></a>
+            <a class="brackets" href="tools.php?action=enable_requests&amp;view=ip_overlap&amp;<?= Format::get_url(array('view', 'action')) ?>" data-tooltip="<?= t('server.tools.auto_enable_requests_ip_overlap_title') ?>"><?= t('server.tools.auto_enable_requests_ip_overlap') ?></a>
+            <a class="brackets" href="tools.php?action=enable_requests&amp;view=manual_disable&amp;<?= Format::get_url(array('view', 'action')) ?>" data-tooltip="<?= t('server.tools.auto_enable_requests_manual_disable_title') ?>"><?= t('server.tools.auto_enable_requests_manual_disable') ?></a>
+        </div>
+
+    </div>
+    <div id="scores" class="TableContainer hidden">
+        <table class="Table" style="width: 50%; margin: 0 auto;">
             <tr class="Table-rowHeader">
                 <th class="Table-cell"><?= t('server.tools.username') ?></th>
                 <th class="Table-cell"><?= t('server.tools.auto_enable_requests_checked') ?></th>
@@ -171,169 +173,178 @@ $DB->set_query_id($QueryID);
         <input type="hidden" name="action" value="enable_requests" />
         <input type="hidden" name="view" value="<?= $_GET['view'] ?>" />
         <input type="hidden" name="search" value="1" />
-        <table class="Form-rowList">
-            <tr class="Form-row">
-                <td class="label"><?= t('server.tools.username') ?></td>
-                <td class="Form-inputs"><input class="Input" type="text" name="username" value="<?= $_GET['username'] ?>" /></td>
-            </tr>
-            <tr class="Form-row">
-                <td class="label"><?= t('server.tools.ip_address') ?></td>
-                <td class="Form-inputs"><input class="Input" type="text" name="ip" value="<?= $_GET['ip'] ?>" /></td>
-            </tr>
-            <tr class="Form-row">
-                <td class="label" data-tooltip="<?= t('server.tools.submitted_timestamp_title') ?>"><?= t('server.tools.submitted_timestamp') ?></td>
-                <td class="Form-inputs">
-                    <select class="Input" name="submitted_between" onchange="ChangeDateSearch(this.value, 'submitted_timestamp2');">
-                        <option class="Select-option" value="on" <?= $_GET['submitted_between'] == 'on' ? 'selected' : '' ?>><?= t('server.tools.submitted_on') ?></option>
-                        <option class="Select-option" value="before" <?= $_GET['submitted_between'] == 'before' ? 'selected' : '' ?>><?= t('server.tools.submitted_before') ?></option>
-                        <option class="Select-option" value="after" <?= $_GET['submitted_between'] == 'after' ? 'selected' : '' ?>><?= t('server.tools.submitted_after') ?></option>
-                        <option class="Select-option" value="between" <?= $_GET['submitted_between'] == 'between' ? 'selected' : '' ?>><?= t('server.tools.submitted_between') ?></option>
-                    </select>
-                    <input class="Input" type="date" name="submitted_timestamp1" value="<?= $_GET['submitted_timestamp1'] ?>" />
-                    <input class="Input" type="date" id="submitted_timestamp2" name="submitted_timestamp2" value="<?= $_GET['submitted_timestamp2'] ?>" <?= $_GET['submitted_between'] != 'between' ? 'style="display: none;"' : '' ?> />
-                </td>
-            </tr>
-            <tr class="Form-row">
-                <td class="label"><?= t('server.tools.handled_by_username') ?></td>
-                <td class="Form-inputs"><input class="Input" type="text" name="handled_username" value="<?= $_GET['handled_username'] ?>" /></td>
-            </tr>
-            <tr class="Form-row">
-                <td class="label" data-tooltip="<?= t('server.tools.handled_timestamp_title') ?>"><?= t('server.tools.handled_timestamp') ?></td>
-                <td class="Form-inputs">
-                    <select class="Input" name="handled_between" onchange="ChangeDateSearch(this.value, 'handled_timestamp2');">
-                        <option class="Select-option" value="on" <?= $_GET['handled_between'] == 'on' ? 'selected' : '' ?>><?= t('server.tools.handled_on') ?></option>
-                        <option class="Select-option" value="before" <?= $_GET['handled_between'] == 'before' ? 'selected' : '' ?>><?= t('server.tools.handled_before') ?></option>
-                        <option class="Select-option" value="after" <?= $_GET['handled_between'] == 'after' ? 'selected' : '' ?>><?= t('server.tools.handled_after') ?></option>
-                        <option class="Select-option" value="between" <?= $_GET['handled_between'] == 'between' ? 'selected' : '' ?>><?= t('server.tools.handled_between') ?></option>
-                    </select>
-                    <input class="Input" type="date" name="handled_timestamp1" value="<?= $_GET['handled_timestamp1'] ?>" />
-                    <input class="Input" type="date" id="handled_timestamp2" name="handled_timestamp2" value="<?= $_GET['handled_timestamp2'] ?>" <?= $_GET['handled_between'] != 'between' ? 'style="display: none;"' : '' ?> />
-                </td>
-            </tr>
-            <tr class="Form-row">
-                <td class="label"><?= t('server.tools.handled_outcome') ?></td>
-                <td class="Form-inputs">
-                    <select class="Input" name="outcome_search">
-                        <option class="Select-option" value="">---</option>
-                        <option class="Select-option" value="<?= AutoEnable::APPROVED ?>" <?= $_GET['outcome_search'] == AutoEnable::APPROVED ? 'selected' : '' ?>><?= t('server.tools.outcome_approved') ?></option>
-                        <option class="Select-option" value="<?= AutoEnable::DENIED ?>" <?= $_GET['outcome_search'] == AutoEnable::DENIED ? 'selected' : '' ?>><?= t('server.tools.outcome_denied') ?></option>
-                        <option class="Select-option" value="<?= AutoEnable::DISCARDED ?>" <?= $_GET['outcome_search'] == AutoEnable::DISCARDED ? 'selected' : '' ?>><?= t('server.tools.outcome_discarded') ?></option>
-                    </select>
-                </td>
-            </tr>
-            <tr class="Form-row">
-                <td class="label"><?= t('server.tools.include_checked') ?></td>
-                <td class="Form-inputs">
-                    <input class="Input" type="checkbox" name="show_checked" <?= isset($_GET['show_checked']) ? t('server.tools.checked_mark') : '' ?> />
-                </td>
-            </tr>
-            <tr class="Form-row">
-                <td class="label"><?= t('server.tools.order_by') ?></td>
-                <td class="Form-inputs">
-                    <select class="Input" name="order">
-                        <option class="Select-option" value="submitted_timestamp" <?= $_GET['order'] == 'submitted_timestamp' ? 'selected' : '' ?>><?= t('server.tools.submitted_timestamp') ?></option>
-                        <option class="Select-option" value="outcome" <?= $_GET['order'] == 'outcome' ? 'selected' : '' ?>><?= t('server.tools.handled_outcome') ?></option>
-                        <option class="Select-option" value="handled_timestamp" <?= $_GET['order'] == 'handled_timestamp' ? 'selected' : '' ?>><?= t('server.tools.handled_timestamp') ?></option>
-                    </select>
-                    <select class="Input" name="way">
-                        <option class="Select-option" value="asc" <?= $_GET['way'] == 'asc' ? 'selected' : '' ?>><?= t('server.tools.ascending') ?></option>
-                        <option class="Select-option" value="desc" <?= !isset($_GET['way']) || $_GET['way'] == 'desc' ? 'selected' : '' ?>><?= t('server.tools.descending') ?></option>
-                    </select>
-                </td>
-            </tr>
-            <tr class="Form-row">
-                <td class="Form-submit" colspan=2>
-                    <input class="Button" type="submit" value="<?= t('server.common.search') ?>" />
-                </td>
-            </tr>
-        </table>
-    </form>
-    <?
-    if ($NumResults > 0) { ?>
-        <div class="BodyNavLinks">
-            <?
-            $Pages = Format::get_pages($Page, $NumResults, $RequestsPerPage);
-            echo $Pages;
-            ?>
-        </div>
-        <div class='option'>
-            <input class=" Button" type="submit" id="outcome" value="Approve Selected" />
-            <input class="Button" type="submit" id="outcome" value="Reject Selected" />
-            <input class="Button" type="submit" id="outcome" value="Discard Selected" />
-        </div>
-        <div class="TableContainer">
-            <table class="TableEnableRequest Table">
-                <tr class="Table-rowHeader">
-                    <td class="Table-cell Table-cellCenter">
-                        <input class="Input" type="checkbox" id="check_all" />
-                    </td>
-                    <td class="Table-cell"><?= t('server.tools.username') ?></td>
-                    <td class="Table-cell"><?= t('server.tools.email_address') ?></td>
-                    <td class="Table-cell"><?= t('server.tools.ip_address') ?></td>
-                    <td class="Table-cell"><?= t('server.tools.user_agent') ?></td>
-                    <td class="Table-cell"><?= t('server.tools.age') ?></td>
-                    <td class="Table-cell"><?= t('server.tools.ban_reason') ?></td>
-                    <td class="Table-cell"><?= t('server.tools.comment') ?><?= $ShowChecked ? t('server.tools.comment_checked_by') : '' ?></td>
-                    <td class="Table-cell"><?= t('server.tools.submit') ?><?= $ShowChecked ? t('server.tools.submit_checked_date') : '' ?></td>
-                    <? if ($ShowChecked) { ?>
-                        <td class="Table-cell"><?= t('server.tools.outcome') ?></td>
-                    <?      } ?>
+        <div class="SearchPageBody">
+            <table class="Form-rowList">
+                <tr class="Form-row">
+                    <td class="Form-label"><?= t('server.tools.username') ?></td>
+                    <td class="Form-inputs"><input class="Input" type="text" name="username" value="<?= $_GET['username'] ?>" /></td>
                 </tr>
-                <?
-                while (list($ID, $UserID, $Email, $IP, $UserAgent, $Timestamp, $BanReason, $CheckedBy, $HandledTimestamp, $Outcome) = $DB->next_record()) {
-                ?>
-                    <tr class="Table-row" id="row_<?= $ID ?>">
-                        <td class="Table-cell Table-celLcenter">
-                            <? if (!$HandledTimestamp) { ?>
-                                <input class="Input" type="checkbox" id="multi" data-id="<?= $ID ?>" />
-                            <?          } ?>
-                        </td>
-                        <td class="Table-cell"><?= Users::format_username($UserID) ?></td>
-                        <td class="Table-cell"><?= display_str($Email) ?></td>
-
-                        <td class="Table-cell"><?= display_str($IP) ?></td>
-
-                        <td class="Table-cell"><?= display_str($UserAgent) ?></td>
-                        <td class="Table-cell"><?= time_diff($Timestamp) ?></td>
-                        <td class="Table-cell"><?= ($BanReason == 3) ? '<b>' . t('server.tools.inactivity') . '</b>' : t('server.tools.other') ?></td>
-                        <? if (!$HandledTimestamp) { ?>
-                            <td class="Table-cell"><input class="Input" type="text" id="comment<?= $ID ?>" placeholder="<?= t('server.tools.comment') ?>" /></td>
-                            <td class="Table-cell">
-                                <div class='option'>
-                                    <input class="Button" type="submit" id="outcome" value="Approve" data-id="<?= $ID ?>" />
-                                    <input class="Button" type="submit" id="outcome" value="Reject" data-id="<?= $ID ?>" />
-                                    <input class="Button" type="submit" id="outcome" value="Discard" data-id="<?= $ID ?>" />
-                                </div>
-                            </td>
-                        <?      } else { ?>
-                            <td class="Table-cell"><?= Users::format_username($CheckedBy); ?></td>
-                            <td class="Table-cell"><?= $HandledTimestamp ?></td>
-                        <?      }
-
-                        if ($ShowChecked) { ?>
-                            <td class="Table-cell"><?= AutoEnable::get_outcome_string($Outcome) ?>
-                                <? if ($Outcome == AutoEnable::DISCARDED) { ?>
-                                    <a href="" id="unresolve" onclick="return false;" class="brackets" data-id="<?= $ID ?>"><?= t('server.tools.unresolve') ?></a>
-                                <?          } ?>
-                            </td>
-                        <?      } ?>
-                    </tr>
-                <?
-                }
-                ?>
+                <tr class="Form-row">
+                    <td class="Form-label"><?= t('server.tools.ip_address') ?></td>
+                    <td class="Form-inputs"><input class="Input" type="text" name="ip" value="<?= $_GET['ip'] ?>" /></td>
+                </tr>
+                <tr class="Form-row">
+                    <td class="Form-label" data-tooltip="<?= t('server.tools.submitted_timestamp_title') ?>"><?= t('server.tools.submitted_timestamp') ?></td>
+                    <td class="Form-inputs">
+                        <select class="Input" name="submitted_between" onchange="ChangeDateSearch(this.value, 'submitted_timestamp2');">
+                            <option class="Select-option" value="on" <?= $_GET['submitted_between'] == 'on' ? 'selected' : '' ?>><?= t('server.tools.submitted_on') ?></option>
+                            <option class="Select-option" value="before" <?= $_GET['submitted_between'] == 'before' ? 'selected' : '' ?>><?= t('server.tools.submitted_before') ?></option>
+                            <option class="Select-option" value="after" <?= $_GET['submitted_between'] == 'after' ? 'selected' : '' ?>><?= t('server.tools.submitted_after') ?></option>
+                            <option class="Select-option" value="between" <?= $_GET['submitted_between'] == 'between' ? 'selected' : '' ?>><?= t('server.tools.submitted_between') ?></option>
+                        </select>
+                        <input class="Input" type="date" name="submitted_timestamp1" value="<?= $_GET['submitted_timestamp1'] ?>" />
+                        <input class="Input" type="date" id="submitted_timestamp2" name="submitted_timestamp2" value="<?= $_GET['submitted_timestamp2'] ?>" <?= $_GET['submitted_between'] != 'between' ? 'style="display: none;"' : '' ?> />
+                    </td>
+                </tr>
+                <tr class="Form-row">
+                    <td class="Form-label"><?= t('server.tools.handled_by_username') ?></td>
+                    <td class="Form-inputs"><input class="Input" type="text" name="handled_username" value="<?= $_GET['handled_username'] ?>" /></td>
+                </tr>
+                <tr class="Form-row">
+                    <td class="Form-label" data-tooltip="<?= t('server.tools.handled_timestamp_title') ?>"><?= t('server.tools.handled_timestamp') ?></td>
+                    <td class="Form-inputs">
+                        <select class="Input" name="handled_between" onchange="ChangeDateSearch(this.value, 'handled_timestamp2');">
+                            <option class="Select-option" value="on" <?= $_GET['handled_between'] == 'on' ? 'selected' : '' ?>><?= t('server.tools.handled_on') ?></option>
+                            <option class="Select-option" value="before" <?= $_GET['handled_between'] == 'before' ? 'selected' : '' ?>><?= t('server.tools.handled_before') ?></option>
+                            <option class="Select-option" value="after" <?= $_GET['handled_between'] == 'after' ? 'selected' : '' ?>><?= t('server.tools.handled_after') ?></option>
+                            <option class="Select-option" value="between" <?= $_GET['handled_between'] == 'between' ? 'selected' : '' ?>><?= t('server.tools.handled_between') ?></option>
+                        </select>
+                        <input class="Input" type="date" name="handled_timestamp1" value="<?= $_GET['handled_timestamp1'] ?>" />
+                        <input class="Input" type="date" id="handled_timestamp2" name="handled_timestamp2" value="<?= $_GET['handled_timestamp2'] ?>" <?= $_GET['handled_between'] != 'between' ? 'style="display: none;"' : '' ?> />
+                    </td>
+                </tr>
+                <tr class="Form-row">
+                    <td class="Form-label"><?= t('server.tools.handled_outcome') ?></td>
+                    <td class="Form-inputs">
+                        <select class="Input" name="outcome_search">
+                            <option class="Select-option" value="">---</option>
+                            <option class="Select-option" value="<?= AutoEnable::APPROVED ?>" <?= $_GET['outcome_search'] == AutoEnable::APPROVED ? 'selected' : '' ?>><?= t('server.tools.outcome_approved') ?></option>
+                            <option class="Select-option" value="<?= AutoEnable::DENIED ?>" <?= $_GET['outcome_search'] == AutoEnable::DENIED ? 'selected' : '' ?>><?= t('server.tools.outcome_denied') ?></option>
+                            <option class="Select-option" value="<?= AutoEnable::DISCARDED ?>" <?= $_GET['outcome_search'] == AutoEnable::DISCARDED ? 'selected' : '' ?>><?= t('server.tools.outcome_discarded') ?></option>
+                        </select>
+                    </td>
+                </tr>
+                <tr class="Form-row">
+                    <td class="Form-label"><?= t('server.tools.include_checked') ?></td>
+                    <td class="Form-inputs">
+                        <input class="Input" type="checkbox" name="show_checked" <?= isset($_GET['show_checked']) ? t('server.tools.checked_mark') : '' ?> />
+                    </td>
+                </tr>
+                <tr class="Form-row">
+                    <td class="Form-label"><?= t('server.tools.order_by') ?></td>
+                    <td class="Form-inputs">
+                        <select class="Input" name="order">
+                            <option class="Select-option" value="submitted_timestamp" <?= $_GET['order'] == 'submitted_timestamp' ? 'selected' : '' ?>><?= t('server.tools.submitted_timestamp') ?></option>
+                            <option class="Select-option" value="outcome" <?= $_GET['order'] == 'outcome' ? 'selected' : '' ?>><?= t('server.tools.handled_outcome') ?></option>
+                            <option class="Select-option" value="handled_timestamp" <?= $_GET['order'] == 'handled_timestamp' ? 'selected' : '' ?>><?= t('server.tools.handled_timestamp') ?></option>
+                        </select>
+                        <select class="Input" name="way">
+                            <option class="Select-option" value="asc" <?= $_GET['way'] == 'asc' ? 'selected' : '' ?>><?= t('server.tools.ascending') ?></option>
+                            <option class="Select-option" value="desc" <?= !isset($_GET['way']) || $_GET['way'] == 'desc' ? 'selected' : '' ?>><?= t('server.tools.descending') ?></option>
+                        </select>
+                    </td>
+                </tr>
             </table>
         </div>
-        <div class="BodyNavLinks">
-            <?
-            $Pages = Format::get_pages($Page, $NumResults, $RequestsPerPage);
-            echo $Pages;
-            ?>
+        <div class="SearchPageFooter">
+            <div class="SearchPageFooter-actions">
+                <input class="Button" type="submit" value="<?= t('server.common.search') ?>" />
+            </div>
         </div>
+    </form>
+    <div class="u-vstack">
+        <?
+        if ($NumResults > 0) {
 
-    <? } else { ?>
-        <h2 align="center"><?= t('server.tools.no_new_pending_auto_enable_requests') ?><?= isset($_GET['view']) ? t('server.tools.space_in_this_view') : '' ?></h2>
-    <? }
-    ?>
+            $Pages = Format::get_pages($Page, $NumResults, $RequestsPerPage);
+            if ($Pages) {
+        ?>
+                <div class="BodyNavLinks">
+                    <?
+                    echo $Pages;
+                    ?>
+                </div>
+            <?
+            } ?>
+            <div class='option'>
+                <button class=" Button" type="submit" id="outcome" value="Approve Selected"><?= t('server.tools.approve_selected') ?></button>
+                <button class="Button" type="submit" id="outcome" value="Reject Selected"><?= t('server.tools.reject_selected') ?></button>
+                <button class="Button" type="submit" id="outcome" value="Discard Selected"><?= t('server.tools.discard_selected') ?></button>
+            </div>
+            <div class="TableContainer">
+                <table class="TableEnableRequest Table">
+                    <tr class="Table-rowHeader">
+                        <td class="Table-cell Table-cellCenter">
+                            <input class="Input" type="checkbox" id="check_all" />
+                        </td>
+                        <td class="Table-cell"><?= t('server.tools.username') ?></td>
+                        <td class="Table-cell"><?= t('server.tools.email_address') ?></td>
+                        <td class="Table-cell"><?= t('server.tools.ip_address') ?></td>
+                        <td class="Table-cell"><?= t('server.tools.user_agent') ?></td>
+                        <td class="Table-cell"><?= t('server.tools.age') ?></td>
+                        <td class="Table-cell"><?= t('server.tools.ban_reason') ?></td>
+                        <td class="Table-cell"><?= t('server.tools.comment') ?><?= $ShowChecked ? t('server.tools.comment_checked_by') : '' ?></td>
+                        <td class="Table-cell"><?= t('server.tools.submit') ?><?= $ShowChecked ? t('server.tools.submit_checked_date') : '' ?></td>
+                        <? if ($ShowChecked) { ?>
+                            <td class="Table-cell"><?= t('server.tools.outcome') ?></td>
+                        <?      } ?>
+                    </tr>
+                    <?
+                    while (list($ID, $UserID, $Email, $IP, $UserAgent, $Timestamp, $BanReason, $CheckedBy, $HandledTimestamp, $Outcome) = $DB->next_record()) {
+                    ?>
+                        <tr class="Table-row" id="row_<?= $ID ?>">
+                            <td class="Table-cell Table-celLcenter">
+                                <? if (!$HandledTimestamp) { ?>
+                                    <input class="Input" type="checkbox" id="multi" data-id="<?= $ID ?>" />
+                                <?          } ?>
+                            </td>
+                            <td class="Table-cell"><?= Users::format_username($UserID) ?></td>
+                            <td class="Table-cell"><?= display_str($Email) ?></td>
+
+                            <td class="Table-cell"><?= display_str($IP) ?></td>
+
+                            <td class="Table-cell"><?= display_str($UserAgent) ?></td>
+                            <td class="Table-cell"><?= time_diff($Timestamp) ?></td>
+                            <td class="Table-cell"><?= ($BanReason == 3) ? '<b>' . t('server.tools.inactivity') . '</b>' : t('server.tools.other') ?></td>
+                            <? if (!$HandledTimestamp) { ?>
+                                <td class="Table-cell"><input class="Input" type="text" id="comment<?= $ID ?>" placeholder="<?= t('server.tools.comment') ?>" /></td>
+                                <td class="Table-cell">
+                                    <div class='option'>
+                                        <button class="Button" type="submit" id="outcome" value="Approve" data-id="<?= $ID ?>"><?= t('server.tools.approve') ?></button>
+                                        <button class="Button" type="submit" id="outcome" value="Reject" data-id="<?= $ID ?>"><?= t('server.tools.reject') ?></button>
+                                        <button class="Button" type="submit" id="outcome" value="Discard" data-id="<?= $ID ?>"><?= t('server.tools.discard') ?></buton>
+                                    </div>
+                                </td>
+                            <?      } else { ?>
+                                <td class="Table-cell"><?= Users::format_username($CheckedBy); ?></td>
+                                <td class="Table-cell"><?= $HandledTimestamp ?></td>
+                            <?      }
+
+                            if ($ShowChecked) { ?>
+                                <td class="Table-cell"><?= AutoEnable::get_outcome_string($Outcome) ?>
+                                    <? if ($Outcome == AutoEnable::DISCARDED) { ?>
+                                        <a href="" id="unresolve" onclick="return false;" class="brackets" data-id="<?= $ID ?>"><?= t('server.tools.unresolve') ?></a>
+                                    <?          } ?>
+                                </td>
+                            <?      } ?>
+                        </tr>
+                    <?
+                    }
+                    ?>
+                </table>
+            </div>
+            <div class="BodyNavLinks">
+                <?
+                $Pages = Format::get_pages($Page, $NumResults, $RequestsPerPage);
+                echo $Pages;
+                ?>
+            </div>
+
+        <? } else {
+            View::line(t('server.tools.no_new_pending_auto_enable_requests') . (isset($_GET['view']) ? t('server.tools.space_in_this_view') : ''));
+        }
+        ?>
+    </div>
 </div>
 <?
 View::show_footer();
