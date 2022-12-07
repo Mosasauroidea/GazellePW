@@ -1275,10 +1275,10 @@ server.tools.size_this_week: |-
   Tamaño esta semana
 server.tools.size_today: |-
   Tamaño hoy
-server.tools.someone_invites: |-
-  Añadir invitaciones
+server.tools.someone_bonus: |-
+  Bonus
 server.tools.someone_tokens: |-
-  Añadir tokens
+  Tokens
 server.tools.space_invite_one: |-
   1 invitación
 server.tools.space_invite_other: |-
@@ -1723,6 +1723,8 @@ server.user.statistics: |-
   Estadísticas
 server.user.stats: |-
   Estadísticas
+server.user.style: |-
+  Tema
 server.user.subject: |-
   Asunto
 server.user.theme: |-
@@ -1775,8 +1777,6 @@ server.userhistory.topic: |-
   Tema
 server.userhistory.torrent: |-
   Torrent
-server.userhistory.view_all_ip_address: |-
-  Ver todas las direcciones IP
 server.userhistory.view_ip_addresses_with_users: |-
   Ver direcciones IP con usuarios
 server.wiki.add_alias: |-
@@ -2255,3 +2255,17 @@ server.common.update: |-
   Actualizar
 server.upload.chinese: |-
   Chino
+server.common.name: |-
+  Nombre
+server.staffpm.resolved_num: |-
+  Resuelto
+server.common.no_results: |-
+  Sin resultados.
+server.common.reason: |-
+  Razón
+server.tools.total_value: |-
+  Total
+server.user.simple_info: |-
+  Perfil
+server.user.consumed_history: |-
+  Historial

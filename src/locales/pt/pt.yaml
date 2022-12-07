@@ -114,6 +114,8 @@ client.upload.desc_img_hosts: |-
   Por favor, use hosts de imagem que são recomendados pela Regra de Upload <a href="rules.php?p=upload#2.2.1" target="_blank">2.1</a>.
 client.upload.english_name: |-
   Nome em inglês
+client.upload.imdb: |-
+  IMDb
 client.upload.imdb_link_required: |-
   Link IMDb ou ID com formato correto é obrigatório!
 client.upload.mediainfo_complete_name_required: |-
@@ -414,6 +416,8 @@ server.artist.request_name: |-
   Nome da solicitação
 server.artist.revert: |-
   Reverter para esta revisão
+server.artist.revision_history: |-
+  Histórico de versões
 server.artist.similar_artist_cloud: |-
   Nuvem de Artista Similar
 server.artist.similar_artist_map: |-
@@ -759,7 +763,7 @@ server.collages.category: |-
 server.collages.collage: |-
   Playlist
 server.collages.collage_add_error: |-
-  Falha ao adicionar na playlist
+  Falha ao adicionar na coleção
 server.collages.collage_add_success: |-
   Adicionado na playlist com sucesso
 server.collages.collage_id: |-
@@ -1026,8 +1030,12 @@ server.comments.your_collages: |-
   suas coleções
 server.common.actions: |-
   Ações
+server.common.add: |-
+  Adicionar
 server.common.add_bookmark: |-
   Adicionar favorito
+server.common.artist: |-
+  Artista
 server.common.artists: |-
   Artistas
 server.common.bonus: |-
@@ -1046,12 +1054,18 @@ server.common.countries_and_regions: |-
   Países e regiões
 server.common.date: |-
   Data
+server.common.delete: |-
+  Apagar
 server.common.modify: |-
   Modificar
 server.common.director: |-
   Diretor
 server.common.douban_rating: |-
   Classificação Douban
+server.common.download: |-
+  Baixar
+server.common.downloaded: |-
+  Nome do arquivo
 server.common.edit: |-
   Editar
 server.common.edition_info: |-
@@ -1070,6 +1084,8 @@ server.common.error_404_title: |-
   Erro 404
 server.common.external_subtitles: |-
   Externo
+server.common.feature_film: |-
+  Filme de Destaque
 server.common.fltoken: |-
   FL token
 server.common.format: |-
@@ -1104,6 +1120,8 @@ server.common.invalid_request_description: |-
   Algo estava errado com sua solicitação e o servidor se recusa a cumpri-la.
 server.common.invalid_request_title: |-
   Solicitação inválida
+server.common.invite: |-
+  Convidar
 server.common.jump_to_last_read: |-
   Ir para a última leitura
 server.common.lang_chs: |-
@@ -1114,12 +1132,22 @@ server.common.language: |-
   Idioma
 server.common.language_region: |-
   Idioma e região
+server.common.leechers: |-
+  Leechers
+server.common.live_performance: |-
+  Desempenho ao vivo
 server.common.log: |-
   Log
 server.common.logout: |-
   Sair
 server.common.menu_upload_title: |-
   Transferir
+server.common.miniseries: |-
+  Miniséries
+server.common.missing: |-
+  Falta
+server.common.movie_collection: |-
+  Coleção de filmes
 server.common.movie_name: |-
   Título do filme
 server.common.movie_name_title: |-
@@ -1134,6 +1162,8 @@ server.common.my_friends: |-
   Amigos
 server.common.my_notify: |-
   RSS
+server.common.my_subscriptions: |-
+  Subscrições
 server.common.my_uploaded: |-
   Upload concluído
 server.common.n_fl_token_one: |-
@@ -1144,6 +1174,8 @@ server.common.no_torrent_tags: |-
   Sem tags de torrent
 server.common.not_seeded_sure_use_fl: |-
   Aviso! Este torrent não esta em seed no momento, você tem certeza que quer usar %s aqui?
+server.common.others: |-
+  Outros
 server.common.profile: |-
   Perfil
 server.common.rating: |-
@@ -1160,6 +1192,10 @@ server.common.report: |-
   Reportar
 server.common.requests: |-
   Solicitações
+server.common.required_ratio: |-
+  Rácio requerido
+server.common.revision: |-
+  Revisão
 server.common.rss: |-
   RSS
 server.common.rt_rating: |-
@@ -1170,16 +1206,26 @@ server.common.search: |-
   Pesquisa
 server.common.seeders: |-
   Seeders
+server.common.setting: |-
+  Configurações
+server.common.short_film: |-
+  Filme Curto
 server.common.show: |-
   Mostrar
 server.common.size: |-
   Tamanho
+server.common.snatched: |-
+  Encontrado
 server.common.ssp: |-
   Proxy
 server.common.staff: |-
   Bastão
 server.common.staffpm: |-
   PM pessoal
+server.common.stand_up_comedy: |-
+  Comédia de descanso
+server.common.submit: |-
+  Submeter
 server.common.subscribe: |-
   Inscrever-se
 server.common.subtitle: |-
@@ -1222,6 +1268,8 @@ server.common.users: |-
   Utilizadores
 server.common.view_torrent: |-
   Ver torrent
+server.common.wiki: |-
+  Documentação
 server.common.year: |-
   Ano
 server.donate.added_time: |-
@@ -2422,28 +2470,134 @@ server.reports.report_post_comment_guide_3: |-
   Isto vai ser mais rápido do que um membro da equipe vai funcionar.
 server.reports.report_post_comment_guide_4: |-
   Por favor, restringir o uso deste recurso para relatar violações das regras e lembre-se, isto é para comentários reportados, não para responder a elas.
+server.reports.report_request_guide_1: |-
+  A opção de pedido de relatório é para denunciar um pedido que quebre qualquer uma das regras encontradas <a href="rules.php?p=requests">aqui</a> e para fazer menores, geralmente cosmético, alterações para um pedido (exemplo: adicionando um cartaz, revisando o título de filme anunciado por ser, etc.).
 server.reports.report_request_guide_2: |-
   Incentivamos todos os usuários a usarem este recurso sempre que possível. Esta ação será mais rápida do que a correção de um membro da equipe o fará.
+server.reports.report_request_guide_3: |-
+  Na descrição abaixo do seu relatório, por favor seja específico e inclua o máximo de informações possível para ajudar nossa equipe a resolver o problema. Links para fontes de informação confiáveis e externas são extremamente úteis ao resolver relatórios. Exemplos de tais fontes incluem o site oficial da empresa. <a href="https://imdb.com/">IMDb</a>, <a href="https://www.themoviedb.org/">TMDB</a> e <a href="https://movie.douban.com/">Douban</a>.
+server.reports.report_request_guide_4: |-
+  <strong>Não relate solicitações simplesmente porque não são preenchidas.</strong> As solicitações de versões atualmente não preenchíveis são permitidas porque a solicitação pode se tornar preenchível no futuro. Um exemplo de tal cenário seria a solicitação de um rasto para os meios de comunicação físicos de um lançamento exclusivo da Amazónia, porque uma liberação física dos meios de comunicação social poderia ocorrer numa data futura. A probabilidade de tal liberação física não é relevante.
+server.reports.report_request_guide_5: |-
+  <strong>Se você estiver relatando este pedido para atualizá-lo para o sistema de novas solicitações, volte e clique em '[Solicitar atualização]'</strong>.
+server.reports.report_request_update_guide_1: |-
+  Esta opção é para pedir aos moderadores que atualizem a sua solicitação para o novo sistema.
+server.reports.report_request_update_guide_2: |-
+  Se o seu pedido não tem outros votos, você pode editá-lo você mesmo!
+server.reports.report_user_guide_1: |-
+  A opção de Usuário do Relatório é denunciar um usuário que quebrou uma das regras de Ouro descrito <a href="rules.php">aqui</a>, ou se você precisa alertar o pessoal para algo específico sobre um usuário que não pode ser reportado em outro lugar.
 server.reports.report_user_guide_2: |-
   Incentivamos todos os usuários a usarem este recurso sempre que possível. Esta ação será mais rápida do que a correção de um membro da equipe o fará.
+server.reports.report_user_guide_3: |-
+  Por favor, não denuncie um usuário nesta seção por quebrar regras como:
+  <ul>
+  <li>Envios de torrents</li>
+  <li>Tópicos/postagens do fórum</li>
+  <li>Coleções</li>
+  <li>Solicitações</li>
+  </ul>
+server.reports.report_user_guide_4: |-
+  Estes têm a sua secção específica para a apresentação de relatórios, encontrada nas suas respectivas páginas.
 server.reports.report_user_guide_5: |-
   Na descrição abaixo do seu relatório, por favor seja específico e inclua o máximo de informações possível para ajudar nossa equipe a resolver o problema.
+server.reports.reporting_guidelines: |-
+  Diretrizes de relatórios
+server.reports.reporting_guidelines_intro: |-
+  Seguindo estas orientações, ajudará os moderadores a tratarem o seu relatório em tempo oportuno.
+server.reports.reporting_guidelines_summary: |-
+  Em resumo, por favor inclua o máximo de detalhes possível ao reportar. Obrigado.
+server.reports.reporting_the: |-
+  Você está relatando o&nbsp;
 server.reports.reporting_the_collage: |-
   Você está relatando a coleção
+server.reports.reporting_the_post: |-
+  Você está reportando a publicação
+server.reports.reporting_the_request: |-
+  Você está reportando o pedido
+server.reports.reporting_the_thread: |-
+  Você está reportando o tópico
+server.reports.reporting_the_user: |-
+  Denunciar utilizador
+server.reports.reports: |-
+  Denúncias
+server.reports.reports_resolved_in_the_last_24_hours: |-
+  Reportações resolvidas nas últimas 24 horas
+server.reports.reports_resolved_in_the_last_month: |-
+  Reportações resolvidas no último mês
+server.reports.reports_resolved_in_the_last_week: |-
+  Reportações resolvidas na última semana
+server.reports.reports_resolved_since_other_reports: |-
+  Reportações resolvidas desde "outros" relatórios (2009-08-21)
+server.reports.request: |-
+  Pedido
+server.reports.request_update: |-
+  Pedido (atualização)
+server.reports.resolved_by: |-
+  Resolvido por %s
 server.reports.send_a_message_to: |-
   Enviar uma mensagem para %s
 server.reports.stats: |-
   Estatísticas
+server.reports.sth_was_reported_by_user_sometime: |-
+  &nbsp;foi reportado por %s
 server.reports.subject: |-
   Assunto
+server.reports.threads_trashed_since_the_beginning_of_time: |-
+  Tópicos descartados desde o início do tempo
 server.reports.title: |-
   Título
+server.reports.toggle_notes: |-
+  Ativar/desativar notas
+server.reports.trashed: |-
+  Eliminado
+server.reports.unclaim: |-
+  Rejeitar
 server.reports.user: |-
   Usuário
 server.reports.username: |-
   Usuário
+server.reports.way_to_increase_turnover_rate: |-
+  Isso aumentará muito a taxa de volume de negócios das atualizações se você puder preencher o máximo de detalhes possível.
+server.reports.year_required: |-
+  Ano (obrigatório)
+server.reports.yes: |-
+  Sim
 server.reports.you_cannot_start_a_conversation_with_yourself: |-
   Você não pode iniciar uma conversa consigo mesmo!
+server.reports.you_reported_sth_for_the_reason: |-
+  Você relatou %s pelo motivo
+server.reportsv2.a_torrent_with_that_id_does_not_exist: |-
+  Um torrent com esse ID não existe!
+server.reportsv2.all_new_reports_for_the_chosen_type: |-
+  Todos os novos relatórios para o tipo escolhido
+server.reportsv2.all_reports_for_the_torrent: |-
+  Todos os relatórios para o torrent %s
+server.reportsv2.all_reports_for_torrents_uploaded_by: |-
+  Todos os relatórios para torrents enviados por %s
+server.reportsv2.all_reports_for_torrents_uploaded_by_user: |-
+  Todos os relatórios para torrents enviados pelo usuário %s;
+server.reportsv2.all_the_old_smelly_reports: |-
+  Todos as antigas reportações de mau gosto
+server.reportsv2.relevant_other_torrents: |-
+  Outros torrents relevantes
+server.reportsv2.all_torrents_reported_by: |-
+  Todos os torrents reportados por %s
+server.reportsv2.all_torrents_reported_by_user: |-
+  Todos os torrents reportados pelo usuário %s
+server.reportsv2.also_space: |-
+  também&nbsp;
+server.reportsv2.and_until: |-
+  e até
+server.reportsv2.as_useful_as_blank_reports_are_could_you_be_a_tiny_bit_more_helpful_leave_a_comment: |-
+  Tão útil quanto os relatórios em branco são, você poderia ser um pouco mais útil? (Deixe um comentário)
+server.reportsv2.by_group_id_of_torrent_reported: |-
+  Por ID do grupo de torrent reportado
+server.reportsv2.by_id_of_torrent_reported: |-
+  Por ID do torrent reportado
+server.reportsv2.by_report_id: |-
+  Por ID do repórter
+server.reportsv2.by_resolver_id: |-
+  Por ID de resolvedor
 server.reportsv2.by_uploader_id: |-
   Por ID do uploader
 server.reportsv2.claim: |-
@@ -2563,6 +2717,8 @@ server.reportsv2.reported_by: |-
   Denunciado por
 server.reportsv2.reporter: |-
   Relator
+server.reportsv2.reports: |-
+  Denúncias
 server.reportsv2.reports_v2: |-
   Relatar V2!
 server.reportsv2.reports_v2_information: |-
@@ -2623,6 +2779,12 @@ server.reportsv2.this_request: |-
   este pedido
 server.reportsv2.time_a: |-
   Os relatórios se resolvem desde o nosso aniversário
+server.reportsv2.time_d: |-
+  Reportações resolvidas nas últimas 24 horas
+server.reportsv2.time_m: |-
+  Reportações resolvidas no último mês
+server.reportsv2.time_w: |-
+  Reportações resolvidas na última semana
 server.reportsv2.torrent_group: |-
   Grupo de Torrent
 server.reportsv2.track_number_s: |-
@@ -2642,8 +2804,12 @@ server.reportsv2.types.master.dupe.report_messages.1: |-
   Por favor, especifique um link para o torrent original.
 server.reportsv2.types.master.dupe.resolve_options.pm: |-
   [rule]h2.2[/rule]. Seu torrent foi reportado porque era uma duplicata de outro torrente.
+server.reportsv2.types.master.dupe.title: |-
+  Dupe
 server.reportsv2.types.master.other.report_messages.1: |-
   Por favor, inclua o máximo de informações possível para verificar o relatório.
+server.reportsv2.types.master.other.title: |-
+  Outros
 server.reportsv2.types.master.trump.report_messages.1: |-
   Por favor, liste o(s) motivo(s) específico(s) para que o novo torrent tropece no mais antigo.
 server.reportsv2.types.master.trump.report_messages.2: |-
@@ -2709,6 +2875,8 @@ server.reportsv2.types.movie.video_track_bad.report_messages.1: |-
 server.reportsv2.types.movie.video_track_bad.resolve_options.pm: "[rule]5.4.1[/rule], [rule]5.4.2[/rule]. Este upload tem uma proporção diferente do filme original, apresentado teatralmente. Uma vez que uma versão com a proporção adequada estiver disponível, nenhum upload não-OAR poderá coexistir no mesmo grupo de resolução.\n              \n[rule]5..5[/rule], [rule]5.4.6[/rule]. Esse upload foi desentrelaçado indevidamente ou joga em uma taxa de quadros diferente da taxa de quadros nativa, adequada a framerate.\n\n[rule]5.4.18[/rule]. Este upload foi significativamente sobreposto ou undercroped.\n\n[rule]5.4.22[/rule]. Este upload é marcado com água de uma maneira significativa.\n              \nSeu torrent foi marcado como \"Bad Video Track\" e truncável."
 server.reportsv2.types.movie.video_track_bad.title: |-
   Faixa de Vídeo Ruim
+server.reportsv2.unclaim: |-
+  Rejeitar
 server.reportsv2.unclaim_all: |-
   Rejeitar tudo
 server.reportsv2.unclaim_all_btn_title: |-
@@ -2757,30 +2925,135 @@ server.requests.acceptable_containers: |-
   Recipientes aceitáveis
 server.requests.acceptable_resolutions: |-
   Resoluções aceitáveis
+server.requests.acceptable_sources: |-
+  Fontes aceitáveis
+server.requests.add_by: |-
+  Solicitado por
 server.requests.all: |-
   Todos
+server.requests.already_filled: |-
+  Este pedido já foi preenchido.
 server.requests.any: |-
   Qualquer
+server.requests.artist_note: |-
+  Por favor use o recurso de vários artistas em vez de adicionar "Vários Artistas" como um artista; leia <a href="wiki.php?action=article&amp;id=27" target="_blank">isto</a> para obter mais informações.
+server.requests.associated_with_the_above_torrent_group: |-
+  &nbsp;associado ao grupo de torrents acima.
+server.requests.at_least_one_director: |-
+  Por favor insira pelo menos um diretor.
+server.requests.auto_fill_note: |-
+  Preenchimento automático com link de grupo IMDb ou torrent.
+server.requests.basic_info: |-
+  Informação Básica
+server.requests.bookmarked_requests: |-
+  Solicitações marcadas
+server.requests.bookmarks: |-
+  Suas solicitações favoritas
 server.requests.bounty: |-
   Recompensa
 server.requests.by_user: |-
   Usuário
+server.requests.codec_list: |-
+  Codec
 server.requests.collages: |-
   Playlists
+server.requests.container_list: |-
+  Recipiente
+server.requests.costs: |-
+  Custos
+server.requests.cover: |-
+  Capa
 server.requests.created: |-
   Criado
+server.requests.created_by: |-
+  Criado por
+server.requests.custom_vote: |-
+  Voto personalizado
+server.requests.custom_vote_title: |-
+  Essas unidades estão na base 2, não na base 10. Por exemplo, há 1.024 MiB em 1 Gb.
+server.requests.delete_request_warning: |-
+  Você <strong>não</strong> receberá a sua recompensa se excluir este pedido.
 server.requests.description: |-
   Descrição
+server.requests.description_note: |-
+  <b>Por favor, descreva sua solicitação detalhadamente.</b> Exemplo 1: prioridade CD 100%% log > Web 16bit sem perda > Web 24bit; Exemplo 2: lançamento Web precisa de informações de linhagem claras.
+  <br>Se você não tiver nenhuma exigência extra, por favor, digite "Sem informações extras".
+server.requests.entered_bounty_not_number: |-
+  A sua recompensa inserida não é um número.
+server.requests.entered_year_not_number: |-
+  Seu ano inserido não é um número.
+server.requests.fill_a_request_how_to_blockquote: |-
+  Procure no site para encontrar o torrent da partida primeiro. Então cole a <strong>permalink</strong> para a caixa abaixo de acordo com diferentes situações:
+  <ul>
+  <li>Se o torrent que atende a demandas existe, colar permalink diretamente;</li>
+  <li>Se o torrent não existir, mas o grupo de lançamento existe, por favor carregue o torrent pelo "Adicionar formato" e cole o permalink;</li>
+  <li>Se o torrent ou o grupo de lançamento não existir, por favor use o botão "Enviar pedido" para fazer o upload de um novo e colar seu permalink.</li></ul>
+server.requests.fill_a_request_how_to_toggle: |-
+  Como preencher uma solicitação
+server.requests.fill_request: |-
+  Requisição de preenchimento
+server.requests.fill_request_explanation: |-
+  Clique neste botão para criar um torrent com as informações dadas por esta solicitação.
 server.requests.filled: |-
   Preenchido
+server.requests.filled_by: |-
+  Preenchido por
+server.requests.find_in_stores: |-
+  Encontrar nas lojas
+server.requests.for_user: |-
+  Para o usuário
+server.requests.forgot_enter_artists: |-
+  Você não digitou nenhum artista.
+server.requests.forgot_enter_bounty: |-
+  Você esqueceu de entrar em qualquer recompensa!
+server.requests.forgot_enter_description: |-
+  Você se esqueceu de digitar uma descrição.
 server.requests.forgot_enter_tags: |-
   Você se esqueceu de digitar as tags!
+server.requests.forgot_enter_title: |-
+  Você se esqueceu de digitar o título!
+server.requests.forgot_enter_year: |-
+  Você se esqueceu de entrar no ano!
+server.requests.forgot_link_fill_torrent: |-
+  Você esqueceu de fornecer um link para preencher o torrent.
+server.requests.forgot_pick_release_type: |-
+  Por favor, escolha um tipo de lançamento.
+server.requests.if_this_is_incorrect_please: |-
+  Se isso estiver incorreto, por favor&nbsp;
+server.requests.if_you_add_the_entered: |-
+  Se você adicionar a entrada
 server.requests.image: |-
   Imagem
+server.requests.image_link_invalid: |-
+  &nbsp;não parece ser um link válido para uma imagem.
+server.requests.include_filled: |-
+  Incluir preenchida
+server.requests.is: |-
+  é
+server.requests.last_voted: |-
+  Último voto
+server.requests.lastvote: |-
+  Último voto
 server.requests.link: |-
   Link
+server.requests.link_empty_warning: |-
+  Se não houver nenhum link IMDb ou link de grupo torrent, por favor verifique a caixa.
+server.requests.link_not_valid: |-
+  Seu link não parecia ser um link torrent válido.
+server.requests.min_bounty: |-
+  A recompensa mínima é de 1 GB.
+server.requests.my_requests: |-
+  My requests
 server.requests.name: |-
   Nome
+server.requests.new_create: |-
+  Criar um pedido
+server.requests.new_edit: |-
+  Editar uma solicitação
+server.requests.new_request: |-
+  Novo pedido
+server.requests.new_rules: |-
+  Por favor, certifique-se de que sua solicitação segue <a href='rules.php?p=requests'>as regras de solicitação</a>!
 server.requests.no_link: |-
   Nenhum link
 server.requests.no_such_user_to_fill: |-
@@ -2885,6 +3158,8 @@ server.requests.will_be: |-
   será
 server.requests.year: |-
   Ano
+server.requests.yes: |-
+  Sim
 server.requests.you_do_not_have_enough_uploaded: |-
   Você não tem upload suficiente para fazer uma solicitação.
 server.requests.you_have_not_bookmarked_any_request: |-
@@ -3169,14 +3444,30 @@ server.subtitles.lack_of_torrent_permalink: |-
   Falta de permalink do torrent
 server.subtitles.movie_title: |-
   Título do filme
+server.subtitles.my_subtitles: |-
+  Minhas legendas
 server.subtitles.new: |-
   Novo
+server.subtitles.new_subtitle: |-
+  Nova legenda
+server.subtitles.please_choose_a_subtitle_file: |-
+  Por favor, escolha um arquivo de legenda
+server.subtitles.please_select_language: |-
+  Por favor, selecione pelo menos um idioma
+server.subtitles.please_upload_supported_subtitle_formats: |-
+  Por favor, carregue formatos de legenda suportados
 server.subtitles.reason: |-
   Motivo
+server.subtitles.request_a_subtitle: |-
+  Solicitar uma legenda
 server.subtitles.search: |-
   Pesquisa
 server.subtitles.source: |-
   Fonte
+server.subtitles.subtitle_file: |-
+  Arquivo de legenda
+server.subtitles.subtitle_names: |-
+  Nome da legenda
 server.subtitles.subtitle_rules: |-
   <ul>
   <li id='r3.6.1'></strong>1.</a> <strong>A legenda carregada por um usuário deve ser sincronizada com o arquivo de vídeo específico, caso contrário ela será apagada diretamente.</strong>
@@ -3190,10 +3481,97 @@ server.subtitles.subtitle_rules: |-
   <li id='r3.6.5'><a href='rules.php?p=upload#3.6.5'>5.</a> <strong>Por favor carregue um único arquivo de legenda para um filme. NÃO compile arquivos de legendas de idiomas diferentes. </strong>Por exemplo, incluindo a SRT simplificada chinesa, a SRT tradicional chinesa e a chinesa e a inglesa SRT em um único arquivo não é permitido. Devem ser enviados separadamente. <strong>Para miniseries, é permitido comprimir legendas para episódios juntos. </strong>você tem que ter certeza de que os nomes dos arquivos da legenda e do vídeo são correspondentes.
   </li>
   </ul>
+server.subtitles.subtitle_upload_warning: |-
+  Por favor, certifique-se de que sua legenda está sincronizada com o arquivo de vídeo ou ele será removido e você pode ser avisado
 server.subtitles.subtitle_uploader: |-
   Carregador
+server.subtitles.times_of_download: |-
+  Vezes de download:
+server.subtitles.title_or_imdb_link: |-
+  Title or IMDb link
+server.subtitles.top_warning: |-
+  Esta página é apenas para navegação. Por favor veja a página de detalhes do torrent se você quiser carregar uma legenda.
+server.subtitles.torrent_pl: |-
+  Vantagem permanente
+server.subtitles.upload_a_subtitle: |-
+  Carregar uma legenda
+server.subtitles.year_optional: |-
+  Ano (opcional)&nbsp;
+server.time.ago: |-
+  &nbsp;atrás
+server.time.d: |-
+  dia
+server.time.ds: |-
+  dias
+server.time.h: |-
+  hora
+server.time.hs: |-
+  horas
+server.time.just_now: |-
+  Agora mesmo
+server.time.m: |-
+  mês
+server.time.mn: |-
+  min
+server.time.mns: |-
+  min
+server.time.ms: |-
+  meses
+server.time.space_and_space: |-
+  &nbsp;%se&nbsp;
+server.time.w: |-
+  semana
+server.time.ws: |-
+  semanas
+server.time.y: |-
+  ano
+server.time.ys: |-
+  anos
 server.tools.Bonus: |-
   Bônus
+server.tools.about_rendering: |-
+  Sobre a renderização
+server.tools.about_rendering_note: |-
+  <p>Você agora está renderizando imagens de galeria de estilos.</p>
+  <p>Os parâmetros usados podem ser vistos à direita, os status retornados são exibidos abaixo.</p>
+server.tools.above: |-
+  Acima
+server.tools.access: |-
+  Acesso
+server.tools.activity: |-
+  Actividade
+server.tools.add: |-
+  Adicionar
+server.tools.add_all: |-
+  Todos Utilizadores
+server.tools.add_an_entry_to_the_dnu_list: |-
+  Adicionar uma entrada à lista "Não enviar"
+server.tools.add_bonus_points_to_all_users: |-
+  Adicionar pontos de bônus para todos os usuários
+server.tools.add_bonus_sitewide: |-
+  Adicionar Bônus, Sitewide
+server.tools.add_client: |-
+  Adicionar cliente
+server.tools.add_fl_tokens_to_all_enabled_users: |-
+  Adicionar tokens freeleech a todos os usuários habilitados
+server.tools.add_invites: |-
+  Adicionar convites
+server.tools.add_invites_to_users: |-
+  Adicionar convites aos usuários
+server.tools.add_part: |-
+  Usuários particulares
+server.tools.add_recommendation: |-
+  Adicionar Recomendação
+server.tools.add_rule: |-
+  Adicionar
+server.tools.add_to: |-
+  Recompensa para
+server.tools.add_to_blacklist: |-
+  Adicionar endereço de e-mail ou domínio à lista negra
+server.tools.add_to_disabled_users: |-
+  Adicionar a usuários desabilitados
+server.tools.add_to_placeholder: |-
+  Preencha os nomes de usuários aqui e os separe com vírgulas.
 server.tools.add_tokens_sitewide: |-
   Adicionar tokens sitewide
 server.tools.added: |-
@@ -3468,20 +3846,120 @@ server.tools.controls: |-
   Controlos
 server.tools.converting_image: |-
   Conversão de Imagem
+server.tools.count: |-
+  Contar
+server.tools.country: |-
+  País
+server.tools.create_a_new_permission_set: |-
+  Criar um novo conjunto de permissões
+server.tools.create_a_user: |-
+  Criar um usuário
+server.tools.create_category: |-
+  Criar Categoria
+server.tools.create_forum: |-
+  Criar fórum
+server.tools.create_group: |-
+  Criar grupo
+server.tools.create_user: |-
+  Criar usuário
+server.tools.current_sales_promotion_rules: |-
+  Regras atuais de promoção de vendas
+server.tools.current_users_in_this_class: |-
+  Usuários atuais nesta classe
+server.tools.data: |-
+  Dados
+server.tools.data_read: |-
+  Ler dados
+server.tools.data_size: |-
+  Tamanho dos Dados
+server.tools.data_write: |-
+  Gravação de dados
+server.tools.database: |-
+  Database
+server.tools.database_slow: |-
+  Banco de dados lento
+server.tools.database_slow_title: |-
+  1/7500 consultas podem ser lentas para minimizar o impacto no desempenho.
+server.tools.database_specifics: |-
+  Dados específicos
 server.tools.date: |-
   Data
+server.tools.date_added: |-
+  Data de adição
+server.tools.default: |-
+  Padrão
+server.tools.deficit: |-
+  Deficit
+server.tools.deficit_title: |-
+  Quanto o usuário precisa fazer upload para atender a sua proporção requerida
+server.tools.delete_failed: |-
+  Falha ao excluir
+server.tools.delete_success: |-
+  Exclusões (Acesso)
+server.tools.delete_success_title: |-
+  Mais de 30%% dos comandos de exclusão emitidos eram desnecessários perda de tempo e recursos.
+server.tools.deleted_on: |-
+  Excluído em
+server.tools.deletes: |-
+  Apagados
 server.tools.descending: |-
   Descendente
 server.tools.description: |-
   Descrição
+server.tools.developer_sandboxes: |-
+  Arenas de desenvolvedor
+server.tools.development: |-
+  Desenvolvimento
+server.tools.disable_entire_tree: |-
+  Desabilitar toda a árvore
+server.tools.disable_invites_privileges: |-
+  Desativar privilégios de convites
+server.tools.dnu_added: |-
+  Adicionar Detalhes
 server.tools.dnu_comment: |-
   Observação
+server.tools.dnu_list: |-
+  Lista "Não Enviar"
+server.tools.do_not_process_these_donations_manually: |-
+  <strong>Não processe estas doações manualmente!</strong> O analisador de Bitcoin <em>irá</em> pegá-los mais cedo ou mais tarde (coloque um desenvolvedor se algo parecer estar com problemas).
+server.tools.do_nothing: |-
+  Não fazer nada
+server.tools.donor_rank: |-
+  Rank de doador
+server.tools.donor_rewards: |-
+  Recompensas de doador
+server.tools.downloaded: |-
+  Nome do arquivo
+server.tools.drag_and_drop_table_rows_to_reorder: |-
+  Arrastar e soltar linhas de tabela para reordenar.
+server.tools.drive: |-
+  Conduzir
+server.tools.dupe_ips: |-
+  Duplicar IPs
+server.tools.dupes: |-
+  Duplicações
+server.tools.duplicate_ip_addresses: |-
+  Endereço IP duplicado
+server.tools.economic_stats: |-
+  Estatísticas econômicas
+server.tools.economy: |-
+  Economy
+server.tools.edit_an_announcement: |-
+  Editar um Anúncio
+server.tools.edit_requests_handled: |-
+  Editar solicitações tratadas
 server.tools.email: |-
   E-mail
 server.tools.email_address: |-
   Endereço de Email
+server.tools.email_blacklist: |-
+  Lista negra de e-mail
 server.tools.email_blacklist_comment: |-
   Comentário
+server.tools.enable_requests: |-
+  Permitir Requisições
+server.tools.engine: |-
+  Motor
 server.tools.enter_a_single_replacement_tag: |-
   Insira uma única tag de substituição.
 server.tools.enter_a_single_tag_to_search_for: |-
@@ -3586,6 +4064,8 @@ server.tools.h2_official_tags_manager: |-
   Gerenciador Oficial de Tags
 server.tools.official_tag: |-
   Oficial
+server.tools.other_tag: |-
+  Outros
 server.tools.h2_os_and_browser_usage: |-
   Uso do sistema operacional e navegador
 server.tools.h2_site_options: |-
@@ -3594,18 +4074,118 @@ server.tools.h2_upscale_pool: |-
   Piscina de escala
 server.tools.h2_user_flow: |-
   Fluxo de usuário
+server.tools.had_trackers: |-
+  Rastreadores de anúncios
 server.tools.handled_after: |-
   Depois
 server.tools.handled_before: |-
   Antes
+server.tools.handled_between: |-
+  Entre
+server.tools.handled_by_username: |-
+  Manipulado pelo usuário
+server.tools.handled_on: |-
+  Ativado
+server.tools.handled_outcome: |-
+  Resultado
+server.tools.handled_timestamp: |-
+  Timestamp Tratado
+server.tools.handled_timestamp_title: |-
+  Isto irá pesquisar entre a data inserida e 24 horas após ela
+server.tools.hidden: |-
+  Ocultas
 server.tools.history: |-
   Histórico
+server.tools.host: |-
+  Servidor
+server.tools.hour_s: |-
+  hora (s)
+server.tools.hours: |-
+  Horas
 server.tools.icon: |-
   Ícone
+server.tools.icon_link: |-
+  Link do ícone
+server.tools.icon_text: |-
+  Texto do ícone
+server.tools.id: |-
+  ID
+server.tools.importance: |-
+  Importância
+server.tools.inactivity: |-
+  Inactividade
+server.tools.include_checked: |-
+  Incluir Selecionados
+server.tools.incomplete: |-
+  Incompleto
+server.tools.increment_decrement: |-
+  Incremento/Diminuição
+server.tools.increment_decrement_success: |-
+  Incremento/Diminuição (Success)
+server.tools.index_size: |-
+  Tamanho do índice
+server.tools.internal_torrent: |-
+  Torrent dos grupos internos
 server.tools.introduction: |-
   Introdução
+server.tools.invalid_freeleech_type_or_freeleech_reason: |-
+  Tipo de freeleech inválido ou razão freeleech
+server.tools.invalid_group_ids: |-
+  IDs de grupos inválidos
+server.tools.invalid_size_or_units: |-
+  Tamanho ou unidade inválido
+server.tools.invite_code: |-
+  ConvidarCódigo
+server.tools.invite_pool: |-
+  Banco de Convidados
+server.tools.inviter: |-
+  Convidante
+server.tools.invites: |-
+  Convites
+server.tools.invites_giving: |-
+  Convites para dar
+server.tools.invites_number: |-
+  Número de convite
+server.tools.invites_type: |-
+  Tipo de convite
+server.tools.invitestime: |-
+  Convites expirados
+server.tools.ip_address: |-
+  Endereço de IP
+server.tools.ip_address_bans: |-
+  Endereços IP banidos
+server.tools.ip_lock_management: |-
+  Limite de login IP
+server.tools.irc_manager: |-
+  Gerente IRC
+server.tools.joined: |-
+  Juntou-se
+server.tools.joined_after: |-
+  Entrou após
+server.tools.joined_before: |-
+  Entrou antes de
+server.tools.key: |-
+  Chave
+server.tools.last_donated: |-
+  Última Doação
+server.tools.leave_blank_to_auto_generate: |-
+  Deixe em branco para gerar automaticamente
+server.tools.leechdisabled: |-
+  Adicionar a usuários cujo privilégio de aula foi desativado
+server.tools.leeching: |-
+  Sangramento
+server.tools.length_in_min: |-
+  Comprimento (em minutos)
 server.tools.level: |-
   Nível
+server.tools.life_span: |-
+  Vitalício
+server.tools.link_to_a_torrent_group: |-
+  Link para um grupo de torrent no site. Por exemplo,&nbsp;
+server.tools.list_affected_rows: |-
+  Listar linhas afetadas
+server.tools.login_watch: |-
+  Acompanhar login
 server.tools.main_stats: |-
   Estatísticas principais
 server.tools.manage: |-
@@ -3724,28 +4304,130 @@ server.tools.normal: |-
   Normal
 server.tools.notes: |-
   Observações
+server.tools.numbers_and_such: |-
+  Números e tal
 server.tools.tags_manager: |-
   Gerenciador de tags
+server.tools.offset: |-
+  Deslocamento
+server.tools.offsets_inserted: |-
+  compensações inseridas.
+server.tools.only_affect_users_with_at_least_this_many_tokens: |-
+  Só afeta usuários com pelo menos esta quantidade de tokens
+server.tools.operation: |-
+  Operação
 server.tools.operations: |-
   Operações
+server.tools.operator: |-
+  Operador
+server.tools.opinion: |-
+  Opinião
+server.tools.order_by: |-
+  Order By
+server.tools.original_options: |-
+  Opções originais
+server.tools.os: |-
+  SO
+server.tools.os_and_browser_usage: |-
+  Uso do sistema operacional e do navegador
+server.tools.os_usage: |-
+  Uso do SO
+server.tools.other: |-
+  Outros
+server.tools.others: |-
+  Outros
+server.tools.outcome: |-
+  Resultado
 server.tools.outcome_approved: |-
   Aprovado
+server.tools.outcome_denied: |-
+  Negado
 server.tools.outcome_discarded: |-
   Descartado
+server.tools.overall_stats: |-
+  Estatísticas gerais
+server.tools.pass: |-
+  Senha
+server.tools.passed: |-
+  Aprovado
 server.tools.password: |-
   Senha
 server.tools.paste_a_list_of_collage_or_torrent_group_urls: |-
   Colar uma lista de coleções de grupo ou de grupos de torrents
+server.tools.path: |-
+  Caminho
+server.tools.peer_id: |-
+  ID do Par
+server.tools.pend: |-
+  Pend
 server.tools.pending: |-
   Pendente
+server.tools.period_of_validity: |-
+  Período de validade
+server.tools.permanent: |-
+  Permanente
+server.tools.permission_name: |-
+  Nome de permissão
+server.tools.permissions_manager: |-
+  Gerenciador de permissões
+server.tools.php_processes: |-
+  Processos PHP
+server.tools.please_enter_a_comment_to_add_to_the_users_affected: |-
+  Por favor, insira um comentário para adicionar aos usuários afetados.
+server.tools.please_enter_properly_formatted_urls: |-
+  Por favor, insira URLs formatadas corretamente
+server.tools.plz_supply_a_valid_album_id: |-
+  Por favor, forneça um ID de filme válido
+server.tools.points_to_add: |-
+  Pontos a adicionar
 server.tools.posts: |-
   Postagens
+server.tools.prepaid_card_donor: |-
+  Doações de cartão pré-pago
+server.tools.processing: |-
+  Processando
 server.tools.proper_tag: |-
   Tag adequada
+server.tools.publish_a_new_announcement: |-
+  Publicar um novo anúncio
+server.tools.puppeteer: |-
+  Marionetista
+server.tools.qq_group: |-
+  Grupo do QQ
+server.tools.quarter_1: |-
+  &nbsp;- Trimestre 1
+server.tools.quarter_2: |-
+  &nbsp;- Trimestre 2
+server.tools.quarter_3: |-
+  &nbsp;- Trimestre 3
+server.tools.quarter_4: |-
+  &nbsp;- Trimestre 4
+server.tools.queue: |-
+  Fila
+server.tools.queuing: |-
+  Filando
+server.tools.range: |-
+  Alcance
+server.tools.rank: |-
+  Classificação
 server.tools.ratio: |-
   Ratio
+server.tools.ratio_watch_ended_ends: |-
+  Relógio Proporcional Terminou/Termina
+server.tools.ratio_watch_ended_ends_title: |-
+  Se o tempo mostrado aqui terminar em &quot;atrás&quot;, então este é o tempo que o usuário está na relação e/ou abaixo da relação desejada. Se a hora mostrada aqui não terminar em &quot;atrás&quot;, então esta é a hora até que o período de Relação de 2 semanas expire.
 server.tools.reason: |-
   Motivo
+server.tools.reason_placeholder: |-
+  O motivo pelo qual você escrever aqui será adicionado aos registros de envio.
+server.tools.receiving_bitcoin_address: |-
+  Recebendo endereço Bitcoin
+server.tools.recommendations: |-
+  Recomendações
+server.tools.registered: |-
+  Registado
+server.tools.registration_date: |-
+  Data de registo
 server.tools.registration_log: |-
   Registro de registro
 server.tools.reject: |-
@@ -3861,29 +4543,133 @@ server.tools.size_today: |-
 server.tools.snatches: |-
   Snatches
 server.tools.someone_bonus: |-
-  Adicionar Bônus
+  Bônus
+server.tools.someone_invites: |-
+  Convites
+server.tools.someone_tokens: |-
+  Tokens
 server.tools.sort: |-
   Ordenar
+server.tools.sort_by_bad_labels: |-
+  Ordenar por rótulos ruins
 server.tools.sort_by_bad_tags: |-
   Ordenar por tags ruins
+server.tools.sort_by_good_labels: |-
+  Ordenar por etiquetas boas
 server.tools.sort_by_good_tags: |-
   Ordenar por tags boas
 server.tools.source: |-
   Fonte
+server.tools.space_bonus: |-
+  &nbsp;bônus
+server.tools.space_in_this_view: |-
+  &nbsp;nesta visualização
+server.tools.space_invite_one: |-
+  1 convite
+server.tools.space_invite_other: |-
+  %s convites
+server.tools.space_token_one: |-
+  1 token
+server.tools.space_token_other: |-
+  %s tokens
+server.tools.special: |-
+  Especial
+server.tools.special_effects_subtitles: |-
+  Legendas de efeitos especiais
+server.tools.special_rank: |-
+  Rank Especial
+server.tools.special_users: |-
+  Usuários especiais
+server.tools.specifications: |-
+  Especificações
 server.tools.staff: |-
   Bastão
+server.tools.staff_group_management: |-
+  Gerenciamento de equipe
+server.tools.staff_page_group: |-
+  Sociedade de página
+server.tools.staff_page_group_manager: |-
+  Gerenciador da página do pessoal
+server.tools.staff_tools: |-
+  Ferramentas do pessoal
+server.tools.standard_definition: |-
+  SD
+server.tools.static_server: |-
+  Servidor estático
+server.tools.statistical_settlement_time_dividing_query_panel: |-
+  Painel de Consulta de Liquidação Estatística
 server.tools.status: |-
   Status
 server.tools.subject: |-
   Assunto
+server.tools.submit: |-
+  Submeter
+server.tools.submit_checked_date: |-
+  /Data de Verificação
 server.tools.submitted_after: |-
   Depois
+server.tools.submitted_at: |-
+  Enviada em
 server.tools.submitted_before: |-
   Antes
+server.tools.submitted_between: |-
+  Entre
+server.tools.submitted_on: |-
+  Ativado
+server.tools.submitted_timestamp: |-
+  Timestamp enviado
+server.tools.submitted_timestamp_title: |-
+  Isto irá pesquisar entre a data inserida e 24 horas após ela
+server.tools.success_exclamation_mark: |-
+  Sucesso!&nbsp;
+server.tools.supplementary_information: |-
+  Informações complementares
+server.tools.sure_delete_staff_group_title: |-
+  Tem certeza de que deseja fazer isso? Esta é uma ação irreversível!
+server.tools.swarms_and_snatches: |-
+  Enxames e Aparelhos
 server.tools.tag: |-
   Tag
+server.tools.sub_tag: |-
+  Nome da etiqueta chinesa
 server.tools.tag_aliases: |-
   Pseudônimo de Tag
+server.tools.td_ip_address: |-
+  Endereço IP
+server.tools.temporary: |-
+  Temporário
+server.tools.tg_group: |-
+  Grupo de TG
+server.tools.there_are_currently_enabled_users_on_ratio_watch: |-
+  No momento, há %s usuários habilitados no Relógio e %s já desativados.
+server.tools.there_are_currently_no_users_on_ratio_watch: |-
+  Atualmente, não há usuários no relógio de proporção.
+server.tools.there_are_no_permission_classes: |-
+  Não há nenhuma classe de permissão.
+server.tools.there_are_no_stylesheets: |-
+  Não há folhas de estilos.
+server.tools.there_are_no_users_with_more_than_n_ip_overlaps: |-
+  Atualmente, não há usuários com mais de %s sobreposições de IP.
+server.tools.there_have_been_no_new_registrations_in_the_past_72_hours: |-
+  Não houve novos registos nas últimas 72 horas.
+server.tools.threads_active: |-
+  Tópicos (Ativos)
+server.tools.time: |-
+  Tempo de emissão
+server.tools.timer: |-
+  Temporizador
+server.tools.tips: |-
+  Dicas
+server.tools.token_number: |-
+  Número do token
+server.tools.token_type: |-
+  Tipo de token
+server.tools.tokens: |-
+  Tokens
+server.tools.tokens_to_add: |-
+  Tokens para adicionar
+server.tools.tokens_to_set: |-
+  Tokens para definir
 server.tools.tokenstime: |-
   Tokens expirados
 server.tools.tools: |-
@@ -3994,22 +4780,90 @@ server.tools.username_search: |-
   Pesquisa de Usuário
 server.tools.users: |-
   Utilizadores
+server.tools.users_caches_cleared: |-
+  cache dos usuários limpo!
+server.tools.uses: |-
+  usos
+server.tools.utilities: |-
+  Utilitários
+server.tools.value: |-
+  Valor
 server.tools.view: |-
   Visualizar
+server.tools.wage_statistics: |-
+  Estatísticas de salários
+server.tools.whoami: |-
+  Whoami
+server.tools.wi: |-
+  WI
+server.tools.words_must_be_separated_by_underscores: |-
+  Palavras devem ser separadas por sublinhados
+server.tools.work_statistical_graph: |-
+  Gráfico Estatístico de Trabalho
 server.tools.year: |-
   %s
+server.tools.yes: |-
+  Sim
 server.top10.all: |-
   Todos
 server.top10.any: |-
   Qualquer
+server.top10.current_donor_rank: |-
+  Classificação atual de doador
 server.top10.date: |-
   Data
+server.top10.day: |-
+  Dia
+server.top10.dl_speed: |-
+  Velocidade DL
+server.top10.donors: |-
+  Doadores
+server.top10.down_speed_is_base_2: |-
+  A velocidade de download é relatada na base 2 em bytes por segundo, não bits por segundo.
+server.top10.downloaded: |-
+  Nome do arquivo
+server.top10.downloaders: |-
+  Baixadores
+server.top10.fastest_downloaders: |-
+  Mais Rápido Downloaders
+server.top10.fastest_uploaders: |-
+  Mais Rápido Uploaders
+server.top10.favorites: |-
+  Favoritos
 server.top10.found_no_tags_matching_the_criteria: |-
   Não foram encontradas tags correspondentes ao critério
+server.top10.found_no_torrents_matching_the_criteria: |-
+  Não foram encontrados torrents que correspondam aos critérios.
+server.top10.found_no_users_matching_the_criteria: |-
+  Nenhum usuário correspondente ao critério encontrado
+server.top10.free: |-
+  freeLeech
+server.top10.ft_torrents: |-
+  Filtrar torrents
 server.top10.hide: |-
   Esconder
+server.top10.in_the_past_day: |-
+  O mais ativo %s foi enviado no último dia
+server.top10.in_the_past_month: |-
+  Mais Ativo %s carregado no mês passado
+server.top10.in_the_past_week: |-
+  O mais ativo %s foi enviado na última semana
+server.top10.in_the_past_year: |-
+  %s mais ativo carregado no último ano
+server.top10.joined: |-
+  Juntou-se
+server.top10.last_donated: |-
+  Última Doação
+server.top10.most_data: |-
+  Mais dados transferidos %s
 server.top10.most_highly_voted_tags: |-
   Tags mais votadas
+server.top10.most_seed: |-
+  Melhor Semeada %s
+server.top10.most_snatched: |-
+  Mais Encontrados %s
+server.top10.most_torrents: |-
+  Mais Ativo %s de todos os tempos
 server.top10.most_used_request_tags: |-
   Tags de solicitação mais usadas
 server.top10.most_used_torrent_tags: |-
@@ -4018,18 +4872,60 @@ server.top10.movies: |-
   Filmes
 server.top10.name: |-
   Nome
+server.top10.neg_votes: |-
+  Neg. votos
+server.top10.original: |-
+  Original
+server.top10.original_uploaders: |-
+  Uploaders originais
+server.top10.original_uploads: |-
+  Envio original
+server.top10.pos_votes: |-
+  Votos na votação
+server.top10.position: |-
+  Posição
+server.top10.rank: |-
+  Classificação
 server.top10.ratio: |-
   Ratio
+server.top10.search_for_a_date_after: |-
+  Pesquisar por uma data! (Após 2010-09-05)
+server.top10.self_purchased_uploaders: |-
+  Uploaders auto-comprados
+server.top10.self_purchased_uploads: |-
+  Envios auto-comprados
+server.top10.self_rip_uploaders: |-
+  Uploaders autorip
+server.top10.self_rip_uploads: |-
+  Uploads auto-rip
 server.top10.show: |-
   Mostrar
+server.top10.sth_is_wrong_with_the_date_you_provided: |-
+  Algo está errado com a data fornecida
 server.top10.tag: |-
   Tag
 server.top10.tags: |-
   Tags
 server.top10.tags_comma: |-
   Tags (separadas por vírgula)
+server.top10.the_first_week_after: |-
+  a primeira semana após %s
+server.top10.top: |-
+  Topo
+server.top10.top_10_donors: |-
+  Top 10 doadores
+server.top10.top_10_for: |-
+  10 maiores para %s
+server.top10.top_10_original_uploaders: |-
+  Top 10 Uploaders originais
 server.top10.top_10_tags: |-
   As 10 Principais Tags
+server.top10.top_10_torrents: |-
+  10 Melhores Torrents
+server.top10.top_10_torrents_history: |-
+  Top 10 Histórico de Torrentes!
+server.top10.top_10_users: |-
+  Top 10 Usuários
 server.top10.top_donors: |-
   Top Doadores
 server.top10.top_movies: |-
@@ -4173,100 +5069,401 @@ server.torrents.cn_quality_slot: |-
   Slot de Qualidade CN
 server.torrents.cn_quality_slot_requirements: |-
   Deve conter uma legenda chinesa codificada. Legendas não podem ser mais do que chinesa e inglês. A qualidade do vídeo deve ser a melhor possível.
+server.torrents.cn_quality_slot_x265: |-
+  Slot de Qualidade CN (x265)
+server.torrents.codec: |-
+  Codec
 server.torrents.composer: |-
   Compositor
+server.torrents.connectable: |-
+  Conectável
+server.torrents.container: |-
+  Recipiente
+server.torrents.database_ids: |-
+  IDs do banco
 server.torrents.date: |-
   Data
+server.torrents.dead: |-
+  Descarregada
 server.torrents.delete_title: |-
   Excluir torrent?
+server.torrents.delete_torrent: |-
+  Excluir torrent
+server.torrents.delete_torrent_note: |-
+  Se você quer apagar o torrent só porque foi relatado, por favor, não faça isso, porque possivelmente não foi tão horrível. Excluir torrents casualmente fará você ser punido.
 server.torrents.deleted: |-
   Excluído
 server.torrents.desc: |-
   Descendente
 server.torrents.director: |-
   Diretor
+server.torrents.diy: |-
+  Autodidata
+server.torrents.diy_slot: |-
+  Faça você mesmo(a)
 server.torrents.diy_slot_requirements: |-
   Apenas para filmes não chineses. Deve adicionar menos um dub chinês ou uma legenda de efeitos especiais chineses à cópia do disco.
+server.torrents.douban_id: |-
+  ID da Douban
+server.torrents.dupe: |-
+  Dupe
 server.torrents.edit_details: |-
   Editar detalhes
+server.torrents.edit_filters: |-
+  Filtros personalizados
+server.torrents.edit_notification_filters: |-
+  Editar filtros de notificação
 server.torrents.edit_summary: |-
   Resumo da edição
+server.torrents.edit_torrent_group: |-
+  Editar grupo de torrents
 server.torrents.editgroup: |-
   Editar descrição
+server.torrents.edition_expand: |-
+  Clique aqui para alternar a busca de informações específicas de remesso
 server.torrents.editrequest: |-
   Solicitar uma edição
 server.torrents.eliminate_a_hnr: |-
   Eliminar um H&R
+server.torrents.eliminated_hnrs: |-
+  Eliminado H&Rs
+server.torrents.empty_slot: |-
+  Este torrent não foi atribuído a um slot
+server.torrents.empty_slots: |-
+  Slots vazios:&nbsp;
+server.torrents.en_quality_slot: |-
+  EN Slot de Qualidade
+server.torrents.en_quality_slot_requirements: |-
+  Melhor conter uma legenda codificada em inglês. Um filme não inglês sem uma legenda em inglês seria marcado como "Trumpable". A qualidade do vídeo deve ser o mais boa possível.
+server.torrents.en_quality_slot_x265: |-
+  EN Slot de Qualidade (x265)
+server.torrents.error_downloaded_to_many_times: |-
+  Você já baixou este arquivo torrent quatro vezes. Se você precisar baixá-lo novamente, por favor faça isso do seu navegador.
+server.torrents.error_leech_disabled: |-
+  Você não pode usar os tokens enquanto estiver desabilitado.
+server.torrents.error_leech_disabled_may: |-
+  Você não pode usar tokens enquanto a Sanguessuga estiver desativada.
+server.torrents.error_occurred_to_token: |-
+  Desculpe! Ocorreu um erro ao tentar registrar o seu token. Com muita frequência, isto é devido ao rastreador estar abaixo ou sob carga pesada. Tente novamente mais tarde.
+server.torrents.error_tokens_not_enough: |-
+  Você não possui fichas de freeleech suficientes. Use o link DL regular.
 server.torrents.extra: |-
   Extra
+server.torrents.extra_definition: |-
+  Outros
+server.torrents.extra_info: |-
+  Informação extra
+server.torrents.extra_info_placeholder: |-
+  Por favor, explique a razão pela qual você exclui o torrent em detalhes.
+server.torrents.feature: |-
+  Funcionalidade
+server.torrents.feature_slot: |-
+  Slot de Recurso
 server.torrents.feature_slot_requirements: |-
   Apenas para filmes não chineses. Deve conter uma legenda chinesa codificada. Precisa adicionar pelo menos uma legenda chinesa ou uma legenda de efeitos especiais em chinês para o código.
+server.torrents.file_names: |-
+  Nomes de Arquivos
 server.torrents.first_torrent: |-
   Primeiro torrent
 server.torrents.first_torrent_title: |-
   Este é o primeiro torrent que o usuário enviou
+server.torrents.fld: |-
+  GRATUITO
+server.torrents.fold_tooltip: |-
+  Clique para dobrar e descobrir visão geral
+server.torrents.for_the_reason: |-
+  &nbsp;pelo motivo"
+server.torrents.free_left: |-
+  Faltam %s
+server.torrents.freeleech: |-
+  GRATUITO
+server.torrents.ft_filelist: |-
+  Lista de ficheiros
 server.torrents.ft_order: |-
   Ordenar por
 server.torrents.ft_releasetype: |-
   Tipo lançamento
+server.torrents.ft_ripspecifics: |-
+  Especiais em Rip
 server.torrents.ft_year: |-
   Ano
 server.torrents.ftb_searchstr: |-
   Termos de pesquisa
+server.torrents.gift_points_pre_tax: |-
+  Pontos de presente (pré-imposto)
+server.torrents.giver_list: |-
+  Giver list
+server.torrents.global_freeleech_text: |-
+  Global freeleech tem efeito, o seeting freeleech de torrent não vai funcionar temporariamente
+server.torrents.group_high_resolution: |-
+  Alta Definição
+server.torrents.group_id: |-
+  Group ID
+server.torrents.group_results: |-
+  Agrupar por lançamento
+server.torrents.group_standard_resolution: |-
+  Definição Padrão
+server.torrents.group_title: |-
+  Título do filme
+server.torrents.group_ultra_high_resolution: |-
+  Ultra Alta Definição
 server.torrents.guide_of_advanced_search: |-
   Manual
+server.torrents.has_been_checked: |-
+  Já foi
+server.torrents.has_not_been_checked: |-
+  Não foi
+server.torrents.hd_encode: |-
+  Codificação HD
+server.torrents.hd_encode_title: |-
+  Qualidade / Retenção / Funcionalidade
+server.torrents.hd_untouched: |-
+  HD intocado
+server.torrents.hd_untouched_title: |-
+  Remux / Untouched / DIY
 server.torrents.header: |-
   Filmes
 server.torrents.hide: |-
   Esconder
 server.torrents.hide_tags: |-
   Esconder Tags
+server.torrents.history_for_after: |-
+  Editar Histórico
+server.torrents.history_for_group_after: |-
+  Editar histórico
+server.torrents.hit_and_run: |-
+  R&R
+server.torrents.hnr_is_not_opened_now: |-
+  H&R não está aberto agora
+server.torrents.hnrs: |-
+  H&R
+server.torrents.if_you_download_this: |-
+  Se você baixar isso, sua tarifa será de%s.
+server.torrents.image: |-
+  Autor
+server.torrents.imdb_id: |-
+  IMDb ID
 server.torrents.imdb_language: |-
   Idioma
+server.torrents.imdb_plot: |-
+  Sinopse
+server.torrents.imdb_region: |-
+  País/área
+server.torrents.imdb_runtime: |-
+  Tempo de execução
+server.torrents.info: |-
+  informações
+server.torrents.into_the_group: |-
+  No grupo
+server.torrents.jinzhuan: |-
+  Exclusivo
+server.torrents.lack_of_info_now: |-
+  Falta de informação agora
+server.torrents.last_active: |-
+  Última atividade
+server.torrents.latest_notifications: |-
+  Últimas notificações
+server.torrents.leechers: |-
+  Leechers
 server.torrents.like: |-
   Curtir
+server.torrents.list_of_downloaders: |-
+  Lista de Downloaders
+server.torrents.list_of_giver: |-
+  Lista de Doadores
+server.torrents.list_of_giver_title: |-
+  Lista de usuários que recompensaram bônus
+server.torrents.list_of_snatchers: |-
+  Lista de natadores
+server.torrents.location: |-
+  Local
+server.torrents.mark_all_in_filter_as_read: |-
+  Marcar Tudo no Filtro como Lido
+server.torrents.mass_pm: |-
+  Enviar PM para todos os natadores
 server.torrents.masspm: |-
   Saqueadores de PM em massa
+server.torrents.matches_for: |-
+  Correspondências para %s
+server.torrents.matches_for_unknown_filter: |-
+  Correspondências para filtro desconhecido %s
+server.torrents.media_info: |-
+  Informação de media
+server.torrents.merge_confirm: |-
+  Confirmação de Mescla!
+server.torrents.merge_target: |-
+  ID do grupo torrent alvo
+server.torrents.merge_with: |-
+  Mesclar com outro grupo
 server.torrents.misc: |-
   Diversas
+server.torrents.missing: |-
+  Falta
 server.torrents.movie_producer: |-
   Produtor
+server.torrents.movie_votes: |-
+  votações
+server.torrents.my_notifications: |-
+  Minhas notificações
+server.torrents.n_user_one: |-
+  1 usuário.
+server.torrents.n_user_other: |-
+  %s usuários.
 server.torrents.name: |-
   Nome
+server.torrents.neutral_leech: |-
+  Sanguessuga Neutra
+server.torrents.never: |-
+  Nunca
 server.torrents.no: |-
   Não
+server.torrents.no_new_notifications_found: |-
+  Nenhuma nova notificação encontrada!&nbsp;
+server.torrents.non_wiki_torrent_group_editing: |-
+  Edição de grupo de torrents não-wiki
 server.torrents.nothing_found: |-
   Nada encontrado!
+server.torrents.off25: |-
+  -25%%
+server.torrents.off50: |-
+  -50%%
+server.torrents.off75: |-
+  -75%%
+server.torrents.only_hnr: |-
+  Somente H&R
+server.torrents.only_shows_free_torrents: |-
+  Mostrar somente torrents gratuitos
+server.torrents.other: |-
+  Outros
+server.torrents.peer: |-
+  Parceiros
+server.torrents.peer_list: |-
+  Lista de pares
+server.torrents.people_who_like_this_album_also_liked: |-
+  Pessoas que gostam deste álbum também gostaram...
 server.torrents.period: |-
   .
+server.torrents.permalink: |-
+  Link permanente
+server.torrents.pfl: |-
+  Freeleeche pessoal!
+server.torrents.pm_uploader: |-
+  Envio de PM
+server.torrents.processing: |-
+  Processando
+server.torrents.quality_slot: |-
+  Slot de Qualidade
 server.torrents.quality_slot_requirements: |-
   É melhor conter uma legenda chinesa codificada. Um torrent sem legendas chinesas e inglesas seria marcado como "Trumpable". A qualidade do vídeo deve ser o melhor possível.
+server.torrents.quality_type_slot: |-
+  Composição do tipo de qualidade (incluindo EN e Sem exigência)
+server.torrents.random: |-
+  Aleatória
 server.torrents.reason: |-
   Motivo
+server.torrents.regenerate: |-
+  Gerar novamente
 server.torrents.release_type: |-
   Tipo lançamento
+server.torrents.release_types:
+  '1': |-
+    Filme de Destaque
+  '2': |-
+    Filme Curto
+  '3': |-
+    Miniséries
+  '4': |-
+    Comédia de descanso
+  '5': |-
+    Desempenho ao vivo
+  '6': |-
+    Coleção de filmes
 server.torrents.remove: |-
   Remover
+server.torrents.remove_artist: |-
+  Remover artista
+server.torrents.remove_conductor: |-
+  Remover condutor
 server.torrents.remove_tag: |-
   Remover tag
 server.torrents.remove_upload_privileges: |-
   Remover privilégios de upload
 server.torrents.remove_upload_privileges_title: |-
   Remover privilégios de upload?
+server.torrents.remux_slot: |-
+  Slot Remux
 server.torrents.remux_slot_requirements: |-
   É melhor conter uma legenda chinesa codificada. Um torrent sem legendas chinesas e inglesas seria marcado como "Trumpable".&nbsp;
+server.torrents.rename: |-
+  Renomear (não irá combinar)
 server.torrents.reply: |-
   Responder
+server.torrents.reply_at: |-
+  responder a denúncia
+server.torrents.reply_it_patiently: |-
+  Por favor, digite a sua explicação para o relatório aqui, você só pode enviar uma vez. Por favor, seja paciente e objetivo, esta resposta pode ajudar o pessoal a lidar melhor com o relatório.
 server.torrents.report: |-
   Reportar
+server.torrents.reported: |-
+  Denunciado
+server.torrents.reported_it: |-
+  denunciou isso
+server.torrents.req_format: |-
+  Formato da requisição
 server.torrents.request_an_edit: |-
   Solicitar uma Edição
+server.torrents.request_number: |-
+  Requisition number
+server.torrents.request_re_seed: |-
+  Solicitar reSeed
+server.torrents.request_re_seed_confirm: |-
+  Você tem certeza que deseja solicitar uma nova semente deste torrent?
+server.torrents.reset: |-
+  Redefinir
 server.torrents.resolution: |-
   Resolução
 server.torrents.resolve: |-
   Resolver
+server.torrents.retention_slot: |-
+  Espaço de Retenção
+server.torrents.retention_slot_requirements: |-
+  Deve ser menor que 80%% do torrent do Slot de Qualidade. A qualidade do vídeo não deve estar ruim.
+server.torrents.retention_type_slot: |-
+  Tipo de retenção (incluindo retenção e destaque)
 server.torrents.revert: |-
   Reverter para esta revisão
+server.torrents.revert_confirm: |-
+  Reverter Confirma!
+server.torrents.revert_confirm_body: |-
+  Você está tentando reverter para a revisão %s.
+server.torrents.revision_history_after: |-
+  Histórico de versões
+server.torrents.reward_100_bonus_to_uploader: |-
+  Recompense 100 bônus para o uploader
+server.torrents.reward_300_bonus_to_uploader: |-
+  Recompense 300 bônus para o uploader
+server.torrents.reward_30_bonus_to_uploader: |-
+  Recompense 30 bônus para o uploader
+server.torrents.reward_5_bonus_to_uploader: |-
+  Recompensa 5 bônus para o uploader
+server.torrents.rt_title: |-
+  RottenTomatoes ID
+server.torrents.rules_broken: |-
+  Regras quebradas
+server.torrents.s_notifications: |-
+  notificações de
+server.torrents.scene: |-
+  Cena
+server.torrents.sd_encode: |-
+  Codificação SD
+server.torrents.sd_encode_title: |-
+  Qualidade
+server.torrents.sd_untouched: |-
+  SD intocado
+server.torrents.sd_untouched_title: |-
+  Intocável
+server.torrents.se_sub: |-
+  Sub SE
 server.torrents.search: |-
   Pesquisa
 server.torrents.search_empty_1: |-
@@ -4281,66 +5478,228 @@ server.torrents.search_torrents: |-
   Pesquisa
 server.torrents.seeders: |-
   Seeders
+server.torrents.seeding_status: |-
+  Status da semeando
+server.torrents.seeding_time: |-
+  Tempo semeando
+server.torrents.setdefault: |-
+  Definir como padrão
 server.torrents.show: |-
   Mostrar
+server.torrents.show_comparison: |-
+  Mostrar comparação
+server.torrents.show_downloads_title: |-
+  Veja a lista de usuários que clicaram no botão "DL".
+server.torrents.show_snatches_title: |-
+  Ver a lista de usuários que reportaram um snatch ao rastreador.
+server.torrents.showing_first_n_matches: |-
+  Mostrando os primeiros %s jogos
 server.torrents.size: |-
   Tamanho
+server.torrents.slot_action: |-
+  Entrada
+server.torrents.slot_filter: |-
+  Filtro de faixas
+server.torrents.slot_status: |-
+  Status do Slot
+server.torrents.slot_status_empty: |-
+  Vazio
+server.torrents.slot_status_full: |-
+  Carregada
+server.torrents.slot_status_occupied: |-
+  Ocupado
+server.torrents.slot_status_trumpable: |-
+  Tráfego
+server.torrents.slot_table: |-
+  Slots
+server.torrents.slot_wiki: |-
+  O que é isto?
+server.torrents.slots_we_need: |-
+  Precisamos de:
+server.torrents.snatched: |-
+  Encontrado
+server.torrents.someone_reported_it: |-
+  Alguém relatou isso
 server.torrents.source: |-
   Fonte
 server.torrents.space_log_message: |-
   &nbsp;Mensagem de log
+server.torrents.space_results: |-
+  &nbsp;resultados
 server.torrents.space_staff_notes: |-
   &nbsp;notas de pessoal
+server.torrents.space_to_space: |-
+  &nbsp;para&nbsp;
+server.torrents.split_off_into_new_group: |-
+  Dividir em Novo Grupo
 server.torrents.sub_title: |-
   Título Chinês
 server.torrents.subscribe: |-
   Inscrever-se
+server.torrents.successfully_sent_re_seed_request: |-
+  Solicitação de reseed enviada com sucesso
+server.torrents.successfully_sent_re_seed_request_for_torrent: |-
+  Pedido de re-semente enviado com sucesso para torrent&nbsp;
 server.torrents.tag: |-
   Tags
 server.torrents.tag_rules: |-
   Regras de tags
 server.torrents.tags: |-
   Tags (separadas por vírgula)
+server.torrents.the_destination_torrent_group_does_not_exist: |-
+  O grupo de torrent de destino não existe!
 server.torrents.there_are_no_tags_to_display: |-
   Não há tags para exibir.
+server.torrents.this_album_is_in_collages: |-
+  Este filme está em %s
 server.torrents.this_album_is_in_collages_count_one: |-
   %s coleção
 server.torrents.this_album_is_in_collages_count_other: |-
   %s coleções
+server.torrents.this_album_is_in_personal_collages: |-
+  Este filme está em %s
 server.torrents.this_album_is_in_personal_collages_count_one: |-
   %s coleção pessoal
 server.torrents.this_album_is_in_personal_collages_count_other: |-
   %s coleções pessoais
 server.torrents.this_request: |-
   este pedido
+server.torrents.this_torrent_has_active_reports: |-
+  Este torrent tem %s ativo %s
+server.torrents.this_torrent_has_active_reports_count_one: |-
+  %s relatório
+server.torrents.this_torrent_has_active_reports_count_other: |-
+  %s relatórios
 server.torrents.time: |-
   Tempo
 server.torrents.title: |-
   Título
 server.torrents.torrent: |-
   Torrent
+server.torrents.torrent_already_deleted: |-
+  Torrent já excluído.
+server.torrents.torrent_cannot_be_deleted_because_the_upload_process_is_not_completed_yet: |-
+  Torrent não pode ser excluído porque o processo de upload ainda não está concluído. Tente novamente mais tarde.
+server.torrents.torrent_deleted: |-
+  Torrent Excluído
+server.torrents.torrent_deleted_notice: |-
+  Aviso
+server.torrents.torrent_deleted_successfully: |-
+  Torrent foi excluído com sucesso.
+server.torrents.torrent_group: |-
+  Grupo de torrents:&nbsp;
+server.torrents.torrent_group_id_change_confirmation: |-
+  Confirmação de Alterar ID do Grupo Torrent
+server.torrents.torrent_group_leech_status: |-
+  Status do Leech de grupo torrent
+server.torrents.torrent_group_meta_editing: |-
+  Edição de informações de filme
+server.torrents.torrents_count: |-
+  # torrents
+server.torrents.total_reward_bonus_points_pre_tax: |-
+  Pontos de bônus totais (pré-impostos)
+server.torrents.trump: |-
+  Tráfego
+server.torrents.trumpable_reason: |-
+  Razão Trumpable
+server.torrents.trumped: |-
+  Descompactado
+server.torrents.turn_me_green: |-
+  Deixe-me verde, pleeeeeeee~
+server.torrents.uhd_encode: |-
+  Codificação UHD
+server.torrents.uhd_encode_title: |-
+  Qualidade / Retenção / Funcionalidade
+server.torrents.uhd_untouched: |-
+  UHD intocado
+server.torrents.uhd_untouched_title: |-
+  Remux / Untouched / DIY
+server.torrents.unchecked_torrents: |-
+  Não seleccionada
+server.torrents.checking_status: |-
+  A verificar o estado
+server.torrents.unchecked_torrents_results_note: |-
+  (%d total desmarcado)
 server.torrents.checked_torrents: |-
   Verificado
+server.torrents.undo_delete: |-
+  Anular eliminação
 server.torrents.unsubscribe: |-
   Desinscrever
+server.torrents.untouched_slot: |-
+  Espaço não tocado
+server.torrents.untouched_slot_ntsc: |-
+  Slot não tocado (NTSC)
+server.torrents.untouched_slot_pal: |-
+  Slot não tocado (PAL)
+server.torrents.untouched_slot_requirements: |-
+  É necessário não ter cópias de discos de varejo de 1:1. Apenas os avisos podem ser removidos.
+server.torrents.untouched_type_slot: |-
+  Slot de tipo não tocado (incluindo Remux, Untouched & DIY)
+server.torrents.up_this_session: |-
+  Subir (esta sessão)
+server.torrents.upload_by: |-
+  Enviado por %s
+server.torrents.upload_torrent: |-
+  Carregar torrent
+server.torrents.uploader_replied_it: |-
+  Uploader respondeu
 server.torrents.used_this_torrent_to_fill: |-
   usou este torrent para preencher
 server.torrents.user: |-
   Usuário
+server.torrents.user_s: |-
+  de&nbsp;
+server.torrents.view_all: |-
+  Ver tudo
+server.torrents.view_download_list: |-
+  Ver lista de download
+server.torrents.view_file_list: |-
+  Ver lista de arquivos
+server.torrents.view_peer_list: |-
+  Ver lista de pares
+server.torrents.view_report_information: |-
+  Ver informações do relatório
+server.torrents.view_snatch_list: |-
+  Ver lista de snatch
 server.torrents.view_tags: |-
   Vizualizar Tags
 server.torrents.view_the_profile_of_the_user_that_added_this_tag: |-
   Ver o perfil do usuário que adicionou esta tag
 server.torrents.viewhistory: |-
   Ver histórico
+server.torrents.viewlog: |-
+  Ver registo
 server.torrents.vote_this_tag_down: |-
   Vote deslike nesta tag
 server.torrents.vote_this_tag_up: |-
   Vote like nesta tag
 server.torrents.votes: |-
   Votações
+server.torrents.votes_changed: |-
+  Changed your mind?
+server.torrents.votes_clear: |-
+  Limpe seu voto
+server.torrents.votes_downvote: |-
+  voto negativo
+server.torrents.votes_downvoted: |-
+  Você votou contra.
+server.torrents.votes_downvotes: |-
+  votos negativos
+server.torrents.votes_positive: |-
+  positivo
+server.torrents.votes_score: |-
+  Pontuação
+server.torrents.votes_score_note: |-
+  Este é o limite inferior do intervalo de confiança binomial &lt;a href=&quot;wiki.php?action=article&amp;id=108&quot;&gt;descrito aqui&lt;/a&gt;, multiplicado por 100.
 server.torrents.votes_total: |-
   Total
+server.torrents.votes_upvote: |-
+  voto positivo
+server.torrents.votes_upvoted: |-
+  O senhor votou favoravelmente.
+server.torrents.votes_upvotes: |-
+  votos positivos
 server.torrents.warning: |-
   Atenção
 server.torrents.warning_title: |-
@@ -4349,10 +5708,62 @@ server.torrents.writer: |-
   Escritor
 server.torrents.year: |-
   Ano
+server.torrents.yes: |-
+  Sim
+server.torrents.you_are_attempt_to_move_from: |-
+  Você está tentando mover o torrent com o ID %s do grupo
+server.torrents.you_are_attempting_to_merge: |-
+  Você está tentando mesclar o grupo
 server.torrents.you_are_req: |-
   Você está solicitando uma edição para...
+server.torrents.you_are_req_note: |-
+  <p>
+  Por favor, detalhe todas as informações que precisam ser editadas para o grupo de torrents. Inclua todos os links relevantes (discogs, musicbrz, etc. .<br /><br />
+  Isto não irá gerar um relatório, mas irá criar um tópico no fórum de edição.<br /><br />
+
+  Para que este formulário pode ser usado:
+  </p>
+  <ul>
+  <li>'Versão Original', informações tais como: ano, rótulo de registro & número do catálogo.</li>
+  <li>Nome do grupo/erro de digitação</li>
+  <li>Agrupamento</li>
+  <li>etc. .</li>
+  </ul>
+  <p>NÃO use esse formulário para torrents individuais ou artistas. Para torrents individuais, use
+  o recurso de relatório torrent. Para artistas, vá para suas respectivas
+  páginas e use esse recurso de solicitação de edição.</p>
+server.torrents.you_can_no_longer_delete_this_torrent_as_it_has_been_snatched_by_5_or_more_users: |-
+  Você não pode mais excluir este torrent como ele foi encontrado por 5 ou mais usuários. Se você acredita que há um problema com este torrent, por favor reporte-o em vez disso.
+server.torrents.you_can_no_longer_delete_this_torrent_as_it_has_been_uploaded_for_over_a_week: |-
+  Você não pode mais deletar este torrent, pois ele foi carregado por mais de uma semana. Se você agora acha que há um problema, por favor reporte o torrent.
+server.torrents.you_cant_like_yourself: |-
+  Você não pode se curtir
+server.torrents.you_cant_reward_yourself: |-
+  Você não pode se recompensar
+server.torrents.you_have_recently_deleted_3_torrents: |-
+  Você recentemente excluiu 3 torrents. Por favor, entre em contato com um membro da staff se você precisar excluir mais.
+server.torrents.you_have_rewarded: |-
+  Você recompensou
+server.upload.album_note: |-
+  <h7>Não inclua as palavras de remaster, re-criar, MFSL Gold, edição limitada, faixas de bônus, disco bônus ou informações específicas de país neste campo. Isso pertence nos campos de informações do lançamento abaixo; veja <a href='wiki.php?action=article&amp;id=6' target='_blank'>esta</a> para mais informações. Lembre-se também de usar a capitalização correta para seu upload. Consulte os <a href='wiki.php?action=article&amp;id=68' target='_blank'>Diretrizes para Capitalização</a> para obter mais informações.</h7>
+server.upload.arabic: |-
+  Árabe
+server.upload.artist_note: |-
+  <strong class='u-colorWarning'>Por favor use a função de multi-artistas em vez de simplesmente adicionar &quot;Vários artistas&quot; como um artista; </strong>leia <a href='wiki.php?action=article&amp;id=64' target='_blank'>este artigo</a> para mais informações.
+server.upload.assurance: |-
+  Certifique-se de que seu torrent está de acordo com as regras <h7><a href='rules.php?p=upload' target='_blank'></a></h7> no nosso site. Caso contrário, você receberá <strong class='u-colorWarning'>aviso</strong> ou <strong class='u-colorWarning'>punição</strong>.&nbsp;
+server.upload.assurance_note: |-
+  <p>Após enviar um torrent, você terá um buffer de uma hora. Durante este período, ninguém além de você pode usar este torrent para preencher a solicitação de outros usuários. Faça pleno uso dessa chance e pesquise a <a href='requests.php' target='_blank'>lista de solicitação</a>.</p>
+server.upload.auto_detect: |-
+  Detectar automaticamente
+server.upload.bad_folders: |-
+  Nomes de arquivos inválidos (pasta)
 server.upload.because: |-
   porque
+server.upload.brazilian_port: |-
+  Porta brasileira.
+server.upload.bulgarian: |-
+  Búlgaro
 server.upload.chinese_dubbed_label: |-
   Dublado em chinês
 server.upload.chinese_movie_synopsis: |-
@@ -4369,48 +5780,254 @@ server.upload.composer: |-
   Compositor
 server.upload.copied: |-
   Copiado
+server.upload.copy: |-
+  Copiar
+server.upload.croatian: |-
+  Croata
+server.upload.custom_trumpable: |-
+  Personalizado Trumpable
+server.upload.czech: |-
+  Checo
+server.upload.danish: |-
+  Dinamarquês
+server.upload.dead_torrent: |-
+  Torrent morto
 server.upload.director: |-
   Diretor
+server.upload.drop_area: |-
+  Solte uma Imagem aqui
+server.upload.dutch: |-
+  Holandês
 server.upload.english: |-
   Inglês
+server.upload.mandarin: |-
+  Mandarim
+server.upload.cantonese: |-
+  Cantonês
+server.upload.english_movie_synopsis: |-
+  Sinopse inglesa
 server.upload.english_name: |-
   Nome em inglês
+server.upload.enter_at_least_one_artist: |-
+  Por favor, insira pelo menos um artista principal
+server.upload.estonian: |-
+  Estónio
+server.upload.explain: |-
+  Explicar
+server.upload.finnish: |-
+  Finlandês
+server.upload.freeleech: |-
+  FreeLeech
+server.upload.french: |-
+  Francês
+server.upload.german: |-
+  Alemão
+server.upload.greek: |-
+  Grego
+server.upload.hardcode_sub: |-
+  Legendas codificadas
 server.upload.header_warning: |-
   Atenção
+server.upload.hebrew: |-
+  Hebraico
+server.upload.here: |-
+  aqui
+server.upload.hindi: |-
+  Hindi
+server.upload.hungarian: |-
+  Húngaro
+server.upload.icelandic: |-
+  Islandês
+server.upload.image_host: |-
+  Host da Imagem
+server.upload.image_note: |-
+  <h7>Siga <a href='wiki.php?action=article&id=27' target='_blank'>As Instruções da Capa</a>, recomendamos que você use a nossa <a href='http://www.dicimg.club' target='_blank'>máquina de imagem oficial</a>. <span><strong class='u-colorWarning'>Nota:</strong> Por favor, tente o seu melhor para fazer o upload da capa. Você será punido se você carregar muitos torrents sem capas.</span></h7>
+server.upload.imdb_empty_warning: |-
+  Se não existir um link IMDb, por favor marque a caixa ou você não pode enviar ou solicitar.
+server.upload.indonesian: |-
+  Indonésio
+server.upload.italian: |-
+  Italiano
+server.upload.japanese: |-
+  ﻿Japonês
+server.upload.jinzhuan: |-
+  Exclusivo
+server.upload.korean: |-
+  Coreano
 server.upload.last_update: |-
   Última atualização
+server.upload.latvian: |-
+  Letão
+server.upload.lithuanian: |-
+  Lituano
+server.upload.marks: |-
+  Marcadores
+server.upload.marks_how_to_blockquote: |-
+  <ul>
+  <li>Marca a explicação:
+  <ol class='postlist'>
+  <li>a própria compra: para discos físicos, etc. que foi comprado pelo uploader.</li>
+  <li>Auto-rip: Para Codes, Remuxes, DIYs, etc. que foram enganados pelo uploader.</li>
+  <li>Exclusivos: Você precisa da permissão do uploaders para repostar o torrent.</li>
+  </ol>
+  </li>
+  <li>Apenas um de auto-compra ou auto-inquilir pode ser selecionado.</li></ul>
+server.upload.marks_how_to_toggle: |-
+  Como usar as marcas originais
+server.upload.marks_warning: |-
+  <strong class='u-colorWarning'>Selecionar a marca "Autocompra" ou "Auto-rip" para um torrent re-postado pode fazer com que você seja avisado.</strong>
+server.upload.mediainfo_bdinfo_note: |-
+  Se houver mais de um arquivo de vídeo ou disco, clique em "+" para adicionar seu próprio MediaInfo/BDInfo.
+server.upload.mediainfo_bdinfo_placeholder: |-
+  Cole MediaInfo/BDInfo aqui, se você tiver vários Mediainfo, use o botão +.
+server.upload.mixed_subtitles: |-
+  Legendas codificadas
 server.upload.movie_aliases: |-
   Título Chinês
 server.upload.movie_aliases_note: |-
   Por favor, digite o título em chinês.
+server.upload.movie_codec: |-
+  Codec
+server.upload.movie_container: |-
+  Recipiente
+server.upload.movie_cover: |-
+  Arte de capa (opcional)
+server.upload.movie_edition_information: |-
+  Informações da edição
+server.upload.movie_edition_information_examples: |-
+  Exemplos: |-
+  Parte de uma coleção, edição especial, visão de bonecos ou recursos de propagação não-padrão. Veja o guia de edição <a href="#">aqui</a>. <strong>Quando escolher "Masters of Cinema" "The Criterion Collection" "Warner Archive Collection" "4K Restoration" "4K Remaste" ou inserir uma informação personalizada, você é altamente recomendável para preencher o ano específico.</strong>
+server.upload.movie_edition_information_label: |-
+  Marque esta caixa se este torrent tem informação de edição extra.
 server.upload.movie_feature: |-
   Torrent de recursos
 server.upload.movie_feature_note: |-
   <strong>Nota: </strong>somente filmes não chineses podem usar essas marcas.
+server.upload.movie_fill: |-
+  Auto-preenchimento
+server.upload.movie_imdb: |-
+  IMDb
+server.upload.movie_information: |-
+  Informação
+server.upload.movie_processing: |-
+  Processando
 server.upload.movie_producer: |-
   Produtor
 server.upload.movie_resolution: |-
   Resolução
+server.upload.movie_scene: |-
+  Cena
+server.upload.movie_scene_label: |-
+  Marque isto somente se isto for uma 'liberação de cena'. Se você mesmo o rasgou, não é uma liberação de cena.
+server.upload.movie_scene_note: |-
+  A verificação pode ser feita digitando o nome do arquivo em <a href="https://pre.corrupt-net.org/" target="_blank">pre.corrupt-net.org</a> ou em <a href="https://www.srrdb.com/" target="_blank">srrDB</a>.
 server.upload.movie_source: |-
   Fonte
 server.upload.movie_subtitles: |-
   Legendas
+server.upload.movie_subtitles_note: |-
+  <strong>Nota: </strong>As legendas forçadas não significam legendas codificadas.
 server.upload.movie_title: |-
   Título do filme
+server.upload.movie_torrent_description: |-
+  Descrição do torrent
+server.upload.movie_torrent_description_note: |-
+  Exigimos pelo menos três capturas de tela PNG (guia<a href="wiki.php?action=article&name=原始分辨率截图指南" target="_blank"></a>) e um log completo de MediaInfo (<a href="wiki.php?action=article&name=MediaInfo+使用指南" target="_blank">guia</a>) ou BDInfo (<a href="wiki.php?action=article&name=BDInfo+使用指南" target="_blank">guia</a>).<br/>Por favor consulte nossa página de regras para obter mais informações sobre as informações necessárias.
+server.upload.movie_trumpable: |-
+  Tráfego
+server.upload.movie_type: |-
+  Tipo de filme
+server.upload.movie_upload_note: |-
+  <strong class='u-colorWarning'>Nota: </strong>As regras de nomeação de artistas e nomes de filmes, por favor, veja a Regra <a href='rules.php?p=upload#2.1' target='_blank'>2.1. Nomeação</a> e <a href='wiki.php?action=article&id=17' target='_blank'>Nomeação de Torrent</a>.
 server.upload.name: |-
   Nome
+server.upload.name_too_long: |-
+  O torrent continha um ou mais arquivos com um nome muito longo:<br />
+server.upload.need_download_new_torrent1: |-
+  Seu torrent foi enviado; no entanto, você tem que baixar seu torrent de&nbsp;
+server.upload.need_download_new_torrent2: |-
+  &nbsp;para começar a semear.
+server.upload.no_imdb_link: |-
+  Não existe nenhum link IMDb
+server.upload.no_imdb_note: |-
+  Certifique-se de que o link do IMDB não existe, caso contrário, você receberá um aviso.
+server.upload.no_sub: |-
+  Falta de legenda básica
+server.upload.no_subtitles: |-
+  Sem Legendas
+server.upload.no_torrent_uploaded: |-
+  Nenhum arquivo torrent foi carregado, ou o arquivo está vazio.
+server.upload.norwegian: |-
+  Norueguês
+server.upload.not_main_movie: |-
+  Não é filme principal
+server.upload.not_main_movie_label: |-
+  Marque isto apenas se NÃO contiver o filme principal.
+server.upload.not_main_movie_note: |-
+  Exemplos: |-
+  SOMENTE contém extras, Rifftrax, Workprints.
+server.upload.not_supported_encrypted_file_list: |-
+  Este torrent contém uma lista de arquivos encriptados que não é suportada aqui.
+server.upload.not_torrent_file: |-
+  Você parece ter colocado algo diferente de um arquivo torrent no campo de upload.&nbsp;
+server.upload.other: |-
+  Outros
 server.upload.period: |-
   .
+server.upload.persian: |-
+  Persa
+server.upload.personal_announce: |-
+  O seu URL de anúncio pessoal é
+server.upload.personal_announce_note: |-
+  Seu anúncio pessoal foi escondido para segurança, por favor, clique com o botão direito para copiar
+server.upload.polish: |-
+  Polaco
+server.upload.portuguese: |-
+  Português
 server.upload.preview: |-
   Pré-visualizar
+server.upload.romanian: |-
+  Romeno
+server.upload.russian: |-
+  Russo
+server.upload.same_torrent_exists: |-
+  O mesmo arquivo torrent já existe no site!
+server.upload.select_a_type: |-
+  Por favor, selecione um tipo válido.
+server.upload.select_file: |-
+  Selecione uma imagem
+server.upload.select_valid_format: |-
+  Por favor, selecione um formato válido.
 server.upload.self_purchase: |-
   Auto Compra
+server.upload.self_rip: |-
+  Autodidata
+server.upload.serbian: |-
+  Sérvio
+server.upload.show_more: |-
+  Mostrar mais
+server.upload.slovak: |-
+  Eslovaco
+server.upload.slovenian: |-
+  Esloveno
+server.upload.spanish: |-
+  Espanhol
+server.upload.special_effects_subtitles_label: |-
+  Legendas de efeitos especiais
+server.upload.staff_note: |-
+  Nota pessoal
 server.upload.sub_name: |-
   Nome em chinês
 server.upload.sub_title: |-
   Título Chinês
+server.upload.swedish: |-
+  Sueco
 server.upload.tags: |-
   Tags
+server.upload.thai: |-
+  Tailandês
+server.upload.thank_you_fix_torrent: |-
+  Obrigado por corrigir este torrent!
 server.upload.title_how_to_blockquote: |-
   Por favor, leia a regra de envio <a href='rules.php?p=upload#2.1' target='_blank'>2.1</a> para nomes com título. Aqui estão algumas explicações extras.<br/><br/>
   <strong>Título do filme</strong>: Título principal em inglês do filme. Por favor, note que o título que foi preenchido automaticamente pode não ser normal, o que é uma transliteração do título do idioma original. No momento, recomendamos fortemente que você use o título padrão de inglês, que pode ser encontrado em:
@@ -4421,6 +6038,14 @@ server.upload.title_how_to_blockquote: |-
   </ul>Quando você não consegue encontrar um título padrão em inglês pelas formas acima, então uma transliteração é aceitável. Por exemplo, o filme Chinês <i>The Wandering Earth</i> não deve ser nomeado como <i>Liu Lang Di Qiu</i>.
   <br/><br/>
   <strong>Chinês:</strong> Por favor, digite o título da China continental. Não são permitidos títulos utilizados em Hong Kong ou província de Taiwan.
+server.upload.title_how_to_toggle: |-
+  &nbsp;Como preencher um título de filme&nbsp;
+server.upload.title_length_limit: |-
+  O título deve ter entre 2 e 200 caracteres.
+server.upload.torrent_diff: |-
+  Não enviar lista
+server.upload.torrent_file: |-
+  Ficheiro torrent
 server.upload.torrent_info_how_to_blockquote: |-
   <strong>MediaInfo e especificações:</strong> Depois de colar a MediaInfo (<a href="wiki.php?action=article&name=MediaInfo+使用指南" target="_blank">guide</a>) ou log do BDInfo (<a href="wiki.php?action=article&name=BDInfo+使用指南" target="_blank">guia</a>), você pode clicar fora da área de texto, então os quatro seletores com "Detectar automaticamente" serão escolhidos automaticamente.<br/>
   <strong class="u-colorWarning">Por favor, verifique novamente depois de preencher automaticamente.</strong><br/><br/>
@@ -4429,118 +6054,682 @@ server.upload.torrent_info_how_to_blockquote: |-
   Por favor consulte nossas <a href="rules.php?p=upload" target="_blank">regras</a> para mais informações sobre informações obrigatórias.<br/><br/>
   <strong>Legendas:</strong> Por favor observe as diferenças entre a legenda forçada e a legenda codificada, você pode ler <a href="wiki.php?action=article&id=44" target="_blank">esse artigo</a>.<br/><br/>
   <strong>Feature torrent:</strong> Somente <strong class="u-colorWarning">filmes não-chineses</strong> podem usar estas marcas (dialectos como Cantonês são considerados chineses).
+server.upload.torrent_info_how_to_toggle: |-
+  &nbsp;Como preencher as informações abaixo de&nbsp;
+server.upload.torrent_rule: |-
+  <h7>Por favor, obedeça às <a href='wiki.php?action=article&amp;id=6' target='_blank'>Regras de Nomeação de Torrent</a>. Por favor, use o botão "+" à direita para adicionar mais artistas, por favor, verifique <a href='wiki.php?action=article&amp;id=17' target='_blank'>esta instrução</a> para mais informações.</h7>
+server.upload.trailer_link: |-
+  Link do Trailer
+server.upload.turkish: |-
+  Turco
 server.upload.type: |-
   Tipo
+server.upload.ukrainian: |-
+  Ucraniano
 server.upload.upload: |-
   Transferir
 server.upload.upload_handle_warning: |-
   Atenção
 server.upload.upload_img: |-
   Transferir
+server.upload.upload_note: |-
+  Por favor, obedeça às <a href='rules.php?p=upload' target='_blank'>regras de envio</a>. As seguintes liberações estão atualmente proibidas de serem enviadas para o site. Por favor, verifique as <a href='wiki.php?action=article&id=27' target='_blank'>Instruções de Upload de Torrents</a>.
+server.upload.vietnamese: |-
+  Vietnamita
 server.upload.writer: |-
   Escritor
 server.upload.year: |-
   Ano
+server.upload.year_remaster: |-
+  Ano inicial
+server.upload.year_remaster_title: |-
+  Você inseriu um ano para uma versão anterior à disponibilidade do médio. Você precisará alterar o ano e inserir informações adicionais de edição. Se esta informação não puder ser fornecida, verifique a &quot;Liberação desconhecida&quot; caixa de seleção abaixo.
+server.user.1_week: |-
+  1 semana
+server.user.2_week: |-
+  2 semana
+server.user.2fa: |-
+  2FA
+server.user.4_week: |-
+  4 semana
+server.user.8_week: |-
+  8 semana
+server.user.SettingAlternative: |-
+  Estilo Alternativo
+server.user.SettingShowReleaseGroup: |-
+  Mostrar Grupo de Lançamento
+server.user.SettingTorrentTitle: |-
+  Estilo do título
+server.user.setting_torrent_title_seq: |-
+  Sequência
+server.user.SettingTorrentTitleTooltip: |-
+  Salve o perfil para ver o resultado
+server.user.above: |-
+  Acima
+server.user.account: |-
+  Conta
+server.user.account_disable: |-
+  Trancar conta
+server.user.active_points: |-
+  Pontos ativos
+server.user.active_points_title: |-
+  Pontos ativos determinam a Classificação de Doadores de um usuário e expiram.
+server.user.add_friend: |-
+  Adicionar aos amigos
+server.user.add_time: |-
+  Adicionar tempo
+server.user.added_points: |-
+  Pontos adicionados
+server.user.admin_account: |-
+  Equipe bloqueada
 server.user.advanced: |-
   Avançado
 server.user.after: |-
   Depois
+server.user.all_fields_below_here_are_optional: |-
+  Todos os campos abaixo aqui são opcionais
+server.user.also_search_the_email_addresses_the_member_used_in_the_past: |-
+  Também pesquise os endereços de e-mail que o membro usou no passado
+server.user.amount_cny: |-
+  Quantidade (CNY)
+server.user.and_the_total_ratio_is: |-
+  ; e a taxa total é&nbsp;
+server.user.anonymous: |-
+  Anônimo
 server.user.anyone: |-
   Qualquer
+server.user.api_key: |-
+  Chave API
+server.user.are_you_sure_delete_notification_filter: |-
+  Tem certeza que deseja excluir este filtro de notificação?
+server.user.are_you_sure_you_want_to_delete_this_invite: |-
+  Tem certeza de que deseja excluir este convite?
 server.user.assigned_to: |-
   Atribuido a
 server.user.at_least_one_of_these_tags: |-
   Pelo menos uma dessas tags
+server.user.authentication_key: |-
+  Chave de autenticação
+server.user.authentication_key_title: |-
+  Se tudo foi para o plano de última etapa, seu aplicativo de autenticação deve ter lhe dado um código. Por favor, digite-o aqui.
+server.user.authkey: |-
+  Chave de Autenticação
+server.user.autocomp: |-
+  Autocompletar
+server.user.autocomp_0: |-
+  Tudo
+server.user.autocomp_1: |-
+  Desativar
+server.user.autocomp_2: |-
+  Somente Pesquisas
 server.user.autocomp_title: |-
   O preenchimento automático tentará prever a palavra ou frase que você está digitando. Selecionando &quot;Em todos os lugares&quot; ativará o preenchimento automático nos campos de artista e tag em todo o site. A seleção de &quot;Somente pesquisas&quot; ativará o preenchimento automático nas pesquisas.
+server.user.autosave: |-
+  Salvar texto de resposta automaticamente
+server.user.autosave_title: |-
+  Como você adiciona texto a uma postagem ou resposta, este texto é salvo automaticamente. Se você parar e retornar à sua postagem mais tarde (por exemplo, acidentalmente clicar em um link e depois pressionar o botão &quot;Voltar&quot; em seu navegador), o texto permanecerá. Esta opção permite que você desative esse recurso.
+server.user.autosubscribe: |-
+  Inscrições automáticas de tópicos
+server.user.autosubscribe_title: |-
+  Habilitar isso irá automaticamente inscrevê-lo em qualquer tópico em que você postar.
+server.user.autosubscribe_your_request: |-
+  Solicitar assinaturas automáticas
+server.user.autosubscribe_your_request_title: |-
+  Habilitar isso irá inscrever-se automaticamente em qualquer solicitação que você enviar.
+server.user.avatar: |-
+  Imagem de Perfil
+server.user.avatar_url: |-
+  URL do avatar
+server.user.avatars: |-
+  Mostrar avatar (postagens)
+server.user.avatars_0: |-
+  Mostrar avatars
+server.user.avatars_2: |-
+  Mostrar avatares para:
+server.user.avatars_3: |-
+  Substituir todos os avatares com:
+server.user.avatars_title: |-
+  Esta opção permite que você desative todos os avatares, exiba todos os avatares (com um espaço reservado para usuários sem avatares), mostra todos os avatares &lt;em&gt;ou&lt;/em&gt; um conjunto de identificadores (para usuários sem avatares), ou substitua todos os avatares por um conjunto de identificadores de sua escolha. data-title-plain='Esta opção permite que você desative todos os avatares, exiba todos os avatares (com um espaço reservado para usuários sem avatares), mostrar todos os avatares ou um conjunto de identificadores (para usuários sem avatares), ou substituir todos os avatares por um
+  conjunto de identificadores de sua escolha.
 server.user.badge_center: |-
   Centro de Medalha
+server.user.base: |-
+  Simples
+server.user.base_stats: |-
+  Estatísticas básicas
+server.user.base_stats_note: |-
+  Buscar download e informações em pares automaticamente em páginas de perfil.
+server.user.base_stats_title: |-
+  Este é um recurso exclusivo para ignorar as &quot;Mostrar estatísticas&quot; botão para semear, limpar, encontrado e baixado estatísticas nas páginas de perfil.
+server.user.because_the_user_limit_has_been_reached_you_are_unable_to_send_invites_at_this_time: |-
+  Como o limite de usuários foi atingido, você não pode enviar convites no momento.
 server.user.before: |-
   Antes
 server.user.below: |-
   Abaixo
+server.user.between: |-
+  Entre
+server.user.between_the_sizes: |-
+  Entre os tamanhos
+server.user.between_the_years: |-
+  Entre os anos
+server.user.blog_announcements: |-
+  Avisos do Blog
 server.user.bonus_points: |-
   Pontos de bónus
+server.user.bonus_points_title: |-
+  Pontos Bônus.
 server.user.bounty: |-
   Recompensa
+server.user.bprates: |-
+  Pontos por hora
 server.user.browser: |-
   Navegador de Internet
+server.user.btc: |-
+  BTC
+server.user.buffer: |-
+  Buffer
+server.user.check_all_torrents: |-
+  Verificar todos os torrents
+server.user.check_his_her_torrents: |-
+  Verificar torrents dele/dela
+server.user.check_self_torrents: |-
+  Verificar torrents dele/dela
+server.user.clearcache: |-
+  Limpar cache
+server.user.clearing_cookies_can_result_in_ghost_sessions: |-
+  Nota: |-
+  A limpeza de cookies pode resultar em sessões fantasmas que são removidas automaticamente após 30 dias.
+server.user.close: |-
+  Fechar
 server.user.closed: |-
   Fechado
+server.user.cny: |-
+  CNY
 server.user.collage_covers_all: |-
   Todos
+server.user.collage_covers_none: |-
+  Nenhum
+server.user.collage_subscriptions: |-
+  Inscrições de coleção
 server.user.collage_subscriptions_title: |-
   Habilitando isto lhe dará uma notificação quando um torrent for adicionado a uma coleção que você está inscrito.
+server.user.collected: |-
+  collected
+server.user.colornamepreview: |-
+  Pré-visualização colorida do nome de usuário
+server.user.colornamepreview_title: |-
+  Você pode visualizar seu estilo de nome de usuário para economizar tempo.
+server.user.comm_downloaded: |-
+  Nome do arquivo
+server.user.comm_invited: |-
+  Convidado
+server.user.comm_leeching: |-
+  Sangramento
+server.user.comm_originals: |-
+  "Original" carregado
 server.user.comm_seeding: |-
   Semeando
+server.user.comm_snatched: |-
+  Encontrado
 server.user.comm_upload: |-
   Upload concluído
+server.user.comma_seperated_artists_list: |-
+  Lista separada por vírgulas&#8202;&mdash;&#8202; por exemplo, Christopher Nolan, Zack Snyder, Jackie Chan
+server.user.comma_seperated_countries_list: |-
+  Lista separada por vírgulas&#8202;&mdash;&#8202;por exemplo, China, Japão, Reino Unido, Taiwan
+server.user.comma_seperated_editions_list: |-
+  Lista separada por vírgulas&#8202;&mdash;&#8202; por exemplo, O Critério de Coleção, recorte do diretor, Edição Estendida
 server.user.comma_seperated_languages_list: |-
   Lista separada por vírgulas&#8202;&mdash;&#8202;por exemplo, Chinês, Japonês, Inglês
 server.user.comma_seperated_tags_list: |-
   Lista separada por vírgulas&#8202;&mdash;&#8202;por exemplo ação, ficção científica, suspense
+server.user.comma_seperated_usernames_list: |-
+  Lista de nomes de usuários separados por vírgula
+server.user.comma_space_and_space: |-
+  e&nbsp;
 server.user.community: |-
   Comunidade
 server.user.community_arts: |-
   Comentários do artista
+server.user.community_collcontrib: |-
+  Coleções contribuídas para
 server.user.community_colls: |-
   Comentários da coleção
+server.user.community_collstart: |-
+  Coleções iniciadas
 server.user.community_comms: |-
   Comentários do torrent
+server.user.community_dl: |-
+  Baixar
+server.user.community_pots: |-
+  Posts forum
 server.user.community_reqs: |-
   Solicitar comentários
 server.user.community_show: |-
   Mostrar
+server.user.community_topic: |-
+  Tópicos do fórum
 server.user.compose: |-
   Enviar mensagem
+server.user.copypaste: |-
+  Copiar colar
+server.user.country_code: |-
+  Código do país
+server.user.country_code_title: |-
+  Códigos de duas letras conforme definido no ISO 3166-1 alpha-2
+server.user.cover_coll: |-
+  Capa de arte (coleção)
+server.user.cover_coll_number: |-
+  capas por página
+server.user.cover_coll_title: |-
+  Esta opção permite alterar o número de capas de álbuns a serem exibidas em uma única página de coleção.
+server.user.create_a_new_notification_filter: |-
+  Criar um novo filtro de notificação
+server.user.create_filter: |-
+  Criar filtro
+server.user.current_donor_rank: |-
+  Rank de doador
+server.user.current_filter: |-
+  Filtro de notificação atual
+server.user.current_special_donor_rank: |-
+  Rank especial
 server.user.customtitle: |-
   Título Personalizado
 server.user.date: |-
   Data
+server.user.default: |-
+  predefinição
+server.user.default_search: |-
+  Tipo de pesquisa padrão
+server.user.default_search_title: |-
+  Esta opção permite que você escolha se o menu padrão de pesquisa torrent será básico (menos opções) ou avançado (mais opções).
+server.user.delete_account: |-
+  Eliminar conta
+server.user.delete_invite: |-
+  Excluir convite
+server.user.device_id: |-
+  ID do Dispositivo
+server.user.disable_account: |-
+  Conta de Bloqueio
+server.user.disable_push_notifications: |-
+  Desativar notificações push
 server.user.disabled: |-
   Desativado
+server.user.disabled_accounts_linked_by_ip: |-
+  Contas desabilitadas vinculadas por IP
+server.user.disabled_accounts_linked_by_ip_must_also_be_checked: |-
+  Contas desabilitadas vinculadas por IP também devem ser verificadas
+server.user.disabled_accounts_linked_by_ip_title: |-
+  Exibir apenas os usuários que têm uma conta desabilitada vinculada por endereço IP
+server.user.disabled_invites: |-
+  Convites desativados
+server.user.disabled_privilege: |-
+  Privilégio desativado
+server.user.dltext: |-
+  Downloads de texto
+server.user.dltext_title: |-
+  Alguns ISPs bloqueiam o download de arquivos torrent. Habilite esta opção se você quiser baixar arquivos torrent com uma extensão &quot;.txt&quot; de arquivo.
+server.user.dltext_tr: |-
+  Ativar download de arquivos torrent como arquivos de texto
 server.user.do_not_care: |-
   Não Quero Saber
+server.user.donation_history: |-
+  Histórico de doações
+server.user.donor: |-
+  Doador
+server.user.donor_statistics: |-
+  Estatísticas de Doadores
+server.user.donor_system_add_points: |-
+  Sistema de Doadores (adicionar pontos)
+server.user.donor_system_modify_values: |-
+  Sistema de Doadores (modificar valores)
+server.user.donor_system_modify_values_title: |-
+  Use esta ferramenta apenas quando corrigir valores manualmente. Se creditando doações normalmente, use a ferramenta "Sistema de Doações (adicionar pontos)".
+server.user.donorforum_1: |-
+  Prefix
+server.user.donorforum_2: |-
+  Sufixo
+server.user.donorforum_3: |-
+  Ocultar vírgula
 server.user.donorforum_4: |-
   Pré-visualizar
+server.user.download_list: |-
+  Lista de downloads
+server.user.downloaded: |-
+  Nome do arquivo
+server.user.downloaded_title: |-
+  Valor do download em bytes. Também aceita, por exemplo, +20GB ou -35.6364MB no final.
+server.user.downloads: |-
+  Downloads
+server.user.drag_and_drop_change_order: |-
+  Arraste e solte os tipos de versões para alterar sua ordem. Marque para dobrar o tipo por padrão.
 server.user.email: |-
   E-mail
 server.user.email_address: |-
   Endereço de Email
+server.user.email_history: |-
+  Histórico de e-mail
+server.user.emails: |-
+  E-mails
+server.user.emot: |-
+  Emoticons
+server.user.emot_disable: |-
+  Desativar emoticons
+server.user.emot_title: |-
+  Emoticons são imagens pequenas que substituem os textos tradicionais &quot;smileys&quot; like :) ou :(
+server.user.enable_opendyslexic: |-
+  Ativar a fonte OpenDyslexic
+server.user.enable_opendyslexic_title: |-
+  Esta é uma característica experimental, e algumas folhas de estilo terão problemas de exibição.
+server.user.enabled: |-
+  Ativado
 server.user.equal: |-
   Igual
+server.user.equals: |-
+  É igual a
+server.user.ex_style: |-
+  URL da folha de estilos externa
+server.user.ex_style_title: |-
+  Fornecer um link para uma folha de estilos hospedada externamente irá substituir sua seleção de folha de estilo padrão.
+server.user.expand: |-
+  Expandir
+server.user.expires_in: |-
+  Expira em
+server.user.filt_tr: |-
+  Filtros de busca por torrent
+server.user.filt_tr_show: |-
+  Exibir controles de filtro
 server.user.filt_tr_show_tags: |-
   Exibir filtros de tags oficiais
 server.user.filt_tr_title: |-
   A exibição de controles de filtro mostrará as opções de filtragem de torrent no menu de pesquisa de torrent por padrão. A exibição de filtros para tags oficiais listará filtros clicáveis para tags oficiais no menu de pesquisa de torrent por padrão.
+server.user.for: |-
+  para
+server.user.forum_warnings: |-
+  Avisos do fórum
 server.user.forums: |-
   Fóruns
+server.user.free_time: |-
+  Tempo livre
+server.user.generate: |-
+  Gerar
+server.user.gradientscolor: |-
+  Nome de usuário de cor personalizado
+server.user.gradientscolor_placeholder: |-
+  Exemplo: |-
+  #123456,#456789
+server.user.gradientscolor_title: |-
+  Ao digitar 2~3 números de cores RGB, você pode definir sua cor de nome de usuário gradiente.
+server.user.hacked: |-
+  Hackeado
+server.user.hidden_text: |-
+  Texto oculto
+server.user.hide_gallery: |-
+  Ocultar galeria
 server.user.history: |-
   Histórico
+server.user.inbox_messages: |-
+  Caixa de entrada
+server.user.inbsort: |-
+  Classificação da caixa de entrada
+server.user.inbsort_title: |-
+  Esta opção forçará a listagem de mensagens privadas não lidas primeiro.
+server.user.inbsort_un: |-
+  Listar primeiro mensagens privadas não lidas
+server.user.info: |-
+  Informação do Utilizador
+server.user.infotitle: |-
+  Título da Informação
+server.user.invite: |-
+  Convidar
+server.user.invite_link: |-
+  Link do convite
+server.user.invite_note: |-
+  Convidar nota
+server.user.invite_rules_1: |-
+  <a href="/rules.php#1.1">Uma conta por pessoa</a>. Possui mais de uma conta irá desativar todas as contas relativas.
+  Não convide pessoas que costumavam ter uma conta no {{CONFIG['SITE_NAME']}}, apesar de a pessoa ser sua pessoa. Se você convidar alguém que esteja desativado, você poderá ser banido para sempre. Se eles quiserem habilitar suas contas novamente, ligue-os para Ativar recurso automático, Grupo QQQ, Grupo TG ou pedir a seus amigos que enviem <a href="/staffpm.php">PPM do seu pessoal</a>.
+server.user.invite_rules_2: |-
+  <a href="/rules.php#2.1">Não convide usuários ruins</a>. Não convide usuários ruins. Você é responsável por seus convidados. Você não será punido se seus convidados não mantiverem as taxas de participação exigidas, mas os convidados que violarem <a href="/rules.php">regras de ouro</a> colocarão seus privilégios e conta de convite em risco.
+server.user.invite_rules_3: |-
+  <a href="/rules.php#2.2">Não troque, venda, entregue publicamente ou ofereça convites publicamente</a>. Apenas convide pessoas que você conhece e confia. Não ofereça convites através de outros rastreadores, fóruns, redes sociais ou outros locais públicos. É proibido responder a pedidos de convites públicos. Exceção: recrutadores designados por funcionários podem oferecer convites em locais aprovados.
+server.user.invite_rules_4: |-
+  Não use fóruns de convites ilícitos. Note que "amigos" de fóruns de convites ilícitos nunca serão considerados amigos por {{CONFIG['SITE_NAME']}} e você e sua árvore serão permanentemente banidos se você convidar alguém de qualquer fórum de convites ilícitos.
+server.user.invite_rules_5: |-
+  Obedeça as regras do lugar onde você está oferecendo convites.
+server.user.invite_rules_6: |-
+  Não envie um convite se você não leu ou não entender a informação acima.
+server.user.invite_rules_7: |-
+  Diga ao seu convidado para adicionar noreply@{{CONFIG['MAIL_HOST']}} à whitelist antes de enviar um convite.
+server.user.invite_tree: |-
+  Árvore de Convidados
+server.user.invitee_list: |-
+  Lista de convidados
+server.user.invitees: |-
+  Convidados
+server.user.invites: |-
+  Convites
+server.user.ip_address: |-
+  Endereço IP
+server.user.ip_history: |-
+  Histórico de IP
+server.user.api: |-
+  Chave da API
+server.user.api_note: |-
+  Redefina a sua chave de api. Você terá que atualizar a api em todos os aplicativos que usam a antiga.
+server.user.api_copy: |-
+  Copiar para área de transferência
+server.user.irc: |-
+  IRC
 server.user.irc_no: |-
   Não
+server.user.irc_yes: |-
+  Sim
+server.user.irckey: |-
+  Chave IRC
+server.user.irckey_note_1: |-
+  <p class='min_padding'>Se definido, esta chave será usada em vez de sua senha do site ao autenticar com
+server.user.irckey_note_2: |-
+  na <a href=&quot;wiki.php?action=article&amp;id=248&quot;>rede IRC do site</a>. <span style='white-space: nowrap;'>Por favor, note:</span></p>
+  <ul class="List">
+  <li>Este valor é guardado em texto simples e não deve ser sua senha.</li>
+  <li>chave IRC deve ter entre 6 e 32 caracteres.</li>
+  </ul>
+server.user.irckey_title: |-
+  Gerar chave IRC
+server.user.joined: |-
+  Juntou-se
+server.user.joineddate: |-
+  Juntou-se
+server.user.last_active: |-
+  Última atividade
+server.user.last_activity: |-
+  Última atividade
+server.user.last_donated: |-
+  Última doação
+server.user.last_seen: |-
+  Visto à
+server.user.last_torrents: |-
+  Transferências Recentes
+server.user.last_uploads: |-
+  Uploads recentes
 server.user.lastaccess: |-
   Visto pela última vez
+server.user.leaderboard_position: |-
+  Posição da classificação
+server.user.leaving_blank_means_you_allow_all_sizes: |-
+  (Permitir assinatura para torrents maiores que 1g de tamanho)
+server.user.leaving_blank_means_you_allow_all_years: |-
+  (Ser em branco significa que você permite todos os anos)
+server.user.leech: |-
+  Sanguessuga
+server.user.legacy_view: |-
+  Vista antiga
+server.user.limitedcolor: |-
+  Nome de usuário de cor pura
+server.user.limitedcolor_blue: |-
+  Azul
+server.user.limitedcolor_green: |-
+  Verde
+server.user.limitedcolor_orange: |-
+  Laranja
+server.user.limitedcolor_purple: |-
+  Roxo
 server.user.limitedcolor_red: |-
   Vermelho
+server.user.limitedcolor_title: |-
+  Selecione uma cor que você gosta, seu nome de usuário será exibido com isso.
+server.user.limitedcolor_yellow: |-
+  Amarelo
+server.user.linked_account: |-
+  Conta vinculada
 server.user.locked: |-
   Bloqueado
+server.user.locked_account: |-
+  Conta bloqueada
+server.user.logout: |-
+  Efetuar logout
+server.user.manage_notifications: |-
+  Gerenciar notificações
+server.user.mature: |-
+  Conteúdo adulto (fóruns, comentários, perfis)
+server.user.mature_show: |-
+  Exibir conteúdo adulto
 server.user.mature_title: |-
   >-
   {{CONFIG['SITE_NAME']}} tem &lt;a href=&quot;wiki.php?action=article&amp;amp;id=1063&quot;&gt;políticas de conteúdo adulto&lt;/a&gt; para todas as áreas da comunidade. Escolher exibir conteúdo adulto permitirá que você clique para visualizar qualquer conteúdo postado abaixo de &lt;code&gt;[mature]&lt;/code&gt; Tag. Se você optar por não exibir conteúdo adulto, todo o conteúdo marcado com &lt;code&gt;[mature]&lt;/code&gt; tags serão ocultadas de você.' data-title-plain='{{CONFIG['SITE_NAME']}} tem muito
   políticas flexíveis de conteúdo maduro para todas as áreas da comunidade. Escolher exibir conteúdo adulto permitirá que você clique para visualizar qualquer conteúdo postado sob as tags [mature]. Se você optar por não exibir conteúdo adulto, todo o conteúdo marcado com tags [mature] ficará oculto para você.
+server.user.menu: |-
+  Secções
+server.user.merge_from: |-
+  Mesclar de
+server.user.merge_from_title: |-
+  Informe um nome de usuário.
+server.user.min_1: |-
+  1 minuto
+server.user.min_1888: |-
+  1888 minuto
+server.user.minimum_imdb_rating: |-
+  Mínimo de avaliação IMDb
+server.user.n_users_are_disabled: |-
+  %s desativado (
+server.user.n_users_are_disabled_count_one: |-
+  &nbsp;usuário é
+server.user.n_users_are_disabled_count_other: |-
+  &nbsp;os usuários são
+server.user.n_users_have_donated: |-
+  %s doou (
+server.user.n_users_have_donated_count_one: |-
+  &nbsp;o usuário tem
+server.user.n_users_have_donated_count_other: |-
+  &nbsp;os usuários têm
 server.user.name: |-
   Nome
+server.user.new_password: |-
+  Nova senha
+server.user.news_announcements: |-
+  Avisos de notícias
+server.user.next: |-
+  Avançar
+server.user.next_userclass: |-
+  Próximo Usuário
+server.user.next_userclass_title1: |-
+  Próxima aula
 server.user.next_userclass_title3: |-
   Ratio
 server.user.next_userclass_title4: |-
   Tempo
 server.user.next_userclass_title5: |-
   Torrents
+server.user.next_userclass_title6: |-
+  Grupos únicos
 server.user.no: |-
   Não
+server.user.no_infotitle: |-
+  Este usuário não disse nada.
 server.user.none_of_these_tags: |-
   Nenhuma destas tags
+server.user.none_of_these_users: |-
+  Nenhum destes usuários
+server.user.not_equal: |-
+  Diferente
+server.user.not_factored_into_the_stats_for_the_total_tree: |-
+  &nbsp;não fatorado nas estatísticas para a árvore total.
+server.user.notification_filter_name: |-
+  Nome do filtro de notificação
+server.user.notification_filter_name_note: |-
+  Um nome para o filtro de notificação definido para distinguir filtros diferentes
+server.user.notify_me_of_all_new_torrents_with: |-
+  Notifique-me de todos os novos torrents com...
+server.user.create_new_torrent_notify: |-
+  Criar novo filtro de notificação
+server.user.new_torrent_notify_list: |-
+  Lista de notificações
+server.user.new_torrent_notify_name: |-
+  Nome do filtro de notificação
+server.user.notify_my_android: |-
+  Notify My Android
+server.user.notifyondeletedownloaded: |-
+  Eliminar alertas de torrent baixados
+server.user.notifyondeletedownloaded_checked: |-
+  Habilitar notificação PM para excluídos torrents baixados
+server.user.notifyondeletedownloaded_title: |-
+  Ativando isto irá enviar-lhe um alerta de PM sempre que um torrent que você baixou for excluído.
+server.user.notifyondeleteseeding: |-
+  Excluído semeando alertas torrents
+server.user.notifyondeleteseeding_checked: |-
+  Habilitar notificação PM para excluir torrents semeando
+server.user.notifyondeleteseeding_title: |-
+  Ativando isso irá enviar-lhe um alerta de PM sempre que um torrent que você está semeando for excluído.
+server.user.notifyondeletesnatched: |-
+  Alertas de torrent encontrados excluídos
+server.user.notifyondeletesnatched_checked: |-
+  Habilitar notificação de PM para torrents encontrados excluídos
+server.user.notifyondeletesnatched_title: |-
+  Ativando isso irá enviar-lhe um alerta de PM sempre que um torrent que você encontrou for excluído.
+server.user.number_of_emails: |-
+  # E-mails
+server.user.number_of_invitees: |-
+  # Convidados
+server.user.number_of_invites: |-
+  # Convites
+server.user.off: |-
+  Desligado
+server.user.on: |-
+  Ativado
+server.user.one_of_these_artists: |-
+  Um desses artistas
+server.user.one_of_these_users: |-
+  Um desses usuários
+server.user.only_new_releases: |-
+  Somente novos filmes
+server.user.only_new_releases_label: |-
+  Notificar apenas para novos filmes, não novos torrents
+server.user.only_these_categories: |-
+  Apenas estas categorias
+server.user.only_these_codecs: |-
+  Somente estes codecs
+server.user.only_these_containers: |-
+  Apenas estes contêineres
+server.user.only_these_countries: |-
+  Apenas estes países/regiões
+server.user.only_these_discounts: |-
+  Apenas estes descontos
+server.user.only_these_editions: |-
+  Somente estas edições
+server.user.only_these_languages: |-
+  Apenas estes idiomas
+server.user.only_these_processings: |-
+  Apenas estes processamentos
+server.user.only_these_resolutions: |-
+  Apenas estas resoluções
+server.user.only_these_sources: |-
+  Apenas estas fontes
+server.user.opendyslexic: |-
+  OpenDyslexic
+server.user.opendyslexic_title: |-
+  "&lt;a href=&quot;http://opendyslexic.org&quot; target=&quot;_blank&quot;&gt;Clique aqui&lt;/a&gt; para ler sobre OpenDyslexic, uma fonte licenciada CC-BY 3.0 projetada para usuários com dislexia. data-title-plain='Acesse http://opendyslexic.org para ler sobre OpenDyslexic, uma fonte licenciada CC-BY 3.0 projetada para usuários com dyslexia."
 server.user.order: |-
   Pedir
 server.user.p_class: |-
@@ -4549,122 +6738,892 @@ server.user.p_clients: |-
   Clientes
 server.user.p_email: |-
   E-mail
+server.user.p_host: |-
+  Servidor
+server.user.p_inviter: |-
+  Convidante
+server.user.p_invites: |-
+  Contagem de convidados
+server.user.p_ip: |-
+  IP
+server.user.p_irc: |-
+  Chave IRC
+server.user.p_paranoiaLevel: |-
+  Nível paranóia
+server.user.p_passkey: |-
+  Chave de acesso
+server.user.p_passwordage: |-
+  Idade da senha
 server.user.p_personal: |-
   Pessoal
+server.user.para_artistsadded: |-
+  Artistas adicionados
+server.user.para_artistsadded_title: |-
+  Esta opção controla a exibição dos artistas que você adicionou aos grupos de torrents no site. Este número inclui artistas adicionados através do formulário de upload torrent, assim como artistas adicionados através do &quot;Adicionar artistas&quot; caixa nas páginas de grupo de torrents.
 server.user.para_badgedisplay: |-
   Mostrar todas as medalhas
 server.user.para_badgedisplay_label: |-
   Permitir que outras pessoas vejam todas as medalhas que você possui
 server.user.para_bonus: |-
   Pontos de bónus
+server.user.para_collcontr: |-
+  Coleções (contribuição)
+server.user.para_collstart: |-
+  Coleções (iniciado)
+server.user.para_comments: |-
+  Comentários (torrents)
+server.user.para_downloaded: |-
+  Nome do arquivo
 server.user.para_emailshowtotc: |-
   E-mail
+server.user.para_emailshowtotc_label: |-
+  Ative isso para permitir que alguns grupos de usuários especiais (por exemplo, TC) vejam seu e-mail
+server.user.para_emailshowtotc_title: |-
+  Permita que grupos de usuários com acesso de e-mail vejam o seu e-mail, grupos de usuários comuns não terão essa ocasião, mesmo que você tenha verificado essa configuração.
+server.user.para_invited: |-
+  Convidados
+server.user.para_original: |-
+  Uploaded torrents (original)
+server.user.para_preview: |-
+  Pré-visualizar paranóia
 server.user.para_ratio: |-
   Ratio
+server.user.para_reqfill: |-
+  Solicitações (preenchidas)
+server.user.para_reqvote: |-
+  Solicitações (votadas)
 server.user.para_reratio: |-
   Proporção requerida
 server.user.para_stats: |-
   Estatísticas
+server.user.para_stats_title: |-
+  Essas configurações controlam a exibição de sua quantidade de dados enviados, quantidade de dados baixada e proporção.
+server.user.para_torleech: |-
+  Torrents (sangue)
+server.user.para_torseed: |-
+  Torrents (semeamento)
+server.user.para_torsnatch: |-
+  Torrents (encontrado)
+server.user.para_torsubscr: |-
+  Torrents (enviar assinaturas)
+server.user.para_torsubscr_note: |-
+  Permitir upload de torrents
 server.user.para_uploaded: |-
   Upload concluído
+server.user.para_upltor: |-
+  Torrents enviados
+server.user.para_uplunique: |-
+  Uploaded torrents (grupos únicos)
+server.user.passkey: |-
+  Chave de acesso
+server.user.passkeys: |-
+  Chaves
+server.user.passwords: |-
+  Senhas
+server.user.paste: |-
+  Colar
+server.user.paste_user_stats: |-
+  Colar estatísticas do usuário
+server.user.pending_invites: |-
+  Convites pendentes
+server.user.period_space: |-
+  .&nbsp;
+server.user.period_space_p: |-
+  . </p>
+server.user.permissions: |-
+  Permissões
+server.user.permitted_forums: |-
+  Fóruns permitidos
+server.user.permitted_forums_title: |-
+  Insira uma lista de IDs de fórum delimitada por vírgula.
+server.user.platform: |-
+  Plataforma
+server.user.please_enter_2fa_key: |-
+  Por favor, digite sua chave de autenticação de dois fatores dada a você pelo seu aplicativo.
+server.user.please_enter_correct_numbers: |-
+  Por favor, digite os números corretos!
 server.user.pm: |-
   PM
+server.user.pop_up: |-
+  Pop-up
+server.user.posting: |-
+  Postagem
+server.user.ppp: |-
+  Posts por página (fóruns)
+server.user.ppp_number: |-
+  postagens por página
+server.user.ppp_title: |-
+  Esta opção permite definir o número desejado de publicações exibidas por página dentro de tópicos do fórum.
+server.user.primary_class: |-
+  Classe primária
+server.user.promote_class: |-
+  Promover classe
+server.user.prowl: |-
+  Prowl
+server.user.push: |-
+  Notificações push
+server.user.push_notifications: |-
+  Notificações push
+server.user.pushbullet: |-
+  PushBullet
+server.user.pushover: |-
+  Suspender
+server.user.quote_notifications: |-
+  Notificações de Cotação
+server.user.quote_notifications_title: |-
+  Habilitar isso lhe dará uma notificação sempre que alguém citar você nos fóruns.
+server.user.rank_expires: |-
+  A classificação expira
 server.user.ratio: |-
   Ratio
+server.user.ratio_watch: |-
+  Relógio proporcional
+server.user.ratio_watch_text: |-
+  Este usuário está atualmente no relógio de proporção e deve enviar %s nas próximas %s, ou os seus privilégios de sangue-frio serão revogados. Quantidade baixada enquanto na relação era de comparação: %s
 server.user.reason: |-
   Motivo
+server.user.reason_title: |-
+  Esta mensagem será inserida apenas em notas de funcionário.
+server.user.redownloading_confirm: |-
+  Se você não tiver mais o conteúdo, sua taxa será afetada; certifique-se de verificar o tamanho de todos os torrents antes de baixar.
+server.user.regex_contains_illegal_characters: |-
+  O Regex contém caracteres ilegais.
 server.user.replies: |-
   Respostas
 server.user.report: |-
   Reportar
+server.user.reported: |-
+  Alertas de torrents reportados
+server.user.reported_checked: |-
+  Habilitar alertas de torrent reportados
+server.user.reported_title: |-
+  Habilitar isto irá enviar-lhe um alerta de PM após os seus uploads serem reportados.
+server.user.reporter: |-
+  Os meus relatórios
+server.user.requestscreated: |-
+  Solicitações criadas
+server.user.requestsfilled: |-
+  Solicitações concluídas
+server.user.requestsvoted: |-
+  Solicitações votadas
+server.user.required_ratio: |-
+  Rácio requerido
+server.user.reset: |-
+  Redefinir
+server.user.reset_session: |-
+  Redefinir sessão
+server.user.reset_to_default: |-
+  Repor os valores de origem
+server.user.resetpk: |-
+  Reset passkey
+server.user.resetpk_note: |-
+  Quaisquer torrents ativos devem ser baixados novamente para continuar a limpezar/sementar.
+server.user.resetpk_title: |-
+  Para informações sobre a função da sua chave de segurança, por favor &lt;a href=&quot;wiki.php?action=article&amp;amp;name=Passkey&quot;&gt;leia este artigo da wiki&lt;/a&gt;. data-title-plain='Para informações sobre a função da sua senha, por favor leia o artigo da wiki &quot;Passkey&quot;.
 server.user.resolved_by: |-
   Resolvido por
+server.user.restricted_forums: |-
+  Fóruns restritos
+server.user.restricted_forums_title: |-
+  Insira uma lista de IDs de fórum delimitada por vírgula.
+server.user.rss_address: |-
+  Endereço
+server.user.se_class: |-
+  Segunda aula
+server.user.search_results: |-
+  Resultados da pesquisa
+server.user.search_type: |-
+  Tipo de pesquisa
+server.user.search_type_fuzzy: |-
+  Incerto
+server.user.search_type_fuzzy_title: |-
+  Uma &quot;difusa&quot; pesquisa automaticamente se prepara e acrescenta curingas para pesquisar sequências de caracteres, exceto pesquisas de endereços de IP, a menos que a busca comece ou termine com um &quot;&#124;&quot; (pipe). É análogo a uma busca por greve de baunilha (exceto as coisas de tubulação).
+server.user.search_type_regex: |-
+  Regex
+server.user.search_type_regex_title: |-
+  Uma &quot;regex&quot; pesquisa usa a sintaxe de expressão regular do MySQL.
+server.user.search_type_strict: |-
+  Rigoroso
+server.user.search_type_strict_title: |-
+  Um &quot;strict&quot; busca não usa caracteres curinga nos campos de busca, e é semelhante a &#96;grep -E &quot;&circ;SEARCHTERM&#36;&quot;&#96;
 server.user.secondary_class: |-
   Classe secundária
+server.user.secret_text: |-
+  Texto secreto
+server.user.secret_text_invalid: |-
+  Por favor, certifique-se de ter importado a chave correta para o aplicativo de autenticação e tente novamente.
 server.user.self_purchase_number: |-
   Auto Compra
+server.user.self_rip_number: |-
+  Autodidata
+server.user.send_fltoken: |-
+  Enviar token freeleech
+server.user.send_hacked_account_email_to: |-
+  Enviar e-mail da conta hackeada para
+server.user.session: |-
+  Sessão
+server.user.sessions: |-
+  Sessões
+server.user.setting: |-
+  Configurações
+server.user.show_bounty: |-
+  Mostrar recompensa
+server.user.show_count: |-
+  Mostrar contagem
+server.user.show_gallery: |-
+  Mostrar galeria
+server.user.show_list: |-
+  Mostrar lista
+server.user.snatch_list: |-
+  Lista de sites
+server.user.somebody_else_has_moderated: |-
+  Alguém mais moderou este usuário desde que você o carregou. Por favor, volte e atualize a página.
 server.user.source: |-
   Fonte
+server.user.space_and_space: |-
+  &nbsp;e&nbsp;
+server.user.space_are: |-
+  &nbsp;estão
+server.user.space_bigger_than_sessions: |-
+  &nbsp;> Sessões
+server.user.space_expired: |-
+  &nbsp;expirado)
+server.user.space_is: |-
+  &nbsp;está
+server.user.space_results: |-
+  &nbsp;resultados
+server.user.space_user_space_bracket: |-
+  &nbsp;usuário (
+server.user.space_users_space_bracket: |-
+  &nbsp;usuários (
+server.user.space_was: |-
+  &nbsp;era
+server.user.space_were: |-
+  &nbsp;estavam
+server.user.spent: |-
+  despesas
+server.user.st_2fa_after: |-
+  &nbsp;Autenticação de dois fatores
+server.user.st_2fa_disable: |-
+  desactivar
 server.user.st_2fa_disabled: |-
   Desativado
+server.user.st_2fa_enable: |-
+  activar
+server.user.st_2fa_enabled: |-
+  Ativado
+server.user.st_2fa_note1: |-
+  A autenticação de dois fatores está atualmente&nbsp;
+server.user.st_2fa_note3: |-
+  Clique aqui para&nbsp;
+server.user.st_2fa_period: |-
+  Autenticação de dois fatores&nbsp;
+server.user.st_token_settings_description: |-
+  Configurações relacionadas ao token de API para interagir com as APIs GPW
+server.user.st_access: |-
+  Acesso ás Configurações
+server.user.st_access_title: |-
+  Estas configurações controlam seus detalhes de login e acesso para <?={{CONFIG['SITE_NAME']}}?>, a rede IRC do site e o rastreador.
+server.user.st_all: |-
+  Todas as configurações
+server.user.st_all_title: |-
+  Veja a lista completa de configurações de usuário.
+server.user.st_avatar: |-
+  URL do avatar
+server.user.st_avatar_2: |-
+  Segunda URL do avatar
+server.user.st_avatar_2_title: |-
+  Parabéns! Você desbloqueou esta opção ao alcançar Rank Especial
+server.user.st_avatar_title: |-
+  Por favor, link para um avatar que segue as &lt;a href=&quot;rules.php&quot;&gt;regras do site&lt;/a&gt;. A largura do avatar deve ter 150 pixels e será redimensionada se necessário. data-title-plain='Por favor, link para um avatar que segue as regras do site. A largura do avatar deve ser de 150 pixels e será redimensionada se necessário.
+server.user.st_avatarhover: |-
+  Avatar texto do mouseover
+server.user.st_avatarhover_title: |-
+  Parabéns! Você desbloqueou esta opção ao alcançar Rank de Donor
+server.user.st_community: |-
+  Configurações da Comunidade
+server.user.st_community_title: |-
+  Estas configurações alteram a forma como as interações com outros usuários são formatadas, agrupadas e exibidas.
+server.user.st_donations: |-
+  Doações
+server.user.st_donations_0: |-
+  Mostrar estatística do doador
+server.user.st_donations_1: |-
+  Mostrar coração doador
+server.user.st_donorforum: |-
+  Honorários do fórum doador
+server.user.st_donorforum_title: |-
+  Parabéns! Você desbloqueou esta opção ao alcançar Rank de Donor
+server.user.st_donorhover: |-
+  Texto do ícone doador do mouseover
+server.user.st_donorhover_title: |-
+  Parabéns! Você desbloqueou esta opção ao alcançar Rank de Donor
+server.user.st_donoricon: |-
+  URL personalizada de ícone do doador
+server.user.st_donoricon_title: |-
+  Parabéns! Você desbloqueou esta opção ao alcançar Rank de Donor
+server.user.st_donorlink: |-
+  Link de ícone doador
+server.user.st_donorlink_title: |-
+  Parabéns! Você desbloqueou esta opção ao alcançar Rank de Donor
 server.user.st_email: |-
   Endereço de Email
+server.user.st_email_note: |-
+  Ao alterar seu endereço de e-mail, você deve digitar sua senha atual no campo &quot;Senha atual&quot; antes de salvar suas alterações.
+server.user.st_email_title: |-
+  Este é o endereço de e-mail que você quer associado à sua conta <?={{CONFIG['SITE_NAME']}}?>. Será usado se você esquecer sua senha ou se um alerta precisar ser enviado para você.
+server.user.st_lastactivity: |-
+  Atividade recente
 server.user.st_lastseen: |-
   Visto pela última vez
+server.user.st_lastseen_title: |-
+  Ative esta opção para permitir que outros vejam quando ocorreu a atividade do seu site mais recente.
+server.user.st_notification: |-
+  Definições das notificações
+server.user.st_notification_title: |-
+  Essas configurações alteram o formato e os tipos de notificações que você recebe.
+server.user.st_paranoia: |-
+  Configurações Paranoia
+server.user.st_paranoia_note: |-
+  <p><strong>Selecione os elementos do perfil que deseja exibir a outros usuários.</strong></p>
+  <p>Por exemplo, se você selecionar &quot;Mostrar contagem&quot; para &quot;Requisições (preenchidas)&quot;, o número de solicitações que você preencheu ficará visível. Se você selecionar &quot;Mostrar recompensa&quot;, a quantidade de pedido de recompensa que você recebeu ficará visível. Se selecionar &quot;Show lista&quot;, a lista completa das solicitações que você preencheu ficará visível.</p>
+  <p><span class='u-colorWarning'>Nota: Paranoia não tem nada a ver com sua segurança neste site. Essas configurações determinam apenas se outros podem visualizar a atividade do seu site. Algumas informações permanecerão disponíveis no log do site.</span></p>
+server.user.st_paranoia_title: |-
+  Estas configurações permitem que você exiba ou oculte diferentes categorias de informações do seu perfil.
+server.user.st_password: |-
+  Alterar senha
+server.user.st_password_new: |-
+  Nova senha
+server.user.st_password_note: |-
+  Uma senha forte:
+  <ul class="List">
+  <li>tem 8 caracteres ou mais, contém pelo menos 1 letra minúscula e maiúscula, e contém pelo menos um número ou símbolo</li>
+  <li>Ou tem 20 caracteres ou mais.</li>
+  </ul>
+server.user.st_password_old: |-
+  Senha atual
+server.user.st_password_re: |-
+  Confirmar nova palavra-passe
+server.user.st_personal: |-
+  Configurações Pessoais
+server.user.st_personal_title: |-
+  Estas configurações alteram a aparência do seu perfil e postagens.
+server.user.st_presets: |-
+  Predefinições
+server.user.st_presets_0: |-
+  Mostrar tudo
+server.user.st_presets_1: |-
+  Mostrar apenas estatísticas
+server.user.st_presets_2: |-
+  Mostrar nada
+server.user.st_profinfo1: |-
+  Informação do perfil 1
+server.user.st_profinfo1_title: |-
+  Você pode personalizar suas informações de perfil com texto e BBCode. Entrando em um título irá rotular a seção de informações do seu perfil. Desbloqueie caixas adicionais de informações de perfil via Rank de doadores.
+server.user.st_profinfo2: |-
+  Informação do perfil 2
+server.user.st_profinfo2_title: |-
+  Parabéns! Você desbloqueou esta opção ao alcançar Rank de Donor
+server.user.st_profinfo3: |-
+  Informação do perfil 3
+server.user.st_profinfo3_title: |-
+  Parabéns! Você desbloqueou esta opção ao alcançar Rank de Donor
+server.user.st_profinfo4: |-
+  Informação do perfil 4
+server.user.st_profinfo4_title: |-
+  Parabéns! Você desbloqueou esta opção ao alcançar Rank de Donor
+server.user.st_profinfo5: |-
+  Informação do perfil 5
+server.user.st_profinfo5_title: |-
+  Parabéns! Você desbloqueou esta opção ao alcançar Rank de Donor
+server.user.st_proftitle1: |-
+  Título do perfil 1
+server.user.st_proftitle1_title: |-
+  Você pode personalizar suas informações de perfil com texto e BBCode. Entrando em um título irá rotular a seção de informações do seu perfil. Desbloqueie caixas adicionais de informações de perfil via Rank de doadores.
+server.user.st_proftitle2: |-
+  Título do perfil 2
+server.user.st_proftitle2_title: |-
+  Você pode personalizar suas informações de perfil com texto e BBCode. Entrando em um título irá rotular a seção de informações do seu perfil. Desbloqueie caixas adicionais de informações de perfil via Rank de doadores.
+server.user.st_proftitle3: |-
+  Título do perfil 3
+server.user.st_proftitle3_title: |-
+  Parabéns! Você desbloqueou esta opção ao alcançar Rank de Donor
+server.user.st_proftitle4: |-
+  Título do perfil 4
+server.user.st_proftitle4_title: |-
+  Parabéns! Você desbloqueou esta opção ao alcançar Rank de Donor
+server.user.st_proftitle5: |-
+  Título do perfil 5
+server.user.st_proftitle5_title: |-
+  Parabéns! Você desbloqueou esta opção ao alcançar Rank de Donor
+server.user.st_save: |-
+  Guardar perfil
+server.user.st_search: |-
+  Pesquisa ao vivo
+server.user.st_style: |-
+  Configurações da aparência
+server.user.st_style_title: |-
+  Essas configurações alteram o estilo visual de todo o site.
+server.user.st_torrents: |-
+  Configurações do Torrent
+server.user.st_torrents_title: |-
+  Estas configurações mudam a forma como os torrents são pesquisados, agrupados, exibidos e baixados.
+server.user.staff_mark: |-
+  Marca do pessoal
+server.user.staff_mark_title: |-
+  Esta é a mensagem mostrada na coluna direita do arquivo /staff.php.
+server.user.staff_messages: |-
+  Mensagens do pessoal
+server.user.staff_messages_title: |-
+  Ao ativar isso, você receberá uma notificação quando receber uma nova mensagem privada de um membro da equipe.
+server.user.staff_note: |-
+  Nota do pessoal
+server.user.staff_notes: |-
+  Notas de funcionários
 server.user.staff_pm: |-
   PM pessoal
+server.user.staff_tools: |-
+  Ferramentas de pessoal
 server.user.statistics: |-
   Estatísticas
 server.user.stats: |-
   Estatísticas
+server.user.style: |-
+  Tema
+server.user.style_tool: |-
+  Styled tooltips
+server.user.style_tool_title: |-
+  Usar dicas estilizadas ao invés do padrão do navegador quando passar elementos com informações extras (como esta).
+server.user.stylesheet: |-
+  Stylesheet
+server.user.stylesheet_title: |-
+  Selecionando uma folha de estilo irá alterar a aparência visual de {{CONFIG['SITE_NAME']}}.
 server.user.subject: |-
   Assunto
+server.user.submit: |-
+  Submeter
+server.user.super_toasty: |-
+  Super torrada
+server.user.supports_partial_url_matching: |-
+  Suporta correspondência de URL parcial, por exemplo, inserindo &quot;&#124;https://whatimg.com&quot; irá procurar por avatares hospedados em https://whatimg.com
 server.user.tagging: |-
   Tagging(Marcação)
 server.user.tagging_title: |-
   Isso apenas desativa a capacidade do usuário de excluir tags.
+server.user.test_push: |-
+  Testar push
+server.user.tg_binding: |-
+  Ligação do Telegram
+server.user.tg_binding_binded: |-
+  Vinculado
+server.user.tg_binding_key: |-
+  Tecla de ligação
+server.user.tg_binding_right8: |-
+  &nbsp;(últimos 8 dígitos da sua senha)
+server.user.tg_binding_span: |-
+  Participe do <a target="_blank" href="{{CONFIG['TG_GROUP']}}">grupo oficial do Telegram</a>, digite <code>/gohome</code>, e vincule seu Telegram à sua conta siga as instruções.
+server.user.tg_binding_status: |-
+  Status da vinculação
+server.user.tg_binding_unbind: |-
+  Desvincular
+server.user.the_total_amount_downloaded_was: |-
+  ; o montante total baixado foi&nbsp;
+server.user.the_total_amount_uplaoded_by_direct_invitees_was_: |-
+  O valor total enviado pelos convidados direto (o nível superior) era&nbsp;
+server.user.the_total_amount_uploaded_by_the_entire_tree_was: |-
+  O valor total carregado pela árvore inteira foi&nbsp;
 server.user.theme: |-
   Tema
 server.user.theme_auto: |-
   Auto
+server.user.theme_dark: |-
+  Escuro
+server.user.theme_light: |-
+  Fino
+server.user.these_numbers_include_the_stats_of_paranoid_users_and: |-
+  Esses números incluem as estatísticas dos usuários paranóicos e serão incluídos no script de apresentação de convite.
+server.user.this_costs: |-
+  Isso custa %d BP, o que lhe deixará %d depois
+server.user.this_tree_has_n_entries_n_branches_and_a_depth_of_n: |-
+  Esta árvore tem %s entradas, %s ramos e uma profundidade de %s. Tem
+server.user.thread_subscriptions: |-
+  Inscrições dos tópicos
+server.user.to_fuzzy_search_for_a_block_of_addresses_title: |-
+  Para fazer uma busca difusa (padrão) para um bloco de endereços (por exemplo, 55.66.77.*), digite &quot;55.66.77.&quot; sem as aspas
+server.user.token: |-
+  Tokens
+server.user.token_history: |-
+  Histórico do token
+server.user.token_number: |-
+  Tokens
+server.user.too_paranoid_to_have_their_stats_shown_here_and: |-
+  &nbsp;muito paranóico para ter suas estatísticas exibidas aqui, e&nbsp;
+server.user.torrent_notifications: |-
+  Notificações de torrent
+server.user.torrent_notifications_title: |-
+  Ativando isto irá lhe dar uma notificação quando os filtros de notificação do torrent que você estabeleceu forem acionados.
+server.user.torrent_upload: |-
+  Upload de torrent
+server.user.torrents_artists_display: |-
+  Liberar a exibição do tipo (páginas do artista)
+server.user.torrents_artists_display_title: |-
+  Nas páginas do artista, &quot;abrir&quot; irá expandir seções de tipos de lançamento por padrão, e &quot;fechado&quot; irá recolher seções de tipo de lançamento por padrão.
+server.user.torrents_artists_display_type: |-
+  Liberar a exibição do tipo (páginas do artista)
+server.user.torrents_artists_display_type_title: |-
+  Qualquer versão selecionada será recolhida por padrão nas páginas do artista.
+server.user.torrents_cover: |-
+  Arte de capa (torrents)
+server.user.torrents_cover_title: |-
+  Habilitar arte de capa para torrents mostrará arte de capa ao lado das informações do torrent. Ao habilitar arte de capa adicional também exibirá toda arte de capa adicional.
+server.user.torrents_group: |-
+  Agrupamento de torrents
+server.user.torrents_group_display: |-
+  Mostrar grupo de torrent
+server.user.torrents_group_display_title: |-
+  Na busca de torrents e em páginas de artistas, &quot;abrir&quot; irá expandir os grupos de torrent por padrão e &quot;fechado&quot; irá colapso grupos de torrents por padrão.
+server.user.torrents_group_title: |-
+  Habilitar o agrupamento de torrents colocará vários formatos do mesmo grupo de torrent juntos abaixo de um cabeçalho comum.
+server.user.torrents_group_tool: |-
+  Ativar agrupamento de torrents
+server.user.torrents_snatched: |-
+  Indicador de torrents encontrado
+server.user.torrents_snatched_title: |-
+  Habilitando o indicador de torrents encontrado irá exibir &quot;Encontrado!&quot; ao lado de torrents que você encontrou.
+server.user.total_donor_points: |-
+  Pontos totais do doador
 server.user.total_points: |-
   Total pontos
+server.user.total_points_title: |-
+  Total de pontos representam o total e nunca expiram de um usuário. O total de pontos determina a Classificação Especial de um usuário e posicionamento de Donos de Placar de Liderança.
+server.user.total_uploads_title: |-
+  Total de uploads (inclui torrents excluídos)
+server.user.tracker_ip: |-
+  IP do rastreador
+server.user.traditional: |-
+  Tradicional
+server.user.tree: |-
+  Árvore
+server.user.true_downloaded_title: |-
+  Verdadeiro baixado (O total baixado se você não usar tokens freeleeche, a partir de 1 de junho de 2020)
+server.user.true_uploaded_title: |-
+  True Uploaded (Loja de Pontos Bônus excluída)
 server.user.two_factor_authentication: |-
   Autenticação de dois fatores
+server.user.two_factor_authentication_note: |-
+  Note que se você perder sua chave 2FA e todas as suas chaves de backup, a equipe {{CONFIG['SITE_NAME']}} não pode ajudá-lo a recuperar a sua conta. Certifique-se de manter suas chaves de segurança em um lugar seguro.
+server.user.two_factor_authentication_note_3: |-
+  Nós geramos um segredo de segurança que somente você e eu deveríamos saber. Por favor, importe-o para o seu telefone,
+  escaneando a chave QR, ou copiando para o texto pequeno abaixo. Recomendamos usar o app Authy que você pode obter
+  na <a href="https://itunes.apple.com/gb/app/authy/id494168017?mt=8">App Store</a> ou <a
+  href="https://play.google.com/store/apps/details?id=com.authy.authy&hl=en_GB">Play Store</a>. Você pode
+  usar o <a href="https://play.google.com/store/apps/details?id=com.google.android.apps.authenticator2&hl=en_GB">Google
+  Autenticador</a>. Toque no botão seguinte depois de fazer isso.
+server.user.u_artist: |-
+  Artistas adicionados
+server.user.u_bounty: |-
+  Recompensa gasta
+server.user.u_downloaded: |-
+  Dados transferidos
+server.user.u_filled: |-
+  Solicitações concluídas
+server.user.u_percentile: |-
+  Classificação Percentil
+server.user.u_post: |-
+  Postagens feitas
+server.user.u_total: |-
+  Classificação geral
+server.user.u_uploaded: |-
+  Dados enviados
+server.user.u_uploads: |-
+  Torrents enviados
+server.user.ulocked: |-
+  Desbloqueado
+server.user.unconfirmed: |-
+  Não confirmada
+server.user.units_are_in_gibibytes: |-
+  Unidades estão em gibibytes (a base 2 de gigabytes)
+server.user.unlimitedcolor: |-
+  Nome de usuário personalizado puro
+server.user.unlimitedcolor_placeholder: |-
+  Exemplo: |-
+  #123456
+server.user.unlimitedcolor_title: |-
+  Ao digitar o número de cor RGB, você pode definir sua cor de nome de usuário.
+server.user.unseeded: |-
+  Alertas de torrent desconhecidos
+server.user.unseeded_checked: |-
+  Ativar alertas de torrents desconhecidos
+server.user.unseeded_title: |-
+  Habilitar isso irá enviar-lhe um alerta de PM antes de seus envios serem excluídos por não serem avaliados.
+server.user.update_filter: |-
+  Atualizar filtro
 server.user.upload: |-
   Upload concluído
 server.user.uploaded: |-
   Upload concluído
+server.user.uploaded_title: |-
+  Valor do upload em bytes. Também aceita, por exemplo, +20GB ou -35.6364MB no final.
 server.user.uploads: |-
   Carregamentos
+server.user.user_disable: |-
+  Utilizador desactivar
+server.user.user_po: |-
+  Promover Usuário
+server.user.user_reason: |-
+  Razão do usuário
+server.user.user_search: |-
+  Pesquisa de usuários
 server.user.username: |-
   Usuário
+server.user.username_invites_tree: |-
+  &nbsp;> Convites > Árvore
+server.user.value: |-
+  Valor
 server.user.view: |-
   Visualizar
+server.user.view_list: |-
+  Ver lista
+server.user.view_notifications: |-
+  Ver notificações
+server.user.view_users: |-
+  Ver utilizadores
+server.user.view_wiki_guide: |-
+  Visualizar guia da wiki
 server.user.vote: |-
   Votar
+server.user.voting: |-
+  Votação de links
+server.user.voting_disable: |-
+  Desativar links de votação
+server.user.voting_title: |-
+  Esta opção permite que você ative ou desative &quot;para cima&quot; e &quot;para baixo&quot; links de voto nas páginas do artista, coleções e listas encontradas.
 server.user.warn: |-
   Avisar
+server.user.warn_reason: |-
+  Razão da advertência
+server.user.warn_reason_title: |-
+  Esta mensagem *será* enviada para o usuário na mensagem de aviso!
+server.user.warn_time: |-
+  Tempo de alerta
+server.user.warned: |-
+  Alertado
+server.user.warning_expires_in: |-
+  Aviso expira em
+server.user.week_one: |-
+  semana
+server.user.week_other: |-
+  semanas
+server.user.wiki: |-
+  Documentação
+server.user.year: |-
+  ano
+server.user.yes: |-
+  Sim
+server.user.you_may_not_send_invites_while_on_ratio_watch_or: |-
+  Você não pode enviar convites enquanto estiver em Ratio Watch ou enquanto seus privilégios de Sanguamento estiverem desativados. Por favor, leia <a href="wiki.php?action=article&amp;id=104">este artigo</a> para mais informações.
+server.user.your_invites_have_been_disabled: |-
+  Seus convites foram desativados. Por favor, leia <a href="wiki.php?action=article&amp;id=104">este artigo</a> para obter mais informações.
+server.userhistory.age_of_account: |-
+  Idade da conta
+server.userhistory.artist: |-
+  Artista
 server.userhistory.catch_up: |-
   Capturar até
+server.userhistory.changed: |-
+  Alterado
 server.userhistory.collage: |-
   Playlist
+server.userhistory.current_email: |-
+  E-mail atual
+server.userhistory.current_ip: |-
+  IP atual
+server.userhistory.downloaded: |-
+  Nome do arquivo
+server.userhistory.elapsed: |-
+  Decorrido
 server.userhistory.email: |-
   E-mail
+server.userhistory.email_history_for: |-
+  Histórico de e-mails para %s
+server.userhistory.end: |-
+  Fim
+server.userhistory.ended: |-
+  Terminado
+server.userhistory.expire_button: |-
+  (expirar)
+server.userhistory.expired: |-
+  Expirado
+server.userhistory.fl_token_history: |-
+  Histórico do token Freeleech
+server.userhistory.fl_token_history_for: |-
+  Histórico do token Freeleech para %s
 server.userhistory.forum: |-
   Fórum
 server.userhistory.forums: |-
   Fóruns
+server.userhistory.go_to_post_history: |-
+  Ir ao histórico de publicações
+server.userhistory.go_to_subscriptions: |-
+  Ir para assinaturas
+server.userhistory.grouped: |-
+  agrupado&nbsp;
+server.userhistory.header_quote_notifications: |-
+  Notificações de Cotação
 server.userhistory.hide: |-
   Esconder
+server.userhistory.in: |-
+  &nbsp;em&nbsp;
+server.userhistory.invite_email: |-
+  Email de Convite
+server.userhistory.ip_address: |-
+  Endereço IP
+server.userhistory.ip_address_history_for: |-
+  Histórico de endereços IP para %s
+server.userhistory.ip_address_search: |-
+  Pesquisar endereço IP
+server.userhistory.last_edited_by: |-
+  Última edição por
+server.userhistory.last_post_time: |-
+  Hora da Última Postagem
+server.userhistory.left_bracket: |-
+  &nbsp;(
+server.userhistory.never: |-
+  Nunca
 server.userhistory.new: |-
   Novo
+server.userhistory.new_right_bracket: |-
+  &nbsp;novo)
+server.userhistory.new_torrent_one: |-
+  %s novo torrent
+server.userhistory.new_torrent_other: |-
+  %s novos torrents
 server.userhistory.no: |-
   Não
+server.userhistory.no_quotes: |-
+  Sem %s cotações.
 server.userhistory.no_subscribed_collages: |-
   Nenhuma coleção assinada
+server.userhistory.no_subscriptions: |-
+  Sem inscrições
+server.userhistory.no_topics: |-
+  Sem tópicos
 server.userhistory.old: |-
   Antigo
+server.userhistory.old_emails: |-
+  E-mails antigos
+server.userhistory.only_display_collages_with_new_additions: |-
+  Exibir apenas coleções com novas adições
+server.userhistory.only_display_posts_with_unread_replies: |-
+  Exibir apenas mensagens com respostas não lidas
+server.userhistory.only_display_posts_with_unread_replies_grouped: |-
+  Exibir apenas mensagens com respostas não lidas (agrupadas)
+server.userhistory.only_display_subscriptions_with_unread_replies: |-
+  Exibir apenas assinaturas com respostas não lidas
+server.userhistory.passkey_history_for: |-
+  Histórico da senha para %s
+server.userhistory.password_reset_history_for: |-
+  Histórico de redefinição de senha para %s
+server.userhistory.post_bodies: |-
+  &nbsp;órgãos de postagem
+server.userhistory.post_history_for: |-
+  Histórico de publicações para %s
+server.userhistory.quote_notifications: |-
+  Notificações de Cotação
+server.userhistory.quoted_by: |-
+  Citação por
+server.userhistory.registration_ip_address: |-
+  Endereço IP de registro
+server.userhistory.request: |-
+  Pedido
 server.userhistory.search: |-
   Pesquisa
+server.userhistory.search_wimia_com: |-
+  Pesquisar no WIMIA.com
+server.userhistory.set: |-
+  Definir
+server.userhistory.set_from_ip: |-
+  Definir do IP
 server.userhistory.show: |-
   Mostrar
+server.userhistory.show_all_posts: |-
+  Mostrar todas as postagens
+server.userhistory.show_all_posts_grouped: |-
+  Mostrar todos os posts (agrupados)
+server.userhistory.show_all_quotes: |-
+  Mostrar todas as aspas
+server.userhistory.show_all_subscribed_collages: |-
+  Mostrar todas as coleções inscritas
+server.userhistory.show_all_subscriptions: |-
+  Mostrar todas as assinaturas
+server.userhistory.show_subscriptions: |-
+  Mostrar assinaturas
+server.userhistory.show_unread_quotes: |-
+  Exibir citações não lidas
+server.userhistory.space_new: |-
+  &nbsp;novo
+server.userhistory.span_new: |-
+  <span class="u-colorWarning">(Novo!)</span>
+server.userhistory.start: |-
+  Início
+server.userhistory.started: |-
+  Iniciado
 server.userhistory.subscribed_collages: |-
   Coleções inscritas
+server.userhistory.subscriptions: |-
+  Subscrições
+server.userhistory.threads_started_by: |-
+  Tópicos iniciados por %s
 server.userhistory.time: |-
   Tempo
+server.userhistory.tokens_used: |-
+  Tokens usados
 server.userhistory.topic: |-
   Tópico
+server.userhistory.topic_creation_time: |-
+  Hora da Criação do Tópico
 server.userhistory.torrent: |-
   Torrent
+server.userhistory.tracker_ip_address_history_for: |-
+  Histórico de endereços IP do rastreador para %s
+server.userhistory.unread: |-
+  não lido&nbsp;
+server.userhistory.unread_post_history_for: |-
+  Histórico de publicações não lidas para %s
+server.userhistory.view_all_ip_address: |-
+  Todos
+server.userhistory.wildcard_search_examples: |-
+  Filtros de busca por curinga (*): 127.0.* ou 1*2.0.*.1 ou *.*.*
+server.userhistory.with_new_additions: |-
+  &nbsp;com novas adições
+server.userhistory.with_unread_posts: |-
+  &nbsp;com publicações não lidas
+server.userhistory.with_unread_posts_number: |-
+  com postagens não lidas %s
+server.userhistory.yes: |-
+  Sim
 server.wiki.add_alias: |-
   Adicionar pseudônimo
 server.wiki.aliases: |-
   Pseudônimos
+server.wiki.all_articles: |-
+  Buscar artigos
+server.wiki.article: |-
+  Artigo
+server.wiki.article_access: |-
+  Acesso
+server.wiki.article_access_detail: |-
+  Há algumas situações em que a visualização ou edição de um artigo deve ser restrita a uma determinada classe.
 server.wiki.article_chinese: |-
   Link do Wiki Chinês
 server.wiki.article_create: |-
   Criar
+server.wiki.article_delete: |-
+  Apagar
+server.wiki.article_delete_confirm1: |-
+  Tem certeza que deseja excluir?&nbsp;
+server.wiki.article_delete_confirm2: |-
+  Sim, DELETE, não como em 'Oh hey, se isto estiver errado, podemos fazer com que alguém o leve a anular magicamente para nós mais tarde' isso será um GONE.
 server.wiki.article_delete_confirm3: |-
   Dadas estas novas informações, você ainda quer DELETAR esse artigo, todas as suas revisões e todos os seus pseudônimos e agir como nunca existiu?
 server.wiki.article_edit: |-
@@ -4677,18 +7636,34 @@ server.wiki.article_language_detail: |-
   Por favor, selecione o idioma em que a sua página wiki foi escrita. Se o artigo estiver escrito em um idioma diferente do chinês, você precisa incluir o URL da Wiki para o artigo chinês. Se você não vê o idioma na lista, por favor envie uma mensagem privada com a ID/URL do Wiki após a criação.
 server.wiki.article_language_select: |-
   Idioma
+server.wiki.article_note1: |-
+  Pesquise na wiki por tutoriais e informações criados.
+server.wiki.article_note2: |-
+  Além disso, você pode navegar manualmente pelos artigos por sua primeira letra.
+server.wiki.article_restrict_edit: |-
+  Restringir edição
+server.wiki.article_restrict_read: |-
+  Restringir leitura
 server.wiki.body: |-
   Corpo
+server.wiki.browse_wiki_articles: |-
+  Buscar artigos na wiki
 server.wiki.chinese: |-
   Chinês
+server.wiki.compare: |-
+  Comparar
 server.wiki.create: |-
   Criar
+server.wiki.create_an_article: |-
+  Criar artigo
 server.wiki.delete_aliases: |-
   Apagar pseudônimos
 server.wiki.details: |-
   Detalhes
 server.wiki.english: |-
   Inglês
+server.wiki.for_an_similar_article: |-
+  &nbsp;para um artigo semelhante a isso.
 server.wiki.history_age: |-
   Idade
 server.wiki.history_author: |-
@@ -4697,23 +7672,599 @@ server.wiki.history_new: |-
   Novo
 server.wiki.history_old: |-
   Antigo
+server.wiki.history_revision: |-
+  Revisão
 server.wiki.history_title: |-
   Título
+server.wiki.last_edited: |-
+  Última edição por
+server.wiki.last_edited_by: |-
+  Última edição por
+server.wiki.last_updated_on: |-
+  Última atualização em
 server.wiki.last_upload: |-
   Última atualização
+server.wiki.no_article_found: |-
+  Nenhum artigo encontrado
+server.wiki.no_article_matching_the_name: |-
+  Não há artigo correspondente ao nome que você solicitou.
 server.wiki.order_by: |-
   Ordenar por
+server.wiki.other_languages: |-
+  Outros idiomas
+server.wiki.permissions: |-
+  Permissões
+server.wiki.read: |-
+  Ler
+server.wiki.replace_article: |-
+  &nbsp;um artigo em seu lugar.
 server.wiki.revision_history: |-
   Histórico de revisões para %s
+server.wiki.revisions: |-
+  Revisões
 server.wiki.search: |-
   Pesquisa
+server.wiki.search_articles: |-
+  Pesquisar artigos
 server.wiki.search_for: |-
   Pesquisar por
 server.wiki.search_in: |-
   Pesquisar em
 server.wiki.title: |-
   Título
+server.wiki.toc: |-
+  Tabela de conteúdos
+server.wiki.version: |-
+  Versão
+server.wiki.view_user: |-
+  Visualizar usuário
+server.wiki.you_must_be_a_higher_user_class_to_view: |-
+  Você precisa ser uma classe de usuário superior para visualizar este artigo wiki
+server.country.afghanistan: |-
+  Afeganistão
+server.country.aland_islands: |-
+  Ilhas de Aland
+server.country.albania: |-
+  Albânia
+server.country.algeria: |-
+  Algeria
+server.country.american_samoa: |-
+  Samoa Americana
+server.country.andorra: |-
+  Andorra
+server.country.angola: |-
+  Angola
+server.country.anguilla: |-
+  Anguilla
+server.country.antigua_and_barbuda: |-
+  Antígua e Barbuda
+server.country.argentina: |-
+  Argentina
+server.country.armenia: |-
+  Armênia
+server.country.aruba: |-
+  Aruba
+server.country.australia: |-
+  Austrália
+server.country.austria: |-
+  Áustria
+server.country.azerbaijan: |-
+  Azerbaijão
+server.country.bangladesh: |-
+  Bangladesh
+server.country.bahrain: |-
+  Barém
+server.country.bahamas: |-
+  Bahamas
+server.country.barbados: |-
+  Barbados
+server.country.belarus: |-
+  Bielorrússia
+server.country.belgium: |-
+  Bélgica
+server.country.taiwan: |-
+  Taiwan, China
+server.country.hong_kong: |-
+  Hong Kong, China
+server.country.belize: |-
+  Belize
+server.country.benin: |-
+  Benim
+server.country.bermuda: |-
+  Bermuda
+server.country.bhutan: |-
+  Butão
+server.country.bolivia: |-
+  Bolívia
+server.country.bosnia_and_herzegovina: |-
+  Bosnia e Herzegovina
+server.country.botswana: |-
+  Botsuana
+server.country.bouvet_island: |-
+  Ilha Bouvet
+server.country.brazil: |-
+  Brasil
+server.country.brunei: |-
+  Brunei
+server.country.bulgaria: |-
+  Bulgária
+server.country.burkina_faso: |-
+  Burquina Faso
+server.country.burundi: |-
+  Burundi
+server.country.cambodia: |-
+  Camboja
+server.country.cameroon: |-
+  Camarões
+server.country.canada: |-
+  Canadá
+server.country.cape_verde: |-
+  Cabo Verde
+server.country.central_african_republic: |-
+  República Centro-Africana
+server.country.chad: |-
+  Chade
+server.country.chile: |-
+  Chile
+server.country.christmas_islands: |-
+  Ilhas Natalinas
+server.country.cocos_(keeling)_islands: |-
+  Ilhas Cocos (Keeling)
+server.country.colombia: |-
+  Colômbia
+server.country.comoros: |-
+  Comores
+server.country.congo_(congo-kinshasa): |-
+  Congo (Congo-Kinshasa)
+server.country.congo: |-
+  Congo
+server.country.cook_islands: |-
+  Ilhas Cook
+server.country.costa_rica: |-
+  Costa Rica
+server.country.cote_d'ivoire: |-
+  Costa do Marfim
+server.country.china: |-
+  China
+server.country.croatia: |-
+  Croácia
+server.country.cuba: |-
+  Cuba
+server.country.czech: |-
+  Checo
+server.country.cyprus: |-
+  Chipre
+server.country.denmark: |-
+  Dinamarca
+server.country.djibouti: |-
+  Djibouti
+server.country.dominica: |-
+  Dominica
+server.country.ecuador: |-
+  Ecuador
+server.country.egypt: |-
+  Egito
+server.country.equatorial_guinea: |-
+  Equatorial Guinea
+server.country.eritrea: |-
+  Eritreia
+server.country.estonia: |-
+  Estónia
+server.country.ethiopia: |-
+  Ethiopia
+server.country.faroe_islands: |-
+  Ilhas Faroé
+server.country.fiji: |-
+  Ilhas Fiji
+server.country.finland: |-
+  Finlândia
+server.country.france: |-
+  França
+server.country.metropolitanfrance: |-
+  MetropolitanFrance
+server.country.french_guiana: |-
+  Guiana Francesa
+server.country.french_polynesia: |-
+  Polinésia Francesa
+server.country.gabon: |-
+  Gabão
+server.country.gambia: |-
+  Gambia
+server.country.georgia: |-
+  Geórgia
+server.country.germany: |-
+  Alemanha
+server.country.ghana: |-
+  Gana
+server.country.gibraltar: |-
+  Gibraltar
+server.country.greece: |-
+  Grécia
+server.country.grenada: |-
+  Granada
+server.country.guadeloupe: |-
+  Guadeloupe
+server.country.guam: |-
+  Guão
+server.country.guatemala: |-
+  Guatemala
+server.country.guernsey: |-
+  Guernsey
+server.country.guinea-bissau: |-
+  Guinea-Bissau
+server.country.guinea: |-
+  Guinea
+server.country.guyana: |-
+  Guyana
+server.country.haiti: |-
+  Haiti
+server.country.honduras: |-
+  Honduras
+server.country.hungary: |-
+  Hungria
+server.country.iceland: |-
+  Islândia
+server.country.india: |-
+  Índia
+server.country.indonesia: |-
+  Indonésia
+server.country.iran: |-
+  Irão
+server.country.iraq: |-
+  Iraque
+server.country.ireland: |-
+  Ireland
+server.country.isle_of_man: |-
+  Ilha de Man
+server.country.israel: |-
+  Israel
+server.country.italy: |-
+  Itália
+server.country.jamaica: |-
+  Jamaica
+server.country.japan: |-
+  Japão
+server.country.jersey: |-
+  Jérsia
+server.country.jordan: |-
+  Jordan
+server.country.kazakhstan: |-
+  Cazaquistão
+server.country.kenya: |-
+  Quénia
+server.country.kiribati: |-
+  Quiribati
+server.country.korea_(south): |-
+  Coreia (Sul)
+server.country.korea_(north): |-
+  Coréia do Norte
+server.country.kuwait: |-
+  Kuwait
+server.country.kyrgyzstan: |-
+  Kyrgyzstan
+server.country.laos: |-
+  Laos
+server.country.latvia: |-
+  Letónia
+server.country.lebanon: |-
+  Líbano
+server.country.lesotho: |-
+  Lesoto
+server.country.liberia: |-
+  A libéria
+server.country.libya: |-
+  Líbia
+server.country.liechtenstein: |-
+  Liechtenstein
+server.country.lithuania: |-
+  Lituânia
+server.country.luxembourg: |-
+  Luxemburgo
+server.country.macedonia: |-
+  Macedónia
+server.country.malawi: |-
+  Maláui
+server.country.malaysia: |-
+  Malásia
+server.country.madagascar: |-
+  Madagascar
+server.country.maldives: |-
+  Maldivas
+server.country.mali: |-
+  Mali
+server.country.malta: |-
+  Malta
+server.country.marshall_islands: |-
+  Ilhas Marshall
+server.country.martinique: |-
+  Martinica
+server.country.mauritania: |-
+  Mauritânia
+server.country.mauritius: |-
+  Maurícia
+server.country.mayotte: |-
+  Maiote
+server.country.mexico: |-
+  México
+server.country.micronesia: |-
+  Micronésia
+server.country.moldova: |-
+  Moldávia
+server.country.monaco: |-
+  Mónaco
+server.country.mongolia: |-
+  Mongólia
+server.country.montenegro: |-
+  Montenegro
+server.country.montserrat: |-
+  Monserrate
+server.country.morocco: |-
+  Marrocos
+server.country.mozambique: |-
+  Moçambique
+server.country.myanmar: |-
+  Myanmar
+server.country.namibia: |-
+  Namíbia
+server.country.nauru: |-
+  Nauru
+server.country.nepal: |-
+  Nepal
+server.country.netherlands: |-
+  Holanda
+server.country.new_caledonia: |-
+  Nova Caledónia
+server.country.new_zealand: |-
+  Nova Zelândia
+server.country.nicaragua: |-
+  Nicarágua
+server.country.niger: |-
+  Níger
+server.country.nigeria: |-
+  Nigéria
+server.country.niue: |-
+  Niuê
+server.country.norfolk_island: |-
+  Ilhas Norfolk
+server.country.norway: |-
+  Noruega
+server.country.oman: |-
+  Omã
+server.country.pakistan: |-
+  Paquistão
+server.country.palau: |-
+  Palau
+server.country.palestine: |-
+  Palestina
+server.country.panama: |-
+  Panamá
+server.country.papua_new_guinea: |-
+  Papua-Nova Guiné
+server.country.peru: |-
+  Perú
+server.country.philippines: |-
+  Filipinas
+server.country.pitcairn_islands: |-
+  Ilhas Pitcairn
+server.country.poland: |-
+  Polônia
+server.country.portugal: |-
+  Quênia
+server.country.puerto_rico: |-
+  Puerto Rico
+server.country.qatar: |-
+  Qatar
+server.country.reunion: |-
+  Reunião
+server.country.romania: |-
+  Romênia
+server.country.rwanda: |-
+  Ruanda
+server.country.russia: |-
+  Rússia
+server.country.saint_helena: |-
+  Santa Helena
+server.country.saint_kitts-nevis: |-
+  Saint Kitts-Nevis
+server.country.saint_lucia: |-
+  Santa Lúcia
+server.country.saint_vincent_and_the_grenadines: |-
+  São Vicente e Granadinas
+server.country.el_salvador: |-
+  El Salvador
+server.country.samoa: |-
+  Samoa
+server.country.san_marino: |-
+  San Marino
+server.country.sao_tome_and_principe: |-
+  São Tomé e Príncipe
+server.country.saudi_arabia: |-
+  Arábia Saudita
+server.country.senegal: |-
+  Senegal
+server.country.seychelles: |-
+  Seicheles
+server.country.sierra_leone: |-
+  Serra Leoa
+server.country.singapore: |-
+  Singapura
+server.country.serbia: |-
+  Sérvia
+server.country.slovakia: |-
+  Eslováquia
+server.country.slovenia: |-
+  Eslovénia
+server.country.solomon_islands: |-
+  Ilhas Salomão
+server.country.somalia: |-
+  Somália
+server.country.south_africa: |-
+  África do Sul
+server.country.spain: |-
+  Espanha
+server.country.sri_lanka: |-
+  Sri Lanka
+server.country.sudan: |-
+  Sudan
+server.country.suriname: |-
+  Suriname
+server.country.swaziland: |-
+  Suazilândia
+server.country.sweden: |-
+  Suécia
+server.country.switzerland: |-
+  Suíça
+server.country.syria: |-
+  Síria
+server.country.tajikistan: |-
+  Tajiquistão
+server.country.tanzania: |-
+  Tanzânia
+server.country.thailand: |-
+  Tailândia
+server.country.trinidad_and_tobago: |-
+  Trinidade e Tobago
+server.country.timor-leste: |-
+  Timor Leste
+server.country.togo: |-
+  Togo
+server.country.tokelau: |-
+  Toquelau
+server.country.tonga: |-
+  Tonga
+server.country.tunisia: |-
+  Tunísia
+server.country.turkey: |-
+  Turquia
+server.country.turkmenistan: |-
+  Turquemenistão
+server.country.tuvalu: |-
+  Tuvalu
+server.country.uganda: |-
+  Uganda
+server.country.ukraine: |-
+  Ucrânia
+server.country.united_arab_emirates: |-
+  Emirados Árabes Unidos
+server.country.united_kingdom: |-
+  United Kingdom
+server.country.united_states: |-
+  Estados Unidos
+server.country.uruguay: |-
+  Uruguai
+server.country.uzbekistan: |-
+  Uzbequistão
+server.country.vanuatu: |-
+  Vanuatu
+server.country.vatican_city: |-
+  Cidade do Vaticano
+server.country.venezuela: |-
+  Venezuela
+server.country.vietnam: |-
+  Vietnam
+server.country.wallis_and_futuna: |-
+  Wallis e Futuna
+server.country.western_sahara: |-
+  Saara Ocidental
+server.country.yemen: |-
+  Iémen
+server.country.yugoslavia: |-
+  Jugoslávia
+server.country.zambia: |-
+  Zambia
+server.country.zimbabwe: |-
+  Zimbabué
+server.country.macao: |-
+  Macau, China
+server.common.minutes: |-
+  min
+server.upload.upload_torrents: |-
+  Carregar torrent
+server.collages.contributed_collages_browse: |-
+  Coleções com contribuições de %s
+server.collages.started_collages_browse: |-
+  Coleções iniciadas por %s
+server.torrents.report_info: |-
+  Informações do relatório
+server.collages.not_torrent_link: |-
+  O URL deve ser um link para um torrent no site.
+server.requests.delete_request: |-
+  Excluir pedido
+server.requests.unfill_request: |-
+  Despreencher solicitação
+server.requests.filled_user: |-
+  Usuário preenchido
+server.common.open: |-
+  Abrir
+server.common.close: |-
+  Fechar
 server.apply.resolve: |-
   Resolver
+server.apply.reopen: |-
+  Reabrir
+server.user.torrent_title_drag_note: |-
+  Arraste os itens para baixo para a esquerda ou direita para classificar
+server.bookmarks.delete_checked: |-
+  Excluir verificado
+server.common.update: |-
+  Atualização
+server.country.soviet_union: |-
+  União Soviética
+server.upload.min_nan: |-
+  Min Nan
+server.upload.japanese_sign_language: |-
+  Linguagem de Sinais Japonesa
 server.upload.chinese: |-
   Chinês
+server.upload.catalan: |-
+  Catalão
+server.staffpm.common_answers: |-
+  Respostas comuns
+server.common.resolve: |-
+  Resolver
+server.staffpm.assign: |-
+  Atribuir
+server.staffpm.set_message: |-
+  Configura mensagem
+server.staffpm.create_edit_message: |-
+  Gerenciar
+server.staffpm.make_donate: |-
+  Fazer Doação
+server.staffpm.resolve_selected: |-
+  Resolver selecionados
+server.staffpm.manage_common_response: |-
+  Gerenciar respostas comuns
+server.staffpm.back_to_conversation: |-
+  Voltar à conversa
+server.common.name: |-
+  Nome
+server.common.content: |-
+  Conteúdo
+server.common.new: |-
+  Criar
+server.staffpm.inbox_action_last_24_hours: |-
+  Ações na caixa de entrada nas últimas 24 horas
+server.staffpm.inbox_action_last_week: |-
+  Tarefas na última semana
+server.staffpm.inbox_action_last_month: |-
+  Tarefas de caixa de entrada no último mês
+server.staffpm.inbox_actions_total: |-
+  Ações na caixa de entrada
+server.staffpm.resolved_num: |-
+  Resolvido
+server.common.no_results: |-
+  Sem resultados.
+server.tools.donation_source: |-
+  Fonte
+server.common.reason: |-
+  Motivo
+server.tools.donation_staff_pm: |-
+  PM pessoal
+server.tools.total_value: |-
+  Total
+server.user.simple_info: |-
+  Perfil
+server.user.consumed_history: |-
+  Histórico
+server.user.user_basic: |-
+  Informação Básica
