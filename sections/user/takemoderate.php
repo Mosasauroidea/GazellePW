@@ -858,21 +858,21 @@ if (!empty($Summary)) {
 
 
 // Build query
-
-$SET = implode(', ', $UpdateSet);
-
-$SQL = "
+if (count($UpdateSet) > 0) {
+    $SET = implode(', ', $UpdateSet);
+    $SQL = "
 	UPDATE users_main AS m
 		JOIN users_info AS i ON m.ID = i.UserID
 	SET $SET
 	WHERE m.ID = '$UserID'";
 
-// Perform update
-//die($SQL);
-$DB->query($SQL);
+    // Perform update
+    //die($SQL);
+    $DB->query($SQL);
 
-if (isset($ClearStaffIDCache)) {
-    $Cache->delete_value('staff_ids');
+    if (isset($ClearStaffIDCache)) {
+        $Cache->delete_value('staff_ids');
+    }
 }
 
 // redirect to user page

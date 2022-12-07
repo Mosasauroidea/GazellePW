@@ -40,25 +40,27 @@ $DB->query("
 	ORDER BY ChangeTime DESC");
 
 ?>
-<div class="BodyHeader">
-	<h2 class="BodyHeader-nav">
-		<?= t('server.userhistory.password_reset_history_for', ['Values' => [
-			"<a href='/user.php?id=${UserID}'>${Username}</a>"
-		]]) ?>
-	</h2>
-</div>
-<div class="TableContainer">
-	<table class="TableUserPasswordHistory Table">
-		<tr class="Table-rowHeader">
-			<td class="Table-cell"><?= t('server.userhistory.changed') ?></td>
-			<td class="Table-cell">IP <a href="/userhistory.php?action=ips&amp;userid=<?= $UserID ?>" class="brackets">H</a></td>
-		</tr>
-		<? while (list($ChangeTime, $ChangerIP) = $DB->next_record()) { ?>
-			<tr class="Table-row">
-				<td class="Table-cell"><?= time_diff($ChangeTime) ?></td>
-				<td class="Table-cell"><?= display_str($ChangerIP) ?> <a href="/user.php?action=search&amp;ip_history=on&amp;ip=<?= display_str($ChangerIP) ?>" class="brackets" data-tooltip="Search">S</a><br /><?= Tools::get_host_by_ajax($ChangerIP) ?></td>
+<div class="LayoutBody">
+	<div class="BodyHeader">
+		<h2 class="BodyHeader-nav">
+			<?= t('server.userhistory.password_reset_history_for', ['Values' => [
+				"<a href='/user.php?id=${UserID}'>${Username}</a>"
+			]]) ?>
+		</h2>
+	</div>
+	<div class="TableContainer">
+		<table class="TableUserPasswordHistory Table">
+			<tr class="Table-rowHeader">
+				<td class="Table-cell"><?= t('server.userhistory.changed') ?></td>
+				<td class="Table-cell">IP <a href="/userhistory.php?action=ips&amp;userid=<?= $UserID ?>" class="brackets">H</a></td>
 			</tr>
-		<? } ?>
-	</table>
+			<? while (list($ChangeTime, $ChangerIP) = $DB->next_record()) { ?>
+				<tr class="Table-row">
+					<td class="Table-cell"><?= time_diff($ChangeTime) ?></td>
+					<td class="Table-cell"><?= display_str($ChangerIP) ?> <a href="/user.php?action=search&amp;ip_history=on&amp;ip=<?= display_str($ChangerIP) ?>" class="brackets" data-tooltip="Search">S</a><br /><?= Tools::get_host_by_ajax($ChangerIP) ?></td>
+				</tr>
+			<? } ?>
+		</table>
+	</div>
 </div>
 <? View::show_footer(); ?>

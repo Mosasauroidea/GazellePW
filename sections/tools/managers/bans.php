@@ -6,13 +6,13 @@ if (!check_perms('admin_manage_ipbans')) {
 if (isset($_POST['submit'])) {
     authorize();
 
-    $IPA = substr($_POST['start'], 0, strcspn($_POST['start'], '.'));
+    $IP = db_string($_POST['start']);
     if ($_POST['submit'] == 'Delete') { //Delete
         if (!is_number($_POST['id']) || $_POST['id'] == '') {
             error(0);
         }
         $DB->query('DELETE FROM ip_bans WHERE ID=' . $_POST['id']);
-        $Cache->delete_value('ip_bans_' . $IPA);
+        $Cache->delete_value('ip_bans_' . $IP);
     } else { //Edit & Create, Shared Validation
         $Val->SetFields('start', '1', 'regex', 'You must include the starting IP address.', array('regex' => '/^\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}/i'));
         $Val->SetFields('end', '1', 'regex', 'You must include the ending IP address.', array('regex' => '/^\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}/i'));
@@ -23,8 +23,8 @@ if (isset($_POST['submit'])) {
         }
 
         $Notes = db_string($_POST['notes']);
-        $Start = Tools::ip_to_unsigned($_POST['start']); //Sanitized by Validation regex
-        $End = Tools::ip_to_unsigned($_POST['end']); //See above
+        $Start = db_string($_POST['start']); //Sanitized by Validation regex
+        $End = db_string($_POST['end']); //See above
 
         if ($_POST['submit'] == 'Edit') { //Edit
             if (empty($_POST['id']) || !is_number($_POST['id'])) {
@@ -33,8 +33,8 @@ if (isset($_POST['submit'])) {
             $DB->query("
 				UPDATE ip_bans
 				SET
-					FromIP=$Start,
-					ToIP='$End',
+					FromIP=INET6_ATON('$Start'),
+					ToIP=INET6_ATON('$End'),
 					Reason='$Notes'
 				WHERE ID='" . $_POST['id'] . "'");
         } else { //Create
@@ -42,9 +42,9 @@ if (isset($_POST['submit'])) {
 				INSERT INTO ip_bans
 					(FromIP, ToIP, Reason)
 				VALUES
-					('$Start','$End', '$Notes')");
+					(INET6_ATON('$Start'),INET6_ATON('$End'), '$Notes')");
         }
-        $Cache->delete_value('ip_bans_' . $IPA);
+        $Cache->delete_value('ip_bans_' . $IP);
     }
     header('tools.php?action=ip_ban');
 }
@@ -56,8 +56,8 @@ $sql = "
 	SELECT
 		SQL_CALC_FOUND_ROWS
 		ID,
-		FromIP,
-		ToIP,
+		INET6_NTOA(FromIP),
+		INET6_NTOA(ToIP),
 		Reason
 	FROM ip_bans ";
 
@@ -67,9 +67,9 @@ if (!empty($_REQUEST['notes'])) {
 
 if (!empty($_REQUEST['ip']) && preg_match('/' . IP_REGEX . '/', $_REQUEST['ip'])) {
     if (!empty($_REQUEST['notes'])) {
-        $sql .= "AND '" . Tools::ip_to_unsigned($_REQUEST['ip']) . "' BETWEEN FromIP AND ToIP ";
+        $sql .= "AND INET6_ATON('" . $_REQUEST['ip'] . "') BETWEEN FromIP AND ToIP ";
     } else {
-        $sql .= "WHERE '" . Tools::ip_to_unsigned($_REQUEST['ip']) . "' BETWEEN FromIP AND ToIP ";
+        $sql .= "WHERE INET6_ATON('" . $_REQUEST['ip'] . "') BETWEEN FromIP AND ToIP ";
     }
 }
 
@@ -160,8 +160,6 @@ $DB->set_query_id($Bans);
             $Row = 'a';
             while (list($ID, $Start, $End, $Reason) = $DB->next_record()) {
                 $Row = $Row === 'a' ? 'b' : 'a';
-                $Start = long2ip($Start);
-                $End = long2ip($End);
             ?>
                 <tr class="row<?= $Row ?>">
                     <form class="manage_form" name="ban" action="" method="post">

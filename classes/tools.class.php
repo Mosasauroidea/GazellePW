@@ -6,39 +6,11 @@ class Tools {
      * @param string $IP
      */
     public static function site_ban_ip($IP) {
-        global $Debug;
-        $A = substr($IP, 0, strcspn($IP, '.'));
-        $IPNum = Tools::ip_to_unsigned($IP);
-        $IPBans = G::$Cache->get_value('ip_bans_' . $A);
-        if (!is_array($IPBans)) {
-            $SQL = sprintf("
-				SELECT ID, FromIP, ToIP
-				FROM ip_bans
-				WHERE FromIP BETWEEN %d << 24 AND (%d << 24) - 1", $A, $A + 1);
-            $QueryID = G::$DB->get_query_id();
-            G::$DB->query($SQL);
-            $IPBans = G::$DB->to_array(0, MYSQLI_NUM);
-            G::$DB->set_query_id($QueryID);
-            G::$Cache->cache_value('ip_bans_' . $A, $IPBans, 0);
+        G::$DB->prepared_query('SELECT ID FROM ip_bans WHERE INET6_ATON(?) BETWEEN FromIP and ToIP', $IP);
+        if (G::$DB->has_results()  > 0) {
+            return true;
         }
-        foreach ($IPBans as $Index => $IPBan) {
-            list($ID, $FromIP, $ToIP) = $IPBan;
-            if ($IPNum >= $FromIP && $IPNum <= $ToIP) {
-                return true;
-            }
-        }
-
         return false;
-    }
-
-    /**
-     * Returns the unsigned form of an IP address.
-     *
-     * @param string $IP The IP address x.x.x.x
-     * @return string the long it represents.
-     */
-    public static function ip_to_unsigned($IP) {
-        return sprintf('%u', ip2long($IP));
     }
 
     /**
@@ -52,22 +24,14 @@ class Tools {
         if (isset($IPs[$IP])) {
             return $IPs[$IP];
         }
-        if (is_number($IP)) {
-            $Long = $IP;
-        } else {
-            $Long = Tools::ip_to_unsigned($IP);
-        }
-        if (!$Long || $Long == 2130706433) { // No need to check cc for 127.0.0.1
-            return false;
-        }
         $QueryID = G::$DB->get_query_id();
         G::$DB->query("
-			SELECT EndIP, Code
+			SELECT Code
 			FROM geoip_country
-			WHERE $Long >= StartIP
+			WHERE INET6_ATON('$IP')>= StartIP and INET6_ATON('$IP') < EndIP
 			ORDER BY StartIP DESC
 			LIMIT 1");
-        if ((!list($EndIP, $Country) = G::$DB->next_record()) || $EndIP < $Long) {
+        if ((!list($Country) = G::$DB->next_record())) {
             $Country = '?';
         }
         G::$DB->set_query_id($QueryID);
@@ -151,7 +115,7 @@ class Tools {
      */
     public static function display_ip($IP) {
         $Line = display_str($IP) . ' (' . Tools::get_country_code_by_ajax($IP) . ') ';
-        $Line .= '<a class="brackets" href="user.php?action=search&amp;ip_history=on&amp;ip=' . display_str($IP) . '&amp;matchtype=strict" data-tooltip="Search">' . t('server.common.search') . '</a>';
+        $Line .= '<a class="brackets" href="user.php?action=search&amp;ip_history=on&amp;ip=' . display_str($IP) . '&amp;matchtype=strict" data-tooltip="Search">' . S . '</a>';
 
         return $Line;
     }
@@ -298,19 +262,5 @@ class Tools {
 			SET AdminComment = CONCAT(\'' . db_string($AdminComment) . '\', AdminComment)
 			WHERE UserID = \'' . db_string($UserID) . '\'');
         G::$DB->set_query_id($QueryID);
-    }
-
-    /**
-     * Check if an IP address is part of a given CIDR range.
-     * @param string $CheckIP the IP address to be looked up
-     * @param string $Subnet the CIDR subnet to be checked against
-     */
-    public static function check_cidr_range($CheckIP, $Subnet) {
-        $IP = ip2long($CheckIP);
-        $CIDR = split('/', $Subnet);
-        $SubnetIP = ip2long($CIDR[0]);
-        $SubnetMaskBits = 32 - $CIDR[1];
-
-        return (($IP >> $SubnetMaskBits) == ($SubnetIP >> $SubnetMaskBits));
     }
 }

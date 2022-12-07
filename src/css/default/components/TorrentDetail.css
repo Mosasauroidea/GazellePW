@@ -128,10 +128,6 @@ TorrentDetail
   margin-left: auto;
 }
 
-.TorrentDetailfileListItem-fileListItem {
-  padding: 0px 0px 0px 12px;
-}
-
 .TorrentDetailfileListItem-fileListItem[variant='root'] {
   padding-left: 0px;
 }

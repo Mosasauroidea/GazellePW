@@ -26,9 +26,9 @@ View::show_header(t('server.tools.service_stats'), '', 'PageToolSericeStat');
                 <?= t('server.tools.service') ?>
             </div>
             <div class="Box-body">
-                <ul class="List">
+                <ul class="MenuList">
                     <li><strong><?= t('server.tools.threads_active') ?></strong>
-                        <ul class="List">
+                        <ul class="MenuList SubMenu">
                             <li>
                                 <?= t('server.tools.cache') ?>: <?= number_format($MemStats['threads']) ?> <span>(100.000%)</span>
                             </li>
@@ -43,7 +43,7 @@ View::show_header(t('server.tools.service_stats'), '', 'PageToolSericeStat');
                     </li>
                     <li>
                         <strong><?= t('server.tools.connections') ?></strong>
-                        <ul class="List">
+                        <ul class="MenuList SubMenu">
                             <li>
                                 <?= t('server.tools.cache') ?>:
                                 <?= number_format($MemStats['total_connections']) ?>
@@ -56,7 +56,7 @@ View::show_header(t('server.tools.service_stats'), '', 'PageToolSericeStat');
                     </li>
                     <li>
                         <strong><?= t('server.tools.cache_usage') ?></strong>
-                        <ul class="List">
+                        <ul class="MenuList SubMenu">
                             <li>
                                 <?= t('server.tools.cashe_current_index') ?>:
                                 <?= number_format($MemStats['curr_items']) ?></span>
@@ -81,9 +81,9 @@ View::show_header(t('server.tools.service_stats'), '', 'PageToolSericeStat');
                 <?= t('server.tools.activity') ?>
             </div>
             <div class="Box-body">
-                <ul class="List">
+                <ul class="MenuList">
                     <li><strong><?= t('server.tools.total_reads') ?></strong>
-                        <ul class="List">
+                        <ul class="MenuList SubMenu">
                             <li>
                                 <?= t('server.tools.cache') ?>:
                                 <?= number_format($MemStats['cmd_get']) ?>
@@ -95,7 +95,7 @@ View::show_header(t('server.tools.service_stats'), '', 'PageToolSericeStat');
                         </ul>
                     </li>
                     <li><strong><?= t('server.tools.total_writes') ?></strong>
-                        <ul class="List">
+                        <ul class="MenuList SubMenu">
                             <li>
                                 <?= t('server.tools.cache') ?>:
                                 <?= number_format($MemStats['cmd_set']) ?>
@@ -107,7 +107,7 @@ View::show_header(t('server.tools.service_stats'), '', 'PageToolSericeStat');
                         </ul>
                     </li>
                     <li><strong><?= t('server.tools.get_select_success') ?></strong>
-                        <ul class="List">
+                        <ul class="MenuList SubMenu">
                             <li>
                                 <span data-tooltip="<?= t('server.tools.cache_hit_rate') ?>"><?= t('server.tools.cache') ?>:</span>
                                 <span class="<?= $MemStats['get_hits'] / $MemStats['cmd_get'] < 0.7 ? "u-colorWarning" : "" ?>"><?= number_format($MemStats['get_hits']) ?> <span>(<?= number_format(($MemStats['get_hits'] / $MemStats['cmd_get']) * 100, 3); ?>%)</span></span>
@@ -119,7 +119,7 @@ View::show_header(t('server.tools.service_stats'), '', 'PageToolSericeStat');
                         </ul>
                     </li>
                     <li><strong><?= t('server.tools.set_insert_success') ?></strong>
-                        <ul class="List">
+                        <ul class="MenuList SubMenu">
                             <li>
                                 <span><?= t('server.tools.cache') ?>:</span>
                                 <?= number_format($MemStats['cmd_set']) ?> <span>(100.000%)</span>
@@ -131,7 +131,7 @@ View::show_header(t('server.tools.service_stats'), '', 'PageToolSericeStat');
                         </ul>
                     </li>
                     <li><strong><?= t('server.tools.increment_decrement_success') ?></strong>
-                        <ul class="List">
+                        <ul class="MenuList SubMenu">
                             <li>
                                 <span><?= t('server.tools.cache_increment') ?>:</span>
                                 <span class="<?= $MemStats['incr_hits'] / ($MemStats['incr_hits'] + $MemStats['incr_misses']) < 0.7 ? "u-colorWarning" : "" ?>"><?= number_format($MemStats['incr_hits']) ?> <span>(<?= number_format(($MemStats['incr_hits'] / ($MemStats['incr_hits'] + $MemStats['incr_misses'])) * 100, 3); ?>%)</span></span>
@@ -143,7 +143,7 @@ View::show_header(t('server.tools.service_stats'), '', 'PageToolSericeStat');
                         </ul>
                     </li>
                     <li><strong><?= t('server.tools.cas_update_success') ?></strong>:
-                        <ul class="List">
+                        <ul class="MenuList SubMenu">
                             <li>
                                 <span><?= t('server.tools.cache') ?>:</span>
                                 <span class="<? if ($MemStats['cas_hits'] > 0 && $MemStats['cas_hits'] / ($MemStats['cas_hits'] + $MemStats['cas_misses']) < 0.7) {
@@ -163,7 +163,7 @@ View::show_header(t('server.tools.service_stats'), '', 'PageToolSericeStat');
                         </ul>
                     </li>
                     <li><strong><?= t('server.tools.delete_success') ?></strong>
-                        <ul class="List">
+                        <ul class="MenuList SubMenu">
                             <li>
                                 <span><?= t('server.tools.cache') ?>:</span>
                                 <span class="<? if ($MemStats['delete_hits'] / ($MemStats['delete_hits'] + $MemStats['delete_misses']) < 0.7) {
@@ -178,7 +178,7 @@ View::show_header(t('server.tools.service_stats'), '', 'PageToolSericeStat');
                     </li>
 
                     <li><strong><?= t('server.tools.data_read') ?></strong>
-                        <ul class="List">
+                        <ul class="MenuList SubMenu">
                             <li>
                                 <span><?= t('server.tools.cache') ?>:</span>
                                 <span><?= Format::get_size($MemStats['bytes_read']) ?> </span>
@@ -190,7 +190,7 @@ View::show_header(t('server.tools.service_stats'), '', 'PageToolSericeStat');
                         </ul>
                     </li>
                     <li><strong><?= t('server.tools.data_write') ?></strong>
-                        <ul class="List">
+                        <ul class="MenuList SubMenu">
                             <li>
                                 <span><?= t('server.tools.cache') ?>:</span>
                                 <span><?= Format::get_size($MemStats['bytes_written']) ?> </span>
@@ -202,7 +202,7 @@ View::show_header(t('server.tools.service_stats'), '', 'PageToolSericeStat');
                         </ul>
                     </li>
                     <li><strong><?= t('server.tools.others') ?></strong>
-                        <ul class="List">
+                        <ul class="MenuList SubMenu">
                             <li>
                                 <span><?= t('server.tools.cache_flushes') ?>:</span>
                                 <span class="Table-cell <? if ($MemStats['cmd_flush'] > $MemStats['uptime'] / 7 * 24 * 3600) {
@@ -229,9 +229,9 @@ View::show_header(t('server.tools.service_stats'), '', 'PageToolSericeStat');
                 <?= t('server.tools.concurrency') ?>
             </div>
             <div class="Box-body">
-                <ul class="List">
+                <ul class="MenuList">
                     <li><strong><?= t('server.tools.total_reads') ?></strong>
-                        <ul class="List">
+                        <ul class="MenuList SubMenu">
                             <li>
                                 <span><?= t('server.tools.cache') ?>:</span>
                                 <span class="<? if (($MemStats['cmd_get'] / $MemStats['uptime']) * 5 < $DBStats['Com_select']['Value'] / $DBStats['Uptime']['Value']) {
@@ -245,7 +245,7 @@ View::show_header(t('server.tools.service_stats'), '', 'PageToolSericeStat');
                         </ul>
                     </li>
                     <li><strong><?= t('server.tools.total_writes') ?></strong>
-                        <ul class="List">
+                        <ul class="MenuList SubMenu">
                             <li>
                                 <span><?= t('server.tools.cache') ?>:</span>
                                 <span class="<? if (($MemStats['cmd_set'] / $MemStats['uptime']) * 5 < ($DBStats['Com_insert']['Value'] + $DBStats['Com_update']['Value']) / $DBStats['Uptime']['Value']) {
@@ -259,7 +259,7 @@ View::show_header(t('server.tools.service_stats'), '', 'PageToolSericeStat');
                         </ul>
                     </li>
                     <li><strong><?= t('server.tools.get_select') ?></strong>
-                        <ul class="List">
+                        <ul class="MenuList SubMenu">
                             <li>
                                 <span><?= t('server.tools.cache') ?>:</span>
                                 <span><?= number_format($MemStats['get_hits'] / $MemStats['uptime'], 5) ?>/s </span>
@@ -271,7 +271,7 @@ View::show_header(t('server.tools.service_stats'), '', 'PageToolSericeStat');
                         </ul>
                     </li>
                     <li><strong><?= t('server.tools.set_insert') ?></strong>
-                        <ul class="List">
+                        <ul class="MenuList SubMenu">
                             <li>
                                 <span><?= t('server.tools.cache') ?>:</span>
                                 <span><?= number_format($MemStats['cmd_set'] / $MemStats['uptime'], 5) ?>/s </span>
@@ -283,7 +283,7 @@ View::show_header(t('server.tools.service_stats'), '', 'PageToolSericeStat');
                         </ul>
                     </li>
                     <li><strong><?= t('server.tools.increment_decrement_success') ?></strong>
-                        <ul class="List">
+                        <ul class="MenuList SubMenu">
                             <li>
                                 <span><?= t('server.tools.cache_increment') ?>:</span>
                                 <span><?= number_format($MemStats['incr_hits'] / $MemStats['uptime'], 5) ?>/s</span>
@@ -295,7 +295,7 @@ View::show_header(t('server.tools.service_stats'), '', 'PageToolSericeStat');
                         </ul>
                     </li>
                     <li><strong><?= t('server.tools.cas_updates') ?></strong>
-                        <ul class="List">
+                        <ul class="MenuList SubMenu">
                             <li>
                                 <span><?= t('server.tools.cache') ?>:</span>
                                 <span><?= number_format($MemStats['cas_hits'] / $MemStats['uptime'], 5) ?>/s</span>
@@ -307,7 +307,7 @@ View::show_header(t('server.tools.service_stats'), '', 'PageToolSericeStat');
                         </ul>
                     </li>
                     <li><strong><?= t('server.tools.delete_success') ?></strong>
-                        <ul class="List">
+                        <ul class="MenuList SubMenu">
                             <li>
                                 <span><?= t('server.tools.cache') ?>:</span>
                                 <span><?= number_format($MemStats['delete_hits'] / $MemStats['uptime'], 5) ?>/s</span>
@@ -319,7 +319,7 @@ View::show_header(t('server.tools.service_stats'), '', 'PageToolSericeStat');
                         </ul>
                     </li>
                     <li><strong><?= t('server.tools.others') ?></strong>
-                        <ul class="List">
+                        <ul class="MenuList SubMenu">
                             <li>
                                 <span><?= t('server.tools.cache_flushes') ?>:</span>
                                 <span><?= number_format($MemStats['cmd_flush'] / $MemStats['uptime'], 5) ?>/s</span>
@@ -335,7 +335,7 @@ View::show_header(t('server.tools.service_stats'), '', 'PageToolSericeStat');
                         </ul>
                     </li>
                     <li><strong><?= t('server.tools.data_read') ?></strong>
-                        <ul class="List">
+                        <ul class="MenuList SubMenu">
                             <li>
                                 <span><?= t('server.tools.cache') ?>:</span>
                                 <span><?= Format::get_size($MemStats['bytes_read'] / $MemStats['uptime']) ?>/s</span>
@@ -347,7 +347,7 @@ View::show_header(t('server.tools.service_stats'), '', 'PageToolSericeStat');
                         </ul>
                     </li>
                     <li><strong><?= t('server.tools.data_write') ?></strong>
-                        <ul class="List">
+                        <ul class="MenuList SubMenu">
                             <li>
                                 <span><?= t('server.tools.cache') ?>:</span>
                                 <span><?= Format::get_size($MemStats['bytes_written'] / $MemStats['uptime']) ?>/s</span>

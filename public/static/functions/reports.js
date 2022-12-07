@@ -33,8 +33,9 @@ function claim(id) {
     }
     if (json['status'] == 'success') {
       var username = json['username']
-      $('#claim_' + id).raw().innerHTML =
-        '<a href="#" onclick="return false;">Claimed by ' + username + '</a>'
+      $('#claim_' + id).ghide()
+      $('#unclaim_' + id).gshow()
+      $('#claimer_' + id).raw().innerHTML = username
     }
   })
 }
@@ -46,12 +47,9 @@ function unClaim(id) {
   ajax.post('reports.php?action=unclaim', post, function (response) {
     var json = JSON.parse(response)
     if (json['status'] == 'success') {
-      $('#claimed_' + id).raw().innerHTML =
-        '<a href="#" id="claim_' +
-        id +
-        '" onclick="claim(' +
-        id +
-        '); return false;" class="brackets">Claim</a>'
+      $('#claim_' + id).gshow()
+      $('#unclaim_' + id).ghide()
+      $('#claimer_' + id).raw().innerHTML = ''
     }
   })
 }
@@ -60,26 +58,20 @@ function resolve(id, claimer) {
   var answer = true
   if (!claimer) {
     if ($('#claimed_' + id).raw()) {
-      var answer = confirm(
-        'This is a claimed report. Are you sure you want to resolve it?'
-      )
+      var answer = confirm('This is a claimed report. Are you sure you want to resolve it?')
       if (answer) answer = true
       else answer = false
     }
   }
   if (answer) {
-    ajax.post(
-      'reports.php?action=resolve',
-      'report_form_' + id,
-      function (response) {
-        var json = JSON.parse(response)
-        if (json['status'] == 'success') {
-          $('#report_' + id).remove()
-        } else {
-          alert(json['status'])
-        }
+    ajax.post('reports.php?action=resolve', 'report_form_' + id, function (response) {
+      var json = JSON.parse(response)
+      if (json['status'] == 'success') {
+        $('#report_' + id).remove()
+      } else {
+        alert(json['status'])
       }
-    )
+    })
   }
   return false
 }

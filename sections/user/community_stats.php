@@ -58,56 +58,67 @@ $OverrideClass = $Override === 2 ? 'paranoia_override' : '';
     </div>
     <ul class="SidebarList SidebarItem-body Box-body">
         <li class="SidebarList-item isForumTopicCount" id="forum-topic-count-value" data-value="<?= $ForumTopics ?>">
-            <span><?= t('server.user.community_topic') ?>: </span>
-            <?= number_format($ForumTopics) ?>
+            <span>
+                <?= t('server.user.community_topic') ?>
+                : </span>
             <a class="brackets" href="userhistory.php?action=topics&amp;userid=<?= $UserID ?>">
-                <?= t('server.user.view') ?>
+                <?= number_format($ForumTopics) ?>
             </a>
         </li>
         <li class="SidebarList-item isForumThreadCount" id="forum-thread-count-value" data-value="<?= $ForumPosts ?>">
-            <span><?= t('server.user.community_pots') ?>: </span>
-            <?= number_format($ForumPosts) ?>
-            <a class="brackets" href="userhistory.php?action=posts&amp;userid=<?= $UserID ?>">
-                <?= t('server.user.view') ?>
+            <span>
+                <?= t('server.user.community_pots') ?>
+                : </span>
+            <a class="brackets" href="userhistory.php?action=posts&amp;userid=<?= $UserID ?>&showunread=0&group=0">
+                <?= number_format($ForumPosts) ?>
             </a>
         </li>
         <? if ($Override = check_paranoia_here('torrentcomments+')) { ?>
             <li class="SidebarList-item isTorrentCommentCount <?= $OverrideClass ?>" id="torrent-comment-count-value" data-value="<?= $NumComments ?>">
-                <span><?= t('server.user.community_comms') ?>: </span>
-                <?= number_format($NumComments) ?>
+                <span>
+                    <?= t('server.user.community_comms') ?>:
+                </span>
                 <? if ($Override = check_paranoia_here('torrentcomments')) { ?>
                     <a href="comments.php?id=<?= $UserID ?>" class="brackets <?= $OverrideClass ?>">
-                        <?= t('server.user.view') ?>
+                        <?= number_format($NumComments) ?>
                     </a>
+                <? } else { ?>
+                    <?= number_format($NumComments) ?>
                 <? } ?>
             </li>
             <li class="SidebarList-item isArtistCommentCount <?= $OverrideClass ?>" id="artist-comment-count-value" data-value="<?= $NumArtistComments ?>">
-                <span><?= t('server.user.community_arts') ?>: </span>
-                <?= number_format($NumArtistComments) ?>
+                <span>
+                    <?= t('server.user.community_arts') ?>:
+                </span>
                 <? if ($Override = check_paranoia_here('torrentcomments')) { ?>
                     <a href="comments.php?id=<?= $UserID ?>&amp;action=artist" class="brackets <?= $OverrideClass ?>">
-                        <?= t('server.user.view') ?>
+                        <?= number_format($NumArtistComments) ?>
                     </a>
+                <? } else { ?>
+                    <?= number_format($NumArtistComments) ?>
                 <? } ?>
             </li>
             <? if (CONFIG['ENABLE_COLLAGES']) { ?>
                 <li class="SidebarList-item isCollageCommentCount <?= $OverrideClass ?>" id="collage-comment-count-value" data-value="<?= $NumCollageComments ?>">
-                    <span><?= t('server.user.community_colls') ?>: </span>
-                    <?= number_format($NumCollageComments) ?>
+                    <span>
+                        <?= t('server.user.community_colls') ?>: </span>
                     <? if ($Override = check_paranoia_here('torrentcomments')) { ?>
                         <a href="comments.php?id=<?= $UserID ?>&amp;action=collages" class="brackets <?= $OverrideClass ?>">
-                            <?= t('server.user.view') ?>
+                            <?= number_format($NumCollageComments) ?>
                         </a>
+                    <? } else { ?>
+                        <?= number_format($NumCollageComments) ?>
                     <? } ?>
                 </li>
             <?  } ?>
             <li class="SidebarList-item isReqeustCommentCount <?= $OverrideClass ?>" id="request-comment-count-value" data-value="<?= $NumRequestComments ?>">
                 <span><?= t('server.user.community_reqs') ?>: </span>
-                <?= number_format($NumRequestComments) ?>
                 <? if ($Override = check_paranoia_here('torrentcomments')) { ?>
                     <a href="comments.php?id=<?= $UserID ?>&amp;action=requests" class="brackets <?= $OverrideClass ?>">
-                        <?= t('server.user.view') ?>
+                        <?= number_format($NumRequestComments) ?>
                     </a>
+                <? } else { ?>
+                    <?= number_format($NumRequestComments) ?>
                 <? } ?>
             </li>
         <? } ?>
@@ -115,11 +126,12 @@ $OverrideClass = $Override === 2 ? 'paranoia_override' : '';
         if (($Override = check_paranoia_here('collages+')) && CONFIG['ENABLE_COLLAGES']) { ?>
             <li class="SidebarList-item isCollageCreateCount <?= $OverrideClass ?>" id="collage-create-count-value" data-value="<?= $NumCollages ?>">
                 <span><?= t('server.user.community_collstart') ?>: </span>
-                <?= number_format($NumCollages) ?>
                 <? if ($Override = check_paranoia_here('collages')) { ?>
                     <a href="collages.php?userid=<?= $UserID ?>" class="brackets <?= $OverrideClass ?>">
-                        <?= t('server.user.view') ?>
+                        <?= number_format($NumCollages) ?>
                     </a>
+                <? } else { ?>
+                    <?= number_format($NumCollages) ?>
                 <? } ?>
             </li>
         <?
@@ -127,11 +139,12 @@ $OverrideClass = $Override === 2 ? 'paranoia_override' : '';
         if (($Override = check_paranoia_here('collagecontribs+')) && CONFIG['ENABLE_COLLAGES']) { ?>
             <li class="SidebarList-item isCollageContributeCount <?= $OverrideClass ?>" id="collage-countribute-count-value" data-value="<?= $NumCollageContribs ?>">
                 <span><?= t('server.user.community_collcontrib') ?>: </span>
-                <?= number_format($NumCollageContribs) ?>
                 <? if ($Override = check_paranoia_here('collagecontribs')) { ?>
                     <a href="collages.php?userid=<?= $UserID ?>&amp;contrib=1" class="brackets <?= $OverrideClass ?>">
-                        <?= t('server.user.view') ?>
+                        <?= number_format($NumCollageContribs) ?>
                     </a>
+                <? } else { ?>
+                    <?= number_format($NumCollageContribs) ?>
                 <? } ?>
             </li>
         <? } ?>
@@ -164,15 +177,14 @@ $OverrideClass = $Override === 2 ? 'paranoia_override' : '';
             <li class="SidebarList-item">
                 <span class="<?= ($ViewCount === 2 ? 'paranoia_override' : '') ?>">
                     <span><?= t('server.user.requestsfilled') ?>: </span>
-                    <?= number_format($RequestsFilled) ?>
+                    <a href="requests.php?type=filled&amp;userid=<?= $UserID ?>" class="brackets <?= (($ViewAll === 2) ? ' paranoia_override' : '') ?>">
+                        <?= number_format($RequestsFilled) ?>
+                    </a>
                 </span>
                 <span class="<?= ($ViewBounty === 2 ? 'paranoia_override' : '') ?>">
                     <?= t('server.user.for') ?>
                     <?= Format::get_size($TotalBounty) ?>
                 </span>
-                <a href="requests.php?type=filled&amp;userid=<?= $UserID ?>" class="brackets <?= (($ViewAll === 2) ? ' paranoia_override' : '') ?>">
-                    <?= t('server.user.view') ?>
-                </a>
             </li>
         <? } ?>
 
@@ -193,34 +205,35 @@ $OverrideClass = $Override === 2 ? 'paranoia_override' : '';
             <li class="SidebarList-item"><?= t('server.user.requestsvoted') ?> <?= number_format($RequestsVoted) ?> <?= t('server.user.for') ?> <?= Format::get_size($TotalSpent) ?></li>
         <?  } elseif ($ViewAll) { ?>
             <li class="SidebarList-item">
-                <span class="<?= ($ViewCount === 2 ? 'paranoia_override' : '') ?>"><?= t('server.user.requestscreated') ?>: <?= number_format($RequestsCreated) ?></span>
+                <span class="<?= ($ViewCount === 2 ? 'paranoia_override' : '') ?>"><?= t('server.user.requestscreated') ?>:
+                    <a href="requests.php?type=created&amp;userid=<?= $UserID ?>" class="brackets<?= ($ViewAll === 2 ? ' paranoia_override' : '') ?>">
+                        <?= number_format($RequestsCreated) ?>
+                    </a>
+                </span>
                 <span class="<?= ($ViewBounty === 2 ? 'paranoia_override' : '') ?>"> <?= t('server.user.for') ?> <?= Format::get_size($RequestsCreatedSpent) ?></span>
-                <a href="requests.php?type=created&amp;userid=<?= $UserID ?>" class="brackets<?= ($ViewAll === 2 ? ' paranoia_override' : '') ?>">
-                    <?= t('server.user.view') ?>
-                </a>
             </li>
             <li class="SidebarList-item">
-                <span class="<?= ($ViewCount === 2 ? 'paranoia_override' : '') ?>"><?= t('server.user.requestsvoted') ?>: <?= number_format($RequestsVoted) ?></span>
+                <span class="<?= ($ViewCount === 2 ? 'paranoia_override' : '') ?>"><?= t('server.user.requestsvoted') ?>:
+                    <a href="requests.php?type=voted&amp;userid=<?= $UserID ?>" class="brackets<?= ($ViewAll === 2 ? ' paranoia_override' : '') ?>">
+                        <?= number_format($RequestsVoted) ?>
+                    </a>
+                </span>
                 <span class="<?= ($ViewBounty === 2 ? 'paranoia_override' : '') ?>"><?= t('server.user.for') ?> <?= Format::get_size($TotalSpent) ?></span>
-                <a href="requests.php?type=voted&amp;userid=<?= $UserID ?>" class="brackets<?= ($ViewAll === 2 ? ' paranoia_override' : '') ?>">
-                    <?= t('server.user.view') ?>
-                </a>
             </li>
         <? } ?>
         <?
         if ($CanViewUploads || $Override = check_paranoia_here('uploads+')) { ?>
             <li class="SidebarList-item isUploadCount <?= $OverrideClass ?>" id="upload-count-value" data-value="<?= $Uploads ?>">
                 <?= t('server.user.comm_upload') ?>:
-                <?= number_format($Uploads) ?>
-                <? if ($TotalUploads) { ?>
-                    <span data-tooltip="<?= t('server.user.total_uploads_title') ?>">
-                        (<?= $TotalUploads ?>)
-                    </span>
-                <? } ?>
+                <a class="brackets <?= $OverrideClass ?>" href="torrents.php?type=uploaded&amp;userid=<?= $UserID ?>">
+                    <?= number_format($Uploads) ?>
+                    <? if ($TotalUploads) { ?>
+                        <span data-tooltip="<?= t('server.user.total_uploads_title') ?>">
+                            (<?= $TotalUploads ?>)
+                        </span>
+                    <? } ?>
+                </a>
                 <? if ($CanViewUploads || $Override = check_paranoia_here('uploads')) { ?>
-                    <a class="brackets <?= $OverrideClass ?>" href="torrents.php?type=uploaded&amp;userid=<?= $UserID ?>">
-                        <?= t('server.user.view') ?>
-                    </a>
                     <? if (check_perms('zip_downloader')) { ?>
                         <a class="brackets <?= $OverrideClass ?>" href="torrents.php?action=redownload&amp;type=uploads&amp;userid=<?= $UserID ?>" onclick="return confirm('<?= t('server.user.redownloading_confirm') ?>');">
                             <?= t('server.user.community_dl') ?>

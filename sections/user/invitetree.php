@@ -31,8 +31,6 @@ View::show_header(t('server.user.tree'), '', 'PageUserInviteTree');
     <div class="BodyHeader">
         <h2 class="BodyHeader-nav"><?= t('server.user.tree') ?></h2>
     </div>
-    <div class="BoxBody">
-        <? $Tree->make_tree(); ?>
-    </div>
+    <? $Tree->make_tree(); ?>
 </div>
 <? View::show_footer(); ?>

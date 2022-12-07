@@ -186,7 +186,7 @@ View::show_header(t('server.user.invites'), '', 'PageUserInvite');
                     </div>
                 <?  } ?>
                 <div class="Form-row">
-                    <input class="Button" type="submit" value="Invite" />
+                    <button class="Button" type="submit" value="Invite"><?= t('server.common.submit') ?></button>
                 </div>
             </div>
         </form>
@@ -202,7 +202,7 @@ View::show_header(t('server.user.invites'), '', 'PageUserInvite');
     <? if (!empty($Pending)) { ?>
         <div class="Group">
             <div class="Group-header">
-                <div class="Box-headerTitle" id="pending_invites_header"><?= t('server.user.pending_invites') ?></div>
+                <div class="Group-headerTitle" id="pending_invites_header"><?= t('server.user.pending_invites') ?></div>
             </div>
             <div class="Group-body" id="pending_invites_container">
                 <table class="TableInvite Table">

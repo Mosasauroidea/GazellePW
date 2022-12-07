@@ -24,7 +24,7 @@ class INVITE_TREE {
 
         $UserID = $this->UserID;
 ?>
-        <div class="invitetree pad">
+        <div class="invitetree BoxBody">
             <?
             G::$DB->query("
 			SELECT TreePosition, TreeID, TreeLevel
@@ -113,11 +113,14 @@ class INVITE_TREE {
                 if ($Donor) {
                     $DonorCount++;
                 }
-
                 // Manage tree depth
                 if ($TreeLevel > $PreviousTreeLevel) {
                     for ($i = 0; $i < $TreeLevel - $PreviousTreeLevel; $i++) {
-                        echo "\n\n<ul class=\"invitetree\">\n\t<li>\n";
+                        if ($TreeLevel == 2) {
+                            echo "\n\n<ul class=\"MenuList invitetree\">\n\t<li>\n";
+                        } else {
+                            echo "\n\n<ul class=\"MenuList SubMenu invitetree\">\n\t<li>\n";
+                        }
                     }
                 } elseif ($TreeLevel < $PreviousTreeLevel) {
                     for ($i = 0; $i < $PreviousTreeLevel - $TreeLevel; $i++) {
@@ -240,8 +243,9 @@ class INVITE_TREE {
                 }
             }
                 ?>
-                <br />
-                <?= $Tree ?>
+        </div>
+        <div class="BoxBody">
+            <?= $Tree ?>
         </div>
 <?
         G::$DB->set_query_id($QueryID);

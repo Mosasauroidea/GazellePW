@@ -1,6 +1,9 @@
 <?
 enforce_login();
 
+if (!check_perms('site_view_full_log')) {
+    error(403);
+}
 View::show_header(t('server.log.site_log'), '', 'PageLogHome');
 
 include(CONFIG['SERVER_ROOT'] . '/sections/log/sphinx.php');

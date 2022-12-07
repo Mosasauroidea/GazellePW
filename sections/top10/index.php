@@ -2,14 +2,7 @@
 enforce_login();
 
 if (!check_perms('site_top10')) {
-    View::show_header('', '', 'PageTop10Index');
-?>
-    <div class="content_basiccontainer">
-        <?= t('server.top10.you_do_not_have_access_to_view_this_feature') ?>
-    </div>
-<?
-    View::show_footer();
-    die();
+    error(403);
 }
 
 include(CONFIG['SERVER_ROOT'] . '/sections/torrents/functions.php'); //Has get_reports($TorrentID);
@@ -43,4 +36,3 @@ if (empty($_GET['type']) || $_GET['type'] == 'movies') {
             break;
     }
 }
-?>

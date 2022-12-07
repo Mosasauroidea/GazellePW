@@ -348,9 +348,6 @@ list($ThumbCount) = $DB->next_record();
         <? if (check_perms('admin_reports')) { ?>
             <a href="reportsv2.php?view=reporter&amp;id=<?= $UserID ?>"><?= t('server.user.reporter') ?></a>
         <? } ?>
-        <? if (check_perms('users_mod')) { ?>
-            <a href="userhistory.php?action=token_history&amp;userid=<?= $UserID ?>"><?= t('server.user.token_history') ?></a>
-        <? } ?>
         <? if (check_perms('admin_clear_cache') && check_perms('users_override_paranoia')) { ?>
             <a href="user.php?action=clearcache&amp;id=<?= $UserID ?>"><?= t('server.user.clearcache') ?></a>
         <? } ?>
@@ -503,7 +500,9 @@ list($ThumbCount) = $DB->next_record();
                             <?= number_format($BonusPoints) ?>
                             <?
                             if (check_perms('admin_bp_history')) {
-                                printf('<a href="bonus.php?action=history&amp;id=%d" >View</a>', $UserID);
+                            ?>
+                                <a href="bonus.php?action=history&id=<?= $UserID ?>"><?= t('server.user.consumed_history') ?></a>
+                            <?
                             }
                             ?>
                         </li>
@@ -539,10 +538,13 @@ list($ThumbCount) = $DB->next_record();
                         $TokensDisplay = $num == 0 ? number_format($FLTokens) : number_format($FLTokens - $num) . '+' . number_format($num);
                         ?>
                         <li class="SidebarList-item is-flTokenCount <?= $OverrideClass ?>" id="fl-token-count-value" data-value="<?= $FLTokens ?>" data-tooltip="<?= $Title ?>">
-                            <a href="userhistory.php?action=token_history&amp;userid=<?= $UserID ?>">
-                                <?= t('server.user.token_number') ?></a>
+                            <?= t('server.user.token_number') ?>
                             <span>: </span>
                             <?= $TokensDisplay ?>
+
+                            <a href="userhistory.php?action=token_history&amp;userid=<?= $UserID ?>">
+                                <?= t('server.user.consumed_history') ?>
+                            </a>
                         </li>
                     <? } ?>
                     <? if (($OwnProfile || check_perms('users_mod')) && $Warned != '0000-00-00 00:00:00') { ?>
@@ -752,26 +754,49 @@ WHERE xs.uid =" . $UserID . " and xs.tstamp >= unix_timestamp(date_format(now(),
                         <?= t('server.user.history') ?></div>
                     <ul class="SidebarList SidebarItem-body Box-body">
                         <? if (check_perms('users_view_email', $Class)) { ?>
-                            <li class="SidebarList-item"><?= t('server.user.emails') ?>: <?= number_format($EmailChanges) ?> <a href="userhistory.php?action=email2&amp;userid=<?= $UserID ?>"><?= t('server.user.view') ?></a><a href="userhistory.php?action=email&amp;userid=<?= $UserID ?>"> <?= t('server.user.legacy_view') ?></a></li>
+                            <li class="SidebarList-item">
+                                <a href="userhistory.php?action=email2&amp;userid=<?= $UserID ?>">
+                                    <?= t('server.user.emails') ?></a>: <?= number_format($EmailChanges) ?>
+                            </li>
                         <?
                         }
                         if (check_perms('users_view_ips', $Class)) {
                         ?>
-                            <li class="SidebarList-item">IPs: <?= number_format($IPChanges) ?> <a href="userhistory.php?action=ips&amp;userid=<?= $UserID ?>"><?= t('server.user.view') ?></a><a href="userhistory.php?action=ips&amp;userid=<?= $UserID ?>&amp;usersonly=1"> <?= t('server.user.view_users') ?></a></li>
+                            <li class="SidebarList-item">
+                                <a href="userhistory.php?action=ips&amp;userid=<?= $UserID ?>">
+                                    IPs
+                                </a>:
+                                <?= number_format($IPChanges) ?>
+                                <a href="userhistory.php?action=ips&amp;userid=<?= $UserID ?>&amp;usersonly=1"> <?= t('server.user.view_users') ?></a>
+                            </li>
                             <? if (check_perms('users_view_ips', $Class) && check_perms('users_mod', $Class)) { ?>
-                                <li class="SidebarList-item">Tracker IPs: <?= number_format($TrackerIPs) ?> <a href="userhistory.php?action=tracker_ips&amp;userid=<?= $UserID ?>"><?= t('server.user.view') ?></a></li>
+                                <li class="SidebarList-item">
+                                    <a href="userhistory.php?action=tracker_ips&amp;userid=<?= $UserID ?>">
+                                        Tracker IPs
+                                    </a>:
+                                    <?= number_format($TrackerIPs) ?>
+                                </li>
                             <?
                             }
                         }
                         if (check_perms('users_view_keys', $Class)) {
                             ?>
-                            <li class="SidebarList-item"><?= t('server.user.passkeys') ?>: <?= number_format($PasskeyChanges) ?> <a href="userhistory.php?action=passkeys&amp;userid=<?= $UserID ?>"><?= t('server.user.view') ?></a></li>
+                            <li class="SidebarList-item">
+                                <a href="userhistory.php?action=passkeys&amp;userid=<?= $UserID ?>">
+                                    <?= t('server.user.passkeys') ?>
+                                </a>:
+                                <?= number_format($PasskeyChanges) ?>
+                            </li>
                         <?
                         }
                         if (check_perms('users_mod', $Class)) {
                         ?>
-                            <li class="SidebarList-item"><?= t('server.user.passwords') ?>: <?= number_format($PasswordChanges) ?> <a href="userhistory.php?action=passwords&amp;userid=<?= $UserID ?>"><?= t('server.user.view') ?></a></li>
-                            <li class="SidebarList-item"><?= t('server.user.stats') ?>: N/A <a href="userhistory.php?action=stats&amp;userid=<?= $UserID ?>"><?= t('server.user.view') ?></a></li>
+                            <li class="SidebarList-item">
+                                <a href="userhistory.php?action=passwords&amp;userid=<?= $UserID ?>">
+                                    <?= t('server.user.passwords') ?>
+                                </a>
+                                : <?= number_format($PasswordChanges) ?>
+                            </li>
                         <?      } ?>
                     </ul>
                 </div>
@@ -870,7 +895,7 @@ WHERE xs.uid =" . $UserID . " and xs.tstamp >= unix_timestamp(date_format(now(),
                         </li>
                     <? } ?>
                     <? if (Applicant::user_is_applicant($UserID) && (check_perms('admin_manage_applicants') || $OwnProfile)) { ?>
-                        <li class="SidebarList-item"><?= t('server.user.p_inviter') ?>: <a href="/apply.php?action=view"><?= t('server.user.view') ?></a></li>
+                        <li class="SidebarList-item"><?= t('server.apply.apply') ?>: <a href="/apply.php?action=view"><?= t('server.user.view') ?></a></li>
                     <? } ?>
                     <?
                     if (!isset($SupportFor)) {
@@ -900,8 +925,7 @@ WHERE xs.uid =" . $UserID . " and xs.tstamp >= unix_timestamp(date_format(now(),
 				LEFT JOIN users_history_passwords uhp ON uhp.UserID = $UserID
 				WHERE ui.UserID = $UserID");
                         list($PasswordHistory, $JoinDate) = G::$DB->next_record();
-                        $Age = (empty($PasswordHistory)) ? time_diff($JoinDate) : time_diff($PasswordHistory);
-                        $PasswordAge = substr($Age, 0, strpos($Age, " ago"));
+                        $PasswordAge = (empty($PasswordHistory)) ? time_diff($JoinDate, 2, false, false, false, true) : time_diff($PasswordHistory, 2, false, false, false, true);
                     ?>
                         <li class="SidebarList-item"><?= t('server.user.p_passwordage') ?>: <?= $PasswordAge ?></li>
                     <? }
@@ -1097,8 +1121,11 @@ WHERE xs.uid =" . $UserID . " and xs.tstamp >= unix_timestamp(date_format(now(),
                     </script>
 
                     <div class="Group-header">
-                        <div class="Group-headerTitle"><a href="/badges.php"><?= t('server.user.badge_center') ?></a></div>
+                        <div class="Group-headerTitle"><?= t('server.user.badge_center') ?></div>
                         <div class="Group-headerActions">
+                            <span>
+                                <a href="badges.php"><?= t('server.common.see_full') ?></a>
+                            </span> -
                             <span><a href="#" onclick="badgesDisplay()"><?= t('server.common.hide') ?></a></span>
                         </div>
                     </div>
@@ -1147,7 +1174,7 @@ WHERE xs.uid =" . $UserID . " and xs.tstamp >= unix_timestamp(date_format(now(),
             <div class="Group">
                 <div class="Group-header">
                     <div class="Group-headerTitle">
-                        <?= t('server.user.infotitle') ?>
+                        <?= t('server.user.simple_info') ?>
                     </div>
                 </div>
                 <div class="Group-body">

@@ -105,7 +105,6 @@ switch ($_GET['feed']) {
         $Feed->channel('Gazelle Change Log', 'RSS feed for Gazelle\'s changelog.');
         if (!$Changelog = $Cache->get_value('changelog')) {
             require(CONFIG['SERVER_ROOT'] . '/classes/mysql.class.php');
-            require(CONFIG['SERVER_ROOT'] . '/classes/misc.class.php');
 
             $DB = new DB_MYSQL;
             $DB->query("

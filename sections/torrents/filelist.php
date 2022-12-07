@@ -59,7 +59,7 @@ function gen_list($FileList, $Root = false) {
 		return;
 	}
 ?>
-	<ul class="TorrentDetailfileList-fileList">
+	<ul class="<?= $Root ? 'MenuList' : 'MenuList SubMenu' ?> TorrentDetailfileList-fileList">
 		<? foreach ($FileList as $Name => $File) {
 		?>
 			<li class="TorrentDetailfileListItem-fileListItem" variant="<?= $Root ? 'root' : '' ?>">

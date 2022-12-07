@@ -28,8 +28,8 @@ $Owner = display_str($Owner);
         <h2 class="BodyHeader-nav"><?= t('server.reportsv2.reports_v2_information') ?></h2>
         <? include('header.php'); ?>
     </div>
-    <div class="thin float_clear">
-        <div class="two_gigcolumns pad">
+    <div class="Permissions">
+        <div class="permission_container">
             <?
             $DB->query("
 	SELECT
@@ -43,30 +43,36 @@ $Owner = display_str($Owner);
 	ORDER BY Reports DESC");
             $Results = $DB->to_array();
             ?>
-            <h3><?= t('server.reportsv2.time_d') ?></h3>
-            <div>
-                <table class="Table">
-                    <tr class="Table-rowHeader">
-                        <td class="Table-cell"><?= t('server.reportsv2.username') ?></td>
-                        <td class="Table-cell Table-cellRight"><?= t('server.reportsv2.reports') ?></td>
-                    </tr>
-                    <?
-                    foreach ($Results as $Result) {
-                        list($UserID, $Username, $Reports) = $Result;
-                        if ($Username == $LoggedUser['Username']) {
-                            $RowClass = ' class="rowa"';
-                        } else {
-                            $RowClass = '';
-                        }
-                    ?>
-                        <tr class="Table-row">
-                            <td class="Table-cell"><a href="reportsv2.php?view=resolver&amp;id=<?= $UserID ?>"><?= $Username ?></a></td>
-                            <td class="Table-cell Table-cellRight"><?= number_format($Reports) ?></td>
+            <div class="Group">
+                <div class="Group-header">
+                    <div class="Group-headerTitle">
+                        <?= t('server.reportsv2.time_d') ?>
+                    </div>
+                </div>
+                <div class="Group-body">
+                    <table class="Table">
+                        <tr class="Table-rowHeader">
+                            <td class="Table-cell"><?= t('server.reportsv2.username') ?></td>
+                            <td class="Table-cell Table-cellRight"><?= t('server.reportsv2.reports') ?></td>
                         </tr>
-                    <?
-                    }
-                    ?>
-                </table>
+                        <?
+                        foreach ($Results as $Result) {
+                            list($UserID, $Username, $Reports) = $Result;
+                            if ($Username == $LoggedUser['Username']) {
+                                $RowClass = ' class="rowa"';
+                            } else {
+                                $RowClass = '';
+                            }
+                        ?>
+                            <tr class="Table-row">
+                                <td class="Table-cell"><a href="reportsv2.php?view=resolver&amp;id=<?= $UserID ?>"><?= $Username ?></a></td>
+                                <td class="Table-cell Table-cellRight"><?= number_format($Reports) ?></td>
+                            </tr>
+                        <?
+                        }
+                        ?>
+                    </table>
+                </div>
             </div>
             <?
             $DB->query("
@@ -81,31 +87,40 @@ $Owner = display_str($Owner);
 	ORDER BY Reports DESC");
             $Results = $DB->to_array();
             ?>
-            <h3><?= t('server.reportsv2.time_w') ?></h3>
-            <div>
-                <table class="Table">
-                    <tr class="Table-rowHeader">
-                        <td class="Table-cell"><?= t('server.reportsv2.username') ?></td>
-                        <td class="Table-cell Table-cellRight"><?= t('server.reportsv2.reports') ?></td>
-                    </tr>
-                    <?
-                    foreach ($Results as $Result) {
-                        list($UserID, $Username, $Reports) = $Result;
-                        if ($Username == $LoggedUser['Username']) {
-                            $RowClass = ' class="rowa"';
-                        } else {
-                            $RowClass = '';
-                        }
-                    ?>
-                        <tr class="Table-row">
-                            <td class="Table-cell"><a href="reportsv2.php?view=resolver&amp;id=<?= $UserID ?>"><?= $Username ?></a></td>
-                            <td class="Table-cell Table-cellRight"><?= number_format($Reports) ?></td>
+            <div class="Group">
+                <div class="Group-header">
+                    <div class="Group-headerTitle">
+                        <?= t('server.reportsv2.time_w') ?>
+                    </div>
+                </div>
+                <div class="Group-body">
+                    <table class="Table">
+                        <tr class="Table-rowHeader">
+                            <td class="Table-cell"><?= t('server.reportsv2.username') ?></td>
+                            <td class="Table-cell Table-cellRight"><?= t('server.reportsv2.reports') ?></td>
                         </tr>
-                    <?
-                    }
-                    ?>
-                </table>
+                        <?
+                        foreach ($Results as $Result) {
+                            list($UserID, $Username, $Reports) = $Result;
+                            if ($Username == $LoggedUser['Username']) {
+                                $RowClass = ' class="rowa"';
+                            } else {
+                                $RowClass = '';
+                            }
+                        ?>
+                            <tr class="Table-row">
+                                <td class="Table-cell"><a href="reportsv2.php?view=resolver&amp;id=<?= $UserID ?>"><?= $Username ?></a></td>
+                                <td class="Table-cell Table-cellRight"><?= number_format($Reports) ?></td>
+                            </tr>
+                        <?
+                        }
+                        ?>
+                    </table>
+                </div>
             </div>
+
+        </div>
+        <div class="permission_container">
             <?
             $DB->query("
 	SELECT
@@ -119,32 +134,39 @@ $Owner = display_str($Owner);
 	ORDER BY Reports DESC");
             $Results = $DB->to_array();
             ?>
-            <h3><?= t('server.reportsv2.time_m') ?></h3>
-            <div>
-                <table class="Table">
-                    <tr class="Table-rowHeader">
-                        <td class="Table-cell"><?= t('server.reportsv2.username') ?></td>
-                        <td class="Table-cell Table-cellRight"><?= t('server.reportsv2.reports') ?></td>
-                    </tr>
-                    <?
-                    foreach ($Results as $Result) {
-                        list($UserID, $Username, $Reports) = $Result;
-                        if ($Username == $LoggedUser['Username']) {
-                            $RowClass = ' class="rowa"';
-                        } else {
-                            $RowClass = '';
-                        }
-                    ?>
-                        <tr class="Table-row">
-                            <td class="Table-cell"><a href="reportsv2.php?view=resolver&amp;id=<?= $UserID ?>"><?= $Username ?></a></td>
-                            <td class="Table-cell Table-cellRight"><?= number_format($Reports) ?></td>
+            <div class="Group">
+                <div class="Group-header">
+                    <div class="Group-headerTitle">
+                        <?= t('server.reportsv2.time_m') ?>
+                    </div>
+                </div>
+                <div class="Group-body">
+                    <table class="Table">
+                        <tr class="Table-rowHeader">
+                            <td class="Table-cell"><?= t('server.reportsv2.username') ?></td>
+                            <td class="Table-cell Table-cellRight"><?= t('server.reportsv2.reports') ?></td>
                         </tr>
-                    <?
-                    }
-                    ?>
-                </table>
+                        <?
+                        foreach ($Results as $Result) {
+                            list($UserID, $Username, $Reports) = $Result;
+                            if ($Username == $LoggedUser['Username']) {
+                                $RowClass = ' class="rowa"';
+                            } else {
+                                $RowClass = '';
+                            }
+                        ?>
+                            <tr class="Table-row">
+                                <td class="Table-cell"><a href="reportsv2.php?view=resolver&amp;id=<?= $UserID ?>"><?= $Username ?></a></td>
+                                <td class="Table-cell Table-cellRight"><?= number_format($Reports) ?></td>
+                            </tr>
+                        <?
+                        }
+                        ?>
+                    </table>
+                </div>
             </div>
             <?
+
             $DB->query("
 	SELECT
 		um.ID,
@@ -156,33 +178,39 @@ $Owner = display_str($Owner);
 	ORDER BY Reports DESC");
             $Results = $DB->to_array();
             ?>
-            <h3><?= t('server.reportsv2.time_a') ?></h3>
-            <div>
-                <table class="Table">
-                    <tr class="Table-rowHeader">
-                        <td class="Table-cell"><?= t('server.reportsv2.username') ?></td>
-                        <td class="Table-cell Table-cellRight"><?= t('server.reportsv2.reports') ?></td>
-                    </tr>
-                    <?
-                    foreach ($Results as $Result) {
-                        list($UserID, $Username, $Reports) = $Result;
-                        if ($Username == $LoggedUser['Username']) {
-                            $RowClass = ' class="rowa"';
-                        } else {
-                            $RowClass = '';
-                        }
-                    ?>
-                        <tr class="Table-row">
-                            <td class="Table-cell"><a href="reportsv2.php?view=resolver&amp;id=<?= $UserID ?>"><?= $Username ?></a></td>
-                            <td class="Table-cell Table-cellRight"><?= number_format($Reports) ?></td>
+            <div class="Group">
+                <div class="Group-header">
+                    <div class="Group-headerTitle">
+                        <?= t('server.reportsv2.time_a') ?>
+                    </div>
+                </div>
+                <div class="Group-body">
+                    <table class="Table">
+                        <tr class="Table-rowHeader">
+                            <td class="Table-cell"><?= t('server.reportsv2.username') ?></td>
+                            <td class="Table-cell Table-cellRight"><?= t('server.reportsv2.reports') ?></td>
                         </tr>
-                    <?
-                    }
-                    ?>
-                </table>
+                        <?
+                        foreach ($Results as $Result) {
+                            list($UserID, $Username, $Reports) = $Result;
+                            if ($Username == $LoggedUser['Username']) {
+                                $RowClass = ' class="rowa"';
+                            } else {
+                                $RowClass = '';
+                            }
+                        ?>
+                            <tr class="Table-row">
+                                <td class="Table-cell"><a href="reportsv2.php?view=resolver&amp;id=<?= $UserID ?>"><?= $Username ?></a></td>
+                                <td class="Table-cell Table-cellRight"><?= number_format($Reports) ?></td>
+                            </tr>
+                        <?
+                        }
+                        ?>
+                    </table>
+                </div>
             </div>
         </div>
-        <div class="two_columns pad">
+        <div class="permission_container">
             <?
             $DB->query("
 		SELECT
@@ -196,72 +224,84 @@ $Owner = display_str($Owner);
 
             $Staff = $DB->to_array();
             ?>
-            <h3><?= t('server.reportsv2.currently_assigned_reports_by_staff_member') ?></h3>
-            <div>
-                <table class="Table">
-                    <tr class="Table-rowHeader">
-                        <td class="Table-cell"><?= t('server.reportsv2.staff_member') ?></td>
-                        <td class="Table-cell Table-cellRight"><?= t('server.reportsv2.current_count') ?></td>
-                    </tr>
-                    <?
-                    foreach ($Staff as $Array) {
-                        if ($Array['Username'] == $LoggedUser['Username']) {
-                            $RowClass = ' class="rowa"';
-                        } else {
-                            $RowClass = '';
-                        }
-                    ?>
-                        <tr class="Table-row">
-                            <td class="Table-cell">
-                                <a href="reportsv2.php?view=staff&amp;id=<?= $Array['ResolverID'] ?>"><?= display_str($Array['Username']) ?><?= t('server.reportsv2.s_reports') ?></a>
-                            </td>
-                            <td class="Table-cell Table-cellRight"><?= number_format($Array['Count']) ?></td>
+            <div class="Group">
+                <div class="Group-header">
+                    <div class="Group-headerTitle">
+                        <?= t('server.reportsv2.currently_assigned_reports_by_staff_member') ?>
+                    </div>
+                </div>
+                <div class="Group-body">
+                    <table class="Table">
+                        <tr class="Table-rowHeader">
+                            <td class="Table-cell"><?= t('server.reportsv2.staff_member') ?></td>
+                            <td class="Table-cell Table-cellRight"><?= t('server.reportsv2.current_count') ?></td>
                         </tr>
-                    <?  } ?>
-                </table>
+                        <?
+                        foreach ($Staff as $Array) {
+                            if ($Array['Username'] == $LoggedUser['Username']) {
+                                $RowClass = ' class="rowa"';
+                            } else {
+                                $RowClass = '';
+                            }
+                        ?>
+                            <tr class="Table-row">
+                                <td class="Table-cell">
+                                    <a href="reportsv2.php?view=staff&amp;id=<?= $Array['ResolverID'] ?>"><?= display_str($Array['Username']) ?><?= t('server.reportsv2.s_reports') ?></a>
+                                </td>
+                                <td class="Table-cell Table-cellRight"><?= number_format($Array['Count']) ?></td>
+                            </tr>
+                        <?  } ?>
+                    </table>
+                </div>
             </div>
-            <h3><?= t('server.reportsv2.different_view_modes_by_report_type') ?></h3>
-            <?
-            $DB->query("
+            <div class="Group">
+                <div class="Group-header">
+                    <div class="Group-headerTitle">
+                        <?= t('server.reportsv2.different_view_modes_by_report_type') ?>
+                    </div>
+                </div>
+                <div class="Group-body">
+                    <?
+                    $DB->query("
 		SELECT
 			Type,
 			COUNT(ID) AS Count
 		FROM reportsv2
 		WHERE Status = 'New'
 		GROUP BY Type");
-            $Current = $DB->to_array();
-            if (!empty($Current)) {
-            ?>
-                <div>
-                    <table class="Table">
-                        <tr class="Table-rowHeader">
-                            <td class="Table-cell"><?= t('server.reportsv2.type') ?></td>
-                            <td class="Table-cell Table-cellRight"><?= t('server.reportsv2.current_count') ?></td>
-                        </tr>
-                        <?
-                        foreach ($Current as $Array) {
-                            //Ugliness
-                            foreach ($Types as $Category) {
-                                if (!empty($Category[$Array['Type']])) {
-                                    $Title = $Category[$Array['Type']]['title'];
-                                    break;
-                                }
-                            }
-                        ?>
-                            <tr class="Table-row" <?= $Title === 'Urgent' ? ' style="font-weight: bold;"' : '' ?>>
-                                <td class="Table-cell">
-                                    <a href="reportsv2.php?view=type&amp;id=<?= display_str($Array['Type']) ?>"><?= display_str($Title) ?></a>
-                                </td>
-                                <td class="Table-cell Table-cellRight">
-                                    <?= number_format($Array['Count']) ?>
-                                </td>
-                            </tr>
-                    <?
-                        }
-                    }
+                    $Current = $DB->to_array();
+                    if (!empty($Current)) {
                     ?>
-                    </table>
+                        <table class="Table">
+                            <tr class="Table-rowHeader">
+                                <td class="Table-cell"><?= t('server.reportsv2.type') ?></td>
+                                <td class="Table-cell Table-cellRight"><?= t('server.reportsv2.current_count') ?></td>
+                            </tr>
+                            <?
+                            foreach ($Current as $Array) {
+                                //Ugliness
+                                foreach ($Types as $Category) {
+                                    if (!empty($Category[$Array['Type']])) {
+                                        $Title = $Category[$Array['Type']]['title'];
+                                        break;
+                                    }
+                                }
+                            ?>
+                                <tr class="Table-row" <?= $Title === 'Urgent' ? ' style="font-weight: bold;"' : '' ?>>
+                                    <td class="Table-cell">
+                                        <a href="reportsv2.php?view=type&amp;id=<?= display_str($Array['Type']) ?>"><?= display_str($Title) ?></a>
+                                    </td>
+                                    <td class="Table-cell Table-cellRight">
+                                        <?= number_format($Array['Count']) ?>
+                                    </td>
+                                </tr>
+                        <?
+                            }
+                        }
+                        ?>
+                        </table>
                 </div>
+            </div>
         </div>
     </div>
 </div>

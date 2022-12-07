@@ -4,7 +4,7 @@ if (!check_perms('admin_manage_ipbans')) {
     error(403);
 }
 if (isset($_GET['perform'])) {
-    $IPv4Man = new \Gazelle\Manager\IPv4;
+    $IPv4Man = new \Gazelle\Manager\IP;
     if ($_GET['perform'] == 'delete') {
         $IPv4Man->removeBan((int)$_GET['id']);
     } elseif ($_GET['perform'] == 'create') {

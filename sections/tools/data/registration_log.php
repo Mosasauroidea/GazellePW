@@ -143,11 +143,11 @@ $Pages = Format::get_pages($Page, $Results, USERS_PER_PAGE, 11);
                     <td class="Table-cell">
                         <span><?= display_str($IP) ?></span>
                         (<span><?= display_str($Uses) ?></span>)
-                        <span style="float:right"><a href="userhistory.php?action=ips&amp;userid=<?= $UserID ?>" data-tooltip="<?= t('server.tools.history') ?>" class="brackets">H</a> <a href="/user.php?action=search&amp;ip_history=on&amp;ip=<?= display_str($IP) ?>" data-tooltip="<?= t('server.common.search') ?>" class="brackets">S</a> <a href="http://whatismyipaddress.com/ip/<?= display_str($IP) ?>" data-tooltip="<?= t('server.tools.wi') ?>" class="brackets">WI</a></span><br />
+                        <span style="float:right"><a href="userhistory.php?action=ips&amp;userid=<?= $UserID ?>" data-tooltip="<?= t('server.tools.history') ?>" class="brackets">H</a> <a href="/user.php?action=search&amp;ip_history=on&amp;ip=<?= display_str($IP) ?>" data-tooltip="<?= t('server.common.search') ?>" class="brackets">S</a> <a href="http://whatismyipaddress.com/ip/<?= display_str($IP) ?>" data-tooltip="<?= t('server.tools.wi') ?>" class="brackets" target="_blank">WI</a></span><br />
                         <span><?= display_str($InviterIP) ?></span>
                         <? if ($InviterIP) { ?>
                             (<span> <?= display_str($InviterUses) ?></span>)
-                            <span style="float:right"> <a href="userhistory.php?action=ips&amp;userid=<?= $InviterID ?>" data-tooltip="<?= t('server.tools.history') ?>" class="brackets">H</a> <a href="/user.php?action=search&amp;ip_history=on&amp;ip=<?= display_str($InviterIP) ?>" data-tooltip="<?= t('server.common.search') ?>" class="brackets">S</a> <a href="http://whatismyipaddress.com/ip/<?= display_str($InviterIP) ?>" data-tooltip="<?= t('server.tools.wi') ?>" class="brackets">WI</a></span><br />
+                            <span style="float:right"> <a href="userhistory.php?action=ips&amp;userid=<?= $InviterID ?>" data-tooltip="<?= t('server.tools.history') ?>" class="brackets">H</a> <a href="/user.php?action=search&amp;ip_history=on&amp;ip=<?= display_str($InviterIP) ?>" data-tooltip="<?= t('server.common.search') ?>" class="brackets">S</a> <a href="http://whatismyipaddress.com/ip/<?= display_str($InviterIP) ?>" data-tooltip="<?= t('server.tools.wi') ?>" class="brackets" target="_blank">WI</a></span><br />
                         <? } ?>
                     </td>
                     <td class="Table-cell">

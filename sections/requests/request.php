@@ -91,7 +91,7 @@ View::show_header(t('server.requests.view_request') . ": $FullName", 'comments,b
                 <a href="reports.php?action=report&amp;type=request_update&amp;id=<?= $RequestID ?>" class="brackets"><?= t('server.requests.request_update') ?></a>
             <? } ?>
             <?
-            $google_url  = "https://www.blu-ray.com/search/?quicksearch=1&quicksearch_country=all&section=bluraymovies&quicksearch_keyword=" . $Request['Name'];
+            $google_url  = "https://www.blu-ray.com/search/?quicksearch=1&quicksearch_country=all&section=bluraymovies&quicksearch_keyword=" . display_str($Request['Name']);
             ?>
             <a target="_blank" href="<? echo $google_url; ?>" class="brackets"><?= t('server.requests.find_in_stores') ?></a>
         </div>

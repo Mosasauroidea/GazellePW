@@ -45,7 +45,7 @@ $DB->set_query_id($QueryID);
     <div class="BodyHeader">
         <h2 class="BodyHeader-nav">
             <?= t('server.userhistory.threads_started_by', ['Values' => [
-                "<a href='user.php?id=${UserID}'>${Username}</a>"
+                Users::format_username($UserID)
             ]]) ?>
         </h2>
     </div>

@@ -247,7 +247,7 @@ if ((empty($_GET['search']) || trim($_GET['search']) === '') && $Order != 'Name'
 			Snatched int(10) unsigned,
 			Name mediumtext,
 			Size bigint(12) unsigned,
-		PRIMARY KEY (TorrentID)) CHARSET=utf8");
+		PRIMARY KEY (TorrentID)) CHARSET=utf8mb4");
     $DB->query("
 		INSERT IGNORE INTO temp_sections_torrents_user
 			SELECT

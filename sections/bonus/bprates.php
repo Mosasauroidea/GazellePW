@@ -64,7 +64,42 @@ $TotalMonthlyPoints = $TotalDailyPoints * 30.436875;
 $TotalYearlyPoints = $TotalDailyPoints * 365.2425;
 
 $Pages = Format::get_pages($Page, $TotalTorrents, CONFIG['TORRENTS_PER_PAGE']);
+if ($TotalTorrents > 0) {
+    $DB->prepared_query("
+	SELECT
+		t.ID,
+		t.GroupID,
+		t.Size,
+		t.Size / (1024 * 1024 * 1024) as CorrectSize,
+		t.Codec,
+		t.Source,
+		t.Processing,
+        t.Container,
+        t.Resolution,
+		t.Scene,
+		t.RemasterYear,
+		t.RemasterTitle,
+        t.Slot,
+		GREATEST(t.Seeders, 1) AS Seeders,
+		xfh.seedtime AS Seedtime,
+		(t.Size / (1024 * 1024 * 1024) * 1 *(
+			0.025 + (
+				(0.06 * LN(1 + (xfh.seedtime / (24)))) / (POW(GREATEST(t.Seeders, 1), 0.6))
+			)
+		)) AS HourlyPoints
+	FROM
+		(SELECT DISTINCT uid,fid FROM xbt_files_users WHERE active=1 AND remaining=0 AND mtime > unix_timestamp(NOW() - INTERVAL 1 HOUR) AND uid = ?) AS xfu
+		JOIN xbt_files_history AS xfh ON xfh.uid = xfu.uid AND xfh.fid = xfu.fid
+		JOIN torrents AS t ON t.ID = xfu.fid
+	WHERE
+		xfu.uid = ?
+	$OrderBy
+	LIMIT ?
+	OFFSET ?", $UserID, $UserID, $Limit, $Offset);
 
+    $GroupIDs = $DB->collect('GroupID');
+    $Groups = Torrents::get_groups($GroupIDs, true, true, false);
+}
 ?>
 <div class=LayoutBody>
     <div class="BodyHeader">
@@ -134,59 +169,26 @@ $Pages = Format::get_pages($Page, $TotalTorrents, CONFIG['TORRENTS_PER_PAGE']);
     <?
     $LinkTail = "&order_way=" . ($OrderWay == "asc" ? "desc" : "asc") . ($Page != 1 ? "&page=$Page" : "");
     ?>
-    <div class="TableContainer">
-        <table class="TableBonusRateDetail Table">
-            <thead>
-                <tr class="Table-rowHeader">
-                    <td class="Table-cell"><?= t('server.common.torrent') ?></td>
-                    <td class="Table-cell"><a href="bonus.php?action=bprates&order_by=size<?= $LinkTail ?><?= $UserID == $LoggedUser['ID'] ? "" : "&userid=$UserID" ?>"><?= t('server.common.size') ?></a></td>
-                    <td class="Table-cell"><a href="bonus.php?action=bprates&order_by=seeders<?= $LinkTail ?><?= $UserID == $LoggedUser['ID'] ? "" : "&userid=$UserID" ?>"><?= t('server.common.seeders') ?></a></td>
-                    <td class="Table-cell"><a href="bonus.php?action=bprates&order_by=seedtime<?= $LinkTail ?><?= $UserID == $LoggedUser['ID'] ? "" : "&userid=$UserID" ?>"><?= t('server.bonus.seedtime') ?></a></td>
-                    <td class="Table-cell"><a href="bonus.php?action=bprates&order_by=hourlypoints<?= $LinkTail ?><?= $UserID == $LoggedUser['ID'] ? "" : "&userid=$UserID" ?>"><?= t('server.bonus.bp_hour') ?></a></td>
-                    <td class="Table-cell"><?= t('server.bonus.bp_day') ?></td>
-                    <td class="Table-cell"><?= t('server.bonus.bp_week') ?></td>
-                    <td class="Table-cell"><?= t('server.bonus.bp_month') ?></td>
-                    <td class="Table-cell"><?= t('server.bonus.bp_year') ?></td>
-                </tr>
-            </thead>
-            <tbody>
-                <?php
-
-                if ($TotalTorrents > 0) {
-                    $DB->prepared_query("
-	SELECT
-		t.ID,
-		t.GroupID,
-		t.Size,
-		t.Size / (1024 * 1024 * 1024) as CorrectSize,
-		t.Codec,
-		t.Source,
-		t.Processing,
-        t.Container,
-        t.Resolution,
-		t.Scene,
-		t.RemasterYear,
-		t.RemasterTitle,
-        t.Slot,
-		GREATEST(t.Seeders, 1) AS Seeders,
-		xfh.seedtime AS Seedtime,
-		(t.Size / (1024 * 1024 * 1024) * 1 *(
-			0.025 + (
-				(0.06 * LN(1 + (xfh.seedtime / (24)))) / (POW(GREATEST(t.Seeders, 1), 0.6))
-			)
-		)) AS HourlyPoints
-	FROM
-		(SELECT DISTINCT uid,fid FROM xbt_files_users WHERE active=1 AND remaining=0 AND mtime > unix_timestamp(NOW() - INTERVAL 1 HOUR) AND uid = ?) AS xfu
-		JOIN xbt_files_history AS xfh ON xfh.uid = xfu.uid AND xfh.fid = xfu.fid
-		JOIN torrents AS t ON t.ID = xfu.fid
-	WHERE
-		xfu.uid = ?
-	$OrderBy
-	LIMIT ?
-	OFFSET ?", $UserID, $UserID, $Limit, $Offset);
-
-                    $GroupIDs = $DB->collect('GroupID');
-                    $Groups = Torrents::get_groups($GroupIDs, true, true, false);
+    <?
+    if ($TotalTorrents > 0) {
+    ?>
+        <div class="TableContainer">
+            <table class="TableBonusRateDetail Table">
+                <thead>
+                    <tr class="Table-rowHeader">
+                        <td class="Table-cell"><?= t('server.common.torrent') ?></td>
+                        <td class="Table-cell"><a href="bonus.php?action=bprates&order_by=size<?= $LinkTail ?><?= $UserID == $LoggedUser['ID'] ? "" : "&userid=$UserID" ?>"><?= t('server.common.size') ?></a></td>
+                        <td class="Table-cell"><a href="bonus.php?action=bprates&order_by=seeders<?= $LinkTail ?><?= $UserID == $LoggedUser['ID'] ? "" : "&userid=$UserID" ?>"><?= t('server.common.seeders') ?></a></td>
+                        <td class="Table-cell"><a href="bonus.php?action=bprates&order_by=seedtime<?= $LinkTail ?><?= $UserID == $LoggedUser['ID'] ? "" : "&userid=$UserID" ?>"><?= t('server.bonus.seedtime') ?></a></td>
+                        <td class="Table-cell"><a href="bonus.php?action=bprates&order_by=hourlypoints<?= $LinkTail ?><?= $UserID == $LoggedUser['ID'] ? "" : "&userid=$UserID" ?>"><?= t('server.bonus.bp_hour') ?></a></td>
+                        <td class="Table-cell"><?= t('server.bonus.bp_day') ?></td>
+                        <td class="Table-cell"><?= t('server.bonus.bp_week') ?></td>
+                        <td class="Table-cell"><?= t('server.bonus.bp_month') ?></td>
+                        <td class="Table-cell"><?= t('server.bonus.bp_year') ?></td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?
                     while ($Torrent = $DB->next_record(MYSQLI_ASSOC)) {
                         $Size = intval($Torrent['Size']);
                         $CorrectSize = $Torrent['CorrectSize'];
@@ -201,7 +203,7 @@ $Pages = Format::get_pages($Page, $TotalTorrents, CONFIG['TORRENTS_PER_PAGE']);
                             'SettingTorrentTitle' => G::$LoggedUser['SettingTorrentTitle'],
                         ]);
                         $DisplayName = '<a href="torrents.php?id=' . $GroupID . '&amp;torrentid=' . $Torrent['ID'] . '"  data-tooltip="' . t('server.common.view_torrent') . '" dir="ltr">' . $Name . '</a>';
-                ?>
+                    ?>
                         <tr class="Table-row">
                             <td class="Table-cell"><?= $DisplayName ?></td>
                             <td class="Table-cell"><?= Format::get_size($Torrent['Size']) ?></td>
@@ -213,22 +215,12 @@ $Pages = Format::get_pages($Page, $TotalTorrents, CONFIG['TORRENTS_PER_PAGE']);
                             <td class="Table-cell"><?= number_format($MonthlyPoints) ?></td>
                             <td class="Table-cell"><?= number_format($YearlyPoints) ?></td>
                         </tr>
-                    <?php
-                    }
-                } else {
-                    ?>
-                    <tr class="Table-row">
-                        <td colspan="10" style="text-align:center;"><?= t('server.bonus.no_torrent_seeded_currently') ?></td>
-                    </tr>
-                <?php
-                }
-                ?>
-
-            </tbody>
-        </table>
-    </div>
+                    <? } ?>
+                </tbody>
+            </table>
+        </div>
+    <? } ?>
 </div>
-<?php
-
+<?
 View::show_footer();
 ?>

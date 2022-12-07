@@ -175,47 +175,59 @@ $Pages = Format::get_pages($Page, $NumResults, IPS_PER_PAGE, 9);
     <div class="BodyHeader">
         <h2 class="BodyHeader-nav">
             <?= t('server.userhistory.ip_address_history_for', ['Values' => [
-                "<a href='user.php?id=${UserID}'>${UserInfo['Username']}</a>"
+                Users::format_username($UserID)
             ]]) ?>
         </h2>
-        <div class="BodyNavLinks">
-            <?
-            if ($UsersOnly) { ?>
-                <a href="userhistory.php?<?= Format::get_url(array('usersonly')) ?>" class="brackets"><?= t('server.userhistory.view_all_ip_address') ?></a>
-            <?  } else { ?>
-                <a href="userhistory.php?<?= Format::get_url() ?>&amp;usersonly=1" class="brackets"><?= t('server.userhistory.view_ip_addresses_with_users') ?></a>
-            <?  } ?>
-        </div>
-        <?
-        if ($Pages) { ?>
-            <div class="BodyNavLinks pager"><?= $Pages ?></div>
-        <?  } ?>
     </div>
-    <table class="Table">
-        <tr class="Table-rowHeader">
-            <td class="Table-cell"><?= t('server.userhistory.ip_address_search') ?></td>
-        </tr>
-        <tr class="Table-row">
-            <td class="Table-cell">
-                <form class="Form SearchIP" name="ip_log" method="get" action="">
-                    <input type="hidden" name="action" value="<?= $_GET['action'] ?>" />
-                    <input type="hidden" name="userid" value="<?= $UserID ?>" />
-                    <? if ($UsersOnly) { ?>
-                        <input type="hidden" name="usersonly" value="1" />
-                    <?  } ?>
-                    <input class="Input" type="text" name="ip" value="<?= Format::form('ip') ?>" />
-                    <input class="Button" type="submit" value="Search" />
-                    <?= t('server.userhistory.wildcard_search_examples') ?>
-                </form>
-            </td>
-        </tr>
-    </table>
+    <form class="Box Form SearchPage SearchIP" name="ip_log" method="get" action="">
+        <input type="hidden" name="action" value="<?= $_GET['action'] ?>" />
+        <input type="hidden" name="userid" value="<?= $UserID ?>" />
+        <? if ($UsersOnly) { ?>
+            <input type="hidden" name="usersonly" value="1" />
+        <?  } ?>
+        <div class="SearchPageHeader">
+            <div class="SearchPageHeader-title">
+                <?
+                if ($UsersOnly) { ?>
+                    <a href="userhistory.php?<?= Format::get_url(array('usersonly')) ?>" class="brackets"><?= t('server.userhistory.view_all_ip_address') ?></a>
+                    / <?= t('server.userhistory.view_ip_addresses_with_users') ?>
+                <?  } else { ?>
+                    <?= t('server.userhistory.view_all_ip_address') ?>
+                    / <a href="userhistory.php?<?= Format::get_url() ?>&amp;usersonly=1" class="brackets"><?= t('server.userhistory.view_ip_addresses_with_users') ?></a>
+                <?  } ?>
 
+            </div>
+            <div class="SearchPageHeader-actions">
+            </div>
+
+        </div>
+        <div class="SearchPageBody">
+            <table class="Form-rowList">
+                <tr class="Form-row">
+                    <td class="Form-label">
+                        <?= t('server.torrents.search_for') ?>
+                    </td>
+                    <td class="Form-inputs">
+                        <input placeholder="<?= t('server.userhistory.wildcard_search_examples') ?>" class="Input" type="text" name="ip" value="<?= Format::form('ip') ?>" />
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div class="SearchPageFooter">
+            <div class="SearchPageFooter-actions">
+                <input class="Button" type="submit" value="<?= t('server.common.search') ?>" />
+            </div>
+        </div>
+    </form>
+    <?
+    if ($Pages) { ?>
+        <div class="BodyNavLinks pager"><?= $Pages ?></div>
+    <?  } ?>
     <div class="TableContainer">
-        <table class="TableUserIPHistory Table">
+        <table class="TableUserIPHistory Table" id="iphistory">
             <tr class="Table-rowHeader">
-                <td class="Table-cell"><?= t('server.userhistory.ip_address') ?></td>
-                <td class="Table-cell"><?= t('server.userhistory.started') ?> <a href="#" onclick="$('#iphistory .reltime').gtoggle(); $('#iphistory .abstime').gtoggle(); return false;" class="brackets"><?= t('server.common.toggle') ?></a></td>
+                <td class="Table-cell"><?= t('server.userhistory.ip_address') ?> <a href="#" onclick="$('#iphistory .reltime').gtoggle(); $('#iphistory .abstime').gtoggle(); return false;" class="brackets"><?= t('server.common.time_format') ?></a></td>
+                <td class="Table-cell"><?= t('server.userhistory.started') ?> </td>
                 <td class="Table-cell"><?= t('server.userhistory.ended') ?></td>
                 <td class="Table-cell hidden"><?= t('server.userhistory.ended') ?></td>
                 <td class="Table-cell"><?= t('server.userhistory.elapsed') ?></td>
@@ -297,7 +309,7 @@ $Pages = Format::get_pages($Page, $NumResults, IPS_PER_PAGE, 9);
                             $OtherUser['EndTime'] = sqltime();
                         }
                 ?>
-                        <tr class="Table-row otherusers<?= $Index ?><?= ($HideMe ? ' hidden' : '') ?>">
+                        <tr class="Table-row hidden otherusers<?= $Index ?><?= ($HideMe ? ' hidden' : '') ?>">
                             <td class="Table-cell">&nbsp;&nbsp;&#187;&nbsp;<?= Users::format_username($OtherUser['UserID'], true, true, true) ?></td>
                             <td class="Table-cell">
                                 <span class="reltime"><?= time_diff($OtherUser['StartTime']) ?></span>

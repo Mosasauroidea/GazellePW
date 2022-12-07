@@ -89,7 +89,7 @@ if ($_GET['action']) {
 users_history_ips:
     id (auto_increment, index)
     userid (index)
-    ip (stored using ip2long())
+    ip
     timestamp
 
 users_history_passwd:

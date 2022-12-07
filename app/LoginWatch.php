@@ -200,7 +200,7 @@ class LoginWatch extends Base {
                 (ip.FromIP IS NOT NULL) AS banned
             FROM login_attempts w
             LEFT JOIN users_main um ON (um.ID = w.UserID)
-            LEFT JOIN ip_bans ip ON (ip.FromIP = inet_aton(w.IP))
+            LEFT JOIN ip_bans ip ON (ip.FromIP = inet6_aton(w.IP))
             WHERE (w.BannedUntil > now() OR w.LastAttempt > now() - INTERVAL 6 HOUR)
             ORDER BY $orderBy $orderWay
         ");
@@ -219,9 +219,9 @@ class LoginWatch extends Base {
         $reason = trim($reason);
         $n = 0;
         foreach ($list as $id) {
-            $ipv4 = $this->db->scalar(
+            $ip = $this->db->scalar(
                 "
-                SELECT inet_aton(IP) FROM login_attempts WHERE ID = ?
+                SELECT inet6_aton(IP) FROM login_attempts WHERE ID = ?
                 ",
                 $id
             );
@@ -233,8 +233,8 @@ class LoginWatch extends Base {
                 ",
                 $userId,
                 $reason,
-                $ipv4,
-                $ipv4
+                $ip,
+                $ip
             );
             $n += $this->db->affected_rows();
         }

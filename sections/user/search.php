@@ -44,9 +44,6 @@ if (isset($_GET['username'])) {
         list($NumResults) = $DB->next_record();
         if ($NumResults > 300) {
             $NumResults = 300;
-        } elseif (intval($NumResults) === 1) {
-            list($UserID, $Username, $Enabled, $PermissionID, $Donor, $Warned) = $Results[0];
-            header("Location: user.php?id={$UserID}");
         }
     }
 }
@@ -63,39 +60,50 @@ View::show_header(t('server.user.user_search'), '', 'PageUserSearch');
     <?  } ?>
     <form class="Form SearchPage Box SearchUser" name="users" action="user.php" method="get">
         <input type="hidden" name="action" value="search" />
-        <table class="Form-rowList">
-            <tr class="Form-row">
-                <td class="Form-label"><?= t('server.user.username') ?>:</td>
-                <td class="Form-inputs">
-                    <input class="Input" type="text" name="username" size="60" value="<?= display_str($_GET['username']) ?>" />
-                </td>
-            </tr>
-            <tr class="Form-row">
-                <td class="Form-submit" colspan="2">
-                    <input class="Button" type="submit" value="Search users" />
-                </td>
-            </tr>
-        </table>
-    </form>
-    <div class="TableContainer">
-        <table class="Table" style="width: 400px; margin: 0px auto;">
-            <tr class="Table-rowHeader">
-                <td class="Table-cell" width="50%"><?= t('server.user.username') ?></td>
-                <td class="Table-cell"><?= t('server.user.primary_class') ?></td>
-            </tr>
-            <?
-            foreach ($Results as $Result) {
-                list($UserID, $Username, $Enabled, $PermissionID, $Donor, $Warned) = $Result;
-            ?>
-                <tr class="Table-row">
-                    <td class="Table-cell"><?= Users::format_username($UserID, true, true, true, true); ?></td>
-                    <td class="Table-cell"><?= Users::make_class_string($PermissionID); ?></td>
+        <div class="SearchPageBody">
+            <table class="Form-rowList">
+                <tr class="Form-row">
+                    <td class="Form-label"><?= t('server.user.username') ?>:</td>
+                    <td class="Form-inputs">
+                        <input placeholder="<?= t('server.user.search_type_strict') ?>" class="Input" type="text" name="username" size="60" value="<?= display_str($_GET['username']) ?>" />
+                    </td>
                 </tr>
-            <?  } ?>
-        </table>
-    </div>
-    <div class="BodyNavLinks">
-        <?= $Pages ?>
-    </div>
+            </table>
+        </div>
+        <div class="SearchPageFooter">
+            <div class="SearchPageFooter-actions">
+                <input class="Button" type="submit" value="<?= t('server.common.search') ?>" />
+            </div>
+        </div>
+    </form>
+    <? if (count($Results) > 0) { ?>
+        <div class="BodyNavLinks">
+            <?= $Pages ?>
+        </div>
+        <div class="TableContainer">
+            <table class="Table">
+                <tr class="Table-rowHeader">
+                    <td class="Table-cell" width="50%"><?= t('server.user.username') ?></td>
+                    <td class="Table-cell"><?= t('server.user.primary_class') ?></td>
+                </tr>
+                <?
+                foreach ($Results as $Result) {
+                    list($UserID, $Username, $Enabled, $PermissionID, $Donor, $Warned) = $Result;
+                ?>
+                    <tr class="Table-row">
+                        <td class="Table-cell"><?= Users::format_username($UserID, true, true, true, true); ?></td>
+                        <td class="Table-cell"><?= Users::make_class_string($PermissionID); ?></td>
+                    </tr>
+                <?  } ?>
+            </table>
+        </div>
+        <div class="BodyNavLinks">
+            <?= $Pages ?>
+        </div>
+    <? } else {
+        if (!empty($_GET['username'])) {
+            View::line(t('server.common.no_results'));
+        }
+    } ?>
 </div>
 <? View::show_footer(); ?>

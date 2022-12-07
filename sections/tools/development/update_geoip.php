@@ -25,9 +25,22 @@ if (!$HaveData) {
 	$client->run();
 }
 
+$FileNameIPv4HexBlocks = "$Dir/GeoLite2-City-CSV/GeoLite2-City-Blocks-IPv4-Hex.csv";
+$FileNameIPv6HexBlocks = "$Dir/GeoLite2-City-CSV/GeoLite2-City-Blocks-IPv6-Hex.csv";
+
 if (!file_exists($FileNameLocation) || !file_exists($FileNameIPv4Blocks) ||  !file_exists($FileNameIPv6Blocks)) {
 	// TODO by qwerty i18N
 	error('Download or extraction of maxmind database failed');
+}
+if (!file_exists($FileNameIPv4HexBlocks) ||  !file_exists($FileNameIPv6HexBlocks)) {
+	$BinPath = CONFIG['SERVER_ROOT'] . '/.bin';
+	shell_exec("$BinPath/geoip2-csv-converter -block-file $FileNameIPv4Blocks -include-hex-range -output-file $FileNameIPv4HexBlocks");
+	shell_exec("$BinPath/geoip2-csv-converter -block-file $FileNameIPv6Blocks -include-hex-range -output-file $FileNameIPv6HexBlocks");
+}
+
+
+if (!file_exists($FileNameIPv4HexBlocks) ||  !file_exists($FileNameIPv6HexBlocks)) {
+	error('Convert maxmind CSV to Hex failed');
 }
 
 View::show_header(t('server.tools.update_geoip'), '', 'PageToolUpdateGeoIP');
@@ -61,42 +74,56 @@ SET `ID`=@ID, `Country`=@Country, `City`=@City;");
 
 		$DB->prepared_query("
 CREATE TEMPORARY TABLE temp_geoip_blocks (
-	`Network` varchar(32) DEFAULT NULL,
-	`LocID` INT(10) NOT NULL
+	network_start varbinary(16) not null,
+    network_end varbinary(16) not null,
+	geoname_id INT(10) NOT NULL
 )");
 
 		// Note: you cannot use a prepared query here for this
 		$DB->query("
-LOAD DATA LOCAL INFILE '{$FileNameIPv4Blocks}' INTO TABLE temp_geoip_blocks
-FIELDS TERMINATED BY ',' 
-OPTIONALLY ENCLOSED BY '\"' 
-LINES TERMINATED BY '\n'
-IGNORE 1 LINES
-(@Network,  @LocID,  @dummy,  @dummy,  @dummy,  @dummy, @dummy, @dummy, @dummy, @dummy)
-SET `Network`=@Network, `LocID`=@LocID;");
+load data local infile '{$FileNameIPv4HexBlocks}' into table temp_geoip_blocks
+fields terminated by ',' enclosed by '\"' lines terminated by '\n' ignore 1 rows
+(@network_start, @network_end, @geoname_id, @dummy, @dummy,
+ @dummy, @dummy, @dummy, @dummy, @dummy, @dummy)
+set network_start = unhex(@network_start),
+    network_end = unhex(@network_end),
+    geoname_id = nullif(@geoname_id, '');
+");
+
+		// Note: you cannot use a prepared query here for this
+		$DB->query("
+load data local infile '{$FileNameIPv6HexBlocks}'
+into table temp_geoip_blocks
+fields terminated by ',' enclosed by '\"' lines terminated by '\n' ignore 1 rows
+(@network_start, @network_end, @geoname_id, @dummy, @dummy,
+ @dummy, @dummy, @dummy, @dummy, @dummy, @dummy)
+set network_start = unhex(@network_start),
+    network_end = unhex(@network_end),
+    geoname_id = nullif(@geoname_id, '');
+");
 
 		$DB->prepared_query("
 INSERT INTO geoip_country (StartIP, EndIP, Code) 
 	SELECT 
-    INET_ATON( SUBSTRING_INDEX(Network, '/', 1)) & 0xffffffff ^ ((0x1 << ( 32 - SUBSTRING_INDEX(Network, '/', -1))  ) -1 ) as StartIP,
-    INET_ATON( SUBSTRING_INDEX(Network, '/', 1)) | ((0x100000000 >> SUBSTRING_INDEX(Network, '/', -1) ) -1 ) as EndIP,
+    network_start ,
+    network_end,
 	Country
 	FROM temp_geoip_blocks AS tgb
-	LEFT JOIN temp_geoip_locations AS tgl ON tgb.LocID = tgl.ID
+	LEFT JOIN temp_geoip_locations AS tgl ON tgb.geoname_id = tgl.ID
 ");
 
-		print "{$DB->affected_rows()} locations inserted";
+		print "{$DB->affected_rows()} locations inserted, ";
 
 		$DB->query("INSERT INTO users_geodistribution
 	(Code, Users)
 SELECT g.Code, COUNT(u.ID) AS Users
 FROM geoip_country AS g
-	JOIN users_main AS u ON INET_ATON(u.IP) BETWEEN g.StartIP AND g.EndIP
+	JOIN users_main AS u ON INET6_ATON(u.IP) BETWEEN g.StartIP AND g.EndIP
 WHERE u.Enabled = '1'
 GROUP BY g.Code
 ORDER BY Users DESC");
 
-		print "{$DB->affected_rows()} users updated";
+		print "{$DB->affected_rows()} users updated.";
 
 		?>
 	</div>

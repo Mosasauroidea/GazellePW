@@ -64,8 +64,8 @@ $Pages = Format::get_pages($Page, $Results, USERS_PER_PAGE, 11);
                     <td class="Table-cell"><?= Users::format_username($UserID, true, true, true, true) ?></td>
                     <td class="Table-cell">
                         <?= Tools::get_host_by_ajax($IP) . " ($IP)" ?>
-                        <a href="userhistory.php?action=ips&amp;userid=<?= $UserID ?>" class="brackets"><?= t('server.tools.history') ?></a>
-                        <a href="user.php?action=search&amp;ip_history=on&amp;ip=<?= display_str($IP) ?>" data-tooltip="" class="brackets"><?= t('server.common.search') ?></a>
+                        <a href="userhistory.php?action=ips&amp;userid=<?= $UserID ?>" class="brackets">H</a>
+                        <a href="user.php?action=search&amp;ip_history=on&amp;ip=<?= display_str($IP) ?>" data-tooltip="" class="brackets">S</a>
                     </td>
                     <td class="Table-cell"><?= display_str($Uses) ?></td>
                     <td class="Table-cell"><?= time_diff($Joined) ?></td>

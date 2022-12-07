@@ -1046,11 +1046,11 @@ server.common.error: |-
 server.common.error_403_description: |-
   你刚刚试图查看你无权访问的页面。
 server.common.error_403_title: |-
-  错误 403
+  无权限
 server.common.error_404_description: |-
   你刚刚试图查看不存在的页面。
 server.common.error_404_title: |-
-  错误 404
+  页面不存在
 server.common.external_subtitles: |-
   外挂
 server.common.feature_film: |-
@@ -2225,7 +2225,7 @@ server.pub.space_new_torrent_notification_one: |-
 server.pub.space_new_torrent_notification_other: |-
   &nbsp;条新种推送
 server.pub.statistics: |-
-  统计面板
+  工资统计
 server.pub.toolbox: |-
   管理面板
 server.pub.user_manage: |-
@@ -2337,7 +2337,7 @@ server.register.you_did_not_select_wiki: |-
 server.register.your_passwords_do_not_match: |-
   两次输入的密码不一致
 server.reports.active_reports: |-
-  未处理的报告
+  其他报告
 server.reports.body: |-
   内容
 server.reports.claim: |-
@@ -2483,7 +2483,7 @@ server.reports.sth_was_reported_by_user_sometime: |-
 server.reports.subject: |-
   主题
 server.reports.threads_trashed_since_the_beginning_of_time: |-
-  所有被删除的主题
+  所有被删除的帖子
 server.reports.title: |-
   标题
 server.reports.toggle_notes: |-
@@ -6200,7 +6200,7 @@ server.user.community_topic: |-
 server.user.compose: |-
   发送私信
 server.user.copypaste: |-
-  复制访问日志
+  复制用户信息
 server.user.country_code: |-
   国家代码
 server.user.country_code_title: |-
@@ -6626,7 +6626,7 @@ server.user.p_host: |-
 server.user.p_inviter: |-
   邀请人
 server.user.p_invites: |-
-  邀请数量
+  邀请数
 server.user.p_ip: |-
   IP
 server.user.p_irc: |-
@@ -6846,7 +6846,7 @@ server.user.send_hacked_account_email_to: |-
 server.user.session: |-
   访问终端
 server.user.sessions: |-
-  访问终端列表
+  登录记录
 server.user.setting: |-
   设置
 server.user.show_bounty: |-
@@ -6868,7 +6868,7 @@ server.user.space_and_space: |-
 server.user.space_are: |-
   &nbsp;的
 server.user.space_bigger_than_sessions: |-
-  &nbsp;> 访问记录
+  的登录记录
 server.user.space_expired: |-
   &nbsp;到期)
 server.user.space_is: |-
@@ -7130,7 +7130,7 @@ server.user.to_fuzzy_search_for_a_block_of_addresses_title: |-
 server.user.token: |-
   令牌
 server.user.token_history: |-
-  免费令牌历史
+  令牌消费历史
 server.user.token_number: |-
   令牌
 server.user.too_paranoid_to_have_their_stats_shown_here_and: |-
@@ -7462,9 +7462,9 @@ server.userhistory.unread: |-
 server.userhistory.unread_post_history_for: |-
   未读的 %s 的发帖历史
 server.userhistory.view_all_ip_address: |-
-  查看所有 IP 地址
+  所有
 server.userhistory.view_ip_addresses_with_users: |-
-  查看有用户使用的 IP 地址
+  用户在使用
 server.userhistory.wildcard_search_examples: |-
   通配符（*）搜索示例：127.0.* 或 1*2.0.*.1 或 *.*.*.*
 server.userhistory.with_new_additions: |-
@@ -8183,3 +8183,15 @@ server.tool.timestamps: |-
   时间戳
 server.common.see_full: |-
   查看全部
+server.user.simple_info: |-
+  简介
+server.user.consumed_history: |-
+  消费历史
+server.user.user_basic: |-
+  基本信息
+server.user.account_info: |-
+  账号情况
+server.common.time_format: |-
+  时间格式
+server.user.logout_all: |-
+  注销所有

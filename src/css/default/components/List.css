@@ -1,10 +1,29 @@
-.List {
-  list-style-type: unset;
-  list-style-position: inside;
+.MenuList {
+  list-style: none;
 }
-.List li {
-  padding-top: var(--global-space-sm);
-  padding-left: var(--global-space-lg);
-  padding-right: 0;
-  padding-bottom: 0;
+
+.MenuList.SubMenu {
+  position: relative;
+  margin-left: 20px;
+  padding-top: 5px;
+}
+
+.MenuList li {
+  position: relative;
+  padding: 5px;
+}
+
+.MenuList.SubMenu li::before {
+  content: '';
+  height: 100%;
+  width: 12px;
+  border-bottom: 2px solid var(--global-color-border);
+  border-left: 2px solid var(--global-color-border);
+  position: absolute;
+  bottom: 12px;
+  left: -10px;
+}
+
+.MenuList.SubMenu li:first-child::before {
+  height: 70%;
 }

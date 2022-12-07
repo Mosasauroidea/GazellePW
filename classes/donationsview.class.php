@@ -32,10 +32,10 @@ class DonationsView {
                 <div class="SidebarItem-header Box-header">
                     <?= t('server.user.donor_statistics') ?></div>
                 <ul class="SidebarList SidebarItem-body Box-body">
-                    <?
-                    if ($IsDonor) {
+                    <? if ($IsDonor) { ?>
+                        <?
                         if (check_perms('users_mod') || $OwnProfile) {
-                    ?>
+                        ?>
                             <li class="SidebarList-item">
                                 <?= t('server.user.total_donor_points') ?>: <?= $DonationInfo['TotRank'] ?>
                             </li class="SidebarList-item">
@@ -56,11 +56,13 @@ class DonationsView {
                         <li class="SidebarList-item">
                             <?= t('server.user.rank_expires') ?>: <?= ($DonationInfo['ExpireTime']) ?>
                         </li>
-                    <?          } else { ?>
+                    <?          } else {
+                    ?>
                         <li class="SidebarList-item">
-                            <?= t('server.user.rank_expires') ?>
+                            <?= t('server.common.no_results') ?>
                         </li>
-                    <?          } ?>
+                    <?
+                    } ?>
                 </ul>
             </div>
             <?

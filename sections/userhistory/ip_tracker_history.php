@@ -65,40 +65,45 @@ $Pages = Format::get_pages($Page, $NumResults, IPS_PER_PAGE, 9);
     <div class="BodyHeader">
         <h2 class="BodyHeader-nav">
             <?= t('server.userhistory.tracker_ip_address_history_for', ['Values' => [
-                "<a href='user.php?id=${UserID}'>${Username}</a>"
+                Users::format_username($UserID)
             ]]) ?>
         </h2>
     </div>
-    <div class="BodyNavLinks"><?= $Pages ?></div>
-    <div class="TableContainer">
-        <table class="TableUserTrakcerIPHistory Table">
-            <tr class="Table-rowHeader">
-                <td class="Table-cell"><?= t('server.userhistory.ip_address') ?></td>
-                <td class="Table-cell"><?= t('server.common.torrent') ?></td>
-                <td class="Table-cell"><?= t('server.userhistory.time') ?></td>
-            </tr>
-            <?
-            $Results = $DB->to_array();
-            foreach ($Results as $Index => $Result) {
-                list($IP, $TorrentID, $Time) = $Result;
-
-            ?>
-                <tr class="Table-row">
-                    <td class="Table-cell">
-                        <?= $IP ?> (<?= Tools::get_country_code_by_ajax($IP) ?>)<br /><?= Tools::get_host_by_ajax($IP) ?>
-                        <a href="http://whatismyipaddress.com/ip/<?= display_str($IP) ?>" class="brackets" data-tooltip="<?= t('server.userhistory.search_wimia_com') ?>">WI</a>
-                    </td>
-                    <td class="Table-cell"><a href="torrents.php?torrentid=<?= $TorrentID ?>"><?= $TorrentID ?></a></td>
-                    <td class="Table-cell"><?= date('Y-m-d g:i:s', $Time) ?></td>
+    <? if ($NumResults > 0) { ?>
+        <div class="BodyNavLinks"><?= $Pages ?></div>
+        <div class="TableContainer">
+            <table class="TableUserTrakcerIPHistory Table">
+                <tr class="Table-rowHeader">
+                    <td class="Table-cell"><?= t('server.userhistory.ip_address') ?></td>
+                    <td class="Table-cell"><?= t('server.common.torrent') ?></td>
+                    <td class="Table-cell"><?= t('server.userhistory.time') ?></td>
                 </tr>
-            <?
-            }
-            ?>
-        </table>
-    </div>
-    <div class="BodyNavLinks">
-        <?= $Pages ?>
-    </div>
+                <?
+                $Results = $DB->to_array();
+                foreach ($Results as $Index => $Result) {
+                    list($IP, $TorrentID, $Time) = $Result;
+
+                ?>
+                    <tr class="Table-row">
+                        <td class="Table-cell">
+                            <?= $IP ?> (<?= Tools::get_country_code_by_ajax($IP) ?>)<br /><?= Tools::get_host_by_ajax($IP) ?>
+                            <a href="http://whatismyipaddress.com/ip/<?= display_str($IP) ?>" class="brackets" data-tooltip="<?= t('server.userhistory.search_wimia_com') ?>" target="_blank">WI</a>
+                        </td>
+                        <td class="Table-cell"><a href="torrents.php?torrentid=<?= $TorrentID ?>"><?= $TorrentID ?></a></td>
+                        <td class="Table-cell"><?= date('Y-m-d g:i:s', $Time) ?></td>
+                    </tr>
+                <?
+                }
+                ?>
+            </table>
+        </div>
+        <div class="BodyNavLinks">
+            <?= $Pages ?>
+        </div>
+    <? } else {
+        VIew::line(t('server.common.no_results'));
+    }
+    ?>
 </div>
 
 <?

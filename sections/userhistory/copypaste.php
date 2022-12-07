@@ -32,7 +32,7 @@ $DB->prepared_query("
 		u.IP,
 		c.Code
 	FROM users_main AS u
-		LEFT JOIN geoip_country AS c ON INET_ATON(u.IP) BETWEEN c.StartIP AND c.EndIP
+		LEFT JOIN geoip_country AS c ON INET6_ATON(u.IP) BETWEEN c.StartIP AND c.EndIP
 	WHERE u.ID = ?
 	UNION
 	SELECT
@@ -41,7 +41,7 @@ $DB->prepared_query("
 		h.IP,
 		c.Code
 	FROM users_history_emails AS h
-		LEFT JOIN geoip_country AS c ON INET_ATON(h.IP) BETWEEN c.StartIP AND c.EndIP
+		LEFT JOIN geoip_country AS c ON INET6_ATON(h.IP) BETWEEN c.StartIP AND c.EndIP
 	WHERE UserID = ? "
 	/*AND Time != '0000-00-00 00:00:00'*/ . "
 	ORDER BY Time DESC", sqltime(), $UserID, $UserID);

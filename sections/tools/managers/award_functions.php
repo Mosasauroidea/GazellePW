@@ -77,7 +77,7 @@ function getLittleID($UserID) {
     return 0;
 }
 
-function printYearTR($StartYear = 2019, $focus) {
+function printYearTR($StartYear = 2021, $focus) {
     $now = date("Y");
     echo "<tr><th>年份：</th><td>";
     for ($y = $StartYear; $y <= $now; $y++) {

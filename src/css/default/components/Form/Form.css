@@ -109,9 +109,6 @@ FormOneLine Search<Name>
   }
 }
 @media (max-width: 767px) {
-  .SearchUserAdvanced .Form-row {
-    flex-wrap: wrap;
-  }
   .Form.is-longLabel .Form-row {
     flex-direction: column;
   }
@@ -132,9 +129,6 @@ FormOneLine Search<Name>
   }
   .LayoutMainSidebar-main .Form-label {
     width: 18%;
-  }
-  .SearchUserAdvanced .Form-label {
-    width: 8%;
   }
 }
 @media (max-width: 767px) {
@@ -176,10 +170,6 @@ FormOneLine Search<Name>
   }
   :is(.LayoutMainSidebar-main, .TorrentNotifyForm) .Form-inputs {
     width: 78%;
-  }
-  .SearchUserAdvanced .Form-inputs {
-    width: 24%;
-    align-items: start;
   }
 }
 

@@ -163,15 +163,15 @@ if ($ShowGrouped) {
                 echo t('server.userhistory.grouped')
                     . ($ShowUnread ? t('server.userhistory.unread') : '')
                     . t('server.userhistory.post_history_for', ['Values' => [
-                        "<a href='user.php?id=${UserID}'>${Username}</a>"
+                        Users::format_username($UserID)
                     ]]);
             } elseif ($ShowUnread) {
                 echo t('server.userhistory.unread_post_history_for', ['Values' => [
-                    "<a href='user.php?id=${UserID}'>${Username}</a>"
+                    Users::format_username($UserID)
                 ]]);
             } else {
                 echo t('server.userhistory.post_history_for', ['Values' => [
-                    "<a href='user.php?id=${UserID}'>${Username}</a>"
+                    Users::format_username($UserID)
                 ]]);
             }
             ?>

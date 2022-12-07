@@ -1078,11 +1078,11 @@ server.common.error: |-
 server.common.error_403_description: |-
   You just tried to go to a page that you don't have enough permission to view.
 server.common.error_403_title: |-
-  Error 403
+  Permission denied
 server.common.error_404_description: |-
   You just tried to go to a page that doesn't exist.
 server.common.error_404_title: |-
-  Error 404
+  Page not found
 server.common.external_subtitles: |-
   External
 server.common.feature_film: |-
@@ -7598,9 +7598,9 @@ server.userhistory.unread: |-
 server.userhistory.unread_post_history_for: |-
   Unread post history for %s
 server.userhistory.view_all_ip_address: |-
-  View all IP addresses
+  All
 server.userhistory.view_ip_addresses_with_users: |-
-  View IP addresses with users
+  Users only
 server.userhistory.wildcard_search_examples: |-
   Wildcard (*) search examples: 127.0.* or 1*2.0.*.1 or *.*.*.*
 server.userhistory.with_new_additions: |-
@@ -8319,3 +8319,15 @@ server.tools.timestamps: |-
   Timestamps
 server.common.see_full: |-
   See full
+server.user.simple_info: |-
+  Profile
+server.user.consumed_history: |-
+  History
+server.user.user_basic: |-
+  Basic info
+server.user.account_info: |-
+  Account info
+server.common.time_format: |-
+  Time format
+server.user.logout_all: |-
+  Logout all

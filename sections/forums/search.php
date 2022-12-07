@@ -93,126 +93,128 @@ View::show_header(t('server.forums.forums_greater_than_search'), 'bbcode,forum_s
     </div>
     <form class="Form SearchPage Box SearchForum" name="forums" action="" method="get">
         <input type="hidden" name="action" value="search" />
-        <table class="Form-rowList">
-            <tr class="Form-row">
-                <td class="Form-label"><?= t('server.forums.search_for') ?>:</td>
-                <td class="Form-inputs">
-                    <input class="Input" type="text" name="search" size="70" value="<?= display_str($Search) ?>" />
-                </td>
-            </tr>
-            <tr class="Form-row">
-                <td class="Form-label"><?= t('server.forums.posted_by') ?>:</td>
-                <td class="Form-inputs">
-                    <input class="Input" type="text" name="user" placeholder="Username" size="70" value="<?= display_str($User) ?>" />
-                </td>
-            </tr>
-            <tr class="Form-row">
-                <td class="Form-label"><?= t('server.forums.topic_created') ?>:</td>
-                <td class="Form-inputs">
-                    <?= t('server.forums.after') ?>:
-                    <input class="Input is-small" type="text" name="thread_created_after" id="thread_created_after" value="<?= $ThreadAfterDate ?>" />
-                    <?= t('server.forums.before') ?>:
-                    <input class="Input is-small" type="text" name="thread_created_before" id="thread_created_before" value="<?= $ThreadBeforeDate ?>" />
-                </td>
-            </tr>
-            <?
-            if (empty($ThreadID)) {
-            ?>
+        <div class="SearchPageBody">
+            <table class="Form-rowList">
                 <tr class="Form-row">
-                    <td class="Form-label"><?= t('server.forums.search_in') ?>:</td>
+                    <td class="Form-label"><?= t('server.forums.search_for') ?>:</td>
                     <td class="Form-inputs">
-                        <div class="Radio">
-                            <input class="Input" type="radio" name="type" id="type_title" value="title" <? if ($Type == 'title') {
-                                                                                                            echo ' checked="checked"';
-                                                                                                        } ?> />
-                            <label class="Radio-label" for="type_title"><?= t('server.forums.titles') ?></label>
-                        </div>
-                        <div class="Radio">
-                            <input class="Input" type="radio" name="type" id="type_body" value="body" <? if ($Type == 'body') {
-                                                                                                            echo ' checked="checked"';
-                                                                                                        } ?> />
-                            <label class="Radio-label" for="type_body"><?= t('server.forums.post_bodies') ?></label>
-                        </div>
+                        <input class="Input" type="text" name="search" size="70" value="<?= display_str($Search) ?>" />
                     </td>
                 </tr>
-                <tr class="Form-row <?= $Type == 'title' ? 'hidden' : '' ?>" id="post_created_row">
-                    <td class="Form-label"><?= t('server.forums.post_created') ?>:</td>
+                <tr class="Form-row">
+                    <td class="Form-label"><?= t('server.forums.posted_by') ?>:</td>
+                    <td class="Form-inputs">
+                        <input class="Input" type="text" name="user" placeholder="Username" size="70" value="<?= display_str($User) ?>" />
+                    </td>
+                </tr>
+                <tr class="Form-row">
+                    <td class="Form-label"><?= t('server.forums.topic_created') ?>:</td>
                     <td class="Form-inputs">
                         <?= t('server.forums.after') ?>:
-                        <input class="Input" type="text" name="post_created_after" id="post_created_after" value="<?= $PostAfterDate ?>" />
+                        <input class="Input is-small" type="text" name="thread_created_after" id="thread_created_after" value="<?= $ThreadAfterDate ?>" />
                         <?= t('server.forums.before') ?>:
-                        <input class="Input" type="text" name="post_created_before" id="post_created_before" value="<?= $PostBeforeDate ?>" />
+                        <input class="Input is-small" type="text" name="thread_created_before" id="thread_created_before" value="<?= $ThreadBeforeDate ?>" />
                     </td>
                 </tr>
-                <tr class="Form-row" variant="alighLeft">
-                    <td class="Form-label"><?= t('server.forums.search_forums') ?>:</td>
-                    <td class="Form-inputs">
-                        <table class="SearchForum-forumList" id="forum_search_cat_list">
-                            <?
-                            // List of forums
-                            $Open = false;
-                            $LastCategoryID = -1;
-                            $Columns = 0;
-                            $i = 0;
-                            foreach ($Forums as $Forum) {
-                                if (!Forums::check_forumperm($Forum['ID'])) {
-                                    continue;
-                                }
-
-                                $Columns++;
-
-                                if ($Forum['CategoryID'] != $LastCategoryID) {
-                                    $LastCategoryID = $Forum['CategoryID'];
-                                    if ($Open) {
-                                        if ($Columns % 5) { ?>
-                                            <td colspan="<?= (5 - ($Columns % 5)) ?>"></td>
-                                        <?
-                                        }
-
-                                        ?>
-                </tr>
-            <?
+                <?
+                if (empty($ThreadID)) {
+                ?>
+                    <tr class="Form-row">
+                        <td class="Form-label"><?= t('server.forums.search_in') ?>:</td>
+                        <td class="Form-inputs">
+                            <div class="Radio">
+                                <input class="Input" type="radio" name="type" id="type_title" value="title" <? if ($Type == 'title') {
+                                                                                                                echo ' checked="checked"';
+                                                                                                            } ?> />
+                                <label class="Radio-label" for="type_title"><?= t('server.forums.titles') ?></label>
+                            </div>
+                            <div class="Radio">
+                                <input class="Input" type="radio" name="type" id="type_body" value="body" <? if ($Type == 'body') {
+                                                                                                                echo ' checked="checked"';
+                                                                                                            } ?> />
+                                <label class="Radio-label" for="type_body"><?= t('server.forums.post_bodies') ?></label>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr class="Form-row <?= $Type == 'title' ? 'hidden' : '' ?>" id="post_created_row">
+                        <td class="Form-label"><?= t('server.forums.post_created') ?>:</td>
+                        <td class="Form-inputs">
+                            <?= t('server.forums.after') ?>:
+                            <input class="Input" type="text" name="post_created_after" id="post_created_after" value="<?= $PostAfterDate ?>" />
+                            <?= t('server.forums.before') ?>:
+                            <input class="Input" type="text" name="post_created_before" id="post_created_before" value="<?= $PostBeforeDate ?>" />
+                        </td>
+                    </tr>
+                    <tr class="Form-row" variant="alighLeft">
+                        <td class="Form-label"><?= t('server.forums.search_forums') ?>:</td>
+                        <td class="Form-inputs">
+                            <table class="SearchForum-forumList" id="forum_search_cat_list">
+                                <?
+                                // List of forums
+                                $Open = false;
+                                $LastCategoryID = -1;
+                                $Columns = 0;
+                                $i = 0;
+                                foreach ($Forums as $Forum) {
+                                    if (!Forums::check_forumperm($Forum['ID'])) {
+                                        continue;
                                     }
-                                    $Columns = 0;
-                                    $Open = true;
-                                    $i++;
-            ?>
-            <tr class="Form-row" variant="alignLeft">
-                <td colspan="5" class="forum_cat">
-                    <strong><?= $ForumCats[$Forum['CategoryID']] ?></strong>
-                    <a href="#" class="brackets forum_category" id="forum_category_<?= $i ?>"><?= t('server.forums.check_all') ?></a>
+
+                                    $Columns++;
+
+                                    if ($Forum['CategoryID'] != $LastCategoryID) {
+                                        $LastCategoryID = $Forum['CategoryID'];
+                                        if ($Open) {
+                                            if ($Columns % 5) { ?>
+                                                <td colspan="<?= (5 - ($Columns % 5)) ?>"></td>
+                                            <?
+                                            }
+
+                                            ?>
+                    </tr>
+                <?
+                                        }
+                                        $Columns = 0;
+                                        $Open = true;
+                                        $i++;
+                ?>
+                <tr class="Form-row" variant="alignLeft">
+                    <td colspan="5" class="forum_cat">
+                        <strong><?= $ForumCats[$Forum['CategoryID']] ?></strong>
+                        <a href="#" class="brackets forum_category" id="forum_category_<?= $i ?>"><?= t('server.forums.check_all') ?></a>
+                    </td>
+                </tr>
+                <tr class="Form-row" variant="alignLeft">
+                <?      } elseif ($Columns % 5 == 0) { ?>
+                </tr>
+                <tr class="Form-row" variant="alignLeft">
+                <?      } ?>
+                <td class="Form-submit">
+                    <div class="Checkbox">
+                        <input class="Input" type="checkbox" name="forums[]" value="<?= $Forum['ID'] ?>" data-category="forum_category_<?= $i ?>" id="forum_<?= $Forum['ID'] ?>" <? if (isset($_GET['forums']) && in_array($Forum['ID'], $_GET['forums'])) {
+                                                                                                                                                                                        echo ' checked="checked"';
+                                                                                                                                                                                    } ?> />
+                        <label class="Checkbox-label" for="forum_<?= $Forum['ID'] ?>"><?= htmlspecialchars($Forum['Name']) ?></label>
+                    </div>
                 </td>
-            </tr>
-            <tr class="Form-row" variant="alignLeft">
-            <?      } elseif ($Columns % 5 == 0) { ?>
-            </tr>
-            <tr class="Form-row" variant="alignLeft">
-            <?      } ?>
-            <td class="Form-submit">
-                <div class="Checkbox">
-                    <input class="Input" type="checkbox" name="forums[]" value="<?= $Forum['ID'] ?>" data-category="forum_category_<?= $i ?>" id="forum_<?= $Forum['ID'] ?>" <? if (isset($_GET['forums']) && in_array($Forum['ID'], $_GET['forums'])) {
-                                                                                                                                                                                    echo ' checked="checked"';
-                                                                                                                                                                                } ?> />
-                    <label class="Checkbox-label" for="forum_<?= $Forum['ID'] ?>"><?= htmlspecialchars($Forum['Name']) ?></label>
-                </div>
-            </td>
-        <?  }
-                            if ($Columns % 5) { ?>
-            <td colspan="<?= (4 - ($Columns % 5)) ?>"></td>
-        <?  } ?>
-            </tr>
-        </table>
-    <? } else { ?>
-        <input type="hidden" name="threadid" value="<?= $ThreadID ?>" />
-    <? } ?>
-    </td>
-    </tr>
-    <tr class="Form-row">
-        <td colspan="2" class="center">
-            <input class="Button" type="submit" value="Search" />
+            <?  }
+                                if ($Columns % 5) { ?>
+                <td colspan="<?= (4 - ($Columns % 5)) ?>"></td>
+            <?  } ?>
+                </tr>
+            </table>
+        <? } else { ?>
+            <input type="hidden" name="threadid" value="<?= $ThreadID ?>" />
+        <? } ?>
         </td>
-    </tr>
-    </table>
+        </tr>
+        </table>
+        </div>
+        <div class="SearchPageFooter">
+            <div class="SearchPageFooter-actions">
+                <button class="Button" type="submit" value="Search"><?= t('server.common.search') ?></button>
+            </div>
+        </div>
     </form>
     <div class="BodyNavLinks">
         <?
