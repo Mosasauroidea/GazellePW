@@ -3042,7 +3042,7 @@ server.requests.require_one_source: |-
 server.requests.resolution_list: |-
   分辨率
 server.requests.search_terms: |-
-  搜索条件
+  关键词
 server.requests.should_be_pl_to_the_torrent: |-
   你应填写种子的永久链接 (PL) (比如
 server.requests.so_that_staff_can_fix_it: |-
@@ -7462,7 +7462,7 @@ server.userhistory.unread: |-
 server.userhistory.unread_post_history_for: |-
   未读的 %s 的发帖历史
 server.userhistory.view_all_ip_address: |-
-  所有
+  全部
 server.userhistory.view_ip_addresses_with_users: |-
   用户在使用
 server.userhistory.wildcard_search_examples: |-
@@ -8179,8 +8179,6 @@ server.tools.cache_hit_rate: |-
   缓存命中率
 server.tools.total_value: |-
   合计
-server.tool.timestamps: |-
-  时间戳
 server.common.see_full: |-
   查看全部
 server.user.simple_info: |-
