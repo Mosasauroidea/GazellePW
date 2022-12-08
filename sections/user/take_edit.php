@@ -157,7 +157,8 @@ if (isset($_POST['p_donor_stats'])) {
 // API Key Helpers
 
 function doesUserHasToken(int $UserID): bool {
-    return G::$DB->scalar("
+    return G::$DB->scalar(
+        "
         SELECT 1
         FROM api_applications
         WHERE UserID = $UserID"
@@ -165,7 +166,8 @@ function doesUserHasToken(int $UserID): bool {
 }
 
 function hasApiToken(int $userId, string $token): bool {
-    return G::$DB->scalar("
+    return G::$DB->scalar(
+        "
         SELECT 1
         FROM api_applications
         WHERE UserID = $userId
@@ -174,9 +176,11 @@ function hasApiToken(int $userId, string $token): bool {
 }
 
 function revokeApiTokenById(int $UserID): int {
-    G::$DB->prepared_query("
+    G::$DB->prepared_query(
+        "
         DELETE FROM api_applications
-        WHERE UserID = ? ", $UserID
+        WHERE UserID = ? ",
+        $UserID
     );
     return G::$DB->affected_rows();
 }
@@ -192,10 +196,14 @@ function createApiToken(int $UserID, string $key): string {
             break;
     }
 
-    G::$DB->prepared_query("
+    G::$DB->prepared_query(
+        "
         INSERT INTO api_applications
                (UserID, Name, Token)
-        VALUES (?,       ?,    ?)", $UserID, $name, $token
+        VALUES (?,       ?,    ?)",
+        $UserID,
+        $name,
+        $token
     );
     return $token;
 }
@@ -206,7 +214,7 @@ function base64UrlEncode($data): string {
 // API Key Helpers
 
 // Reset API Key
-if(isset($_POST["resetApiKey"])){
+if (isset($_POST["resetApiKey"])) {
     G::$DB->begin_transaction();
     if (doesUserHasToken($UserID)) {
         // User has already created a token. We'll delete the entry here.
@@ -300,6 +308,7 @@ $Options['PostsPerPage']        = (int)$_POST['postsperpage'];
 //$Options['HideCollage']         = (!empty($_POST['hidecollage']) ? 1 : 0);
 $Options['CollageCovers']       = (empty($_POST['collagecovers']) ? 0 : $_POST['collagecovers']);
 $Options['ShowTorFilter']       = (empty($_POST['showtfilter']) ? 0 : 1);
+$Options['ShowHotMovieOnHomePage']       = (empty($_POST['showhotmovie']) ? 0 : 1);
 $Options['ShowTags']            = (!empty($_POST['showtags']) ? 1 : 0);
 $Options['AutoSubscribe']       = (!empty($_POST['autosubscribe']) ? 1 : 0);
 $Options['DisableSmileys']      = (!empty($_POST['disablesmileys']) ? 1 : 0);

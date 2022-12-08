@@ -465,6 +465,15 @@ echo $Val->GenerateJS('userform');
                             </div>
                         </td>
                     </tr>
+                    <tr class="Form-row" id="tor_showhotmovie_tr">
+                        <td class="Form-label"><strong><?= t('server.index.popular_movies') ?></strong></td>
+                        <td class="Form-inputs">
+                            <div class="Checkbox">
+                                <input class="Input" type="checkbox" name="showhotmovie" id="showtfilter" <?= (isset($SiteOptions['ShowHotMovieOnHomePage']) && $SiteOptions['ShowHotMovieOnHomePage'] ? ' checked="checked"' : '') ?> />
+                                <label class="Checkbox-label" for="showhotmovie"><?= t('server.user.show_hot_movie_at_home') ?></label>
+                            </div>
+                        </td>
+                    </tr>
                     <tr class="Form-row" id="tor_autocomp_tr">
                         <td class="Form-label" data-tooltip="<?= t('server.user.autocomp_title') ?>"><strong><?= t('server.user.autocomp') ?></strong></td>
                         <td class="Form-inputs">

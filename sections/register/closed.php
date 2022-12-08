@@ -10,7 +10,7 @@ View::show_header(t('server.register.register_closed'), 'PageRegisterClosed');
     <?
     } else {
     ?>
-        <strong><?= t('server.register.register_closed_note2') ?></strong>
+        <?= t('server.register.register_closed_note2') ?>
         <ul style="width:80px; text-align:left">
             <?
             foreach (CONFIG['OPEN_REGISTRATION_EMAIL'] as $Email) {

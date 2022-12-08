@@ -4,7 +4,8 @@ class Lang {
 
     const EN = 'en';
     const CHS = 'chs';
-    const LANGS = [self::EN, self::CHS];
+    const PT = 'pt';
+    const LANGS = [self::EN, self::CHS, self::PT];
     const DEFAULT_LANG = self::CHS;
     const MAIN_LANG = self::EN;
     const SUB_LANG = self::CHS;
@@ -65,8 +66,14 @@ class Lang {
                 return $Content;
             }
             return $SubContent;
-        }
-        if (!empty($SubContent)) {
+        } else if ($Lang == self::SUB_LANG) {
+            if (!empty($SubContent)) {
+                return $SubContent;
+            }
+        } else {
+            if (!empty($Content)) {
+                return $Content;
+            }
             return $SubContent;
         }
         return $Content;

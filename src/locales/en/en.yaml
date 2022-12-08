@@ -6668,13 +6668,13 @@ server.user.notification_filter_name: |-
 server.user.notification_filter_name_note: |-
   A name for the notification filter set to tell different filters apart
 server.user.notify_me_of_all_new_torrents_with: |-
-  Notify me of all new torrents with...
+  RSS
 server.user.create_new_torrent_notify: |-
   Create new notification filter
 server.user.new_torrent_notify_list: |-
   Notification filter list
 server.user.new_torrent_notify_name: |-
-  Notification filter name
+  Personal Notifications
 server.user.notify_my_android: |-
   Notify My Android
 server.user.notifyondeletedownloaded: |-
@@ -8331,3 +8331,29 @@ server.common.time_format: |-
   Time format
 server.user.logout_all: |-
   Logout all
+server.common.lang_pt: |-
+  Português
+server.forums.trash: |-
+  Trash
+server.user.rss_feed_url: |-
+  RSS Feed URL
+server.user.official_rss: |-
+  Official Notifications
+server.user.rss_news: |-
+  Announcements
+server.user.rss_blog: |-
+  Blog
+server.user.rss_torrents_all: |-
+  Latest torrents
+server.user.rss_torrents_free: |-
+  Latest Free torrents
+server.user_rss_bookmarked_movie: |-
+  Latest torrents you bookmarked
+server.reports.report_thread: |-
+  Forum Thread Report
+server.reports_report_post: |-
+  Forum Post Report
+server.reports_report_comment: |-
+  Comment Report
+server.user.show_hot_movie_at_home: |-
+  Show on homepage

@@ -468,14 +468,15 @@ View::show_header(t('server.index.index'), 'comments', 'PageHome');
         <div class="Box">
             <div class="Social Box-header"><?= t('server.index.links') ?></div>
             <div class="Social Box-body">
-                <a target="_blank" href="feeds.php?feed=feed_news&amp;user=<?= G::$LoggedUser['ID'] ?>&amp;auth=<?= G::$LoggedUser['RSS_Auth'] ?>&amp;passkey=<?= G::$LoggedUser['torrent_pass'] ?>&amp;authkey=<?= G::$LoggedUser['AuthKey'] ?>" data-tooltip="<?= t('server.common.rss') ?>">
-                    <?= icon('rss') ?>
-                </a>
+
                 <a target="_blank" href="<?= CONFIG['TG_GROUP'] ?>" data-tooltip="<?= t('server.common.telegram') ?>">
                     <?= icon('telegram') ?>
                 </a>
                 <a target="_blank" href="https://github.com/Mosasauroidea/GazellePW" data-tooltip="<?= t('server.common.github') ?>">
                     <?= icon('github') ?>
+                </a>
+                <a target="_blank" href="https://crowdin.com/project/gazellepw" data-tooltip="Crowdin">
+                    <?= icon('crowdin') ?>
                 </a>
             </div>
         </div>
@@ -483,34 +484,38 @@ View::show_header(t('server.index.index'), 'comments', 'PageHome');
 
 
     <div class="LayoutMainSidebar-main">
-        <!-- Active Movies -->
+        <!-- Hot Movies -->
         <?
-        $Top10Movies = new Top10Movies();
-        $Data = $Top10Movies->getData(
-            'active_week',
-            [
-                'Limit' => 10,
-            ]
-        );
-        if (count($Data) > 0) {
+        if ($LoggedUser['ShowHotMovieOnHomePage']) {;
         ?>
-            <div class="IndexTop10Movie Group">
-                <div class="Group-header">
-                    <div class="Group-headerTitle">
-                        <?= t('server.index.popular_movies') ?>
+            <?
+            $Top10Movies = new Top10Movies();
+            $Data = $Top10Movies->getData(
+                'active_week',
+                [
+                    'Limit' => 10,
+                ]
+            );
+            if (count($Data) > 0) {
+            ?>
+                <div class="IndexTop10Movie Group">
+                    <div class="Group-header">
+                        <div class="Group-headerTitle">
+                            <?= t('server.index.popular_movies') ?>
+                        </div>
+                    </div>
+                    <div class="Group-body">
+                        <?
+
+                        $tableRender = new TorrentGroupCoverTableView($Data);
+                        $tableRender->render([
+                            'Variant' => 'OneLine'
+                        ]);
+                        ?>
                     </div>
                 </div>
-                <div class="Group-body">
-                    <?
-
-                    $tableRender = new TorrentGroupCoverTableView($Data);
-                    $tableRender->render([
-                        'Variant' => 'OneLine'
-                    ]);
-                    ?>
-                </div>
-            </div>
         <?
+            }
         }
         ?>
         <? if (count($News) > 0) { ?>

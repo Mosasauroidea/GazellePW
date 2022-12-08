@@ -1023,9 +1023,7 @@ View::show_header($ThreadInfo['Title'] . ' &lt; ' . $Forums[$ForumID]['Name'] . 
                 <tr class="Form-row">
                     <td colspan="2" class="center">
                         <input class="Button" type="submit" value="<?= t('server.forums.edit_thread') ?>" tabindex="2" />
-                        <span style="float: right;">
-                            <input class="Button" type="submit" name="trash" value="Trash" tabindex="2" />
-                        </span>
+                        <button class="Button" type="submit" name="trash" value="Trash" tabindex="2"><?= t('server.forums.trash') ?></button>
                     </td>
                 </tr>
 

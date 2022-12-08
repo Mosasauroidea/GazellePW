@@ -365,6 +365,7 @@ class Users {
         return array(
             'CoverArt' => true,
             'AutoSubscribe' => true,
+            'ShowHotMovieOnHomePage' => true,
         );
     }
 

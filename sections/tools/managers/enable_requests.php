@@ -34,8 +34,8 @@ $OrderWay = "DESC";
 if ($_GET['view'] == 'perfect') {
     $Where[] = "um.Email = uer.Email";
     $Joins[] = "JOIN users_main um ON um.ID = uer.UserID";
-    $Where[] = "uer.IP = (SELECT IP FROM users_history_ips uhi1 WHERE uhi1.StartTime = (SELECT MAX(StartTime) FROM users_history_ips uhi2 WHERE uhi2.UserID = uer.UserID ORDER BY StartTime DESC LIMIT 1))";
-    $Where[] = "(SELECT 1 FROM users_history_ips uhi WHERE uhi.IP = uer.IP AND uhi.UserID != uer.UserID) IS NULL";
+    $Where[] = "uer.IP = (SELECT IP FROM users_history_ips uhi1 WHERE uhi1.StartTime = (SELECT MAX(StartTime) FROM users_history_ips uhi2 WHERE uhi2.UserID = uer.UserID ORDER BY StartTime DESC LIMIT 1) LIMIT 1)";
+    $Where[] = "(SELECT 1 FROM users_history_ips uhi WHERE uhi.IP = uer.IP AND uhi.UserID != uer.UserID LIMIT 1) IS NULL";
     $Where[] = "ui.BanReason = '3'";
 } else if ($_GET['view'] == 'minus_ip') {
     $Where[] = "um.Email = uer.Email";

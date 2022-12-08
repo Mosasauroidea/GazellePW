@@ -98,7 +98,6 @@ $CONFIG['BLOCK_OPERA_MINI'] = false; //Set to true to block Opera Mini proxy
 $CONFIG['SYSTEM_USER_ID'] = 0; // ID for user to create "system" threads under (e.g. Edit Requests)
 $CONFIG['TRASH_FORUM_ID'] = 0; // ID of forum to send threads to when trash button is pressed
 $CONFIG['EDITING_FORUM_ID'] = 0; // ID of forum to send editing requests to
-$CONFIG['EDITING_TRASH_FORUM_ID'] = 0; // ID of forum to send editing threads to when trash button is pressed inCONFIG['EDITING_FORUM_ID']
 $CONFIG['ANNOUNCEMENT_FORUM_ID'] = 0;
 $CONFIG['NEWS_FORUM_ID'] = 0;
 $CONFIG['DONOR_FORUM'] = 0;

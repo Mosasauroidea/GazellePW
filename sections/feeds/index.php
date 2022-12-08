@@ -128,6 +128,10 @@ switch ($_GET['feed']) {
         $Feed->channel('Movie Torrents', 'RSS feed for all new movie torrents.');
         $Feed->retrieve('torrents_movie', $_GET['authkey'], $_GET['passkey']);
         break;
+    case 'torrents_free':
+        $Feed->channel('Free Torrents', 'RSS feed for all new free torrent.');
+        $Feed->retrieve('torrents_free', $_GET['authkey'], $_GET['passkey']);
+        break;
     default:
         // Personalized torrents
         if (empty($_GET['name']) && substr($_GET['feed'], 0, 16) == 'torrents_notify_') {

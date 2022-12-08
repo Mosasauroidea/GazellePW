@@ -12,6 +12,9 @@ switch (trim($_POST['language'])) {
   case t('server.common.lang_chs'):
     $Language = Lang::CHS;
     break;
+  case t('server.common.lang_pt'):
+    $Language = Lang::PT;
+    break;
   default:
     error(404);
 }

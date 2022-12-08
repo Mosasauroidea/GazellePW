@@ -52,7 +52,7 @@ $ForumID = (int)$_POST['forumid'];
 $Page = (int)$_POST['page'];
 $Action = '';
 
-$TrashForumID = ($ForumID === CONFIG['EDITING_FORUM_ID']) ? CONFIG['EDITING_TRASH_FORUM_ID'] : CONFIG['TRASH_FORUM_ID'];
+$TrashForumID = CONFIG['TRASH_FORUM_ID'];
 
 if ($Locked == 1) {
     $DB->query("

@@ -3,7 +3,7 @@
 namespace Gazelle\Torrent;
 
 use Gazelle\Base;
-use FEED, Text, Torrents;
+use FEED, Text, Torrents, Lang, Tags;
 
 class Notification extends Base {
 
@@ -13,13 +13,20 @@ class Notification extends Base {
         $this->feed = new FEED;
     }
 
-    public function notify($Properties, $IsNewGroup) {
+    private function buildBody($Properties) {
+        $Body = '';
+        if (empty($Properties['Body'])) {
+            $Body = $Properties['MainBody'];
+        } else if (empty($Properties["MainBody"])) {
+            $Body = $Properties['Body'];
+        } else {
+            $Body = $Properties['Body'] . "\n\n" . $Properties['MainBody'];
+        }
+        return $Body;
+    }
+
+    private function buildTitle($Properties) {
         $Title = Torrents::display_simple_group_name($Properties, null, false);
-        $Body = $Properties['Body'];
-        $GroupID = $Properties['GroupID'];
-        $TorrentID = $Properties['TorrentID'];
-        $TotalSize = $Properties['Size'];
-        $Group = $Properties['Group'];
         if ($Properties['ReleaseType'] > 0) {
             $Title .= ' [' . t('server.torrents.release_types')[$Properties['ReleaseType']] . ']';
         }
@@ -32,7 +39,7 @@ class Notification extends Base {
         $RemasterTitleRSS = explode(' / ', $Properties['RemasterTitle']);
         foreach ($RemasterTitleRSS as $RT) {
             if ($RT) {
-                $Details .= " / " . EditionInfo::text(trim($RT));
+                $Details .= " / " . EditionInfo::text(trim($RT), Lang::EN);
             }
         }
 
@@ -51,10 +58,22 @@ class Notification extends Base {
         if ($Details !== "") {
             $Title .= " - " . $Details;
         }
+        return $Title;
+    }
 
+    public function notify($Properties, $IsNewGroup) {
+        $GroupID = $Properties['GroupID'];
+        $TorrentID = $Properties['TorrentID'];
+        $TotalSize = $Properties['Size'];
+        $Group = $Properties['Group'];
+
+        $Title = $this->buildTitle($Properties);
+        $Body = $this->buildBody($Properties);
 
         // For RSS
-        $Item = $this->feed->item($Title, html_entity_decode(Text::strip_bbcode($Body)), 'torrents.php?action=download&amp;authkey=[[AUTHKEY]]&amp;torrent_pass=[[PASSKEY]]&amp;id=' . $TorrentID, $this->user['Username'], 'torrents.php?id=' . $GroupID, trim($Properties['TagList']));
+        $Tags = explode(',', $Properties['TagList']);
+        $TagList = implode(',', Tags::main_name($Tags));
+        $Item = $this->feed->item($Title, Text::strip_bbcode($Body), 'torrents.php?action=download&amp;authkey=[[AUTHKEY]]&amp;torrent_pass=[[PASSKEY]]&amp;id=' . $TorrentID, $this->user['Username'], 'torrents.php?id=' . $GroupID, trim($TagList));
 
 
         //Notifications
@@ -216,5 +235,25 @@ class Notification extends Base {
 
         // RSS for all
         $this->feed->populate('torrents_all', $Item);
+        $this->feed->populate('torrents_movie', $Item);
+        if ($Properties['FreeLeech'] == Torrents::FREE) {
+            $this->feed->populate('torrents_free', $Item);
+        }
+    }
+
+    function edit_notify($Properties) {
+        if ($Properties['FreeLeech'] != Torrents::FREE) {
+            return;
+        }
+        $Title = $this->buildTitle($Properties);
+        $Body = $this->buildBody($Properties);
+
+        $GroupID = $Properties['GroupID'];
+        $TorrentID = $Properties['TorrentID'];
+        $Tags = explode(',', $Properties['TagList']);
+        $TagList = implode(',', Tags::main_name($Tags));
+
+        $Item = $this->feed->item($Title, Text::strip_bbcode($Body), 'torrents.php?action=download&amp;authkey=[[AUTHKEY]]&amp;torrent_pass=[[PASSKEY]]&amp;id=' . $TorrentID, $this->user['Username'], 'torrents.php?id=' . $GroupID, trim($TagList));
+        $this->feed->populate('torrents_free', $Item);
     }
 }

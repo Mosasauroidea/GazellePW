@@ -1097,6 +1097,8 @@ server.common.lang_chs: |-
   简体中文
 server.common.lang_en: |-
   English
+server.common.lang_pt: |-
+  Português
 server.common.language: |-
   语言
 server.common.language_region: |-
@@ -1130,7 +1132,7 @@ server.common.my_comments: |-
 server.common.my_friends: |-
   我的好友
 server.common.my_notify: |-
-  RSS 推送
+  RSS 订阅
 server.common.my_subscriptions: |-
   订阅管理
 server.common.my_uploaded: |-
@@ -4683,7 +4685,7 @@ server.tools.url: |-
 server.tools.user: |-
   用户
 server.tools.user_agent: |-
-  用户代理
+  User Agent
 server.tools.user_count: |-
   用户数
 server.tools.user_does_not_exist: |-
@@ -6544,13 +6546,13 @@ server.user.notification_filter_name: |-
 server.user.notification_filter_name_note: |-
   用以区分不同的过滤器
 server.user.notify_me_of_all_new_torrents_with: |-
-  新种推送
+  RSS 订阅
 server.user.create_new_torrent_notify: |-
-  新建推送
+  新建订阅
 server.user.new_torrent_notify_list: |-
-  推送列表
+  订阅列表
 server.user.new_torrent_notify_name: |-
-  推送过滤器名称
+  个人 RSS
 server.user.notify_my_android: |-
   推送到我的智能设备
 server.user.notifyondeletedownloaded: |-
@@ -7256,7 +7258,7 @@ server.user.view: |-
 server.user.view_list: |-
   查看做种列表
 server.user.view_notifications: |-
-  查看推送
+  查看订阅
 server.user.view_users: |-
   查看用户
 server.user.view_wiki_guide: |-
@@ -8193,3 +8195,27 @@ server.common.time_format: |-
   时间格式
 server.user.logout_all: |-
   注销所有
+server.forums.trash: |-
+  移到垃圾箱
+server.user.rss_feed_url: |-
+  RSS 订阅地址
+server.user.official_rss: |-
+  官方 RSS
+server.user.rss_news: |-
+  公告
+server.user.rss_blog: |-
+  博客
+server.user.rss_torrents_all: |-
+  最新种子
+server.user.rss_torrents_free: |-
+  最新免费种子
+server.user_rss_bookmarked_movie: |-
+  已收藏电影中的最新种子
+server.reports.report_thread: |-
+  报告论坛主题
+server.reports_report_post: |-
+  报告论坛帖子
+server.reports_report_comment: |-
+  报告评论
+server.user.show_hot_movie_at_home: |-
+  首页展示

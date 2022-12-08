@@ -1127,7 +1127,7 @@ server.common.jump_to_last_read: |-
 server.common.lang_chs: |-
   简体中文
 server.common.lang_en: |-
-  Inglês
+  English
 server.common.language: |-
   Idioma
 server.common.language_region: |-
@@ -1269,7 +1269,7 @@ server.common.users: |-
 server.common.view_torrent: |-
   Ver torrent
 server.common.wiki: |-
-  Documentação
+  Wiki
 server.common.year: |-
   Ano
 server.donate.added_time: |-
@@ -3275,7 +3275,6 @@ server.staff.contact_staff: |-
 server.staff.contact_staff_note: |-
   <p>Se você estiver procurando ajuda com uma pergunta geral, Nós agradecemos se você só enviasse uma mensagem através da caixa de entrada do pessoal, onde todos nós podemos ajudá-lo.</p>
   <p>Você pode fazer isso <strong><a href="javascript:void(0)" onclick="$('#compose').gtoggle(); return false;">enviando uma mensagem para a caixa de entrada do pessoal</a></strong>.</p>
-  <p>Se quiser entrar na nossa equipe, sinta-se à vontade para <strong><a href='apply.php'>aplicar</a></strong>!</p>
 server.staff.donation: |-
   Doar
 server.staff.first_line_support: |-
@@ -5849,7 +5848,7 @@ server.upload.indonesian: |-
 server.upload.italian: |-
   Italiano
 server.upload.japanese: |-
-  ﻿Japonês
+
 server.upload.jinzhuan: |-
   Exclusivo
 server.upload.korean: |-

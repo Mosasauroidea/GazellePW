@@ -12,6 +12,7 @@ authorize();
 require(CONFIG['SERVER_ROOT'] . '/classes/validate.class.php');
 
 use Gazelle\Torrent\EditionInfo;
+use Gazelle\Torrent\Notification;
 
 $Validate = new VALIDATE;
 
@@ -27,6 +28,7 @@ $Type = $Categories[$TypeID - 1];
 $TorrentID = (int)$_POST['torrentid'];
 
 $Properties['Scene'] = (isset($_POST['scene'])) ? 1 : 0;
+$Properties['TorrentID'] = $TorrentID;
 $Properties['Jinzhuan'] = (isset($_POST['jinzhuan'])) ? 1 : 0;
 $Properties['Diy'] = (isset($_POST['diy'])) ? 1 : 0;
 $Properties['Buy'] = (isset($_POST['buy'])) ? 1 : 0;
@@ -178,7 +180,7 @@ $DBTorVals = $DBTorVals[0];
 $LogDetails = '';
 foreach ($DBTorVals as $Key => $Value) {
     $Value = "'$Value'";
-    // shit special logic, 不熟悉PHP
+    // shit special logic
     if ($Key == 'MediaInfo') {
         if ("'" . $Properties[$Key] . "'" == $Value) {
             continue;
@@ -321,23 +323,29 @@ $SQL .= "
 	WHERE ID = $TorrentID";
 $DB->query($SQL);
 
-if (check_perms('torrents_freeleech') && $Properties['FreeLeech'] != $CurFreeLeech) {
-    Torrents::freeleech_torrents($TorrentID, $Properties['FreeLeech'], $Properties['FreeLeechType']);
-}
-
 $DB->query("
-	SELECT GroupID, Time
+	SELECT GroupID,  Time
 	FROM torrents
 	WHERE ID = '$TorrentID'");
-list($GroupID, $Time) = $DB->next_record();
+list($GroupID, $Body, $TagList, $Time) = $DB->next_record();
+$Properties['GroupID'] = $GroupID;
+$Group = Torrents::get_group($GroupID);
 
-$DB->query("
-	SELECT Name
-	FROM torrents_group
-	WHERE ID = $GroupID");
-list($Name) = $DB->next_record(MYSQLI_NUM, false);
 
-Misc::write_log("Torrent $TorrentID ($Name) in group $GroupID was edited by " . $LoggedUser['Username'] . " ($LogDetails)"); // TODO: this is probably broken
+if (check_perms('torrents_freeleech') && $Properties['FreeLeech'] != $CurFreeLeech) {
+    Torrents::freeleech_torrents($TorrentID, $Properties['FreeLeech'], $Properties['FreeLeechType']);
+    $Notification = new Notification;
+    $Properties['Body'] = $Group['WikiBody'];
+    $Properties['MainBody'] = $Group['MainWikiBody'];
+    $Properties['TagList'] = $Group['TagList'];
+    $Properties['Year'] = $Group['Year'];
+    $Properties['Name'] = $Group['Name'];
+    $Properties['SubName'] = $Group['SubName'];
+    $Notification->edit_notify($Properties);
+}
+
+
+Misc::write_log("Torrent $TorrentID in group $GroupID was edited by " . $LoggedUser['Username'] . " ($LogDetails)"); // TODO: this is probably broken
 if ($LogDetails) {
     Torrents::write_group_log($GroupID, $TorrentID, $LoggedUser['ID'], $LogDetails, 0);
 }
@@ -345,6 +353,7 @@ $Cache->delete_value("torrents_details_$GroupID");
 $Cache->delete_value("torrent_download_$TorrentID");
 
 Torrents::update_hash($GroupID);
+
 // All done!
 
 header("Location: torrents.php?id=$GroupID");

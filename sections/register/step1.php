@@ -20,6 +20,7 @@ echo $Val->GenerateJS('registerform');
             <table class="layout" cellpadding="0" cellspacing="0" border="0" align="left">
                 <tr class="warn_msg_tr">
                 </tr>
+
                 <tr>
                     <td class="table-left"><?= t('server.register.username') ?></td>
                     <td class="table-right">
@@ -70,6 +71,30 @@ echo $Val->GenerateJS('registerform');
                         <input id="submit" type="submit" name="submit" value='<?= t('server.register.register') ?>' class="submit" />
                     </td>
                 </tr>
+                <?
+                if (is_limit_email_registration()) {
+                ?>
+                    <tr>
+                        <td>
+                        </td>
+                        <td class="table-right">
+                            <?= t('server.register.register_closed_note2') ?>
+                            <ul style="width:80px; text-align:left">
+                                <?
+                                foreach (CONFIG['OPEN_REGISTRATION_EMAIL'] as $Email) {
+                                ?>
+                                    <li>
+                                        <?= $Email ?>
+                                    </li>
+                                <?
+                                }
+                                ?>
+                            </ul>
+                        </td>
+                    </tr>
+                <?
+                }
+                ?>
             </table>
         <? } else { ?>
             <p sytle="margin-top: 2.5rem;"><?= t('server.register.send_note') ?></p>

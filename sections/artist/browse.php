@@ -509,7 +509,7 @@ View::show_header($ArtistHeaderName, 'browse,bbcode,comments,voting,recommend,su
                 $Range = range(0, count($Collages) - 1);
                 shuffle($Range);
                 $Indices = array_slice($Range, 0, MAX_COLLAGES);
-                $SeeAll = ' <a href="#" onclick="$(\'.collage_rows\').gtoggle(); return false;">(See all)</a>';
+                $SeeAll = ' <a href="#" onclick="$(\'.collage_rows\').gtoggle(); return false;">(' . t('server.common.see_full') . ')</a>';
             } else {
                 $Indices = range(0, count($Collages) - 1);
                 $SeeAll = '';

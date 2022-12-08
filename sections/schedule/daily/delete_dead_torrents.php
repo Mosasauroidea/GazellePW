@@ -9,7 +9,10 @@ $DB->query("
 			t.ID
 		FROM torrents AS t
 		WHERE
-			(t.Time < '" . time_minus(3600 * 24 * 2) . "' AND t.last_action = 0)");
+			(t.Time < '" . time_minus(3600 * 24 * 2) . "' AND t.last_action = 0)
+        OR
+            (t.last_action < '" . time_minus(3600 * 24 * 42) . "' AND t.last_action != 0)
+            ");
 $Torrents = $DB->to_array(false, MYSQLI_NUM, false);
 echo 'Found ' . count($Torrents) . " inactive torrents to be deleted.\n";
 

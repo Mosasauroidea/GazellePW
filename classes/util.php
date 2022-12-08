@@ -298,6 +298,20 @@ function open_registration($Email = null) {
     return false;
 }
 
+function is_limit_email_registration() {
+    if (CONFIG['OPEN_REGISTRATION']) {
+        return false;
+    }
+    if (!isset(CONFIG['OPEN_REGISTRATION_TO']) || !isset(CONFIG['OPEN_REGISTRATION_FROM'])) {
+        return true;
+    }
+    $t = time();
+    if ($t >= strtotime(CONFIG['OPEN_REGISTRATION_FROM']) && $t < strtotime(CONFIG['OPEN_REGISTRATION_TO'])) {
+        return false;
+    }
+    return true;
+}
+
 function icon($name, $class = '', $Option = []) {
     $Option = array_merge(['ReturnEmptyString' => false], $Option);
     $icon = file_get_contents(CONFIG['SERVER_ROOT'] . "/src/icons/$name.svg");

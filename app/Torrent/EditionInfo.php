@@ -35,8 +35,8 @@ class EditionInfo {
         return array_merge(self::collections, self::editions, self::features);
     }
 
-    public static function text(string $key): ?string {
-        return t("server.editioninfo.$key");
+    public static function text(string $key, $Lang = null): ?string {
+        return t("server.editioninfo.$key", ['Lang' => $Lang]);
     }
 
     public static function icon(string $key): ?string {

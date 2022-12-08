@@ -558,7 +558,7 @@ View::show_header($Title, 'browse,comments,torrent,bbcode,recommend,cover_art,su
                         $Range = range(0, count($Collages) - 1);
                         shuffle($Range);
                         $Indices = array_slice($Range, 0, MAX_COLLAGES);
-                        $SeeAll = ' <a href="#" onclick="$(\'.collage_rows\').gtoggle(); return false;">(See all)</a>';
+                        $SeeAll = ' <a href="#" onclick="$(\'.collage_rows\').gtoggle(); return false;">(' . t('server.common.see_full') . ')</a>';
                     } else {
                         $Indices = range(0, count($Collages) - 1);
                         $SeeAll = '';
@@ -613,7 +613,7 @@ View::show_header($Title, 'browse,comments,torrent,bbcode,recommend,cover_art,su
                         $Range = range(0, count($PersonalCollages) - 1);
                         shuffle($Range);
                         $Indices = array_slice($Range, 0, MAX_PERS_COLLAGES);
-                        $SeeAll = ' <a href="#" onclick="$(\'.personal_rows\').gtoggle(); return false;">(See all)</a>';
+                        $SeeAll = ' <a href="#" onclick="$(\'.personal_rows\').gtoggle(); return false;">(' . t('server.common.see_full') . ')</a>';
                     } else {
                         $Indices = range(0, count($PersonalCollages) - 1);
                         $SeeAll = '';
