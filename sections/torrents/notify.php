@@ -168,7 +168,8 @@ if ($Sneaky) {
 ?>
 <div class=LayoutBody>
     <div class="BodyHeader">
-        <h2 class="BodyHeader-nav"><?= t('server.torrents.latest_notifications') ?></h2>
+        <div class="BodyHeader-nav"><?= t('server.user.notify_me_of_all_new_torrents_with') ?></div>
+        <div class="BodyHeader-subNav"><?= t('server.torrents.latest_notifications') ?></div>
     </div>
     <div class="BodyNavLinks">
         <? if ($FilterID) { ?>
@@ -178,7 +179,7 @@ if ($Sneaky) {
             <a class="brackets" href="#" onclick="globalapp.clearSelected(event)"><?= t('server.torrents.clear_selected') ?></a>
             <a href="torrents.php?action=notify_catchup&amp;auth=<?= $LoggedUser['AuthKey'] ?>" class="brackets"><?= t('server.torrents.catch_up') ?></a>
         <? } ?>
-        <a href="user.php?action=notify" class="brackets"><?= t('server.torrents.edit_filters') ?></a>
+        <a href="user.php?action=notify" class="brackets"><?= t('server.user.new_torrent_notify_list') ?></a>
     </div>
     <? if ($TorrentCount > NOTIFICATIONS_PER_PAGE) { ?>
         <div class="BodyNavLinks">

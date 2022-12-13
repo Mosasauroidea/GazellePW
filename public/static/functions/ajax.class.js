@@ -120,6 +120,7 @@ function Bookmark(type, id, newName) {
   var bmLinks = $('#bookmarklink_' + type + '_' + id + ', .bookmarklink_' + type + '_' + id)
   var oldName = newName && bmLinks.html()
   ajax.get('bookmarks.php?action=add&type=' + type + '&auth=' + authkey + '&id=' + id, function () {
+    bmLinks.parent('.remove_bookmark, .add_bookmark').toggleClass('add_bookmark remove_bookmark')
     if (newName) {
       bmLinks.html(newName)
     }
@@ -144,6 +145,7 @@ function Unbookmark(type, id, newName) {
     var bmLinks = $('#bookmarklink_' + type + '_' + id + ', .bookmarklink_' + type + '_' + id)
     var oldName = newName && bmLinks.html()
     ajax.get('bookmarks.php?action=remove&type=' + type + '&auth=' + authkey + '&id=' + id, function () {
+      bmLinks.parent('.remove_bookmark, .add_bookmark').toggleClass('add_bookmark remove_bookmark')
       if (newName) {
         bmLinks.html(newName)
       }

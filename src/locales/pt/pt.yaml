@@ -7945,10 +7945,10 @@ server.country.kenya: |-
   Quénia
 server.country.kiribati: |-
   Quiribati
-server.country.korea_(south): |-
-  Coreia (Sul)
-server.country.korea_(north): |-
-  Coréia do Norte
+server.country.south_korea: |-
+  Sul Coreia
+server.country.north_korea: |-
+  Coréia Coréia
 server.country.kuwait: |-
   Kuwait
 server.country.kyrgyzstan: |-

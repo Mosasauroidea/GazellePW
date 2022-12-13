@@ -7957,10 +7957,10 @@ server.country.kenya: |-
   Kenya
 server.country.kiribati: |-
   Kiribati
-server.country.korea_(south): |-
-  Korea (South)
-server.country.korea_(north): |-
-  Korea (North)
+server.country.south_korea: |-
+  South Korea
+server.country.north_korea: |-
+  North Korea
 server.country.kuwait: |-
   Kuwait
 server.country.kyrgyzstan: |-
@@ -8433,3 +8433,5 @@ client.stats.uv: |-
   Users active
 client.stats.seeding_user: |-
   User in seeding status
+server.forums.verbal: |-
+  Verbal

@@ -4976,7 +4976,7 @@ server.torrents.browser_edit_torrent: |-
 server.torrents.buy: |-
   自购
 server.torrents.catch_up: |-
-  刷新列表
+  刷新
 server.torrents.change_category: |-
   变更分类
 server.torrents.change_group: |-
@@ -5202,7 +5202,7 @@ server.torrents.lack_of_info_now: |-
 server.torrents.last_active: |-
   最新活动
 server.torrents.latest_notifications: |-
-  最近的新种推送
+  最近的推送
 server.torrents.leechers: |-
   下载数
 server.torrents.like: |-
@@ -5258,7 +5258,7 @@ server.torrents.never: |-
 server.torrents.no: |-
   否
 server.torrents.no_new_notifications_found: |-
-  新种订阅空空如也
+  空空如也
 server.torrents.non_wiki_torrent_group_editing: |-
   种子组编辑
 server.torrents.nothing_found: |-
@@ -7272,7 +7272,7 @@ server.user.view: |-
 server.user.view_list: |-
   查看做种列表
 server.user.view_notifications: |-
-  查看订阅
+  查看推送
 server.user.view_users: |-
   查看用户
 server.user.view_wiki_guide: |-
@@ -7823,9 +7823,9 @@ server.country.kenya: |-
   肯尼亚
 server.country.kiribati: |-
   基里巴斯
-server.country.korea_(south): |-
+server.country.south_korea: |-
   韩国
-server.country.korea_(north): |-
+server.country.north_korea: |-
   朝鲜
 server.country.kuwait: |-
   科威特

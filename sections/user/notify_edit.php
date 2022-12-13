@@ -16,9 +16,9 @@ View::show_header(t('server.user.manage_notifications'), 'jquery.validate,form_v
     <div class="BodyHeader">
         <h2 class="BodyHeader-nav"><?= t('server.user.notify_me_of_all_new_torrents_with') ?></h2>
         <div class="BodyNavLinks">
+            <a href="user.php?action=notify_edit" class="brackets"><?= t('server.user.create_new_torrent_notify') ?></a>
             <a href="user.php?action=notify" class="brackets"><?= t('server.user.new_torrent_notify_list') ?></a>
             <a href="torrents.php?action=notify" class="brackets"><?= t('server.user.view_notifications') ?></a>
-            <a href="user.php?action=notify_edit" class="brackets"><?= t('server.user.create_new_torrent_notify') ?></a>
         </div>
     </div>
     <script>

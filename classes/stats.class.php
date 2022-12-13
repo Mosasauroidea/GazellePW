@@ -7,16 +7,17 @@ class Stats {
   public const DayActive = 'day_active';
   public const SeedingUser = 'seeding_user';
 
-  private $Names = [
-    self::PeerCount,
-    self::SeederCount,
-    self::LeecherCount,
-    self::DayActive,
-    self::SeedingUser
-  ];
+
 
   public static function record($Name, $Value) {
-    if (!array_key_exists($Name, self::$Names)) {
+    $Names = [
+      self::PeerCount,
+      self::SeederCount,
+      self::LeecherCount,
+      self::DayActive,
+      self::SeedingUser
+    ];
+    if (!in_array($Name, $Names)) {
       error_log('Invalid name: ' . $Name);
       return;
     }
@@ -24,7 +25,7 @@ class Stats {
       error_log('Invalid value: ' . $Value . ' ;name: ' . $Name);
       return;
     }
-    G::$DB->prepared_query("INSERT INTO Name, Value, Time VALUES (?, ?, ?)", $Name, $Value, sqltime());
+    G::$DB->prepared_query("INSERT INTO stats (Name, Value, Time) VALUES (?, ?, ?)", $Name, $Value, sqltime());
   }
 
   public static function peersCount() {
