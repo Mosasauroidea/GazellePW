@@ -96,7 +96,8 @@ list($Results) = $DB->next_record();
                                     &nbsp;<?= t('server.friends.down') ?>: <strong><?= Format::get_size($Downloaded) ?></strong>
                                 <?  } ?>
                             </span>
-                            <span style="float: right">
+                            &nbsp;
+                            <span>
                                 <? if (check_paranoia('lastseen', $Paranoia, $Class, $FriendID)) { ?>
                                     <span><?= time_diff($LastAccess) ?></span>
                                 <?  } ?>
@@ -112,7 +113,7 @@ list($Results) = $DB->next_record();
                         <?  } ?>
                         <td valign="top">
                             <input type="hidden" name="friendid" value="<?= $FriendID ?>" />
-                            <? new TEXTAREA_PREVIEW('comment', "comment$FriendID", '', 60, 8, true, true, false); ?>
+                            <? new TEXTAREA_PREVIEW('comment', "comment$FriendID", display_str($Comment), 60, 8, true, true, false); ?>
                         </td>
 
                     </tr>

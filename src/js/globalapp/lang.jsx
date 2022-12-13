@@ -23,6 +23,13 @@ import RulesClientsEn from '#/locales/en/Rules/Clients.mdx'
 import RulesClientsZhHans from '#/locales/zh-Hans/Rules/Clients.mdx'
 import RulesUploadEn from '#/locales/en/Rules/Upload.mdx'
 import RulesUploadZhHans from '#/locales/zh-Hans/Rules/Upload.mdx'
+import RulesBonusEn from '#/locales/en/Rules/Bonus.mdx'
+import RulesBonusZhHans from '#/locales/zh-Hans/Rules/Bonus.mdx'
+import RulesInviteEn from '#/locales/en/Rules/Invite.mdx'
+import RulesInviteZhHans from '#/locales/zh-Hans/Rules/Invite.mdx'
+import RulesBlacklistEn from '#/locales/en/Rules/Blacklist.mdx'
+import RulesBlacklistZhHans from '#/locales/zh-Hans/Rules/Blacklist.mdx'
+
 import * as components from '#/js/app/components'
 
 const LOCALES = { en, chs: zhHans }
@@ -41,6 +48,9 @@ const COMPONENTS = {
     'Rules/Ratio.mdx': RulesRatioEn,
     'Rules/Clients.mdx': RulesClientsEn,
     'Rules/Upload.mdx': RulesUploadEn,
+    'Rules/Bonus.mdx': RulesBonusEn,
+    'Rules/Invite.mdx': RulesInviteEn,
+    'Rules/Blacklist.mdx': RulesBlacklistEn,
   },
   chs: {
     'ScreenshotComparisonHelp.mdx': ScreenshotComparisionHelpZhHans,
@@ -53,6 +63,9 @@ const COMPONENTS = {
     'Rules/Ratio.mdx': RulesRatioZhHans,
     'Rules/Clients.mdx': RulesClientsZhHans,
     'Rules/Upload.mdx': RulesUploadZhHans,
+    'Rules/Bonus.mdx': RulesBonusZhHans,
+    'Rules/Invite.mdx': RulesInviteZhHans,
+    'Rules/Blacklist.mdx': RulesBlacklistZhHans,
   },
 }
 

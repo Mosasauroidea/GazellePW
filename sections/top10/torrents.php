@@ -315,9 +315,7 @@ function generate_torrent_table($Caption, $Tag, $Details, $Limit) {
                 }
             }
             $tableRender = new UngroupTorrentSimpleListView($TorrentLists);
-            $tableRender->with_number(true)->render([
-                'NoActions' => true
-            ]);
+            $tableRender->with_number(true)->render([]);
             ?>
         </div>
     </div>

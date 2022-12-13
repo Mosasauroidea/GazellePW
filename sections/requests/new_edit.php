@@ -414,9 +414,7 @@ View::show_header(($NewRequest ? t('server.requests.new_create') : t('server.req
                     <tr class="Form-row">
                         <td class="Form-label"><?= t('server.requests.description') ?>:</td>
                         <td class="Form-items">
-                            <div class="Form-inputs">
-                                <textarea class="Input" name="description" cols="70" rows="7"><?= (!empty($Request['Description']) ? $Request['Description'] : '') ?></textarea>
-                            </div>
+                            <? new TEXTAREA_PREVIEW("description", "description", (!empty($Request['Description']) ? display_str($Request['Description']) : '')) ?>
                             <div>
                                 <?= t('server.requests.description_note') ?>
                             </div>

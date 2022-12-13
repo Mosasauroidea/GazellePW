@@ -3205,6 +3205,18 @@ server.rules.tags_title: |-
   Tagging
 server.rules.tags_title_de: |-
   These rules govern what tags can and cannot be added.
+server.rules.bonus_title: |-
+  Bonus Points
+server.rules.bonus_title_de: |-
+  These are the rules that govern bonus.
+server.rules.invite_title: |-
+  Invite
+server.rules.invite_title_de: |-
+  These are the rules that govern invites.
+server.rules.blacklist_title: |-
+  Blacklist
+server.rules.blacklist_title_de: |-
+  These are the rules that govern image hosts and movies.
 server.rules.type: |-
   Category
 server.rules.upload_h13k: |-
@@ -3382,9 +3394,9 @@ server.staffpm.view_your_unanswered: |-
 server.staffpm.your_unanswered: |-
   Your Unanswered
 server.stats.detailed_torrent_statistics: |-
-  Detailed Torrent Statistics
+  Torrent Statistics
 server.stats.detailed_user_statistics: |-
-  Detailed User Statistics
+  User Statistics
 server.stats.geographical_distribution_map: |-
   Geographical Distribution Map
 server.stats.geographical_distribution_map_africa: |-
@@ -7370,7 +7382,7 @@ server.user.upload: |-
 server.user.uploaded: |-
   Uploaded
 server.user.uploaded_title: |-
-  Upload amount in bytes. Also accepts e.g. +20GB or -35.6364MB on the end.
+  Upload amount in bytes. Also accepts e.g. +20 GB or -35.6364 MB on the end.
 server.user.uploads: |-
   Uploads
 server.user.user_disable: |-
@@ -7379,6 +7391,8 @@ server.user.user_po: |-
   User Promote
 server.user.user_reason: |-
   User reason
+server.user.user_reason_title: |-
+  This text will be sent to the user.
 server.user.user_search: |-
   User search
 server.user.username: |-
@@ -8357,3 +8371,65 @@ server.reports_report_comment: |-
   Comment Report
 server.user.show_hot_movie_at_home: |-
   Show on homepage
+server.forums.new_forum_specific_rule: |-
+  Add forum specific rules
+server.stats.uploads_by_day: |-
+  Uploads by day
+client.stats.delete: |-
+  Deletion
+client.stats.uploads: |-
+  Uploads
+client.stats.upload_alive: |-
+  Uploads(alive)
+client.stats.user_timeline: |-
+  User Timeline
+client.stats.new_registrations: |-
+  New registrations
+client.stats.disabled_user: |-
+  Disabled user
+client.stats.user_class_distribution: |-
+  User Class Distribution
+client.stats.user_count: |-
+  User count
+client.stats.user_platform_distribution: |-
+  User Platform Distribution
+client.stats.user_browser_distribution: |-
+  User Browse Distribution
+client.stats.geographical_distribution: |-
+  Geographical Distribution
+server.common.time_length: |-
+  Length
+server.comment.verbal: |-
+  Verbal
+server.forums.edit_post: |-
+  Edit post
+server.user.seeding_size: |-
+  Seeding Size
+client.stats.processing_distribution: |-
+  Processing Distribution
+client.stats.source_distribution: |-
+  Source Distribution
+client.stats.codec_distribution: |-
+  Codec Distribution
+client.stats.resolution_distribution: |-
+  Resolution Distribution
+client.stats.container_distribution: |-
+  Container Distribution
+client.stats.release_distribution: |-
+  Release Type Distribution
+client.stats.torrent_count: |-
+  Torrent Count
+client.stats.movie_count: |-
+  Movie Count
+client.stats.peers: |-
+  Peers
+client.stats.peer_count: |-
+  Peer count
+client.stats.seeder_count: |-
+  Seeder count
+client.stats.leecher_count: |-
+  Leecher count
+client.stats.uv: |-
+  Users active
+client.stats.seeding_user: |-
+  User in seeding status

@@ -43,7 +43,8 @@ echo "Start services..."
 
 mkdir -p /var/www/logs
 mkdir -p /var/www/.cache
-chmod 777 gazelle:gazelle /var/www/.cache
+chmod 777 /var/www/.cache
+chown gazelle:gazelle  /var/www/.cache
 truncate -s0  /var/www/logs/*.log
 
 run_service cron

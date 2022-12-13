@@ -56,7 +56,6 @@ Where
   margin-left: auto;
   display: flex;
   gap: var(--global-space-sm);
-  padding-top: 5px;
 }
 .TableForumPostHeader-info {
   display: flex;

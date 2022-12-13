@@ -3,53 +3,6 @@ if (!check_perms('site_view_flow')) {
 	error(403);
 }
 
-//Timeline generation
-if (!isset($_GET['page'])) {
-	if (!list($Labels, $InFlow, $OutFlow, $Max) = $Cache->get_value('users_timeline')) {
-		$Labels = [];
-		$InFlow = [];
-		$OutFlow = [];
-		$DB->query("
-			SELECT DATE_FORMAT(JoinDate, '%b \'%y') AS Month, COUNT(UserID)
-			FROM users_info
-			GROUP BY Month
-			ORDER BY JoinDate DESC
-			LIMIT 1, 12");
-		$TimelineIn = array_reverse($DB->to_array());
-		$DB->query("
-			SELECT DATE_FORMAT(BanDate, '%b \'%y') AS Month, COUNT(UserID)
-			FROM users_info
-			GROUP BY Month
-			ORDER BY BanDate DESC
-			LIMIT 1, 12");
-		$TimelineOut = array_reverse($DB->to_array());
-		foreach ($TimelineIn as $Month) {
-			list($Label, $Amount) = $Month;
-			if ($Amount > $Max) {
-				$Max = $Amount;
-			}
-		}
-		foreach ($TimelineOut as $Month) {
-			list($Label, $Amount) = $Month;
-			if ($Amount > $Max) {
-				$Max = $Amount;
-			}
-		}
-		foreach ($TimelineIn as $Month) {
-			list($Label, $Amount) = $Month;
-			$Labels[] = $Label;
-			$InFlow[] = number_format(($Amount / $Max) * 100, 4);
-		}
-		foreach ($TimelineOut as $Month) {
-			list($Label, $Amount) = $Month;
-			$OutFlow[] = number_format(($Amount / $Max) * 100, 4);
-		}
-		$Cache->cache_value('users_timeline', array($Labels, $InFlow, $OutFlow, $Max), mktime(0, 0, 0, date('n') + 1, 2));
-	}
-}
-//End timeline generation
-
-
 define('DAYS_PER_PAGE', 100);
 list($Page, $Limit) = Format::page_limit(DAYS_PER_PAGE);
 
@@ -123,8 +76,9 @@ $DB->set_query_id($RS);
 		<h2 class="BodyHeader-nav"><?= t('server.tools.user_flow') ?></h2>
 	</div>
 	<? if (!isset($_GET['page'])) { ?>
-		<div class="BoxBody">
-			<img src="https://chart.googleapis.com/chart?cht=lc&amp;chs=820x160&amp;chco=000D99,99000D&amp;chg=0,-1,1,1&amp;chxt=y,x&amp;chxs=0,h&amp;chxl=1:|<?= implode('|', $Labels) ?>&amp;chxr=0,0,<?= $Max ?>&amp;chd=t:<?= implode(',', $InFlow) ?>|<?= implode(',', $OutFlow) ?>&amp;chls=2,4,0&amp;chdl=New+Registrations|Disabled+Users&amp;chf=bg,s,FFFFFF00" alt="<?= t('server.tools.user_flow_vs_time') ?>" />
+		<div class="ChartRoot">
+			<div id="chart_user_timeline">
+			</div>
 		</div>
 	<?  } ?>
 	<? View::pages($Pages) ?>
@@ -156,4 +110,6 @@ $DB->set_query_id($RS);
 	</table>
 	<? View::pages($Pages) ?>
 </div>
-<? View::show_footer(); ?>
+<?
+Stats::userTimeLine();
+View::show_footer([], 'stats/index'); ?>

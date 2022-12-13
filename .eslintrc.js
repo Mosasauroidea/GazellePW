@@ -1,10 +1,5 @@
 module.exports = {
-  extends: [
-    'standard',
-    'prettier',
-    'plugin:react/recommended',
-    'plugin:react/jsx-runtime',
-  ],
+  extends: ['standard', 'prettier', 'plugin:react/recommended', 'plugin:react/jsx-runtime'],
   plugins: ['jest'],
   env: {
     'jest/globals': true,

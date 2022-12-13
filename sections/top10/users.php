@@ -22,24 +22,49 @@ View::show_header(t('server.top10.top_10_users'), '', 'PageTop10User');
     // defaults to 10 (duh)
     $Limit = isset($_GET['limit']) ? intval($_GET['limit']) : 10;
     $Limit = in_array($Limit, array(10, 100, 250)) ? $Limit : 10;
-    $BaseQuery = "
-	SELECT
-		u.ID,
-		ui.JoinDate,
-		u.Uploaded,
-		u.Downloaded,
-		COUNT(t.ID) AS NumUploads,
-		u.Paranoia,
-        u.BonusPoints
-	FROM users_main AS u
-		JOIN users_info AS ui ON ui.UserID = u.ID
-		LEFT JOIN torrents AS t ON t.UserID=u.ID
-	WHERE u.Enabled='1'
-		And Uploaded>" . CONFIG['STARTING_UPLOAD'] . "
-		AND (Uploaded>'" . 10 * 1024 * 1024 * 1024 . "'
-		or Downloaded>'" . 5 * 1024 * 1024 * 1024 . "')
-	GROUP BY u.ID";
-
+    $BaseQuery =
+        "SELECT
+            u.ID,
+            ui.JoinDate,
+            u.Uploaded,
+            u.Downloaded,
+            COUNT(t.ID) AS NumUploads,
+            u.Paranoia,
+            u.BonusPoints,
+            temp.SeedingSize as SeedingSize
+        FROM
+            users_main AS u
+        JOIN users_info AS ui
+        ON
+            ui.UserID = u.ID
+        LEFT JOIN torrents AS t
+        ON
+            t.UserID = u.ID
+        LEFT JOIN(
+            SELECT
+                xfu.uid,
+                SUM(seedingt.Size) AS SeedingSize
+            FROM
+                (
+                SELECT DISTINCT
+                    uid,
+                    fid
+                FROM
+                    xbt_files_users
+                WHERE
+                    active = 1 AND remaining = 0 AND mtime > UNIX_TIMESTAMP(NOW() - INTERVAL 1 HOUR)) AS xfu
+                LEFT JOIN torrents AS seedingt
+                ON
+                    seedingt.ID = xfu.fid AND seedingt.UserID = xfu.uid
+            ) AS temp
+        ON
+            temp.uid = u.id
+        WHERE
+            u.Enabled = '1' And Uploaded>" . CONFIG['STARTING_UPLOAD'] . " AND(
+                u.Uploaded > '" . 10 * 1024 * 1024 * 1024 . "' OR u.Downloaded > '" . 5 * 1024 * 1024 * 1024 . "'
+            )
+        GROUP BY
+            u.ID";
     /* upload count */
     if ($Details == 'all' || $Details == 'numul') {
         if (!$TopUserNumUploads = $Cache->get_value('topuser_numul')) {
@@ -81,6 +106,15 @@ View::show_header(t('server.top10.top_10_users'), '', 'PageTop10User');
         generate_user_table(t('server.user.bonus_points'), 'bonus_points', $TopUserBonusPoints, $Limit);
     }
 
+    if ($Details == 'all' || $Details == 'seeding_size') {
+        if (!$TopUserUploads = $Cache->get_value('topuser_seeding_size_' . $Limit)) {
+            $DB->query("$BaseQuery ORDER BY SeedingSize DESC LIMIT $Limit;");
+            $TopUserSeedingSize = $DB->to_array();
+            $Cache->cache_value('topuser_seeding_size_' . $Limit, $TopUserSeedingSize, 3600 * 12);
+        }
+        generate_user_table(t('server.user.seeding_size'), 'seeding_size', $TopUserSeedingSize, $Limit);
+    }
+
     echo '</div>';
     View::show_footer();
     exit;
@@ -93,7 +127,7 @@ View::show_header(t('server.top10.top_10_users'), '', 'PageTop10User');
 
     // generate a table based on data from most recent query to $DB
     function generate_user_table($Caption, $Tag, $Details, $Limit) {
-        $DefaultItems = ['ul', 'dl', 'numul', 'bonus_points', 'ratio'];
+        $DefaultItems = ['ul', 'dl', 'numul', 'bonus_points', 'ratio', 'seeding_size'];
         $Items = create_items($DefaultItems, $Tag);
         $Details = array_slice($Details, 0, $Limit);
     ?>
@@ -149,6 +183,8 @@ View::show_header(t('server.top10.top_10_users'), '', 'PageTop10User');
                                     <td class="Table-cell Table-cellRight"><?= t('server.user.downloaded') ?></td>
                                 <? } else if ($Item === 'ratio') { ?>
                                     <td class="Table-cell Table-cellRight"><?= t('server.user.ratio') ?></td>
+                                <? } else if ($Item == "seeding_size") { ?>
+                                    <td class="Table-cell Table-cellRight"><?= t('server.user.seeding_size') ?></td>
                                 <? } ?>
                             <? } ?>
                             <td class="Table-cell Table-cellRight"><?= t('server.top10.joined') ?></td>
@@ -175,6 +211,8 @@ View::show_header(t('server.top10.top_10_users'), '', 'PageTop10User');
                                         <td class="Table-cell Table-cellRight"><?= Format::get_size($Detail['Downloaded'], 0) ?></td>
                                     <? } else if ($Item === 'ratio') { ?>
                                         <td class="Table-cell Table-cellRight"><?= Format::get_ratio_html($Detail['Uploaded'], $Detail['Downloaded']) ?></td>
+                                    <? } else if ($Item == 'seeding_size') { ?>
+                                        <td class="Table-cell Table-cellRight"><?= Format::get_size($Detail['SeedingSize']) ?></td>
                                     <? } ?>
                                 <? } ?>
                                 <td class="Table-cell Table-cellRight"><?= $IsAnonymous ? '--' : (new DateTime($Detail['JoinDate']))->format('Y'); ?></td>

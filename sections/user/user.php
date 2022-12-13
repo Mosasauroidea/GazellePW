@@ -2021,7 +2021,7 @@ WHERE xs.uid =" . $UserID . " and xs.tstamp >= unix_timestamp(date_format(now(),
                                 </td>
                             </tr>
                             <tr class="Form-row">
-                                <td class="Form-label"><?= t('server.user.user_reason') ?></td>
+                                <td class="Form-label" data-tooltip="<?= t('server.user.user_reason_title') ?>"><?= t('server.user.user_reason') ?></td>
                                 <td class="Form-inputs">
                                     <input class="Input" type="text" name="UserReason" />
                                 </td>

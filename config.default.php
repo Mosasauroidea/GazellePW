@@ -4,9 +4,9 @@ date_default_timezone_set('UTC');
 
 $CONFIG = [];
 
-// Main settings
-$CONFIG['SITE_NAME'] = "GPW DEV"; //The name of your site
-$CONFIG['SITE_HOST'] = "localhost"; // The host for your site (e.g. localhost, orpheus.network)
+// 主设置 | Main settings
+$CONFIG['SITE_NAME'] = "GPW DEV"; //站名 | The name of your site
+$CONFIG['SITE_HOST'] = "localhost"; //站点域名 | The host for your site (e.g. localhost, orpheus.network)
 $CONFIG['SITE_URL'] = "http://${CONFIG['SITE_HOST']}:9000"; // The base URL to access the site (e.g. http://localhost:8080, https://orpheus.network)
 $CONFIG['SERVER_ROOT'] = "/var/www"; //The root of the server, used for includes, purpose is to shorten the path string
 $CONFIG['ANNOUNCE_URL'] = "http://${CONFIG['SITE_HOST']}:2710"; //Announce HTTP URL

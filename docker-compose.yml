@@ -14,7 +14,6 @@ services:
       - mysql
     volumes:
       - .:/var/www:delegated
-      - node-modules:/var/www/node_modules
       - .docker/web/nginx.conf:/etc/nginx/sites-enabled/gazelle.conf
       - .docker/web/www.conf:/etc/php/7.3/fpm/pool.d/www.conf
     environment:
@@ -67,6 +66,5 @@ services:
       - MYSQL_PASSWORD=password
 
 volumes:
-  node-modules:
   mysql-data:
   manticore-data:

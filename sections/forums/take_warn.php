@@ -36,7 +36,7 @@ $DB->query("
 		('$UserID', '" . db_string($AdminComment) . "')
 	ON DUPLICATE KEY UPDATE
 		Comment = CONCAT('" . db_string($AdminComment) . "', Comment)");
-Misc::send_pm_with_tpl($UserID, 'verbal_warning', ['Length' => $WarningLength, 'URL' => $URL]);
+Misc::send_pm_with_tpl($UserID, 'verbal_warning', ['Length' => $WarningLength, 'URL' => $URL, 'PrivateMessage' => $PrivateMessage]);
 
 //edit the post
 $DB->query("

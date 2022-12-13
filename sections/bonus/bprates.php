@@ -112,7 +112,7 @@ if ($TotalTorrents > 0) {
         </h3>
     </div>
     <div class="BodyNavLinks">
-        <a class="brackets" href="/wiki.php?action=article&id=47"><?= t('server.bonus.about_bonus_points') ?></a>
+        <a class="brackets" href="/rules.php?p=bonus"><?= t('server.bonus.about_bonus_points') ?></a>
         <a class="brackets" href="/bonus.php"><?= t('server.bonus.bonus_points_shop') ?></a>
         <a class="brackets" href="/bonus.php?action=history"><?= t('server.bonus.history') ?></a>
         <a class="brackets" href="/top10.php?type=users&limit=10&details=bonus_points"><?= t('server.top10.top') . ' 10 ' . t('server.user.bonus_points') ?></a>

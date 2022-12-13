@@ -106,3 +106,9 @@ form.edit_form      -> 编辑主题
   align-items: center;
   padding-top: 3px;
 }
+
+.ForumSpecialHeader {
+  display: flex;
+  font-size: var(--global-fontSize-lg);
+  justify-content: center;
+}

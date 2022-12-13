@@ -12,14 +12,36 @@ export const ChartTorrentByDay = () => {
     },
     series: [
       {
+        name: t('client.stats.uploads'),
         data: window.DATA['statsTorrentByDay'].map((v) => ({
           date: v.date,
           x: new Date(v.date).getTime(),
-          y: v.uploads,
+          y: v.in,
+        })),
+        dataLabels: { enabled: true },
+      },
+      {
+        name: t('client.stats.delete'),
+        data: window.DATA['statsTorrentByDay'].map((v) => ({
+          date: v.date,
+          x: new Date(v.date).getTime(),
+          y: v.out,
+        })),
+        dataLabels: { enabled: true },
+      },
+      {
+        name: t('client.stats.upload_alive'),
+        data: window.DATA['statsTorrentByDay'].map((v) => ({
+          date: v.date,
+          x: new Date(v.date).getTime(),
+          y: v.net,
         })),
         dataLabels: { enabled: true },
       },
     ],
+    yAxis: {
+      allowDecimals: false,
+    },
     xAxis: {
       type: 'datetime',
       dateTimeLabelFormats: {

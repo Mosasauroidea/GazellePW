@@ -71,6 +71,30 @@
 					<?= t('server.rules.tags_title_de') ?>
 				</td>
 			</tr>
+			<tr class="Table-row">
+				<td class="Table-cell">
+					<a href="rules.php?p=bonus"><?= t('server.rules.bonus_title') ?></a>
+				</td>
+				<td class="Table-cell">
+					<?= t('server.rules.bonus_title_de') ?>
+				</td>
+			</tr>
+			<tr class="Table-row">
+				<td class="Table-cell">
+					<a href="rules.php?p=invite"><?= t('server.rules.invite_title') ?></a>
+				</td>
+				<td class="Table-cell">
+					<?= t('server.rules.invite_title_de') ?>
+				</td>
+			</tr>
+			<tr class="Table-row">
+				<td class="Table-cell">
+					<a href="rules.php?p=blacklist"><?= t('server.rules.blacklist_title') ?></a>
+				</td>
+				<td class="Table-cell">
+					<?= t('server.rules.blacklist_title_de') ?>
+				</td>
+			</tr>
 		</table>
 	</div>
 </div>

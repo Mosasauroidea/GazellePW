@@ -75,8 +75,8 @@ if (!empty($Err)) {
 
             <tr class="Form-row">
                 <td class="Form-label"><?= t('server.collages.description') ?></td>
-                <td class="Form-inputs">
-                    <textarea class="Input" name="description" id="description" cols="60" rows="10"><?= $Description ?></textarea>
+                <td class="Form-items">
+                    <? new TEXTAREA_PREVIEW("description", "description", display_str($Description)) ?>
                 </td>
             </tr>
             <tr class="Form-row">

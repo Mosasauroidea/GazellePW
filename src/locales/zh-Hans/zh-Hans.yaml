@@ -65,11 +65,11 @@ client.common.writer: |-
 client.error.imdb_unknown_error: |-
   请检查 IMDb ID 是否填写有误，如果无误，请重试，重试无效，请联系管理员。
 client.error.invalid_imdb_link_note: |-
-  请填入格式合规的 IMDb 链接，形如 “tt1234567” 或 “https://www.imdb.com/title/tt1234567”。
+  请填入格式合规的 IMDb 链接，形如「tt1234567」或「https://www.imdb.com/title/tt1234567」。
 client.error.request_torrent_group_exists_note: |-
-  站点已有此电影，<a href='/torrents.php?id={{groupID}}'>点此</a> 查看并确保你想要的格式不存在，通过页面上方的 “请求格式” 发布求种。
+  站点已有此电影，<a href='/torrents.php?id={{groupID}}'>点此</a> 查看并确保你想要的格式不存在，通过页面上方的「请求格式」发布求种。
 client.error.torrent_group_exists_note: |-
-  站点已有此电影，<a href='/torrents.php?id={{groupID}}'>点此</a> 查看并确保你想要发布的种子不与既有种子重复后，通过页面上方的 “添加格式” 发布。
+  站点已有此电影，<a href='/torrents.php?id={{groupID}}'>点此</a> 查看并确保你想要发布的种子不与既有种子重复后，通过页面上方的「添加格式」发布。
 client.other.client_whitelist: |-
   客户端白名单
 client.screenshot_comparison.gpw_helper_not_installed: |-
@@ -141,11 +141,11 @@ client.upload.remaster_required: |-
 client.upload.resolution_required: |-
   请选择一个分辨率。
 client.upload.source_required: |-
-  请选择片源。如果你不确定，请选 “Other”，然后输入 “Unknown”。
+  请选择片源。如果你不确定，请选「Other」，然后输入「Unknown」。
 client.upload.sub_name: |-
   中文名
 client.upload.subtitles_required: |-
-  请指明文件所包含的字幕，如果没有就勾选 “无字幕”。
+  请指明文件所包含的字幕，如果没有就勾选「无字幕」。
 client.upload.subtitles_with_mediainfo: |-
   MediaInfo 未提供语言信息，请根据实际情况手动勾选。
 client.upload.tag_required: |-
@@ -249,7 +249,7 @@ server.apply.public: |-
 server.apply.published: |-
   开放
 server.apply.referral_note: |-
-  <b>内推制度：欢迎用户推荐自己的伙伴前来应聘（可推荐无号用户，应聘 TI 除外），内推成功可获得 <span class='u-colorWarning'>3 个邀请名额</span> 和 <span class='u-colorWarning'>250000 积分</span>的奖励！请推荐者使用 Staff PM（对象为 “工作组”）提交推荐信，信中需包含被推荐者的基本信息及意向沟通方式。</b>
+  <b>内推制度：欢迎用户推荐自己的伙伴前来应聘（可推荐无号用户，应聘 TI 除外），内推成功可获得 <span class='u-colorWarning'>3 个邀请名额</span> 和 <span class='u-colorWarning'>250000 积分</span>的奖励！请推荐者使用 Staff PM（对象为「工作组」）提交推荐信，信中需包含被推荐者的基本信息及意向沟通方式。</b>
 server.apply.reply: |-
   回复
 server.apply.resolved: |-
@@ -329,7 +329,7 @@ server.artist.english_biography: |-
 server.artist.artist_name: |-
   艺人名
 server.artist.artist_x_deleted: |-
-  艺人 “%s” 删除成功！
+  艺人「%s」删除成功！
 server.artist.artistcomments: |-
   评论
 server.artist.as_an_artist: |-
@@ -467,7 +467,7 @@ server.artist.writes_redirect_to: |-
 server.artist.you_are_req_for: |-
   你当前请求编辑的艺人是
 server.artist.you_are_req_for_note: |-
-  <p>请详细写明编辑该艺人所需的信息，包括所有相关链接（IMDb、豆瓣等）。<br /><br />请求编辑不会生成报告，但会在论坛的 “编辑请求” 版块生成一个帖子。<br /><br />该功能可用于：</p> <ul> <li>重命名艺人</li> <li>取消或设置别名的重定向</li> <li>增／删别名</li> <li>其他……</li> </ul> <p>绝对不要将此功能用于种子或种子组。对于单个的种子，使用种子报告功能；对于种子组，前往其各自的页面使用请求编辑功能。</p>
+  <p>请详细写明编辑该艺人所需的信息，包括所有相关链接（IMDb、豆瓣等）。<br /><br />请求编辑不会生成报告，但会在论坛的「编辑请求」版块生成一个帖子。<br /><br />该功能可用于：</p> <ul> <li>重命名艺人</li> <li>取消或设置别名的重定向</li> <li>增／删别名</li> <li>其他……</li> </ul> <p>绝对不要将此功能用于种子或种子组。对于单个的种子，使用种子报告功能；对于种子组，前往其各自的页面使用请求编辑功能。</p>
 server.badges.badge_achievement_progress: |-
   成就进度
 server.badges.badge_display: |-
@@ -643,13 +643,13 @@ server.bonus.total_points: |-
 server.bonus.total_torrents: |-
   种子总数
 server.bonus.upload-1: |-
-  5GB 上传量
+  5GiB 上传量
 server.bonus.upload-2: |-
-  50GB 上传量
+  50GiB 上传量
 server.bonus.upload-3: |-
-  250GB 上传量
+  250GiB 上传量
 server.bonus.upload-4: |-
-  500GB 上传量
+  500GiB 上传量
 server.bonus.you_cannot_afford_this_item: |-
   你的余额不足以支付此商品的价格。
 server.bonus.you_have_spent: |-
@@ -792,7 +792,7 @@ server.collages.delete_warning: |-
 server.collages.description: |-
   描述
 server.collages.drag_drop_textnote: |-
-  <ul> <li>单击列标题的按钮以自动排序。</li> <li>按住 [Shift] 键并单击其他列标题，同时对多个列排序。</li> <li>拖放任意行以改变其顺序。</li> <li>结束排序，请点击 “保存” 以保存结果。</li> <li>点击 “Edit” 或 “Remove” 来修改单个条目。</li> </ul>
+  <ul> <li>单击列标题的按钮以自动排序。</li> <li>按住 [Shift] 键并单击其他列标题，同时对多个列排序。</li> <li>拖放任意行以改变其顺序。</li> <li>结束排序，请点击「保存」以保存结果。</li> <li>点击「Edit」或「Remove」来修改单个条目。</li> </ul>
 server.collages.edit_collage: |-
   编辑合集
 server.collages.edit_description: |-
@@ -802,7 +802,7 @@ server.collages.edit_tags: |-
 server.collages.featured: |-
   推荐
 server.collages.featured_title: |-
-  “推荐” 的私人合集及其内含种子的部分预览会在你的个人页面展示出来。
+  「推荐」的私人合集及其内含种子的部分预览会在你的个人页面展示出来。
 server.collages.ft_order: |-
   排序
 server.collages.ftb_searchstr: |-
@@ -2405,7 +2405,7 @@ server.reports.report_collage_guide_3: |-
 server.reports.report_collage_guide_4: |-
   在下面的报告描述中，请尽可能详尽地描述情况以帮助管理解决问题。
 server.reports.report_forum_thread_guide_1: |-
-  请在下述情况下使用 “报告论坛主题” 类目： <ul> <li>当 <a href="rules.php?p=chat">社交规则</a> 被违反时，比如含有种族主义、攻击性、煽动性、色情和其他违反规则内容的帖子。我们鼓励所有用户在看到任何形式的违规时及时报告。</li> <li>申请解锁主题。</li> <li>报告出现在错误版块的主题。</li> <li>报告求助版块中已被解决但尚未添加标记的问题。</li> </ul>
+  请在下述情况下使用「报告论坛主题」类目： <ul> <li>当 <a href="rules.php?p=chat">社交规则</a> 被违反时，比如含有种族主义、攻击性、煽动性、色情和其他违反规则内容的帖子。我们鼓励所有用户在看到任何形式的违规时及时报告。</li> <li>申请解锁主题。</li> <li>报告出现在错误版块的主题。</li> <li>报告求助版块中已被解决但尚未添加标记的问题。</li> </ul>
 server.reports.report_forum_thread_guide_2: |-
   它比私信管理组成员更加高效。
 server.reports.report_forum_thread_guide_3: |-
@@ -2623,7 +2623,7 @@ server.reportsv2.pm_reason: |-
 server.reportsv2.pm_uploader_reporter: |-
   私信
 server.reportsv2.pm_uploader_reporter_title: |-
-  发布人：如不使用 “Send now”，内容就会附加到常规信息中。报告人：必须使用 “Send now”。
+  发布人：如不使用「Send now」，内容就会附加到常规信息中。报告人：必须使用「Send now」。
 server.reportsv2.reason: |-
   报告类目
 server.reportsv2.relevant_images: |-
@@ -2735,7 +2735,7 @@ server.reportsv2.tracks_should_be_given_in_a_space_separated_list_of_numbers_wit
 server.reportsv2.type: |-
   类目
 server.reportsv2.types.master.banned.report_messages.1: |-
-  请明确指出其违反了 “禁止发布” 列表中的哪一项。
+  请明确指出其违反了「禁止发布」列表中的哪一项。
 server.reportsv2.types.master.banned.resolve_options.pm: |-
   [rule]h1.2[/rule]。你上传了本站目前禁止的资源。列于禁止发布列表（位于 [url=upload.php]发布页面[/url] 顶部）以及上传规则中 [url=rules.php?p=upload#1.2]特别禁止[/url] 部分的资源不能被上传到本站。除非你的种子符合禁止发布列表注释中指定的条件，否则请勿发布。
   你的种子已被报告，因为它包含了来自禁止发布列表或上传规则中特别禁止部分的资源。
@@ -2762,14 +2762,14 @@ server.reportsv2.types.master.trump.title: |-
 server.reportsv2.types.master.urgent.report_messages.1: |-
   该类目仅适用于紧急情况，一般是因为在种子中泄露了个人信息。
 server.reportsv2.types.master.urgent.report_messages.2: |-
-  滥用 “紧急” 类目会导致警告或更严重的惩罚。
+  滥用「紧急」类目会导致警告或更严重的惩罚。
 server.reportsv2.types.master.urgent.report_messages.3: |-
   由于该类目不能方便地告知管理员问题所在，所以请在说明中详细描述种子的问题。
 server.reportsv2.types.master.urgent.title: |-
   紧急
 server.reportsv2.types.movie.audio_track_bad.report_messages.1: |-
   请指出音频轨存在的具体问题。
-server.reportsv2.types.movie.audio_track_bad.resolve_options.pm: "[rule]5.4.3[/rule]。种子内含的音频轨相对其分辨率而言过于庞大。\n\n[rule]5.4.4[/rule]。种子含有冗余的音频轨。\n\n[rule]5.4.16[/rule]。既没有原始语种音频也没有国语配音，只有非国语配音的种子会被标记为 “可替代”。\n\n[rule]5.4.17[/rule]。种子中包含的音轨有效，但不同步。\n\n你的种子被标记为 “问题音频轨” 且可被替代。"
+server.reportsv2.types.movie.audio_track_bad.resolve_options.pm: "[rule]5.4.3[/rule]。种子内含的音频轨相对其分辨率而言过于庞大。\n\n[rule]5.4.4[/rule]。种子含有冗余的音频轨。\n\n[rule]5.4.16[/rule]。既没有原始语种音频也没有国语配音，只有非国语配音的种子会被标记为「可替代」。\n\n[rule]5.4.17[/rule]。种子中包含的音轨有效，但不同步。\n\n你的种子被标记为「问题音频轨」且可被替代。"
 server.reportsv2.types.movie.audio_track_bad.title: |-
   问题音频轨
 server.reportsv2.types.movie.format.report_messages.1: |-
@@ -2782,19 +2782,19 @@ server.reportsv2.types.movie.format.title: |-
 server.reportsv2.types.movie.low.report_messages.1: |-
   请向我们提供 PNG 格式的影片原始分辨率截图。
 server.reportsv2.types.movie.low.resolve_options.pm: |-
-  [rule]5.4.10[/rule]、[rule]5.4.11[/rule]、[rule]5.4.21[/rule]、[rule]5.4.24[/rule]。编码自质量低下的、存在错误的、低清的源的作品会被标记为 “可替代”。
+  [rule]5.4.10[/rule]、[rule]5.4.11[/rule]、[rule]5.4.21[/rule]、[rule]5.4.24[/rule]。编码自质量低下的、存在错误的、低清的源的作品会被标记为「可替代」。
 server.reportsv2.types.movie.low.title: |-
   劣质源
 server.reportsv2.types.movie.names_bad.report_messages.1: |-
   请指出有问题的文件（夹）名。
 server.reportsv2.types.movie.names_bad.report_messages.2: |-
   理想情况下，你可以发布修复了文件（夹）名问题之后的种子以替代该种子。
-server.reportsv2.types.movie.names_bad.resolve_options.pm: "[rule]2.1.1[/rule]。文件（夹）名必须使用电影原始语种名称或官方英文名（推荐）。（如海报所示等的官方英文名，其优先级高于 IMDb。）\n\n[rule]2.1.2[/rule]。压制组发行（来自 P2P 组或 Scene 组）不应重命名，除非它们不满足规则 [rule]2.1.1[/rule] 或我们的文件名要求。\n\n[rule]2.1.4[/rule]。DVD 和 BD 文件目录结构不允许改动，仅顶层文件夹允许重命名。\n\n你的种子被标记为问题文件（夹）名且可被替代。当然你也可自行修复这个种子，补充或修正文件（夹）名然后重新发布种子。然后以 “替代” 为由报告（RP）旧种，在报告说明中指出你已修复的命名问题，同时请确保提供用以替代的新种永久链接（PL）。"
+server.reportsv2.types.movie.names_bad.resolve_options.pm: "[rule]2.1.1[/rule]。文件（夹）名必须使用电影原始语种名称或官方英文名（推荐）。（如海报所示等的官方英文名，其优先级高于 IMDb。）\n\n[rule]2.1.2[/rule]。压制组发行（来自 P2P 组或 Scene 组）不应重命名，除非它们不满足规则 [rule]2.1.1[/rule] 或我们的文件名要求。\n\n[rule]2.1.4[/rule]。DVD 和 BD 文件目录结构不允许改动，仅顶层文件夹允许重命名。\n\n你的种子被标记为问题文件（夹）名且可被替代。当然你也可自行修复这个种子，补充或修正文件（夹）名然后重新发布种子。然后以「替代」为由报告（RP）旧种，在报告说明中指出你已修复的命名问题，同时请确保提供用以替代的新种永久链接（PL）。"
 server.reportsv2.types.movie.names_bad.title: |-
   问题文件（夹）名
 server.reportsv2.types.movie.subtitle_track_bad.report_messages.1: |-
   请指出字幕轨存在的具体问题。
-server.reportsv2.types.movie.subtitle_track_bad.resolve_options.pm: "[rule]5.4.7[/rule]。种子中包含的字幕有效，但不同步。\n\n[rule]5.4.14[/rule]。无中字槽位的种子如果是不包含英文字幕（通过字幕管理器内挂或外挂）的非英语电影，会被标为 “可替代”。\n\n[rule]5.4.15[/rule]。无中字槽位的种子，其重要非英语对白不包含单独的英文字幕。\n\n[rule]5.4.19[/rule]。包含字幕质量很差，且不是电影准确翻译的种子会被标为 “可替代”。\n\n[rule]5.4.20[/rule]。字幕被硬编码在视频轨中的种子会被标为 “可替代”。\n\n你的种子被标记为 “问题字幕轨” 且可被替代。"
+server.reportsv2.types.movie.subtitle_track_bad.resolve_options.pm: "[rule]5.4.7[/rule]。种子中包含的字幕有效，但不同步。\n\n[rule]5.4.14[/rule]。无中字槽位的种子如果是不包含英文字幕（通过字幕管理器内挂或外挂）的非英语电影，会被标为「可替代」。\n\n[rule]5.4.15[/rule]。无中字槽位的种子，其重要非英语对白不包含单独的英文字幕。\n\n[rule]5.4.19[/rule]。包含字幕质量很差，且不是电影准确翻译的种子会被标为「可替代」。\n\n[rule]5.4.20[/rule]。字幕被硬编码在视频轨中的种子会被标为「可替代」。\n\n你的种子被标记为「问题字幕轨」且可被替代。"
 server.reportsv2.types.movie.subtitle_track_bad.title: |-
   问题字幕轨
 server.reportsv2.types.movie.torrent_description_bad.report_messages.1: |-
@@ -2814,7 +2814,7 @@ server.reportsv2.types.movie.transcode.title: |-
   劣质转码
 server.reportsv2.types.movie.video_track_bad.report_messages.1: |-
   请指出视频轨存在的具体问题，并向我们提供 PNG 格式的影片原始分辨率截图。
-server.reportsv2.types.movie.video_track_bad.resolve_options.pm: "[rule]5.4.1[/rule]、[rule]5.4.2[/rule]。种子的纵横比因编码错误等原因与原始的、影院上映的电影不同。\n\n[rule]5.4.5[/rule]、[rule]5.4.6[/rule]。种子被错误地反交错，或以错误的帧率播放。\n\n[rule]5.4.18[/rule]。种子明显裁边过多或过少。\n\n[rule]5.4.22[/rule]。种子含有明显的水印。\n\n你的种子被标记为 “问题视频轨” 且可被替代。"
+server.reportsv2.types.movie.video_track_bad.resolve_options.pm: "[rule]5.4.1[/rule]、[rule]5.4.2[/rule]。种子的纵横比因编码错误等原因与原始的、影院上映的电影不同。\n\n[rule]5.4.5[/rule]、[rule]5.4.6[/rule]。种子被错误地反交错，或以错误的帧率播放。\n\n[rule]5.4.18[/rule]。种子明显裁边过多或过少。\n\n[rule]5.4.22[/rule]。种子含有明显的水印。\n\n你的种子被标记为「问题视频轨」且可被替代。"
 server.reportsv2.types.movie.video_track_bad.title: |-
   问题视频轨
 server.reportsv2.unclaim: |-
@@ -2860,7 +2860,7 @@ server.reportsv2.your_above_torrent_was_reported_and_has_been_deleted: |-
 server.reportsv2.your_above_torrent_was_reported_but_not_been_deleted: |-
   [url=%s]你发布的种子[/url] 已被报告并处理，但未被删除。
 server.reportsv2.your_torrent_is_now_displayed_on_better_php_and_trumpable: |-
-  你的种子现因上述原因被列在 [url=%s/better.php]站点优化[/url] 的页面且可被替代。当然你也可自行修复这个种子，修复该问题后重新上传种子。然后报告（RP）旧种，选择 “替代” 类目，在报告说明中指出你已修复的具体问题，同时请确保你提供了用以替代的新种永久链接（PL）。
+  你的种子现因上述原因被列在 [url=%s/better.php]站点优化[/url] 的页面且可被替代。当然你也可自行修复这个种子，修复该问题后重新上传种子。然后报告（RP）旧种，选择「替代」类目，在报告说明中指出你已修复的具体问题，同时请确保你提供了用以替代的新种永久链接（PL）。
 server.requests.acceptable_codecs: |-
   允许的编码
 server.requests.acceptable_containers: |-
@@ -2878,7 +2878,7 @@ server.requests.already_filled: |-
 server.requests.any: |-
   任一
 server.requests.artist_note: |-
-  请不要将 “群星” 作为单个艺人添加，而是使用多艺人功能；阅读 <a href="wiki.php?action=article&amp;id=27" target="_blank">本文</a> 了解详情。
+  请不要将「群星」作为单个艺人添加，而是使用多艺人功能；阅读 <a href="wiki.php?action=article&amp;id=27" target="_blank">本文</a> 了解详情。
 server.requests.associated_with_the_above_torrent_group: |-
   和上方填写的种子组关联在一起。
 server.requests.at_least_one_director: |-
@@ -2912,19 +2912,19 @@ server.requests.created_by: |-
 server.requests.custom_vote: |-
   自定义赞助
 server.requests.custom_vote_title: |-
-  这里的单位是二进制而非十进制的，比如，1024 MB 等于 1 GB。
+  这里的单位是二进制而非十进制的，比如，1024 MiB 等于 1 GiB。
 server.requests.delete_request_warning: |-
   删除求种会导致你 <strong>永远失去</strong> 发起求种所消耗的上传量。
 server.requests.description: |-
   求种描述
 server.requests.description_note: |-
-  <b>请尽量对你的请求做出说明。</b>例 1：求种顺序 Blu-ray > WEB-DL > HDTV；例 2：WEB-DL 需要来自 Netflix 或 Amazon。 <br>如无其他要求，请填写 “无额外说明”。
+  <b>请尽量对你的请求做出说明。</b>例 1：求种顺序 Blu-ray > WEB-DL > HDTV；例 2：WEB-DL 需要来自 Netflix 或 Amazon。 <br>如无其他要求，请填写「无额外说明」。
 server.requests.entered_bounty_not_number: |-
   你填的报酬不是数字。
 server.requests.entered_year_not_number: |-
   你填的年份不是数字。
 server.requests.fill_a_request_how_to_blockquote: |-
-  先搜索是否已有符合的资源，再根据下述不同情况，将应求种的<strong>永久链接（PL）</strong>填入下列框中以完成应求。 <ul> <li>若已有符合的种子，直接填入其 PL；</li> <li>若没有符合的种子，但存在该影片组，请使用影片详情页面的 “添加格式” 上传新种并填入其 PL；</li> <li>若没有符合的种子且不存在该影片组，请使用 “发布应求” 按钮来上传新种并填入其 PL。</li></ul>
+  先搜索是否已有符合的资源，再根据下述不同情况，将应求种的<strong>永久链接（PL）</strong>填入下列框中以完成应求。 <ul> <li>若已有符合的种子，直接填入其 PL；</li> <li>若没有符合的种子，但存在该影片组，请使用影片详情页面的「添加格式」上传新种并填入其 PL；</li> <li>若没有符合的种子且不存在该影片组，请使用「发布应求」按钮来上传新种并填入其 PL。</li></ul>
 server.requests.fill_a_request_how_to_toggle: |-
   &nbsp;应求方法&nbsp;
 server.requests.fill_request: |-
@@ -3066,7 +3066,7 @@ server.requests.tags: |-
 server.requests.tags_comma: |-
   标签 (逗号分隔)
 server.requests.tags_note: |-
-  标签应以英文逗号（“,”）分隔，你应使用英文点号（“.”）来分隔标签内的单词——例如 “<strong class='u-colorSuccess'>imdb.top.500</strong>”。<br />请使用左侧文本框的官方标签，而不是 “非官方” 标签（例如使用官方的 “<strong class='u-colorSuccess'>剧情</strong>” 标签, 而不是非官方的 “<strong class='u-colorWarning'>holy.crap</strong>” 标签）。
+  标签应以英文逗号（<code>,</code>」）分隔，你应使用英文点号（<code>.</code>）来分隔标签内的单词——例如「<strong class='u-colorSuccess'>imdb.top.500</strong>」。<br />请使用左侧文本框的官方标签，而不是「非官方」标签（例如使用官方的「<strong class='u-colorSuccess'>剧情</strong>」标签, 而不是非官方的「<strong class='u-colorWarning'>holy.crap</strong>」标签）。
 server.requests.this_request: |-
   该求种
 server.requests.top_contributors: |-
@@ -3124,7 +3124,7 @@ server.rules.info: |-
 server.rules.ratio: |-
   分享率
 server.rules.ratio_dl_title: |-
-  这些单位是二进制而非十进制的，举个例子，1 GB 中有 1024 MB。
+  这些单位是二进制而非十进制的，举个例子，1 GiB 中有 1024 MiB。
 server.rules.ratio_title: |-
   分享率
 server.rules.ratio_title_de: |-
@@ -3139,6 +3139,18 @@ server.rules.tags_title: |-
   标签
 server.rules.tags_title_de: |-
   该部分规则决定哪些标签可以添加而哪些不能。
+server.rules.bonus_title: |-
+  积分
+server.rules.bonus_title_de: |-
+  该部分规则决定积分的获取机制。
+server.rules.invite_title: |-
+  邀请
+server.rules.invite_title_de: |-
+  该部分规则决定具体的邀请细则。
+server.rules.blacklist_title: |-
+  黑名单
+server.rules.blacklist_title_de: |-
+  该部分规则决定哪些图床不可用、哪些电影不可发。
 server.rules.type: |-
   分类
 server.rules.upload_h13k: |-
@@ -3230,7 +3242,7 @@ server.staff.role_applications: |-
 server.staff.role_applications_note: |-
   <p>成长路上，希望有你。如果你对我们的工作有兴趣，欢迎尝试 <a href='apply.php'>申请</a> 加入我们！
 server.staff.role_applications_sub: |-
-  （具体招聘岗位请点击下方申请）
+  （请点击下方「申请」按钮查看岗位详情）
 server.staff.send_to: |-
   发送给
 server.staff.staff: |-
@@ -3314,9 +3326,9 @@ server.staffpm.view_your_unanswered: |-
 server.staffpm.your_unanswered: |-
   你未解决
 server.stats.detailed_torrent_statistics: |-
-  种子统计详情
+  种子统计
 server.stats.detailed_user_statistics: |-
-  用户统计详情
+  用户统计
 server.stats.geographical_distribution_map: |-
   地理分布图
 server.stats.geographical_distribution_map_africa: |-
@@ -3402,7 +3414,7 @@ server.subtitles.subtitle_file: |-
 server.subtitles.subtitle_names: |-
   字幕名
 server.subtitles.subtitle_rules: |-
-  <ul> <li id='r3.6.1'><a href='rules.php?p=upload#3.6.1'>1.</a> <strong>用户上传的字幕应与对应种子的视频文件同步，否则会被直接删除。</strong> </li> <li id='r3.6.2'><a href='rules.php?p=upload#3.6.2'>2.</a> <strong>站点允许的字幕格式有 .sub、.idx、.sup、.srt、.vtt、.ass、.smi、.ssa。</strong>此外，也允许压缩打包上传，支持 .rar、.zip、.7z、.tar、.tgz、.tar.gz。 </li> <li id='r3.6.3'><a href='rules.php?p=upload#3.6.3'>3.</a> <strong>字幕文件建议采用与对应视频文件相一致的文件命名以方便使用。</strong>在尾部增加用以标明语言的字段是允许的，如 “Monsters.Inc.2001.1080p.BluRay.DTS.x264.D-Z0N3.chs.srt”。 </li> <li
+  <ul> <li id='r3.6.1'><a href='rules.php?p=upload#3.6.1'>1.</a> <strong>用户上传的字幕应与对应种子的视频文件同步，否则会被直接删除。</strong> </li> <li id='r3.6.2'><a href='rules.php?p=upload#3.6.2'>2.</a> <strong>站点允许的字幕格式有 .sub、.idx、.sup、.srt、.vtt、.ass、.smi、.ssa。</strong>此外，也允许压缩打包上传，支持 .rar、.zip、.7z、.tar、.tgz、.tar.gz。 </li> <li id='r3.6.3'><a href='rules.php?p=upload#3.6.3'>3.</a> <strong>字幕文件建议采用与对应视频文件相一致的文件命名以方便使用。</strong>在尾部增加用以标明语言的字段是允许的，如「Monsters.Inc.2001.1080p.BluRay.DTS.x264.D-Z0N3.chs.srt」。 </li> <li
   id='r3.6.4'><a href='rules.php?p=upload#3.6.4'>4.</a> <strong>字幕文件应以 Unicode 编码为佳。</strong> </li> <li id='r3.6.5'><a href='rules.php?p=upload#3.6.5'>5.</a> <strong>对于单文件电影，请直接上传单个的字幕文件，不要将同一部电影的多类字幕文件一同打包上传。</strong>如，在一个压缩包内同时囊括简中 SRT、繁中 SRT、中英 ASS，这是不允许的，你应将它们分别上传。<strong>对于迷你剧，则可以将每一集对应的字幕合并打包上传。</strong>但应保证每一集所对应的字幕文件命名与视频文件相同。 </li> </ul>
 server.subtitles.subtitle_upload_warning: |-
   请确保字幕与对应的视频文件同步，否则你上传的字幕会被直接删除，你可能会被警告
@@ -3589,7 +3601,7 @@ server.tools.auto_lock: |-
 server.tools.auto_lock_weeks: |-
   自动锁定周数
 server.tools.available_request_bounty: |-
-  可获取的求种报酬
+  已获取的求种报酬
 server.tools.avatar_text: |-
   头像文本
 server.tools.back_to_permission_list: |-
@@ -4341,7 +4353,7 @@ server.tools.ratio: |-
 server.tools.ratio_watch_ended_ends: |-
   分享率监控结束时间
 server.tools.ratio_watch_ended_ends_title: |-
-  如果此处显示的时间以 “前” 结尾，则代表用户被监控分享率的时长和／或低于其合格分享率的时长。如果此处显示的时间不以 “前” 结尾，则它是两周分享率监控期结束的时间。
+  如果此处显示的时间以「前」结尾，则代表用户被监控分享率的时长和／或低于其合格分享率的时长。如果此处显示的时间不以「前」结尾，则它是两周分享率监控期结束的时间。
 server.tools.reason: |-
   理由
 server.tools.reason_placeholder: |-
@@ -4455,7 +4467,7 @@ server.tools.site_options: |-
 server.tools.size_limitation: |-
   大小限制
 server.tools.size_limitation_note: |-
-  “等于” 与 “大于” “小于” 互斥，如果同时都填写了，只有 “等于” 会生效。如果希望对所有大小的种子生效，三处留空即可。
+  「等于」与「大于」「小于」互斥，如果同时都填写了，只有「等于」会生效。如果希望对所有大小的种子生效，三处留空即可。
 server.tools.size_per_day_this_month: |-
   本月日均大小
 server.tools.size_per_day_this_week: |-
@@ -4771,11 +4783,11 @@ server.top10.ft_torrents: |-
 server.top10.hide: |-
   隐藏
 server.top10.in_the_past_day: |-
-  最近一天内上传最活跃的资源
+  最近一天内上传最活跃的种子
 server.top10.in_the_past_month: |-
-  最近一月内上传最活跃的资源
+  最近一月内上传最活跃的种子
 server.top10.in_the_past_week: |-
-  最近一周内上传最活跃的资源
+  最近一周内上传最活跃的种子
 server.top10.in_the_past_year: |-
   最近一年内上传最活跃的资源
 server.top10.joined: |-
@@ -4939,7 +4951,7 @@ server.torrents.already_a_re_seed_request: |-
 server.torrents.any: |-
   任一
 server.torrents.appended_to_the_regular_message_unless_using_send_now: |-
-  除非使用 “Send now”，否则会追加到常规信息中。
+  除非使用「Send now」，否则会追加到常规信息中。
 server.torrents.artist_alias_id: |-
   艺人 ID
 server.torrents.asc: |-
@@ -5645,7 +5657,7 @@ server.torrents.you_are_attempting_to_merge: |-
 server.torrents.you_are_req: |-
   你当前请求编辑的种子组是
 server.torrents.you_are_req_note: |-
-  <p>请详细写明编辑该种子组所需的信息，包括所有相关链接（IMDb、豆瓣等）。<br /><br />请求编辑不会生成报告，会在论坛的 “编辑请求” 版块生成一个帖子。<br /><br />该功能可用于：</p> <ul> <li>“原始发行” 信息，例如：发行年。</li> <li>种子组重命名／资料修正</li> <li>种子组合并</li> <li>其他……</li> </ul>绝对不要将此功能用于种子或艺人。对于单个种子，使用种子报告功能；对于艺人，前往其各自的页面使用请求编辑功能。
+  <p>请详细写明编辑该种子组所需的信息，包括所有相关链接（IMDb、豆瓣等）。<br /><br />请求编辑不会生成报告，会在论坛的「编辑请求」版块生成一个帖子。<br /><br />该功能可用于：</p> <ul> <li>「原始发行」信息，例如：发行年。</li> <li>种子组重命名／资料修正</li> <li>种子组合并</li> <li>其他……</li> </ul>绝对不要将此功能用于种子或艺人。对于单个种子，使用种子报告功能；对于艺人，前往其各自的页面使用请求编辑功能。
 server.torrents.you_can_no_longer_delete_this_torrent_as_it_has_been_snatched_by_5_or_more_users: |-
   由于下载完成种子的用户已超过 5 位，因而不能被你删除。如果你认为它存在问题，请报告之。
 server.torrents.you_can_no_longer_delete_this_torrent_as_it_has_been_uploaded_for_over_a_week: |-
@@ -5663,11 +5675,11 @@ server.upload.album_note: |-
 server.upload.arabic: |-
   阿拉伯语
 server.upload.artist_note: |-
-  <strong class='u-colorWarning'>请采用右侧的多艺人增删功能而非简单地将 “Various Artists” 作为一个艺人添加，</strong>参阅 <a href='wiki.php?action=article&amp;id=128' target='_blank'>本文</a> 获取更多信息。
+  <strong class='u-colorWarning'>请采用右侧的多艺人增删功能而非简单地将「Various Artists」作为一个艺人添加，</strong>参阅 <a href='wiki.php?action=article&amp;id=128' target='_blank'>本文</a> 获取更多信息。
 server.upload.assurance: |-
   确保你的种子符合 <h7><a href='rules.php?p=upload' target='_blank'>发布规则</a></h7>。否则将会受到<strong class='u-colorWarning'>警告</strong>或<strong class='u-colorWarning'>处罚</strong>。
 server.upload.assurance_note: |-
-  <p>上传种子后，你将有一个小时的保护期，在此期间，除你之外没有人可以使用此种子应求，明智地利用这段时间，并搜索 “<a href='requests.php' target='_blank'>求种列表</a>”。</p>
+  <p>上传种子后，你将有一个小时的保护期，在此期间，除你之外没有人可以使用此种子应求，明智地利用这段时间，并搜索「<a href='requests.php' target='_blank'>求种列表</a>」。</p>
 server.upload.auto_detect: |-
   *自动检测
 server.upload.bad_folders: |-
@@ -5783,7 +5795,7 @@ server.upload.marks_how_to_toggle: |-
 server.upload.marks_warning: |-
   <strong class='u-colorWarning'>转载资源不得使用「自购」和「自制」标记，否则将导致你被警告。</strong>
 server.upload.mediainfo_bdinfo_note: |-
-  如果有多个视频文件或多张碟片，请使用右上角的 “+” 按钮分别添加各自所属的 MediaInfo/BDInfo。
+  如果有多个视频文件或多张碟片，请使用右上角的「+」按钮分别添加各自所属的 MediaInfo/BDInfo。
 server.upload.mediainfo_bdinfo_placeholder: |-
   请在此粘贴 MediaInfo/BDInfo 全文，每框限填一段。
 server.upload.mixed_subtitles: |-
@@ -5801,7 +5813,7 @@ server.upload.movie_cover: |-
 server.upload.movie_edition_information: |-
   版本信息
 server.upload.movie_edition_information_examples: |-
-  例：珍藏集的一部分、特殊版本、杜比视界/全景声等非同寻常的特点。<a href="wiki.php?action=article&name=版本信息填写指南">点此</a> 阅读版本指南。<strong>当选择 “电影大师” “标准收藏” “华纳档案馆” “4K修复版” “4K重制版” “重制版” 或自定义版本信息时，强烈建议填写该版本所对应的年份。</strong>
+  例：珍藏集的一部分、特殊版本、杜比视界/全景声等非同寻常的特点。<a href="wiki.php?action=article&name=版本信息填写指南">点此</a> 阅读版本指南。<strong>当选择「电影大师」「标准收藏」「华纳档案馆」「4K修复版」「4K重制版」「重制版」或自定义版本信息时，强烈建议填写该版本所对应的年份。</strong>
 server.upload.movie_edition_information_label: |-
   如果种子来自特定的版本，请勾选此项。
 server.upload.movie_feature: |-
@@ -5823,7 +5835,7 @@ server.upload.movie_resolution: |-
 server.upload.movie_scene: |-
   Scene
 server.upload.movie_scene_label: |-
-  当且仅当它是 “scene release” 时勾选此项。如果它是你自购自制的，那么它就不是一个 scene release。
+  当且仅当它是「scene release」时勾选此项。如果它是你自购自制的，那么它就不是一个 scene release。
 server.upload.movie_scene_note: |-
   你可以前往 <a href="https://pre.corrupt-net.org/" target="_blank">pre.corrupt-net.org</a> 或 <a href="https://www.srrdb.com/" target="_blank">srrDB</a> 搜索文件名再次确认。
 server.upload.movie_source: |-
@@ -5948,7 +5960,7 @@ server.upload.torrent_info_how_to_blockquote: |-
 server.upload.torrent_info_how_to_toggle: |-
   &nbsp;如何填写以下信息&nbsp;
 server.upload.torrent_rule: |-
-  <h7>除极个别情况，“VA、Various Artists、群星” 不可作为艺人名称，请使用 “+” 编辑具体艺人。更多信息请参阅 <a href='wiki.php?action=article&amp;id=17' target='_blank'>此说明</a>。</h7>
+  <h7>除极个别情况，「VA、Various Artists、群星」不可作为艺人名称，请使用「+」编辑具体艺人。更多信息请参阅 <a href='wiki.php?action=article&amp;id=17' target='_blank'>此说明</a>。</h7>
 server.upload.trailer_link: |-
   预告片链接
 server.upload.turkish: |-
@@ -5974,7 +5986,7 @@ server.upload.year: |-
 server.upload.year_remaster: |-
   首次公映年份
 server.upload.year_remaster_title: |-
-  你为原始发行版指定的年份早于该媒介面世的时间。你需要填写发行信息，尤其是发行版年份。若你无法提供发行信息，请勾选下方的 “未知发行” 选框。
+  你为原始发行版指定的年份早于该媒介面世的时间。你需要填写发行信息，尤其是发行版年份。若你无法提供发行信息，请勾选下方的「未知发行」选框。
 server.user.1_week: |-
   1 周
 server.user.2_week: |-
@@ -6054,7 +6066,7 @@ server.user.autocomp_1: |-
 server.user.autocomp_2: |-
   仅搜索栏
 server.user.autocomp_title: |-
-  自动补全会尝试预测你正在输入的字词。选择“任何位置”会在站点的艺人和标签区域启用自动补全。选择“仅搜索栏”会在搜索区启用自动补全。
+  自动补全会尝试预测你正在输入的字词。选择「任何位置」会在站点的艺人和标签区域启用自动补全。选择「仅搜索栏」会在搜索区启用自动补全。
 server.user.autosave: |-
   文本框内容自动保存
 server.user.autosave_title: |-
@@ -6248,7 +6260,7 @@ server.user.disabled: |-
 server.user.disabled_accounts_linked_by_ip: |-
   通过 IP 地址关联的被禁用账号
 server.user.disabled_accounts_linked_by_ip_must_also_be_checked: |-
-  必须同时勾选 “通过 IP 地址关联的被禁用账号”
+  必须同时勾选「通过 IP 地址关联的被禁用账号」
 server.user.disabled_accounts_linked_by_ip_title: |-
   仅显示通过 IP 地址关联的被禁用账号的用户
 server.user.disabled_invites: |-
@@ -6274,7 +6286,7 @@ server.user.donor_system_add_points: |-
 server.user.donor_system_modify_values: |-
   捐助系统（修改数值）
 server.user.donor_system_modify_values_title: |-
-  此工具仅用于手动修正数值。如欲正常统计捐助，请使用 “捐助系统（添加点数）” 工具。
+  此工具仅用于手动修正数值。如欲正常统计捐助，请使用「捐助系统（添加点数）」工具。
 server.user.donorforum_1: |-
   前缀
 server.user.donorforum_2: |-
@@ -6332,7 +6344,7 @@ server.user.filt_tr_show: |-
 server.user.filt_tr_show_tags: |-
   显示官方标签筛选区
 server.user.filt_tr_title: |-
-  勾选“显示种子搜索箱”会默认在种子搜索菜单下显示它。勾选“显示官方标签筛选区”会默认在搜索箱中罗列出可点击的官方标签项。
+  勾选「显示种子搜索箱」会默认在种子搜索菜单下显示它。勾选「显示官方标签筛选区」会默认在搜索箱中罗列出可点击的官方标签项。
 server.user.for: |-
   共
 server.user.forum_warnings: |-
@@ -6376,7 +6388,7 @@ server.user.invite_link: |-
 server.user.invite_note: |-
   备注
 server.user.invite_rules_1: |-
-  <a href="/rules.php#1.1">一人一号</a>。创建多个账号（即俗称的 “马甲”），一经查实即封禁所有相关账号。不要向任何曾经拥有过 {{CONFIG['SITE_NAME']}} 账号的人发送邀请，即使是你的熟人也不可以。如果你邀请了曾被禁用的用户，你将可能被永久禁止。如果他们希望重启账号，请指引他通过账号找回功能、QQ 群、TG 群，或请朋友在申诉板块寻求帮助或发送 <a href="/staffpm.php">Staff PM</a> 联系管理人员。
+  <a href="/rules.php#1.1">一人一号</a>。创建多个账号（即俗称的「马甲」），一经查实即封禁所有相关账号。不要向任何曾经拥有过 {{CONFIG['SITE_NAME']}} 账号的人发送邀请，即使是你的熟人也不可以。如果你邀请了曾被禁用的用户，你将可能被永久禁止。如果他们希望重启账号，请指引他通过账号找回功能、QQ 群、TG 群，或请朋友在申诉板块寻求帮助或发送 <a href="/staffpm.php">Staff PM</a> 联系管理人员。
 server.user.invite_rules_2: |-
   <a href="/rules.php#2.1">不要邀请劣质用户</a>。你需要对你邀请的用户负责。你邀请的用户达不到合格分享率，不会导致你受罚。但若你邀请的用户操作违反了<a href="/rules.php">黄金规则</a>，你的账号和／或权限可能会被禁用。
 server.user.invite_rules_3: |-
@@ -6446,7 +6458,7 @@ server.user.lastaccess: |-
 server.user.leaderboard_position: |-
   排行榜排名
 server.user.leaving_blank_means_you_allow_all_sizes: |-
-  (只可订阅大于 1 GB 的种子)
+  (只可订阅大于 1 GiB 的种子)
 server.user.leaving_blank_means_you_allow_all_years: |-
   (如果不设置，即视为订阅全部年份的种子)
 server.user.leech: |-
@@ -6484,7 +6496,7 @@ server.user.mature: |-
 server.user.mature_show: |-
   显示成人内容
 server.user.mature_title: |-
-  {{CONFIG['SITE_NAME']}} 对于社交领域的成人内容政策较为灵活。勾选 “显示成人内容” 会允许你点击访问 <code>[mature]</code> 标签下的任何内容。如果你不勾选 “显示成人内容”，就不会看到任何用 <code>[mature]</code> 包裹起来的内容。
+  {{CONFIG['SITE_NAME']}} 对于社交领域的成人内容政策较为灵活。勾选「显示成人内容」会允许你点击访问 <code>[mature]</code> 标签下的任何内容。如果你不勾选「显示成人内容」，就不会看到任何用 <code>[mature]</code> 包裹起来的内容。
 server.user.menu: |-
   目录
 server.user.merge_from: |-
@@ -6644,7 +6656,7 @@ server.user.p_personal: |-
 server.user.para_artistsadded: |-
   添加的艺人数
 server.user.para_artistsadded_title: |-
-  该选项控制了你在本站添加到种子组中艺人的显示。其总数包含了通过上传页面，以及种子详情页面 “添加艺人” 功能添加的艺人数量。
+  该选项控制了你在本站添加到种子组中艺人的显示。其总数包含了通过上传页面，以及种子详情页面「添加艺人」功能添加的艺人数量。
 server.user.para_badgedisplay: |-
   个人印记全部展示
 server.user.para_badgedisplay_label: |-
@@ -6764,7 +6776,7 @@ server.user.ratio: |-
 server.user.ratio_watch: |-
   分享率监控
 server.user.ratio_watch_text: |-
-  此用户当前正处于分享率监控中，其必须上传%s（在%s前），否则其下载权限会被封禁， 列入分享率监控后新增的下载量为：%s
+  此用户当前正处于分享率监控中，其必须在 %s 内获得 %s 上传量，否则其下载权限会被封禁。<br/>被监控分享率后其新增的下载量为：%s。
 server.user.reason: |-
   原因
 server.user.reason_title: |-
@@ -6954,7 +6966,7 @@ server.user.st_donorlink_title: |-
 server.user.st_email: |-
   邮件地址
 server.user.st_email_note: |-
-  更改邮件地址时，你需要在 “当前密码” 中输入你的密码，以便验证。
+  更改邮件地址时，你需要在「当前密码」中输入你的密码，以便验证。
 server.user.st_email_title: |-
   这是你想要与站点账号关联的邮箱地址。在你忘记密码或站点需要通知你时会用到。
 server.user.st_lastactivity: |-
@@ -6970,7 +6982,7 @@ server.user.st_notification_title: |-
 server.user.st_paranoia: |-
   隐私设置
 server.user.st_paranoia_note: |-
-  <p><strong>勾选你愿意向其他用户显示的内容</strong></p> <p>举个例子，如果你为 “求种 (已完成)” 勾选了 “显示数量”，则你已应求的数量就会可见。如果你勾选了 “显示总额”，则你从求种中赚取的上传总量就会可见。如果你勾选了 “显示列表”，则你应求列表中的所有应求都会可见。</p> <p><span class='u-colorWarning'>注意：</span></p> <p><span class='u-colorWarning'>1. 隐私设置对你在本站的安全性毫无影响，以下选项仅能决定其他用户能否看到你在站点的活动。一些信息在站点日志中仍旧可见。</span></p> <p><span class='u-colorWarning'>2. 隐私设置中的某些设置可能会影响你在排行榜中的显示。</span></p>
+  <p><strong>勾选你愿意向其他用户显示的内容</strong></p> <p>举个例子，如果你为「求种 (已完成)」勾选了「显示数量」，则你已应求的数量就会可见。如果你勾选了「显示总额」，则你从求种中赚取的上传总量就会可见。如果你勾选了「显示列表」，则你应求列表中的所有应求都会可见。</p> <p><span class='u-colorWarning'>注意：</span></p> <p><span class='u-colorWarning'>1. 隐私设置对你在本站的安全性毫无影响，以下选项仅能决定其他用户能否看到你在站点的活动。一些信息在站点日志中仍旧可见。</span></p> <p><span class='u-colorWarning'>2. 隐私设置中的某些设置可能会影响你在排行榜中的显示。</span></p>
 server.user.st_paranoia_title: |-
   这些设置允许你展示或隐藏个人信息。
 server.user.st_password: |-
@@ -7084,7 +7096,7 @@ server.user.submit: |-
 server.user.super_toasty: |-
   Super Toasty (APP)
 server.user.supports_partial_url_matching: |-
-  支持部分网址匹配，如，输入 “&#124;https://whatimg.com” 会搜索存储在 https://whatimg.com 上的头像
+  支持部分网址匹配，如，输入「&#124;https://whatimg.com」会搜索存储在 https://whatimg.com 上的头像
 server.user.tagging: |-
   标签编辑
 server.user.tagging_title: |-
@@ -7128,7 +7140,7 @@ server.user.this_tree_has_n_entries_n_branches_and_a_depth_of_n: |-
 server.user.thread_subscriptions: |-
   论坛主题订阅
 server.user.to_fuzzy_search_for_a_block_of_addresses_title: |-
-  欲模糊搜索（默认）一个地址段（如 55.66.77.*），输入 “55.66.77.” 即可，不要带引号
+  欲模糊搜索（默认）一个地址段（如 55.66.77.*），输入「55.66.77.」即可，不要带引号
 server.user.token: |-
   令牌
 server.user.token_history: |-
@@ -7168,7 +7180,7 @@ server.user.torrents_group_tool: |-
 server.user.torrents_snatched: |-
   已完成种子标记
 server.user.torrents_snatched_title: |-
-  启用已完成种子标识会在你已完成的种子旁显示 “已完成！” 字样。
+  启用已完成种子标识会在你已完成的种子旁显示「已完成！」字样。
 server.user.total_donor_points: |-
   总捐助点数
 server.user.total_points: |-
@@ -7244,7 +7256,9 @@ server.user.user_disable: |-
 server.user.user_po: |-
   用户权限
 server.user.user_reason: |-
-  理由
+  随附原因
+server.user.user_reason_title: |-
+  此原因会被私信给用户。
 server.user.user_search: |-
   用户搜索
 server.user.username: |-
@@ -7270,7 +7284,7 @@ server.user.voting: |-
 server.user.voting_disable: |-
   禁用投票链接
 server.user.voting_title: |-
-  该选项允许你启用或禁用艺人、合集和下载清单页面的“up”和“down”投票链接。
+  该选项允许你启用或禁用艺人、合集和下载清单页面的「up」和「down」投票链接。
 server.user.warn: |-
   警告
 server.user.warn_reason: |-
@@ -8219,3 +8233,65 @@ server.reports_report_comment: |-
   报告评论
 server.user.show_hot_movie_at_home: |-
   首页展示
+server.forums.new_forum_specific_rule: |-
+  添加版规
+server.stats.uploads_by_day: |-
+  每日发布
+client.stats.delete: |-
+  删除
+client.stats.uploads: |-
+  发布
+client.stats.upload_alive: |-
+  发布（存活）
+client.stats.user_timeline: |-
+  流动情况
+client.stats.new_registrations: |-
+  新注册
+client.stats.disabled_user: |-
+  禁用
+client.stats.user_class_distribution: |-
+  等级分布
+client.stats.user_count: |-
+  用户数
+client.stats.user_platform_distribution: |-
+  操作系统分布
+client.stats.user_browser_distribution: |-
+  浏览器分布
+client.stats.geographical_distribution: |-
+  地理位置分布
+server.common.time_length: |-
+  时长
+server.forums.verbal: |-
+  口头
+server.forums.edit_post: |-
+  编辑帖子
+server.user.seeding_size: |-
+  做种体积
+client.stats.processing_distribution: |-
+  处理方式分布
+client.stats.source_distribution: |-
+  来源分布
+client.stats.codec_distribution: |-
+  编码分布
+client.stats.resolution_distribution: |-
+  分辨率分布
+client.stats.container_distribution: |-
+  容器分布
+client.stats.release_distribution: |-
+  发行类别分布
+client.stats.torrent_count: |-
+  种子数
+client.stats.movie_count: |-
+  电影数
+client.stats.peers: |-
+  Peers
+client.stats.peer_count: |-
+  同伴数
+client.stats.seeder_count: |-
+  做种数
+client.stats.leecher_count: |-
+  下载数
+client.stats.uv: |-
+  日活跃用户数
+client.stats.seeding_user: |-
+  做种的用户数

@@ -1,47 +1,5 @@
 <?php
 
-/*
-Disabled until we fix Geographical Data
-if (!list($Countries, $Rank, $CountryUsers, $CountryMax, $CountryMin, $LogIncrements) = $Cache->get_value('geodistribution')) {
-    require(__DIR__ . '/../../../classes/charts.class.php');
-    $DB->prepared_query('
-        SELECT Code, Users
-        FROM users_geodistribution');
-    $Data = $DB->to_array();
-    $Count = $DB->record_count() - 1;
-
-    if ($Count < 30) {
-        $CountryMinThreshold = $Count;
-    } else {
-        $CountryMinThreshold = 30;
-    }
-
-    $CountryMax = ceil(log(Max(1, $Data[0][1])) / log(2)) + 1;
-    $CountryMin = floor(log(Max(1, $Data[$CountryMinThreshold][1])) / log(2));
-
-    $CountryRegions = array('RS' => array('RS-KM')); // Count Kosovo as Serbia as it doesn't have a TLD
-    foreach ($Data as $Key => $Item) {
-        list($Country, $UserCount) = $Item;
-        $Countries[] = $Country;
-        $CountryUsers[] = number_format((((log($UserCount) / log(2)) - $CountryMin) / ($CountryMax - $CountryMin)) * 100, 2);
-        $Rank[] = round((1 - ($Key / $Count)) * 100);
-
-        if (isset($CountryRegions[$Country])) {
-            foreach ($CountryRegions[$Country] as $Region) {
-                $Countries[] = $Region;
-                $Rank[] = end($Rank);
-            }
-        }
-    }
-    reset($Rank);
-
-    for ($i = $CountryMin; $i <= $CountryMax; $i++) {
-        $LogIncrements[] = Format::human_format(pow(2, $i));
-    }
-    $Cache->cache_value('geodistribution', array($Countries, $Rank, $CountryUsers, $CountryMax, $CountryMin, $LogIncrements), 0);
-}
-*/
-
 if (!$UserClasses = $Cache->get_value('stats_users_classes')) {
     $DB->prepared_query("
         SELECT p.Name, COUNT(m.ID) AS Users

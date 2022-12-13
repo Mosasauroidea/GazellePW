@@ -120,4 +120,5 @@ View::show_header(t('server.user.manage_notifications'), 'jquery.validate,form_v
                 </div>
             </div>
     </div>
-    <? View::show_footer(); ?>
+</div>
+<? View::show_footer(); ?>

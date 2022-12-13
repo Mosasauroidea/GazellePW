@@ -106,9 +106,7 @@ if (!empty($_REQUEST['confirm'])) {
             if ($UserCount) {
                 $Err = t('server.register.someone_registered_with_that_email');
                 $_REQUEST['email'] = '';
-            }
-
-            if ($_REQUEST['invite']) {
+            } else if ($_REQUEST['invite']) {
                 $DB->query("
 					SELECT InviterID, Email, Reason, InviteID
 					FROM invites

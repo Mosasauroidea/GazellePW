@@ -3204,6 +3204,18 @@ server.rules.tags_title: |-
   Tagging(Marcação)
 server.rules.tags_title_de: |-
   Essas regras regem quais tags podem e não podem ser adicionadas.
+server.rules.bonus_title: |-
+
+server.rules.bonus_title_de: |-
+
+server.rules.invite_title: |-
+
+server.rules.invite_title_de: |-
+
+server.rules.blacklist_title: |-
+
+server.rules.blacklist_title_de: |-
+
 server.rules.type: |-
   Categoria
 server.rules.upload_h13k: |-
@@ -3380,9 +3392,9 @@ server.staffpm.view_your_unanswered: |-
 server.staffpm.your_unanswered: |-
   Seu Não Respondido
 server.stats.detailed_torrent_statistics: |-
-  Estatísticas detalhadas do Torrent
+  Estatísticas  do Torrent
 server.stats.detailed_user_statistics: |-
-  Estatísticas detalhadas do usuário
+  Estatísticas  do usuário
 server.stats.geographical_distribution_map: |-
   Mapa Geográfico de Distribuição
 server.stats.geographical_distribution_map_africa: |-

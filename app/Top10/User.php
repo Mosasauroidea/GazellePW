@@ -3,14 +3,11 @@
 namespace Gazelle\Top10;
 
 class User extends \Gazelle\Base {
-
     public const UPLOADERS = 'uploaders';
     public const DOWNLOADERS = 'downloaders';
     public const UPLOADS = 'uploads';
-    public const REQUEST_VOTES = 'request_votes';
-    public const REQUEST_FILLS = 'request_fills';
-    public const UPLOAD_SPEED = 'upload_speed';
-    public const DOWNLOAD_SPEED = 'download_speed';
+    public const BONUSPOINTS = 'bonus_points';
+    public const SEEDINGSIZE = 'bonus_points';
 
     private const CACHE_KEY = 'topusers_%s_%d';
 
@@ -18,10 +15,8 @@ class User extends \Gazelle\Base {
         self::UPLOADERS => 'uploaded',
         self::DOWNLOADERS => 'downloaded',
         self::UPLOADS => 'num_uploads',
-        self::REQUEST_VOTES => 'request_votes',
-        self::REQUEST_FILLS => 'request_fills',
-        self::UPLOAD_SPEED => 'up_speed',
-        self::DOWNLOAD_SPEED => 'down_speed',
+        self::BONUSPOINTS => 'bonus_points',
+        self::SEEDINGSIZE => 'seeding_size',
     ];
 
     public function fetch(string $type, int $limit) {

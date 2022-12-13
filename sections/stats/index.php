@@ -7,7 +7,10 @@ switch ($_REQUEST['action']) {
     case 'torrents':
         include(CONFIG['SERVER_ROOT'] . '/sections/stats/torrents.php');
         break;
+    case 'peers':
+        include(CONFIG['SERVER_ROOT'] . '/sections/stats/peers.php');
+        break;
     default:
-        include(CONFIG['SERVER_ROOT'] . '/sections/stats/browse.php');
+        include(CONFIG['SERVER_ROOT'] . '/sections/stats/torrents.php');
         break;
 }

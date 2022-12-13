@@ -26,6 +26,16 @@ if (!isset($_GET['p'])) {
         case 'tag':
             require(CONFIG['SERVER_ROOT'] . '/sections/rules/tag.php');
             break;
+        case 'bonus':
+            require(CONFIG['SERVER_ROOT'] . '/sections/rules/bonus.php');
+            break;
+        case 'invite':
+            require(CONFIG['SERVER_ROOT'] . '/sections/rules/invite.php');
+            break;
+        case 'blacklist':
+            require(CONFIG['SERVER_ROOT'] . '/sections/rules/blacklist.php');
+            break;
+
         default:
             error(0);
     }

@@ -238,6 +238,7 @@
   --Chart-color5: rgb(151, 227, 213);
   --Chart-background: none;
   --Chart-text: currentColor;
+  --Chart-text-hover: var(--global-onHover-color);
   --Chart-gridLine: #d0d7de;
   --Chart-axisText: #57606a;
   --Chart-axisLine: #d0d7de;

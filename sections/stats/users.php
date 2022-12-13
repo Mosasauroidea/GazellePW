@@ -1,6 +1,5 @@
 <?
 if (!list($Countries, $Rank, $CountryUsers, $CountryMax, $CountryMin, $LogIncrements) = $Cache->get_value('geodistribution')) {
-    include_once(CONFIG['SERVER_ROOT'] . '/classes/charts.class.php');
     $DB->query('
 		SELECT Code, Users
 		FROM users_geodistribution');
@@ -38,152 +37,55 @@ if (!list($Countries, $Rank, $CountryUsers, $CountryMax, $CountryMin, $LogIncrem
     $Cache->cache_value('geodistribution', array($Countries, $Rank, $CountryUsers, $CountryMax, $CountryMin, $LogIncrements), 0);
 }
 
-if (!$ClassDistribution = $Cache->get_value('class_distribution')) {
-    include_once(CONFIG['SERVER_ROOT'] . '/classes/charts.class.php');
-    $DB->query("
-		SELECT p.Name, COUNT(m.ID) AS Users
-		FROM users_main AS m
-			JOIN permissions AS p ON m.PermissionID = p.ID
-		WHERE m.Enabled = '1'
-		GROUP BY p.Name
-		ORDER BY Users DESC");
-    $ClassSizes = $DB->to_array();
-    $Pie = new PIE_CHART(750, 400, array('Other' => 1, 'Percentage' => 1));
-    foreach ($ClassSizes as $ClassSize) {
-        list($Label, $Users) = $ClassSize;
-        $Pie->add($Label, $Users);
-    }
-    $Pie->transparent();
-    $Pie->color('FF33CC');
-    $Pie->generate();
-    $ClassDistribution = $Pie->url();
-    $Cache->cache_value('class_distribution', $ClassDistribution, 3600 * 24 * 14);
-}
-if (!$PlatformDistribution = $Cache->get_value('platform_distribution')) {
-    include_once(CONFIG['SERVER_ROOT'] . '/classes/charts.class.php');
 
-    $DB->query("
-		SELECT OperatingSystem, COUNT(UserID) AS Users
-		FROM users_sessions
-		GROUP BY OperatingSystem
-		ORDER BY Users DESC");
-
-    $Platforms = $DB->to_array();
-    $Pie = new PIE_CHART(750, 400, array('Other' => 1, 'Percentage' => 1));
-    foreach ($Platforms as $Platform) {
-        list($Label, $Users) = $Platform;
-        $Pie->add($Label, $Users);
-    }
-    $Pie->transparent();
-    $Pie->color('8A00B8');
-    $Pie->generate();
-    $PlatformDistribution = $Pie->url();
-    $Cache->cache_value('platform_distribution', $PlatformDistribution, 3600 * 24 * 14);
-}
-
-if (!$BrowserDistribution = $Cache->get_value('browser_distribution')) {
-    include_once(CONFIG['SERVER_ROOT'] . '/classes/charts.class.php');
-
-    $DB->query("
-		SELECT Browser, COUNT(UserID) AS Users
-		FROM users_sessions
-		GROUP BY Browser
-		ORDER BY Users DESC");
-
-    $Browsers = $DB->to_array();
-    $Pie = new PIE_CHART(750, 400, array('Other' => 1, 'Percentage' => 1));
-    foreach ($Browsers as $Browser) {
-        list($Label, $Users) = $Browser;
-        $Pie->add($Label, $Users);
-    }
-    $Pie->transparent();
-    $Pie->color('008AB8');
-    $Pie->generate();
-    $BrowserDistribution = $Pie->url();
-    $Cache->cache_value('browser_distribution', $BrowserDistribution, 3600 * 24 * 14);
-}
-
-
-//Timeline generation
-if (!list($Labels, $InFlow, $OutFlow, $Max) = $Cache->get_value('users_timeline')) {
-    $DB->query("
-		SELECT DATE_FORMAT(JoinDate,'%b \\'%y') AS Month, COUNT(UserID)
-		FROM users_info
-		GROUP BY Month
-		ORDER BY JoinDate DESC
-		LIMIT 1, 12");
-    $TimelineIn = array_reverse($DB->to_array());
-    $DB->query("
-		SELECT DATE_FORMAT(BanDate,'%b \\'%y') AS Month, COUNT(UserID)
-		FROM users_info
-		GROUP BY Month
-		ORDER BY BanDate DESC
-		LIMIT 1, 12");
-    $TimelineOut = array_reverse($DB->to_array());
-    foreach ($TimelineIn as $Month) {
-        list($Label, $Amount) = $Month;
-        if ($Amount > $Max) {
-            $Max = $Amount;
-        }
-    }
-    foreach ($TimelineOut as $Month) {
-        list($Label, $Amount) = $Month;
-        if ($Amount > $Max) {
-            $Max = $Amount;
-        }
-    }
-
-    $Labels = array();
-    foreach ($TimelineIn as $Month) {
-        list($Label, $Amount) = $Month;
-        $Labels[] = $Label;
-        $InFlow[] = number_format(($Amount / $Max) * 100, 4);
-    }
-    foreach ($TimelineOut as $Month) {
-        list($Label, $Amount) = $Month;
-        $OutFlow[] = number_format(($Amount / $Max) * 100, 4);
-    }
-    $Cache->cache_value('users_timeline', array($Labels, $InFlow, $OutFlow, $Max), mktime(0, 0, 0, date('n') + 1, 2)); //Tested: fine for Dec -> Jan
-}
-//End timeline generation
-
-View::show_header(t('server.stats.detailed_user_statistics'), '', 'PageStatUser');
+View::show_header(t('server.stats.stats'), '', 'PageStatUser');
 ?>
-<div class="BodyNavLinks">
-    <a href="stats.php?action=torrents" class="brackets"><?= t('server.stats.torrent_stats') ?></a>
+<div class="LayoutBody">
+    <div class="BodyHeader">
+        <div class="BodyHeader-nav">
+            <?= t('server.stats.stats') ?>
+        </div>
+        <div class="BodyHeader-subNav">
+            <?= t('server.top10.users') ?>
+        </div>
+        <div class="BodyNavLinks">
+            <a href="stats.php?action=torrents" class="brackets"><?= t('server.top10.torrents') ?></a>
+            <a href="stats.php?action=peers" class="brackets">Peers</a>
+        </div>
+    </div>
+    <div class="ChartRoot">
+        <div id="chart_user_timeline"> </div>
+        <div id="chart_user_day_active"> </div>
+        <div id="chart_user_home" class="ChartPieContainer"></div>
+    </div>
+    <? if (false) { ?>
+        <div class="Group">
+            <div class="Group-header">
+                <div class="Group-headerTitle">
+                    <div id="Geo_Dist_Map"><a href="#Geo_Dist_Map"><?= t('server.stats.geographical_distribution_map') ?></a></div>
+                </div>
+            </div>
+            <div class="Group-body">
+                <div class=" center">
+                    <img src="https://chart.googleapis.com/chart?cht=map:fixed=-55,-180,73,180&amp;chs=440x220&amp;chd=t:<?= implode(',', $Rank) ?>&amp;chco=FFFFFF,EDEDED,1F0066&amp;chld=<?= implode('|', $Countries) ?>&amp;chf=bg,s,CCD6FF" alt="<?= t('server.stats.geographical_distribution_map') ?>" />
+                    <img src="https://chart.googleapis.com/chart?cht=map:fixed=37,-26,65,67&amp;chs=440x220&amp;chs=440x220&amp;chd=t:<?= implode(',', $Rank) ?>&amp;chco=FFFFFF,EDEDED,1F0066&amp;chld=<?= implode('|', $Countries) ?>&amp;chf=bg,s,CCD6FF" alt="<?= t('server.stats.geographical_distribution_map_europe') ?>" />
+                    <br />
+                    <img src="https://chart.googleapis.com/chart?cht=map:fixed=-46,-132,24,21.5&amp;chs=440x220&amp;chd=t:<?= implode(',', $Rank) ?>&amp;chco=FFFFFF,EDEDED,1F0066&amp;chld=<?= implode('|', $Countries) ?>&amp;chf=bg,s,CCD6FF" alt="<?= t('server.stats.geographical_distribution_map_south_america') ?>" />
+                    <img src="https://chart.googleapis.com/chart?cht=map:fixed=-11,22,50,160&amp;chs=440x220&amp;chd=t:<?= implode(',', $Rank) ?>&amp;chco=FFFFFF,EDEDED,1F0066&amp;chld=<?= implode('|', $Countries) ?>&amp;chf=bg,s,CCD6FF" alt="<?= t('server.stats.geographical_distribution_map_asia') ?>" />
+                    <br />
+                    <img src="https://chart.googleapis.com/chart?cht=map:fixed=-36,-57,37,100&amp;chs=440x220&amp;chd=t:<?= implode(',', $Rank) ?>&amp;chco=FFFFFF,EDEDED,1F0066&amp;chld=<?= implode('|', $Countries) ?>&amp;chf=bg,s,CCD6FF" alt="<?= t('server.stats.geographical_distribution_map_africa') ?>" />
+                    <img src="https://chart.googleapis.com/chart?cht=map:fixed=14.8,15,45,86&amp;chs=440x220&amp;chd=t:<?= implode(',', $Rank) ?>&amp;chco=FFFFFF,EDEDED,1F0066&amp;chld=<?= implode('|', $Countries) ?>&amp;chf=bg,s,CCD6FF" alt="<?= t('server.stats.geographical_distribution_map_middle_east') ?>" />
+                    <br />
+                    <img src="https://chart.googleapis.com/chart?chxt=y,x&amp;chg=0,-1,1,1&amp;chxs=0,h&amp;cht=bvs&amp;chco=76A4FB&amp;chs=880x300&amp;chd=t:<?= implode(',', array_slice($CountryUsers, 0, 31)) ?>&amp;chxl=1:|<?= implode('|', array_slice($Countries, 0, 31)) ?>|0:|<?= implode('|', $LogIncrements) ?>&amp;chf=bg,s,FFFFFF00" alt="<?= t('server.stats.number_of_users_by_country') ?>" />
+                </div>
+            </div>
+        </div>
+    <? } ?>
 </div>
-<h1 id="User_Flow"><a href="#User_Flow"><?= t('server.stats.user_flow') ?></a></h1>
-<div class="BoxBody center">
-    <img src="https://chart.googleapis.com/chart?cht=lc&amp;chs=880x160&amp;chco=000D99,99000D&amp;chg=0,-1,1,1&amp;chxt=y,x&amp;chxs=0,h&amp;chxl=1:|<?= implode('|', $Labels) ?>&amp;chxr=0,0,<?= $Max ?>&amp;chd=t:<?= implode(',', $InFlow) ?>|<?= implode(',', $OutFlow) ?>&amp;chls=2,4,0&amp;chdl=New+Registrations|Disabled+Users&amp;chf=bg,s,FFFFFF00" alt="User Flow Chart" />
-</div>
-<br />
-<h1 id="User_Classes"><a href="#User_Classes"><?= t('server.stats.user_classes') ?></a></h1>
-<div class="BoxBody center">
-    <img src="<?= $ClassDistribution ?>" alt="<?= t('server.stats.user_class_distribution') ?>" />
-</div>
-<br />
-<h1 id="User_Platforms"><a href="#User_Platforms"><?= t('server.stats.user_platforms') ?></a></h1>
-<div class="BoxBody center">
-    <img src="<?= $PlatformDistribution ?>" alt="<?= t('server.stats.user_platform_distribution') ?>" />
-</div>
-<br />
-<h1 id="User_Browsers"><a href="#User_Browsers"><?= t('server.stats.user_browsers') ?></a></h1>
-<div class="BoxBody center">
-    <img src="<?= $BrowserDistribution ?>" alt="<?= t('server.stats.user_browsers_market_share') ?>" />
-</div>
-<!-- <br />根本不能确实显示，而且也涉及到用户隐私，所以注释掉。
-<h1 id="Geo_Dist_Map"><a href="#Geo_Dist_Map"><?= t('server.stats.geographical_distribution_map') ?></a></h1>
-<div class="box center">
-    <img src="https://chart.googleapis.com/chart?cht=map:fixed=-55,-180,73,180&amp;chs=440x220&amp;chd=t:<?= implode(',', $Rank) ?>&amp;chco=FFFFFF,EDEDED,1F0066&amp;chld=<?= implode('|', $Countries) ?>&amp;chf=bg,s,CCD6FF" alt="<?= t('server.stats.geographical_distribution_map') ?>" />
-    <img src="https://chart.googleapis.com/chart?cht=map:fixed=37,-26,65,67&amp;chs=440x220&amp;chs=440x220&amp;chd=t:<?= implode(',', $Rank) ?>&amp;chco=FFFFFF,EDEDED,1F0066&amp;chld=<?= implode('|', $Countries) ?>&amp;chf=bg,s,CCD6FF" alt="<?= t('server.stats.geographical_distribution_map_europe') ?>" />
-    <br />
-    <img src="https://chart.googleapis.com/chart?cht=map:fixed=-46,-132,24,21.5&amp;chs=440x220&amp;chd=t:<?= implode(',', $Rank) ?>&amp;chco=FFFFFF,EDEDED,1F0066&amp;chld=<?= implode('|', $Countries) ?>&amp;chf=bg,s,CCD6FF" alt="<?= t('server.stats.geographical_distribution_map_south_america') ?>" />
-    <img src="https://chart.googleapis.com/chart?cht=map:fixed=-11,22,50,160&amp;chs=440x220&amp;chd=t:<?= implode(',', $Rank) ?>&amp;chco=FFFFFF,EDEDED,1F0066&amp;chld=<?= implode('|', $Countries) ?>&amp;chf=bg,s,CCD6FF" alt="<?= t('server.stats.geographical_distribution_map_asia') ?>" />
-    <br />
-    <img src="https://chart.googleapis.com/chart?cht=map:fixed=-36,-57,37,100&amp;chs=440x220&amp;chd=t:<?= implode(',', $Rank) ?>&amp;chco=FFFFFF,EDEDED,1F0066&amp;chld=<?= implode('|', $Countries) ?>&amp;chf=bg,s,CCD6FF" alt="<?= t('server.stats.geographical_distribution_map_africa') ?>" />
-    <img src="https://chart.googleapis.com/chart?cht=map:fixed=14.8,15,45,86&amp;chs=440x220&amp;chd=t:<?= implode(',', $Rank) ?>&amp;chco=FFFFFF,EDEDED,1F0066&amp;chld=<?= implode('|', $Countries) ?>&amp;chf=bg,s,CCD6FF" alt="<?= t('server.stats.geographical_distribution_map_middle_east') ?>" />
-    <br />
-    <img src="https://chart.googleapis.com/chart?chxt=y,x&amp;chg=0,-1,1,1&amp;chxs=0,h&amp;cht=bvs&amp;chco=76A4FB&amp;chs=880x300&amp;chd=t:<?= implode(',', array_slice($CountryUsers, 0, 31)) ?>&amp;chxl=1:|<?= implode('|', array_slice($Countries, 0, 31)) ?>|0:|<?= implode('|', $LogIncrements) ?>&amp;chf=bg,s,FFFFFF00" alt="<?= t('server.stats.number_of_users_by_country') ?>" />
-</div> -->
 <?
-View::show_footer();
+Stats::userTimeLine();
+Stats::uv();
+Stats::userClasses();
+Stats::userPlatforms();
+Stats::userBrowsers();
+View::show_footer([], 'stats/index');

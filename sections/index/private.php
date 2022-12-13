@@ -309,7 +309,12 @@ View::show_header(t('server.index.index'), 'comments', 'PageHome');
         <!-- Stats -->
         <div class="SidebarItemStats SidebarItem Box">
             <div class="SidebarItem-header Box-header">
-                <?= t('server.index.stats') ?>
+                <div class="SidebarItem-headerTitle">
+                    <?= t('server.index.stats') ?>
+                </div>
+                <div class="SidebarItem-headerActions">
+
+                </div>
             </div>
             <ul class="SidebarItem-body Box-body SidebarList">
                 <? if (CONFIG['USER_LIMIT'] > 0) { ?>
@@ -328,7 +333,8 @@ View::show_header(t('server.index.index'), 'comments', 'PageHome');
                 ?>
                 <li class="SidebarList-item">
                     <?= t('server.index.enable_users') ?>:
-                    <?= number_format($UserCount) ?>
+                    <?= number_format($UserCount) ?>&nbsp;
+                    <a href="stats.php?action=users" class="brackets"><?= t('server.index.details') ?></a>
                 </li>
                 <?
                 if (($UserStats = $Cache->get_value('stats_users')) === false) {
@@ -388,7 +394,8 @@ View::show_header(t('server.index.index'), 'comments', 'PageHome');
                     $Cache->cache_value('stats_artist_count', $ArtistCount, 604860); // staggered 1 week cache
                 }
                 ?>
-                <li class="SidebarList-item"><?= t('server.common.torrents') ?>: <?= number_format($TorrentCount) ?></li>
+                <li class="SidebarList-item"><?= t('server.common.torrents') ?>: <?= number_format($TorrentCount) ?>&nbsp;<a href="stats.php?action=torrents" class="brackets"><?= t('server.index.details') ?></a>
+                </li>
                 <li class="SidebarList-item"><?= t('server.index.moviegroups') ?>: <?= number_format($MoviesCount) ?></li>
                 <li class="SidebarList-item"><?= t('server.common.artist') ?>: <?= number_format($ArtistCount) ?></li>
                 <?
@@ -457,7 +464,7 @@ View::show_header(t('server.index.index'), 'comments', 'PageHome');
                     $PeerCount = $SeederCount = $LeecherCount = $Ratio = 'Server busy';
                 }
                 ?>
-                <li class="SidebarList-item"><?= t('server.index.peers') ?>: <?= $PeerCount ?></li>
+                <li class="SidebarList-item"><?= t('server.index.peers') ?>: <?= $PeerCount ?>&nbsp;<a href="stats.php?action=peers" class="brackets"><?= t('server.index.details') ?></a></li>
                 <li class="SidebarList-item"><?= t('server.common.seeders') ?>: <?= $SeederCount ?></li>
                 <li class="SidebarList-item"><?= t('server.common.leechers') ?>: <?= $LeecherCount ?></li>
                 <li><?= t('server.index.s_l_ratio') ?>: <?= $Ratio ?></li>
@@ -572,26 +579,11 @@ View::show_header(t('server.index.index'), 'comments', 'PageHome');
                 </div>
             </div>
         <? } ?>
-        <? if (CONFIG['IS_DEV']) { ?>
-            <div class="Home-stats Group">
-                <div class="Group-header">
-                    <div class="Group-headerTitle">
-                        <a href="/stats.php">
-                            <?= t('server.index.stats') ?>
-                        </a>
-                    </div>
-                </div>
-                <div class="Group-body" id="root-stats"></div>
-            </div>
-        <? } ?>
     </div>
 </div>
 <?
-if ($CONFIG['IS_DEV']) {
-    Stats::torrentByDay();
-}
 
-View::show_footer(array('disclaimer' => true), 'home.jsx');
+View::show_footer(array('disclaimer' => true));
 
 function contest() {
     global $DB, $Cache, $LoggedUser;

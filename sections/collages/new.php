@@ -64,8 +64,8 @@ if (!check_perms('site_collages_renamepersonal') && $Category === '0') {
             </tr>
             <tr class="Form-row">
                 <td class="Form-label"><?= t('server.collages.new_description') ?>:</td>
-                <td class="Form-inputs">
-                    <textarea class="Input" name="description" id="description" cols="60" rows="10"><?= display_str($Description) ?></textarea>
+                <td class="Form-items">
+                    <? new TEXTAREA_PREVIEW("description", "description", display_str($Description)) ?>
                 </td>
             </tr>
             <tr class="Form-row">

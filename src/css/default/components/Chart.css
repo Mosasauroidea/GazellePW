@@ -1,7 +1,22 @@
 @import '../../forked/highcharts.css';
 
+.ChartRoot {
+  display: flex;
+  flex-direction: column;
+  gap: var(--global-space-lg);
+}
+
+.ChartPieContainer {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+}
+
 .ChartStat {
   height: 300px;
+}
+
+.highcharts-legend-item:hover text {
+  fill: var(--Chart-text-hover);
 }
 
 /* global */
