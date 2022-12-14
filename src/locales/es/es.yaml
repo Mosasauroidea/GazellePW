@@ -1645,6 +1645,8 @@ server.user.next_userclass_title5: |-
   Torrents
 server.user.no: |-
   No
+server.user.notify_me_of_all_new_torrents_with: |-
+  RSS
 server.user.order: |-
   Orden
 server.user.p_email: |-
@@ -2269,3 +2271,9 @@ server.user.simple_info: |-
   Perfil
 server.user.consumed_history: |-
   Historial
+server.user.rss_news: |-
+  Anuncios
+server.user.rss_blog: |-
+  Blog
+client.stats.peers: |-
+  Peers

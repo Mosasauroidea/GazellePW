@@ -1097,8 +1097,6 @@ server.common.lang_chs: |-
   简体中文
 server.common.lang_en: |-
   English
-server.common.lang_pt: |-
-  Português
 server.common.language: |-
   语言
 server.common.language_region: |-
@@ -1776,7 +1774,7 @@ server.index.moviegroups: |-
 server.index.mystery: |-
   天机不可泄露！
 server.index.peers: |-
-  同伴数
+  Peers
 server.index.period: |-
   。
 server.index.poll: |-
@@ -4976,7 +4974,7 @@ server.torrents.browser_edit_torrent: |-
 server.torrents.buy: |-
   自购
 server.torrents.catch_up: |-
-  刷新
+  刷新列表
 server.torrents.change_category: |-
   变更分类
 server.torrents.change_group: |-
@@ -7272,7 +7270,7 @@ server.user.view: |-
 server.user.view_list: |-
   查看做种列表
 server.user.view_notifications: |-
-  查看推送
+  查看订阅
 server.user.view_users: |-
   查看用户
 server.user.view_wiki_guide: |-
@@ -8195,6 +8193,8 @@ server.tools.cache_hit_rate: |-
   缓存命中率
 server.tools.total_value: |-
   合计
+server.tools.timestamps: |-
+  时间戳
 server.common.see_full: |-
   查看全部
 server.user.simple_info: |-
@@ -8209,6 +8209,8 @@ server.common.time_format: |-
   时间格式
 server.user.logout_all: |-
   注销所有
+server.common.lang_pt: |-
+  Português
 server.forums.trash: |-
   移到垃圾箱
 server.user.rss_feed_url: |-
@@ -8261,8 +8263,6 @@ client.stats.geographical_distribution: |-
   地理位置分布
 server.common.time_length: |-
   时长
-server.forums.verbal: |-
-  口头
 server.forums.edit_post: |-
   编辑帖子
 server.user.seeding_size: |-
@@ -8286,7 +8286,7 @@ client.stats.movie_count: |-
 client.stats.peers: |-
   Peers
 client.stats.peer_count: |-
-  同伴数
+  Peers
 client.stats.seeder_count: |-
   做种数
 client.stats.leecher_count: |-
