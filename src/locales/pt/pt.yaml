@@ -3204,18 +3204,8 @@ server.rules.tags_title: |-
   Tagging(Marcação)
 server.rules.tags_title_de: |-
   Essas regras regem quais tags podem e não podem ser adicionadas.
-server.rules.bonus_title: |-
-
-server.rules.bonus_title_de: |-
-
 server.rules.invite_title: |-
-
-server.rules.invite_title_de: |-
-
-server.rules.blacklist_title: |-
-
-server.rules.blacklist_title_de: |-
-
+  Convidar
 server.rules.type: |-
   Categoria
 server.rules.upload_h13k: |-
@@ -5860,7 +5850,7 @@ server.upload.indonesian: |-
 server.upload.italian: |-
   Italiano
 server.upload.japanese: |-
-
+  ﻿Japonês
 server.upload.jinzhuan: |-
   Exclusivo
 server.upload.korean: |-
@@ -6672,7 +6662,7 @@ server.user.notification_filter_name: |-
 server.user.notification_filter_name_note: |-
   Um nome para o filtro de notificação definido para distinguir filtros diferentes
 server.user.notify_me_of_all_new_torrents_with: |-
-  Notifique-me de todos os novos torrents com...
+  RSS
 server.user.create_new_torrent_notify: |-
   Criar novo filtro de notificação
 server.user.new_torrent_notify_list: |-
@@ -8279,3 +8269,17 @@ server.user.consumed_history: |-
   Histórico
 server.user.user_basic: |-
   Informação Básica
+server.user.rss_news: |-
+  Avisos
+server.user.rss_blog: |-
+  Blog
+client.stats.uploads: |-
+  Carregamentos
+client.stats.user_class_distribution: |-
+  Distribuição de Classe do Usuário
+client.stats.user_count: |-
+  Número de usuários
+client.stats.user_platform_distribution: |-
+  Plataforma de Usuário Distribuição
+client.stats.peers: |-
+  Peers
