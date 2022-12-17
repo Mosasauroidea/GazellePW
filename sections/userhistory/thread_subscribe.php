@@ -3,11 +3,11 @@
 authorize();
 
 if (!empty($LoggedUser['DisableForums'])) {
-	error(403);
+    error(403);
 }
 
 if (!is_number($_GET['topicid'])) {
-	error(0);
+    error(0);
 }
 
 $TopicID = (int)$_GET['topicid'];
@@ -19,7 +19,7 @@ $DB->query("
 	WHERE t.ID = $TopicID");
 list($ForumID) = $DB->next_record();
 if (!Forums::check_forumperm($ForumID)) {
-	die();
+    die();
 }
 
 Subscriptions::subscribe($_GET['topicid']);

@@ -25,6 +25,7 @@ HeaderDonate
   display: flex;
   align-items: center;
   height: 100%;
+  width: 130px;
 }
 .HeaderDonate-percent {
   line-height: 1;

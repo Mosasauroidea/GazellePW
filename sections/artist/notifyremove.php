@@ -1,15 +1,15 @@
 <?
 authorize();
 if (!check_perms('site_torrents_notify')) {
-	error(403);
+    error(403);
 }
 $ArtistID = $_GET['artistid'];
 if (!is_number($ArtistID)) {
-	error(0);
+    error(0);
 }
 
 if (($Notify = $Cache->get_value('notify_artists_' . $LoggedUser['ID'])) === false) {
-	$DB->query("
+    $DB->query("
 		SELECT ID, Artists
 		FROM users_notify_filters
 		WHERE Label = 'Artist notifications'
@@ -17,7 +17,7 @@ if (($Notify = $Cache->get_value('notify_artists_' . $LoggedUser['ID'])) === fal
 		ORDER BY ID
 		LIMIT 1");
 } else {
-	$DB->query("
+    $DB->query("
 		SELECT ID, Artists
 		FROM users_notify_filters
 		WHERE ID = '$Notify[ID]'");
@@ -28,16 +28,16 @@ $DB->query("
 	FROM artists_alias
 	WHERE ArtistID = '$ArtistID'");
 while (list($Alias) = $DB->next_record(MYSQLI_NUM, false)) {
-	while (stripos($Artists, "|$Alias|") !== false) {
-		$Artists = str_ireplace("|$Alias|", '|', $Artists);
-	}
+    while (stripos($Artists, "|$Alias|") !== false) {
+        $Artists = str_ireplace("|$Alias|", '|', $Artists);
+    }
 }
 if ($Artists == '|') {
-	$DB->query("
+    $DB->query("
 		DELETE FROM users_notify_filters
 		WHERE ID = $ID");
 } else {
-	$DB->query("
+    $DB->query("
 		UPDATE users_notify_filters
 		SET Artists = '" . db_string($Artists) . "'
 		WHERE ID = '$ID'");

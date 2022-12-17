@@ -1,7 +1,6 @@
 <?
 
 class SiteHistoryView {
-
     public static function render_linkbox() {
         if (check_perms('users_mod')) {
 ?>

@@ -3,7 +3,6 @@
 namespace Gazelle\Manager;
 
 class Artist extends \Gazelle\Base {
-
     public function createArtist($name) {
         $this->db->prepared_query(
             '

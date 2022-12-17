@@ -487,8 +487,7 @@ HTML;
     // List of pages
     $Pages = Format::get_pages($Page, $NumResults, CONFIG['TORRENTS_PER_PAGE']);
 ?>
-
-<div class="BodyNavLinks"><?= $Pages ?></div>
+<? View::pages($Pages) ?>
 <?
 if ($GroupResults || isset($GroupedCategories[$CategoryID - 1])) {
     $tableRender = new GroupTorrentTableView($Groups);
@@ -502,7 +501,6 @@ if ($GroupResults || isset($GroupedCategories[$CategoryID - 1])) {
     $tableRender->with_sort(true, $headlink)->with_year(true)->with_time(true)->render();
 }
 ?>
-<div class="BodyNavLinks"><?= $Pages ?></div>
-</div>
+<? View::pages($Pages) ?>
 <?
 View::show_footer();

@@ -28,7 +28,7 @@ if (isset($_POST['id']) && is_number($_POST['id'])) {
             $IS_STAFF && $_POST['visibility'] == 'staff' ? 'staff' : 'public'
         );
     }
-    $Location = (empty($_SERVER['HTTP_REFERER'])) ? "/index.php" : $_SERVER['HTTP_REFERER']; // redirect back 
+    $Location = (empty($_SERVER['HTTP_REFERER'])) ? "/index.php" : $_SERVER['HTTP_REFERER']; // redirect back
     header("Location: /apply.php?action=view&id=$ID");
 } elseif (isset($_GET['id']) && is_number($_GET['id'])) {
     $ID = intval($_GET['id']);

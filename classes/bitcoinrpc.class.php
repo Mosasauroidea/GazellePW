@@ -1,8 +1,7 @@
 <?php
 class BitcoinRpc {
-
     public static function __callStatic($Method, $Args) {
-        if (CONFIG['BITCOIN_RPC_URL'])) {
+        if (CONFIG['BITCOIN_RPC_URL']) {
             return false;
         }
         $MessageID = mt_rand();

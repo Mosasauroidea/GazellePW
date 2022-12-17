@@ -21,11 +21,11 @@ $DB->query("
 			AND ul.UserID IS NULL
 		GROUP BY um.ID");
 while (list($Username, $Email) = $DB->next_record()) {
-	$Tpl = new \TEMPLATE;
-	$Tpl->open(CONFIG['SERVER_ROOT'] . '/templates/inactive_notice.tpl');
-	$Tpl->set('SiteURL', CONFIG['SITE_URL']);
-	$Tpl->set('UserName', $Username);
-	Misc::send_email($Email, '你的 ' . CONFIG['SITE_NAME'] . ' 账号即将被封禁 | Your ' . CONFIG['SITE_NAME'] . ' account is about to be disabled', $Tpl->get(), 'noreply');
+    $Tpl = new \TEMPLATE;
+    $Tpl->open(CONFIG['SERVER_ROOT'] . '/templates/inactive_notice.tpl');
+    $Tpl->set('SiteURL', CONFIG['SITE_URL']);
+    $Tpl->set('UserName', $Username);
+    Misc::send_email($Email, '你的 ' . CONFIG['SITE_NAME'] . ' 账号即将被封禁 | Your ' . CONFIG['SITE_NAME'] . ' account is about to be disabled', $Tpl->get(), 'noreply');
 }
 
 $DB->query("
@@ -42,5 +42,5 @@ $DB->query("
 			AND ul.UserID IS NULL
 		GROUP BY um.ID");
 if ($DB->has_results()) {
-	Tools::disable_users($DB->collect('ID'), 'Disabled for inactivity.', 3);
+    Tools::disable_users($DB->collect('ID'), 'Disabled for inactivity.', 3);
 }

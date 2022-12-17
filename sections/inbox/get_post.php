@@ -13,7 +13,7 @@ $_GET['post'], which is the ID of the post.
 
 // Quick SQL injection check
 if (!$_GET['post'] || !is_number($_GET['post'])) {
-	error(0);
+    error(0);
 }
 
 // Variables for database input

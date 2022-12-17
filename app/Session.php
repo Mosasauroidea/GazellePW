@@ -5,7 +5,6 @@ namespace Gazelle;
 use \Gazelle\Util\Crypto;
 
 class Session extends Base {
-
     private $id;
 
     public function __construct($id) {

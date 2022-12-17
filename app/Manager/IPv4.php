@@ -3,7 +3,6 @@
 namespace Gazelle\Manager;
 
 class IP extends \Gazelle\Base {
-
     const CACHE_KEY = 'ip_bans_';
 
     /**

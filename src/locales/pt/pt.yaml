@@ -3151,7 +3151,7 @@ server.requests.upload_request: |-
 server.requests.uploaded: |-
   Upload concluído
 server.requests.view_request: |-
-  Exibir solicitação
+  Solicitação
 server.requests.vote_requests: |-
   Pedidos que votei em
 server.requests.will_be: |-

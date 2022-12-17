@@ -4,10 +4,10 @@ $GroupID = db_string($_GET['groupid']);
 $Importance = db_string($_GET['importance']);
 
 if (!is_number($ArtistID) || !is_number($GroupID) || !is_number($Importance)) {
-	error(404);
+    error(404);
 }
 if (!check_perms('torrents_edit')) {
-	error(403);
+    error(403);
 }
 
 $DB->query("
@@ -26,7 +26,7 @@ $DB->query("
 	FROM torrents_group
 	WHERE ID = $GroupID");
 if (!$DB->has_results()) {
-	error(404);
+    error(404);
 }
 list($GroupName) = $DB->next_record(MYSQLI_NUM, false);
 
@@ -46,8 +46,8 @@ $DB->query("
 		AND ag.ArtistID = $ArtistID");
 $GroupCount = $DB->record_count();
 if (($ReqCount + $GroupCount) == 0) {
-	// The only group to use this artist
-	Artists::delete_artist($ArtistID);
+    // The only group to use this artist
+    Artists::delete_artist($ArtistID);
 }
 
 $Cache->delete_value("torrents_details_$GroupID"); // Delete torrent group cache

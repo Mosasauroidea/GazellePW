@@ -3,7 +3,6 @@
 namespace Gazelle\Util;
 
 class FileChecker {
-
     protected $comicsExtensions = [
         'cbr', 'cbz', 'gif', 'jpeg', 'jpg', 'pdf', 'png'
     ];

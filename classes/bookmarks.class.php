@@ -1,6 +1,5 @@
 <?php
 class Bookmarks {
-
     /**
      * Check if can bookmark
      *

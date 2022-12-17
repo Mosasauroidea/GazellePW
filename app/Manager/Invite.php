@@ -3,7 +3,6 @@
 namespace Gazelle\Manager;
 
 class Invite extends \Gazelle\Base {
-
     protected $search;
 
     /**

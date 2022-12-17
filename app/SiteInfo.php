@@ -5,7 +5,6 @@ namespace Gazelle;
 use Gazelle\Util\Time;
 
 class SiteInfo extends Base {
-
     public function gitBranch() {
         return trim(shell_exec('git rev-parse --abbrev-ref HEAD'));
     }

@@ -26,6 +26,6 @@ $DB->query("SELECT
 	FROM 
 	torrents where Slot <> 1");
 foreach ($DB->to_array('ID', MYSQLI_ASSOC) as $ID => $Torrent) {
-	$Slot = TorrentSlot::CalSlot($Torrent);
-	$DB->query("UPDATE torrents SET Slot=$Slot WHERE ID=$ID");
+    $Slot = TorrentSlot::CalSlot($Torrent);
+    $DB->query("UPDATE torrents SET Slot=$Slot WHERE ID=$ID");
 }

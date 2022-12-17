@@ -19,5 +19,6 @@
     "editor.wordWrapColumn": 120
   },
   "intelephense.format.braces": "k&r",
-  "formatFiles.excludedFolders": ["node_modules", ".vscode", ".git", "dist", ".chrome", "vendor"]
+  "formatFiles.excludedFolders": ["node_modules", ".vscode", ".git", "dist", ".chrome", "vendor"],
+  "editor.detectIndentation": false
 }

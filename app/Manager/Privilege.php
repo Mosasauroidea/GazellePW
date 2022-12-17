@@ -3,7 +3,6 @@
 namespace Gazelle\Manager;
 
 class Privilege extends \Gazelle\Base {
-
     protected $classList;
     protected $privilege;
 

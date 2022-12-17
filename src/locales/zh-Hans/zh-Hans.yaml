@@ -3084,7 +3084,7 @@ server.requests.upload_request: |-
 server.requests.uploaded: |-
   上传量
 server.requests.view_request: |-
-  查看求种
+  求种
 server.requests.vote_requests: |-
   我参与的求种
 server.requests.will_be: |-
@@ -8295,3 +8295,7 @@ client.stats.uv: |-
   日活跃用户数
 client.stats.seeding_user: |-
   做种的用户数
+server.wiki.created: |-
+  创建时间
+server.wiki.edited: |-
+  编辑时间

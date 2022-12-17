@@ -22,4 +22,4 @@ View::show_header(t('server.stats.stats'), '', 'PageStatPeer');
 <?
 Stats::peersCount();
 Stats::seedingUser();
-View::show_footer([], 'stats/index');
+View::show_footer([], 'stats/index.jsx');

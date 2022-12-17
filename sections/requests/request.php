@@ -66,6 +66,7 @@ $SubName = Lang::is_default() ? $Request['Name'] : $Request['SubName'];
 $GroupYear = $Request['Year'];
 View::show_header(t('server.requests.view_request') . ": $FullName", 'comments,bbcode,subscriptions', 'PageRequestShow');
 
+$Pages = Format::get_pages($Page, $NumComments, CONFIG['TORRENT_COMMENTS_PER_PAGE'], 9, '#comments');
 ?>
 <div class="LayoutBody">
     <div class="BodyHeader">
@@ -416,35 +417,31 @@ View::show_header(t('server.requests.view_request') . ": $FullName", 'comments,b
                     </table>
                 <? } ?>
             </div>
-            <div id="request_comments">
-                <div class="BodyNavLinks">
-                    <a name="comments"></a>
+            <div class="Group">
+                <div class="Group-header">
+                    <div class="Group-headerTitle">
+                        <?= t('server.collages.comments') ?>
+                    </div>
+                </div>
+                <div class="Group-body" id="request_comments">
+                    <? View::pages($Pages) ?>
                     <?
-                    $Pages = Format::get_pages($Page, $NumComments, CONFIG['TORRENT_COMMENTS_PER_PAGE'], 9, '#comments');
-                    echo $Pages;
+
+                    //---------- Begin printing
+                    CommentsView::render_comments($Thread, $LastRead, "requests.php?action=view&amp;id=$RequestID");
+
+                    View::pages($Pages);
+                    View::parse('generic/reply/quickreply.php', array(
+                        'InputName' => 'pageid',
+                        'InputID' => $RequestID,
+                        'Action' => 'comments.php?page=requests',
+                        'InputAction' => 'take_post',
+                        'SubscribeBox' => true
+                    ));
                     ?>
                 </div>
-                <?
-
-                //---------- Begin printing
-                CommentsView::render_comments($Thread, $LastRead, "requests.php?action=view&amp;id=$RequestID");
-
-                if ($Pages) { ?>
-                    <div class="BodyNavLinks pager"><?= $Pages ?></div>
-                <?
-                }
-
-                View::parse('generic/reply/quickreply.php', array(
-                    'InputName' => 'pageid',
-                    'InputID' => $RequestID,
-                    'Action' => 'comments.php?page=requests',
-                    'InputAction' => 'take_post',
-                    'SubscribeBox' => true
-                ));
-                ?>
             </div>
         </div>
-
     </div>
 </div>
 <? View::show_footer(); ?>

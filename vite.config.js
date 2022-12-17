@@ -54,7 +54,6 @@ export default defineConfig({
         'src/js/pages/torrents/index.js',
         'src/js/pages/userEdit.js',
         'src/js/pages/stats/index.jsx',
-        'src/js/pages/stats/index.jsx',
       ],
     },
   },

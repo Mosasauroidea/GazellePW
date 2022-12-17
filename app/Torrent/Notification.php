@@ -6,7 +6,6 @@ use Gazelle\Base;
 use FEED, Text, Torrents, Lang, Tags;
 
 class Notification extends Base {
-
     private $feed;
     public function __construct() {
         parent::__construct();
@@ -15,23 +14,26 @@ class Notification extends Base {
 
     private function buildBody($Properties) {
         $Body = '';
-        if (empty($Properties['Body'])) {
-            $Body = $Properties['MainBody'];
-        } else if (empty($Properties["MainBody"])) {
-            $Body = $Properties['Body'];
+        if (empty($Properties['WikiBody'])) {
+            $Body = $Properties['MainWikiBody'];
+        } else if (empty($Properties["MainWikiBody"])) {
+            $Body = $Properties['WikiBody'];
         } else {
-            $Body = $Properties['Body'] . "\n\n" . $Properties['MainBody'];
+            $Body = $Properties['WikiBody'] . "\n\n" . $Properties['MainWikiBody'];
         }
         return $Body;
     }
 
     private function buildTitle($Properties) {
-        $Title = Torrents::display_simple_group_name($Properties, null, false);
+        $Title = Torrents::display_simple_group_name($Properties['Group'], null, false);
         if ($Properties['ReleaseType'] > 0) {
             $Title .= ' [' . t('server.torrents.release_types')[$Properties['ReleaseType']] . ']';
         }
         $Details = '';
-        $Details .= trim($Properties['Codec']) . ' / ' . trim($Properties['Source']) . ' / ' . trim($Properties['Resolution']) . ' / ' . trim($Properties['Container']) . ' / ' . trim($Properties['Processing']);
+        $Details .= trim($Properties['Codec']) . ' / ' . trim($Properties['Source']) . ' / ' . trim($Properties['Resolution']) . ' / ' . trim($Properties['Container']);
+        if (!empty(trim($Properties['Processing'])) && trim($Properties['Processing']) != '---') {
+            $Details .= ' / ' . trim($Properties['Processing']);
+        }
         if ($Properties['Scene'] == '1') {
             $Details .= ' / Scene';
         }
@@ -68,7 +70,7 @@ class Notification extends Base {
         $Group = $Properties['Group'];
 
         $Title = $this->buildTitle($Properties);
-        $Body = $this->buildBody($Properties);
+        $Body = $this->buildBody($Properties['Group']);
 
         // For RSS
         $Tags = explode(',', $Properties['TagList']);
@@ -246,7 +248,7 @@ class Notification extends Base {
             return;
         }
         $Title = $this->buildTitle($Properties);
-        $Body = $this->buildBody($Properties);
+        $Body = $this->buildBody($Properties['Group']);
 
         $GroupID = $Properties['GroupID'];
         $TorrentID = $Properties['TorrentID'];

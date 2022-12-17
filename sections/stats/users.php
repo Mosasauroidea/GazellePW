@@ -88,4 +88,4 @@ Stats::uv();
 Stats::userClasses();
 Stats::userPlatforms();
 Stats::userBrowsers();
-View::show_footer([], 'stats/index');
+View::show_footer([], 'stats/index.jsx');

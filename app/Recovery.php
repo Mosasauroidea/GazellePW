@@ -3,7 +3,6 @@
 namespace Gazelle;
 
 class Recovery {
-
     static function email_check($raw) {
         $raw = strtolower(trim($raw));
         $parts = explode('@', $raw);

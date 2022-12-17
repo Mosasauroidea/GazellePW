@@ -130,10 +130,6 @@ hr {
   color: var(--global-color-success);
 }
 
-#wiki #wiki_search_box {
-  margin-bottom: var(--global-space-lg);
-}
-
 #sortable {
   list-style-type: none;
   margin: 0;

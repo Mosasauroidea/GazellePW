@@ -1,7 +1,6 @@
 <?php
 
 class NMA_API {
-
     /**
      * @const LIB_ERROR_TYPE can be exception or error
      */

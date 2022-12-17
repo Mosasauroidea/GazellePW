@@ -52,9 +52,9 @@ View::show_header(t('server.tools.tracker_info'), '', 'PageToolOcelotInfo');
             </div>
         </div>
         <div class="LayoutMainSidebar-main">
-            <div class="box box2">
-                <div class="head"><strong><?= t('server.tools.numbers_and_such') ?></strong></div>
-                <div class="pad">
+            <div class="Box">
+                <div class="Box-header"><?= t('server.tools.numbers_and_such') ?></div>
+                <div class="Box-body">
                     <?
                     if (!empty($UserPeerStats)) {
                     ?>

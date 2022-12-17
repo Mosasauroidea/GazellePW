@@ -7,7 +7,7 @@ $HistoryID = $DB->inserted_id();
 
 $Top10 = $Cache->get_value('top10tor_week_10');
 if ($Top10 === false) {
-	$DB->query("
+    $DB->query("
 				t.ID as TorrentID,
 				g.ID,
 				g.Name,
@@ -34,19 +34,19 @@ if ($Top10 === false) {
 				ORDER BY (t.Seeders + t.Leechers) DESC
 				LIMIT 10;");
 
-	$Top10 = $DB->to_array();
+    $Top10 = $DB->to_array();
 }
 
 $i = 1;
 foreach ($Top10 as $Torrent) {
-	$TorrentID = $Torrent['TorrentID'];
-	$TorrentDetail = Torrents::get_torrent($TorrengID);
-	$TitleString = Torrents::torrent_name($TorrentDetail, false);
-	$TagString = str_replace('|', ' ', $Torrent['TagList']);
-	$DB->query("
+    $TorrentID = $Torrent['TorrentID'];
+    $TorrentDetail = Torrents::get_torrent($TorrengID);
+    $TitleString = Torrents::torrent_name($TorrentDetail, false);
+    $TagString = str_replace('|', ' ', $Torrent['TagList']);
+    $DB->query("
 				INSERT INTO top10_history_torrents
 					(HistoryID, Rank, TorrentID, TitleString, TagString)
 				VALUES
 					($HistoryID, $i, $TorrentID, '" . db_string($TitleString) . "', '" . db_string($TagString) . "')");
-	$i++;
+    $i++;
 } //foreach ($Top10 as $Torrent)

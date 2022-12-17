@@ -3,7 +3,6 @@
 use Gazelle\Util\Time;
 
 class Artists {
-
     const Director = 1;
     const Writter = 2;
     const Producer = 3;

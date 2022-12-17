@@ -450,7 +450,7 @@ class TorrentSearch {
             case 'freetorrent':
                 if (Torrents::global_freeleech()) {
                     if ($Value != 1) {
-                        // temp code 
+                        // temp code
                         $this->SphQL->where('freetorrent', -1);
                     } else {
                         return;
@@ -589,7 +589,7 @@ class TorrentSearch {
             } elseif (in_array($Word, $SearchProcessings)) {
                 $this->add_word('processing', $Word);
             } else {
-                // Supports Hello.World 
+                // Supports Hello.World
                 $Word = str_replace('.', ' ', $Word);
                 $this->add_word('searchstr', $Word);
             }

@@ -2,7 +2,7 @@
 enforce_login();
 
 if (!$_GET['postid'] || !is_number($_GET['postid'])) {
-	error(0);
+    error(0);
 }
 
 $PostID = (int)$_GET['postid'];

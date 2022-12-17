@@ -6,7 +6,7 @@ authorize();
 
 $RequestID = $_POST['id'];
 if (!is_number($RequestID)) {
-	error(0);
+    error(0);
 }
 
 $DB->query("
@@ -31,7 +31,7 @@ $FillerID = $Request['FillerID'];
 $Uploaded = $Request['Uploaded'];
 $GruopID = $Request['GroupID'];
 if ((($LoggedUser['ID'] !== $UserID && $LoggedUser['ID'] !== $FillerID) && !check_perms('site_moderate_requests')) || $FillerID === '0') {
-	error(403);
+    error(403);
 }
 
 // Unfill
@@ -48,46 +48,46 @@ $CategoryName = $Categories[$CategoryID - 1];
 
 $RequestVotes = Requests::get_votes_array($RequestID);
 if ($RequestVotes['TotalBounty'] > $Uploaded) {
-	// If we can't take it all out of upload, zero that out and add whatever is left as download.
-	$DB->query("
+    // If we can't take it all out of upload, zero that out and add whatever is left as download.
+    $DB->query("
 		UPDATE users_main
 		SET Uploaded = 0
 		WHERE ID = $FillerID");
-	$DB->query('
+    $DB->query('
 		UPDATE users_main
 		SET Downloaded = Downloaded + ' . ($RequestVotes['TotalBounty'] - $Uploaded) . "
 		WHERE ID = $FillerID");
 } else {
-	$DB->query('
+    $DB->query('
 		UPDATE users_main
 		SET Uploaded = Uploaded - ' . $RequestVotes['TotalBounty'] . "
 		WHERE ID = $FillerID");
 }
 $FillerLang = Lang::getUserLang($FillerID);
 Misc::send_pm_with_tpl(
-	$FillerID,
-	'request_filled_unfilled',
-	[
-		'RequestID' => $RequestID,
-		'FullName' => $FullName,
-		'Reason' => $_POST['reason'],
-		'LoggedUserID' =>  $LoggedUser['ID'],
-		'LoggedUserUsername' =>  $LoggedUser['Username'],
-	]
+    $FillerID,
+    'request_filled_unfilled',
+    [
+        'RequestID' => $RequestID,
+        'FullName' => $FullName,
+        'Reason' => $_POST['reason'],
+        'LoggedUserID' =>  $LoggedUser['ID'],
+        'LoggedUserUsername' =>  $LoggedUser['Username'],
+    ]
 );
 
 $Cache->delete_value("user_stats_$FillerID");
 
 if ($UserID !== $LoggedUser['ID']) {
-	$ToUserLang = Lang::getUserLang($UserID);
-	Misc::send_pm_with_tpl($UserID, 'request_created_unfilled', [
-		'Reason' => $_POST['reason'],
-		'RequestID' => $RequestID,
-		'FullName' => $FullName,
-		'LoggedUserID' => $LoggedUser['ID'],
-		'LoggedUserUsername' => $LoggedUser['Username'],
-		'CONFIG' => CONFIG,
-	]);
+    $ToUserLang = Lang::getUserLang($UserID);
+    Misc::send_pm_with_tpl($UserID, 'request_created_unfilled', [
+        'Reason' => $_POST['reason'],
+        'RequestID' => $RequestID,
+        'FullName' => $FullName,
+        'LoggedUserID' => $LoggedUser['ID'],
+        'LoggedUserUsername' => $LoggedUser['Username'],
+        'CONFIG' => CONFIG,
+    ]);
 }
 
 Misc::write_log("Request $RequestID ($FullName), with a " . Format::get_size($RequestVotes['TotalBounty']) . ' bounty, was unfilled by user ' . $LoggedUser['ID'] . ' (' . $LoggedUser['Username'] . ') for the reason: ' . $_POST['reason']);
@@ -95,17 +95,17 @@ Misc::write_log("Request $RequestID ($FullName), with a " . Format::get_size($Re
 $Cache->delete_value("request_$RequestID");
 $Cache->delete_value("request_artists_$RequestID");
 if ($GroupID) {
-	$Cache->delete_value("requests_group_$GroupID");
+    $Cache->delete_value("requests_group_$GroupID");
 }
 
 Requests::update_sphinx_requests($RequestID);
 
 if (!empty($ArtistForm)) {
-	foreach ($ArtistForm as $ArtistType) {
-		foreach ($ArtistType as $Artist) {
-			$Cache->delete_value('artists_requests_' . $Artist['id']);
-		}
-	}
+    foreach ($ArtistForm as $ArtistType) {
+        foreach ($ArtistType as $Artist) {
+            $Cache->delete_value('artists_requests_' . $Artist['id']);
+        }
+    }
 }
 
 $SphQL = new SphinxqlQuery();

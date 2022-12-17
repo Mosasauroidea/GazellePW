@@ -380,11 +380,10 @@ if ($Username !== $Cur['Username'] && check_perms('users_edit_usernames', $Cur['
         error('You cannot set a username of "0" or "1".');
         header("Location: user.php?id=$UserID");
         die();
-    } else {
-        $UpdateSet[] = "Username = '$Username'";
-        $EditSummary[] = "username changed from " . $Cur['Username'] . " to $Username";
-        $LightUpdates['Username'] = $Username;
     }
+    $UpdateSet[] = "Username = '$Username'";
+    $EditSummary[] = "username changed from " . $Cur['Username'] . " to $Username";
+    $LightUpdates['Username'] = $Username;
 }
 
 if ($Title != db_string(display_str($Cur['Title'])) && check_perms('users_edit_titles')) {

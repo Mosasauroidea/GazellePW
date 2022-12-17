@@ -10,7 +10,7 @@ class Torrent extends AbstractAPI {
             case 'torrent':
                 return $this->getTorrent();
             default:
-                return $this->getTorrent(); 
+                return $this->getTorrent();
         }
     }
 
@@ -97,7 +97,7 @@ class Torrent extends AbstractAPI {
         } else {
             json_error('Missing group id and imdbid');
         }
-        
+
         if (!$this->db->has_results()) {
             json_error('Group not found');
         }

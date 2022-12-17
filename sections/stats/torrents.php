@@ -24,4 +24,4 @@ View::show_header(t('server.stats.stats'), '', 'PageStatTorrent');
 Stats::torrentByMonth();
 Stats::torrentByDay();
 Stats::torrentBySpecific();
-View::show_footer([], 'stats/index');
+View::show_footer([], 'stats/index.jsx');

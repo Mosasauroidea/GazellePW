@@ -1,7 +1,6 @@
 <?
 
 class Lang {
-
     const EN = 'en';
     const CHS = 'chs';
     const PT = 'pt';

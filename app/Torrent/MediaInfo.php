@@ -7,6 +7,6 @@ class MediaInfo {
         $this->parse();
     }
     private function parse() {
-        
+
     }
 }

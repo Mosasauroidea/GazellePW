@@ -833,7 +833,7 @@ View::show_header($ThreadInfo['Title'] . ' &lt; ' . $Forums[$ForumID]['Name'] . 
                                         <input class="Input" type="text" id="input_comment_<?= $PostID ?>" maxlength=20 placeholder="<?= t('server.forums.comment_optional') ?>">
                                         <button class="Button" id="button_<?= $PostID ?>"><?= check_perms('admin_send_bonus') ? t('server.forums.personal_reward') : t('server.forums.confirm') ?></button>
                                     </div>
-                                    <? //} 
+                                    <? //}
                                     ?>
 
                             </div> <? } ?>

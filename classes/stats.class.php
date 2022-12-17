@@ -1,6 +1,5 @@
 <?
 class Stats {
-
   public const  PeerCount = 'peer_count';
   public const SeederCount = 'seeder_count';
   public const LeecherCount = 'leecher_count';

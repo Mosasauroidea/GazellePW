@@ -346,7 +346,7 @@ if (count($_GET)) {
         if (!empty($_GET['tracker_ip'])) {
             $Distinct = 'DISTINCT ';
             $Join['xfu'] = ' JOIN xbt_files_users AS xfu ON um1.ID = xfu.uid ';
-            $Where[] = ' xfu.ip ' . $Match . wrap($_GET['tracker_ip'], '', true);
+            $Where[] = '( xfu.ip ' . $Match . wrap($_GET['tracker_ip'], '', true) . 'or  xfu.ipv6 ' . $Match . wrap($_GET['tracker_ip'], '', true) . ')';
         }
 
         //      if (!empty($_GET['tracker_ip'])) {
@@ -504,28 +504,18 @@ if (count($_GET)) {
 
         $SQL .= $Order;
 
-        if (count($Where) > 0 || count($Join) > 0 || count($Having) > 0) {
-            $RunQuery = true;
-        }
-
         list($Page, $Limit) = Format::page_limit(USERS_PER_PAGE);
         $SQL .= " LIMIT $Limit";
     } else {
         error($Err);
     }
 }
-if ($RunQuery) {
-    $Results = $DB->query($SQL);
-    $DB->query('SELECT FOUND_ROWS()');
-    list($NumResults) = $DB->next_record();
-    $DB->set_query_id($Results);
-} else {
-    $DB->query('SET @nothing = 0');
-    $NumResults = 0;
-}
-
+$Results = $DB->query($SQL);
+$DB->query('SELECT FOUND_ROWS()');
+list($NumResults) = $DB->next_record();
 $Pages = Format::get_pages($Page, $NumResults, USERS_PER_PAGE, 11);
 View::show_header(t('server.user.user_search'), '', 'PageUserAdvancedSearch');
+$DB->set_query_id($Results);
 ?>
 
 <div class="LayoutBody">
@@ -1091,4 +1081,3 @@ View::show_header(t('server.user.user_search'), '', 'PageUserAdvancedSearch');
 <?
 View::show_footer();
 ?>
-</div>

@@ -2,7 +2,7 @@
 authorize();
 $UserSubscriptions = Subscriptions::get_subscriptions();
 if (!empty($UserSubscriptions)) {
-	$DB->query("
+    $DB->query("
 		INSERT INTO forums_last_read_topics (UserID, TopicID, PostID)
 			SELECT '$LoggedUser[ID]', ID, LastPostID
 			FROM forums_topics

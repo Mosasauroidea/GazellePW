@@ -5,24 +5,24 @@ $ThreadID = $_POST['threadid'];
 $NewOption = $_POST['new_option'];
 
 if (!is_number($ThreadID)) {
-	error(404);
+    error(404);
 }
 if (!check_perms('site_moderate_forums')) {
-	$DB->query("
+    $DB->query("
 		SELECT ForumID
 		FROM forums_topics
 		WHERE ID = $ThreadID");
-	list($ForumID) = $DB->next_record();
-	if (!in_array($ForumID, $CONFIG['ForumsRevealVoters'])) {
-		error(403);
-	}
+    list($ForumID) = $DB->next_record();
+    if (!in_array($ForumID, $CONFIG['ForumsRevealVoters'])) {
+        error(403);
+    }
 }
 $DB->query("
 	SELECT Answers
 	FROM forums_polls
 	WHERE TopicID = $ThreadID");
 if (!$DB->has_results()) {
-	error(404);
+    error(404);
 }
 
 list($Answers) = $DB->next_record(MYSQLI_NUM, false);

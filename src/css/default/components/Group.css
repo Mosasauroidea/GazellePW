@@ -1,5 +1,4 @@
 .Group {
-  padding-bottom: var(--global-space-lg);
 }
 
 .Group-header {
@@ -23,6 +22,5 @@
 .Group-body {
   display: flex;
   gap: var(--global-space-default);
-  flex-wrap: wrap;
   flex-direction: column;
 }

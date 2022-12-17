@@ -361,50 +361,49 @@ View::show_header($ArtistHeaderName, 'browse,bbcode,comments,voting,recommend,su
             </div>
         </div>
     </div>
-</div>
-<div class="LayoutMainSidebar">
-    <div class="Sidebar LayoutMainSidebar-sidebar">
-        <div class="SidebarItemSearch SidebarItem Box">
-            <div class="SidebarItem-header Box-header">
-                <strong><?= t('server.artist.box_search') ?></strong>
+    <div class="LayoutMainSidebar">
+        <div class="Sidebar LayoutMainSidebar-sidebar">
+            <div class="SidebarItemSearch SidebarItem Box">
+                <div class="SidebarItem-header Box-header">
+                    <strong><?= t('server.artist.box_search') ?></strong>
+                </div>
+                <div class="SidebarItem-body Box-body">
+                    <form class="FormOneLine FormSearchFileLists" name="filelists" action="torrents.php">
+                        <input type="hidden" name="artistname" value="<?= $Name ?>" />
+                        <input type="hidden" name="action" value="advanced" />
+                        <input class="Input" type="text" autocomplete="off" id="filelist" name="filelist" size="20" />
+                        <input class="Button" type="submit" value="&gt;" />
+                    </form>
+                </div>
             </div>
-            <div class="SidebarItem-body Box-body">
-                <form class="FormOneLine FormSearchFileLists" name="filelists" action="torrents.php">
-                    <input type="hidden" name="artistname" value="<?= $Name ?>" />
-                    <input type="hidden" name="action" value="advanced" />
-                    <input class="Input" type="text" autocomplete="off" id="filelist" name="filelist" size="20" />
-                    <input class="Button" type="submit" value="&gt;" />
-                </form>
+            <div class="SidebarItemTags SidebarItem Box">
+                <div class="SidebarItem-header Box-header">
+                    <strong><?= t('server.artist.tag') ?></strong>
+                </div>
+                <ul class="Sidebar-list SidebarItem-body Box-body">
+                    <? Tags::format_top(50, 'torrents.php?action=advanced&taglist=', $Name, "Sidebar-item"); ?>
+                </ul>
             </div>
-        </div>
-        <div class="SidebarItemTags SidebarItem Box">
-            <div class="SidebarItem-header Box-header">
-                <strong><?= t('server.artist.tag') ?></strong>
+            <?
+            // Stats
+            ?>
+            <div class="SidebarItemStats SidebarItem Box">
+                <div class="SidebarItem-header Box-header">
+                    <strong><?= t('server.artist.statistics') ?></strong>
+                </div>
+                <ul class="Sidebar-list SidebarItem-body Box-body">
+                    <li class="Sidebar-item"><?= t('server.artist.number_of_groups') ?>: <?= number_format($NumGroups) ?></li>
+                    <li class="Sidebar-item"><?= t('server.artist.number_of_torrents') ?>: <?= number_format($NumTorrents) ?></li>
+                    <li class="Sidebar-item"><?= t('server.artist.number_of_seeders') ?>: <?= number_format($NumSeeders) ?></li>
+                    <li class="Sidebar-item"><?= t('server.artist.number_of_leechers') ?>: <?= number_format($NumLeechers) ?></li>
+                    <li class="Sidebar-item"><?= t('server.artist.number_of_snatches') ?>: <?= number_format($NumSnatches) ?></li>
+                </ul>
             </div>
-            <ul class="Sidebar-list SidebarItem-body Box-body">
-                <? Tags::format_top(50, 'torrents.php?action=advanced&taglist=', $Name, "Sidebar-item"); ?>
-            </ul>
-        </div>
-        <?
-        // Stats
-        ?>
-        <div class="SidebarItemStats SidebarItem Box">
-            <div class="SidebarItem-header Box-header">
-                <strong><?= t('server.artist.statistics') ?></strong>
-            </div>
-            <ul class="Sidebar-list SidebarItem-body Box-body">
-                <li class="Sidebar-item"><?= t('server.artist.number_of_groups') ?>: <?= number_format($NumGroups) ?></li>
-                <li class="Sidebar-item"><?= t('server.artist.number_of_torrents') ?>: <?= number_format($NumTorrents) ?></li>
-                <li class="Sidebar-item"><?= t('server.artist.number_of_seeders') ?>: <?= number_format($NumSeeders) ?></li>
-                <li class="Sidebar-item"><?= t('server.artist.number_of_leechers') ?>: <?= number_format($NumLeechers) ?></li>
-                <li class="Sidebar-item"><?= t('server.artist.number_of_snatches') ?>: <?= number_format($NumSnatches) ?></li>
-            </ul>
-        </div>
-        <?
+            <?
 
 
-        if (empty($SimilarArray)) {
-            $DB->query("
+            if (empty($SimilarArray)) {
+                $DB->query("
 		SELECT
 			s2.ArtistID,
 			a.Name,
@@ -419,351 +418,355 @@ View::show_header($ArtistHeaderName, 'browse,bbcode,comments,voting,recommend,su
 		ORDER BY ass.Score DESC
 		LIMIT 30
 	");
-            $SimilarArray = $DB->to_array();
-            $NumSimilar = count($SimilarArray);
-        }
-        ?>
-        <div class="SidbarItemArtists SidebarItem Box">
-            <div class="SidebarItem-header Box-header">
-                <strong><?= t('server.artist.similarartist') ?></strong>
-            </div>
-            <ul class="SidebarList SidebarItem-body Box-body">
-                <? if ($NumSimilar == 0) { ?>
-                    <li class="SidebarList-item"><span style="font-style: italic;"><?= t('server.artist.similarartist_note') ?></span></li>
-                <?
-                }
-                $First = true;
-                foreach ($SimilarArray as $SimilarArtist) {
-                    list($Artist2ID, $Artist2Name, $Artist2SubName, $Score, $SimilarID) = $SimilarArtist;
-                    $Score = $Score / 100;
-                    if ($First) {
-                        $Max = $Score + 1;
-                        $First = false;
+                $SimilarArray = $DB->to_array();
+                $NumSimilar = count($SimilarArray);
+            }
+            ?>
+            <div class="SidbarItemArtists SidebarItem Box">
+                <div class="SidebarItem-header Box-header">
+                    <strong><?= t('server.artist.similarartist') ?></strong>
+                </div>
+                <ul class="SidebarList SidebarItem-body Box-body">
+                    <? if ($NumSimilar == 0) { ?>
+                        <li class="SidebarList-item"><span style="font-style: italic;"><?= t('server.artist.similarartist_note') ?></span></li>
+                    <?
                     }
+                    $First = true;
+                    foreach ($SimilarArray as $SimilarArtist) {
+                        list($Artist2ID, $Artist2Name, $Artist2SubName, $Score, $SimilarID) = $SimilarArtist;
+                        $Score = $Score / 100;
+                        if ($First) {
+                            $Max = $Score + 1;
+                            $First = false;
+                        }
 
-                    $FontSize = (ceil(((($Score - 2) / $Max - 2) * 4))) + 8;
-                    $ArtistDisplayName = Artists::display_artist(['Name' => $Artist2Name, 'SubName' => $Artist2SubName, 'ArtistID' => $Artist2ID])
+                        $FontSize = (ceil(((($Score - 2) / $Max - 2) * 4))) + 8;
+                        $ArtistDisplayName = Artists::display_artist(['Name' => $Artist2Name, 'SubName' => $Artist2SubName, 'ArtistID' => $Artist2ID])
 
-                ?>
-                    <li class="SidebarList-item u-hoverToShow-hover">
-                        <span data-tooltip="<?= $Score ?>"><?= $ArtistDisplayName ?></span>
-                        <div class="SidebarList-actions">
-                            <? if (check_perms('site_delete_tag')) { ?>
-                                <a class="SidebarList-action u-hoverToShow-hide remove remove_artist" href="artist.php?action=delete_similar&amp;artistid=<?= $ArtistID ?>&amp;similarid=<?= $SimilarID ?>&amp;auth=<?= $LoggedUser['AuthKey'] ?>" class="brackets" data-tooltip="<?= t('server.artist.remove_similar_artist_title') ?>">
-                                    <?= icon('remove') ?>
+                    ?>
+                        <li class="SidebarList-item u-hoverToShow-hover">
+                            <span data-tooltip="<?= $Score ?>"><?= $ArtistDisplayName ?></span>
+                            <div class="SidebarList-actions">
+                                <? if (check_perms('site_delete_tag')) { ?>
+                                    <a class="SidebarList-action u-hoverToShow-hide remove remove_artist" href="artist.php?action=delete_similar&amp;artistid=<?= $ArtistID ?>&amp;similarid=<?= $SimilarID ?>&amp;auth=<?= $LoggedUser['AuthKey'] ?>" class="brackets" data-tooltip="<?= t('server.artist.remove_similar_artist_title') ?>">
+                                        <?= icon('remove') ?>
+                                    </a>
+                                <?      } ?>
+
+                                <a href=" artist.php?action=vote_similar&amp;artistid=<?= $ArtistID ?>&amp;similarid=<?= $SimilarID ?>&amp;way=up" class="SidebarList-action brackets vote_artist_up" data-tooltip="<?= t('server.artist.vote_up_similar_artist_title') ?>">
+                                    <?= icon('vote-up') ?>
                                 </a>
-                            <?      } ?>
-
-                            <a href=" artist.php?action=vote_similar&amp;artistid=<?= $ArtistID ?>&amp;similarid=<?= $SimilarID ?>&amp;way=up" class="SidebarList-action brackets vote_artist_up" data-tooltip="<?= t('server.artist.vote_up_similar_artist_title') ?>">
-                                <?= icon('vote-up') ?>
-                            </a>
-                            <a href="artist.php?action=vote_similar&amp;artistid=<?= $ArtistID ?>&amp;similarid=<?= $SimilarID ?>&amp;way=down" class="SidebarList-action brackets vote_artist_down" data-tooltip="<?= t('server.artist.vote_down_similar_artist_title') ?>">
-                                <?= icon('vote-down') ?>
-                            </a>
+                                <a href="artist.php?action=vote_similar&amp;artistid=<?= $ArtistID ?>&amp;similarid=<?= $SimilarID ?>&amp;way=down" class="SidebarList-action brackets vote_artist_down" data-tooltip="<?= t('server.artist.vote_down_similar_artist_title') ?>">
+                                    <?= icon('vote-down') ?>
+                                </a>
+                            </div>
+                            <br style="clear: both;" />
+                        </li>
+                    <?      } ?>
+                </ul>
+            </div>
+            <div class="SidebarItemArtistAdd SidebarItem Box">
+                <div class="SidebarItem-header Box-header">
+                    <strong><?= t('server.artist.add_similarartist') ?></strong>
+                </div>
+                <div class="SidebarItem-body Box-body">
+                    <form class="FormAddSimilarArtist" name="similar_artists" action="artist.php" method="post">
+                        <input type="hidden" name="action" value="add_similar" />
+                        <input type="hidden" name="auth" value="<?= $LoggedUser['AuthKey'] ?>" />
+                        <input type="hidden" name="artistid" value="<?= $ArtistID ?>" />
+                        <div class="Form-row FormOneLine">
+                            <input class="Input" type="text" placeholder="<?= t('server.artist.search_auto_fill') ?>" autocomplete="off" id="artistsimilar" size="20" <? Users::has_autocomplete_enabled('other'); ?> />
                         </div>
-                        <br style="clear: both;" />
-                    </li>
-                <?      } ?>
-            </ul>
-        </div>
-        <div class="SidebarItemArtistAdd SidebarItem Box">
-            <div class="SidebarItem-header Box-header">
-                <strong><?= t('server.artist.add_similarartist') ?></strong>
-            </div>
-            <div class="SidebarItem-body Box-body">
-                <form class="FormAddSimilarArtist" name="similar_artists" action="artist.php" method="post">
-                    <input type="hidden" name="action" value="add_similar" />
-                    <input type="hidden" name="auth" value="<?= $LoggedUser['AuthKey'] ?>" />
-                    <input type="hidden" name="artistid" value="<?= $ArtistID ?>" />
-                    <div class="Form-row FormOneLine">
-                        <input class="Input" type="text" placeholder="<?= t('server.artist.search_auto_fill') ?>" autocomplete="off" id="artistsimilar" size="20" <? Users::has_autocomplete_enabled('other'); ?> />
-                    </div>
-                    <div class="Form-row FormOneLine">
-                        <input type="text" placeholder=" <?= t('server.artist.artist_id') ?>" class="Input" id="similar_artistid" name="similar_artistid" />
-                        <input class="Button" type="submit" value="+" />
-                    </div>
-                </form>
+                        <div class="Form-row FormOneLine">
+                            <input type="text" placeholder=" <?= t('server.artist.artist_id') ?>" class="Input" id="similar_artistid" name="similar_artistid" />
+                            <input class="Button" type="submit" value="+" />
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
-    </div>
-    <div class="LayoutMainSidebar-main">
-        <?
+        <div class="LayoutMainSidebar-main">
+            <?
 
-        echo $TorrentDisplayList;
+            echo $TorrentDisplayList;
 
-        $Collages = $Cache->get_value("artists_collages_$ArtistID");
-        if (!is_array($Collages)) {
-            $DB->query("
+            $Collages = $Cache->get_value("artists_collages_$ArtistID");
+            if (!is_array($Collages)) {
+                $DB->query("
 		SELECT c.Name, c.NumTorrents, c.ID
 		FROM collages AS c
 			JOIN collages_artists AS ca ON ca.CollageID = c.ID
 		WHERE ca.ArtistID = '$ArtistID'
 			AND Deleted = '0'
 			AND CategoryID = '7'");
-            $Collages = $DB->to_array();
-            $Cache->cache_value("artists_collages_$ArtistID", $Collages, 3600 * 6);
-        }
-        if (count($Collages) > 0) {
-            if (count($Collages) > MAX_COLLAGES) {
-                // Pick some at random
-                $Range = range(0, count($Collages) - 1);
-                shuffle($Range);
-                $Indices = array_slice($Range, 0, MAX_COLLAGES);
-                $SeeAll = ' <a href="#" onclick="$(\'.collage_rows\').gtoggle(); return false;">(' . t('server.common.see_full') . ')</a>';
-            } else {
-                $Indices = range(0, count($Collages) - 1);
-                $SeeAll = '';
+                $Collages = $DB->to_array();
+                $Cache->cache_value("artists_collages_$ArtistID", $Collages, 3600 * 6);
             }
-        ?>
-            <table class="TableCollage Table" id="collages">
-                <tr class="Table-rowHeader">
-                    <td class="Table-cell" width="85%">This artist is in <?= number_format(count($Collages)) ?> collage<?= ((count($Collages) > 1) ? 's' : '') ?><?= $SeeAll ?></td>
-                    <td class="Table-cell"># artists</td>
-                </tr>
-                <?
-                foreach ($Indices as $i) {
-                    list($CollageName, $CollageArtists, $CollageID) = $Collages[$i];
-                    unset($Collages[$i]);
-                ?>
-                    <tr class="Table-row">
-                        <td class="Table-cell"><a href="collages.php?id=<?= $CollageID ?>"><?= $CollageName ?></a></td>
-                        <td class="Table-cell"><?= number_format($CollageArtists) ?></td>
-                    </tr>
-                <?
+            if (count($Collages) > 0) {
+                if (count($Collages) > MAX_COLLAGES) {
+                    // Pick some at random
+                    $Range = range(0, count($Collages) - 1);
+                    shuffle($Range);
+                    $Indices = array_slice($Range, 0, MAX_COLLAGES);
+                    $SeeAll = ' <a href="#" onclick="$(\'.collage_rows\').gtoggle(); return false;">(' . t('server.common.see_full') . ')</a>';
+                } else {
+                    $Indices = range(0, count($Collages) - 1);
+                    $SeeAll = '';
                 }
-                foreach ($Collages as $Collage) {
-                    list($CollageName, $CollageArtists, $CollageID) = $Collage;
-                ?>
-                    <tr class="Table-row hidden">
-                        <td class="Table-cell"><a href="collages.php?id=<?= $CollageID ?>"><?= $CollageName ?></a></td>
-                        <td class="Table-cell"><?= number_format($CollageArtists) ?></td>
+            ?>
+                <table class="TableCollage Table" id="collages">
+                    <tr class="Table-rowHeader">
+                        <td class="Table-cell" width="85%">This artist is in <?= number_format(count($Collages)) ?> collage<?= ((count($Collages) > 1) ? 's' : '') ?><?= $SeeAll ?></td>
+                        <td class="Table-cell"># artists</td>
                     </tr>
-                <?          } ?>
-            </table>
-        <?
-        }
+                    <?
+                    foreach ($Indices as $i) {
+                        list($CollageName, $CollageArtists, $CollageID) = $Collages[$i];
+                        unset($Collages[$i]);
+                    ?>
+                        <tr class="Table-row">
+                            <td class="Table-cell"><a href="collages.php?id=<?= $CollageID ?>"><?= $CollageName ?></a></td>
+                            <td class="Table-cell"><?= number_format($CollageArtists) ?></td>
+                        </tr>
+                    <?
+                    }
+                    foreach ($Collages as $Collage) {
+                        list($CollageName, $CollageArtists, $CollageID) = $Collage;
+                    ?>
+                        <tr class="Table-row hidden">
+                            <td class="Table-cell"><a href="collages.php?id=<?= $CollageID ?>"><?= $CollageName ?></a></td>
+                            <td class="Table-cell"><?= number_format($CollageArtists) ?></td>
+                        </tr>
+                    <?          } ?>
+                </table>
+            <?
+            }
 
-        if ($NumRequests > 0) {
+            if ($NumRequests > 0) {
 
-        ?>
-            <div class="Group" id="requests">
-                <div class="Group-header">
-                    <div class="Group-headerTitle">
-                        <?= t('server.common.requests') ?>
+            ?>
+                <div class="Group" id="requests">
+                    <div class="Group-header">
+                        <div class="Group-headerTitle">
+                            <?= t('server.common.requests') ?>
+                        </div>
                     </div>
-                </div>
-                <div class="Group-body">
-                    <div class="TableContainer">
-                        <table class="TableRequest Table" cellpadding="6" cellspacing="1" border="0" width="100%">
-                            <tr class="Table-rowHeader">
-                                <td class="Table-cell">
-                                    <?= t('server.artist.request_name') ?>
-                                </td>
-                                <td class="Table-cell TableRequest-cellValue">
-                                    <?= t('server.artist.vote') ?>
-                                </td>
-                                <td class="Table-cell TableRequest-cellValue">
-                                    <?= t('server.artist.bounty') ?>
-                                </td>
-                                <td class="Table-cell TableRequest-cellValue">
-                                    <?= t('server.artist.added') ?>
-                                </td>
-                            </tr>
-                            <?
-                            foreach ($Requests as $Request) {
-                                $RequestVotes = Requests::get_votes_array($Request['ID']);
-                                $RequestID = $Request['ID'];
-                                $RequestName = Torrents::group_name($Request, false);
-                                $FullName = "<a href=\"requests.php?action=view&amp;id=$RequestID\">$RequestName</a>";
-                                $Tags = $Request['Tags'];
-                            ?>
-                                <tr class="Table-row">
-                                    <td class="TableRequest-cellName Table-cell">
-                                        <?= $FullName ?>
-                                        <div class="torrent_info">
-                                            <?
-                                            ?>
-                                            <?= str_replace('|', ', ', $Request['CodecList']) . ' / ' . str_replace('|', ', ', $Request['SourceList']) . ' / ' . str_replace('|', ', ', $Request['ResolutionList']) . ' / ' . str_replace('|', ', ', $Request['ContainerList']) ?>
-                                        </div>
+                    <div class="Group-body">
+                        <div class="TableContainer">
+                            <table class="TableRequest Table" cellpadding="6" cellspacing="1" border="0" width="100%">
+                                <tr class="Table-rowHeader">
+                                    <td class="Table-cell">
+                                        <?= t('server.artist.request_name') ?>
                                     </td>
-                                    <td class="TableRequest-cellVotes Table-cell TableRequest-cellValue">
-                                        <span id="vote_count_<?= $Request['ID'] ?>"><?= count($RequestVotes['Voters']) ?></span>
-                                        <? if (check_perms('site_vote')) { ?>
-                                            &nbsp;&nbsp; <a href="javascript:globalapp.requestVote(0, <?= $Request['ID'] ?>)" class="brackets">+</a>
-                                        <?          } ?>
+                                    <td class="Table-cell TableRequest-cellValue">
+                                        <?= t('server.artist.vote') ?>
                                     </td>
-                                    <td class="TableRequest-cellBounty Table-cell TableRequest-cellValue">
-                                        <?= Format::get_size($RequestVotes['TotalBounty']) ?>
+                                    <td class="Table-cell TableRequest-cellValue">
+                                        <?= t('server.artist.bounty') ?>
                                     </td>
-                                    <td class="TableRequest-cellCreatedAt TableRequest-cellValue Table-cell">
-                                        <?= time_diff($Request['TimeAdded'], 1) ?>
+                                    <td class="Table-cell TableRequest-cellValue">
+                                        <?= t('server.artist.added') ?>
                                     </td>
                                 </tr>
-                            <?  } ?>
-                        </table>
+                                <?
+                                foreach ($Requests as $Request) {
+                                    $RequestVotes = Requests::get_votes_array($Request['ID']);
+                                    $RequestID = $Request['ID'];
+                                    $RequestName = Torrents::group_name($Request, false);
+                                    $FullName = "<a href=\"requests.php?action=view&amp;id=$RequestID\">$RequestName</a>";
+                                    $Tags = $Request['Tags'];
+                                ?>
+                                    <tr class="Table-row">
+                                        <td class="TableRequest-cellName Table-cell">
+                                            <?= $FullName ?>
+                                            <div class="torrent_info">
+                                                <?
+                                                ?>
+                                                <?= str_replace('|', ', ', $Request['CodecList']) . ' / ' . str_replace('|', ', ', $Request['SourceList']) . ' / ' . str_replace('|', ', ', $Request['ResolutionList']) . ' / ' . str_replace('|', ', ', $Request['ContainerList']) ?>
+                                            </div>
+                                        </td>
+                                        <td class="TableRequest-cellVotes Table-cell TableRequest-cellValue">
+                                            <span id="vote_count_<?= $Request['ID'] ?>"><?= count($RequestVotes['Voters']) ?></span>
+                                            <? if (check_perms('site_vote')) { ?>
+                                                &nbsp;&nbsp; <a href="javascript:globalapp.requestVote(0, <?= $Request['ID'] ?>)" class="brackets">+</a>
+                                            <?          } ?>
+                                        </td>
+                                        <td class="TableRequest-cellBounty Table-cell TableRequest-cellValue">
+                                            <?= Format::get_size($RequestVotes['TotalBounty']) ?>
+                                        </td>
+                                        <td class="TableRequest-cellCreatedAt TableRequest-cellValue Table-cell">
+                                            <?= time_diff($Request['TimeAdded'], 1) ?>
+                                        </td>
+                                    </tr>
+                                <?  } ?>
+                            </table>
+                        </div>
                     </div>
                 </div>
-            </div>
-        <?
-        }
-        ?>
+            <?
+            }
+            ?>
 
-        <?
-        foreach ($TorrentGroups as $ReleaseType => $GroupInfo) {
-            $DisplayName = sectionTitle($ReleaseType);
-        ?>
+            <?
+            foreach ($TorrentGroups as $ReleaseType => $GroupInfo) {
+                $DisplayName = sectionTitle($ReleaseType);
+            ?>
+                <div class="Group">
+                    <div class="Group-header">
+                        <div class="Group-headerTitle">
+                            <div id="torrents_<?= $ReleaseType ?>">
+                                <?= $DisplayName ?>
+                            </div>
+                        </div>
+                        <div class="Group-headerActions">
+                            <a href="#" onclick="globalapp.toggleAny(event, '.torrent_table_<?= $ReleaseType ?>');return false;">
+                                <span class="u-toggleAny-show u-hidden"><?= t('server.common.show') ?></span>
+                                <span class="u-toggleAny-hide"><?= t('server.common.hide') ?></span>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="Group-body torrent_table_<?= $ReleaseType ?>" id="torrent_table_<?= $ID ?>">
+                        <?
+                        $tableRender = new TorrentGroupCoverTableView($GroupInfo);
+                        $tableRender->render();
+                        ?>
+                    </div>
+                </div>
+                <?
+            }
+
+            // Similar Artist Map
+
+            if ($NumSimilar > 0) {
+                if ($SimilarData = $Cache->get_value("similar_positions_$ArtistID")) {
+                    $Similar = new ARTISTS_SIMILAR($ArtistID, $Name);
+                    $Similar->load_data($SimilarData);
+                    if (!(current($Similar->Artists)->NameLength)) {
+                        unset($Similar);
+                    }
+                }
+                if (empty($Similar) || empty($Similar->Artists)) {
+                    include(CONFIG['SERVER_ROOT'] . '/classes/image.class.php');
+                    $Img = new IMAGE;
+                    $Img->create(WIDTH, HEIGHT);
+                    $Img->color(255, 255, 255, 127);
+
+                    $Similar = new ARTISTS_SIMILAR($ArtistID, $Name);
+                    $Similar->set_up();
+                    $Similar->set_positions();
+                    $Similar->background_image();
+
+                    $SimilarData = $Similar->dump_data();
+
+                    $Cache->cache_value("similar_positions_$ArtistID", $SimilarData, 3600 * 24);
+                }
+                if (false) {
+                ?>
+                    <div id="similar_artist_map" class="box">
+                        <div id="flipper_head" class="head">
+                            <strong id="flipper_title"><?= t('server.artist.similar_artist_map') ?></strong>
+                            <a id="flip_to" class="brackets" href="#" onclick="flipView(); return false;"><?= t('server.artist.switch_to_cloud') ?></a>
+                        </div>
+                        <div id="flip_view_1" style="display: block; width: 100%; height: <?= (HEIGHT) ?>px; position: relative; background-image: url(static/similar/<?= ($ArtistID) ?>.png?t=<?= (time()) ?>);">
+                            <?
+                            $Similar->write_artists();
+                            ?>
+                        </div>
+                        <div id="flip_view_2" style="display: none; width: <?= WIDTH ?>px; height: <?= HEIGHT ?>px;">
+                            <canvas width="<?= WIDTH ?>px" height="<?= (HEIGHT - 20) ?>px" id="similarArtistsCanvas"></canvas>
+                            <div id="artistTags" style="display: none;">
+                                <ul>
+                                    <li></li>
+                                </ul>
+                            </div>
+                            <strong style="margin-left: 10px;"><a id="currentArtist" href="#null"><?= t('server.artist.loading') ?></a></strong>
+                        </div>
+                    </div>
+                <?
+                }
+                ?>
+
+                <script type="text/javascript">
+                    //<![CDATA[
+                    var cloudLoaded = false;
+
+                    function flipView() {
+                        var state = document.getElementById('flip_view_1').style.display == 'block';
+
+                        if (state) {
+                            document.getElementById('flip_view_1').style.display = 'none';
+                            document.getElementById('flip_view_2').style.display = 'block';
+                            document.getElementById('flipper_title').innerHTML = '<?= t('server.artist.similar_artist_cloud') ?>';
+                            document.getElementById('flip_to').innerHTML = '<?= t('server.artist.switch_to_map') ?>';
+
+                            if (!cloudLoaded) {
+                                require("static/functions/tagcanvas.js", function() {
+                                    require("static/functions/artist_cloud.js", function() {});
+                                });
+                                cloudLoaded = true;
+                            }
+                        } else {
+                            document.getElementById('flip_view_1').style.display = 'block';
+                            document.getElementById('flip_view_2').style.display = 'none';
+                            document.getElementById('flipper_title').innerHTML = '<?= t('server.artist.similar_artist_map') ?>';
+                            document.getElementById('flip_to').innerHTML = '<?= t('server.artist.switch_to_cloud') ?>';
+                        }
+                    }
+
+                    //TODO move this to global, perhaps it will be used elsewhere in the future
+                    //http://stackoverflow.com/questions/7293344/load-javascript-dynamically
+                    function require(file, callback) {
+                        var script = document.getElementsByTagName('script')[0],
+                            newjs = document.createElement('script');
+
+                        // IE
+                        newjs.onreadystatechange = function() {
+                            if (newjs.readyState === 'loaded' || newjs.readyState === 'complete') {
+                                newjs.onreadystatechange = null;
+                                callback();
+                            }
+                        };
+                        // others
+                        newjs.onload = function() {
+                            callback();
+                        };
+                        newjs.src = file;
+                        script.parentNode.insertBefore(newjs, script);
+                    }
+                    //]]>
+                </script>
+
+            <? } /* if $NumSimilar > 0 */ ?>
+            <?
+            // --- Comments ---
+            $Pages = Format::get_pages($Page, $NumComments, CONFIG['TORRENT_COMMENTS_PER_PAGE'], 9, '#comments');
+
+            ?>
             <div class="Group">
                 <div class="Group-header">
                     <div class="Group-headerTitle">
-                        <div id="torrents_<?= $ReleaseType ?>">
-                            <?= $DisplayName ?>
-                        </div>
-                    </div>
-                    <div class="Group-headerActions">
-                        <a href="#" onclick="globalapp.toggleAny(event, '.torrent_table_<?= $ReleaseType ?>');return false;">
-                            <span class="u-toggleAny-show u-hidden"><?= t('server.common.show') ?></span>
-                            <span class="u-toggleAny-hide"><?= t('server.common.hide') ?></span>
-                        </a>
+                        <?= t('server.artist.artistcomments') ?>
                     </div>
                 </div>
-                <div class="Group-body torrent_table_<?= $ReleaseType ?>" id="torrent_table_<?= $ID ?>">
+                <div id="artistcomments" class="Group-body">
+                    <? View::pages($Pages) ?>
                     <?
-                    $tableRender = new TorrentGroupCoverTableView($GroupInfo);
-                    $tableRender->render();
+
+                    //---------- Begin printing
+                    CommentsView::render_comments($Thread, $LastRead, "artist.php?id=$ArtistID");
+                    ?>
+                    <? View::pages($Pages) ?>
+                    <?
+                    View::parse('generic/reply/quickreply.php', array(
+                        'InputName' => 'pageid',
+                        'InputID' => $ArtistID,
+                        'Action' => 'comments.php?page=artist',
+                        'InputAction' => 'take_post',
+                        'SubscribeBox' => true
+                    ));
                     ?>
                 </div>
             </div>
-            <?
-        }
-
-        // Similar Artist Map
-
-        if ($NumSimilar > 0) {
-            if ($SimilarData = $Cache->get_value("similar_positions_$ArtistID")) {
-                $Similar = new ARTISTS_SIMILAR($ArtistID, $Name);
-                $Similar->load_data($SimilarData);
-                if (!(current($Similar->Artists)->NameLength)) {
-                    unset($Similar);
-                }
-            }
-            if (empty($Similar) || empty($Similar->Artists)) {
-                include(CONFIG['SERVER_ROOT'] . '/classes/image.class.php');
-                $Img = new IMAGE;
-                $Img->create(WIDTH, HEIGHT);
-                $Img->color(255, 255, 255, 127);
-
-                $Similar = new ARTISTS_SIMILAR($ArtistID, $Name);
-                $Similar->set_up();
-                $Similar->set_positions();
-                $Similar->background_image();
-
-                $SimilarData = $Similar->dump_data();
-
-                $Cache->cache_value("similar_positions_$ArtistID", $SimilarData, 3600 * 24);
-            }
-            if (false) {
-            ?>
-                <div id="similar_artist_map" class="box">
-                    <div id="flipper_head" class="head">
-                        <strong id="flipper_title"><?= t('server.artist.similar_artist_map') ?></strong>
-                        <a id="flip_to" class="brackets" href="#" onclick="flipView(); return false;"><?= t('server.artist.switch_to_cloud') ?></a>
-                    </div>
-                    <div id="flip_view_1" style="display: block; width: 100%; height: <?= (HEIGHT) ?>px; position: relative; background-image: url(static/similar/<?= ($ArtistID) ?>.png?t=<?= (time()) ?>);">
-                        <?
-                        $Similar->write_artists();
-                        ?>
-                    </div>
-                    <div id="flip_view_2" style="display: none; width: <?= WIDTH ?>px; height: <?= HEIGHT ?>px;">
-                        <canvas width="<?= WIDTH ?>px" height="<?= (HEIGHT - 20) ?>px" id="similarArtistsCanvas"></canvas>
-                        <div id="artistTags" style="display: none;">
-                            <ul>
-                                <li></li>
-                            </ul>
-                        </div>
-                        <strong style="margin-left: 10px;"><a id="currentArtist" href="#null"><?= t('server.artist.loading') ?></a></strong>
-                    </div>
-                </div>
-            <?
-            }
-            ?>
-
-            <script type="text/javascript">
-                //<![CDATA[
-                var cloudLoaded = false;
-
-                function flipView() {
-                    var state = document.getElementById('flip_view_1').style.display == 'block';
-
-                    if (state) {
-                        document.getElementById('flip_view_1').style.display = 'none';
-                        document.getElementById('flip_view_2').style.display = 'block';
-                        document.getElementById('flipper_title').innerHTML = '<?= t('server.artist.similar_artist_cloud') ?>';
-                        document.getElementById('flip_to').innerHTML = '<?= t('server.artist.switch_to_map') ?>';
-
-                        if (!cloudLoaded) {
-                            require("static/functions/tagcanvas.js", function() {
-                                require("static/functions/artist_cloud.js", function() {});
-                            });
-                            cloudLoaded = true;
-                        }
-                    } else {
-                        document.getElementById('flip_view_1').style.display = 'block';
-                        document.getElementById('flip_view_2').style.display = 'none';
-                        document.getElementById('flipper_title').innerHTML = '<?= t('server.artist.similar_artist_map') ?>';
-                        document.getElementById('flip_to').innerHTML = '<?= t('server.artist.switch_to_cloud') ?>';
-                    }
-                }
-
-                //TODO move this to global, perhaps it will be used elsewhere in the future
-                //http://stackoverflow.com/questions/7293344/load-javascript-dynamically
-                function require(file, callback) {
-                    var script = document.getElementsByTagName('script')[0],
-                        newjs = document.createElement('script');
-
-                    // IE
-                    newjs.onreadystatechange = function() {
-                        if (newjs.readyState === 'loaded' || newjs.readyState === 'complete') {
-                            newjs.onreadystatechange = null;
-                            callback();
-                        }
-                    };
-                    // others
-                    newjs.onload = function() {
-                        callback();
-                    };
-                    newjs.src = file;
-                    script.parentNode.insertBefore(newjs, script);
-                }
-                //]]>
-            </script>
-
-        <? } /* if $NumSimilar > 0 */ ?>
-        <?
-        // --- Comments ---
-        $Pages = Format::get_pages($Page, $NumComments, CONFIG['TORRENT_COMMENTS_PER_PAGE'], 9, '#comments');
-
-        ?>
-        <div id="artistcomments">
-            <div class="BodyNavLinks"><a name="comments"></a>
-                <?= ($Pages) ?>
-            </div>
-            <?
-
-            //---------- Begin printing
-            CommentsView::render_comments($Thread, $LastRead, "artist.php?id=$ArtistID");
-            ?>
-            <div class="BodyNavLinks">
-                <?= ($Pages) ?>
-            </div>
-            <?
-            View::parse('generic/reply/quickreply.php', array(
-                'InputName' => 'pageid',
-                'InputID' => $ArtistID,
-                'Action' => 'comments.php?page=artist',
-                'InputAction' => 'take_post',
-                'SubscribeBox' => true
-            ));
-            ?>
         </div>
     </div>
 </div>

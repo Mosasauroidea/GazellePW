@@ -6,7 +6,7 @@ $UserID = $_POST['userid'];
 $Answer = db_string($_POST['edit']);
 
 if (empty($Answer) || !is_number($ID) || $UserID != $LoggedUser['ID']) {
-	error(403);
+    error(403);
 }
 
 $DB->query("

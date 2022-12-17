@@ -335,12 +335,7 @@ $Group = Torrents::get_group($GroupID);
 if (check_perms('torrents_freeleech') && $Properties['FreeLeech'] != $CurFreeLeech) {
     Torrents::freeleech_torrents($TorrentID, $Properties['FreeLeech'], $Properties['FreeLeechType']);
     $Notification = new Notification;
-    $Properties['Body'] = $Group['WikiBody'];
-    $Properties['MainBody'] = $Group['MainWikiBody'];
-    $Properties['TagList'] = $Group['TagList'];
-    $Properties['Year'] = $Group['Year'];
-    $Properties['Name'] = $Group['Name'];
-    $Properties['SubName'] = $Group['SubName'];
+    $Properties['Group'] = $Group;
     $Notification->edit_notify($Properties);
 }
 

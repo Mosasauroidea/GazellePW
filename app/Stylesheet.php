@@ -3,7 +3,6 @@
 namespace Gazelle;
 
 class Stylesheet extends Base {
-
     private $stylesheets;
 
     public function __construct() {

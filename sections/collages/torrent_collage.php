@@ -302,26 +302,29 @@ View::show_header($Name, 'browse,collage,bbcode,voting,recommend', 'PageCollageT
                     ?>
                 </div>
             </div>
-            <div class="u-vstack" id="torrent_comments">
-                <div class="BodyNavLinks"><a name="comments"></a>
-                    <?= $Pages ?>
+            <div class="Group">
+                <div class="Group-header">
+                    <div class="Group-headerTitle">
+                        <?= t('server.collages.comments') ?>
+                    </div>
                 </div>
-                <?
-                CommentsView::render_comments($Thread, $LastRead, "collages.php?id=$CollageID");
-                ?>
-                <div class="BodyNavLinks">
-                    <?= $Pages ?>
+                <div class="Group-body" id="torrent_comments">
+                    <? View::pages($Pages) ?>
+                    <?
+                    CommentsView::render_comments($Thread, $LastRead, "collages.php?id=$CollageID");
+                    ?>
+                    <? View::pages($Pages) ?>
+                    <?
+                    View::parse('generic/reply/quickreply.php', array(
+                        'InputName' => 'pageid',
+                        'InputID' => $CollageID,
+                        'Action' => 'comments.php?page=collages',
+                        'InputAction' => 'take_post',
+                        'TextareaCols' => 65,
+                        'SubscribeBox' => true
+                    ));
+                    ?>
                 </div>
-                <?
-                View::parse('generic/reply/quickreply.php', array(
-                    'InputName' => 'pageid',
-                    'InputID' => $CollageID,
-                    'Action' => 'comments.php?page=collages',
-                    'InputAction' => 'take_post',
-                    'TextareaCols' => 65,
-                    'SubscribeBox' => true
-                ));
-                ?>
             </div>
         </div>
     </div>

@@ -35,6 +35,7 @@
   - 多语言（英语，中文等）
   - mdx/yaml 文件格式
   - 使用云服务（Crowdin）进行翻译
+  - 支持双语内容
 - 图床：本地或者 [Minio](https://github.com/minio/minio)
 - 邮件发送：SMTP 或者 [Mailgun](https://www.mailgun.com/)
 - 在免费和中性基础上，额外增加 25%，50%，75% 种子免费

@@ -4,7 +4,6 @@
  * Class to manage locked accounts
  */
 class LockedAccounts {
-
     /**
      * Lock an account
      *

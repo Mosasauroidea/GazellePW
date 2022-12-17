@@ -6,13 +6,13 @@ authorize();
 $DB->query("SELECT COUNT(1) FROM user_questions WHERE UserID = '$LoggedUser[ID]'");
 list($Results) = $DB->next_record();
 if ($Results >= MAX_QUESTIONS) {
-	error("You have asked too many questions for the time being.");
+    error("You have asked too many questions for the time being.");
 }
 
 $Question = db_string($_POST['question']);
 
 if (empty($Question)) {
-	error("No question asked");
+    error("No question asked");
 }
 
 $UserID = $LoggedUser['ID'];

@@ -3,7 +3,6 @@
 namespace Gazelle;
 
 abstract class BaseObject extends Base {
-
     protected $id;
 
     /* used for handling updates */

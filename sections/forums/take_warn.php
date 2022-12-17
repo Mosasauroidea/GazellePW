@@ -1,6 +1,6 @@
 <?php
 if (!check_perms('users_warn')) {
-	error(404);
+    error(404);
 }
 Misc::assert_isset_request($_POST, array('reason', 'privatemessage', 'body', 'length', 'postid', 'userid'));
 
@@ -15,18 +15,18 @@ $SQLTime = sqltime();
 
 $UserInfo = Users::user_info($UserID);
 if ($UserInfo['Class'] > $LoggedUser['Class']) {
-	error(403);
+    error(403);
 }
 
 $URL = site_url() . "forums.php?action=viewthread&amp;postid=$PostID#post$PostID";
 if ($WarningLength !== 'verbal') {
-	$Time = (int)$WarningLength * (7 * 24 * 60 * 60);
-	Tools::warn_user($UserID, $Time, "$URL - $Reason");
-	$WarnTime = time_plus($Time);
-	$AdminComment = date('Y-m-d') . " - Warned until $WarnTime by " . $LoggedUser['Username'] . " for $URL\nReason: $Reason\n\n";
+    $Time = (int)$WarningLength * (7 * 24 * 60 * 60);
+    Tools::warn_user($UserID, $Time, "$URL - $Reason");
+    $WarnTime = time_plus($Time);
+    $AdminComment = date('Y-m-d') . " - Warned until $WarnTime by " . $LoggedUser['Username'] . " for $URL\nReason: $Reason\n\n";
 } else {
-	$AdminComment = date('Y-m-d') . ' - Verbally warned by ' . $LoggedUser['Username'] . " for $URL\nReason: $Reason\n\n";
-	Tools::update_user_notes($UserID, $AdminComment);
+    $AdminComment = date('Y-m-d') . ' - Verbally warned by ' . $LoggedUser['Username'] . " for $URL\nReason: $Reason\n\n";
+    Tools::update_user_notes($UserID, $AdminComment);
 }
 
 $DB->query("
@@ -70,30 +70,30 @@ $DB->query("
 $CatalogueID = floor((CONFIG['POSTS_PER_PAGE'] * $Page - CONFIG['POSTS_PER_PAGE']) / CONFIG['THREAD_CATALOGUE']);
 $Cache->begin_transaction("thread_$TopicID" . "_catalogue_$CatalogueID");
 if ($Cache->MemcacheDBArray[$Key]['ID'] != $PostID) {
-	$Cache->cancel_transaction();
-	$Cache->delete_value("thread_$TopicID" . "_catalogue_$CatalogueID");
-	//just clear the cache for would be cache-screwer-uppers
+    $Cache->cancel_transaction();
+    $Cache->delete_value("thread_$TopicID" . "_catalogue_$CatalogueID");
+    //just clear the cache for would be cache-screwer-uppers
 } else {
-	$Cache->update_row($Key, array(
-		'ID' => $Cache->MemcacheDBArray[$Key]['ID'],
-		'AuthorID' => $Cache->MemcacheDBArray[$Key]['AuthorID'],
-		'AddedTime' => $Cache->MemcacheDBArray[$Key]['AddedTime'],
-		'Body' => $Body, //Don't url decode.
-		'EditedUserID' => $LoggedUser['ID'],
-		'EditedTime' => $SQLTime,
-		'Username' => $LoggedUser['Username']
-	));
-	$Cache->commit_transaction(3600 * 24 * 5);
+    $Cache->update_row($Key, array(
+        'ID' => $Cache->MemcacheDBArray[$Key]['ID'],
+        'AuthorID' => $Cache->MemcacheDBArray[$Key]['AuthorID'],
+        'AddedTime' => $Cache->MemcacheDBArray[$Key]['AddedTime'],
+        'Body' => $Body, //Don't url decode.
+        'EditedUserID' => $LoggedUser['ID'],
+        'EditedTime' => $SQLTime,
+        'Username' => $LoggedUser['Username']
+    ));
+    $Cache->commit_transaction(3600 * 24 * 5);
 }
 $ThreadInfo = Forums::get_thread_info($TopicID);
 if ($ThreadInfo === null) {
-	error(404);
+    error(404);
 }
 if ($ThreadInfo['StickyPostID'] == $PostID) {
-	$ThreadInfo['StickyPost']['Body'] = $Body;
-	$ThreadInfo['StickyPost']['EditedUserID'] = $LoggedUser['ID'];
-	$ThreadInfo['StickyPost']['EditedTime'] = $SQLTime;
-	$Cache->cache_value("thread_$TopicID" . '_info', $ThreadInfo, 0);
+    $ThreadInfo['StickyPost']['Body'] = $Body;
+    $ThreadInfo['StickyPost']['EditedUserID'] = $LoggedUser['ID'];
+    $ThreadInfo['StickyPost']['EditedTime'] = $SQLTime;
+    $Cache->cache_value("thread_$TopicID" . '_info', $ThreadInfo, 0);
 }
 
 $DB->query("

@@ -66,8 +66,6 @@ View::show_header($Title, 'wiki,bbcode', 'PageWikiHome');
                         <input class="Input" type="text" placeholder="<?= t('server.wiki.search_articles') ?>" name="search" size="20" />
                         <input value="Search" type="submit" class="hidden" />
                     </form>
-                    <br style="line-height: 10px;" />
-                    <a href="wiki.php?action=browse" class="brackets"><?= t('server.wiki.all_articles') ?></a>
                 </div>
             </div>
             <?

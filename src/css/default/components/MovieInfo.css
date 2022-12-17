@@ -5,7 +5,6 @@ Where
 */
 
 .MovieInfo {
-  margin-bottom: var(--global-space-lg);
   display: grid;
   grid-template-columns: 249px 1fr;
   grid-template-rows: auto auto auto 1fr;

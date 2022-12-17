@@ -770,7 +770,7 @@ class NotificationsManager {
 							ON DUPLICATE KEY UPDATE
 								TimesUsed = TimesUsed + 1");
 
-                    $PushServerSocket = fsockopen("127.0.0.1", 6789);
+                    $PushServerSocket = fsockopen(CONFIG['PUSH_CONFIG_SOCKET_LISTEN_ADDRESS'], CONFIG['PUSH_CONFIG_SOCKET_LISTEN_PORT']);
                     fwrite($PushServerSocket, $JSON);
                     fclose($PushServerSocket);
                 }

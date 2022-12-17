@@ -3,7 +3,6 @@
 namespace Gazelle\Top10;
 
 class Torrent extends \Gazelle\Base {
-
     /** @var Array */
     private $formats;
 

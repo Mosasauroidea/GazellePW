@@ -26,10 +26,10 @@ $DB->query("
 ");
 $Bonus = $DB->to_array();
 foreach ($Bonus as $B) {
-	list($UserID, $NewPoints) = $B;
-	if (empty($NewPoints)) {
-		continue;
-	}
-	$DB->query("UPDATE users_main AS um SET um.BonusPoints=um.BonusPoints + ROUND($NewPoints, 5) where ID = $UserID");
-	$Cache->delete_value('user_stats_' . $UserID);
+    list($UserID, $NewPoints) = $B;
+    if (empty($NewPoints)) {
+        continue;
+    }
+    $DB->query("UPDATE users_main AS um SET um.BonusPoints=um.BonusPoints + ROUND($NewPoints, 5) where ID = $UserID");
+    $Cache->delete_value('user_stats_' . $UserID);
 }

@@ -1,39 +1,39 @@
 <?
 View::show_header(t('server.user.two_factor_authentication'), '', 'Pageuser2FAStep2');
 ?>
-
-<div class="BoxBody">
-    <p><?= t('server.user.two_factor_authentication_note') ?></p>
-</div>
-
-<form method="post">
-    <table id="user_2fa_step2_table" class="layout border">
-        <thead>
-            <tr class="colhead_dark">
-                <td colspan="2">
-                    <strong><?= t('server.user.please_enter_2fa_key') ?></strong>
-                </td>
-            </tr>
-        </thead>
-
-        <tbody>
-            <tr>
-                <td class="label" data-tooltip-interactive="<?= t('server.user.authentication_key_title') ?>" data-title-plain="If all went to plan last step, your authentication app should've given you a code. Please enter that here.">
-                    <label for="2fa"><strong><?= t('server.user.authentication_key') ?>:</strong></label>
-                </td>
-
+<div class="LayoutBody">
+    <div class="BodyHeader">
+        <div class="BodyHeader-nav">
+            <?= t('server.user.two_factor_authentication') ?>
+        </div>
+    </div>
+    <form class="Form" method="post">
+        <table id="user_2fa_step2_table" class="Form-rowList" variant="header">
+            <tr class="Form-rowHeader">
                 <td>
-                    <input class="Input" type="text" size="50" name="2fa" id="2fa" />
+                    <div><?= t('server.user.authentication_key') ?></div>
+                </td>
+            </tr>
+            <tr class="Form-row">
+                <td>
+                    <p><?= t('server.user.two_factor_authentication_note') ?></p>
+                </td>
+            </tr>
+            <tr class="Form-row">
+                <td class="Form-label"><?= t('server.user.authentication_key') ?>:
+                </td>
+                <td class="Form-inputs">
+                    <input placeholder="<?= t('server.user.authentication_key_title') ?>" class="Input" type="text" size="50" name="2fa" id="2fa" />
                 </td>
             </tr>
 
-            <tr>
+            <tr class="Form-row">
                 <td colspan="2">
                     <input class="Button" type="submit">
                 </td>
             </tr>
-        </tbody>
-    </table>
-</form>
+        </table>
+    </form>
+</div>
 
 <? View::show_footer(); ?>

@@ -82,5 +82,5 @@ Where
 .BodyContent {
   display: flex;
   flex-direction: column;
-  gap: var(--global-space-default);
+  gap: var(--global-space-lg);
 }

@@ -35,6 +35,7 @@ GazellePW (GazellePosterWall) is a web framework geared towards private BitTorre
   - Multiple Languages (English, Chinese etc)
   - mdx/yaml file format
   - Use service (Crowdin) to translate
+  - Support bilingual content
 - Image host: Local or [Minio](https://github.com/minio/minio)
 - Mail delivery type: SMTP or [Mailgun](https://www.mailgun.com/)
 - Additional torrents off: 25%, 50%, 75%

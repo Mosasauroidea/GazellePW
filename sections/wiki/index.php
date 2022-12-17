@@ -52,9 +52,6 @@ if (!empty($_REQUEST['action'])) {
         case 'delete_alias':
             include('delete_alias.php');
             break;
-        case 'browse':
-            include('wiki_browse.php');
-            break;
         case 'article':
             include('browse.php');
             break;

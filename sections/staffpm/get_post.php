@@ -13,7 +13,7 @@ $_GET['post'], which is the ID of the post.
 
 // Quick SQL injection check
 if (!$_GET['post'] || !is_number($_GET['post'])) {
-	error(0);
+    error(0);
 }
 
 // Variables for database input
@@ -29,8 +29,8 @@ $DB->query("
 list($Message, $Level, $UserID) = $DB->next_record(MYSQLI_NUM);
 
 if (($LoggedUser['ID'] == $UserID) || ($IsFLS && $LoggedUser['Class'] >= $Level)) {
-	// This gets sent to the browser, which echoes it wherever
-	echo trim($Message);
+    // This gets sent to the browser, which echoes it wherever
+    echo trim($Message);
 } else {
-	error(403);
+    error(403);
 }

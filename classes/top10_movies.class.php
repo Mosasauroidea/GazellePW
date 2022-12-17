@@ -1,6 +1,5 @@
 <?
 class Top10Movies {
-
   private $BaseQuery = "
     SELECT
       g.ID,

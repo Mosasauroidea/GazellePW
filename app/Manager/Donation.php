@@ -25,8 +25,6 @@ class DonationCurrency {
     const BTC = "BTC";
 }
 class Donation extends \Gazelle\Base {
-
-
     private static $ForumDescriptions = array(
         "I want only two houses, rather than seven... I feel like letting go of things",
         "A billion here, a billion there, sooner or later it adds up to real money.",

@@ -5,7 +5,7 @@
 authorize();
 
 if (!check_perms('site_manage_recommendations')) {
-	error(403);
+    error(403);
 }
 
 $DB->query('

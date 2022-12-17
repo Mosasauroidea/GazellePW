@@ -161,7 +161,7 @@ if (check_perms('admin_manage_blog')) {
                         <? } ?>
                     </div>
                 </div>
-                <div class="Post-body Box-body HtmlText">
+                <div class="PostArticle Post-body Box-body HtmlText">
                     <?= Text::full_format($Body) ?>
                 </div>
             </div>

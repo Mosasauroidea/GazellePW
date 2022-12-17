@@ -6,7 +6,6 @@ use Permissions;
 use Users;
 
 class Staff extends Base {
-
     /** @var array */
     protected $user;
 

@@ -89,7 +89,7 @@ switch ($_GET['feed']) {
 					LEFT JOIN users_main AS um ON b.UserID = um.ID
 				ORDER BY Time DESC
 				LIMIT 20");
-            $Blog = $DB->to_array();
+            $Blog = $DB->to_array(false, MYSQLI_BOTH, false);
             $Cache->cache_value('blog', $Blog, 1209600);
         }
         foreach ($Blog as $BlogItem) {
@@ -112,7 +112,7 @@ switch ($_GET['feed']) {
 				FROM changelog
 				ORDER BY Time DESC
 				LIMIT 20");
-            $Changelog = $DB->to_array();
+            $Changelog = $DB->to_array(false, MYSQLI_BOTH, false);
             $Cache->cache_value('changelog', $Changelog, 3600);
         }
         foreach ($Changelog as $Change) {

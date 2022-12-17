@@ -281,7 +281,7 @@ function render_item($Idx, $Report) {
                             </td>
                         </tr>
                     <? } ?>
-                    <? if ($Status == 'InProgress') { // END REPORTED STUFF :|: BEGIN MOD STUFF 
+                    <? if ($Status == 'InProgress') { // END REPORTED STUFF :|: BEGIN MOD STUFF
                     ?>
                         <tr class="Form-row">
                             <td class="Form-label Table-cellRight"><?= t('server.reportsv2.in_progress_by') ?>:</td>

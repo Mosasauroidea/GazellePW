@@ -1,7 +1,4 @@
 <?php
-define("PUSH_CONFIG['SOCKET_LISTEN_ADDRESS']", "127.0.0.1");
-define("PUSH_CONFIG['SOCKET_LISTEN_PORT']", 6789);
-
 require 'NMA_API.php';
 require 'config.php';
 require 'const.php';
@@ -20,7 +17,7 @@ class PushServer {
     private function init() {
         $this->ListenSocket = socket_create(AF_INET, SOCK_STREAM, SOL_TCP);
         socket_set_option($this->ListenSocket, SOL_SOCKET, SO_REUSEADDR, 1);
-        socket_bind($this->ListenSocket, PUSH_CONFIG['SOCKET_LISTEN_ADDRESS'], PUSH_CONFIG['SOCKET_LISTEN_PORT']);
+        socket_bind($this->ListenSocket, CONFIG['PUSH_CONFIG_SOCKET_LISTEN_ADDRESS'], CONFIG['PUSH_CONFIG_SOCKET_LISTEN_PORT']);
         socket_listen($this->ListenSocket);
         socket_set_nonblock($this->ListenSocket);
         echo "\nInitialized\n";

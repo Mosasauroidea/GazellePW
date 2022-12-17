@@ -7,7 +7,6 @@
  *
  */
 class Referral {
-
     // array to store external site credentials and API URIs, stored in cache to keep user sessions alive
     private $ExternalServices;
     // set session length

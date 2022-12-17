@@ -93,7 +93,6 @@ class Upload extends Base {
             $this->validate->SetFields('maindesc', '1', 'string', 'Title must be between 2 and 200 characters.', ['maxlength' => 65535]);
             $this->validate->SetFields('image', '1', 'link', 'Image link must be between 2 and 200 characters.');
             $this->validate->SetFields('year', '1', 'number', 'year.');
-            $this->validate->SetFields('imdb', '1', 'regex', 'imdb id', ['regex' => '/' . IMDB_REGEX . '/']);
             $this->validate->SetFields('releasetype', '1', 'inarray', 'release type', ['inarray' => $ReleaseTypes]);
         } else {
             $this->validate->SetFields('groupid', '1', 'number', 'group id');
@@ -105,6 +104,7 @@ class Upload extends Base {
         if ($Err) {
             throw new Exception\InvalidParamException($Err);
         }
+
         if (!is_array($Params['mediainfo'])) {
             throw new Exception\InvalidParamException('mediainfo');
         }
@@ -127,6 +127,11 @@ class Upload extends Base {
             }
             if ($MainArtistCount < 1) {
                 throw new Exception\InvalidParamException('main artist number');
+            }
+            if (!empty($Params['no_imdb_link'])) {
+            } else if (preg_match('/' . IMDB_REGEX . '/', $Params['imdb'])) {
+            } else {
+                throw new Exception\InvalidParamException('imdb id');
             }
             if (count($Params['artists']) != count($Params['importance']) || count($Params['artists']) != count($Params['artist_ids']) || count($Params['artists']) != count($Params['artists_sub'])) {
                 throw new Exception\InvalidParamException('artists info count');
@@ -155,6 +160,8 @@ class Upload extends Base {
         if (!empty($Params['imdb'])) {
             preg_match('/' . IMDB_REGEX . '/', $Params['imdb'], $IMDBMatch);
             $properties['IMDBID'] = $IMDBMatch[1];
+        } else {
+            $properties['IMDBID'] = '';
         }
         $properties['Name'] = $Params['name'];
         $properties['SubName'] = isset($Params['subname']) ? $Params['subname'] : '';
@@ -233,6 +240,7 @@ class Upload extends Base {
         $ArtistSubName = $Params['artists_sub'];
 
 
+
         for ($i = 0, $il = count($Artists); $i < $il; $i++) {
             if (trim($Artists[$i]) != '') {
                 $ArtistForm[$Importance[$i]][] = array('Name' => $Artists[$i], 'IMDBID' => isset($ArtistIMDBIDs[$i]) ? $ArtistIMDBIDs[$i] : null, 'SubName' => $ArtistSubName[$i]);
@@ -253,7 +261,7 @@ class Upload extends Base {
             $properties['FreeLeech'] = Torrents::FREE;
         }
 
-        if ($properties['Diy'] || $this->properties['Buy']) {
+        if ($properties['Diy'] || $properties['Buy']) {
             $properties['FreeLeech'] = Torrents::FREE;
         }
 
@@ -387,7 +395,6 @@ class Upload extends Base {
         $DoubanID = 'null';
         $DoubanVote = 'null';
         $IMDBVote = 'null';
-        $IMDBID = '';
         $RTRating = '';
         $IMDBRating = 'null';
         $Runtime = '';
@@ -431,12 +438,14 @@ class Upload extends Base {
         $this->db->begin_transaction();
         try {
             $IMDBID = $this->properties['IMDBID'];
-            $this->db->prepared_query("SELECT * FROM torrents_group WHERE IMDBID = ?", $IMDBID);
-            if ($this->db->record_count() > 0) {
-                $ExistedGroup = $this->db->next_record(MYSQLI_ASSOC, false);
-                $this->isNewGroup = false;
-                $this->properties['Group'] = $ExistedGroup;
-                $this->properties['GroupID'] = $ExistedGroup['ID'];
+            if ($IMDBID) {
+                $this->db->prepared_query("SELECT * FROM torrents_group WHERE IMDBID = ?", $IMDBID);
+                if ($this->db->record_count() > 0) {
+                    $ExistedGroup = $this->db->next_record(MYSQLI_ASSOC, false);
+                    $this->isNewGroup = false;
+                    $this->properties['Group'] = $ExistedGroup;
+                    $this->properties['GroupID'] = $ExistedGroup['ID'];
+                }
             }
             if ($this->isNewGroup) {
                 $ArtistForm = $this->properties['Artists'];
@@ -552,7 +561,7 @@ class Upload extends Base {
                 list($properties['ReleaseType']) = $this->db->next_record();
             }
             $this->db->prepared_query("SELECT * FROM torrents_group WHERE ID = ?", $GroupID);
-            $ExistedGroup = $this->db->next_record(MYSQLI_ASSOC);
+            $ExistedGroup = $this->db->next_record(MYSQLI_ASSOC, false);
             $this->properties['Group'] = $ExistedGroup;
             // Use this section to control freeleeches
             $Checked = 0;

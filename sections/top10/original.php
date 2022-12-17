@@ -37,18 +37,18 @@ View::show_header(t('server.top10.top_10_original_uploaders'));
 		" . ($OverrideParanoia ? "" : "AND (Paranoia IS NULL OR Paranoia NOT LIKE '%\"originals+\"%')") . "
 		and (t.Diy='1' or t.Buy='1')
 	GROUP BY u.ID";
-    //list($NumUploads) = $DB->next_record();	
+    //list($NumUploads) = $DB->next_record();
     /*
-	if ($Details == 'all' || $Details == 'original') {
-		if ($OverrideParanoia || !$TopUserNumUploads = $Cache->get_value('topuser_original_'.$Limit)) {
-			$DB->query("$BaseQuery ORDER BY DiyOrBuy DESC LIMIT $Limit;");
-			$TopUserNumUploads = $DB->to_array();
-			if (!$OverrideParanoia) {
-				$Cache->cache_value('topuser_original_'.$Limit,$TopUserNumUploads, 3600 * 12);
-			}
-		}
-		generate_user_table(t('server.top10.original_uploaders'), t('server.top10.original_uploads'), 'original', $TopUserNumUploads, $Limit);
-	}
+    if ($Details == 'all' || $Details == 'original') {
+        if ($OverrideParanoia || !$TopUserNumUploads = $Cache->get_value('topuser_original_'.$Limit)) {
+            $DB->query("$BaseQuery ORDER BY DiyOrBuy DESC LIMIT $Limit;");
+            $TopUserNumUploads = $DB->to_array();
+            if (!$OverrideParanoia) {
+                $Cache->cache_value('topuser_original_'.$Limit,$TopUserNumUploads, 3600 * 12);
+            }
+        }
+        generate_user_table(t('server.top10.original_uploaders'), t('server.top10.original_uploads'), 'original', $TopUserNumUploads, $Limit);
+    }
 */
     if ($Details == 'all' || $Details == 'diy') {
         if ($OverrideParanoia || !$TopUserNumUploads = $Cache->get_value('topuser_diy_' . $Limit)) {

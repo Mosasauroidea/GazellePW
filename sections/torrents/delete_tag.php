@@ -1,13 +1,13 @@
 <?
 if (!empty($LoggedUser['DisableTagging']) || !check_perms('site_delete_tag')) {
-	error(403);
+    error(403);
 }
 
 $TagID = $_GET['tagid'];
 $GroupID = $_GET['groupid'];
 
 if (!is_number($TagID) || !is_number($GroupID)) {
-	error(404);
+    error(404);
 }
 
 $DB->query("
@@ -15,7 +15,7 @@ $DB->query("
 	FROM tags
 	WHERE ID = '$TagID'");
 if (list($TagName) = $DB->next_record()) {
-	$DB->query("
+    $DB->query("
 		INSERT INTO group_log
 			(GroupID, UserID, Time, Info)
 		VALUES
@@ -39,13 +39,13 @@ $DB->query("
 	WHERE TagID = $TagID");
 list($Count) = $DB->next_record();
 if ($Count < 1) {
-	$DB->query("
+    $DB->query("
 		SELECT Name
 		FROM tags
 		WHERE ID = $TagID");
-	list($TagName) = $DB->next_record();
+    list($TagName) = $DB->next_record();
 
-	$DB->query("
+    $DB->query("
 		DELETE FROM tags
 		WHERE ID = $TagID");
 }

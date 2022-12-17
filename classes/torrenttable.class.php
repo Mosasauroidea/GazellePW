@@ -1047,7 +1047,7 @@ class UngroupTorrentTableView  extends TorrentTableView {
         global $LoggedUser;
     ?>
         <? /* UngroupTorrentTableView */ ?>
-        <tr class="TableTorrent-rowTitle Table-row  <?= $SnatchedGroupClass . (!empty($LoggedUser['TorrentGrouping']) && $LoggedUser['TorrentGrouping'] === 1 ? ' hidden' : '') ?>" group-id="<?= $GroupID ?>">
+        <tr class="TableTorrent-rowTitle Table-row  <?= $SnatchedGroupClass  ?>" group-id="<?= $GroupID ?>">
             <td class="Table-cell">
                 <div class="TableTorrent-title">
                     <span class="TableTorrent-titleActions">

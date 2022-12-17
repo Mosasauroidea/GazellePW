@@ -3,7 +3,6 @@
 namespace Gazelle\Top10;
 
 class Tag extends \Gazelle\Base {
-
     public function getTopUsedTags($limit) {
         if (!$topUsedTags = $this->cache->get_value('topusedtag_' . $limit)) {
             $topUsedTags = $this->db->prepared_query("

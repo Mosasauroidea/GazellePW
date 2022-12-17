@@ -46,7 +46,7 @@ abstract class IRC_BOT {
         $this->Connecting = true;
         //Open a socket to the IRC server
         if (CONFIG['BOT_PORT_SSL']) {
-            $IrcAddress = 'tls://' . CONFIG['BOT_SERVER'] . ':' . CONFIG['BOT_PORT']_SSL;
+            $IrcAddress = 'tls://' . CONFIG['BOT_SERVER'] . ':' . CONFIG['BOT_PORT_SSL'];
         } else {
             $IrcAddress = 'tcp://' . CONFIG['BOT_SERVER'] . ':' . CONFIG['BOT_PORT'];
         }

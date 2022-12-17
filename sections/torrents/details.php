@@ -1079,26 +1079,29 @@ View::show_header($Title, 'browse,comments,torrent,bbcode,recommend,cover_art,su
             include(CONFIG['SERVER_ROOT'] . '/sections/torrents/voter_picks.php');
             $Pages = Format::get_pages($Page, $NumComments, CONFIG['TORRENT_COMMENTS_PER_PAGE'], 9, '#comments');
             ?>
-            <div class="u-vstack" id="torrent_comments">
-                <div class="BodyNavLinks"><a name="comments"></a>
-                    <?= $Pages ?>
+            <div class="Group">
+                <div class="Group-header">
+                    <div class="Group-headerTitle">
+                        <?= t('server.collages.comments') ?>
+                    </div>
                 </div>
-                <?
-                CommentsView::render_comments($Thread, $LastRead, "torrents.php?id=$GroupID");
-                ?>
-                <div class="BodyNavLinks">
-                    <?= $Pages ?>
+                <div class="Group-body" id="torrent_comments">
+                    <? View::pages($Pages) ?>
+                    <?
+                    CommentsView::render_comments($Thread, $LastRead, "torrents.php?id=$GroupID");
+                    ?>
+                    <? View::pages($Pages) ?>
+                    <?
+                    View::parse('generic/reply/quickreply.php', array(
+                        'InputName' => 'pageid',
+                        'InputID' => $GroupID,
+                        'Action' => 'comments.php?page=torrents',
+                        'InputAction' => 'take_post',
+                        'TextareaCols' => 65,
+                        'SubscribeBox' => true
+                    ));
+                    ?>
                 </div>
-                <?
-                View::parse('generic/reply/quickreply.php', array(
-                    'InputName' => 'pageid',
-                    'InputID' => $GroupID,
-                    'Action' => 'comments.php?page=torrents',
-                    'InputAction' => 'take_post',
-                    'TextareaCols' => 65,
-                    'SubscribeBox' => true
-                ));
-                ?>
             </div>
         </div>
     </div>

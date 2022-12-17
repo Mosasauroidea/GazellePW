@@ -3,7 +3,6 @@
 namespace Gazelle\Manager;
 
 class News extends \Gazelle\Base {
-
     const CACHE_KEY = 'newsv2';
 
     /**

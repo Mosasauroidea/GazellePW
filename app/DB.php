@@ -3,7 +3,6 @@
 namespace Gazelle;
 
 class DB extends Base {
-
     /**
      * Skip foreign key checks
      * @param $relax true if foreign key checks should be skipped

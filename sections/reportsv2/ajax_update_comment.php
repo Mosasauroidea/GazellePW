@@ -4,7 +4,7 @@
 authorize();
 
 if (!check_perms('admin_reports')) {
-	error(403);
+    error(403);
 }
 
 $ReportID = (int) $_POST['reportid'];
@@ -18,7 +18,7 @@ $DB->query("
 	WHERE ID = $ReportID");
 list($ModComment) = $DB->next_record();
 if (isset($ModComment)) {
-	$DB->query("
+    $DB->query("
 		UPDATE reportsv2
 		SET ModComment = '$Message'
 		WHERE ID = $ReportID");

@@ -1,7 +1,6 @@
 <?
 
 class Top10View {
-
     public static function render_linkbox($Selected, $Class) {
 ?>
         <div class="<?= $Class ?>">

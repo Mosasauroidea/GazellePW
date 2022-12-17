@@ -1,6 +1,6 @@
 <?php
 if (!check_perms('site_view_flow')) {
-	error(403);
+    error(403);
 }
 
 define('DAYS_PER_PAGE', 100);
@@ -72,43 +72,43 @@ View::show_header(t('server.tools.h2_user_flow'), '', 'PageToolUserFlow');
 $DB->set_query_id($RS);
 ?>
 <div class="LayoutBody">
-	<div class="BodyHeader">
-		<h2 class="BodyHeader-nav"><?= t('server.tools.user_flow') ?></h2>
-	</div>
-	<? if (!isset($_GET['page'])) { ?>
-		<div class="ChartRoot">
-			<div id="chart_user_timeline">
-			</div>
-		</div>
-	<?  } ?>
-	<? View::pages($Pages) ?>
-	<table class="TableUserFlow Table">
-		<tr class="Table-rowHeader">
-			<td class="Table-cell"><?= t('server.tools.date') ?></td>
-			<td class="Table-cell">(+) <?= t('server.tools.joined') ?></td>
-			<td class="Table-cell">(-) <?= t('server.tools.manual') ?></td>
-			<td class="Table-cell">(-) <?= t('server.tools.ratio') ?></td>
-			<td class="Table-cell">(-) <?= t('server.tools.inactivity') ?></td>
-			<td class="Table-cell">(-) <?= t('server.tools.total') ?></td>
-			<td class="Table-cell"><?= t('server.tools.net_growth') ?></td>
-		</tr>
-		<?
-		while (list($Date, $Month, $Joined, $Manual, $Ratio, $Inactivity) = $DB->next_record()) {
-			$TotalOut = $Ratio + $Inactivity + $Manual;
-			$TotalGrowth = $Joined - $TotalOut;
-		?>
-			<tr class="Table-row">
-				<td class="Table-cell"><?= $Date ?></td>
-				<td class="Table-cell"><?= number_format($Joined) ?></td>
-				<td class="Table-cell"><?= number_format($Manual) ?></td>
-				<td class="Table-cell"><?= number_format((float)$Ratio) ?></td>
-				<td class="Table-cell"><?= number_format($Inactivity) ?></td>
-				<td class="Table-cell"><?= number_format($TotalOut) ?></td>
-				<td class="Table-cell"><?= number_format($TotalGrowth) ?></td>
-			</tr>
-		<?  } ?>
-	</table>
-	<? View::pages($Pages) ?>
+    <div class="BodyHeader">
+        <h2 class="BodyHeader-nav"><?= t('server.tools.user_flow') ?></h2>
+    </div>
+    <? if (!isset($_GET['page'])) { ?>
+        <div class="ChartRoot">
+            <div id="chart_user_timeline">
+            </div>
+        </div>
+    <?  } ?>
+    <? View::pages($Pages) ?>
+    <table class="TableUserFlow Table">
+        <tr class="Table-rowHeader">
+            <td class="Table-cell"><?= t('server.tools.date') ?></td>
+            <td class="Table-cell">(+) <?= t('server.tools.joined') ?></td>
+            <td class="Table-cell">(-) <?= t('server.tools.manual') ?></td>
+            <td class="Table-cell">(-) <?= t('server.tools.ratio') ?></td>
+            <td class="Table-cell">(-) <?= t('server.tools.inactivity') ?></td>
+            <td class="Table-cell">(-) <?= t('server.tools.total') ?></td>
+            <td class="Table-cell"><?= t('server.tools.net_growth') ?></td>
+        </tr>
+        <?
+        while (list($Date, $Month, $Joined, $Manual, $Ratio, $Inactivity) = $DB->next_record()) {
+            $TotalOut = $Ratio + $Inactivity + $Manual;
+            $TotalGrowth = $Joined - $TotalOut;
+        ?>
+            <tr class="Table-row">
+                <td class="Table-cell"><?= $Date ?></td>
+                <td class="Table-cell"><?= number_format($Joined) ?></td>
+                <td class="Table-cell"><?= number_format($Manual) ?></td>
+                <td class="Table-cell"><?= number_format((float)$Ratio) ?></td>
+                <td class="Table-cell"><?= number_format($Inactivity) ?></td>
+                <td class="Table-cell"><?= number_format($TotalOut) ?></td>
+                <td class="Table-cell"><?= number_format($TotalGrowth) ?></td>
+            </tr>
+        <?  } ?>
+    </table>
+    <? View::pages($Pages) ?>
 </div>
 <?
 Stats::userTimeLine();

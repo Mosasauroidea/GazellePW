@@ -5,7 +5,6 @@ namespace Gazelle\Manager;
 use \Gazelle\Exception\PaymentFetchForexException;
 
 class Payment extends \Gazelle\Base {
-
     const LIST_KEY = 'payment_list';
     const RENT_KEY = 'payment_monthly_rental';
 

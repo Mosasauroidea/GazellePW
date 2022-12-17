@@ -61,7 +61,6 @@ switch ($Document) {
     case 'log':
     case 'login':
     case 'logout':
-    case 'questions':
     case 'random':
     case 'referral':
     case 'register':

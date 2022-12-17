@@ -3,7 +3,6 @@
 namespace Gazelle\Manager;
 
 class Blog extends \Gazelle\Base {
-
     const CACHE_KEY = 'blogv2';
 
     public function flushCache() {

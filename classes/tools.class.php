@@ -123,6 +123,7 @@ class Tools {
     public static function get_country_code_by_ajax($IP) {
         static $IPs = array();
         $Class = strtr($IP, '.', '-');
+        $Class = strtr($Class, ':', '-');
         $HTML = '<span class="cc_' . $Class . '">Resolving CC...';
         if (!isset($IPs[$IP])) {
             $HTML .= '<script type="text/javascript">' .

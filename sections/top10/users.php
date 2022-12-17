@@ -55,7 +55,7 @@ View::show_header(t('server.top10.top_10_users'), '', 'PageTop10User');
                     active = 1 AND remaining = 0 AND mtime > UNIX_TIMESTAMP(NOW() - INTERVAL 1 HOUR)) AS xfu
                 LEFT JOIN torrents AS seedingt
                 ON
-                    seedingt.ID = xfu.fid AND seedingt.UserID = xfu.uid
+                    seedingt.ID = xfu.fid  group by uid
             ) AS temp
         ON
             temp.uid = u.id
@@ -107,7 +107,7 @@ View::show_header(t('server.top10.top_10_users'), '', 'PageTop10User');
     }
 
     if ($Details == 'all' || $Details == 'seeding_size') {
-        if (!$TopUserUploads = $Cache->get_value('topuser_seeding_size_' . $Limit)) {
+        if (!$TopUserSeedingSize = $Cache->get_value('topuser_seeding_size_' . $Limit)) {
             $DB->query("$BaseQuery ORDER BY SeedingSize DESC LIMIT $Limit;");
             $TopUserSeedingSize = $DB->to_array();
             $Cache->cache_value('topuser_seeding_size_' . $Limit, $TopUserSeedingSize, 3600 * 12);

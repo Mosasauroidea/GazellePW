@@ -8,7 +8,6 @@ namespace Gazelle\Manager;
  */
 
 class Thread extends \Gazelle\Base {
-
     /**
      */
     public function createThread($type) {

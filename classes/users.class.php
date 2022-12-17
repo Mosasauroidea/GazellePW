@@ -1085,7 +1085,7 @@ class Users {
             'uploadCount' => (int) $result['Uploads'],
         ];
     }
-    public static              function get_nav_items(): array {
+    public static function get_nav_items(): array {
         $list = G::$Cache->get_value("nav_items");
         if (!$list) {
             $QueryID = G::$DB->get_query_id();

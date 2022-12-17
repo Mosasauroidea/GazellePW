@@ -2086,8 +2086,8 @@ WHERE ud.TorrentID=? AND ui.NotifyOnDeleteDownloaded='1' AND ud.UserID NOT IN ({
     public static function sanitizeName($Name) {
         return preg_replace(
             '/_+/',
-            '_',         // remove doubled-up underscore 
-            trim(                                 // trim leading, trailing underscore 
+            '_',         // remove doubled-up underscore
+            trim(                                 // trim leading, trailing underscore
                 preg_replace(
                     '/[^a-z0-9_]+/',
                     '', // remove non alphanum, underscore

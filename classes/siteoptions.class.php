@@ -4,7 +4,6 @@
  * Class to manage site options
  */
 class SiteOptions {
-
     /**
      * Get a site option
      *

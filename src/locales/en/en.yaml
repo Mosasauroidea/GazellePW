@@ -3152,7 +3152,7 @@ server.requests.upload_request: |-
 server.requests.uploaded: |-
   Uploaded
 server.requests.view_request: |-
-  View request
+  Request
 server.requests.vote_requests: |-
   Requests I've voted on
 server.requests.will_be: |-
@@ -8435,3 +8435,7 @@ client.stats.seeding_user: |-
   User in seeding status
 server.forums.verbal: |-
   Verbal
+server.wiki.created: |-
+  Created
+server.wiki.edited: |-
+  Edited

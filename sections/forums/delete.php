@@ -2,13 +2,13 @@
 authorize();
 // Quick SQL injection check
 if (!isset($_GET['postid']) || !is_number($_GET['postid'])) {
-	error(0);
+    error(0);
 }
 $PostID = $_GET['postid'];
 
 // Make sure they are moderators
 if (!check_perms('site_admin_forums')) {
-	error(403);
+    error(403);
 }
 
 // Get topic ID, forum ID, number of pages
@@ -29,8 +29,8 @@ $DB->query("
 	GROUP BY t.ID");
 list($TopicID, $ForumID, $Pages, $Page, $StickyPostID) = $DB->next_record();
 if (!$TopicID) {
-	// Post is deleted or thread doesn't exist
-	error(0); // This is evil, but the ajax call doesn't check the response
+    // Post is deleted or thread doesn't exist
+    error(0); // This is evil, but the ajax call doesn't check the response
 }
 
 // $Pages = number of pages in the thread
@@ -54,20 +54,20 @@ $DB->query("
 		AND t.ID = '$TopicID'");
 
 if ($LastID < $PostID) { // Last post in a topic was removed
-	$DB->query("
+    $DB->query("
 		SELECT p.AuthorID, u.Username, p.AddedTime
 		FROM forums_posts AS p
 			LEFT JOIN users_main AS u ON u.ID = p.AuthorID
 		WHERE p.ID = '$LastID'");
-	list($LastAuthorID, $LastAuthorName, $LastTime) = $DB->next_record();
-	$DB->query("
+    list($LastAuthorID, $LastAuthorName, $LastTime) = $DB->next_record();
+    $DB->query("
 		UPDATE forums_topics
 		SET
 			LastPostID = '$LastID',
 			LastPostAuthorID = '$LastAuthorID',
 			LastPostTime = '$LastTime'
 		WHERE ID = '$TopicID'");
-	$DB->query("
+    $DB->query("
 		SELECT
 			t.ID,
 			t.Title,
@@ -81,10 +81,10 @@ if ($LastID < $PostID) { // Last post in a topic was removed
 			AND t.ID != '$TopicID'
 		ORDER BY LastPostID DESC
 		LIMIT 1");
-	list($LastTopicID, $LastTopicTitle, $LastTopicPostID, $LastTopicPostTime, $LastTopicAuthorID, $LastTopicAuthorName) = $DB->next_record(MYSQLI_BOTH, false);
+    list($LastTopicID, $LastTopicTitle, $LastTopicPostID, $LastTopicPostTime, $LastTopicAuthorID, $LastTopicAuthorName) = $DB->next_record(MYSQLI_BOTH, false);
 
-	if ($LastID < $LastTopicPostID) { // Topic is no longer the most recent in its forum
-		$DB->query("
+    if ($LastID < $LastTopicPostID) { // Topic is no longer the most recent in its forum
+        $DB->query("
 			UPDATE forums
 			SET
 				LastPostTopicID = '$LastTopicID',
@@ -93,16 +93,16 @@ if ($LastID < $PostID) { // Last post in a topic was removed
 				LastPostTime = '$LastTopicPostTime'
 			WHERE ID = '$ForumID'
 				AND LastPostTopicID = '$TopicID'");
-		$UpdateArrayForums = array(
-			'NumPosts' => '-1',
-			'LastPostID' => $LastTopicPostID,
-			'LastPostAuthorID' => $LastTopicAuthorID,
-			'LastPostTime' => $LastTopicPostTime,
-			'LastPostTopicID' => $LastTopicID,
-			'Title' => $LastTopicTitle
-		);
-	} else { // Topic is still the most recent in its forum
-		$DB->query("
+        $UpdateArrayForums = array(
+            'NumPosts' => '-1',
+            'LastPostID' => $LastTopicPostID,
+            'LastPostAuthorID' => $LastTopicAuthorID,
+            'LastPostTime' => $LastTopicPostTime,
+            'LastPostTopicID' => $LastTopicID,
+            'Title' => $LastTopicTitle
+        );
+    } else { // Topic is still the most recent in its forum
+        $DB->query("
 			UPDATE forums
 			SET
 				LastPostID = '$LastID',
@@ -110,21 +110,21 @@ if ($LastID < $PostID) { // Last post in a topic was removed
 				LastPostTime = '$LastTime'
 			WHERE ID = '$ForumID'
 				AND LastPostTopicID = '$TopicID'");
-		$UpdateArrayForums = array(
-			'NumPosts' => '-1',
-			'LastPostID' => $LastID,
-			'LastPostAuthorID' => $LastAuthorID,
-			'LastPostTime' => $LastTime
-		);
-	}
-	$UpdateArrayThread = array('Posts' => '-1', 'LastPostAuthorID' => $LastAuthorID, 'LastPostTime' => $LastTime);
+        $UpdateArrayForums = array(
+            'NumPosts' => '-1',
+            'LastPostID' => $LastID,
+            'LastPostAuthorID' => $LastAuthorID,
+            'LastPostTime' => $LastTime
+        );
+    }
+    $UpdateArrayThread = array('Posts' => '-1', 'LastPostAuthorID' => $LastAuthorID, 'LastPostTime' => $LastTime);
 } else {
-	$UpdateArrayForums = array('NumPosts' => '-1');
-	$UpdateArrayThread = array('Posts' => '-1');
+    $UpdateArrayForums = array('NumPosts' => '-1');
+    $UpdateArrayThread = array('Posts' => '-1');
 }
 
 if ($StickyPostID == $PostID) {
-	$DB->query("
+    $DB->query("
 		UPDATE forums_topics
 		SET StickyPostID = 0
 		WHERE ID = $TopicID");
@@ -134,7 +134,7 @@ if ($StickyPostID == $PostID) {
 $ThisCatalogue = floor((CONFIG['POSTS_PER_PAGE'] * $Page - CONFIG['POSTS_PER_PAGE']) / CONFIG['THREAD_CATALOGUE']);
 $LastCatalogue = floor((CONFIG['POSTS_PER_PAGE'] * $Pages - CONFIG['POSTS_PER_PAGE']) / CONFIG['THREAD_CATALOGUE']);
 for ($i = $ThisCatalogue; $i <= $LastCatalogue; $i++) {
-	$Cache->delete_value("thread_$TopicID" . "_catalogue_$i");
+    $Cache->delete_value("thread_$TopicID" . "_catalogue_$i");
 }
 
 $Cache->begin_transaction("thread_$TopicID" . '_info');

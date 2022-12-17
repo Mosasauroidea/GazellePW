@@ -48,7 +48,6 @@ namespace Gazelle;
  */
 
 class UserRank extends Base {
-
     var $config;
     var $rank;
     var $score;

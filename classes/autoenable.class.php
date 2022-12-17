@@ -1,7 +1,6 @@
 <?
 
 class AutoEnable {
-
     // Constants for database values
     const APPROVED = 1;
     const DENIED = 2;
