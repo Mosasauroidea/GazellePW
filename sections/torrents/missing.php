@@ -1,8 +1,6 @@
 <?
 // todo by qwerty 冗余代码和browse.php
 
-use Gazelle\Torrent\TorrentSlotGroup;
-use Gazelle\Torrent\TorrentSlotGroupStatus;
 use Gazelle\Torrent\TorrentSlot;
 
 include(CONFIG['SERVER_ROOT'] . '/sections/torrents/functions.php');
@@ -150,17 +148,17 @@ HTML;
             foreach ($SlotStatus as $type => $Status) {
                 list($status, $misslots) = $Status;
                 switch ($status) {
-                    case TorrentSlotGroupStatus::Empty:
+                    case TorrentSlot::TorrentSlotStatusEmpty:
                         // 空的class
                         $SlotStatusClass[$type] = '';
                         $text[$type] = "<span class='u-colorSuccess' data-tooltip='" . t('server.torrents.slot_status_empty') . "'>" . icon('check') . "</span>";
                         break;
-                    case TorrentSlotGroupStatus::Full:
+                    case TorrentSlot::TorrentSlotStatusFull:
                         // 满的class
                         $SlotStatusClass[$type] = '';
                         $text[$type] = "<span class='u-colorWarning' title = '" . t('server.torrents.slot_status_full') . "'>" . icon('times') . "</span>";
                         break;
-                    case TorrentSlotGroupStatus::Free:
+                    case TorrentSlot::TorrentSlotStatusFree:
                         // 有空位的class
                         $SlotStatusClass[$type] = '';
                         $SlotsTitle = '';
@@ -186,15 +184,15 @@ HTML;
                 <td class="TableMissing-cellName Table-cell"><a href="torrents.php?id=<?= $GroupID ?>&view=slot#slot"><?= $GroupName ?><a></td>
                 <td class="TableMissing-cellSnatches Table-cell"><?= $SnatchedCount ?></td>
                 <td class="TableMissing-cellRequests Table-cell"><?= $RequestCount ?></td>
-                <td class="TableMissing-cellSDEncode Table-cell <?= $SlotStatusClass[TorrentSlotGroup::SDEncode] ?>"><?= $text[TorrentSlotGroup::SDEncode] ?>
+                <td class="TableMissing-cellSDEncode Table-cell <?= $SlotStatusClass[TorrentSlot::TorrentSlotGroupSDEncode] ?>"><?= $text[TorrentSlot::TorrentSlotGroupSDEncode] ?>
                 </td>
-                <td class="TableMissing-cellSDUntouched Table-cell <?= $SlotStatusClass[TorrentSlotGroup::SDUntouched] ?>"><?= $text[TorrentSlotGroup::SDUntouched] ?>
+                <td class="TableMissing-cellSDUntouched Table-cell <?= $SlotStatusClass[TorrentSlot::TorrentSlotGroupSDUntouched] ?>"><?= $text[TorrentSlot::TorrentSlotGroupSDUntouched] ?>
                 </td>
-                <td class="TableMissing-cellHDEncode Table-cell <?= $SlotStatusClass[TorrentSlotGroup::HDEncode] ?>"><?= $text[TorrentSlotGroup::HDEncode] ?>
+                <td class="TableMissing-cellHDEncode Table-cell <?= $SlotStatusClass[TorrentSlot::TorrentSlotGroupHDEncode] ?>"><?= $text[TorrentSlot::TorrentSlotGroupHDEncode] ?>
                 </td>
-                <td class="TableMissing-cellHDUntouched Table-cell <?= $SlotStatusClass[TorrentSlotGroup::HDUntouched] ?>"><?= $text[TorrentSlotGroup::HDUntouched] ?></td>
-                <td class="TableMissing-cellUHDEncode Table-cell <?= $SlotStatusClass[TorrentSlotGroup::UHDEncode] ?>"><?= $text[TorrentSlotGroup::UHDEncode] ?></td>
-                <td class="TableMissing-cellUHDUntouched Table-cell <?= $SlotStatusClass[TorrentSlotGroup::UHDUntouched] ?>"><?= $text[TorrentSlotGroup::UHDUntouched] ?></td>
+                <td class="TableMissing-cellHDUntouched Table-cell <?= $SlotStatusClass[TorrentSlot::TorrentSlotGroupHDUntouched] ?>"><?= $text[TorrentSlot::TorrentSlotGroupHDUntouched] ?></td>
+                <td class="TableMissing-cellUHDEncode Table-cell <?= $SlotStatusClass[TorrentSlot::TorrentSlotGroupUHDEncode] ?>"><?= $text[TorrentSlot::TorrentSlotGroupUHDEncode] ?></td>
+                <td class="TableMissing-cellUHDUntouched Table-cell <?= $SlotStatusClass[TorrentSlot::TorrentSlotGroupUHDUntouched] ?>"><?= $text[TorrentSlot::TorrentSlotGroupUHDUntouched] ?></td>
             </tr>
         <?
         }

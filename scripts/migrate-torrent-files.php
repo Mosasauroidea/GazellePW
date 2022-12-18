@@ -1,16 +1,8 @@
 <?php
 
-require_once(__DIR__ . '/../classes/config.php');
-require_once(__DIR__ . '/../classes/const.php');
-require_once(__DIR__ . '/../vendor/autoload.php');
-require_once(__DIR__ . '/../classes/util.php');
-
-$Debug = new DEBUG;
-$Debug->handle_errors();
+require(__DIR__ . '../classes/includes.php');
 
 ini_set('max_execution_time', -1);
-
-$DB = new DB_MYSQL;
 
 define('CHUNK', 100);
 

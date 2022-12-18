@@ -204,10 +204,10 @@ View::show_header('Site Information', '', 'PageToolSiteInfo');
             </div>
         </div>
         <div class="Group-body BoxBody">
-            <span style="width: 150px; display: inline-block;">Branch:</span> <?= $GitBranch ?>
-            <span style="width: 150px; display: inline-block;">Local Hash:</span> <?= $GitHash ?>
-            <span style="width: 150px; display: inline-block;">Remote Hash:</span> <?= $RemoteHash ?>
-            <span style="width: 150px; display: inline-block;">Tag:</span> <?= $Tag ?>
+            <strong style="width: 150px; display: inline-block;">Branch</strong> <?= $GitBranch ?>
+            <strong style="width: 150px; display: inline-block;">Local Hash</strong> <?= $GitHash ?>
+            <strong style="width: 150px; display: inline-block;">Remote Hash</strong> <?= $RemoteHash ?>
+            <strong style="width: 150px; display: inline-block;">Tag</strong> <?= $Tag ?>
         </div>
     </div>
     <div class="Group">

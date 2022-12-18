@@ -1,7 +1,7 @@
 <?
 
 use Gazelle\Manager\Donation;
-use Gazelle\Torrent\TorrentSlotType;
+use Gazelle\Torrent\TorrentSlot;
 
 $UserID = $_REQUEST['userid'];
 if (!is_number($UserID)) {
@@ -55,7 +55,7 @@ if (!is_array($Paranoia)) {
 $apiToken = $DB->query(
     "
     SELECT Token FROM api_applications
-    WHERE UserID = $UserID",
+    WHERE UserID = $UserID"
 );
 list($apiToken) = $DB->next_record();
 
@@ -67,8 +67,12 @@ function paranoia_level($Setting) {
 
 function display_paranoia($FieldName) {
     $Level = paranoia_level($FieldName);
-    print "\t\t\t\t\t<input id=\"input-p_{$FieldName}_c\" type=\"checkbox\" name=\"p_{$FieldName}_c\"" . checked($Level >= 1) . " onchange=\"AlterParanoia()\" />\n<label for=\"input-p_{$FieldName}_c\">" . t('server.user.show_count') . "</label>" . "\n";
-    print "\t\t\t\t\t<input id=\"input-p_{$FieldName}_l\" type=\"checkbox\" name=\"p_{$FieldName}_l\"" . checked($Level >= 2) . " onchange=\"AlterParanoia()\" />\n<label for=\"input-p_{$FieldName}_l\">" . t('server.user.show_list') . "</label>" . "\n";
+    print "<div class=\"Checkbox\">";
+    print "\t\t\t\t\t<input class=\"Input\" id=\"input-p_{$FieldName}_c\" type=\"checkbox\" name=\"p_{$FieldName}_c\"" . checked($Level >= 1) . " onchange=\"AlterParanoia()\" />\n<label for=\"input-p_{$FieldName}_c\">" . t('server.user.show_count') . "</label>" . "\n";
+    print "</div>";
+    print "<div class=\"Checkbox\">";
+    print "\t\t\t\t\t<input class=\"CheckBox-label\" id=\"input-p_{$FieldName}_l\" type=\"checkbox\" name=\"p_{$FieldName}_l\"" . checked($Level >= 2) . " onchange=\"AlterParanoia()\" />\n<label for=\"input-p_{$FieldName}_l\">" . t('server.user.show_list') . "</label>" . "\n";
+    print "</div>";
 }
 
 function checked($Checked) {
@@ -283,7 +287,7 @@ echo $Val->GenerateJS('userform');
                                 <strong><?= t('server.user.donorforum_4') ?>:</strong>
                                 <?
                                 $Previews = [
-                                    ['Codec' => 'x265', 'Source' => 'WEB', 'Resolution' => '720p', 'Container' => 'MKV', 'Processing' => 'Encode', 'Slot' => TorrentSlotType::EnglishQuality, 'RemasterTitle' => 'dolby_vision / dolby_atmos / masters_of_cinema', 'ReleaseGroup' => 'Release Group'],
+                                    ['Codec' => 'x265', 'Source' => 'WEB', 'Resolution' => '720p', 'Container' => 'MKV', 'Processing' => 'Encode', 'Slot' => TorrentSlot::TorrentSlotTypeEnglishQuality, 'RemasterTitle' => 'dolby_vision / dolby_atmos / masters_of_cinema', 'ReleaseGroup' => 'Release Group'],
                                 ];
                                 ?>
                                 <? foreach ($Previews as $Preview) {
@@ -853,8 +857,10 @@ echo $Val->GenerateJS('userform');
                     <tr class="Form-row" id="para_lastseen_tr">
                         <td class="Form-label" data-tooltip="<?= t('server.user.st_lastseen_title') ?>"><strong><?= t('server.user.st_lastactivity') ?></strong></td>
                         <td class="Form-inputs">
-                            <input id="input-p_lastseen" type="checkbox" name="p_lastseen" <?= checked(!in_array('lastseen', $Paranoia)) ?> />
-                            <label for="input-p_lastseen"> <?= t('server.user.st_lastseen') ?></label>
+                            <div class="Checkbox">
+                                <input id="input-p_lastseen" class="Input" type="checkbox" name="p_lastseen" <?= checked(!in_array('lastseen', $Paranoia)) ?> />
+                                <label class="Checkbox-label" for="input-p_lastseen"> <?= t('server.user.st_lastseen') ?></label>
+                            </div>
                         </td>
                     </tr>
                     <tr class="Form-row" id="para_presets_tr">
@@ -887,21 +893,31 @@ echo $Val->GenerateJS('userform');
                             $RatioChecked = checked(!in_array('ratio', $Paranoia));
                             $BonusCheched = checked(!in_array('bonuspoints', $Paranoia));
                             ?>
-                            <input id="input-p_uploaded" type="checkbox" name="p_uploaded" onchange="AlterParanoia();" <?= $UploadChecked ?> />
-                            <label for="input-p_uploaded"> <?= t('server.user.para_uploaded') ?></label>
-                            <input id="input-p_downloaded" type="checkbox" name="p_downloaded" onchange="AlterParanoia();" <?= $DownloadChecked ?> />
-                            <label for="input-p_downloaded"> <?= t('server.user.para_downloaded') ?></label>
-                            <input id="input-p_ratio" type="checkbox" name="p_ratio" onchange="AlterParanoia();" <?= $RatioChecked ?> />
-                            <label for="input-p_ratio"> <?= t('server.user.para_ratio') ?></label>
-                            <input id="input-p_bonuspoints" type="checkbox" name="p_bonuspoints" <?= $BonusCheched ?> />
-                            <label for="input-p_bonuspoints"> <?= t('server.user.para_bonus') ?></label>
+                            <div class="Checkbox">
+                                <input class="Input" id="input-p_uploaded" type="checkbox" name="p_uploaded" onchange="AlterParanoia();" <?= $UploadChecked ?> />
+                                <label class="Checkbox-label" for="input-p_uploaded"> <?= t('server.user.para_uploaded') ?></label>
+                            </div>
+                            <div class="Checkbox">
+                                <input class="Input" id="input-p_downloaded" type="checkbox" name="p_downloaded" onchange="AlterParanoia();" <?= $DownloadChecked ?> />
+                                <label class="Checkbox-label" for="input-p_downloaded"> <?= t('server.user.para_downloaded') ?></label>
+                            </div>
+                            <div class="Checkbox">
+                                <input class="Input" id="input-p_ratio" type="checkbox" name="p_ratio" onchange="AlterParanoia();" <?= $RatioChecked ?> />
+                                <label class="Checkbox-label" for="input-p_ratio"> <?= t('server.user.para_ratio') ?></label>
+                            </div>
+                            <div class="Checkbox">
+                                <input class="Input" id="input-p_bonuspoints" type="checkbox" name="p_bonuspoints" <?= $BonusCheched ?> />
+                                <label class="Checkbox-label" for="input-p_bonuspoints"> <?= t('server.user.para_bonus') ?></label>
+                            </div>
                         </td>
                     </tr>
                     <tr class="Form-row" id="para_reqratio_tr">
                         <td class="Form-label"><strong><?= t('server.user.para_reratio') ?></strong></td>
                         <td class="Form-inputs">
-                            <input id="input-p_requiredratio" type="checkbox" name="p_requiredratio" <?= checked(!in_array('requiredratio', $Paranoia)) ?> />
-                            <label for="input-p_requiredratio"> <?= t('server.user.para_reratio') ?></label>
+                            <div class="Checkbox">
+                                <input class="Input" id="input-p_requiredratio" type="checkbox" name="p_requiredratio" <?= checked(!in_array('requiredratio', $Paranoia)) ?> />
+                                <label class="Checkbox-label" for="input-p_requiredratio"> <?= t('server.user.para_reratio') ?></label>
+                            </div>
                         </td>
                     </tr>
                     <tr class="Form-row" id="para_comments_tr">
@@ -930,12 +946,18 @@ echo $Val->GenerateJS('userform');
                             $RequestsFilledBountyChecked = checked(!in_array('requestsfilled_bounty', $Paranoia));
                             $RequestsFilledListChecked = checked(!in_array('requestsfilled_list', $Paranoia));
                             ?>
-                            <input id="input-p_requestsfilled_count" type="checkbox" name="p_requestsfilled_count" onchange="AlterParanoia();" <?= $RequestsFilledCountChecked ?> />
-                            <label for="input-p_requestsfilled_count"> <?= t('server.user.show_count') ?></label>
-                            <input id="input-p_requestsfilled_bounty" type="checkbox" name="p_requestsfilled_bounty" onchange="AlterParanoia();" <?= $RequestsFilledBountyChecked ?> />
-                            <label for="input-p_requestsfilled_bounty"> <?= t('server.user.show_bounty') ?></label>
-                            <input id="input-p_requestsfilled_list" type="checkbox" name="p_requestsfilled_list" onchange="AlterParanoia();" <?= $RequestsFilledListChecked ?> />
-                            <label for="input-p_requestsfilled_list"> <?= t('server.user.show_list') ?></label>
+                            <div class="Checkbox">
+                                <input class="Input" id="input-p_requestsfilled_count" type="checkbox" name="p_requestsfilled_count" onchange="AlterParanoia();" <?= $RequestsFilledCountChecked ?> />
+                                <label class="Checkbox-label" for="input-p_requestsfilled_count"> <?= t('server.user.show_count') ?></label>
+                            </div>
+                            <div class="Checkbox">
+                                <input class="Input" id="input-p_requestsfilled_bounty" type="checkbox" name="p_requestsfilled_bounty" onchange="AlterParanoia();" <?= $RequestsFilledBountyChecked ?> />
+                                <label class="Checkbox-label" for="input-p_requestsfilled_bounty"> <?= t('server.user.show_bounty') ?></label>
+                            </div>
+                            <div class="Checkbox">
+                                <input class="Input" id="input-p_requestsfilled_list" type="checkbox" name="p_requestsfilled_list" onchange="AlterParanoia();" <?= $RequestsFilledListChecked ?> />
+                                <label class="Checkbox-label" for="input-p_requestsfilled_list"> <?= t('server.user.show_list') ?></label>
+                            </div>
                         </td>
                     </tr>
                     <tr class="Form-row" id="para_reqvote_tr">
@@ -946,12 +968,18 @@ echo $Val->GenerateJS('userform');
                             $RequestsVotedBountyChecked = checked(!in_array('requestsvoted_bounty', $Paranoia));
                             $RequestsVotedListChecked = checked(!in_array('requestsvoted_list', $Paranoia));
                             ?>
-                            <input id="input-p_requestsvoted_count" type="checkbox" name="p_requestsvoted_count" onchange="AlterParanoia();" <?= $RequestsVotedCountChecked ?> />
-                            <label for="input-p_requestsvoted_count"> <?= t('server.user.show_count') ?></label>
-                            <input id="input-p_requestsvoted_bounty" type="checkbox" name="p_requestsvoted_bounty" onchange="AlterParanoia();" <?= $RequestsVotedBountyChecked ?> />
-                            <label for="input-p_requestsvoted_bounty"> <?= t('server.user.show_bounty') ?></label>
-                            <input id="input-p_requestsvoted_list" type="checkbox" name="p_requestsvoted_list" onchange="AlterParanoia();" <?= $RequestsVotedListChecked ?> />
-                            <label for="input-p_requestsvoted_list"> <?= t('server.user.show_list') ?></label>
+                            <div class="Checkbox">
+                                <input class="Input" id="input-p_requestsvoted_count" type="checkbox" name="p_requestsvoted_count" onchange="AlterParanoia();" <?= $RequestsVotedCountChecked ?> />
+                                <label class="Checkbox-label" for="input-p_requestsvoted_count"> <?= t('server.user.show_count') ?></label>
+                            </div>
+                            <div class="Checkbox">
+                                <input class="Input" id="input-p_requestsvoted_bounty" type="checkbox" name="p_requestsvoted_bounty" onchange="AlterParanoia();" <?= $RequestsVotedBountyChecked ?> />
+                                <label class="Checkbox-label" for="input-p_requestsvoted_bounty"> <?= t('server.user.show_bounty') ?></label>
+                            </div>
+                            <div class="Checkbox">
+                                <input class="Input" id="input-p_requestsvoted_list" type="checkbox" name="p_requestsvoted_list" onchange="AlterParanoia();" <?= $RequestsVotedListChecked ?> />
+                                <label class="Checkbox-label" for="input-p_requestsvoted_list"> <?= t('server.user.show_list') ?></label>
+                            </div>
                         </td>
                     </tr>
                     <tr class="Form-row" id="para_upltor_tr">
@@ -1002,8 +1030,10 @@ echo $Val->GenerateJS('userform');
                     <tr class="Form-row" id="para_emailshowtotc_tr">
                         <td class="Form-label" data-tooltip="<?= t('server.user.para_emailshowtotc_title') ?>"><strong><?= t('server.user.para_emailshowtotc') ?></strong></td>
                         <td class="Form-inputs">
-                            <input id="input-p_emailshowtotc" type="checkbox" name="p_emailshowtotc" <?= checked(in_array('emailshowtotc', $Paranoia)) ?> />
-                            <label for="input-p_emailshowtotc"> <?= t('server.user.para_emailshowtotc_label') ?></label>
+                            <div class="Checkbox">
+                                <input class="Input" id="input-p_emailshowtotc" type="checkbox" name="p_emailshowtotc" <?= checked(in_array('emailshowtotc', $Paranoia)) ?> />
+                                <label class="Checkbox-label" for="input-p_emailshowtotc"> <?= t('server.user.para_emailshowtotc_label') ?></label>
+                            </div>
                         </td>
                     </tr>
                     <?
@@ -1016,8 +1046,10 @@ echo $Val->GenerateJS('userform');
                     <tr class="Form-row" id="para_invited_tr">
                         <td class="Form-label" data-tooltip="This option controls the display of your <?= CONFIG['SITE_NAME'] ?> invitees."><strong><?= t('server.user.para_invited') ?></strong></td>
                         <td class="Form-inputs">
-                            <input id="input-p_invitedcount" type="checkbox" name="p_invitedcount" <?= checked(!in_array('invitedcount', $Paranoia)) ?> />
-                            <label for="input-p_invitedcount"> <?= t('server.user.show_count') ?></label>
+                            <div class="Checkbox">
+                                <input class="Input" id="input-p_invitedcount" type="checkbox" name="p_invitedcount" <?= checked(!in_array('invitedcount', $Paranoia)) ?> />
+                                <label class="Checkbox-label" for="input-p_invitedcount"> <?= t('server.user.show_count') ?></label>
+                            </div>
                         </td>
                     </tr>
                     <?
@@ -1030,8 +1062,10 @@ echo $Val->GenerateJS('userform');
                     <tr class="Form-row" id="para_artistsadded_tr">
                         <td class="Form-label" data-tooltip="<?= t('server.user.para_artistsadded_title') ?>"><strong><?= t('server.user.para_artistsadded') ?></strong></td>
                         <td class="Form-inputs">
-                            <input id="input-p_artistsadded" type="checkbox" name="p_artistsadded" <?= checked(!in_array('artistsadded', $Paranoia)) ?> />
-                            <label for="input-p_artistsadded"> <?= t('server.user.show_count') ?></label>
+                            <div class="Checkbox">
+                                <input class="Input" id="input-p_artistsadded" type="checkbox" name="p_artistsadded" <?= checked(!in_array('artistsadded', $Paranoia)) ?> />
+                                <label class="Checkbox-label" for="input-p_artistsadded"> <?= t('server.user.show_count') ?></label>
+                            </div>
                         </td>
                     </tr>
                     <?
@@ -1040,8 +1074,10 @@ echo $Val->GenerateJS('userform');
                         <tr class="Form-row" id="para_badgedisplay_tr">
                             <td class="Form-label" data-tooltip="para_badgedisplay_title"><strong><?= t('server.user.para_badgedisplay') ?></strong></td>
                             <td class="Form-inputs">
-                                <input id="input-p_badgedisplay" type="checkbox" name="p_badgedisplay" <?= checked(!in_array('badgedisplay', $Paranoia)) ?> />
-                                <label for="input-p_badgedisplay"> <?= t('server.user.para_badgedisplay_label') ?></label>
+                                <div class="Checkbox">
+                                    <input class="Input" id="input-p_badgedisplay" type="checkbox" name="p_badgedisplay" <?= checked(!in_array('badgedisplay', $Paranoia)) ?> />
+                                    <label class="Checkbox-label" for="input-p_badgedisplay"> <?= t('server.user.para_badgedisplay_label') ?></label>
+                                </div>
                             </td>
                         </tr>
                     <?
@@ -1061,11 +1097,10 @@ echo $Val->GenerateJS('userform');
                     <tr class="Form-row" id="acc_resetpk_tr">
                         <td class="Form-label" data-tooltip-interactive="<?= t('server.user.resetpk_title') ?>"><strong><?= t('server.user.resetpk') ?></strong></td>
                         <td class="Form-inputs">
-                            <div>
-                                <input id="input-resetpasskey" type="checkbox" name="resetpasskey" id="resetpasskey" />
-                                <label for="input-resetpasskey"><?= t('server.user.resetpk_note') ?></label>
+                            <div class="Checkbox">
+                                <input class="Input" id="input-resetpasskey" type="checkbox" name="resetpasskey" id="resetpasskey" />
+                                <label class="Checkbox-label" for="input-resetpasskey"><?= t('server.user.resetpk_note') ?></label>
                             </div>
-
                         </td>
                     </tr>
                     <tr class="Form-row" id="acc_irckey_tr">
@@ -1149,9 +1184,9 @@ echo $Val->GenerateJS('userform');
                     <tr class="Form-row" id="api_token">
                         <td class="Form-label"><strong><?= t('server.user.api') ?></strong></td>
                         <td class="Form-inputs">
-                            <div>
-                                <input id="input-resetApiKey" type="checkbox" name="resetApiKey" id="resetApiKey" />
-                                <label for="input-resetApiKey"><?= t('server.user.api_note') ?></label>
+                            <div class="Checkbox">
+                                <input class="Input" id="input-resetApiKey" type="checkbox" name="resetApiKey" id="resetApiKey" />
+                                <label class="Checkbox-label" for="input-resetApiKey"><?= t('server.user.api_note') ?></label>
                             </div>
                             <?php if (isset($apiToken)) { ?>
                                 <div class="FormOneLine">

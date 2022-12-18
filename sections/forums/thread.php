@@ -166,7 +166,7 @@ if ($QuoteNotificationsCount === false || $QuoteNotificationsCount > 0) {
 }
 
 // Start printing
-View::show_header($ThreadInfo['Title'] . ' &lt; ' . $Forums[$ForumID]['Name'] . ' &lt; Forums', 'comments,subscriptions,bbcode,thumb', $IsDonorForum ? 'donor' : '', 'PageForumThread');
+View::show_header($ThreadInfo['Title'], 'comments,subscriptions,bbcode,thumb', $IsDonorForum ? 'donor' : '', 'PageForumThread');
 ?>
 <div class="LayoutBody">
     <div class="BodyHeader">

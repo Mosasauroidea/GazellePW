@@ -83,6 +83,14 @@ if (!empty($_GET['threadid']) && is_number($_GET['threadid'])) {
 } else {
     $ThreadID = '';
 }
+$ForumCategories = [];
+$LastCategoryID = -1;
+foreach ($Forums as $Forum) {
+    if (!Forums::check_forumperm($Forum['ID'])) {
+        continue;
+    }
+    $ForumCategories[$Forum['CategoryID']][] = $Forum;
+}
 
 // Let's hope we got some results - start printing out the content.
 View::show_header(t('server.forums.forums_greater_than_search'), 'bbcode,forum_search,datetime_picker', 'PageFormSearch');
@@ -140,75 +148,56 @@ View::show_header(t('server.forums.forums_greater_than_search'), 'bbcode,forum_s
                         <td class="Form-label"><?= t('server.forums.post_created') ?>:</td>
                         <td class="Form-inputs">
                             <?= t('server.forums.after') ?>:
-                            <input class="Input" type="text" name="post_created_after" id="post_created_after" value="<?= $PostAfterDate ?>" />
+                            <input class="Input is-small" type="text" name="post_created_after" id="post_created_after" value="<?= $PostAfterDate ?>" />
                             <?= t('server.forums.before') ?>:
-                            <input class="Input" type="text" name="post_created_before" id="post_created_before" value="<?= $PostBeforeDate ?>" />
+                            <input class="Input is-small" type="text" name="post_created_before" id="post_created_before" value="<?= $PostBeforeDate ?>" />
                         </td>
                     </tr>
                     <tr class="Form-row" variant="alighLeft">
                         <td class="Form-label"><?= t('server.forums.search_forums') ?>:</td>
-                        <td class="Form-inputs">
-                            <table class="SearchForum-forumList" id="forum_search_cat_list">
-                                <?
-                                // List of forums
-                                $Open = false;
-                                $LastCategoryID = -1;
-                                $Columns = 0;
-                                $i = 0;
+                        <td class="Form-items" id="forum_search_cat_list">
+                            <?
+                            // List of forums
+                            foreach ($ForumCategories as $Category => $Forums) {
+                                $CheckAll = true;
                                 foreach ($Forums as $Forum) {
-                                    if (!Forums::check_forumperm($Forum['ID'])) {
-                                        continue;
+                                    if (!in_array($Forum['ID'], $_GET['forums'])) {
+                                        $CheckAll = false;
+                                        break;
                                     }
+                                }
 
-                                    $Columns++;
+                            ?>
+                                <div class="Form-inputs">
+                                    <strong><?= $ForumCats[$Category] ?></strong> -
+                                    <div class="Checkbox">
+                                        <input class="Input" type="checkbox" id="forum_category_<?= $Category ?>" onchange="toggleAll('forum_category_' + <?= $Category ?>);" <?= $CheckAll ? ' checked="checked"' : '' ?> />
+                                        <label class="Checkbox-label" for="toggle_category_<?= $Category ?>"><?= t('client.common.check_all') ?></label>
+                                    </div>
+                                    <?
+                                    foreach ($Forums as $Forum) {
+                                    ?>
+                                        <div class="Checkbox">
+                                            <input class="Input" type="checkbox" name="forums[]" value="<?= $Forum['ID'] ?>" data-category="forum_category_<?= $Category ?>" id="forum_<?= $Forum['ID'] ?>" <? if (isset($_GET['forums']) && in_array($Forum['ID'], $_GET['forums'])) {
+                                                                                                                                                                                                                echo ' checked="checked"';
+                                                                                                                                                                                                            } ?> />
+                                            <label class="Checkbox-label" for="forum_<?= $Forum['ID'] ?>"><?= htmlspecialchars($Forum['Name']) ?></label>
+                                        </div>
+                                    <?
 
-                                    if ($Forum['CategoryID'] != $LastCategoryID) {
-                                        $LastCategoryID = $Forum['CategoryID'];
-                                        if ($Open) {
-                                            if ($Columns % 5) { ?>
-                                                <td colspan="<?= (5 - ($Columns % 5)) ?>"></td>
-                                            <?
-                                            }
-
-                                            ?>
+                                    }
+                                    ?>
+                                </div>
+                            <?
+                            }
+                            ?>
+                        </td>
                     </tr>
-                <?
-                                        }
-                                        $Columns = 0;
-                                        $Open = true;
-                                        $i++;
-                ?>
-                <tr class="Form-row" variant="alignLeft">
-                    <td colspan="5" class="forum_cat">
-                        <strong><?= $ForumCats[$Forum['CategoryID']] ?></strong>
-                        <a href="#" class="brackets forum_category" id="forum_category_<?= $i ?>"><?= t('server.forums.check_all') ?></a>
-                    </td>
-                </tr>
-                <tr class="Form-row" variant="alignLeft">
-                <?      } elseif ($Columns % 5 == 0) { ?>
-                </tr>
-                <tr class="Form-row" variant="alignLeft">
-                <?      } ?>
-                <td class="Form-submit">
-                    <div class="Checkbox">
-                        <input class="Input" type="checkbox" name="forums[]" value="<?= $Forum['ID'] ?>" data-category="forum_category_<?= $i ?>" id="forum_<?= $Forum['ID'] ?>" <? if (isset($_GET['forums']) && in_array($Forum['ID'], $_GET['forums'])) {
-                                                                                                                                                                                        echo ' checked="checked"';
-                                                                                                                                                                                    } ?> />
-                        <label class="Checkbox-label" for="forum_<?= $Forum['ID'] ?>"><?= htmlspecialchars($Forum['Name']) ?></label>
-                    </div>
-                </td>
-            <?  }
-                                if ($Columns % 5) { ?>
-                <td colspan="<?= (4 - ($Columns % 5)) ?>"></td>
-            <?  } ?>
-                </tr>
+                <? } else { ?>
+
+                    <input type="hidden" name="threadid" value="<?= $ThreadID ?>" />
+                <? } ?>
             </table>
-        <? } else { ?>
-            <input type="hidden" name="threadid" value="<?= $ThreadID ?>" />
-        <? } ?>
-        </td>
-        </tr>
-        </table>
         </div>
         <div class="SearchPageFooter">
             <div class="SearchPageFooter-actions">

@@ -82,47 +82,63 @@ View::show_header(($Section === 'sentbox' ? t('server.inbox.sentbox') : t('serve
     </div>
 
     <div class="BodyContent">
-        <? if ($Count == 0 && empty($_GET['search'])) { ?>
-            <div class="BoxBody">
-                <?= t('server.inbox.your') ?><?= ($Section === 'sentbox' ? t('server.inbox.sentbox') : t('server.inbox.inbox')) ?><?= t('server.inbox.is_empty') ?>
-            </div>
-        <? } else { ?>
-            <div class="Box">
-                <form class="Box-body Form SearchInbox u-vstack" name="<?= ($Section === 'sentbox' ? 'sentbox' : 'inbox') ?>" action="inbox.php" method="get" id="searchbox">
-                    <div class="SearchInbox-row">
-                        <input type="hidden" name="action" value="<?= $Section ?>" />
-                        <div class="Radio">
-                            <input class="Input" type="radio" name="searchtype" value="user" id="radio-user" <?= (empty($_GET['searchtype']) || $_GET['searchtype'] === 'user' ? ' checked="checked"' : '') ?> />
-                            <label class="Radio-label" for="radio-user"><?= t('server.inbox.user') ?></label>
+        <? if ($Count == 0 && empty($_GET['search'])) {
+            View::line(t('server.inbox.your') . ($Section === 'sentbox' ? t('server.inbox.sentbox') : t('server.inbox.inbox')) . t('server.inbox.is_empty'));
+        } else { ?>
+            <form class="SearchPage Form Box SearchInbox" name="<?= ($Section === 'sentbox' ? 'sentbox' : 'inbox') ?>" action="inbox.php" method="get" id="searchbox">
+                <div class="SearchPageBody">
+                    <input type="hidden" name="action" value="<?= $Section ?>" />
+                    <div class="Form-rowList">
+                        <div class="Form-row">
+                            <div class="Form-label">
+                                <?= t('server.torrents.search_for') ?>
+                            </div>
+                            <div class="Form-inputs">
+                                <input class="Input" type="text" name="search" placeholder="<?= (!empty($_GET['search']) ? display_str($_GET['search']) : t('server.inbox.placeholder_search') . ($Section === 'sentbox' ? t('server.inbox.sentbox') : t('server.inbox.inbox'))) ?>" />
+                            </div>
                         </div>
-                        <div class="Radio">
-                            <input class="Input" type="radio" name="searchtype" value="subject" id="radio-subject" <?= (!empty($_GET['searchtype']) && $_GET['searchtype'] === 'subject' ? ' checked="checked"' : '') ?> />
-                            <label class="Radio-label" for="radio-subject"><?= t('server.inbox.subject') ?></label>
+                        <div class="Form-row">
+                            <div class="Form-label">
+                                <?= t('server.wiki.search_in') ?>
+                            </div>
+                            <div class="Form-inputs">
+                                <div class="RadioGroup">
+                                    <div class="Radio">
+                                        <input class="Input" type="radio" name="searchtype" value="user" id="radio-user" <?= (empty($_GET['searchtype']) || $_GET['searchtype'] === 'user' ? ' checked="checked"' : '') ?> />
+                                        <label class="Radio-label" for="radio-user"><?= t('server.inbox.user') ?></label>
+                                    </div>
+                                    <div class="Radio">
+                                        <input class="Input" type="radio" name="searchtype" value="subject" id="radio-subject" <?= (!empty($_GET['searchtype']) && $_GET['searchtype'] === 'subject' ? ' checked="checked"' : '') ?> />
+                                        <label class="Radio-label" for="radio-subject"><?= t('server.inbox.subject') ?></label>
+                                    </div>
+                                    <div class="Radio">
+                                        <input class="Input" type="radio" name="searchtype" value="message" id="radio-message" <?= (!empty($_GET['searchtype']) && $_GET['searchtype'] === 'message' ? ' checked="checked"' : '') ?> />
+                                        <label class="Radio-label" for="radio-message"><?= t('server.inbox.message') ?></label>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                        <div class="Radio">
-                            <input class="Input" type="radio" name="searchtype" value="message" id="radio-message" <?= (!empty($_GET['searchtype']) && $_GET['searchtype'] === 'message' ? ' checked="checked"' : '') ?> />
-                            <label class="Radio-label" for="radio-message"><?= t('server.inbox.message') ?></label>
-                        </div>
-                        <span class="SearchInbox-actions">
-                            <?          // provide a temporary toggle for sorting PMs
-                            $ToggleTitle = 'Temporary toggle switch for sorting PMs. To permanently change the sorting behavior, edit the setting in your profile.';
-                            $BaseURL = "inbox.php?action={$_GET['action']}";
 
-                            if ($_GET['sort'] === 'unread') { ?>
-                                <a href="<?= $BaseURL ?>" class="brackets" data-tooltip="<?= $ToggleTitle ?>"><?= t('server.inbox.list_latest_first') ?></a>
-                            <?      } else { ?>
-                                <a href="<?= $BaseURL ?>&sort=unread" class="brackets" data-tooltip="<?= $ToggleTitle ?>"><?= t('server.inbox.list_unread_first') ?></a>
-                            <?      } ?>
-                        </span>
+                        <div class="Form-row">
+                            <div class="Form-label">
+                                <?= t('server.tools.order_by') ?>
+                            </div>
+                            <div class="Form-inputs">
+                                <select class="Input" name="sort">
+                                    <option class="Select-option" value="latest" <? Format::selected('sort', 'latest') ?>><?= t('server.inbox.list_latest_first') ?></option>
+                                    <option class="Select-option" value="unread" <? Format::selected('sort', 'unread') ?>><?= t('server.inbox.list_unread_first') ?></option>
+                                </select>
+
+                            </div>
+                        </div>
                     </div>
-                    <div class="SearchInbox-row">
-                        <input class="Input" type="text" name="search" placeholder="<?= (!empty($_GET['search']) ? display_str($_GET['search']) : t('server.inbox.placeholder_search') . ($Section === 'sentbox' ? t('server.inbox.sentbox') : t('server.inbox.inbox'))) ?>" />
-                    </div>
-                    <div class="SearchInbox-actions">
+                </div>
+                <div class="SearchPageFooter">
+                    <div class="SearchPageFooter-actions">
                         <button class="Button" type="submit"><?= t('server.common.search') ?></button>
                     </div>
-                </form>
-            </div>
+                </div>
+            </form>
             <? if ($Count == 0) { ?>
                 <div class="center"><?= t('server.inbox.no_results') ?></div>
             <? } else { ?>

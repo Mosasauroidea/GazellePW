@@ -82,7 +82,7 @@ if (!Forums::check_forumperm($ForumID)) {
 $Pages = Format::get_pages($Page, $Forums[$ForumID]['NumTopics'], CONFIG['TOPICS_PER_PAGE'], 9);
 
 // Start printing
-View::show_header(t('server.forums.forums') . '&gt; ' . $Forums[$ForumID]['Name'], '', $IsDonorForum ? 'donor' : '', 'PageForumShow');
+View::show_header($Forums[$ForumID]['Name'], '', $IsDonorForum ? 'donor' : '', 'PageForumShow');
 ?>
 <div class="LayoutBody">
     <div class="BodyHeader">

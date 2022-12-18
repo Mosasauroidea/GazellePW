@@ -91,15 +91,19 @@ View::show_header('Staff Inbox', 'PageStaffPMScoreboard');
                             foreach ($Results as $Result) {
                                 [$UserID, $Username, $Num, $Extra] = $Result;
                             ?>
-                                <tr>
-                                    <td><a href="/reportsv2.php?view=resolver&amp;id=<?= $UserID ?>"><?= $Username ?></a></td>
-                                    <td><?= $Num ?></td>
-                                    <td><?= $Extra ?></td>
+                                <tr class="Table-row">
+                                    <td class="Table-cell"><a href="/reportsv2.php?view=resolver&amp;id=<?= $UserID ?>"><?= $Username ?></a></td>
+                                    <td class="Table-cell"><?= $Num ?></td>
+                                    <td class="Table-cell"><?= $Extra ?></td>
                                 </tr>
                             <?php } ?>
                         </table>
                     </div>
                 </div>
+                <?php
+                $DB->prepared_query($BaseSQL, 365000, 365000, $LoggedUser['Class'], ...$SupportStaff);
+                $Results = $DB->to_array();
+                ?>
                 <div class="Group">
                     <div class="Group-header">
                         <div class="Group-headerTitle"><?= t('server.staffpm.inbox_actions_total') ?></div>
@@ -115,10 +119,10 @@ View::show_header('Staff Inbox', 'PageStaffPMScoreboard');
                             foreach ($Results as $Result) {
                                 [$UserID, $Username, $Num, $Extra] = $Result;
                             ?>
-                                <tr>
-                                    <td><a href="/reportsv2.php?view=resolver&amp;id=<?= $UserID ?>"><?= $Username ?></a></td>
-                                    <td><?= $Num ?></td>
-                                    <td><?= $Extra ?></td>
+                                <tr class="Table-row">
+                                    <td class="Table-cell"><a href="/reportsv2.php?view=resolver&amp;id=<?= $UserID ?>"><?= $Username ?></a></td>
+                                    <td class="Table-cell"><?= $Num ?></td>
+                                    <td class="Table-cell"><?= $Extra ?></td>
                                 </tr>
                             <?php } ?>
                         </table>
@@ -145,10 +149,10 @@ View::show_header('Staff Inbox', 'PageStaffPMScoreboard');
                             foreach ($Results as $Result) {
                                 [$UserID, $Username, $Num, $Extra] = $Result;
                             ?>
-                                <tr>
-                                    <td><a href="/reportsv2.php?view=resolver&amp;id=<?= $UserID ?>"><?= $Username ?></a></td>
-                                    <td><?= $Num ?></td>
-                                    <td><?= $Extra ?></td>
+                                <tr class="Table-row">
+                                    <td class="Table-cell"><a href="/reportsv2.php?view=resolver&amp;id=<?= $UserID ?>"><?= $Username ?></a></td>
+                                    <td class="Table-cell"><?= $Num ?></td>
+                                    <td class="Table-cell"><?= $Extra ?></td>
                                 </tr>
                             <?php } ?>
                         </table>
@@ -175,22 +179,20 @@ View::show_header('Staff Inbox', 'PageStaffPMScoreboard');
                             foreach ($Results as $Result) {
                                 [$UserID, $Username, $Num, $Extra] = $Result;
                             ?>
-                                <tr>
-                                    <td><a href="/reportsv2.php?view=resolver&amp;id=<?= $UserID ?>"><?= $Username ?></a></td>
-                                    <td><?= $Num ?></td>
-                                    <td><?= $Extra ?></td>
+                                <tr class="Table-row">
+                                    <td class="Table-cell"><a href="/reportsv2.php?view=resolver&amp;id=<?= $UserID ?>"><?= $Username ?></a></td>
+                                    <td class="Table-cell"><?= $Num ?></td>
+                                    <td class="Table-cell"><?= $Extra ?></td>
                                 </tr>
                             <?php } ?>
                         </table>
                     </div>
                 </div>
             </div>
-            <?php
-            $DB->prepared_query($BaseSQL, 365000, 365000, $LoggedUser['Class'], ...$SupportStaff);
-            $Results = $DB->to_array();
-            ?>
+
         </div>
     </div>
+</div>
 
-    <?php
-    View::show_footer();
+<?php
+View::show_footer();

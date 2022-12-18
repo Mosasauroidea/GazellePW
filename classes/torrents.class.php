@@ -5,7 +5,6 @@ use Gazelle\Torrent\EditionInfo;
 use Gazelle\Torrent\Region;
 use Gazelle\Torrent\Language;
 use Gazelle\Torrent\TorrentSlot;
-use Gazelle\Torrent\TorrentSlotType;
 use Illuminate\Support\Facades\File;
 use Gazelle\Util\Time;
 
@@ -1187,7 +1186,7 @@ WHERE ud.TorrentID=? AND ui.NotifyOnDeleteDownloaded='1' AND ud.UserID NOT IN ({
             if ($Item == 'Processing' && !empty($Processing)) {
                 if ($Style) {
                     if ($Option['SettingTorrentTitle']['Alternative']) {
-                        if ($Data['Slot'] != TorrentSlotType::None) {
+                        if ($Data['Slot'] != TorrentSlot::TorrentSlotTypeNone) {
                             $Slot = TorrentSlot::slot_name($Data['Slot']);
                             $Processing = icon("Torrent/slot_${Slot}");
                         }

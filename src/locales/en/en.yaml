@@ -6448,7 +6448,7 @@ server.user.equal: |-
 server.user.equals: |-
   Equals
 server.user.ex_style: |-
-  External stylesheet URL
+  External CSS URL
 server.user.ex_style_title: |-
   Providing a link to an externally-hosted stylesheet will override your default stylesheet selection.
 server.user.expand: |-
@@ -8439,3 +8439,5 @@ server.wiki.created: |-
   Created
 server.wiki.edited: |-
   Edited
+server.user.snatches: |-
+  Snatches

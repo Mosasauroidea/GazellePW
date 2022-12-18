@@ -1,12 +1,3 @@
-.SearchInbox-row {
-  display: flex;
-  gap: var(--global-space-default);
-}
-
-.SearchInbox-actions {
-  margin-left: auto;
-}
-
 #inbox div.box.vertical_space {
   background: var(--Box-background);
   color: var(--Box-color);

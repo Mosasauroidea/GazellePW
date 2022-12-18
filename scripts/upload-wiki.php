@@ -6,27 +6,9 @@ define('MEMORY_EXCEPTION', true);
 define('TIME_EXCEPTION', true);
 define('ERROR_EXCEPTION', true);
 
-require_once(__DIR__ . '/../classes/config.php');
-require_once(__DIR__ . '/../classes/const.php');
-require_once(__DIR__ . '/../vendor/autoload.php');
+require(__DIR__ . '../classes/includes.php');
 
-use Gazelle\Util\Crypto;
-use Twig\Loader\FilesystemLoader;
-use Twig\Environment;
-
-require('classes/proxies.class.php');
-
-set_include_path(CONFIG['SERVER_ROOT']);
-
-require_once(CONFIG['SERVER_ROOT'] . 'classes/time.class.php');
-require_once(CONFIG['SERVER_ROOT'] . 'classes/util.php');
-
-$Debug = new DEBUG;
-$Debug->handle_errors();
 $Debug->set_flag('Debug constructed');
-
-$DB = new DB_MYSQL;
-$Cache = new CACHE($CONFIG['MemcachedServers']);
 
 $in = fopen($argv[1], 'r');
 

@@ -65,7 +65,7 @@ switch ($_GET['feed']) {
             if (strtotime($NewsTime) >= time()) {
                 continue;
             }
-            echo $Feed->item($Title, Text::strip_bbcode($Body), "index.php#news$NewsID", CONFIG['SITE_NAME'] . ' Staff', '', '', $NewsTime);
+            echo $Feed->item($Title, Text::full_format($Body), "index.php#news$NewsID", CONFIG['SITE_NAME'] . ' Staff', '', '', $NewsTime);
             if (++$Count > 4) {
                 break;
             }
@@ -95,9 +95,9 @@ switch ($_GET['feed']) {
         foreach ($Blog as $BlogItem) {
             list($BlogID, $Author, $AuthorID, $Title, $Body, $BlogTime, $ThreadID) = $BlogItem;
             if ($ThreadID) {
-                echo $Feed->item($Title, Text::strip_bbcode($Body), "forums.php?action=viewthread&amp;threadid=$ThreadID", CONFIG['SITE_NAME'] . ' Staff', '', '', $BlogTime);
+                echo $Feed->item($Title, Text::full_format($Body), "forums.php?action=viewthread&amp;threadid=$ThreadID", CONFIG['SITE_NAME'] . ' Staff', '', '', $BlogTime);
             } else {
-                echo $Feed->item($Title, Text::strip_bbcode($Body), "blog.php#blog$BlogID", CONFIG['SITE_NAME'] . ' Staff', '', '', $BlogTime);
+                echo $Feed->item($Title, Text::full_format($Body), "blog.php#blog$BlogID", CONFIG['SITE_NAME'] . ' Staff', '', '', $BlogTime);
             }
         }
         break;
@@ -117,7 +117,7 @@ switch ($_GET['feed']) {
         }
         foreach ($Changelog as $Change) {
             list($Message, $Author, $Date) = $Change;
-            echo $Feed->item("$Date by $Author", $Message, 'tools.php?action=change_log', CONFIG['SITE_NAME'] . ' Staff', '', '', $Date);
+            echo $Feed->item("$Date by $Author", Text::full_format($Message), 'tools.php?action=change_log', CONFIG['SITE_NAME'] . ' Staff', '', '', $Date);
         }
         break;
     case 'torrents_all':

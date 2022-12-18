@@ -1,23 +1,5 @@
 <?
-require_once(__DIR__ . '/../classes/classloader.php');
-require_once(__DIR__ . '/../classes/config.php');
-require_once(__DIR__ . '/../classes/const.php');
-require_once(__DIR__ . '/../vendor/autoload.php');
-require_once(__DIR__ . '/../classes/util.php');
-require_once(__DIR__ . '/../classes/mysql.class.php');
-require_once(__DIR__ . '/../classes/cache.class.php');
-require_once(__DIR__ . '/../classes/time.class.php');
-
-$DB = new DB_MYSQL;
-$Cache = new CACHE($CONFIG['MemcachedServers']);
-$Debug = new DEBUG;
-$Debug->handle_errors();
-
-ImageTools::init(CONFIG['IMAGE_PROVIDER']);
-
-G::$Cache = $Cache;
-G::$DB = $DB;
-G::$Debug = $Debug;
+require(__DIR__ . '../classes/includes.php');
 
 $StartGroupID = $argv[1];
 $EndGroupID = $argv[2];

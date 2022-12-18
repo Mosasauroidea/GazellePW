@@ -25,7 +25,7 @@ $DeleteKeys = false;
 // Variables for database input
 $Class = (int)$_POST['Class'];
 $Username = db_string($_POST['Username']);
-$Title = db_string(Text::full_format($_POST['Title']));
+$Title = db_string($_POST['Title']);
 $Donor = isset($_POST['Donor']) ? 1 : 0;
 $Artist = isset($_POST['Artist']) ? 1 : 0;
 $SecondaryClasses = isset($_POST['secondary_classes']) ? $_POST['secondary_classes'] : array();
@@ -386,13 +386,14 @@ if ($Username !== $Cur['Username'] && check_perms('users_edit_usernames', $Cur['
     $LightUpdates['Username'] = $Username;
 }
 
-if ($Title != db_string(display_str($Cur['Title'])) && check_perms('users_edit_titles')) {
+if ($Title != db_string($Cur['Title']) && check_perms('users_edit_titles')) {
     // Using the unescaped value for the test to avoid confusion
     if (mb_strlen($_POST['Title']) > 2048) {
         error("Custom titles have a maximum length of 2,048 characters.");
         header("Location: user.php?id=$UserID");
         die();
     } else {
+
         $UpdateSet[] = "Title = '$Title'";
         $EditSummary[] = "title changed to [code]{$Title}[/code]";
         $LightUpdates['Title'] = $_POST['Title'];

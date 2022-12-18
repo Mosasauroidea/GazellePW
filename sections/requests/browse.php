@@ -416,7 +416,10 @@ View::show_header($Title, '', 'PageRequestHome');
                     <tr class="Form-row is-release">
                         <td class="Form-label"><?= t('server.requests.release_list') ?></td>
                         <td class="Form-inputs">
-                            <input class="Input" type="checkbox" id="toggle_releases" onchange="globalapp.requestToggle('releases', 0);" <?= (!$Submitted || !empty($ReleaseArray) && count($ReleaseArray) === count($ReleaseTypes) ? ' checked="checked"' : '') ?> /> <label for="toggle_releases">All</label>
+                            <div class="Checkbox">
+                                <input class="Input" type="checkbox" id="toggle_releases" onchange="globalapp.allToggle('releases', 0);" <?= (!$Submitted || !empty($ReleaseArray) && count($ReleaseArray) === count($ReleaseTypes) ? ' checked="checked"' : '') ?> />
+                                <label for="toggle_releases"><?= t('server.forums.check_all') ?></label>
+                            </div>
                             <?
                             foreach ($ReleaseTypes as $Key) {
                             ?>
@@ -433,8 +436,8 @@ View::show_header($Title, '', 'PageRequestHome');
                         <td class="Form-label"><?= t('server.requests.source_list') ?>:</td>
                         <td class="Form-inputs">
                             <div class="Checkbox">
-                                <input class="Input" type="checkbox" id="toggle_source" onchange="globalapp.requestToggle('sources', 0);" <?= (!$Submitted || !empty($SourceArray) && count($SourceArray) === count($Sources) ? ' checked="checked"' : '') ?> />
-                                <label class="Checkbox-label" for="toggle_source">All</label>
+                                <input class="Input" type="checkbox" id="toggle_source" onchange="globalapp.allToggle('source', 0);" <?= (!$Submitted || !empty($SourceArray) && count($SourceArray) === count($Sources) ? ' checked="checked"' : '') ?> />
+                                <label class="Checkbox-label" for="toggle_source"><?= t('server.forums.check_all') ?></label>
                             </div>
                             <?
                             foreach ($Sources as $Key => $Val) {
@@ -450,8 +453,8 @@ View::show_header($Title, '', 'PageRequestHome');
                         <td class="Form-label"><?= t('server.requests.codec_list') ?>:</td>
                         <td class="Form-inputs">
                             <div class="Checkbox">
-                                <input class="Input" type="checkbox" id="toggle_codec" onchange="globalapp.requestToggle('codec', 0);" <?= (!$Submitted || !empty($CodecArray) && count($CodecArray) === count($Codecs) ? ' checked="checked"' : '') ?> />
-                                <label class="Checkbox-label" for="toggle_codec">All</label>
+                                <input class="Input" type="checkbox" id="toggle_codec" onchange="globalapp.allToggle('codec', 0);" <?= (!$Submitted || !empty($CodecArray) && count($CodecArray) === count($Codecs) ? ' checked="checked"' : '') ?> />
+                                <label class="Checkbox-label" for="toggle_codec"><?= t('server.forums.check_all') ?></label>
                             </div>
                             <?
                             foreach ($Codecs as $Key => $Val) {
@@ -467,8 +470,8 @@ View::show_header($Title, '', 'PageRequestHome');
                         <td class="Form-label"><?= t('server.requests.container_list') ?>:</td>
                         <td class="Form-inputs">
                             <div class="Checkbox">
-                                <input class="Input" type="checkbox" id="toggle_container" onchange="globalapp.requestToggle('container', 0);" <?= (!$Submitted || !empty($ContainerArray) && count($ContainerArray) === count($Containers) ? ' checked="checked"' : '') ?> />
-                                <label class="Checkbox-label" for="toggle_container">All</label>
+                                <input class="Input" type="checkbox" id="toggle_container" onchange="globalapp.allToggle('container', 0);" <?= (!$Submitted || !empty($ContainerArray) && count($ContainerArray) === count($Containers) ? ' checked="checked"' : '') ?> />
+                                <label class="Checkbox-label" for="toggle_container"><?= t('server.forums.check_all') ?></label>
                             </div>
                             <?
                             foreach ($Containers as $Key => $Val) {
@@ -486,8 +489,8 @@ View::show_header($Title, '', 'PageRequestHome');
                         <td class="Form-label"><?= t('server.requests.resolution_list') ?>:</td>
                         <td class="Form-inputs">
                             <div class="Checkbox">
-                                <input class="Input" type="checkbox" id="toggle_resolution" onchange="globalapp.requestToggle('resolution', 0);" <?= (!$Submitted || !empty($ResolutionArray) && count($ResolutionArray) === count($Resolutions) ? ' checked="checked"' : '') ?> />
-                                <label class="Checkbox-label" for="toggle_resolution">All</label>
+                                <input class="Input" type="checkbox" id="toggle_resolution" onchange="globalapp.allToggle('resolution', 0);" <?= (!$Submitted || !empty($ResolutionArray) && count($ResolutionArray) === count($Resolutions) ? ' checked="checked"' : '') ?> />
+                                <label class="Checkbox-label" for="toggle_resolution"><?= t('server.forums.check_all') ?></label>
                             </div>
                             <?
                             foreach ($Resolutions as $Key => $Val) {
@@ -505,7 +508,7 @@ View::show_header($Title, '', 'PageRequestHome');
             </div>
             <div class="SearchPageFooter">
                 <div class="SearchPageFooter-actions">
-                    <input class="Button" type="submit" value="<?= t('server.torrents.search_requests') ?>" />
+                    <input class="Button" type="submit" value="<?= t('server.common.search') ?>" />
                 </div>
             </div>
         </form>

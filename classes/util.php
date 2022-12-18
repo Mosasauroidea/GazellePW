@@ -66,7 +66,6 @@ function is_bool_value($Value) {
 
 /**
  * HTML-escape a string for output.
- * This is preferable to htmlspecialchars because it doesn't screw up upon a double escape.
  *
  * @param string $Str
  * @return string escaped string.
@@ -75,30 +74,7 @@ function display_str($Str) {
     if ($Str === null || $Str === false || is_array($Str)) {
         return '';
     }
-    if ($Str != '' && !is_number($Str)) {
-        $Str = Format::make_utf8($Str);
-        $Str = mb_convert_encoding($Str, 'HTML-ENTITIES', 'UTF-8');
-        $Str = preg_replace("/&(?![A-Za-z]{0,4}\w{2,3};|#[0-9]{2,6};)/m", '&amp;', $Str);
-
-        $Replace = array(
-            "'", '"', "<", ">",
-            '&#128;', '&#130;', '&#131;', '&#132;', '&#133;', '&#134;', '&#135;', '&#136;',
-            '&#137;', '&#138;', '&#139;', '&#140;', '&#142;', '&#145;', '&#146;', '&#147;',
-            '&#148;', '&#149;', '&#150;', '&#151;', '&#152;', '&#153;', '&#154;', '&#155;',
-            '&#156;', '&#158;', '&#159;'
-        );
-
-        $With = array(
-            '&#39;', '&quot;', '&lt;', '&gt;',
-            '&#8364;', '&#8218;', '&#402;', '&#8222;', '&#8230;', '&#8224;', '&#8225;', '&#710;',
-            '&#8240;', '&#352;', '&#8249;', '&#338;', '&#381;', '&#8216;', '&#8217;', '&#8220;',
-            '&#8221;', '&#8226;', '&#8211;', '&#8212;', '&#732;', '&#8482;', '&#353;', '&#8250;',
-            '&#339;', '&#382;', '&#376;'
-        );
-
-        $Str = str_replace($Replace, $With, $Str);
-    }
-    return $Str;
+    return htmlspecialchars($Str, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8',  false);
 }
 
 
@@ -184,7 +160,7 @@ function add_json_info($Json) {
             ],
         ]);
     }
-    if (!isset($Json['debug']) && check_perms('site_debug')) {
+    if (!isset($Json['debug']) && G::$LoggedUser && check_perms('site_debug')) {
         /** @var DEBUG $Debug */
         global $Debug;
         $Json = array_merge($Json, [

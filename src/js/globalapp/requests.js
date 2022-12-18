@@ -140,7 +140,7 @@ globalapp.requestAddTag = function requestAddTag() {
   }
 }
 
-globalapp.requestToggle = function reqeustToggle(id, disable) {
+globalapp.allToggle = function allToggle(id, disable) {
   var arr = document.getElementsByName(id + '[]')
   var master = $('#toggle_' + id).raw().checked
   for (const element of arr) {

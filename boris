@@ -23,28 +23,8 @@
 
 define('BORIS', 1);
 
-require(__DIR__ . '/classes/classloader.php');
-
-require_once(__DIR__ . '/classes/config.php');
-require_once(__DIR__ . '/classes/const.php');
-require_once(__DIR__ . '/classes/cache.class.php');
-require_once(__DIR__ . '/classes/mysql.class.php');
-require_once(__DIR__ . '/classes/debug.class.php');
-require_once(__DIR__ . '/vendor/autoload.php');
-require_once(__DIR__ . '/classes/paranoia.class.php');
-require_once(__DIR__ . '/classes/time.class.php');
-require_once(__DIR__ . '/classes/util.php');
+require(__DIR__ . 'classes/includes.php');
 require_once(__DIR__ . '/vendor/d11wtq/boris/lib/autoload.php');
-
-$Cache = new CACHE($CONFIG['MemcachedServers']);
-$DB = new DB_MYSQL;
-$Debug = new DEBUG;
-$Debug->handle_errors();
-
-G::$Cache = &$Cache;
-G::$DB = &$DB;
-G::$Debug = &$Debug;
-
 $b = new \Boris\Boris(CONFIG['SITE_NAME'] . '> ');
 $preload = [
     'cache'       => $Cache,

@@ -24,9 +24,11 @@ $Items = $Bonus->getList();
     </div>
 
     <div class="LayoutBody">
-        <div class="alertbar blend">
-            &quot;<?= t("server.bonus.${item['Label']}") ?>&quot;&nbsp;<?= t('server.bonus.purchased') ?>
-        </div>
+        <? if (isset($_GET['complete'])) { ?>
+            <div class="alertbar blend">
+                &quot;<?= t("server.bonus.${item['Label']}") ?>&quot;&nbsp;<?= t('server.bonus.purchased') ?>
+            </div>
+        <? } ?>
         <? if (count($Items) > 0) { ?>
             <div class="TableContainer">
                 <table class="TableBonusStore Table">

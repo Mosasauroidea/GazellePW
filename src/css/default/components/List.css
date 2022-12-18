@@ -1,3 +1,11 @@
+ul.List li {
+  margin-left: 15px;
+  list-style-type: disc;
+}
+ol.List li {
+  margin-left: 15px;
+  list-style-type: decimal;
+}
 .MenuList .SubMenu li {
   margin-left: 15px;
   position: relative;

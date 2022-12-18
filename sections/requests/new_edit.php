@@ -341,7 +341,7 @@ View::show_header(($NewRequest ? t('server.requests.new_create') : t('server.req
                             <td class="Form-items">
                                 <div class="Form-inputs">
                                     <div class="Checkbox">
-                                        <input type="checkbox" name="all_sources" id="toggle_sources" onchange="globalapp.requestToggle('sources', <?= ($NewRequest ? 1 : 0) ?>);" <?= !empty($SourceArray) && (count($SourceArray) === count($Sources)) ? ' checked="checked"' : ''; ?> /><label for="toggle_sources"> <?= t('server.requests.all') ?></label>
+                                        <input type="checkbox" name="all_sources" id="toggle_sources" onchange="globalapp.allToggle('sources', <?= ($NewRequest ? 1 : 0) ?>);" <?= !empty($SourceArray) && (count($SourceArray) === count($Sources)) ? ' checked="checked"' : ''; ?> /><label for="toggle_sources"> <?= t('server.requests.all') ?></label>
                                     </div>
                                     <? foreach ($Sources as $Key => $Val) { ?>
                                         <div class="Checkbox"><input type="checkbox" name="sources[]" value="<?= $Key ?>" onchange="if (!this.checked) { $('#toggle_sources').raw().checked = false; }" id="source_<?= $Key ?>" <?= (!empty($SourceArray) && in_array($Key, $SourceArray) ? ' checked="checked"' : '') ?> /><label for="source_<?= $Key ?>"> <?= $Val ?></label></div>
@@ -354,7 +354,7 @@ View::show_header(($NewRequest ? t('server.requests.new_create') : t('server.req
                             <td class="Form-items">
                                 <div class="Form-inputs">
                                     <div class="Checkbox">
-                                        <input type="checkbox" name="all_codecs" id="toggle_codecs" onchange="globalapp.requestToggle('codecs', <?= ($NewRequest ? 1 : 0) ?>);" <?= (!empty($CodecArray) && (count($CodecArray) === count($Codecs)) ? ' checked="checked"' : '') ?> /><label for="toggle_codecs"> <?= t('server.requests.all') ?></label>
+                                        <input type="checkbox" name="all_codecs" id="toggle_codecs" onchange="globalapp.allToggle('codecs', <?= ($NewRequest ? 1 : 0) ?>);" <?= (!empty($CodecArray) && (count($CodecArray) === count($Codecs)) ? ' checked="checked"' : '') ?> /><label for="toggle_codecs"> <?= t('server.requests.all') ?></label>
                                     </div>
                                     <? foreach ($Codecs as $Key => $Val) { ?>
                                         <div class="Checkbox">
@@ -369,7 +369,7 @@ View::show_header(($NewRequest ? t('server.requests.new_create') : t('server.req
                             <td class="Form-items">
                                 <div class="Form-inputs">
                                     <div class="Checkbox">
-                                        <input type="checkbox" name="all_containers" id="toggle_containers" onchange="globalapp.requestToggle('containers', <?= ($NewRequest ? 1 : 0) ?>);" <?= (!empty($ContainerArray) && (count($ContainerArray) === count($Containers)) ? ' checked="checked"' : '') ?> /><label for="toggle_containers"> <?= t('server.requests.all') ?></label>
+                                        <input type="checkbox" name="all_containers" id="toggle_containers" onchange="globalapp.allToggle('containers', <?= ($NewRequest ? 1 : 0) ?>);" <?= (!empty($ContainerArray) && (count($ContainerArray) === count($Containers)) ? ' checked="checked"' : '') ?> /><label for="toggle_containers"> <?= t('server.requests.all') ?></label>
                                     </div>
                                     <? foreach ($Containers as $Key => $Val) { ?>
                                         <div class="Checkbox">
@@ -384,7 +384,7 @@ View::show_header(($NewRequest ? t('server.requests.new_create') : t('server.req
                             <td class="Form-items">
                                 <div class="Form-inputs">
                                     <div class="Checkbox">
-                                        <input type="checkbox" name="all_resolutions" id="toggle_resolutions" onchange="globalapp.requestToggle('resolutions', <?= ($NewRequest ? 1 : 0) ?>);" <?= (!empty($ResolutionArray) && (count($ResolutionArray) === count($Resolutions)) ? ' checked="checked"' : '') ?> /><label for="toggle_resolutions"> <?= t('server.requests.all') ?></label>
+                                        <input type="checkbox" name="all_resolutions" id="toggle_resolutions" onchange="globalapp.allToggle('resolutions', <?= ($NewRequest ? 1 : 0) ?>);" <?= (!empty($ResolutionArray) && (count($ResolutionArray) === count($Resolutions)) ? ' checked="checked"' : '') ?> /><label for="toggle_resolutions"> <?= t('server.requests.all') ?></label>
                                     </div>
                                     <? foreach ($Resolutions as $Key => $Val) { ?>
                                         <div class="Checkbox">

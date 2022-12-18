@@ -1,8 +1,6 @@
 <?
 
-use Gazelle\Manager\Tag;
 use Gazelle\Torrent\TorrentSlot;
-use Gazelle\Torrent\TorrentSlotType;
 
 include(CONFIG['SERVER_ROOT'] . '/classes/torrenttable.class.php');
 function compare($X, $Y) {
@@ -916,7 +914,7 @@ View::show_header($Title, 'browse,comments,torrent,bbcode,recommend,cover_art,su
                                 $MissSlots = $MissingSlots[TorrentSlot::get_slot_resolution($Resolution)];
                                 $MissSlotNames = [];
                                 foreach ($MissSlots as $MissingSlot) {
-                                    if ($MissingSlot == TorrentSlotType::None) {
+                                    if ($MissingSlot == TorrentSlot::TorrentSlotTypeNone) {
                                         continue;
                                     }
                                     $SlotTooltip = TorrentSlot::empty_slot_tooltip($MissingSlot);
@@ -964,7 +962,7 @@ View::show_header($Title, 'browse,comments,torrent,bbcode,recommend,cover_art,su
                                                 <optgroup class="Select-group" label="<?= $extraName ?>">
                                                     <?
                                                     foreach (TorrentSlot::get_resolution_slots($Resolution) as $RSlot) {
-                                                        if ($RSlot == TorrentSlotType::None) {
+                                                        if ($RSlot == TorrentSlot::TorrentSlotTypeNone) {
                                                             continue;
                                                         }
                                                     ?>

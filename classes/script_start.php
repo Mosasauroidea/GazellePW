@@ -11,21 +11,18 @@
 /*------------------------------------------------------*/
 
 /********************************************************/
-
-require('config.php');
-require('const.php');
-
 // Autoload classes.
-require(CONFIG['SERVER_ROOT'] . '/classes/classloader.php');
 
 use Gazelle\Util\Crypto;
 use Gazelle\Manager\Donation;
-
 
 //Deal with dumbasses
 if (isset($_REQUEST['info_hash']) && isset($_REQUEST['peer_id'])) {
     die('d14:failure reason40:Invalid .torrent, try downloading again.e');
 }
+
+
+require(__DIR__ . '/includes.php');
 
 require(CONFIG['SERVER_ROOT'] . '/classes/proxies.class.php');
 
@@ -59,42 +56,10 @@ if (!defined('PHP_WINDOWS_VERSION_MAJOR')) {
 
 ob_start(); //Start a buffer, mainly in case there is a mysql error
 
-set_include_path(CONFIG['SERVER_ROOT']);
+require('classes/paranoia.class.php'); //Require the paranoia check_paranoia function
+require('classes/vite.php');
 
-require(CONFIG['SERVER_ROOT'] . '/classes/debug.class.php'); //Require the debug class
-require(CONFIG['SERVER_ROOT'] . '/classes/mysql.class.php'); //Require the database wrapper
-require(CONFIG['SERVER_ROOT'] . '/classes/cache.class.php'); //Require the caching class
-require(CONFIG['SERVER_ROOT'] . '/classes/time.class.php'); //Require the time class
-require(CONFIG['SERVER_ROOT'] . '/classes/lang.class.php'); //Require the time class
-require(CONFIG['SERVER_ROOT'] . '/classes/paranoia.class.php'); //Require the paranoia check_paranoia function
-require(CONFIG['SERVER_ROOT'] . '/classes/regex.php');
-require(CONFIG['SERVER_ROOT'] . '/classes/util.php');
-require(CONFIG['SERVER_ROOT'] . '/classes/vite.php');
-require(CONFIG['SERVER_ROOT'] . '/app/Torrent/TorrentSlot.php');
-
-$Debug = new DEBUG;
-$Debug->handle_errors();
-$Debug->set_flag('Debug constructed');
-
-$DB = new DB_MYSQL;
-
-$Cache = new CACHE($CONFIG['MemcachedServers']);
-
-$Twig = new Twig\Environment(
-    new Twig\Loader\FilesystemLoader([
-        CONFIG['SERVER_ROOT'] . '/templates',
-        CONFIG['SERVER_ROOT'] . '/src/locales',
-    ]),
-    ['debug' => CONFIG['DEBUG_MODE'], 'cache' => CONFIG['SERVER_ROOT'] . '/.cache/twig']
-);
-
-
-ImageTools::init(CONFIG['IMAGE_PROVIDER']);
-
-G::$Cache = &$Cache;
-G::$DB = &$DB;
-G::$Debug = &$Debug;
-G::$Twig = &$Twig;
+G::$Debug->set_flag('Debug constructed');
 
 //Begin browser identification
 if (session_status() === PHP_SESSION_NONE) {

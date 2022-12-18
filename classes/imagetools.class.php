@@ -41,7 +41,7 @@ class ImageTools {
         'fastpic.ru',
     );
 
-    private static $Whitelist = ['kshare.club', 'pixhost.to', 'ptpimg.me', 'img.pterclub.com', 'yes.ilikeshots.club', 'imgbox.com'];
+    private static $Whitelist = ['kshare.club', 'pixhost.to', 'ptpimg.me', 'img.pterclub.com', 'yes.ilikeshots.club', 'imgbox.com', 's3.pterclub.com'];
 
     /**
      * Array of image hosts that provide thumbnailing

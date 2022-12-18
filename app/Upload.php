@@ -48,7 +48,7 @@ class Upload extends Base {
         $LogName = Torrents::torrent_name($this->properties, false);
         $TotalSize = $this->properties['Size'];
         Misc::write_log("Torrent $TorrentID ($LogName) was uploaded by " . $this->user['Username'] . ($this->useAPI ? ' using the api' : ''));
-        Torrents::write_group_log($GroupID, $TorrentID, $this->user['ID'], "uploaded (" . number_format($TotalSize / (1024 * 1024 * 1024), 2) . ' GiB) " . "', 0);
+        Torrents::write_group_log($GroupID, $TorrentID, $this->user['ID'], "uploaded (" . number_format($TotalSize / (1024 * 1024 * 1024), 2) . ' GiB)', 0);
 
         $this->clearCache();
         Tracker::update_tracker('add_torrent', array('id' => $TorrentID, 'info_hash' => rawurlencode($this->properties['InfoHash']), 'freetorrent' => $this->properties['FreeLeech']));

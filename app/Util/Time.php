@@ -197,27 +197,59 @@ class Time {
         $return = '';
 
         if ($years > 0 && $levels > 0) {
-            $return .= $years . 'y';
+            if ($years > 1) {
+                $return .= "$years " . t('server.time.ys');
+            } else {
+                $return .= "$years " . t('server.time.y');
+            }
             $levels--;
         }
 
         if ($months > 0 && $levels > 0) {
-            $return .= $months . 'mo';
+            if ($return != '') {
+                $return .= ', ';
+            }
+            if ($months > 1) {
+                $return .= "$months " . t('server.time.ms');
+            } else {
+                $return .= "$months " . t('server.time.m');
+            }
             $levels--;
         }
 
         if ($weeks > 0 && $levels > 0) {
-            $return .= $weeks . 'w';
+            if ($return != '') {
+                $return .= ', ';
+            }
+            if ($weeks > 1) {
+                $return .= "$weeks " . t('server.time.ws');
+            } else {
+                $return .= "$weeks " . t('server.time.w');
+            }
             $levels--;
         }
 
         if ($days > 0 && $levels > 0) {
-            $return .= $days . 'd';
+            if ($return != '') {
+                $return .= ', ';
+            }
+            if ($days > 1) {
+                $return .= "$days " . t('server.time.ds');
+            } else {
+                $return .= "$days " . t('server.time.d');
+            }
             $levels--;
         }
 
         if ($hours > 0 && $levels > 0) {
-            $return .= $hours . 'h';
+            if ($return != '') {
+                $return .= ', ';
+            }
+            if ($hours > 1) {
+                $return .= "$hours " . t('server.time.hs');
+            } else {
+                $return .= "$hours " . t('server.time.h');
+            }
         }
 
         if ($span) {

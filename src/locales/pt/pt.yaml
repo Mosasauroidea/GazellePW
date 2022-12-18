@@ -6430,7 +6430,7 @@ server.user.equal: |-
 server.user.equals: |-
   É igual a
 server.user.ex_style: |-
-  URL da folha de estilos externa
+  URL do CSS externo
 server.user.ex_style_title: |-
   Fornecer um link para uma folha de estilos hospedada externamente irá substituir sua seleção de folha de estilo padrão.
 server.user.expand: |-
@@ -8283,3 +8283,5 @@ client.stats.user_platform_distribution: |-
   Plataforma de Usuário Distribuição
 client.stats.peers: |-
   Peers
+server.user.snatches: |-
+  Encontrado

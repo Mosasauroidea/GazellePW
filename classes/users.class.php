@@ -168,7 +168,7 @@ class Users {
                     'Class' => 0
                 );
             } else {
-                $UserInfo = G::$DB->next_record(MYSQLI_ASSOC, array('Paranoia', 'Title'));
+                $UserInfo = G::$DB->next_record(MYSQLI_ASSOC, false);
                 $UserInfo['CatchupTime'] = strtotime($UserInfo['CatchupTime']);
                 $UserInfo['Paranoia'] = unserialize_array($UserInfo['Paranoia']);
                 if ($UserInfo['Paranoia'] === false) {

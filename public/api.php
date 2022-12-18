@@ -14,12 +14,8 @@ $ScriptStartTime = microtime(true); //To track how long a page takes to create
 if (isset($_GET['clearcache'])) {
     unset($_GET['clearcache']);
 }
-require_once(__DIR__ . '/../classes/classloader.php');
-require_once(__DIR__ . '/../classes/config.php');
-require_once(__DIR__ . '/../classes/mysql.class.php');
-require_once(__DIR__ . '/../classes/const.php');
-require_once(__DIR__ . '/../vendor/autoload.php');
-require_once(__DIR__ . '/../classes/util.php');
+
+require(__DIR__ . '/../classes/includes.php');
 
 $available = [
     'generate_invite',
@@ -42,28 +38,6 @@ if (!in_array($_GET['action'], $available)) {
 if (empty($_GET['api_key'])) {
     json_error('invalid parameters');
 }
-
-$Cache = new CACHE($CONFIG['MemcachedServers']);
-$DB = new DB_MYSQL;
-$Debug = new DEBUG;
-$Twig = new Twig\Environment(
-    new \Twig\Loader\FilesystemLoader([
-        __DIR__ . '/../templates',
-        __DIR__ . '/../src/locales',
-    ]),
-    [
-        'debug' => CONFIG['DEBUG_MODE'],
-        'cache' => __DIR__ . '/../.cache/twig'
-    ]
-);
-$Debug->handle_errors();
-
-ImageTools::init(CONFIG['IMAGE_PROVIDER']);
-
-G::$Cache = &$Cache;
-G::$DB = &$DB;
-G::$Debug = &$Debug;
-G::$Twig = &$Twig;
 
 $app = $Cache->get_value("api_apps_{$token}");
 if (!is_array($app)) {

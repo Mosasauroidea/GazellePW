@@ -129,8 +129,13 @@ $SingleDateChoices = array('inarray' => array('on', 'before', 'after'));
 $NumberChoices = array('inarray' => array('equal', 'above', 'below', 'between', 'buffer'));
 $YesNo = array('inarray' => array('any', 'yes', 'no'));
 $DisabledField = array('inarray' => array("DisableAnyone", "DisablePosting", "DisableAvatar", "DisableForums", "DisableIRC", "DisablePM", "DisableLeech", "DisableRequests", "DisableUpload", "DisablePoints", "DisableTagging", "DisableWiki", "DisableInvites", "DisableCheckAll", "DisableCheckSelf"));
-$OrderVals = array('inarray' => array('Username', 'Ratio', 'IP', 'Email', 'Joined', 'Last Seen', 'Uploaded', 'Downloaded', 'Invites', 'Snatches'));
-$WayVals = array('inarray' => array('Ascending', 'Descending'));
+$OrderVals = array(
+    'inarray' =>
+    array('Username', 'Ratio', 'IP Address', 'Email', 'Joined', 'Last Seen', 'Uploaded', 'Downloaded', 'Invites', 'Snatches')
+);
+$WayVals = array(
+    'inarray' => array('Ascending', 'Descending')
+);
 
 $email_history_checked = true;
 $ip_history_checked = true;
@@ -984,14 +989,14 @@ $DB->set_query_id($Results);
                                 foreach (array_shift($OrderVals) as $Cur) { ?>
                                     <option class="Select-option" value="<?= $Cur ?>" <? if (isset($_GET['order']) && $_GET['order'] == $Cur || (!isset($_GET['order']) && $Cur == 'Joined')) {
                                                                                             echo ' selected="selected"';
-                                                                                        } ?>><?= $Cur ?></option>
+                                                                                        } ?>><?= t('server.user.' . str_replace(' ', '_', strtolower($Cur))) ?></option>
                                 <?                      } ?>
                             </select>
                             <select class="Input" name="way">
                                 <? foreach (array_shift($WayVals) as $Cur) { ?>
                                     <option class="Select-option" value="<?= $Cur ?>" <? if (isset($_GET['way']) && $_GET['way'] == $Cur || (!isset($_GET['way']) && $Cur == 'Descending')) {
                                                                                             echo ' selected="selected"';
-                                                                                        } ?>><?= $Cur ?></option>
+                                                                                        } ?>><?= t('server.tools.' . strtolower($Cur)) ?></option>
                                 <?                      } ?>
                             </select>
                         </td>

@@ -7,7 +7,15 @@ const BD = ['Blu-ray']
 const SELECT_HAS_OTHER_INPUT = ['Other']
 const SELECT_REQUIRED = ['', '---']
 const IMDB_ID_PATTERN = /tt\d+/
-const IMAGE_HOSTS = ['kshare.club', 'pixhost.to', 'ptpimg.me', 'img.pterclub.com', 'yes.ilikeshots.club', 'imgbox.com']
+const IMAGE_HOSTS = [
+  'kshare.club',
+  'pixhost.to',
+  'ptpimg.me',
+  'img.pterclub.com',
+  'yes.ilikeshots.club',
+  'imgbox.com',
+  's3.pterclub.com',
+]
 
 document.addEventListener('DOMContentLoaded', () => {
   registerValidation()

@@ -1,18 +1,6 @@
 <?php
 
-require_once(__DIR__ . '/../classes/config.php');
-require_once(__DIR__ . '/../classes/const.php');
-require_once(__DIR__ . '/../vendor/autoload.php');
-require_once(__DIR__ . '/../classes/util.php');
-
-$Debug = new DEBUG;
-$Debug->handle_errors();
-
-$DB = new DB_MYSQL;
-$Cache = new CACHE($CONFIG['MemcachedServers']);
-
-G::$Cache = $Cache;
-G::$DB = $DB;
+require(__DIR__ . '../classes/includes.php');
 
 $DB->prepared_query("
     DELETE FROM invite_tree

@@ -539,7 +539,7 @@ server.bonus.about_bonus_points: |-
 server.bonus.bbcode_allowed: |-
   允许 BBCode
 server.bonus.bonus_point_rates: |-
-  积分计算
+  积分速率
 server.bonus.bonus_points_purchase_history: |-
   积分消费历史
 server.bonus.bonus_points_shop: |-
@@ -6328,7 +6328,7 @@ server.user.equal: |-
 server.user.equals: |-
   匹配
 server.user.ex_style: |-
-  外部样式链接
+  外部 CSS 链接
 server.user.ex_style_title: |-
   填写外部 Stylesheet 样式链接可覆盖你所选择的预置样式。
 server.user.expand: |-
@@ -6412,9 +6412,9 @@ server.user.ip_address: |-
 server.user.ip_history: |-
   IP 历史
 server.user.api: |-
-  接口密钥
+  API 密钥
 server.user.api_note: |-
-  重置您的 API 密钥。您必须在使用旧 API 的所有应用程序中更新 API。
+  重置你的 API 密钥，重置后所有在使用旧 API 密钥的应用都需要更新。
 server.user.api_copy: |-
   复制到剪贴板
 server.user.irc: |-
@@ -8299,3 +8299,5 @@ server.wiki.created: |-
   创建时间
 server.wiki.edited: |-
   编辑时间
+server.user.snatches: |-
+  已完成
