@@ -5,6 +5,7 @@ use Gazelle\Torrent\EditionInfo;
 use Gazelle\Torrent\Region;
 use Gazelle\Torrent\Language;
 use Gazelle\Torrent\TorrentSlot;
+use Gazelle\Torrent\Notification;
 use Illuminate\Support\Facades\File;
 use Gazelle\Util\Time;
 
@@ -1407,6 +1408,9 @@ WHERE ud.TorrentID=? AND ui.NotifyOnDeleteDownloaded='1' AND ud.UserID NOT IN ({
             G::$Cache->delete_value("torrent_download_$TorrentID");
             Misc::write_log(($Schedule ? "Schedule" : G::$LoggedUser['Username']) . " marked torrent $TorrentID freeleech $FreeNeutral type $FreeLeechType!");
             Torrents::write_group_log($GroupID, $TorrentID, $Schedule ? 0 : G::$LoggedUser['ID'], "marked as freeleech $FreeNeutral type $FreeLeechType!", 0);
+            $TorrentInfo = Torrents::get_torrent($TorrentID);
+            $Notification = new Notification;
+            $Notification->edit_notify($TorrentInfo);
         }
 
         foreach ($GroupIDs as $GroupID) {
@@ -2123,28 +2127,5 @@ WHERE ud.TorrentID=? AND ui.NotifyOnDeleteDownloaded='1' AND ud.UserID NOT IN ({
             $Root[$Fragment[0]]['size'] += $Size;
         }
         return;
-    }
-}
-
-class TorrentFile {
-    public $name = '';
-    public $size = 0;
-    public function __construct($name, $size) {
-        $this->name = $name;
-        $this->size = $size;
-    }
-}
-
-class FileNode {
-    public $name = '';
-    public $children = [];
-    public $size = 0;
-    public function __construct($name,  $size) {
-        $this->name = $name;
-        $this->size = $size;
-    }
-
-    public function addChild(FileNode $child) {
-        $this->children[$child->name] = $child;
     }
 }

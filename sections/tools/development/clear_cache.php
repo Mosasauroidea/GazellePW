@@ -102,24 +102,29 @@ $MultiKeyTooltip = t('server.tools.enter_cache_keys_delimited_by_any_amount_of_w
                     <button class="Button" type="submit" name="submit" value="Multi"><?= t('server.common.submit') ?></button>
                 </td>
             </tr>
-            <tr class="Form-row">
-                <td>
-                    <?
-                    if (isset($Keys) && $_GET['type'] == 'clear') {
-                        foreach ($Keys as $Key) {
-                            if (preg_match('/(.*?)(\d+)\.\.(\d+)$/', $Key, $Matches) && is_number($Matches[2]) && is_number($Matches[3])) {
-                                for ($i = $Matches[2]; $i <= $Matches[3]; $i++) {
-                                    $Cache->delete_value($Matches[1] . $i);
-                                }
-                            } else {
-                                $Cache->delete_value($Key);
-                            }
+
+            <?
+            if (isset($Keys) && $_GET['type'] == 'clear') {
+                foreach ($Keys as $Key) {
+                    if (preg_match('/(.*?)(\d+)\.\.(\d+)$/', $Key, $Matches) && is_number($Matches[2]) && is_number($Matches[3])) {
+                        for ($i = $Matches[2]; $i <= $Matches[3]; $i++) {
+                            $Cache->delete_value($Matches[1] . $i);
                         }
-                        echo '<div class="save_message">Key(s) ' . implode(', ', array_map('display_str', $Keys)) . ' cleared!</div>';
+                    } else {
+                        $Cache->delete_value($Key);
                     }
-                    ?>
-                </td>
-            </tr>
+                }
+            ?>
+                <tr class="Form-row">
+                    <td>
+                        <?
+                        echo '<div class="save_message">Key(s) ' . implode(', ', array_map('display_str', $Keys)) . ' cleared!</div>';
+                        ?>
+                    </td>
+                </tr>
+            <?
+            }
+            ?>
 
         </table>
     </form>
@@ -141,7 +146,7 @@ $MultiKeyTooltip = t('server.tools.enter_cache_keys_delimited_by_any_amount_of_w
                 <tr class="Tabel-row">
                     <td class="Table-cell"><?= display_str($Key) ?></td>
                     <td class="Tabel-cell">
-                        <pre><?= $Cache->get_value($Key); ?></pre>
+                        <pre><?= print_r($Cache->get_value($Key)); ?></pre>
                     </td>
                 </tr>
             <?  } ?>

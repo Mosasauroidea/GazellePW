@@ -239,8 +239,6 @@ class Upload extends Base {
         $ArtistIMDBIDs = $Params['artist_ids'];
         $ArtistSubName = $Params['artists_sub'];
 
-
-
         for ($i = 0, $il = count($Artists); $i < $il; $i++) {
             if (trim($Artists[$i]) != '') {
                 $ArtistForm[$Importance[$i]][] = array('Name' => $Artists[$i], 'IMDBID' => isset($ArtistIMDBIDs[$i]) ? $ArtistIMDBIDs[$i] : null, 'SubName' => $ArtistSubName[$i]);
@@ -267,6 +265,7 @@ class Upload extends Base {
 
         // limit free
         $properties['FreeEndTime'] = Time::timePlus(3600 * 48);
+        $properties['FreeTorrent'] = $properties['FreeLeech'];
 
         $properties['Slot'] = TorrentSlot::CalSlot($properties);
         $this->properties = $properties;
@@ -563,6 +562,7 @@ class Upload extends Base {
             $this->db->prepared_query("SELECT * FROM torrents_group WHERE ID = ?", $GroupID);
             $ExistedGroup = $this->db->next_record(MYSQLI_ASSOC, false);
             $this->properties['Group'] = $ExistedGroup;
+            $this->properties['Artists'] = Artists::get_artist($GroupID);
             // Use this section to control freeleeches
             $Checked = 0;
             $UserID = $this->user['ID'];

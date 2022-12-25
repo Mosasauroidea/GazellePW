@@ -11,10 +11,6 @@ class Lang {
 
     static $Locales = [];
 
-    public static function is_default() {
-        return Lang::getUserLang(G::$LoggedUser['ID']) == self::DEFAULT_LANG;
-    }
-
     public static function get($Key, $Options = []) {
         $Options = array_merge([
             'DefaultValue' => null,

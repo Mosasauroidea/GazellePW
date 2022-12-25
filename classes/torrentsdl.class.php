@@ -204,7 +204,7 @@ class TorrentsDL {
         if ($Resolution != '') {
             $TorrentInfo[] = $Resolution;
         }
-        if ($Processing != '') {
+        if ($Processing != '' && $Processing != '---' && $Processing != 'Encode') {
             $TorrentInfo[] = $Processing;
         }
         if (!empty($TorrentInfo)) {

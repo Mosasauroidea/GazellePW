@@ -29,10 +29,7 @@ class Artists {
     }
 
     public static function get_artist_name($Artist) {
-        if (Lang::is_default() && !empty($Artist['SubName'])) {
-            return $Artist['SubName'];
-        }
-        return $Artist['Name'];
+        return Lang::choose_content($Artist['Name'], $Artist['SubName']);
     }
     public static function get_first_directors($Artists) {
         if (empty($Artists[1])) {
@@ -365,11 +362,7 @@ class Artists {
             global $LoggedUser;
             $UserID = $LoggedUser['ID'];
         }
-        if (!empty($Artist['SubName']) && Lang::getUserLang($UserID) == Lang::CHS) {
-            $name = $Artist['SubName'];
-        } else {
-            $name = $Artist['Name'];
-        }
+        $name = Lang::choose_content($Artist['Name'], $Artist['SubName']);
         if ($MakeLink && !$Escape) {
             error('Invalid parameters to Artists::display_artist()');
         } elseif ($MakeLink) {

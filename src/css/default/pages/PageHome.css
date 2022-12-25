@@ -20,6 +20,11 @@
   color: #181717;
 }
 
+.Social .crowdin.icon {
+  background: #71da74;
+  border-radius: 5px;
+}
+
 @media (prefers-color-scheme: dark) {
   .Social .github.icon {
     color: #cdd9e5;

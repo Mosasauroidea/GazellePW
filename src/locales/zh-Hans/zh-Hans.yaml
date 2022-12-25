@@ -1426,7 +1426,7 @@ server.forums.bonus_reward: |-
 server.forums.by: |-
   发帖人是
 server.forums.by_user_just_now: |-
-  &nbsp;刚刚发布
+  刚刚
 server.forums.cant_like_yourself: |-
   无法赞自己。
 server.forums.catch_up: |-

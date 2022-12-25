@@ -41,8 +41,8 @@ $Name = $TorrentDetails['Name'];
 
 $RTTitle = empty($TorrentDetails['RTTitle']) ? Torrents::sanitizeName(html_entity_decode($Name)) : $TorrentDetails['RTTitle'];
 
-$GroupName = (Lang::is_default() && !empty($TorrentDetails['SubName'])) ? $TorrentDetails['SubName'] : $TorrentDetails['Name'];
-$SubName = Lang::is_default() ? $TorrentDetails['Name'] : $TorrentDetails['SubName'];
+$GroupName = Lang::choose_content($TorrentDetails['Name'], $TorrentDetails['SubName']);
+$SubName = Lang::choose_content($TorrentDetails['SubName'], $TorrentDetails['Name']);
 $GroupYear = $TorrentDetails['Year'];
 $ReleaseType = $TorrentDetails['ReleaseType'];
 $GroupCategoryID = $TorrentDetails['CategoryID'];

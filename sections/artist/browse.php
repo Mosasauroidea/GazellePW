@@ -332,9 +332,9 @@ View::show_header($ArtistHeaderName, 'browse,bbcode,comments,voting,recommend,su
         </div>
         <div class="MovieInfo-titleContainer">
             <div class="MovieInfo-title">
-                <?= (Lang::is_default() && !empty($SubName)) ? $SubName : $Name ?>
+                <?= Lang::choose_content($Name, $SubName) ?>
             </div>
-            <div class="MovieInfo-subTitle"><?= (Lang::is_default() && !empty($Name)) ? $Name : $SubName ?></div>
+            <div class="MovieInfo-subTitle"><?= Lang::choose_content($SubName, $Name) ?></div>
         </div>
         <div class="MovieInfo-tagContainer">
             <div class="MovieInfo-facts">

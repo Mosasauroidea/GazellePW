@@ -26,12 +26,10 @@ class Notification extends Base {
 
     private function buildTitle($Properties) {
         $Title = Torrents::display_simple_group_name($Properties['Group'], null, false);
-        if ($Properties['ReleaseType'] > 0) {
-            $Title .= ' [' . t('server.torrents.release_types')[$Properties['ReleaseType']] . ']';
-        }
+        $Title .= ' [' . t('server.torrents.release_types', ['Lang' => Lang::EN])[$Properties['Group']['ReleaseType']] . ']';
         $Details = '';
         $Details .= trim($Properties['Codec']) . ' / ' . trim($Properties['Source']) . ' / ' . trim($Properties['Resolution']) . ' / ' . trim($Properties['Container']);
-        if (!empty(trim($Properties['Processing'])) && trim($Properties['Processing']) != '---') {
+        if (!empty(trim($Properties['Processing'])) && trim($Properties['Processing']) != '---' && trim($Properties['Processing']) != ' Encode') {
             $Details .= ' / ' . trim($Properties['Processing']);
         }
         if ($Properties['Scene'] == '1') {
@@ -45,15 +43,15 @@ class Notification extends Base {
             }
         }
 
-        if ($Properties['FreeLeech'] == Torrents::FREE) {
+        if ($Properties['FreeTorrent'] == Torrents::FREE) {
             $Details .= ' / Freeleech!';
-        } else if ($Properties['FreeLeech'] == Torrents::Neutral) {
+        } else if ($Properties['FreeTorrent'] == Torrents::Neutral) {
             $Details .= ' / Neutral Leech!';
-        } else if ($Properties['FreeLeech'] == Torrents::OneFourthOff) {
+        } else if ($Properties['FreeTorrent'] == Torrents::OneFourthOff) {
             $Details .= ' / 25% off!';
-        } else if ($Properties['FreeLeech'] == Torrents::TwoFourthOff) {
+        } else if ($Properties['FreeTorrent'] == Torrents::TwoFourthOff) {
             $Details .= ' / 50% off!';
-        } else if ($Properties['FreeLeech'] == Torrents::ThreeFourthOff) {
+        } else if ($Properties['FreeTorrent'] == Torrents::ThreeFourthOff) {
             $Details .= ' / 75% off!';
         }
 
@@ -73,7 +71,7 @@ class Notification extends Base {
         $Body = $this->buildBody($Properties['Group']);
 
         // For RSS
-        $Tags = explode(',', $Properties['TagList']);
+        $Tags = explode(',', $Group['TagList']);
         $TagList = implode(',', Tags::main_name($Tags));
         $Item = $this->feed->item($Title, Text::strip_bbcode($Body), 'torrents.php?action=download&amp;authkey=[[AUTHKEY]]&amp;torrent_pass=[[PASSKEY]]&amp;id=' . $TorrentID, $this->user['Username'], 'torrents.php?id=' . $GroupID, trim($TagList));
 
@@ -96,7 +94,6 @@ class Notification extends Base {
         }
 
         // tags
-        $Tags = explode(',', $Properties['TagList']);
         $TagSQL = array();
         $NotTagSQL = array();
         foreach ($Tags as $Tag) {
@@ -109,7 +106,7 @@ class Notification extends Base {
         $SQL .= ") AND !(" . implode(' OR ', $NotTagSQL) . ')';
 
         // release type
-        $SQL .= " AND (ReleaseTypes LIKE '%|" . db_string($Properties['ReleaseType']) . "|%' OR ReleaseTypes = '') ";
+        $SQL .= " AND (ReleaseTypes LIKE '%|" . db_string($Group['ReleaseType']) . "|%' OR ReleaseTypes = '') ";
 
         // codec
         $NotifyCodec = Torrents::parse_codec($Properties['Codec']);
@@ -137,8 +134,8 @@ class Notification extends Base {
         // freeleech
         if (Torrents::global_freeleech()) {
             $SQL .= " AND (FreeTorrents LIKE '%|" . db_string('1') . "|%' OR FreeTorrents = '') ";
-        } else if ($Properties['FreeLeech']) {
-            $SQL .= " AND (FreeTorrents LIKE '%|" . db_string(trim($Properties['FreeLeech'])) . "|%' OR FreeTorrents = '') ";
+        } else if ($Properties['FreeTorrents']) {
+            $SQL .= " AND (FreeTorrents LIKE '%|" . db_string(trim($Properties['FreeTorrents'])) . "|%' OR FreeTorrents = '') ";
         } else {
             $SQL .= " AND (FreeTorrents = '') ";
         }
@@ -238,21 +235,21 @@ class Notification extends Base {
         // RSS for all
         $this->feed->populate('torrents_all', $Item);
         $this->feed->populate('torrents_movie', $Item);
-        if ($Properties['FreeLeech'] == Torrents::FREE) {
+        if ($Properties['FreeTorrent'] == Torrents::FREE) {
             $this->feed->populate('torrents_free', $Item);
         }
     }
 
     function edit_notify($Properties) {
-        if ($Properties['FreeLeech'] != Torrents::FREE) {
+        if ($Properties['FreeTorrent'] != Torrents::FREE) {
             return;
         }
         $Title = $this->buildTitle($Properties);
         $Body = $this->buildBody($Properties['Group']);
 
         $GroupID = $Properties['GroupID'];
-        $TorrentID = $Properties['TorrentID'];
-        $Tags = explode(',', $Properties['TagList']);
+        $TorrentID = $Properties['ID'];
+        $Tags = explode(',', $Properties['Group']['TagList']);
         $TagList = implode(',', Tags::main_name($Tags));
 
         $Item = $this->feed->item($Title, Text::strip_bbcode($Body), 'torrents.php?action=download&amp;authkey=[[AUTHKEY]]&amp;torrent_pass=[[PASSKEY]]&amp;id=' . $TorrentID, $this->user['Username'], 'torrents.php?id=' . $GroupID, trim($TagList));

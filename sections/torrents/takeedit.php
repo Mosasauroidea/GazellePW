@@ -334,9 +334,6 @@ $Group = Torrents::get_group($GroupID);
 
 if (check_perms('torrents_freeleech') && $Properties['FreeLeech'] != $CurFreeLeech) {
     Torrents::freeleech_torrents($TorrentID, $Properties['FreeLeech'], $Properties['FreeLeechType']);
-    $Notification = new Notification;
-    $Properties['Group'] = $Group;
-    $Notification->edit_notify($Properties);
 }
 
 

@@ -73,10 +73,7 @@ class ARTISTS_SIMILAR extends ARTIST {
             if ($Score < 0) {
                 continue;
             }
-            $UserID = G::$LoggedUser['ID'];
-            if (Lang::getUserLang($UserID) != Lang::EN) {
-                $Name = $SubName;
-            }
+            $Name = Lang::choose_content($Name, $SubName);
             $this->Artists[$ArtistID] = new ARTIST($ArtistID, $Name);
             $this->Similar[$ArtistID] = array('ID' => $ArtistID, 'Score' => $Score);
             $this->TotalScore += $Score;

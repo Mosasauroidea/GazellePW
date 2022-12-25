@@ -610,8 +610,8 @@ class TorrentTableView {
     }
     protected function render_group_name($GroupInfo) {
         $GroupID = $GroupInfo['ID'];
-        $GroupName = (Lang::is_default() && !empty($GroupInfo['SubName'])) ? $GroupInfo['SubName'] : $GroupInfo['Name'];
-        $SubName = Lang::is_default() ? $GroupInfo['Name'] : $GroupInfo['SubName'];
+        $GroupName = Lang::choose_content($GroupInfo['Name'], $GroupInfo['SubName']);
+        $SubName = Lang::choose_content($GroupInfo['SubName'], $GroupInfo['Name']);
         $GroupYear = $GroupInfo['Year'];
     ?>
         <span class="TableTorrent-movieInfoTitle">

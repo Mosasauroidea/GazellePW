@@ -61,8 +61,8 @@ $CanEdit = ($UserCanEdit || $ProjectCanEdit || check_perms('site_moderate_reques
 // Comments (must be loaded before View::show_header so that subscriptions and quote notifications are handled properly)
 list($NumComments, $Page, $Thread, $LastRead) = Comments::load('requests', $RequestID);
 
-$GroupName = (Lang::is_default() && !empty($Request['SubName'])) ? $Request['SubName'] : $Request['Name'];
-$SubName = Lang::is_default() ? $Request['Name'] : $Request['SubName'];
+$GroupName = Lang::choose_content($Request['Name'], $Request['SubName']);
+$SubName = Lang::choose_content($Request['SubName'], $Request['Name']);
 $GroupYear = $Request['Year'];
 View::show_header(t('server.requests.view_request') . ": $FullName", 'comments,bbcode,subscriptions', 'PageRequestShow');
 
