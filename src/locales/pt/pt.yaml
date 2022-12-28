@@ -3151,7 +3151,7 @@ server.requests.upload_request: |-
 server.requests.uploaded: |-
   Upload concluído
 server.requests.view_request: |-
-  Solicitação
+  Pedido
 server.requests.vote_requests: |-
   Pedidos que votei em
 server.requests.will_be: |-
@@ -8283,5 +8283,7 @@ client.stats.user_platform_distribution: |-
   Plataforma de Usuário Distribuição
 client.stats.peers: |-
   Peers
+server.wiki.created: |-
+  Criado
 server.user.snatches: |-
-  Encontrado
+  Snatches
