@@ -87,8 +87,11 @@ $DB->query("
     while (list($SentDate, $SenderID, $Body, $MessageID) = $DB->next_record()) { ?>
         <div class="Box">
             <div class="Box-header" style="overflow: hidden;">
-                <div class="Box-headerTitle">
-                    <strong><?= $Users[(int)$SenderID]['UserStr'] ?></strong> - <?= time_diff($SentDate) ?>
+                <div class="Box-headerLeft">
+                    <div class="Box-headerTitle">
+                        <?= $Users[(int)$SenderID]['UserStr'] ?>
+                    </div>
+                    - <?= time_diff($SentDate) ?>
                 </div>
                 <div class="Box-headerActions">
                     <? if ($SenderID > 0) { ?>

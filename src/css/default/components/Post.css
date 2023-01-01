@@ -42,7 +42,8 @@ Post-headerMultipleRows
 .Post-header {
   display: flex;
   gap: var(--global-space-default);
-  padding: var(--global-space-default);
+  padding-top: var(--global-space-default);
+  padding-bottom: var(--global-space-default);
   flex-wrap: wrap;
   border-bottom: var(--Box-border);
 }
@@ -72,7 +73,8 @@ Post-headerMultipleRows
 }
 
 .Post-body {
-  padding: var(--global-space-default);
+  padding-top: var(--global-space-default);
+  padding-bottom: var(--global-space-default);
 }
 
 .Post-bodyActions {

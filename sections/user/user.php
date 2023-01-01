@@ -1172,11 +1172,6 @@ WHERE xs.uid =" . $UserID . " and xs.tstamp >= unix_timestamp(date_format(now(),
             ?>
 
             <div class="Group">
-                <div class="Group-header">
-                    <div class="Group-headerTitle">
-                        <?= t('server.user.simple_info') ?>
-                    </div>
-                </div>
                 <div class="Group-body">
                     <div class="Post">
                         <div class="Post-header">

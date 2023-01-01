@@ -36,6 +36,10 @@ Box              // box with header
   font-weight: bold;
 }
 
+.Box .Box-headerLeft {
+  display: inline;
+}
+
 .Box-header {
   color: var(--Box-header-color);
   border-bottom: var(--Box-border);

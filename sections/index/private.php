@@ -528,11 +528,6 @@ View::show_header(t('server.index.index'), 'comments', 'PageHome');
         <? if (count($News) > 0) { ?>
             <!-- Anouncements -->
             <div class="Group">
-                <div class="Group-header">
-                    <div class="Group-headerTitle">
-                        <?= t('server.index.announcements') ?>
-                    </div>
-                </div>
                 <div class="Group-body">
                     <?
                     $Count = 0;

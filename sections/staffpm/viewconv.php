@@ -90,13 +90,14 @@ if ($ConvID = (int)$_GET['id']) {
                 }
             ?>
                 <div class="Box" id="post<?= $MessageID ?>">
+
                     <div class="Box-header">
-                        <div class="Box-headerTitle">
-                            <?              /* TODO: the inline style in the <a> tag is an ugly hack. get rid of it. */ ?>
-                            <a class="postid" href="staffpm.php?action=viewconv&amp;id=<?= $ConvID ?>#post<?= $MessageID ?>" style="font-weight: normal;">#<?= $MessageID ?></a>
-                            <strong>
+                        <div class="Box-headerLeft">
+                            <div class="Box-headerTitle">
+                                <?              /* TODO: the inline style in the <a> tag is an ugly hack. get rid of it. */ ?>
+                                <a class="postid" href="staffpm.php?action=viewconv&amp;id=<?= $ConvID ?>#post<?= $MessageID ?>" style="font-weight: normal;">#<?= $MessageID ?></a>
                                 <?= $UserString ?>
-                            </strong>
+                            </div>
                             - <?= time_diff($SentDate, 2, true) ?>
                         </div>
                         <div class="Box-headerActions">
