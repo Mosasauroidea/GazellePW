@@ -6536,7 +6536,7 @@ server.user.next_userclass_title3: |-
 server.user.next_userclass_title4: |-
   加入时间
 server.user.next_userclass_title5: |-
-  已发布数
+  已发布数（活种）
 server.user.next_userclass_title6: |-
   下载量
 server.user.no: |-
@@ -8301,3 +8301,5 @@ server.wiki.edited: |-
   编辑时间
 server.user.snatches: |-
   已完成
+server_bonus_purchase_confirmation: |-
+  购买确认

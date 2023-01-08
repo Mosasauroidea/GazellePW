@@ -6660,7 +6660,7 @@ server.user.next_userclass_title3: |-
 server.user.next_userclass_title4: |-
   Time
 server.user.next_userclass_title5: |-
-  Torrents
+  Torrents(active)
 server.user.next_userclass_title6: |-
   Unique groups
 server.user.no: |-
@@ -8441,3 +8441,5 @@ server.wiki.edited: |-
   Edited
 server.user.snatches: |-
   Snatches
+server_bonus_purchase_confirmation: |-
+  Purchase Confirmation

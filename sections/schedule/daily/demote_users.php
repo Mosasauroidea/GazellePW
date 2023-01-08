@@ -6,6 +6,8 @@ sleep(10);
 
 $UserDemotes = [];
 
+$DeadPeriod = TORRENT_DEAD_PERIOD;
+
 foreach ($UserDemoteCriteria as $L) {
     G::$DB->query("SELECT ID
 				FROM users_main AS um
@@ -14,7 +16,7 @@ foreach ($UserDemoteCriteria as $L) {
 					OR (
 						SELECT COUNT(ID)
 						FROM torrents
-						WHERE UserID = um.ID
+						WHERE UserID = um.ID and date_sub(NOW(), INTERVAL $DeadPeriod DAY) < last_action
 						) < '$L[MinUploads]')");
     $UserIDs = G::$DB->collect('ID');
     foreach ($UserIDs as $UserID) {

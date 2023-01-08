@@ -70,7 +70,7 @@ $Items = $Bonus->getList();
                                             $NextFunction = preg_match('/^other-\d$/',          $Label) ? 'ConfirmOther' : 'null';
                                             $OnClick      = preg_match('/^title-bbcode-[yn]$/', $Label) ? "NoOp" : "ConfirmPurchase";
                                         ?>
-                                            <button class="Button" id="bonusconfirm" href="" onclick="<?= $OnClick ?>(event, '<?= t('server.bonus.' . $Item['Label']) ?>', <?= $NextFunction ?>, this); location.href='bonus.php?action=purchase&label=<?= $Label ?>&auth=<?= $LoggedUser['AuthKey'] ?>'"><?= t('server.bonus.purchase') ?></button>
+                                            <button class="Button" id="bonusconfirm" href="" onclick="if(<?= $OnClick ?>(event, '<?= t('server.bonus.' . $Item['Label']) ?>', <?= $NextFunction ?>, this)) { location.href='bonus.php?action=purchase&label=<?= $Label ?>&auth=<?= $LoggedUser['AuthKey'] ?>'}"><?= t('server.bonus.purchase') ?></button>
                                         <?
                                         } else {
                                         ?>

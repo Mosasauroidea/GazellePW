@@ -258,9 +258,8 @@ class Torrent extends \Gazelle\Base {
         SELECT
             t.ID,
             g.ID,
-            ((t.Size * tls.Snatched) + (t.Size * 0.5 * tls.Leechers)) AS Data
+            ((t.Size * t.Snatched) + (t.Size * 0.5 * t.Leechers)) AS Data
         FROM torrents AS t
-        INNER JOIN torrents_leech_stats tls ON (tls.TorrentID = t.ID)
         INNER JOIN torrents_group AS g ON (g.ID = t.GroupID)
         %s
         GROUP BY %s

@@ -1991,7 +1991,7 @@ WHERE ud.TorrentID=? AND ui.NotifyOnDeleteDownloaded='1' AND ud.UserID NOT IN ({
     }
 
     public static function is_torrent_dead($Torrent) {
-        return $Torrent['Seeders'] == 0 && !empty($Torrent['last_action'])  && $Torrent['last_action'] != '0000-00-00 00:00:00' && $Torrent['last_action'] < time_minus(3600 * 24 * 28);
+        return $Torrent['Seeders'] == 0 && !empty($Torrent['last_action'])  && $Torrent['last_action'] != '0000-00-00 00:00:00' && $Torrent['last_action'] < time_minus(3600 * 24 * TORRENT_DEAD_PERIOD);
     }
     // New Torrent Name: 安全领域 / Dirty Rotten Scoundrels Year: 1988 Uploader: joey Tags: comedy,documentary Codec: x264 Source: Blu-ray Container: MKV Resolution: 720p Size: 1.1 GB Freeleech: Freeleech! Link: https://CONFIG['SITE_NAME']/torrents.php?id=375
     public static function build_irc_msg($UploaderName, $Torrent) {

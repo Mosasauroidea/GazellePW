@@ -50,8 +50,8 @@ class Economic extends \Gazelle\Base {
                 $this->stats['totalLiveSnatches'],
                 $this->stats['totalTorrents'],
             ) = $this->db->row('
-                SELECT sum(tls.Snatched), count(*)
-                FROM torrents_leech_stats tls
+                SELECT sum(t.Snatched), count(*)
+                FROM torrents as t
             ');
 
             $this->stats['totalOverallSnatches'] = $this->db->scalar('

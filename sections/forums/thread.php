@@ -280,7 +280,7 @@ View::show_header($ThreadInfo['Title'], 'comments,subscriptions,bbcode,thumb', $
             }
         }
 
-        $PollClass = $ThreadInfo['IsLocked'] ? 'hidden' : '';
+        $PollClass = $ThreadInfo['IsLocked'] ? 'u-hidden' : '';
         $PollStatus = '';
         if ($Closed) {
             $PollStatus = ' [' . t('server.forums.closed') . ']';

@@ -115,22 +115,18 @@ export default class MediainfoConverter {
           ((width === '1920' || (width < 1920 && height === '1080')) &&
             (scanType === 'Interlaced' || scanType === 'MBAFF'))
         ? '1080i'
-        : /1080p/i.test(completeName) ||
-          width === '1920' ||
-          (width < 1920 && height === '1080')
+        : /1080p/i.test(completeName) || width === '1920' || (width < 1920 && height === '1080')
         ? '1080p'
-        : /720p/i.test(completeName) ||
-          width === '1280' ||
-          (width < 1280 && height === '720')
+        : /720p/i.test(completeName) || width === '1280' || (width < 1280 && height === '720')
         ? '720p'
         : width === '1024'
         ? '576p'
+        : standard === 'NTSC'
+        ? 'NTSC'
         : width === '854' || height === '480'
         ? '480p'
         : standard === 'PAL'
         ? 'PAL'
-        : standard === 'NTSC'
-        ? 'NTSC'
         : 'Other'
 
     if (resolution === 'Other' && width && height) {

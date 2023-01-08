@@ -9,7 +9,7 @@ $DB->query("
 			t.ID
 		FROM torrents as t
 		WHERE
-			(t.last_action < '" . time_minus(3600 * 24 * 28) . "' AND t.last_action != 0 AND t.dead_time < t.last_action)");
+			(t.last_action < '" . time_minus(3600 * 24 * TORRENT_DEAD_PERIOD) . "' AND t.last_action != 0 AND t.dead_time < t.last_action)");
 $Torrents = G::$DB->to_array(false, MYSQLI_NUM, false);
 echo 'Found ' . count($Torrents) . " inactive torrents to be marked dead.\n";
 

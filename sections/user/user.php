@@ -1016,9 +1016,10 @@ WHERE xs.uid =" . $UserID . " and xs.tstamp >= unix_timestamp(date_format(now(),
                                                                                                     echo time_diff($JoinDate, $Levels = 2, $Span = true, $Lowercase = false, $StartTime = false, $HideAgo = true) . ' / ' . time_diff($NextLevel[$Class]['MaxTime'], $Levels = 2, $Span = true, $Lowercase = false, $StartTime = false, $HideAgo = true)
                                                                                                     ?></li>
                         <?
+                        $DeadPeriod = TORRENT_DEAD_PERIOD;
                         $DB->query("SELECT COUNT(ID)
 				FROM torrents
-				WHERE UserID = " . $UserID);
+				WHERE UserID = '$UserID' and date_sub(NOW(), INTERVAL $DeadPeriod DAY) < last_action");
                         list($MinUploads) = $DB->next_record();
                         // test
                         $p = $MinUploads / $NextLevel[$Class]['MinUploads'] * 100;
@@ -1029,6 +1030,7 @@ WHERE xs.uid =" . $UserID . " and xs.tstamp >= unix_timestamp(date_format(now(),
                 </div>
             <?
             }
+
 
 
 

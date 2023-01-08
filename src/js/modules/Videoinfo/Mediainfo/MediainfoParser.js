@@ -20,9 +20,10 @@ export default class MediainfoParser {
     const sections = splitIntoSections(text)
     debug('SECTIONS', sections)
     for (const section of sections) {
-      const [rawSectionName, sectionBody] = section
-        .match(/([a-zA-Z]+).*\n([\s\S]+)/)
-        .slice(1)
+      if (!section.match(/([a-zA-Z]+).*\n([\s\S]+)/)) {
+        continue
+      }
+      const [rawSectionName, sectionBody] = section.match(/([a-zA-Z]+).*\n([\s\S]+)/).slice(1)
       const sectionName = rawSectionName.toLowerCase()
       const fields = this.extractFields({ sectionName, sectionBody })
       if (isArray(result[sectionName])) {

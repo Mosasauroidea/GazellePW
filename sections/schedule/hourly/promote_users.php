@@ -2,7 +2,7 @@
 
 //------------- Promote users -------------------------------------------//
 sleep(5);
-
+$DeadPeriod = TORRENT_DEAD_PERIOD;
 foreach ($UserPromoteCriteria as $L) { // $L = Level
     $Query = "
 				SELECT ID
@@ -37,7 +37,7 @@ foreach ($UserPromoteCriteria as $L) { // $L = Level
 					AND (
 						SELECT COUNT(ID)
 						FROM torrents
-						WHERE UserID = um.ID
+						WHERE UserID = um.ID and date_sub(NOW(), INTERVAL $DeadPeriod DAY) < last_action
 						) >= '$L[MinUploads]'
 					AND Enabled = '1'";
     if (!empty($L['Extra'])) {

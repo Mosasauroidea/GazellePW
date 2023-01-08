@@ -39,6 +39,8 @@ if (empty($_GET['api_key'])) {
     json_error('invalid parameters');
 }
 
+$token = $_GET['api_key'];
+
 $app = $Cache->get_value("api_apps_{$token}");
 if (!is_array($app)) {
     $DB->prepared_query("
@@ -54,7 +56,6 @@ if (!is_array($app)) {
 }
 $app = $app[0];
 
-$token = $_GET['api_key'];
 
 if ($app['Token'] !== $token) {
     json_error('invalid token');
