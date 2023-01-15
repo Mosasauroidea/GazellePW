@@ -30,7 +30,7 @@ class MovieInfo extends AbstractAPI {
                     }
                 }
             } else {
-                $response["message"] = "Invalid IMDB ID";
+                $response["message"] = "Invalid IMDb ID";
                 $response["status"] = "error";
             }
         } else {

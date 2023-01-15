@@ -312,7 +312,7 @@ class TORRENT_FORM {
                     <td class="Form-label"><?= t('server.upload.movie_imdb') ?><span class="u-colorWarning">*</span>:</td>
                     <td class="Form-items Form-errorContainer">
                         <div class="Form-inputs">
-                            <input class="Input" type="text" id="imdb" name="imdb" size="45" placeholder="IMDB" <?= $this->Disabled ?> value=<?= $IMDBID ?>>
+                            <input class="Input" type="text" id="imdb" name="imdb" size="45" placeholder="IMDb" <?= $this->Disabled ?> value=<?= $IMDBID ?>>
                             <button class='Button autofill' variant="primary" id="imdb_button" onclick="globalapp.uploadMovieAutofill()" <?= $this->Disabled ? "disabled" : '' ?> type='button'>
                                 <span class="text"><?= t('server.upload.movie_fill') ?></span>
                                 <span class="Loader"></span>
@@ -405,7 +405,7 @@ class TORRENT_FORM {
                     ?>
                     <tr class="Form-row" id="artist_tr">
                         <td class="Form-label"><?= t('server.common.artist') ?><span class="u-colorWarning"></span>:</td>
-                        <td class="Form-items is-artist u-formUploadArtistList" id="artistfields">
+                        <td class="Form-items is-artist u-formUploadArtistList  Form-errorContainer" id="artistfields">
                             <p id="vawarning" class="hidden"><?= t('server.upload.artist_note') ?></p>
                             <?
                             if (!empty($Torrent['Artists'])) {
@@ -513,15 +513,10 @@ class TORRENT_FORM {
                             </td>
                         </tr>
                         <tr class="Form-row">
-                            <td class="Form-label"><?= t('server.upload.english_movie_synopsis') ?><span class="u-colorWarning">*</span>:</td>
+                            <td class="Form-label"><?= t('server.upload.movie_synopsis') ?><span class="u-colorWarning">*</span>:</td>
                             <td class="Form-items Form-errorContainer">
-                                <? new TEXTAREA_PREVIEW('maindesc', 'maindesc', display_str($Torrent['MainGroupDescription']), 60, 8, false, false, false, array($this->Disabled)); ?>
-                            </td>
-                        </tr>
-                        <tr class="Form-row">
-                            <td class="Form-label"><?= t('server.upload.chinese_movie_synopsis') ?><span class="u-colorWarning">*</span>:</td>
-                            <td class="Form-items Form-errorContainer">
-                                <? new TEXTAREA_PREVIEW('desc', 'desc', display_str($Torrent['GroupDescription']), 60, 8, false, false, false, array($this->Disabled)); ?>
+                                <? new TEXTAREA_PREVIEW('maindesc', 'maindesc', display_str($Torrent['MainGroupDescription']), 60, 8, false, false, false, array('placeholder= "' . t('server.upload.english_movie_synopsis') . '"', $this->Disabled)); ?>
+                                <? new TEXTAREA_PREVIEW('desc', 'desc', display_str($Torrent['GroupDescription']), 60, 8, false, false, false, array('placeholder= "' . t('server.upload.chinese_movie_synopsis') . '"', $this->Disabled)); ?>
                                 <h7><?= t('server.upload.chinese_movie_synopsis_note') ?></h7>
                             </td>
                         </tr>

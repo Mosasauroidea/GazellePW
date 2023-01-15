@@ -127,7 +127,7 @@ client.upload.mediainfo_required: |-
 client.upload.mediainfo_table_space: |-
   BDInfo表格中的空格导致无法解析，请使用 Tab 空格（\t）替代。
 client.upload.movie_desc_required: |-
-  请填写电影简介！
+  请填写影片简介！
 client.upload.movie_title_required: |-
   请填写电影名！
 client.upload.poster_required: |-
@@ -8303,3 +8303,9 @@ server.user.snatches: |-
   已完成
 server_bonus_purchase_confirmation: |-
   购买确认
+client.upload.at_least_one_director: |-
+  请填写至少一位导演。
+client.upload.mediainfo_valid_format: |-
+  MediaInfo无效，请遵循 <a href="wiki.php?action=article&id=3">Wiki</a> 重新识别生成。
+server.upload.movie_synopsis: |-
+  影片简介

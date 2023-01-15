@@ -12,9 +12,15 @@ export default class TableBdinfoParser {
       text = `DISC INFO:\n\n${text}`
     }
 
-    const sections = splitIntoSections(text)
+    let sections = splitIntoSections(text)
+    sections = sections.filter((v) => {
+      if (v.startsWith('(*)')) {
+        return false
+      }
+      return true
+    })
     const chunks = chunk(sections, 2)
-    // console.log({ chunks })
+    console.log({ chunks })
     debug('CHUNKS', chunks)
 
     const result = {
@@ -26,16 +32,7 @@ export default class TableBdinfoParser {
     }
     for (const [rawSectionName, sectionBody] of chunks) {
       const sectionName = rawSectionName.replace(':', '')
-      if (
-        [
-          'VIDEO',
-          'AUDIO',
-          'SUBTITLES',
-          'FILES',
-          'CHAPTERS',
-          'STREAM DIAGNOSTICS',
-        ].includes(sectionName)
-      ) {
+      if (['VIDEO', 'AUDIO', 'SUBTITLES', 'FILES', 'CHAPTERS', 'STREAM DIAGNOSTICS'].includes(sectionName)) {
         const items = this.splitTable(sectionBody)
         console.log('splitTable', { sectionName, items })
         result[sectionName] = items.map((v) => this.processItem(sectionName, v))
@@ -71,8 +68,7 @@ export default class TableBdinfoParser {
   processItem(sectionName, item) {
     switch (sectionName) {
       case 'VIDEO': {
-        const [resolution, frameRate, aspectRatio, note] =
-          item.Description.split(' / ')
+        const [resolution, frameRate, aspectRatio, note] = item.Description.split(' / ')
         return {
           codec: item.Codec.replace(/ Video/, ''),
           bitrate: item.Bitrate,
@@ -83,8 +79,7 @@ export default class TableBdinfoParser {
         }
       }
       case 'AUDIO': {
-        const [channels, sampleRate, bitrate, ...rest] =
-          item.Description.split(' / ')
+        const [channels, sampleRate, bitrate, ...rest] = item.Description.split(' / ')
         return {
           codec: item.Codec,
           language: item.Language,
@@ -108,12 +103,12 @@ export default class TableBdinfoParser {
     const result = []
     // eslint-disable-next-line no-unused-vars
     const [header, seperator, ...rest] = splitIntoLines(text)
-    const names = header.split(/ {5,}/)
+    const names = header.split(/ {3,}/)
     if (names.length === 1) {
       throw new VideinfoTableSpaceError('BDInfoParser: Table空格格式不支持')
     }
     for (const line of rest) {
-      const cells = line.split(/ {5,}/)
+      const cells = line.split(/ {3,}/)
       result.push(zipObject(names, cells))
     }
     return result

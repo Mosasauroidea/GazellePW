@@ -3073,7 +3073,7 @@ server.requests.purchasable_at_placeholder: |-
 server.requests.quick_vote: |-
   Voto Rápido
 server.requests.ratio: |-
-  Rádio
+  Ratio
 server.requests.reason: |-
   Motivo
 server.requests.release_list: |-
@@ -5951,7 +5951,7 @@ server.upload.need_download_new_torrent2: |-
 server.upload.no_imdb_link: |-
   Não existe nenhum link IMDb
 server.upload.no_imdb_note: |-
-  Certifique-se de que o link do IMDB não existe, caso contrário, você receberá um aviso.
+  Certifique-se de que o link do IMDb não existe, caso contrário, você receberá um aviso.
 server.upload.no_sub: |-
   Falta de legenda básica
 server.upload.no_subtitles: |-

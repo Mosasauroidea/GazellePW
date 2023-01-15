@@ -89,8 +89,8 @@ class Upload extends Base {
 
         if ($this->isNewGroup) {
             $this->validate->SetFields('name', '1', 'string', 'Title must be between 2 and 200 characters.');
-            $this->validate->SetFields('desc', '1', 'string', 'Title must be between 2 and 200 characters.', ['maxlength' => 65535]);
-            $this->validate->SetFields('maindesc', '1', 'string', 'Title must be between 2 and 200 characters.', ['maxlength' => 65535]);
+            $this->validate->SetFields('desc', '0', 'string', 'Title must be between 2 and 200 characters.', ['maxlength' => 65535]);
+            $this->validate->SetFields('maindesc', '0', 'string', 'Title must be between 2 and 200 characters.', ['maxlength' => 65535]);
             $this->validate->SetFields('image', '1', 'link', 'Image link must be between 2 and 200 characters.');
             $this->validate->SetFields('year', '1', 'number', 'year.');
             $this->validate->SetFields('releasetype', '1', 'inarray', 'release type', ['inarray' => $ReleaseTypes]);
@@ -127,6 +127,9 @@ class Upload extends Base {
             }
             if ($MainArtistCount < 1) {
                 throw new Exception\InvalidParamException('main artist number');
+            }
+            if (empty($Params['maindesc']) && empty($Params['desc'])) {
+                throw new Exception\InvalidParamException('description');
             }
             if (!empty($Params['no_imdb_link'])) {
             } else if (preg_match('/' . IMDB_REGEX . '/', $Params['imdb'])) {

@@ -27,8 +27,8 @@ globalapp.uploadMovieAutofill = function uploadMovieAutofill() {
           data.code === 1
             ? 'client.error.invalid_imdb_link_note'
             : data.code === 2
-              ? 'client.error.torrent_group_exists_note'
-              : 'client.error.imdb_unknown_error',
+            ? 'client.error.torrent_group_exists_note'
+            : 'client.error.imdb_unknown_error',
           data.code === 2 && { groupID: data.error.GroupID }
         )
         return
@@ -138,10 +138,12 @@ globalapp.uploadMovieAutofill = function uploadMovieAutofill() {
       }
       $('.FormValidation')[0].validator.validate()
       $('.FormUpload').addClass('u-formUploadAutoFilled')
-      $('.u-formUploadArtistList input:not([name="artists_sub[]"]), .u-formUploadArtistList select').prop(
-        'disabled',
-        true
-      )
+      if (artists.length > 0) {
+        $('.u-formUploadArtistList input:not([name="artists_sub[]"]), .u-formUploadArtistList select').prop(
+          'disabled',
+          true
+        )
+      }
       if (artists.length >= 5) {
         globalapp.uploadArtistsShowMore({ hide: true })
       }

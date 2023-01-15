@@ -378,8 +378,7 @@ $Pages = Format::get_pages($Page, $NumComments, CONFIG['TORRENT_COMMENTS_PER_PAG
                                             <?= t('server.requests.if_you_add_the_entered') ?>
                                             <strong><span id="new_bounty">0.00 GB</span></strong>
                                             <?= t('server.requests.of_bounty_your_new_stats') ?>:
-                                            <?= t('server.requests.uploaded') ?>: <span id="new_uploaded"><?= Format::get_size($LoggedUser['BytesUploaded']) ?></span>
-                                            <span>,</span>
+                                            <?= t('server.requests.uploaded') ?>: <span id="new_uploaded"><?= Format::get_size($LoggedUser['BytesUploaded']) ?></span>,
                                             <?= t('server.requests.ratio') ?>: <span id="new_ratio"><?= Format::get_ratio_html($LoggedUser['BytesUploaded'], $LoggedUser['BytesDownloaded']) ?></span>
                                         </div>
 

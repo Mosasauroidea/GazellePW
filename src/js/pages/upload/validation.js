@@ -78,6 +78,11 @@ export function registerValidation() {
 
   handleSubtitle()
   addValidator({
+    selector: `[name="artist_ids[]"], [name="artists[]"],[name="importance[]"]`,
+    validate: validateArtists,
+    messageKey: 'client.upload.at_least_one_director',
+  })
+  addValidator({
     selector: `[name="subtitles[]"], [name=subtitle_type]`,
     validate: validateSubtitle,
     messageKey: 'client.upload.subtitles_required',
@@ -119,8 +124,8 @@ export function registerValidation() {
     messageKey: 'client.upload.poster_required',
   })
   addValidator({
-    selector: `[name="desc"]`,
-    validate: validateRequired,
+    selector: `[name="desc"], [name="maindesc"]`,
+    validate: validateDesc,
     messageKey: 'client.upload.movie_desc_required',
   })
 
@@ -138,6 +143,12 @@ export function registerValidation() {
     selector: `[name="mediainfo[]"]`,
     validate: wrap(Videoinfo.validateTableSpace),
     messageKey: 'client.upload.mediainfo_table_space',
+  })
+
+  addValidator({
+    selector: `[name="mediainfo[]"]`,
+    validate: wrap(Videoinfo.validateMediaInfo),
+    messageKey: 'client.upload.mediainfo_valid_format',
   })
 
   addValidator({
@@ -193,6 +204,15 @@ function validateSelectInputRequired({ select, inputs }) {
   } else {
     return true
   }
+}
+
+function validateDesc() {
+  const desc = document.querySelector('[name=desc]').value
+  const mainDesc = document.querySelector('[name=maindesc]').value
+  if (desc || mainDesc) {
+    return true
+  }
+  return false
 }
 
 function validateProcessing({ select, inputs }) {
@@ -414,6 +434,23 @@ function validateSubtitle() {
     }
   }
   return true
+}
+
+function validateArtists() {
+  const artist_ids = document.querySelectorAll('[name="artist_ids[]"]')
+  const artists = document.querySelectorAll('[name="artists[]"]')
+  const importances = document.querySelectorAll('[name="importance[]"]')
+  let hasDirector = false
+  for (var i = 0; i < artist_ids.length; i++) {
+    if (importances[i].value == 1 && (artist_ids[i].value || artists[i].value)) {
+      hasDirector = true
+    }
+  }
+  if (hasDirector) {
+    return true
+  }
+
+  return false
 }
 
 function validateSubtitleWithMediainfo() {

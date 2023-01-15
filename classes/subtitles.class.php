@@ -3,7 +3,7 @@ class Subtitles {
     public static function get($TorrentID) {
         $Data = G::$Cache->get_value("torrent_sub_title_$TorrentID");
         if (!$Data) {
-            G::$DB->query("
+            G::$DB->prepared_query("
         select 
             subtitles.id, 
             subtitles.languages, 
@@ -16,7 +16,7 @@ class Subtitles {
             subtitles.upload_time, 
             subtitles.name
         from subtitles 
-            where torrent_id=$TorrentID");
+            where torrent_id= ? ", $TorrentID);
             $AllSubtitles = G::$DB->to_array();
             G::$Cache->cache_value("torrent_sub_title_$TorrentID", [$AllSubtitles]);
         } else {

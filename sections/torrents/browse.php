@@ -502,5 +502,6 @@ if ($GroupResults || isset($GroupedCategories[$CategoryID - 1])) {
 }
 ?>
 <? View::pages($Pages) ?>
+</div>
 <?
 View::show_footer();

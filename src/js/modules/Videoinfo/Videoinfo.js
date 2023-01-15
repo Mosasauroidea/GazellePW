@@ -11,6 +11,18 @@ export default class Videoinfo {
     return Boolean(text.match(/(Complete name\s*:|Disc (Title|Label)\s*:)/i))
   }
 
+  static validateMediaInfo(text) {
+    try {
+      const info = Videoinfo.convertBBCode(text)
+      if (info.codec && info.container && info.resolution) {
+        return true
+      }
+    } catch (err) {
+      return false
+    }
+    return false
+  }
+
   static validateTableSpace(text) {
     try {
       Videoinfo.convertBBCode(text)
@@ -25,11 +37,7 @@ export default class Videoinfo {
 
   static getType(text) {
     text = preProcess(text)
-    return text.match(/Disc (Title|Label)\s*:/i)
-      ? 'bdinfo'
-      : text.match(/Complete name\s*:/i)
-      ? 'mediainfo'
-      : null
+    return text.match(/Disc (Title|Label)\s*:/i) ? 'bdinfo' : text.match(/Complete name\s*:/i) ? 'mediainfo' : null
   }
 
   static convertBBCode(text) {
@@ -54,9 +62,7 @@ export default class Videoinfo {
         return new BdinfoConverter().convert(info)
       }
       default:
-        console.error(
-          'mediainfo unknown type, no Disc Title/Label or Complete name'
-        )
+        console.error('mediainfo unknown type, no Disc Title/Label or Complete name')
         return null
     }
   }

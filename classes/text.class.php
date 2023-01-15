@@ -521,9 +521,9 @@ class Text {
                     break; // n serves only to disrupt bbcode (backwards compatibility - use [pre])
                 case 'mediainfo':
                     if (strstr(strtolower($Block), 'disc size')) {
-                        $Array[$ArrayPos] = array('Type' => 'bdinfo', 'Val' => $Block);
+                        $Array[$ArrayPos] = array('Type' => 'bdinfo', 'Val' => str_replace(chr(194) . chr(160), ' ', $Block));
                     } else {
-                        $Array[$ArrayPos] = array('Type' => 'mediainfo', 'Val' => $Block);
+                        $Array[$ArrayPos] = array('Type' => 'mediainfo', 'Val' => str_replace(chr(194) . chr(160), ' ', $Block));
                     }
 
                     break;
@@ -789,27 +789,6 @@ class Text {
         return array_values($Rows);
     }
 
-    private static function getVideoResolutionInBDInfo($str) {
-        if (preg_match("/(\d+p)/mi", $str, $match)) {
-            return $match[1];
-        } else {
-            return false;
-        }
-    }
-    private static function getVideoAspectRatioInBDInfo($str) {
-        if (preg_match("/(\d+:\d+)/mi", $str, $match)) {
-            return $match[1];
-        } else {
-            return false;
-        }
-    }
-    private static function getVideoFrameRateInBDInfo($str) {
-        if (preg_match("/\/(.+) ?fps/mi", $str, $match)) {
-            return $match[1];
-        } else {
-            return false;
-        }
-    }
     private static function getAudioChannelsInBDInfo($str) {
         if (preg_match("/(\d\.\d)/mi", $str, $match)) {
             return $match[1];
@@ -1170,37 +1149,73 @@ class Text {
                         $VideoAudioSubTitle = stristr($Block['Val'], "VIDEO:");
                         $VideoText = rtrim(substr($VideoAudioSubTitle, 0, stripos($VideoAudioSubTitle, "AUDIO:")));
                         $TableValues = self::getColValueInTextTable($VideoText);
+                        $VideoInfo = [
+                            "Codec" => "",
+                            "Resolution" => "",
+                            "Bit rate" => "",
+                            'HDR format' => "",
+                            "Bit depth" => "",
+                            "Frame rate" => "",
+                            "Aspect ratio" => "",
+                            //"BPP" => self::getval($Section, "Bits\/\(Pixel\*Frame\)"),
+                        ];
+                        $HDRFormats = [];
                         if ($TableValues) {
                             foreach ($TableValues as $TableValue) {
-                                $VideoInfo = [
-                                    "Codec" => ltrim($TableValue[0], '* '),
-                                    //"Bit depth" => self::getval($Section, "Bit depth"),
-                                    "Resolution" => self::getVideoResolutionInBDInfo($TableValue[2]),
-                                    "Aspect ratio" => self::getVideoAspectRatioInBDInfo($TableValue[2]),
-                                    "Frame rate" => self::getVideoFrameRateInBDInfo($TableValue[2]),
-                                    "Bit rate" => $TableValue[1],
-                                    //"Aspect ratio" => self::getval($Section, "Display aspect ratio"),
-                                    //"BPP" => self::getval($Section, "Bits\/\(Pixel\*Frame\)"),
-                                ];
-                                $BDInfo["Video"][] = $VideoInfo;
+                                list($Resolution, $FPS, $AspectRatio,,, $Bits,, $HDRFormat) = explode('/', $TableValue[2]);
+                                if (str_contains($HDRFormat, 'Dolby Vision')) {
+                                    $HDRFormats[] = 'Dolby Vision(P7)';
+                                } else if (str_contains($HDRFormat, 'HDR10+')) {
+                                    $HDRFormats[] = 'HDR10+';
+                                    $HDRFormats[] = 'HDR10';
+                                } else if (str_contains($HDRFormat, 'HDR10')) {
+                                    $HDRFormats[] = 'HDR10';
+                                }
+                                if (!starts_with($TableValue[0], '*')) {
+                                    $VideoInfo["Codec"] = ltrim($TableValue[0], '* ');
+                                    $VideoInfo["Resolution"] = trim($Resolution);
+                                    $VideoInfo["Bit rate"] = $TableValue[1];
+                                    $VideoInfo['HDR format'] = trim($HDRFormat);
+                                    $VideoInfo["Bit depth"] = trim($Bits);
+                                    $VideoInfo["Frame rate"] = trim($FPS);
+                                    $VideoInfo["Aspect ratio"] = trim($AspectRatio);
+                                }
                             }
                         } else {
-                            $VideoSummarys = self::getallval($Block['Val'], "Video");
-                            foreach ($VideoSummarys as $VS) {
+                            $VideoSummary = self::getallval($Block['Val'], "Video");
+                            $VideoSummary2 = self::getallval($Block['Val'], "\* Video");
+                            foreach ($VideoSummary as $VS) {
                                 $VideoSummaryArray = explode('/', $VS);
-                                $VideoInfo = [
-                                    "Codec" => $VideoSummaryArray[0],
-                                    //"Bit depth" => self::getval($Section, "Bit depth"),
-                                    "Resolution" => $VideoSummaryArray[2],
-                                    "Aspect ratio" => $VideoSummaryArray[4],
-                                    "Frame rate" => $VideoSummaryArray[3],
-                                    "Bit rate" => $VideoSummaryArray[1],
-                                    //"Aspect ratio" => self::getval($Section, "Display aspect ratio"),
-                                    //"BPP" => self::getval($Section, "Bits\/\(Pixel\*Frame\)"),
-                                ];
-                                $BDInfo["Video"][] = $VideoInfo;
+                                $HDRFormat = $VideoSummaryArray[7];
+                                if (str_contains($HDRFormat, 'HDR10+')) {
+                                    $HDRFormats[] = 'HDR10+';
+                                    $HDRFormats[] = 'HDR10';
+                                } else if (str_contains($HDRFormat, 'HDR10')) {
+                                    $HDRFormats[] = 'HDR10';
+                                }
+                                $VideoInfo["Codec"] = $VideoSummaryArray[0];
+                                $VideoInfo["Resolution"] = $VideoSummaryArray[2];
+                                $VideoInfo["Aspect ratio"] = $VideoSummaryArray[4];
+                                $VideoInfo["Frame rate"] = $VideoSummaryArray[3];
+                                $VideoInfo["Bit rate"] = $VideoSummaryArray[1];
+                                $VideoInfo["Bit depth"] = $VideoSummaryArray[6];
+                            }
+                            foreach ($VideoSummary2 as $VS) {
+                                $VideoSummaryArray = explode('/', $VS);
+                                $HDRFormat = $VideoSummaryArray[7];
+                                if (str_contains($HDRFormat, 'Dolby Vision')) {
+                                    $HDRFormats[] = 'Dolby Vision(P7)';
+                                }
                             }
                         }
+                        if (empty($HDRFormats)) {
+                            unset($VideoInfo['HDR format']);
+                        } else {
+                            sort($HDRFormats);
+                            $VideoInfo['HDR format'] = implode(', ', $HDRFormats);
+                        }
+
+                        $BDInfo["Video"][] = $VideoInfo;
 
                         $AudioText = stristr($VideoAudioSubTitle, "AUDIO:");
                         if (stripos($AudioText, "SUBTITLES:")) {
@@ -1212,11 +1227,13 @@ class Text {
                         $TableValues = self::getColValueInTextTable($AudioText);
                         if ($TableValues) {
                             foreach ($TableValues as $Row) {
+                                list($channel,,, $bitDepth) = explode('/', $Row[3]);
                                 $AudioInfo = [
                                     "Language" => $Row[1],
                                     "Format" => $Row[0],
-                                    "Channels" => self::getAudioChannelsInBDInfo($Row[3]),
+                                    "Channels" => $channel,
                                     "Bit rate" => $Row[2],
+                                    "Bit depth" => $bitDepth,
                                 ];
                                 $AudioText = '';
                                 if ($AudioInfo['Language']) {
@@ -1228,6 +1245,9 @@ class Text {
                                 }
                                 if ($AudioInfo['Format']) {
                                     $AudioText .= $AudioInfo['Format'] . " ";
+                                }
+                                if ($AudioInfo['Bit depth']) {
+                                    $AudioText .= $AudioInfo['Bit depth'] . " ";
                                 }
                                 if ($AudioInfo['Bit rate']) {
                                     $AudioText .= '@ ' . $AudioInfo['Bit rate'];
@@ -1306,18 +1326,42 @@ class Text {
                                     $VideoInfo = [
                                         "Codec" => self::getval($Section, "Format"),
                                         'Resolution' => '',
-                                        "Aspect ratio" => self::getval($Section, "Display aspect ratio"),
-                                        "Frame rate" => self::getval($Section, "Frame rate"),
                                         "Bit rate" => self::getval($Section, "Bit rate"),
                                         "Bit rate (N)" => self::getval($Section, "Nominal bit rate"),
-                                        //"Bit depth" => self::getval($Section, "Bit depth"),
+                                        "HDR format" => '',
+                                        "Bit depth" => self::getval($Section, "Bit depth"),
+                                        "Frame rate" => self::getval($Section, "Frame rate"),
+                                        "Aspect ratio" => self::getval($Section, "Display aspect ratio"),
                                         "Width" => self::getval($Section, "Width"),
                                         "Height" => self::getval($Section, "Height"),
                                         //"BPP" => self::getval($Section, "Bits\/\(Pixel\*Frame\)"),
                                     ];
+                                    $HDRFormat = self::getval($Section, "HDR format");
+                                    $HDRs = [];
+                                    if ($HDRFormat) {
+                                        if (str_contains($HDRFormat, 'Dolby Vision')) {
+                                            if (str_contains($HDRFormat, 'dvhe.08')) {
+                                                $HDRs[] = 'Dolby Vision(P8)';
+                                            } else if (str_contains($HDRFormat, 'dvhe.07')) {
+                                                $HDRs[] = 'Dolby Vision(P7)';
+                                            } else if (str_contains($HDRFormat, 'dvhe.05')) {
+                                                $HDRs[] = 'Dolby Vision(P5)';
+                                            }
+                                        }
+                                        if (str_contains($HDRFormat, 'HDR10+')) {
+                                            $HDRs[] = 'HDR10+';
+                                        }
+                                        if (str_contains($HDRFormat, 'HDR10 compatible')) {
+                                            $HDRs[] = 'HDR10';
+                                        }
+                                        $VideoInfo["HDR format"] = implode(', ', $HDRs);
+                                    } else {
+                                        unset($VideoInfo['HDR format']);
+                                    }
                                     if ($VideoInfo['Width'] && $VideoInfo['Height']) {
                                         $VideoInfo['Resolution'] = self::onlyDigit($VideoInfo['Width']) . " × " . self::onlyDigit($VideoInfo['Height']);
                                     }
+                                    unset($VideoInfo['Width'], $VideoInfo['Height']);
                                     if ($VideoInfo['Codec'] == "AVC") {
                                         if (!empty(self::getval($Section, "Encoding settings")) || str_contains(self::getval($Section, "Writing library"), 'x264')) {
                                             $VideoInfo['Codec'] = "x264";
@@ -1333,7 +1377,6 @@ class Text {
                                     } else {
                                         $VideoInfo['Codec'] = $VideoInfo['Codec'];
                                     }
-                                    unset($VideoInfo['Width'], $VideoInfo['Height']);
                                     $MediaInfo["Video"][] = $VideoInfo;
                                     break;
                                 case "A":
@@ -1343,6 +1386,7 @@ class Text {
                                         "Channels" => self::getval($Section, "Channel\(s\)"),
                                         "Bit rate" => self::getval($Section, "Bit rate"),
                                         "Title" => self::getval($Section, "Title"),
+                                        "Bit depth" => self::getval($Section, "Bit depth"),
                                     ];
                                     $AudioText = '';
                                     if ($AudioInfo['Language']) {
@@ -1367,6 +1411,9 @@ class Text {
                                     }
                                     if ($AudioInfo['Format']) {
                                         $AudioText .= $AudioInfo['Format'] . " ";
+                                    }
+                                    if ($AudioInfo['Bit depth']) {
+                                        $AudioText .= $AudioInfo['Bit depth'] . " ";
                                     }
                                     if ($AudioInfo['Bit rate']) {
                                         $AudioText .= '@ ' . $AudioInfo['Bit rate'];

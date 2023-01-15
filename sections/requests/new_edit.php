@@ -191,7 +191,7 @@ View::show_header(($NewRequest ? t('server.requests.new_create') : t('server.req
                 <tr class="Form-row" id="imdb_tr">
                     <td class="Form-label"><?= t('server.requests.link') ?>:</td>
                     <td class="Form-items" id="imdbfield">
-                        <input class="Input" type="text" id="imdb" name="imdb" size="45" placeholder="IMDB" value="<?= $IMDBID ?>" <?= $Disabled ?>>
+                        <input class="Input" type="text" id="imdb" name="imdb" size="45" placeholder="IMDb" value="<?= $IMDBID ?>" <?= $Disabled ?>>
                         <div class="Form-inputs">
                             <input class=" Input" type="text" id="group" name="group" size="45" placeholder="<?= t('server.requests.t_group') ?>" value="<?= $GroupID ? CONFIG['SITE_URL'] . '/torrents.php?id=' . $GroupID : '' ?>" <?= $Disabled ?>>
                             <? if ($NewRequest) { ?>

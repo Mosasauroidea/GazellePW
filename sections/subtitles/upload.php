@@ -5,6 +5,9 @@ use Gazelle\Torrent\Subtitle;
 //ini_set('max_file_uploads', 1);
 View::show_header(t('server.subtitles.h2_subtitles'), 'validate_subtitles', 'PageSubtitleHome');
 $TorrentID = isset($_GET['torrent_id']) ? $_GET['torrent_id'] : null;
+if (!is_number($TorrentID)) {
+    error(-1);
+}
 if ($TorrentID) {
     $AllSubtitles = Subtitles::get($TorrentID);
 } else {

@@ -3074,7 +3074,7 @@ server.requests.purchasable_at_placeholder: |-
 server.requests.quick_vote: |-
   Quick Vote
 server.requests.ratio: |-
-  Radio
+  Ratio
 server.requests.reason: |-
   Reason
 server.requests.release_list: |-
@@ -5969,7 +5969,7 @@ server.upload.need_download_new_torrent2: |-
 server.upload.no_imdb_link: |-
   No IMDb link exists
 server.upload.no_imdb_note: |-
-  Make sure the IMDB link does not exist, otherwise you'll receive a warn.
+  Make sure the IMDb link does not exist, otherwise you'll receive a warn.
 server.upload.no_sub: |-
   Lack of basic subtitle
 server.upload.no_subtitles: |-
@@ -8443,3 +8443,9 @@ server.user.snatches: |-
   Snatches
 server_bonus_purchase_confirmation: |-
   Purchase Confirmation
+client.upload.at_least_one_director: |-
+  Please enter at least one director.
+client.upload.mediainfo_valid_format: |-
+  MediaInfo is invalid, please follow the <a href="wiki.php?action=article&id=3">Wiki</a>  to regenerate.
+server.upload.movie_synopsis: |-
+  Movie synopsis
