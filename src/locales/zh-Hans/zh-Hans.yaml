@@ -8309,3 +8309,5 @@ client.upload.mediainfo_valid_format: |-
   MediaInfo无效，请遵循 <a href="wiki.php?action=article&id=3">Wiki</a> 重新识别生成。
 server.upload.movie_synopsis: |-
   影片简介
+client.stats.uploaded_user: |-
+  发布种子的用户数

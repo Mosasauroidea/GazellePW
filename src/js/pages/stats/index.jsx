@@ -15,6 +15,7 @@ import {
   ChartPeersCount,
   ChartUserDayActive,
   ChartSeedingUser,
+  ChartUserDayTorrent,
 } from '#/js/app/components'
 
 const ChartUserHome = () => (
@@ -61,4 +62,8 @@ if (document.querySelector('#chart_user_day_active')) {
 
 if (document.querySelector('#chart_seeding_user')) {
   render(<ChartSeedingUser />, document.querySelector('#chart_seeding_user'))
+}
+
+if (document.querySelector('#chart_user_day_torrent')) {
+  render(<ChartUserDayTorrent />, document.querySelector('#chart_user_day_torrent'))
 }

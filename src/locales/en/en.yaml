@@ -8449,3 +8449,5 @@ client.upload.mediainfo_valid_format: |-
   MediaInfo is invalid, please follow the <a href="wiki.php?action=article&id=3">Wiki</a>  to regenerate.
 server.upload.movie_synopsis: |-
   Movie synopsis
+client.stats.uploaded_user: |-
+  User uploaded torrent

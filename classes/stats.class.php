@@ -274,6 +274,34 @@ class Stats {
         $WINDOW_DATA[$DataKey] = $Data;
     }
 
+    public static function torrentByDayUser() {
+        global $DB, $WINDOW_DATA, $Cache;
+        $LastDays = 15;
+        $DataKey = 'statsTorrentByDayUser';
+        if (!$DayLabels = $Cache->get_value('torrents_day_user_timeline')) {
+            $DB->query("
+		SELECT DATE_FORMAT(Time, '%Y-%m-%d') AS Day, COUNT(Distinct UserID)
+		FROM torrents Where  DATE_SUB(CURDATE(), INTERVAL $LastDays DAY) <= date(Time)
+		GROUP BY Day
+		ORDER BY Time DESC");
+            $DayTimelineNet = array_reverse($DB->to_array());
+            foreach ($DayTimelineNet as $Day) {
+                list($Label, $Amount) = $Day;
+                $DayLabels[$Label]['net'] = $Amount;
+            }
+            G::$Cache->cache_value('torrents_day_user_timeline', $DayLabels, mktime(0, 0, 0, date('n'), date('j') + 1));
+        }
+        $Data = [];
+        foreach ($DayLabels as $Label => $Value) {
+            $Value = [
+                'date' => $Label,
+                'net' => intval($Value['net']),
+            ];
+            $Data[] = $Value;
+        }
+        $WINDOW_DATA[$DataKey] = $Data;
+    }
+
     public static function torrentByDay() {
         global $DB, $WINDOW_DATA, $Cache;
         $LastDays = 15;

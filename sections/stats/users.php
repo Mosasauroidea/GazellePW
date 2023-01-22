@@ -56,6 +56,7 @@ View::show_header(t('server.stats.stats'), '', 'PageStatUser');
     <div class="ChartRoot">
         <div id="chart_user_timeline"> </div>
         <div id="chart_user_day_active"> </div>
+        <div id="chart_user_day_torrent"> </div>
         <div id="chart_user_home" class="ChartPieContainer"></div>
     </div>
     <? if (false) { ?>
@@ -88,4 +89,5 @@ Stats::uv();
 Stats::userClasses();
 Stats::userPlatforms();
 Stats::userBrowsers();
+Stats::torrentByDayUser();
 View::show_footer([], 'stats/index.jsx');

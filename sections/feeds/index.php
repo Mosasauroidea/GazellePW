@@ -133,7 +133,7 @@ switch ($_GET['feed']) {
             // Specific personalized torrent notification channel
             $Feed->channel(display_str($_GET['name']), 'Personal RSS feed: ' . display_str($_GET['name']));
             $Feed->retrieve($_GET['feed'], $_GET['authkey'], $_GET['passkey']);
-        } elseif (!empty($_GET['name']) && substr($_GET['feed'], 0, 21) == 'torrents_bookmarks_t_') {
+        } elseif (substr($_GET['feed'], 0, 21) == 'torrents_bookmarks_t_') {
             // Bookmarks
             $Feed->channel('Bookmarked torrent notifications', 'RSS feed for bookmarked torrents.');
             $Feed->retrieve($_GET['feed'], $_GET['authkey'], $_GET['passkey']);

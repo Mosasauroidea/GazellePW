@@ -134,8 +134,8 @@ class Notification extends Base {
         // freeleech
         if (Torrents::global_freeleech()) {
             $SQL .= " AND (FreeTorrents LIKE '%|" . db_string('1') . "|%' OR FreeTorrents = '') ";
-        } else if ($Properties['FreeTorrents']) {
-            $SQL .= " AND (FreeTorrents LIKE '%|" . db_string(trim($Properties['FreeTorrents'])) . "|%' OR FreeTorrents = '') ";
+        } else if ($Properties['FreeTorrent']) {
+            $SQL .= " AND (FreeTorrents LIKE '%|" . db_string(trim($Properties['FreeTorrent'])) . "|%' OR FreeTorrents = '') ";
         } else {
             $SQL .= " AND (FreeTorrents = '') ";
         }
@@ -151,12 +151,12 @@ class Notification extends Base {
             OR ('" . db_string(trim($TotalSize)) . "' > FromSize AND ToSize = 0)) ";
 
         // year
-        if ($Properties['Year'] && $Properties['RemasterYear']) {
-            $SQL .= " AND (('" . db_string(trim($Properties['Year'])) . "' BETWEEN FromYear AND ToYear)
+        if ($Group['Year'] && $Properties['RemasterYear']) {
+            $SQL .= " AND (('" . db_string(trim($Group['Year'])) . "' BETWEEN FromYear AND ToYear)
 			OR ('" . db_string(trim($Properties['RemasterYear'])) . "' BETWEEN FromYear AND ToYear)
 			OR (FromYear = 0 AND ToYear = 0)) ";
-        } elseif ($Properties['Year'] || $Properties['RemasterYear']) {
-            $SQL .= " AND (('" . db_string(trim(Max($Properties['Year'], $Properties['RemasterYear']))) . "' BETWEEN FromYear AND ToYear)
+        } elseif ($Group['Year'] || $Properties['RemasterYear']) {
+            $SQL .= " AND (('" . db_string(trim(Max($Group['Year'], $Properties['RemasterYear']))) . "' BETWEEN FromYear AND ToYear)
 			OR (FromYear = 0 AND ToYear = 0)) ";
         } else {
             $SQL .= " AND (FromYear = 0 AND ToYear = 0) ";
@@ -168,17 +168,17 @@ class Notification extends Base {
             $SQL .= " AND (" .  $IMDBRating . " > FromIMDBRating OR FromIMDBRating = 0)";
         }
 
-        // country
-        $Country = $Group['Country'];
-        if ($Country) {
-            foreach (explode(',', $Country) as $R) {
+        // Region 
+        $Region = $Group['Region'];
+        if ($Region) {
+            foreach (explode(',', $Region) as $R) {
                 $RegionSQL[] = " Regions LIKE '%|" . db_string(trim($R)) . "|%' ";
             }
         }
         $RegionSQL[] = "Regions = ''";
         $SQL .= " AND (" . implode(' OR ', $RegionSQL) . ") ";
 
-        // language
+        // Language
         $Language = $Group['Language'];
         if ($Language) {
             foreach (explode(',', $Language) as $L) {
