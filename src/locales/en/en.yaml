@@ -8451,3 +8451,5 @@ server.upload.movie_synopsis: |-
   Movie synopsis
 client.stats.uploaded_user: |-
   User uploaded torrent
+server.bonus.bonus_points_has_spent: |-
+  has spent

@@ -75,13 +75,15 @@ $Resolved = (isset($_GET['status']) && $_GET['status'] === 'resolved');
         <? if ($IS_STAFF) { ?>
             <div class="Box" id="user_application_reply_box">
                 <div class="Box-header">
-                    <div class="Box-headerTitle">
-                        <?= Users::format_username($App->user_id(), true, true, true, true, true, false) ?>
+                    <div class="Box-headerLeft">
+                        <div class="Box-headerTitle">
+                            <?= Users::format_username($App->user_id(), true, true, true, true, true, false) ?>
+                        </div>
+                        - <?= time_diff($App->created()) ?>
                     </div>
                     <div class="Box-headerActions">
                         <form name="role_resolve" id="form<?= $ID ?>" method="POST" action="/apply.php?action=view&amp;id=<?= $ID ?>">
-                            <?= time_diff($App->created()) ?>
-                            - <a href="javascript:{}" onclick="document.getElementById('form<?= $ID ?>').submit();"><?= $App->is_resolved() ? t('server.apply.reopen') : t('server.apply.resolve') ?></a>
+                            <a href="javascript:{}" onclick="document.getElementById('form<?= $ID ?>').submit();"><?= $App->is_resolved() ? t('server.apply.reopen') : t('server.apply.resolve') ?></a>
                             <input type="hidden" name="resolve" value="<?= $App->is_resolved() ? 'Reopen' : 'Resolve' ?>" />
                             <input type="hidden" name="id" value="<?= $ID ?>" />
                             <input type="hidden" name="auth" value="<?= $LoggedUser['AuthKey'] ?>" />

@@ -596,7 +596,7 @@ View::show_header($ThreadInfo['Title'], 'comments,subscriptions,bbcode,thumb', $
                                 }
                                 ?>
                                 <? if ((!$ThreadInfo['IsLocked'] && Forums::check_forumperm($ForumID, 'Write') && $AuthorID == $LoggedUser['ID']) || check_perms('site_moderate_forums') || ($AuthorID == $LoggedUser['ID'] && isset($LoggedUser['ExtraClasses']['31']))) { ?>
-                                    <a href="#" onclick="globalapp.editForm('<?= $PostID ?>', '<?= $Key ?>');" class="brackets"><?= t('server.common.edit') ?></a> -
+                                    <a href="#post<?=$PostID?>" onclick="globalapp.editForm('<?= $PostID ?>', '<?= $Key ?>');" class="brackets"><?= t('server.common.edit') ?></a> -
                                 <?
 
                                 }

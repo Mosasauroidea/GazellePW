@@ -146,10 +146,12 @@ globalapp.editForm = function Edit_Form(post) {
   if (location.href.match(/forums\.php/)) {
     ajax.get('?action=get_post&post=' + postid, function (response) {
       $('#edit_content_' + postid).val(html_entity_decode(response))
+      resize('edit_content_' + postid)
     })
   } else {
     ajax.get('comments.php?action=get&postid=' + postid, function (response) {
       $('#edit_content_' + postid).val(html_entity_decode(response))
+      resize('edit_content_' + postid)
     })
   }
 }

@@ -21,4 +21,4 @@ if (!Forums::check_forumperm($ForumID)) {
     ajax_json_error("assholes");
 }
 
-ajax_json_success(array("body" => nl2br($Body)));
+ajax_json_success(array("body" => str_replace(array("\r\n", "\r", "\n"), '<br />', $Body)));

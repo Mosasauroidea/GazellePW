@@ -5,7 +5,7 @@ View::show_header(t('server.bonus.bonus_points_purchase_history'), 'bonus', 'Pag
 if (check_perms('admin_bp_history') && isset($_GET['id']) && is_number($_GET['id'])) {
     $ID = (int)$_GET['id'];
     $Header = t('server.bonus.bonus_points_spending_history_for', ['Values' => [Users::format_username($ID)]]);
-    $WhoSpent = Users::format_username($ID) . ' has spent';
+    $WhoSpent = Users::format_username($ID) . t('server.bonus.bonus_points_has_spent');
 } else {
     $ID = G::$LoggedUser['ID'];
     $Header = t('server.bonus.bonus_points_spending_history');

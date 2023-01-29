@@ -169,11 +169,12 @@ class Text {
             $Str = preg_replace('/(\={2})([^=].*)\1/i', '[inlinesize=7]$2[/inlinesize]', $Str);
         }
 
-        $HTML = nl2br(self::to_html(self::parse($Str)));
+        $HTML = str_replace(array("\r\n", "\r", "\n"), '<br />', self::to_html(self::parse($Str)));
 
         if (self::$TOC && $OutputTOC) {
             $HTML = self::parse_toc($Min) . $HTML;
         }
+
 
         $Debug->set_flag('BBCode end');
         return $HTML;
@@ -185,7 +186,7 @@ class Text {
         //Inline links
         $Str = preg_replace('/(?<!(\[url\]|\[url\=|\[img\=|\[img\]))http(s)?:\/\//i', '$1[inlineurl]http$2://', $Str);
 
-        return nl2br(self::raw_text(self::parse($Str)));
+        return str_replace(array("\r\n", "\r", "\n"), '<br />', self::raw_text(self::parse($Str)));
     }
 
 
@@ -1725,7 +1726,6 @@ class Text {
         $Str = preg_replace("/\<img(.*)src=\"(.*)\"(.*)\>/", '[img]\\2[/img]', $Str);
         $Str = str_replace('<p>', '', $Str);
         $Str = str_replace('</p>', '<br />', $Str);
-        //return $Str;
         return str_replace(["<br />", "<br>"], "\n", $Str);
     }
 }

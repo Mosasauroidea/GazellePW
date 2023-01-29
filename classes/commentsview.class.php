@@ -44,10 +44,10 @@ class CommentsView {
                                 <? if ($Tools) { ?>
                                     <a href="#quickpost" onclick="Quote('<?= $PostID ?>','<?= $UserInfo['Username'] ?>', true);" class="brackets"><?= t('server.forums.quote') ?></a>
                                     <? if ($AuthorID == G::$LoggedUser['ID'] || check_perms('site_moderate_forums')) { ?>
-                                        - <a href="#" onclick="globalapp.editForm('<?= $PostID ?>');" class="brackets"><?= t('server.common.edit') ?></a>
+                                        - <a href="#post<?= $PostID ?>" onclick="globalapp.editForm('<?= $PostID ?>');" class="brackets"><?= t('server.common.edit') ?></a>
                                     <? } ?>
                                     <? if (check_perms('site_moderate_forums')) { ?>
-                                        - <a href="#" onclick="Delete('<?= $PostID ?>');" class="brackets"><?= t('server.common.delete') ?></a>
+                                        - <a href="#post<?= $PostID ?>" onclick="Delete('<?= $PostID ?>');" class="brackets"><?= t('server.common.delete') ?></a>
                                     <? } ?>
                                     - <a href="reports.php?action=report&amp;type=comment&amp;id=<?= $PostID ?>" class="brackets"><?= t('server.forums.report') ?></a>
                                     <? if (check_perms('users_warn') && $AuthorID != G::$LoggedUser['ID'] && G::$LoggedUser['Class'] >= $UserInfo['Class']) { ?>

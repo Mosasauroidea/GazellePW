@@ -8311,3 +8311,5 @@ server.upload.movie_synopsis: |-
   影片简介
 client.stats.uploaded_user: |-
   发布种子的用户数
+server.bonus.bonus_points_has_spent: |-
+  花费了

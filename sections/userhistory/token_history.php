@@ -106,21 +106,14 @@ $Pages = Format::get_pages($Page, $NumResults, 25);
                 foreach ($Tokens as $Token) {
                     $GroupIDs[] = $Token['GroupID'];
                 }
-                $Artists = Artists::get_artists($GroupIDs);
+                $Groups = Torrents::get_groups($GroupIDs);
 
                 $i = true;
                 foreach ($Tokens as $Token) {
                     $i = !$i;
-                    list($TorrentID, $GroupID, $Time, $Expired, $Downloaded, $Uses, $Name) = $Token;
-                    if ($Name != '') {
-                        $Name = "<a href=\"torrents.php?torrentid=$TorrentID\">$Name</a>";
-                    } else {
-                        $Name = "(<i>Deleted torrent <a href=\"log.php?search=Torrent+$TorrentID\">$TorrentID</a></i>)";
-                    }
-                    $ArtistName = Artists::display_artists($Artists[$GroupID]);
-                    if ($ArtistName) {
-                        $Name = $ArtistName . $Name;
-                    }
+                    list($TorrentID, $GroupID, $Time, $Expired, $Downloaded, $Uses,) = $Token;
+                    $Group = $Groups[$GroupID];
+                    $Name = Torrents::torrent_simple_view($Group, $Group['Torrents'][$TorrentID]);
 
                 ?>
                     <tr class="Table-row">
