@@ -84,11 +84,6 @@ TorrentDetail
   word-break: break-all;
 }
 
-.MediaInfoText > br {
-  line-height: 0;
-  display: none;
-}
-
 .FormTorrentAddArtist {
   flex-direction: column;
   gap: 6px;
