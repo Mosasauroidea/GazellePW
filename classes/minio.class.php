@@ -59,9 +59,13 @@ class Minio implements ImageStorage {
         try {
             $results = CommandPool::batch($this->s3, $commands);
             foreach ($results as $Idx => $Result) {
+                if ($Result->getStatusCode() != 200) {
+                    throw new Exception("Upload failed, status code: " . $Result->getStatusCode() . " message: " . $Result->getAwsErrorMessage());
+                }
                 $ret[] = $this->image_path($Datas[$Idx]['Name']);
             }
         } catch (CommandTransferException $e) {
+
             foreach ($e->getFailedCommands() as $failedCommand) {
                 throw new Exception($e->getExceptionForFailedCommand($failedCommand)->getMessage());
             }
