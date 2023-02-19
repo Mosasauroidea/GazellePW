@@ -289,8 +289,7 @@ if (!empty($_REQUEST['confirm'])) {
 
             include(CONFIG['SERVER_ROOT'] . '/classes/templates.class.php');
             $TPL = new TEMPLATE;
-            include(CONFIG['SERVER_ROOT'] . "/sections/login/close.php");
-            if ($CloseLogin) {
+            if (CONFIG['CLOSE_LOGIN']) {
                 $LoginKey = Users::make_secret();
                 $DB->query("insert into login_link (LoginKey, UserID, Username) values ('" . db_string($LoginKey) . "', '$UserID', '" . db_string(trim($_POST['username'])) . "')");
                 $TPL->open(CONFIG['SERVER_ROOT'] . '/templates/new_registration_close_login.tpl');

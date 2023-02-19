@@ -103,8 +103,7 @@ class LoginCommand extends Command {
         G::$DB->query("select count(1), Username, ID from users_info i left join users_main m on m.id=i.userid where TGID='$UserTGID'");
         list($HasUser, $Username, $UserID) = G::$DB->next_record();
         if ($HasUser) {
-            include(CONFIG['SERVER_ROOT'] . "/sections/login/close.php");
-            if ($CloseLogin) {
+            if (CONFIG['CLOSE_LOGIN']) {
                 G::$DB->query("select count(1), LoginKey from login_link where UserID='$UserID' and used='0'");
                 list($HasKey, $Key) = G::$DB->next_record();
                 if (!$HasKey) {

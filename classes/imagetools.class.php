@@ -33,15 +33,9 @@ class ImageTools {
      * Blacklisted sites
      * @var array $Blacklist Array of blacklisted hosts
      */
-    private static $Blacklist = array(
-        'tinypic.com',
-        'imgur.com',
-        'funkyimg.com',
-        'e-cdns-images.dzcdn.net',
-        'fastpic.ru',
-    );
+    private static $Blacklist = CONFIG['IMAGE_HOST_BLACKLIST'];
 
-    private static $Whitelist = ['kshare.club', 'pixhost.to', 'ptpimg.me', 'img.pterclub.com', 'yes.ilikeshots.club', 'imgbox.com', 's3.pterclub.com'];
+    private static $Whitelist = CONFIG['IMAGE_HOST_WHITELIST'];
 
     /**
      * Array of image hosts that provide thumbnailing
@@ -254,11 +248,6 @@ class ImageTools {
         }
 
         $ProcessedUrl = $Url;
-        /*
-        if (strpos($Url, 'dicimg.kshare.club') !== false) {
-            $ProcessedUrl .= "-cover";
-        }
-*/
         if ($Thumb) {
             $Extension = pathinfo($Url, PATHINFO_EXTENSION);
             if (self::thumbnailable($Url) && self::valid_extension($Extension)) {

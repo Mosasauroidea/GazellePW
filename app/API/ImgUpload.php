@@ -22,7 +22,7 @@ class ImgUpload extends AbstractAPI {
         for ($i = 0; $i < count($urls); $i += 1) {
             $url = $urls[$i];
             $extension = strtolower(end(explode(".", $url)));
-            $path = 'user/' . $user_id . '/' . date('Ymd', time()) . '/' . uniqid() . '.' . $extension;
+            $path = CONFIG['IMAGE_PATH_PREFIX'] . '/user/' . $user_id . '/' . date('Ymd', time()) . '/' . uniqid() . '.' . $extension;
             $Data[] = ['Url' => $url, 'Name' => $path];
         }
 

@@ -1,16 +1,16 @@
 <?
 
-if ($CloseLogin) {
+if (CONFIG['CLOSE_LOGIN']) {
     if (isset($_GET['loginkey'])) {
         $CheckKey = checkLoginKey($_GET['loginkey']);
         if (!$CheckKey[0]) {
             header('HTTP/1.1 301 Moved Permanently');
-            header('Location: https://kshare.club/');
+            header('Location: ' . $CONFIG['CLOSE_REDIRECT_URL']);
             return;
         }
     } else {
         header('HTTP/1.1 301 Moved Permanently');
-        header('Location: https://kshare.club/');
+        header('Location: ' . $CONFIG['CLOSE_REDIRECT_URL']);
         return;
     }
 }

@@ -73,8 +73,6 @@ function checkLoginKey($Key) {
     return G::$DB->next_record(MYSQLI_BOTH, false);
 }
 
-include("close.php");
-
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
@@ -414,17 +412,17 @@ else {
 
     // If user has submitted form
     if (isset($_POST['username']) && !empty($_POST['username']) && isset($_POST['password']) && !empty($_POST['password'])) {
-        if ($CloseLogin) {
+        if (CONFIG['CLOSE_LOGIN']) {
             if (isset($_POST['loginkey'])) {
                 $CheckKey = checkLoginKey($_POST['loginkey']);
                 if (!$CheckKey[0] || strcasecmp($CheckKey['Username'], $_POST['username']) != 0) {
                     header('HTTP/1.1 301 Moved Permanently');
-                    header('Location: https://kshare.club/');
+                    header('Location: ' . $CONFIG['CLOSE_REDIRECT_URL']);
                     return;
                 }
             } else {
                 header('HTTP/1.1 301 Moved Permanently');
-                header('Location: https://kshare.club/');
+                header('Location: ' . $CONFIG['CLOSE_REDIRECT_URL']);
                 return;
             }
         }
@@ -459,7 +457,7 @@ else {
 							SET passhash = ?
 							WHERE ID = ?", Users::make_password_hash($_POST['password']), $UserID);
                     }
-                    if ($CloseLogin) {
+                    if (CONFIG['CLOSE_LOGIN']) {
                         $DB->query("update login_link set used='1' where id=" . $CheckKey['ID']);
                     }
                     if ($Enabled == 1) {

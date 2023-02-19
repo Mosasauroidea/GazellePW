@@ -747,10 +747,10 @@ class MOVIE {
     }
 
     public static function upload_movie_poster($IMDBID, $url) {
-        return self::upload_image('site/movie/imdb/' . $IMDBID . '-' . uniqid() . '.jpg', $url);
+        return self::upload_image(CONFIG['IMAGE_PATH_PREFIX'] . '/site/movie/imdb/' . $IMDBID . '-' . uniqid() . '.jpg', $url);
     }
     public static function upload_artist_avatar($IMDBID, $url) {
-        return self::upload_image("site/artist/imdb/" . $IMDBID . '-' . uniqid() . ".jpg", $url);
+        return self::upload_image(CONFIG['IMAGE_PATH_PREFIX'] . "/site/artist/imdb/" . $IMDBID . '-' . uniqid() . ".jpg", $url);
     }
 
     private static function upload_image($key, $url) {

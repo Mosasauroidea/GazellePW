@@ -1,8 +1,7 @@
 <?php
-include(CONFIG['SERVER_ROOT'] . "/sections/login/close.php");
-if ($CloseLogin) {
+if (CONFIG['CLOSE_LOGIN']) {
     header('HTTP/1.1 301 Moved Permanently');
-    header('Location: https://kshare.club/');
+    header('Location: ' . CONFIG['CLOSE_REDIRECT_URL']);
     return;
 }
 if (!CONFIG['SHOW_PUBLIC_INDEX']) {

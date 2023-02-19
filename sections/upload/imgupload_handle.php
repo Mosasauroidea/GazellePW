@@ -15,7 +15,7 @@ for ($i = 0; $i < count($names); $i += 1) {
     if (!ImageTools::valid_extension($extension)) {
         ajax_json_error("Invalid ext: $extension");
     }
-    $path = 'user/' . $user_id . '/' . date('Ymd', time()) . '/' . uniqid() . '.' . $extension;
+    $path = CONFIG['IMAGE_PATH_PREFIX'] . '/user/' . $user_id . '/' . date('Ymd', time()) . '/' . uniqid() . '.' . $extension;
     $Data[] = ['Url' => $tmp_name, 'Name' => $path];
 }
 try {

@@ -84,6 +84,10 @@ $CONFIG['OPEN_REGISTRATION_TO'] = "2032-01-03 23:59";
 $CONFIG['OPEN_REGISTRATION_EMAIL'] = [];
 $CONFIG['NOT_ALLOWED_REGISTRATION_EMAIL'] = [];
 
+# Close login page
+$CONFIG['CLOSE_LOGIN'] = false;
+$CONFIG['CLOSE_REDIRECT_URL'] = "";
+
 $CONFIG['USER_LIMIT'] = 5000; //The maximum number of users the site can have, 0 for no limit
 
 $CONFIG['REQUEST_TAX'] = 0.0; //Percentage Tax (0 - 1) to charge users on making requests
@@ -183,6 +187,10 @@ $CONFIG['ExternalServicesConfig'] = [
 // Image hosting service
 $CONFIG['IMAGE_PROVIDER'] = "local"; // Image storage service provider (local or minio)
 $CONFIG['IMAGE_URL'] = $CONFIG['SITE_URL']; // Image storage service base URL
+$CONFIG['IMAGE_PATH_PREFIX'] = "gpw";
+
+$CONFIG['IMAGE_HOST_BLACKLIST'] = [];
+$CONFIG['IMAGE_HOST_WHITELIST'] = [];
 
 // Minio service config
 $CONFIG['MINIO_ENDPOINT'] = "";
