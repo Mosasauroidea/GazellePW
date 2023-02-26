@@ -269,7 +269,7 @@ if ($NumResults == 0) {
     foreach ($SphRequests as $RequestID => $SphRequest) {
         $Request = $Requests[$RequestID];
         $VoteCount = $SphRequest['votes'];
-        $Bounty = $SphRequest['bounty'] * 1024; // Sphinx stores bounty in kB
+        $Bounty = $SphRequest['bounty'] * 1024 * 1024; // Sphinx stores bounty in kB
         $Requestor = Users::user_info($Request['UserID']);
         $Filler = $Request['FillerID'] ? Users::user_info($Request['FillerID']) : null;
 

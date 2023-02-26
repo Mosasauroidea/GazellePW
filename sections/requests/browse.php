@@ -568,7 +568,7 @@ View::show_header($Title, '', 'PageRequestHome');
                     $Requests = Requests::get_requests(array_keys($SphRequests));
                     foreach ($Requests as $RequestID => $Request) {
                         $SphRequest = $SphRequests[$RequestID];
-                        $Bounty = $SphRequest['bounty'] * 1024; // Sphinx stores bounty in kB
+                        $Bounty = $SphRequest['bounty'] * 1024 * 1024; // Sphinx stores bounty in MB
                         $VoteCount = $SphRequest['votes'];
 
                         if ($Request['CategoryID'] == 0) {
