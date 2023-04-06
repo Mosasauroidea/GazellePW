@@ -26,7 +26,7 @@
     "whichbrowser/parser": "^2.0",
     "orpheusnet/bencode-torrent": "*",
     "irazasyed/telegram-bot-sdk": "^3.4",
-    "imdbphp/imdbphp": "^6.5",
+    "imdbphp/imdbphp": "^8.1",
     "php-curl-class/php-curl-class": "^9.1",
     "mailgun/mailgun-php": "~1.7.2",
     "kriswallsmith/buzz": "^1.2",

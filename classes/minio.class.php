@@ -42,16 +42,11 @@ class Minio implements ImageStorage {
         foreach ($Datas as $Data) {
             $Content = $Data['Content'];
             $Name = $Data['Name'];
-            $file_info = new finfo(FILEINFO_MIME_TYPE);
-            $mime_type = $file_info->buffer($Content);
-            if (!in_array($mime_type, ['image/gif', 'image/jpeg', 'image/jpg', 'image/png'])) {
-                throw new Exception("Invalid ext: $mime_type");
-            }
             $commands[] = $this->s3->getCommand('PutObject', [
                 'Bucket' => $this->bucket,
                 'Key'    => $Name,
                 'Body'   => $Content,
-                'ContentType' => $mime_type,
+                'ContentType' => $Data['MimeType'],
             ]);
         }
         $ret = [];

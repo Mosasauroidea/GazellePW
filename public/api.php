@@ -52,7 +52,7 @@ if (!is_array($app)) {
         json_error('invalid token');
     }
     $app = $DB->to_array(false, MYSQLI_ASSOC);
-    G::$Cache->cache_value("api_apps_{$token}", $app,);
+    G::$Cache->cache_value("api_apps_{$token}", $app);
 }
 $app = $app[0];
 
@@ -64,7 +64,7 @@ if ($app['Token'] !== $token) {
 // Get info such as username
 $LightInfo = Users::user_info($app['UserID']);
 $HeavyInfo = Users::user_heavy_info($app['UserID']);
-
+$UserStats = Users::user_stats($app['UserID']);
 // Create LoggedUser array
 $LoggedUser = array_merge($HeavyInfo, $LightInfo, $UserStats);
 G::$LoggedUser = &$LoggedUser;

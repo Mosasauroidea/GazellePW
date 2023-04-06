@@ -299,7 +299,12 @@ class ImageTools {
         $ContentDatas = [];
         foreach ($Datas as $Data) {
             $data = file_get_contents($Data['Url']);
-            $ContentDatas[] = ['Content' => $data, 'Name' => $Data['Name']];
+            $file_info = new finfo(FILEINFO_MIME_TYPE);
+            $mime_type = $file_info->buffer($data);
+            if (!in_array($mime_type, ['image/gif', 'image/jpeg', 'image/jpg', 'image/png'])) {
+                throw new Exception("Invalid ext: $mime_type");
+            }
+            $ContentDatas[] = ['Content' => $data, 'Name' => $Data['Name'], "MimeType" => $mime_type];
         }
         return self::$Provider->multi_upload($ContentDatas);
     }
