@@ -55,6 +55,7 @@ Loading Button
   align-items: center;
   /* override a */
   text-decoration: none;
+  white-space: no-wrap;
 }
 .Button:hover {
   background: var(--Button-default-onHover-background);

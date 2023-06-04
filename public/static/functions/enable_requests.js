@@ -1,10 +1,10 @@
 ;(function () {
   var ids = Array()
   $(document).ready(function () {
-    $('button[id^=check_all]').click(function () {
+    $('input[id^=check_all]').click(function () {
       // Check or uncheck all requests
       var checked = $(this).attr('checked') == 'checked' ? true : false
-      $('button[id^=multi]').each(function () {
+      $('input[id^=multi]').each(function () {
         $(this).attr('checked', checked)
         var id = $(this).data('id')
         if (checked && $.inArray(id, ids) == -1) {
@@ -16,7 +16,7 @@
         }
       })
     })
-    $('button[id^=multi]').click(function () {
+    $('input[id^=multi]').click(function () {
       // Put the ID in the array if checked, or removed if unchecked
       var checked = $(this).attr('checked') == 'checked' ? true : false
       var id = $(this).data('id')

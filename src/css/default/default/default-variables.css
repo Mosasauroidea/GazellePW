@@ -227,7 +227,7 @@
 
   /* Progress */
   --Progress-bar-background: rgba(0, 0, 0, 0.05);
-  --Progress-value-background: rgba(122, 188, 255, 0.3);
+  --Progress-value-background: #1083c2;
 
   /* Chart */
   --Chart-color0: rgb(232, 193, 160);

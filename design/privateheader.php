@@ -341,7 +341,7 @@ if (check_perms('users_mod') && CONFIG['FEATURE_EMAIL_REENABLE']) {
     }
 
     if ($NumEnableRequests > 0) {
-        $ModBar[] = '<a class="Button ButtonHeader"  href="tools.php?action=enable_requests">' . $NumEnableRequests . t('server.common.enable_requests') . "</a>";
+        $ModBar[] = '<a class="Button ButtonHeader"  href="tools.php?action=enable_requests">' . $NumEnableRequests . '&nbsp' . t('server.common.enable_requests') . "</a>";
     }
 }
 ?>

@@ -48,7 +48,7 @@ switch ($Type) {
             $Error = t('server.reports.no_user_with_the_reported_id_found');
         } else {
             list($Username) = $DB->next_record();
-            $TypeLink = "the user [user]{$Username}[/user]";
+            $TypeLink = t('server.reports.the_user') .  " [user]{$Username}[/user]";
             $Subject = t('server.reports.reporting_the_user') . ': ' . display_str($Username);
         }
         break;
@@ -62,7 +62,7 @@ switch ($Type) {
             $Error = t('server.reports.no_request_with_the_reported_id_found');
         } else {
             list($Name) = $DB->next_record();
-            $TypeLink = 'the request [url=' . site_url() . "requests.php?action=view&amp;id=$ThingID]" . display_str($Name) . '[/url]';
+            $TypeLink = t('server.reports.the_request') .  ' v[url=' . site_url() . "requests.php?action=view&amp;id=$ThingID]" . display_str($Name) . '[/url]';
             $Subject = t('server.requests.report_request') . ': ' . display_str($Name);
         }
         break;
@@ -75,7 +75,7 @@ switch ($Type) {
             $Error = t('server.reports.no_collage_with_the_reported_id_found');
         } else {
             list($Name) = $DB->next_record();
-            $TypeLink = 'the collage [url=' . site_url() . "collage.php?id=$ThingID]" . display_str($Name) . '[/url]';
+            $TypeLink = t('server.reports.the_collage') .  ' [url=' . site_url() . "collage.php?id=$ThingID]" . display_str($Name) . '[/url]';
             $Subject = t('server.collages.report_collage') . ': ' . display_str($Name);
         }
         break;
@@ -88,7 +88,7 @@ switch ($Type) {
             $Error = t('server.reports.no_forum_thread_with_the_reported_id_found');
         } else {
             list($Title) = $DB->next_record();
-            $TypeLink = 'the forum thread [url=' . site_url() . "forums.php?action=viewthread&amp;threadid=$ThingID]" . display_str($Title) . '[/url]';
+            $TypeLink = t('server.reports.the_forum_thread') . ' [url=' . site_url() . "forums.php?action=viewthread&amp;threadid=$ThingID]" . display_str($Title) . '[/url]';
             $Subject = t('server.reports.report_thread') . ': ' . display_str($Title);
         }
         break;
@@ -115,7 +115,7 @@ switch ($Type) {
             $Error = t('server.reports.no_forum_post_with_the_reported_id_found');
         } else {
             list($PostID, $Body, $TopicID, $PostNum) = $DB->next_record();
-            $TypeLink = 'this [url=' . site_url() . "forums.php?action=viewthread&amp;threadid=$TopicID&amp;post=$PostNum#post$PostID]forum post[/url]";
+            $TypeLink = t('server.reports.the_post') . ' [url=' . site_url() . "forums.php?action=viewthread&amp;threadid=$TopicID&amp;post=$PostNum#post$PostID]forum post[/url]";
             $Subject = t('server.reports_report_post') . ': #' . display_str($PostID);
         }
         break;
@@ -127,7 +127,7 @@ switch ($Type) {
         if (!$DB->has_results()) {
             $Error = t('server.reports.no_comment_with_the_reported_id_found');
         } else {
-            $TypeLink = '[url=' . site_url() . "comments.php?action=jump&amp;postid=$ThingID]this comment[/url]";
+            $TypeLink = t('server.reports.the_comment') . ' [url=' . site_url() . "comments.php?action=jump&amp;postid=$ThingID]this comment[/url]";
             $Subject = t('server.reports_report_comment') . ': #' . display_str($ThingID);
         }
         break;

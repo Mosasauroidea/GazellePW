@@ -8204,7 +8204,7 @@ server.apply.resolve: |-
 server.apply.reopen: |-
   Reabrir
 server.user.torrent_title_drag_note: |-
-  Arraste os itens para baixo para a esquerda ou direita para classificar
+  Arraste os itens a esquerda ou direita para classificar
 server.bookmarks.delete_checked: |-
   Excluir verificado
 server.common.update: |-

@@ -16,7 +16,7 @@ export function splitIntoSections(text) {
     text
       .trim()
       .replace(/\n\r/, '\n')
-      .split(/\n\s*\n/)
+      .split(/([a-zA-Z ]*:\n)/)
       .map((v) => v.trim())
   )
 }

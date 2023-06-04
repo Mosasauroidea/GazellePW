@@ -508,7 +508,7 @@ if ($Warned == 1 && $Cur['Warned'] == '0000-00-00 00:00:00' && check_perms('user
     Misc::send_pm_with_tpl(
         $UserID,
         'comment_warning',
-        ['Length' => $WarnLength, 'URL' => 'wiki.php?action=article&amp;name=warnings', 'PrivateMessage' => $WarnReason]
+        ['Length' => $WarnLength, 'URL' => 'wiki.php?action=article&name=warnings', 'PrivateMessage' => $WarnReason]
     );
     $UpdateSet[] = "Warned = '" . sqltime() . "' + INTERVAL $WarnLength WEEK";
     $Msg = "warned for $WarnLength $Weeks";

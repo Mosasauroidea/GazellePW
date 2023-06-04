@@ -54,7 +54,8 @@ class NotificationsManagerView {
 
     public static function render_settings($Settings) {
         self::$Settings = $Settings;
-        self::render_push_settings();
+        // TODO by qwerty 临时取消通知推送的设置，因为它们目前都无效
+        // self::render_push_settings();
     ?>
         <tr class="Form-row">
             <td class="Form-label">

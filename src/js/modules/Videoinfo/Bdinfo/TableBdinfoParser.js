@@ -31,17 +31,11 @@ export default class TableBdinfoParser {
       SUBTITLES: [],
     }
     for (const [rawSectionName, sectionBody] of chunks) {
-      const sectionName = rawSectionName.replace(':', '')
-      if (['VIDEO', 'AUDIO', 'SUBTITLES', 'FILES', 'CHAPTERS', 'STREAM DIAGNOSTICS'].includes(sectionName)) {
-        const items = this.splitTable(sectionBody)
+      const sectionName = rawSectionName.replace(':', '').toUpperCase()
+      if (['VIDEO', 'AUDIO', 'SUBTITLES'].includes(sectionName)) {
+        const items = this.splitTable(sectionName, sectionBody)
         console.log('splitTable', { sectionName, items })
         result[sectionName] = items.map((v) => this.processItem(sectionName, v))
-      } else {
-        const lines = splitIntoLines(sectionBody)
-        for (const line of lines) {
-          const [key, value] = line.match(/^(.+?):(.*)$/).slice(1)
-          result[sectionName][key] = this.processValue(key, value.trim())
-        }
       }
     }
     return {
@@ -99,17 +93,32 @@ export default class TableBdinfoParser {
     }
   }
 
-  splitTable(text) {
+  splitTable(name, text) {
     const result = []
     // eslint-disable-next-line no-unused-vars
     const [header, seperator, ...rest] = splitIntoLines(text)
-    const names = header.split(/ {3,}/)
+    const names = header.split(/ {1,}/)
     if (names.length === 1) {
       throw new VideinfoTableSpaceError('BDInfoParser: Table空格格式不支持')
     }
-    for (const line of rest) {
-      const cells = line.split(/ {3,}/)
-      result.push(zipObject(names, cells))
+    switch (name) {
+      case 'VIDEO':
+        for (const line of rest) {
+          result.push(zipObject(names, line.match(/(.*?) *([0-9.\(\)]* kbps) *(.*)/).slice(1)))
+        }
+        break
+      case 'AUDIO':
+        for (const line of rest) {
+          result.push(zipObject(names, line.match(/(.*?) *([a-zA-Z ]*[a-zA-Z]) *([0-9.]* kbps) *(.*)/).slice(1)))
+        }
+        break
+      case 'SUBTITLES':
+        for (const line of rest) {
+          result.push(
+            zipObject(names, line.match(/(Presentation Graphics) *([a-zA-Z ]*[a-zA-Z]) *([0-9.]* kbps) *(.*)/).slice(1))
+          )
+        }
+        break
     }
     return result
   }

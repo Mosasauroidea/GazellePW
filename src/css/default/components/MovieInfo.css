@@ -139,15 +139,13 @@ Where
 }
 
 .MovieInfo-poster.empty_photo {
-  content: url('https://ptpimg.me/72j48o.png');
-  opacity: var(--artist-photo-opacity);
+  content: url(../assets/no-image.svg);
   display: block;
   width: 100%;
   pointer-events: none;
 }
 .MovieInfo-artistPhoto.default_photo {
-  opacity: var(--artist-photo-opacity);
-  content: url('https://ptpimg.me/72j48o.png');
+  content: url(../assets/no-image.svg);
   pointer-events: none;
 }
 

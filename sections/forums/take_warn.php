@@ -18,7 +18,7 @@ if ($UserInfo['Class'] > $LoggedUser['Class']) {
     error(403);
 }
 
-$URL = site_url() . "forums.php?action=viewthread&amp;postid=$PostID#post$PostID";
+$URL = site_url() . "forums.php?action=viewthread&postid=$PostID#post$PostID";
 if ($WarningLength !== 'verbal') {
     $Time = (int)$WarningLength * (7 * 24 * 60 * 60);
     Tools::warn_user($UserID, $Time, "$URL - $Reason");

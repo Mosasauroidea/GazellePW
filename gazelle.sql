@@ -3100,7 +3100,6 @@ CREATE TABLE `users_info` (
   `Warned` datetime NOT NULL,
   `SupportFor` varchar(255) NOT NULL,
   `TorrentGrouping` enum('0','1','2') NOT NULL COMMENT '0=Open,1=Closed,2=Off',
-  `ShowTags` enum('0','1') NOT NULL DEFAULT '1',
   `NotifyOnQuote` enum('0','1','2') NOT NULL DEFAULT '0',
   `AuthKey` varchar(32) NOT NULL,
   `ResetKey` varchar(32) NOT NULL,

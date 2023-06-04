@@ -151,12 +151,12 @@ HTML;
                     case TorrentSlot::TorrentSlotStatusEmpty:
                         // 空的class
                         $SlotStatusClass[$type] = '';
-                        $text[$type] = "<span class='u-colorSuccess' data-tooltip='" . t('server.torrents.slot_status_empty') . "'>" . icon('check') . "</span>";
+                        $text[$type] = "<span class='u-colorSuccess' data-tooltip='" . t('server.torrents.slot_status_empty') . "'>" . icon('circle') . "</span>";
                         break;
                     case TorrentSlot::TorrentSlotStatusFull:
                         // 满的class
                         $SlotStatusClass[$type] = '';
-                        $text[$type] = "<span class='u-colorWarning' title = '" . t('server.torrents.slot_status_full') . "'>" . icon('times') . "</span>";
+                        $text[$type] = "<span class='u-colorWarning' title = '" . t('server.torrents.slot_status_full') . "'>" . icon('full-filled-circle') . "</span>";
                         break;
                     case TorrentSlot::TorrentSlotStatusFree:
                         // 有空位的class
@@ -166,7 +166,7 @@ HTML;
                             $SlotsTitle .= "<div>&nbsp;&nbsp;" . t('server.torrents.' . TorrentSlot::slot_option_lang($slot)) . "</div>";
                         }
                         $title = t('server.torrents.slots_we_need');
-                        $text[$type] = "<span class='u-colorCircle' data-tooltip-html>" . icon('circle') .
+                        $text[$type] = "<span class='u-colorCircle' data-tooltip-html>" . icon('half-filled-circle') .
                             "<div data-tooltip-html-content>
                         <div class='title'>$title</div>
                         <div class='content'>$SlotsTitle</div>

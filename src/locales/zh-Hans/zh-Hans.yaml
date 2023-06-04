@@ -2505,7 +2505,7 @@ server.reports.yes: |-
 server.reports.you_cannot_start_a_conversation_with_yourself: |-
   你不能向自己发起对话！
 server.reports.you_reported_sth_for_the_reason: |-
-  你报告了 %s，理由是
+  你报告了%s，理由是
 server.reportsv2.a_torrent_with_that_id_does_not_exist: |-
   不存在该 ID 的种子。
 server.reportsv2.all_new_reports_for_the_chosen_type: |-
@@ -8090,7 +8090,7 @@ server.apply.resolve: |-
 server.apply.reopen: |-
   重新打开
 server.user.torrent_title_drag_note: |-
-  左右拖拽下方项目以排序
+  左右拖拽项目以排序
 server.bookmarks.delete_checked: |-
   删除选中
 server.common.update: |-
@@ -8313,3 +8313,17 @@ client.stats.uploaded_user: |-
   发布种子的用户数
 server.bonus.bonus_points_has_spent: |-
   花费了
+server.forums.verbal: |-
+  口头
+server.reports.the_user: |-
+  用户
+server.reports.the_request: |-
+  求种
+server.reports.the_collage: |-
+  合集
+server.reports.the_forum_thread: |-
+  论坛
+server.reports.the_post: |-
+  回复
+server.reports.the_comment: |-
+  评论

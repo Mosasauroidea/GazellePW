@@ -95,14 +95,14 @@ class Misc {
 
 
     public static function send_pm_with_tpl($ToID, $Template, $Params = [], $FromID = 0, $ConvID = '') {
-        $CHSTPL = G::$Twig->load('privatemessage/chs/' . $Template . '.twig');
-        $ENTPL = G::$Twig->load('privatemessage/en/' . $Template . '.twig');
-        $CHSSubject = $CHSTPL->renderBlock('subject', $Params);
-        $CHSBody = $CHSTPL->renderBlock('body', $Params);
-        $ENSubject = $ENTPL->renderBlock('subject', $Params);
-        $ENBody = $ENTPL->renderBlock('body', $Params);
-        $Subject = $CHSSubject . ' | ' . $ENSubject;
-        $Body = $CHSBody . "\n[hr]\n" . $ENBody;
+        $MainTPL = G::$Twig->load('privatemessage/' . Lang::MAIN_LANG . '/' . $Template . '.twig');
+        $SubTPL = G::$Twig->load('privatemessage/' . Lang::SUB_LANG . '/' . $Template . '.twig');
+        $MainSubject = $MainTPL->renderBlock('subject', $Params);
+        $MainBody = $MainTPL->renderBlock('body', $Params);
+        $SubSubject = $SubTPL->renderBlock('subject', $Params);
+        $SubBody = $SubTPL->renderBlock('body', $Params);
+        $Subject = $MainSubject . ' | ' . $SubSubject;
+        $Body = $MainBody . "\n[hr]\n" . $SubBody;
         return self::send_pm($ToID, $FromID, $Subject, $Body, $ConvID);
     }
 

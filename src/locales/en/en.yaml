@@ -8226,7 +8226,7 @@ server.apply.resolve: |-
 server.apply.reopen: |-
   Reopen
 server.user.torrent_title_drag_note: |-
-  Drag the items below left or right to sort
+  Drag the items left or right to sort
 server.bookmarks.delete_checked: |-
   Delete checked
 server.common.update: |-
@@ -8453,3 +8453,15 @@ client.stats.uploaded_user: |-
   User uploaded torrent
 server.bonus.bonus_points_has_spent: |-
   has spent
+server.reports.the_user: |-
+  the user
+server.reports.the_request: |-
+  the request
+server.reports.the_collage: |-
+  the collage
+server.reports.the_forum_thread: |-
+  the forum thread
+server.reports.the_post: |-
+  the post
+server.reports.the_comment: |-
+  the comment

@@ -1,5 +1,5 @@
 <?
-if (check_perms('site_debug')) {
+if (!check_perms('admin_manage_news')) {
     error(403);
 }
 if (isset($_GET['news_flush'])) {

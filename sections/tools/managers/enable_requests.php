@@ -267,7 +267,7 @@ $DB->set_query_id($QueryID);
             <?
             } ?>
             <div class='option'>
-                <button class=" Button" type="submit" id="outcome" value="Approve Selected"><?= t('server.tools.approve_selected') ?></button>
+                <button class="Button" type="submit" id="outcome" value="Approve Selected"><?= t('server.tools.approve_selected') ?></button>
                 <button class="Button" type="submit" id="outcome" value="Reject Selected"><?= t('server.tools.reject_selected') ?></button>
                 <button class="Button" type="submit" id="outcome" value="Discard Selected"><?= t('server.tools.discard_selected') ?></button>
             </div>

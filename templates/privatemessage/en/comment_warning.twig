@@ -2,7 +2,5 @@
 You have received a warning
 {% endblock %}
 {% block body %}
-You have received a {{ Length }} week{%if Length > 1%}s{%endif%} warning for [url={{ URL }}]this comment[/url].
-
-[quote]{{ PrivateMessage }}[/quote]
+You have received a {{ Length }} week{%if Length > 1%}s{%endif%} warning for {{PrivateMessage}}
 {% endblock %}

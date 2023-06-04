@@ -278,11 +278,11 @@ function LoadEdit(type, post, depth) {
 
 function Refresh($Lite) {
   if ($Lite) {
-    ajax.get('forums.php?action=ajax_refresh&news_flush_lite=1', function (response) {
+    ajax.get('forums.php?action=ajax_refresh&auth=' + authkey + '&news_flush_lite=1', function (response) {
       alert('Success!')
     })
   } else {
-    ajax.get('forums.php?action=ajax_refresh&news_flush=1', function (response) {})
+    ajax.get('forums.php?action=ajax_refresh&auth=' + authkey + '&news_flush=1', function (response) {})
     alert('Success!')
   }
 }

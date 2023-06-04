@@ -229,15 +229,6 @@ echo $Val->GenerateJS('userform');
                             <input class="Input" type="text" size="40" name="styleurl" id="styleurl" value="<?= display_str($StyleURL) ?>" />
                         </td>
                     </tr>
-                    <tr class="Form-row" id="site_tooltips_tr">
-                        <td class="Form-label" data-tooltip="<?= t('server.user.style_tool_title') ?>"><strong><?= t('server.user.style_tool') ?></strong></td>
-                        <td class="Form-inputs">
-                            <div class="Checkbox">
-                                <input class="Input" type="checkbox" name="usetooltipster" id="usetooltipster" <?= !isset($SiteOptions['Tooltipster']) || $SiteOptions['Tooltipster'] ? ' checked="checked"' : '' ?> />
-                                <label class="Checkbox-label" for="usetooltipster"><?= t('server.user.enabled') ?></label>
-                            </div>
-                        </td>
-                    </tr>
                     <? if (check_perms('users_mod')) { ?>
                         <tr class="Form-row" id="site_autostats_tr">
                             <td class="Form-label" data-tooltip="<?= t('server.user.base_stats_title') ?>"><strong><?= t('server.user.base_stats') ?></strong></td>
@@ -462,10 +453,6 @@ echo $Val->GenerateJS('userform');
                             <div class="Checkbox">
                                 <input class="Input" type="checkbox" name="showtfilter" id="showtfilter" <?= (!isset($SiteOptions['ShowTorFilter']) || $SiteOptions['ShowTorFilter'] ? ' checked="checked"' : '') ?> />
                                 <label class="Checkbox-label" for="showtfilter"><?= t('server.user.filt_tr_show') ?></label>
-                            </div>
-                            <div class="Checkbox">
-                                <input class="Input" type="checkbox" name="showtags" id="showtags" <? Format::selected('ShowTags', 1, 'checked', $SiteOptions); ?> />
-                                <label class="Checkbox-label" for="showtags"><?= t('server.user.filt_tr_show_tags') ?></label>
                             </div>
                         </td>
                     </tr>
@@ -1103,6 +1090,7 @@ echo $Val->GenerateJS('userform');
                             </div>
                         </td>
                     </tr>
+                    <? /*
                     <tr class="Form-row" id="acc_irckey_tr">
                         <td class="Form-label"><strong><?= t('server.user.irckey') ?></strong></td>
                         <td class="Form-items">
@@ -1115,6 +1103,8 @@ echo $Val->GenerateJS('userform');
                             </div>
                         </td>
                     </tr>
+                    /*
+                    ?>
                     <? /*
                     <tr class="Form-row" id="acc_tg_tr">
                         <td class="Form-label"><strong><?= t('server.user.tg_binding') ?></strong></td>
@@ -1151,22 +1141,33 @@ echo $Val->GenerateJS('userform');
                     <tr class="Form-row" id="acc_password_tr">
                         <td class="Form-label"><strong><?= t('server.user.st_password') ?></strong></td>
                         <td class="Form-items">
-                            <div class="FormOneLine">
-                                <div><?= t('server.user.st_password_old') ?>:</div>
-                                <input class="Input is-small" type="password" size="40" name="cur_pass" id="cur_pass" value="" />
+                            <div class="Form-row">
+                                <div class="Form-label"><?= t('server.user.st_password_old') ?>:</div>
+                                <div class="Form-inputs">
+                                    <input class="Input is-small" type="password" size="40" name="cur_pass" id="cur_pass" value="" />
+                                </div>
                             </div>
-                            <div class="FormOneLine">
-                                <div><?= t('server.user.st_password_new') ?>:</div>
-                                <input class="is-small Input" type="password" size="40" name="new_pass_1" id="new_pass_1" value="" />
-                                <strong id="pass_strength"></strong>
+                            <div class="Form-row">
+                                <div class="Form-label"><?= t('server.user.st_password_new') ?>:</div>
+                                <div class="Form-inputs">
+                                    <input class="is-small Input" type="password" size="40" name="new_pass_1" id="new_pass_1" value="" />
+                                    <strong id="pass_strength"></strong>
+                                </div>
                             </div>
-                            <div class="FormOneLine">
-                                <div><?= t('server.user.st_password_re') ?>:</div>
-                                <input class="is-small Input" type="password" size="40" name="new_pass_2" id="new_pass_2" value="" />
-                                <strong id="pass_match"></strong>
+                            <div class="Form-row">
+                                <div class="Form-label"><?= t('server.user.st_password_re') ?>:</div>
+                                <div class="Form-inputs">
+                                    <input class="is-small Input" type="password" size="40" name="new_pass_2" id="new_pass_2" value="" />
+                                    <strong id="pass_match"></strong>
+                                </div>
                             </div>
-                            <div class="setting_description">
-                                <?= t('server.user.st_password_note') ?>
+                            <div class="Form-row">
+                                <div class="Form-label"></div>
+                                <div class="Form-inputs">
+                                    <div class="setting_description">
+                                        <?= t('server.user.st_password_note') ?>
+                                    </div>
+                                </div>
                             </div>
                         </td>
                     </tr>
