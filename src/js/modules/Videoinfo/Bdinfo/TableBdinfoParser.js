@@ -1,6 +1,6 @@
 import Debug from 'debug'
 import { chunk, zipObject } from 'lodash-es'
-import { splitIntoLines, splitIntoSections } from '../utils'
+import { splitIntoLines, splitIntoBDInfoSections } from '../utils'
 import { VideinfoTableSpaceError } from '../errors'
 
 const debug = Debug('mediainfo')
@@ -12,7 +12,7 @@ export default class TableBdinfoParser {
       text = `DISC INFO:\n\n${text}`
     }
 
-    let sections = splitIntoSections(text)
+    let sections = splitIntoBDInfoSections(text)
     sections = sections.filter((v) => {
       if (v.startsWith('(*)')) {
         return false

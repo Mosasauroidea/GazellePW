@@ -11,12 +11,22 @@ export const DISK_SIZE = {
   BD100: GB(93.13),
 }
 
-export function splitIntoSections(text) {
+export function splitIntoBDInfoSections(text) {
   return compact(
     text
       .trim()
       .replace(/\n\r/, '\n')
       .split(/([a-zA-Z ]*:\n)/)
+      .map((v) => v.trim())
+  )
+}
+
+export function splitIntoSections(text) {
+  return compact(
+    text
+      .trim()
+      .replace(/\n\r/, '\n')
+      .split(/\n\s*\n/)
       .map((v) => v.trim())
   )
 }
