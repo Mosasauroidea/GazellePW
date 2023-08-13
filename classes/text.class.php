@@ -523,8 +523,6 @@ class Text {
                     $ArrayPos--;
                     break; // n serves only to disrupt bbcode (backwards compatibility - use [pre])
                 case 'mediainfo':
-                    $Block =  str_replace(chr(194) . chr(160), ' ', $Block);
-                    $Block = str_replace("\u2002", " ", utf8_encode($Block));
                     if (strstr(strtolower($Block), 'disc size')) {
                         $Array[$ArrayPos] = array('Type' => 'bdinfo', 'Val' => $Block);
                     } else {
