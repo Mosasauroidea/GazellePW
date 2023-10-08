@@ -26,7 +26,7 @@ HeaderLogo
 .HeaderLogo-link {
   display: block;
   width: 100%;
-  background: url(../../assets/loginlogo.png) center / contain no-repeat;
+  background: url(../../assets/speciallogo.png) center / contain no-repeat;
   height: 100%;
   filter: var(--HeaderLogo-filter);
 }
