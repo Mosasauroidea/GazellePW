@@ -26,19 +26,19 @@ RUN  DEBIAN_FRONTEND=noninteractive TZ=Etc/UTC apt-get install -y --no-install-r
     mariadb-client \
     netcat-openbsd \
     nginx \
-    php7.4-cli \
-    php7.4-curl \
-    php7.4-fpm \
-    php7.4-gd \
-    php7.4-mbstring \
-    php7.4-mysql \
-    php7.4-xml \
-    php7.4-zip \
-    php7.4-yaml \
-    php7.4-apcu \
-    php7.4-bcmath \
-    php7.4-memcached \
-    php7.4-xdebug \
+    php8.1-cli \
+    php8.1-curl \
+    php8.1-fpm \
+    php8.1-gd \
+    php8.1-mbstring \
+    php8.1-mysql \
+    php8.1-xml \
+    php8.1-zip \
+    php8.1-yaml \
+    php8.1-apcu \
+    php8.1-bcmath \
+    php8.1-memcached \
+    php8.1-xdebug \
     python3 \
     python3-pip \
     python3-setuptools \
@@ -116,12 +116,13 @@ COPY . /var/www
 # Permissions and configuration layer
 RUN useradd -ms /bin/bash gazelle \
     && chown -R gazelle:gazelle /var/www \
-    && cp /var/www/.docker/web/php.ini /etc/php/7.4/cli/php.ini \
-    && cp /var/www/.docker/web/php.ini /etc/php/7.4/fpm/php.ini \
-    && cp /var/www/.docker/web/xdebug.ini /etc/php/7.4/mods-available/xdebug.ini \
+    && cp /var/www/.docker/web/php.ini /etc/php/8.1/cli/php.ini \
+    && cp /var/www/.docker/web/php.ini /etc/php/8.1/fpm/php.ini \
+    && cp /var/www/.docker/web/xdebug.ini /etc/php/8.1/mods-available/xdebug.ini \
     && rm -f /etc/nginx/sites-enabled/default
 
 EXPOSE 80/tcp
+EXPOSE 443/tcp
 EXPOSE 9002/tcp
 EXPOSE 35729/tcp
 

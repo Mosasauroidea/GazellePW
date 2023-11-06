@@ -6,20 +6,29 @@ services:
     platform: linux/amd64
     container_name: gpw-web
     ports:
-      - 9000:80
+      - 80:80
+      - 443:443
       - 9002:9002 # vite
       - 35729:35729 # livereload
     depends_on:
       - memcached
       - mysql
+    restart: always
     volumes:
       - .:/var/www:delegated
       - .docker/web/nginx.conf:/etc/nginx/sites-enabled/gazelle.conf
-      - .docker/web/www.conf:/etc/php/7.3/fpm/pool.d/www.conf
+      - .docker/web/www.conf:/etc/php/8.1/fpm/pool.d/www.conf
+      - ./certbot/www/:/var/www/certbot/:ro
     environment:
       # These should match what you set for your mysql container below
       - MYSQL_USER=gazelle
       - MYSQL_PASSWORD=password
+  
+   certbot:
+    image: certbot/certbot:latest
+    volumes:
+      - ./certbot/www/:/var/www/certbot/:rw
+      - ./certbot/conf/:/etc/letsencrypt/:rw
 
   memcached:
     image: memcached:1.5-alpine

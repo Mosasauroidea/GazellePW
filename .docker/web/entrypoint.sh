@@ -34,7 +34,7 @@ fi
 
 if [ ! -f /etc/php/7.4/cli/conf.d/99-boris.ini ]; then
     echo "Initialize Boris..."
-    grep '^disable_functions' /etc/php/7.4/cli/php.ini \
+    grep '^disable_functions' /etc/php/8.1/cli/php.ini \
         | sed -r 's/pcntl_(fork|signal|signal_dispatch|waitpid),//g' \
         > /etc/php/7.4/cli/conf.d/99-boris.ini
 fi
