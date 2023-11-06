@@ -11,9 +11,6 @@
 git clone https://github.com/Mosasauroidea/GazellePW.git
 cd GazellePW
 
-#Letencrypt certbot // Remember to change the domain
-docker-compose run --rm certbot certonly --webroot --webroot-path /var/www/certbot/ -d yourdomain.com
-
 #Edit nginx file.
 edit .docker/web/nginx.conf 
 
@@ -22,6 +19,13 @@ replace with yourdomain.com
 
 # Start
 docker-compose -p gazelle up
+
+#Letencrypt certbot // Remember to change the domain
+docker-compose run --rm certbot certonly --webroot --webroot-path /var/www/certbot/ -d yourdomain.com
+
+# Restart
+docker-compose -p gazelle restart
+
 ```
 
 3. Now you can access the website through http://localhost:9000
