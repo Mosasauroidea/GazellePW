@@ -24,8 +24,9 @@ services:
       - MYSQL_USER=gazelle
       - MYSQL_PASSWORD=password
   
-   certbot:
+  certbot:
     image: certbot/certbot:latest
+    container_name: gpw-certbot
     volumes:
       - ./certbot/www/:/var/www/certbot/:rw
       - ./certbot/conf/:/etc/letsencrypt/:rw
