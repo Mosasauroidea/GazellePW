@@ -38,9 +38,7 @@ services:
     image: phpmyadmin/phpmyadmin:latest
     container_name: gpw-phpmyadmin
     environment:
-      - PMA_HOST=mysql
-      - PMA_USER=gazelle
-      - PMA_PASSWORD=password
+      - UPLOAD_LIMIT=50M
     depends_on:
       - mysql
     ports:
