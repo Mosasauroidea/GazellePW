@@ -12,7 +12,7 @@ git clone https://github.com/Mosasauroidea/GazellePW.git
 cd GazellePW
 
 #Letencrypt certbot // Remember to change the domain
-docker-compose run --rm certbot certonly --webroot --webroot-path /var/www/certbot/ --dry-run -d yourdomain.com
+docker-compose run --rm certbot certonly --webroot --webroot-path /var/www/certbot/ -d yourdomain.com
 
 #Edit nginx file.
 edit .docker/web/nginx.conf 
