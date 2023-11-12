@@ -287,24 +287,26 @@ if (!empty($_REQUEST['confirm'])) {
                 $TreeLevel = 1;
             }
 
-            include(CONFIG['SERVER_ROOT'] . '/classes/templates.class.php');
-            $TPL = new TEMPLATE;
             if (CONFIG['CLOSE_LOGIN']) {
                 $LoginKey = Users::make_secret();
                 $DB->query("insert into login_link (LoginKey, UserID, Username) values ('" . db_string($LoginKey) . "', '$UserID', '" . db_string(trim($_POST['username'])) . "')");
-                $TPL->open(CONFIG['SERVER_ROOT'] . '/templates/new_registration_close_login.tpl');
-                $TPL->set('LoginKey', $LoginKey);
-                $TPL->set('TorrentKeyRight', substr($torrent_pass, -8));
-                $TPL->set('Username', $_REQUEST['username']);
+                Misc::send_email_with_tpl($_REQUEST['email'], 'new_registration_close_login', [
+                    'LoginKey' => $LoginKey,
+                    'TorrentKeyRight' => substr($torrent_pass, -8),
+                    'Username' => $_REQUEST['username'],
+                    'TorrentKey' => $torrent_pass,
+                    'SITE_NAME' => CONFIG['SITE_NAME'],
+                    'SITE_URL' => CONFIG['SITE_URL'],
+                ], 'text/html');
             } else {
-                $TPL->open(CONFIG['SERVER_ROOT'] . '/templates/new_registration.tpl');
+                Misc::send_email_with_tpl($_REQUEST['email'], 'new_registration', [
+                    'Username' => $_REQUEST['username'],
+                    'TorrentKey' => $torrent_pass,
+                    'SITE_NAME' => CONFIG['SITE_NAME'],
+                    'SITE_URL' => CONFIG['SITE_URL'],
+                ], 'text/html');
             }
-            $TPL->set('Username', $_REQUEST['username']);
-            $TPL->set('TorrentKey', $torrent_pass);
-            $TPL->set('SITE_NAME', CONFIG['SITE_NAME']);
-            $TPL->set('SITE_URL', CONFIG['SITE_URL']);
 
-            Misc::send_email($_REQUEST['email'], '激活你的 ' . CONFIG['SITE_NAME'] . ' 账号 | New account confirmation at ' . CONFIG['SITE_NAME'], $TPL->get(), 'noreply', 'text/html');
             Tracker::update_tracker('add_user', array('id' => $UserID, 'passkey' => $torrent_pass));
             $Sent = 1;
         }

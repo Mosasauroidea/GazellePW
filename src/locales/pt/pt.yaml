@@ -1972,8 +1972,6 @@ server.login.you_are_banned_from_logging: |-
   Você está proibido de iniciar sessão por outro %s.
 server.login.your_account_has_been_enabled: |-
   Sua conta foi ativada. Agora você pode fazer login.<br>Certifique-se de fazer login antes de 24:00 hoje ou sua conta será desativada novamente.
-server.login.your_enable_request_for: |-
-  Seu pedido de ativação para {{CONFIG['SITE_NAME']}} foi&nbsp;
 server.permissions.admin_advanced_user_search: |-
   Pode acessar a busca avançada de usuários
 server.permissions.admin_bp_history: |-
@@ -5434,9 +5432,9 @@ server.torrents.retention_type_slot: |-
 server.torrents.revert: |-
   Reverter para esta revisão
 server.torrents.revert_confirm: |-
-  Reverter Confirma!
+  Reverter revisão!
 server.torrents.revert_confirm_body: |-
-  Você está tentando reverter para a revisão %s.
+  Você está tentando reverter para a revisão
 server.torrents.revision_history_after: |-
   Histórico de versões
 server.torrents.reward_100_bonus_to_uploader: |-

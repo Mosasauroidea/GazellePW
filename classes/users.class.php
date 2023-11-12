@@ -928,17 +928,13 @@ class Users {
 				ResetExpires = '" . time_plus(60 * 60) . "'
 			WHERE UserID = '$UserID'");
 
-        require(CONFIG['SERVER_ROOT'] . '/classes/templates.class.php');
-        $TPL = new TEMPLATE;
-        $TPL->open(CONFIG['SERVER_ROOT'] . '/templates/password_reset.tpl'); // Password reset template
-
-        $TPL->set('Username', $Username);
-        $TPL->set('ResetKey', $ResetKey);
-        $TPL->set('IP', $_SERVER['REMOTE_ADDR']);
-        $TPL->set('SITE_NAME', CONFIG['SITE_NAME']);
-        $TPL->set('SITE_URL', site_url(false));
-
-        Misc::send_email($Email, '重置你 ' . CONFIG['SITE_NAME'] . ' 账号的密码 | Password reset information for ' . CONFIG['SITE_NAME'],  $TPL->get(), 'noreply', 'text/html');
+        Misc::send_email_with_tpl($Email, 'password_reset', [
+            'Username' => $Username,
+            'ResetKey' => $ResetKey,
+            'IP' => $_SERVER['REMOTE_ADDR'],
+            'SITE_NAME' => CONFIG['SITE_NAME'],
+            'SITE_URL' => site_url(false),
+        ], 'text/html');
     }
 
     /**

@@ -67,7 +67,6 @@ if (strpos($Email, '|') !== false && check_perms('site_send_unlimited_invites'))
 } else {
     $Emails = array($Email);
 }
-require(CONFIG['SERVER_ROOT'] . '/classes/templates.class.php');
 foreach ($Emails as $CurEmail) {
     if (!preg_match("/^" . EMAIL_REGEX . "$/i", $CurEmail)) {
         if (count($Emails) > 1) {
@@ -130,17 +129,15 @@ foreach ($Emails as $CurEmail) {
         }
         $Cache->commit_transaction(0);
     }
-    $Tpl = new \TEMPLATE;
-    $Tpl->open(CONFIG['SERVER_ROOT'] . '/templates/invite.tpl');
-    $Tpl->set('SiteName', CONFIG['SITE_NAME']);
-    $Tpl->set('SiteURL', CONFIG['SITE_URL']);
-    $Tpl->set('CurEmail', $CurEmail);
-    $Tpl->set('InviteKey', $InviteKey);
-    $Tpl->set('UserName', $Username);
-    $Tpl->set('TGDisableChannel', $TGDisableChannel);
-    $Tpl->set('TGDisableChannelName', $TGDisableChannelName);
-
-    Misc::send_email($CurEmail, '你有一封来自 ' . CONFIG['SITE_NAME'] . ' 的邀请函 | You have been invited to ' . CONFIG['SITE_NAME'], $Tpl->get(), 'noreply', 'text/html');
+    Misc::send_email_with_tpl($CurEmail, 'invite', [
+        'SiteName' => CONFIG['SITE_NAME'],
+        'SiteURL' => CONFIG['SITE_URL'],
+        'CurEmail' => $CurEmail,
+        'InviteKey' => $InviteKey,
+        'UserName' => $Username,
+        'TGDisableChannel' => $TGDisableChannel,
+        'TGDisableChannelName' => $TGDisableChannelName,
+    ], 'text/html');
 }
 
 header('Location: user.php?action=invite');

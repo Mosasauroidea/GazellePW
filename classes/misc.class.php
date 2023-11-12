@@ -8,6 +8,98 @@ use PHPMailer\PHPMailer\Exception;
 use Gazelle\Util\Time;
 
 class Misc {
+    private static function mailHeader() {
+        return '
+        <style type="text/css">
+            #mail_background{
+                background-image: linear-gradient(#bbbbbc, #c4c4c4);
+                padding: 20px;
+            }
+            #mail_container{
+            	background-color: #fff;
+            	border-radius: 5px;
+            	max-width: 600px;
+            	margin: 0 auto;
+            	box-shadow: 0 0 6px 0 rgba(0, 0, 0, .1);
+            }
+            #mail_head{
+            	border-top-left-radius: 5px;
+                border-top-right-radius: 5px;
+            	text-align: center;
+            	padding: 20px 0;
+            	background-color: #1e2538;
+            }
+            #mail_head>img{
+            	width: 50%;
+            }
+            #mail_body{
+            	padding: 15px;
+            }
+            #mail_body>ol{
+            	padding-top: 0;
+            	margin-top: 0;
+            	margin-left: 10px;
+            	padding-left: 10px;
+            }
+            .button_container{
+            	text-align: center;
+            	margin: 10px 0;
+            }
+            .button{
+                cursor: pointer;
+                outline: 0;
+                transition: all .1s linear;
+                background: #4285f4;
+                border: none;
+                border-radius: 5px;
+                box-shadow: 0 0 4px 0 rgba(0, 0, 0, .2);
+                color: #ffffff;
+                padding: 5px 10px;
+                margin: 0px 2px;
+            	text-decoration: none !important;
+            	font-size: 1.1rem;
+            }
+            .button:hover{
+            	background: #1958bd;
+            }
+            li.important{
+            	color: #d8210d
+            }
+        </style>
+        <div id="mail_background" style="background-image: linear-gradient(#bbbbbc, #c4c4c4); padding: 20px;">
+            <div id="mail_container" style="background-color: #fff;border-radius: 5px;max-width: 600px;margin: 0 auto;box-shadow: 0 0 6px 0 rgba(0, 0, 0, .1);">
+            <div id="imail_head" style="border-top-left-radius: 5px;
+                border-top-right-radius: 5px;
+                text-align: center;
+                padding: 20px 0;
+                background-color: #1e2538;">
+                <img src="' . vite('src/css/publicstyle/images/loginlogo.png') . '" style="width: 50%;">
+            </div>
+            <div id="mail_body" style="padding: 15px;">
+    ';
+    }
+
+    private static function mailFooter() {
+        return '</div></div></div>';
+    }
+
+    public static function send_email_with_tpl($To, $Template, $Params, $ContentType = '') {
+        $MainTPL = G::$Twig->load('emails/' . Lang::MAIN_LANG . '/' . $Template . '.twig');
+        $SubTPL = G::$Twig->load('emails/' . Lang::SUB_LANG . '/' . $Template . '.twig');
+        $MainSubject = $MainTPL->renderBlock('subject', $Params);
+        $MainBody = $MainTPL->renderBlock('body', $Params);
+        $SubSubject = $SubTPL->renderBlock('subject', $Params);
+        $SubBody = $SubTPL->renderBlock('body', $Params);
+        $Subject = $MainSubject . ' | ' . $SubSubject;
+        $SiteName = CONFIG['SITE_NAME'];
+        if ($ContentType == 'text/html') {
+            $Body = self::mailHeader() . $MainBody . "<br/><br/><hr/><br/><br/>" . $SubBody . "<br/><br/>Thank you, <br/>${SiteName} Staff" . self::mailFooter();
+        } else {
+            $Body = $MainBody . "\n\n----------------------------------------\n\n" . $SubBody;
+            $Body = $Body . "\n\nThank you, \n${SiteName} Staff";
+        }
+        return self::send_email($To, $Subject, $Body, 'noreply', $ContentType);
+    }
     /**
      * Send an email.
      *

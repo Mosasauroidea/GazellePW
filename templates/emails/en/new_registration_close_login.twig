@@ -1,0 +1,28 @@
+{% block subject %}New account confirmation at {{SITE_NAME}}{% endblock %}
+{% block body %}This email is to confirm the account you just created at {{SITE_NAME}}. You have 24 hours to confirm and login to finish the registration process for the account created with the username: {{Username}}.<br/>
+<p class="button_container" style="text-align: center;
+	margin: 10px 0;"><a class="button" target="_blank" href='{{SITE_URL}}/register.php?confirm={{TorrentKey}}' style="cursor: pointer;
+    outline: 0;
+    transition: all .1s linear;
+    background: #4285f4;
+    border: none;
+    border-radius: 5px;
+    box-shadow: 0 0 4px 0 rgba(0, 0, 0, .2);
+    color: #ffffff;
+    padding: 5px 10px;
+    margin: 0px 2px;
+	text-decoration: none !important;
+	font-size: 1.1rem;">Confirm</a>
+<a class="button" target="_blank" href='{{SITE_URL}}/login.php?loginkey={{LoginKey}}' style="cursor: pointer;
+    outline: 0;
+    transition: all .1s linear;
+    background: #4285f4;
+    border: none;
+    border-radius: 5px;
+    box-shadow: 0 0 4px 0 rgba(0, 0, 0, .2);
+    color: #ffffff;
+    padding: 5px 10px;
+    margin: 0px 2px;
+	text-decoration: none !important;
+	font-size: 1.1rem;">Login</a></p>
+<span>The last 8 digits of your passkey are: {{LoginKey}} (can be used to obtain temporary login link in the future)</span>{% endblock %}

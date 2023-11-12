@@ -121,17 +121,17 @@ class AutoEnable {
 
         if ($Status != self::DISCARDED) {
             // Prepare email
-            require(CONFIG['SERVER_ROOT'] . '/classes/templates.class.php');
-            $TPL = new TEMPLATE;
+            $TPL = '';
+            $Params = [];
             if ($Status == self::APPROVED) {
-                $TPL->open(CONFIG['SERVER_ROOT'] . '/templates/enable_request_accepted.tpl');
-                $TPL->set('SITE_URL', site_url(false));
+                $TPL = 'enable_request_accept';
+                $Params['SITE_URL'] =  site_url(false);
             } else {
-                $TPL->open(CONFIG['SERVER_ROOT'] . '/templates/enable_request_denied.tpl');
-                $TPL->set('TG_DISABLE_CHANNEL', CONFIG['TG_DISBALE_CHANNEL']);
+                $TPL = 'enable_request_denied';
+                $Params['TG_DISABLE_CHANNEL'] =  CONFIG['TG_DISBALE_CHANNEL'];
             }
 
-            $TPL->set('SITE_NAME', CONFIG['SITE_NAME']);
+            $Params['SITE_NAME'] = CONFIG['SITE_NAME'];
 
             foreach ($Results as $Result) {
                 list($Email, $ID, $UserID) = $Result;
@@ -144,14 +144,10 @@ class AutoEnable {
 						UPDATE users_enable_requests
 						SET Token = '$Token'
 						WHERE ID = '$ID'");
-                    $TPL->set('TOKEN', $Token);
+                    $Params['TOKEN'] = $Token;
                 }
 
-                // Send email
-                $Subject = t('server.login.your_enable_request_for');
-                $Subject .= ($Status == self::APPROVED) ? t('server.login.approved') : t('server.login.denied');
-
-                Misc::send_email($Email, $Subject, $TPL->get(), 'noreply');
+                Misc::send_email_with_tpl($Email, $TPL, $Params);
             }
         } else {
             foreach ($Results as $Result) {

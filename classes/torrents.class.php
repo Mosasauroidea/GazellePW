@@ -1362,11 +1362,11 @@ WHERE ud.TorrentID=? AND ui.NotifyOnDeleteDownloaded='1' AND ud.UserID NOT IN ({
 
     public static function release_group($Torrent) {
         $FileName = self::filename($Torrent);
-        preg_match("/-([a-zA-Z0-9]{0,15})([\.@]\w+)?$/i", $FileName, $Matches);
-        if (!$Matches[1]) {
-            preg_match("/@(.*)/i", $FileName, $Matches);
+        preg_match("/[-@]?([a-zA-Z0-9]{0,15})(\.\w+)?$/i", $FileName, $Matches);
+        if (count($Matches) > 1) {
+            return $Matches[1];
         }
-        return $Matches[1];
+        return '';
     }
 
     public static function filename($Torrent) {

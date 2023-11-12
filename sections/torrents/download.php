@@ -179,7 +179,8 @@ if ($CategoryID == '1' && $Image != '' && $TorrentUploaderID != $UserID) {
     $RecentSnatches = $Cache->get_value("recent_snatches_$UserID");
     if (!empty($RecentSnatches)) {
         $Snatch = array(
-            'TorrentID' => $GroupID,
+            'TorrentID' => $TorrentID,
+            'ID' => $GroupID,
             'Name' => $Name,
             'SubName' => $SubName,
             'Year' => $Year,

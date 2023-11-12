@@ -1924,8 +1924,6 @@ server.login.you_are_banned_from_logging: |-
   你将被限制登录 %s。
 server.login.your_account_has_been_enabled: |-
   账号已恢复，你现在可以登录了。<br>请确保在今晚 24:00 之前完成登录，否则你的账号会被再次禁用。
-server.login.your_enable_request_for: |-
-  你向 %s 提交的恢复申请已被
 server.permissions.admin_advanced_user_search: |-
   能够访问高级用户搜索
 server.permissions.admin_bp_history: |-
@@ -5365,15 +5363,15 @@ server.torrents.resolve: |-
 server.torrents.retention_slot: |-
   存档槽
 server.torrents.retention_slot_requirements: |-
-  应小于质量类槽位体积的 80%。压制质量达到一般要求即可。
+  应小于质量类槽位体积的 80%%。压制质量达到一般要求即可。
 server.torrents.retention_type_slot: |-
   存档槽类（含存档和特色）
 server.torrents.revert: |-
   还原该版
 server.torrents.revert_confirm: |-
-  还原确认！
+  还原版本
 server.torrents.revert_confirm_body: |-
-  你正在试图还原到版本%s。
+  你正在试图还原到版本
 server.torrents.revision_history_after: |-
   历史版本
 server.torrents.reward_100_bonus_to_uploader: |-

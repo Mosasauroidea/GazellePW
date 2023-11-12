@@ -350,25 +350,23 @@ class Referral {
         $InviteReason = 'This user was referred to membership by their account at ' . $service . '. They verified their account on ' . date('Y-m-d H:i:s');
         $InviteKey = db_string(Users::make_secret());
         $InviterId = $this->ExternalServices[$service]['inviter_id'];
-        require(CONFIG['SERVER_ROOT'] . '/classes/templates.class.php');
-        $Tpl = new TEMPLATE;
-        $Tpl->open(CONFIG['SERVER_ROOT'] . '/templates/referral.tpl'); // Password reset template
-        $Tpl->set('Email', $email);
-        $Tpl->set('InviteKey', $InviteKey);
-        $Tpl->set('DISABLED_CHAN', CONFIG['BOT_DISABLED_CHAN']);
-        $Tpl->set('IRC_SERVER', CONFIG['BOT_SERVER']);
-        $Tpl->set('SITE_NAME', CONFIG['SITE_NAME']);
-        $Tpl->set('SITE_URL', CONFIG['SITE_URL']);
-
         // save invite to DB
         G::$DB->query("
 		INSERT INTO invites
 			(InviterID, InviteKey, Email, Expires, Reason)
 		VALUES
 			('$InviterId', '$InviteKey', '" . db_string($email) . "', '$InviteExpires', '$InviteReason')");
+        $Body = G::$Twig->render('emails/referral.twig', [
+            'Email' => $email,
+            'InviteKey' => $InviteKey,
+            'DISABLED_CHAN' => CONFIG['BOT_DISABLED_CHAN'],
+            'IRC_SERVER' => CONFIG['BOT_SERVER'],
+            'SITE_NAME' => CONFIG['SITE_NAME'],
+            'SITE_URL' => CONFIG['SITE_URL'],
+        ]);
 
         // send email
-        Misc::send_email($email, 'You have been invited to ' . CONFIG['SITE_NAME'], $Tpl->get(), 'noreply', 'text/plain');
+        Misc::send_email($email, 'You have been invited to ' . CONFIG['SITE_NAME'], $Body, 'noreply', 'text/plain');
     }
 
     /**

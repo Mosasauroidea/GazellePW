@@ -1,0 +1,26 @@
+{% block subject %}You have been invited to  {{SiteName}}{% endblock %}
+{% block body %}The user {{UserName}} has invited you to join {{SiteName}} and has specified this address ({{CurEmail}}) as your email address. To confirm your invite, click on the following button:<br/>
+<p class="button_container" style="text-align: center;
+margin: 10px 0;"><a class="button" target="_blank" href='{{SiteURL}}/register.php?invite={{InviteKey}}' style="cursor: pointer;
+outline: 0;
+transition: all .1s linear;
+background: #4285f4;
+border: none;
+border-radius: 5px;
+box-shadow: 0 0 4px 0 rgba(0, 0, 0, .2);
+color: #ffffff;
+padding: 5px 10px;
+margin: 0px 2px;
+text-decoration: none !important;
+font-size: 1.1rem;">Register</a></p>
+Note:
+<ol style="padding-top: 0;
+margin-top: 0;
+margin-left: 10px;
+padding-left: 10px">
+<li>It will expire if you do not use this invite in the next 72 hours</li>
+<li class="important" style="color: #d8210d">One person should NOT create more than one account. If you already had an account and cannot log in, please join <a href="{{TGDisableChannel}}" target="_blank">{{TGDisableChannelName}}</a> for help</li>
+<li class="important" style="color: #d8210d">Users who get the account by trade will be disabled</li>
+<li class="important" style="color: #d8210d">Please use the home connection to register. Users who register by proxy will be disabled</li>
+<li>Please ignore this email if you don't understand</li>
+</ol>{% endblock %}

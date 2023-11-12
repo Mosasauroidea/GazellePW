@@ -24,24 +24,32 @@ if (!empty($_GET['action']) && $_GET['action'] == 'revert') { // if we're revert
     // to cite from merge: "Everything is legit, let's just confim they're not retarded"
     if (empty($_GET['confirm'])) {
         View::show_header('', '', 'PageTorrentTakeGroupEdit');
+        $TorrentCache = Torrents::get_group($GroupID, true);
+        $TorrentDetails = $TorrentCache;
+        $Name = Torrents::group_name($TorrentDetails);
 ?>
-        <div class="center thin">
+        <div class="LayoutBody">
             <div class="BodyHeader">
-                <h2 class="BodyHeader-nav"><?= t('server.torrents.revert_confirm') ?></h2>
+                <h2 class="BodyHeader-nav"><?= t('server.torrents.viewhistory') ?></h2>
+                <div class="BodyHeader-subNav"><?= $Name ?></div>
             </div>
-            <div class="BoxBody">
+            <div class="Form-rowList" variant="header">
+                <div class="Form-rowHeader">
+                    <div class="Form-title">
+                        <?= t('server.torrents.revert_confirm') ?>
+                    </div>
+                </div>
+                <div class="Form-row"><?= t('server.torrents.revert_confirm_body') ?><a href='torrents.php?id=<?= $GroupID ?>&amp;revisionid=<?= $RevisionID ?>'><?= $RevisionID ?></a>
+                </div>
                 <form class="confirm_form" name="torrent_group" action="torrents.php" method="get">
                     <input type="hidden" name="action" value="revert" />
                     <input type="hidden" name="auth" value="<?= $LoggedUser['AuthKey'] ?>" />
                     <input type="hidden" name="confirm" value="true" />
                     <input type="hidden" name="groupid" value="<?= $GroupID ?>" />
                     <input type="hidden" name="revisionid" value="<?= $RevisionID ?>" />
-                    <h3>
-                        <?= t('server.torrents.revert_confirm_body', ['Values' => [
-                            "<a href='torrents.php?id=${GroupID}&amp;revisionid=${RevisionID}>${RevisionID}</a>"
-                        ]]) ?>
-                    </h3>
-                    <input class="Button" type="submit" value="Confirm" />
+                    <div class="Form-row">
+                        <input class="Button" type="submit" value="<?= t('server.common.submit') ?>" />
+                    </div>
                 </form>
             </div>
         </div>

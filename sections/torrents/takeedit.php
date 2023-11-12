@@ -214,7 +214,6 @@ $SQL .= "
 		Subtitles = $T[Subtitles],
 		Makers = $T[Makers],
 		Scene = $T[Scene],
-		Jinzhuan = $T[Jinzhuan],
 		RemasterTitle = $T[RemasterTitle],
 		RemasterCustomTitle = $T[RemasterCustomTitle],
 		RemasterYear = $T[RemasterYear],
@@ -229,6 +228,7 @@ $SQL .= "
 if (check_perms("users_mod")) {
     $SQL .= "
 		Buy = $T[Buy],
+		Jinzhuan = $T[Jinzhuan],
 		Diy = $T[Diy],";
 }
 
@@ -311,7 +311,7 @@ if (check_perms('torrents_trumpable')) {
     $DB->query("
 	DELETE FROM torrents_custom_trumpable
 	WHERE TorrentID = '$TorrentID'");
-    if (!empty($Properties['CustomTrumpable'])) {
+    if (!empty($Properties['CustomTrumpable']) && check_perms('users_mod')) {
         $DB->query("
 			INSERT INTO torrents_custom_trumpable
 			VALUES ($TorrentID, $LoggedUser[ID], '" . sqltime() . "', '" . db_string(trim($Properties['CustomTrumpable'])) . "')");

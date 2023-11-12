@@ -290,12 +290,11 @@ class Recovery {
             $email,
             "Account recovery id={$id} key={$key}"
         );
-        require(CONFIG['SERVER_ROOT'] . '/classes/templates.class.php');
-        $Tpl = new \TEMPLATE;
-        $Tpl->open(CONFIG['SERVER_ROOT'] . '/templates/recover.tpl');
-        $Tpl->set('SiteName', CONFIG['SITE_NAME']);
-        $Tpl->set('SiteURL', CONFIG['SITE_URL']);
-        \Misc::send_email($email, 'Account recovery confirmation at ' . CONFIG['SITE_NAME'], $Tpl->get(), 'noreply');
+        $Body = \G::$Twig->render('emails/recover.twig', [
+            'SiteName' => CONFIG['SITE_NAME'],
+            'SiteURL' =>  CONFIG['SITE_NAME'],
+        ]);
+        \Misc::send_email($email, 'Account recovery confirmation at ' . CONFIG['SITE_NAME'], $Body, 'noreply');
 
         $db->prepared_query(
             "

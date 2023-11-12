@@ -87,7 +87,7 @@ class UngroupTorrentSimpleListView extends UngroupTorrentTableView {
         }
     ?>
         <? /* UngroupTorrentSimpleListView */ ?>
-        <tr class="TableTorrent-rowTitle Table-row u-tableTorrent-rowTitle <?= $SnatchedGroupClass . (!empty($LoggedUser['TorrentGrouping']) && $LoggedUser['TorrentGrouping'] === 1 ? ' hidden' : '') ?>" group-id="<?= $GroupID ?>" torrent-id="<?= $TorrentID ?>">
+        <tr class="TableTorrent-rowTitle Table-row u-tableTorrent-rowTitle <?= $SnatchedGroupClass ?>" group-id="<?= $GroupID ?>" torrent-id="<?= $TorrentID ?>">
             <? if ($this->WithNumber) { ?>
                 <td class="TableTorrent-cellMovieInfo Table-cell TableTorrent-cellMovieInfoNo" style="padding: 8px; text-align: center;" class="td_rank m_td_left"><strong><?= $Idx + 1 ?></strong></td>
             <? }

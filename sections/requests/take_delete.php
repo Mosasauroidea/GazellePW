@@ -51,9 +51,9 @@ $Cache->delete_value("request_artists_$RequestID");
 
 G::$DB->query("
 	REPLACE INTO sphinx_requests_delta
-		(ID)
+		(ID, TimeAdded)
 	VALUES
-		($RequestID)");
+		($RequestID, Unix_TIMESTAMP())");
 
 if ($UserID != $LoggedUser['ID']) {
     Misc::send_pm_with_tpl($UserID, 'request_deleted', [

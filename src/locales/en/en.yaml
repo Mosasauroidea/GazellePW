@@ -1973,8 +1973,6 @@ server.login.you_are_banned_from_logging: |-
   You are banned from logging in for another %s.
 server.login.your_account_has_been_enabled: |-
   Your account has been enabled. You may now log in.<br>Please be sure to log in before 24:00 today or your account will be disabled again.
-server.login.your_enable_request_for: |-
-  Your enable request for {{CONFIG['SITE_NAME']}} has been&nbsp;
 server.permissions.admin_advanced_user_search: |-
   Can access advanced user search
 server.permissions.admin_bp_history: |-
@@ -5452,9 +5450,9 @@ server.torrents.retention_type_slot: |-
 server.torrents.revert: |-
   Revert to this revision
 server.torrents.revert_confirm: |-
-  Revert Confirm!
+  Revert revision!
 server.torrents.revert_confirm_body: |-
-  You are attempting to revert to the revision %s.
+  You are attempting to revert to the revision
 server.torrents.revision_history_after: |-
   Revision history
 server.torrents.reward_100_bonus_to_uploader: |-
