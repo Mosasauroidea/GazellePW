@@ -5004,7 +5004,7 @@ server.torrents.cn_dub: |-
 server.torrents.cn_quality_slot: |-
   中字质量槽
 server.torrents.cn_quality_slot_requirements: |-
-  必须内封中字。不得含有简繁英以外的字幕。压制质量越高越好。
+  必须内封中字。允许额外包含英文字幕或原始语言字幕其中一者。压制质量越高越好。
 server.torrents.cn_quality_slot_x265: |-
   中字质量槽 (x265)
 server.torrents.codec: |-
