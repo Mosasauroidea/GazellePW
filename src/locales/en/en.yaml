@@ -5085,7 +5085,7 @@ server.torrents.cn_dub: |-
 server.torrents.cn_quality_slot: |-
   CN Quality Slot
 server.torrents.cn_quality_slot_requirements: |-
-Must contain a softcoded Chinese subtitle. An additional softcoded English subtitle OR an original language subtitle is allowed. The video quality should be as good as possible.
+  Must contain a softcoded Chinese subtitle. An additional softcoded English subtitle OR an original language subtitle is allowed. The video quality should be as good as possible.
 server.torrents.cn_quality_slot_x265: |-
   CN Quality Slot (x265)
 server.torrents.codec: |-
@@ -5463,6 +5463,8 @@ server.torrents.reward_30_bonus_to_uploader: |-
   Reward 30 bonus to uploader
 server.torrents.reward_5_bonus_to_uploader: |-
   Reward 5 bonus to uploader
+server.torrents.reward_bonus_to_uploader: |-
+  Reward %s bonus to uploader
 server.torrents.rt_title: |-
   RottenTomatoes ID
 server.torrents.rules_broken: |-

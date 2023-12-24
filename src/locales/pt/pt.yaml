@@ -5445,6 +5445,8 @@ server.torrents.reward_30_bonus_to_uploader: |-
   Recompense 30 bônus para o uploader
 server.torrents.reward_5_bonus_to_uploader: |-
   Recompensa 5 bônus para o uploader
+server.torrents.reward_bonus_to_uploader: |-
+  Recompensa %s bônus para o uploader
 server.torrents.rt_title: |-
   RottenTomatoes ID
 server.torrents.rules_broken: |-

@@ -111,6 +111,10 @@ $UserDemoteCriteria = [
 
 ];
 
+$TorrentBonus = [20, 120, 400, 1200];
+$ForumBonus = [40, 200, 800, 2000];
+$ForumAdminBonus = [400, 2000, 4000, 12000];
+
 $UserPromoteCriteria = [
     [
         'From' => CONFIG['USER_CLASS']['USER'],

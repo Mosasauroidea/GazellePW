@@ -5382,6 +5382,8 @@ server.torrents.reward_30_bonus_to_uploader: |-
   赠送 30 积分给发布者
 server.torrents.reward_5_bonus_to_uploader: |-
   赠送 5 积分给发布者
+server.torrents.reward_bonus_to_uploader: |-
+  赠送 %s 积分给发布者
 server.torrents.rt_title: |-
   烂番茄标题
 server.torrents.rules_broken: |-

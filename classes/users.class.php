@@ -766,7 +766,7 @@ class Users {
             );
         }
 
-        $TorrentList = Torrents::get_groups($GroupIDs);
+        $TorrentList = Torrents::get_groups($GroupIDs, true, false, false);
 
         return array($GroupIDs, $BookmarkData, $TorrentList);
     }

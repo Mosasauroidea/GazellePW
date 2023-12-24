@@ -2,7 +2,7 @@
 if (!isset($_POST['torrentid']) || !isset($_POST['bonus'])) {
     error(403);
 }
-$Bonuses = array(5, 30, 100, 300);
+$Bonuses = $TorrentBonus;
 
 $TorrentID = intval($_POST['torrentid']);
 $Bonus = intval($_POST['bonus']);

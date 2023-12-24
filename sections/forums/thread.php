@@ -596,7 +596,7 @@ View::show_header($ThreadInfo['Title'], 'comments,subscriptions,bbcode,thumb', $
                                 }
                                 ?>
                                 <? if ((!$ThreadInfo['IsLocked'] && Forums::check_forumperm($ForumID, 'Write') && $AuthorID == $LoggedUser['ID']) || check_perms('site_moderate_forums') || ($AuthorID == $LoggedUser['ID'] && isset($LoggedUser['ExtraClasses']['31']))) { ?>
-                                    <a href="#post<?=$PostID?>" onclick="globalapp.editForm('<?= $PostID ?>', '<?= $Key ?>');" class="brackets"><?= t('server.common.edit') ?></a> -
+                                    <a href="#post<?= $PostID ?>" onclick="globalapp.editForm('<?= $PostID ?>', '<?= $Key ?>');" class="brackets"><?= t('server.common.edit') ?></a> -
                                 <?
 
                                 }
@@ -787,30 +787,27 @@ View::show_header($ThreadInfo['Title'], 'comments,subscriptions,bbcode,thumb', $
                                                 <?
                                                 if (check_perms('admin_send_bonus')) {
                                                 ?>
-                                                    <option class="Select-option" value="10" id="psn_<?= $PostID ?>">10</option>
-                                                    <option class="Select-option" value="50" id="psn_<?= $PostID ?>">50</option>
-                                                    <option class="Select-option" value="200" id="psn_<?= $PostID ?>">200</option>
-                                                    <option class="Select-option" value="500" id="psn_<?= $PostID ?>">500</option>
-                                                    <option class="Select-option" value="100" id="sysn_<?= $PostID ?>" style="display:none;">100</option>
-                                                    <option class="Select-option" value="500" id="sysn_<?= $PostID ?>" style="display:none;">500</option>
-                                                    <option class="Select-option" value="1000" id="sysn_<?= $PostID ?>" style="display:none;">1000</option>
-                                                    <option class="Select-option" value="3000" id="sysn_<?= $PostID ?>" style="display:none;">3000</option>
+                                                    <? foreach ($ForumBonus as $Bonus) { ?>
+                                                        <option class="Select-option" value="<?= $Bonus ?>" id="psn_<?= $PostID ?>"><?= $Bonus ?></option>
+                                                    <? } ?>
+                                                    <? foreach ($ForumAdminBonus as $Bonus) { ?>
+                                                        <option class="Select-option" value="<?= $Bonus ?>" id="sysn_<?= $PostID ?>" style="display:none;"><?= $Bonus ?></option>
+                                                    <? } ?>
                                                     <option class="Select-option" value="0" id="sysn_<?= $PostID ?>" style="display:none;"><?= t('server.forums.customize') ?></option>
                                                 <?
                                                 } else if (isset($LoggedUser['ExtraClasses']['31'])) {
                                                 ?>
                                                     <option class="Select-option" value="0" id="sysn_<?= $PostID ?>">TC</option>
-                                                    <option class="Select-option" value="10" id="psn_<?= $PostID ?>" style="display:none;">10</option>
-                                                    <option class="Select-option" value="50" id="psn_<?= $PostID ?>" style="display:none;">50</option>
-                                                    <option class="Select-option" value="200" id="psn_<?= $PostID ?>" style="display:none;">200</option>
-                                                    <option class="Select-option" value="500" id="psn_<?= $PostID ?>" style="display:none;">500</option>
+                                                    <? foreach ($ForumBonus as $Bonus) { ?>
+                                                        <option class="Select-option" value="<?= $Bonus ?>" id="psn_<?= $PostID ?>" style="display:none;"><?= $Bonus ?></option>
+                                                    <? } ?>
                                                 <?
                                                 } else {
                                                 ?>
-                                                    <option class="Select-option" value="10">10</option>
-                                                    <option class="Select-option" value="50">50</option>
-                                                    <option class="Select-option" value="200">200</option>
-                                                    <option class="Select-option" value="500">500</option>
+                                                    <? foreach ($ForumBonus as $Bonus) { ?>
+                                                        <option class="Select-option" value="<?= $Bonus ?>"><?= $Bonus ?></option>
+                                                    <? } ?>
+
                                                 <?
                                                 }
                                                 ?>

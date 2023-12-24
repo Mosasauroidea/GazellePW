@@ -448,46 +448,27 @@ class TorrentTableView {
 
                 <?
                 if (!$ReadOnly) {
+
                 ?>
                     <div class="is-rewardContainer">
                         <div class="TorrentDetail-rewardList ButtonGroup" id="sendbonus_<?= $TorrentID ?>">
                             <? $Sended = isset($BonusSended) ? explode(',', $BonusSended['Sended']) : []; ?>
-                            <div class="TorrentDetail-reward">
-                                <span class="TorrentDetail-rewardButton is-active" data-tooltip="<?= G::$LoggedUser['ID'] == $UserID ? t('server.torrents.you_cant_reward_yourself') : t('server.torrents.you_have_rewarded') ?>" style="<?= in_array(5, $Sended) || G::$LoggedUser['ID'] == $UserID ? "" : "display: none;" ?>" id="bonus5<?= $TorrentID ?>">
-                                    <?= icon('bonus-active') ?>
-                                </span>
-                                <a class="TorrentDetail-rewardButton is-toReward" data-tooltip="<?= t('server.torrents.reward_5_bonus_to_uploader') ?>" style="<?= in_array(5, $Sended) || G::$LoggedUser['ID'] == $UserID ? "display: none;" : "" ?>" id="abonus5<?= $TorrentID ?>" href="javascript:void(0);" onclick="sendbonus(<?= $TorrentID ?>, 5)">
-                                    <?= icon('bonus-active') ?>
-                                </a>
-                                <span>5</span>
-                            </div>
-                            <div class="TorrentDetail-reward">
-                                <span class="TorrentDetail-rewardButton is-active" data-tooltip="<?= G::$LoggedUser['ID'] == $UserID ? t('server.torrents.you_cant_reward_yourself') : t('server.torrents.you_have_rewarded') ?>" style="<?= in_array(30, $Sended) || G::$LoggedUser['ID'] == $UserID ? "" : "display: none;" ?>" id="bonus30<?= $TorrentID ?>">
-                                    <?= icon('bonus-active') ?>
-                                </span>
-                                <a class="TorrentDetail-rewardButton is-toReward" data-tooltip="<?= t('server.torrents.reward_30_bonus_to_uploader') ?>" style="<?= in_array(30, $Sended) || G::$LoggedUser['ID'] == $UserID ? "display: none;" : "" ?>" id="abonus30<?= $TorrentID ?>" href="javascript:void(0);" onclick="sendbonus(<?= $TorrentID ?>, 30)">
-                                    <?= icon('bonus-active') ?>
-                                </a>
-                                <span>30</span>
-                            </div>
-                            <div class="TorrentDetail-reward">
-                                <span class="TorrentDetail-rewardButton is-active" data-tooltip="<?= G::$LoggedUser['ID'] == $UserID ? t('server.torrents.you_cant_reward_yourself') : t('server.torrents.you_have_rewarded') ?>" style="<?= in_array(100, $Sended) || G::$LoggedUser['ID'] == $UserID ? "" : "display: none;" ?>" id="bonus100<?= $TorrentID ?>">
-                                    <?= icon('bonus-active') ?>
-                                </span>
-                                <a class="TorrentDetail-rewardButton is-toReward" data-tooltip="<?= t('server.torrents.reward_100_bonus_to_uploader') ?>" style="<?= in_array(100, $Sended) || G::$LoggedUser['ID'] == $UserID ? "display: none;" : "" ?>" id="abonus100<?= $TorrentID ?>" href="javascript:void(0);" onclick="sendbonus(<?= $TorrentID ?>, 100)">
-                                    <?= icon('bonus-active') ?>
-                                </a>
-                                <span>100</span>
-                            </div>
-                            <div class="TorrentDetail-reward">
-                                <span class="TorrentDetail-rewardButton is-active" data-tooltip="<?= G::$LoggedUser['ID'] == $UserID ? t('server.torrents.you_cant_reward_yourself') : t('server.torrents.you_have_rewarded') ?>" style="<?= in_array(300, $Sended) || G::$LoggedUser['ID'] == $UserID ? "" : "display: none;" ?>" id="bonus300<?= $TorrentID ?>">
-                                    <?= icon('bonus-active') ?>
-                                </span>
-                                <a class="TorrentDetail-rewardButton is-toReward" data-tooltip="<?= t('server.torrents.reward_300_bonus_to_uploader') ?>" style="<?= in_array(300, $Sended) || G::$LoggedUser['ID'] == $UserID ? "display: none;" : "" ?>" id="abonus300<?= $TorrentID ?>" href="javascript:void(0);" onclick="sendbonus(<?= $TorrentID ?>, 300)">
-                                    <?= icon('bonus-active') ?>
-                                </a>
-                                <span>300</span>
-                            </div>
+                            <?
+                            global $TorrentBonus;
+                            foreach ($TorrentBonus as $Bonus) {
+                            ?>
+                                <div class="TorrentDetail-reward">
+                                    <span class="TorrentDetail-rewardButton is-active" data-tooltip="<?= G::$LoggedUser['ID'] == $UserID ? t('server.torrents.you_cant_reward_yourself') : t('server.torrents.you_have_rewarded') ?>" style="<?= in_array($Bonus, $Sended) || G::$LoggedUser['ID'] == $UserID ? "" : "display: none;" ?>" id="bonus<?= $Bonus ?><?= $TorrentID ?>">
+                                        <?= icon('bonus-active') ?>
+                                    </span>
+                                    <a class="TorrentDetail-rewardButton is-toReward" data-tooltip="<?= t('server.torrents.reward_bonus_to_uploader', ['Values' => [$Bonus]]) ?>" style="<?= in_array($Bonus, $Sended) || G::$LoggedUser['ID'] == $UserID ? "display: none;" : "" ?>" id="abonus<?= $Bonus ?><?= $TorrentID ?>" href="javascript:void(0);" onclick="sendbonus(<?= $TorrentID ?>, <?= $Bonus ?>)">
+                                        <?= icon('bonus-active') ?>
+                                    </a>
+                                    <span><?= $Bonus ?></span>
+                                </div>
+                            <?
+                            }
+                            ?>
                         </div>
                     </div>
                 <? } ?>

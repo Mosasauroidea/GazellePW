@@ -60,7 +60,7 @@ if (isset($auth_code_arr[4])) {
         die();
     }
     if (!$JF_sys) {
-        if (!in_array($JF, array(10, 50, 200, 500))) {
+        if (!in_array($JF, $ForumBonus)) {
             echo json_encode(array('ret' => 0, 'msg' => ''));
             die();
         }

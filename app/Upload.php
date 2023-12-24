@@ -251,7 +251,9 @@ class Upload extends Base {
 
         $properties['FreeLeech'] = Torrents::Normal;
         $properties['FreeLeechType'] = '1';
-        if (in_array($this->properties['Processing'], ['Untouched', 'DIY', 'Remux', 'BD25', 'BD66', 'BD50', 'BD100', 'DVD9', 'DVD5'])) {
+        if (CONFIG['TORRENT_UPLOAD_FREE'] == true) {
+            $properties['FreeLeech'] = Torrents::FREE;
+        } else if (in_array($this->properties['Processing'], ['Untouched', 'DIY', 'Remux', 'BD25', 'BD66', 'BD50', 'BD100', 'DVD9', 'DVD5'])) {
             $properties['FreeLeech'] = Torrents::OneFourthOff;
         } else {
             $properties['FreeLeech'] = Torrents::TwoFourthOff;

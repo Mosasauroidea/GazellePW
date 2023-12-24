@@ -1127,7 +1127,7 @@ class Text {
                                     $Str .= '</tr>';
                                 }
                             } else {
-                                $Str .= self::to_html([$tr]);
+                                $Str .= '<tr class="Table-row"><td class="Table-cell">' . self::to_html([$tr]) . '</td></tr>';
                             }
                         }
                         $Str .= '</table></div>';
