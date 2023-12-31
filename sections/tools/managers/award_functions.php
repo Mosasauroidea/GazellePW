@@ -2,9 +2,9 @@
 $PointRadios = [
     'DownloadCount' => 0.75,
     'UploadCount' => 1,
-    'CheckCount' => 0.75,
+    'CheckCount' => 7.5,
     'RSReportCount' => 0.5,
-    'RPReportCount' => 1.25,
+    'RPReportCount' => 12.5,
     'EditCount' => 1,
     'PostCount' => 0.5,
     'SendJF' => 0.1,

@@ -63,12 +63,12 @@ class INVITE_TREE {
 				JOIN users_main AS um ON um.ID = it.UserID
 				JOIN users_info AS ui ON ui.UserID = it.UserID
 			WHERE TreeID = $TreeID
-				AND TreePosition > $TreePosition" .
+				AND TreePosition >= $TreePosition" .
                 ($MaxPosition ? " AND TreePosition < $MaxPosition" : '') . "
-				AND TreeLevel > $TreeLevel
+				AND TreeLevel >= $TreeLevel
 			ORDER BY TreePosition");
 
-            $PreviousTreeLevel = $TreeLevel;
+            $PreviousTreeLevel = $TreeLevel - 1;
 
             // Stats for the summary
             $MaxTreeLevel = $TreeLevel; // The deepest level (this changes)
@@ -116,7 +116,7 @@ class INVITE_TREE {
                 // Manage tree depth
                 if ($TreeLevel > $PreviousTreeLevel) {
                     for ($i = 0; $i < $TreeLevel - $PreviousTreeLevel; $i++) {
-                        if ($TreeLevel == 2) {
+                        if ($TreeLevel == 0) {
                             echo "\n\n<ul class=\"MenuList invitetree\">\n\t<li>\n";
                         } else {
                             echo "\n\n<ul class=\"MenuList SubMenu invitetree\">\n\t<li>\n";

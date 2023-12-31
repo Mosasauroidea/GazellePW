@@ -1,6 +1,6 @@
 <?php
 
-require(__DIR__ . '../classes/includes.php');
+require(__DIR__ . '/../classes/includes.php');
 
 ini_set('max_execution_time', -1);
 

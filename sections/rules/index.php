@@ -17,6 +17,9 @@ if (!isset($_GET['p'])) {
         case 'upload':
             require(CONFIG['SERVER_ROOT'] . '/sections/rules/upload.php');
             break;
+        case 'slots':
+            require(CONFIG['SERVER_ROOT'] . '/sections/rules/slots.php');
+            break;
         case 'requests';
             require(CONFIG['SERVER_ROOT'] . '/sections/rules/requests.php');
             break;

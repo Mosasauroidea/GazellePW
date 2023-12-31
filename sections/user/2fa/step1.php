@@ -1,4 +1,10 @@
 <?
+
+use Endroid\QrCode\Writer\PngWriter;
+use Endroid\QrCode\Color\Color;
+use Endroid\QrCode\Builder\Builder;
+use Endroid\QrCode\ErrorCorrectionLevel\ErrorCorrectionLevelHigh;
+
 View::show_header(t('server.user.two_factor_authentication'), '', 'PageUser2FAStep1');
 ?>
 <div class="LayoutBody">
@@ -15,14 +21,16 @@ View::show_header(t('server.user.two_factor_authentication'), '', 'PageUser2FASt
         <div class="center">
             <img src="data:image/png;base64,<?
                                             echo base64_encode(
-                                                (new QrCode())->setText('otpauth://totp/' . CONFIG['SITE_NAME'] . '?secret=' . $_SESSION['private_key'])
-                                                    ->setSize(300)
-                                                    ->setPadding(10)
-                                                    ->setLabel($_SESSION['private_key'])
-                                                    ->setErrorCorrection('high')
-                                                    ->setForegroundColor(['r' => 0, 'g' => 0, 'b' => 0, 'a' => 0])
-                                                    ->setBackgroundColor(['r' => 255, 'g' => 255, 'b' => 255, 'a' => 0])
-                                                    ->get('png')
+                                                Builder::create()->writer(new PngWriter())
+                                                    ->writerOptions([])
+                                                    ->data('otpauth://totp/' . CONFIG['SITE_NAME'] . '?secret=' . $_SESSION['private_key'])
+                                                    ->size(300)
+                                                    ->margin(10)
+                                                    ->labelText($_SESSION['private_key'])
+                                                    ->errorCorrectionLevel(new ErrorCorrectionLevelHigh())
+                                                    ->foregroundColor(new Color(0, 0, 0))
+                                                    ->backgroundColor(new Color(255, 255, 255))
+                                                    ->build()->getString()
                                             );
                                             ?>">
         </div>

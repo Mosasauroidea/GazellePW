@@ -13,6 +13,7 @@ require(CONFIG['SERVER_ROOT'] . '/classes/validate.class.php');
 
 use Gazelle\Torrent\EditionInfo;
 use Gazelle\Torrent\Notification;
+use Gazelle\Torrent\TorrentSlot;
 
 $Validate = new VALIDATE;
 
@@ -75,6 +76,7 @@ $Properties['RemasterTitle'] = $_POST['remaster_title'];
 if (!EditionInfo::validate($Properties['RemasterTitle'])) {
     die("invalid remaster_title");
 }
+$Properties['RemasterTitle'] = EditionInfo::mergeAdvanceFeature($Properties['RemasterTitle'], $_POST);
 
 $Properties['RemasterCustomTitle'] = $_POST['remaster_custom_title'];
 $Properties['TorrentDescription'] = $_POST['release_desc'];
@@ -187,6 +189,10 @@ foreach ($DBTorVals as $Key => $Value) {
         }
     }
     if ($Value != $T[$Key]) {
+        if ($Key == 'Resolution') {
+            $Slot = TorrentSlot::CalSlot($Properties);
+            var_dump($Slot);
+        }
         if (!isset($T[$Key])) {
             continue;
         }
@@ -230,6 +236,10 @@ if (check_perms("users_mod")) {
 		Buy = $T[Buy],
 		Jinzhuan = $T[Jinzhuan],
 		Diy = $T[Diy],";
+}
+
+if ($Slot !== null) {
+    $SQL .= "Slot = $Slot,";
 }
 
 if (check_perms('torrents_freeleech')) {

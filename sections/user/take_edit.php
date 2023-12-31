@@ -309,7 +309,6 @@ $Options['PostsPerPage']        = (int)$_POST['postsperpage'];
 $Options['CollageCovers']       = (empty($_POST['collagecovers']) ? 0 : $_POST['collagecovers']);
 $Options['ShowTorFilter']       = (empty($_POST['showtfilter']) ? 0 : 1);
 $Options['ShowHotMovieOnHomePage']       = (empty($_POST['showhotmovie']) ? 0 : 1);
-$Options['ShowTags']            = (!empty($_POST['showtags']) ? 1 : 0);
 $Options['AutoSubscribe']       = (!empty($_POST['autosubscribe']) ? 1 : 0);
 $Options['DisableSmileys']      = (!empty($_POST['disablesmileys']) ? 1 : 0);
 $Options['EnableMatureContent'] = (!empty($_POST['enablematurecontent']) ? 1 : 0);

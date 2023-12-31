@@ -1,1 +1,6 @@
-<svg class="icon" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="iconify iconify--gis" preserveAspectRatio="xMidYMid meet"><path d="M50 5C25.189 5 5 25.189 5 50s20.189 45 45 45s45-20.189 45-45S74.811 5 50 5z" fill="#000000"></path></svg>
+<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"
+    xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img"
+    class="icon iconify iconify--gis" preserveAspectRatio="xMidYMid meet">
+    <path d="M50 5C25.189 5 5 25.189 5 50s20.189 45 45 45s45-20.189 45-45S74.811 5 50 5z"
+        fill="currentColor"></path>
+</svg>

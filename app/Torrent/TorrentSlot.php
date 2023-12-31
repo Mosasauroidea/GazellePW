@@ -40,6 +40,11 @@ class TorrentSlot {
     public const TorrentSlotTypeRemux = 10;
     public const TorrentSlotTypeDIY = 11;
     public const TorrentSlotTypeUntouched = 12;
+    public const TorrentSlotTypeWebSDR = 13;
+    public const TorrentSlotTypeWebDovi = 14;
+    public const TorrentSlotTypeHi10p = 15;
+    public const TorrentSlotTypeRemuxFeature = 16;
+
 
     const SDEncodeSlots = [
         self::TorrentSlotTypeQuality,
@@ -62,6 +67,7 @@ class TorrentSlot {
         self::TorrentSlotTypeEnglishQuality,
         self::TorrentSlotTypeX265ChineseQuality,
         self::TorrentSlotTypeX265EnglishQuality,
+        self::TorrentSlotTypeWebDovi,
     ];
     const HD720PUntouchedSlots = [
         self::TorrentSlotTypeRemux,
@@ -70,6 +76,7 @@ class TorrentSlot {
 
     const HD1080PUntouchedSlots = [
         self::TorrentSlotTypeRemux,
+        self::TorrentSlotTypeRemuxFeature,
         self::TorrentSlotTypeUntouched,
         self::TorrentSlotTypeDIY,
     ];
@@ -78,9 +85,12 @@ class TorrentSlot {
         self::TorrentSlotTypeFeature,
         self::TorrentSlotTypeChineseQuality,
         self::TorrentSlotTypeEnglishQuality,
+        self::TorrentSlotTypeWebSDR,
+        self::TorrentSlotTypeWebDovi,
     ];
     const UHDUntouchedSlots = [
         self::TorrentSlotTypeRemux,
+        self::TorrentSlotTypeRemuxFeature,
         self::TorrentSlotTypeDIY,
         self::TorrentSlotTypeUntouched,
     ];
@@ -100,6 +110,7 @@ class TorrentSlot {
         self::TorrentSlotTypeFeature,
         self::TorrentSlotTypeChineseQuality,
         self::TorrentSlotTypeEnglishQuality,
+        self::TorrentSlotTypeHi10p,
         self::TorrentSlotTypeRemux,
         self::TorrentSlotTypeUntouched,
     ];
@@ -107,21 +118,27 @@ class TorrentSlot {
         self::TorrentSlotTypeNone,
         self::TorrentSlotTypeRetention,
         self::TorrentSlotTypeFeature,
+        self::TorrentSlotTypeWebDovi,
         self::TorrentSlotTypeChineseQuality,
         self::TorrentSlotTypeEnglishQuality,
         self::TorrentSlotTypeX265ChineseQuality,
         self::TorrentSlotTypeX265EnglishQuality,
+        self::TorrentSlotTypeHi10p,
         self::TorrentSlotTypeRemux,
+        self::TorrentSlotTypeRemuxFeature,
         self::TorrentSlotTypeDIY,
         self::TorrentSlotTypeUntouched,
     ];
     const UHDSlots = [
         self::TorrentSlotTypeNone,
         self::TorrentSlotTypeRetention,
+        self::TorrentSlotTypeWebSDR,
+        self::TorrentSlotTypeWebDovi,
         self::TorrentSlotTypeFeature,
-        self::TorrentSlotTypeChineseQuality,
-        self::TorrentSlotTypeEnglishQuality,
+        self::TorrentSlotTypeX265ChineseQuality,
+        self::TorrentSlotTypeX265EnglishQuality,
         self::TorrentSlotTypeRemux,
+        self::TorrentSlotTypeRemuxFeature,
         self::TorrentSlotTypeDIY,
         self::TorrentSlotTypeUntouched,
     ];
@@ -225,7 +242,7 @@ class TorrentSlot {
         $HDUntouchedMissSlots = $HD720PUntouchedMissSlots;
         foreach ($HD1080PUntouchedMissSlots as $MissSlot) {
             if (!in_array($MissSlot, $HDEncodeMissSlots)) {
-                $HDuntouchedMissSlots[] = $MissSlot;
+                $HDUntouchedMissSlots[] = $MissSlot;
             }
         }
 
@@ -233,7 +250,7 @@ class TorrentSlot {
             self::TorrentSlotGroupSDEncode => self::check_slot_status($SDSlotTorrents, self::SDEncodeSlots),
             self::TorrentSlotGroupSDUntouched => self::check_slot_status($SDSlotTorrents, self::SDUntouchedSlots),
             self::TorrentSlotGroupHDEncode => [$HDEncodeStatus, $HDEncodeMissSlots],
-            self::TorrentSlotGroupHDUntouched => [$HDUntouchedStatus, $HDUntouchedMissSlots],
+            self::TorrentSlotGroupHDUntouched => [$HDUntouchedStatus, array_unique($HDUntouchedMissSlots)],
             self::TorrentSlotGroupUHDEncode => self::check_slot_status($UHDSlotTorrents, self::UHDEncodeSlots),
             self::TorrentSlotGroupUHDUntouched => self::check_slot_status($UHDSlotTorrents, self::UHDUntouchedSlots),
         ];
@@ -270,6 +287,7 @@ class TorrentSlot {
         $HD720PTorrents = [];
         $HD1080PTorrents = [];
         $UHDTorrents = [];
+
         foreach ($Torrents as $Torrent) {
             $RemasterTitle = $Torrent['RemasterTitle'];
             $RemasterCustomTitle = $Torrent['RemasterCustomTitle'];
@@ -377,12 +395,8 @@ class TorrentSlot {
         $SpecialSub = isset($Torrent['SpecialSub']) && !empty($Torrent['SpecialSub']);
         $ChineseDubbed = isset($Torrent['ChineseDubbed']) && !empty($Torrent['ChineseDubbed']);
         $ChineseSubtitle = isset($Torrent['Subtitles']) && strstr($Torrent['Subtitles'], 'chinese');
-        foreach (explode(',', $Torrent['Subtitles']) as $Subtitle) {
-            if (!in_array($Subtitle, ['chinese_simplified', 'chinese_traditional', 'english'])) {
-                $ChineseSubtitle = false;
-                break;
-            }
-        }
+        $Source = $Torrent['Source'];
+        $RemasterTitle = $Torrent['RemasterTitle'];
         switch (self::get_slot_resolution($Resolution)) {
             case self::TorrentSlotResolutionSD:
                 if ($Processing == 'Encode') {
@@ -416,9 +430,17 @@ class TorrentSlot {
                 }
                 return self::TorrentSlotTypeNone;
             case self::TorrentSlotResolutionHD1080P:
+                if ($Source == 'Web' && $Codec == 'H.265') {
+                    if (EditionInfo::checkEditionInfo($RemasterTitle, EditionInfo::edition_dolby_vision)) {
+                        return self::TorrentSlotTypeWebDovi;
+                    }
+                }
                 if ($Processing == 'Untouched') {
                     return self::TorrentSlotTypeUntouched;
                 } else if ($Processing == 'Remux') {
+                    if ($SpecialSub || $ChineseDubbed) {
+                        return self::TorrentSlotTypeRemuxFeature;
+                    }
                     return self::TorrentSlotTypeRemux;
                 } else if ($Processing == 'DIY') {
                     return self::TorrentSlotTypeDIY;
@@ -442,9 +464,18 @@ class TorrentSlot {
                 }
                 return self::TorrentSlotTypeNone;
             case self::TorrentSlotResolutionUHD:
+                if ($Source == 'Web' && $Codec == 'H.265') {
+                    if (EditionInfo::checkEditionInfo($RemasterTitle, EditionInfo::edition_dolby_vision)) {
+                        return self::TorrentSlotTypeWebDovi;
+                    }
+                    return self::TorrentSlotTypeWebSDR;
+                }
                 if ($Processing == 'Untouched') {
                     return self::TorrentSlotTypeUntouched;
                 } else if ($Processing == 'Remux') {
+                    if ($SpecialSub || $ChineseDubbed) {
+                        return self::TorrentSlotTypeRemuxFeature;
+                    }
                     return self::TorrentSlotTypeRemux;
                 } else if ($Processing == 'DIY') {
                     return self::TorrentSlotTypeDIY;
@@ -453,9 +484,9 @@ class TorrentSlot {
                         return self::TorrentSlotTypeFeature;
                     }
                     if ($ChineseSubtitle) {
-                        return self::TorrentSlotTypeChineseQuality;
+                        return self::TorrentSlotTypeX265ChineseQuality;
                     } else {
-                        return self::TorrentSlotTypeEnglishQuality;
+                        return self::TorrentSlotTypeX265EnglishQuality;
                     }
                 }
                 return self::TorrentSlotTypeNone;
@@ -517,6 +548,18 @@ class TorrentSlot {
             case self::TorrentSlotTypeDIY:
                 $str =  'diy_slot_requirements';
                 break;
+            case self::TorrentSlotTypeHi10p:
+                $str =  'hi10p_slot_requirements';
+                break;
+            case self::TorrentSlotTypeRemuxFeature:
+                $str =  'remux_feature_slot_requirements';
+                break;
+            case self::TorrentSlotTypeWebDovi:
+                $str =  'dovi_slot_requirements';
+                break;
+            case self::TorrentSlotTypeWebSDR:
+                $str =  'sdr_slot_requirements';
+                break;
             default:
                 return '';
         }
@@ -549,6 +592,16 @@ class TorrentSlot {
                 return 'untouched_slot';
             case self::TorrentSlotTypeDIY:
                 return 'diy_slot';
+            case self::TorrentSlotTypeWebSDR:
+                return 'sdr_slot';
+            case self::TorrentSlotTypeWebDovi:
+                return 'dovi_slot';
+            case self::TorrentSlotTypeHi10p:
+                return 'hi10p_slot';
+            case self::TorrentSlotTypeRemuxFeature:
+                return 'remux_feature_slot';
+            case self::TorrentSlotTypeNone:
+                return "empty";
         }
         return '';
     }
@@ -572,7 +625,7 @@ class TorrentSlot {
         return $Ret;
     }
 
-    public static function slot_name($Slot) {
+    public static function slot_filter_name($Slot) {
         switch ($Slot) {
             case self::TorrentSlotTypeNone:
                 return "empty";
@@ -580,6 +633,9 @@ class TorrentSlot {
             case self::TorrentSlotTypeX265ChineseQuality:
                 return 'cn_quality';
             case self::TorrentSlotTypeQuality:
+            case self::TorrentSlotTypeHi10p:
+            case self::TorrentSlotTypeWebSDR:
+            case self::TorrentSlotTypeWebDovi:
                 return 'quality';
             case self::TorrentSlotTypeEnglishQuality:
             case self::TorrentSlotTypeX265EnglishQuality:
@@ -591,6 +647,7 @@ class TorrentSlot {
             case self::TorrentSlotTypeDIY:
                 return 'diy';
             case self::TorrentSlotTypeRemux:
+            case self::TorrentSlotTypeRemuxFeature:
                 return 'remux';
             case self::TorrentSlotTypeUntouched:
             case self::TorrentSlotTypeNTSCUntouched:

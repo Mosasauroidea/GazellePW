@@ -1,6 +1,6 @@
 <?php
 
-require(__DIR__ . '../classes/includes.php');
+require(__DIR__ . '/../classes/includes.php');
 
 $DB->prepared_query("
     DELETE FROM invite_tree
@@ -8,7 +8,7 @@ $DB->prepared_query("
 $invite = $DB->prepared_query('
 	SELECT UserID, Inviter
     FROM users_info
-    WHERE Inviter IS NOT NULL
+    WHERE Inviter IS NOT NULL and inviter <> 0
     ORDER BY UserID
 ');
 $inv = [];

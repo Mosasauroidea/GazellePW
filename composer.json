@@ -35,7 +35,8 @@
     "twig/twig": "^2.15.3",
     "d11wtq/boris": "^1.0",
     "phpmailer/phpmailer": "^6.6",
-    "tronovav/geoip2-update": "^2.1"
+    "tronovav/geoip2-update": "^2.1",
+    "endroid/qr-code": "^4.6"
   },
   "require-dev": {
     "phpstan/phpstan": "^0.12.49",

@@ -1,5 +1,5 @@
 <?
-require(__DIR__ . '../classes/includes.php');
+require(__DIR__ . '/../classes/includes.php');
 
 $StartGroupID = $argv[1];
 $EndGroupID = $argv[2];

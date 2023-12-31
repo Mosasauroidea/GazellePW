@@ -60,8 +60,14 @@ function toFields(info) {
     container: info.container,
     ...toResolution(info),
     ...toLangs(info),
+    ...toOption(info.videoOption),
+    ...toOption(info.audioOption),
   }
   return fields
+}
+
+function toOption(option) {
+  return Object.fromEntries(option.map((v) => [v, true]))
 }
 
 function toResolution(info) {

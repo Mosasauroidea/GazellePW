@@ -13,14 +13,13 @@ export default class SummaryBdinfoParser {
       Subtitle: [],
     }
     debug('LINES', lines)
-    for (const line of lines) {
-      // (*) Indicates included stream hidden by this playlist.
+    for (var line of lines) {
       if (line.startsWith('* ')) {
-        continue
+        line = line.replace('* ', '')
       }
       const found = line.match(/^([\w ]+): (.*)$/)
       if (!found) {
-        throw new Error(`Line is not a 'A: B' format -- '${line}'`)
+        continue
       }
       const [key, value] = found.slice(1)
       const newValue = this.processValue(key, value.trim())
@@ -39,20 +38,18 @@ export default class SummaryBdinfoParser {
       case 'Size':
         return parseInt(value.replace(/,/g, '').replace('bytes', '').trim())
       case 'Video': {
-        const [codec, bitrate, resolution, frameRate, aspectRatio, note] =
-          value.split(' / ')
+        const [codec, bitrate, resolution, frameRate, aspectRatio, ...rest] = value.split(' / ')
         return {
           codec: codec.replace(/ Video/, ''),
           bitrate,
           resolution,
           frameRate,
           aspectRatio,
-          note,
+          note: rest.join(' / ').trim(),
         }
       }
       case 'Audio': {
-        const [language, codec, channels, sampleRate, bitrate, ...rest] =
-          value.split(' / ')
+        const [language, codec, channels, sampleRate, bitrate, ...rest] = value.split(' / ')
         return {
           language,
           codec,

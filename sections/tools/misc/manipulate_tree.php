@@ -57,6 +57,8 @@ if ($_POST['id']) {
         while (list($Invitee) = $DB->next_record()) {
             $BanList[] = $Invitee;
         }
+        var_dump($BanList);
+        die();
 
         foreach ($BanList as $Key => $InviteeID) {
             if ($_POST['perform'] === 'nothing') {

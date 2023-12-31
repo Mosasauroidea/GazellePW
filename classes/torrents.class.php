@@ -1188,7 +1188,7 @@ WHERE ud.TorrentID=? AND ui.NotifyOnDeleteDownloaded='1' AND ud.UserID NOT IN ({
                 if ($Style) {
                     if ($Option['SettingTorrentTitle']['Alternative']) {
                         if ($Data['Slot'] != TorrentSlot::TorrentSlotTypeNone) {
-                            $Slot = TorrentSlot::slot_name($Data['Slot']);
+                            $Slot = TorrentSlot::slot_filter_name($Data['Slot']);
                             $Processing = icon("Torrent/slot_${Slot}");
                         }
                     }
@@ -1734,6 +1734,7 @@ WHERE ud.TorrentID=? AND ui.NotifyOnDeleteDownloaded='1' AND ud.UserID NOT IN ({
         }
         $DoubanData = null;
         if (!empty($DoubanID)) {
+            $UpdateSQL[] = "DoubanID = " . $DoubanID;
             $DoubanData = MOVIE::get_douban_data_by_doubanid($DoubanID, $Force);
         }
         if ($DoubanData && $DoubanData->rating) {

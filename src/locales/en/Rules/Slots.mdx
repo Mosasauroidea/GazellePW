@@ -1,0 +1,413 @@
+To be translated.
+
+<Heading1 id="content">槽位规则</Heading1>
+
+<Heading2 id="introduction">前言</Heading2>
+
+因为槽位规则比较复杂，所以用独立的章节来介绍它。
+
+<Heading2 id="1">1. 槽位</Heading2>
+
+简单来说，槽位规定了种子组下有哪些空位可供放入种子，并且规定种子要符合怎样的条件才能放入该空位。
+
+由于槽位数是有限的，当存在多个种子应占据同一槽位时，就会发生优胜劣汰。
+
+<Heading3 id="1.1">1.1. 槽位总览</Heading3>
+
+下面是在无特殊版本的情况下，一部影视作品的完整槽位表：
+
+<div className="SlotsOverview">
+<table class="Table" style="text-align: center">
+    <tr class="Table-row">
+        <th class="Table-cellHeader">槽位类型</th>
+        <th class="Table-cellHeader" colspan="9">Encode</th>
+        <th class="Table-cellHeader" colspan="2">Web</th>
+        <th class="Table-cellHeader" colspan="2">Remux</th>
+        <th class="Table-cellHeader">Untouched</th>
+        <th class="Table-cellHeader">DIY</th>
+    </tr>
+    <tr class="Table-row">
+        <th class="Table-cellHeader">槽位名称</th>
+        <th class="Table-cellHeader" colspan="2">中字质量槽</th>
+        <th class="Table-cellHeader" colspan="2">英字质量槽</th>
+        <th class="Table-cellHeader" colspan="2">特色槽</th>
+        <th class="Table-cellHeader" colspan="3">存档槽</th>
+        <th class="Table-cellHeader">Hi10p 槽</th>
+        <th class="Table-cellHeader">SDR 槽</th>
+        <th class="Table-cellHeader">DoVi 槽</th>
+        <th class="Table-cellHeader">质量槽</th>
+        <th class="Table-cellHeader">特色槽</th>
+        <th class="Table-cellHeader">原盘槽</th>
+        <th class="Table-cellHeader">DIY 槽</th>
+    </tr>
+    <tr class="Table-row">
+        <th class="Table-cellHeader">编码</th>
+        <td class="Table-cell">x264</td>
+        <td class="Table-cell">x265</td>
+        <td class="Table-cell">x264</td>
+        <td class="Table-cell">x265</td>
+        <td class="Table-cell">x264</td>
+        <td class="Table-cell">x265</td>
+        <td class="Table-cell">x264</td>
+        <td class="Table-cell">x265</td>
+        <td class="Table-cell">x264</td>
+        <td class="Table-cell">H.265</td>
+        <td class="Table-cell">H.265</td>
+        <td class="Table-cell">—</td>
+        <td class="Table-cell">—</td>
+        <td class="Table-cell">—</td>
+        <td class="Table-cell">—</td>
+    </tr>
+    <tr class="Table-row">
+        <th class="Table-cellHeader">SD</th>
+        <td class="Table-cell">√</td>
+        <td class="Table-cell"></td>
+        <td class="Table-cell">√</td>
+        <td class="Table-cell"></td>
+        <td class="Table-cell"></td>
+        <td class="Table-cell"></td>
+        <td class="Table-cell"></td>
+        <td class="Table-cell"></td>
+        <td class="Table-cell"></td>
+        <td class="Table-cell"></td>
+        <td class="Table-cell"></td>
+        <td class="Table-cell"></td>
+        <td class="Table-cell"></td>
+        <td class="Table-cell">√</td>
+        <td class="Table-cell"></td>
+    </tr>
+    <tr class="Table-row">
+        <th class="Table-cellHeader">720p</th>
+        <td class="Table-cell">√</td>
+        <td class="Table-cell"></td>
+        <td class="Table-cell">√</td>
+        <td class="Table-cell"></td>
+        <td class="Table-cell">√</td>
+        <td class="Table-cell"></td>
+        <td class="Table-cell">√</td>
+        <td class="Table-cell"></td>
+        <td class="Table-cell">√</td>
+        <td class="Table-cell"></td>
+        <td class="Table-cell"></td>
+        <td class="Table-cell">√</td>
+        <td class="Table-cell"></td>
+        <td class="Table-cell">√</td>
+        <td class="Table-cell"></td>
+    </tr>
+    <tr class="Table-row">
+        <th class="Table-cellHeader">1080p</th>
+        <td class="Table-cell">√</td>
+        <td class="Table-cell">√</td>
+        <td class="Table-cell">√</td>
+        <td class="Table-cell">√</td>
+        <td class="Table-cell">√</td>
+        <td class="Table-cell"></td>
+        <td class="Table-cell">√</td>
+        <td class="Table-cell"></td>
+        <td class="Table-cell">√</td>
+        <td class="Table-cell"></td>
+        <td class="Table-cell">√</td>
+        <td class="Table-cell">√</td>
+        <td class="Table-cell">√</td>
+        <td class="Table-cell">√</td>
+        <td class="Table-cell">√</td>
+    </tr>
+    <tr class="Table-row">
+        <th class="Table-cellHeader">2160p</th>
+        <td class="Table-cell"></td>
+        <td class="Table-cell">√</td>
+        <td class="Table-cell"></td>
+        <td class="Table-cell">√</td>
+        <td class="Table-cell"></td>
+        <td class="Table-cell">√</td>
+        <td class="Table-cell"></td>
+        <td class="Table-cell">√</td>
+        <td class="Table-cell"></td>
+        <td class="Table-cell">√</td>
+        <td class="Table-cell">√</td>
+        <td class="Table-cell">√</td>
+        <td class="Table-cell">√</td>
+        <td class="Table-cell">√</td>
+        <td class="Table-cell">√</td>
+    </tr>
+</table>
+</div>
+
+想要了解某个分辨率下有哪些槽位，只需要先在第一列找到清晰度，比如 SD，往右看，就可以知道它拥有 x264 编码的中字和英字质量槽，以及原盘槽。其他清晰度以此类推。
+
+<Heading3 id="1.2">1.2. 槽位要求</Heading3>
+
+这一节介绍每一类槽位对放入其中的视频种子有何要求。
+
+<div className="SlotsRequirements">
+
+| 槽位类型  | 槽位名称   | 字幕语言要求                           | 其他要求                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
+| :-------- | :--------- | :------------------------------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Encode    | 中字质量槽 | 必须内封中字（硬字、外挂不算）         | 该槽仅以压制质量为考虑因素，压制应在保证压制后画面与源基本无可感知差异的前提下尽可能减小码率，音轨应满足 5.4.3 的指导要求，不允许包含冗余的配音音轨。<br/>可入该槽的字幕组合有：中、中+英、中+原（指原始语言字幕，日语片就是日语字幕），这三大类字幕组合的种子只进入该槽。其他所有字幕组合，均进入英字质量槽。<br/>进入该槽的外语片，除原始语言音轨以外，含非国配音轨会被视为冗余，含国配音轨则进入特色槽。                                               |
+| ^         | 英字质量槽 | 必须带英字（可封可挂，硬字不算）       | 基本性质同上。进入该槽的种子，非英语电影必须内封或外挂英字，并推荐将英字设为默认字幕。通常，种子组的首个无字幕种子会进入该槽，如果其是非英语电影则会被标记为「可替代」。                                                                                                                                                                                                                                                                                  |
+| ^         | 特色槽     | 必须内封中字或带国配（硬字、外挂不算） | **原则上仅外语片适用**。该槽以内容丰富程度为主要考虑因素，压制应在保证质量过关的前提下尽可能多地加入特效字幕、国配音轨等特色内容。发布者必须在种子描述中针对特色的具体情况作出说明，比如，增加了某某国配，增加了怎样的特效字幕并配以截图。                                                                                                                                                                                                                |
+| ^         | 存档槽     | 无要求                                 | 该槽以体积和压制质量为考虑因素，压制应在保证质量过关的前提下尽可能减小码率，该槽基本以 0day/Scene 压制作品为参照。不允许包含冗余的配音音轨。                                                                                                                                                                                                                                                                                                              |
+| ^         | Hi10p 槽   | 无要求                                 | 该槽专供**动画电影**。在发布前，请先 [获得批准](forums.php?action=viewthread&threadid=21)。由于此类压制具有一定先锋实验性质，故其音轨要求可以酌情放宽。                                                                                                                                                                                                                                                                                                   |
+| Web       | SDR 槽     | 无要求                                 | 该槽专供 SDR Web 资源。Web 类资源必须来自正规视频平台的原始视频流，不得二压。                                                                                                                                                                                                                                                                                                                                                                             |
+| ^         | DoVi 槽    | 无要求                                 | 该槽专供 P5 杜比视界。P5 杜比视界独一无二，只有 WEB-DL 有，且不兼容 HDR10。                                                                                                                                                                                                                                                                                                                                                                               |
+| Remux     | 质量槽     | 无要求                                 | 该槽的首要考虑因素是 Remux 源音视频轨的质量。与特色槽、DIY 槽不同，该槽不考虑特效中字、国配音轨。                                                                                                                                                                                                                                                                                                                                                         |
+| ^         | 特色槽     | 无要求                                 | **原则上仅外语片适用**。该槽的首要考虑因素是特色内容。在质量相近的前提下，应尽可能多地加入特效字幕、国配音轨等特色内容。发布者必须在种子描述中针对加入的特色内容作出说明，比如，增加了某某国配，增加了怎样的特效字幕并配以截图。请注意，**中文影片（包括粤语闽南语等方言影片）不享受此规则与槽位**，不允许上传华语影片的特色 Remux。如果你认为手中的 Remux 具有**特别的价值**，请移步 [我能发布它吗](forums.php?action=viewthread&threadid=21)。          |
+| Untouched | 原盘槽     | 无要求                                 | 该槽的首要考虑因素是原盘音视频轨的质量。原盘资源必须是未经任何非必要改动的原始媒介数据的复制品。                                                                                                                                                                                                                                                                                                                                                          |
+| DIY       | DIY 槽     | 必须内封中字或带国配（硬字、外挂不算） | **原则上仅外语片适用**。该槽的首要考虑因素是特色内容。在质量相近的前提下，应尽可能多地加入特效字幕、国配音轨等特色内容。发布者必须在种子描述中针对加入的特色内容作出说明，比如，增加了某某国配，增加了怎样的特效字幕并配以截图。请注意，**中文影片（包括粤语闽南语等方言影片）不享受此规则与槽位**，不允许上传华语影片的 DIY 原盘。如果你认为手中的华语影片 DIY 原盘具有**特别的价值**，请移步 [我能发布它吗](forums.php?action=viewthread&threadid=21)。 |
+
+</div>
+
+备注：
+
+1. **中字**：囊括了中文的多语字幕（如中英双语字幕等），一律按中文字幕标记和处理。
+2. **国配**：仅外语电影（不包括粤语等方言电影）可添加此标记。仅普通话（含台湾普通话）被视为国配，粤语等地方方言不被视为国配。
+3. **方言**：方言（如粤语）电影不能使用「国语配音」「特效字幕」标记，其中的普通话配音音轨也不被视为冗余。
+4. **特效字幕**：带有反光、闪烁、移动、翻滚、漂移、颜色、二维、三维、分裂、组合等特殊效果的字幕，应用特效的目的是与电影场景尽可能匹配、和谐。简单的变色、字体处理不被视为特效，如果你不确定自己种子的字幕是否属于特效字幕，可以在论坛 求助区 询问。在发布时，你必须提供能展现特效字幕绚丽性的截图。特效截图无分辨率和格式要求，至少两张，必须截取影片剧情相关部分的特效（不要截取片头片尾的人员名单或片商名称特效等等没有意义的部分），不要和影片截图混放，且不计入 三张截图的基本要求，也就是共计至少五张。
+
+<Heading3 id="1.3">1.3. 替代优先级</Heading3>
+
+这一节介绍每一类槽位中发生优胜劣汰时，判定视频文件胜负的标准。
+
+<div className="TrumpPriority">
+
+| 槽位类型  | 槽位名称   | 编码  | 替代时考虑因素的优先级                                                                     | 具体替代序列                                                                                                                                                                                                                                                                                                                                                                         |
+| :-------- | :--------- | :---- | :----------------------------------------------------------------------------------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Encode    | 中字质量槽 | x264  | 视频质量佳 > 体积小                                                                        | 由于已经拆成了中字、英字两类槽位，压制质量是唯一替代考虑因素，欲替代旧种的发布者需要提交尽可能多的对比截图来证明改进。<br/>此外，还存在对字幕无硬性要求的质量槽（适用于附加内容）。                                                                                                                                                                                                  |
+| ^         | ^          | x265  | 向下兼容的杜比视界（其 HDR10 层要同等或更优质）> 仅 HDR10（WEB-DL 的两个层应同源或同参源） | ^                                                                                                                                                                                                                                                                                                                                                                                    |
+| ^         | 英字质量槽 | x264  | 视频质量佳 > 体积小                                                                        | ^                                                                                                                                                                                                                                                                                                                                                                                    |
+| ^         | ^          | x265  | 向下兼容的杜比视界（其 HDR10 层要同等或更优质）> 仅 HDR10（WEB-DL 的两个层应同源或同参源） | ^                                                                                                                                                                                                                                                                                                                                                                                    |
+| ^         | 特色槽     | x264  | 国配／特效字幕丰富 > 国配／特效字幕质量佳 > 视频质量优，单独包含特效或国配无法替代另一种   | 在保证质量的前提下，内封中字/国配有其一 < 内封中字+国配 < 内封特效中字+国配。                                                                                                                                                                                                                                                                                                        |
+| ^         | ^          | x265  | ^                                                                                          | ^                                                                                                                                                                                                                                                                                                                                                                                    |
+| ^         | 存档槽     | x264  | 视频质量佳 > 体积小                                                                        | 在保证质量的前提下，无内封中字 < 内封中字。                                                                                                                                                                                                                                                                                                                                          |
+| ^         | ^          | x265  | 向下兼容的杜比视界（其 HDR10 层要同等或更优质）> 仅 HDR10（WEB-DL 的两个层应同源或同参源） | ^                                                                                                                                                                                                                                                                                                                                                                                    |
+| ^         | Hi10p 槽   | x264  | 视频质量佳 > 体积小                                                                        | 同质量槽                                                                                                                                                                                                                                                                                                                                                                             |
+| Web       | SDR 槽     | H.265 | 视频质量佳 > 体积小                                                                        | 同质量槽                                                                                                                                                                                                                                                                                                                                                                             |
+| ^         | DoVi 槽    | H.265 | 视频质量佳 > 体积小                                                                        | 同质量槽                                                                                                                                                                                                                                                                                                                                                                             |
+| Remux     | 质量槽     | —     | 原盘质量优 > 带内封中字                                                                    | Remux 可被同等质量但更为完整的种子替代，下列是可能的替代原因：<ul><li>包含了旧种所不包含的章节信息。</li><li>添加了评论或独立的配乐。</li><li>以适当的相同内容的无损压缩音轨替换旧 Remux 的 PCM 音轨。</li><li>包含了旧种所不包含的中文 PGS/SUP 字幕。</li></ul>若上述因素都一致，则无中字普通源 < 内封中字普通源 < 无中字优质源 < 内封中字优质源。<br/>有无国配不纳入替代考虑因素。 |
+| ^         | 特色槽     | —     | 国配／特效字幕丰富 > 国配／特效字幕质量佳 > 视频质量优                                     | 无内封中字 < 内封中字 < 内封特效中字 < 内封中字+国配 < 内封特效中字+国配。                                                                                                                                                                                                                                                                                                           |
+| Untouched | 原盘槽     | —     | 原盘质量优                                                                                 | 无中字普通源 < 内封中字普通源 < 无中字优质源 < 内封中字优质源。<br/>有无国配不纳入替代考虑因素。                                                                                                                                                                                                                                                                                     |
+| DIY       | DIY 槽     | —     | 国配／特效字幕丰富 > 国配／特效字幕质量佳 > 视频质量优                                     | 无内封中字 < 内封中字 < 内封特效中字 < 内封中字+国配 < 内封特效中字+国配。                                                                                                                                                                                                                                                                                                           |
+
+</div>
+
+<Heading2 id="2">2. 共存</Heading2>
+
+上一节介绍了每一个槽位自身的定义和要求等，这一节阐述同分辨率 Encode 类中各槽位的相互关系。它是对 [1.1](#1.1) 表格的进一步解释。
+
+<Heading3 id="2.1">2.1. 标清</Heading3>
+
+<Heading4 id="2.1.1">2.1.1. **对于给定电影，提供 1 个中字质量槽，1 个英字质量槽，共计 2 个 x264 Encode 槽位**。</Heading4>
+
+<Heading4 id="2.1.2">2.1.2. 更多关于标清发布的信息，参见 [相关规则](rules.php?p=upload#3.1)。</Heading4>
+
+<Heading3 id="2.2">2.2. 高清</Heading3>
+
+<Heading4 id="2.2.1">2.2.1. **对于给定电影，5 个不同的 x264 720p Encode 和 5 个不同的 x264 1080p Encode 可以共存**。</Heading4>
+
+<Heading5 id="2.2.1.1">2.2.1.1. **每组包含一个中字质量槽，一个英字质量槽，一个特色槽，一个存档槽和一个 Hi10p 槽**。存档槽的编码应趋向压缩程度更高、更紧凑，而质量槽应趋向尽可能高的质量。作为参考，存档槽的 Encode 应至少比质量槽小约 20% 才能共存。</Heading5>
+
+<Heading4 id="2.2.2">2.2.2. **另外，还有 2 个额外的槽位留给 HDR x265 1080p Encode**，分别是中字和英字的质量槽。它与规则 [2.2.1](#2.2.1) 所定义的槽位相独立，且互不干涉。除 Hi10p 槽以外，不允许发布 SDR x265 1080p Encode。</Heading4>
+
+<Heading4 id="2.2.3">2.2.3. 更多关于高清发布的信息，参见 [相关规则](rules.php?p=upload#3.2)。</Heading4>
+
+<Heading3 id="2.3">2.3. 超高清</Heading3>
+
+<Heading4 id="2.3.1">2.3.1. **对于给定电影，有 4 个 2160p Encode 可以共存**。</Heading4>
+
+<Heading5 id="2.3.1.1">2.3.1.1. **每组包含一个中字质量槽，一个英字质量槽，一个特色槽和一个存档槽**。存档槽的编码应趋向压缩程度更高、更紧凑，而质量槽应趋向尽可能高的质量。作为参考，存档槽的 Encode 应至少比质量槽小约 20% 才能共存。</Heading5>
+
+<Heading5 id="2.3.1.2">2.3.1.2. **如果提供了足够多的对比截图证明其优于既存的高清源，则一个 SDR 种子可占据规则 [2.3.1.1](#2.3.1.1) 定义的存档槽**。</Heading5>
+
+<Heading4 id="2.3.2">2.3.2. 更多关于超高清发布的信息，参见 [相关规则](rules.php?p=upload#3.3)。</Heading4>
+
+<Heading3 id="2.4">2.4. 原盘</Heading3>
+
+<Heading4 id="2.4.1">2.4.1. **允许存在一个 NTSC DVD 原盘种子和一个 PAL DVD 原盘种子。两个槽位都应以能获取到的最优质源占据，由管理决定**。</Heading4>
+
+<Heading4 id="2.4.2">2.4.2. **720p 下，允许存在一个原盘种子和一个 Remux 种子**。两个槽位都应以能获取到的最优质源占据，原盘第二考虑国配，Remux 第二考虑内封中字，由管理决定。</Heading4>
+
+<Heading4 id="2.4.3">2.4.3. **1080p/2160p 下，各允许存在一个原盘种子，一个 DIY 原盘种子和两个 Remux 种子**。三个槽位都应以能获取到的最优质源占据，由管理决定。</Heading4>
+
+<Heading4 id="2.4.4">2.4.4. 更多关于原盘发布的信息，参见 [相关规则](rules.php?p=upload#3.4)。</Heading4>
+
+<Heading3 id="2.5">2.5. 附加内容</Heading3>
+
+<Heading4 id="2.5.1">2.5.1. **每种分辨率（SD、720p、1080p 还额外允许 Remux）允许存在一个含附加内容的合集**。</Heading4>
+
+<Heading4 id="2.5.2">2.5.2. **若内容存在实际区别，则来自不同版本的附加内容合集可以共存**。若无区别，该槽应留给最完整的合集。</Heading4>
+
+<Heading3 id="2.6">2.6. 其他</Heading3>
+
+<Heading4 id="2.6.1">2.6.1. **允许电影的每种剪辑版本（影院／导演、限制级／未分级……）拥有一组独立的槽位。另外，各类不存在包含关系的 HDR 格式各自拥有一组独立的槽位**。</Heading4>
+
+<Heading4 id="2.6.2">2.6.2. **外语电影（不包括粤语等方言电影）的国语配音种子（同时包含原声和配音音轨更好）进入特色槽**。</Heading4>
+
+<Heading4 id="2.6.3">2.6.3. **非英语电影的英配种子（双音轨更好）可拥有一个额外的英字质量槽**。即使英配电影的内封字幕情况符合中字质量槽标准，它也优先进入英字质量槽。**方言影片如果不包含国配或英配则可拥有一个额外的中字质量槽**。即使内封字幕情况符合英字槽条件，它也优先进入中字质量槽。<Important italic>Update! 2021-08-14</Important> </Heading4>
+
+<Heading4 id="2.6.4">2.6.4. **虽然对于给定电影，每个种子都应源自被视为最佳的版本，但可以额外提供给源自稍差但提供了不同观赏体验版本的种子一组槽位**。该槽组通常由每个分辨率的一个 Encode、一个 Remux 和一个完整的原盘组成（这里没有存档槽）。如果你不确定能否共存，请移步 [我能发布它吗](forums.php?action=viewthread&threadid=21)。<Important italic>Update! 2021-08-14</Important> </Heading4>
+
+<Heading2 id="3">3. 替代</Heading2>
+
+当两个种子无法根据上述规则被分配到不同的槽位时，就应比较其优劣。若新种子劣于旧种子，或与之质量相当，则被视为「重复」并且删除；若新种子优于旧种子，则应使之「替代」旧种子，旧种子被删除。
+
+优劣的比较通常需要考虑下列因素。
+
+<Heading3 id="3.1">3.1. 源</Heading3>
+
+<Heading4 id="3.1.1">3.1.1. **对于标清种子通常的替代顺序如下：VHS &lt; TV &lt; HDTV | WEB &lt; DVD &lt; Blu-ray。对于高清和超高清种子通常的替代顺序如下：HDTV &lt; WEB | HD-DVD | Blu-ray**。如果码率高低悬殊，蓝光、HD-DVD 源的种子可直接替代 TV、HDTV 源的同槽位种子，无需提供用于佐证的对比图。</Heading4>
+
+<Heading5 id="3.1.1.1">3.1.1.1. **虽说这个替代顺序一般都没问题，但请注意决定的作出最终要落实在质量上（比如，如果蓝光源被发现是次品，则 WEB Encode 就不会被删除）**。</Heading5>
+
+<Heading4 id="3.1.2">3.1.2. **未经删减的原盘种子总是能替代相同质量的、抛弃部分内容（比如附加内容或菜单）的种子**。</Heading4>
+
+<Heading3 id="3.2">3.2. 质量</Heading3>
+
+<Heading4 id="3.2.1">3.2.1. **任何未满足 [相关规则](rules.php?p=upload#3) 定义的首选格式的种子都可被符合推荐格式的种子替代，只要其质量同等或更优**。</Heading4>
+
+<Heading5 id="3.2.1.1">3.2.1.1. **x264 (SD, HD) 和 x265 (UHD) 被视为首选编码器**。来源信息未知的 H.264 或 H.265 文件可以占据规则 [2.1.1](#2.1.1)、[2.2.1](#2.2.1) 和 [2.3.1](#2.3.1) 定义的 x264 或 x265 槽位，但更容易因质量原因被替代。</Heading5>
+
+<Heading4 id="3.2.2">3.2.2. **占据了规则 [1.1](#1.1) 定义的质量槽的种子可被质量显著更佳的 Encode 替代**。</Heading4>
+
+<Heading4 id="3.2.3">3.2.3. **可替代种子可以被无标记所指问题的种子替代**。见规则 [3.4](#3.4) 了解完整的可替代标记清单。</Heading4>
+
+<Heading4 id="3.2.4">3.2.4. **原盘、Remux 类种子的替代政策较激进，即提供更好观看体验的来源将胜过较低劣的**。</Heading4>
+
+<Heading4 id="3.2.5">3.2.5. **质量替代（对于 Encode、Remux 和源）应尽可能多地通过截图对比来证明改进**。</Heading4>
+
+<Heading4 id="3.2.6">3.2.6. **如果出现重大缺陷（不完整、音轨不同步、错误的纵横比……），则劣质 Scene 出品可自动被 REPACK 或 PROPER 替代掉。不是因影响观影体验的问题（被盗的源、重复、命名错误），劣质的 Scene 出品可以此方式替代**。</Heading4>
+<Heading4 id="3.2.7">3.2.7. 在管理批准的情况下，影片后期制作存在显著差异的 Remux 种子允许共存。</Heading4>
+
+<Heading4 id="3.2.8">3.2.8. **非中文电影的评论音轨替代序列**：</Heading4>
+
+<Heading5 id="3.2.8.1">3.2.8.1. **Remux 槽**：同源、同含主音轨中字的情况下，无评论音轨 &lt; 有评论音轨；有评论音轨时，无评论音轨字幕 &lt; 英文评论音轨字幕 &lt; 中文评论音轨字幕。</Heading5>
+
+<Heading5 id="3.2.8.2">3.2.8.2. **DIY 槽**：同源、其他内容与既有种子相近的情况下，无评论音轨 &lt; 有评论音轨；有评论音轨时，无评论音轨字幕 &lt; 英文评论音轨字幕 &lt; 中文评论音轨字幕。</Heading5>
+
+<Heading4 id="3.2.9">3.2.9. **脏线、色带、色块等原盘瑕疵的修复不可单独作为替代理由**。</Heading4>
+
+<Heading3 id="3.3">3.3. 不活跃</Heading3>
+
+<Heading4 id="3.3.1">3.3.1. **任何不活跃超过 4 周将自动可替代**。</Heading4>
+
+<Heading4 id="3.3.2">3.3.2. **任何发布 24 小时后仍未做种的种子会被标记为「可替代」**。</Heading4>
+
+<Heading4 id="3.3.3">3.3.3. **如有可能，尽量为不活跃种子（死种）续种而不是替代之**。</Heading4>
+
+<Heading3 id="3.4">3.4. 可替代标记：这些标记会附加在任何未达到我们标准的种子上。</Heading3>
+
+<Heading4 id="3.4.1">3.4.1. **问题纵横比**：编码错误是导致种子表现出错误纵横比的原因。</Heading4>
+
+<Heading4 id="3.4.2">3.4.2. **非原始纵横比**：该种子的纵横比与原始的、影院上映的电影不同，一旦存在纵横比正确的发行，同分辨率组内就不允许共存非原始纵横比的种子了。</Heading4>
+
+<Heading4 id="3.4.3">3.4.3. **无谓高码（臃肿）**：种子的视频或音频比特率过高。音频比特率上限手册：<Important italic>Update! 2021-08-06</Important></Heading4>
+
+<Table>
+  <Tr>
+    <Th colspan='2' rowspan='2'>源音频</Th>
+    <Th colspan='4'>Encode</Th>
+    <Th colspan='2'>Remux</Th>
+  </Tr>
+  <Tr>
+    <Th>SD</Th>
+    <Th>720p</Th>
+    <Th>1080p</Th>
+    <Th>2160p</Th>
+    <Th>1080p</Th>
+    <Th>2160p</Th>
+  </Tr>
+  <Tr>
+    <Td rowspan='3'>主音轨</Td>
+    <Td>7.1/5.1 无损</Td>
+    <Td>640 kbps AC3 (首选 448 kbps AC3)</Td>
+    <Td>1509 kbps DTS (首选 640  kbps AC3)</Td>
+    <Td>1536 kbps E-AC3</Td>
+    <Td>保持原样</Td>
+    <Td>保持原样</Td>
+    <Td>保持原样</Td>
+  </Tr>
+  <Tr>
+    <Td>2.0/1.0 无损</Td>
+    <Td>16-bit FLAC (首选高质量 AAC)</Td>
+    <Td>16-bit FLAC (首选高质量 AAC)</Td>
+    <Td>16-bit FLAC</Td>
+    <Td>保持原样 (首选 24-bit FLAC)</Td>
+    <Td>保持原样 (首选 FLAC)</Td>
+    <Td>保持原样 (首选 FLAC)</Td>
+  </Tr>
+  <Tr>
+    <Td>有损</Td>
+    <Td>保持原样</Td>
+    <Td>保持原样</Td>
+    <Td>保持原样</Td>
+    <Td>保持原样</Td>
+    <Td>保持原样</Td>
+    <Td>保持原样</Td>
+  </Tr>
+  <Tr>
+    <Td rowspan='2'>次音轨</Td>
+    <Td>无损</Td>
+    <Td>中质量 AAC</Td>
+    <Td>高质量 AAC</Td>
+    <Td>16-bit FLAC</Td>
+    <Td>16-bit FLAC</Td>
+    <Td>保持原样 (首选 FLAC)</Td>
+    <Td>保持原样 (首选 FLAC)</Td>
+  </Tr>
+  <Tr>
+    <Td>有损</Td>
+    <Td>中质量 AAC 或保持原样</Td>
+    <Td>中质量 AAC 或保持原样</Td>
+    <Td>中质量 AAC 或保持原样</Td>
+    <Td>中质量 AAC 或保持原样</Td>
+    <Td>保持原样</Td>
+    <Td>保持原样</Td>
+  </Tr>
+</Table>
+
+<Heading4 id="3.4.4">3.4.4. **音轨冗余：不适用于原盘槽和 DIY 槽**。种子包含多余的音轨，有如非中英配音或同一音轨的冗余版本。[4.0.4](#4.0.4) 方言（如粤语）电影中的普通话配音音轨不被视为冗余。</Heading4>
+
+<Heading4 id="3.4.5">3.4.5. **反交错问题**：种子被错误地反交错了。</Heading4>
+
+<Heading4 id="3.4.6">3.4.6. **帧率错误**：种子以不同于原生、正确的帧率播放。</Heading4>
+
+<Heading4 id="3.4.7">3.4.7. **字幕不同步**：种子中包含的字幕有效，但不同步。</Heading4>
+
+<Heading4 id="3.4.8">3.4.8. **格式不当**：种子不符合我们的 [推荐格式](rules.php?p=upload#3)。</Heading4>
+
+<Heading4 id="3.4.9">3.4.9. **分辨率不当**：种子不符合我们的 [推荐分辨率](rules.php?p=upload#3)。</Heading4>
+
+<Heading4 id="3.4.10">3.4.10. **劣质源**：种子的源没能提供当下能获取到的最好观影体验。</Heading4>
+
+<Heading4 id="3.4.11">3.4.11. **低质量**：种子编码所使用的源非常糟糕，或是受到了重大质量问题的影响。</Heading4>
+
+<Heading4 id="3.4.12">3.4.12. **播放问题**：通常会由次级标记详细说明导致种子无法完美播放或编码的问题。</Heading4>
+
+<Heading4 id="3.4.13">3.4.13. **残缺**：种子缺失内容，通常会由次级标记详细说明。</Heading4>
+
+<Heading4 id="3.4.14">3.4.14. **缺少基本字幕：适用于英字质量槽、存档槽、Remux 槽和原盘槽**，同时缺少中英字幕（内封或外挂均无）的非英文影片会被标记，标记可通过外挂要求的字幕来消除。默片或无需字幕的影片不会被添加此标记。</Heading4>
+
+<Heading5 id="3.4.14.1">3.4.14.1. **英字质量槽**：外挂英语字幕可消除标记。</Heading5>
+
+<Heading5 id="3.4.14.2">3.4.14.2. **其他三类**：外挂中／英字幕可消除标记。可被内封中字的同等或更优质量种子所替代。</Heading5>
+
+<Heading4 id="3.4.15">3.4.15. **未强制英文字幕：仅适用于英字槽**，种子的重要非英语对白不包含单独的英文字幕。</Heading4>
+
+<Heading4 id="3.4.16">3.4.16. **无原声音轨**：一部影片在同时没有原声音轨、国语配音和英语配音的情况下（仅包含小语种配音）适用此标记。<Important italic>Update! 2021-08-14</Important></Heading4>
+
+<Heading4 id="3.4.17">3.4.17. **音轨不同步**：种子中包含的音轨有效，但不同步。</Heading4>
+
+<Heading4 id="3.4.18">3.4.18. **问题裁边**：种子明显裁边过多或过少。</Heading4>
+
+<Heading4 id="3.4.19">3.4.19. **劣质字幕翻译**：种子中包含的字幕质量很差，且不是电影的准确翻译。</Heading4>
+
+<Heading4 id="3.4.20">3.4.20. **硬字幕**：种子中的字幕被硬编码在视频轨中。此标记不针对硬编码强制字幕。</Heading4>
+
+<Heading4 id="3.4.21">3.4.21. **劣质转码**：种子的音频轨编码自已有损压缩的源。</Heading4>
+
+<Heading4 id="3.4.22">3.4.22. **含水印**：种子含有明显的水印。</Heading4>
+
+<Heading4 id="3.4.23">3.4.23. **放大**：种子编码自低分辨率源。</Heading4>
+
+<Heading4 id="3.4.24">3.4.24. **不活跃**：种子无人做种已达至少 4 周。这个标记是自动添加和去除的。</Heading4>
+
+<Heading4 id="3.4.25">3.4.25. **冗余文件**：种子包含无关的文件，详见 [2.1.3](rules.php?p=upload#2.1.3) 。<Important italic>New! 2021-12-31</Important></Heading4>

@@ -627,8 +627,6 @@ class MOVIE {
             }
         }
 
-
-
         $ArtistIMDBIDs = [];
         if ($IMDBActorData) {
             $IMDBActor = json_decode($IMDBActorData);

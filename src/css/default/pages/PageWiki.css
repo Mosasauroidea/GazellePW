@@ -196,6 +196,14 @@ ol.navigation_list li li {
   list-style-type: upper-alpha !important;
 }
 
+ol.navigation_list li li li {
+  list-style-type: decimal !important;
+}
+
+ol.navigation_list li li li li {
+  list-style-type: lower-alpha !important;
+}
+
 div.box.wiki_article {
   background: none;
   border: none;

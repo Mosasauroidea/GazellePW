@@ -3171,6 +3171,12 @@ server.rules.upload_title: |-
   发布
 server.rules.upload_title_de: |-
   该部分规则决定哪些内容可以被发布到本站。
+server.rules.slots_rules: |-
+  槽位规则
+server.rules.slots_title: |-
+  槽位
+server.rules.slots_title_de: |-
+  该部分规则决定已发布内容的去留。
 server.sitehistory.body: |-
   正文
 server.sitehistory.calendar: |-
@@ -5327,7 +5333,7 @@ server.torrents.remove_upload_privileges: |-
 server.torrents.remove_upload_privileges_title: |-
   封禁发布权限？
 server.torrents.remux_slot: |-
-  Remux 槽
+  Remux 质量槽
 server.torrents.remux_slot_requirements: |-
   建议内封中字。同时缺少中英字幕的种子会被标为「可替代」。
 server.torrents.rename: |-
@@ -5566,12 +5572,28 @@ server.torrents.unsubscribe: |-
   退订评论
 server.torrents.untouched_slot: |-
   原盘槽
+server.torrents.sdr_slot: |-
+  SDR 槽
+server.torrents.dovi_slot: |-
+  Dovi 槽
+server.torrents.hi10p_slot: |-
+  Hi10p 槽
+server.torrents.remux_feature_slot: |-
+  Remux 特色槽
 server.torrents.untouched_slot_ntsc: |-
   原盘槽 (NTSC)
 server.torrents.untouched_slot_pal: |-
   原盘槽 (PAL)
 server.torrents.untouched_slot_requirements: |-
   必须是与零售光盘完全一致的副本，仅版权警告部分可以删去。
+server.torrents.sdr_slot_requirements: |-
+  仅杜比视界 WEB 可用。
+server.torrents.dovi_slot_requirements: |-
+  仅 SDR WEB 可用。
+server.torrents.remux_feature_slot_requirements: |-
+  指添加了国配音轨和／或特效字幕的 Remux。
+server.torrents.hi10p_slot_requirements: |-
+  仅动漫类型可用，指 x264 编码的 10-bit 色深 Encode。
 server.torrents.untouched_type_slot: |-
   原盘槽类 (含 Remux、原盘和 DIY)
 server.torrents.up_this_session: |-

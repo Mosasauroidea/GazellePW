@@ -62,14 +62,14 @@ export default class TableBdinfoParser {
   processItem(sectionName, item) {
     switch (sectionName) {
       case 'VIDEO': {
-        const [resolution, frameRate, aspectRatio, note] = item.Description.split(' / ')
+        const [resolution, frameRate, aspectRatio, ...rest] = item.Description.split(' / ')
         return {
           codec: item.Codec.replace(/ Video/, ''),
           bitrate: item.Bitrate,
           resolution,
           frameRate,
           aspectRatio,
-          note,
+          note: rest.join(' / ').trim(),
         }
       }
       case 'AUDIO': {

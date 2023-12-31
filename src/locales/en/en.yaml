@@ -3239,6 +3239,12 @@ server.rules.upload_title: |-
   Upload
 server.rules.upload_title_de: |-
   This is the section of the rules regarding any and all content which is allowed on this site.
+server.rules.slots_rules: |-
+  Slots Rules
+server.rules.slots_title: |-
+  Slots
+server.rules.slots_title_de: |-
+  This is the section of the rules regarding whether content should stay or leave.
 server.sitehistory.body: |-
   Body
 server.sitehistory.calendar: |-
@@ -5086,6 +5092,14 @@ server.torrents.cn_quality_slot: |-
   CN Quality Slot
 server.torrents.cn_quality_slot_requirements: |-
   Must contain a softcoded Chinese subtitle. An additional softcoded English subtitle OR an original language subtitle is allowed. The video quality should be as good as possible.
+server.torrents.sdr_slot_requirements: |-
+  Only for Dolby Vision WEB torrents.
+server.torrents.dovi_slot_requirements: |-
+  Only for SDR WEB torrents.
+server.torrents.remux_feature_slot_requirements: |-
+  Refers to Remux with at least a Chinese dub and/or a Chinese special effects subtitle.
+server.torrents.hi10p_slot_requirements: |-
+  Only for anime movies, which refers to x264 10-bit encodes.
 server.torrents.cn_quality_slot_x265: |-
   CN Quality Slot (x265)
 server.torrents.codec: |-
@@ -5119,7 +5133,7 @@ server.torrents.diy: |-
 server.torrents.diy_slot: |-
   DIY Slot
 server.torrents.diy_slot_requirements: |-
-  Only for non-Chinese movies. Must add least a Chinese dub or a Chinese special effects subtitle to the disc copy.
+  Only for non-Chinese movies. Must add at least a Chinese dub or a Chinese special effects subtitle to the disc copy.
 server.torrents.douban_id: |-
   Douban ID
 server.torrents.dupe: |-
@@ -5177,7 +5191,7 @@ server.torrents.feature: |-
 server.torrents.feature_slot: |-
   Feature Slot
 server.torrents.feature_slot_requirements: |-
-  Only for non-Chinese movies. Must contain a softcoded Chinese subtitle. Must add least a Chinese dub or a Chinese special effects subtitle to the encode.
+  Only for non-Chinese movies. Must contain a softcoded Chinese subtitle. Must add at least a Chinese dub or a Chinese special effects subtitle to the encode.
 server.torrents.file_names: |-
   File Names
 server.torrents.first_torrent: |-
@@ -5408,7 +5422,7 @@ server.torrents.remove_upload_privileges: |-
 server.torrents.remove_upload_privileges_title: |-
   Remove upload privileges?
 server.torrents.remux_slot: |-
-  Remux Slot
+  Remux Quality Slot
 server.torrents.remux_slot_requirements: |-
   Better to contain a softcoded Chinese subtitle. A torrent without both Chinese and English subtitles would be marked as "Trumpable".&nbsp;
 server.torrents.rename: |-
@@ -5647,6 +5661,14 @@ server.torrents.unsubscribe: |-
   Unsubscribe
 server.torrents.untouched_slot: |-
   Untouched Slot
+server.torrents.sdr_slot: |-
+  SDR Slot
+server.torrents.dovi_slot: |-
+  Dovi Slot
+server.torrents.hi10p_slot: |-
+  Hi10p Slot
+server.torrents.remux_feature_slot: |-
+  Remux Feature Slot
 server.torrents.untouched_slot_ntsc: |-
   Untouched Slot (NTSC)
 server.torrents.untouched_slot_pal: |-

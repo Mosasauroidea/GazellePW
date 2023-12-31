@@ -218,7 +218,7 @@ if (!empty($_REQUEST['confirm'])) {
 
             // Manage invite trees, delete invite
 
-            if ($InviterID !== null) {
+            if (!empty($InviterID)) {
                 $DB->query("
 					SELECT TreePosition, TreeID, TreeLevel
 					FROM invite_tree
@@ -285,6 +285,12 @@ if (!empty($_REQUEST['confirm'])) {
                 $InviterID = 0;
                 $TreePosition = 1;
                 $TreeLevel = 1;
+                // Create invite tree record
+                $DB->query("
+						INSERT INTO invite_tree
+							(UserID, InviterID, TreePosition, TreeID, TreeLevel)
+						VALUES
+							('$UserID', '$InviterID', '$TreePosition', '$TreeID', '$TreeLevel')");
             }
 
             if (CONFIG['CLOSE_LOGIN']) {

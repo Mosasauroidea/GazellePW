@@ -13,7 +13,7 @@ use Gazelle\Torrent\Subtitle;
  ** When it is called from the edit page, the forms are shortened quite a bit. **
  ********************************************************************************/
 class TORRENT_FORM {
-    var $UploadForm = '';
+
     var $Categories = array();
     var $Sources = array();
     var $Codecs = array();
@@ -21,8 +21,10 @@ class TORRENT_FORM {
     var $Resolutions = array();
     var $Processings = array();
     var $Makers = array();
-    var $NewTorrent = false;
+
+    var $UploadForm = '';
     var $Torrent = array();
+    var $NewTorrent = false;
     var $Error = false;
     var $TorrentID = false;
     var $Disabled = '';
@@ -87,6 +89,13 @@ class TORRENT_FORM {
 
     function head() {
         $AnnounceURL = CONFIG['ANNOUNCE_URL'];
+        if ($this->NewTorrent) { ?>
+            <div class="BoxBody">
+                <?= t('server.upload.personal_announce') ?>:
+                <a onclick="return false" href="<?= $AnnounceURL . '/' . G::$LoggedUser['torrent_pass'] . '/announce' ?>"><?= t('server.upload.personal_announce_note') ?></a>
+            </div>
+        <?
+        }
         ?> <div class="Form">
             <?
             if ($this->Error) {
@@ -126,12 +135,6 @@ class TORRENT_FORM {
                         </tr>
                     <? }
                     if ($this->NewTorrent) { ?>
-                        <tr class="Form-row">
-                            <td>
-                                <?= t('server.upload.personal_announce') ?>:
-                                <a onclick="return false" href="<?= $AnnounceURL . '/' . G::$LoggedUser['torrent_pass'] . '/announce' ?>"><?= t('server.upload.personal_announce_note') ?></a>
-                            </td>
-                        </tr>
                         <tr class="Form-row is-file">
                             <td class="Form-label">
                                 <?= t('server.upload.torrent_file') ?><span class="u-colorWarning">*</span>:
@@ -283,6 +286,7 @@ class TORRENT_FORM {
                 $BadFolders = isset($Torrent['BadFolders']) ? $Torrent['BadFolders'] : null;
                 $CustomTrumpable = isset($Torrent['CustomTrumpable']) ? $Torrent['CustomTrumpable'] : null;
                 $RemasterTitle = isset($Torrent['RemasterTitle']) ? $Torrent['RemasterTitle'] : null;
+                $BasicRemasterTitle =  EditionInfo::filter_basic_remaster_title($RemasterTitle);
                 $RemasterYear = isset($Torrent['RemasterYear']) ? $Torrent['RemasterYear'] : null;
                 $RemasterCustomTitle = isset($Torrent['RemasterCustomTitle']) ? $Torrent['RemasterCustomTitle'] : null;
                 $Scene = isset($Torrent['Scene']) ? $Torrent['Scene'] : null;
@@ -570,16 +574,16 @@ class TORRENT_FORM {
                     <td class="Form-items Form-errorContainer">
                         <div class="Form-inputs">
                             <div class="Checkbox">
-                                <input class="Input" type="checkbox" onclick="$('#movie_edition_information_container').new_toggle()" id="movie_edition_information" name="movie_edition_information" <?= $RemasterTitle || $RemasterCustomTitle || $RemasterYear ? "checked " : "" ?>>
+                                <input class="Input" type="checkbox" onclick="$('#movie_edition_information_container').new_toggle()" id="movie_edition_information" name="movie_edition_information" <?= $BasicRemasterTitle || $RemasterCustomTitle || $RemasterYear ? "checked " : "" ?>>
                                 <label class="Checkbox-label" for="movie_edition_information"><?= t('server.upload.movie_edition_information_label') ?></label>
                             </div>
                         </div>
                         <div>
                             <?= t('server.upload.movie_edition_information_examples') ?>
-                            <input type="hidden" id="remaster_title_hide" name="remaster_title" value="<?= display_str($RemasterTitle) ?>" />
+                            <input type="hidden" id="remaster_title_hide" name="remaster_title" value="<?= display_str($BasicRemasterTitle) ?>" />
                             <div id="movie_edition_information_container" style="display: none">
                                 <div>
-                                    <?= t('server.upload.movie_information') ?>: <input class="Input" type="text" name="remaster_title_show" readonly id="remaster_title_show" size="80" value="<?= $RemasterTitle ? display_str(Torrents::display_edition_info($RemasterTitle)) : '' ?>" />
+                                    <?= t('server.upload.movie_information') ?>: <input class="Input" type="text" name="remaster_title_show" readonly id="remaster_title_show" size="80" value="<?= $BasicRemasterTitle ? display_str(Torrents::display_edition_info($BasicRemasterTitle)) : '' ?>" />
                                 </div>
                                 <div id="movie_remaster_tags">
                                     <div>
@@ -608,7 +612,7 @@ class TORRENT_FORM {
                                     </div>
                                 </div>
                             </div>
-                            <? if ($RemasterTitle || $RemasterCustomTitle || $RemasterYear) { ?>
+                            <? if ($BasicRemasterTitle || $RemasterCustomTitle || $RemasterYear) { ?>
                                 <script>
                                     $('#movie_edition_information_container').new_toggle();
                                 </script>
@@ -685,7 +689,7 @@ class TORRENT_FORM {
                         <div class="Form-inputs">
                             <div class="SelectInput">
                                 <select class="Input" id="source" name="source">
-                                    <option class="Select-option" value=""><?= t('server.upload.auto_detect') ?></option>
+                                    <option class="Select-option" value=""><?= '---' ?></option>
                                     <?
                                     $SourceOther = null;
                                     if (!in_array($TorrentSource, $this->Sources)) {
@@ -730,7 +734,7 @@ class TORRENT_FORM {
                                 ?>
                             </select>
                             <select class="Input <?= in_array($TorrentSource, ['Blu-ray', 'DVD']) && $SelectedProcessing == 'Untouched' ? '' : 'hidden' ?>" name="processing_other">
-                                <option class="Select-Option" value=''><?= t('server.upload.auto_detect') ?></option>
+                                <option class="Select-Option" value=''><?= '---' ?></option>
                                 <option class="Select-Option bd <?= $TorrentSource == 'Blu-ray' ? '' : 'hidden' ?>" value='BD25' <?= $TorrentProcessing == 'BD25' ? 'selected="selected"' : '' ?>>BD25</option>
                                 <option class="Select-Option bd <?= $TorrentSource == 'Blu-ray' ? '' : 'hidden' ?>" value='BD50' <?= $TorrentProcessing == 'BD50' ? 'selected="selected"' : '' ?>>BD50</option>
                                 <option class="Select-Option bd <?= $TorrentSource == 'Blu-ray' ? '' : 'hidden' ?>" value='BD66' <?= $TorrentProcessing == 'BD66' ? 'selected="selected"' : '' ?>>BD66</option>
@@ -748,7 +752,7 @@ class TORRENT_FORM {
                         <div class="Form-inputs">
                             <div class="SelectInput">
                                 <select class="Input" id="codec" name="codec">
-                                    <option value=''><?= t('server.upload.auto_detect') ?></option>
+                                    <option value=''><?= '---' ?></option>
                                     <?
                                     $CodecOther = null;
                                     if (!in_array($TorrentCodec, $this->Codecs)) {
@@ -777,7 +781,7 @@ class TORRENT_FORM {
                         <div class="Form-inputs">
                             <div class="SelectInput">
                                 <select class="Input" id="resolution" name="resolution">
-                                    <option class="Select-option" value=""><?= t('server.upload.auto_detect') ?></option>
+                                    <option class="Select-option" value=""><?= "---" ?></option>
                                     <?
                                     $resolution = $TorrentResolution;
                                     $resolution_width = '';
@@ -812,7 +816,7 @@ class TORRENT_FORM {
                         <div class="Form-inputs">
                             <div class="SelectInput">
                                 <select class="Input" id="container" name="container">
-                                    <option class="Select-option" value=""><?= t('server.upload.auto_detect') ?></option>
+                                    <option class="Select-option" value=""><?= '---' ?></option>
                                     <?
                                     $ContainerOther = null;
                                     if (!in_array($TorrentContainer, $this->Containers)) {
@@ -834,6 +838,50 @@ class TORRENT_FORM {
                             </div>
                         </div>
                         <span id="container_warning" class="u-colorWarning"></span>
+                    </td>
+                </tr>
+                <tr class="Form-row">
+                    <td class="Form-label"><?= "高级视频特性" ?><span class="u-colorWarning"></span>:</td>
+                    <td class="Form-inputs Form-errorAudio">
+                        <div class="Checkbox">
+                            <input class="Input" type="checkbox" id="10_bit" name="10_bit" <?= EditionInfo::checkEditionInfo($RemasterTitle, EditionInfo::edition_10_bit) ? "checked" : "" ?> />
+                            <label class="Checkbox-label" for="10_bit"><?= "10bit 色深" ?></label>
+                        </div>
+                        <div class="Checkbox">
+                            <input class="Input" type="checkbox" id="hdr10" name="hdr10" <?= EditionInfo::checkEditionInfo($RemasterTitle, EditionInfo::edition_hdr10)  ? "checked" : "" ?> />
+                            <label class="Checkbox-label" for="hdr10"><?= "HDR10" ?></label>
+                        </div>
+                        <div class="Checkbox">
+                            <input class="Input" type="checkbox" id="hdr10plus" name="hdr10plus" <?= EditionInfo::checkEditionInfo($RemasterTitle, EditionInfo::edition_hdr10plus) ? "checked" : "" ?> />
+                            <label class="Checkbox-label" for="hdr10plus"><?= "HDR10+" ?></label>
+                        </div>
+                        <div class="Checkbox">
+                            <input class="Input" type="checkbox" id="dolby_vision" name="dolby_vision" <?= EditionInfo::checkEditionInfo($RemasterTitle, EditionInfo::edition_dolby_vision) ? "checked" : "" ?> />
+                            <label class="Checkbox-label" for="dolby_vision"><?= "杜比视界" ?></label>
+                        </div>
+                        <span id="video_warning" class="important_text"></span>
+                    </td>
+                </tr>
+                <tr class="Form-row">
+                    <td class="Form-label"><?= "高级音频特性" ?><span class="u-colorWarning"></span>:</td>
+                    <td class="Form-inputs Form-errorAudio">
+                        <div class="Checkbox hidden">
+                            <input class="Input" type="checkbox" id="audio_51" name="audio_51" <?= false ? "checked" : "" ?> />
+                            <label class="Checkbox-label" for="audio_51"><?= "5.1声道" ?></label>
+                        </div>
+                        <div class="Checkbox hidden">
+                            <input class="Input" type="checkbox" id="audio_71" name="audio_71" <?= false ? "checked" : "" ?> />
+                            <label class="Checkbox-label" for="audio_71"><?= "7.1声道" ?></label>
+                        </div>
+                        <div class="Checkbox">
+                            <input class="Input" type="checkbox" id="dts_x" name="dts_x" <?= EditionInfo::checkEditionInfo($RemasterTitle, EditionInfo::edition_dts_x) ? "checked" : "" ?> />
+                            <label class="Checkbox-label" for="dts_x"><?= "DTS:X" ?></label>
+                        </div>
+                        <div class="Checkbox">
+                            <input class="Input" type="checkbox" id="dolby_atmos" name="dolby_atmos" <?= EditionInfo::checkEditionInfo($RemasterTitle, EditionInfo::edition_dolby_atmos)  ? "checked" : "" ?> />
+                            <label class="Checkbox-label" for="dolby_atmos"><?= "杜比全景声" ?></label>
+                        </div>
+                        <span id="audio_warning" class="important_text"></span>
                     </td>
                 </tr>
                 <tr class="Form-row is-text">

@@ -540,19 +540,7 @@ class Users {
 
         // This array is a hack that should be made less retarded, but whatevs
         //                        PermID => ShortForm
-        $SecondaryClasses = array(
-            '23' => 'FLS', // First Line Support
-            '30' => 'IN', // Interviewer
-            '31' => 'TC', // Torrent Celebrity
-            '32' => 'D', // Designer
-            '33' => 'ST', // Security Team
-            '37' => 'AR', // Archive Team
-            '36' => 'AT', // Alpha Team
-            '38' => 'CT', // Charlie Team
-            '39' => 'DT', // Delta Team
-            '56' => 'TI',
-            '62' => 'A',
-        );
+        $SecondaryClasses =  CONFIG['SECONDARY_CLASS'];
 
         if ($UserID == 0) {
             return 'System';

@@ -23,6 +23,8 @@ import RulesClientsEn from '#/locales/en/Rules/Clients.mdx'
 import RulesClientsZhHans from '#/locales/zh-Hans/Rules/Clients.mdx'
 import RulesUploadEn from '#/locales/en/Rules/Upload.mdx'
 import RulesUploadZhHans from '#/locales/zh-Hans/Rules/Upload.mdx'
+import RulesSlotsEn from '#/locales/en/Rules/Slots.mdx'
+import RulesSlotsZhHans from '#/locales/zh-Hans/Rules/Slots.mdx'
 import RulesBonusEn from '#/locales/en/Rules/Bonus.mdx'
 import RulesBonusZhHans from '#/locales/zh-Hans/Rules/Bonus.mdx'
 import RulesInviteEn from '#/locales/en/Rules/Invite.mdx'
@@ -48,6 +50,7 @@ const COMPONENTS = {
     'Rules/Ratio.mdx': RulesRatioEn,
     'Rules/Clients.mdx': RulesClientsEn,
     'Rules/Upload.mdx': RulesUploadEn,
+    'Rules/Slots.mdx': RulesSlotsEn,
     'Rules/Bonus.mdx': RulesBonusEn,
     'Rules/Invite.mdx': RulesInviteEn,
     'Rules/Blacklist.mdx': RulesBlacklistEn,
@@ -63,6 +66,7 @@ const COMPONENTS = {
     'Rules/Ratio.mdx': RulesRatioZhHans,
     'Rules/Clients.mdx': RulesClientsZhHans,
     'Rules/Upload.mdx': RulesUploadZhHans,
+    'Rules/Slots.mdx': RulesSlotsZhHans,
     'Rules/Bonus.mdx': RulesBonusZhHans,
     'Rules/Invite.mdx': RulesInviteZhHans,
     'Rules/Blacklist.mdx': RulesBlacklistZhHans,

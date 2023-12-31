@@ -12,15 +12,6 @@ export const ChartPeersCount = () => {
     },
     series: [
       {
-        name: t('client.stats.peer_count'),
-        data: window.DATA['statsPeersCount'].map((v) => ({
-          date: v.date,
-          x: new Date(v.date).getTime(),
-          y: v.peer_count,
-        })),
-        dataLabels: { enabled: true },
-      },
-      {
         name: t('client.stats.seeder_count'),
         data: window.DATA['statsPeersCount'].map((v) => ({
           date: v.date,
@@ -28,6 +19,7 @@ export const ChartPeersCount = () => {
           y: v.seeder_count,
         })),
         dataLabels: { enabled: true },
+        yAxis: 0,
       },
       {
         name: t('client.stats.leecher_count'),
@@ -37,11 +29,24 @@ export const ChartPeersCount = () => {
           y: v.leecher_count,
         })),
         dataLabels: { enabled: true },
+        yAxis: 1,
       },
     ],
-    yAxis: {
-      allowDecimals: false,
-    },
+    yAxis: [
+      {
+        allowDecimals: false,
+        title: {
+          text: t('client.stats.seeder_count'),
+        },
+      },
+      {
+        title: {
+          text: t('client.stats.leecher_count'),
+        },
+        opposite: true,
+        allowDecimals: false,
+      },
+    ],
     xAxis: {
       type: 'datetime',
       dateTimeLabelFormats: {

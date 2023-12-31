@@ -221,6 +221,8 @@ class Upload extends Base {
 
         $properties['RemasterYear'] = !empty($Params['remaster_year']) ? trim($Params['remaster_year']) : '';
         $properties['RemasterTitle'] = isset($Params['remaster_title']) ? trim($Params['remaster_title']) : '';
+        $properties['RemasterTitle'] = EditionInfo::mergeAdvanceFeature($properties['RemasterTitle'], $Params);
+
         $properties['RemasterCustomTitle'] = isset($Params['remaster_custom_title']) ? $Params['remaster_custom_title'] : '';
         $properties['Scene'] = isset($Params['scene']) ? '1' : '0';
         $properties['Jinzhuan'] = isset($Params['jinzhuan']) ? '1' : '0';

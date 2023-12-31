@@ -57,6 +57,14 @@
             </tr>
             <tr class="Table-row">
                 <td class="Table-cell">
+                    <a href="rules.php?p=slots"><?= t('server.rules.slots_title') ?></a>
+                </td>
+                <td class="Table-cell">
+                    <?= t('server.rules.slots_title_de') ?>
+                </td>
+            </tr>
+            <tr class="Table-row">
+                <td class="Table-cell">
                     <a href="rules.php?p=chat"><?= t('server.rules.chat_title') ?></a>
                 </td>
                 <td class="Table-cell">

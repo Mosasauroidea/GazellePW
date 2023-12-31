@@ -3228,6 +3228,12 @@ server.rules.upload_title: |-
   Transferir
 server.rules.upload_title_de: |-
   Esta é a seção das regras sobre todo e qualquer conteúdo permitido neste site.
+server.rules.slots_rules: |-
+  Regras de slots
+server.rules.slots_title: |-
+  Slots
+server.rules.slots_title_de: |-
+  Esta é a seção das regras sobre se o conteúdo deve permanecer ou sair.
 server.sitehistory.body: |-
   Corpo
 server.sitehistory.calendar: |-

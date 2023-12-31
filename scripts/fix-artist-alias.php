@@ -1,6 +1,6 @@
 <?
 
-require(__DIR__ . '../classes/includes.php');
+require(__DIR__ . '/../classes/includes.php');
 
 $StartArtistID = $argv[1];
 $EndArtistID = $argv[2];

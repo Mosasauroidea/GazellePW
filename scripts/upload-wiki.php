@@ -6,7 +6,7 @@ define('MEMORY_EXCEPTION', true);
 define('TIME_EXCEPTION', true);
 define('ERROR_EXCEPTION', true);
 
-require(__DIR__ . '../classes/includes.php');
+require(__DIR__ . '/../classes/includes.php');
 
 $Debug->set_flag('Debug constructed');
 
