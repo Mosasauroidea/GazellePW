@@ -520,7 +520,7 @@ if ($_REQUEST['action']) {
             </div>
 
             <div class="HeaderLogo">
-                <a class="HeaderLogo-link" href="index.php"></a>
+                <a class="HeaderLogo-link Logo" href="index.php"></a>
             </div>
 
             <?

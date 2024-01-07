@@ -40,6 +40,7 @@ if ($_SERVER['REQUEST_URI'] === '/index.php') {
 
 View::show_header(t('server.index.index'), 'comments', 'PageHome');
 ?>
+
 <div class="LayoutMainSidebar">
     <div class="Sidebar LayoutMainSidebar-sidebar">
         <!-- Poll -->
@@ -173,6 +174,9 @@ View::show_header(t('server.index.index'), 'comments', 'PageHome');
                 </div>
             <? } ?>
         <?  } ?>
+
+        <!-- Upload rank -->
+        <? include('upload_rank.php'); ?>
 
         <!-- Featured Movie -->
         <? include('feature_movie.php'); ?>

@@ -886,7 +886,17 @@ class Text {
                         break;
                     case 'rule':
                         $Rule = trim(strtolower($Block['Val']));
-                        $Str .= '<a href="rules.php?p=upload#' . urlencode(Format::undisplay_str($Rule)) . '">' . preg_replace('/[aA-zZ]/', '', $Block['Val']) . '</a>';
+                        $Page = '';
+                        $RV = explode('#', $Rule);
+                        if (count($RV) == 1) {
+                            $Num = $RV[0];
+                            $Str .= '<a href="rules.php?p=upload#' . urlencode(Format::undisplay_str($Num)) . '">' . 'golden#' . $Num . '</a>';
+                        } else {
+                            $Page = $RV[0];
+                            $Num = $RV[1];
+                            $Str .= '<a href="rules.php?p=' . $Page . '#' . urlencode(Format::undisplay_str($Num)) . '">' . $Rule . '</a>';
+                        }
+
                         break;
                     case 'torrent':
                         $Pattern = '/(' . SITELINK_REGEX . '\/torrents\.php.*[\?&]id=)?(\d+)($|&|\#).*/i';

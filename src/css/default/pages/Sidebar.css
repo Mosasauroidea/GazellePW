@@ -62,7 +62,7 @@ SidebarList.is-ordered
 */
 .SidebarList.is-ordered {
   list-style: decimal;
-  padding: 10px 0 10px 25px;
+  padding: 10px 10px 10px 30px;
 }
 
 .SidebarList.is-ordered .SidebarList-item {

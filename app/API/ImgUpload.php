@@ -27,7 +27,7 @@ class ImgUpload extends AbstractAPI {
                 return $response;
             }
             $path = CONFIG['IMAGE_PATH_PREFIX'] . '/user/' . $user_id . '/' . date('Ymd', time()) . '/' . uniqid() . '.' . $extension;
-            $Data[] = ['Url' => $url, 'Name' => $path];
+            $Data[] = ['Url' => $url, 'Name' => $path, 'Ext' => $extension];
         }
 
         try {

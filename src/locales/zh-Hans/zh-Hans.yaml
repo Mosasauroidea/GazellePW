@@ -3254,7 +3254,7 @@ server.staff.subject: |-
 server.staff.support: |-
   支持项目
 server.staff.torrent_inspector: |-
-  种子检查员 (TI)
+  种子检查员
 server.staff.username: |-
   用户名
 server.staffpm.amount: |-
@@ -5280,7 +5280,7 @@ server.torrents.other: |-
 server.torrents.peer: |-
   同伴
 server.torrents.peer_list: |-
-  做种列表
+  Peer 列表
 server.torrents.people_who_like_this_album_also_liked: |-
   喜欢这部影片的用户也喜欢……
 server.torrents.period: |-
@@ -5617,7 +5617,7 @@ server.torrents.view_download_list: |-
 server.torrents.view_file_list: |-
   文件列表
 server.torrents.view_peer_list: |-
-  做种列表
+  Peer 列表
 server.torrents.view_report_information: |-
   查看报告信息
 server.torrents.view_snatch_list: |-
@@ -8349,3 +8349,5 @@ server.reports.the_post: |-
   回复
 server.reports.the_comment: |-
   评论
+server.index.upload_rank: |-
+  发布排行

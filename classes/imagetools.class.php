@@ -141,6 +141,20 @@ class ImageTools {
         return !empty(self::$Thumbs[$ParsedUrl['host']]);
     }
 
+    public static function match_minetype($Ext, $MineType) {
+        switch ($Ext) {
+            case 'jpg':
+                return in_array($MineType, ['image/jpeg', 'image/jpg']);
+            case 'jpeg':
+                return in_array($MineType, ['image/jpeg', 'image/jpg']);
+            case 'gif':
+                return in_array($MineType, ['image/gif']);
+            case 'png':
+                return in_array($MineType, ['image/png']);
+        }
+        return false;
+    }
+
     /**
      * Checks an extension
      * @param string $Ext Extension to check
@@ -301,9 +315,10 @@ class ImageTools {
             $data = file_get_contents($Data['Url']);
             $file_info = new finfo(FILEINFO_MIME_TYPE);
             $mime_type = $file_info->buffer($data);
-            if (!in_array($mime_type, ['image/gif', 'image/jpeg', 'image/jpg', 'image/png'])) {
-                throw new Exception("Invalid ext: $mime_type");
+            if (!self::match_minetype($Data['Ext'], $mime_type)) {
+                throw new Exception("ext not match: $mime_type");
             }
+
             $ContentDatas[] = ['Content' => $data, 'Name' => $Data['Name'], "MimeType" => $mime_type];
         }
         return self::$Provider->multi_upload($ContentDatas);

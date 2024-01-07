@@ -88,6 +88,7 @@
     --HeaderDonate-progressBar-onHover-background: #fff;
     --HeaderDonate-progressBarBorder-border: 2px solid #aaa;
     --HeaderDonate-progressBarBorder-onHover-border: 2px solid #fff;
+    --HeaderLogo-icon: url(../assets/loginlogo-dark.png) center / contain no-repeat;
 
     /* Footer */
     --Footer-background: transparent;

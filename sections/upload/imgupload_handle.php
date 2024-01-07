@@ -16,7 +16,7 @@ for ($i = 0; $i < count($names); $i += 1) {
         ajax_json_error("Invalid ext: $extension");
     }
     $path = CONFIG['IMAGE_PATH_PREFIX'] . '/user/' . $user_id . '/' . date('Ymd', time()) . '/' . uniqid() . '.' . $extension;
-    $Data[] = ['Url' => $tmp_name, 'Name' => $path];
+    $Data[] = ['Url' => $tmp_name, 'Name' => $path, 'Ext' => $extension];
 }
 try {
     $RetPath = ImageTools::multi_fetch_upload($Data);

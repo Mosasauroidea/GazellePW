@@ -8,7 +8,7 @@ $SupportStaff = get_support();
 
 $action = $_GET['action'];
 
-list($FrontLineSupport, $Staff) = $SupportStaff;
+list($Secondary, $Staff) = $SupportStaff;
 ?>
 
 <div class="LayoutBody">
@@ -42,51 +42,45 @@ list($FrontLineSupport, $Staff) = $SupportStaff;
             </div>
             <div class="Group-body">
                 <?= t('server.staff.fl_support_note') ?>
-                <div class="Box">
-                    <div class="Box-header">
-                        <div class="Box-headerTitle">
-                            <div id="fls"><i><?= t('server.staff.first_line_support') ?></i></div>
-                        </div>
-                    </div>
-                    <div class="Box-body">
-                        <table class="TableUser Table is-inner">
-                            <tr class="Table-rowHeader">
-                                <td class="Table-cell" style="width: 130px;"><?= t('server.staff.username') ?></td>
-                                <td class="Table-cell" style="width: 200px;"><?= t('server.staff.lastseen') ?></td>
-                                <td class="Table-cell"><?= t('server.staff.support') ?></td>
-                            </tr>
+                <?
+                $CurClass = 0;
+                $CloseTable = false;
+                foreach ($Secondary as $StaffMember) {
+                    list($ID, $ClassID, $Class, $ClassName, $StaffGroup, $Username, $Paranoia, $LastAccess, $Remark) = $StaffMember;
+                    if ($Class != $CurClass) { // Start new class of staff members
+                        $Row = 'a';
+                        if ($CloseTable) {
+                            $CloseTable = false;
+                            // the "\t" and "\n" are used here to make the HTML look pretty
+                            echo "</table></div></div>";
+                        }
+                        $CurClass = $Class;
+                        $CloseTable = true;
+                        $HTMLID = str_replace(' ', '_', strtolower($ClassName));
+                ?>
+                        <div class="Box">
+                            <div class="Box-header">
+                                <div class="Box-headerTitle">
+                                    <div id="<?= $HTMLID ?>"><i><?= $ClassName ?></i></div>
+                                </div>
+                            </div>
+                            <div class="Box-body">
+                                <table class="TableUser Table is-inner">
+                                    <tr class="Table-rowHeader">
+                                        <td class="Table-cell" style="width: 130px;"><?= t('server.staff.username') ?></td>
+                                        <td class="Table-cell" style="width: 200px;"><?= t('server.staff.lastseen') ?></td>
+                                        <td class="Table-cell"><?= t('server.staff.support') ?></td>
+                                    </tr>
                             <?
-                            $Row = 'a';
-                            foreach ($FrontLineSupport as $Support) {
-                                list($ID, $Class, $Username, $Paranoia, $LastAccess, $SupportFor) = $Support;
-                                $Row = make_staff_row($Row, $ID, $Paranoia, $Class, $LastAccess, $SupportFor);
-                            } ?>
-                        </table>
-                    </div>
-                </div>
-                <div class="Box">
-                    <div class="Box-header">
-                        <div class="Box-headerTitle">
-                            <div id="fls"><i><?= t('server.staff.torrent_inspector') ?></i></div>
+                        }
+                        $Row = make_staff_row($Row, $ID, $Paranoia, $Class, $LastAccess, $Remark);
+                    }
+                            ?>
+                                </table>
+                            </div>
                         </div>
-                    </div>
-                    <div class="Box-body">
-                        <table class="TableUser Table is-inner">
-                            <tr class="Table-rowHeader">
-                                <td class="Table-cell" style="width: 130px;"><?= t('server.staff.username') ?></td>
-                                <td class="Table-cell" style="width: 200px;"><?= t('server.staff.lastseen') ?></td>
-                                <td class="Table-cell"><?= t('server.staff.support') ?></td>
-                            </tr>
-                            <?
-                            $Row = 'a';
-                            $TorrentWatching = get_tw();
-                            foreach ($TorrentWatching as $tw) {
-                                list($ID, $Class, $Username, $Paranoia, $LastAccess, $SupportFor) = $tw;
-                                $Row = make_staff_row($Row, $ID, $Paranoia, $Class, $LastAccess, $SupportFor);
-                            } ?>
-                        </table>
-                    </div>
-                </div>
+                        <?
+                        ?>
             </div>
         </div>
         <? if (check_perms('show_admin_team')) {

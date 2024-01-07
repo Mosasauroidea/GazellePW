@@ -26,7 +26,7 @@ class Requests {
 				UNIX_TIMESTAMP(LastVote) AS LastVote, CategoryID, Title, '$TagList',
 				Year, ReleaseType, CodecList, SourceList, ContainerList, ResolutionList, FillerID, TorrentID,
 				UNIX_TIMESTAMP(TimeFilled) AS TimeFilled, Visible,
-				COUNT(rv.UserID) AS Votes, SUM(rv.Bounty) >> 10 AS Bounty
+				COUNT(rv.UserID) AS Votes, SUM(rv.Bounty) >> 20 AS Bounty
 			FROM requests AS r
 				LEFT JOIN requests_votes AS rv ON rv.RequestID = r.ID
 			WHERE ID = $RequestID

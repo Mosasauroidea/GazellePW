@@ -3324,7 +3324,7 @@ server.staff.subject: |-
 server.staff.support: |-
   Support for
 server.staff.torrent_inspector: |-
-  Torrent Inspector (TI)
+  Torrent Inspector
 server.staff.username: |-
   Username
 server.staffpm.amount: |-
@@ -8487,3 +8487,5 @@ server.reports.the_post: |-
   the post
 server.reports.the_comment: |-
   the comment
+server.index.upload_rank: |-
+  Uploaded Ranking

@@ -33,49 +33,36 @@ function make_staff_row($Row, $ID, $Paranoia, $Class, $LastAccess, $Remark = '',
     // the foreach loop that calls this function needs to know the new value of $Row
     return $Row;
 }
-function get_tw() {
-    global $DB;
-    $DB->query('
-			SELECT
-				m.ID,
-				p.Level,
-				m.Username,
-				m.Paranoia,
-				m.LastAccess,
-				i.SupportFor
-			FROM users_info AS i
-				JOIN users_main AS m ON m.ID = i.UserID
-				JOIN permissions AS p ON p.ID = m.PermissionID
-				JOIN users_levels AS l ON l.UserID = i.UserID
-			WHERE l.PermissionID = 56
-			ORDER BY m.Username');
-    return $DB->to_array(false, MYSQLI_BOTH, array(3, 'Paranoia'));
-}
-function get_fls() {
+
+function get_secondary() {
     global $Cache, $DB;
-    static $FLS;
-    if (is_array($FLS)) {
-        return $FLS;
+    static $Secondary;
+    if (is_array($Secondary)) {
+        return $Secondary;
     }
-    if (($FLS = $Cache->get_value('fls')) === false) {
-        $DB->prepared_query('
+    if (($Secondary = $Cache->get_value('secondary')) === false) {
+        $DB->prepared_query("
 			SELECT
 				m.ID,
-				p.Level,
+                p.ID as LevelID,
+			    p.Level,
+			    p.Name,
 				m.Username,
+                IFNULL(sg.Name, '') AS StaffGroup,
 				m.Paranoia,
 				m.LastAccess,
 				i.SupportFor
 			FROM users_info AS i
 				JOIN users_main AS m ON m.ID = i.UserID
-				JOIN permissions AS p ON p.ID = m.PermissionID
 				JOIN users_levels AS l ON l.UserID = i.UserID
-			WHERE l.PermissionID = ?
-			ORDER BY m.Username', CONFIG['USER_CLASS']['FLS_TEAM']);
-        $FLS = $DB->to_array(false, MYSQLI_BOTH, array(3, 'Paranoia'));
-        $Cache->cache_value('fls', $FLS, 180);
+				JOIN permissions AS p ON p.ID = l.PermissionID
+                INNER JOIN staff_groups AS sg ON sg.ID = p.StaffGroup
+            WHERE p.DisplayStaff = '1' AND Secondary = 1
+			ORDER BY p.Name, m.Username");
+        $Secondary = $DB->to_array(false, MYSQLI_BOTH, array(3, 'Paranoia'));
+        $Cache->cache_value('secondary', $Secondary, 180);
     }
-    return $FLS;
+    return $Secondary;
 }
 
 function get_staff() {
@@ -124,10 +111,8 @@ function get_staff() {
 
 function get_support() {
     return array(
-        get_fls(),
+        get_secondary(),
         get_staff(),
-        'fls' => get_fls(),
-        'staff' => get_staff()
     );
 }
 

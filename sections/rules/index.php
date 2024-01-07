@@ -8,6 +8,9 @@ if (!isset($_GET['p'])) {
         case 'ratio':
             require(CONFIG['SERVER_ROOT'] . '/sections/rules/ratio.php');
             break;
+        case 'golden':
+            require(CONFIG['SERVER_ROOT'] . '/sections/rules/browse.php');
+            break;
         case 'clients':
             require(CONFIG['SERVER_ROOT'] . '/sections/rules/clients.php');
             break;

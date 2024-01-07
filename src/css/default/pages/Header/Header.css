@@ -18,7 +18,7 @@ Header is-hasAlerts
   display: grid;
   width: 100%;
   row-gap: var(--global-space-default);
-  grid-template-columns: 220px auto 220px;
+  grid-template-columns: 280px auto 280px;
   background: var(--Header-background);
   color: var(--Header-color);
   box-shadow: var(--Header-boxShadow);
