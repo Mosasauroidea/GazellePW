@@ -5587,9 +5587,9 @@ server.torrents.untouched_slot_pal: |-
 server.torrents.untouched_slot_requirements: |-
   必须是与零售光盘完全一致的副本，仅版权警告部分可以删去。
 server.torrents.sdr_slot_requirements: |-
-  仅杜比视界 WEB 可用。
-server.torrents.dovi_slot_requirements: |-
   仅 SDR WEB 可用。
+server.torrents.dovi_slot_requirements: |-
+  仅杜比视界 WEB 可用。
 server.torrents.remux_feature_slot_requirements: |-
   指添加了国配音轨和／或特效字幕的 Remux。
 server.torrents.hi10p_slot_requirements: |-

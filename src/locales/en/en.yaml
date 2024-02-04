@@ -5093,9 +5093,9 @@ server.torrents.cn_quality_slot: |-
 server.torrents.cn_quality_slot_requirements: |-
   Must contain a softcoded Chinese subtitle. An additional softcoded English subtitle OR an original language subtitle is allowed. The video quality should be as good as possible.
 server.torrents.sdr_slot_requirements: |-
-  Only for Dolby Vision WEB torrents.
-server.torrents.dovi_slot_requirements: |-
   Only for SDR WEB torrents.
+server.torrents.dovi_slot_requirements: |-
+  Only for Dolby Vision WEB torrents.
 server.torrents.remux_feature_slot_requirements: |-
   Refers to Remux with at least a Chinese dub and/or a Chinese special effects subtitle.
 server.torrents.hi10p_slot_requirements: |-
