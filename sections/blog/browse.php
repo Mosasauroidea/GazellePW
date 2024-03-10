@@ -55,12 +55,24 @@ View::show_header(t('server.index.blog_note'), 'bbcode', 'PageBlogHome');
                         - <?= time_diff($BlogTime); ?>
                     </div>
                     <div class="Post-headerActions">
+                        <?= time_diff($BlogTime); ?>
+                        <?php if (check_perms('admin_manage_blog')) { ?>
                         <?php if ($ThreadID) { ?>
                             <a href="forums.php?action=viewthread&amp;threadid=<?= $ThreadID ?>"><?= t('server.index.discuss') ?></a>
                         <? } ?>
                         <? if (check_perms('admin_manage_blog')) { ?>
                             - <a href="blog.php?action=neweditblog&amp;id=<?= $BlogID ?>" class="brackets"><?= t('server.common.edit') ?></a>
                             - <a href="blog.php?action=deleteblog&amp;id=<?= $BlogID ?>&amp;auth=<?= G::$LoggedUser['AuthKey'] ?>" class="brackets"><?= t('server.common.delete') ?></a>
+                        <?php    } ?>
+                        <?php if ($ThreadID) { ?>
+                            - <a href="forums.php?action=viewthread&amp;threadid=<?= $ThreadID ?>"><?= t('server.index.discuss') ?></a>
+                            <?php
+                            if (check_perms('admin_manage_blog')) { ?>
+                                - <a href="blog.php?action=deadthread&amp;id=<?= $BlogID ?>&amp;auth=<?= G::$LoggedUser['AuthKey'] ?>" class="brackets"><?= t('server.blog.remove_link') ?></a>
+                        <?php
+                            }
+                        }
+                        ?>
                             - <a href="blog.php?action=deadthread&amp;id=<?= $BlogID ?>&amp;auth=<?= G::$LoggedUser['AuthKey'] ?>" class="brackets"><?= t('server.blog.remove_link') ?></a>
                         <?    } else { ?>
                             -
