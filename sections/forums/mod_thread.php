@@ -133,6 +133,7 @@ if (isset($_POST['delete'])) {
 			LastPostTime = '$NewLastAddedTime'
 		WHERE ID = '$ForumID'");
     $Cache->delete_value("forums_$ForumID");
+    $Cache->delete_value("forums_index_$ForumID");
 
     $Cache->delete_value("thread_$TopicID");
 
@@ -204,6 +205,7 @@ if (isset($_POST['delete'])) {
     // if a thread title, etc. is changed, this cache key must be cleared so the thread listing
     //      properly shows the new thread title.
     $Cache->delete_value("forums_$ForumID");
+    $Cache->delete_value("forums_index_$ForumID");
 
     if ($ForumID != $OldForumID) { // If we're moving a thread, change the forum stats
         $Cache->delete_value("forums_$OldForumID");
