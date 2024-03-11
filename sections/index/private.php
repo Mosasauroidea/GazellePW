@@ -1,6 +1,7 @@
 <?php
 include(CONFIG['SERVER_ROOT'] . '/classes/torrenttable.class.php');
 require(CONFIG['SERVER_ROOT'] . '/classes/top10_movies.class.php');
+require(CONFIG['SERVER_ROOT'] . '/classes/forums.class.php');
 Text::$TOC = true;
 
 $NewsCount = 3;
@@ -207,100 +208,54 @@ View::show_header(t('server.index.index'), 'comments', 'PageHome');
             </div>
         <?  } ?>
 
-        <!-- Staff Blog -->
-        <? if (check_perms('users_mod')) { ?>
-            <div class="SidebarItemStaffBlog SidebarItem Box">
+
+        <? if(is_array(CONFIG['INDEX_FORUM_IDS'])) {
+
+            foreach (CONFIG['INDEX_FORUM_IDS'] as $ForumId) {
+
+              if(Forums::check_forumperm($ForumId)) {
+                $ForumsInfo = Forums::get_forum_info($ForumId);
+        ?>
+
+                <div class="SidebarItemStaffBlog SidebarItem Box">
                 <div class="SidebarItem-header Box-header">
-                    <a href="staffblog.php"><?= t('server.index.staff_note') ?></a>
+                    <a href="forums.php?action=viewforum&forumid=<?= $ForumId ?>"><?= $ForumsInfo['Name'] ?></a>
                 </div>
+
                 <?
-                if (($Blog = $Cache->get_value('staff_blog')) === false) {
+                $Forum = $Cache->get_value("forums_index_$ForumId");
+                if (!isset($Forum) || !is_array($Forum)) {
                     $DB->query("
-		SELECT
-			b.ID,
-			um.Username,
-			b.Title,
-			b.Body,
-			b.Time,
-            b.ThreadID
-		FROM staff_blog AS b
-			LEFT JOIN users_main AS um ON b.UserID = um.ID
-		ORDER BY Time DESC");
-                    $Blog = $DB->to_array(false, MYSQLI_NUM);
-                    $Cache->cache_value('staff_blog', $Blog, 1209600);
-                }
-                if (($SBlogReadTime = $Cache->get_value('staff_blog_read_' . $LoggedUser['ID'])) === false) {
-                    $DB->query("
-		SELECT Time
-		FROM staff_blog_visits
-		WHERE UserID = " . $LoggedUser['ID']);
-                    if (list($SBlogReadTime) = $DB->next_record()) {
-                        $SBlogReadTime = strtotime($SBlogReadTime);
-                    } else {
-                        $SBlogReadTime = 0;
-                    }
-                    $Cache->cache_value('staff_blog_read_' . $LoggedUser['ID'], $SBlogReadTime, 1209600);
+                      SELECT
+                        ID,
+                        Title,
+                        CreatedTime
+                      FROM forums_topics
+                      WHERE ForumID = '$ForumId'
+                      ORDER BY CreatedTime DESC
+                      LIMIT 5"); // Can be cached until someone makes a new post
+                    $Forum = $DB->to_array();
+                    $Cache->cache_value("forums_index_$ForumId", $Forum);
                 }
                 ?>
                 <ul class="SidebarItem-body Box-body SidebarList is-ordered">
                     <?
-                    $End = min(count($Blog), 5);
+                    $End = min(count($Forum), 5);
                     for ($i = 0; $i < $End; $i++) {
-                        list($BlogID, $Author, $Title, $Body, $BlogTime) = $Blog[$i];
-                        $BlogTime = strtotime($BlogTime);
+                        list($TopicID, $Title) = $Forum[$i];
                     ?>
                         <li class="SidebarList-item">
-                            <?= $SBlogReadTime < $BlogTime ? '<strong>' : '' ?>
-                            <a href="staffblog.php#blog<?= $BlogID ?>"><?= $Title ?></a>
-                            <?= $SBlogReadTime < $BlogTime ? '</strong>' : '' ?>
+                            <strong>
+                            <a href="forums.php?action=viewthread&threadid=<?= $TopicID ?>"><?= $Title ?></a>
+                            </strong>
                         </li>
                     <?
                     }
                     ?>
                 </ul>
             </div>
-        <?  } ?>
-        <div class="SidbarItemBlog SidebarItem Box">
-            <div class="SidebarItem-header Box-header">
-                <a href="blog.php"><?= t('server.index.blog_note') ?></a>
-            </div>
-            <?
-            if (($Blog = $Cache->get_value('blog')) === false) {
-                $DB->query("
-		SELECT
-			b.ID,
-			um.Username,
-			b.UserID,
-			b.Title,
-			b.Body,
-			b.Time,
-			b.ThreadID
-		FROM blog AS b
-			LEFT JOIN users_main AS um ON b.UserID = um.ID
-		ORDER BY Time DESC
-		LIMIT 20");
-                $Blog = $DB->to_array();
-                $Cache->cache_value('blog', $Blog, 1209600);
-            }
-            ?>
-            <ul class="SidebarItem-body Box-body SidebarList is-ordered">
-                <?
-                if (count($Blog) < 5) {
-                    $Limit = count($Blog);
-                } else {
-                    $Limit = 5;
-                }
-                for ($i = 0; $i < $Limit; $i++) {
-                    list($BlogID, $Author, $AuthorID, $Title, $Body, $BlogTime, $ThreadID) = $Blog[$i];
-                ?>
-                    <li class="SidebarList-item">
-                        <a href="blog.php#blog<?= $BlogID ?>"><?= $Title ?></a>
-                    </li>
-                <?
-                }
-                ?>
-            </ul>
-        </div>
+
+        <?php }}} ?>
 
         <!-- Site History -->
         <?

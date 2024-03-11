@@ -146,6 +146,7 @@ $Cache->update_row($ForumID, $UpdateArrayForums);
 $Cache->commit_transaction();
 
 $Cache->delete_value("forums_$ForumID");
+$Cache->delete_value("forums_index_$ForumID");
 
 Subscriptions::flush_subscriptions('forums', $TopicID);
 
