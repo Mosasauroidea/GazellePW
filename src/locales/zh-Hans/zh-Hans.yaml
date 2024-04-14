@@ -650,6 +650,12 @@ server.bonus.upload-3: |-
   250GiB 上传量
 server.bonus.upload-4: |-
   500GiB 上传量
+server.bonus.free_and_top_torrent_group: |-
+  免费和置顶种子组
+server.bonus.torrent_group_id: |-
+  种子组ID
+server.bonus.free_days: |-
+  免费时间(天)
 server.bonus.you_cannot_afford_this_item: |-
   你的余额不足以支付此商品的价格。
 server.bonus.you_have_spent: |-
@@ -1781,6 +1787,8 @@ server.index.poll: |-
   投票
 server.index.popular_movies: |-
   热门电影
+server.index.user_recommend: |-
+  用户精选
 server.index.product_note: |-
   你可能想在这里放一张图。
 server.index.product_page: |-

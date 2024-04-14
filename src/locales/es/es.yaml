@@ -444,6 +444,12 @@ server.bonus.upload-3: |-
   250GB de subida
 server.bonus.upload-4: |-
   500GB de subida
+server.bonus.free_and_top_torrent_group: |-
+  Grupo de torrents gratuitos y destacados
+server.bonus.torrent_group_id: |-
+  ID del grupo de torrents
+server.bonus.free_days: |-
+  Días gratis
 server.bookmarks.dont_notify_new: |-
   No notificar las nuevas subidas
 server.bookmarks.no_torrents_found: |-
@@ -957,6 +963,8 @@ server.index.poll: |-
   Encuesta
 server.index.popular_movies: |-
   Películas populares
+server.index.user_recommend: |-
+  Recomendaciones de usuarios
 server.index.staff_note: |-
   Blog del Staff
 server.index.stats: |-

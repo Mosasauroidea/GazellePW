@@ -448,42 +448,77 @@ View::show_header(t('server.index.index'), 'comments', 'PageHome');
         </div>
     </div>
 
-
-    <div class="LayoutMainSidebar-main">
+    <div class="LayoutMainSidebar-main u-tab">
         <!-- Hot Movies -->
-        <?
-        if ($LoggedUser['ShowHotMovieOnHomePage']) {;
-        ?>
-            <?
-            $Top10Movies = new Top10Movies();
-            $Data = $Top10Movies->getData(
-                'active_week',
-                [
-                    'Limit' => 10,
-                ]
-            );
-            if (count($Data) > 0) {
-            ?>
-                <div class="IndexTop10Movie Group">
-                    <div class="Group-header">
-                        <div class="Group-headerTitle">
-                            <?= t('server.index.popular_movies') ?>
-                        </div>
-                    </div>
-                    <div class="Group-body">
-                        <?
+        <? if ($LoggedUser['ShowHotMovieOnHomePage']) {
+          $Top10Movies = new Top10Movies();
+          $TopWeekData = $Top10Movies->getData(
+              'active_week',
+              [
+                  'Limit' => 10,
+              ]
+          );
 
-                        $tableRender = new TorrentGroupCoverTableView($Data);
-                        $tableRender->render([
-                            'Variant' => 'OneLine'
-                        ]);
-                        ?>
+          $Top10Movies = new Top10Movies();
+          $LastFreeData = $Top10Movies->getData('free', ['Limit' => 10]);
+        }?>
+
+        <?php if(isset($TopWeekData) && count($TopWeekData) > 0){ ?>
+          <div class="IndexTop10Movie Group u-tabItem u-tabItemPopularMovies">
+              <div class="Group-header">
+
+                  <div class="Group-headerTitle" >
+                      <?= t('server.index.popular_movies') ?>
+                  </div>
+                  &nbsp;<span class="Group-headerTitle"> | </span>&nbsp;
+                  <?php if(isset($LastFreeData) && count($LastFreeData) > 0){ ?>
+                    <div class="Group-headerTitle" >
+                        <a href="#" onclick='globalapp.toggleTab(event, ".u-tabItemFreeTorrents")' ><?= t('server.index.user_recommend') ?></a>
                     </div>
-                </div>
-        <?
-            }
-        }
-        ?>
+                  <?php } ?>
+              </div>
+
+              <div class="Group-body">
+                  <?php
+                    $tableRender = new TorrentGroupCoverTableView($TopWeekData);
+                      $tableRender->render([
+                          'Variant' => 'OneLine'
+                      ]);
+
+                  ?>
+              </div>
+          </div>
+        <?php } ?>
+
+        <?php if(isset($LastFreeData) && count($LastFreeData) > 0){ ?>
+          <div class="IndexTop10Movie Group u-tabItem u-tabItemFreeTorrents" style="display: none">
+              <div class="Group-header">
+
+                  <?php if(isset($TopWeekData) && count($TopWeekData) > 0){ ?>
+                  <div class="Group-headerTitle" >
+                      <a href="#" onclick='globalapp.toggleTab(event, ".u-tabItemPopularMovies")' ><?= t('server.index.popular_movies') ?></a>
+                  </div>
+                  &nbsp;<span class="Group-headerTitle"> | </span>&nbsp;
+                  <?php } ?>
+
+                  <?php if(isset($LastFreeData) && count($LastFreeData) > 0){ ?>
+                    <div class="Group-headerTitle" >
+                        <?= t('server.index.user_recommend') ?>
+                    </div>
+                  <?php } ?>
+              </div>
+
+              <div class="Group-body">
+                  <?php
+                     $tableRender = new TorrentGroupCoverTableView($LastFreeData);
+                      $tableRender->render([
+                          'Variant' => 'OneLine'
+                      ]);
+                  ?>
+              </div>
+          </div>
+        <?php } ?>
+
         <? if (count($News) > 0) { ?>
             <!-- Anouncements -->
             <div class="Group">

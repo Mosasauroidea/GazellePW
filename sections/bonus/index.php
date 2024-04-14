@@ -13,7 +13,6 @@ if (isset($_GET['action'])) {
     switch ($_GET['action']) {
         case 'purchase':
             /* handle validity and cost as early as possible */
-
             if (isset($_REQUEST['label']) && preg_match('/^[a-z]{1,15}(-\w{1,15}){0,4}/', $_REQUEST['label'])) {
                 $Label = $_REQUEST['label'];
                 $Item = $Bonus->getItem($Label);
@@ -51,6 +50,9 @@ if (isset($_GET['action'])) {
                         case 'upload-3':
                         case 'upload-4':
                             require_once(CONFIG['SERVER_ROOT'] . '/sections/bonus/upload.php');
+                            break;
+                        case 'free_and_top_torrent_group':
+                            require_once(CONFIG['SERVER_ROOT'] . '/sections/bonus/freetorrent.php');
                             break;
                         default:
                             require_once(CONFIG['SERVER_ROOT'] . DEFAULT_PAGE);

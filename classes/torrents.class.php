@@ -1385,7 +1385,7 @@ WHERE ud.TorrentID=? AND ui.NotifyOnDeleteDownloaded='1' AND ud.UserID NOT IN ({
      * @param int $FreeNeutral 0 = normal, 1 = fl, 2 = nl
      * @param int $FreeLeechType 0 = Unknown, 1 = Staff picks, 2 = Perma-FL (Toolbox, etc.)
      */
-    public static function freeleech_torrents($TorrentIDs, $FreeNeutral = 1, $FreeLeechType = 0, $Schedule = false) {
+    public static function freeleech_torrents($TorrentIDs, $FreeNeutral = 1, $FreeLeechType = 0, $Schedule = false, $LimitTime = null) {
         if (!is_array($TorrentIDs)) {
             $TorrentIDs = array($TorrentIDs);
         }
@@ -1407,6 +1407,12 @@ WHERE ud.TorrentID=? AND ui.NotifyOnDeleteDownloaded='1' AND ud.UserID NOT IN ({
 
         foreach ($Torrents as $Torrent) {
             list($TorrentID, $GroupID, $InfoHash) = $Torrent;
+            if($LimitTime !== null) {
+               G::$DB->query("
+                   INSERT INTO `freetorrents_timed`(`TorrentID`, `EndTime`) 
+                   VALUES ($TorrentID, '$LimitTime') ON DUPLICATE KEY UPDATE EndTime=VALUES(EndTime)");
+            }
+
             Tracker::update_tracker('update_torrent', array('info_hash' => rawurlencode($InfoHash), 'freetorrent' => $FreeNeutral));
             G::$Cache->delete_value("torrent_download_$TorrentID");
             Misc::write_log(($Schedule ? "Schedule" : G::$LoggedUser['Username']) . " marked torrent $TorrentID freeleech $FreeNeutral type $FreeLeechType!");
@@ -1429,7 +1435,7 @@ WHERE ud.TorrentID=? AND ui.NotifyOnDeleteDownloaded='1' AND ud.UserID NOT IN ({
      * @param int $FreeNeutral see Torrents::freeleech_torrents()
      * @param int $FreeLeechType see Torrents::freeleech_torrents()
      */
-    public static function freeleech_groups($GroupIDs, $FreeNeutral = 1, $FreeLeechType = 0) {
+    public static function freeleech_groups($GroupIDs, $FreeNeutral = 1, $FreeLeechType = 0, $LimitTime = null) {
         $QueryID = G::$DB->get_query_id();
 
         if (!is_array($GroupIDs)) {
@@ -1442,7 +1448,7 @@ WHERE ud.TorrentID=? AND ui.NotifyOnDeleteDownloaded='1' AND ud.UserID NOT IN ({
 			WHERE GroupID IN (' . implode(', ', $GroupIDs) . ')');
         if (G::$DB->has_results()) {
             $TorrentIDs = G::$DB->collect('ID');
-            Torrents::freeleech_torrents($TorrentIDs, $FreeNeutral, $FreeLeechType);
+            Torrents::freeleech_torrents($TorrentIDs, $FreeNeutral, $FreeLeechType, false, $LimitTime);
         }
         G::$DB->set_query_id($QueryID);
     }

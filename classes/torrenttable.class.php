@@ -11,9 +11,10 @@ class TorrentGroupCoverTableView extends GroupTorrentTableView {
     /* { UseTorrentID => false } */
     public function render($options = []) {
         $Class = $options['class'];
+        $Style = $options['style'];
         $Variant = $options['Variant'];
 ?>
-        <div class="TorrentCover u-hideScrollbar <?= $Class ?>" variant="<?= $Variant ?>">
+        <div class="TorrentCover u-hideScrollbar <?= $Class ?>" style="<?= $Style ?>" variant="<?= $Variant ?>">
             <?
             foreach ($this->Groups as $RS) {
                 $Name = Torrents::group_name($RS, false);

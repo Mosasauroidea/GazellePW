@@ -18,6 +18,7 @@ class Bonus {
         $this->db = $db;
         $this->cache = $cache;
         $this->items = $this->cache->get_value(self::CACHE_ITEM);
+//        $this->items = false;
         if ($this->items === false) {
             $this->db->query("SELECT ID, Price, Amount, MinClass, FreeClass, OffPrice, OffClass, Label, Title FROM bonus_item order by rank");
             $this->items = $this->db->has_results() ? $this->db->to_array('Label') : [];
@@ -42,6 +43,7 @@ class Bonus {
         if ($effective_class >= $item['FreeClass']) {
             $price = 0;
         }
+
         return $price;
     }
 
@@ -327,6 +329,47 @@ class Bonus {
         $this->sendPmToOther($From['Username'], $toID, $amount);
 
         return $amount;
+    }
+
+    public function purchaseFreeTorrent($user_id, $label, $torrent_group_id, $effective_class) {
+        if (!array_key_exists($label, $this->items)) {
+            return false;
+        }
+        $item = $this->items[$label];
+        $price = $this->getEffectivePrice($label, $effective_class);
+        $stats = \Users::user_stats($user_id, true);
+        if ($stats['BonusPoints'] < $price) {
+            return false;
+        }
+        $this->db->begin_transaction();
+        if ($price > 0) {
+            /* if the price is 0, nothing changes so avoid hitting the db */
+            $this->db->prepared_query(
+                'UPDATE users_main SET BonusPoints = BonusPoints - ? WHERE BonusPoints >= ? AND ID = ?',
+                $price,
+                $price,
+                $user_id
+            );
+            if ($this->db->affected_rows() != 1) {
+                $this->db->rollback();
+                return false;
+            }
+            // Sanity check
+            $new_stats = \Users::user_stats($user_id, true);
+            if (!($new_stats['BonusPoints'] >= 0 && $new_stats['BonusPoints'] < $stats['BonusPoints'])) {
+                $this->db->rollback();
+                return false;
+            }
+        }
+
+        // freeleech the torrent group
+        $LimitEndTime = date('Y-m-d H:i:00', strtotime('+1 day'));
+        \Torrents::freeleech_groups($torrent_group_id, 1, 0, $LimitEndTime);
+
+        $this->addPurchaseHistory($item['ID'], $user_id, $price);
+        $this->db->commit();
+        $this->cache->delete_value('user_info_heavy_' . $user_id);
+        return true;
     }
 
     public function sendPmToOther($from, $toID, $amount) {

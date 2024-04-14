@@ -664,6 +664,12 @@ server.bonus.upload-3: |-
   250GB upload
 server.bonus.upload-4: |-
   500GB upload
+server.bonus.free_and_top_torrent_group: |-
+  Free and Top Torrent Group
+server.bonus.torrent_group_id: |-
+  Torrent Group ID
+server.bonus.free_days: |-
+  Freeleech Days
 server.bonus.you_cannot_afford_this_item: |-
   You cannot afford this item.
 server.bonus.you_have_spent: |-
@@ -1821,6 +1827,8 @@ server.index.poll: |-
   Poll
 server.index.popular_movies: |-
   Popular Movies
+server.index.user_recommend: |-
+  User Recommendations
 server.index.product_note: |-
   You may want to put an image here.
 server.index.product_page: |-
