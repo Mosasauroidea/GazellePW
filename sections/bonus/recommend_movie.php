@@ -1,15 +1,26 @@
 <?php
 
+require(CONFIG['SERVER_ROOT'] . '/classes/recommend_groups.class.php');
+
 $ID = G::$LoggedUser['ID'];
 $Label = $_REQUEST['label'];
 
-if (isset($_POST['confirm'])) {
+if (isset($_POST['confirm']) && isset($_POST['torrent_group_id'])) {
     authorize();
 
-    if ($Bonus->purchaseFreeTorrent($ID, $Label, $_POST['torrent_group_id'], G::$LoggedUser['EffectiveClass'])) {
-        header('Location: bonus.php?complete=' . urlencode($Label));
-    } else {
-        error(t('server.bonus.you_cannot_afford_this_item'));
+    if (!preg_match('/^recommend-movie-([1|7])$/', $Label, $match)) {
+      error(t('server.bonus.you_cannot_afford_this_item'));
+    }
+
+    $flag = $Bonus->purchaseRecommendMovie($ID, $Label, G::$LoggedUser['EffectiveClass']);
+
+    if($flag) {
+      $LimitEndTime = date('Y-m-d H:i:s', strtotime("+{$match[1]} day"));
+      \Torrents::freeleech_groups($_POST['torrent_group_id'], 1, 0, $LimitEndTime);
+      \RecommendGroups::recommend_group_buy($ID, $_POST['torrent_group_id'], $LimitEndTime);
+      header('Location: bonus.php?complete=' . urlencode($Label));
+    }else {
+      error(t('server.bonus.you_cannot_afford_this_item'));
     }
 }
 
@@ -33,7 +44,7 @@ View::show_header(t('server.bonus.bonus_points_title'), 'bonus', 'PageBonusTitle
                     <?= t('server.bonus.th_item') ?>:
                 </td>
                 <td class="Form-inputs">
-                    <?= t('server.bonus.free_and_top_torrent_group') ?>
+                    <?= t("server.bonus.$Label") ?>
                 </td>
             </tr>
             <tr class="Form-row">
@@ -53,16 +64,8 @@ View::show_header(t('server.bonus.bonus_points_title'), 'bonus', 'PageBonusTitle
                 </td>
             </tr>
             <tr class="Form-row">
-                <td class="Form-label">
-                    <?= t('server.bonus.free_days') ?><span class="read"></span>:
-                </td>
-                <td class="Form-inputs">
-                    <input class="is-small Input" disabled type="text" id="free_days" name="free_days" value="1" />
-                </td>
-            </tr>
-            <tr class="Form-row">
                 <td>
-                    <input class="Button" type="submit" onclick="ConfirmPurchase(event, '<?= t('server.bonus.free_and_top_torrent_group') ?>')" value="<?= t('server.common.submit') ?>" />&nbsp;
+                    <input class="Button" type="submit" onclick="ConfirmPurchase(event, '<?= t("server.bonus.$Label") ?>')" value="<?= t('server.common.submit') ?>" />&nbsp;
                 </td>
             </tr>
             </td>

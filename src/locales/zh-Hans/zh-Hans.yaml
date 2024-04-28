@@ -33,7 +33,7 @@ client.common.collapse_this_group: |-
 client.common.composer: |-
   作曲
 client.common.confirm_purchase: |-
-  你确定要购买 {{item}}吗？
+  你确定要购买{{item}}吗？
 client.common.confirm_username: |-
   请输入受赠者的用户名:
 client.common.copied: |-
@@ -650,12 +650,12 @@ server.bonus.upload-3: |-
   250GiB 上传量
 server.bonus.upload-4: |-
   500GiB 上传量
-server.bonus.free_and_top_torrent_group: |-
-  免费和置顶种子组
+server.bonus.recommend-movie-1: |-
+  推荐电影 1天
+server.bonus.recommend-movie-7: |-
+  推荐电影 7天
 server.bonus.torrent_group_id: |-
   种子组ID
-server.bonus.free_days: |-
-  免费时间(天)
 server.bonus.you_cannot_afford_this_item: |-
   你的余额不足以支付此商品的价格。
 server.bonus.you_have_spent: |-
@@ -1788,7 +1788,7 @@ server.index.poll: |-
 server.index.popular_movies: |-
   热门电影
 server.index.user_recommend: |-
-  用户精选
+  用户推荐
 server.index.product_note: |-
   你可能想在这里放一张图。
 server.index.product_page: |-

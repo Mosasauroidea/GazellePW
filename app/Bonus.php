@@ -331,7 +331,7 @@ class Bonus {
         return $amount;
     }
 
-    public function purchaseFreeTorrent($user_id, $label, $torrent_group_id, $effective_class) {
+    public function purchaseRecommendMovie($user_id, $label, $effective_class) {
         if (!array_key_exists($label, $this->items)) {
             return false;
         }
@@ -361,10 +361,6 @@ class Bonus {
                 return false;
             }
         }
-
-        // freeleech the torrent group
-        $LimitEndTime = date('Y-m-d H:i:00', strtotime('+1 day'));
-        \Torrents::freeleech_groups($torrent_group_id, 1, 0, $LimitEndTime);
 
         $this->addPurchaseHistory($item['ID'], $user_id, $price);
         $this->db->commit();

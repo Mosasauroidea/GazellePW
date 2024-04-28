@@ -9,7 +9,6 @@ class Top10Movies {
       g.WikiImage
     FROM torrents AS t
     LEFT JOIN torrents_group AS g ON g.ID = t.GroupID
-    LEFT JOIN freetorrents_timed AS f ON f.TorrentID = t.ID
     {rest}
     GROUP BY g.ID
     ORDER BY {order} DESC
@@ -61,8 +60,6 @@ class Top10Movies {
         return "WHERE t.Snatched > 0";
       case 'seeded':
         return "WHERE t.Seeders > 0";
-      case "free":
-        return "WHERE f.EndTime > now()";
     }
   }
 
@@ -80,8 +77,6 @@ class Top10Movies {
         return 'sum((t.Size * t.Snatched) + (t.Size * 0.5 * t.Leechers))';
       case 'seeded':
         return 'sum(t.Seeders)';
-      case 'free':
-        return 'f.EndTime';
     }
   }
 }

@@ -51,8 +51,9 @@ if (isset($_GET['action'])) {
                         case 'upload-4':
                             require_once(CONFIG['SERVER_ROOT'] . '/sections/bonus/upload.php');
                             break;
-                        case 'free_and_top_torrent_group':
-                            require_once(CONFIG['SERVER_ROOT'] . '/sections/bonus/freetorrent.php');
+                        case 'recommend-movie-1':
+                        case 'recommend-movie-7':
+                            require_once(CONFIG['SERVER_ROOT'] . '/sections/bonus/recommend_movie.php');
                             break;
                         default:
                             require_once(CONFIG['SERVER_ROOT'] . DEFAULT_PAGE);

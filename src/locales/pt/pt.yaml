@@ -663,6 +663,12 @@ server.bonus.upload-3: |-
   Upload de 250GB
 server.bonus.upload-4: |-
   Upload de 500GB
+server.bonus.recommend-movie-1: |-
+  Filmes recomendados 1 dia
+server.bonus.recommend-movie-7: |-
+  Filmes recomendados 7 dias
+server.bonus.torrent_group_id: |-
+  ID do grupo de sementes
 server.bonus.you_cannot_afford_this_item: |-
   Você não pode pagar por este item.
 server.bonus.you_have_spent: |-
