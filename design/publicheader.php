@@ -9,10 +9,10 @@ define('FOOTER_FILE', CONFIG['SERVER_ROOT'] . '/design/publicfooter.php');
     <title><?= display_str($PageTitle) ?></title>
     <meta http-equiv="X-UA-Compatible" content="chrome=1; IE=edge" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <meta name="referrer" content="none, no-referrer, same-origin" />
+    <meta name="referrer" content="same-origin" />
     <link rel="shortcut icon" href="favicon.ico" />
     <link rel="apple-touch-icon" href="favicon.ico" />
-    <meta name="viewport" content="width=device-width; initial-scale=1.0;" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <? if (CONFIG['IS_DEV']) { ?>
         <link rel="stylesheet" type="text/css" media="screen" href="/src/css/publicstyle/style.css" />
     <? } else { ?>

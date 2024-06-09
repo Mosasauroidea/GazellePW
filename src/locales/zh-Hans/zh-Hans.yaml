@@ -4948,6 +4948,18 @@ server.torrents.additional_slots: |-
   额外的特许槽位
 server.torrents.advanced: |-
   高级
+server.torrents.advanced_video_feature: |-
+  高级视频特性
+server.torrents.advanced_audio_feature: |-
+  高级音频特性
+server.editioninfo.51_surround: |-
+  5.1 声道
+server.editioninfo.71_surround: |-
+  7.1 声道
+server.torrents.release_group: |-
+  制作组
+server.user.member_of_group: |-
+  %s 小组的一员
 server.torrents.album_votes: |-
   影片投票
 server.torrents.all: |-

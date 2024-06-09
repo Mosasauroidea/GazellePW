@@ -89,3 +89,7 @@ Where
   overflow: visible;
   border-top: var(--global-border-box);
 }
+
+.TableForumPost.sticky_post {
+  border: 1px, solid, var(--global-color-warning);
+}

@@ -90,7 +90,7 @@ if (
 // Silly hack for people who are on the old setting
 $CollageCovers = isset($LoggedUser['CollageCovers']) ? $LoggedUser['CollageCovers'] : 25 * (abs($LoggedUser['HideCollage'] - 1));
 
-View::show_header($Name, 'browse,collage,bbcode,voting,recommend', 'PageCollageTorrent');
+View::show_header($Name, 'browse,collage,comments,bbcode,voting,recommend', 'PageCollageTorrent');
 ?>
 <div class="LayoutBody">
     <div class="BodyHeader">

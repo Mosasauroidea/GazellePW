@@ -254,9 +254,10 @@ switch ($_REQUEST['action']) {
 
             if (is_numeric($_REQUEST['id'])) {
                 $DB->prepared_query("
-					SELECT p.ID, p.Name, p.Level, p.Secondary, p.PermittedForums, p.Values, p.DisplayStaff, p.StaffGroup, COUNT(u.ID)
+					SELECT p.ID, p.Name, p.Level, p.Secondary, p.PermittedForums, p.Values, p.DisplayStaff, p.StaffGroup, COUNT(u.ID) + COUNT(DISTINCT l.UserID)
 					FROM permissions AS p
 						LEFT JOIN users_main AS u ON u.PermissionID = p.ID
+                        LEFT JOIN users_levels AS l ON l.PermissionID = p.ID
 					WHERE p.ID = ?
 					GROUP BY p.ID", $_REQUEST['id']);
                 list($ID, $Name, $Level, $Secondary, $Forums, $Values, $DisplayStaff, $StaffGroup, $UserCount) = $DB->next_record(MYSQLI_NUM, array(5));

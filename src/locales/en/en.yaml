@@ -5029,6 +5029,18 @@ server.torrents.additional_slots: |-
   Additional slots
 server.torrents.advanced: |-
   Advanced
+server.torrents.advanced_video_feature: |-
+  Advanced video feature
+server.torrents.advanced_audio_feature: |-
+  Advanced audio feature
+server.editioninfo.51_surround: |-
+  5.1 surround
+server.editioninfo.71_surround: |-
+  7.1 surround
+server.torrents.release_group: |-
+  Release group
+server.user.member_of_group: |-
+  A member of %s
 server.torrents.album_votes: |-
   Album Votes
 server.torrents.all: |-

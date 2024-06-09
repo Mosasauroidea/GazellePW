@@ -632,7 +632,7 @@ View::show_header($ThreadInfo['Title'], 'comments,subscriptions,bbcode,thumb', $
                                 } else {
                                     if (check_perms('site_moderate_forums')) {
                                     ?>
-                                        - <a href="forums.php?action=sticky_post&amp;threadid=<?= $ThreadID ?>&amp;postid=<?= $PostID ?>&amp;auth=<?= $LoggedUser['AuthKey'] ?>" data-tooltip="<?= t('server.forums.sticky_title') ?>" class="brackets">&#x21d5;</a>
+                                        - <a href="forums.php?action=sticky_post&amp;threadid=<?= $ThreadID ?>&amp;postid=<?= $PostID ?>&amp;auth=<?= $LoggedUser['AuthKey'] ?>" data-tooltip="<?= t('server.forums.sticky_title') ?>" class="brackets"><?= t('server.forums.sticky') ?></a>
                                 <?
                                     }
                                 }

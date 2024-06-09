@@ -425,7 +425,7 @@ class Torrents {
 
             foreach ($NotFound as $GroupID => &$GroupInfo) {
                 uasort($GroupInfo['Torrents'], 'Torrents::sort_torrent');
-                G::$Cache->cache_value($Key . $GroupID, array('ver' => CACHE::GROUP_VERSION, 'd' => $GroupInfo), 0);
+                G::$Cache->cache_value($Key . $GroupID, array('ver' => CACHE::GROUP_VERSION, 'd' => $GroupInfo), 3600);
             }
 
             $Found = $NotFound + $Found;
@@ -1292,11 +1292,15 @@ WHERE ud.TorrentID=? AND ui.NotifyOnDeleteDownloaded='1' AND ud.UserID NOT IN ({
         if ($Data['Allow'] == '1') {
             $Info[] = Format::torrent_label(t('server.torrents.allow'), 'tl_allow');
         }
-        if ($Option['SettingTorrentTitle']['ReleaseGroup']) {
-            $ReleaseGroup = $Data['ReleaseGroup'] ?: self::release_group($Data);
-            if ($ReleaseGroup) {
-                $Info[] = "<span class='TorrentTitle-item is-releaseGroup'>$ReleaseGroup</span>";
-            }
+        $OfficialReleaseGroup = false;
+        $ReleaseGroup = Users::get_release_group_by_id($Data['Makers'])['Name'];
+        if (empty($ReleaseGroup)) {
+            $ReleaseGroup = self::release_group($Data);
+        } else {
+            $OfficialReleaseGroup = true;
+        }
+        if ($ReleaseGroup && $Option['SettingTorrentTitle']['ReleaseGroup']) {
+            $Info[] = "<span class='TorrentTitle-item is-releaseGroup " . ($OfficialReleaseGroup ? "bg tl_buy" : '') . "'>$ReleaseGroup</span>";
         }
         if (
             (!empty($Data['BadFiles'])) ||
@@ -1308,12 +1312,13 @@ WHERE ud.TorrentID=? AND ui.NotifyOnDeleteDownloaded='1' AND ud.UserID NOT IN ({
         ) {
             $Info[] = Format::torrent_label(t('server.torrents.trump'), 'tl_trumpable');
         }
-
-        if ($Data['Buy'] == '1' &&  $Data['Diy'] == '0') {
-            $Info[] = Format::torrent_label(t('server.torrents.buy'), 'bg tl_buy');
-        }
-        if ($Data['Diy'] == '1') {
-            $Info[] = Format::torrent_label(t('server.torrents.diy'), 'bg tl_diy');
+        if (empty($OfficialReleaseGroup)) {
+            if ($Data['Buy'] == '1' &&  $Data['Diy'] == '0') {
+                $Info[] = Format::torrent_label(t('server.torrents.buy'), 'bg tl_buy');
+            }
+            if ($Data['Diy'] == '1') {
+                $Info[] = Format::torrent_label(t('server.torrents.diy'), 'bg tl_diy');
+            }
         }
         if (self::global_freeleech()) {
             $Info[] = Format::torrent_label(t('server.torrents.fld'), 'tl_free bg torrent_discount free');
@@ -1407,8 +1412,8 @@ WHERE ud.TorrentID=? AND ui.NotifyOnDeleteDownloaded='1' AND ud.UserID NOT IN ({
 
         foreach ($Torrents as $Torrent) {
             list($TorrentID, $GroupID, $InfoHash) = $Torrent;
-            if($LimitTime !== null) {
-               G::$DB->query("
+            if ($LimitTime !== null) {
+                G::$DB->query("
                    INSERT INTO `freetorrents_timed`(`TorrentID`, `EndTime`) 
                    VALUES ($TorrentID, '$LimitTime') ON DUPLICATE KEY UPDATE EndTime=VALUES(EndTime)");
             }

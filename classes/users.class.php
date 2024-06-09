@@ -864,6 +864,31 @@ class Users {
         global $HeavyInfo;
         return empty($HeavyInfo['DisableAvatars']) || $HeavyInfo['DisableAvatars'] != 1;
     }
+
+    public static function get_release_group(int $UserID): ?array {
+        foreach (CONFIG['RELEASE_GROUP_MEMBER'] as $ID => $Members) {
+            foreach ($Members as $Member) {
+                if ($Member == $UserID) {
+                    return self::get_release_group_by_id($ID);
+                }
+            }
+        }
+        return [];
+    }
+
+    public static function get_all_release_groups(): ?array {
+        return CONFIG['RELEASE_GROUP'];
+    }
+
+    public static function get_release_group_by_id($ReleaseGroupID): ?array {
+        foreach (CONFIG['RELEASE_GROUP'] as $ReleaseGroup) {
+            if ($ReleaseGroup['ID'] == $ReleaseGroupID) {
+                return $ReleaseGroup;
+            }
+        }
+        return [];
+    }
+
     /**
      * Checks whether user has autocomplete enabled
      *

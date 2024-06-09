@@ -890,7 +890,7 @@ class Text {
                         $RV = explode('#', $Rule);
                         if (count($RV) == 1) {
                             $Num = $RV[0];
-                            $Str .= '<a href="rules.php?p=upload#' . urlencode(Format::undisplay_str($Num)) . '">' . 'golden#' . $Num . '</a>';
+                            $Str .= '<a href="rules.php?p=upload#' . urlencode(Format::undisplay_str($Num)) . '">' . 'upload#' . $Num . '</a>';
                         } else {
                             $Page = $RV[0];
                             $Num = $RV[1];

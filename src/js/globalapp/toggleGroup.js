@@ -14,7 +14,7 @@ globalapp.toggleGroup = function toggleGroup(groupid, link, event) {
     clickedRow = clickedRow.parentNode
   }
   var group_rows = clickedRow.parentNode.children
-  var showing = $(clickedRow).nextElementSibling().has_class('hidden')
+  var showing = $(clickedRow).nextElementSibling().has_class('u-hidden')
   var allGroups = event.ctrlKey || event.metaKey // detect ctrl or cmd
 
   // for dealing with Mac OS X
@@ -52,17 +52,17 @@ globalapp.toggleGroup = function toggleGroup(groupid, link, event) {
         if (showing) {
           // show the row depending on whether the edition it's in is collapsed or not
           if (row.has_class('TableTorrent-rowCategory')) {
-            row.gshow()
+            row.remove_class('u-hidden')
             showRow = $('a', row.raw()).raw().innerHTML != '+'
           } else {
             if (showRow) {
-              row.gshow()
+              row.remove_class('u-hidden')
             } else {
-              row.ghide()
+              row.add_class('u-hidden')
             }
           }
         } else {
-          row.ghide()
+          row.add_class('u-hidden')
         }
       }
     }

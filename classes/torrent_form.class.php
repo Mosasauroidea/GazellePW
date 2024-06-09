@@ -20,7 +20,6 @@ class TORRENT_FORM {
     var $Containers = array();
     var $Resolutions = array();
     var $Processings = array();
-    var $Makers = array();
 
     var $UploadForm = '';
     var $Torrent = array();
@@ -41,7 +40,7 @@ class TORRENT_FORM {
         $this->Torrent = $Torrent;
         $this->Error = $Error;
 
-        global $UploadForm, $Categories, $Sources, $Codecs, $Containers, $Resolutions, $Processings, $Makers, $TorrentID;
+        global $UploadForm, $Categories, $Sources, $Codecs, $Containers, $Resolutions, $Processings, $TorrentID;
 
         $this->UploadForm = $UploadForm;
         $this->Categories = $Categories;
@@ -50,7 +49,6 @@ class TORRENT_FORM {
         $this->Containers = $Containers;
         $this->Resolutions = $Resolutions;
         $this->Processings = $Processings;
-        $this->Makers = $Makers;
         $this->TorrentID = $TorrentID;
         $this->GenreTags = Tags::get_genre_tag();
 
@@ -300,6 +298,8 @@ class TORRENT_FORM {
                 $Subtitles = isset($Torrent['Subtitles']) ? $Torrent['Subtitles'] : null;
                 $Buy = isset($Torrent['Buy']) ? $Torrent['Buy'] : null;
                 $Diy = isset($Torrent['Diy']) ? $Torrent['Diy'] : null;
+                $Makers = isset($Torrent['Makers']) ? $Torrent['Makers'] : null;
+                $ReleaseGroups = check_perms('users_mod') ? Users::get_all_release_groups() : [Users::get_release_group(G::$LoggedUser['ID'])];
                 $Jinzhuan = isset($Torrent['Jinzhuan']) ? $Torrent['Jinzhuan'] : null;
                 $IMDBID = isset($Torrent['IMDBID']) ? $Torrent['IMDBID'] : null;
                 $SpecialSub = isset($Torrent['SpecialSub']) ? $Torrent['SpecialSub'] : null;
@@ -841,45 +841,45 @@ class TORRENT_FORM {
                     </td>
                 </tr>
                 <tr class="Form-row">
-                    <td class="Form-label"><?= "高级视频特性" ?><span class="u-colorWarning"></span>:</td>
+                    <td class="Form-label"><?= t('server.torrents.advanced_video_feature') ?><span class="u-colorWarning"></span>:</td>
                     <td class="Form-inputs Form-errorAudio">
                         <div class="Checkbox">
                             <input class="Input" type="checkbox" id="10_bit" name="10_bit" <?= EditionInfo::checkEditionInfo($RemasterTitle, EditionInfo::edition_10_bit) ? "checked" : "" ?> />
-                            <label class="Checkbox-label" for="10_bit"><?= "10bit 色深" ?></label>
+                            <label class="Checkbox-label" for="10_bit"><?= t('server.editioninfo.10_bit') ?></label>
                         </div>
                         <div class="Checkbox">
                             <input class="Input" type="checkbox" id="hdr10" name="hdr10" <?= EditionInfo::checkEditionInfo($RemasterTitle, EditionInfo::edition_hdr10)  ? "checked" : "" ?> />
-                            <label class="Checkbox-label" for="hdr10"><?= "HDR10" ?></label>
+                            <label class="Checkbox-label" for="hdr10"><?= t('server.editioninfo.hdr10') ?></label>
                         </div>
                         <div class="Checkbox">
                             <input class="Input" type="checkbox" id="hdr10plus" name="hdr10plus" <?= EditionInfo::checkEditionInfo($RemasterTitle, EditionInfo::edition_hdr10plus) ? "checked" : "" ?> />
-                            <label class="Checkbox-label" for="hdr10plus"><?= "HDR10+" ?></label>
+                            <label class="Checkbox-label" for="hdr10plus"><?= t('server.editioninfo.hdr10plus') ?></label>
                         </div>
                         <div class="Checkbox">
                             <input class="Input" type="checkbox" id="dolby_vision" name="dolby_vision" <?= EditionInfo::checkEditionInfo($RemasterTitle, EditionInfo::edition_dolby_vision) ? "checked" : "" ?> />
-                            <label class="Checkbox-label" for="dolby_vision"><?= "杜比视界" ?></label>
+                            <label class="Checkbox-label" for="dolby_vision"><?= t('server.editioninfo.dolby_vision') ?></label>
                         </div>
                         <span id="video_warning" class="important_text"></span>
                     </td>
                 </tr>
                 <tr class="Form-row">
-                    <td class="Form-label"><?= "高级音频特性" ?><span class="u-colorWarning"></span>:</td>
+                    <td class="Form-label"><?= t('server.torrents.advanced_audio_feature') ?><span class="u-colorWarning"></span>:</td>
                     <td class="Form-inputs Form-errorAudio">
                         <div class="Checkbox hidden">
                             <input class="Input" type="checkbox" id="audio_51" name="audio_51" <?= false ? "checked" : "" ?> />
-                            <label class="Checkbox-label" for="audio_51"><?= "5.1声道" ?></label>
+                            <label class="Checkbox-label" for="audio_51"><?= t('server.editioninfo.51_surround') ?></label>
                         </div>
                         <div class="Checkbox hidden">
                             <input class="Input" type="checkbox" id="audio_71" name="audio_71" <?= false ? "checked" : "" ?> />
-                            <label class="Checkbox-label" for="audio_71"><?= "7.1声道" ?></label>
+                            <label class="Checkbox-label" for="audio_71"><?= t('server.editioninfo.71_surround') ?></label>
                         </div>
                         <div class="Checkbox">
                             <input class="Input" type="checkbox" id="dts_x" name="dts_x" <?= EditionInfo::checkEditionInfo($RemasterTitle, EditionInfo::edition_dts_x) ? "checked" : "" ?> />
-                            <label class="Checkbox-label" for="dts_x"><?= "DTS:X" ?></label>
+                            <label class="Checkbox-label" for="dts_x"><?= t('server.editioninfo.dts_x') ?></label>
                         </div>
                         <div class="Checkbox">
                             <input class="Input" type="checkbox" id="dolby_atmos" name="dolby_atmos" <?= EditionInfo::checkEditionInfo($RemasterTitle, EditionInfo::edition_dolby_atmos)  ? "checked" : "" ?> />
-                            <label class="Checkbox-label" for="dolby_atmos"><?= "杜比全景声" ?></label>
+                            <label class="Checkbox-label" for="dolby_atmos"><?= t('server.editioninfo.dolby_atmos') ?></label>
                         </div>
                         <span id="audio_warning" class="important_text"></span>
                     </td>
@@ -1014,16 +1014,39 @@ class TORRENT_FORM {
                                 <div class="Checkbox">
                                     <input class="Input" type="checkbox" id="jinzhuan" name="jinzhuan" <? if ($Jinzhuan) {
                                                                                                             echo 'checked="checked" ';
-                                                                                                        } ?><?= !$Buy && !$Diy && !check_perms("users_mod") ? "disabled" : "" ?> />
+                                                                                                        } ?><?= !$Buy && !$Diy ? "disabled" : "" ?> />
                                     <label class="Checkbox-label" for="jinzhuan"><?= t('server.upload.jinzhuan') ?></label>
                                 </div>
+                                <?
+                                if (count($ReleaseGroups) > 0) {
+                                ?>
+                                    <div class="SelectInput">
+                                        <select class="Input" id="makers" name="makers" <?= !$Buy && !$Diy ? "disabled" : "" ?>>
+                                            <option class="Select-option" value=""><?= t('server.torrents.release_group') ?></option>
+                                            <?
+                                            foreach ($ReleaseGroups as $ReleaseGroup) {
+                                                $Name = $ReleaseGroup['Name'];
+                                                $ID = $ReleaseGroup['ID'];
+                                                echo "\t\t\t\t\t\t<option value=\"$ID\"";
+                                                if ($ID == $Makers) {
+                                                    echo ' selected="selected"';
+                                                }
+                                                echo ">$Name</option>\n";
+                                            }
+                                            ?>
+                                        </select>
+                                    </div>
+                                <?
+                                }
+                                ?>
+
                             </div>
                             <div style="padding: 10px 0 0;"><?= t('server.upload.marks_warning') ?></div>
                             <div>
                                 <strong class="how_to_toggle_container">[<a href="javascript:void(0);" onclick="$('#marks_how_to_blockquote').new_toggle();"><strong class="how_to_toggle"><?= t('server.upload.marks_how_to_toggle') ?></strong></a>]</strong>
                             </div>
-
                         </td>
+
                     </tr>
                     <tr class="Form-row">
                         <td class="Form-label">

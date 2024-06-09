@@ -96,13 +96,13 @@ globalapp.uploadRemoveAllArtistFields = function removeAllArtistFields() {
 
 globalapp.uploadAlterOriginal = function AlterOriginal() {
   if (!$('input[name=buy]').raw().checked && !$('input[name=diy]').raw().checked) {
-    //$('input[name=allow]').raw().disabled = true
     $('input[name=jinzhuan]').raw().disabled = true
-    //$('input[name=allow]').raw().checked = false
     $('input[name=jinzhuan]').raw().checked = false
+    $('select[name=makers]').raw().disabled = true
+    $('select[name=makers]').raw().value = ''
   } else {
-    //$('input[name=allow]').raw().disabled = false
     $('input[name=jinzhuan]').raw().disabled = false
+    $('select[name=makers]').raw().disabled = false
   }
 }
 

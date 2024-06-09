@@ -19,10 +19,10 @@ if (!empty($_GET['letter'])) {
     $Order = "Title";
     $Way = "Ascending";
 } else {
-
-
     // What are we looking for? Let's make sure it isn't dangerous.
     $Search = db_string(trim($_GET['search']));
+
+    $Type = $_GET['type'];
 
     if (!in_array($Type, array('Title', 'Body'))) {
         $Type = 'Title';
@@ -30,11 +30,6 @@ if (!empty($_GET['letter'])) {
 
     // Break search string down into individual words
     $Words = explode(' ', $Search);
-
-    $Type = $TypeTable[$_GET['type']];
-    if (!$Type) {
-        $Type = 'Title';
-    }
 
     $Order = $OrderTable[$_GET['order']];
     if (!$Order) {

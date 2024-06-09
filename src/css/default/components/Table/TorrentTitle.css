@@ -24,6 +24,10 @@ TorrentTitle TorrentTitle--standalone   # settings - torrent title
   line-height: 1.5em;
 }
 
+.TorrentTitle-item.official_release_group {
+  background-color: #e80128;
+}
+
 .TorrentTitle-item.torrent_discount.free {
   background-color: #0055ff;
 }

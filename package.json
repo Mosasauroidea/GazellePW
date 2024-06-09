@@ -19,7 +19,7 @@
     "lint:php:fix": "./.bin/phpcbf",
     "pre-commit": "yarn lint:php:fix"
   },
-  "license": "Unlicense",
+  "license": "MIT",
   "dependencies": {
     "classnames": "^2.3.1",
     "debug": "^4.3.1",

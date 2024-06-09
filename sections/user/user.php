@@ -307,12 +307,23 @@ $OverallRank = UserRank::overall_score($UploadedRank, $DownloadedRank, $UploadsR
 
 $DB->query("select count(1) from thumb where ToUserID = $UserID");
 list($ThumbCount) = $DB->next_record();
+
+$ReleaseGroup = Users::get_release_group($UserID)
 ?>
 <div class="LayoutBody">
     <div class="BodyHeader">
         <h2 class="BodyHeader-nav"><?= Users::format_username($UserID, true, true, true, false, true, false, true) ?>
             <span class="floatright" id="thumb"><?= icon("Common/like") ?><?= $ThumbCount ? ' ' . $ThumbCount : '' ?></span>
         </h2>
+        <?
+        if (!empty($ReleaseGroup)) {
+        ?>
+            <div class="BodyHeader-subNav">
+                <?= t('server.user.member_of_group', ['Values' => [$ReleaseGroup['Name']]]) ?>
+            </div>
+        <?
+        }
+        ?>
     </div>
     <div class="BodyNavLinks">
         <? if (!$OwnProfile) { ?>

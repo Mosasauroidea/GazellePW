@@ -8,11 +8,11 @@ function updateYearMovie($fromYear, $toYear, $interval) {
     $DB->query("SELECT ID, IMDBID, DoubanID, Year from torrents_group where MOD(UNIX_TIMESTAMP(Time),$interval) = " . (date('z') + 1) % $interval . " and Year > " . $fromYear . " and Year <= " . $toYear);
     $Groups = G::$DB->to_array();
     foreach ($Groups as $Group) {
-        updateMovieInfo($Group);
+        updateMovieInfo2($Group);
     }
 }
 
-function updateMovieInfo($Group) {
+function updateMovieInfo2($Group) {
     $IMDBID = $Group['IMDBID'];
     $GroupID = $Group['ID'];
     $DoubanID = $Group['DoubanID'];
