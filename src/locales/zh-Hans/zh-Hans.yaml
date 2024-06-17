@@ -8305,6 +8305,8 @@ client.stats.geographical_distribution: |-
   地理位置分布
 server.common.time_length: |-
   时长
+server.comment.verbal: |-
+  口头的
 server.forums.edit_post: |-
   编辑帖子
 server.user.seeding_size: |-
@@ -8337,8 +8339,10 @@ client.stats.uv: |-
   日活跃用户数
 client.stats.seeding_user: |-
   做种的用户数
+server.forums.verbal: |-
+  口头的
 server.wiki.created: |-
-  创建时间
+  提交时间
 server.wiki.edited: |-
   编辑时间
 server.user.snatches: |-
