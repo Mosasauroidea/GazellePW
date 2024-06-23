@@ -259,20 +259,31 @@ View::show_header($Title, 'browse,comments,torrent,bbcode,recommend,cover_art,su
         <div class="Sidebar LayoutMainSidebar-sidebar">
             <div class="SidebarTags SidebarItem Box">
                 <div class="SidebarItem-header Box-header">
-                    <span><?= t('server.torrents.tag') ?></span>
-                    <?
-                    $DeletedTag = $Cache->get_value("deleted_tags_$GroupID" . '_' . $LoggedUser['ID']);
-                    if (!empty($DeletedTag)) { ?>
-                        <form style="display: none;" id="undo_tag_delete_form" name="tags" action="torrents.php" method="post">
-                            <input type="hidden" name="action" value="add_tag" />
-                            <input type="hidden" name="auth" value="<?= $LoggedUser['AuthKey'] ?>" />
-                            <input type="hidden" name="groupid" value="<?= $GroupID ?>" />
-                            <input type="hidden" name="tagname" value="<?= $DeletedTag ?>" />
-                            <input type="hidden" name="undo" value="true" />
-                        </form>
-                        <a class="brackets" href="#" onclick="$('#undo_tag_delete_form').raw().submit(); return false;"><?= t('server.torrents.undo_delete') ?></a>
+                    <div class="SidebarItem-headerTitle">
+                        <span><?= t('server.torrents.tag') ?></span>
+                        <?
+                        $DeletedTag = $Cache->get_value("deleted_tags_$GroupID" . '_' . $LoggedUser['ID']);
+                        if (!empty($DeletedTag)) { ?>
+                            <form style="display: none;" id="undo_tag_delete_form" name="tags" action="torrents.php" method="post">
+                                <input type="hidden" name="action" value="add_tag" />
+                                <input type="hidden" name="auth" value="<?= $LoggedUser['AuthKey'] ?>" />
+                                <input type="hidden" name="groupid" value="<?= $GroupID ?>" />
+                                <input type="hidden" name="tagname" value="<?= $DeletedTag ?>" />
+                                <input type="hidden" name="undo" value="true" />
+                            </form>
+                            <a class="brackets" href="#" onclick="$('#undo_tag_delete_form').raw().submit(); return false;"><?= t('server.torrents.undo_delete') ?></a>
 
-                    <?              } ?>
+                        <?              } ?>
+                    </div>
+                    <div class="SidebarItem-headerActions">
+                        <?
+                        if (empty($LoggedUser['DisableTagging'])) {
+                        ?>
+                            <a class="" onclick="$('#tag_edit_form').gtoggle(); return false;" href="#"><?= t('server.common.add') ?></a>'
+                        <?
+                        }
+                        ?>
+                    </div>
                 </div>
 
                 <?
@@ -319,7 +330,7 @@ View::show_header($Title, 'browse,comments,torrent,bbcode,recommend,cover_art,su
             <?
             if (empty($LoggedUser['DisableTagging'])) {
             ?>
-                <div class="SidebarItemTagAdd SidebarItem Box">
+                <div class="SidebarItemTagAdd SidebarItem Box hidden" id="tag_edit_form">
                     <div class="SidebarItem-header Box-header">
                         <div class="SidebarItem-headerTitle">
                             <span><?= t('server.torrents.add_tag') ?></span>
@@ -363,7 +374,14 @@ View::show_header($Title, 'browse,comments,torrent,bbcode,recommend,cover_art,su
                             <span><?= t('server.common.artist') ?></span>
                         </div>
                         <div class="SidebarItem-headerActions">
-                            <?= check_perms('torrents_edit') ? '<a class="u-hoverToShow-hide" onclick="ArtistManager(); return false;" href="#">' . t('server.common.edit') . '</a>' : '' ?>
+                            <?
+                            if (check_perms('torrents_add_artist')) {
+                            ?>
+                                <a class="" onclick="$('#add_artist_form').gtoggle(); return false" href="#"><?= t('server.common.add') ?></a>
+                            <?
+                            }
+                            ?>
+                            <?= check_perms('torrents_edit') ? '<a class="" onclick="ArtistManager(); return false;" href="#">' . t('server.common.edit') . '</a>' : '' ?>
                         </div>
                     </div>
                     <ul class="SidebarItem-body Box-body SidebarList" id="artist_list">
@@ -495,7 +513,7 @@ View::show_header($Title, 'browse,comments,torrent,bbcode,recommend,cover_art,su
                     </ul>
                 </div>
                 <? if (check_perms('torrents_add_artist')) { ?>
-                    <div class="SidebarItemArtistAdd SidebarItem Box">
+                    <div class="SidebarItemArtistAdd SidebarItem Box hidden" id="add_artist_form">
                         <div class="SidebarItem-header Box-header u-hoverToShow-hover">
                             <span><?= t('server.torrents.add_artist') ?></span>
                         </div>
@@ -546,7 +564,7 @@ View::show_header($Title, 'browse,comments,torrent,bbcode,recommend,cover_art,su
 			JOIN collages_torrents AS ct ON ct.CollageID = c.ID
 		WHERE ct.GroupID = '$GroupID'
 			AND Deleted = '0'
-			AND CategoryID != '0'");
+			AND CategoryID != '$PersonalCollageCategoryCat'");
                     $Collages = $DB->to_array();
                     $Cache->cache_value("torrent_collages_$GroupID", $Collages, 600 * 6);
                 }
@@ -564,13 +582,18 @@ View::show_header($Title, 'browse,comments,torrent,bbcode,recommend,cover_art,su
                 ?>
                     <div class="SidebarItem Box">
                         <div class="SidebarItem-header Box-header">
+                            <div class="SidebarItem-headerTitle">
+                                <?= t('server.collages.collages') ?>
+                                <?= $SeeAll ?>
+                            </div>
+                            <div class="SidebarItem-headerActions">
+                                <a class="" onclick="$('#add_collage_form').gtoggle(); return false;" href="#"><?= t('server.common.add') ?></a>
+                            </div>
+                        </div>
+                        <ul class="SidebarList SidebarItem-body Box-body">
                             <?= t('server.torrents.this_album_is_in_collages', ['Values' => [
                                 t('server.torrents.this_album_is_in_collages_count', ['Count' => $Collages, 'Values' => [number_format(count($Collages))]])
                             ]]) ?>
-
-                            <?= $SeeAll ?>
-                        </div>
-                        <ul class="SidebarList SidebarItem-body Box-body">
                             <? foreach ($Indices as $i) {
                                 list($CollageName, $CollageTorrents, $CollageID) = $Collages[$i];
                                 unset($Collages[$i]);
@@ -599,7 +622,7 @@ View::show_header($Title, 'browse,comments,torrent,bbcode,recommend,cover_art,su
 			JOIN collages_torrents AS ct ON ct.CollageID = c.ID
 		WHERE ct.GroupID = '$GroupID'
 			AND Deleted = '0'
-			AND CategoryID = '0'");
+			AND CategoryID = '$PersonalCollageCategoryCat'");
                     $PersonalCollages = $DB->to_array(false, MYSQLI_NUM);
                     $Cache->cache_value("torrent_collages_personal_$GroupID", $PersonalCollages, 600 * 6);
                 }
@@ -619,15 +642,22 @@ View::show_header($Title, 'browse,comments,torrent,bbcode,recommend,cover_art,su
                 ?>
                     <div class="SidebarItem Box">
                         <div class="SidebarItem-header Box-header">
+                            <div class="SidebarItem-headerTitle">
+                                <?= t('server.collages.personal_collage') ?>
+                                <?= $SeeAll ?>
+                            </div>
+                            <div class="SidebarItem-headerActions">
+                                <a class="" onclick="$('#add_collage_form').gtoggle(); return false;" href="#"><?= t('server.common.add') ?></a>
+                            </div>
+
+                        </div>
+
+                        <ul class="SidebarList SidebarItem-body Box-body">
                             <?= t('server.torrents.this_album_is_in_personal_collages', ['Values' => [
                                 t('server.torrents.this_album_is_in_personal_collages_count', ['Count' => count($PersonalCollages), 'Values' => [
                                     number_format(count($PersonalCollages))
                                 ]])
                             ]]) ?>
-                            <?= $SeeAll ?>
-                        </div>
-
-                        <ul class="SidebarList SidebarItem-body Box-body">
                             <? foreach ($Indices as $i) {
                                 list($CollageName, $CollageTorrents, $CollageID) = $PersonalCollages[$i];
                                 unset($PersonalCollages[$i]);

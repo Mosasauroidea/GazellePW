@@ -69,7 +69,7 @@
         search(true)
     });
 </script>
-<div class="SidebarItemAddCollage SidebarItem Box">
+<div class="SidebarItemAddCollage SidebarItem Box hidden" id="add_collage_form">
     <div class="SidebarItem-header Box-header">
         <span><?= t('server.collages.add_to_collage') ?></span>
     </div>
