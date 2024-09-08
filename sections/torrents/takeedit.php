@@ -229,12 +229,12 @@ $SQL .= "
         SpecialSub = $T[SpecialSub],
         MediaInfo = $T[MediaInfo],
         SubtitleType = $T[SubtitleType],
-        Note = $T[Note],
 		Allow = $T[Allow],";
 if (check_perms("users_mod")) {
     $SQL .= "
 		Buy = $T[Buy],
 		Jinzhuan = $T[Jinzhuan],
+        Note = $T[Note],
 		Diy = $T[Diy],";
 }
 
