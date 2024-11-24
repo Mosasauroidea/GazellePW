@@ -299,7 +299,7 @@ class TORRENT_FORM {
                 $Buy = isset($Torrent['Buy']) ? $Torrent['Buy'] : null;
                 $Diy = isset($Torrent['Diy']) ? $Torrent['Diy'] : null;
                 $Makers = isset($Torrent['Makers']) ? $Torrent['Makers'] : null;
-                $ReleaseGroups = check_perms('users_mod') ? Users::get_all_release_groups() : [Users::get_release_group(G::$LoggedUser['ID'])];
+                $ReleaseGroups = check_perms('users_mod') ? Users::get_all_release_groups() : Users::get_release_group(G::$LoggedUser['ID']);
                 $Jinzhuan = isset($Torrent['Jinzhuan']) ? $Torrent['Jinzhuan'] : null;
                 $IMDBID = isset($Torrent['IMDBID']) ? $Torrent['IMDBID'] : null;
                 $SpecialSub = isset($Torrent['SpecialSub']) ? $Torrent['SpecialSub'] : null;

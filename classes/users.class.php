@@ -866,14 +866,15 @@ class Users {
     }
 
     public static function get_release_group(int $UserID): ?array {
+        $Ret = [];
         foreach (CONFIG['RELEASE_GROUP_MEMBER'] as $ID => $Members) {
             foreach ($Members as $Member) {
                 if ($Member == $UserID) {
-                    return self::get_release_group_by_id($ID);
+                    $Ret[] = self::get_release_group_by_id($ID);
                 }
             }
         }
-        return [];
+        return $Ret;
     }
 
     public static function get_all_release_groups(): ?array {

@@ -178,10 +178,36 @@ if (check_perms('users_mod')) { // Person viewing is a staff member
     }
 
     list(
-        $Username, $Email, $LastAccess, $IP, $Class, $Uploaded, $Downloaded, $BonusPoints,
-        $RequiredRatio, $Enabled, $Paranoia, $Invites, $CustomTitle, $torrent_pass,
-        $DisableLeech, $JoinDate, $Info, $Avatar, $FLTokens, $Donor, $Found, $Warned,
-        $ForumPosts, $InviterID, $DisableInvites, $InviterName, $InfoTitle, $BonusUploaded, $TotalUploads, $Uploads
+        $Username,
+        $Email,
+        $LastAccess,
+        $IP,
+        $Class,
+        $Uploaded,
+        $Downloaded,
+        $BonusPoints,
+        $RequiredRatio,
+        $Enabled,
+        $Paranoia,
+        $Invites,
+        $CustomTitle,
+        $torrent_pass,
+        $DisableLeech,
+        $JoinDate,
+        $Info,
+        $Avatar,
+        $FLTokens,
+        $Donor,
+        $Found,
+        $Warned,
+        $ForumPosts,
+        $InviterID,
+        $DisableInvites,
+        $InviterName,
+        $InfoTitle,
+        $BonusUploaded,
+        $TotalUploads,
+        $Uploads
     ) = $DB->next_record(MYSQLI_NUM, array(10, 12));
 }
 
@@ -308,7 +334,7 @@ $OverallRank = UserRank::overall_score($UploadedRank, $DownloadedRank, $UploadsR
 $DB->query("select count(1) from thumb where ToUserID = $UserID");
 list($ThumbCount) = $DB->next_record();
 
-$ReleaseGroup = Users::get_release_group($UserID)
+$ReleaseGroups = Users::get_release_group($UserID);
 ?>
 <div class="LayoutBody">
     <div class="BodyHeader">
@@ -316,10 +342,11 @@ $ReleaseGroup = Users::get_release_group($UserID)
             <span class="floatright" id="thumb"><?= icon("Common/like") ?><?= $ThumbCount ? ' ' . $ThumbCount : '' ?></span>
         </h2>
         <?
-        if (!empty($ReleaseGroup)) {
+        if (!empty($ReleaseGroups)) {
         ?>
             <div class="BodyHeader-subNav">
-                <?= t('server.user.member_of_group', ['Values' => [$ReleaseGroup['Name']]]) ?>
+                <?= t('server.user.member_of_group', ['Values' => [$ReleaseGroups[0]['Name']]]) // temp select first 
+                ?>
             </div>
         <?
         }
