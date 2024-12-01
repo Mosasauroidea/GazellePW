@@ -32,6 +32,7 @@ $Properties['Scene'] = (isset($_POST['scene'])) ? 1 : 0;
 $Properties['TorrentID'] = $TorrentID;
 $Properties['Jinzhuan'] = (isset($_POST['jinzhuan'])) ? 1 : 0;
 $Properties['Diy'] = (isset($_POST['diy'])) ? 1 : 0;
+$Properties['Makers'] = $_POST['makers'];
 $Properties['Buy'] = (isset($_POST['buy'])) ? 1 : 0;
 $Properties['Allow'] = (isset($_POST['allow'])) ? 1 : 0;
 $Properties['BadTags'] = (isset($_POST['bad_tags'])) ? 1 : 0;
@@ -66,7 +67,6 @@ if ($Properties['Resolution'] == 'Other' && $_POST['resolution_width'] && $_POST
     $Properties['Resolution'] = $_POST['resolution_width'] . '×' . $_POST['resolution_height'];
 }
 $Properties['Subtitles'] = implode(',', $_POST['subtitles']);
-$Properties['Makers'] = $_POST['makers'];
 $Properties['Processing'] = $_POST['processing'];
 if ($_POST['processing_other']) {
     $Properties['Processing'] = $_POST['processing_other'];
@@ -218,7 +218,6 @@ $SQL .= "
 		Container = $T[Container],
 		Resolution = $T[Resolution],
 		Subtitles = $T[Subtitles],
-		Makers = $T[Makers],
 		Scene = $T[Scene],
 		RemasterTitle = $T[RemasterTitle],
 		RemasterCustomTitle = $T[RemasterCustomTitle],
@@ -235,6 +234,7 @@ if (check_perms("users_mod")) {
 		Buy = $T[Buy],
 		Jinzhuan = $T[Jinzhuan],
         Note = $T[Note],
+        Makers = $T[Makers],
 		Diy = $T[Diy],";
 }
 
