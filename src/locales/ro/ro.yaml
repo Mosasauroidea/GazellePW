@@ -1,0 +1,188 @@
+client.upload.copied: |-
+  Copiat
+client.common.save: |-
+  Salveaza
+client.common.cancel: |-
+  Renunta
+client.upload.uploading: |-
+  Încărcare:
+client.bbcode.edit: |-
+  Editaţi
+client.bbcode.loading: |-
+  Încărcare...
+client.bbcode.preview: |-
+  Previzualizare
+client.common.actor: |-
+  Actor
+client.common.are_you_sure_cannot_undone: |-
+  Ești sigur că vrei să faci asta? Acest lucru nu poate fi anulat!
+client.common.are_you_sure_you_want_to_cancel: |-
+  Ești sigur că dorești să anulezi?
+client.common.are_you_sure_you_wish_to_delete_this_post: |-
+  Sunteti sigur ca vreti sa stergeti acest post?
+client.common.check_all: |-
+  Bifează tot
+client.common.cinematographer: |-
+  Cinematograf
+client.common.collapse_this_group: |-
+  Restrângeți acest grup. Țineți apăsat [Command] <em>(Mac)</em> sau [Ctrl] <em>(PC)</em> în timp ce faceți clic pentru a restrânge toate grupurile {{section}}
+client.common.composer: |-
+  Compozitor
+client.common.confirm_purchase: |-
+  Ești sigur că vrei să cumperi {{item}}?
+client.common.confirm_username: |-
+  Introdu numele de utilizator pentru a da tokeni către:
+client.common.copied: |-
+  Copiat
+client.common.director: |-
+  Director
+client.common.expand_this_group: |-
+  Extinde acest grup. Țineți apăsat [Command] <em>(Mac)</em> sau [Ctrl] <em>(PC)</em> în timp ce faceți clic pentru a extinde toate grupurile {{section}}
+client.common.hide: |-
+  Ascunde
+client.common.in_this_release_type: |-
+  în acest tip de versiune.
+client.common.like: |-
+  Apreciază
+client.common.on_this_page: |-
+  Pe această pagină.
+client.common.pm_user_on_edit: |-
+  <span id="pmbox{{postId}}"><label>PM către user la editare? <input type="checkbox" name="pm" value="1" /></label></span>
+client.common.producer: |-
+  Producător
+client.common.request_has_been_unresolved: |-
+  Solicitarea a fost nerezolvată. Vă rugăm să reîmprospătați browser-ul pentru a-l vedea.
+client.common.uncheck_all: |-
+  Deselectează tot
+client.common.view: |-
+  Vizualizare
+client.common.writer: |-
+  Scriitor
+client.error.imdb_unknown_error: |-
+  Eroare necunoscută. Contactează staff-ul.
+client.error.invalid_imdb_link_note: |-
+  Vă rugăm să introduceţi un link IMDb valid cum ar fi "tt1234567" sau "https://www.imdb.com/title/tt1234567".
+client.error.request_torrent_group_exists_note: |-
+  Filmul deja <a href='/torrents.php?id={{groupID}}'>există</a> pe site. Vă rugăm să vă asigurați că formatul pe care îl solicitați nu există și să folosiți linkul [format solicitare] pentru a solicita formatul de așteptare pentru film.
+client.error.torrent_group_exists_note: |-
+  Filmul deja <a href='/torrents.php?id={{groupID}}'>există</a> pe site. Vă rugăm să vă asigurați că formatul pe care îl solicitați nu există și să folosiți linkul [format solicitare] pentru a solicita formatul de așteptare pentru film.
+client.other.client_whitelist: |-
+  Lista cu clienții permiși
+client.screenshot_comparison.gpw_helper_not_installed: |-
+  Vă rugăm să instalați <a href="https://greasyfork.org/scripts/445653-gpw-helper/code/GPW-Helper.user.js" target="_blank">GPW Helper</a> și să reîncărcați pagina
+client.screenshot_comparison.help: |-
+  Apăsați ? pentru a citi ajutorul
+client.screenshot_comparison.help_title: |-
+  Comparație de capturi de ecran
+client.screenshot_comparison.loading: |-
+  Încărcare...
+client.screenshot_comparison.pixel_compare: |-
+  Comparare pixeli
+client.staffpm.assign_assigned: |-
+  Conversaţie atribuită cu succes.
+client.staffpm.error: |-
+  Ceva nu a funcţionat corect.
+client.staffpm.response_created: |-
+  Răspuns creat cu sucess
+client.staffpm.response_deleted: |-
+  Răspuns șters cu succes.
+client.staffpm.response_edited: |-
+  Răspuns editat cu succes.
+client.stats.torrentByDay: |-
+  Încărcări zilnice de torrent
+client.stats.torrentByMonth: |-
+  Încărcări lunare ale torrentelor
+client.stats.torrentByYear: |-
+  Încărcări Anuale Torrent
+client.torrent_table.collapse_edition: |-
+  Restrângeți acest grup. Țineți apăsat [Command] <em>(Mac)</em> sau [Ctrl] <em>(PC)</em> în timp ce faceți clic pentru a restrânge toate grupurile {{section}}.
+client.torrent_table.expand_edition: |-
+  Extinde acest grup. Țineți apăsat [Command] <em>(Mac)</em> sau [Ctrl] <em>(PC)</em> în timp ce faceți clic pentru a extinde toate grupurile {{section}}
+client.upload.codec_required: |-
+  Te rog selecteaza un codec.
+client.upload.container_required: |-
+  Vă rugăm selectaţi un container.
+client.upload.desc_img_3_png: |-
+  Cel puţin trei capturi de ecran PNG sunt necesare, vezi <a href="wiki.php?action=article&id=51" target="_blank">Ajutor</a>.
+client.upload.imdb_link_required: |-
+  Este necesar un link sau un ID IMDb cu un format corect!
+server.apply.edit_role: |-
+  Editaţi
+server.artist.1021: |-
+  Director
+server.artist.1022: |-
+  Scriitor
+server.artist.1023: |-
+  Producător
+server.artist.1024: |-
+  Compozitor
+server.artist.1025: |-
+  Cinematograf
+server.artist.1026: |-
+  Actor
+server.artist.loading: |-
+  Încărcare...
+server.artist.view: |-
+  Vizualizare
+server.badges.badge_preview: |-
+  Previzualizare
+server.common.director: |-
+  Director
+server.common.edit: |-
+  Editaţi
+server.common.hide: |-
+  Ascunde
+server.forums.check_all: |-
+  Bifează tot
+server.forums.like: |-
+  Apreciază
+server.forums.view: |-
+  Vizualizare
+server.index.hide: |-
+  Ascunde
+server.sitehistory.edit: |-
+  Editaţi
+server.staffpm.preview: |-
+  Previzualizare
+server.tools.client_whitelist: |-
+  Lista cu clienții permiși
+server.tools.view: |-
+  Vizualizare
+server.top10.hide: |-
+  Ascunde
+server.torrents.cinematographer: |-
+  Cinematograf
+server.torrents.composer: |-
+  Compozitor
+server.torrents.director: |-
+  Director
+server.torrents.hide: |-
+  Ascunde
+server.torrents.like: |-
+  Apreciază
+server.torrents.movie_producer: |-
+  Producător
+server.torrents.writer: |-
+  Scriitor
+server.upload.cinematographer: |-
+  Cinematograf
+server.upload.composer: |-
+  Compozitor
+server.upload.copied: |-
+  Copiat
+server.upload.director: |-
+  Director
+server.upload.movie_producer: |-
+  Producător
+server.upload.preview: |-
+  Previzualizare
+server.upload.writer: |-
+  Scriitor
+server.user.donorforum_4: |-
+  Previzualizare
+server.user.view: |-
+  Vizualizare
+server.userhistory.hide: |-
+  Ascunde
+server.wiki.article_edit: |-
+  Editaţi
