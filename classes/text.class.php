@@ -5,8 +5,42 @@ class Text {
      * @var array $ValidTags
      */
     private static $ValidTags = array(
-        'b' => 0, 'u' => 0, 'i' => 0, 's' => 0, '*' => 0, '#' => 0, 'artist' => 0, 'user' => 0, 'n' => 0, 'inlineurl' => 0, 'inlinesize' => 1, 'headline' => 1, 'align' => 1, 'color' => 1, 'colour' => 1, 'size' => 1, 'url' => 1, 'img' => 1, 'quote' => 1, 'pre' => 1, 'code' => 1, 'tex' => 0, 'hide' => 1, 'spoiler' => 1, 'plain' => 0, 'important' => 0, 'torrent' => 0, 'rule' => 0, 'mature' => 1, 'table' => 1, 'tr' => 1, 'td' => 1, 'lang' => 1,
-        'mediainfo' => 0, 'bdinfo' => 0, 'comparison' => 10
+        'b' => 0,
+        'u' => 0,
+        'i' => 0,
+        's' => 0,
+        '*' => 0,
+        '#' => 0,
+        'artist' => 0,
+        'user' => 0,
+        'n' => 0,
+        'inlineurl' => 0,
+        'inlinesize' => 1,
+        'headline' => 1,
+        'align' => 1,
+        'color' => 1,
+        'colour' => 1,
+        'size' => 1,
+        'url' => 1,
+        'img' => 1,
+        'quote' => 1,
+        'pre' => 1,
+        'code' => 1,
+        'tex' => 0,
+        'hide' => 1,
+        'spoiler' => 1,
+        'plain' => 0,
+        'important' => 0,
+        'torrent' => 0,
+        'rule' => 0,
+        'mature' => 1,
+        'table' => 1,
+        'tr' => 1,
+        'td' => 1,
+        'lang' => 1,
+        'mediainfo' => 0,
+        'bdinfo' => 0,
+        'comparison' => 10
     );
 
     /**
@@ -782,7 +816,7 @@ class Text {
             }
         }
         foreach ($Rows as $key => $Row) {
-            preg_match('/(.*Video (?:\([0-9]\))?) *([0-9.\(\) ]* kbps) *(.*)/mi', $Row, $matches);
+            preg_match('/(.*Video (?:\([0-9,]\))?) *([0-9.\(\),]* kbps) *(.*)/mi', $Row, $matches);
             list(, $Codec, $Bitrate, $Desc) =  $matches;
             $Ret[] = array_slice($matches, 1);
         }
@@ -882,7 +916,7 @@ class Text {
                         $Str .= '<a href="user.php?action=search&amp;search=' . urlencode($Block['Val']) . '">' . $Block['Val'] . '</a>';
                         break;
                     case 'artist':
-                        $Str .= '<a href="artist.php?artistname=' . urlencode(Format::undisplay_str($Block['Val'])) . '">' . $Block['Val'] . '</a>';
+                        $Str .= '<a href="artist.php?artistname=' . urlencode($Block['Val']) . '">' . $Block['Val'] . '</a>';
                         break;
                     case 'rule':
                         $Rule = trim(strtolower($Block['Val']));

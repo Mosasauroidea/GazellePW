@@ -1,12 +1,11 @@
 FROM debian:buster-slim
 
-
 RUN apt update
 RUN apt install -y wget cron curl mariadb-client
 RUN wget https://repo.manticoresearch.com/manticore-repo.noarch.deb
 RUN dpkg -i manticore-repo.noarch.deb
 RUN apt update
-RUN apt install -y manticore manticore-columnar-lib
+RUN apt install -y manticore=5.0.2-220530-348514c86 manticore-server=5.0.2-220530-348514c86 manticore-tools=5.0.2-220530-348514c86 manticore-dev=5.0.2-220530-348514c86 manticore-server-core=5.0.2-220530-348514c86  manticore-common=5.0.2-220530-348514c86
 
 
 RUN mkdir -pv /var/lib/manticore/data/ /var/lib/manticore/conf/

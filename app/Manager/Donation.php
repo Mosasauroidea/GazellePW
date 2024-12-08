@@ -330,7 +330,7 @@ class Donation extends \Gazelle\Base {
 
     public static function rankLabel($rank, $specialRank, $ShowOverflow = true) {
         if ($specialRank == MAX_SPECIAL_RANK) {
-            return '∞ [' . t('server.donate.diamond_rank') . ']';
+            return '∞ (' . t('server.donate.diamond_rank') . ')';
         }
         $label = $rank >= MAX_RANK ? MAX_RANK : $rank;
         $overflow = $rank - $label;
@@ -338,15 +338,15 @@ class Donation extends \Gazelle\Base {
             $label .= " (+$overflow)";
         }
         if ($rank >= 6) {
-            $label .= ' [' . t('server.donate.gold_rank') . ']';
+            $label .= ' (' . t('server.donate.gold_rank') . ')';
         } elseif ($rank >= 4) {
-            $label .= ' [' . t('server.donate.silver_rank') . ']';
+            $label .= ' (' . t('server.donate.silver_rank') . ')';
         } elseif ($rank >= 3) {
-            $label .= ' [' . t('server.donate.bronze_rank') . ']';
+            $label .= ' (' . t('server.donate.bronze_rank') . ')';
         } elseif ($rank >= 2) {
-            $label .= ' [' . t('server.donate.copper_rank') . ']';
+            $label .= ' (' . t('server.donate.copper_rank') . ')';
         } elseif ($rank >= 1) {
-            $label .= ' [' . t('server.donate.red_rank') . ']';
+            $label .= ' (' . t('server.donate.red_rank') . ')';
         }
         return $label;
     }

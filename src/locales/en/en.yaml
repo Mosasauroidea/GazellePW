@@ -7244,9 +7244,9 @@ server.user.staff_notes: |-
 server.user.staff_pm: |-
   Staff PM
 server.user.staff_tools: |-
-  Staff tools
+  Staff Tool
 server.user.statistics: |-
-  Statistics
+  User Stats
 server.user.stats: |-
   Stats
 server.user.style: |-
@@ -7366,9 +7366,9 @@ server.user.traditional: |-
 server.user.tree: |-
   Tree
 server.user.true_downloaded_title: |-
-  True downloaded (The total downloaded if you did not use freeleech tokens, from June 1st, 2020)
+  True downloaded
 server.user.true_uploaded_title: |-
-  True Uploaded (Uploaded bought from Bonus Points Shop excluded)
+  True Uploaded
 server.user.two_factor_authentication: |-
   Two-factor Authentication
 server.user.two_factor_authentication_note: |-
@@ -8509,3 +8509,7 @@ server.reports.the_comment: |-
   the comment
 server.index.upload_rank: |-
   Uploaded Ranking
+server.user.link_user_with: |-
+  Link this user with
+server.user.all_site: |-
+  site percent

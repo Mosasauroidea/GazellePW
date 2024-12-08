@@ -1,6 +1,5 @@
 <?
-function link_users($UserID, $TargetID, $IgnoreComments) {
-
+function link_users($UserID, $TargetID) {
     global $DB, $LoggedUser;
 
     authorize();
@@ -70,14 +69,12 @@ function link_users($UserID, $TargetID, $IgnoreComments) {
         $DB->query("INSERT INTO users_dupes (UserID, GroupID) VALUES ($UserID, $GroupID)");
     }
 
-    if (!$IgnoreComments) {
-        $AdminComment = sqltime() . " - Linked accounts updated: [user]" . $UserInfo['Username'] . "[/user] and [user]" . $TargetInfo['Username'] . "[/user] linked by " . $LoggedUser['Username'];
-        $DB->query("
+    $AdminComment = sqltime() . " - Linked accounts updated: [user]" . $UserInfo['Username'] . "[/user] and [user]" . $TargetInfo['Username'] . "[/user] linked by " . $LoggedUser['Username'];
+    $DB->query("
 			UPDATE users_info AS i
 				JOIN users_dupes AS d ON d.UserID = i.UserID
 			SET i.AdminComment = CONCAT('" . db_string($AdminComment) . "\n\n', i.AdminComment)
 			WHERE d.GroupID = $GroupID");
-    }
 }
 
 function unlink_user($UserID) {
@@ -125,7 +122,7 @@ function delete_dupegroup($GroupID) {
     $DB->query("DELETE FROM dupe_groups WHERE ID = '$GroupID'");
 }
 
-function dupe_comments($GroupID, $Comments, $IgnoreComments) {
+function dupe_comments($GroupID, $Comments) {
     global $DB, $LoggedUser;
 
     authorize();
@@ -143,9 +140,7 @@ function dupe_comments($GroupID, $Comments, $IgnoreComments) {
 		WHERE ID = $GroupID");
     list($OldCommentHash) = $DB->next_record();
     if ($OldCommentHash != sha1($Comments)) {
-        if (!$IgnoreComments) {
-            $AdminComment = sqltime() . " - Linked accounts updated: Comments updated by " . $LoggedUser['Username'];
-        }
+        $AdminComment = sqltime() . " - Linked accounts updated: Comments updated by " . $LoggedUser['Username'];
         if ($_POST['form_comment_hash'] == $OldCommentHash) {
             $DB->query("
 				UPDATE dupe_groups
@@ -158,109 +153,10 @@ function dupe_comments($GroupID, $Comments, $IgnoreComments) {
 				WHERE ID = '$GroupID'");
         }
 
-        if (!$IgnoreComments) {
-            $DB->query("
+        $DB->query("
 				UPDATE users_info AS i
 					JOIN users_dupes AS d ON d.UserID = i.UserID
 				SET i.AdminComment = CONCAT('" . db_string($AdminComment) . "\n\n', i.AdminComment)
 				WHERE d.GroupID = $GroupID");
-        }
     }
 }
-
-function user_dupes_table($UserID) {
-    global $DB, $LoggedUser;
-
-    if (!check_perms('users_mod')) {
-        error(403);
-    }
-    if (!is_number($UserID)) {
-        error(403);
-    }
-    $DB->query("
-		SELECT d.ID, d.Comments, SHA1(d.Comments) AS CommentHash
-		FROM dupe_groups AS d
-			JOIN users_dupes AS u ON u.GroupID = d.ID
-		WHERE u.UserID = $UserID");
-    if (list($GroupID, $Comments, $CommentHash) = $DB->next_record()) {
-        $DB->query("
-			SELECT m.ID
-			FROM users_main AS m
-				JOIN users_dupes AS d ON m.ID = d.UserID
-			WHERE d.GroupID = $GroupID
-			ORDER BY m.ID ASC");
-        $DupeCount = $DB->record_count();
-        $Dupes = $DB->to_array();
-    } else {
-        $DupeCount = 0;
-        $Dupes = array();
-    }
-?>
-    <form class="manage_form" name="user" method="post" id="linkedform" action="">
-        <input type="hidden" name="action" value="dupes" />
-        <input type="hidden" name="dupeaction" value="update" />
-        <input type="hidden" name="userid" value="<?= $UserID ?>" />
-        <input type="hidden" id="auth" name="auth" value="<?= $LoggedUser['AuthKey'] ?>" />
-        <input type="hidden" id="form_comment_hash" name="form_comment_hash" value="<?= $CommentHash ?>" />
-        <div class="Form-rowList" variant="header" id="l_a_box">
-            <div class="Form-rowHeader">
-                <?= t('server.user.linked_account') ?> (<?= max($DupeCount - 1, 0) ?>)
-            </div>
-            <? if (count($Dupes) > 0) { ?>
-                <div class="Form-row">
-                    <div class="Form-label">
-                        <?= t('server.user.linked_account') ?>:
-                    </div>
-                    <div class="Form-items">
-                        <ul>
-                            <?
-                            $i = 0;
-                            foreach ($Dupes as $Dupe) {
-                                $i++;
-                                list($DupeID) = $Dupe;
-                                $DupeInfo = Users::user_info($DupeID);
-                            ?>
-                                <li class="Table-cell"><?= Users::format_username($DupeID, true, true, true, true) ?>
-                                    <a href="user.php?action=dupes&amp;dupeaction=remove&amp;auth=<?= $LoggedUser['AuthKey'] ?>&amp;userid=<?= $UserID ?>&amp;removeid=<?= $DupeID ?>" onclick="return confirm('Are you sure you wish to remove <?= $DupeInfo['Username'] ?> from this group?');" class="brackets" data-tooltip="Remove linked account">X</a>
-                                </li>
-                            <?
-                            }
-                            ?>
-                        </ul>
-                    </div>
-                </div>
-            <? } ?>
-            <div class="Form-row">
-                <div class="Form-label">
-                    <label for="target">Link this user with: </label>
-                </div>
-                <div class="Form-inputs">
-                    <input class="Input is-small" type="text" name="target" id="target" />
-                </div>
-            </div>
-            <div class="Form-row">
-                <div class="Form-label">
-                    Comments:
-                </div>
-                <div class="Form-items">
-                    <div id="editdupecomments" class="<?= ($DupeCount ? 'hidden' : '') ?>">
-                        <textarea class="Input" name="dupecomments" onkeyup="resize('dupecommentsbox');" id="dupecommentsbox" cols="65" rows="5"><?= display_str($Comments) ?></textarea>
-                    </div>
-                </div>
-            </div>
-            <div class="Form-row">
-                <div class="Form-label">
-                </div>
-                <div class="Form-inputs">
-                    <input type="checkbox" name="ignore_comments" id="ignore_comments" />
-                    <label for="ignore_comments">Do not update staff notes</label>
-                </div>
-            </div>
-            <div class="Form-row">
-                <input class="Button" type="submit" value="Update" id="submitlink" />
-            </div>
-        </div>
-    </form>
-<?
-}
-?>

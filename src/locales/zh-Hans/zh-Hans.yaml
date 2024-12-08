@@ -6230,7 +6230,7 @@ server.user.comma_seperated_usernames_list: |-
 server.user.comma_space_and_space: |-
   ，而&nbsp;
 server.user.community: |-
-  社交
+  社区
 server.user.community_arts: |-
   艺人评论
 server.user.community_collcontrib: |-
@@ -6680,7 +6680,7 @@ server.user.p_host: |-
 server.user.p_inviter: |-
   邀请人
 server.user.p_invites: |-
-  邀请数
+  邀请
 server.user.p_ip: |-
   IP
 server.user.p_irc: |-
@@ -6768,7 +6768,7 @@ server.user.period_space: |-
 server.user.period_space_p: |-
   。</p>
 server.user.permissions: |-
-  权限
+  权限管理
 server.user.permitted_forums: |-
   特许论坛版块
 server.user.permitted_forums_title: |-
@@ -7116,7 +7116,7 @@ server.user.staff_pm: |-
 server.user.staff_tools: |-
   管理工具
 server.user.statistics: |-
-  统计
+  用户状态
 server.user.stats: |-
   统计
 server.user.style: |-
@@ -7236,9 +7236,9 @@ server.user.traditional: |-
 server.user.tree: |-
   邀请树
 server.user.true_downloaded_title: |-
-  真实下载量（非个人令牌免费下载数据从 2020 年 6 月 1 日开始统计）
+  真实下载量
 server.user.true_uploaded_title: |-
-  真实上传量（不包含积分兑换的上传量）
+  真实上传量
 server.user.two_factor_authentication: |-
   两步验证
 server.user.two_factor_authentication_note: |-
@@ -7246,7 +7246,7 @@ server.user.two_factor_authentication_note: |-
 server.user.two_factor_authentication_note_3: |-
   你我约定了一个保障安全的密钥。请通过扫描二维码或是复制粘贴的方式将之导入你的手机。我们推荐使用的密保 APP 可以从 <a href="https://itunes.apple.com/gb/app/authy/id494168017?mt=8">App Store</a> 或是 <a href="https://play.google.com/store/apps/details?id=com.authy.authy&hl=en_GB">Play Store</a> 获取。你也可以使用 <a href="https://play.google.com/store/apps/details?id=com.google.android.apps.authenticator2&hl=en_GB">Google Authenticator</a> APP。当你完成以后就可以点击下一步了。
 server.user.u_artist: |-
-  艺人添加总数
+  艺人添加
 server.user.u_bounty: |-
   积分消费总额
 server.user.u_downloaded: |-
@@ -8371,3 +8371,7 @@ server.reports.the_comment: |-
   评论
 server.index.upload_rank: |-
   发布排行
+server.user.link_user_with: |-
+  关联用户名
+server.user.all_site: |-
+  全站占比

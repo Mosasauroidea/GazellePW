@@ -88,6 +88,9 @@ blockquote {
 
 .floatright {
   float: right;
+  display: flex;
+  align-items: center;
+  gap: 5px;
 }
 
 span[style='color: red'] {

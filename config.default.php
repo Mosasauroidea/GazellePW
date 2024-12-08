@@ -248,3 +248,31 @@ $CONFIG['UPLOAD_RANK_END_TIME'] = '0000-00-00 00:00:00';
 $CONFIG['UPLOAD_RANK_SHOW_END_TIME'] = '0000-00-00 00:00:00';
 $CONFIG['RELEASE_GROUP'] = [];
 $CONFIG['RELEASE_GROUP_MEMBER'] = [];
+
+$PointRadios = [
+    'DownloadCount' => 0.75,
+    'UploadCount' => 1,
+    'CheckCount' => 7.5,
+    'RSReportCount' => 0.5,
+    'RPReportCount' => 12.5,
+    'EditCount' => 1,
+    'PostCount' => 0.5,
+    'SendJF' => 0.1,
+    'ApplyCount' => 1.5,
+];
+
+$Bases = [
+    "Sysop" => 8000,
+    "Administrator" => 8000,
+    "Developer" => 8000,
+
+    "Senior Moderator" => 7000, // cancel
+
+    "Moderator" => 7000,
+    "Torrent Moderator" =>  6000,
+    "Forum Moderator" => 5000,
+
+    "Torrent Inspector" => 3000,
+    "First Line Support" => 3000,
+    "Translators" => 3000,
+];

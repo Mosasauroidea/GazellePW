@@ -32,6 +32,12 @@ switch ($_REQUEST['action']) {
         include('notify_edit.php');
         break;
 
+    case 'staff_tool':
+        include('staff_tool.php');
+        break;
+    case 'linked_account':
+        include('linked_account.php');
+        break;
     case 'notify_handle':
         include('notify_handle.php');
         break;

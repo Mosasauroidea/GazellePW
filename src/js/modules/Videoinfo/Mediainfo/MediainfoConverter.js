@@ -188,13 +188,15 @@ export default class MediainfoConverter {
     const texts = info['text']
     const subtitles = []
     for (const text of texts) {
-      const language = text['language'] || text['title']
+      let language = text['language'] || text['title']
       if (!language) {
         continue
       }
       let extra = ''
-      if (language === 'Chinese') {
+      if (language.match(/chinese|mandarin/i)) {
+        language = 'Chinese'
         const title = compact([text['language'], text['title']]).join('\n')
+        console.log(title)
         extra = title.match(/traditional|繁|cht/i)
           ? ' Traditional'
           : title.match(/simplified|简|chs/i)

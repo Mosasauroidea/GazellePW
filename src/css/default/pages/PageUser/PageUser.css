@@ -2,6 +2,10 @@
   color: #da7171;
 }
 
+#user #ratio_watch .Group-body {
+  color: var(--global-color-warning);
+}
+
 .donor_icon {
   width: 16px;
   height: 16px;
@@ -41,10 +45,6 @@ table .disabled_flag {
   min-width: 200px;
   object-fit: cover;
   object-position: top;
-}
-
-#user .SidebarList-item {
-  display: block;
 }
 
 .UserModForm-rowHeader {

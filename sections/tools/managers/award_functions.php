@@ -1,80 +1,31 @@
 <?
-$PointRadios = [
-    'DownloadCount' => 0.75,
-    'UploadCount' => 1,
-    'CheckCount' => 7.5,
-    'RSReportCount' => 0.5,
-    'RPReportCount' => 12.5,
-    'EditCount' => 1,
-    'PostCount' => 0.5,
-    'SendJF' => 0.1,
-    'ApplyCount' => 1.5,
-];
-
-$Bases = [
-    "Sysop" => 8000,
-    "Administrator" => 8000,
-    "Senior Moderator" => 7000,
-    "Moderator" => 6000,
-    "Torrent Moderator" =>  4000,
-    "Forum Moderator" => 5000,
-    "Torrent Inspector" => 3000,
-    "First Line Support" => 3000,
-    "Translators" => 3000,
-    "Developer" => 8000,
-];
-
 function queryUsersByGroup($GroupName) {
     $sql = "select ID from users_main where PermissionID=(select ID from permissions where name='$GroupName')
         UNION select userid from users_levels where PermissionID=(select ID from permissions where name='$GroupName')";
     G::$DB->query($sql);
     return G::$DB->to_array(false, MYSQLI_ASSOC, false);
 }
+
 function getAwardData($GroupName, $Time) {
     $data = ['GroupName' => $GroupName, 'Users' => []];
     $Users = queryUsersByGroup($GroupName);
     foreach ($Users as $User) {
-        $LittleID = getLittleID($User['ID']);
-        if ($LittleID) {
-            $EditCnt = getEditCount($User['ID'], $Time) + getEditCount($LittleID, $Time);
-            $data['Users'][] = [
-                'UserID' => $User['ID'],
-                'LittleID' => $LittleID,
-                'DownloadCount' => getDownloadCount($User['ID'], $Time) + getDownloadCount($LittleID, $Time),
-                'UploadCount' => getUploadCount($User['ID'], $Time) + getUploadCount($LittleID, $Time),
-                'CheckCount' => getCheckCount($User['ID'], $Time) + getCheckCount($LittleID, $Time),
-                'RSReportCount' => getRSReportCount($User['ID'], $Time) + getRSReportCount($LittleID, $Time),
-                'RPReportCount' => getRPReportCount($User['ID'], $Time) + getRPReportCount($LittleID, $Time),
-                'EditCount' => $EditCnt,
-                'PostCount' => getPostCount($User['ID'], $Time) + getPostCount($LittleID, $Time) - $EditCnt,
-                'SendJF' => getSendJFCount($User['ID'], $Time) + getSendJFCount($LittleID, $Time),
-                'ApplyCount' => getApplyCount($User['ID'], $Time) + getApplyCount($LittleID, $Time),
-                'QQCount' => 0,
-                'TGCount' => 0
-            ];
-        } else {
-            $EditCnt = getEditCount($User['ID'], $Time);
-            $data['Users'][] = [
-                'UserID' => $User['ID'],
-                'LittleID' => $LittleID,
-                'DownloadCount' => getDownloadCount($User['ID'], $Time),
-                'UploadCount' => getUploadCount($User['ID'], $Time),
-                'CheckCount' => getCheckCount($User['ID'], $Time),
-                'RSReportCount' => getRSReportCount($User['ID'], $Time),
-                'RPReportCount' => getRPReportCount($User['ID'], $Time),
-                'EditCount' => $EditCnt,
-                'PostCount' => getPostCount($User['ID'], $Time) - $EditCnt,
-                'SendJF' => getSendJFCount($User['ID'], $Time),
-                'ApplyCount' => getApplyCount($User['ID'], $Time),
-                'QQCount' => 0,
-                'TGCount' => 0
-            ];
-        }
+        $EditCnt = getEditCount($User['ID'], $Time);
+        $data['Users'][] = [
+            'UserID' => $User['ID'],
+            'DownloadCount' => getDownloadCount($User['ID'], $Time),
+            'UploadCount' => getUploadCount($User['ID'], $Time),
+            'CheckCount' => getCheckCount($User['ID'], $Time),
+            'RSReportCount' => getRSReportCount($User['ID'], $Time),
+            'RPReportCount' => getRPReportCount($User['ID'], $Time),
+            'EditCount' => $EditCnt,
+            'PostCount' => getPostCount($User['ID'], $Time) - $EditCnt,
+            'SendJF' => getSendJFCount($User['ID'], $Time),
+            'ApplyCount' => getApplyCount($User['ID'], $Time),
+            'TGCount' => 0
+        ];
     }
     return $data;
-}
-function getLittleID($UserID) {
-    return 0;
 }
 
 function printYearTR($StartYear = 2021, $focus) {

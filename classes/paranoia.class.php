@@ -44,7 +44,6 @@ define("PARANOIA_ALLOWED", 1);
 define("PARANOIA_OVERRIDDEN", 2);
 
 function check_paranoia($Property, $Paranoia, $UserClass, $UserID = false) {
-    global $Classes;
     if ($Property == false) {
         return false;
     }
@@ -72,7 +71,6 @@ function check_paranoia($Property, $Paranoia, $UserClass, $UserID = false) {
         if (check_perms('users_override_paranoia', $UserClass)) {
             return PARANOIA_OVERRIDDEN;
         }
-        $Override = false;
         switch ($Property) {
             case 'downloaded':
             case 'ratio':

@@ -22,7 +22,9 @@ $.fn.extend({
 
 function createFunctionInit(attribute) {
   return function FunctionInit(instance, helper) {
-    instance.content(helper.origin.getAttribute(attribute))
+    if (helper.origin.getAttribute(attribute).length > 0) {
+      instance.content(helper.origin.getAttribute(attribute))
+    }
   }
 }
 
@@ -59,9 +61,7 @@ globalapp.tooltipInit = function tooltipInit(target) {
     .find('[data-tooltip-html]')
     .tooltipster({
       functionInit(instance, helper) {
-        const content = helper.origin.querySelector(
-          '[data-tooltip-html-content]'
-        )
+        const content = helper.origin.querySelector('[data-tooltip-html-content]')
         content.remove()
         content.style.display = 'block'
         instance.content(content)

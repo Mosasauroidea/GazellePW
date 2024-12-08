@@ -24,3 +24,13 @@
   gap: var(--global-space-default);
   flex-direction: column;
 }
+
+.Group-body-row {
+  display: flex;
+  flex-direction: row;
+  gap: var(--global-space-default);
+}
+
+.Group-body-row .Group-column {
+  flex: auto;
+}

@@ -21,7 +21,7 @@ switch ($_REQUEST['dupeaction']) {
 				FROM users_main
 				WHERE Username LIKE '" . db_string($Target) . "'");
             if (list($TargetID) = $DB->next_record()) {
-                link_users($UserID, $TargetID, (isset($_REQUEST['ignore_comments'])) ? true : false);
+                link_users($UserID, $TargetID);
             } else {
                 error("User '$Target' not found.");
             }
@@ -34,7 +34,7 @@ switch ($_REQUEST['dupeaction']) {
         list($GroupID) = $DB->next_record();
 
         if ($_REQUEST['dupecomments'] && $GroupID) {
-            dupe_comments($GroupID, $_REQUEST['dupecomments'], (isset($_REQUEST['ignore_comments'])) ? true : false);
+            dupe_comments($GroupID, $_REQUEST['dupecomments']);
         }
         break;
 
@@ -42,4 +42,4 @@ switch ($_REQUEST['dupeaction']) {
         error(403);
 }
 echo '\o/';
-header("Location: user.php?id=$UserID");
+header("Location: user.php?id=$UserID&action=linked_account");

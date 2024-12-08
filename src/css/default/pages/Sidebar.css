@@ -79,6 +79,8 @@ SidebarList.is-ordered
   display: flex;
   align-items: center;
   padding: var(--global-space-sm);
+  gap: 5px;
+  flex-wrap: wrap;
 }
 
 .SidebarList-actions {

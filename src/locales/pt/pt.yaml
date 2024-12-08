@@ -7318,9 +7318,9 @@ server.user.traditional: |-
 server.user.tree: |-
   Árvore
 server.user.true_downloaded_title: |-
-  Verdadeiro baixado (O total baixado se você não usar tokens freeleeche, a partir de 1 de junho de 2020)
+  Verdadeiro baixado
 server.user.true_uploaded_title: |-
-  True Uploaded (Loja de Pontos Bônus excluída)
+  True Uploaded
 server.user.two_factor_authentication: |-
   Autenticação de dois fatores
 server.user.two_factor_authentication_note: |-

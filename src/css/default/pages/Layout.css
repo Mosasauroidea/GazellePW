@@ -20,7 +20,7 @@ LayoutBody                    # gap
 .LayoutPage-body {
   width: 100%;
   align-self: center;
-  max-width: 1200px;
+  max-width: 1300px;
 }
 @media (max-width: 425px) {
   .LayoutPage-body {
@@ -29,7 +29,7 @@ LayoutBody                    # gap
 }
 .LayoutPage-siteDebug {
   width: 100%;
-  max-width: 1200px;
+  max-width: 1300px;
   align-self: center;
 }
 
@@ -43,7 +43,7 @@ LayoutBody                    # gap
 /* LayoutMainSidebar */
 .LayoutMainSidebar {
   display: grid;
-  grid-template-columns: 1fr 240px;
+  grid-template-columns: 1fr 260px;
   grid-template-rows: auto;
   width: auto;
   gap: var(--global-space-lg);

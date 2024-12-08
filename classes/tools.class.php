@@ -115,7 +115,7 @@ class Tools {
      */
     public static function display_ip($IP) {
         $Line = display_str($IP) . ' (' . Tools::get_country_code_by_ajax($IP) . ') ';
-        $Line .= '<a class="brackets" href="user.php?action=search&amp;ip_history=on&amp;ip=' . display_str($IP) . '&amp;matchtype=strict" data-tooltip="Search">' . S . '</a>';
+        $Line .= '[<a class="brackets" href="user.php?action=search&amp;ip_history=on&amp;ip=' . display_str($IP) . '&amp;matchtype=strict" data-tooltip="Search">' . S . '</a>]';
 
         return $Line;
     }

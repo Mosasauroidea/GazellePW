@@ -482,7 +482,7 @@ class TorrentTableView {
 
 
             <? if ($Note) { ?>
-                <div class="TorrentDetail-row is-staffNote is-block">
+                <div class="TorrentDetail-row is-staffNote is-block HtmlText ">
                     <span class='u-colorWarning'><strong><?= t('server.upload.staff_note') ?>:</strong></span>
                     <?= Text::full_format($Note) ?>
                 </div>
@@ -583,7 +583,7 @@ class TorrentTableView {
                 </div>
             <? } ?>
             <? if (!empty($Description)) { ?>
-                <div class="TorrentDetail-row is-description is-block">
+                <div class="TorrentDetail-row is-description is-block HtmlText ">
                     <?= Text::full_format($Description) ?>
                 </div>
             <? } ?>
