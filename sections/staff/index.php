@@ -32,7 +32,6 @@ list($Secondary, $Staff) = $SupportStaff;
             </div>
             <div class="Group-body">
                 <?= t('server.staff.role_applications_note') ?>
-                <div><?= t('server.apply.referral_note') ?></div>
             </div>
             <? View::parse('generic/reply/staffpm.php', array('Hidden' => true)); ?>
         </div>

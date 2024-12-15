@@ -1,6 +1,10 @@
 <?php
 
 //------------- Promote users -------------------------------------------//
+
+use Gazelle\Manager\Reward;
+use Gazelle\Action\RewardInfo;
+
 sleep(5);
 $DeadPeriod = TORRENT_DEAD_PERIOD;
 foreach ($UserPromoteCriteria as $L) { // $L = Level
@@ -49,10 +53,11 @@ foreach ($UserPromoteCriteria as $L) { // $L = Level
     $UserIDs = $DB->collect('ID');
 
     if (count($UserIDs) > 0) {
-        $DB->query("
-				UPDATE users_main
+        $DB->query(
+            "UPDATE users_main
 				SET PermissionID = " . $L['To'] . "
-				WHERE ID IN(" . implode(',', $UserIDs) . ')');
+				WHERE ID IN(" . implode(',', $UserIDs) . ')'
+        );
         foreach ($UserIDs as $UserID) {
             /*$Cache->begin_transaction("user_info_$UserID");
             $Cache->update_row(false, array('PermissionID' => $L['To']));
@@ -61,19 +66,23 @@ foreach ($UserPromoteCriteria as $L) { // $L = Level
             $Cache->delete_value("user_info_heavy_$UserID");
             $Cache->delete_value("user_stats_$UserID");
             $Cache->delete_value("enabled_$UserID");
-            $DB->query("
-					UPDATE users_info
+            $DB->query(
+                "UPDATE users_info
 					SET AdminComment = CONCAT('" . sqltime() . " - Class changed to " . Users::make_class_string($L['To']) . " by System\n\n', AdminComment)
-					WHERE UserID = $UserID");
-
-            Misc::send_pm_with_tpl($UserID, 'promote_users', ['UserClass' => Users::make_class_string($L['To']), 'CONFIG' => CONFIG]);
+					WHERE UserID = $UserID"
+            );
             if ($L['Invite']) {
                 $DB->query("select AwardLevel from users_main where ID=$UserID and AwardLevel < " . $L['AwardLevel']);
                 $AwardLevel = $DB->collect('AwardLevel');
                 if (count($AwardLevel) > 0) {
-                    $DB->query("UPDATE users_main SET AwardLevel = " . $L['AwardLevel'] . ", Invites = Invites + " . $L['Invite'] . " WHERE ID = $UserID");
+                    $DB->query("UPDATE users_main SET AwardLevel = " . $L['AwardLevel']  . " WHERE ID = $UserID");
+                    $rewardManager = new Reward;
+                    $reward = new RewardInfo;
+                    $reward->inviteCount = $L['Invite'];
+                    $rewardManager->sendReward($reward, [$UserID], "Level up reward.", false, true);
                 }
             }
+            Misc::send_pm_with_tpl($UserID, 'promote_users', ['UserClass' => Users::make_class_string($L['To']), 'CONFIG' => CONFIG]);
         }
     }
 }

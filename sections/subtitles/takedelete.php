@@ -9,12 +9,12 @@ if (!is_number($SubtitleID)) {
     error(0);
 }
 
-if (!check_perms('users_mod')) {
+$DB->query("SELECT torrent_id, name, uploader from subtitles where ID=" . $SubtitleID);
+list($TorrentID, $Name, $Uploader) = $DB->next_record(MYSQLI_BOTH, false);
+
+if ($LoggedUser['ID'] != $Uploader && !check_perms('users_mod')) {
     error(403);
 }
-
-$DB->query("SELECT torrent_id, name from subtitles where ID=" . $SubtitleID);
-list($TorrentID, $Name) = $DB->next_record(MYSQLI_BOTH, false);
 
 $DB->query("DELETE FROM subtitles WHERE id = $SubtitleID");
 $DB->query("DELETE FROM subtitles_files WHERE id = $SubtitleID");

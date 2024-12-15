@@ -103,32 +103,32 @@ HTML;
     <table class="TableMissing Table" variant="ungroup" id="slot_table">
         <tr class="Table-rowHeader">
             <td class="TableMissing-cellName Table-cell"><?= t('server.torrents.name') ?></td>
-            <td class="TableMissing-cellSnatches Table-cell">
+            <td class="TableMissing-cellSnatches Table-cell Table-cellCenter ">
                 <i aria-hidden="true" alt="Snatches" data-tooltip="<?= t('server.common.snatched') ?>">
                     <?= icon("torrent-snatches") ?>
                 </i>
             </td>
-            <td class="TableMissing-cellRequests Table-cell">
+            <td class="TableMissing-cellRequests Table-cell Table-cellCenter ">
                 <i aria-hidden="true" alt="Request number" data-tooltip="<?= t('server.torrents.request_number') ?>">
                     <?= icon("Table/request-numbers") ?>
                 </i>
             </td>
-            <td class="TableMissing-cellSDEncode Table-cell" data-tooltip="<?= t('server.torrents.sd_encode_title') ?>">
+            <td class="TableMissing-cellSDEncode Table-cell Table-cellCenter " data-tooltip="<?= t('server.torrents.sd_encode_title') ?>">
                 <?= t('server.torrents.sd_encode') ?>
             </td>
-            <td class="TableMissing-cellSDUntouched Table-cell" data-tooltip="<?= t('server.torrents.sd_untouched_title') ?>">
+            <td class="TableMissing-cellSDUntouched Table-cell Table-cellCenter " data-tooltip="<?= t('server.torrents.sd_untouched_title') ?>">
                 <?= t('server.torrents.sd_untouched') ?>
             </td>
-            <td class="TableMissing-cellHDencode Table-cell" data-tooltip="<?= t('server.torrents.hd_encode_title') ?>">
+            <td class="TableMissing-cellHDencode Table-cell Table-cellCenter " data-tooltip="<?= t('server.torrents.hd_encode_title') ?>">
                 <?= t('server.torrents.hd_encode') ?>
             </td>
-            <td class="TableMissing-cellHDUntouched Table-cell" data-tooltip="<?= t('server.torrents.hd_untouched_title') ?>">
+            <td class="TableMissing-cellHDUntouched Table-cell Table-cellCenter " data-tooltip="<?= t('server.torrents.hd_untouched_title') ?>">
                 <?= t('server.torrents.hd_untouched') ?>
             </td>
-            <td class="TableMissing-cellUHDEncode Table-cell" data-tooltip="<?= t('server.torrents.uhd_encode_title') ?>">
+            <td class="TableMissing-cellUHDEncode Table-cell Table-cellCenter " data-tooltip="<?= t('server.torrents.uhd_encode_title') ?>">
                 <?= t('server.torrents.uhd_encode') ?>
             </td>
-            <td class="TableMissing-cellUHDUnTouched Table-cell" data-tooltip="<?= t('server.torrents.uhd_untouched_title') ?>">
+            <td class="TableMissing-cellUHDUnTouched Table-cell  Table-cellCenter " data-tooltip="<?= t('server.torrents.uhd_untouched_title') ?>">
                 <?= t('server.torrents.uhd_untouched') ?>
             </td>
         </tr>
@@ -156,7 +156,7 @@ HTML;
                     case TorrentSlot::TorrentSlotStatusFull:
                         // 满的class
                         $SlotStatusClass[$type] = '';
-                        $text[$type] = "<span class='u-colorWarning' title = '" . t('server.torrents.slot_status_full') . "'>" . icon('full-filled-circle') . "</span>";
+                        $text[$type] = "<span class='u-colorWarning' title = '" . t('server.torrents.slot_status_full') . "'>" . icon('circle') . "</span>";
                         break;
                     case TorrentSlot::TorrentSlotStatusFree:
                         // 有空位的class
@@ -166,7 +166,7 @@ HTML;
                             $SlotsTitle .= "<div>&nbsp;&nbsp;" . t('server.torrents.' . TorrentSlot::slot_option_lang($slot)) . "</div>";
                         }
                         $title = t('server.torrents.slots_we_need');
-                        $text[$type] = "<span class='u-colorCircle' data-tooltip-html>" . icon('half-filled-circle') .
+                        $text[$type] = "<span class='u-colorCircle' data-tooltip-html>" . icon('circle') .
                             "<div data-tooltip-html-content>
                         <div class='title'>$title</div>
                         <div class='content'>$SlotsTitle</div>
@@ -182,17 +182,17 @@ HTML;
         ?>
             <tr class="TableMissing-row Table-row">
                 <td class="TableMissing-cellName Table-cell"><a href="torrents.php?id=<?= $GroupID ?>&view=slot#slot"><?= $GroupName ?><a></td>
-                <td class="TableMissing-cellSnatches Table-cell"><?= $SnatchedCount ?></td>
-                <td class="TableMissing-cellRequests Table-cell"><?= $RequestCount ?></td>
-                <td class="TableMissing-cellSDEncode Table-cell <?= $SlotStatusClass[TorrentSlot::TorrentSlotGroupSDEncode] ?>"><?= $text[TorrentSlot::TorrentSlotGroupSDEncode] ?>
+                <td class="TableMissing-cellSnatches Table-cell  Table-cellCenter "><?= $SnatchedCount ?></td>
+                <td class="TableMissing-cellRequests Table-cell  Table-cellCenter "><?= $RequestCount ?></td>
+                <td class="TableMissing-cellSDEncode Table-cell  Table-cellCenter <?= $SlotStatusClass[TorrentSlot::TorrentSlotGroupSDEncode] ?>"><?= $text[TorrentSlot::TorrentSlotGroupSDEncode] ?>
                 </td>
-                <td class="TableMissing-cellSDUntouched Table-cell <?= $SlotStatusClass[TorrentSlot::TorrentSlotGroupSDUntouched] ?>"><?= $text[TorrentSlot::TorrentSlotGroupSDUntouched] ?>
+                <td class="TableMissing-cellSDUntouched Table-cell  Table-cellCenter <?= $SlotStatusClass[TorrentSlot::TorrentSlotGroupSDUntouched] ?>"><?= $text[TorrentSlot::TorrentSlotGroupSDUntouched] ?>
                 </td>
-                <td class="TableMissing-cellHDEncode Table-cell <?= $SlotStatusClass[TorrentSlot::TorrentSlotGroupHDEncode] ?>"><?= $text[TorrentSlot::TorrentSlotGroupHDEncode] ?>
+                <td class="TableMissing-cellHDEncode Table-cell  Table-cellCenter <?= $SlotStatusClass[TorrentSlot::TorrentSlotGroupHDEncode] ?>"><?= $text[TorrentSlot::TorrentSlotGroupHDEncode] ?>
                 </td>
-                <td class="TableMissing-cellHDUntouched Table-cell <?= $SlotStatusClass[TorrentSlot::TorrentSlotGroupHDUntouched] ?>"><?= $text[TorrentSlot::TorrentSlotGroupHDUntouched] ?></td>
-                <td class="TableMissing-cellUHDEncode Table-cell <?= $SlotStatusClass[TorrentSlot::TorrentSlotGroupUHDEncode] ?>"><?= $text[TorrentSlot::TorrentSlotGroupUHDEncode] ?></td>
-                <td class="TableMissing-cellUHDUntouched Table-cell <?= $SlotStatusClass[TorrentSlot::TorrentSlotGroupUHDUntouched] ?>"><?= $text[TorrentSlot::TorrentSlotGroupUHDUntouched] ?></td>
+                <td class="TableMissing-cellHDUntouched Table-cell  Table-cellCenter <?= $SlotStatusClass[TorrentSlot::TorrentSlotGroupHDUntouched] ?>"><?= $text[TorrentSlot::TorrentSlotGroupHDUntouched] ?></td>
+                <td class="TableMissing-cellUHDEncode Table-cell  Table-cellCenter <?= $SlotStatusClass[TorrentSlot::TorrentSlotGroupUHDEncode] ?>"><?= $text[TorrentSlot::TorrentSlotGroupUHDEncode] ?></td>
+                <td class="TableMissing-cellUHDUntouched Table-cell Table-cellCenter <?= $SlotStatusClass[TorrentSlot::TorrentSlotGroupUHDUntouched] ?>"><?= $text[TorrentSlot::TorrentSlotGroupUHDUntouched] ?></td>
             </tr>
         <?
         }

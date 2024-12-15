@@ -204,11 +204,12 @@ $DB->query("
 	$Order
 	LIMIT $Limit");
 
-$Reports = G::$DB->to_array();
+$Reports = G::$DB->to_array(false, MYSQLI_NUM);
 
 $DB->query('SELECT FOUND_ROWS()');
 list($Results) = $DB->next_record();
 $PageLinks = Format::get_pages($Page, $Results, REPORTS_PER_PAGE, 11);
+$ReportMessages = Reports::get_reports_messages(array_column($Reports, '0'));
 View::show_header(t('server.reportsv2.reports_v2'), 'reportsv2,bbcode,browse', 'PageReportV2Static');
 ?>
 <div class="LayoutBody">
@@ -239,7 +240,7 @@ View::show_header(t('server.reportsv2.reports_v2'), 'reportsv2,bbcode,browse', '
             <?  } else { ?>
                 <?
                 foreach ($Reports as $Idx => $Report) {
-                    render_item($Idx, $Report)
+                    render_item($Idx, $Report, $ReportMessages[$Report['0']]);
                 ?>
                 <? } ?>
             <? } ?>

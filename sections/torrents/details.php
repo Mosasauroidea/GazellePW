@@ -166,7 +166,7 @@ View::show_header($Title, 'browse,comments,torrent,bbcode,recommend,cover_art,su
             <?
             }
             if (check_perms('site_submit_requests')) { ?>
-                <a href="requests.php?action=new&amp;groupid=<?= $GroupID ?>" class="brackets"><?= t('server.torrents.req_format') ?></a>
+                <a href="requests.php?action=new&type=1&amp;groupid=<?= $GroupID ?>" class="brackets"><?= t('server.torrents.req_format') ?></a>
             <?  } ?>
             <a href="torrents.php?action=grouplog&amp;groupid=<?= $GroupID ?>" class="brackets"><?= t('server.torrents.viewlog') ?></a>
         </div>
@@ -236,14 +236,16 @@ View::show_header($Title, 'browse,comments,torrent,bbcode,recommend,cover_art,su
             </div>
         </div>
 
-        <div class=" MovieInfo-synopsis" data-tooltip="<?= t('server.torrents.fold_tooltip') ?>">
-            <p class="HtmlText">
-                <?= display_str($WikiBody) ?>
-            </p>
+        <div class="MovieInfo-synopsis">
+            <div class=" HtmlText">
+                <?
+                View::long_text('movie_info_synopsis', display_str($WikiBody), 2);
+                ?>
+            </div>
         </div>
         <div class="MovieInfo-artists u-hideScrollbar">
             <?
-            for ($i = 0; $i < 10 && $i < count($Actors); $i++) {
+            for ($i = 0; $i < 7 && $i < count($Actors); $i++) {
             ?>
                 <a class="MovieInfo-artist" href="<? echo " artist.php?id=" . $Actors[$i]['ArtistID'] ?>">
                     <img class="MovieInfo-artistPhoto <?= $Actors[$i]['Image'] ? '' : 'default_photo' ?>" src="<?= ImageTools::process($Actors[$i]['Image']) ?>">
@@ -1064,6 +1066,9 @@ View::show_header($Title, 'browse,comments,torrent,bbcode,recommend,cover_art,su
                                 <span> | </span>
                                 <?= t('server.common.requests') ?>
                             </td>
+                            <td class="Table-cell">
+                                <?= t('server.requests.request_type') ?>
+                            </td>
                             <td class="TableRequest-cellVotes Table-cell TableRequest-cellValue"><?= t('server.torrents.votes') ?></td>
                             <td class="TableRequest-cellBounty Table-cell TableRequest-cellValue"><?= t('server.torrents.bounty') ?></td>
                             <td class="Table-cell TableRequest-cellValue">
@@ -1072,6 +1077,7 @@ View::show_header($Title, 'browse,comments,torrent,bbcode,recommend,cover_art,su
                         </tr>
                         <? foreach ($Requests as $Request) {
                             $RequestVotes = Requests::get_votes_array($Request['ID']);
+                            $RequestType = $Request['RequestType'];
 
                             $CodecString = implode(', ', explode('|', $Request['CodecList']));
                             $SourceString = implode(', ', explode('|', $Request['SourceList']));
@@ -1083,6 +1089,9 @@ View::show_header($Title, 'browse,comments,torrent,bbcode,recommend,cover_art,su
                                 <td class="TableRequest-cellName Table-cell">
                                     <a href="requests.php?action=view&amp;id=<?= $Request['ID'] ?>"><?= $CodecString ?> /
                                         <?= $SourceString ?> / <?= $ResolutionString ?> / <?= $ContainerString ?></a>
+                                </td>
+                                <td class="TableRequest-cellType Table-cell">
+                                    <?= $RequestType  == 2 ? t('server.requests.seed_torrent') : t('server.requests.new_torrent') ?>
                                 </td>
                                 <td class="TableRequest-cellVotes Table-cell TableRequest-cellValue">
                                     <span id="vote_count_<?= $Request['ID'] ?>"><?= count($RequestVotes['Voters']) ?></span>

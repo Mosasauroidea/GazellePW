@@ -5355,7 +5355,7 @@ server.torrents.people_who_like_this_album_also_liked: |-
 server.torrents.period: |-
   .
 server.torrents.permalink: |-
-  Link permanente
+  Torrent Link permanente
 server.torrents.pfl: |-
   Freeleeche pessoal!
 server.torrents.pm_uploader: |-
@@ -5655,8 +5655,8 @@ server.torrents.upload_by: |-
   Enviado por %s
 server.torrents.upload_torrent: |-
   Carregar torrent
-server.torrents.uploader_replied_it: |-
-  Uploader respondeu
+server.torrents.reports_replied_it: |-
+  respondeu
 server.torrents.used_this_torrent_to_fill: |-
   usou este torrent para preencher
 server.torrents.user: |-

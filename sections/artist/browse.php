@@ -558,6 +558,9 @@ View::show_header($ArtistHeaderName, 'browse,bbcode,comments,voting,recommend,su
                                     <td class="Table-cell">
                                         <?= t('server.artist.request_name') ?>
                                     </td>
+                                    <td class="Table-cell">
+                                        <?= t('server.requests.request_type') ?>
+                                    </td>
                                     <td class="Table-cell TableRequest-cellValue">
                                         <?= t('server.artist.vote') ?>
                                     </td>
@@ -572,6 +575,7 @@ View::show_header($ArtistHeaderName, 'browse,bbcode,comments,voting,recommend,su
                                 foreach ($Requests as $Request) {
                                     $RequestVotes = Requests::get_votes_array($Request['ID']);
                                     $RequestID = $Request['ID'];
+                                    $RequestType = $Request['RequestType'];
                                     $RequestName = Torrents::group_name($Request, false);
                                     $FullName = "<a href=\"requests.php?action=view&amp;id=$RequestID\">$RequestName</a>";
                                     $Tags = $Request['Tags'];
@@ -581,9 +585,21 @@ View::show_header($ArtistHeaderName, 'browse,bbcode,comments,voting,recommend,su
                                             <?= $FullName ?>
                                             <div class="torrent_info">
                                                 <?
+                                                if ($RequestType == 2) {
                                                 ?>
-                                                <?= str_replace('|', ', ', $Request['CodecList']) . ' / ' . str_replace('|', ', ', $Request['SourceList']) . ' / ' . str_replace('|', ', ', $Request['ResolutionList']) . ' / ' . str_replace('|', ', ', $Request['ContainerList']) ?>
+                                                    <a href="<?= $Request['SourceTorrent'] ?>"><?= str_replace('|', ', ', $Request['CodecList']) . ' / ' . str_replace('|', ', ', $Request['SourceList']) . ' / ' . str_replace('|', ', ', $Request['ResolutionList']) . ' / ' . str_replace('|', ', ', $Request['ContainerList']) ?></a>
+                                                <?
+                                                } else {
+                                                ?>
+                                                    <?= str_replace('|', ', ', $Request['CodecList']) . ' / ' . str_replace('|', ', ', $Request['SourceList']) . ' / ' . str_replace('|', ', ', $Request['ResolutionList']) . ' / ' . str_replace('|', ', ', $Request['ContainerList']) ?>
+                                                <?
+
+                                                }
+                                                ?>
                                             </div>
+                                        </td>
+                                        <td class="TableRequest-cellType Table-cell">
+                                            <?= $RequestType  == 2 ? t('server.requests.seed_torrent') : t('server.requests.new_torrent') ?>
                                         </td>
                                         <td class="TableRequest-cellVotes Table-cell TableRequest-cellValue">
                                             <span id="vote_count_<?= $Request['ID'] ?>"><?= count($RequestVotes['Voters']) ?></span>

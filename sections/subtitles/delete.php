@@ -9,11 +9,13 @@ if ($Action !== 'delete') {
     error(404);
 }
 
-if ($LoggedUser['ID'] != $UserID && !check_perms('torrents_delete')) {
+
+$DB->query('SELECT name, uploader FROM subtitles WHERE id=' . $_GET['id']);
+list($Name, $Uploader) = $DB->next_record(MYSQLI_NUM, false);
+
+if ($LoggedUser['ID'] != $Uploader && !check_perms('users_mod')) {
     error(403);
 }
-$DB->query('SELECT name FROM subtitles WHERE id=' . $_GET['id']);
-list($Name) = $DB->next_record(MYSQLI_NUM, false);
 View::show_header(t('server.subtitles.delete_subtitle'), '', 'PageSubtitleDelete');
 
 ?>

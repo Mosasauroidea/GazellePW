@@ -210,16 +210,16 @@ if ($DB->affected_rows() > 0 || !$Report) {
             $Log .= ' ( ' . $Escaped['log_message'] . ' )';
         }
         $DB->query("
-			SELECT GroupID, hex(info_hash)
+			SELECT GroupID, hex(info_hash), FilePath, Size
 			FROM torrents
 			WHERE ID = $TorrentID");
-        list($GroupID, $InfoHash) = $DB->next_record();
+        list($GroupID, $InfoHash, $FilePath, $Size) = $DB->next_record();
         Torrents::delete_torrent($TorrentID, 0, $ResolveType['reason']);
 
         //$InfoHash = unpack("H*", $InfoHash);
         $Log .= ' (' . strtoupper($InfoHash) . ')';
         Misc::write_log($Log);
-        $Log = 'deleted torrent for the reason: ' . $ResolveType['title'] . '. ( ' . $Escaped['log_message'] . ' )';
+        $Log = 'deleted ' . $FilePath . '(' . number_format($Size / (1024 * 1024 * 1024), 2) .  ' GB) for the reason: ' . $ResolveType['title'] . '. ( ' . $Escaped['log_message'] . ' )';
         Torrents::write_group_log($GroupID, $TorrentID, $LoggedUser['ID'], $Log, 0);
         $TrumpID = 0;
         if ($Escaped['resolve_type'] === 'trump') {

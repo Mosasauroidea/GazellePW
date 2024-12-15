@@ -1491,9 +1491,9 @@ class Text {
                         $Block['Val'] = str_replace("\r", "\n", $Block['Val']);
                         $Images = [];
                         foreach ($Block['Val'] as $value) {
-                            if (is_array($value) && isset($value['Attr'])) {
+                            if (is_array($value) && !empty($value['Attr'])) {
                                 $Images[] = "'" . $value['Attr'] . "'";
-                            } else if (is_array($value) && isset($value['Val'])) {
+                            } else if (is_array($value) && !empty($value['Val'])) {
                                 $Images[] = "'" . $value['Val'] . "'";
                             }
                         }

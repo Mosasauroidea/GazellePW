@@ -351,6 +351,7 @@ Misc::write_log("Torrent $TorrentID in group $GroupID was edited by " . $LoggedU
 if ($LogDetails) {
     Torrents::write_group_log($GroupID, $TorrentID, $LoggedUser['ID'], $LogDetails, 0);
 }
+
 $Cache->delete_value("torrents_details_$GroupID");
 $Cache->delete_value("torrent_download_$TorrentID");
 

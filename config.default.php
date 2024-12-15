@@ -92,6 +92,7 @@ $CONFIG['USER_LIMIT'] = 5000; //The maximum number of users the site can have, 0
 
 $CONFIG['REQUEST_TAX'] = 0.0; //Percentage Tax (0 - 1) to charge users on making requests
 $CONFIG['REQUEST_MIN_VOTE'] = 1 * 1024 * 1024 * 1024;
+$CONFIG['REQUEST_FILL_FREE_HOUR'] = 0;
 
 $CONFIG['STARTING_UPLOAD'] = 3221225472; //Upload given to newly registered users, in bytes using IEC standard (1024 bytes per KiB)
 
@@ -234,12 +235,15 @@ $CONFIG['DONATE_MONTH_GOAL'] = 75;
 $CONFIG['GLOBAL_FREELEECH'] = false;
 
 $CONFIG['FEATURE_EMAIL_REENABLE'] = true;
+
 $CONFIG['FREE_PROBABILITY'] = 20;
+$CONFIG['TORRENT_UPLOAD_FREE'] = false;
+$CONFIG['TORRENT_UPLOAD_FREE_HOUR'] = 48;
+$CONFIG['PG_TORRENT_UPLOAD_FREE_HOUR'] = 168;
 
 $CONFIG['PUSH_CONFIG_SOCKET_LISTEN_ADDRESS'] = "127.0.0.1";
 $CONFIG['PUSH_CONFIG_SOCKET_LISTEN_PORT'] = 6789;
 
-$CONFIG['TORRENT_UPLOAD_FREE'] = false;
 
 $CONFIG['SECONDARY_CLASS'] = [];
 
@@ -248,6 +252,9 @@ $CONFIG['UPLOAD_RANK_END_TIME'] = '0000-00-00 00:00:00';
 $CONFIG['UPLOAD_RANK_SHOW_END_TIME'] = '0000-00-00 00:00:00';
 $CONFIG['RELEASE_GROUP'] = [];
 $CONFIG['RELEASE_GROUP_MEMBER'] = [];
+
+
+
 
 $PointRadios = [
     'DownloadCount' => 0.75,
@@ -275,4 +282,17 @@ $Bases = [
     "Torrent Inspector" => 3000,
     "First Line Support" => 3000,
     "Translators" => 3000,
+];
+
+$BaseRewardConfig = [
+    'upload_torrent' => [
+        'token' => 0,
+        'token_valid_day' => 0,
+
+        'invite' => 0,
+        'invite_valid_day' => 0,
+
+        'bonus' => 0,
+        'badge_id' => 0,
+    ],
 ];

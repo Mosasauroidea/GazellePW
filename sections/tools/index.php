@@ -201,21 +201,9 @@ switch ($_REQUEST['action']) {
         $Cache->delete_value('news_latest_title');
         $Cache->delete_value('news');
 
-
-
         NotificationsManager::send_push(NotificationsManager::get_push_enabled_users(), $_POST['title'], $_POST['body'], site_url() . 'index.php', NotificationsManager::NEWS);
 
         header('Location: index.php');
-        break;
-
-    case 'bonus_points':
-        include(CONFIG['SERVER_ROOT'] . '/sections/tools/managers/bonus_points.php');
-        break;
-    case 'tokens':
-        include(CONFIG['SERVER_ROOT'] . '/sections/tools/managers/tokens.php');
-        break;
-    case 'invite':
-        include(CONFIG['SERVER_ROOT'] . '/sections/tools/managers/invite.php');
         break;
     case 'multiple_freeleech':
         include(CONFIG['SERVER_ROOT'] . '/sections/tools/managers/multiple_freeleech.php');

@@ -1,13 +1,44 @@
 <?
-function render_item($Idx, $Report) {
+function render_item($Idx, $Report, $ReportMessages) {
     $DB = G::$DB;
     $Cache = G::$Cache;
     $LoggedUser = G::$LoggedUser;
     global $Types;
     list(
-        $ReportID, $ReporterID, $ReporterName, $TorrentID, $Type, $UserComment, $UploaderReply, $ResolverID, $ResolverName, $Status, $ReportedTime, $LastChangeTime,
-        $ModComment, $Tracks, $Images, $ExtraIDs, $Links, $LogMessage, $GroupName, $GroupID, $ArtistID, $ArtistName, $Year, $CategoryID, $Time, $RemasterTitle,
-        $RemasterYear, $Codec, $Source, $Resolution, $Container, $Size, $UploaderID, $UploaderName
+        $ReportID,
+        $ReporterID,
+        $ReporterName,
+        $TorrentID,
+        $Type,
+        $UserComment,
+        $UploaderReply,
+        $ResolverID,
+        $ResolverName,
+        $Status,
+        $ReportedTime,
+        $LastChangeTime,
+        $ModComment,
+        $Tracks,
+        $Images,
+        $ExtraIDs,
+        $Links,
+        $LogMessage,
+        $GroupName,
+        $GroupID,
+        $ArtistID,
+        $ArtistName,
+        $Year,
+        $CategoryID,
+        $Time,
+        $RemasterTitle,
+        $RemasterYear,
+        $Codec,
+        $Source,
+        $Resolution,
+        $Container,
+        $Size,
+        $UploaderID,
+        $UploaderName
     ) = Misc::display_array($Report, array('ModComment'));
     if (!$GroupID && $Status != 'Resolved') {
         //Torrent already deleted
@@ -62,14 +93,17 @@ function render_item($Idx, $Report) {
                             <span data-tooltip="<?= t('server.reportsv2.multi_resolve_title') ?>">
                                 <input type="checkbox" name="multi" id="multi<?= $ReportID ?>" />
                             </span>
-                            <strong>#<?= $Idx + 1 ?></strong>
+                            <strong><a href='#<?= $Idx + 1 ?>' id='<?= $Idx + 1 ?>'>#<?= $Idx + 1 ?></a></strong>
                         </td>
+                    </tr>
+                    <tr class="Form-rowSubHeader">
+                        <td colspan="2"><?= t('server.torrents.report_info') ?></td>
                     </tr>
                     <tr class="Form-row">
                         <td class="Form-label">
                             <?= t('server.common.torrents') ?>:
                         </td>
-                        <td class="Form-items">
+                        <td class="Form-inputs">
                             <?
                             if (!$GroupID) {
                             ?>
@@ -81,8 +115,6 @@ function render_item($Idx, $Report) {
                                 <?
 
                                 if ($Status != 'Resolved') {
-
-
                                     $DB->query("
 						SELECT r.ID
 						FROM reportsv2 AS r
@@ -232,55 +264,41 @@ function render_item($Idx, $Report) {
                                     <a href="user.php?id=<?= $UploaderID ?>"><?= $UploaderName ?></a>
                                     <div class="Table-cellRight Table-cellTop"><?= t('server.reportsv2.upload_time') ?>:</div>
                                     <div><?= $Time ?></div>
-                                </div>
-                                <?
-                                $DB->query("
+                                    <?
+                                    $DB->query("
 						SELECT t.UserID
 						FROM reportsv2 AS r
 							JOIN torrents AS t ON t.ID = r.TorrentID
 						WHERE r.Status != 'Resolved'
 							AND t.UserID = $UploaderID");
-                                $UploaderOthers = ($DB->record_count() - 1);
+                                    $UploaderOthers = ($DB->record_count() - 1);
 
-                                if ($UploaderOthers > 0) { ?>
-                                    <div style="font-style: italic;">
-                                        <a href="reportsv2.php?view=uploader&amp;id=<?= $UploaderID ?>">
-                                            <?= t('server.reportsv2.there_are_n_other_reports_for_torrents_uploaded_by_this_user', ['Values' => [
-                                                t('server.reportsv2.there_are_n_other_reports_for_torrents_uploaded_by_this_user_count', ['Count' => $UploaderOthers, 'Values' => [$UploaderOthers]])
-                                            ]]) ?>
-                                        </a>
-                                    </div>
-                                <?                  }
-                                ?>
+                                    if ($UploaderOthers > 0) { ?>
+                                        <div style="font-style: italic;">
+                                            <a href="reportsv2.php?view=uploader&amp;id=<?= $UploaderID ?>">
+                                                <?= t('server.reportsv2.there_are_n_other_reports_for_torrents_uploaded_by_this_user', ['Values' => [
+                                                    t('server.reportsv2.there_are_n_other_reports_for_torrents_uploaded_by_this_user_count', ['Count' => $UploaderOthers, 'Values' => [$UploaderOthers]])
+                                                ]]) ?>
+                                            </a>
+                                        </div>
+                                    <?                  }
+                                    ?>
+                                </div>
                             </td>
                         </tr>
                     <? } ?>
-                    <tr class="Form-row">
-                        <td class="Form-label Table-cellRight Table-cellTop"><?= t('server.reportsv2.reporter') ?>:</td>
-                        <td class="Form-inputs">
-                            <a href="user.php?id=<?= $ReporterID ?>"><?= $ReporterName ?></a>
-                            <div class="Table-cellRight Table-cellTop"><?= t('server.reportsv2.date_reported') ?>:</div>
-                            <div><?= $ReportedTime ?></div>
-                        </td>
-                    </tr>
                     <tr class="Form-row">
                         <td class="Form-label Table-cellRight Table-cellTop"><?= t('server.reportsv2.user_comment') ?>:</td>
                         <td class="Form-inputs">
                             <div class="HtmlText">
                                 <?= Text::full_format($UserComment) ?>
                             </div>
+                            <a href="user.php?id=<?= $ReporterID ?>"><?= $ReporterName ?></a>
+                            <div class="Table-cellRight Table-cellTop"><?= t('server.reportsv2.date_reported') ?>:</div>
+                            <div><?= $ReportedTime ?></div>
+
                         </td>
                     </tr>
-                    <? if ($UploaderReply) { ?>
-                        <tr class="Form-row">
-                            <td class="Form-label Table-cellRight"><?= t('server.reportsv2.uploader_s_reply') ?>:</td>
-                            <td class="Form-inputs">
-                                <div class="HtmlText">
-                                    <?= Text::full_format($UploaderReply) ?>
-                                </div>
-                            </td>
-                        </tr>
-                    <? } ?>
                     <? if ($Status == 'InProgress') { // END REPORTED STUFF :|: BEGIN MOD STUFF
                     ?>
                         <tr class="Form-row">
@@ -290,19 +308,61 @@ function render_item($Idx, $Report) {
                             </td>
                         </tr>
                     <? } ?>
-                    <? if ($Status != 'Resolved') { ?>
-                        <tr class="Form-row">
-                            <td class="Form-label Table-cellRight Table-cellTop"><?= t('server.reportsv2.report_comment') ?>:</td>
-                            <td class="Form-inputs">
-                                <textarea style="min-height: auto;" class="Input" type="text" name="comment" id="comment<?= $ReportID ?>" size="70"><?= $ModComment ?></textarea>
-                                <input class="Button" type="button" value="Update now" onclick="UpdateComment(<?= $ReportID ?>);" />
-                            </td>
-                        </tr>
+                    <tr class="Form-rowSubHeader">
+                        <td colspan="2"><?= t('server.reports.conversation') ?></td>
+                    </tr>
+
+                    <? if (count($ReportMessages) > 0) { ?>
                         <tr class="Form-row">
                             <td class="Form-label Table-cellRight Table-cellTop">
-                                <a href="javascript:Load('<?= $ReportID ?>')" data-tooltip="<?= t('server.reportsv2.resolve_title') ?>"><?= t('server.reportsv2.resolve') ?></a>:
+                                <?= t('server.reports.conversation_history') ?>:
                             </td>
-                            <td class="Form-items">
+                            <td class="Form-items Table-cellTop">
+                                <?
+                                foreach ($ReportMessages as $Message) {
+                                    if ($Message['SenderID'] == $UploaderID) {
+                                        $Name = t('server.top10.torrents_uploaded');
+                                    } else if ($Message['SenderID'] == $ReporterID) {
+                                        $Name = t('server.reportsv2.reporter');
+                                    } else {
+                                        $Name = "TM";
+                                    }
+
+                                ?>
+                                    <div class="BoxBody">
+                                        <strong><?= $Name . ' ' . Users::format_username($Message['SenderID']) . ' ' .  t('server.torrents.reports_replied_it') . ' ' . time_diff($Message['SentDate'], 2, true, true) ?></strong>
+                                        <div style="padding-top:5px;">
+                                            <?= Text::full_format($Message['Body']) ?>
+                                        </div>
+                                    </div>
+                                <?
+                                }
+                                ?>
+                            </td>
+                        </tr>
+                    <? } ?>
+
+                    <tr class="Form-row">
+                        <td class="Form-label Table-cellRight Table-cellTop">
+                            <?= t('server.inbox.quote') ?>:
+                        </td>
+                        <td class="Form-items">
+                            <?php new TEXTAREA_PREVIEW('uploader_pm', 'uploader_pm_' . $ReportID, '', 50, 2, true, true, false); ?>
+                        </td>
+                    </tr>
+                    <tr class="Form-row">
+                        <td collapse="4">
+                            <input class=" Button" type="button" value="<?= t('server.inbox.send_message') ?>" onclick="SendPM(<?= $Idx ?>,<?= $ReportID ?>);" />
+                        </td>
+                    </tr>
+                    <tr class="Form-rowSubHeader">
+                        <td colspan="2"><?= t('server.reportsv2.resolve') ?></td>
+                    </tr>
+
+                    <? if ($Status != 'Resolved') { ?>
+                        <tr class="Form-row">
+                            <td class="Form-label Table-cellRight Table-cellTop"><?= t('server.reportsv2.resolve') ?>:</td>
+                            <td class="Form-inputs">
                                 <div id="options<?= $ReportID ?>" class="Table-item Form-inputs">
                                     <select class="Input" name="resolve_type" id="resolve_type<?= $ReportID ?>" onchange="ChangeResolve(<?= $ReportID ?>);">
                                         <?
@@ -343,13 +403,16 @@ function render_item($Idx, $Report) {
                                     <span data-tooltip="<?= t('server.reportsv2.remove_upload_privileges_title') ?>">
                                         <input type="checkbox" name="upload" id="upload<?= $ReportID ?>" />&nbsp;<label for="upload<?= $ReportID ?>"><strong><?= t('server.reportsv2.remove_upload_privileges') ?></strong></label>
                                     </span>
-                                    <div>
-                                        <input class="Button" type="button" name="update_resolve" id="update_resolve<?= $ReportID ?>" value="Update now" onclick="UpdateResolve(<?= $ReportID ?>);" />
-                                    </div>
                                 </div>
-
                             </td>
                         </tr>
+                        <tr class="Form-row">
+                            <td class="Form-label Table-cellRight Table-cellTop"><?= t('server.reports.comment') ?>:</td>
+                            <td class="Form-inputs">
+                                <textarea style="min-height: auto;" class="Input" type="text" name="comment" id="comment<?= $ReportID ?>" size="70"><?= $ModComment ?></textarea>
+                            </td>
+                        </tr>
+
                         <tr class="Form-row">
                             <td class="Form-label Table-cellTop Table-cellRight"><?= t('server.reportsv2.custom_trumpable') ?>:</td>
                             <td class="Form-inputs">
@@ -357,34 +420,19 @@ function render_item($Idx, $Report) {
                             </td>
                         </tr>
                         <tr class="Form-row">
-                            <td class="Form-label Table-cellRight Table-cellTop" data-tooltip="<?= t('server.reportsv2.pm_uploader_reporter_title') ?>">
-                                <?= t('server.reportsv2.pm_uploader_reporter') ?>
-                                <select class="Input" name="pm_type" id="pm_type<?= $ReportID ?>">
-                                    <option class="Select-option" value="Uploader" selected="selected"><?= t('server.reportsv2.uploader') ?></option>
-                                    <option class="Select-option" value="Reporter"><?= t('server.reportsv2.reporter') ?></option>
-                                </select>:
-                            </td>
-                            <td class="Form-items Table-cellTop">
-                                <?php new TEXTAREA_PREVIEW('uploader_pm', 'uploader_pm_' . $ReportID, '', 50, 2, true, true, false); ?>
-                                <div>
-                                    <input class="Button" type="button" value="Send now" onclick="SendPM(<?= $ReportID ?>);" />
-                                </div>
-                            </td>
-                        </tr>
-                        <tr class="Form-row">
                             <td class="Form-label Table-cellRight"><strong><?= t('server.reportsv2.extra') ?></strong> <?= t('server.reportsv2.space_log_message') ?>:</td>
                             <td class="Form-inputs">
-                                <input style="width:unset" class="Input" type="text" name="log_message" id="log_message<?= $ReportID ?>" size="40" <?
-                                                                                                                                                    if ($ExtraIDs) {
-                                                                                                                                                        $Extras = explode(' ', $ExtraIDs);
-                                                                                                                                                        $Value = '';
-                                                                                                                                                        foreach ($Extras as $ExtraID) {
-                                                                                                                                                            $Value .= site_url() . "torrents.php?torrentid=$ExtraID ";
-                                                                                                                                                        }
-                                                                                                                                                        echo ' value="' . trim($Value) . '"';
-                                                                                                                                                    } elseif (isset($ReportType['extra_log'])) {
-                                                                                                                                                        printf(' value="%s"', $ReportType['extra_log']);
-                                                                                                                                                    } ?> />
+                                <input class="Input" type="text" name="log_message" id="log_message<?= $ReportID ?>" size="40" <?
+                                                                                                                                if ($ExtraIDs) {
+                                                                                                                                    $Extras = explode(' ', $ExtraIDs);
+                                                                                                                                    $Value = '';
+                                                                                                                                    foreach ($Extras as $ExtraID) {
+                                                                                                                                        $Value .= site_url() . "torrents.php?torrentid=$ExtraID ";
+                                                                                                                                    }
+                                                                                                                                    echo ' value="' . trim($Value) . '"';
+                                                                                                                                } elseif (isset($ReportType['extra_log'])) {
+                                                                                                                                    printf(' value="%s"', $ReportType['extra_log']);
+                                                                                                                                } ?> />
                             </td>
                         </tr>
                         <tr class="Form-row">
@@ -405,6 +453,7 @@ function render_item($Idx, $Report) {
                                     <input class="Button" id="grab<?= $ReportID ?>" type="button" value="<?= t('server.reportsv2.claim') ?>" onclick="Grab(<?= $ReportID ?>);" />
                                 <?                  }   ?>
                                 <input class="Button" type="button" id="submit_<?= $ReportID ?>" value="<?= t('server.common.submit') ?>" onclick="TakeResolve(<?= $ReportID ?>);" />
+                                <input class="Button" type="button" value="<?= t('client.common.save') ?>" onclick="UpdateComment(<?= $ReportID ?>);" />
                             </td>
                         </tr>
                     <? } else { ?>

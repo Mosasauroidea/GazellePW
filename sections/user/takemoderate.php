@@ -847,7 +847,7 @@ if ($EditSummary || $Reason) {
     } else {
         $Summary .=  sqltime() . ' - ' . "Comment: " . $Reason . " by " . $LoggedUser['Username'];
     }
-    $AdminComment = $Cur['AdminComment'];
+    $AdminComment = db_string($Cur['AdminComment']);
     $Summary .= "\n\n$AdminComment";
 }
 

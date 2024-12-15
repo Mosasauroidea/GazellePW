@@ -302,7 +302,8 @@ if ($NumResults == 0) {
             'fillerId' => (int)$Request['FillerID'],
             'fillerName' => $Filler ? $Filler['Username'] : '',
             'torrentId' => (int)$Request['TorrentID'],
-            'timeFilled' => $Request['TimeFilled'] == 0 ? '' : $Request['TimeFilled']
+            'timeFilled' => $Request['TimeFilled'] == 0 ? '' : $Request['TimeFilled'],
+            'requestType' => $Request['RequestType'],
         );
     }
 

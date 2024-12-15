@@ -4,7 +4,6 @@
 .Group-header {
   padding-bottom: var(--global-space-default);
   display: flex;
-  justify-self: flex-start;
 }
 .Group-headerTitle {
   font-size: 1.3rem;

@@ -1,5 +1,7 @@
 <?php
 
+use Gazelle\Manager\ActionTrigger;
+
 if (empty($_GET['torrentid'])) {
     error(403);
 }
@@ -41,4 +43,6 @@ G::$Cache->delete_value("torrent_group_$GroupID");
 G::$Cache->delete_value("torrents_details_$GroupID");
 $DB->query("insert into torrents_check (UserID, TorrentID, Type) values (" . $LoggedUser['ID'] . ", $TorrentID, " . ($Checked ? "1" : "0") . ")");
 Misc::write_log("Torrent $TorrentID was " . ($Checked ? "" : "un") . "checked by " . $LoggedUser['Username']);
+$trigger =  new ActionTrigger;
+$trigger->triggerTorrentCheck($TorrentID);
 echo json_encode(array('ret' => 'success'));

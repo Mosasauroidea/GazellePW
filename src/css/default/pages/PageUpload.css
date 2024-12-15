@@ -1,5 +1,4 @@
-.FormUpload:not(.u-formUploadAutoFilled, .u-formUploadNoImdbId)
-  .u-formUploadCollapse {
+.FormUpload:not(.u-formUploadAutoFilled, .u-formUploadNoImdbId) .u-formUploadCollapse {
   display: none;
 }
 

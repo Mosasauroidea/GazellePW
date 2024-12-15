@@ -20,7 +20,6 @@ $DB->query("
 	UPDATE torrents
 	SET LastReseedRequest = NOW()
 	WHERE ID = '$TorrentID'");
-$Torrent = TOrrents::get_torrent($TorrentID);
 
 $usersToNotify = array();
 
@@ -45,6 +44,7 @@ if ($DB->has_results()) {
 }
 
 $usersToNotify[$UploaderID] = array("uploaded", strtotime($UploadedTime));
+$Torrent = TOrrents::get_torrent($TorrentID);
 $Name = Torrents::torrent_name($Torrent, false);
 
 foreach ($usersToNotify as $UserID => $info) {

@@ -69,7 +69,7 @@ $JsonTorrentDetails = array(
     'language' => $TorrentDetails['Language'],
 );
 
-$Reports = Torrents::get_reports($TorrentID);
+$Reports = Reports::get_reports($TorrentID);
 if (count($Reports) > 0) {
     $Torrent['Reported'] = true;
 } else {

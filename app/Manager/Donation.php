@@ -5,6 +5,7 @@ namespace Gazelle\Manager;
 use Misc;
 use Lang;
 use DB_MYSQL_DuplicateKeyException;
+use Gazelle\Action\RewardInfo;
 
 class DonationSource {
     const PrepaidCard = "Prepaid Card";
@@ -25,6 +26,7 @@ class DonationCurrency {
     const BTC = "BTC";
 }
 class Donation extends \Gazelle\Base {
+    private Reward $rewardManager;
     private static $ForumDescriptions = array(
         "I want only two houses, rather than seven... I feel like letting go of things",
         "A billion here, a billion there, sooner or later it adds up to real money.",
@@ -48,6 +50,10 @@ class Donation extends \Gazelle\Base {
         "I work very hard and I’m worth every cent!",
         "To all my Barbies out there who date Benjamin Franklin, George Washington, Abraham Lincoln, you'll be better off in life. Get that money."
     );
+    public function __construct() {
+        parent::__construct();
+        $this->rewardManager = new Reward;
+    }
 
     public function moderatorAdjust(int $UserID, int $Rank, int $TotalRank, string $Reason, int $who) {
         $this->donate($UserID, [
@@ -109,7 +115,7 @@ class Donation extends \Gazelle\Base {
         ]);
     }
 
-    private function currency_exchange($Amount, $Currency) {
+    function currencyExchange($Amount, $Currency) {
         switch ($Currency) {
             case 'BTC':
                 $XBT = new \Gazelle\Manager\XBT;
@@ -259,7 +265,7 @@ class Donation extends \Gazelle\Base {
 						RankExpirationTime = NOW()");
         } else {
             // Donations from the store get donor points directly, no need to calculate them
-            $ConvertedPrice = $this->currency_exchange($Amount, $Currency);
+            $ConvertedPrice = $this->currencyExchange($Amount, $Currency);
             // 计算捐赠点数
             $DonorPoints = $ConvertedPrice / 50;
             $IncreaseRank = $DonorPoints;
@@ -393,10 +399,9 @@ class Donation extends \Gazelle\Base {
 				SET SpecialRank = '$SpecialRank'
 				WHERE UserID = '$UserID'");
         if ($Invite > 0) {
-            $this->db->query("
-				UPDATE users_main
-				SET Invites = Invites + '$Invite'
-				WHERE ID = $UserID");
+            $rewardInfo = new RewardInfo;
+            $rewardInfo->inviteCount = $Invite;
+            $this->rewardManager->sendReward($rewardInfo, [$UserID], "Donor reward.", false, true);
         }
         $this->cache->delete_value("donor_info_$UserID");
         $this->db->set_query_id($QueryID);

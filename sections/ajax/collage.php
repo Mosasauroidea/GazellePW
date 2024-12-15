@@ -80,7 +80,7 @@ foreach ($GroupIDs as $GroupID) {
                 'leechers'                => (int)$Torrent['Leechers'],
                 'snatched'                => (int)$Torrent['Snatched'],
                 'freeTorrent'             => Torrents::torrent_freeleech($Torrent),
-                'reported'                => (count(Torrents::get_reports((int)$Torrent['ID'])) > 0),
+                'reported'                => (count(Reports::get_reports((int)$Torrent['ID'])) > 0),
                 'time'                    => $Torrent['Time']
             );
         }

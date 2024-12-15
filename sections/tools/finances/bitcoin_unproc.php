@@ -1,4 +1,7 @@
 <?
+
+use Gazelle\Manager\Donation;
+
 if (!check_perms('users_mod')) {
     error(403);
 }
@@ -55,15 +58,16 @@ $OldDonations = G::$DB->to_pair(0, 1, false);
         <?
         if (!empty($NewDonations)) {
             foreach (DonationsBitcoin::get_userids(array_keys($NewDonations)) as $Address => $UserID) {
-                $DonationEUR = Donations::currency_exchange($NewDonations[$Address], 'BTC');
+                $donation = new Donation;
+                $DonationEUR = $donation->currencyExchange($NewDonations[$Address], 'BTC');
         ?>
                 <tr class="Table-row">
                     <td class="Table-cell"><?= $Address ?></td>
                     <td class="Table-cell"><?= Users::format_username($UserID, true, false, false) ?></td>
                     <td class="Table-cell"><?= $NewDonations[$Address] ?> (<?= "$DonationEUR EUR" ?>)</td>
                     <td class="Table-cell"><?= $AllDonations[$Address] ?></td>
-                    <td class="Table-cell"><?= (int)Donations::get_rank($UserID) ?></td>
-                    <td class="Table-cell"><?= (int)Donations::get_special_rank($UserID) ?></td>
+                    <td class="Table-cell"><?= (int)$donation->rank($UserID) ?></td>
+                    <td class="Table-cell"><?= (int)$donation->specialRank($UserID) ?></td>
                 </tr>
             <?  }
         } else { ?>

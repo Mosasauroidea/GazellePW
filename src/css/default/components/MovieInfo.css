@@ -97,6 +97,9 @@ Where
   color: var(--Movieinfo-button-onHover-color);
 }
 
+.MovieInfo-synopsis {
+  word-break: break-word;
+}
 .MovieInfo-synopsis > p {
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
@@ -119,7 +122,6 @@ Where
 
 .MovieInfo-artist {
   width: 130px;
-  text-align: center;
 }
 
 .MovieInfo-artistPhoto {
@@ -132,6 +134,11 @@ Where
 
 .MovieInfo-artistName {
   color: var(--Movieinfo-button-color);
+  width: 100px;
+  text-align: center;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .MovieInfo-year {

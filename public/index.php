@@ -78,6 +78,7 @@ switch ($Document) {
     case 'activity':
     case 'badges':
     case 'subtitles':
+    case 'task':
         $Valid = true;
         break;
 }

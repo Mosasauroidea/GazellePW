@@ -366,7 +366,8 @@ $NotifyOnDeleteSeeding = (!empty($_POST['notifyondeleteseeding']) ? 1 : 0);
 $NotifyOnDeleteSnatched = (!empty($_POST['notifyondeletesnatched']) ? 1 : 0);
 $NotifyOnDeleteDownloaded = (!empty($_POST['notifyondeletedownloaded']) ? 1 : 0);
 
-Donations::update_rewards($UserID);
+$donation = new Donation;
+$donation->updateReward($UserID);
 NotificationsManager::save_settings($UserID);
 
 // Information on how the user likes to download torrents is stored in cache

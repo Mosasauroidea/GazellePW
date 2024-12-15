@@ -1,4 +1,7 @@
 <?
+
+use Gazelle\Manager\Donation;
+
 class DonationsBitcoin {
     /**
      * Ask bitcoind for a list of all addresses that have received bitcoins
@@ -159,7 +162,8 @@ class DonationsBitcoin {
             }
             $Debug->log_var($NewDonations, '$NewDonations');
             foreach (self::get_userids(array_keys($NewDonations)) as $Address => $UserID) {
-                Donations::regular_donate($UserID, $NewDonations[$Address], 'Bitcoin Parser', '', 'BTC');
+                $donation = new Donation;
+                $donation->regularDonate($UserID, $NewDonations[$Address], 'Bitcoin Parser', '', 'BTC');
                 self::store_donation($Address, $NewDonations[$Address]);
             }
             G::$Cache->cache_value('btc_total_received', $NewAmount, 0);

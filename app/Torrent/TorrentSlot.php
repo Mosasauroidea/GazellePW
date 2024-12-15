@@ -95,8 +95,6 @@ class TorrentSlot {
         self::TorrentSlotTypeUntouched,
     ];
 
-
-
     const SDSlots = [
         self::TorrentSlotTypeNone,
         self::TorrentSlotTypeQuality,
@@ -623,6 +621,19 @@ class TorrentSlot {
 
         $Ret = "<option class='Select-option' $Selected value='$Slot'>$text</option>";
         return $Ret;
+    }
+
+    public static function resolution_name($resolution) {
+        switch ($resolution) {
+            case self::TorrentSlotResolutionSD:
+            case self::TorrentSlotResolutionHD720P:
+                return "group_standard_resolution";
+            case self::TorrentSlotResolutionHD1080P:
+                return "group_high_resolution";
+            case self::TorrentSlotResolutionUHD:
+                return "group_ultra_high_resolution";
+        }
+        return "";
     }
 
     public static function slot_filter_name($Slot) {

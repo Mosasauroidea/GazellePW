@@ -590,17 +590,6 @@ class Torrents {
         G::$DB->set_query_id($QueryID);
     }
 
-    public static function write_group_log_with_time($GroupID, $TorrentID, $UserID, $Message, $Hidden) {
-        $QueryID = G::$DB->get_query_id();
-        G::$DB->query("
-			INSERT INTO group_log
-				(GroupID, TorrentID, UserID, Info, Time, Hidden)
-			VALUES
-				($GroupID, $TorrentID, $UserID, '" . db_string($Message) . "', '" . Time::sqlTime() . "', $Hidden)");
-        G::$DB->set_query_id($QueryID);
-    }
-
-
     /**
      * Delete a torrent.
      *
@@ -1412,12 +1401,12 @@ WHERE ud.TorrentID=? AND ui.NotifyOnDeleteDownloaded='1' AND ud.UserID NOT IN ({
 
         foreach ($Torrents as $Torrent) {
             list($TorrentID, $GroupID, $InfoHash) = $Torrent;
+            G::$Cache->delete_value("torrents_details_$GroupID");
             if ($LimitTime !== null) {
                 G::$DB->query("
                    INSERT INTO `freetorrents_timed`(`TorrentID`, `EndTime`) 
                    VALUES ($TorrentID, '$LimitTime') ON DUPLICATE KEY UPDATE EndTime=VALUES(EndTime)");
             }
-
             Tracker::update_tracker('update_torrent', array('info_hash' => rawurlencode($InfoHash), 'freetorrent' => $FreeNeutral));
             G::$Cache->delete_value("torrent_download_$TorrentID");
             Misc::write_log(($Schedule ? "Schedule" : G::$LoggedUser['Username']) . " marked torrent $TorrentID freeleech $FreeNeutral type $FreeLeechType!");
@@ -1504,7 +1493,7 @@ WHERE ud.TorrentID=? AND ui.NotifyOnDeleteDownloaded='1' AND ud.UserID NOT IN ({
         return (G::$LoggedUser['FLTokens'] >= 1
             && !$Torrent['PersonalFL']
             && (in_array($Torrent['FreeTorrent'], [self::OneFourthOff, self::TwoFourthOff, self::ThreeFourthOff]) || empty($Torrent['FreeTorrent']))
-            && G::$LoggedUser['CanLeech'] == self::FREE);
+            && G::$LoggedUser['CanLeech'] == 1);
     }
 
     /**
@@ -2142,5 +2131,20 @@ WHERE ud.TorrentID=? AND ui.NotifyOnDeleteDownloaded='1' AND ud.UserID NOT IN ({
             $Root[$Fragment[0]]['size'] += $Size;
         }
         return;
+    }
+
+    public static function render_media_info($MediaInfo) {
+        $Index = 0;
+        $MediaInfoObj = json_decode($MediaInfo);
+        if (is_array($MediaInfoObj)) {
+            foreach ($MediaInfoObj as $MediaInfo) {
+                $MediaInfo = ltrim(trim($MediaInfo), '[mediainfo]');
+                $MediaInfo = ltrim(trim($MediaInfo), '[bdinfo]');
+                $MediaInfo = rtrim(trim($MediaInfo), '[/mediainfo]');
+                $MediaInfo = rtrim(trim($MediaInfo), '[/bdinfo]');
+                echo ($Index > 0 ? "<br>" : "") . Text::full_format('[mediainfo]' . $MediaInfo . '[/mediainfo]');
+                $Index++;
+            }
+        }
     }
 }

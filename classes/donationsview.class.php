@@ -171,6 +171,7 @@ class DonationsView {
     }
 
     public static function render_rank($rank, $specialRank, $ShowOverflow = true) {
-        echo Donation::rankLabel($rank, $specialRank, $ShowOverflow);
+        $donate = new Donation;
+        echo $donate->rankLabel($rank, $specialRank, $ShowOverflow);
     }
 }

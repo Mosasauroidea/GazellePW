@@ -1,0 +1,49 @@
+.LongText {
+  display: flex;
+  overflow: hidden;
+}
+
+.LongText .LongText-text {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-align: justify;
+  /* display: flex; */
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  position: relative;
+}
+
+.LongText-text.LongText-line-1 {
+  -webkit-line-clamp: 1;
+}
+
+.LongText-text.LongText-line-2 {
+  -webkit-line-clamp: 2;
+}
+
+.LongText .LongText-text::before {
+  content: '';
+  height: calc(100% - var(--global-lineHeight));
+  float: right;
+}
+.LongText .LongText-btn {
+  float: right;
+  clear: both;
+  color: var(--global-color-link);
+  padding-left: 3px;
+  cursor: pointer;
+  display: none;
+  /* margin-top: -30px; */
+}
+.LongText .LongText-btn::before {
+  content: attr(data-more-content);
+}
+.LongText .LongText-exp {
+  display: none;
+}
+.LongText .LongText-exp:checked + .LongText-text {
+  -webkit-line-clamp: 999;
+}
+.LongText .LongText-exp:checked + .LongText-text .LongText-btn::before {
+  content: attr(data-less-content);
+}

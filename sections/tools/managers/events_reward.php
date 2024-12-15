@@ -1,33 +1,9 @@
 <?
-function eventsRewardLog($UserIDs, $Invites, $InvitesTime, $Tokens, $TokensTime, $Bonus, $BadgeID, $Remark) {
-    $Columns = "";
-    $Values = "";
-    if ($Invites) {
-        $Columns .= ", Invites";
-        $Values .= ", $Invites";
-        if ($InvitesTime) {
-            $Columns .= ", InvitesTime";
-            $Values .= ", '$InvitesTime'";
-        }
-    }
-    if ($Tokens) {
-        $Columns .= ", Tokens";
-        $Values .= ", $Tokens";
-        if ($TokensTime) {
-            $Columns .= ", TokensTime";
-            $Values .= ", '$TokensTime'";
-        }
-    }
-    if ($Bonus) {
-        $Columns .= ", Bonus";
-        $Values .= ", $Bonus";
-    }
-    if ($BadgeID) {
-        $Columns .= ", Badge";
-        $Values .= ", $BadgeID";
-    }
-    G::$DB->query("insert into events_reward_log (UserIDs, ByUserID, Remark$Columns) values ('" . implode(",", $UserIDs) . "', " . G::$LoggedUser['ID'] . ", '$Remark'$Values)");
-}
+
+use Gazelle\Manager\Reward;
+use Gazelle\Action\RewardInfo;
+use Gazelle\Exception\InvalidParamException;
+
 function getUserIDs($UsernamesString) {
     $Usernames = preg_split("/[\s,]+/", $UsernamesString);
     G::$DB->query("select ID from users_main where username in ('" . implode("','", $Usernames) . "')");
@@ -38,79 +14,7 @@ function getUserIDs($UsernamesString) {
         return $UserIDs;
     }
 }
-function addTokens($UserIDs, $Numbers, $Time, $SendToLeechDisabled) {
-    $Where = " where id in (" . implode(",", $UserIDs) . ")";
-    if (!$SendToLeechDisabled) {
-        $Where .= ' and can_leech = 1';
-    }
-    G::$DB->query("UPDATE users_main SET FLTokens = FLTokens + $Numbers$Where");
-    if ($Time) {
-        $SQL = "insert into tokens_typed (`EndTime`, `Type`, `UserID`) values ";
-        $Values = [];
-        foreach ($UserIDs as $UserID) {
-            for ($i = 0; $i < $Numbers; $i++) {
-                $Values[] = "('$Time', 'time', $UserID)";
-            }
-        }
-        $SQL .= implode(',', $Values);
-        G::$DB->query($SQL);
-    }
-    clearCache($UserIDs, 'user_info_heavy_');
-}
-function addInvites($UserIDs, $Numbers, $Time) {
-    $Where = " where id in (" . implode(",", $UserIDs) . ")";
-    G::$DB->query("UPDATE users_main SET Invites = Invites + $Numbers$Where");
-    if ($Time) {
-        $SQL = "insert into invites_typed (`EndTime`, `Type`, `UserID`) values ";
-        $Values = [];
-        foreach ($UserIDs as $UserID) {
-            for ($i = 0; $i < $Numbers; $i++) {
-                $Values[] = "('$Time', 'time', $UserID)";
-            }
-        }
-        $SQL .= implode(',', $Values);
-        G::$DB->query($SQL);
-    }
-    clearCache($UserIDs, 'user_info_heavy_');
-}
-function addBonus($UserIDs, $Numbers) {
-    $Where = " where id in (" . implode(",", $UserIDs) . ")";
-    G::$DB->query("UPDATE users_main SET BonusPoints = BonusPoints + $Numbers$Where");
-    clearCache($UserIDs, 'user_stats_');
-}
-function addBadges($UserIDs, $BadgeID) {
-    foreach ($UserIDs as $UserID) {
-        Badges::gave($UserID, $BadgeID, false);
-    }
-}
-function clearCache($UserIDs, $Label) {
-    G::$DB->query("SELECT max(id) from users_main");
-    list($MaxID) = G::$DB->next_record();
-    for ($i = 1; $i <= $MaxID; $i++) {
-        G::$Cache->delete_value($Label . $i);
-    }
-}
-function sendRewardPM($UserIDs, $Invites, $InvitesTime, $Tokens, $TokensTime, $Bonus, $BadgeID) {
-    $BadgeName = "";
-    if ($BadgeID) {
-        $Badge = Badges::get_badges_by_id($BadgeID);
-        $BadgeName = t("server.badges.${Badge['Label']}_badge_name");
-    }
-    foreach ($UserIDs as $UserID) {
-        Misc::send_pm_with_tpl(
-            $UserID,
-            'send_reward',
-            [
-                'Invites' => $Invites,
-                'InvitesTime' => $InvitesTime,
-                'Tokens' => $Tokens,
-                'TokensTime' => $TokensTime,
-                'Bonus' => $Bonus,
-                'BadgeName' => $BadgeName,
-            ]
-        );
-    }
-}
+
 if (!check_perms('users_mod')) {
     error(403);
 }
@@ -205,20 +109,22 @@ if (isset($_POST['action'])) {
         error(t('server.common.invalid_param'));
     }
     $PM = db_string($_POST['pm']);
-    eventsRewardLog($UserIDs, $InvitesNumbers, $InvitesTime, $TokensNumbers, $TokensTime, $BonusNumbers, $BadgeID, $PM);
-    if (!empty($_POST['tokens_numbers'])) {
-        addTokens($UserIDs, $TokensNumbers, $TokensTime, $SendToLeechDisabled);
+    $RewardInfo = new RewardInfo;
+    $RewardInfo->tokenCount = $TokensNumbers ? $TokensNumbers : 0;
+    $RewardInfo->tokenExpireTime = $TokensTime;
+    $RewardInfo->inviteCount = $InvitesNumbers ? $InvitesNumbers : 0;
+    $RewardInfo->invteExpireTime = $InvitesTime;
+    $RewardInfo->badgeID = $BadgeID ? $BadgeID : 0;
+    $RewardInfo->bonus = $BonusNumbers ? $BonusNumbers : 0;
+    $RewardManager = new Reward;
+    try {
+        $RewardManager->sendReward($RewardInfo, $UserIDs, $PM, true);
+    } catch (InvalidParamException $e) {
+        error($e->getMessage());
+    } catch (Exception $e) {
+        error_log($e->getMessage());
+        error("internal error");
     }
-    if (!empty($_POST['invites_numbers'])) {
-        addInvites($UserIDs, $InvitesNumbers, $InvitesTime);
-    }
-    if (!empty($_POST['bonus_numbers'])) {
-        addBonus($UserIDs, $BonusNumbers);
-    }
-    if (!empty($_POST['badgeid'])) {
-        addBadges($UserIDs, $BadgeID);
-    }
-    sendRewardPM($UserIDs, $InvitesNumbers, $InvitesTime, $TokensNumbers, $TokensTime, $BonusNumbers, $BadgeID);
     header("Location: tools.php?action=events_reward_history");
     exit();
 }

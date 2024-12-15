@@ -248,7 +248,7 @@ globalapp.requestMovieAutofill = function requestMovieAutofill() {
         }
       }
       $('.FormUpload').addClass('u-formUploadAutoFilled')
-      $('.u-formUploadArtistList input, .u-formUploadArtistList select').prop('disabled', true)
+      $('.u-formRequestArtistList input, .u-formRequestArtistList select').prop('disabled', true)
       if (artists.length >= 5) {
         globalapp.requestArtistsShowMore({ hide: true })
       }
@@ -334,17 +334,30 @@ globalapp.requestRemoveAllArtistFields = function removeAllArtistFields() {
 
 globalapp.requestArtistsShowMore = function artistsShowMore({ hide } = {}) {
   if (hide) {
-    $('.u-formUploadArtistList .Form-inputs').slice(5).hide()
-    $('.u-formUploadArtistList .show-more').gshow()
+    $('.u-formRequestArtistList .Form-inputs').slice(5).hide()
+    $('.u-formRequestArtistList.show-more').gshow()
   } else {
-    $('.u-formUploadArtistList .Form-inputs').slice(5).show()
-    $('.u-formUploadArtistList .show-more').ghide()
+    $('.u-formRequestArtistList.Form-inputs').slice(5).show()
+    $('.u-formRequestArtistList.show-more').ghide()
   }
 }
 
 globalapp.requestNoImdbId = function noImdbId() {
-  const form = $('.FormUpload')
-  form.toggleClass('u-formUploadNoImdbId')
-  $('.u-formUploadNoImdbNote').toggleClass('hidden')
-  $('.u-formUploadArtistList .show-more').ghide()
+  const form = $('.FormRequest')
+  form.toggleClass('u-formRequestNoImdbId')
+  $('.u-formRequestNoImdbNote').toggleClass('hidden')
+}
+
+globalapp.requestNewTorrent = function newTorrent() {
+  const form = $('.FormRequest')
+  form.removeClass('u-formNewRequest')
+  form.addClass('u-formSeedRequest')
+  form.addClass('u-formRequest')
+}
+
+globalapp.requestSeedTorrent = function seedTorrent() {
+  const form = $('.FormRequest')
+  form.addClass('u-formNewRequest')
+  form.removeClass('u-formSeedRequest')
+  form.addClass('u-formRequest')
 }

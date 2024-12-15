@@ -4,6 +4,8 @@
 The page that handles the backend of the 'edit artist' function.
 \*********************************************************************/
 
+use Gazelle\Manager\ActionTrigger;
+
 authorize();
 
 if (!$_REQUEST['artistid'] || !is_number($_REQUEST['artistid'])) {
@@ -112,6 +114,8 @@ $DB->query(
 
 // There we go, all done!
 $Cache->delete_value("artist_$ArtistID"); // Delete artist cache
+$trigger = new ActionTrigger;
+$trigger->triggerArtistEdit($ArtistID);
 
 // delete group artist cache;
 $DB->query(

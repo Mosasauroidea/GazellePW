@@ -209,23 +209,23 @@ View::show_header(t('server.index.index'), 'comments', 'PageHome');
         <?  } ?>
 
 
-        <? if(is_array(CONFIG['INDEX_FORUM_IDS'])) {
+        <? if (is_array(CONFIG['INDEX_FORUM_IDS'])) {
 
             foreach (CONFIG['INDEX_FORUM_IDS'] as $ForumId) {
 
-              if(Forums::check_forumperm($ForumId)) {
-                $ForumsInfo = Forums::get_forum_info($ForumId);
+                if (Forums::check_forumperm($ForumId)) {
+                    $ForumsInfo = Forums::get_forum_info($ForumId);
         ?>
 
-                <div class="SidebarItemStaffBlog SidebarItem Box">
-                <div class="SidebarItem-header Box-header">
-                    <a href="forums.php?action=viewforum&forumid=<?= $ForumId ?>"><?= $ForumsInfo['Name'] ?></a>
-                </div>
+                    <div class="SidebarItemStaffBlog SidebarItem Box">
+                        <div class="SidebarItem-header Box-header">
+                            <a href="forums.php?action=viewforum&forumid=<?= $ForumId ?>"><?= $ForumsInfo['Name'] ?></a>
+                        </div>
 
-                <?
-                $Forum = $Cache->get_value("forums_index_$ForumId");
-                if (!isset($Forum) || !is_array($Forum)) {
-                    $DB->query("
+                        <?
+                        $Forum = $Cache->get_value("forums_index_$ForumId");
+                        if (!isset($Forum) || !is_array($Forum)) {
+                            $DB->query("
                       SELECT
                         ID,
                         Title,
@@ -234,28 +234,28 @@ View::show_header(t('server.index.index'), 'comments', 'PageHome');
                       WHERE ForumID = '$ForumId'
                       ORDER BY CreatedTime DESC
                       LIMIT 5"); // Can be cached until someone makes a new post
-                    $Forum = $DB->to_array();
-                    $Cache->cache_value("forums_index_$ForumId", $Forum);
-                }
-                ?>
-                <ul class="SidebarItem-body Box-body SidebarList is-ordered">
-                    <?
-                    $End = min(count($Forum), 5);
-                    for ($i = 0; $i < $End; $i++) {
-                        list($TopicID, $Title) = $Forum[$i];
-                    ?>
-                        <li class="SidebarList-item">
-                            <strong>
-                            <a href="forums.php?action=viewthread&threadid=<?= $TopicID ?>"><?= $Title ?></a>
-                            </strong>
-                        </li>
-                    <?
-                    }
-                    ?>
-                </ul>
-            </div>
+                            $Forum = $DB->to_array();
+                            $Cache->cache_value("forums_index_$ForumId", $Forum);
+                        }
+                        ?>
+                        <ul class="SidebarItem-body Box-body SidebarList is-ordered">
+                            <?
+                            $End = min(count($Forum), 5);
+                            for ($i = 0; $i < $End; $i++) {
+                                list($TopicID, $Title) = $Forum[$i];
+                            ?>
+                                <li class="SidebarList-item">
+                                    <a href="forums.php?action=viewthread&threadid=<?= $TopicID ?>"><?= $Title ?></a>
+                                </li>
+                            <?
+                            }
+                            ?>
+                        </ul>
+                    </div>
 
-        <?php }}} ?>
+        <?php }
+            }
+        } ?>
 
         <!-- Site History -->
         <?

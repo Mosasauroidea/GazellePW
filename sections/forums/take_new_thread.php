@@ -1,4 +1,7 @@
 <?php
+
+use Gazelle\Manager\ActionTrigger;
+
 authorize();
 
 /*
@@ -87,6 +90,9 @@ $DB->query("
 	Values
 		('" . db_string($Title) . "', '" . $LoggedUser['ID'] . "', '$ForumID', '" . $sqltime . "', '" . $LoggedUser['ID'] . "', '" . $sqltime . "')");
 $TopicID = $DB->inserted_id();
+
+$trigger = new ActionTrigger;
+$trigger->triggerCreateTopic($TopicID);
 
 $DB->query("
 	INSERT INTO forums_posts

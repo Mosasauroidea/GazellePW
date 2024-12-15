@@ -16,6 +16,18 @@ $Request = Requests::get_request($RequestID);
 if ($Request === false) {
     error(404);
 }
+$RequestType = $Request['RequestType'];
+if ($RequestType == 2) {
+    $Link =  $Request['SourceTorrent'];
+    if (!preg_match('/' . TORRENT_REGEX . '/i', $Link, $Matches)) {
+        error('invlaid request');
+    } else {
+        $SourceTorrentID = $Matches[2];
+        $SourceTorrent = Torrents::get_torrent($SourceTorrentID);
+    }
+}
+
+
 
 //Convenience variables
 $IsFilled = !empty($Request['TorrentID']);
@@ -45,6 +57,7 @@ $ResolutionString = implode(', ', explode('|', $Request['ResolutionList']));
 $ContainerString = implode(', ', explode('|', $Request['ContainerList']));
 $SourceString =  implode(', ', explode('|', $Request['SourceList']));
 
+
 if (empty($Request['ReleaseType'])) {
     $ReleaseName = 'Unknown';
 } else {
@@ -56,7 +69,7 @@ $RequestVotes = Requests::get_votes_array($RequestID);
 $VoteCount = count($RequestVotes['Voters']);
 $ProjectCanEdit = (check_perms('project_team') && !$IsFilled && ($Request['CategoryID'] === '0'));
 $UserCanEdit = (!$IsFilled && $LoggedUser['ID'] === $Request['UserID'] && $VoteCount < 2);
-$CanEdit = ($UserCanEdit || $ProjectCanEdit || check_perms('site_moderate_requests'));
+$CanEdit = ($UserCanEdit || $ProjectCanEdit || check_perms('site_moderate_requests')) &&  $RequestType != 2;
 
 // Comments (must be loaded before View::show_header so that subscriptions and quote notifications are handled properly)
 list($NumComments, $Page, $Thread, $LastRead) = Comments::load('requests', $RequestID);
@@ -85,16 +98,30 @@ $Pages = Format::get_pages($Page, $NumComments, CONFIG['TORRENT_COMMENTS_PER_PAG
             <?  } ?>
             <a href="#" id="subscribelink_requests<?= $RequestID ?>" class="brackets" onclick="SubscribeComments('requests',<?= $RequestID ?>, '<?= Subscriptions::has_subscribed_comments('requests', $RequestID) !== false ? t('server.torrents.subscribe') : t('server.torrents.unsubscribe') ?>');return false;"><?= Subscriptions::has_subscribed_comments('requests', $RequestID) !== false ? t('server.torrents.unsubscribe') : t('server.torrents.subscribe') ?></a>
             <a href="reports.php?action=report&amp;type=request&amp;id=<?= $RequestID ?>" class="brackets"><?= t('server.requests.report_request') ?></a>
-            <? if (!$IsFilled) { ?>
-                <a href="upload.php?requestid=<?= $RequestID ?><?= ($Request['GroupID'] ? "&amp;groupid=$Request[GroupID]" : '') ?>" class="brackets"><?= t('server.requests.upload_request') ?></a>
-            <?  }
+            <?
+            if (!$IsFilled) {
+                if ($RequestType == 2) { ?>
+                    <a href="torrents.php?action=download&amp;id=<?= $SourceTorrentID ?>&amp;authkey=<?= $LoggedUser['AuthKey'] ?>&amp;torrent_pass=<?= $LoggedUser['torrent_pass'] ?>" data-tooltip="Download"><?= t('server.requests.seed_torrent') ?></a>
+                <?
+                } else {
+                ?>
+                    <a href="upload.php?requestid=<?= $RequestID ?><?= ($Request['GroupID'] ? "&amp;groupid=$Request[GroupID]" : '') ?>" class="brackets"><?= t('server.requests.upload_request') ?></a>
+                <?
+                }
+            }
             if (!$IsFilled && ($Request['CategoryID'] === '0')) { ?>
                 <a href="reports.php?action=report&amp;type=request_update&amp;id=<?= $RequestID ?>" class="brackets"><?= t('server.requests.request_update') ?></a>
             <? } ?>
             <?
             $google_url  = "https://www.blu-ray.com/search/?quicksearch=1&quicksearch_country=all&section=bluraymovies&quicksearch_keyword=" . display_str($Request['Name']);
             ?>
-            <a target="_blank" href="<? echo $google_url; ?>" class="brackets"><?= t('server.requests.find_in_stores') ?></a>
+            <?
+            if ($RequestType != 2) {
+            ?>
+                <a target="_blank" href="<? echo $google_url; ?>" class="brackets"><?= t('server.requests.find_in_stores') ?></a>
+            <?
+            }
+            ?>
         </div>
     </div>
     <div class="MovieInfo MovieInfoMovie Box">
@@ -124,17 +151,21 @@ $Pages = Format::get_pages($Page, $NumComments, CONFIG['TORRENT_COMMENTS_PER_PAG
                     <?= icon('movie-type') ?>
                     <span><?= $ReleaseName ?></span>
                 </span>
-                <span class="MovieInfo-fact TableTorrent-movieInfoFactsItem" data-tooltip="<?= t('server.requests.bounty') ?>">
-                    <?= icon('uploaded') ?>
-                    <div id="movieinfo_bountry"><?= Format::get_size($RequestVotes['TotalBounty']) ?></div>
-                </span>
                 <?
                 if ($Request['GroupID']) {
+                    if ($RequestType == 2) {
                 ?>
-                    <span class="MovieInfo-fact TableTorrent-movieInfoFactsItem" data-tooltip="<?= t('server.requests.torrent_group') ?>">
-                        <a href="torrents.php?id=<?= $Request['GroupID'] ?>">torrents.php?id=<?= $Request['GroupID'] ?></a>
-                    </span>
+                        <span class="MovieInfo-fact TableTorrent-movieInfoFactsItem" data-tooltip="<?= t('server.common.torrent') ?>">
+                            <a href="torrents.php?torrentid=<?= $SourceTorrentID ?>">torrents.php?torrentid=<?= $SourceTorrentID ?></a>
+                        </span>
+                    <?
+                    } else {
+                    ?>
+                        <span class="MovieInfo-fact TableTorrent-movieInfoFactsItem" data-tooltip="<?= t('server.requests.torrent_group') ?>">
+                            <a href="torrents.php?id=<?= $Request['GroupID'] ?>">torrents.php?id=<?= $Request['GroupID'] ?></a>
+                        </span>
                 <?
+                    }
                 }
                 ?>
             </div>
@@ -154,68 +185,76 @@ $Pages = Format::get_pages($Page, $NumComments, CONFIG['TORRENT_COMMENTS_PER_PAG
             </div>
         </div>
 
-        <div class=" MovieInfo-synopsis" data-tooltip="<?= t('server.torrents.fold_tooltip') ?>">
-            <p class="HtmlText">
-                <?= Text::full_format($Request['Description']); ?>
-            </p>
-        </div>
-        <table class="RequestDetailTable Table">
-            <tr class="Table-row">
-                <td class="Table-cell">
-                    <?= t('server.requests.acceptable_codecs') ?>:
-                </td>
-                <td class="Table-cell">
-                    <?= $CodecString ?>
-                </td>
-            </tr>
-            <tr class="Table-row">
-                <td class="Table-cell">
-                    <?= t('server.requests.acceptable_containers') ?>:
-                </td>
-                <td class="Table-cell">
-                    <?= $ContainerString ?>
-                </td>
-            </tr>
-            <tr class="Table-row">
-                <td class="Table-cell">
-                    <?= t('server.requests.acceptable_resolutions') ?>:
-                </td>
-                <td class="Table-cell">
-                    <?= $ResolutionString ?>
-                </td>
-            </tr>
-            <tr class="Table-row">
-                <td class="Table-cell">
-                    <?= t('server.requests.acceptable_sources') ?>:
-                </td>
-                <td class="Table-cell">
-                    <?= $SourceString ?>
-                </td>
-            </tr>
-            <?
-            if ($Request['SourceTorrent']) {
-            ?>
+        <?
+        if ($RequestType == 2) {
+            Torrents::render_media_info($SourceTorrent['MediaInfo']);
+        } else {
+        ?>
+            <div class="MovieInfo-synopsis" ?>
+                <div class="HtmlText">
+                    <? View::long_text('movie_info_synopsis', display_str($Request['Description']), 2); ?>
+                </div>
+            </div>
+            <table class="RequestDetailTable Table">
                 <tr class="Table-row">
                     <td class="Table-cell">
-                        <?= t('server.requests.source_torrent') ?>:
+                        <?= t('server.requests.acceptable_codecs') ?>:
                     </td>
                     <td class="Table-cell">
-                        <?= $Request['SourceTorrent'] ?>
+                        <?= $CodecString ?>
                     </td>
                 </tr>
+                <tr class="Table-row">
+                    <td class="Table-cell">
+                        <?= t('server.requests.acceptable_containers') ?>:
+                    </td>
+                    <td class="Table-cell">
+                        <?= $ContainerString ?>
+                    </td>
+                </tr>
+                <tr class="Table-row">
+                    <td class="Table-cell">
+                        <?= t('server.requests.acceptable_resolutions') ?>:
+                    </td>
+                    <td class="Table-cell">
+                        <?= $ResolutionString ?>
+                    </td>
+                </tr>
+                <tr class="Table-row">
+                    <td class="Table-cell">
+                        <?= t('server.requests.acceptable_sources') ?>:
+                    </td>
+                    <td class="Table-cell">
+                        <?= $SourceString ?>
+                    </td>
+                </tr>
+                <?
+                if ($Request['SourceTorrent']) {
+                ?>
+                    <tr class="Table-row">
+                        <td class="Table-cell">
+                            <?= t('server.requests.source_torrent') ?>:
+                        </td>
+                        <td class="Table-cell">
+                            <?= $Request['SourceTorrent'] ?>
+                        </td>
+                    </tr>
 
-            <?  } ?>
-            <? if ($Request['PurchasableAt']) { ?>
-                <tr class="Table-row">
-                    <td class="Table-cell">
-                        <?= t('server.requests.purchasable_at') ?>:
-                    </td>
-                    <td class="Table-cell">
-                        <?= $Request['PurchasableAt'] ?>
-                    </td>
-                </tr>
-            <? } ?>
-        </table>
+                <?  } ?>
+                <? if ($Request['PurchasableAt']) { ?>
+                    <tr class="Table-row">
+                        <td class="Table-cell">
+                            <?= t('server.requests.purchasable_at') ?>:
+                        </td>
+                        <td class="Table-cell">
+                            <?= $Request['PurchasableAt'] ?>
+                        </td>
+                    </tr>
+                <? } ?>
+            </table>
+        <?
+        }
+        ?>
 
     </div>
     <div class="LayoutMainSidebar">
@@ -233,13 +272,6 @@ $Pages = Format::get_pages($Page, $NumComments, CONFIG['TORRENT_COMMENTS_PER_PAG
                     <? if ($Request['LastVote'] > $Request['TimeAdded']) { ?>
                         <li class="SidebarList-item"><?= t('server.requests.last_voted') ?>:&nbsp;<?= time_diff($Request['LastVote']) ?> </li>
                     <? } ?>
-                    <?
-                    if ($Request['GroupID']) {
-                    ?>
-                        <li class="SidebarList-item"><?= t('server.requests.torrent_group') ?>:&nbsp;<a href="torrents.php?id=<?= $Request['GroupID'] ?>">torrents.php?id=<?= $Request['GroupID'] ?></a> </li>
-                    <?
-                    }
-                    ?>
                     <? if ($IsFilled) {
                         $TimeCompare = 1267643718; // Requests v2 was implemented 2010-03-03 20:15:18
                     ?>
@@ -296,37 +328,6 @@ $Pages = Format::get_pages($Page, $NumComments, CONFIG['TORRENT_COMMENTS_PER_PAG
                     }
                     ?>
                 </table>
-            </div>
-            <div class="SidebarItemArtists SidebarItem Box">
-                <div class="SidebarItem-header Box-header">
-                    <strong><?= t('server.common.director') ?></strong>
-                </div>
-                <ul class="SidebarList SidebarItem-body Box-body">
-                    <?
-                    foreach ($ArtistForm[Artists::Director] as $Artist) {
-                    ?>
-                        <li class="SidebarList-item">
-                            <?= Artists::display_artist($Artist) ?>
-                        </li>
-                    <?
-                    }
-                    ?>
-                </ul>
-            </div>
-            <div class="SidebarItemTags SidebarItem Box">
-                <div class="SidebarItem-header Box-header">
-                    <strong><?= t('server.requests.tags') ?></strong>
-                </div>
-                <ul class="SidebarList SidebarItem-body Box-body">
-                    <?
-                    $Tags = Tags::get_sub_name($Request['Tags']);
-                    foreach ($Tags as $Key => $Tag) {
-                    ?>
-                        <li class="SidebarList-item">
-                            <a href="torrents.php?action=advanced&taglist=<?= $Tag ?>"><?= $Tag ?></a>
-                        </li>
-                    <?  } ?>
-                </ul>
             </div>
         </div>
         <div class="LayoutMainSidebar-main">
@@ -390,19 +391,33 @@ $Pages = Format::get_pages($Page, $NumComments, CONFIG['TORRENT_COMMENTS_PER_PAG
                             <td class="Form-label" valign="top"><?= t('server.requests.fill_request') ?>:</td>
                             <td class="Form-items">
                                 <form class="u-vstack edit_form" name="request" action="" method="post">
-                                    <div class="field_div">
-                                        <input type="hidden" name="action" value="takefill" />
-                                        <input type="hidden" name="auth" value="<?= $LoggedUser['AuthKey'] ?>" />
-                                        <input type="hidden" name="requestid" value="<?= $RequestID ?>" />
-                                        <input placeholder="<?= t('server.requests.should_be_pl_to_the_torrent') ?><?= site_url() ?>torrents.php?torrentid=xxxx" class="Input" type="text" size="50" name="link" <?= (!empty($Link) ? " value=\"$Link\"" : '') ?> />
-                                    </div>
+                                    <input type="hidden" name="action" value="takefill" />
+                                    <input type="hidden" name="auth" value="<?= $LoggedUser['AuthKey'] ?>" />
+                                    <input type="hidden" name="requestid" value="<?= $RequestID ?>" />
+                                    <?
+                                    if ($RequestType == 1) {
+                                    ?>
+                                        <div class="field_div">
+
+                                            <input placeholder="<?= t('server.requests.should_be_pl_to_the_torrent') ?><?= site_url() ?>torrents.php?torrentid=xxxx" class="Input" type="text" size="50" name="link" <?= (!empty($Link) ? " value=\"$Link\"" : '') ?> />
+                                        </div>
+                                    <?
+                                    }
+                                    ?>
                                     <div class="field_div">
                                         <? if (check_perms('site_moderate_requests')) { ?>
                                             <?= t('server.requests.for_user') ?>: <input class="Input is-small" type="text" size="25" name="user" <?= (!empty($FillerUsername) ? " value=\"$FillerUsername\"" : '') ?> />
                                         <?      } ?>
                                         <button class="Button" type="submit" value="Fill request" /><?= t('server.requests.fill_request') ?></button>
-                                        <a href="upload.php?requestid=<?= $RequestID ?><?= ($Request['GroupID'] ? "&amp;groupid=$Request[GroupID]" : '') ?>"><button class="Button" type="button" id="upload" value="Upload request"><?= t('server.requests.upload_request') ?></button></a>
-                                        <strong style="margin-bottom: 10px;">[<a href="javascript:void(0);" onclick="$('#fill_a_request_how_to_blockquote').toggle();"><strong class="how_to_toggle"><?= t('server.requests.fill_a_request_how_to_toggle') ?></strong></a>]</strong>
+                                        <?
+                                        if ($RequestType == 2) {
+                                        } else {
+                                        ?>
+                                            <a href="upload.php?requestid=<?= $RequestID ?><?= ($Request['GroupID'] ? "&amp;groupid=$Request[GroupID]" : '') ?>"><button class="Button" type="button" id="upload" value="Upload request"><?= t('server.requests.upload_request') ?></button></a>
+                                            <strong style="margin-bottom: 10px;">[<a href="javascript:void(0);" onclick="$('#fill_a_request_how_to_blockquote').toggle();"><strong class="how_to_toggle"><?= t('server.requests.fill_a_request_how_to_toggle') ?></strong></a>]</strong>
+                                        <?
+                                        }
+                                        ?>
                                     </div>
                                 </form>
                             </td>

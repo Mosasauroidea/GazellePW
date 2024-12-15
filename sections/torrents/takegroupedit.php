@@ -1,4 +1,7 @@
 <?
+
+use Gazelle\Manager\ActionTrigger;
+
 authorize();
 
 // Quick SQL injection check
@@ -151,8 +154,8 @@ $DB->query(
         SubName = '$SubName'
 	WHERE ID='$GroupID'"
 );
-
-
+$trigger = new ActionTrigger;
+$trigger->triggerMovieEdit($GroupID);
 Torrents::update_movie_info($GroupID, $IMDBID, $DoubanID, true);
 Torrents::update_hash($GroupID);
 

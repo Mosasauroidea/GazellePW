@@ -1,4 +1,8 @@
 <?
+
+use Gazelle\Manager\Reward;
+use Gazelle\Action\RewardInfo;
+
 include(CONFIG['SERVER_ROOT'] . '/sections/badges/functions.php');
 class Badges {
     static $Limit = array(
@@ -180,15 +184,13 @@ class Badges {
     }
     public static function gave($UserID, $BadgeID, $SendPM = true) {
         $Badge = Badges::get_badges_by_id($BadgeID);
-        G::$DB->query("insert ignore into badges (UserID, BadgeID) values (" . intval($UserID) . ", " . intval($BadgeID) . ")");
-        $r = G::$DB->affected_rows();
-        if ($r) {
-            G::$Cache->delete_value("badges_by_" . $UserID);
-            if ($SendPM) {
-                Misc::send_pm_with_tpl($UserID, 'give_badges', ['BadgeName' => Badges::get_text($Badge['Label'], 'badge_name'), 'BadgeLevel' => $Badge['Level']]);
-            }
+        $rewardManager = new Reward;
+        $reward = new RewardInfo;
+        $reward->badgeID = $BadgeID;
+        $rewardManager->sendReward($reward, [$UserID], "System", false, true);
+        if ($SendPM) {
+            Misc::send_pm_with_tpl($UserID, 'give_badges', ['BadgeName' => Badges::get_text($Badge['Label'], 'badge_name'), 'BadgeLevel' => $Badge['Level']]);
         }
-        return $r;
     }
     public static function buy($UserID, $BadgeID, $Price) {
         if (G::$LoggedUser['ID'] != $UserID) return 0;

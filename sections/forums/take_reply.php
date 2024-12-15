@@ -1,4 +1,7 @@
 <?php
+
+use Gazelle\Manager\ActionTrigger;
+
 authorize();
 
 //TODO: Remove all the stupid queries that could get their information just as easily from the cache
@@ -129,6 +132,10 @@ if ($ThreadInfo['LastPostAuthorID'] == $LoggedUser['ID'] && isset($_POST['merge'
 		VALUES ('$TopicID', '" . $LoggedUser['ID'] . "', '$SQLTime', '" . db_string($Body) . "')");
 
     $PostID = $DB->inserted_id();
+
+    $trigger = new ActionTrigger;
+    $trigger->triggerPostComment($PostID);
+
 
     //This updates the root index
     $DB->query("

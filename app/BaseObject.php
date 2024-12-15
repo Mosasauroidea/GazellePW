@@ -3,13 +3,13 @@
 namespace Gazelle;
 
 abstract class BaseObject extends Base {
-    protected $id;
+
+    protected int $id;
 
     /* used for handling updates */
-    protected $updateField = [];
+    protected array $updateField = [];
 
     public function __construct(int $id) {
-        parent::__construct();
         $this->id = $id;
     }
 
@@ -20,27 +20,35 @@ abstract class BaseObject extends Base {
         return $this->id;
     }
 
+    public function dirty(): bool {
+        return !empty($this->updateField);
+    }
+
     public function setUpdate(string $field, $value) {
         $this->updateField[$field] = $value;
         return $this;
     }
 
+    public function field(string $field) {
+        return $this->updateField[$field] ?? null;
+    }
+
     public function modify(): bool {
-        if (!$this->updateField) {
+        if (!$this->dirty()) {
             return false;
         }
-        $set = implode(', ', array_map(function ($f) {
-            return "$f = ?";
-        }, array_keys($this->updateField)));
-        $args = array_values($this->updateField);
+        $set = implode(', ', array_merge(
+            array_map(fn ($f) => "$f = ?", array_keys($this->updateField))
+        ));
+        $args = array_merge(
+            array_values($this->updateField),
+        );
         $args[] = $this->id;
-        $this->db->prepared_query(
-            "UPDATE " . $this->tableName() . " SET
-                $set WHERE ID = ?
-            ",
+        self::$db->prepared_query(
+            "UPDATE " . $this->tableName() . " SET $set WHERE ID = ?",
             ...$args
         );
-        $success = ($this->db->affected_rows() === 1);
+        $success = (self::$db->affected_rows() === 1);
         if ($success) {
             $this->flush();
         }

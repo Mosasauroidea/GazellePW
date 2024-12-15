@@ -122,7 +122,11 @@ cell
 }
 
 .TableTorrent-cellUploadTime {
-  width: 150px;
+  width: 200px;
+}
+
+.TableTorrent-cellID {
+  width: 50px;
 }
 
 .TableTorrent-cellUserName {

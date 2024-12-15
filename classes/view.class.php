@@ -139,7 +139,19 @@ class View {
             <div class="BodyNavLinks">
                 <?= $Pages ?>
             </div>
-<?
+        <?
         }
+    }
+
+    public static function long_text($ID, $Text, $Lines) {
+        ?>
+        <div class="LongText">
+            <input id="<?= $ID ?>" class="LongText-exp" type="checkbox">
+            <div class="LongText-text LongText-line-<?= $Lines ?>">
+                <label class="LongText-btn" for="<?= $ID ?>" data-more-content=<?= t('server.text.more') ?> , data-less-content="<?= t('server.text.collapse') ?>"></label>
+                <?= $Text ?>
+            </div>
+        </div>
+<?
     }
 }

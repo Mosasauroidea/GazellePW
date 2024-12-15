@@ -196,7 +196,7 @@ function FL_confirmation_msg($seeders, $Size) {
     /* Coder Beware: this text is emitted as part of a Javascript single quoted string.
      * Any apostrophes should be avoided or escaped appropriately (with \\').
      */
-    $TokenUses = ceil($Size / (5 * 1024 * 1024 * 1024));
+    $TokenUses = 1;
     $FTStr = t('server.common.n_fl_token', ['Count' => $TokenUses, 'Values' => [$TokenUses]]);
     return ($seeders == 0)
         ? t('server.common.not_seeded_sure_use_fl', ['Values' => [$FTStr]])
@@ -367,4 +367,11 @@ function get_by_path($Object, $Path, $DefaultValue = null) {
         $Value = $Value[$Key];
     }
     return $Value;
+}
+
+function add_day($date, $day) {
+    $timestamp = strtotime($date);
+    $timestamp = strtotime("+$day days", $timestamp);
+    $newDate = date('Y-m-d', $timestamp);
+    return $newDate;
 }

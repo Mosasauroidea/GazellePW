@@ -13,6 +13,11 @@ $SortOrders = array(
     'random' => false
 );
 
+$RequestType = $_GET['request_type'];
+if (!empty($RequestType)) {
+    $SphQL->where("requesttype", $RequestType);
+}
+
 if (empty($_GET['order']) || !isset($SortOrders[$_GET['order']])) {
     $_GET['order'] = 'created';
 }
@@ -403,6 +408,19 @@ View::show_header($Title, '', 'PageRequestHome');
                                                                                             } ?>" />
                         </td>
                     </tr>
+                    <tr class="Form-row is-searchStr">
+                        <td class="Form-label"><?= t('server.requests.request_type') ?>:</td>
+                        <td class="Form-inputs">
+                            <div class="Checkbox">
+                                <input class="Input" type="checkbox" name="request_type[]" value="1" id="new_torrent" <?= empty($RequestType) || in_array(1, $RequestType) ? ' checked="checked" ' : '' ?> />
+                                <label class="Checkbox-label" for="new_torrent"><?= t('server.requests.new_torrent') ?></label>
+                            </div>
+                            <div class="Checkbox">
+                                <input class="Input" type="checkbox" name="request_type[]" value="2" id="seed_torrent" <?= empty($RequestType) || in_array(2, $RequestType) ? ' checked="checked" ' : '' ?> />
+                                <label class="Checkbox-label" for="new_torrent"><?= t('server.requests.seed_torrent') ?></label>
+                            </div>
+                        </td>
+                    </tr>
                     <tr class="Form-row is-includeFilled">
                         <td class="Form-label">
                             <label for="include_filled_box"><?= t('server.requests.include_filled') ?>:</label>
@@ -527,6 +545,9 @@ View::show_header($Title, '', 'PageRequestHome');
                         <?= t('server.requests.name') ?> / <a href="?order=year&amp;sort=<?= ($OrderBy === 'year' ? $NewSort : 'desc') ?>&amp;<?= $CurrentURL ?>"><?= t('server.requests.year') ?></a>
                     </td>
                     <td class="Table-cell">
+                        <?= t('server.requests.request_type') ?>
+                    </td>
+                    <td class="Table-cell">
                         <a href="?order=votes&amp;sort=<?= ($OrderBy === 'votes' ? $NewSort : 'desc') ?>&amp;<?= $CurrentURL ?>"><?= t('server.requests.quick_vote') ?></a>
                     </td>
                     <td class="Table-cell">
@@ -576,6 +597,7 @@ View::show_header($Title, '', 'PageRequestHome');
                         } else {
                             $CategoryName = $Categories[$Request['CategoryID'] - 1];
                         }
+                        $RequestType = $Request['RequestType'];
 
                         if ($Request['TorrentID'] != 0) {
                             $IsFilled = true;
@@ -594,9 +616,20 @@ View::show_header($Title, '', 'PageRequestHome');
                                 <?= $FullName ?>
                                 <div class="torrent_info">
                                     <?
+                                    if ($RequestType == 2) {
                                     ?>
-                                    <?= str_replace('|', ', ', $Request['CodecList']) . ' / ' . str_replace('|', ', ', $Request['SourceList']) . ' / ' . str_replace('|', ', ', $Request['ResolutionList']) . ' / ' . str_replace('|', ', ', $Request['ContainerList']) ?>
+                                        <a href="<?= $Request['SourceTorrent'] ?>"><?= str_replace('|', ', ', $Request['CodecList']) . ' / ' . str_replace('|', ', ', $Request['SourceList']) . ' / ' . str_replace('|', ', ', $Request['ResolutionList']) . ' / ' . str_replace('|', ', ', $Request['ContainerList']) ?></a>
+                                    <?
+                                    } else {
+                                    ?>
+                                        <?= str_replace('|', ', ', $Request['CodecList']) . ' / ' . str_replace('|', ', ', $Request['SourceList']) . ' / ' . str_replace('|', ', ', $Request['ResolutionList']) . ' / ' . str_replace('|', ', ', $Request['ContainerList']) ?>
+                                    <?
+                                    }
+                                    ?>
                                 </div>
+                            </td>
+                            <td class="TableRequest-cellType Table-cell">
+                                <?= $RequestType  == 2 ? t('server.requests.seed_torrent') : t('server.requests.new_torrent') ?>
                             </td>
                             <td class="TableRequest-cellVotes Table-cell">
                                 <span id="vote_count_<?= $RequestID ?>"><?= number_format($VoteCount) ?></span>

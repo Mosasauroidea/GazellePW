@@ -1,3 +1,10 @@
-.FormRequestNew .Input[type='text']:not(.is-small) {
-  width: 313px;
+.FormRequest:not(.u-formNewRequest) .u-formRequestSeedCollapse {
+  display: none;
+}
+.FormRequest:not(.u-formSeedRequest) .u-formRequestNewCollapse {
+  display: none;
+}
+
+.FormRequest:not(.u-formRequest) .u-formRequestCommonCollapse {
+  display: none;
 }

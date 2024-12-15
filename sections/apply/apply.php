@@ -47,7 +47,6 @@ View::show_header(t('server.apply.apply'), 'apply,bbcode', 'PageApplyApply');
                     <?= t('server.apply.open_roles') ?></div>
             </div>
             <div class="Group-body">
-                <div><?= t('server.apply.referral_note') ?></div>
                 <? foreach ($Roles as $title => $info) { ?>
                     <div class="Box">
                         <div class="Box-header">

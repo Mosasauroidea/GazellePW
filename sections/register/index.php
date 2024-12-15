@@ -9,6 +9,8 @@ if (isset($LoggedUser)) {
 }
 */
 
+use Gazelle\Manager\ActionTrigger;
+
 include(CONFIG['SERVER_ROOT'] . '/classes/validate.class.php');
 $Val = new VALIDATE;
 
@@ -275,6 +277,8 @@ if (!empty($_REQUEST['confirm'])) {
 							(UserID, InviterID, TreePosition, TreeID, TreeLevel)
 						VALUES
 							('$UserID', '$InviterID', '$TreePosition', '$TreeID', '$TreeLevel')");
+                    $trigger = new ActionTrigger;
+                    $trigger->triggerInviteeRegister($InviterID);
                 }
             } else { // No inviter (open registration)
                 $DB->query("

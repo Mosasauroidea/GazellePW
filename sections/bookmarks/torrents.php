@@ -41,13 +41,18 @@ foreach ($GroupIDs as $Idx => $GroupID) {
     // Handle stats and stuff
     $NumGroups++;
     extract(Torrents::array_group($TorrentList[$GroupID]));
+    $ArtistSet = [];
     foreach ($Artists as $Importance => $ImportanceArtists) {
         foreach ($ImportanceArtists as $Artist) {
+            if (isset($ArtistSet[$Artist['ArtistID']])) {
+                continue;
+            }
             if (!isset($TopArtists[$Artist['ArtistID']])) {
                 $TopArtists[$Artist['ArtistID']] = array('data' => $Artist, 'count' => 1);
             } else {
                 $TopArtists[$Artist['ArtistID']]['count']++;
             }
+            $ArtistSet[$Artist['ArtistID']] = true;
         }
     }
     new Tags(Torrents::tags($TorrentList[$GroupID]));

@@ -1,4 +1,7 @@
 <?
+
+use Gazelle\Manager\Donation;
+
 $LastRead = Forums::get_last_read($Forums);
 View::show_header(t('server.forums.forums'), '', 'PageForumHome');
 ?>
@@ -18,7 +21,8 @@ View::show_header(t('server.forums.forums'), '', 'PageForumHome');
                 continue;
             }
             if ($ForumID == CONFIG['DONOR_FORUM']) {
-                $ForumDescription = Donations::get_forum_description();
+                $donation = new Donation;
+                $ForumDescription = $donation->forumDescription();
             }
             $TooltipTheme = $ForumID == CONFIG['DONOR_FORUM'] ? 'gold' : '';
             $Row = $Row === 'a' ? 'b' : 'a';

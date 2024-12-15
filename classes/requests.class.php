@@ -20,13 +20,13 @@ class Requests {
 			REPLACE INTO sphinx_requests_delta (
 				ID, UserID, TimeAdded, LastVote, CategoryID, Title, TagList,
 				Year, ReleaseType, CodecList, SourceList, ContainerList, ResolutionList, FillerID, TorrentID,
-				TimeFilled, Visible, Votes, Bounty)
+				TimeFilled, Visible, Votes, Bounty, RequestType)
 			SELECT
 				ID, r.UserID, UNIX_TIMESTAMP(TimeAdded) AS TimeAdded,
 				UNIX_TIMESTAMP(LastVote) AS LastVote, CategoryID, Title, '$TagList',
 				Year, ReleaseType, CodecList, SourceList, ContainerList, ResolutionList, FillerID, TorrentID,
 				UNIX_TIMESTAMP(TimeFilled) AS TimeFilled, Visible,
-				COUNT(rv.UserID) AS Votes, SUM(rv.Bounty) >> 20 AS Bounty
+				COUNT(rv.UserID) AS Votes, SUM(rv.Bounty) >> 20 AS Bounty, RequestType
 			FROM requests AS r
 				LEFT JOIN requests_votes AS rv ON rv.RequestID = r.ID
 			WHERE ID = $RequestID
@@ -111,7 +111,8 @@ class Requests {
 					FillerID,
 					TorrentID,
 					TimeFilled,
-					GroupID
+					GroupID,
+                    RequestType
 				FROM requests
 				WHERE ID IN ($IDs)
 				ORDER BY ID");
@@ -262,6 +263,28 @@ class Requests {
             $Cache->cache_value("requests_group_$GroupID", $Requests, 0);
         }
         return self::get_requests($Requests);
+    }
+
+    public static function get_torrent_request_id($TorrentID, $RequestType) {
+        G::$DB->query(
+            "SELECT
+				    r.ID,
+                    SourceTorrent
+			FROM requests AS r
+            JOIN torrents AS t ON t.ID =$TorrentID and t.GroupID = r.GroupID
+			WHERE r.RequestType = $RequestType and r.FillerID = '0'"
+        );
+
+        $Requests = G::$DB->to_array('ID', MYSQLI_ASSOC, false);
+        foreach ($Requests as $ID => $Request) {
+            if (!preg_match('/' . TORRENT_REGEX . '/i', $Request['SourceTorrent'], $Matches)) {
+                continue;
+            }
+            if ($Matches[2] == $TorrentID) {
+                return $ID;
+            }
+        }
+        return null;
     }
 
     public static function get_artist_requests($ArtistID) {

@@ -3,7 +3,6 @@
 use Gazelle\Torrent\Subtitle;
 
 $TorrentID = isset($_GET['torrentid']) ? $_GET['torrentid'] : null;
-// TODO by qwerty 获取失败
 if (!$TorrentID) {
     die();
 }
@@ -26,7 +25,7 @@ if (empty($AllSubtitles)) {
     foreach ($AllSubtitles as $Subtitle) {
         $LanguageArray = explode(',', $Subtitle['languages']);
         $IsNew = time_ago($Subtitle['upload_time']) < 60;
-        $CanRM = check_perms('users_mod');
+        $CanRM = check_perms('users_mod') || $Subtitle['Uploader'] == $LoggedUser['ID'];
         $UserInfo = Users::user_info($Subtitle['uploader']);
         $UploaderName = $UserInfo['Username'];
         if ($UploaderName == '') {

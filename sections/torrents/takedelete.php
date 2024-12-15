@@ -27,6 +27,7 @@ $DB->query("
 		t.Processing,
 		t.RemasterTitle,
 		t.RemasterYear,
+        t.FilePath,
 		COUNT(x.uid)
 	FROM torrents AS t
 		LEFT JOIN torrents_group AS tg ON tg.ID = t.GroupID
@@ -35,8 +36,23 @@ $DB->query("
 	WHERE t.ID = '$TorrentID'");
 $Data = G::$DB->next_record(MYSQLI_ASSOC, false);
 list(
-    $UserID, $GroupID, $Size, $InfoHash, $Name, $SubName, $Year, $Time, $Codec, $Source, $Resolution, $Container, $Processing,
-    $RemasterTitle, $RemasterYear, $Snatches
+    $UserID,
+    $GroupID,
+    $Size,
+    $InfoHash,
+    $Name,
+    $SubName,
+    $Year,
+    $Time,
+    $Codec,
+    $Source,
+    $Resolution,
+    $Container,
+    $Processing,
+    $RemasterTitle,
+    $RemasterYear,
+    $FilePath,
+    $Snatches
 ) = array_values($Data);
 $TorrentDetail = Torrents::get_torrent($TorrentID);
 $RawName = Torrents::torrent_name($TorrentDetail, false);
@@ -58,7 +74,7 @@ Torrents::delete_torrent($TorrentID, $GroupID);
 $Log = "Torrent $TorrentID ($RawName) (" . strtoupper($InfoHash[1]) . ") was deleted by " . $LoggedUser['Username'] . ': ' . $_POST['reason'] . ' ' . $_POST['extra'];
 Torrents::send_pm($TorrentID, $UserID, $RawName, $Log, 0, G::$LoggedUser['ID'] != $UserID);
 Misc::write_log($Log);
-Torrents::write_group_log($GroupID, $TorrentID, $LoggedUser['ID'], 'deleted torrent (' . number_format($Size / (1024 * 1024), 2) . ' MB, ' . strtoupper($InfoHash[1]) . ') for reason: ' . $_POST['reason'] . ' ' . $_POST['extra'], 0);
+Torrents::write_group_log($GroupID, $TorrentID, $LoggedUser['ID'], 'deleted ' . $FilePath . ' (' . number_format($Size / (1024 * 1024 * 1024), 2) . ' GB) for reason: ' . $_POST['reason'] . ' ' . $_POST['extra'], 0);
 
 View::show_header(t('server.torrents.torrent_deleted'), '', 'PageTorrentTakeDelete');
 ?>

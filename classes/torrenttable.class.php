@@ -189,6 +189,7 @@ class TorrentTableView {
     protected $CheckSelfTorrents;
     protected $AllUncheckedCnt = 0;
     protected $PageUncheckedCnt = 0;
+    protected $TableTorrentClass;
     /**
      * @var DetailOption $DetailOption
      */
@@ -327,7 +328,7 @@ class TorrentTableView {
                             time() - strtotime($LastReseedRequest) >= 864000) ||
                             check_perms('users_mod'))
                     ) {
-                    ?><a href="torrents.php?action=reseed&amp;torrentid=<?= $TorrentID ?>&amp;groupid=<?= $GroupID ?>" class="brackets" onclick="return confirm('<?= t('server.torrents.request_re_seed_confirm') ?>');"><?= t('server.torrents.request_re_seed') ?></a>
+                    ?><a href="requests.php?action=new&type=2&torrentid=<?= $TorrentID ?>&amp;groupid=<?= $GroupID ?>" class="brackets"><?= t('server.torrents.request_re_seed') ?></a>
                     <?
                     } ?>
                     <? if (check_perms('site_moderate_requests')) { ?>
@@ -567,18 +568,7 @@ class TorrentTableView {
                 <div class=" TorrentDetail-row is-mediainfo is-block">
                     <strong class="TorrentDetailSubtitle-title" id="subtitles_box_title"><?= t('server.torrents.media_info') ?>:</strong>
                     <?
-                    $Index = 0;
-                    $MediaInfoObj = json_decode($MediaInfos);
-                    if (is_array($MediaInfoObj)) {
-                        foreach ($MediaInfoObj as $MediaInfo) {
-                            $MediaInfo = ltrim(trim($MediaInfo), '[mediainfo]');
-                            $MediaInfo = ltrim(trim($MediaInfo), '[bdinfo]');
-                            $MediaInfo = rtrim(trim($MediaInfo), '[/mediainfo]');
-                            $MediaInfo = rtrim(trim($MediaInfo), '[/bdinfo]');
-                            echo ($Index > 0 ? "<br>" : "") . Text::full_format('[mediainfo]' . $MediaInfo . '[/mediainfo]');
-                            $Index++;
-                        }
-                    }
+                    Torrents::render_media_info($MediaInfos);
                     ?>
                 </div>
             <? } ?>

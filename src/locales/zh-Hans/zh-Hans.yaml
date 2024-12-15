@@ -2353,7 +2353,7 @@ server.reports.claimed_by: |-
 server.reports.collage: |-
   合集
 server.reports.comment: |-
-  评论
+  备注
 server.reports.compose: |-
   撰写私信
 server.reports.contact: |-
@@ -2972,7 +2972,7 @@ server.requests.include_filled: |-
 server.requests.is: |-
   已
 server.requests.last_voted: |-
-  最近的赞助人
+  最近的赞助时间
 server.requests.lastvote: |-
   最后投票
 server.requests.link: |-
@@ -5306,7 +5306,7 @@ server.torrents.people_who_like_this_album_also_liked: |-
 server.torrents.period: |-
   。
 server.torrents.permalink: |-
-  永久链接
+  种子永久链接
 server.torrents.pfl: |-
   个人免费
 server.torrents.pm_uploader: |-
@@ -5371,13 +5371,13 @@ server.torrents.reported: |-
 server.torrents.reported_it: |-
   报告此种
 server.torrents.req_format: |-
-  请求格式
+  求种
 server.torrents.request_an_edit: |-
   请求编辑
 server.torrents.request_number: |-
   求种数
 server.torrents.request_re_seed: |-
-  请求续种
+  续种请求
 server.torrents.request_re_seed_confirm: |-
   你确定要为这个种子请求续种么？
 server.torrents.reset: |-
@@ -5622,8 +5622,8 @@ server.torrents.upload_by: |-
   由 %s 发布于
 server.torrents.upload_torrent: |-
   上传种子
-server.torrents.uploader_replied_it: |-
-  发布者回复于
+server.torrents.reports_replied_it: |-
+  回复于
 server.torrents.used_this_torrent_to_fill: |-
   使用该种子完成了
 server.torrents.user: |-
@@ -8369,9 +8369,27 @@ server.reports.the_post: |-
   回复
 server.reports.the_comment: |-
   评论
+server.common.task: |-
+  任务
 server.index.upload_rank: |-
   发布排行
 server.user.link_user_with: |-
   关联用户名
 server.user.all_site: |-
   全站占比
+server.requests.request_type: |-
+  求种类型
+server.requests.new_torrent: |-
+  新种
+server.requests.seed_torrent: |-
+  续种
+server.requests.cant_fill: |-
+  不符合应求条件
+server.text.more: |-
+  查看更多
+server.text.collapse: |-
+  收起
+server.reports.conversation: |-
+  对话
+server.reports.conversation_history: |-
+  历史沟通

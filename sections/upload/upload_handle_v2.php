@@ -28,8 +28,12 @@ $TorrentID = $uploadedTorrent->TorrentID;
 if (!$uploadedTorrent->$IsPrivate) {
     View::show_header(t('server.upload.header_warning'), '', 'PageUploadHandle');
 ?>
-    <h1><?= t('server.upload.upload_handle_warning') ?></h1>
-    <p><?= t('server.upload.need_download_new_torrent1') ?><a href="torrents.php?id=<?= $GroupID ?>&torrentid=<?= $TorrentID ?>"><?= t('server.upload.here') ?></a><?= t('server.upload.need_download_new_torrent2') ?></p>
+    <div class="LayoutBody">
+        <div class="BodyHeader">
+            <div class="BodyHeader-nav"><?= t('server.upload.upload_handle_warning') ?></div>
+        </div>
+        <p><?= t('server.upload.need_download_new_torrent1') ?><a href="torrents.php?id=<?= $GroupID ?>&torrentid=<?= $TorrentID ?>"><?= t('server.upload.here') ?></a><?= t('server.upload.need_download_new_torrent2') ?></p>
+    </div>
 <? View::show_footer();
 } elseif ($uploadedTorrent->RequestID) {
     header("Location: requests.php?action=takefill&requestid=$RequestID&torrentid=$TorrentID&auth=" . $LoggedUser['AuthKey']);

@@ -2,7 +2,9 @@
 
 namespace Gazelle;
 
-use VALIDATE, Artists, Format, ImageTools, Movie, Tags, Misc, Tracker, Torrents;
+use Gazelle\Manager\ActionTrigger;
+use Gazelle\Manager\Tag;
+use VALIDATE, Artists, Format, ImageTools, Movie, Tags, Misc, Tracker, Torrents, Users;
 use Gazelle\Util\Time, Gazelle\Torrent\EditionInfo, Gazelle\Torrent\TorrentSlot, Gazelle\Torrent\Notification, Gazelle\Util\FileChecker;
 
 class UploadedTorrent {
@@ -19,6 +21,7 @@ class Upload extends Base {
     private $notification;
     private $fileChecker;
     private $useAPI = false;
+    private $trigger;
 
     public function __construct($IsNewGroup, $UseAPI = false) {
         parent::__construct();
@@ -27,6 +30,7 @@ class Upload extends Base {
         $this->isNewGroup = $IsNewGroup;
         $this->fileChecker = new FileChecker;
         $this->useAPI = $UseAPI;
+        $this->trigger = new ActionTrigger;
         $this->initValidate();
     }
 
@@ -48,7 +52,7 @@ class Upload extends Base {
         $LogName = Torrents::torrent_name($this->properties, false);
         $TotalSize = $this->properties['Size'];
         Misc::write_log("Torrent $TorrentID ($LogName) was uploaded by " . $this->user['Username'] . ($this->useAPI ? ' using the api' : ''));
-        Torrents::write_group_log($GroupID, $TorrentID, $this->user['ID'], "uploaded (" . number_format($TotalSize / (1024 * 1024 * 1024), 2) . ' GiB)', 0);
+        Torrents::write_group_log($GroupID, $TorrentID, $this->user['ID'], 'uploaded ' . $this->properties['FilePath'] .  '(' . number_format($TotalSize / (1024 * 1024 * 1024), 2) . ' GiB)', 0);
 
         $this->clearCache();
         Tracker::update_tracker('add_torrent', array('id' => $TorrentID, 'info_hash' => rawurlencode($this->properties['InfoHash']), 'freetorrent' => $this->properties['FreeLeech']));
@@ -59,6 +63,7 @@ class Upload extends Base {
         $this->updateUser();
         // TODO by qwerty async
         $this->notification->notify($this->properties, $this->isNewGroup);
+        $this->trigger->triggerUpload($GroupID, $TorrentID);
         $this->cache->delete_value("torrent_{$TorrentID}_lock");
         return $this->buildUploadedTorrent();
     }
@@ -269,9 +274,14 @@ class Upload extends Base {
         if ($properties['Diy'] || $properties['Buy']) {
             $properties['FreeLeech'] = Torrents::FREE;
         }
+        $ReleaseGroup = Users::get_release_group_by_id($properties['Makers']);
+        if (count($ReleaseGroup) > 0) {
+            $properties['FreeEndTime'] = Time::timePlus(3600 * CONFIG['TORRENT_UPLOAD_FREE_HOUR']);
+        } else {
+            $properties['FreeEndTime'] = Time::timePlus(3600 * CONFIG['TORRENT_UPLOAD_FREE_HOUR']);
+        }
 
         // limit free
-        $properties['FreeEndTime'] = Time::timePlus(3600 * 48);
         $properties['FreeTorrent'] = $properties['FreeLeech'];
 
         $properties['Slot'] = TorrentSlot::CalSlot($properties);
@@ -363,11 +373,6 @@ class Upload extends Base {
         $GroupID = $this->properties['GroupID'];
         $FirstTorrent = $TotalSize > 2 * 1024 * 1024 * 1024 ? 1 : $TorrentID;
         $this->db->query("update users_main set firsttorrent=IF(firsttorrent = 0, $FirstTorrent, firsttorrent) ,TotalUploads=TotalUploads+1 where id=" . $this->user['ID']);
-        if ($this->user['DisablePoints'] == 0) {
-            $BonusPoints = 300;
-            $this->db->query("UPDATE users_main SET BonusPoints = BonusPoints + {$BonusPoints} WHERE ID=" . $this->user['ID']);
-            $this->cache->delete_value('user_stats_' . $this->user['ID']);
-        }
         $RecentUploads = $this->cache->get_value("recent_uploads_$UserID");
         if (is_array($RecentUploads)) {
             do {
@@ -542,7 +547,7 @@ class Upload extends Base {
                 $UserID = $this->user['ID'];
                 $Tags = explode(',', $this->properties['TagList']);
                 $Tags = Tags::main_name($Tags);
-                $tagMan = new \Gazelle\Manager\Tag;
+                $tagMan = new Tag;
                 foreach ($Tags as $Tag) {
                     $TagID = $tagMan->create($Tag, $this->user['ID']);
                     if ($TagID) {

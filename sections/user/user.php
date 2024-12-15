@@ -72,7 +72,8 @@ $DB->query("
             m.BonusUploaded,
             m.TotalUploads,
             COUNT(DISTINCT t.ID) AS Uploads,
-		    i.RatioWatchEnds
+		    i.RatioWatchEnds,
+            i.AdminComment
 		FROM users_main AS m
 			JOIN users_info AS i ON i.UserID = m.ID
 			LEFT JOIN permissions AS p ON p.ID = m.PermissionID
@@ -117,7 +118,8 @@ list(
     $BonusUploaded,
     $TotalUploads,
     $Uploads,
-    $RatioWatchEnds
+    $RatioWatchEnds,
+    $AdminComment
 ) = $DB->next_record(MYSQLI_NUM, array(10, 12));
 
 
@@ -1074,6 +1076,9 @@ View::show_header($Username, "jquery.imagesloaded,jquery.wookmark,user,bbcode,co
                                     <td class="Table-cell">
                                         <?= t('server.user.name') ?>
                                     </td>
+                                    <td class="Table-cell">
+                                        <?= t('server.requests.request_type') ?>
+                                    </td>
                                     <td class="Table-cell TableRequest-cellValue">
                                         <?= t('server.user.vote') ?>
                                     </td>
@@ -1088,6 +1093,7 @@ View::show_header($Username, "jquery.imagesloaded,jquery.wookmark,user,bbcode,co
                                 $Requests = Requests::get_requests(array_keys($SphRequests));
                                 foreach ($SphRequests as $RequestID => $SphRequest) {
                                     $Request = $Requests[$RequestID];
+                                    $RequestType = $Request['RequestType'];
 
                                     $RequestVotes = Requests::get_votes_array($Request['ID']);
                                     $RequestID = $Request['ID'];
@@ -1100,9 +1106,20 @@ View::show_header($Username, "jquery.imagesloaded,jquery.wookmark,user,bbcode,co
                                             <?= $FullName ?>
                                             <div class="torrent_info">
                                                 <?
+                                                if ($RequestType == 2) {
                                                 ?>
-                                                <?= str_replace('|', ', ', $Request['CodecList']) . ' / ' . str_replace('|', ', ', $Request['SourceList']) . ' / ' . str_replace('|', ', ', $Request['ResolutionList']) . ' / ' . str_replace('|', ', ', $Request['ContainerList']) ?>
+                                                    <a href="<?= $Request['SourceTorrent'] ?>"><?= str_replace('|', ', ', $Request['CodecList']) . ' / ' . str_replace('|', ', ', $Request['SourceList']) . ' / ' . str_replace('|', ', ', $Request['ResolutionList']) . ' / ' . str_replace('|', ', ', $Request['ContainerList']) ?></a>
+                                                <?
+                                                } else {
+                                                ?>
+                                                    <?= str_replace('|', ', ', $Request['CodecList']) . ' / ' . str_replace('|', ', ', $Request['SourceList']) . ' / ' . str_replace('|', ', ', $Request['ResolutionList']) . ' / ' . str_replace('|', ', ', $Request['ContainerList']) ?>
+                                                <?
+                                                }
+                                                ?>
                                             </div>
+                                        </td>
+                                        <td class="TableRequest-cellType Table-cell">
+                                            <?= $RequestType  == 2 ? t('server.requests.seed_torrent') : t('server.requests.new_torrent') ?>
                                         </td>
                                         <td class="TableRequest-cellVotes Table-cell TableRequest-cellValue">
                                             <span id="vote_count_<?= $Request['ID'] ?>"><?= count($RequestVotes['Voters']) ?></span>

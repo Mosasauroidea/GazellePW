@@ -1,4 +1,7 @@
 <?
+
+use Gazelle\Manager\ActionTrigger;
+
 class Comments {
     /*
      * For all functions:
@@ -31,6 +34,9 @@ class Comments {
 			INSERT INTO comments (Page, PageID, AuthorID, AddedTime, Body)
 			VALUES ('$Page', $PageID, " . G::$LoggedUser['ID'] . ", '" . sqltime() . "', '" . db_string($Body) . "')");
         $PostID = G::$DB->inserted_id();
+
+        $trigger = new ActionTrigger;
+        $trigger->triggerPostComment($PostID);
 
         $CatalogueID = floor((CONFIG['TORRENT_COMMENTS_PER_PAGE'] * $Pages - CONFIG['TORRENT_COMMENTS_PER_PAGE']) / CONFIG['THREAD_CATALOGUE']);
         G::$Cache->delete_value($Page . '_comments_' . $PageID . '_catalogue_' . $CatalogueID);

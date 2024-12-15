@@ -120,10 +120,12 @@ function AddMore(view, id) {
   }
 }
 
-function SendPM(reportid) {
+function SendPM(idx, reportid) {
   $.post('reportsv2.php?action=ajax_take_pm', $('#reportform_' + reportid).serialize(), function (response) {
     $('#uploader_pm_' + reportid).val(response)
   })
+  window.location = '#' + idx + 1
+  location.reload()
 }
 
 function UpdateComment(reportid) {

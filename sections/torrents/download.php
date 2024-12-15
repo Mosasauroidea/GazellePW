@@ -118,59 +118,51 @@ if ($_REQUEST['usetoken'] && in_array($FreeTorrent, [Torrents::Normal, Torrents:
     // First make sure this isn't already FL, and if it is, do nothing
 
     if (!Torrents::has_token($TorrentID)) {
-        $TokenUses = ceil($Size / (5 * 1024 * 1024 * 1024));
-        if ($FLTokens < $TokenUses) {
+        $TokenUses = 1;
+        if ($FLTokens < 1) {
             error(t('server.torrents.error_tokens_not_enough'));
         }
-        /*
-        if ($Size >= 2147483648) {
-            error('This torrent is too large. Please use the regular DL link.');
-        }
-        */
         // Let the tracker know about this
         if (!Tracker::update_tracker('add_token', array('info_hash' => rawurlencode($InfoHash), 'userid' => $UserID))) {
             error(t('server.torrents.error_occurred_to_token'));
         }
-
-        if (!Torrents::has_token($TorrentID)) {
-            $DB->query("
-				INSERT INTO users_freeleeches (UserID, TorrentID, Time)
-				VALUES ($UserID, $TorrentID, NOW())
+        G::$DB->begin_transaction();
+        try {
+            G::$DB->prepared_query("SELECT FLTokens FROM users_main where ID = $UserID");
+            $TokenCount = G::$DB->collect('FLTokens');
+            if ($TokenCount[0] < $TokenUses) {
+                G::$DB->rollback();
+                error(Lang::get('torrents', 'error_tokens_not_enough'));
+            };
+            G::$DB->prepared_query("
+				INSERT INTO users_freeleeches (UserID, TorrentID, Time, Uses)
+				VALUES ($UserID, $TorrentID, NOW(), $TokenUses)
 				ON DUPLICATE KEY UPDATE
 					Time = VALUES(Time),
 					Expired = FALSE,
 					Uses = Uses + $TokenUses");
-            $DB->query("
+            G::$DB->prepared_query("
 				INSERT INTO users_freeleeches_time (UserID, TorrentID, Time)
 				VALUES ($UserID, $TorrentID, NOW())");
-            $DB->query("
+            G::$DB->prepared_query("
 				UPDATE users_main
 				SET FLTokens = FLTokens - $TokenUses
 				WHERE ID = $UserID");
-            for ($i = 0; $i < $TokenUses; $i++) {
-                $DB->query(
-                    "select ID from (SELECT ID FROM `tokens_typed` WHERE UserID='$UserID' and Type='time' ORDER BY `EndTime`) a
-					union all
-					select ID from (select ID FROM `tokens_typed` WHERE UserID='$UserID' and Type='count') b 
-					limit 1"
-                );
-                $UsedTokenID = $DB->collect('ID');
-                if (count($UsedTokenID) > 0) {
-                    $DB->query("delete from `tokens_typed` WHERE ID = '$UsedTokenID[0]'");
-                } else {
-                    break;
-                }
-            }
-            // Fix for downloadthemall messing with the cached token count
-            $UInfo = Users::user_heavy_info($UserID);
-            $FLTokens = $UInfo['FLTokens'];
-            $TimedTokens = $UInfo['TimedTokens'];
-            $Cache->begin_transaction("user_info_heavy_$UserID");
-            $Cache->update_row(false, array('FLTokens' => ($FLTokens - $TokenUses), 'TimedTokens' => ($TimedTokens >= $TokenUses ? $TimedTokens - $TokenUses : 0)));
-            $Cache->commit_transaction(0);
-
-            $Cache->delete_value("users_tokens_$UserID");
+            G::$DB->prepared_query("DELETE FROM tokens_typed WHERE ID in (SELECT tmp.ID FROM (SELECT ID FROM tokens_typed order by EndTime limit $TokenUses) tmp)");
+        } catch (Exception $e) {
+            error_log($e);
+            G::$DB->rollback();
         }
+        G::$DB->commit();
+        // Fix for downloadthemall messing with the cached token count
+        $UInfo = Users::user_heavy_info($UserID);
+        $FLTokens = $UInfo['FLTokens'];
+        $TimedTokens = $UInfo['TimedTokens'];
+        $Cache->begin_transaction("user_info_heavy_$UserID");
+        $Cache->update_row(false, array('FLTokens' => ($FLTokens - $TokenUses), 'TimedTokens' => ($TimedTokens >= $TokenUses ? $TimedTokens - $TokenUses : 0)));
+        $Cache->commit_transaction(0);
+
+        $Cache->delete_value("users_tokens_$UserID");
     }
 }
 

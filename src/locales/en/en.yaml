@@ -5703,8 +5703,8 @@ server.torrents.upload_by: |-
   Uploaded by %s
 server.torrents.upload_torrent: |-
   Upload torrent
-server.torrents.uploader_replied_it: |-
-  Uploader replied
+server.torrents.reports_replied_it: |-
+  replied
 server.torrents.used_this_torrent_to_fill: |-
   used this torrent to fill
 server.torrents.user: |-
@@ -8513,3 +8513,19 @@ server.user.link_user_with: |-
   Link this user with
 server.user.all_site: |-
   site percent
+server.requests.request_type: |-
+  Request Type
+server.requests.new_torrent: |-
+  New Torrent Request
+server.requests.seed_torrent: |-
+  Re-seed Request
+server.requests.cant_fill: |-
+  Does not meet the requirements
+server.text.more: |-
+  more
+server.text.collapse: |-
+  collpase
+server.reports.conversation: |-
+  Conversation
+server.reports.conversation_history: |-
+  Conversation history

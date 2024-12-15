@@ -1,5 +1,7 @@
 <?
 
+use Gazelle\Manager\ActionTrigger;
+
 authorize();
 
 include(CONFIG['SERVER_ROOT'] . '/classes/validate.class.php');
@@ -7,6 +9,7 @@ $Val = new VALIDATE;
 $FromAjax = isset($_POST['groupid']);
 function add_torrent($CollageID, $GroupID) {
     global $Cache, $LoggedUser, $DB;
+    $trigger = new ActionTrigger;
 
     $DB->query("
 		SELECT MAX(Sort)
@@ -36,6 +39,8 @@ function add_torrent($CollageID, $GroupID) {
         $Cache->delete_value("torrents_details_$GroupID");
         $Cache->delete_value("torrent_collages_$GroupID");
         $Cache->delete_value("torrent_collages_personal_$GroupID");
+        $trigger->triggerFillCollage($CollageID, $GroupID);
+
 
         $DB->query("
 			SELECT UserID

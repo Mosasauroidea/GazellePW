@@ -1,4 +1,7 @@
 <?php
+
+use Gazelle\Manager\ActionTrigger;
+
 authorize();
 
 include(CONFIG['SERVER_ROOT'] . '/classes/validate.class.php');
@@ -90,4 +93,7 @@ $DB->query("
 $CollageID = $DB->inserted_id();
 $Cache->delete_value("collage_$CollageID");
 Misc::write_log("Collage $CollageID (" . $_POST['name'] . ') was created by ' . $LoggedUser['Username']);
+
+$trigger = new ActionTrigger;
+$trigger->triggerCreateCollage($CollageID);
 header("Location: collages.php?id=$CollageID");
