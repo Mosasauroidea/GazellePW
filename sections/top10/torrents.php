@@ -25,7 +25,11 @@ View::show_header(t('server.top10.top') . " $Limit " . t('server.top10.top_torre
 ?>
 <div class="LayoutBody">
     <div class="BodyHeader">
-        <h2 class="BodyHeader-nav"><?= t('server.top10.top') ?> <?= $Limit ?> <?= t('server.top10.top_torrents') ?></h2>
+        <div class="BodyHeader-nav TorrentViewWrapper"><?= t('server.top10.top') ?> <?= $Limit ?> <?= t('server.top10.top_torrents') ?>
+            <?
+            renderTorrentViewButton(TorrentViewScene::Top10Torrent);
+            ?>
+        </div>
         <? Top10View::render_linkbox("torrents", "BodyNavLinks"); ?>
     </div>
     <?
@@ -314,7 +318,7 @@ function generate_torrent_table($Caption, $Tag, $Details, $Limit) {
                     $TorrentLists[] = Torrents::convert_torrent($Groups[$Detail['ID']], $Detail['TorrentID']);
                 }
             }
-            $tableRender = new UngroupTorrentSimpleListView($TorrentLists);
+            $tableRender = newUngroupTorrentView(TorrentViewScene::Top10Torrent, $TorrentLists);
             $tableRender->with_number(true)->render([]);
             ?>
         </div>

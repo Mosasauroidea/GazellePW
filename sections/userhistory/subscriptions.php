@@ -13,7 +13,7 @@ list($Page, $Limit) = Format::page_limit($PerPage);
 View::show_header(t('server.userhistory.subscriptions'), 'subscriptions,comments,bbcode', 'PageUserHistorySubscription');
 
 $ShowUnread = (!isset($_GET['showunread']) && !isset($HeavyInfo['SubscriptionsUnread']) || isset($HeavyInfo['SubscriptionsUnread']) && !!$HeavyInfo['SubscriptionsUnread'] || isset($_GET['showunread']) && !!$_GET['showunread']);
-$ShowCollapsed = (!isset($_GET['collapse']) && !isset($HeavyInfo['SubscriptionsCollapse']) || isset($HeavyInfo['SubscriptionsCollapse']) && !!$HeavyInfo['SubscriptionsCollapse'] || isset($_GET['collapse']) && !!$_GET['collapse']);
+$ShowCollapsed = false;
 
 // The monster sql query:
 /*
@@ -123,11 +123,6 @@ $Requests = Requests::get_requests($Requests);
             ?>
                 <br /><br />
                 <a href="userhistory.php?action=subscriptions&amp;showunread=0" class="brackets"><?= t('server.userhistory.show_all_subscriptions') ?></a>
-            <?
-            }
-            if ($NumResults) {
-            ?>
-                <a href="#" onclick="Collapse('<?= $ShowCollapsed ? t('server.userhistory.hide') : t('server.userhistory.show') ?><?= t('server.userhistory.post_bodies') ?>'); return false;" id="collapselink" class="brackets"><?= $ShowCollapsed ? t('server.userhistory.show') : t('server.userhistory.hide') ?><?= t('server.userhistory.post_bodies') ?></a>
             <?
             }
             ?>

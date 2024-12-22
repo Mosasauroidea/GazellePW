@@ -292,7 +292,11 @@ View::show_header($Name, 'browse,collage,comments,bbcode,voting,recommend', 'Pag
             <div class="Group">
                 <div class="Group-header">
                     <div class="Group-headerTitle">
-                        <strong><?= t('server.index.moviegroups') ?></strong>
+                        <?= t('server.index.moviegroups') ?>
+                    </div>
+                    <div class="Group-headerActions">
+                        <? renderTorrentViewButton(TorrentViewScene::Collage);
+                        ?>
                     </div>
                 </div>
                 <div class="Group-body">
@@ -301,7 +305,7 @@ View::show_header($Name, 'browse,collage,comments,bbcode,voting,recommend', 'Pag
                     foreach ($GroupIDs as $GroupID) {
                         $Groups[] = $TorrentList[$GroupID];
                     }
-                    $tableRender = new TorrentGroupCoverTableView($Groups);
+                    $tableRender = newGroupTorrentView(TorrentViewScene::Collage, $Groups);
                     $tableRender->render();
                     $Pages = Format::get_pages($Page, $NumComments, CONFIG['TORRENT_COMMENTS_PER_PAGE'], 9, '#comments');
                     ?>

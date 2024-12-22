@@ -9,4 +9,5 @@
 #bookmarks .RssTitle {
   display: flex;
   gap: 3px;
+  align-items: center;
 }

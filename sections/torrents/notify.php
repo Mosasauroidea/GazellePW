@@ -168,7 +168,11 @@ if ($Sneaky) {
 ?>
 <div class=LayoutBody>
     <div class="BodyHeader">
-        <div class="BodyHeader-nav"><?= t('server.user.notify_me_of_all_new_torrents_with') ?></div>
+        <div class="BodyHeader-nav TorrentViewWrapper"><?= t('server.user.notify_me_of_all_new_torrents_with') ?>
+            <?
+            renderTorrentViewButton(TorrentViewScene::Notify);
+            ?>
+        </div>
         <div class="BodyHeader-subNav"><?= t('server.torrents.latest_notifications') ?></div>
     </div>
     <div class="BodyNavLinks">
@@ -247,7 +251,7 @@ if ($Sneaky) {
                                 $TorrentID = $Result['TorrentID'];
                                 $TorrentLists[] = Torrents::convert_torrent($TorrentGroups[$Result['GroupID']], $TorrentID);
                             }
-                            $tableRender = new UngroupTorrentSimpleListView($TorrentLists);
+                            $tableRender = newUngroupTorrentView(TorrentViewScene::Notify, $TorrentLists);
                             $tableRender->with_filter_id($FilterID)->render();
 
                             ?>

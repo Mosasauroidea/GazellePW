@@ -120,7 +120,7 @@ class Tags {
         foreach ($s as $k => $v) {
             $a[] = $k . '(' . $v . ')';
         }
-        return implode($a, ', ');
+        return implode(', ', $a);
     }
 
     /**

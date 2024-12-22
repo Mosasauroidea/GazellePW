@@ -1,10 +1,130 @@
 <?
 
-use Gazelle\API\Torrent;
 use Gazelle\Torrent\Subtitle;
 
 interface SortLink {
     public function link($SortKey, $DefaultWay = 'desc');
+}
+
+
+function get_torrent_view($Scene) {
+    $TorrentView = G::$LoggedUser['TorrentView' . $Scene];
+    if (!empty($TorrentView)) {
+        return $TorrentView;
+    }
+    switch ($Scene) {
+        case TorrentViewScene::Collage:
+            return TorrentView::Cover;
+        case TorrentViewScene::Artist:
+            return TorrentView::Cover;
+        case TorrentViewScene::Bookmark:
+            return TorrentView::Cover;
+        case TorrentViewScene::Top10Movie:
+            return TorrentView::Cover;
+        case TorrentViewScene::Subscribe:
+            return TorrentView::Cover;
+        case TorrentViewScene::Top10Torrent:
+            return TorrentView::Compact;
+        case TorrentViewScene::Notify:
+            return TorrentView::Compact;
+    }
+    return TorrentView::List;
+}
+
+function renderTorrentViewButton($Scene) {
+    $TorrentView = get_torrent_view($Scene);
+?>
+    <button class="TorrentView-btn Dropdown Dropdown-trigger">
+        <?= icon('Torrent/torrent_view') ?>
+        <form action="/user.php" method="post">
+            <input type="hidden" name="action" value="change_torrent_view" />
+            <input type="hidden" name="scene" value="<?= $Scene ?>" />
+            <input type="hidden" name="auth" value="<?= G::$LoggedUser['AuthKey'] ?>" />
+            <div class="DropdownMenu Overlay">
+                <?
+                foreach (getTorrentViews() as $View) {
+                ?>
+                    <input class=" <?= $TorrentView == $View ? 'DropdownMenu-selectedItem' : '' ?> DropdownMenu-item" type="submit" name="torrent_view" value="<?= getTorrentViewName($View) ?>" onclick="this.value='<?= $View ?>';">
+                <? } ?>
+            </div>
+        </form>
+    </button>
+    <?
+}
+
+
+function getTorrentViews(): array {
+    return [
+        TorrentView::List,
+        TorrentView::Cover,
+        TorrentView::Compact,
+        TorrentView::ReleaseName,
+    ];
+}
+
+function getTorrentViewName($View): string {
+    switch ($View) {
+        case TorrentView::Compact:
+            return t('server.torrent.compact_view');
+        case TorrentView::List:
+            return t('server.torrent.list_view');
+        case TorrentView::Cover:
+            return t('server.torrent.cover_view');
+        case TorrentView::ReleaseName:
+            return t('server.torrent.release_name_view');
+    }
+    return t('server.torrent.list_view');
+}
+
+abstract class TorrentView {
+    const  List = "list";
+    const Cover = "cover";
+    const Compact = "compact";
+    const ReleaseName = "release_name";
+}
+
+abstract class TorrentViewScene {
+    const TorrentBrowse = "TorrentBrowse";
+    const Collage = "Collage";
+    const Artist = "Artist";
+    const Bookmark = "Bookmark";
+    const Top10Movie = "Top10Movie";
+    const Top10Torrent = "Top10Movie";
+    const User = "User";
+    const Subscribe = "Subscribe";
+    const Notify = "Notify";
+}
+
+function newGroupTorrentView($Scene, $Groups): GroupTorrentTableView {
+    $View = get_torrent_view($Scene);
+    switch ($View) {
+        case TorrentView::Compact:
+            return new GroupTorrentSimpleListView($Groups);
+        case TorrentView::List:
+            return new GroupTorrentTableView($Groups);
+        case TorrentView::Cover:
+            return new TorrentGroupCoverTableView($Groups);
+        case TorrentView::ReleaseName:
+            $List = new GroupTorrentSimpleListView($Groups);
+            return $List->use_release_name(true);
+    }
+    return new GroupTorrentTableView($Groups);
+}
+
+function newUngroupTorrentView($Scene, $Torrents): UnGroupTorrentTableView {
+    $View = get_torrent_view($Scene);
+    switch ($View) {
+        case TorrentView::Compact:
+            return new UngroupTorrentSimpleListView($Torrents);
+        case TorrentView::List:
+            return new UngroupTorrentTableView($Torrents);
+        case TorrentView::Cover:
+            return new TorrentUnGroupCoverTableView($Torrents);
+        case TorrentView::ReleaseName:
+            $List  = new UngroupTorrentSimpleListView($Torrents);
+            return $List->use_release_name(true);
+    }
+    return new UngroupTorrentTableView($Torrents);
 }
 
 class TorrentGroupCoverTableView extends GroupTorrentTableView {
@@ -13,15 +133,56 @@ class TorrentGroupCoverTableView extends GroupTorrentTableView {
         $Class = $options['class'];
         $Style = $options['style'];
         $Variant = $options['Variant'];
-?>
+
+    ?>
         <div class="TorrentCover u-hideScrollbar <?= $Class ?>" style="<?= $Style ?>" variant="<?= $Variant ?>">
             <?
             foreach ($this->Groups as $RS) {
+                $TagsList = Torrents::tags($RS);
                 $Name = Torrents::group_name($RS, false);
                 $QueryString = $options['UseTorrentID'] ? "torrentid=" . $RS['TorrentID'] : "id=" . $RS['ID'];
             ?>
                 <a class="TorrentCover-item" href="torrents.php?<?= $QueryString ?>">
                     <div class="TorrentCover-imageContainer">
+                        <div class="TorrentCover-imdbTag TorrentCover-leftTopTag">
+                            <span><?= !empty($RS['IMDBRating']) ? sprintf("%.1f", $RS['IMDBRating']) : '--' ?></span>
+                        </div>
+                        <div class="TorrentCover-rightBottomTag">
+                            <div><i><?= $TagsList ?></i></div>
+                        </div>
+                        <img class="TorrentCover-image" src="<?= ImageTools::process($RS['WikiImage'], false) ?>" />
+                    </div>
+                    <b><?= display_str($Name) ?></b>
+                </a>
+            <? } ?>
+        </div>
+    <?
+    }
+}
+
+class TorrentUnGroupCoverTableView extends UnGroupTorrentTableView {
+    /* { UseTorrentID => false } */
+    public function render($options = []) {
+        $Class = $options['class'];
+        $Style = $options['style'];
+        $Variant = $options['Variant'];
+    ?>
+        <div class="TorrentCover u-hideScrollbar <?= $Class ?>" style="<?= $Style ?>" variant="<?= $Variant ?>">
+            <?
+            foreach ($this->Torrents as $Torrent) {
+                $RS = $Torrent['Group'];
+                $TagsList = Torrents::tags($RS);
+                $Name = Torrents::group_name($RS, false);
+                $QueryString = $options['UseTorrentID'] ? "torrentid=" . $RS['TorrentID'] : "id=" . $RS['ID'];
+            ?>
+                <a class="TorrentCover-item" href="torrents.php?<?= $QueryString ?>">
+                    <div class="TorrentCover-imageContainer">
+                        <div class="TorrentCover-imdbTag TorrentCover-leftTopTag">
+                            <span><?= !empty($RS['IMDBRating']) ? sprintf("%.1f", $RS['IMDBRating']) : '--' ?></span>
+                        </div>
+                        <div class="TorrentCover-rightBottomTag">
+                            <div><i><?= $TagsList ?></i></div>
+                        </div>
                         <img class="TorrentCover-image" src="<?= ImageTools::process($RS['WikiImage'], false) ?>" />
                     </div>
                     <b><?= display_str($Name) ?></b>
@@ -40,7 +201,7 @@ class UngroupTorrentSimpleListView extends UngroupTorrentTableView {
         parent::with_time(true);
     }
     public function with_cover($Bool): ?TorrentTableView {
-        $this->WithCover = false;
+        parent::with_cover(false);
         return $this;
     }
 
@@ -82,6 +243,9 @@ class UngroupTorrentSimpleListView extends UngroupTorrentTableView {
         $TorrentID = $Torrent['ID'];
         $SnatchedTorrentClass = $Torrent['IsSnatched'] ? ' snatched_torrent' : '';
         global $LoggedUser;
+        $TagsList = Torrents::tags($Group);
+        $Artists = $Group['Artists'];
+        $Director = Artists::get_first_directors($Artists);
         $ColCount = 6;
         if (!$this->WithTime) {
             $ColCount -= 1;
@@ -107,9 +271,24 @@ class UngroupTorrentSimpleListView extends UngroupTorrentTableView {
                                 |
                                 <a href="torrents.php?action=download&amp;id=<?= $TorrentID ?>&amp;authkey=<?= $LoggedUser['AuthKey'] ?>&amp;torrent_pass=<?= $LoggedUser['torrent_pass'] ?>&amp;usetoken=1" data-tooltip="Use a FL Token" onclick="return confirm('<?= FL_confirmation_msg($Torrent['Seeders'], $Torrent['Size']) ?>');">FL</a>
                             <? } ?>
-                            |
-                            <a href="torrents.php?torrentid=<?= $TorrentID ?>" data-tooltip="<?= t('server.torrents.permalink') ?>">PL</a>
                             ]
+                        </span>
+                    <? } ?>
+                    <?
+                    if ($this->WithCheck) {
+                        $TorrentChecked = $Torrent['Checked'];
+                        $TorrentCheckedBy = 'unknown';
+                        if ($TorrentChecked) {
+                            $TorrentCheckedBy = Users::user_info($TorrentChecked)['Username'];
+                        }
+                    ?>
+                        <span class="TableTorrent-titleCheck">
+                            <? if ($this->CheckAllTorrents || ($this->CheckSelfTorrents && $LoggedUser['id'] == $Torrent['UserID'])) { ?>
+                                <i class="TableTorrent-check" id="torrent<?= $TorrentID ?>_check1" style="display:<?= $TorrentChecked ? "inline-block" : "none" ?>;color:#649464;" data-tooltip="<?= t('server.torrents.checked_by', ['Values' => [$TorrentChecked ? $TorrentCheckedBy : $LoggedUser['Username']]]) ?>"><?= icon("Table/checked") ?></i>
+                                <i class="TableTorrent-check" id="torrent<?= $TorrentID ?>_check0" style="display:<?= $TorrentChecked ? "none" : "inline-block" ?>;color:#CF3434;" data-tooltip="<?= t('server.torrents.has_not_been_checked') ?><?= t('server.torrents.checked_explanation') ?>"><?= icon("Table/unchecked") ?></i>
+                            <? } else { ?>
+                                <i class="TableTorrent-check" style="color: <?= $TorrentChecked ? "#74B274" : "#A6A6A6" ?>;" data-tooltip="<?= $TorrentChecked ? t('server.torrents.has_been_checked') : t('server.torrents.has_not_been_checked') ?><?= t('server.torrents.checked_explanation') ?>"><?= icon("Table/" . ($TorrentChecked ? "checked" : "unchecked")) ?> </i>
+                            <? } ?>
                         </span>
                     <? } ?>
                     <? if (isset($this->DetailView)) { ?>
@@ -117,9 +296,12 @@ class UngroupTorrentSimpleListView extends UngroupTorrentTableView {
                             <?= Torrents::torrent_simple_view($Group, $Torrent, false, [
                                 'Self' => $this->WithSelf,
                                 'SettingTorrentTitle' => G::$LoggedUser['SettingTorrentTitle'],
+                                'UseReleaseName' => $this->UseReleaseName,
+                                'ShowNew' => $this->WithNewTag,
                             ]) ?>
                         </a>
-                    <? } else { ?>
+                    <? } else {
+                    ?>
                         <?= Torrents::torrent_simple_view(
                             $Group,
                             $Torrent,
@@ -127,11 +309,33 @@ class UngroupTorrentSimpleListView extends UngroupTorrentTableView {
                             [
                                 'Class' => $SnatchedTorrentClass,
                                 'SettingTorrentTitle' => G::$LoggedUser['SettingTorrentTitle'],
+                                'UseReleaseName' => $this->UseReleaseName,
+                                'ShowNew' => $this->WithNewTag,
                             ]
-                        ) ?>
+                        );
+                        ?>
                     <? } ?>
 
                 </div>
+                <span class="TableTorrent-movieInfoCompactItems">
+                    <span class="TableTorrent-movieInfoCompactItem">
+                        <?= icon('imdb-gray') ?>
+                        <span><?= !empty($Group['IMDBRating']) ? sprintf("%.1f", $Group['IMDBRating']) : '--' ?></span>
+                    </span>
+                    <a class="TableTorrent-movieInfoCompactItem">
+                        <?= icon('douban-gray') ?>
+                        <span><?= !empty($Group['DoubanRating']) ? sprintf("%.1f", $Group['DoubanRating']) : '--' ?></span>
+                    </a>
+                    <a class="TableTorrent-movieInfoCompactItem">
+                        <?= icon('rotten-tomatoes-gray') ?>
+                        <span><?= !empty($Group['RTRating']) ? $Group['RTRating'] : '--' ?></span>
+                    </a>
+                    <a class="TableTorrent-movieInfoCompactItem" data-tooltip="<?= t('server.upload.director') ?>" href="/artist.php?id=<?= $Director['ArtistID'] ?>" dir="ltr">
+                        <?= icon('movie-director') ?>
+                        <span><?= Artists::display_artist($Director, false) ?></span>
+                    </a>
+                    <span class="TableTorrent-movieInfoCompactItem"><i><?= $TagsList ?></i></span>
+                </span>
             </td>
             <? if ($this->WithTime) { ?>
                 <td class="Table-cell TableTorrent-cellStat TableTorrent-cellStatTime">
@@ -165,6 +369,117 @@ class UngroupTorrentSimpleListView extends UngroupTorrentTableView {
     }
 }
 
+
+class GroupTorrentSimpleListView extends GroupTorrentTableView {
+    public function __construct($Groups) {
+        parent::__construct($Groups);
+        parent::with_cover(false);
+        parent::with_time(true);
+        $this->CollapseTorrent = false;
+    }
+    public function with_cover($Bool): ?TorrentTableView {
+        parent::with_cover(false);
+        return $this;
+    }
+
+    public function render($Options = []) {
+        $Options = array_merge([
+            'NoActions' => false,
+        ], $Options)
+    ?>
+        <div class="TableContainer UngroupTorrentSimpleListView">
+            <? if (!empty($this->Groups)) { ?>
+                <table class="TableTorrent Table <?= $this->TableTorrentClass ?>" id="torrent_table">
+                    <tr class="Table-rowHeader">
+                        <?
+                        $this->render_header();
+                        foreach ($this->Groups as $Idx => $Group) {
+                            $this->render_group_info($Idx, $Options);
+                        }
+                        ?>
+                    </tr>
+                </table>
+            <? } else { ?>
+                <table>
+                    <tr class="rowb">
+                        <td colspan="7" class="center">
+                            <?= t('server.top10.found_no_torrents_matching_the_criteria') ?>
+                        </td>
+                    </tr>
+                </table>
+            <? } ?>
+        </div>
+    <?
+    }
+
+    protected function render_group_info($Idx) {
+        $Group = $this->Groups[$Idx];
+        $SnatchedGroupClass = Torrents::parse_group_snatched($Group) ? ' snatched_group' : '';
+        $Cols = 5;
+        if ($this->WithTime) {
+            $Cols += 1;
+        }
+        $GroupChecked = true;
+        foreach ($Group['Torrents'] as $Torrent) {
+            if (!$Torrent['Checked']) {
+                $GroupChecked = false;
+                break;
+            }
+        }
+        $GroupID = $Group['ID'];
+        $ShowGroups = !(!empty(G::$LoggedUser['TorrentGrouping']) && G::$LoggedUser['TorrentGrouping'] == 1);
+    ?>
+        <tr class="TableTorrent-rowMovieInfo Table-row <?= $this->WithCheck && $GroupChecked ? "torrent_all_checked " : "torrent_all_unchecked" ?> <?= $SnatchedGroupClass ?>" group-id="<?= $Group['ID'] ?>">
+
+            <td class="TableTorrent-cellMovieInfo Table-cell TableTorrent-cellMovieInfoBody" colspan="<?= $Cols + 1 ?>">
+                <div class="TableTorrent-movieInfoBody">
+                    <div class="TableTorrent-movieInfoContent">
+                        <?= $this->render_group_name($Group); ?>
+                    </div>
+                </div>
+            </td>
+            <?
+            ?>
+        </tr>
+    <?
+        $this->render_browse_group($Idx);
+    }
+
+    protected function render_group_name($GroupInfo) {
+        $GroupID = $GroupInfo['ID'];
+        $GroupName = Lang::choose_content($GroupInfo['Name'], $GroupInfo['SubName']);
+        $GroupYear = $GroupInfo['Year'];
+        $TagsList = Torrents::tags($GroupInfo);
+        $Artists = $GroupInfo['Artists'];
+        $Director = Artists::get_first_directors($Artists);
+    ?>
+        <span class="TableTorrent-compact  TableTorrent-movieInfoTitle">
+            <a href="\torrents.php?id=<?= $GroupID ?>"><?= display_str($GroupName) ?></a>
+            <span class="TableTorrent-movieInfoYear">(<? print_r($GroupYear) ?>)</span>
+        </span>
+        <span class="TableTorrent-movieInfoCompactItems">
+            <span class="TableTorrent-movieInfoCompactItem">
+                <?= icon('imdb-gray') ?>
+                <span><?= !empty($GroupInfo['IMDBRating']) ? sprintf("%.1f", $GroupInfo['IMDBRating']) : '--' ?></span>
+            </span>
+            <a class="TableTorrent-movieInfoCompactItem">
+                <?= icon('douban-gray') ?>
+                <span><?= !empty($GroupInfo['DoubanRating']) ? sprintf("%.1f", $GroupInfo['DoubanRating']) : '--' ?></span>
+            </a>
+            <a class="TableTorrent-movieInfoCompactItem">
+                <?= icon('rotten-tomatoes-gray') ?>
+                <span><?= !empty($GroupInfo['RTRating']) ? $GroupInfo['RTRating'] : '--' ?></span>
+            </a>
+            <a class="TableTorrent-movieInfoCompactItem" data-tooltip="<?= t('server.upload.director') ?>" href="/artist.php?id=<?= $Director['ArtistID'] ?>" dir="ltr">
+                <?= icon('movie-director') ?>
+                <span><?= Artists::display_artist($Director, false) ?></span>
+            </a>
+            <span class="TableTorrent-movieInfoCompactItem"><i><?= $TagsList ?></i></span>
+        </span>
+    <?
+    }
+}
+
 class DetailOption {
     public $ThumbCounts = null;
     public $BonusSended = null;
@@ -184,12 +499,15 @@ class TorrentTableView {
     protected $WithYear = false;
     protected $WithSelf = true;
     protected $DetailView = null;
+    protected $WithNewTag = false;
 
     protected $CheckAllTorrents;
     protected $CheckSelfTorrents;
     protected $AllUncheckedCnt = 0;
     protected $PageUncheckedCnt = 0;
     protected $TableTorrentClass;
+    protected bool $UseReleaseName;
+    protected bool $CollapseTorrent = true;
     /**
      * @var DetailOption $DetailOption
      */
@@ -198,13 +516,36 @@ class TorrentTableView {
     protected $HeadLinkFunc = null;
 
     public function __construct() {
+
+        $this->UseReleaseName = false;
         if (G::$LoggedUser['CoverArt']) {
             $this->WithCover = true;
         } else {
             $this->WithCover = false;
         }
         $this->TableTorrentClass = G::$LoggedUser['SettingTorrentTitle']['Alternative'] ? 'is-alternative' : '';
+        if (check_perms('torrents_check')) {
+            $this->CheckAllTorrents = !G::$LoggedUser['DisableCheckAll'];
+        } else {
+            $this->CheckAllTorrents = false;
+        }
+        if (check_perms('self_torrents_check')) {
+            $this->CheckSelfTorrents = !G::$LoggedUser['DisableCheckSelf'];
+        } else {
+            $this->CheckSelfTorrents = false;
+        }
     }
+
+    public function with_new_tag($Bool): TorrentTableView {
+        $this->WithNewTag = $Bool;
+        return $this;
+    }
+
+    public function use_release_name($Bool): TorrentTableView {
+        $this->UseReleaseName = $Bool;
+        return $this;
+    }
+
     public function with_detail($View = '', DetailOption $DetailOption = null): ?TorrentTableView {
         $this->DetailView = $View;
         $this->DetailOption = $DetailOption;
@@ -316,7 +657,7 @@ class TorrentTableView {
         }
     ?>
 
-        <div class="TorrentDetail">
+        <div class=" TorrentDetail">
             <div class="TorrentDetail-row is-viewActionsContainer">
                 <div class="ButtonGroup TorrentDetail-postMessageList">
                     <?
@@ -706,7 +1047,7 @@ class TorrentTableView {
         <td class="Table-cell TableTorrent-cellStat TableTorrent-cellStatLeechers">
             <?= $this->header_elem('<i  aria-hidden="true" data-tooltip="' . t('server.common.leechers') . '">' . icon('torrent-leechers') . '</i>', $this->WithSort, 'leechers') ?>
         </td>
-        <?
+    <?
     }
 }
 
@@ -716,16 +1057,6 @@ class GroupTorrentTableView extends TorrentTableView {
     public function __construct($Groups) {
         $this->set_groups($Groups);
         parent::__construct();
-        if (check_perms('torrents_check')) {
-            $this->CheckAllTorrents = !G::$LoggedUser['DisableCheckAll'];
-        } else {
-            $this->CheckAllTorrents = false;
-        }
-        if (check_perms('self_torrents_check')) {
-            $this->CheckSelfTorrents = !G::$LoggedUser['DisableCheckSelf'];
-        } else {
-            $this->CheckSelfTorrents = false;
-        }
     }
     private function set_groups($Groups): ?GroupTorrentTableView {
         $this->Groups = $Groups;
@@ -741,42 +1072,7 @@ class GroupTorrentTableView extends TorrentTableView {
         return $Torrents;
     }
     public function render() {
-        if ($this->WithCheck) {
-            // TODO by qwerty move js
-            if ($this->CheckAllTorrents || $this->CheckSelfTorrents) {
-        ?>
-                <script>
-                    function torrents_unchecked() {
-                        $('#torrents_unchecked').hide()
-                        $('#torrents_checked').show()
-                        $('.torrent_all_checked').show()
-                        $('.torrent_checked').show()
-                        $('.torrent_all_unchecked').hide()
-                        $('.torrent_unchecked').hide()
-                    }
-
-                    function torrents_checked() {
-                        $('#torrents_checked').hide()
-                        $('#torrents_all').show()
-                        $('.torrent_all_unchecked').show()
-                        $('.torrent_unchecked').show()
-                    }
-
-                    function torrents_all() {
-                        $('#torrents_all').hide()
-                        $('#torrents_unchecked').show()
-                        $('.torrent_all_checked').hide()
-                        $('.torrent_checked').hide()
-                    }
-                    $(document).ready(function() {
-                        $('#torrents_all').click(torrents_all)
-                        $('#torrents_unchecked').click(torrents_unchecked)
-                        $('#torrents_checked').click(torrents_checked)
-                    })
-                </script>
-        <? }
-        }
-        ?>
+    ?>
         <div class="TableContainer">
             <table class="TableTorrent Table <?= $this->TableTorrentClass ?>" id="torrent_table">
                 <tr class="Table-rowHeader">
@@ -798,15 +1094,6 @@ class GroupTorrentTableView extends TorrentTableView {
     protected function render_header() {
     ?>
         <td class="Table-cell" width="40px">
-            <?
-            if ($this->WithCheck && $this->CheckAllTorrents) {
-            ?>
-                <a href="javascript:void(-1)" id="torrents_all"><?= icon("Table/check-all") ?></a>
-                <a href="javascript:void(-1)" id="torrents_unchecked" style="display:none"><?= icon("Table/unchecked") ?></a>
-                <a href="javascript:void(-1)" id="torrents_checked" style="display:none"><?= icon("Table/checked") ?></a>
-            <?
-            }
-            ?>
         </td>
 
     <?
@@ -859,7 +1146,7 @@ class GroupTorrentTableView extends TorrentTableView {
         $this->render_browse_group($Idx);
     }
 
-    private function render_browse_group($Idx) {
+    protected  function render_browse_group($Idx) {
         global $LoggedUser;
         $Group = $this->Groups[$Idx];
         $GroupID = $Group['ID'];
@@ -887,7 +1174,11 @@ class GroupTorrentTableView extends TorrentTableView {
         ?>
                 <tr class="TableTorrent-rowCategory Table-row <?= $this->WithCheck && $GroupChecked ? "torrent_all_checked " : "torrent_all_unchecked" ?> <?= (!empty($LoggedUser['TorrentGrouping']) && $LoggedUser['TorrentGrouping'] === 1 ? ' hidden' : '') ?>" group-id="<?= $GroupID ?>">
                     <td class="TableTorrent-cellCategory Table-cell" colspan="<?= $Cols ?>">
-                        <a class="u-toggleEdition-button" href="#" onclick="globalapp.toggleEdition(event, <?= $GroupID ?>, <?= $EditionID ?>)" data-tooltip="<?= t('server.common.collapse_this_edition_title') ?>">&minus;</a>
+                        <? if ($this->CollapseTorrent) { ?>
+                            <a class="u-toggleEdition-button" href="#" onclick="globalapp.toggleEdition(event, <?= $GroupID ?>, <?= $EditionID ?>)" data-tooltip="<?= t('server.common.collapse_this_edition_title') ?>">&minus;</a>
+                        <? } else { ?>
+                            <span class="u-toggleEdition-button">&minus;</span>
+                        <? } ?>
                         <?= $NewEdition ?>
                     </td>
                 </tr>
@@ -907,7 +1198,9 @@ class GroupTorrentTableView extends TorrentTableView {
 
         global $LoggedUser;
         $TorrentChecked = $Torrent['Checked'];
-        $FileName = Torrents::filename($Torrent);
+        if (!$this->UseReleaseName) {
+            $FileName = Torrents::filename($Torrent);
+        }
         $SnatchedTorrentClass = $Torrent['IsSnatched'] ? ' snatched_torrent' : '';
         $SnatchedGroupClass = Torrents::parse_group_snatched($Group) ? ' snatched_group' : '';
         $Cols = 2;
@@ -947,7 +1240,9 @@ class GroupTorrentTableView extends TorrentTableView {
                     <? } ?>
                     <a class="<?= $SnatchedTorrentClass ?>" data-tooltip="<?= $FileName ?>" href="torrents.php?id=<?= $GroupID ?>&amp;torrentid=<?= $TorrentID ?>#torrent<?= $TorrentID ?>">
                         <?= Torrents::torrent_info($Torrent, true, [
-                            'SettingTorrentTitle' => G::$LoggedUser['SettingTorrentTitle']
+                            'SettingTorrentTitle' => G::$LoggedUser['SettingTorrentTitle'],
+                            'UseReleaseName' => $this->UseReleaseName,
+                            'ShowNew' => $this->WithNewTag,
                         ]) ?>
                     </a>
 
@@ -1015,7 +1310,9 @@ class UngroupTorrentTableView  extends TorrentTableView {
         $SnatchedGroupClass = Torrents::parse_group_snatched($Group) ? ' snatched_group' : '';
         $TorrentID = $Torrent['ID'];
         $SnatchedTorrentClass = $Torrent['IsSnatched'] ? ' snatched_torrent' : '';
-        $FileName = Torrents::filename($Torrent);
+        if (!$this->UseReleaseName) {
+            $FileName = Torrents::filename($Torrent);
+        }
         global $LoggedUser;
     ?>
         <? /* UngroupTorrentTableView */ ?>
@@ -1031,9 +1328,27 @@ class UngroupTorrentTableView  extends TorrentTableView {
                         <? } ?>
                         ]
                     </span>
+                    <?
+                    if ($this->WithCheck) {
+                        $TorrentChecked = $Torrent['Checked'];
+                        $TorrentCheckedBy = 'unknown';
+                        if ($TorrentChecked) {
+                            $TorrentCheckedBy = Users::user_info($TorrentChecked)['Username'];
+                        }
+                    ?>
+                        <span class="TableTorrent-titleCheck">
+                            <? if ($this->CheckAllTorrents || ($this->CheckSelfTorrents && $LoggedUser['id'] == $Torrent['UserID'])) { ?>
+                                <i class="TableTorrent-check" id="torrent<?= $TorrentID ?>_check1" style="display:<?= $TorrentChecked ? "inline-block" : "none" ?>;color:#649464;" data-tooltip="<?= t('server.torrents.checked_by', ['Values' => [$TorrentChecked ? $TorrentCheckedBy : $LoggedUser['Username']]]) ?>"><?= icon("Table/checked") ?></i>
+                                <i class="TableTorrent-check" id="torrent<?= $TorrentID ?>_check0" style="display:<?= $TorrentChecked ? "none" : "inline-block" ?>;color:#CF3434;" data-tooltip="<?= t('server.torrents.has_not_been_checked') ?><?= t('server.torrents.checked_explanation') ?>"><?= icon("Table/unchecked") ?></i>
+                            <? } else { ?>
+                                <i class="TableTorrent-check" style="color: <?= $TorrentChecked ? "#74B274" : "#A6A6A6" ?>;" data-tooltip="<?= $TorrentChecked ? t('server.torrents.has_been_checked') : t('server.torrents.has_not_been_checked') ?><?= t('server.torrents.checked_explanation') ?>"><?= icon("Table/" . ($TorrentChecked ? "checked" : "unchecked")) ?> </i>
+                            <? } ?>
+                        </span>
+                    <? } ?>
                     <a class="<?= $SnatchedTorrentClass ?>" data-tooltip="<?= $FileName ?>" href="torrents.php?id=<?= $GroupID ?>&amp;torrentid=<?= $TorrentID ?>#torrent<?= $TorrentID ?>">
                         <?= Torrents::torrent_info($Torrent, true, [
-                            'SettingTorrentTitle' => G::$LoggedUser['SettingTorrentTitle']
+                            'SettingTorrentTitle' => G::$LoggedUser['SettingTorrentTitle'],
+                            'ShowNew' => $this->WithNewTag,
                         ]) ?>
                     </a>
 

@@ -45,7 +45,11 @@ $CollageSubs = $DB->to_array();
 ?>
 <div class="LayoutBody">
     <div class="BodyHeader">
-        <h2 class="BodyHeader-nav"><?= t('server.userhistory.subscribed_collages') ?><?= ($ShowAll ? '' : t('server.userhistory.with_new_additions')) ?></h2>
+        <div class="BodyHeader-nav TorrentViewWrapper"><?= t('server.userhistory.subscribed_collages') ?><?= ($ShowAll ? '' : t('server.userhistory.with_new_additions')) ?>
+            <?
+            renderTorrentViewButton(TorrentViewScene::Subscribe);
+            ?>
+        </div>
 
         <div class="BodyNavLinks">
             <?
@@ -115,7 +119,7 @@ $CollageSubs = $DB->to_array();
                 foreach ($GroupIDs as $GroupID) {
                     $Groups[] = $TorrentList[$GroupID];
                 }
-                $tableRender = new TorrentGroupCoverTableView($Groups);
+                $tableRender = newGroupTorrentView(TorrentViewScene::Subscribe, $Groups);
                 $tableRender->render();
                 ?>
             </div>

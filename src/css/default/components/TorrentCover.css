@@ -51,6 +51,35 @@ TorrentCover variant="OneLine | FiveGrid"
 .TorrentCover-imageContainer {
   width: 160px;
   height: 240px;
+  position: relative;
+}
+
+.TorrentCover-leftTopTag {
+  float: left;
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  z-index: 1000;
+  width: 24px;
+  display: flex;
+  justify-content: center;
+}
+
+.TorrentCover-imdbTag {
+  background-color: #fbbf14;
+  color: black;
+}
+
+.TorrentCover-rightBottomTag {
+  float: right;
+  position: absolute;
+  right: 0px;
+  bottom: 0px;
+  z-index: 1000;
+  color: var(--TableTorrent-coverTag-color);
+  background-color: var(--TableTorrent-coverTag-background);
+  padding: 0 2px;
+  font-size: 75%;
 }
 @media (max-width: 768px) {
   .TorrentCover[variant='OneLine'] .TorrentCover-imageContainer {

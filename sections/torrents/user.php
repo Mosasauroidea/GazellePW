@@ -310,7 +310,11 @@ $Pages = Format::get_pages($Page, $TorrentCount, CONFIG['TORRENTS_PER_PAGE']);
 ?>
 <div class="LayoutBody">
     <div class="BodyHeader">
-        <h2 class="BodyHeader-nav"><a href="user.php?id=<?= $UserID ?>"><?= $User['Username'] ?></a><?= t('server.torrents.user_s') . t('server.torrents.action_' . $Action) . t('server.torrents.action_torrents') ?></h2>
+        <div class="BodyHeader-nav TorrentViewWrapper"><a href="user.php?id=<?= $UserID ?>"><?= $User['Username'] ?></a><?= t('server.torrents.user_s') . t('server.torrents.action_' . $Action) . t('server.torrents.action_torrents') ?>
+            <?
+            renderTorrentViewButton(TorrentViewScene::User);
+            ?>
+        </div>
     </div>
     <div class="BodyContent">
         <form class="Form SearchPage Box SearchUserTorrent" name="torrents" action="" method="get">
@@ -412,7 +416,7 @@ $Pages = Format::get_pages($Page, $TorrentCount, CONFIG['TORRENTS_PER_PAGE']);
             list($GroupID,, $Time) = array_values($Info);
             $TorrentLists[] = Torrents::convert_torrent($Results[$GroupID], $TorrentID);
         }
-        $tableRender = new UngroupTorrentSimpleListView($TorrentLists);
+        $tableRender = newUngroupTorrentView(TorrentViewScene::User, $TorrentLists);
         $tableRender->render();
     } ?>
     <div class="BodyNavLinks"><?= $Pages ?></div>

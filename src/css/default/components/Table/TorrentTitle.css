@@ -5,6 +5,7 @@ TorrentTitle TorrentTitle--standalone   # settings - torrent title
 
 .TorrentTitle {
 }
+
 .TableTorrent.is-alternative .TorrentTitle {
   font-family: var(--global-fontFamilyMonospace);
 }
@@ -22,6 +23,10 @@ TorrentTitle TorrentTitle--standalone   # settings - torrent title
   vertical-align: middle;
   margin: 3px 0px;
   line-height: 1.5em;
+}
+
+.TorrentTitle-item.group_name a {
+  color: var(--TableTorrent-movieInfoTitle-color);
 }
 
 .TorrentTitle-item.official_release_group {
@@ -62,6 +67,18 @@ TorrentTitle TorrentTitle--standalone   # settings - torrent title
 }
 .TorrentTitle-item.tl_snatched {
   color: #00bc8c;
+}
+
+.TorrentSnatched {
+  color: rgb(127 76 76);
+}
+
+.TorrentDownloading {
+  color: #919830;
+}
+
+.TorrentSeeding {
+  color: green;
 }
 
 /* standalone */

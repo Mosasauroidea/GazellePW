@@ -297,6 +297,13 @@ if ($Err) {
     header("Location: user.php?action=edit&userid=$UserID");
     die();
 }
+$DB->query("
+	SELECT SiteOptions
+	FROM users_info
+	WHERE UserID = $UserID");
+list($SiteOptions) = $DB->next_record();
+
+$Options = unserialize_array($SiteOptions);
 
 if (!empty($LoggedUser['DefaultSearch'])) {
     $Options['DefaultSearch'] = $LoggedUser['DefaultSearch'];

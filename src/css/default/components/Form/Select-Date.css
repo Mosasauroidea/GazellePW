@@ -18,7 +18,7 @@ DatePicker
 */
 
 /* select */
-:is(select.Input, .Input:is([type='date'], [type='datetime'], [type='datetime-local'])) {
+:is(select.Input, .Input:is([type='date'], [type='datetime'], [type='datetime-local'], [type='time'])) {
   background-color: var(--Input-background);
   color: var(--Input-color);
   border: var(--Input-border);
@@ -33,11 +33,11 @@ DatePicker
   max-width: 100%;
 }
 
-:is(select.Input, .Input:is([type='date'], [type='datetime'], [type='datetime-local'])):hover {
+:is(select.Input, .Input:is([type='date'], [type='datetime'], [type='datetime-local'], [type='time'])):hover {
   background: var(--Input-onHover-background);
 }
 
-:is(select.Input, .Input:is([type='date'], [type='datetime'], [type='datetime-local'])):focus {
+:is(select.Input, .Input:is([type='date'], [type='datetime'], [type='datetime-local'], [type='time'])):focus {
   border: var(--Input-onFocus-border);
   box-shadow: var(--Input-onFocus-boxShadow);
 }

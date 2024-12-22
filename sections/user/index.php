@@ -185,6 +185,9 @@ switch ($_REQUEST['action']) {
     case 'take_edit':
         include('take_edit.php');
         break;
+    case 'change_torrent_view':
+        include('change_torrent_view.php');
+        break;
     case 'invitetree':
         include(CONFIG['SERVER_ROOT'] . '/sections/user/invitetree.php');
         break;

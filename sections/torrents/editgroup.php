@@ -213,62 +213,93 @@ View::show_header(t('server.torrents.edit_torrent_group'), '', 'PageTorrentEditG
                         <tr class="Form-row">
                             <td class="Form-label"><?= t('server.torrents.torrent_group_leech_status') ?>:</td>
                             <td class="Form-inputs">
-                                <input type="checkbox" id="unfreeleech" name="unfreeleech" /><label for="unfreeleech"> <?= t('server.torrents.reset') ?></label>
-                                <input type="checkbox" id="freeleech" name="freeleech" /><label for="freeleech"> <?= t('server.torrents.freeleech') ?></label>
-                                <input type="checkbox" id="neutralleech" name="neutralleech" /><label for="neutralleech"> <?= t('server.torrents.neutral_leech') ?></label>
-                                <input type="checkbox" id="off25leech" name="off25leech" /><label for="off25leech"> <?= t('server.torrents.off25') ?></label>
-                                <input type="checkbox" id="off50leech" name="off50leech" /><label for="off50leech"> <?= t('server.torrents.off50') ?></label>
-                                <input type="checkbox" id="off75leech" name="off75leech" /><label for="off75leech"> <?= t('server.torrents.off75') ?></label>
-                                <?= t('server.torrents.because') ?>
-                                <select class="Input" name="freeleechtype" <? $FL = array('N/A', 'Staff Pick', 'Perma-FL');
-                                                                            // TODO 种子组的free类型当前没有记忆功能
-                                                                            foreach ($FL as $Key => $FLType) { ?> <option class="Select-option" value="<?= $Key ?>"><?= $FLType ?></option>
-                                <?      } ?>
+                                <select class="Input" name="freeleech">
+                                    <?
+                                    $FL = Torrents::freeleech_option();
+                                    foreach ($FL as $Key => $Name) {
+                                    ?>
+                                        <option class="Select-option" value="<?= $Key ?>" <?= ($Key == $Torrent['FreeTorrent'] ? ' selected="selected"' : '') ?>>
+                                            <?= $Name ?></option>
+                                    <?              } ?>
                                 </select>
-                            </td>
-                        </tr>
-                    <?  } ?>
-                    <tr class="Form-row">
-                        <td rowspan="2">
-                            <div style="text-align: center;">
-                                <input class="Button" type="submit" value="<?= t('server.common.submit') ?>" />
-                            </div>
-                        </td>
-                    </tr>
-                </table>
-            </form>
+                                <script>
+                                    $(document).ready(() => {
+                                        $("#limit-time").click(() => {
+                                            if ($("#limit-time")[0].checked) {
+                                                $("#input-free-date,#input-free-time").show()
+                                                if (<?= $Torrent['FreeEndTime'] ? "false" : "true" ?>) {
+                                                    const d = new Date()
+                                                    $("#input-free-date")[0].value = d.getFullYear() + "-" + ("0" + (d.getMonth() +
+                                                        1)).substr(-2) + "-" + ("0" + d.getDate()).substr(-2)
+                                                    $("#input-free-time")[0].value = ("0" + d.getHours()).substr(-2) + ":" + ("0" + d
+                                                        .getMinutes()).substr(-2)
+                                                }
+
+                                            } else {
+                                                $("#input-free-date,#input-free-time").hide()
+                                            }
+                                        })
+                                    })
+                                </script>
+                                <div class="Checkbox">
+                                    <input class="Input" type="checkbox" id="limit-time" name="limit-time" <?= $Torrent['FreeEndTime'] ? " checked=\"checked\"" : "" ?> />
+                                    <label class="Checkbox-label" for="limit-time" style="display: inline;">定时</label>
+                                </div>
         </div>
-    <?
+        <input class="Input" type="date" id="input-free-date" name="free-date" <?= $Torrent['FreeEndTime'] ? "value=\"" . substr($Torrent['FreeEndTime'], 0, 10) . "\"" : "style=\"display:none;\"" ?> /><input class="Input" id="input-free-time" name="free-time" type="time" <?= $Torrent['FreeEndTime'] ? "value=\"" . substr($Torrent['FreeEndTime'], 11, 5) . "\"" : "style=\"display:none;\"" ?> />
+        <?= t('server.upload.because') ?>
+        <select class="Input" name="freeleechtype">
+            <?
+                        $FL = array("N/A", "Staff Pick", "Perma-FL");
+                        foreach ($FL as $Key => $Name) {
+            ?>
+                <option class="Select-option" value="<?= $Key ?>" <?= ($Key == $Torrent['FreeLeechType'] ? ' selected="selected"' : '') ?>><?= $Name ?></option>
+            <?              } ?>
+        </select>
+        </td>
+        </tr>
+    <?  } ?>
+    <tr class="Form-row">
+        <td rowspan="2">
+            <div style="text-align: center;">
+                <input class="Button" type="submit" value="<?= t('server.common.submit') ?>" />
+            </div>
+        </td>
+    </tr>
+    </table>
+    </form>
+</div>
+<?
     }
     if (check_perms('torrents_edit')) {
-    ?>
-        <div>
-            <form class="merge_form" name="torrent_group" action="torrents.php" method="post">
-                <div>
-                    <input type="hidden" name="action" value="merge" />
-                    <input type="hidden" name="auth" value="<?= $LoggedUser['AuthKey'] ?>" />
-                    <input type="hidden" name="groupid" value="<?= $GroupID ?>" />
-                    <table cellpadding="3" cellspacing="1" border="0" class="Form-rowList" width="100%" variant="header">
-                        <tr class="Form-rowHeader" id="merge">
-                            <td class="Form-title"><?= t('server.torrents.merge_with') ?></td>
-                        </tr>
-                        <tr class="Form-row">
-                            <td class="Form-label"><?= t('server.torrents.merge_target') ?>:</td>
-                            <td class="Form-inputs FormOneLine">
-                                <input class="Input is-small" type="text" name="targetgroupid" size="10" />
-                            </td>
-                        </tr>
-                        <tr class="Form-row">
-                            <td rowspan="2">
-                                <input class="Button" type="submit" value="<?= t('server.common.submit') ?>" />
-                            </td>
-                        </tr>
-                </div>
+?>
+    <div>
+        <form class="merge_form" name="torrent_group" action="torrents.php" method="post">
+            <div>
+                <input type="hidden" name="action" value="merge" />
+                <input type="hidden" name="auth" value="<?= $LoggedUser['AuthKey'] ?>" />
+                <input type="hidden" name="groupid" value="<?= $GroupID ?>" />
+                <table cellpadding="3" cellspacing="1" border="0" class="Form-rowList" width="100%" variant="header">
+                    <tr class="Form-rowHeader" id="merge">
+                        <td class="Form-title"><?= t('server.torrents.merge_with') ?></td>
+                    </tr>
+                    <tr class="Form-row">
+                        <td class="Form-label"><?= t('server.torrents.merge_target') ?>:</td>
+                        <td class="Form-inputs FormOneLine">
+                            <input class="Input is-small" type="text" name="targetgroupid" size="10" />
+                        </td>
+                    </tr>
+                    <tr class="Form-row">
+                        <td rowspan="2">
+                            <input class="Button" type="submit" value="<?= t('server.common.submit') ?>" />
+                        </td>
+                    </tr>
+            </div>
 
-                </table>
-        </div>
-        </form>
-</div>
+            </table>
+    </div>
+    </form>
+    </div>
 <?  } ?>
 </div>
 <? View::show_footer(); ?>

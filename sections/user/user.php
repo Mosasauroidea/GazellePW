@@ -935,10 +935,14 @@ View::show_header($Username, "jquery.imagesloaded,jquery.wookmark,user,bbcode,co
         				    g.Name,
         				    g.WikiImage,
                             g.SubName,
-                            g.Year
+                            g.Year,
+                            g.IMDBRating,
+                            GROUP_CONCAT(DISTINCT tags.Name ORDER BY `TagID` SEPARATOR ' ') as TagList
         			    FROM xbt_snatched AS s
         			    	INNER JOIN torrents AS t ON t.ID = s.fid
         			    	INNER JOIN torrents_group AS g ON t.GroupID = g.ID
+                            LEFT JOIN torrents_tags AS tt ON tt.GroupID = g.ID
+                            LEFT JOIN tags ON tags.ID = tt.TagID
         			    WHERE s.uid = '$UserID'
         			    	AND t.UserID != '$UserID'
         			    	AND g.CategoryID = '1'
@@ -977,9 +981,13 @@ View::show_header($Username, "jquery.imagesloaded,jquery.wookmark,user,bbcode,co
             				g.Name,
                             g.SubName,
                             g.Year,
-            				g.WikiImage
+            				g.WikiImage,
+                            g.IMDBRating,
+                            GROUP_CONCAT(DISTINCT tags.Name ORDER BY `TagID` SEPARATOR ' ') as TagList
             			FROM torrents_group AS g
             				INNER JOIN torrents AS t ON t.GroupID = g.ID
+                            LEFT JOIN torrents_tags AS tt ON tt.GroupID = g.ID
+                            LEFT JOIN tags ON tags.ID = tt.TagID
             			WHERE t.UserID = '$UserID'
             				AND g.CategoryID = '1'
             				AND g.WikiImage != ''

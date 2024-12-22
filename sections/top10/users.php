@@ -193,13 +193,26 @@ View::show_header(t('server.top10.top_10_users'), '', 'PageTop10User');
                         // in the unlikely event that query finds 0 rows...
 
                         $Rank = 0;
+                        $IsMod = check_perms('users_mod');
                         foreach ($Details as $Detail) {
+                            $UserName = Users::format_username($Detail['ID'], false, false, false);
                             $Rank++;
                             $IsAnonymous = preg_match("/&quot;(uploaded|downloaded|ratio|uploads\+|bonuspoints)&quot;/", $Detail['Paranoia']);
+                            if ($IsMod) {
+                                if ($IsAnonymous) {
+                                    $NameItem = t('server.user.anonymous') . '(' . $UserName . ')';
+                                } else {
+                                    $NameItem = $UserName;
+                                }
+                            } else if ($IsAnonymous) {
+                                $NameItem = $IsAnonymous;
+                            } else {
+                                $NameItem = $UserName;
+                            }
                         ?>
                             <tr class="Table-row">
                                 <td class="Table-cell"><?= $Rank ?></td>
-                                <td class="Table-cell"><?= $IsAnonymous ?  t('server.user.anonymous') : Users::format_username($Detail['ID'], false, false, false) ?></td>
+                                <td class="Table-cell"><?= $NameItem ?></td>
                                 <? foreach ($Items as $Item) { ?>
                                     <? if ($Item === 'numul') { ?>
                                         <td class="Table-cell Table-cellRight"><?= number_format($Detail['NumUploads']) ?></td>

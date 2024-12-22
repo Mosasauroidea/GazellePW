@@ -190,7 +190,7 @@ if (isset($_POST['GroupID'])) {
                             <label class="Checkbox-label" for="limit-time" style="display: inline;"><?= t('server.tools.timer') ?></label>&nbsp;
                         </div>
                         <input id="input-free-date" name="free-date" type="date" style="display:none;" />
-                        <input id="input-free-time" name="free-time" type="time" style="display:none;" />
+                        <input id="Input input-free-time" name="free-time" type="time" style="display:none;" />
                         <?= t('server.tools.for_reason') ?>
                         <select class="Input" name="freeleechreason">
                             <? $FL = array('N/A', 'Staff Pick', 'Perma-FL');

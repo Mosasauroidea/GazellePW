@@ -260,7 +260,7 @@ class Text {
         }
         $Host = $URLInfo['host'];
         // If for some reason your site does not require subdomains or contains a directory in the CONFIG['SITE_URL'], revert to the line below.
-        if (empty($URLInfo['port']) && $Host === CONFIG['SITE_HOST']) {
+        if ($Host === CONFIG['SITE_HOST']) {
             $URL = '';
             if (!empty($URLInfo['path'])) {
                 $URL .= ltrim($URLInfo['path'], '/'); // Things break if the path starts with '//'

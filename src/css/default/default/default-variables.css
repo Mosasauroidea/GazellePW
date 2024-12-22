@@ -207,6 +207,8 @@
   --slotDiy-color: #00b8ea;
   --slotEmpty-color: #a7a7a7;
   --slotHighlightName-color: #ddd;
+  --TableTorrent-coverTag-background: #535353ba;
+  --TableTorrent-coverTag-color: white;
 
   /* Form */
   --Form-errorMessage-color: var(--global-color-warning);

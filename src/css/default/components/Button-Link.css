@@ -64,6 +64,9 @@ Loading Button
   box-shadow: var(--Button-default-onHover-boxShadow);
   text-decoration: none;
 }
+.Button:active {
+  transform: scale(0.95);
+}
 .Button:disabled {
   cursor: not-allowed;
 }

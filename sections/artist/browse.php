@@ -226,6 +226,7 @@ if (!empty($UsedReleases)) { ?>
         <?
         }
         ?>
+
     </div>
 <? }
 
@@ -272,8 +273,10 @@ View::show_header($ArtistHeaderName, 'browse,bbcode,comments,voting,recommend,su
 ?>
 <div class="LayoutBody">
     <div class="BodyHeader">
-        <div class="BodyHeader-nav">
+        <div class="BodyHeader-nav TorrentViewWrapper">
             <?= t('server.common.artists') ?>
+            <? renderTorrentViewButton(TorrentViewScene::Artist) ?>
+
         </div>
         <div class="BodyNavLinks">
             <? if (check_perms('site_edit_wiki')) { ?>
@@ -643,7 +646,7 @@ View::show_header($ArtistHeaderName, 'browse,bbcode,comments,voting,recommend,su
                     </div>
                     <div class="Group-body torrent_table_<?= $ReleaseType ?>" id="torrent_table_<?= $ID ?>">
                         <?
-                        $tableRender = new TorrentGroupCoverTableView($GroupInfo);
+                        $tableRender =  newGroupTorrentView(TorrentViewScene::Artist, $GroupInfo);
                         $tableRender->render();
                         ?>
                     </div>

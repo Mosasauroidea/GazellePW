@@ -66,7 +66,7 @@ View::show_header($Title, 'browse,collage', 'PageBookmarkTorrent');
 ?>
 <div class="LayoutBody">
     <div class="BodyHeader">
-        <h2 class="BodyHeader-nav">
+        <h2 class="BodyHeader-nav TorrentViewWrapper">
             <div class="RssTitle">
                 <? if (!$Sneaky) {
                 ?><a target="_blank" data-tooltip="<?= t('server.user.rss_address') ?>" href="feeds.php?feed=torrents_bookmarks_t_<?= $LoggedUser['torrent_pass'] ?>&amp;user=<?= $LoggedUser['ID'] ?>&amp;auth=<?= $LoggedUser['RSS_Auth'] ?>&amp;passkey=<?= $LoggedUser['torrent_pass'] ?>&amp;authkey=<?= $LoggedUser['AuthKey'] ?>&amp;name=<?= urlencode(CONFIG['SITE_NAME'] . ': Bookmarked Torrents') ?>">
@@ -74,6 +74,9 @@ View::show_header($Title, 'browse,collage', 'PageBookmarkTorrent');
                     <?
                 } ?><?= $Title ?>
             </div>
+            <?
+            renderTorrentViewButton(TorrentViewScene::Bookmark);
+            ?>
         </h2>
         <div class="BodyNavLinks">
             <a href="bookmarks.php?type=torrents" class="brackets"><?= t('server.index.moviegroups') ?></a>
@@ -160,7 +163,7 @@ View::show_header($Title, 'browse,collage', 'PageBookmarkTorrent');
     foreach ($GroupIDs as $GroupID) {
         $Groups[] = $TorrentList[$GroupID];
     }
-    $tableRender = new TorrentGroupCoverTableView($Groups);
+    $tableRender = newGroupTorrentView(TorrentViewScene::Bookmark, $Groups);
     $tableRender->render();
     ?>
 </div>

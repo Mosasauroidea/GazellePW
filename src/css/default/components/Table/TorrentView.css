@@ -1,0 +1,24 @@
+.TorrentViewWrapper {
+  display: flex;
+}
+
+.TorrentView-btn {
+  font-size: var(--global-fontSize-sm);
+  margin-left: auto;
+  color: var(--Button-primary-background);
+  background-color: transparent;
+  border-color: transparent;
+  cursor: pointer;
+}
+
+.TorrentView-btn:hover {
+  color: var(--Button-default-onHover-color);
+  text-decoration: none;
+}
+.TorrentView-btn:disabled {
+  cursor: not-allowed;
+}
+
+.TorrentView-btn:active {
+  transform: scale(0.95);
+}

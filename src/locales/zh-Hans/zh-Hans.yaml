@@ -7218,9 +7218,9 @@ server.user.torrents_group_title: |-
 server.user.torrents_group_tool: |-
   启用种子分组功能
 server.user.torrents_snatched: |-
-  已完成种子标记
+  种子进度标记
 server.user.torrents_snatched_title: |-
-  启用已完成种子标识会在你已完成的种子旁显示「已完成！」字样。
+  启用种子进度标识会针对种子的完成/下载/做种展示不同的效果
 server.user.total_donor_points: |-
   总捐助点数
 server.user.total_points: |-
@@ -8397,3 +8397,11 @@ server.reports.conversation: |-
   对话
 server.reports.conversation_history: |-
   历史沟通
+server.torrent.compact_view: |-
+  紧凑视图
+server.torrent.list_view: |-
+  列表视图
+server.torrent.cover_view: |-
+  封面视图
+server.torrent.release_name_view: |-
+  文件名视图

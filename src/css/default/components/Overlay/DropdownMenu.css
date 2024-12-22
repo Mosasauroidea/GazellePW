@@ -21,7 +21,6 @@ Dropdown is-open
   right: 10px;
   z-index: var(--global-zIndex-default);
   list-style: none;
-  padding: 5px 0;
 }
 
 .Dropdown:not(.is-open) .DropdownMenu {
@@ -42,6 +41,12 @@ Dropdown is-open
   /* override input[type="submit"] */
   width: 100%;
   text-align: left;
+}
+
+.DropdownMenu-selectedItem {
+  color: var(--DropdownMenu-item-onHover-color);
+  text-decoration: var(--DropdownMenu-item-onHover-textDecoration);
+  background: var(--DropdownMenu-item-onHover-background);
 }
 
 .DropdownMenu-item:hover {

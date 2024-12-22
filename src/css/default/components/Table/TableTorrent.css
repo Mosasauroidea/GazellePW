@@ -301,9 +301,14 @@ TableTorrent-movieInfo
   width: 100%;
 }
 
-.TableTorrent-movieInfoTitle a {
+.TableTorrent-movieInfoTitle:not(.TableTorrent-compact) a {
   font-size: 20px;
   font-weight: 600;
+  color: var(--TableTorrent-movieInfoTitle-color);
+}
+
+.TableTorrent-movieInfoTitle:is(.TableTorrent-compact) a {
+  font-size: 16px;
   color: var(--TableTorrent-movieInfoTitle-color);
 }
 
@@ -327,6 +332,34 @@ TableTorrent-movieInfo
   background: var(--MovieInfo-button-background);
   border: var(--MovieInfo-button-border);
   width: fit-content;
+}
+
+.TableTorrent-movieInfoCompactItems {
+  border-radius: var(--global-borderRadius);
+  display: inline-flex;
+  font-size: 12px;
+  background: var(--MovieInfo-button-background);
+  border: var(--MovieInfo-button-border);
+  width: fit-content;
+}
+
+.TableTorrent-movieInfoCompactItem {
+  display: flex;
+  padding-left: 5px;
+  padding-right: 5px;
+
+  color: var(--Movieinfo-button-color);
+  align-items: center;
+  gap: var(--global-space-sm);
+}
+
+.TableTorrent-movieInfoCompactItem .icon {
+  width: 12px;
+  height: 12px;
+}
+
+.TableTorrent-movieInfoCompactItem:not(:last-child) {
+  border-right: var(--MovieInfo-button-border);
 }
 
 .TableTorrent-movieInfoFactsItem {
@@ -366,7 +399,6 @@ TableTorrent-movieInfo
   color: var(--Movieinfo-button-color);
   padding: 3px 5px;
 }
-
 .TableTorrent-movieInfoTagsItem:hover {
   background: var(--MovieInfo-button-onHover-background);
   color: var(--Movieinfo-button-onhover-color);

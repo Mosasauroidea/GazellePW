@@ -52,15 +52,12 @@ View::show_header(t('server.collages.manage_collage'), 'jquery-ui,jquery.tableso
                 <?= t('server.collages.drag_drop_textnote') ?>
             </div>
         </div>
-
-        <div class="drag_drop_save hidden">
-            <input class="Button" collage-manage-save type="button" name="submit" value="<?= t('server.apply.saved') ?>" />
-        </div>
         <table class="TableManageCollage Table" id="manage_collage_table">
             <thead>
                 <tr class="Table-rowHeader">
                     <th class="Table-cell" style="width: 50px" data-sorter="false"><?= t('server.collages.order') ?></th>
                     <th class="Table-cell Table-cellLeft" style="width: 50px"><span><abbr data-tooltip="Current rank">#</abbr></span></th>
+                    <th class="Table-cell Table-cellLeft" style="width: 80px" data-sorter="ignoreArticles"><span><?= t('server.torrents.ft_year') ?></span></th>
                     <th class="Table-cell Table-cellLeft" data-sorter="ignoreArticles"><span><?= t('server.common.torrent') ?></span></th>
                     <th class="Table-cell Table-cellRight"><span><?= t('server.collages.adder') ?></span></th>
                     <th class="Table-cell Table-cellRight nobr" style="width:150px" data-sorter="false"><span><abbr data-tooltip="<?= t('server.collages.tweak_title') ?>"><?= t('server.collages.tweak') ?></abbr></span></th>
@@ -86,6 +83,7 @@ View::show_header(t('server.collages.manage_collage'), 'jquery-ui,jquery.tableso
                                 <input class=" Input sort_numbers" type="text" name="sort" value="<?= $Sort ?>" id="sort_<?= $GroupID ?>" size="4" />
                             </td>
                             <td class="Table-cell Table-cellLeft"><?= $Number ?></td>
+                            <td class="Table-cell Table-cellLeft"><?= $Group['Year'] ?></td>
                             <td class="Table-cell Table-cellLeft"><?= $DisplayName ?></td>
                             <td class="Table-cell Table-cellRight nobr"><?= Users::format_username($UserID, $Username, false, false, false) ?></td>
                             <td class="Table-cell Table-cellRight nobr">

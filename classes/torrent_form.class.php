@@ -226,51 +226,52 @@ class TORRENT_FORM {
                                                 <input class="Input" type="checkbox" id="limit-time" name="limit-time" <?= $Torrent['FreeEndTime'] ? " checked=\"checked\"" : "" ?> />
                                                 <label class="Checkbox-label" for="limit-time" style="display: inline;">定时</label>
                                             </div>
-                                            <input class="Input" type="date" id="input-free-date" name="free-date" <?= $Torrent['FreeEndTime'] ? "value=\"" . substr($Torrent['FreeEndTime'], 0, 10) . "\"" : "style=\"display:none;\"" ?> /><input id="input-free-time" name="free-time" type="time" <?= $Torrent['FreeEndTime'] ? "value=\"" . substr($Torrent['FreeEndTime'], 11, 5) . "\"" : "style=\"display:none;\"" ?> />
-                                            <?= t('server.upload.because') ?>
-                                            <select class="Input" name="freeleechtype">
-                                                <?
-                                                $FL = array("N/A", "Staff Pick", "Perma-FL");
-                                                foreach ($FL as $Key => $Name) {
-                                                ?>
-                                                    <option class="Select-option" value="<?= $Key ?>" <?= ($Key == $Torrent['FreeLeechType'] ? ' selected="selected"' : '') ?>><?= $Name ?></option>
-                                                <?              } ?>
-                                            </select>
                                         </div>
-                                    </td>
-                                </tr>
-                        <?
+                                        <input class="Input" type="date" id="input-free-date" name="free-date" <?= $Torrent['FreeEndTime'] ? "value=\"" . substr($Torrent['FreeEndTime'], 0, 10) . "\"" : "style=\"display:none;\"" ?> /><input class="Input" id="input-free-time" name="free-time" type="time" <?= $Torrent['FreeEndTime'] ? "value=\"" . substr($Torrent['FreeEndTime'], 11, 5) . "\"" : "style=\"display:none;\"" ?> />
+                                        <?= t('server.upload.because') ?>
+                                        <select class="Input" name="freeleechtype">
+                                            <?
+                                            $FL = array("N/A", "Staff Pick", "Perma-FL");
+                                            foreach ($FL as $Key => $Name) {
+                                            ?>
+                                                <option class="Select-option" value="<?= $Key ?>" <?= ($Key == $Torrent['FreeLeechType'] ? ' selected="selected"' : '') ?>><?= $Name ?></option>
+                                            <?              } ?>
+                                        </select>
+                </div>
+                </td>
+                </tr>
+        <?
                             }
                         }
-                        ?>
-                        <tr class="Form-row is-section">
-                            <td class="FormSubmitCenter" colspan="2">
-                                <?
-                                if ($this->NewTorrent) {
-                                ?>
-                                    <p>
-                                        <?= t('server.upload.assurance') ?>
-                                    </p>
-                                    <? if ($this->NewTorrent) { ?>
-                                        <?= t('server.upload.assurance_note') ?>
-                                <?      }
-                                }
-                                ?>
-                                <button class="Button" variant="primary" type="submit" id="post">
-                                    <span class="text">
-                                        <? if ($this->NewTorrent) {
-                                            echo t('server.torrents.upload_torrent');
-                                        } else {
-                                            echo t('server.torrents.browser_edit_torrent');
-                                        } ?>
-                                    </span>
-                                    <span class="Loader"></span>
-                                </button>
-                            </td>
-                        </tr>
-                    </table>
-                </div>
-            </form>
+        ?>
+        <tr class="Form-row is-section">
+            <td class="FormSubmitCenter" colspan="2">
+                <?
+                if ($this->NewTorrent) {
+                ?>
+                    <p>
+                        <?= t('server.upload.assurance') ?>
+                    </p>
+                    <? if ($this->NewTorrent) { ?>
+                        <?= t('server.upload.assurance_note') ?>
+                <?      }
+                }
+                ?>
+                <button class="Button" variant="primary" type="submit" id="post">
+                    <span class="text">
+                        <? if ($this->NewTorrent) {
+                            echo t('server.torrents.upload_torrent');
+                        } else {
+                            echo t('server.torrents.browser_edit_torrent');
+                        } ?>
+                    </span>
+                    <span class="Loader"></span>
+                </button>
+            </td>
+        </tr>
+        </table>
+        </div>
+        </form>
         </div>
     <?
             } //function foot

@@ -7348,9 +7348,9 @@ server.user.torrents_group_title: |-
 server.user.torrents_group_tool: |-
   Enable torrent grouping
 server.user.torrents_snatched: |-
-  Snatched torrents indicator
+  Torrents state indicator
 server.user.torrents_snatched_title: |-
-  Enabling the snatched torrents indicator will display &quot;Snatched!&quot; next to torrents you've snatched.
+  Enabling the indicator will display snatched/seeding/downloading style on the torrent
 server.user.total_donor_points: |-
   Total donor points
 server.user.total_points: |-
@@ -8529,3 +8529,11 @@ server.reports.conversation: |-
   Conversation
 server.reports.conversation_history: |-
   Conversation history
+server.torrent.compact_view: |-
+  Compact View
+server.torrent.list_view: |-
+  List View
+server.torrent.cover_view: |-
+  Cover View
+server.torrent.release_name_view: |-
+  Release Name View

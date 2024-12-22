@@ -248,7 +248,7 @@ export function validateDescImg3Png(value) {
   if (!matches) {
     return false
   }
-  return matches.length >= 3
+  return new Set(matches).size >= 3
 }
 
 export function validateDescImgHosts(value) {

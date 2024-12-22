@@ -373,31 +373,7 @@ class Upload extends Base {
         $GroupID = $this->properties['GroupID'];
         $FirstTorrent = $TotalSize > 2 * 1024 * 1024 * 1024 ? 1 : $TorrentID;
         $this->db->query("update users_main set firsttorrent=IF(firsttorrent = 0, $FirstTorrent, firsttorrent) ,TotalUploads=TotalUploads+1 where id=" . $this->user['ID']);
-        $RecentUploads = $this->cache->get_value("recent_uploads_$UserID");
-        if (is_array($RecentUploads)) {
-            do {
-                foreach ($RecentUploads as $Item) {
-                    if ($Item['ID'] == $GroupID) {
-                        break 2;
-                    }
-                }
-
-                // Only reached if no matching GroupIDs in the cache already.
-                if (count($RecentUploads) === 5) {
-                    array_pop($RecentUploads);
-                }
-                $Group = $this->properties['Group'];
-                array_unshift($RecentUploads, array(
-                    'TorrentID' => $TorrentID,
-                    'ID' => $GroupID,
-                    'Name' => trim($Group['Name']),
-                    'SubName' => trim($Group['SubName']),
-                    'Year' => trim($Group['Year']),
-                    'WikiImage' => trim($Group['WikiImage'])
-                ));
-                $this->cache->cache_value("recent_uploads_$UserID", $RecentUploads, 0);
-            } while (0);
-        }
+        $RecentUploads = $this->cache->delete_value("recent_uploads_$UserID");
     }
 
     private function fetchMovieData() {

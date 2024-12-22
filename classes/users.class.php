@@ -366,6 +366,10 @@ class Users {
             'CoverArt' => true,
             'AutoSubscribe' => true,
             'ShowHotMovieOnHomePage' => true,
+            'TorrentBrowseView' => 'default',
+            'CollageTorrentView' => 'default',
+            'PersonalTorrentView' => 'default',
+            'Top10TorrentView' => 'default',
         );
     }
 
@@ -754,7 +758,7 @@ class Users {
             );
         }
 
-        $TorrentList = Torrents::get_groups($GroupIDs, true, false, false);
+        $TorrentList = Torrents::get_groups($GroupIDs, true, false, true);
 
         return array($GroupIDs, $BookmarkData, $TorrentList);
     }
