@@ -307,4 +307,65 @@ class Requests {
         }
         return self::get_requests($Requests);
     }
+
+    public static function delete_request($RequestID, $OperatorID = 0, $OperatorName, $Reason) {
+        //Do we need to get artists?
+        G::$DB->query(
+            "SELECT
+	        	UserID,
+	        	Title,
+	        	GroupID
+	        FROM requests
+	        WHERE ID = $RequestID"
+        );
+        list($UserID, $Title, $GroupID) = G::$DB->next_record();
+        if ($OperatorID != 0 && $OperatorID != $UserID && !check_perms('site_moderate_requests')) {
+            error(403);
+        }
+        $FullName = $Title;
+        // Delete request, votes and tags
+        G::$DB->query("DELETE FROM requests WHERE ID = '$RequestID'");
+        G::$DB->query("DELETE FROM requests_votes WHERE RequestID = '$RequestID'");
+        G::$DB->query("DELETE FROM requests_tags WHERE RequestID = '$RequestID'");
+        Comments::delete_page('requests', $RequestID);
+
+        G::$DB->query(
+            "SELECT ArtistID
+	            FROM requests_artists
+	            WHERE RequestID = $RequestID"
+        );
+        $RequestArtists = G::$DB->to_array();
+        foreach ($RequestArtists as $RequestArtist) {
+            G::$Cache->delete_value("artists_requests_$RequestArtist");
+        }
+        G::$DB->query(
+            "DELETE FROM requests_artists
+	            WHERE RequestID = '$RequestID'"
+        );
+        G::$Cache->delete_value("request_artists_$RequestID");
+
+        G::$DB->query(
+            "REPLACE INTO sphinx_requests_delta
+	        	(ID, TimeAdded)
+	        VALUES
+		($RequestID, Unix_TIMESTAMP())"
+        );
+
+        if ($UserID != $OperatorID) {
+            Misc::send_pm_with_tpl($UserID, 'request_deleted', [
+                'FullName' => $FullName,
+                'LoggedUserID' => $OperatorID,
+                'LoggedUserUsername' => $OperatorName,
+                'Reason' => $Reason,
+            ]);
+        }
+
+        Misc::write_log("Request $RequestID ($FullName) was deleted by user " . $OperatorID . ' (' . $OperatorName . ') for the reason: ' . $Reason);
+
+        G::$Cache->delete_value("request_$RequestID");
+        G::$Cache->delete_value("request_votes_$RequestID");
+        if ($GroupID) {
+            G::$Cache->delete_value("requests_group_$GroupID");
+        }
+    }
 }

@@ -81,7 +81,7 @@ View::show_header(t('server.tools.events_reward_history'));
                 foreach ($Histories as $Recode) {
                 ?>
                     <tr class="Table-row">
-                        <td class="Table-cell"><?= strlen($Recode['UserIDs']) > 1 ? '<a target="_blank" href="tools.php?action=events_reward_history&id=' . $Recode['ID'] . '">' . t('server.tools.show_all') . '</a>' : userIDs2Usernames($Recode['UserIDs'], ' ') ?></td>
+                        <td class="Table-cell"><?= count(explode(',', $Recode['UserIDs'])) > 1 ? '<a target="_blank" href="tools.php?action=events_reward_history&id=' . $Recode['ID'] . '">' . t('server.tools.show_all') . '</a>' : userIDs2Usernames($Recode['UserIDs'], ' ') ?></td>
                         <td class="Table-cell"><?= Users::format_username($Recode['ByUserID']) ?></td>
                         <td class="Table-cell"><?
                                                 $Strs = [];

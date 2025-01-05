@@ -74,7 +74,7 @@ if ($Data) {
         error(404);
     }
 
-    list($Name, $Image, $Body, $MainBody, $IMDBID, $SubName, $Birthday, $PlaceOfBirth) = $DB->next_record(MYSQLI_NUM);
+    list($Name, $Image, $Body, $MainBody, $IMDBID, $SubName, $Birthday, $PlaceOfBirth) = G::$DB->next_record(MYSQLI_NUM);
 }
 
 //----------------- Build list and get stats
@@ -355,12 +355,16 @@ View::show_header($ArtistHeaderName, 'browse,bbcode,comments,voting,recommend,su
                 </span>
             </div>
             <div class="MovieInfo-synopsis" data-tooltip="<?= t('server.torrents.fold_tooltip') ?>">
-                <p class="HtmlText">
+                <div class="HtmlText">
                     <?
                     $Content = Text::full_format(Lang::choose_content($MainBody, $Body));
-                    echo $Content ? $Content : '<i>' . t('server.artist.empty_introduction_note') . '</i>'
+                    if ($Content) {
+                        View::long_text('movie_info_synopsis', display_str($Content), 5);
+                    } else {
+                        echo '<i>' . t('server.artist.empty_introduction_note') . '</i>';
+                    }
                     ?>
-                </p>
+                </div>
             </div>
         </div>
     </div>

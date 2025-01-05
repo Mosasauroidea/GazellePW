@@ -35,9 +35,10 @@ $Title = Torrents::group_name($Group);
                 list($TorrentID, $UserID, $Info, $Time) = $LogEntry;
                 if (strpos($Info, 'deleted') !== false) {
                     $Color = 'red';
-                }
-                if (strpos($Info, 'uploaded ') !== false) {
+                } else if (strpos($Info, 'uploaded ') !== false) {
                     $Color = 'green';
+                } else {
+                    $Color = '';
                 }
             ?>
                 <tr class="Table-row">

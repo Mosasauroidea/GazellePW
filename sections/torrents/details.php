@@ -24,6 +24,7 @@ $View = isset($_GET['view']) ? $_GET['view'] : '';
 
 // Group details
 $WikiBody = Lang::choose_content($TorrentDetails['MainWikiBody'], $TorrentDetails['WikiBody']);
+
 $WikiImage = $TorrentDetails['WikiImage'];
 $GropuID = $TorrentDetails['ID'];
 $IMDBID = $TorrentDetails['IMDBID'];

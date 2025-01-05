@@ -22,5 +22,6 @@
   "formatFiles.excludedFolders": ["node_modules", ".vscode", ".git", "dist", ".chrome", "vendor"],
   "editor.detectIndentation": false,
   "intelephense.environment.phpVersion": "7.4",
-  "makefile.configureOnOpen": false
+  "makefile.configureOnOpen": false,
+  "editor.wordWrap": "off"
 }

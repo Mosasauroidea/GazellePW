@@ -158,7 +158,7 @@
   --Button-default-onHover-color: var(--global-onHover-color-onPrimary);
   --Button-default-onHover-boxShadow: var(--Button-default-boxShadow);
   --Button-default-onHover-border: var(--Button-default-border);
-  --Button-primary-background: var(--Header-background);
+  --Button-primary-background: var(--HeaderAnnounceItem-link-background);
   --Button-primary-color: var(--Button-default-color);
   --Button-primary-border: var(--Button-default-border);
   --Button-primary-boxShadow: var(--Button-default-boxShadow);

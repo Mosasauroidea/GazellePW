@@ -1,7 +1,4 @@
 <?
-
-use Gazelle\Manager\ActionTrigger;
-
 authorize();
 
 if (empty($_POST['id']) || !is_number($_POST['id']) || empty($_POST['type']) || ($_POST['type'] !== 'request_update' && empty($_POST['reason']))) {
@@ -72,9 +69,6 @@ $DB->query('
 	VALUES
 		(' . db_string($LoggedUser['ID']) . ", $ID, '$Short', '" . sqltime() . "', '" . db_string($Reason) . "')");
 $ReportID = $DB->inserted_id();
-
-$trigger = new ActionTrigger;
-$trigger->triggerReport($Short, $ID, $ReportID);
 
 $Channels = array();
 

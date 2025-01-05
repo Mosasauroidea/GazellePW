@@ -947,11 +947,11 @@ View::show_header($Username, "jquery.imagesloaded,jquery.wookmark,user,bbcode,co
         			    	AND t.UserID != '$UserID'
         			    	AND g.CategoryID = '1'
         			    	AND g.WikiImage != ''
-        			    GROUP BY g.ID
+        			    GROUP BY t.ID
         			    ORDER BY s.tstamp DESC
         			    LIMIT 5");
                     $RecentSnatches = $DB->to_array();
-                    $Cache->cache_value("recent_snatches_$UserID", $RecentSnatches, 0); //inf cache
+                    $Cache->cache_value("recent_snatches_$UserID", $RecentSnatches, 86400); //inf cache
                 }
                 if (!empty($RecentSnatches)) {
             ?>
@@ -991,11 +991,11 @@ View::show_header($Username, "jquery.imagesloaded,jquery.wookmark,user,bbcode,co
             			WHERE t.UserID = '$UserID'
             				AND g.CategoryID = '1'
             				AND g.WikiImage != ''
-            			GROUP BY g.ID
+            			GROUP BY t.ID
             			ORDER BY t.Time DESC
             			LIMIT 5");
                     $RecentUploads = $DB->to_array();
-                    $Cache->cache_value("recent_uploads_$UserID", $RecentUploads, 0); //inf cache
+                    $Cache->cache_value("recent_uploads_$UserID", $RecentUploads, 86400); //inf cache
                 }
                 if (!empty($RecentUploads)) {
                 ?>

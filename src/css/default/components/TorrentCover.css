@@ -48,6 +48,14 @@ TorrentCover variant="OneLine | FiveGrid"
   word-break: break-all;
 }
 
+.TorrentCover-item .TorrentCover-title {
+  width: 160px;
+  color: var(--TableTorrent-movieInfoTitle-color);
+  padding-top: var(--global-space-sm);
+  justify-content: center;
+  display: flex;
+}
+
 .TorrentCover-imageContainer {
   width: 160px;
   height: 240px;
@@ -60,9 +68,11 @@ TorrentCover variant="OneLine | FiveGrid"
   left: 0px;
   top: 0px;
   z-index: 1000;
-  width: 24px;
+  width: 26px;
   display: flex;
   justify-content: center;
+  border-bottom-right-radius: var(--global-borderRadius);
+  border-top-left-radius: var(--global-borderRadius);
 }
 
 .TorrentCover-imdbTag {
@@ -78,7 +88,10 @@ TorrentCover variant="OneLine | FiveGrid"
   z-index: 1000;
   color: var(--TableTorrent-coverTag-color);
   background-color: var(--TableTorrent-coverTag-background);
-  padding: 0 2px;
+  border-top-left-radius: var(--global-borderRadius);
+  border-bottom-right-radius: var(--global-borderRadius);
+  padding-right: 4px;
+  padding-left: 2px;
   font-size: 75%;
 }
 @media (max-width: 768px) {
@@ -91,9 +104,4 @@ TorrentCover variant="OneLine | FiveGrid"
 .TorrentCover-image {
   height: 100%;
   border-radius: var(--global-borderRadius);
-}
-
-.TorrentCover-item b {
-  color: var(--TableTorrent-movieInfoTitle-color);
-  padding-top: var(--global-space-sm);
 }

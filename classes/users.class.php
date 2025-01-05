@@ -1112,4 +1112,66 @@ class Users {
         }
         return $list;
     }
+
+    public static function add_secondary_class($UserID, $Classes) {
+        foreach ($Classes as $PermID) {
+            $ClassChanges[] = $Classes[$PermID]['Name'];
+        }
+        $ClassChangeStr = implode(', ', $ClassChanges);
+        $Values = [];
+        foreach ($Classes as $PermID) {
+            $Values[] = $UserID;
+            $Values[] = $PermID;
+        }
+        if (in_array('31', $Classes)) {
+            Misc::send_pm_with_tpl($UserID, 'official_recruiter', ['SiteName' => CONFIG['SITE_NAME']]);
+        }
+        $sqltime = sqltime();
+        G::$DB->begin_transaction();
+        try {
+            G::$DB->prepared_query(
+                "INSERT INTO users_levels (UserID, PermissionID)
+			VALUES " . implode(', ', array_fill(0, count($Values) / 2, '(?, ?)')),
+                ...$Values
+            );
+            G::$DB->prepared_query("
+			UPDATE users_info AS ui
+			SET ui.AdminComment = CONCAT('$sqltime - Secondary classes added $ClassChangeStr.\n\n', ui.AdminComment)
+			WHERE ui.UserID = ?", $UserID);
+        } catch (Exception $e) {
+            G::$DB->rollback();
+            error_log($e);
+        }
+        G::$DB->commit();
+        G::$Cache->delete_value("user_info_$UserID");
+        G::$Cache->delete_value("user_info_heavy_$UserID");
+    }
+
+    public static function remove_secondary_class($UserID, $Classes) {
+        foreach ($Classes as $PermID) {
+            $ClassChanges[] = $Classes[$PermID]['Name'];
+        }
+        $ClassChangeStr = implode(', ', $ClassChanges);
+        $sqltime = sqltime();
+        G::$DB->begin_transaction();
+        try {
+            G::$DB->prepared_query(
+                "
+			DELETE FROM users_levels
+			WHERE UserID = '$UserID'
+				AND PermissionID IN (" . implode(', ', array_fill(0, count($Classes), '?')) . ")",
+                ...$Classes
+            );
+            G::$DB->prepared_query("
+        UPDATE users_info AS ui
+        SET ui.AdminComment = CONCAT('$sqltime - Secondary classes added $ClassChangeStr.\n\n', ui.AdminComment)
+        WHERE ui.UserID = ?", $UserID);
+        } catch (Exception $e) {
+            G::$DB->rollback();
+            error_log($e);
+        }
+        G::$DB->commit();
+        G::$Cache->delete_value("user_info_$UserID");
+        G::$Cache->delete_value("user_info_heavy_$UserID");
+    }
 }

@@ -26,10 +26,10 @@ class Top10Movies {
         $Key = "top10_movies_${Name}_${Limit}";
         $Data = $Cache->get_value($Key);
         if ($Data !== false) {
-            // return $Data;
+            return $Data;
         }
         if (!$Cache->get_query_lock($Key)) {
-            // return false;
+            return false;
         }
         $Query = strtr($this->BaseQuery, [
             '{rest}' => $this->rest($Name),

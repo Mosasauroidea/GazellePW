@@ -31,12 +31,10 @@ class Contest {
 				INNER JOIN contest_type t ON (t.ID = c.ContestTypeID)
 				WHERE c.DateEnd = (select max(DateEnd) from contest)
 			");
-            if (G::$DB->has_results()) {
-                $Contest = G::$DB->next_record(MYSQLI_ASSOC);
-                // Cache this for three days
-                G::$Cache->cache_value("contest_{$Contest['ID']}", $Contest, 86400 * 3);
-                G::$Cache->cache_value('contest_current', $Contest, 86400 * 3);
-            }
+            $Contest = G::$DB->next_record(MYSQLI_ASSOC);
+            // Cache this for three days
+            G::$Cache->cache_value("contest_{$Contest['ID']}", $Contest, 86400);
+            G::$Cache->cache_value('contest_current', $Contest, 86400);
         }
         return $Contest;
     }

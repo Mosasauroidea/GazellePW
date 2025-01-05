@@ -253,46 +253,27 @@ $CONFIG['UPLOAD_RANK_SHOW_END_TIME'] = '0000-00-00 00:00:00';
 $CONFIG['RELEASE_GROUP'] = [];
 $CONFIG['RELEASE_GROUP_MEMBER'] = [];
 
+$CONFIG['BaseRewardConfig'] = [
+    'UploadTorrent' => [
+        'Token' => 0,
+        'TokenValidDay' => 0,
 
+        'Invite' => 0,
+        'InviteValidDay' => 0,
 
-
-$PointRadios = [
-    'DownloadCount' => 0.75,
-    'UploadCount' => 1,
-    'CheckCount' => 7.5,
-    'RSReportCount' => 0.5,
-    'RPReportCount' => 12.5,
-    'EditCount' => 1,
-    'PostCount' => 0.5,
-    'SendJF' => 0.1,
-    'ApplyCount' => 1.5,
-];
-
-$Bases = [
-    "Sysop" => 8000,
-    "Administrator" => 8000,
-    "Developer" => 8000,
-
-    "Senior Moderator" => 7000, // cancel
-
-    "Moderator" => 7000,
-    "Torrent Moderator" =>  6000,
-    "Forum Moderator" => 5000,
-
-    "Torrent Inspector" => 3000,
-    "First Line Support" => 3000,
-    "Translators" => 3000,
-];
-
-$BaseRewardConfig = [
-    'upload_torrent' => [
-        'token' => 0,
-        'token_valid_day' => 0,
-
-        'invite' => 0,
-        'invite_valid_day' => 0,
-
-        'bonus' => 0,
-        'badge_id' => 0,
+        'Bonus' => 0,
+        'BadgeID' => 0,
     ],
+];
+
+$CONFIG['SecondaryClassAwardConfig'] = [
+    'TI_CHECK_COUNT' => 0,
+    'TI_PERMISSION_ID' => 0,
+    'TI_SALARY' => 0,
+    'UP_UPLOAD_COUNT' => 0,
+    'UPLOADER_PERMISSION_ID' => 0,
+    'UPLOADER_SALARY' => 0,
+    'SD_SEED_SIZE' => 0, //GB
+    'SEEDER_PERMISSION_ID' => 0,
+    'SEEDER_SALARY' => 0,
 ];

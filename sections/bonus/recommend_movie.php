@@ -8,19 +8,19 @@ $Label = $_REQUEST['label'];
 if (isset($_POST['confirm']) && isset($_POST['torrent_group_id'])) {
     authorize();
 
-    if (!preg_match('/^recommend-movie-([1|7])$/', $Label, $match)) {
-      error(t('server.bonus.you_cannot_afford_this_item'));
+    if (!preg_match('/^recommend-movie-([7|30])$/', $Label, $match)) {
+        error(t('server.bonus.you_cannot_afford_this_item'));
     }
 
     $flag = $Bonus->purchaseRecommendMovie($ID, $Label, G::$LoggedUser['EffectiveClass']);
 
-    if($flag) {
-      $LimitEndTime = date('Y-m-d H:i:s', strtotime("+{$match[1]} day"));
-      \Torrents::freeleech_groups($_POST['torrent_group_id'], 1, 0, $LimitEndTime);
-      \RecommendGroups::recommend_group_buy($ID, $_POST['torrent_group_id'], $LimitEndTime);
-      header('Location: bonus.php?complete=' . urlencode($Label));
-    }else {
-      error(t('server.bonus.you_cannot_afford_this_item'));
+    if ($flag) {
+        $LimitEndTime = date('Y-m-d H:i:s', strtotime("+{$match[1]} day"));
+        \Torrents::freeleech_groups($_POST['torrent_group_id'], 1, 0, $LimitEndTime);
+        \RecommendGroups::recommend_group_buy($ID, $_POST['torrent_group_id'], $LimitEndTime);
+        header('Location: bonus.php?complete=' . urlencode($Label));
+    } else {
+        error(t('server.bonus.you_cannot_afford_this_item'));
     }
 }
 

@@ -13,6 +13,7 @@ if ($NumReports < 0) {
 $ReportIDs = array_column($Reports, 'ID');
 $ReportsMessage = Reports::get_reports_messages($ReportIDs);
 $Reported = true;
+$ReportAdmin = check_perms('admin_reports');
 $UploaderID = Torrents::get_torrent($TorrentID)['UserID'];
 include(CONFIG['SERVER_ROOT'] . '/classes/reportsv2_type.php');
 ?>
@@ -50,19 +51,19 @@ include(CONFIG['SERVER_ROOT'] . '/classes/reportsv2_type.php');
         <div class="Box-body BoxList">
             <div class="BoxBody">
                 <strong>
+                    <?= $ReportLinks; ?>
                     <? if ($ReportAdmin) {
                     ?>
                         <a href="reportsv2.php?view=report&id=<?= $Report['ID'] ?>">
-                            <?= $ReportLinks; ?>
+                            <?= $ReportType['title'] ?>
                         </a>
                     <?
                     } else {
                     ?>
-                        <?= $ReportLinks; ?>
+                        <?= $ReportType['title'] ?>
                     <?
                     }
                     ?>
-                    <?= $ReportType['title'] ?>
                     <?= t('server.torrents.at', ['Values' => [time_diff($Report['ReportedTime'], 2, true, true)]])
                     ?>
                 </strong>

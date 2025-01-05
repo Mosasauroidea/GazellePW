@@ -21,6 +21,10 @@
   -webkit-line-clamp: 2;
 }
 
+.LongText-text.LongText-line-5 {
+  -webkit-line-clamp: 5;
+}
+
 .LongText .LongText-text::before {
   content: '';
   height: calc(100% - var(--global-lineHeight));

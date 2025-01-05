@@ -130,6 +130,9 @@ $OverrideClass = $Override === 2 ? 'paranoia_override' : '';
                 <? } ?>
             </ul>
         </div>
+        <?
+        $hasTorrentItem = false;
+        ?>
 
         <div class="SidebarItemUserCoummunity SidebarItem Box Group-column">
             <div class="Box-header">
@@ -142,18 +145,21 @@ $OverrideClass = $Override === 2 ? 'paranoia_override' : '';
                 $ViewCount  = check_paranoia_here('requestsfilled_count');
                 $ViewBounty = check_paranoia_here('requestsfilled_bounty');
 
-                if ($ViewCount && !$ViewBounty && !$ViewAll) { ?>
+                if ($ViewCount && !$ViewBounty && !$ViewAll) {
+                    $hasTorrentItem = true ?>
                     <li class="SidebarList-item isRequestFill" id="requst-fill-value" data-value="<?= $RequestsFilled ?>">
                         <span><?= t('server.user.requestsfilled') ?>: </span>
                         <span data-tooltip="<?= empty($RequestRank) ? '' : t('server.user.all_site') . ' ' . number_format($RequestRank) . '%' ?>"><?= number_format($RequestsFilled) ?> </span>
                     </li>
-                <?  } elseif (!$ViewCount && $ViewBounty && !$ViewAll) { ?>
+                <?  } elseif (!$ViewCount && $ViewBounty && !$ViewAll) {
+                    $hasTorrentItem = true ?>
                     <li class="SidebarList-item">
                         <span><?= t('server.user.requestsfilled') ?>: </span>
                         <?= Format::get_size($TotalBounty) ?>
                         <?= t('server.user.collected') ?>
                     </li>
-                <?  } elseif ($ViewCount && $ViewBounty && !$ViewAll) { ?>
+                <?  } elseif ($ViewCount && $ViewBounty && !$ViewAll) {
+                    $hasTorrentItem = true ?>
                     <li class="SidebarList-item">
                         <span><?= t('server.user.requestsfilled') ?>: </span>
                         <span data-tooltip="<?= empty($RequestRank) ? '' : t('server.user.all_site') . ' ' . number_format($RequestRank) . '%' ?>"><?= number_format($RequestsFilled) ?></span>
@@ -162,7 +168,8 @@ $OverrideClass = $Override === 2 ? 'paranoia_override' : '';
                             <?= Format::get_size($TotalBounty) ?>)
                         </span>
                     </li>
-                <?  } elseif ($ViewAll) { ?>
+                <?  } elseif ($ViewAll) {
+                    $hasTorrentItem = true ?>
                     <li class="SidebarList-item">
                         <span class="<?= ($ViewCount === 2 ? 'paranoia_override' : '') ?>">
                             <span><?= t('server.user.requestsfilled') ?>: </span>
@@ -184,16 +191,20 @@ $OverrideClass = $Override === 2 ? 'paranoia_override' : '';
                 $ViewCount  = check_paranoia_here('requestsvoted_count');
                 $ViewBounty = check_paranoia_here('requestsvoted_bounty');
 
-                if ($ViewCount && !$ViewBounty && !$ViewAll) { ?>
+                if ($ViewCount && !$ViewBounty && !$ViewAll) {
+                    $hasTorrentItem = true ?>
                     <li class="SidebarList-item"><?= t('server.user.requestscreated') ?>: <?= number_format($RequestsCreated) ?></li>
                     <li class="SidebarList-item"><?= t('server.user.requestsvoted') ?> <?= number_format($RequestsVoted) ?></li>
-                <?  } elseif (!$ViewCount && $ViewBounty && !$ViewAll) { ?>
+                <?  } elseif (!$ViewCount && $ViewBounty && !$ViewAll) {
+                    $hasTorrentItem = true ?>
                     <li class="SidebarList-item"><?= t('server.user.requestscreated') ?>: <?= Format::get_size($RequestsCreatedSpent) ?> <?= t('server.user.spent') ?></li>
                     <li class="SidebarList-item"><?= t('server.user.requestsvoted') ?> <span data-tooltip="<?= empty($BountyRank) ? '' : t('server.user.all_site') .  ' ' . number_format($BountyRank) . '%' ?>"><?= Format::get_size($TotalSpent) ?></span> <?= t('server.user.spent') ?></li>
-                <?  } elseif ($ViewCount && $ViewBounty && !$ViewAll) { ?>
+                <?  } elseif ($ViewCount && $ViewBounty && !$ViewAll) {
+                    $hasTorrentItem = true ?>
                     <li class="SidebarList-item"><?= t('server.user.requestscreated') ?>: <?= number_format($RequestsCreated) ?> <?= t('server.user.for') ?> <?= Format::get_size($RequestsCreatedSpent) ?></li>
                     <li class="SidebarList-item"><?= t('server.user.requestsvoted') ?> <?= number_format($RequestsVoted) ?> <?= t('server.user.for') ?><span data-tooltip="<?= empty($BountyRank) ? '' : t('server.user.all_site') .  ' ' . number_format($BountyRank) . '%' ?>"> <?= Format::get_size($TotalSpent) ?></span></li>
-                <?  } elseif ($ViewAll) { ?>
+                <?  } elseif ($ViewAll) {
+                    $hasTorrentItem = true ?>
                     <li class="SidebarList-item">
                         <span class="<?= ($ViewCount === 2 ? 'paranoia_override' : '') ?>"><?= t('server.user.requestscreated') ?>:
                             <a href="requests.php?type=created&amp;userid=<?= $UserID ?>" class="brackets<?= ($ViewAll === 2 ? ' paranoia_override' : '') ?>">
@@ -212,7 +223,8 @@ $OverrideClass = $Override === 2 ? 'paranoia_override' : '';
                     </li>
                 <? } ?>
                 <?
-                if ($CanViewUploads || $Override = check_paranoia_here('uploads+')) { ?>
+                if ($CanViewUploads || $Override = check_paranoia_here('uploads+')) {
+                    $hasTorrentItem = true ?>
                     <li class="SidebarList-item isUploadCount <?= $OverrideClass ?>" id="upload-count-value" data-value="<?= $Uploads ?>">
                         <?= t('server.user.comm_upload') ?>:
                         <a data-tooltip="<?= empty($UploadsRank) ? '' : t('server.user.all_site') . ' ' . number_format($UploadsRank)  . '%' ?>" class="brackets <?= $OverrideClass ?>" href="torrents.php?type=uploaded&amp;userid=<?= $UserID ?>">
@@ -234,7 +246,8 @@ $OverrideClass = $Override === 2 ? 'paranoia_override' : '';
                     </li>
                 <? } ?>
                 <?
-                if ($CanViewUploads || $Override = check_paranoia_here('originals+')) { ?>
+                if ($CanViewUploads || $Override = check_paranoia_here('originals+')) {
+                    $hasTorrentItem = true ?>
                     <li class="SidebarList-item isOriginalUploadCount <?= $OverrideClass ?>" id="original-upload-count-value" data-value-buy="<?= $OriginalsBuy ?>" data-value-diy="<?= $OriginalsDiy ?>">
                         <?= t('server.user.comm_originals') ?>:
                         <span data-tooltip="<?= t('server.user.self_purchase_number') ?>">
@@ -248,6 +261,7 @@ $OverrideClass = $Override === 2 ? 'paranoia_override' : '';
                 <?
                 }
                 if ($Override = check_paranoia_here('seeding+')) {
+                    $hasTorrentItem = true
                 ?>
                     <li class="SidebarList-item <?= $OverrideClass ?>">
                         <?= t('server.user.comm_seeding') ?>:
@@ -280,7 +294,8 @@ $OverrideClass = $Override === 2 ? 'paranoia_override' : '';
                     </li>
                 <?
                 }
-                if ($Override = check_paranoia_here('leeching+')) { ?>
+                if ($Override = check_paranoia_here('leeching+')) {
+                    $hasTorrentItem = true ?>
                     <li class="SidebarList-item <?= $OverrideClass ?>">
                         <?= t('server.user.comm_leeching') ?>:
                         <span class="user_commstats" id="user_commstats_leeching">
@@ -299,7 +314,8 @@ $OverrideClass = $Override === 2 ? 'paranoia_override' : '';
                     </li>
                 <?
                 }
-                if ($Override = check_paranoia_here('snatched+')) { ?>
+                if ($Override = check_paranoia_here('snatched+')) {
+                    $hasTorrentItem = true ?>
                     <li class="SidebarList-item <?= $OverrideClass ?>">
                         <?= t('server.user.comm_snatched') ?>:
                         <span class="user_commstats" id="user_commstats_snatched"><a href="#" class="brackets" onclick="commStats(<?= $UserID ?>); return false;"><?= t('server.user.community_show') ?></a></a></span>
@@ -308,14 +324,16 @@ $OverrideClass = $Override === 2 ? 'paranoia_override' : '';
                         <?
                         }
                     }
-                    if ($Override = check_paranoia_here('snatched')) { ?>
+                    if ($Override = check_paranoia_here('snatched')) {
+                        $hasTorrentItem = true ?>
                         [<a href="torrents.php?type=snatched&amp;userid=<?= $UserID ?>" class="brackets <?= $OverrideClass ?>"><?= t('server.user.view') ?></a>
                         <? if (check_perms('zip_downloader')) { ?>
                             |<a href="torrents.php?action=redownload&amp;type=snatches&amp;userid=<?= $UserID ?>" onclick="return confirm('<?= t('server.user.redownloading_confirm') ?>');" class="brackets"><?= t('server.user.community_dl') ?></a></a>
                             <? } ?>]
                     </li>
                 <?  } ?>
-                <? if (check_perms('site_view_torrent_snatchlist', $Class)) { ?>
+                <? if (check_perms('site_view_torrent_snatchlist', $Class)) {
+                    $hasTorrentItem = true ?>
                     <li class="SidebarList-item" id="comm_downloaded">
                         <?= t('server.user.comm_downloaded') ?>:
                         <span class="user_commstats" id="user_commstats_downloaded">
@@ -329,9 +347,16 @@ $OverrideClass = $Override === 2 ? 'paranoia_override' : '';
                         </a>]
                     </li>
                 <? } ?>
+                <?
+                if (!$hasTorrentItem) {
+                ?>
+                    <li class="SidebarList-item"><?= t('server.common.no_results') ?></li>
+                <?
+                } ?>
             </ul>
             <?
-            if ($OwnProfile || check_perms('users_override_paranoia')) { ?>
+            if ($OwnProfile || check_perms('users_override_paranoia')) {
+                $hasTorrentItem = true ?>
                 <?
                 $DB->query("SELECT xs.uid, xs.tstamp, xs.fid, t.Size FROM xbt_snatched AS xs left join torrents AS t ON t.ID = xs.fid WHERE xs.uid =" . $UserID . " and xs.tstamp >= unix_timestamp(date_format(now(),'%Y-%m-01')) order by 2");
                 $Requests = $DB->to_array();
@@ -413,13 +438,19 @@ $OverrideClass = $Override === 2 ? 'paranoia_override' : '';
                     }
                 }
                 ?>
-            <? } ?>
+            <?
+            }
+
+            ?>
             <? if ($LoggedUser['AutoloadCommStats']) { ?>
                 <script type="text/javascript">
                     commStats(<?= $UserID ?>);
                 </script>
             <?  } ?>
         </div>
+        <?
+        $hasOther = false;
+        ?>
         <div class="SidebarItemUserCoummunity SidebarItem Box Group-column">
             <div class="Box-header">
                 <?= t('server.common.others') ?>
@@ -427,7 +458,9 @@ $OverrideClass = $Override === 2 ? 'paranoia_override' : '';
 
             <ul class="SidebarList SidebarItem-body Box-body">
                 <?
-                if (($Override = check_paranoia_here('collages+')) && CONFIG['ENABLE_COLLAGES']) { ?>
+                if (($Override = check_paranoia_here('collages+')) && CONFIG['ENABLE_COLLAGES']) {
+                    $hasOther = true;
+                ?>
                     <li class="SidebarList-item isCollageCreateCount <?= $OverrideClass ?>" id="collage-create-count-value" data-value="<?= $NumCollages ?>">
                         <span><?= t('server.user.community_collstart') ?>: </span>
                         <? if ($Override = check_paranoia_here('collages')) { ?>
@@ -440,7 +473,8 @@ $OverrideClass = $Override === 2 ? 'paranoia_override' : '';
                     </li>
                 <?
                 }
-                if (($Override = check_paranoia_here('collagecontribs+')) && CONFIG['ENABLE_COLLAGES']) { ?>
+                if (($Override = check_paranoia_here('collagecontribs+')) && CONFIG['ENABLE_COLLAGES']) {
+                    $hasOther = true; ?>
                     <li class="SidebarList-item isCollageContributeCount <?= $OverrideClass ?>" id="collage-countribute-count-value" data-value="<?= $NumCollageContribs ?>">
                         <span><?= t('server.user.community_collcontrib') ?>: </span>
                         <? if ($Override = check_paranoia_here('collagecontribs')) { ?>
@@ -454,7 +488,8 @@ $OverrideClass = $Override === 2 ? 'paranoia_override' : '';
                 <? }
                 ?>
                 <?
-                if (($Override = check_paranoia_here('artistsadded'))) { ?>
+                if (($Override = check_paranoia_here('artistsadded'))) {
+                    $hasOther = true; ?>
                     <li class="SidebarList-item" , id="artists_added">
                         <span><?= t('server.user.u_artist') ?>: </span>
                         <span data-tooltip="<?= !empty($ArtistsRank) ? t('server.user.all_site') . ' ' . $ArtistsRank . '%' : '' ?>">
@@ -464,6 +499,7 @@ $OverrideClass = $Override === 2 ? 'paranoia_override' : '';
                 <?
                 }
                 if ($Override = check_paranoia_here('invitedcount')) {
+                    $hasOther = true;
                     $DB->query("SELECT COUNT(UserID) FROM users_info WHERE Inviter = '$UserID'");
                     list($Invited) = $DB->next_record();
                 ?>
@@ -471,6 +507,13 @@ $OverrideClass = $Override === 2 ? 'paranoia_override' : '';
                         <?= t('server.user.comm_invited') ?>:
                         <a href="user.php?action=invite&amp;userid=<?= $UserID ?>"><?= number_format($Invited) ?></a>
                     </li>
+                <?
+                }
+                ?>
+                <?
+                if (!$hasOther) {
+                ?>
+                    <li class="SidebarList-item"><?= t('server.common.no_results') ?></li>
                 <?
                 }
                 ?>

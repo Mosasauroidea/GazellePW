@@ -27,8 +27,6 @@ if ($RequestType == 2) {
     }
 }
 
-
-
 //Convenience variables
 $IsFilled = !empty($Request['TorrentID']);
 $CanVote = !$IsFilled && check_perms('site_vote');
@@ -42,6 +40,7 @@ if ($Request['CategoryID'] === '0') {
 
 //Do we need to get artists?
 $ArtistForm = Requests::get_artists($RequestID);
+$Director = Artists::get_first_directors($ArtistForm);
 $ArtistName = Artists::display_artists($ArtistForm, false, false);
 $RequestGroupName = Torrents::group_name($Request, false);
 

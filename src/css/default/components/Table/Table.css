@@ -100,10 +100,6 @@ Where
   background: var(--Box-header-background);
 }
 
-.Table:is(.is-inner) :is(.Table-cellHeader, .Table-rowHeader .Table-cell) {
-  font-weight: bold;
-}
-
 .Table :is(.Table-cellHeader, .Table-rowHeader .Table-cell):first-child {
   border-top-left-radius: var(--global-borderRadius);
 }

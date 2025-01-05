@@ -152,7 +152,7 @@ class TorrentGroupCoverTableView extends GroupTorrentTableView {
                         </div>
                         <img class="TorrentCover-image" src="<?= ImageTools::process($RS['WikiImage'], false) ?>" />
                     </div>
-                    <b><?= display_str($Name) ?></b>
+                    <div class="TorrentCover-title"><?= display_str($Name) ?></div>
                 </a>
             <? } ?>
         </div>
@@ -185,7 +185,7 @@ class TorrentUnGroupCoverTableView extends UnGroupTorrentTableView {
                         </div>
                         <img class="TorrentCover-image" src="<?= ImageTools::process($RS['WikiImage'], false) ?>" />
                     </div>
-                    <b><?= display_str($Name) ?></b>
+                    <div class="TorrentCover-title"><?= display_str($Name) ?></div>
                 </a>
             <? } ?>
         </div>
@@ -1172,7 +1172,7 @@ class GroupTorrentTableView extends TorrentTableView {
             if ($NewEdition) {
                 $EditionID++;
         ?>
-                <tr class="TableTorrent-rowCategory Table-row <?= $this->WithCheck && $GroupChecked ? "torrent_all_checked " : "torrent_all_unchecked" ?> <?= (!empty($LoggedUser['TorrentGrouping']) && $LoggedUser['TorrentGrouping'] === 1 ? ' hidden' : '') ?>" group-id="<?= $GroupID ?>">
+                <tr class="TableTorrent-rowCategory Table-row <?= $this->WithCheck && $GroupChecked ? "torrent_all_checked " : "torrent_all_unchecked" ?> <?= (!empty($LoggedUser['TorrentGrouping']) && $LoggedUser['TorrentGrouping'] === 1 ? ' u-hidden' : '') ?>" group-id="<?= $GroupID ?>">
                     <td class="TableTorrent-cellCategory Table-cell" colspan="<?= $Cols ?>">
                         <? if ($this->CollapseTorrent) { ?>
                             <a class="u-toggleEdition-button" href="#" onclick="globalapp.toggleEdition(event, <?= $GroupID ?>, <?= $EditionID ?>)" data-tooltip="<?= t('server.common.collapse_this_edition_title') ?>">&minus;</a>
@@ -1209,7 +1209,7 @@ class GroupTorrentTableView extends TorrentTableView {
         }
         ?>
         <? /* GroupTorrentTableView */ ?>
-        <tr class="TableTorrent-rowTitle Table-row <?= $this->WithCheck && $TorrentChecked ? "torrent_checked " : "torrent_unchecked" ?> <?= $SnatchedGroupClass . (!empty($LoggedUser['TorrentGrouping']) && $LoggedUser['TorrentGrouping'] == 1 ? ' hidden' : '') ?>" group-id="<?= $GroupID ?>" edition-id="<?= $EditionID ?>">
+        <tr class="TableTorrent-rowTitle Table-row <?= $this->WithCheck && $TorrentChecked ? "torrent_checked " : "torrent_unchecked" ?> <?= $SnatchedGroupClass . (!empty($LoggedUser['TorrentGrouping']) && $LoggedUser['TorrentGrouping'] == 1 ? ' u-hidden' : '') ?>" group-id="<?= $GroupID ?>" edition-id="<?= $EditionID ?>">
             <td class="Table-cell is-name" colspan="<?= $Cols ?>">
                 <div class="TableTorrent-title">
                     <span class="TableTorrent-titleActions">

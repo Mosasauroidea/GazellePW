@@ -605,6 +605,7 @@ class Torrents {
      * @param string $OcelotReason The deletion reason for ocelot to report to users.
      */
     public static function delete_torrent($ID, $GroupID = 0, $OcelotReason = -1) {
+        // remove requests
         $QueryID = G::$DB->get_query_id();
         if (!$GroupID) {
             G::$DB->query("
@@ -629,7 +630,6 @@ class Torrents {
                 }
             }
         }
-
 
         G::$DB->query("
 			SELECT info_hash
@@ -694,9 +694,29 @@ class Torrents {
 			REPLACE INTO sphinx_delta (ID, Time)
 			VALUES ($ID, UNIX_TIMESTAMP())");
 
+        // remove requests
+        G::$DB->query("SELECT ID, SourceTorrent FROM requests WHERE GroupID = $GroupID");
+        $Requests = G::$DB->to_array(false, MYSQLI_ASSOC);
+        foreach ($Requests as $Request) {
+            $Link =  $Request['SourceTorrent'];
+            if (!preg_match('/' . TORRENT_REGEX . '/i', $Link, $Matches)) {
+                continue;
+            }
+            if ($Matches[2] != $ID) {
+                continue;
+            }
+            $RequestID = $Request['ID'];
+            break;
+        }
+        if (!empty($RequestID)) {
+            Requests::delete_request($RequestID, 0, 'System', 'Torrent deleted');
+        }
+
+
         G::$Cache->delete_value("torrent_download_$ID");
         G::$Cache->delete_value("torrent_group_$GroupID");
         G::$Cache->delete_value("torrents_details_$GroupID");
+        G::$Cache->delete_value("recommend_group");
         G::$DB->set_query_id($QueryID);
     }
 
@@ -1759,7 +1779,8 @@ WHERE ud.TorrentID=? AND ui.NotifyOnDeleteDownloaded='1' AND ud.UserID NOT IN ({
             $Body = $Artist['Body'];
             $MainBody = $Artist['MainBody'];
             $Image = $Artist['Image'];
-            $ArtistInfo = $ArtistInfos[$Artist['IMDBID']];
+            $ArtistIMDBID = $Artist['IMDBID'];
+            $ArtistInfo = $ArtistInfos[$ArtistIMDBID];
             if (empty($ArtistInfo)) {
                 continue;
             }
@@ -1789,7 +1810,7 @@ WHERE ud.TorrentID=? AND ui.NotifyOnDeleteDownloaded='1' AND ud.UserID NOT IN ({
                     "INSERT INTO wiki_artists
 			        (PageID, Body, MainBody, Image, UserID, Summary, Time, IMDBID, SubName, Name)
 		        VALUES
-			        ('$ArtistID', '$Body', '$MainBody', '$Image', '0', 'Auto load', '" . sqltime() . "', '$IMDBID', '$SubName', '$Name')"
+			        ('$ArtistID', '$Body', '$MainBody', '$Image', '0', 'Auto load', '" . sqltime() . "', '$ArtistIMDBID', '$SubName', '$Name')"
                 );
                 $RevisionID = G::$DB->inserted_id();
                 $UpdateSQL[] = "RevisionID = $RevisionID";

@@ -15,7 +15,7 @@ class Reward extends \Gazelle\Base {
         }
         $send = false;
         $BadgeName = '';
-        if ($rewardInfo->badgeID > 0) {
+        if (CONFIG['ENABLE_BADGE'] && $rewardInfo->badgeID > 0) {
             $Badge = Badges::get_badges_by_id($rewardInfo->badgeID);
             $BadgeName =  $Badge['Label'];
             if (empty($BadgeName)) {
@@ -34,7 +34,7 @@ class Reward extends \Gazelle\Base {
                 $this->addInvites($toUserIDs, $rewardInfo->inviteCount, $rewardInfo->invteExpireTime);
                 $send = true;
             }
-            if (CONFIG['ENABLE_BADGE'] && $rewardInfo->bonus > 0) {
+            if ($rewardInfo->bonus > 0) {
                 $this->addBonus($toUserIDs, $rewardInfo->bonus);
                 $send = true;
             }

@@ -175,7 +175,7 @@ class Donation extends \Gazelle\Base {
     }
 
     public function getPendingDonationCount() {
-        if (!$Count = $this->cache->get_value("donations_pending_count")) {
+        if ($Count = $this->cache->get_value("donations_pending_count") === false) {
             $this->db->prepared_query('SELECT count(*) FROM donations_prepaid_card where status = ?', PrepaidCardStatus::Pending);
             list($Count) = $this->db->next_record();
             $this->cache->cache_value("donations_pending_count", $Count);
@@ -185,14 +185,13 @@ class Donation extends \Gazelle\Base {
 
 
     public function getYearProgress() {
-        if (!$YearSum = $this->cache->get_value("donations_year_sum")) {
-
+        if (($YearSum = $this->cache->get_value("donations_year_sum")) === false) {
             $this->db->query(
                 "SELECT sum(rank) from donations 
 	            where time >= '" . date("Y-01-01") . "'"
             );
             list($YearSum) = $this->db->next_record();
-            $this->cache->cache_value("donations_year_sum", $YearSum);
+            $this->cache->cache_value("donations_year_sum", $YearSum, 86400);
         }
         if (empty($YearSum)) {
             return 0;

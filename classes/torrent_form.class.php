@@ -192,40 +192,38 @@ class TORRENT_FORM {
                                 ?>
                                 <tr class="Form-row" id="freetorrent">
                                     <td class="Form-label"><?= t('server.upload.freeleech') ?>:</td>
-                                    <td class="Form-items">
-                                        <div class="Form-inputs">
-                                            <select class="Input" name="freeleech">
-                                                <?
-                                                $FL = Torrents::freeleech_option();
-                                                foreach ($FL as $Key => $Name) {
-                                                ?>
-                                                    <option class="Select-option" value="<?= $Key ?>" <?= ($Key == $Torrent['FreeTorrent'] ? ' selected="selected"' : '') ?>>
-                                                        <?= $Name ?></option>
-                                                <?              } ?>
-                                            </select>
-                                            <script>
-                                                $(document).ready(() => {
-                                                    $("#limit-time").click(() => {
-                                                        if ($("#limit-time")[0].checked) {
-                                                            $("#input-free-date,#input-free-time").show()
-                                                            if (<?= $Torrent['FreeEndTime'] ? "false" : "true" ?>) {
-                                                                const d = new Date()
-                                                                $("#input-free-date")[0].value = d.getFullYear() + "-" + ("0" + (d.getMonth() +
-                                                                    1)).substr(-2) + "-" + ("0" + d.getDate()).substr(-2)
-                                                                $("#input-free-time")[0].value = ("0" + d.getHours()).substr(-2) + ":" + ("0" + d
-                                                                    .getMinutes()).substr(-2)
-                                                            }
-
-                                                        } else {
-                                                            $("#input-free-date,#input-free-time").hide()
+                                    <td class="Form-inputs">
+                                        <select class="Input" name="freeleech">
+                                            <?
+                                            $FL = Torrents::freeleech_option();
+                                            foreach ($FL as $Key => $Name) {
+                                            ?>
+                                                <option class="Select-option" value="<?= $Key ?>" <?= ($Key == $Torrent['FreeTorrent'] ? ' selected="selected"' : '') ?>>
+                                                    <?= $Name ?></option>
+                                            <?              } ?>
+                                        </select>
+                                        <script>
+                                            $(document).ready(() => {
+                                                $("#limit-time").click(() => {
+                                                    if ($("#limit-time")[0].checked) {
+                                                        $("#input-free-date,#input-free-time").show()
+                                                        if (<?= $Torrent['FreeEndTime'] ? "false" : "true" ?>) {
+                                                            const d = new Date()
+                                                            $("#input-free-date")[0].value = d.getFullYear() + "-" + ("0" + (d.getMonth() +
+                                                                1)).substr(-2) + "-" + ("0" + d.getDate()).substr(-2)
+                                                            $("#input-free-time")[0].value = ("0" + d.getHours()).substr(-2) + ":" + ("0" + d
+                                                                .getMinutes()).substr(-2)
                                                         }
-                                                    })
+
+                                                    } else {
+                                                        $("#input-free-date,#input-free-time").hide()
+                                                    }
                                                 })
-                                            </script>
-                                            <div class="Checkbox">
-                                                <input class="Input" type="checkbox" id="limit-time" name="limit-time" <?= $Torrent['FreeEndTime'] ? " checked=\"checked\"" : "" ?> />
-                                                <label class="Checkbox-label" for="limit-time" style="display: inline;">定时</label>
-                                            </div>
+                                            })
+                                        </script>
+                                        <div class="Checkbox">
+                                            <input class="Input" type="checkbox" id="limit-time" name="limit-time" <?= $Torrent['FreeEndTime'] ? " checked=\"checked\"" : "" ?> />
+                                            <label class="Checkbox-label" for="limit-time" style="display: inline;">定时</label>
                                         </div>
                                         <input class="Input" type="date" id="input-free-date" name="free-date" <?= $Torrent['FreeEndTime'] ? "value=\"" . substr($Torrent['FreeEndTime'], 0, 10) . "\"" : "style=\"display:none;\"" ?> /><input class="Input" id="input-free-time" name="free-time" type="time" <?= $Torrent['FreeEndTime'] ? "value=\"" . substr($Torrent['FreeEndTime'], 11, 5) . "\"" : "style=\"display:none;\"" ?> />
                                         <?= t('server.upload.because') ?>

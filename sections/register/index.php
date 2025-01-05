@@ -30,6 +30,7 @@ if (!empty($_REQUEST['confirm'])) {
 			WHERE ID = '$UserID'");
         $Cache->increment('stats_user_count');
         include('step2.php');
+        die();
     }
 
     // Confirm registration
@@ -277,9 +278,9 @@ if (!empty($_REQUEST['confirm'])) {
 							(UserID, InviterID, TreePosition, TreeID, TreeLevel)
 						VALUES
 							('$UserID', '$InviterID', '$TreePosition', '$TreeID', '$TreeLevel')");
-                    $trigger = new ActionTrigger;
-                    $trigger->triggerInviteeRegister($InviterID);
                 }
+                $trigger = new ActionTrigger;
+                $trigger->triggerInviteeRegister($InviterID, $UserID);
             } else { // No inviter (open registration)
                 $DB->query("
 					SELECT MAX(TreeID)

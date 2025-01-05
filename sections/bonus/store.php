@@ -36,7 +36,7 @@ $Items = $Bonus->getList();
                         <tr class="Table-rowHeader">
                             <td class="Table-cell" width="30px">#</td>
                             <td class="Table-cell"><?= t('server.bonus.description') ?></td>
-                            <td class="Table-cell" width="45px"><?= t('server.bonus.points_price') ?></td>
+                            <td class="Table-cell" width="80px"><?= t('server.bonus.points_price') ?></td>
                             <td class="Table-cell" width="70px"><?= t('server.common.actions') ?></td>
                         </tr>
                     </thead>

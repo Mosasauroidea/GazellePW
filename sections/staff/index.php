@@ -9,6 +9,11 @@ $SupportStaff = get_support();
 $action = $_GET['action'];
 
 list($Secondary, $Staff) = $SupportStaff;
+$SupportStaffList = [];
+foreach ($Secondary as $StaffMember) {
+    list($ID, $ClassID, $Class, $ClassName, $StaffGroup, $Username, $Paranoia, $LastAccess, $Remark) = $StaffMember;
+    $SupportStaffList[$ClassName][] = $StaffMember;
+}
 ?>
 
 <div class="LayoutBody">
@@ -41,47 +46,32 @@ list($Secondary, $Staff) = $SupportStaff;
             </div>
             <div class="Group-body">
                 <?= t('server.staff.fl_support_note') ?>
-                <?
-                $CurClass = 0;
-                $CloseTable = false;
-                foreach ($Secondary as $StaffMember) {
-                    list($ID, $ClassID, $Class, $ClassName, $StaffGroup, $Username, $Paranoia, $LastAccess, $Remark) = $StaffMember;
-                    if ($Class != $CurClass) { // Start new class of staff members
-                        $Row = 'a';
-                        if ($CloseTable) {
-                            $CloseTable = false;
-                            // the "\t" and "\n" are used here to make the HTML look pretty
-                            echo "</table></div></div>";
-                        }
-                        $CurClass = $Class;
-                        $CloseTable = true;
+                <table class="TableUser Table">
+                    <tr class="Table-rowHeader">
+                        <td class="Table-cell" width="200px"><?= t('server.apply.role') ?></td>
+                        <td class="Table-cell"><?= t('server.common.user') ?></td>
+                    </tr>
+                    <?
+                    foreach ($SupportStaffList as $ClassName => $StaffMembers) {
+
                         $HTMLID = str_replace(' ', '_', strtolower($ClassName));
-                ?>
-                        <div class="Box">
-                            <div class="Box-header">
-                                <div class="Box-headerTitle">
-                                    <div id="<?= $HTMLID ?>"><i><?= $ClassName ?></i></div>
-                                </div>
-                            </div>
-                            <div class="Box-body">
-                                <table class="TableUser Table is-inner">
-                                    <tr class="Table-rowHeader">
-                                        <td class="Table-cell" style="width: 130px;"><?= t('server.staff.username') ?></td>
-                                        <td class="Table-cell" style="width: 200px;"><?= t('server.staff.lastseen') ?></td>
-                                        <td class="Table-cell"><?= t('server.staff.support') ?></td>
-                                    </tr>
-                            <?
-                        }
-                        $Row = make_staff_row($Row, $ID, $Paranoia, $Class, $LastAccess, $Remark);
+                        $UserNameList = implode(', ', array_map(function ($StaffMember) {
+                            list($ID, $ClassID, $Class, $ClassName, $StaffGroup, $Username, $Paranoia, $LastAccess, $Remark) = $StaffMember;
+                            return Users::format_username($ID, false, false, false);
+                        }, $StaffMembers));
+                    ?>
+                        <tr class="Table-row">
+                            <td class="Table-cell" id="<?= $HTMLID ?>"><?= $ClassName ?></td>
+                            <td class="Table-cell"><?= $UserNameList ?></td>
+                        </tr>
+                    <?
                     }
-                            ?>
-                                </table>
-                            </div>
-                        </div>
-                        <?
-                        ?>
+                    ?>
+                </table>
             </div>
         </div>
+        <?
+        ?>
         <? if (check_perms('show_admin_team')) {
 
             foreach ($Staff as $SectionName => $StaffSection) {
@@ -89,7 +79,7 @@ list($Secondary, $Staff) = $SupportStaff;
                     continue;
                 }
         ?>
-                <div class="Group">
+                <div class=" Group">
                     <div class="Group-header">
                         <div class="Group-headerTitle"><?= $SectionName ?></div>
                     </div>

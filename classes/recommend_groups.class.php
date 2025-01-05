@@ -10,7 +10,7 @@ class RecommendGroups {
             $QueryID = G::$DB->get_query_id();
             G::$DB->prepared_query("
             SELECT
-                g.ID,
+                DISTINCT g.ID,
                 g.Name,
                 g.SubName,
                 g.IMDBRating,
@@ -19,10 +19,11 @@ class RecommendGroups {
                 rg.EndTime,
                 GROUP_CONCAT(DISTINCT tags.Name ORDER BY `TagID` SEPARATOR ' ') as TagList
             FROM recommend_group AS rg
-               LEFT JOIN torrents_group AS g ON rg.GroupID = g.ID
+               RIGHT JOIN torrents_group AS g ON rg.GroupID = g.ID
                LEFT JOIN torrents_tags AS tt ON tt.GroupID = g.ID
                LEFT JOIN tags ON tags.ID = tt.TagID
             WHERE rg.EndTime > ?
+            GROUP BY rg.GroupID
             ORDER BY rg.EndTime DESC
             LIMIT 10", sqltime());
 

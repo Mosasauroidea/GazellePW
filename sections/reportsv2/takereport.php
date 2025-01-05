@@ -11,6 +11,8 @@
  * Then it just inserts the report to the DB and increments the counter.
  */
 
+use Gazelle\Manager\ActionTrigger;
+
 authorize();
 
 if (!is_number($_POST['torrentid'])) {
@@ -132,6 +134,10 @@ $DB->query("
 
 $ReportID = $DB->inserted_id();
 
+$trigger = new ActionTrigger;
+$trigger->triggerReport($Type, $TorrentID, $ReportID);
+
+
 if ($Type != "rescore" && $Type != "lossyapproval" && $Type != "upload_contest" && $Type != 'edited') {
     $DB->query("
 	SELECT
@@ -157,8 +163,20 @@ if ($Type != "rescore" && $Type != "lossyapproval" && $Type != "upload_contest" 
     if ($DB->has_results()) {
         $Data = G::$DB->next_record(MYSQLI_ASSOC);
         list(
-            $UserID, $GroupID, $Size, $InfoHash, $Name, $SubName, $Year, $Time, $Source, $Codec, $Container, $Resolution,
-            $RemasterTitle, $RemasterYear
+            $UserID,
+            $GroupID,
+            $Size,
+            $InfoHash,
+            $Name,
+            $SubName,
+            $Year,
+            $Time,
+            $Source,
+            $Codec,
+            $Container,
+            $Resolution,
+            $RemasterTitle,
+            $RemasterYear
         ) = array_values($Data);
         $Torrent = Torrents::get_torrent($TorrentID);
         $RawName = Torrents::torrent_name($Torrent, false);

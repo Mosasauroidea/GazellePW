@@ -664,10 +664,10 @@ server.bonus.upload-3: |-
   250GB upload
 server.bonus.upload-4: |-
   500GB upload
-server.bonus.recommend-movie-1: |-
-  Recommend a movie 1 day
 server.bonus.recommend-movie-7: |-
-  Recommend a movie 7 days
+  Recommend a movie 7 day
+server.bonus.recommend-movie-30: |-
+  Recommend a movie 30 days
 server.bonus.torrent_group_id: |-
   Torrent Group ID
 server.bonus.you_cannot_afford_this_item: |-
@@ -5452,7 +5452,7 @@ server.torrents.reply: |-
 server.torrents.reply_at: |-
   reply the report
 server.torrents.reply_it_patiently: |-
-  Please type your explanation to the report here, you can only submit once. Please be patient and objective, this reply can help staff to handle the report better.
+  Please type your explanation to the report here. Please be patient and objective, this reply can help staff to handle the report better.
 server.torrents.report: |-
   Report
 server.torrents.reported: |-

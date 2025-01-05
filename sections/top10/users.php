@@ -205,7 +205,7 @@ View::show_header(t('server.top10.top_10_users'), '', 'PageTop10User');
                                     $NameItem = $UserName;
                                 }
                             } else if ($IsAnonymous) {
-                                $NameItem = $IsAnonymous;
+                                $NameItem = t('server.user.anonymous');
                             } else {
                                 $NameItem = $UserName;
                             }

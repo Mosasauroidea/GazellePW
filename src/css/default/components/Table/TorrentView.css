@@ -5,7 +5,7 @@
 .TorrentView-btn {
   font-size: var(--global-fontSize-sm);
   margin-left: auto;
-  color: var(--Button-primary-background);
+  color: var(--Button-default-color);
   background-color: transparent;
   border-color: transparent;
   cursor: pointer;

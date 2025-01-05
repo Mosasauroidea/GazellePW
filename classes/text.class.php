@@ -1144,7 +1144,7 @@ class Text {
                         ) {
                             $TableStyle = ' style="width: ' . intval($Block['Attr']) . '%;"';
                         }
-                        $Str .= "<div class=\"TalbeContainer\"><table class=\"Table\"$TableStyle>";
+                        $Str .= "<div class=\"TalbeContainer\"><table class=\"Table\" $TableStyle>";
                         foreach ($Block['Val'] as $tr) {
                             if (is_string($tr)) {
                                 $tr = trim($tr);
@@ -1171,7 +1171,7 @@ class Text {
                                     $Str .= '</tr>';
                                 }
                             } else {
-                                $Str .= '<tr class="Table-row"><td class="Table-cell">' . self::to_html([$tr]) . '</td></tr>';
+                                $Str .=  self::to_html([$tr]);
                             }
                         }
                         $Str .= '</table></div>';

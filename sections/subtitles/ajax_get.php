@@ -25,7 +25,7 @@ if (empty($AllSubtitles)) {
     foreach ($AllSubtitles as $Subtitle) {
         $LanguageArray = explode(',', $Subtitle['languages']);
         $IsNew = time_ago($Subtitle['upload_time']) < 600;
-        $CanRM = check_perms('users_mod') || $Subtitle['Uploader'] == $LoggedUser['ID'];
+        $CanRM = check_perms('users_mod') || $Subtitle['uploader'] == $LoggedUser['ID'];
         $UserInfo = Users::user_info($Subtitle['uploader']);
         $UploaderName = $UserInfo['Username'];
         if ($UploaderName == '') {

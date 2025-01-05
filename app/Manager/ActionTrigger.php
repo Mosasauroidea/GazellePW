@@ -61,13 +61,13 @@ class ActionTrigger extends \Gazelle\Base {
         $this->rewardManager->sendReward($reward, [$this->user['ID']], "Basic reward for Create Topic($TopicID).", false, true);
     }
 
-    public function triggerInviteeRegister(int $Inviter) {
+    public function triggerInviteeRegister(int $Inviter, int $Invitee) {
         $reward = BasicReward::getReward(UserActionEnum::InviteFriend);
-        $this->rewardManager->sendReward($reward, [$Inviter], "Basic reward for invite user($this->user['ID']).", false, true);
+        $this->rewardManager->sendReward($reward, [$Inviter], "Basic reward for invite user($Invitee).", false, true);
     }
 
-    public function triggerReport(int $Type, int $ID, $ReportID) {
+    public function triggerReport(string $Type, int $TorrentID, int $ReportID) {
         $reward = BasicReward::getReward(UserActionEnum::Report);
-        $this->rewardManager->sendReward($reward, [$this->user['ID']], "Basic reward for report($ReportID) $Type($ID).", false, true);
+        $this->rewardManager->sendReward($reward, [$this->user['ID']], "Basic reward for report($ReportID) $Type for torrent($TorrentID).", false, true);
     }
 }

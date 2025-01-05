@@ -81,7 +81,7 @@ if ($RequestType == 1) {
 	    WHERE xu.fid = '$SourceTorrentID' and xu.uid = $FillerID and active = 1 and xu.remaining = 0 "
     );
     if (!$DB->has_results()) {
-        //$Err = t('server.requests.cant_fill');
+        $Err = t('server.requests.cant_fill');
     }
     $TorrentID = $SourceTorrentID;
 }
@@ -172,7 +172,7 @@ foreach ($ArtistIDs as $ArtistID) {
     $Cache->delete_value("artists_requests_$ArtistID");
 }
 $trigger = new ActionTrigger;
-$trigger->triggerFillRequest($RequestID, $TorretnID);
+$trigger->triggerFillRequest($RequestID, $TorrentID);
 
 Requests::update_sphinx_requests($RequestID);
 $SphQL = new SphinxqlQuery();

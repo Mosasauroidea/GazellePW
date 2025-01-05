@@ -27,8 +27,8 @@ if ($_GET['action'] === 'revert') { // if we're reverting to a previous revision
         error(0);
     }
 } else { // with edit, the variables are passed with POST
-    $Body = db_string($_POST['body']);
-    $MainBody = db_string($_POST['mainbody']);
+    $Body = db_string(preg_replace("/\r|\n/", "", trim($_POST['body'])));
+    $MainBody = db_string(preg_replace("/\r|\n/", "", trim($_POST['mainbody'])));
     $Summary = db_string($_POST['summary']);
     $Image = db_string($_POST['image']);
     $IMDBID = db_string($_POST['imdb_id']);
@@ -70,6 +70,10 @@ if (!$RevisionID) { // edit
         $TotalSummary .= "修改名称";
     }
     $TotalSummary .= $Summary ? " 原因：$Summary" : "";
+    if (empty($TotalSummary)) {
+        header("Location: artist.php?id=$ArtistID");
+        die();
+    }
     $DB->query("
 		INSERT INTO wiki_artists
 			(PageID, Body, MainBody, Image, UserID, Summary, Time, IMDBID, SubName, Name)
@@ -111,6 +115,8 @@ $DB->query(
         Name = '$Name'
 	WHERE ArtistID = '$ArtistID'"
 );
+
+Artists::update_artist_info([$IMDBID]);
 
 // There we go, all done!
 $Cache->delete_value("artist_$ArtistID"); // Delete artist cache

@@ -220,7 +220,7 @@ class Upload extends Base {
         }
         $properties['Subtitles'] = implode(',', $Params['subtitles']);
 
-        $properties['Makers'] = isset($POST['makers']) ? $Params['makers'] : "";
+        $properties['Makers'] = isset($Params['makers']) ? $Params['makers'] : "";
         $properties['SpecialSub'] = isset($Params['special_effects_subtitles']) ? 1 : 0;
         $properties['ChineseDubbed'] = isset($Params['chinese_dubbed']) ? 1 : 0;
 
@@ -276,7 +276,7 @@ class Upload extends Base {
         }
         $ReleaseGroup = Users::get_release_group_by_id($properties['Makers']);
         if (count($ReleaseGroup) > 0) {
-            $properties['FreeEndTime'] = Time::timePlus(3600 * CONFIG['TORRENT_UPLOAD_FREE_HOUR']);
+            $properties['FreeEndTime'] = Time::timePlus(3600 * CONFIG['PG_TORRENT_UPLOAD_FREE_HOUR']);
         } else {
             $properties['FreeEndTime'] = Time::timePlus(3600 * CONFIG['TORRENT_UPLOAD_FREE_HOUR']);
         }
@@ -370,10 +370,9 @@ class Upload extends Base {
         $TotalSize = $this->properties['Size'];
         $TorrentID = $this->properties['TorrentID'];
         $UserID = $this->user['ID'];
-        $GroupID = $this->properties['GroupID'];
         $FirstTorrent = $TotalSize > 2 * 1024 * 1024 * 1024 ? 1 : $TorrentID;
         $this->db->query("update users_main set firsttorrent=IF(firsttorrent = 0, $FirstTorrent, firsttorrent) ,TotalUploads=TotalUploads+1 where id=" . $this->user['ID']);
-        $RecentUploads = $this->cache->delete_value("recent_uploads_$UserID");
+        $this->cache->delete_value("recent_uploads_$UserID");
     }
 
     private function fetchMovieData() {

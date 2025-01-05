@@ -10,7 +10,12 @@ class Artists {
     const Cinematographer = 5;
     const Actor = 6;
     const Importances = [
-        self::Director, self::Writter, self::Producer, self::Composer, self::Cinematographer, self::Actor
+        self::Director,
+        self::Writter,
+        self::Producer,
+        self::Composer,
+        self::Cinematographer,
+        self::Actor
     ];
 
     public static function update_artist_alias($OldName, $Name, $ArtistID) {
@@ -154,6 +159,24 @@ class Artists {
         return G::$DB->to_array('IMDBID', MYSQLI_ASSOC);
     }
 
+    public static function update_artist_info($IMDBIDs) {
+        $FullArtistDetails = MOVIE::get_artists($IMDBIDs);
+        foreach ($IMDBIDs as $IMDBID) {
+            $ArtistDetail = MOVIE::get_default_artist($IMDBID);
+            $Detail = $FullArtistDetails[$IMDBID];
+            if ($Detail) {
+                $ArtistDetail = $Detail;
+            }
+            $Artist['IMDBID'] = $IMDBID;
+            $Artist['Image'] = $ArtistDetail['Image'];
+            $Artist['Description'] = $ArtistDetail['Description'];
+            $Artist['MainDescription'] = $ArtistDetail['MainDescription'];
+            $Artist['Birthday'] = $ArtistDetail['Birthday'];
+            $Artist['PlaceOfBirth'] = $ArtistDetail['PlaceOfBirth'];
+            Artists::add_artist($Artist);
+        }
+    }
+
     public static function new_artist($ArtistForm, $MovieIMDNBID, $Limit = 10) {
         foreach ($ArtistForm[Artists::Actor] as $Num => $Artist) {
             if ($Artist['IMDBID']) {
@@ -226,11 +249,19 @@ class Artists {
                     G::$DB->prepared_query("INSERT INTO artists_alias (ArtistID, Name)
 						VALUES (?, ?)", $OldID, $Name);
                     $Updates[] = "Name = '" . db_string($Name) . "'";
+                } else if (!empty($OldArtist['Name'])) {
+                    $Name = $OldArtist['Name'];
+                } else {
+                    $Name = '';
                 }
                 if (!empty($SubName) && empty($OldSubName)) {
                     G::$DB->prepared_query("INSERT INTO artists_alias (ArtistID, Name)
 						VALUES (?, ?)", $OldID, $SubName);
                     $Updates[] = "SubName = '" . db_string($SubName) . "'";
+                } else if (!empty($OldArtist['SubName'])) {
+                    $SubName = $OldArtist['SubName'];
+                } else {
+                    $SubName = '';
                 }
                 if (empty($OldArtist['Image']) && !empty($Image)) {
                     $Updates[] = "Image = '" . db_string($Image) . "'";

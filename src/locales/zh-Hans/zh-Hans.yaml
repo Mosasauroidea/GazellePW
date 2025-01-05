@@ -650,10 +650,10 @@ server.bonus.upload-3: |-
   250GiB 上传量
 server.bonus.upload-4: |-
   500GiB 上传量
-server.bonus.recommend-movie-1: |-
-  推荐电影 1天
 server.bonus.recommend-movie-7: |-
-  推荐电影 7天
+  推荐电影 7 天
+server.bonus.recommend-movie-30: |-
+  推荐电影 30 天
 server.bonus.torrent_group_id: |-
   种子组ID
 server.bonus.you_cannot_afford_this_item: |-
@@ -5363,7 +5363,7 @@ server.torrents.reply: |-
 server.torrents.reply_at: |-
   回复报告于
 server.torrents.reply_it_patiently: |-
-  请在此填写你针对已有报告想作出的解释和说明，你只能提交一次，请保持礼貌、客观。该说明有助于管理更好地处理该报告。
+  请在此填写你针对已有报告想作出的解释和说明，请保持礼貌、客观。该说明有助于管理更好地处理该报告。
 server.torrents.report: |-
   报告
 server.torrents.reported: |-
@@ -8339,8 +8339,6 @@ client.stats.uv: |-
   日活跃用户数
 client.stats.seeding_user: |-
   做种的用户数
-server.forums.verbal: |-
-  口头的
 server.wiki.created: |-
   提交时间
 server.wiki.edited: |-

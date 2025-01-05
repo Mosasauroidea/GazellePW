@@ -77,14 +77,6 @@ switch ($_REQUEST['action']) {
         include(CONFIG['SERVER_ROOT'] . '/sections/tools/managers/forum_alter.php');
         break;
 
-    case 'award':
-        if (check_perms('staff_award')) {
-            include(CONFIG['SERVER_ROOT'] . '/sections/tools/managers/award.php');
-        } else {
-            error(403);
-        }
-        break;
-
     case 'whitelist':
         include(CONFIG['SERVER_ROOT'] . '/sections/tools/managers/whitelist_list.php');
         break;

@@ -179,9 +179,6 @@ if ($NotificationsManager->is_traditional(NotificationsManager::TORRENTS)) {
 if (check_perms('users_mod')) {
     $ModBar[] = '<a class="Button ButtonHeader"  href="tools.php">' . t('server.pub.toolbox') . '</a>';
 }
-if (check_perms('staff_award')) {
-    $ModBar[] = '<a class="Button ButtonHeader"  href="tools.php?action=award">' . t('server.pub.statistics') . '</a>';
-}
 if (check_perms('users_give_donor')) {
     $Count = $donation->getPendingDonationCount();
     if ($Count > 0) {
@@ -426,6 +423,19 @@ if ($_REQUEST['action']) {
                             </span>
                         </a>
                     </li>
+                    <?
+                    if (G::$LoggedUser['FLTokens'] > 0) { ?>
+                        <li class="HeaderStat-item is-bp" data-tooltip="<?= t('server.common.fltoken') ?>">
+                            <a class="HeaderStat-link LinkHeader Link" href="userhistory.php?action=token_history&amp;userid=<?= G::$LoggedUser['ID'] ?>">
+                                <?= icon('token') ?>
+                                <span class="HeaderStat-value is-bp" id="header-bp-value" data-value="<?= G::$LoggedUser['TimedTokens'] + G::$LoggedUser['FLTokens'] ?>">
+                                    <?
+                                    $Tokens = G::$LoggedUser['TimedTokens'] == 0 ? G::$LoggedUser['FLTokens'] : (G::$LoggedUser['FLTokens'] - G::$LoggedUser['TimedTokens']) . '+' . G::$LoggedUser['TimedTokens'];
+                                    echo $Tokens; ?>
+                                </span>
+                            </a>
+                        </li>
+                    <?    } ?>
                     <? if (CONFIG['ENABLE_HNR']) { ?>
                         <li class="HeaderStat-item isHnr">
                             <a class="HeaderStat-link LinkHeader Link" href="rules.php?p=ratio">

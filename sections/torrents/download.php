@@ -148,7 +148,7 @@ if ($_REQUEST['usetoken'] && in_array($FreeTorrent, [Torrents::Normal, Torrents:
 				UPDATE users_main
 				SET FLTokens = FLTokens - $TokenUses
 				WHERE ID = $UserID");
-            G::$DB->prepared_query("DELETE FROM tokens_typed WHERE ID in (SELECT tmp.ID FROM (SELECT ID FROM tokens_typed order by EndTime limit $TokenUses) tmp)");
+            G::$DB->prepared_query("DELETE FROM tokens_typed WHERE ID in (SELECT tmp.ID FROM (SELECT ID FROM tokens_typed WHERE UserID = $UserID order by EndTime limit $TokenUses) tmp)");
         } catch (Exception $e) {
             error_log($e);
             G::$DB->rollback();

@@ -444,10 +444,10 @@ server.bonus.upload-3: |-
   250GB de subida
 server.bonus.upload-4: |-
   500GB de subida
-server.bonus.recommend-movie-1: |-
-  Recomendar una película (1)
 server.bonus.recommend-movie-7: |-
   Recomendar una película (7)
+server.bonus.recommend-movie-30: |-
+  Recomendar una película (30)
 server.bonus.torrent_group_id: |-
   ID del grupo de torrents
 server.bookmarks.dont_notify_new: |-

@@ -172,6 +172,7 @@ if ($CheckAllTorrents) {
     list($AllUncheckedCnt) = G::$DB->next_record();
 }
 
+
 View::show_header(t('server.torrents.header'), 'browse', 'PageTorrentHome');
 //$TimeNow = new DateTime();
 //$TimeUntil = new DateTime('2016-12-16 03:50:00');
@@ -440,6 +441,7 @@ View::show_header(t('server.torrents.header'), 'browse', 'PageTorrentHome');
                         <span><?= t('server.torrents.unchecked_torrents_results_note', ['Values' => [$AllUncheckedCnt]]) ?></span>
                     <? }
                     ?>
+
                 </div>
                 <div class="SearchPageFooter-actions">
                     <input class="Button" type="submit" value="<?= t('server.torrents.search_torrents') ?>" />
