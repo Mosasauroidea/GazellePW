@@ -6,14 +6,14 @@ run_service()
 }
 
 # We'll need these anyway so why not kill some time while waiting on MySQL to be ready
-su -c 'echo -e "====== Composer Install ======"; \
+su -c 'echo "====== Composer Install ======"; \
     composer --version; \
     composer install; \
-    echo -e "\n====== Yarn Install ======"; \
-    yarn; \
-    echo -e "\n====== Yarn Start ======"; \
-    yarn start & \
 ' gazelle
+echo -e "\n====== Yarn Install ======"
+yarn
+echo -e "\n====== Yarn Start ======"
+yarn start &
 
 # Wait for MySQL...
 counter=1
