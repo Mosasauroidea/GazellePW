@@ -79,6 +79,16 @@ View::show_header(t('server.reportsv2.report'), 'reportsv2,browse,torrent,bbcode
         </table>
         <table>
             <tr class="Form-row">
+                <td class="Form-label">
+                    <?= t('server.reportsv2.comments') ?> <strong class="u-colorWarning">(<?= t('server.reportsv2.required') ?>)</strong>:
+                </td>
+                <td class="Form-items">
+                    <? new TEXTAREA_PREVIEW('extra', 'extra', display_str($_POST['extra'])); ?>
+                </td>
+            </tr>
+        </table>
+        <table>
+            <tr class="Form-row">
                 <td colspan="2">
                     <input class="Button" type="submit" value="<?= t('server.common.submit') ?>" />
                 </td>

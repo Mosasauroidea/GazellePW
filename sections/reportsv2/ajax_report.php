@@ -106,12 +106,3 @@ if (array_key_exists('proofimages', $ReportType['report_fields'])) {
 <?
 }
 ?>
-<tr class="Form-row">
-    <td class="Form-label">
-        <?= t('server.reportsv2.comments') ?> <strong class="u-colorWarning">(<?= t('server.reportsv2.required') ?>)</strong>:
-    </td>
-    <td class="Form-items">
-        <? new TEXTAREA_PREVIEW('extra', 'extra', display_str($_POST['extra'])); ?>
-    </td>
-
-</tr>
