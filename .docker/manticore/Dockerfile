@@ -1,7 +1,7 @@
 FROM debian:buster-slim
 
 RUN apt update
-RUN apt install -y wget cron curl mariadb-client
+RUN apt install -y wget cron curl mariadb-client gnupg
 RUN wget https://repo.manticoresearch.com/manticore-repo.noarch.deb
 RUN dpkg -i manticore-repo.noarch.deb
 RUN apt update
